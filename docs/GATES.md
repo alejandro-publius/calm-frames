@@ -36,9 +36,9 @@ Target was Sat Sep 19, reached Wed Sep 17. Recorded by `python3 eval/vvd_smoke.p
 | Package | `io.github.alejandropublius.calmframes`, debug build for aarch64 |
 | Device | OS 1.2 (TV Ship/101520710), aarch64, virtual |
 | Title | Cosmos Laundromat, a Blender open movie, over HLS from the Amazon reference assets CDN |
-| Playback started events | 2 |
+| Playback started events | <!--n results/vvd_smoke.json:playback_started_events -->2<!--/n--> |
 | Media play calls | 4 |
-| Segment fetches during 40 s of play | 8 |
+| Segment fetches during 40 s of play | <!--n results/vvd_smoke.json:segment_fetches_during_play -->8<!--/n--> |
 | Streaming errors | 0 |
 | Crash lines | 0 |
 | Peak memory | 353 MB (the phase 4.10 target is under 400 MiB in the foreground, on the stick, not here) |
