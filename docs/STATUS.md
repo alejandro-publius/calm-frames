@@ -1,6 +1,6 @@
 # Status
 
-Updated Thu Sep 17, 2026, afternoon PT.
+Updated Thu Sep 17, 2026, late afternoon PT.
 
 ## Done
 
@@ -19,15 +19,24 @@ Updated Thu Sep 17, 2026, afternoon PT.
 - **Tooling:** `eval/vvd_control.py` presses remote buttons and captures the screen through QEMU's QMP socket, since the Vega CLI has neither. `eval/vvd_smoke.py` records a playback run to results/.
 - **Guards, each one seen to fail:** 15 day-one assertions (manifest has no task or service components, package id is not under com.amazon, app.json matches the manifest, no module entries for removed features, flags off) and 30 cover-schedule assertions. Breaking each rule on purpose turned the suite red, and one mutation survived the first pass and exposed a real gap, now covered.
 
+### Phase 1, continued
+- **1.5 and 1.6 The cover and both measurement runs are built and tested.** The cover draws between the video surface and the captions view; the harness runs the schedule on a wall clock re-synced to media time, hides the picture at once on seeking, buffering, stalling, pausing or backgrounding, and writes one `CALM_TIMING` line per event pairing media time with wall-clock time. Start a run from the two buttons at the bottom of Settings, or from a run file in `eval/harness_runs/`. Details and caveats in docs/GATES.md.
+- A test caught a real bug before any filming: the scheduler restarted on every re-render, so the cover turned on and straight back off. Fixed, and putting the bug back turns the suite red.
+
 ## Not started or blocked
 
-- **Layering test screen (1.5) and the GATE 1 harness wiring (1.6):** the schedule logic is in and tested; the on-screen cover, the event logging (currentTime with wall clock on every timeupdate, seeking and seeked, plus getVideoPlaybackQuality) and the dev screen that toggles a cover over a playing title are not built yet. The marker clip itself comes from calm-timing, which is in the missing kits.
+- **GATE 1 cannot produce a number yet:** the marker clip and its schedule come from calm-timing, in the missing kits. The committed timing run is a placeholder and labels itself as one in its own log line.
+- **The on-device menu path is unverified by me.** Screenshots from the virtual device come back black, and driving the menus blind did not land on the buttons. With the stick and a visible screen this is a few presses.
+- **Pushing a run file to a device does not work on OS 1.2:** `vega device copy-to` cannot write into another package's sandbox, and the path the sample README gives does not exist. The Settings buttons work regardless.
 - **Back navigation regression test (1.2):** the sample's README lists a black screen with audio-only playback after back navigation. Not written yet.
 - **0.4 kits, 0.6 CI, 0.7 friction tooling:** blocked. `day-one-head-start.zip` is not on this Mac, in Google Drive or in claude.ai artifacts.
 - **0.9 outreach drafts (due Fri Sep 18):** blocked on `outreach-kit.md`.
 - **docs/RUBRIC.md:** blocked on `rubric-amazon.md`.
 - **Lane 4, IRIS baseline image:** files committed with verified pins, never built. Paused while the shared colima VM runs another project's DataHub stack. Needs to finish by about Sep 30.
 - **GitHub repo:** not created yet, so CI has nowhere to run.
+
+## Tests
+411 passing in the app, 77 of them across the Calm Frames modules (cover schedule, media clock, harness config, cover layer and harness wiring, day-one guards). Every rule in those 77 was broken on purpose and seen to fail.
 
 ## Friction log
 9 real entries in docs/friction_pending.md, waiting for evkit. Five about the SDK installer and docs, four from device work: `vega device list` crashes with a TypeError while a device is running, the virtual device stops with no message, its status says running before the device can be used, and there is no supported way to press a remote button or capture the screen.
