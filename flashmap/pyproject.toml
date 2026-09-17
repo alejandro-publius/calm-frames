@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flashmap"
+version = "1.0.0"
+description = "Flash analysis for video against the WCAG 2.2 general and red flash thresholds, with signed map sidecars."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Calm Frames" }]
+keywords = ["accessibility", "wcag", "photosensitive", "epilepsy", "video", "flash"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Multimedia :: Video",
+]
+dependencies = [
+  "av==18.1.0",
+  "numpy==2.5.3",
+  "cryptography==50.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest==9.1.1",
+  "hypothesis==6.168.0",
+  "pyyaml==6.0.3",
+]
+
+[project.scripts]
+flashmap = "flashmap.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/calm-frames/calm-frames"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+flashmap = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "slow: takes more than about a second, skipped on CI with -m 'not slow'",
+]
+filterwarnings = ["error::DeprecationWarning:flashmap.*"]

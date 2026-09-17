@@ -65,10 +65,17 @@ jobs:
         run: |
           # Skip anything marked slow: the full conformance suite runs locally
           # or nightly, not on every push.
-          if ls flashmap/tests pipeline/tests eval/tests >/dev/null 2>&1; then
-            pytest -q -m "not slow" flashmap pipeline eval
+          targets=""
+          for dir in flashmap pipeline eval; do
+            if [ -d "$dir" ] && ls "$dir"/**/test_*.py "$dir"/test_*.py "$dir"/tests >/dev/null 2>&1; then
+              targets="$targets $dir"
+            fi
+          done
+          if [ -n "$targets" ]; then
+            echo "testing:$targets"
+            pytest -q -m "not slow" $targets
           else
-            echo "no Python test directories yet"
+            echo "no Python tests yet"
           fi
 
   secrets:

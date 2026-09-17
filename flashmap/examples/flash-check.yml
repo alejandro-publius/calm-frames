@@ -1,0 +1,38 @@
+# Sample workflow. Copy this to .github/workflows/flash-check.yml in a repository that holds
+# images or video, and every pull request that adds or changes one gets checked against WCAG
+# 2.2 Success Criterion 2.3.1.
+#
+# The check needs the base commit to work out what changed, so the checkout needs enough
+# history for a diff. fetch-depth: 0 is the simple way to be sure.
+
+name: Flash check
+
+on:
+  pull_request:
+    paths:
+      - "**.mp4"
+      - "**.mov"
+      - "**.mkv"
+      - "**.webm"
+      - "**.gif"
+      - "**.png"
+      - "**.webp"
+      - "**.avif"
+
+permissions:
+  contents: read
+
+jobs:
+  flash-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check for flashing above the WCAG thresholds
+        uses: calm-frames/calm-frames/flashmap@v1
+        with:
+          profile: wcag
+          # Uncomment to fail when a file cannot be measured, for example an HDR master.
+          # fail-on-error: "true"
