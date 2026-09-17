@@ -1,0 +1,25 @@
+{
+  "recorded_utc": "2026-09-17T21:49:59+00:00",
+  "package_id": "io.github.alejandropublius.calmframes",
+  "package_file": "app/build/aarch64-debug/calm-frames-app_aarch64.vpkg",
+  "device": {
+    "build": "OS 1.2 (TV Ship/101520710)",
+    "architecture": "aarch64",
+    "product": "vvrp-tv-arm64",
+    "simulated": true
+  },
+  "launched": true,
+  "streams_requested": [
+    "https://d1v0fxmwkpxbrg.cloudfront.net/videos/hls/cosmos-laundromat/master.m3u8"
+  ],
+  "playback_started_events": 2,
+  "media_play_calls": 4,
+  "app_play_resolved": 4,
+  "streaming_errors": 0,
+  "segment_fetches_during_play": 8,
+  "play_seconds": 40.0,
+  "crash_lines": 0,
+  "peak_pss_kb": 353178,
+  "played": true,
+  "reached_player_screen": true
+}
