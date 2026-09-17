@@ -81,3 +81,38 @@ Each line pairs media time with wall-clock time, so a 240 fps recording can be l
 **A bug the tests caught before any filming**
 
 The first version restarted its run clock on every re-render, so the cover turned on and then straight back off. It would have wasted a filming session. The schedule is now read through a ref, the run clock survives re-renders, and putting the bug back turns the suite red.
+
+### 2026-09-17, evening: the GATE 1 analysis rehearsed end to end
+
+The marker clip, the run and the analysis all exist now, and they were run against each other on the Vega Virtual Device. Numbers come from results/gate1_rehearsal_vvd.json and results/vvd_timeupdate_stats.json.
+
+| What | Value |
+|---|---|
+| Markers in the clip | <!--n results/gate1_rehearsal_vvd.json:markers_in_schedule -->20<!--/n--> |
+| Markers reached during the run | <!--n results/gate1_rehearsal_vvd.json:markers_reached_during_run -->20<!--/n--> |
+| Covered in time (150 ms or more before the marker) | <!--n results/gate1_rehearsal_vvd.json:markers_covered_in_time -->20<!--/n--> |
+| Wilson 95% interval | <!--n results/gate1_rehearsal_vvd.json:wilson_95_interval.low -->0.8389<!--/n--> to <!--n results/gate1_rehearsal_vvd.json:wilson_95_interval.high -->1<!--/n--> |
+| Worst lead time | <!--n results/gate1_rehearsal_vvd.json:worst_lead_ms -->449<!--/n--> ms |
+| Median lead time | <!--n results/gate1_rehearsal_vvd.json:lead_ms.median -->471<!--/n--> ms |
+| Guard band | <!--n results/gate1_rehearsal_vvd.json:guard_band_ms -->500<!--/n--> ms |
+
+**This is not GATE 1.** It measures what the app believed about media time, not what the screen showed. A cover the app scheduled correctly but the compositor drew late would pass here and fail on camera. The real gate is 50 trials filmed at 240 fps on a real stick, in game mode with motion smoothing off.
+
+Two things stop us recording the virtual device's screen on this machine, and neither affects the real gate, which films a TV with a phone:
+- macOS exposes no screen capture device to ffmpeg without the Screen Recording permission, which a person has to grant;
+- the window is not captured anyway. A full screen grab while the virtual device was frontmost returned the desktop behind it, and QEMU's own screendump returns black, because the app draws on a GPU layer that neither path sees.
+
+What the same run measured about the player, in results/vvd_timeupdate_stats.json. Neither figure is documented by Amazon, which is why the scheduler runs on a wall clock re-synced to media time rather than reacting to timeupdate:
+
+| What | Value |
+|---|---|
+| timeupdate events in the run | <!--n results/vvd_timeupdate_stats.json:timeupdate.count -->10<!--/n--> |
+| Gap between them, median | <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.median -->426<!--/n--> ms |
+| Gap between them, shortest | <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.min -->75<!--/n--> ms |
+| Gap between them, longest | <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms |
+| Smallest step currentTime reported | <!--n results/vvd_timeupdate_stats.json:current_time_precision_ms -->3<!--/n--> ms |
+| Worst gap between the app's estimate and the player | <!--n results/vvd_timeupdate_stats.json:worst_wall_clock_drift_ms -->2756<!--/n--> ms |
+
+Read that carefully, because it is the argument for the design. In this run the player went quiet for over five seconds between position reports while the clip kept playing. A cover that waited for timeupdate would have been that late. The wall-clock scheduler kept covering through the gap, and the drift figure is the price: with no position report for five seconds, the estimate had run nearly three seconds away from the player by the time one arrived. That is why anything which makes the playhead uncertain, including a stall, hides the picture at once rather than trusting the estimate.
+
+The cadence is not stable on this device. The same clip played smoothly earlier in the evening and choppily here, so treat these as virtual device numbers only. The stick is what GATE 1 measures.
