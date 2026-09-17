@@ -1,8 +1,8 @@
 # Calm Frames: rules for every session
 
-**Current phase:** Phase 1 (Vega day-one probes), Thu Sep 17, 2026. Phase 0 is done apart from the items that need the kits. The stripped app already plays a title on the Vega Virtual Device (docs/GATES.md).
-**Blocked on:** the head-start kits (`day-one-head-start.zip`), `rubric-amazon.md` and `outreach-kit.md` are not on this machine yet. See docs/STATUS.md.
-**Next in Phase 1:** the layering test screen (1.5), the GATE 1 cover and event logging on top of `app/src/calmframes/coverSchedule.ts` (1.6), and the back navigation regression test (1.2).
+**Current phase:** Phase 2 and 3 in progress, Thu Sep 17, 2026. Phases 0 and 1 are done apart from what needs the stick.
+**The head-start kits never arrived.** flashmap, calm-timing, evkit and the notes were all written here instead. docs/PLAN.md lists what replaced what. If the kits turn up, treat them as a second opinion and re-record any number taken with our version.
+**Repo:** private at github.com/alejandro-publius/calm-frames, main, CI green on ubuntu runners. It goes public during the final checks on Oct 21, because the rules need it public with the licence visible at submission.
 
 Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/BUILD_PROMPT.md (the full plan, phases, gates, kill rules, cut list), docs/DECISIONS.md, docs/GATES.md.
 
@@ -23,9 +23,9 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 - Approved wording: "reduces exposure to flashing above published limits in the videos it plays; not a medical device." Never "prevents seizures" or "seizure-proof".
 
 ### Truth
-- Every published number (README, Devpost text, video) comes from `results/*.json` through `evkit.readme_sync`, and CI fails on drift.
+- Every published number (README, Devpost text, video) comes from `results/*.json` through `eval/readme_sync.py`, and CI fails on drift. Mark one like this: `<!--n results/file.json:key -->value<!--/n-->`.
 - Nothing mocked is shown as real. Label composite personas (Maya), sham maps and estimates.
-- Thresholds come only from `flashmap/docs/SPEC_SOURCES.md`. Never re-derive a threshold from memory. A new number needs the quoted spec text and link in SPEC_SOURCES.md first.
+- Thresholds come only from `docs/SPEC_SOURCES.md`. Never re-derive a threshold from memory. A new number needs the quoted spec text and link in SPEC_SOURCES.md first, and anything that cannot be verified from a primary source is named there and not used.
 - Every guard gets a test that has been seen to fail: break the guard on purpose, watch the test go red, restore it. A green new test proves nothing on its own.
 - `docs/EVAL_PLAN.md` is committed before any real clip is labeled. Later changes are logged as deviations.
 - Re-check any source page before quoting it (impact numbers, licenses, Amazon docs).
@@ -64,7 +64,7 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 - Work on your own. Record each call in docs/DECISIONS.md (date, decision, why, cost) and keep going.
 - Stop and ask only at a HUMAN CHECKPOINT or when a KILL rule fires (both listed in docs/BUILD_PROMPT.md).
 - Keep docs/STATUS.md current and end every block of work with one status line.
-- Friction log from minute one: real entries only (task, steps, expected vs actual, severity, workaround, suggestion) through `python -m evkit.friction add`. Until evkit is installed, entries wait in docs/friction_pending.md.
+- Friction log from minute one: real entries only (task, steps, expected vs actual, severity, workaround, suggestion), in docs/friction_pending.md. evkit never arrived, so that file is the log.
 - Parallel lanes: (1) flashmap and conformance, (2) Vega app, (3) pipeline and CDK, (4) baselines and evaluation, (5) docs, friction log and feedback. A separate verifier agent attacks every claim and number at each milestone before it reaches the README, Devpost text or video.
 - Update this file at every phase change.
 
@@ -73,6 +73,15 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 - Node: `eval "$(fnm env)" && fnm use`. The app also needs `JAVA_HOME=/opt/homebrew/opt/openjdk@21` for the Shaka build during `npm install`.
 - Python: `.venv/bin/python` or `uv run` (the system `python3` is 3.9)
 - Full versions: docs/ENVIRONMENT.md
+
+## Measurement runs
+
+- `eval/marker_clip.py` makes the marker clip and its schedule. The clip stays out of git; the schedule and its SHA-256 are committed.
+- `eval/vvd_timing_run.py` serves the clip and a run config over HTTP, launches the app and collects what it did. `eval/gate1_rehearsal.py` turns that into the gate analysis.
+- A run is started by a config the app fetches at startup, because on OS 1.2 nothing can put a file in another package's data directory from the host.
+- Serve the clip as HLS. The player does not start a plain MP4 over HTTP, and the test server has to answer byte ranges.
+- The clip needs an audio track, even a silent one, or playback pauses a few seconds in.
+- Device logs cannot carry the evidence: the device drops the app's console output under load. Runs post their events to the machine running them.
 
 ## Working with the Vega Virtual Device
 - Start it detached, or it dies with the shell that started it. `eval/vvd_smoke.py` handles this.
