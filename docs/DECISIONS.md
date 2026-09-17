@@ -30,7 +30,7 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
 ## 2026-09-17: App base is vega-video-sample at tag v0.24-RN83
 - **Decision:** Copy `AmazonAppDev/vega-video-sample` at tag `v0.24-RN83` (commit `ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`) into `app/`, keeping its MIT-0 license and notices. Use a plain copy, not a submodule.
 - **Why:** That tag is the React Native 0.83 release for SDK 0.24 (the repo also has `v0.24-RN72`). A plain copy keeps everything judges need in one repo. The repo has merged an outside contributor's pull request (#7, Jul 6, 2026), so the upstream pull request in Phase 7.3 can come from a separate GitHub fork.
-- **Cost:** Upstream changes have to be pulled in by hand. The copy is not done yet (next step in Phase 1.2).
+- **Cost:** Upstream changes have to be pulled in by hand. Done: commit cf8b752 holds the untouched copy, so later commits show exactly what Calm Frames changes.
 
 ## 2026-09-17: Leave the shared colima VM alone
 - **Decision:** Don't restart or resize colima (2 CPUs, 4 GiB) for the IRIS build. Build IRIS with limited parallelism instead.
