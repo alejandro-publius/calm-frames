@@ -1,0 +1,133 @@
+{
+  "mode": "timing",
+  "guardBandMs": 500,
+  "scheduleLabel": "placeholder-not-a-gate-1-run",
+  "referencePatch": {
+    "x": 48,
+    "y": 48,
+    "width": 96,
+    "height": 96
+  },
+  "segments": [
+    {
+      "startMs": 10000,
+      "endMs": 11000,
+      "reason": "general",
+      "label": "placeholder marker 1"
+    },
+    {
+      "startMs": 16000,
+      "endMs": 17000,
+      "reason": "general",
+      "label": "placeholder marker 2"
+    },
+    {
+      "startMs": 22000,
+      "endMs": 23000,
+      "reason": "general",
+      "label": "placeholder marker 3"
+    },
+    {
+      "startMs": 28000,
+      "endMs": 29000,
+      "reason": "general",
+      "label": "placeholder marker 4"
+    },
+    {
+      "startMs": 34000,
+      "endMs": 35000,
+      "reason": "general",
+      "label": "placeholder marker 5"
+    },
+    {
+      "startMs": 40000,
+      "endMs": 41000,
+      "reason": "general",
+      "label": "placeholder marker 6"
+    },
+    {
+      "startMs": 46000,
+      "endMs": 47000,
+      "reason": "general",
+      "label": "placeholder marker 7"
+    },
+    {
+      "startMs": 52000,
+      "endMs": 53000,
+      "reason": "general",
+      "label": "placeholder marker 8"
+    },
+    {
+      "startMs": 58000,
+      "endMs": 59000,
+      "reason": "general",
+      "label": "placeholder marker 9"
+    },
+    {
+      "startMs": 64000,
+      "endMs": 65000,
+      "reason": "general",
+      "label": "placeholder marker 10"
+    },
+    {
+      "startMs": 70000,
+      "endMs": 71000,
+      "reason": "general",
+      "label": "placeholder marker 11"
+    },
+    {
+      "startMs": 76000,
+      "endMs": 77000,
+      "reason": "general",
+      "label": "placeholder marker 12"
+    },
+    {
+      "startMs": 82000,
+      "endMs": 83000,
+      "reason": "general",
+      "label": "placeholder marker 13"
+    },
+    {
+      "startMs": 88000,
+      "endMs": 89000,
+      "reason": "general",
+      "label": "placeholder marker 14"
+    },
+    {
+      "startMs": 94000,
+      "endMs": 95000,
+      "reason": "general",
+      "label": "placeholder marker 15"
+    },
+    {
+      "startMs": 100000,
+      "endMs": 101000,
+      "reason": "general",
+      "label": "placeholder marker 16"
+    },
+    {
+      "startMs": 106000,
+      "endMs": 107000,
+      "reason": "general",
+      "label": "placeholder marker 17"
+    },
+    {
+      "startMs": 112000,
+      "endMs": 113000,
+      "reason": "general",
+      "label": "placeholder marker 18"
+    },
+    {
+      "startMs": 118000,
+      "endMs": 119000,
+      "reason": "general",
+      "label": "placeholder marker 19"
+    },
+    {
+      "startMs": 124000,
+      "endMs": 125000,
+      "reason": "general",
+      "label": "placeholder marker 20"
+    }
+  ]
+}

@@ -35,6 +35,13 @@ import { OptionType } from '../components/RadioPicker';
 import AutoRotator from '../components/rotator/AutoRotator';
 import { MovieRotatorGrid } from '../components/touchOptimized/MovieRotatorGrid';
 
+// Calm Frames measurement runs
+import {
+  getLayeringTestTitle,
+  getTimingHarnessSegments,
+} from '../calmframes/harnessFixtures';
+import { readHarnessConfig } from '../calmframes/harnessConfig';
+
 // Configuration and feature flags
 import {
   isContentPersonalizationEnabled,
@@ -123,7 +130,7 @@ interface HomeProps {
  * - Touch mode: Shows combined rotator + movie grid that scrolls together
  */
 const HomeScreen = ({
-  navigation: _navigation,
+  navigation,
 }: AppStackScreenProps<Screens.HOME_SCREEN>) => {
   // Redux hooks for state management
   const dispatch = useDispatch();
@@ -215,6 +222,41 @@ const HomeScreen = ({
       '[ HomeScreen.tsx ] - callPlaybackEventsRefresh - k_content_per: Calling Report Refreshed PlaybackEvents',
     );
     ContentPersonalizationServer.reportRefreshedPlaybackEvents();
+  }, []);
+
+  /**
+   * Effect: start a measurement run if this device was given one.
+   *
+   * A harness config file in the app's data directory sends the app straight
+   * into the layering test or the GATE 1 timing run, so a take can be started
+   * on a stick in front of a camera without navigating menus. See
+   * src/calmframes/harnessConfig.ts.
+   */
+  useEffect(() => {
+    let cancelled = false;
+    readHarnessConfig().then((config) => {
+      if (cancelled || !config) {
+        return;
+      }
+      console.info(
+        `[calmframes] starting harness run: ${JSON.stringify(config.mode)}`,
+      );
+      navigation.navigate(Screens.PLAYER_SCREEN, {
+        data: getLayeringTestTitle(),
+        coverTest: config.mode,
+        coverSegments:
+          config.segments ??
+          (config.mode === 'timing' ? getTimingHarnessSegments() : undefined),
+        guardBandMs: config.guardBandMs,
+        toggleEveryMs: config.toggleEveryMs,
+        referencePatch: config.referencePatch,
+        scheduleLabel: config.scheduleLabel,
+      });
+    });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**

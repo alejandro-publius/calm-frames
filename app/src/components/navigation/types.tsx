@@ -5,6 +5,9 @@ import { DrawerScreenProps } from '@amazon-devices/react-navigation__drawer/lib/
 import { StackNavigationProp } from '@amazon-devices/react-navigation__stack';
 import { StackScreenProps } from '@amazon-devices/react-navigation__stack/lib/typescript/src/types';
 import { ImageSourcePropType, TouchableOpacity } from 'react-native';
+import { ReferencePatch } from '../../calmframes/CoverLayer';
+import { FlashSegment } from '../../calmframes/coverSchedule';
+import { HarnessMode } from '../../calmframes/useCoverHarness';
 import { TitleData } from '../../types/TitleData';
 
 export enum Screens {
@@ -42,6 +45,20 @@ export type AppStackParamList = {
   [Screens.PLAYER_SCREEN]: {
     data: TitleData;
     focusId?: number | string;
+    /**
+     * Calm Frames cover harness. "layering" is the phase 1.5 check and
+     * "timing" is the GATE 1 harness. Leave it out for normal playback.
+     */
+    coverTest?: HarnessMode;
+    /** Timing mode: the flagged segments to hide. */
+    coverSegments?: FlashSegment[];
+    /** Which schedule produced those segments, for the log. */
+    scheduleLabel?: string;
+    guardBandMs?: number;
+    /** Layering mode: how often the cover toggles, milliseconds. */
+    toggleEveryMs?: number;
+    /** Screen area the cover leaves visible for the camera harness. */
+    referencePatch?: ReferencePatch;
   };
 };
 

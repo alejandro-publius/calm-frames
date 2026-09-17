@@ -1,0 +1,5 @@
+{
+  "mode": "layering",
+  "toggleEveryMs": 5000,
+  "scheduleLabel": "phase-1.5-layering-test"
+}

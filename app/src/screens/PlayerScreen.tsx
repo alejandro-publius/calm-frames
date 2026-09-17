@@ -46,6 +46,9 @@ import { FrameImageSource } from '../services/bif/FrameImageSource';
 import { COLORS } from '../styles/Colors';
 import { VideoHandler } from '../utils/VideoHandler';
 import VideoPlayerUI from '../w3cmedia/mediacontrols/VideoPlayerUI';
+import CoverLayer from '../calmframes/CoverLayer';
+import { buildCoverIntervals } from '../calmframes/coverSchedule';
+import { useCoverHarness } from '../calmframes/useCoverHarness';
 import { ShakaPlayer } from '../w3cmedia/shakaplayer/ShakaPlayer';
 
 const BACKGROUND_STATE: AppStateStatus = 'background';
@@ -60,6 +63,19 @@ const PlayerScreen = ({
   route,
 }: AppStackScreenProps<Screens.PLAYER_SCREEN>) => {
   const { data } = route.params;
+  // Calm Frames cover harness. "layering" is the phase 1.5 check and "timing"
+  // is the GATE 1 harness; without the parameter the player behaves exactly as
+  // the sample did. See docs/GATES.md for how to run each one.
+  const coverTest = route.params.coverTest ?? 'off';
+  const coverIntervals = React.useMemo(
+    () =>
+      route.params.coverSegments
+        ? buildCoverIntervals(route.params.coverSegments, {
+            guardBandMs: route.params.guardBandMs,
+          })
+        : [],
+    [route.params.coverSegments, route.params.guardBandMs],
+  );
   const { width: deviceWidth, height: deviceHeight } = useWindowDimensions();
   const addKeplerAppStateListenerCallback = (
     eventType: KeplerAppStateEvent,
@@ -94,6 +110,13 @@ const PlayerScreen = ({
   const TIME_TO_GO_BACK_IF_VIDEO_ENDS = 2300;
   const BACK_NAVIGATION_DELAY = 700;
   const showVideoPlayerUI = !isVideoError;
+
+  const cover = useCoverHarness(videoRef, {
+    mode: coverTest,
+    intervals: coverIntervals,
+    toggleEveryMs: route.params.toggleEveryMs,
+    scheduleLabel: route.params.scheduleLabel,
+  });
   const keplerAppStateManager: IKeplerAppStateManager =
     useKeplerAppStateManager();
   const componentInstance: IComponentInstance =
@@ -405,6 +428,17 @@ const PlayerScreen = ({
               onSurfaceViewCreated={onSurfaceViewCreated}
               onSurfaceViewDestroyed={onSurfaceViewDestroyed}
               testID="kepler-video-surface-view"
+            />
+            {/*
+              The cover sits between the video surface (zIndex 0) and the
+              captions view (zIndex 2), which is what keeps captions readable
+              over a hidden picture.
+            */}
+            <CoverLayer
+              visible={cover.covered}
+              referencePatch={route.params.referencePatch}
+              screenWidth={deviceWidth}
+              screenHeight={deviceHeight}
             />
             <KeplerCaptionsView
               onCaptionViewCreated={onCaptionViewCreated}

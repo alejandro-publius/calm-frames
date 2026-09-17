@@ -6,11 +6,22 @@ import React, { useCallback, useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
+import {
+  getLayeringTestTitle,
+  getTimingHarnessSegments,
+  REFERENCE_PATCH_1080P,
+  TIMING_SCHEDULE_IS_PLACEHOLDER,
+} from '../calmframes/harnessFixtures';
+import { useNavigation } from '@amazon-devices/react-navigation__native';
 import BufferingWindow from '../components/BufferingWindow';
 import ConnectionComponent from '../components/ConnectionComponent';
 import LocaleComponent from '../components/LocaleComponent';
 import LoginInformation from '../components/LoginInformation';
-import { AppDrawerScreenProps, Screens } from '../components/navigation/types';
+import {
+  AppDrawerScreenProps,
+  HomeScreenNavigationProps,
+  Screens,
+} from '../components/navigation/types';
 import { isAccountLoginEnabled } from '../config/AppConfig';
 import {
   setLoginStatus,
@@ -35,6 +46,9 @@ const ListItem: React.FC<ItemProps> = React.memo(({ title, value }) => (
 const SettingsScreen: React.FC<AppDrawerScreenProps<Screens.SETTINGS_SCREEN>> =
   React.memo(({ navigation }) => {
     const dispatch = useDispatch();
+    // Settings lives in the drawer, and the player lives in the stack above
+    // it, so the measurement runs navigate through the parent navigator.
+    const stackNavigation = useNavigation<HomeScreenNavigationProps>();
     const loginStatus = useSelector(settingsSelectors.loginStatus);
     const { deviceInfo, isLoading, fetchDeviceInfo } = useDeviceInfo();
 
@@ -106,6 +120,49 @@ const SettingsScreen: React.FC<AppDrawerScreenProps<Screens.SETTINGS_SCREEN>> =
               label="Feedback"
               onPress={() => {
                 navigation.navigate(Screens.FEEDBACK_SCREEN);
+              }}
+              variant="secondary"
+              mode="outlined"
+              focusedStyle={styles.buttonFocused}
+              style={styles.feedbackButton}
+              labelStyle={styles.buttonLabel}
+              size="sm"
+            />
+            {/*
+              Calm Frames measurement runs. Both play a title with the cover
+              layer on top and write CALM_TIMING lines to the device log, which
+              is what the camera recordings are lined up against. See
+              docs/GATES.md.
+            */}
+            <Button
+              label="Layering test"
+              onPress={() => {
+                stackNavigation.navigate(Screens.PLAYER_SCREEN, {
+                  data: getLayeringTestTitle(),
+                  coverTest: 'layering',
+                  toggleEveryMs: 5_000,
+                });
+              }}
+              variant="secondary"
+              mode="outlined"
+              focusedStyle={styles.buttonFocused}
+              style={styles.feedbackButton}
+              labelStyle={styles.buttonLabel}
+              size="sm"
+            />
+            <Button
+              label="Timing harness"
+              onPress={() => {
+                stackNavigation.navigate(Screens.PLAYER_SCREEN, {
+                  data: getLayeringTestTitle(),
+                  coverTest: 'timing',
+                  coverSegments: getTimingHarnessSegments(),
+                  scheduleLabel: TIMING_SCHEDULE_IS_PLACEHOLDER
+                    ? 'placeholder-not-a-gate-1-run'
+                    : 'calm-timing',
+                  guardBandMs: 500,
+                  referencePatch: REFERENCE_PATCH_1080P,
+                });
               }}
               variant="secondary"
               mode="outlined"
