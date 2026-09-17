@@ -121,13 +121,18 @@ export function beacon(where: string, detail: Record<string, unknown> = {}): voi
     return;
   }
   try {
+    // The catch has to be on the promise, not just around the call. A
+    // rejected fetch with no handler is an unhandled rejection, which is
+    // noise on a device and a failed run under jest.
     void fetch('http://10.0.2.2:8000/beacon', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ where, at: Date.now(), ...detail }),
+    }).catch(() => {
+      // Nothing listening, which is the normal case.
     });
   } catch {
-    // Nothing listening, which is the normal case.
+    // fetch itself missing, which is also fine.
   }
 }
 
@@ -167,7 +172,10 @@ export function flushTimingEvents(): void {
   }
   const batch = pending;
   pending = [];
-  void postBatch(batch, sinkUrl);
+  void postBatch(batch, sinkUrl).catch(() => {
+    // postBatch already swallows its own errors; this is belt and braces so a
+    // collector that vanishes mid run cannot produce an unhandled rejection.
+  });
 }
 
 export function logTimingEvent(event: TimingEvent): void {
