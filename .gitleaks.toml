@@ -1,0 +1,22 @@
+# Secret scanning config.
+#
+# The default rules are kept. The allowlist below only covers directories that
+# hold generated or third-party files that are never committed: the Shaka
+# Player checkout and the bundles built from it during npm install, installed
+# packages, and build output. Scanning them produces hundreds of false matches
+# from minified demo code, which buries a real finding.
+#
+# Nothing under our own source, docs, results or infrastructure is allowlisted.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Generated and third-party files, none of which are committed"
+paths = [
+  '''app/src/w3cmedia/shakaplayer/dist/''',
+  '''app/shaka-setup/shaka-player/''',
+  '''node_modules/''',
+  '''app/build/''',
+  '''\.venv/''',
+]
