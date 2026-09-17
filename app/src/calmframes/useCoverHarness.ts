@@ -36,7 +36,13 @@ import {
   setRunning,
   sync,
 } from './mediaClock';
-import { logTimingEvent, readPlaybackQuality, TimingEventKind } from './timingLog';
+import {
+  beacon,
+  getTimingSink,
+  logTimingEvent,
+  readPlaybackQuality,
+  TimingEventKind,
+} from './timingLog';
 
 export type HarnessMode = 'off' | 'layering' | 'timing';
 
@@ -52,6 +58,15 @@ export interface CoverHarnessOptions {
   foreground?: boolean;
   /** Which schedule this run used, recorded in the harness-start line. */
   scheduleLabel?: string;
+  /**
+   * True once the media element exists.
+   *
+   * The player is created after the screen mounts, so at mount the ref is
+   * still null. Without this the harness would attach its listeners to
+   * nothing and never try again, which is how a run produced no events at all
+   * on the virtual device.
+   */
+  ready?: boolean;
 }
 
 export interface CoverHarnessState {
@@ -108,6 +123,7 @@ export function useCoverHarness(
     tickMs = DEFAULT_TICK_MS,
     foreground = true,
     scheduleLabel = 'none',
+    ready = true,
   } = options;
 
   const [state, setState] = useState<CoverHarnessState>({
@@ -161,6 +177,13 @@ export function useCoverHarness(
       return;
     }
     const element = mediaRef.current;
+    beacon('harness.attach', {
+      mode,
+      ready,
+      hasElement: Boolean(element),
+      canListen: Boolean(element?.addEventListener),
+      sink: getTimingSink(),
+    });
     if (!element?.addEventListener) {
       return;
     }
@@ -249,7 +272,7 @@ export function useCoverHarness(
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mode, mediaRef, applyCover]);
+  }, [mode, mediaRef, applyCover, ready]);
 
   // A new mode is a new run, so the toggle clock starts again.
   useEffect(() => {

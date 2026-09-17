@@ -31,6 +31,12 @@ export const HARNESS_CONFIG_DIR = '/data';
 
 export interface HarnessConfig {
   mode: HarnessMode;
+  /** Play this URL instead of a catalog title, for example the marker clip. */
+  videoUrl?: string;
+  /** MP4, HLS or DASH. Defaults to MP4 when a videoUrl is given. */
+  videoFormat?: string;
+  /** Post timing events here during the run, because device logs get dropped. */
+  eventSinkUrl?: string;
   toggleEveryMs?: number;
   guardBandMs?: number;
   segments?: FlashSegment[];
@@ -107,6 +113,17 @@ export function parseHarnessConfig(raw: string): HarnessConfig | null {
   if (typeof candidate.scheduleLabel === 'string') {
     config.scheduleLabel = candidate.scheduleLabel;
   }
+  if (
+    typeof candidate.eventSinkUrl === 'string' &&
+    candidate.eventSinkUrl.length > 0
+  ) {
+    config.eventSinkUrl = candidate.eventSinkUrl;
+  }
+  if (typeof candidate.videoUrl === 'string' && candidate.videoUrl.length > 0) {
+    config.videoUrl = candidate.videoUrl;
+    config.videoFormat =
+      typeof candidate.videoFormat === 'string' ? candidate.videoFormat : 'MP4';
+  }
   const segments = parseSegments(candidate.segments);
   if (segments) {
     config.segments = segments;
@@ -125,12 +142,58 @@ export function parseHarnessConfig(raw: string): HarnessConfig | null {
   return config;
 }
 
+/**
+ * Where a debug build looks for a run over the network.
+ *
+ * On OS 1.2 there is no way to put a file into another package's data
+ * directory from the host, so a debug build also asks a small server for a
+ * run. 10.0.2.2 is the host machine as seen from the virtual device. On a real
+ * stick, point this at the machine serving the run over the local network.
+ *
+ * This only ever runs in a debug build. A release build never reaches for the
+ * network to decide what to play.
+ */
+export const HARNESS_CONFIG_URL =
+  'http://10.0.2.2:8000/calm-frames-harness.json';
+
+async function readHarnessConfigFromNetwork(): Promise<HarnessConfig | null> {
+  const isDebugBuild = typeof __DEV__ !== 'undefined' && __DEV__;
+  if (!isDebugBuild) {
+    console.warn(
+      '[calmframes] release build, not asking the network for a measurement run',
+    );
+    return null;
+  }
+  try {
+    console.warn(`[calmframes] asking ${HARNESS_CONFIG_URL} for a run`);
+    const response = await fetch(HARNESS_CONFIG_URL, {
+      headers: { 'cache-control': 'no-cache' },
+    });
+    if (!response.ok) {
+      console.warn(`[calmframes] run server answered ${response.status}`);
+      return null;
+    }
+    const config = parseHarnessConfig(await response.text());
+    console.warn(
+      `[calmframes] run server gave ${config ? config.mode : 'nothing valid'}`,
+    );
+    return config;
+  } catch (error) {
+    // No server, which is the normal case. Start the app as usual.
+    console.warn(`[calmframes] no run server: ${error}`);
+    return null;
+  }
+}
+
 /** Read the config a device was given, or null for a normal launch. */
 export async function readHarnessConfig(): Promise<HarnessConfig | null> {
   try {
+    console.warn('[calmframes] looking for a measurement run');
     const entries = await FileSystem.getEntries(HARNESS_CONFIG_DIR);
     if (!Array.isArray(entries) || !entries.includes(HARNESS_CONFIG_FILE)) {
-      return null;
+      // No file on the device is the normal case, because on OS 1.2 there is
+      // no way to put one there from the host. Ask the network instead.
+      return readHarnessConfigFromNetwork();
     }
     const raw = await FileSystem.readFileAsString(
       `${HARNESS_CONFIG_DIR}/${HARNESS_CONFIG_FILE}`,
@@ -142,9 +205,9 @@ export async function readHarnessConfig(): Promise<HarnessConfig | null> {
         `[calmframes] ${HARNESS_CONFIG_FILE} is present but not a valid harness config, starting normally`,
       );
     }
-    return config;
+    return config ?? (await readHarnessConfigFromNetwork());
   } catch (error) {
     console.warn(`[calmframes] could not read ${HARNESS_CONFIG_FILE}: ${error}`);
-    return null;
+    return readHarnessConfigFromNetwork();
   }
 }

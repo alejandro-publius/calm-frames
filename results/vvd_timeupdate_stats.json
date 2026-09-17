@@ -1,0 +1,77 @@
+{
+  "recorded_utc": "2026-09-17T23:24:18+00:00",
+  "mode": "timing",
+  "device": "Vega Virtual Device (not the stick, see docs/GATES.md)",
+  "clip_sha256": "a9fcb9dec4dc9a1dbac1800f34ca9fa35aa4e6b8d0c6d03a05968409cc97a5b0",
+  "events_seen": 66,
+  "event_source": "posted by the app",
+  "timeupdate": {
+    "count": 10,
+    "interval_ms": {
+      "count": 9,
+      "min": 75.0,
+      "median": 426.0,
+      "p95": 5219.0,
+      "max": 5219.0
+    },
+    "media_step_ms": {
+      "count": 5,
+      "min": 3.0,
+      "median": 16.0,
+      "p95": 43.0,
+      "max": 43.0
+    }
+  },
+  "current_time_precision_ms": 3,
+  "worst_wall_clock_drift_ms": 2756,
+  "drift_note": "The app tracks the largest gap it saw between its wall-clock estimate and the position the player reported. Only the maximum is meaningful.",
+  "cover": {
+    "on_events": 22,
+    "off_events": 22,
+    "reasons": [
+      "error",
+      "interval 105500-107500",
+      "interval 111500-113500",
+      "interval 117500-119500",
+      "interval 15500-17500",
+      "interval 21500-23500",
+      "interval 27500-29500",
+      "interval 33500-35500",
+      "interval 3500-5500",
+      "interval 39500-41500",
+      "interval 45500-47500",
+      "interval 51500-53500",
+      "interval 57500-59500",
+      "interval 63500-65500",
+      "interval 69500-71500",
+      "interval 75500-77500",
+      "interval 81500-83500",
+      "interval 87500-89500",
+      "interval 93500-95500",
+      "interval 9500-11500",
+      "interval 99500-101500",
+      "waiting"
+    ]
+  },
+  "playback_quality_samples": 10,
+  "playback_quality_last": {
+    "droppedVideoFrames": 0,
+    "totalVideoFrames": 1164,
+    "corruptedVideoFrames": null
+  },
+  "event_kinds": {
+    "cover-off": 22,
+    "cover-on": 22,
+    "error": 1,
+    "harness-start": 1,
+    "harness-stop": 1,
+    "playing": 1,
+    "ratechange": 3,
+    "seeked": 2,
+    "seeking": 2,
+    "timeupdate": 10,
+    "waiting": 1
+  },
+  "seek_events": 4,
+  "stall_events": 1
+}

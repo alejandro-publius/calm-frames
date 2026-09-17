@@ -46,6 +46,7 @@ import { FrameImageSource } from '../services/bif/FrameImageSource';
 import { COLORS } from '../styles/Colors';
 import { VideoHandler } from '../utils/VideoHandler';
 import VideoPlayerUI from '../w3cmedia/mediacontrols/VideoPlayerUI';
+import { beacon } from '../calmframes/timingLog';
 import CoverLayer from '../calmframes/CoverLayer';
 import { buildCoverIntervals } from '../calmframes/coverSchedule';
 import { useCoverHarness } from '../calmframes/useCoverHarness';
@@ -111,11 +112,20 @@ const PlayerScreen = ({
   const BACK_NAVIGATION_DELAY = 700;
   const showVideoPlayerUI = !isVideoError;
 
+  React.useEffect(() => {
+    beacon('PlayerScreen.mount', { coverTest, uri: route.params.data?.uri });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  React.useEffect(() => {
+    beacon('PlayerScreen.videoInitialized', { isVideoInitialized });
+  }, [isVideoInitialized]);
+
   const cover = useCoverHarness(videoRef, {
     mode: coverTest,
     intervals: coverIntervals,
     toggleEveryMs: route.params.toggleEveryMs,
     scheduleLabel: route.params.scheduleLabel,
+    ready: isVideoInitialized,
   });
   const keplerAppStateManager: IKeplerAppStateManager =
     useKeplerAppStateManager();
@@ -274,10 +284,18 @@ const PlayerScreen = ({
       );
       if (nextAppState === BACKGROUND_STATE) {
         setShowBuffering(false);
+        if (coverTest !== 'off') {
+          // A measurement run stays on this screen. The virtual device
+          // backgrounds an app that nobody is touching, and leaving the
+          // screen would tear the player down mid-run. The cover is already
+          // on: useCoverHarness hides the picture as soon as the playhead
+          // becomes uncertain, which includes going to the background.
+          return;
+        }
         navigateBack();
       }
     },
-    [navigateBack],
+    [navigateBack, coverTest],
   );
 
   const backHandlerSubscription = useRef<{ remove: () => void } | null>(null);

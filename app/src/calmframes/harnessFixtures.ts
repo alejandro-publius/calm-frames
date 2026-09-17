@@ -48,6 +48,33 @@ export function getLayeringTestTitle(): TitleData {
 }
 
 /**
+ * A title that plays one URL, for measurement runs.
+ *
+ * The marker clip lives on the machine running the run, not in a catalog, so
+ * the harness needs a title it can build on the spot.
+ */
+export function makeUrlTitle(uri: string, format = 'MP4'): TitleData {
+  return {
+    id: 'calm-frames-harness',
+    title: 'Calm Frames measurement run',
+    description: 'Timing markers for a measurement run. Not a catalog title.',
+    mediaType: 'video',
+    mediaSourceType: 'url',
+    duration: 120,
+    thumbnail: '',
+    posterUrl: '',
+    uri,
+    categories: ['Measurement'],
+    channelID: 'harness',
+    rating: '',
+    format,
+    uhd: false,
+    secure: false,
+    rentAmount: '0',
+  } as unknown as TitleData;
+}
+
+/**
  * Placeholder cover schedule, in milliseconds of media time.
  *
  * Twenty one-second hides, six seconds apart, starting at ten seconds. The

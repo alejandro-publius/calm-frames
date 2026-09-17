@@ -228,3 +228,33 @@ describe('useCoverHarness', () => {
     }
   });
 });
+
+describe('useCoverHarness when the player appears later', () => {
+  // The player is created after the screen mounts. A harness that only looks
+  // for the media element once attaches to nothing and records a run with no
+  // events in it, which is what happened on the virtual device.
+  const LateHarness = ({
+    media,
+    ready,
+  }: {
+    media: MediaElementLike;
+    ready: boolean;
+  }) => {
+    const ref = React.useRef<MediaElementLike | null>(null);
+    if (ready) {
+      ref.current = media;
+    }
+    const state = useCoverHarness(ref, { mode: 'timing', intervals: [], ready });
+    return <Text testID="covered">{state.covered ? 'covered' : 'clear'}</Text>;
+  };
+
+  it('attaches once the media element exists', () => {
+    const media = makeMediaElement();
+    const view = render(<LateHarness media={media} ready={false} />);
+    expect(media.listeners.timeupdate ?? []).toHaveLength(0);
+
+    view.rerender(<LateHarness media={media} ready={true} />);
+    expect(media.listeners.timeupdate).toHaveLength(1);
+    expect(media.listeners.seeking).toHaveLength(1);
+  });
+});

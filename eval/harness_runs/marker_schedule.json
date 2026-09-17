@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "generator": "eval/marker_clip.py",
+  "note": "Timing markers for the GATE 1 rehearsal. Not hazardous: one pair of opposing luminance changes every six seconds, far below the three per second WCAG counts as flashing.",
+  "clip": {
+    "file_name": "markers.mp4",
+    "sha256": "a9fcb9dec4dc9a1dbac1800f34ca9fa35aa4e6b8d0c6d03a05968409cc97a5b0",
+    "duration_s": 120.0,
+    "fps": 30,
+    "width": 1280,
+    "height": 720,
+    "base_srgb": 110,
+    "marker_srgb": 235,
+    "base_relative_luminance": 0.1559,
+    "marker_relative_luminance": 0.8308
+  },
+  "reference_patch": {
+    "x": 48,
+    "y": 48,
+    "width": 96,
+    "height": 96
+  },
+  "markers": [
+    {
+      "index": 1,
+      "start_ms": 4000,
+      "end_ms": 5000
+    },
+    {
+      "index": 2,
+      "start_ms": 10000,
+      "end_ms": 11000
+    },
+    {
+      "index": 3,
+      "start_ms": 16000,
+      "end_ms": 17000
+    },
+    {
+      "index": 4,
+      "start_ms": 22000,
+      "end_ms": 23000
+    },
+    {
+      "index": 5,
+      "start_ms": 28000,
+      "end_ms": 29000
+    },
+    {
+      "index": 6,
+      "start_ms": 34000,
+      "end_ms": 35000
+    },
+    {
+      "index": 7,
+      "start_ms": 40000,
+      "end_ms": 41000
+    },
+    {
+      "index": 8,
+      "start_ms": 46000,
+      "end_ms": 47000
+    },
+    {
+      "index": 9,
+      "start_ms": 52000,
+      "end_ms": 53000
+    },
+    {
+      "index": 10,
+      "start_ms": 58000,
+      "end_ms": 59000
+    },
+    {
+      "index": 11,
+      "start_ms": 64000,
+      "end_ms": 65000
+    },
+    {
+      "index": 12,
+      "start_ms": 70000,
+      "end_ms": 71000
+    },
+    {
+      "index": 13,
+      "start_ms": 76000,
+      "end_ms": 77000
+    },
+    {
+      "index": 14,
+      "start_ms": 82000,
+      "end_ms": 83000
+    },
+    {
+      "index": 15,
+      "start_ms": 88000,
+      "end_ms": 89000
+    },
+    {
+      "index": 16,
+      "start_ms": 94000,
+      "end_ms": 95000
+    },
+    {
+      "index": 17,
+      "start_ms": 100000,
+      "end_ms": 101000
+    },
+    {
+      "index": 18,
+      "start_ms": 106000,
+      "end_ms": 107000
+    },
+    {
+      "index": 19,
+      "start_ms": 112000,
+      "end_ms": 113000
+    },
+    {
+      "index": 20,
+      "start_ms": 118000,
+      "end_ms": 119000
+    }
+  ]
+}

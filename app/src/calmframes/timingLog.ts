@@ -6,9 +6,13 @@
  * media time with wall-clock time, which is what lets the camera recordings be
  * lined up against what the app believed it was doing.
  *
- * Lines are printed with console.info, because release builds strip
- * console.log but keep info, and they carry a fixed prefix so the device log
- * can be filtered with:
+ * Lines are printed with console.warn. Release builds strip console.log but
+ * keep warn, and, more to the point, the device suppresses info level logs
+ * under load: a run on the virtual device lost every info line to
+ * "Log suppression ended at level [info]. [140] logs were suppressed". A
+ * measurement whose evidence can be dropped by a log rate limiter is not a
+ * measurement. They carry a fixed prefix so the device log can be filtered
+ * with:
  *
  *     vega device start-log-stream | grep CALM_TIMING
  */
@@ -87,6 +91,104 @@ export function formatTimingEvent(event: TimingEvent): string {
   return `${TIMING_LOG_PREFIX} ${JSON.stringify(event)}`;
 }
 
+/**
+ * Where events are sent, when a measurement run gives us somewhere to send
+ * them.
+ *
+ * The device log cannot be trusted with this. On the virtual device every
+ * console line from the app was dropped, with the device reporting
+ * "Log suppression ended at level [info]. [140] logs were suppressed", and
+ * nothing the app printed survived. So during a run the harness posts its
+ * events straight to the machine running the run, and the log stays a
+ * convenience rather than the evidence.
+ *
+ * Events are batched, because one request per timeupdate would change the
+ * thing we are measuring.
+ */
+let sinkUrl: string | null = null;
+let pending: TimingEvent[] = [];
+let flushTimer: ReturnType<typeof setTimeout> | null = null;
+
+/**
+ * A one line beacon, used while bringing a device up.
+ *
+ * The device drops the app's console output, so when a run does not start
+ * there is otherwise no way to tell whether the app's JavaScript ran at all.
+ * Debug builds only.
+ */
+export function beacon(where: string, detail: Record<string, unknown> = {}): void {
+  if (typeof __DEV__ === 'undefined' || !__DEV__) {
+    return;
+  }
+  try {
+    void fetch('http://10.0.2.2:8000/beacon', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ where, at: Date.now(), ...detail }),
+    });
+  } catch {
+    // Nothing listening, which is the normal case.
+  }
+}
+
+export function setTimingSink(url: string | null): void {
+  sinkUrl = url;
+  if (!url) {
+    pending = [];
+  }
+}
+
+export function getTimingSink(): string | null {
+  return sinkUrl;
+}
+
+async function postBatch(batch: TimingEvent[], url: string): Promise<void> {
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(batch),
+    });
+  } catch {
+    // A run continues even if the collector is not listening. The events are
+    // dropped rather than retried, so a slow collector cannot back up and
+    // change the timing we are measuring.
+  }
+}
+
+/** Send anything buffered now. Called on harness-stop and on a timer. */
+export function flushTimingEvents(): void {
+  if (flushTimer) {
+    clearTimeout(flushTimer);
+    flushTimer = null;
+  }
+  if (!sinkUrl || pending.length === 0) {
+    return;
+  }
+  const batch = pending;
+  pending = [];
+  void postBatch(batch, sinkUrl);
+}
+
 export function logTimingEvent(event: TimingEvent): void {
-  console.info(formatTimingEvent(event));
+  console.warn(formatTimingEvent(event));
+  if (!sinkUrl) {
+    return;
+  }
+  pending.push(event);
+  // Send at once for the events that bracket a run or change what is on
+  // screen, and batch the rest.
+  if (
+    event.kind === 'harness-start' ||
+    event.kind === 'harness-stop' ||
+    event.kind === 'cover-on' ||
+    event.kind === 'cover-off' ||
+    pending.length >= 25
+  ) {
+    flushTimingEvents();
+    return;
+  }
+  if (!flushTimer) {
+    flushTimer = setTimeout(flushTimingEvents, 1000);
+  }
 }

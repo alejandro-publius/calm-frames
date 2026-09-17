@@ -39,8 +39,10 @@ import { MovieRotatorGrid } from '../components/touchOptimized/MovieRotatorGrid'
 import {
   getLayeringTestTitle,
   getTimingHarnessSegments,
+  makeUrlTitle,
 } from '../calmframes/harnessFixtures';
 import { readHarnessConfig } from '../calmframes/harnessConfig';
+import { beacon, setTimingSink } from '../calmframes/timingLog';
 
 // Configuration and feature flags
 import {
@@ -234,25 +236,42 @@ const HomeScreen = ({
    */
   useEffect(() => {
     let cancelled = false;
-    readHarnessConfig().then((config) => {
-      if (cancelled || !config) {
-        return;
-      }
-      console.info(
-        `[calmframes] starting harness run: ${JSON.stringify(config.mode)}`,
-      );
-      navigation.navigate(Screens.PLAYER_SCREEN, {
-        data: getLayeringTestTitle(),
-        coverTest: config.mode,
-        coverSegments:
-          config.segments ??
-          (config.mode === 'timing' ? getTimingHarnessSegments() : undefined),
-        guardBandMs: config.guardBandMs,
-        toggleEveryMs: config.toggleEveryMs,
-        referencePatch: config.referencePatch,
-        scheduleLabel: config.scheduleLabel,
+    beacon('HomeScreen.mount');
+    readHarnessConfig()
+      .then((config) => {
+        beacon('HomeScreen.configRead', {
+          got: config ? config.mode : null,
+          sink: config ? (config.eventSinkUrl ?? null) : null,
+          videoUrl: config ? (config.videoUrl ?? null) : null,
+          segments: config ? (config.segments?.length ?? 0) : 0,
+        });
+        return config;
+      })
+      .then((config) => {
+        if (cancelled || !config) {
+          return;
+        }
+        setTimingSink(config.eventSinkUrl ?? null);
+        console.warn(
+          `[calmframes] starting harness run: ${JSON.stringify(config.mode)}`,
+        );
+        navigation.navigate(Screens.PLAYER_SCREEN, {
+          data: config.videoUrl
+            ? makeUrlTitle(config.videoUrl, config.videoFormat)
+            : getLayeringTestTitle(),
+          coverTest: config.mode,
+          coverSegments:
+            config.segments ??
+            (config.mode === 'timing' ? getTimingHarnessSegments() : undefined),
+          guardBandMs: config.guardBandMs,
+          toggleEveryMs: config.toggleEveryMs,
+          referencePatch: config.referencePatch,
+          scheduleLabel: config.scheduleLabel,
+        });
+      })
+      .catch((error) => {
+        beacon('HomeScreen.configError', { error: String(error) });
       });
-    });
     return () => {
       cancelled = true;
     };
