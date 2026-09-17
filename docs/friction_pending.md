@@ -82,3 +82,21 @@ These are real entries from the build. They move into docs/FRICTION_LOG.md with 
 - **Severity:** Medium. Automated UI checks and screen recordings both need this.
 - **Workaround:** The virtual device is QEMU with a QMP socket at `/tmp/qmp-socket-*.sock`, so `eval/vvd_control.py` sends key events with `input-send-event` and captures with `screendump`. Key injection works. Screenshots come back black, because the app renders through a GPU layer that `screendump` does not see, so playback has to be verified from device logs instead.
 - **Suggestion:** Add `vega device key` and `vega device screenshot` commands, and make the screenshot capture the composited output.
+
+## 10. No way to put a file in an app's data directory on OS 1.2
+- **Task:** Push a config file into our own app's data directory, so a measurement run can start without navigating menus in front of a camera.
+- **Steps:** Followed the vega-video-sample README, which says to push search data with `vega exec vda push KVATestData.json /home/app_user/packages/<package id>/data`. Tried the current equivalent, `vega device copy-to --source ... --destination /home/app_user/packages/io.github.alejandropublius.calmframes/data`, on a virtual device running OS 1.2, with the app installed and running.
+- **Expected:** The file lands in the app's data directory, where the app's own `KeplerFileSystem.readFileAsString('/data/<name>')` can read it.
+- **Actual:** `Permission denied`. The path does not exist either: `/home` is not on the device at all. `vega device run-cmd` runs inside the developer shell's own sandbox (`/pkgs/com.amazon.dev.shell`), which cannot see other packages' directories, so there is no path from the host to an app's data directory.
+- **Severity:** Medium. The sample documents a workflow that cannot be carried out, and any app that reads a config or test fixture from its data directory has no way to be given one.
+- **Workaround:** Start the run from a button inside the app instead.
+- **Suggestion:** Either add `vega device copy-to --package <id>` that writes into that package's data directory in developer mode, or correct the sample README to say how it is done on OS 1.2.
+
+## 11. `vega device copy-to` help text has source and destination backwards
+- **Task:** Copy a file to a device.
+- **Steps:** `vega device copy-to --help`.
+- **Expected:** Source is on the host, destination is on the device.
+- **Actual:** The help says `--source  Source file or directory on the device` and `--destination  Destination file or directory on the host`, which is the opposite of what the command does and of its own examples just below.
+- **Severity:** Low
+- **Workaround:** Follow the examples, not the option descriptions.
+- **Suggestion:** Swap the two descriptions.
