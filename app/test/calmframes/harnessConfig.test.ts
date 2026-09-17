@@ -4,6 +4,10 @@
  * Every assertion here was seen to fail: each rule was broken on purpose in
  * harnessConfig.ts and the suite went red before the file was restored.
  */
+// jest.setup.ts replaces this module so no test reaches for a run. These
+// tests are about the real one.
+jest.unmock('../../src/calmframes/harnessConfig');
+
 import { parseHarnessConfig } from '../../src/calmframes/harnessConfig';
 
 describe('parseHarnessConfig', () => {

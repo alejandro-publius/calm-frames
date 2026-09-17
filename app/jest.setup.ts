@@ -284,3 +284,12 @@ jest.mock('@amazon-devices/security-manager-lib', () => ({
     UNKNOWN: 'UNKNOWN',
   },
 }));
+
+// Tests must never reach for a measurement run. readHarnessConfig asks the
+// device and then the network, and in CI that fetch fails and logs after the
+// test that started it has finished, which jest counts as an error. The
+// dedicated tests for this module call jest.unmock to get the real one.
+jest.mock('./src/calmframes/harnessConfig', () => ({
+  ...jest.requireActual('./src/calmframes/harnessConfig'),
+  readHarnessConfig: jest.fn().mockResolvedValue(null),
+}));
