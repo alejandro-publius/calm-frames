@@ -46,3 +46,39 @@ These are real entries from the build. They move into docs/FRICTION_LOG.md with 
 - **Severity:** Low
 - **Workaround:** Ignore it and run `vega virtual-device start`.
 - **Suggestion:** Treat "no instance" as a normal state with one clear line, and keep the internal command for `--verbose`.
+
+## 6. `vega device list` crashes while a virtual device is running
+- **Task:** List connected devices so a script can pick one.
+- **Steps:** Started the Vega Virtual Device, waited for it to boot, ran `vega device list`. SDK 0.24.9914, Vega CLI 1.3.4, macOS 15.1.1 on Apple M1.
+- **Expected:** A table with the running virtual device.
+- **Actual:** `Vega operation FAILED due to an irrecoverable error: Cannot read properties of undefined (reading 'trim')`. The SDK error log shows `[DeviceManagerHandler]: [getDeviceList]: Error - TypeError: Cannot read properties of undefined (reading 'trim')`. Every other device command works against the same device at the same moment, including `vega device is-connected`, `vega device info`, `vega run-app` and `vega device start-log-stream`.
+- **Severity:** Medium. It breaks the obvious way to script against a device, and the message gives no clue what to fix.
+- **Workaround:** Use `vega device is-connected` and `vega device info` instead.
+- **Suggestion:** Guard the field the parser trims, and report which device entry failed to parse.
+
+## 7. The virtual device stops with no message in the log
+- **Task:** Keep the virtual device up across a few install, launch and log-stream cycles.
+- **Steps:** Started it detached, installed and launched the app twice, streamed logs, drove the remote over QMP, then ran another install about 8 minutes later.
+- **Expected:** The device keeps running until it is stopped.
+- **Actual:** The QEMU process was gone. `vega virtual-device status` returned `{"running":false,"process_ids":{"qemu":-1}}` and later commands failed with "Device not found". Nothing was written to the virtual device's own output after "Virtual device ready", and the host had 61% of memory free at the time.
+- **Severity:** Medium. A scripted run has to check the device before every step and be ready to start it again.
+- **Workaround:** `eval/vvd_smoke.py` starts the device when it is missing and waits for `vega device is-connected` rather than trusting the status command.
+- **Suggestion:** Log why the device exited, and add an exit reason to `vega virtual-device status`.
+
+## 8. `vega virtual-device status` reports running before the device can be used
+- **Task:** Wait for the virtual device to be ready in a script.
+- **Steps:** Started the device, then polled `vega virtual-device status` until it reported `"running":true`, then ran `vega run-app`.
+- **Expected:** "running" means the device is ready for device commands.
+- **Actual:** The status flips to true as soon as QEMU starts, while the guest is still booting, so `vega run-app` fails with "No connected Vega devices found". The boot takes roughly 20 more seconds.
+- **Severity:** Low
+- **Workaround:** Poll `vega device is-connected` instead, which only succeeds once the device is usable.
+- **Suggestion:** Either hold "running" until the device is connectable, or add a separate readiness field so scripts do not have to guess.
+
+## 9. No supported way to press a remote button or capture the screen
+- **Task:** Drive the app on the virtual device from a script, and capture what it shows, to check our own screens for flashing (a requirement of this project).
+- **Steps:** Looked through `vega device --help` and `vega exec vda`.
+- **Expected:** Something like `vega device key dpad-down` and `vega device screenshot out.png`.
+- **Actual:** Neither exists. `vega device` covers install, launch, logs, shell and port forwarding but no input or capture. The bundled device adapter is adb-derived, but the device has no `input` or `screencap` tool.
+- **Severity:** Medium. Automated UI checks and screen recordings both need this.
+- **Workaround:** The virtual device is QEMU with a QMP socket at `/tmp/qmp-socket-*.sock`, so `eval/vvd_control.py` sends key events with `input-send-event` and captures with `screendump`. Key injection works. Screenshots come back black, because the app renders through a GPU layer that `screendump` does not see, so playback has to be verified from device logs instead.
+- **Suggestion:** Add `vega device key` and `vega device screenshot` commands, and make the screenshot capture the composited output.

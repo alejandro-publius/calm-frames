@@ -1,7 +1,8 @@
 # Calm Frames: rules for every session
 
-**Current phase:** Phase 0 (machine and repo), started Thu Sep 17, 2026. Phase 1 (Vega day-one probes) runs in parallel because the SDK is already installed.
+**Current phase:** Phase 1 (Vega day-one probes), Thu Sep 17, 2026. Phase 0 is done apart from the items that need the kits. The stripped app already plays a title on the Vega Virtual Device (docs/GATES.md).
 **Blocked on:** the head-start kits (`day-one-head-start.zip`), `rubric-amazon.md` and `outreach-kit.md` are not on this machine yet. See docs/STATUS.md.
+**Next in Phase 1:** the layering test screen (1.5), the GATE 1 cover and event logging on top of `app/src/calmframes/coverSchedule.ts` (1.6), and the back navigation regression test (1.2).
 
 Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/BUILD_PROMPT.md (the full plan, phases, gates, kill rules, cut list), docs/DECISIONS.md, docs/GATES.md.
 
@@ -69,6 +70,14 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 
 ## Environment quick reference
 - Vega: `source ~/vega/env` (already in `.zshrc`), then `vega ...`
-- Node: `eval "$(fnm env)" && fnm use`
+- Node: `eval "$(fnm env)" && fnm use`. The app also needs `JAVA_HOME=/opt/homebrew/opt/openjdk@21` for the Shaka build during `npm install`.
 - Python: `.venv/bin/python` or `uv run` (the system `python3` is 3.9)
 - Full versions: docs/ENVIRONMENT.md
+
+## Working with the Vega Virtual Device
+- Start it detached, or it dies with the shell that started it. `eval/vvd_smoke.py` handles this.
+- `vega virtual-device status` says running before the device is usable. Wait for `vega device is-connected` instead.
+- `vega device list` crashes with a TypeError. Use `vega device info` and `vega device is-connected`.
+- The CLI cannot press remote buttons or take screenshots. `eval/vvd_control.py` does both through QEMU's QMP socket. Screenshots come back black because the app renders on a GPU layer the capture misses, so verify playback from device logs.
+- Release builds strip `console.log`. Use the debug package when you need the app's own logs.
+- The build rewrites `app/manifest.toml`, adding a `[[needs.module]]` entry per installed `@amazon-devices` package. Removing a feature means removing its dependency too, or the app still declares it needs that module.
