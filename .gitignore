@@ -1,0 +1,42 @@
+# Media: downloads and hazard files never get committed.
+# Only the license ledger, hash files and the folder README are tracked.
+media/*
+!media/LICENSES.csv
+!media/*.sha256
+!media/README.md
+
+# Map-signing keys: private keys never enter the repo, public keys may.
+*.pem
+!*.pub.pem
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+*.egg-info/
+dist/
+build/
+
+# Node and Vega builds
+node_modules/
+*.vpkg
+app/build/
+app/bundle/
+app/kepler-build/
+app/generated/
+app/coverage/
+app/shaka-setup/shaka-player/
+
+# AWS CDK
+cdk.out/
+
+# Local environment and editors
+.env
+.env.*
+.DS_Store
+.idea/
+.vscode/
