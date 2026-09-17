@@ -11,8 +11,8 @@ Updated Thu Sep 17, 2026, morning PT.
 - **Rules check against Devpost (Sep 17):** deadline Oct 23 12:00 PT, judging Nov 9 to 20, winners around Dec 3. Four equally weighted criteria; ties are broken by the first criterion, Tech Implementation. Both AWS credit form links open the same form ($150, closes Oct 21 12:00 PT). Devpost posted a Sep 16 update on the code repository requirement: public with an open-source license at the top, or private and shared with testing@devpost.com and @AmazonAppDev.
 - **Docs:** BUILD_PROMPT, CLAUDE.md, ENVIRONMENT, DECISIONS, GATES, SAFETY, PRIOR_WORK, `media/LICENSES.csv` header, 5 friction entries waiting for evkit.
 
-## In progress
-- **Lane 4:** EA IRIS baseline Docker image (pinned commit, vcpkg), building in the background on the shared colima VM with limited parallelism.
+## Paused
+- **Lane 4, IRIS baseline image:** Dockerfile, staged vcpkg scripts, Make snippet and README are committed with verified pins, but the image has never finished building. The first attempt ended when its agent stalled. The build waits until the shared colima VM is idle (it now runs another project's DataHub stack with 3.2 GB free) or until CI can build it. It has to finish by about Sep 30.
 
 ## Next
 1. 1.2: copy vega-video-sample `v0.24-RN83` into `app/` as one untouched commit, then the day-one fixes (package ID, remove tasks and services, setNativeProps lint rule, back-navigation regression test).
