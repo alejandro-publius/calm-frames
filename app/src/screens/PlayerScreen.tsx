@@ -1,9 +1,4 @@
 import {
-  ChangeChannelStatus,
-  ChannelServerComponent2,
-  OperationError,
-} from '@amazon-devices/kepler-channel';
-import {
   ContentPersonalizationServer,
   PlaybackState,
 } from '@amazon-devices/kepler-content-personalization';
@@ -64,7 +59,7 @@ const PlayerScreen = ({
   navigation,
   route,
 }: AppStackScreenProps<Screens.PLAYER_SCREEN>) => {
-  const { data, onChannelTuneSuccess, onChannelTuneFailed } = route.params;
+  const { data } = route.params;
   const { width: deviceWidth, height: deviceHeight } = useWindowDimensions();
   const addKeplerAppStateListenerCallback = (
     eventType: KeplerAppStateEvent,
@@ -321,14 +316,6 @@ const PlayerScreen = ({
       console.debug(
         '[PlayerScreen.tsx] - playVideo -  Video playing successfully',
       );
-      if (onChannelTuneSuccess) {
-        const channelResponse =
-          ChannelServerComponent2.makeChannelResponseBuilder()
-            .status(ChangeChannelStatus.SUCCESS)
-            .data(data.title)
-            .build();
-        onChannelTuneSuccess(channelResponse);
-      }
       console.info(
         '[PlayerScreen.tsx] - playVideo - k_content_per: Reporting new playback event',
       );
@@ -338,23 +325,9 @@ const PlayerScreen = ({
         '[PlayerScreen.tsx] - playVideo - Error occurred while playing video {}',
         error,
       );
-      if (onChannelTuneFailed) {
-        onChannelTuneFailed(
-          new OperationError(
-            `[PlayerScreen.tsx] - playVideo - Video content could not be played due to error ${error}`,
-          ),
-        );
-      }
       navigateBack();
     }
-  }, [
-    videoRef,
-    data.title,
-    navigateBack,
-    onChannelTuneFailed,
-    onChannelTuneSuccess,
-    reportVideoPlaying,
-  ]);
+  }, [videoRef, navigateBack, reportVideoPlaying]);
 
   const setSurface = useCallback(async () => {
     if (surfaceHandle.current) {

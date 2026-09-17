@@ -149,13 +149,6 @@ jest.mock('@amazon-devices/react-native-gesture-handler', () => ({
     END: 5,
   },
 }));
-jest.mock('@amazon-devices/kepler-media-account-login', () => ({
-  AccountLoginServerComponent: jest.fn(),
-  IAccountLoginHandlerAsync: jest.fn(),
-  IAccountLoginServerAsync: jest.fn(),
-  IStatus: jest.fn(),
-  StatusType: jest.fn(),
-}));
 jest.mock('@amazon-devices/react-native-localize', () => ({
   getCountry: jest.fn(),
   getLocales: jest.fn(),
@@ -198,25 +191,6 @@ jest.mock('react-native-event-listeners', () => ({
 jest.mock('@amazon-devices/kepler-performance-api', () => ({
   useReportFullyDrawn: jest.fn().mockReturnValue(jest.fn()),
 }));
-jest.mock('@amazon-devices/kepler-media-content-launcher', () => ({
-  ContentLauncherServerComponent: jest.fn().mockImplementation(() => ({
-    getOrMakeServer: jest.fn().mockReturnValue({
-      setHandler: jest.fn(),
-    }),
-    makeLauncherResponseBuilder: jest.fn().mockReturnValue({
-      contentLauncherStatus: jest.fn().mockReturnValue({
-        build: jest.fn().mockReturnValue({}),
-      }),
-    }),
-  })),
-  ContentLauncherStatusType: {
-    SUCCESS: 'SUCCESS',
-  },
-  IContentLauncherHandler: jest.fn(),
-  IContentSearch: jest.fn(),
-  ILaunchContentOptionalFields: jest.fn(),
-  ILauncherResponse: jest.fn(),
-}));
 
 jest.mock('./src/utils/lodashHelper', () => ({
   areComponentPropsEqual: jest.fn((prevProps, nextProps) => {
@@ -224,30 +198,6 @@ jest.mock('./src/utils/lodashHelper', () => ({
   }),
 }));
 
-jest.mock('./src/AccountLoginWrapper', () => ({
-  AccountLoginWrapperInstance: {
-    updateStatus: jest.fn(),
-  },
-  onStartService: jest.fn(),
-  onStopService: jest.fn(),
-}));
-jest.mock('@amazon-devices/kepler-channel', () => ({
-  ChannelServerComponent2: {
-    getOrMakeServer: jest.fn().mockReturnValue({
-      setHandlerForComponent: jest.fn(),
-    }),
-    makeChannelResponseBuilder: jest.fn().mockReturnValue({
-      channelStatus: jest.fn().mockReturnValue({
-        build: jest.fn().mockReturnValue({}),
-      }),
-    }),
-  },
-  ChannelServerComponent: {
-    channelServer: {
-      handler: jest.fn(),
-    },
-  },
-}));
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');
   RN.Animated.timing = jest.fn().mockReturnValue({
@@ -301,7 +251,8 @@ jest.mock('./src/iap/IAPConstants', () => ({
 jest.mock('./src/config/AppConfig', () => ({
   isContentPersonalizationEnabled: jest.fn(() => true),
   isInAppPurchaseEnabled: jest.fn(() => true),
-  isAccountLoginEnabled: jest.fn(() => true),
+  // Calm Frames removed the account login service component, so this is off.
+  isAccountLoginEnabled: jest.fn(() => false),
   isDpadControllerSupported: jest.fn(() => true),
   isChannelTuningV2Enabled: jest.fn(() => true),
 }));
@@ -317,7 +268,6 @@ jest.mock('./src/services/dataProviderFactory', () => ({
 }));
 jest.mock('./src/components/rotator/AutoRotator', () => 'AutoRotator');
 jest.mock('./src/components/miniDetails/MiniDetails', () => 'MiniDetails');
-jest.mock('./src/livetv/channelTunerHandler', () => {});
 jest.mock('./src/components/RadioPicker', () => 'RadioPicker');
 jest.mock('./src/components/GradientButton', () => 'GradientButton');
 

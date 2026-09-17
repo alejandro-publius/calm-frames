@@ -7,16 +7,21 @@ A refactor for this implementation is required, in order to remove hardcoded val
 const isSimulator =
   modelValue.includes('simulator') || modelValue.includes('AQVV01P');
 
+// Calm Frames removed the content personalization service component, so the
+// personalization calls left in the sample screens must never run. They are
+// all guarded by this flag.
 const isContentPersonalizationEnabled = () => {
-  return !isSimulator && Platform.isTV;
+  return false;
 };
 
 const isInAppPurchaseEnabled = () => {
   return Platform.isTV;
 };
 
+// Calm Frames removed the account login service component. Kid mode has no
+// accounts beyond the local parent PIN, so this stays off.
 const isAccountLoginEnabled = () => {
-  return Platform.isTV;
+  return false;
 };
 
 const isRunningOnAutomotive = () => {

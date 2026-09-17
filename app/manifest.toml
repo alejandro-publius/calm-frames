@@ -1,128 +1,48 @@
 #
-# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
-# SPDX-License-Identifier: MIT-0
+# Based on AmazonAppDev/vega-video-sample (MIT-0), tag v0.24-RN83.
+# Calm Frames changes: renamed the package, and removed the service and task
+# components (account login, content personalization, install and EPG sync)
+# with everything that needed them. On SDK 0.24 with React Native 0.83 those
+# headless components can crash the app at launch, and Calm Frames does not
+# use them.
 #
 schema-version = 1                          # [required] Schema version used in the manifest file. Currently, value must be 1
 
 [package]
-id = "com.amazondeveloper.keplervideoapp"   # [required] Package identifier, used as a primary identifier for the app on Vega devices and Appstore. 
-                                            #            Existing FireTV app developers with apps on FireOS devices 
-                                            #            must reuse their existing application id to ensure existing
-                                            #            Amazon integrations, viz. IAP, continue to work. 
-title = "Vega Video Sample App"           # [required] string name for the app, used to display on FireTV launcher and Appstore.
-version = "3.24.0"                          # [required] Version string of the app, recommended to use semver, but any other string may be used. 
-icon = "@image/VideoApp.png"        # [required] Image file to be used as the icon for the app. 
-
-## ------------------------------------------------------------------------------
-## The [components] section declares the application components in the package, including interactive, service, and task components. 
-## ------------------------------------------------------------------------------
+id = "io.github.alejandropublius.calmframes"  # [required] Package identifier. Developer mode only sideloads packages
+                                              #            whose id does not start with com.amazon.
+title = "Calm Frames"                       # [required] string name for the app, used to display on FireTV launcher and Appstore.
+version = "0.1.0"                           # [required] Version string of the app, recommended to use semver, but any other string may be used.
+icon = "@image/VideoApp.png"                # [required] Image file to be used as the icon for the app. Placeholder from the sample; replace with our own icon.
 
 [os.version]
 min = "1.2"
 target = "1.2"
 
+## ------------------------------------------------------------------------------
+## The [components] section declares the application components in the package.
+## Calm Frames has one interactive component and no services or tasks.
+## ------------------------------------------------------------------------------
 [components]
 [[components.interactive]]
-id = "com.amazondeveloper.keplervideoapp.main"  # [required] Unique component identifier
+id = "io.github.alejandropublius.calmframes.main"  # [required] Unique component identifier
 runtime-module = "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0"
 categories = [
-    "com.amazon.category.main",                 # [required] Category declaration to annotate 
-                                                #            this component as the main launchable component for the app.
-                                                #            App launches from Launcher and Appstore will leverage this 
-                                                #            category to launch this specific interactive component. 
-
-    "com.amazon.category.kepler.media"          # [optional] This is an optional category, requied for media account 
-                                                #            integration. The component tagged with this category, should 
-                                                #            be the main component, and referenced later in the [extras].
+    "com.amazon.category.main",                 # [required] Marks this as the main launchable component for the app.
+    "com.amazon.category.kepler.media"          # [optional] Required for media integrations, including Vega Media Controls.
 ]
 
-launch-type = "singleton"                       # [optional] Declares that only one running instance of this app component is created,
-                                                #            new invocations always reference the existing instance. 
-
-# ------------------------------------------------------------------------------
-# LiveTV EPG Sync Source 
-# -------------------------------------------------------------------------------
-[[components.interactive]]                                                              # [required] Declares the component that implements the required interfaces.
-id = "com.amazondeveloper.keplervideoapp.sync_source"                                   # [required] Id of the component
-launch-type = "singleton"                                                               # [optional] Declares that only one running instance of this app component is created,
-                                                                                        #            new invocations always reference the existing instance. 
-runtime-module = "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0" 
-
-# ------------------------------------------------------------------------------
-# Account Login
-# -------------------------------------------------------------------------------
-[[components.service]]
-id = "com.amazondeveloper.keplervideoapp.interface.provider"                            # [required] Id of the service component
-launch-type = "singleton"                                                               # [required] Declares that only one running instance of this app component is created,
-                                                                                        #            services have to be singleton. 
-runtime-module = "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0"  # [required] Runtime module definition for the component.
-                                                                                        #            In this case the component uses the headless runtime for React Native for Vega.
-
-# ------------------------------------------------------------------------------
-# Content Personalization Refresh Service
-# -------------------------------------------------------------------------------
-[[components.service]]
-id = "com.amazondeveloper.keplervideoapp.content.dataRefresh.provider"                  # [required] Id of the service component
-runtime-module = "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0"  # [required] Runtime module definition for the component.
-                                                                                        #            In this case the component uses the headless runtime for React Native for Vega.
-launch-type = "singleton"                                                               # [optional] Declares that only one running instance of this app component is created,
-                                                                                        #            new invocations always reference the existing instance. 
-
-# ------------------------------------------------------------------------------
-# LiveTV EPG Ingestion - Periodically Run
-# -------------------------------------------------------------------------------
-[[components.task]]
-id = "com.amazondeveloper.keplervideoapp.onInstallOrUpdateTask"                         # [required] Id of the task component
-runtime-module = "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0"  # [required] Runtime module definition for the component.
-                                                                                        #            In this case the component uses the headless runtime for React Native for Vega.
-
-# ------------------------------------------------------------------------------
-# LiveTV EPG Sync Task 
-# -------------------------------------------------------------------------------
-[[components.task]]
-id = "com.amazondeveloper.keplervideoapp.epgSyncTask"                                   # [required] Id of the task component
-runtime-module = "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0"  # [required] Runtime module definition for the component.
-                                                                                        #            In this case the component uses the headless runtime for React Native for Vega.
+launch-type = "singleton"                       # [optional] Only one running instance of this component exists.
 
 ## ------------------------------------------------------------------------------
-## End of [components] section
-## ------------------------------------------------------------------------------
-
-## ------------------------------------------------------------------------------
-## The [processes] section describes which components in the package should run within a shared process when launched. This section is optional.
+## The [processes] section describes which components run in a shared process.
 ## ------------------------------------------------------------------------------
 [processes]
-# Main app component
-[[processes.group]]                                                                     # [required] Run the required service within a different process. 
-component-ids = ["com.amazondeveloper.keplervideoapp.main"]                             # [required] Declares the app components that run within this process together. 
-
-# ------------------------------------------------------------------------------
-# Account Login
-# ------------------------------------------------------------------------------
-[[processes.group]]                                                                     # [required] Run the required service within a different process. 
-component-ids = ["com.amazondeveloper.keplervideoapp.interface.provider"]               # [required] Declares the app components that run within this process together. 
-
-# ------------------------------------------------------------------------------
-# App-specific content refresh functionality
-# ------------------------------------------------------------------------------
-[[processes.group]]                                                                     # [required] Run the required service within a different process. 
-component-ids = ["com.amazondeveloper.keplervideoapp.content.dataRefresh.provider"]     # [required] Declares the app components that run within this process together. 
-
-# ------------------------------------------------------------------------------
-# EPG Ingestion
-# ------------------------------------------------------------------------------
-[[processes.group]]                                                                     # [required] Run the required service within a different process. 
-component-ids = ["com.amazondeveloper.keplervideoapp.onInstallOrUpdateTask"]            # [required] Declares the app components that run within this process together. 
-
-# ------------------------------------------------------------------------------
-# EPG Sync 
-# ------------------------------------------------------------------------------
-[[processes.group]]                                                                     # [required] Run the required service within a different process. 
-component-ids = ["com.amazondeveloper.keplervideoapp.epgSyncTask"]                      # [required] Declares the app components that run within this process together. 
-## End of [processes] section.
+[[processes.group]]
+component-ids = ["io.github.alejandropublius.calmframes.main"]
 
 ## ------------------------------------------------------------------------------
-## The [wants] section declares the capabilities that are optional for the application to function on a Vega device. Handle graceful fallbacks in your application code if a feature in this list is unavailable on a device. 
+## The [wants] section declares optional capabilities. Handle fallbacks in code.
 ## ------------------------------------------------------------------------------
 [wants]
 [[wants.service]]
@@ -135,25 +55,7 @@ id = "com.amazon.kepler.pcon.service.main"
 id = "com.amazon.drm.key" # Required for DRM video playback
 
 [[wants.service]]
-id = "com.amazon.drm.crypto" # Required for DMR video playback
-
-# ------------------------------------------------------------------------------
-# Connect to personalization data service
-# ------------------------------------------------------------------------------
-[[wants.service]]
-id = "com.amazon.tv.developer.dataservice"
-
-# ------------------------------------------------------------------------------
-# Use datastore for pushing Live content data into the system
-# ------------------------------------------------------------------------------
-[[wants.service]]
-id = "com.amazon.alexa.datastore.service"
-
-# ------------------------------------------------------------------------------
-# Access to Content Personalization APIs.
-# ------------------------------------------------------------------------------
-[[wants.privilege]]
-id = "com.amazon.tv.content-personalization.privilege.provide-data"
+id = "com.amazon.drm.crypto" # Required for DRM video playback
 
 # ------------------------------------------------------------------------------
 # MediaPlayer/MediaTransform
@@ -183,13 +85,13 @@ id = "com.amazon.mediabuffer.service"
 id = "com.amazon.mediatransform.service"
 
 # ------------------------------------------------------------------------------
-# Accessibility
+# Accessibility (VoiceView announcements)
 # ------------------------------------------------------------------------------
 [[wants.privilege]]
 id = "com.amazon.devconf.privilege.accessibility"
 
 # ------------------------------------------------------------------------------
-# Required for GIPC SR? it's for audio video playback
+# Required for GIPC SR, used by audio and video playback
 # ------------------------------------------------------------------------------
 [[wants.service]]
 id = "com.amazon.gipc.uuid.*"
@@ -206,9 +108,6 @@ id = "com.amazon.audio.stream"
 [[wants.service]]
 id = "com.amazon.audio.control"
 
-# ------------------------------------------------------------------------------
-# Volume and other audio controls
-# ------------------------------------------------------------------------------
 [[wants.service]]
 id = "com.amazon.audio.system"
 
@@ -219,38 +118,26 @@ id = "com.amazon.audio.system"
 id = "com.amazon.network.service"
 
 # ------------------------------------------------------------------------------
-# In-App Purchasing (IAP)  
+# In-App Purchasing (IAP), still used by the sample's details screen
 # ------------------------------------------------------------------------------
 [[wants.service]]
 id = "com.amazon.iap.core.service"
 
-# ------------------------------------------------------------------------------
-# In-App Purchasing (IAP)
-# ------------------------------------------------------------------------------
 [[wants.module]]
 id = "/com.amazon.iap.core@IIAPCoreUI"
 
-# ------------------------------------------------------------------------------
-# In-App Purchasing (IAP) Tester 
-# ------------------------------------------------------------------------------
 [[wants.service]]
 id = "com.amazon.iap.tester.service"
 
-# ------------------------------------------------------------------------------
-# In-App Purchasing (IAP)
-# ------------------------------------------------------------------------------
 [[wants.module]]
 id = "/com.amazonappstore.iap.tester@IIAPTesterUI"
-## ------------------------------------------------------------------------------
-## End of [wants] section.
-## ------------------------------------------------------------------------------
 
 ## ------------------------------------------------------------------------------
-## The [needs] section declares the system capabilities that the application requires to function on a Vega device. This information helps Vega package manager and Amazon Appstore to ensure the application is installed on the supported devices. Carefully declare the application's needs for your desired device targeting. You can choose a combination of needs and wants to maximize your device reach, while providing enhanced features on applicable devices.
+## The [needs] section declares required system capabilities.
 ## ------------------------------------------------------------------------------
-[needs]  
+[needs]
 # ------------------------------------------------------------------------------
-# Audio
+# Audio and video
 # ------------------------------------------------------------------------------
 [[needs.privilege]]
 id = "com.amazon.media.secureplayback"
@@ -259,16 +146,10 @@ id = "com.amazon.media.secureplayback"
 id = "com.amazon.privilege.security.file-sharing" # Required for DRM video playback
 
 # ------------------------------------------------------------------------------
-# LiveTV
-# ------------------------------------------------------------------------------
-[[needs.privilege]]
-id = "com.amazon.kepler.tv.privilege.data_provider" # Required to push data to database
-
-# ------------------------------------------------------------------------------
 # Network information
 # ------------------------------------------------------------------------------
 [[needs.privilege]]
-id="com.amazon.network.privilege.net-info"
+id = "com.amazon.network.privilege.net-info"
 
 # ------------------------------------------------------------------------------
 # In-App Purchasing (IAP)
@@ -276,120 +157,157 @@ id="com.amazon.network.privilege.net-info"
 [[needs.module]]
 id = "/com.amazon.kepler.appstore.iap.purchase.core@IAppstoreIAPPurchaseCoreService"
 
-# ------------------------------------------------------------------------------
-# Content Launcher
-# ------------------------------------------------------------------------------
-[[needs.module]]
-id = "/com.amazon.kepler.media@IContentLauncher1"
-
-# ------------------------------------------------------------------------------
-# Account Login
-# ------------------------------------------------------------------------------
-[[needs.module]]
-id = "/com.amazon.kepler.media.@IAccountLogin1"
-
-## ------------------------------------------------------------------------------
-## End of [needs] section
-## ------------------------------------------------------------------------------
-
-## ------------------------------------------------------------------------------
-## The [tasks] section declares a small routine that can run at specific events during the lifecycle of the application package. At this time the Vega OS supports the install event for running such tasks. This task can be used to set up other tasks before the application’s first launch. The task section is optional.
-## ------------------------------------------------------------------------------
-
 [[needs.module]]
 id = "/com.amazon.vega.os@IVega_1_2"
 
-[tasks]
-[[tasks.work]]
-component-id = "com.amazondeveloper.keplervideoapp.onInstallOrUpdateTask"
-mode = "install"
 ## ------------------------------------------------------------------------------
-## End of [tasks] section
+## The [offers] section declares what this package offers to other packages.
 ## ------------------------------------------------------------------------------
 
-## ------------------------------------------------------------------------------
-## The [offers] section declares the capabilities that an application package offers to other application packages installed on a Vega OS. Offers is an optional section.
-## ------------------------------------------------------------------------------
+[[needs.module]]
+id = "/com.amazon.kepler.kepler_content_personalization_1@IKeplerContentPersonalization_3"
+
+[[needs.module]]
+id = "/com.amazon.kepler.kepler_epg_provider_1@IKeplerEpgProvider_9"
+
+[[needs.module]]
+id = "/com.amazon.kepler.kepler_file_system_0@IKeplerFileSystem_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.kepler_media_controls_1@IKeplerMediaControls_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.keplermediadescriptor_1@IKeplermediadescriptor_1"
+
+[[needs.module]]
+id = "/com.amazon.kepler.appstore_iap_lib_2@IAppstoreIapLib_12"
+
+[[needs.module]]
+id = "/com.amazon.kepler.keplerscript_netmgr_lib_2@INetmgrTurbomodule_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.lottie_3@ILottie_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.linear_gradient_2@ILinearGradient_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.async_storage__async_storage_2@IAsyncStorage__AsyncStorage_1"
+
+[[needs.module]]
+id = "/com.amazon.kepler.device_info_2@IDeviceInfo_1"
+
+[[needs.module]]
+id = "/com.amazon.kepler.gesture_handler_4@IGestureHandler_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.keplerscript_4@IKeplerScript_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.localize_2@ILocalize_1"
+
+[[needs.module]]
+id = "/com.amazon.kepler.reanimated_4@IReanimated_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.safe_area_context_8@ISafeAreaContext_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.screens_3@IScreens_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.svg_3@ISVG_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.vector_icons_2@IVectorIcons_1"
+
+[[needs.module]]
+id = "/com.amazon.kepler.w3cmedia_2@IW3cmedia_3"
+
+[[needs.module]]
+id = "/com.amazon.kepler.worklets_1@IWorklets_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.navigation__core_8@INavigation__Core_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.navigation__drawer_8@INavigation__Drawer_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.navigation__elements_8@INavigation__Elements_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.navigation__native_8@INavigation__Native_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.navigation__routers_8@INavigation__Routers_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.navigation__stack_8@INavigation__Stack_0"
+
+[[needs.module]]
+id = "/com.amazon.kepler.security_manager_lib_1@ISecurityManagerLib_0"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 [offers]
-[[offers.service]]
-id = "com.amazondeveloper.keplervideoapp.interface.provider"
-
-[[offers.service]]
-id = "com.amazondeveloper.keplervideoapp.content.dataRefresh.provider"
-
 #Required for GIPC SR
 [[offers.service]]
 id = "com.amazon.gipc.uuid.*"
 
 [[offers.interaction]]
-id = "com.amazondeveloper.keplervideoapp.main"
-
-# Sync Source Hnadling
-[[offers.message-target]]                                           # What should hapen when receiving a specific message. 
-uses-component = "com.amazondeveloper.keplervideoapp.sync_source"   # [required] Component to launch when receiving the following list of messages
-uris = ["livetv://sync_source"]                                     # [required] Live TV settings uses this message to launch your sync source screen.
+id = "io.github.alejandropublius.calmframes.main"
 
 [[offers.module]]
-id = "/com.amazondeveloper.keplervideoapp.main@IMod1"
+id = "/io.github.alejandropublius.calmframes.main@IMod1"
 includes-messages = [
-    "pkg://com.amazondeveloper.keplervideoapp.main"
+    "pkg://io.github.alejandropublius.calmframes.main"
 ]
-## ------------------------------------------------------------------------------
-## End of [offers] section
-## ------------------------------------------------------------------------------
 
 ## ------------------------------------------------------------------------------
-## The [[message]] section defines the URIs that the application package introduces to the rest of the system.
+## The [[message]] section defines the URIs this package introduces.
 ## ------------------------------------------------------------------------------
-[[message]]                                                 # [required] defines the privileges associated with the main component in the app. 
-                                                            #            Required for Amazon feature integrations, set sender-privileges to "*" 
-                                                            #            to allow Amazon services to launch this uri. 
-uri = "pkg://com.amazondeveloper.keplervideoapp.main"       # [required] main component launch uri with pkg uri scheme
-sender-privileges = ["*"]                                   # [required] anyone can launch this app
-receiver-privileges = ["self"]                              # [required] only this app can receive this launch message
-## End of [[message]] section
+[[message]]
+uri = "pkg://io.github.alejandropublius.calmframes.main"  # [required] main component launch uri
+sender-privileges = ["*"]                                 # [required] anyone can launch this app
+receiver-privileges = ["self"]                            # [required] only this app can receive this launch message
 
 ## ------------------------------------------------------------------------------
-## The [[extras]] section contains key-value pairs to describe custom configuration entries, required by certain Amazon feature integrations.
+## The [[extras]] section holds configuration for Amazon feature integrations.
+## Calm Frames keeps Vega Media Controls, which carries the Alexa and remote
+## transport commands that every seek path has to stay safe under.
 ## ------------------------------------------------------------------------------
 [[extras]]
-key = "interface.provider"                                  # `interface.provider` designates a component that provides implementation of certain interfaces 
-                                                            #   These app provided interfaces implement required functions to provide data for Amazon service
-                                                            #   integrations. They may also register listeners for event callbacks. 
-component-id = "com.amazondeveloper.keplervideoapp.main"    # Declares the component that provides the implementation of the interfaces. 
+key = "interface.provider"                                # Designates the component that implements the interfaces below.
+component-id = "io.github.alejandropublius.calmframes.main"
 
-# Add extras to declare support for Vega Channel
 [extras.value.application]
-[[extras.value.application.interface]]
-interface_name = "com.amazon.kepler.media.IChannelServer"   # All the channel command callbacks will be handled by the component-id
-                                                            # under the key "interface.provider".
-features = ["ChannelList"]
-
-# Declare the support for Vega Content Personalization
-[[extras.value.application.interface]]
-interface_name = "com.amazon.kepler.media.IContentPersonalizationServer"
-attribute_options = ["SupportedCustomerLists", "DataRefreshComponentId"]
-
-[extras.value.application.interface.static_values]
-SupportedCustomerLists = ["Watchlist"]
-DataRefreshComponentId = "com.amazondeveloper.keplervideoapp.content.dataRefresh.provider"
-
-# ------------------------------------------------------------------------------
-# Content Launcher
-# ------------------------------------------------------------------------------
-[[extras.value.application.interface]]
-interface_name = "com.amazon.kepler.media.IContentLauncherServer"
-attribute_options = ["partner-id"]
-static-values = { partner-id = "KEP_VID" }
-
-# ------------------------------------------------------------------------------
-# Account Login
-# ------------------------------------------------------------------------------
-[[extras.value.application.interface]]
-interface_name = "com.amazon.kepler.media.IAccountLoginServer"
-attribute_options = ["Status"]
-override_attribute_component = { Status = "com.amazondeveloper.keplervideoapp.interface.provider" }
-
 # ------------------------------------------------------------------------------
 # Vega Media Controls (VMC)
 # ------------------------------------------------------------------------------
@@ -404,6 +322,3 @@ command_options = [
 ]
 attribute_options = ["AudioAdvanceMuted"]
 features = ["AdvancedSeek", "VariableSpeed", "AudioTracks", "TextTracks"]
-## ------------------------------------------------------------------------------
-## End of [[extras]] section
-## ------------------------------------------------------------------------------

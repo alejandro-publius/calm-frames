@@ -10,10 +10,6 @@ import { default as React } from 'react';
 import 'react-native';
 import { BackHandler } from 'react-native';
 
-import {
-  ChangeChannelStatus,
-  IChangeChannelResponseBuilder,
-} from '@amazon-devices/kepler-channel';
 import { HWEvent } from '@amazon-devices/react-native-kepler';
 import {
   AppStackParamList,
@@ -24,28 +20,6 @@ import PlayerScreen, { styles } from '../../src/screens/PlayerScreen';
 import { TitleData } from '../../src/types/TitleData';
 import { VideoHandler } from '../../src/utils/VideoHandler';
 import { ShakaPlayer } from '../../src/w3cmedia/shakaplayer/ShakaPlayer';
-
-const createMockBuilder = (): IChangeChannelResponseBuilder => {
-  let currentStatus: ChangeChannelStatus;
-  let currentData: string;
-
-  return {
-    status(status: ChangeChannelStatus): IChangeChannelResponseBuilder {
-      currentStatus = status;
-      return this;
-    },
-    data(data: string): IChangeChannelResponseBuilder {
-      currentData = data;
-      return this;
-    },
-    build() {
-      return {
-        status: currentStatus,
-        data: currentData,
-      };
-    },
-  };
-};
 
 const tileData: TitleData = {
   id: '169313',
@@ -214,24 +188,6 @@ jest.mock('../../src/config/AppConfig', () => ({
   isDpadControllerSupported: jest.fn(() => true),
 }));
 
-// Mock the ChannelServerComponent2
-jest.mock('@amazon-devices/kepler-channel', () => ({
-  ChangeChannelStatus: {
-    SUCCESS: 'SUCCESS',
-  },
-  ChannelServerComponent2: {
-    makeChannelResponseBuilder: jest
-      .fn()
-      .mockImplementation(() => createMockBuilder()),
-  },
-  KeplerScriptChannel: {
-    getEnforcing: jest.fn(),
-  },
-  TurboModuleRegistry: {
-    getEnforcing: jest.fn(),
-  },
-}));
-
 const videoRef: React.MutableRefObject<VideoPlayer | null> = {
   current: {
     setSurfaceHandle: jest.fn(),
@@ -307,19 +263,6 @@ describe('PlayerScreen rendering Test Cases', () => {
   it('renders correctly screenshot match', () => {
     const tree = render(renderPlayerScreen());
     expect(tree).toMatchSnapshot();
-  });
-
-  it('creates channel response correctly', () => {
-    const builder = createMockBuilder();
-    const response = builder
-      .status(ChangeChannelStatus.SUCCESS)
-      .data('Test Title')
-      .build();
-
-    expect(response).toEqual({
-      status: ChangeChannelStatus.SUCCESS,
-      data: 'Test Title',
-    });
   });
 
   it('SafeAreaView is present in component', async () => {

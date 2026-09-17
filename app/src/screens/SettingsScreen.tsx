@@ -6,7 +6,6 @@ import React, { useCallback, useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AccountLoginWrapperInstance } from '../AccountLoginWrapper';
 import BufferingWindow from '../components/BufferingWindow';
 import ConnectionComponent from '../components/ConnectionComponent';
 import LocaleComponent from '../components/LocaleComponent';
@@ -47,7 +46,6 @@ const SettingsScreen: React.FC<AppDrawerScreenProps<Screens.SETTINGS_SCREEN>> =
 
     const handleOnToggleLoginStatus = useCallback(() => {
       dispatch(setLoginStatus(!loginStatus));
-      AccountLoginWrapperInstance.updateStatus(!loginStatus);
     }, [dispatch, loginStatus]);
 
     const listData: ItemProps[] = useMemo(() => {
