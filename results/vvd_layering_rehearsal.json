@@ -1,0 +1,66 @@
+{
+  "recorded_utc": "2026-09-17T23:31:02+00:00",
+  "mode": "layering",
+  "device": "Vega Virtual Device (not the stick, see docs/GATES.md)",
+  "clip_sha256": "a9fcb9dec4dc9a1dbac1800f34ca9fa35aa4e6b8d0c6d03a05968409cc97a5b0",
+  "events_seen": 42,
+  "event_source": "posted by the app",
+  "timeupdate": {
+    "count": 15,
+    "interval_ms": {
+      "count": 14,
+      "min": 111.0,
+      "median": 500.0,
+      "p95": 4562.0,
+      "max": 4562.0
+    },
+    "media_step_ms": {
+      "count": 10,
+      "min": 2.0,
+      "median": 13.5,
+      "p95": 32.334,
+      "max": 32.334
+    }
+  },
+  "current_time_precision_ms": 2,
+  "worst_wall_clock_drift_ms": 2759,
+  "drift_note": "The app tracks the largest gap it saw between its wall-clock estimate and the position the player reported. Only the maximum is meaningful.",
+  "cover": {
+    "on_events": 8,
+    "off_events": 7,
+    "reasons": [
+      "layering-toggle"
+    ]
+  },
+  "playback_quality_samples": 15,
+  "playback_quality_last": {
+    "droppedVideoFrames": 0,
+    "totalVideoFrames": 2252,
+    "corruptedVideoFrames": null
+  },
+  "event_kinds": {
+    "cover-off": 7,
+    "cover-on": 8,
+    "error": 1,
+    "harness-start": 1,
+    "harness-stop": 1,
+    "playing": 1,
+    "ratechange": 3,
+    "seeked": 2,
+    "seeking": 2,
+    "timeupdate": 15,
+    "waiting": 1
+  },
+  "seek_events": 4,
+  "stall_events": 1,
+  "layering": {
+    "cover_cycles": 8,
+    "timeupdates_while_covered": 7,
+    "timeupdates_while_clear": 8,
+    "media_seconds_advanced_while_covered": 0.05,
+    "media_time_start_s": 0.17,
+    "media_time_end_s": 0.31,
+    "verdict": "inconclusive",
+    "note": "The cover toggled 8 times on schedule and the app did not crash, so the harness side works. Playback did not run: media time moved 0.14 s across a 70 second run, so this run says nothing about whether sound keeps going under the cover. The same clip played through all 20 markers in the timing run minutes earlier, so this is the virtual device being unreliable, not the clip. The real phase 1.5 checks, whether the cover hides the hardware video layer and whether captions stay readable above it, need a screen and a pair of eyes, so they wait for the stick."
+  }
+}
