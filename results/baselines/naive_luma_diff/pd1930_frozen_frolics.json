@@ -1,0 +1,109 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "pd1930_frozen_frolics.mp4",
+  "sha256": "928baf7c90f5689ab68bb9638df35889cfce55cb4e480b41452f6bce1efc3c66",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 15260,
+  "flagged_frames": 50,
+  "segment_count": 15,
+  "segments": [
+    {
+      "start_s": 3.503,
+      "end_s": 3.537,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 108.675,
+      "end_s": 108.742,
+      "duration_s": 0.067,
+      "frames": 3
+    },
+    {
+      "start_s": 213.28,
+      "end_s": 213.413,
+      "duration_s": 0.133,
+      "frames": 3
+    },
+    {
+      "start_s": 237.738,
+      "end_s": 237.771,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 247.28,
+      "end_s": 247.314,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 256.323,
+      "end_s": 256.356,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 258.525,
+      "end_s": 258.625,
+      "duration_s": 0.1,
+      "frames": 3
+    },
+    {
+      "start_s": 269.469,
+      "end_s": 269.703,
+      "duration_s": 0.234,
+      "frames": 6
+    },
+    {
+      "start_s": 349.482,
+      "end_s": 349.516,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 365.699,
+      "end_s": 365.732,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 370.203,
+      "end_s": 370.27,
+      "duration_s": 0.067,
+      "frames": 3
+    },
+    {
+      "start_s": 380.447,
+      "end_s": 380.48,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 410.977,
+      "end_s": 411.011,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 465.899,
+      "end_s": 465.932,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 506.373,
+      "end_s": 506.406,
+      "duration_s": 0.033,
+      "frames": 2
+    }
+  ],
+  "segments_dropped_as_single_cut": 12,
+  "max_frame_to_frame_delta": 96.01,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

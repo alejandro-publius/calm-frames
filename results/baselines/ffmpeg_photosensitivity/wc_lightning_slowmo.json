@@ -1,0 +1,28 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "wc_lightning_slowmo.webm",
+  "sha256": "ec23732cdb0a643af3ba8038c3810d40063dd57eb40c266221737b0c7b4fe97a",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 1096,
+  "frames_dropped_as_warmup": 24,
+  "frames_analyzed": 1072,
+  "flagged_frames": 1072,
+  "segment_count": 1,
+  "segments": [
+    {
+      "start_s": 1.001,
+      "end_s": 45.671,
+      "duration_s": 44.67
+    }
+  ],
+  "warmup_would_have_flagged": 24,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

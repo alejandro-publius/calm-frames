@@ -1,0 +1,25 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "wc_fireworks_buenos_aires.webm",
+  "sha256": "cb8228b058d5e52bf4cf642ed1055f0ee25792874ff61f6a543219e67271577e",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 907,
+  "flagged_frames": 2,
+  "segment_count": 1,
+  "segments": [
+    {
+      "start_s": 35.545,
+      "end_s": 35.586,
+      "duration_s": 0.041,
+      "frames": 2
+    }
+  ],
+  "segments_dropped_as_single_cut": 0,
+  "max_frame_to_frame_delta": 101.09,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

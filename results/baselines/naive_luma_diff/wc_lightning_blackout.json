@@ -1,0 +1,55 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "wc_lightning_blackout.webm",
+  "sha256": "a139990fcf99ef8b713b8cdf26fd69b43e6478e131e85f6bbc0010f01ac8a376",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 213,
+  "flagged_frames": 27,
+  "segment_count": 6,
+  "segments": [
+    {
+      "start_s": 0.635,
+      "end_s": 1.266,
+      "duration_s": 0.631,
+      "frames": 10
+    },
+    {
+      "start_s": 5.617,
+      "end_s": 5.757,
+      "duration_s": 0.14,
+      "frames": 2
+    },
+    {
+      "start_s": 7.301,
+      "end_s": 7.442,
+      "duration_s": 0.141,
+      "frames": 3
+    },
+    {
+      "start_s": 9.828,
+      "end_s": 10.459,
+      "duration_s": 0.631,
+      "frames": 7
+    },
+    {
+      "start_s": 11.231,
+      "end_s": 11.301,
+      "duration_s": 0.07,
+      "frames": 2
+    },
+    {
+      "start_s": 14.249,
+      "end_s": 14.319,
+      "duration_s": 0.07,
+      "frames": 2
+    }
+  ],
+  "segments_dropped_as_single_cut": 1,
+  "max_frame_to_frame_delta": 203.96,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

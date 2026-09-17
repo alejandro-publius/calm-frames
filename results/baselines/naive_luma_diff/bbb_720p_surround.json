@@ -1,0 +1,49 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "bbb_720p_surround.mp4",
+  "sha256": "46f62396c755e1ed0ab856a1521378d54196e125ef1a1643a199af087a15046b",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 14315,
+  "flagged_frames": 96,
+  "segment_count": 5,
+  "segments": [
+    {
+      "start_s": 196.0,
+      "end_s": 196.167,
+      "duration_s": 0.167,
+      "frames": 5
+    },
+    {
+      "start_s": 336.875,
+      "end_s": 337.125,
+      "duration_s": 0.25,
+      "frames": 3
+    },
+    {
+      "start_s": 488.625,
+      "end_s": 488.667,
+      "duration_s": 0.042,
+      "frames": 2
+    },
+    {
+      "start_s": 489.792,
+      "end_s": 489.875,
+      "duration_s": 0.083,
+      "frames": 3
+    },
+    {
+      "start_s": 579.917,
+      "end_s": 579.958,
+      "duration_s": 0.042,
+      "frames": 2
+    }
+  ],
+  "segments_dropped_as_single_cut": 81,
+  "max_frame_to_frame_delta": 167.85,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

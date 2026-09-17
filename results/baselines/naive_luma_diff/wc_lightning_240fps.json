@@ -1,0 +1,61 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "wc_lightning_240fps.webm",
+  "sha256": "cfc9677fdeebdb20c19144fe5b581924f9d887dd811946764c56f9e759887391",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 337,
+  "flagged_frames": 32,
+  "segment_count": 7,
+  "segments": [
+    {
+      "start_s": 0.133,
+      "end_s": 0.167,
+      "duration_s": 0.034,
+      "frames": 2
+    },
+    {
+      "start_s": 2.967,
+      "end_s": 3.2,
+      "duration_s": 0.233,
+      "frames": 4
+    },
+    {
+      "start_s": 5.933,
+      "end_s": 6.333,
+      "duration_s": 0.4,
+      "frames": 9
+    },
+    {
+      "start_s": 6.6,
+      "end_s": 6.967,
+      "duration_s": 0.367,
+      "frames": 5
+    },
+    {
+      "start_s": 7.467,
+      "end_s": 7.533,
+      "duration_s": 0.066,
+      "frames": 3
+    },
+    {
+      "start_s": 8.533,
+      "end_s": 8.6,
+      "duration_s": 0.067,
+      "frames": 3
+    },
+    {
+      "start_s": 9.167,
+      "end_s": 9.4,
+      "duration_s": 0.233,
+      "frames": 5
+    }
+  ],
+  "segments_dropped_as_single_cut": 1,
+  "max_frame_to_frame_delta": 166.42,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

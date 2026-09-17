@@ -1,0 +1,18 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "dvids_fireworks_safety.mp4",
+  "sha256": "ce20d71c7e6e3fcc859eeae1254904f707760bfc293f18e33349c3716d816c79",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 5238,
+  "flagged_frames": 11,
+  "segment_count": 0,
+  "segments": [],
+  "segments_dropped_as_single_cut": 11,
+  "max_frame_to_frame_delta": 106.56,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

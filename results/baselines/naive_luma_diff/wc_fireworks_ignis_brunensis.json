@@ -1,0 +1,37 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "wc_fireworks_ignis_brunensis.ogv",
+  "sha256": "368e0950b11110ab51c5a4ea85d5f38c0916c4f4f96823daa67c48b4014cc33c",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 3734,
+  "flagged_frames": 11,
+  "segment_count": 3,
+  "segments": [
+    {
+      "start_s": 4.867,
+      "end_s": 4.9,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 100.733,
+      "end_s": 100.933,
+      "duration_s": 0.2,
+      "frames": 3
+    },
+    {
+      "start_s": 118.7,
+      "end_s": 118.867,
+      "duration_s": 0.167,
+      "frames": 4
+    }
+  ],
+  "segments_dropped_as_single_cut": 2,
+  "max_frame_to_frame_delta": 38.97,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

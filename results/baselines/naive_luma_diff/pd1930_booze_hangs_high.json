@@ -1,0 +1,18 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "pd1930_booze_hangs_high.mp4",
+  "sha256": "70c3541ddc7168bd69e67cb0fe694b888f022d25672673ff7ed7ba5f9d8db0c1",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 8825,
+  "flagged_frames": 1,
+  "segment_count": 0,
+  "segments": [],
+  "segments_dropped_as_single_cut": 1,
+  "max_frame_to_frame_delta": 50.96,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}
