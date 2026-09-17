@@ -41,7 +41,11 @@ Checked independently before it was committed: it passes our calm marker clip, f
 ### Lane C, screening day
 Media pool downloaded with the licence checked before each download and recorded in `media/LICENSES.csv`: Blender open movies, NASA SVS and ISS time-lapses, DVIDS, Wikimedia, two 1930 public domain films. Three sources were skipped rather than guessed, with the reason recorded. `eval/plots.py` renders a hazard file as plots so nobody has to open one, and it does not import flashmap. The ffmpeg photosensitivity and naive luminance baselines run. **EA IRIS is not built**: its Dockerfile is pinned and reviewed, but the shared colima VM has another project's services in it and a vcpkg build of OpenCV there could have the kernel kill their containers instead of the compiler.
 
-**`results/screening.json` does not exist yet.** The screening run over the pool was still going when this was written, so there is no per-source count and no named self-filmed gap. That is the one GATE 2 deliverable outstanding, and GATE 2 is Fri Sep 25.
+**GATE 2's target is already met, eight days early.** `results/screening.json`: <!--n results/screening.json:totals.flagged_segments -->432<!--/n--> flagged segments across <!--n results/screening.json:totals.sources_with_at_least_one_flag -->5<!--/n--> sources, against a target of 15 segments from 4 sources. 20 clips, <!--n results/screening.json:clips_analyzed_ok -->16<!--/n--> analyzed cleanly and <!--n results/screening.json:clips_failed -->4<!--/n--> that flashmap could not decode.
+
+**The self-filmed gap has a name: red.** Every one of the 432 segments fired the general rule and not one fired the red rule. The pool has no saturated red strobe and no sustained regular strobe, and no free third-party footage was found that covers it. So the clips you film should be exactly that: red emergency-vehicle lights or red stage lighting, and a steady strobe. Everything in docs/SAFETY.md applies: whoever films is not photosensitive and does not look at the lights.
+
+**Two real bugs came out of the screening run**, both logged for lane B: flashmap cannot decode Theora `.ogv` (4 clips, `avcodec_send_packet` returned 22), and re-encoding shifts the picture rectangle it detects, which lifts area fractions and is what blocked a title in the pipeline.
 
 ### Lane D, the pipeline
 
@@ -64,6 +68,8 @@ All from `results/`, all checked by CI:
 | App tests | 415 | jest |
 | flashmap tests | 200, 42 of 42 mutations killed | pytest |
 | Pipeline tests | 185 | pytest |
+| Flagged segments found | 432 across 5 sources | screening.json |
+| Clips flashmap could not decode | 4 of 20 | screening.json |
 | Titles verified end to end | 4 | pipeline catalog |
 | Friction log entries | 11 | docs/friction_pending.md |
 
@@ -77,7 +83,7 @@ All from `results/`, all checked by CI:
 
 ## 6. Next
 
-1. Finish the GATE 2 screening count and name the self-filmed gap. The run is in flight.
+1. Fix the two flashmap bugs the screening found: Theora decode, and keeping the picture rectangle across a re-encode.
 2. Get a fifth title through verify, by giving flashmap a way to keep the picture rectangle across a re-encode, or by generating a neutral cover still for a title with no calm moment.
 3. Build the IRIS image when the shared Docker VM is free.
 4. Phase 4: kid mode, the parent area behind a PIN, seek safety across voice, D-pad and cards, and the drop-in hook.
