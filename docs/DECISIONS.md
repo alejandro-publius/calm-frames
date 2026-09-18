@@ -847,3 +847,82 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   quietly incomplete. It appears under Everyone and in no kid's own log.
   **Cost:** a household can see a line in the everyone view that is in nobody's
   own view, which reads as odd until you know why.
+
+## 2026-09-18: the registry is asked first, and what a missing entry does that a tampered one does not
+
+- **Decision:** the catalog goes through `app/src/calmframes/mapSource.ts`
+  before it reaches `checkTitle`. For every title and every profile the preset
+  asks for, `lookupMap` is asked first, by the file's SHA-256, and only then
+  does the bundled or catalog map get a look in.
+  **Why:** the registry has been right since it was written and nothing called
+  it, so it was a feature the app had rather than one it used. Of the three
+  sources a map can come from, the index is the only one that can say a map has
+  been replaced since the catalog was written, so it is the one to ask first.
+  Everything it hands back still goes through `verifyFlashMap` on the shelf and
+  again in the player, so a map reached through the index is held to every rule
+  a map is held to.
+  **Cost:** a title now waits on a network answer before it can be listed, and
+  while it waits it is pending rather than verified, which means the shelf is
+  empty for as long as the index takes. Listing it on the strength of the
+  bundled map and refusing it a moment later would leave it playable in
+  between, so the wait is the safe direction. Nothing sets `registryUrl` yet,
+  because no index has been published: the pipeline builds one and nothing has
+  been deployed, so the shipping default is still the bundled map and the
+  lookup runs only where a URL is configured. That is one prop, and until it is
+  set the registry is wired rather than in use.
+
+- **Decision:** a missing entry falls through to the map the app already holds.
+  A tampered one does not, and takes the title off the shelf.
+  **Why:** they are different facts. An index that verified and lists no map
+  for this file, or no index at all, is the normal state of a file nobody has
+  published and is also what a device in flight mode sees. Blocking there would
+  break the bundled title, which is the whole offline story, and the fallback
+  is a signed map bound to the same file hash and read by the same reader, so
+  nothing is being trusted that was not already. With no such map either, the
+  title is pending, kid mode never lists a pending title and the player refuses
+  it, so the picture stays hidden exactly as a missing map has always left it.
+  An index that did not check out is a different thing: unsigned, signed by a
+  key we do not hold, edited after signing, stale past the thirty day bound,
+  pointing outside itself, or naming a map other than the one that came back.
+  That is somebody serving us something, and the answer is to stop rather than
+  to keep playing off a different map. The two cases are one list,
+  `FALL_THROUGH_REFUSALS`, with exactly two entries, so there is one place to
+  read which is which.
+  **Cost:** a denial of service. Whoever can serve a broken index can stop a
+  title playing even though a perfectly good bundled map is sitting there. That
+  is the direction to fail in, and it is worth saying out loud rather than
+  discovering on a judge's device.
+
+- **Decision:** the resolver hands on the exact bytes the lookup verified,
+  through a fetch that reads each URL once and keeps what it read.
+  **Why:** `lookupMap` returns a parsed map, not its text, and the guard needs
+  text. Fetching the map again to get the text would be a second answer to the
+  same question, from a server free to give a different one. The same read-once
+  fetch means the index is read once for a whole catalog rather than once per
+  title and per profile.
+  **Cost:** one small wrapper that has to stay honest. It also has a branch
+  that cannot be reached without something replacing the reader underneath, and
+  that branch blocks rather than falls through.
+
+- **Decision:** which source served each map is logged as one `console.info`
+  line and one beacon, not shown on a screen.
+  **Why:** a reader has to be able to tell registry from bundled from catalog
+  when a title behaves oddly, and the app has no existing timing event kind for
+  this. `logTimingEvent` takes a fixed union of kinds and adding one would edit
+  a file the hook package mirrors.
+  **Cost:** release builds strip console logging, so on a release build the
+  beacon is the only copy and it needs the harness listening. The source is
+  also returned in `ResolvedMaps.sources` for anything that wants to draw it.
+
+- **Decision:** the wiring is in the shelf and in a new app-only module, not in
+  `useFlashGuard`.
+  **Why:** `useFlashGuard` is one of the twenty files `hook/tools/sync.mjs`
+  mirrors into the published package, and `hookMirror.test.ts` compares them
+  byte for byte, so editing the engine turns the suite red until the sync
+  script is run, and this lane does not run it. The shelf is also where the
+  catalog is resolved and where docs/STATUS.md section 4c said the call
+  belonged. The engine stays what it says it is: a guard that knows nothing
+  about this app's catalog.
+  **Cost:** an app that installs the hook package gets the guard without the
+  registry lookup. `lookupMap` is in the package and callable, so a host app
+  can do what the shelf does, and this is a seam rather than a wall.

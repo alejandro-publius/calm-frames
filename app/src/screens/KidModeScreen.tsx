@@ -31,8 +31,13 @@ import { StackNavigationProp } from '@amazon-devices/react-navigation__stack';
 import React from 'react';
 import { BackHandler, Platform } from 'react-native';
 import FirstRunScreen, { FirstRunResult } from '../calmframes/FirstRunScreen';
-import { DEFAULT_SETTINGS, HouseholdSettings } from '../calmframes/household';
+import { DEFAULT_SETTINGS, HouseholdSettings, PRESETS } from '../calmframes/household';
 import { useHideLogs } from '../calmframes/hideLogStore';
+import {
+  refusedTitle,
+  useMapSources,
+  waitingTitle,
+} from '../calmframes/mapSource';
 import KidHomeScreen from '../calmframes/KidHomeScreen';
 import {
   activeProfile,
@@ -52,7 +57,7 @@ import {
 import CreditsScreen from '../calmframes/CreditsScreen';
 import ParentAreaScreen from '../calmframes/ParentAreaScreen';
 import { emptyPinGate, PinGateState } from '../calmframes/parentGate';
-import { CatalogTitle, CheckedTitle, checkTitles } from '../calmframes/titleStatus';
+import { CatalogTitle, CheckedTitle, checkTitle } from '../calmframes/titleStatus';
 import TitleDetailsScreen from '../calmframes/TitleDetailsScreen';
 import {
   AppStackParamList,
@@ -76,6 +81,26 @@ export interface KidModeScreenProps {
    * in flight mode still gets a working kid mode.
    */
   catalog?: CatalogTitle[];
+  /**
+   * Where the signed index of checked titles is.
+   *
+   * Left out, no index is consulted and every title plays off the map the
+   * package or the catalog carried, which is what the app does today. Set, the
+   * index is asked about every title first, by the file's hash, and mapSource.ts
+   * says what a missing entry does and what a tampered one does. No index has
+   * been published yet, so nothing in this repository sets it.
+   */
+  registryUrl?: string;
+  /** Injected so tests do not need a network and a device does not need one. */
+  fetchText?: (url: string) => Promise<string | null>;
+  /**
+   * The public key this build trusts.
+   *
+   * The app never passes it: the key it ships is the default. It is a prop so
+   * that a test can drive the whole shelf against the signed fixtures, which
+   * were made with a key whose private half is in nobody's tree.
+   */
+  publicKeyBase64?: string;
   /** Injected in tests. A device has no crypto API to make a salt with. */
   newSalt?: () => string;
   nowMs?: () => number;
@@ -151,6 +176,9 @@ export function guardedParamsFor(
 const KidModeScreen = ({
   navigation,
   catalog,
+  registryUrl,
+  fetchText,
+  publicKeyBase64 = OFFLINE_PUBLIC_KEY_BASE64,
   newSalt = makeLocalSalt,
   nowMs = Date.now,
   testID = 'kid-mode',
@@ -178,14 +206,35 @@ const KidModeScreen = ({
   );
 
   const entries = React.useMemo(() => catalog ?? defaultCatalog(), [catalog]);
+  // Where each title's map comes from: the signed index first, by the file's
+  // hash, then the map the package or the catalog carried. With no index
+  // configured this is the catalog itself and nothing is fetched.
+  const resolved = useMapSources(entries, {
+    registryUrl,
+    publicKeyBase64,
+    nowMs,
+    profiles: (PRESETS[settings.preset] ?? PRESETS.wcag).mapProfiles,
+    fetchText,
+  });
+  // Three answers: the index refused and nothing may be served, the index has
+  // been asked and has not answered, or there is a map to check. Only the last
+  // can reach the shelf, because only a verified title is listed.
   const titles = React.useMemo(
     () =>
-      checkTitles(entries, {
-        settings,
-        publicKeyBase64: OFFLINE_PUBLIC_KEY_BASE64,
-        nowMs: nowMs(),
+      resolved.map((one) => {
+        if (one.refusal) {
+          return refusedTitle(one);
+        }
+        if (one.waiting) {
+          return waitingTitle(one.title);
+        }
+        return checkTitle(one.title, {
+          settings,
+          publicKeyBase64,
+          nowMs: nowMs(),
+        });
       }),
-    [entries, settings, nowMs],
+    [resolved, settings, publicKeyBase64, nowMs],
   );
   const open = titles.find((entry) => entry.title.id === openId) ?? null;
 
