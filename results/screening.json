@@ -5,40 +5,169 @@
   "clips_analyzed_ok": 16,
   "clips_failed": 4,
   "per_source": {
-    "DVIDS": {
-      "files": 2,
-      "flagged_files": 2,
-      "flagged_segments": 9
-    },
-    "NASA SVS 5011": {
-      "files": 1,
-      "flagged_files": 0,
-      "flagged_segments": 0
-    },
     "1930 public-domain film": {
       "files": 2,
       "flagged_files": 2,
-      "flagged_segments": 229
-    },
-    "Wikimedia Commons fireworks": {
-      "files": 3,
-      "flagged_files": 2,
-      "flagged_segments": 16
-    },
-    "Wikimedia Commons lightning": {
-      "files": 4,
-      "flagged_files": 3,
-      "flagged_segments": 9
+      "flagged_segments": 229,
+      "files_failed_to_decode": 0,
+      "segments_by_rule": {
+        "general": 229,
+        "red": 0
+      },
+      "flagged_seconds": 737.544,
+      "analysed_seconds": 877.3,
+      "max_flashes_in_window": 14,
+      "max_area_fraction": 1.0,
+      "titles": [
+        "HAZARD_pd1930_booze_hangs_high.mp4",
+        "HAZARD_pd1930_frozen_frolics.mp4"
+      ],
+      "titles_with_a_red_segment": [],
+      "flagged_share_of_analysed_time": 0.8407
     },
     "Blender open movies": {
       "files": 3,
       "flagged_files": 3,
-      "flagged_segments": 169
+      "flagged_segments": 169,
+      "files_failed_to_decode": 0,
+      "segments_by_rule": {
+        "general": 169,
+        "red": 0
+      },
+      "flagged_seconds": 471.714,
+      "analysed_seconds": 2218.71,
+      "max_flashes_in_window": 12,
+      "max_area_fraction": 1.0,
+      "titles": [
+        "HAZARD_bbb_720p_surround.mp4",
+        "HAZARD_sintel_2048_stereo_512kb.mp4",
+        "HAZARD_tears_of_steel_720p.mov"
+      ],
+      "titles_with_a_red_segment": [],
+      "flagged_share_of_analysed_time": 0.2126
+    },
+    "DVIDS": {
+      "files": 2,
+      "flagged_files": 2,
+      "flagged_segments": 9,
+      "files_failed_to_decode": 0,
+      "segments_by_rule": {
+        "general": 9,
+        "red": 0
+      },
+      "flagged_seconds": 15.126,
+      "analysed_seconds": 161.02,
+      "max_flashes_in_window": 11,
+      "max_area_fraction": 0.84375,
+      "titles": [
+        "HAZARD_dvids_fireworks_safety.mp4",
+        "HAZARD_dvids_illumination_flares.mp4"
+      ],
+      "titles_with_a_red_segment": [],
+      "flagged_share_of_analysed_time": 0.0939
+    },
+    "NASA ISS time-lapse": {
+      "files": 0,
+      "flagged_files": 0,
+      "flagged_segments": 0,
+      "files_failed_to_decode": 3,
+      "segments_by_rule": {
+        "general": 0,
+        "red": 0
+      },
+      "flagged_seconds": 0.0,
+      "analysed_seconds": 0.0,
+      "max_flashes_in_window": 0,
+      "max_area_fraction": 0.0,
+      "titles": [
+        "HAZARD_iss_night_pass_africa_mideast.ogv",
+        "HAZARD_iss_night_pass_europe_to_asia.ogv",
+        "HAZARD_iss_night_pass_malaysia.ogv"
+      ],
+      "titles_with_a_red_segment": [],
+      "flagged_share_of_analysed_time": null
+    },
+    "NASA SVS 5011": {
+      "files": 1,
+      "flagged_files": 0,
+      "flagged_segments": 0,
+      "files_failed_to_decode": 0,
+      "segments_by_rule": {
+        "general": 0,
+        "red": 0
+      },
+      "flagged_seconds": 0.0,
+      "analysed_seconds": 216.7,
+      "max_flashes_in_window": 0,
+      "max_area_fraction": 0.0,
+      "titles": [
+        "HAZARD_nasa_svs_5011_iss_lightning_1080p.mp4"
+      ],
+      "titles_with_a_red_segment": [],
+      "flagged_share_of_analysed_time": 0.0
+    },
+    "Wikimedia Commons fireworks": {
+      "files": 3,
+      "flagged_files": 2,
+      "flagged_segments": 16,
+      "files_failed_to_decode": 1,
+      "segments_by_rule": {
+        "general": 16,
+        "red": 0
+      },
+      "flagged_seconds": 23.467,
+      "analysed_seconds": 80.15,
+      "max_flashes_in_window": 11,
+      "max_area_fraction": 1.0,
+      "titles": [
+        "HAZARD_wc_fireworks_buenos_aires.webm",
+        "HAZARD_wc_fireworks_ignis_brunensis.ogv",
+        "HAZARD_wc_fireworks_rieti.ogv",
+        "HAZARD_wc_fireworks_summer.webm"
+      ],
+      "titles_with_a_red_segment": [],
+      "flagged_share_of_analysed_time": 0.2928
+    },
+    "Wikimedia Commons lightning": {
+      "files": 4,
+      "flagged_files": 3,
+      "flagged_segments": 9,
+      "files_failed_to_decode": 0,
+      "segments_by_rule": {
+        "general": 9,
+        "red": 0
+      },
+      "flagged_seconds": 10.807,
+      "analysed_seconds": 124.54,
+      "max_flashes_in_window": 8,
+      "max_area_fraction": 1.0,
+      "titles": [
+        "HAZARD_wc_lightning_240fps.webm",
+        "HAZARD_wc_lightning_blackout.webm",
+        "HAZARD_wc_lightning_condensed.webm",
+        "HAZARD_wc_lightning_slowmo.webm"
+      ],
+      "titles_with_a_red_segment": [],
+      "flagged_share_of_analysed_time": 0.0868
     },
     "unlabeled": {
       "files": 1,
       "flagged_files": 0,
-      "flagged_segments": 0
+      "flagged_segments": 0,
+      "files_failed_to_decode": 0,
+      "segments_by_rule": {
+        "general": 0,
+        "red": 0
+      },
+      "flagged_seconds": 0.0,
+      "analysed_seconds": 0.0,
+      "max_flashes_in_window": 0,
+      "max_area_fraction": 0.0,
+      "titles": [
+        "markers.mp4"
+      ],
+      "titles_with_a_red_segment": [],
+      "flagged_share_of_analysed_time": null
     }
   },
   "per_file": [
@@ -4958,7 +5087,14 @@
   "totals": {
     "clips": 20,
     "flagged_segments": 432,
-    "sources_with_at_least_one_flag": 5
+    "sources_with_at_least_one_flag": 5,
+    "segments_by_rule": {
+      "general": 432,
+      "red": 0
+    },
+    "red_rule_segments": 0,
+    "sources_with_a_red_segment": 0,
+    "red_rule_statement": "no segment in this pool fired the red flash rule"
   },
   "gate2": {
     "min_segments": 15,
@@ -4970,5 +5106,75 @@
     "HAZARD_bbb_720p_surround.mp4",
     "HAZARD_sintel_2048_stereo_512kb.mp4",
     "HAZARD_tears_of_steel_720p.mov"
-  ]
+  ],
+  "self_filmed_needed": {
+    "what_this_is": "a shooting list, not a measurement. It says what has to be filmed because no licensed footage we could find covers it.",
+    "flash_limit_per_second_from_profile": 3,
+    "flash_rate_note": "every rate here is a multiple of the analyser's own per second flash limit, read from the wcag profile at run time. No threshold is written out in this file.",
+    "red_segments_in_the_pool": 0,
+    "clips": [
+      {
+        "id": "red_emergency_lightbar",
+        "gap": "red",
+        "must_show": "a red emergency vehicle light bar filling most of the frame, shot head on after dark or against a dark wall, with nothing bright behind it. The red has to be the lamp itself, not a red wash on a pale surface, because the rule is about how saturated the red state is (profiles.WCAG.red.saturated_red_ratio).",
+        "flash_rate_multiple_of_limit": 2.0,
+        "duration_s": 30,
+        "framing": "the flashing part covering well over half the picture height and width",
+        "why": "the pool has no saturated red strobe at all, so the red rule has never fired on real footage",
+        "flash_rate_per_second": 6.0,
+        "still_needed": true
+      },
+      {
+        "id": "red_stage_wash",
+        "gap": "red",
+        "must_show": "a red stage or party light washing the whole frame, chased on and off, with the camera close enough that the red fills the picture rather than sitting in a corner",
+        "flash_rate_multiple_of_limit": 1.333,
+        "duration_s": 30,
+        "framing": "whole frame red at the peak of each flash",
+        "why": "a red positive close to the flash limit, where a detector that rounds the rate the wrong way shows it",
+        "flash_rate_per_second": 4.0,
+        "still_needed": true
+      },
+      {
+        "id": "red_below_the_limit",
+        "gap": "red-negative",
+        "must_show": "the same red rig as red_stage_wash, flashing slowly, one take, nothing else changed",
+        "flash_rate_multiple_of_limit": 0.667,
+        "duration_s": 20,
+        "framing": "identical to red_stage_wash, so the only difference between the two is the rate",
+        "why": "a red negative control. Without it, a red flag says only that the picture was red, and there is no way to show the rate mattered",
+        "flash_rate_per_second": 2.0,
+        "still_needed": true
+      },
+      {
+        "id": "white_strobe_steady",
+        "gap": "sustained-regular-strobe",
+        "must_show": "a white strobe lamp pointed at a plain wall, running at a steady rate for the whole take, with the camera locked off and the exposure locked",
+        "flash_rate_multiple_of_limit": 3.333,
+        "duration_s": 30,
+        "framing": "the lit wall filling the frame",
+        "why": "every flagged segment in the pool so far comes from fireworks, lightning, a cut heavy 1930 print or an explosion, all of them irregular. Nothing in the pool holds one rate for more than a second or two",
+        "flash_rate_per_second": 10.0,
+        "still_needed": true
+      },
+      {
+        "id": "strobe_small_area",
+        "gap": "area-negative",
+        "must_show": "the same strobe as white_strobe_steady, at the same rate, but as a small lamp in a wide shot of a lit room, so the flashing part is roughly a tenth of the picture",
+        "flash_rate_multiple_of_limit": 3.333,
+        "duration_s": 20,
+        "framing": "flashing area well under the profile's area fraction limit (profiles.WCAG.area_fraction_limit)",
+        "why": "an area rule negative: real flashing, fast enough to fail on rate alone, that the area condition should rescue. The pool has no such clip, so the area rule is only exercised by generated clips",
+        "flash_rate_per_second": 10.0,
+        "still_needed": true
+      }
+    ],
+    "filming_notes": [
+      "Film at 60 fps if the camera offers it, with the shutter and exposure locked. A rolling shutter at 24 or 30 fps can beat against a strobe and record a rate that is not the one in the room, and the analyser would then be measuring the camera.",
+      "Do not use the phone's own torch or any auto exposure. Auto exposure chases the flashes and turns a square wave into a ramp.",
+      "One take per entry, no cuts inside the take, and no colour grading afterwards. The file that lands in media/ is the file that came off the camera.",
+      "Write the rate you actually set into media/LICENSES.csv in the notes column. What was intended and what the lamp did are two different numbers.",
+      "Safety first, every take: whoever films is not photosensitive and does not look at the lights, anyone in frame consents, and the clip goes into media/ with the HAZARD_ prefix before anything opens it."
+    ]
+  }
 }
