@@ -287,7 +287,7 @@ Two things this run found, both recorded rather than smoothed over. Every one of
 
 ### How well the analyzer does, on the conformance suite
 
-This is the number that says whether any of the rest is worth having, and it was missing from this page until a mock judge asked for it. Recorded by the conformance suite into [`results/conformance.json`](results/conformance.json), whose ground truth is computed from the quoted spec text in a module that cannot import flashmap.
+This is the number that says whether any of the rest is worth having. Recorded by the conformance suite into [`results/conformance.json`](results/conformance.json), whose ground truth is computed from the quoted spec text in a module that cannot import flashmap.
 
 | What | Value |
 |---|---|
@@ -301,9 +301,9 @@ This is the number that says whether any of the rest is worth having, and it was
 **What those two numbers mean for a child in front of the TV**, said plainly:
 
 - Precision of <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n--> means roughly a third of the windows flashmap flags are not over the threshold. The cost of that is picture hidden that did not need hiding. It is the direction we would rather err in, and it is still a cost, because a title full of unnecessary covers is a title a child stops choosing.
-- Recall of <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> means about one positive window in ten is missed. That is the direction that matters, and it is the honest reason this is a layer that reduces exposure rather than one that removes it. It is also the reason the approved wording is the wording it is.
+- Recall of <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> means about one positive window in ten is missed. That is the direction that matters, and it is the reason this is a layer that reduces exposure rather than one that removes it. It is also the reason the approved wording is the wording it is.
 
-Neither number has anything to say about the red flash rule against real footage, because the pool has no saturated red strobe. The ablation in [`results/ablations.json`](results/ablations.json) shows what the red rule is carrying on the synthetic suite: turning it off moves recall by <!--n results/ablations.json:detection.arms.red_rule_off.recall_change_vs_default -->-0.244898<!--/n-->.
+Neither number has anything to say about the red flash rule against real footage, because the pool has no saturated red strobe. The ablation in [`results/ablations.json`](results/ablations.json) shows what the red rule is carrying on the synthetic suite: with it on, <!--n results/ablations.json:detection.arms.default.recall.numerator -->88<!--/n--> of <!--n results/ablations.json:detection.arms.default.recall.denominator -->98<!--/n--> positive windows are found; with it off, <!--n results/ablations.json:detection.arms.red_rule_off.recall.numerator -->64<!--/n--> of <!--n results/ablations.json:detection.arms.red_rule_off.recall.denominator -->98<!--/n-->.
 
 ### Baselines
 
