@@ -118,6 +118,16 @@ request ever stalled, because the whole clip is fetched before the 9 second sett
 ends, so the network chaos reached a player that had already buffered everything;
 and backgrounding never happened, so `background_covers_seen` is 0.
 
+**Closed since this section was written.** `pipeline/verify.py` used to skip its
+own cover check when a title had no flagged segment, so
+<!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> titles collected
+38 passing checks without covering anything and read exactly like the
+<!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n--> whose cover was
+measured on the rendition. Those titles now carry the outcome `no flagged
+segments`, and a preset that has intervals cannot pass unless the drawn check ran
+for it and passed. Four counts that add up are in `results/verify_pool.json` and
+are published through markers wherever a title count appears.
+
 **Still open, in rough order of what would help most:**
 
 1. **The early covers are not capped.** The p95 lead is 4097 ms and the longest is
@@ -127,15 +137,7 @@ and backgrounding never happened, so `background_covers_seen` is 0.
    whose reports can be 5219 ms apart, which trades the thing this app exists for
    against a cosmetic gain, so it has not been done. If it is done, the cap has to
    be measured against the worst report gap, not chosen.
-2. **Fixed, Sep 17 late.** `pipeline/verify.py` used to skip its own cover check
-   when a title had no flagged segment, so
-   <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> titles
-   collected 38 passing checks without covering anything and read like the
-   <!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n--> whose cover
-   was measured. Those titles now carry the outcome `no flagged segments`, and a
-   preset with intervals cannot pass unless the drawn check ran for it and
-   passed. The counts are in `results/verify_pool.json`.
-3. **EA IRIS is still not a candidate list**, so the recall estimate is optimistic
+2. **EA IRIS is still not a candidate list**, so the recall estimate is optimistic
    by an unknown amount, and the 16 calm clips are screened but not in the
    labelling pool because only flashmap has looked at them.
 

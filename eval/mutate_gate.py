@@ -650,6 +650,18 @@ MUTATIONS: list[Mutation] = [
         why="the catalog marks a failed title verified, so kid mode lists it",
     ),
     Mutation(
+        mid="verify-cover-proof-cannot-be-skipped",
+        prop="verify blocks publishing on any violation",
+        lane="py",
+        path="pipeline/verify.py",
+        old="            not plan.intervals or proven,",
+        new="            True,",
+        tests=("pipeline/tests/test_verify.py", "pipeline/tests/test_verify_pool.py"),
+        why="a title with intervals to cover passes verify without the cover ever having "
+        "been measured on the rendition, which is the hole that let fourteen titles with "
+        "nothing to hide read exactly like seven whose cover was proven",
+    ),
+    Mutation(
         mid="verify-cover-is-actually-drawn",
         prop="verify blocks publishing on any violation",
         lane="py",
