@@ -106,8 +106,9 @@ def check_ground_truth_is_independent() -> dict[str, object]:
     interpreter, which catches a module that reaches flashmap through something else.
 
     To confirm this guard is live, add `import flashmap` to pattern_truth.py and watch the run
-    refuse to start. Verified on 2026-09-17: it does, with
-    "pattern_truth.py imports flashmap: ['line 47: import flashmap']".
+    refuse to start. Done on 2026-09-18 with a run of two clips: it refused before making one,
+    with "the pattern ground truth imports flashmap, so it would be grading its own homework:
+    {'pattern_truth.py': ['line 48: import flashmap']}".
     """
     here = Path(__file__).resolve().parent
     offenders: dict[str, list[str]] = {}
