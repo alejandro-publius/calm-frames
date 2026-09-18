@@ -1,0 +1,43 @@
+{
+  "created_utc": "1970-01-01T00:00:00Z",
+  "picture": {
+    "height": 1080,
+    "source": "detected",
+    "width": 1920
+  },
+  "profile": {
+    "area_windows": [
+      {
+        "name": "wcag-10deg",
+        "width_px": 640
+      }
+    ],
+    "name": "wcag"
+  },
+  "segments": [
+    {
+      "end_ms": 12000,
+      "reason": "general",
+      "start_ms": 10000
+    }
+  ],
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "97b1027720b422e0",
+    "payload_sha256": "2982748ec435d6a62c8f72023cfa76ab0f2a978630a88f33a10196c6ebe8a9b0",
+    "public_key": "F4FIUDEZiZ6H5px4rAufp0/ysSLj1s+C4TTHq1JAtQM=",
+    "value": "TlqrmQEROLWc/YBlpjKHUAbnbXomuqEVotPmY8mIt3Va+VWOlGuq6c3OtEnhnNTOkZiwb3tjkD1aLnPv2NPlCw=="
+  },
+  "source": {
+    "coded_height": 1080,
+    "coded_width": 1920,
+    "duration_ms": 600000,
+    "path": "media/example.mp4",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "summary": {
+    "hidden_ms": 2000,
+    "violation_count": 1
+  },
+  "version": 1
+}

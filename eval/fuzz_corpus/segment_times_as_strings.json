@@ -1,0 +1,43 @@
+{
+  "created_utc": "2026-09-01T00:00:00Z",
+  "picture": {
+    "height": 1080,
+    "source": "detected",
+    "width": 1920
+  },
+  "profile": {
+    "area_windows": [
+      {
+        "name": "wcag-10deg",
+        "width_px": 640
+      }
+    ],
+    "name": "wcag"
+  },
+  "segments": [
+    {
+      "end_ms": "12000",
+      "reason": "general",
+      "start_ms": "10000"
+    }
+  ],
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "97b1027720b422e0",
+    "payload_sha256": "3bfaefb65a32ce5ab16475698d10d5e1d28c0ad0ff741a61813f9fce3ab66920",
+    "public_key": "F4FIUDEZiZ6H5px4rAufp0/ysSLj1s+C4TTHq1JAtQM=",
+    "value": "H05FfTEWMKdiRw2JkaJsJL3PwQ4sjV+ApBadEYrO0W8Cmft5Vv/TEF3XIDk9ClP2TpAT3V3+h7yJBxkx+uM5Cw=="
+  },
+  "source": {
+    "coded_height": 1080,
+    "coded_width": 1920,
+    "duration_ms": 600000,
+    "path": "media/example.mp4",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "summary": {
+    "hidden_ms": 2000,
+    "violation_count": 1
+  },
+  "version": 1
+}

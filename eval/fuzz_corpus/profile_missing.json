@@ -1,0 +1,34 @@
+{
+  "created_utc": "2026-09-01T00:00:00Z",
+  "picture": {
+    "height": 1080,
+    "source": "detected",
+    "width": 1920
+  },
+  "segments": [
+    {
+      "end_ms": 12000,
+      "reason": "general",
+      "start_ms": 10000
+    }
+  ],
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "97b1027720b422e0",
+    "payload_sha256": "93ed933503ab777b273e5637510aa9d9573b4727954a33d12e555ba030ab2083",
+    "public_key": "F4FIUDEZiZ6H5px4rAufp0/ysSLj1s+C4TTHq1JAtQM=",
+    "value": "ESQ4vuPLeiJMuz6BgAzZKm87Pm0FErusNYhsQm53UzLNZrRmuS9RU2l5+wBXmU5mvgTW39s5hwnGuIPxDzIzAw=="
+  },
+  "source": {
+    "coded_height": 1080,
+    "coded_width": 1920,
+    "duration_ms": 600000,
+    "path": "media/example.mp4",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "summary": {
+    "hidden_ms": 2000,
+    "violation_count": 1
+  },
+  "version": 1
+}

@@ -1,0 +1,40 @@
+{
+  "created_utc": "2026-09-01T00:00:00Z",
+  "picture": {
+    "height": 1080,
+    "source": "detected",
+    "width": 1920
+  },
+  "profile": {
+    "area_windows": [
+      {
+        "name": "wcag-10deg",
+        "width_px": 640
+      }
+    ],
+    "name": "wcag"
+  },
+  "segments": [
+    {
+      "end_ms": 12000,
+      "reason": "general",
+      "start_ms": 10000
+    }
+  ],
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "97b1027720b422e0",
+    "payload_sha256": "1c0dc0c59e8abb5eea629926ce95ce6d955cfb8f1e53a07570cc26194fbdab11",
+    "public_key": "F4FIUDEZiZ6H5px4rAufp0/ysSLj1s+C4TTHq1JAtQM=",
+    "value": "AO5PhZfenmBDjSLx6fVWJvXI+ZUwGfPNTeyl9xpnUNaYT0SwSOZiamSmHX+thICV3sPWtyB6MLhTPaR0DlMiAA=="
+  },
+  "source": {
+    "path": "p",
+    "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "summary": {
+    "hidden_ms": 2000,
+    "violation_count": 1
+  },
+  "version": 1
+}

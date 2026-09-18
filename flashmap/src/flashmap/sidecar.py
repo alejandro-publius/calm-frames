@@ -187,6 +187,50 @@ def load_map(path: str | Path) -> dict[str, Any]:
     return document
 
 
+def _segment_problems(segments: Any) -> list[str]:
+    """Every way a segment list can be wrong, named.
+
+    Found by eval/fuzz_maps_test.py. Until this was here, a correctly signed map whose
+    segments said a flash ended before it started, or were strings, or were not a list at
+    all, passed `flashmap verify` cleanly. No player would have accepted it: the app's reader
+    and the pipeline's loader both refuse those maps. So the tool a studio runs to check its
+    own work was the only one saying the map was fine, which is the wrong way round.
+
+    A segment is a span of the film. It has a start and an end, both numbers of milliseconds,
+    the end is after the start, and neither is before the film begins.
+    """
+    if segments is None:
+        return []  # The missing section is already reported by the caller.
+    if not isinstance(segments, list):
+        return [f"segments is {type(segments).__name__}, not a list"]
+
+    problems: list[str] = []
+    for index, segment in enumerate(segments):
+        if not isinstance(segment, dict):
+            problems.append(f"segment {index} is not an object")
+            continue
+        start = segment.get("start_ms")
+        end = segment.get("end_ms")
+        # bool is an int in Python, and True is not a timestamp.
+        numbers = [
+            value
+            for value in (start, end)
+            if isinstance(value, (int, float)) and not isinstance(value, bool)
+        ]
+        if len(numbers) != 2 or any(value != value for value in numbers):
+            problems.append(
+                f"segment {index} has times {start!r} and {end!r}, which are not both numbers"
+            )
+            continue
+        if end <= start:
+            problems.append(f"segment {index} ends at {end} and starts at {start}")
+        if start < 0:
+            problems.append(f"segment {index} starts at {start}, before the film does")
+    if len(problems) > 8:
+        return problems[:8] + [f"and {len(problems) - 8} more segment problem(s)"]
+    return problems
+
+
 def verify_map(
     document: dict[str, Any],
     video_path: str | Path | None = None,
@@ -209,6 +253,8 @@ def verify_map(
     for required in ("source", "segments", "profile", "picture", "summary"):
         if required not in document:
             problems.append(f"map has no {required!r} section")
+
+    problems.extend(_segment_problems(document.get("segments")))
 
     source = document.get("source")
     expected_hash = source.get("sha256") if isinstance(source, dict) else None

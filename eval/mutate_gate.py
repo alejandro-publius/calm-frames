@@ -115,6 +115,12 @@ class Mutation:
     new: str
     tests: tuple[str, ...]
     why: str
+    # Set when the mutant is known to be equivalent: the edit changes the code but cannot
+    # change what the program does, so no test can catch it and none should be written to
+    # pretend otherwise. It still counts as a survivor in the kill rate, because rounding a
+    # number up for a good reason is still rounding it up. What it does not do is fail the
+    # gate, and the reason has to be written here for a reader to check.
+    equivalent: str = ""
 
 
 @dataclass
@@ -261,8 +267,13 @@ MUTATIONS: list[Mutation] = [
         path="src/calmframes/useCoverHarness.ts",
         old="    if (mode === 'timing' && !foreground) {\n      applyCover(true, 'background', clockRef.current.anchorMediaMs);\n    }",
         new="    if (mode === 'timing' && false) {\n      applyCover(true, 'background', clockRef.current.anchorMediaMs);\n    }",
-        tests=("test/calmframes/coverHarness.test.tsx", "test/calmframes/useFlashGuard.test.tsx"),
-        why="going to the background stops hiding the picture at once",
+        tests=(
+            "test/calmframes/coverHarness.test.tsx",
+            "test/calmframes/useFlashGuard.test.tsx",
+            "test/calmframes/mutationSurvivors.test.tsx",
+        ),
+        why="going to the background stops hiding the picture at once, and waits for the "
+        "next scheduler tick instead",
     ),
     # -------------------------------------------------------------- fail closed on maps
     Mutation(
@@ -294,6 +305,14 @@ MUTATIONS: list[Mutation] = [
         new="  const signature = asRecord(plain.signature) ?? {};\n  if (false) {\n    return reject('unsigned', 'the map carries no signature');\n  }",
         tests=("test/calmframes/flashMap.test.ts",),
         why="a map with no signature block is read as if it had one",
+        equivalent=(
+            "the unsigned path is guarded three times over. With the first check gone, a map "
+            "with no signature block reaches the algorithm check, where asString(undefined) "
+            "is not 'ed25519', and is refused as 'unsigned' again. Only the diagnostic "
+            "detail changes, and nothing user facing reads it: useFlashGuard shows "
+            "rejectionMessage(reason). No test can tell the two apart, and writing one that "
+            "pins the wording would be testing a log line."
+        ),
     ),
     Mutation(
         mid="fail-closed-tampered",
@@ -343,7 +362,10 @@ MUTATIONS: list[Mutation] = [
         path="src/calmframes/flashMap.ts",
         old="    if (startMs === null || endMs === null || endMs <= startMs || startMs < 0) {\n      return null;\n    }",
         new="    if (startMs === null || endMs === null) {\n      continue;\n    }",
-        tests=("test/calmframes/flashMap.test.ts",),
+        tests=(
+            "test/calmframes/flashMap.test.ts",
+            "test/calmframes/mutationSurvivors.test.tsx",
+        ),
         why="a segment with a negative or reversed time is skipped instead of refusing "
         "the whole map, so the part it described is never covered",
     ),
@@ -400,6 +422,29 @@ MUTATIONS: list[Mutation] = [
         why="the signature stops covering the segments, so they can be edited freely",
     ),
     Mutation(
+        mid="fail-closed-sidecar-segment-list",
+        prop="fail closed on a map that cannot be read",
+        lane="py",
+        path="flashmap/src/flashmap/sidecar.py",
+        old='    problems.extend(_segment_problems(document.get("segments")))',
+        new="    problems.extend([])",
+        tests=("flashmap/tests/test_sidecar.py",),
+        why="a signed map whose segments are strings, or not a list, or end before they "
+        "start, verifies cleanly, so a studio is told its map is fine when no player will "
+        "take it",
+    ),
+    Mutation(
+        mid="fail-closed-sidecar-segment-ends-after-it-starts",
+        prop="fail closed on a map that cannot be read",
+        lane="py",
+        path="flashmap/src/flashmap/sidecar.py",
+        old='        if end <= start:\n            problems.append(f"segment {index} ends at {end} and starts at {start}")',
+        new='        if False:\n            problems.append(f"segment {index} ends at {end} and starts at {start}")',
+        tests=("flashmap/tests/test_sidecar.py",),
+        why="the one segment check that costs coverage, a flash that ends before it starts, "
+        "stops being made",
+    ),
+    Mutation(
         mid="verify-checks-the-source-hash",
         prop="fail closed on a map bound to the wrong file",
         lane="py",
@@ -429,7 +474,10 @@ MUTATIONS: list[Mutation] = [
         path="src/calmframes/flashMap.ts",
         old="    const reason: CoverReason = reasonText === 'general' ? 'general' : 'red';",
         new="    const reason: CoverReason = reasonText === 'red' ? 'red' : 'general';",
-        tests=("test/calmframes/flashMap.test.ts",),
+        tests=(
+            "test/calmframes/flashMap.test.ts",
+            "test/calmframes/mutationSurvivors.test.tsx",
+        ),
         why="a reason this build has not seen is treated as general rather than red, so "
         "a future map's stricter category gets the weaker cover",
     ),
@@ -471,7 +519,10 @@ MUTATIONS: list[Mutation] = [
         path="src/calmframes/household.ts",
         old="    guardBandMs: Math.max(DEFAULT_GUARD_BAND_MS, preset.guardBandMs),\n    minCoverMs: Math.max(DEFAULT_MIN_COVER_MS, preset.minCoverMs),",
         new="    guardBandMs: preset.guardBandMs,\n    minCoverMs: preset.minCoverMs,",
-        tests=("test/calmframes/household.test.ts",),
+        tests=(
+            "test/calmframes/household.test.ts",
+            "test/calmframes/mutationSurvivors.test.tsx",
+        ),
         why="a preset can set a guard band below the WCAG default, which is a household "
         "setting making the app weaker",
     ),
@@ -624,7 +675,10 @@ MUTATIONS: list[Mutation] = [
         path="src/calmframes/coverSchedule.ts",
         old="      let endMs = segment.endMs - offsetMs + guardBandMs;",
         new="      let endMs = segment.endMs + guardBandMs;",
-        tests=("test/calmframes/coverSchedule.test.ts",),
+        tests=(
+            "test/calmframes/coverSchedule.test.ts",
+            "test/calmframes/mutationSurvivors.test.tsx",
+        ),
         why="only one end of the interval moves onto the rendition's timeline, so the "
         "cover is the wrong length and ends late",
     ),
@@ -669,6 +723,64 @@ MUTATIONS: list[Mutation] = [
         tests=("pipeline/tests/test_verify.py",),
         why="a household with a guard band narrower than the offset limit stops "
         "narrowing the limit with it, which is a setting making the check weaker",
+    ),
+    # -------------------------------------------- the property tests are not vacuous either
+    #
+    # These break the same guards again, but the tests that have to notice are the hypothesis
+    # ones in eval/property_scheduler_test.py, driving the app copy's compiled TypeScript. A
+    # property test that has never been seen to fail is worth no more than any other.
+    Mutation(
+        mid="property-cover-before-segment",
+        prop="the property tests are not vacuous",
+        lane="pyapp",
+        path="src/calmframes/coverSchedule.ts",
+        old="      let startMs = segment.startMs - offsetMs - guardBandMs;",
+        new="      let startMs = segment.startMs - offsetMs;",
+        tests=("eval/property_scheduler_test.py",),
+        why="the guard band stops running ahead of the segment, which the hypothesis tests "
+        "have to find at any guard band, minimum cover and rendition offset",
+    ),
+    Mutation(
+        mid="property-red-survives-merging",
+        prop="the property tests are not vacuous",
+        lane="pyapp",
+        path="src/calmframes/coverSchedule.ts",
+        old="      if (interval.reason === 'red') {\n        previous.reason = 'red';\n      }",
+        new="      if (false) {\n        previous.reason = 'red';\n      }",
+        tests=("eval/property_scheduler_test.py",),
+        why="merging drops the red reason, over random timelines rather than one fixture",
+    ),
+    Mutation(
+        mid="property-intervals-never-touch",
+        prop="the property tests are not vacuous",
+        lane="pyapp",
+        path="src/calmframes/coverSchedule.ts",
+        old="    if (previous && interval.startMs <= previous.endMs) {",
+        new="    if (previous && interval.startMs < previous.endMs) {",
+        tests=("eval/property_scheduler_test.py",),
+        why="two intervals that touch exactly stop merging, which no fixture in the jest "
+        "suite happens to hit at every guard band",
+    ),
+    Mutation(
+        mid="property-seek-covers-first",
+        prop="the property tests are not vacuous",
+        lane="pyapp",
+        path="src/calmframes/seekSafety.ts",
+        old="      interval.endMs <= targetMs && targetMs - interval.endMs < lookbackMs,",
+        new="      interval.endMs <= targetMs && targetMs - interval.endMs < 0,",
+        tests=("eval/property_scheduler_test.py",),
+        why="the keyframe lookback disappears, at every gap the property test tries",
+    ),
+    Mutation(
+        mid="property-clock-re-anchors",
+        prop="the property tests are not vacuous",
+        lane="pyapp",
+        path="src/calmframes/mediaClock.ts",
+        old="  const anchorMediaMs = estimate(clock, wallClockMs);\n  return { ...clock, running, anchorMediaMs, anchorWallMs: wallClockMs };",
+        new="  return { ...clock, running };",
+        tests=("eval/property_scheduler_test.py",),
+        why="starting and stopping the clock stops re-anchoring it, so the estimate invents "
+        "the media time a stall took",
     ),
     Mutation(
         mid="rendition-offset-is-recorded",
@@ -722,12 +834,41 @@ def _copy_app_lane() -> None:
 def prepare(lanes: set[str]) -> None:
     if "py" in lanes:
         _copy_python_lane()
-    if "app" in lanes:
+    if lanes & {"app", "pyapp"}:
         _copy_app_lane()
+    if "pyapp" in lanes:
+        _PRISTINE["digest"] = compile_mutant_scheduler()
 
 
 def lane_root(lane: str) -> Path:
     return PY_LANE if lane == "py" else APP_LANE
+
+
+# The compiled scheduler as it is before any mutation, so a mutation that compiles to the
+# same bytes can be caught and reported rather than counted.
+_PRISTINE: dict[str, str] = {}
+
+
+def compile_mutant_scheduler() -> str:
+    """Compile the app copy's scheduler and return a hash of the JavaScript it produced."""
+    code = (
+        "import sys; sys.path.insert(0, 'eval');"
+        "import property_runner as runner;"
+        "runner.compile_scheduler(force=True);"
+        "print(runner.compiled_digest())"
+    )
+    env = dict(os.environ)
+    env["CALM_FRAMES_APP_DIR"] = str(APP_LANE)
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    result = subprocess.run(
+        [PY, "-c", code], cwd=REPO, capture_output=True, text=True, env=env
+    )
+    if result.returncode != 0:
+        raise SystemExit(
+            "the app copy's scheduler would not compile, so the property tests cannot be "
+            f"mutated:\n{(result.stdout + result.stderr)[-2000:]}"
+        )
+    return result.stdout.strip().splitlines()[-1]
 
 
 # ------------------------------------------------------------------------ running tests
@@ -808,7 +949,22 @@ def _read_jest(result: RunResult) -> None:
 
 def run_tests(lane: str, tests: tuple[str, ...], env_extra: dict[str, str] | None = None) -> RunResult:
     root = lane_root(lane)
-    if lane == "py":
+    if lane == "pyapp":
+        # Python property tests, driving the app copy's TypeScript through node. Run from the
+        # repository, not the copy, because the tests themselves are not what is mutated.
+        root = REPO
+        command = [
+            PY, "-m", "pytest", "-q", "-rf", "-x", "--no-header",
+            "-p", "no:cacheprovider", *tests,
+        ]
+        env = dict(os.environ)
+        env["CALM_FRAMES_APP_DIR"] = str(APP_LANE)
+        env["CALM_FRAMES_REQUIRE_NODE"] = "1"
+        env["PYTHONDONTWRITEBYTECODE"] = "1"
+        env.pop("PYTEST_ADDOPTS", None)
+        if env_extra:
+            env.update(env_extra)
+    elif lane == "py":
         command = [
             PY, "-m", "pytest", "-q", "-rf", "-x", "--no-header",
             "-p", "no:cacheprovider", *tests,
@@ -833,7 +989,7 @@ def run_tests(lane: str, tests: tuple[str, ...], env_extra: dict[str, str] | Non
         stdout=proc.stdout[-20000:],
         stderr=proc.stderr[-20000:],
     )
-    if lane == "py":
+    if lane in ("py", "pyapp"):
         _read_pytest(result)
     else:
         _read_jest(result)
@@ -847,6 +1003,20 @@ def canary(mutation: Mutation, needle: str) -> tuple[bool, str]:
     """Prove the runner loads the mutated file, not the original one."""
     root = lane_root(mutation.lane)
     target = (root / mutation.path).resolve()
+
+    if mutation.lane == "pyapp":
+        # The property tests reach the app through compiled JavaScript, so the proof has to be
+        # that the compile changed. A mutation that compiles to the same bytes never reached
+        # the code that answers, whatever the source file now says.
+        if needle not in target.read_text():
+            return False, "the mutated text is not in the app copy"
+        digest = compile_mutant_scheduler()
+        if digest == _PRISTINE.get("digest"):
+            return False, (
+                "the compiled scheduler is byte for byte what it was before the mutation, "
+                "so the mutation never reached the code the property tests run"
+            )
+        return True, ""
 
     if mutation.lane == "py":
         if mutation.path.startswith("flashmap/"):
@@ -921,6 +1091,8 @@ def apply_and_run(mutation: Mutation) -> dict:
         "survived_because": "",
         "seconds": 0.0,
     }
+    if mutation.equivalent:
+        record["equivalent"] = mutation.equivalent
 
     if not path.exists():
         record["survived_because"] = f"there is no {mutation.path} in the copy"
@@ -1012,6 +1184,10 @@ def floor_to(value: float, places: int) -> float:
 def build_report(records: list[dict], controls: list[dict], control_green: bool) -> dict:
     killed = [record for record in records if record["killed"]]
     survived = [record for record in records if not record["killed"]]
+    unexpected = [record for record in survived if "equivalent" not in record]
+    claimed_equivalent_but_killed = [
+        record for record in killed if "equivalent" in record
+    ]
     total = len(records)
     rate = floor_to(len(killed) / total, 4) if total else 0.0
     by_property: dict[str, dict] = {}
@@ -1047,10 +1223,14 @@ def build_report(records: list[dict], controls: list[dict], control_green: bool)
             "mutations": total,
             "killed": len(killed),
             "survived": len(survived),
+            "survived_and_not_equivalent": len(unexpected),
             "kill_rate": rate,
             "kill_rate_percent": floor_to(rate * 100, 2),
             "as_a_fraction": f"{len(killed)}/{total}",
         },
+        "equivalent_mutants_that_were_killed_after_all": [
+            record["id"] for record in claimed_equivalent_but_killed
+        ],
         "properties": by_property,
         "survivors": survived,
         "mutations": records,
@@ -1078,6 +1258,8 @@ def compare_with_committed(report: dict) -> int:
     now = {record["id"] for record in report["survivors"]}
     for mid in sorted(now - was):
         problems.append(f"{mid} survived and the committed report does not say it would")
+    for mid in sorted(was - now):
+        print(f"mutation gate: {mid} used to survive and is now killed. Update the report.")
     for problem in problems:
         print(f"mutation gate: {problem}", file=sys.stderr)
     return 1 if problems else 0
@@ -1085,7 +1267,9 @@ def compare_with_committed(report: dict) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--lane", choices=["py", "app"], help="run one lane only")
+    parser.add_argument(
+        "--lane", choices=["py", "app", "pyapp"], help="run one lane only"
+    )
     parser.add_argument("--only", action="append", default=[], help="run these ids only")
     parser.add_argument("--property", action="append", default=[], help="run these properties only")
     parser.add_argument("--list", action="store_true", help="print the mutations and stop")
@@ -1159,11 +1343,16 @@ def main(argv: list[str] | None = None) -> int:
     if report["survivors"]:
         print(f"\n{len(report['survivors'])} survivor(s):")
         for record in report["survivors"]:
-            print(f"  {record['id']}: {record['survived_because']}")
+            mark = "equivalent, " if "equivalent" in record else ""
+            print(f"  {record['id']}: {mark}{record['survived_because']}")
+            if "equivalent" in record:
+                print(f"            {record['equivalent']}")
+    for mid in report["equivalent_mutants_that_were_killed_after_all"]:
+        print(f"\n{mid} was called equivalent and a test caught it. Remove that claim.")
 
     if args.check:
         return compare_with_committed(report)
-    return 0 if not report["survivors"] else 1
+    return 0 if not report["totals"]["survived_and_not_equivalent"] else 1
 
 
 if __name__ == "__main__":

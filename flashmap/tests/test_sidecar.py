@@ -215,3 +215,63 @@ def test_the_written_file_is_readable_json(strobe, tmp_path):
     document = build_map(analyze_file(strobe, WCAG))
     path = write_map(document, tmp_path / "m.json")
     assert json.loads(path.read_text(encoding="utf-8")) == document
+
+
+# The segment list, which nothing used to check.
+#
+# Found by eval/fuzz_maps_test.py. A correctly signed map whose segments said a flash ended
+# before it started, or were written as strings, or were not a list at all, passed `flashmap
+# verify` cleanly. No player would have taken it: both the app's reader and the pipeline's
+# loader refuse those maps. The tool a studio runs on its own work was the only one calling
+# them fine, which is the wrong way round.
+
+
+def _signed(segments, keypair):
+    private_path, _ = keypair
+    document = {
+        "version": SIDECAR_VERSION,
+        "created_utc": "2026-09-01T00:00:00Z",
+        "source": {"path": "x.mp4", "sha256": "a" * 64, "duration_ms": 1000},
+        "profile": {"name": "wcag"},
+        "picture": {"width": 1920, "height": 1080},
+        "summary": {"hidden_ms": 0},
+        "segments": segments,
+    }
+    return sign_map(document, load_private_key(private_path))
+
+
+def _problems(segments, keypair):
+    _, public_path = keypair
+    return verify_map(_signed(segments, keypair), public_key_path=public_path).problems
+
+
+def test_a_sensible_segment_list_still_verifies(keypair):
+    """The negative control. Without this, refusing everything would pass the tests below."""
+    assert _problems([{"start_ms": 0.0, "end_ms": 500.0, "reason": "general"}], keypair) == []
+
+
+@pytest.mark.parametrize(
+    ("segments", "expected"),
+    [
+        ([{"start_ms": 900.0, "end_ms": 100.0}], "ends at 100"),
+        ([{"start_ms": 900.0, "end_ms": 900.0}], "ends at 900"),
+        ([{"start_ms": -5.0, "end_ms": 100.0}], "before the film does"),
+        ([{"start_ms": "0", "end_ms": "500"}], "not both numbers"),
+        ([{"start_ms": None, "end_ms": None}], "not both numbers"),
+        ([{"start_ms": True, "end_ms": 500.0}], "not both numbers"),
+        ([{"end_ms": 500.0}], "not both numbers"),
+        ([12345], "not an object"),
+        ("every frame", "not a list"),
+        ({"start_ms": 0.0, "end_ms": 1.0}, "not a list"),
+    ],
+)
+def test_a_segment_that_makes_no_sense_fails_the_map(segments, expected, keypair):
+    problems = _problems(segments, keypair)
+    assert problems, f"{segments!r} verified cleanly"
+    assert any(expected in problem for problem in problems), problems
+
+
+def test_a_map_full_of_bad_segments_reports_a_readable_number_of_them(keypair):
+    problems = _problems([{"start_ms": 9.0, "end_ms": 1.0}] * 40, keypair)
+    assert len(problems) == 9
+    assert problems[-1] == "and 32 more segment problem(s)"

@@ -1,0 +1,353 @@
+{
+  "statement": "Every case a flash map reader has to survive. Written by eval/fuzz_maps.py and replayed by eval/fuzz_maps_test.py on every CI run. Fail closed means the map is refused, or it is accepted and everything it flags is hidden.",
+  "public_key_base64": "F4FIUDEZiZ6H5px4rAufp0/ysSLj1s+C4TTHq1JAtQM=",
+  "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "now_ms": 1756684800000,
+  "cases": [
+    {
+      "name": "not_json_at_all",
+      "file": "not_json_at_all.txt",
+      "description": "plain text where a map should be"
+    },
+    {
+      "name": "empty_file",
+      "file": "empty_file.txt",
+      "description": "an empty file"
+    },
+    {
+      "name": "whitespace_only",
+      "file": "whitespace_only.txt",
+      "description": "nothing but spaces and newlines"
+    },
+    {
+      "name": "truncated_object",
+      "file": "truncated_object.json",
+      "description": "JSON cut off in the middle"
+    },
+    {
+      "name": "json_array",
+      "file": "json_array.json",
+      "description": "a JSON array rather than an object"
+    },
+    {
+      "name": "json_number",
+      "file": "json_number.txt",
+      "description": "a bare number"
+    },
+    {
+      "name": "json_null",
+      "file": "json_null.txt",
+      "description": "a bare null"
+    },
+    {
+      "name": "json_true",
+      "file": "json_true.txt",
+      "description": "a bare true"
+    },
+    {
+      "name": "duplicate_keys",
+      "file": "duplicate_keys.json",
+      "description": "the same key twice, which the canonical reader refuses"
+    },
+    {
+      "name": "nan_literal",
+      "file": "nan_literal.json",
+      "description": "NaN, which JSON does not have"
+    },
+    {
+      "name": "infinity_literal",
+      "file": "infinity_literal.json",
+      "description": "Infinity, which JSON does not have"
+    },
+    {
+      "name": "trailing_comma",
+      "file": "trailing_comma.json",
+      "description": "a trailing comma"
+    },
+    {
+      "name": "single_quotes",
+      "file": "single_quotes.json",
+      "description": "single quoted strings"
+    },
+    {
+      "name": "bom_prefixed",
+      "file": "bom_prefixed.txt",
+      "description": "a byte order mark in front of the object"
+    },
+    {
+      "name": "deeply_nested",
+      "file": "deeply_nested.json",
+      "description": "two hundred levels of nesting"
+    },
+    {
+      "name": "huge_string_key",
+      "file": "huge_string_key.json",
+      "description": "a key a hundred thousand characters long"
+    },
+    {
+      "name": "control_characters",
+      "file": "control_characters.json",
+      "description": "a raw control character inside a string"
+    },
+    {
+      "name": "lone_surrogate",
+      "file": "lone_surrogate.json",
+      "description": "an unpaired surrogate escape"
+    },
+    {
+      "name": "version_zero",
+      "file": "version_zero.json",
+      "description": "version 0"
+    },
+    {
+      "name": "version_two",
+      "file": "version_two.json",
+      "description": "a version newer than this build reads"
+    },
+    {
+      "name": "version_string",
+      "file": "version_string.json",
+      "description": "the version as a string"
+    },
+    {
+      "name": "version_missing",
+      "file": "version_missing.json",
+      "description": "no version at all"
+    },
+    {
+      "name": "version_float",
+      "file": "version_float.json",
+      "description": "version 1.5"
+    },
+    {
+      "name": "version_huge",
+      "file": "version_huge.json",
+      "description": "a version larger than a double can hold exactly"
+    },
+    {
+      "name": "segment_negative_start",
+      "file": "segment_negative_start.json",
+      "description": "a segment that starts before the film does"
+    },
+    {
+      "name": "segment_reversed",
+      "file": "segment_reversed.json",
+      "description": "a segment that ends before it starts"
+    },
+    {
+      "name": "segment_zero_length",
+      "file": "segment_zero_length.json",
+      "description": "a segment of no length at all"
+    },
+    {
+      "name": "segment_huge_interval",
+      "file": "segment_huge_interval.json",
+      "description": "a segment a thousand years long"
+    },
+    {
+      "name": "segment_start_beyond_duration",
+      "file": "segment_start_beyond_duration.json",
+      "description": "a segment that starts after the film ends"
+    },
+    {
+      "name": "segment_times_as_strings",
+      "file": "segment_times_as_strings.json",
+      "description": "times written as strings"
+    },
+    {
+      "name": "segment_times_null",
+      "file": "segment_times_null.json",
+      "description": "times that are null"
+    },
+    {
+      "name": "segment_not_an_object",
+      "file": "segment_not_an_object.json",
+      "description": "a segment that is a number"
+    },
+    {
+      "name": "segments_not_a_list",
+      "file": "segments_not_a_list.json",
+      "description": "segments given as an object"
+    },
+    {
+      "name": "segments_missing",
+      "file": "segments_missing.json",
+      "description": "no segment list at all"
+    },
+    {
+      "name": "segments_empty",
+      "file": "segments_empty.json",
+      "description": "an empty segment list, which is a clean title"
+    },
+    {
+      "name": "segments_overlapping",
+      "file": "segments_overlapping.json",
+      "description": "two segments that overlap"
+    },
+    {
+      "name": "segments_identical",
+      "file": "segments_identical.json",
+      "description": "the same segment twice"
+    },
+    {
+      "name": "segments_out_of_order",
+      "file": "segments_out_of_order.json",
+      "description": "segments listed back to front"
+    },
+    {
+      "name": "segments_contained",
+      "file": "segments_contained.json",
+      "description": "one segment entirely inside another"
+    },
+    {
+      "name": "segment_unknown_reason",
+      "file": "segment_unknown_reason.json",
+      "description": "a reason this build has never seen"
+    },
+    {
+      "name": "segment_reason_missing",
+      "file": "segment_reason_missing.json",
+      "description": "no reason at all"
+    },
+    {
+      "name": "segment_reason_number",
+      "file": "segment_reason_number.json",
+      "description": "a reason that is a number"
+    },
+    {
+      "name": "segments_two_thousand",
+      "file": "segments_two_thousand.json",
+      "description": "two thousand segments, far more than any real title"
+    },
+    {
+      "name": "segment_times_not_finite",
+      "file": "segment_times_not_finite.json",
+      "description": "times written as 1e400, which reads back as infinity"
+    },
+    {
+      "name": "source_missing",
+      "file": "source_missing.json",
+      "description": "no source block"
+    },
+    {
+      "name": "source_not_an_object",
+      "file": "source_not_an_object.json",
+      "description": "a source block that is a string"
+    },
+    {
+      "name": "source_sha_missing",
+      "file": "source_sha_missing.json",
+      "description": "a source block with no hash"
+    },
+    {
+      "name": "source_sha_wrong",
+      "file": "source_sha_wrong.json",
+      "description": "a hash for a different file"
+    },
+    {
+      "name": "source_sha_uppercase",
+      "file": "source_sha_uppercase.json",
+      "description": "the right hash in capitals"
+    },
+    {
+      "name": "source_sha_short",
+      "file": "source_sha_short.json",
+      "description": "a hash of the wrong length"
+    },
+    {
+      "name": "created_missing",
+      "file": "created_missing.json",
+      "description": "no created_utc"
+    },
+    {
+      "name": "created_local_time",
+      "file": "created_local_time.json",
+      "description": "a local time rather than UTC"
+    },
+    {
+      "name": "created_date_only",
+      "file": "created_date_only.json",
+      "description": "a date with no time"
+    },
+    {
+      "name": "created_far_future",
+      "file": "created_far_future.json",
+      "description": "a map made in the year 9999"
+    },
+    {
+      "name": "created_far_past",
+      "file": "created_far_past.json",
+      "description": "a map made in 1970"
+    },
+    {
+      "name": "created_nonsense_month",
+      "file": "created_nonsense_month.json",
+      "description": "month 13"
+    },
+    {
+      "name": "unsigned",
+      "file": "unsigned.json",
+      "description": "no signature block at all"
+    },
+    {
+      "name": "signature_empty_object",
+      "file": "signature_empty_object.json",
+      "description": "an empty signature block"
+    },
+    {
+      "name": "signature_wrong_algorithm",
+      "file": "signature_wrong_algorithm.json",
+      "description": "a signature that claims another algorithm"
+    },
+    {
+      "name": "signature_not_base64",
+      "file": "signature_not_base64.json",
+      "description": "a signature value that is not base64"
+    },
+    {
+      "name": "signature_truncated",
+      "file": "signature_truncated.json",
+      "description": "a signature with its last character removed"
+    },
+    {
+      "name": "signature_over_a_different_body",
+      "file": "signature_over_a_different_body.json",
+      "description": "a real signature over a different map"
+    },
+    {
+      "name": "signature_is_a_string",
+      "file": "signature_is_a_string.json",
+      "description": "a signature block that is a string"
+    },
+    {
+      "name": "signature_public_key_swapped",
+      "file": "signature_public_key_swapped.json",
+      "description": "signed by us, but claiming another key"
+    },
+    {
+      "name": "profile_missing",
+      "file": "profile_missing.json",
+      "description": "no profile block"
+    },
+    {
+      "name": "profile_windows_missing",
+      "file": "profile_windows_missing.json",
+      "description": "a profile with no area windows"
+    },
+    {
+      "name": "profile_window_width_string",
+      "file": "profile_window_width_string.json",
+      "description": "a window width written as a string"
+    },
+    {
+      "name": "picture_width_zero",
+      "file": "picture_width_zero.json",
+      "description": "a picture zero pixels wide"
+    },
+    {
+      "name": "picture_missing",
+      "file": "picture_missing.json",
+      "description": "no picture block"
+    }
+  ]
+}

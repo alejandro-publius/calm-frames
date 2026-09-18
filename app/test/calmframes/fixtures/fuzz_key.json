@@ -1,0 +1,6 @@
+{
+  "note": "The public half of the key eval/fuzz_maps.py derives from a fixed phrase. It signs test maps and nothing else. There is no private key in this repository.",
+  "public_key_base64": "F4FIUDEZiZ6H5px4rAufp0/ysSLj1s+C4TTHq1JAtQM=",
+  "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "created_utc": "2026-09-01T00:00:00Z"
+}

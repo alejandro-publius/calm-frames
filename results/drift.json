@@ -1,0 +1,177 @@
+{
+  "statement": "Two hours of synthetic playback against the app's real cover scheduler, with a player whose media clock runs 0.5 percent faster than the app assumes. The position report cadences are the ones results/vvd_timeupdate_stats.json measured on the virtual device. Nothing here was measured on hardware, and it is not a GATE 1 number.",
+  "tool": "eval/property_drift_test.py",
+  "generated_utc": "2026-09-18T04:11:29Z",
+  "timeline": {
+    "length_ms": 7200000,
+    "tick_ms": 50,
+    "guard_band_ms": 500,
+    "drift_factor": 1.005,
+    "flagged_spans": 23,
+    "flagged_span_ms": 3000
+  },
+  "cadences_from": "results/vvd_timeupdate_stats.json",
+  "arms": {
+    "measured_cadence": {
+      "name": "measured_cadence",
+      "report_every_ms": 426.0,
+      "ticks": 144001,
+      "ticks_inside_a_flagged_span": 1373,
+      "position_reports": 16902,
+      "uncovered_moments": 0,
+      "first_uncovered": [],
+      "worst_estimate_error_ms": -2.12,
+      "worst_estimate_error_inside_a_flagged_span_ms": -2.12,
+      "correction_ms": {
+        "count": 16902,
+        "min": 2.13,
+        "median": 2.13,
+        "mean": 2.13,
+        "max": 2.13,
+        "total": 35999.13
+      },
+      "first_six_resyncs": [
+        {
+          "wallMs": 0,
+          "reportedMs": 0,
+          "estimateMs": 0,
+          "correctionMs": 0
+        },
+        {
+          "wallMs": 426,
+          "reportedMs": 428.12999999999994,
+          "estimateMs": 426,
+          "correctionMs": 2.1299999999999386
+        },
+        {
+          "wallMs": 852,
+          "reportedMs": 856.2599999999999,
+          "estimateMs": 854.1299999999999,
+          "correctionMs": 2.1299999999999955
+        },
+        {
+          "wallMs": 1278,
+          "reportedMs": 1284.3899999999999,
+          "estimateMs": 1282.2599999999998,
+          "correctionMs": 2.130000000000109
+        },
+        {
+          "wallMs": 1704,
+          "reportedMs": 1712.5199999999998,
+          "estimateMs": 1710.3899999999999,
+          "correctionMs": 2.1299999999998818
+        },
+        {
+          "wallMs": 2130,
+          "reportedMs": 2140.6499999999996,
+          "estimateMs": 2138.5199999999995,
+          "correctionMs": 2.130000000000109
+        }
+      ]
+    },
+    "worst_measured_gap": {
+      "name": "worst_measured_gap",
+      "report_every_ms": 5219.0,
+      "ticks": 144001,
+      "ticks_inside_a_flagged_span": 1373,
+      "position_reports": 1380,
+      "uncovered_moments": 0,
+      "first_uncovered": [],
+      "worst_estimate_error_ms": -26.09,
+      "worst_estimate_error_inside_a_flagged_span_ms": -26.09,
+      "correction_ms": {
+        "count": 1380,
+        "min": 26.095,
+        "median": 26.095,
+        "mean": 26.095,
+        "max": 26.095,
+        "total": 35985.005
+      },
+      "first_six_resyncs": [
+        {
+          "wallMs": 0,
+          "reportedMs": 0,
+          "estimateMs": 0,
+          "correctionMs": 0
+        },
+        {
+          "wallMs": 5219,
+          "reportedMs": 5245.094999999999,
+          "estimateMs": 5219,
+          "correctionMs": 26.094999999999345
+        },
+        {
+          "wallMs": 10438,
+          "reportedMs": 10490.189999999999,
+          "estimateMs": 10464.095,
+          "correctionMs": 26.094999999999345
+        },
+        {
+          "wallMs": 15657,
+          "reportedMs": 15735.284999999998,
+          "estimateMs": 15709.189999999999,
+          "correctionMs": 26.094999999999345
+        },
+        {
+          "wallMs": 20876,
+          "reportedMs": 20980.379999999997,
+          "estimateMs": 20954.284999999996,
+          "correctionMs": 26.095000000001164
+        },
+        {
+          "wallMs": 26095,
+          "reportedMs": 26225.474999999995,
+          "estimateMs": 26199.379999999997,
+          "correctionMs": 26.094999999997526
+        }
+      ]
+    },
+    "no_resync": {
+      "name": "no_resync",
+      "report_every_ms": 72000000,
+      "ticks": 144001,
+      "ticks_inside_a_flagged_span": 1373,
+      "position_reports": 1,
+      "uncovered_moments": 50,
+      "first_uncovered": [
+        {
+          "wallMs": 298550,
+          "realMs": 300042.74999999994,
+          "estimateMs": 298550,
+          "errorMs": -1492.7499999999418
+        },
+        {
+          "wallMs": 298600,
+          "realMs": 300092.99999999994,
+          "estimateMs": 298600,
+          "errorMs": -1492.9999999999418
+        },
+        {
+          "wallMs": 298650,
+          "realMs": 300143.24999999994,
+          "estimateMs": 298650,
+          "errorMs": -1493.2499999999418
+        }
+      ],
+      "worst_estimate_error_ms": -36000.0,
+      "worst_estimate_error_inside_a_flagged_span_ms": -34343.25,
+      "correction_ms": {
+        "count": 1,
+        "min": 0.0,
+        "median": 0.0,
+        "mean": 0.0,
+        "max": 0.0,
+        "total": 0.0
+      },
+      "first_six_resyncs": [
+        {
+          "wallMs": 0,
+          "reportedMs": 0,
+          "estimateMs": 0,
+          "correctionMs": 0
+        }
+      ]
+    }
+  },
+  "reading": "With re-sync the correction each report applies is small and the estimate never falls behind the player by as much as the guard band, so no flagged frame is ever showing. Without it the estimate ends the film about half a percent of two hours behind, which is why the schedule re-anchors on every report instead of trusting its own clock."
+}

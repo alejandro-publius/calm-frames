@@ -1,0 +1,1321 @@
+{
+  "statement": "Every case in eval/fuzz_corpus, through each of the three readers that open a flash map. Fail closed means the map is refused and the picture stays hidden, or the map is accepted and every span it flags is hidden. A reader that throws is a finding, because it has said nothing about whether the picture is safe.",
+  "tool": "eval/fuzz_maps_test.py",
+  "generated_utc": "2026-09-18T04:11:48Z",
+  "corpus": "eval/fuzz_corpus",
+  "totals": {
+    "cases": 69,
+    "readers": 3,
+    "checks": 207,
+    "findings": 0
+  },
+  "by_reader": {
+    "flashmap": {
+      "cases": 69,
+      "rejected": 46,
+      "accepted": 23,
+      "findings": 0
+    },
+    "pipeline": {
+      "cases": 69,
+      "rejected": 27,
+      "accepted": 42,
+      "findings": 0
+    },
+    "app": {
+      "cases": 69,
+      "rejected": 50,
+      "accepted": 19,
+      "findings": 0
+    }
+  },
+  "findings": [],
+  "records": [
+    {
+      "case": "not_json_at_all",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/not_json_at_all.txt could not be read as JSON: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "case": "not_json_at_all",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map file is not valid JSON: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/not_json_at_all.txt: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "case": "not_json_at_all",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "empty_file",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/empty_file.txt could not be read as JSON: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "case": "empty_file",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map file is not valid JSON: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/empty_file.txt: Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "case": "empty_file",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "missing"
+    },
+    {
+      "case": "whitespace_only",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/whitespace_only.txt could not be read as JSON: Expecting value: line 3 column 1 (char 8)"
+    },
+    {
+      "case": "whitespace_only",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map file is not valid JSON: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/whitespace_only.txt: Expecting value: line 3 column 1 (char 8)"
+    },
+    {
+      "case": "whitespace_only",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "missing"
+    },
+    {
+      "case": "truncated_object",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/truncated_object.json could not be read as JSON: Unterminated string starting at: line 1 column 16 (char 15)"
+    },
+    {
+      "case": "truncated_object",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map file is not valid JSON: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/truncated_object.json: Unterminated string starting at: line 1 column 16 (char 15)"
+    },
+    {
+      "case": "truncated_object",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "json_array",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/json_array.json is not a JSON object"
+    },
+    {
+      "case": "json_array",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map is not a JSON object: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/json_array.json"
+    },
+    {
+      "case": "json_array",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "json_number",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/json_number.txt is not a JSON object"
+    },
+    {
+      "case": "json_number",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map is not a JSON object: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/json_number.txt"
+    },
+    {
+      "case": "json_number",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "json_null",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/json_null.txt is not a JSON object"
+    },
+    {
+      "case": "json_null",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map is not a JSON object: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/json_null.txt"
+    },
+    {
+      "case": "json_null",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "json_true",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/json_true.txt is not a JSON object"
+    },
+    {
+      "case": "json_true",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map is not a JSON object: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/json_true.txt"
+    },
+    {
+      "case": "json_true",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "duplicate_keys",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map version is 2, this build reads version 1; map has no 'source' section; map has no 'segments' section; map has no 'profile' section; map has no 'picture' section; map has no 'summary' section; map "
+    },
+    {
+      "case": "duplicate_keys",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map version 2 is not one this reader understands ((1, '1')): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/duplicate_keys.json"
+    },
+    {
+      "case": "duplicate_keys",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "nan_literal",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map version is nan, this build reads version 1; map has no 'source' section; map has no 'segments' section; map has no 'profile' section; map has no 'picture' section; map has no 'summary' section; ma"
+    },
+    {
+      "case": "nan_literal",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map version nan is not one this reader understands ((1, '1')): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/nan_literal.json"
+    },
+    {
+      "case": "nan_literal",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "infinity_literal",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map version is inf, this build reads version 1; map has no 'source' section; map has no 'segments' section; map has no 'profile' section; map has no 'picture' section; map has no 'summary' section; ma"
+    },
+    {
+      "case": "infinity_literal",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map version inf is not one this reader understands ((1, '1')): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/infinity_literal.json"
+    },
+    {
+      "case": "infinity_literal",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "trailing_comma",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/trailing_comma.json could not be read as JSON: Expecting property name enclosed in double quotes: line 1 column 15 (char 14)"
+    },
+    {
+      "case": "trailing_comma",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map file is not valid JSON: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/trailing_comma.json: Expecting property name enclosed in double quotes: line 1 column 15 (char 14)"
+    },
+    {
+      "case": "trailing_comma",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "single_quotes",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/single_quotes.json could not be read as JSON: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+    },
+    {
+      "case": "single_quotes",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map file is not valid JSON: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/single_quotes.json: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+    },
+    {
+      "case": "single_quotes",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "bom_prefixed",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/bom_prefixed.txt could not be read as JSON: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)"
+    },
+    {
+      "case": "bom_prefixed",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map file is not valid JSON: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/bom_prefixed.txt: Unexpected UTF-8 BOM (decode using utf-8-sig): line 1 column 1 (char 0)"
+    },
+    {
+      "case": "bom_prefixed",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "deeply_nested",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/deeply_nested.json is not a JSON object"
+    },
+    {
+      "case": "deeply_nested",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map is not a JSON object: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/deeply_nested.json"
+    },
+    {
+      "case": "deeply_nested",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "huge_string_key",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map has no 'source' section; map has no 'segments' section; map has no 'profile' section; map has no 'picture' section; map has no 'summary' section; map has no usable source.sha256; map is not signed"
+    },
+    {
+      "case": "huge_string_key",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map has no segment list (looked for segments, flashes, intervals, hits): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/huge_string_key.json"
+    },
+    {
+      "case": "huge_string_key",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unsigned"
+    },
+    {
+      "case": "control_characters",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "/var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/control_characters.json could not be read as JSON: Invalid control character at: line 1 column 51 (char 50)"
+    },
+    {
+      "case": "control_characters",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map file is not valid JSON: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/control_characters.json: Invalid control character at: line 1 column 51 (char 50)"
+    },
+    {
+      "case": "control_characters",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "lone_surrogate",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map has no 'source' section; map has no 'segments' section; map has no 'profile' section; map has no 'picture' section; map has no 'summary' section; map has no usable source.sha256; map is not signed"
+    },
+    {
+      "case": "lone_surrogate",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map has no segment list (looked for segments, flashes, intervals, hits): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/lone_surrogate.json"
+    },
+    {
+      "case": "lone_surrogate",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unsigned"
+    },
+    {
+      "case": "version_zero",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map version is 0, this build reads version 1"
+    },
+    {
+      "case": "version_zero",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map version 0 is not one this reader understands ((1, '1')): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/version_zero.json"
+    },
+    {
+      "case": "version_zero",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "wrong-version"
+    },
+    {
+      "case": "version_two",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map version is 2, this build reads version 1"
+    },
+    {
+      "case": "version_two",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map version 2 is not one this reader understands ((1, '1')): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/version_two.json"
+    },
+    {
+      "case": "version_two",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "wrong-version"
+    },
+    {
+      "case": "version_string",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map version is '1', this build reads version 1"
+    },
+    {
+      "case": "version_string",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "version_string",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "wrong-version"
+    },
+    {
+      "case": "version_missing",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map version is None, this build reads version 1"
+    },
+    {
+      "case": "version_missing",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "version_missing",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "wrong-version"
+    },
+    {
+      "case": "version_float",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map version is 1.5, this build reads version 1"
+    },
+    {
+      "case": "version_float",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map version 1.5 is not one this reader understands ((1, '1')): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/version_float.json"
+    },
+    {
+      "case": "version_float",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "wrong-version"
+    },
+    {
+      "case": "version_huge",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map version is 1000000000000000000000000000000, this build reads version 1"
+    },
+    {
+      "case": "version_huge",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map version 1000000000000000000000000000000 is not one this reader understands ((1, '1')): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/version_huge.json"
+    },
+    {
+      "case": "version_huge",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "wrong-version"
+    },
+    {
+      "case": "segment_negative_start",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "segment 0 starts at -5000, before the film does"
+    },
+    {
+      "case": "segment_negative_start",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1,
+      "notes": [
+        "segment starting at -5000.0 was clamped to the start of the film"
+      ]
+    },
+    {
+      "case": "segment_negative_start",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "segment_reversed",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "segment 0 ends at 1000 and starts at 9000"
+    },
+    {
+      "case": "segment_reversed",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "segment 0 ends before it starts: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/segment_reversed.json"
+    },
+    {
+      "case": "segment_reversed",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "segment_zero_length",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "segment 0 ends at 9000 and starts at 9000"
+    },
+    {
+      "case": "segment_zero_length",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1,
+      "notes": [
+        "segment of no length at 9000.0 was dropped"
+      ]
+    },
+    {
+      "case": "segment_zero_length",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "segment_huge_interval",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segment_huge_interval",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "segment_huge_interval",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "red"
+      ]
+    },
+    {
+      "case": "segment_start_beyond_duration",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segment_start_beyond_duration",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "segment_start_beyond_duration",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "red"
+      ]
+    },
+    {
+      "case": "segment_times_as_strings",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "segment 0 has times '10000' and '12000', which are not both numbers"
+    },
+    {
+      "case": "segment_times_as_strings",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "segment_times_as_strings",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "segment_times_null",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "segment 0 has times None and None, which are not both numbers"
+    },
+    {
+      "case": "segment_times_null",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "segment 0 has no start or end: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/segment_times_null.json"
+    },
+    {
+      "case": "segment_times_null",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "segment_not_an_object",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "segment 0 is not an object"
+    },
+    {
+      "case": "segment_not_an_object",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "segment 0 is not an object: /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/segment_not_an_object.json"
+    },
+    {
+      "case": "segment_not_an_object",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "segments_not_a_list",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "segments is dict, not a list"
+    },
+    {
+      "case": "segments_not_a_list",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map has no segment list (looked for segments, flashes, intervals, hits): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/segments_not_a_list.json"
+    },
+    {
+      "case": "segments_not_a_list",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "segments_missing",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map has no 'segments' section"
+    },
+    {
+      "case": "segments_missing",
+      "reader": "pipeline",
+      "verdict": "rejected",
+      "reason": "map has no segment list (looked for segments, flashes, intervals, hits): /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpi6r4kx_m/segments_missing.json"
+    },
+    {
+      "case": "segments_missing",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "segments_empty",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segments_empty",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 0
+    },
+    {
+      "case": "segments_empty",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 0,
+      "reasons": []
+    },
+    {
+      "case": "segments_overlapping",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segments_overlapping",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 2
+    },
+    {
+      "case": "segments_overlapping",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 2,
+      "reasons": [
+        "general",
+        "red"
+      ]
+    },
+    {
+      "case": "segments_identical",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segments_identical",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 2
+    },
+    {
+      "case": "segments_identical",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 2,
+      "reasons": [
+        "general"
+      ]
+    },
+    {
+      "case": "segments_out_of_order",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segments_out_of_order",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 2
+    },
+    {
+      "case": "segments_out_of_order",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 2,
+      "reasons": [
+        "general",
+        "red"
+      ]
+    },
+    {
+      "case": "segments_contained",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segments_contained",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 2
+    },
+    {
+      "case": "segments_contained",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 2,
+      "reasons": [
+        "general",
+        "red"
+      ]
+    },
+    {
+      "case": "segment_unknown_reason",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segment_unknown_reason",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "segment_unknown_reason",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "red"
+      ]
+    },
+    {
+      "case": "segment_reason_missing",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segment_reason_missing",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "segment_reason_missing",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "red"
+      ]
+    },
+    {
+      "case": "segment_reason_number",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segment_reason_number",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "segment_reason_number",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "red"
+      ]
+    },
+    {
+      "case": "segments_two_thousand",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "segments_two_thousand",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 2000
+    },
+    {
+      "case": "segments_two_thousand",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 2000,
+      "reasons": [
+        "general"
+      ]
+    },
+    {
+      "case": "segment_times_not_finite",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map has no 'source' section; map has no 'profile' section; map has no 'picture' section; map has no 'summary' section; segment 0 ends at inf and starts at inf; map has no usable source.sha256; map is "
+    },
+    {
+      "case": "segment_times_not_finite",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1,
+      "notes": [
+        "segment of no length at inf was dropped"
+      ]
+    },
+    {
+      "case": "segment_times_not_finite",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unsigned"
+    },
+    {
+      "case": "source_missing",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map has no 'source' section; map has no usable source.sha256"
+    },
+    {
+      "case": "source_missing",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "source_missing",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "source_not_an_object",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map has no usable source.sha256"
+    },
+    {
+      "case": "source_not_an_object",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "source_not_an_object",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "source_sha_missing",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map has no usable source.sha256"
+    },
+    {
+      "case": "source_sha_missing",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "source_sha_missing",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "source_sha_wrong",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "source_sha_wrong",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "source_sha_wrong",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "wrong-file"
+    },
+    {
+      "case": "source_sha_uppercase",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "source_sha_uppercase",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "source_sha_uppercase",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "general"
+      ]
+    },
+    {
+      "case": "source_sha_short",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map has no usable source.sha256"
+    },
+    {
+      "case": "source_sha_short",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "source_sha_short",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "wrong-file"
+    },
+    {
+      "case": "created_missing",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "created_missing",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "created_missing",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "created_local_time",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "created_local_time",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "created_local_time",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "created_date_only",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "created_date_only",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "created_date_only",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unparseable"
+    },
+    {
+      "case": "created_far_future",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "created_far_future",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "created_far_future",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "general"
+      ]
+    },
+    {
+      "case": "created_far_past",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "created_far_past",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "created_far_past",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "stale"
+    },
+    {
+      "case": "created_nonsense_month",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "created_nonsense_month",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "created_nonsense_month",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "general"
+      ]
+    },
+    {
+      "case": "unsigned",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map is not signed"
+    },
+    {
+      "case": "unsigned",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "unsigned",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unsigned"
+    },
+    {
+      "case": "signature_empty_object",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "unknown signature algorithm None"
+    },
+    {
+      "case": "signature_empty_object",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "signature_empty_object",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unsigned"
+    },
+    {
+      "case": "signature_wrong_algorithm",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "unknown signature algorithm 'rsa'"
+    },
+    {
+      "case": "signature_wrong_algorithm",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "signature_wrong_algorithm",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unsigned"
+    },
+    {
+      "case": "signature_not_base64",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "signature could not be checked: Only base64 data is allowed"
+    },
+    {
+      "case": "signature_not_base64",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "signature_not_base64",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unsigned"
+    },
+    {
+      "case": "signature_truncated",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "signature does not match the map body"
+    },
+    {
+      "case": "signature_truncated",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "signature_truncated",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "bad-signature"
+    },
+    {
+      "case": "signature_over_a_different_body",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "signature payload_sha256 does not match the map body; signature does not match the map body"
+    },
+    {
+      "case": "signature_over_a_different_body",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "signature_over_a_different_body",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "bad-signature"
+    },
+    {
+      "case": "signature_is_a_string",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "signature is not an object"
+    },
+    {
+      "case": "signature_is_a_string",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "signature_is_a_string",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unsigned"
+    },
+    {
+      "case": "signature_public_key_swapped",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "signature_public_key_swapped",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "signature_public_key_swapped",
+      "reader": "app",
+      "verdict": "rejected",
+      "reason": "unknown-key"
+    },
+    {
+      "case": "profile_missing",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map has no 'profile' section"
+    },
+    {
+      "case": "profile_missing",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "profile_missing",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "general"
+      ]
+    },
+    {
+      "case": "profile_windows_missing",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "profile_windows_missing",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "profile_windows_missing",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "general"
+      ]
+    },
+    {
+      "case": "profile_window_width_string",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "profile_window_width_string",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "profile_window_width_string",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "general"
+      ]
+    },
+    {
+      "case": "picture_width_zero",
+      "reader": "flashmap",
+      "verdict": "accepted"
+    },
+    {
+      "case": "picture_width_zero",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "picture_width_zero",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "general"
+      ]
+    },
+    {
+      "case": "picture_missing",
+      "reader": "flashmap",
+      "verdict": "rejected",
+      "reason": "map has no 'picture' section"
+    },
+    {
+      "case": "picture_missing",
+      "reader": "pipeline",
+      "verdict": "accepted",
+      "segments": 1
+    },
+    {
+      "case": "picture_missing",
+      "reader": "app",
+      "verdict": "accepted",
+      "segments": 1,
+      "reasons": [
+        "general"
+      ]
+    }
+  ]
+}

@@ -20,6 +20,18 @@
  * The list itself is generated. `credits.ts` and the repository's NOTICE file
  * are both written from the ledger by eval/attribution.py, and CI fails if
  * either drifts, so what a parent reads here is what the repository says.
+ *
+ * NOT WIRED IN YET. Nothing navigates here, because the screens around it
+ * belong to another lane. It needs one entry point, and the parent area is the
+ * right place for it rather than kid mode:
+ *
+ *     <CreditsScreen onBack={() => setScreen('parent-area')} />
+ *
+ * It takes no other props, it holds no state beyond which control has focus,
+ * and its frame is already in ALL_UI_FRAMES, so the app's own flashmap run
+ * covers it as soon as it is reachable. Until then the attribution lives in
+ * NOTICE, which ships with the source, and a CC BY clip is not yet credited
+ * where somebody watching can see it.
  */
 
 import React from 'react';
