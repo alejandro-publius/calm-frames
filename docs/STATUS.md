@@ -50,7 +50,8 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | **Same session** | Film the layering test, then the 240 fps marker run. | **This is the only thing that can produce a GATE 1 number.** Phone at 240 fps, exposure locked, TV in game mode with motion smoothing off. `make stick-day` prints what to film and where the files go. |
 | **Before then** | Confirm your phone films 240 fps and the TV has a game mode. | Assumed, never confirmed. If either is wrong, GATE 1 needs a different plan and it is better to know now. |
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
-| **Next session, before anything else** | Decide whether the three unreachable features get wired or get cut. Per-profile logs and the household hide log both need one shared store between the player screen and the kid mode route. The registry needs one `lookupMap` call in the shelf. Neither is large; both were left because the lanes that built them did not own the file. | They are built and tested and a judge cannot see any of them. Section 4c has the detail. |
+| **Next session, first thing** | Fix the pattern crop defect in section 4c: a full-frame six-pair pattern with a near-black edge bar escapes the rule, because the picture detector crops that bar as pillarbox and the count falls to five pairs. A hazard reaches a child. `docs/VERIFY_PASS_2.md` reproduces it. | It is the only thing on this page where something flashing or striped gets through. |
+| **Next session, after that** | Decide whether the three unreachable features get wired or get cut. Per-profile logs and the household hide log both need one shared store between the player screen and the kid mode route. The registry needs one `lookupMap` call in the shelf. Neither is large; both were left because the lanes that built them did not own the file. | They are built and tested and a judge cannot see any of them. Section 4c has the detail. |
 | **Any evening, about an hour** | Label the 40 blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all 40. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. |
 | **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add that line to this file. It has to start a line of its own: no bullet, no table cell, no backticks. The exact wording is in the refusal `make deploy` prints. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Seventeen tests now cover both locks, run against a copy of the script so this file is never touched. Nothing has touched AWS. |
 | **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
@@ -156,6 +157,36 @@ check does not cover the stripe hazard, because a timeline lane padded into the
 analysis frame fills about a fourteenth of it, under the pattern rule's area
 limit. What keeps that picture safe is the cap of five bars per lane, taken from
 the same BT.1702-3 criterion rather than chosen.
+
+### One defect in the pattern rule, found by the second verifier pass
+
+**A full-frame pattern at the count boundary can escape the rule entirely.** Six
+pairs of black to peak white stripes, filling the frame, PASSES the broadcast
+profile: exit 0, `pattern_pass` true, and the hide plan and verify never see a
+segment. The cause is the picture detector, not the pattern code. It reads the
+near-black outermost bar as pillarbox and crops it, so the map records
+`pillarbox: true, width 175 of 192`, eleven bars remain, and five pairs is not
+"more than five". Seven pairs with a black edge bar is flagged but reports
+`stripe_pairs 6`.
+
+Any pattern whose edge bar is near black loses a pair to the crop. That is a
+hazard reaching a child, so it is the first thing to fix in phase 8, ahead of
+wiring anything up. Both files are named in `docs/VERIFY_PASS_2.md` with the
+commands that reproduce it.
+
+**A second thing to tighten while in there.** A pattern segment is covered opaque
+today, which is right, but only because `normalise_reason('pattern')` falls
+through to `red` on an unknown-reason default in both the pipeline adapter and
+`flashMap.ts`. Nothing names patterns. Adding `pattern` to `_GENERAL_WORDS` would
+make every pattern dimmable and every test would stay green. It also makes
+`has_red` true for a title whose red rule never fired, which is a wrong word in
+the record. The opacity of a pattern cover should be a rule that says so.
+
+The rest of the pattern rule holds, checked end to end on the real pipeline: a
+pattern gets the identical cover interval a flash gets, `pipeline.verify` passes
+with the cover proven drawn, wcag and extra-cautious never report a pattern, and
+the smooth-flow exemption failed safe on every ambiguous case put to it and logged
+every exemption it did apply.
 
 **Still open, in rough order of what would help most:**
 
