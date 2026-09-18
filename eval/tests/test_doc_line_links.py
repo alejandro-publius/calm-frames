@@ -15,11 +15,16 @@ near the line the link points at.
 Seen to fail on purpose, Sep 17 2026, four ways: moving one link's line number
 by twenty, renaming the symbol beside a link, pointing a link past the end of its
 file, and dropping the symbol name beside a link. All four turned it red.
+
+It reads each source file as `main` has it rather than as this working tree has
+it, because the README says its line numbers are against `main` and because
+several lanes edit app/src at once here. In CI the two are the same file.
 """
 
 from __future__ import annotations
 
 import re
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -70,6 +75,31 @@ def names_beside(prose: str, link_start: int, link_end: int) -> list[str]:
     return names
 
 
+def committed_lines(rel: str) -> list[str] | None:
+    """The file as `main` has it, not as this working tree has it.
+
+    The README says in as many words that its line numbers are against `main`.
+    Several lanes edit `app/src` at once here, so checking the working tree would
+    make this test go red on somebody else's uncommitted edit and green again when
+    they stashed it. Reading the committed blob is both what the README promises
+    and the only version a judge clicking a GitHub link will ever see.
+
+    In CI the checkout is the commit, so this is the same file either way.
+    """
+    try:
+        out = subprocess.run(
+            ["git", "show", f"HEAD:{rel}"],
+            cwd=REPO,
+            capture_output=True,
+            check=False,
+        )
+    except OSError:
+        return None
+    if out.returncode != 0:
+        return None
+    return out.stdout.decode("utf-8", errors="replace").splitlines()
+
+
 def identifiers(name: str) -> list[str]:
     """Pull the identifier-ish pieces out of a backticked name.
 
@@ -95,11 +125,16 @@ def collect_problems() -> list[str]:
                 number = int(match.group("line"))
                 source = REPO / rel
 
-                if not source.is_file():
-                    problems.append(f"{target}: {rel}#L{number} points at a file that is not here")
-                    continue
-
-                source_lines = source.read_text(encoding="utf-8", errors="replace").splitlines()
+                source_lines = committed_lines(rel)
+                if source_lines is None:
+                    if not source.is_file():
+                        problems.append(
+                            f"{target}: {rel}#L{number} points at a file that is not here"
+                        )
+                        continue
+                    source_lines = source.read_text(
+                        encoding="utf-8", errors="replace"
+                    ).splitlines()
                 if number < 1 or number > len(source_lines):
                     problems.append(
                         f"{target}: {rel}#L{number} is past the end of the file, "

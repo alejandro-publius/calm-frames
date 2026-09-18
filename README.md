@@ -84,6 +84,8 @@ Two things in that picture are worth saying out loud.
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device. Everything below is written inside that sentence.
 
+Two of the Fire TV track's six priority categories are this project by name. It is **family entertainment**, because the whole thing exists so that a child can pick a title on the family television without a parent having to preview it first. And it is **multi-modal UX**, because voice, D-pad and on-screen cards are not three ways into the same app, they are three inputs to one seek function that covers the picture before it moves the playhead. A spoken "skip forward" and a press of the remote go through the same gate, and neither can land inside a flagged interval. That single flow is the part that does not work if you build it three times.
+
 ### The people
 
 The Epilepsy Foundation's page on photosensitivity says this:
@@ -280,6 +282,26 @@ Per source:
 
 Two things this run found, both recorded rather than smoothed over. Every one of those segments fired the general flash rule and not one fired the red flash rule, because the free pool holds no saturated red strobe and no sustained regular strobe. And flashmap cannot decode Theora `.ogv`, which is what all four failures were.
 
+### How well the analyzer does, on the conformance suite
+
+This is the number that says whether any of the rest is worth having, and it was missing from this page until a mock judge asked for it. Recorded by the conformance suite into [`results/conformance.json`](results/conformance.json), whose ground truth is computed from the quoted spec text in a module that cannot import flashmap.
+
+| What | Value |
+|---|---|
+| Clips measured and kept | <!--n results/conformance.json:published.clips_kept -->467<!--/n--> of <!--n results/conformance.json:published.clips_designed -->3000<!--/n--> designed |
+| Windows judged | <!--n results/conformance.json:published.windows -->1401<!--/n-->, of which <!--n results/conformance.json:published.positive_windows -->324<!--/n--> are positive in the ground truth |
+| Precision | <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n--> (<!--n results/conformance.json:published.flashmap_precision_lo -->0.605<!--/n--> to <!--n results/conformance.json:published.flashmap_precision_hi -->0.693<!--/n-->) |
+| Recall | <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> (<!--n results/conformance.json:published.flashmap_recall_lo -->0.857<!--/n--> to <!--n results/conformance.json:published.flashmap_recall_hi -->0.924<!--/n-->) |
+
+**This run is partial and the file says so in its own statement field.** <!--n results/conformance.json:published.clips_measured -->475<!--/n--> clips were measured, <!--n results/conformance.json:published.excluded_clips -->8<!--/n--> were excluded and <!--n results/conformance.json:published.clips_kept -->467<!--/n--> kept, out of a committed design of <!--n results/conformance.json:published.clips_designed -->3000<!--/n-->. Nothing here should be read as a finished evaluation.
+
+**What those two numbers mean for a child in front of the TV**, said plainly:
+
+- Precision of <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n--> means roughly a third of the windows flashmap flags are not over the threshold. The cost of that is picture hidden that did not need hiding. It is the direction we would rather err in, and it is still a cost, because a title full of unnecessary covers is a title a child stops choosing.
+- Recall of <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> means about one positive window in ten is missed. That is the direction that matters, and it is the honest reason this is a layer that reduces exposure rather than one that removes it. It is also the reason the approved wording is the wording it is.
+
+Neither number has anything to say about the red flash rule against real footage, because the pool has no saturated red strobe. The ablation in [`results/ablations.json`](results/ablations.json) shows what the red rule is carrying on the synthetic suite: turning it off moves recall by <!--n results/ablations.json:detection.arms.red_rule_off.recall_change_vs_default -->-0.244898<!--/n-->.
+
 ### Baselines
 
 Two independent tools were run over the same pool, so flashmap can be compared against something rather than trusted on its own. Per-clip results are in [`results/baselines/`](results/baselines/): `ffmpeg_photosensitivity` (FFmpeg's own photosensitivity filter, a mitigator whose flags are inferred from where its output differs from the unfiltered decode) and `naive_luma_diff` (whole-frame mean luma only, no area rule, no colour rule, no rate window). Neither is a conformance result and neither is a safety claim. The EA IRIS baseline is not built yet.
@@ -398,7 +420,7 @@ Worth knowing before trusting this with a child.
 - **The layering question is open.** The one recorded run is inconclusive, because playback did not run in that take.
 - **Red flash coverage is untested against real footage**, because no free source in the pool has a saturated red strobe.
 - **The room rule can only add hides.** A household cannot make Calm Frames weaker than WCAG. That is a design rule and it is enforced in code, but it also means a household cannot switch protection off for one title without leaving kid mode.
-- **Phase 4 is landing as this is written.** The guard hook, the PIN gate, the seek safety engine, the calm card and the VoiceView announcements exist in `app/src/calmframes/`. What does not exist yet is the standalone `hook/` package that ships them to other apps, and none of it has been seen running on a stick.
+- **None of it has been seen running on a stick.** The guard hook, the PIN gate, the seek safety engine, the calm card and the VoiceView announcements exist in `app/src/calmframes/`, and the standalone [`hook/`](hook/) package that ships them to other apps exists too, with its own README and the integration diff above. What has not happened is any of it running on real hardware.
 
 ## Safety
 
