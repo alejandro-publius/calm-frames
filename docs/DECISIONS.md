@@ -336,3 +336,64 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   **Cost:** nothing navigates there yet, so a CC BY clip is credited in NOTICE
   and not yet anywhere a person watching can see. The file says so at the top
   and gives the one line that wires it.
+
+- **Decision:** The mutation gate mutates a copy of the tree, never the working
+  tree.
+  **Why:** flashmap runs as a subprocess of a long ingest on this machine and the
+  app's jest suite runs in another session, so an edit to the real tree, even for
+  thirty seconds, could hand somebody else a wrong answer. It also means no
+  restore step can destroy unstaged work, which is why there is no `git checkout`
+  anywhere in `eval/mutate_gate.py`.
+  **Cost:** flashmap is installed into the virtual environment as an editable
+  package, so `import flashmap` reaches the original source whatever the working
+  directory is. Every mutation runs a canary that resolves the module the way the
+  test runner will and looks for the mutated text in it, and a mutation whose
+  canary fails is recorded as survived rather than killed.
+
+- **Decision:** The mutation gate's canary writes its values into the test file
+  rather than reading them from the environment.
+  **Why:** the first version read `process.env`, and the second mutation's canary
+  was handed the first mutation's needle. jest had cached the transformed canary
+  with the environment values baked in, because the file itself had not changed.
+  A harness that reads its own inputs out of a cache can say anything.
+  **Cost:** the canary file is rewritten per mutation, which is a few
+  milliseconds and makes the cache key move with it.
+
+- **Decision:** A mutation the gate calls equivalent still counts as a survivor
+  in the kill rate.
+  **Why:** the unsigned check in flashMap.ts is guarded three times over, so
+  removing the first guard changes the diagnostic detail and nothing else. It
+  would be easy to exclude that from the denominator and publish a higher number.
+  Rounding a number up for a good reason is still rounding it up.
+  **Cost:** the published kill rate is lower than it could be made to look, and
+  `results/mutation.json` carries the reason next to the mutant so a reader can
+  check the claim.
+
+- **Decision:** The scheduler property tests drive the app's TypeScript through a
+  node process rather than a Python model of it.
+  **Why:** hypothesis is Python and the scheduler that GATE 1 measures is
+  TypeScript. A Python reimplementation would agree with itself and prove
+  nothing, which is the same mistake as measuring a scheduler against its own
+  clock.
+  **Cost:** `make properties` needs node and the app's tsc. Without them the
+  tests skip and say why, and the CI job that owns them sets
+  `CALM_FRAMES_REQUIRE_NODE=1` so a skip there is a failure.
+
+- **Decision:** `flashmap verify` now checks the segment list.
+  **Why:** the fuzz corpus found that a correctly signed map whose segments ended
+  before they started, or were written as strings, or were not a list at all,
+  verified cleanly. The app's reader and the pipeline's loader both refuse those
+  maps, so the tool a studio runs on its own work was the only one calling them
+  fine, and a studio has no second check behind them.
+  **Cost:** a map with a segment that makes no sense now fails verify. Nothing in
+  the pool produces one, and the guard has two mutations in the gate.
+
+- **Decision:** The playback fuzzing run reports what it could not do rather than
+  leaving it out.
+  **Why:** the run cannot change playbackRate, because nothing a remote can press
+  changes it and the app does not change it itself, and it cannot force the app
+  into the background, because the only key that reaches the device shell is the
+  one the keepalive uses to stop the device backgrounding the app by itself. A
+  chaos run that quietly dropped both would read as covering more than it does.
+  **Cost:** `results/chaos_vvd.json` names both, and rate changes are exercised
+  against the real scheduler in `eval/property_scheduler_test.py` instead.
