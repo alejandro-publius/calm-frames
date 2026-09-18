@@ -249,6 +249,16 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--pool-key", type=Path, default=LABELING / "pool_key.json")
     parser.add_argument("--labels", type=Path, action="append", default=None)
+    parser.add_argument(
+        "--adjudicated",
+        type=Path,
+        default=None,
+        help=(
+            "the sheet the two labellers agreed after discussing their disagreements. Its "
+            "answers are the ones the metrics use. Kappa stays on the two original sheets, "
+            "because kappa is about the answers as first given."
+        ),
+    )
     parser.add_argument("-o", "--out", type=Path, default=OUT)
     parser.add_argument("--status-out", type=Path, default=STATUS_OUT)
     parser.add_argument(
@@ -260,6 +270,11 @@ def main() -> int:
 
     key = json.loads(arguments.pool_key.read_text())
     label_paths = arguments.labels or sorted(LABELING.glob("labels_*.csv"))
+    if arguments.adjudicated is not None:
+        # The agreed sheet is read with the others, so it is hashed, frozen and reported the
+        # same way, but it is never one of the two the kappa is computed between.
+        label_paths = [path for path in label_paths if path != arguments.adjudicated]
+        label_paths = label_paths + [arguments.adjudicated]
     sheets = {}
     for path in label_paths:
         answers = read_labels(path)
@@ -321,21 +336,37 @@ def main() -> int:
         )
         return 2
 
-    names = sorted(answered)
+    agreed_name = arguments.adjudicated.name if arguments.adjudicated else None
+    names = sorted(name for name in answered if name != agreed_name)
+    if not names:
+        print(
+            "the only sheet with answers in it is the agreed one. Pass the two labellers' "
+            "sheets as well, because kappa is computed between them.",
+            file=sys.stderr,
+        )
+        return 2
     primary = answered[names[0]]["answers"]
     second = answered[names[1]]["answers"] if len(names) > 1 else {}
+    agreed = answered.get(agreed_name, {}).get("answers", {}) if agreed_name else {}
 
     # Adjudication: where both labellers gave the same answer, that is the answer. Where they
     # disagree, the window is held out until a human resolves it, because the plan says the
-    # adjudicated labels are the ones the metrics use and nothing here may adjudicate.
+    # adjudicated labels are the ones the metrics use and nothing here may adjudicate. An agreed
+    # sheet, written after the two of them talked, is that human resolution: its answers win
+    # wherever it has one, including over a window they both got the same way.
     adjudicated: dict[tuple[str, int], str] = {}
     unresolved = 0
     for key_tuple, value in primary.items():
         other = second.get(key_tuple)
         if other is None or other == value:
             adjudicated[key_tuple] = value
-        else:
+        elif key_tuple not in agreed:
             unresolved += 1
+    resolved_by_hand = 0
+    for key_tuple, value in agreed.items():
+        if adjudicated.get(key_tuple) != value:
+            resolved_by_hand += 1
+        adjudicated[key_tuple] = value
 
     report = {
         "generated_on": "2026-09-17",
@@ -350,14 +381,22 @@ def main() -> int:
         "titles": key["titles"],
         "sources": key["sources"],
         "adjudication": {
-            "rule": "agreement between the two sheets is the label; a disagreement is held out",
+            "rule": (
+                "agreement between the two sheets is the label; a disagreement is held out "
+                "unless the agreed sheet answers it"
+            ),
+            "labeller_sheets": names,
+            "agreed_sheet": agreed_name,
             "windows_held_out_for_discussion": unresolved,
+            "windows_answered_by_the_agreed_sheet": len(agreed),
+            "windows_the_agreed_sheet_changed": resolved_by_hand,
             "note": (
                 "this script never picks a side. Resolve the disagreements together, write the "
-                "agreed answers into a third sheet, and re-run with that sheet first."
+                "agreed answers into a third sheet, and re-run passing it as --adjudicated."
             ),
         },
         "kappa": cohens_kappa(primary, second) if second else {"kappa": None, "why": "one sheet"},
+        "kappa_is_between": names[:2],
         "any_overlap": build(key, sheets, adjudicated, 0.0),
         "half_window": build(key, sheets, adjudicated, 0.5),
     }

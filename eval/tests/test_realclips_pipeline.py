@@ -61,6 +61,19 @@ def _write_sheet(path: Path, pool: dict, flip_every: int, unlabelable_every: int
                 )
 
 
+def _run(tmp: Path, arguments: list[str]) -> dict:
+    out = tmp / "realclips.json"
+    finished = subprocess.run(
+        [sys.executable, str(REPORT), "--pool-key", str(KEY), "--out", str(out),
+         "--allow-uncommitted", *arguments],
+        capture_output=True,
+        text=True,
+        timeout=300,
+    )
+    assert finished.returncode == 0, finished.stderr
+    return json.loads(out.read_text())
+
+
 @pytest.fixture(scope="module")
 def report(tmp_path_factory) -> dict:
     if not POOL.exists() or not KEY.exists():
@@ -148,3 +161,56 @@ def test_per_source_counts_are_reported(report):
     per_source = report["any_overlap"]["per_source"]
     assert len(per_source) >= 4
     assert all("segments" in row for row in per_source.values())
+
+
+def test_the_agreed_sheet_settles_the_metrics_and_kappa_stays_on_the_first_answers(
+    tmp_path_factory,
+):
+    """The third sheet, written after the two labellers talk.
+
+    FABRICATED FOR TEST ONLY, like every other label in this file.
+
+    Two things have to hold at once, and they pull in opposite directions: the agreed answers
+    are the ones the metrics use, and kappa is about the answers as first given, so kappa must
+    still be between the two original sheets. The trap this covers is real: the script picks its
+    primary and second sheets by sorted file name, so a sheet called labels_agreed.csv sorts
+    first and would have quietly become one of the two kappa was computed between.
+
+    To see it fail: take the agreed sheet out of the exclusion in main() and let it back into
+    `names`, and both halves of this go red.
+    """
+    if not POOL.exists() or not KEY.exists():
+        pytest.skip("the blinded pool has not been built yet")
+    tmp = tmp_path_factory.mktemp("adjudicated")
+    pool = json.loads(POOL.read_text())
+    sheet_a = tmp / "labels_labeller_a.csv"
+    sheet_b = tmp / "labels_labeller_b.csv"
+    agreed = tmp / "labels_agreed.csv"
+    _write_sheet(sheet_a, pool, flip_every=3, unlabelable_every=17)
+    _write_sheet(sheet_b, pool, flip_every=4, unlabelable_every=23)
+    # The agreed sheet calls every window a positive, which no labeller did, so its effect on
+    # the metrics is impossible to confuse with either sheet's own answers.
+    _write_sheet(agreed, pool, flip_every=1, unlabelable_every=10_000)
+
+    without = _run(tmp, ["--labels", str(sheet_a), "--labels", str(sheet_b)])
+    with_agreed = _run(
+        tmp,
+        ["--labels", str(sheet_a), "--labels", str(sheet_b), "--adjudicated", str(agreed)],
+    )
+
+    assert without["adjudication"]["windows_held_out_for_discussion"] > 0
+    assert with_agreed["adjudication"]["windows_held_out_for_discussion"] == 0
+    assert with_agreed["adjudication"]["agreed_sheet"] == "labels_agreed.csv"
+    assert with_agreed["adjudication"]["windows_the_agreed_sheet_changed"] > 0
+
+    # The agreed sheet said every window is a positive, so the truth it produces has to be
+    # bigger than what the two sheets agreed on their own.
+    assert (
+        with_agreed["any_overlap"]["ground_truth_positive_windows"]
+        > without["any_overlap"]["ground_truth_positive_windows"]
+    )
+
+    # And kappa has not moved, because it is still between the same two sheets.
+    assert with_agreed["kappa_is_between"] == ["labels_labeller_a.csv", "labels_labeller_b.csv"]
+    assert with_agreed["kappa"]["kappa"] == without["kappa"]["kappa"]
+    assert with_agreed["kappa"]["windows"] == without["kappa"]["windows"]

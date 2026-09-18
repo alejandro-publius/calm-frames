@@ -7,6 +7,29 @@ right, and you will not be shown what any detector said.
 
 Please read all of this before the first segment, and keep it open while you work.
 
+## Who does what
+
+Two people label, separately, without talking about any segment until both sheets are saved.
+That is the whole point of doing it twice: the agreement between two people who have not
+compared notes is a number, and the agreement between two people who have is not.
+
+**Alex**, your sheet is `eval/labeling/labels_labeller_a.csv`. Please do all 40 segments. Each
+one is ten rows, so 400 rows in all. A segment takes a minute or two once you have the hang of
+the figure, so set aside about an hour and take breaks.
+
+**Rachel**, your sheet is `eval/labeling/labels_labeller_b.csv`. Please do at least the first
+15, `seg000` through `seg014`, and as many more as you have time for. The ids are already in a
+shuffled order, so the first 15 are a random sample rather than the easy ones. Fifteen is the
+floor the evaluation plan sets for the second labeller, and the agreement score uses whatever
+you both labelled.
+
+Neither of you sees the other's sheet until both are saved, and neither of you opens
+`pool_key.json` at all.
+
+If you find you cannot call a window, mark it unlabelable. An honest "cannot tell" is worth
+more than a guess, and the two of you disagreeing about a hard segment is useful information
+rather than a problem.
+
 ## What you get
 
 - `pool.json`, a list of segment ids. Each segment is ten seconds of some video.
@@ -115,3 +138,26 @@ will look at the disagreements together and agree a final answer, and that agree
 the numbers use.
 
 When you are done, save the file and say so. Nothing is scored until both sheets are in.
+
+## When both sheets are in
+
+In this order, because the plan freezes labels before any comparison and the analysis refuses
+to run on a sheet that is not committed:
+
+1. Commit both sheets. `git add eval/labeling/labels_*.csv && git commit`. The analysis records
+   the SHA-256 of each sheet in its output, so the numbers always name the labels they came
+   from.
+2. Run `make realclips-status`, or `python eval/realclips/report.py`. It writes
+   `results/realclips.json`: precision and recall per detector against your labels, a bootstrap
+   interval over titles, Cohen's kappa between the two of you on the answers as first given, and
+   the per source breakdown.
+3. Look at the disagreements together. The script holds every window you two called differently
+   out of the metrics rather than picking a side, and it says how many there are. Agree an
+   answer for each, write the agreed answers into a third sheet, commit that too, and run the
+   analysis again with that sheet named:
+   `python eval/realclips/report.py --adjudicated eval/labeling/labels_agreed.csv`.
+   The agreed answers are then the ones the metrics use, and the kappa stays between your two
+   original sheets, which is what it is for.
+
+If a sheet is not committed the analysis stops and says which one. That is the freeze rule
+working, not a bug.
