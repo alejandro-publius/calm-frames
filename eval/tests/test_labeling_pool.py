@@ -51,6 +51,7 @@ FABRICATED_FLAGS = {
         "flashmap": [(10.0, 12.0), (40.0, 41.5)],
         "ffmpeg_photosensitivity": [(10.5, 11.0), (80.0, 81.0)],
         "naive_luma_diff": [(40.2, 40.9)],
+        "iris": [(11.0, 11.4)],
     },
     "invented_seen_by_one": {"flashmap": []},
 }
@@ -80,7 +81,8 @@ def test_a_title_only_one_list_has_seen_is_kept_out(monkeypatch, tmp_path):
 
     assert "HAZARD_invented_seen_by_one.webm" in skipped
     reason = skipped["HAZARD_invented_seen_by_one.webm"]
-    assert "ffmpeg_photosensitivity" in reason and "naive_luma_diff" in reason
+    for missing in ("ffmpeg_photosensitivity", "naive_luma_diff", "iris"):
+        assert missing in reason, f"the skip reason does not name {missing}"
 
     chosen = {row["file"] for row in built["key"]["segments"]}
     assert "HAZARD_invented_seen_by_one.webm" not in chosen
@@ -99,6 +101,7 @@ def test_the_sheet_the_labeller_reads_gives_nothing_away(monkeypatch, tmp_path):
         "flashmap",
         "ffmpeg_photosensitivity",
         "naive_luma_diff",
+        "iris",
         "proposed_by",
         "from_unflagged_time",
     ):

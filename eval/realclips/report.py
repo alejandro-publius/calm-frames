@@ -128,7 +128,7 @@ def cohens_kappa(a: dict, b: dict) -> dict:
 
 def detector_windows(key: dict, min_overlap: float) -> dict[str, dict[str, set[int]]]:
     """Each detector's positive windows per segment, through the shared window mapping."""
-    from labeling.make_pool import title_key  # noqa: PLC0415
+    from labeling.make_pool import CANDIDATE_LISTS, title_key  # noqa: PLC0415
 
     flags: dict[str, dict[str, list[tuple[float, float]]]] = defaultdict(dict)
     screening = json.loads(SCREENING.read_text())
@@ -139,7 +139,9 @@ def detector_windows(key: dict, min_overlap: float) -> dict[str, dict[str, set[i
             (float(s["start_s"]) * 1000.0, float(s["end_s"]) * 1000.0)
             for s in entry.get("segments", [])
         ]
-    for folder in ("ffmpeg_photosensitivity", "naive_luma_diff"):
+    # The baselines, taken from the same list the pool was cut from. Naming them here a second
+    # time is how a detector ends up in the pool and then never scored against the labels.
+    for folder in (name for name in CANDIDATE_LISTS if name != "flashmap"):
         for path in sorted((BASELINES / folder).glob("*.json")):
             data = json.loads(path.read_text())
             flags[title_key(data["video"])][folder] = [

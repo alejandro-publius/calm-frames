@@ -9,39 +9,37 @@
   "this analysis, which computes the metrics, the kappa and the bootstrap as soon as the sheets have answers in them"
  ],
  "what_is_missing": "the labels. Nobody on this lane labels anything.",
- "segments": 40,
- "titles": 15,
+ "segments": 34,
+ "titles": 9,
  "sources": [
   "1930 public-domain film",
   "Blender open movies",
   "DVIDS",
-  "NASA ISS time-lapse",
-  "NASA SVS 5011",
   "Wikimedia Commons fireworks",
   "Wikimedia Commons lightning"
  ],
- "source_count": 7,
- "windows_to_label": 400,
+ "source_count": 5,
+ "windows_to_label": 340,
  "sheets": {
   "labels_labeller_a.csv": {
    "path": "eval/labeling/labels_labeller_a.csv",
-   "sha256": "a05b7663486e725073e055a17a24538be4521db5250b52ca41294ecfa8d86013",
+   "sha256": "019d0ad7c514866d105258ea2ac62f391e4f51c5573b11ba09a898c386623cb4",
    "answered_windows": 0,
    "unlabelable_windows": 0,
-   "git_state": "committed"
+   "git_state": "modified"
   },
   "labels_labeller_b.csv": {
    "path": "eval/labeling/labels_labeller_b.csv",
-   "sha256": "a05b7663486e725073e055a17a24538be4521db5250b52ca41294ecfa8d86013",
+   "sha256": "019d0ad7c514866d105258ea2ac62f391e4f51c5573b11ba09a898c386623cb4",
    "answered_windows": 0,
    "unlabelable_windows": 0,
-   "git_state": "committed"
+   "git_state": "modified"
   }
  },
- "pool_key_sha256": "bd713e5863a4050327109608eb7f88a816364437f27b50702919f856dc1a4cf8",
+ "pool_key_sha256": "1416fbfe179c16dff54ac7ccb2b615b52f6f67a5a796da321f92b13227ba33b6",
  "plots": {
   "directory": "eval/labeling/plots",
-  "one_per_segment": 40,
+  "one_per_segment": 34,
   "missing": []
  }
 }

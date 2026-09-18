@@ -1,0 +1,385 @@
+{
+ "generated_on": "2026-09-18",
+ "set": "real clips, every window of every title all candidate lists have analysed",
+ "what_this_measures": "each detector against the union of what the candidate lists proposed, not against ground truth. Nobody has labelled anything. A window is positive here because some detector proposed it, so this is an upper bound on recall and it is not comparable with the conformance recall.",
+ "no_labels_yet": true,
+ "window_rule": "any overlap",
+ "headline_interval": "bootstrap over titles, 10000 resamples",
+ "wilson_note": "reported as the optimistic bound, because windows in one title are not independent",
+ "iris_build": {
+  "ran": true,
+  "one_build": true,
+  "clips": 32,
+  "iris_commit": "d96978ac1107f3463b77f69a9c1b1ec5d45291a0",
+  "built_by": "eval/baselines/iris/build-native.sh",
+  "opencv": "4.14.0",
+  "ffmpeg_libavformat": "63.1.101",
+  "note": "built against Homebrew's OpenCV and ffmpeg rather than the vcpkg versions upstream pins, because the Docker build could not be run on this machine. docs/DECISIONS.md carries the deviation and eval/baselines/iris/README.md says what it costs."
+ },
+ "iris_over_the_whole_pool": {
+  "clips_analyzed": 32,
+  "clips_it_could_not_decode": 6,
+  "why_it_could_not": {
+   "HAZARD_iss_night_pass_africa_mideast.ogv": "RuntimeError: IrisApp wrote a frame data file with no frames in it, which is what this build does when OpenCV cannot decode the file. IRIS called it PASS anyway.",
+   "HAZARD_iss_night_pass_europe_to_asia.ogv": "RuntimeError: IrisApp wrote a frame data file with no frames in it, which is what this build does when OpenCV cannot decode the file. IRIS called it PASS anyway.",
+   "HAZARD_iss_night_pass_malaysia.ogv": "RuntimeError: every frame carries the same timestamp (0.0 s over 61 frames), because IRIS read this container's frame rate as 0. Its analysis has no time base, so its flags cannot be placed in the clip.",
+   "HAZARD_wc_clouds_seloncourt.ogv": "RuntimeError: every frame carries the same timestamp (0.0 s over 715 frames), because IRIS read this container's frame rate as 0. Its analysis has no time base, so its flags cannot be placed in the clip.",
+   "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv": "RuntimeError: every frame carries the same timestamp (0.0 s over 1661 frames), because IRIS read this container's frame rate as 0. Its analysis has no time base, so its flags cannot be placed in the clip.",
+   "HAZARD_wc_planepassingthundercloud.ogv": "RuntimeError: every frame carries the same timestamp (0.0 s over 660 frames), because IRIS read this container's frame rate as 0. Its analysis has no time base, so its flags cannot be placed in the clip."
+  },
+  "flagged_segments": 6,
+  "clips_with_at_least_one_flag": 4,
+  "warning_segments": 32,
+  "warning_segments_are_not_flags": "IRIS passes flashing between 2 and 3 Hz. Those frames are counted here so that 'IRIS flagged nothing' can be told apart from 'IRIS saw nothing'."
+ },
+ "titles_in_scope": [
+  "HAZARD_bbb_720p_surround.mp4",
+  "HAZARD_dvids_fireworks_safety.mp4",
+  "HAZARD_dvids_illumination_flares.mp4",
+  "HAZARD_nasa_svs_5011_iss_lightning_1080p.mp4",
+  "HAZARD_pd1930_booze_hangs_high.mp4",
+  "HAZARD_pd1930_frozen_frolics.mp4",
+  "HAZARD_sintel_2048_stereo_512kb.mp4",
+  "HAZARD_tears_of_steel_720p.mov",
+  "HAZARD_wc_fireworks_buenos_aires.webm",
+  "HAZARD_wc_fireworks_ignis_brunensis.ogv",
+  "HAZARD_wc_fireworks_rieti.ogv",
+  "HAZARD_wc_fireworks_summer.webm",
+  "HAZARD_wc_lightning_240fps.webm",
+  "HAZARD_wc_lightning_blackout.webm",
+  "HAZARD_wc_lightning_condensed.webm",
+  "HAZARD_wc_lightning_slowmo.webm"
+ ],
+ "titles_skipped": {
+  "HAZARD_iss_night_pass_africa_mideast.ogv": "only ffmpeg_photosensitivity, flashmap, naive_luma_diff has a candidate list for it; iris never ran on it",
+  "HAZARD_iss_night_pass_europe_to_asia.ogv": "only ffmpeg_photosensitivity, flashmap, naive_luma_diff has a candidate list for it; iris never ran on it",
+  "HAZARD_iss_night_pass_malaysia.ogv": "only ffmpeg_photosensitivity, flashmap, naive_luma_diff has a candidate list for it; iris never ran on it",
+  "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_clouds_seloncourt.ogv": "only flashmap has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff, iris never ran on it",
+  "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv": "only flashmap has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff, iris never ran on it",
+  "HAZARD_wc_irminger_waves_without_sound_ooi.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_jezioro_cisie_panorama_1080p.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_planepassingthundercloud.ogv": "only flashmap has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff, iris never ran on it",
+  "HAZARD_wc_sea_of_clouds_over_asia.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_stockfootage_setting_sun.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sunset_at_the_sea_of_azov.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sunset_in_spain.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_water_waves_greece.ogv": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "app/assets/raw/sound/calm-chime.mp3": "file not in media/ under either name"
+ },
+ "all_titles": {
+  "now": {
+   "candidate_lists": [
+    "flashmap",
+    "ffmpeg_photosensitivity",
+    "naive_luma_diff",
+    "iris"
+   ],
+   "union_windows": 2277,
+   "titles": 16,
+   "table": {
+    "flashmap": {
+     "recall_against_the_union": {
+      "value": 0.6262626262626263,
+      "wilson_lo": 0.6061941906229954,
+      "wilson_hi": 0.6459057516050378,
+      "numerator": 1426,
+      "denominator": 2277
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.35271470228540264,
+      "hi": 0.7960612170087976,
+      "resamples": 10000,
+      "groups": 16,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 439
+    },
+    "ffmpeg_photosensitivity": {
+     "recall_against_the_union": {
+      "value": 0.8041282389108476,
+      "wilson_lo": 0.787320664276777,
+      "wilson_hi": 0.8199113704811812,
+      "numerator": 1831,
+      "denominator": 2277
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.6862634922600152,
+      "hi": 0.9283032101997618,
+      "resamples": 10000,
+      "groups": 16,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 821
+    },
+    "naive_luma_diff": {
+     "recall_against_the_union": {
+      "value": 0.03469477382520861,
+      "wilson_lo": 0.027927246471292598,
+      "wilson_hi": 0.04302966208313803,
+      "numerator": 79,
+      "denominator": 2277
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.019416971290787965,
+      "hi": 0.06621963000938012,
+      "resamples": 10000,
+      "groups": 16,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 4
+    },
+    "iris": {
+     "recall_against_the_union": {
+      "value": 0.0030742204655248135,
+      "wilson_lo": 0.0014899516271795485,
+      "wilson_hi": 0.00633236269970884,
+      "numerator": 7,
+      "denominator": 2277
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.000605867835350768,
+      "hi": 0.008701642564452291,
+      "resamples": 10000,
+      "groups": 16,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 0
+    }
+   }
+  },
+  "before_iris_was_built": {
+   "candidate_lists": [
+    "flashmap",
+    "ffmpeg_photosensitivity",
+    "naive_luma_diff"
+   ],
+   "union_windows": 2277,
+   "titles": 16,
+   "table": {
+    "flashmap": {
+     "recall_against_the_union": {
+      "value": 0.6262626262626263,
+      "wilson_lo": 0.6061941906229954,
+      "wilson_hi": 0.6459057516050378,
+      "numerator": 1426,
+      "denominator": 2277
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.35271470228540264,
+      "hi": 0.7960612170087976,
+      "resamples": 10000,
+      "groups": 16,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 439
+    },
+    "ffmpeg_photosensitivity": {
+     "recall_against_the_union": {
+      "value": 0.8041282389108476,
+      "wilson_lo": 0.787320664276777,
+      "wilson_hi": 0.8199113704811812,
+      "numerator": 1831,
+      "denominator": 2277
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.6862634922600152,
+      "hi": 0.9283032101997618,
+      "resamples": 10000,
+      "groups": 16,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 821
+    },
+    "naive_luma_diff": {
+     "recall_against_the_union": {
+      "value": 0.03469477382520861,
+      "wilson_lo": 0.027927246471292598,
+      "wilson_hi": 0.04302966208313803,
+      "numerator": 79,
+      "denominator": 2277
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.019416971290787965,
+      "hi": 0.06621963000938012,
+      "resamples": 10000,
+      "groups": 16,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 4
+    }
+   }
+  }
+ },
+ "pool_segments": {
+  "segments": 34,
+  "now": {
+   "candidate_lists": [
+    "flashmap",
+    "ffmpeg_photosensitivity",
+    "naive_luma_diff",
+    "iris"
+   ],
+   "union_windows": 204,
+   "titles": 9,
+   "table": {
+    "flashmap": {
+     "recall_against_the_union": {
+      "value": 0.6666666666666666,
+      "wilson_lo": 0.5994243813290842,
+      "wilson_hi": 0.7277480720680215,
+      "numerator": 136,
+      "denominator": 204
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.42990654205607476,
+      "hi": 0.8426966292134831,
+      "resamples": 10000,
+      "groups": 9,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 26
+    },
+    "ffmpeg_photosensitivity": {
+     "recall_against_the_union": {
+      "value": 0.8725490196078431,
+      "wilson_lo": 0.8198068600942048,
+      "wilson_hi": 0.9115198004405018,
+      "numerator": 178,
+      "denominator": 204
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.7254876562023773,
+      "hi": 0.9712655455059355,
+      "resamples": 10000,
+      "groups": 9,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 63
+    },
+    "naive_luma_diff": {
+     "recall_against_the_union": {
+      "value": 0.058823529411764705,
+      "wilson_lo": 0.03396627690998608,
+      "wilson_hi": 0.09998899350944015,
+      "numerator": 12,
+      "denominator": 204
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.006287354974803705,
+      "hi": 0.1450381679389313,
+      "resamples": 10000,
+      "groups": 9,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 0
+    },
+    "iris": {
+     "recall_against_the_union": {
+      "value": 0.00980392156862745,
+      "wilson_lo": 0.0026927192157608845,
+      "wilson_hi": 0.03503535902804605,
+      "numerator": 2,
+      "denominator": 204
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.0,
+      "hi": 0.03076923076923077,
+      "resamples": 10000,
+      "groups": 9,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 0
+    }
+   }
+  },
+  "before_iris_was_built": {
+   "candidate_lists": [
+    "flashmap",
+    "ffmpeg_photosensitivity",
+    "naive_luma_diff"
+   ],
+   "union_windows": 204,
+   "titles": 9,
+   "table": {
+    "flashmap": {
+     "recall_against_the_union": {
+      "value": 0.6666666666666666,
+      "wilson_lo": 0.5994243813290842,
+      "wilson_hi": 0.7277480720680215,
+      "numerator": 136,
+      "denominator": 204
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.42990654205607476,
+      "hi": 0.8426966292134831,
+      "resamples": 10000,
+      "groups": 9,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 26
+    },
+    "ffmpeg_photosensitivity": {
+     "recall_against_the_union": {
+      "value": 0.8725490196078431,
+      "wilson_lo": 0.8198068600942048,
+      "wilson_hi": 0.9115198004405018,
+      "numerator": 178,
+      "denominator": 204
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.7254876562023773,
+      "hi": 0.9712655455059355,
+      "resamples": 10000,
+      "groups": 9,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 63
+    },
+    "naive_luma_diff": {
+     "recall_against_the_union": {
+      "value": 0.058823529411764705,
+      "wilson_lo": 0.03396627690998608,
+      "wilson_hi": 0.09998899350944015,
+      "numerator": 12,
+      "denominator": 204
+     },
+     "bootstrap_over_titles": {
+      "lo": 0.006287354974803705,
+      "hi": 0.1450381679389313,
+      "resamples": 10000,
+      "groups": 9,
+      "seed": 20260917
+     },
+     "windows_only_this_list_proposed": 0
+    }
+   }
+  }
+ },
+ "what_iris_cost_the_estimate": {
+  "flashmap_recall_before_iris_was_a_candidate_list": 0.6262626262626263,
+  "flashmap_recall_now": 0.6262626262626263,
+  "difference": 0.0,
+  "iris_only_windows": 0,
+  "read_it_like_this": "the first number is what this repository could have published while IRIS was missing. The second is the same measurement against a union that now includes IRIS. The drop is the part of the old estimate that was optimism, and it is no longer unknown."
+ },
+ "published": {
+  "flashmap_pool_recall": 0.6262626262626263,
+  "flashmap_pool_recall_lo": 0.35271470228540264,
+  "flashmap_pool_recall_hi": 0.7960612170087976,
+  "flashmap_pool_recall_before_iris": 0.6262626262626263,
+  "union_windows": 2277,
+  "titles": 16,
+  "iris_only_windows": 0,
+  "candidate_lists": 4,
+  "iris_clips_analyzed": 32,
+  "iris_clips_it_could_not_decode": 6,
+  "iris_flagged_segments": 6,
+  "iris_warning_segments": 32
+ }
+}

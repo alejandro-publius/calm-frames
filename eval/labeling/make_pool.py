@@ -20,9 +20,10 @@ needs.
 Nobody plays anything. The plots come from eval/labeling/plots.py, which does not import
 flashmap, and the clips are never opened by a person at any point.
 
-IRIS is one of the four candidate lists in the plan and it is not here, because the image has
-never built on this machine. The pool file says so, and says what that costs: segments only
-IRIS would have proposed are missing from the union.
+All four candidate lists the plan asks for are here. EA IRIS was the one that used to be
+missing, because its Docker image had never built on this machine; it is now built natively
+(eval/baselines/iris/build-native.sh) and has run over every clip, so the union is the union
+the plan meant. `iris_build` in the key records which build produced it.
 """
 
 from __future__ import annotations
@@ -47,8 +48,8 @@ BASELINES = REPO / "results" / "baselines"
 OUT_DIR = _EVAL_DIR / "labeling"
 
 # The candidate lists the pool is the union of. A title only joins the pool if every one of them
-# has looked at it. IRIS is not here: see `candidate_list_missing` in the key.
-CANDIDATE_LISTS = ("flashmap", "ffmpeg_photosensitivity", "naive_luma_diff")
+# has looked at it.
+CANDIDATE_LISTS = ("flashmap", "ffmpeg_photosensitivity", "naive_luma_diff", "iris")
 
 SEED = 20260917
 SEGMENT_SECONDS = 10.0
@@ -111,12 +112,62 @@ def detector_intervals() -> dict[str, dict[str, list[tuple[float, float]]]]:
     for baseline, folder in (
         ("ffmpeg_photosensitivity", "ffmpeg_photosensitivity"),
         ("naive_luma_diff", "naive_luma_diff"),
+        ("iris", "iris"),
     ):
         for path in sorted((BASELINES / folder).glob("*.json")):
             data = json.loads(path.read_text())
             intervals = [(s["start_s"], s["end_s"]) for s in data.get("segments", [])]
             out.setdefault(title_key(data["video"]), {})[baseline] = intervals
     return out
+
+
+def iris_build() -> dict:
+    """Which IRIS produced the IRIS candidate list, read off the reports it wrote.
+
+    The pool is the union of four lists now, and one of them comes from somebody else's
+    analyser built here from source. A pool that does not say which build cannot be
+    reproduced, so the commit and the libraries travel with it.
+    """
+    reports = sorted((BASELINES / "iris").glob("*.json"))
+    if not reports:
+        return {"ran": False, "why": "no report in results/baselines/iris"}
+    builds = set()
+    for path in reports:
+        data = json.loads(path.read_text())
+        build = data.get("build", {})
+        builds.add(
+            (
+                build.get("iris_commit"),
+                build.get("built_by"),
+                build.get("opencv"),
+                build.get("ffmpeg_libavformat"),
+            )
+        )
+    if len(builds) != 1:
+        # Two builds in one candidate list is two detectors wearing one name.
+        return {
+            "ran": True,
+            "one_build": False,
+            "why": "these reports were not all written by the same build of IRIS",
+            "builds": sorted(str(build) for build in builds),
+            "clips": len(reports),
+        }
+    commit, built_by, opencv, libavformat = builds.pop()
+    return {
+        "ran": True,
+        "one_build": True,
+        "clips": len(reports),
+        "iris_commit": commit,
+        "built_by": built_by,
+        "opencv": opencv,
+        "ffmpeg_libavformat": libavformat,
+        "note": (
+            "built against Homebrew's OpenCV and ffmpeg rather than the vcpkg versions "
+            "upstream pins, because the Docker build could not be run on this machine. "
+            "docs/DECISIONS.md carries the deviation and eval/baselines/iris/README.md "
+            "says what it costs."
+        ),
+    }
 
 
 def snap(value: float) -> float:
@@ -173,18 +224,20 @@ def unflagged_windows(
     return out
 
 
-def build() -> dict:
-    rng = random.Random(SEED)
-    licenses = load_licenses()
-    flags = detector_intervals()
-    screening = json.loads(SCREENING.read_text())
-    source_by_file = {
-        title_key(entry["file"]): entry.get("source", "unknown")
-        for entry in screening["per_file"]
-    }
+def eligible_titles(
+    flags: dict[str, dict[str, list[tuple[float, float]]]],
+) -> tuple[list[tuple[str, dict, float]], dict[str, str]]:
+    """The titles allowed into the pool, and why each of the others is not.
 
-    titles = []
-    skipped = {}
+    Split out of build() so that anything measuring against the pooled candidates
+    (eval/realclips/pool_recall.py) decides which titles count through this function and not
+    through a second copy of these rules. The guards here are the point: a licence line that
+    was never confirmed, a title one of the candidate lists never saw, a clip too short to
+    hold a segment.
+    """
+    licenses = load_licenses()
+    titles: list[tuple[str, dict, float]] = []
+    skipped: dict[str, str] = {}
     for name, row in sorted(licenses.items()):
         if name in NOT_REAL_CONTENT:
             skipped[name] = "our own generated clip, not real content"
@@ -221,6 +274,18 @@ def build() -> dict:
             skipped[name] = f"shorter than one {SEGMENT_SECONDS:.0f} s segment"
             continue
         titles.append((path.name, row, duration))
+    return titles, skipped
+
+
+def build() -> dict:
+    rng = random.Random(SEED)
+    flags = detector_intervals()
+    screening = json.loads(SCREENING.read_text())
+    source_by_file = {
+        title_key(entry["file"]): entry.get("source", "unknown")
+        for entry in screening["per_file"]
+    }
+    titles, skipped = eligible_titles(flags)
 
     flagged_pool: list[dict] = []
     unflagged_pool: list[dict] = []
@@ -326,13 +391,14 @@ def build() -> dict:
                 "one of them has seen has no unflagged time in the sense this pool means, because "
                 "the other lists never had the chance to flag it."
             ),
-            "candidate_list_missing": {
-                "EA IRIS": (
-                    "the image has never built on this machine, so no segment in this pool was "
-                    "proposed by IRIS. Anything only IRIS would have caught is not in the union, "
-                    "which makes this pool's recall estimate optimistic by an unknown amount."
-                )
-            },
+            "candidate_list_missing": {},
+            "iris_build": iris_build(),
+            "candidate_lists_note": (
+                "every list the plan asks for has run. EA IRIS used to be missing, and while it "
+                "was, anything only IRIS would have caught was not in the union, which made this "
+                "pool's recall estimate optimistic by an unknown amount. It is in now, built "
+                "natively rather than in Docker, and `iris_build` says which build it was."
+            ),
             "theora_rescreen": (
                 "the four Theora .ogv titles failed to decode in the first screening run, with "
                 "avcodec_send_packet returning 22, so their windows came from the two ffmpeg "

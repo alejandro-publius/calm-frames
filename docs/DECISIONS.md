@@ -1214,3 +1214,85 @@ second way.
   held as a flag rather than an id, the seat plural dropped, and the new frame
   taken out of `ALL_UI_FRAMES`. The real failure text is quoted beside each
   test.
+
+## 2026-09-18: EA IRIS is built, on the host and not in the Docker VM
+
+- **Decision:** build EA IRIS's example app natively on this Mac with
+  `eval/baselines/iris/build-native.sh`, against Homebrew's OpenCV 4, ffmpeg,
+  spdlog and nlohmann-json, and leave the pinned Docker image unbuilt.
+- **Why:** the image is a vcpkg source build of the whole OpenCV tree, and the
+  colima VM it would run in is shared with another project. A lane building an
+  image in that VM on Sep 17 pushed it into its memory limit and got that
+  project's `datahub-gms` container killed; its kafka and opensearch containers
+  were still sitting at exit 137 the next morning. CLAUDE.md says never restart
+  colima and never touch containers, images or volumes we did not create, and
+  repeating the exact workload that caused the incident is not a risk worth an
+  hour of build time. The native build is the same upstream commit, read out of
+  the Dockerfile so the two cannot drift, with tests off and `test/` still left
+  out of the checkout. It takes about two minutes.
+- **Cost:** the dependencies are different builds of the same libraries.
+  Upstream pins OpenCV and ffmpeg through vcpkg at a fixed baseline; this links
+  against Homebrew's OpenCV 4.14 and ffmpeg 9. Decoding is where that could
+  show, because a different ffmpeg can hand IRIS a different frame. Every report
+  file carries the commit, the compiler, the OpenCV version and the libavformat
+  version that produced it, so no number from this build is ever read as a
+  number from upstream's. If the image is ever built on a CI runner, the pool
+  should be re-run through it and the two compared rather than assumed equal.
+
+## 2026-09-18: IRIS joins the pool as a candidate list, at its own fail line
+
+- **Decision:** a frame joins IRIS's candidate list when its luminance or red
+  frame result is an extended fail or a flash fail, or its pattern result is a
+  fail. IRIS's "pass with warning", which is flashing between 2 and 3 Hz that
+  IRIS passes, is recorded as `warning_frames` and `warning_segments` and is not
+  a flag.
+- **Why:** the candidate list should be what IRIS says is a hazard, not
+  everything IRIS noticed, or the comparison is between our threshold and their
+  curiosity. Keeping the warnings in the same file means "IRIS flagged nothing
+  here" can still be told apart from "IRIS saw nothing here", and those are not
+  the same finding.
+- **Cost:** a window IRIS warned about and nobody else proposed is not in the
+  union, so it will not be labelled. `--include-warnings` moves the line and the
+  report records which side it was on.
+
+## 2026-09-18: a clip IRIS cannot decode keeps its title out of the pool
+
+- **Decision:** when IrisApp writes a frame data file with no frames in it, or
+  stamps every frame with the same timestamp, `eval/baselines/iris/run.py`
+  records a failure and writes no report for that clip. No report means no IRIS
+  candidate list, which means `make_pool` keeps the title out.
+- **Why:** on two Theora clips IrisApp logs "Video analysis started", "Elapsed
+  time: 0 ms", writes a header-only CSV and reports the video as **Pass**. On
+  four more it reads the container's frame rate as 0 and gives every frame the
+  same timestamp, so its own one second transition window has nothing to measure
+  against. A tool that passes what it never looked at is the one failure mode a
+  candidate list must not inherit, and a report saying IRIS found nothing would
+  be indistinguishable from one saying it never looked. The alternative, giving
+  those clips a time base from `r_frame_rate` afterwards, puts real looking
+  timestamps on an analysis that never had them.
+- **Cost:** the pool shrank from 40 segments across 15 titles to 34 across 9.
+  The three ISS night passes dropped out, and they were carrying half the
+  unflagged half of the pool, so the negative half went from 12 windows to 6.
+  That is the guard doing what it was built to do and it is still a real loss.
+  `make ffmpeg-ps-pool` and `make naive-luma-pool` over the 16 calm clips would
+  more than replace it, and this lane did not run them because its brief was the
+  IRIS candidate list and nothing else.
+
+## 2026-09-18: ffmpeg went from 8.1.2 to 9.0.1 on this machine, and two tools had to change
+
+- **Decision:** keep ffmpeg 9 and change `-vsync 0` to `-fps_mode passthrough`
+  in `eval/plots.py` and `eval/labeling/plots.py`.
+- **Why:** not a decision anybody planned. Installing Homebrew's `opencv@4` for
+  the IRIS build pulled ffmpeg 9.0.1 in and relinked it, and ffmpeg 9 removed the
+  `-vsync` spelling outright. It exits with "Unrecognized option 'vsync'" before
+  it opens the file, which reads downstream as a clip with no frames in it rather
+  than as a bad command line, so every labelling plot failed to render with "no
+  frames decoded". Rolling back is not cheap either: the 8.1.2 binary in the
+  Cellar no longer starts, because x265 was upgraded underneath it. `fps_mode`
+  has been in ffmpeg since 5.0 and means exactly what `-vsync 0` meant, so the
+  two tools now work on both.
+- **Cost:** every baseline result already in `results/baselines/` was measured
+  with ffmpeg 8.1.2 and records that in its own `tool_version`, while the machine
+  now has 9.0.1. Re-running either ffmpeg based baseline will produce numbers
+  from a different decoder, and they should be re-run as a set rather than one
+  clip at a time. The `photosensitivity` filter is still present in ffmpeg 9.

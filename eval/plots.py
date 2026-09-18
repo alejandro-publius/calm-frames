@@ -113,8 +113,12 @@ def frame_times(path: Path, max_seconds: float | None) -> list[float]:
 def decode_luma(path: Path, width: int, max_seconds: float | None):
     """Yield per-frame linear-light luminance planes, downscaled.
 
-    -vsync 0 keeps every decoded frame instead of resampling to a constant rate,
-    so the frame count lines up with the timestamps from frame_times().
+    -fps_mode passthrough keeps every decoded frame instead of resampling to a
+    constant rate, so the frame count lines up with the timestamps from
+    frame_times(). It used to be spelled -vsync 0; ffmpeg 9 removed that spelling
+    and exits with "Unrecognized option 'vsync'" before it opens the file, which
+    reads downstream as a clip with no frames in it rather than as a bad command
+    line. fps_mode has been there since ffmpeg 5.0.
     """
     probe_info = probe(path)
     w = probe_info["width"] or width
@@ -127,7 +131,7 @@ def decode_luma(path: Path, width: int, max_seconds: float | None):
         cmd += ["-t", str(max_seconds)]
     cmd += [
         "-i", str(path),
-        "-vsync", "0",
+        "-fps_mode", "passthrough",
         "-vf", f"scale={out_w}:{out_h}:flags=area",
         "-pix_fmt", "rgb24", "-f", "rawvideo", "-",
     ]

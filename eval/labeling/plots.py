@@ -59,7 +59,12 @@ def decode_rgb(path: Path, start_s: float, seconds: float, width: int):
         "ffmpeg", "-v", "error", "-nostdin",
         "-ss", f"{start_s:.3f}", "-t", f"{seconds:.3f}",
         "-i", str(path),
-        "-vsync", "0",
+        # -fps_mode passthrough, not -vsync 0. They mean the same thing, keep every decoded
+        # frame rather than resampling to a constant rate, and ffmpeg 9 removed the old
+        # spelling outright: it exits with "Unrecognized option 'vsync'" before it opens the
+        # file, so every segment comes back as "no frames decoded". fps_mode has been there
+        # since ffmpeg 5.0, so this works on both.
+        "-fps_mode", "passthrough",
         "-vf", f"scale={out_width}:{out_height}:flags=area",
         "-pix_fmt", "rgb24", "-f", "rawvideo", "-",
     ]

@@ -100,11 +100,13 @@ Both baselines were swept on this suite and are shown at the threshold that maxi
 here, which is the friendliest reading of each. flashmap's thresholds come from the spec and
 were not tuned on either set.
 
-Two baselines did not run, and the reason is in `results/baselines.json` with the machine probe
-that supports it: **EA IRIS**, whose pinned image has never built and whose build would have
-taken over a Docker VM that another project's stack was already using, and **Apple
-VideoFlashingReduction**, which needs Xcode on a machine that has Command Line Tools only. No
-number from either appears anywhere.
+Two baselines did not run **on this suite**, and the reason is in `results/baselines.json` with
+the machine probe that supports it: **EA IRIS**, which is built and has run over the real clip
+pool but is not in this loop, because a conformance clip is generated, analysed and deleted
+inside one job and handing it to a second process means keeping three thousand flashing clips
+alive for it; and **Apple VideoFlashingReduction**, which needs Xcode on a machine that has
+Command Line Tools only. No number from either appears in this table. IRIS's numbers on the real
+clip pool are in `results/baselines/iris/` and `results/pool_recall.json`.
 
 What the baselines cannot do is measured rather than asserted, in
 `results/baselines.json` under `blind_spots_measured`: the area axis, the colour pair axis and
@@ -155,12 +157,12 @@ this":
 
 Prepared, not labelled. Nobody on this lane labels a segment.
 
-<!--n results/realclips_status.json:segments -->40<!--/n--> ten second segments were cut from
-<!--n results/realclips_status.json:titles -->15<!--/n--> titles across
-<!--n results/realclips_status.json:source_count -->7<!--/n--> sources, as the
-union of what flashmap, ffmpeg's filter and naive differencing each flagged, plus time none of
-them flagged. That is
-<!--n results/realclips_status.json:windows_to_label -->400<!--/n--> one second windows to call.
+<!--n results/realclips_status.json:segments -->34<!--/n--> ten second segments were cut from
+<!--n results/realclips_status.json:titles -->9<!--/n--> titles across
+<!--n results/realclips_status.json:source_count -->5<!--/n--> sources, as the
+union of what flashmap, ffmpeg's filter, naive differencing and EA IRIS each flagged, plus time
+none of them flagged. That is
+<!--n results/realclips_status.json:windows_to_label -->340<!--/n--> one second windows to call.
 Each segment has an opaque id and one plot, with no title, no source, no position in the film and
 no detector output anywhere on the figure. `eval/labeling/GUIDE.md` quotes the spec conditions
 and says what is not a flash.
@@ -169,9 +171,29 @@ The analysis is written and tested end to end on fabricated labels, so the only 
 two people filling in `eval/labeling/labels_*.csv`. `eval/labeling/GUIDE.md` says who takes
 which sheet, how much of it, and what to run afterwards.
 
-IRIS is not one of the candidate lists, because the image has never built, so anything only IRIS
-would have proposed is not in the union and the recall estimate is optimistic by an unknown
-amount. The four Theora titles were screened again before this pool was cut: the decoder was
+IRIS is a candidate list now. It was built on Sep 18, natively rather than in the shared Docker
+VM, and it has run over every clip it can decode, so the recall estimate is no longer optimistic
+by an unknown amount. The amount turned out to be
+<!--n results/pool_recall.json:published.iris_only_windows -->0<!--/n-->: not one window in the
+union came from IRIS alone, so flashmap's coverage of the union is
+<!--n results/pool_recall.json:published.flashmap_pool_recall -->0.626263<!--/n--> with IRIS in it and
+<!--n results/pool_recall.json:published.flashmap_pool_recall_before_iris -->0.626263<!--/n--> without.
+IRIS flagged <!--n results/pool_recall.json:published.iris_flagged_segments -->6<!--/n--> segments
+across the whole pool, against flashmap's
+<!--n results/screening.json:totals.flagged_segments -->456<!--/n-->, and raised
+<!--n results/pool_recall.json:published.iris_warning_segments -->32<!--/n--> pass-with-warning
+stretches it does not treat as flags. It is a much stricter reading of the same rules, which is
+worth knowing and is not a verdict on either tool.
+
+`results/pool_recall.json` reports every detector against the four list union and against the
+three list union that stood before, side by side, in two scopes: every window of every title in
+scope, and the windows of the blinded segments. It also says plainly what the measurement is
+not. A window is positive there because a detector proposed it, not because a person called it,
+so it is an upper bound, it is not ground truth, and it is not comparable with the conformance
+recall in section 2. The union is also dominated by ffmpeg's filter, which is the only proposer
+of more than a third of it, so flashmap's share is as much a statement about that filter's
+breadth as about flashmap. The four
+Theora titles were screened again before this pool was cut: the decoder was
 fixed, the four were re-run on Sep 17, and `results/screening.json` records that under
 `rescreens`. Three of them are ISS night time-lapses that flash at nothing, and the fourth is a
 fireworks display with five flagged segments.
@@ -179,7 +201,10 @@ fireworks display with five flagged segments.
 A title joins the pool only when every candidate list has analysed it. Sixteen clips downloaded
 later in the day have no candidate list from either ffmpeg based baseline, so their time is not
 unflagged in the sense this pool means and they are skipped, with the reason recorded per title
-in `pool_key.json`.
+in `pool_key.json`. IRIS has run over those sixteen, so the two ffmpeg based lists are the only
+thing still holding them out; `make ffmpeg-ps-pool` and `make naive-luma-pool` would close it.
+A title IRIS could not decode is kept out by the same rule, and `results/baselines/iris_failures.json`
+names each one.
 
 Do not rebuild the pool once labelling has begun: a segment id is a position in a shuffled list,
 so the answers would end up describing different segments. `make_pool` refuses while any sheet

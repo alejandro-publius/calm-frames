@@ -120,18 +120,30 @@ def not_run(environment: dict) -> dict:
     return {
         "EA IRIS": {
             "ran": False,
+            "built": True,
             "why": (
-                "the pinned image at eval/baselines/iris/ has never built, and building it here "
-                f"would have taken the shared machine for a long time: {busy}. CLAUDE.md "
-                "forbids touching containers, images or volumes this project did not create, "
-                "and the build is a vcpkg source build of the whole IRIS dependency tree on "
-                "two jobs. Skipped rather than fought, as the lane brief asked."
+                "IRIS is built and has run over the real clip pool, but not over this suite. "
+                "A conformance clip is generated, analysed and deleted inside one job, because "
+                "it is hazardous by design and docs/SAFETY.md says it does not outlive the job "
+                "that made it. IRIS is a separate process reading a file from disk, so putting "
+                "it in that loop means keeping three thousand flashing clips alive for a second "
+                "tool to open. That has not been built. The Docker image still has not been "
+                f"built either, and would not be built here: {busy}, and CLAUDE.md forbids "
+                "touching containers, images or volumes this project did not create."
             ),
-            "how_to_run_it_later": "make iris-build, then make iris-run VIDEO=... OUT=...",
+            "where_iris_did_run": (
+                "results/baselines/iris/, one report per clip in the real pool, and "
+                "results/pool_recall.json, where it is the fourth candidate list"
+            ),
+            "how_to_run_it_here_later": (
+                "make iris-native-build, then teach eval/conformance to hand each clip to "
+                "eval/baselines/iris/run.py before it deletes it"
+            ),
             "effect_on_this_table": (
-                "no IRIS number appears anywhere in this repository. The cross-check of our "
-                "ground truth against IRIS that EVAL_PLAN section 4 asks for has not happened, "
-                "so the ground truth stands on the spec text alone."
+                "no IRIS row appears in this table. The cross-check of our ground truth against "
+                "IRIS that EVAL_PLAN section 4 asks for has not happened, so the ground truth "
+                "here stands on the spec text alone. What IRIS did change is the real clip "
+                "pool, which is a different measurement in a different file."
             ),
         },
         "Apple VideoFlashingReduction": {

@@ -36,7 +36,36 @@ REPORT = EVAL_DIR / "realclips" / "report.py"
 FABRICATED_FOR_TEST_ONLY = True
 
 
-def _write_sheet(path: Path, pool: dict, flip_every: int, unlabelable_every: int) -> None:
+def _write_sheet(
+    path: Path,
+    pool: dict,
+    key: dict,
+    flip_every: int,
+    unlabelable_every: int,
+    all_positive: bool = False,
+) -> None:
+    """A fabricated sheet whose answers cluster by title, the way real ones do.
+
+    The pattern is arithmetic, it describes no real segment, and it exists to exercise the
+    arithmetic downstream. Two properties it has to keep, because tests below depend on them
+    and both used to depend on the size of the pool rather than on the pattern:
+
+    - some window is unlabelable on BOTH sheets, so the exclusion path is reached. The two
+      strides used to be coprime, so the only shared one was the 391st window; a pool with
+      fewer than 391 windows had none and the exclusion test went red for a reason that had
+      nothing to do with exclusions. `unlabelable_every` is now the same stride on both sheets
+      plus a sheet specific extra, so the shared ones cannot run out;
+    - the labels vary by title and not only by position. Windows inside one title are
+      correlated in real life, which is the whole reason EVAL_PLAN makes the bootstrap over
+      titles the headline for this set. Labels drawn from position alone have no such
+      structure, so the bootstrap had nothing to resample and could come out narrower than
+      Wilson, which `eval/metrics.py` says outright can happen. Half the titles here are
+      mostly positive and half are mostly negative.
+    """
+    title_of = {row["segment_id"]: row["file"] for row in key["segments"]}
+    titles = sorted({row["file"] for row in key["segments"]})
+    mostly_positive = {name for index, name in enumerate(titles) if index % 2 == 0}
+
     with path.open("w", newline="") as handle:
         writer = csv.DictWriter(
             handle,
@@ -45,10 +74,31 @@ def _write_sheet(path: Path, pool: dict, flip_every: int, unlabelable_every: int
         writer.writeheader()
         counter = 0
         for segment in pool["segments"]:
+            title = title_of[segment["segment_id"]]
             for index in range(int(segment["windows"])):
                 counter += 1
-                unlabelable = "x" if counter % unlabelable_every == 0 else ""
-                label = "" if unlabelable else ("1" if counter % flip_every == 0 else "0")
+                if all_positive:
+                    # The agreed sheet: every window a positive and nothing unlabelable, so its
+                    # effect on the metrics cannot be confused with either labeller's answers.
+                    writer.writerow(
+                        {
+                            "segment_id": segment["segment_id"],
+                            "window_index": index,
+                            "window_start_s": index,
+                            "label": "1",
+                            "unlabelable": "",
+                            "notes": "FABRICATED FOR TEST ONLY",
+                        }
+                    )
+                    continue
+                shared = counter % 11 == 0
+                unlabelable = "x" if shared or counter % unlabelable_every == 0 else ""
+                if unlabelable:
+                    label = ""
+                elif title in mostly_positive:
+                    label = "0" if counter % flip_every == 0 else "1"
+                else:
+                    label = "1" if counter % flip_every == 0 else "0"
                 writer.writerow(
                     {
                         "segment_id": segment["segment_id"],
@@ -80,10 +130,11 @@ def report(tmp_path_factory) -> dict:
         pytest.skip("the blinded pool has not been built yet")
     tmp = tmp_path_factory.mktemp("realclips")
     pool = json.loads(POOL.read_text())
+    key = json.loads(KEY.read_text())
     sheet_a = tmp / "labels_test_a.csv"
     sheet_b = tmp / "labels_test_b.csv"
-    _write_sheet(sheet_a, pool, flip_every=3, unlabelable_every=17)
-    _write_sheet(sheet_b, pool, flip_every=4, unlabelable_every=23)
+    _write_sheet(sheet_a, pool, key, flip_every=3, unlabelable_every=17)
+    _write_sheet(sheet_b, pool, key, flip_every=4, unlabelable_every=23)
     out = tmp / "realclips.json"
     finished = subprocess.run(
         [
@@ -144,12 +195,24 @@ def test_kappa_is_computed_on_the_two_sheets(report):
 
 
 def test_the_bootstrap_over_titles_is_wider_than_wilson(report):
+    """And that it is over titles, which the width on its own does not prove.
+
+    Break the width half: draw the fabricated labels from window position alone, with no
+    per-title structure, and the bootstrap has nothing to resample. Break the grouping half:
+    key `per_title` in report.py by segment id instead of by file, and the group count stops
+    matching the titles. Both were seen red on Sep 18, 2026; the width half alone was not, and
+    that is why the group count is asserted here as well.
+    """
     row = report["any_overlap"]["table"]["flashmap"]
     wilson = row["recall_wilson_optimistic"]
     boot = row["recall_bootstrap_over_titles"]
     if boot["lo"] is None or wilson["value"] is None:
         pytest.skip("no positive windows in the fabricated pattern for this detector")
     assert (boot["hi"] - boot["lo"]) > (wilson["wilson_hi"] - wilson["wilson_lo"])
+    assert boot["groups"] == report["titles"], (
+        "the bootstrap resampled something other than whole titles: "
+        f"{boot['groups']} groups against {report['titles']} titles"
+    )
 
 
 def test_both_window_rules_are_computed_in_the_same_run(report):
@@ -186,11 +249,12 @@ def test_the_agreed_sheet_settles_the_metrics_and_kappa_stays_on_the_first_answe
     sheet_a = tmp / "labels_labeller_a.csv"
     sheet_b = tmp / "labels_labeller_b.csv"
     agreed = tmp / "labels_agreed.csv"
-    _write_sheet(sheet_a, pool, flip_every=3, unlabelable_every=17)
-    _write_sheet(sheet_b, pool, flip_every=4, unlabelable_every=23)
+    key = json.loads(KEY.read_text())
+    _write_sheet(sheet_a, pool, key, flip_every=3, unlabelable_every=17)
+    _write_sheet(sheet_b, pool, key, flip_every=4, unlabelable_every=23)
     # The agreed sheet calls every window a positive, which no labeller did, so its effect on
     # the metrics is impossible to confuse with either sheet's own answers.
-    _write_sheet(agreed, pool, flip_every=1, unlabelable_every=10_000)
+    _write_sheet(agreed, pool, key, flip_every=1, unlabelable_every=10_000, all_positive=True)
 
     without = _run(tmp, ["--labels", str(sheet_a), "--labels", str(sheet_b)])
     with_agreed = _run(

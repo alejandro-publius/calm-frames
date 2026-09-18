@@ -1,0 +1,94 @@
+{
+  "baseline": "iris",
+  "tool_version": "EA IRIS d96978ac1107f3463b77f69a9c1b1ec5d45291a0, built by eval/baselines/iris/build-native.sh on Darwin arm64",
+  "video": "HAZARD_pd1930_frozen_frolics.mp4",
+  "sha256": "928baf7c90f5689ab68bb9638df35889cfce55cb4e480b41452f6bce1efc3c66",
+  "params": {
+    "iris_commit": "d96978ac1107f3463b77f69a9c1b1ec5d45291a0",
+    "appsettings": "upstream config/appsettings.json, unchanged",
+    "pattern_detection": false,
+    "frame_resize": false,
+    "safe_area_proportion": 0.25,
+    "safe_area_is_the_upstream_default": true,
+    "flagged_from_frame_result": 2,
+    "include_warnings": false,
+    "merge_gap_s": 0.25,
+    "frame_seconds": 0.033005
+  },
+  "build": {
+    "iris_repo": "https://github.com/electronicarts/IRIS",
+    "iris_commit": "d96978ac1107f3463b77f69a9c1b1ec5d45291a0",
+    "built_by": "eval/baselines/iris/build-native.sh",
+    "built_on": "2026-09-18T07:26:25Z",
+    "machine": "Darwin arm64",
+    "compiler": "Apple clang version 16.0.0 (clang-1600.0.26.6)",
+    "sdk": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+    "cmake": "cmake version 4.4.3",
+    "opencv": "4.14.0",
+    "ffmpeg_libavformat": "63.1.101",
+    "spdlog": "1.17.0",
+    "dependency_source": "Homebrew, not vcpkg. See the note at the top of this script.",
+    "tests_built": "no",
+    "test_videos_fetched": "no"
+  },
+  "frames_analyzed": 15260,
+  "flagged_frames": 0,
+  "warning_frames": 66,
+  "segment_count": 0,
+  "segments": [],
+  "warning_segment_count": 6,
+  "warning_segments": [
+    {
+      "start_s": 109.5,
+      "end_s": 109.566,
+      "duration_s": 0.066,
+      "frames": 2
+    },
+    {
+      "start_s": 237.533,
+      "end_s": 237.866,
+      "duration_s": 0.333,
+      "frames": 10
+    },
+    {
+      "start_s": 245.933,
+      "end_s": 246.199,
+      "duration_s": 0.266,
+      "frames": 8
+    },
+    {
+      "start_s": 246.9,
+      "end_s": 247.833,
+      "duration_s": 0.933,
+      "frames": 25
+    },
+    {
+      "start_s": 252.966,
+      "end_s": 253.433,
+      "duration_s": 0.467,
+      "frames": 14
+    },
+    {
+      "start_s": 258.3,
+      "end_s": 258.533,
+      "duration_s": 0.233,
+      "frames": 7
+    }
+  ],
+  "agrees_with_iris_own_verdict": true,
+  "iris_overall_result": "PassWithWarning",
+  "iris_results": [],
+  "iris_total_luminance_incidents": {
+    "ExtendedFailFrames": 0,
+    "FlashFailFrames": 0,
+    "PassWithWarningFrames": 66,
+    "TotalFailedFrames": 0
+  },
+  "iris_total_red_incidents": {
+    "ExtendedFailFrames": 0,
+    "FlashFailFrames": 0,
+    "PassWithWarningFrames": 0,
+    "TotalFailedFrames": 0
+  },
+  "notes": "EA IRIS through its own example app, at the upstream settings. A frame joins a segment when its luminance or red result is an extended fail or a flash fail, or its pattern result is a fail. Pass with warning is 2 to 3 Hz flashing that IRIS passes, and is counted in warning_frames rather than flagged. Not a conformance result and not a safety claim: it is a second opinion, so that the real clip pool is not drawn from our own detector alone."
+}

@@ -52,7 +52,7 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
 | **Next session, first thing** | Fix the pattern crop defect in section 4c: a full-frame six-pair pattern with a near-black edge bar escapes the rule, because the picture detector crops that bar as pillarbox and the count falls to five pairs. A hazard reaches a child. `docs/VERIFY_PASS_2.md` reproduces it. | It is the only thing on this page where something flashing or striped gets through. |
 | **Next session, after that** | Decide whether the three unreachable features get wired or get cut. Per-profile logs and the household hide log both need one shared store between the player screen and the kid mode route. The registry needs one `lookupMap` call in the shelf. Neither is large; both were left because the lanes that built them did not own the file. | They are built and tested and a judge cannot see any of them. Section 4c has the detail. |
-| **Any evening, about an hour** | Label the 40 blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all 40. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. |
+| **Any evening, about an hour** | Label the <!--n results/realclips_status.json:segments -->34<!--/n--> blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all of them. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. The pool was recut on Sep 18 when EA IRIS joined as a candidate list, so the segment ids are not the ones an earlier version of this page named. |
 | **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add that line to this file. It has to start a line of its own: no bullet, no table cell, no backticks. The exact wording is in the refusal `make deploy` prints. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Seventeen tests now cover both locks, run against a copy of the script so this file is never touched. Nothing has touched AWS. |
 | **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
 | **Oct 19 to 20** | Film the video from `docs/VIDEO_SCRIPT.md`, timed to 2:55. | |
@@ -212,9 +212,15 @@ every exemption it did apply.
    whose reports can be 5219 ms apart, which trades the thing this app exists for
    against a cosmetic gain, so it has not been done. If it is done, the cap has to
    be measured against the worst report gap, not chosen.
-2. **EA IRIS is still not a candidate list**, so the recall estimate is optimistic
-   by an unknown amount, and the 16 calm clips are screened but not in the
-   labelling pool because only flashmap has looked at them.
+2. **The two ffmpeg based lists have still not run on the 16 calm clips**, so those
+   titles are screened and are not in the labelling pool. EA IRIS has now run on
+   them and is a candidate list, so the two ffmpeg based lists are the only thing
+   holding them out: `make ffmpeg-ps-pool` and `make naive-luma-pool` close it.
+   Worth doing, because adding IRIS shrank the pool from 40 segments across 15
+   titles to <!--n results/realclips_status.json:segments -->34<!--/n--> across
+   <!--n results/realclips_status.json:titles -->9<!--/n-->: the three ISS night
+   passes dropped out because IRIS cannot decode them, and they were carrying half
+   the unflagged half of the pool.
 
 ## 5. What is not done
 
@@ -237,7 +243,7 @@ every exemption it did apply.
   <!--n results/verify_pool.json:not_analyzed.pending -->1<!--/n--> title and
   <!--n results/verify_pool.json:not_analyzed.no_entry_json -->3<!--/n-->
   directories have no verdict at all, so they are in none of the four counts.
-- **EA IRIS is not built**, so the baselines table has ffmpeg and naive but no IRIS. The shared Docker VM has another project's services in it, and a vcpkg OpenCV build there could get their containers killed rather than the compiler.
+- **EA IRIS does not run on the conformance suite**, so that table still has ffmpeg and naive and no IRIS. It is built and it has run over the real clip pool; what it is not in is the generate-analyse-delete loop, because putting a second process in that loop means keeping three thousand flashing clips alive for it. The pinned Docker image is still unbuilt and stays that way on this machine: the shared VM has another project's services in it, and a vcpkg OpenCV build there could get their containers killed rather than the compiler.
 - **The conformance run is partial**, and `results/conformance.json` says so in its own statement field rather than implying a full 3,000-clip run.
 - **The demo PIN does not exist yet**, so the release notes say so.
 - **Nothing in the app has been opened on a device since kid mode was wired up.** Every screen, the first run, the play path and the player's refusal are checked in the app's own test suite, and none of it has been seen on the virtual device or the stick. The bundled clip's URI is `file:///pkg/assets/raw/offline/calm_gradient.mp4`, which is where the Kepler file system README says package assets land, and that has never been played.
@@ -256,7 +262,7 @@ Every one comes from `results/`, and CI fails if a document drifts from them.
 | Flagged segments in the pool | <!--n results/screening.json:totals.flagged_segments -->456<!--/n--> across <!--n results/screening.json:totals.sources_with_at_least_one_flag -->6<!--/n--> sources | screening.json |
 | Red-rule segments found | none | screening.json |
 | Longest gap between player position reports | <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms | vvd_timeupdate_stats.json |
-| Segments ready for blind labelling | <!--n results/realclips_status.json:segments -->40<!--/n--> across <!--n results/realclips_status.json:titles -->15<!--/n--> titles | realclips_status.json |
+| Segments ready for blind labelling | <!--n results/realclips_status.json:segments -->34<!--/n--> across <!--n results/realclips_status.json:titles -->9<!--/n--> titles | realclips_status.json |
 | Titles with a verify verdict | <!--n results/verify_pool.json:analyzed -->30<!--/n--> | verify_pool.json |
 | Of those, cover proven drawn | <!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n--> | verify_pool.json |
 | Of those, no flagged segments | <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> | verify_pool.json |
@@ -267,7 +273,7 @@ Every one comes from `results/`, and CI fails if a document drifts from them.
 
 1. Send the emails tomorrow.
 2. When the stick arrives: `make stick-day`, then film. That is the gate. **Add one measurement to it:** the worst gap between two scheduler ticks. The harness re-checks every 50 ms, so logging the longest gap between consecutive checks gives the worst pause of the JavaScript thread, and the guard band should be set above it rather than at the 500 ms we picked by judgement. This is not instrumented yet.
-3. Meanwhile: more titles through verify, IRIS when the Docker VM frees up, and finish the conformance run.
+3. Meanwhile: more titles through verify, the two ffmpeg based lists over the 16 calm clips so they can join the labelling pool, and finish the conformance run.
 
 ---
 
@@ -278,3 +284,13 @@ in this file that tells you to add the line. The container build was stopped
 part way because it helped push the shared Docker VM into its memory limit and
 killed another project's container, which was restarted; the build is verified
 on a CI runner from now on. Nothing has touched AWS.
+
+**Status line, Fri Sep 18 early (baselines and evaluation lane).** EA IRIS is
+built and is the fourth candidate list, so the recall caveat is gone and a
+measured number stands where it was. It was built on the host in about two
+minutes, not in the shared Docker VM, which was never touched. The amount the
+old estimate was optimistic by turned out to be zero: not one window in the
+union came from IRIS alone. IRIS cannot decode six of the pool's clips and calls
+them PASS without saying it never looked, so those titles are kept out and named
+in `results/baselines/iris_failures.json`. That shrank the pool, and section 4c
+says what closes it again.

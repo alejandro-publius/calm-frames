@@ -1,0 +1,15 @@
+{
+  "generated_on": "2026-09-18",
+  "what_this_is": "clips EA IRIS could not analyse on this build, and why. They have no report in results/baselines/iris/, so they have no IRIS candidate list, so eval/labeling/make_pool.py keeps them out of the pool.",
+  "clips_attempted_in_this_run": 6,
+  "failed": 6,
+  "how_to_count_the_pool": "one report in results/baselines/iris/ per clip IRIS analysed, plus the failures here, is the whole pool. This file is rewritten by each run, so clips_attempted_in_this_run is that run and not the pool.",
+  "failures": {
+    "HAZARD_iss_night_pass_africa_mideast.ogv": "RuntimeError: IrisApp wrote a frame data file with no frames in it, which is what this build does when OpenCV cannot decode the file. IRIS called it PASS anyway.",
+    "HAZARD_iss_night_pass_europe_to_asia.ogv": "RuntimeError: IrisApp wrote a frame data file with no frames in it, which is what this build does when OpenCV cannot decode the file. IRIS called it PASS anyway.",
+    "HAZARD_iss_night_pass_malaysia.ogv": "RuntimeError: every frame carries the same timestamp (0.0 s over 61 frames), because IRIS read this container's frame rate as 0. Its analysis has no time base, so its flags cannot be placed in the clip.",
+    "HAZARD_wc_clouds_seloncourt.ogv": "RuntimeError: every frame carries the same timestamp (0.0 s over 715 frames), because IRIS read this container's frame rate as 0. Its analysis has no time base, so its flags cannot be placed in the clip.",
+    "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv": "RuntimeError: every frame carries the same timestamp (0.0 s over 1661 frames), because IRIS read this container's frame rate as 0. Its analysis has no time base, so its flags cannot be placed in the clip.",
+    "HAZARD_wc_planepassingthundercloud.ogv": "RuntimeError: every frame carries the same timestamp (0.0 s over 660 frames), because IRIS read this container's frame rate as 0. Its analysis has no time base, so its flags cannot be placed in the clip."
+  }
+}
