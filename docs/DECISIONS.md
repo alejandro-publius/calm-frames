@@ -294,3 +294,45 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
 - **Decision:** Add `moto==5.2.3` and `boto3==1.43.97` to `.venv`, and install them in CI's new infra job.
 - **Why:** The ingest container's rules are worth testing end to end, and moto is a real S3, DynamoDB and SSM in the test process, so the test drives the actual boto3 calls rather than a mock of them. boto3 is a container dependency anyway and is already in the hash pinned requirements.
 - **Cost:** Two more packages in a venv other lanes share, both additive. The same job also installs `aws-cdk-lib`, which CI never had, so `pipeline/tests/test_infra.py` has been skipping itself there since it was written.
+
+## 2026-09-17, night: the real clip set and the credits
+
+- **Decision:** Rescreen the four Theora titles with a merge, rather than running
+  the whole pool again.
+  **Why:** the whole pool run was already going when this lane picked the work
+  up. It ran for two hours and fourteen minutes and wrote nothing: it was killed
+  near the end with its output still in the buffer, so there was no log either.
+  Four titles take six minutes. `eval/screen.py --only` now screens the named
+  titles, replaces their rows and leaves every other row as the run that made it
+  wrote it, recording the re-run in a `rescreens` block so a merged file never
+  reads as one sweep.
+  **Cost:** a merge path and four tests, each seen to fail. Per clip lines are
+  flushed now, so the next long run leaves something to read.
+
+- **Decision:** A title joins the labelling pool only when every candidate list
+  has analysed it, not when any one of them has.
+  **Why:** the pool's negative half is time no detector flagged. Sixteen calm
+  clips arrived after the two ffmpeg based baselines had run, so a rescreen was
+  about to put their time into that half with only flashmap having looked at it,
+  which would have handed flashmap free false positives on windows nobody
+  measured.
+  **Cost:** those sixteen titles are out of the pool until the baselines run on
+  them. The skip reason names which lists never ran, per title.
+
+- **Decision:** Generate NOTICE and the app's credits screen from
+  media/LICENSES.csv, rather than keeping two lists by hand.
+  **Why:** the conditions that are not the licence text are the ones that get
+  lost: the Blender logo exclusion, the Tears of Steel credit scroll, the DVIDS
+  non-endorsement notice, the NASA credit line, share alike. Two hand-kept lists
+  drift, and the one that drifts is the one nobody is reading.
+  **Cost:** `eval/attribution.py --check` in the test suite, and a small table of
+  eight titles whose names no page gives us. A row that is neither a Commons file
+  nor in that table fails rather than being named after its file.
+
+- **Decision:** Write the credits screen but do not wire it into navigation.
+  **Why:** the screens around it belong to another lane and were being edited at
+  the time. The screen is complete, tested, and its frame is in the app's own
+  flashmap run, which passes with it in.
+  **Cost:** nothing navigates there yet, so a CC BY clip is credited in NOTICE
+  and not yet anywhere a person watching can see. The file says so at the top
+  and gives the one line that wires it.
