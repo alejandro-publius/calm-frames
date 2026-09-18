@@ -17,6 +17,12 @@ REPO := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 PY ?= $(REPO)/.venv/bin/python
 PKG_ID ?= io.github.alejandropublius.calmframes
 
+# The ingest image. DOCKER_BUILD is a variable because a machine that is not
+# ARM64 needs buildx to make an ARM64 image:
+#   make image DOCKER_BUILD="docker buildx build --platform linux/arm64"
+INGEST_IMAGE ?= calm-frames/ingest:local
+DOCKER_BUILD ?= docker build
+
 # Node comes from fnm and is pinned by .nvmrc. The Shaka Player build that runs
 # during npm install needs a JDK, which is why JAVA_HOME is set for builds and
 # left out of test runs that do not need it.
@@ -43,6 +49,7 @@ include eval/baselines/naive_luma_diff/naive_luma.mk
 .PHONY: help test test-app test-flashmap test-pipeline test-eval ci \
         reproduce reproduce-release reproduce-all synth cdk-diff deploy destroy \
         release release-notes stick-day stick-day-vvd hooks hooks-selftest \
+        image image-smoke image-context image-push audit sbom \
         scan scan-tree pins clean
 
 help: ## show this list
@@ -126,11 +133,37 @@ synth: ## synthesize the CDK stack offline, no credentials, no account
 cdk-diff: ## cdk diff, which does reach AWS, so it is behind the same guard
 	@$(REPO)/scripts/aws_guard.sh diff
 
+# One command, two steps: the stack, then the image the task runs. The stack
+# comes first because the image is pushed to the ECR repository the stack makes.
+# If the first step refuses, make stops and the second never runs.
 deploy: ## blocked until HUMAN CHECKPOINT D. Use make synth instead
 	@$(REPO)/scripts/aws_guard.sh deploy
+	@$(REPO)/scripts/aws_guard.sh image
 
 destroy: ## blocked by the same rule as deploy
 	@$(REPO)/scripts/aws_guard.sh destroy
+
+# ------------------------------------------------------- the ingest image
+#
+# Building bills nobody, so `image` runs today. Only `image-push` reaches an
+# account, and it waits behind the same two locks as deploy.
+
+image: ## build the ingest container for ARM64. No AWS, no account
+	cd $(REPO) && DOCKER_BUILDKIT=0 $(DOCKER_BUILD) \
+		-f pipeline/infra/ingest/Dockerfile -t $(INGEST_IMAGE) .
+	@echo
+	@docker image inspect $(INGEST_IMAGE) \
+		--format 'built {{.Architecture}}/{{.Os}}, {{len .RootFS.Layers}} layers, {{.Size}} bytes'
+
+image-smoke: ## run the image with no credentials and read what it refuses
+	docker run --rm $(INGEST_IMAGE) ; \
+	  echo "exit $$? (2 is right: nothing is configured, so it refuses to start)"
+
+image-context: ## every file the build would send to the daemon
+	@$(PY) $(REPO)/scripts/build_context.py
+
+image-push: ## build and push to ECR. Blocked until HUMAN CHECKPOINT D
+	@$(REPO)/scripts/aws_guard.sh image
 
 # -------------------------------------------------------------- release
 
@@ -164,6 +197,25 @@ scan-tree: ## gitleaks over the whole working directory, including ignored files
 
 pins: ## report any dependency version that is not pinned
 	@$(PY) $(REPO)/scripts/check_pins.py
+
+# ------------------------------------------------------- the camera meter
+#
+# eval/meter.py reads a filmed TV screen and counts WCAG flashes inside it.
+# Two targets drive it: one turns a session's recordings into numbers, the
+# other re-runs the meter's own validation against simulated footage.
+#
+# SAFETY: meter-validate renders strobes on purpose. Every clip is written to a
+# scratch directory outside the repository, measured and deleted inside the
+# same job, and never opened. CALM_METER_SCRATCH says where; the default is
+# under TMPDIR and is never inside media/.
+
+.PHONY: ingest-recordings meter-validate
+
+ingest-recordings: ## screen-level recordings -> results/screen_level.json. Refuses when there are none
+	$(PY) $(REPO)/eval/meter_ingest.py $(INGEST_ARGS)
+
+meter-validate: ## re-measure the meter on simulated footage. Half an hour, writes results/meter_validation.json
+	$(PY) $(REPO)/eval/meter_validate.py $(METER_VALIDATE_ARGS)
 
 # ----------------------------------------------------------------- house
 

@@ -16,9 +16,11 @@
 !LICENSE
 !NOTICE
 
-# Nothing generated, and no test media, even from the directories above.
+# Nothing generated, and no tests, even from the directories above. The tests
+# are not part of either package, and flashmap/tests/fixtures/ holds video.
 flashmap/**/__pycache__/
-flashmap/tests/fixtures/
+flashmap/tests/
+flashmap/.hypothesis/
 flashmap/build/
 flashmap/dist/
 flashmap/*.egg-info/
