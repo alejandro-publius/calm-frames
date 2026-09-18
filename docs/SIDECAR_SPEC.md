@@ -127,9 +127,18 @@ measured on it.
 `pipeline/verify.py` uses this. It measures the kid safe rendition on the source's rectangle,
 and it separately refuses to publish a title whose rendition does not have the source's coded
 frame size, the source's picture rectangle, the source's frame count, a span that has not
-stretched by as much as half a frame and a start that has not moved by as much as a whole
-frame. The start is judged more loosely because a re-encode routinely renumbers the first
-presentation timestamp to zero while leaving every picture where it was.
+stretched by as much as half a frame and a start that has not moved by more than 150 ms. The
+start gets a bar of its own because a re-encode routinely renumbers the first presentation
+timestamp to zero while leaving every picture where it was, and the files in this pool start
+anywhere from 3 to 67 ms in.
+
+That bar is deliberately not the guard band. The map's intervals are on the source timeline,
+so a rendition whose timeline has slid draws every live cover that much late, out of the same
+band that has to absorb the scheduler. A cover has already been measured going on 86 ms after
+its marker with the JavaScript thread away for about 335 ms of a 500 ms band, so the band has
+no room to spare. Whatever the offset turns out to be, verify records it per preset in the
+catalog entry as `rendition_start_offset_ms`, so a player can subtract it and it costs the
+band nothing.
 
 ### Why this is still version 1
 

@@ -42,6 +42,7 @@ from .flashmap_adapter import FlashMapDoc, FlashmapAdapter, MapFormatError, load
 from .hashing import sha256_file
 from .hideplan import (
     DEFAULT_CALM_MARGIN_MS,
+    DEFAULT_GUARD_BAND_MS,
     HidePlan,
     build_cover_intervals,
     is_calm,
@@ -62,15 +63,29 @@ COVER_SAMPLE_LIMIT = 6
 # How far a rendition may run longer or shorter than the source and still be
 # showing the same pictures at the same moments: half a frame. Less than that
 # and nothing has moved by a whole frame anywhere.
-#
-# Where the timeline starts is judged more loosely, at one whole frame, because
-# a re-encode routinely renumbers the first presentation timestamp to zero and
-# one frame is the smallest step a picture can move by. The frame count and the
-# span are what catch a rendition that really lost or gained time.
-#
-# Both are engineering tolerances, not numbers from a spec, and
-# docs/SPEC_SOURCES.md is where spec numbers live.
 TIMING_TOLERANCE_FRAMES = 0.5
+
+# How far a rendition's timeline may start from the source's.
+#
+# Not the guard band, even though the guard band is what would absorb it. That
+# band is shared. The app schedules live covers from the signed map, and the
+# map's intervals are on the SOURCE timeline, so a rendition that starts late
+# draws every live cover that much late and spends the same 500 ms the
+# scheduler needs. The software lead time run measured a cover going on 86 ms
+# AFTER its marker, because the JavaScript thread was unavailable for about
+# 335 ms (results/gate1_software_vvd.json, and docs/GATES.md on why that is the
+# thread and not the scheduler). Handing a media offset the rest of that band
+# would leave nothing for the pause nobody has measured on hardware yet.
+#
+# So the offset is given a tolerance of its own, and the measured offset is
+# recorded per preset in the verify report and in the catalog entry, so a player
+# can subtract it and stop it costing the band anything at all.
+#
+# The worst offset in this pool is 67 ms, from a source whose first frame sits
+# two frames in. 150 ms is that with room to spare and still leaves the band
+# most of its headroom. An engineering tolerance, not a number from a spec, and
+# docs/SPEC_SOURCES.md is where spec numbers live.
+START_OFFSET_LIMIT_MS = 150.0
 
 
 @dataclass
@@ -188,6 +203,7 @@ def compare_rendition_to_source(
     rendition_map: FlashMapDoc,
     *,
     tolerance_frames: float = TIMING_TOLERANCE_FRAMES,
+    guard_band_ms: float = DEFAULT_GUARD_BAND_MS,
 ) -> tuple[bool, list[str], dict]:
     """Is the rendition the same picture, in the same place, at the same times?
 
@@ -196,15 +212,23 @@ def compare_rendition_to_source(
     plan built from the source only lines up with it if the two agree on where the picture is
     and when each frame arrives. So: the same coded frame, the same picture rectangle, the
     same number of frames, a span that has not stretched by as much as half a frame, and a
-    start that has not moved by as much as a whole frame. The two bars differ because a
-    re-encode routinely renumbers the first presentation timestamp to zero while keeping every
-    picture where it was.
+    start that has not moved by more than `START_OFFSET_LIMIT_MS`.
+
+    The two bars differ on purpose. A re-encode routinely renumbers the first presentation
+    timestamp to zero while leaving every picture where it was, and the source files in this
+    pool start anywhere from 3 to 67 ms in, so a bar of half a frame would refuse most of
+    them. It is not tied to the guard band either: the band is shared with scheduler jitter,
+    and a cover has already been measured going on 86 ms after its marker. See
+    `START_OFFSET_LIMIT_MS`. Whatever the offset turns out to be, it is reported so a player
+    can subtract it rather than spend the band on it.
 
     Returns (passed, problems, data). Anything that cannot be read is a problem, never a pass.
     """
     src = _geometry(source_map)
     ren = _geometry(rendition_map)
     problems: list[str] = []
+    # What a player needs in order to line the map up with the rendition itself.
+    measured: dict = {"start_offset_ms": None}
 
     if ren["picture_source"] != "carried":
         problems.append(
@@ -243,13 +267,21 @@ def compare_rendition_to_source(
                 problems.append(f"one of the two maps does not say when its {name} is")
         if all(src[k] is not None and ren[k] is not None for k in ("first_pts_ms", "last_pts_ms")):
             start_shift = abs(ren["first_pts_ms"] - src["first_pts_ms"])
+            measured["start_offset_ms"] = round(
+                ren["first_pts_ms"] - src["first_pts_ms"], 3
+            )
             src_span = src["last_pts_ms"] - src["first_pts_ms"]
             ren_span = ren["last_pts_ms"] - ren["first_pts_ms"]
             span_change = abs(ren_span - src_span)
-            if start_shift > median:
+            # A household may only ever make things stricter, so a guard band narrower than
+            # the tolerance narrows the tolerance with it.
+            start_limit = min(START_OFFSET_LIMIT_MS, guard_band_ms)
+            if start_shift > start_limit:
                 problems.append(
-                    f"the rendition starts {start_shift:.3f} ms away from the source, "
-                    f"and one frame is {median:.3f} ms"
+                    f"the rendition starts {start_shift:.3f} ms away from the source, and "
+                    f"{start_limit:.0f} ms is as far as that may go. The guard band cannot "
+                    "be asked to absorb it: it is already holding the scheduler's own "
+                    "lateness"
                 )
             if span_change > tolerance_ms:
                 problems.append(
@@ -260,7 +292,14 @@ def compare_rendition_to_source(
     return (
         not problems,
         problems,
-        {"source": src, "rendition": ren, "tolerance_ms": tolerance_ms},
+        {
+            "source": src,
+            "rendition": ren,
+            "tolerance_ms": tolerance_ms,
+            "guard_band_ms": guard_band_ms,
+            "start_offset_limit_ms": min(START_OFFSET_LIMIT_MS, guard_band_ms),
+            **measured,
+        },
     )
 
 
@@ -408,7 +447,9 @@ def verify_title(
                     f"in the kid safe rendition",
                     violations=safe_map.violation_count,
                 )
-                matched, problems, data = compare_rendition_to_source(source_map, safe_map)
+                matched, problems, data = compare_rendition_to_source(
+                    source_map, safe_map, guard_band_ms=plan.guard_band_ms
+                )
                 report.add(
                     f"rendition_matches_source:{preset}",
                     matched,
@@ -659,6 +700,19 @@ def apply_to_catalog(layout: TitleLayout, report: VerifyReport) -> None:
     entry.status = STATUS_VERIFIED if report.passed else STATUS_FAILED
     entry.verify_report = str(layout.verify_report_path)
     entry.notes["failed_checks"] = [check.name for check in report.failures]
+    # How far each rendition's timeline sits from the source's, in milliseconds. The map's
+    # intervals are on the source timeline, so a player scheduling live covers over the
+    # rendition adds this to every one of them. Recorded rather than absorbed: the guard band
+    # is already holding the scheduler's own lateness, and there is a measured cover that went
+    # on 86 ms after its marker.
+    offsets = {
+        check.name.split(":", 1)[1]: check.data.get("start_offset_ms")
+        for check in report.checks
+        if check.name.startswith("rendition_matches_source:")
+        and check.data.get("start_offset_ms") is not None
+    }
+    if offsets:
+        entry.notes["rendition_start_offset_ms"] = offsets
     write_entry(layout.entry_path, entry)
     update_index(layout.index_path, entry)
 

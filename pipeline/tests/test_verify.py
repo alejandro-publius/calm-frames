@@ -18,7 +18,7 @@ from pipeline.flashmap_adapter import FlashmapAdapter, parse_map
 from pipeline.hideplan import HidePlan
 from pipeline.ingest import IngestOptions, ingest_title
 from pipeline.render import still_is_flat
-from pipeline.verify import compare_rendition_to_source
+from pipeline.verify import apply_to_catalog, compare_rendition_to_source
 from pipeline.verify import main as verify_main
 from pipeline.verify import verify_title
 
@@ -532,23 +532,56 @@ class TestTheRenditionMustMatchTheSource:
         assert failed
         assert "frames" in failed[0].detail
 
-    def test_a_timeline_that_slid_more_than_a_frame_blocks_publishing(self, built):
-        built["analyzer"].set_geometry("safe.mp4", first_pts_ms=100.0, last_pts_ms=3400.0)
+    def test_a_start_that_slid_too_far_blocks_publishing(self, built):
+        """The map's intervals are on the source timeline.
+
+        A rendition whose timeline has slid draws every live cover that much late, out of a
+        guard band that is already holding the scheduler's own lateness. Past the tolerance
+        the title cannot publish.
+        """
+        built["analyzer"].set_geometry("safe.mp4", first_pts_ms=300.0, last_pts_ms=3600.0)
+        report = run_verify(built)
+        assert not report.passed
+        failed = [c for c in report.failures if c.name == "rendition_matches_source:wcag"]
+        assert failed
+        assert "as far as that may go" in failed[0].detail
+
+    def test_the_offset_is_not_allowed_to_eat_the_whole_guard_band(self, built):
+        """400 ms is inside the 500 ms guard band and still far too far.
+
+        The band is shared with scheduler jitter: a cover has been measured going on 86 ms
+        after its marker, with the JavaScript thread away for about 335 ms. Spending the band
+        on a media offset as well would leave nothing.
+        """
+        built["analyzer"].set_geometry("safe.mp4", first_pts_ms=400.0, last_pts_ms=3700.0)
         report = run_verify(built)
         assert not report.passed
         assert "rendition_matches_source:wcag" in failed_names(report)
 
-    def test_a_start_renumbered_by_one_frame_is_allowed(self, built):
+    def test_a_start_renumbered_to_zero_is_allowed(self, built):
         """A re-encode routinely puts the first presentation timestamp at zero.
 
         The pictures and their spacing are the same, so nothing has moved relative to
-        anything else, and refusing this would refuse most renditions.
+        anything else. Refusing this would refuse most of the pool: its source files start
+        anywhere from 3 to 67 ms in.
         """
         built["analyzer"].set_geometry(
-            "clip.mp4", first_pts_ms=33.333, last_pts_ms=3333.333
+            "safe.mp4", first_pts_ms=67.0, last_pts_ms=3367.0
         )
         report = run_verify(built)
         assert report.passed, failed_names(report)
+
+    def test_the_offset_is_recorded_so_a_player_can_subtract_it(self, built):
+        """Recorded rather than absorbed, so it costs the guard band nothing."""
+        built["analyzer"].set_geometry(
+            "safe.mp4", first_pts_ms=67.0, last_pts_ms=3367.0
+        )
+        report = run_verify(built)
+        check = [c for c in report.checks if c.name == "rendition_matches_source:wcag"][0]
+        assert check.data["start_offset_ms"] == pytest.approx(67.0)
+        apply_to_catalog(built["layout"], report)
+        entry = read_entry(built["layout"].entry_path)
+        assert entry.notes["rendition_start_offset_ms"]["wcag"] == pytest.approx(67.0)
 
     def test_a_timeline_that_stretched_blocks_publishing(self, built):
         built["analyzer"].set_geometry("safe.mp4", last_pts_ms=3400.0)
@@ -606,6 +639,22 @@ class TestComparingAMapToItsSource:
         matched, problems, _ = compare_rendition_to_source(self._doc(), rendition)
         assert not matched
         assert any("not the one carried over" in problem for problem in problems)
+
+    def test_a_narrow_guard_band_narrows_the_offset_tolerance(self):
+        """A household may only ever make things stricter.
+
+        A room that asked for a 100 ms guard band must not be handed the 150 ms of offset the
+        default allows, because its band has that much less to absorb.
+        """
+        rendition = self._doc(first_pts_ms=120.0, last_pts_ms=3420.0)
+        wide, _, _ = compare_rendition_to_source(self._doc(), rendition)
+        narrow, problems, data = compare_rendition_to_source(
+            self._doc(), rendition, guard_band_ms=100.0
+        )
+        assert wide
+        assert not narrow
+        assert data["start_offset_limit_ms"] == 100.0
+        assert any("as far as that may go" in problem for problem in problems)
 
     def test_a_map_that_does_not_say_its_shape_does_not_match(self):
         """Fail closed: a rendition we cannot measure is a rendition we cannot publish."""
