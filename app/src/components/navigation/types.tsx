@@ -95,6 +95,16 @@ export type AppStackParamList = {
        */
       renditionStartOffsetMs?: number;
       titleId?: string;
+      /**
+       * Who is watching, so a cover can be written into that kid's log.
+       *
+       * The player has no other way to learn it: the shelf knows which profile
+       * is active and the player is a separate route. Left out, the hide is
+       * recorded as unattributed rather than filed under a kid who was not
+       * there.
+       */
+      profileId?: string;
+      profileName?: string;
     };
   };
 };

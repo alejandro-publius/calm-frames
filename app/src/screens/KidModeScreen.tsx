@@ -32,15 +32,15 @@ import React from 'react';
 import { BackHandler, Platform } from 'react-native';
 import FirstRunScreen, { FirstRunResult } from '../calmframes/FirstRunScreen';
 import { DEFAULT_SETTINGS, HouseholdSettings } from '../calmframes/household';
-import { emptyHideLog } from '../calmframes/hideLog';
+import { useHideLogs } from '../calmframes/hideLogStore';
 import KidHomeScreen from '../calmframes/KidHomeScreen';
 import {
   activeProfile,
+  allProfileHides,
   effectiveSettings,
-  emptyProfileLogs,
   Family,
   newFamily,
-  ProfileLogs,
+  Profile,
   selectProfile,
   setFloor,
 } from '../calmframes/profiles';
@@ -130,6 +130,7 @@ export function guardedParamsFor(
   entry: CheckedTitle,
   settings: HouseholdSettings,
   chimeEnabled = true,
+  watching?: Profile,
 ) {
   return {
     sha256: entry.title.sha256,
@@ -140,6 +141,10 @@ export function guardedParamsFor(
     // The household switch travels with the title, because the player screen
     // is where the cue is raised and it has no other way to learn the answer.
     chimeEnabled,
+    // Who is watching, for the same reason: the player writes the hide log and
+    // this is the only way it can know whose sitting it was.
+    profileId: watching?.id,
+    profileName: watching?.name,
   };
 }
 
@@ -155,13 +160,12 @@ const KidModeScreen = ({
   // it rather than stored beside it, so there is no second copy to disagree.
   const [family, setFamily] = React.useState<Family>(() => newFamily(DEFAULT_SETTINGS));
   const [gate, setGate] = React.useState<PinGateState>(emptyPinGate());
-  // The player covers the flagged parts and knows what it hid. Carrying that
-  // back here across a navigation boundary needs a store the two screens
-  // share, and that is not built yet, so the parent area says nothing has been
-  // hidden for a kid rather than inventing entries. A log that guesses is
-  // worse than an empty one. The logs are kept per profile so that when the
-  // player can post into them, one kid's record cannot land in another's.
-  const [profileLogs] = React.useState<ProfileLogs>(emptyProfileLogs());
+  // The player covers the flagged parts and knows what it hid. It writes each
+  // one into the shared store in hideLogStore.ts, which is a module rather
+  // than state on either screen, so a hide survives the player being torn down
+  // on the way back here. The logs are kept per profile, so one kid's record
+  // cannot land in another's.
+  const profileLogs = useHideLogs();
   const [view, setView] = React.useState<KidModeView>('first-run');
   const [openId, setOpenId] = React.useState<string | null>(null);
 
@@ -213,7 +217,12 @@ const KidModeScreen = ({
   const play = (entry: CheckedTitle) => {
     navigation.navigate(Screens.PLAYER_SCREEN, {
       data: titleDataFor(entry),
-      guarded: guardedParamsFor(entry, settings, family.chimeEnabled !== false),
+      guarded: guardedParamsFor(
+        entry,
+        settings,
+        family.chimeEnabled !== false,
+        watching,
+      ),
     });
   };
 
@@ -236,7 +245,7 @@ const KidModeScreen = ({
         onGateChange={setGate}
         settings={family.floor}
         onSettingsChange={(next) => setFamily(setFloor(family, next))}
-        log={emptyHideLog()}
+        log={allProfileHides(profileLogs)}
         family={family}
         onFamilyChange={setFamily}
         profileLogs={profileLogs}

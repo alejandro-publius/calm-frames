@@ -60,6 +60,7 @@ import {
 } from '../calmframes/playerAccess';
 import { useCoverHarness } from '../calmframes/useCoverHarness';
 import { useFlashGuard } from '../calmframes/useFlashGuard';
+import { recordHide } from '../calmframes/hideLogStore';
 import { useChimeCue } from '../calmframes/useChimeCue';
 import { playChime } from '../calmframes/chimeSound';
 import { useUiCapture } from '../calmframes/uiCapture';
@@ -160,6 +161,16 @@ const PlayerScreen = ({
     titleId: guardedParams?.titleId ?? data.id,
     titleName: data.title,
     ready: isVideoInitialized && Boolean(guardedParams),
+    // One line in the parent area per cover this player put on. The guard
+    // fires this once per interval it actually covered; everything added here
+    // is what the guard has no way of knowing: whose sitting it was and which
+    // preset the schedule was built under.
+    onHide: (entry) =>
+      recordHide(entry, {
+        profileId: guardedParams?.profileId,
+        profileName: guardedParams?.profileName,
+        preset: guardedParams?.settings?.preset,
+      }),
   });
   // The courtesy sound. useChimeCue decides whether a chime is owed and
   // refuses to raise one that no cover follows, so everything this call does is

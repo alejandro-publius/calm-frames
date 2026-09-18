@@ -799,3 +799,51 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   than assumed: the whole spine of the committed flash design plus 250 cross
   product rows, 402 clips, went through the old detector and the new one on the
   frames the generator drew, and the picture rectangle changed on none of them.
+
+## 2026-09-18: the hide log producer, and a module-level store rather than a context
+
+- **Decision:** the player writes one entry per cover into a module-level
+  store, `app/src/calmframes/hideLogStore.ts`, and the kid mode route reads it
+  through `useSyncExternalStore`. Not a context, not Redux, not the navigation
+  parameters.
+  **Why:** the guard has always reported every cover through `onHide` and the
+  parent area has always been able to draw a log. Nothing joined them, so a
+  household read "Nothing has been hidden yet" however much had been hidden,
+  which is the one thing in the parent area that could quietly say the app was
+  doing nothing. The join has to outlive the player, because the player is torn
+  down on the way back to the shelf, so it cannot be either screen's state. Of
+  the three ways to make it outlive them: a context has to be provided above
+  both routes, which means editing the navigator that the five sample screens
+  share; the sample's Redux store is the sample's, and a slice there would put
+  what a child watched inside the app's general state; a module lives as long
+  as the JavaScript context and is reachable from the guard's callback, which
+  is not a component. The writer being a callback rather than a component is
+  what decided it.
+  **Cost:** a module-level store is global, so a test that writes has to reset
+  it, and `resetHideLogs` exists for that. It is memory, so it empties when the
+  app is killed, the same as the PIN and the room setting, and that is written
+  down in docs/STATUS.md rather than hidden. Writing it to /data is a separate
+  job.
+
+- **Decision:** the stored entry carries the profile, the preset and the end of
+  the cover, on top of what the engine's `HideLogEntry` already carries.
+  **Why:** the engine's entry is mirrored into the hook package and knows about
+  a title and a position, not about this app's families. Whose sitting it was
+  and which rule set the schedule was built under are the app's facts, so they
+  are added in the app's store as `HouseholdHideEntry`. The preset is recorded
+  as it was at the time of the cover, so a household that tightens the setting
+  later still reads the old lines truthfully.
+  **Cost:** two shapes for one thing. The parent area still prints the engine's
+  wording, so the profile shows only as which kid's log the line is in and the
+  preset shows nowhere yet. It is in the record and not on the screen, which is
+  worth saying rather than implying it is displayed.
+
+- **Decision:** a cover the player cannot attribute is recorded under
+  `unattributed` rather than dropped or filed under the active kid.
+  **Why:** kid mode always names the profile in the guarded parameters. Anything
+  else reaching a guarded player did not come through the shelf, and a cover it
+  caused still happened. Filing it under whoever was last chosen would put one
+  kid's sitting in another kid's record, and dropping it would make the log
+  quietly incomplete. It appears under Everyone and in no kid's own log.
+  **Cost:** a household can see a line in the everyone view that is in nobody's
+  own view, which reads as odd until you know why.
