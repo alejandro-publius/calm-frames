@@ -28,15 +28,20 @@
    "sha256": "a05b7663486e725073e055a17a24538be4521db5250b52ca41294ecfa8d86013",
    "answered_windows": 0,
    "unlabelable_windows": 0,
-   "git_state": "untracked"
+   "git_state": "committed"
   },
   "labels_labeller_b.csv": {
    "path": "eval/labeling/labels_labeller_b.csv",
    "sha256": "a05b7663486e725073e055a17a24538be4521db5250b52ca41294ecfa8d86013",
    "answered_windows": 0,
    "unlabelable_windows": 0,
-   "git_state": "untracked"
+   "git_state": "committed"
   }
  },
- "pool_key_sha256": "58fb0c55c1e7873e7517607d86b2d93a5f2a59e2d4a1eab0417c38c4703e8f9e"
+ "pool_key_sha256": "09504fe1a49e8c6fc22e14cec7f55d3cea4b6e6af8f4e5688e3556087a7a2ed3",
+ "plots": {
+  "directory": "eval/labeling/plots",
+  "one_per_segment": 40,
+  "missing": []
+ }
 }

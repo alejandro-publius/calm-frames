@@ -287,11 +287,21 @@ def main() -> int:
             "answers": answers,
         }
 
+    # Every segment on the sheet needs a figure, because the figure is the only thing the
+    # labeller is allowed to look at. A segment whose plot failed to render would sit on the
+    # sheet asking for an answer nobody can give.
+    plots_dir = LABELING / "plots"
+    missing_plots = [
+        row["segment_id"]
+        for row in key["segments"]
+        if not (plots_dir / f"{row['segment_id']}.png").is_file()
+    ]
+
     answered = {name: row for name, row in sheets.items() if row["answered_windows"]}
     if not answered:
         status = {
             "generated_on": "2026-09-17",
-            "state": "awaiting labels",
+            "state": "awaiting labels" if not missing_plots else "not ready: plots are missing",
             "what_is_ready": [
                 "the blinded pool (eval/labeling/pool.json) and its key",
                 "one plot per segment (eval/labeling/plots/), no detector output on any of them",
@@ -313,8 +323,20 @@ def main() -> int:
                 for name, row in sheets.items()
             },
             "pool_key_sha256": sha256_of(arguments.pool_key),
+            "plots": {
+                "directory": str(plots_dir.relative_to(REPO)),
+                "one_per_segment": len(key["segments"]) - len(missing_plots),
+                "missing": missing_plots,
+            },
         }
         arguments.status_out.write_text(json.dumps(status, indent=1) + "\n")
+        if missing_plots:
+            print(
+                f"{len(missing_plots)} segments have no plot: {', '.join(missing_plots[:5])}"
+                f"{' ...' if len(missing_plots) > 5 else ''}. Run `make labeling-plots`.",
+                file=sys.stderr,
+            )
+            return 2
         print(
             f"no labels yet: {status['segments']} segments, "
             f"{status['windows_to_label']} windows waiting. wrote {arguments.status_out}"

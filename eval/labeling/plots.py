@@ -297,7 +297,9 @@ def main() -> int:
     print(f"{done} plots written to {arguments.out_dir}, {len(failed)} failed")
     for row in failed:
         print(f"  {row['segment_id']}: {row['error']}", file=sys.stderr)
-    return 0
+    # A segment with no figure is a segment nobody can label, and the sheet still asks for it.
+    # Exiting 0 with plots missing would let `make labeling-plots` look finished when it is not.
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
