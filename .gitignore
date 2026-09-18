@@ -41,3 +41,6 @@ cdk.out/
 .idea/
 .vscode/
 app/buildinfo.json
+
+# Local run logs, never committed
+.logs/

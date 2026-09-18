@@ -13,13 +13,20 @@ How it was built is in fixtures/README.md.
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import av
 import pytest
 
 from flashmap import WCAG, analyze_file
 from flashmap.decode import iter_frames, probe
 
-from conftest import FIXTURES
+# Resolved from this file rather than imported from conftest. The test
+# directories have no __init__.py, so the bare module name `conftest` is
+# claimed by whichever one pytest collects first, and `eval/tests/conftest.py`
+# has no FIXTURES. Running `pytest flashmap` alone hid that; the CI command
+# runs flashmap, pipeline and eval together and failed at collection.
+FIXTURES = Path(__file__).parent / "fixtures"
 
 THEORA_CLIP = FIXTURES / "calm_sweep_theora.ogv"
 
@@ -93,7 +100,5 @@ def test_the_map_says_where_the_pictures_stop():
 
 
 def test_a_file_that_ends_on_a_picture_says_so():
-    from conftest import FIXTURES as _F
-
-    result = analyze_file(_F / "calm_sweep.mp4", WCAG)
+    result = analyze_file(FIXTURES / "calm_sweep.mp4", WCAG)
     assert result.last_coded_pts_ms == pytest.approx(result.last_pts_ms)

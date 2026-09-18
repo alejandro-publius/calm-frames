@@ -397,3 +397,40 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   chaos run that quietly dropped both would read as covering more than it does.
   **Cost:** `results/chaos_vvd.json` names both, and rate changes are exercised
   against the real scheduler in `eval/property_scheduler_test.py` instead.
+
+## 2026-09-18: the recovery pass, three findings
+
+- **Decision:** `waiting` now stops the media clock, beside `pause`, `ended` and
+  `stalled`, in `app/src/calmframes/useCoverHarness.ts`.
+  **Why:** `waiting` is the event a player fires when it runs out of data, and it
+  is the common one. `stalled` only arrives after the fetch has been quiet for
+  seconds, and some players never send it. The clock therefore kept running
+  through every buffer, and the estimate came out the far side ahead of the
+  playhead by the length of the buffer. Measured on the real hook: a four second
+  buffer left the clock 4,000 ms ahead. The picture was covered throughout,
+  because `waiting` was already an uncertain event, so this is not a hole in the
+  cover. It is a hole in every number taken off that clock, which is the drift
+  and the cover lead that GATE 1 reports.
+  **Cost:** one line in the event handler, mirrored into `hook/`. The new test in
+  `app/test/calmframes/coverHarness.test.tsx` was seen red at 4,000 ms against a
+  1,000 ms baseline before the fix and green after.
+
+- **Decision:** the property harness no longer invents a position report during a
+  stall, in `eval/property_scheduler_runner.mjs`.
+  **Why:** `test_the_estimate_matches_the_player_when_nothing_drifts` was failing
+  on main, out by 75 ms against a 25 ms bound. The counterexample was a seek that
+  lands inside a stall. The harness answered that seek with `setRunning(true)` and
+  a synthetic timeupdate, which contradicts the rule written twelve lines below it
+  in the same file: a stalled player fires no timeupdate. A seek does carry the
+  new position, so the clock still learns it, but the player stays stalled. With
+  that corrected the estimate error is 0.00 ms across every case probed, not
+  merely under the bound, which is what the test's own docstring always claimed.
+  **Cost:** the harness models one more thing about real players. Nothing in the
+  app changed for this one.
+
+- **Decision:** the README says the `unlabeled` row is our own marker clips.
+  **Why:** the pool count moved from 36 to 38 when the sweep finished, and both
+  new files are marker clips the timing harness plays against itself. Left alone,
+  "38 clips in the pool" reads as 38 pieces of screened footage. It is 35.
+  **Cost:** one sentence, and the headline number stays 38 because that is what
+  the results file counts.
