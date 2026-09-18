@@ -1143,3 +1143,74 @@ safety wording, so it is written down rather than taken.
   visible in the log, and the second half of its negative control is that the
   striped page has to measure more pattern area on the whole page than the real
   one does, which keeps the analyzer run from becoming decoration.
+
+## 2026-09-18: The three findings the design pass left behind, picked up
+
+The 2026-09-18 review recorded three defects on surfaces outside its scope and
+left them. These are them, fixed the way it fixed the equivalents rather than a
+second way.
+
+- **Decision:** the television and seat chips say which one is chosen, in a
+  sentence under the row, and both rows now carry a visible name.
+  **Why:** the chips carried chosen as a fill colour and nothing else. Their
+  screen reader labels already said the word, so the only reader told nothing
+  was the one looking at the screen, on a television, from a sofa. This is the
+  same defect the profile picker had, so it gets the picker's answer: the word
+  goes under the row, not on the chosen chip, because a word on one chip makes
+  that chip wider than it was a moment earlier and slides every chip after it
+  along the row, and kid mode has no motion. The sentence is the chip's own
+  label plus the state word, "55 inch is chosen", so nobody translates one into
+  the other. The two rows got names because two unlabelled rows of numbers
+  under one heading left a person working out which was inches and which feet.
+  **Cost:** two lines on the parent area's room section and two on the first
+  run's room step, and two more headings. Both screens were already scrolls.
+  No palette token changed.
+
+- **Decision:** `FirstRunScreen.tsx`'s three lists are labelled radio groups and
+  carry `checked` beside `selected`.
+  **Why:** the picker's entry above says this file was left for whoever held
+  it. Without the role a screen reader read three questions as thirteen loose
+  buttons, and `selected` alone is not what a radio carries. The parent area's
+  copies of the same two rows got the role at the same time, so the two screens
+  a parent meets these chips on read the same way.
+  **Cost:** one wrapper view per list. `radiogroup` is not in `FOCUSABLE_ROLES`,
+  so the ten foot pass does not measure the wrappers as controls.
+
+- **Decision:** removing a kid asks first, as a `StatusNotice` with two buttons
+  in it, in the place the buttons were.
+  **Why:** one press took a kid's preset, their room and their record of what
+  was hidden, and none of it comes back. The button sits beside the picker a
+  parent uses to switch between kids, which is the worst place on the screen
+  for a one press delete. It is not a dialog: CLAUDE.md rules out anything that
+  blocks events on Vega, there is no browser here for a modal, and `Alert`
+  would be a second style of asking on a screen that already has one. The
+  wording follows the `design:ux-copy` shape for a destructive confirmation.
+  It names the kid rather than saying "are you sure", says what goes and what
+  does not, says it cannot be undone, and puts the action in both buttons
+  rather than OK and Cancel. Keep is first and takes focus, so a parent who
+  pressed Remove by mistake is one press from undoing it rather than one press
+  from finishing it. The question is held by profile id rather than as a flag,
+  because the picker stays live above it and a question asked about Sam must
+  not be answerable about Robin.
+  **Cost:** two presses to remove a kid instead of one. A new state,
+  `PARENT_REMOVE_KID_FRAME`, which is in `ALL_UI_FRAMES`, in the capture walk
+  and in the ten foot pass. It paints no new colour, so the flash run is
+  unchanged at 25 screens and transitions.
+
+- **Decision:** the question's tone is `calm`, not `blocked`.
+  **Why:** `blocked` means the picture stays hidden and will not play, which is
+  not what is happening, and widening that word for one use would make the
+  other three notices harder to read. So colour carries none of this and the
+  words carry all of it, which is the rule this whole pass exists to enforce.
+  **Cost:** the question's border is the same blue as every other calm notice.
+  It is still a notice block standing where a row of buttons was, which is not
+  a change anybody misses.
+
+- **Every new guard was seen to fail.** The chosen line off the television row
+  (`Unable to find an element with testID: parent-area-tv-chosen`), the word
+  put back on the chosen chip, the radiogroup role off the room row, `checked`
+  dropped back to `selected` alone, Remove removing on the first press
+  (`Expected number of calls: 0, Received number of calls: 1`), the question
+  held as a flag rather than an id, the seat plural dropped, and the new frame
+  taken out of `ALL_UI_FRAMES`. The real failure text is quoted beside each
+  test.

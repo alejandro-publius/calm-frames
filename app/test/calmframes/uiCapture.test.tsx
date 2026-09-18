@@ -53,6 +53,7 @@ import {
   PARENT_LOCKED_FRAME,
   PARENT_OPEN_FRAME,
   PARENT_PROFILE_FRAME,
+  PARENT_REMOVE_KID_FRAME,
   PARENT_WRONG_PIN_FRAME,
   playerFrame,
   TITLE_DETAILS_BLOCKED_FRAME,
@@ -235,6 +236,14 @@ describe('what the app paints', () => {
     expect(
       frameFromTree('parent-area-profile', screen.toJSON() as unknown as RenderedNode),
     ).toEqual(PARENT_PROFILE_FRAME);
+
+    // Asking before removing that kid paints no new colour: the question is a
+    // notice block on the card colour and the picker above it has not moved.
+    // It is a frame of its own so the flash run walks through the state.
+    fireEvent.press(screen.getByTestId('parent-area-remove-profile'));
+    expect(
+      frameFromTree('parent-area-remove-kid', screen.toJSON() as unknown as RenderedNode),
+    ).toEqual(PARENT_REMOVE_KID_FRAME);
   });
 
   it('lists every frame the app can show, so the flash run covers them all', () => {
@@ -242,7 +251,15 @@ describe('what the app paints', () => {
     // capture below walks. A frame declared and left out of that list is a
     // screen the flash check never sees.
     const named = new Set(ALL_UI_FRAMES.map((frame) => frame.screen));
-    for (const frame of [KID_HOME_PROFILES_FRAME, PARENT_PROFILE_FRAME]) {
+    for (const frame of [
+      KID_HOME_PROFILES_FRAME,
+      PARENT_PROFILE_FRAME,
+      // Seen to fail by taking this one back out of ALL_UI_FRAMES:
+      //     expect(received).toBe(expected) // Object.is equality
+      //     Expected: true
+      //     Received: false
+      PARENT_REMOVE_KID_FRAME,
+    ]) {
       expect(named.has(frame.screen)).toBe(true);
     }
   });
@@ -555,6 +572,11 @@ describe('the capture path', () => {
             name: 'parent-area-profile',
             reason: 'one kid',
             act: () => press('parent-area-profiles-profile-1'),
+          },
+          {
+            name: 'parent-area-remove-kid',
+            reason: 'the question before a kid is removed',
+            act: () => press('parent-area-remove-profile'),
           },
         ],
       },

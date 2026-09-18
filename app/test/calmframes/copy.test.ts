@@ -30,6 +30,7 @@ import {
   HIDDEN_TITLE,
   hiddenSummary,
   hideDayHeading,
+  keepKidLabel,
   nextKidName,
   Notice,
   noticeForTitle,
@@ -40,11 +41,17 @@ import {
   PIN_PROMPT,
   PROFILE_ONLY_ADDS,
   readingSeconds,
+  removeKidLabel,
+  removeKidPrompt,
   ROOM_ONLY_ADDS,
   ROOM_TITLE,
   SAFETY_NOTE,
+  seatChosen,
+  SEAT_DISTANCE_TITLE,
   sectionFor,
   STRICTNESS_TITLE,
+  televisionChosen,
+  TV_SIZE_TITLE,
   TITLE_FAILED,
   TITLE_PENDING,
   TITLE_STALE,
@@ -125,6 +132,15 @@ describe('house style', () => {
       sectionFor(ROOM_TITLE, 'Robin'),
       sectionFor(HIDDEN_TITLE, 'Robin'),
       hideDayHeading(new Date(2026, 8, 17).getTime(), new Date(2026, 8, 20).getTime()),
+      // The room chips' answers and the question before a kid is removed.
+      TV_SIZE_TITLE,
+      SEAT_DISTANCE_TITLE,
+      televisionChosen(85),
+      seatChosen(48),
+      removeKidPrompt('Robin').title,
+      removeKidPrompt('Robin').detail,
+      removeKidLabel('Robin'),
+      keepKidLabel('Robin'),
     ];
     for (const line of lines) {
       expect(`${line} has em dash: ${line.includes('—')}`).toBe(
@@ -198,6 +214,66 @@ describe('the record in the parent area', () => {
   it('says the same thing whether the record is one kid or the household', () => {
     expect(NOTHING_HIDDEN_YET).toBe('Nothing has been hidden yet.');
     expect(nothingHiddenFor('Robin')).toBe('Nothing has been hidden for Robin yet.');
+  });
+});
+
+describe('the room chips, in words', () => {
+  /**
+   * Seen to fail with the plural dropped from `seatChosen`:
+   *
+   *     Expected: "8 feet away is chosen."
+   *     Received: "8 foot away is chosen."
+   */
+  it('names the chip rather than describing it in other words', () => {
+    // Whatever the sentence says is on a chip in the row above it, spelled the
+    // same way, so nobody has to translate one into the other from a sofa.
+    expect(televisionChosen(55)).toBe('55 inch is chosen.');
+    expect(seatChosen(96)).toBe('8 feet away is chosen.');
+    expect(seatChosen(48)).toBe('4 feet away is chosen.');
+    // One foot would read "1 feet". No choice in the list is that close, and
+    // the rule costs nothing.
+    expect(seatChosen(12)).toBe('1 foot away is chosen.');
+  });
+
+  it('gives both rows a name, because two rows of numbers are not one row', () => {
+    expect(TV_SIZE_TITLE).toBe('Television size');
+    expect(SEAT_DISTANCE_TITLE).toBe('How far away the sofa is');
+  });
+});
+
+describe('the question before a kid is removed', () => {
+  /**
+   * Naming the kid, saying what goes, and putting the action in both labels.
+   *
+   * "Are you sure?" with OK and Cancel asks a person to remember what they
+   * pressed and to work out which button means which. This one says the name
+   * in the question and in both answers.
+   *
+   * Seen to fail with the title back to a bare 'Are you sure?':
+   *
+   *     Expected: "Remove Robin?"
+   *     Received: "Are you sure?"
+   */
+  it('names the kid, says what goes, and says it cannot be undone', () => {
+    const prompt = removeKidPrompt('Robin');
+    expect(prompt.title).toBe('Remove Robin?');
+    expect(prompt.detail).toContain('Robin');
+    expect(prompt.detail).toContain('record of what was hidden');
+    expect(prompt.detail).toContain('cannot be undone');
+    expect(prompt.detail.endsWith('.')).toBe(true);
+    // A title a person takes in at a glance, like every other one.
+    expect(prompt.title.split(' ').length).toBeLessThanOrEqual(7);
+    // Nothing is wrong yet and nothing is blocked, so it is not dressed as an
+    // error. The words carry all of this, which is the rule everywhere else.
+    expect(prompt.tone).toBe('calm');
+  });
+
+  it('puts the action in both answers, and OK in neither', () => {
+    expect(removeKidLabel('Robin')).toBe('Remove Robin');
+    expect(keepKidLabel('Robin')).toBe('Keep Robin');
+    for (const label of [removeKidLabel('Robin'), keepKidLabel('Robin')]) {
+      expect(label).not.toMatch(/^(OK|Okay|Yes|No|Cancel)$/i);
+    }
   });
 });
 

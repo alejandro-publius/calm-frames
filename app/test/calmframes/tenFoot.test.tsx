@@ -392,6 +392,19 @@ const CASES: Case[] = [
     press: [...UNLOCK, 'parent-area-profiles-profile-1'],
   },
   {
+    // The question before a kid is removed, which is a state a parent reads
+    // and answers from the sofa like any other.
+    name: 'parent-area-remove-kid',
+    element: parentAreaWithFamily,
+    background: CALM_COLORS.BACKGROUND,
+    screen: true,
+    press: [
+      ...UNLOCK,
+      'parent-area-profiles-profile-1',
+      'parent-area-remove-profile',
+    ],
+  },
+  {
     name: 'player-countdown',
     element: <PlayerLayer covered={false} card={cardAt(intervals, 16_000)} />,
     background: VIDEO_STAND_IN,

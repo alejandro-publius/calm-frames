@@ -22,7 +22,10 @@ import {
 import FirstRunScreen, {
   FirstRunResult,
 } from '../../src/calmframes/FirstRunScreen';
-import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
+import {
+  DEFAULT_SETTINGS,
+  TV_DIAGONAL_CHOICES_IN,
+} from '../../src/calmframes/household';
 import { attemptPin, hashPin } from '../../src/calmframes/parentGate';
 
 const ROUNDS = 4;
@@ -148,6 +151,125 @@ describe('the first run', () => {
     expect(shown).toEqual(EXPLAINER_LINES);
     expect(shown).toContain(SAFETY_NOTE);
     expect(shown.join(' ')).not.toMatch(/prevent|proof|safe from/i);
+  });
+
+  /**
+   * Every list of choices is one question, and says so.
+   *
+   * The three lists here carried `accessibilityState.selected` alone and no
+   * role on the list itself, so a screen reader read three questions as
+   * thirteen unrelated buttons and said nothing about which answer was
+   * standing. The profile picker was moved to a labelled radiogroup with
+   * `checked` and these follow it rather than inventing a second way.
+   *
+   * Seen to fail twice. With the radiogroup role taken back off the
+   * television row:
+   *
+   *     ● the first run › reads each list of choices as one question
+   *
+   *       Unable to find an element with accessibilityLabel: Television size
+   *
+   *       at Object.getByLabelText (test/calmframes/firstRun.test.tsx:207:19)
+   *
+   * And with `checked` dropped back to `selected` alone in all three lists:
+   *
+   *       expect(received).toEqual(expected) // deep equality
+   *
+   *       - Expected  - 1
+   *       + Received  + 4
+   *
+   *         Object {
+   *       -   "checked": true,
+   *       +   "busy": undefined,
+   *       +   "checked": undefined,
+   *       +   "disabled": undefined,
+   *       +   "expanded": undefined,
+   *           "selected": true,
+   *         }
+   *
+   *       at Object.toEqual (test/calmframes/firstRun.test.tsx:200:7)
+   */
+  it('reads each list of choices as one question', () => {
+    renderFirstRun();
+    type('5555');
+    type('5555');
+
+    expect(
+      screen.getByLabelText('How strict should it be').props.accessibilityRole,
+    ).toBe('radiogroup');
+    expect(
+      screen.getByTestId('first-run-preset-wcag').props.accessibilityState,
+    ).toEqual({ checked: true, selected: true });
+    expect(
+      screen.getByTestId('first-run-preset-broadcast').props.accessibilityState,
+    ).toEqual({ checked: false, selected: false });
+
+    fireEvent.press(screen.getByTestId('first-run-next'));
+
+    expect(screen.getByLabelText('Television size').props.accessibilityRole).toBe(
+      'radiogroup',
+    );
+    expect(
+      screen.getByLabelText('How far away the sofa is').props.accessibilityRole,
+    ).toBe('radiogroup');
+    expect(
+      screen.getByTestId('first-run-tv-55').props.accessibilityState,
+    ).toEqual({ checked: true, selected: true });
+    expect(
+      screen.getByTestId('first-run-seat-96').props.accessibilityState,
+    ).toEqual({ checked: true, selected: true });
+    expect(
+      screen.getByTestId('first-run-seat-48').props.accessibilityState,
+    ).toEqual({ checked: false, selected: false });
+  });
+
+  /**
+   * The room chips say which one is chosen, and choosing moves no chip.
+   *
+   * Same defect and same answer as the parent area's copy of these rows: the
+   * fill colour was the whole of the chosen state for anybody looking at the
+   * screen, and the word goes under the row rather than on the chip so that
+   * choosing cannot change a chip's width.
+   *
+   * Seen to fail. With `televisionChosen(settings.tvDiagonalIn)` left out of
+   * the room step:
+   *
+   *     ● the first run › says which room choices are standing, in words
+   *
+   *       Unable to find an element with testID: first-run-tv-chosen
+   *
+   *       at Object.getByTestId (test/calmframes/firstRun.test.tsx:249:19)
+   */
+  it('says which room choices are standing, in words', () => {
+    renderFirstRun();
+    type('5555');
+    type('5555');
+    fireEvent.press(screen.getByTestId('first-run-next'));
+
+    expect(screen.getByTestId('first-run-tv-chosen').props.children).toBe(
+      '55 inch is chosen.',
+    );
+    expect(screen.getByTestId('first-run-seat-chosen').props.children).toBe(
+      '8 feet away is chosen.',
+    );
+
+    const chipText = () =>
+      TV_DIAGONAL_CHOICES_IN.map((inches) =>
+        String(screen.getByTestId(`first-run-tv-${inches}-label`).props.children),
+      );
+    const before = chipText();
+
+    fireEvent.press(screen.getByTestId('first-run-tv-85'));
+    fireEvent.press(screen.getByTestId('first-run-seat-48'));
+
+    expect(screen.getByTestId('first-run-tv-chosen').props.children).toBe(
+      '85 inch is chosen.',
+    );
+    expect(screen.getByTestId('first-run-seat-chosen').props.children).toBe(
+      '4 feet away is chosen.',
+    );
+    // Only the sentence moved. No chip grew, so no chip slid along the row.
+    expect(chipText()).toEqual(before);
   });
 
   it('has no motion: nothing on any step animates', () => {

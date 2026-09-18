@@ -128,6 +128,22 @@ export const PARENT_PROFILE_FRAME: UiFrame = {
   surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.SURFACE_FOCUSED],
 };
 
+/**
+ * The parent area asking before it removes a kid.
+ *
+ * The same two colours as the parent area with one kid open, in the same
+ * order, which is the point: the question is a notice block on the card
+ * colour, and the picker above it has not moved, so asking paints no new
+ * colour and no new transition. It is a separate frame for the reason the
+ * wrong PIN one is: a state the app can be in is a state the flash run should
+ * walk through, and the timeline should show it was visited.
+ */
+export const PARENT_REMOVE_KID_FRAME: UiFrame = {
+  screen: 'parent-area-remove-kid',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.SURFACE_FOCUSED],
+};
+
 /** The four steps of the first run, in order. */
 export const FIRST_RUN_PIN_FRAME: UiFrame = {
   screen: 'first-run-pin',
@@ -210,6 +226,7 @@ export const ALL_UI_FRAMES: UiFrame[] = [
   PARENT_WRONG_PIN_FRAME,
   PARENT_OPEN_FRAME,
   PARENT_PROFILE_FRAME,
+  PARENT_REMOVE_KID_FRAME,
   CREDITS_FRAME,
   playerFrame(false, 'none'),
   playerFrame(false, 'countdown'),

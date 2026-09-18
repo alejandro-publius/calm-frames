@@ -28,7 +28,11 @@ import FlashMapStrip, {
   MINIMUM_MARK_FRACTION,
   stripMarks,
 } from '../../src/calmframes/FlashMapStrip';
-import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
+import {
+  DEFAULT_SETTINGS,
+  HouseholdSettings,
+  TV_DIAGONAL_CHOICES_IN,
+} from '../../src/calmframes/household';
 import {
   addHideEntry,
   emptyHideLog,
@@ -498,6 +502,108 @@ describe('ParentAreaScreen', () => {
     });
   });
 
+  /**
+   * Which television and which distance are chosen, in words.
+   *
+   * The chips carried chosen as a fill colour and nothing else, which is the
+   * same defect the profile picker had: a state only a person who can tell two
+   * shades of teal apart can read, on a television, from a sofa. It gets the
+   * same answer the picker got, a sentence under the row, rather than a second
+   * style of saying the same thing.
+   *
+   * Under the row and not on the chip, because a word on the chosen chip would
+   * make that chip wider than it was a moment earlier and slide every chip
+   * after it along the row, and kid mode has no motion. There is no way to
+   * measure a width here, so the guard is on the cause: the chips draw the same
+   * text whichever one is chosen.
+   *
+   * Seen to fail twice, once for each half.
+   *
+   * With the television line dropped and the chosen state left to
+   * `styles.rowSelected` alone:
+   *
+   *     ● ParentAreaScreen › says which television and which distance are
+   *       chosen, in words
+   *
+   *       Unable to find an element with testID: parent-area-tv-chosen
+   *
+   *       at Object.getByTestId (test/calmframes/screens.test.tsx:551:19)
+   *
+   * And with the word put back on the chosen chip, which is what would make
+   * the row slide:
+   *
+   *       expect(received).toEqual(expected) // deep equality
+   *
+   *       - Expected  - 2
+   *       + Received  + 2
+   *
+   *         Array [
+   *           "32, inch,",
+   *           "43, inch,",
+   *           "50, inch,",
+   *       -   "55, inch, (chosen)",
+   *       +   "55, inch,",
+   *           "65, inch,",
+   *           "75, inch,",
+   *       -   "85, inch,",
+   *       +   "85, inch, (chosen)",
+   *         ]
+   *
+   *       at Object.toEqual (test/calmframes/screens.test.tsx:586:24)
+   */
+  it('says which television and which distance are chosen, in words', () => {
+    const area = (settings: HouseholdSettings) => (
+      <ParentAreaScreen
+        gate={gate}
+        onGateChange={jest.fn()}
+        settings={settings}
+        onSettingsChange={jest.fn()}
+        log={log}
+        titles={titles}
+        nowMs={() => 0}
+      />
+    );
+    const view = render(area(DEFAULT_SETTINGS));
+    enter('1357');
+
+    expect(screen.getByTestId('parent-area-tv-chosen').props.children).toBe(
+      '55 inch is chosen.',
+    );
+    expect(screen.getByTestId('parent-area-seat-chosen').props.children).toBe(
+      '8 feet away is chosen.',
+    );
+    // The rows say which question they are asking, and the chips carry the
+    // state a radio carries rather than only a fill.
+    expect(screen.getByLabelText('Television size').props.accessibilityRole).toBe(
+      'radiogroup',
+    );
+    expect(
+      screen.getByLabelText('How far away the sofa is').props.accessibilityRole,
+    ).toBe('radiogroup');
+    expect(
+      screen.getByTestId('parent-area-tv-55').props.accessibilityState,
+    ).toEqual({ checked: true, selected: true });
+    expect(
+      screen.getByTestId('parent-area-tv-85').props.accessibilityState,
+    ).toEqual({ checked: false, selected: false });
+
+    const chipText = () =>
+      TV_DIAGONAL_CHOICES_IN.map((inches) =>
+        String(screen.getByTestId(`parent-area-tv-${inches}-label`).props.children),
+      );
+    const before = chipText();
+
+    view.rerender(area({ ...DEFAULT_SETTINGS, tvDiagonalIn: 85, seatDistanceIn: 48 }));
+    expect(screen.getByTestId('parent-area-tv-chosen').props.children).toBe(
+      '85 inch is chosen.',
+    );
+    expect(screen.getByTestId('parent-area-seat-chosen').props.children).toBe(
+      '4 feet away is chosen.',
+    );
+    // Only the sentence moved. No chip grew, so no chip slid.
+    expect(chipText()).toEqual(before);
+  });
+
   it('announces the PIN result politely', () => {
     renderArea();
     const message = screen.getByTestId('parent-area-message');
@@ -887,6 +993,123 @@ describe('family profiles on the screens', () => {
 
     const next: Family = onFamilyChange.mock.calls[0][0];
     expect(next.profiles.map((one) => one.name)).toEqual(['Kid', 'Robin', 'Kid 2']);
+  });
+
+  /**
+   * Removing a kid asks first, and the question is answerable both ways.
+   *
+   * One press used to take a kid's own preset, their room and their record of
+   * what was hidden, and none of it comes back. The button sits next to the
+   * picker a parent uses to switch between kids, which is the worst place on
+   * the screen for a one press delete.
+   *
+   * The question is the app's own notice block with two buttons in it, not a
+   * dialog. CLAUDE.md rules out anything that blocks events on Vega, and there
+   * is no browser here to put a modal in. Both buttons say what they do rather
+   * than OK and Cancel, and the one that changes nothing is first and takes
+   * focus.
+   *
+   * Seen to fail. With the Remove press calling `removeProfile` straight away,
+   * the way it did before:
+   *
+   *     ● family profiles on the screens › asks before it removes a kid, and
+   *       removes nobody until it is answered
+   *
+   *       expect(jest.fn()).not.toHaveBeenCalled()
+   *
+   *       Expected number of calls: 0
+   *       Received number of calls: 1
+   *
+   *       1: {"activeProfileId": "profile-1", "chimeEnabled": true, "floor":
+   *       {"preset": "wcag", "seatDistanceIn": 96, "tvDiagonalIn": 55},
+   *       "profiles": [{"id": "profile-1", "name": "Robin", "settings":
+   *       {"preset": "wcag", "seatDistanceIn": 96, "tvDiagonalIn": 55}}]}
+   *
+   *       at Object.toHaveBeenCalled (test/calmframes/screens.test.tsx:1017:32)
+   *
+   * Sam is gone from that family already, on the press that was only meant to
+   * ask.
+   */
+  it('asks before it removes a kid, and removes nobody until it is answered', () => {
+    const { onFamilyChange } = renderFamilyArea();
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
+    fireEvent.press(screen.getByTestId('parent-area-remove-profile'));
+
+    // Nothing has happened yet. The screen has asked.
+    expect(onFamilyChange).not.toHaveBeenCalled();
+    expect(screen.getByTestId('parent-area-remove-question-title').props.children).toBe(
+      'Remove Sam?',
+    );
+    expect(
+      screen.getByTestId('parent-area-remove-question-detail').props.children,
+    ).toContain('cannot be undone');
+    // The question stands where the buttons were, so there is one thing being
+    // asked and no way to add a kid in the middle of it.
+    expect(screen.queryByTestId('parent-area-add-profile')).toBeNull();
+    expect(screen.queryByTestId('parent-area-remove-profile')).toBeNull();
+
+    // Both answers say what they do, and the safe one takes focus.
+    const keep = screen.getByTestId('parent-area-remove-keep');
+    expect(keep.props.accessibilityLabel).toBe('Keep Sam');
+    expect(keep.props.hasTVPreferredFocus).toBe(true);
+    expect(
+      screen.getByTestId('parent-area-remove-confirm').props.accessibilityLabel,
+    ).toBe('Remove Sam');
+
+    // Keeping puts the buttons back and changes nothing.
+    fireEvent.press(keep);
+    expect(onFamilyChange).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('parent-area-remove-question')).toBeNull();
+    expect(screen.getByTestId('parent-area-remove-profile')).toBeTruthy();
+
+    // Answering the other way is what removes them.
+    fireEvent.press(screen.getByTestId('parent-area-remove-profile'));
+    fireEvent.press(screen.getByTestId('parent-area-remove-confirm'));
+    const next: Family = onFamilyChange.mock.calls[0][0];
+    expect(next.profiles.map((one) => one.name)).toEqual(['Robin']);
+  });
+
+  /**
+   * A question asked about one kid cannot be answered about another.
+   *
+   * The picker sits above the question and stays live while it is up, so the
+   * state is held by profile id rather than as a flag. Choosing somebody else
+   * is not an answer, so it takes the question away rather than repointing it.
+   *
+   * Seen to fail. With the state held as a flag rather than an id, which is
+   * `askedToRemove !== null` in place of `askedToRemove === editingId` and no
+   * reset when the picker moves:
+   *
+   *     ● family profiles on the screens › takes the question away when the
+   *       picker moves underneath it
+   *
+   *       expect(received).toBeNull()
+   *
+   *       Received: {"_fiber": {"_debugHookTypes": null, ... "elementType":
+   *       "View", ... "type": "View", "updateQueue": null}}
+   *
+   *       at Object.toBeNull (test/calmframes/screens.test.tsx:1076:65)
+   *
+   * The question about Sam was still on screen with Robin chosen, which is the
+   * one press that would have removed the wrong kid.
+   */
+  it('takes the question away when the picker moves underneath it', () => {
+    const { onFamilyChange } = renderFamilyArea();
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
+    fireEvent.press(screen.getByTestId('parent-area-remove-profile'));
+    expect(screen.getByTestId('parent-area-remove-question')).toBeTruthy();
+
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-1'));
+    expect(screen.queryByTestId('parent-area-remove-question')).toBeNull();
+    expect(onFamilyChange).not.toHaveBeenCalled();
+  });
+
+  /** The last kid has no Remove button, so there is no question to ask. */
+  it('never asks about the only kid in the household', () => {
+    renderFamilyArea({ family: newFamily(DEFAULT_SETTINGS, 'Robin') });
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-1'));
+    expect(screen.queryByTestId('parent-area-remove-profile')).toBeNull();
+    expect(screen.queryByTestId('parent-area-remove-question')).toBeNull();
   });
 
   it('stops at four kids and says so', () => {

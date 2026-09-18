@@ -139,6 +139,45 @@ export const ROOM_ONLY_ADDS =
   'A bigger television or a closer sofa can only add hidden parts. It never takes any away.';
 
 /**
+ * The two rows of room chips, and which chip in each is the chosen one.
+ *
+ * The chips carried chosen as a fill colour and nothing else. That is a state
+ * only a person who can tell two shades of teal apart can read, on a
+ * television, from a sofa, which is the whole set of conditions this app was
+ * built for. Their screen reader labels already said the word, so the one
+ * reader who was told nothing was the one looking at the screen.
+ *
+ * The answer goes under the row rather than on the chosen chip, for the reason
+ * the profile picker's does: a word that appears on one chip makes that chip
+ * wider than it was a moment earlier and slides every chip after it along the
+ * row, and a row of controls moving sideways is motion. Under the row the
+ * geometry is fixed by construction and the answer gets to be a sentence.
+ *
+ * The rows are named here rather than in the JSX because both screens draw
+ * them and a heading that only the first run says is a heading the parent area
+ * cannot label its radio group with. The parent area draws them too now: two
+ * unlabelled rows of numbers under one heading left a person working out which
+ * row was inches and which was feet from the units on the chips.
+ *
+ * Each answer is the chip's own label and the state word, in that order, so a
+ * person reads the sentence and then finds the chip that matches it without
+ * translating anything. "Chosen" is the word the preset rows and every one of
+ * these chips already used in their screen reader labels, so this adds no new
+ * vocabulary to a screen that already has enough.
+ */
+export const TV_SIZE_TITLE = 'Television size';
+export const SEAT_DISTANCE_TITLE = 'How far away the sofa is';
+
+export function televisionChosen(inches: number): string {
+  return `${Math.round(inches)} inch is chosen.`;
+}
+
+export function seatChosen(inches: number): string {
+  const feet = Math.round(inches / 12);
+  return `${feet} ${feet === 1 ? 'foot' : 'feet'} away is chosen.`;
+}
+
+/**
  * Family profiles.
  *
  * The shelf asks who is watching. The parent area asks whose settings are
@@ -211,6 +250,50 @@ export const PROFILE_ONLY_ADDS =
 
 /** Four is the most, and the parent area says so before the button is gone. */
 export const PROFILES_FULL = 'Four profiles is the most. Remove one to add another.';
+
+/**
+ * The question before a kid is removed.
+ *
+ * Removing a kid took one press and took two things with it: that kid's own
+ * preset and room, and their record of what was hidden, which is the only
+ * evidence a household ever gets that any of this works. Neither comes back,
+ * and the button sat one press away from the picker where a parent goes to
+ * switch between kids.
+ *
+ * It asks in the app's own notice block rather than in a dialog. CLAUDE.md
+ * rules out anything that blocks events on Vega, and a browser modal is not a
+ * thing this app has: there is no browser, and `Alert` would be a second style
+ * of asking on a screen that already has one.
+ *
+ * The wording follows the same shape as every other question worth asking:
+ * name the thing rather than saying "are you sure", say what goes, say what
+ * does not, and put the action in both button labels rather than leaving a
+ * person to work out which way round OK means. The safe answer is first in the
+ * row and takes focus, because a parent who pressed Remove by mistake should
+ * be one press from undoing that mistake rather than one press from finishing
+ * it.
+ *
+ * The tone is calm on purpose. Nothing is wrong yet, and nothing here is
+ * blocked or waiting, which is what the other two tones mean. Colour carries
+ * none of this: the words do all of it, which is the rule everywhere else in
+ * this app and the reason this defect was worth fixing in the first place.
+ */
+export function removeKidPrompt(name: string): Notice {
+  return {
+    title: `Remove ${name}?`,
+    detail: `${name}'s own settings and ${name}'s record of what was hidden both go. Everyone else is left as they are, and this cannot be undone.`,
+    tone: 'calm',
+  };
+}
+
+/** Both answers say what they do. Neither of them says OK. */
+export function removeKidLabel(name: string): string {
+  return `Remove ${name}`;
+}
+
+export function keepKidLabel(name: string): string {
+  return `Keep ${name}`;
+}
 
 /** The record, before anything has been hidden. */
 export const NOTHING_HIDDEN_YET = 'Nothing has been hidden yet.';

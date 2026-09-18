@@ -22,6 +22,13 @@
  *
  * No motion anywhere, including here: the steps do not slide and nothing
  * counts down on screen.
+ *
+ * Each list of choices is a radio group and says so, labelled with the
+ * question it is asking, and each choice carries `checked` rather than
+ * `selected` alone, which is what a radio carries. Without the role a screen
+ * reader read three questions as thirteen unrelated buttons. The two rooms
+ * rows also say in words which chip is the chosen one, because a fill colour
+ * is not a state everybody on the sofa can read.
  */
 
 import React from 'react';
@@ -40,6 +47,10 @@ import {
   EXPLAINER_TITLE,
   Notice,
   ROOM_ONLY_ADDS,
+  seatChosen,
+  SEAT_DISTANCE_TITLE,
+  televisionChosen,
+  TV_SIZE_TITLE,
 } from './copy';
 import {
   DEFAULT_SETTINGS,
@@ -216,33 +227,40 @@ const FirstRunScreen = ({
         style={styles.screen}
         contentContainerStyle={styles.content}>
         {header}
-        {PRESET_NAMES.map((name: PresetName, index) => {
-          const chosen = settings.preset === name;
-          return (
-            <TouchableOpacity
-              key={name}
-              testID={`${testID}-preset-${name}`}
-              accessibilityRole="radio"
-              accessibilityState={{ selected: chosen }}
-              accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
-              activeOpacity={1}
-              hasTVPreferredFocus={index === 0}
-              onFocus={() => setFocusedRow(`preset-${name}`)}
-              onBlur={() => setFocusedRow(null)}
-              onPress={() => setSettings({ ...settings, preset: name })}
-              style={[
-                styles.row,
-                chosen ? styles.rowSelected : null,
-                focusedRow === `preset-${name}` ? styles.rowFocused : null,
-              ]}>
-              <Text style={styles.rowTitle}>
-                {PRESETS[name].title}
-                {chosen ? ' (chosen)' : ''}
-              </Text>
-              <Text style={styles.rowDetail}>{PRESETS[name].description}</Text>
-            </TouchableOpacity>
-          );
-        })}
+        <View
+          accessibilityRole="radiogroup"
+          accessibilityLabel={STEP_TITLES.preset}
+          aria-label={STEP_TITLES.preset}>
+          {PRESET_NAMES.map((name: PresetName, index) => {
+            const chosen = settings.preset === name;
+            return (
+              <TouchableOpacity
+                key={name}
+                testID={`${testID}-preset-${name}`}
+                accessibilityRole="radio"
+                // checked is what a radio carries. selected stays beside it
+                // because the rest of the app reads that way today.
+                accessibilityState={{ checked: chosen, selected: chosen }}
+                accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
+                activeOpacity={1}
+                hasTVPreferredFocus={index === 0}
+                onFocus={() => setFocusedRow(`preset-${name}`)}
+                onBlur={() => setFocusedRow(null)}
+                onPress={() => setSettings({ ...settings, preset: name })}
+                style={[
+                  styles.row,
+                  chosen ? styles.rowSelected : null,
+                  focusedRow === `preset-${name}` ? styles.rowFocused : null,
+                ]}>
+                <Text style={styles.rowTitle}>
+                  {PRESETS[name].title}
+                  {chosen ? ' (chosen)' : ''}
+                </Text>
+                <Text style={styles.rowDetail}>{PRESETS[name].description}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
         <View style={styles.buttons}>
           <CalmButton
             testID={`${testID}-next`}
@@ -263,8 +281,14 @@ const FirstRunScreen = ({
         {header}
         <Text style={styles.note}>{ROOM_ONLY_ADDS}</Text>
 
-        <Text style={styles.section}>Television size</Text>
-        <View style={styles.choices}>
+        <Text style={styles.section} accessibilityRole="header">
+          {TV_SIZE_TITLE}
+        </Text>
+        <View
+          style={styles.choices}
+          accessibilityRole="radiogroup"
+          accessibilityLabel={TV_SIZE_TITLE}
+          aria-label={TV_SIZE_TITLE}>
           {TV_DIAGONAL_CHOICES_IN.map((inches, index) => {
             const chosen = settings.tvDiagonalIn === inches;
             return (
@@ -272,7 +296,7 @@ const FirstRunScreen = ({
                 key={`tv-${inches}`}
                 testID={`${testID}-tv-${inches}`}
                 accessibilityRole="radio"
-                accessibilityState={{ selected: chosen }}
+                accessibilityState={{ checked: chosen, selected: chosen }}
                 accessibilityLabel={`${inches} inch television${chosen ? ', chosen' : ''}`}
                 activeOpacity={1}
                 hasTVPreferredFocus={index === 0}
@@ -284,14 +308,27 @@ const FirstRunScreen = ({
                   chosen ? styles.rowSelected : null,
                   focusedRow === `tv-${inches}` ? styles.rowFocused : null,
                 ]}>
-                <Text style={styles.choiceLabel}>{inches} inch</Text>
+                <Text
+                  style={styles.choiceLabel}
+                  testID={`${testID}-tv-${inches}-label`}>
+                  {inches} inch
+                </Text>
               </TouchableOpacity>
             );
           })}
         </View>
+        <Text style={styles.chosenLine} testID={`${testID}-tv-chosen`}>
+          {televisionChosen(settings.tvDiagonalIn)}
+        </Text>
 
-        <Text style={styles.section}>How far away the sofa is</Text>
-        <View style={styles.choices}>
+        <Text style={styles.section} accessibilityRole="header">
+          {SEAT_DISTANCE_TITLE}
+        </Text>
+        <View
+          style={styles.choices}
+          accessibilityRole="radiogroup"
+          accessibilityLabel={SEAT_DISTANCE_TITLE}
+          aria-label={SEAT_DISTANCE_TITLE}>
           {SEAT_DISTANCE_CHOICES_IN.map((inches) => {
             const chosen = settings.seatDistanceIn === inches;
             const feet = Math.round(inches / 12);
@@ -300,7 +337,7 @@ const FirstRunScreen = ({
                 key={`seat-${inches}`}
                 testID={`${testID}-seat-${inches}`}
                 accessibilityRole="radio"
-                accessibilityState={{ selected: chosen }}
+                accessibilityState={{ checked: chosen, selected: chosen }}
                 accessibilityLabel={`${feet} feet away${chosen ? ', chosen' : ''}`}
                 activeOpacity={1}
                 onFocus={() => setFocusedRow(`seat-${inches}`)}
@@ -311,11 +348,18 @@ const FirstRunScreen = ({
                   chosen ? styles.rowSelected : null,
                   focusedRow === `seat-${inches}` ? styles.rowFocused : null,
                 ]}>
-                <Text style={styles.choiceLabel}>{feet} ft</Text>
+                <Text
+                  style={styles.choiceLabel}
+                  testID={`${testID}-seat-${inches}-label`}>
+                  {feet} ft
+                </Text>
               </TouchableOpacity>
             );
           })}
         </View>
+        <Text style={styles.chosenLine} testID={`${testID}-seat-chosen`}>
+          {seatChosen(settings.seatDistanceIn)}
+        </Text>
 
         <View style={styles.buttons}>
           <CalmButton
@@ -438,6 +482,18 @@ const styles = StyleSheet.create({
     backgroundColor: CALM_COLORS.SURFACE,
   },
   choiceLabel: { color: CALM_COLORS.TEXT, fontSize: scale(CALM_TYPE.SMALL) },
+  /**
+   * Which chip in the row above is the chosen one, in words.
+   *
+   * The same line the parent area draws under the same two rows, from the same
+   * copy, because a parent meets these chips twice and they should read the
+   * same way both times.
+   */
+  chosenLine: {
+    color: CALM_COLORS.TEXT,
+    fontSize: scale(CALM_TYPE.BODY),
+    marginTop: scale(CALM_SPACE.TIGHT),
+  },
   buttons: {
     flexDirection: 'row',
     marginTop: scale(CALM_SPACE.BLOCK),

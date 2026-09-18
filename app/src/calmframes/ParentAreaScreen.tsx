@@ -18,6 +18,13 @@
  * out for a minute. All three are the same notice block as every other state
  * in the app, so a parent who has seen one has seen them all. A household with
  * no PIN set is a fourth: the keypad is useless there, so it is not drawn.
+ *
+ * Removing a kid asks first, in that same notice block, because it takes their
+ * settings and their record with it and neither comes back. It is two presses
+ * on this screen rather than a dialog: CLAUDE.md rules out anything that
+ * blocks events on Vega, and this app has no browser to put a modal in. While
+ * the question is up it stands where the buttons were, so there is one thing
+ * being asked and Add a kid is out of reach until it is answered.
  */
 
 import React from 'react';
@@ -42,6 +49,7 @@ import {
   HIDDEN_TITLE,
   hiddenSummary,
   hidesByDay,
+  keepKidLabel,
   nextKidName,
   Notice,
   noticeForTitle,
@@ -55,11 +63,17 @@ import {
   PROFILE_ONLY_ADDS,
   PROFILES_FULL,
   PROFILES_PARENT_TITLE,
+  removeKidLabel,
+  removeKidPrompt,
   ROOM_ONLY_ADDS,
   ROOM_TITLE,
+  seatChosen,
+  SEAT_DISTANCE_TITLE,
   sectionFor,
   SETTINGS_STATE_WORD,
   STRICTNESS_TITLE,
+  televisionChosen,
+  TV_SIZE_TITLE,
   whoseSettingsThese,
 } from './copy';
 import {
@@ -100,6 +114,7 @@ import {
   PARENT_LOCKED_FRAME,
   PARENT_OPEN_FRAME,
   PARENT_PROFILE_FRAME,
+  PARENT_REMOVE_KID_FRAME,
   PARENT_WRONG_PIN_FRAME,
 } from './uiFrames';
 
@@ -169,15 +184,26 @@ const ParentAreaScreen = ({
     gate.record ? PIN_PROMPT : PIN_NOT_SET,
   );
   const [focusedRow, setFocusedRow] = React.useState<string | null>(null);
+  // Which kid the screen has asked about removing, if it has asked. Held by
+  // id rather than as a flag, so a question asked about Robin cannot be
+  // answered about Sam if the picker moves underneath it.
+  const [askedToRemove, setAskedToRemove] = React.useState<string | null>(null);
   const wrongPin = notice.tone === 'blocked';
 
   const editingKid = Boolean(
     family && family.profiles.some((profile) => profile.id === editingId),
   );
+  // A family always has somebody in it, so the last kid has no Remove button
+  // and so no question to ask about them either.
+  const removable = Boolean(family && editingKid && family.profiles.length > 1);
+  const confirmingRemoval = removable && askedToRemove === editingId;
 
   let frame = PARENT_LOCKED_FRAME;
   let reason = 'parent area locked';
-  if (unlocked && editingKid) {
+  if (unlocked && confirmingRemoval) {
+    frame = PARENT_REMOVE_KID_FRAME;
+    reason = 'parent area, asking before removing a kid';
+  } else if (unlocked && editingKid) {
     frame = PARENT_PROFILE_FRAME;
     reason = 'parent area, one kid';
   } else if (unlocked) {
@@ -308,7 +334,12 @@ const ParentAreaScreen = ({
             chosenLine={whoseSettingsThese(whose ?? EVERYONE_LABEL)}
             profiles={pickable}
             activeProfileId={editingId}
-            onChoose={(profile) => setEditingId(profile.id)}
+            onChoose={(profile) => {
+              // Moving the picker takes the question with it. A parent who
+              // answers by choosing somebody else has not said remove.
+              setAskedToRemove(null);
+              setEditingId(profile.id);
+            }}
           />
           <Text style={styles.note} testID={`${testID}-profile-rule`}>
             {PROFILE_ONLY_ADDS}
@@ -318,44 +349,74 @@ const ParentAreaScreen = ({
               {floorEffect}
             </Text>
           ) : null}
-          <View style={styles.buttons}>
-            {canAddProfile(family) ? (
-              <CalmButton
-                testID={`${testID}-add-profile`}
-                label="Add a kid"
-                // Named apart from the start. Two chips both reading Kid is a
-                // picker nobody can use, and there is no keyboard here to
-                // rename one with.
-                onPress={() =>
-                  onFamilyChange(
-                    addProfile(
-                      family,
-                      nextKidName(
-                        DEFAULT_PROFILE_NAME,
-                        family.profiles.map((one) => one.name),
-                      ),
-                    ),
-                  )
-                }
-              />
-            ) : (
-              <Text style={styles.note} testID={`${testID}-profiles-full`}>
-                {PROFILES_FULL}
-              </Text>
-            )}
-            {editingProfile && family.profiles.length > 1 ? (
-              <View style={styles.secondButton}>
+          {confirmingRemoval && editingProfile ? (
+            // The question stands in for the buttons rather than sitting
+            // beside them, so the screen is asking one thing and Add a kid
+            // cannot be pressed in the middle of it.
+            <View style={styles.block}>
+              <StatusNotice
+                testID={`${testID}-remove-question`}
+                notice={removeKidPrompt(editingProfile.name)}>
+                <View style={styles.buttons}>
+                  <CalmButton
+                    testID={`${testID}-remove-keep`}
+                    label={keepKidLabel(editingProfile.name)}
+                    onPress={() => setAskedToRemove(null)}
+                    hasTVPreferredFocus
+                  />
+                  <View style={styles.secondButton}>
+                    <CalmButton
+                      testID={`${testID}-remove-confirm`}
+                      label={removeKidLabel(editingProfile.name)}
+                      onPress={() => {
+                        onFamilyChange(removeProfile(family, editingProfile.id));
+                        setAskedToRemove(null);
+                        setEditingId(EVERYONE_ID);
+                      }}
+                    />
+                  </View>
+                </View>
+              </StatusNotice>
+            </View>
+          ) : (
+            <View style={styles.buttons}>
+              {canAddProfile(family) ? (
                 <CalmButton
-                  testID={`${testID}-remove-profile`}
-                  label={`Remove ${editingProfile.name}`}
-                  onPress={() => {
-                    onFamilyChange(removeProfile(family, editingProfile.id));
-                    setEditingId(EVERYONE_ID);
-                  }}
+                  testID={`${testID}-add-profile`}
+                  label="Add a kid"
+                  // Named apart from the start. Two chips both reading Kid is
+                  // a picker nobody can use, and there is no keyboard here to
+                  // rename one with.
+                  onPress={() =>
+                    onFamilyChange(
+                      addProfile(
+                        family,
+                        nextKidName(
+                          DEFAULT_PROFILE_NAME,
+                          family.profiles.map((one) => one.name),
+                        ),
+                      ),
+                    )
+                  }
                 />
-              </View>
-            ) : null}
-          </View>
+              ) : (
+                <Text style={styles.note} testID={`${testID}-profiles-full`}>
+                  {PROFILES_FULL}
+                </Text>
+              )}
+              {editingProfile && removable ? (
+                <View style={styles.secondButton}>
+                  <CalmButton
+                    testID={`${testID}-remove-profile`}
+                    label={removeKidLabel(editingProfile.name)}
+                    // Asks. Nothing is removed on this press, because what it
+                    // removes does not come back.
+                    onPress={() => setAskedToRemove(editingProfile.id)}
+                  />
+                </View>
+              ) : null}
+            </View>
+          )}
         </>
       ) : null}
 
@@ -396,7 +457,14 @@ const ParentAreaScreen = ({
         {describeRoom(shown)}
       </Text>
       <Text style={styles.note}>{ROOM_ONLY_ADDS}</Text>
-      <View style={styles.choices}>
+      <Text style={styles.rowTitle} accessibilityRole="header">
+        {TV_SIZE_TITLE}
+      </Text>
+      <View
+        style={styles.choices}
+        accessibilityRole="radiogroup"
+        accessibilityLabel={TV_SIZE_TITLE}
+        aria-label={TV_SIZE_TITLE}>
         {TV_DIAGONAL_CHOICES_IN.map((inches) => {
           const chosen = shown.tvDiagonalIn === inches;
           return (
@@ -415,12 +483,26 @@ const ParentAreaScreen = ({
                 chosen ? styles.rowSelected : null,
                 focusedRow === `tv-${inches}` ? styles.rowFocused : null,
               ]}>
-              <Text style={styles.choiceLabel}>{inches} inch</Text>
+              <Text
+                  style={styles.choiceLabel}
+                  testID={`${testID}-tv-${inches}-label`}>
+                  {inches} inch
+                </Text>
             </TouchableOpacity>
           );
         })}
       </View>
-      <View style={styles.choices}>
+      <Text style={styles.chosenLine} testID={`${testID}-tv-chosen`}>
+        {televisionChosen(shown.tvDiagonalIn)}
+      </Text>
+      <Text style={styles.rowTitle} accessibilityRole="header">
+        {SEAT_DISTANCE_TITLE}
+      </Text>
+      <View
+        style={styles.choices}
+        accessibilityRole="radiogroup"
+        accessibilityLabel={SEAT_DISTANCE_TITLE}
+        aria-label={SEAT_DISTANCE_TITLE}>
         {SEAT_DISTANCE_CHOICES_IN.map((inches) => {
           const chosen = shown.seatDistanceIn === inches;
           const feet = Math.round(inches / 12);
@@ -440,11 +522,18 @@ const ParentAreaScreen = ({
                 chosen ? styles.rowSelected : null,
                 focusedRow === `seat-${inches}` ? styles.rowFocused : null,
               ]}>
-              <Text style={styles.choiceLabel}>{feet} ft</Text>
+              <Text
+                  style={styles.choiceLabel}
+                  testID={`${testID}-seat-${inches}-label`}>
+                  {feet} ft
+                </Text>
             </TouchableOpacity>
           );
         })}
       </View>
+      <Text style={styles.chosenLine} testID={`${testID}-seat-chosen`}>
+        {seatChosen(shown.seatDistanceIn)}
+      </Text>
 
       <Text style={styles.section} accessibilityRole="header">
         {sectionFor(HIDDEN_TITLE, whose)}
@@ -618,6 +707,19 @@ const styles = StyleSheet.create({
     backgroundColor: CALM_COLORS.SURFACE,
   },
   choiceLabel: { color: CALM_COLORS.TEXT, fontSize: scale(CALM_TYPE.SMALL) },
+  /**
+   * Which chip in the row above is the chosen one, in words.
+   *
+   * The same shape the profile picker uses, and for the same two reasons: a
+   * fill colour is not a state everybody can read, and a word drawn on the
+   * chosen chip would make that chip wider than its neighbours and slide the
+   * rest of the row along when a parent presses one.
+   */
+  chosenLine: {
+    color: CALM_COLORS.TEXT,
+    fontSize: scale(CALM_TYPE.BODY),
+    marginBottom: scale(CALM_SPACE.TIGHT),
+  },
   /**
    * The record reads as the evidence it is.
    *
