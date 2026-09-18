@@ -50,6 +50,9 @@ from gate1_software import (  # noqa: E402
 # The fields that have to come back identical. Everything else in the summary
 # is a timestamp or a description of the run.
 REBUILT_FIELDS = (
+    "trials_attempted",
+    "in_time_strict_fraction",
+    "wilson_95_interval_strict",
     "trials_counted",
     "trials_dropped_no_timeupdate",
     "trials_dropped_playback_stalled",
@@ -112,6 +115,14 @@ def rebuild(events: list[dict], summary: dict, schedule: dict) -> dict:
     in_time = [t for t in counted if t.get("in_time")]
 
     return {
+        # Strict first, because it is the worse of the two and the one a reader
+        # should meet first. It counts every trial that was started, including
+        # the ones that produced no usable evidence, as a failure.
+        "trials_attempted": len(trials),
+        "in_time_strict_fraction": (
+            round(len(in_time) / len(trials), 4) if trials else None
+        ),
+        "wilson_95_interval_strict": wilson_interval(len(in_time), len(trials)),
         "trials_counted": len(counted),
         "trials_dropped_no_timeupdate": len(
             [

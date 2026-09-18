@@ -136,5 +136,12 @@
     "p95": 4097.0,
     "max": 6197.5
   },
-  "worst_lead_ms": -86.0
+  "worst_lead_ms": -86.0,
+  "trials_attempted": 55,
+  "in_time_strict_fraction": 0.8727,
+  "wilson_95_interval_strict": {
+    "low": 0.7598,
+    "high": 0.937
+  },
+  "accounting": "strict counts every trial that was started, including the ones that produced no usable evidence, as a failure. usable counts only the trials that could be measured. Both are here because quoting the second alone hides the runs that failed to produce evidence, and that is the friendlier of the two numbers."
 }
