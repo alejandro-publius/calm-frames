@@ -97,13 +97,15 @@ const Harness = ({
   media,
   mode,
   intervals,
+  foreground = true,
 }: {
   media: MediaElementLike;
   mode: 'layering' | 'timing';
   intervals?: ReturnType<typeof buildCoverIntervals>;
+  foreground?: boolean;
 }) => {
   const ref = React.useRef<MediaElementLike | null>(media);
-  const state = useCoverHarness(ref, { mode, intervals, tickMs: 50 });
+  const state = useCoverHarness(ref, { mode, intervals, tickMs: 50, foreground });
   return (
     <>
       <Text testID="covered">{state.covered ? 'covered' : 'clear'}</Text>
@@ -214,6 +216,36 @@ describe('useCoverHarness', () => {
     const after = Number(screen.getByTestId('worstDriftMs').props.children);
 
     expect(Math.abs(after)).toBeLessThanOrEqual(Math.abs(before));
+  });
+
+  it('hides the picture the moment the app goes to the background', () => {
+    // At once, not at the next tick. The tick is 50 ms when the thread is free,
+    // and the thread is not always free: a 72 second gap between two ticks was
+    // measured under load (results/under_load/). Waiting for a tick to notice
+    // the app is no longer in front is waiting an unbounded time, so this
+    // advances no timers at all.
+    const media = makeMediaElement();
+    const intervals = buildCoverIntervals([{ startMs: 60_000, endMs: 61_000 }]);
+    const view = render(
+      <Harness media={media} mode="timing" intervals={intervals} foreground />,
+    );
+
+    media.currentTime = 1.0;
+    act(() => media.fire('playing'));
+    act(() => jest.advanceTimersByTime(100));
+    expect(screen.getByTestId('covered').props.children).toBe('clear');
+
+    act(() => {
+      view.rerender(
+        <Harness
+          media={media}
+          mode="timing"
+          intervals={intervals}
+          foreground={false}
+        />,
+      );
+    });
+    expect(screen.getByTestId('covered').props.children).toBe('covered');
   });
 
   it('timing mode hides the picture at once when a seek starts', () => {

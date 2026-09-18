@@ -119,6 +119,40 @@ def test_intervals_come_out_sorted_and_never_touch(scheduler, rows, guard, min_c
         assert interval["endMs"] > interval["startMs"]
 
 
+def test_two_intervals_that_meet_at_a_point_are_merged(scheduler):
+    """The exact touch, pinned rather than left to chance.
+
+    The merge above is written `interval.startMs <= previous.endMs`. Written `<`
+    instead, two intervals that meet at exactly one point stop merging, and the
+    cover blinks off for a frame between two flagged spans.
+
+    test_intervals_come_out_sorted_and_never_touch would catch that, but only if
+    hypothesis happens to draw a pair that lands on the same millisecond after
+    widening, at whichever guard band it drew. Over thirty examples it does not,
+    and the mutation gate found that out: `property-intervals-never-touch`
+    survived with every one of those tests passing. So the case is written down.
+
+    With a 500 ms band, a segment ending at 2000 widens to 2500 and one starting
+    at 3000 widens to 2500 as well. They meet, and the answer has to be one
+    interval covering both.
+    """
+    answer = ask(
+        scheduler,
+        {
+            "job": "schedule",
+            "segments": as_segments([(1_000, 1_000, "general"), (3_000, 1_000, "general")]),
+            "options": {"guardBandMs": 500, "minCoverMs": 0},
+        },
+    )
+    intervals = answer["intervals"]
+    assert len(intervals) == 1, (
+        "two spans that meet at exactly one millisecond came back as separate "
+        f"intervals, so the cover blinks off between them: {intervals}"
+    )
+    assert intervals[0]["startMs"] == 500
+    assert intervals[0]["endMs"] == 4_500
+
+
 @given(rows=segment_rows, guard=guard_bands, min_cover=min_covers)
 @SETTINGS
 def test_any_red_source_makes_the_whole_interval_red(scheduler, rows, guard, min_cover):

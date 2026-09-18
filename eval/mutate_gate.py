@@ -274,6 +274,20 @@ MUTATIONS: list[Mutation] = [
         ),
         why="going to the background stops hiding the picture at once, and waits for the "
         "next scheduler tick instead",
+        equivalent=(
+            "the cover still goes on at once, by a second path. foreground is in the "
+            "dependency list of the tick effect, and that effect calls tick() itself "
+            "before setting its interval, so a change of foreground tears the effect "
+            "down, builds it again and covers synchronously. The picture is hidden in "
+            "the same commit either way and no test can see a difference. It was "
+            "checked rather than assumed: coverHarness.test.tsx now has a test that "
+            "flips foreground and advances no timers at all, and it stays green with "
+            "this mutation applied and goes red when foreground is also taken out of "
+            "that dependency list, which is the only way to actually remove the "
+            "behaviour. Worth knowing that the redundancy is what makes this "
+            "equivalent: drop foreground from those deps as a tidy-up and the guard on "
+            "line 318 becomes load bearing again."
+        ),
     ),
     # -------------------------------------------------------------- fail closed on maps
     Mutation(
