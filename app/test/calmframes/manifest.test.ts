@@ -62,4 +62,33 @@ describe('app/manifest.toml', () => {
     expect(id?.[1]).toBeDefined();
     expect(id?.[1]?.startsWith('com.amazon')).toBe(false);
   });
+
+  it('points at an icon that is there, and is the size Amazon asks for', () => {
+    // The packaging tool does not check this. Strings in vpt show it validates
+    // the @image/ name and whether the file exists, and a missing file is only
+    // a warning: "icon validation is not enforced, continuing packaging".
+    // There is no size check in it at all, so a wrong icon would sail through
+    // the build and be caught at Appstore review instead. Hence this.
+    //
+    // The numbers come from the 0.24 manifest page: "Required resolution and
+    // format: 512x512, PNG" and "Maximum file size: 1MB".
+    const declared = /^icon = "(.+?)"/m.exec(manifest.split('[package]')[1] ?? '');
+    expect(declared?.[1]).toBeDefined();
+
+    const name = declared![1].replace(/^@image\//, '');
+    expect(name).not.toBe(declared![1]);
+
+    const file = path.join(__dirname, '..', '..', 'assets', 'image', name);
+    expect(fs.existsSync(file)).toBe(true);
+
+    const bytes = fs.readFileSync(file);
+    expect(bytes.subarray(0, 8)).toEqual(
+      Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    );
+    // IHDR is the first chunk of every PNG: width and height are the four byte
+    // big endian pair at offset 16.
+    expect(bytes.readUInt32BE(16)).toBe(512);
+    expect(bytes.readUInt32BE(20)).toBe(512);
+    expect(bytes.byteLength).toBeLessThan(1024 * 1024);
+  });
 });
