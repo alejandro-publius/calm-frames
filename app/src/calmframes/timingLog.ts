@@ -35,7 +35,9 @@ export type TimingEventKind =
   | 'cover-on'
   | 'cover-off'
   | 'background'
-  | 'foreground';
+  | 'foreground'
+  /** The scheduler's own tick ran later than it should have. */
+  | 'tick-gap';
 
 export interface PlaybackQualitySnapshot {
   droppedVideoFrames?: number;

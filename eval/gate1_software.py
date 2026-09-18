@@ -150,15 +150,82 @@ def trials_from_events(events: list[dict], schedule: dict, guard_band_ms: int) -
                 }
             )
             continue
+        # Two leads, because they answer different questions.
+        #
+        # The wall-clock lead is how long the cover was actually up before the
+        # picture arrived. It is the one a viewer would feel, and it is the one
+        # GATE 1 films.
+        #
+        # The media-time lead is how far ahead of the marker the schedule put
+        # the cover, in the clip's own time. It should sit at the guard band
+        # whatever the machine is doing.
+        #
+        # They come apart when playback runs slower than real time, which the
+        # virtual device does constantly: the cover goes on at the right place
+        # in the clip and then waits a long time in wall clock for the playhead
+        # to reach the marker. That inflates the wall-clock tail without the
+        # scheduler being early, so reporting only the wall-clock number would
+        # make a slow machine look like a design fault.
+        lead_wall = due - cover["wallClockMs"]
+        lead_media = marker["start_ms"] - cover["mediaTimeMs"]
         trials.append(
             {
                 "marker": marker["index"],
                 "counted": True,
-                "lead_ms": round(due - cover["wallClockMs"], 1),
-                "in_time": (due - cover["wallClockMs"]) >= REQUIRED_LEAD_MS,
+                "lead_ms": round(lead_wall, 1),
+                "lead_media_ms": round(lead_media, 1),
+                "in_time": lead_wall >= REQUIRED_LEAD_MS,
+                "held_longer_than_guard_band": lead_media > guard_band_ms + 1,
+                "why_held": why_held(events, cover, guard_band_ms, lead_media),
             }
         )
     return trials
+
+
+def worst_tick_gap(events: list[dict]) -> float | None:
+    """The longest gap between two runs of the scheduler's tick, over all passes.
+
+    Read from the harness-stop line each pass writes, and from the tick-gap
+    lines themselves, so it survives a pass that ended without stopping
+    cleanly. Returns None when no pass reported it at all.
+    """
+    seen: list[float] = []
+    for event in events:
+        extra = event.get("extra") or {}
+        for key in ("worstTickGapMs", "gapMs"):
+            value = extra.get(key)
+            if isinstance(value, (int, float)):
+                seen.append(float(value))
+    return round(max(seen), 1) if seen else None
+
+
+def why_held(
+    events: list[dict], cover: dict, guard_band_ms: float, lead_media_ms: float
+) -> str | None:
+    """Why a cover went on earlier in the clip than the guard band asked for.
+
+    The schedule puts a cover exactly one guard band ahead of its segment, so
+    anything earlier than that had a reason, and the reason should be in the
+    record rather than left as an outlier for someone to wonder about. The
+    honest ones are a merge with the segment before it, or a hold the harness
+    took because the playhead had become untrustworthy.
+    """
+    if lead_media_ms <= guard_band_ms + 1:
+        return None
+    reason = cover.get("reason")
+    if isinstance(reason, str) and not reason.startswith("interval "):
+        return reason
+    # A hold that started before this cover and had not been cleared.
+    before = [
+        e
+        for e in events
+        if e.get("kind") in ("seeking", "waiting", "stalled", "pause")
+        and isinstance(e.get("wallClockMs"), (int, float))
+        and e["wallClockMs"] <= cover["wallClockMs"]
+    ]
+    if before:
+        return f"held after {before[-1]['kind']}"
+    return "merged with the interval before it"
 
 
 def main() -> int:
@@ -245,6 +312,27 @@ def main() -> int:
         "guard_band_ms": args.guard_band_ms,
         "required_lead_ms": REQUIRED_LEAD_MS,
         "passes": runs,
+        # Two accountings, because a dropped trial is not a pass.
+        #
+        # The strict one treats every marker that had a cover as a trial, and
+        # every trial that could not be measured as a failure. It is the
+        # pessimistic reading and it is the one to quote if only one is quoted.
+        #
+        # The usable one is over the trials that could actually be measured. It
+        # says how the scheduler behaved when the run was good enough to see,
+        # and on its own it flatters, because the runs that went wrong are the
+        # ones that dropped out.
+        "accounting": (
+            "strict counts every dropped trial as a failure; usable counts "
+            "only the trials that could be measured. Both are reported "
+            "because quoting the second alone would hide the runs that failed "
+            "to produce evidence."
+        ),
+        "trials_attempted": len(all_trials),
+        "in_time_strict_fraction": (
+            round(len(in_time) / len(all_trials), 4) if all_trials else None
+        ),
+        "wilson_95_interval_strict": wilson_interval(len(in_time), len(all_trials)),
         "trials_counted": len(counted),
         "trials_dropped_no_timeupdate": len(
             [t for t in all_trials if not t.get("counted") and "stalled" not in str(t.get("why", ""))]
@@ -256,7 +344,25 @@ def main() -> int:
         "in_time_fraction": round(len(in_time) / len(counted), 4) if counted else None,
         "wilson_95_interval": wilson_interval(len(in_time), len(counted)),
         "lead_ms": summarize(leads),
+        "lead_media_ms": summarize(
+            [float(t["lead_media_ms"]) for t in counted if "lead_media_ms" in t]
+        ),
         "worst_lead_ms": round(min(leads), 1) if leads else None,
+        "held_longer_than_guard_band": len(
+            [t for t in counted if t.get("held_longer_than_guard_band")]
+        ),
+        # The longest the scheduler's own tick was kept waiting. It asks every
+        # 50 ms whether the cover should be on, so a gap far past that is the
+        # JavaScript thread being away, and the guard band has to be wider than
+        # the worst of them. Null means the app did not report it, which is
+        # what a build from before the instrumentation looks like.
+        "worst_tick_gap_ms": worst_tick_gap(pooled_events),
+        "tick_gaps_over_twice_the_tick": len(
+            [e for e in pooled_events if e.get("kind") == "tick-gap"]
+        ),
+        "why_held": sorted(
+            {t["why_held"] for t in counted if t.get("why_held")}
+        ),
     }
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
