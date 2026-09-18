@@ -102,32 +102,23 @@ It surfaced because a second, stricter script needed a position report from the 
 
 **Submission.** README, `docs/SUBMISSION.md`, `docs/FRICTION_LOG.md`, `docs/OPEN_SOURCE_PR.md` and `docs/VIDEO_SCRIPT.md` are written, with every number traced to `results/` and checked by CI.
 
-## 4b. Running right now, and what is still open
+## 4b. The chaos run, finished
 
-**A chaos re-run is in flight** and will write `results/chaos_vvd.json` when it
-finishes, in about twenty minutes from 22:30 PT. The committed run is honest but
-thin: 16 passes, 157 rude actions, every pause, seek and stall met by the
-fail-safe cover, but only **3 marker crossings**, because `markers50.mp4` puts its
-first marker at 4000 ms and a rewind under chaos is a 10 second seek, so 14 of 16
-passes never got the playhead that far. The re-run uses `markers_packed.mp4`,
-whose first marker is at 2000 ms, and should give 20 to 30 crossings in the same
-time. **Nothing quotes the 3 crossing run and nothing should.** If the re-run
-comes back thin too, say so and leave the claim unmade.
+**71 marker crossings under deliberate abuse, none with the picture showing.**
+`results/chaos_vvd.json`. 16 passes, all launched, no device lost, 157 rude
+actions, machine quiet. The fail-safe cover fired on pause, seeking and waiting as
+well as on the intervals, so the uncertain-event path was exercised on a real
+player. Written up in docs/GATES.md.
 
-Two limits of that harness are recorded in the file and are not fixed: no segment
-request ever stalled, because the whole clip is fetched before the 9 second settle
-ends, so the network chaos reached a player that had already buffered everything;
-and backgrounding never happened, so `background_covers_seen` is 0.
+An earlier run of the same harness counted only 3 crossings and is the basis of no
+claim: `markers50.mp4` puts its first marker at 4000 ms and a rewind under chaos is
+a 10 second seek, so 14 of its 16 passes never reached it. The packed clip, whose
+first marker is at 2000 ms, was the whole fix.
 
-**Closed since this section was written.** `pipeline/verify.py` used to skip its
-own cover check when a title had no flagged segment, so
-<!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> titles collected
-38 passing checks without covering anything and read exactly like the
-<!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n--> whose cover was
-measured on the rendition. Those titles now carry the outcome `no flagged
-segments`, and a preset that has intervals cannot pass unless the drawn check ran
-for it and passed. Four counts that add up are in `results/verify_pool.json` and
-are published through markers wherever a title count appears.
+Two limits recorded in the file and not fixed: `segments_served` and
+`segment_requests_stalled` are both 0, because the clip is fully fetched before the
+9 second settle ends, so **there is no evidence here about a starved network**; and
+backgrounding never happened, so `background_covers_seen` is 0.
 
 ## 4c. The five features, and the honest state of each
 
