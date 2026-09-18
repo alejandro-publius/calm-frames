@@ -1,0 +1,15 @@
+{
+  "note": "Public halves only. Both keys are derived from the phrases in scripts/make_revoked_key_fixture.py, so there is no private key in this repository. They sign this one test map and nothing else.",
+  "retired": {
+    "public_key_base64": "7LzAo4W/YwI+oDC2242F6ypEBHNtGG6ISfx5l8ECGjc=",
+    "key_id": "sha256:2e84de6f5829e51117835f0add2143a879d480b353f5531336dffc0d747b5956",
+    "what_it_is": "the key that signed revoked_key.flashmap.json, then was rotated out"
+  },
+  "current": {
+    "public_key_base64": "5GscTde+LiGn4lHB86+bqxxcoaQGXLdDVMi3YNgPnzY=",
+    "key_id": "sha256:a149c4c250d5c8f3dd75055abd8712ef765be36ed247958e440e62c6939d59dd",
+    "what_it_is": "the key an app built after the rotation would carry"
+  },
+  "source_sha256": "9f2c1b6c1cbb4c3a9a0f0c2d5e8b7a6d4f3e2c1b0a9f8e7d6c5b4a3928170615",
+  "created_utc": "2026-09-17T12:00:00Z"
+}

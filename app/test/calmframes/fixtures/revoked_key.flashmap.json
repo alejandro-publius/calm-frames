@@ -1,0 +1,54 @@
+{
+  "created_utc": "2026-09-17T12:00:00Z",
+  "generator": {
+    "name": "flashmap",
+    "version": "1.0.0"
+  },
+  "picture": {
+    "height": 108,
+    "left": 0,
+    "letterbox": false,
+    "top": 0,
+    "width": 192
+  },
+  "profile": {
+    "area_windows": [
+      {
+        "height_px": 36,
+        "name": "wcag-10deg",
+        "width_px": 64
+      }
+    ],
+    "name": "wcag"
+  },
+  "segments": [
+    {
+      "end_ms": 1800,
+      "reason": "general",
+      "start_ms": 1000
+    },
+    {
+      "end_ms": 12600,
+      "reason": "red",
+      "start_ms": 12000
+    }
+  ],
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "sha256:2e84de6f5829e51117835f0add2143a879d480b353f5531336dffc0d747b5956",
+    "payload_sha256": "06c8ffc3357a3a59c87571409430f611c0b96e050a371bcec719dd6533480dc7",
+    "public_key": "7LzAo4W/YwI+oDC2242F6ypEBHNtGG6ISfx5l8ECGjc=",
+    "value": "IwqRIJNOZa8TcraNcSMimNSVJRmjZ6JTBT+wwp38lekVl+qdAgCvqmpeeYscjngMSKTLbzGxuxBSS9Tw08bNAQ=="
+  },
+  "source": {
+    "duration_ms": 30000,
+    "path": "titles/example/safe/wcag/safe.mp4",
+    "sha256": "9f2c1b6c1cbb4c3a9a0f0c2d5e8b7a6d4f3e2c1b0a9f8e7d6c5b4a3928170615"
+  },
+  "summary": {
+    "general_segment_count": 1,
+    "hidden_ms": 1400,
+    "red_segment_count": 1
+  },
+  "version": 1
+}
