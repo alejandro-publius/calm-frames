@@ -12,8 +12,19 @@ It is not a medical device.
 
 ## Install
 
+**This package is not on npm yet.** Nothing has been published under the name
+`@calm-frames/flash-guard`, so the command below does not work today and is
+written down for when it does. Until then, take the package straight from the
+repository:
+
 ```
-npm install @calm-frames/flash-guard
+npm install github:alejandro-publius/calm-frames#main --workspace-root  # the hook/ folder
+```
+
+or copy `hook/src` into your app, which is all the package is.
+
+```
+npm install @calm-frames/flash-guard   # once it is published
 ```
 
 Peers: `react`, `react-native`, `@amazon-devices/react-native-w3cmedia` and

@@ -12,7 +12,7 @@ video and the tool that turns these recordings into `results/screen_level.json`.
 **Nothing in here has been done on real hardware yet.** The stick has not arrived, no footage
 exists, and the meter has only ever seen simulated recordings (`results/meter_validation.json`).
 Expect the first session to find something this page did not think of, and write it down in
-`docs/friction_pending.md` when it does.
+`docs/FRICTION_LOG.md` when it does.
 
 ---
 

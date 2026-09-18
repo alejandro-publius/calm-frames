@@ -29,6 +29,15 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 - Every guard gets a test that has been seen to fail: break the guard on purpose, watch the test go red, restore it. A green new test proves nothing on its own.
 - `docs/EVAL_PLAN.md` is committed before any real clip is labeled. Later changes are logged as deviations.
 - Re-check any source page before quoting it (impact numbers, licenses, Amazon docs).
+- **The drift checker cannot catch the right number being left out.** Every published
+  number traces to `results/` and passes `eval/readme_sync.py --check`, and that guards
+  against a number going stale. It does nothing about which number was chosen. Four
+  times now the one published was the friendlier one: the blended recall instead of the
+  near-limits recall, the median cover lead instead of the spread, the well-behaved
+  timing run instead of the under-load one, and "21 titles verified" instead of the 7
+  that cover anything. So when a number has a worse sibling, publish both, or say in
+  the same sentence why the worse one is not the honest measure. This matters most in
+  the Devpost text and the video script, where no marker check runs at all.
 
 ### Media and licenses
 - Download a file only after opening its source page and confirming the license and credit line. Record URL, license, credit line, SHA-256, duration and resolution in `media/LICENSES.csv`.
@@ -64,7 +73,7 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 - Work on your own. Record each call in docs/DECISIONS.md (date, decision, why, cost) and keep going.
 - Stop and ask only at a HUMAN CHECKPOINT or when a KILL rule fires (both listed in docs/BUILD_PROMPT.md).
 - Keep docs/STATUS.md current and end every block of work with one status line.
-- Friction log from minute one: real entries only (task, steps, expected vs actual, severity, workaround, suggestion), in docs/friction_pending.md. evkit never arrived, so that file is the log.
+- Friction log from minute one: real entries only (task, steps, expected vs actual, severity, workaround, suggestion), in docs/FRICTION_LOG.md. There is no second file: the scratch pad that used to sit beside it shipped by mistake and is gone.
 - Parallel lanes: (1) flashmap and conformance, (2) Vega app, (3) pipeline and CDK, (4) baselines and evaluation, (5) docs, friction log and feedback. A separate verifier agent attacks every claim and number at each milestone before it reaches the README, Devpost text or video.
 - Update this file at every phase change.
 

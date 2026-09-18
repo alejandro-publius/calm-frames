@@ -60,7 +60,7 @@ scheduling ahead rather than reacting.
 |---|---|
 | README.md | Written. Thesis, architecture diagram, required-tech table with exact file and line, results tables synced from `results/`, install steps for the stick and the virtual device, limits, safety wording, licences. The demo PIN is the one gap: the parent area lands in phase 4. |
 | docs/SUBMISSION.md | Every Devpost field drafted. Product feedback answers Amazon's five questions for nine tools. Fourteen feature requests with priorities, led by a system-wide Fire TV "dim flashing lights" setting. Twelve items need Alex, listed in one table at the end. |
-| docs/FRICTION_LOG.md | The eleven entries in Amazon's six-field format. docs/friction_pending.md is kept as the working notes, because the lanes still add to it. |
+| docs/FRICTION_LOG.md | Every entry in Amazon's six-field format, with a table at the end saying where the evidence for each one lives. It is the only friction file. |
 | docs/OPEN_SOURCE_PR.md | Target picked, fix written, tests written and seen to fail without the fix. The branch is not created and nothing is pushed: it has to live in a fork under Alex's account. |
 | docs/VIDEO_SCRIPT.md | Timed to 2:55, with the safety and rights checks, the shot list, and what has to exist before it can be filmed. |
 

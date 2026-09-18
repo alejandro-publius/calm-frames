@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """GATE 2 screening: run flashmap over the media pool and count flagged segments.
 
-One command, once lane B's flashmap package exists:
+One command:
 
     .venv/bin/python eval/screen.py
 
