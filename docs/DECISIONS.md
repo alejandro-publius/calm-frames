@@ -71,3 +71,47 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
 - **Decision:** Drop screen capture of the virtual device. Measure software-level lead time instead, in results/gate1_software_vvd.json, labelled as software-level and never quoted as a gate number.
 - **Why:** Two independent blocks. macOS exposes no screen capture device to ffmpeg without the Screen Recording permission, and the window is not captured anyway: a full screen grab while the virtual device was frontmost returned the desktop behind it, and QEMU's own screendump returns black, because the app draws on a GPU layer neither path sees. Chasing it further would spend time on a dead end.
 - **Cost:** Nothing measured on the virtual device can speak for the screen. The software number is an upper bound on how well the real thing can do, because the React commit, the compositor, scan-out and the panel all add delay that this measurement cannot see. GATE 1 stays what it always was: 50 trials filmed at 240 fps on a real stick.
+
+## 2026-09-17, night: the carry-over fixes
+
+- **Decision:** The player subtracts `rendition_start_offset_ms` inside
+  `buildCoverIntervals`, rather than anywhere else.
+  **Why:** it is the one place every caller already goes through, so a screen
+  that forgot to apply the offset is not possible. The safety property is
+  stated as lead time and not as coverage, because with an offset smaller than
+  the guard band the cover still lands before the picture, just with less room
+  than the band promised, and the band has to absorb the scheduler as well.
+  **Cost:** one option on a pure function, plus a fail closed path in
+  useFlashGuard when the offset is further out than verify would publish.
+
+- **Decision:** Re-verify the eight titles blocked on
+  `rendition_matches_source` instead of ingesting eight more.
+  **Why:** those eight failed on the picture rectangle and start offset bar
+  that was fixed today. They already have maps and renditions on disk, so
+  verify alone decides them. Ingesting new titles to reach twenty while eight
+  correct ones sat blocked by a fixed bug would have been the wrong count.
+  **Cost:** minutes per title with `--no-rerender`, against roughly an hour
+  each to ingest a new one.
+
+- **Decision:** Report cover lead in media time alongside wall clock.
+  **Why:** the two come apart when playback runs slower than real time, which
+  the virtual device does constantly. The cover goes on at the right place in
+  the clip and then waits a long time in wall clock for the playhead to reach
+  the marker. That is what put the p95 at 4097 ms, not the scheduler being
+  early, and reporting only wall clock would have made a slow machine look
+  like a design fault.
+  **Cost:** one more field per trial, and a reason recorded for any cover that
+  goes on earlier in the clip than the guard band asked for.
+
+- **Decision:** Report dropped trials two ways, strict and usable, and quote
+  the strict one if only one is quoted.
+  **Why:** a trial that could not be measured is not a trial that passed. The
+  usable fraction on its own flatters, because the runs that went wrong are
+  exactly the ones that drop out.
+  **Cost:** two fractions and two intervals in the results file.
+
+- **Decision:** Instrument the gap between runs of the scheduler's own tick.
+  **Why:** the cover that went on 86 ms late was blamed on the JavaScript
+  thread being away, and nothing measured that directly. The guard band has to
+  be wider than the worst such pause, so the pause has to be a number.
+  **Cost:** one ref and one log line per gap past twice the tick.
