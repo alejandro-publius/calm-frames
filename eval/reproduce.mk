@@ -32,7 +32,8 @@ ABLATION_CLIPS ?= 150
 COVER_CLIPS ?= 60
 
 .PHONY: reproduce conformance-design conformance conformance-full conformance-report \
-        baselines-table ablations realclips-status labeling-pool labeling-plots eval-checks
+        baselines-table ablations realclips-status labeling-pool labeling-plots eval-checks \
+        screening-table attribution
 
 reproduce: ## rebuild every evaluation table and figure offline from results/*.json
 	$(PY) $(EVAL_DIR)/figures.py
@@ -67,6 +68,12 @@ labeling-plots: ## one plot per pooled segment, with no detector output on any o
 
 realclips-status: ## what the real clip set is still waiting for
 	$(PY) $(EVAL_DIR)/realclips/report.py
+
+screening-table: ## rebuild the per source positives table and the shooting list in screening.json
+	$(PY) $(EVAL_DIR)/screening_table.py
+
+attribution: ## rewrite NOTICE and the app's credits screen from media/LICENSES.csv
+	$(PY) $(EVAL_DIR)/attribution.py
 
 eval-checks: ## the eval lane's own tests, including the no-flashmap-import guards
 	$(PY) -m pytest $(EVAL_DIR)/tests $(EVAL_DIR)/test_plots_standalone.py -q
