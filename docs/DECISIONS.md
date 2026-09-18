@@ -260,3 +260,37 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   **Cost:** these mutations are recorded in the test file's docstring rather
   than in results/mutation.json. Moving them into the gate is a job for whoever
   owns it, and the list is written out ready to move.
+
+## 2026-09-17 late: what this stack costs a month, as an estimate
+
+- **Decision:** Publish a monthly cost estimate of about $<!--n results/cost_estimate.json:published.monthly_total_usd -->1.34<!--/n--> in us-east-1, against the $<!--n results/cost_estimate.json:published.budget_alarm_usd -->20<!--/n--> budget alarm, and say plainly that it is an estimate rather than a bill.
+- **Why:** Anyone reading an infrastructure lane's work wants to know what it would cost before they let it run. The arithmetic is in `scripts/cost_estimate.py` and the numbers in `results/cost_estimate.json`, so it can be argued with rather than believed.
+
+  The assumptions: 20 titles a month, 10 minutes each, one preset in the cloud, an ARM Fargate task of 2 vCPU and 4 GB taking 15 minutes per title, 0.8 GB of published artifacts per title, source masters expiring after 30 days, and about 20 GB of viewing a month.
+
+  The lines: Fargate $<!--n results/cost_estimate.json:published.fargate_usd -->0.4<!--/n-->, S3 storage $<!--n results/cost_estimate.json:published.storage_usd -->0.83<!--/n-->, and small change for ECR and requests. CloudFront is nothing because 20 GB is inside its always free 1 TB a month. DynamoDB at 20 writes a month is nothing. Lambda and CloudWatch Logs are not in the table at all, because at this volume they round to zero whatever the rate is.
+
+  Every unit price was read from the AWS pricing pages on Sep 17, 2026 and each one carries its page in the JSON. Fargate ARM is $0.032380 per vCPU hour and $0.003560 per GB hour; S3 Standard is $0.023 per GB month; DynamoDB on demand is $0.625 per million writes; ECR is $0.10 per GB month; CloudFront gives 1 TB out and 10 million requests a month free.
+- **Cost:** The estimate has one soft input and it is the biggest one: nobody has measured how long the ingest task takes per title, because the container has never processed a video. So the file carries a sensitivity block. At twice the task time the total is $<!--n results/cost_estimate.json:published.task_time_double_usd -->1.73<!--/n-->; at four times, $<!--n results/cost_estimate.json:published.task_time_quadruple_usd -->2.52<!--/n-->. The shape of the bill does not change, because compute is not what dominates it at this size.
+
+  What would change the shape: a NAT gateway per zone, which the CDK creates by default and this stack sets to zero, would add $<!--n results/cost_estimate.json:published.nat_gateways_would_add_usd -->65.7<!--/n--> a month on its own, before any data. That is the line the whole network design exists to avoid, and it is more than three times the budget alarm.
+
+## 2026-09-17 late: stop building the container on this Mac
+
+- **Decision:** Do not build the ingest image in the shared colima VM again. Build it on a GitHub Actions runner instead, in the new `image` job in `.github/workflows/audit.yml`, with QEMU for ARM64.
+- **Why:** The build was started with a 768 MB memory cap and two of four CPUs, on a VM with about 1.4 GB free and no swap. Eight minutes in, with apt unpacking ffmpeg's dependencies, the other project's `datahub-gms` container was killed with exit 137, which is the out of memory killer. The build was stopped and their container was started again; it came back healthy. The memory cap did not prevent this, because the page cache a build fills is not charged to the build's cgroup.
+
+  This is the risk the Sep 17 IRIS entry described, arriving from a smaller build than the one that entry was about.
+- **Cost:** The container build is not verified end to end on this machine. What did get verified before it was stopped: the pinned base image digest resolves and pulls, the platform is arm64, and the apt step reaches unpacking Debian's ffmpeg packages. What is not verified: the pip install from hashes, the flashmap install, the entrypoint running inside the image. That answer now comes from CI, on a runner where a build cannot hurt anybody else.
+
+## 2026-09-17 late: anchor the AWS status lock, and test both locks
+
+- **Decision:** Change the guard's pattern from `AWS Paid plan:[[:space:]]*confirmed` to the same thing anchored at the start of a line, and add `pipeline/tests/test_aws_guard.py`.
+- **Why:** The row in docs/STATUS.md that tells the operator to add that line contains the line, in backticks. An unanchored grep matched it, so the document lock had been open since the day it was written and only `CHECKPOINT_D` was holding. Nothing was deployed and no AWS call was ever made, but that was one typo away rather than by design. The anchored pattern is stricter, not looser: a document that talks about the line is no longer a document that says it.
+- **Cost:** The operator has to put the line at the start of a line of its own, which the refusal text now says. Sixteen tests, run against a copy of the real script in a temporary directory so the real STATUS.md is never touched, and every one of them with the credential files pointed at /dev/null because this machine has an AWS CLI and credentials on it.
+
+## 2026-09-17 late: moto and boto3 in the development venv
+
+- **Decision:** Add `moto==5.2.3` and `boto3==1.43.97` to `.venv`, and install them in CI's new infra job.
+- **Why:** The ingest container's rules are worth testing end to end, and moto is a real S3, DynamoDB and SSM in the test process, so the test drives the actual boto3 calls rather than a mock of them. boto3 is a container dependency anyway and is already in the hash pinned requirements.
+- **Cost:** Two more packages in a venv other lanes share, both additive. The same job also installs `aws-cdk-lib`, which CI never had, so `pipeline/tests/test_infra.py` has been skipping itself there since it was written.
