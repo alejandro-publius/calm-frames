@@ -279,6 +279,9 @@ Per source:
 | Wikimedia Commons lightning | <!--n results/screening.json:per_source.Wikimedia Commons lightning.files -->4<!--/n--> | <!--n results/screening.json:per_source.Wikimedia Commons lightning.flagged_files -->3<!--/n--> | <!--n results/screening.json:per_source.Wikimedia Commons lightning.flagged_segments -->9<!--/n--> |
 | DVIDS | <!--n results/screening.json:per_source.DVIDS.files -->2<!--/n--> | <!--n results/screening.json:per_source.DVIDS.flagged_files -->2<!--/n--> | <!--n results/screening.json:per_source.DVIDS.flagged_segments -->9<!--/n--> |
 | NASA SVS 5011 | <!--n results/screening.json:per_source.NASA SVS 5011.files -->1<!--/n--> | <!--n results/screening.json:per_source.NASA SVS 5011.flagged_files -->0<!--/n--> | <!--n results/screening.json:per_source.NASA SVS 5011.flagged_segments -->0<!--/n--> |
+| unlabeled | <!--n results/screening.json:per_source.unlabeled.files -->1<!--/n--> | <!--n results/screening.json:per_source.unlabeled.flagged_files -->0<!--/n--> | <!--n results/screening.json:per_source.unlabeled.flagged_segments -->0<!--/n--> |
+
+The `unlabeled` row is one file that carries no source label in `media/LICENSES.csv`. It is in the table because the seven rows have to add up to the <!--n results/screening.json:clips_analyzed_ok -->16<!--/n--> analyzed cleanly, and a table that quietly dropped it would not.
 
 Two things this run found, both recorded rather than smoothed over. Every one of those segments fired the general flash rule and not one fired the red flash rule, because the free pool holds no saturated red strobe and no sustained regular strobe. And flashmap cannot decode Theora `.ogv`, which is what all four failures were.
 
@@ -358,9 +361,9 @@ Two things to know before you script against the device. `vega virtual-device st
 ```sh
 cd app
 npm install
-npm run build:debug                     # armv7 for the stick
+npm run build:debug                     # builds every architecture; the stick takes armv7
 vega device is-connected                # not "vega device list", which crashes
-vega run-app app/build/armv7-debug/calm-frames-app_armv7.vpkg
+vega run-app build/armv7-debug/calm-frames-app_armv7.vpkg
 ```
 
 The stick needs Vega OS 1.2 with developer mode on, connected over USB. The package ID must not begin with `com.amazon`, or developer mode will not sideload it.
