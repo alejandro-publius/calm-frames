@@ -167,3 +167,38 @@ The citable software level result is still the quiet-machine run in
 `results/gate1_software_vvd.json`, which predates the instrument and so has no
 tick gap in it. A clean re-run with the instrument, on an idle machine, is
 still owed and is listed in docs/STATUS.md.
+
+## 2026-09-17, night: playback chaos on the virtual device
+
+**The claim this supports:** across 71 marker crossings under deliberate abuse,
+the picture was never showing when the player reported being inside a flagged
+segment. `results/chaos_vvd.json`.
+
+16 passes, all 16 launched, no device lost and no restarts. 157 rude actions:
+28 rewinds, 26 stalls, 26 throttles, 25 pauses, 17 fast-forwards and 35 idles.
+The machine was quiet, load average 2.65 before and 1.99 after. Every crossing is
+anchored to a position the player reported, never to the app's own estimate,
+which is the rule that caught the withdrawn number in the first place.
+
+The fail-safe cover fired on `pause`, `seeking` and `waiting` as well as on the
+two intervals, so the uncertain-event path was exercised on a real player rather
+than argued for.
+
+**An earlier run of the same harness is not the basis of any claim.** It counted
+only 3 crossings, because `markers50.mp4` puts its first marker at 4000 ms and a
+rewind under chaos is a 10 second seek, so 14 of its 16 passes never got the
+playhead that far. Three is three. The re-run used `markers_packed.mp4`, whose
+first marker is at 2000 ms, and that one change took it to 71.
+
+**Two things this run does not show, both recorded in the file.**
+
+- `segments_served` and `segment_requests_stalled` are both 0. The whole clip is
+  fetched before the 9 second settle ends, so the throttling and stalling reached
+  a player that had already buffered everything. **There is no evidence here about
+  behaviour under a starved network.** A longer clip or a shorter settle would fix
+  it, and both trade against the crossing rate.
+- `background_covers_seen` is 0. Backgrounding never happened, so the
+  background path is covered by the app's own tests and not by this run.
+
+Neither is a screen-level result. Nothing here sees the React commit, the
+compositor, scan-out or the panel.

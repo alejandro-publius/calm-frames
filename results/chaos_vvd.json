@@ -2,20 +2,20 @@
   "statement": "Playback fuzzing on the Vega Virtual Device. For every moment the player reported being inside a marker, was the picture hidden. Everything is anchored to positions the player reported, never to the app's own estimate.",
   "what_this_is_not": "Not GATE 1 and not a screen-level measurement. Nothing here sees the React commit, the compositor, scan-out or the panel. It is the app's own account of what it did, on a virtual device, checked against what the player said.",
   "tool": "eval/fuzz_playback_vvd.py",
-  "recorded_utc": "2026-09-18T04:49:02+00:00",
+  "recorded_utc": "2026-09-18T05:42:10+00:00",
   "device": "Vega Virtual Device",
-  "clip_sha256": "fad744279f9c9f085b9cd23b78d5a206e99f565b5cd42bb64bda0762157a391e",
+  "clip_sha256": "1c57cfe921ca58787e813350a19a1307c5d80bb076f07b80bff0c858a4bd0500",
   "guard_band_ms": 500,
   "seed": 20260917,
   "load_average_before": [
-    11.0,
-    15.72,
-    37.64
+    2.65,
+    3.24,
+    4.36
   ],
   "load_average_after": [
-    4.81,
-    5.89,
-    14.93
+    1.99,
+    2.08,
+    2.75
   ],
   "load_note": "A run taken on a loaded machine measures the machine. The load averages are one, five and fifteen minutes, from the host.",
   "passes_attempted": 16,
@@ -23,13 +23,13 @@
   "passes_lost_with_the_device": 0,
   "virtual_device_restarts": 0,
   "device_note": "The virtual device stopped on its own more than once during this work, which is a note about the device and not about the app. A pass that lost it is dropped rather than counted, and the device is started again.",
-  "passes_with_a_crossing": 2,
+  "passes_with_a_crossing": 16,
   "totals": {
-    "marker_crossings_counted": 3,
+    "marker_crossings_counted": 71,
     "uncovered_marker_crossings": 0,
     "showing_ms_total": 0,
-    "report_gap_ms_median": 179.0,
-    "report_gap_ms_max": 250.0
+    "report_gap_ms_median": 251.0,
+    "report_gap_ms_max": 308.0
   },
   "chaos": {
     "actions_carried_out": 157,
@@ -44,7 +44,8 @@
     "segments_served": 0,
     "segment_requests_stalled": 0,
     "cover_on_reasons_seen": [
-      "interval 3500-5500",
+      "interval 1500-3000",
+      "interval 4000-5500",
       "pause",
       "seeking",
       "waiting"
@@ -60,15 +61,166 @@
       "pass": 1,
       "launched": true,
       "device_lost": false,
-      "events": 16,
+      "events": 32,
       "event_kinds": [
         "cover-off",
         "cover-on",
         "harness-start",
         "pause",
         "playing",
-        "seeked",
-        "seeking",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 0,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.82,
+          "kind": "stall",
+          "for_s": 2.54,
+          "wall_clock_ms": 1789709093750,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789709093751
+        },
+        {
+          "at_s": 7.82,
+          "kind": "rewind",
+          "wall_clock_ms": 1789709099756,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789709099828
+        },
+        {
+          "at_s": 11.87,
+          "kind": "idle",
+          "for_s": 5.63,
+          "wall_clock_ms": 1789709103802,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789709109440
+        },
+        {
+          "at_s": 15.34,
+          "kind": "idle",
+          "for_s": 4.55,
+          "wall_clock_ms": 1789709109440,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789709114000
+        },
+        {
+          "at_s": 20.11,
+          "kind": "throttle",
+          "bytes_per_second": 8000,
+          "for_s": 2.04,
+          "wall_clock_ms": 1789709114000,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789709116051
+        },
+        {
+          "at_s": 25.69,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789709117624,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789709117694
+        },
+        {
+          "at_s": 31.22,
+          "kind": "idle",
+          "for_s": 8.27,
+          "wall_clock_ms": 1789709123149,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789709131430
+        },
+        {
+          "at_s": 35.09,
+          "kind": "stall",
+          "for_s": 2.52,
+          "wall_clock_ms": 1789709131430,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789709131430
+        },
+        {
+          "at_s": 40.36,
+          "kind": "idle",
+          "for_s": 5.39,
+          "wall_clock_ms": 1789709132290,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789709137690
+        }
+      ],
+      "position_reports": 22,
+      "furthest_position_ms": 5077.0,
+      "cover_on_reasons": [
+        "interval 1500-3000",
+        "interval 4000-5500",
+        "waiting"
+      ],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2009.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2009.0,
+          "media_to_ms": 2260.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2260.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4517.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4517.0,
+          "media_to_ms": 4768.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4768.0,
+          "media_to_ms": 5000.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
+      "uncovered": []
+    },
+    {
+      "pass": 2,
+      "launched": true,
+      "device_lost": false,
+      "events": 29,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "tick-gap",
         "timeupdate",
         "waiting"
       ],
@@ -79,215 +231,136 @@
       },
       "actions": [
         {
-          "at_s": 1.82,
-          "kind": "stall",
-          "for_s": 2.54,
-          "wall_clock_ms": 1789705869411,
-          "carried_out": true,
-          "ended_wall_clock_ms": 1789705869411
-        },
-        {
-          "at_s": 7.82,
-          "kind": "rewind",
-          "wall_clock_ms": 1789705875407,
-          "carried_out": true,
-          "ended_wall_clock_ms": 1789705875474
-        },
-        {
-          "at_s": 11.87,
-          "kind": "idle",
-          "for_s": 5.63,
-          "wall_clock_ms": 1789705879461,
-          "carried_out": true,
-          "ended_wall_clock_ms": 1789705885094
-        },
-        {
-          "at_s": 15.34,
-          "kind": "idle",
-          "for_s": 4.55,
-          "wall_clock_ms": 1789705885094,
-          "carried_out": true,
-          "ended_wall_clock_ms": 1789705889650
-        },
-        {
-          "at_s": 20.11,
-          "kind": "throttle",
-          "bytes_per_second": 8000,
-          "for_s": 2.04,
-          "wall_clock_ms": 1789705889650,
-          "carried_out": true,
-          "ended_wall_clock_ms": 1789705891696
-        },
-        {
-          "at_s": 25.69,
-          "kind": "fast-forward",
-          "wall_clock_ms": 1789705893279,
-          "carried_out": true,
-          "ended_wall_clock_ms": 1789705893348
-        },
-        {
-          "at_s": 31.22,
-          "kind": "idle",
-          "for_s": 8.27,
-          "wall_clock_ms": 1789705898811,
-          "carried_out": true,
-          "ended_wall_clock_ms": 1789705907083
-        },
-        {
-          "at_s": 35.09,
-          "kind": "stall",
-          "for_s": 2.52,
-          "wall_clock_ms": 1789705907083,
-          "carried_out": true,
-          "ended_wall_clock_ms": 1789705907083
-        },
-        {
-          "at_s": 40.36,
-          "kind": "idle",
-          "for_s": 5.39,
-          "wall_clock_ms": 1789705907951,
-          "carried_out": true,
-          "ended_wall_clock_ms": 1789705913346
-        }
-      ],
-      "position_reports": 7,
-      "furthest_position_ms": 1159.0,
-      "cover_on_reasons": [
-        "pause",
-        "waiting"
-      ],
-      "crossings": [],
-      "uncovered": []
-    },
-    {
-      "pass": 2,
-      "launched": true,
-      "device_lost": false,
-      "events": 34,
-      "event_kinds": [
-        "cover-off",
-        "cover-on",
-        "harness-start",
-        "pause",
-        "playing",
-        "seeked",
-        "seeking",
-        "timeupdate",
-        "waiting"
-      ],
-      "split": {
-        "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 3,
-        "dropped_for_going_backwards": 0
-      },
-      "actions": [
-        {
           "at_s": 1.45,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789705938541,
+          "wall_clock_ms": 1789709159503,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789705938616
+          "ended_wall_clock_ms": 1789709159575
         },
         {
           "at_s": 4.87,
           "kind": "idle",
           "for_s": 7.74,
-          "wall_clock_ms": 1789705941969,
+          "wall_clock_ms": 1789709162913,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789705949722
+          "ended_wall_clock_ms": 1789709170664
         },
         {
           "at_s": 10.31,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789705949722,
+          "wall_clock_ms": 1789709170664,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789705949796
+          "ended_wall_clock_ms": 1789709170733
         },
         {
           "at_s": 14.52,
           "kind": "pause",
           "for_s": 1.28,
-          "wall_clock_ms": 1789705951615,
+          "wall_clock_ms": 1789709172573,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789705953042
+          "ended_wall_clock_ms": 1789709174011
         },
         {
           "at_s": 20.15,
           "kind": "rewind",
-          "wall_clock_ms": 1789705957241,
+          "wall_clock_ms": 1789709178194,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789705957310
+          "ended_wall_clock_ms": 1789709178266
         },
         {
           "at_s": 23.43,
           "kind": "throttle",
           "bytes_per_second": 20000,
           "for_s": 2.97,
-          "wall_clock_ms": 1789705960525,
+          "wall_clock_ms": 1789709181482,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789705963500
+          "ended_wall_clock_ms": 1789709184457
         },
         {
           "at_s": 28.49,
           "kind": "rewind",
-          "wall_clock_ms": 1789705965585,
+          "wall_clock_ms": 1789709186543,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789705965651
+          "ended_wall_clock_ms": 1789709186616
         },
         {
           "at_s": 31.5,
           "kind": "idle",
           "for_s": 7.29,
-          "wall_clock_ms": 1789705968591,
+          "wall_clock_ms": 1789709189549,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789705975883
+          "ended_wall_clock_ms": 1789709196847
         },
         {
           "at_s": 37.06,
           "kind": "pause",
           "for_s": 1.19,
-          "wall_clock_ms": 1789705975884,
+          "wall_clock_ms": 1789709196847,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789705977225
+          "ended_wall_clock_ms": 1789709198177
         },
         {
           "at_s": 40.13,
           "kind": "pause",
           "for_s": 1.71,
-          "wall_clock_ms": 1789705977225,
+          "wall_clock_ms": 1789709198177,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789705979070
+          "ended_wall_clock_ms": 1789709200040
         }
       ],
-      "position_reports": 12,
-      "furthest_position_ms": 1994.0,
+      "position_reports": 19,
+      "furthest_position_ms": 4452.0,
       "cover_on_reasons": [
-        "pause",
-        "seeking"
+        "interval 1500-3000",
+        "interval 4000-5500",
+        "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2005.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2005.0,
+          "media_to_ms": 2256.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2256.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 253.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 3,
       "launched": true,
       "device_lost": false,
-      "events": 15,
+      "events": 29,
       "event_kinds": [
         "cover-off",
         "cover-on",
         "harness-start",
         "pause",
         "playing",
-        "seeked",
-        "seeking",
         "tick-gap",
         "timeupdate",
         "waiting"
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 4,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
@@ -295,106 +368,138 @@
           "at_s": 1.38,
           "kind": "idle",
           "for_s": 5.4,
-          "wall_clock_ms": 1789706007578,
+          "wall_clock_ms": 1789709224845,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706012982
+          "ended_wall_clock_ms": 1789709230254
         },
         {
           "at_s": 5.74,
           "kind": "rewind",
-          "wall_clock_ms": 1789706012982,
+          "wall_clock_ms": 1789709230254,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706013050
+          "ended_wall_clock_ms": 1789709230325
         },
         {
           "at_s": 9.78,
           "kind": "rewind",
-          "wall_clock_ms": 1789706015978,
+          "wall_clock_ms": 1789709233254,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706016050
+          "ended_wall_clock_ms": 1789709233332
         },
         {
           "at_s": 13.82,
           "kind": "stall",
           "for_s": 2.81,
-          "wall_clock_ms": 1789706020020,
+          "wall_clock_ms": 1789709237294,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706020021
+          "ended_wall_clock_ms": 1789709237294
         },
         {
           "at_s": 18.35,
           "kind": "rewind",
-          "wall_clock_ms": 1789706024550,
+          "wall_clock_ms": 1789709241815,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706024617
+          "ended_wall_clock_ms": 1789709241883
         },
         {
           "at_s": 23.99,
           "kind": "rewind",
-          "wall_clock_ms": 1789706030192,
+          "wall_clock_ms": 1789709247460,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706030258
+          "ended_wall_clock_ms": 1789709247532
         },
         {
           "at_s": 27.37,
           "kind": "stall",
           "for_s": 1.63,
-          "wall_clock_ms": 1789706033571,
+          "wall_clock_ms": 1789709250844,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706033571
+          "ended_wall_clock_ms": 1789709250844
         },
         {
           "at_s": 32.89,
           "kind": "rewind",
-          "wall_clock_ms": 1789706039088,
+          "wall_clock_ms": 1789709256356,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706039156
+          "ended_wall_clock_ms": 1789709256420
         },
         {
           "at_s": 37.37,
           "kind": "rewind",
-          "wall_clock_ms": 1789706043568,
+          "wall_clock_ms": 1789709260843,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706043634
+          "ended_wall_clock_ms": 1789709260911
         },
         {
           "at_s": 42.05,
           "kind": "stall",
           "for_s": 1.81,
-          "wall_clock_ms": 1789706048251,
+          "wall_clock_ms": 1789709265515,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706048251
+          "ended_wall_clock_ms": 1789709265515
         }
       ],
-      "position_reports": 4,
-      "furthest_position_ms": 448.0,
+      "position_reports": 19,
+      "furthest_position_ms": 4508.0,
       "cover_on_reasons": [
-        "pause",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2006.0,
+          "report_gap_ms": 252.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2006.0,
+          "media_to_ms": 2258.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2258.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4508.0,
+          "report_gap_ms": 308.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 4,
       "launched": true,
       "device_lost": false,
-      "events": 17,
+      "events": 30,
       "event_kinds": [
         "cover-off",
         "cover-on",
         "harness-start",
         "pause",
         "playing",
-        "seeked",
-        "seeking",
         "tick-gap",
         "timeupdate",
         "waiting"
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 3,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
@@ -403,106 +508,141 @@
           "kind": "throttle",
           "bytes_per_second": 8000,
           "for_s": 1.69,
-          "wall_clock_ms": 1789706077269,
+          "wall_clock_ms": 1789709290709,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706078963
+          "ended_wall_clock_ms": 1789709292408
         },
         {
           "at_s": 4.94,
           "kind": "idle",
           "for_s": 4.79,
-          "wall_clock_ms": 1789706080398,
+          "wall_clock_ms": 1789709293832,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706085193
+          "ended_wall_clock_ms": 1789709298627
         },
         {
           "at_s": 8.99,
           "kind": "idle",
           "for_s": 5.65,
-          "wall_clock_ms": 1789706085193,
+          "wall_clock_ms": 1789709298627,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706090844
+          "ended_wall_clock_ms": 1789709304284
         },
         {
           "at_s": 12.2,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706090844,
+          "wall_clock_ms": 1789709304284,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706090915
+          "ended_wall_clock_ms": 1789709304356
         },
         {
           "at_s": 17.31,
           "kind": "rewind",
-          "wall_clock_ms": 1789706092768,
+          "wall_clock_ms": 1789709306200,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706092900
+          "ended_wall_clock_ms": 1789709306334
         },
         {
           "at_s": 23.27,
           "kind": "stall",
           "for_s": 3.17,
-          "wall_clock_ms": 1789706098732,
+          "wall_clock_ms": 1789709312161,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706098732
+          "ended_wall_clock_ms": 1789709312161
         },
         {
           "at_s": 26.35,
           "kind": "idle",
           "for_s": 6.51,
-          "wall_clock_ms": 1789706101811,
+          "wall_clock_ms": 1789709315249,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706108326
+          "ended_wall_clock_ms": 1789709321767
         },
         {
           "at_s": 31.27,
           "kind": "rewind",
-          "wall_clock_ms": 1789706108326,
+          "wall_clock_ms": 1789709321767,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706108392
+          "ended_wall_clock_ms": 1789709321833
         },
         {
           "at_s": 36.72,
           "kind": "rewind",
-          "wall_clock_ms": 1789706112181,
+          "wall_clock_ms": 1789709325615,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706112247
+          "ended_wall_clock_ms": 1789709325691
         },
         {
           "at_s": 41.33,
           "kind": "pause",
           "for_s": 2.38,
-          "wall_clock_ms": 1789706116790,
+          "wall_clock_ms": 1789709330226,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706119312
+          "ended_wall_clock_ms": 1789709332763
         }
       ],
-      "position_reports": 7,
-      "furthest_position_ms": 1295.0,
+      "position_reports": 20,
+      "furthest_position_ms": 4709.0,
       "cover_on_reasons": [
-        "pause",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2226.0,
+          "report_gap_ms": 253.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2226.0,
+          "media_to_ms": 2476.0,
+          "report_gap_ms": 249.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2476.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 252.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4709.0,
+          "report_gap_ms": 308.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 5,
       "launched": true,
       "device_lost": false,
-      "events": 19,
+      "events": 26,
       "event_kinds": [
         "cover-off",
         "cover-on",
         "harness-start",
         "pause",
         "playing",
+        "seeked",
+        "seeking",
         "tick-gap",
-        "timeupdate",
-        "waiting"
+        "timeupdate"
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 3,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
@@ -510,231 +650,295 @@
           "at_s": 1.86,
           "kind": "idle",
           "for_s": 7.64,
-          "wall_clock_ms": 1789706145715,
+          "wall_clock_ms": 1789709356107,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706153359
+          "ended_wall_clock_ms": 1789709363752
         },
         {
           "at_s": 5.16,
           "kind": "pause",
           "for_s": 0.81,
-          "wall_clock_ms": 1789706153359,
+          "wall_clock_ms": 1789709363752,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706154307
+          "ended_wall_clock_ms": 1789709364710
         },
         {
           "at_s": 8.39,
           "kind": "idle",
           "for_s": 7.64,
-          "wall_clock_ms": 1789706154307,
+          "wall_clock_ms": 1789709364710,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706161951
+          "ended_wall_clock_ms": 1789709372353
         },
         {
           "at_s": 11.51,
           "kind": "idle",
           "for_s": 7.44,
-          "wall_clock_ms": 1789706161951,
+          "wall_clock_ms": 1789709372353,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706169392
+          "ended_wall_clock_ms": 1789709379800
         },
         {
           "at_s": 15.88,
           "kind": "rewind",
-          "wall_clock_ms": 1789706169392,
+          "wall_clock_ms": 1789709379800,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706169468
+          "ended_wall_clock_ms": 1789709379869
         },
         {
           "at_s": 21.44,
           "kind": "idle",
           "for_s": 4.3,
-          "wall_clock_ms": 1789706169468,
+          "wall_clock_ms": 1789709379869,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706173773
+          "ended_wall_clock_ms": 1789709384177
         },
         {
           "at_s": 26.23,
           "kind": "stall",
           "for_s": 3.16,
-          "wall_clock_ms": 1789706173773,
+          "wall_clock_ms": 1789709384177,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706173773
+          "ended_wall_clock_ms": 1789709384177
         },
         {
           "at_s": 30.8,
           "kind": "throttle",
           "bytes_per_second": 60000,
           "for_s": 3.17,
-          "wall_clock_ms": 1789706174652,
+          "wall_clock_ms": 1789709385052,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706177828
+          "ended_wall_clock_ms": 1789709388227
         },
         {
           "at_s": 34.41,
           "kind": "stall",
           "for_s": 1.72,
-          "wall_clock_ms": 1789706178266,
+          "wall_clock_ms": 1789709388661,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706178266
+          "ended_wall_clock_ms": 1789709388661
         },
         {
           "at_s": 38.18,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706182037,
+          "wall_clock_ms": 1789709392433,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706182105
+          "ended_wall_clock_ms": 1789709392498
         },
         {
           "at_s": 41.49,
           "kind": "idle",
           "for_s": 5.84,
-          "wall_clock_ms": 1789706185344,
+          "wall_clock_ms": 1789709395743,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706191185
+          "ended_wall_clock_ms": 1789709401585
         }
       ],
-      "position_reports": 11,
-      "furthest_position_ms": 2396.0,
+      "position_reports": 15,
+      "furthest_position_ms": 3287.0,
       "cover_on_reasons": [
+        "interval 1500-3000",
         "pause",
-        "waiting"
+        "seeking"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2101.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2101.0,
+          "media_to_ms": 2352.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2352.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 6,
       "launched": true,
       "device_lost": false,
-      "events": 19,
+      "events": 30,
       "event_kinds": [
         "cover-off",
         "cover-on",
         "harness-start",
         "pause",
         "playing",
-        "seeked",
-        "seeking",
         "tick-gap",
         "timeupdate",
         "waiting"
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 3,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
         {
           "at_s": 1.02,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706217165,
+          "wall_clock_ms": 1789709423098,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706217234
+          "ended_wall_clock_ms": 1789709423165
         },
         {
           "at_s": 5.13,
           "kind": "stall",
           "for_s": 2.05,
-          "wall_clock_ms": 1789706221276,
+          "wall_clock_ms": 1789709427207,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706221276
+          "ended_wall_clock_ms": 1789709427207
         },
         {
           "at_s": 8.74,
           "kind": "idle",
           "for_s": 4.16,
-          "wall_clock_ms": 1789706224831,
+          "wall_clock_ms": 1789709430825,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706228997
+          "ended_wall_clock_ms": 1789709434993
         },
         {
           "at_s": 14.31,
           "kind": "stall",
           "for_s": 2.29,
-          "wall_clock_ms": 1789706230452,
+          "wall_clock_ms": 1789709436396,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706230452
+          "ended_wall_clock_ms": 1789709436396
         },
         {
           "at_s": 17.48,
           "kind": "idle",
           "for_s": 8.68,
-          "wall_clock_ms": 1789706233624,
+          "wall_clock_ms": 1789709439565,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706242306
+          "ended_wall_clock_ms": 1789709448256
         },
         {
           "at_s": 20.73,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706242306,
+          "wall_clock_ms": 1789709448256,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706242374
+          "ended_wall_clock_ms": 1789709448327
         },
         {
           "at_s": 26.49,
           "kind": "throttle",
           "bytes_per_second": 60000,
           "for_s": 3.67,
-          "wall_clock_ms": 1789706242633,
+          "wall_clock_ms": 1789709448566,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706246306
+          "ended_wall_clock_ms": 1789709452246
         },
         {
           "at_s": 30.51,
           "kind": "idle",
           "for_s": 8.71,
-          "wall_clock_ms": 1789706246655,
+          "wall_clock_ms": 1789709452590,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706255370
+          "ended_wall_clock_ms": 1789709461302
         },
         {
           "at_s": 35.18,
           "kind": "idle",
           "for_s": 8.44,
-          "wall_clock_ms": 1789706255370,
+          "wall_clock_ms": 1789709461302,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706263810
+          "ended_wall_clock_ms": 1789709469750
         },
         {
           "at_s": 39.75,
           "kind": "pause",
           "for_s": 2.31,
-          "wall_clock_ms": 1789706263810,
+          "wall_clock_ms": 1789709469750,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706266265
+          "ended_wall_clock_ms": 1789709472214
         }
       ],
-      "position_reports": 9,
-      "furthest_position_ms": 1722.0,
+      "position_reports": 20,
+      "furthest_position_ms": 4721.0,
       "cover_on_reasons": [
-        "pause",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2248.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2248.0,
+          "media_to_ms": 2499.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2499.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 257.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4509.0,
+          "report_gap_ms": 248.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4509.0,
+          "media_to_ms": 4721.0,
+          "report_gap_ms": 293.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 7,
       "launched": true,
       "device_lost": false,
-      "events": 17,
+      "events": 29,
       "event_kinds": [
         "cover-off",
         "cover-on",
         "harness-start",
         "pause",
         "playing",
-        "seeked",
-        "seeking",
         "tick-gap",
         "timeupdate",
         "waiting"
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 3,
+        "dropped_before_the_last_harness_start": 2,
         "dropped_for_going_backwards": 0
       },
       "actions": [
@@ -742,87 +946,113 @@
           "at_s": 0.52,
           "kind": "idle",
           "for_s": 8.57,
-          "wall_clock_ms": 1789706290987,
+          "wall_clock_ms": 1789709494030,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706299561
+          "ended_wall_clock_ms": 1789709502606
         },
         {
           "at_s": 5.42,
           "kind": "stall",
           "for_s": 2.4,
-          "wall_clock_ms": 1789706299561,
+          "wall_clock_ms": 1789709502606,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706299561
+          "ended_wall_clock_ms": 1789709502606
         },
         {
           "at_s": 10.77,
           "kind": "throttle",
           "bytes_per_second": 20000,
           "for_s": 2.2,
-          "wall_clock_ms": 1789706301236,
+          "wall_clock_ms": 1789709504286,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706303438
+          "ended_wall_clock_ms": 1789709506496
         },
         {
           "at_s": 16.06,
           "kind": "rewind",
-          "wall_clock_ms": 1789706306528,
+          "wall_clock_ms": 1789709509571,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706306597
+          "ended_wall_clock_ms": 1789709509634
         },
         {
           "at_s": 21.32,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706311788,
+          "wall_clock_ms": 1789709514836,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706311857
+          "ended_wall_clock_ms": 1789709514914
         },
         {
           "at_s": 27.14,
           "kind": "rewind",
-          "wall_clock_ms": 1789706317607,
+          "wall_clock_ms": 1789709520649,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706317671
+          "ended_wall_clock_ms": 1789709520725
         },
         {
           "at_s": 31.76,
           "kind": "idle",
           "for_s": 4.29,
-          "wall_clock_ms": 1789706322228,
+          "wall_clock_ms": 1789709525273,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706326524
+          "ended_wall_clock_ms": 1789709529572
         },
         {
           "at_s": 35.37,
           "kind": "throttle",
           "bytes_per_second": 8000,
           "for_s": 2.98,
-          "wall_clock_ms": 1789706326524,
+          "wall_clock_ms": 1789709529572,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706329509
+          "ended_wall_clock_ms": 1789709532556
         },
         {
           "at_s": 40.72,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706331188,
+          "wall_clock_ms": 1789709534236,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706331256
+          "ended_wall_clock_ms": 1789709534317
         }
       ],
-      "position_reports": 7,
-      "furthest_position_ms": 1343.0,
+      "position_reports": 19,
+      "furthest_position_ms": 4342.0,
       "cover_on_reasons": [
-        "pause",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2242.0,
+          "report_gap_ms": 249.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2242.0,
+          "media_to_ms": 2492.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2492.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 253.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 8,
       "launched": true,
       "device_lost": false,
-      "events": 18,
+      "events": 29,
       "event_kinds": [
         "cover-off",
         "cover-on",
@@ -835,7 +1065,7 @@
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 4,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
@@ -843,114 +1073,138 @@
           "at_s": 0.99,
           "kind": "stall",
           "for_s": 2.92,
-          "wall_clock_ms": 1789706360223,
+          "wall_clock_ms": 1789709559901,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706360223
+          "ended_wall_clock_ms": 1789709559901
         },
         {
           "at_s": 4.35,
           "kind": "pause",
           "for_s": 2.41,
-          "wall_clock_ms": 1789706363586,
+          "wall_clock_ms": 1789709563260,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706366139
+          "ended_wall_clock_ms": 1789709565818
         },
         {
           "at_s": 9.74,
           "kind": "pause",
           "for_s": 1.2,
-          "wall_clock_ms": 1789706368978,
+          "wall_clock_ms": 1789709568648,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706370321
+          "ended_wall_clock_ms": 1789709570005
         },
         {
           "at_s": 14.2,
           "kind": "throttle",
           "bytes_per_second": 60000,
           "for_s": 2.16,
-          "wall_clock_ms": 1789706373436,
+          "wall_clock_ms": 1789709573110,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706375601
+          "ended_wall_clock_ms": 1789709575278
         },
         {
           "at_s": 17.22,
           "kind": "throttle",
           "bytes_per_second": 20000,
           "for_s": 2.09,
-          "wall_clock_ms": 1789706376457,
+          "wall_clock_ms": 1789709576127,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706378550
+          "ended_wall_clock_ms": 1789709578222
         },
         {
           "at_s": 22.01,
           "kind": "idle",
           "for_s": 5.12,
-          "wall_clock_ms": 1789706381243,
+          "wall_clock_ms": 1789709580921,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706386367
+          "ended_wall_clock_ms": 1789709586050
         },
         {
           "at_s": 26.76,
           "kind": "throttle",
           "bytes_per_second": 8000,
           "for_s": 3.68,
-          "wall_clock_ms": 1789706386367,
+          "wall_clock_ms": 1789709586050,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706390049
+          "ended_wall_clock_ms": 1789709589740
         },
         {
           "at_s": 31.26,
           "kind": "pause",
           "for_s": 1.51,
-          "wall_clock_ms": 1789706390494,
+          "wall_clock_ms": 1789709590171,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706392137
+          "ended_wall_clock_ms": 1789709591825
         },
         {
           "at_s": 34.87,
           "kind": "stall",
           "for_s": 3.06,
-          "wall_clock_ms": 1789706394110,
+          "wall_clock_ms": 1789709593781,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706394110
+          "ended_wall_clock_ms": 1789709593781
         },
         {
           "at_s": 38.57,
           "kind": "rewind",
-          "wall_clock_ms": 1789706397805,
+          "wall_clock_ms": 1789709597476,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706397874
+          "ended_wall_clock_ms": 1789709597552
         }
       ],
-      "position_reports": 10,
-      "furthest_position_ms": 1932.0,
+      "position_reports": 19,
+      "furthest_position_ms": 4388.0,
       "cover_on_reasons": [
-        "pause",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2032.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2032.0,
+          "media_to_ms": 2284.0,
+          "report_gap_ms": 252.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2284.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 249.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 9,
       "launched": true,
       "device_lost": false,
-      "events": 17,
+      "events": 30,
       "event_kinds": [
         "cover-off",
         "cover-on",
         "harness-start",
         "pause",
         "playing",
-        "seeked",
-        "seeking",
         "tick-gap",
         "timeupdate",
         "waiting"
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 3,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
@@ -959,95 +1213,129 @@
           "kind": "throttle",
           "bytes_per_second": 60000,
           "for_s": 2.07,
-          "wall_clock_ms": 1789706428877,
+          "wall_clock_ms": 1789709624871,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706430950
+          "ended_wall_clock_ms": 1789709626948
         },
         {
           "at_s": 5.13,
           "kind": "stall",
           "for_s": 2.57,
-          "wall_clock_ms": 1789706433393,
+          "wall_clock_ms": 1789709629393,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706433394
+          "ended_wall_clock_ms": 1789709629393
         },
         {
           "at_s": 8.47,
           "kind": "rewind",
-          "wall_clock_ms": 1789706436735,
+          "wall_clock_ms": 1789709632726,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706436804
+          "ended_wall_clock_ms": 1789709632804
         },
         {
           "at_s": 13.78,
           "kind": "stall",
           "for_s": 1.32,
-          "wall_clock_ms": 1789706442045,
+          "wall_clock_ms": 1789709638035,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706442045
+          "ended_wall_clock_ms": 1789709638035
         },
         {
           "at_s": 19.02,
           "kind": "idle",
           "for_s": 4.26,
-          "wall_clock_ms": 1789706447282,
+          "wall_clock_ms": 1789709643280,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706451547
+          "ended_wall_clock_ms": 1789709647549
         },
         {
           "at_s": 22.95,
           "kind": "pause",
           "for_s": 1.84,
-          "wall_clock_ms": 1789706451547,
+          "wall_clock_ms": 1789709647549,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706453524
+          "ended_wall_clock_ms": 1789709649537
         },
         {
           "at_s": 26.56,
           "kind": "pause",
           "for_s": 2.1,
-          "wall_clock_ms": 1789706454826,
+          "wall_clock_ms": 1789709650823,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706457062
+          "ended_wall_clock_ms": 1789709653056
         },
         {
           "at_s": 31.65,
           "kind": "stall",
           "for_s": 3.18,
-          "wall_clock_ms": 1789706459914,
+          "wall_clock_ms": 1789709655911,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706459914
+          "ended_wall_clock_ms": 1789709655911
         },
         {
           "at_s": 35.02,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706463283,
+          "wall_clock_ms": 1789709659277,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706463346
+          "ended_wall_clock_ms": 1789709659347
         },
         {
           "at_s": 39.05,
           "kind": "stall",
           "for_s": 1.84,
-          "wall_clock_ms": 1789706467315,
+          "wall_clock_ms": 1789709663313,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706467315
+          "ended_wall_clock_ms": 1789709663313
         }
       ],
-      "position_reports": 7,
-      "furthest_position_ms": 1206.0,
+      "position_reports": 20,
+      "furthest_position_ms": 4639.0,
       "cover_on_reasons": [
-        "pause",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2233.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2233.0,
+          "media_to_ms": 2484.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2484.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4639.0,
+          "report_gap_ms": 241.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 10,
       "launched": true,
       "device_lost": false,
-      "events": 23,
+      "events": 30,
       "event_kinds": [
         "cover-off",
         "cover-on",
@@ -1060,105 +1348,147 @@
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 3,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
         {
           "at_s": 1.86,
           "kind": "rewind",
-          "wall_clock_ms": 1789706497598,
+          "wall_clock_ms": 1789709691458,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706497664
+          "ended_wall_clock_ms": 1789709691533
         },
         {
           "at_s": 5.8,
           "kind": "throttle",
           "bytes_per_second": 8000,
           "for_s": 1.69,
-          "wall_clock_ms": 1789706501539,
+          "wall_clock_ms": 1789709695400,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706503234
+          "ended_wall_clock_ms": 1789709697101
         },
         {
           "at_s": 10.01,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706505748,
+          "wall_clock_ms": 1789709699610,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706505818
+          "ended_wall_clock_ms": 1789709699673
         },
         {
           "at_s": 15.06,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706510798,
+          "wall_clock_ms": 1789709704652,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706510867
+          "ended_wall_clock_ms": 1789709704729
         },
         {
           "at_s": 18.27,
           "kind": "idle",
           "for_s": 6.33,
-          "wall_clock_ms": 1789706514006,
+          "wall_clock_ms": 1789709707870,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706520341
+          "ended_wall_clock_ms": 1789709714208
         },
         {
           "at_s": 22.03,
           "kind": "stall",
           "for_s": 1.88,
-          "wall_clock_ms": 1789706520341,
+          "wall_clock_ms": 1789709714208,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706520341
+          "ended_wall_clock_ms": 1789709714208
         },
         {
           "at_s": 26.65,
           "kind": "idle",
           "for_s": 7.08,
-          "wall_clock_ms": 1789706522386,
+          "wall_clock_ms": 1789709716245,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706529471
+          "ended_wall_clock_ms": 1789709723327
         },
         {
           "at_s": 31.56,
           "kind": "pause",
           "for_s": 1.04,
-          "wall_clock_ms": 1789706529471,
+          "wall_clock_ms": 1789709723327,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706530643
+          "ended_wall_clock_ms": 1789709724511
         },
         {
           "at_s": 37.26,
           "kind": "throttle",
           "bytes_per_second": 20000,
           "for_s": 2.01,
-          "wall_clock_ms": 1789706532998,
+          "wall_clock_ms": 1789709726862,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706535013
+          "ended_wall_clock_ms": 1789709728877
         },
         {
           "at_s": 42.57,
           "kind": "throttle",
           "bytes_per_second": 20000,
           "for_s": 1.79,
-          "wall_clock_ms": 1789706538307,
+          "wall_clock_ms": 1789709732166,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706540101
+          "ended_wall_clock_ms": 1789709733957
         }
       ],
-      "position_reports": 15,
-      "furthest_position_ms": 3431.0,
+      "position_reports": 20,
+      "furthest_position_ms": 4558.0,
       "cover_on_reasons": [
-        "pause",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2004.0,
+          "report_gap_ms": 252.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2004.0,
+          "media_to_ms": 2254.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2254.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4510.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4510.0,
+          "media_to_ms": 4558.0,
+          "report_gap_ms": 138.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 11,
       "launched": true,
       "device_lost": false,
-      "events": 26,
+      "events": 36,
       "event_kinds": [
         "cover-off",
         "cover-on",
@@ -1173,112 +1503,136 @@
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 2,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
         {
           "at_s": 1.53,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706563680,
+          "wall_clock_ms": 1789709756571,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706563748
+          "ended_wall_clock_ms": 1789709756638
         },
         {
           "at_s": 6.6,
           "kind": "throttle",
           "bytes_per_second": 8000,
           "for_s": 3.87,
-          "wall_clock_ms": 1789706568749,
+          "wall_clock_ms": 1789709761645,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706572624
+          "ended_wall_clock_ms": 1789709765521
         },
         {
           "at_s": 11.96,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706574110,
+          "wall_clock_ms": 1789709767002,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706574174
+          "ended_wall_clock_ms": 1789709767071
         },
         {
           "at_s": 17.7,
           "kind": "stall",
           "for_s": 3.47,
-          "wall_clock_ms": 1789706579849,
+          "wall_clock_ms": 1789709772738,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706579849
+          "ended_wall_clock_ms": 1789709772738
         },
         {
           "at_s": 21.7,
           "kind": "throttle",
           "bytes_per_second": 20000,
           "for_s": 1.57,
-          "wall_clock_ms": 1789706583848,
+          "wall_clock_ms": 1789709776741,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706585422
+          "ended_wall_clock_ms": 1789709778320
         },
         {
           "at_s": 26.71,
           "kind": "rewind",
-          "wall_clock_ms": 1789706588858,
+          "wall_clock_ms": 1789709781754,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706588922
+          "ended_wall_clock_ms": 1789709781832
         },
         {
           "at_s": 31.67,
           "kind": "idle",
           "for_s": 8.01,
-          "wall_clock_ms": 1789706593817,
+          "wall_clock_ms": 1789709786710,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706601831
+          "ended_wall_clock_ms": 1789709794730
         },
         {
           "at_s": 37.14,
           "kind": "throttle",
           "bytes_per_second": 8000,
           "for_s": 3.79,
-          "wall_clock_ms": 1789706601831,
+          "wall_clock_ms": 1789709794731,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706605622
+          "ended_wall_clock_ms": 1789709798525
         },
         {
           "at_s": 42.91,
           "kind": "pause",
           "for_s": 0.84,
-          "wall_clock_ms": 1789706605622,
+          "wall_clock_ms": 1789709798525,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706606596
+          "ended_wall_clock_ms": 1789709799508
         }
       ],
-      "position_reports": 16,
-      "furthest_position_ms": 3556.0,
+      "position_reports": 20,
+      "furthest_position_ms": 3973.0,
       "cover_on_reasons": [
-        "interval 3500-5500",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2069.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2069.0,
+          "media_to_ms": 2320.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2320.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 12,
       "launched": true,
       "device_lost": false,
-      "events": 26,
+      "events": 31,
       "event_kinds": [
         "cover-off",
         "cover-on",
         "harness-start",
         "pause",
         "playing",
-        "seeked",
-        "seeking",
         "tick-gap",
         "timeupdate",
         "waiting"
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 3,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
@@ -1286,95 +1640,137 @@
           "at_s": 1.07,
           "kind": "idle",
           "for_s": 5.45,
-          "wall_clock_ms": 1789706629449,
+          "wall_clock_ms": 1789709821419,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706634900
+          "ended_wall_clock_ms": 1789709826879
         },
         {
           "at_s": 5.46,
           "kind": "rewind",
-          "wall_clock_ms": 1789706634900,
+          "wall_clock_ms": 1789709826879,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706634966
+          "ended_wall_clock_ms": 1789709826954
         },
         {
           "at_s": 9.17,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706637551,
+          "wall_clock_ms": 1789709829518,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706637614
+          "ended_wall_clock_ms": 1789709829585
         },
         {
           "at_s": 13.62,
           "kind": "throttle",
           "bytes_per_second": 60000,
           "for_s": 1.52,
-          "wall_clock_ms": 1789706642001,
+          "wall_clock_ms": 1789709833966,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706643527
+          "ended_wall_clock_ms": 1789709835496
         },
         {
           "at_s": 18.12,
           "kind": "pause",
           "for_s": 1.52,
-          "wall_clock_ms": 1789706646498,
+          "wall_clock_ms": 1789709838473,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706648148
+          "ended_wall_clock_ms": 1789709840146
         },
         {
           "at_s": 22.5,
           "kind": "pause",
           "for_s": 1.56,
-          "wall_clock_ms": 1789706650877,
+          "wall_clock_ms": 1789709842851,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706652570
+          "ended_wall_clock_ms": 1789709844565
         },
         {
           "at_s": 25.9,
           "kind": "idle",
           "for_s": 7.88,
-          "wall_clock_ms": 1789706654281,
+          "wall_clock_ms": 1789709846247,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706662163
+          "ended_wall_clock_ms": 1789709854137
         },
         {
           "at_s": 31.67,
           "kind": "rewind",
-          "wall_clock_ms": 1789706662163,
+          "wall_clock_ms": 1789709854137,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706662230
+          "ended_wall_clock_ms": 1789709854206
         },
         {
           "at_s": 35.97,
           "kind": "stall",
           "for_s": 1.64,
-          "wall_clock_ms": 1789706664349,
+          "wall_clock_ms": 1789709856323,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706664349
+          "ended_wall_clock_ms": 1789709856323
         },
         {
           "at_s": 39.92,
           "kind": "stall",
           "for_s": 3.06,
-          "wall_clock_ms": 1789706668297,
+          "wall_clock_ms": 1789709860267,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706668297
+          "ended_wall_clock_ms": 1789709860267
         }
       ],
-      "position_reports": 16,
-      "furthest_position_ms": 3519.0,
+      "position_reports": 21,
+      "furthest_position_ms": 4752.0,
       "cover_on_reasons": [
-        "interval 3500-5500",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2243.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2243.0,
+          "media_to_ms": 2494.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2494.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4638.0,
+          "report_gap_ms": 257.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4638.0,
+          "media_to_ms": 4752.0,
+          "report_gap_ms": 54.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 13,
       "launched": true,
       "device_lost": false,
-      "events": 26,
+      "events": 31,
       "event_kinds": [
         "cover-off",
         "cover-on",
@@ -1387,7 +1783,7 @@
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 2,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
@@ -1395,84 +1791,117 @@
           "at_s": 1.19,
           "kind": "idle",
           "for_s": 7.65,
-          "wall_clock_ms": 1789706695928,
+          "wall_clock_ms": 1789709886889,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706703581
+          "ended_wall_clock_ms": 1789709894544
         },
         {
           "at_s": 6.22,
           "kind": "idle",
           "for_s": 6.51,
-          "wall_clock_ms": 1789706703581,
+          "wall_clock_ms": 1789709894544,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706710092
+          "ended_wall_clock_ms": 1789709901064
         },
         {
           "at_s": 12.04,
           "kind": "idle",
           "for_s": 6.09,
-          "wall_clock_ms": 1789706710092,
+          "wall_clock_ms": 1789709901064,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706716187
+          "ended_wall_clock_ms": 1789709907161
         },
         {
           "at_s": 15.11,
           "kind": "pause",
           "for_s": 2.0,
-          "wall_clock_ms": 1789706716187,
+          "wall_clock_ms": 1789709907161,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706718318
+          "ended_wall_clock_ms": 1789709909311
         },
         {
           "at_s": 21.11,
           "kind": "rewind",
-          "wall_clock_ms": 1789706718318,
+          "wall_clock_ms": 1789709909311,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706718382
+          "ended_wall_clock_ms": 1789709909383
         },
         {
           "at_s": 26.87,
           "kind": "pause",
           "for_s": 1.53,
-          "wall_clock_ms": 1789706721609,
+          "wall_clock_ms": 1789709912564,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706723276
+          "ended_wall_clock_ms": 1789709914250
         },
         {
           "at_s": 32.31,
           "kind": "rewind",
-          "wall_clock_ms": 1789706727048,
+          "wall_clock_ms": 1789709918009,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706727116
+          "ended_wall_clock_ms": 1789709918084
         },
         {
           "at_s": 37.9,
           "kind": "stall",
           "for_s": 2.53,
-          "wall_clock_ms": 1789706732638,
+          "wall_clock_ms": 1789709923599,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706732638
+          "ended_wall_clock_ms": 1789709923599
         },
         {
           "at_s": 41.95,
           "kind": "rewind",
-          "wall_clock_ms": 1789706736689,
+          "wall_clock_ms": 1789709927648,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706736752
+          "ended_wall_clock_ms": 1789709927716
         }
       ],
-      "position_reports": 18,
-      "furthest_position_ms": 4070.999,
+      "position_reports": 21,
+      "furthest_position_ms": 4926.0,
       "cover_on_reasons": [
-        "interval 3500-5500",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
       "crossings": [
         {
           "marker": 1,
-          "media_from_ms": 4000.0,
-          "media_to_ms": 4071.0,
-          "report_gap_ms": 179.0,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2226.0,
+          "report_gap_ms": 249.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2226.0,
+          "media_to_ms": 2478.0,
+          "report_gap_ms": 252.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2478.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 255.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4734.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4734.0,
+          "media_to_ms": 4926.0,
+          "report_gap_ms": 243.0,
           "covered": true,
           "showing_for_ms": 0
         }
@@ -1483,7 +1912,7 @@
       "pass": 14,
       "launched": true,
       "device_lost": false,
-      "events": 26,
+      "events": 31,
       "event_kinds": [
         "cover-off",
         "cover-on",
@@ -1496,103 +1925,136 @@
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 3,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
         {
           "at_s": 0.73,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706762079,
+          "wall_clock_ms": 1789709951881,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706762141
+          "ended_wall_clock_ms": 1789709951951
         },
         {
           "at_s": 6.44,
           "kind": "throttle",
           "bytes_per_second": 60000,
           "for_s": 1.89,
-          "wall_clock_ms": 1789706767794,
+          "wall_clock_ms": 1789709957593,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706769684
+          "ended_wall_clock_ms": 1789709959486
         },
         {
           "at_s": 11.41,
           "kind": "throttle",
           "bytes_per_second": 60000,
           "for_s": 3.69,
-          "wall_clock_ms": 1789706772764,
+          "wall_clock_ms": 1789709962563,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706776454
+          "ended_wall_clock_ms": 1789709966261
         },
         {
           "at_s": 17.39,
           "kind": "rewind",
-          "wall_clock_ms": 1789706778743,
+          "wall_clock_ms": 1789709968539,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706778809
+          "ended_wall_clock_ms": 1789709968616
         },
         {
           "at_s": 21.47,
           "kind": "pause",
           "for_s": 2.3,
-          "wall_clock_ms": 1789706782824,
+          "wall_clock_ms": 1789709972620,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706785257
+          "ended_wall_clock_ms": 1789709975071
         },
         {
           "at_s": 24.97,
           "kind": "stall",
           "for_s": 2.89,
-          "wall_clock_ms": 1789706786324,
+          "wall_clock_ms": 1789709976118,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706786324
+          "ended_wall_clock_ms": 1789709976119
         },
         {
           "at_s": 30.93,
           "kind": "pause",
           "for_s": 1.38,
-          "wall_clock_ms": 1789706792282,
+          "wall_clock_ms": 1789709982083,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706793795
+          "ended_wall_clock_ms": 1789709983614
         },
         {
           "at_s": 36.59,
           "kind": "stall",
           "for_s": 2.03,
-          "wall_clock_ms": 1789706797943,
+          "wall_clock_ms": 1789709987741,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706797943
+          "ended_wall_clock_ms": 1789709987741
         },
         {
           "at_s": 41.11,
           "kind": "pause",
           "for_s": 1.06,
-          "wall_clock_ms": 1789706802463,
+          "wall_clock_ms": 1789709992263,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706803657
+          "ended_wall_clock_ms": 1789709993491
         }
       ],
-      "position_reports": 18,
-      "furthest_position_ms": 4097.0,
+      "position_reports": 21,
+      "furthest_position_ms": 4957.0,
       "cover_on_reasons": [
-        "interval 3500-5500",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
       "crossings": [
         {
           "marker": 1,
-          "media_from_ms": 4000.0,
-          "media_to_ms": 4005.0,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2019.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2019.0,
+          "media_to_ms": 2270.0,
           "report_gap_ms": 250.0,
           "covered": true,
           "showing_for_ms": 0
         },
         {
           "marker": 1,
-          "media_from_ms": 4005.0,
-          "media_to_ms": 4097.0,
-          "report_gap_ms": 159.0,
+          "media_from_ms": 2270.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 252.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4529.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4529.0,
+          "media_to_ms": 4780.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4780.0,
+          "media_to_ms": 4957.0,
+          "report_gap_ms": 247.0,
           "covered": true,
           "showing_for_ms": 0
         }
@@ -1610,229 +2072,324 @@
         "harness-start",
         "pause",
         "playing",
-        "seeked",
-        "seeking",
         "tick-gap",
         "timeupdate",
         "waiting"
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 3,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
         {
           "at_s": 0.96,
           "kind": "rewind",
-          "wall_clock_ms": 1789706828564,
+          "wall_clock_ms": 1789710017443,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706828631
+          "ended_wall_clock_ms": 1789710017518
         },
         {
           "at_s": 4.11,
           "kind": "rewind",
-          "wall_clock_ms": 1789706831714,
+          "wall_clock_ms": 1789710020593,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706831777
+          "ended_wall_clock_ms": 1789710020671
         },
         {
           "at_s": 9.42,
           "kind": "pause",
           "for_s": 1.66,
-          "wall_clock_ms": 1789706837027,
+          "wall_clock_ms": 1789710025901,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706838825
+          "ended_wall_clock_ms": 1789710027742
         },
         {
           "at_s": 13.53,
           "kind": "pause",
           "for_s": 2.44,
-          "wall_clock_ms": 1789706841136,
+          "wall_clock_ms": 1789710030007,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706843714
+          "ended_wall_clock_ms": 1789710032601
         },
         {
           "at_s": 16.73,
           "kind": "idle",
           "for_s": 4.31,
-          "wall_clock_ms": 1789706844336,
+          "wall_clock_ms": 1789710033214,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706848648
+          "ended_wall_clock_ms": 1789710037532
         },
         {
           "at_s": 21.34,
           "kind": "throttle",
           "bytes_per_second": 60000,
           "for_s": 2.0,
-          "wall_clock_ms": 1789706848944,
+          "wall_clock_ms": 1789710037824,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706850948
+          "ended_wall_clock_ms": 1789710039828
         },
         {
           "at_s": 25.3,
           "kind": "idle",
           "for_s": 6.95,
-          "wall_clock_ms": 1789706852904,
+          "wall_clock_ms": 1789710041784,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706859856
+          "ended_wall_clock_ms": 1789710048744
         },
         {
           "at_s": 29.61,
           "kind": "pause",
           "for_s": 2.13,
-          "wall_clock_ms": 1789706859856,
+          "wall_clock_ms": 1789710048744,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706862118
+          "ended_wall_clock_ms": 1789710051018
         },
         {
           "at_s": 34.5,
           "kind": "idle",
           "for_s": 8.37,
-          "wall_clock_ms": 1789706862118,
+          "wall_clock_ms": 1789710051018,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706870493
+          "ended_wall_clock_ms": 1789710059396
         },
         {
           "at_s": 38.1,
           "kind": "pause",
           "for_s": 2.43,
-          "wall_clock_ms": 1789706870493,
+          "wall_clock_ms": 1789710059396,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706873057
+          "ended_wall_clock_ms": 1789710061975
         },
         {
           "at_s": 42.04,
           "kind": "stall",
           "for_s": 1.9,
-          "wall_clock_ms": 1789706873057,
+          "wall_clock_ms": 1789710061975,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706873057
+          "ended_wall_clock_ms": 1789710061975
         }
       ],
-      "position_reports": 18,
-      "furthest_position_ms": 3384.0,
+      "position_reports": 22,
+      "furthest_position_ms": 5092.0,
       "cover_on_reasons": [
-        "pause",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2035.0,
+          "report_gap_ms": 248.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2035.0,
+          "media_to_ms": 2286.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2286.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4540.0,
+          "report_gap_ms": 249.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4540.0,
+          "media_to_ms": 4791.0,
+          "report_gap_ms": 252.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4791.0,
+          "media_to_ms": 5000.0,
+          "report_gap_ms": 254.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     },
     {
       "pass": 16,
       "launched": true,
       "device_lost": false,
-      "events": 27,
+      "events": 30,
       "event_kinds": [
         "cover-off",
         "cover-on",
         "harness-start",
         "pause",
         "playing",
-        "seeked",
-        "seeking",
-        "tick-gap",
         "timeupdate",
         "waiting"
       ],
       "split": {
         "had_a_harness_start": true,
-        "dropped_before_the_last_harness_start": 2,
+        "dropped_before_the_last_harness_start": 1,
         "dropped_for_going_backwards": 0
       },
       "actions": [
         {
           "at_s": 0.63,
           "kind": "fast-forward",
-          "wall_clock_ms": 1789706895079,
+          "wall_clock_ms": 1789710083045,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706895142
+          "ended_wall_clock_ms": 1789710083121
         },
         {
           "at_s": 5.49,
           "kind": "throttle",
           "bytes_per_second": 60000,
           "for_s": 3.4,
-          "wall_clock_ms": 1789706899942,
+          "wall_clock_ms": 1789710087910,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706903344
+          "ended_wall_clock_ms": 1789710091320
         },
         {
           "at_s": 9.68,
           "kind": "throttle",
           "bytes_per_second": 20000,
           "for_s": 2.09,
-          "wall_clock_ms": 1789706904133,
+          "wall_clock_ms": 1789710092095,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706906228
+          "ended_wall_clock_ms": 1789710094193
         },
         {
           "at_s": 15.36,
           "kind": "stall",
           "for_s": 2.4,
-          "wall_clock_ms": 1789706909811,
+          "wall_clock_ms": 1789710097782,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706909811
+          "ended_wall_clock_ms": 1789710097782
         },
         {
           "at_s": 20.4,
           "kind": "rewind",
-          "wall_clock_ms": 1789706914852,
+          "wall_clock_ms": 1789710102814,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706914917
+          "ended_wall_clock_ms": 1789710102887
         },
         {
           "at_s": 25.57,
           "kind": "idle",
           "for_s": 4.15,
-          "wall_clock_ms": 1789706920023,
+          "wall_clock_ms": 1789710107989,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706924178
+          "ended_wall_clock_ms": 1789710112149
         },
         {
           "at_s": 29.59,
           "kind": "throttle",
           "bytes_per_second": 20000,
           "for_s": 2.93,
-          "wall_clock_ms": 1789706924178,
+          "wall_clock_ms": 1789710112149,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706927109
+          "ended_wall_clock_ms": 1789710115089
         },
         {
           "at_s": 33.76,
           "kind": "throttle",
           "bytes_per_second": 20000,
           "for_s": 3.3,
-          "wall_clock_ms": 1789706928210,
+          "wall_clock_ms": 1789710116173,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706931514
+          "ended_wall_clock_ms": 1789710119474
         },
         {
           "at_s": 38.75,
           "kind": "throttle",
           "bytes_per_second": 60000,
           "for_s": 3.29,
-          "wall_clock_ms": 1789706933203,
+          "wall_clock_ms": 1789710121170,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706936498
+          "ended_wall_clock_ms": 1789710124471
         },
         {
           "at_s": 42.37,
           "kind": "pause",
           "for_s": 1.87,
-          "wall_clock_ms": 1789706936822,
+          "wall_clock_ms": 1789710124792,
           "carried_out": true,
-          "ended_wall_clock_ms": 1789706938829
+          "ended_wall_clock_ms": 1789710126813
         }
       ],
-      "position_reports": 17,
-      "furthest_position_ms": 3824.0,
+      "position_reports": 21,
+      "furthest_position_ms": 4895.0,
       "cover_on_reasons": [
-        "interval 3500-5500",
+        "interval 1500-3000",
+        "interval 4000-5500",
         "waiting"
       ],
-      "crossings": [],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 2000.0,
+          "media_to_ms": 2007.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2007.0,
+          "media_to_ms": 2257.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 2257.0,
+          "media_to_ms": 2500.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4500.0,
+          "media_to_ms": 4513.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4513.0,
+          "media_to_ms": 4765.0,
+          "report_gap_ms": 251.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 2,
+          "media_from_ms": 4765.0,
+          "media_to_ms": 4895.0,
+          "report_gap_ms": 240.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
       "uncovered": []
     }
   ]
