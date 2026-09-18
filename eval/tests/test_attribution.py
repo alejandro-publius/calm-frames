@@ -127,3 +127,25 @@ def test_the_title_we_keep_out_of_what_we_publish_is_not_credited_as_used():
     assert any("hell" in (row.get("notes") or "").lower() for row in skipped), (
         "the reason that title is kept out is no longer written down anywhere"
     )
+
+
+def test_no_downloaded_row_says_verify_in_its_notes():
+    """A trap in the pool builder, kept loud.
+
+    eval/labeling/make_pool.py drops any title whose notes contain "verify", on the repo rule
+    that anything marked for checking is checked or dropped. The match is on the bare word in
+    free text, so a note that happens to use it for some other reason takes that title out of
+    the labelling pool and says only "license line not confirmed". This nearly happened while
+    rewriting the notes: the new text described the pipeline's verify step.
+
+    Break it: put the word back into a downloaded row's notes, and this goes red naming it.
+    """
+    offenders = [
+        row["file"]
+        for row in attribution.used_rows(attribution.rows())
+        if "verify" in (row.get("notes") or "").lower()
+    ]
+    assert not offenders, (
+        "these rows would be dropped from the labelling pool by the word 'verify' in their "
+        f"notes: {offenders}. Say it another way."
+    )

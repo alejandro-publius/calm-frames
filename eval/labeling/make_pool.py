@@ -193,6 +193,10 @@ def build() -> dict:
         if path is None:
             skipped[name] = "file not in media/ under either name"
             continue
+        # CLAUDE.md: anything marked for checking is checked or dropped. The match is on the
+        # bare word in free text, so a note that uses it for any other reason drops the title
+        # silently. eval/tests/test_attribution.py fails if a downloaded row's notes carry it,
+        # which is how that stays loud rather than quiet.
         if "not verified" in row["license"].lower() or "verify" in row["notes"].lower():
             skipped[name] = "license line not confirmed, dropped at screening"
             continue
