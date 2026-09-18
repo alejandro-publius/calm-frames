@@ -1,9 +1,12 @@
 # Deviations from docs/EVAL_PLAN.md
 
 The plan says every change to it after Thu Sep 17, 2026 is logged with the date, what changed
-and why. This is that log for the evaluation lane. **These rows still need copying into
-EVAL_PLAN section 12 by whoever owns docs/**, which this lane does not: it was asked to stay
-inside `eval/` and `results/`. Nothing here is a result.
+and why. This is that log for the evaluation lane, kept here as the lane worked, because the
+lane was asked to stay inside `eval/` and `results/`.
+
+**Every row below is now also in docs/EVAL_PLAN.md section 12**, copied there on Sep 17, 2026,
+which is where the plan says its deviations live. Add a row in both places, or add it here and
+copy it across in the same sitting. Nothing here is a result.
 
 | Date | What changed | Why |
 |---|---|---|
@@ -16,8 +19,10 @@ inside `eval/` and `results/`. Nothing here is a result.
 | 2026-09-17 | Apple VideoFlashingReduction did not run. | It needs Xcode; this machine has Command Line Tools only. It was already cut list item 4, so this changes nothing about the committed comparison. |
 | 2026-09-17 | The conformance run reported on is a sample of the committed design, not all of it. | At the measured rate on a machine under load from three other lanes, three thousand clips take about four hours. The run order is the whole spine first and then the cross product shuffled with the committed seed, so a partial run holds every one axis at a time sweep plus a random sample of everything else. The exact count is in `results/conformance.json` under `sample`, and `make conformance-full` finishes the rest and rebuilds the tables. |
 | 2026-09-17 | The guard band ablation reports across a grid of assumed cover latencies rather than one measured latency. | `results/gate1_timing.json` does not exist yet. A single number here would look measured and would not be. When the GATE 1 recordings land, the same script takes the measured latency and the assumption grid comes out. |
-| 2026-09-17 | The labelling plots come from a new `eval/labeling/plots.py` rather than from `eval/plots.py` directly. | The plan asks the labeller to see four series: whole picture luminance, the luminance of the largest changing region, that region's area fraction, and the red chromaticity trace. `eval/plots.py` draws the first and third and has no way to blind a figure or to start part way into a file, and it is the sanctioned inspection tool for other lanes, so it was left alone. The new module imports its probing and timestamp helpers, keeps the same rule about never importing flashmap (the same test covers both), and adds the two panels and the blinding. |
+| 2026-09-17 | The labelling plots come from a new `eval/labeling/plots.py` rather than from `eval/plots.py` directly. | The plan asks the labeller to see four series: whole picture luminance, the luminance of the largest changing region, that region's area fraction, and the red chromaticity trace. `eval/plots.py` draws the first and third and has no way to blind a figure or to start part way into a file, and it is the sanctioned inspection tool for other lanes, so it was left alone. The new module imports its probing and timestamp helpers, keeps the same rule about never importing flashmap, and adds the two panels and the blinding. The guard covers both files as of Sep 17, 2026. It did not when this row was first written: `eval/tests/test_conformance_standalone.py` listed `eval/plots.py` only and its runtime check imported only the conformance modules, so the labelling plots were unguarded for a few hours. Both halves now include them. |
 | 2026-09-17 | A root `Makefile` was created for `make reproduce`, and then replaced by the release lane's own. | `make reproduce` has to work from the repository root. The root makefile this lane wrote was superseded within the hour by a fuller one from another lane, which includes `eval/reproduce.mk` and takes the `reproduce` recipe from it. `eval/reproduce.mk` is written to that convention: it owns the recipe, the root file adds its own half as a prerequisite, and every target still runs standalone with `make -f eval/reproduce.mk`. |
+| 2026-09-17 | A title joins the real clip pool only when **every** candidate list has analysed it, not when any one of them has. | Section 5 draws the negative half from unflagged time in the same titles. Fourteen calm clips arrived after the two ffmpeg based lists had already run, so a rescreen would have put their time into the negative half with only flashmap having looked at it. Time one detector did not flag, in a title the other detectors never saw, is not unflagged time: it would have handed flashmap free false positives on windows nobody measured. `eval/labeling/make_pool.py` now names the missing lists in its skip reason. |
+| 2026-09-17 | `results/screening.json` carries a per source positives table split by which rule fired, and the list of clips that still have to be filmed. | Section 5 asks for positives per source in the real clip result file. That file needs labels first, and the question of whether anything in the pool fires the red rule had to be answerable before then, because the answer decides what has to be filmed. Nothing fires it. The table is built by `eval/screening_table.py` from the per file rows, and `--check` fails if it drifts from them. |
 
 ## Incidents
 
