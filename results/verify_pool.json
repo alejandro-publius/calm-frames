@@ -1,0 +1,17 @@
+{
+ "adds_up": true,
+ "analyzed": 30,
+ "cover_not_proven": 0,
+ "cover_proven_drawn": 7,
+ "failed": 9,
+ "generated_on": "2026-09-17",
+ "no_flagged_segments": 14,
+ "not_analyzed": {
+  "no_entry_json": 3,
+  "no_verdict": 0,
+  "pending": 1
+ },
+ "statement": "analyzed is no_flagged_segments plus cover_proven_drawn plus cover_not_proven plus failed. A title counted under no_flagged_segments passed verify and had no segment over the thresholds, so nothing was covered and nothing about covering was shown. Only cover_proven_drawn titles had the cover measured on the rendition. The titles under not_analyzed have no verdict and are in none of the four counts.",
+ "title_directories": 34,
+ "work_directory": "~/calm-frames-work"
+}

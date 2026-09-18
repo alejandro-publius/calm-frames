@@ -11,8 +11,11 @@ three are fixed. The python job never installed matplotlib, so
 at collection, which is worse than one red test because it hid the other two
 behind it. Under that, a scheduler property was failing for real. And the new
 hardening job was red until a full mutation report existed, which it now does. The screening sweep and the ingest chain that were still going have
-finished; the re-verify took the pool to **21 titles verified**, all 21 with a row
-in `media/LICENSES.csv`.
+finished; the re-verify gave <!--n results/verify_pool.json:analyzed -->30<!--/n-->
+titles a verdict, which is **<!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n-->
+with the cover proven drawn, <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n-->
+with no flagged segment at all and <!--n results/verify_pool.json:failed -->9<!--/n-->
+failed**. Every title that passed has a row in `media/LICENSES.csv`.
 
 Two defects came out of the recovery rather than out of a plan, and both are the
 kind that a green suite was hiding. The media clock kept running through every
@@ -124,10 +127,14 @@ and backgrounding never happened, so `background_covers_seen` is 0.
    whose reports can be 5219 ms apart, which trades the thing this app exists for
    against a cosmetic gain, so it has not been done. If it is done, the cap has to
    be measured against the worst report gap, not chosen.
-2. **`pipeline/verify.py` skips its own cover check** when a title has no flagged
-   segment, around line 477, so 14 of the 21 verified titles collect 38 passing
-   checks without covering anything. A distinct `clean` status would stop the
-   count reading as protection demonstrated.
+2. **Fixed, Sep 17 late.** `pipeline/verify.py` used to skip its own cover check
+   when a title had no flagged segment, so
+   <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> titles
+   collected 38 passing checks without covering anything and read like the
+   <!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n--> whose cover
+   was measured. Those titles now carry the outcome `no flagged segments`, and a
+   preset with intervals cannot pass unless the drawn check ran for it and
+   passed. The counts are in `results/verify_pool.json`.
 3. **EA IRIS is still not a candidate list**, so the recall estimate is optimistic
    by an unknown amount, and the 16 calm clips are screened but not in the
    labelling pool because only flashmap has looked at them.
@@ -135,18 +142,24 @@ and backgrounding never happened, so `background_covers_seen` is 0.
 ## 5. What is not done
 
 - **No cover lead time on real hardware**, and none is possible until the stick arrives. There is now a software-level figure in `results/gate1_software_vvd.json`, and the strict reading is the one to quote: **48 of the 55 trials started covered in time, 0.873**, Wilson 95% 0.760 to 0.937. Six of the seven that did not were dropped for producing no usable evidence and one cover went on 86 ms late, because the JavaScript thread paused for about a third of a second. Counting only the 49 trials that could be measured gives 48 of 49, 0.980, which is the friendlier number and is why both are published. Median lead 488 ms. It is labelled as software-level: it cannot see the React commit, the compositor, scan-out or the panel, so it is an upper bound on how well the real thing can do, never a prediction of it.
-- **21 titles pass verify, and only 7 of them prove anything.** Every one of the
-  21 has a row in `media/LICENSES.csv`. But 14 have `covered_ms = 0` and no
-  flagged segment at all: the analyzer looked and found nothing over the
-  thresholds, which for gentle cloud and sunset footage is the right answer and
-  is not evidence that anything was covered. Worse, `pipeline/verify.py` wraps
-  the `cover_actually_drawn` check in `if sampled and still.exists()`, so with no
-  intervals that check is skipped for every preset and a title with nothing to
-  hide still collects 38 passing checks. The seven that exercise the whole path,
-  detect then plan then cover then prove the cover drew, are fireworks_rieti,
-  lightning_blackout, lightning_240fps, illumination_flares, jezioro_cisie,
-  irminger_waves and dvids_fireworks_safety. **Never publish the 21 on its own.**
-  Adding more calm footage raises it without adding evidence.
+- **Only <!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n--> titles
+  prove anything about covering.** Of the
+  <!--n results/verify_pool.json:analyzed -->30<!--/n--> titles with a verdict,
+  <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> have
+  `covered_ms = 0` and no flagged segment at all: the analyzer looked and found
+  nothing over the thresholds, which for gentle cloud and sunset footage is the
+  right answer and is not evidence that anything was covered. They now carry the
+  outcome `no flagged segments` rather than the same word as the seven, and a
+  preset with intervals can no longer pass on a cover check that never ran. The
+  seven that exercise the whole path, detect then plan then cover then prove the
+  cover drew, are fireworks_rieti, lightning_blackout, lightning_240fps,
+  illumination_flares, jezioro_cisie, irminger_waves and dvids_fireworks_safety.
+  **Never publish the total on its own.** Adding more calm footage raises it
+  without adding evidence. The remaining
+  <!--n results/verify_pool.json:failed -->9<!--/n--> failed and cannot play, and
+  <!--n results/verify_pool.json:not_analyzed.pending -->1<!--/n--> title and
+  <!--n results/verify_pool.json:not_analyzed.no_entry_json -->3<!--/n-->
+  directories have no verdict at all, so they are in none of the four counts.
 - **EA IRIS is not built**, so the baselines table has ffmpeg and naive but no IRIS. The shared Docker VM has another project's services in it, and a vcpkg OpenCV build there could get their containers killed rather than the compiler.
 - **The conformance run is partial**, and `results/conformance.json` says so in its own statement field rather than implying a full 3,000-clip run.
 - **The demo PIN does not exist yet**, so the release notes say so.
@@ -167,6 +180,11 @@ Every one comes from `results/`, and CI fails if a document drifts from them.
 | Red-rule segments found | none | screening.json |
 | Longest gap between player position reports | <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms | vvd_timeupdate_stats.json |
 | Segments ready for blind labelling | <!--n results/realclips_status.json:segments -->40<!--/n--> across <!--n results/realclips_status.json:titles -->15<!--/n--> titles | realclips_status.json |
+| Titles with a verify verdict | <!--n results/verify_pool.json:analyzed -->30<!--/n--> | verify_pool.json |
+| Of those, cover proven drawn | <!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n--> | verify_pool.json |
+| Of those, no flagged segments | <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> | verify_pool.json |
+| Of those, failed | <!--n results/verify_pool.json:failed -->9<!--/n--> | verify_pool.json |
+| The four add up to the titles on disk | <!--n results/verify_pool.json:adds_up -->yes<!--/n--> | verify_pool.json |
 
 ## 7. Next
 

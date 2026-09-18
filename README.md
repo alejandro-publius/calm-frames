@@ -153,7 +153,7 @@ The honest shape of it: three of the four things above can travel without us, an
 
 - **Nobody outside this project has used it or commented on it yet.** No parent, no clinician, no studio. [`docs/VALIDATION.md`](docs/VALIDATION.md) is the place those quotes will go, and it is marked as empty until they arrive. Nothing in this README should be read as anyone else's endorsement.
 - **It is not a medical device and it does not prevent seizures.** It reduces exposure to flashing above published limits in the videos it plays.
-- **Only titles that passed verify are protected.** Anything else was never measured. The rest of what is not true yet is in [Limits](#limits), including the fact that no cover has been timed on a physical stick.
+- **Only titles that passed verify are protected, and passing verify means two different things.** <!--n results/verify_pool.json:analyzed -->30<!--/n--> titles have a verdict. <!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n--> had a flagged segment, a cover planned for it, and the cover measured on the rendition that plays. <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> had no flagged segment at all: the analyzer looked and nothing was over the thresholds, which for cloud and sunset footage is the right answer and is not evidence that any cover works. <!--n results/verify_pool.json:failed -->9<!--/n--> failed and cannot play. **The 7 is the number to read as evidence**, and adding more calm footage raises the other one without adding any. Anything that was never through verify was never measured. The rest of what is not true yet is in [Limits](#limits), including the fact that no cover has been timed on a physical stick.
 
 ### Where the numbers here came from
 
@@ -342,7 +342,6 @@ These rows exist so nobody has to guess what is missing.
 | Any cover lead time at all, on any device | The one run that produced one was withdrawn, because the player never reported a position. See above. |
 | GATE 3: end to end on the stick | Needs the stick. |
 | Prevented exposure, in seconds | Computed from flash maps once the KPI run happens. Never by playing flashing content with the filter off. |
-| Titles verified end to end | The pipeline catalog is local state and is not in `results/` yet. |
 | Test counts | The suites run in CI. No results file records their counts, so no number is published here. |
 | Red flash segments from real footage | The free pool has none. Self-filmed red clips are the plan, under the rules in [docs/SAFETY.md](docs/SAFETY.md). |
 
