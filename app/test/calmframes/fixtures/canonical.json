@@ -1,0 +1,12 @@
+{
+  "bursts": {
+    "canonical_bytes": 3218,
+    "canonical_sha512": "73316126033504587ed6cf77e6b430c5240a6b938bc177adbd5524208d4b08eec408527bf7ecfd803604c36e9efa5498a9b8052117b965c347f5621995effdc6"
+  },
+  "note": "Made by flashmap in this repo. canonical_sha512 is the SHA-512 of the exact bytes docs/SIDECAR_SPEC.md says are signed, so a JavaScript reader that rebuilds those bytes can check itself against Python.",
+  "offline": {
+    "canonical_bytes": 2535,
+    "canonical_sha512": "9ab3c426c9ad946cb63b0887a80416ca35f494dbf783276feabaa98b3ddee1c50c5eeaf365576a82186c4c944f995bc09df851ef9baeeea0cab65c72d01731c1"
+  },
+  "other_public_key_b64": "bdQbkHd2wKZ8YTc/rjAsApn+jDLXmyqjQmmEacndyIw="
+}

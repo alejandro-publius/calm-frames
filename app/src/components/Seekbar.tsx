@@ -11,6 +11,7 @@ import { TVFocusGuideView } from '@amazon-devices/react-native-kepler';
 import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
+import { SeekSource } from '../calmframes/seekSafety';
 import { getImageForVideoSecond } from '../services/bif/bifService';
 import { FrameImageSource } from '../services/bif/FrameImageSource';
 import { COLORS } from '../styles/Colors';
@@ -44,6 +45,7 @@ const Seekbar = ({
   seekBarRef,
   testID,
   handleShowControlsOnKeyEvent,
+  requestSeek,
 }: {
   videoRef: React.MutableRefObject<VideoPlayer | null>;
   videoData: TitleData;
@@ -51,6 +53,12 @@ const Seekbar = ({
   seekBarRef: React.MutableRefObject<null>;
   testID?: string;
   handleShowControlsOnKeyEvent;
+  /**
+   * Calm Frames: the one safe seek function. When it is given, the bar never
+   * writes currentTime itself. The guard covers the picture first and then
+   * moves the playhead.
+   */
+  requestSeek?: (source: SeekSource, targetMs: number) => void;
 }) => {
   const [progress, setProgress] = useState<number>(
     videoRef.current?.currentTime || 0,
@@ -92,7 +100,13 @@ const Seekbar = ({
   const seek = (value: number) => {
     if (typeof videoRef.current?.currentTime === 'number') {
       setProgress(value);
-      videoRef.current.fastSeek(value);
+      if (requestSeek) {
+        // Everything that moves the playhead goes through one function, so a
+        // target inside a flagged part is covered before the picture changes.
+        requestSeek('seek-bar', value * SECOND_IN_MILIS);
+      } else {
+        videoRef.current.fastSeek(value);
+      }
       videoRef.current.play();
       isSkippingRef.current = false;
     }

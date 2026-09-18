@@ -175,3 +175,45 @@ def test_chunked_and_whole_give_the_same_verdict_through_the_cli(strobe):
     assert main(["check", str(strobe)]) == main(
         ["check", str(strobe), "--chunk-frames", "7", "--chunk-overlap", "3"]
     )
+
+
+# ---- analyze --picture-from ----------------------------------------------------------------
+
+
+def test_analyze_carries_the_picture_rectangle_out_of_another_map(strobe, tmp_path):
+    """The flag the pipeline uses to measure a rendition on the source's rectangle."""
+    source_map = tmp_path / "source.json"
+    assert main(["analyze", str(strobe), "--out", str(source_map), "--quiet"]) == EXIT_FAIL
+    document = json.loads(source_map.read_text())
+    # Shrink the rectangle the way a re-encode's detector would, then carry that in.
+    document["picture"]["coded"]["height"] -= 6
+    shrunken = tmp_path / "shrunken.json"
+    shrunken.write_text(json.dumps(document))
+
+    out = tmp_path / "carried.json"
+    assert (
+        main(
+            [
+                "analyze",
+                str(strobe),
+                "--out",
+                str(out),
+                "--quiet",
+                "--picture-from",
+                str(shrunken),
+            ]
+        )
+        == EXIT_FAIL
+    )
+    carried = json.loads(out.read_text())
+    assert carried["picture"]["source"] == "carried"
+    assert carried["picture"]["coded"]["height"] == document["picture"]["coded"]["height"]
+    assert carried["picture"]["detected"]["coded"]["height"] == H
+
+
+def test_analyze_refuses_a_map_with_no_rectangle_to_carry(strobe, tmp_path):
+    empty = tmp_path / "empty.json"
+    empty.write_text(json.dumps({"version": 1, "segments": []}))
+    with pytest.raises(SystemExit) as caught:
+        main(["analyze", str(strobe), "--out", str(tmp_path / "x.json"), "--picture-from", str(empty)])
+    assert "picture rectangle" in str(caught.value)

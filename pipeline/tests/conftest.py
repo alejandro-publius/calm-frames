@@ -62,6 +62,15 @@ class FakeAnalyzer:
         self.plan["rules"].append(rule)
         self.write()
 
+    def set_geometry(self, match: str, **fields: object) -> None:
+        """Make the analyzer report a different shape or timing for anything matching.
+
+        Everything left out keeps ``fake_flashmap.DEFAULT_GEOMETRY``, so a source and a
+        rendition agree until a test says otherwise.
+        """
+        self.plan.setdefault("geometry", []).append({"match": match, **fields})
+        self.write()
+
     def fail_on(self, match: str, message: str = "analysis failed") -> None:
         self.plan["fail"] = {"match": match, "message": message}
         self.write()

@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { IComponentInstance } from '@amazon-devices/react-native-kepler';
-import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
+import {
+  KeplerMediaControlHandler,
+  VideoPlayer,
+} from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback } from 'react';
 import { Platform } from 'react-native';
 import { VideoFileTypes } from '../data/videos';
@@ -64,6 +67,15 @@ export class VideoHandler {
   public setShowBuffering: React.Dispatch<React.SetStateAction<boolean>>;
 
   /**
+   * The media control handler this player hands to Vega Media Controls.
+   *
+   * Calm Frames passes SafeMediaControlHandler here, so Alexa and the remote's
+   * transport commands go through the one safe seek function instead of moving
+   * the playhead themselves. Left out, the sample's own handler is used.
+   */
+  public mediaControlHandler?: KeplerMediaControlHandler;
+
+  /**
    * Constructor - Initializes the VideoHandler with required dependencies
    *
    * @param videoRef - Reference to the video player instance
@@ -84,6 +96,7 @@ export class VideoHandler {
     setIsVideoError: React.Dispatch<React.SetStateAction<boolean>>,
     setVideoPlayElapsedTimeM: React.Dispatch<React.SetStateAction<number>>,
     setShowBuffering: React.Dispatch<React.SetStateAction<boolean>>,
+    mediaControlHandler?: KeplerMediaControlHandler,
   ) {
     this.videoRef = videoRef;
     this.player = player;
@@ -94,6 +107,7 @@ export class VideoHandler {
     this.setIsVideoError = setIsVideoError;
     this.setVideoPlayElapsedTimeM = setVideoPlayElapsedTimeM;
     this.setShowBuffering = setShowBuffering;
+    this.mediaControlHandler = mediaControlHandler;
   }
   /**
    * Updates the media data and file type for the current video
@@ -143,10 +157,11 @@ export class VideoHandler {
 
           await this.videoRef.current.setMediaControlFocus(
             componentInstance,
-            new AppOverrideMediaControlHandler(
-              this.videoRef.current as VideoPlayer,
-              false,
-            ),
+            this.mediaControlHandler ??
+              new AppOverrideMediaControlHandler(
+                this.videoRef.current as VideoPlayer,
+                false,
+              ),
           );
         } else {
           console.log(

@@ -3,6 +3,7 @@
 It speaks the same two commands the pipeline uses:
 
     analyze VIDEO --profile P --out MAP.json [--diag D --distance-ft F --key K]
+                  [--picture-from SOURCE_MAP.json]
     verify MAP.json VIDEO --pub PUB
 
 What it fakes: which spans are flagged. That comes from a plan file named by
@@ -26,6 +27,13 @@ Plan file::
 The first rule whose ``match`` appears in the video path wins. A rule may use
 ``segments_all`` instead of ``segments`` to answer the same way for every
 profile. Anything with no rule comes back clean.
+
+Shape and timing come from ``geometry``, the same way: a list of rules with a
+``match`` and any of ``coded_width``, ``coded_height``, ``frame_count``,
+``first_pts_ms``, ``last_pts_ms``, ``median_interval_ms`` and
+``picture_coded``. A file with no rule gets ``DEFAULT_GEOMETRY``, so every
+source and every rendition agree unless a test asks them not to. That is how
+the rendition against source check is made to fail on purpose.
 """
 
 from __future__ import annotations
@@ -41,6 +49,16 @@ from pathlib import Path
 
 MAP_VERSION = 1
 PLAN_ENV = "FAKE_FLASHMAP_PLAN"
+
+DEFAULT_GEOMETRY = {
+    "coded_width": 1280,
+    "coded_height": 720,
+    "frame_count": 100,
+    "first_pts_ms": 0.0,
+    "last_pts_ms": 3300.0,
+    "median_interval_ms": 33.333,
+    "picture_coded": {"left": 0, "top": 0, "width": 1280, "height": 720},
+}
 
 
 def _sha256(path: Path) -> str:
@@ -94,6 +112,43 @@ def _segments_for(video: str, profile: str) -> list[dict]:
     ]
 
 
+def _geometry_rule(video: str) -> dict:
+    for rule in _plan().get("geometry", []):
+        if rule.get("match") and rule["match"] in video:
+            return rule
+    return {}
+
+
+def _geometry_for(video: str) -> dict:
+    geometry = dict(DEFAULT_GEOMETRY)
+    geometry.update({k: v for k, v in _geometry_rule(video).items() if k != "match"})
+    return geometry
+
+
+def _picture_block(video: str, picture_from: str | None) -> dict:
+    """Where the picture is, and whether the rectangle was detected or carried in.
+
+    With ``--picture-from`` the rectangle comes out of that map, the way the real analyzer
+    does it, so a rendition is measured on the ground the source was. A ``picture_coded`` in
+    the plan wins over both, which is how a test plays an analyzer that answers with a
+    rectangle nobody asked it for.
+    """
+    block = {
+        "measured_on": "picture",
+        "source": "detected",
+        "coded": dict(_geometry_for(video)["picture_coded"]),
+    }
+    if picture_from:
+        carried = json.loads(Path(picture_from).read_text())
+        coded = ((carried.get("picture") or {}).get("coded")) or {}
+        block["source"] = "carried"
+        if coded:
+            block["coded"] = dict(coded)
+    if "picture_coded" in _geometry_rule(video):
+        block["coded"] = dict(_geometry_rule(video)["picture_coded"])
+    return block
+
+
 def _canonical(payload: dict) -> bytes:
     """The exact bytes docs/SIDECAR_SPEC.md says are signed."""
     body = {key: value for key, value in payload.items() if key != "signature"}
@@ -143,6 +198,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         return 2
 
     segments = _segments_for(str(video), args.profile)
+    geometry = _geometry_for(str(video))
     payload = {
         "schema": "https://calm-frames.github.io/schemas/flashmap-map-v1.json",
         "version": MAP_VERSION,
@@ -152,8 +208,18 @@ def cmd_analyze(args: argparse.Namespace) -> int:
             "path": video.name,
             "sha256": _sha256(video),
             "size_bytes": video.stat().st_size,
+            "coded_width": geometry["coded_width"],
+            "coded_height": geometry["coded_height"],
+            "frame_count": geometry["frame_count"],
+            "first_pts_ms": geometry["first_pts_ms"],
+            "last_pts_ms": geometry["last_pts_ms"],
+            "frame_interval_ms": {
+                "min": geometry["median_interval_ms"],
+                "max": geometry["median_interval_ms"],
+                "median": geometry["median_interval_ms"],
+            },
         },
-        "picture": {"measured_on": "picture"},
+        "picture": _picture_block(str(video), args.picture_from),
         "color": {"matrix": "bt709", "range": "limited"},
         "profile": {
             "name": _plan().get("force_profile") or args.profile,
@@ -242,6 +308,7 @@ def main(argv: list[str] | None = None) -> int:
     analyze.add_argument("--diag", type=float)
     analyze.add_argument("--distance-ft", dest="distance_ft", type=float)
     analyze.add_argument("--key")
+    analyze.add_argument("--picture-from", dest="picture_from")
     analyze.set_defaults(func=cmd_analyze)
 
     verify = sub.add_parser("verify")

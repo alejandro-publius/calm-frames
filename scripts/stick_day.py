@@ -712,6 +712,14 @@ def summarize(entry: dict) -> str:
 
 
 def main() -> int:
+    # This is a checklist someone reads while it runs, often through tee or a
+    # log file. Python buffers a pipe in blocks, so without this the first
+    # several minutes look like nothing is happening.
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except (AttributeError, ValueError):
+        pass
+
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )

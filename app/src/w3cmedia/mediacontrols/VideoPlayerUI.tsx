@@ -11,6 +11,7 @@ import {
 import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
+import { SeekSource } from '../../calmframes/seekSafety';
 import Seekbar from '../../components/Seekbar';
 import {
   isContentPersonalizationEnabled,
@@ -36,6 +37,12 @@ interface VideoPlayerUIProps {
   setSelectedCaptionInVideoPlayer: (id: string) => void;
   bifFrameImagesRef: React.MutableRefObject<FrameImageSource | null>;
   videoData: TitleData;
+  /**
+   * Calm Frames: the one safe seek function. Given it, the seek bar and the
+   * transport buttons ask the guard to move the playhead instead of writing
+   * currentTime themselves.
+   */
+  requestSeek?: (source: SeekSource, targetMs: number) => void;
 }
 export const areVideoPlayerUIPropsEqual = (
   prevProps: VideoPlayerUIProps,
@@ -53,6 +60,7 @@ export const VideoPlayerUI = React.memo(
     setSelectedCaptionInVideoPlayer,
     bifFrameImagesRef,
     videoData,
+    requestSeek,
   }: VideoPlayerUIProps) => {
     const [captionMenuVisibility, setCaptionMenuVisibility] =
       useState<boolean>(false);
@@ -201,7 +209,7 @@ export const VideoPlayerUI = React.memo(
             <Header navigateBack={navigateBack} title={title} />
 
             {isRunningOnAutomotive() && (
-              <PlaybackControls videoRef={videoRef} />
+              <PlaybackControls videoRef={videoRef} requestSeek={requestSeek} />
             )}
 
             <Seekbar
@@ -210,6 +218,7 @@ export const VideoPlayerUI = React.memo(
               bifFrameImagesRef={bifFrameImagesRef}
               videoData={videoData}
               handleShowControlsOnKeyEvent={handleShowControlsOnKeyEvent}
+              requestSeek={requestSeek}
             />
             <ControlBar
               videoRef={videoRef}

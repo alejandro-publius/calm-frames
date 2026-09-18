@@ -39,7 +39,7 @@ include eval/baselines/naive_luma_diff/naive_luma.mk
 
 .PHONY: help test test-app test-flashmap test-pipeline test-eval ci \
         reproduce synth cdk-diff deploy destroy release release-notes \
-        stick-day stick-day-vvd hooks hooks-selftest scan pins clean
+        stick-day stick-day-vvd hooks hooks-selftest scan scan-tree pins clean
 
 help: ## show this list
 	@echo "Calm Frames targets:"
@@ -145,8 +145,11 @@ hooks: ## install the gitleaks pre-commit hook into this checkout
 hooks-selftest: ## watch the pre-commit hook block a planted key, in a throwaway repo
 	@$(REPO)/scripts/hook_selftest.sh
 
-scan: ## run gitleaks over the working tree, the same config CI uses
-	@$(REPO)/scripts/gitleaks_scan.sh dir
+scan: ## gitleaks over the committed tree, the same scan CI runs
+	@$(REPO)/scripts/gitleaks_scan.sh committed
+
+scan-tree: ## gitleaks over the whole working directory, including ignored files
+	@$(REPO)/scripts/gitleaks_scan.sh tree
 
 pins: ## report any dependency version that is not pinned
 	@$(PY) $(REPO)/scripts/check_pins.py

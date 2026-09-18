@@ -12,7 +12,12 @@ A title may appear in kid mode only when every one of these passes:
    violations for that preset;
 5. every BIF frame and every poster comes from a calm moment;
 6. the stored hide plan is the plan the map produces, and the rendition really
-   shows the cover still across each covered span.
+   shows the cover still across each covered span;
+7. the kid safe rendition has the source's picture rectangle and the source's
+   frame timing. A title is analyzed from the source file and never from a
+   re-encode, so the map that ships describes the source. The rendition is what
+   plays. A hide plan built from one only lines up with the other while the two
+   agree on where the picture sits and when each frame arrives.
 
 Checks 1, 5 and 6 do not go through the analyzer, so a broken or missing
 analyzer cannot turn them off quietly. Anything that cannot be read counts as
@@ -46,6 +51,12 @@ COVER_PSNR_MIN_DB = 30.0
 # How many covered spans to sample for that check. Sampling keeps verify
 # affordable on a feature length title.
 COVER_SAMPLE_LIMIT = 6
+
+# How far a rendition's timing may sit from the source's and still be showing
+# the same picture at the same moment: half a frame. Less than that and nothing
+# has moved by a whole frame anywhere. This is an engineering tolerance, not a
+# number from a spec, and docs/SPEC_SOURCES.md is where spec numbers live.
+TIMING_TOLERANCE_FRAMES = 0.5
 
 
 @dataclass
@@ -119,6 +130,122 @@ class VerifyReport:
         for check in self.failures:
             lines.append(f"  FAIL {check.name}: {check.detail}")
         return "\n".join(lines)
+
+
+def _geometry(doc: FlashMapDoc) -> dict:
+    """The shape and the timing a map reports, or None for anything it does not say.
+
+    Nothing here is guessed. A field the map does not carry comes back None and the
+    comparison below treats that as a mismatch, because a rendition we cannot measure
+    against the source is a rendition we cannot publish.
+    """
+    raw = doc.raw if isinstance(doc.raw, dict) else {}
+    source = raw.get("source")
+    source = source if isinstance(source, dict) else {}
+    picture = raw.get("picture")
+    picture = picture if isinstance(picture, dict) else {}
+    coded = picture.get("coded")
+    intervals = source.get("frame_interval_ms")
+    intervals = intervals if isinstance(intervals, dict) else {}
+
+    rect = None
+    if isinstance(coded, dict):
+        values = [coded.get(key) for key in ("left", "top", "width", "height")]
+        if all(isinstance(value, (int, float)) for value in values):
+            rect = tuple(int(value) for value in values)
+
+    def number(value):
+        return float(value) if isinstance(value, (int, float)) else None
+
+    return {
+        "coded_width": number(source.get("coded_width")),
+        "coded_height": number(source.get("coded_height")),
+        "picture_coded": rect,
+        "picture_source": picture.get("source"),
+        "frame_count": number(source.get("frame_count")),
+        "first_pts_ms": number(source.get("first_pts_ms")),
+        "last_pts_ms": number(source.get("last_pts_ms")),
+        "median_interval_ms": number(intervals.get("median")),
+    }
+
+
+def compare_rendition_to_source(
+    source_map: FlashMapDoc,
+    rendition_map: FlashMapDoc,
+    *,
+    tolerance_frames: float = TIMING_TOLERANCE_FRAMES,
+) -> tuple[bool, list[str], dict]:
+    """Is the rendition the same picture, in the same place, at the same times?
+
+    A title is always analyzed from the source file, never from a re-encode, so the map that
+    ships describes the source. The rendition is the file that actually plays, and the hide
+    plan built from the source only lines up with it if the two agree on where the picture is
+    and when each frame arrives. So: the same coded frame, the same picture rectangle, the
+    same number of frames, and a timeline that has not slid or stretched by as much as half a
+    frame.
+
+    Returns (passed, problems, data). Anything that cannot be read is a problem, never a pass.
+    """
+    src = _geometry(source_map)
+    ren = _geometry(rendition_map)
+    problems: list[str] = []
+
+    if ren["picture_source"] != "carried":
+        problems.append(
+            "the rendition was measured on a rectangle of its own "
+            f"({ren['picture_source']!r}), not the one carried over from the source map"
+        )
+    for key, name in (("coded_width", "coded width"), ("coded_height", "coded height")):
+        if src[key] is None or ren[key] is None or src[key] != ren[key]:
+            problems.append(f"{name} is {src[key]} in the source and {ren[key]} here")
+    if src["picture_coded"] is None or ren["picture_coded"] is None:
+        problems.append(
+            f"picture rectangle in coded pixels is {src['picture_coded']} in the source "
+            f"and {ren['picture_coded']} here, and both have to be readable"
+        )
+    elif src["picture_coded"] != ren["picture_coded"]:
+        problems.append(
+            f"picture rectangle is {src['picture_coded']} in the source and "
+            f"{ren['picture_coded']} here, as left, top, width, height in coded pixels"
+        )
+    if src["frame_count"] is None or ren["frame_count"] is None:
+        problems.append("one of the two maps does not say how many frames it measured")
+    elif src["frame_count"] != ren["frame_count"]:
+        problems.append(
+            f"the source has {src['frame_count']:.0f} frames and the rendition has "
+            f"{ren['frame_count']:.0f}"
+        )
+
+    median = src["median_interval_ms"]
+    tolerance_ms = None
+    if median is None or median <= 0:
+        problems.append("the source map does not say how far apart its frames are")
+    else:
+        tolerance_ms = tolerance_frames * median
+        for key, name in (("first_pts_ms", "first frame"), ("last_pts_ms", "last frame")):
+            if src[key] is None or ren[key] is None:
+                problems.append(f"one of the two maps does not say when its {name} is")
+        if all(src[k] is not None and ren[k] is not None for k in ("first_pts_ms", "last_pts_ms")):
+            start_shift = abs(ren["first_pts_ms"] - src["first_pts_ms"])
+            src_span = src["last_pts_ms"] - src["first_pts_ms"]
+            ren_span = ren["last_pts_ms"] - ren["first_pts_ms"]
+            span_change = abs(ren_span - src_span)
+            if start_shift > tolerance_ms:
+                problems.append(
+                    f"the rendition starts {start_shift:.3f} ms away from the source, "
+                    f"and half a frame is {tolerance_ms:.3f} ms"
+                )
+            if span_change > tolerance_ms:
+                problems.append(
+                    f"the rendition runs {span_change:.3f} ms longer or shorter than the "
+                    f"source, and half a frame is {tolerance_ms:.3f} ms"
+                )
+
+    return (
+        not problems,
+        problems,
+        {"source": src, "rendition": ren, "tolerance_ms": tolerance_ms},
+    )
 
 
 def _load_plan(layout: TitleLayout, preset: str) -> HidePlan:
@@ -256,6 +383,7 @@ def verify_title(
                     out_path=out_map,
                     diag_in=diag_in,
                     distance_ft=distance_ft,
+                    picture_from=layout.map_path(preset),
                 )
                 report.add(
                     f"safe_rendition_clean:{preset}",
@@ -264,11 +392,28 @@ def verify_title(
                     f"in the kid safe rendition",
                     violations=safe_map.violation_count,
                 )
+                matched, problems, data = compare_rendition_to_source(source_map, safe_map)
+                report.add(
+                    f"rendition_matches_source:{preset}",
+                    matched,
+                    f"{prefix}"
+                    + (
+                        "the rendition has the source's picture rectangle and frame timing"
+                        if matched
+                        else "; ".join(problems)
+                    ),
+                    **data,
+                )
             except PipelineError as exc:
                 report.add(
                     f"safe_rendition_clean:{preset}",
                     False,
                     f"{prefix}could not analyze the safe rendition: {exc}",
+                )
+                report.add(
+                    f"rendition_matches_source:{preset}",
+                    False,
+                    f"{prefix}the rendition could not be measured against the source: {exc}",
                 )
 
             # 6b. The rendition really shows the still across covered spans.
@@ -306,6 +451,7 @@ def verify_title(
                 out_path=out_map,
                 diag_in=diag_in,
                 distance_ft=distance_ft,
+                picture_from=layout.map_path(preset),
             )
             hint = ""
             if not model_map.is_clean and plan.allow_dim and plan.dim_intervals():

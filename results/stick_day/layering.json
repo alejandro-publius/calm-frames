@@ -1,0 +1,56 @@
+{
+  "recorded_utc": "2026-09-18T00:42:28+00:00",
+  "mode": "layering",
+  "device": "Vega Virtual Device (not the stick, see docs/GATES.md)",
+  "clip_sha256": "fad744279f9c9f085b9cd23b78d5a206e99f565b5cd42bb64bda0762157a391e",
+  "events_seen": 59,
+  "event_source": "posted by the app",
+  "timeupdate": {
+    "count": 14,
+    "interval_ms": {
+      "count": 13,
+      "min": 138.0,
+      "median": 401.0,
+      "p95": 10773.0,
+      "max": 10773.0
+    },
+    "media_step_ms": {
+      "count": 8,
+      "min": 0.666,
+      "median": 157.0,
+      "p95": 254.0,
+      "max": 254.0
+    }
+  },
+  "current_time_precision_ms": 0.666,
+  "worst_wall_clock_drift_ms": 3870,
+  "drift_note": "The app tracks the largest gap it saw between its wall-clock estimate and the position the player reported. Only the maximum is meaningful.",
+  "cover": {
+    "on_events": 13,
+    "off_events": 12,
+    "reasons": [
+      "layering-toggle"
+    ]
+  },
+  "playback_quality_samples": 14,
+  "playback_quality_last": {
+    "droppedVideoFrames": 0,
+    "totalVideoFrames": 1128,
+    "corruptedVideoFrames": null
+  },
+  "event_kinds": {
+    "cover-off": 12,
+    "cover-on": 13,
+    "error": 2,
+    "harness-start": 2,
+    "harness-stop": 1,
+    "playing": 2,
+    "ratechange": 4,
+    "seeked": 3,
+    "seeking": 3,
+    "timeupdate": 14,
+    "waiting": 3
+  },
+  "seek_events": 6,
+  "stall_events": 3
+}

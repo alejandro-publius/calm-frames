@@ -1,0 +1,108 @@
+{
+  "color": {
+    "analysis_height": 108,
+    "analysis_width": 192,
+    "luminance_model": "wcag-relative-luminance-srgb",
+    "matrix": "bt709",
+    "matrix_source": "inferred-hd-bt709",
+    "pixel_format": "yuv420p",
+    "range": "limited",
+    "range_source": "default-limited",
+    "transfer_tag": "2"
+  },
+  "created_utc": "2026-09-18T00:13:36Z",
+  "generator": {
+    "name": "flashmap",
+    "version": "1.0.0"
+  },
+  "picture": {
+    "frame_height": 108,
+    "frame_width": 192,
+    "height": 108,
+    "left": 0,
+    "letterbox": false,
+    "measured_on": "picture",
+    "note": "Area fractions in this map were measured on the picture rectangle above, not on the full coded frame. Letterbox and pillarbox bars were removed first.",
+    "pillarbox": false,
+    "top": 0,
+    "width": 192
+  },
+  "profile": {
+    "area_fraction_limit": 0.25,
+    "area_window_mode": "ten-degree-field",
+    "area_windows": [
+      {
+        "height_px": 36,
+        "name": "wcag-10deg",
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)",
+        "width_px": 64
+      }
+    ],
+    "exceptions_not_implemented": [
+      "WCAG fine balanced pattern exception (white noise, checkerboards under 0.1 degree). Content the exception would excuse is still reported."
+    ],
+    "flash_limit_per_second": 3,
+    "general_flash": {
+      "dark_image_below": 0.8,
+      "metric": "wcag-relative-luminance",
+      "min_delta": 0.1,
+      "source": "WCAG 2.2 general flash and red flash thresholds (SPEC_SOURCES section 2)"
+    },
+    "name": "wcag",
+    "peak_nits": null,
+    "red_flash": {
+      "min_ucs_distance": 0.2,
+      "saturated_red_ratio": 0.8,
+      "source": "WCAG 2.2 thresholds Note 3 and Understanding 2.3.1 (SPEC_SOURCES sections 2, 4)"
+    },
+    "red_opposing_rule": "enter-saturated-red-paired-with-leave",
+    "room": null,
+    "rules_not_implemented": [
+      "the fine balanced pattern exception",
+      "any HDR rule"
+    ],
+    "spec_sources": "flashmap/docs/SPEC_SOURCES.md",
+    "title": "WCAG 2.2 Success Criterion 2.3.1, general and red flash thresholds",
+    "transition_pairing": "non-overlapping",
+    "transition_rule": "declared-on-first-frame-meeting-threshold",
+    "window_ms": 1000,
+    "window_placement": "trailing-closed-window-at-every-frame"
+  },
+  "schema": "https://calm-frames.github.io/schemas/flashmap-map-v1.json",
+  "segments": [],
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "sha256:9d32df3b18c97a7e895a2f76bf58c189259a8e2de1b1ca02da4830d1e057b26a",
+    "payload_sha256": "f2746de7f7ade0e9c08a760def97bf3f59d571f05301bd2a8f14ba5321bbf8d6",
+    "public_key": "533gF/bCDXyQppRnqiiT41+JwyyUYRN8P4YVZnCbKLQ=",
+    "value": "75qenTm6+7cM4XrsWJ99opkU07AqY6AXHfkXLX7YEmxHIjtByvhhA7FHsxzfWD2dgny5HgbtetlN8N8MzBFSAQ=="
+  },
+  "source": {
+    "coded_height": 720,
+    "coded_width": 1280,
+    "container_frame_rate": "24/1",
+    "duration_ms": 12000.0,
+    "first_pts_ms": 0.0,
+    "frame_count": 288,
+    "frame_interval_ms": {
+      "max": 41.667,
+      "median": 41.667,
+      "min": 41.667
+    },
+    "last_pts_ms": 11958.333,
+    "path": "calm_gradient.mp4",
+    "sha256": "af2934dc45c9519bcace8db253d0a9e0c10f9db6682a04ad2cf3f906e1755224",
+    "size_bytes": 119567,
+    "timestamp_source": "container-pts",
+    "variable_frame_rate": false
+  },
+  "summary": {
+    "area_measured_on": "picture",
+    "general_segment_count": 0,
+    "hidden_ms": 0,
+    "pass": true,
+    "red_segment_count": 0,
+    "segment_count": 0
+  },
+  "version": 1
+}

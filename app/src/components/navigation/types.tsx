@@ -7,6 +7,7 @@ import { StackScreenProps } from '@amazon-devices/react-navigation__stack/lib/ty
 import { ImageSourcePropType, TouchableOpacity } from 'react-native';
 import { ReferencePatch } from '../../calmframes/CoverLayer';
 import { FlashSegment } from '../../calmframes/coverSchedule';
+import { HouseholdSettings } from '../../calmframes/household';
 import { HarnessMode } from '../../calmframes/useCoverHarness';
 import { TitleData } from '../../types/TitleData';
 
@@ -59,6 +60,23 @@ export type AppStackParamList = {
     toggleEveryMs?: number;
     /** Screen area the cover leaves visible for the camera harness. */
     referencePatch?: ReferencePatch;
+
+    /**
+     * Kid mode. With a checked title in hand the player runs the flash guard:
+     * it verifies the map again before play, covers every flagged part, shows
+     * the cards and routes every seek through one function.
+     */
+    guarded?: {
+      /** SHA-256 of the file about to play, from the catalog entry. */
+      sha256: string;
+      /** Map text per profile name, exactly as it was written. */
+      maps?: Partial<Record<string, string | null>>;
+      /** Or where to fetch them from. */
+      mapUrls?: Partial<Record<string, string>>;
+      settings?: HouseholdSettings;
+      durationMs?: number;
+      titleId?: string;
+    };
   };
 };
 

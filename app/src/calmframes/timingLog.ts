@@ -116,7 +116,22 @@ let flushTimer: ReturnType<typeof setTimeout> | null = null;
  * there is otherwise no way to tell whether the app's JavaScript ran at all.
  * Debug builds only.
  */
+let beaconEnabled = true;
+
+/**
+ * Turn the beacon off.
+ *
+ * jest.setup.ts calls this, because a unit test has no business opening a
+ * socket to the machine that ran it. Nothing else should.
+ */
+export function setBeaconEnabled(enabled: boolean): void {
+  beaconEnabled = enabled;
+}
+
 export function beacon(where: string, detail: Record<string, unknown> = {}): void {
+  if (!beaconEnabled) {
+    return;
+  }
   if (typeof __DEV__ === 'undefined' || !__DEV__) {
     return;
   }

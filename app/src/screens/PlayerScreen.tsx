@@ -47,9 +47,14 @@ import { COLORS } from '../styles/Colors';
 import { VideoHandler } from '../utils/VideoHandler';
 import VideoPlayerUI from '../w3cmedia/mediacontrols/VideoPlayerUI';
 import { beacon } from '../calmframes/timingLog';
+import CalmCard from '../calmframes/CalmCard';
 import CoverLayer from '../calmframes/CoverLayer';
 import { buildCoverIntervals } from '../calmframes/coverSchedule';
+import { OFFLINE_PUBLIC_KEY_BASE64 } from '../calmframes/offlineTitle';
+import { SafeMediaControlHandler } from '../calmframes/SafeMediaControlHandler';
+import { NO_CARD } from '../calmframes/cards';
 import { useCoverHarness } from '../calmframes/useCoverHarness';
+import { useFlashGuard } from '../calmframes/useFlashGuard';
 import { ShakaPlayer } from '../w3cmedia/shakaplayer/ShakaPlayer';
 
 const BACKGROUND_STATE: AppStateStatus = 'background';
@@ -127,10 +132,48 @@ const PlayerScreen = ({
     scheduleLabel: route.params.scheduleLabel,
     ready: isVideoInitialized,
   });
+
+  // Kid mode. The guard checks the map again here, right before play, so a
+  // title that passed on the shelf cannot play on a map that has since gone
+  // missing or gone stale.
+  const guardedParams = route.params.guarded;
+  const guard = useFlashGuard({
+    mediaRef: videoRef,
+    mapTexts: guardedParams?.maps,
+    mapUrls: guardedParams?.mapUrls,
+    expectedSha256: guardedParams?.sha256 ?? '',
+    publicKeyBase64: OFFLINE_PUBLIC_KEY_BASE64,
+    settings: guardedParams?.settings,
+    durationMs: guardedParams?.durationMs,
+    titleId: guardedParams?.titleId ?? data.id,
+    titleName: data.title,
+    ready: isVideoInitialized && Boolean(guardedParams),
+  });
+  const guarding = Boolean(guardedParams);
+  // The measurement harness and the guard never run at once: a run is a
+  // measurement, kid mode is the product.
+  const covered = guarding ? guard.covered : cover.covered;
+  const card = guarding ? guard.card : NO_CARD;
   const keplerAppStateManager: IKeplerAppStateManager =
     useKeplerAppStateManager();
   const componentInstance: IComponentInstance =
     keplerAppStateManager.getComponentInstance();
+
+  // Alexa and the remote's transport commands arrive through Vega Media
+  // Controls. In kid mode they go to SafeMediaControlHandler, which sends
+  // every one of them through the same seek function the on-screen controls
+  // use, so a spoken "skip forward" cannot land inside a flagged part with the
+  // picture showing.
+  const mediaControlHandler = React.useMemo(
+    () =>
+      guarding
+        ? new SafeMediaControlHandler({
+            engine: guard.seekEngine,
+            getCurrentMs: () => (videoRef.current?.currentTime ?? 0) * 1000,
+          })
+        : undefined,
+    [guarding, guard.seekEngine],
+  );
 
   const videoHandler = new VideoHandler(
     videoRef,
@@ -141,6 +184,7 @@ const PlayerScreen = ({
     setVideoError,
     setVideoPlayElapsedTimeM,
     setShowBuffering,
+    mediaControlHandler,
   );
 
   useTVEventHandler((evt: HWEvent) => {
@@ -453,7 +497,7 @@ const PlayerScreen = ({
               over a hidden picture.
             */}
             <CoverLayer
-              visible={cover.covered}
+              visible={covered}
               referencePatch={route.params.referencePatch}
               screenWidth={deviceWidth}
               screenHeight={deviceHeight}
@@ -471,6 +515,11 @@ const PlayerScreen = ({
         {showBuffering && (
           <BufferingWindow backgroundColor={COLORS.SEMI_TRANSPARENT} />
         )}
+        {/*
+          The card sits above the cover, so it stays readable while the picture
+          is hidden, and it is the only thing on screen that speaks.
+        */}
+        <CalmCard card={card} onSkip={guard.skipTo} />
         {showVideoPlayerUI && (
           <VideoPlayerUI
             videoRef={videoRef}
@@ -480,6 +529,13 @@ const PlayerScreen = ({
             setSelectedCaptionInVideoPlayer={setSelectedCaptionInVideoPlayer}
             bifFrameImagesRef={bifFrameImagesRef}
             videoData={data}
+            requestSeek={
+              guarding
+                ? (source, targetMs) => {
+                    void guard.requestSeek(source, targetMs);
+                  }
+                : undefined
+            }
           />
         )}
         {isVideoError && <ErrorView navigateBack={navigateBack} />}

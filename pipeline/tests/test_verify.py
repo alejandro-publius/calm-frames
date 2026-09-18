@@ -14,9 +14,10 @@ import shutil
 import pytest
 
 from pipeline.catalog import STATUS_FAILED, kid_mode_titles, read_entry
-from pipeline.flashmap_adapter import FlashmapAdapter
+from pipeline.flashmap_adapter import FlashmapAdapter, parse_map
 from pipeline.hideplan import HidePlan
 from pipeline.ingest import IngestOptions, ingest_title
+from pipeline.verify import compare_rendition_to_source
 from pipeline.verify import main as verify_main
 from pipeline.verify import verify_title
 
@@ -491,3 +492,113 @@ class TestDimIsNotAlwaysEnough:
         assert failed
         assert "--no-dim" not in failed[0].detail
         assert failed[0].data["dim_intervals"] == 0
+
+
+class TestTheRenditionMustMatchTheSource:
+    """A title is analyzed from the source file and never from a re-encode.
+
+    That only holds up while the rendition really is the same picture in the same place at
+    the same times. Re-encoding can move all three: a detector run on the re-encode can find
+    a bar a row taller than the source's, a filter can rescale, a mux can drop or add frames
+    or slide the timeline. Any of those and the hide plan built from the source no longer
+    lines up with the file that plays, so verify refuses the title.
+    """
+
+    def test_a_rescaled_rendition_blocks_publishing(self, built):
+        built["analyzer"].set_geometry("safe.mp4", coded_width=640, coded_height=360)
+        report = run_verify(built)
+        assert not report.passed
+        assert "rendition_matches_source:wcag" in failed_names(report)
+
+    def test_a_shifted_picture_rectangle_blocks_publishing(self, built):
+        # This is an analyzer that answered with a rectangle nobody asked it for. 720 down to
+        # 706 is the size of the shift that blocked a real title: the re-encode crushed the
+        # outermost row below the bar threshold and the detector read it as letterbox.
+        built["analyzer"].set_geometry(
+            "safe.mp4", picture_coded={"left": 0, "top": 0, "width": 1280, "height": 706}
+        )
+        report = run_verify(built)
+        assert not report.passed
+        failed = [c for c in report.failures if c.name == "rendition_matches_source:wcag"]
+        assert failed
+        assert "picture rectangle" in failed[0].detail
+
+    def test_a_rendition_missing_frames_blocks_publishing(self, built):
+        built["analyzer"].set_geometry("safe.mp4", frame_count=99)
+        report = run_verify(built)
+        assert not report.passed
+        failed = [c for c in report.failures if c.name == "rendition_matches_source:wcag"]
+        assert failed
+        assert "frames" in failed[0].detail
+
+    def test_a_timeline_that_slid_a_whole_frame_blocks_publishing(self, built):
+        built["analyzer"].set_geometry("safe.mp4", first_pts_ms=40.0, last_pts_ms=3340.0)
+        report = run_verify(built)
+        assert not report.passed
+        assert "rendition_matches_source:wcag" in failed_names(report)
+
+    def test_a_timeline_that_stretched_blocks_publishing(self, built):
+        built["analyzer"].set_geometry("safe.mp4", last_pts_ms=3400.0)
+        report = run_verify(built)
+        assert not report.passed
+        assert "rendition_matches_source:wcag" in failed_names(report)
+
+    def test_a_shift_smaller_than_half_a_frame_is_allowed(self, built):
+        # Container time bases round, so a rendition of a 24000/1001 source reports 41.708 ms
+        # where the source reported 42. Nothing has moved by a frame, and refusing that would
+        # refuse every title.
+        built["analyzer"].set_geometry("safe.mp4", first_pts_ms=3.0, last_pts_ms=3303.0)
+        report = run_verify(built)
+        assert report.passed, failed_names(report)
+
+    def test_the_source_rectangle_really_is_the_one_used(self, built):
+        """The rendition's map has to say the rectangle was carried, not found here."""
+        report = run_verify(built)
+        check = [c for c in report.checks if c.name == "rendition_matches_source:wcag"][0]
+        assert check.passed
+        assert check.data["rendition"]["picture_source"] == "carried"
+
+
+class TestComparingAMapToItsSource:
+    """The comparison on its own, without building a title around it."""
+
+    @staticmethod
+    def _doc(**source_changes):
+        picture = {
+            "measured_on": "picture",
+            "source": "carried",
+            "coded": {"left": 0, "top": 0, "width": 1280, "height": 720},
+        }
+        source = {
+            "sha256": "ab" * 32,
+            "coded_width": 1280,
+            "coded_height": 720,
+            "frame_count": 100,
+            "first_pts_ms": 0.0,
+            "last_pts_ms": 3300.0,
+            "frame_interval_ms": {"min": 33.333, "max": 33.333, "median": 33.333},
+        }
+        picture.update(source_changes.pop("picture", {}))
+        source.update(source_changes)
+        return parse_map(
+            {"version": 1, "source": source, "picture": picture, "segments": []}
+        )
+
+    def test_two_maps_of_the_same_shape_match(self):
+        matched, problems, _ = compare_rendition_to_source(self._doc(), self._doc())
+        assert matched, problems
+
+    def test_a_rendition_measured_on_its_own_rectangle_does_not_match(self):
+        rendition = self._doc(picture={"source": "detected"})
+        matched, problems, _ = compare_rendition_to_source(self._doc(), rendition)
+        assert not matched
+        assert any("not the one carried over" in problem for problem in problems)
+
+    def test_a_map_that_does_not_say_its_shape_does_not_match(self):
+        """Fail closed: a rendition we cannot measure is a rendition we cannot publish."""
+        bare = parse_map(
+            {"version": 1, "source": {"sha256": "ab" * 32}, "picture": {}, "segments": []}
+        )
+        matched, problems, _ = compare_rendition_to_source(self._doc(), bare)
+        assert not matched
+        assert len(problems) >= 3

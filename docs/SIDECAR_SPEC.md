@@ -81,9 +81,61 @@ than it is.
 | `left`, `top`, `width`, `height` | integer | the picture rectangle, in analysis pixels |
 | `frame_width`, `frame_height` | integer | the analysis frame the rectangle sits in |
 | `letterbox`, `pillarbox` | boolean | whether bars were found on that axis |
+| `coded` | object | the same rectangle in the file's own coded pixels, `{left, top, width, height}`. **This is the one to carry.** |
+| `source` | string | `detected` or `carried`, see below |
+| `detected` | object or absent | present only when `source` is `carried`, see below |
 | `note` | string | plain language restatement of the above, for humans |
 
-To map these back to the source frame, scale by `source.coded_width / picture.frame_width`.
+To map the analysis pixel rectangle back to the source frame, scale by
+`source.coded_width / picture.frame_width`. `picture.coded` is that already done, and it is
+what a reader should use, because the analysis width is a setting and the coded frame is the
+file.
+
+### Carrying the rectangle across a re-encode
+
+**Always analyze the source file. Never analyze a re-encode and call the answer the title's
+map.** Re-encoding nudges the outermost rows and columns. One row of picture crushed dark
+enough to read as a letterbox bar is enough to shrink the rectangle, and because every area
+fraction is measured against the rectangle, a smaller rectangle lifts every fraction. A real
+title was blocked this way: a rendition whose picture was detected as 192 by 106 analysis
+pixels where the source was 192 by 108, which lifted spans over the 25 percent line that the
+source never broke.
+
+So a re-encode is measured on the rectangle from the source's map, not on one found in the
+re-encode:
+
+```
+python -m flashmap analyze RENDITION.mp4 --profile wcag --out CHECK.json \
+    --picture-from SOURCE_MAP.json
+```
+
+The rectangle is read from `picture.coded` of that map, and it is refused outright if the
+coded frame size it came from is not the coded frame size of the file being measured. A
+rectangle from a different frame size does not describe this file.
+
+| `picture.source` | Meaning |
+| --- | --- |
+| `detected` | the detector found this rectangle in this file. Every map of a source file says this. |
+| `carried` | the rectangle came from another file's map, because this file is a re-encode of that one |
+
+When `source` is `carried`, `picture.detected` holds what this file's own detector found, as
+`left`, `top`, `width`, `height`, `letterbox`, `pillarbox` and `coded`. It is there so the two
+can be compared without analysing the file again, and it is reporting only: nothing was
+measured on it.
+
+`pipeline/verify.py` uses this. It measures the kid safe rendition on the source's rectangle,
+and it separately refuses to publish a title whose rendition does not have the source's coded
+frame size, the source's picture rectangle, the source's frame count and a timeline that has
+neither slid nor stretched by as much as half a frame.
+
+### Why this is still version 1
+
+`coded`, `source` and `detected` are new optional keys. They do not change the meaning of any
+key that was already here, none is removed, and nothing about how segments are computed has
+changed for a file measured the ordinary way. The versioning rule above allows exactly that
+inside version 1, and a reader that ignores all three still reads every map correctly. A map
+with `picture.source` set to `carried` is the one case where the rectangle is not this file's
+own, and a reader that cares has the field to look at.
 
 ## `color`
 
@@ -237,6 +289,8 @@ reader must re-serialise rather than hash the file.
     "left": 0, "top": 0, "width": 64, "height": 48,
     "frame_width": 64, "frame_height": 48,
     "letterbox": false, "pillarbox": false,
+    "coded": { "left": 0, "top": 0, "width": 64, "height": 48 },
+    "source": "detected",
     "note": "Area fractions in this map were measured on the picture rectangle above, not on the full coded frame. Letterbox and pillarbox bars were removed first."
   },
   "color": {

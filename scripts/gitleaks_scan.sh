@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 #
 # One way to run gitleaks, used by `make scan`, by the pre-commit hook and by
-# anyone who wants to check the tree by hand. CI runs the same version with the
-# same config, so a clean run here means a clean run there.
+# anyone who wants to check by hand. CI runs the same version with the same
+# config, so a clean run here means a clean run there.
 #
-#   scripts/gitleaks_scan.sh dir       scan the whole working tree
-#   scripts/gitleaks_scan.sh staged    scan what is staged for commit
+#   scripts/gitleaks_scan.sh committed   what a fresh clone holds. This is CI.
+#   scripts/gitleaks_scan.sh staged      what is staged for commit. The hook.
+#   scripts/gitleaks_scan.sh tree        the whole working directory as it is
+#
+# "committed" is the default because it is the one that answers the question
+# people actually have, which is whether the repository leaks anything. A scan
+# of the working directory also walks .venv, node_modules, app/build, coverage
+# output and the media pool: about a gigabyte that no clone ever sees, several
+# minutes, and findings in other people's vendored test fixtures that nobody
+# can act on. "tree" is still there for when you want it.
 #
 # The version is pinned to the one .github/workflows/ci.yml downloads. A
 # different version can have different rules, and then a commit that passes
@@ -15,7 +23,7 @@ set -u
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PINNED_VERSION="8.30.1"
-MODE="${1:-dir}"
+MODE="${1:-committed}"
 
 find_gitleaks() {
   if [ -x "$REPO/.cache/gitleaks/gitleaks" ]; then
@@ -53,14 +61,33 @@ if [ "$FOUND_VERSION" != "$PINNED_VERSION" ]; then
 fi
 
 case "$MODE" in
-  dir)
-    exec "$GITLEAKS" dir "$REPO" --config "$REPO/.gitleaks.toml" --no-banner --redact
+  committed)
+    # Scan exactly what a clone gets: the committed tree at HEAD, unpacked
+    # somewhere clean. Same command CI runs, same content CI has.
+    work="$(mktemp -d)"
+    trap 'rm -rf "$work"' EXIT
+    git -C "$REPO" archive HEAD | tar -x -C "$work" || exit 1
+    echo "Scanning the committed tree at $(git -C "$REPO" rev-parse --short HEAD)."
+    "$GITLEAKS" dir "$work" --config "$REPO/.gitleaks.toml" --no-banner --redact
+    status=$?
+    if [ "$status" -ne 0 ]; then
+      echo "" >&2
+      echo "Rerun with -v to see the findings:" >&2
+      echo "  gitleaks dir $work --config $REPO/.gitleaks.toml --redact -v" >&2
+      echo "(that directory is deleted when this exits, so copy the command first)" >&2
+    fi
+    exit "$status"
     ;;
   staged)
     exec "$GITLEAKS" git "$REPO" --staged --config "$REPO/.gitleaks.toml" --no-banner --redact
     ;;
+  tree)
+    echo "Scanning the whole working directory, including files no clone has."
+    echo "This walks .venv, node_modules and the media pool. Expect minutes."
+    exec "$GITLEAKS" dir "$REPO" --config "$REPO/.gitleaks.toml" --no-banner --redact -v
+    ;;
   *)
-    echo "usage: $0 [dir|staged]" >&2
+    echo "usage: $0 [committed|staged|tree]" >&2
     exit 2
     ;;
 esac

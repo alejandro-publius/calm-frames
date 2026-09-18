@@ -7,6 +7,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { isContentPersonalizationEnabled } from '../../config/AppConfig';
 import { getMockPlaybackEventForVideo } from '../../personalization/mock/ContentPersonalizationMocks';
+import { SeekSource } from '../../calmframes/seekSafety';
 import { areComponentPropsEqual } from '../../utils/lodashHelper';
 import { PLAYER_BUTTON_SIZE } from '../../utils/videoPlayerValues';
 import PlayerButton from './PlayerButton';
@@ -18,11 +19,14 @@ export interface PlaybackControlsProps {
   videoRef: React.MutableRefObject<VideoPlayer | null>;
   onBlur?: () => void;
   playerControlType?: string;
+  /** Calm Frames: the one safe seek function. */
+  requestSeek?: (source: SeekSource, targetMs: number) => void;
 }
 
 export const seek = (
   seekSeconds: number,
   videoRef: React.MutableRefObject<VideoPlayer | null>,
+  requestSeek?: (source: SeekSource, targetMs: number) => void,
 ) => {
   if (typeof videoRef.current?.currentTime === 'number') {
     const { currentTime, duration } = videoRef.current;
@@ -32,7 +36,16 @@ export const seek = (
     } else if (newTime < 0) {
       newTime = 0;
     }
-    videoRef.current.currentTime = newTime;
+    if (requestSeek) {
+      // Calm Frames: the transport keys move the playhead through the same
+      // function as everything else, so the cover comes first.
+      requestSeek(
+        seekSeconds >= 0 ? 'dpad-fast-forward' : 'dpad-rewind',
+        newTime * 1000,
+      );
+    } else {
+      videoRef.current.currentTime = newTime;
+    }
     if (videoRef.current.paused) {
       videoRef.current.play();
     }
@@ -41,11 +54,17 @@ export const seek = (
   }
 };
 
-const seekForward = (videoRef: React.MutableRefObject<VideoPlayer | null>) => {
-  seek(DEFAULT_SEEK_TIME, videoRef);
+const seekForward = (
+  videoRef: React.MutableRefObject<VideoPlayer | null>,
+  requestSeek?: (source: SeekSource, targetMs: number) => void,
+) => {
+  seek(DEFAULT_SEEK_TIME, videoRef, requestSeek);
 };
-const seekBackward = (videoRef: React.MutableRefObject<VideoPlayer | null>) => {
-  seek(-DEFAULT_SEEK_TIME, videoRef);
+const seekBackward = (
+  videoRef: React.MutableRefObject<VideoPlayer | null>,
+  requestSeek?: (source: SeekSource, targetMs: number) => void,
+) => {
+  seek(-DEFAULT_SEEK_TIME, videoRef, requestSeek);
 };
 
 export let throttling = false;
@@ -59,7 +78,10 @@ export const throttleSeek = (func: () => void, delay: number) => {
   }
 };
 
-const PlaybackControls = ({ videoRef }: PlaybackControlsProps) => {
+const PlaybackControls = ({
+  videoRef,
+  requestSeek,
+}: PlaybackControlsProps) => {
   const playPauseRef = useRef<any>(null);
   const skipBackwardRef = useRef<React.ComponentRef<typeof TouchableOpacity>>(null);
   const skipForwardRef = useRef<React.ComponentRef<typeof TouchableOpacity>>(null);
@@ -81,7 +103,7 @@ const PlaybackControls = ({ videoRef }: PlaybackControlsProps) => {
   const handleSeekBackward = useCallback(() => {
     console.info('k_content_per: calling seekBackward');
     throttleSeek(() => {
-      seekBackward(videoRef);
+      seekBackward(videoRef, requestSeek);
     }, 500);
     try {
       if (isContentPersonalizationEnabled()) {
@@ -105,7 +127,7 @@ const PlaybackControls = ({ videoRef }: PlaybackControlsProps) => {
   const handleSeekForward = useCallback(() => {
     console.info('k_content_per: calling seekForward');
     throttleSeek(() => {
-      seekForward(videoRef);
+      seekForward(videoRef, requestSeek);
     }, 500);
     try {
       if (isContentPersonalizationEnabled()) {

@@ -97,6 +97,22 @@ jest.mock('@amazon-devices/react-native-w3cmedia', () => ({
     destroyVideoElements: jest.fn(),
     preBufferVideo: jest.fn(),
   })),
+  // The real base class carries these on its prototype. Calm Frames subclasses
+  // it in SafeMediaControlHandler, so the mock has to be a class, and its
+  // methods have to be prototype methods: instance fields would shadow the
+  // subclass overrides and a test would be measuring the mock.
+  KeplerMediaControlHandler: class KeplerMediaControlHandler {
+    async handlePlay() {}
+    async handlePause() {}
+    async handleStop() {}
+    async handleTogglePlayPause() {}
+    async handleStartOver() {}
+    async handleFastForward() {}
+    async handleRewind() {}
+    async handleSeek() {}
+    async handleSkipForward() {}
+    async handleSkipBackward() {}
+  },
 }));
 jest.mock('@amazon-devices/lottie-react-native', () => ({
   __esModule: true,
@@ -293,3 +309,9 @@ jest.mock('./src/calmframes/harnessConfig', () => ({
   ...jest.requireActual('./src/calmframes/harnessConfig'),
   readHarnessConfig: jest.fn().mockResolvedValue(null),
 }));
+
+// The bring-up beacon posts to the machine running a device session. A unit
+// test has no business opening a socket, and a fetch that outlives the test
+// that started it makes jest leave a worker behind.
+import { setBeaconEnabled } from './src/calmframes/timingLog';
+setBeaconEnabled(false);
