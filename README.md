@@ -404,6 +404,30 @@ python -m flashmap check VIDEO --profile wcag
 
 Exit codes: `0` below the thresholds, `1` over them, `2` flashmap could not tell. A caller that treats `2` as a pass has a hole in it. The private key never enters the repository.
 
+### The report page
+
+```sh
+python -m flashmap report VIDEO_OR_MAP --out report.html \
+    --map broadcast=BROADCAST_MAP.json \
+    --title "Some title" --license-csv media/LICENSES.csv
+```
+
+One HTML file for one title: the flash timeline, every span that went over the thresholds, what the player hides on each of the three household presets, the licence line and the hashes. It opens with the network off. There is no sibling asset, the CSS is inline and every picture is a PNG embedded as a data URI, so the file can be mailed to somebody as it is.
+
+**It never shows a frame of the film.** There is no still, no poster and no thumbnail anywhere in it. The timeline is drawn from the numbers in the map and holds no picture data from the title at all, and the report says so on its own first screen.
+
+The timeline is drawn so it cannot be a hazard of its own. Nothing thinner than eight pixels is drawn and nothing sits closer than eight pixels to its neighbour, and a lane never draws more than five bars, which is the regular pattern criterion the broadcast profile measures. A title with fifty spans has its neighbouring spans joined, closest first, until five bars are left, so a bar can cover calm time as well as flagged time. Every lane that was drawn coarser than the numbers says so in a line under it, and the tables carry the exact milliseconds.
+
+Every picture the report draws goes through flashmap itself, under both profiles, in `flashmap/tests/test_report.py`. It has two negative controls, because without them a green run would prove nothing: a file flashing at 10 Hz, which the WCAG profile refuses, and a full frame of forty stripe pairs, which the broadcast profile refuses and the WCAG profile passes.
+
+A judge who would rather not use a terminal can run the same thing from a page:
+
+```sh
+python -m pipeline.upload_server            # http://127.0.0.1:8765
+```
+
+Drop in a clip, get the report back. It runs on this machine only. The clip is measured by the pipeline's own analyzer door and deleted before the answer is sent, it is never played and there is no route that serves it back. **Nothing is deployed.** Anything that would reach AWS waits behind the same two locks as `make deploy`, and neither has ever been open here.
+
 ### The GitHub Action
 
 Copy [`flashmap/examples/flash-check.yml`](flashmap/examples/flash-check.yml) into `.github/workflows/`. Every pull request that adds or changes an image or video is measured, and the job fails if the file goes over the general or red flash thresholds. The map format is [`docs/SIDECAR_SPEC.md`](docs/SIDECAR_SPEC.md).

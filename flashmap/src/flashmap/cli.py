@@ -1,12 +1,13 @@
 """The `python -m flashmap` command line.
 
-Four subcommands, as in docs/BUILD_PROMPT.md 0.4:
+The four in docs/BUILD_PROMPT.md 0.4, and `report`:
 
     python -m flashmap keygen  --out team_key
     python -m flashmap analyze VIDEO --profile wcag --out MAP.json --diag 55 --distance-ft 8 \
         --key team_key.pem
     python -m flashmap verify  MAP.json VIDEO --pub team_key.pub.pem
     python -m flashmap check   VIDEO [VIDEO ...] --profile wcag
+    python -m flashmap report  VIDEO_OR_MAP --out report.html
 
 Exit codes: 0 means the content is below the thresholds or the map verified. 1 means it is not.
 2 means flashmap could not tell, which callers must treat as a failure too.
@@ -24,6 +25,7 @@ from .analyze import AnalysisResult, analyze_file
 from .decode import ColorPolicy, UnsupportedInput
 from .picture import CarriedPicture, LetterboxSettings
 from .profiles import PROFILES, get_profile
+from .report import add_report_arguments, run_report
 from .room import RoomSetting
 from .sidecar import VerificationError, build_map, load_map, sign_map, verify_map, write_map
 from .signing import generate_keypair, load_private_key
@@ -333,6 +335,12 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--json", default=None, help="also write the map of the last file here")
     _add_common(check)
     check.set_defaults(func=cmd_check)
+
+    report = subparsers.add_parser(
+        "report", help="write one self-contained HTML report for one title"
+    )
+    add_report_arguments(report)
+    report.set_defaults(func=run_report)
     return parser
 
 

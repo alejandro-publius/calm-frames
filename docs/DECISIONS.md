@@ -645,3 +645,92 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   to `useChimeCue` in `app/src/screens/PlayerScreen.tsx` beside the existing
   `useFlashGuard` call, with `chimeEnabled` carried through the guarded route
   parameters in `app/src/components/navigation/types.tsx`.
+
+## 2026-09-17, Feature D: the report page
+
+- **Decision:** the report is one HTML file with every picture inlined as a
+  PNG data URI, and no SVG.
+  **Why:** self contained had to mean a file somebody can mail. Inline SVG
+  would also have been self contained, but the pictures have to be run through
+  flashmap, and flashmap measures pixels. Drawing an SVG for the page and
+  rasterising a twin of it for the check would mean the bytes that were
+  measured were not the bytes that shipped, which is the kind of gap this
+  project keeps finding in other people's work. A PNG is measured exactly as
+  it is read.
+  **Cost:** a PNG writer had to be written, because flashmap's three
+  dependencies do not include an imaging library and adding one to an analyzer
+  studios install for one job is a poor trade for thirty lines of format.
+  `flashmap/src/flashmap/pngout.py` writes the plainest truecolour PNG there
+  is.
+
+- **Decision:** no text and no tick marks inside any picture. The labels and
+  the time axis are HTML around them.
+  **Why:** three reasons that all point the same way. Text in a raster is not
+  readable by a screen reader and does not scale. Hairlines for ticks are the
+  beginning of the pattern the drawing is trying not to be. And a picture made
+  only of solid blocks is one whose colours can be asserted, which is how
+  `test_a_lane_holds_no_colour_but_the_palette` can say no frame of the film
+  ever leaked in.
+
+- **Decision:** a lane draws at most five bars, and when a title has more
+  spans than that the closest neighbours are joined until five are left.
+  **Why:** the cap is not ours. It is the regular pattern criterion in the
+  broadcast profile, from ITU-R BT.1702-3 Attachment 1 to Annex 1, already
+  quoted in docs/SPEC_SOURCES.md section 8: more than five light and dark
+  pairs. Five bars is at most five pairs, so a lane cannot reach the
+  criterion whatever its area, and no number had to be invented or
+  re-derived. The first version collapsed everything over the cap into one
+  bar from the first span to the last, which was safe and useless: Big Buck
+  Bunny has fifty three spans between 19 s and 590 s of a ten minute film, and
+  it drew one bar across almost the whole lane. Joining the closest pairs
+  instead keeps the bars where the flashes are.
+  **Cost:** a bar now covers calm time as well as flagged time. Every lane
+  that was drawn coarser than the numbers prints a line saying so, and the
+  tables underneath carry every span to the millisecond.
+
+- **Decision:** every picture in the report is checked under both the wcag and
+  the broadcast profile, with a negative control for each.
+  **Why:** eval/brand_assets_check.py learned not to invent a worst case that
+  cannot happen, and that lesson holds here: a lane is a static PNG in a
+  static page, it never follows another picture, so it is analysed alone and
+  held for two seconds and nothing is cut against anything. But a still cannot
+  flash, so the WCAG profile passes any drawing this module could make. It was
+  checked: a full frame of forty stripe pairs passes `--profile wcag` and
+  fails `--profile broadcast`. Checking only against wcag would have been a
+  check that cannot fail.
+  **Cost:** two negative controls to maintain instead of one, and a note in
+  the test file saying where the picture check stops. The padded still the
+  check builds puts a lane in about a fourteenth of the frame, which is under
+  the pattern rule's area limit, so the image check is not what keeps the
+  timeline safe. The block cap is, and its tests are the ones that go red when
+  it comes off.
+
+- **Decision:** a preset whose maps were not all supplied is reported as a
+  lower bound, by name, and never as a measured figure.
+  **Why:** the Broadcast and Extra cautious presets union the wcag and
+  broadcast maps. Given only a wcag map, the honest answer is "at least this
+  much", and the row says which map is missing.
+  **Cost:** a report made from one map has two rows that are floors rather
+  than figures. `python -m pipeline.upload_server` always analyses both, so
+  the page a judge uses has neither.
+
+- **Decision:** the upload page checks the two AWS locks itself rather than
+  calling scripts/aws_guard.sh.
+  **Why:** the shell guard's only actions are deploy, destroy, diff and an ECR
+  push. There is no way to ask it a question without picking one of those, and
+  a server that has to run a real CDK action to find out whether it is allowed
+  to is not a lock. So the check is a second copy.
+  **Cost:** a second copy of a lock is a second chance to make the mistake
+  that had one of these open for a day, where an unanchored match read the row
+  in docs/STATUS.md that describes the line as the line itself.
+  pipeline/tests/test_upload_server.py holds the two together: it pulls
+  STATUS_PATTERN out of the shell script and runs the same five strings
+  through grep and through this module, and fails if they disagree.
+
+- **Decision:** the uploaded clip is deleted before the response is written,
+  not after.
+  **Why:** it was written the other way first and the test caught it as a
+  race: a caller holding the report could still find the clip on disk. An
+  uploaded clip may well be a hazard file, which is the reason somebody
+  uploads it.
+  **Cost:** none. The report is built in memory either way.
