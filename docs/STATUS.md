@@ -10,8 +10,7 @@ three are fixed. The python job never installed matplotlib, so
 `eval/tests/test_labeling_plots.py` failed to import and took the whole job down
 at collection, which is worse than one red test because it hid the other two
 behind it. Under that, a scheduler property was failing for real. And the new
-hardening job stays red until a full mutation report is committed, which is
-running now. The screening sweep and the ingest chain that were still going have
+hardening job was red until a full mutation report existed, which it now does. The screening sweep and the ingest chain that were still going have
 finished; the re-verify took the pool to **21 titles verified**, all 21 with a row
 in `media/LICENSES.csv`.
 
@@ -26,10 +25,10 @@ the property harness was answering a seek that lands inside a stall with a
 position report a stalled player never sends, which is what the 75 ms failure
 was. Both are fixed, both were seen red first, and the estimate error across
 every case probed is now 0.00 ms rather than merely inside its bound. The full
-mutation gate ran for the first time: 57 mutations, 54 killed. Of the three that
-lived, one was a real gap in the property tests and is closed, one is redundancy
-and is recorded as equivalent with the experiment that proves it, and one was
-already known equivalent.
+mutation gate ran for the first time and then again after the fixes: 57
+mutations, 55 killed, and the 2 that live are both declared equivalent with
+their reasoning in the file. The third survivor of the first run was a real gap
+in the property tests and is closed.
 
 ## 1. The head-start kits are still not here, asked for twice
 
@@ -135,7 +134,7 @@ and backgrounding never happened, so `background_covers_seen` is 0.
 
 ## 5. What is not done
 
-- **No cover lead time on real hardware**, and none is possible until the stick arrives. There is now a software-level figure in `results/gate1_software_vvd.json`: 49 trials, 48 covered in time, median lead 488 ms, and one cover that went on 86 ms late because the JavaScript thread paused for about a third of a second. It is labelled as software-level: it cannot see the React commit, the compositor, scan-out or the panel, so it is an upper bound on how well the real thing can do, never a prediction of it.
+- **No cover lead time on real hardware**, and none is possible until the stick arrives. There is now a software-level figure in `results/gate1_software_vvd.json`, and the strict reading is the one to quote: **48 of the 55 trials started covered in time, 0.873**, Wilson 95% 0.760 to 0.937. Six of the seven that did not were dropped for producing no usable evidence and one cover went on 86 ms late, because the JavaScript thread paused for about a third of a second. Counting only the 49 trials that could be measured gives 48 of 49, 0.980, which is the friendlier number and is why both are published. Median lead 488 ms. It is labelled as software-level: it cannot see the React commit, the compositor, scan-out or the panel, so it is an upper bound on how well the real thing can do, never a prediction of it.
 - **21 titles pass verify, and only 7 of them prove anything.** Every one of the
   21 has a row in `media/LICENSES.csv`. But 14 have `covered_ms = 0` and no
   flagged segment at all: the analyzer looked and found nothing over the
