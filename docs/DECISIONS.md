@@ -1047,3 +1047,99 @@ safety wording, so it is written down rather than taken.
 - **One edit outside this lane.** `ProfilePicker` gained a required prop, so
   `KidHomeScreen.tsx` had to pass it. That call site is the only change in the
   file: three lines, no behaviour of its own.
+
+## 2026-09-18: a timeline bar that cannot be a bar, and the page a reader sees
+
+- **Decision:** the report's flash timeline keeps its cap of five bars a lane and
+  is now also drawn under the luminance difference that makes a light and dark
+  pair at all. The three colours a lane may hold are the app's own COVER for the
+  track, SURFACE for a general block and BACKGROUND for a red one. Through
+  `color.bt1886_nits`, the curve the broadcast profile measures with, they are
+  0.00, 4.45 and 8.47 cd/m2, so the widest step a lane can hold is 8.47 cd/m2
+  against the 20 cd/m2 Guideline 1 flash difference that BT.1702-3 Attachment 1
+  reuses for its bar to bar condition. That is 11.53 cd/m2 of headroom, and a
+  lane spends 42% of the difference. The saffron fill it replaces sat at
+  82.20 cd/m2 on a 4.45 cd/m2 ground, a step of 77.75 cd/m2, which is nearly
+  four flash differences.
+  **Why:** the cap was doing all the work, and it is one number away from being
+  wrong: at six blocks a lane can show six pairs, which is the first count the
+  attachment can fail. The two limits now fail in different directions, so
+  neither has to be right on its own. A bar that cannot reach the bar to bar
+  difference is not counted as a bar at any count, at any width and at any area.
+  That is asked of `pattern.scan_bars` itself in `TestNoStepInALaneCanBeABar`,
+  on a hand built lane of two hundred blocks that `plan_blocks` would never
+  draw, and the same scan over a lane sized stripe pattern counts 60 bars, so
+  the test is not one that cannot fail.
+  **Cost:** contrast, measured rather than felt. Against the track a red block
+  is 2.27:1 and a general block 1.75:1, where the saffron fill was 5.81:1 on the
+  old lane ground. The ceiling is low by construction: the brightest grey that
+  still stays under the flash difference above black is 19.66 cd/m2, which is
+  3.39:1, so nothing drawn under this rule can be bright. One alternative was
+  measured and not taken: a single fill of SURFACE_FOCUSED at 14.42 cd/m2 is
+  3.00:1, which is the 3:1 non-text floor the app's palette is built to, but it
+  spends 72% of the difference instead of 42% and leaves the two kinds of block
+  nothing but their height to tell them apart. The report's own line is that the
+  picture is a picture and the table is the truth, and the table carries every
+  span to the millisecond, so the headroom was worth more than the extra three
+  quarters of a contrast point. The kinds are told apart by shape before colour
+  and the key shows each fill sitting on a piece of track.
+
+- **Decision:** no block reaches the top or bottom edge of its lane, and the
+  lane's outline on the page is drawn in a lane colour rather than the page's
+  border colour.
+  **Why:** both were found by running the new page check, not by thinking about
+  it. A red block is drawn in the page's own ground colour, and on a worst case
+  page forty spans joined into five wide blocks that ran to the lane's edges, so
+  the lane read as the page with a few black notches cut in it. And the lane's
+  1 px `var(--border)` outline is 55.18 cd/m2 around a 0.00 cd/m2 track, a step
+  of 55 cd/m2: the check counted three bars in every lane on the page and it was
+  right to.
+  **Cost:** the lane's edge on the page is a dim line now rather than a bright
+  one, and one more pixel of each block is track.
+
+- **Decision:** `eval/report_page_check.py` renders the whole report page in
+  headless Chrome at 1280 px wide, cuts it into 1280x720 display frames, holds
+  each for two seconds and runs the analyzer over it under the `broadcast`
+  profile, which is the one that carries the regular pattern rule. It runs in
+  the ui-flashmap CI job beside eval/brand_assets_check.py, and it carries its
+  own negative control: the same page with a twelve pair stripe pattern in place
+  of each lane, which it refuses.
+  **Why:** the lanes were checked one picture at a time, padded into an analysis
+  frame where a lane is about a fourteenth of the picture, and the test file
+  said out loud that the picture check therefore does not cover the stripe
+  hazard. A reader does not see a padded lane. A reader sees the page, with the
+  lanes at the size the layout gives them and the text around them, and that is
+  what a hazard would arrive in.
+  **Cost:** about 70 seconds of CI on the ubuntu runner, three browser renders
+  and eighteen analyzer runs, and a dependency on Chrome being on the runner.
+  The GitHub ubuntu image ships Google Chrome and the script also takes
+  Chromium, a `CALM_FRAMES_CHROME` path, or an exit code 2 saying it found
+  neither.
+
+- **Decision:** the page's own pattern verdict is printed on every run and is not
+  what the check asserts on. What it asserts is the timeline: the pattern rule's
+  own bar scanner has to find nothing at all inside a lane, at the size the page
+  draws it.
+  **Why:** the report page fails the regular pattern rule, and the cause is its
+  text. Cream on teal is 160.77 cd/m2 against 8.47 cd/m2, so every glyph edge is
+  a Guideline 1 step and a line of text crossed by a scan line is a row of them.
+  Nine display frames out of nine hold a pattern finding at 16 to 25 pairs over
+  44% to 64% of the frame, against a 25% area limit, and analysing more finely
+  sharpens it rather than rescuing it: the same nine frames at analysis widths
+  384, 640 and 1280 give 37 to 77, 71 to 152 and 82 to 176 pairs, over as much
+  as 93% of the frame. That is not something the
+  report can design away: readable text needs 4.5:1, and at an SDR peak of
+  200 cd/m2 no pair of colours at that ratio has its difference under 20 cd/m2
+  or its darker state above 160 cd/m2, so any page a person can read holds those
+  steps at every glyph. BT.1702-3 asks for the guidelines where patterns are
+  "clearly discernible" and a paragraph is not a discernible stripe pattern, but
+  the attachment puts no number on that and flashmap does not invent one.
+  **Cost:** this is the first time anything in this repo has put text in front of
+  the pattern rule. app/tools/ui_flashmap.mjs runs `--profile wcag`, which has no
+  pattern rule, so the app's own screens have never been asked. The same finding
+  is waiting there and in any film with credits or subtitles, and the number the
+  pattern rule reports on such a title is a false positive nobody has counted
+  yet. The check prints the page's numbers every run so that a change in them is
+  visible in the log, and the second half of its negative control is that the
+  striped page has to measure more pattern area on the whole page than the real
+  one does, which keeps the analyzer run from becoming decoration.

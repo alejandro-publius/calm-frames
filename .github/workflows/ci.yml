@@ -118,6 +118,17 @@ jobs:
         # flashes.
         run: python eval/brand_assets_check.py
 
+      - name: Check the report page as a reader sees it
+        # flashmap's report page draws a flash timeline. Its lanes are checked
+        # as pictures in flashmap/tests/test_report.py, which is not what a
+        # reader sees: a reader sees the page, lanes at layout size with text
+        # around them. This renders the whole page in the headless Chrome the
+        # runner already has, cuts it into 1280x720 display frames and runs the
+        # analyzer over each one under the broadcast profile, which is the one
+        # that carries the regular pattern rule. It carries its own negative
+        # control, a page whose timeline is a stripe pattern, and refuses it.
+        run: python eval/report_page_check.py
+
   hardening:
     name: Mutation gate, property tests and the map fuzz corpus
     runs-on: ubuntu-latest

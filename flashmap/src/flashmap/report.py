@@ -20,7 +20,7 @@ frame data at all.
 **The timeline must not itself be a hazard.** A title with two hundred short
 segments drawn one thin bright bar each is a fine high contrast stripe
 pattern, which is a photosensitive hazard of a different kind than the one
-this project measures. So the drawing has two limits:
+this project measures. So the drawing has three limits:
 
 - nothing narrower than ``MIN_BLOCK_PX`` is drawn, and no two blocks sit closer
   than ``MIN_GAP_PX``: blocks that would fall closer are drawn as one. Both are
@@ -29,15 +29,26 @@ this project measures. So the drawing has two limits:
   closest neighbours are joined until it holds no more. That one is not ours:
   it is the regular pattern criterion the broadcast profile measures, more
   than five light and dark pairs, so a lane cannot reach the criterion however
-  many spans a title has.
+  many spans a title has;
+- every bar is drawn below the luminance difference that makes a light and
+  dark pair at all, so a bar boundary is never a bar boundary. The three
+  colours a lane may hold are ``LANE_GROUND``, ``LANE_GENERAL`` and
+  ``LANE_RED``, and the arithmetic that picked them is beside them below.
 
-Both make the picture say less than the numbers do, so both are named on the
-page next to the lane they changed, and the tables underneath carry the exact
-milliseconds. The picture is a picture. The table is the truth.
+The third is there because the second is one number away from being wrong.
+The cap is the whole of the argument today: raise it by one and a lane can
+show six pairs. A bar that cannot reach the bar to bar difference cannot be
+counted as a bar however many of them there are, so the two limits fail in
+different directions and neither has to be right on its own.
+
+The first two make the picture say less than the numbers do, so both are named
+on the page next to the lane they changed, and the tables underneath carry the
+exact milliseconds. The picture is a picture. The table is the truth.
 
 The palette is the app's own, from app/src/calmframes/calmStyles.ts. Saffron is
-a fill here and never a label, because it is 4.47:1 on the teal ground and the
-text floor is 4.5:1.
+an edge here and never a label, because it is 4.47:1 on the teal ground and the
+text floor is 4.5:1. It is not a lane fill any more: at 82 cd/m2 on a 4 cd/m2
+ground it was 78 cd/m2 of step, which is four times a flash difference.
 """
 
 from __future__ import annotations
@@ -57,6 +68,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 from . import __version__
+from .color import LUMA_B, LUMA_G, LUMA_R, bt1886_nits
 from .pngout import encode_png
 
 __all__ = [
@@ -64,10 +76,13 @@ __all__ = [
     "Preset",
     "Span",
     "ReportDocument",
+    "bar_difference_nits",
     "build_report",
     "cover_intervals",
+    "lane_nits",
     "plan_blocks",
     "render_lane_png",
+    "widest_lane_step_nits",
     "write_report",
 ]
 
@@ -78,13 +93,14 @@ __all__ = [
 # ---------------------------------------------------------------------------
 
 BACKGROUND = "#1F4D5C"  # teal ground, every Calm Frames screen sits on it
-SURFACE = "#173B47"  # a card on the ground: the calm part of a lane
+SURFACE = "#173B47"  # a card on the ground
 BORDER = "#66A0B4"
-FOCUS_RING = "#E6A957"  # saffron: rings and fills only, never a label
-ACCENT_DARK = "#B87A2C"  # dark saffron: edges and fills only, carries nothing
+FOCUS_RING = "#E6A957"  # saffron: rings and edges only, never a label
+ACCENT_DARK = "#B87A2C"  # dark saffron: edges only, carries nothing
 TEXT = "#F3E8D3"  # cream, 7.60:1 on teal
 TEXT_DIM = "#CFE0DC"
 INK = "#17323C"  # text on a light surface
+COVER = "#000000"  # the cover itself, and the lane's own track
 
 # ---------------------------------------------------------------------------
 # Drawing limits. Ours, not a spec's. See the module docstring.
@@ -112,9 +128,65 @@ MIN_GAP_PX = 8
 # and WCAG 2.2 SC 2.3.1 has no pattern rule at all.
 MAX_BLOCKS_PER_LANE = 5
 
+# Not ours either, and the reason the cap above is not the only thing holding
+# the line. A bar is only a bar when the step to it reaches the Guideline 1
+# flash difference: for SDR that is 20 cd/m2 with the darker state below
+# 160 cd/m2 (docs/SPEC_SOURCES.md section 5, which section 8 reuses because the
+# attachment gives the bar to bar condition no number of its own). Every colour
+# a lane may hold is picked so the widest step inside it is well under that
+# difference. pattern.scan_bars then counts no boundary anywhere in a lane, so
+# no number of blocks can make a light and dark pair, cap or no cap.
+#
+# The arithmetic, through color.bt1886_nits, the curve the broadcast profile
+# measures with: nits = peak * V ** 2.4, with V the luma signal normalised black
+# 0 to white 1 and peak the profile's own 200 cd/m2 assumed SDR white. V here is
+# the BT.709 luma of the sRGB bytes, (0.2126 R + 0.7152 G + 0.0722 B) / 255,
+# which is what the decoder hands back for a picture 720 lines or taller:
+#
+#   LANE_GROUND   #000000   V = 0.0000  ->  200 * 0.0000 ** 2.4 =  0.00 cd/m2
+#   LANE_GENERAL  #173B47   V = 0.2048  ->  200 * 0.2048 ** 2.4 =  4.45 cd/m2
+#   LANE_RED      #1F4D5C   V = 0.2679  ->  200 * 0.2679 ** 2.4 =  8.47 cd/m2
+#
+#   widest step a lane can hold   8.47 - 0.00  =   8.47 cd/m2
+#   the Guideline 1 difference                     20.00 cd/m2
+#   headroom                                       11.53 cd/m2
+#
+# so a lane spends 42% of the difference that would make one of its edges a bar
+# boundary. A picture under 720 lines decodes through BT.601, whose coefficients
+# put the same three colours 7.51 cd/m2 apart, so the number above is the worse
+# of the two. None of this is the measurement: flashmap/tests/test_report.py
+# puts the real pixels of a lane through color.bt1886_nits and then through
+# pattern.scan_bars with the profile's own numbers, and eval/report_page_check.py
+# puts the whole rendered page through the analyzer at display size.
+#
+# What it costs, measured the same way. Under that ceiling the palette buys
+# 2.27:1 for a red block and 1.75:1 for a general block against the track, where
+# the saffron fill this replaced was 5.81:1. No drawing under this rule can be
+# bright: the brightest grey that still stays under the difference above black
+# is 19.66 cd/m2, which is 3.39:1, and that is the whole ceiling. The dark end
+# of the curve is where the palette buys the most visible step per cd/m2, which
+# is why the track is the app's own COVER black rather than a card colour.
+# One alternative was measured and not taken: one fill of SURFACE_FOCUSED at
+# 14.42 cd/m2 is 3.00:1, the non-text floor the app's palette is built to, but
+# it spends 72% of the difference rather than 42% and leaves the two kinds of
+# block nothing but their height to tell them apart. So the kinds are told apart
+# by shape before colour, the lane keeps an outline on the page, and every span
+# is in the table underneath to the millisecond.
+LANE_GROUND = COVER
+LANE_GENERAL = SURFACE
+LANE_RED = BACKGROUND
+
 # A general block is drawn short and a red block full height, so the two are
 # told apart by shape and not by colour alone.
 GENERAL_BLOCK_INSET_PX = 9
+
+# A hairline of track above and below every block, so no block ever runs to the
+# edge of the lane. A red block is drawn in the page's own ground colour, and one
+# that reached the lane's edge would join the page behind it and read as a hole
+# rather than as a mark. This was found on a real drawing: forty spans joined
+# into five wide red blocks left a lane that looked like the page with a few
+# black notches in it.
+BLOCK_EDGE_PX = 1
 
 RED = "red"
 GENERAL = "general"
@@ -410,6 +482,44 @@ def _rgb(colour: str) -> tuple[int, int, int]:
     return int(value[0:2], 16), int(value[2:4], 16), int(value[4:6], 16)
 
 
+def lane_nits(colour: str) -> float:
+    """Screen luminance of one lane colour, through the profile's own curve.
+
+    The peak white and the curve are read off the broadcast profile rather than
+    written here, so this cannot drift from what the analyzer measures with. The
+    luma weights are color.LUMA_*, quoted in docs/SPEC_SOURCES.md section 3.
+    """
+    from .profiles import PROFILES
+
+    peak = PROFILES["broadcast"].peak_nits
+    if peak is None:  # pragma: no cover - the broadcast profile carries one
+        raise ValueError("the broadcast profile no longer has a peak white to measure with")
+    red, green, blue = _rgb(colour)
+    level = (LUMA_R * red + LUMA_G * green + LUMA_B * blue) / 255.0
+    return float(bt1886_nits(np.array([level], dtype=np.float32), peak).item())
+
+
+def widest_lane_step_nits() -> float:
+    """The largest luminance step a lane can hold, in cd/m2.
+
+    A lane is three colours and nothing else, so the widest step it can put in
+    front of the pattern rule is the spread of those three.
+    """
+    values = [lane_nits(colour) for colour in (LANE_GROUND, LANE_GENERAL, LANE_RED)]
+    return max(values) - min(values)
+
+
+def bar_difference_nits() -> float:
+    """The luminance difference that makes a light and dark pair, in cd/m2.
+
+    Guideline 1's flash difference, which Attachment 1 reuses for the bar to bar
+    condition. Read off the broadcast profile, never written down here.
+    """
+    from .profiles import PROFILES
+
+    return float(PROFILES["broadcast"].general.min_delta)
+
+
 def render_lane(plan: LanePlan, width_px: int = LANE_WIDTH_PX) -> NDArray[np.uint8]:
     """Draw one lane: a calm band with the flagged blocks on it.
 
@@ -418,17 +528,18 @@ def render_lane(plan: LanePlan, width_px: int = LANE_WIDTH_PX) -> NDArray[np.uin
     reader can read and a television can scale.
     """
     lane = np.zeros((LANE_HEIGHT_PX, width_px, 3), dtype=np.uint8)
-    lane[:, :] = _rgb(SURFACE)
+    lane[:, :] = _rgb(LANE_GROUND)
     for block in plan.blocks:
         left = max(0, min(width_px, block.left))
         right = max(0, min(width_px, block.right))
         if right <= left:
             continue
         if block.reason == RED:
-            lane[:, left:right] = _rgb(ACCENT_DARK)
+            inset = BLOCK_EDGE_PX
+            lane[inset : LANE_HEIGHT_PX - inset, left:right] = _rgb(LANE_RED)
         else:
             inset = GENERAL_BLOCK_INSET_PX
-            lane[inset : LANE_HEIGHT_PX - inset, left:right] = _rgb(FOCUS_RING)
+            lane[inset : LANE_HEIGHT_PX - inset, left:right] = _rgb(LANE_GENERAL)
     return lane
 
 
@@ -513,6 +624,9 @@ _STYLE = f"""
   --text: {TEXT};
   --text-dim: {TEXT_DIM};
   --ink: {INK};
+  --lane-ground: {LANE_GROUND};
+  --lane-general: {LANE_GENERAL};
+  --lane-red: {LANE_RED};
 }}
 * {{ box-sizing: border-box; }}
 body {{
@@ -550,8 +664,12 @@ th {{ background: var(--surface); }}
              align-items: center; margin: 10px 0; }}
 .lane-row .name {{ font-weight: 600; }}
 .lane-row .name small {{ display: block; font-weight: 400; color: var(--text-dim); }}
+/* The lane's own outline is part of the lane a reader sees, so it is drawn in a
+   lane colour and not in the page's border colour. A 55 cd/m2 line around a
+   0 cd/m2 track is a 55 cd/m2 step, which is a bar boundary, and
+   eval/report_page_check.py found exactly that when this was var(--border). */
 .lane-row img {{ width: 100%; height: auto; display: block; border-radius: 4px;
-                 border: 1px solid var(--border); }}
+                 border: 1px solid var(--lane-general); }}
 .axis {{ display: flex; justify-content: space-between; color: var(--text-dim);
          font-size: 13px; margin-left: 234px; font-variant-numeric: tabular-nums; }}
 .key {{ display: flex; flex-wrap: wrap; gap: 20px; margin: 16px 0 4px;
@@ -656,15 +774,29 @@ def build_report(
         "<p>Left is the start of the film and right is the end. Every lane is the whole "
         "film at the same scale.</p>"
     )
+    # Each swatch is a mark on a piece of track, which is what a lane shows: the
+    # fill inside, the track colour around it, and a thin light outline so the
+    # whole swatch can be found on the page. The fills are dim on purpose (see
+    # the arithmetic in this module) and on the teal ground alone two of the
+    # three would be all but invisible.
+    swatch = f"border:3px solid {LANE_GROUND};outline:1px solid {BORDER}"
     parts.append(
         "<div class='key'>"
-        f"<div><span class='swatch' style='background:{FOCUS_RING};height:8px'></span>"
-        "general flash, drawn short</div>"
-        f"<div><span class='swatch' style='background:{ACCENT_DARK}'></span>"
-        "red flash, drawn full height</div>"
-        f"<div><span class='swatch' style='background:{SURFACE};border:1px solid {BORDER}'>"
-        "</span>nothing flagged</div>"
+        f"<div><span class='swatch' style='background:{LANE_GENERAL};height:6px;{swatch}'>"
+        "</span>general flash, drawn short</div>"
+        f"<div><span class='swatch' style='background:{LANE_RED};{swatch}'></span>"
+        "red flash, drawn tall</div>"
+        f"<div><span class='swatch' style='background:{LANE_GROUND};{swatch}'></span>"
+        "nothing flagged</div>"
         "</div>"
+    )
+    parts.append(
+        f"<p class='note' style='margin-left:0'>The bars are drawn dim on purpose. The widest "
+        f"luminance step a lane can hold is {widest_lane_step_nits():.2f} cd/m2, against the "
+        f"{bar_difference_nits():.0f} cd/m2 difference that makes a light and dark pair in "
+        "ITU-R BT.1702-3, so no number of bars in a lane can be a regular pattern. That is why "
+        "a bar is a quiet mark on a dark track rather than a bright block, and why the tables "
+        "below carry every span rather than the picture.</p>"
     )
 
     primary_plan = plan_blocks(spans[primary], duration_ms)

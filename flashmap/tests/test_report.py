@@ -28,6 +28,15 @@ five light and dark pairs, which is the hazard a drawn timeline could really
 hold: two hundred segments drawn one thin bright bar each is a fine high
 contrast pattern.
 
+Neither profile is what keeps the timeline safe, and this file says where each
+guard stops. The block cap keeps a lane under the attachment's count. The lane
+colours keep every step in a lane under the luminance difference that makes a
+light and dark pair at all, which is ``TestNoStepInALaneCanBeABar`` below and
+is the one that holds however many blocks are drawn. And the page a reader
+actually sees, lanes at layout size with the text around them, is measured by
+eval/report_page_check.py, which renders it in a browser and runs the analyzer
+over display sized frames of it.
+
 There are two negative controls, one for each. A file that flashes at 10 Hz,
 which ``wcag`` refuses. A full frame of forty stripe pairs, which
 ``broadcast`` refuses and ``wcag`` passes. Without both, a green run here
@@ -60,13 +69,18 @@ from flashmap.report import (
     MIN_BLOCK_PX,
     MIN_GAP_PX,
     PRESETS,
+    Block,
+    LanePlan,
     ReportDocument,
     Span,
+    bar_difference_nits,
     build_report,
     cover_intervals,
+    lane_nits,
     looks_like_a_map,
     plan_blocks,
     render_lane,
+    widest_lane_step_nits,
 )
 
 REPO = Path(__file__).resolve().parents[2]
@@ -211,9 +225,9 @@ class TestNoFrameOfTheFilm:
         plan = plan_blocks([Span(1_000, 2_000), Span(5_000, 6_000, "red")], 10_000.0)
         lane = render_lane(plan)
         allowed = {
-            report_module._rgb(report_module.SURFACE),
-            report_module._rgb(report_module.FOCUS_RING),
-            report_module._rgb(report_module.ACCENT_DARK),
+            report_module._rgb(report_module.LANE_GROUND),
+            report_module._rgb(report_module.LANE_GENERAL),
+            report_module._rgb(report_module.LANE_RED),
         }
         used = {tuple(int(v) for v in colour) for colour in np.unique(lane.reshape(-1, 3), axis=0)}
         assert used <= allowed, f"a lane holds colours that are not the palette: {used - allowed}"
@@ -226,7 +240,7 @@ class TestNoFrameOfTheFilm:
 
 def blocks_of(lane: np.ndarray) -> list[tuple[int, int]]:
     """Read the drawn blocks back out of the pixels, by column."""
-    ground = np.array(report_module._rgb(report_module.SURFACE), dtype=np.uint8)
+    ground = np.array(report_module._rgb(report_module.LANE_GROUND), dtype=np.uint8)
     painted = (lane != ground).any(axis=2).any(axis=0)
     runs: list[tuple[int, int]] = []
     start = None
@@ -358,6 +372,187 @@ class TestTheTimelineIsNotAStripePattern:
         left, right = drawn[0]
         assert left <= int(10_000 / 30_000 * report_module.LANE_WIDTH_PX)
         assert right >= int(20_000 / 30_000 * report_module.LANE_WIDTH_PX)
+
+
+# ---------------------------------------------------------------------------
+# A bar that cannot be a bar
+# ---------------------------------------------------------------------------
+
+
+def nits_of(picture: np.ndarray) -> np.ndarray:
+    """A drawn picture in cd/m2, the way the broadcast profile measures one.
+
+    BT.709 luma of the sRGB bytes, then color.bt1886_nits at the profile's own
+    peak white. The analyzer reaches the same place through the decoder's luma
+    plane; this starts from the pixels, because what is being asked about here
+    is the drawing rather than a re-encode of it.
+    """
+    from flashmap.color import LUMA_B, LUMA_G, LUMA_R, bt1886_nits
+    from flashmap.profiles import PROFILES
+
+    peak = PROFILES["broadcast"].peak_nits
+    assert peak is not None
+    weights = np.array([LUMA_R, LUMA_G, LUMA_B], dtype=np.float32)
+    level = (picture.astype(np.float32) * weights).sum(axis=-1) / np.float32(255.0)
+    return np.asarray(bt1886_nits(level, peak))
+
+
+def bars_in(picture: np.ndarray) -> int:
+    """The most bars the pattern rule's own scanner finds on any line of this.
+
+    `flashmap.pattern.scan_bars` is the rule's own bar counter, handed the
+    profile's own Guideline 1 numbers. Rows and columns both, because a lane is
+    a wide short picture and a bar boundary in it could run either way.
+    """
+    from flashmap.pattern import scan_bars
+    from flashmap.profiles import PROFILES
+
+    rule = PROFILES["broadcast"].general
+    values = nits_of(picture)
+    rows, _, _ = scan_bars(values, rule.min_delta, rule.dark_image_below)
+    columns, _, _ = scan_bars(values.T, rule.min_delta, rule.dark_image_below)
+    return max(int(rows.max()) if rows.size else 0, int(columns.max()) if columns.size else 0)
+
+
+RED = "red"
+GENERAL = "general"
+
+
+def a_lane_the_cap_would_never_allow(blocks: int = 200) -> LanePlan:
+    """A lane with forty times as many blocks as plan_blocks will ever draw.
+
+    Built by hand, past `plan_blocks`, because that is the point: this is the
+    lane the block cap exists to prevent, and the question is what the drawing
+    would be worth if the cap came off tomorrow.
+    """
+    width = report_module.LANE_WIDTH_PX
+    step = width // blocks
+    drawn = [
+        Block(index * step, index * step + max(1, step // 2), RED if index % 2 else GENERAL)
+        for index in range(blocks)
+    ]
+    return LanePlan(drawn, blocks, 0, 0, False)
+
+
+class TestNoStepInALaneCanBeABar:
+    """The limit the block cap is not.
+
+    The cap keeps a lane under the attachment's count of more than five light
+    and dark pairs. It is one number, and one number away from being wrong: at
+    six it stops working. This is the other half, and it fails in a different
+    direction. A light and dark pair only exists where the step between the two
+    levels reaches the Guideline 1 flash difference, so a lane drawn entirely
+    under that difference holds no pair at any count, at any width, at any area.
+    """
+
+    def test_the_widest_step_a_lane_can_hold_is_well_under_the_difference(self):
+        from flashmap.profiles import PROFILES
+
+        difference = PROFILES["broadcast"].general.min_delta
+        assert bar_difference_nits() == difference
+        step = widest_lane_step_nits()
+        assert step < difference / 2.0, (
+            f"a lane can hold a {step:.2f} cd/m2 step against a {difference:.0f} cd/m2 "
+            "difference, which is not the comfortable margin this was designed for"
+        )
+
+    def test_the_numbers_are_the_ones_the_drawing_was_designed_around(self):
+        """Written out, not read back from the module.
+
+        Every other test here reads the colours from flashmap.report, so on
+        their own they would follow them anywhere. This one pins them, so
+        brightening a lane is a red test and a decision somebody made on
+        purpose. The cd/m2 figures are the ones in the comment beside the
+        colours in flashmap/src/flashmap/report.py.
+        """
+        assert report_module.LANE_GROUND == "#000000"
+        assert report_module.LANE_GENERAL == "#173B47"
+        assert report_module.LANE_RED == "#1F4D5C"
+        assert round(lane_nits(report_module.LANE_GROUND), 2) == 0.00
+        assert round(lane_nits(report_module.LANE_GENERAL), 2) == 4.45
+        assert round(lane_nits(report_module.LANE_RED), 2) == 8.47
+        assert round(widest_lane_step_nits(), 2) == 8.47
+        assert bar_difference_nits() == 20.0
+
+    def test_the_rules_own_scanner_finds_no_bar_in_a_drawn_lane(self):
+        plan = plan_blocks(
+            [Span(1_000, 2_000), Span(5_000, 6_000, "red"), Span(8_000, 8_100)], 10_000.0
+        )
+        assert bars_in(render_lane(plan)) == 0
+
+    def test_it_finds_none_in_a_lane_the_cap_would_never_allow(self):
+        """Two hundred bars, alternating kinds, and still not one pair."""
+        lane = render_lane(a_lane_the_cap_would_never_allow())
+        drawn = blocks_of(lane)
+        assert len(drawn) > MAX_BLOCKS_PER_LANE * 10, (
+            "this test is worthless unless the lane it builds really is past the cap"
+        )
+        assert bars_in(lane) == 0, (
+            "a lane with two hundred blocks in it holds a light and dark pair, so the block "
+            "cap is the only thing keeping the timeline safe after all"
+        )
+
+    def test_the_scanner_does_find_the_bars_in_a_stripe_pattern(self):
+        """The negative control, and without it the two above say nothing.
+
+        They could mean the lane holds no bar, or they could mean this test's
+        scanner never finds one. The same scan over a lane sized stripe pattern
+        has to count bars, and plenty of them.
+        """
+        stripes = np.zeros((report_module.LANE_HEIGHT_PX, report_module.LANE_WIDTH_PX, 3),
+                           dtype=np.uint8)
+        for x in range(report_module.LANE_WIDTH_PX):
+            light = (x // 20) % 2 == 0
+            stripes[:, x] = report_module._rgb(
+                report_module.TEXT if light else report_module.INK
+            )
+        assert bars_in(stripes) > 2 * (MAX_BLOCKS_PER_LANE + 1), (
+            "the bar scanner cannot find a stripe pattern, so it cannot say anything about "
+            "a lane either"
+        )
+
+    def test_the_page_prints_the_step_it_measured(self, built: ReportDocument):
+        """The number on the page is computed, never typed."""
+        assert f"{widest_lane_step_nits():.2f} cd/m2" in built.html
+        assert f"{bar_difference_nits():.0f} cd/m2 difference" in built.html
+
+    def test_the_key_shows_the_colours_the_lane_actually_draws(self, built: ReportDocument):
+        """A key that named other colours would be a lie about the picture."""
+        for colour in (
+            report_module.LANE_GROUND,
+            report_module.LANE_GENERAL,
+            report_module.LANE_RED,
+        ):
+            assert f"background:{colour}" in built.html, f"the key does not show {colour}"
+
+    def test_no_block_ever_reaches_the_edge_of_the_lane(self):
+        """The readability half of the same decision.
+
+        A red block is drawn in the page's own ground colour, so a block that
+        ran to the top and bottom of the lane would join the page behind it and
+        read as a hole rather than as a mark. It was drawn that way first, and
+        on a worst case page forty spans joined into five wide red blocks looked
+        like the page with a few black notches in it.
+        """
+        lane = render_lane(plan_blocks([Span(0, 10_000, "red")], 10_000.0))
+        track = np.array(report_module._rgb(report_module.LANE_GROUND), dtype=np.uint8)
+        assert (lane[0] == track).all(), "a block runs to the top edge of the lane"
+        assert (lane[-1] == track).all(), "a block runs to the bottom edge of the lane"
+
+    def test_the_bright_fills_are_gone_from_the_drawing(self):
+        """Saffron may still be an edge on the page. It may not be in a picture."""
+        gone = {
+            report_module._rgb(report_module.FOCUS_RING),
+            report_module._rgb(report_module.ACCENT_DARK),
+            report_module._rgb(report_module.BORDER),
+            report_module._rgb(report_module.TEXT),
+        }
+        plan = plan_blocks([Span(1_000, 2_000), Span(5_000, 6_000, "red")], 10_000.0)
+        used = {
+            tuple(int(v) for v in colour)
+            for colour in np.unique(render_lane(plan).reshape(-1, 3), axis=0)
+        }
+        assert not (used & gone), f"a lane still holds a bright fill: {used & gone}"
 
 
 # ---------------------------------------------------------------------------
@@ -652,11 +847,37 @@ class TestThePalette:
             ("ACCENT_DARK", report_module.ACCENT_DARK),
             ("TEXT", report_module.TEXT),
             ("INK", report_module.INK),
+            ("COVER", report_module.COVER),
         ):
             assert f"{name}: '{value}'" in text, (
                 f"{name} in flashmap/report.py is {value}, which is not what "
                 "app/src/calmframes/calmStyles.ts says"
             )
+
+    def test_every_lane_colour_is_one_of_the_app_colours(self):
+        """The lane fills are dim, and they are still the app's own colours.
+
+        Picking a new hex because it measured well would leave the report
+        looking like something else. These three are CALM_COLORS entries and the
+        test above holds each of them to the app's file.
+        """
+        palette = {
+            report_module.BACKGROUND,
+            report_module.SURFACE,
+            report_module.BORDER,
+            report_module.FOCUS_RING,
+            report_module.ACCENT_DARK,
+            report_module.TEXT,
+            report_module.TEXT_DIM,
+            report_module.INK,
+            report_module.COVER,
+        }
+        for colour in (
+            report_module.LANE_GROUND,
+            report_module.LANE_GENERAL,
+            report_module.LANE_RED,
+        ):
+            assert colour in palette, f"{colour} is not one of the app's colours"
 
     def test_saffron_is_only_ever_a_fill(self, built: ReportDocument):
         """4.47:1 on teal, which misses the 4.5:1 text floor by 0.03.
