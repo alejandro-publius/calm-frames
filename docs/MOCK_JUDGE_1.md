@@ -12,14 +12,20 @@ An independent agent judged this repository against `docs/RUBRIC.md` on **Thu Se
 
 ## Read the scores in context
 
-**Several lanes were still writing documents while this ran, and the snapshot is a build in progress, not a submission.** The deadline is Fri Oct 23, 2026 and this was judged on Sep 17, five weeks early. That matters for how the Stage One result should be read: the judge marked five hard lines as failures, and four of the five are things that are scheduled to happen and have not happened yet rather than things that were done wrong.
+**Several lanes were still writing documents while this ran, and the snapshot is a build in progress, not a submission.** The deadline is Fri Oct 23, 2026 and this was judged on Sep 17, five weeks early. That matters for how the Stage One result should be read.
 
-- **No demo video.** It is scheduled for Oct 19 to 20 in `docs/STATUS.md`, and it cannot be filmed before the stick arrives.
-- **The repository is private.** It is scheduled to go public on Oct 21, which is the plan the rules allow. What the judge is right about is that the rules also allow the private route, and the private route needs `testing@devpost.com` and `@AmazonAppDev` added, and nothing records that happening.
-- **No Open Source contribution URL.** The patches are finished and the pull request is dated Oct 12 in `docs/STATUS.md`.
-- **No demo PIN.** It depends on the parent area being reachable.
+**A correction to the verdict below, found by mock judge 2.** Its prose says twice that the submission "misses five hard lines". Its own table marks **seven** lines FAIL: 2, 3, 7, 8, 12, 13 and 16. The table is the part to trust and the prose undercounts. This header originally repeated the wrong number, which is a good illustration of why the second run was worth doing.
 
-The fifth is different in kind, and it is the finding that makes this whole exercise worth the time: **kid mode never engages in the app as committed.** That is not a scheduling item. It is a wiring gap in the product, found by someone reading the code with no idea what it was supposed to do, and it is gap 2 in the list below.
+Of those seven, four are things scheduled to happen that have not happened yet rather than things done wrong:
+
+- **No demo video** (lines 2 and 3). It is scheduled for Oct 19 to 20 in `docs/STATUS.md`. It was thought to be blocked on the stick when this judge ran; it is not, because the rules allow the Vega simulator.
+- **The repository is private** (line 7). It is scheduled to go public on Oct 21, which is a route the rules allow. What the judge is right about is that the other route, staying private, needs `testing@devpost.com` and `@AmazonAppDev` added, and nothing records that happening.
+- **No Open Source contribution URL** (line 12). The patches are finished and the pull request is dated Oct 12 in `docs/STATUS.md`.
+- **No demo PIN** (part of line 16). It depends on the parent area being reachable.
+
+Line 13, the AWS Builder services table sitting outside the product feedback field, was a real placement error and has since been fixed.
+
+That leaves line 8, and it is the finding that makes this whole exercise worth the time: **kid mode never engages in the app as committed.** That is not a scheduling item. It is a wiring gap in the product, found by someone reading the code with no idea what it was supposed to do, and it is gap 2 in the list below. It has since been fixed, in commit `8a155ff`.
 
 None of this softens the scores. A judge in November will read whatever is in front of them on that day. It is here so that a reader in October can tell which failures were the calendar and which were the build.
 

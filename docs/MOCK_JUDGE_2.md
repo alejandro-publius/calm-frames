@@ -18,6 +18,10 @@ Two things landed after the clone was taken, so the verdict does not see them an
 1. **Kid mode is now reachable.** Commit `8a155ff`, "Kid mode is reachable, and the player refuses anything unchecked", landed while this judge was reading. That is the single finding both judges made independently and ranked second, and it is the reason Stage One line 1 is marked FAIL below. It has been wired since.
 2. **The recall split this judge asked for is now published.** Its gap 6, `recall_near_limits = 0.575`, is the most important thing either judge found in this lane's own writing, and it is in the README's conformance table and prose as of commit `d6e8ad7`.
 
+## Both judges undercounted their own tables
+
+Judge 2 noticed that judge 1's prose said "five hard lines" over a table with seven FAIL rows, and it was right. Its own verdict below then does the same thing: the prose under the table says "Six lines fail outright and a seventh cannot be told", and its table marks **seven** FAIL, on lines 1, 2, 3, 7, 8, 12 and 16. The report it handed back said seven. The tables are the part to trust in both files, and the verdict text below is left exactly as written.
+
 ## The part worth reading twice
 
 Judge 2 found an overstatement that this lane wrote while trying to be careful. The impact section published the blended recall of <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> and glossed it as about one positive window in ten missed. The same results file holds the split: recall is <!--n results/conformance.json:published.recall_away_from_limits -->1<!--/n--> away from a limit, and <!--n results/conformance.json:published.recall_near_limits -->0.575<!--/n--> on the <!--n results/conformance.json:published.recall_near_limits_clips -->178<!--/n--> clips that sit on one. A safety tool lives at the limit. Publishing the friendlier number, in the paragraph whose entire job was to say what the numbers mean for a child, was the wrong number in the wrong place, and no rule in this repository would have caught it, because every number was traceable and the marker check was green.
