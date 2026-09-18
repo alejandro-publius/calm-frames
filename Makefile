@@ -22,14 +22,17 @@ PKG_ID ?= io.github.alejandropublius.calmframes
 # left out of test runs that do not need it.
 NODE_ENV := source ~/vega/env >/dev/null 2>&1 && eval "$$(fnm env --shell bash)" && fnm use 22 >/dev/null
 
-# Pieces other lanes own. The eval lane keeps its reproduce steps in
-# eval/reproduce.mk and adds its target names to REPRODUCE_EXTRA, for example:
+# Pieces other lanes own, included so `make <their target>` works from the root
+# and each file still runs standalone with `make -f <file>`.
 #
-#     REPRODUCE_EXTRA += eval-figures
+# eval/reproduce.mk owns the evaluation side of `reproduce` (the conformance
+# tables, the baselines, the ablations, the figures) and supplies the recipe for
+# the `reproduce` target itself. This file adds the release lane's checks to it
+# as a prerequisite further down rather than defining `reproduce` a second time,
+# which would override theirs and silently drop their figures.
 #
-# so `make reproduce` runs them without this file knowing what they are. The
-# leading dash means a missing file is not an error, so this works before the
-# eval lane lands theirs.
+# The leading dash means a missing file is not an error, so a branch without
+# theirs still works.
 -include eval/reproduce.mk
 include eval/baselines/iris/iris.mk
 include eval/baselines/ffmpeg_photosensitivity/ffmpeg_ps.mk
@@ -38,14 +41,22 @@ include eval/baselines/naive_luma_diff/naive_luma.mk
 .DEFAULT_GOAL := help
 
 .PHONY: help test test-app test-flashmap test-pipeline test-eval ci \
-        reproduce synth cdk-diff deploy destroy release release-notes \
-        stick-day stick-day-vvd hooks hooks-selftest scan scan-tree pins clean
+        reproduce reproduce-release reproduce-all synth cdk-diff deploy destroy \
+        release release-notes stick-day stick-day-vvd hooks hooks-selftest \
+        scan scan-tree pins clean
 
 help: ## show this list
 	@echo "Calm Frames targets:"
+	@# Two comment shapes, because two lanes write these files. This one puts
+	@# the description after the target; eval/reproduce.mk puts a ## line above
+	@# it. Read both, so one list covers everything.
 	@grep -hE '^[a-zA-Z0-9_-]+:.*?## ' $(MAKEFILE_LIST) \
 		| sort \
-		| awk 'BEGIN {FS = ":.*?## "}; {printf "  %-16s %s\n", $$1, $$2}'
+		| awk 'BEGIN {FS = ":.*?## "}; {printf "  %-18s %s\n", $$1, $$2}'
+	@awk '/^## /{line = substr($$0, 4); next} \
+	     /^[a-zA-Z0-9_-]+:/{if (line != "") {split($$0, name, ":"); \
+	       printf "  %-18s %s\n", name[1], line}; line = ""} \
+	     !/^##/{line = ""}' $(MAKEFILE_LIST) | sort
 	@echo
 	@echo "Useful variables:"
 	@echo "  PY=$(PY)"
@@ -77,17 +88,17 @@ ci: ## everything CI runs, in CI's order, before you push
 
 # ------------------------------------------------------------ reproduce
 
-reproduce: ## rebuild every table and figure from committed results, offline
+# `reproduce` has its recipe in eval/reproduce.mk: the eval lane's tables and
+# figures. A target can carry prerequisites in one file and its recipe in
+# another, so this adds the release lane's half in front of theirs without
+# overriding anything. Both halves run, in this order, from one command.
+reproduce: reproduce-release $(REPRODUCE_EXTRA)
+
+reproduce-release: ## the release lane's half of reproduce, on its own
 	$(PY) $(REPO)/scripts/reproduce.py $(REPRODUCE_ARGS)
-	@if [ -n "$(REPRODUCE_EXTRA)" ]; then \
-		echo ""; \
-		echo "eval lane pieces: $(REPRODUCE_EXTRA)"; \
-		$(MAKE) $(REPRODUCE_EXTRA); \
-	else \
-		echo ""; \
-		echo "No eval/reproduce.mk yet. When the eval lane lands one, its"; \
-		echo "targets run here through REPRODUCE_EXTRA. Nothing is duplicated."; \
-	fi
+
+reproduce-all: ## reproduce, plus the pieces that need the media pool
+	$(MAKE) reproduce REPRODUCE_ARGS="--with-baselines --with-screening"
 
 # ------------------------------------------------------------------ AWS
 #

@@ -9,10 +9,10 @@ strangers.
 | Secret | Where it lives | In the repo? |
 |---|---|---|
 | Map signing private key | `~/.calm-frames/keys/team_key.pem`, on one machine, mode 600 | never |
-| Map signing public key | `~/.calm-frames/keys/team_key.pub.pem`, and shipped inside the app | the public half only |
+| Map signing public key | `~/.calm-frames/keys/team_key.pub.pem`, and compiled into the app as `OFFLINE_PUBLIC_KEY_BASE64` | the public half only |
 | AWS access | GitHub OIDC, a role assumed by a workflow | never, there are no stored keys |
 | PyPI upload | trusted publishing, an OIDC token minted per run | never, there is no API token |
-| Demo PIN | not built yet, phase 4.6 | not yet |
+| Parent area PIN | set on the device, stored only as a salted hash (`app/src/calmframes/parentGate.ts`) | never, there is no default |
 
 There is no `.env` to copy, no secret to paste into CI, and nothing to rotate
 except the signing key.
@@ -94,11 +94,21 @@ verify passes with the new key.
            --sha <the title's source SHA-256> \
            --pub ~/.calm-frames/keys/team_key_2026-10-21.pub.pem
 
-6. **Ship the new public key with the app**, and only then. The app carries the
-   public key so a device can check a map with no network. Until the kid mode
-   work in phase 4.6 lands, the app does not carry one yet, so this step is a
-   note rather than an instruction: when it does, the key lives with the app
-   bundle and a rotation means a new app build as well as new maps.
+6. **Ship the new public key with the app.** The app carries the public key so
+   a device can check a map with no network at all. As of Sep 17, 2026 it is
+   one constant:
+
+       app/src/calmframes/offlineTitle.ts   OFFLINE_PUBLIC_KEY_BASE64
+
+   base64 of the 32 raw Ed25519 bytes, the same form `key_id` is computed from.
+   `app/src/screens/PlayerScreen.tsx` passes it to the map check, and
+   `flashMap.ts` refuses a map whose key does not equal it.
+
+   So a key rotation is a new app build as well as new maps, and the bundled
+   offline title (`assets/raw/offline/calm_gradient.flashmap.json`, signed with
+   the demo key) has to be re-signed with the new key in the same change, or
+   the one title that works with the backend down stops working. That file
+   belongs to the app lane. Tell them before rotating, not after.
 
 7. **Prove the old key no longer works.** Take one re-signed map and check it
    against the old public key. It must fail. A rotation nobody has watched fail

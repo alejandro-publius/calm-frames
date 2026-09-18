@@ -58,11 +58,19 @@ OUT_DIR = REPO / "results" / "stick_day"
 # ------------------------------------------------------------------ output
 
 
-def heading(number: int, title: str, minutes: str) -> None:
+def heading(number: int, title: str, cost: str) -> None:
     print()
     print("=" * 72)
-    print(f"{number}. {title}    (about {minutes})")
+    # "about" only makes sense in front of a length of time.
+    prefix = "about " if any(unit in cost for unit in ("min", "sec", "hour")) else ""
+    print(f"{number}. {title}    ({prefix}{cost})")
     print("=" * 72)
+
+
+def minutes_text(seconds: float) -> str:
+    if seconds < 90:
+        return f"{seconds:.0f} seconds"
+    return f"{seconds / 60:.0f} minutes"
 
 
 def say(text: str = "") -> None:
@@ -452,8 +460,7 @@ def read_package_id() -> str:
 
 
 def layering(target: str, facts: dict, args) -> dict:
-    minutes = args.layering_seconds / 60
-    heading(5, "The layering test, captions on", f"{minutes:.0f} minutes")
+    heading(5, "The layering test, captions on", minutes_text(args.layering_seconds))
 
     say("  Before it starts, on the television:")
     say()
@@ -651,26 +658,45 @@ def marker_run(target: str, facts: dict, args) -> dict:
     if not analysis.exists():
         return {"ran": True, "ok": False, "out": str(out)}
 
+    # eval/gate1_rehearsal.py belongs to another lane and its fields move as
+    # they sharpen what the rehearsal is allowed to claim. Read it by asking
+    # rather than by assuming, so a field they rename does not end a session
+    # with a stack trace after the camera has already been packed away.
     result_data = json.loads(analysis.read_text())
+
+    def field(*names, default="not reported"):
+        for name in names:
+            if name in result_data:
+                return result_data[name]
+        return default
+
+    counted = field("markers_counted", "markers_reached_during_run")
     say()
     say("  What the app believed it did:")
-    say(f"    markers in the schedule       {result_data['markers_in_schedule']}")
-    say(f"    markers reached in the run    {result_data['markers_reached_during_run']}")
-    say(f"    covered 150 ms or more early  {result_data['markers_covered_in_time']}")
-    say(f"    worst lead                    {result_data['worst_lead_ms']} ms")
-    interval = result_data["wilson_95_interval"]
-    say(f"    Wilson 95% interval           {interval['low']} to {interval['high']}")
+    say(f"    markers in the schedule       {field('markers_in_schedule')}")
+    say(f"    markers the run reached       {counted}")
+    if field("markers_not_counted", default=0):
+        say(f"    markers not counted          {field('markers_not_counted')}")
+    say(f"    covered 150 ms or more early  {field('markers_covered_in_time')}")
+    say(f"    worst lead                    {field('worst_lead_ms')} ms")
+    interval = field("wilson_95_interval", default={}) or {}
+    if interval.get("low") is not None:
+        say(f"    Wilson 95% interval           {interval['low']} to {interval['high']}")
     say()
-    say("  This is not GATE 1. It is what the app believed about media time. A")
-    say("  cover the app scheduled correctly but the compositor drew late passes")
-    say("  here and fails on camera. GATE 1 is the footage.")
+    if not counted:
+        say("  Nothing was counted. The run reached no marker, so there is no number")
+        say("  here and none should be quoted. Check the clip played at all before")
+        say("  taking another take.")
+    say("  This is not GATE 1 either way. It is what the app believed about media")
+    say("  time. A cover the app scheduled correctly but the compositor drew late")
+    say("  passes here and fails on camera. GATE 1 is the footage.")
     return {
         "ran": True,
-        "ok": True,
+        "ok": bool(counted),
         "analysis": str(analysis),
-        "covered_in_time": result_data["markers_covered_in_time"],
-        "reached": result_data["markers_reached_during_run"],
-        "worst_lead_ms": result_data["worst_lead_ms"],
+        "covered_in_time": field("markers_covered_in_time"),
+        "counted": counted,
+        "worst_lead_ms": field("worst_lead_ms"),
     }
 
 
@@ -678,7 +704,7 @@ def marker_run(target: str, facts: dict, args) -> dict:
 
 
 def closing(target: str, session: dict) -> None:
-    heading(7, "What is left, and what is not built", "read this")
+    heading(7, "What is left, and what is not built", "read this before you pack up")
 
     say("  Done in this session:")
     for key in ("developer_mode", "os", "install", "layering", "timing"):

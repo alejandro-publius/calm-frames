@@ -23,7 +23,9 @@ TAG=""
 DEMO_PIN="${DEMO_PIN:-}"
 
 usage() {
-  sed -n '2,20p' "$0" | sed 's/^# \{0,1\}//'
+  # The comment block at the top of this file is the help text, so the two can
+  # never drift apart. It ends at the first line that is not a comment.
+  sed -n '2,/^[^#]/p' "$0" | sed 's/^# \{0,1\}//' | sed '$d'
   exit 0
 }
 
@@ -122,13 +124,24 @@ fi
 
 if [ -n "$DEMO_PIN" ]; then
   pin_block="The demo PIN is \`$DEMO_PIN\`. It opens the parent area, where the preset, the
-room settings and the log of what was hidden live. Kid mode needs no PIN."
-else
-  pin_block="**The demo PIN is not set yet.** The parent area behind a PIN is phase 4.6 and
-is not built, so there is no PIN to publish and this file will not invent one.
-When it exists, build the release with the PIN in the notes:
+room settings and the log of what was hidden live. Kid mode itself needs no PIN.
 
-    make release RELEASE_ARGS=\"--pin 1234\""
+It is four digits on a device anyone can pick up, and the parent area can only
+make the filter stricter, never weaker. Treat it as a lock on a drawer, not on a
+door."
+else
+  pin_block="**No PIN is published here, because the app does not ship with one.** The parent
+area is locked with a four digit PIN that a person sets on the device the first
+time they open it (app/src/calmframes/parentGate.ts: with nothing set it says
+\"No PIN is set yet\"). Only the salted hash is stored, so nobody can read the PIN
+back off a device either.
+
+Set the demo PIN on the demo stick, then build the notes with it:
+
+    make release RELEASE_ARGS=\"--pin 1234\"
+
+This file will not invent one, and a PIN in a public release should be one you
+do not use anywhere else."
 fi
 
 cat > "$OUT/NOTES.md" <<NOTES
@@ -199,7 +212,8 @@ done
 echo
 echo "Release notes: $OUT/NOTES.md"
 if [ -z "$DEMO_PIN" ]; then
-  echo "  the notes say the demo PIN does not exist yet, because it does not."
+  echo "  no PIN in the notes: the app ships without one and a person sets it on"
+  echo "  the device. Pass --pin once the demo stick has one."
 fi
 echo
 echo "The command this would run, and does not:"

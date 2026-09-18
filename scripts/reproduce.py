@@ -141,13 +141,18 @@ def gate1_rehearsal(report: Report) -> None:
         strip_volatile(json.loads(committed.read_text())),
     )
     if difference is None:
+        # The eval lane owns this analysis and its fields move as they sharpen
+        # what the rehearsal may claim, so read it by asking, not by assuming.
         counts = json.loads(rebuilt.read_text())
-        report.add(
-            "GATE 1 rehearsal",
-            "PASS",
-            f"{counts['markers_covered_in_time']} of {counts['markers_in_schedule']} "
-            f"covered in time, worst lead {counts['worst_lead_ms']} ms, matches results/",
-        )
+        in_schedule = counts.get("markers_in_schedule", "?")
+        counted = counts.get("markers_counted", counts.get("markers_reached_during_run"))
+        covered = counts.get("markers_covered_in_time", "?")
+        detail = f"matches results/. It counts {counted} of {in_schedule} markers"
+        if counted in (0, None):
+            detail += " (the run it came from reached no marker, so it claims nothing)"
+        else:
+            detail += f", {covered} covered in time, worst lead {counts.get('worst_lead_ms')} ms"
+        report.add("GATE 1 rehearsal", "PASS", detail)
     else:
         report.add("GATE 1 rehearsal", "DRIFT", difference)
 
@@ -163,7 +168,14 @@ def source_for_plot(png: Path) -> Path | None:
 
 
 def figures(report: Report, strict: bool) -> None:
-    """The inspection plots in results/plots, rebuilt from the media pool."""
+    """The inspection plots in results/plots, rebuilt from the media pool.
+
+    One wrinkle worth knowing before reading the output: the plot prints the
+    file name across the top, and the screening run renames anything it flags
+    to HAZARD_<name>. So a figure made before its clip was renamed can never
+    match byte for byte again, and that is not drift. It is counted and named
+    separately.
+    """
     committed_dir = REPO / "results" / "plots"
     pngs = sorted(committed_dir.glob("*_luminance_and_area.png"))
     if not pngs:
@@ -172,8 +184,8 @@ def figures(report: Report, strict: bool) -> None:
 
     out_dir = OUT / "plots"
     out_dir.mkdir(parents=True, exist_ok=True)
-    rebuilt = 0
     same = 0
+    renamed: list[str] = []
     moved: list[str] = []
     skipped: list[str] = []
 
@@ -186,14 +198,20 @@ def figures(report: Report, strict: bool) -> None:
         if result.returncode != 0:
             report.add("figures", "ERROR", f"{png.name}: {result.stderr.strip()[-200:]}")
             return
-        rebuilt += 1
-        new = out_dir / png.name
-        if new.exists() and new.read_bytes() == png.read_bytes():
+        new = out_dir / f"{source.stem}_luminance_and_area.png"
+        if not new.exists():
+            moved.append(f"{png.name}: nothing was written")
+        elif new.name != png.name:
+            renamed.append(f"{png.name} is now {new.name}")
+        elif new.read_bytes() == png.read_bytes():
             same += 1
         else:
             moved.append(png.name)
 
+    rebuilt = len(pngs) - len(skipped)
     detail = f"{rebuilt} rebuilt, {same} byte for byte identical"
+    if renamed:
+        detail += f", {len(renamed)} from a clip that screening renamed ({renamed[0]})"
     if skipped:
         detail += f", {len(skipped)} skipped (source not in media/)"
     if moved:
@@ -248,6 +266,13 @@ def main() -> int:
     parser.add_argument("--strict", action="store_true", help="a figure whose bytes moved is a failure")
     parser.add_argument("--clean", action="store_true", help="throw away build/reproduce first")
     args = parser.parse_args()
+
+    # Line buffering, so a run through tee or into a log file shows its
+    # progress rather than arriving all at once at the end.
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except (AttributeError, ValueError):
+        pass
 
     if args.clean and OUT.exists():
         shutil.rmtree(OUT)

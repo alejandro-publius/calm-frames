@@ -59,8 +59,24 @@ def check_pyproject(path: Path, findings: list[tuple[str, str, str]]) -> None:
                 findings.append(("LOOSE", where, raw))
 
 
+def workflow_files() -> list[Path]:
+    """CI, plus the action we publish and the example we tell people to copy.
+
+    A loose version in an example someone pastes into their own repository is
+    still a loose version, and it is one we asked them to take.
+    """
+    paths = sorted((REPO / ".github" / "workflows").glob("*.yml"))
+    for extra in (
+        REPO / "flashmap" / "action.yml",
+        REPO / "flashmap" / "examples" / "flash-check.yml",
+    ):
+        if extra.exists():
+            paths.append(extra)
+    return paths
+
+
 def check_workflows(findings: list[tuple[str, str, str]]) -> None:
-    for path in sorted((REPO / ".github" / "workflows").glob("*.yml")):
+    for path in workflow_files():
         for number, line in enumerate(path.read_text().splitlines(), 1):
             where = f"{path.relative_to(REPO)}:{number}"
             action = ACTION_REF.search(line)
