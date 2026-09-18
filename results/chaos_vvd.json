@@ -1,0 +1,1839 @@
+{
+  "statement": "Playback fuzzing on the Vega Virtual Device. For every moment the player reported being inside a marker, was the picture hidden. Everything is anchored to positions the player reported, never to the app's own estimate.",
+  "what_this_is_not": "Not GATE 1 and not a screen-level measurement. Nothing here sees the React commit, the compositor, scan-out or the panel. It is the app's own account of what it did, on a virtual device, checked against what the player said.",
+  "tool": "eval/fuzz_playback_vvd.py",
+  "recorded_utc": "2026-09-18T04:49:02+00:00",
+  "device": "Vega Virtual Device",
+  "clip_sha256": "fad744279f9c9f085b9cd23b78d5a206e99f565b5cd42bb64bda0762157a391e",
+  "guard_band_ms": 500,
+  "seed": 20260917,
+  "load_average_before": [
+    11.0,
+    15.72,
+    37.64
+  ],
+  "load_average_after": [
+    4.81,
+    5.89,
+    14.93
+  ],
+  "load_note": "A run taken on a loaded machine measures the machine. The load averages are one, five and fifteen minutes, from the host.",
+  "passes_attempted": 16,
+  "passes_launched": 16,
+  "passes_lost_with_the_device": 0,
+  "virtual_device_restarts": 0,
+  "device_note": "The virtual device stopped on its own more than once during this work, which is a note about the device and not about the app. A pass that lost it is dropped rather than counted, and the device is started again.",
+  "passes_with_a_crossing": 2,
+  "totals": {
+    "marker_crossings_counted": 3,
+    "uncovered_marker_crossings": 0,
+    "showing_ms_total": 0,
+    "report_gap_ms_median": 179.0,
+    "report_gap_ms_max": 250.0
+  },
+  "chaos": {
+    "actions_carried_out": 157,
+    "actions_by_kind": {
+      "fast-forward": 17,
+      "idle": 35,
+      "pause": 25,
+      "rewind": 28,
+      "stall": 26,
+      "throttle": 26
+    },
+    "segments_served": 0,
+    "segment_requests_stalled": 0,
+    "cover_on_reasons_seen": [
+      "interval 3500-5500",
+      "pause",
+      "seeking",
+      "waiting"
+    ],
+    "background_covers_seen": 0,
+    "playback_rate_changes": 0,
+    "playback_rate_note": "Never exercised on the device. Nothing a remote can press changes playbackRate, and the app does not change it itself, so there was no way to do it from the host without changing the app. Rate changes are exercised against the real scheduler in eval/property_scheduler_test.py."
+  },
+  "how_a_crossing_is_counted": "Two consecutive timeupdate reports with the position moving forward describe a span of the clip the player passed through. Where that span meets a marker, the wall-clock window is interpolated between the two reports and the cover state over that window is read from the cover-on and cover-off events. A pair where the position went backwards is a seek rather than a journey, and is not counted. The report gap is published because it is how coarse the interpolation is.",
+  "uncovered": [],
+  "passes": [
+    {
+      "pass": 1,
+      "launched": true,
+      "device_lost": false,
+      "events": 16,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 1,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.82,
+          "kind": "stall",
+          "for_s": 2.54,
+          "wall_clock_ms": 1789705869411,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705869411
+        },
+        {
+          "at_s": 7.82,
+          "kind": "rewind",
+          "wall_clock_ms": 1789705875407,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705875474
+        },
+        {
+          "at_s": 11.87,
+          "kind": "idle",
+          "for_s": 5.63,
+          "wall_clock_ms": 1789705879461,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705885094
+        },
+        {
+          "at_s": 15.34,
+          "kind": "idle",
+          "for_s": 4.55,
+          "wall_clock_ms": 1789705885094,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705889650
+        },
+        {
+          "at_s": 20.11,
+          "kind": "throttle",
+          "bytes_per_second": 8000,
+          "for_s": 2.04,
+          "wall_clock_ms": 1789705889650,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705891696
+        },
+        {
+          "at_s": 25.69,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789705893279,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705893348
+        },
+        {
+          "at_s": 31.22,
+          "kind": "idle",
+          "for_s": 8.27,
+          "wall_clock_ms": 1789705898811,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705907083
+        },
+        {
+          "at_s": 35.09,
+          "kind": "stall",
+          "for_s": 2.52,
+          "wall_clock_ms": 1789705907083,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705907083
+        },
+        {
+          "at_s": 40.36,
+          "kind": "idle",
+          "for_s": 5.39,
+          "wall_clock_ms": 1789705907951,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705913346
+        }
+      ],
+      "position_reports": 7,
+      "furthest_position_ms": 1159.0,
+      "cover_on_reasons": [
+        "pause",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 2,
+      "launched": true,
+      "device_lost": false,
+      "events": 34,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 3,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.45,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789705938541,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705938616
+        },
+        {
+          "at_s": 4.87,
+          "kind": "idle",
+          "for_s": 7.74,
+          "wall_clock_ms": 1789705941969,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705949722
+        },
+        {
+          "at_s": 10.31,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789705949722,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705949796
+        },
+        {
+          "at_s": 14.52,
+          "kind": "pause",
+          "for_s": 1.28,
+          "wall_clock_ms": 1789705951615,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705953042
+        },
+        {
+          "at_s": 20.15,
+          "kind": "rewind",
+          "wall_clock_ms": 1789705957241,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705957310
+        },
+        {
+          "at_s": 23.43,
+          "kind": "throttle",
+          "bytes_per_second": 20000,
+          "for_s": 2.97,
+          "wall_clock_ms": 1789705960525,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705963500
+        },
+        {
+          "at_s": 28.49,
+          "kind": "rewind",
+          "wall_clock_ms": 1789705965585,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705965651
+        },
+        {
+          "at_s": 31.5,
+          "kind": "idle",
+          "for_s": 7.29,
+          "wall_clock_ms": 1789705968591,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705975883
+        },
+        {
+          "at_s": 37.06,
+          "kind": "pause",
+          "for_s": 1.19,
+          "wall_clock_ms": 1789705975884,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705977225
+        },
+        {
+          "at_s": 40.13,
+          "kind": "pause",
+          "for_s": 1.71,
+          "wall_clock_ms": 1789705977225,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789705979070
+        }
+      ],
+      "position_reports": 12,
+      "furthest_position_ms": 1994.0,
+      "cover_on_reasons": [
+        "pause",
+        "seeking"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 3,
+      "launched": true,
+      "device_lost": false,
+      "events": 15,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 4,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.38,
+          "kind": "idle",
+          "for_s": 5.4,
+          "wall_clock_ms": 1789706007578,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706012982
+        },
+        {
+          "at_s": 5.74,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706012982,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706013050
+        },
+        {
+          "at_s": 9.78,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706015978,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706016050
+        },
+        {
+          "at_s": 13.82,
+          "kind": "stall",
+          "for_s": 2.81,
+          "wall_clock_ms": 1789706020020,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706020021
+        },
+        {
+          "at_s": 18.35,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706024550,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706024617
+        },
+        {
+          "at_s": 23.99,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706030192,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706030258
+        },
+        {
+          "at_s": 27.37,
+          "kind": "stall",
+          "for_s": 1.63,
+          "wall_clock_ms": 1789706033571,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706033571
+        },
+        {
+          "at_s": 32.89,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706039088,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706039156
+        },
+        {
+          "at_s": 37.37,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706043568,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706043634
+        },
+        {
+          "at_s": 42.05,
+          "kind": "stall",
+          "for_s": 1.81,
+          "wall_clock_ms": 1789706048251,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706048251
+        }
+      ],
+      "position_reports": 4,
+      "furthest_position_ms": 448.0,
+      "cover_on_reasons": [
+        "pause",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 4,
+      "launched": true,
+      "device_lost": false,
+      "events": 17,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 3,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.81,
+          "kind": "throttle",
+          "bytes_per_second": 8000,
+          "for_s": 1.69,
+          "wall_clock_ms": 1789706077269,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706078963
+        },
+        {
+          "at_s": 4.94,
+          "kind": "idle",
+          "for_s": 4.79,
+          "wall_clock_ms": 1789706080398,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706085193
+        },
+        {
+          "at_s": 8.99,
+          "kind": "idle",
+          "for_s": 5.65,
+          "wall_clock_ms": 1789706085193,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706090844
+        },
+        {
+          "at_s": 12.2,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706090844,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706090915
+        },
+        {
+          "at_s": 17.31,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706092768,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706092900
+        },
+        {
+          "at_s": 23.27,
+          "kind": "stall",
+          "for_s": 3.17,
+          "wall_clock_ms": 1789706098732,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706098732
+        },
+        {
+          "at_s": 26.35,
+          "kind": "idle",
+          "for_s": 6.51,
+          "wall_clock_ms": 1789706101811,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706108326
+        },
+        {
+          "at_s": 31.27,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706108326,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706108392
+        },
+        {
+          "at_s": 36.72,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706112181,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706112247
+        },
+        {
+          "at_s": 41.33,
+          "kind": "pause",
+          "for_s": 2.38,
+          "wall_clock_ms": 1789706116790,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706119312
+        }
+      ],
+      "position_reports": 7,
+      "furthest_position_ms": 1295.0,
+      "cover_on_reasons": [
+        "pause",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 5,
+      "launched": true,
+      "device_lost": false,
+      "events": 19,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 3,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.86,
+          "kind": "idle",
+          "for_s": 7.64,
+          "wall_clock_ms": 1789706145715,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706153359
+        },
+        {
+          "at_s": 5.16,
+          "kind": "pause",
+          "for_s": 0.81,
+          "wall_clock_ms": 1789706153359,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706154307
+        },
+        {
+          "at_s": 8.39,
+          "kind": "idle",
+          "for_s": 7.64,
+          "wall_clock_ms": 1789706154307,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706161951
+        },
+        {
+          "at_s": 11.51,
+          "kind": "idle",
+          "for_s": 7.44,
+          "wall_clock_ms": 1789706161951,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706169392
+        },
+        {
+          "at_s": 15.88,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706169392,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706169468
+        },
+        {
+          "at_s": 21.44,
+          "kind": "idle",
+          "for_s": 4.3,
+          "wall_clock_ms": 1789706169468,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706173773
+        },
+        {
+          "at_s": 26.23,
+          "kind": "stall",
+          "for_s": 3.16,
+          "wall_clock_ms": 1789706173773,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706173773
+        },
+        {
+          "at_s": 30.8,
+          "kind": "throttle",
+          "bytes_per_second": 60000,
+          "for_s": 3.17,
+          "wall_clock_ms": 1789706174652,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706177828
+        },
+        {
+          "at_s": 34.41,
+          "kind": "stall",
+          "for_s": 1.72,
+          "wall_clock_ms": 1789706178266,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706178266
+        },
+        {
+          "at_s": 38.18,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706182037,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706182105
+        },
+        {
+          "at_s": 41.49,
+          "kind": "idle",
+          "for_s": 5.84,
+          "wall_clock_ms": 1789706185344,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706191185
+        }
+      ],
+      "position_reports": 11,
+      "furthest_position_ms": 2396.0,
+      "cover_on_reasons": [
+        "pause",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 6,
+      "launched": true,
+      "device_lost": false,
+      "events": 19,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 3,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.02,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706217165,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706217234
+        },
+        {
+          "at_s": 5.13,
+          "kind": "stall",
+          "for_s": 2.05,
+          "wall_clock_ms": 1789706221276,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706221276
+        },
+        {
+          "at_s": 8.74,
+          "kind": "idle",
+          "for_s": 4.16,
+          "wall_clock_ms": 1789706224831,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706228997
+        },
+        {
+          "at_s": 14.31,
+          "kind": "stall",
+          "for_s": 2.29,
+          "wall_clock_ms": 1789706230452,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706230452
+        },
+        {
+          "at_s": 17.48,
+          "kind": "idle",
+          "for_s": 8.68,
+          "wall_clock_ms": 1789706233624,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706242306
+        },
+        {
+          "at_s": 20.73,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706242306,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706242374
+        },
+        {
+          "at_s": 26.49,
+          "kind": "throttle",
+          "bytes_per_second": 60000,
+          "for_s": 3.67,
+          "wall_clock_ms": 1789706242633,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706246306
+        },
+        {
+          "at_s": 30.51,
+          "kind": "idle",
+          "for_s": 8.71,
+          "wall_clock_ms": 1789706246655,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706255370
+        },
+        {
+          "at_s": 35.18,
+          "kind": "idle",
+          "for_s": 8.44,
+          "wall_clock_ms": 1789706255370,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706263810
+        },
+        {
+          "at_s": 39.75,
+          "kind": "pause",
+          "for_s": 2.31,
+          "wall_clock_ms": 1789706263810,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706266265
+        }
+      ],
+      "position_reports": 9,
+      "furthest_position_ms": 1722.0,
+      "cover_on_reasons": [
+        "pause",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 7,
+      "launched": true,
+      "device_lost": false,
+      "events": 17,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 3,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 0.52,
+          "kind": "idle",
+          "for_s": 8.57,
+          "wall_clock_ms": 1789706290987,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706299561
+        },
+        {
+          "at_s": 5.42,
+          "kind": "stall",
+          "for_s": 2.4,
+          "wall_clock_ms": 1789706299561,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706299561
+        },
+        {
+          "at_s": 10.77,
+          "kind": "throttle",
+          "bytes_per_second": 20000,
+          "for_s": 2.2,
+          "wall_clock_ms": 1789706301236,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706303438
+        },
+        {
+          "at_s": 16.06,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706306528,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706306597
+        },
+        {
+          "at_s": 21.32,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706311788,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706311857
+        },
+        {
+          "at_s": 27.14,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706317607,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706317671
+        },
+        {
+          "at_s": 31.76,
+          "kind": "idle",
+          "for_s": 4.29,
+          "wall_clock_ms": 1789706322228,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706326524
+        },
+        {
+          "at_s": 35.37,
+          "kind": "throttle",
+          "bytes_per_second": 8000,
+          "for_s": 2.98,
+          "wall_clock_ms": 1789706326524,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706329509
+        },
+        {
+          "at_s": 40.72,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706331188,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706331256
+        }
+      ],
+      "position_reports": 7,
+      "furthest_position_ms": 1343.0,
+      "cover_on_reasons": [
+        "pause",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 8,
+      "launched": true,
+      "device_lost": false,
+      "events": 18,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 4,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 0.99,
+          "kind": "stall",
+          "for_s": 2.92,
+          "wall_clock_ms": 1789706360223,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706360223
+        },
+        {
+          "at_s": 4.35,
+          "kind": "pause",
+          "for_s": 2.41,
+          "wall_clock_ms": 1789706363586,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706366139
+        },
+        {
+          "at_s": 9.74,
+          "kind": "pause",
+          "for_s": 1.2,
+          "wall_clock_ms": 1789706368978,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706370321
+        },
+        {
+          "at_s": 14.2,
+          "kind": "throttle",
+          "bytes_per_second": 60000,
+          "for_s": 2.16,
+          "wall_clock_ms": 1789706373436,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706375601
+        },
+        {
+          "at_s": 17.22,
+          "kind": "throttle",
+          "bytes_per_second": 20000,
+          "for_s": 2.09,
+          "wall_clock_ms": 1789706376457,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706378550
+        },
+        {
+          "at_s": 22.01,
+          "kind": "idle",
+          "for_s": 5.12,
+          "wall_clock_ms": 1789706381243,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706386367
+        },
+        {
+          "at_s": 26.76,
+          "kind": "throttle",
+          "bytes_per_second": 8000,
+          "for_s": 3.68,
+          "wall_clock_ms": 1789706386367,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706390049
+        },
+        {
+          "at_s": 31.26,
+          "kind": "pause",
+          "for_s": 1.51,
+          "wall_clock_ms": 1789706390494,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706392137
+        },
+        {
+          "at_s": 34.87,
+          "kind": "stall",
+          "for_s": 3.06,
+          "wall_clock_ms": 1789706394110,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706394110
+        },
+        {
+          "at_s": 38.57,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706397805,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706397874
+        }
+      ],
+      "position_reports": 10,
+      "furthest_position_ms": 1932.0,
+      "cover_on_reasons": [
+        "pause",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 9,
+      "launched": true,
+      "device_lost": false,
+      "events": 17,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 3,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 0.61,
+          "kind": "throttle",
+          "bytes_per_second": 60000,
+          "for_s": 2.07,
+          "wall_clock_ms": 1789706428877,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706430950
+        },
+        {
+          "at_s": 5.13,
+          "kind": "stall",
+          "for_s": 2.57,
+          "wall_clock_ms": 1789706433393,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706433394
+        },
+        {
+          "at_s": 8.47,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706436735,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706436804
+        },
+        {
+          "at_s": 13.78,
+          "kind": "stall",
+          "for_s": 1.32,
+          "wall_clock_ms": 1789706442045,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706442045
+        },
+        {
+          "at_s": 19.02,
+          "kind": "idle",
+          "for_s": 4.26,
+          "wall_clock_ms": 1789706447282,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706451547
+        },
+        {
+          "at_s": 22.95,
+          "kind": "pause",
+          "for_s": 1.84,
+          "wall_clock_ms": 1789706451547,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706453524
+        },
+        {
+          "at_s": 26.56,
+          "kind": "pause",
+          "for_s": 2.1,
+          "wall_clock_ms": 1789706454826,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706457062
+        },
+        {
+          "at_s": 31.65,
+          "kind": "stall",
+          "for_s": 3.18,
+          "wall_clock_ms": 1789706459914,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706459914
+        },
+        {
+          "at_s": 35.02,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706463283,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706463346
+        },
+        {
+          "at_s": 39.05,
+          "kind": "stall",
+          "for_s": 1.84,
+          "wall_clock_ms": 1789706467315,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706467315
+        }
+      ],
+      "position_reports": 7,
+      "furthest_position_ms": 1206.0,
+      "cover_on_reasons": [
+        "pause",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 10,
+      "launched": true,
+      "device_lost": false,
+      "events": 23,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 3,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.86,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706497598,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706497664
+        },
+        {
+          "at_s": 5.8,
+          "kind": "throttle",
+          "bytes_per_second": 8000,
+          "for_s": 1.69,
+          "wall_clock_ms": 1789706501539,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706503234
+        },
+        {
+          "at_s": 10.01,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706505748,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706505818
+        },
+        {
+          "at_s": 15.06,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706510798,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706510867
+        },
+        {
+          "at_s": 18.27,
+          "kind": "idle",
+          "for_s": 6.33,
+          "wall_clock_ms": 1789706514006,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706520341
+        },
+        {
+          "at_s": 22.03,
+          "kind": "stall",
+          "for_s": 1.88,
+          "wall_clock_ms": 1789706520341,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706520341
+        },
+        {
+          "at_s": 26.65,
+          "kind": "idle",
+          "for_s": 7.08,
+          "wall_clock_ms": 1789706522386,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706529471
+        },
+        {
+          "at_s": 31.56,
+          "kind": "pause",
+          "for_s": 1.04,
+          "wall_clock_ms": 1789706529471,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706530643
+        },
+        {
+          "at_s": 37.26,
+          "kind": "throttle",
+          "bytes_per_second": 20000,
+          "for_s": 2.01,
+          "wall_clock_ms": 1789706532998,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706535013
+        },
+        {
+          "at_s": 42.57,
+          "kind": "throttle",
+          "bytes_per_second": 20000,
+          "for_s": 1.79,
+          "wall_clock_ms": 1789706538307,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706540101
+        }
+      ],
+      "position_reports": 15,
+      "furthest_position_ms": 3431.0,
+      "cover_on_reasons": [
+        "pause",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 11,
+      "launched": true,
+      "device_lost": false,
+      "events": 26,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 2,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.53,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706563680,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706563748
+        },
+        {
+          "at_s": 6.6,
+          "kind": "throttle",
+          "bytes_per_second": 8000,
+          "for_s": 3.87,
+          "wall_clock_ms": 1789706568749,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706572624
+        },
+        {
+          "at_s": 11.96,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706574110,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706574174
+        },
+        {
+          "at_s": 17.7,
+          "kind": "stall",
+          "for_s": 3.47,
+          "wall_clock_ms": 1789706579849,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706579849
+        },
+        {
+          "at_s": 21.7,
+          "kind": "throttle",
+          "bytes_per_second": 20000,
+          "for_s": 1.57,
+          "wall_clock_ms": 1789706583848,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706585422
+        },
+        {
+          "at_s": 26.71,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706588858,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706588922
+        },
+        {
+          "at_s": 31.67,
+          "kind": "idle",
+          "for_s": 8.01,
+          "wall_clock_ms": 1789706593817,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706601831
+        },
+        {
+          "at_s": 37.14,
+          "kind": "throttle",
+          "bytes_per_second": 8000,
+          "for_s": 3.79,
+          "wall_clock_ms": 1789706601831,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706605622
+        },
+        {
+          "at_s": 42.91,
+          "kind": "pause",
+          "for_s": 0.84,
+          "wall_clock_ms": 1789706605622,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706606596
+        }
+      ],
+      "position_reports": 16,
+      "furthest_position_ms": 3556.0,
+      "cover_on_reasons": [
+        "interval 3500-5500",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 12,
+      "launched": true,
+      "device_lost": false,
+      "events": 26,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 3,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.07,
+          "kind": "idle",
+          "for_s": 5.45,
+          "wall_clock_ms": 1789706629449,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706634900
+        },
+        {
+          "at_s": 5.46,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706634900,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706634966
+        },
+        {
+          "at_s": 9.17,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706637551,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706637614
+        },
+        {
+          "at_s": 13.62,
+          "kind": "throttle",
+          "bytes_per_second": 60000,
+          "for_s": 1.52,
+          "wall_clock_ms": 1789706642001,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706643527
+        },
+        {
+          "at_s": 18.12,
+          "kind": "pause",
+          "for_s": 1.52,
+          "wall_clock_ms": 1789706646498,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706648148
+        },
+        {
+          "at_s": 22.5,
+          "kind": "pause",
+          "for_s": 1.56,
+          "wall_clock_ms": 1789706650877,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706652570
+        },
+        {
+          "at_s": 25.9,
+          "kind": "idle",
+          "for_s": 7.88,
+          "wall_clock_ms": 1789706654281,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706662163
+        },
+        {
+          "at_s": 31.67,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706662163,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706662230
+        },
+        {
+          "at_s": 35.97,
+          "kind": "stall",
+          "for_s": 1.64,
+          "wall_clock_ms": 1789706664349,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706664349
+        },
+        {
+          "at_s": 39.92,
+          "kind": "stall",
+          "for_s": 3.06,
+          "wall_clock_ms": 1789706668297,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706668297
+        }
+      ],
+      "position_reports": 16,
+      "furthest_position_ms": 3519.0,
+      "cover_on_reasons": [
+        "interval 3500-5500",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 13,
+      "launched": true,
+      "device_lost": false,
+      "events": 26,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 2,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 1.19,
+          "kind": "idle",
+          "for_s": 7.65,
+          "wall_clock_ms": 1789706695928,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706703581
+        },
+        {
+          "at_s": 6.22,
+          "kind": "idle",
+          "for_s": 6.51,
+          "wall_clock_ms": 1789706703581,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706710092
+        },
+        {
+          "at_s": 12.04,
+          "kind": "idle",
+          "for_s": 6.09,
+          "wall_clock_ms": 1789706710092,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706716187
+        },
+        {
+          "at_s": 15.11,
+          "kind": "pause",
+          "for_s": 2.0,
+          "wall_clock_ms": 1789706716187,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706718318
+        },
+        {
+          "at_s": 21.11,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706718318,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706718382
+        },
+        {
+          "at_s": 26.87,
+          "kind": "pause",
+          "for_s": 1.53,
+          "wall_clock_ms": 1789706721609,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706723276
+        },
+        {
+          "at_s": 32.31,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706727048,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706727116
+        },
+        {
+          "at_s": 37.9,
+          "kind": "stall",
+          "for_s": 2.53,
+          "wall_clock_ms": 1789706732638,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706732638
+        },
+        {
+          "at_s": 41.95,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706736689,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706736752
+        }
+      ],
+      "position_reports": 18,
+      "furthest_position_ms": 4070.999,
+      "cover_on_reasons": [
+        "interval 3500-5500",
+        "waiting"
+      ],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 4000.0,
+          "media_to_ms": 4071.0,
+          "report_gap_ms": 179.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
+      "uncovered": []
+    },
+    {
+      "pass": 14,
+      "launched": true,
+      "device_lost": false,
+      "events": 26,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 3,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 0.73,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706762079,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706762141
+        },
+        {
+          "at_s": 6.44,
+          "kind": "throttle",
+          "bytes_per_second": 60000,
+          "for_s": 1.89,
+          "wall_clock_ms": 1789706767794,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706769684
+        },
+        {
+          "at_s": 11.41,
+          "kind": "throttle",
+          "bytes_per_second": 60000,
+          "for_s": 3.69,
+          "wall_clock_ms": 1789706772764,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706776454
+        },
+        {
+          "at_s": 17.39,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706778743,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706778809
+        },
+        {
+          "at_s": 21.47,
+          "kind": "pause",
+          "for_s": 2.3,
+          "wall_clock_ms": 1789706782824,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706785257
+        },
+        {
+          "at_s": 24.97,
+          "kind": "stall",
+          "for_s": 2.89,
+          "wall_clock_ms": 1789706786324,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706786324
+        },
+        {
+          "at_s": 30.93,
+          "kind": "pause",
+          "for_s": 1.38,
+          "wall_clock_ms": 1789706792282,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706793795
+        },
+        {
+          "at_s": 36.59,
+          "kind": "stall",
+          "for_s": 2.03,
+          "wall_clock_ms": 1789706797943,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706797943
+        },
+        {
+          "at_s": 41.11,
+          "kind": "pause",
+          "for_s": 1.06,
+          "wall_clock_ms": 1789706802463,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706803657
+        }
+      ],
+      "position_reports": 18,
+      "furthest_position_ms": 4097.0,
+      "cover_on_reasons": [
+        "interval 3500-5500",
+        "waiting"
+      ],
+      "crossings": [
+        {
+          "marker": 1,
+          "media_from_ms": 4000.0,
+          "media_to_ms": 4005.0,
+          "report_gap_ms": 250.0,
+          "covered": true,
+          "showing_for_ms": 0
+        },
+        {
+          "marker": 1,
+          "media_from_ms": 4005.0,
+          "media_to_ms": 4097.0,
+          "report_gap_ms": 159.0,
+          "covered": true,
+          "showing_for_ms": 0
+        }
+      ],
+      "uncovered": []
+    },
+    {
+      "pass": 15,
+      "launched": true,
+      "device_lost": false,
+      "events": 32,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 3,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 0.96,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706828564,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706828631
+        },
+        {
+          "at_s": 4.11,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706831714,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706831777
+        },
+        {
+          "at_s": 9.42,
+          "kind": "pause",
+          "for_s": 1.66,
+          "wall_clock_ms": 1789706837027,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706838825
+        },
+        {
+          "at_s": 13.53,
+          "kind": "pause",
+          "for_s": 2.44,
+          "wall_clock_ms": 1789706841136,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706843714
+        },
+        {
+          "at_s": 16.73,
+          "kind": "idle",
+          "for_s": 4.31,
+          "wall_clock_ms": 1789706844336,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706848648
+        },
+        {
+          "at_s": 21.34,
+          "kind": "throttle",
+          "bytes_per_second": 60000,
+          "for_s": 2.0,
+          "wall_clock_ms": 1789706848944,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706850948
+        },
+        {
+          "at_s": 25.3,
+          "kind": "idle",
+          "for_s": 6.95,
+          "wall_clock_ms": 1789706852904,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706859856
+        },
+        {
+          "at_s": 29.61,
+          "kind": "pause",
+          "for_s": 2.13,
+          "wall_clock_ms": 1789706859856,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706862118
+        },
+        {
+          "at_s": 34.5,
+          "kind": "idle",
+          "for_s": 8.37,
+          "wall_clock_ms": 1789706862118,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706870493
+        },
+        {
+          "at_s": 38.1,
+          "kind": "pause",
+          "for_s": 2.43,
+          "wall_clock_ms": 1789706870493,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706873057
+        },
+        {
+          "at_s": 42.04,
+          "kind": "stall",
+          "for_s": 1.9,
+          "wall_clock_ms": 1789706873057,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706873057
+        }
+      ],
+      "position_reports": 18,
+      "furthest_position_ms": 3384.0,
+      "cover_on_reasons": [
+        "pause",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    },
+    {
+      "pass": 16,
+      "launched": true,
+      "device_lost": false,
+      "events": 27,
+      "event_kinds": [
+        "cover-off",
+        "cover-on",
+        "harness-start",
+        "pause",
+        "playing",
+        "seeked",
+        "seeking",
+        "tick-gap",
+        "timeupdate",
+        "waiting"
+      ],
+      "split": {
+        "had_a_harness_start": true,
+        "dropped_before_the_last_harness_start": 2,
+        "dropped_for_going_backwards": 0
+      },
+      "actions": [
+        {
+          "at_s": 0.63,
+          "kind": "fast-forward",
+          "wall_clock_ms": 1789706895079,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706895142
+        },
+        {
+          "at_s": 5.49,
+          "kind": "throttle",
+          "bytes_per_second": 60000,
+          "for_s": 3.4,
+          "wall_clock_ms": 1789706899942,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706903344
+        },
+        {
+          "at_s": 9.68,
+          "kind": "throttle",
+          "bytes_per_second": 20000,
+          "for_s": 2.09,
+          "wall_clock_ms": 1789706904133,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706906228
+        },
+        {
+          "at_s": 15.36,
+          "kind": "stall",
+          "for_s": 2.4,
+          "wall_clock_ms": 1789706909811,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706909811
+        },
+        {
+          "at_s": 20.4,
+          "kind": "rewind",
+          "wall_clock_ms": 1789706914852,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706914917
+        },
+        {
+          "at_s": 25.57,
+          "kind": "idle",
+          "for_s": 4.15,
+          "wall_clock_ms": 1789706920023,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706924178
+        },
+        {
+          "at_s": 29.59,
+          "kind": "throttle",
+          "bytes_per_second": 20000,
+          "for_s": 2.93,
+          "wall_clock_ms": 1789706924178,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706927109
+        },
+        {
+          "at_s": 33.76,
+          "kind": "throttle",
+          "bytes_per_second": 20000,
+          "for_s": 3.3,
+          "wall_clock_ms": 1789706928210,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706931514
+        },
+        {
+          "at_s": 38.75,
+          "kind": "throttle",
+          "bytes_per_second": 60000,
+          "for_s": 3.29,
+          "wall_clock_ms": 1789706933203,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706936498
+        },
+        {
+          "at_s": 42.37,
+          "kind": "pause",
+          "for_s": 1.87,
+          "wall_clock_ms": 1789706936822,
+          "carried_out": true,
+          "ended_wall_clock_ms": 1789706938829
+        }
+      ],
+      "position_reports": 17,
+      "furthest_position_ms": 3824.0,
+      "cover_on_reasons": [
+        "interval 3500-5500",
+        "waiting"
+      ],
+      "crossings": [],
+      "uncovered": []
+    }
+  ]
+}
