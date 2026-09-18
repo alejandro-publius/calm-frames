@@ -1,0 +1,2864 @@
+{
+  "generated_on": "2026-09-17",
+  "tool": "eval/meter_validate.py",
+  "meter_version": "1.0.0",
+  "git_commit": "5829ca26ff461e8f766908c65289697c62f3debe",
+  "statement": "Simulated footage only. Every trial is a rendered clip filmed by the camera model in eval/meter_camera.py, so these numbers say how well the meter reads a simulated recording whose answer is known. They are not a measurement of any phone, TV or stick, and they are not evidence that the app covered anything.",
+  "thresholds": {
+    "source": "flashmap/docs/SPEC_SOURCES.md",
+    "source_sha256": "7c8d170c15bc9587f68ee61b494aa634640daa2a51ef51d43efc1037cd81ae67",
+    "flash_limit_per_second": 3,
+    "window_ms": 1000,
+    "general_min_delta": 0.1,
+    "general_dark_image_below": 0.8,
+    "area_fraction_limit": 0.25,
+    "field_fraction": [
+      0.3330078125,
+      0.3333333333333333
+    ],
+    "red_saturated_ratio": 0.8,
+    "red_min_ucs_distance": 0.2,
+    "srgb_transfer": {
+      "break": 0.04045,
+      "divisor": 12.92,
+      "offset": 0.055,
+      "scale": 1.055,
+      "exponent": 2.4
+    },
+    "luma_weights": [
+      0.2126,
+      0.7152,
+      0.0722
+    ],
+    "xyz_matrix": [
+      [
+        0.4124564,
+        0.3575761,
+        0.1804375
+      ],
+      [
+        0.2126729,
+        0.7151522,
+        0.072175
+      ],
+      [
+        0.0193339,
+        0.119192,
+        0.9503041
+      ]
+    ]
+  },
+  "instrument": {
+    "working_width": 480,
+    "analysis_width": 96,
+    "roi_sample_frames": 40,
+    "roi_trim_percentile": 1.0,
+    "roi_inset_fraction": 0.02,
+    "roi_min_area_fraction": 0.02,
+    "chart_margin_fraction": 0.1,
+    "patch_measure_fraction": 0.5,
+    "clip_high_code": 250,
+    "clip_low_code": 3,
+    "min_usable_patches": 4,
+    "max_calibration_residual": 0.05,
+    "max_clipped_frame_fraction": 0.02,
+    "leak_hold_ms": 1000.0,
+    "note": "Instrument tuning, not thresholds. Every flash threshold comes from flashmap/docs/SPEC_SOURCES.md through eval/conformance/spec.py."
+  },
+  "reference_takes": {
+    "roi": {
+      "x0": 0.16499999999999998,
+      "y0": 0.18,
+      "x1": 0.8350000000000001,
+      "y1": 0.8200000000000001,
+      "method": "otsu-profile",
+      "frames_sampled": 8,
+      "fill_inside": 1.0,
+      "fill_outside": 0.02867965367965368,
+      "area_fraction_of_frame": 0.4288000000000002,
+      "inset_fraction": 0.02,
+      "trim_percentile": 1.0
+    },
+    "calibration": {
+      "gain": [
+        1.194382888874759,
+        1.1942467640178747,
+        1.1941687699899022
+      ],
+      "offset": [
+        -0.016537252342520015,
+        -0.01647632558653909,
+        -0.01646897042023556
+      ],
+      "max_residual_relative_luminance": 0.0059896258371254785,
+      "rms_residual_relative_luminance": 0.0032563816254511423,
+      "r_squared": 0.9999020763770654,
+      "usable_patches": 10,
+      "steps": 10,
+      "saturation_luminance": null,
+      "spec_sha256": "7c8d170c15bc9587f68ee61b494aa634640daa2a51ef51d43efc1037cd81ae67",
+      "patches": [
+        {
+          "index": 0,
+          "code": 0,
+          "target_relative_luminance": 0.0,
+          "camera_rgb8": [
+            33.57901785714286,
+            33.660267857142856,
+            33.59263392857143
+          ],
+          "usable": true,
+          "clipped": false,
+          "fitted_relative_luminance": 0.0022714889693490757,
+          "residual": 0.0022714889693490757
+        },
+        {
+          "index": 1,
+          "code": 28,
+          "target_relative_luminance": 0.011612245179743885,
+          "camera_rgb8": [
+            44.715401785714285,
+            44.582589285714285,
+            44.55379464285714
+          ],
+          "usable": true,
+          "clipped": false,
+          "fitted_relative_luminance": 0.01435415706505592,
+          "residual": 0.002741911885312035
+        },
+        {
+          "index": 2,
+          "code": 57,
+          "target_relative_luminance": 0.04091519690685319,
+          "camera_rgb8": [
+            63.327313311688314,
+            63.23478084415584,
+            63.30722402597402
+          ],
+          "usable": true,
+          "clipped": false,
+          "fitted_relative_luminance": 0.04335581072106974,
+          "residual": 0.0024406138142165495
+        },
+        {
+          "index": 3,
+          "code": 85,
+          "target_relative_luminance": 0.09084171118340768,
+          "camera_rgb8": [
+            84.99464285714286,
+            84.9125,
+            84.99151785714285
+          ],
+          "usable": true,
+          "clipped": false,
+          "fitted_relative_luminance": 0.0918317426284766,
+          "residual": 0.0009900314450689146
+        },
+        {
+          "index": 4,
+          "code": 113,
+          "target_relative_luminance": 0.1651321945016676,
+          "camera_rgb8": [
+            108.40111607142858,
+            108.40870535714286,
+            108.38660714285714
+          ],
+          "usable": true,
+          "clipped": false,
+          "fitted_relative_luminance": 0.16403539036405193,
+          "residual": -0.0010968041376156756
+        },
+        {
+          "index": 5,
+          "code": 142,
+          "target_relative_luminance": 0.2704977910130658,
+          "camera_rgb8": [
+            133.77098214285715,
+            133.78191964285713,
+            133.75446428571428
+          ],
+          "usable": true,
+          "clipped": false,
+          "fitted_relative_luminance": 0.267196843165901,
+          "residual": -0.003300947847164837
+        },
+        {
+          "index": 6,
+          "code": 170,
+          "target_relative_luminance": 0.4019777798321958,
+          "camera_rgb8": [
+            158.95267857142858,
+            158.97142857142856,
+            158.953125
+          ],
+          "usable": true,
+          "clipped": false,
+          "fitted_relative_luminance": 0.3973749784695476,
+          "residual": -0.004602801362648179
+        },
+        {
+          "index": 7,
+          "code": 198,
+          "target_relative_luminance": 0.5647115057049292,
+          "camera_rgb8": [
+            184.6875,
+            184.71387987012986,
+            184.7148944805195
+          ],
+          "usable": true,
+          "clipped": false,
+          "fitted_relative_luminance": 0.5608756410405458,
+          "residual": -0.0038358646643834593
+        },
+        {
+          "index": 8,
+          "code": 227,
+          "target_relative_luminance": 0.7681511472475069,
+          "camera_rgb8": [
+            211.6203125,
+            211.60825892857142,
+            211.62589285714284
+          ],
+          "usable": true,
+          "clipped": false,
+          "fitted_relative_luminance": 0.7665538933082465,
+          "residual": -0.0015972539392603569
+        },
+        {
+          "index": 9,
+          "code": 255,
+          "target_relative_luminance": 1.0,
+          "camera_rgb8": [
+            238.1421875,
+            238.1419642857143,
+            238.14888392857142
+          ],
+          "usable": true,
+          "clipped": false,
+          "fitted_relative_luminance": 1.0059896258371255,
+          "residual": 0.0059896258371254785
+        }
+      ],
+      "model": "per channel affine in linear light: display = gain * camera + offset",
+      "colour_note": "The chart is neutral gray, so this fit corrects luminance and per channel gain. It cannot correct the camera's colour matrix, so red flash counts from camera footage are an indication and not a calibrated measurement."
+    },
+    "gray_field_flicker_check": {
+      "frames": 8,
+      "mean_relative_luminance": 0.21353636423458427,
+      "peak_to_peak": 0.00011344839272198204,
+      "standard_deviation": 3.428089340853411e-05,
+      "dominant_hz": 30.0,
+      "dominant_amplitude": 3.598304003050077e-05,
+      "tolerance": 0.0059896258371254785,
+      "tolerance_source": "the worst patch residual of this take's calibration",
+      "passes": true,
+      "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+    }
+  },
+  "summary": {
+    "trials_run": 26,
+    "trials_with_an_error": 0,
+    "verdict_agreement": {
+      "numerator": 26,
+      "denominator": 26,
+      "value": 1.0,
+      "wilson_lo": 0.8712710781407846,
+      "wilson_hi": 1.0
+    },
+    "exact_rate_agreement_on_flashing_clips": {
+      "numerator": 18,
+      "denominator": 20,
+      "value": 0.9,
+      "wilson_lo": 0.6989663547715128,
+      "wilson_hi": 0.9721335187862319
+    },
+    "within_one_per_second_on_flashing_clips": {
+      "numerator": 20,
+      "denominator": 20,
+      "value": 1.0,
+      "wilson_lo": 0.8388748419471806,
+      "wilson_hi": 1.0
+    },
+    "covered_runs_with_a_leak": {
+      "numerator": 0,
+      "denominator": 4,
+      "value": 0.0,
+      "wilson_lo": 0.0,
+      "wilson_hi": 0.4898908364545973
+    },
+    "covered_runs_with_any_flash_counted": {
+      "numerator": 0,
+      "denominator": 4,
+      "value": 0.0,
+      "wilson_lo": 0.0,
+      "wilson_hi": 0.4898908364545973
+    },
+    "by_camera_frame_rate": {
+      "240fps": {
+        "exact_rate": {
+          "numerator": 9,
+          "denominator": 11,
+          "value": 0.8181818181818182,
+          "wilson_lo": 0.523019438039156,
+          "wilson_hi": 0.9486323102539149
+        },
+        "within_one_per_second": {
+          "numerator": 11,
+          "denominator": 11,
+          "value": 1.0,
+          "wilson_lo": 0.7411670330319684,
+          "wilson_hi": 1.0
+        },
+        "verdict": {
+          "numerator": 11,
+          "denominator": 11,
+          "value": 1.0,
+          "wilson_lo": 0.7411670330319684,
+          "wilson_hi": 1.0
+        }
+      },
+      "60fps": {
+        "exact_rate": {
+          "numerator": 9,
+          "denominator": 9,
+          "value": 1.0,
+          "wilson_lo": 0.7008549515804559,
+          "wilson_hi": 1.0
+        },
+        "within_one_per_second": {
+          "numerator": 9,
+          "denominator": 9,
+          "value": 1.0,
+          "wilson_lo": 0.7008549515804559,
+          "wilson_hi": 1.0
+        },
+        "verdict": {
+          "numerator": 9,
+          "denominator": 9,
+          "value": 1.0,
+          "wilson_lo": 0.7008549515804559,
+          "wilson_hi": 1.0
+        }
+      }
+    },
+    "interval_method": "Wilson score interval, 95%, two sided, no continuity correction, from eval/metrics.py. The trials are simulated clips chosen by hand, not a sample from any population, so the interval describes this simulation and nothing else. A rate of 0 of n still has an upper bound, which is why it is reported that way."
+  },
+  "trials": [
+    {
+      "trial": "rate_1hz_240fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_1hz",
+        "flash_hz": 1.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 1.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 1.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20295
+      },
+      "measured": {
+        "peak_flashes_per_second": 1,
+        "general_peak_per_second": 1,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 85.57
+    },
+    {
+      "trial": "rate_2hz_240fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_2hz",
+        "flash_hz": 2.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 2.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 2.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20450
+      },
+      "measured": {
+        "peak_flashes_per_second": 2,
+        "general_peak_per_second": 2,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 72.48
+    },
+    {
+      "trial": "rate_3hz_240fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_3hz",
+        "flash_hz": 3.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 3.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 3.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20600
+      },
+      "measured": {
+        "peak_flashes_per_second": 3,
+        "general_peak_per_second": 3,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 93.43
+    },
+    {
+      "trial": "rate_4hz_240fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_4hz",
+        "flash_hz": 4.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 4.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 4.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20755
+      },
+      "measured": {
+        "peak_flashes_per_second": 4,
+        "general_peak_per_second": 4,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 81.98
+    },
+    {
+      "trial": "rate_5hz_240fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_5hz",
+        "flash_hz": 5.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 5.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 5.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20905
+      },
+      "measured": {
+        "peak_flashes_per_second": 5,
+        "general_peak_per_second": 5,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 44.37
+    },
+    {
+      "trial": "rate_6hz_240fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_6hz",
+        "flash_hz": 6.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 6.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 6.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21060
+      },
+      "measured": {
+        "peak_flashes_per_second": 6,
+        "general_peak_per_second": 6,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 88.01
+    },
+    {
+      "trial": "rate_10hz_240fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_10hz",
+        "flash_hz": 10.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 10.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 10.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21633
+      },
+      "measured": {
+        "peak_flashes_per_second": 11,
+        "general_peak_per_second": 11,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": false,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 110.48
+    },
+    {
+      "trial": "rate_12hz_240fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_12hz",
+        "flash_hz": 12.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 12.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 12.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21933
+      },
+      "measured": {
+        "peak_flashes_per_second": 12,
+        "general_peak_per_second": 12,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 108.81
+    },
+    {
+      "trial": "rate_1hz_60fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_1hz",
+        "flash_hz": 1.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 1.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 1.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20295
+      },
+      "measured": {
+        "peak_flashes_per_second": 1,
+        "general_peak_per_second": 1,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 30.88
+    },
+    {
+      "trial": "rate_2hz_60fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_2hz",
+        "flash_hz": 2.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 2.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 2.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20450
+      },
+      "measured": {
+        "peak_flashes_per_second": 2,
+        "general_peak_per_second": 2,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 32.73
+    },
+    {
+      "trial": "rate_3hz_60fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_3hz",
+        "flash_hz": 3.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 3.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 3.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20600
+      },
+      "measured": {
+        "peak_flashes_per_second": 3,
+        "general_peak_per_second": 3,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 38.36
+    },
+    {
+      "trial": "rate_4hz_60fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_4hz",
+        "flash_hz": 4.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 4.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 4.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20755
+      },
+      "measured": {
+        "peak_flashes_per_second": 4,
+        "general_peak_per_second": 4,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 49.76
+    },
+    {
+      "trial": "rate_5hz_60fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_5hz",
+        "flash_hz": 5.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 5.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 5.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20905
+      },
+      "measured": {
+        "peak_flashes_per_second": 5,
+        "general_peak_per_second": 5,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 49.52
+    },
+    {
+      "trial": "rate_6hz_60fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_6hz",
+        "flash_hz": 6.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 6.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 6.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21060
+      },
+      "measured": {
+        "peak_flashes_per_second": 6,
+        "general_peak_per_second": 6,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 62.9
+    },
+    {
+      "trial": "rate_10hz_60fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_10hz",
+        "flash_hz": 10.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 10.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 10.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21633
+      },
+      "measured": {
+        "peak_flashes_per_second": 10,
+        "general_peak_per_second": 10,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 38.83
+    },
+    {
+      "trial": "rate_12hz_60fps",
+      "arm": "rate",
+      "what_it_tests": "does the count match the rate that was filmed",
+      "clip": {
+        "name": "rate_12hz",
+        "flash_hz": 12.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 12.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 12.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21933
+      },
+      "measured": {
+        "peak_flashes_per_second": 12,
+        "general_peak_per_second": 12,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 38.92
+    },
+    {
+      "trial": "red_6hz_240fps",
+      "arm": "red",
+      "what_it_tests": "the red rule, on a pair that barely moves in luminance",
+      "clip": {
+        "name": "red_6hz",
+        "flash_hz": 6.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          128,
+          128,
+          128
+        ],
+        "high_rgb": [
+          255,
+          0,
+          0
+        ],
+        "background_rgb": [
+          128,
+          128,
+          128
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 6.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 6.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21160
+      },
+      "measured": {
+        "peak_flashes_per_second": 6,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 6,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.4757929883138564,
+        "publishable": false
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 98.02
+    },
+    {
+      "trial": "red_6hz_60fps",
+      "arm": "red",
+      "what_it_tests": "the red rule, on a pair that barely moves in luminance",
+      "clip": {
+        "name": "red_6hz",
+        "flash_hz": 6.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          128,
+          128,
+          128
+        ],
+        "high_rgb": [
+          255,
+          0,
+          0
+        ],
+        "background_rgb": [
+          128,
+          128,
+          128
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 6.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 6.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21160
+      },
+      "measured": {
+        "peak_flashes_per_second": 6,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 6,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.5,
+        "publishable": false
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 39.81
+    },
+    {
+      "trial": "area_small_patch_240fps",
+      "arm": "area",
+      "what_it_tests": "a strobe too small to fill a 10 degree window is not counted",
+      "clip": {
+        "name": "area_small",
+        "flash_hz": 8.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 0.125,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 8.0,
+        "designed_window_coverage": 0.13763440860215054
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 0.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 22219
+      },
+      "measured": {
+        "peak_flashes_per_second": 0,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 91.1
+    },
+    {
+      "trial": "area_half_patch_240fps",
+      "arm": "area",
+      "what_it_tests": "the same strobe, big enough to count, still counts",
+      "clip": {
+        "name": "area_half",
+        "flash_hz": 8.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          40,
+          40,
+          40
+        ],
+        "patch_fraction": 0.5,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 8.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 8.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 25269
+      },
+      "measured": {
+        "peak_flashes_per_second": 9,
+        "general_peak_per_second": 9,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": false,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 102.49
+    },
+    {
+      "trial": "amplitude_below_threshold_240fps",
+      "arm": "amplitude",
+      "what_it_tests": "a swing under the general flash threshold is not counted",
+      "clip": {
+        "name": "amp_below",
+        "flash_hz": 8.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          128,
+          128,
+          128
+        ],
+        "high_rgb": [
+          146,
+          146,
+          146
+        ],
+        "background_rgb": [
+          128,
+          128,
+          128
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 8.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 0.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21035
+      },
+      "measured": {
+        "peak_flashes_per_second": 0,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 70.02
+    },
+    {
+      "trial": "amplitude_above_threshold_240fps",
+      "arm": "amplitude",
+      "what_it_tests": "a swing just over the threshold still counts",
+      "clip": {
+        "name": "amp_above",
+        "flash_hz": 8.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          128,
+          128,
+          128
+        ],
+        "high_rgb": [
+          161,
+          161,
+          161
+        ],
+        "background_rgb": [
+          128,
+          128,
+          128
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 8.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 8.0,
+        "above_limit": true,
+        "leaks": 1
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21070
+      },
+      "measured": {
+        "peak_flashes_per_second": 8,
+        "general_peak_per_second": 8,
+        "red_peak_per_second": 0,
+        "above_limit": true,
+        "leaks": 1,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 92.79
+    },
+    {
+      "trial": "covered_static_240fps",
+      "arm": "covered",
+      "what_it_tests": "an opaque cover: zero flashes and zero leaks",
+      "clip": {
+        "name": "covered_static",
+        "flash_hz": 0.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          24,
+          24,
+          24
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 0.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 0.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20295
+      },
+      "measured": {
+        "peak_flashes_per_second": 0,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 58.94
+    },
+    {
+      "trial": "covered_static_60fps",
+      "arm": "covered",
+      "what_it_tests": "an opaque cover: zero flashes and zero leaks",
+      "clip": {
+        "name": "covered_static",
+        "flash_hz": 0.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          24,
+          24,
+          24
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 0.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 0.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20295
+      },
+      "measured": {
+        "peak_flashes_per_second": 0,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 21.6
+    },
+    {
+      "trial": "covered_ramp_240fps",
+      "arm": "covered",
+      "what_it_tests": "a slow fade is a ramp, not flashing, so it stays at zero",
+      "clip": {
+        "name": "covered_ramp",
+        "flash_hz": 0.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          24,
+          24,
+          24
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": [
+          200,
+          200,
+          200
+        ],
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 0.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 0.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 21152
+      },
+      "measured": {
+        "peak_flashes_per_second": 0,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 30.0,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 70.99
+    },
+    {
+      "trial": "covered_bright_60fps",
+      "arm": "covered",
+      "what_it_tests": "a bright still screen, where camera noise is largest, stays at zero",
+      "clip": {
+        "name": "covered_bright",
+        "flash_hz": 0.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          180,
+          180,
+          180
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 0.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.0035,
+        "shot_noise": 0.006,
+        "seed": 20260917,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 0.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20283
+      },
+      "measured": {
+        "peak_flashes_per_second": 0,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 8,
+        "mean_relative_luminance": 0.21353636423458427,
+        "peak_to_peak": 0.00011344839272198204,
+        "standard_deviation": 3.428089340853411e-05,
+        "dominant_hz": 7.5,
+        "dominant_amplitude": 3.598304003050077e-05,
+        "tolerance": 0.0059896258371254785,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      },
+      "seconds": 25.31
+    }
+  ],
+  "what_this_does_not_cover": [
+    "any real camera: rolling shutter, autoexposure hunting, the camera's colour matrix, and the beat between the shutter and the panel's refresh are all absent from the model",
+    "any real TV: panel response time, local dimming, motion interpolation and contrast enhancement are all absent",
+    "camera shake, an off-axis view and a reflection on the screen",
+    "red flash through a real camera. The step chart is neutral gray, so the fit corrects luminance and per channel gain, not colour",
+    "the live capture path. It is the same code as the file path, with the input format set, and it has never been run against a physical camera here"
+  ],
+  "known_issues": [
+    {
+      "found": "2026-09-17",
+      "what": "the meter read a 6 Hz strobe as 12 flashes a second on simulated camera footage, because an exposure window that straddles an edge records a middle value and one edge arrived as two steps",
+      "fix": "a run of transitions in the same direction now counts once for pairing, which is what WCAG's 'adjacent peaks and valleys' asks for. See GeneralFlashCounter in eval/meter.py",
+      "note": "flashmap does not need this rule, because a file changes on a frame boundary and never shows the middle of an edge. It is worth a look all the same, for footage that was itself filmed off a screen."
+    }
+  ],
+  "runtime_seconds": 1704.1
+}
