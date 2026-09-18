@@ -43,6 +43,28 @@ REPO = Path(__file__).resolve().parent.parent
 REQUIRED_LEAD_MS = 150
 
 
+def last_reported_media_ms(events: list[dict]) -> float | None:
+    """The furthest position the player itself ever reported.
+
+    This exists because of a mistake worth not repeating. A run can look
+    perfect while nothing plays: the scheduler advances its own wall-clock
+    estimate, fires every cover on time against that estimate, and produces a
+    full set of lead times that are arithmetic rather than measurement. The
+    first version of this script reported 20 of 20 markers covered in time
+    from a run where the player never got past 0.26 seconds.
+
+    So a lead time is only counted when the player had actually reached that
+    part of the clip.
+    """
+    reported = [
+        e["mediaTimeMs"]
+        for e in events
+        if e.get("kind") in ("timeupdate", "seeked", "playing")
+        and isinstance(e.get("mediaTimeMs"), (int, float))
+    ]
+    return max(reported) if reported else None
+
+
 def wilson_interval(successes: int, trials: int, z: float = 1.96) -> dict:
     """Wilson score interval, which behaves at the edges where this lives.
 
@@ -101,6 +123,7 @@ def main() -> int:
         and isinstance(e.get("reason"), str)
         and e["reason"].startswith("interval ")
     ]
+    furthest_played = last_reported_media_ms(events)
 
     # Each cover-on names the interval it belongs to, so a cover can be matched
     # to its marker without guessing from timestamps.
@@ -122,19 +145,35 @@ def main() -> int:
             )
             continue
         first = min(matching, key=lambda e: e["wallClockMs"])
+        if furthest_played is None or marker["start_ms"] > furthest_played:
+            trials.append(
+                {
+                    "marker": marker["index"],
+                    "marker_start_ms": marker["start_ms"],
+                    "covered": True,
+                    "counted": False,
+                    "why": (
+                        "the player never reached this part of the clip, so the "
+                        "cover fired against an estimate and there is nothing "
+                        "here to measure"
+                    ),
+                }
+            )
+            continue
         lead = marker["start_ms"] - first["mediaTimeMs"]
         trials.append(
             {
                 "marker": marker["index"],
                 "marker_start_ms": marker["start_ms"],
                 "covered": True,
+                "counted": True,
                 "cover_on_media_ms": round(first["mediaTimeMs"], 1),
                 "lead_ms": round(lead, 1),
                 "in_time": lead >= REQUIRED_LEAD_MS,
             }
         )
 
-    reached = [t for t in trials if t["covered"]]
+    reached = [t for t in trials if t.get("counted")]
     in_time = [t for t in reached if t.get("in_time")]
     leads = [t["lead_ms"] for t in reached if t["lead_ms"] is not None]
 
@@ -159,7 +198,11 @@ def main() -> int:
         "guard_band_ms": args.guard_band_ms,
         "required_lead_ms": REQUIRED_LEAD_MS,
         "markers_in_schedule": len(markers),
-        "markers_reached_during_run": len(reached),
+        "furthest_position_the_player_reported_ms": furthest_played,
+        "markers_counted": len(reached),
+        "markers_not_counted": len(
+            [t for t in trials if t.get("covered") and not t.get("counted")]
+        ),
         "markers_covered_in_time": len(in_time),
         "covered_in_time_fraction": (
             round(len(in_time) / len(reached), 4) if reached else None

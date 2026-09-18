@@ -82,25 +82,19 @@ Each line pairs media time with wall-clock time, so a 240 fps recording can be l
 
 The first version restarted its run clock on every re-render, so the cover turned on and then straight back off. It would have wasted a filming session. The schedule is now read through a ref, the run clock survives re-renders, and putting the bug back turns the suite red.
 
-### 2026-09-17, evening: the GATE 1 analysis rehearsed end to end
+### 2026-09-17, evening: a retracted number, and what it taught us
 
-The marker clip, the run and the analysis all exist now, and they were run against each other on the Vega Virtual Device. Numbers come from results/gate1_rehearsal_vvd.json and results/vvd_timeupdate_stats.json.
+**An earlier version of this entry said the GATE 1 rehearsal covered 20 of 20 markers in time, with a worst lead of 449 ms. That number was wrong and it is withdrawn.**
 
-| What | Value |
-|---|---|
-| Markers in the clip | <!--n results/gate1_rehearsal_vvd.json:markers_in_schedule -->20<!--/n--> |
-| Markers reached during the run | <!--n results/gate1_rehearsal_vvd.json:markers_reached_during_run -->20<!--/n--> |
-| Covered in time (150 ms or more before the marker) | <!--n results/gate1_rehearsal_vvd.json:markers_covered_in_time -->20<!--/n--> |
-| Wilson 95% interval | <!--n results/gate1_rehearsal_vvd.json:wilson_95_interval.low -->0.8389<!--/n--> to <!--n results/gate1_rehearsal_vvd.json:wilson_95_interval.high -->1<!--/n--> |
-| Worst lead time | <!--n results/gate1_rehearsal_vvd.json:worst_lead_ms -->449<!--/n--> ms |
-| Median lead time | <!--n results/gate1_rehearsal_vvd.json:lead_ms.median -->471<!--/n--> ms |
-| Guard band | <!--n results/gate1_rehearsal_vvd.json:guard_band_ms -->500<!--/n--> ms |
+What happened. The run it came from never played. The player reported positions between 0.17 s and <!--n results/gate1_rehearsal_vvd.json:furthest_position_the_player_reported_ms -->259<!--/n--> ms and got no further. Meanwhile the cover scheduler, which runs on a wall clock by design, kept advancing its own estimate of where the playhead was and fired all 20 covers on time against that estimate. The analysis then compared those covers against the schedule and found perfect agreement, because both sides were the same clock. It was arithmetic wearing the clothes of a measurement.
 
-**This is not GATE 1.** It measures what the app believed about media time, not what the screen showed. A cover the app scheduled correctly but the compositor drew late would pass here and fail on camera. The real gate is 50 trials filmed at 240 fps on a real stick, in game mode with motion smoothing off.
+It was caught by writing a stricter second script. `eval/gate1_software.py` needs a position report from the player on both sides of a marker before it will place that marker in wall-clock time, and it returned zero usable trials out of 150 across three passes. That disagreement with a script reporting a perfect score is what exposed the problem.
 
-Two things stop us recording the virtual device's screen on this machine, and neither affects the real gate, which films a TV with a phone:
-- macOS exposes no screen capture device to ffmpeg without the Screen Recording permission, which a person has to grant;
-- the window is not captured anyway. A full screen grab while the virtual device was frontmost returned the desktop behind it, and QEMU's own screendump returns black, because the app draws on a GPU layer that neither path sees.
+`eval/gate1_rehearsal.py` now refuses the same way: a lead time is counted only when the player actually reached that part of the clip. Re-run against the same events, it reports <!--n results/gate1_rehearsal_vvd.json:markers_counted -->0<!--/n--> counted and <!--n results/gate1_rehearsal_vvd.json:markers_not_counted -->20<!--/n--> not counted, with the reason on each one.
+
+**So there is no lead time number yet, from any run, on any device.** results/gate1_software_vvd.json records <!--n results/gate1_software_vvd.json:trials_counted -->0<!--/n--> counted trials and <!--n results/gate1_software_vvd.json:trials_dropped_no_timeupdate -->150<!--/n--> dropped, which is the honest state. Getting one needs playback that actually runs, and the virtual device has not managed a sustained play of the marker clip. GATE 1 on the stick does not depend on solving that, because a stick plays video properly and a camera watches the screen.
+
+The lesson is worth keeping: a scheduler measured against its own clock will always look perfect. Any timing number has to be anchored to something the player or the screen reported, not to what the app believed.
 
 What the same run measured about the player, in results/vvd_timeupdate_stats.json. Neither figure is documented by Amazon, which is why the scheduler runs on a wall clock re-synced to media time rather than reacting to timeupdate:
 

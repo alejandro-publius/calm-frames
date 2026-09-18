@@ -33,7 +33,8 @@ Private at **github.com/alejandro-publius/calm-frames**, branch `main`, **CI gre
 ### Lane A, the cover and GATE 1
 - The marker clip and its schedule are made by `eval/marker_clip.py`: 20 markers, one gentle gray to white step each. Measured after generation: 20 rising edges, zero offset from the schedule, 0.333 transitions per second against WCAG's three. The clip stays out of git; the schedule and its hash are committed.
 - The cover scheduler runs on a wall clock re-synced to media time, knows about playback rate and pauses, and hides the picture at once on seeking, buffering, stalling, pausing and backgrounding. 81 tests across the Calm Frames modules.
-- **The GATE 1 analysis is rehearsed end to end** on the virtual device: all 20 markers covered in time, worst lead 449 ms, median 471 ms, Wilson interval 0.839 to 1.0. `results/gate1_rehearsal_vvd.json`.
+- **A number was published and then withdrawn.** An earlier status said the rehearsal covered 20 of 20 markers in time with a worst lead of 449 ms. It was wrong: the run never played, the player never got past 0.26 s, and the scheduler fired every cover on time against its own wall-clock estimate, so the analysis agreed with itself. A stricter second script refused to count any of it, which is how it surfaced. Both scripts now require a position report from the player before counting a lead time. docs/GATES.md carries the full retraction.
+- **There is no cover lead time number yet, from any run, on any device.** `results/gate1_software_vvd.json` records 0 counted trials and 150 dropped, which is the honest state. Getting one needs playback that actually runs, and the virtual device has not managed a sustained play of the marker clip. GATE 1 on the stick does not depend on solving that.
 - Measured about the player, which Amazon does not document: `timeupdate` is irregular, and in the recorded run it went quiet for over five seconds while the clip played on. `results/vvd_timeupdate_stats.json`. This is the argument for scheduling ahead rather than reacting.
 - The layering test ran and is **inconclusive**: the cover toggled 8 times on schedule and nothing crashed, but playback did not run in that take, so it says nothing about sound continuing. Recorded that way in `results/vvd_layering_rehearsal.json`.
 
@@ -66,8 +67,8 @@ All from `results/`, all checked by CI:
 
 | What | Value | Source |
 |---|---|---|
-| Markers covered in time, rehearsal | 20 of 20 | gate1_rehearsal_vvd.json |
-| Worst lead time, rehearsal | 449 ms | gate1_rehearsal_vvd.json |
+| Cover lead time | none yet, withdrawn, see GATES.md | gate1_software_vvd.json |
+| Longest gap between player position reports | 5219 ms | vvd_timeupdate_stats.json |
 | Guard band | 500 ms | gate1_rehearsal_vvd.json |
 | App tests | 415 | jest |
 | flashmap tests | 200, 42 of 42 mutations killed | pytest |

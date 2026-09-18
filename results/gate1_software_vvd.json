@@ -1,0 +1,38 @@
+{
+  "recorded_utc": "2026-09-18T00:23:09+00:00",
+  "measurement": "software-level lead time, not screen-level",
+  "what_this_is": "The gap between the moment the app applied the cover and the moment the marker was due, both in wall-clock time, from the events the app posted during runs on the Vega Virtual Device.",
+  "what_this_is_not": "GATE 1, and not a prediction of it. Everything after the app sets its state is unmeasured here: the React commit, the compositor, scan-out and the panel. All of that delay lands in the real figure and none of it lands in this one, so treat this as an upper bound on how well the real thing can do. GATE 1 is 50 trials filmed at 240 fps on a real stick.",
+  "device": "Vega Virtual Device",
+  "clip_sha256": "fad744279f9c9f085b9cd23b78d5a206e99f565b5cd42bb64bda0762157a391e",
+  "markers_per_pass": 50,
+  "guard_band_ms": 500,
+  "required_lead_ms": 150,
+  "passes": [
+    {
+      "pass": 1,
+      "events": 126,
+      "trials": 0
+    },
+    {
+      "pass": 2,
+      "events": 129,
+      "trials": 0
+    },
+    {
+      "pass": 3,
+      "events": 123,
+      "trials": 0
+    }
+  ],
+  "trials_counted": 0,
+  "trials_dropped_no_timeupdate": 150,
+  "in_time": 0,
+  "in_time_fraction": null,
+  "wilson_95_interval": {
+    "low": null,
+    "high": null
+  },
+  "lead_ms": null,
+  "worst_lead_ms": null
+}
