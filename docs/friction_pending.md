@@ -126,3 +126,12 @@ Keep adding here as things happen. It is easier to write one down at the time th
 - **Severity:** Low
 - **Workaround:** Follow the examples, not the option descriptions.
 - **Suggestion:** Swap the two descriptions.
+
+## 12. The sample app ships jest-native but never registers its matchers
+- **Task:** Assert that a credits screen really draws a licence line, rather than only carrying it in an accessibility label.
+- **Steps:** `expect(screen.getByTestId('x')).toHaveTextContent('...')` in a new suite under `app/test/`, run with `npx jest --ci`, Sep 17, 2026. `@testing-library/jest-native ~5.4.3` is in the sample's devDependencies.
+- **Expected:** The matcher works, because the package is installed.
+- **Actual:** `TypeError: expect(...).toHaveTextContent is not a function`. Nothing imports `@testing-library/jest-native/extend-expect`, so the matchers are never added. `jest.setup.ts` also calls `expect.hasAssertions()` in a `beforeEach`, so the throw comes back as two failures: the TypeError and "Expected at least one assertion but received none", which reads as though the test never ran.
+- **Severity:** Low
+- **Workaround:** Read the node's children directly: `getByTestId(id).props.children`, keeping the strings. That is what the suite does now.
+- **Suggestion:** Either add `import '@testing-library/jest-native/extend-expect';` to `jest.setup.ts`, or drop the dependency. A declared package whose matchers are missing costs more time than one that was never there.
