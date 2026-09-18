@@ -267,3 +267,69 @@ class TestPlanRoundTrip:
             CoverInterval(5000, 5500, "red"),
         ]
         assert total_covered_ms(intervals) == 1500
+
+
+class TestAPatternIsItsOwnKindOfCover:
+    """A regular pattern is covered opaque, and it is not a red flash.
+
+    Before the pattern class existed, `normalise_reason` had no word for a
+    pattern and fell through to its red default. The cover came out right and
+    two other things came out wrong: a title whose red rule never fired reported
+    `has_red` true and counted red intervals, and the only thing holding the
+    cover opaque was an undocumented default. Adding "pattern" to the general
+    word list would have made every pattern dimmable with the whole suite still
+    green, which is the reason these assertions exist.
+
+    Both were seen to fail. Mapping pattern onto general gives
+    `AssertionError: assert 'dim' == 'opaque'`, and dropping PATTERN from the
+    opaque branch of cover_mode gives the same. Counting a pattern as red gives
+    `AssertionError: assert False is True` on the has_red case below.
+    """
+
+    def test_a_pattern_is_opaque_even_when_the_household_allows_dim(self):
+        doc = FlashMapDoc(
+            version=1,
+            source_sha256="c" * 64,
+            profile="broadcast",
+            segments=[seg(4000, 6000, "pattern")],
+        )
+        plan = build_hide_plan(
+            doc, source_sha256="c" * 64, duration_ms=20_000, allow_dim=True
+        )
+        assert [i.reason for i in plan.intervals] == ["pattern"]
+        assert plan.modes() == ["opaque"]
+
+    def test_a_pattern_only_title_does_not_claim_a_red_flash(self):
+        # Parsed from a raw map rather than built from MapSegment directly, so
+        # this goes through normalise_reason. Constructing the segment by hand
+        # skips that function entirely, and a first version of this test did
+        # exactly that and stayed green while the pattern branch was deleted.
+        from pipeline.flashmap_adapter import parse_map
+
+        doc = parse_map(
+            {
+                "version": 1,
+                "source_sha256": "d" * 64,
+                "profile": "broadcast",
+                "segments": [
+                    {"start_ms": 4000, "end_ms": 6000, "reason": "pattern"}
+                ],
+            }
+        )
+        assert [s.reason for s in doc.segments] == ["pattern"]
+        plan = build_hide_plan(doc, source_sha256="d" * 64, duration_ms=20_000)
+        assert plan.has_red is False
+
+    def test_a_pattern_merged_with_a_general_flash_stays_opaque(self):
+        doc = FlashMapDoc(
+            version=1,
+            source_sha256="e" * 64,
+            profile="broadcast",
+            segments=[seg(4000, 5000, "general"), seg(5100, 6000, "pattern")],
+        )
+        plan = build_hide_plan(
+            doc, source_sha256="e" * 64, duration_ms=20_000, allow_dim=True
+        )
+        assert len(plan.intervals) == 1
+        assert plan.intervals[0].reason == "pattern"
+        assert plan.modes() == ["opaque"]

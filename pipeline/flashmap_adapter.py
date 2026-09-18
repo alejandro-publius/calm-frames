@@ -97,8 +97,18 @@ PRESET_SPECS: dict[str, Preset] = {
 
 RED = "red"
 GENERAL = "general"
+# The regular pattern rule, BT.1702-3 Guideline 2. Opaque like red, counted apart
+# from it, because a pattern is not a red flash and must not be reported as one.
+PATTERN = "pattern"
 
 _RED_WORDS = {"red", "red_flash", "red-flash", "saturated_red", "saturatedred", "redflash"}
+_PATTERN_WORDS = {
+    "pattern",
+    "regular_pattern",
+    "regular-pattern",
+    "regularpattern",
+}
+
 _GENERAL_WORDS = {
     "general",
     "general_flash",
@@ -130,10 +140,20 @@ class MapFormatError(PipelineError):
 
 
 def normalise_reason(value: Any) -> str:
-    """Map a reason string onto "general" or "red", defaulting to red.
+    """Map a reason string onto "general", "red" or "pattern", defaulting to red.
 
     Red is the safe default: a red segment is always covered opaque, so
     guessing red can only ever hide more, never less.
+
+    Pattern is its own class rather than a spelling of red, and that is a
+    correctness fix rather than a rename. Before it existed, a regular pattern
+    segment fell through this function's default and came out as red. The cover
+    was right, because red is opaque and a pattern must be opaque, but two other
+    things were wrong: `has_red` and the `red_intervals` count both said a title
+    had red flashing when its red rule had never fired, and the only thing
+    keeping a pattern opaque was a default nobody had written down. Adding the
+    word "pattern" to _GENERAL_WORDS would have made every pattern dimmable with
+    every test still green, which is how close that was.
     """
     if value is None:
         return RED
@@ -142,6 +162,8 @@ def normalise_reason(value: Any) -> str:
         return GENERAL
     if text in _RED_WORDS:
         return RED
+    if text in _PATTERN_WORDS:
+        return PATTERN
     return RED
 
 

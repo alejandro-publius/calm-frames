@@ -27,7 +27,7 @@ export interface HideLogEntry {
   durationMs: number;
   cause: HideCause;
   /** general or red, from the map. */
-  reason?: 'general' | 'red';
+  reason?: 'general' | 'red' | 'pattern';
 }
 
 export const HIDE_LOG_LIMIT = 200;

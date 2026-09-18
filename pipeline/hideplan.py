@@ -25,7 +25,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Iterable, Sequence
 
-from .flashmap_adapter import GENERAL, RED, MapSegment
+from .flashmap_adapter import GENERAL, PATTERN, RED, MapSegment
 
 DEFAULT_GUARD_BAND_MS = 500.0
 DEFAULT_MIN_COVER_MS = 400.0
@@ -111,7 +111,11 @@ def build_cover_intervals(
             CoverInterval(
                 start_ms=start_ms,
                 end_ms=end_ms,
-                reason=segment.reason if segment.reason == RED else GENERAL,
+                reason=(
+                    segment.reason
+                    if segment.reason in (RED, PATTERN)
+                    else GENERAL
+                ),
                 sources=[segment],
             )
         )
@@ -123,8 +127,13 @@ def build_cover_intervals(
         previous = merged[-1] if merged else None
         if previous is not None and interval.start_ms <= previous.end_ms:
             previous.end_ms = max(previous.end_ms, interval.end_ms)
+            # Strength wins when two intervals merge, and red is the strongest.
+            # A pattern merged with a general flash stays a pattern, so the
+            # merged interval keeps the opaque cover the pattern needs.
             if interval.reason == RED:
                 previous.reason = RED
+            elif interval.reason == PATTERN and previous.reason != RED:
+                previous.reason = PATTERN
             previous.sources.extend(interval.sources)
             continue
         merged.append(
@@ -154,10 +163,20 @@ def is_covered(intervals: Sequence[CoverInterval], time_ms: float) -> bool:
 def cover_mode(interval: CoverInterval, *, allow_dim: bool = True) -> str:
     """What the device is allowed to draw over this interval.
 
-    Red is always opaque. General may be dimmed when the household allows it,
-    which is why verify models the dim case for general intervals.
+    Red is always opaque, and so is a regular pattern. General may be dimmed
+    when the household allows it, which is why verify models the dim case for
+    general intervals.
+
+    A pattern is opaque because dimming does not remove the hazard it is there
+    for in a way this code can prove. Dim keeps a tenth of the linear light, and
+    the pattern rule's bar to bar condition is a luminance difference, so dimming
+    scales that difference down by the same tenth and a pattern just over the
+    line would land under it. That may well be true, and it is not something to
+    rest on arithmetic done once: verify models a dim cover by re-measuring the
+    rendered result, and until a pattern has been through that measurement the
+    opaque cover is the one we can defend.
     """
-    if interval.reason == RED:
+    if interval.reason in (RED, PATTERN):
         return OPAQUE
     return DIM if allow_dim else OPAQUE
 

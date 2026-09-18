@@ -31,7 +31,7 @@ export interface StripMark {
   left: number;
   /** Width as a fraction of the strip, 0 to 1. */
   width: number;
-  reason: 'general' | 'red';
+  reason: 'general' | 'red' | 'pattern';
 }
 
 /** Where the marks go. Pulled out so the arithmetic can be tested on its own. */

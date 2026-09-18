@@ -156,9 +156,17 @@ function readSegments(value: JsonPlain | undefined): FlashSegment[] | null {
       return null;
     }
     const reasonText = asString(record.reason);
-    // Anything that is not the word "general" is treated as red, so a reason
+    // Three words are understood. Anything else is treated as red, so a reason
     // this build has not seen gets the opaque cover rather than the dim one.
-    const reason: CoverReason = reasonText === 'general' ? 'general' : 'red';
+    // `pattern` is read as itself rather than falling into that default,
+    // because a pattern is opaque AND is not a red flash, and reading it as red
+    // put red flashing in the parent's record for a title that had none.
+    const reason: CoverReason =
+      reasonText === 'general'
+        ? 'general'
+        : reasonText === 'pattern'
+          ? 'pattern'
+          : 'red';
     segments.push({ startMs, endMs, reason });
   }
   return segments.sort((a, b) => a.startMs - b.startMs);

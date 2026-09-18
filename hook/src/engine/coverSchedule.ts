@@ -25,7 +25,15 @@
  *   merged interval is red, the whole interval is red.
  */
 
-export type CoverReason = 'general' | 'red';
+/**
+ * Why an interval is covered.
+ *
+ * `pattern` is the regular pattern rule, BT.1702-3 Guideline 2, and it is its
+ * own class rather than a spelling of `red`. It has to be opaque like red, and
+ * it is not a red flash: a title with a pattern and no red flashing should not
+ * be recorded, coloured or reported as having red flashing.
+ */
+export type CoverReason = 'general' | 'red' | 'pattern';
 
 export interface FlashSegment {
   /** Start of the flagged segment in media time, milliseconds. */
@@ -157,8 +165,13 @@ export function buildCoverIntervals(
       previous.endMs = Math.max(previous.endMs, interval.endMs);
       // Any red part makes the whole merged interval red, because a dim cover
       // would not satisfy the red rule for that part.
+      // Strength wins when two intervals merge, and red is the strongest. A
+      // pattern merged with a general flash stays a pattern, so the merged
+      // interval keeps the opaque cover the pattern needs.
       if (interval.reason === 'red') {
         previous.reason = 'red';
+      } else if (interval.reason === 'pattern' && previous.reason !== 'red') {
+        previous.reason = 'pattern';
       }
       previous.sources.push(...interval.sources);
       continue;

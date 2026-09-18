@@ -64,7 +64,12 @@ function parseSegments(value: unknown): FlashSegment[] | undefined {
     segments.push({
       startMs: candidate.startMs,
       endMs: candidate.endMs,
-      reason: candidate.reason === 'red' ? 'red' : 'general',
+      reason:
+        candidate.reason === 'red'
+          ? 'red'
+          : candidate.reason === 'pattern'
+            ? 'pattern'
+            : 'general',
       label: typeof candidate.label === 'string' ? candidate.label : undefined,
     });
   }

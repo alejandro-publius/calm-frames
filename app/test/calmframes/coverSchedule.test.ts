@@ -320,3 +320,42 @@ describe('totalCoveredMs', () => {
     expect(totalCoveredMs(intervals)).toBe(4_000);
   });
 });
+
+describe('a regular pattern is its own reason', () => {
+  /**
+   * The pattern rule is BT.1702-3 Guideline 2. A pattern must be covered
+   * opaque, like red, and it is not a red flash.
+   *
+   * Before this existed, flashMap.ts read anything that was not the word
+   * "general" as red. The cover was right and the label was wrong, and the
+   * label now reaches a parent: the hide log has a producer, so a title with a
+   * pattern and no red flashing would have shown red flashing in the record.
+   *
+   * Seen to fail. Reading `pattern` as red again gives
+   * `Expected: "pattern" / Received: "red"`, and dropping the pattern branch
+   * from the merge gives the same on the merged interval.
+   */
+  it('survives merging with a general flash, and keeps the stronger reason', () => {
+    const intervals = buildCoverIntervals(
+      [
+        { startMs: 4_000, endMs: 5_000, reason: 'general' },
+        { startMs: 5_100, endMs: 6_000, reason: 'pattern' },
+      ],
+      { guardBandMs: 500 },
+    );
+    expect(intervals).toHaveLength(1);
+    expect(intervals[0].reason).toBe('pattern');
+  });
+
+  it('loses to red, which is the strongest', () => {
+    const intervals = buildCoverIntervals(
+      [
+        { startMs: 4_000, endMs: 5_000, reason: 'pattern' },
+        { startMs: 5_100, endMs: 6_000, reason: 'red' },
+      ],
+      { guardBandMs: 500 },
+    );
+    expect(intervals).toHaveLength(1);
+    expect(intervals[0].reason).toBe('red');
+  });
+});
