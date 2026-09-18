@@ -17,6 +17,7 @@ To see them fail on purpose: see the note on each test. Both were verified on Se
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -107,3 +108,29 @@ def test_the_sheet_the_labeller_reads_gives_nothing_away(monkeypatch, tmp_path):
     key_text = json.dumps(built["key"])
     assert "invented_seen_by_all" in key_text
     assert "proposed_by" in key_text
+
+
+def test_the_pool_refuses_to_rebuild_once_somebody_has_started_labelling(tmp_path):
+    """The dangerous half of a re-run.
+
+    make_sheets.py already refuses to overwrite a filled sheet, so a re-run leaves the answers
+    on disk while the pool underneath them is reshuffled. The answers then point at different
+    segments and nothing says so. The sheet below is FABRICATED FOR TEST ONLY: one answered row.
+
+    Break it: drop the started check in make_pool.main(), and this goes red.
+    """
+    sheet = tmp_path / "labels_labeller_a.csv"
+    sheet.write_text(
+        "segment_id,window_index,window_start_s,label,unlabelable,notes\n"
+        "seg000,0,0,1,,FABRICATED FOR TEST ONLY\n"
+    )
+    finished = subprocess.run(
+        [sys.executable, str(EVAL_DIR / "labeling" / "make_pool.py"), "--out-dir", str(tmp_path)],
+        capture_output=True,
+        text=True,
+        timeout=300,
+    )
+    assert finished.returncode == 2, finished.stdout
+    assert "labels_labeller_a.csv" in finished.stderr
+    assert not (tmp_path / "pool.json").exists(), "it wrote a new pool anyway"
+    assert not (tmp_path / "pool_key.json").exists()

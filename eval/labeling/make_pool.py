@@ -343,10 +343,41 @@ def build() -> dict:
     }
 
 
+def sheets_with_answers(out_dir: Path) -> list[Path]:
+    """Any sheet in this directory that somebody has started filling in."""
+    from labeling.make_sheets import has_labels  # noqa: PLC0415
+
+    return [path for path in sorted(out_dir.glob("labels_*.csv")) if has_labels(path)]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("-o", "--out-dir", type=Path, default=OUT_DIR)
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="rebuild even though a sheet has answers in it. It will not mean what it says.",
+    )
     arguments = parser.parse_args()
+
+    # A segment id is a position in a shuffled list, so rebuilding the pool after labelling has
+    # started does not erase the answers, which would at least be obvious. It quietly points
+    # them at different segments. make_sheets.py refuses to overwrite a filled sheet, which is
+    # what made this the dangerous half: the sheet survives and stops meaning anything.
+    started = sheets_with_answers(arguments.out_dir)
+    if started and not arguments.force:
+        print(
+            "these sheets already have answers in them: "
+            + ", ".join(path.name for path in started),
+            file=sys.stderr,
+        )
+        print(
+            "Rebuilding the pool now would leave those answers pointing at different segments, "
+            "because a segment id is a position in a shuffled list. Nothing was written. "
+            "Finish the labelling, or move the sheets aside first.",
+            file=sys.stderr,
+        )
+        return 2
 
     built = build()
     arguments.out_dir.mkdir(parents=True, exist_ok=True)
