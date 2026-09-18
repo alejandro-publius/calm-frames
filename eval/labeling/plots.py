@@ -281,6 +281,11 @@ def main() -> int:
         if arguments.only and row["segment_id"] not in set(arguments.only):
             continue
         path = arguments.media / row["file"]
+        # The figure for this id from an earlier pool goes first, before anything can fail.
+        # A segment id is a position in a shuffled list, so a stale figure left behind by a
+        # failed render is not a missing figure: it is a different segment's picture under
+        # this segment's name, and the labeller has no way to tell.
+        (arguments.out_dir / f"{row['segment_id']}.png").unlink(missing_ok=True)
         try:
             render(
                 row["segment_id"],
@@ -295,6 +300,17 @@ def main() -> int:
         except Exception as error:  # noqa: BLE001
             failed.append({"segment_id": row["segment_id"], "error": f"{type(error).__name__}: {error}"})
     print(f"{done} plots written to {arguments.out_dir}, {len(failed)} failed")
+    if not arguments.only:
+        wanted = {row["segment_id"] for row in key["segments"]}
+        extra = sorted(
+            path.name for path in arguments.out_dir.glob("*.png") if path.stem not in wanted
+        )
+        if extra:
+            print(
+                f"  {len(extra)} figure(s) here belong to no segment in this pool: "
+                f"{', '.join(extra[:5])}{' ...' if len(extra) > 5 else ''}",
+                file=sys.stderr,
+            )
     for row in failed:
         print(f"  {row['segment_id']}: {row['error']}", file=sys.stderr)
     # A segment with no figure is a segment nobody can label, and the sheet still asks for it.

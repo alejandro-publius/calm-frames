@@ -188,3 +188,51 @@ def test_the_status_report_refuses_while_a_plot_is_missing(tmp_path):
     status = json.loads((tmp_path / "status.json").read_text())
     assert status["state"].startswith("not ready")
     assert status["plots"]["missing"] == ["seg_invented_no_plot"]
+
+
+def test_a_stale_figure_is_removed_before_the_render_that_might_fail(tmp_path):
+    """A figure from an earlier pool must not survive a failed re-render.
+
+    The PNG written here is FABRICATED FOR TEST ONLY: four bytes that are not an image. It
+    stands for seg999's figure from a previous pool, where seg999 was a different segment.
+
+    Break it: take the unlink out of main(), and this goes red with the stale bytes still
+    there, which is the labeller reading the wrong picture under the right name.
+    """
+    out = tmp_path / "plots"
+    out.mkdir()
+    stale = out / "seg999.png"
+    stale.write_bytes(b"old!")
+
+    key = tmp_path / "pool_key.json"
+    key.write_text(
+        json.dumps(
+            {
+                "segments": [
+                    {
+                        "segment_id": "seg999",
+                        "file": "invented_missing_clip_for_test_only.mp4",
+                        "start_s": 0.0,
+                        "end_s": 10.0,
+                    }
+                ]
+            }
+        )
+    )
+    finished = subprocess.run(
+        [
+            sys.executable,
+            str(EVAL_DIR / "labeling" / "plots.py"),
+            "--pool-key",
+            str(key),
+            "--out-dir",
+            str(out),
+            "--media",
+            str(tmp_path / "no-media-here"),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=300,
+    )
+    assert finished.returncode != 0
+    assert not stale.exists(), "the figure from the earlier pool is still there"
