@@ -532,7 +532,10 @@ const PlayerScreen = ({
             requestSeek={
               guarding
                 ? (source, targetMs) => {
-                    void guard.requestSeek(source, targetMs);
+                    guard.requestSeek(source, targetMs).catch(() => {
+                      // requestSeek covers before it moves, so a rejected seek
+                      // leaves the picture hidden. Nothing more to do here.
+                    });
                   }
                 : undefined
             }

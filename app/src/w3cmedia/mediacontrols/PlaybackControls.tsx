@@ -122,7 +122,9 @@ const PlaybackControls = ({
     } catch (e) {
       console.error(`k_content_per: ${e}`);
     }
-  }, [videoRef]);
+    // requestSeek belongs here: it carries the cover schedule, and a stale one
+    // would seek against an out of date view of where the flagged parts are.
+  }, [videoRef, requestSeek]);
 
   const handleSeekForward = useCallback(() => {
     console.info('k_content_per: calling seekForward');
@@ -146,7 +148,7 @@ const PlaybackControls = ({
     } catch (e) {
       console.error(`k_content_per: ${e}`);
     }
-  }, [videoRef]);
+  }, [videoRef, requestSeek]);
   return (
     <View style={styles.playbackControls}>
       <PlayerButton

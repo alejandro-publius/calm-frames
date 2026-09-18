@@ -18,7 +18,7 @@ import {
   parseJsonNode,
   utf8Bytes,
 } from '../../src/calmframes/canonicalJson';
-import { base64ToBytes, verifyEd25519 } from '../../src/calmframes/ed25519';
+import { verifyEd25519 } from '../../src/calmframes/ed25519';
 import {
   DEFAULT_MAX_MAP_AGE_MS,
   parseCreatedUtc,

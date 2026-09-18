@@ -15,7 +15,6 @@ import {
   AppStackParamList,
   Screens,
 } from '../../src/components/navigation/types';
-import { CAPTION_DISABLE_ID } from '../../src/constants';
 import PlayerScreen, { styles } from '../../src/screens/PlayerScreen';
 import { TitleData } from '../../src/types/TitleData';
 import { VideoHandler } from '../../src/utils/VideoHandler';
@@ -248,16 +247,16 @@ jest.mock('lodash/isEqual', () =>
 );
 
 describe('PlayerScreen rendering Test Cases', () => {
-  const setState = jest.fn();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let mockSetState: any;
   beforeEach(() => {
     jest.clearAllMocks();
-    mockSetState = jest
-      .spyOn(React, 'useState')
-      .mockImplementationOnce(() => [true, setState]) //setShowBuffering
-      .mockImplementationOnce(() => [false, setState]) //setIsVideoInitialized
-      .mockImplementationOnce(() => [CAPTION_DISABLE_ID, setState]); //setCaptionID
+    // This block used to spy on React.useState and hand back the first three
+    // calls itself. That only worked while nothing in the screen ever set
+    // state: a mocked useState call adds nothing to React's hook list, so the
+    // next render reads the list back shifted and React throws "Should have a
+    // queue". Calm Frames' flash guard does update state on mount, which made
+    // that show. The mocked values were the real initial values anyway
+    // (buffering true, video not initialised, captions off), so the spy is
+    // gone and these tests render the screen as it really starts.
   });
 
   it('renders correctly screenshot match', () => {
