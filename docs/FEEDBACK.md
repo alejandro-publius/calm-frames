@@ -71,7 +71,7 @@ Two smaller ones, both about the installer: with stdout redirected to a file it 
 - **Playback is not steady.** Of four runs in one afternoon, two played cleanly, one failed with `Category: UNKNOWN, Position: 0.084` on the same HLS stream, and one never started. A later timing measurement needed 22 app launches to collect <!--n results/gate1_software_vvd.json:trials_counted -->49<!--/n--> usable trials. The error carries a category of `UNKNOWN` and a position, and nothing else to act on.
 - **The device backgrounds an app nobody is touching**, and a backgrounded app stops playing. A person holding a remote never hits this. A camera rig with nobody pressing anything hits it every time, so our runs press a key the app does not bind, every few seconds, to keep the device awake without touching playback.
 
-**Onboarding, zero to hello world.** Quick to start and confusing to script against, because the readiness signal is not one. Add twenty minutes for working out that `status` is not readiness, and another hour for working out that the screenshot you are looking at is black for a reason.
+**Onboarding, zero to hello world.** Quick to start and confusing to script against, because the readiness signal is not one. Budget time for two discoveries nothing warns you about: that `status` is not readiness, and that the black screenshot you are looking at is black for a reason rather than because the app failed.
 
 **Would we build with it again.** Yes for development. No for evidence. Every number we take from it is labelled a virtual device number, and the gates that matter are filmed at 240 fps against a real stick.
 
@@ -92,7 +92,7 @@ Two smaller ones, both about the installer: with stdout redirected to a file it 
 
 One more thing that is a design choice rather than a defect, and worth knowing: the sample picks its player purely from a hand-declared `format` field. `VideoFormat` in `src/types/TitleData.d.ts` admits `'DASH'` while `VideoFileTypes` in `src/data/videos/index.ts` does not, so anything whose `format` is not exactly `"MP4"` goes to Shaka, which cannot parse a raw MP4 as a manifest. That is how we first met the silent failure above.
 
-**Onboarding, zero to hello world.** Fast. Clone, install, build, sideload, and a title plays. Two hours, most of it the Shaka build.
+**Onboarding, zero to hello world.** Fast. Clone, install, build, sideload, and a title plays, with the Shaka build in `postinstall` taking most of the wall-clock time.
 
 **Would we build with it again.** Yes, and we are: the contribution goes back to it. The repository is still on `ef8e4da` from August 6 2026, and the one outside pull request it has merged was a two-line documentation change, so we are not expecting a quick review, and the fix is written to be reviewable in two independent commits for that reason.
 
@@ -261,7 +261,7 @@ One thing we could not check yet, and will not pretend we did: whether captions 
 
 **What worked well.** Composite actions made it cheap to publish our analyzer as something someone else can adopt in one file, which is most of what "open source" means for a tool like this. `actions/setup-node` reading `.nvmrc` and `actions/setup-python` reading `.python-version` keeps CI pinned to the same versions as the laptop with no duplication.
 
-**What needs work.** Nothing that cost us time. One thing worth saying for other Vega projects: the Vega SDK and its virtual device do not run on a standard hosted runner, so nothing about the device side of a Vega app can be tested in CI today. Our app job runs `npm install --ignore-scripts` to skip the Shaka build, mocks the player, and tests the logic. Everything device-shaped is a local run with its output committed to `results/`.
+**What needs work.** Nothing that cost us time. One thing worth saying for other Vega projects: we found no published way to run the Vega SDK or its virtual device on a hosted runner, and we did not attempt it, since the SDK is a 5.4 GB install and the virtual device is a QEMU guest. So our app job runs `npm install --ignore-scripts` to skip the Shaka build, mocks the player and tests the logic, and everything device-shaped is a local run with its output committed to `results/` and checked in CI from there.
 
 **Onboarding, zero to hello world.** Fast.
 
@@ -295,6 +295,25 @@ One thing we could not check yet, and will not pretend we did: whether captions 
 | 18 | **Nice-to-have** | **Log why the virtual device exited**, and add an exit reason to `vega virtual-device status`. | It stops with nothing written after "Virtual device ready", so a scripted run has to check for it before every step. |
 | 19 | **Nice-to-have** | **Swap the `--source` and `--destination` descriptions in `vega device copy-to --help`.** | One-line fix, and it contradicts the command's own examples printed just below. |
 | 20 | **Nice-to-have** | **Say in the sample's README that `postinstall` builds Shaka Player and needs a JDK**, and delete the two obsolete snapshot entries that make `jest --ci` exit 1 on a clean checkout. | Both are first-hour experiences for anyone who clones it, and both are a few lines to fix. |
-| 21 | **Nice-to-have** | **A published way to build and test a Vega app on a hosted CI runner.** | The SDK and its virtual device do not run on a standard runner, so nothing device-shaped can be tested in CI. Every Vega project ends up with a laptop in the loop. |
+| 21 | **Nice-to-have** | **A published way to build and test a Vega app on a hosted CI runner**, or a plain statement that there is not one and why. | We could not find one, and a 5.4 GB SDK plus a QEMU guest is not something you try speculatively on a runner. Today every Vega project keeps a laptop in the loop for anything device-shaped. |
 
 The first one is the one that matters. The rest of this list is a fortnight of engineering work at Amazon. The first is a policy decision, and it would protect far more children than anything we can ship.
+
+---
+
+## For Lane H: what this changes in other documents
+
+This file and the friction log grew past what other documents say about them. None of these files belong to this lane, so here is the list rather than the edit.
+
+| File and line | What it says now | What is true |
+|---|---|---|
+| `docs/SUBMISSION.md` section 9 | Product feedback for nine tools, written inline | Thirteen tools are answered here, including the accessibility APIs, Fargate, S3 and CloudFront, which section 9 did not cover. Section 9 can either absorb this file or link to it |
+| `docs/SUBMISSION.md` section 12 | Fourteen feature requests | Twenty-one here, in the same priority scale. The three Critical ones are the system setting and the two capture gaps |
+| `docs/SUBMISSION.md` section 13 | "eleven entries: four Medium and seven Low" | Thirty entries: four High, thirteen Medium, thirteen Low. Twenty-five are on Amazon's surface and five are the wider toolchain |
+| `docs/SUBMISSION.md` line 77 | "alongside seven more" | Alongside twenty-seven more |
+| `docs/SUBMISSION.md` section 14, item 10 | "Read the eleven friction entries" | Read the thirty |
+| `docs/SUBMISSION.md` section 11.4 | The upstream half says two tests | Three tests now, and both guards were seen to fail |
+| `docs/PLAN.md` lines 62 to 63 | Nine tools, fourteen requests, eleven entries | As above |
+| `docs/VIDEO_SCRIPT.md` line 60 | Calls the `vega device list` crash "feature request 4" | It is request 4 in `docs/SUBMISSION.md` section 12 and request 5 in this file. If section 12 adopts this list, that line needs the new number, or better, the name instead of a number |
+
+Two things that did not change. Friction entries 1 to 11 keep their numbers, so `README.md` line 332 pointing at entries 6 and 8 is still right, and `docs/VIDEO_SCRIPT.md` pointing at entry 6 is still right.
