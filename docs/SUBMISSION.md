@@ -2,9 +2,20 @@
 
 Every field for **Build, Ship, Shape: Amazon Developer Hackathon**, Fire TV track, with the Open Source and AWS Builder mini challenges.
 
-**How to use this file.** Each section below is one Devpost field. Copy the block under the heading. Anything marked **NEEDS ALEX** cannot be filled in by the build and is listed again at the end.
+**How to use this file.** Each numbered section below is one Devpost field. Copy the block under the heading. Anything marked **NEEDS ALEX** cannot be filled in by the build, and section 16 lists every one of them again with a date.
 
-**Re-check before pasting.** The Devpost form's exact field names and character limits should be read off the live form on the day, because this file is written from the build plan rather than from the form. Submit Thursday October 22 2026. The deadline is Friday October 23 at 12:00 PT.
+**Re-check before pasting.** The Devpost form's exact field names and character limits should be read off the live form on the day, because this file is written from the build plan rather than from the form.
+
+**The dates.**
+
+| When | What |
+|---|---|
+| Mon Oct 12 | The upstream pull request is open, so the contribution URL exists |
+| Mon Oct 19 to Tue Oct 20 | Film the video from [`docs/VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md) |
+| Wed Oct 21 | Make the repository public, run the final checks, tag the judged release |
+| Wed Oct 21, 12:00 PT | Last moment to request the 150 US dollar AWS credits |
+| **Thu Oct 22** | **Press submit** |
+| Fri Oct 23, 12:00 PT | The deadline. We are a day early on purpose |
 
 ---
 
@@ -38,7 +49,9 @@ Devpost splits this into headed sections. They are written out separately below 
 
 About 3 percent of people with epilepsy are photosensitive, and it is more common in children and adolescents. Flashing at roughly 5 to 30 times a second is the most likely trigger. A 2025 Epilepsy Foundation working group told media designers to avoid bright flashing in the 10 to 20 Hz range.
 
-Now picture a twelve year old at a sleepover picking a movie on the living room television, with no adult sitting next to her to screen it first. Nothing on that television knows what is in the next ninety minutes. Other platforms have partial answers: Apple has a Dim Flashing Lights setting, there are desktop filters, and there are research prototypes that detect flashes and overlay them live. What none of them do is check the whole title before it is allowed to play, and then guarantee that every way of jumping into it is safe.
+Now picture Maya. She is twelve, she has photosensitive epilepsy, and tonight she is at a sleepover picking a film on somebody else's living room television, with no adult sitting next to her to screen it first. Nothing on that television knows what is in the next ninety minutes. (Maya is a composite persona, not a real person. She is labelled as one on screen in our demo video too.)
+
+Other platforms have partial answers: Apple has a Dim Flashing Lights setting, there are desktop filters, and there are research prototypes that detect flashes and overlay them live. What none of them do is check the whole title before it is allowed to play, and then guarantee that every way of jumping into it is safe.
 
 That is the gap Calm Frames fills, and Fire TV is where it belongs, because the television is the screen a child uses without supervision.
 
@@ -74,9 +87,9 @@ The hardest design decision came out of a measurement. The player's own position
 
 ### Challenges we ran into
 
-The virtual device has no supported way to press a remote button or capture the screen, so we drive it through QEMU's QMP socket. Key injection works. Screenshots come back black, because the app renders on a GPU layer the capture does not see, so playback evidence comes from device logs rather than pictures. `vega device list` crashes with a TypeError while a device is running, so every script uses `vega device info` and `vega device is-connected` instead. And on OS 1.2 there is no path from the host into another package's data directory, although the sample's README documents one, so a measurement run is started from a button inside the app or from a config the app fetches over HTTP. Every one of those is in the friction log with its exact output, alongside seven more.
+The virtual device has no supported way to press a remote button or capture the screen, so we drive it through QEMU's QMP socket. Key injection works. Screenshots come back black, because the app renders on a GPU layer the capture does not see, so playback evidence comes from device logs rather than pictures. `vega device list` crashes with a TypeError while a device is running, so every script uses `vega device info` and `vega device is-connected` instead. And on OS 1.2 there is no path from the host into another package's data directory, although the sample's README documents one, so a measurement run is started from a button inside the app or from a config the app fetches over HTTP. Every one of those is in the friction log with its exact output, alongside twenty-six more.
 
-The real one is this. We do not have a cover lead time number, and for a while we thought we did. A rehearsal run appeared to show every marker covered in time with a worst lead of 449 ms. It was wrong. The player in that run never got past about a quarter of a second, while the cover scheduler, which runs on a wall clock by design, kept advancing its own estimate and fired every cover on time against that estimate. The analysis agreed with itself. A stricter second script refused to count any of it, which is how it surfaced, and both scripts now require a position report from the player before a lead time is counted. Those numbers were withdrawn from everywhere they appeared, and the retraction is written out in `docs/GATES.md`. Run again on a packed clip under the new rule, the measurement gave 49 usable trials with 48 covered in time, a median lead of 488 ms, and one cover that went on 86 ms after its marker started because the JavaScript thread stalled. We kept that last one in the README rather than rounding it away, because it is the thing that tells us the guard band is not yet known to be wide enough. The real measurement is 50 trials filmed at 240 frames a second against a real Fire TV stick, and it has not happened yet.
+The real one is this. We do not have a cover lead time number, and for a while we thought we did. A rehearsal run appeared to show every marker covered in time with a worst lead of 449 ms. It was wrong. The player in that run never got past about a quarter of a second, while the cover scheduler, which runs on a wall clock by design, kept advancing its own estimate and fired every cover on time against that estimate. The analysis agreed with itself. A stricter second script refused to count any of it, which is how it surfaced, and both scripts now require a position report from the player before a lead time is counted. Those numbers were withdrawn from everywhere they appeared, and the retraction is written out in `docs/GATES.md`. Run again on a packed clip under the new rule, the measurement gave <!--n results/gate1_software_vvd.json:trials_counted -->49<!--/n--> usable trials with <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time, a median lead of <!--n results/gate1_software_vvd.json:lead_ms.median -->488.4<!--/n--> ms, and one cover that went on 86 ms after its marker started because the JavaScript thread stalled. We kept that last one in the README rather than rounding it away, because it is the thing that tells us the guard band is not yet known to be wide enough. The real measurement is 50 trials filmed at 240 frames a second against a real Fire TV stick, and it has not happened yet.
 
 ### Accomplishments we are proud of
 
@@ -101,7 +114,7 @@ Filming the real gates on the stick. Self-filmed red strobe footage, because no 
 ### Built with
 
 ```
-Vega SDK 0.24 · Vega CLI · React Native 0.83 · TypeScript · @amazon-devices/react-native-w3cmedia · Shaka Player · Kepler Media Controls · KeplerCaptionsView · Kepler UI Components · Kepler File System · Python 3.12 · PyAV / FFmpeg · Ed25519 · pytest · Jest · AWS CDK · Amazon S3 · Amazon DynamoDB · AWS Fargate · AWS Lambda · Amazon CloudFront · Amazon ECR · AWS Budgets · GitHub Actions
+Vega SDK 0.24 · Vega CLI · React Native 0.83 · TypeScript · @amazon-devices/react-native-w3cmedia · Shaka Player · Kepler Media Controls · KeplerCaptionsView · Kepler UI Components · Kepler File System · react-native-kepler · AccessibilityInfo / VoiceView · Python 3.12 · PyAV / FFmpeg · NumPy · Ed25519 · pytest · Jest · AWS CDK · Amazon S3 · Amazon DynamoDB · AWS Fargate · AWS Lambda · Amazon CloudFront · Amazon ECR · AWS Budgets · AWS IAM with GitHub OIDC · Amazon CloudWatch Logs · GitHub Actions
 ```
 
 ## 4. Track
@@ -117,13 +130,17 @@ Open Source (primary)
 AWS Builder
 ```
 
+A project can win at most one track prize and one mini challenge prize. Open Source is the one to lead with: the analyzer, the Action, the sidecar specification and the hook are all published under Apache-2.0, and the upstream fix goes back to the sample every Vega video app starts from.
+
+**Open Source is solid. AWS Builder is not certain, and section 11 says exactly why.** The short version: the rules ask for a project that "incorporates AWS services ... with documented integrations", and our stack synthesizes, is unit tested and has never been deployed. Nobody here can tell from the rules text whether that counts. Entering both is still right, because entering costs nothing and the answer might be yes. Claiming it as won is not.
+
 ## 6. Repository URL
 
 ```
 https://github.com/alejandro-publius/calm-frames
 ```
 
-**NEEDS ALEX:** the repository is private today and goes public during the final checks on October 21, because the rules need it public with the licence visible at submission. Confirm it is public, and that the licence shows in GitHub's About box, before pasting this.
+**NEEDS ALEX:** the repository is private today and goes public during the final checks on **Wednesday October 21**, because the rules need it public with the licence visible at submission. Confirm it is public, and that Apache-2.0 shows in GitHub's About box, before pasting this.
 
 ## 7. Video URL
 
@@ -131,13 +148,61 @@ https://github.com/alejandro-publius/calm-frames
 NEEDS ALEX
 ```
 
-**NEEDS ALEX:** film and upload the demo, then paste the link. The script is in [`docs/VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md), timed and under 3:00. Three checks before pasting: the link works while logged out, the final video file passes `flashmap check` with zero violations and that result is committed, and the on-screen wording is "reduces exposure to flashing above published limits in the videos it plays; not a medical device".
+**NEEDS ALEX:** film it **Monday October 19 to Tuesday October 20**, upload it, then paste the link. The script is in [`docs/VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md), timed to 2:53 with a shot list, and the capture plan for each shot is in [`docs/SHOT_MANIFEST.md`](SHOT_MANIFEST.md).
 
-## 8. Testing instructions
+Three checks before pasting:
+
+1. `eval/check_video.sh <final file>` exits 0, and `results/video_check.json` is committed. It runs flashmap over the finished cut and refuses anything over three minutes. Exit 2 means flashmap could not tell, and that is a failure too.
+2. The link works while logged out, on YouTube or Vimeo, in English.
+3. The on-screen and spoken wording is "reduces exposure to flashing above published limits in the videos it plays; not a medical device". Never "prevents seizures", never "seizure-proof".
+
+## 8. Required technologies
+
+**First, what the rules actually ask of a Fire TV entry.** Alexa+, Bee and Ring entries have to demonstrate their track's required technology at runtime, imported and called. Fire TV is the exception. Quoted from the rules page, Submission Requirements, and copied into [`docs/RUBRIC.md`](RUBRIC.md) section 2.2:
+
+> Fire TV: Any framework or language is acceptable (React Native, Android/Kotlin/Java, web technologies, etc.). The requirement is that the project runs on Fire OS or Vega OS. The demo video must show the project running on an actual Fire TV device or the Fire TV/Vega simulator.
+
+So the hard Stage One line for our track is a video line, not a code line, and it is field 7 rather than this one. The table below goes past what the rules ask. It is here because it helps Technical Implementation and because an automated review can follow it, not because it is required.
+
+Every row links a file and a symbol in the repository, and the README carries the same table with line numbers: [Required tech at runtime](../README.md#required-tech-at-runtime).
+
+| Required technology | Package | Where it is called | What it does here |
+|---|---|---|---|
+| **W3C media player** | `@amazon-devices/react-native-w3cmedia` | `app/src/utils/VideoHandler.ts`, `new VideoPlayer()`, with Shaka attached | All playback. Calm Frames never replaces it and never lowers its opacity. It reads `currentTime`, `playbackRate` and the media events, and covers on top. |
+| **W3C media player, video surface** | `@amazon-devices/react-native-w3cmedia` | `app/src/screens/PlayerScreen.tsx`, `KeplerVideoSurfaceView` | The hardware video layer at zIndex 0. The cover sits above it, which is what keeps the sound running while the picture is hidden. |
+| **Vega Media Controls** | `@amazon-devices/kepler-media-controls` | `setMediaControlFocus` in `app/src/utils/VideoHandler.ts`; the safe handler is `app/src/calmframes/SafeMediaControlHandler.ts` | System and voice transport, and the path an Alexa "skip forward" arrives on. None of the handlers call `super`. Each one goes through `planSeek` in `app/src/calmframes/seekSafety.ts`. |
+| **KeplerCaptionsView** | `@amazon-devices/react-native-w3cmedia` | `app/src/screens/PlayerScreen.tsx`, with `setCaptionViewHandle` | Captions at zIndex 2, above the cover. One captions view per process. This is why a hidden segment is still followable. |
+| **Accessibility APIs** | `react-native` `AccessibilityInfo`, plus the `com.amazon.devconf.privilege.accessibility` privilege in `app/manifest.toml` | `app/src/calmframes/announce.ts`, with `accessibilityLiveRegion` and `accessibilityRole` on the card | VoiceView is told what is about to be hidden, in a queue rather than by interrupting. The cover itself is taken out of the accessibility tree, so VoiceView never reads a black rectangle. |
+| **Kepler UI Components and `react-native-kepler`** | `@amazon-devices/kepler-ui-components`, `@amazon-devices/react-native-kepler` | Throughout `app/src/calmframes/` | Ten-foot focus management through `TVFocusGuideView`, the themed components and the seek bar. |
+| **Kepler File System** | `@amazon-devices/kepler-file-system` | `app/src/calmframes/harnessConfig.ts` | Reading a measurement run config from the app's data directory. |
+
+The whole guard is one hook, `app/src/calmframes/useFlashGuard.ts`. Give it a player and where the map is, and it verifies the map, builds the schedule, drives the cover, decides the card, announces it and hands back the one seek function every control has to use. It knows nothing about Calm Frames screens, navigation or storage, which is what makes it the thing another Vega app can drop in.
+
+## 9. Testing instructions
 
 ```
 Calm Frames runs on a Fire TV stick with Vega OS 1.2 in developer mode, and on
 the Vega Virtual Device. Everything below is also in the repository README.
+
+THE FASTEST PATH: INSTALL THE RELEASE
+  Download the package for your device from the GitHub Release, check it
+  against SHA256SUMS, and sideload it:
+
+    vega device is-connected
+    vega run-app calm-frames-<version>-armv7.vpkg
+
+  calm-frames-<version>-armv7.vpkg    Fire TV Stick
+  calm-frames-<version>-aarch64.vpkg  64 bit Fire TV devices, and the
+                                      aarch64 virtual device
+  calm-frames-<version>-x86_64.vpkg   the x86 virtual device
+
+  These are release builds for Vega OS 1.2. Release builds strip console.log,
+  so use a debug build if you want the app's own logs.
+
+  Release: NEEDS ALEX
+  SHA256SUMS: in the same release
+
+BUILD IT YOURSELF INSTEAD
 
 WHAT YOU NEED
   Vega SDK 0.24.9914 and Vega CLI 1.3.4
@@ -173,7 +238,11 @@ RUN IT ON A STICK
   measurement run is in the log.
 
 PARENT AREA
-  The parent area is behind a PIN. Demo PIN: NEEDS ALEX.
+  The parent area is behind a four digit PIN, set on the device by whoever sets
+  the app up. The PIN itself is never stored: what is stored is a salted,
+  iterated hash of it.
+
+  Demo PIN: NEEDS ALEX
 
 CHECK ANY VIDEO YOURSELF, WITHOUT THE APP
   python -m pip install -e 'flashmap[dev]'
@@ -189,135 +258,79 @@ CHECK OUR NUMBERS
   points at a file in results/. This command fails if any of them has drifted,
   and CI runs it on every push.
 
+RUN THE WHOLE THING
+  make test         the app's jest suite, flashmap and pipeline pytest
+  make reproduce    rebuild every table and figure from committed results
+  make synth        the CDK stack, offline, with no AWS account touched
+
 SAFETY, PLEASE READ
   Do not open any file under media/ with a HAZARD_ prefix in a player. They
   contain real flashing footage and they are in the repository's ignore list for
   that reason. Inspect them as luminance plots with eval/plots.py instead.
 ```
 
-**NEEDS ALEX:** the demo PIN. The parent area lands in phase 4. Once it exists, set the PIN here, in the README and in the GitHub Release notes.
+**NEEDS ALEX, two things in this block.**
+
+1. **The demo PIN.** Set it once, then put the same four digits in three places: the block above, the README's "The parent area and the demo PIN" section, and the GitHub Release notes. `make release RELEASE_ARGS="--pin 1234"` puts it in the notes. The README says today that it is not set, and it must not carry a made-up one.
+2. **The release links.** The release does not exist yet, because the judged tag can never move once it is created and that is a person's decision. `make release` builds all three packages, writes `SHA256SUMS` and `NOTES.md` into `build/release/<tag>/`, prints the `gh release create` line and stops. Once it is published, the links are:
+
+   ```
+   https://github.com/alejandro-publius/calm-frames/releases/tag/<tag>
+   https://github.com/alejandro-publius/calm-frames/releases/download/<tag>/calm-frames-<version>-armv7.vpkg
+   https://github.com/alejandro-publius/calm-frames/releases/download/<tag>/calm-frames-<version>-aarch64.vpkg
+   https://github.com/alejandro-publius/calm-frames/releases/download/<tag>/calm-frames-<version>-x86_64.vpkg
+   https://github.com/alejandro-publius/calm-frames/releases/download/<tag>/SHA256SUMS
+   ```
+
+   `<version>` comes from `app/manifest.toml` and `<tag>` defaults to `v<version>`. Paste the real ones here once the tag exists, and install from the release on a real stick before telling anyone about it. [`docs/RELEASE.md`](RELEASE.md) has the full steps.
 
 ---
 
-## 9. Product feedback
+## 10. Product feedback
 
-Amazon asks five questions about every tool we used. Answered once per tool.
+Amazon asks five questions about every tool an entry used. **The answers live in [`docs/FEEDBACK.md`](FEEDBACK.md)**, which covers thirteen tools: the Vega SDK and CLI, the Vega Virtual Device, `vega-video-sample`, the W3C media player, Vega Media Controls, KeplerCaptionsView, the accessibility APIs, AWS CDK, AWS Fargate on ECS, Amazon S3, Amazon CloudFront, the Kepler UI and file system packages, and GitHub Actions.
 
-### 9.1 Vega SDK and Vega CLI
+That file is the one to paste from, and it is deliberately the only copy, so this document cannot drift away from it. If the form wants the answers inline, paste `docs/FEEDBACK.md` from its "1. Vega SDK and Vega CLI" heading down to the "Feature requests" heading. Nothing in it needs editing first.
 
-**Which tools, and what for.** Vega SDK 0.24.9914 and Vega CLI 1.3.4 for everything: building, installing, launching, log streaming and running the virtual device. The whole app is a Vega app.
+Two things a reader should know about it, which it says itself:
 
-**What worked well.** The install is one non-interactive command and it finished in about four minutes. `vega run-app` and `vega device start-log-stream` are reliable and were the backbone of every measurement run we did. The virtual device boots a real OS 1.2 image, which meant we found platform behaviour early rather than on hardware.
+- Every complaint points at something that happened during the build, and the long version with exact commands and exact output is a numbered entry in [`docs/FRICTION_LOG.md`](FRICTION_LOG.md).
+- Fargate, S3 and CloudFront say in their first line that nothing is deployed and no AWS credential has been used, and they answer as far as a synthesized template and a unit test can. Their onboarding question is answered "not answerable yet" rather than made up.
 
-**What needs work.** Four things. `vega device list` crashes with `Cannot read properties of undefined (reading 'trim')` while a device is connected, although every other device command works at that same moment. `vega virtual-device status` reports `"running":true` about twenty seconds before the device can actually take a command, so scripts have to poll `vega device is-connected` instead. The same command fails with a non-zero exit before the first start, where "no instance yet" is a normal state. And the virtual device sometimes exits with nothing written to its log, so a scripted run has to check for it before every step. `vega device copy-to --help` also has its source and destination descriptions the wrong way round.
-
-**Onboarding, zero to hello world.** Good once you find the right page, and the right page is hard to find. `https://developer.amazon.com/docs/vega/0.24/` is a 404, and so is `/latest/`. System requirements are split between the install page and the release notes, and the install page says Node 18 while the samples require Node 22. From a working shell to a sample app playing video on the virtual device was under a day, and most of that day was the documentation rather than the tools.
-
-**Would we build with them again.** Yes. The gaps we hit are rough edges in the CLI rather than limits in the platform, and every one of them had a workaround. The missing input and screen capture commands are the only ones that would change our answer if they stayed missing, because an accessibility project has to be able to check its own screens.
-
-### 9.2 Vega Virtual Device
-
-**Which tools, and what for.** The Vega Virtual Device, for all development and for every measurement in this submission that is not on hardware: the smoke test, the cover timing rehearsal and the layering run.
-
-**What worked well.** It is a real OS 1.2 image on ARM, and the app that runs there is the app that runs on the stick. It made it possible to start the whole project before any hardware arrived, which for a two-month build is most of the value.
-
-**What needs work.** There is no supported way to press a remote button or capture the screen. `vega device` has install, launch, logs, shell and port forwarding, and no input or capture. We drive it through QEMU's QMP socket, which is undocumented and could change with any SDK release. Key injection works. `screendump` comes back black, because the app renders through a GPU layer that capture does not see, so we cannot look at our own screens at all and playback evidence has to come from device logs. Playback itself is not steady: of four runs in one afternoon, two played cleanly, one failed with `Category: UNKNOWN, Position: 0.084` on the same HLS stream, and one never started. And the device occasionally exits with nothing in the log.
-
-**Onboarding, zero to hello world.** Quick to start, and confusing to script against, because the readiness signal lies. Add twenty minutes for working out that `status` is not readiness.
-
-**Would we build with them again.** Yes for development. Not for evidence. Every number we take from it is labelled as a virtual device number, and the gates that matter are filmed on a real stick.
-
-### 9.3 vega-video-sample
-
-**Which tools, and what for.** `AmazonAppDev/vega-video-sample` at tag `v0.24-RN83` is the base of our app. We kept its playback stack and its media controls, and replaced the rest.
-
-**What worked well.** It is a complete, working reference for the parts that are hard to guess: how `KeplerVideoSurfaceView`, `KeplerCaptionsView` and the W3C media player fit together, how the caption view handle is passed to the player, and how Kepler Media Controls are given focus. That wiring would have taken a long time to reconstruct from documentation, and having it in one repository under MIT-0 is worth a lot.
-
-**What needs work.** The README documents a workflow that cannot be carried out on OS 1.2: pushing a file into the app's data directory. `/home` is not on the device, and the developer shell runs in its own sandbox, so there is no path from the host. Beyond that, the sample has real behaviour problems that we hit while building on it. Those are the subject of our upstream pull request, and they are described in [`docs/OPEN_SOURCE_PR.md`](OPEN_SOURCE_PR.md).
-
-**Onboarding, zero to hello world.** Fast. Clone, install, build, sideload, and a title plays. The Shaka Player build in `postinstall` needs a JDK, which is not mentioned where you first need it.
-
-**Would we build with them again.** Yes, and we are: the contribution goes back to it.
-
-### 9.4 W3C media player, `@amazon-devices/react-native-w3cmedia`
-
-**Which tools, and what for.** All playback. We read `currentTime`, `playbackRate` and the media events from it, and we draw on top of it. We never replace it.
-
-**What worked well.** It is the standard W3C media element surface, so the knowledge transfers, and `getVideoPlaybackQuality` gave us dropped and total frame counts that we published. `setMediaControlFocus` and the caption view handle are clean integration points.
-
-**What needs work.** The behaviour we had to measure ourselves, because it is not documented. `timeupdate` is irregular: in one recorded run, the median gap was <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.median -->426<!--/n--> ms, the shortest was <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.min -->75<!--/n--> ms and the longest was <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms while the clip kept playing. The smallest step `currentTime` reported was <!--n results/vvd_timeupdate_stats.json:current_time_precision_ms -->3<!--/n--> ms. For anything that has to act at a precise media time, those two facts decide the whole design, and both should be in the documentation with a stated guarantee. Separately, a plain MP4 over HTTP does not start where the same content over HLS does, and a stream with no audio track pauses a few seconds in, so a silent audio track has to be added to any test clip.
-
-**Onboarding, zero to hello world.** Good, because the sample does it for you. Hard if you started from the API surface alone, because the surface handle and caption handle lifecycle is not obvious.
-
-**Would we build with them again.** Yes. We would ask for a documented statement about `timeupdate` cadence and `currentTime` resolution first, because an accessibility feature that has to be on screen before a specific frame cannot be built on undocumented timing.
-
-### 9.5 Kepler Media Controls
-
-**Which tools, and what for.** `@amazon-devices/kepler-media-controls`, for system and voice transport. It is where an Alexa "skip forward" arrives, which makes it a safety surface for us rather than a convenience.
-
-**What worked well.** Subclassing `KeplerMediaControlHandler` and overriding only the methods you care about is a good shape, and `setMediaControlFocus` made it one call to wire up.
-
-**What needs work.** For our purposes the important thing is that `handleSeek` can move the playhead without the app's own UI being involved, so an app that has to validate a target position has to funnel every one of these through its own logic. That is the right design, but it deserves to be called out in the documentation, because it is easy to leave a voice path unguarded while the remote path is careful.
-
-**Onboarding, zero to hello world.** Quick, through the sample.
-
-**Would we build with them again.** Yes.
-
-### 9.6 KeplerCaptionsView
-
-**Which tools, and what for.** Captions, and in our case the reason a hidden segment is still followable. It sits above our cover, so the words carry on over a black picture.
-
-**What worked well.** The handle-based lifecycle, `onCaptionViewCreated` and `setCaptionViewHandle`, is clear, and the view composited above our own React Native views exactly as we needed.
-
-**What needs work.** One captions view per process is a real constraint and it should be stated loudly, because an app that adds a second one finds out at runtime. We would also like a documented statement about z-ordering between the captions view, the video surface and ordinary React Native views, since our whole design depends on being able to put a view between them.
-
-**Onboarding, zero to hello world.** Fine through the sample. Not obvious from the API alone.
-
-**Would we build with them again.** Yes.
-
-### 9.7 Kepler UI Components, react-native-kepler and Kepler File System
-
-**Which tools, and what for.** `@amazon-devices/kepler-ui-components` for themed components and the seek bar, `@amazon-devices/react-native-kepler` for TV focus management and the splash screen, `@amazon-devices/kepler-file-system` for reading a run config from the app's data directory.
-
-**What worked well.** `TVFocusGuideView` and the focus model do the hard part of ten-foot navigation. The theme builder is sensible.
-
-**What needs work.** Two platform rules cost us time and neither is loud enough in the documentation. `setNativeProps` throws a TypeError on React Native 0.83, so any UI has to be state-driven, and the error does not say that is why. And the build rewrites `manifest.toml`, adding a `[[needs.module]]` entry for each installed `@amazon-devices` package, so removing a feature means removing its dependency too, or the app still declares it needs a module it does not use. On Kepler File System, the data directory it reads from cannot be written to from the host on OS 1.2, which makes it hard to use for exactly the fixture-loading case it is good for.
-
-**Onboarding, zero to hello world.** Good.
-
-**Would we build with them again.** Yes.
-
-### 9.8 AWS CDK
-
-**Which tools, and what for.** The whole ingest stack in Python CDK: buckets, table, container, trigger, distribution, budget and OIDC role. Unit tested against the synthesized template.
-
-**What worked well.** Testing the synthesized template meant we could be confident about cost and privacy settings without deploying anything, which mattered because we are not allowed to deploy until the account is ready. Asserting on the template is the cheapest safety net we have.
-
-**What needs work.** The default for `ec2.Vpc` is one NAT gateway per availability zone, which is 65 to 100 US dollars a month and would have been the largest line on a hobby project's bill by a wide margin. That default costs beginners real money, and it should either be zero by default or warn at synth time. A budget alarm should also be a one-liner rather than a raw `aws_budgets` construct.
-
-**Onboarding, zero to hello world.** Good if you know CloudFormation, slower if you do not.
-
-**Would we build with them again.** Yes.
-
-### 9.9 GitHub Actions
-
-**Which tools, and what for.** CI for the app, the Python packages, a secret scan and the check that every published number still matches its results file. Also the home of the flashmap Action we publish for other people.
-
-**What worked well.** Composite actions made it easy to ship our flash check as something a studio can drop into a repository in one file.
-
-**What needs work.** Nothing that cost us time on this build.
-
-**Onboarding, zero to hello world.** Fast.
-
-**Would we build with them again.** Yes.
+The heaviest complaint, in one line each, is in that file's "At a glance" table.
 
 ---
 
-## 10. AWS services, and how we used them
+## 11. AWS Builder mini challenge
 
-The CDK app is in `pipeline/infra/`. It synthesizes and is unit tested.
+### 11.1 What exists, stated plainly before anything else
 
-**NEEDS ALEX: nothing is deployed yet and no AWS credentials have been used.** Deployment waits on the account being on the Paid plan with the budget alarm confirmed.
+The AWS work in this project is **an AWS CDK application in [`pipeline/infra/`](../pipeline/infra/) that synthesizes to a CloudFormation template and is unit tested against that template.** That is the whole of it, and here is what that does and does not mean:
+
+- the stack is written, and `make synth` builds the template offline with no account attached;
+- the template is asserted on in unit tests, which is how we know about the zero NAT gateways, the private buckets, the budget alarm and the OIDC role;
+- **nothing has ever been deployed. No AWS credential has been used. No AWS API has been called by this project at any time.** `make deploy` refuses to run until HUMAN CHECKPOINT D is confirmed, and that lock was tested;
+- so no number in this section is a bill, a metric or a log line. The cost figure further down is an estimate from the stack's shape and is labelled as one.
+
+### 11.2 Whether this qualifies is an open question, and it is Alex's to settle
+
+The rules page, Project Requirements, says:
+
+> AWS Builder (Mini Challenge): Any primary track project that incorporates AWS services (i.e. Amazon Bedrock, AgentCore, Strands SDK, Kiro Crew, SageMaker, etc.) with documented integrations.
+
+Neither the rules page nor the overview page defines "incorporates", and neither says whether a deployment is required. A synthesized, unit tested, undeployed stack is documented and integrated in the sense that the code exists and is tested, and it is not integrated in the sense that nothing has ever run. **We cannot tell from the rules text which reading applies, so this document does not claim the mini challenge.** It describes what exists and lets a judge decide.
+
+Three routes settle it, and they are Alex's calls, not the build's:
+
+1. **Ask the hackathon manager.** One question, and the answer is authoritative in a way that our reading never will be. This is the cheapest route and it should go first.
+2. **Deploy once.** Put the account on the Paid plan, set the 20 dollar budget alarm, confirm HUMAN CHECKPOINT D, run `make deploy`, ingest one title, and the doubt is gone. `make destroy` leaves nothing billable afterwards.
+3. **Kiro Crew.** The rules say it qualifies on its own: "Kiro Crew qualifies on its own as a development tool used during the hackathon[,] a submission does not need to also call a runtime AWS service". **We have not used Kiro Crew and nothing in this submission may imply that we have.** It is listed because it is a route that exists, not because it is a route we have taken.
+
+Route 1 then route 2 is the order that costs least. Doing nothing is also a choice: we enter the mini challenge, describe the stack as it is, and a judge decides.
+
+### 11.3 Which AWS services, and how each one is used
+
+Read every row as "how it is used in the stack as written and tested", not as "how it behaved in production". None of it has run.
 
 | Service | How it is used | Why this one |
 |---|---|---|
@@ -333,23 +346,25 @@ The CDK app is in `pipeline/infra/`. It synthesizes and is unit tested.
 | **Amazon CloudWatch Logs** | Task logs with a retention setting. | Retention means old logs stop costing money on their own. |
 | **Cost allocation tags** | On everything in the stack. | So the bill can be read per project. |
 
-Estimated cost: about 5 US dollars in a month where 25 titles are ingested, and under a dollar in a month after that. `make destroy` leaves nothing billable.
+**Cost.** Estimated at about 5 US dollars in a month where 25 titles are ingested, and under a dollar in a month after that. This is an estimate from the stack's shape, not a bill anybody has received. `make destroy` leaves nothing billable.
 
-**NEEDS ALEX:** request the 150 US dollar AWS credits by October 21 at 12:00 PT, while supplies last. Either form link works, both resolve to the same Google Form.
+**What we would tell another builder.** The `ec2.Vpc` default is one NAT gateway per availability zone, which is 65 to 100 US dollars a month and would have been the largest line on this project's bill by a wide margin. Asserting on the synthesized template, before deploying anything, is the cheapest safety net available, and it is what let us be confident about cost and privacy settings with no account attached. Both of those are written up properly in [`docs/FEEDBACK.md`](FEEDBACK.md) section 8.
+
+**NEEDS ALEX:** request the 150 US dollar AWS credits by **Wednesday October 21 at 12:00 PT**, while supplies last. Either form link works, both resolve to the same Google Form.
 
 ---
 
-## 11. Open Source mini challenge
+## 12. Open Source mini challenge
 
-### 11.1 Contribution URL
+### 12.1 Contribution URL
 
 ```
 NEEDS ALEX
 ```
 
-**NEEDS ALEX:** the pull request has to be opened by Monday October 12 so that the contribution URL exists. The branch, the title and the body are prepared in [`docs/OPEN_SOURCE_PR.md`](OPEN_SOURCE_PR.md). The pull request has not been opened and the branch has not been pushed anywhere, because opening it needs a fork under your own GitHub account. It does not need to be merged by the deadline.
+**NEEDS ALEX:** the pull request has to be opened by **Monday October 12** so that this URL exists. The branch, the title and the body are prepared in [`docs/OPEN_SOURCE_PR.md`](OPEN_SOURCE_PR.md), which Lane G owns. It has not been opened and the branch has not been pushed anywhere, because opening it needs a fork under your own GitHub account. It does not need to be merged by the deadline, only opened.
 
-### 11.2 Project repository URL
+### 12.2 Project repository URL
 
 ```
 https://github.com/alejandro-publius/calm-frames
@@ -362,21 +377,22 @@ The open-source parts of this project are:
 | `flashmap`, the analyzer, CLI and sidecar format | [`flashmap/`](../flashmap/) | Apache-2.0 |
 | The flash check GitHub Action | [`flashmap/action.yml`](../flashmap/action.yml) and [`flashmap/examples/flash-check.yml`](../flashmap/examples/flash-check.yml) | Apache-2.0 |
 | The flash map sidecar specification, version 1 | [`docs/SIDECAR_SPEC.md`](SIDECAR_SPEC.md) | Apache-2.0 |
-| The drop-in hook for other Vega video apps | `app/src/calmframes/useFlashGuard.ts` today. The standalone `hook/` package that ships it is **not built yet** | Apache-2.0 |
+| The drop-in hook for other Vega video apps | [`hook/`](../hook/), mirrored from `app/src/calmframes/` with a diff in [`docs/INTEGRATION_DIFF.md`](INTEGRATION_DIFF.md) | Apache-2.0 |
 | The threshold sources, quoted with links | [`flashmap/docs/SPEC_SOURCES.md`](../flashmap/docs/SPEC_SOURCES.md) | Apache-2.0 |
 
-### 11.3 GitHub username
+### 12.3 GitHub username
 
 ```
 NEEDS ALEX
 ```
 
-**NEEDS ALEX:** the repository lives under `alejandro-publius`. Confirm which GitHub account should be credited on the contribution and which one forks the upstream repository, because the fork's owner is what appears on the pull request.
+**NEEDS ALEX:** the repository lives under `alejandro-publius`. Confirm which GitHub account should be credited on the contribution and which one forks the upstream repository, because the fork's owner is what appears on the pull request. Both answers are needed before Oct 12.
 
-### 11.4 What we did, and why it matters
+### 12.4 What we did, and why it matters
 
 ```
-We contributed in two directions: a fix upstream, and a reusable tool downstream.
+We contributed in two directions: a fix upstream, and a reusable tool
+downstream.
 
 UPSTREAM
 
@@ -393,8 +409,8 @@ DOWNSTREAM
 
 flashmap, an Apache-2.0 Python package that measures video against WCAG 2.2
 Success Criterion 2.3.1, both the general flash and the red flash thresholds. It
-ships as a library, a CLI, a signed sidecar format and a GitHub Action that fails
-a pull request adding an image or video over the thresholds.
+ships as a library, a CLI, a signed sidecar format and a GitHub Action that
+fails a pull request adding an image or video over the thresholds.
 
 Why it matters. There was no way for a studio or an app developer to check
 whether the content they are about to publish breaks the flash thresholds, as
@@ -409,73 +425,86 @@ with a link in SPEC_SOURCES.md, and the three values that could not be verified
 from a primary source are named there and are not used as thresholds.
 
 The sidecar specification is published so that a flash map is portable: a studio
-can ship one with a title and any player can honour it.
+can ship one with a title and any player can honour it. The hook package ships
+the playback side, so a Vega video app can get the same protection by giving one
+hook a player and a map URL.
 ```
 
 ---
 
-## 12. Feature requests
+## 13. Feature requests
 
-Priority scale: **Critical** means we could not do the right thing without it. **Important** means it cost real time or forced an undocumented workaround. **Nice-to-have** means it would be better.
+**The full list is in [`docs/FEEDBACK.md`](FEEDBACK.md) under "Feature requests"**: twenty-one requests, each marked Critical, Important or Nice-to-have, each tied to something that happened during the build. Paste that table.
 
-| # | Priority | Request | Why |
-|---|---|---|---|
-| 1 | **Critical** | **A system-wide Fire TV "dim flashing lights" setting**, that any app can read and honour, in Accessibility settings next to the existing options. Apple has one. Fire TV does not. | Photosensitivity is a property of the person, not of an app. A child should not have to hope that whichever app they opened happens to have built protection. A system setting turns this from one app's feature into a platform guarantee, and gives every developer a single flag to respect. |
-| 2 | **Critical** | **`vega device screenshot` that captures the composited output**, and `vega device key` for remote input. | Today there is no supported way to see what an app drew or to press a button from a script. For an accessibility app this is not a convenience: we have to check our own screens and transitions for flashing, and we cannot. Our workaround goes through QEMU's QMP socket, which is undocumented, only works on the virtual device, and returns black frames for anything drawn on the GPU layer. |
-| 3 | **Important** | **Document the `timeupdate` cadence and `currentTime` resolution of the W3C media player, with a stated guarantee.** | We measured a median gap of <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.median -->426<!--/n--> ms and a longest gap of <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms during continuous playback, and a smallest reported step of <!--n results/vvd_timeupdate_stats.json:current_time_precision_ms -->3<!--/n--> ms. Anything that must act at a precise media time, which includes captions, chapter skips, ad insertion and our covers, has to know this. Right now every developer has to measure it themselves and each one gets a different answer. |
-| 4 | **Important** | **Fix `vega device list`**, which crashes with `Cannot read properties of undefined (reading 'trim')` while a device is connected and every other device command works. | It is the obvious way to script against a device and it is the first thing a new developer tries. |
-| 5 | **Important** | **A way to write into an app's data directory in developer mode**, such as `vega device copy-to --package <id>`. | On OS 1.2 there is no path from the host into another package's sandbox, `/home` is not on the device, and the sample's README documents a workflow that cannot be carried out. Any app that loads a config or a test fixture from its data directory cannot be given one. |
-| 6 | **Important** | **A readiness signal for the virtual device**, either by holding `"running"` until it is connectable or by adding a separate field. | `status` flips to running about twenty seconds before the device can take a command, so every script has to poll something else and every developer discovers this the same way. |
-| 7 | **Important** | **Document the z-order contract** between `KeplerVideoSurfaceView`, `KeplerCaptionsView` and ordinary React Native views, and state that there is one `KeplerCaptionsView` per process. | Our whole design depends on being able to place a view between the video surface and the captions. It works, and we had to find out by trying it. A second captions view fails at runtime rather than at build time. |
-| 8 | **Important** | **Make the `setNativeProps` failure on React Native 0.83 explain itself**, or lint it in the template. | It throws a TypeError that does not say why, and the fix is a design change rather than a patch. |
-| 9 | **Nice-to-have** | **One requirements table on the install page**, with host OS, CPU architecture, RAM, disk, the virtual device's memory needs, the Intel end-of-support date, and the Node version the samples need. | Today it is split between the install page and the release notes, and the install page says Node 18 while the samples require Node 22. |
-| 10 | **Nice-to-have** | **Redirect `/docs/vega/<version>/` and `/docs/vega/latest/`** to the get-started page instead of returning 404. | These are the links most guides give. |
-| 11 | **Nice-to-have** | **`NO_MODIFY_RC=true` for the installer**, and write to one startup file per shell. | It currently appends to `.zshrc`, `.zprofile`, `.bashrc`, `.bash_profile` and `.profile`, so a zsh login shell sources the env file twice, and there is no way to opt out. |
-| 12 | **Nice-to-have** | **Quiet progress output when stdout is not a TTY.** | The install log was 2.5 MB of progress frames with the version lines buried in it. |
-| 13 | **Nice-to-have** | **Log why the virtual device exited**, and add an exit reason to `vega virtual-device status`. | It stops with nothing written after "Virtual device ready", so a scripted run has to check for it before every step. |
-| 14 | **Nice-to-have** | **Swap the `--source` and `--destination` descriptions in `vega device copy-to --help`**, which are currently backwards. | One-line fix, and it contradicts the command's own examples printed just below. |
+The scale, so the priorities read correctly: **Critical** means we could not do the right thing without it. **Important** means it cost real time or forced an undocumented workaround. **Nice-to-have** means it would be better.
+
+The three Critical ones, because they are the argument:
+
+1. **A system-wide Fire TV "dim flashing lights" setting**, in Accessibility settings, readable by any app. Photosensitivity is a property of the person, not of an app. A child should not have to hope that the app they opened happens to have built protection. Apple has one. Fire TV does not. We would delete half of our own settings screen the day this ships.
+2. **`vega device screenshot` that captures the composited output**, and `vega device key` for remote input. WCAG 2.3.1 applies to an app's own interface, and today a developer cannot look at it.
+3. **A way to get one frame of what an app drew, from inside the app.** The same gap from the other side: React Native 0.83 removed `takeSnapshot` and no `@amazon-devices` package replaces it.
+
+Requests 2 and 3 are the pair that stopped us seeing our own screens, which is why an accessibility entry is raising them as Critical rather than as a convenience.
 
 ---
 
-## 13. Friction log
+## 14. Friction log
 
-The full log, in Amazon's six fields, is [`docs/FRICTION_LOG.md`](FRICTION_LOG.md). It holds eleven entries: four Medium and seven Low. Each one has the task, the steps with the exact commands, expected versus actual with the exact output, severity, the workaround we used, and a suggestion.
+**The full log, in Amazon's six fields, is [`docs/FRICTION_LOG.md`](FRICTION_LOG.md)**, which Lane G owns. It holds **thirty entries: four High, thirteen Medium and thirteen Low.** Each one has the task, the steps with the exact commands, expected versus actual with the exact output, severity, the workaround we used, and a suggestion.
 
 If the Devpost form wants the entries inline rather than a link, paste the body of that file from its "Summary" heading down. Nothing in it needs editing first.
 
-Short version of the eleven, so the list is readable at a glance:
+The four High entries, so the list reads in the right order:
 
-| # | What broke | Severity |
-|---|---|---|
-| 1 | The installer floods a non-TTY log with progress frames | Low |
-| 2 | The installer edits every shell startup file, with no opt-out | Low |
-| 3 | The versioned docs root returns 404 | Low |
-| 4 | System requirements are split across pages, and the Node versions disagree | Low |
-| 5 | `vega virtual-device status` fails before the first start | Low |
-| 6 | `vega device list` crashes with a TypeError while a device is connected | Medium |
-| 7 | The virtual device stops with no message in the log | Medium |
-| 8 | `status` reports running before the device can be used | Low |
-| 9 | No supported way to press a remote button or capture the screen | Medium |
-| 10 | No way to put a file in an app's data directory on OS 1.2 | Medium |
-| 11 | `vega device copy-to` help text has source and destination backwards | Low |
+| # | What broke |
+|---|---|
+| 12 | The device drops the app's own log output under load, so evidence a rate limiter can delete is not evidence |
+| 14 | No way to get a frame of what the app drew, from inside the app or from outside it |
+| 15 | No crypto API on the platform, so Ed25519 signature checking had to be written by hand |
+| 22 | Playback on the virtual device is not steady, and the error says `UNKNOWN` |
+
+**NEEDS ALEX:** read the thirty entries and confirm you are happy for them to be published as written. They name real defects in Amazon's tools, in plain words, with the exact output. That is what the log is for, and it is still your name on the submission.
 
 ---
 
-## 14. Everything that needs Alex
+## 15. Team and entrant details
 
-One list, so nothing is missed on submission day.
+**NEEDS ALEX, all of it.** Nothing in this section can be filled in by the build.
 
-| # | What | When |
-|---|---|---|
-| 1 | **Make the repository public** and confirm the licence shows in GitHub's About box | Final checks, Wed Oct 21 |
-| 2 | **Film and upload the video**, then paste the URL into field 7. Check it works while logged out | Before Thu Oct 22 |
-| 3 | **Run `flashmap check` on the final video file**, confirm zero violations, and commit the result | Before pasting the video URL |
-| 4 | **Open the upstream pull request** from a fork under your own account, and paste the URL into field 11.1 | By Mon Oct 12 |
-| 5 | **Confirm the GitHub username** to credit on the Open Source fields | Before Oct 12 |
-| 6 | **Set the demo PIN** once the parent area exists, in field 8, in the README and in the Release notes | Phase 4 |
-| 7 | **AWS: confirm the Paid plan and the 20 dollar budget alarm** before any deploy, which is HUMAN CHECKPOINT D | Before the first deploy |
-| 8 | **Request the 150 dollar AWS credits** | By Oct 21, 12:00 PT |
-| 9 | **Confirm the team and entrant details** on the Devpost form: names, eligibility, country of residence | Submission day |
-| 10 | **Read the eleven friction entries** and confirm you are happy for them to be published as written | Before submission |
-| 11 | **Any outreach reply you want quoted** goes into `docs/VALIDATION.md`, with permission | By Fri Oct 16 |
-| 12 | **Press submit** at HUMAN CHECKPOINT G | Thu Oct 22 |
+| Field | Answer |
+|---|---|
+| Entrant name or team name | NEEDS ALEX |
+| Team members, if any | NEEDS ALEX |
+| Country of residence | NEEDS ALEX |
+| Eligibility confirmation | NEEDS ALEX |
+| Contact email | NEEDS ALEX |
+| Amazon developer account | NEEDS ALEX |
+
+Anything quoted from outreach goes in [`docs/VALIDATION.md`](VALIDATION.md), with permission, by **Friday October 16**.
+
+---
+
+## 16. Everything that needs Alex
+
+One list, in date order, so nothing is missed on submission day.
+
+| # | What | When | Field it unblocks |
+|---|---|---|---|
+| 0 | **Settle the AWS Builder question.** Ask the hackathon manager whether a synthesized, unit tested, undeployed CDK stack counts as "incorporating AWS services". If the answer is no or nobody answers, decide between deploying once and dropping the mini challenge. Kiro Crew is a third route we have not taken and must not imply we have | **As early as possible.** Route 2 needs the paid plan first, so a late yes is worth less than an early one | 5, 11 |
+| 0b | **Settle whether a camera can see the Vega Virtual Device window.** Two minutes with a phone. It decides whether the video can be filmed without the stick, and the rules allow the simulator, so this is the Stage One line | **The moment the virtual device is free** | 7 |
+| 1 | **Confirm the GitHub username** to credit on the Open Source fields, and which account forks the upstream repository | Before Mon Oct 12 | 12.3 |
+| 2 | **Open the upstream pull request** from a fork under your own account, and paste the URL | By Mon Oct 12 | 12.1 |
+| 3 | **Set the demo PIN** once, then put it in the testing instructions, the README and the Release notes | Before the release is built | 9 |
+| 4 | **AWS: confirm the Paid plan and the 20 dollar budget alarm**, which is HUMAN CHECKPOINT D | Before any deploy, and it is the gate on route 2 of item 0 | 11 |
+| 5 | **Any outreach reply you want quoted** goes into `docs/VALIDATION.md`, with permission | By Fri Oct 16 | 15 |
+| 6 | **Film the video** from `docs/VIDEO_SCRIPT.md`, with the shot manifest beside it | **Mon Oct 19 to Tue Oct 20** | 7 |
+| 7 | **Run `eval/check_video.sh` on the final file**, confirm exit 0, and commit `results/video_check.json` | Before pasting the video URL | 7 |
+| 8 | **Upload the video** and check the link works while logged out | Before Thu Oct 22 | 7 |
+| 9 | **Read the thirty friction entries** and confirm you are happy for them to be published as written | Before submission | 14 |
+| 10 | **Request the 150 dollar AWS credits** | By **Wed Oct 21, 12:00 PT** | 11 |
+| 11 | **Make the repository public** and confirm Apache-2.0 shows in GitHub's About box | **Wed Oct 21**, during the final checks | 6 |
+| 12 | **Publish the release** and paste the `.vpkg` links and the tag into the testing instructions | **Wed Oct 21**, after the final checks | 9 |
+| 13 | **Confirm the team and entrant details**: name, team, eligibility, country of residence, contact email | Submission day | 15 |
+| 14 | **Press submit** at HUMAN CHECKPOINT G | **Thu Oct 22** | all |
+
+The deadline is **Friday October 23 at 12:00 PT**. We submit a day early on purpose, so that a form problem on the day is a problem with a day left in it rather than a problem with an hour.

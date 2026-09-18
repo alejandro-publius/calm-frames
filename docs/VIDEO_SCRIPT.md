@@ -30,7 +30,46 @@ Read at about 130 words a minute, which is slower than the 150 the script is bud
 
 376 words over 173 seconds is 130 a minute. If a beat runs long in the read, the slack is in beats 7 and 12, in that order. Beat 4 is the one beat that must never be trimmed.
 
+Beat 1 has two voiceover lines, one for the stick and one for the virtual device. They are both 13 words, so the timing is the same whichever device the video is shot on.
+
 **Everything the first 60 seconds has to contain, and where it is:** the countdown card (beat 3, 0:22), the calm hold with captions and sound still going (beat 4, 0:34), the camera meter reading zero (beat 4, 0:34), and the luminance trace of what was hidden (beat 4, from about 0:48). The last of them is on screen at 0:58, with two seconds to spare.
+
+---
+
+## The device the video shows: the hardest Stage One line
+
+This is the one Stage One requirement that no amount of code satisfies, so it gets its own section.
+
+The rules exempt Fire TV from the runtime technology hook that Alexa+, Bee and Ring have. What they ask instead is about this video. Quoted from the rules page, Submission Requirements, and copied into [`docs/RUBRIC.md`](RUBRIC.md) section 2.2:
+
+> Fire TV: Any framework or language is acceptable (React Native, Android/Kotlin/Java, web technologies, etc.). The requirement is that the project runs on Fire OS or Vega OS. The demo video must show the project running on an actual Fire TV device or the Fire TV/Vega simulator.
+
+**The simulator counts.** So this video does not hang on the stick arriving. Every shot that has to show the app running can be filmed against the Vega Virtual Device, and the stick is an upgrade rather than a dependency.
+
+### The constraint that shapes every app shot
+
+The virtual device's screen cannot be captured on this machine. macOS screen grabs and QEMU's `screendump` both come back black, because the app draws on a GPU layer that neither capture sees. There is no workaround and none is coming before the deadline. So there is no route that turns the virtual device into a clean screen recording, and every shot of the app on the virtual device has to be **a camera pointed at the monitor the virtual device window is on**, exactly the way the stick shots are a camera pointed at a television.
+
+The app's own capture path, `app/src/calmframes/uiCapture.ts`, is the other thing that exists, and it is not a second route for these shots. It records the colours the app paints, screen by screen. It is a frame record, not a picture of a screen, and it never appears in this video. It is how the screens get checked before anyone films them. [`docs/SHOT_MANIFEST.md`](SHOT_MANIFEST.md) says this twice, because cutting one of those renders into the video would be showing something mocked as real.
+
+### The open question, which has to be settled before this plan is trusted
+
+**Nobody has yet pointed a camera at the virtual device window and confirmed the app is visible in it.** The capture APIs miss the GPU layer. Whether a human eye and a camera see the app on that monitor is a different question, and it has not been checked. If the window is visible, the plan below works. If it is black to a camera as well, then every app shot waits on the stick after all, and that changes the schedule rather than the script.
+
+It takes two minutes to settle: put the app on the virtual device, point a phone at the monitor, and look. **Do it the moment the virtual device is free**, because everything below depends on the answer, and finding out on Oct 19 would be the worst possible time.
+
+### Which device each shot uses
+
+| | On the stick, if it is here | On the virtual device, if it is not |
+|---|---|---|
+| **S01**, the opening | The stick in the back of a television, `vega device info` beside it | The virtual device window on a monitor, `vega device info` beside it, naming the device it prints |
+| **S02, S03, S07, S08, S09, S12, S18**, the app screens | Camera on the television | Camera on the monitor |
+| **S04, S06**, the calm hold and the Alexa skip | Camera on the television, with the meter reading the panel | Camera on the monitor, with the meter reading the monitor. See the note below |
+| **S05, S10, S11, S13, S14, S15, S16, S17** | Captured from this machine. The device makes no difference | Same |
+
+**If the video is shot on the virtual device, say so on screen.** One plain line, `Vega Virtual Device`, in the corner of the first app shot. The rules allow the simulator, so there is nothing to hide, and a viewer who works out for themselves that it is not a television trusts everything else less.
+
+**The meter, in S04 and S06, is the one place the two plans are not equal.** The meter is calibrated by filming a step chart shown on the same screen with the same camera, and a calibration only holds for the surface it was filmed on. On a television that is one step. On the virtual device window it is an open question whether a chart shown by another application on that monitor calibrates the same surface the app draws through, because the whole reason capture fails is that the app draws through a different path. Two ways out, in order of preference: film S04 and S06 on the stick, or have the app show the step chart itself so the chart and the cover come off the same layer. The second is a question for the app lane, not something to decide with a camera in hand. **If neither is possible, the meter in those shots is labelled uncalibrated on screen, and the beat still works, because a meter that moves before and after a covered span and sits at zero through it is an argument even without a calibrated scale.**
 
 ---
 
@@ -63,9 +102,10 @@ The VIDEO RULES in `docs/BUILD_PROMPT.md` say to open with a terminal where `veg
 
 | Needed | Where it stands |
 |---|---|
-| The Fire TV stick on Vega OS 1.2, developer mode, connected | Waiting on the stick |
+| A device the app runs on: the stick on Vega OS 1.2 in developer mode, **or** the Vega Virtual Device | The virtual device works today. The stick is an upgrade |
+| A camera view of that device's screen | Confirmed for a television. **Not yet confirmed for the virtual device window**, see the section above |
 | Kid mode, the countdown card, the parent area behind a PIN | Built, not yet seen on hardware |
-| The camera-fed meter beside the television | `eval/meter.py` is built. It needs a calibration filmed on the same screen, which is part of stick day |
+| The camera-fed meter beside the screen | `eval/meter.py` is built. It needs a calibration filmed on the same screen, which is part of stick day |
 | At least one verified title with a real flagged segment in it | The pipeline produces these. Pick one with a clean calm moment either side of the flagged span |
 | The drop-in hook, so there is a diff to show | [`docs/INTEGRATION_DIFF.md`](INTEGRATION_DIFF.md) |
 | A pull request in a scratch repository that the Action fails | Can be made any time from `flashmap/examples/flash-check.yml` |
@@ -87,10 +127,11 @@ Times are cumulative. Voiceover is the middle column read aloud. On-screen text 
 | | |
 |---|---|
 | **Shots** | S01 |
-| **Picture** | One continuous shot, no cut. A Fire TV stick in the back of a television, the app's own home screen on the panel, and a laptop terminal beside it in the same frame. In the terminal, type and run `vega device info`. Let its output sit for a beat. |
-| **Voiceover** | "This is a Fire TV stick, running our app, on a real television." |
-| **On screen** | Nothing burned in. Let the terminal be the caption. |
-| **Note** | Ten seconds is enough for one command to be typed and answer. Do not add a second command. If the shell is slow, type the command before the take starts and press return on the first frame. |
+| **Picture** | One continuous shot, no cut. The device running the app and a terminal beside it in the same frame. On the stick: the stick in the back of a television, the app's own home screen on the panel. On the virtual device: the device window on a monitor with the app's home screen in it. Either way, in the terminal, type and run `vega device info`. Let its output sit for a beat. |
+| **Voiceover, on the stick** | "This is a Fire TV stick, running our app, on a real television." |
+| **Voiceover, on the virtual device** | "This is our app, running on Vega OS, on the Vega Virtual Device." |
+| **On screen** | Nothing burned in on the stick. On the virtual device, `Vega Virtual Device` in a corner, held through this shot and the next. |
+| **Note** | Ten seconds is enough for one command to be typed and answer. Do not add a second command. If the shell is slow, type the command before the take starts and press return on the first frame. `vega device info` prints the device it is talking to, so the shot proves which one this is without the voiceover having to insist. |
 
 ### Beat 2. 0:10 to 0:22, who this is for
 
@@ -211,31 +252,34 @@ Eighteen shots. The capture plan for each one, and what it waits on, is [`docs/S
 
 | Shot | Beat | What is in frame | Filmed or captured |
 |---|---|---|---|
-| **S01** | 1 | The stick in the back of the television, the app's home screen on the panel, a laptop terminal in the same frame running `vega device info` | Camera, on the stick |
-| **S02** | 2 | Close on the panel: the kid mode row, a child's hand on the remote, no faces | Camera, on the stick |
-| **S03** | 3 | The countdown card on the panel, its own countdown running to zero | Camera, on the stick |
-| **S04** | 4 | One unbroken frame: the covered picture with captions running, the meter beside the television reading 0, sound audible | Camera, on the stick, with the meter live |
-| **S05** | 4 | The luminance trace for those same seconds, flagged span marked, composited into a corner of S04 | Generated from the flash map. No hardware |
-| **S06** | 5 | The Alexa skip landing inside the flagged part, picture still covered, meter still 0 | Camera, on the stick |
-| **S07** | 6 | The parent area PIN entry | Camera, on the stick |
-| **S08** | 6 | The household settings, and the hidden-segment count going up when the room changes | Camera, on the stick |
-| **S09** | 7 | A card press, a D-pad seek and a voice command, same title, no reload | Camera, on the stick |
-| **S10** | 8 | A terminal, a title going through the pipeline | Terminal recording. No hardware |
-| **S11** | 8 | A terminal, `verify` refusing a second title with the reason printed | Terminal recording. No hardware |
-| **S12** | 8 | The kid mode row with the refused title absent | Camera, on the stick |
-| **S13** | 9 | A terminal, `python -m flashmap check` exiting 1 with its segment list | Terminal recording. No hardware |
-| **S14** | 9 | A browser, a pull request adding a flashing asset, our Action red, its job summary open | Browser recording. No hardware |
-| **S15** | 10 | The hook diff, still, readable in one look | Screen recording. No hardware |
-| **S16** | 11 | The README results tables, scrolled to "Not measured yet" | Screen recording. No hardware |
-| **S17** | 11 | A terminal, `python eval/readme_sync.py --check` passing | Terminal recording. No hardware |
-| **S18** | 12 | The television, calm, playing, with the end card over it | Camera, on the stick |
+| **S01** | 1 | The device running the app, and a terminal in the same frame running `vega device info` | Camera on the screen, either device |
+| **S02** | 2 | Close on the screen: the kid mode row, a child's hand on the remote, no faces | Camera on the screen, either device |
+| **S03** | 3 | The countdown card, its own countdown running to zero | Camera on the screen, either device |
+| **S04** | 4 | One unbroken frame: the covered picture with captions running, the meter beside the screen reading 0, sound audible | Camera on the screen, with the meter live. Prefer the stick |
+| **S05** | 4 | The luminance trace for those same seconds, flagged span marked, composited into a corner of S04 | Generated from the flash map. No device |
+| **S06** | 5 | The Alexa skip landing inside the flagged part, picture still covered, meter still 0 | Camera on the screen, with the meter live. Prefer the stick |
+| **S07** | 6 | The parent area PIN entry | Camera on the screen, either device |
+| **S08** | 6 | The household settings, and the hidden-segment count going up when the room changes | Camera on the screen, either device |
+| **S09** | 7 | A card press, a D-pad seek and a voice command, same title, no reload | Camera on the screen, either device |
+| **S10** | 8 | A terminal, a title going through the pipeline | Terminal recording. No device |
+| **S11** | 8 | A terminal, `verify` refusing a second title with the reason printed | Terminal recording. No device |
+| **S12** | 8 | The kid mode row with the refused title absent | Camera on the screen, either device |
+| **S13** | 9 | A terminal, `python -m flashmap check` exiting 1 with its segment list | Terminal recording. No device |
+| **S14** | 9 | A browser, a pull request adding a flashing asset, our Action red, its job summary open | Browser recording. No device |
+| **S15** | 10 | The hook diff, still, readable in one look | Screen recording. No device |
+| **S16** | 11 | The README results tables, scrolled to "Not measured yet" | Screen recording. No device |
+| **S17** | 11 | A terminal, `python eval/readme_sync.py --check` passing | Terminal recording. No device |
+| **S18** | 12 | The screen, calm, playing, with the end card over it | Camera on the screen, either device |
 
-Ten of the eighteen are filmed off the panel and wait on the stick. Eight are captured from this machine and wait on nothing, except S14, which needs a scratch repository first. Nothing in the video is a screenshot of the virtual device, because the virtual device's screen cannot be captured at all.
+Ten of the eighteen are a camera pointed at whichever screen the app is running on. Eight are captured from this machine and need no device at all, except S14, which needs a scratch repository first.
+
+None of the ten is a screen recording, on either device. A television cannot be screen recorded, and the virtual device's screen comes back black because the app draws on a layer the capture misses. Nothing in this video is a screenshot of the virtual device, and nothing in it is a render from the app's own capture path.
 
 ---
 
 ## After filming, before uploading
 
+- [ ] **The app is shown running on a real Fire TV device or on the Vega Virtual Device**, and if it is the virtual device, it is named on screen. This is the Stage One line
 - [ ] `eval/check_video.sh <final file>` exits 0, and `results/video_check.json` is committed
 - [ ] No Fire TV home screen, no other companies' app tiles
 - [ ] No Blender logo anywhere
@@ -251,9 +295,10 @@ Ten of the eighteen are filmed off the panel and wait on the stick. Eight are ca
 
 ## What needs Alex
 
-1. **The stick, a television in game mode with motion smoothing off, and a phone that films at 240 fps.** Two of those were assumed rather than confirmed.
-2. **Consent** from anyone in frame, including hands.
-3. **Filming the flashing source material**, under the rules at the top: not photosensitive, does not look at the lights.
-4. **The camera meter calibration**, which is a step chart shown on the same television and filmed by the same phone. `eval/meter.py chart` writes the chart and `eval/meter.py calibrate` fits it. Without it the meter in beat 4 is uncalibrated and the shot does not stand up.
-5. **The voiceover.** Read it slowly. The script is budgeted at 150 words a minute and written to 130, so there is room.
-6. **Upload and paste the link** into `docs/SUBMISSION.md` field 7, then check it while logged out.
+1. **Settle whether a camera can see the virtual device window.** Two minutes with a phone, the moment the device is free. If it can, this video can be filmed without the stick and the Stage One line is met either way. If it cannot, every app shot waits on hardware. Nothing else in this file matters as much.
+2. **The stick, a television in game mode with motion smoothing off, and a phone that films at 240 fps.** The stick is now an upgrade rather than a dependency, but the 240 fps phone is still the only way to get a GATE 1 number, and it was assumed rather than confirmed.
+3. **Consent** from anyone in frame, including hands.
+4. **Filming the flashing source material**, under the rules at the top: not photosensitive, does not look at the lights.
+5. **The camera meter calibration**, which is a step chart shown on the same screen and filmed by the same phone. `eval/meter.py chart` writes the chart and `eval/meter.py calibrate` fits it. On a television this is one step. On the virtual device window it is the open question in the section above.
+6. **The voiceover.** Read it slowly. The script is budgeted at 150 words a minute and written to 130, so there is room.
+7. **Upload and paste the link** into `docs/SUBMISSION.md` field 7, then check it while logged out.
