@@ -115,3 +115,37 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   thread being away, and nothing measured that directly. The guard band has to
   be wider than the worst such pause, so the pause has to be a number.
   **Cost:** one ref and one log line per gap past twice the tick.
+
+- **Decision:** Do not cap how early a cover may go on. Report the reason for
+  every cover that starts earlier in the clip than the guard band asked for,
+  and leave the cover itself alone.
+  **Why:** the brief asked for a cap so that the p95 lead stays under 1.5
+  seconds unless a stall or a seek forced it. Looking at where the long leads
+  actually come from, a cap would either do nothing or make the app less safe.
+  There are only three ways a cover starts earlier than one guard band ahead.
+
+  The first is interval merging. Two flagged segments close together merge
+  into one cover so the picture does not flicker clear for a fraction of a
+  second between them. Capping that would uncover between two segments that
+  nearly touch, which is the exact thing the merge exists to prevent, and the
+  picture would flash clear over flashing content.
+
+  The second is a hold the harness takes when the playhead stops being
+  trustworthy, after a seek, a stall, a pause or the app going to the
+  background. Those are the cases the brief already exempts.
+
+  The third is not an early cover at all. It is playback running slower than
+  real time, which the virtual device does constantly. The cover goes on at
+  the right place in the clip and then waits in wall clock for the playhead to
+  reach the marker. That is what put the p95 at 4097 ms. Nothing about the
+  schedule is early there, and a cap keyed on wall clock would start
+  uncovering flashing content on any slow device, which is the worst possible
+  place to save time.
+
+  So the fix for the number is to measure it in media time, where it is
+  bounded by the guard band by construction, and to name the reason whenever
+  it is not. That is what landed.
+  **Cost:** the p95 of the wall clock lead stays large on the virtual device
+  and is reported as such, with the media time lead beside it. If the media
+  time p95 ever exceeds the guard band for a reason that is not a merge or a
+  hold, that is a real defect and the reason field will say so.
