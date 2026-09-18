@@ -15,6 +15,7 @@ Calm Frames is a verified safety layer for kids with photosensitive epilepsy, an
 ## Contents
 
 - [How it fits together](#how-it-fits-together)
+- [Who it is for, and how it leaves this hackathon](#who-it-is-for-and-how-it-leaves-this-hackathon)
 - [Required tech at runtime](#required-tech-at-runtime)
 - [What has been measured](#what-has-been-measured)
 - [Install and run](#install-and-run)
@@ -78,6 +79,68 @@ Two things in that picture are worth saying out loud.
 **The cover is scheduled, not reacted to.** The player's own position reports are irregular. In the recorded run below, the longest gap between two of them was <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms while the clip kept playing. Anything that waited for a position report before covering would have been that late. So the cover runs on a wall clock that is re-synced to media time at every report, and anything that makes the playhead uncertain, including a stall, a seek, a pause or the app going to the background, hides the picture at once instead of trusting the estimate.
 
 **Verify is a gate, not a report.** `pipeline/verify.py` blocks publishing. A violation left in a rendition, a violation under the modelled cover, a tampered map, a wrong hash, or a poster taken from a flagged moment all fail it, and the title does not reach kid mode.
+
+## Who it is for, and how it leaves this hackathon
+
+Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device. Everything below is written inside that sentence.
+
+### The people
+
+The Epilepsy Foundation's page on photosensitivity says this:
+
+> For about 3% of people with epilepsy, exposure to flashing lights at certain intensities or to certain visual patterns can trigger seizures. This condition is known as photosensitive epilepsy or visually-provoked seizures.
+
+Read that number carefully, because it is easy to repeat wrongly. It is about 3% **of people who have epilepsy**, not 3% of people. The same page says who it lands on:
+
+> Photosensitive epilepsy is more common in children and adolescents, especially those with generalized epilepsy and with certain epilepsy syndromes, such as juvenile myoclonic epilepsy and epilepsy with eyelid myoclonia (Jeavon's syndrome). It becomes less frequent with age, with relatively few cases in the mid-twenties.
+
+And what sets it off:
+
+> Generally, flashing lights between the frequency of 5 to 30 flashes per second (Hertz) are most likely to trigger seizures. However, this number varies from person to person. The likelihood of such conditions combining to trigger a seizure is small.
+
+That last sentence is the Epilepsy Foundation's own caution and it belongs here as much as the rest. This is not a common event. It is a rare event with a bad outcome, landing mostly on children, in front of a screen, and its first two items on that page's list of triggers are television screens and TV broadcasts with rapid flashes.
+
+The Epilepsy Foundation's expert panel published its current consensus in *Epilepsia* in February 2026. Two sentences from its abstract say why a tool like this one can exist at all:
+
+> Media designers of video games, movies, TV productions, web videos, and artificial or virtual reality images are advised to avoid bright flashing patterns in the 10-20 Hz range, repetitive color flashes, and oscillating or static stripes of ~1-8 cycles per visual degree. Signal analysis or trained human inspectors can identify provocative visual patterns.
+
+The same abstract records that "Government and regulatory agencies require screening of potentially provocative media in some nations", and calls visually provoked seizures "both an individual and public health problem".
+
+**Signal analysis or trained human inspectors.** Broadcasters have had both for years. A living room has neither. A child picks a title, it plays, and nobody has looked at it. Calm Frames is the signal analysis, run before the title can be chosen, with the result signed and carried to the player.
+
+**What these sources are not.** They are why the problem is real, not where our thresholds come from. Every threshold in this project comes from [`flashmap/docs/SPEC_SOURCES.md`](flashmap/docs/SPEC_SOURCES.md) and nowhere else, which means WCAG 2.2 SC 2.3.1 and ITU-R BT.1702-3. The 10 to 20 Hz range and the stripe guidance in the consensus paper are not implemented and are not claimed. Neither source says that hiding flagged segments prevents a seizure, and neither do we.
+
+### Four things that outlive the deadline
+
+The app is the demo. These four are the part that keeps working after the judging period, and none of them needs anyone to install Calm Frames.
+
+**1. The hook, so any Vega video app gets the same protection.** The guard is one React hook with no knowledge of our screens, navigation or storage. [`docs/INTEGRATION_DIFF.md`](docs/INTEGRATION_DIFF.md) is the real `git diff` of adding it to a clean [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) checkout at tag `v0.24-RN83`: <!--n results/integration_diff.json:lines_added -->32<!--/n--> lines added and <!--n results/integration_diff.json:lines_replaced -->2<!--/n--> replaced across <!--n results/integration_diff.json:files_touched -->4<!--/n--> files, two of which only pass a prop along. `hook/tools/make_integration_diff.mjs` regenerates that patch from the pinned checkout, and `eval/integration_diff_stats.py` counts what is committed, so the three numbers in this paragraph are measured rather than asserted.
+
+What an app gets for it: every flagged part of a title hidden before it starts while sound and captions keep going, a card ahead of it with a D-pad Skip and a card afterwards, a missing or stale or unsigned or wrong-hash map keeping the picture hidden, every seek path safe including Alexa and the remote's transport commands, and a VoiceView announcement for each card. What it costs: one rule, which is that nothing in the app writes `currentTime` or calls `fastSeek` any more. Everything goes through `guard.requestSeek`. The package README is [`hook/README.md`](hook/README.md).
+
+**2. The GitHub Action, so a studio never ships the problem.** [`flashmap/examples/flash-check.yml`](flashmap/examples/flash-check.yml) drops into any repository that holds images or video. Every pull request that adds or changes one is measured against WCAG 2.2 SC 2.3.1, and the job fails when a file goes over the general or red flash thresholds. Exit codes are `0` under the thresholds, `1` over them and `2` when flashmap could not tell, and a caller that treats `2` as a pass has a hole in it. The analyzer is Apache-2.0 and runs standalone, so this works for a studio, a game team, a marketing site or a documentation repository with animated GIFs in it, none of whom have to care that Calm Frames exists.
+
+**3. The sidecar spec, so a map is portable.** [`docs/SIDECAR_SPEC.md`](docs/SIDECAR_SPEC.md) is the flash map format, version 1: what was measured, under which profile, with which colour assumptions, which segments were flagged, and an Ed25519 signature over a canonical serialization bound to the source file's SHA-256. It is written so that a player that has never seen our code can read a map it did not make, check the signature and the hash, and honour it. That is the difference between one app having a feature and a format existing. The spec also has a section on what a map does not say, which is the part a second implementer needs most.
+
+**4. The feature request, because this should not be an app's job.** Photosensitivity is a property of a person, not of an app. A child should not have to hope that whichever app they opened happens to have built protection into it. The request we are filing with Amazon, as **Critical**, is a **system-wide Fire TV "dim flashing lights" setting** in Accessibility settings, next to the options already there, that any app can read and honour. Apple ships one. Fire TV does not. A system setting turns this from one app's feature into a platform guarantee and gives every developer a single flag to respect, and it is the one change that would reach the children this project is about faster than any app could. It is request 1 in [`docs/SUBMISSION.md`](docs/SUBMISSION.md), alongside thirteen others found while building.
+
+### What has not been shown
+
+- **Nobody outside this project has used it or commented on it yet.** No parent, no clinician, no studio. [`docs/VALIDATION.md`](docs/VALIDATION.md) is the place those quotes will go, and it is marked as empty until they arrive. Nothing in this README should be read as anyone else's endorsement.
+- **It is not a medical device and it does not prevent seizures.** It reduces exposure to flashing above published limits in the videos it plays.
+- **Only titles that passed verify are protected.** Anything else was never measured. The rest of what is not true yet is in [Limits](#limits), including the fact that no cover has been timed on a physical stick.
+
+### Where the numbers here came from
+
+The three numbers about the integration diff are markers pointing at `results/integration_diff.json`, and CI fails if they drift, the same as every other number in this README. The two quoted statistics are not ours: they are quoted from their sources below, with the date each was read, and they measure the problem rather than this project.
+
+**Sources, re-read on Thu Sep 17, 2026.**
+
+1. Epilepsy Foundation, "Photosensitivity and Seizures", reviewed by Elaine Wirrell MD.
+   <https://www.epilepsy.com/what-is-epilepsy/seizure-triggers/photosensitivity>
+   **How it was read.** The live page returned HTTP 403 to every automated request from this machine, which is a Cloudflare bot check rather than a missing page, so the text quoted above was read from the Internet Archive's capture of that URL taken on **Aug 16, 2026**: <https://web.archive.org/web/20260816074759/https://www.epilepsy.com/what-is-epilepsy/seizure-triggers/photosensitivity>. Quoting an archived capture is quoting what the page said on a date, not what it says today. Open the live URL in a browser and confirm these three sentences before the submission goes in.
+2. Fisher RS, Wilkins A, Takahashi Y, Thio LL, Acharya J, Alkhaldi M, Baumer FM, Beran RG, Craiu D, French J, Mirza N, Parisi P, Solodar J, Szaflarski JP, Tolchin B, Kasteleijn-Nolst Trenite D. "Visually-provoked seizures: Consensus of the Epilepsy Foundation Working Group." *Epilepsia*. 2026;67(2):565-581. doi:[10.1111/epi.18702](https://doi.org/10.1111/epi.18702). Published online Nov 24, 2025.
+   **How it was read.** The DOI resolves to Wiley Online Library, which returns HTTP 403 to automated requests, so the record was confirmed twice against databases instead: Crossref, and PubMed (PMID [41283196](https://pubmed.ncbi.nlm.nih.gov/41283196/)). Both agree on the title, all sixteen authors, the journal, volume 67, issue 2 and pages 565 to 581. The sentences quoted above are from the published abstract as PubMed renders it. **Only the abstract has been read.** Nothing in this project cites the body of that paper, and no threshold comes from it.
 
 ## Required tech at runtime
 

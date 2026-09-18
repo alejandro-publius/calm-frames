@@ -1,0 +1,8 @@
+{
+  "generated_from": "docs/INTEGRATION_DIFF.md",
+  "what_this_is": "the size of the real git diff that adds the flash guard to a clean vega-video-sample checkout at tag v0.24-RN83",
+  "lines_added": 32,
+  "lines_replaced": 2,
+  "files_touched": 4,
+  "diff_sha256": "1666328c6debf10fc48cc86e195724298099a5ee1812c73405f62c1ce196003b"
+}

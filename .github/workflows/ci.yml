@@ -131,3 +131,5 @@ jobs:
         run: python3 eval/readme_sync.py --check
       - name: Rebuild the lead time summary from its own events
         run: python3 eval/verify_gate1_archive.py
+      - name: Recount the integration diff the README quotes
+        run: python3 eval/integration_diff_stats.py --check
