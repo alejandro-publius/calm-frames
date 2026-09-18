@@ -13,12 +13,19 @@ import shutil
 
 import pytest
 
+from pipeline import verify
 from pipeline.catalog import STATUS_FAILED, kid_mode_titles, read_entry
 from pipeline.flashmap_adapter import FlashmapAdapter, parse_map
 from pipeline.hideplan import HidePlan
 from pipeline.ingest import IngestOptions, ingest_title
 from pipeline.render import still_is_flat
-from pipeline.verify import apply_to_catalog, compare_rendition_to_source
+from pipeline.verify import (
+    OUTCOME_COVER_PROVEN_DRAWN,
+    OUTCOME_FAILED,
+    OUTCOME_NO_FLAGGED_SEGMENTS,
+    apply_to_catalog,
+    compare_rendition_to_source,
+)
 from pipeline.verify import main as verify_main
 from pipeline.verify import verify_title
 
@@ -56,6 +63,35 @@ def built(tmp_path, analyzer, keypair):
     }
 
 
+@pytest.fixture
+def calm_built(tmp_path, analyzer, keypair):
+    """A title the analyzer found nothing in, built but not yet verified.
+
+    The fourteen real titles in this state are gentle cloud, sunset and wave
+    footage: the analyzer looked and nothing was over the thresholds.
+    """
+    private, public = keypair
+    source = make_calm_clip(tmp_path / "clip.mp4", seconds=8.0)
+    options = IngestOptions(
+        presets=["wcag"],
+        key=str(private),
+        pub=str(public),
+        poster_count=2,
+        bif_interval_ms=2000,
+        x264_preset="ultrafast",
+        skip_verify=True,
+    )
+    result = ingest_title(source, tmp_path / "out", options)
+    return {
+        "result": result,
+        "layout": result.layout,
+        "source": source,
+        "analyzer": analyzer,
+        "public": public,
+        "workdir": tmp_path / "out",
+    }
+
+
 def run_verify(built, **overrides):
     kwargs = dict(
         source=built["source"],
@@ -70,6 +106,11 @@ def run_verify(built, **overrides):
 
 def failed_names(report):
     return [check.name for check in report.failures]
+
+
+def check_named(report, name):
+    """The one check with this name, or None when it never ran."""
+    return next((check for check in report.checks if check.name == name), None)
 
 
 class TestAGoodTitlePasses:
@@ -760,3 +801,107 @@ class TestACoverStillThatCannotBeChecked:
         failed = [c for c in report.failures if c.name == "cover_still_calm"]
         assert failed
         assert "not from when" in failed[0].detail
+
+
+class TestWhatAPassActuallyProves:
+    """Two titles can both pass and have proved completely different things.
+
+    Before this, a title with no flagged segment collected the same word as a
+    title whose cover had been measured on its rendition, because the check
+    that measures it only ran when there was an interval to sample. Fourteen
+    of the twenty-one verified titles were in that state.
+    """
+
+    def test_a_title_with_nothing_flagged_gets_a_name_of_its_own(self, calm_built):
+        report = run_verify(calm_built)
+        assert report.passed, failed_names(report)
+        assert report.outcome == OUTCOME_NO_FLAGGED_SEGMENTS
+        assert check_named(report, "cover_actually_drawn:wcag") is None
+        proof = check_named(report, "cover_proof:wcag")
+        assert proof.passed
+        assert proof.data["intervals"] == 0
+        assert proof.data["proof_ran"] is False
+
+    def test_a_flagged_title_that_passes_says_the_cover_was_proven_drawn(self, built):
+        report = run_verify(built)
+        assert report.passed, failed_names(report)
+        assert report.outcome == OUTCOME_COVER_PROVEN_DRAWN
+        assert check_named(report, "cover_actually_drawn:wcag").passed
+        assert check_named(report, "cover_proof:wcag").data["intervals"] == 1
+
+    def test_a_calm_title_reaches_the_catalog_under_its_own_name(self, calm_built):
+        report = run_verify(calm_built)
+        apply_to_catalog(calm_built["layout"], report)
+        entry = read_entry(calm_built["layout"].entry_path)
+        assert entry.notes["verify_outcome"] == OUTCOME_NO_FLAGGED_SEGMENTS
+        # A title with nothing over the thresholds is still safe to play, so
+        # naming what it proved does not take it out of kid mode.
+        assert entry.kid_mode_visible
+
+    def test_a_covered_title_reaches_the_catalog_under_the_other_one(self, built):
+        report = run_verify(built)
+        apply_to_catalog(built["layout"], report)
+        entry = read_entry(built["layout"].entry_path)
+        assert entry.notes["verify_outcome"] == OUTCOME_COVER_PROVEN_DRAWN
+        assert entry.kid_mode_visible
+
+    def test_the_summary_line_says_which_kind_of_pass_it_was(self, calm_built):
+        report = run_verify(calm_built)
+        assert OUTCOME_NO_FLAGGED_SEGMENTS in report.summary()
+
+    def test_the_written_report_carries_the_outcome(self, calm_built):
+        report = run_verify(calm_built)
+        assert report.to_dict()["outcome"] == OUTCOME_NO_FLAGGED_SEGMENTS
+
+
+class TestTheCoverProofCannotBeSkipped:
+    """A title with intervals may not pass on a check that never ran.
+
+    Seen to fail twice before the guard was trusted. Deleting the
+    `cover_proof:{preset}` report.add from pipeline/verify.py, and separately
+    short-circuiting it to `True`, each turn three of these red:
+
+        FAILED pipeline/tests/test_verify.py::TestTheCoverProofCannotBeSkipped::
+        test_an_empty_sample_takes_the_proof_away_and_verify_refuses
+            assert not report.passed
+        E   AssertionError: assert not True
+        E    +  where True = VerifyReport(sha256='bf564a6819ff', ...).passed
+
+        FAILED ...::test_a_drawn_check_that_ran_and_failed_is_not_read_as_a_proof
+        E   AssertionError: assert 'cover_proof:wcag' in ['cover_actually_drawn:wcag']
+
+    All three pass again once the check is restored.
+    """
+
+    def test_an_empty_sample_takes_the_proof_away_and_verify_refuses(
+        self, built, monkeypatch
+    ):
+        # Exactly what a plan with no interval used to do to the drawn check,
+        # done to a title that does have one to cover.
+        monkeypatch.setattr(verify, "COVER_SAMPLE_LIMIT", 0)
+        report = run_verify(built)
+        assert not report.passed
+        assert "cover_proof:wcag" in failed_names(report)
+        assert check_named(report, "cover_actually_drawn:wcag") is None
+        assert report.outcome == OUTCOME_FAILED
+
+    def test_a_missing_cover_still_takes_the_proof_away_and_verify_refuses(self, built):
+        built["layout"].still_path.unlink()
+        report = run_verify(built)
+        assert not report.passed
+        assert "cover_proof:wcag" in failed_names(report)
+
+    def test_a_drawn_check_that_ran_and_failed_is_not_read_as_a_proof(self, built):
+        # The rendition still shows the film, so the drawn check runs and fails.
+        shutil.copyfile(built["source"], built["layout"].safe_master("wcag"))
+        report = run_verify(built)
+        assert not report.passed
+        assert "cover_actually_drawn:wcag" in failed_names(report)
+        assert "cover_proof:wcag" in failed_names(report)
+        assert report.outcome == OUTCOME_FAILED
+
+    def test_no_preset_at_all_is_never_a_pass(self, built):
+        report = run_verify(built, presets=[])
+        assert not report.passed
+        assert "presets_checked" in failed_names(report)
+        assert report.outcome == OUTCOME_FAILED

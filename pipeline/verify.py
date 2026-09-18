@@ -23,6 +23,13 @@ Checks 1, 5 and 6 do not go through the analyzer, so a broken or missing
 analyzer cannot turn them off quietly. Anything that cannot be read counts as
 a failure: a map we cannot parse is never a clean bill of health.
 
+A pass is not one thing, and `VerifyReport.outcome` says which kind it was.
+A title whose plan has intervals passes only when the check that measures the
+cover against the cover still ran for that preset and passed, which is
+`cover_proof:{preset}`. A title with no flagged segment has nothing to cover,
+so it gets `no flagged segments` rather than the same word as a title whose
+cover was measured. `--pool-summary` counts a whole work directory that way.
+
 Exit codes: 0 pass, 1 fail, 2 the request itself was wrong.
 """
 
@@ -37,7 +44,15 @@ from pathlib import Path
 from typing import Sequence
 
 from . import PipelineError
-from .catalog import STATUS_FAILED, STATUS_VERIFIED, read_entry, update_index, write_entry
+from .catalog import (
+    STATUS_FAILED,
+    STATUS_PENDING,
+    STATUS_VERIFIED,
+    CatalogEntry,
+    read_entry,
+    update_index,
+    write_entry,
+)
 from .flashmap_adapter import FlashMapDoc, FlashmapAdapter, MapFormatError, load_map
 from .hashing import sha256_file
 from .hideplan import (
@@ -87,6 +102,29 @@ TIMING_TOLERANCE_FRAMES = 0.5
 # docs/SPEC_SOURCES.md is where spec numbers live.
 START_OFFSET_LIMIT_MS = 150.0
 
+# What a report proves, in four words that never stand in for one another.
+#
+# Until 2026-09-17 a title with no flagged segment collected the same "verified" as a
+# title whose cover had been measured on the rendition, because the check that measures
+# it only ran when there was an interval to sample. Fourteen of the twenty-one verified
+# titles were in that state. Finding nothing over the thresholds is a real outcome and
+# for gentle cloud and sunset footage it is the right one. It is not evidence that any
+# cover works, so it gets a name of its own. docs/DECISIONS.md has the reasoning.
+OUTCOME_NO_FLAGGED_SEGMENTS = "no flagged segments"
+OUTCOME_COVER_PROVEN_DRAWN = "cover proven drawn"
+# A report that passed while a flagged preset had no passing cover proof. Verify now
+# refuses that, so only a report written before this rule can carry it. It is kept
+# because a report from then is still read, and folding it into either neighbour would
+# be the friendlier answer rather than the true one.
+OUTCOME_COVER_NOT_PROVEN = "cover not proven"
+OUTCOME_FAILED = "failed"
+OUTCOMES = (
+    OUTCOME_NO_FLAGGED_SEGMENTS,
+    OUTCOME_COVER_PROVEN_DRAWN,
+    OUTCOME_COVER_NOT_PROVEN,
+    OUTCOME_FAILED,
+)
+
 
 @dataclass
 class Check:
@@ -113,6 +151,44 @@ class VerifyReport:
     def failures(self) -> list[Check]:
         return [check for check in self.checks if not check.passed]
 
+    @property
+    def flagged_presets(self) -> list[str]:
+        """The presets whose hide plan has at least one interval to cover.
+
+        Read from the checks rather than from the plans on disk, so a report written
+        months ago answers the same question the same way.
+        """
+        return [
+            check.name.split(":", 1)[1]
+            for check in self.checks
+            if check.name.startswith("plan_matches_map:")
+            and float(check.data.get("stored") or 0) > 0
+        ]
+
+    @property
+    def outcome(self) -> str:
+        """What this report proves, as one of `OUTCOMES`.
+
+        A pass is not one thing. A title with no flagged segment was looked at and
+        nothing was over the thresholds, which is worth saying out loud and is not
+        worth anything as evidence that a cover works. A title with flagged segments
+        only counts as proven when the check that measures the cover against the cover
+        still ran for every preset that had something to cover, and passed.
+        """
+        if not self.passed:
+            return OUTCOME_FAILED
+        flagged = self.flagged_presets
+        if not flagged:
+            return OUTCOME_NO_FLAGGED_SEGMENTS
+        drawn = {
+            check.name.split(":", 1)[1]: check.passed
+            for check in self.checks
+            if check.name.startswith("cover_actually_drawn:")
+        }
+        if all(drawn.get(preset) for preset in flagged):
+            return OUTCOME_COVER_PROVEN_DRAWN
+        return OUTCOME_COVER_NOT_PROVEN
+
     def add(self, name: str, passed: bool, detail: str, **data) -> Check:
         check = Check(name=name, passed=passed, detail=detail, data=data)
         self.checks.append(check)
@@ -124,6 +200,7 @@ class VerifyReport:
             "source_path": self.source_path,
             "presets": self.presets,
             "passed": self.passed,
+            "outcome": self.outcome,
             "started_at": self.started_at,
             "finished_at": self.finished_at,
             "checks": [asdict(check) for check in self.checks],
@@ -151,7 +228,10 @@ class VerifyReport:
 
     def summary(self) -> str:
         if self.passed:
-            return f"VERIFY PASSED for {self.sha256[:12]} ({len(self.checks)} checks)"
+            return (
+                f"VERIFY PASSED for {self.sha256[:12]} ({len(self.checks)} checks, "
+                f"{self.outcome})"
+            )
         lines = [
             f"VERIFY FAILED for {self.sha256[:12]}: "
             f"{len(self.failures)} of {len(self.checks)} checks failed"
@@ -347,6 +427,15 @@ def verify_title(
     probe_data = json.loads(layout.probe_path.read_text())
     probe = VideoProbe.from_dict(probe_data)
 
+    # No preset means no map was looked at, and a report that reached the end without
+    # looking at one would otherwise pass on the two checks that do not need a preset.
+    if not presets:
+        report.add(
+            "presets_checked",
+            False,
+            "no preset was given, so no map, plan or cover was checked",
+        )
+
     for preset in presets:
         prefix = f"[{preset}] "
 
@@ -493,6 +582,49 @@ def verify_title(
                     worst_db=None if worst == float("inf") else worst,
                     worst_at_s=worst_at,
                 )
+
+        # 6c. Either there was nothing to cover, or the cover was proven drawn.
+        #
+        # The check above sits behind `if sampled and still.exists()`, so a missing
+        # cover still, an empty sample or a plan with no interval used to take it out
+        # of the report without taking the title out of kid mode. This is the line that
+        # says a preset with intervals may not pass on a check that never ran. It is
+        # deliberately asked after the fact, of the report, rather than inside the
+        # branch: a check that is skipped cannot notice its own absence.
+        drawn = next(
+            (c for c in report.checks if c.name == f"cover_actually_drawn:{preset}"),
+            None,
+        )
+        proven = drawn is not None and drawn.passed
+        if not plan.intervals:
+            detail = (
+                f"{prefix}the hide plan has no interval, so there is nothing to cover "
+                f"and nothing about covering is shown: {OUTCOME_NO_FLAGGED_SEGMENTS}"
+            )
+        elif proven:
+            detail = (
+                f"{prefix}{len(plan.intervals)} interval(s) to cover, and the cover was "
+                "measured on the rendition"
+            )
+        elif drawn is None:
+            detail = (
+                f"{prefix}{len(plan.intervals)} interval(s) to cover and no cover proof "
+                "at all: cover_actually_drawn never ran, which happens when the cover "
+                "still is missing or nothing was sampled"
+            )
+        else:
+            detail = (
+                f"{prefix}{len(plan.intervals)} interval(s) to cover and the cover proof "
+                "did not pass"
+            )
+        report.add(
+            f"cover_proof:{preset}",
+            not plan.intervals or proven,
+            detail,
+            intervals=len(plan.intervals),
+            proof_ran=drawn is not None,
+            proof_passed=proven,
+        )
 
         # 4. The on-device cover schedule over the original video.
         cover_model = layout.cover_model_path(preset)
@@ -700,6 +832,11 @@ def apply_to_catalog(layout: TitleLayout, report: VerifyReport) -> None:
     entry.status = STATUS_VERIFIED if report.passed else STATUS_FAILED
     entry.verify_report = str(layout.verify_report_path)
     entry.notes["failed_checks"] = [check.name for check in report.failures]
+    # Which kind of pass this was. `status` still decides whether kid mode may list the
+    # title, because a title with no flagged segment is safe to play and hiding it would
+    # be a worse answer than publishing it. The outcome is what stops the two kinds of
+    # pass being counted as one thing.
+    entry.notes["verify_outcome"] = report.outcome
     # How far each rendition's timeline sits from the source's, in milliseconds. The map's
     # intervals are on the source timeline, so a player scheduling live covers over the
     # rendition adds this to every one of them. Recorded rather than absorbed: the guard band
@@ -717,13 +854,120 @@ def apply_to_catalog(layout: TitleLayout, report: VerifyReport) -> None:
     update_index(layout.index_path, entry)
 
 
+def outcome_for_entry(entry: CatalogEntry) -> str | None:
+    """The outcome behind one catalog entry, or None when verify never gave it a verdict.
+
+    The report on disk is read first, because it is the evidence and it can be read
+    again. The note verify writes beside it is the fallback for an entry whose report
+    has been moved or deleted. A title that has not been through verify has no outcome
+    at all, and is counted as not analyzed rather than quietly as one of the passes.
+    """
+    # `is_file` rather than `exists`, because an entry that never ran verify has no
+    # report path at all and Path("") is the working directory, which does exist.
+    path = Path(entry.verify_report or "")
+    if entry.verify_report and path.is_file():
+        try:
+            return VerifyReport.from_dict(json.loads(path.read_text())).outcome
+        except (OSError, json.JSONDecodeError, TypeError, ValueError):
+            pass
+    recorded = entry.notes.get("verify_outcome")
+    if isinstance(recorded, str) and recorded in OUTCOMES:
+        return recorded
+    if entry.status == STATUS_FAILED:
+        return OUTCOME_FAILED
+    return None
+
+
+def pool_summary(workdir: str | Path) -> dict:
+    """Count every title in a work directory by what verify proved about it.
+
+    The four published counts are `analyzed` and the three it is made of, so a title
+    cannot move between them without the total moving too. Everything verify has not
+    given a verdict on is counted separately, by name, so the directory count and the
+    analyzed count can be told apart instead of one being read as the other.
+    """
+    titles_dir = Path(workdir) / "titles"
+    counts = dict.fromkeys(OUTCOMES, 0)
+    not_analyzed = {"pending": 0, "no_entry_json": 0, "no_verdict": 0}
+    directories = 0
+
+    children = sorted(titles_dir.iterdir()) if titles_dir.is_dir() else []
+    for child in children:
+        if not child.is_dir():
+            continue
+        directories += 1
+        entry_path = child / "entry.json"
+        if not entry_path.exists():
+            not_analyzed["no_entry_json"] += 1
+            continue
+        try:
+            entry = read_entry(entry_path)
+        except (json.JSONDecodeError, TypeError, ValueError):
+            not_analyzed["no_verdict"] += 1
+            continue
+        outcome = outcome_for_entry(entry)
+        if outcome is None:
+            key = "pending" if entry.status == STATUS_PENDING else "no_verdict"
+            not_analyzed[key] += 1
+            continue
+        counts[outcome] += 1
+
+    analyzed = sum(counts.values())
+    # Written out rather than summed again, so that an outcome added to OUTCOMES and
+    # not published here turns `adds_up` false instead of hiding inside the total. The
+    # second half is the invariant that a title cannot fall out of every count.
+    published = (
+        counts[OUTCOME_NO_FLAGGED_SEGMENTS]
+        + counts[OUTCOME_COVER_PROVEN_DRAWN]
+        + counts[OUTCOME_COVER_NOT_PROVEN]
+        + counts[OUTCOME_FAILED]
+    )
+    adds_up = analyzed == published and directories == analyzed + sum(
+        not_analyzed.values()
+    )
+    home = Path.home()
+    root = Path(workdir).resolve()
+    try:
+        shown = f"~/{root.relative_to(home)}"
+    except ValueError:
+        shown = str(root)
+    return {
+        "generated_on": time.strftime("%Y-%m-%d"),
+        "work_directory": shown,
+        "title_directories": directories,
+        "analyzed": analyzed,
+        "no_flagged_segments": counts[OUTCOME_NO_FLAGGED_SEGMENTS],
+        "cover_proven_drawn": counts[OUTCOME_COVER_PROVEN_DRAWN],
+        "cover_not_proven": counts[OUTCOME_COVER_NOT_PROVEN],
+        "failed": counts[OUTCOME_FAILED],
+        "not_analyzed": not_analyzed,
+        "adds_up": adds_up,
+        "statement": (
+            "analyzed is no_flagged_segments plus cover_proven_drawn plus "
+            "cover_not_proven plus failed. A title counted under no_flagged_segments "
+            "passed verify and had no segment over the thresholds, so nothing was "
+            "covered and nothing about covering was shown. Only cover_proven_drawn "
+            "titles had the cover measured on the rendition. The titles under "
+            "not_analyzed have no verdict and are in none of the four counts."
+        ),
+    }
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m pipeline.verify",
         description="Check a title and block publishing if anything fails.",
     )
     parser.add_argument("--workdir", required=True, help="the ingest work directory")
-    parser.add_argument("--sha", required=True, help="the source SHA-256 of the title")
+    parser.add_argument("--sha", help="the source SHA-256 of the title")
+    parser.add_argument(
+        "--pool-summary",
+        metavar="PATH",
+        help=(
+            "count every title in the work directory by what verify proved about it, "
+            "write that to PATH as JSON, and check nothing else"
+        ),
+    )
     parser.add_argument(
         "--source", help="path to the original video (default: the path ingest recorded)"
     )
@@ -744,6 +988,31 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+
+    if args.pool_summary:
+        summary = pool_summary(args.workdir)
+        out = Path(args.pool_summary)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(summary, indent=1, sort_keys=True) + "\n")
+        print(
+            f"{summary['analyzed']} title(s) analyzed: "
+            f"{summary['no_flagged_segments']} with no flagged segment, "
+            f"{summary['cover_proven_drawn']} with the cover proven drawn, "
+            f"{summary['cover_not_proven']} with the cover unproven, "
+            f"{summary['failed']} failed. Written to {out}"
+        )
+        if not summary["adds_up"]:
+            print(
+                "VERIFY FAILED: the counts do not add up to the titles on disk",
+                file=sys.stderr,
+            )
+            return 1
+        return 0
+
+    if not args.sha:
+        print("VERIFY FAILED: --sha is required", file=sys.stderr)
+        return 2
+
     layout = TitleLayout(args.workdir, args.sha)
     if not layout.root.exists():
         print(f"VERIFY FAILED: no title directory at {layout.root}", file=sys.stderr)
