@@ -1,10 +1,25 @@
 /**
  * Kid mode's shelf, the details page and the parent area.
+ *
+ * Every empty state and every error state is here as well as the happy path,
+ * because the states nobody demonstrates are the ones that ship broken. The
+ * rule each of them has to keep is the same one: an error state never puts an
+ * unchecked title within reach.
  */
 
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
 import { MINIMUM_TEXT_SIZE } from '../../src/calmframes/calmStyles';
+import {
+  BACKEND_UNREACHABLE,
+  BACKEND_UNREACHABLE_EMPTY,
+  NO_TITLES,
+  PIN_NOT_SET,
+  PIN_WRONG_TITLE,
+  TITLE_FAILED,
+  TITLE_PENDING,
+  TITLE_STALE,
+} from '../../src/calmframes/copy';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
 import FlashMapStrip, {
   describeStrip,
@@ -14,11 +29,20 @@ import FlashMapStrip, {
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { addHideEntry, emptyHideLog } from '../../src/calmframes/hideLog';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
+import { OFFLINE_MAP_JSON } from '../../src/calmframes/offlineMapText';
+import {
+  OFFLINE_PUBLIC_KEY_BASE64,
+  offlineTitle,
+} from '../../src/calmframes/offlineTitle';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
-import { emptyPinGate, setPin } from '../../src/calmframes/parentGate';
+import {
+  emptyPinGate,
+  MAX_ATTEMPTS,
+  setPin,
+} from '../../src/calmframes/parentGate';
 import ShieldBadge from '../../src/calmframes/ShieldBadge';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
-import { CheckedTitle } from '../../src/calmframes/titleStatus';
+import { checkTitle, CheckedTitle } from '../../src/calmframes/titleStatus';
 
 function makeTitle(
   id: string,
@@ -43,6 +67,16 @@ function makeTitle(
     verifiedProfiles: ['wcag'],
     ...overrides,
   };
+}
+
+/** The title bundled in the package, checked with the real reader. */
+const MAP_MADE_AT = Date.parse(JSON.parse(OFFLINE_MAP_JSON).created_utc);
+function bundledTitle(nowMs: number): CheckedTitle {
+  return checkTitle(offlineTitle('file:///offline/calm_gradient.mp4'), {
+    settings: DEFAULT_SETTINGS,
+    publicKeyBase64: OFFLINE_PUBLIC_KEY_BASE64,
+    nowMs,
+  });
 }
 
 describe('FlashMapStrip', () => {
@@ -131,11 +165,42 @@ describe('KidHomeScreen', () => {
     expect(onOpen).toHaveBeenCalledWith(titles[0]);
   });
 
-  it('says so plainly when nothing is ready', () => {
+  it('says so plainly when nothing is ready, and shows no grid at all', () => {
     render(<KidHomeScreen titles={[titles[1]]} onOpen={jest.fn()} />);
-    expect(screen.getByTestId('kid-home-subtitle').props.children).toMatch(
-      /Nothing is ready yet/,
+    expect(screen.getByTestId('kid-home-empty-title').props.children).toBe(
+      NO_TITLES.title,
     );
+    expect(screen.getByTestId('kid-home-empty-detail').props.children).toBe(
+      NO_TITLES.detail,
+    );
+    expect(screen.queryByTestId('kid-home-poster-waiting')).toBeNull();
+  });
+
+  it('keeps playing the bundled title when the service cannot be reached', () => {
+    const bundled = bundledTitle(MAP_MADE_AT + 1_000);
+    expect(bundled.status).toBe('verified');
+
+    const onOpen = jest.fn();
+    render(
+      <KidHomeScreen
+        titles={[bundled, titles[1]]}
+        onOpen={onOpen}
+        offline
+      />,
+    );
+    expect(screen.getByTestId('kid-home-offline-title').props.children).toBe(
+      BACKEND_UNREACHABLE.title,
+    );
+    fireEvent.press(screen.getByTestId(`kid-home-poster-${bundled.title.id}`));
+    expect(onOpen).toHaveBeenCalledWith(bundled);
+  });
+
+  it('says the service is unreachable and offers nothing when the shelf is bare', () => {
+    render(<KidHomeScreen titles={[titles[2]]} onOpen={jest.fn()} offline />);
+    expect(screen.getByTestId('kid-home-empty-title').props.children).toBe(
+      BACKEND_UNREACHABLE_EMPTY.title,
+    );
+    expect(screen.queryByTestId('kid-home-poster-bad')).toBeNull();
   });
 
   it('has no video and nothing that plays by itself', () => {
@@ -144,6 +209,16 @@ describe('KidHomeScreen', () => {
     expect(tree).not.toMatch(/autoPlay|shouldPlay|Video|KeplerVideoSurfaceView/i);
     // An Image is a still. That is the only picture on this screen.
     expect(screen.getByTestId('kid-home-poster-image-ok')).toBeTruthy();
+  });
+
+  it('never draws a poster for a title that did not verify', () => {
+    const { toJSON } = render(
+      <KidHomeScreen titles={titles} onOpen={jest.fn()} offline />,
+    );
+    const tree = JSON.stringify(toJSON());
+    expect(tree).toContain('ok.jpg');
+    expect(tree).not.toContain('waiting.jpg');
+    expect(tree).not.toContain('bad.jpg');
   });
 
   it('draws its headings at a ten foot size', () => {
@@ -165,12 +240,13 @@ describe('TitleDetailsScreen', () => {
     expect(screen.getByTestId('title-details-strip')).toBeTruthy();
   });
 
-  it('will not play a title that is not checked', () => {
+  it('will not play a title that is still being checked', () => {
     const onPlay = jest.fn();
     render(
       <TitleDetailsScreen
         entry={makeTitle('waiting', 'pending', {
           reason: 'This title is not checked yet, so the picture stays hidden.',
+          segments: [],
         })}
         onPlay={onPlay}
       />,
@@ -179,7 +255,49 @@ describe('TitleDetailsScreen', () => {
     expect(play.props.accessibilityState).toEqual({ disabled: true });
     fireEvent.press(play);
     expect(onPlay).not.toHaveBeenCalled();
-    expect(screen.getByTestId('title-details-reason')).toBeTruthy();
+    expect(screen.getByTestId('title-details-notice-title').props.children).toBe(
+      TITLE_PENDING.title,
+    );
+    // Nothing to show about a title that has not been checked.
+    expect(screen.queryByTestId('title-details-strip')).toBeNull();
+    expect(screen.queryByTestId('title-details-summary')).toBeNull();
+  });
+
+  it('will not play a title whose check did not pass', () => {
+    const onPlay = jest.fn();
+    render(
+      <TitleDetailsScreen
+        entry={makeTitle('bad', 'failed', {
+          rejection: 'bad-signature',
+          reason:
+            'The check for this title was changed after it was signed, so the picture stays hidden.',
+          segments: [],
+        })}
+        onPlay={onPlay}
+      />,
+    );
+    fireEvent.press(screen.getByTestId('title-details-play'));
+    expect(onPlay).not.toHaveBeenCalled();
+    expect(screen.getByTestId('title-details-notice-title').props.children).toBe(
+      TITLE_FAILED.title,
+    );
+    expect(screen.getByTestId('title-details-notice-detail').props.children).toMatch(
+      /changed after it was signed/,
+    );
+  });
+
+  it('will not play a title whose check is too old, checked with the real reader', () => {
+    // Ninety days and a minute after the bundled map was made.
+    const stale = bundledTitle(MAP_MADE_AT + 90 * 24 * 60 * 60 * 1000 + 60_000);
+    expect(stale.rejection).toBe('stale');
+
+    const onPlay = jest.fn();
+    render(<TitleDetailsScreen entry={stale} onPlay={onPlay} />);
+    fireEvent.press(screen.getByTestId('title-details-play'));
+    expect(onPlay).not.toHaveBeenCalled();
+    expect(screen.getByTestId('title-details-notice-title').props.children).toBe(
+      TITLE_STALE.title,
+    );
   });
 
   it('plays a checked title', () => {
@@ -230,10 +348,11 @@ describe('ParentAreaScreen', () => {
 
   function renderArea(overrides: Record<string, unknown> = {}) {
     const onSettingsChange = jest.fn();
+    const onGateChange = jest.fn();
     render(
       <ParentAreaScreen
         gate={gate}
-        onGateChange={jest.fn()}
+        onGateChange={onGateChange}
         settings={DEFAULT_SETTINGS}
         onSettingsChange={onSettingsChange}
         log={log}
@@ -242,7 +361,7 @@ describe('ParentAreaScreen', () => {
         {...overrides}
       />,
     );
-    return { onSettingsChange };
+    return { onSettingsChange, onGateChange };
   }
 
   const enter = (pin: string) => {
@@ -259,9 +378,46 @@ describe('ParentAreaScreen', () => {
 
     enter('0000');
     expect(screen.queryByTestId('parent-area-open')).toBeNull();
-    expect(screen.getByTestId('parent-area-message').props.children).toMatch(
+    expect(screen.getByTestId('parent-area-message-title').props.children).toBe(
+      PIN_WRONG_TITLE,
+    );
+    expect(screen.getByTestId('parent-area-message-detail').props.children).toMatch(
       /not right/,
     );
+  });
+
+  it('says how many tries are left, and then that it is locked', () => {
+    // One state for the whole run, so the failed attempts really accumulate.
+    let live = gate;
+    render(
+      <ParentAreaScreen
+        gate={live}
+        onGateChange={(next) => {
+          live = next;
+        }}
+        settings={DEFAULT_SETTINGS}
+        onSettingsChange={jest.fn()}
+        log={log}
+        titles={titles}
+        nowMs={() => 0}
+      />,
+    );
+    enter('0000');
+    expect(screen.getByTestId('parent-area-message-detail').props.children).toMatch(
+      new RegExp(`${MAX_ATTEMPTS - 1} tries left`),
+    );
+    expect(live.failedAttempts).toBe(1);
+  });
+
+  it('offers no keypad at all when no PIN has been set', () => {
+    const onSetPin = jest.fn();
+    renderArea({ gate: emptyPinGate(), onSetPin });
+    expect(screen.queryByTestId('parent-area-keypad')).toBeNull();
+    expect(screen.getByTestId('parent-area-message-title').props.children).toBe(
+      PIN_NOT_SET.title,
+    );
+    fireEvent.press(screen.getByTestId('parent-area-set-pin'));
+    expect(onSetPin).toHaveBeenCalled();
   });
 
   it('opens on the right PIN and shows the settings, the log and the statuses', () => {
@@ -278,6 +434,15 @@ describe('ParentAreaScreen', () => {
     expect(screen.getByTestId('parent-area-status-bad-label').props.children).toBe(
       'Check failed',
     );
+  });
+
+  it('says why a title is not on the shelf, in the same words as its page', () => {
+    renderArea();
+    enter('1357');
+    expect(screen.getByTestId('parent-area-reason-bad').props.children).toBe(
+      TITLE_FAILED.detail,
+    );
+    expect(screen.queryByTestId('parent-area-reason-ok')).toBeNull();
   });
 
   it('changes the preset and the room, and says the room can only add', () => {

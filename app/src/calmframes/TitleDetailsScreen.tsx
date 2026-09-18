@@ -3,18 +3,27 @@
  *
  * It says what the check found before anything plays: how many parts will be
  * hidden, how long they add up to and where they fall. No preview, no motion.
+ *
+ * A title that did not verify gets this page too, and that is the point of it.
+ * Instead of the strip and a summary it shows one notice saying what happened
+ * and that the picture stays hidden, and the play control is drawn as
+ * unavailable rather than left out, so nobody hunts for it. There is no state
+ * of this screen where an unverified title can be started.
  */
 
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import CalmButton from './CalmButton';
 import { CALM_COLORS, CALM_SPACE, CALM_TYPE, scale } from './calmStyles';
+import { noticeForTitle } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import FlashMapStrip from './FlashMapStrip';
 import { coverOptionsFor, DEFAULT_SETTINGS, HouseholdSettings } from './household';
 import ShieldBadge from './ShieldBadge';
+import StatusNotice from './StatusNotice';
 import { CheckedTitle } from './titleStatus';
 import { useUiCapture } from './uiCapture';
-import { TITLE_DETAILS_FRAME } from './uiFrames';
+import { TITLE_DETAILS_BLOCKED_FRAME, TITLE_DETAILS_FRAME } from './uiFrames';
 
 export interface TitleDetailsScreenProps {
   entry: CheckedTitle;
@@ -40,8 +49,12 @@ const TitleDetailsScreen = ({
       }),
     [entry.segments, settings, durationMs],
   );
-  const [focused, setFocused] = React.useState<string | null>(null);
-  useUiCapture(TITLE_DETAILS_FRAME, 'title details');
+  const notice = noticeForTitle(entry);
+  const playable = notice === null;
+  useUiCapture(
+    playable ? TITLE_DETAILS_FRAME : TITLE_DETAILS_BLOCKED_FRAME,
+    playable ? 'title details' : 'title details, not ready',
+  );
 
   const hiddenSeconds = Math.round(totalCoveredMs(intervals) / 1000);
 
@@ -55,70 +68,52 @@ const TitleDetailsScreen = ({
       </Text>
       <ShieldBadge status={entry.status} testID={`${testID}-badge`} />
 
-      <Text style={styles.summary} testID={`${testID}-summary`}>
-        {intervals.length === 0
-          ? 'The check found nothing over the flash limits in this title.'
-          : `${intervals.length} part${
-              intervals.length === 1 ? '' : 's'
-            } will be hidden, ${hiddenSeconds} second${
-              hiddenSeconds === 1 ? '' : 's'
-            } in all. Sound and captions keep playing.`}
-      </Text>
-
-      {durationMs > 0 ? (
-        <View style={styles.strip}>
-          <FlashMapStrip
-            intervals={intervals}
-            durationMs={durationMs}
-            testID={`${testID}-strip`}
-          />
+      {notice ? (
+        <View style={styles.block}>
+          <StatusNotice testID={`${testID}-notice`} notice={notice} />
         </View>
-      ) : null}
+      ) : (
+        <>
+          <Text style={styles.summary} testID={`${testID}-summary`}>
+            {intervals.length === 0
+              ? 'The check found nothing over the flash limits in this title.'
+              : `${intervals.length} part${
+                  intervals.length === 1 ? '' : 's'
+                } will be hidden, ${hiddenSeconds} second${
+                  hiddenSeconds === 1 ? '' : 's'
+                } in all. Sound and captions keep playing.`}
+          </Text>
 
-      {entry.reason ? (
-        <Text style={styles.reason} testID={`${testID}-reason`}>
-          {entry.reason}
-        </Text>
-      ) : null}
+          {durationMs > 0 ? (
+            <View style={styles.block}>
+              <FlashMapStrip
+                intervals={intervals}
+                durationMs={durationMs}
+                testID={`${testID}-strip`}
+              />
+            </View>
+          ) : null}
+        </>
+      )}
 
       <View style={styles.buttons}>
-        <TouchableOpacity
+        <CalmButton
           testID={`${testID}-play`}
-          accessibilityRole="button"
+          label={playable ? 'Play' : 'Not ready to play'}
           accessibilityLabel={
-            entry.status === 'verified'
+            playable
               ? `Play ${entry.title.title}`
-              : 'This title is not checked yet'
+              : `${entry.title.title} is not ready to play. ${notice?.detail ?? ''}`
           }
-          accessibilityState={{ disabled: entry.status !== 'verified' }}
-          activeOpacity={1}
+          disabled={!playable}
           hasTVPreferredFocus
-          disabled={entry.status !== 'verified'}
-          onFocus={() => setFocused('play')}
-          onBlur={() => setFocused(null)}
           onPress={() => onPlay(entry)}
-          style={[
-            styles.button,
-            focused === 'play' ? styles.buttonFocused : null,
-            entry.status !== 'verified' ? styles.buttonDisabled : null,
-          ]}>
-          <Text style={styles.buttonLabel}>
-            {entry.status === 'verified' ? 'Play' : 'Not ready'}
-          </Text>
-        </TouchableOpacity>
+        />
 
         {onBack ? (
-          <TouchableOpacity
-            testID={`${testID}-back`}
-            accessibilityRole="button"
-            accessibilityLabel="Back"
-            activeOpacity={1}
-            onFocus={() => setFocused('back')}
-            onBlur={() => setFocused(null)}
-            onPress={onBack}
-            style={[styles.button, focused === 'back' ? styles.buttonFocused : null]}>
-            <Text style={styles.buttonLabel}>Back</Text>
-          </TouchableOpacity>
+          <View style={styles.secondButton}>
+            <CalmButton testID={`${testID}-back`} label="Back" onPress={onBack} />
+          </View>
         ) : null}
       </View>
     </ScrollView>
@@ -128,7 +123,8 @@ const TitleDetailsScreen = ({
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: {
-    padding: scale(CALM_SPACE.EDGE),
+    paddingHorizontal: scale(CALM_SPACE.SAFE_X),
+    paddingVertical: scale(CALM_SPACE.SAFE_Y),
   },
   title: {
     color: CALM_COLORS.TEXT,
@@ -141,35 +137,12 @@ const styles = StyleSheet.create({
     fontSize: scale(CALM_TYPE.BODY),
     marginTop: scale(CALM_SPACE.BLOCK),
   },
-  strip: { marginTop: scale(CALM_SPACE.BLOCK) },
-  reason: {
-    color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.SMALL),
-    marginTop: scale(CALM_SPACE.ROW),
-  },
+  block: { marginTop: scale(CALM_SPACE.BLOCK) },
   buttons: {
     flexDirection: 'row',
     marginTop: scale(CALM_SPACE.BLOCK),
   },
-  button: {
-    marginRight: scale(CALM_SPACE.ROW),
-    paddingVertical: scale(CALM_SPACE.TIGHT),
-    paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(12),
-    borderWidth: scale(4),
-    borderColor: CALM_COLORS.BORDER,
-    backgroundColor: CALM_COLORS.SURFACE,
-  },
-  buttonFocused: {
-    borderColor: CALM_COLORS.FOCUS_RING,
-    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
-  },
-  buttonDisabled: { opacity: 0.6 },
-  buttonLabel: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BUTTON),
-    fontWeight: '600',
-  },
+  secondButton: { marginLeft: scale(CALM_SPACE.ROW) },
 });
 
 export default TitleDetailsScreen;

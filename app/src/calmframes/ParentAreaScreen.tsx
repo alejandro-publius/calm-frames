@@ -12,11 +12,36 @@
  * The screen renders the keypad until the gate is open. It never renders the
  * settings behind it in a way a child could reach by pressing back, because
  * the locked state does not mount them at all.
+ *
+ * The locked state has three readings, and they are different enough to say
+ * differently: nothing typed yet, a wrong PIN with the tries left, and locked
+ * out for a minute. All three are the same notice block as every other state
+ * in the app, so a parent who has seen one has seen them all. A household with
+ * no PIN set is a fourth: the keypad is useless there, so it is not drawn.
  */
 
 import React from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { CALM_COLORS, CALM_SPACE, CALM_TYPE, scale } from './calmStyles';
+import CalmButton from './CalmButton';
+import {
+  CALM_COLORS,
+  CALM_SPACE,
+  CALM_TYPE,
+  FOCUS_RING_WIDTH,
+  scale,
+} from './calmStyles';
+import {
+  EXPLAINER_LINES,
+  EXPLAINER_TITLE,
+  Notice,
+  noticeForTitle,
+  PARENT_AREA_TITLE,
+  PIN_LOCKED_TITLE,
+  PIN_NOT_SET,
+  PIN_PROMPT,
+  PIN_WRONG_TITLE,
+  ROOM_ONLY_ADDS,
+} from './copy';
 import {
   describeRoom,
   HouseholdSettings,
@@ -28,10 +53,16 @@ import {
 } from './household';
 import { describeHideEntry, HideLogStore, totalHiddenMs } from './hideLog';
 import { attemptPin, PIN_LENGTH, PinGateState } from './parentGate';
+import PinKeypad from './PinKeypad';
 import ShieldBadge from './ShieldBadge';
+import StatusNotice from './StatusNotice';
 import { CheckedTitle } from './titleStatus';
 import { useUiCapture } from './uiCapture';
-import { PARENT_LOCKED_FRAME, PARENT_OPEN_FRAME } from './uiFrames';
+import {
+  PARENT_LOCKED_FRAME,
+  PARENT_OPEN_FRAME,
+  PARENT_WRONG_PIN_FRAME,
+} from './uiFrames';
 
 export interface ParentAreaScreenProps {
   gate: PinGateState;
@@ -42,6 +73,8 @@ export interface ParentAreaScreenProps {
   titles: CheckedTitle[];
   nowMs?: () => number;
   onBack?: () => void;
+  /** Offered only when no PIN exists, to send the parent to the first run. */
+  onSetPin?: () => void;
   testID?: string;
 }
 
@@ -54,15 +87,27 @@ const ParentAreaScreen = ({
   titles,
   nowMs = Date.now,
   onBack,
+  onSetPin,
   testID = 'parent-area',
 }: ParentAreaScreenProps) => {
   const [unlocked, setUnlocked] = React.useState(false);
   const [entered, setEntered] = React.useState('');
-  const [message, setMessage] = React.useState('Enter the PIN to change settings.');
-  useUiCapture(
-    unlocked ? PARENT_OPEN_FRAME : PARENT_LOCKED_FRAME,
-    unlocked ? 'parent area open' : 'parent area locked',
+  const [notice, setNotice] = React.useState<Notice>(
+    gate.record ? PIN_PROMPT : PIN_NOT_SET,
   );
+  const [focusedRow, setFocusedRow] = React.useState<string | null>(null);
+  const wrongPin = notice.tone === 'blocked';
+
+  let frame = PARENT_LOCKED_FRAME;
+  let reason = 'parent area locked';
+  if (unlocked) {
+    frame = PARENT_OPEN_FRAME;
+    reason = 'parent area open';
+  } else if (wrongPin) {
+    frame = PARENT_WRONG_PIN_FRAME;
+    reason = 'parent area, wrong PIN';
+  }
+  useUiCapture(frame, reason);
 
   const press = (digit: string) => {
     const next = `${entered}${digit}`;
@@ -70,55 +115,49 @@ const ParentAreaScreen = ({
       setEntered(next);
       return;
     }
-    const result = attemptPin(gate, next, nowMs());
+    const now = nowMs();
+    const result = attemptPin(gate, next, now);
     onGateChange(result.state);
     setEntered('');
-    setMessage(result.message);
     if (result.ok) {
       setUnlocked(true);
+      setNotice(PIN_PROMPT);
+      return;
     }
+    const lockedOut =
+      result.state.lockedUntilMs !== null && now < result.state.lockedUntilMs;
+    setNotice({
+      title: lockedOut ? PIN_LOCKED_TITLE : PIN_WRONG_TITLE,
+      detail: result.message,
+      tone: 'blocked',
+    });
   };
 
   if (!unlocked) {
     return (
       <View testID={testID} style={styles.screen}>
-        <Text style={styles.title}>Parent area</Text>
-        <Text
-          style={styles.message}
-          testID={`${testID}-message`}
-          accessibilityLiveRegion="polite"
-          aria-live="polite">
-          {message}
-        </Text>
-        <Text style={styles.entered} testID={`${testID}-entered`}>
-          {'*'.repeat(entered.length)}
-        </Text>
-        <View style={styles.keypad}>
-          {['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].map((digit) => (
-            <TouchableOpacity
-              key={digit}
-              testID={`${testID}-key-${digit}`}
-              accessibilityRole="button"
-              accessibilityLabel={digit}
-              activeOpacity={1}
-              hasTVPreferredFocus={digit === '1'}
-              onPress={() => press(digit)}
-              style={styles.key}>
-              <Text style={styles.keyLabel}>{digit}</Text>
-            </TouchableOpacity>
-          ))}
+        <Text style={styles.title}>{PARENT_AREA_TITLE}</Text>
+        <View style={styles.block}>
+          <StatusNotice testID={`${testID}-message`} notice={notice} />
         </View>
-        {onBack ? (
-          <TouchableOpacity
-            testID={`${testID}-back`}
-            accessibilityRole="button"
-            accessibilityLabel="Back"
-            activeOpacity={1}
-            onPress={onBack}
-            style={styles.button}>
-            <Text style={styles.buttonLabel}>Back</Text>
-          </TouchableOpacity>
+        {gate.record ? (
+          <PinKeypad entered={entered.length} onDigit={press} idPrefix={testID} />
         ) : null}
+        <View style={styles.buttons}>
+          {!gate.record && onSetPin ? (
+            <CalmButton
+              testID={`${testID}-set-pin`}
+              label="Set a PIN"
+              onPress={onSetPin}
+              hasTVPreferredFocus
+            />
+          ) : null}
+          {onBack ? (
+            <View style={styles.secondButton}>
+              <CalmButton testID={`${testID}-back`} label="Back" onPress={onBack} />
+            </View>
+          ) : null}
+        </View>
       </View>
     );
   }
@@ -131,67 +170,89 @@ const ParentAreaScreen = ({
       testID={`${testID}-open`}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      <Text style={styles.title}>Parent area</Text>
+      <Text style={styles.title}>{PARENT_AREA_TITLE}</Text>
 
       <Text style={styles.section}>How strict</Text>
-      {PRESET_NAMES.map((name: PresetName) => (
-        <TouchableOpacity
-          key={name}
-          testID={`${testID}-preset-${name}`}
-          accessibilityRole="radio"
-          accessibilityState={{ selected: settings.preset === name }}
-          accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
-          activeOpacity={1}
-          onPress={() => choose({ preset: name })}
-          style={[styles.row, settings.preset === name ? styles.rowSelected : null]}>
-          <Text style={styles.rowTitle}>{PRESETS[name].title}</Text>
-          <Text style={styles.rowDetail}>{PRESETS[name].description}</Text>
-        </TouchableOpacity>
-      ))}
+      {PRESET_NAMES.map((name: PresetName) => {
+        const chosen = settings.preset === name;
+        return (
+          <TouchableOpacity
+            key={name}
+            testID={`${testID}-preset-${name}`}
+            accessibilityRole="radio"
+            accessibilityState={{ selected: chosen }}
+            accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
+            activeOpacity={1}
+            onFocus={() => setFocusedRow(`preset-${name}`)}
+            onBlur={() => setFocusedRow(null)}
+            onPress={() => choose({ preset: name })}
+            style={[
+              styles.row,
+              chosen ? styles.rowSelected : null,
+              focusedRow === `preset-${name}` ? styles.rowFocused : null,
+            ]}>
+            <Text style={styles.rowTitle}>
+              {PRESETS[name].title}
+              {chosen ? ' (chosen)' : ''}
+            </Text>
+            <Text style={styles.rowDetail}>{PRESETS[name].description}</Text>
+          </TouchableOpacity>
+        );
+      })}
 
       <Text style={styles.section}>The room</Text>
       <Text style={styles.rowDetail} testID={`${testID}-room`}>
         {describeRoom(settings)}
       </Text>
-      <Text style={styles.note}>
-        A bigger television or a closer sofa can only add hidden parts. It never
-        takes any away.
-      </Text>
+      <Text style={styles.note}>{ROOM_ONLY_ADDS}</Text>
       <View style={styles.choices}>
-        {TV_DIAGONAL_CHOICES_IN.map((inches) => (
-          <TouchableOpacity
-            key={`tv-${inches}`}
-            testID={`${testID}-tv-${inches}`}
-            accessibilityRole="radio"
-            accessibilityState={{ selected: settings.tvDiagonalIn === inches }}
-            accessibilityLabel={`${inches} inch television`}
-            activeOpacity={1}
-            onPress={() => choose({ tvDiagonalIn: inches })}
-            style={[
-              styles.choice,
-              settings.tvDiagonalIn === inches ? styles.rowSelected : null,
-            ]}>
-            <Text style={styles.choiceLabel}>{inches}"</Text>
-          </TouchableOpacity>
-        ))}
+        {TV_DIAGONAL_CHOICES_IN.map((inches) => {
+          const chosen = settings.tvDiagonalIn === inches;
+          return (
+            <TouchableOpacity
+              key={`tv-${inches}`}
+              testID={`${testID}-tv-${inches}`}
+              accessibilityRole="radio"
+              accessibilityState={{ selected: chosen }}
+              accessibilityLabel={`${inches} inch television${chosen ? ', chosen' : ''}`}
+              activeOpacity={1}
+              onFocus={() => setFocusedRow(`tv-${inches}`)}
+              onBlur={() => setFocusedRow(null)}
+              onPress={() => choose({ tvDiagonalIn: inches })}
+              style={[
+                styles.choice,
+                chosen ? styles.rowSelected : null,
+                focusedRow === `tv-${inches}` ? styles.rowFocused : null,
+              ]}>
+              <Text style={styles.choiceLabel}>{inches} inch</Text>
+            </TouchableOpacity>
+          );
+        })}
       </View>
       <View style={styles.choices}>
-        {SEAT_DISTANCE_CHOICES_IN.map((inches) => (
-          <TouchableOpacity
-            key={`seat-${inches}`}
-            testID={`${testID}-seat-${inches}`}
-            accessibilityRole="radio"
-            accessibilityState={{ selected: settings.seatDistanceIn === inches }}
-            accessibilityLabel={`${Math.round(inches / 12)} feet away`}
-            activeOpacity={1}
-            onPress={() => choose({ seatDistanceIn: inches })}
-            style={[
-              styles.choice,
-              settings.seatDistanceIn === inches ? styles.rowSelected : null,
-            ]}>
-            <Text style={styles.choiceLabel}>{Math.round(inches / 12)} ft</Text>
-          </TouchableOpacity>
-        ))}
+        {SEAT_DISTANCE_CHOICES_IN.map((inches) => {
+          const chosen = settings.seatDistanceIn === inches;
+          const feet = Math.round(inches / 12);
+          return (
+            <TouchableOpacity
+              key={`seat-${inches}`}
+              testID={`${testID}-seat-${inches}`}
+              accessibilityRole="radio"
+              accessibilityState={{ selected: chosen }}
+              accessibilityLabel={`${feet} feet away${chosen ? ', chosen' : ''}`}
+              activeOpacity={1}
+              onFocus={() => setFocusedRow(`seat-${inches}`)}
+              onBlur={() => setFocusedRow(null)}
+              onPress={() => choose({ seatDistanceIn: inches })}
+              style={[
+                styles.choice,
+                chosen ? styles.rowSelected : null,
+                focusedRow === `seat-${inches}` ? styles.rowFocused : null,
+              ]}>
+              <Text style={styles.choiceLabel}>{feet} ft</Text>
+            </TouchableOpacity>
+          );
+        })}
       </View>
 
       <Text style={styles.section}>What was hidden</Text>
@@ -212,40 +273,56 @@ const ParentAreaScreen = ({
       ))}
 
       <Text style={styles.section}>Titles</Text>
-      {titles.map((entry) => (
-        <View
-          key={entry.title.id}
-          testID={`${testID}-title-${entry.title.id}`}
-          style={styles.titleRow}>
-          <Text style={styles.rowTitle}>{entry.title.title}</Text>
-          <ShieldBadge
-            status={entry.status}
-            testID={`${testID}-status-${entry.title.id}`}
-          />
-          {entry.reason ? (
-            <Text style={styles.rowDetail}>{entry.reason}</Text>
-          ) : null}
-        </View>
+      {titles.map((entry) => {
+        const titleNotice = noticeForTitle(entry);
+        return (
+          <View
+            key={entry.title.id}
+            testID={`${testID}-title-${entry.title.id}`}
+            style={styles.titleRow}>
+            <Text style={styles.rowTitle}>{entry.title.title}</Text>
+            <ShieldBadge
+              status={entry.status}
+              testID={`${testID}-status-${entry.title.id}`}
+            />
+            {titleNotice ? (
+              <Text
+                style={styles.rowDetail}
+                testID={`${testID}-reason-${entry.title.id}`}>
+                {titleNotice.detail}
+              </Text>
+            ) : null}
+          </View>
+        );
+      })}
+
+      <Text style={styles.section}>{EXPLAINER_TITLE}</Text>
+      {EXPLAINER_LINES.map((line, index) => (
+        <Text
+          key={line}
+          testID={`${testID}-explainer-line-${index}`}
+          style={styles.explainerLine}>
+          {line}
+        </Text>
       ))}
 
       {onBack ? (
-        <TouchableOpacity
-          testID={`${testID}-back`}
-          accessibilityRole="button"
-          accessibilityLabel="Back"
-          activeOpacity={1}
-          onPress={onBack}
-          style={styles.button}>
-          <Text style={styles.buttonLabel}>Back</Text>
-        </TouchableOpacity>
+        <View style={styles.buttons}>
+          <CalmButton testID={`${testID}-back`} label="Back" onPress={onBack} />
+        </View>
       ) : null}
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND, padding: scale(CALM_SPACE.EDGE) },
-  content: { paddingBottom: scale(CALM_SPACE.EDGE) },
+  screen: {
+    flex: 1,
+    backgroundColor: CALM_COLORS.BACKGROUND,
+    paddingHorizontal: scale(CALM_SPACE.SAFE_X),
+    paddingVertical: scale(CALM_SPACE.SAFE_Y),
+  },
+  content: { paddingBottom: scale(CALM_SPACE.SAFE_Y) },
   title: {
     color: CALM_COLORS.TEXT,
     fontSize: scale(CALM_TYPE.SCREEN_TITLE),
@@ -258,57 +335,44 @@ const styles = StyleSheet.create({
     marginTop: scale(CALM_SPACE.BLOCK),
     marginBottom: scale(CALM_SPACE.TIGHT),
   },
-  message: {
-    color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.BODY),
+  block: {
     marginTop: scale(CALM_SPACE.ROW),
+    marginBottom: scale(CALM_SPACE.BLOCK),
   },
-  entered: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.SCREEN_TITLE),
-    letterSpacing: scale(12),
-    minHeight: scale(72),
-  },
-  keypad: { flexDirection: 'row', flexWrap: 'wrap', maxWidth: scale(600) },
-  key: {
-    width: scale(160),
-    marginRight: scale(CALM_SPACE.ROW),
-    marginBottom: scale(CALM_SPACE.ROW),
-    paddingVertical: scale(CALM_SPACE.ROW),
-    borderRadius: scale(12),
-    borderWidth: scale(4),
-    borderColor: CALM_COLORS.BORDER,
-    backgroundColor: CALM_COLORS.SURFACE,
-    alignItems: 'center',
-  },
-  keyLabel: { color: CALM_COLORS.TEXT, fontSize: scale(CALM_TYPE.SCREEN_TITLE) },
   row: {
     padding: scale(CALM_SPACE.ROW),
     marginBottom: scale(CALM_SPACE.TIGHT),
     borderRadius: scale(12),
-    borderWidth: scale(4),
+    borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.BORDER,
     backgroundColor: CALM_COLORS.SURFACE,
   },
-  rowSelected: {
-    borderColor: CALM_COLORS.FOCUS_RING,
-    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+  /** Chosen is a fill and a word. Focus is the ring. They stack. */
+  rowSelected: { backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
+  rowFocused: { borderColor: CALM_COLORS.FOCUS_RING },
+  rowTitle: {
+    color: CALM_COLORS.TEXT,
+    fontSize: scale(CALM_TYPE.BODY),
+    fontWeight: '600',
   },
-  rowTitle: { color: CALM_COLORS.TEXT, fontSize: scale(CALM_TYPE.BODY), fontWeight: '600' },
   rowDetail: { color: CALM_COLORS.TEXT_DIM, fontSize: scale(CALM_TYPE.SMALL) },
   note: {
     color: CALM_COLORS.TEXT_DIM,
     fontSize: scale(CALM_TYPE.SMALL),
     marginTop: scale(CALM_SPACE.TIGHT),
   },
-  choices: { flexDirection: 'row', flexWrap: 'wrap', marginTop: scale(CALM_SPACE.TIGHT) },
+  choices: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: scale(CALM_SPACE.TIGHT),
+  },
   choice: {
     marginRight: scale(CALM_SPACE.TIGHT),
     marginBottom: scale(CALM_SPACE.TIGHT),
     paddingVertical: scale(CALM_SPACE.TIGHT),
     paddingHorizontal: scale(CALM_SPACE.ROW),
     borderRadius: scale(10),
-    borderWidth: scale(3),
+    borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.BORDER,
     backgroundColor: CALM_COLORS.SURFACE,
   },
@@ -318,19 +382,19 @@ const styles = StyleSheet.create({
     fontSize: scale(CALM_TYPE.SMALL),
     marginBottom: scale(6),
   },
+  explainerLine: {
+    color: CALM_COLORS.TEXT,
+    fontSize: scale(CALM_TYPE.BODY),
+    marginBottom: scale(CALM_SPACE.TIGHT),
+  },
   titleRow: {
     marginBottom: scale(CALM_SPACE.ROW),
   },
-  button: {
+  buttons: {
+    flexDirection: 'row',
     marginTop: scale(CALM_SPACE.BLOCK),
-    alignSelf: 'flex-start',
-    paddingVertical: scale(CALM_SPACE.TIGHT),
-    paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(12),
-    borderWidth: scale(4),
-    borderColor: CALM_COLORS.BORDER,
   },
-  buttonLabel: { color: CALM_COLORS.TEXT, fontSize: scale(CALM_TYPE.BUTTON) },
+  secondButton: { marginLeft: scale(CALM_SPACE.ROW) },
 });
 
 export default ParentAreaScreen;

@@ -33,10 +33,36 @@ export const KID_HOME_FOCUSED_FRAME: UiFrame = {
   ],
 };
 
+/** Nothing has been checked yet, so the shelf is one notice. */
+export const KID_HOME_EMPTY_FRAME: UiFrame = {
+  screen: 'kid-home-empty',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE],
+};
+
+/** The service is unreachable, so a notice sits above what still verifies. */
+export const KID_HOME_OFFLINE_FRAME: UiFrame = {
+  screen: 'kid-home-offline',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.BORDER],
+};
+
 export const TITLE_DETAILS_FRAME: UiFrame = {
   screen: 'title-details',
   background: CALM_COLORS.BACKGROUND,
   surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.PENDING, CALM_COLORS.FAILED],
+};
+
+/**
+ * A title that is not ready to play.
+ *
+ * No strip, because a title that did not verify has no schedule to show, so
+ * neither of the strip's colours is painted. What is left is the notice.
+ */
+export const TITLE_DETAILS_BLOCKED_FRAME: UiFrame = {
+  screen: 'title-details-blocked',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE],
 };
 
 export const PARENT_LOCKED_FRAME: UiFrame = {
@@ -45,10 +71,48 @@ export const PARENT_LOCKED_FRAME: UiFrame = {
   surfaces: [CALM_COLORS.SURFACE],
 };
 
+/**
+ * The keypad after a wrong PIN.
+ *
+ * The same colours as the locked screen, which is the point: a wrong PIN
+ * changes the words, not the picture. It is recorded separately so the
+ * timeline shows the state was visited.
+ */
+export const PARENT_WRONG_PIN_FRAME: UiFrame = {
+  screen: 'parent-area-wrong-pin',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE],
+};
+
 export const PARENT_OPEN_FRAME: UiFrame = {
   screen: 'parent-area-open',
   background: CALM_COLORS.BACKGROUND,
   surfaces: [CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.SURFACE],
+};
+
+/** The four steps of the first run, in order. */
+export const FIRST_RUN_PIN_FRAME: UiFrame = {
+  screen: 'first-run-pin',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE],
+};
+
+export const FIRST_RUN_PRESET_FRAME: UiFrame = {
+  screen: 'first-run-preset',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.SURFACE],
+};
+
+export const FIRST_RUN_ROOM_FRAME: UiFrame = {
+  screen: 'first-run-room',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.SURFACE_FOCUSED],
+};
+
+export const FIRST_RUN_EXPLAINER_FRAME: UiFrame = {
+  screen: 'first-run-explainer',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE],
 };
 
 /**
@@ -93,10 +157,18 @@ export function playerFrame(covered: boolean, cardKind: CardKind): UiFrame {
 
 /** Every frame the app can show, for the flashmap run. */
 export const ALL_UI_FRAMES: UiFrame[] = [
+  FIRST_RUN_PIN_FRAME,
+  FIRST_RUN_PRESET_FRAME,
+  FIRST_RUN_ROOM_FRAME,
+  FIRST_RUN_EXPLAINER_FRAME,
   KID_HOME_FRAME,
   KID_HOME_FOCUSED_FRAME,
+  KID_HOME_EMPTY_FRAME,
+  KID_HOME_OFFLINE_FRAME,
   TITLE_DETAILS_FRAME,
+  TITLE_DETAILS_BLOCKED_FRAME,
   PARENT_LOCKED_FRAME,
+  PARENT_WRONG_PIN_FRAME,
   PARENT_OPEN_FRAME,
   CREDITS_FRAME,
   playerFrame(false, 'none'),
