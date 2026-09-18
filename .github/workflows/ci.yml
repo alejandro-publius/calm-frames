@@ -104,6 +104,43 @@ jobs:
         working-directory: app
         run: npm run ui:flashmap
 
+  hardening:
+    name: Mutation gate, property tests and the map fuzz corpus
+    runs-on: ubuntu-latest
+    # The longest job here, about twenty minutes. It breaks every safety guard on purpose
+    # and runs the tests that have to notice, one guard at a time, and most of that time is
+    # the pipeline verify suite, which renders video. It earns the minutes: a green test
+    # suite that has never been seen to fail is the one thing this project cannot afford.
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
+      - name: Install the Python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e "./flashmap[dev]" || pip install -e ./flashmap
+          pip install pytest==9.1.1 hypothesis==6.168.0
+      - name: Install the app's dependencies
+        working-directory: app
+        # The property tests compile the app's scheduler with the app's own tsc and run it,
+        # so what they answer about is the code that ships rather than a copy of it.
+        run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
+      - name: Property tests and the map fuzz corpus
+        # CALM_FRAMES_REQUIRE_NODE=1, set by the target, turns a missing node from a skip
+        # into a failure. A silently skipped property test is a green tick for nothing.
+        run: make properties
+      - name: The mutation gate
+        # --check runs the gate and then fails if it disagrees with results/mutation.json:
+        # a new survivor, a lower kill rate, or a different number of mutations.
+        run: make mutate MUTATE_ARGS=--check
+
   secrets:
     name: Secret scan
     runs-on: ubuntu-latest
