@@ -1,12 +1,12 @@
 # Friction log
 
-Developer friction found while building Calm Frames on Vega OS, in the six fields Amazon asks for: task, steps, expected versus actual, severity, workaround, suggestion.
+Developer friction found while building Calm Frames, in the six fields Amazon asks for: task, steps, expected versus actual, severity, workaround, suggestion.
 
-Everything here is real. Each entry is something that cost time on this build, with the exact commands and the exact output. Nothing was invented to fill the log, and nothing was softened.
+Everything here is real. Each entry is something that cost time on this build, with the exact commands and the exact output, and each one is traceable to a commit, a log, a results file or an entry in [`docs/DECISIONS.md`](DECISIONS.md). **Nothing was invented to reach a number, and nothing was softened.** Where we are stating a platform constraint we designed around rather than a failure we watched happen, the entry says so in its own words.
 
-**Working notes stay in [`docs/friction_pending.md`](friction_pending.md).** That file was the running log while the build was going, and it is kept rather than folded away, because the lanes still add to it as they hit things. This file is the final format, and it is what goes into the Devpost product feedback.
+**Working notes stay in [`docs/friction_pending.md`](friction_pending.md).** That file was the running log while the build was going and the lanes still add to it. This file is the final format, and it is what goes into the Devpost product feedback. The shorter, per-tool version of the same material is [`docs/FEEDBACK.md`](FEEDBACK.md).
 
-**Environment for every entry unless the entry says otherwise:** macOS 15.1.1 (24B91) on Apple M1, 16 GB. Vega CLI 1.3.4, Vega SDK 0.24.9914, Vega OS 1.2 (TV Ship/101520710) on the Vega Virtual Device, Node 22, September 17 2026.
+**Environment for every entry unless the entry says otherwise:** macOS 15.1.1 (24B91) on Apple M1, 16 GB. Vega CLI 1.3.4, Vega SDK 0.24.9914, Vega OS 1.2 (TV Ship/101520710) on the Vega Virtual Device, Node 22.23.2, Python 3.12.13, React Native 0.83, September 17 2026.
 
 ## Summary
 
@@ -23,8 +23,31 @@ Everything here is real. Each entry is something that cost time on this build, w
 | 9 | CLI | No supported way to press a remote button or capture the screen | Medium |
 | 10 | Device | No way to put a file in an app's data directory on OS 1.2 | Medium |
 | 11 | CLI | `copy-to` help text has source and destination backwards | Low |
+| 12 | Device | The device drops the app's own log output under load | High |
+| 13 | Build | Release builds strip `console.log` | Low |
+| 14 | Device, React Native | No way to get a frame of what the app drew, from inside or outside | High |
+| 15 | Platform | No crypto API, so signature checking had to be written by hand | High |
+| 16 | Build | The build rewrites `manifest.toml` on every build | Medium |
+| 17 | Player | A plain MP4 over HTTP never starts, and never errors | Medium |
+| 18 | Player | A server that answers 200 instead of 206 makes the player fail in silence | Medium |
+| 19 | Player | A video-only stream pauses a few seconds in | Medium |
+| 20 | Player, sample | The media element does not exist at mount, and nothing says when it does | Medium |
+| 21 | Virtual device | It backgrounds an app nobody is touching, and playback stops | Medium |
+| 22 | Virtual device | Playback is not steady, and the error says `UNKNOWN` | High |
+| 23 | Sample | `postinstall` builds Shaka Player from source and needs a JDK | Low |
+| 24 | Sample | `jest --ci` exits 1 on a clean checkout with every test passing | Low |
+| 25 | Sample | Its dependency tree buries a secret scan in 208 findings | Low |
+| 26 | Toolchain | Ogg Theora duplicate-frame packets kill the decoder | Medium |
+| 27 | Toolchain | Theora decodes wider than the size the file declares | Low |
+| 28 | Toolchain | Re-encoding moves the picture rectangle, which moves every area fraction | Medium |
+| 29 | Toolchain | A re-encode renumbers the first timestamp, so the rendition slides | Medium |
+| 30 | Toolchain | The ffmpeg photosensitivity filter misfires on its own first second | Low |
 
-Four are Medium and seven are Low. Nothing was High, and nothing blocked the build outright, because every one of them had a way around it. Three of them (6, 9, 10) cost the most, because each broke the obvious way to automate something and the workaround had to be built from scratch.
+**Thirty entries. Four High, thirteen Medium, thirteen Low.**
+
+**Entries 1 to 25 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player and `vega-video-sample`. **Entries 26 to 30 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. They are marked separately so nobody has to guess which are Amazon's.
+
+Nothing here blocked the build outright, because every one of them had a way around it. The four High entries are the ones where there was no supported path at all and the way around had to be built from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), and playback on the virtual device being unreliable enough that a measurement needs twenty-two launches (22).
 
 ---
 
@@ -206,7 +229,7 @@ The SDK error log shows `[DeviceManagerHandler]: [getDeviceList]: Error - TypeEr
 
 **Severity.** Medium. Automated UI checks and screen recordings both need this, and for an accessibility project the screen capture is not optional.
 
-**Workaround.** The virtual device is QEMU with a QMP socket at `/tmp/qmp-socket-*.sock`, so `eval/vvd_control.py` sends key events with `input-send-event` and captures with `screendump`. Key injection works. Screenshots come back black, because the app renders through a GPU layer that `screendump` does not see, so playback evidence has to come from device logs instead. This is an undocumented interface and it could change between SDK versions.
+**Workaround.** The virtual device is QEMU with a QMP socket at `/tmp/qmp-socket-*.sock`, so `eval/vvd_control.py` sends key events with `input-send-event` and captures with `screendump`. Key injection works. Screenshots do not; see entry 14. This is an undocumented interface and it could change between SDK versions.
 
 **Suggestion.** Add `vega device key` and `vega device screenshot`, and make the screenshot capture the composited output rather than the framebuffer the app does not draw into.
 
@@ -254,3 +277,388 @@ vega device copy-to --help
 **Workaround.** Follow the examples, not the option descriptions.
 
 **Suggestion.** Swap the two descriptions.
+
+---
+
+## 12. The device throws away the app's own log output under load
+
+**Task.** Collect the evidence for a cover timing run. The app prints one line per event, pairing media time with wall-clock time, and the plan was to read them out of the device log:
+
+```sh
+vega device start-log-stream | grep CALM_TIMING
+```
+
+**Steps.** Built and installed the debug package, started the timing harness on the virtual device, and streamed the device log for the length of the run while a two-minute clip played.
+
+**Expected.** One line per event in the stream: media events, cover on, cover off, position reports.
+
+**Actual.** Nothing the app printed survived. The device log instead carried:
+
+```
+Log suppression ended at level [info]. [140] logs were suppressed
+```
+
+A run that produced covers, position reports and errors produced no readable record of any of it. The suppression is reported after the fact and there is no way to ask for it back.
+
+**Severity.** High. A measurement whose evidence can be deleted by a log rate limiter is not a measurement. This is the single change that cost the most rework in the measurement chain.
+
+**Workaround.** Two changes. Timing lines now print with `console.warn`, which survives more than `console.log` does. More to the point, the evidence no longer goes through the device log at all: `eval/vvd_timing_run.py` serves the clip and the run config over HTTP and collects the events the app posts back to it, and `results/*_events.json` is what the analysis reads. The device log is a convenience now, never the evidence.
+
+**Suggestion.** Document the rate limiter and its thresholds. Give developer mode one level that is never suppressed, or a switch that turns suppression off for a named package. If lines must be dropped, say so at the moment of dropping, with the count, rather than afterwards.
+
+---
+
+## 13. Release builds strip `console.log`
+
+**Task.** Watch what the app is doing during a run on the device.
+
+**Steps.** Built both packages, `react-native build-kepler --build-type Release` and `--build-type Debug`, and streamed the device log while the app ran.
+
+**Expected.** The app's own log lines, whichever package is installed.
+
+**Actual.** `console.log` does not survive a release build. This is a platform behaviour we designed around from the first device run rather than a failure we sat and watched: every observed run in this project installs the debug package for that reason, `eval/vvd_smoke.py` says so in its own docstring, and the timing log uses `console.warn` rather than `console.log` partly because of it. We did not do a controlled side by side, so this entry is a constraint with a cost rather than a bug report.
+
+**Severity.** Low. It is reasonable behaviour. The cost is that it is not stated where a developer plans their evidence, and it stacks with entry 12: one mechanism strips your lines at build time and another drops them at run time, and neither says so at the moment it matters.
+
+**Workaround.** Install the debug package for anything that has to be observed, and use `console.warn` for lines that have to survive.
+
+**Suggestion.** State on the build page which console levels survive a release build, and mention it next to the logging documentation rather than only in the build documentation.
+
+---
+
+## 14. There is no way to get a frame of what the app drew, from inside it or outside it
+
+**Task.** Check Calm Frames' own screens and transitions for flashing. This is not optional for us: WCAG 2.3.1 applies to an app's own interface, and an app that hides flashing in other people's video while flashing its own cards would be absurd.
+
+**Steps.** Four routes, in order.
+
+1. `vega device screenshot`. Does not exist (entry 9).
+2. QEMU's `screendump` through the QMP socket, which `eval/vvd_control.py` drives.
+3. A screen capture of the virtual device's window from macOS, with ffmpeg and with the system screen grab.
+4. A pixel read from inside the app: `takeSnapshot` in React Native, or any `@amazon-devices` package that offers a view capture or frame grab.
+
+**Expected.** At least one of the four gives a picture of the running app.
+
+**Actual.** None of them does.
+
+- `screendump` writes a file and the file is black. The app renders through a GPU layer that the framebuffer capture does not see.
+- macOS exposes no screen capture device to ffmpeg without the Screen Recording permission, and the window is not captured anyway: a full screen grab taken while the virtual device was frontmost returned the desktop behind it.
+- React Native 0.83 has no `takeSnapshot`. It was removed from core and nothing in `node_modules/react-native` exposes a pixel read.
+- No `@amazon-devices` package offers a screenshot, a view capture or a frame grab. The only match anywhere across them is `readPixels` inside a Flow type stub for the DOM, which is a type declaration and not a runtime.
+
+**Severity.** High. It changed the design of a whole deliverable, and it means no visual evidence of this app exists that was taken from a screen rather than reconstructed.
+
+**Workaround.** The app records what it paints instead of what it displays. Every Calm Frames screen reports its own frame, the colour behind the whole screen and the distinct colours painted on top, read off the rendered tree rather than written down by hand, so a style change shows up in the record. `tools/ui_flashmap.mjs` turns that timeline into a lossless video, giving every painted colour a block one WCAG area window wide so the analyzer overstates area rather than understating it, and the same analyzer we point at content is pointed at that. Nine screens, zero flagged segments, checked in CI. A test fails if a declared frame drifts from what renders. It is a real record of the app's own drawing, including every transition, and it is not a photograph, and we say so everywhere it is quoted.
+
+**Suggestion.** Make `vega device screenshot` capture the composited output. Separately, expose a view capture from inside the app, even a slow one, because self-testing an interface should not need a camera.
+
+---
+
+## 15. Vega has no crypto API, so a signature check had to be written by hand
+
+**Task.** Verify an Ed25519 signature on a flash map before letting a title play. A map that is unsigned, stale or bound to a different file has to leave the picture hidden, and that decision has to be made on the device.
+
+**Steps.** Looked for a way to verify a signature or hash bytes: WebCrypto in React Native 0.83, Node's `crypto`, and every `@amazon-devices` package in the sample's dependency tree, including `security-manager-lib`.
+
+**Expected.** Something like `crypto.subtle.verify`, or a platform key store with a verify call.
+
+**Actual.** Nothing. React Native has no WebCrypto and no `crypto` module. `@amazon-devices/security-manager-lib` deals in privileges rather than primitives. So an app that ships signed data has no supported way to check the signature.
+
+**Severity.** High. Hand-written cryptography in an application is the last thing anyone should want, and the platform left no other option.
+
+**Workaround.** SHA-512 and Ed25519 verification, written in TypeScript on BigInt, following FIPS 180-4 and RFC 8032 section 5.1.7 with the strict checks: a non-canonical point encoding is refused, a scalar at or above the group order is refused, and the cofactorless equation is the one that has to hold. Checked against the RFC 8032 test vectors and against a real map signed by our own pipeline. Being stricter than the signer can only ever refuse a map, and refusing a map keeps the picture hidden, which is the safe direction. It runs once per title before play starts, never on the path of a frame. A third piece was needed as well: `JSON.parse` followed by `JSON.stringify` cannot rebuild the bytes Python signed, because parsing throws away how a number was written and Python's `1450.0` comes back as `1450`, so the parser keeps each scalar's source text.
+
+**Suggestion.** Expose a verify-only primitive: SHA-256, SHA-512 and Ed25519 or ECDSA verification, in a Vega module. Signed content is normal on a television platform, and every app that handles it is otherwise writing this same code.
+
+---
+
+## 16. The build rewrites `manifest.toml` on every build
+
+**Task.** Keep the app's manifest saying what the app actually needs, and keep two load-bearing blocks in it.
+
+**Steps.** Removed the sample's service and task components, removed the five npm dependencies those features needed, then built with `react-native build-kepler` and read the manifest afterwards.
+
+**Expected.** The manifest is our file. The build reads it.
+
+**Actual.** The build rewrites it, adding one `[[needs.module]]` entry per installed `@amazon-devices` package. Our manifest carries 30 of them today. Two consequences. First, removing a feature means removing its dependency too, or the app goes on declaring it needs a module for a feature it no longer has: we kept `kepler-content-personalization` and `kepler-epg-provider` because the personalization mocks still need them, and the manifest still declares both. Second, anything hand-written in that file lives under a tool that rewrites it, and two of the hand-written blocks are ones the app breaks quietly without: the `IMediaPlaybackServer` extras block, which is how Alexa and remote transport commands reach the app at all, and the `com.amazon.devconf.privilege.accessibility` privilege, without which no VoiceView announcement is made.
+
+**Severity.** Medium.
+
+**Workaround.** `app/test/calmframes/manifest.test.ts` fails if either block goes missing, and the pristine manifest is at commit `cf8b752` if it has to be restored by hand.
+
+**Suggestion.** Say in the build documentation that the manifest is rewritten and which sections the tool owns. Better, keep the generated `[[needs.module]]` list in a separate generated file that the build merges, so the hand-written manifest is never touched.
+
+---
+
+## 17. A plain MP4 over HTTP never starts, and never says why
+
+**Task.** Play our own two-minute marker clip on the device, served from the machine running the measurement.
+
+**Steps.** Served `marker.mp4` over plain HTTP from a local server, pointed the app at the URL, and watched both the device log and the app's own event stream.
+
+**Expected.** It plays, or it fails with an error the app can show.
+
+**Actual.** Neither. Playback never started and no error arrived: no `error` event, no error view, and the buffering spinner stayed up. The same content over HLS plays. Two separate things are going on. The player will not take a raw MP4 handed to the adaptive path, and the sample sends anything whose `format` is not the exact literal `"MP4"` down that path. And the failure is swallowed rather than reported, which is a defect in the sample itself: `ShakaPlayer.load()` is declared `void` and fires its async work unawaited, so the rejection becomes an unhandled rejection and the caller's `try`/`catch` can never see it.
+
+**Severity.** Medium. It cost a day, because a spinner that never stops looks like a network problem rather than a load failure.
+
+**Workaround.** Package the clip as HLS, copying the stream rather than re-encoding it, so the marker times still hold. For the silent failure, we wrote the fix: two commits and three tests against `AmazonAppDev/vega-video-sample`, ready to open from a fork, in [`docs/OPEN_SOURCE_PR.md`](OPEN_SOURCE_PR.md) and [`docs/upstream-pr/`](upstream-pr/).
+
+**Suggestion.** Report a load failure to the app. That is the upstream fix. Separately, document which containers and protocols the player accepts on which path, because "MP4 over HTTP" is what every developer will try first.
+
+---
+
+## 18. A server that answers 200 instead of 206 makes the player fail in silence
+
+**Task.** Serve the marker clip to the device from a Python test server during a measurement run.
+
+**Steps.** Served the directory with `http.server.SimpleHTTPRequestHandler` behind a `ThreadingHTTPServer`, and pointed the app at it.
+
+**Expected.** The player fetches the file, by ranges or not, and plays it.
+
+**Actual.** The clip never loaded and the run produced nothing, with no error. Python's handler ignores the `Range` header and returns the whole file with a 200, and the player treats that as a broken source. Nothing in the log says "this server does not answer ranges", so from the outside it looks the same as entry 17.
+
+**Severity.** Medium. Two silent failures that look identical is what makes this expensive: we could not tell which one we were looking at until the server was fixed.
+
+**Workaround.** `eval/vvd_timing_run.py` implements `Range` properly: it parses `bytes=start-end` and suffix ranges, replies 206 with `Content-Range`, and replies 416 with `bytes */size` when the range cannot be satisfied.
+
+**Suggestion.** Two things, both small. Say in the player documentation that an HTTP source must answer byte ranges. And make the "source is unusable" case produce an error the app can see, which is the same ask as entry 17.
+
+---
+
+## 19. A video-only stream pauses a few seconds in
+
+**Task.** Play a generated test clip long enough to measure twenty covers.
+
+**Steps.** Generated a clip with video and no audio track, played it on the virtual device, and watched position reports.
+
+**Expected.** It plays to the end, or it fails.
+
+**Actual.** It played and then stopped a few seconds in, so a run that needed two minutes measured nothing. Adding a silent stereo AAC track at 48 kHz fixed it, with no other change.
+
+We looked for the cause in the sample and it is not there: a search of the whole pristine `src/` for `audioTrack`, `audioTracks`, `readyState`, `stalled`, `canplay`, `canPlayType` and `preload` finds only two unrelated Redux `preloadedState` hits. There is no buffering watchdog and nothing that waits on audio. The sample's handlers are `onWaiting`, which shows the spinner, and `onPlaying` and `onSeeked`, which hide it. None of them pause. So this comes from below the sample, in Shaka or in the W3C media pipeline, which is why it is not part of our upstream pull request.
+
+**Severity.** Medium.
+
+**Workaround.** Every test clip this project generates carries a silent audio track. `eval/marker_clip.py` adds it with `anullsrc`, and the comment there says why so nobody removes it. It has a second benefit: the layering test asks whether sound keeps going while the picture is hidden, and a clip with no audio cannot answer that.
+
+**Suggestion.** Either play video-only streams, or fail them with an error. Pausing a few seconds in is the worst of the three, because it looks like a stall and sends you hunting for a network problem.
+
+---
+
+## 20. The media element does not exist when the screen mounts, and nothing says when it does
+
+**Task.** Attach media event listeners, so a measurement run can record `timeupdate`, `playing`, `waiting`, `seeked` and the rest.
+
+**Steps.** Attached listeners in an effect at mount, the way a React developer would, then ran a two-minute measurement on the device.
+
+**Expected.** Listeners attach to the media element and events arrive.
+
+**Actual.** The run recorded no events at all. The player is created after the screen mounts, so at mount the ref is still null, the listeners attached to nothing, and the effect never ran again because nothing in its dependencies changed. There is no event, callback or promise that tells an app when the media element becomes available, so there is nothing to wait on.
+
+**Severity.** Medium. It cost a whole run and it is silent: no warning, no error, just an empty results file at the end.
+
+**Workaround.** The harness takes a `ready` flag from the screen that owns the player and re-runs its attach effect when the element appears. There is a test for it, and a beacon event records whether the element and its `addEventListener` were there at attach time, so a future empty run says which of the two was missing. `useCoverHarness.ts` carries the explanation in its own comment.
+
+**Suggestion.** Give the player a readiness signal, or make the ref's assignment observable. Failing that, say in the sample's documentation that the media element arrives later than the screen and show the pattern.
+
+---
+
+## 21. The virtual device backgrounds an app nobody is touching, and playback stops
+
+**Task.** Run a two-minute unattended measurement.
+
+**Steps.** Installed and launched the app, started the run, and left the device alone with nobody pressing anything, as a camera rig would.
+
+**Expected.** The app keeps playing while it is the foreground app.
+
+**Actual.** The device backgrounds an app that nobody is touching, and a backgrounded app stops playing. A launch with nobody at the device can also leave the app in the background from the start, where it never plays at all. On top of that, the sample's player navigates away on an app state change, tearing itself down mid-run.
+
+**Severity.** Medium. A person holding a remote never hits this. Every unattended measurement hits it.
+
+**Workaround.** `eval/vvd_timing_run.py` presses one key after launch to bring the app forward, then presses a key the app does not bind every few seconds for the length of the run, which keeps the device awake without touching playback. A measurement run stays on the player screen and keeps the cover on rather than navigating away.
+
+**Suggestion.** Give developer mode a way to hold an app in the foreground, or document the idle timer and how to extend it. Anything filmed or measured has this problem.
+
+---
+
+## 22. Playback on the virtual device is not steady, and the error says `UNKNOWN`
+
+**Task.** Get one clean playback run, and then get enough of them to measure cover timing.
+
+**Steps.** Ran the same HLS stream repeatedly through `eval/vvd_smoke.py`, then ran the timing harness repeatedly through `eval/vvd_timing_run.py`.
+
+**Expected.** The same clip plays the same way each time.
+
+**Actual.** Of four runs in one afternoon, two played cleanly, one reached the player screen and then failed with `Category: UNKNOWN, Position: 0.084` on the same HLS stream, and one never started because a key press did not land. Later, one layering run advanced media time by 0.14 seconds across 70 seconds while the same clip had played all the way through minutes earlier, so that run was recorded as inconclusive. The cover timing measurement needed 22 app launches to collect 49 usable trials, and a `make stick-day` rehearsal against the virtual device reached only 2 of 50 markers before the device stopped playing. The failures do not say why: the category is `UNKNOWN` and the payload is a position.
+
+**Severity.** High. It is the reason every measurement here is a pooled run across many launches rather than one clean take, and the reason an early number was published and withdrawn: a run that never played still produced a scheduler log that looked perfect until a stricter script refused to count it.
+
+**Workaround.** Every analysis script now requires a position report from the player on both sides of a marker before it counts one, records the reason for each marker it did not count, and drops trials where playback stalled mid-trial. Runs are pooled across launches, and the per-pass event counts, rather than the start events, are what split them. `eval/verify_gate1_archive.py` rebuilds the summary from its own events in CI and fails on any disagreement.
+
+**Suggestion.** Put a reason in the playback error: which fetch, which segment, which decoder, and the HTTP status if there was one. `UNKNOWN` plus a position is not enough for an app to do anything with, and on a safety feature the only safe response to an unexplained error is to hide the picture, which is not a good experience for the viewer.
+
+---
+
+## 23. The sample's `postinstall` builds Shaka Player from source and needs a JDK
+
+**Task.** `npm install` in a fresh clone of `vega-video-sample`.
+
+**Steps.**
+
+```sh
+npm install     # runs postinstall: cd shaka-setup && ./build.sh && ./copyOutputs.sh
+```
+
+**Expected.** Dependencies install.
+
+**Actual.** `postinstall` unpacks and builds Shaka Player, which needs a JDK on the path. The JDK on this machine was Java 1.8 and x86_64 only. Nothing says a JDK is involved until the build is already running, and the sample's README does not mention it where you first need it.
+
+**Severity.** Low, and unavoidable once you know. It is on the list because it is a first-hour experience and it is one line of documentation.
+
+**Workaround.** `npm install` in this repository runs with `JAVA_HOME=/opt/homebrew/opt/openjdk@21`, recorded in `CLAUDE.md` so nobody has to rediscover it. CI installs with `npm ci --ignore-scripts`, which skips the build entirely, because the tests mock the player and never need the built bundle.
+
+**Suggestion.** Say in the README, next to the install step, that `postinstall` builds Shaka Player and needs a JDK, with the version. Mention `--ignore-scripts` for test-only environments.
+
+---
+
+## 24. `jest --ci` exits 1 on a clean checkout of the sample with every test passing
+
+**Task.** Run the sample's own test suite as CI would, on an unmodified checkout, so that our fork's CI has a baseline.
+
+**Steps.** Clean checkout of `v0.24-RN83`, full install, then:
+
+```sh
+npx jest --ci
+```
+
+**Expected.** Green, or a failure that names a test.
+
+**Actual.** Exit code 1 with every test that ran passing, and nothing in the output naming a failing test. It ends with:
+
+```
+ › 2 snapshots obsolete.
+   • <MediaItemShoveler /> renders default featured MediaItemShoveler with no playlistName 1
+   • <MediaItemShoveler /> renders default nonFeatured MediaItemShoveler with playlistName 1
+Test Suites: 1 skipped, 61 passed, 61 of 62 total
+Tests:       4 skipped, 342 passed, 346 total
+Snapshots:   2 obsolete, 54 passed, 54 total
+```
+
+`test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap` holds two entries that no current test produces, and `--ci` counts an obsolete snapshot as a failure. We first met it as a red CI run on our own app on a day when nothing was wrong.
+
+One honest note about that paste. Our verification checkout lives at a very deep scratch path, and two other suites, `DrawerContent.test.tsx` and `Preview.test.tsx`, fail there for an unrelated reason: their snapshots hold an asset `testUri` written relative to the project root, which comes out absolute from a deep path. Those two pass in `app/` in this repository, which is the same code at a normal path, so they are excluded from the run above. The obsolete-snapshot exit is independent of them: it happens with every remaining test passing.
+
+**Severity.** Low, and loud. A first-time contributor sees a red build they did not cause.
+
+**Workaround.** Delete the two obsolete entries, which is what commit `e09c36f` in this repository does for our copy. Keeping `--ci` strict is the point of it, so the right fix is to delete rather than to loosen the flag.
+
+**Suggestion.** Delete the two entries upstream. We have offered to send it as a one-line pull request alongside our fix.
+
+---
+
+## 25. The sample's dependency tree buries a secret scan in 208 findings
+
+**Task.** Add secret scanning to the repository, in CI and as a pre-commit hook, and have it be worth reading.
+
+**Steps.** Ran `gitleaks` over the working tree once `node_modules` and the Shaka build existed.
+
+**Expected.** A handful of findings to triage, or none.
+
+**Actual.** 208 findings. Every one of them is a minified third-party demo bundle that ships inside the dependency tree or the Shaka build, none of them committed, and that volume would bury a real finding on the day there is one.
+
+**Severity.** Low. It is the ordinary cost of a large JavaScript dependency tree rather than anything specific to Vega, and it is here because it is a real hour that went on making the tool useful.
+
+**Workaround.** A config that keeps every default rule and allowlists only generated directories. Checked both ways rather than assumed: a synthetic GitHub-style token dropped into `docs/` is found, the same file under `app/build/` is ignored, and the repository is otherwise clean. The hook has since earned its place twice, including blocking a commit over inline Ed25519 public keys in tests, which were checked against the committed `.pub.pem` before one exact string was allowlisted.
+
+**Suggestion.** Ship a `.gitleaksignore` or an equivalent in the sample, covering `node_modules` and the Shaka build output. It is a file most projects need and few write.
+
+---
+
+## 26. Ogg Theora duplicate-frame packets kill the decoder
+
+**Task.** Analyze the four Ogg Theora clips in the screening pool.
+
+**Steps.** Ran the analyzer over `.ogv` files from the media pool, decoding with PyAV.
+
+**Expected.** They decode like every other container.
+
+**Actual.** The decode failed. Ogg Theora marks a frame identical to the one before it with a zero-length packet, and `avcodec_send_packet()` refuses one outright with EINVAL, which surfaces through PyAV as "returned 22". Four clips in the screened pool hit it, which means four titles could not be measured at all until it was fixed.
+
+**Severity.** Medium.
+
+**Workaround.** An empty packet is never handed to the decoder. It carries no picture, so it is kept in the timeline and filled with the picture in front of it, which is what a player shows for that packet's slice of time. That keeps the frame count and the frame intervals true to the file rather than growing a hole where the repeats were. There is a committed non-flashing Theora fixture as a regression test, and PyAV's own end-of-demux drain packet is handled by the same rule.
+
+**Suggestion.** For anyone else hitting this: it is not a corrupt file. It is how Theora encodes a duplicate frame, and any decoder loop that forwards every demuxed packet will hit it.
+
+---
+
+## 27. Theora decodes wider than the size the file declares
+
+**Task.** Record the picture rectangle a map was measured on, so that a re-encode can be measured against the same ground.
+
+**Steps.** Probed the Theora clips and compared the stream's declared size with the size of the frames that came back.
+
+**Expected.** They match.
+
+**Actual.** Three Ogg Theora clips in this project's pool declare 840 by 560 and decode to 844 by 560, because the codec pads to its block size. Reporting the padded width as the file's size would be wrong, and it would stop a rendition ever being measured against the rectangle in that file's map, since the check is that the two files have the same coded frame.
+
+**Severity.** Low, and worth writing down because it is silent and it corrupts a comparison rather than failing it.
+
+**Workaround.** The declared size is what goes in the map. The whole decoded frame including the padding is what gets scaled and measured, which can only add a sliver of edge to the measurement rather than taking one away.
+
+**Suggestion.** None for Amazon. This is a note for anyone who assumes a decoded frame is the size the container says.
+
+---
+
+## 28. Re-encoding moves the picture rectangle, which moves every area fraction
+
+**Task.** Verify that a kid-safe rendition still hides everything the source map says to hide.
+
+**Steps.** Analyzed a source title, rendered a rendition from it, then analyzed the rendition with the detector running normally on both.
+
+**Expected.** The same picture in the same place, so the two sets of area fractions are comparable.
+
+**Actual.** Re-encoding nudges the outermost rows and columns, so the letterbox detector run on the rendition finds a bar one row taller or shorter than the one it found in the original. Every area fraction is measured against the picture, so one row is enough to lift a span over the area limit and flag content that the original did not. This is what blocked a title in the pipeline, and it would have looked like a verify failure rather than a measurement artifact.
+
+**Severity.** Medium.
+
+**Workaround.** The rectangle travels with the map. A rendition is measured on the rectangle carried in from the source's map rather than on one detected in itself, verify refuses a rendition whose map was measured on a rectangle of its own, and the detector still runs so what it found is recorded alongside. A carried rectangle from a different coded frame size is an error rather than a rescale, because a rectangle from a different frame size does not describe this file.
+
+**Suggestion.** None for Amazon. It is a warning for anyone comparing two encodes of the same video: detect once, then carry the geometry.
+
+---
+
+## 29. A re-encode renumbers the first timestamp, so the rendition slides under the map
+
+**Task.** Play a rendition with a cover schedule built from the source's map.
+
+**Steps.** Compared the first presentation timestamp of each rendition against its source, across the pool.
+
+**Expected.** The pictures are where they were.
+
+**Actual.** A re-encode routinely renumbers the first presentation timestamp to zero while leaving every picture where it was. The source files in this pool start anywhere from 3 to 67 ms in. The map's intervals are on the source timeline, so a rendition whose timeline has slid draws every live cover that much late.
+
+**Severity.** Medium. It is small, and it comes out of the one budget that has nothing to spare: the guard band also has to absorb scheduler jitter, and a cover has already been measured going on 86 ms after its marker with the JavaScript thread away for about 335 ms of a 500 ms band.
+
+**Workaround.** The start offset gets a tolerance of its own, 150 ms, which is the pool's worst real offset of 67 ms with room to spare, capped by the guard band so a narrower band narrows the tolerance too. Whatever the offset turns out to be, verify measures it and records it per preset as `rendition_start_offset_ms` in the catalog entry, so a player can subtract it and it costs the band nothing. It is an engineering tolerance, not a spec number, and it says so. Checked by breaking it: raising the limit to 600 ms turns two tests red, and dropping the cap turns the narrow-band test red.
+
+**Suggestion.** None for Amazon. For anyone shipping a sidecar against a re-encoded rendition: measure the offset and publish it, rather than assuming the timelines agree.
+
+---
+
+## 30. The ffmpeg photosensitivity filter misfires on its own first second
+
+**Task.** Run a published baseline alongside our analyzer, so the comparison table is not only us.
+
+**Steps.** Ran ffmpeg's `photosensitivity` filter over the clip pool, including static controls, and inferred a flag from where its output differs from the unfiltered decode.
+
+**Expected.** A static gray clip produces no difference.
+
+**Actual.** It fires in its first second even on static gray. It is also a mitigator rather than a reporter: it rewrites the frames it thinks are unsafe, so there is no flag to read, only a difference to infer.
+
+**Severity.** Low, and it matters for fairness rather than for our own product. A baseline that is measured wrong makes our numbers look better than they are.
+
+**Workaround.** The first second of its output is dropped, and the baseline write-up says that in the results file itself rather than in a footnote. Neither baseline is presented as a safety tool.
+
+**Suggestion.** None for Amazon. For anyone comparing detectors: check what your baseline does to a control clip before you report a difference.
