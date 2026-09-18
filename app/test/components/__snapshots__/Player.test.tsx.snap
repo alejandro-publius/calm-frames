@@ -40,8 +40,8 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "#1B2735",
-          "borderColor": "#33455A",
+          "backgroundColor": "#173B47",
+          "borderColor": "#66A0B4",
           "borderRadius": 16,
           "borderWidth": 2,
           "maxWidth": 1400,
@@ -53,7 +53,7 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
       <Text
         style={
           {
-            "color": "#F4F7FA",
+            "color": "#F3E8D3",
             "fontSize": 56,
             "fontWeight": "600",
             "textAlign": "center",
@@ -66,7 +66,7 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
       <Text
         style={
           {
-            "color": "#B9C4D0",
+            "color": "#CFE0DC",
             "fontSize": 38,
             "marginTop": 12,
             "textAlign": "center",

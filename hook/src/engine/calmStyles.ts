@@ -27,21 +27,48 @@
 
 import { scaleUxToDp } from '../pixelUtils';
 
+/**
+ * The palette, and what each colour is allowed to carry.
+ *
+ * The five at the top are the brand: they are the same five constants at the
+ * head of `app/assets/brand/make_logo.py`, so the mark on the shelf and the
+ * screen behind it cannot drift apart.
+ *
+ * What each may be used for is decided by measured contrast rather than taste,
+ * against the 4.5:1 text floor and the 3:1 non-text floor below:
+ *
+ *   cream on teal      7.60:1   text, any size
+ *   saffron on teal    4.47:1   rings and fills only, and it misses the text
+ *                               floor by 0.03, so it never becomes a label
+ *   dark saffron       2.58:1   edges and fills only. It carries nothing: ink
+ *                               on it is 3.76:1 and cream on it is 2.95:1
+ *   ink on cream      11.10:1   text on a light surface
+ *   ink on saffron     6.53:1   the label on a saffron fill
+ *
+ * tenFoot.test.tsx measures every rendered line against the colour actually
+ * painted behind it, so a colour used in the wrong place fails there.
+ */
 export const CALM_COLORS = {
   /** Every Calm Frames screen sits on this. */
-  BACKGROUND: '#101A24',
-  SURFACE: '#1B2735',
-  SURFACE_FOCUSED: '#2B3B4E',
-  BORDER: '#33455A',
-  FOCUS_RING: '#F2C14E',
-  TEXT: '#F4F7FA',
-  TEXT_DIM: '#B9C4D0',
+  BACKGROUND: '#1F4D5C',
+  /** A card on the ground, and the same card with focus on it. */
+  SURFACE: '#173B47',
+  SURFACE_FOCUSED: '#286070',
+  BORDER: '#66A0B4',
+  /** The accent. A ring and a fill, never a label. */
+  FOCUS_RING: '#E6A957',
+  /** The secondary accent. Edges and fills only, it carries no text at all. */
+  ACCENT_DARK: '#B87A2C',
+  TEXT: '#F3E8D3',
+  TEXT_DIM: '#CFE0DC',
+  /** Text on a light surface, where cream would disappear. */
+  INK: '#17323C',
   /** The shield on a checked title. */
   VERIFIED: '#7FD1A3',
   /** A title still being checked. */
   PENDING: '#E2C275',
   /** A title whose check failed. Not a warning red, this is not an alarm. */
-  FAILED: '#E08A7B',
+  FAILED: '#F2BDB1',
   /** The cover itself. */
   COVER: '#000000',
 } as const;
