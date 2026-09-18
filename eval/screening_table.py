@@ -193,7 +193,7 @@ SELF_FILMED: list[dict] = [
             "a red stage or party light washing the whole frame, chased on and off, with the "
             "camera close enough that the red fills the picture rather than sitting in a corner"
         ),
-        "flash_rate_multiple_of_limit": 1.4,
+        "flash_rate_multiple_of_limit": 4 / 3,
         "duration_s": 30,
         "framing": "whole frame red at the peak of each flash",
         "why": "a red positive close to the flash limit, where a detector that rounds the rate the wrong way shows it",
@@ -202,7 +202,7 @@ SELF_FILMED: list[dict] = [
         "id": "red_below_the_limit",
         "gap": "red-negative",
         "must_show": "the same red rig as red_stage_wash, flashing slowly, one take, nothing else changed",
-        "flash_rate_multiple_of_limit": 0.6,
+        "flash_rate_multiple_of_limit": 2 / 3,
         "duration_s": 20,
         "framing": "identical to red_stage_wash, so the only difference between the two is the rate",
         "why": (
@@ -217,7 +217,7 @@ SELF_FILMED: list[dict] = [
             "a white strobe lamp pointed at a plain wall, running at a steady rate for the whole "
             "take, with the camera locked off and the exposure locked"
         ),
-        "flash_rate_multiple_of_limit": 3.3,
+        "flash_rate_multiple_of_limit": 10 / 3,
         "duration_s": 30,
         "framing": "the lit wall filling the frame",
         "why": (
@@ -233,7 +233,7 @@ SELF_FILMED: list[dict] = [
             "the same strobe as white_strobe_steady, at the same rate, but as a small lamp in a "
             "wide shot of a lit room, so the flashing part is roughly a tenth of the picture"
         ),
-        "flash_rate_multiple_of_limit": 3.3,
+        "flash_rate_multiple_of_limit": 10 / 3,
         "duration_s": 20,
         "framing": "flashing area well under the profile's area fraction limit (profiles.WCAG.area_fraction_limit)",
         "why": (
@@ -269,6 +269,7 @@ def self_filmed_needed(table: dict) -> dict:
         multiple = entry["flash_rate_multiple_of_limit"]
         clip = dict(entry)
         clip["flash_rate_per_second"] = round(limit * multiple, 1) if limit else None
+        clip["flash_rate_multiple_of_limit"] = round(multiple, 3)
         clip["still_needed"] = red_segments == 0 if entry["gap"].startswith("red") else True
         clips.append(clip)
     return {
