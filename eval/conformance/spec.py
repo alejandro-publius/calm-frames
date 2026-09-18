@@ -150,6 +150,15 @@ def _table_rows(text: str) -> dict[str, str]:
     return rows
 
 
+def table_rows(text: str) -> dict[str, str]:
+    """The number tables of a spec page, keyed by the code name each row points at.
+
+    Public because the pattern suite parses the same tables out of the same file and two
+    copies of a table parser is one copy too many.
+    """
+    return _table_rows(text)
+
+
 def _one_number(cell: str, where: str) -> float:
     found = re.findall(_NUM, cell)
     if not found:

@@ -1,0 +1,1138 @@
+{
+ "generated_on": "2026-09-18",
+ "rule": "ITU-R BT.1702-3 Attachment 1 to Annex 1 (informative), regular patterns",
+ "profile": "broadcast",
+ "not_a_wcag_measurement": "WCAG 2.2 SC 2.3.1 does not cover regular patterns, so no number in this file is a WCAG number and none of it may be described as WCAG conformance.",
+ "ground_truth": {
+  "source": "computed from the spec text by eval/conformance/pattern_truth.py",
+  "modules": [
+   "pattern_truth",
+   "pattern_spec",
+   "pattern_geometry"
+  ],
+  "imports_flashmap": false,
+  "checked": "syntax tree and a fresh interpreter import, before any clip was made",
+  "spec_file": "flashmap/docs/SPEC_SOURCES.md",
+  "spec_sha256": "d3f3c2c35c705f6438dca2272c9d1229b10aaec577eb109c336363421d2d01fd",
+  "design_seed": 20260917
+ },
+ "sample": {
+  "clips_designed": 199,
+  "clips_measured": 199,
+  "clips_kept": 196,
+  "windows_kept": 588,
+  "ground_truth_positive_windows": 124,
+  "hazard_files_that_leaked": 0
+ },
+ "exclusions": {
+  "the encoded bar difference did not match the drawn one": 3
+ },
+ "published": {
+  "pattern_precision": 0.527,
+  "pattern_precision_lo": 0.462,
+  "pattern_precision_hi": 0.591,
+  "pattern_precision_denominator": 226,
+  "pattern_recall": 0.96,
+  "pattern_recall_lo": 0.909,
+  "pattern_recall_hi": 0.983,
+  "pattern_recall_denominator": 124,
+  "pattern_f1": 0.68,
+  "pattern_on_screen_precision": 0.815,
+  "pattern_on_screen_precision_lo": 0.744,
+  "pattern_on_screen_precision_hi": 0.87,
+  "pattern_on_screen_precision_denominator": 146,
+  "pattern_on_screen_recall": 0.96,
+  "pattern_on_screen_recall_lo": 0.909,
+  "pattern_on_screen_recall_hi": 0.983,
+  "pattern_on_screen_recall_denominator": 124,
+  "pattern_on_screen_f1": 0.881,
+  "pattern_settled_precision": 0.937,
+  "pattern_settled_precision_lo": 0.848,
+  "pattern_settled_precision_hi": 0.975,
+  "pattern_settled_precision_denominator": 63,
+  "pattern_settled_recall": 0.952,
+  "pattern_settled_recall_lo": 0.867,
+  "pattern_settled_recall_hi": 0.983,
+  "pattern_settled_recall_denominator": 62,
+  "pattern_settled_f1": 0.944,
+  "pattern_half_window_precision": 0.992,
+  "pattern_half_window_precision_lo": 0.954,
+  "pattern_half_window_precision_hi": 0.999,
+  "pattern_half_window_precision_denominator": 119,
+  "pattern_half_window_recall": 0.952,
+  "pattern_half_window_recall_lo": 0.898,
+  "pattern_half_window_recall_hi": 0.978,
+  "pattern_half_window_recall_denominator": 124,
+  "pattern_half_window_f1": 0.971,
+  "clip_level_precision": 0.726,
+  "clip_level_recall": 0.984
+ },
+ "headline_all_windows": {
+  "counts": {
+   "tp": 119,
+   "fp": 107,
+   "fn": 5,
+   "tn": 357
+  },
+  "precision": {
+   "value": 0.5265486725663717,
+   "wilson_lo": 0.4615542299064052,
+   "wilson_hi": 0.5906556719171014,
+   "numerator": 119,
+   "denominator": 226
+  },
+  "recall": {
+   "value": 0.9596774193548387,
+   "wilson_lo": 0.9090738373814525,
+   "wilson_hi": 0.982655661418247,
+   "numerator": 119,
+   "denominator": 124
+  },
+  "f1": 0.68,
+  "precision_bootstrap_over_clips": {
+   "lo": 0.47058823529411764,
+   "hi": 0.5775862068965517,
+   "resamples": 10000,
+   "groups": 84,
+   "seed": 20260917
+  },
+  "recall_bootstrap_over_clips": {
+   "lo": 0.9032258064516129,
+   "hi": 1.0,
+   "resamples": 10000,
+   "groups": 62,
+   "seed": 20260917
+  }
+ },
+ "pattern_windows_only": {
+  "counts": {
+   "tp": 119,
+   "fp": 27,
+   "fn": 5,
+   "tn": 241
+  },
+  "precision": {
+   "value": 0.815068493150685,
+   "wilson_lo": 0.7443051817231313,
+   "wilson_hi": 0.8696770947714579,
+   "numerator": 119,
+   "denominator": 146
+  },
+  "recall": {
+   "value": 0.9596774193548387,
+   "wilson_lo": 0.9090738373814525,
+   "wilson_hi": 0.982655661418247,
+   "numerator": 119,
+   "denominator": 124
+  },
+  "f1": 0.8814814814814815,
+  "precision_bootstrap_over_clips": {
+   "lo": 0.7361111111111112,
+   "hi": 0.8843537414965986,
+   "resamples": 10000,
+   "groups": 83,
+   "seed": 20260917
+  },
+  "recall_bootstrap_over_clips": {
+   "lo": 0.9032258064516129,
+   "hi": 1.0,
+   "resamples": 10000,
+   "groups": 62,
+   "seed": 20260917
+  }
+ },
+ "pattern_windows_after_the_first": {
+  "counts": {
+   "tp": 59,
+   "fp": 4,
+   "fn": 3,
+   "tn": 130
+  },
+  "precision": {
+   "value": 0.9365079365079365,
+   "wilson_lo": 0.8478082215469362,
+   "wilson_hi": 0.9750343819866059,
+   "numerator": 59,
+   "denominator": 63
+  },
+  "recall": {
+   "value": 0.9516129032258065,
+   "wilson_lo": 0.8671196207267605,
+   "wilson_hi": 0.9834083141494193,
+   "numerator": 59,
+   "denominator": 62
+  },
+  "f1": 0.944,
+  "precision_bootstrap_over_clips": {
+   "lo": 0.873015873015873,
+   "hi": 0.9841269841269841,
+   "resamples": 10000,
+   "groups": 63,
+   "seed": 20260917
+  },
+  "recall_bootstrap_over_clips": {
+   "lo": 0.8870967741935484,
+   "hi": 1.0,
+   "resamples": 10000,
+   "groups": 62,
+   "seed": 20260917
+  }
+ },
+ "half_window_rule": {
+  "counts": {
+   "tp": 118,
+   "fp": 1,
+   "fn": 6,
+   "tn": 463
+  },
+  "precision": {
+   "value": 0.9915966386554622,
+   "wilson_lo": 0.9539321145669224,
+   "wilson_hi": 0.9985150569599106,
+   "numerator": 118,
+   "denominator": 119
+  },
+  "recall": {
+   "value": 0.9516129032258065,
+   "wilson_lo": 0.8984475321621598,
+   "wilson_hi": 0.9776375894656152,
+   "numerator": 118,
+   "denominator": 124
+  },
+  "f1": 0.9711934156378601,
+  "precision_bootstrap_over_clips": {
+   "lo": 0.9743589743589743,
+   "hi": 1.0,
+   "resamples": 10000,
+   "groups": 60,
+   "seed": 20260917
+  },
+  "recall_bootstrap_over_clips": {
+   "lo": 0.8870967741935484,
+   "hi": 1.0,
+   "resamples": 10000,
+   "groups": 62,
+   "seed": 20260917
+  }
+ },
+ "clip_level": {
+  "counts": {
+   "tp": 61,
+   "fp": 23,
+   "fn": 1,
+   "tn": 111
+  },
+  "precision": {
+   "value": 0.7261904761904762,
+   "wilson_lo": 0.622525808389156,
+   "wilson_hi": 0.8100717430423072,
+   "numerator": 61,
+   "denominator": 84
+  },
+  "recall": {
+   "value": 0.9838709677419355,
+   "wilson_lo": 0.9141327973931,
+   "wilson_hi": 0.9971471328313782,
+   "numerator": 61,
+   "denominator": 62
+  }
+ },
+ "where_the_false_positives_are": {
+  "the calm second before the pattern arrives": 80,
+  "the window the pattern arrives in": 23,
+  "a smooth flow the detector would not call smooth": 4
+ },
+ "smooth_flow_exemption": {
+  "drift_clips": 40,
+  "drift_clips_with_an_exemption": 15,
+  "exempt_ms": 22880.0,
+  "meaning": "a drift clip is drawn flowing smoothly one way, which Attachment 1 exempts, so its true answer is no hidden window at all. Every drift clip the detector hides instead is a false positive here, on purpose: the exemption is the one place where a wrong call hides a hazard from a child rather than covering a few safe seconds, so it is applied only when the flow is unambiguous and the cost of that is this number."
+ },
+ "error_curves": {
+  "pairs": [
+   {
+    "bucket": "2",
+    "clips": 9,
+    "precision": null,
+    "precision_wilson": [
+     0.0,
+     1.0
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 27
+    }
+   },
+   {
+    "bucket": "3",
+    "clips": 12,
+    "precision": null,
+    "precision_wilson": [
+     0.0,
+     1.0
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 36
+    }
+   },
+   {
+    "bucket": "4",
+    "clips": 14,
+    "precision": null,
+    "precision_wilson": [
+     0.0,
+     1.0
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 42
+    }
+   },
+   {
+    "bucket": "5",
+    "clips": 18,
+    "precision": 0.0,
+    "precision_wilson": [
+     0.0,
+     0.4898908364545973
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 4,
+     "fn": 0,
+     "tn": 50
+    }
+   },
+   {
+    "bucket": "6",
+    "clips": 15,
+    "precision": 0.5454545454545454,
+    "precision_wilson": [
+     0.280091537409322,
+     0.7872872837754024
+    ],
+    "recall": 0.75,
+    "recall_wilson": [
+     0.40927543031016883,
+     0.9285207872478909
+    ],
+    "counts": {
+     "tp": 6,
+     "fp": 5,
+     "fn": 2,
+     "tn": 32
+    }
+   },
+   {
+    "bucket": "7",
+    "clips": 14,
+    "precision": 0.5882352941176471,
+    "precision_wilson": [
+     0.36005442642999785,
+     0.7838894320978518
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.7224672001371107,
+     0.9999999999999999
+    ],
+    "counts": {
+     "tp": 10,
+     "fp": 7,
+     "fn": 0,
+     "tn": 25
+    }
+   },
+   {
+    "bucket": "8",
+    "clips": 60,
+    "precision": 0.5,
+    "precision_wilson": [
+     0.41332731782637955,
+     0.5866726821736205
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.9416559278986275,
+     0.9999999999999999
+    ],
+    "counts": {
+     "tp": 62,
+     "fp": 62,
+     "fn": 0,
+     "tn": 56
+    }
+   },
+   {
+    "bucket": "10",
+    "clips": 19,
+    "precision": 0.6666666666666666,
+    "precision_wilson": [
+     0.4537345197425524,
+     0.8280524739491653
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.7846891972623643,
+     1.0
+    ],
+    "counts": {
+     "tp": 14,
+     "fp": 7,
+     "fn": 0,
+     "tn": 36
+    }
+   },
+   {
+    "bucket": "12",
+    "clips": 20,
+    "precision": 0.5416666666666666,
+    "precision_wilson": [
+     0.3507486535891948,
+     0.72108666268789
+    ],
+    "recall": 0.9285714285714286,
+    "recall_wilson": [
+     0.6853129557584889,
+     0.9872777847521093
+    ],
+    "counts": {
+     "tp": 13,
+     "fp": 11,
+     "fn": 1,
+     "tn": 35
+    }
+   },
+   {
+    "bucket": "16",
+    "clips": 15,
+    "precision": 0.56,
+    "precision_wilson": [
+     0.3706733186979878,
+     0.7333436111893266
+    ],
+    "recall": 0.875,
+    "recall_wilson": [
+     0.639771727342413,
+     0.9650225122567595
+    ],
+    "counts": {
+     "tp": 14,
+     "fp": 11,
+     "fn": 2,
+     "tn": 18
+    }
+   }
+  ],
+  "drawn_motion": [
+   {
+    "bucket": "drift",
+    "clips": 40,
+    "precision": 0.0,
+    "precision_wilson": [
+     0.0,
+     0.08966685370757142
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 39,
+     "fn": 0,
+     "tn": 81
+    }
+   },
+   {
+    "bucket": "flashing",
+    "clips": 34,
+    "precision": 0.6666666666666666,
+    "precision_wilson": [
+     0.5033399787115652,
+     0.7978538117569468
+    ],
+    "recall": 0.8571428571428571,
+    "recall_wilson": [
+     0.685101978364747,
+     0.9430099468025059
+    ],
+    "counts": {
+     "tp": 24,
+     "fp": 12,
+     "fn": 4,
+     "tn": 62
+    }
+   },
+   {
+    "bucket": "oscillating",
+    "clips": 25,
+    "precision": 0.6521739130434783,
+    "precision_wilson": [
+     0.44890335377263,
+     0.8118872406120227
+    ],
+    "recall": 0.9375,
+    "recall_wilson": [
+     0.7167126242970107,
+     0.9888806552353576
+    ],
+    "counts": {
+     "tp": 15,
+     "fp": 8,
+     "fn": 1,
+     "tn": 51
+    }
+   },
+   {
+    "bucket": "reversing",
+    "clips": 35,
+    "precision": 0.6666666666666666,
+    "precision_wilson": [
+     0.529683778569708,
+     0.7803006814641148
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.8984854458466761,
+     0.9999999999999999
+    ],
+    "counts": {
+     "tp": 34,
+     "fp": 17,
+     "fn": 0,
+     "tn": 54
+    }
+   },
+   {
+    "bucket": "stationary",
+    "clips": 62,
+    "precision": 0.5974025974025974,
+    "precision_wilson": [
+     0.48576853167949463,
+     0.6997798270317195
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.9229264369144198,
+     1.0
+    ],
+    "counts": {
+     "tp": 46,
+     "fp": 31,
+     "fn": 0,
+     "tn": 109
+    }
+   }
+  ],
+  "orientation": [
+   {
+    "bucket": "diagonal",
+    "clips": 41,
+    "precision": 0.4,
+    "precision_wilson": [
+     0.21880653237281708,
+     0.6134184992377468
+    ],
+    "recall": 0.8,
+    "recall_wilson": [
+     0.4901624715366418,
+     0.9433178485456248
+    ],
+    "counts": {
+     "tp": 8,
+     "fp": 12,
+     "fn": 2,
+     "tn": 101
+    }
+   },
+   {
+    "bucket": "horizontal",
+    "clips": 50,
+    "precision": 0.5531914893617021,
+    "precision_wilson": [
+     0.41245459838218734,
+     0.6858903373450472
+    ],
+    "recall": 0.9285714285714286,
+    "recall_wilson": [
+     0.7735463743160095,
+     0.9801879358846942
+    ],
+    "counts": {
+     "tp": 26,
+     "fp": 21,
+     "fn": 2,
+     "tn": 101
+    }
+   },
+   {
+    "bucket": "vertical",
+    "clips": 105,
+    "precision": 0.5345911949685535,
+    "precision_wilson": [
+     0.45715936658418393,
+     0.6103909985357463
+    ],
+    "recall": 0.9883720930232558,
+    "recall_wilson": [
+     0.9370359341070826,
+     0.9979444313347503
+    ],
+    "counts": {
+     "tp": 85,
+     "fp": 74,
+     "fn": 1,
+     "tn": 155
+    }
+   }
+  ],
+  "area_over_limit": [
+   {
+    "bucket": "under 0.5",
+    "clips": 12,
+    "precision": null,
+    "precision_wilson": [
+     0.0,
+     1.0
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 36
+    }
+   },
+   {
+    "bucket": "0.5 to 0.85",
+    "clips": 24,
+    "precision": 0.0,
+    "precision_wilson": [
+     0.0,
+     0.39033428790216534
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 6,
+     "fn": 0,
+     "tn": 66
+    }
+   },
+   {
+    "bucket": "0.95 to 1",
+    "clips": 4,
+    "precision": 0.0,
+    "precision_wilson": [
+     0.0,
+     0.6576197724933469
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 2,
+     "fn": 0,
+     "tn": 10
+    }
+   },
+   {
+    "bucket": "1 to 1.05",
+    "clips": 7,
+    "precision": 0.7142857142857143,
+    "precision_wilson": [
+     0.35893445183261935,
+     0.9177810759959433
+    ],
+    "recall": 0.8333333333333334,
+    "recall_wilson": [
+     0.43649717781352987,
+     0.9699466302516935
+    ],
+    "counts": {
+     "tp": 5,
+     "fp": 2,
+     "fn": 1,
+     "tn": 13
+    }
+   },
+   {
+    "bucket": "1.05 to 1.15",
+    "clips": 1,
+    "precision": 0.6666666666666666,
+    "precision_wilson": [
+     0.20765960080204765,
+     0.9385080552796037
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.34238022750665303,
+     1.0
+    ],
+    "counts": {
+     "tp": 2,
+     "fp": 1,
+     "fn": 0,
+     "tn": 0
+    }
+   },
+   {
+    "bucket": "1.15 to 1.5",
+    "clips": 33,
+    "precision": 0.6666666666666666,
+    "precision_wilson": [
+     0.5465634388771762,
+     0.7684357087849766
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.9197043962415192,
+     1.0
+    ],
+    "counts": {
+     "tp": 44,
+     "fp": 22,
+     "fn": 0,
+     "tn": 33
+    }
+   },
+   {
+    "bucket": "1.5 to 2",
+    "clips": 32,
+    "precision": 0.6428571428571429,
+    "precision_wilson": [
+     0.4583030651442781,
+     0.7929417049226233
+    ],
+    "recall": 0.8181818181818182,
+    "recall_wilson": [
+     0.6148339256287345,
+     0.9269311541657794
+    ],
+    "counts": {
+     "tp": 18,
+     "fp": 10,
+     "fn": 4,
+     "tn": 64
+    }
+   },
+   {
+    "bucket": "2 and over",
+    "clips": 43,
+    "precision": 0.6666666666666666,
+    "precision_wilson": [
+     0.5541742611414865,
+     0.7629177913642448
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.9286524008666414,
+     1.0
+    ],
+    "counts": {
+     "tp": 50,
+     "fp": 25,
+     "fn": 0,
+     "tn": 54
+    }
+   },
+   {
+    "bucket": "exempt",
+    "clips": 40,
+    "precision": 0.0,
+    "precision_wilson": [
+     0.0,
+     0.08966685370757142
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 39,
+     "fn": 0,
+     "tn": 81
+    }
+   }
+  ],
+  "contrast_over_limit": [
+   {
+    "bucket": "0.5",
+    "clips": 18,
+    "precision": null,
+    "precision_wilson": [
+     0.0,
+     1.0
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 54
+    }
+   },
+   {
+    "bucket": "0.6",
+    "clips": 4,
+    "precision": null,
+    "precision_wilson": [
+     0.0,
+     1.0
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 12
+    }
+   },
+   {
+    "bucket": "0.9",
+    "clips": 13,
+    "precision": null,
+    "precision_wilson": [
+     0.0,
+     1.0
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 39
+    }
+   },
+   {
+    "bucket": "1.0",
+    "clips": 25,
+    "precision": 0.5806451612903226,
+    "precision_wilson": [
+     0.4076626249536972,
+     0.7358445693268778
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.8241207763533425,
+     1.0
+    ],
+    "counts": {
+     "tp": 18,
+     "fp": 13,
+     "fn": 0,
+     "tn": 44
+    }
+   },
+   {
+    "bucket": "1.1",
+    "clips": 27,
+    "precision": 0.5652173913043478,
+    "precision_wilson": [
+     0.3681137508501646,
+     0.743653646743258
+    ],
+    "recall": 0.7222222222222222,
+    "recall_wilson": [
+     0.4912734343970255,
+     0.87500246620446
+    ],
+    "counts": {
+     "tp": 13,
+     "fp": 10,
+     "fn": 5,
+     "tn": 53
+    }
+   },
+   {
+    "bucket": "1.6",
+    "clips": 10,
+    "precision": null,
+    "precision_wilson": [
+     0.0,
+     1.0
+    ],
+    "recall": null,
+    "recall_wilson": [
+     0.0,
+     1.0
+    ],
+    "counts": {
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 30
+    }
+   },
+   {
+    "bucket": "2.0",
+    "clips": 81,
+    "precision": 0.5234899328859061,
+    "precision_wilson": [
+     0.44371694127548666,
+     0.6020821505024323
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.9530621902878059,
+     1.0
+    ],
+    "counts": {
+     "tp": 78,
+     "fp": 71,
+     "fn": 0,
+     "tn": 94
+    }
+   },
+   {
+    "bucket": "2.8",
+    "clips": 5,
+    "precision": 0.2857142857142857,
+    "precision_wilson": [
+     0.08221892400405678,
+     0.6410655481673808
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.34238022750665303,
+     1.0
+    ],
+    "counts": {
+     "tp": 2,
+     "fp": 5,
+     "fn": 0,
+     "tn": 8
+    }
+   },
+   {
+    "bucket": "4.0",
+    "clips": 13,
+    "precision": 0.5,
+    "precision_wilson": [
+     0.27999563610326017,
+     0.7200043638967398
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.6755924351161198,
+     1.0
+    ],
+    "counts": {
+     "tp": 8,
+     "fp": 8,
+     "fn": 0,
+     "tn": 23
+    }
+   }
+  ],
+  "resolution": [
+   {
+    "bucket": "480p",
+    "clips": 124,
+    "precision": 0.5030674846625767,
+    "precision_wilson": [
+     0.42712894689432734,
+     0.57886476718051
+    ],
+    "recall": 0.9534883720930233,
+    "recall_wilson": [
+     0.8864300218628802,
+     0.9817660317616792
+    ],
+    "counts": {
+     "tp": 82,
+     "fp": 81,
+     "fn": 4,
+     "tn": 205
+    }
+   },
+   {
+    "bucket": "720p",
+    "clips": 72,
+    "precision": 0.5873015873015873,
+    "precision_wilson": [
+     0.4641531769742257,
+     0.7004153437324827
+    ],
+    "recall": 0.9736842105263158,
+    "recall_wilson": [
+     0.8650512388404787,
+     0.9953394123142312
+    ],
+    "counts": {
+     "tp": 37,
+     "fp": 26,
+     "fn": 1,
+     "tn": 152
+    }
+   }
+  ],
+  "compression_crf": [
+   {
+    "bucket": "18",
+    "clips": 42,
+    "precision": 0.6,
+    "precision_wilson": [
+     0.42320360253322475,
+     0.7540937188319815
+    ],
+    "recall": 0.9,
+    "recall_wilson": [
+     0.6989663547715128,
+     0.9721335187862319
+    ],
+    "counts": {
+     "tp": 18,
+     "fp": 12,
+     "fn": 2,
+     "tn": 94
+    }
+   },
+   {
+    "bucket": "23",
+    "clips": 114,
+    "precision": 0.5,
+    "precision_wilson": [
+     0.4234392476991226,
+     0.5765607523008773
+    ],
+    "recall": 0.975609756097561,
+    "recall_wilson": [
+     0.9153662160893606,
+     0.9932856296688367
+    ],
+    "counts": {
+     "tp": 80,
+     "fp": 80,
+     "fn": 2,
+     "tn": 180
+    }
+   },
+   {
+    "bucket": "lossless",
+    "clips": 40,
+    "precision": 0.5833333333333334,
+    "precision_wilson": [
+     0.4220025157487166,
+     0.7285943794855394
+    ],
+    "recall": 0.9545454545454546,
+    "recall_wilson": [
+     0.7820195416134267,
+     0.991930572378736
+    ],
+    "counts": {
+     "tp": 21,
+     "fp": 15,
+     "fn": 1,
+     "tn": 83
+    }
+   }
+  ],
+  "near_limit": [
+   {
+    "bucket": "False",
+    "clips": 85,
+    "precision": 0.5179856115107914,
+    "precision_wilson": [
+     0.43555788224628234,
+     0.5994459607645651
+    ],
+    "recall": 1.0,
+    "recall_wilson": [
+     0.9493488274035422,
+     1.0
+    ],
+    "counts": {
+     "tp": 72,
+     "fp": 67,
+     "fn": 0,
+     "tn": 116
+    }
+   },
+   {
+    "bucket": "True",
+    "clips": 111,
+    "precision": 0.5402298850574713,
+    "precision_wilson": [
+     0.43602826866762756,
+     0.641029058359857
+    ],
+    "recall": 0.9038461538461539,
+    "recall_wilson": [
+     0.7939036987986837,
+     0.9582256489474276
+    ],
+    "counts": {
+     "tp": 47,
+     "fp": 40,
+     "fn": 5,
+     "tn": 241
+    }
+   }
+  ]
+ },
+ "window_rules": {
+  "primary": "any overlap at all between a pattern segment and the window",
+  "sensitivity": "at least half the window covered, reported as the half window rule"
+ },
+ "known_gaps": [
+  "radial, curved and dotted patterns are in BT.1702-3's wording and are not drawn by this suite. Only straight stripes, in three orientations, are measured.",
+  "letterboxed pictures are not in this suite. The flash suite covers that path.",
+  "no real footage. Every clip here is generated."
+ ]
+}
