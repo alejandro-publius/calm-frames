@@ -23,6 +23,7 @@ import { Card, cardAt, NO_CARD } from '../../src/calmframes/cards';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import CreditsScreen from '../../src/calmframes/CreditsScreen';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
+import FirstRunScreen from '../../src/calmframes/FirstRunScreen';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
@@ -39,11 +40,19 @@ import {
   UiFrame,
 } from '../../src/calmframes/uiCapture';
 import {
+  FIRST_RUN_EXPLAINER_FRAME,
+  FIRST_RUN_PIN_FRAME,
+  FIRST_RUN_PRESET_FRAME,
+  FIRST_RUN_ROOM_FRAME,
+  KID_HOME_EMPTY_FRAME,
   KID_HOME_FOCUSED_FRAME,
   KID_HOME_FRAME,
+  KID_HOME_OFFLINE_FRAME,
   PARENT_LOCKED_FRAME,
   PARENT_OPEN_FRAME,
+  PARENT_WRONG_PIN_FRAME,
   playerFrame,
+  TITLE_DETAILS_BLOCKED_FRAME,
   TITLE_DETAILS_FRAME,
 } from '../../src/calmframes/uiFrames';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
@@ -81,13 +90,55 @@ const intervals = buildCoverIntervals([{ startMs: 20_000, endMs: 24_000 }], {
   guardBandMs: 500,
 });
 
-/** Colours read off a rendered tree, as the app would paint them. */
-function renderedFrame(name: string, element: React.ReactElement): UiFrame {
-  const { toJSON, unmount } = render(element);
-  const tree = toJSON();
-  const frame = frameFromTree(name, tree as unknown as RenderedNode);
+/**
+ * Colours read off a rendered tree, as the app would paint them.
+ *
+ * `act` is where a state that needs pressing or focusing gets there: a wrong
+ * PIN, a focused poster, the step after the one the screen opens on. Whatever
+ * it does, the frame is read after it, so what is recorded is the state a
+ * person would be looking at.
+ */
+function renderedFrame(
+  name: string,
+  element: React.ReactElement,
+  act?: () => void,
+): UiFrame {
+  const { unmount } = render(element);
+  act?.();
+  const frame = frameFromTree(name, screen.toJSON() as unknown as RenderedNode);
   unmount();
   return frame;
+}
+
+const press = (testID: string) => fireEvent.press(screen.getByTestId(testID));
+const pressAll = (...testIDs: string[]) => testIDs.forEach(press);
+
+/** The four presses that set a PIN, typed twice. */
+const FIRST_RUN_PIN = ['1', '3', '5', '7'].map((digit) => `first-run-key-${digit}`);
+
+const firstRun = () => (
+  <FirstRunScreen onDone={jest.fn()} newSalt={() => 'seed'} rounds={4} />
+);
+
+const parentArea = (titles: CheckedTitle[]) => (
+  <ParentAreaScreen
+    gate={setPin(emptyPinGate(), '1357', 'seed', 4)}
+    onGateChange={jest.fn()}
+    settings={DEFAULT_SETTINGS}
+    onSettingsChange={jest.fn()}
+    log={emptyHideLog()}
+    titles={titles}
+    nowMs={() => 0}
+  />
+);
+
+/** A title whose check did not pass, so its page shows a notice and no strip. */
+function blockedTitle(): CheckedTitle {
+  return {
+    ...makeTitle('bad', 'failed'),
+    rejection: 'bad-signature',
+    segments: [],
+  };
 }
 
 describe('what the app paints', () => {
@@ -115,12 +166,80 @@ describe('what the app paints', () => {
     expect(focused).toEqual(KID_HOME_FOCUSED_FRAME);
   });
 
-  it('matches what the details page reports', () => {
+  it('matches what the empty and unreachable shelves report', () => {
+    expect(
+      renderedFrame('kid-home-empty', (
+        <KidHomeScreen titles={[]} onOpen={jest.fn()} />
+      )),
+    ).toEqual(KID_HOME_EMPTY_FRAME);
+
+    expect(
+      renderedFrame('kid-home-offline', (
+        <KidHomeScreen
+          titles={[makeTitle('ok', 'verified')]}
+          onOpen={jest.fn()}
+          offline
+        />
+      )),
+    ).toEqual(KID_HOME_OFFLINE_FRAME);
+  });
+
+  it('matches what the details page reports, ready and not ready', () => {
     expect(
       renderedFrame('title-details', (
         <TitleDetailsScreen entry={makeTitle('ok', 'verified')} onPlay={jest.fn()} />
       )),
     ).toEqual(TITLE_DETAILS_FRAME);
+
+    // A title that did not verify has no schedule, so the strip and both of
+    // its colours are gone and what is left is the notice.
+    expect(
+      renderedFrame('title-details-blocked', (
+        <TitleDetailsScreen entry={blockedTitle()} onPlay={jest.fn()} />
+      )),
+    ).toEqual(TITLE_DETAILS_BLOCKED_FRAME);
+  });
+
+  it('matches what each step of the first run reports', () => {
+    expect(renderedFrame('first-run-pin', firstRun())).toEqual(FIRST_RUN_PIN_FRAME);
+
+    expect(
+      renderedFrame('first-run-preset', firstRun(), () => {
+        pressAll(...FIRST_RUN_PIN, ...FIRST_RUN_PIN);
+      }),
+    ).toEqual(FIRST_RUN_PRESET_FRAME);
+
+    expect(
+      renderedFrame('first-run-room', firstRun(), () => {
+        pressAll(...FIRST_RUN_PIN, ...FIRST_RUN_PIN, 'first-run-next');
+      }),
+    ).toEqual(FIRST_RUN_ROOM_FRAME);
+
+    expect(
+      renderedFrame('first-run-explainer', firstRun(), () => {
+        pressAll(
+          ...FIRST_RUN_PIN,
+          ...FIRST_RUN_PIN,
+          'first-run-next',
+          'first-run-next',
+        );
+      }),
+    ).toEqual(FIRST_RUN_EXPLAINER_FRAME);
+  });
+
+  it('paints the same picture for a wrong PIN as for the keypad itself', () => {
+    // The words change, the colours do not. Somebody mistyping a PIN four
+    // times in a row should not be making the screen flash.
+    expect(
+      renderedFrame('parent-area-wrong-pin', parentArea([]), () => {
+        pressAll(
+          'parent-area-key-2',
+          'parent-area-key-2',
+          'parent-area-key-2',
+          'parent-area-key-2',
+        );
+      }),
+    ).toEqual(PARENT_WRONG_PIN_FRAME);
   });
 
   it('matches what the parent area reports, locked and open', () => {
@@ -199,75 +318,171 @@ describe('the capture path', () => {
   });
 
   it('records every screen and transition the app can show, and writes them out', () => {
-    // Walk the app the way a person would: shelf, focus a poster, open the
-    // details, play, through a flagged part, back out, then the parent area.
-    const walk: Array<[React.ReactElement, string, string]> = [
-      [
-        <KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />,
-        'kid-home',
-        'open the shelf',
-      ],
-      [
-        <TitleDetailsScreen entry={makeTitle('ok', 'verified')} onPlay={jest.fn()} />,
-        'title-details',
-        'open a title',
-      ],
-      [<PlayerLayer covered={false} card={NO_CARD} />, 'player-clear-none', 'play'],
-      [
-        <PlayerLayer covered={false} card={cardAt(intervals, 16_000)} />,
-        'player-clear-countdown',
-        'countdown',
-      ],
-      [
-        <PlayerLayer covered={true} card={cardAt(intervals, 22_000)} />,
-        'player-covered-covering',
-        'cover on',
-      ],
-      [
-        <PlayerLayer covered={false} card={cardAt(intervals, 24_600)} />,
-        'player-clear-after',
-        'cover off',
-      ],
-      [
-        <PlayerLayer
-          covered={true}
-          card={cardAt([], 0, { rejection: 'missing' })}
-        />,
-        'player-covered-unverified',
-        'title not checked',
-      ],
-      [
-        <KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />,
-        'kid-home',
-        'back to the shelf',
-      ],
-      [
-        <ParentAreaScreen
-          gate={setPin(emptyPinGate(), '1357', 'seed', 4)}
-          onGateChange={jest.fn()}
-          settings={DEFAULT_SETTINGS}
-          onSettingsChange={jest.fn()}
-          log={emptyHideLog()}
-          titles={[makeTitle('ok', 'verified')]}
-          nowMs={() => 0}
-        />,
-        'parent-area-locked',
-        'open the parent area',
-      ],
-      [<CreditsScreen />, 'credits', 'open the credits'],
+    // A path through the whole app, in the order a household meets it: the
+    // first run one step at a time, a shelf with nothing on it, a shelf with
+    // the service down, a title, the player through a flagged part, and the
+    // parent area with a wrong PIN on the way in. The empty and error states
+    // are in here with everything else, because a screen nobody demonstrates
+    // is still a screen the app can show, and it still has to not flash on the
+    // way in or out.
+    //
+    // A scene is one mounted screen and the states it moves through, so the
+    // first run is walked the way a parent walks it rather than remounted at
+    // step one for each step, which would record a path nobody takes.
+    interface Stop {
+      name: string;
+      reason: string;
+      act?: () => void;
+    }
+    const scenes: Array<{ element: React.ReactElement; stops: Stop[] }> = [
+      {
+        element: firstRun(),
+        stops: [
+          { name: 'first-run-pin', reason: 'first run, the PIN' },
+          {
+            name: 'first-run-preset',
+            reason: 'first run, how strict',
+            act: () => pressAll(...FIRST_RUN_PIN, ...FIRST_RUN_PIN),
+          },
+          {
+            name: 'first-run-room',
+            reason: 'first run, the room',
+            act: () => press('first-run-next'),
+          },
+          {
+            name: 'first-run-explainer',
+            reason: 'first run, what gets hidden',
+            act: () => press('first-run-next'),
+          },
+        ],
+      },
+      {
+        element: <KidHomeScreen titles={[]} onOpen={jest.fn()} />,
+        stops: [{ name: 'kid-home-empty', reason: 'nothing checked yet' }],
+      },
+      {
+        element: (
+          <KidHomeScreen
+            titles={[makeTitle('ok', 'verified')]}
+            onOpen={jest.fn()}
+            offline
+          />
+        ),
+        stops: [
+          { name: 'kid-home-offline', reason: 'the check service is unreachable' },
+        ],
+      },
+      {
+        element: (
+          <KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />
+        ),
+        stops: [
+          { name: 'kid-home', reason: 'open the shelf' },
+          {
+            name: 'kid-home-focused',
+            reason: 'poster focused',
+            act: () => fireEvent(screen.getByTestId('kid-home-poster-ok'), 'focus'),
+          },
+        ],
+      },
+      {
+        element: (
+          <TitleDetailsScreen entry={makeTitle('ok', 'verified')} onPlay={jest.fn()} />
+        ),
+        stops: [{ name: 'title-details', reason: 'open a title' }],
+      },
+      {
+        element: <PlayerLayer covered={false} card={NO_CARD} />,
+        stops: [{ name: 'player-clear-none', reason: 'play' }],
+      },
+      {
+        element: <PlayerLayer covered={false} card={cardAt(intervals, 16_000)} />,
+        stops: [{ name: 'player-clear-countdown', reason: 'countdown' }],
+      },
+      {
+        element: <PlayerLayer covered={true} card={cardAt(intervals, 22_000)} />,
+        stops: [{ name: 'player-covered-covering', reason: 'cover on' }],
+      },
+      {
+        element: <PlayerLayer covered={false} card={cardAt(intervals, 24_600)} />,
+        stops: [{ name: 'player-clear-after', reason: 'cover off' }],
+      },
+      {
+        element: (
+          <PlayerLayer covered={true} card={cardAt([], 0, { rejection: 'missing' })} />
+        ),
+        stops: [{ name: 'player-covered-unverified', reason: 'title not checked' }],
+      },
+      {
+        element: (
+          <KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />
+        ),
+        stops: [{ name: 'kid-home', reason: 'back to the shelf' }],
+      },
+      {
+        element: parentArea([makeTitle('ok', 'verified'), blockedTitle()]),
+        stops: [
+          { name: 'parent-area-locked', reason: 'open the parent area' },
+          {
+            name: 'parent-area-wrong-pin',
+            reason: 'wrong PIN',
+            act: () =>
+              pressAll(
+                'parent-area-key-2',
+                'parent-area-key-2',
+                'parent-area-key-2',
+                'parent-area-key-2',
+              ),
+          },
+          {
+            name: 'parent-area-open',
+            reason: 'the right PIN',
+            act: () =>
+              pressAll(
+                'parent-area-key-1',
+                'parent-area-key-3',
+                'parent-area-key-5',
+                'parent-area-key-7',
+              ),
+          },
+        ],
+      },
+      {
+        element: <TitleDetailsScreen entry={blockedTitle()} onPlay={jest.fn()} />,
+        stops: [
+          { name: 'title-details-blocked', reason: 'a title that is not ready' },
+        ],
+      },
+      {
+        element: <CreditsScreen />,
+        stops: [{ name: 'credits', reason: 'open the credits' }],
+      },
     ];
 
-    // A quarter of a second between screens is faster than anyone can press a
-    // button, so it is the worst case for a flash rate.
+    // A quarter of a second between states is faster than anyone can press a
+    // button, so it is the worst case for a flash rate. The screens record
+    // themselves as well, through useUiCapture, and those entries carry the
+    // wall clock. tools/ui_flashmap.mjs ignores both and holds every frame for
+    // 100 ms, which is faster again than either.
     let atMs = 0;
-    for (const [element, name, reason] of walk) {
-      const frame = renderedFrame(name, element);
-      recordUiFrame(frame, reason, atMs);
-      atMs += 250;
+    let stops = 0;
+    for (const scene of scenes) {
+      const { unmount } = render(scene.element);
+      for (const stop of scene.stops) {
+        stop.act?.();
+        const frame = frameFromTree(
+          stop.name,
+          screen.toJSON() as unknown as RenderedNode,
+        );
+        recordUiFrame(frame, stop.reason, atMs);
+        atMs += 250;
+        stops += 1;
+      }
+      unmount();
     }
 
     const timeline = getUiCaptureTimeline();
-    expect(timeline.length).toBeGreaterThanOrEqual(8);
+    expect(timeline.length).toBeGreaterThanOrEqual(stops - 1);
 
     fs.mkdirSync(OUT_DIR, { recursive: true });
     fs.writeFileSync(
