@@ -43,13 +43,18 @@ DIM = (120, 120, 120)
 
 
 def nits(code: int) -> float:
-    """Screen luminance for an 8 bit limited range luma code, as test_broadcast_profile.py
-    reads it, through the profile's own peak white and the BT.1886 curve of SPEC_SOURCES
-    section 5."""
+    """Screen luminance of an 8 bit grey these clips are drawn with.
+
+    clipgen hands full range RGB to the encoder and asks for limited range, so a grey code c
+    comes back out of the decoder at video level c / 255, which was measured rather than
+    assumed: codes 64, 96, 120, 128, 160 and 200 decode to 0.2511, 0.3744, 0.4703, 0.5023,
+    0.6256 and 0.7854. From there it is the profile's own peak white and the BT.1886 curve of
+    SPEC_SOURCES section 5.
+    """
     from flashmap.color import bt1886_nits
 
     peak = BROADCAST_SDR.peak_nits or 200.0
-    return float(bt1886_nits(np.array([(code - 16.0) / 219.0]), peak).item())
+    return float(bt1886_nits(np.array([code / 255.0]), peak).item())
 
 
 @pytest.fixture
@@ -144,6 +149,38 @@ def test_a_picture_under_the_stripe_gate_has_no_pattern_area_at_all(rule):
     )
     assert scan.area_fraction == 0.0
     assert scan.mask.sum() == 0
+
+
+def test_a_black_to_peak_white_grating_is_flagged(hazard_clip, rule):
+    """The worst pattern this generator can draw, and it used to pass.
+
+    A six pair black to peak white grating has a black bar at one edge, and black sits under
+    `LetterboxSettings.max_bar_luminance` on every sampled frame, so the picture detector took
+    that bar for a pillarbox and cropped it away. Eleven bars were left, eleven bars is five
+    pairs, and five pairs is not more than five, so the whole frame strobe pattern with a
+    200 cd/m2 bar difference came back `pass: true`. Found by the verifier on 2026-09-17.
+    """
+    black, white = (0, 0, 0), (255, 255, 255)
+    frames = [clipgen.grating(W, H, FAILING_PAIRS, black, white)] * 40
+    path = hazard_clip("blackwhite.mkv", frames, fps=20)
+    result = analyse(path)
+    assert result.picture.width == result.picture.frame_width, (
+        "a stripe of the pattern was cropped as a pillarbox bar, so the count came up short"
+    )
+    assert not result.picture.pillarbox
+    assert result.pattern_segments, "a full frame black to white grating has to be a pattern"
+    assert result.pattern_segments[0].stripe_pairs == FAILING_PAIRS
+    assert not result.passes
+
+
+def test_the_pair_count_survives_a_black_edge_bar(hazard_clip, rule):
+    """The same crop cost a pattern one pair even when it was still flagged."""
+    black, white = (0, 0, 0), (255, 255, 255)
+    frames = [clipgen.grating(W, H, FAILING_PAIRS + 1, black, white)] * 40
+    path = hazard_clip("blackwhite7.mkv", frames, fps=20)
+    result = analyse(path)
+    assert result.pattern_segments
+    assert result.pattern_segments[0].stripe_pairs == FAILING_PAIRS + 1
 
 
 # ---- the contrast condition ------------------------------------------------------------
@@ -343,6 +380,27 @@ def test_the_scan_finds_stripes_whichever_way_they_run():
 
 
 # ---- the map ---------------------------------------------------------------------------
+
+
+def test_the_diagonal_families_are_real_diagonals_and_not_rows_in_disguise():
+    """A grating the row and column scans cannot reach.
+
+    The value depends on x + y with a bar every 8, on a square picture. A row crosses 8 bars,
+    which is four pairs and under the gate. A line that runs corner to corner crosses twice as
+    many, because x + y moves two for every step along it, so the same picture holds eight
+    pairs in that orientation. BT.1702-3 says stripes in any orientation, so it has to be found.
+    """
+    rows, columns = np.indices((64, 64))
+    frame = np.where(((columns + rows) // 8) % 2 == 0, 60.0, 10.0).astype(np.float32)
+    limits = {"min_delta": 20.0, "dark_below": 160.0, "min_bars": 12}
+
+    flat = stripe_mask(frame, orientations=("rows", "columns"), **limits)
+    assert flat.stripe_pairs < 6 and flat.area_fraction == 0.0
+
+    found = stripe_mask(frame, orientations=PatternSettings().orientations, **limits)
+    assert found.stripe_pairs >= 6
+    assert found.orientation in ("diagonal", "antidiagonal")
+    assert found.area_fraction > 0.25
 
 
 def test_the_map_carries_pattern_segments_where_every_reader_already_looks(hazard_clip, rule):

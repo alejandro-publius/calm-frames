@@ -185,6 +185,29 @@ def detect_picture(
     if left + right >= width:
         left = right = 0
 
+    # A bar is a frame around the picture, so it comes in pairs and it has nothing like itself
+    # inside the picture. Two checks, both of which only ever crop less:
+    #
+    # 1. one dark edge and one bright edge is content touching the edge, not a bar;
+    # 2. a dark line inside the picture means the dark edge is part of a pattern.
+    #
+    # Without these, a black to peak white grating whose outermost bar happens to be dark had
+    # that bar cropped away as a pillarbox. Eleven bars were left, eleven bars is five pairs,
+    # and five pairs is not more than five, so the whole frame six pair strobe pattern came
+    # back clean. Found by the verifier on 2026-09-17. Cropping less makes the picture larger,
+    # which raises the stripe count and lowers every area fraction, so this is the safe
+    # direction for the pattern rule and the cautious one for the flash rules: a flash measured
+    # against a larger picture is a smaller share of it. That is why both checks are written to
+    # fire only on a shape no real letterbox has.
+    if top == 0 or bottom == 0:
+        top = bottom = 0
+    if left == 0 or right == 0:
+        left = right = 0
+    if top and bool(dark_rows[top : height - bottom].any()):
+        top = bottom = 0
+    if left and bool(dark_cols[left : width - right].any()):
+        left = right = 0
+
     top = min(top, int(height * settings.max_bar_fraction))
     bottom = min(bottom, int(height * settings.max_bar_fraction))
     left = min(left, int(width * settings.max_bar_fraction))

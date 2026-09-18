@@ -55,6 +55,30 @@ def test_detect_picture_finds_left_and_right_bars():
     assert (rect.left, rect.width) == (16, 32)
 
 
+def test_a_dark_stripe_at_one_edge_is_not_a_pillarbox():
+    """A bar is a frame around the picture. One dark edge and one bright edge is content.
+
+    This is the shape of a black to white grating whose outermost bar happens to be dark, and
+    cropping it cost the pattern rule a whole pair of stripes.
+    """
+    sample = np.full((48, 64), 0.5, dtype=np.float32)
+    sample[:, :8] = 0.0
+    rect = detect_picture([sample], LetterboxSettings(erode_px=0))
+    assert not rect.pillarbox
+    assert (rect.left, rect.width) == (0, 64)
+
+
+def test_dark_bars_at_both_edges_of_a_grating_are_not_a_pillarbox():
+    """Both edges dark, so symmetry alone would crop. The picture is full of dark columns, and
+    a pillarbox bar has nothing like itself inside the picture, so this is content."""
+    sample = np.full((48, 64), 0.5, dtype=np.float32)
+    for start in range(0, 64, 16):
+        sample[:, start : start + 8] = 0.0
+    rect = detect_picture([sample], LetterboxSettings(erode_px=0))
+    assert not rect.pillarbox
+    assert (rect.left, rect.width) == (0, 64)
+
+
 def test_a_dark_frame_is_not_a_letterboxed_frame():
     sample = np.zeros((48, 64), dtype=np.float32)
     rect = detect_picture([sample])

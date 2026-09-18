@@ -76,8 +76,9 @@ class PatternSettings:
     """
 
     orientations: tuple[str, ...] = ("rows", "columns", "diagonal", "antidiagonal")
-    """Which scan directions are walked. Stripes may be in any orientation and may be radial or
-    curved, so four families are scanned and the pattern area is their union."""
+    """Which scan directions are walked: picture rows, picture columns, and the two families of
+    45 degree lines. Stripes may be in any orientation and may be radial or curved, so four
+    families are scanned and the pattern area is their union."""
 
     motion_history_frames: int = 12
     """How many frame to frame comparisons the motion class is decided on."""
@@ -233,17 +234,57 @@ def scan_bars(
     return bars, first, last
 
 
-def _shear(array: NDArray[np.float32], flip: bool) -> NDArray[np.float32]:
-    """Rows of the result are diagonal lines of `array`.
+def _edge_fill(lines: NDArray[np.float32], valid: NDArray[np.bool_]) -> NDArray[np.float32]:
+    """Replace the samples outside each line's real picture with its nearest real sample.
 
-    Positions that fall outside the picture repeat the nearest real pixel, so the padding is
-    flat and cannot invent a bar boundary. A wrapped shear would have invented one per line.
+    Every line's valid stretch is contiguous, so this is a clamp of the sample index. The
+    padding is then flat and cannot invent a bar boundary, which a wrapped or a zero filled
+    padding would have done once per line.
+    """
+    count = lines.shape[1]
+    low = np.argmax(valid, axis=1)
+    high = count - 1 - np.argmax(valid[:, ::-1], axis=1)
+    index = np.clip(np.arange(count)[None, :], low[:, None], high[:, None])
+    return np.take_along_axis(lines, index, axis=1)
+
+
+def _diagonal_lines(
+    array: NDArray[np.float32], flip: bool
+) -> tuple[NDArray[np.float32], NDArray[np.int64], NDArray[np.int64], NDArray[np.bool_]]:
+    """Scan lines that run at 45 degrees, and where every sample of them sits in the picture.
+
+    Two families, because a diagonal grating is only crossed by one of them. With `flip` False a
+    line holds the samples where x + y is constant, so walking it changes x - y and it crosses
+    stripes that run along the main diagonal. With `flip` True a line holds the samples where
+    x - y is constant and it crosses stripes that run the other way. A picture row is neither of
+    those, which is why this is a real diagonal and not a shear of the rows.
     """
     height, width = array.shape
-    rows = np.arange(height)
-    offsets = (height - 1 - rows) if flip else rows
-    columns = np.arange(width + height - 1)[None, :] - offsets[:, None]
-    return np.take_along_axis(array, np.clip(columns, 0, width - 1), axis=1)
+    count = width + height - 1
+    ys = np.arange(height)[None, :]
+    index = np.arange(count)[:, None]
+    xs = (ys + index - (height - 1)) if flip else (index - ys)
+    valid = (xs >= 0) & (xs < width)
+    columns = np.clip(xs, 0, width - 1)
+    rows = np.broadcast_to(ys, columns.shape)
+    return _edge_fill(array[rows, columns], valid), rows, columns, valid
+
+
+def _diagonal_profile(array: NDArray[np.float32], flip: bool) -> NDArray[np.float32]:
+    """The picture averaged along the stripe direction, so the stripes are left in one line.
+
+    For the family that crosses main diagonal stripes the picture varies with x - y, so the mean
+    over every pixel sharing an x - y is the signal those stripes live in. The other family is
+    the same with x + y. A shift of the pattern along its normal is a lag in this signal.
+    """
+    height, width = array.shape
+    rows, columns = np.indices(array.shape)
+    key = (columns + rows) if flip else (columns - rows + height - 1)
+    flat = key.ravel()
+    length = width + height - 1
+    total = np.bincount(flat, weights=array.ravel().astype(np.float64), minlength=length)
+    count = np.bincount(flat, minlength=length)
+    return (total / np.maximum(1, count)).astype(np.float32)
 
 
 def _span_mask(
@@ -253,10 +294,19 @@ def _span_mask(
     length: int,
     min_bars: int,
 ) -> NDArray[np.bool_]:
-    """The stretch of each qualifying scanline that lies between its outer bar boundaries."""
+    """The stretch of each qualifying scanline the stripes occupy.
+
+    A boundary sits between two bars, so the outermost bars reach about half a bar past the
+    outermost boundaries. Taking the boundaries alone would report a pattern smaller than the
+    one on the screen, and under reporting an area is the direction that lets a hazard through.
+    Half a bar at each end is the symmetric choice and it is detector tuning, not a threshold.
+    """
     qualifies = bars >= min_bars
+    width = (last - first).astype(np.float64) / np.maximum(1, bars - 2)
+    low = np.clip(first - width / 2.0, 0, length - 1)
+    high = np.clip(last + width / 2.0, 0, length - 1)
     index = np.arange(length)[None, :]
-    return qualifies[:, None] & (index >= first[:, None]) & (index <= last[:, None])
+    return qualifies[:, None] & (index >= low[:, None]) & (index <= high[:, None])
 
 
 @dataclass(frozen=True)
@@ -286,69 +336,20 @@ class PatternScan:
     bar_width: float
 
 
-def _median_bar_width(
-    bars: NDArray[np.int32], first: NDArray[np.int32], last: NDArray[np.int32], min_bars: int
+def _profile_bar_width(
+    profile: NDArray[np.float32], min_delta: float, dark_below: float
 ) -> float:
-    qualifies = bars >= min_bars
-    if not qualifies.any():
+    """One bar, measured in samples of the profile the motion is going to be measured in.
+
+    Measured on the profile rather than on the scan lines because the two are not in the same
+    units: one step along a diagonal scan line is not one step along the profile. The lag search
+    needs the profile's own bar width and nothing else. Zero when the profile holds no bars,
+    which the caller reads as no usable motion evidence.
+    """
+    bars, first, last = scan_bars(profile[None, :], min_delta, dark_below)
+    if int(bars[0]) < 3:
         return 0.0
-    spans = (last[qualifies] - first[qualifies]).astype(np.float64)
-    counts = np.maximum(1, bars[qualifies] - 2).astype(np.float64)
-    return float(np.median(spans / counts))
-
-
-def _lines_for(array: NDArray[np.float32], orientation: str) -> NDArray[np.float32]:
-    if orientation == "rows":
-        return array
-    if orientation == "columns":
-        return array.T
-    if orientation in ("diagonal", "antidiagonal"):
-        return _shear(array, flip=orientation == "antidiagonal")
-    raise ValueError(f"unknown scan orientation {orientation!r}")
-
-
-def _finish_scan(
-    orientation: str,
-    lines: NDArray[np.float32],
-    bars: NDArray[np.int32],
-    first: NDArray[np.int32],
-    last: NDArray[np.int32],
-    shape: tuple[int, int],
-    min_bars: int,
-    min_profile_samples: int,
-) -> _Scan:
-    height, width = shape
-    span = _span_mask(bars, first, last, lines.shape[1], min_bars)
-    qualifies = bars >= min_bars
-    best = int(bars.max()) if bars.size else 0
-    bar_width = _median_bar_width(bars, first, last, min_bars)
-
-    mask = np.zeros((height, width), dtype=bool)
-    profile: NDArray[np.float32] | None = None
-    if orientation == "rows":
-        mask |= span[:, :width]
-        if qualifies.any():
-            profile = lines[qualifies].mean(axis=0).astype(np.float32)
-    elif orientation == "columns":
-        mask |= span[:, :height].T
-        if qualifies.any():
-            profile = lines[qualifies].mean(axis=0).astype(np.float32)
-    else:
-        rows = np.arange(height)
-        offsets = (height - 1 - rows) if orientation == "antidiagonal" else rows
-        columns = np.arange(lines.shape[1])[None, :] - offsets[:, None]
-        inside = (columns >= 0) & (columns < width)
-        hits = span[:, : lines.shape[1]] & inside
-        if hits.any():
-            line_index, shear_index = np.nonzero(hits)
-            mask[line_index, columns[line_index, shear_index]] = True
-        # Every sheared line is padded differently, so only the stretch that is real picture on
-        # all of them can be averaged. Below `min_profile_samples` there is nothing to average.
-        low, high = height - 1, width
-        if qualifies.any() and high - low >= min_profile_samples:
-            profile = lines[qualifies, low:high].mean(axis=0).astype(np.float32)
-
-    return _Scan(orientation, best, mask, profile, bar_width)
+    return float(last[0] - first[0]) / float(max(1, int(bars[0]) - 2))
 
 
 def stripe_mask(
@@ -362,27 +363,40 @@ def stripe_mask(
 ) -> PatternScan:
     """The pixels inside a qualifying run of stripes, and what was found there.
 
-    The four scan families are rows, columns and the two diagonal shears, which is how an
-    orientation agnostic count is done without rotating the picture. Their masks are unioned,
-    because a pattern the picture holds is a pattern whichever way it was found. The orientation
-    that counted the most bars is the dominant one, and it is the one motion is measured in.
+    The four scan families are picture rows, picture columns and the two families of 45 degree
+    lines, which is how an orientation agnostic count is done without rotating the picture.
+    Their masks are unioned, because a pattern the picture holds is a pattern whichever way it
+    was found. The family that counted the most bars is the dominant one, and it is the one
+    motion is measured in.
 
-    All four families are walked in one pass over a stacked array. Short families are padded by
-    repeating their last sample, which is flat and so cannot invent a bar.
+    All four are walked in one pass over a stacked array. Short families are padded by repeating
+    their last sample, which is flat and so cannot invent a bar.
     """
     array = np.asarray(metric, dtype=np.float32)
     height, width = array.shape
-    families = [(orientation, _lines_for(array, orientation)) for orientation in orientations]
-    if not families:
+    if not orientations or height < 2 or width < 2:
         return PatternScan(np.zeros((height, width), dtype=bool), 0, 0.0, None, None, 0.0)
 
-    longest = max(lines.shape[1] for _, lines in families)
+    families = []
+    for orientation in orientations:
+        if orientation == "rows":
+            families.append((orientation, array, None, None, None))
+        elif orientation == "columns":
+            families.append((orientation, array.T, None, None, None))
+        elif orientation in ("diagonal", "antidiagonal"):
+            flip = orientation == "antidiagonal"
+            lines, rows, columns, valid = _diagonal_lines(array, flip)
+            families.append((orientation, lines, rows, columns, valid))
+        else:
+            raise ValueError(f"unknown scan orientation {orientation!r}")
+
+    longest = max(lines.shape[1] for _, lines, _, _, _ in families)
     stacked = np.concatenate(
         [
             lines
             if lines.shape[1] == longest
             else np.pad(lines, ((0, 0), (0, longest - lines.shape[1])), mode="edge")
-            for _, lines in families
+            for _, lines, _, _, _ in families
         ],
         axis=0,
     )
@@ -391,33 +405,50 @@ def stripe_mask(
     mask = np.zeros((height, width), dtype=bool)
     dominant: _Scan | None = None
     offset = 0
-    for orientation, lines in families:
+    for orientation, lines, rows, columns, valid in families:
         count = lines.shape[0]
         piece = slice(offset, offset + count)
         offset += count
-        scan = _finish_scan(
+        line_bars = bars[piece]
+        span = _span_mask(line_bars, first[piece], last[piece], lines.shape[1], min_bars)
+        qualifies = line_bars >= min_bars
+        best = int(line_bars.max()) if line_bars.size else 0
+
+        profile: NDArray[np.float32] | None = None
+        if orientation == "rows":
+            mask |= span
+            if qualifies.any():
+                profile = lines[qualifies].mean(axis=0).astype(np.float32)
+        elif orientation == "columns":
+            mask |= span.T
+            if qualifies.any():
+                profile = lines[qualifies].mean(axis=0).astype(np.float32)
+        else:
+            hits = span & valid
+            if hits.any():
+                mask[rows[hits], columns[hits]] = True
+            if qualifies.any() and lines.shape[1] >= min_profile_samples:
+                profile = _diagonal_profile(array, flip=orientation == "antidiagonal")
+
+        scan = _Scan(
             orientation,
-            lines,
-            bars[piece],
-            first[piece],
-            last[piece],
-            (height, width),
-            min_bars,
-            min_profile_samples,
+            best,
+            mask,
+            profile,
+            0.0 if profile is None else _profile_bar_width(profile, min_delta, dark_below),
         )
-        mask |= scan.mask
         if dominant is None or scan.bars > dominant.bars:
             dominant = scan
 
-    pairs = (dominant.bars // 2) if dominant is not None else 0
-    qualifying = dominant is not None and dominant.bars >= min_bars
+    assert dominant is not None
+    qualifying = dominant.bars >= min_bars
     return PatternScan(
         mask=mask,
-        stripe_pairs=pairs,
+        stripe_pairs=dominant.bars // 2,
         area_fraction=float(mask.mean()) if mask.size else 0.0,
-        orientation=dominant.orientation if qualifying and dominant else None,
-        profile=dominant.profile if qualifying and dominant else None,
-        bar_width=dominant.bar_width if qualifying and dominant else 0.0,
+        orientation=dominant.orientation if qualifying else None,
+        profile=dominant.profile if qualifying else None,
+        bar_width=dominant.bar_width if qualifying else 0.0,
     )
 
 
@@ -604,6 +635,12 @@ class PatternTracker:
         if still:
             self._history.append(
                 _Comparison(True, reversed_contrast, flashed, False, 0, 1.0, False)
+            )
+            return
+        if scan.bar_width <= 0:
+            # No bar width in the profile, so no lag search can be trusted. No evidence.
+            self._history.append(
+                _Comparison(False, reversed_contrast, flashed, False, 0, 0.0, True)
             )
             return
         max_shift = max(1, int(scan.bar_width) - 1)
