@@ -134,3 +134,47 @@ def test_the_pool_refuses_to_rebuild_once_somebody_has_started_labelling(tmp_pat
     assert "labels_labeller_a.csv" in finished.stderr
     assert not (tmp_path / "pool.json").exists(), "it wrote a new pool anyway"
     assert not (tmp_path / "pool_key.json").exists()
+
+
+def test_the_csv_sheet_has_nothing_on_it_but_the_id_and_the_window(tmp_path):
+    """The file the labeller types into. FABRICATED FOR TEST ONLY pool of two segments.
+
+    Break it: add the file name, the source or a detector column to make_sheets.COLUMNS, and
+    this goes red.
+    """
+    pool = tmp_path / "pool.json"
+    pool.write_text(
+        json.dumps(
+            {
+                "segments": [
+                    {"segment_id": "seg000", "seconds": 10.0, "windows": 10, "plot": "plots/seg000.png"},
+                    {"segment_id": "seg001", "seconds": 10.0, "windows": 10, "plot": "plots/seg001.png"},
+                ]
+            }
+        )
+    )
+    finished = subprocess.run(
+        [
+            sys.executable,
+            str(EVAL_DIR / "labeling" / "make_sheets.py"),
+            "--pool",
+            str(pool),
+            "--out-dir",
+            str(tmp_path),
+            "--labeller",
+            "invented_for_test_only",
+        ],
+        capture_output=True,
+        text=True,
+        timeout=300,
+    )
+    assert finished.returncode == 0, finished.stderr
+
+    sheet = tmp_path / "labels_invented_for_test_only.csv"
+    lines = sheet.read_text().splitlines()
+    assert lines[0] == "segment_id,window_index,window_start_s,label,unlabelable,notes"
+    assert len(lines) == 21, "two segments of ten windows, plus the header"
+    for line in lines[1:]:
+        cells = line.split(",")
+        assert cells[0].startswith("seg")
+        assert cells[3:] == ["", "", ""], f"a sheet row arrives with something already on it: {line}"
