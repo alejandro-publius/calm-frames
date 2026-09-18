@@ -35,6 +35,10 @@ An earlier status said the GATE 1 rehearsal covered 20 of 20 markers in time, wo
 
 It surfaced because a second, stricter script needed a position report from the player before counting anything, and returned zero usable trials. Both scripts now refuse to count a marker the player never reached, and a third rule was added after that: a trial where playback stalled between the cover and the marker is recorded and excluded, because the cover being held for forty seconds says nothing about whether the schedule fires early enough. The full retraction is in docs/GATES.md.
 
+**The re-run worked, and it found something.** On a packed clip across 22 app launches: 49 usable trials, 48 covered in time, median lead 488 ms against a 500 ms guard band. One cover went on 86 ms **after** its marker started. The scheduler re-anchors on every position report and re-checks every 50 ms, so that is the JavaScript thread being unavailable for about a third of a second, not a scheduling error. It means the guard band has to be wider than the worst pause of that thread and nobody has measured that pause on hardware. This is still software-level and stays labelled that way.
+
+**A second wrong number was caught before it was written down.** Rebuilding that summary from its own events by splitting the passes on each `harness-start` gave 54 trials and a 13.3 s lead, because two passes opened with a batch the previous app instance posted late. The right split is the per-pass event counts the summary records. `eval/verify_gate1_archive.py` now does that rebuild in CI and was checked by breaking it five ways.
+
 ## 4. Where each lane stands
 
 **The app.** Countdown card with a D-pad Skip, the cover, the after-card, and a minimum cover length. Fail closed for missing, stale, unsigned, unparseable and wrong-hash maps, with real Ed25519 verification written for Vega, which has no crypto API, checked against RFC 8032 vectors. Seek safety through one function for the seek bar, D-pad, trickplay and Alexa transport commands. VoiceView announcements, a parent area behind a PIN where room settings can only add hides, and a kid home with shield badges. **The app's own UI passes flashmap: 9 screens, 0 segments, checked in CI.** 563 tests, 15 mutations all seen red.
@@ -74,5 +78,5 @@ Every one comes from `results/`, and CI fails if a document drifts from them.
 ## 7. Next
 
 1. Send the emails tomorrow.
-2. When the stick arrives: `make stick-day`, then film. That is the gate.
+2. When the stick arrives: `make stick-day`, then film. That is the gate. **Add one measurement to it:** the worst gap between two scheduler ticks. The harness re-checks every 50 ms, so logging the longest gap between consecutive checks gives the worst pause of the JavaScript thread, and the guard band should be set above it rather than at the 500 ms we picked by judgement. This is not instrumented yet.
 3. Meanwhile: more titles through verify, IRIS when the Docker VM frees up, and finish the conformance run.
