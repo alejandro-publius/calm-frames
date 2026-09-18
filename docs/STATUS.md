@@ -48,6 +48,7 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | **Same session** | Film the layering test, then the 240 fps marker run. | **This is the only thing that can produce a GATE 1 number.** Phone at 240 fps, exposure locked, TV in game mode with motion smoothing off. `make stick-day` prints what to film and where the files go. |
 | **Before then** | Confirm your phone films 240 fps and the TV has a game mode. | Assumed, never confirmed. If either is wrong, GATE 1 needs a different plan and it is better to know now. |
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
+| **Any evening, about an hour** | Label the 40 blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all 40. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. |
 | **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add that line to this file. It has to start a line of its own: no bullet, no table cell, no backticks. The exact wording is in the refusal `make deploy` prints. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Seventeen tests now cover both locks, run against a copy of the script so this file is never touched. Nothing has touched AWS. |
 | **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
 | **Oct 19 to 20** | Film the video from `docs/VIDEO_SCRIPT.md`, timed to 2:55. | |
@@ -56,7 +57,19 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 
 ### The red footage, specifically
 
-Every flagged segment in the screened pool fired the general rule. **Not one fired the red rule.** The pool has no saturated red strobe and no sustained regular strobe, and no free third-party footage was found that covers it. So the clips to film are red emergency-vehicle lights, red stage lighting, and a steady strobe. docs/SAFETY.md applies in full: whoever films is not photosensitive and does not look at the lights.
+Every flagged segment in the screened pool fired the general rule. **Not one fired the red rule**, across 456 flagged segments. The pool has no saturated red strobe and no sustained regular strobe, and no free third-party footage was found that covers it.
+
+Five clips, listed with their rates in `results/screening.json` under `self_filmed_needed`, all still needed. The rates are multiples of the analyser's own per second limit, read from the wcag profile rather than typed in:
+
+| Clip | Rate | Length | What it is |
+|---|---|---|---|
+| `red_emergency_lightbar` | 6 a second | 30 s | A red emergency vehicle light bar filling most of the frame, head on after dark or against a dark wall. The red has to be the lamp, not a red wash on something pale. |
+| `red_stage_wash` | 4 a second | 30 s | A red stage or party light washing the whole frame, chased on and off, close enough that red fills the picture. The red positive near the limit. |
+| `red_below_the_limit` | 2 a second | 20 s | The same rig as above, flashing slowly, nothing else changed. **The red negative control**: without it a red flag only says the picture was red. |
+| `white_strobe_steady` | 10 a second | 30 s | A white strobe on a plain wall, one steady rate for the whole take. Nothing in the pool holds a rate for more than a second or two. |
+| `strobe_small_area` | 10 a second | 20 s | The same strobe as a small lamp in a wide shot, flashing part about a tenth of the picture. The area rule negative. |
+
+Filming notes: 60 fps if the camera has it, shutter and exposure locked because a rolling shutter can record a rate that was not in the room, no auto exposure, one take each, no grading, and write the rate actually set into `media/LICENSES.csv`. **docs/SAFETY.md applies in full: whoever films is not photosensitive and does not look at the lights.**
 
 ## 3. A number was published and withdrawn
 
