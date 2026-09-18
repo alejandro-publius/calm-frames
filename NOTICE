@@ -3,4 +3,276 @@ Copyright 2026 The Calm Frames authors
 
 This product is licensed under the Apache License, Version 2.0 (see LICENSE).
 
-Third-party material is listed below as it is added, with its license.
+Two kinds of third-party material are listed here: the code this is built on, and the video it
+was built and measured with. The video list below the marker is written from media/LICENSES.csv
+by eval/attribution.py, which writes the app's own credits screen from the same rows, so the
+credits on the television and the credits in this file cannot say different things. CI fails if
+either drifts.
+
+## Code
+
+**Vega Video Sample App**, AmazonAppDev/vega-video-sample at tag v0.24-RN83, commit
+ef8e4da89b22ef7973d0d41beedfa2b42f7bb272. Copyright Amazon.com, Inc. or its affiliates.
+Licensed under MIT-0. `app/` began as a copy of it, its licence and notices are kept in
+`app/LICENSE`, and the Calm Frames work sits alongside it under Apache-2.0.
+
+**Shaka Player**, https://github.com/shaka-project/shaka-player, Apache-2.0. Bundled by the
+sample app's own build. Its licence text is in `app/LICENSE-THIRD-PARTY`.
+
+## A rule about one title
+
+Hell's Angels (1930) is kept out of the demo video and out of anything else we publish, because
+of the trademark. No copy of it was used. It is named in the list of sources considered and not
+used, at the bottom of this file, so that the reason is on the record rather than forgotten.
+
+<!-- BEGIN media credits, written by eval/attribution.py. Do not edit by hand. -->
+
+## Video used to build and measure Calm Frames
+
+Every clip below was downloaded only after its licence and its credit line were read on
+the page linked beside it. The files themselves are not in this repository. What is here
+is this list, and the SHA-256 of each file in media/LICENSES.csv.
+
+### Big Buck Bunny
+
+- Licence: CC BY 3.0
+- Credit: (c) copyright 2008, Blender Foundation / www.bigbuckbunny.org
+- Source: https://peach.blender.org/about/
+- The Blender logos and trademarks are not covered by this licence. They are not used here.
+
+### Buenos Aires fireworks
+
+- Licence: CC BY 2.0
+- Credit: Colin and Sarah Northway, CC BY 2.0, via Wikimedia Commons
+- Source: https://commons.wikimedia.org/wiki/File:Buenos_Aires_fireworks.webm
+
+### Clouds 101 (SVS20383 - HightAltCloud V05)
+
+- Licence: Public domain
+- Credit: NASA's Scientific Visualization Studio - Advocates in Manpower Management, Inc./Jenny McElligott via Wikimedia Commons, Public domain
+- Source: https://commons.wikimedia.org/wiki/File%3AClouds%20101%20%28SVS20383%20-%20HightAltCloud%20V05%29.webm
+- NASA is named as the source. The NASA insignia, logotype and identifiers are not public domain, they are not used, and nothing here implies NASA endorses this.
+
+### Clouds 101 (SVS20383 - LowAltClouds V05)
+
+- Licence: Public domain
+- Credit: NASA's Scientific Visualization Studio - Advocates in Manpower Management, Inc./Jenny McElligott via Wikimedia Commons, Public domain
+- Source: https://commons.wikimedia.org/wiki/File%3AClouds%20101%20%28SVS20383%20-%20LowAltClouds%20V05%29.webm
+- NASA is named as the source. The NASA insignia, logotype and identifiers are not public domain, they are not used, and nothing here implies NASA endorses this.
+
+### Clouds-seloncourt
+
+- Licence: CC BY 2.0
+- Credit: Thomas Bresson via Wikimedia Commons, CC BY 2.0
+- Source: https://commons.wikimedia.org/wiki/File%3AClouds-seloncourt.ogv
+
+### Eastern Europe to Southeastern Asia at Night
+
+- Licence: Public domain (NASA)
+- Credit: ISS Expedition 29 crew, NASA
+- Source: https://commons.wikimedia.org/wiki/File:Eastern_Europe_to_Southeastern_Asia_at_Night.ogv
+- NASA is named as the source. The NASA insignia, logotype and identifiers are not public domain, they are not used, and nothing here implies NASA endorses this.
+
+### Fireworks in summer
+
+- Licence: CC BY-SA 4.0
+- Credit: Joyful spherical creature, CC BY-SA 4.0, via Wikimedia Commons
+- Source: https://commons.wikimedia.org/wiki/File:Fireworks_in_summer.webm
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+
+### Fireworks Safety
+
+- Licence: Public domain (U.S. government work)
+- Credit: Courtesy video via DVIDS. The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.
+- Source: https://www.dvidshub.net/video/929265/fireworks-safety
+- The non-endorsement notice above is required by DVIDS and travels with the clip. Military insignia, seals and symbols are protected marks and are not used.
+
+### Frozen Frolics (1930)
+
+- Licence: Public domain (U.S. work published 1930)
+- Credit: Frozen Frolics (1930), Van Beuren Studios, public domain, via the Internet Archive
+- Source: https://archive.org/details/frozen-frolics-1930
+
+### Fuochi d'artificio - Rieti, capodanno 2011
+
+- Licence: CC BY 3.0
+- Credit: Alessandro Antonelli, CC BY 3.0, via Wikimedia Commons
+- Source: https://commons.wikimedia.org/wiki/File:Fuochi_d%27artificio_-_Rieti,_capodanno_2011.ogv
+
+### Growing cumulus clouds in time lapse
+
+- Licence: CC0
+- Credit: Wolf170278 via Wikimedia Commons, CC0
+- Source: https://commons.wikimedia.org/wiki/File%3AGrowing%20cumulus%20clouds%20in%20time%20lapse.ogv
+
+### Ignis Brunensis 2010-05-22
+
+- Licence: CC BY-SA 3.0
+- Credit: Ignis Brunensis 2010-05-22, CC BY-SA 3.0, via Wikimedia Commons
+- Source: https://commons.wikimedia.org/wiki/File:Ignis_Brunensis_2010-05-22.ogv
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+- The author asks to be told if the work is used away from Wikimedia. Tell them before we publish anything made from it.
+
+### Irminger waves without sound (OOI)
+
+- Licence: Public domain
+- Credit: Ocean Observatories Initiative via Wikimedia Commons, Public domain
+- Source: https://commons.wikimedia.org/wiki/File%3AIrminger%20waves%20without%20sound%20%28OOI%29.webm
+
+### Jezioro Cisie - panorama 1080p
+
+- Licence: CC BY-SA 4.0
+- Credit: Lubicz via Wikimedia Commons, CC BY-SA 4.0
+- Source: https://commons.wikimedia.org/wiki/File%3AJezioro%20Cisie%20-%20panorama%201080p.webm
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+
+### Lightning - condensed version
+
+- Licence: CC BY-SA 4.0
+- Credit: W.carter, CC BY-SA 4.0, via Wikimedia Commons
+- Source: https://commons.wikimedia.org/wiki/File:Lightning_-_condensed_version.webm
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+
+### Lightning in Slow Motion (Free to Use HD Stock Video Footage)
+
+- Licence: CC BY 3.0
+- Credit: Jeffrey Beach, CC BY 3.0, via Wikimedia Commons
+- Source: https://commons.wikimedia.org/wiki/File:Lightning_in_Slow_Motion_(Free_to_Use_HD_Stock_Video_Footage).webm
+
+### Lightning seen from the International Space Station, NASA SVS 5011
+
+- Licence: Public domain (NASA media usage policy)
+- Credit: NASA's Scientific Visualization Studio
+- Source: https://svs.gsfc.nasa.gov/5011
+- NASA is named as the source. The NASA insignia, logotype and identifiers are not public domain, they are not used, and nothing here implies NASA endorses this.
+
+### Lightningblackout1
+
+- Licence: CC BY 3.0
+- Credit: Couch-scratching-cats, CC BY 3.0, via Wikimedia Commons
+- Source: https://commons.wikimedia.org/wiki/File:Lightningblackout1.webm
+
+### LightningStrike240FPS
+
+- Licence: CC BY-SA 4.0
+- Credit: GalaxyDoge72, CC BY-SA 4.0, via Wikimedia Commons
+- Source: https://commons.wikimedia.org/wiki/File:LightningStrike240FPS.webm
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+
+### Night Pass over Central Africa and the Middle East
+
+- Licence: Public domain (NASA)
+- Credit: ISS Expedition 29 crew, NASA
+- Source: https://commons.wikimedia.org/wiki/File:Night_Pass_over_Central_Africa_and_the_Middle_East.ogv
+- NASA is named as the source. The NASA insignia, logotype and identifiers are not public domain, they are not used, and nothing here implies NASA endorses this.
+
+### Night Pass over Malaysia
+
+- Licence: Public domain (NASA)
+- Credit: ISS Expedition 28 crew, NASA
+- Source: https://commons.wikimedia.org/wiki/File:Night_Pass_over_Malaysia.ogv
+- NASA is named as the source. The NASA insignia, logotype and identifiers are not public domain, they are not used, and nothing here implies NASA endorses this.
+
+### PlanePassingThunderCloud
+
+- Licence: CC BY-SA 4.0
+- Credit: Docfirerock via Wikimedia Commons, CC BY-SA 4.0
+- Source: https://commons.wikimedia.org/wiki/File%3APlanePassingThunderCloud.ogv
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+
+### Sea of clouds over Asia
+
+- Licence: CC BY-SA 4.0
+- Credit: Asaf Bartov via Wikimedia Commons, CC BY-SA 4.0
+- Source: https://commons.wikimedia.org/wiki/File%3ASea%20of%20clouds%20over%20Asia.webm
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+
+### Sintel
+
+- Licence: CC BY 3.0
+- Credit: (c) copyright Blender Foundation | durian.blender.org
+- Source: https://durian.blender.org/sharing/
+- The Blender logos and trademarks are not covered by this licence. They are not used here.
+
+### Soldiers Fire Illumination Flares
+
+- Licence: Public domain (U.S. government work)
+- Credit: Courtesy video, Defense Imagery Management Operations Center, via DVIDS. The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.
+- Source: https://www.dvidshub.net/video/16304/soldiers-fire-illumination-flares
+- The non-endorsement notice above is required by DVIDS and travels with the clip. Military insignia, seals and symbols are protected marks and are not used.
+
+### Stockfootage - Setting Sun
+
+- Licence: CC BY 3.0
+- Credit: stockfootage via Wikimedia Commons, CC BY 3.0
+- Source: https://commons.wikimedia.org/wiki/File%3AStockfootage%20-%20Setting%20Sun.webm
+
+### Sunset at the sea of Azov
+
+- Licence: CC BY 4.0
+- Credit: Igor da Bari via Wikimedia Commons, CC BY 4.0
+- Source: https://commons.wikimedia.org/wiki/File%3ASunset%20at%20the%20sea%20of%20Azov.webm
+
+### Sunset in Spain
+
+- Licence: CC BY 2.0
+- Credit: BY-YOUR-⌘ via Wikimedia Commons, CC BY 2.0
+- Source: https://commons.wikimedia.org/wiki/File%3ASunset%20in%20Spain.webm
+
+### Sunset Time Lapse 31-12-2009
+
+- Licence: CC BY-SA 3.0
+- Credit: XtUProductions via Wikimedia Commons, CC BY-SA 3.0
+- Source: https://commons.wikimedia.org/wiki/File%3ASunset%20Time%20Lapse%2031-12-2009.ogv
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+
+### Sunset timelapse Lake Huron looking west from Port Albert
+
+- Licence: CC BY-SA 4.0
+- Credit: Ian Furst via Wikimedia Commons, CC BY-SA 4.0
+- Source: https://commons.wikimedia.org/wiki/File%3ASunset%20timelapse%20Lake%20Huron%20looking%20west%20from%20Port%20Albert.webm
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+
+### Sunset under the Golden Gate Bridge, February 10 2025
+
+- Licence: CC BY-SA 4.0
+- Credit: SnowShoes8 via Wikimedia Commons, CC BY-SA 4.0
+- Source: https://commons.wikimedia.org/wiki/File%3ASunset%20under%20the%20Golden%20Gate%20Bridge%2C%20February%2010%202025.webm
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+
+### Tears of Steel
+
+- Licence: CC BY 3.0 (conditional on keeping the credit scroll)
+- Credit: (CC) Blender Foundation | mango.blender.org
+- Source: https://mango.blender.org/about/
+- The Blender logos and trademarks are not covered by this licence. They are not used here.
+- This licence holds only while the credit scroll stays in the film, so the file is kept whole and the scroll is never cut.
+
+### The Booze Hangs High (1930)
+
+- Licence: Public domain (U.S. work published 1930)
+- Credit: The Booze Hangs High (1930), public domain, via the Internet Archive
+- Source: https://archive.org/details/the-booze-hangs-high-1930
+
+### Water Waves Greece
+
+- Licence: CC BY 3.0
+- Credit: Tanzania via Wikimedia Commons, CC BY 3.0
+- Source: https://commons.wikimedia.org/wiki/File%3AWater%20Waves%20Greece.ogv
+
+### Waves-1013354, Dingle Peninsula, Co. Kerry, Ireland
+
+- Licence: CC BY-SA 4.0
+- Credit: Maoileann via Wikimedia Commons, CC BY-SA 4.0
+- Source: https://commons.wikimedia.org/wiki/File%3AWaves-1013354%2C%20Dingle%20Peninsula%2C%20Co.%20Kerry%2C%20Ireland.webm
+- Share alike. Anything we publish that is made from this clip carries the same licence.
+
+## Considered and not used
+
+These were looked at and left alone, each for the reason given. Nothing from them is in this project.
+
+- https://developer.apple.com/streaming/examples/: source: Apple sample video. SKIPPED. The examples page carries no license grant or terms for reusing the sample streams, only Apple's site-wide terms. Under the repo rule that anything unverified is dropped, we do not download it. Baseline sanity uses a locally generated ffmpeg clip instead, which has no license question at all.
+- https://www.nssl.noaa.gov/news/b-roll/: source: NOAA NSSL B-roll. SKIPPED. The b-roll page serves its clips through a Vimeo showcase and exposes no direct file links, and no yt-dlp is installed on this machine. Nothing was downloaded. NOAA works are generally public domain, but we did not verify a per-clip statement, so the source is open rather than confirmed.
+- https://archive.org/search?query=hell%27s+angels+1930: source: Hell's Angels (1930). SKIPPED. No copy of the 1930 film is on the Internet Archive; the hits are unrelated modern documentaries. Not downloaded. If a copy turns up, note that the repo rule keeps that title out of anything we publish because of the trademark.
+
+<!-- END media credits -->

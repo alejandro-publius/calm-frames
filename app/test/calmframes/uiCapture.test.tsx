@@ -21,6 +21,7 @@ import CalmCard from '../../src/calmframes/CalmCard';
 import { CALM_COLORS } from '../../src/calmframes/calmStyles';
 import { Card, cardAt, NO_CARD } from '../../src/calmframes/cards';
 import CoverLayer from '../../src/calmframes/CoverLayer';
+import CreditsScreen from '../../src/calmframes/CreditsScreen';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
@@ -253,6 +254,7 @@ describe('the capture path', () => {
         'parent-area-locked',
         'open the parent area',
       ],
+      [<CreditsScreen />, 'credits', 'open the credits'],
     ];
 
     // A quarter of a second between screens is faster than anyone can press a

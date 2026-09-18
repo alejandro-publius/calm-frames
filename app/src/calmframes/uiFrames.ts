@@ -52,6 +52,18 @@ export const PARENT_OPEN_FRAME: UiFrame = {
 };
 
 /**
+ * The credits.
+ *
+ * One card colour behind every entry and nothing else, so arriving here from
+ * any other screen is the same small step in brightness as any other move.
+ */
+export const CREDITS_FRAME: UiFrame = {
+  screen: 'credits',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE],
+};
+
+/**
  * The colour standing in for the video itself.
  *
  * When the cover is off, what is behind the app's layer is the title, and the
@@ -86,6 +98,7 @@ export const ALL_UI_FRAMES: UiFrame[] = [
   TITLE_DETAILS_FRAME,
   PARENT_LOCKED_FRAME,
   PARENT_OPEN_FRAME,
+  CREDITS_FRAME,
   playerFrame(false, 'none'),
   playerFrame(false, 'countdown'),
   playerFrame(true, 'covering'),
