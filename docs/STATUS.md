@@ -2,6 +2,35 @@
 
 Updated Thu Sep 17, 2026, late evening PT.
 
+## 0. Where the recovery pass left things
+
+The tree is clean and pushed, and the two suites the CI command runs are green
+here: 973 Python tests and 671 app tests. Three things were making CI red and all
+three are fixed. The python job never installed matplotlib, so
+`eval/tests/test_labeling_plots.py` failed to import and took the whole job down
+at collection, which is worse than one red test because it hid the other two
+behind it. Under that, a scheduler property was failing for real. And the new
+hardening job stays red until a full mutation report is committed, which is
+running now. The screening sweep and the ingest chain that were still going have
+finished; the re-verify took the pool to **21 titles verified**, all 21 with a row
+in `media/LICENSES.csv`.
+
+Two defects came out of the recovery rather than out of a plan, and both are the
+kind that a green suite was hiding. The media clock kept running through every
+buffer, because `waiting` was missing from the list of events that stop it while
+`stalled` and `pause` were on it; a four second buffer left the estimate 4,000 ms
+ahead of the playhead. The picture stayed covered throughout, so this was never a
+hole in the cover, but every number taken off that clock, which is the drift and
+the cover lead GATE 1 reports, was wrong by the length of the buffer. Separately
+the property harness was answering a seek that lands inside a stall with a
+position report a stalled player never sends, which is what the 75 ms failure
+was. Both are fixed, both were seen red first, and the estimate error across
+every case probed is now 0.00 ms rather than merely inside its bound. The full
+mutation gate ran for the first time: 57 mutations, 54 killed. Of the three that
+lived, one was a real gap in the property tests and is closed, one is redundancy
+and is recorded as equivalent with the experiment that proves it, and one was
+already known equivalent.
+
 ## 1. The head-start kits are still not here, asked for twice
 
 **`day-one-head-start.zip` is not on this machine.** Not at the repo root, not in `~/Downloads`, nowhere within four levels of your home folder, and Spotlight finds nothing by that name. `headstart/` is still the empty directory from day one. Neither `rubric-amazon.md` nor `outreach-kit.md` is here.
@@ -43,7 +72,7 @@ It surfaced because a second, stricter script needed a position report from the 
 
 **The app.** Countdown card with a D-pad Skip, the cover, the after-card, and a minimum cover length. Fail closed for missing, stale, unsigned, unparseable and wrong-hash maps, with real Ed25519 verification written for Vega, which has no crypto API, checked against RFC 8032 vectors. Seek safety through one function for the seek bar, D-pad, trickplay and Alexa transport commands. VoiceView announcements, a parent area behind a PIN where room settings can only add hides, and a kid home with shield badges. **The app's own UI passes flashmap: 20 screens and transitions, 0 segments, checked in CI.**
 
-**Kid mode is reachable.** The app opens on Calm Frames: the first run sets a PIN, a preset and the room, then the shelf, a title, and the parent area behind that PIN. The shelf hands the player the map it verified, and the player itself now refuses to show a picture without one, so the five sample screens that still navigate to it the old way get a black picture and a card saying the title is not checked. A first run, empty and error states for every screen, and a ten foot pass measured rather than eyeballed: 32 units is the smallest text anywhere, 5.82 to 1 the worst contrast, 96 by 54 units the safe margins on every screen. The virtual device cannot be photographed, so those are measurements off the rendered screens, in `app/build/ui-capture/ten-foot.json`. 656 tests, and every new guard was broken on purpose and seen red before it was trusted.
+**Kid mode is reachable.** The app opens on Calm Frames: the first run sets a PIN, a preset and the room, then the shelf, a title, and the parent area behind that PIN. The shelf hands the player the map it verified, and the player itself now refuses to show a picture without one, so the five sample screens that still navigate to it the old way get a black picture and a card saying the title is not checked. A first run, empty and error states for every screen, and a ten foot pass measured rather than eyeballed: 32 units is the smallest text anywhere, 5.12 to 1 the worst contrast, 96 by 54 units the safe margins on every screen. The virtual device cannot be photographed, so those are measurements off the rendered screens, in `app/build/ui-capture/ten-foot.json`. 671 tests, and every new guard was broken on purpose and seen red before it was trusted.
 
 **flashmap.** WCAG general and red flash, area windows, letterbox handling, real timestamps, chunked analysis, the room rule, signed sidecars, the CLI and the GitHub Action. Theora decoding is fixed with a regression fixture. Over 200 tests, 42 mutations all killed.
 
@@ -60,7 +89,18 @@ It surfaced because a second, stricter script needed a position report from the 
 ## 5. What is not done
 
 - **No cover lead time on real hardware**, and none is possible until the stick arrives. There is now a software-level figure in `results/gate1_software_vvd.json`: 49 trials, 48 covered in time, median lead 488 ms, and one cover that went on 86 ms late because the JavaScript thread paused for about a third of a second. It is labelled as software-level: it cannot see the React commit, the compositor, scan-out or the panel, so it is an upper bound on how well the real thing can do, never a prediction of it.
-- **Fewer than 20 titles pass verify.** Verify refuses titles for real reasons, which is the point of it.
+- **21 titles pass verify, and only 7 of them prove anything.** Every one of the
+  21 has a row in `media/LICENSES.csv`. But 14 have `covered_ms = 0` and no
+  flagged segment at all: the analyzer looked and found nothing over the
+  thresholds, which for gentle cloud and sunset footage is the right answer and
+  is not evidence that anything was covered. Worse, `pipeline/verify.py` wraps
+  the `cover_actually_drawn` check in `if sampled and still.exists()`, so with no
+  intervals that check is skipped for every preset and a title with nothing to
+  hide still collects 38 passing checks. The seven that exercise the whole path,
+  detect then plan then cover then prove the cover drew, are fireworks_rieti,
+  lightning_blackout, lightning_240fps, illumination_flares, jezioro_cisie,
+  irminger_waves and dvids_fireworks_safety. **Never publish the 21 on its own.**
+  Adding more calm footage raises it without adding evidence.
 - **EA IRIS is not built**, so the baselines table has ffmpeg and naive but no IRIS. The shared Docker VM has another project's services in it, and a vcpkg OpenCV build there could get their containers killed rather than the compiler.
 - **The conformance run is partial**, and `results/conformance.json` says so in its own statement field rather than implying a full 3,000-clip run.
 - **The demo PIN does not exist yet**, so the release notes say so.
