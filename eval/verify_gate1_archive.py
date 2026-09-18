@@ -60,6 +60,10 @@ REBUILT_FIELDS = (
     "in_time_fraction",
     "wilson_95_interval",
     "lead_ms",
+    "lead_ms_unforced",
+    "lead_media_ms",
+    "lead_media_ms_unforced",
+    "forced_covers",
     "worst_lead_ms",
 )
 
@@ -138,6 +142,20 @@ def rebuild(events: list[dict], summary: dict, schedule: dict) -> dict:
         "in_time_fraction": round(len(in_time) / len(counted), 4) if counted else None,
         "wilson_95_interval": wilson_interval(len(in_time), len(counted)),
         "lead_ms": summarize(leads),
+        "lead_ms_unforced": summarize(
+            [float(t["lead_ms"]) for t in counted if not t.get("forced_by")]
+        ),
+        "lead_media_ms": summarize(
+            [float(t["lead_media_ms"]) for t in counted if "lead_media_ms" in t]
+        ),
+        "lead_media_ms_unforced": summarize(
+            [
+                float(t["lead_media_ms"])
+                for t in counted
+                if "lead_media_ms" in t and not t.get("forced_by")
+            ]
+        ),
+        "forced_covers": len([t for t in counted if t.get("forced_by")]),
         "worst_lead_ms": round(min(leads), 1) if leads else None,
         "_trials_per_pass": per_pass,
     }

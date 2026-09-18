@@ -143,5 +143,28 @@
     "low": 0.7598,
     "high": 0.937
   },
-  "accounting": "strict counts every trial that was started, including the ones that produced no usable evidence, as a failure. usable counts only the trials that could be measured. Both are here because quoting the second alone hides the runs that failed to produce evidence, and that is the friendlier of the two numbers."
+  "accounting": "strict counts every trial that was started, including the ones that produced no usable evidence, as a failure. usable counts only the trials that could be measured. Both are here because quoting the second alone hides the runs that failed to produce evidence, and that is the friendlier of the two numbers.",
+  "lead_ms_unforced": {
+    "count": 49,
+    "min": -86.0,
+    "median": 488.4,
+    "p95": 4097.0,
+    "max": 6197.5
+  },
+  "lead_media_ms_unforced": {
+    "count": 49,
+    "min": -86.0,
+    "median": 443.0,
+    "p95": 491.0,
+    "max": 500.0
+  },
+  "forced_covers": 0,
+  "lead_time_statement": "Two distributions. lead_ms is wall clock and lead_ms_unforced is the same over trials where no stall, seek, pause or background held the cover. The wall-clock tail is the virtual device playing slower than real time near the start of a clip, not the schedule firing early: every trial over 1.5 s of wall-clock lead has a media-time lead inside the guard band. lead_media_ms is the measure of the schedule itself.",
+  "lead_media_ms": {
+    "count": 49,
+    "min": -86.0,
+    "median": 443.0,
+    "p95": 491.0,
+    "max": 500.0
+  }
 }

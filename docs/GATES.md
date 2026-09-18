@@ -202,3 +202,54 @@ first marker is at 2000 ms, and that one change took it to 71.
 
 Neither is a screen-level result. Nothing here sees the React commit, the
 compositor, scan-out or the panel.
+
+## 2026-09-17, night: the long covers, and why they are not a scheduler bug
+
+The rule was: report the lead-time distribution twice, all covers and covers not
+forced by a stall or seek, and if the unforced p95 is over 1.5 s treat it as a bug
+to find rather than a number to accept.
+
+**The unforced p95 is 4097 ms, so it was treated as a bug, and the bug is not in
+the scheduler.** Both distributions are now in `results/gate1_software_vvd.json`.
+
+| | count | min | median | p95 | max |
+|---|---|---|---|---|---|
+| Wall-clock lead, all covers | 49 | -86 | 488.4 | **4097.0** | 6197.5 |
+| Wall-clock lead, unforced | 49 | -86 | 488.4 | **4097.0** | 6197.5 |
+| Media-time lead, all covers | 49 | -86 | 443.0 | **491.0** | 500.0 |
+| Media-time lead, unforced | 49 | -86 | 443.0 | **491.0** | 500.0 |
+
+`forced_covers` is **0**. Not one of the 49 counted trials had a stall, seek,
+pause or background between the cover going on and the marker arriving, so the two
+halves of each pair are identical. That is not a mistake in the split: trials with
+a stall between the cover and the marker are excluded from counting entirely, and
+no seek happened inside any of the remaining windows.
+
+**What the long wall-clock leads actually are.** The media-time lead is the
+schedule's own behaviour, and it never exceeds the guard band: max 500.0 ms
+against a 500 ms band, p95 491.0 ms. The schedule is not firing early. Every trial
+with a wall-clock lead over 1.5 s has a media-time lead inside the band:
+
+| wall lead | media lead | effective rate | marker |
+|---|---|---|---|
+| 6197.5 ms | 305.3 ms | 0.049 | 1 |
+| 5539.7 ms | 463.0 ms | 0.084 | 3 |
+| 4097.0 ms | 423.3 ms | 0.103 | 1 |
+| 4094.6 ms | 234.3 ms | 0.057 | 1 |
+| 3441.0 ms | 491.3 ms | 0.143 | 1 |
+| 2659.0 ms | 465.3 ms | 0.175 | 1 |
+
+The effective rate is media milliseconds per wall millisecond. At 0.049 the clip
+advanced 305 ms of its own time while six seconds of wall clock went past, so the
+virtual device was playing at about a twentieth of real time. Five of the six are
+**marker 1**, the first marker of a pass, which is exactly where the device is
+still getting going.
+
+So the wall-clock tail measures this machine, not the schedule. Each trial now
+carries `forced_by` and `effective_rate` so the attribution is in the record
+rather than in this paragraph, and `verify_gate1_archive.py` rebuilds all four
+distributions from the events, so CI fails if any of them drifts.
+
+**What this does not settle.** A real stick may be slow in different places, and
+none of this is screen-level. The media-time lead is the right instrument for
+asking whether the schedule fires early, and it is the one to carry to GATE 1.

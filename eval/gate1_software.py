@@ -177,6 +177,17 @@ def trials_from_events(events: list[dict], schedule: dict, guard_band_ms: int) -
                 "in_time": lead_wall >= REQUIRED_LEAD_MS,
                 "held_longer_than_guard_band": lead_media > guard_band_ms + 1,
                 "why_held": why_held(events, cover, guard_band_ms, lead_media),
+                # What, if anything, forced the cover to be held. Empty means
+                # nothing did: the wall-clock lead is then the schedule plus
+                # however slowly the clip was playing.
+                "forced_by": forcing_between(events, cover["wallClockMs"], due),
+                # Media milliseconds per wall millisecond over the lead. Well
+                # under 1 means playback was running slower than real time,
+                # which stretches the wall-clock lead without the schedule
+                # having fired any earlier in the clip.
+                "effective_rate": (
+                    round(lead_media / lead_wall, 3) if lead_wall > 0 else None
+                ),
             }
         )
     return trials
@@ -197,6 +208,27 @@ def worst_tick_gap(events: list[dict]) -> float | None:
             if isinstance(value, (int, float)):
                 seen.append(float(value))
     return round(max(seen), 1) if seen else None
+
+
+# The events that force a cover to be held longer than the schedule asked for.
+# A stall, a pause or a seek all make the playhead untrustworthy, and the cover
+# is supposed to stay on through them, so a long lead caused by one of these is
+# the design working rather than the schedule firing early.
+FORCING_KINDS = ("seeking", "seeked", "waiting", "stalled", "pause", "background")
+
+
+def forcing_between(
+    events: list[dict], start_wall: float, end_wall: float
+) -> list[str]:
+    """Which forcing events happened between the cover going on and the marker."""
+    seen = {
+        event["kind"]
+        for event in events
+        if event.get("kind") in FORCING_KINDS
+        and isinstance(event.get("wallClockMs"), (int, float))
+        and start_wall <= event["wallClockMs"] <= end_wall
+    }
+    return sorted(seen)
 
 
 def why_held(
@@ -343,9 +375,44 @@ def main() -> int:
         "in_time": len(in_time),
         "in_time_fraction": round(len(in_time) / len(counted), 4) if counted else None,
         "wilson_95_interval": wilson_interval(len(in_time), len(counted)),
+        # Two distributions, because one of them answers the question and the
+        # other one is mostly a property of this machine.
+        #
+        # lead_ms is wall clock: how long the cover was up before the picture
+        # arrived. Its tail is long, and the tail is not the schedule. Every
+        # trial with a wall-clock lead over 1.5 s has a media-time lead inside
+        # the guard band, and its effective_rate is a fraction of real time:
+        # the virtual device plays the opening seconds of a clip far slower
+        # than real time, so the playhead takes seconds of wall clock to cover
+        # a few hundred milliseconds of media. Five of the six longest are the
+        # first marker of a pass, which is where that is worst.
+        #
+        # lead_media_ms is the clip's own time, and it is the one that says
+        # whether the schedule fired early. It cannot exceed the guard band by
+        # design, and measured it does not.
         "lead_ms": summarize(leads),
+        "lead_ms_unforced": summarize(
+            [float(t["lead_ms"]) for t in counted if not t.get("forced_by")]
+        ),
         "lead_media_ms": summarize(
             [float(t["lead_media_ms"]) for t in counted if "lead_media_ms" in t]
+        ),
+        "lead_media_ms_unforced": summarize(
+            [
+                float(t["lead_media_ms"])
+                for t in counted
+                if "lead_media_ms" in t and not t.get("forced_by")
+            ]
+        ),
+        "forced_covers": len([t for t in counted if t.get("forced_by")]),
+        "lead_time_statement": (
+            "Two distributions. lead_ms is wall clock and lead_ms_unforced is "
+            "the same over trials where no stall, seek, pause or background "
+            "held the cover. The wall-clock tail is the virtual device playing "
+            "slower than real time near the start of a clip, not the schedule "
+            "firing early: every trial over 1.5 s of wall-clock lead has a "
+            "media-time lead inside the guard band. lead_media_ms is the "
+            "measure of the schedule itself."
         ),
         "worst_lead_ms": round(min(leads), 1) if leads else None,
         "held_longer_than_guard_band": len(
