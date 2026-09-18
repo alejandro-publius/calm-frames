@@ -1,0 +1,232 @@
+"""Software-level lead time: how early the cover went on, in wall-clock time.
+
+GATE 1 asks whether the cover was fully on at least 150 ms before the marker
+appeared, and only a camera pointed at a screen can answer that. The stick is
+not here yet, so this measures the part that does not need a camera: the gap
+between the moment the app applied the cover and the moment the marker was due,
+both in wall-clock time.
+
+    python3 eval/gate1_software.py --passes 3
+
+WHAT THIS IS. A software-level number. It is the app's own timing, measured
+from the events it posts during a run on the Vega Virtual Device.
+
+WHAT THIS IS NOT. A screen-level number. Everything after the app sets its
+state is unmeasured here: React commits the change, the compositor draws it,
+the device scans it out, the panel responds. Each of those adds delay, and all
+of it lands in the real GATE 1 figure and none of it lands in this one. So this
+number is an upper bound on how well the real thing can do, never a prediction
+of it. The real gate is 50 trials filmed at 240 fps on a real stick.
+
+HOW THE WALL-CLOCK MOMENT OF A MARKER IS FOUND. The app reports (wall clock,
+media time) pairs on every timeupdate. For a marker at media time M, the two
+reports either side of M give the wall-clock instant when the playhead passed
+M, by interpolation. The lead is that instant minus the wall clock when the
+cover went on. Markers with no timeupdate on both sides are not counted, and
+the count of those is reported rather than hidden.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import statistics
+import subprocess
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+REQUIRED_LEAD_MS = 150
+
+
+def wilson_interval(successes: int, trials: int, z: float = 1.96) -> dict:
+    if trials == 0:
+        return {"low": None, "high": None}
+    p = successes / trials
+    denominator = 1 + z * z / trials
+    centre = p + z * z / (2 * trials)
+    spread = z * math.sqrt(p * (1 - p) / trials + z * z / (4 * trials * trials))
+    return {
+        "low": round((centre - spread) / denominator, 4),
+        "high": round((centre + spread) / denominator, 4),
+    }
+
+
+def summarize(values: list[float]) -> dict | None:
+    if not values:
+        return None
+    ordered = sorted(values)
+    return {
+        "count": len(ordered),
+        "min": round(ordered[0], 1),
+        "median": round(statistics.median(ordered), 1),
+        "p95": round(ordered[min(len(ordered) - 1, int(0.95 * len(ordered)))], 1),
+        "max": round(ordered[-1], 1),
+    }
+
+
+def wall_clock_at_media(events: list[dict], media_ms: float) -> float | None:
+    """When did the playhead pass this media time, in wall-clock terms."""
+    reports = [
+        (e["wallClockMs"], e["mediaTimeMs"])
+        for e in events
+        if e.get("kind") == "timeupdate" and isinstance(e.get("mediaTimeMs"), (int, float))
+    ]
+    reports.sort(key=lambda pair: pair[1])
+    before = None
+    after = None
+    for wall, media in reports:
+        if media <= media_ms:
+            before = (wall, media)
+        if media >= media_ms and after is None:
+            after = (wall, media)
+    if before is None or after is None:
+        return None
+    if after[1] == before[1]:
+        return float(before[0])
+    span_media = after[1] - before[1]
+    span_wall = after[0] - before[0]
+    fraction = (media_ms - before[1]) / span_media
+    return before[0] + fraction * span_wall
+
+
+def trials_from_events(events: list[dict], schedule: dict, guard_band_ms: int) -> list[dict]:
+    covers_on = [
+        e
+        for e in events
+        if e.get("kind") == "cover-on"
+        and isinstance(e.get("reason"), str)
+        and e["reason"].startswith("interval ")
+    ]
+    trials = []
+    for marker in schedule["markers"]:
+        label = (
+            f"interval {marker['start_ms'] - guard_band_ms}-"
+            f"{marker['end_ms'] + guard_band_ms}"
+        )
+        matching = [e for e in covers_on if e["reason"] == label]
+        if not matching:
+            continue
+        cover = min(matching, key=lambda e: e["wallClockMs"])
+        due = wall_clock_at_media(events, marker["start_ms"])
+        if due is None:
+            trials.append(
+                {
+                    "marker": marker["index"],
+                    "counted": False,
+                    "why": "no timeupdate on both sides of the marker",
+                }
+            )
+            continue
+        trials.append(
+            {
+                "marker": marker["index"],
+                "counted": True,
+                "lead_ms": round(due - cover["wallClockMs"], 1),
+                "in_time": (due - cover["wallClockMs"]) >= REQUIRED_LEAD_MS,
+            }
+        )
+    return trials
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--passes", type=int, default=3)
+    parser.add_argument("--target-trials", type=int, default=50)
+    parser.add_argument("--guard-band-ms", type=int, default=500)
+    parser.add_argument("--seconds", type=float, default=215.0)
+    parser.add_argument(
+        "--schedule",
+        type=Path,
+        default=REPO / "eval/harness_runs/marker_schedule_50.json",
+    )
+    parser.add_argument("--clip", type=Path, default=REPO / "media/markers50.mp4")
+    parser.add_argument(
+        "--out", type=Path, default=REPO / "results/gate1_software_vvd.json"
+    )
+    args = parser.parse_args()
+
+    schedule = json.loads(args.schedule.read_text())
+    all_trials: list[dict] = []
+    runs: list[dict] = []
+
+    for index in range(args.passes):
+        counted = len([t for t in all_trials if t.get("counted")])
+        if counted >= args.target_trials:
+            break
+        print(f"pass {index + 1} of {args.passes}, {counted} trials so far")
+        events_path = REPO / f"results/.software_pass_{index}.json"
+        result = subprocess.run(
+            [
+                str(REPO / ".venv/bin/python"),
+                str(REPO / "eval/vvd_timing_run.py"),
+                "--mode", "timing",
+                "--seconds", str(args.seconds),
+                "--format", "HLS",
+                "--schedule", str(args.schedule),
+                "--clip", str(args.clip),
+                "--guard-band-ms", str(args.guard_band_ms),
+                "--out", str(events_path),
+            ],
+            capture_output=True,
+            text=True,
+            timeout=int(args.seconds) + 600,
+        )
+        raw = events_path.with_name(events_path.stem + "_events.json")
+        if not raw.exists():
+            print(f"  pass produced no events: {result.stdout[-300:]}")
+            continue
+        events = json.loads(raw.read_text())
+        trials = trials_from_events(events, schedule, args.guard_band_ms)
+        counted_now = len([t for t in trials if t.get("counted")])
+        runs.append({"pass": index + 1, "events": len(events), "trials": counted_now})
+        print(f"  {len(events)} events, {counted_now} usable trials")
+        all_trials.extend(trials)
+        events_path.unlink(missing_ok=True)
+        raw.unlink(missing_ok=True)
+
+    counted = [t for t in all_trials if t.get("counted")]
+    leads = [float(t["lead_ms"]) for t in counted]
+    in_time = [t for t in counted if t.get("in_time")]
+
+    result = {
+        "recorded_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "measurement": "software-level lead time, not screen-level",
+        "what_this_is": (
+            "The gap between the moment the app applied the cover and the "
+            "moment the marker was due, both in wall-clock time, from the "
+            "events the app posted during runs on the Vega Virtual Device."
+        ),
+        "what_this_is_not": (
+            "GATE 1, and not a prediction of it. Everything after the app sets "
+            "its state is unmeasured here: the React commit, the compositor, "
+            "scan-out and the panel. All of that delay lands in the real "
+            "figure and none of it lands in this one, so treat this as an "
+            "upper bound on how well the real thing can do. GATE 1 is 50 "
+            "trials filmed at 240 fps on a real stick."
+        ),
+        "device": "Vega Virtual Device",
+        "clip_sha256": schedule["clip"]["sha256"],
+        "markers_per_pass": len(schedule["markers"]),
+        "guard_band_ms": args.guard_band_ms,
+        "required_lead_ms": REQUIRED_LEAD_MS,
+        "passes": runs,
+        "trials_counted": len(counted),
+        "trials_dropped_no_timeupdate": len(all_trials) - len(counted),
+        "in_time": len(in_time),
+        "in_time_fraction": round(len(in_time) / len(counted), 4) if counted else None,
+        "wilson_95_interval": wilson_interval(len(in_time), len(counted)),
+        "lead_ms": summarize(leads),
+        "worst_lead_ms": round(min(leads), 1) if leads else None,
+    }
+
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    args.out.write_text(json.dumps(result, indent=2) + "\n")
+    print(json.dumps({k: v for k, v in result.items() if k != "passes"}, indent=2))
+    return 0 if len(counted) >= args.target_trials else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

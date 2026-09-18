@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "generator": "eval/marker_clip.py",
+  "note": "Timing markers for the GATE 1 rehearsal. Not hazardous: one pair of opposing luminance changes every six seconds, far below the three per second WCAG counts as flashing.",
+  "clip": {
+    "file_name": "markers50.mp4",
+    "sha256": "fad744279f9c9f085b9cd23b78d5a206e99f565b5cd42bb64bda0762157a391e",
+    "duration_s": 210.0,
+    "fps": 30,
+    "width": 1280,
+    "height": 720,
+    "base_srgb": 110,
+    "marker_srgb": 235,
+    "base_relative_luminance": 0.1559,
+    "marker_relative_luminance": 0.8308
+  },
+  "reference_patch": {
+    "x": 48,
+    "y": 48,
+    "width": 96,
+    "height": 96
+  },
+  "markers": [
+    {
+      "index": 1,
+      "start_ms": 4000,
+      "end_ms": 5000
+    },
+    {
+      "index": 2,
+      "start_ms": 8000,
+      "end_ms": 9000
+    },
+    {
+      "index": 3,
+      "start_ms": 12000,
+      "end_ms": 13000
+    },
+    {
+      "index": 4,
+      "start_ms": 16000,
+      "end_ms": 17000
+    },
+    {
+      "index": 5,
+      "start_ms": 20000,
+      "end_ms": 21000
+    },
+    {
+      "index": 6,
+      "start_ms": 24000,
+      "end_ms": 25000
+    },
+    {
+      "index": 7,
+      "start_ms": 28000,
+      "end_ms": 29000
+    },
+    {
+      "index": 8,
+      "start_ms": 32000,
+      "end_ms": 33000
+    },
+    {
+      "index": 9,
+      "start_ms": 36000,
+      "end_ms": 37000
+    },
+    {
+      "index": 10,
+      "start_ms": 40000,
+      "end_ms": 41000
+    },
+    {
+      "index": 11,
+      "start_ms": 44000,
+      "end_ms": 45000
+    },
+    {
+      "index": 12,
+      "start_ms": 48000,
+      "end_ms": 49000
+    },
+    {
+      "index": 13,
+      "start_ms": 52000,
+      "end_ms": 53000
+    },
+    {
+      "index": 14,
+      "start_ms": 56000,
+      "end_ms": 57000
+    },
+    {
+      "index": 15,
+      "start_ms": 60000,
+      "end_ms": 61000
+    },
+    {
+      "index": 16,
+      "start_ms": 64000,
+      "end_ms": 65000
+    },
+    {
+      "index": 17,
+      "start_ms": 68000,
+      "end_ms": 69000
+    },
+    {
+      "index": 18,
+      "start_ms": 72000,
+      "end_ms": 73000
+    },
+    {
+      "index": 19,
+      "start_ms": 76000,
+      "end_ms": 77000
+    },
+    {
+      "index": 20,
+      "start_ms": 80000,
+      "end_ms": 81000
+    },
+    {
+      "index": 21,
+      "start_ms": 84000,
+      "end_ms": 85000
+    },
+    {
+      "index": 22,
+      "start_ms": 88000,
+      "end_ms": 89000
+    },
+    {
+      "index": 23,
+      "start_ms": 92000,
+      "end_ms": 93000
+    },
+    {
+      "index": 24,
+      "start_ms": 96000,
+      "end_ms": 97000
+    },
+    {
+      "index": 25,
+      "start_ms": 100000,
+      "end_ms": 101000
+    },
+    {
+      "index": 26,
+      "start_ms": 104000,
+      "end_ms": 105000
+    },
+    {
+      "index": 27,
+      "start_ms": 108000,
+      "end_ms": 109000
+    },
+    {
+      "index": 28,
+      "start_ms": 112000,
+      "end_ms": 113000
+    },
+    {
+      "index": 29,
+      "start_ms": 116000,
+      "end_ms": 117000
+    },
+    {
+      "index": 30,
+      "start_ms": 120000,
+      "end_ms": 121000
+    },
+    {
+      "index": 31,
+      "start_ms": 124000,
+      "end_ms": 125000
+    },
+    {
+      "index": 32,
+      "start_ms": 128000,
+      "end_ms": 129000
+    },
+    {
+      "index": 33,
+      "start_ms": 132000,
+      "end_ms": 133000
+    },
+    {
+      "index": 34,
+      "start_ms": 136000,
+      "end_ms": 137000
+    },
+    {
+      "index": 35,
+      "start_ms": 140000,
+      "end_ms": 141000
+    },
+    {
+      "index": 36,
+      "start_ms": 144000,
+      "end_ms": 145000
+    },
+    {
+      "index": 37,
+      "start_ms": 148000,
+      "end_ms": 149000
+    },
+    {
+      "index": 38,
+      "start_ms": 152000,
+      "end_ms": 153000
+    },
+    {
+      "index": 39,
+      "start_ms": 156000,
+      "end_ms": 157000
+    },
+    {
+      "index": 40,
+      "start_ms": 160000,
+      "end_ms": 161000
+    },
+    {
+      "index": 41,
+      "start_ms": 164000,
+      "end_ms": 165000
+    },
+    {
+      "index": 42,
+      "start_ms": 168000,
+      "end_ms": 169000
+    },
+    {
+      "index": 43,
+      "start_ms": 172000,
+      "end_ms": 173000
+    },
+    {
+      "index": 44,
+      "start_ms": 176000,
+      "end_ms": 177000
+    },
+    {
+      "index": 45,
+      "start_ms": 180000,
+      "end_ms": 181000
+    },
+    {
+      "index": 46,
+      "start_ms": 184000,
+      "end_ms": 185000
+    },
+    {
+      "index": 47,
+      "start_ms": 188000,
+      "end_ms": 189000
+    },
+    {
+      "index": 48,
+      "start_ms": 192000,
+      "end_ms": 193000
+    },
+    {
+      "index": 49,
+      "start_ms": 196000,
+      "end_ms": 197000
+    },
+    {
+      "index": 50,
+      "start_ms": 200000,
+      "end_ms": 201000
+    }
+  ]
+}
