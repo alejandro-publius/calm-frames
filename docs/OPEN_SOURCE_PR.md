@@ -1,8 +1,20 @@
 # The upstream contribution
 
-**Target:** [`AmazonAppDev/vega-video-sample`](https://github.com/AmazonAppDev/vega-video-sample), the Fire TV video sample that most Vega video apps start from. It has merged an outside contributor's pull request before (#7, July 6 2026), so it takes them.
+**Target:** [`AmazonAppDev/vega-video-sample`](https://github.com/AmazonAppDev/vega-video-sample), the Fire TV video sample that most Vega video apps start from. It has merged an outside contributor's pull request before: #7, opened June 18 2026 by an account with no association to the repository, merged July 6 2026. So they do take them.
 
-**Status:** the fix and its tests are written and verified. **The pull request has not been opened and the branch has not been pushed anywhere**, because the branch has to live in a fork under Alex's own GitHub account. Everything needed to open it is in this file. Due by Monday October 12.
+**Status, Thu Sep 17 2026.** The branch is finished and verified. Two commits and three tests, sitting as ready-to-apply patch files in [`docs/upstream-pr/`](upstream-pr/). **Nothing has been pushed and no pull request has been opened**, because the branch has to live in a fork under Alex's own GitHub account. Everything needed to open it is in this file. Due by Monday October 12.
+
+**Checked against the live repository today:**
+
+| What | Result, Sep 17 2026 |
+|---|---|
+| `main` | `ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`, which is the same commit as tag `v0.24-RN83`, last pushed Aug 6 2026 |
+| Does the patch still apply to `main` | Yes. `git am` of both patches onto a clean checkout of that commit applies with no fuzz, and the suite passes |
+| Open issues | 0 |
+| Every issue and pull request ever filed | 11, none of them about Shaka load failures or a stuck buffering spinner. This is not a duplicate |
+| Licence | MIT-0 |
+
+Re-run those checks on the day. `main` has not moved in six weeks, but the patch has to go on top of whatever `main` is then.
 
 ---
 
@@ -16,7 +28,7 @@ Three candidates came out of the build. All three are real symptoms we hit. Only
 | The player tears itself down when the app is backgrounded | Sample-side and fixable, but the teardown is the code doing what it says. The crisp bug next to it is narrower and worth a second pull request. Described below. |
 | A video-only stream pauses a few seconds in | **Not a sample defect.** Nothing in the sample waits on audio, and there is no watchdog. The pause comes from below the sample. Mention as a known issue only. |
 
-Two notes on scope. First, `app/` in this repository is a copy of the sample at tag `v0.24-RN83`, commit `ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`, and commit `cf8b752` in this repository holds the untouched copy. `git diff cf8b752 HEAD -- app/` touches only `PlayerScreen.tsx` and `Player.test.tsx`, so `VideoHandler.ts`, `ShakaPlayer.ts` and `VideoHandler.test.ts` are byte for byte upstream and every line number below is an upstream line number. Second, `src/w3cmedia/shakaplayer/ShakaPlayer.ts` is checked in to the sample rather than generated. Its `shaka-setup/copyOutputs.sh` deletes the copy that comes out of the Shaka tarball and keeps the repository's own, with the comment "this file is checked in & modified". So a pull request may change it.
+Two notes on scope. First, `app/` in this repository is a copy of the sample at tag `v0.24-RN83`, commit `ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`, and commit `cf8b752` in this repository holds the untouched copy. The patch below was built from that untouched copy, never from our own tree, so every line number in this file is an upstream line number. `src/w3cmedia/shakaplayer/ShakaPlayer.ts` and `test/utils/VideoHandler.test.ts` are byte for byte upstream here. `src/utils/VideoHandler.ts` is not: Calm Frames added an optional media control handler to its constructor, 20 lines above the method this pull request touches, which shifts our copy down by 14 lines and changes nothing inside `loadAdaptiveMediaPlayer`. Read our `app/` copy for the fix and you will find the same code at a different line number. Second, `src/w3cmedia/shakaplayer/ShakaPlayer.ts` is checked in to the sample rather than generated. Its `shaka-setup/copyOutputs.sh` deletes the copy that comes out of the Shaka tarball and keeps the repository's own, with the comment "this file is checked in & modified". So a pull request may change it.
 
 ---
 
@@ -50,7 +62,7 @@ We hit this with a plain MP4 over HTTP. Any manifest or segment fetch that fails
 
 The caller has a guard, and the guard cannot fire, because it only catches a synchronous throw.
 
-`src/utils/VideoHandler.ts:264`
+`src/utils/VideoHandler.ts:266`
 
 ```ts
         if (this.player.current) {
@@ -69,7 +81,7 @@ The caller has a guard, and the guard cannot fire, because it only catches a syn
         }
 ```
 
-This is a good bug to send upstream, because the method's own documentation states the intent that the code cannot meet. `src/utils/VideoHandler.ts:238` says:
+This is a good bug to send upstream, because the method's own documentation states the intent that the code cannot meet. The comment block at `src/utils/VideoHandler.ts:238` to `:248` says:
 
 ```
    * This method:
@@ -79,7 +91,7 @@ This is a good bug to send upstream, because the method's own documentation stat
    * 4. Handles any loading errors
 ```
 
-Step 4 is the one that does not happen.
+Step 4, on line 245, is the one that does not happen.
 
 ### Why the spinner never stops
 
@@ -90,8 +102,8 @@ Step 4 is the one that does not happen.
 The sample never sniffs a URL or a MIME type. The only branch is a hand-declared JSON field:
 
 - `src/utils/VideoHandler.ts:205`, `if (this.selectedFileType === VideoFileTypes.MP4)`, set at `:91` from `data.format`
-- `src/types/TitleData.d.ts:14` admits `'DASH'` as a `VideoFormat`
-- `src/data/videos/index.ts:7` has no `DASH` member of `VideoFileTypes`
+- `src/types/TitleData.d.ts:15` admits `'DASH'` as a `VideoFormat`
+- `src/data/videos/index.ts:7` has no `DASH` member of `VideoFileTypes` (it has `MPD`, `HLS`, `MP4` and `MPD_DRM`)
 
 So a source whose `format` is not the exact literal `"MP4"` goes to Shaka, which cannot parse a raw MP4 as a manifest, and then fails the silent way described above. We are not proposing to change the format handling in this pull request, because that is a design decision for the maintainers. The point is that the silent failure is what makes it hard to diagnose.
 
@@ -99,22 +111,27 @@ So a source whose `format` is not the exact literal `"MP4"` goes to Shaka, which
 
 ## The fix
 
-Two files, both small. They can land as two commits.
+Two files of source and one of tests. They land as two commits.
 
 **Commit 1, `ShakaPlayer.ts`: return the promise so a caller can see the failure.**
 
-**Commit 2, `VideoHandler.ts`: catch it and report it.**
+**Commit 2, `VideoHandler.ts` and `VideoHandler.test.ts`: catch it, report it, and cover it.**
 
 `VideoHandler.ts` uses `Promise.resolve(...)` rather than `await`, which means it works against either signature, so the two commits are independent and either one is safe on its own.
 
 ### The patch
 
-Apply from the root of a `vega-video-sample` checkout with `git apply`.
+The two commits are saved as patch files and those files are the source of truth:
+
+- [`docs/upstream-pr/0001-Return-the-load-promise-from-ShakaPlayer.load.patch`](upstream-pr/0001-Return-the-load-promise-from-ShakaPlayer.load.patch)
+- [`docs/upstream-pr/0002-Report-a-failed-Shaka-load-instead-of-dropping-it.patch`](upstream-pr/0002-Report-a-failed-Shaka-load-instead-of-dropping-it.patch)
+
+They were produced with `git format-patch` from a clean checkout of `ef8e4da`, and applied back onto another clean checkout with `git am` to prove they go on cleanly. The combined diff, for reading:
 
 ```diff
 --- a/src/w3cmedia/shakaplayer/ShakaPlayer.ts
 +++ b/src/w3cmedia/shakaplayer/ShakaPlayer.ts
-@@ -197,7 +197,7 @@
+@@ -197,7 +197,7 @@ export class ShakaPlayer implements PlayerInterface {
    }
    // End custom callbacks }}}
  
@@ -123,7 +140,7 @@ Apply from the root of a `vega-video-sample` checkout with `git apply`.
      // Native HLS parsing setup
      if (ShakaPlayer.enableNativeParsing) {
        if (
-@@ -453,8 +453,10 @@
+@@ -453,8 +453,10 @@ export class ShakaPlayer implements PlayerInterface {
        });
      }
  
@@ -137,7 +154,7 @@ Apply from the root of a `vega-video-sample` checkout with `git apply`.
      await this.player.load(content.uri);
 --- a/src/utils/VideoHandler.ts
 +++ b/src/utils/VideoHandler.ts
-@@ -263,10 +263,28 @@
+@@ -263,10 +263,28 @@ export class VideoHandler {
  
          if (this.player.current) {
            try {
@@ -169,7 +186,7 @@ Apply from the root of a `vega-video-sample` checkout with `git apply`.
                '[VideoHandler.ts] - Error during Shaka player load:',
 --- a/test/utils/VideoHandler.test.ts
 +++ b/test/utils/VideoHandler.test.ts
-@@ -5,6 +5,7 @@
+@@ -5,6 +5,7 @@ import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
  import React from 'react';
  import { TitleData } from '../../src/types/TitleData';
  import { VideoHandler } from '../../src/utils/VideoHandler';
@@ -177,11 +194,15 @@ Apply from the root of a `vega-video-sample` checkout with `git apply`.
  
  jest.mock('react', () => ({
    ...jest.requireActual('react'),
-@@ -155,4 +156,43 @@
+@@ -155,4 +156,72 @@ describe('VideoHandler', () => {
        expect(result).toBe(true);
      });
    });
 +  describe('loadAdaptiveMediaPlayer', () => {
++    afterEach(() => {
++      (ShakaPlayer as unknown as jest.Mock).mockReset();
++    });
++
 +    it('reports a video error when the Shaka load rejects after returning', async () => {
 +      const { mockVideoRef, mockSetIsVideoError, videoHandler } =
 +        createVideoHandler();
@@ -198,6 +219,31 @@ Apply from the root of a `vega-video-sample` checkout with `git apply`.
 +
 +      expect(mockLoad).toHaveBeenCalledTimes(1);
 +      expect(mockSetIsVideoError).toHaveBeenCalledWith(true);
++    });
++
++    it('stays quiet when the player was torn down while the load was in flight', async () => {
++      const { mockVideoRef, mockPlayer, mockSetIsVideoError, videoHandler } =
++        createVideoHandler();
++      mockVideoRef.current = {} as unknown as VideoPlayer;
++
++      const mockLoad = jest
++        .fn()
++        .mockRejectedValue(new Error('LOAD_INTERRUPTED'));
++      (ShakaPlayer as unknown as jest.Mock).mockImplementation(() => ({
++        load: mockLoad,
++        unload: jest.fn(),
++      }));
++
++      videoHandler.loadAdaptiveMediaPlayer();
++      // Backing out of the player mid-load calls destroyMediaPlayerSync, which
++      // unloads Shaka and nulls this ref before the rejection lands. An
++      // aborted load is not a playback error and must not flash the error
++      // screen on the way out.
++      mockPlayer.current = null;
++      await new Promise(process.nextTick);
++
++      expect(mockLoad).toHaveBeenCalledTimes(1);
++      expect(mockSetIsVideoError).not.toHaveBeenCalled();
 +    });
 +
 +    it('reports a video error when the Shaka load throws synchronously', async () => {
@@ -225,7 +271,7 @@ Apply from the root of a `vega-video-sample` checkout with `git apply`.
 
 ### Why the tests need no new mocks
 
-The sample's own `jest.setup.ts:308` already mocks the module:
+The sample's own `jest.setup.ts` already mocks the module:
 
 ```ts
 jest.mock('./src/w3cmedia/shakaplayer/ShakaPlayer', () => ({
@@ -233,31 +279,47 @@ jest.mock('./src/w3cmedia/shakaplayer/ShakaPlayer', () => ({
 }));
 ```
 
-so the test only re-implements that constructor per case. `test/utils/VideoHandler.test.ts` already neutralises the `useCallback`-inside-a-class problem with its own `jest.mock('react', ...)`, and `createVideoHandler()` already returns `mockSetIsVideoError`. No device, no native module, no new dependency.
+so each test only re-implements that constructor for its own case, and the `afterEach` resets it so the three cannot leak into each other. `test/utils/VideoHandler.test.ts` already neutralises the `useCallback`-inside-a-class problem with its own `jest.mock('react', ...)`, and `createVideoHandler()` already returns `mockSetIsVideoError` and `mockPlayer`. No device, no native module, no new dependency.
 
-The second test, the synchronous one, is there on purpose. Without it, someone could satisfy the first test through the pre-existing `catch` block and think the async path was covered. The two together pin both paths apart.
+The three tests are three different claims:
+
+1. **The async one** is the bug. It fails on unmodified upstream.
+2. **The teardown one** is the guard inside the fix. Backing out of the player mid-load makes Shaka reject with `OPERATION_ABORTED` or `LOAD_INTERRUPTED`, and that must not flash the error screen on the way out. Without the guard, this test goes red.
+3. **The synchronous one** pins the path that already worked. It passes with or without the change, on purpose. Without it, someone could satisfy the first test through the pre-existing `catch` block and think the async path was covered.
 
 ---
 
 ## What was verified, and how
 
-A pristine upstream checkout was rebuilt from `cf8b752` in a scratch directory, with `node_modules` symlinked from this repository, and the tests were run against it.
+Two clean checkouts of upstream `ef8e4da` were made in a scratch directory from commit `cf8b752` of this repository, which is that commit byte for byte. `node_modules` is a directory of symlinks into this repository's `app/node_modules`, plus four resolution stubs for `@amazon-devices` packages that Calm Frames removed from its own install and the pristine `jest.setup.ts` still mocks: `kepler-channel`, `kepler-media-account-login`, `kepler-media-content-launcher` and `kepler-epg-sync-scheduler`. Each stub is an empty module that exists only so `jest.mock` can resolve a path. Nothing else about the sample was touched, and this repository's own `node_modules` was not written to.
+
+Run on Sep 17 2026, Node 22.23.2:
 
 | Step | Result |
 |---|---|
-| `test/utils/VideoHandler.test.ts` on unmodified upstream | 3 passed |
-| Add the two new tests, **no fix applied** | **1 failed**, 4 passed. The async test fails with `setIsVideoError` "Number of calls: 0". The synchronous test passes, as it should. |
-| Apply both halves of the fix | 5 passed |
-| Full suite, no fix | 9 suites failed, 54 passed, 4 tests failed |
-| Full suite, with the fix | 8 suites failed, 55 passed, 3 tests failed |
-| `eslint` on the changed files | clean, exit 0 |
-| `prettier --check` on the changed files | clean |
+| `jest test/utils/VideoHandler.test.ts` on unmodified upstream | 3 passed |
+| Add the three new tests, **no fix applied** | **2 failed**, 4 passed. The async test fails with `setIsVideoError` "Number of calls: 0". The teardown test fails on the unhandled `LOAD_INTERRUPTED` rejection, which is the bug itself showing up in the test runner. The synchronous test passes, as it should. |
+| Apply both halves of the fix | 6 passed |
+| Full suite, unmodified upstream | 2 suites failed, 61 passed, 1 skipped. 3 tests failed, 348 passed, 4 skipped |
+| Full suite, with the fix | 2 suites failed, 61 passed, 1 skipped. 3 tests failed, **351** passed, 4 skipped. The three extra passes are the new tests |
+| `eslint` on all three changed files | clean, exit 0 |
+| `prettier --check` on all three changed files | clean |
+| `tsc --noEmit` | the same 4 pre-existing `TS2742` errors with and without the change |
+| `git am` of both patch files onto a second clean checkout | applies with no fuzz, 6 passed |
 
-The eight suites that fail either way are unrelated: they need `@amazon-devices` packages that Calm Frames removed from its own `node_modules` (`kepler-channel`, `kepler-media-account-login`, `kepler-epg-sync-scheduler`, `kepler-media-content-launcher`). They fail identically with and without the change, so the fix introduces no new failure and fixes exactly the one it targets. The maintainers' CI has the full dependency set and will not see them.
+**The three failing tests and the four type errors are both artifacts of where the checkout lives, and neither is an upstream defect.** The failures are snapshot mismatches in `DrawerContent.test.tsx` and `Preview.test.tsx`, where the recorded snapshot holds an asset `testUri` that is written relative to the project root: from a deep scratch path it comes out absolute and the snapshot does not match. The same two suites pass in `app/` in this repository, which is the same code at a normal path. The `TS2742` errors are the usual complaint about a symlinked `node_modules` outside the project and name four store slices nobody touched. Both appear identically with and without the change.
 
-**The guard was broken on purpose and seen to go red**, which is the rule in this project: a green new test proves nothing on its own. Removing the `Promise.resolve(loadResult).catch(...)` block takes the async test from green to red, and only that test.
+One real upstream problem did turn up while running the suite, and it is not this pull request's subject: **`npx jest --ci` exits 1 on a clean checkout with every test passing**, because `test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap` holds two snapshot entries no current test produces, and `--ci` treats an obsolete snapshot as a failure. Deleting those two entries fixes it. It is worth a sentence in the pull request so a reviewer does not blame this change for a red run, and it is worth a separate one-line pull request.
 
-One thing to be explicit about in the pull request: the test covers the `VideoHandler` half. The `ShakaPlayer.ts` return type change has no unit coverage, because the test mocks `ShakaPlayer`. It is a one-line contract change and reverting it alone would not turn this test red.
+**The guards were broken on purpose and seen to go red**, which is the rule in this project: a green new test proves nothing on its own.
+
+| Mutation | Result |
+|---|---|
+| Remove the whole `Promise.resolve(loadResult).catch(...)` block | The async test and the teardown test both go red. Nothing else moves |
+| Remove only the `if (!this.player.current) return;` guard inside the catch | Only the teardown test goes red |
+| Revert only `ShakaPlayer.ts`, keep the caller-side catch | **All six still pass.** This is the limitation below, measured rather than assumed |
+
+That last row is the honest gap, and the pull request says so: the test covers the `VideoHandler` half, because `jest.setup.ts` mocks `ShakaPlayer`. The `ShakaPlayer.ts` return type change has no unit coverage, and reverting it alone would not turn any test red.
 
 ---
 
@@ -265,7 +327,7 @@ One thing to be explicit about in the pull request: the test covers the `VideoHa
 
 Real and contained. Streams that used to hang on a spinner now show the error view. That is the point of the change, and it is still a behaviour change for anyone who had learned to live with the spinner.
 
-The one race worth naming is teardown. Backing out of the player mid-load calls `destroyMediaPlayerSync`, which calls `unload()`, which makes Shaka reject the in-flight `load()` with `OPERATION_ABORTED` or `LOAD_INTERRUPTED`. That would flash the error screen on the way out. The `if (!this.player.current) return;` guard covers it, because `destroyMediaPlayerSync` nulls `this.player.current` at `src/utils/VideoHandler.ts:549` before the rejection can land.
+The one race worth naming is teardown. Backing out of the player mid-load calls `destroyMediaPlayerSync`, which calls `unload()`, which makes Shaka reject the in-flight `load()` with `OPERATION_ABORTED` or `LOAD_INTERRUPTED`. That would flash the error screen on the way out. The `if (!this.player.current) return;` guard covers it, because `destroyMediaPlayerSync` nulls `this.player.current` at `src/utils/VideoHandler.ts:549` before the rejection can land, and the third test in the file holds it to that.
 
 ---
 
@@ -290,14 +352,14 @@ The one race worth naming is teardown. Backing out of the player mid-load calls 
 | App Version | 3.24.0 (manifest.toml) |
 | Image Build | Vega OS 1.2 (TV Ship/101520710) |
 | VDT Version | Vega CLI 1.3.4, Vega SDK 0.24.9914 |
-| Video/Img showing the issue | Not included. The symptom is a spinner that never stops, which is not informative as a video. The unit test in this PR reproduces it deterministically. |
+| Video/Img showing the issue | Not included. The symptom is a spinner that never stops, which is not informative as a video. The unit tests in this PR reproduce it deterministically. |
 | Expected Behavior | When Shaka fails to load a source, the app reports a playback error. `loadAdaptiveMediaPlayer` documents this itself: its comment block says the method "4. Handles any loading errors", and it has a try/catch around the load that calls `setIsVideoError(true)`. |
 | Current Behaviour | The error is never seen. `ShakaPlayer.load()` is declared `void` and calls `internalLoad(content)` without returning or awaiting it, so a rejection from `this.player.load(content.uri)` becomes an unhandled rejection. The caller's try/catch in `VideoHandler.loadAdaptiveMediaPlayer` can only catch a synchronous throw, so it never fires. `setIsVideoError` is never called, `ErrorView` never renders, and `showBuffering` (initialised true in `PlayerScreen.tsx`, cleared only on `playing` / `seeked` / `timeupdate` / error) stays up for good. The user sees a spinner forever with no error. |
-| Reproduction Rate | 5 out of 5. Any source Shaka cannot load reproduces it: a 404 manifest, a plain MP4 handed to Shaka because its `format` field is not the literal "MP4", or a server that does not answer byte ranges. The unit test added here reproduces it 5 out of 5 with no device. |
+| Reproduction Rate | 5 out of 5. Any source Shaka cannot load reproduces it: a 404 manifest, a plain MP4 handed to Shaka because its `format` field is not the literal "MP4", or a server that does not answer byte ranges. The unit tests added here reproduce it 5 out of 5 with no device. |
 
 For Pull Requests:
 
-* This PR addresses issue #: (none filed yet)
+* This PR addresses issue #: (filled in when the issue is filed)
 
 * Changes made:
 
@@ -314,8 +376,9 @@ For Pull Requests:
      correctly whether `load()` returns a promise or not, which keeps the two
      changes independent.
 
-  3. `test/utils/VideoHandler.test.ts` - two tests. One proves an
-     asynchronously rejected load sets the video error. The other proves a
+  3. `test/utils/VideoHandler.test.ts` - three tests. One proves an
+     asynchronously rejected load sets the video error. One proves an aborted
+     load during teardown does not, which is the guard above. One proves a
      synchronously thrown load still does, so the existing behaviour is pinned
      and the two paths cannot be confused for each other.
 
@@ -331,20 +394,32 @@ For Pull Requests:
 
   - `npx jest test/utils/VideoHandler.test.ts` against unmodified upstream:
     3 passed.
-  - Added the two tests with no fix applied: the async test fails
-    (`setIsVideoError` "Number of calls: 0"), the sync test passes. This is the
-    guard being seen to fail before it is trusted.
-  - Applied the fix: 5 passed.
-  - Full suite before and after: the same unrelated suites fail either way in
-    our environment, and `test/utils/VideoHandler.test.ts` moves from failing
-    to passing. No new failure is introduced.
+  - Added the three tests with no fix applied: the async test fails
+    (`setIsVideoError` "Number of calls: 0") and the teardown test fails on the
+    unhandled rejection, which is the bug itself surfacing in the runner. The
+    synchronous test passes. This is the guard being seen to fail before it is
+    trusted.
+  - Applied the fix: 6 passed.
+  - Full suite before and after: the same suites and the same three tests fail
+    either way in our environment, for reasons unrelated to this change, and
+    `test/utils/VideoHandler.test.ts` moves from failing to passing. No new
+    failure is introduced.
   - `eslint` and `prettier --check` on all three changed files: clean.
-  - Removing only the new `.catch` block turns the async test red again, and
-    nothing else.
+  - Removing only the new `.catch` block turns the async and teardown tests red
+    again. Removing only the teardown guard turns the teardown test red.
+    Nothing else moves either way.
 
-  One limitation, stated plainly: the test covers the `VideoHandler` half,
+  One limitation, stated plainly: the tests cover the `VideoHandler` half,
   because `jest.setup.ts` mocks `ShakaPlayer`. The `ShakaPlayer.ts` return type
-  change has no unit coverage. It is a one-line contract change.
+  change has no unit coverage, and we checked that: reverting it alone leaves
+  all six tests green. It is a one-line contract change.
+
+  Unrelated, and flagging it so a red CI run is not blamed on this change:
+  `npx jest --ci` exits 1 on a clean checkout of main with every test passing,
+  because `test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap`
+  holds two snapshot entries that no current test produces, and `--ci` counts
+  an obsolete snapshot as a failure. Happy to send that one-line deletion as a
+  separate PR if it would help.
 
 * Dependencies added/modified: none.
 
@@ -374,12 +449,12 @@ anything awaitable, and harmless if it never does.
 
 ## How to open it
 
-`CONTRIBUTING.md` in that repository asks contributors to open an issue first for anything significant, and to work against the latest `main`. Filing the bug first also means the contribution URL exists earlier, which is what the Devpost Open Source field needs.
+`CONTRIBUTING.md` in that repository asks contributors to work against the latest `main`, to check existing and recently merged pull requests first, and to open an issue to discuss any significant work. Filing the bug first also means the contribution URL exists earlier, which is what the Devpost Open Source field needs.
 
-1. **Check first.** Look through open and recently closed issues and pull requests for anything about Shaka load failures or a stuck buffering spinner, so this is not a duplicate. Also re-read `CONTRIBUTING.md` in case it changed.
-2. **File the issue.** Use the `[BUG]` form above, without the "For Pull Requests" part. Note its number.
+1. **Check first.** Look through open and recently closed issues and pull requests for anything about Shaka load failures or a stuck buffering spinner. As of Sep 17 there were none and no open issues at all, but check again on the day. Re-read `CONTRIBUTING.md` in case it changed.
+2. **File the issue.** Use the `[BUG]` table above, without the "For Pull Requests" part. Note its number.
 3. **Fork** `AmazonAppDev/vega-video-sample` to your own account.
-4. **Branch** from the latest `main`:
+4. **Clone your fork and branch from the latest `main`:**
 
    ```sh
    git clone https://github.com/<your-username>/vega-video-sample.git
@@ -387,32 +462,50 @@ anything awaitable, and harmless if it never does.
    git checkout -b fix/surface-shaka-load-failures
    ```
 
-5. **Apply the patch.** Copy the diff block above into a file and apply it:
+5. **Apply the two commits.** This is the whole change, messages included:
 
    ```sh
-   git apply /path/to/shaka-load-failure.patch
+   git am /path/to/calm-frames/docs/upstream-pr/0001-*.patch \
+          /path/to/calm-frames/docs/upstream-pr/0002-*.patch
+   git rebase --exec 'git commit --amend --no-edit --reset-author' HEAD~2
    ```
 
-   If it does not apply because `main` has moved on, the three hunks are small enough to make by hand. The anchors are `load(content: any, _autoplay: boolean): void {`, `this.internalLoad(content);` and `this.player.current.load(this.data, false);`.
+   The second line matters. The patches carry a placeholder author, `Your Name <you@example.com>`, because this machine must not guess which identity you want on a public contribution. The rebase rewrites both commits as you. Check with `git log --format='%an <%ae> %s' -2` before pushing.
+
+   If `git am` refuses because `main` has moved on, fall back to `git apply` on each patch and commit twice by hand, with the messages from the patch files. The three anchors are small: `load(content: any, _autoplay: boolean): void {`, `this.internalLoad(content);` and `this.player.current.load(this.data, false);`.
 
 6. **Run the tests** with their full dependency set:
 
    ```sh
    npm install
    npx jest test/utils/VideoHandler.test.ts
-   npx eslint src/utils/VideoHandler.ts test/utils/VideoHandler.test.ts --ext .ts
+   npx eslint src/utils/VideoHandler.ts test/utils/VideoHandler.test.ts src/w3cmedia/shakaplayer/ShakaPlayer.ts --ext .ts
+   npx prettier --check src/utils/VideoHandler.ts test/utils/VideoHandler.test.ts src/w3cmedia/shakaplayer/ShakaPlayer.ts
    ```
 
-7. **Commit as two commits**, so a reviewer can take one without the other:
+   Expect 6 passed in that file. `npm install` runs the Shaka build in `postinstall`, which needs a JDK on the path; see `docs/ENVIRONMENT.md`.
 
-   ```
-   Return the load promise from ShakaPlayer.load()
-   Report a failed Shaka load instead of dropping it
-   ```
+7. **Push the branch to your fork and open the pull request** with the title and body above, referencing the issue number.
 
-8. **Open the pull request** with the title and body above, referencing the issue number, and paste the link into `docs/SUBMISSION.md` field 11.1.
+8. **Record the links.** Paste the pull request URL into `docs/SUBMISSION.md` field 11.1 and your GitHub username into 11.3. The fields are listed at the end of this file.
 
-It does not need to be merged by the deadline. It needs to exist by **Monday October 12**.
+One decision that is yours, not this machine's: the patches carry no co-author or generated-with trailer. Our own repository puts one on every commit. A contribution to someone else's repository goes out under your name, so the trailer is left off rather than added on your behalf. Add one before pushing if you would rather it were there.
+
+It does not need to be merged by the deadline. It needs to exist by **Monday October 12**. The only outside pull request this repository has ever merged was a two-line documentation change, and it took eighteen days, so plan for the link rather than the merge.
+
+---
+
+## For Lane H: the SUBMISSION.md fields
+
+Three fields in `docs/SUBMISSION.md` depend on this file. None of them can be filled from here.
+
+| Field | What goes in it | State |
+|---|---|---|
+| 11.1 Contribution URL | The pull request URL, `https://github.com/AmazonAppDev/vega-video-sample/pull/<n>`. If the issue is filed first and the pull request is late, the issue URL is a usable stand-in on the same repository | **NEEDS ALEX.** Nothing is pushed. Due Mon Oct 12 |
+| 11.3 GitHub username | The account that owns the fork, which is the account that appears on the pull request | **NEEDS ALEX.** The repository here is under `alejandro-publius`; confirm the same account forks upstream, or say which one does |
+| 11.4 What we did, and why it matters | Already written. The upstream half can now say three tests rather than two, and that both guards were seen to fail | Ready, one word to update |
+
+Section 9.3 of `docs/SUBMISSION.md`, the vega-video-sample feedback, can also pick up two things that were measured today: `jest --ci` exits 1 on a clean checkout over two obsolete snapshot entries, and `main` has not moved since Aug 6 2026. Both are in `docs/FEEDBACK.md` under the sample.
 
 ---
 

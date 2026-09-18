@@ -1,0 +1,155 @@
+From 50212fb151039d66926acc89a6fb752b54b946b0 Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Thu, 17 Sep 2026 20:14:55 -0700
+Subject: [PATCH 2/2] Report a failed Shaka load instead of dropping it
+
+loadAdaptiveMediaPlayer wraps the load in a try/catch that calls
+setIsVideoError(true), and the method's own comment block says it
+"4. Handles any loading errors". The load settles asynchronously, so
+that catch can only ever see a synchronous throw. A rejected manifest
+or segment fetch set nothing: ErrorView never rendered, and
+showBuffering, which starts true in PlayerScreen and clears only on
+playing, seeked, timeupdate or an error, stayed up for good. The user
+sees a buffering spinner that never stops and no error.
+
+The result of load() now gets a .catch that reports the failure the
+same way the existing catch does. Promise.resolve() wraps it, so this
+works whether or not load() returns a promise, which keeps this commit
+independent of the ShakaPlayer.ts one.
+
+The .catch stays quiet when the player was torn down while the load was
+in flight. destroyMediaPlayerSync unloads Shaka and nulls
+this.player.current before the aborted load can reject, and backing out
+of the player is not a playback error.
+
+Three tests cover it. The async test and the teardown test both fail
+without this change. The synchronous test passes either way and is
+there on purpose, to pin the path that already worked so the two cannot
+be confused for each other.
+---
+ src/utils/VideoHandler.ts       | 20 +++++++++-
+ test/utils/VideoHandler.test.ts | 69 +++++++++++++++++++++++++++++++++
+ 2 files changed, 88 insertions(+), 1 deletion(-)
+
+diff --git a/src/utils/VideoHandler.ts b/src/utils/VideoHandler.ts
+index 3f67d5b..95c1713 100644
+--- a/src/utils/VideoHandler.ts
++++ b/src/utils/VideoHandler.ts
+@@ -263,10 +263,28 @@ export class VideoHandler {
+ 
+         if (this.player.current) {
+           try {
+-            this.player.current.load(this.data, false);
++            const loadResult = this.player.current.load(this.data, false);
+             console.log(
+               `[VideoHandler.ts] - loadStaticMediaPlayer - Loading Adaptive Media player (Shaka) with: ${this.data}`,
+             );
++            // load() settles asynchronously, so the catch below can only ever
++            // see a synchronous throw. Without this, a rejected manifest or
++            // segment fetch becomes an unhandled rejection: isVideoError is
++            // never set, the error view never appears, and the buffering
++            // spinner stays up for good.
++            Promise.resolve(loadResult).catch((loadError) => {
++              if (!this.player.current) {
++                // Torn down while the load was in flight.
++                // destroyMediaPlayerSync nulls this ref before the rejection
++                // lands, and an aborted load is not a playback error.
++                return;
++              }
++              console.error(
++                '[VideoHandler.ts] - Error during Shaka player load:',
++                loadError,
++              );
++              this.setIsVideoError(true);
++            });
+           } catch (loadError) {
+             console.error(
+               '[VideoHandler.ts] - Error during Shaka player load:',
+diff --git a/test/utils/VideoHandler.test.ts b/test/utils/VideoHandler.test.ts
+index 6a11974..90ffb69 100644
+--- a/test/utils/VideoHandler.test.ts
++++ b/test/utils/VideoHandler.test.ts
+@@ -5,6 +5,7 @@ import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
+ import React from 'react';
+ import { TitleData } from '../../src/types/TitleData';
+ import { VideoHandler } from '../../src/utils/VideoHandler';
++import { ShakaPlayer } from '../../src/w3cmedia/shakaplayer/ShakaPlayer';
+ 
+ jest.mock('react', () => ({
+   ...jest.requireActual('react'),
+@@ -155,4 +156,72 @@ describe('VideoHandler', () => {
+       expect(result).toBe(true);
+     });
+   });
++  describe('loadAdaptiveMediaPlayer', () => {
++    afterEach(() => {
++      (ShakaPlayer as unknown as jest.Mock).mockReset();
++    });
++
++    it('reports a video error when the Shaka load rejects after returning', async () => {
++      const { mockVideoRef, mockSetIsVideoError, videoHandler } =
++        createVideoHandler();
++      mockVideoRef.current = {} as unknown as VideoPlayer;
++
++      const mockLoad = jest.fn().mockRejectedValue(new Error('manifest 404'));
++      (ShakaPlayer as unknown as jest.Mock).mockImplementation(() => ({
++        load: mockLoad,
++        unload: jest.fn(),
++      }));
++
++      videoHandler.loadAdaptiveMediaPlayer();
++      await new Promise(process.nextTick);
++
++      expect(mockLoad).toHaveBeenCalledTimes(1);
++      expect(mockSetIsVideoError).toHaveBeenCalledWith(true);
++    });
++
++    it('stays quiet when the player was torn down while the load was in flight', async () => {
++      const { mockVideoRef, mockPlayer, mockSetIsVideoError, videoHandler } =
++        createVideoHandler();
++      mockVideoRef.current = {} as unknown as VideoPlayer;
++
++      const mockLoad = jest
++        .fn()
++        .mockRejectedValue(new Error('LOAD_INTERRUPTED'));
++      (ShakaPlayer as unknown as jest.Mock).mockImplementation(() => ({
++        load: mockLoad,
++        unload: jest.fn(),
++      }));
++
++      videoHandler.loadAdaptiveMediaPlayer();
++      // Backing out of the player mid-load calls destroyMediaPlayerSync, which
++      // unloads Shaka and nulls this ref before the rejection lands. An
++      // aborted load is not a playback error and must not flash the error
++      // screen on the way out.
++      mockPlayer.current = null;
++      await new Promise(process.nextTick);
++
++      expect(mockLoad).toHaveBeenCalledTimes(1);
++      expect(mockSetIsVideoError).not.toHaveBeenCalled();
++    });
++
++    it('reports a video error when the Shaka load throws synchronously', async () => {
++      const { mockVideoRef, mockSetIsVideoError, videoHandler } =
++        createVideoHandler();
++      mockVideoRef.current = {} as unknown as VideoPlayer;
++
++      const mockLoad = jest.fn(() => {
++        throw new Error('bad configuration');
++      });
++      (ShakaPlayer as unknown as jest.Mock).mockImplementation(() => ({
++        load: mockLoad,
++        unload: jest.fn(),
++      }));
++
++      videoHandler.loadAdaptiveMediaPlayer();
++      await new Promise(process.nextTick);
++
++      expect(mockLoad).toHaveBeenCalledTimes(1);
++      expect(mockSetIsVideoError).toHaveBeenCalledWith(true);
++    });
++  });
+ });
+-- 
+2.39.5 (Apple Git-154)
+
