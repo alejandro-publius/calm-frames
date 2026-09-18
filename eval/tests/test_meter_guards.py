@@ -33,8 +33,20 @@ of 0.90. Both area checks now run on the lit rectangle before the inset, and
 afterwards: `Failed: DID NOT RAISE RoiError`.
 
 Two guards in this file are about the committed `results/meter_validation.json` rather than
-about code, so they were checked by editing that file instead: removing the word "simulated"
-from its statement, and removing a `denominator` from one of its rates. Both went red.
+about code, so they were checked by editing that file instead, restoring it and checking its
+SHA-256 back. Removing a `denominator` from one of its rates:
+`AssertionError: verdict_agreement is missing denominator`.
+
+The other one is worth reading twice. Deleting "Simulated footage only. " from the front of the
+statement changed nothing, because the statement says "simulated" again further along. The guard
+was fine; the mutation was too weak to reach it. Taking out every spelling of the word did it:
+`the validation file does not say it is simulated`. A mutation that survives is a question, not
+an answer, and the question here was which of the two was broken.
+
+Running these also found a test of mine that was wrong rather than a guard that was missing. A
+Wilson interval on zero successes comes back with a lower end of 2.8e-17, and an assertion that
+the rate sits inside its own interval failed on that, on the real committed file. The assertion
+now carries a nanosecond of slack and says why.
 """
 
 from __future__ import annotations
@@ -268,7 +280,12 @@ def test_every_published_rate_carries_its_counts_and_its_interval():
             assert field in entry, f"{key} is missing {field}"
         assert entry["wilson_lo"] <= entry["wilson_hi"]
         if entry["denominator"]:
-            assert entry["wilson_lo"] <= entry["value"] <= entry["wilson_hi"]
+            # The slack is float noise, not room for a wrong number. A Wilson interval on zero
+            # successes comes back with a lower end of 2.8e-17 rather than 0, which is the
+            # quadratic being solved in floating point and not a claim that the rate is above
+            # zero. Anything a reader could see is still caught.
+            slack = 1e-9
+            assert entry["wilson_lo"] - slack <= entry["value"] <= entry["wilson_hi"] + slack
 
 
 @pytest.mark.skipif(not VALIDATION.exists(), reason="results/meter_validation.json not written")
