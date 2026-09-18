@@ -133,13 +133,33 @@ def build_map(result: AnalysisResult, created_utc: str | None = None) -> dict[st
             "area_windows": [window.as_dict() for window in result.area_windows],
             "room": None if result.room is None else result.room.as_dict(),
         },
-        "segments": [segment.as_dict() for segment in result.segments],
+        # Flash segments and pattern segments live in one array, in time order, because a
+        # player hides the union and every reader of this map already walks this list. They
+        # are told apart by `reason`, and the summary below counts and judges them apart.
+        "segments": [segment.as_dict() for segment in result.all_segments],
+        "pattern_exemptions": [
+            exemption.as_dict() for exemption in result.pattern_exemptions
+        ],
         "summary": {
             "pass": result.passes,
-            "segment_count": len(result.segments),
+            "segment_count": len(result.all_segments),
             "hidden_ms": int(round(result.hidden_ms)),
             "general_segment_count": sum(1 for s in result.segments if s.reason == "general"),
             "red_segment_count": sum(1 for s in result.segments if s.reason == "red"),
+            "pattern_segment_count": len(result.pattern_segments),
+            "pattern_exemption_count": len(result.pattern_exemptions),
+            # The two verdicts, separable, so nobody has to subtract one from the other.
+            "flash_pass": result.flash_passes,
+            "pattern_pass": result.pattern_passes,
+            "pattern_rule_applied": result.profile.pattern is not None,
+            "pattern_rule_source": (
+                None if result.profile.pattern is None else result.profile.pattern.source
+            ),
+            "pattern_findings_are_not_wcag": (
+                "WCAG 2.2 SC 2.3.1 does not cover regular patterns. A pattern segment is an "
+                "extra hide from an informative ITU recommendation, never a WCAG finding, and "
+                "`flash_pass` is the only verdict a WCAG claim may be read from."
+            ),
             "area_measured_on": "picture",
         },
     }

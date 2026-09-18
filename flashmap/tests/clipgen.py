@@ -55,6 +55,49 @@ def patch(
     return out
 
 
+def grating(
+    width: int,
+    height: int,
+    pairs: int,
+    dark: tuple[int, int, int],
+    bright: tuple[int, int, int],
+    *,
+    vertical: bool = True,
+    area: float = 1.0,
+    shift: int = 0,
+    invert: bool = False,
+) -> NDArray[np.uint8]:
+    """A block of `pairs` light and dark stripe pairs, so exactly `2 * pairs` bars.
+
+    The block covers `area` of the frame along the striped axis and the whole of the other
+    axis. `shift` slides the whole block, for drift clips, and `invert` swaps light for dark,
+    for contrast reversal clips. Bar widths are whole pixels and equal, so the bar count a
+    detector should find is not a matter of opinion.
+    """
+    if pairs < 1:
+        raise ValueError("a grating needs at least one pair")
+    frame = solid(width, height, dark)
+    extent = width if vertical else height
+    span = int(round(extent * area))
+    span -= span % (2 * pairs)
+    if span < 2 * pairs:
+        raise ValueError("the frame is too small for that many bars")
+    bar = span // (2 * pairs)
+    start = (extent - span) // 2 + shift
+    for index in range(2 * pairs):
+        if (index % 2 == 0) == invert:
+            continue
+        low = max(0, min(extent, start + index * bar))
+        high = max(0, min(extent, low + bar))
+        if high <= low:
+            continue
+        if vertical:
+            frame[:, low:high] = bright
+        else:
+            frame[low:high, :] = bright
+    return frame
+
+
 def alternating(
     count: int,
     frame_a: NDArray[np.uint8],

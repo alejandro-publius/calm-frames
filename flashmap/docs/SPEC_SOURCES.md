@@ -322,9 +322,15 @@ transcribed into the test file so the check runs offline.
   SDR only. HLG and PQ inputs are refused rather than analysed with the SDR curve.
 - The 360 ms / 334 ms leading-edge allowance. It can only ever excuse flashes that the
   three-per-second rule already flagged, so leaving it out keeps the analyser stricter.
-- Guideline 2, potentially harmful regular patterns. flashmap does not look for patterns at
-  all, and the sidecar says so in `profile.rules_not_implemented`.
 - The overscan allowance in Note 4 (3.5% to 1% of picture width or height).
+- Any persistence time, stripe width or spatial frequency band for Guideline 2. BT.1702-3 gives
+  none, so none is used as a threshold. See section 8 and implementation decision 9.
+
+**Guideline 2, potentially harmful regular patterns, IS implemented**, in the broadcast profile
+only, from the numbers in Attachment 1 to Annex 1. That attachment is informative, so section 8
+below carries its quote, its status and the consequences of that status, and the sidecar carries
+the attribution beside every pattern segment. Until 2026-09-17 this list said Guideline 2 was
+not implemented. It is, so it is not on the list any more.
 
 ---
 
@@ -414,6 +420,145 @@ records `color.range_source = "default-limited"` so the guess is visible.
 
 ---
 
+## 8. ITU-R BT.1702-3, Guideline 2 and Attachment 1 to Annex 1: regular patterns
+
+Source, URL and PDF as in section 5, the same document. Read on 2026-09-17 from the PDF, SHA-256
+`9d1167de5553a82c633020a44b5f729118e90ff6536a3b519f1813e235437bf2`. Revision checked the same
+day: BT.1702-3 (11/2023) is in force; BT.1702-2, -1 and -0 are superseded.
+
+Two conventions in the quotes below, so the repo style rule and the quote can both be kept:
+the ITU prints its bullet markers as dashes and CLAUDE.md forbids en dashes anywhere here, so
+the bullets appear as `-`; and whitespace is normalised from the PDF text layer, which inserts
+stray spaces inside words. No word, no punctuation and no number is changed.
+
+Verified quote, the scope sentence that governs both guidelines:
+
+> To reduce risk, the following guidelines on visual content should be applied when flashing or
+> regular patterns are clearly discernible in normal domestic viewing conditions.
+
+Verified quote, Annex 1, Guideline 2, in full:
+
+> **Guideline 2  Potentially harmful patterns**
+>
+> Potentially harmful regular patterns occur when an image contains light and dark pairs of
+> clearly discernible stripes in any orientation. The stripes may be parallel or radial, curved
+> or straight, and may be formed by rows of repetitive elements such as polka dots. If the
+> stripes change direction, oscillate, flash or reverse in contrast they are more likely to be
+> harmful than if they are stationary.
+>
+> Attachment 1 to this Annex provides informative guidance for measurement to identify
+> potentially harmful patterns.
+
+Guideline 2 itself carries no stripe count, no area and no contrast. It defines the hazard and
+puts every number in Attachment 1.
+
+### 8.1 Attachment 1 to Annex 1, and what "informative" costs us
+
+**Verified as text. Informative in status.** The quote is exact and from the primary document,
+so it meets the bar on this page for a number flashmap may use. What it is not is a requirement:
+the ITU marks the attachment `(informative)` and its first sentence says the criteria are used
+by some administrations, not by all. So everything flashmap reports from it says where it came
+from, in `profile.pattern_rule_source` and on every pattern segment, and nothing reported from
+it is presented as a requirement.
+
+Verified quote, Attachment 1 to Annex 1, in full:
+
+> **Attachment 1**
+> **to Annex 1**
+> **(informative)**
+>
+> **Guidance on measurement criteria to identify potentially harmful patterns**
+>
+> The following additional guidance on the identification of potentially harmful regular
+> patterns is used by some administrations.
+>
+> Potentially harmful regular patterning may occur if an image contains more than five light
+> and dark pairs of clearly discernible stripes in any orientation when either of the following
+> two conditions apply:
+>
+> - the stripes are stationary and the pattern occupies more than 40% of the displayed screen
+>   area; or
+> - the stripes change direction, oscillate, flash, or reverse in contrast and the pattern
+>   occupies more than 25% of the displayed screen area.
+>
+> For a pattern to be considered potentially harmful, the difference between the luminance of
+> the darker and lighter bars of the pattern will be the same as the difference between the
+> darker and brighter images of a potentially harmful flash described in Guideline 1 above.
+>
+> If the patterns obviously flow smoothly across, into, or out of the screen in one direction
+> they are exempt from restriction.
+
+Numbers taken from this quote and used in the `broadcast` profile:
+
+| Number | Meaning | Where it is used |
+| --- | --- | --- |
+| more than 5 | light and dark pairs of clearly discernible stripes, printed as "more than five", so six pairs, which is twelve bars, is the first count that can fail | `profiles.BROADCAST_SDR.pattern.more_than_pairs` |
+| 0.40 | more than 40% of the displayed screen area, when the stripes are stationary | `profiles.BROADCAST_SDR.pattern.stationary_area_limit` |
+| 0.25 | more than 25% of the displayed screen area, when the stripes change direction, oscillate, flash or reverse in contrast | `profiles.BROADCAST_SDR.pattern.changing_area_limit` |
+
+The bar to bar difference is **not a new number**. The attachment defines it by reference to
+Guideline 1, so the pattern rule reads the profile's own general flash rule: for SDR that is a
+darker bar below 160 cd/m2 and a difference of 20 cd/m2 or more, through the same peak white of
+200 cd/m2 and the same BT.1886 curve as section 5. `pattern.py` is handed `profile.general`
+and introduces no luminance constant of its own.
+
+Three things the quote settles:
+
+1. the stripe count and the area are one test: the count is a gate and then either area
+   condition can trip it;
+2. the contrast condition is separate and additional;
+3. the static and moving cases differ only in the area limit, 40% against 25%. Nothing in the
+   quote gives a duration, a persistence time, a stripe width or a spatial frequency.
+
+On area: BT.1702-3 Note 4 explains "displayed" for Guideline 1 as allowing for overscan of 3.5%
+to 1% of picture width or height. Attachment 1 says "displayed screen area" without repeating
+the note. flashmap measures the pattern on the picture after letterbox and pillarbox removal
+(implementation decision 5) and does not implement the overscan allowance, which makes it
+stricter. The pattern rule measures the same way, for the same reason.
+
+### 8.2 WCAG 2.2 does not cover regular patterns at all
+
+**Verified, and it is a negative result worth writing down.**
+
+Source: Understanding Success Criterion 2.3.1: Three Flashes or Below Threshold, W3C, read
+2026-09-17. URL: https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html
+
+Every occurrence of the word "pattern" in SC 2.3.1 and its Understanding document is the same
+exemption, quoted in full in section 2 of this file: the fine, balanced pattern such as white
+noise or a checkerboard under 0.1 degree. The word "stripe" does not occur. There is no WCAG
+requirement about stripe counts, static patterns, pattern area or pattern contrast, and the one
+pattern sentence WCAG has lets content off rather than catching it.
+
+Consequences, and they are firm:
+
+- the pattern rule is not a WCAG rule. It is absent from the `wcag` profile, it never changes a
+  WCAG pass or fail, and it must never be described as WCAG conformance in the README, the
+  Devpost text or the video. The map carries `summary.flash_pass` for the WCAG reading and
+  `summary.pattern_pass` beside it, and every pattern segment carries
+  `"is_a_wcag_finding": false`;
+- the house line that room settings can only make things stricter than WCAG is unaffected. A
+  pattern hide is strictly extra.
+
+### 8.3 Sources that could not be read, and vendor claims that are not sources
+
+- **Ofcom's guidance note on flashing images and regular patterns.** Every ofcom.org.uk URL
+  tried on 2026-09-17 answered HTTP 403 behind a Cloudflare interstitial, to a plain fetch and
+  to curl with a desktop user agent alike, and no browser was connected to that session. **No
+  number is taken from Ofcom and nothing in the code cites Ofcom.** Worth retrying from a
+  machine with a browser: Ofcom's wording states the contrast condition as its own clause that
+  must apply in addition to the area condition, where the ITU attachment states it as a
+  sentence, and the two read the same way.
+- **HardingFPA** is a commercial analyser. Its pages are marketing and product support for a
+  closed implementation, not a published threshold, so under CLAUDE.md they cannot supply a
+  number. In particular the claim that a pattern must stay stationary for about half a second
+  before it fails appears only on vendor and third party pages. No primary document read here
+  contains a persistence time for patterns, so flashmap has none.
+- **The Japanese NAB and ARIB guidance**, which BT.1702-3 alludes to as regional variation. No
+  primary English copy read. Not used.
+- **ISO 9241-391**, still behind a paywall, as recorded in section 4.
+
+---
+
 ## Implementation decisions where the specs are silent
 
 These are not thresholds. They are choices flashmap had to make to turn the wording above into
@@ -459,6 +604,39 @@ code. Each one is named in the sidecar so that a consumer can see the reading th
 8. **The room window is geometry, not a threshold.** A 10 degree field at a seat distance d
    subtends 2 * d * tan(5 degrees). The 10 degrees is WCAG's, from section 2. The trigonometry
    is not a number that needs a source.
+
+9. **How stripes are counted, and how the motion class is decided.** Attachment 1 says "clearly
+   discernible stripes in any orientation" and nothing more, so the detector had to be built
+   out of choices rather than numbers. Each one is in `pattern.PatternSettings` with its
+   default written out, and the whole block is in the sidecar under
+   `profile.pattern_rule.tuning`, the same way the bar detector's numbers are under decision 6.
+   None of them is a threshold:
+
+   - stripes are counted along four scan families, rows, columns and the two diagonal shears,
+     because the attachment allows any orientation and allows radial, curved and dotted
+     patterns. A bar boundary is a swing that reaches the Guideline 1 flash difference with the
+     darker level under the Guideline 1 darker image limit, read across the picture instead of
+     across time, and only boundaries that oppose the one before them count, so a gradient
+     across the screen counts no bars however far it travels. Twelve bars is six pairs;
+   - the pattern area is the union of the stretches of those scanlines that lie between their
+     outer bar boundaries, as a fraction of the picture;
+   - motion is measured on the one dimensional stripe profile of the orientation that counted
+     the most bars, not on the picture, because a grating can only be seen to move along its
+     own normal. A shift is a whole pixel lag found by normalised cross correlation, searched
+     out to just under one bar width. A pattern that travels a whole bar between two frames
+     lands on top of itself, so the measurement is reported ambiguous rather than guessed at;
+   - **the smooth flow exemption fails safe.** It is applied only when the flow is unambiguous:
+     a full history of frame to frame comparisons, all in one direction, none still, none
+     ambiguous, none below the match floor. Anything short of that is `uncertain`, and
+     `uncertain` takes the 25% area, never the 40% one, and never the exemption. The cost is
+     that a pattern between the two area limits is hidden for the first few frames, while the
+     detector is still filling its history, and that a fine pattern flowing fast enough to
+     alias is hidden rather than exempted. Every exemption that is applied is written into the
+     map as its own interval in `pattern_exemptions`, so a reviewer sees what was let through
+     instead of finding a silence. docs/DECISIONS.md carries the reasoning.
+
+   There is no persistence time, no stripe width and no spatial frequency band in this list,
+   because BT.1702-3 gives none and a vendor page is not a source (section 8.3).
 
 ---
 

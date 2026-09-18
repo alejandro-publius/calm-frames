@@ -11,10 +11,18 @@ from __future__ import annotations
 
 __version__ = "1.0.0"
 
-from .analyze import AnalysisResult, Segment, StreamingAnalyzer, analyze_file
+from .analyze import (
+    AnalysisResult,
+    PatternExemption,
+    PatternSegment,
+    Segment,
+    StreamingAnalyzer,
+    analyze_file,
+)
 from .decode import ColorPolicy, UnsupportedInput
+from .pattern import PatternSettings
 from .picture import LetterboxSettings, PictureRect
-from .profiles import BROADCAST_SDR, PROFILES, WCAG, Profile, get_profile
+from .profiles import BROADCAST_SDR, PROFILES, WCAG, PatternRule, Profile, get_profile
 from .room import RoomSetting
 from .sidecar import (
     SIDECAR_VERSION,
@@ -33,6 +41,10 @@ __all__ = [
     "ColorPolicy",
     "LetterboxSettings",
     "PROFILES",
+    "PatternExemption",
+    "PatternRule",
+    "PatternSegment",
+    "PatternSettings",
     "PictureRect",
     "Profile",
     "RoomSetting",

@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from collections import deque
 from collections.abc import Iterable, Iterator
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
@@ -27,6 +27,7 @@ from .decode import (
     probe,
 )
 from .flash import GeneralFlashTracker, RedFlashTracker
+from .pattern import PatternObservation, PatternTracker
 from .picture import (
     CARRIED,
     DETECTED,
@@ -40,12 +41,18 @@ from .profiles import Profile
 from .room import RoomSetting, room_window
 
 __all__ = [
+    "PATTERN",
     "Segment",
+    "PatternSegment",
+    "PatternExemption",
     "AnalysisResult",
     "StreamingAnalyzer",
     "analyze_file",
     "build_area_windows",
 ]
+
+PATTERN = "pattern"
+"""The `reason` a pattern segment carries. Its own kind, not a flash with a different word."""
 
 
 @dataclass
@@ -77,6 +84,79 @@ class Segment:
 
 
 @dataclass
+class PatternSegment:
+    """A span where a high contrast regular pattern broke BT.1702-3 Attachment 1.
+
+    Its own kind. It is not a flash, it carries none of a flash segment's fields, and it is
+    never a WCAG finding. `source` travels with every one of them because the attachment is
+    informative and says so about itself.
+    """
+
+    start_ms: float
+    end_ms: float
+    pattern_first_ms: float
+    pattern_last_ms: float
+    stripe_pairs: int
+    area_fraction: float
+    area_limit: float
+    motion: str
+    motion_confidence: float
+    source: str
+    reason: str = PATTERN
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "start_ms": int(round(self.start_ms)),
+            "end_ms": int(round(self.end_ms)),
+            "reason": self.reason,
+            "pattern_first_ms": int(round(self.pattern_first_ms)),
+            "pattern_last_ms": int(round(self.pattern_last_ms)),
+            "stripe_pairs": int(self.stripe_pairs),
+            "area_fraction": round(float(self.area_fraction), 6),
+            "area_limit": self.area_limit,
+            "motion": self.motion,
+            "motion_confidence": round(float(self.motion_confidence), 4),
+            "source": self.source,
+            "is_a_wcag_finding": False,
+        }
+
+
+@dataclass
+class PatternExemption:
+    """A span the smooth flow exemption let through, recorded so it is never a silence.
+
+    The attachment exempts a pattern that obviously flows smoothly across, into or out of the
+    screen in one direction. flashmap applies that only when the flow is unambiguous, and
+    writes down every time it did, with what the pattern measured, so a reviewer can see what
+    was not hidden and why.
+    """
+
+    start_ms: float
+    end_ms: float
+    stripe_pairs: int
+    area_fraction: float
+    area_limit: float
+    motion_confidence: float
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "start_ms": int(round(self.start_ms)),
+            "end_ms": int(round(self.end_ms)),
+            "stripe_pairs": int(self.stripe_pairs),
+            "area_fraction": round(float(self.area_fraction), 6),
+            "area_limit": self.area_limit,
+            "motion": "smooth-flow",
+            "motion_confidence": round(float(self.motion_confidence), 4),
+            "exemption": (
+                "ITU-R BT.1702-3 Attachment 1 to Annex 1: a pattern that obviously flows "
+                "smoothly across, into or out of the screen in one direction is exempt. This "
+                "span met the stripe count, the bar difference and the area limit and was not "
+                "hidden."
+            ),
+        }
+
+
+@dataclass
 class AnalysisResult:
     source: SourceInfo
     picture: PictureRect
@@ -97,15 +177,39 @@ class AnalysisResult:
     detected_picture: PictureRect | None = None
     """What this file's own detector found. Recorded even when a rectangle was carried in, so
     a reader can see how far the two are apart without analysing the file again."""
+    pattern_segments: list[PatternSegment] = field(default_factory=list)
+    """Regular pattern spans, kept apart from the flash segments so either verdict can be read
+    on its own. Empty whenever the profile has no pattern rule, which is every WCAG run."""
+    pattern_exemptions: list[PatternExemption] = field(default_factory=list)
+    """Every span the smooth flow exemption let through."""
+
+    @property
+    def flash_passes(self) -> bool:
+        """The flash verdict on its own: general and red only, no pattern rule in it.
+
+        This is the number a WCAG claim may be made from. `passes` below is the whole profile.
+        """
+        return not self.segments
+
+    @property
+    def pattern_passes(self) -> bool:
+        """The pattern verdict on its own. Always True when the profile has no pattern rule."""
+        return not self.pattern_segments
+
+    @property
+    def all_segments(self) -> list[Segment | PatternSegment]:
+        """Every hide this analysis asks for, flash and pattern together, in time order."""
+        merged: list[Segment | PatternSegment] = [*self.segments, *self.pattern_segments]
+        return sorted(merged, key=lambda s: (s.start_ms, s.reason))
 
     @property
     def passes(self) -> bool:
-        return not self.segments
+        return not self.all_segments
 
     @property
     def hidden_ms(self) -> float:
         merged: list[list[float]] = []
-        for segment in sorted(self.segments, key=lambda s: s.start_ms):
+        for segment in sorted(self.all_segments, key=lambda s: s.start_ms):
             if merged and segment.start_ms <= merged[-1][1]:
                 merged[-1][1] = max(merged[-1][1], segment.end_ms)
             else:
@@ -145,6 +249,46 @@ def build_area_windows(
             )
         )
     return windows
+
+
+class _OpenPattern:
+    """A pattern span being built up, either a failing one or an exempted one."""
+
+    __slots__ = (
+        "start",
+        "end",
+        "first",
+        "last",
+        "stripe_pairs",
+        "area_fraction",
+        "area_limit",
+        "motion",
+        "confidence",
+    )
+
+    def __init__(self, start: float, observation: PatternObservation) -> None:
+        self.start = start
+        self.end = observation.pts_ms
+        self.first = observation.pts_ms
+        self.last = observation.pts_ms
+        self.stripe_pairs = observation.stripe_pairs
+        self.area_fraction = observation.area_fraction
+        self.area_limit = observation.area_limit
+        self.motion = observation.motion
+        self.confidence = observation.motion_confidence
+
+    def extend(self, observation: PatternObservation) -> None:
+        self.end = max(self.end, observation.pts_ms)
+        self.last = max(self.last, observation.pts_ms)
+        self.stripe_pairs = max(self.stripe_pairs, observation.stripe_pairs)
+        if observation.area_fraction > self.area_fraction:
+            self.area_fraction = observation.area_fraction
+        # The strictest limit that was ever applied inside the span is the one to report: it
+        # says the pattern was treated as changing or uncertain somewhere inside it.
+        self.area_limit = min(self.area_limit, observation.area_limit)
+        if observation.motion != self.motion:
+            self.motion = "mixed"
+        self.confidence = min(self.confidence, observation.motion_confidence)
 
 
 class _OpenSegment:
@@ -202,6 +346,23 @@ class StreamingAnalyzer:
         }
         self._open: dict[str, _OpenSegment | None] = {"general": None, "red": None}
         self._closed: list[Segment] = []
+        self._pattern = (
+            None
+            if profile.pattern is None
+            else PatternTracker(
+                min_delta=profile.general.min_delta,
+                dark_image_below=profile.general.dark_image_below,
+                more_than_pairs=profile.pattern.more_than_pairs,
+                stationary_area_limit=profile.pattern.stationary_area_limit,
+                changing_area_limit=profile.pattern.changing_area_limit,
+                settings=profile.pattern.settings,
+            )
+        )
+        self._pattern_open: _OpenPattern | None = None
+        self._pattern_closed: list[PatternSegment] = []
+        self._exempt_open: _OpenPattern | None = None
+        self._exempt_closed: list[PatternExemption] = []
+        self._previous_pts: float | None = None
         self._last_pts: float | None = None
         self._last_coded_pts: float | None = None
         self._first_pts: float | None = None
@@ -245,6 +406,79 @@ class StreamingAnalyzer:
         ratio = color_math.red_ratio(linear)
         red_mask = self._red.step(u_prime, v_prime, ratio)
         self._record("red", frame.pts_ms, red_mask)
+
+        if self._pattern is not None:
+            self._record_pattern(self._pattern.step(frame.pts_ms, metric))
+        self._previous_pts = frame.pts_ms
+
+    # ---- the pattern rule -------------------------------------------------------------
+
+    def _record_pattern(self, observation: PatternObservation) -> None:
+        """Open, extend or close the pattern span and the exemption span this frame belongs to.
+
+        A failing span starts at the frame *before* the first failing one, so the hide is
+        already up when the pattern arrives. There is no window here: BT.1702-3 gives the
+        pattern rule no persistence time and none is invented, so a span is the frames that
+        failed and nothing wider.
+        """
+        settings = self.profile.pattern.settings if self.profile.pattern else None
+        bridge = settings.segment_bridge_ms if settings else 0.0
+        lead = self._previous_pts if self._previous_pts is not None else observation.pts_ms
+
+        if observation.fails:
+            if self._pattern_open is not None and observation.pts_ms - self._pattern_open.end <= bridge:
+                self._pattern_open.extend(observation)
+            else:
+                self._flush_pattern()
+                self._pattern_open = _OpenPattern(lead, observation)
+        elif self._pattern_open is not None and observation.pts_ms - self._pattern_open.end > bridge:
+            self._flush_pattern()
+
+        if observation.exempt:
+            if self._exempt_open is not None and observation.pts_ms - self._exempt_open.end <= bridge:
+                self._exempt_open.extend(observation)
+            else:
+                self._flush_exemption()
+                self._exempt_open = _OpenPattern(observation.pts_ms, observation)
+        elif self._exempt_open is not None and observation.pts_ms - self._exempt_open.end > bridge:
+            self._flush_exemption()
+
+    def _flush_pattern(self) -> None:
+        span = self._pattern_open
+        if span is None:
+            return
+        rule = self.profile.pattern
+        self._pattern_closed.append(
+            PatternSegment(
+                start_ms=span.start,
+                end_ms=span.end,
+                pattern_first_ms=span.first,
+                pattern_last_ms=span.last,
+                stripe_pairs=span.stripe_pairs,
+                area_fraction=span.area_fraction,
+                area_limit=span.area_limit,
+                motion=span.motion,
+                motion_confidence=span.confidence,
+                source="" if rule is None else rule.source,
+            )
+        )
+        self._pattern_open = None
+
+    def _flush_exemption(self) -> None:
+        span = self._exempt_open
+        if span is None:
+            return
+        self._exempt_closed.append(
+            PatternExemption(
+                start_ms=span.start,
+                end_ms=span.end,
+                stripe_pairs=span.stripe_pairs,
+                area_fraction=span.area_fraction,
+                area_limit=span.area_limit,
+                motion_confidence=span.confidence,
+            )
+        )
+        self._exempt_open = None
 
     def _record(self, kind: str, pts_ms: float, mask: NDArray[np.bool_]) -> None:
         events = self._events[kind]
@@ -333,6 +567,14 @@ class StreamingAnalyzer:
         for kind in ("general", "red"):
             self._flush(kind)
         return sorted(self._closed, key=lambda s: (s.start_ms, s.reason))
+
+    def pattern_segments(self) -> list[PatternSegment]:
+        self._flush_pattern()
+        return sorted(self._pattern_closed, key=lambda s: s.start_ms)
+
+    def pattern_exemptions(self) -> list[PatternExemption]:
+        self._flush_exemption()
+        return sorted(self._exempt_closed, key=lambda s: s.start_ms)
 
     def interval_stats(self) -> tuple[bool, dict[str, float]]:
         if not self._intervals:
@@ -448,6 +690,8 @@ def analyze_file(
         last_coded_pts_ms=analyzer.last_coded_pts_ms,
         picture_source=picture_source,
         detected_picture=detected,
+        pattern_segments=analyzer.pattern_segments(),
+        pattern_exemptions=analyzer.pattern_exemptions(),
     )
 
 

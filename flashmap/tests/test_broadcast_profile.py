@@ -7,6 +7,8 @@ area. See flashmap/docs/SPEC_SOURCES.md section 5.
 
 from __future__ import annotations
 
+import json
+
 import numpy as np
 import pytest
 
@@ -99,4 +101,22 @@ def test_the_profile_says_what_it_does_not_implement():
     joined = " ".join(described["rules_not_implemented"])
     assert "HDR" in joined
     assert "334 ms" in joined
-    assert "patterns" in joined
+    assert "overscan" in joined
+    # Guideline 2 used to be on this list. It is implemented now, so the list must not still
+    # say it is missing, and the parts of it that really are missing have to be named instead.
+    assert "Guideline 2" in joined and "persistence" in joined
+    assert "potentially harmful regular patterns" not in joined
+
+
+def test_the_profile_carries_the_pattern_rule_and_says_it_is_informative():
+    described = BROADCAST_SDR.as_dict()
+    rule = described["pattern_rule"]
+    assert rule is not None, "the broadcast profile must carry the Guideline 2 pattern rule"
+    assert rule["more_than_pairs"] == 5
+    assert rule["stationary_area_limit"] == 0.40
+    assert rule["changing_area_limit"] == 0.25
+    assert rule["informative"] is True
+    assert rule["is_a_wcag_requirement"] is False
+    assert "BT.1702-3 Attachment 1 to Annex 1" in described["pattern_rule_source"]
+    assert "informative" in described["pattern_rule_source"]
+    assert "Ofcom" not in json.dumps(described)
