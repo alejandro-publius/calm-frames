@@ -116,6 +116,15 @@ class StackConfig:
     github_repo: str = ""  # "owner/name"
     github_oidc_provider_arn: str = ""  # reuse an existing provider when set
     signing_public_key: str = ""  # PEM, turns on CloudFront signed URLs
+    # An SSM SecureString holding the map signing private key. Empty means the
+    # task signs nothing, which is the default: an unsigned map is refused by
+    # every player, so the safe setting is the one that publishes nothing rather
+    # than the one that puts a private key in the cloud. docs/SECURITY.md says
+    # what you are taking on when you set it.
+    signing_key_parameter: str = ""
+    # One preset in the cloud. Each extra preset is another full encode of the
+    # title, which is the largest line in the cost estimate.
+    presets: tuple[str, ...] = ("wcag",)
     task_cpu: int = 2048
     task_memory_mib: int = 4096
     log_retention: logs.RetentionDays = logs.RetentionDays.TWO_WEEKS
@@ -305,15 +314,21 @@ class CalmFramesStack(Stack):
             retention=self.config.log_retention,
             removal_policy=RemovalPolicy.DESTROY,
         )
+        environment = {
+            "CALM_FRAMES_DELIVERY_BUCKET": self.delivery_bucket.bucket_name,
+            "CALM_FRAMES_CATALOG_TABLE": self.catalog_table.table_name,
+            "CALM_FRAMES_SOURCE_BUCKET": self.source_bucket.bucket_name,
+            "CALM_FRAMES_PRESETS": ",".join(self.config.presets),
+            "CALM_FRAMES_WORKDIR": "/work",
+        }
+        if self.config.signing_key_parameter:
+            environment["CALM_FRAMES_SIGNING_KEY_PARAM"] = self.config.signing_key_parameter
+
         task_definition.add_container(
             "ingest",
             image=ecs.ContainerImage.from_ecr_repository(repository, "latest"),
             logging=ecs.LogDrivers.aws_logs(stream_prefix="ingest", log_group=task_logs),
-            environment={
-                "CALM_FRAMES_DELIVERY_BUCKET": self.delivery_bucket.bucket_name,
-                "CALM_FRAMES_CATALOG_TABLE": self.catalog_table.table_name,
-                "CALM_FRAMES_SOURCE_BUCKET": self.source_bucket.bucket_name,
-            },
+            environment=environment,
         )
 
         # Least privilege: read the uploads, write the artifacts, write the
@@ -323,6 +338,33 @@ class CalmFramesStack(Stack):
         self.delivery_bucket.grant_read(task_definition.task_role)
         self.catalog_table.grant_write_data(task_definition.task_role)
         repository.grant_pull(task_definition.obtain_execution_role())
+
+        if self.config.signing_key_parameter:
+            name = self.config.signing_key_parameter.lstrip("/")
+            task_definition.task_role.add_to_principal_policy(
+                iam.PolicyStatement(
+                    actions=["ssm:GetParameter"],
+                    resources=[
+                        f"arn:aws:ssm:{self.region}:{self.account}:parameter/{name}"
+                    ],
+                )
+            )
+            # A SecureString is decrypted by KMS, not by SSM, so reading one
+            # needs kms:Decrypt as well. The parameter is expected to use the
+            # account's aws/ssm key, whose id is not known at synth time, so the
+            # condition does the narrowing instead: this grant only works when
+            # the call arrives through SSM in this region.
+            task_definition.task_role.add_to_principal_policy(
+                iam.PolicyStatement(
+                    actions=["kms:Decrypt"],
+                    resources=[f"arn:aws:kms:{self.region}:{self.account}:key/*"],
+                    conditions={
+                        "StringEquals": {
+                            "kms:ViaService": f"ssm.{self.region}.amazonaws.com"
+                        }
+                    },
+                )
+            )
 
         return repository, cluster, task_definition
 

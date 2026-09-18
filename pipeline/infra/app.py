@@ -32,6 +32,16 @@ def build_app() -> cdk.App:
             app.node.try_get_context("calmframes:githubOidcProviderArn") or ""
         ),
         signing_public_key=app.node.try_get_context("calmframes:signingPublicKey") or "",
+        signing_key_parameter=(
+            app.node.try_get_context("calmframes:signingKeyParameter") or ""
+        ),
+        presets=tuple(
+            preset.strip()
+            for preset in (
+                app.node.try_get_context("calmframes:presets") or "wcag"
+            ).split(",")
+            if preset.strip()
+        ),
     )
     CalmFramesStack(
         app,

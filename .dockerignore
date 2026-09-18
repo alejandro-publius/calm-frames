@@ -1,0 +1,30 @@
+# What may go into a container build context, as an allowlist.
+#
+# Ignore everything first, then name the few directories the ingest image
+# needs. An allowlist rather than a list of exclusions, because the things that
+# must never reach a build context are exactly the things nobody remembers to
+# exclude: hazard media under media/, private keys, the .git history, the
+# app's node_modules, cdk.out.
+#
+# Check it before you build:
+#
+#   make image-context     prints every file the build would send
+*
+
+!flashmap/
+!pipeline/
+!LICENSE
+!NOTICE
+
+# Nothing generated, and no test media, even from the directories above.
+flashmap/**/__pycache__/
+flashmap/tests/fixtures/
+flashmap/build/
+flashmap/dist/
+flashmap/*.egg-info/
+pipeline/**/__pycache__/
+pipeline/tests/
+pipeline/infra/cdk.out/
+**/*.pyc
+**/*.pem
+**/.DS_Store
