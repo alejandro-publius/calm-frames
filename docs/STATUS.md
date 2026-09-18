@@ -99,6 +99,40 @@ It surfaced because a second, stricter script needed a position report from the 
 
 **Submission.** README, `docs/SUBMISSION.md`, `docs/FRICTION_LOG.md`, `docs/OPEN_SOURCE_PR.md` and `docs/VIDEO_SCRIPT.md` are written, with every number traced to `results/` and checked by CI.
 
+## 4b. Running right now, and what is still open
+
+**A chaos re-run is in flight** and will write `results/chaos_vvd.json` when it
+finishes, in about twenty minutes from 22:30 PT. The committed run is honest but
+thin: 16 passes, 157 rude actions, every pause, seek and stall met by the
+fail-safe cover, but only **3 marker crossings**, because `markers50.mp4` puts its
+first marker at 4000 ms and a rewind under chaos is a 10 second seek, so 14 of 16
+passes never got the playhead that far. The re-run uses `markers_packed.mp4`,
+whose first marker is at 2000 ms, and should give 20 to 30 crossings in the same
+time. **Nothing quotes the 3 crossing run and nothing should.** If the re-run
+comes back thin too, say so and leave the claim unmade.
+
+Two limits of that harness are recorded in the file and are not fixed: no segment
+request ever stalled, because the whole clip is fetched before the 9 second settle
+ends, so the network chaos reached a player that had already buffered everything;
+and backgrounding never happened, so `background_covers_seen` is 0.
+
+**Still open, in rough order of what would help most:**
+
+1. **The early covers are not capped.** The p95 lead is 4097 ms and the longest is
+   6197.5 ms against a 500 ms guard band. A cover four seconds early is safe and it
+   is not the schedule working, it is the cover firing whenever the next position
+   report happened to arrive. Capping it would mean delaying the cover on a player
+   whose reports can be 5219 ms apart, which trades the thing this app exists for
+   against a cosmetic gain, so it has not been done. If it is done, the cap has to
+   be measured against the worst report gap, not chosen.
+2. **`pipeline/verify.py` skips its own cover check** when a title has no flagged
+   segment, around line 477, so 14 of the 21 verified titles collect 38 passing
+   checks without covering anything. A distinct `clean` status would stop the
+   count reading as protection demonstrated.
+3. **EA IRIS is still not a candidate list**, so the recall estimate is optimistic
+   by an unknown amount, and the 16 calm clips are screened but not in the
+   labelling pool because only flashmap has looked at them.
+
 ## 5. What is not done
 
 - **No cover lead time on real hardware**, and none is possible until the stick arrives. There is now a software-level figure in `results/gate1_software_vvd.json`: 49 trials, 48 covered in time, median lead 488 ms, and one cover that went on 86 ms late because the JavaScript thread paused for about a third of a second. It is labelled as software-level: it cannot see the React commit, the compositor, scan-out or the panel, so it is an upper bound on how well the real thing can do, never a prediction of it.
