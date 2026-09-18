@@ -1,0 +1,42 @@
+{
+  "created_utc": "2026-09-18T00:14:13Z",
+  "files": {
+    "94b63ee75c9873c23df210c82f0e65319b492666fed5383ce647754f46460c5e": {
+      "maps": {
+        "wcag": {
+          "created_utc": "2026-09-18T00:14:13Z",
+          "hidden_ms": 10200,
+          "key_id": "sha256:e818161a4a506c46470c4ee938f187800704c75cf4293fc783ac24bae2493dc3",
+          "path": "maps/bursts.wcag.json",
+          "segment_count": 3,
+          "signature": "UZ+vDIE+mNE1LSN2MESNnWU/j0fLnzYSTJMCek4bZurOJrx708du+RVHmYQLpAsyjpy/izo/yiXNlsWKcIpACg=="
+        }
+      }
+    },
+    "af2934dc45c9519bcace8db253d0a9e0c10f9db6682a04ad2cf3f906e1755224": {
+      "maps": {
+        "wcag": {
+          "created_utc": "2026-09-18T00:13:36Z",
+          "hidden_ms": 0,
+          "key_id": "sha256:e818161a4a506c46470c4ee938f187800704c75cf4293fc783ac24bae2493dc3",
+          "path": "maps/calm_gradient.wcag.json",
+          "segment_count": 0,
+          "signature": "ybe+4SX4NG5wso9vcYr4Q3e7sQWAMn9BIum+ukL5AM7yV11ASVEH84qaEb/IpWlIZbyoOCAxN1elMkXbhrohAg=="
+        }
+      }
+    }
+  },
+  "generator": {
+    "name": "calm-frames-registry",
+    "version": "1.0.0"
+  },
+  "schema": "https://calm-frames.github.io/schemas/flashmap-registry-v1.json",
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "sha256:e818161a4a506c46470c4ee938f187800704c75cf4293fc783ac24bae2493dc3",
+    "payload_sha256": "8c2b995adac2ed06fe94f6ce86c2ecf41a68737b7ad63e001503fd2e72c671c8",
+    "public_key": "/brschmFHfvmbulBzPdh2EzwlSOUvAcvXF3X5bNAtJY=",
+    "value": "E2yHIJ6ZSEKXjYfYCZPOIYI87Fc0m9HPeZEsxRbgY63FP1EHOx15oBvoz1eYiV4w351c8ST4J9UZDyUifHzKCQ=="
+  },
+  "version": 1
+}

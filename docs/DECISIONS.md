@@ -532,3 +532,55 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   there is a keyboard.
   **Cost:** four profiles called Kid read worse than four names. `renameProfile`
   is there and tested, so the screen is the only piece missing.
+
+## 2026-09-18: the map registry, and why signing it is not enough on its own
+
+- **Decision:** the index of published maps is signed, **and** every entry is
+  checked against the map it points at, **and** the map has to be the one the
+  entry named, by its Ed25519 signature. `pipeline/registry.py` builds it,
+  `app/src/calmframes/mapRegistry.ts` reads it, docs/SIDECAR_SPEC.md holds the
+  format.
+  **Why:** the threat is somebody serving a modified index. Ask what they can do
+  with only one of the two halves in place and the answer is different each
+  time. With the index signed and the entries not rechecked, an attacker who can
+  serve the maps as well as the index, which is the ordinary case because both
+  come off the same origin, swaps a validly signed older map of the same file,
+  one with fewer segments, in at the URL the index names. The index is untouched
+  and still verifies, and the picture comes back. With the entries rechecked and
+  the index unsigned, they write their own index instead: point a file at no map
+  at all, or at an older map they kept, and every check we run passes because
+  each map is a real map. So both, plus the entry carrying the map's signature,
+  which is what ties one to the other. The one attack neither closes is replaying
+  yesterday's set whole, so the index has a staleness bound of its own, thirty
+  days, shorter than a map's ninety because it is rebuilt on every publish.
+  **Cost:** one more fetch and one more signature check before a title can play,
+  both off the frame path, and a published set now has a file that has to be
+  rebuilt whenever a map is added.
+
+- **Decision:** the builder refuses to index a map it cannot verify against the
+  public key it was given, and refuses two maps claiming the same file and
+  profile, and either refusal stops the whole build.
+  **Why:** an index entry is a claim that a checked map exists. An index built
+  from maps nobody checked is that claim made at scale, and a build that quietly
+  skipped the maps it could not read would publish a shelf with holes in it that
+  nobody would see. Failing the build is loud, and nothing is written.
+  **Cost:** one unreadable map in a directory blocks the index for all of them,
+  which is the direction we want to fail in.
+
+- **Decision:** the index's own date is the newest date of the maps it indexes,
+  not the clock, and paths in it are relative to the index.
+  **Why:** the file has to be reproducible, so a mirror can be compared rather
+  than trusted. With the clock in it, two builds of the same directory differ,
+  and there is nothing left to compare. Ed25519 signatures are deterministic, so
+  with the timestamp and the paths pinned the bytes are too.
+  **Cost:** an index of maps that never change never changes its date either,
+  which is right, and an empty set has no date to take, so that one case has to
+  be given one.
+
+- **Decision:** the lookup is not in the hook package yet.
+  **Why:** `hook/src/engine/*` is generated from `app/src/calmframes` by
+  `hook/tools/sync.mjs` and a test enforces it byte for byte. Adding the file to
+  that mirror means editing the sync script's list and running it, which belongs
+  to whoever owns the mirror, not to this lane.
+  **Cost:** an app that installs `@calm-frames/flash-guard` today gets the guard
+  and not the registry lookup. The change is two lines and a sync run.

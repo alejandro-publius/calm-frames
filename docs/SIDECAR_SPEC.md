@@ -7,6 +7,9 @@ the video it describes.
 Producer: `python -m flashmap analyze VIDEO --out MAP.json --key team_key.pem`.
 Reader of last resort: `python -m flashmap verify MAP.json VIDEO --pub team_key.pub.pem`.
 
+The last section of this file, "The registry", describes the signed index that sits beside a
+set of published maps so an app holding a video file can find out whether a map for it exists.
+
 Thresholds are not defined here. They live in `flashmap/docs/SPEC_SOURCES.md` with the quoted
 spec text they came from, and the map repeats the ones it used so a reader never has to guess.
 
@@ -361,6 +364,131 @@ reader must re-serialise rather than hash the file.
   }
 }
 ```
+
+## The registry, version 1
+
+A map is written next to the video it describes, which works when the app already knows where
+the map is. The registry is for the other case: an app has a video file, it has hashed it, and
+it wants to know whether a checked map for that file exists anywhere in a published set.
+
+It is one signed JSON file served beside the maps, keyed by the SHA-256 of the video file,
+which is the same key the maps are bound to by `source.sha256`. Producer:
+`python -m pipeline.registry MAPS_DIR --out registry.json --key team_key.pem --pub
+team_key.pub.pem`. Reader: `app/src/calmframes/mapRegistry.ts`.
+
+### The rules a reader must follow
+
+These are the map rules again, applied to the index, plus one that is new.
+
+1. **Fail closed.** An index that is missing, unparseable, the wrong version, unsigned, signed
+   by a key you do not hold, or older than your staleness bound is not an index. Keep the
+   picture hidden. A hash that is not listed is not a map either.
+2. **Check the index signature against a key you already hold.** Same rule, same reason, as
+   rule 3 for a map. The index carries its own public key so it can be self checked, and a self
+   check proves nothing about who wrote it.
+3. **Then check the map it points at, the ordinary way.** Fetch it and run the same reader you
+   would have run on a map you found by any other route: version, signature against the key you
+   hold, and `source.sha256` equal to the hash of the file you are about to play.
+4. **The map has to be the one the index named.** The entry carries `signature`, the base64
+   Ed25519 signature of the map it points at. A map that verifies but whose signature is not
+   that one is refused. This is the rule that survives an attacker who serves the maps as well
+   as the index: without it, a validly signed older map of the same file, with fewer segments,
+   could be served in place of the current one.
+5. **A path in the index is relative, and stays inside.** Entry paths resolve against the
+   index's own URL. A path that is absolute, carries a scheme, starts with a slash or contains
+   a `..` segment is refused without being fetched, so a bad index cannot send a player to
+   another origin.
+6. **Unknown fields are ignored, not rejected**, as in a map.
+
+### Top level
+
+| Key | Type | Notes |
+| --- | --- | --- |
+| `schema` | string | `https://calm-frames.github.io/schemas/flashmap-registry-v1.json` |
+| `version` | integer | `1` |
+| `generator` | object | `{"name": "calm-frames-registry", "version": "1.0.0"}` |
+| `created_utc` | string | RFC 3339 in UTC, seconds precision. The newest `created_utc` of the maps indexed, unless the builder was given one, so the same maps always produce the same bytes. |
+| `files` | object | SHA-256 of a video file, 64 lowercase hex characters, to a file block |
+| `signature` | object or absent | exactly the shape and the signing rule a map uses, below |
+
+### A file block
+
+| Key | Type | Notes |
+| --- | --- | --- |
+| `maps` | object | profile name (`wcag`, `broadcast`) to a map entry. One file can have a map per profile, the way the pipeline builds one per preset. |
+
+### A map entry
+
+| Key | Type | Notes |
+| --- | --- | --- |
+| `path` | string | where the map is, relative to the index's own URL, forward slashes |
+| `signature` | string | base64 of the map's 64 byte Ed25519 signature, copied from its `signature.value`. **This is the binding between index and map.** |
+| `key_id` | string | the map's `signature.key_id`, so a reader can see which key before fetching |
+| `created_utc` | string | the map's `created_utc` |
+| `segment_count` | integer | how many segments the map carries, counted by the builder from the map it verified |
+| `hidden_ms` | integer | the total length of those segments with overlaps counted once, worked out the same way |
+
+`segment_count` and `hidden_ms` are for listing a shelf, not for deciding anything. They are as
+trustworthy as the index signature and no more, and a player still fetches the map and checks
+it before it shows a frame. Nothing here says a title is safe, and an empty `segments` list in
+the map it points at still means only what the map says it means.
+
+### What is signed
+
+The same rule as a map, word for word: the whole object with the `signature` key removed,
+serialised with sorted keys, separators `,` and `:`, UTF-8, no NaN, signed directly by Ed25519
+with no pre-hash. A reader rebuilds those bytes from the file it was handed, so
+`canonicalBytesWithout` and `verifyEd25519` do for an index what they already do for a map.
+
+### Reproducible bytes
+
+Same maps in, same file out, byte for byte. The builder sorts every key, takes `created_utc`
+from the newest map rather than from the clock, stores paths relative to the maps directory,
+and Ed25519 signatures are deterministic. Two builds on two machines of the same directory
+produce the same bytes, which is what lets a mirror be compared rather than trusted.
+
+The builder refuses to index a map it cannot verify against the public key it was given, and
+refuses two maps claiming the same file and profile, rather than choosing one. A registry is
+either built from maps that all check out or it is not built.
+
+### Worked example
+
+```json
+{
+  "schema": "https://calm-frames.github.io/schemas/flashmap-registry-v1.json",
+  "version": 1,
+  "generator": { "name": "calm-frames-registry", "version": "1.0.0" },
+  "created_utc": "2026-09-17T22:00:00Z",
+  "files": {
+    "b304e1da964543740468dfe1ffb7b381d3070a2ae4e9644ffef7a43c2f40aa01": {
+      "maps": {
+        "wcag": {
+          "path": "titles/b304e1da96454374/maps/wcag.json",
+          "signature": "YEsmbKrIo57hFcmmAsPpXnQBQl5b3nbxwf0HhK6L7bfi1dzTeKstgxy4pNsPs8av5sChevVpwjmPNld9SizYDg==",
+          "key_id": "sha256:5a9e13c66b86fabcefd0261f462b878d58bb5289f577d40ca2f92643054568ae",
+          "created_utc": "2026-09-17T22:00:00Z",
+          "segment_count": 1,
+          "hidden_ms": 1450
+        }
+      }
+    }
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "sha256:5a9e13c66b86fabcefd0261f462b878d58bb5289f577d40ca2f92643054568ae",
+    "public_key": "RKH7ONac1sAt16sGl2aPnLwvZs/GZ6Ja1kgkxuOiSsI=",
+    "payload_sha256": "9d1d1fa2c1c0f2e1c3c3a0a1b2c3d4e5f60718293a4b5c6d7e8f901234567890",
+    "value": "d2hvZXZlciBzaWducyB0aGUgbWFwcyBzaWducyB0aGUgaW5kZXggdG9vLCBhbmQgb25seSB0aGF0IGtleQ=="
+  }
+}
+```
+
+### What the registry does not say
+
+- It does not say a file is safe, and it does not say a file with no entry is unchecked. It
+  says what was in the set of maps it was built from.
+- A player that finds no entry is in the same position as a player that found no map: the
+  picture stays hidden and the title is not listed in kid mode.
 
 ## What this map does not say
 
