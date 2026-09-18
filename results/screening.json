@@ -2,8 +2,8 @@
   "generated_on": "2026-09-17",
   "profile": "wcag",
   "adapter_entry_point": "flashmap.analyze_file(path, profile)",
-  "clips_analyzed_ok": 16,
-  "clips_failed": 4,
+  "clips_analyzed_ok": 20,
+  "clips_failed": 0,
   "per_source": {
     "1930 public-domain film": {
       "files": 2,
@@ -67,16 +67,16 @@
       "flagged_share_of_analysed_time": 0.0939
     },
     "NASA ISS time-lapse": {
-      "files": 0,
+      "files": 3,
       "flagged_files": 0,
       "flagged_segments": 0,
-      "files_failed_to_decode": 3,
+      "files_failed_to_decode": 0,
       "segments_by_rule": {
         "general": 0,
         "red": 0
       },
       "flagged_seconds": 0.0,
-      "analysed_seconds": 0.0,
+      "analysed_seconds": 100.25,
       "max_flashes_in_window": 0,
       "max_area_fraction": 0.0,
       "titles": [
@@ -85,7 +85,7 @@
         "HAZARD_iss_night_pass_malaysia.ogv"
       ],
       "titles_with_a_red_segment": [],
-      "flagged_share_of_analysed_time": null
+      "flagged_share_of_analysed_time": 0.0
     },
     "NASA SVS 5011": {
       "files": 1,
@@ -107,17 +107,17 @@
       "flagged_share_of_analysed_time": 0.0
     },
     "Wikimedia Commons fireworks": {
-      "files": 3,
-      "flagged_files": 2,
-      "flagged_segments": 16,
-      "files_failed_to_decode": 1,
+      "files": 4,
+      "flagged_files": 3,
+      "flagged_segments": 21,
+      "files_failed_to_decode": 0,
       "segments_by_rule": {
-        "general": 16,
+        "general": 21,
         "red": 0
       },
-      "flagged_seconds": 23.467,
-      "analysed_seconds": 80.15,
-      "max_flashes_in_window": 11,
+      "flagged_seconds": 34.934,
+      "analysed_seconds": 204.65,
+      "max_flashes_in_window": 12,
       "max_area_fraction": 1.0,
       "titles": [
         "HAZARD_wc_fireworks_buenos_aires.webm",
@@ -126,7 +126,7 @@
         "HAZARD_wc_fireworks_summer.webm"
       ],
       "titles_with_a_red_segment": [],
-      "flagged_share_of_analysed_time": 0.2928
+      "flagged_share_of_analysed_time": 0.1707
     },
     "Wikimedia Commons lightning": {
       "files": 4,
@@ -171,6 +171,598 @@
     }
   },
   "per_file": [
+    {
+      "file": "HAZARD_bbb_720p_surround.mp4",
+      "source": "Blender open movies",
+      "flagged_segments": 53,
+      "frame_count": 14315,
+      "variable_frame_rate": false,
+      "segments": [
+        {
+          "start_s": 19.792,
+          "end_s": 20.958,
+          "reason": "general",
+          "area_fraction": 0.3107638888888889,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 55.083,
+          "end_s": 56.083,
+          "reason": "general",
+          "area_fraction": 0.25390625,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 6
+        },
+        {
+          "start_s": 64.583,
+          "end_s": 68.0,
+          "reason": "general",
+          "area_fraction": 0.7243923611111112,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 67.083,
+          "end_s": 68.125,
+          "reason": "general",
+          "area_fraction": 0.2526041666666667,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 6
+        },
+        {
+          "start_s": 76.625,
+          "end_s": 78.375,
+          "reason": "general",
+          "area_fraction": 0.3650173611111111,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 77.625,
+          "end_s": 78.667,
+          "reason": "general",
+          "area_fraction": 0.2608506944444444,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 77.75,
+          "end_s": 78.75,
+          "reason": "general",
+          "area_fraction": 0.2513020833333333,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 78.375,
+          "end_s": 79.875,
+          "reason": "general",
+          "area_fraction": 0.4231770833333333,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 78.958,
+          "end_s": 80.0,
+          "reason": "general",
+          "area_fraction": 0.3311631944444444,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 95.208,
+          "end_s": 97.042,
+          "reason": "general",
+          "area_fraction": 0.4157986111111111,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 105.917,
+          "end_s": 111.708,
+          "reason": "general",
+          "area_fraction": 0.4405381944444444,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 12
+        },
+        {
+          "start_s": 111.125,
+          "end_s": 113.167,
+          "reason": "general",
+          "area_fraction": 0.79296875,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 112.417,
+          "end_s": 114.125,
+          "reason": "general",
+          "area_fraction": 0.44140625,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 118.125,
+          "end_s": 119.792,
+          "reason": "general",
+          "area_fraction": 0.4778645833333333,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 141.708,
+          "end_s": 143.75,
+          "reason": "general",
+          "area_fraction": 0.6480034722222222,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 174.75,
+          "end_s": 175.75,
+          "reason": "general",
+          "area_fraction": 0.2552083333333333,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 6
+        },
+        {
+          "start_s": 174.875,
+          "end_s": 178.125,
+          "reason": "general",
+          "area_fraction": 0.6163194444444444,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 179.5,
+          "end_s": 185.208,
+          "reason": "general",
+          "area_fraction": 0.4787326388888889,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 185.375,
+          "end_s": 187.917,
+          "reason": "general",
+          "area_fraction": 0.8598090277777778,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 12
+        },
+        {
+          "start_s": 187.292,
+          "end_s": 188.667,
+          "reason": "general",
+          "area_fraction": 0.3138020833333333,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 191.75,
+          "end_s": 194.25,
+          "reason": "general",
+          "area_fraction": 0.6840277777777778,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 193.667,
+          "end_s": 194.708,
+          "reason": "general",
+          "area_fraction": 0.2586805555555556,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 194.917,
+          "end_s": 197.0,
+          "reason": "general",
+          "area_fraction": 0.8489583333333334,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 205.75,
+          "end_s": 207.25,
+          "reason": "general",
+          "area_fraction": 0.3233506944444444,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 208.042,
+          "end_s": 214.042,
+          "reason": "general",
+          "area_fraction": 0.8151041666666666,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 243.333,
+          "end_s": 245.0,
+          "reason": "general",
+          "area_fraction": 0.421875,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 244.292,
+          "end_s": 245.333,
+          "reason": "general",
+          "area_fraction": 0.2543402777777778,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 269.958,
+          "end_s": 274.375,
+          "reason": "general",
+          "area_fraction": 0.7365451388888888,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 276.042,
+          "end_s": 277.542,
+          "reason": "general",
+          "area_fraction": 0.6219618055555556,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 292.792,
+          "end_s": 293.875,
+          "reason": "general",
+          "area_fraction": 0.2586805555555556,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 293.167,
+          "end_s": 294.292,
+          "reason": "general",
+          "area_fraction": 0.2708333333333333,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 320.042,
+          "end_s": 321.625,
+          "reason": "general",
+          "area_fraction": 0.3233506944444444,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 330.458,
+          "end_s": 331.625,
+          "reason": "general",
+          "area_fraction": 0.3059895833333333,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 6
+        },
+        {
+          "start_s": 359.125,
+          "end_s": 361.125,
+          "reason": "general",
+          "area_fraction": 0.3637152777777778,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 398.333,
+          "end_s": 400.333,
+          "reason": "general",
+          "area_fraction": 0.5789930555555556,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 401.958,
+          "end_s": 402.958,
+          "reason": "general",
+          "area_fraction": 0.2543402777777778,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 402.458,
+          "end_s": 403.833,
+          "reason": "general",
+          "area_fraction": 0.2834201388888889,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 403.083,
+          "end_s": 405.125,
+          "reason": "general",
+          "area_fraction": 0.6870659722222222,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 408.0,
+          "end_s": 409.125,
+          "reason": "general",
+          "area_fraction": 0.3068576388888889,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 410.542,
+          "end_s": 412.25,
+          "reason": "general",
+          "area_fraction": 0.4674479166666667,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 419.375,
+          "end_s": 421.75,
+          "reason": "general",
+          "area_fraction": 0.7157118055555556,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 421.583,
+          "end_s": 423.083,
+          "reason": "general",
+          "area_fraction": 0.3910590277777778,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 423.833,
+          "end_s": 425.792,
+          "reason": "general",
+          "area_fraction": 0.5876736111111112,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 429.667,
+          "end_s": 431.792,
+          "reason": "general",
+          "area_fraction": 0.5559895833333334,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 432.833,
+          "end_s": 435.125,
+          "reason": "general",
+          "area_fraction": 0.7365451388888888,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 435.125,
+          "end_s": 437.542,
+          "reason": "general",
+          "area_fraction": 0.5269097222222222,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 437.333,
+          "end_s": 439.25,
+          "reason": "general",
+          "area_fraction": 0.60546875,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 441.458,
+          "end_s": 445.5,
+          "reason": "general",
+          "area_fraction": 0.9826388888888888,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 451.958,
+          "end_s": 453.792,
+          "reason": "general",
+          "area_fraction": 0.6961805555555556,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 474.667,
+          "end_s": 477.208,
+          "reason": "general",
+          "area_fraction": 0.3923611111111111,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 557.917,
+          "end_s": 564.542,
+          "reason": "general",
+          "area_fraction": 0.4283854166666667,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 594.292,
+          "end_s": 596.167,
+          "reason": "general",
+          "area_fraction": 0.3025173611111111,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 595.417,
+          "end_s": 596.417,
+          "reason": "general",
+          "area_fraction": 0.2886284722222222,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        }
+      ]
+    },
     {
       "file": "HAZARD_dvids_fireworks_safety.mp4",
       "source": "DVIDS",
@@ -291,17 +883,26 @@
     {
       "file": "HAZARD_iss_night_pass_africa_mideast.ogv",
       "source": "NASA ISS time-lapse",
-      "error": "Invalid argument: 'avcodec_send_packet()' returned 22"
+      "flagged_segments": 0,
+      "frame_count": 485,
+      "variable_frame_rate": false,
+      "segments": []
     },
     {
       "file": "HAZARD_iss_night_pass_europe_to_asia.ogv",
       "source": "NASA ISS time-lapse",
-      "error": "Invalid argument: 'avcodec_send_packet()' returned 22"
+      "flagged_segments": 0,
+      "frame_count": 633,
+      "variable_frame_rate": false,
+      "segments": []
     },
     {
       "file": "HAZARD_iss_night_pass_malaysia.ogv",
       "source": "NASA ISS time-lapse",
-      "error": "Invalid argument: 'avcodec_send_packet()' returned 22"
+      "flagged_segments": 0,
+      "frame_count": 85,
+      "variable_frame_rate": false,
+      "segments": []
     },
     {
       "file": "HAZARD_nasa_svs_5011_iss_lightning_1080p.mp4",
@@ -2849,947 +3450,6 @@
       ]
     },
     {
-      "file": "HAZARD_wc_fireworks_buenos_aires.webm",
-      "source": "Wikimedia Commons fireworks",
-      "flagged_segments": 0,
-      "frame_count": 907,
-      "variable_frame_rate": true,
-      "segments": []
-    },
-    {
-      "file": "HAZARD_wc_fireworks_ignis_brunensis.ogv",
-      "source": "Wikimedia Commons fireworks",
-      "error": "Invalid argument: 'avcodec_send_packet()' returned 22"
-    },
-    {
-      "file": "HAZARD_wc_fireworks_rieti.ogv",
-      "source": "Wikimedia Commons fireworks",
-      "flagged_segments": 1,
-      "frame_count": 452,
-      "variable_frame_rate": false,
-      "segments": [
-        {
-          "start_s": 5.067,
-          "end_s": 6.367,
-          "reason": "general",
-          "area_fraction": 0.273125,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        }
-      ]
-    },
-    {
-      "file": "HAZARD_wc_fireworks_summer.webm",
-      "source": "Wikimedia Commons fireworks",
-      "flagged_segments": 15,
-      "frame_count": 809,
-      "variable_frame_rate": true,
-      "segments": [
-        {
-          "start_s": 0.2,
-          "end_s": 2.0,
-          "reason": "general",
-          "area_fraction": 0.35473588342440804,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        },
-        {
-          "start_s": 4.433,
-          "end_s": 8.2,
-          "reason": "general",
-          "area_fraction": 1.0,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 11
-        },
-        {
-          "start_s": 10.367,
-          "end_s": 11.5,
-          "reason": "general",
-          "area_fraction": 0.30327868852459017,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 10.767,
-          "end_s": 11.8,
-          "reason": "general",
-          "area_fraction": 0.2736794171220401,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 11.0,
-          "end_s": 12.167,
-          "reason": "general",
-          "area_fraction": 0.3679417122040073,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        },
-        {
-          "start_s": 11.267,
-          "end_s": 12.8,
-          "reason": "general",
-          "area_fraction": 0.2877959927140255,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 12.2,
-          "end_s": 14.7,
-          "reason": "general",
-          "area_fraction": 0.476775956284153,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 11
-        },
-        {
-          "start_s": 13.767,
-          "end_s": 14.767,
-          "reason": "general",
-          "area_fraction": 0.2522768670309654,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 13.833,
-          "end_s": 15.167,
-          "reason": "general",
-          "area_fraction": 0.29280510018214934,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        },
-        {
-          "start_s": 14.233,
-          "end_s": 15.6,
-          "reason": "general",
-          "area_fraction": 0.29098360655737704,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        },
-        {
-          "start_s": 15.3,
-          "end_s": 21.933,
-          "reason": "general",
-          "area_fraction": 0.6234061930783242,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 11
-        },
-        {
-          "start_s": 21.133,
-          "end_s": 24.533,
-          "reason": "general",
-          "area_fraction": 0.5063752276867031,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        },
-        {
-          "start_s": 23.8,
-          "end_s": 24.9,
-          "reason": "general",
-          "area_fraction": 0.26958105646630237,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 7
-        },
-        {
-          "start_s": 24.0,
-          "end_s": 25.433,
-          "reason": "general",
-          "area_fraction": 0.36156648451730417,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 25.0,
-          "end_s": 26.967,
-          "reason": "general",
-          "area_fraction": 1.0,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        }
-      ]
-    },
-    {
-      "file": "HAZARD_wc_lightning_240fps.webm",
-      "source": "Wikimedia Commons lightning",
-      "flagged_segments": 3,
-      "frame_count": 337,
-      "variable_frame_rate": true,
-      "segments": [
-        {
-          "start_s": 5.233,
-          "end_s": 6.4,
-          "reason": "general",
-          "area_fraction": 0.4800347222222222,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 5
-        },
-        {
-          "start_s": 5.6,
-          "end_s": 7.667,
-          "reason": "general",
-          "area_fraction": 1.0,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 6.8,
-          "end_s": 8.0,
-          "reason": "general",
-          "area_fraction": 0.4092881944444444,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        }
-      ]
-    },
-    {
-      "file": "HAZARD_wc_lightning_blackout.webm",
-      "source": "Wikimedia Commons lightning",
-      "flagged_segments": 2,
-      "frame_count": 213,
-      "variable_frame_rate": true,
-      "segments": [
-        {
-          "start_s": 0.126,
-          "end_s": 1.687,
-          "reason": "general",
-          "area_fraction": 1.0,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 4
-        },
-        {
-          "start_s": 9.459,
-          "end_s": 11.021,
-          "reason": "general",
-          "area_fraction": 1.0,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 5
-        }
-      ]
-    },
-    {
-      "file": "HAZARD_wc_lightning_condensed.webm",
-      "source": "Wikimedia Commons lightning",
-      "flagged_segments": 0,
-      "frame_count": 2626,
-      "variable_frame_rate": false,
-      "segments": []
-    },
-    {
-      "file": "HAZARD_wc_lightning_slowmo.webm",
-      "source": "Wikimedia Commons lightning",
-      "flagged_segments": 4,
-      "frame_count": 1096,
-      "variable_frame_rate": true,
-      "segments": [
-        {
-          "start_s": 7.175,
-          "end_s": 8.675,
-          "reason": "general",
-          "area_fraction": 0.7118055555555556,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 4
-        },
-        {
-          "start_s": 9.761,
-          "end_s": 10.969,
-          "reason": "general",
-          "area_fraction": 0.2808159722222222,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 6
-        },
-        {
-          "start_s": 10.053,
-          "end_s": 11.72,
-          "reason": "general",
-          "area_fraction": 0.7565104166666666,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 6
-        },
-        {
-          "start_s": 16.935,
-          "end_s": 18.393,
-          "reason": "general",
-          "area_fraction": 0.7842881944444444,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 4
-        }
-      ]
-    },
-    {
-      "file": "HAZARD_bbb_720p_surround.mp4",
-      "source": "Blender open movies",
-      "flagged_segments": 53,
-      "frame_count": 14315,
-      "variable_frame_rate": false,
-      "segments": [
-        {
-          "start_s": 19.792,
-          "end_s": 20.958,
-          "reason": "general",
-          "area_fraction": 0.3107638888888889,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 55.083,
-          "end_s": 56.083,
-          "reason": "general",
-          "area_fraction": 0.25390625,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 6
-        },
-        {
-          "start_s": 64.583,
-          "end_s": 68.0,
-          "reason": "general",
-          "area_fraction": 0.7243923611111112,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        },
-        {
-          "start_s": 67.083,
-          "end_s": 68.125,
-          "reason": "general",
-          "area_fraction": 0.2526041666666667,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 6
-        },
-        {
-          "start_s": 76.625,
-          "end_s": 78.375,
-          "reason": "general",
-          "area_fraction": 0.3650173611111111,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 77.625,
-          "end_s": 78.667,
-          "reason": "general",
-          "area_fraction": 0.2608506944444444,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 7
-        },
-        {
-          "start_s": 77.75,
-          "end_s": 78.75,
-          "reason": "general",
-          "area_fraction": 0.2513020833333333,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 7
-        },
-        {
-          "start_s": 78.375,
-          "end_s": 79.875,
-          "reason": "general",
-          "area_fraction": 0.4231770833333333,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 78.958,
-          "end_s": 80.0,
-          "reason": "general",
-          "area_fraction": 0.3311631944444444,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 95.208,
-          "end_s": 97.042,
-          "reason": "general",
-          "area_fraction": 0.4157986111111111,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 105.917,
-          "end_s": 111.708,
-          "reason": "general",
-          "area_fraction": 0.4405381944444444,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 12
-        },
-        {
-          "start_s": 111.125,
-          "end_s": 113.167,
-          "reason": "general",
-          "area_fraction": 0.79296875,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 112.417,
-          "end_s": 114.125,
-          "reason": "general",
-          "area_fraction": 0.44140625,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 118.125,
-          "end_s": 119.792,
-          "reason": "general",
-          "area_fraction": 0.4778645833333333,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 141.708,
-          "end_s": 143.75,
-          "reason": "general",
-          "area_fraction": 0.6480034722222222,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        },
-        {
-          "start_s": 174.75,
-          "end_s": 175.75,
-          "reason": "general",
-          "area_fraction": 0.2552083333333333,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 6
-        },
-        {
-          "start_s": 174.875,
-          "end_s": 178.125,
-          "reason": "general",
-          "area_fraction": 0.6163194444444444,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 11
-        },
-        {
-          "start_s": 179.5,
-          "end_s": 185.208,
-          "reason": "general",
-          "area_fraction": 0.4787326388888889,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 11
-        },
-        {
-          "start_s": 185.375,
-          "end_s": 187.917,
-          "reason": "general",
-          "area_fraction": 0.8598090277777778,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 12
-        },
-        {
-          "start_s": 187.292,
-          "end_s": 188.667,
-          "reason": "general",
-          "area_fraction": 0.3138020833333333,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        },
-        {
-          "start_s": 191.75,
-          "end_s": 194.25,
-          "reason": "general",
-          "area_fraction": 0.6840277777777778,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        },
-        {
-          "start_s": 193.667,
-          "end_s": 194.708,
-          "reason": "general",
-          "area_fraction": 0.2586805555555556,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 194.917,
-          "end_s": 197.0,
-          "reason": "general",
-          "area_fraction": 0.8489583333333334,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 205.75,
-          "end_s": 207.25,
-          "reason": "general",
-          "area_fraction": 0.3233506944444444,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 208.042,
-          "end_s": 214.042,
-          "reason": "general",
-          "area_fraction": 0.8151041666666666,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 11
-        },
-        {
-          "start_s": 243.333,
-          "end_s": 245.0,
-          "reason": "general",
-          "area_fraction": 0.421875,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        },
-        {
-          "start_s": 244.292,
-          "end_s": 245.333,
-          "reason": "general",
-          "area_fraction": 0.2543402777777778,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 7
-        },
-        {
-          "start_s": 269.958,
-          "end_s": 274.375,
-          "reason": "general",
-          "area_fraction": 0.7365451388888888,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 11
-        },
-        {
-          "start_s": 276.042,
-          "end_s": 277.542,
-          "reason": "general",
-          "area_fraction": 0.6219618055555556,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 7
-        },
-        {
-          "start_s": 292.792,
-          "end_s": 293.875,
-          "reason": "general",
-          "area_fraction": 0.2586805555555556,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 7
-        },
-        {
-          "start_s": 293.167,
-          "end_s": 294.292,
-          "reason": "general",
-          "area_fraction": 0.2708333333333333,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 320.042,
-          "end_s": 321.625,
-          "reason": "general",
-          "area_fraction": 0.3233506944444444,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 330.458,
-          "end_s": 331.625,
-          "reason": "general",
-          "area_fraction": 0.3059895833333333,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 6
-        },
-        {
-          "start_s": 359.125,
-          "end_s": 361.125,
-          "reason": "general",
-          "area_fraction": 0.3637152777777778,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        },
-        {
-          "start_s": 398.333,
-          "end_s": 400.333,
-          "reason": "general",
-          "area_fraction": 0.5789930555555556,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 401.958,
-          "end_s": 402.958,
-          "reason": "general",
-          "area_fraction": 0.2543402777777778,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 7
-        },
-        {
-          "start_s": 402.458,
-          "end_s": 403.833,
-          "reason": "general",
-          "area_fraction": 0.2834201388888889,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 7
-        },
-        {
-          "start_s": 403.083,
-          "end_s": 405.125,
-          "reason": "general",
-          "area_fraction": 0.6870659722222222,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        },
-        {
-          "start_s": 408.0,
-          "end_s": 409.125,
-          "reason": "general",
-          "area_fraction": 0.3068576388888889,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 410.542,
-          "end_s": 412.25,
-          "reason": "general",
-          "area_fraction": 0.4674479166666667,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 419.375,
-          "end_s": 421.75,
-          "reason": "general",
-          "area_fraction": 0.7157118055555556,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 11
-        },
-        {
-          "start_s": 421.583,
-          "end_s": 423.083,
-          "reason": "general",
-          "area_fraction": 0.3910590277777778,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        },
-        {
-          "start_s": 423.833,
-          "end_s": 425.792,
-          "reason": "general",
-          "area_fraction": 0.5876736111111112,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        },
-        {
-          "start_s": 429.667,
-          "end_s": 431.792,
-          "reason": "general",
-          "area_fraction": 0.5559895833333334,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 11
-        },
-        {
-          "start_s": 432.833,
-          "end_s": 435.125,
-          "reason": "general",
-          "area_fraction": 0.7365451388888888,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        },
-        {
-          "start_s": 435.125,
-          "end_s": 437.542,
-          "reason": "general",
-          "area_fraction": 0.5269097222222222,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        },
-        {
-          "start_s": 437.333,
-          "end_s": 439.25,
-          "reason": "general",
-          "area_fraction": 0.60546875,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 11
-        },
-        {
-          "start_s": 441.458,
-          "end_s": 445.5,
-          "reason": "general",
-          "area_fraction": 0.9826388888888888,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        },
-        {
-          "start_s": 451.958,
-          "end_s": 453.792,
-          "reason": "general",
-          "area_fraction": 0.6961805555555556,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        },
-        {
-          "start_s": 474.667,
-          "end_s": 477.208,
-          "reason": "general",
-          "area_fraction": 0.3923611111111111,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        },
-        {
-          "start_s": 557.917,
-          "end_s": 564.542,
-          "reason": "general",
-          "area_fraction": 0.4283854166666667,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 8
-        },
-        {
-          "start_s": 594.292,
-          "end_s": 596.167,
-          "reason": "general",
-          "area_fraction": 0.3025173611111111,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 10
-        },
-        {
-          "start_s": 595.417,
-          "end_s": 596.417,
-          "reason": "general",
-          "area_fraction": 0.2886284722222222,
-          "triggered_by": [
-            "wcag-10deg"
-          ],
-          "breaks_baseline": true,
-          "max_flashes_in_window": 9
-        }
-      ]
-    },
-    {
-      "file": "markers.mp4",
-      "source": "unlabeled",
-      "flagged_segments": 0,
-      "frame_count": 3600,
-      "variable_frame_rate": false,
-      "segments": []
-    },
-    {
       "file": "HAZARD_sintel_2048_stereo_512kb.mp4",
       "source": "Blender open movies",
       "flagged_segments": 60,
@@ -5082,14 +4742,422 @@
           "max_flashes_in_window": 6
         }
       ]
+    },
+    {
+      "file": "HAZARD_wc_fireworks_buenos_aires.webm",
+      "source": "Wikimedia Commons fireworks",
+      "flagged_segments": 0,
+      "frame_count": 907,
+      "variable_frame_rate": true,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_fireworks_ignis_brunensis.ogv",
+      "source": "Wikimedia Commons fireworks",
+      "flagged_segments": 5,
+      "frame_count": 3735,
+      "variable_frame_rate": false,
+      "segments": [
+        {
+          "start_s": 93.867,
+          "end_s": 95.067,
+          "reason": "general",
+          "area_fraction": 0.2763888888888889,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 102.1,
+          "end_s": 103.2,
+          "reason": "general",
+          "area_fraction": 0.2625,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 12
+        },
+        {
+          "start_s": 103.4,
+          "end_s": 112.1,
+          "reason": "general",
+          "area_fraction": 0.7356481481481482,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 12
+        },
+        {
+          "start_s": 111.2,
+          "end_s": 112.2,
+          "reason": "general",
+          "area_fraction": 0.25416666666666665,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 111.467,
+          "end_s": 112.567,
+          "reason": "general",
+          "area_fraction": 0.26944444444444443,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        }
+      ]
+    },
+    {
+      "file": "HAZARD_wc_fireworks_rieti.ogv",
+      "source": "Wikimedia Commons fireworks",
+      "flagged_segments": 1,
+      "frame_count": 452,
+      "variable_frame_rate": false,
+      "segments": [
+        {
+          "start_s": 5.067,
+          "end_s": 6.367,
+          "reason": "general",
+          "area_fraction": 0.273125,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        }
+      ]
+    },
+    {
+      "file": "HAZARD_wc_fireworks_summer.webm",
+      "source": "Wikimedia Commons fireworks",
+      "flagged_segments": 15,
+      "frame_count": 809,
+      "variable_frame_rate": true,
+      "segments": [
+        {
+          "start_s": 0.2,
+          "end_s": 2.0,
+          "reason": "general",
+          "area_fraction": 0.35473588342440804,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 4.433,
+          "end_s": 8.2,
+          "reason": "general",
+          "area_fraction": 1.0,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 10.367,
+          "end_s": 11.5,
+          "reason": "general",
+          "area_fraction": 0.30327868852459017,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 10.767,
+          "end_s": 11.8,
+          "reason": "general",
+          "area_fraction": 0.2736794171220401,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 11.0,
+          "end_s": 12.167,
+          "reason": "general",
+          "area_fraction": 0.3679417122040073,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 11.267,
+          "end_s": 12.8,
+          "reason": "general",
+          "area_fraction": 0.2877959927140255,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 12.2,
+          "end_s": 14.7,
+          "reason": "general",
+          "area_fraction": 0.476775956284153,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 13.767,
+          "end_s": 14.767,
+          "reason": "general",
+          "area_fraction": 0.2522768670309654,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 13.833,
+          "end_s": 15.167,
+          "reason": "general",
+          "area_fraction": 0.29280510018214934,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 14.233,
+          "end_s": 15.6,
+          "reason": "general",
+          "area_fraction": 0.29098360655737704,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 15.3,
+          "end_s": 21.933,
+          "reason": "general",
+          "area_fraction": 0.6234061930783242,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 21.133,
+          "end_s": 24.533,
+          "reason": "general",
+          "area_fraction": 0.5063752276867031,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 23.8,
+          "end_s": 24.9,
+          "reason": "general",
+          "area_fraction": 0.26958105646630237,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 24.0,
+          "end_s": 25.433,
+          "reason": "general",
+          "area_fraction": 0.36156648451730417,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 25.0,
+          "end_s": 26.967,
+          "reason": "general",
+          "area_fraction": 1.0,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        }
+      ]
+    },
+    {
+      "file": "HAZARD_wc_lightning_240fps.webm",
+      "source": "Wikimedia Commons lightning",
+      "flagged_segments": 3,
+      "frame_count": 337,
+      "variable_frame_rate": true,
+      "segments": [
+        {
+          "start_s": 5.233,
+          "end_s": 6.4,
+          "reason": "general",
+          "area_fraction": 0.4800347222222222,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 5
+        },
+        {
+          "start_s": 5.6,
+          "end_s": 7.667,
+          "reason": "general",
+          "area_fraction": 1.0,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 6.8,
+          "end_s": 8.0,
+          "reason": "general",
+          "area_fraction": 0.4092881944444444,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        }
+      ]
+    },
+    {
+      "file": "HAZARD_wc_lightning_blackout.webm",
+      "source": "Wikimedia Commons lightning",
+      "flagged_segments": 2,
+      "frame_count": 213,
+      "variable_frame_rate": true,
+      "segments": [
+        {
+          "start_s": 0.126,
+          "end_s": 1.687,
+          "reason": "general",
+          "area_fraction": 1.0,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 4
+        },
+        {
+          "start_s": 9.459,
+          "end_s": 11.021,
+          "reason": "general",
+          "area_fraction": 1.0,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 5
+        }
+      ]
+    },
+    {
+      "file": "HAZARD_wc_lightning_condensed.webm",
+      "source": "Wikimedia Commons lightning",
+      "flagged_segments": 0,
+      "frame_count": 2626,
+      "variable_frame_rate": false,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_lightning_slowmo.webm",
+      "source": "Wikimedia Commons lightning",
+      "flagged_segments": 4,
+      "frame_count": 1096,
+      "variable_frame_rate": true,
+      "segments": [
+        {
+          "start_s": 7.175,
+          "end_s": 8.675,
+          "reason": "general",
+          "area_fraction": 0.7118055555555556,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 4
+        },
+        {
+          "start_s": 9.761,
+          "end_s": 10.969,
+          "reason": "general",
+          "area_fraction": 0.2808159722222222,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 6
+        },
+        {
+          "start_s": 10.053,
+          "end_s": 11.72,
+          "reason": "general",
+          "area_fraction": 0.7565104166666666,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 6
+        },
+        {
+          "start_s": 16.935,
+          "end_s": 18.393,
+          "reason": "general",
+          "area_fraction": 0.7842881944444444,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 4
+        }
+      ]
+    },
+    {
+      "file": "markers.mp4",
+      "source": "unlabeled",
+      "flagged_segments": 0,
+      "frame_count": 3600,
+      "variable_frame_rate": false,
+      "segments": []
     }
   ],
   "totals": {
     "clips": 20,
-    "flagged_segments": 432,
+    "flagged_segments": 437,
     "sources_with_at_least_one_flag": 5,
     "segments_by_rule": {
-      "general": 432,
+      "general": 437,
       "red": 0
     },
     "red_rule_segments": 0,
@@ -5106,6 +5174,19 @@
     "HAZARD_bbb_720p_surround.mp4",
     "HAZARD_sintel_2048_stereo_512kb.mp4",
     "HAZARD_tears_of_steel_720p.mov"
+  ],
+  "rescreens": [
+    {
+      "on": "2026-09-17",
+      "files": [
+        "HAZARD_iss_night_pass_africa_mideast.ogv",
+        "HAZARD_iss_night_pass_europe_to_asia.ogv",
+        "HAZARD_iss_night_pass_malaysia.ogv",
+        "HAZARD_wc_fireworks_ignis_brunensis.ogv"
+      ],
+      "rows_kept_from_the_earlier_run": 16,
+      "note": "these files were screened again and their rows replaced. Every other row is from the run named in generated_on."
+    }
   ],
   "self_filmed_needed": {
     "what_this_is": "a shooting list, not a measurement. It says what has to be filmed because no licensed footage we could find covers it.",

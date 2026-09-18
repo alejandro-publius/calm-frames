@@ -10,7 +10,7 @@
  ],
  "what_is_missing": "the labels. Nobody on this lane labels anything.",
  "segments": 40,
- "titles": 16,
+ "titles": 15,
  "sources": [
   "1930 public-domain film",
   "Blender open movies",
@@ -38,7 +38,7 @@
    "git_state": "committed"
   }
  },
- "pool_key_sha256": "09504fe1a49e8c6fc22e14cec7f55d3cea4b6e6af8f4e5688e3556087a7a2ed3",
+ "pool_key_sha256": "9f54e77a59d1ae23433656a59cd010a0b468ba61041052d94ec123121578a130",
  "plots": {
   "directory": "eval/labeling/plots",
   "one_per_segment": 40,

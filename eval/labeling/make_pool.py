@@ -208,10 +208,12 @@ def build() -> dict:
             # flagged it. One detector's silence on a title nobody else analysed is not the same
             # thing, and it would put windows nobody has measured into the negative half, where
             # they would count as false positives for whichever detector did run.
-            ran = sorted(looked) or ["nothing"]
+            ran = sorted(looked)
             skipped[name] = (
                 f"only {', '.join(ran)} has a candidate list for it; "
                 f"{', '.join(missing)} never ran on it"
+                if ran
+                else f"no detector has analysed it: {', '.join(missing)} never ran on it"
             )
             continue
         duration = float(row["duration_s"] or 0.0)
@@ -331,15 +333,21 @@ def build() -> dict:
                     "which makes this pool's recall estimate optimistic by an unknown amount."
                 )
             },
-            "known_decoder_gap": (
-                "the four Theora .ogv titles have no flashmap intervals in the screening run "
-                "this pool was cut from: they failed with avcodec_send_packet returning 22, "
-                "which results/screening.json still records. Their windows therefore come from "
-                "the two ffmpeg based lists only. flashmap's Theora decoding has since been "
-                "fixed (see flashmap/tests/test_theora.py), so the right order is: rescreen "
-                "those four titles, then run `make labeling-pool` again, and only then start "
-                "labelling. Rebuilding after labelling has begun would throw the labels away, "
-                "because the segment ids are positions in a shuffled list."
+            "theora_rescreen": (
+                "the four Theora .ogv titles failed to decode in the first screening run, with "
+                "avcodec_send_packet returning 22, so their windows came from the two ffmpeg "
+                "based lists only. flashmap's Theora decoding was fixed (see "
+                "flashmap/tests/test_theora.py), the four titles were screened again on "
+                "2026-09-17, and this pool was cut from that merged result. "
+                "results/screening.json records the re-run under `rescreens`. One of the four, "
+                "the Malaysia night pass, is shorter than a single segment and is skipped for "
+                "that reason rather than for the decoder."
+            ),
+            "rebuilding_this_pool": (
+                "a segment id is a position in a shuffled list, so rebuilding after labelling "
+                "has begun leaves the answers pointing at different segments. make_pool refuses "
+                "while any sheet has an answer in it, and the plot run deletes a figure before "
+                "re-rendering it so no figure from an earlier pool can survive under a new id."
             ),
             "titles_skipped": skipped,
             "segments": key_rows,

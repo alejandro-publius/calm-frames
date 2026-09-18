@@ -3,7 +3,7 @@
  "warning": "THE LABELLERS DO NOT OPEN THIS FILE. It maps each blinded id back to its title, its place in that title and which detectors proposed it. Opening it before labelling would unblind the review and waste the whole exercise.",
  "seed": 20260917,
  "segment_seconds": 10.0,
- "titles": 16,
+ "titles": 15,
  "sources": [
   "1930 public-domain film",
   "Blender open movies",
@@ -18,26 +18,25 @@
   "from_flagged_time": 28,
   "from_unflagged_time": 12,
   "sole_source": {
-   "flashmap": 3,
-   "ffmpeg_photosensitivity": 8
+   "ffmpeg_photosensitivity": 9,
+   "flashmap": 2
   },
   "per_title": {
-   "HAZARD_tears_of_steel_720p.mov": 5,
-   "HAZARD_bbb_720p_surround.mp4": 5,
-   "HAZARD_wc_fireworks_summer.webm": 1,
-   "HAZARD_pd1930_frozen_frolics.mp4": 4,
-   "HAZARD_wc_lightning_240fps.webm": 1,
-   "HAZARD_pd1930_booze_hangs_high.mp4": 3,
    "HAZARD_sintel_2048_stereo_512kb.mp4": 5,
-   "HAZARD_dvids_illumination_flares.mp4": 2,
+   "HAZARD_tears_of_steel_720p.mov": 5,
+   "HAZARD_wc_fireworks_summer.webm": 1,
+   "HAZARD_bbb_720p_surround.mp4": 5,
    "HAZARD_wc_fireworks_rieti.ogv": 1,
+   "HAZARD_pd1930_frozen_frolics.mp4": 4,
+   "HAZARD_pd1930_booze_hangs_high.mp4": 3,
    "HAZARD_nasa_svs_5011_iss_lightning_1080p.mp4": 1,
-   "HAZARD_wc_fireworks_ignis_brunensis.ogv": 3,
-   "HAZARD_wc_lightning_blackout.webm": 1,
    "HAZARD_dvids_fireworks_safety.mp4": 1,
+   "HAZARD_wc_fireworks_ignis_brunensis.ogv": 3,
+   "HAZARD_dvids_illumination_flares.mp4": 2,
+   "HAZARD_wc_lightning_condensed.webm": 1,
    "HAZARD_iss_night_pass_europe_to_asia.ogv": 3,
    "HAZARD_wc_fireworks_buenos_aires.webm": 2,
-   "HAZARD_iss_night_pass_africa_mideast.ogv": 2
+   "HAZARD_iss_night_pass_africa_mideast.ogv": 3
   }
  },
  "candidate_lists_used": [
@@ -45,36 +44,38 @@
   "ffmpeg_photosensitivity",
   "naive_luma_diff"
  ],
+ "titles_need_every_candidate_list": "a title joins the pool only when every list above has analysed it. A title only one of them has seen has no unflagged time in the sense this pool means, because the other lists never had the chance to flag it.",
  "candidate_list_missing": {
   "EA IRIS": "the image has never built on this machine, so no segment in this pool was proposed by IRIS. Anything only IRIS would have caught is not in the union, which makes this pool's recall estimate optimistic by an unknown amount."
  },
- "known_decoder_gap": "the four Theora .ogv titles have no flashmap intervals in the screening run this pool was cut from: they failed with avcodec_send_packet returning 22, which results/screening.json still records. Their windows therefore come from the two ffmpeg based lists only. flashmap's Theora decoding has since been fixed (see flashmap/tests/test_theora.py), so the right order is: rescreen those four titles, then run `make labeling-pool` again, and only then start labelling. Rebuilding after labelling has begun would throw the labels away, because the segment ids are positions in a shuffled list.",
+ "theora_rescreen": "the four Theora .ogv titles failed to decode in the first screening run, with avcodec_send_packet returning 22, so their windows came from the two ffmpeg based lists only. flashmap's Theora decoding was fixed (see flashmap/tests/test_theora.py), the four titles were screened again on 2026-09-17, and this pool was cut from that merged result. results/screening.json records the re-run under `rescreens`. One of the four, the Malaysia night pass, is shorter than a single segment and is skipped for that reason rather than for the decoder.",
+ "rebuilding_this_pool": "a segment id is a position in a shuffled list, so rebuilding after labelling has begun leaves the answers pointing at different segments. make_pool refuses while any sheet has an answer in it, and the plot run deletes a figure before re-rendering it so no figure from an earlier pool can survive under a new id.",
  "titles_skipped": {
   "HAZARD_iss_night_pass_malaysia.ogv": "shorter than one 10 s segment",
-  "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_clouds_seloncourt.ogv": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_irminger_waves_without_sound_ooi.webm": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_jezioro_cisie_panorama_1080p.webm": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_planepassingthundercloud.ogv": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_sea_of_clouds_over_asia.webm": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_stockfootage_setting_sun.webm": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_sunset_at_the_sea_of_azov.webm": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_sunset_in_spain.webm": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_water_waves_greece.ogv": "no detector has analysed it yet, so it has no candidate list",
-  "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm": "no detector has analysed it yet, so it has no candidate list"
+  "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_clouds_seloncourt.ogv": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_irminger_waves_without_sound_ooi.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_jezioro_cisie_panorama_1080p.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_planepassingthundercloud.ogv": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sea_of_clouds_over_asia.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_stockfootage_setting_sun.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sunset_at_the_sea_of_azov.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sunset_in_spain.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_water_waves_greece.ogv": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm": "no detector has analysed it: flashmap, ffmpeg_photosensitivity, naive_luma_diff never ran on it"
  },
  "segments": [
   {
    "segment_id": "seg000",
-   "file": "HAZARD_pd1930_booze_hangs_high.mp4",
-   "source": "1930 public-domain film",
-   "start_s": 111.5,
-   "end_s": 121.5,
+   "file": "HAZARD_tears_of_steel_720p.mov",
+   "source": "Blender open movies",
+   "start_s": 494.5,
+   "end_s": 504.5,
    "proposed_by": [
     "ffmpeg_photosensitivity",
     "flashmap"
@@ -92,13 +93,12 @@
   },
   {
    "segment_id": "seg002",
-   "file": "HAZARD_sintel_2048_stereo_512kb.mp4",
-   "source": "Blender open movies",
-   "start_s": 568.0,
-   "end_s": 578.0,
+   "file": "HAZARD_wc_fireworks_ignis_brunensis.ogv",
+   "source": "Wikimedia Commons fireworks",
+   "start_s": 13.0,
+   "end_s": 23.0,
    "proposed_by": [
-    "ffmpeg_photosensitivity",
-    "flashmap"
+    "ffmpeg_photosensitivity"
    ],
    "from_unflagged_time": false
   },
@@ -106,17 +106,17 @@
    "segment_id": "seg003",
    "file": "HAZARD_sintel_2048_stereo_512kb.mp4",
    "source": "Blender open movies",
-   "start_s": 29.0,
-   "end_s": 39.0,
+   "start_s": 70.5,
+   "end_s": 80.5,
    "proposed_by": [],
    "from_unflagged_time": true
   },
   {
    "segment_id": "seg004",
-   "file": "HAZARD_wc_fireworks_ignis_brunensis.ogv",
-   "source": "Wikimedia Commons fireworks",
-   "start_s": 13.0,
-   "end_s": 23.0,
+   "file": "HAZARD_bbb_720p_surround.mp4",
+   "source": "Blender open movies",
+   "start_s": 221.5,
+   "end_s": 231.5,
    "proposed_by": [
     "ffmpeg_photosensitivity"
    ],
@@ -136,15 +136,6 @@
   },
   {
    "segment_id": "seg006",
-   "file": "HAZARD_wc_fireworks_ignis_brunensis.ogv",
-   "source": "Wikimedia Commons fireworks",
-   "start_s": 105.5,
-   "end_s": 115.5,
-   "proposed_by": [],
-   "from_unflagged_time": true
-  },
-  {
-   "segment_id": "seg007",
    "file": "HAZARD_iss_night_pass_africa_mideast.ogv",
    "source": "NASA ISS time-lapse",
    "start_s": 24.5,
@@ -153,24 +144,31 @@
    "from_unflagged_time": true
   },
   {
+   "segment_id": "seg007",
+   "file": "HAZARD_iss_night_pass_africa_mideast.ogv",
+   "source": "NASA ISS time-lapse",
+   "start_s": 11.0,
+   "end_s": 21.0,
+   "proposed_by": [],
+   "from_unflagged_time": true
+  },
+  {
    "segment_id": "seg008",
-   "file": "HAZARD_sintel_2048_stereo_512kb.mp4",
-   "source": "Blender open movies",
-   "start_s": 331.5,
-   "end_s": 341.5,
+   "file": "HAZARD_dvids_illumination_flares.mp4",
+   "source": "DVIDS",
+   "start_s": 38.5,
+   "end_s": 48.5,
    "proposed_by": [
-    "ffmpeg_photosensitivity",
-    "flashmap",
-    "naive_luma_diff"
+    "ffmpeg_photosensitivity"
    ],
    "from_unflagged_time": false
   },
   {
    "segment_id": "seg009",
-   "file": "HAZARD_pd1930_booze_hangs_high.mp4",
+   "file": "HAZARD_pd1930_frozen_frolics.mp4",
    "source": "1930 public-domain film",
-   "start_s": 48.0,
-   "end_s": 58.0,
+   "start_s": 117.0,
+   "end_s": 127.0,
    "proposed_by": [
     "ffmpeg_photosensitivity",
     "flashmap"
@@ -179,12 +177,13 @@
   },
   {
    "segment_id": "seg010",
-   "file": "HAZARD_sintel_2048_stereo_512kb.mp4",
-   "source": "Blender open movies",
-   "start_s": 96.5,
-   "end_s": 106.5,
+   "file": "HAZARD_pd1930_booze_hangs_high.mp4",
+   "source": "1930 public-domain film",
+   "start_s": 111.5,
+   "end_s": 121.5,
    "proposed_by": [
-    "ffmpeg_photosensitivity"
+    "ffmpeg_photosensitivity",
+    "flashmap"
    ],
    "from_unflagged_time": false
   },
@@ -192,11 +191,12 @@
    "segment_id": "seg011",
    "file": "HAZARD_pd1930_frozen_frolics.mp4",
    "source": "1930 public-domain film",
-   "start_s": 159.0,
-   "end_s": 169.0,
+   "start_s": 264.5,
+   "end_s": 274.5,
    "proposed_by": [
     "ffmpeg_photosensitivity",
-    "flashmap"
+    "flashmap",
+    "naive_luma_diff"
    ],
    "from_unflagged_time": false
   },
@@ -211,34 +211,33 @@
   },
   {
    "segment_id": "seg013",
-   "file": "HAZARD_tears_of_steel_720p.mov",
+   "file": "HAZARD_sintel_2048_stereo_512kb.mp4",
    "source": "Blender open movies",
-   "start_s": 451.0,
-   "end_s": 461.0,
+   "start_s": 153.5,
+   "end_s": 163.5,
    "proposed_by": [
-    "flashmap"
+    "ffmpeg_photosensitivity"
    ],
    "from_unflagged_time": false
   },
   {
    "segment_id": "seg014",
-   "file": "HAZARD_wc_fireworks_rieti.ogv",
-   "source": "Wikimedia Commons fireworks",
-   "start_s": 0.0,
-   "end_s": 10.0,
+   "file": "HAZARD_sintel_2048_stereo_512kb.mp4",
+   "source": "Blender open movies",
+   "start_s": 345.5,
+   "end_s": 355.5,
    "proposed_by": [
     "ffmpeg_photosensitivity",
-    "flashmap",
-    "naive_luma_diff"
+    "flashmap"
    ],
    "from_unflagged_time": false
   },
   {
    "segment_id": "seg015",
-   "file": "HAZARD_pd1930_frozen_frolics.mp4",
-   "source": "1930 public-domain film",
-   "start_s": 22.0,
-   "end_s": 32.0,
+   "file": "HAZARD_bbb_720p_surround.mp4",
+   "source": "Blender open movies",
+   "start_s": 170.0,
+   "end_s": 180.0,
    "proposed_by": [
     "ffmpeg_photosensitivity",
     "flashmap"
@@ -247,11 +246,12 @@
   },
   {
    "segment_id": "seg016",
-   "file": "HAZARD_tears_of_steel_720p.mov",
+   "file": "HAZARD_bbb_720p_surround.mp4",
    "source": "Blender open movies",
-   "start_s": 256.0,
-   "end_s": 266.0,
+   "start_s": 353.0,
+   "end_s": 363.0,
    "proposed_by": [
+    "ffmpeg_photosensitivity",
     "flashmap"
    ],
    "from_unflagged_time": false
@@ -267,23 +267,22 @@
   },
   {
    "segment_id": "seg018",
-   "file": "HAZARD_bbb_720p_surround.mp4",
-   "source": "Blender open movies",
-   "start_s": 329.5,
-   "end_s": 339.5,
+   "file": "HAZARD_pd1930_frozen_frolics.mp4",
+   "source": "1930 public-domain film",
+   "start_s": 435.5,
+   "end_s": 445.5,
    "proposed_by": [
     "ffmpeg_photosensitivity",
-    "flashmap",
-    "naive_luma_diff"
+    "flashmap"
    ],
    "from_unflagged_time": false
   },
   {
    "segment_id": "seg019",
-   "file": "HAZARD_nasa_svs_5011_iss_lightning_1080p.mp4",
-   "source": "NASA SVS 5011",
-   "start_s": 12.0,
-   "end_s": 22.0,
+   "file": "HAZARD_dvids_fireworks_safety.mp4",
+   "source": "DVIDS",
+   "start_s": 48.5,
+   "end_s": 58.5,
    "proposed_by": [
     "ffmpeg_photosensitivity"
    ],
@@ -291,24 +290,24 @@
   },
   {
    "segment_id": "seg020",
-   "file": "HAZARD_dvids_illumination_flares.mp4",
-   "source": "DVIDS",
-   "start_s": 15.0,
-   "end_s": 25.0,
+   "file": "HAZARD_pd1930_booze_hangs_high.mp4",
+   "source": "1930 public-domain film",
+   "start_s": 48.0,
+   "end_s": 58.0,
    "proposed_by": [
-    "ffmpeg_photosensitivity"
+    "ffmpeg_photosensitivity",
+    "flashmap"
    ],
    "from_unflagged_time": false
   },
   {
    "segment_id": "seg021",
-   "file": "HAZARD_bbb_720p_surround.mp4",
-   "source": "Blender open movies",
-   "start_s": 471.0,
-   "end_s": 481.0,
+   "file": "HAZARD_nasa_svs_5011_iss_lightning_1080p.mp4",
+   "source": "NASA SVS 5011",
+   "start_s": 12.0,
+   "end_s": 22.0,
    "proposed_by": [
-    "ffmpeg_photosensitivity",
-    "flashmap"
+    "ffmpeg_photosensitivity"
    ],
    "from_unflagged_time": false
   },
@@ -325,8 +324,8 @@
    "segment_id": "seg023",
    "file": "HAZARD_tears_of_steel_720p.mov",
    "source": "Blender open movies",
-   "start_s": 378.0,
-   "end_s": 388.0,
+   "start_s": 345.5,
+   "end_s": 355.5,
    "proposed_by": [
     "ffmpeg_photosensitivity"
    ],
@@ -334,10 +333,32 @@
   },
   {
    "segment_id": "seg024",
+   "file": "HAZARD_wc_fireworks_ignis_brunensis.ogv",
+   "source": "Wikimedia Commons fireworks",
+   "start_s": 103.0,
+   "end_s": 113.0,
+   "proposed_by": [
+    "flashmap"
+   ],
+   "from_unflagged_time": false
+  },
+  {
+   "segment_id": "seg025",
+   "file": "HAZARD_tears_of_steel_720p.mov",
+   "source": "Blender open movies",
+   "start_s": 256.0,
+   "end_s": 266.0,
+   "proposed_by": [
+    "flashmap"
+   ],
+   "from_unflagged_time": false
+  },
+  {
+   "segment_id": "seg026",
    "file": "HAZARD_bbb_720p_surround.mp4",
    "source": "Blender open movies",
-   "start_s": 353.0,
-   "end_s": 363.0,
+   "start_s": 319.0,
+   "end_s": 329.0,
    "proposed_by": [
     "ffmpeg_photosensitivity",
     "flashmap"
@@ -345,40 +366,7 @@
    "from_unflagged_time": false
   },
   {
-   "segment_id": "seg025",
-   "file": "HAZARD_wc_fireworks_summer.webm",
-   "source": "Wikimedia Commons fireworks",
-   "start_s": 0.0,
-   "end_s": 10.0,
-   "proposed_by": [
-    "ffmpeg_photosensitivity",
-    "flashmap",
-    "naive_luma_diff"
-   ],
-   "from_unflagged_time": false
-  },
-  {
-   "segment_id": "seg026",
-   "file": "HAZARD_dvids_fireworks_safety.mp4",
-   "source": "DVIDS",
-   "start_s": 48.5,
-   "end_s": 58.5,
-   "proposed_by": [
-    "ffmpeg_photosensitivity"
-   ],
-   "from_unflagged_time": false
-  },
-  {
    "segment_id": "seg027",
-   "file": "HAZARD_bbb_720p_surround.mp4",
-   "source": "Blender open movies",
-   "start_s": 232.0,
-   "end_s": 242.0,
-   "proposed_by": [],
-   "from_unflagged_time": true
-  },
-  {
-   "segment_id": "seg028",
    "file": "HAZARD_wc_fireworks_ignis_brunensis.ogv",
    "source": "Wikimedia Commons fireworks",
    "start_s": 44.5,
@@ -387,15 +375,23 @@
    "from_unflagged_time": true
   },
   {
+   "segment_id": "seg028",
+   "file": "HAZARD_bbb_720p_surround.mp4",
+   "source": "Blender open movies",
+   "start_s": 232.0,
+   "end_s": 242.0,
+   "proposed_by": [],
+   "from_unflagged_time": true
+  },
+  {
    "segment_id": "seg029",
-   "file": "HAZARD_wc_lightning_240fps.webm",
-   "source": "Wikimedia Commons lightning",
-   "start_s": 0.0,
-   "end_s": 10.0,
+   "file": "HAZARD_sintel_2048_stereo_512kb.mp4",
+   "source": "Blender open movies",
+   "start_s": 854.5,
+   "end_s": 864.5,
    "proposed_by": [
     "ffmpeg_photosensitivity",
-    "flashmap",
-    "naive_luma_diff"
+    "flashmap"
    ],
    "from_unflagged_time": false
   },
@@ -403,8 +399,8 @@
    "segment_id": "seg030",
    "file": "HAZARD_dvids_illumination_flares.mp4",
    "source": "DVIDS",
-   "start_s": 38.5,
-   "end_s": 48.5,
+   "start_s": 15.0,
+   "end_s": 25.0,
    "proposed_by": [
     "ffmpeg_photosensitivity"
    ],
@@ -412,13 +408,14 @@
   },
   {
    "segment_id": "seg031",
-   "file": "HAZARD_pd1930_frozen_frolics.mp4",
-   "source": "1930 public-domain film",
-   "start_s": 46.5,
-   "end_s": 56.5,
+   "file": "HAZARD_wc_fireworks_rieti.ogv",
+   "source": "Wikimedia Commons fireworks",
+   "start_s": 0.0,
+   "end_s": 10.0,
    "proposed_by": [
     "ffmpeg_photosensitivity",
-    "flashmap"
+    "flashmap",
+    "naive_luma_diff"
    ],
    "from_unflagged_time": false
   },
@@ -442,21 +439,22 @@
   },
   {
    "segment_id": "seg034",
-   "file": "HAZARD_tears_of_steel_720p.mov",
-   "source": "Blender open movies",
-   "start_s": 155.0,
-   "end_s": 165.0,
+   "file": "HAZARD_pd1930_frozen_frolics.mp4",
+   "source": "1930 public-domain film",
+   "start_s": 46.5,
+   "end_s": 56.5,
    "proposed_by": [
+    "ffmpeg_photosensitivity",
     "flashmap"
    ],
    "from_unflagged_time": false
   },
   {
    "segment_id": "seg035",
-   "file": "HAZARD_bbb_720p_surround.mp4",
+   "file": "HAZARD_sintel_2048_stereo_512kb.mp4",
    "source": "Blender open movies",
-   "start_s": 266.0,
-   "end_s": 276.0,
+   "start_s": 290.0,
+   "end_s": 300.0,
    "proposed_by": [
     "ffmpeg_photosensitivity",
     "flashmap"
@@ -465,10 +463,21 @@
   },
   {
    "segment_id": "seg036",
-   "file": "HAZARD_wc_lightning_blackout.webm",
+   "file": "HAZARD_wc_lightning_condensed.webm",
    "source": "Wikimedia Commons lightning",
-   "start_s": 0.0,
-   "end_s": 10.0,
+   "start_s": 22.0,
+   "end_s": 32.0,
+   "proposed_by": [
+    "ffmpeg_photosensitivity"
+   ],
+   "from_unflagged_time": false
+  },
+  {
+   "segment_id": "seg037",
+   "file": "HAZARD_wc_fireworks_summer.webm",
+   "source": "Wikimedia Commons fireworks",
+   "start_s": 10.0,
+   "end_s": 20.0,
    "proposed_by": [
     "ffmpeg_photosensitivity",
     "flashmap",
@@ -477,25 +486,14 @@
    "from_unflagged_time": false
   },
   {
-   "segment_id": "seg037",
-   "file": "HAZARD_pd1930_frozen_frolics.mp4",
-   "source": "1930 public-domain film",
-   "start_s": 117.0,
-   "end_s": 127.0,
+   "segment_id": "seg038",
+   "file": "HAZARD_tears_of_steel_720p.mov",
+   "source": "Blender open movies",
+   "start_s": 325.5,
+   "end_s": 335.5,
    "proposed_by": [
     "ffmpeg_photosensitivity",
     "flashmap"
-   ],
-   "from_unflagged_time": false
-  },
-  {
-   "segment_id": "seg038",
-   "file": "HAZARD_sintel_2048_stereo_512kb.mp4",
-   "source": "Blender open movies",
-   "start_s": 695.5,
-   "end_s": 705.5,
-   "proposed_by": [
-    "ffmpeg_photosensitivity"
    ],
    "from_unflagged_time": false
   },

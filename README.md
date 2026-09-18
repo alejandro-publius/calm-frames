@@ -264,9 +264,9 @@ The harness side works and nothing crashed, but playback did not run in that tak
 | What | Value |
 |---|---|
 | Clips in the pool | <!--n results/screening.json:totals.clips -->20<!--/n--> |
-| Analyzed cleanly | <!--n results/screening.json:clips_analyzed_ok -->16<!--/n--> |
-| flashmap could not decode | <!--n results/screening.json:clips_failed -->4<!--/n--> |
-| Flagged segments found | <!--n results/screening.json:totals.flagged_segments -->432<!--/n--> |
+| Analyzed cleanly | <!--n results/screening.json:clips_analyzed_ok -->20<!--/n--> |
+| flashmap could not decode | <!--n results/screening.json:clips_failed -->0<!--/n--> |
+| Flagged segments found | <!--n results/screening.json:totals.flagged_segments -->437<!--/n--> |
 | Sources with at least one flag | <!--n results/screening.json:totals.sources_with_at_least_one_flag -->5<!--/n--> |
 
 Per source:
@@ -275,16 +275,18 @@ Per source:
 |---|---|---|---|
 | Blender open movies | <!--n results/screening.json:per_source.Blender open movies.files -->3<!--/n--> | <!--n results/screening.json:per_source.Blender open movies.flagged_files -->3<!--/n--> | <!--n results/screening.json:per_source.Blender open movies.flagged_segments -->169<!--/n--> |
 | 1930 public-domain film | <!--n results/screening.json:per_source.1930 public-domain film.files -->2<!--/n--> | <!--n results/screening.json:per_source.1930 public-domain film.flagged_files -->2<!--/n--> | <!--n results/screening.json:per_source.1930 public-domain film.flagged_segments -->229<!--/n--> |
-| Wikimedia Commons fireworks | <!--n results/screening.json:per_source.Wikimedia Commons fireworks.files -->3<!--/n--> | <!--n results/screening.json:per_source.Wikimedia Commons fireworks.flagged_files -->2<!--/n--> | <!--n results/screening.json:per_source.Wikimedia Commons fireworks.flagged_segments -->16<!--/n--> |
+| Wikimedia Commons fireworks | <!--n results/screening.json:per_source.Wikimedia Commons fireworks.files -->4<!--/n--> | <!--n results/screening.json:per_source.Wikimedia Commons fireworks.flagged_files -->3<!--/n--> | <!--n results/screening.json:per_source.Wikimedia Commons fireworks.flagged_segments -->21<!--/n--> |
 | Wikimedia Commons lightning | <!--n results/screening.json:per_source.Wikimedia Commons lightning.files -->4<!--/n--> | <!--n results/screening.json:per_source.Wikimedia Commons lightning.flagged_files -->3<!--/n--> | <!--n results/screening.json:per_source.Wikimedia Commons lightning.flagged_segments -->9<!--/n--> |
 | DVIDS | <!--n results/screening.json:per_source.DVIDS.files -->2<!--/n--> | <!--n results/screening.json:per_source.DVIDS.flagged_files -->2<!--/n--> | <!--n results/screening.json:per_source.DVIDS.flagged_segments -->9<!--/n--> |
 | NASA SVS 5011 | <!--n results/screening.json:per_source.NASA SVS 5011.files -->1<!--/n--> | <!--n results/screening.json:per_source.NASA SVS 5011.flagged_files -->0<!--/n--> | <!--n results/screening.json:per_source.NASA SVS 5011.flagged_segments -->0<!--/n--> |
-| NASA ISS time-lapse | <!--n results/screening.json:per_source.NASA ISS time-lapse.files -->0<!--/n--> | <!--n results/screening.json:per_source.NASA ISS time-lapse.flagged_files -->0<!--/n--> | <!--n results/screening.json:per_source.NASA ISS time-lapse.flagged_segments -->0<!--/n--> |
+| NASA ISS time-lapse | <!--n results/screening.json:per_source.NASA ISS time-lapse.files -->3<!--/n--> | <!--n results/screening.json:per_source.NASA ISS time-lapse.flagged_files -->0<!--/n--> | <!--n results/screening.json:per_source.NASA ISS time-lapse.flagged_segments -->0<!--/n--> |
 | unlabeled | <!--n results/screening.json:per_source.unlabeled.files -->1<!--/n--> | <!--n results/screening.json:per_source.unlabeled.flagged_files -->0<!--/n--> | <!--n results/screening.json:per_source.unlabeled.flagged_segments -->0<!--/n--> |
 
-The `unlabeled` row is one file that carries no source label in `media/LICENSES.csv`, and `NASA ISS time-lapse` is a source whose files all failed to decode, so it contributes nothing. Both are in the table because every source in the results file has to be, and the Files column has to add up to the <!--n results/screening.json:clips_analyzed_ok -->16<!--/n--> analyzed cleanly. `eval/tests/test_screening_table_is_complete.py` fails if either stops being true, because this table had already lost a row once.
+The `unlabeled` row is one file that carries no source label in `media/LICENSES.csv`, and `NASA ISS time-lapse` is three night time-lapses that decode cleanly and flash at nothing, so they contribute no segments. Both are in the table because every source in the results file has to be, and the Files column has to add up to the <!--n results/screening.json:clips_analyzed_ok -->20<!--/n--> analyzed cleanly. `eval/tests/test_screening_table_is_complete.py` fails if either stops being true, because this table had already lost a row once.
 
-Two things this run found, both recorded rather than smoothed over. Every one of those segments fired the general flash rule and not one fired the red flash rule, because the free pool holds no saturated red strobe and no sustained regular strobe. And flashmap cannot decode Theora `.ogv`, which is what all four failures were.
+One thing this run found, recorded rather than smoothed over: every one of those segments fired the general flash rule and not one fired the red flash rule, because the free pool holds no saturated red strobe and no sustained regular strobe. That gap closes by filming. The clips to film are listed in [`results/screening.json`](results/screening.json) under `self_filmed_needed`, each with what it has to show, how long to roll, and how fast it has to flash written as a multiple of the analyser's own per second limit.
+
+An earlier version of this table had four failures, all Theora `.ogv`, which flashmap could not decode at the time. The decoder was fixed and those four titles were screened again on Sep 17. The result file records that re-run under `rescreens`, with the rows it replaced and the rows it kept, so the table above is one run of sixteen titles plus a re-run of four rather than a single sweep.
 
 ### How well the analyzer does, on the conformance suite
 

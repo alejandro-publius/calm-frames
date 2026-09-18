@@ -213,7 +213,7 @@ Times are cumulative. Voiceover is the middle column read aloud. On-screen text 
 | **Shots** | S13, S14 |
 | **Picture** | Split screen or a quick cut. Left: `python -m flashmap check` on a file, exiting 1, with the segment list printed. Right: a GitHub pull request that adds a flashing asset, with our Action's check **red** and its job summary open. |
 | **Voiceover** | "The analyzer is open source and it runs on its own. Any studio can drop one file into their repository, and a pull request that adds flashing above the thresholds fails before anyone merges it." |
-| **On screen** | <!--n results/screening.json:totals.flagged_segments -->432<!--/n--> `flagged segments across` <!--n results/screening.json:totals.sources_with_at_least_one_flag -->5<!--/n--> `licensed sources` |
+| **On screen** | <!--n results/screening.json:totals.flagged_segments -->437<!--/n--> `flagged segments across` <!--n results/screening.json:totals.sources_with_at_least_one_flag -->5<!--/n--> `licensed sources` |
 | **Note** | The Action's summary must not render a thumbnail of the offending asset, and the pull request's Files tab must not be opened, because GitHub previews images there. Check the job summary before filming it. Leave the red cross on screen for the last four seconds of the beat. |
 
 ### Beat 10. 2:14 to 2:26, any Vega app can add it

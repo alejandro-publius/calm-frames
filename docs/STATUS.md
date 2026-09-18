@@ -75,10 +75,10 @@ Every one comes from `results/`, and CI fails if a document drifts from them.
 | flashmap precision, partial conformance run | <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n--> (<!--n results/conformance.json:published.flashmap_precision_lo -->0.605<!--/n--> to <!--n results/conformance.json:published.flashmap_precision_hi -->0.693<!--/n-->) | conformance.json |
 | flashmap recall, same run | <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> | conformance.json |
 | Clips measured, of 3000 designed | <!--n results/conformance.json:published.clips_kept -->467<!--/n--> | conformance.json |
-| Flagged segments in the pool | <!--n results/screening.json:totals.flagged_segments -->432<!--/n--> across <!--n results/screening.json:totals.sources_with_at_least_one_flag -->5<!--/n--> sources | screening.json |
+| Flagged segments in the pool | <!--n results/screening.json:totals.flagged_segments -->437<!--/n--> across <!--n results/screening.json:totals.sources_with_at_least_one_flag -->5<!--/n--> sources | screening.json |
 | Red-rule segments found | none | screening.json |
 | Longest gap between player position reports | <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms | vvd_timeupdate_stats.json |
-| Segments ready for blind labelling | <!--n results/realclips_status.json:segments -->40<!--/n--> across <!--n results/realclips_status.json:titles -->16<!--/n--> titles | realclips_status.json |
+| Segments ready for blind labelling | <!--n results/realclips_status.json:segments -->40<!--/n--> across <!--n results/realclips_status.json:titles -->15<!--/n--> titles | realclips_status.json |
 
 ## 7. Next
 

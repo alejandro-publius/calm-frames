@@ -156,7 +156,7 @@ this":
 Prepared, not labelled. Nobody on this lane labels a segment.
 
 <!--n results/realclips_status.json:segments -->40<!--/n--> ten second segments were cut from
-<!--n results/realclips_status.json:titles -->16<!--/n--> titles across
+<!--n results/realclips_status.json:titles -->15<!--/n--> titles across
 <!--n results/realclips_status.json:source_count -->7<!--/n--> sources, as the
 union of what flashmap, ffmpeg's filter and naive differencing each flagged, plus time none of
 them flagged. That is
@@ -166,14 +166,37 @@ no detector output anywhere on the figure. `eval/labeling/GUIDE.md` quotes the s
 and says what is not a flash.
 
 The analysis is written and tested end to end on fabricated labels, so the only missing step is
-two people filling in `eval/labeling/labels_*.csv`. IRIS is not one of the candidate lists,
-because the image has never built, and the four Theora titles had no flashmap intervals when the
-pool was cut, so their windows came from the two ffmpeg based lists only.
+two people filling in `eval/labeling/labels_*.csv`. `eval/labeling/GUIDE.md` says who takes
+which sheet, how much of it, and what to run afterwards.
 
-One thing to do before anybody starts labelling: flashmap's Theora decoding has since been
-fixed, and `results/screening.json` still holds the run where those four titles failed. Rescreen
-them, then run `make labeling-pool` again. Rebuilding the pool after labelling has begun would
-throw the labels away, because a segment id is a position in a shuffled list.
+IRIS is not one of the candidate lists, because the image has never built, so anything only IRIS
+would have proposed is not in the union and the recall estimate is optimistic by an unknown
+amount. The four Theora titles were screened again before this pool was cut: the decoder was
+fixed, the four were re-run on Sep 17, and `results/screening.json` records that under
+`rescreens`. Three of them are ISS night time-lapses that flash at nothing, and the fourth is a
+fireworks display with five flagged segments.
+
+A title joins the pool only when every candidate list has analysed it. Sixteen clips downloaded
+later in the day have no candidate list from either ffmpeg based baseline, so their time is not
+unflagged in the sense this pool means and they are skipped, with the reason recorded per title
+in `pool_key.json`.
+
+Do not rebuild the pool once labelling has begun: a segment id is a position in a shuffled list,
+so the answers would end up describing different segments. `make_pool` refuses while any sheet
+has an answer in it, and the plot run deletes a figure before re-rendering it, so no figure from
+an earlier pool can survive under a new id.
+
+### Positives per source, and the gap that has to be filmed
+
+`results/screening.json` carries the per source table: titles, titles that flashed, segments,
+and the split by which rule fired. Every flagged segment in the pool fired the **general** flash
+rule. **Not one fired the red flash rule**, so the pool holds no saturated red strobe and no
+sustained regular strobe, and no free footage was found that covers either.
+
+The clips that have to be filmed are listed in the same file under `self_filmed_needed`: what
+each has to show, how long to roll, and how fast it has to flash, written as a multiple of the
+analyser's own per second flash limit rather than as a number of its own. Two of the five are
+negative controls, because a red flag that only says "the picture was red" measures nothing.
 
 ## 5. How to rebuild all of it
 
