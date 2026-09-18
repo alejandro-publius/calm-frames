@@ -7,8 +7,11 @@ at tag `v0.24-RN83`. The four files below came out of that checkout with
 Nothing here is illustrative: it is the output of the diff, and
 `hook/tools/make_integration_diff.mjs` regenerates it.
 
-**32 lines added, 2 replaced, across four files.** Two of those files only
-pass a prop along.
+**32 lines added, 2 replaced, across four files.** Only one of them, the
+video player's own UI, does nothing but pass a prop along. The other two
+besides the player screen each replace a line that moved the playhead, which
+is the point: after this, no code in the sample writes `currentTime` or calls
+`fastSeek` for itself.
 
 ## What the app gets for it
 
