@@ -78,6 +78,17 @@ export interface FlashGuardOptions {
   /** False when the app is in the background. */
   foreground?: boolean;
   durationMs?: number;
+  /**
+   * How far the rendition about to play sits from the source the map
+   * describes, milliseconds, from the catalog entry's
+   * `notes.rendition_start_offset_ms` for this preset.
+   *
+   * Left out it is treated as zero, which is right for a title that plays its
+   * source. An offset larger than verify would publish means the map and the
+   * file disagree, and the schedule refuses to build rather than put covers in
+   * the wrong places.
+   */
+  renditionStartOffsetMs?: number;
   titleId?: string;
   titleName?: string;
   /** Injected so tests do not need a network and a device does not need one. */
@@ -133,6 +144,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
     ready = true,
     foreground = true,
     durationMs,
+    renditionStartOffsetMs,
     titleId = 'unknown',
     titleName = 'this title',
     fetchText = defaultFetchText,
@@ -204,10 +216,28 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
       if (cancelled) {
         return;
       }
-      const built = buildCoverIntervals(unionSegments(verifiedMaps), {
-        ...coverOptions,
-        durationMs,
-      });
+      // Fail closed. An offset the schedule refuses means the map and the file
+      // disagree about where the pictures are, and a schedule built anyway
+      // would put covers in the wrong places, which is worse than not playing.
+      let built;
+      try {
+        built = buildCoverIntervals(unionSegments(verifiedMaps), {
+          ...coverOptions,
+          durationMs,
+          renditionStartOffsetMs,
+        });
+      } catch {
+        if (cancelled) {
+          return;
+        }
+        setStatus('blocked');
+        setRejection('wrong-file');
+        setBlockedReason(
+          'This title does not line up with the check that was run, so the picture stays hidden.',
+        );
+        setSegments([]);
+        return;
+      }
       setSegments(built);
       setRejection(undefined);
       setBlockedReason(undefined);
@@ -219,7 +249,14 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [expectedSha256, publicKeyBase64, settings, durationMs, coverOptions]);
+  }, [
+    expectedSha256,
+    publicKeyBase64,
+    settings,
+    durationMs,
+    coverOptions,
+    renditionStartOffsetMs,
+  ]);
 
   // The schedule itself, on the harness that GATE 1 measured.
   const harness = useCoverHarness(mediaRef, {

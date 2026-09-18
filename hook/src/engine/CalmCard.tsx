@@ -25,7 +25,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { CALM_COLORS, CALM_SPACE, CALM_TYPE, scale } from './calmStyles';
+import {
+  CALM_COLORS,
+  CALM_SPACE,
+  CALM_TYPE,
+  FOCUS_RING_WIDTH,
+  scale,
+} from './calmStyles';
 import { Card } from './cards';
 
 export interface CalmCardProps {
@@ -146,7 +152,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(CALM_SPACE.TIGHT),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
     borderRadius: scale(12),
-    borderWidth: scale(4),
+    borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.BORDER,
     backgroundColor: CALM_COLORS.SURFACE,
   },

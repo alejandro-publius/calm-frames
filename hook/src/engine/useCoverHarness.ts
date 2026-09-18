@@ -79,6 +79,19 @@ export interface CoverHarnessState {
   mediaTimeMs: number;
   /** Largest difference seen between the estimate and a reported position. */
   worstDriftMs: number;
+  /**
+   * The longest gap between two runs of the scheduler's own tick, in
+   * milliseconds.
+   *
+   * The tick asks every DEFAULT_TICK_MS whether the cover should be on, so a
+   * gap much larger than that is the JavaScript thread being unavailable, not
+   * the schedule being wrong. It matters because the guard band has to be
+   * wider than the worst such pause: a cover was measured going on 86 ms after
+   * its marker when the thread was away for about a third of a second
+   * (results/gate1_software_vvd.json). Nothing measured that pause directly
+   * until this.
+   */
+  worstTickGapMs: number;
   reason: string;
 }
 
@@ -134,6 +147,7 @@ export function useCoverHarness(
     covered: false,
     mediaTimeMs: 0,
     worstDriftMs: 0,
+    worstTickGapMs: 0,
     reason: 'idle',
   });
 
@@ -141,6 +155,10 @@ export function useCoverHarness(
   const uncertainRef = useRef<boolean>(false);
   const coveredRef = useRef<boolean>(false);
   const worstDriftRef = useRef<number>(0);
+  // When the tick last ran, so the gap between two runs can be measured. A
+  // gap far larger than tickMs is the JavaScript thread being away.
+  const lastTickWallRef = useRef<number | null>(null);
+  const worstTickGapRef = useRef<number>(0);
   // The schedule is read through a ref so that a caller passing a fresh array
   // on every render does not restart the scheduler. It used to: the default
   // empty array was a new object each render, so the first cover caused a
@@ -239,7 +257,10 @@ export function useCoverHarness(
         covered: coveredRef.current,
         playbackRate: clockRef.current.playbackRate,
         quality: kind === 'timeupdate' ? readPlaybackQuality(element) : undefined,
-        extra: { worstDriftMs: Math.round(worstDriftRef.current) },
+        extra: {
+          worstDriftMs: Math.round(worstDriftRef.current),
+          worstTickGapMs: Math.round(worstTickGapRef.current),
+        },
       });
     };
 
@@ -304,6 +325,25 @@ export function useCoverHarness(
     const tick = () => {
       const wallClockMs = Date.now();
       const mediaTimeMs = estimate(clockRef.current, wallClockMs);
+      if (lastTickWallRef.current !== null) {
+        const gap = wallClockMs - lastTickWallRef.current;
+        if (gap > worstTickGapRef.current) {
+          worstTickGapRef.current = gap;
+          // Anything past twice the tick is worth having in the record rather
+          // than only in a maximum, because the shape of these gaps is what
+          // sets the guard band.
+          if (gap > tickMs * 2) {
+            logTimingEvent({
+              kind: 'tick-gap',
+              wallClockMs,
+              mediaTimeMs,
+              covered: coveredRef.current,
+              extra: { gapMs: Math.round(gap), tickMs },
+            });
+          }
+        }
+      }
+      lastTickWallRef.current = wallClockMs;
 
       if (mode === 'layering') {
         // Toggle on a wall clock, so the recording has a known cadence even if
@@ -334,6 +374,7 @@ export function useCoverHarness(
               ...previous,
               mediaTimeMs,
               worstDriftMs: worstDriftRef.current,
+              worstTickGapMs: worstTickGapRef.current,
             },
       );
     };

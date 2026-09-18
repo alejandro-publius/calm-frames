@@ -56,10 +56,38 @@ export interface CoverScheduleOptions {
   minCoverMs?: number;
   /** Total media duration, used to clamp the last interval. */
   durationMs?: number;
+  /**
+   * How far the rendition's timeline sits from the source's, milliseconds.
+   *
+   * The map always describes the source file, because that is what was
+   * analyzed. The player plays the rendition, and a re-encode routinely
+   * renumbers the first presentation timestamp to zero while leaving every
+   * picture where it was. So a picture at source time S arrives at rendition
+   * time S minus this offset, and a schedule that ignored it would put every
+   * cover that much late.
+   *
+   * `pipeline/verify.py` measures it per preset and records it as
+   * `rendition_start_offset_ms`. Passing it here is what stops it costing the
+   * guard band anything.
+   */
+  renditionStartOffsetMs?: number;
 }
 
 export const DEFAULT_GUARD_BAND_MS = 500;
 export const DEFAULT_MIN_COVER_MS = 400;
+
+/**
+ * The most the rendition's timeline may sit from the source's before this
+ * refuses to build a schedule at all.
+ *
+ * `pipeline/verify.py` will not publish a title whose offset is larger than
+ * this, so an offset above it means the map and the file disagree about
+ * something. There is no safe schedule to build from that, and guessing would
+ * put covers in the wrong places, so it throws and the caller's fail closed
+ * path keeps the picture hidden. Kept in step with START_OFFSET_LIMIT_MS in
+ * pipeline/verify.py.
+ */
+export const MAX_RENDITION_START_OFFSET_MS = 150;
 
 /**
  * Turn flagged segments into the intervals the player must cover.
@@ -79,11 +107,26 @@ export function buildCoverIntervals(
     throw new Error('guardBandMs cannot be negative');
   }
 
+  const offsetMs = options.renditionStartOffsetMs ?? 0;
+  if (!Number.isFinite(offsetMs)) {
+    throw new Error('renditionStartOffsetMs must be a finite number');
+  }
+  if (Math.abs(offsetMs) > MAX_RENDITION_START_OFFSET_MS) {
+    throw new Error(
+      `renditionStartOffsetMs of ${offsetMs} ms is further than verify allows ` +
+        `(${MAX_RENDITION_START_OFFSET_MS} ms), so the map and the file disagree`,
+    );
+  }
+
   const widened: CoverInterval[] = segments
     .filter((segment) => segment.endMs > segment.startMs)
     .map((segment) => {
-      let startMs = segment.startMs - guardBandMs;
-      let endMs = segment.endMs + guardBandMs;
+      // Move the segment onto the rendition's timeline before widening, so the
+      // guard band is measured from where the picture actually arrives rather
+      // than from where the source had it. Both ends shift together, so the
+      // span is unchanged.
+      let startMs = segment.startMs - offsetMs - guardBandMs;
+      let endMs = segment.endMs - offsetMs + guardBandMs;
 
       // Enforce the minimum length by growing the end, then the start, so a
       // cover never starts later than the guard band promised.
