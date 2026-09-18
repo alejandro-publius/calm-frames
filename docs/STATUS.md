@@ -2,9 +2,13 @@
 
 Updated Thu Sep 17, 2026, late evening PT.
 
-## 1. The head-start kits never arrived
+## 1. The head-start kits are still not here, asked for twice
 
-`day-one-head-start.zip` is not in `~/Downloads`, not in the repo, not in Google Drive and not in claude.ai artifacts. Neither are `rubric-amazon.md` or `outreach-kit.md`. **If you have them, drop the zip anywhere and say where; if they are gone, nothing is waiting on them any more.**
+**`day-one-head-start.zip` is not on this machine.** Not at the repo root, not in `~/Downloads` (which holds no zip at all now), nowhere within four levels of your home folder, and Spotlight finds nothing by that name. `headstart/` is still the empty directory from day one. Neither `rubric-amazon.md` nor `outreach-kit.md` is here either.
+
+They were meant to be the test oracle: the kit's flashmap tests to run against ours, the spec-exact WCAG and BT.1702-3 numbers to diff our thresholds against, the clip pool in STRESS_TEST.md and the Vega API sheet. Without them there is no independent implementation to check ours against. What we have instead: docs/SPEC_SOURCES.md quotes primary sources for every threshold and names what could not be verified, and the conformance suite computes its ground truth from the spec text in a module that cannot import flashmap.
+
+**If the zip exists somewhere, the fastest fix is to tell me the exact path.** If it is gone, nothing is waiting on it.
 
 Rather than wait, everything they were meant to bring was built here:
 
