@@ -59,12 +59,17 @@ GATE2_MIN_SEGMENTS = 15
 GATE2_MIN_SOURCES = 4
 
 
-def load_sources() -> dict[str, str]:
-    """file name -> source label, from the notes column of the license ledger."""
+def load_sources(ledger: Path = LEDGER) -> dict[str, str]:
+    """file name -> source label, from the notes column of the license ledger.
+
+    The ledger lives beside the clips, so pointing --media-dir somewhere else points this at
+    that directory's ledger too. Otherwise a run over a different pool would label every clip
+    from the wrong list.
+    """
     out: dict[str, str] = {}
-    if not LEDGER.is_file():
+    if not ledger.is_file():
         return out
-    with LEDGER.open(newline="") as fh:
+    with ledger.open(newline="") as fh:
         for row in csv.DictReader(fh):
             name = (row.get("file") or "").strip()
             if not name or name.startswith("("):
@@ -142,6 +147,12 @@ def analyze_one(flashmap, path: Path, profile):
     return list(segments), result
 
 
+def title_key(name: str) -> str:
+    """One name for one title, with or without the hazard prefix screening adds."""
+    stem = Path(name).stem
+    return stem[len("HAZARD_") :] if stem.startswith("HAZARD_") else stem
+
+
 def segment_row(seg) -> dict:
     """One flagged segment, flattened for the report."""
     def g(name, default=None):
@@ -166,11 +177,27 @@ def main() -> int:
     ap.add_argument("--out", type=Path, default=OUT)
     ap.add_argument("--no-rename", action="store_true",
                     help="do not add the HAZARD_ prefix to flagged files")
+    ap.add_argument("--only", action="append", default=None,
+                    help="screen just these files and merge the rows into an existing report. "
+                         "Repeatable. Matches with or without the HAZARD_ prefix.")
     args = ap.parse_args()
 
     clips = sorted(p for p in args.media_dir.iterdir()
                    if p.suffix.lower() in VIDEO_SUFFIXES)
-    sources = load_sources()
+    if args.only:
+        wanted = {title_key(name) for name in args.only}
+        clips = [clip for clip in clips if title_key(clip.name) in wanted]
+        missing = wanted - {title_key(clip.name) for clip in clips}
+        if missing:
+            print(f"not in {args.media_dir}: {', '.join(sorted(missing))}", file=sys.stderr)
+            print("Nothing written.", file=sys.stderr)
+            return 2
+        if not args.out.is_file():
+            print(f"--only merges into an existing {args.out}, and it is not there.",
+                  file=sys.stderr)
+            print("Run the whole pool once first.", file=sys.stderr)
+            return 2
+    sources = load_sources(args.media_dir / LEDGER.name)
     unlabeled = [p.name for p in clips if p.name not in sources]
 
     print(f"{len(clips)} clips in {args.media_dir}")
@@ -192,7 +219,8 @@ def main() -> int:
         print(f"  available: {list(getattr(flashmap, 'PROFILES', []))}", file=sys.stderr)
         return 2
 
-    per_source: dict[str, dict] = {}
+    # per_source is counted from per_file once every row exists, in one place, so the whole
+    # pool run and a merged re-run of four titles cannot count it two different ways.
     per_file: list[dict] = []
     renamed: list[str] = []
     analyzed_ok = 0
@@ -202,7 +230,7 @@ def main() -> int:
         try:
             segments, result = analyze_one(flashmap, clip, profile)
         except Exception as exc:  # noqa: BLE001
-            print(f"FAILED {clip.name}: {exc}", file=sys.stderr)
+            print(f"FAILED {clip.name}: {exc}", file=sys.stderr, flush=True)
             per_file.append({"file": clip.name, "source": label, "error": str(exc)})
             continue
 
@@ -215,11 +243,6 @@ def main() -> int:
             final_name = target.name
             renamed.append(final_name)
 
-        bucket = per_source.setdefault(label, {"files": 0, "flagged_files": 0,
-                                               "flagged_segments": 0})
-        bucket["files"] += 1
-        bucket["flagged_files"] += 1 if n else 0
-        bucket["flagged_segments"] += n
         per_file.append({
             "file": final_name,
             "source": label,
@@ -228,7 +251,7 @@ def main() -> int:
             "variable_frame_rate": getattr(result, "variable_frame_rate", None),
             "segments": [segment_row(s) for s in segments],
         })
-        print(f"  {label:28} {final_name:44} {n} segments")
+        print(f"  {label:28} {final_name:44} {n} segments", flush=True)
 
     # An all-errors run must not leave a file of zeros behind that later reads as
     # a real screening. This is the bug that actually happened on Sep 17, 2026.
@@ -241,6 +264,40 @@ def main() -> int:
         print("Nothing written. A screening.json full of zeros would read as a "
               "real result later.", file=sys.stderr)
         return 2
+
+    rescreens: list[dict] = []
+    if args.only:
+        # Merge, rather than replace. The rows for the named files are dropped and the rows just
+        # measured take their place; every other row is left exactly as the run that made it
+        # wrote it. The report says which files were re-run and when, so a merged file never
+        # reads as one run when it is two.
+        previous = json.loads(args.out.read_text())
+        rescreened = {title_key(row["file"]) for row in per_file}
+        kept = [row for row in previous.get("per_file", [])
+                if title_key(row["file"]) not in rescreened]
+        rescreens = list(previous.get("rescreens", []))
+        rescreens.append({
+            "on": date.today().isoformat(),
+            "files": sorted(row["file"] for row in per_file),
+            "rows_kept_from_the_earlier_run": len(kept),
+            "note": "these files were screened again and their rows replaced. Every other row "
+                    "is from the run named in generated_on.",
+        })
+        per_file = kept + per_file
+        per_file.sort(key=lambda row: row["file"])
+        analyzed_ok = sum(1 for row in per_file if "error" not in row)
+        renamed = list(previous.get("renamed_to_hazard", [])) + renamed
+        clips = per_file  # the report's clip count is every row it holds, not just this run's
+
+    per_source = {}
+    for row in per_file:
+        if "error" in row:
+            continue
+        bucket = per_source.setdefault(row.get("source", "unknown"),
+                                       {"files": 0, "flagged_files": 0, "flagged_segments": 0})
+        bucket["files"] += 1
+        bucket["flagged_files"] += 1 if row["flagged_segments"] else 0
+        bucket["flagged_segments"] += row["flagged_segments"]
 
     total_segments = sum(b["flagged_segments"] for b in per_source.values())
     sources_with_hits = sum(1 for b in per_source.values() if b["flagged_segments"])
@@ -268,6 +325,8 @@ def main() -> int:
         },
         "renamed_to_hazard": renamed,
     }
+    if rescreens:
+        report["rescreens"] = rescreens
     # The per-source positives table and the shooting list for what the pool still lacks. It
     # rebuilds per_source from per_file, splitting the segments by which rule fired, because a
     # flagged segment count with no rule beside it hides whether the red rule ever fired.
