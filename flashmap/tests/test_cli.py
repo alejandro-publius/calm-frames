@@ -148,6 +148,35 @@ def test_check_passes_a_calm_file(capsys):
     assert "PASS" in capsys.readouterr().out
 
 
+def test_check_prints_a_pattern_without_falling_over(tmp_path, capsys):
+    """A pattern segment is a different dataclass from a flash one.
+
+    `check` used to reach for `area_window` on whatever it was printing, which a
+    PatternSegment does not have, so it printed the FAIL line and then threw an
+    AttributeError. The exit code was already 1 by then, so the crash looked
+    exactly like an ordinary refusal, and the only assertion on this path was
+    that the word FAIL appeared. It did.
+
+    Seen to fail: putting `segment.area_window` back gives
+    `AttributeError: 'PatternSegment' object has no attribute 'area_window'`.
+    """
+    clip = tmp_path / "HAZARD_pattern_for_check.mkv"
+    clipgen.write_clip(
+        clip,
+        [clipgen.grating(384, 216, 8, (96, 96, 96), (160, 160, 160))] * 40,
+        fps=20,
+    )
+    assert main(["check", str(clip), "--profile", "broadcast"]) == EXIT_FAIL
+    captured = capsys.readouterr()
+    assert "FAIL" in captured.out
+    assert "pattern" in captured.out
+    assert "light and dark pairs" in captured.out
+    # The flash wording must not appear on a pattern line.
+    pattern_lines = [ln for ln in captured.out.splitlines() if "pattern," in ln]
+    assert pattern_lines
+    assert not any("flash" in ln for ln in pattern_lines)
+
+
 def test_check_fails_a_strobe_and_says_where_the_area_was_measured(strobe, capsys):
     assert main(["check", str(strobe)]) == EXIT_FAIL
     captured = capsys.readouterr()

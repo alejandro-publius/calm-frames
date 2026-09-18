@@ -152,11 +152,26 @@ Four specific gaps, none of them hidden:
   index and the maps can replay a 29 day old index and its maps. That is the
   design's declared bound, not a defect, and it is worth saying in days.
 
-One thing the report page does not do, which its own tests now record: its image
-check does not cover the stripe hazard, because a timeline lane padded into the
-analysis frame fills about a fourteenth of it, under the pattern rule's area
-limit. What keeps that picture safe is the cap of five bars per lane, taken from
-the same BT.1702-3 criterion rather than chosen.
+The report page's timeline has three guards now, not one. The cap of five bars
+per lane is still there. The bars are also drawn low contrast: the widest step a
+lane can hold is 8.47 cd/m2 against the 20 cd/m2 Guideline 1 difference, so no
+number of them can form a hazardous pattern even if the cap were lost. And CI
+renders the whole page at 1280 px, cuts it into nine display frames and runs the
+analyzer over each under the broadcast profile, with a negative control that
+proves the check can refuse a striped page.
+
+**The page as a whole does not pass the pattern rule, and cannot.** Its text does
+it: cream on teal is 160.77 against 8.47 cd/m2, so every glyph edge is a
+Guideline 1 step, and all nine frames read 16 to 25 stripe pairs over 44 to 64
+per cent against a 25 per cent limit. No readable text avoids that at SDR peak
+200. So the check asserts on the timeline and prints the page verdict rather than
+pretending the page passes.
+
+That is worth carrying further than the report page. **`app/tools/ui_flashmap.mjs`
+runs the wcag profile, so the app's own screens have never been put in front of
+the pattern rule**, and the same finding is waiting there and in any title with
+credits. It is probably also part of why the pattern rule's raw precision is
+0.527 while its settled precision is 0.937.
 
 ### One defect in the pattern rule, found by the second verifier pass
 

@@ -256,12 +256,26 @@ def cmd_check(args: argparse.Namespace) -> int:
             found = list(result.all_segments)
             print(f"FAIL {path}: {len(found)} segment(s) over the thresholds")
             for segment in found:
-                kind = "pattern" if segment.reason == "pattern" else f"{segment.reason} flash"
-                print(
-                    f"  {segment.start_ms:.0f} to {segment.end_ms:.0f} ms  {kind}, "
-                    f"area {segment.area_fraction:.3f} of the {segment.area_window} "
-                    "window, measured on the picture"
-                )
+                # A pattern segment is a different dataclass from a flash one and
+                # shares only the times, the reason and the area. Reaching for a
+                # flash field on one of them threw an AttributeError here, after
+                # the FAIL line had already printed, so the crash looked like an
+                # ordinary refusal. test_report.py's check helper only asserted
+                # that "FAIL" appeared in the output, which is why nothing caught
+                # it. Each kind now prints what it actually has.
+                if segment.reason == "pattern":
+                    print(
+                        f"  {segment.start_ms:.0f} to {segment.end_ms:.0f} ms  pattern, "
+                        f"{segment.stripe_pairs} light and dark pairs, area "
+                        f"{segment.area_fraction:.3f} over {segment.area_limit:.2f}, "
+                        f"motion {segment.motion}, measured on the picture"
+                    )
+                else:
+                    print(
+                        f"  {segment.start_ms:.0f} to {segment.end_ms:.0f} ms  "
+                        f"{segment.reason} flash, area {segment.area_fraction:.3f} "
+                        f"of the {segment.area_window} window, measured on the picture"
+                    )
         if args.json:
             Path(args.json).write_text(
                 json.dumps(build_map(result), indent=2, sort_keys=True) + "\n", encoding="utf-8"
