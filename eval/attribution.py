@@ -220,8 +220,19 @@ def build_notice(existing: str) -> str:
 
 
 def ts_string(value: str) -> str:
-    """A TypeScript single quoted string, with nothing in it that could close it early."""
-    escaped = value.replace("\\", "\\\\").replace("'", "\\'")
+    """A TypeScript single quoted string, with nothing in it that could close it early.
+
+    A credit line is a CSV field, so it can legally hold a newline. A raw newline inside a
+    single quoted TypeScript string is a syntax error, which would break the app's build rather
+    than the credit, so line breaks are escaped rather than dropped.
+    """
+    escaped = (
+        value.replace("\\", "\\\\")
+        .replace("'", "\\'")
+        .replace("\r\n", "\\n")
+        .replace("\r", "\\n")
+        .replace("\n", "\\n")
+    )
     return f"'{escaped}'"
 
 
