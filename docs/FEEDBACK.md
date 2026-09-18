@@ -309,9 +309,9 @@ This file and the friction log grew past what other documents say about them. No
 |---|---|---|
 | `docs/SUBMISSION.md` section 9 | Product feedback for nine tools, written inline | Thirteen tools are answered here, including the accessibility APIs, Fargate, S3 and CloudFront, which section 9 did not cover. Section 9 can either absorb this file or link to it |
 | `docs/SUBMISSION.md` section 12 | Fourteen feature requests | Twenty-one here, in the same priority scale. The three Critical ones are the system setting and the two capture gaps |
-| `docs/SUBMISSION.md` section 13 | "eleven entries: four Medium and seven Low" | Thirty entries: four High, thirteen Medium, thirteen Low. Twenty-five are on Amazon's surface and five are the wider toolchain |
-| `docs/SUBMISSION.md` line 77 | "alongside seven more" | Alongside twenty-seven more |
-| `docs/SUBMISSION.md` section 14, item 10 | "Read the eleven friction entries" | Read the thirty |
+| `docs/SUBMISSION.md` section 13 | "eleven entries: four Medium and seven Low" | Thirty-three entries: five High, thirteen Medium, fifteen Low. Twenty-eight are on Amazon's surface and five are the wider toolchain |
+| `docs/SUBMISSION.md` line 77 | "alongside seven more" | Alongside thirty more |
+| `docs/SUBMISSION.md` section 14, item 10 | "Read the eleven friction entries" | Read the thirty-three |
 | `docs/SUBMISSION.md` section 11.4 | The upstream half says two tests | Three tests now, and both guards were seen to fail |
 | `docs/PLAN.md` lines 62 to 63 | Nine tools, fourteen requests, eleven entries | As above |
 | `docs/VIDEO_SCRIPT.md` line 60 | Calls the `vega device list` crash "feature request 4" | It is request 4 in `docs/SUBMISSION.md` section 12 and request 5 in this file. If section 12 adopts this list, that line needs the new number, or better, the name instead of a number |

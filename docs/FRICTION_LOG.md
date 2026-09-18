@@ -4,7 +4,7 @@ Developer friction found while building Calm Frames, in the six fields Amazon as
 
 Everything here is real. Each entry is something that cost time on this build, with the exact commands and the exact output, and each one is traceable to a commit, a log, a results file or an entry in [`docs/DECISIONS.md`](DECISIONS.md). **Nothing was invented to reach a number, and nothing was softened.** Where we are stating a platform constraint we designed around rather than a failure we watched happen, the entry says so in its own words.
 
-**Working notes stay in [`docs/friction_pending.md`](friction_pending.md).** That file was the running log while the build was going and the lanes still add to it. This file is the final format, and it is what goes into the Devpost product feedback. The shorter, per-tool version of the same material is [`docs/FEEDBACK.md`](FEEDBACK.md).
+**This file is the log.** [`docs/friction_pending.md`](friction_pending.md) is a scratch pad the lanes jot into while they work, and it no longer holds any entries: the eleven drafts that were in it are entries 1 to 11 here, in full, so the drafts were removed rather than left where a reader could mistake them for the log. What that file keeps is a table saying where the evidence for each later entry lives. The shorter, per-tool version of this material is [`docs/FEEDBACK.md`](FEEDBACK.md), and this is what goes into the Devpost product feedback.
 
 **Environment for every entry unless the entry says otherwise:** macOS 15.1.1 (24B91) on Apple M1, 16 GB. Vega CLI 1.3.4, Vega SDK 0.24.9914, Vega OS 1.2 (TV Ship/101520710) on the Vega Virtual Device, Node 22.23.2, Python 3.12.13, React Native 0.83, September 17 2026.
 
@@ -37,17 +37,22 @@ Everything here is real. Each entry is something that cost time on this build, w
 | 23 | Sample | `postinstall` builds Shaka Player from source and needs a JDK | Low |
 | 24 | Sample | `jest --ci` exits 1 on a clean checkout with every test passing | Low |
 | 25 | Sample | Its dependency tree buries a secret scan in 208 findings | Low |
-| 26 | Toolchain | Ogg Theora duplicate-frame packets kill the decoder | Medium |
-| 27 | Toolchain | Theora decodes wider than the size the file declares | Low |
-| 28 | Toolchain | Re-encoding moves the picture rectangle, which moves every area fraction | Medium |
-| 29 | Toolchain | A re-encode renumbers the first timestamp, so the rendition slides | Medium |
-| 30 | Toolchain | The ffmpeg photosensitivity filter misfires on its own first second | Low |
+| 26 | Player, docs | `timeupdate` cadence and `currentTime` resolution are undocumented | High |
+| 27 | React Native | `setNativeProps` throws on 0.83, so every piece of UI has to be state-driven | Low |
+| 28 | Captions, docs | The z-order contract is undocumented, and there is one captions view per process | Low |
+| 29 | Toolchain | Ogg Theora duplicate-frame packets kill the decoder | Medium |
+| 30 | Toolchain | Theora decodes wider than the size the file declares | Low |
+| 31 | Toolchain | Re-encoding moves the picture rectangle, which moves every area fraction | Medium |
+| 32 | Toolchain | A re-encode renumbers the first timestamp, so the rendition slides | Medium |
+| 33 | Toolchain | The ffmpeg photosensitivity filter misfires on its own first second | Low |
 
-**Thirty entries. Four High, thirteen Medium, thirteen Low.**
+**Thirty-three entries. Five High, thirteen Medium, fifteen Low.**
 
-**Entries 1 to 25 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player and `vega-video-sample`. **Entries 26 to 30 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. They are marked separately so nobody has to guess which are Amazon's.
+**Entries 1 to 28 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. They are marked separately so nobody has to guess which are Amazon's.
 
-Nothing here blocked the build outright, because every one of them had a way around it. The four High entries are the ones where there was no supported path at all and the way around had to be built from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), and playback on the virtual device being unreliable enough that a measurement needs twenty-two launches (22).
+Nothing here blocked the build outright, because every one of them had a way around it. The five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26).
+
+Three entries say plainly that they are a platform rule we adopted and designed around rather than a failure we watched: 13, 27 and 28. They are in the log because each one shaped the build and each cost time to establish, and they are labelled so that nobody reads them as a crash we saw.
 
 ---
 
@@ -221,7 +226,21 @@ The SDK error log shows `[DeviceManagerHandler]: [getDeviceList]: Error - TypeEr
 
 **Task.** Drive the app on the virtual device from a script, and capture what it shows. Capture matters for this project in particular, because Calm Frames has to check its own screens and transitions for flashing.
 
-**Steps.** Read through `vega device --help` and `vega exec vda`.
+**Steps.**
+
+1. Read every verb the CLI has for a device:
+
+   ```sh
+   vega device --help
+   ```
+
+2. Read the bundled device adapter's own help, since it is adb-derived and adb has both an input and a capture command:
+
+   ```sh
+   vega exec vda --help
+   ```
+
+3. Looked for those two adb tools on the device itself, through the developer shell (`vega device run-cmd`).
 
 **Expected.** Something like `vega device key dpad-down` and `vega device screenshot out.png`.
 
@@ -575,7 +594,71 @@ One honest note about that paste. Our verification checkout lives at a very deep
 
 ---
 
-## 26. Ogg Theora duplicate-frame packets kill the decoder
+## 26. The player's position reporting is undocumented, and it is not regular
+
+**Task.** Put the cover on screen before a flagged segment starts. That needs two facts about the player: how often it says where the playhead is, and how precise that number is.
+
+**Steps.**
+
+1. Looked for a stated cadence for `timeupdate` and a stated resolution for `currentTime`, in the Vega documentation and in the type definitions that ship with `@amazon-devices/react-native-w3cmedia`.
+2. Found neither, so measured them. Instrumented the app to record every media event with both media time and wall-clock time (`app/src/calmframes/timingLog.ts`), played a clip on the virtual device, and wrote the distribution to `results/vvd_timeupdate_stats.json`.
+
+**Expected.** A documented cadence and a documented resolution, the way a platform states a frame budget. Anything that has to act at a precise media time depends on both.
+
+**Actual.** Neither is documented, and the measured behaviour is not what a developer would assume. In one recorded run the gap between position reports had a median of <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.median -->426<!--/n--> ms, a shortest of <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.min -->75<!--/n--> ms and a longest of <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms, while the clip played on throughout. The smallest step `currentTime` reported was <!--n results/vvd_timeupdate_stats.json:current_time_precision_ms -->3<!--/n--> ms. A cover that waited for a position report would have been more than five seconds late in that run, and nothing would have said why.
+
+**Severity.** High. It is the fact this whole project's timing design rests on, the failure mode is silent, and every developer has to measure it for themselves and will get a different answer on a different device.
+
+**Workaround.** Schedule ahead instead of reacting. The cover runs on a wall clock that is re-anchored to media time at every position report, so it goes on before a marker rather than after it, and `app/src/calmframes/mediaClock.ts` holds that arithmetic including playback rate. The price is drift: through the five second silence above, the app's estimate had run <!--n results/vvd_timeupdate_stats.json:worst_wall_clock_drift_ms -->2756<!--/n--> ms away from the player by the time a report arrived. So anything that makes the playhead uncertain, a seek, a stall, buffering or backgrounding, hides the picture at once rather than trusting the estimate. Every timing line records both clocks, so a 240 fps recording can be lined up against what the app believed.
+
+**Suggestion.** Document both, with a stated guarantee and a word about what happens under load. Captions, chapter skips, ad insertion and accessibility overlays all have to act at a precise media time, and right now each of them is guessing.
+
+---
+
+## 27. `setNativeProps` throws on React Native 0.83, so every piece of UI has to be state-driven
+
+**Task.** Drive the cover on and off, along with the rest of the UI, in a way the platform supports.
+
+**Steps.**
+
+1. Took the rule from this project's own day-one list, `docs/BUILD_PROMPT.md` line 114: ban `setNativeProps`, because it throws a TypeError on React Native 0.83.
+2. Enforced it rather than trusting it. `app/package.json` carries three ESLint rules against it, one `no-restricted-properties` and two `no-restricted-syntax` selectors, each with the reason in its message, and `app/test/calmframes/dayOneGuards.test.ts` asserts they are there. Every one of those assertions was broken on purpose and seen to go red.
+
+**Expected.** A supported way to change a native view's property directly, as React Native has had for years.
+
+**Actual.** It throws on 0.83. **We never called it, so we never saw the error.** This is a platform rule we adopted and enforced, not a crash we watched, and the log says so rather than dressing it up. The cost was a design constraint rather than a debugging session, and the constraint is real: the cover is driven by state, which puts it behind a React commit and a render, and that delay is one of the things the guard band has to absorb.
+
+**Severity.** Low for us, because we were told. Higher for anyone who finds out by calling it, because the error does not say why and the fix is a design change rather than a patch.
+
+**Workaround.** `app/src/calmframes/CoverLayer.tsx` is state-driven and says why in its own comment. The lint rules make a call fail the build rather than the device.
+
+**Suggestion.** Make the failure explain itself, or ship the restriction as a lint rule in the app template, so it is enforced where a developer writes the code rather than discovered where it runs.
+
+---
+
+## 28. The z-order contract is undocumented, and there is one captions view per process
+
+**Task.** Put the cover between the video picture and the captions, so a caption stays readable over a hidden picture. This is the design the whole product rests on: sound and captions carry on while the flashing part is hidden.
+
+**Steps.**
+
+1. Took two rules from this project's own day-one list, `docs/BUILD_PROMPT.md` line 184: playback only through `@amazon-devices/react-native-w3cmedia`, and only one `KeplerCaptionsView` per process.
+2. Looked for a statement of the compositing order between `KeplerVideoSurfaceView`, `KeplerCaptionsView` and ordinary React Native views.
+3. Found none, so built it the way the sample wires the two platform views and put the cover between them: surface at z-index 0, cover at 1, captions at 2, in `app/src/screens/PlayerScreen.tsx` and `app/src/calmframes/CoverLayer.tsx`, with a test asserting that order in the rendered tree.
+
+**Expected.** A documented compositing order. An accessibility layer that draws between two platform views depends on it completely, and a change to it would break that layer silently.
+
+**Actual.** Not documented anywhere we could find, in the API reference or the sample. It works: the order holds in the rendered tree and the app draws as intended. What we cannot say yet is whether it holds on a screen, because the virtual device cannot be photographed (entry 14) and the layering run's verdict in `results/vvd_layering_rehearsal.json` is <!--n results/vvd_layering_rehearsal.json:layering.verdict -->inconclusive<!--/n-->. The one-captions-view-per-process rule is the same shape: we designed around it from day one and never hit it, and an app that adds a second one finds out at runtime rather than at build time.
+
+**Severity.** Low, and only because we were told. A team that discovers either of these by trying loses a day, and in the captions case loses it to a runtime failure.
+
+**Workaround.** The cover sits at a named z-index constant between the two views, with the reason written next to it, and a test fails if the order changes. Confirming it on a real screen is part of the layering test on the stick.
+
+**Suggestion.** State the z-order contract in the `KeplerCaptionsView` reference, along with the one-view-per-process rule, and say what an app may and may not put between the video surface and the captions.
+
+---
+
+## 29. Ogg Theora duplicate-frame packets kill the decoder
 
 **Task.** Analyze the four Ogg Theora clips in the screening pool.
 
@@ -593,7 +676,7 @@ One honest note about that paste. Our verification checkout lives at a very deep
 
 ---
 
-## 27. Theora decodes wider than the size the file declares
+## 30. Theora decodes wider than the size the file declares
 
 **Task.** Record the picture rectangle a map was measured on, so that a re-encode can be measured against the same ground.
 
@@ -611,7 +694,7 @@ One honest note about that paste. Our verification checkout lives at a very deep
 
 ---
 
-## 28. Re-encoding moves the picture rectangle, which moves every area fraction
+## 31. Re-encoding moves the picture rectangle, which moves every area fraction
 
 **Task.** Verify that a kid-safe rendition still hides everything the source map says to hide.
 
@@ -629,7 +712,7 @@ One honest note about that paste. Our verification checkout lives at a very deep
 
 ---
 
-## 29. A re-encode renumbers the first timestamp, so the rendition slides under the map
+## 32. A re-encode renumbers the first timestamp, so the rendition slides under the map
 
 **Task.** Play a rendition with a cover schedule built from the source's map.
 
@@ -647,7 +730,7 @@ One honest note about that paste. Our verification checkout lives at a very deep
 
 ---
 
-## 30. The ffmpeg photosensitivity filter misfires on its own first second
+## 33. The ffmpeg photosensitivity filter misfires on its own first second
 
 **Task.** Run a published baseline alongside our analyzer, so the comparison table is not only us.
 
