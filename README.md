@@ -412,6 +412,8 @@ Thresholds are quoted, with links, in [`flashmap/docs/SPEC_SOURCES.md`](flashmap
 | File | What is in it |
 |---|---|
 | [docs/SUBMISSION.md](docs/SUBMISSION.md) | Every Devpost field, ready to paste |
+| [docs/RUBRIC.md](docs/RUBRIC.md) | The rules we are judged against, quoted from the hackathon's own pages |
+| [docs/VALIDATION.md](docs/VALIDATION.md) | Outreach and what anyone outside this project has said. Empty so far, and it says so |
 | [docs/FRICTION_LOG.md](docs/FRICTION_LOG.md) | Developer friction found while building, in Amazon's six-field format |
 | [docs/OPEN_SOURCE_PR.md](docs/OPEN_SOURCE_PR.md) | The upstream contribution: what it fixes and why |
 | [docs/VIDEO_SCRIPT.md](docs/VIDEO_SCRIPT.md) | The demo video, timed |
