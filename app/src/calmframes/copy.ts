@@ -162,6 +162,21 @@ export function nothingHiddenFor(name: string): string {
 }
 
 /**
+ * The chime before a hide.
+ *
+ * The label says what the sound does, not what the feature is called, and it
+ * carries its own state so a parent reading it from the sofa does not have to
+ * work out whether a highlighted row means on or off. The note underneath says
+ * the thing that matters most about the switch: turning it off changes nothing
+ * about what is hidden.
+ */
+export const CHIME_SECTION_TITLE = 'Sound before a hide';
+export const CHIME_ON_LABEL = 'A soft chime plays first: on';
+export const CHIME_OFF_LABEL = 'A soft chime plays first: off';
+export const CHIME_NOTE =
+  'The chime sounds a couple of seconds before the picture goes dark, so nobody is taken by surprise. Turning it off changes nothing about what is hidden.';
+
+/**
  * The first run explainer.
  *
  * Meant to be read in about twenty seconds. At 150 words a minute, a common

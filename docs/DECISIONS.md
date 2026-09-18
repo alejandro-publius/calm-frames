@@ -584,3 +584,64 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   to whoever owns the mirror, not to this lane.
   **Cost:** an app that installs `@calm-frames/flash-guard` today gets the guard
   and not the registry lookup. The change is two lines and a sync run.
+
+## 2026-09-18: a chime before the hide, and what counts as the hide that follows it
+
+- **Decision:** a soft chime sounds 2,000 ms of media time before the cover
+  goes on, on by default, with one switch for the household in the parent area.
+  **Why:** the cover arriving unannounced is the thing about this app that
+  startles people, and the countdown card only helps somebody who is looking at
+  the screen. Two seconds is fixed by the two numbers either side of it: the
+  countdown card appears at three seconds, so a chime earlier than that would
+  sound before there was anything on screen to explain it, and the guard band
+  is 500 ms, so anything under about a second would land inside the widened
+  interval rather than ahead of it. One switch rather than one per kid, because
+  it is about the room rather than about who is watching, and a chime that is
+  on for one child and off for another is a chime nobody learns to read.
+  **Cost:** one more thing that can be wrong in the dark. It is the reason the
+  property below exists.
+
+- **Decision:** what "a cover following it" means when the playhead is seeked
+  away between the chime and the cover. The cue is discharged by the next time
+  the picture goes dark, whatever raised it: the interval the chime announced,
+  or the fail safe cover that any seek raises before it moves the playhead. It
+  does not have to be the announced interval's own cover.
+  **Why:** every way of moving the playhead in this app covers first.
+  `seekSafety.ts` covers before it seeks into an interval, and
+  `useCoverHarness.ts` has `seeking` in its uncertain set, so the cover goes on
+  at the start of every seek wherever it lands and is held until playback is
+  confirmed outside an interval. So a person who hears the chime and then seeks
+  still gets chime, then dark, which is what the chime promised. Insisting on
+  the announced interval would make the app worse in both directions: after the
+  seek it would either chime again over a cover that is already on, which is a
+  warning after the event, or mark the cue broken and stay silent at the next
+  interval.
+  **Cost:** the property leans on the seek funnel covering first. That is not
+  assumed here: `app/test/calmframes/chimeCue.test.tsx` scripts the seek the
+  way the funnel really answers one, and the funnel's own guard has three
+  mutations in the gate already. If the funnel ever stopped covering first,
+  this property would be discharged by a cover that did not happen, so the two
+  belong together.
+
+- **Decision:** the cue counts its own broken promises in `unmatched`, rather
+  than throwing.
+  **Why:** the property is "a chime never sounds without a cover following it",
+  and a property needs to be measurable to be worth claiming. `unmatched` is
+  the number of times a chime sounded and the playhead then ran past the part
+  it announced with the picture never going dark. It is zero, and the test
+  drives a timeline that does leave a cue unmatched, so the zero elsewhere is a
+  measurement rather than a constant.
+  **Cost:** the counter is dead weight in the running app. It is what makes the
+  mutation gate able to tell a kept promise from a broken one.
+
+- **Decision:** the sound itself is a port, and the default is silence.
+  **Why:** there is no chime asset in the package, and the one audio path Vega
+  offers is the same w3cmedia player the title is already using, which is one
+  per process. Writing device audio code that cannot be run here and might
+  break the single player rule would be worse than an honest gap. Everything
+  that decides whether a chime is due is real, tested and mutation checked.
+  **Cost:** nothing is audible yet. Two things are missing and both are outside
+  this lane: a short sound in `app/assets`, with its licence line, and one call
+  to `useChimeCue` in `app/src/screens/PlayerScreen.tsx` beside the existing
+  `useFlashGuard` call, with `chimeEnabled` carried through the guarded route
+  parameters in `app/src/components/navigation/types.tsx`.

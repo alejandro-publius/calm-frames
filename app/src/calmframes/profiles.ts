@@ -39,6 +39,7 @@ import {
   PresetName,
   roomFieldFraction,
 } from './household';
+import { CHIME_ON_BY_DEFAULT } from './chimeCue';
 import {
   addHideEntry,
   emptyHideLog,
@@ -83,6 +84,16 @@ export interface Family {
   floor: HouseholdSettings;
   profiles: Profile[];
   activeProfileId: string;
+  /**
+   * The soft chime a moment before the picture goes dark.
+   *
+   * One switch for the household rather than one per kid, because it is about
+   * the room the television is in rather than about who is watching, and
+   * because a chime that is on for one kid and off for another is a chime
+   * nobody learns to read. On unless a household turns it off, and turning it
+   * off changes nothing about what is hidden.
+   */
+  chimeEnabled: boolean;
 }
 
 /**
@@ -136,6 +147,7 @@ export function newFamily(
     floor: clampSettings(floor),
     profiles: [first],
     activeProfileId: first.id,
+    chimeEnabled: CHIME_ON_BY_DEFAULT,
   };
 }
 
@@ -157,7 +169,19 @@ export function clampFamily(family: Partial<Family> | null | undefined): Family 
   const active = profiles.some((profile) => profile.id === family?.activeProfileId)
     ? (family?.activeProfileId as string)
     : profiles[0].id;
-  return { floor, profiles, activeProfileId: active };
+  // Anything but an explicit false leaves the chime on, so a record written
+  // before the chime existed comes back with it on rather than silently off.
+  return {
+    floor,
+    profiles,
+    activeProfileId: active,
+    chimeEnabled: family?.chimeEnabled !== false,
+  };
+}
+
+/** Turn the chime on or off for the household. */
+export function setChimeEnabled(family: Family, enabled: boolean): Family {
+  return { ...family, chimeEnabled: enabled };
 }
 
 export function findProfile(family: Family, id: string): Profile | undefined {

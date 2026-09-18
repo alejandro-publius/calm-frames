@@ -13,6 +13,8 @@ import { MINIMUM_TEXT_SIZE } from '../../src/calmframes/calmStyles';
 import {
   BACKEND_UNREACHABLE,
   BACKEND_UNREACHABLE_EMPTY,
+  CHIME_OFF_LABEL,
+  CHIME_ON_LABEL,
   NO_TITLES,
   PIN_NOT_SET,
   PIN_WRONG_TITLE,
@@ -40,6 +42,7 @@ import {
   emptyProfileLogs,
   Family,
   newFamily,
+  setChimeEnabled,
   setFloor,
 } from '../../src/calmframes/profiles';
 import { OFFLINE_MAP_JSON } from '../../src/calmframes/offlineMapText';
@@ -649,6 +652,28 @@ describe('family profiles on the screens', () => {
     fireEvent.press(screen.getByTestId('parent-area-profiles-profile-1'));
     expect(screen.getByTestId('parent-area-floor-effect').props.children).toContain(
       'Extra cautious',
+    );
+  });
+
+  it('offers the chime, on, and turns it off without touching anything else', () => {
+    // On by default, and the switch says which way round it is rather than
+    // relying on a highlight a parent has to interpret from the sofa.
+    const { onFamilyChange } = renderFamilyArea();
+    expect(screen.getByTestId('parent-area-chime-label').props.children).toBe(
+      CHIME_ON_LABEL,
+    );
+    fireEvent.press(screen.getByTestId('parent-area-chime'));
+    const next: Family = onFamilyChange.mock.calls[0][0];
+    expect(next.chimeEnabled).toBe(false);
+    // Turning the sound off changes nothing about what is hidden.
+    expect(next.floor).toEqual(twoKids.floor);
+    expect(next.profiles).toEqual(twoKids.profiles);
+  });
+
+  it('says the chime is off when it is off', () => {
+    renderFamilyArea({ family: setChimeEnabled(twoKids, false) });
+    expect(screen.getByTestId('parent-area-chime-label').props.children).toBe(
+      CHIME_OFF_LABEL,
     );
   });
 

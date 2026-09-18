@@ -98,6 +98,7 @@ function familyWith(floor: HouseholdSettings, profile: HouseholdSettings): Famil
     floor,
     profiles: [makeProfile('profile-1', 'Robin', profile)],
     activeProfileId: 'profile-1',
+    chimeEnabled: true,
   };
 }
 

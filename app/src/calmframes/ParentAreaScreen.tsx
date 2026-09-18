@@ -31,6 +31,10 @@ import {
   scale,
 } from './calmStyles';
 import {
+  CHIME_NOTE,
+  CHIME_OFF_LABEL,
+  CHIME_ON_LABEL,
+  CHIME_SECTION_TITLE,
   EVERYONE_LABEL,
   EXPLAINER_LINES,
   EXPLAINER_TITLE,
@@ -72,6 +76,7 @@ import {
   Profile,
   ProfileLogs,
   removeProfile,
+  setChimeEnabled,
   setFloor,
   setProfileSettings,
 } from './profiles';
@@ -409,6 +414,25 @@ const ParentAreaScreen = ({
           {describeHideEntry(entry)}
         </Text>
       ))}
+
+      {family && onFamilyChange ? (
+        <>
+          <Text style={styles.section}>{CHIME_SECTION_TITLE}</Text>
+          <Text style={styles.note} testID={`${testID}-chime-note`}>
+            {CHIME_NOTE}
+          </Text>
+          <View style={styles.buttons}>
+            <CalmButton
+              testID={`${testID}-chime`}
+              label={family.chimeEnabled ? CHIME_ON_LABEL : CHIME_OFF_LABEL}
+              accessibilityLabel={`${
+                family.chimeEnabled ? CHIME_ON_LABEL : CHIME_OFF_LABEL
+              }. Press to turn it ${family.chimeEnabled ? 'off' : 'on'}.`}
+              onPress={() => onFamilyChange(setChimeEnabled(family, !family.chimeEnabled))}
+            />
+          </View>
+        </>
+      ) : null}
 
       <Text style={styles.section}>Titles</Text>
       {titles.map((entry) => {
