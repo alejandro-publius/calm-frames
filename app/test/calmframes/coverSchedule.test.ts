@@ -10,10 +10,88 @@ import {
   intervalAt,
   intervalForSeekTarget,
   isCovered,
+  MAX_RENDITION_START_OFFSET_MS,
   millisecondsUntilNextCover,
   nextIntervalAfter,
   totalCoveredMs,
 } from '../../src/calmframes/coverSchedule';
+
+describe('the rendition start offset', () => {
+  /**
+   * The safety property: a hide never lands late because of the offset.
+   *
+   * The map describes the source. The player plays the rendition, whose first
+   * presentation timestamp a re-encode routinely renumbers to zero, so a
+   * picture at source time S arrives at rendition time S minus the offset.
+   *
+   * "Late" here does not mean the flashing was missed. With an offset smaller
+   * than the guard band the cover still lands before the picture does, just
+   * with less room than the band promised. That is the whole point: the band
+   * has to absorb the scheduler as well, and a cover was already measured
+   * going on 86 ms after its marker with the JavaScript thread away for about
+   * 335 ms of it (results/gate1_software_vvd.json). So the property is stated
+   * as lead time, not as coverage, and the offset is not allowed to eat any
+   * of the band.
+   */
+  const segments = [
+    { startMs: 10_000, endMs: 12_000 },
+    { startMs: 30_000, endMs: 30_400 },
+    { startMs: 61_250, endMs: 63_000 },
+  ];
+
+  it.each([0, 3, 67, 120, MAX_RENDITION_START_OFFSET_MS])(
+    'keeps the full guard band ahead of the picture at an offset of %i ms',
+    (offsetMs) => {
+      const intervals = buildCoverIntervals(segments, {
+        guardBandMs: DEFAULT_GUARD_BAND_MS,
+        renditionStartOffsetMs: offsetMs,
+      });
+
+      for (const segment of segments) {
+        // Where the picture actually arrives for the viewer.
+        const arrivesAtMs = segment.startMs - offsetMs;
+        const covering = intervalAt(intervals, arrivesAtMs);
+        expect(covering).toBeDefined();
+        const leadMs = arrivesAtMs - covering!.startMs;
+        expect(leadMs).toBeGreaterThanOrEqual(DEFAULT_GUARD_BAND_MS);
+      }
+    },
+  );
+
+  it('still covers the whole segment, not just its start', () => {
+    const offsetMs = 140;
+    const intervals = buildCoverIntervals(segments, {
+      guardBandMs: DEFAULT_GUARD_BAND_MS,
+      renditionStartOffsetMs: offsetMs,
+    });
+    for (const segment of segments) {
+      expect(isCovered(intervals, segment.startMs - offsetMs)).toBe(true);
+      expect(isCovered(intervals, segment.endMs - offsetMs)).toBe(true);
+    }
+  });
+
+  it('refuses an offset further than verify would ever publish', () => {
+    expect(() =>
+      buildCoverIntervals(segments, {
+        renditionStartOffsetMs: MAX_RENDITION_START_OFFSET_MS + 1,
+      }),
+    ).toThrow(/further than verify allows/);
+  });
+
+  it('refuses an offset that is not a number', () => {
+    expect(() =>
+      buildCoverIntervals(segments, { renditionStartOffsetMs: Number.NaN }),
+    ).toThrow(/finite/);
+  });
+
+  it('treats a missing offset as zero rather than guessing', () => {
+    const without = buildCoverIntervals(segments, {});
+    const withZero = buildCoverIntervals(segments, {
+      renditionStartOffsetMs: 0,
+    });
+    expect(without).toEqual(withZero);
+  });
+});
 
 describe('buildCoverIntervals', () => {
   it('widens a segment by the guard band on both sides', () => {

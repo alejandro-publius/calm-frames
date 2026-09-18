@@ -52,6 +52,7 @@ function makeMediaElement(): MediaElementLike & {
 }
 
 interface GuardedProps {
+  renditionStartOffsetMs?: number;
   media: MediaElementLike;
   mapText?: string | null;
   mapUrl?: string;
@@ -69,6 +70,7 @@ const Guarded = ({
   settings = DEFAULT_SETTINGS,
   nowMs = MADE_AT + 1000,
   onHide,
+  renditionStartOffsetMs,
 }: GuardedProps) => {
   const ref = React.useRef<MediaElementLike | null>(media);
   const guard = useFlashGuard({
@@ -84,6 +86,7 @@ const Guarded = ({
     titleId: 'bursts',
     titleName: 'Test pattern',
     onHide,
+    renditionStartOffsetMs,
   });
   return (
     <>
@@ -298,6 +301,24 @@ describe('useFlashGuard', () => {
     render(
       <Guarded media={media} nowMs={MADE_AT + 400 * 24 * 60 * 60 * 1000} />,
     );
+    await settle();
+    expect(read('status')).toBe('blocked');
+    expect(read('covered')).toBe('covered');
+  });
+
+  it('plays a title whose rendition sits a little off the source', async () => {
+    const media = makeMediaElement();
+    render(<Guarded media={media} renditionStartOffsetMs={67} />);
+    await settle();
+    expect(read('status')).toBe('verified');
+  });
+
+  it('keeps the picture hidden when the rendition is further off than verify allows', async () => {
+    // Larger than MAX_RENDITION_START_OFFSET_MS, so the map and the file
+    // disagree about where the pictures are. There is no safe schedule to
+    // build from that, and a wrong one would put covers in the wrong places.
+    const media = makeMediaElement();
+    render(<Guarded media={media} renditionStartOffsetMs={5_000} />);
     await settle();
     expect(read('status')).toBe('blocked');
     expect(read('covered')).toBe('covered');
