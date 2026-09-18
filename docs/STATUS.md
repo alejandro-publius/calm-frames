@@ -41,7 +41,9 @@ It surfaced because a second, stricter script needed a position report from the 
 
 ## 4. Where each lane stands
 
-**The app.** Countdown card with a D-pad Skip, the cover, the after-card, and a minimum cover length. Fail closed for missing, stale, unsigned, unparseable and wrong-hash maps, with real Ed25519 verification written for Vega, which has no crypto API, checked against RFC 8032 vectors. Seek safety through one function for the seek bar, D-pad, trickplay and Alexa transport commands. VoiceView announcements, a parent area behind a PIN where room settings can only add hides, and a kid home with shield badges. **The app's own UI passes flashmap: 9 screens, 0 segments, checked in CI.** 563 tests, 15 mutations all seen red.
+**The app.** Countdown card with a D-pad Skip, the cover, the after-card, and a minimum cover length. Fail closed for missing, stale, unsigned, unparseable and wrong-hash maps, with real Ed25519 verification written for Vega, which has no crypto API, checked against RFC 8032 vectors. Seek safety through one function for the seek bar, D-pad, trickplay and Alexa transport commands. VoiceView announcements, a parent area behind a PIN where room settings can only add hides, and a kid home with shield badges. **The app's own UI passes flashmap: 20 screens and transitions, 0 segments, checked in CI.**
+
+**Kid mode is reachable.** The app opens on Calm Frames: the first run sets a PIN, a preset and the room, then the shelf, a title, and the parent area behind that PIN. The shelf hands the player the map it verified, and the player itself now refuses to show a picture without one, so the five sample screens that still navigate to it the old way get a black picture and a card saying the title is not checked. A first run, empty and error states for every screen, and a ten foot pass measured rather than eyeballed: 32 units is the smallest text anywhere, 5.82 to 1 the worst contrast, 96 by 54 units the safe margins on every screen. The virtual device cannot be photographed, so those are measurements off the rendered screens, in `app/build/ui-capture/ten-foot.json`. 656 tests, and every new guard was broken on purpose and seen red before it was trusted.
 
 **flashmap.** WCAG general and red flash, area windows, letterbox handling, real timestamps, chunked analysis, the room rule, signed sidecars, the CLI and the GitHub Action. Theora decoding is fixed with a regression fixture. Over 200 tests, 42 mutations all killed.
 
@@ -60,6 +62,9 @@ It surfaced because a second, stricter script needed a position report from the 
 - **EA IRIS is not built**, so the baselines table has ffmpeg and naive but no IRIS. The shared Docker VM has another project's services in it, and a vcpkg OpenCV build there could get their containers killed rather than the compiler.
 - **The conformance run is partial**, and `results/conformance.json` says so in its own statement field rather than implying a full 3,000-clip run.
 - **The demo PIN does not exist yet**, so the release notes say so.
+- **Nothing in the app has been opened on a device since kid mode was wired up.** Every screen, the first run, the play path and the player's refusal are checked in the app's own test suite, and none of it has been seen on the virtual device or the stick. The bundled clip's URI is `file:///pkg/assets/raw/offline/calm_gradient.mp4`, which is where the Kepler file system README says package assets land, and that has never been played.
+- **The PIN and the room setting live in memory**, so the first run comes back on every launch. Writing them to `/data` is a small job and a separate one.
+- **The hide log has no way back from the player**, so the parent area says nothing has been hidden rather than inventing entries. It needs a store the player screen and the kid mode route share.
 
 ## 6. The numbers
 

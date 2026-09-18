@@ -149,3 +149,114 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   and is reported as such, with the media time lead beside it. If the media
   time p95 ever exceeds the guard band for a reason that is not a merge or a
   hold, that is a real defect and the reason field will say so.
+
+## 2026-09-17: Measure the ten foot pass instead of looking at it
+- **Decision:** Every claim about how the app reads across a room is a number
+  taken off the rendered screen: type size, the contrast of each line against
+  the colour actually painted behind it, the focus ring against both of its
+  neighbours, and the safe margins. `app/src/calmframes/uiContrast.ts` does the
+  reading, `app/test/calmframes/tenFoot.test.tsx` applies the floors to every
+  screen and every state, and the numbers land in
+  `app/build/ui-capture/ten-foot.json`.
+- **Why:** the virtual device cannot be photographed. The app draws on a GPU
+  layer that macOS screen capture and QEMU's screendump both miss, so there is
+  no screenshot to judge and no way for anyone else to check a judgement. A
+  measurement can be checked, and a floor can be enforced on every screen
+  including the ones nobody opens.
+- **Cost:** the floors are written out twice, once in calmStyles.ts and once in
+  the test. That is deliberate: the first version compared each screen against
+  the same constant the screens are built from, so narrowing the safe margin
+  moved both and the test stayed green. A guard that cannot fail is not a
+  guard. The duplication is what makes it fail.
+
+## 2026-09-17: The type floor is 32 units at 1080p, and the safe margins are 96 by 54
+- **Decision:** Raise the smallest text from 28 units to 32, and keep every
+  screen 96 units from the side of the picture and 54 from the top and bottom.
+- **Why:** on a 55 inch screen one unit at 1080p is about 0.025 inches, so a 32
+  unit line is about 20 arcminutes of cap height from a sofa 8 feet away, which
+  is inside the comfortable range for sustained reading rather than at its
+  edge. 28 units came out at about 18 arcminutes. The margins are five per cent
+  of each edge, the convention television interfaces have used for decades,
+  because sets still overscan by different amounts.
+- **Cost:** the poster grid fits four across instead of five, and every screen
+  holds slightly less. Both are the right trade for a child and a tired parent
+  reading from a sofa.
+
+## 2026-09-17: The player decides whether it may show a picture, not the caller
+- **Decision:** `app/src/calmframes/playerAccess.ts` gives three answers and
+  the player asks on every render: the guard is running, a measurement harness
+  is running, or the picture stays hidden with a card saying why. Guarded
+  parameters carrying no map are not guarded parameters.
+- **Why:** the player came from the Vega sample, where anything in the catalog
+  plays on request, and five screens still navigate to it that way. Fixing the
+  call sites is a promise about call sites; any new screen, deep link or
+  leftover sample screen would have played whatever it was handed. The whole
+  project is the claim that nothing plays unchecked, so the refusal belongs in
+  the one place every path goes through.
+- **Cost:** the sample's own titles now show a "Not checked yet" card and a
+  black picture, which is correct for this app and surprising for anyone
+  expecting the sample. Measurement runs are exempt, because a harness run
+  plays a marker clip at a camera with nobody watching.
+
+## 2026-09-17, night: the camera meter
+
+- **Decision:** The meter counts flashes with its own code and never imports
+  flashmap.
+  **Why:** the meter exists to find out whether the thing flashmap protects
+  stayed covered on a real screen. Counting with flashmap's own tracker would
+  make a pattern flashmap cannot see invisible to both, and the check would
+  then agree with the thing it is checking for the worst possible reason.
+  Thresholds still come from the one quoted spec file, through
+  eval/conformance/spec.py, which lives under the same rule.
+  **Cost:** a second implementation of the same two state machines, and a real
+  risk that the two drift apart. Two guards: one reads the syntax tree of every
+  meter module, the other imports them in a fresh interpreter and checks
+  flashmap never arrived.
+
+- **Decision:** A run of transitions in the same direction counts once when the
+  meter pairs them into flashes.
+  **Why:** a camera whose shutter is open while the screen changes records the
+  middle of the change, so one edge on the TV arrives as two steps at the
+  camera. Pairing both turned a 6 Hz strobe into 12 flashes a second, which the
+  validation caught on its first run. WCAG measures between adjacent peaks and
+  valleys, and a run in one direction is one journey between them, so
+  collapsing it is the closer reading as well as the working one. It can only
+  ever remove a duplicate, never an opposing pair, so it cannot hide a flash.
+  **Cost:** the meter and flashmap now read a multi step edge differently.
+  flashmap never meets one, because a file changes on a frame boundary, so
+  nothing needs to change there today. Worth a look for footage that was itself
+  filmed off a screen.
+
+- **Decision:** The screen region comes from the gray field take, and the
+  region finder uses the bounding box of the lit pixels.
+  **Why:** the first version kept the rows and columns that were mostly lit. On
+  a step chart, which is black at one end, it handed back the white half of the
+  chart and called it the TV, and the calibration then read patches that were
+  not there. A bounding box copes with a screen that is only partly lit, and a
+  uniform gray field is the easiest thing in the world to find, so the protocol
+  films one first and the other two takes reuse the region.
+  **Cost:** a third recording per take, about two seconds of filming. The gray
+  field was already needed for the flicker check, so it earns its place twice.
+
+- **Decision:** An uncalibrated run, or one where the camera clipped, is marked
+  not publishable rather than refused.
+  **Why:** the meter beside the TV in the demo video has to run without a step
+  chart on the night, and a reading in a video is not a published number. A
+  clipped camera reads bright states low, so it can only under-count, which is
+  the dangerous direction. Marking the report and saying why keeps both uses
+  honest.
+  **Cost:** a `publishable` field that anything writing a number has to check.
+  Two tests, both seen to fail.
+
+- **Decision:** Mutate the meter's guards in the working tree rather than in
+  eval/mutate_gate.py.
+  **Why:** the gate landed in another lane while this was being written, and
+  the meter's files are new and imported by nothing else, so the blast radius
+  was one lane's own code for about two minutes per mutation. Fifteen guards
+  were broken, fourteen went red for the right reason, and the fifteenth
+  survived: the ceiling on how much of the frame a screen may fill was measured
+  after the bezel inset came off, which put it permanently out of reach. That
+  is fixed and it now has a test of its own.
+  **Cost:** these mutations are recorded in the test file's docstring rather
+  than in results/mutation.json. Moving them into the gate is a job for whoever
+  owns it, and the list is written out ready to move.
