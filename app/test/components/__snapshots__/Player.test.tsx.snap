@@ -15,5 +15,68 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
     ]
   }
   testID="touchable-opacity"
-/>
+>
+  <View
+    accessibilityLabel="Not checked yet. This title has not been checked, so the picture stays hidden. Sound and captions keep playing."
+    accessibilityLiveRegion="polite"
+    accessibilityRole="alert"
+    accessible={true}
+    aria-label="Not checked yet. This title has not been checked, so the picture stays hidden. Sound and captions keep playing."
+    aria-live="polite"
+    pointerEvents="box-none"
+    style={
+      {
+        "alignItems": "center",
+        "bottom": 160,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "zIndex": 3,
+      }
+    }
+    testID="calm-card"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#1B2735",
+          "borderColor": "#33455A",
+          "borderRadius": 16,
+          "borderWidth": 2,
+          "maxWidth": 1400,
+          "paddingHorizontal": 64,
+          "paddingVertical": 32,
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#F4F7FA",
+            "fontSize": 56,
+            "fontWeight": "600",
+            "textAlign": "center",
+          }
+        }
+        testID="calm-card-title"
+      >
+        Not checked yet
+      </Text>
+      <Text
+        style={
+          {
+            "color": "#B9C4D0",
+            "fontSize": 38,
+            "marginTop": 12,
+            "textAlign": "center",
+          }
+        }
+        testID="calm-card-detail"
+      >
+        This title has not been checked, so the picture stays hidden. Sound and captions keep playing.
+      </Text>
+    </View>
+  </View>
+</View>
 `;

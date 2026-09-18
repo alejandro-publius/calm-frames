@@ -42,6 +42,21 @@ export const OFFLINE_PUBLIC_KEY_BASE64 =
 /** Where the packaged clip lives once the app is installed. */
 export const OFFLINE_VIDEO_PATH = 'assets/raw/offline/calm_gradient.mp4';
 
+/**
+ * The same clip, as the player addresses it on a device.
+ *
+ * `/pkg/assets` is the read only root of the package's assets in a Vega app's
+ * sandbox, which is where `app/assets` ends up once installed. The Kepler file
+ * system README lists the sandbox paths.
+ *
+ * This has not been played from a device yet. If the scheme turns out to be
+ * wrong, the guard treats it the way it treats any file it cannot open: the
+ * picture stays hidden and the shelf says so, which is the right failure but
+ * an unhelpful one to debug, so the path is here on its own rather than
+ * written into a screen.
+ */
+export const OFFLINE_VIDEO_URI = `file:///pkg/${OFFLINE_VIDEO_PATH}`;
+
 export const OFFLINE_TITLE_ID = 'calm-frames-offline';
 
 /**

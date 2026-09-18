@@ -8,6 +8,7 @@ import { Screens } from '../../src/components/navigation/types';
 
 jest.mock('../../src/screens/DetailsScreen', () => 'DetailsScreen');
 jest.mock('../../src/screens/PlayerScreen', () => 'PlayerScreen');
+jest.mock('../../src/screens/KidModeScreen', () => 'KidModeScreen');
 jest.mock('../../src/screens/SearchResultsScreen', () => 'SearchResultsScreen');
 jest.mock('../../src/screens/FeedbackScreen', () => 'FeedbackScreen');
 jest.mock('../../src/components/navigation/AppDrawer', () => 'AppDrawer');
@@ -60,6 +61,12 @@ describe('AppStack', () => {
     expect(createStack.Screen).toHaveBeenCalledWith(
       expect.objectContaining({ name: Screens.APP_DRAWER }), undefined,
     );
+    // Calm Frames itself. Without this route the shelf, the details page and
+    // the parent area exist only in tests and nobody with a remote can open
+    // them.
+    expect(createStack.Screen).toHaveBeenCalledWith(
+      expect.objectContaining({ name: Screens.KID_MODE_SCREEN }), undefined,
+    );
     expect(createStack.Screen).toHaveBeenCalledWith(
       expect.objectContaining({ name: Screens.DETAILS_SCREEN }), undefined,
     );
@@ -84,6 +91,17 @@ describe('AppStack', () => {
       headerShown: false,
       animationEnabled: false,
     });
+  });
+
+  it('opens on Calm Frames', () => {
+    setup();
+    const createStack = createStackNavigator();
+    const navigatorProps = (createStack.Navigator as jest.Mock).mock.calls[0][0];
+
+    // The app is a safety layer with a player behind it, not a player with a
+    // safety setting, so the first screen a person sees is the first run or
+    // the shelf.
+    expect(navigatorProps.initialRouteName).toBe(Screens.KID_MODE_SCREEN);
   });
 
   it('uses Suspense for lazy-loaded components', () => {

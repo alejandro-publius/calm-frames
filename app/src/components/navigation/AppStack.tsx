@@ -12,6 +12,7 @@ import { AppStackParamList, Screens } from './types';
 
 const DetailsScreen = React.lazy(() => import('../../screens/DetailsScreen'));
 const PlayerScreen = React.lazy(() => import('../../screens/PlayerScreen'));
+const KidModeScreen = React.lazy(() => import('../../screens/KidModeScreen'));
 const SearchResultsScreen = React.lazy(
   () => import('../../screens/SearchResultsScreen'),
 );
@@ -32,7 +33,17 @@ const AppStack = () => {
   };
 
   return (
-    <Stack.Navigator screenOptions={navigationOptions}>
+    // Calm Frames opens on Calm Frames. The app is a safety layer with a
+    // player behind it, not a player with a safety setting, so the first
+    // screen is the first run or the shelf, and the sample's own home is
+    // still in this stack behind it.
+    <Stack.Navigator
+      initialRouteName={Screens.KID_MODE_SCREEN}
+      screenOptions={navigationOptions}>
+      <Stack.Screen
+        name={Screens.KID_MODE_SCREEN}
+        component={WithSuspense(KidModeScreen)}
+      />
       <Stack.Screen name={Screens.APP_DRAWER} component={AppDrawer} />
       <Stack.Screen
         name={Screens.DETAILS_SCREEN}

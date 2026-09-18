@@ -53,6 +53,11 @@ import { buildCoverIntervals } from '../calmframes/coverSchedule';
 import { OFFLINE_PUBLIC_KEY_BASE64 } from '../calmframes/offlineTitle';
 import { SafeMediaControlHandler } from '../calmframes/SafeMediaControlHandler';
 import { NO_CARD } from '../calmframes/cards';
+import {
+  mustStayHidden,
+  playbackAccess,
+  UNGUARDED_CARD,
+} from '../calmframes/playerAccess';
 import { useCoverHarness } from '../calmframes/useCoverHarness';
 import { useFlashGuard } from '../calmframes/useFlashGuard';
 import { useUiCapture } from '../calmframes/uiCapture';
@@ -147,15 +152,32 @@ const PlayerScreen = ({
     publicKeyBase64: OFFLINE_PUBLIC_KEY_BASE64,
     settings: guardedParams?.settings,
     durationMs: guardedParams?.durationMs,
+    // How far the rendition about to play sits from the source the map
+    // describes. The bundled title plays its source, so it has none.
+    renditionStartOffsetMs: guardedParams?.renditionStartOffsetMs,
     titleId: guardedParams?.titleId ?? data.id,
     titleName: data.title,
     ready: isVideoInitialized && Boolean(guardedParams),
   });
-  const guarding = Boolean(guardedParams);
+  // Three answers, and only three: the guard is running, a measurement
+  // harness is running, or the picture stays hidden. playerAccess.ts says why
+  // this is decided here rather than trusted to whoever navigated.
+  const access = playbackAccess({
+    guarded: guardedParams,
+    coverTest,
+  });
+  const guarding = access === 'guarded';
   // The measurement harness and the guard never run at once: a run is a
   // measurement, kid mode is the product.
-  const covered = guarding ? guard.covered : cover.covered;
-  const card = guarding ? guard.card : NO_CARD;
+  let covered = cover.covered;
+  let card = NO_CARD;
+  if (guarding) {
+    covered = guard.covered;
+    card = guard.card;
+  } else if (mustStayHidden(access)) {
+    covered = true;
+    card = UNGUARDED_CARD;
+  }
   // The app records its own layer, because Vega gives it no way to read its
   // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
   useUiCapture(

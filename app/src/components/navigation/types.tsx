@@ -21,6 +21,15 @@ export enum Screens {
   SEARCH_SCREEN = 'Search',
   SEARCH_RESULTS_SCREEN = 'SearchResultsScreen',
   FEEDBACK_SCREEN = 'FeedBackScreen',
+  /**
+   * Calm Frames itself: the first run, the shelf, a title and the parent area.
+   *
+   * One route rather than four, because those screens share one household
+   * setting, one PIN gate and one list of checked titles, and passing that
+   * between four routes as parameters is four chances for a screen to be
+   * rendered with a setting that is not the one in force.
+   */
+  KID_MODE_SCREEN = 'KidMode',
 }
 
 export enum DrawerType {
@@ -32,6 +41,7 @@ export enum DrawerType {
 
 export type AppStackParamList = {
   [Screens.APP_DRAWER]: undefined;
+  [Screens.KID_MODE_SCREEN]: undefined;
   [Screens.HOME_SCREEN]: undefined;
   [Screens.SEARCH_SCREEN]: undefined;
   [Screens.SETTINGS_SCREEN]: undefined;
@@ -75,6 +85,13 @@ export type AppStackParamList = {
       mapUrls?: Partial<Record<string, string>>;
       settings?: HouseholdSettings;
       durationMs?: number;
+      /**
+       * How far the rendition about to play sits from the source the map
+       * describes, from the catalog entry's `notes.rendition_start_offset_ms`
+       * for the preset being played. Left out it is treated as zero, which is
+       * right for a title that plays its source.
+       */
+      renditionStartOffsetMs?: number;
       titleId?: string;
     };
   };
