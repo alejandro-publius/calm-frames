@@ -1,11 +1,11 @@
 # Calm Frames: rules for every session
 
-**Current phase:** Phase 3, Thu Sep 17, 2026, late. Phases 0 to 2 are done apart from
-what needs the stick. CI is green on all six jobs, the mutation gate has run whole
-(55 of 57, both survivors declared equivalent with their reasoning), the brand and
-palette are in, and the credits screen is reachable. What is left needs either the
-stick, a camera, or Alex's hands: docs/STATUS.md section 2 is the list, in order,
-with dates.
+**Current phase:** Phase 8 done, Thu Sep 17, 2026, late. Phases 0 to 2 are done apart
+from what needs the stick. All five phase 8 features are in with tests and docs: the
+BT.1702-3 regular-pattern rule, family profiles, the chime, the report and upload
+pages, and the signed map registry. Three of them are built but not reachable in the
+running app, and docs/STATUS.md section 4c says which and why. The mutation gate, the
+two lead-time distributions and the four verify counts are all in place.
 **The head-start kits never arrived.** flashmap, calm-timing, evkit and the notes were all written here instead. docs/PLAN.md lists what replaced what. If the kits turn up, treat them as a second opinion and re-record any number taken with our version.
 **Repo:** private at github.com/alejandro-publius/calm-frames, main, CI green on ubuntu runners. It goes public during the final checks on Oct 21, because the rules need it public with the licence visible at submission.
 
