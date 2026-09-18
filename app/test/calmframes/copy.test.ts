@@ -17,6 +17,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { cardAt } from '../../src/calmframes/cards';
 import {
   APPROVED_SAFETY_CLAUSE,
   BACKEND_UNREACHABLE,
@@ -123,6 +124,15 @@ describe('house style', () => {
     for (const notice of [TITLE_PENDING, TITLE_FAILED, TITLE_STALE]) {
       expect(notice.detail).toMatch(/picture stays hidden|Nothing plays/);
     }
+  });
+
+  it('says the same thing on the card over the video as on the page', () => {
+    // The card the player shows over a title that did not verify and the
+    // notice its page shows are written in different files. They are read by
+    // the same person minutes apart, so they say the same thing.
+    const card = cardAt([], 0, { rejection: 'missing' });
+    expect(card.detail).toMatch(/picture stays hidden/);
+    expect(TITLE_PENDING.detail).toMatch(/picture stays hidden/);
   });
 });
 

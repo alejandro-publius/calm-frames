@@ -68,17 +68,17 @@ export const NO_TITLES: Notice = {
  * signed check, so it keeps working with no network at all.
  */
 export const BACKEND_UNREACHABLE: Notice = {
-  title: 'We cannot reach the check service',
+  title: 'We cannot look for new titles',
   detail:
-    'The title that came with the app still plays, because its check travels with it. Anything new stays off the shelf until the service is back.',
+    'The title that came with the app still plays, because its check is inside the app. Anything new stays off the shelf until this works again.',
   tone: 'waiting',
 };
 
 /** The backend is unreachable and there is not even a bundled title. */
 export const BACKEND_UNREACHABLE_EMPTY: Notice = {
-  title: 'We cannot reach the check service',
+  title: 'We cannot look for new titles',
   detail:
-    'Nothing can be shown until a checked title is on this device. Nothing plays here until it has been checked.',
+    'There is nothing checked on this device yet, so there is nothing to watch. Nothing plays here until it has been checked.',
   tone: 'waiting',
 };
 
@@ -101,7 +101,7 @@ export const TITLE_FAILED: Notice = {
 export const TITLE_STALE: Notice = {
   title: 'This check is too old',
   detail:
-    'The picture stays hidden until the title is checked again. An old check may have been made with older limits.',
+    'The picture stays hidden until the title is checked again. An old check may have been made using older limits.',
   tone: 'blocked',
 };
 
