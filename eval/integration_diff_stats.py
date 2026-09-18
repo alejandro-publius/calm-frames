@@ -83,6 +83,14 @@ def measure(text: str) -> dict:
     }
 
 
+def short(path: Path) -> str:
+    """The path relative to the repository when it is inside it, else as given."""
+    try:
+        return str(path.relative_to(REPO))
+    except ValueError:
+        return str(path)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -111,12 +119,12 @@ def main(argv: list[str] | None = None) -> int:
                 file=sys.stderr,
             )
             return 1
-        print(f"{OUT.relative_to(REPO)} matches the committed diff")
+        print(f"{short(OUT)} matches the committed diff")
         return 0
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(measured, indent=2) + "\n", encoding="utf-8")
-    print(f"wrote {OUT.relative_to(REPO)}")
+    print(f"wrote {short(OUT)}")
     return 0
 
 
