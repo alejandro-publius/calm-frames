@@ -32,8 +32,18 @@ import React from 'react';
 import { BackHandler, Platform } from 'react-native';
 import FirstRunScreen, { FirstRunResult } from '../calmframes/FirstRunScreen';
 import { DEFAULT_SETTINGS, HouseholdSettings } from '../calmframes/household';
-import { emptyHideLog, HideLogStore } from '../calmframes/hideLog';
+import { emptyHideLog } from '../calmframes/hideLog';
 import KidHomeScreen from '../calmframes/KidHomeScreen';
+import {
+  activeProfile,
+  effectiveSettings,
+  emptyProfileLogs,
+  Family,
+  newFamily,
+  ProfileLogs,
+  selectProfile,
+  setFloor,
+} from '../calmframes/profiles';
 import {
   OFFLINE_PUBLIC_KEY_BASE64,
   OFFLINE_VIDEO_URI,
@@ -136,16 +146,28 @@ const KidModeScreen = ({
   nowMs = Date.now,
   testID = 'kid-mode',
 }: KidModeScreenProps) => {
-  const [settings, setSettings] = React.useState<HouseholdSettings>(DEFAULT_SETTINGS);
+  // The family is the one record: the household floor, the kids and which of
+  // them the shelf is for. The settings the guard runs with are derived from
+  // it rather than stored beside it, so there is no second copy to disagree.
+  const [family, setFamily] = React.useState<Family>(() => newFamily(DEFAULT_SETTINGS));
   const [gate, setGate] = React.useState<PinGateState>(emptyPinGate());
   // The player covers the flagged parts and knows what it hid. Carrying that
   // back here across a navigation boundary needs a store the two screens
   // share, and that is not built yet, so the parent area says nothing has been
-  // hidden rather than inventing entries. A log that guesses is worse than an
-  // empty one.
-  const [log] = React.useState<HideLogStore>(emptyHideLog());
+  // hidden for a kid rather than inventing entries. A log that guesses is
+  // worse than an empty one. The logs are kept per profile so that when the
+  // player can post into them, one kid's record cannot land in another's.
+  const [profileLogs] = React.useState<ProfileLogs>(emptyProfileLogs());
   const [view, setView] = React.useState<KidModeView>('first-run');
   const [openId, setOpenId] = React.useState<string | null>(null);
+
+  const watching = activeProfile(family);
+  // Never the kid's own choice on its own: the stricter of the household floor
+  // and the profile, which is what makes a profile unable to loosen anything.
+  const settings = React.useMemo(
+    () => effectiveSettings(family, watching),
+    [family, watching],
+  );
 
   const entries = React.useMemo(() => catalog ?? defaultCatalog(), [catalog]);
   const titles = React.useMemo(
@@ -178,7 +200,9 @@ const KidModeScreen = ({
 
   const finishFirstRun = (result: FirstRunResult) => {
     setGate(result.gate);
-    setSettings(result.settings);
+    // The first run sets the floor, not one kid's settings. Every profile is
+    // measured against it afterwards and the stricter one wins.
+    setFamily((previous) => setFloor(previous, result.settings));
     setView('home');
   };
 
@@ -206,9 +230,12 @@ const KidModeScreen = ({
         testID={`${testID}-parent`}
         gate={gate}
         onGateChange={setGate}
-        settings={settings}
-        onSettingsChange={setSettings}
-        log={log}
+        settings={family.floor}
+        onSettingsChange={(next) => setFamily(setFloor(family, next))}
+        log={emptyHideLog()}
+        family={family}
+        onFamilyChange={setFamily}
+        profileLogs={profileLogs}
         titles={titles}
         nowMs={nowMs}
         onBack={() => setView('home')}
@@ -249,6 +276,9 @@ const KidModeScreen = ({
     <KidHomeScreen
       testID={`${testID}-home`}
       titles={titles}
+      profiles={family.profiles}
+      activeProfileId={family.activeProfileId}
+      onChooseProfile={(profile) => setFamily(selectProfile(family, profile.id))}
       onOpen={(entry) => {
         setOpenId(entry.title.id);
         setView('details');

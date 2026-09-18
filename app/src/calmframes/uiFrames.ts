@@ -33,6 +33,29 @@ export const KID_HOME_FOCUSED_FRAME: UiFrame = {
   ],
 };
 
+/**
+ * The shelf with the family picker on it.
+ *
+ * The chips carry the chosen fill, which neither a focused poster nor the
+ * offline banner adds on its own, so this one frame is what the shelf paints
+ * in all three of those states once a household has profiles. An empty shelf
+ * never shows the picker, so it is not one of them.
+ *
+ * The order is the order the shelf paints them when the kid who is watching is
+ * first in the row. Another kid watching moves the chosen fill along the row
+ * and changes nothing else: the same colours, in a different order, and the
+ * flash check reads the colours.
+ */
+export const KID_HOME_PROFILES_FRAME: UiFrame = {
+  screen: 'kid-home-profiles',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [
+    CALM_COLORS.SURFACE_FOCUSED,
+    CALM_COLORS.SURFACE,
+    CALM_COLORS.BORDER,
+  ],
+};
+
 /** Nothing has been checked yet, so the shelf is one notice. */
 export const KID_HOME_EMPTY_FRAME: UiFrame = {
   screen: 'kid-home-empty',
@@ -88,6 +111,21 @@ export const PARENT_OPEN_FRAME: UiFrame = {
   screen: 'parent-area-open',
   background: CALM_COLORS.BACKGROUND,
   surfaces: [CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.SURFACE],
+};
+
+/**
+ * The parent area with one kid's settings open.
+ *
+ * The same two colours as the open parent area, in the other order: the
+ * household chip is first in the row and it is not the chosen one when a kid
+ * is, so the plain card colour is painted before the chosen fill. It is a
+ * separate frame because it is a separate state, and the timeline should show
+ * it was visited.
+ */
+export const PARENT_PROFILE_FRAME: UiFrame = {
+  screen: 'parent-area-profile',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.SURFACE_FOCUSED],
 };
 
 /** The four steps of the first run, in order. */
@@ -165,11 +203,13 @@ export const ALL_UI_FRAMES: UiFrame[] = [
   KID_HOME_FOCUSED_FRAME,
   KID_HOME_EMPTY_FRAME,
   KID_HOME_OFFLINE_FRAME,
+  KID_HOME_PROFILES_FRAME,
   TITLE_DETAILS_FRAME,
   TITLE_DETAILS_BLOCKED_FRAME,
   PARENT_LOCKED_FRAME,
   PARENT_WRONG_PIN_FRAME,
   PARENT_OPEN_FRAME,
+  PARENT_PROFILE_FRAME,
   CREDITS_FRAME,
   playerFrame(false, 'none'),
   playerFrame(false, 'countdown'),

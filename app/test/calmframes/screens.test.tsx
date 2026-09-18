@@ -27,8 +27,21 @@ import FlashMapStrip, {
   stripMarks,
 } from '../../src/calmframes/FlashMapStrip';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
-import { addHideEntry, emptyHideLog } from '../../src/calmframes/hideLog';
+import {
+  addHideEntry,
+  emptyHideLog,
+  HideLogEntry,
+} from '../../src/calmframes/hideLog';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
+import {
+  addProfile,
+  addProfileHide,
+  effectiveSettings,
+  emptyProfileLogs,
+  Family,
+  newFamily,
+  setFloor,
+} from '../../src/calmframes/profiles';
 import { OFFLINE_MAP_JSON } from '../../src/calmframes/offlineMapText';
 import {
   OFFLINE_PUBLIC_KEY_BASE64,
@@ -487,5 +500,163 @@ describe('ParentAreaScreen', () => {
     const message = screen.getByTestId('parent-area-message');
     expect(message.props.accessibilityLiveRegion).toBe('polite');
     expect(message.props['aria-live']).toBe('polite');
+  });
+});
+
+/**
+ * Family profiles, on the screens.
+ *
+ * The model's own rules are measured in test/calmframes/profiles.test.ts. What
+ * is checked here is that the screens use them: the shelf says whose it is, the
+ * parent area edits one kid without touching the others, and the one PIN is
+ * asked for once for the household rather than once per kid.
+ *
+ * Seen to fail, in an isolated copy rather than in this tree: the parent area
+ * reading `allProfileHides(profileLogs)` where it should read
+ * `logForProfile(profileLogs, editingProfile.id)` turned "shows each kid their
+ * own record and no one else's" red with `expect(received).toContain(expected)`,
+ * Expected substring: "Robin title", Received string: "16:00 Sam title: hid 4
+ * seconds at 1:00". One kid opening another kid's record is the whole reason
+ * these logs are keyed by profile.
+ */
+describe('family profiles on the screens', () => {
+  const twoKids: Family = addProfile(newFamily(DEFAULT_SETTINGS, 'Robin'), 'Sam');
+  const gate = setPin(emptyPinGate(), '1357', 'seed', 4);
+
+  function hide(atMs: number, titleName: string): HideLogEntry {
+    return {
+      atMs,
+      titleId: 'ok',
+      titleName,
+      positionMs: 60_000,
+      durationMs: 4_000,
+      cause: 'schedule',
+    };
+  }
+
+  function renderFamilyArea(overrides: Record<string, unknown> = {}) {
+    const onFamilyChange = jest.fn();
+    render(
+      <ParentAreaScreen
+        gate={gate}
+        onGateChange={jest.fn()}
+        settings={DEFAULT_SETTINGS}
+        onSettingsChange={jest.fn()}
+        log={emptyHideLog()}
+        family={twoKids}
+        onFamilyChange={onFamilyChange}
+        titles={[]}
+        nowMs={() => 0}
+        {...overrides}
+      />,
+    );
+    for (const digit of '1357') {
+      fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
+    }
+    return { onFamilyChange };
+  }
+
+  it('says on the shelf whose shelf it is, and offers the others', () => {
+    const onChooseProfile = jest.fn();
+    render(
+      <KidHomeScreen
+        titles={[makeTitle('ok', 'verified')]}
+        onOpen={jest.fn()}
+        profiles={twoKids.profiles}
+        activeProfileId="profile-1"
+        onChooseProfile={onChooseProfile}
+      />,
+    );
+    expect(
+      screen.getByTestId('kid-home-profiles-profile-1-name').props.children.join(''),
+    ).toContain('(watching)');
+    fireEvent.press(screen.getByTestId('kid-home-profiles-profile-2'));
+    expect(onChooseProfile).toHaveBeenCalledWith(twoKids.profiles[1]);
+  });
+
+  it('leaves the shelf exactly as it was for a household with no profiles', () => {
+    render(<KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />);
+    expect(screen.queryByTestId('kid-home-profiles')).toBeNull();
+  });
+
+  it('does not ask who is watching when there is nothing to watch', () => {
+    render(
+      <KidHomeScreen
+        titles={[]}
+        onOpen={jest.fn()}
+        profiles={twoKids.profiles}
+        activeProfileId="profile-1"
+        onChooseProfile={jest.fn()}
+      />,
+    );
+    expect(screen.queryByTestId('kid-home-profiles')).toBeNull();
+    expect(screen.getByTestId('kid-home-empty')).toBeDefined();
+  });
+
+  it('asks for the one PIN once, not once per kid', () => {
+    renderFamilyArea();
+    // Switching between kids behind the gate never puts the keypad back.
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
+    expect(screen.queryByTestId('parent-area-key-1')).toBeNull();
+    expect(screen.getByTestId('parent-area-profiles')).toBeDefined();
+  });
+
+  it('changes one kid and leaves the household and the other kid alone', () => {
+    const { onFamilyChange } = renderFamilyArea();
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
+    fireEvent.press(screen.getByTestId('parent-area-preset-extra-cautious'));
+
+    const next: Family = onFamilyChange.mock.calls[0][0];
+    expect(next.profiles[1].settings.preset).toBe('extra-cautious');
+    expect(next.profiles[0].settings.preset).toBe(DEFAULT_SETTINGS.preset);
+    expect(next.floor).toEqual(DEFAULT_SETTINGS);
+  });
+
+  it('changes the household floor when the household is the one chosen', () => {
+    const { onFamilyChange } = renderFamilyArea();
+    fireEvent.press(screen.getByTestId('parent-area-preset-broadcast'));
+    const next: Family = onFamilyChange.mock.calls[0][0];
+    expect(next.floor.preset).toBe('broadcast');
+    for (const profile of next.profiles) {
+      expect(effectiveSettings(next, profile).preset).toBe('broadcast');
+    }
+  });
+
+  it("shows each kid their own record and no one else's", () => {
+    let logs = emptyProfileLogs();
+    logs = addProfileHide(logs, 'profile-1', hide(1_000, 'Robin title'));
+    logs = addProfileHide(logs, 'profile-2', hide(2_000, 'Sam title'));
+    renderFamilyArea({ profileLogs: logs });
+
+    // The household first: everything hidden on the device, newest first.
+    expect(screen.getByTestId('parent-area-log-0').props.children).toContain(
+      'Sam title',
+    );
+    expect(screen.getByTestId('parent-area-log-1').props.children).toContain(
+      'Robin title',
+    );
+
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-1'));
+    expect(screen.getByTestId('parent-area-log-0').props.children).toContain(
+      'Robin title',
+    );
+    expect(screen.queryByTestId('parent-area-log-1')).toBeNull();
+  });
+
+  it('says a kid is getting the household setting when that is what is happening', () => {
+    const strict: Family = setFloor(twoKids, { preset: 'extra-cautious' });
+    renderFamilyArea({ family: strict });
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-1'));
+    expect(screen.getByTestId('parent-area-floor-effect').props.children).toContain(
+      'Extra cautious',
+    );
+  });
+
+  it('stops at four kids and says so', () => {
+    let full: Family = twoKids;
+    full = addProfile(addProfile(full, 'Ash'), 'Kit');
+    renderFamilyArea({ family: full });
+    expect(screen.queryByTestId('parent-area-add-profile')).toBeNull();
+    expect(screen.getByTestId('parent-area-profiles-full')).toBeDefined();
   });
 });

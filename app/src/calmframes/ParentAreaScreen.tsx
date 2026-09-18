@@ -31,15 +31,20 @@ import {
   scale,
 } from './calmStyles';
 import {
+  EVERYONE_LABEL,
   EXPLAINER_LINES,
   EXPLAINER_TITLE,
   Notice,
   noticeForTitle,
+  nothingHiddenFor,
   PARENT_AREA_TITLE,
   PIN_LOCKED_TITLE,
   PIN_NOT_SET,
   PIN_PROMPT,
   PIN_WRONG_TITLE,
+  PROFILE_ONLY_ADDS,
+  PROFILES_FULL,
+  PROFILES_PARENT_TITLE,
   ROOM_ONLY_ADDS,
 } from './copy';
 import {
@@ -54,6 +59,22 @@ import {
 import { describeHideEntry, HideLogStore, totalHiddenMs } from './hideLog';
 import { attemptPin, PIN_LENGTH, PinGateState } from './parentGate';
 import PinKeypad from './PinKeypad';
+import ProfilePicker from './ProfilePicker';
+import {
+  addProfile,
+  allProfileHides,
+  canAddProfile,
+  describeFloorEffect,
+  emptyProfileLogs,
+  EVERYONE_ID,
+  Family,
+  logForProfile,
+  Profile,
+  ProfileLogs,
+  removeProfile,
+  setFloor,
+  setProfileSettings,
+} from './profiles';
 import ShieldBadge from './ShieldBadge';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle } from './titleStatus';
@@ -61,6 +82,7 @@ import { useUiCapture } from './uiCapture';
 import {
   PARENT_LOCKED_FRAME,
   PARENT_OPEN_FRAME,
+  PARENT_PROFILE_FRAME,
   PARENT_WRONG_PIN_FRAME,
 } from './uiFrames';
 
@@ -70,6 +92,21 @@ export interface ParentAreaScreenProps {
   settings: HouseholdSettings;
   onSettingsChange: (settings: HouseholdSettings) => void;
   log: HideLogStore;
+  /**
+   * The kids, when this household has made any.
+   *
+   * Left out, this screen is what it always was: one household setting and one
+   * log. Given, the picker at the top decides whose settings the sections
+   * under it are changing, and the household itself is the first choice in
+   * that picker because what it is set to is the floor under every kid.
+   *
+   * The PIN is not in here. There is one for the household, and this screen is
+   * already behind it.
+   */
+  family?: Family;
+  onFamilyChange?: (family: Family) => void;
+  /** One hide log per profile id. */
+  profileLogs?: ProfileLogs;
   titles: CheckedTitle[];
   nowMs?: () => number;
   onBack?: () => void;
@@ -86,6 +123,9 @@ const ParentAreaScreen = ({
   settings,
   onSettingsChange,
   log,
+  family,
+  onFamilyChange,
+  profileLogs = emptyProfileLogs(),
   titles,
   nowMs = Date.now,
   onBack,
@@ -95,15 +135,25 @@ const ParentAreaScreen = ({
 }: ParentAreaScreenProps) => {
   const [unlocked, setUnlocked] = React.useState(false);
   const [entered, setEntered] = React.useState('');
+  // Whose settings the sections below are changing. The household first,
+  // because it is the floor and a parent reads down from it.
+  const [editingId, setEditingId] = React.useState<string>(EVERYONE_ID);
   const [notice, setNotice] = React.useState<Notice>(
     gate.record ? PIN_PROMPT : PIN_NOT_SET,
   );
   const [focusedRow, setFocusedRow] = React.useState<string | null>(null);
   const wrongPin = notice.tone === 'blocked';
 
+  const editingKid = Boolean(
+    family && family.profiles.some((profile) => profile.id === editingId),
+  );
+
   let frame = PARENT_LOCKED_FRAME;
   let reason = 'parent area locked';
-  if (unlocked) {
+  if (unlocked && editingKid) {
+    frame = PARENT_PROFILE_FRAME;
+    reason = 'parent area, one kid';
+  } else if (unlocked) {
     frame = PARENT_OPEN_FRAME;
     reason = 'parent area open';
   } else if (wrongPin) {
@@ -165,8 +215,43 @@ const ParentAreaScreen = ({
     );
   }
 
-  const choose = (change: Partial<HouseholdSettings>) =>
+  // Who is being edited, and what they are set to. With no family this is the
+  // household and nothing else, which is what this screen was before profiles.
+  const editingProfile: Profile | undefined = family
+    ? family.profiles.find((profile) => profile.id === editingId)
+    : undefined;
+  const shown: HouseholdSettings = editingProfile
+    ? editingProfile.settings
+    : family?.floor ?? settings;
+
+  const choose = (change: Partial<HouseholdSettings>) => {
+    if (family && onFamilyChange) {
+      onFamilyChange(
+        editingProfile
+          ? setProfileSettings(family, editingProfile.id, change)
+          : setFloor(family, change),
+      );
+      return;
+    }
     onSettingsChange({ ...settings, ...change });
+  };
+
+  // The picker's own list: the household, then the kids.
+  const pickable: Profile[] = family
+    ? [
+        { id: EVERYONE_ID, name: EVERYONE_LABEL, settings: family.floor },
+        ...family.profiles,
+      ]
+    : [];
+
+  const shownLog: HideLogStore = family
+    ? editingProfile
+      ? logForProfile(profileLogs, editingProfile.id)
+      : allProfileHides(profileLogs)
+    : log;
+
+  const floorEffect =
+    family && editingProfile ? describeFloorEffect(family, editingProfile) : null;
 
   return (
     <ScrollView
@@ -175,9 +260,55 @@ const ParentAreaScreen = ({
       contentContainerStyle={styles.content}>
       <Text style={styles.title}>{PARENT_AREA_TITLE}</Text>
 
+      {family && onFamilyChange ? (
+        <>
+          <ProfilePicker
+            testID={`${testID}-profiles`}
+            title={PROFILES_PARENT_TITLE}
+            chosenWord="chosen"
+            profiles={pickable}
+            activeProfileId={editingId}
+            onChoose={(profile) => setEditingId(profile.id)}
+          />
+          <Text style={styles.note} testID={`${testID}-profile-rule`}>
+            {PROFILE_ONLY_ADDS}
+          </Text>
+          {floorEffect ? (
+            <Text style={styles.note} testID={`${testID}-floor-effect`}>
+              {floorEffect}
+            </Text>
+          ) : null}
+          <View style={styles.buttons}>
+            {canAddProfile(family) ? (
+              <CalmButton
+                testID={`${testID}-add-profile`}
+                label="Add a kid"
+                onPress={() => onFamilyChange(addProfile(family, ''))}
+              />
+            ) : (
+              <Text style={styles.note} testID={`${testID}-profiles-full`}>
+                {PROFILES_FULL}
+              </Text>
+            )}
+            {editingProfile && family.profiles.length > 1 ? (
+              <View style={styles.secondButton}>
+                <CalmButton
+                  testID={`${testID}-remove-profile`}
+                  label={`Remove ${editingProfile.name}`}
+                  onPress={() => {
+                    onFamilyChange(removeProfile(family, editingProfile.id));
+                    setEditingId(EVERYONE_ID);
+                  }}
+                />
+              </View>
+            ) : null}
+          </View>
+        </>
+      ) : null}
+
       <Text style={styles.section}>How strict</Text>
       {PRESET_NAMES.map((name: PresetName) => {
-        const chosen = settings.preset === name;
+        const chosen = shown.preset === name;
         return (
           <TouchableOpacity
             key={name}
@@ -205,12 +336,12 @@ const ParentAreaScreen = ({
 
       <Text style={styles.section}>The room</Text>
       <Text style={styles.rowDetail} testID={`${testID}-room`}>
-        {describeRoom(settings)}
+        {describeRoom(shown)}
       </Text>
       <Text style={styles.note}>{ROOM_ONLY_ADDS}</Text>
       <View style={styles.choices}>
         {TV_DIAGONAL_CHOICES_IN.map((inches) => {
-          const chosen = settings.tvDiagonalIn === inches;
+          const chosen = shown.tvDiagonalIn === inches;
           return (
             <TouchableOpacity
               key={`tv-${inches}`}
@@ -234,7 +365,7 @@ const ParentAreaScreen = ({
       </View>
       <View style={styles.choices}>
         {SEAT_DISTANCE_CHOICES_IN.map((inches) => {
-          const chosen = settings.seatDistanceIn === inches;
+          const chosen = shown.seatDistanceIn === inches;
           const feet = Math.round(inches / 12);
           return (
             <TouchableOpacity
@@ -258,15 +389,19 @@ const ParentAreaScreen = ({
         })}
       </View>
 
-      <Text style={styles.section}>What was hidden</Text>
-      <Text style={styles.rowDetail} testID={`${testID}-total`}>
-        {log.entries.length === 0
-          ? 'Nothing has been hidden yet.'
-          : `${log.entries.length} part${
-              log.entries.length === 1 ? '' : 's'
-            }, ${Math.round(totalHiddenMs(log) / 1000)} seconds in all.`}
+      <Text style={styles.section}>
+        {editingProfile ? `What was hidden for ${editingProfile.name}` : 'What was hidden'}
       </Text>
-      {log.entries.slice(0, 20).map((entry, index) => (
+      <Text style={styles.rowDetail} testID={`${testID}-total`}>
+        {shownLog.entries.length === 0
+          ? editingProfile
+            ? nothingHiddenFor(editingProfile.name)
+            : 'Nothing has been hidden yet.'
+          : `${shownLog.entries.length} part${
+              shownLog.entries.length === 1 ? '' : 's'
+            }, ${Math.round(totalHiddenMs(shownLog) / 1000)} seconds in all.`}
+      </Text>
+      {shownLog.entries.slice(0, 20).map((entry, index) => (
         <Text
           key={`${entry.atMs}-${index}`}
           testID={`${testID}-log-${index}`}

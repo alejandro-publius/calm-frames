@@ -42,7 +42,10 @@ import {
   KID_HOME_SUBTITLE,
   KID_HOME_TITLE,
   NO_TITLES,
+  PROFILES_KID_TITLE,
 } from './copy';
+import ProfilePicker from './ProfilePicker';
+import { Profile } from './profiles';
 import ShieldBadge from './ShieldBadge';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle, kidModeTitles } from './titleStatus';
@@ -52,6 +55,7 @@ import {
   KID_HOME_FOCUSED_FRAME,
   KID_HOME_FRAME,
   KID_HOME_OFFLINE_FRAME,
+  KID_HOME_PROFILES_FRAME,
 } from './uiFrames';
 
 export interface KidHomeScreenProps {
@@ -66,6 +70,16 @@ export interface KidHomeScreenProps {
    * its own signed check and does not need the service to play.
    */
   offline?: boolean;
+  /**
+   * The kids in this household.
+   *
+   * Left out, the shelf is what it always was. Given, it asks who is watching
+   * first, because the shelf a kid is looking at is the one their own settings
+   * produced and they have to be able to tell it is theirs.
+   */
+  profiles?: Profile[];
+  activeProfileId?: string;
+  onChooseProfile?: (profile: Profile) => void;
   testID?: string;
 }
 
@@ -74,20 +88,38 @@ const KidHomeScreen = ({
   onOpen,
   onOpenParentArea,
   offline = false,
+  profiles,
+  activeProfileId,
+  onChooseProfile,
   testID = 'kid-home',
 }: KidHomeScreenProps) => {
   const listed = kidModeTitles(titles);
   const hiddenCount = titles.length - listed.length;
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
   const empty = listed.length === 0;
+  // With nothing to watch, the shelf does not ask who is watching: there is
+  // nothing for the answer to change, and one fewer thing to read.
+  const picking = Boolean(profiles && profiles.length > 0 && onChooseProfile) && !empty;
 
   // The app records what it paints, because Vega gives it no way to read its
   // own pixels. See uiCapture.ts.
+  //
+  // The picker is checked before the other two states on purpose. Its chips
+  // paint the chosen fill, which neither the offline shelf nor a focused
+  // poster adds on its own, so a shelf with a picker on it paints the same
+  // colours whichever of those it is in, and that is the frame it reports.
   let frame = KID_HOME_FRAME;
   let reason = 'kid home';
   if (empty) {
     frame = KID_HOME_EMPTY_FRAME;
     reason = offline ? 'shelf empty, service unreachable' : 'shelf empty';
+  } else if (picking) {
+    frame = KID_HOME_PROFILES_FRAME;
+    reason = offline
+      ? 'shelf with profiles, service unreachable'
+      : focusedId
+        ? 'profiles, poster focused'
+        : 'shelf, with the profiles';
   } else if (offline) {
     frame = KID_HOME_OFFLINE_FRAME;
     reason = 'shelf, service unreachable';
@@ -109,6 +141,16 @@ const KidHomeScreen = ({
           </Text>
         )}
       </View>
+
+      {picking && profiles && onChooseProfile ? (
+        <ProfilePicker
+          testID={`${testID}-profiles`}
+          title={PROFILES_KID_TITLE}
+          profiles={profiles}
+          activeProfileId={activeProfileId ?? profiles[0].id}
+          onChoose={onChooseProfile}
+        />
+      ) : null}
 
       {empty ? (
         <StatusNotice

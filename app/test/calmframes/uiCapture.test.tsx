@@ -40,6 +40,7 @@ import {
   UiFrame,
 } from '../../src/calmframes/uiCapture';
 import {
+  ALL_UI_FRAMES,
   FIRST_RUN_EXPLAINER_FRAME,
   FIRST_RUN_PIN_FRAME,
   FIRST_RUN_PRESET_FRAME,
@@ -48,14 +49,21 @@ import {
   KID_HOME_FOCUSED_FRAME,
   KID_HOME_FRAME,
   KID_HOME_OFFLINE_FRAME,
+  KID_HOME_PROFILES_FRAME,
   PARENT_LOCKED_FRAME,
   PARENT_OPEN_FRAME,
+  PARENT_PROFILE_FRAME,
   PARENT_WRONG_PIN_FRAME,
   playerFrame,
   TITLE_DETAILS_BLOCKED_FRAME,
   TITLE_DETAILS_FRAME,
 } from '../../src/calmframes/uiFrames';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
+import {
+  addProfile,
+  Family,
+  newFamily,
+} from '../../src/calmframes/profiles';
 
 const OUT_DIR = path.join(__dirname, '..', '..', 'build', 'ui-capture');
 
@@ -132,6 +140,34 @@ const parentArea = (titles: CheckedTitle[]) => (
   />
 );
 
+/** A household with two kids, for the screens that carry the picker. */
+const FAMILY: Family = addProfile(newFamily(DEFAULT_SETTINGS, 'Robin'), 'Sam');
+
+const familyShelf = (offline = false) => (
+  <KidHomeScreen
+    titles={[makeTitle('ok', 'verified')]}
+    onOpen={jest.fn()}
+    offline={offline}
+    profiles={FAMILY.profiles}
+    activeProfileId={FAMILY.activeProfileId}
+    onChooseProfile={jest.fn()}
+  />
+);
+
+const familyParentArea = (titles: CheckedTitle[]) => (
+  <ParentAreaScreen
+    gate={setPin(emptyPinGate(), '1357', 'seed', 4)}
+    onGateChange={jest.fn()}
+    settings={DEFAULT_SETTINGS}
+    onSettingsChange={jest.fn()}
+    log={emptyHideLog()}
+    family={FAMILY}
+    onFamilyChange={jest.fn()}
+    titles={titles}
+    nowMs={() => 0}
+  />
+);
+
 /** A title whose check did not pass, so its page shows a notice and no strip. */
 function blockedTitle(): CheckedTitle {
   return {
@@ -164,6 +200,51 @@ describe('what the app paints', () => {
       screen.toJSON() as unknown as RenderedNode,
     );
     expect(focused).toEqual(KID_HOME_FOCUSED_FRAME);
+  });
+
+  it('matches what the shelf with a family on it reports, in each of its states', () => {
+    // One frame covers all three, and that is the claim being checked rather
+    // than assumed: the chips carry the chosen fill, so a focused poster and
+    // the offline banner add nothing new to what is painted.
+    expect(renderedFrame('kid-home-profiles', familyShelf())).toEqual(
+      KID_HOME_PROFILES_FRAME,
+    );
+    expect(renderedFrame('kid-home-profiles', familyShelf(true))).toEqual(
+      KID_HOME_PROFILES_FRAME,
+    );
+    render(familyShelf());
+    fireEvent(screen.getByTestId('kid-home-poster-ok'), 'focus');
+    expect(
+      frameFromTree('kid-home-profiles', screen.toJSON() as unknown as RenderedNode),
+    ).toEqual(KID_HOME_PROFILES_FRAME);
+  });
+
+  it('matches what the parent area reports with a family in it', () => {
+    const area = familyParentArea([makeTitle('ok', 'verified')]);
+    render(area);
+    for (const digit of '1357') {
+      fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
+    }
+    expect(
+      frameFromTree('parent-area-open', screen.toJSON() as unknown as RenderedNode),
+    ).toEqual(PARENT_OPEN_FRAME);
+
+    // Choosing a kid puts the plain card colour before the chosen fill,
+    // because the household chip is first in the row and is no longer chosen.
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-1'));
+    expect(
+      frameFromTree('parent-area-profile', screen.toJSON() as unknown as RenderedNode),
+    ).toEqual(PARENT_PROFILE_FRAME);
+  });
+
+  it('lists every frame the app can show, so the flash run covers them all', () => {
+    // ALL_UI_FRAMES is what docs/SHOT_MANIFEST.md points at and what the
+    // capture below walks. A frame declared and left out of that list is a
+    // screen the flash check never sees.
+    const named = new Set(ALL_UI_FRAMES.map((frame) => frame.screen));
+    for (const frame of [KID_HOME_PROFILES_FRAME, PARENT_PROFILE_FRAME]) {
+      expect(named.has(frame.screen)).toBe(true);
+    }
   });
 
   it('matches what the empty and unreachable shelves report', () => {
@@ -386,6 +467,15 @@ describe('the capture path', () => {
         ],
       },
       {
+        // One stop, not two. A shelf with a picker on it paints the same
+        // colours whichever kid is chosen, so a second stop would be dropped
+        // as a repeat and would only make the timeline look longer.
+        element: familyShelf(),
+        stops: [
+          { name: 'kid-home-profiles', reason: 'the shelf asks who is watching' },
+        ],
+      },
+      {
         element: (
           <TitleDetailsScreen entry={makeTitle('ok', 'verified')} onPlay={jest.fn()} />
         ),
@@ -444,6 +534,27 @@ describe('the capture path', () => {
                 'parent-area-key-5',
                 'parent-area-key-7',
               ),
+          },
+        ],
+      },
+      {
+        element: familyParentArea([makeTitle('ok', 'verified')]),
+        stops: [
+          {
+            name: 'parent-area-open',
+            reason: 'the parent area of a household with kids in it',
+            act: () =>
+              pressAll(
+                'parent-area-key-1',
+                'parent-area-key-3',
+                'parent-area-key-5',
+                'parent-area-key-7',
+              ),
+          },
+          {
+            name: 'parent-area-profile',
+            reason: 'one kid',
+            act: () => press('parent-area-profiles-profile-1'),
           },
         ],
       },

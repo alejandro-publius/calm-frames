@@ -47,6 +47,13 @@ import { emptyHideLog } from '../../src/calmframes/hideLog';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
 import { emptyPinGate, setPin } from '../../src/calmframes/parentGate';
+import {
+  addProfile,
+  addProfileHide,
+  emptyProfileLogs,
+  Family,
+  newFamily,
+} from '../../src/calmframes/profiles';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import { CheckedTitle } from '../../src/calmframes/titleStatus';
 import {
@@ -133,6 +140,34 @@ const parentArea = (
   />
 );
 
+/** A household with two kids, for the screens that carry the picker. */
+const FAMILY: Family = addProfile(newFamily(DEFAULT_SETTINGS, 'Robin'), 'Sam');
+
+const parentAreaWithFamily = (
+  <ParentAreaScreen
+    gate={gate}
+    onGateChange={jest.fn()}
+    settings={DEFAULT_SETTINGS}
+    onSettingsChange={jest.fn()}
+    log={emptyHideLog()}
+    family={FAMILY}
+    onFamilyChange={jest.fn()}
+    profileLogs={addProfileHide(emptyProfileLogs(), 'profile-1', {
+      atMs: Date.parse('2026-09-17T19:30:00Z'),
+      titleId: 'ok',
+      titleName: 'Title ok',
+      positionMs: 60_000,
+      durationMs: 5_000,
+      cause: 'schedule',
+    })}
+    titles={[makeTitle('ok', 'verified'), makeTitle('bad', 'failed')]}
+    nowMs={() => 0}
+    onBack={jest.fn()}
+  />
+);
+
+const UNLOCK = ['1', '3', '5', '7'].map((digit) => `parent-area-key-${digit}`);
+
 const PlayerLayer = ({ covered, card }: { covered: boolean; card: Card }) => (
   <>
     <CoverLayer visible={covered} />
@@ -216,6 +251,21 @@ const CASES: Case[] = [
         titles={[makeTitle('ok', 'verified'), makeTitle('waiting', 'pending')]}
         onOpen={jest.fn()}
         onOpenParentArea={jest.fn()}
+      />
+    ),
+    background: CALM_COLORS.BACKGROUND,
+    screen: true,
+  },
+  {
+    name: 'kid-home-profiles',
+    element: (
+      <KidHomeScreen
+        titles={[makeTitle('ok', 'verified'), makeTitle('waiting', 'pending')]}
+        onOpen={jest.fn()}
+        onOpenParentArea={jest.fn()}
+        profiles={FAMILY.profiles}
+        activeProfileId={FAMILY.activeProfileId}
+        onChooseProfile={jest.fn()}
       />
     ),
     background: CALM_COLORS.BACKGROUND,
@@ -326,6 +376,20 @@ const CASES: Case[] = [
       'parent-area-key-5',
       'parent-area-key-7',
     ],
+  },
+  {
+    name: 'parent-area-family',
+    element: parentAreaWithFamily,
+    background: CALM_COLORS.BACKGROUND,
+    screen: true,
+    press: [...UNLOCK],
+  },
+  {
+    name: 'parent-area-one-kid',
+    element: parentAreaWithFamily,
+    background: CALM_COLORS.BACKGROUND,
+    screen: true,
+    press: [...UNLOCK, 'parent-area-profiles-profile-1'],
   },
   {
     name: 'player-countdown',

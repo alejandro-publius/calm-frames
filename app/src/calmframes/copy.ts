@@ -138,6 +138,30 @@ export const ROOM_ONLY_ADDS =
   'A bigger television or a closer sofa can only add hidden parts. It never takes any away.';
 
 /**
+ * Family profiles.
+ *
+ * The shelf asks who is watching. The parent area asks whose settings are
+ * being changed, which is a different question and reads as one. Both lists
+ * put the household first, because what it is set to is the floor under every
+ * profile.
+ */
+export const PROFILES_KID_TITLE = 'Who is watching';
+export const PROFILES_PARENT_TITLE = 'Whose settings';
+export const EVERYONE_LABEL = 'Everyone';
+
+/** The rule about profiles, said the same way as the one about rooms. */
+export const PROFILE_ONLY_ADDS =
+  'A profile can only add hidden parts to what Everyone is set to. It never takes any away.';
+
+/** Four is the most, and the parent area says so before the button is gone. */
+export const PROFILES_FULL = 'Four profiles is the most. Remove one to add another.';
+
+/** One kid's record, before anything has been hidden for them. */
+export function nothingHiddenFor(name: string): string {
+  return `Nothing has been hidden for ${name} yet.`;
+}
+
+/**
  * The first run explainer.
  *
  * Meant to be read in about twenty seconds. At 150 words a minute, a common
