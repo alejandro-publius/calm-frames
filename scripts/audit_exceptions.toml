@@ -1,0 +1,213 @@
+# Dependency audit exceptions.
+#
+# One entry per reason, not one per package. Each entry names the packages it
+# covers, the advisory ids that were read when it was accepted, who accepted it,
+# why, and the date it has to be looked at again. scripts/dep_audit.py fails if
+# a package has no entry, if an advisory appears that is not in the list, or if
+# a review date has passed. So this file cannot quietly go stale.
+#
+# The advisories tables are written by `make audit-update`, not by hand. The
+# words are written by hand, always.
+#
+# What this file does not claim: that any of these packages is absent from the
+# bundle that reaches the device. Working that out needs Metro's module graph
+# from a release build, which nobody here has read yet. The exceptions are
+# written to hold either way.
+
+[[exception]]
+group = "vega-sdk-and-react-native"
+ecosystem = "npm"
+ships = true
+accepted_by = "Alex, on the infrastructure and security lane's recommendation"
+review_by = "2026-10-21"
+why = """
+These are Amazon's Vega SDK 0.24 packages, React Native 0.83 and the toolchain
+those two pull in. The project pins SDK 0.24.9914 and the sample at tag
+v0.24-RN83 because that is the pair the device runs; the app will not build or
+sideload against anything else. There is no version of react-native we can move
+to that Vega 0.24 supports, so "upgrade" is not an option that leaves a working
+app.
+
+What the advisories are: ReDoS in react-native's own regular expressions,
+improper authorization in react-devtools-core, and a set of denial of service
+issues in metro and the community CLI. All of them need input we control. The
+app parses two things from outside itself, a flash map and a video, and neither
+goes near these packages: the map goes through the reader in
+app/src/calmframes/flashMap.ts, which parses it itself and refuses anything it
+does not understand, and the video goes to the platform player.
+
+What would change this: Amazon publishing an SDK 0.24 point release with newer
+pins, which is worth checking before the Oct 21 release build.
+"""
+packages = [
+  "@amazon-devices/kepler-cli-platform",
+  "@amazon-devices/kepler-module-manifest-builder",
+  "@amazon-devices/react-native-kepler",
+  "@amazon-devices/react-navigation__core",
+  "@amazon-devices/react-navigation__native",
+  "@amazon-devices/security-manager-lib",
+  "react-native",
+  "react-native-tscodegen-types",
+  "react-devtools-core",
+  "metro",
+  "metro-cache",
+  "metro-config",
+  "metro-core",
+  "metro-inspector-proxy",
+  "@react-native-community/cli",
+  "@react-native-community/cli-platform-android",
+  "@react-native-community/cli-platform-ios",
+  "fbjs",
+  "fbjs-scripts",
+  "isomorphic-fetch",
+  "node-fetch",
+  "logkitty",
+  "xcode",
+  "sane",
+]
+[exception.advisories]
+"@amazon-devices/kepler-cli-platform" = []
+"@amazon-devices/kepler-module-manifest-builder" = []
+"@amazon-devices/react-native-kepler" = []
+"@amazon-devices/react-navigation__core" = []
+"@amazon-devices/react-navigation__native" = []
+"@amazon-devices/security-manager-lib" = []
+"@react-native-community/cli" = []
+"@react-native-community/cli-platform-android" = []
+"@react-native-community/cli-platform-ios" = []
+"fbjs" = []
+"fbjs-scripts" = []
+"isomorphic-fetch" = []
+"logkitty" = ["1093556"]
+"metro" = []
+"metro-cache" = []
+"metro-config" = []
+"metro-core" = []
+"metro-inspector-proxy" = []
+"node-fetch" = ["1095073"]
+"react-devtools-core" = ["1099563"]
+"react-native" = ["1089027"]
+"react-native-tscodegen-types" = []
+"sane" = []
+"xcode" = []
+
+[[exception]]
+group = "developer-tooling"
+ecosystem = "npm"
+ships = false
+accepted_by = "Alex, on the infrastructure and security lane's recommendation"
+review_by = "2026-10-21"
+why = """
+Test, packaging and command line helpers that run on a developer machine or on
+a CI runner, over this repository's own files. The advisories are denial of
+service, prototype pollution and path traversal reached through input to those
+tools: a crafted glob pattern, a crafted temporary directory name, a crafted
+command line. Nothing outside this project supplies any of that, and none of
+these is called by the app while a video is playing.
+
+Most have no fix inside the tree Amazon pins: the fix is a major version of a
+parent that the SDK holds at an older one. The ones that do have a fix
+(@microsoft/*, @rushstack/*, metro-cache, shell-quote, source-map-resolve, toml)
+are reached only through `npm audit fix`, which rewrites app/package-lock.json
+under the pinned SDK and is a change the app lane has to make and test on a
+device, not one to slip into a security pass.
+
+The honest summary: this is the build machine's risk, not the television's.
+"""
+packages = [
+  "@jest/fake-timers",
+  "jest-haste-map",
+  "jest-message-util",
+  "jest-util",
+  "@microsoft/api-extractor",
+  "@microsoft/api-extractor-model",
+  "@microsoft/tsdoc-config",
+  "@rushstack/node-core-library",
+  "@rushstack/terminal",
+  "@rushstack/ts-command-line",
+  "node-notifier",
+  "inquirer",
+  "external-editor",
+  "tmp",
+  "shell-quote",
+  "cross-spawn",
+  "execa",
+  "os-locale",
+  "mem",
+  "image-size",
+  "toml",
+  "yargs",
+  "yargs-parser",
+  "source-map-resolve",
+  "query-string",
+  "decode-uri-component",
+  "anymatch",
+  "braces",
+  "micromatch",
+  "minimatch",
+  "ajv",
+  "uuid",
+  "ws",
+]
+[exception.advisories]
+"@jest/fake-timers" = []
+"@microsoft/api-extractor" = []
+"@microsoft/api-extractor-model" = []
+"@microsoft/tsdoc-config" = []
+"@rushstack/node-core-library" = []
+"@rushstack/terminal" = []
+"@rushstack/ts-command-line" = []
+"ajv" = ["1113715"]
+"anymatch" = []
+"braces" = ["1098094"]
+"cross-spawn" = ["1104663"]
+"decode-uri-component" = ["1147955"]
+"execa" = []
+"external-editor" = []
+"image-size" = ["1138808", "1138809"]
+"inquirer" = []
+"jest-haste-map" = []
+"jest-message-util" = []
+"jest-util" = []
+"mem" = ["1085685"]
+"micromatch" = ["1098681"]
+"minimatch" = ["1113459", "1113538", "1113546"]
+"node-notifier" = ["1086436"]
+"os-locale" = []
+"query-string" = []
+"shell-quote" = ["1120422", "1123944"]
+"source-map-resolve" = []
+"tmp" = ["1109537", "1120654"]
+"toml" = ["1164824", "1164825"]
+"uuid" = ["1119441"]
+"ws" = ["1118731", "1123262"]
+"yargs" = []
+"yargs-parser" = ["1088811"]
+
+[[exception]]
+group = "left-over-from-the-sample"
+ecosystem = "npm"
+ships = false
+accepted_by = "Alex, on the infrastructure and security lane's recommendation"
+review_by = "2026-10-05"
+why = """
+Two dependencies the sample brought that Calm Frames does not use.
+
+xmldom 0.6.0 is a direct dependency with sixteen advisories against it, several
+critical, and no fix in the 0.6 line. Nothing in app/src or app/test imports it:
+`npm ls xmldom` shows it hanging off the app package and nothing else. The fix
+is to delete the line from app/package.json, which is the app lane's file and
+their manifest to regenerate, so it is written here as a recommendation with a
+short review date rather than done from this lane.
+
+lodash 4.17.21 has a fix inside the range app/package.json already allows
+(`~4.17.21`), so `npm update lodash` in app/ takes it without touching
+package.json. One file imports it. Same lane, same short date.
+
+This entry expires two weeks before the release build on purpose. If it is
+still here on Oct 5, the answer is no longer "we will get to it".
+"""
+"packages" = ["xmldom", "lodash"]
+[exception.advisories]
+"lodash" = ["1115806", "1115810", "1120370"]
+"xmldom" = ["1091573", "1096547", "1117098", "1117892", "1117895", "1117898", "1117901", "1158516", "1193688", "1193691", "1193694", "1193698", "1193703", "1193706", "1193710", "1193713"]

@@ -49,7 +49,8 @@ include eval/baselines/naive_luma_diff/naive_luma.mk
 .PHONY: help test test-app test-flashmap test-pipeline test-eval ci \
         reproduce reproduce-release reproduce-all synth cdk-diff deploy destroy \
         release release-notes stick-day stick-day-vvd hooks hooks-selftest \
-        image image-smoke image-context image-push audit sbom \
+        image image-smoke image-context image-push \
+        audit audit-check audit-update sbom sbom-check \
         scan scan-tree pins clean
 
 help: ## show this list
@@ -165,6 +166,26 @@ image-context: ## every file the build would send to the daemon
 image-push: ## build and push to ECR. Blocked until HUMAN CHECKPOINT D
 	@$(REPO)/scripts/aws_guard.sh image
 
+# --------------------------------------------------------------- audits
+#
+# Both of these reach the public advisory databases and the npm registry. They
+# reach nothing private, and no AWS account.
+
+audit: ## pip-audit and npm audit, with every exception written down
+	@$(NODE_ENV) && $(PY) $(REPO)/scripts/dep_audit.py $(AUDIT_ARGS)
+
+audit-check: ## the same, and fail if a finding has no exception
+	@$(NODE_ENV) && $(PY) $(REPO)/scripts/dep_audit.py --check $(AUDIT_ARGS)
+
+audit-update: ## refresh the advisory ids in scripts/audit_exceptions.toml
+	@$(NODE_ENV) && $(PY) $(REPO)/scripts/dep_audit.py --update-ids $(AUDIT_ARGS)
+
+sbom: ## write the CycloneDX bills of materials into docs/
+	@$(NODE_ENV) && $(PY) $(REPO)/scripts/sbom.py
+
+sbom-check: ## fail if a committed bill no longer matches what is installed
+	@$(NODE_ENV) && $(PY) $(REPO)/scripts/sbom.py --check
+
 # -------------------------------------------------------------- release
 
 release: ## build armv7, aarch64 and x86_64 .vpkg files and stop before publishing
@@ -216,6 +237,41 @@ ingest-recordings: ## screen-level recordings -> results/screen_level.json. Refu
 
 meter-validate: ## re-measure the meter on simulated footage. Half an hour, writes results/meter_validation.json
 	$(PY) $(REPO)/eval/meter_validate.py $(METER_VALIDATE_ARGS)
+
+# ------------------------------------------------------------- hardening
+#
+# The mutation gate, the property tests and the map fuzz corpus. These are what
+# stop a green suite from meaning nothing: every safety guard is broken on
+# purpose and its test has to go red, and every property is stated over random
+# input rather than one fixture.
+#
+# Python comes from the checkout's virtual environment on this machine and from
+# python3 in CI, where there is none. Node comes from fnm here and from the
+# runner's PATH in CI, and neither target fails just because fnm is absent.
+
+HARDEN_PY := $(shell [ -x "$(REPO)/.venv/bin/python" ] && echo "$(REPO)/.venv/bin/python" || command -v python3)
+NODE_ANY := if command -v fnm >/dev/null 2>&1; then eval "$$(fnm env --shell bash)" >/dev/null 2>&1 && fnm use 22 >/dev/null 2>&1 || true; fi
+
+PROPERTY_TESTS := eval/property_scheduler_test.py eval/property_drift_test.py \
+                  eval/fuzz_maps_test.py
+
+.PHONY: mutate properties fuzz drift harden
+
+mutate: ## break every safety guard on purpose, watch its test go red, write results/mutation.json
+	cd $(REPO) && $(NODE_ANY); $(HARDEN_PY) eval/mutate_gate.py $(MUTATE_ARGS)
+
+properties: ## hypothesis property tests for the scheduler, the windows and the map readers
+	cd $(REPO) && $(NODE_ANY); $(HARDEN_PY) eval/property_runner.py
+	cd $(REPO) && $(NODE_ANY); CALM_FRAMES_REQUIRE_NODE=1 \
+		$(HARDEN_PY) -m pytest $(PROPERTY_TESTS) eval/property_windows_test.py -q
+
+fuzz: ## replay eval/fuzz_corpus through all three map readers, write results/fuzz.json
+	cd $(REPO) && $(NODE_ANY); $(HARDEN_PY) eval/fuzz_maps_test.py
+
+drift: ## the two hour clock drift run against the real scheduler, write results/drift.json
+	cd $(REPO) && $(NODE_ANY); $(HARDEN_PY) eval/property_drift_test.py
+
+harden: properties fuzz drift mutate ## everything in this section, in the order that fails fastest
 
 # ----------------------------------------------------------------- house
 

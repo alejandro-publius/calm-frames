@@ -1,0 +1,161 @@
+name: Audit
+
+# The security side of CI, kept in its own file so the fast checks in ci.yml
+# stay fast. Everything here runs on ubuntu-latest, like the rest.
+#
+# Four jobs:
+#   dependencies  pip-audit and npm audit, with every exception written down
+#   sbom          the CycloneDX bills regenerate to the same bytes
+#   infra         the CDK template and the ingest container's rules, on moto
+#   image         the ingest image really builds, for ARM64
+#
+# None of them touches an AWS account. The image job builds and never pushes,
+# and there is no deploy workflow in this repository on purpose: a deploy is a
+# thing a person does at a terminal, after HUMAN CHECKPOINT D.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Monday morning UTC. Advisories appear on their own schedule, not ours, so
+    # the audit has to run when nobody has pushed anything.
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependencies:
+    name: pip-audit and npm audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - name: Install the audit tools
+        run: python -m pip install pip-audit==2.9.0
+      - name: Install app dependencies
+        working-directory: app
+        # --ignore-scripts skips the Shaka Player build. npm audit reads the
+        # tree, not the built bundle, so this is the same audit either way.
+        run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
+      - name: Audit, and fail on anything without a written exception
+        run: python3 scripts/dep_audit.py --check
+
+  sbom:
+    name: The bills of materials are current
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - name: Install the SBOM tool
+        run: python -m pip install cyclonedx-bom==7.4.0
+      - name: Install app dependencies
+        working-directory: app
+        run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
+      - name: Regenerate and compare
+        run: python3 scripts/sbom.py --check
+
+  infra:
+    name: The stack and the container rules
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          # The CDK runs its Python through jsii, which shells out to node.
+          node-version-file: .nvmrc
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - name: Install the CDK and the test doubles
+        # Without these the infra tests skip themselves, which looked like
+        # passing for as long as nobody read the summary line.
+        run: |
+          python -m pip install -r pipeline/infra/requirements.txt
+          python -m pip install pytest==9.1.1 moto==5.2.3 boto3==1.43.97
+      - name: Synthesize the template, with no credentials and no account
+        env:
+          CDK_DEFAULT_ACCOUNT: "000000000000"
+          CDK_DEFAULT_REGION: us-east-1
+          CDK_OUTDIR: cdk.out
+        working-directory: pipeline/infra
+        run: python3 app.py
+      - name: There are no NAT gateways in it
+        working-directory: pipeline/infra
+        run: |
+          if grep -q '"AWS::EC2::NatGateway"' cdk.out/CalmFramesStack.template.json; then
+            echo "a NAT gateway appeared in the template" >&2
+            exit 1
+          fi
+          echo "no NAT gateways, as intended"
+      - name: The infra tests, which must run rather than skip
+        # A skip here is not a pass. test_infra.py skips itself when aws-cdk-lib
+        # is missing, and for weeks that looked exactly like success in a
+        # summary line nobody reads. If anything skips on this runner, a
+        # dependency above is missing and the job fails.
+        run: |
+          set -o pipefail
+          python -m pytest pipeline/tests/test_infra.py \
+            pipeline/tests/test_infra_ingest.py \
+            pipeline/tests/test_aws_guard.py \
+            -q --no-header | tee /tmp/infra.txt
+          if grep -qi "skipped" /tmp/infra.txt; then
+            echo "a test skipped: aws-cdk-lib, moto or boto3 is missing here" >&2
+            exit 1
+          fi
+
+  image:
+    name: The ingest image builds for ARM64
+    runs-on: ubuntu-latest
+    # Emulated ARM64 through QEMU, so it is slower than a native build and
+    # still far cheaper than the alternative, which is finding out at deploy
+    # time. It builds and never pushes.
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+      - uses: docker/setup-buildx-action@v3
+      - name: What the build context would send
+        run: python3 scripts/build_context.py --quiet
+      - name: Build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: pipeline/infra/ingest/Dockerfile
+          platforms: linux/arm64
+          push: false
+          load: true
+          tags: calm-frames/ingest:ci
+      - name: It refuses to start with nothing configured
+        run: |
+          set +e
+          output=$(docker run --rm --platform linux/arm64 calm-frames/ingest:ci 2>&1)
+          code=$?
+          echo "$output"
+          if [ "$code" != "2" ]; then
+            echo "expected exit 2 from a container with no configuration, got $code" >&2
+            exit 1
+          fi
+          echo "$output" | grep -q "refused to start" || {
+            echo "the refusal did not say why" >&2; exit 1; }
+      - name: It is an ARM64 image and it is not root
+        run: |
+          docker image inspect calm-frames/ingest:ci \
+            --format '{{.Architecture}} {{.Os}} user={{.Config.User}}'
+          test "$(docker image inspect calm-frames/ingest:ci --format '{{.Architecture}}')" = "arm64"
+          test "$(docker image inspect calm-frames/ingest:ci --format '{{.Config.User}}')" = "10001"
