@@ -19,7 +19,7 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | **Same session** | Film the layering test, then the 240 fps marker run. | **This is the only thing that can produce a GATE 1 number.** Phone at 240 fps, exposure locked, TV in game mode with motion smoothing off. `make stick-day` prints what to film and where the files go. |
 | **Before then** | Confirm your phone films 240 fps and the TV has a game mode. | Assumed, never confirmed. If either is wrong, GATE 1 needs a different plan and it is better to know now. |
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
-| **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add the line `AWS Paid plan: confirmed` to this file. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Both locks were tested. Nothing has touched AWS. |
+| **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add that line to this file. It has to start a line of its own: no bullet, no table cell, no backticks. The exact wording is in the refusal `make deploy` prints. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Seventeen tests now cover both locks, run against a copy of the script so this file is never touched. Nothing has touched AWS. |
 | **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
 | **Oct 19 to 20** | Film the video from `docs/VIDEO_SCRIPT.md`, timed to 2:55. | |
 | **Wed Oct 21** | Make the repo public, then run the final checks. | The rules need it public with the licence visible at submission. |
@@ -48,6 +48,8 @@ It surfaced because a second, stricter script needed a position report from the 
 **flashmap.** WCAG general and red flash, area windows, letterbox handling, real timestamps, chunked analysis, the room rule, signed sidecars, the CLI and the GitHub Action. Theora decoding is fixed with a regression fixture. Over 200 tests, 42 mutations all killed.
 
 **The pipeline.** Ingest, hide plan, kid-safe renditions, trickplay and posters from the safe rendition only, signed maps, and a verify step that blocks publishing and was mutation tested. The CDK app synthesizes with zero NAT gateways and a $20 budget alarm, and refuses to deploy.
+
+**Infrastructure and security.** The ingest container exists: ARM64, base image pinned by digest, every Python package installed from a hash, not root, and an entrypoint that publishes nothing unless verify passed and uploads only an allowlist, so the source master and the cover model video cannot leave the task. `make deploy` is one command that deploys the stack and then pushes the image, and it still refuses. The estimate for running it is about $1.34 a month against the $20 alarm, with its assumptions in docs/DECISIONS.md. docs/SECURITY.md now opens with a threat model and ends with what has never been run. pip-audit is clean; npm audit's 59 packages are the pinned Vega toolchain and each one is accounted for in writing with a review date. Three CycloneDX bills of materials, checked in CI. A map signed by a revoked key is refused by the app, and that test was seen to fail three ways.
 
 **Evaluation.** The conformance suite runs with ground truth computed from the spec text in a module that cannot import flashmap. The real-clip labelling pack is ready: 40 segments, 16 titles, 7 sources, blinded, with plots that show no detector output and blank sheets for two labellers. Nobody has labelled anything, which is correct: that is your step and Rachel's.
 
@@ -85,3 +87,13 @@ Every one comes from `results/`, and CI fails if a document drifts from them.
 1. Send the emails tomorrow.
 2. When the stick arrives: `make stick-day`, then film. That is the gate. **Add one measurement to it:** the worst gap between two scheduler ticks. The harness re-checks every 50 ms, so logging the longest gap between consecutive checks gives the worst pause of the JavaScript thread, and the guard band should be set above it rather than at the 500 ms we picked by judgement. This is not instrumented yet.
 3. Meanwhile: more titles through verify, IRIS when the Docker VM frees up, and finish the conformance run.
+
+---
+
+**Status line, Thu Sep 17 late (infrastructure and security lane).** Everything
+for one `make deploy` is ready and still refuses to run. Found and fixed one
+lock that had been open since it was written: the guard's grep matched the row
+in this file that tells you to add the line. The container build was stopped
+part way because it helped push the shared Docker VM into its memory limit and
+killed another project's container, which was restarted; the build is verified
+on a CI runner from now on. Nothing has touched AWS.

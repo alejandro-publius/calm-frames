@@ -93,6 +93,12 @@ ci: ## everything CI runs, in CI's order, before you push
 	$(MAKE) test test-eval
 	$(MAKE) scan
 	$(PY) eval/readme_sync.py --check
+	# The audit workflow's jobs, in its order. These reach the public advisory
+	# databases and the npm registry, so they are the slow part of this target,
+	# and leaving them out would make the name of this target a lie.
+	$(MAKE) audit-check sbom-check
+	$(PY) -m pytest pipeline/tests/test_infra.py pipeline/tests/test_infra_ingest.py \
+		pipeline/tests/test_aws_guard.py -q
 
 # ------------------------------------------------------------ reproduce
 

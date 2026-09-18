@@ -136,6 +136,33 @@ class TestWithBothLocksOpen:
         diff = run_guard(fake_repo, "diff", CHECKPOINT_D="confirmed")
         assert "[would run] diff CalmFramesStack" in diff.stdout
 
+    def test_the_project_venv_goes_first_on_the_path(self, fake_repo):
+        """A fresh clone deploys with the venv's python, not the machine's.
+
+        cdk.json runs the app as `python3 app.py`. On this Mac the system
+        python3 is 3.9 with no aws-cdk-lib in it, so a deploy from a shell that
+        had not activated the venv would synthesize nothing and fail in a way
+        that looks like a CDK problem.
+
+        Seen to fail by removing the PATH lines from the guard: the printed path
+        is then whichever python3 the shell had.
+        """
+        confirm_status(fake_repo)
+        venv = fake_repo / ".venv" / "bin"
+        venv.mkdir(parents=True)
+        marker = venv / "python3"
+        marker.write_text("#!/usr/bin/env bash\necho fake venv python\n")
+        marker.chmod(0o755)
+
+        # A stand in for the CDK that prints which python3 it would find.
+        probe = fake_repo / "probe.sh"
+        probe.write_text("#!/usr/bin/env bash\ncommand -v python3\n")
+        probe.chmod(0o755)
+
+        result = run_guard(fake_repo, CHECKPOINT_D="confirmed", CDK=str(probe))
+        assert result.returncode == 0
+        assert str(marker) in result.stdout
+
     def test_an_unknown_action_is_refused_even_then(self, fake_repo):
         confirm_status(fake_repo)
         result = run_guard(fake_repo, "publish-everything", CHECKPOINT_D="confirmed")

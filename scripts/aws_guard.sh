@@ -86,6 +86,15 @@ if [ "$status_ok" = 1 ] && [ "$variable_ok" = 1 ]; then
   esac
   echo "HUMAN CHECKPOINT D is confirmed in docs/STATUS.md and on this command line."
   echo "Running: $CDK $* $CONTEXT"
+  # cdk.json runs the app as `python3 app.py`, and on a fresh clone the python3
+  # on PATH is whatever the machine has, which here is 3.9 and has no
+  # aws-cdk-lib in it. Put the project venv first when there is one, so the
+  # template the CDK synthesizes during a deploy is built by the same
+  # interpreter `make synth` uses. Without a venv this changes nothing.
+  if [ -x "$REPO/.venv/bin/python3" ]; then
+    PATH="$REPO/.venv/bin:$PATH"
+    export PATH
+  fi
   cd "$REPO/pipeline/infra" || exit 1
   # shellcheck disable=SC2086
   exec $CDK "$@" $CONTEXT
