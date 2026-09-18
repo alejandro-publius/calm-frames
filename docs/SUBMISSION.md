@@ -69,6 +69,8 @@ Voice, D-pad and on-screen cards all run through one seek function. If the targe
 
 And any Vega video app can add the same protection with a small hook, while any studio can check its own content before publishing with the open-source analyzer and its GitHub Action.
 
+Two of the Fire TV track's six priority categories are this project by name. It is **family entertainment**, because the whole thing exists so a child can pick a title on the family television without a parent having to preview it first. And it is **multi-modal UX**, because voice, D-pad and on-screen cards are not three ways into the same app: they are three inputs to one seek function that covers the picture before it moves the playhead. A spoken "skip forward" and a press of the remote go through the same gate, and neither can land inside a flagged interval. That is multi-modal UX combining voice, D-pad and visual in a single flow, and the single flow is the part that stops working if you build it three times.
+
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
 ### How we built it
@@ -122,6 +124,8 @@ Vega SDK 0.24 · Vega CLI · React Native 0.83 · TypeScript · @amazon-devices/
 ```
 Fire TV
 ```
+
+**Priority categories: family entertainment, and multi-modal UX.** The rules list six for Fire TV and two of them are this project by name. If the form has a box for them, tick both. If it does not, the sentence is already in the description above, under "What it does".
 
 ## 5. Mini challenges entered
 
@@ -231,8 +235,8 @@ RUN IT ON THE VIRTUAL DEVICE
 
 RUN IT ON A STICK
   cd app && npm install && npm run build:debug
-  vega device is-connected
-  vega run-app app/build/armv7-debug/calm-frames-app_armv7.vpkg
+  vega device is-connected            # not "vega device list", which crashes
+  vega run-app build/armv7-debug/calm-frames-app_armv7.vpkg
 
   Use a debug build. Release builds strip console.log, and the evidence for a
   measurement run is in the log.
@@ -288,6 +292,8 @@ SAFETY, PLEASE READ
 
 ## 10. Product feedback
 
+### 10.1 The five questions, once per tool
+
 Amazon asks five questions about every tool an entry used. **The answers live in [`docs/FEEDBACK.md`](FEEDBACK.md)**, which covers thirteen tools: the Vega SDK and CLI, the Vega Virtual Device, `vega-video-sample`, the W3C media player, Vega Media Controls, KeplerCaptionsView, the accessibility APIs, AWS CDK, AWS Fargate on ECS, Amazon S3, Amazon CloudFront, the Kepler UI and file system packages, and GitHub Actions.
 
 That file is the one to paste from, and it is deliberately the only copy, so this document cannot drift away from it. If the form wants the answers inline, paste `docs/FEEDBACK.md` from its "1. Vega SDK and Vega CLI" heading down to the "Feature requests" heading. Nothing in it needs editing first.
@@ -298,6 +304,30 @@ Two things a reader should know about it, which it says itself:
 - Fargate, S3 and CloudFront say in their first line that nothing is deployed and no AWS credential has been used, and they answer as far as a synthesized template and a unit test can. Their onboarding question is answered "not answerable yet" rather than made up.
 
 The heaviest complaint, in one line each, is in that file's "At a glance" table.
+
+### 10.2 Which AWS services we used, and how
+
+**This block belongs in the Product Feedback answer, not in a field of its own.** The rules put the AWS Builder requirement inside this field: the Stage One checklist line reads "AWS Builder: which AWS services were used and how, inside the Product Feedback answer". So paste `docs/FEEDBACK.md` first, then paste this table at the end of the same box. Section 11 is the reasoning about whether we qualify at all, and it is not a substitute for having the table here.
+
+Section 11.1 is the sentence that has to be read before the table: the stack synthesizes and is unit tested, and **nothing has ever been deployed and no AWS credential has ever been used.** Read every row as "how it is used in the stack as written and tested", not as "how it behaved in production".
+
+| Service | How it is used | Why this one |
+|---|---|---|
+| **Amazon S3** | Two private buckets. `source` takes uploads and is never reachable from the internet. `delivery` holds kid-safe renditions, signed maps, posters and trickplay. | Object storage with a lifecycle rule for the raw uploads, which are the large and short-lived part. |
+| **Amazon CloudFront** | Serves the delivery bucket through origin access control, so the bucket itself stays private. Signed URLs when a public key is configured. | The app needs range requests and reasonable latency for HLS. Origin access control means no public bucket. |
+| **Amazon DynamoDB** | The title catalog, on demand, keyed by the source file's SHA-256, with the same fields as the local JSON catalog. | On-demand billing suits a workload that is quiet most of the time, and the hash key is the natural identity for a title. |
+| **AWS Fargate on Amazon ECS** | The ingest task, ARM64, running the same container as the local pipeline. | No servers to keep alive between titles, and the same image runs locally, so what CI tests is what runs. |
+| **Amazon ECR** | Holds that image. | It is where a Fargate task definition reads from. |
+| **AWS Lambda** | A small function started by an S3 upload notification, which runs the Fargate task. | The plan rules out Step Functions and EventBridge while the cut list still has items on it, and one small function is the least machinery that does the job. |
+| **Amazon VPC** | Public subnets only, `nat_gateways=0`, the task gets a public IP. | The CDK default of a NAT gateway per availability zone would have been the biggest line on the bill. |
+| **AWS IAM with GitHub OIDC** | The deploy role that GitHub Actions assumes. | No AWS access key is ever stored in the repository or in GitHub secrets. |
+| **AWS Budgets** | A 20 US dollar budget alarm. | A hard stop on a hobby project's spending, set before anything can spend. |
+| **Amazon CloudWatch Logs** | Task logs with a retention setting. | Retention means old logs stop costing money on their own. |
+| **Cost allocation tags** | On everything in the stack. | So the bill can be read per project. |
+
+**Cost.** Estimated at about 5 US dollars in a month where 25 titles are ingested, and under a dollar in a month after that. This is an estimate from the stack's shape, not a bill anybody has received. `make destroy` leaves nothing billable.
+
+**What we would tell another builder.** The `ec2.Vpc` default is one NAT gateway per availability zone, which is 65 to 100 US dollars a month and would have been the largest line on this project's bill by a wide margin. Asserting on the synthesized template, before deploying anything, is the cheapest safety net available, and it is what let us be confident about cost and privacy settings with no account attached. Both of those are written up properly in [`docs/FEEDBACK.md`](FEEDBACK.md) section 8.
 
 ---
 
@@ -328,27 +358,9 @@ Three routes settle it, and they are Alex's calls, not the build's:
 
 Route 1 then route 2 is the order that costs least. Doing nothing is also a choice: we enter the mini challenge, describe the stack as it is, and a judge decides.
 
-### 11.3 Which AWS services, and how each one is used
+### 11.3 Which AWS services, and how
 
-Read every row as "how it is used in the stack as written and tested", not as "how it behaved in production". None of it has run.
-
-| Service | How it is used | Why this one |
-|---|---|---|
-| **Amazon S3** | Two private buckets. `source` takes uploads and is never reachable from the internet. `delivery` holds kid-safe renditions, signed maps, posters and trickplay. | Object storage with a lifecycle rule for the raw uploads, which are the large and short-lived part. |
-| **Amazon CloudFront** | Serves the delivery bucket through origin access control, so the bucket itself stays private. Signed URLs when a public key is configured. | The app needs range requests and reasonable latency for HLS. Origin access control means no public bucket. |
-| **Amazon DynamoDB** | The title catalog, on demand, keyed by the source file's SHA-256, with the same fields as the local JSON catalog. | On-demand billing suits a workload that is quiet most of the time, and the hash key is the natural identity for a title. |
-| **AWS Fargate on Amazon ECS** | The ingest task, ARM64, running the same container as the local pipeline. | No servers to keep alive between titles, and the same image runs locally, so what CI tests is what runs. |
-| **Amazon ECR** | Holds that image. | It is where a Fargate task definition reads from. |
-| **AWS Lambda** | A small function started by an S3 upload notification, which runs the Fargate task. | The plan rules out Step Functions and EventBridge while the cut list still has items on it, and one small function is the least machinery that does the job. |
-| **Amazon VPC** | Public subnets only, `nat_gateways=0`, the task gets a public IP. | The CDK default of a NAT gateway per availability zone would have been the biggest line on the bill. |
-| **AWS IAM with GitHub OIDC** | The deploy role that GitHub Actions assumes. | No AWS access key is ever stored in the repository or in GitHub secrets. |
-| **AWS Budgets** | A 20 US dollar budget alarm. | A hard stop on a hobby project's spending, set before anything can spend. |
-| **Amazon CloudWatch Logs** | Task logs with a retention setting. | Retention means old logs stop costing money on their own. |
-| **Cost allocation tags** | On everything in the stack. | So the bill can be read per project. |
-
-**Cost.** Estimated at about 5 US dollars in a month where 25 titles are ingested, and under a dollar in a month after that. This is an estimate from the stack's shape, not a bill anybody has received. `make destroy` leaves nothing billable.
-
-**What we would tell another builder.** The `ec2.Vpc` default is one NAT gateway per availability zone, which is 65 to 100 US dollars a month and would have been the largest line on this project's bill by a wide margin. Asserting on the synthesized template, before deploying anything, is the cheapest safety net available, and it is what let us be confident about cost and privacy settings with no account attached. Both of those are written up properly in [`docs/FEEDBACK.md`](FEEDBACK.md) section 8.
+**The table is in [section 10.2](#102-which-aws-services-we-used-and-how), because that is the field the rules name.** It is one copy on purpose, so the two cannot drift. Eleven services and settings: S3, CloudFront, DynamoDB, Fargate on ECS, ECR, Lambda, VPC with zero NAT gateways, IAM with GitHub OIDC, Budgets, CloudWatch Logs, and cost allocation tags on everything.
 
 **NEEDS ALEX:** request the 150 US dollar AWS credits by **Wednesday October 21 at 12:00 PT**, while supplies last. Either form link works, both resolve to the same Google Form.
 
@@ -440,11 +452,32 @@ The scale, so the priorities read correctly: **Critical** means we could not do 
 
 The three Critical ones, because they are the argument:
 
-1. **A system-wide Fire TV "dim flashing lights" setting**, in Accessibility settings, readable by any app. Photosensitivity is a property of the person, not of an app. A child should not have to hope that the app they opened happens to have built protection. Apple has one. Fire TV does not. We would delete half of our own settings screen the day this ships.
+1. **A system-wide Fire TV "dim flashing lights" setting**, in Accessibility settings, readable by any app the way `isScreenReaderEnabled` is readable now. Photosensitivity is a property of the person, not of an app. A child should not have to hope that the app they opened happens to have built protection. We would delete half of our own settings screen the day this ships.
 2. **`vega device screenshot` that captures the composited output**, and `vega device key` for remote input. WCAG 2.3.1 applies to an app's own interface, and today a developer cannot look at it.
 3. **A way to get one frame of what an app drew, from inside the app.** The same gap from the other side: React Native 0.83 removed `takeSnapshot` and no `@amazon-devices` package replaces it.
 
 Requests 2 and 3 are the pair that stopped us seeing our own screens, which is why an accessibility entry is raising them as Critical rather than as a convenience.
+
+### Request 1 has a shipped precedent, and it is worth quoting rather than asserting
+
+This is not a thing nobody has tried. Apple's Media Accessibility framework documents it, and its developer pages say:
+
+> The Dim Flashing Lights setting allows the system to calculate, mitigate, and inform people about flashing lights in a piece of media.
+
+> Dim Flashing Lights is a setting that allows a person to indicate that they want to avoid bright, frequent flashes of light on their Apple device. When a person turns on this setting, the device automatically dims video content when the system detects flashing or strobing effects.
+
+A person turns it on at Settings, Accessibility, Motion. An app can read whether it is on, can register for a notification when it changes, and Apple ships `MAFlashingLightsProcessor`, described in the same documentation as "A class that processes a framebuffer object to detect and dim sequences of flashing lights". So **the setting, the read API, the change notification and the processing class all exist and are documented for app developers**. That is the precedent, and it is the shape request 1 asks for.
+
+Sources, and how they were read, because the pages do not serve their text as HTML:
+
+- <https://developer.apple.com/documentation/mediaaccessibility/flashing-lights>
+- <https://developer.apple.com/documentation/mediaaccessibility/responding-to-changes-in-the-flashing-lights-setting>
+
+Both render their text in the browser, so fetching the HTML returns the navigation and nothing else. The quoted sentences come from the documentation content those pages load, at `developer.apple.com/tutorials/data/documentation/mediaaccessibility/flashing-lights.json` and the matching path for the second page, both fetched on Sep 17, 2026. **Nothing about Apple's implementation is claimed beyond what those two pages say.**
+
+**We have not found an equivalent on Fire TV.** That is a statement about what we looked for and did not find, not a proof that nothing exists, and it is the first thing the request should be checked against by somebody inside the Fire TV team.
+
+And two differences, because the precedent is not the same product. Apple's detection runs on the device, in real time, on the frames as they are drawn. Calm Frames analyses the whole title ahead of time, signs the result, and the player acts on a schedule rather than on what it has just seen, which is what lets it cover a flash **before** its first frame rather than dimming after one starts. Apple's approach needs no cooperation from the app; ours needs a signed map, so it only ever protects content somebody measured. The two are complementary, and a system setting would make ours unnecessary for anyone who turned it on, which is the point.
 
 ---
 
