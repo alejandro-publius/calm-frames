@@ -370,6 +370,7 @@ class FlashmapAdapter:
         diag_in: float | None = None,
         distance_ft: float | None = None,
         key: str | Path | None = None,
+        picture_from: str | Path | None = None,
         timeout_s: float | None = None,
     ) -> FlashMapDoc:
         """Analyze ``video`` for one pipeline preset.
@@ -379,6 +380,15 @@ class FlashmapAdapter:
         passes its own ``diag_in`` or ``distance_ft`` overrides the preset,
         which is how a household's own television and seat distance reach the
         analyzer.
+
+        ``picture_from`` is the map to take the picture rectangle from instead
+        of detecting one. It is for a re-encode of the file that map describes:
+        re-encoding nudges the outermost rows and columns, and the detector can
+        come back with a bar one row taller or shorter than the one it found in
+        the original. Area fractions are measured on the picture, so one row is
+        enough to lift a span over the limit and flag content the source never
+        had. Titles are always analyzed from the source; this keeps a check on
+        a rendition measured on the same ground the source was.
         """
         preset = PRESET_SPECS.get(profile, Preset(profile, profile))
         out_path = Path(out_path)
@@ -399,6 +409,8 @@ class FlashmapAdapter:
             args += ["--distance-ft", str(room_distance)]
         if key is not None:
             args += ["--key", str(key)]
+        if picture_from is not None:
+            args += ["--picture-from", str(picture_from)]
 
         result = self._run(args, timeout_s=timeout_s)
         if result.returncode not in ANALYZE_OK_EXIT_CODES:

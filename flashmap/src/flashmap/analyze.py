@@ -27,7 +27,15 @@ from .decode import (
     probe,
 )
 from .flash import GeneralFlashTracker, RedFlashTracker
-from .picture import LetterboxSettings, PictureRect, detect_picture
+from .picture import (
+    CARRIED,
+    DETECTED,
+    CarriedPicture,
+    LetterboxSettings,
+    PictureRect,
+    detect_picture,
+    rect_in_frame,
+)
 from .profiles import Profile
 from .room import RoomSetting, room_window
 
@@ -81,6 +89,11 @@ class AnalysisResult:
     last_pts_ms: float | None
     variable_frame_rate: bool
     frame_interval_ms: dict[str, float]
+    picture_source: str = DETECTED
+    """`detected` or `carried`, see flashmap.picture."""
+    detected_picture: PictureRect | None = None
+    """What this file's own detector found. Recorded even when a rectangle was carried in, so
+    a reader can see how far the two are apart without analysing the file again."""
 
     @property
     def passes(self) -> bool:
@@ -366,14 +379,37 @@ def analyze_file(
     sample_frames: int = 16,
     chunk_frames: int | None = None,
     chunk_overlap: int = 0,
+    carried_picture: CarriedPicture | None = None,
 ) -> AnalysisResult:
     """Analyse one file end to end.
 
     `chunk_frames` only changes how frames are handed to the analyser. The answer is the same
     either way, and tests/test_chunking.py holds that to it.
+
+    `carried_picture` is the picture rectangle out of another file's map, for when this file is
+    a re-encode of that one. Re-encoding nudges the outermost rows and columns, so a detector
+    run on the re-encode can find a bar one row taller or shorter than the one in the original.
+    Every area fraction is measured against the picture, so one row is enough to lift a span
+    over the limit and flag content the original did not. Carrying the rectangle keeps both
+    measured on the same ground. The detector still runs, and what it found is reported.
     """
     info = probe(path, policy=policy, analysis_width=analysis_width)
-    picture = _detect_picture(path, info, letterbox, sample_frames)
+    detected = _detect_picture(path, info, letterbox, sample_frames)
+    if carried_picture is None:
+        picture, picture_source = detected, DETECTED
+    else:
+        if (
+            carried_picture.coded_width != info.coded_width
+            or carried_picture.coded_height != info.coded_height
+        ):
+            raise UnsupportedInput(
+                f"the carried picture rectangle came from a "
+                f"{carried_picture.coded_width}x{carried_picture.coded_height} frame and "
+                f"{path} is {info.coded_width}x{info.coded_height}. A rectangle from a "
+                "different frame size does not describe this file."
+            )
+        picture = rect_in_frame(carried_picture, info.analysis_width, info.analysis_height)
+        picture_source = CARRIED
     windows = build_area_windows(profile, picture, room)
     analyzer = StreamingAnalyzer(profile, picture, windows)
 
@@ -397,6 +433,8 @@ def analyze_file(
         last_pts_ms=analyzer.last_pts_ms,
         variable_frame_rate=variable,
         frame_interval_ms=stats,
+        picture_source=picture_source,
+        detected_picture=detected,
     )
 
 

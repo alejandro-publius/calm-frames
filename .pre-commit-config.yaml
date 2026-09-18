@@ -1,0 +1,21 @@
+# Secret scanning before a commit exists, for people who use the pre-commit
+# framework:
+#
+#   pip install pre-commit && pre-commit install
+#
+# If you would rather not add another tool, `make hooks` installs the same scan
+# as a plain git hook and needs nothing but gitleaks. Both run the same binary
+# with the same .gitleaks.toml that CI runs, so all three agree.
+#
+# The version is pinned to the one .github/workflows/ci.yml downloads. Rules
+# change between gitleaks versions, and a hook that disagrees with CI teaches
+# people to pass --no-verify.
+
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+        name: scan the staged changes for secrets
+        # gitleaks finds .gitleaks.toml at the root of the repository it scans,
+        # so the allowlist for generated and third party files applies here too.

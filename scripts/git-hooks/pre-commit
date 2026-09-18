@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+# Calm Frames pre-commit hook: scan what is about to be committed for secrets.
+#
+# Installed by `make hooks`. CI runs the same gitleaks version with the same
+# config on every push, so this hook is the same check moved earlier, where a
+# secret can still be taken back out of a commit that does not exist yet.
+#
+# If you have to get past it in a hurry:
+#
+#   git commit --no-verify
+#
+# and then say so, because CI will stop it anyway.
+
+set -u
+
+REPO="$(git rev-parse --show-toplevel)"
+SCAN="$REPO/scripts/gitleaks_scan.sh"
+
+if [ ! -x "$SCAN" ]; then
+  echo "pre-commit: $SCAN is missing. Run make hooks again." >&2
+  exit 1
+fi
+
+"$SCAN" staged
+status=$?
+
+if [ "$status" -ne 0 ]; then
+  cat >&2 <<'FOUND'
+
+The commit was stopped: gitleaks found something that looks like a secret in
+the staged changes.
+
+  - if it is real, take it out of the change, then rotate it. A secret that
+    reached a commit is burned even if the commit never leaves this machine.
+    docs/SECURITY.md has the rotation steps for the map-signing key.
+  - if it is a false positive, add a narrow rule to .gitleaks.toml with a
+    comment saying why, and keep the allowlist to paths that hold generated or
+    third-party files.
+
+FOUND
+fi
+
+exit "$status"

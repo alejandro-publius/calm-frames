@@ -10,11 +10,22 @@ flashmap never multiplies a YCbCr matrix itself. It tells libswscale which matri
 use and reads back RGB.
 
 Timestamps come from the container. There is no assumed frame rate anywhere in this file.
+
+Empty packets
+-------------
+Ogg Theora marks a frame that is identical to the one before it with a zero length packet.
+libavcodec refuses one outright: `avcodec_send_packet()` returns EINVAL, which surfaces as
+"returned 22", because a packet that has a buffer but no bytes in it is not a packet it will
+take. So an empty packet is never sent to the decoder. It carries no picture anyway. It is
+kept in the timeline and filled with the picture in front of it, which is what a player shows
+for that packet's slice of time, and the frame count and the frame intervals stay true to the
+file instead of growing a hole where the repeats were.
 """
 
 from __future__ import annotations
 
 import fractions
+from collections import deque
 from collections.abc import Iterator
 from dataclasses import dataclass
 from pathlib import Path
@@ -115,7 +126,12 @@ class ColorDecision:
 
 @dataclass
 class AnalysisFrame:
-    """One decoded frame, already scaled to the analysis size."""
+    """One decoded frame, already scaled to the analysis size.
+
+    `rgb` and `video_level` are read only. A frame that repeats the one before it, which is
+    what an empty packet means, shares their arrays with the frame it repeats rather than
+    copying them, so nothing downstream may write into either.
+    """
 
     index: int
     pts_ms: float
@@ -123,6 +139,8 @@ class AnalysisFrame:
     """Height by width by 3, sRGB encoded, 0 to 1."""
     video_level: NDArray[np.float32]
     """Height by width, the luma signal normalised so black is 0 and white is 1."""
+    repeats_previous: bool = False
+    """True when this frame came from an empty packet and repeats the frame before it."""
 
 
 @dataclass
@@ -138,6 +156,26 @@ class SourceInfo:
     duration_ms: float | None
     color: ColorDecision
     timestamp_source: str = "container-pts"
+
+
+def _carries_no_picture(packet: "av.Packet") -> bool:
+    """True for a packet the decoder must not be handed.
+
+    Two kinds of packet are empty. A Theora duplicate frame packet is zero length and carries
+    a timestamp. PyAV ends every demux with a zero length packet that carries none, which is
+    its way of asking the decoder to drain. Neither holds a picture to decode.
+    """
+    return packet.size == 0
+
+
+def _first_frame(container: "av.container.InputContainer", stream) -> "av.VideoFrame | None":
+    """The first decodable picture, stepping over empty packets on the way."""
+    for packet in container.demux(stream):
+        if _carries_no_picture(packet):
+            continue
+        for frame in packet.decode():
+            return frame
+    return None
 
 
 def _tag(frame_value: int | None, stream_value: int | None) -> int:
@@ -226,11 +264,8 @@ def probe(path: str | Path, policy: ColorPolicy = ColorPolicy(), analysis_width:
             raise UnsupportedInput(f"{path} has no video stream")
         stream = container.streams.video[0]
         codec = stream.codec_context
-        first = None
         try:
-            for frame in container.decode(stream):
-                first = frame
-                break
+            first = _first_frame(container, stream)
         except (av.FFmpegError, OSError, ValueError) as exc:
             raise UnsupportedInput(f"{path} could not be decoded: {exc}") from exc
         if first is None:
@@ -273,6 +308,66 @@ def probe(path: str | Path, policy: ColorPolicy = ColorPolicy(), analysis_width:
     )
 
 
+def _iter_coded_pictures(
+    container: "av.container.InputContainer", stream
+) -> Iterator[tuple[int | None, "av.VideoFrame | None"]]:
+    """Packets in, pictures out, in presentation order, empty packets kept.
+
+    Yields `(stamp, frame)`. `frame` is None when the packet was empty, which means the
+    picture in front of it is shown again at `stamp`.
+
+    Frame threading hands pictures back later than the packets they came from, so the order
+    is held by a queue of slots rather than by assuming one picture per packet. A slot for an
+    empty packet is ready as soon as it is made. A slot for a real packet is ready when the
+    decoder gets round to it. Nothing leaves the queue ahead of the slot in front of it.
+    """
+    # Each slot is [is_repeat, stamp, frame].
+    slots: deque[list] = deque()
+
+    def ready() -> Iterator[tuple[int | None, "av.VideoFrame | None"]]:
+        while slots and (slots[0][0] or slots[0][2] is not None):
+            is_repeat, stamp, frame = slots.popleft()
+            yield stamp, None if is_repeat else frame
+
+    def fill(frame: "av.VideoFrame") -> None:
+        stamp = frame.pts if frame.pts is not None else frame.dts
+        for slot in slots:
+            if not slot[0] and slot[2] is None:
+                slot[1] = stamp
+                slot[2] = frame
+                return
+        # More pictures than packets asked for should not happen. Dropping one would be
+        # dropping evidence, so it goes on the end, in the order it arrived.
+        slots.append([False, stamp, frame])
+
+    for packet in container.demux(stream):
+        if _carries_no_picture(packet):
+            stamp = packet.pts if packet.pts is not None else packet.dts
+            if stamp is None:
+                # PyAV's end of stream marker. Decoding it drains whatever frame threading
+                # is still holding on to.
+                for frame in packet.decode():
+                    fill(frame)
+                yield from ready()
+                break
+            slots.append([True, stamp, None])
+            yield from ready()
+            continue
+        # The slot is booked before the packet is decoded, so a picture that frame threading
+        # hands back several packets later still lands in the place its packet had.
+        slots.append([False, None, None])
+        for frame in packet.decode():
+            fill(frame)
+        yield from ready()
+
+    # A slot still empty here belongs to a packet the decoder gave nothing back for. It goes,
+    # and the repeats queued behind it still resolve against the last picture that did arrive.
+    for is_repeat, stamp, frame in slots:
+        if is_repeat or frame is not None:
+            yield stamp, None if is_repeat else frame
+    slots.clear()
+
+
 def iter_frames(
     path: str | Path,
     info: SourceInfo,
@@ -286,49 +381,69 @@ def iter_frames(
     reformatter = VideoReformatter()
     index = 0
     last_pts_ms: float | None = None
+    previous: AnalysisFrame | None = None
     with _open(path) as container:
         stream = container.streams.video[0]
         stream.thread_type = "AUTO"
         time_base = stream.time_base
-        for frame in container.decode(stream):
-            stamp = frame.pts if frame.pts is not None else frame.dts
-            if stamp is None or time_base is None:
-                raise UnsupportedInput(
-                    f"{path} frame {index} has no presentation timestamp, so flashmap cannot "
-                    "place it in time. flashmap never assumes a frame rate."
-                )
-            pts_ms = float(stamp * time_base) * 1000.0
-            if last_pts_ms is not None and pts_ms < last_pts_ms:
-                # Out of order presentation timestamps mean the decoder handed us frames in
-                # coded order. Skip rather than mis-time the flash windows.
-                continue
-            last_pts_ms = pts_ms
+        try:
+            for stamp, frame in _iter_coded_pictures(container, stream):
+                if stamp is None or time_base is None:
+                    raise UnsupportedInput(
+                        f"{path} frame {index} has no presentation timestamp, so flashmap "
+                        "cannot place it in time. flashmap never assumes a frame rate."
+                    )
+                pts_ms = float(stamp * time_base) * 1000.0
+                if last_pts_ms is not None and pts_ms < last_pts_ms:
+                    # Out of order presentation timestamps mean the decoder handed us frames
+                    # in coded order. Skip rather than mis-time the flash windows.
+                    continue
 
-            rgb_frame = reformatter.reformat(
-                frame,
-                width=info.analysis_width,
-                height=info.analysis_height,
-                format="rgb24",
-                src_colorspace=info.color.swscale_colorspace,
-                src_color_range=info.color.swscale_range,
-                dst_color_range="JPEG",
-                interpolation=interpolation,
-            )
-            rgb = rgb_frame.to_ndarray().astype(np.float32) / np.float32(255.0)
+                if frame is None:
+                    if previous is None:
+                        # An empty packet before any picture repeats nothing, so there is no
+                        # picture to measure at that time.
+                        continue
+                    current = AnalysisFrame(
+                        index=index,
+                        pts_ms=pts_ms,
+                        rgb=previous.rgb,
+                        video_level=previous.video_level,
+                        repeats_previous=True,
+                    )
+                else:
+                    rgb_frame = reformatter.reformat(
+                        frame,
+                        width=info.analysis_width,
+                        height=info.analysis_height,
+                        format="rgb24",
+                        src_colorspace=info.color.swscale_colorspace,
+                        src_color_range=info.color.swscale_range,
+                        dst_color_range="JPEG",
+                        interpolation=interpolation,
+                    )
+                    rgb = rgb_frame.to_ndarray().astype(np.float32) / np.float32(255.0)
 
-            luma_plane = frame.reformat(format="yuv444p").to_ndarray()[0]
-            gray = av.VideoFrame.from_ndarray(luma_plane, format="gray")
-            gray = gray.reformat(
-                width=info.analysis_width,
-                height=info.analysis_height,
-                interpolation=interpolation,
-            )
-            level = gray.to_ndarray().astype(np.float32)
-            if info.color.color_range == "limited":
-                level = (level - np.float32(16.0)) / np.float32(219.0)
-            else:
-                level = level / np.float32(255.0)
-            np.clip(level, 0.0, 1.0, out=level)
+                    luma_plane = frame.reformat(format="yuv444p").to_ndarray()[0]
+                    gray = av.VideoFrame.from_ndarray(luma_plane, format="gray")
+                    gray = gray.reformat(
+                        width=info.analysis_width,
+                        height=info.analysis_height,
+                        interpolation=interpolation,
+                    )
+                    level = gray.to_ndarray().astype(np.float32)
+                    if info.color.color_range == "limited":
+                        level = (level - np.float32(16.0)) / np.float32(219.0)
+                    else:
+                        level = level / np.float32(255.0)
+                    np.clip(level, 0.0, 1.0, out=level)
+                    current = AnalysisFrame(
+                        index=index, pts_ms=pts_ms, rgb=rgb, video_level=level
+                    )
 
-            yield AnalysisFrame(index=index, pts_ms=pts_ms, rgb=rgb, video_level=level)
-            index += 1
+                last_pts_ms = pts_ms
+                previous = current
+                yield current
+                index += 1
+        except (av.FFmpegError, OSError) as exc:
+            raise UnsupportedInput(f"{path} could not be decoded: {exc}") from exc

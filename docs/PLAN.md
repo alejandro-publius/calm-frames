@@ -20,38 +20,48 @@ every seek path is safe. Any Vega video app can add it with a small hook.
 | Phase | What it is | State |
 |---|---|---|
 | 0 | Machine, repo, licence, CI | Done. CI green on ubuntu runners. The head-start kits never arrived, so everything they were meant to bring was written here. |
-| 1 | Vega day-one probes | Done on the virtual device. The app plays a Blender title, the cover harness runs, and the GATE 1 analysis is rehearsed. The parts that need a screen wait for the stick. |
-| 2 | flashmap v1 and screening day | flashmap v1 is built and tested. Screening media is downloaded with licences recorded. GATE 2 is Fri Sep 25. |
+| 1 | Vega day-one probes | Done on the virtual device. The app plays a Blender title and the cover harness runs. The parts that need a screen wait for the stick. No timing number yet: see below. |
+| 2 | flashmap v1 and screening day | flashmap v1 is built and tested. Screening media is downloaded with licences recorded. GATE 2's target is already met. |
 | 3 | Pipeline and Plan B | Local pipeline, verify step and CDK skeleton are in. Nothing is deployed. GATE 3 is Fri Oct 2. |
 | 4 | The app | Not started beyond the cover layer and the harness. Kid mode, the parent area, seek safety and the hook come next. |
 | 5 | Evaluation | docs/EVAL_PLAN.md is committed. Runs Oct 5 to 16. |
 | 6 | Security and engineering | gitleaks in CI with a config that was checked both ways. Make targets and release builds still to do. |
-| 7 | Submission package | Not started. Oct 14 to 22. |
+| 7 | Submission package | **Drafted early, Sep 17.** README, docs/SUBMISSION.md, docs/FRICTION_LOG.md, docs/OPEN_SOURCE_PR.md and docs/VIDEO_SCRIPT.md are written. Each one carries empty rows where a measurement has not happened, and a list of what needs Alex. |
 
-## What the kits were meant to bring, and what replaced it
+## The withdrawn timing number
 
-The head-start kits (`day-one-head-start.zip`) never arrived. Rather than
-wait, each piece was built here:
+There is no cover lead time figure yet, from any run, on any device, and the
+submission documents say so plainly rather than leaving a gap that looks like
+an oversight. A rehearsal run appeared to show all twenty markers covered in
+time. The run never played: the player reported positions up to about a
+quarter of a second and got no further, while the cover scheduler, which runs
+on a wall clock by design, kept advancing its own estimate and fired every
+cover on time against it. A stricter second script refused to count any of it.
+Both analysis scripts now require a position report from the player before a
+lead time is counted. `results/gate1_software_vvd.json` is the citable record:
+zero trials counted, 150 dropped. The full retraction is in docs/GATES.md.
 
-| Missing | Replaced by |
+`results/vvd_timeupdate_stats.json` is unaffected and is still the argument for
+scheduling ahead rather than reacting.
+
+## Phase 7, what is written and what it still needs
+
+| File | State |
 |---|---|
-| flashmap | `flashmap/`, written from scratch, with every threshold quoted in docs/SPEC_SOURCES.md |
-| calm-timing | `eval/marker_clip.py` for the marker clip and schedule, `eval/vvd_timing_run.py` for a run, `eval/gate1_rehearsal.py` for the analysis |
-| evkit.readme_sync | `eval/readme_sync.py`, checked both ways |
-| evkit.friction | `docs/friction_pending.md`, which moves into the kit's format if it ever turns up |
-| calm-vega-notes | Measured directly: the device facts in docs/GATES.md and CLAUDE.md came from running the thing |
-| rubric-amazon.md | The rules were read from Devpost and recorded in docs/STATUS.md |
-| outreach-kit.md | `docs/outreach/`, written from the build prompt's constraints |
+| README.md | Written. Thesis, architecture diagram, required-tech table with exact file and line, results tables synced from `results/`, install steps for the stick and the virtual device, limits, safety wording, licences. The demo PIN is the one gap: the parent area lands in phase 4. |
+| docs/SUBMISSION.md | Every Devpost field drafted. Product feedback answers Amazon's five questions for nine tools. Fourteen feature requests with priorities, led by a system-wide Fire TV "dim flashing lights" setting. Twelve items need Alex, listed in one table at the end. |
+| docs/FRICTION_LOG.md | The eleven entries in Amazon's six-field format. docs/friction_pending.md is kept as the working notes, because the lanes still add to it. |
+| docs/OPEN_SOURCE_PR.md | Target picked, fix written, tests written and seen to fail without the fix. The branch is not created and nothing is pushed: it has to live in a fork under Alex's account. |
+| docs/VIDEO_SCRIPT.md | Timed to 2:55, with the safety and rights checks, the shot list, and what has to exist before it can be filmed. |
 
-If the kits turn up, treat them as a second opinion rather than a drop-in
-replacement, and re-record any number that came from our version.
-
-## The next three gates
+## The next three gates, plus the one date that is new
 
 1. **GATE 1, overlay timing on the stick.** Wed Sep 23, Fri Sep 25 at the
-   latest. Needs the stick, a phone at 240 fps and a TV in game mode. The
-   harness and the analysis are ready and rehearsed.
-2. **GATE 2, screening day.** Fri Sep 25. Needs at least 15 real flagged
-   segments from at least 4 sources.
+   latest. Needs the stick, a phone at 240 fps and a TV in game mode. This is
+   the only thing that can produce a lead time number.
+2. **GATE 2, screening day.** Fri Sep 25. The target of 15 flagged segments
+   from 4 sources is already met by `results/screening.json`.
 3. **GATE 3, end to end on the stick.** Fri Oct 2. Upload a title, get a
    verified map and a safe rendition, play it in kid mode.
+4. **Upstream pull request open.** Mon Oct 12, so the Devpost contribution URL
+   exists. The work is done; opening it needs a fork under Alex's account.

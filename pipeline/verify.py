@@ -33,7 +33,7 @@ from typing import Sequence
 
 from . import PipelineError
 from .catalog import STATUS_FAILED, STATUS_VERIFIED, read_entry, update_index, write_entry
-from .flashmap_adapter import FlashmapAdapter, MapFormatError, load_map
+from .flashmap_adapter import FlashMapDoc, FlashmapAdapter, MapFormatError, load_map
 from .hashing import sha256_file
 from .hideplan import DEFAULT_CALM_MARGIN_MS, HidePlan, build_cover_intervals, is_calm
 from .layout import TitleLayout

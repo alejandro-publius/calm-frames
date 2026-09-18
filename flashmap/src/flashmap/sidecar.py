@@ -23,6 +23,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 from . import signing
 from .analyze import AnalysisResult
+from .picture import DETECTED
 
 __all__ = [
     "SIDECAR_VERSION",
@@ -59,6 +60,38 @@ def _now_iso() -> str:
     )
 
 
+def _picture_block(result: AnalysisResult) -> dict[str, Any]:
+    """The `picture` block, including the rectangle in the source file's own coded pixels.
+
+    `coded` is what a re-encode of this file is measured against later. Analysis pixels depend
+    on the analysis width, which is a setting, so they are no use for carrying a rectangle from
+    one file to another. Coded pixels are the file.
+    """
+    source = result.source
+    block: dict[str, Any] = {
+        **result.picture.as_dict(),
+        "source": result.picture_source,
+        "coded": result.picture.scaled_to(source.coded_width, source.coded_height),
+    }
+    if result.picture_source != DETECTED and result.detected_picture is not None:
+        detected = result.detected_picture
+        block["detected"] = {
+            "left": detected.left,
+            "top": detected.top,
+            "width": detected.width,
+            "height": detected.height,
+            "letterbox": detected.letterbox,
+            "pillarbox": detected.pillarbox,
+            "coded": detected.scaled_to(source.coded_width, source.coded_height),
+        }
+        block["note"] = (
+            "The rectangle in this map was carried in from another file's map, not detected "
+            "here. Area fractions were measured on it, not on the full coded frame. What this "
+            "file's own detector found is under `detected`."
+        )
+    return block
+
+
 def build_map(result: AnalysisResult, created_utc: str | None = None) -> dict[str, Any]:
     """Turn an analysis into the version 1 document, unsigned."""
     from . import __version__
@@ -84,7 +117,7 @@ def build_map(result: AnalysisResult, created_utc: str | None = None) -> dict[st
             "frame_interval_ms": {k: round(v, 3) for k, v in result.frame_interval_ms.items()},
             "timestamp_source": source.timestamp_source,
         },
-        "picture": result.picture.as_dict(),
+        "picture": _picture_block(result),
         "color": {
             **source.color.as_dict(),
             "analysis_width": source.analysis_width,

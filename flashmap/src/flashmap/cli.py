@@ -22,7 +22,7 @@ from pathlib import Path
 from . import __version__
 from .analyze import AnalysisResult, analyze_file
 from .decode import ColorPolicy, UnsupportedInput
-from .picture import LetterboxSettings
+from .picture import CarriedPicture, LetterboxSettings
 from .profiles import PROFILES, get_profile
 from .room import RoomSetting
 from .sidecar import VerificationError, build_map, load_map, sign_map, verify_map, write_map
@@ -60,6 +60,48 @@ def _room_from_args(args: argparse.Namespace) -> RoomSetting | None:
     )
 
 
+def _carried_picture(map_path: str | None) -> CarriedPicture | None:
+    """Read the picture rectangle out of another map, for measuring a re-encode.
+
+    The rectangle is read in coded pixels, from `picture.coded` if the map has it, and
+    otherwise by scaling the analysis pixel rectangle back up. Older maps pre-date `coded`,
+    and refusing them would mean re-analysing files that have a perfectly good map.
+    """
+    if not map_path:
+        return None
+    document = load_map(map_path)
+    picture = document.get("picture")
+    source = document.get("source")
+    if not isinstance(picture, dict) or not isinstance(source, dict):
+        raise SystemExit(f"{map_path} has no picture rectangle to carry")
+    try:
+        coded_width = int(source["coded_width"])
+        coded_height = int(source["coded_height"])
+        coded = picture.get("coded")
+        if isinstance(coded, dict):
+            rect = {key: int(coded[key]) for key in ("left", "top", "width", "height")}
+        else:
+            frame_width = int(picture["frame_width"])
+            frame_height = int(picture["frame_height"])
+            scale_x = coded_width / frame_width
+            scale_y = coded_height / frame_height
+            rect = {
+                "left": int(round(int(picture["left"]) * scale_x)),
+                "top": int(round(int(picture["top"]) * scale_y)),
+                "width": int(round(int(picture["width"]) * scale_x)),
+                "height": int(round(int(picture["height"]) * scale_y)),
+            }
+    except (KeyError, TypeError, ValueError, ZeroDivisionError) as exc:
+        raise SystemExit(f"{map_path} has no picture rectangle that can be carried: {exc}")
+    return CarriedPicture(
+        **rect,
+        coded_width=coded_width,
+        coded_height=coded_height,
+        letterbox=bool(picture.get("letterbox", False)),
+        pillarbox=bool(picture.get("pillarbox", False)),
+    )
+
+
 def _analyze(args: argparse.Namespace, path: Path) -> AnalysisResult:
     profile = get_profile(args.profile, peak_nits=getattr(args, "peak_nits", None))
     return analyze_file(
@@ -71,6 +113,7 @@ def _analyze(args: argparse.Namespace, path: Path) -> AnalysisResult:
         letterbox=LetterboxSettings(),
         chunk_frames=args.chunk_frames,
         chunk_overlap=args.chunk_overlap,
+        carried_picture=_carried_picture(getattr(args, "picture_from", None)),
     )
 
 
@@ -87,6 +130,14 @@ def _describe(result: AnalysisResult) -> str:
     )
     if bars:
         where += f" after removing {' and '.join(bars)} bars"
+    if result.picture_source != "detected":
+        detected = result.detected_picture
+        where += f", rectangle {result.picture_source} in, not detected here"
+        if detected is not None:
+            where += (
+                f" (this file's own detector found {detected.width}x{detected.height} "
+                f"at {detected.left},{detected.top})"
+            )
     lines = [where]
     lines.append(
         "colour: "
@@ -210,6 +261,15 @@ def _add_common(parser: argparse.ArgumentParser) -> None:
         type=int,
         default=720,
         help="picture height at which an untagged stream is decoded as BT.709 instead of BT.601",
+    )
+    parser.add_argument(
+        "--picture-from",
+        default=None,
+        help=(
+            "measure on the picture rectangle in this map instead of detecting one. For a "
+            "re-encode of the file that map describes: re-encoding nudges the outermost rows "
+            "and columns, and one row is enough to move every area fraction."
+        ),
     )
     parser.add_argument("--chunk-frames", type=int, default=None, help="analyse in chunks this big")
     parser.add_argument(

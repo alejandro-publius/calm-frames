@@ -60,7 +60,7 @@ jobs:
               pip install -e "./$pkg[dev]" || pip install -e "./$pkg"
             fi
           done
-          pip install pytest
+          pip install pytest==9.1.1
       - name: Test
         run: |
           # Skip anything marked slow: the full conformance suite runs locally

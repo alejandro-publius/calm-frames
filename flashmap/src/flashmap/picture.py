@@ -16,7 +16,21 @@ from dataclasses import dataclass
 import numpy as np
 from numpy.typing import NDArray
 
-__all__ = ["LetterboxSettings", "PictureRect", "detect_picture"]
+__all__ = [
+    "LetterboxSettings",
+    "PictureRect",
+    "CarriedPicture",
+    "DETECTED",
+    "CARRIED",
+    "detect_picture",
+    "rect_in_frame",
+]
+
+# How the rectangle a map was measured on was arrived at.
+DETECTED = "detected"
+"""Found by the detector, in this file."""
+CARRIED = "carried"
+"""Taken from another map, because this file is a re-encode of the file that map describes."""
 
 
 @dataclass(frozen=True)
@@ -77,6 +91,63 @@ class PictureRect:
                 "not on the full coded frame. Letterbox and pillarbox bars were removed first."
             ),
         }
+
+
+@dataclass(frozen=True)
+class CarriedPicture:
+    """A picture rectangle lifted out of another map, in that file's coded pixels.
+
+    Coded pixels rather than analysis pixels, because the analysis width is a setting and the
+    coded frame is the file. A rectangle carried into a file with a different coded size means
+    nothing, so the coded size travels with it and is checked on arrival.
+    """
+
+    left: int
+    top: int
+    width: int
+    height: int
+    coded_width: int
+    coded_height: int
+    letterbox: bool = False
+    pillarbox: bool = False
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "left": self.left,
+            "top": self.top,
+            "width": self.width,
+            "height": self.height,
+            "coded_width": self.coded_width,
+            "coded_height": self.coded_height,
+            "letterbox": self.letterbox,
+            "pillarbox": self.pillarbox,
+        }
+
+
+def rect_in_frame(carried: CarriedPicture, frame_width: int, frame_height: int) -> PictureRect:
+    """A carried rectangle, expressed in an analysis frame of this size.
+
+    The rectangle is clamped to the frame. A rectangle that does not fit is a rectangle from
+    somewhere else, and the caller checks the coded size before it gets here.
+    """
+    if carried.coded_width <= 0 or carried.coded_height <= 0:
+        raise ValueError("a carried picture needs a coded frame size")
+    scale_x = frame_width / carried.coded_width
+    scale_y = frame_height / carried.coded_height
+    left = max(0, min(frame_width - 1, int(round(carried.left * scale_x))))
+    top = max(0, min(frame_height - 1, int(round(carried.top * scale_y))))
+    width = max(1, min(frame_width - left, int(round(carried.width * scale_x))))
+    height = max(1, min(frame_height - top, int(round(carried.height * scale_y))))
+    return PictureRect(
+        left=left,
+        top=top,
+        width=width,
+        height=height,
+        letterbox=carried.letterbox,
+        pillarbox=carried.pillarbox,
+        frame_width=frame_width,
+        frame_height=frame_height,
+    )
 
 
 def _leading_run(flags: NDArray[np.bool_]) -> int:
