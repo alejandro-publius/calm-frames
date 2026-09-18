@@ -106,6 +106,7 @@ import {
   setFloor,
   setProfileSettings,
 } from './profiles';
+import { forgetProfile } from './hideLogStore';
 import ShieldBadge from './ShieldBadge';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle } from './titleStatus';
@@ -369,6 +370,10 @@ const ParentAreaScreen = ({
                       testID={`${testID}-remove-confirm`}
                       label={removeKidLabel(editingProfile.name)}
                       onPress={() => {
+                        // The confirmation says the record goes too, so it
+                        // goes. Before this the entries stayed in the store
+                        // out of sight and the Everyone view still held them.
+                        forgetProfile(editingProfile.id);
                         onFamilyChange(removeProfile(family, editingProfile.id));
                         setAskedToRemove(null);
                         setEditingId(EVERYONE_ID);

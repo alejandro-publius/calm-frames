@@ -56,6 +56,8 @@ import {
   recordHide,
   resetHideLogs,
   UNATTRIBUTED_PROFILE_ID,
+  forgetProfile,
+  subscribeHideLogs,
 } from '../../src/calmframes/hideLogStore';
 import { OFFLINE_MAP_JSON } from '../../src/calmframes/offlineMapText';
 import { allProfileHides, logForProfile } from '../../src/calmframes/profiles';
@@ -363,5 +365,53 @@ describe('the hide log', () => {
     expect(screen.getByTestId('kid-mode-parent-total').props.children).toBe(
       'Nothing has been hidden yet.',
     );
+  });
+});
+
+describe('removing a kid removes their record', () => {
+  /**
+   * The confirmation a parent reads says the hidden segment record goes with
+   * the kid. Until forgetProfile existed it did not: the entries stayed in the
+   * module level store, out of sight, and the Everyone view would still have
+   * flattened them in. A promise a screen makes is a thing the code owes.
+   *
+   * Seen to fail. Making forgetProfile return without touching `logs` reads
+   * `expect(received).toBeUndefined() / Received: [{...}]` on the first case,
+   * and `expect(jest.fn()).toHaveBeenCalled() / Number of calls: 0` on the
+   * second.
+   */
+  const hide = (profileId: string, titleId: string) =>
+    recordHide(
+      {
+        atMs: 1_000,
+        titleId,
+        titleName: 'Test pattern',
+        positionMs: 1_000,
+        durationMs: 1_000,
+        cause: 'schedule',
+      },
+      { profileId, profileName: profileId },
+    );
+
+  it('forgets the entries, and leaves every other kid alone', () => {
+    resetHideLogs();
+    hide('kid-a', 't1');
+    hide('kid-b', 't2');
+    expect(readHideLogs()['kid-a'].entries).toHaveLength(1);
+
+    forgetProfile('kid-a');
+
+    expect(readHideLogs()['kid-a']).toBeUndefined();
+    expect(readHideLogs()['kid-b'].entries).toHaveLength(1);
+  });
+
+  it('tells anyone watching the store that it changed', () => {
+    resetHideLogs();
+    hide('kid-a', 't1');
+    const heard = jest.fn();
+    const stop = subscribeHideLogs(heard);
+    forgetProfile('kid-a');
+    stop();
+    expect(heard).toHaveBeenCalled();
   });
 });

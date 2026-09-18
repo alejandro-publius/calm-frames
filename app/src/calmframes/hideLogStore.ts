@@ -126,6 +126,29 @@ export function readHideLogs(): ProfileLogs {
 }
 
 /** Empty it. For tests, and for a household that asks for it later. */
+/**
+ * Forget one kid's record, for good.
+ *
+ * Called when a profile is removed. The confirmation a parent reads says the
+ * hidden segment record goes with the kid, and until this existed it did not:
+ * the entries stayed in the module level store, out of sight, and the Everyone
+ * view would still have flattened them in. A promise a screen makes is a thing
+ * the code owes.
+ */
+export function forgetProfile(id: string): void {
+  if (!(id in logs)) {
+    return;
+  }
+  const next: ProfileLogs = {};
+  for (const [profileId, entries] of Object.entries(logs)) {
+    if (profileId !== id) {
+      next[profileId] = entries;
+    }
+  }
+  logs = next;
+  publish();
+}
+
 export function resetHideLogs(): void {
   logs = emptyProfileLogs();
   publish();
