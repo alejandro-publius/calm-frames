@@ -110,6 +110,14 @@ jobs:
         working-directory: app
         run: npm run ui:flashmap
 
+      - name: Check every image the app and the listing ship
+        # The screens above are what the app draws. These are what it ships: the
+        # icon the platform reads and the tile the Appstore shows. Each is
+        # analysed on its own, and eval/tests/test_brand_assets.py holds the
+        # check both to covering all of them and to failing on one that really
+        # flashes.
+        run: python eval/brand_assets_check.py
+
   hardening:
     name: Mutation gate, property tests and the map fuzz corpus
     runs-on: ubuntu-latest
