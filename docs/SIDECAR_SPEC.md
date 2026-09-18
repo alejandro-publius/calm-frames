@@ -225,7 +225,7 @@ overlap. A player hides the union.
 | `end_ms` | integer | **hide up to here**, inclusive of the last offending frame |
 | `flash_first_ms` | integer | timestamp of the first offending flash. For reporting, not for hiding. |
 | `flash_last_ms` | integer | timestamp of the last offending flash. For reporting, not for hiding. |
-| `reason` | string | `general` or `red` |
+| `reason` | string | `general`, `red` or `pattern`. A `pattern` segment comes from the regular pattern rule, not from a flash rule, and the fields below that talk about flashes do not apply to it. |
 | `area_fraction` | number | 0 to 1, the largest share of an area window the flashing filled. Measured on the picture. |
 | `area_window` | string | the name of the window `area_fraction` was measured in |
 | `triggered_by` | array of string | the names of every area window that went over the limit |
@@ -243,8 +243,37 @@ is on purpose: the interval always contains the flashing and always starts befor
 | `pass` | boolean | true when `segments` is empty |
 | `segment_count` | integer | |
 | `hidden_ms` | integer | total length of the merged segments |
-| `general_segment_count`, `red_segment_count` | integer | |
+| `general_segment_count`, `red_segment_count` | integer | Flash segments only. A `pattern` segment is in neither. |
+| `pattern_segment_count` | integer | regular pattern segments, counted apart from the flash ones |
+| `pattern_exemption_count` | integer | how many patterns were found and then exempted, see `pattern_exemptions` |
+| `flash_pass`, `pattern_pass` | boolean | the two verdicts, separable, so nobody has to subtract one from the other |
+| `pattern_rule_applied` | boolean | false on a profile with no pattern rule, which is every WCAG profile |
+| `pattern_rule_source` | string or null | where the rule's numbers come from, carried with every finding |
 | `area_measured_on` | string | `"picture"` |
+
+## `pattern_exemptions[]`
+
+Present when the profile has a pattern rule. One entry per pattern that met the count, area and
+contrast conditions and was then let off by the spec's smooth-flow exemption.
+
+They are written down rather than dropped for one reason: the exemption is the riskiest
+judgement in the rule. A pattern that is wrongly exempted is a hazard reaching a child, and a
+reader has to be able to see every time it was applied and disagree. The analyzer only applies
+it when the flow is unambiguous, and treats an uncertain motion classification as moving, which
+takes the stricter 25% area limit and no exemption.
+
+## A note on the pattern rule, for anyone implementing this
+
+The regular pattern rule is ITU-R BT.1702-3, Attachment 1 to Annex 1, which the ITU labels
+**informative** and introduces with the words "is used by some administrations". It is quotable
+and it is not a requirement, and every map that carries a pattern finding says so in
+`profile.pattern_rule_source` and on the segment itself.
+
+**WCAG 2.2 SC 2.3.1 has no regular pattern rule.** A `pattern` segment must never be reported as
+a WCAG finding. The word `stripe` does not appear in that criterion.
+
+A player that does not implement patterns should still hide a `pattern` segment, because the
+map says to hide it. What it must not do is describe the hide as a WCAG one.
 
 ## `signature`
 
