@@ -20,6 +20,7 @@
  */
 
 import { MapRejection } from './flashMap';
+import { HideLogEntry } from './hideLog';
 import { CheckedTitle } from './titleStatus';
 
 /**
@@ -149,6 +150,61 @@ export const PROFILES_KID_TITLE = 'Who is watching';
 export const PROFILES_PARENT_TITLE = 'Whose settings';
 export const EVERYONE_LABEL = 'Everyone';
 
+/**
+ * The answer to the picker's question, as a sentence under the row.
+ *
+ * It used to be a word in brackets on the chosen chip, and that had two
+ * problems. Brackets are a printing convention that reads as noise from a
+ * sofa. And a word that only appears on one chip makes that chip wider than
+ * the others, so choosing somebody moved every chip after them along the row.
+ * A row of controls sliding sideways is motion, and kid mode has none.
+ *
+ * Off the chip, the chips never change size, and the answer gets room to be a
+ * sentence rather than a fragment. The chip still carries the state for a
+ * screen reader, in `chosenWord` below.
+ */
+export function whoIsWatching(name: string): string {
+  return `${name} is watching.`;
+}
+
+export function whoseSettingsThese(name: string): string {
+  return `These settings are for ${name}.`;
+}
+
+/** The state word a screen reader hears on the chosen chip, in each place. */
+export const WATCHING_STATE_WORD = 'watching';
+export const SETTINGS_STATE_WORD = 'showing';
+
+/**
+ * Section headings in the parent area, and whose they are.
+ *
+ * The heading for the record already said the name. The two above it did not,
+ * so a parent who had scrolled past the picker was reading "How strict" with
+ * no way to tell whether they were about to change the floor under every kid
+ * or one kid's own setting. Those two are not the same thing and the screen
+ * should never let them look the same. Every section says whose it is now.
+ */
+export const STRICTNESS_TITLE = 'How strict';
+export const ROOM_TITLE = 'The room';
+export const HIDDEN_TITLE = 'What was hidden';
+export const CHECKED_TITLES_TITLE = 'Titles';
+
+export function sectionFor(title: string, name: string | null): string {
+  return name ? `${title} for ${name}` : title;
+}
+
+/** A second kid called Kid is two chips nobody can tell apart. */
+export function nextKidName(base: string, taken: string[]): string {
+  if (!taken.includes(base)) {
+    return base;
+  }
+  let index = 2;
+  while (taken.includes(`${base} ${index}`)) {
+    index += 1;
+  }
+  return `${base} ${index}`;
+}
+
 /** The rule about profiles, said the same way as the one about rooms. */
 export const PROFILE_ONLY_ADDS =
   'A profile can only add hidden parts to what Everyone is set to. It never takes any away.';
@@ -156,9 +212,133 @@ export const PROFILE_ONLY_ADDS =
 /** Four is the most, and the parent area says so before the button is gone. */
 export const PROFILES_FULL = 'Four profiles is the most. Remove one to add another.';
 
+/** The record, before anything has been hidden. */
+export const NOTHING_HIDDEN_YET = 'Nothing has been hidden yet.';
+
 /** One kid's record, before anything has been hidden for them. */
 export function nothingHiddenFor(name: string): string {
   return `Nothing has been hidden for ${name} yet.`;
+}
+
+/**
+ * How much was hidden, and whether the list under it is all of it.
+ *
+ * The screen draws the twenty most recent lines and keeps two hundred. It used
+ * to say "43 parts" and then show twenty lines without mentioning it, which is
+ * the one thing this record cannot afford to do: it is the only evidence a
+ * household gets that the thing they set up is working, so it says where the
+ * list stops.
+ *
+ * Long totals are read as minutes. "312 seconds in all" is arithmetic a tired
+ * parent has to do in their head.
+ */
+export function hiddenSummary(count: number, totalMs: number, shown: number): string {
+  const parts = `${count} part${count === 1 ? '' : 's'}`;
+  const line = `${parts}, ${describeHiddenTotal(totalMs)} in all.`;
+  return shown < count ? `${line} The ${shown} most recent are below.` : line;
+}
+
+function plural(value: number, word: string): string {
+  return `${value} ${word}${value === 1 ? '' : 's'}`;
+}
+
+export function describeHiddenTotal(totalMs: number): string {
+  const seconds = Math.round(totalMs / 1000);
+  if (seconds < 60) {
+    return plural(seconds, 'second');
+  }
+  const minutes = Math.floor(seconds / 60);
+  const rest = seconds % 60;
+  return rest === 0
+    ? plural(minutes, 'minute')
+    : `${plural(minutes, 'minute')} ${plural(rest, 'second')}`;
+}
+
+const WEEKDAYS = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+/** The local day an entry belongs to, as a key the screen can group on. */
+export function hideDayKey(atMs: number): string {
+  const when = new Date(atMs);
+  const month = when.getMonth() + 1;
+  const day = when.getDate();
+  return `${when.getFullYear()}-${month < 10 ? `0${month}` : month}-${
+    day < 10 ? `0${day}` : day
+  }`;
+}
+
+/**
+ * The heading over one day of the record.
+ *
+ * A line in the record says the time and nothing else, so two hundred entries
+ * read as one undated pile: "19:30 hid 4 seconds" could be tonight or last
+ * week. The day belongs above the lines rather than repeated on every one of
+ * them, which is also how a person would write the list out by hand.
+ *
+ * The names are spelled out here rather than taken from the platform, because
+ * the parent area is measured in tests and a date that changes with the locale
+ * data on the machine is a date no test can hold.
+ */
+export function hideDayHeading(atMs: number, nowMs: number): string {
+  const key = hideDayKey(atMs);
+  if (key === hideDayKey(nowMs)) {
+    return 'Today';
+  }
+  const yesterday = new Date(nowMs);
+  yesterday.setDate(yesterday.getDate() - 1);
+  if (key === hideDayKey(yesterday.getTime())) {
+    return 'Yesterday';
+  }
+  const when = new Date(atMs);
+  return `${WEEKDAYS[when.getDay()]} ${when.getDate()} ${MONTHS[when.getMonth()]}`;
+}
+
+/** One day of the record, newest day first, newest line first inside it. */
+export interface HideDay {
+  key: string;
+  heading: string;
+  /** The index each line has in the whole list, so a line keeps its place. */
+  lines: Array<{ index: number; entry: HideLogEntry }>;
+}
+
+export function hidesByDay(entries: HideLogEntry[], nowMs: number): HideDay[] {
+  const days: HideDay[] = [];
+  entries.forEach((entry, index) => {
+    const key = hideDayKey(entry.atMs);
+    const last = days[days.length - 1];
+    if (last && last.key === key) {
+      last.lines.push({ index, entry });
+      return;
+    }
+    days.push({
+      key,
+      heading: hideDayHeading(entry.atMs, nowMs),
+      lines: [{ index, entry }],
+    });
+  });
+  return days;
 }
 
 /**

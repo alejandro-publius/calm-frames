@@ -22,20 +22,34 @@ import {
   APPROVED_SAFETY_CLAUSE,
   BACKEND_UNREACHABLE,
   BACKEND_UNREACHABLE_EMPTY,
+  describeHiddenTotal,
+  EVERYONE_LABEL,
   EXPLAINER_LINES,
   EXPLAINER_TARGET_SECONDS,
   EXPLAINER_WORDS_PER_MINUTE,
+  HIDDEN_TITLE,
+  hiddenSummary,
+  hideDayHeading,
+  nextKidName,
   Notice,
   noticeForTitle,
+  nothingHiddenFor,
+  NOTHING_HIDDEN_YET,
   NO_TITLES,
   PIN_NOT_SET,
   PIN_PROMPT,
+  PROFILE_ONLY_ADDS,
   readingSeconds,
   ROOM_ONLY_ADDS,
+  ROOM_TITLE,
   SAFETY_NOTE,
+  sectionFor,
+  STRICTNESS_TITLE,
   TITLE_FAILED,
   TITLE_PENDING,
   TITLE_STALE,
+  whoIsWatching,
+  whoseSettingsThese,
 } from '../../src/calmframes/copy';
 import { CheckedTitle } from '../../src/calmframes/titleStatus';
 
@@ -99,6 +113,18 @@ describe('house style', () => {
       ...ALL_NOTICES.flatMap((notice) => [notice.title, notice.detail]),
       ...EXPLAINER_LINES,
       ROOM_ONLY_ADDS,
+      PROFILE_ONLY_ADDS,
+      // The parent area's own words, which used to be literals in the JSX and
+      // so were never read by this check at all.
+      NOTHING_HIDDEN_YET,
+      nothingHiddenFor('Robin'),
+      whoIsWatching('Robin'),
+      whoseSettingsThese(EVERYONE_LABEL),
+      hiddenSummary(25, 100_000, 20),
+      sectionFor(STRICTNESS_TITLE, 'Robin'),
+      sectionFor(ROOM_TITLE, 'Robin'),
+      sectionFor(HIDDEN_TITLE, 'Robin'),
+      hideDayHeading(new Date(2026, 8, 17).getTime(), new Date(2026, 8, 20).getTime()),
     ];
     for (const line of lines) {
       expect(`${line} has em dash: ${line.includes('—')}`).toBe(
@@ -133,6 +159,55 @@ describe('house style', () => {
     const card = cardAt([], 0, { rejection: 'missing' });
     expect(card.detail).toMatch(/picture stays hidden/);
     expect(TITLE_PENDING.detail).toMatch(/picture stays hidden/);
+  });
+});
+
+describe('the record in the parent area', () => {
+  it('counts one part as one part, and reads long totals as minutes', () => {
+    expect(hiddenSummary(1, 4_000, 1)).toBe('1 part, 4 seconds in all.');
+    // One second used to read "1 seconds".
+    expect(describeHiddenTotal(1_000)).toBe('1 second');
+    expect(describeHiddenTotal(59_000)).toBe('59 seconds');
+    expect(describeHiddenTotal(120_000)).toBe('2 minutes');
+    // 312 seconds in all is arithmetic a tired parent should not have to do.
+    expect(describeHiddenTotal(312_000)).toBe('5 minutes 12 seconds');
+  });
+
+  it('says where the list stops, and stays quiet when it does not stop', () => {
+    expect(hiddenSummary(25, 100_000, 20)).toBe(
+      '25 parts, 1 minute 40 seconds in all. The 20 most recent are below.',
+    );
+    expect(hiddenSummary(3, 12_000, 3)).toBe('3 parts, 12 seconds in all.');
+  });
+
+  it('names the day rather than leaving a bare time to be guessed at', () => {
+    const now = new Date(2026, 8, 17, 21, 0).getTime();
+    expect(hideDayHeading(new Date(2026, 8, 17, 19, 30).getTime(), now)).toBe('Today');
+    expect(hideDayHeading(new Date(2026, 8, 16, 19, 30).getTime(), now)).toBe(
+      'Yesterday',
+    );
+    expect(hideDayHeading(new Date(2026, 8, 11, 19, 30).getTime(), now)).toBe(
+      'Friday 11 September',
+    );
+    // The first of a month is not yesterday just because the number is lower.
+    expect(hideDayHeading(new Date(2026, 8, 1, 19, 30).getTime(), now)).toBe(
+      'Tuesday 1 September',
+    );
+  });
+
+  it('says the same thing whether the record is one kid or the household', () => {
+    expect(NOTHING_HIDDEN_YET).toBe('Nothing has been hidden yet.');
+    expect(nothingHiddenFor('Robin')).toBe('Nothing has been hidden for Robin yet.');
+  });
+});
+
+describe('naming a new kid', () => {
+  it('reaches for the plain name first, then a number nobody has', () => {
+    expect(nextKidName('Kid', ['Robin'])).toBe('Kid');
+    expect(nextKidName('Kid', ['Kid'])).toBe('Kid 2');
+    expect(nextKidName('Kid', ['Kid', 'Kid 2'])).toBe('Kid 3');
+    // A gap is filled rather than skipped past.
+    expect(nextKidName('Kid', ['Kid', 'Kid 3'])).toBe('Kid 2');
   });
 });
 

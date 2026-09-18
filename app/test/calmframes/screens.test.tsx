@@ -570,11 +570,93 @@ describe('family profiles on the screens', () => {
         onChooseProfile={onChooseProfile}
       />,
     );
-    expect(
-      screen.getByTestId('kid-home-profiles-profile-1-name').props.children.join(''),
-    ).toContain('(watching)');
+    // The answer is a sentence under the row, not a word on a chip.
+    expect(screen.getByTestId('kid-home-profiles-chosen').props.children).toBe(
+      'Robin is watching.',
+    );
     fireEvent.press(screen.getByTestId('kid-home-profiles-profile-2'));
     expect(onChooseProfile).toHaveBeenCalledWith(twoKids.profiles[1]);
+  });
+
+  /**
+   * The chips do not change size when the choice moves.
+   *
+   * They used to. The chosen chip carried " (watching)" inside it, so choosing
+   * somebody made their chip wider and everything after it slid along the row.
+   * There is no way to measure a width here, because react-test-renderer does
+   * no layout, so the guard is on the cause rather than the effect: a chip's
+   * text is the name and nothing else, whoever is chosen. Put the word back on
+   * the chip and this goes red.
+   *
+   * Seen to fail. With the chosen word put back on the chip:
+   *
+   *     ● family profiles on the screens › draws the same text on every chip
+   *       whoever is chosen
+   *
+   *       - Expected  - 2
+   *       + Received  + 2
+   *
+   *         Array [
+   *       -   "Robin, (watching)",
+   *       -   "Sam,",
+   *       +   "Robin,",
+   *       +   "Sam, (watching)",
+   *         ]
+   *
+   *       at Object.toEqual (test/calmframes/screens.test.tsx:620:24)
+   */
+  it('draws the same text on every chip whoever is chosen', () => {
+    const chipText = () =>
+      twoKids.profiles.map((profile) =>
+        String(
+          screen.getByTestId(`kid-home-profiles-${profile.id}-name`).props.children,
+        ),
+      );
+
+    const shelf = (activeProfileId: string) => (
+      <KidHomeScreen
+        titles={[makeTitle('ok', 'verified')]}
+        onOpen={jest.fn()}
+        profiles={twoKids.profiles}
+        activeProfileId={activeProfileId}
+        onChooseProfile={jest.fn()}
+      />
+    );
+
+    const view = render(shelf('profile-1'));
+    const before = chipText();
+    view.rerender(shelf('profile-2'));
+
+    expect(chipText()).toEqual(before);
+    expect(before).toEqual(['Robin', 'Sam']);
+    // Only the sentence under the row moved.
+    expect(screen.getByTestId('kid-home-profiles-chosen').props.children).toBe(
+      'Sam is watching.',
+    );
+  });
+
+  /** Seen to fail with the radiogroup role taken off the row. */
+  it('reads the row as one question rather than five loose buttons', () => {
+    render(
+      <KidHomeScreen
+        titles={[makeTitle('ok', 'verified')]}
+        onOpen={jest.fn()}
+        profiles={twoKids.profiles}
+        activeProfileId="profile-1"
+        onChooseProfile={jest.fn()}
+      />,
+    );
+    // A radio group, labelled with the question it is asking, and the chosen
+    // chip carries the state a radio carries rather than only a fill colour.
+    expect(screen.getByLabelText('Who is watching').props.accessibilityRole).toBe(
+      'radiogroup',
+    );
+    expect(
+      screen.getByTestId('kid-home-profiles-profile-1').props.accessibilityState,
+    ).toEqual({ checked: true, selected: true });
+    expect(
+      screen.getByTestId('kid-home-profiles-profile-2').props.accessibilityState,
+    ).toEqual({ checked: false, selected: false });
   });
 
   it('leaves the shelf exactly as it was for a household with no profiles', () => {
@@ -675,6 +757,136 @@ describe('family profiles on the screens', () => {
     expect(screen.getByTestId('parent-area-chime-label').props.children).toBe(
       CHIME_OFF_LABEL,
     );
+  });
+
+  /**
+   * A parent who has scrolled past the picker still knows whose screen it is.
+   *
+   * The record already said the name. "How strict" and "The room" did not, and
+   * those two are the ones where the difference matters: the floor under every
+   * kid and one kid's own setting look identical once the picker is off the
+   * top of the screen, and they are not the same thing at all.
+   *
+   * Seen to fail. With `sectionFor(STRICTNESS_TITLE, whose)` back to the bare
+   * 'How strict', the first line said:
+   *
+   *     Unable to find an element with text: How strict for Everyone
+   */
+  it('says whose each section is, so a scrolled screen cannot be misread', () => {
+    renderFamilyArea();
+    expect(screen.getByText('How strict for Everyone')).toBeTruthy();
+    expect(screen.getByText('The room for Everyone')).toBeTruthy();
+    expect(screen.getByText('What was hidden for Everyone')).toBeTruthy();
+    expect(screen.getByTestId('parent-area-profiles-chosen').props.children).toBe(
+      'These settings are for Everyone.',
+    );
+
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
+    expect(screen.getByText('How strict for Sam')).toBeTruthy();
+    expect(screen.getByText('The room for Sam')).toBeTruthy();
+    expect(screen.getByText('What was hidden for Sam')).toBeTruthy();
+    expect(screen.getByTestId('parent-area-profiles-chosen').props.children).toBe(
+      'These settings are for Sam.',
+    );
+  });
+
+  /**
+   * Seen to fail with `whose` naming the household whether or not a picker is
+   * on screen: "Unable to find an element with text: How strict".
+   */
+  it('leaves the headings bare for a household that has never made a profile', () => {
+    render(
+      <ParentAreaScreen
+        gate={gate}
+        onGateChange={jest.fn()}
+        settings={DEFAULT_SETTINGS}
+        onSettingsChange={jest.fn()}
+        log={emptyHideLog()}
+        titles={[]}
+        nowMs={() => 0}
+      />,
+    );
+    for (const digit of '1357') {
+      fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
+    }
+    expect(screen.getByText('How strict')).toBeTruthy();
+    expect(screen.getByText('The room')).toBeTruthy();
+    expect(screen.getByText('What was hidden')).toBeTruthy();
+    expect(screen.queryByTestId('parent-area-profiles')).toBeNull();
+  });
+
+  /**
+   * The summary and the lines under it agree.
+   *
+   * The screen draws twenty lines and the store keeps two hundred, so a busy
+   * household saw a count of forty three and twenty lines with nothing to say
+   * why. This is the one record a household gets that any of this works, so it
+   * says where the list stops.
+   *
+   * Seen to fail. With the third sentence taken out of hiddenSummary:
+   *
+   *     Expected: "25 parts, 1 minute 40 seconds in all. The 20 most recent are below."
+   *     Received: "25 parts, 1 minute 40 seconds in all."
+   */
+  it('says where the list stops rather than showing twenty of twenty five', () => {
+    let logs = emptyProfileLogs();
+    for (let index = 0; index < 25; index += 1) {
+      logs = addProfileHide(logs, 'profile-1', hide(1_000 + index * 1_000, 'Title ok'));
+    }
+    renderFamilyArea({ profileLogs: logs });
+
+    expect(screen.getByTestId('parent-area-total').props.children).toBe(
+      '25 parts, 1 minute 40 seconds in all. The 20 most recent are below.',
+    );
+    expect(screen.getByTestId('parent-area-log-19')).toBeTruthy();
+    expect(screen.queryByTestId('parent-area-log-20')).toBeNull();
+  });
+
+  /**
+   * A line says the time and nothing else, so the day goes above the lines.
+   *
+   * "19:30 hid 4 seconds" could be tonight or last Tuesday, and two hundred of
+   * them read as one undated pile.
+   *
+   * Seen to fail, with `hideDayHeading` returning Today for every entry: this
+   * one and the day test in copy.test.ts both went red.
+   */
+  it('puts a day over the lines, because a time on its own could be any day', () => {
+    const tonight = new Date(2026, 8, 17, 20, 15).getTime();
+    const nightBefore = new Date(2026, 8, 16, 19, 30).getTime();
+    let logs = emptyProfileLogs();
+    logs = addProfileHide(logs, 'profile-1', hide(nightBefore, 'Older title'));
+    logs = addProfileHide(logs, 'profile-1', hide(tonight, 'Tonight title'));
+    renderFamilyArea({
+      profileLogs: logs,
+      nowMs: () => new Date(2026, 8, 17, 21, 0).getTime(),
+    });
+
+    expect(screen.getByTestId('parent-area-log-day-2026-09-17').props.children).toBe(
+      'Today',
+    );
+    expect(screen.getByTestId('parent-area-log-day-2026-09-16').props.children).toBe(
+      'Yesterday',
+    );
+    // The lines keep their place in the whole list, newest first.
+    expect(screen.getByTestId('parent-area-log-0').props.children).toContain(
+      'Tonight title',
+    );
+    expect(screen.getByTestId('parent-area-log-1').props.children).toContain(
+      'Older title',
+    );
+  });
+
+  /** Seen to fail with `nextKidName` handing back the base name every time. */
+  it('gives a new kid a name nobody else in the household has', () => {
+    // There is no keyboard in the parent area, so two chips both reading Kid
+    // would be a picker with no way out of the ambiguity.
+    const withKid: Family = addProfile(newFamily(DEFAULT_SETTINGS, 'Kid'), 'Robin');
+    const { onFamilyChange } = renderFamilyArea({ family: withKid });
+    fireEvent.press(screen.getByTestId('parent-area-add-profile'));
+
+    const next: Family = onFamilyChange.mock.calls[0][0];
+    expect(next.profiles.map((one) => one.name)).toEqual(['Kid', 'Robin', 'Kid 2']);
   });
 
   it('stops at four kids and says so', () => {

@@ -43,6 +43,8 @@ import {
   KID_HOME_TITLE,
   NO_TITLES,
   PROFILES_KID_TITLE,
+  WATCHING_STATE_WORD,
+  whoIsWatching,
 } from './copy';
 import ProfilePicker from './ProfilePicker';
 import { Profile } from './profiles';
@@ -146,6 +148,10 @@ const KidHomeScreen = ({
         <ProfilePicker
           testID={`${testID}-profiles`}
           title={PROFILES_KID_TITLE}
+          chosenWord={WATCHING_STATE_WORD}
+          chosenLine={whoIsWatching(
+            (profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name,
+          )}
           profiles={profiles}
           activeProfileId={activeProfileId ?? profiles[0].id}
           onChoose={onChooseProfile}

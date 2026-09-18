@@ -926,3 +926,124 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   **Cost:** an app that installs the hook package gets the guard without the
   registry lookup. `lookupMap` is in the package and callable, so a host app
   can do what the shelf does, and this is a seam rather than a wall.
+
+## 2026-09-18: The picker's answer comes off the chip, so choosing moves nothing
+
+- **Decision:** the chosen profile is named in a sentence under the row, not in
+  brackets on the chip. The chip carries the name and nothing else.
+  **Why:** the chosen chip used to read "Robin (watching)", so it was wider
+  than it had been a moment earlier and every chip after it slid along the row.
+  A row of controls moving sideways when a child presses one is motion, and kid
+  mode has none. The component's own header already claimed nothing moves when
+  focus moves, which was true and beside the point: it was choosing that moved
+  things, not focusing. Reserving the space on every chip was the other way out
+  and it cannot be done here without a magic width, because react-test-renderer
+  does no layout and a width nothing can measure is a width no test can hold.
+  Off the chip the geometry is fixed by construction, and the guard is on the
+  cause rather than the effect: every chip draws the same text whoever is
+  chosen. Put the word back and that test goes red, which it was seen to do.
+  **Cost:** one more line of vertical space on the shelf, and the answer is a
+  short read away from the chip rather than on it. The chip still carries the
+  state for a screen reader, in its label and in `accessibilityState.checked`.
+
+- **Decision:** the row is a radio group and says so, and its title is a header.
+  **Why:** five controls where exactly one is true is a radio group whether or
+  not it is built from radio buttons. Without the role a screen reader read the
+  row as five unrelated buttons with no question attached to them. The chips
+  also carried `selected` alone, and `checked` is what a radio carries.
+  **Cost:** the preset, television and seat rows in the parent area now carry
+  `checked` too, for consistency on one screen. `FirstRunScreen.tsx` has three
+  more radio groups still on `selected` alone. That file belongs to another
+  lane and is left for whoever holds it.
+
+## 2026-09-18: The record says whose it is, where it stops, and what day it is
+
+- **Decision:** every section in the parent area names whose it is, not only
+  the record. "How strict for Sam", "The room for Sam", "What was hidden for
+  Sam", and "for Everyone" when the household floor is the one open.
+  **Why:** the picker scrolls off the top of a television screen quickly. Below
+  it, "How strict" looked the same whether it was about to change the floor
+  under every kid or one kid's own setting, and those are not the same thing.
+  The record already said the name, so the screen was half doing this already.
+  A household that has never made a profile reads exactly what it read before,
+  and there is a test on that so the bare case cannot quietly acquire a name.
+  **Cost:** three headings are longer. On a 1728 unit line at 44 units they fit.
+
+- **Decision:** the summary says where the list stops, and the lines are
+  grouped under the day they happened on.
+  **Why:** two things the record was not saying. It drew twenty lines, kept two
+  hundred, and printed "43 parts" above twenty lines with nothing to explain
+  the difference. And a line says the time and nothing else, so "19:30 hid 4
+  seconds" could be tonight or last Tuesday. This is the only evidence a
+  household ever gets that the thing they set up is working, so it is the last
+  place to let a number and the thing under it disagree. The day names are
+  spelled out in `copy.ts` rather than taken from the platform, because a date
+  that changes with the locale data on the machine is a date no test can hold.
+  **Cost:** `describeHideEntry` still prints a bare time, because `hideLog.ts`
+  belongs to another lane. The day is above the lines rather than on them,
+  which is where a person writing the list by hand would put it anyway.
+
+- **Decision:** the record is body text on the ground, and the totals with it.
+  **Why:** the lines were the smallest and dimmest thing on the screen, in the
+  same style as the asides beside them. That put the proof below the notes
+  about it. They are cream at 36 units now, 7.60 to 1 on teal, and the asides
+  stay dim so the two are still told apart. No palette token changed.
+  **Cost:** a long record is taller. It was already a scroll.
+
+- **Decision:** a new kid is named apart from the start: Kid, then Kid 2.
+  **Why:** "Add a kid" passed an empty name, `cleanName` turned it into "Kid",
+  and a second press gave a household two chips reading Kid with no way to tell
+  them apart and no keyboard in the parent area to rename either.
+  **Cost:** none. `MAX_PROFILE_NAME` is 16 and "Kid 4" is five.
+
+## 2026-09-18: Recommendation on the profile picker having no lock
+
+Not a decision. This is a product call and it belongs to whoever owns the
+safety wording, so it is written down rather than taken.
+
+- **What is true today:** any child can press any chip on the shelf. The
+  household floor still applies underneath, and WCAG sits under that, so no
+  switch can take anybody below either. Per-kid strictness above the floor is
+  advisory and a child can shed it by pressing the other kid's name.
+- **What that actually costs:** two things, and the second is the worse one.
+  A six year old set to Extra cautious who presses the twelve year old's chip
+  gets the twelve year old's setting, which the parent chose for a different
+  child. And the hide log follows the active profile, so the evening lands in
+  the wrong kid's record. A parent reading "nothing has been hidden for Ava
+  yet" when Ava watched as Ben is being told something untrue by the one screen
+  that exists to tell them the truth, and nothing on it hints that it happened.
+- **Recommendation:** do not put the parent PIN on the picker. Extend the rule
+  the app already states twice instead. The room can only add hides. A profile
+  can only add hides. So a choice a child can make alone can only add hides:
+  switching to a profile at least as strict as the one running is free, and
+  switching to a laxer one asks for the PIN. `PRESET_STRICTNESS` and
+  `roomFieldFraction` already rank the two profiles and are already tested, so
+  the comparison is one that exists rather than a new judgement.
+- **Why that and not a lock on the whole picker:** a PIN in front of "who is
+  watching" takes a grown up to answer a question a child asked, on the one
+  screen in this app built for the child. Most switches are sideways or upward
+  and would never see the gate. A household where every kid sits at the floor
+  would never see it at all.
+- **What it costs:** an older sibling cannot get their own shelf back without
+  a grown up once a younger one has switched to theirs. That is the direction
+  to fail in, and it should be said in words on screen when it happens rather
+  than left as a chip that does not respond.
+- **Worth doing whichever way this goes:** the hide log store already records
+  `profileId` and `profileName` on every entry. The parent area does not yet
+  show when the shelf was switched, so a parent cannot see the switch that made
+  their record misleading. That is a smaller fix than any lock.
+
+## 2026-09-18: Two findings from this review that were left alone
+
+- **The television and seat chips carry "chosen" as a fill and nothing else.**
+  Their accessibility labels say the word, so a screen reader is fine, but a
+  person on the sofa has only the colour. That is the same defect the profile
+  picker had and it wants the same answer. It is on a different surface from
+  the two this pass was asked to review, so it is recorded rather than fixed.
+- **Removing a kid has no confirmation.** `Remove Robin` sits one press from
+  the picker and takes a profile and its settings with it. A confirmation is
+  new behaviour and a new state to record in `ALL_UI_FRAMES`, so it is named
+  here for whoever picks it up.
+- **One edit outside this lane.** `ProfilePicker` gained a required prop, so
+  `KidHomeScreen.tsx` had to pass it. That call site is the only change in the
+  file: three lines, no behaviour of its own.

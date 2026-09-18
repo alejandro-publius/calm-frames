@@ -31,6 +31,7 @@ import {
   scale,
 } from './calmStyles';
 import {
+  CHECKED_TITLES_TITLE,
   CHIME_NOTE,
   CHIME_OFF_LABEL,
   CHIME_ON_LABEL,
@@ -38,9 +39,14 @@ import {
   EVERYONE_LABEL,
   EXPLAINER_LINES,
   EXPLAINER_TITLE,
+  HIDDEN_TITLE,
+  hiddenSummary,
+  hidesByDay,
+  nextKidName,
   Notice,
   noticeForTitle,
   nothingHiddenFor,
+  NOTHING_HIDDEN_YET,
   PARENT_AREA_TITLE,
   PIN_LOCKED_TITLE,
   PIN_NOT_SET,
@@ -50,6 +56,11 @@ import {
   PROFILES_FULL,
   PROFILES_PARENT_TITLE,
   ROOM_ONLY_ADDS,
+  ROOM_TITLE,
+  sectionFor,
+  SETTINGS_STATE_WORD,
+  STRICTNESS_TITLE,
+  whoseSettingsThese,
 } from './copy';
 import {
   describeRoom,
@@ -68,6 +79,7 @@ import {
   addProfile,
   allProfileHides,
   canAddProfile,
+  DEFAULT_PROFILE_NAME,
   describeFloorEffect,
   emptyProfileLogs,
   EVERYONE_ID,
@@ -90,6 +102,16 @@ import {
   PARENT_PROFILE_FRAME,
   PARENT_WRONG_PIN_FRAME,
 } from './uiFrames';
+
+/**
+ * How many lines of the record the screen draws.
+ *
+ * The store keeps two hundred. Twenty is as many as reads as a list rather
+ * than a wall from across a room, and the summary above them says so when
+ * there are more, because a count that does not match the lines under it is
+ * the kind of quiet untruth this record cannot carry.
+ */
+const LOG_LINES_SHOWN = 20;
 
 export interface ParentAreaScreenProps {
   gate: PinGateState;
@@ -194,7 +216,9 @@ const ParentAreaScreen = ({
   if (!unlocked) {
     return (
       <View testID={testID} style={styles.screen}>
-        <Text style={styles.title}>{PARENT_AREA_TITLE}</Text>
+        <Text style={styles.title} accessibilityRole="header">
+          {PARENT_AREA_TITLE}
+        </Text>
         <View style={styles.block}>
           <StatusNotice testID={`${testID}-message`} notice={notice} />
         </View>
@@ -258,19 +282,30 @@ const ParentAreaScreen = ({
   const floorEffect =
     family && editingProfile ? describeFloorEffect(family, editingProfile) : null;
 
+  // Whose sections these are. Null with no picker on screen, so a household
+  // that has never made a profile reads exactly what it read before.
+  const whose = family && onFamilyChange ? editingProfile?.name ?? EVERYONE_LABEL : null;
+
+  // The lines actually drawn, and the days they fall on.
+  const shownEntries = shownLog.entries.slice(0, LOG_LINES_SHOWN);
+  const days = hidesByDay(shownEntries, nowMs());
+
   return (
     <ScrollView
       testID={`${testID}-open`}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      <Text style={styles.title}>{PARENT_AREA_TITLE}</Text>
+      <Text style={styles.title} accessibilityRole="header">
+        {PARENT_AREA_TITLE}
+      </Text>
 
       {family && onFamilyChange ? (
         <>
           <ProfilePicker
             testID={`${testID}-profiles`}
             title={PROFILES_PARENT_TITLE}
-            chosenWord="chosen"
+            chosenWord={SETTINGS_STATE_WORD}
+            chosenLine={whoseSettingsThese(whose ?? EVERYONE_LABEL)}
             profiles={pickable}
             activeProfileId={editingId}
             onChoose={(profile) => setEditingId(profile.id)}
@@ -288,7 +323,20 @@ const ParentAreaScreen = ({
               <CalmButton
                 testID={`${testID}-add-profile`}
                 label="Add a kid"
-                onPress={() => onFamilyChange(addProfile(family, ''))}
+                // Named apart from the start. Two chips both reading Kid is a
+                // picker nobody can use, and there is no keyboard here to
+                // rename one with.
+                onPress={() =>
+                  onFamilyChange(
+                    addProfile(
+                      family,
+                      nextKidName(
+                        DEFAULT_PROFILE_NAME,
+                        family.profiles.map((one) => one.name),
+                      ),
+                    ),
+                  )
+                }
               />
             ) : (
               <Text style={styles.note} testID={`${testID}-profiles-full`}>
@@ -311,7 +359,9 @@ const ParentAreaScreen = ({
         </>
       ) : null}
 
-      <Text style={styles.section}>How strict</Text>
+      <Text style={styles.section} accessibilityRole="header">
+        {sectionFor(STRICTNESS_TITLE, whose)}
+      </Text>
       {PRESET_NAMES.map((name: PresetName) => {
         const chosen = shown.preset === name;
         return (
@@ -319,7 +369,7 @@ const ParentAreaScreen = ({
             key={name}
             testID={`${testID}-preset-${name}`}
             accessibilityRole="radio"
-            accessibilityState={{ selected: chosen }}
+            accessibilityState={{ checked: chosen, selected: chosen }}
             accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
             activeOpacity={1}
             onFocus={() => setFocusedRow(`preset-${name}`)}
@@ -339,7 +389,9 @@ const ParentAreaScreen = ({
         );
       })}
 
-      <Text style={styles.section}>The room</Text>
+      <Text style={styles.section} accessibilityRole="header">
+        {sectionFor(ROOM_TITLE, whose)}
+      </Text>
       <Text style={styles.rowDetail} testID={`${testID}-room`}>
         {describeRoom(shown)}
       </Text>
@@ -352,7 +404,7 @@ const ParentAreaScreen = ({
               key={`tv-${inches}`}
               testID={`${testID}-tv-${inches}`}
               accessibilityRole="radio"
-              accessibilityState={{ selected: chosen }}
+              accessibilityState={{ checked: chosen, selected: chosen }}
               accessibilityLabel={`${inches} inch television${chosen ? ', chosen' : ''}`}
               activeOpacity={1}
               onFocus={() => setFocusedRow(`tv-${inches}`)}
@@ -377,7 +429,7 @@ const ParentAreaScreen = ({
               key={`seat-${inches}`}
               testID={`${testID}-seat-${inches}`}
               accessibilityRole="radio"
-              accessibilityState={{ selected: chosen }}
+              accessibilityState={{ checked: chosen, selected: chosen }}
               accessibilityLabel={`${feet} feet away${chosen ? ', chosen' : ''}`}
               activeOpacity={1}
               onFocus={() => setFocusedRow(`seat-${inches}`)}
@@ -394,30 +446,44 @@ const ParentAreaScreen = ({
         })}
       </View>
 
-      <Text style={styles.section}>
-        {editingProfile ? `What was hidden for ${editingProfile.name}` : 'What was hidden'}
+      <Text style={styles.section} accessibilityRole="header">
+        {sectionFor(HIDDEN_TITLE, whose)}
       </Text>
-      <Text style={styles.rowDetail} testID={`${testID}-total`}>
+      <Text style={styles.total} testID={`${testID}-total`}>
         {shownLog.entries.length === 0
           ? editingProfile
             ? nothingHiddenFor(editingProfile.name)
-            : 'Nothing has been hidden yet.'
-          : `${shownLog.entries.length} part${
-              shownLog.entries.length === 1 ? '' : 's'
-            }, ${Math.round(totalHiddenMs(shownLog) / 1000)} seconds in all.`}
+            : NOTHING_HIDDEN_YET
+          : hiddenSummary(
+              shownLog.entries.length,
+              totalHiddenMs(shownLog),
+              shownEntries.length,
+            )}
       </Text>
-      {shownLog.entries.slice(0, 20).map((entry, index) => (
-        <Text
-          key={`${entry.atMs}-${index}`}
-          testID={`${testID}-log-${index}`}
-          style={styles.logLine}>
-          {describeHideEntry(entry)}
-        </Text>
+      {days.map((day) => (
+        <View key={day.key}>
+          <Text
+            testID={`${testID}-log-day-${day.key}`}
+            style={styles.logDay}
+            accessibilityRole="header">
+            {day.heading}
+          </Text>
+          {day.lines.map((line) => (
+            <Text
+              key={`${line.entry.atMs}-${line.index}`}
+              testID={`${testID}-log-${line.index}`}
+              style={styles.logLine}>
+              {describeHideEntry(line.entry)}
+            </Text>
+          ))}
+        </View>
       ))}
 
       {family && onFamilyChange ? (
         <>
-          <Text style={styles.section}>{CHIME_SECTION_TITLE}</Text>
+          <Text style={styles.section} accessibilityRole="header">
+            {CHIME_SECTION_TITLE}
+          </Text>
           <Text style={styles.note} testID={`${testID}-chime-note`}>
             {CHIME_NOTE}
           </Text>
@@ -434,7 +500,9 @@ const ParentAreaScreen = ({
         </>
       ) : null}
 
-      <Text style={styles.section}>Titles</Text>
+      <Text style={styles.section} accessibilityRole="header">
+        {CHECKED_TITLES_TITLE}
+      </Text>
       {titles.map((entry) => {
         const titleNotice = noticeForTitle(entry);
         return (
@@ -458,7 +526,9 @@ const ParentAreaScreen = ({
         );
       })}
 
-      <Text style={styles.section}>{EXPLAINER_TITLE}</Text>
+      <Text style={styles.section} accessibilityRole="header">
+        {EXPLAINER_TITLE}
+      </Text>
       {EXPLAINER_LINES.map((line, index) => (
         <Text
           key={line}
@@ -548,10 +618,31 @@ const styles = StyleSheet.create({
     backgroundColor: CALM_COLORS.SURFACE,
   },
   choiceLabel: { color: CALM_COLORS.TEXT, fontSize: scale(CALM_TYPE.SMALL) },
-  logLine: {
-    color: CALM_COLORS.TEXT_DIM,
+  /**
+   * The record reads as the evidence it is.
+   *
+   * These lines were the dimmest and smallest thing on the screen, in the same
+   * style as the asides beside them, which put the one proof a household has
+   * that any of this works below the notes about it. They are body text on the
+   * ground now, cream on teal at 7.60 to 1, and the asides stay dim so the two
+   * are still told apart.
+   */
+  total: {
+    color: CALM_COLORS.TEXT,
+    fontSize: scale(CALM_TYPE.BODY),
+    marginBottom: scale(CALM_SPACE.TIGHT),
+  },
+  logDay: {
+    color: CALM_COLORS.TEXT,
     fontSize: scale(CALM_TYPE.SMALL),
-    marginBottom: scale(6),
+    fontWeight: '600',
+    marginTop: scale(CALM_SPACE.ROW),
+    marginBottom: scale(CALM_SPACE.TIGHT),
+  },
+  logLine: {
+    color: CALM_COLORS.TEXT,
+    fontSize: scale(CALM_TYPE.BODY),
+    marginBottom: scale(CALM_SPACE.TIGHT),
   },
   explainerLine: {
     color: CALM_COLORS.TEXT,
