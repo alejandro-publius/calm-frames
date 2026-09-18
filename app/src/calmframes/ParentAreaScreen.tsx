@@ -75,6 +75,8 @@ export interface ParentAreaScreenProps {
   onBack?: () => void;
   /** Offered only when no PIN exists, to send the parent to the first run. */
   onSetPin?: () => void;
+  /** Opens the credits. Behind the PIN, because it is a parent's screen. */
+  onCredits?: () => void;
   testID?: string;
 }
 
@@ -88,6 +90,7 @@ const ParentAreaScreen = ({
   nowMs = Date.now,
   onBack,
   onSetPin,
+  onCredits,
   testID = 'parent-area',
 }: ParentAreaScreenProps) => {
   const [unlocked, setUnlocked] = React.useState(false);
@@ -306,9 +309,18 @@ const ParentAreaScreen = ({
         </Text>
       ))}
 
-      {onBack ? (
+      {onBack || onCredits ? (
         <View style={styles.buttons}>
-          <CalmButton testID={`${testID}-back`} label="Back" onPress={onBack} />
+          {onBack ? (
+            <CalmButton testID={`${testID}-back`} label="Back" onPress={onBack} />
+          ) : null}
+          {onCredits ? (
+            <CalmButton
+              testID={`${testID}-credits`}
+              label="Credits and licences"
+              onPress={onCredits}
+            />
+          ) : null}
         </View>
       ) : null}
     </ScrollView>

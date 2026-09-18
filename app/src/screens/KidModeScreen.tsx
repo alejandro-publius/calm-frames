@@ -39,6 +39,7 @@ import {
   OFFLINE_VIDEO_URI,
   offlineTitle,
 } from '../calmframes/offlineTitle';
+import CreditsScreen from '../calmframes/CreditsScreen';
 import ParentAreaScreen from '../calmframes/ParentAreaScreen';
 import { emptyPinGate, PinGateState } from '../calmframes/parentGate';
 import { CatalogTitle, CheckedTitle, checkTitles } from '../calmframes/titleStatus';
@@ -49,7 +50,12 @@ import {
 } from '../components/navigation/types';
 import { TitleData } from '../types/TitleData';
 
-export type KidModeView = 'first-run' | 'home' | 'details' | 'parent';
+export type KidModeView =
+  | 'first-run'
+  | 'home'
+  | 'details'
+  | 'parent'
+  | 'credits';
 
 export interface KidModeScreenProps {
   navigation: StackNavigationProp<AppStackParamList, Screens.KID_MODE_SCREEN>;
@@ -207,6 +213,19 @@ const KidModeScreen = ({
         nowMs={nowMs}
         onBack={() => setView('home')}
         onSetPin={() => setView('first-run')}
+        onCredits={() => setView('credits')}
+      />
+    );
+  }
+
+  // Behind the PIN on purpose. The credits are a parent's screen, and CC BY
+  // asks for attribution somewhere a person can actually read it, which NOTICE
+  // in the repository is not for somebody holding a remote.
+  if (view === 'credits') {
+    return (
+      <CreditsScreen
+        testID={`${testID}-credits`}
+        onBack={() => setView('parent')}
       />
     );
   }

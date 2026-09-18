@@ -370,6 +370,21 @@ describe('ParentAreaScreen', () => {
     }
   };
 
+  it('offers the credits, and only once the PIN is right', () => {
+    // CC BY asks for attribution where a person can read it. NOTICE ships with
+    // the source, which is not much use to somebody holding a remote, so this
+    // is the one route to it in the running app. Behind the PIN because the
+    // credits are a parent's screen, not part of kid mode.
+    const onCredits = jest.fn();
+    renderArea({ onCredits });
+
+    expect(screen.queryByTestId('parent-area-credits')).toBeNull();
+
+    enter('1357');
+    fireEvent.press(screen.getByTestId('parent-area-credits'));
+    expect(onCredits).toHaveBeenCalled();
+  });
+
   it('shows only the keypad until the PIN is right', () => {
     renderArea();
     expect(screen.getByTestId('parent-area')).toBeTruthy();
