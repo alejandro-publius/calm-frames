@@ -35,6 +35,30 @@ export {
   NO_CARD,
 } from './engine/cards';
 export type { Card, CardKind } from './engine/cards';
+
+// The map registry: given a file this app already has, find out whether a
+// checked map exists for it. lookupMap does the whole job, verifying the index,
+// re-checking the map it names through the same signature path the player uses,
+// and refusing with a reason rather than guessing.
+export {
+  DEFAULT_MAX_REGISTRY_AGE_MS,
+  SUPPORTED_REGISTRY_VERSION,
+  entryFor,
+  isInsideRegistry,
+  lookupMap,
+  registryRefusalMessage,
+  resolveMapUrl,
+  verifyRegistry,
+} from './engine/mapRegistry';
+export type {
+  LookupOptions,
+  LookupVerdict,
+  RegistryEntry,
+  RegistryRefusal,
+  RegistryVerdict,
+  VerifiedRegistry,
+  VerifyRegistryOptions,
+} from './engine/mapRegistry';
 export { default as CoverLayer, COVER_Z_INDEX } from './engine/CoverLayer';
 export type { CoverLayerProps, ReferencePatch } from './engine/CoverLayer';
 export {

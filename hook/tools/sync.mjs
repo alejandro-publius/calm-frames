@@ -38,6 +38,7 @@ export const MIRRORED = [
   'flashMap.ts',
   'hideLog.ts',
   'household.ts',
+  'mapRegistry.ts',
   'mediaClock.ts',
   'SafeMediaControlHandler.ts',
   'seekSafety.ts',
