@@ -394,7 +394,7 @@ A run that produced covers, position reports and errors produced no readable rec
 
 **Task.** Play our own two-minute marker clip on the device, served from the machine running the measurement.
 
-**Steps.** Served `marker.mp4` over plain HTTP from a local server, pointed the app at the URL, and watched both the device log and the app's own event stream.
+**Steps.** Served `media/markers.mp4` over plain HTTP from a local server, pointed the app at the URL, and watched both the device log and the app's own event stream.
 
 **Expected.** It plays, or it fails with an error the app can show.
 
