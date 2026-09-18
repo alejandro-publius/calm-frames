@@ -734,3 +734,68 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   uploaded clip may well be a hazard file, which is the reason somebody
   uploads it.
   **Cost:** none. The report is built in memory either way.
+
+## 2026-09-18: the regular pattern rule, and the judgement that had to fail safe
+
+- **Decision:** the smooth flow exemption in ITU-R BT.1702-3 Attachment 1 to Annex 1
+  is applied only when the flow is unambiguous, an uncertain motion class takes
+  the 25% area rather than the 40% one, and every exemption that is applied is
+  written into the map as its own interval in `pattern_exemptions`.
+  **Why:** the attachment's two area limits turn on a motion class, and its
+  exemption turns one off entirely. Of the four calls the detector can make,
+  three cost a few covered seconds when they are wrong and one hides a hazard
+  from a child. So the exemption needs a full history of frame to frame
+  comparisons, all one way, none still, none ambiguous, none under the match
+  floor, and anything short of that is `uncertain`. Uncertain never reaches the
+  exemption and never gets the wider area. An exemption is never a silence: it
+  is an interval in the map with the stripe count and the area that were let
+  through, so a reviewer sees it.
+  **Cost:** measured, not guessed. On the pattern conformance suite, of 40 clips
+  drawn flowing smoothly one way, which the attachment exempts outright, 15 were
+  exempted and 25 were hidden. The fine ones drift less than a pixel of the
+  analysis grid per frame, or far enough to alias, and neither is a flow this
+  detector will swear to. A pattern between the two area limits is also hidden
+  for the first few frames while the history fills: 23 windows across the suite.
+  Both are in `results/conformance_pattern.json` under
+  `where_the_false_positives_are` and `smooth_flow_exemption`.
+
+- **Decision:** a pattern segment is its own kind. It sits in the map's
+  `segments` array beside the flash segments, in time order, carrying
+  `reason: "pattern"`, none of a flash segment's fields, and
+  `is_a_wcag_finding: false`. `summary` carries `flash_pass` and `pattern_pass`
+  separately.
+  **Why:** WCAG 2.2 SC 2.3.1 does not cover regular patterns at all, so a
+  pattern hide must never move a WCAG verdict, and Attachment 1 is informative
+  and says its criteria are what some administrations use, so the source has to
+  travel with the finding. Putting it in the same array is what lets a player,
+  the pipeline adapter and verify consume it with no change at all: an unknown
+  reason already falls through to the strictest handling.
+  **Cost:** `summary.pass` for the broadcast profile now includes the pattern
+  rule, so a title with a big regular pattern fails that profile where it passed
+  before. `flash_pass` is the field to read for the WCAG story.
+
+- **Decision:** the stripe count gate lives in exactly one place,
+  `PatternTracker.min_bars`, and the limit check downstream is a plain area
+  comparison.
+  **Why:** it was in two, and neither could be tested. Dropping `min_bars` by a
+  pair left every test green, because the downstream comparison went on holding
+  the line, and loosening the downstream comparison left every test green
+  because `min_bars` did. Two guards that cover for each other are one guard
+  nobody can break on purpose.
+  **Cost:** the reader has to know that a scanline under the gate contributes no
+  pixels, so a picture with too few stripes has an area of zero. There is a test
+  for that, `test_a_picture_under_the_stripe_gate_has_no_pattern_area_at_all`.
+
+- **Decision:** `detect_picture` crops a bar only when the opposite edge has one
+  too and there is no dark line inside the picture.
+  **Why:** the verifier found a whole frame black to peak white six pair grating
+  passing the broadcast profile. Its outermost bar is dark, black sits under
+  `max_bar_luminance` on every sampled frame, and the detector cropped that bar
+  as a pillarbox. Eleven bars were left, which is five pairs, which is not more
+  than five.
+  **Cost:** both checks only ever crop less, which raises the stripe count and
+  lowers every area fraction, so it is the cautious direction for the flash
+  rules and their published precision and recall. That had to be checked rather
+  than assumed: the whole spine of the committed flash design plus 250 cross
+  product rows, 402 clips, went through the old detector and the new one on the
+  frames the generator drew, and the picture rectangle changed on none of them.
