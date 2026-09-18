@@ -138,6 +138,17 @@ We have not found an equivalent on Fire TV. That is a statement about what we lo
 
 Two differences are worth being clear about, because they are the reason this project exists rather than being a copy. Apple's detection runs on the device, in real time, on the frames as they are drawn. Calm Frames analyses the whole title ahead of time, signs the result, and the player acts on a schedule rather than on what it has just seen, which is what makes it possible to cover a flash **before** its first frame instead of dimming after it starts. And Apple's approach needs no cooperation from the app, while ours needs a signed map, which means it only ever protects content somebody measured.
 
+### How any of this would actually reach somebody
+
+The rules ask whether a project "could realistically serve an audience beyond the hackathon", and give the Fire TV Appstore as the example. So, plainly, and without promising anything:
+
+- **The analyzer and the Action need no distribution at all.** `flashmap` is Apache-2.0 and standalone. A studio, a game team or a documentation repository adopts it by copying one workflow file. That route is open today and needs nobody's permission.
+- **The sidecar spec needs adoption, not distribution.** It is worth something the moment a second player reads a map it did not make. That has not happened and it is the thing we would most like to be asked about.
+- **The hook needs publishing.** It is not on npm yet, so today an app vendors it from this repository.
+- **The app itself would need the Fire TV Appstore, and we have not started that.** No developer account submission, no listing, no policy review. A safety claim in a store listing is a different bar from a safety claim in a README, and the wording would have to be checked by someone qualified before it went near a store. **We are not claiming a route we have not walked.**
+
+The honest shape of it: three of the four things above can travel without us, and the app is the one that cannot. That is the opposite of how most entries are built, and it is deliberate.
+
 ### What has not been shown
 
 - **Nobody outside this project has used it or commented on it yet.** No parent, no clinician, no studio. [`docs/VALIDATION.md`](docs/VALIDATION.md) is the place those quotes will go, and it is marked as empty until they arrive. Nothing in this README should be read as anyone else's endorsement.
