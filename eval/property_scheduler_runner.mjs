@@ -232,9 +232,19 @@ function scheduleRun(job) {
       uncertain = true;
       coverOn = true;
       realMediaMs = seeks[seekIndex].toMediaMs;
-      // seeked, then the position report that follows it.
-      clock = setRunning(clock, true, wall);
-      report(wall, realMediaMs);
+      if (phase.kind === 'play') {
+        // seeked, then the position report that follows it.
+        clock = setRunning(clock, true, wall);
+        report(wall, realMediaMs);
+      } else {
+        // seeked carries the new position either way, so the clock learns it. What
+        // a player still stalled at that position does not send is a timeupdate,
+        // which is the rule the report loop below already follows. Inventing one
+        // started the clock inside a stall and let the estimate advance through
+        // time the playhead stood still in.
+        clock = sync(clock, realMediaMs, wall);
+        clock = setRunning(clock, false, wall);
+      }
       nextReportWall = wall + reportEveryMs;
       seekIndex += 1;
     }
