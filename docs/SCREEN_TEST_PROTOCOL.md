@@ -269,20 +269,20 @@ Say these out loud when the numbers are written up.
   warning in `quality.warnings`.
 - **A camera is a sampler, and above a certain rate it reads high.** On simulated footage the
   meter read the rate back exactly for every trial up to
-  <!--n results/meter_validation.json:published.exact_up_to_hz -->0<!--/n--> Hz. Above that it
+  <!--n results/meter_validation.json:published.exact_up_to_hz -->6<!--/n--> Hz. Above that it
   can be out by one. Across
-  <!--n results/meter_validation.json:published.exact_rate_total -->0<!--/n--> flashing trials
+  <!--n results/meter_validation.json:published.exact_rate_total -->20<!--/n--> flashing trials
   the worst it read high was
-  <!--n results/meter_validation.json:published.worst_overcount_per_second -->0<!--/n-->
+  <!--n results/meter_validation.json:published.worst_overcount_per_second -->1<!--/n-->
   flash a second and the worst it read low was
   <!--n results/meter_validation.json:published.worst_undercount_per_second -->0<!--/n-->.
   Reading high is the safe direction. Reading low is the one that would matter, and it did not
   happen in those trials.
 - **Zero on a covered run is only as strong as the runs behind it.**
   <!--n results/meter_validation.json:published.covered_runs_with_a_leak -->0<!--/n--> of
-  <!--n results/meter_validation.json:published.covered_runs -->0<!--/n--> simulated covered
+  <!--n results/meter_validation.json:published.covered_runs -->7<!--/n--> simulated covered
   runs showed a leak, which is an upper bound of
-  <!--n results/meter_validation.json:published.covered_leak_upper_95 -->0<!--/n--> at 95% by
+  <!--n results/meter_validation.json:published.covered_leak_upper_95 -->0.35433<!--/n--> at 95% by
   Wilson. That is a wide bound, and it is wide because seven runs is not many. The screen-level
   test is what narrows it.
 - **An uncalibrated run is not publishable**, and the report says so in `publishable`. So is a

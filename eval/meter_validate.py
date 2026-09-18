@@ -496,6 +496,11 @@ def publishable_numbers(rows: list[dict]) -> dict[str, object]:
         "covered_runs": len(covered),
         "covered_runs_with_a_leak": leaked,
         "covered_leak_upper_95": leak_hi,
+        "covered_leak_upper_95_method": (
+            f"Wilson score interval, 95%, two sided, no continuity correction, on "
+            f"{leaked} of {len(covered)}, from eval/metrics.py. Zero leaks is not zero risk: "
+            "this is the upper end of what seven runs can rule out."
+        ),
         "note": (
             "Simulated footage, from eval/meter_validate.py. Not a measurement of any phone, "
             "TV or stick."
@@ -521,7 +526,25 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", type=Path, default=OUT)
     parser.add_argument("--quick", action="store_true", help="a few trials, for a smoke test")
     parser.add_argument("--limit", type=int, help="stop after this many trials")
+    parser.add_argument(
+        "--resummarise",
+        action="store_true",
+        help="rebuild the summary from the trials already in --out, filming nothing",
+    )
     args = parser.parse_args(argv)
+
+    if args.resummarise:
+        # The trials are the measurement. The summary and the published block are arithmetic
+        # over them, so they can be rebuilt without filming anything again, the way
+        # eval/conformance/report.py rescores its own committed rows. A full run gives the same
+        # answer, it just takes half an hour to say it.
+        payload = json.loads(args.out.read_text())
+        payload["summary"] = summarise(payload["trials"])
+        payload["published"] = publishable_numbers(payload["trials"])
+        payload["resummarised_on"] = date.today().isoformat()
+        args.out.write_text(json.dumps(payload, indent=2) + "\n")
+        print(f"rebuilt the summary of {len(payload['trials'])} trials -> {args.out}")
+        return 0
 
     settings = meter.InstrumentSettings()
     scratch = camera.scratch_dir()

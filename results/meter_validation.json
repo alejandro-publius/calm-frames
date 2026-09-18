@@ -2,7 +2,7 @@
   "generated_on": "2026-09-17",
   "tool": "eval/meter_validate.py",
   "meter_version": "1.0.0",
-  "git_commit": "5829ca26ff461e8f766908c65289697c62f3debe",
+  "git_commit": "6d483ed43d70d99da03132464eb5a44d15f1fb01",
   "statement": "Simulated footage only. Every trial is a rendered clip filmed by the camera model in eval/meter_camera.py, so these numbers say how well the meter reads a simulated recording whose answer is known. They are not a measurement of any phone, TV or stick, and they are not evidence that the app covered anything.",
   "thresholds": {
     "source": "flashmap/docs/SPEC_SOURCES.md",
@@ -55,6 +55,7 @@
     "roi_trim_percentile": 1.0,
     "roi_inset_fraction": 0.02,
     "roi_min_area_fraction": 0.02,
+    "roi_max_area_fraction": 0.9,
     "chart_margin_fraction": 0.1,
     "patch_measure_fraction": 0.5,
     "clip_high_code": 250,
@@ -72,27 +73,27 @@
       "x1": 0.8350000000000001,
       "y1": 0.8200000000000001,
       "method": "otsu-profile",
-      "frames_sampled": 8,
+      "frames_sampled": 24,
       "fill_inside": 1.0,
-      "fill_outside": 0.02867965367965368,
-      "area_fraction_of_frame": 0.4288000000000002,
+      "fill_outside": 0.025838744588744588,
+      "area_fraction_of_frame": 0.4652777777777779,
       "inset_fraction": 0.02,
       "trim_percentile": 1.0
     },
     "calibration": {
       "gain": [
-        1.194382888874759,
-        1.1942467640178747,
-        1.1941687699899022
+        1.1944245956866861,
+        1.1942875671954791,
+        1.1942311908633145
       ],
       "offset": [
-        -0.016537252342520015,
-        -0.01647632558653909,
-        -0.01646897042023556
+        -0.01653475799843702,
+        -0.01649014557411305,
+        -0.01648185518814996
       ],
-      "max_residual_relative_luminance": 0.0059896258371254785,
-      "rms_residual_relative_luminance": 0.0032563816254511423,
-      "r_squared": 0.9999020763770654,
+      "max_residual_relative_luminance": 0.005991852150896371,
+      "rms_residual_relative_luminance": 0.003248952715268327,
+      "r_squared": 0.9999025226613681,
       "usable_patches": 10,
       "steps": 10,
       "saturation_luminance": null,
@@ -103,166 +104,167 @@
           "code": 0,
           "target_relative_luminance": 0.0,
           "camera_rgb8": [
-            33.57901785714286,
-            33.660267857142856,
-            33.59263392857143
+            33.56540178571432,
+            33.5517113095238,
+            33.58117559523806
           ],
           "usable": true,
           "clipped": false,
-          "fitted_relative_luminance": 0.0022714889693490757,
-          "residual": 0.0022714889693490757
+          "fitted_relative_luminance": 0.0021850899966208946,
+          "residual": 0.0021850899966208946
         },
         {
           "index": 1,
           "code": 28,
           "target_relative_luminance": 0.011612245179743885,
           "camera_rgb8": [
-            44.715401785714285,
-            44.582589285714285,
-            44.55379464285714
+            44.61755952380951,
+            44.63244047619043,
+            44.61674107142854
           ],
           "usable": true,
           "clipped": false,
-          "fitted_relative_luminance": 0.01435415706505592,
-          "residual": 0.002741911885312035
+          "fitted_relative_luminance": 0.01436941633720058,
+          "residual": 0.0027571711574566945
         },
         {
           "index": 2,
           "code": 57,
           "target_relative_luminance": 0.04091519690685319,
           "camera_rgb8": [
-            63.327313311688314,
-            63.23478084415584,
-            63.30722402597402
+            63.307765151515106,
+            63.2642721861472,
+            63.285376082251105
           ],
           "usable": true,
           "clipped": false,
-          "fitted_relative_luminance": 0.04335581072106974,
-          "residual": 0.0024406138142165495
+          "fitted_relative_luminance": 0.043376184793597554,
+          "residual": 0.0024609878867443633
         },
         {
           "index": 3,
           "code": 85,
           "target_relative_luminance": 0.09084171118340768,
           "camera_rgb8": [
-            84.99464285714286,
-            84.9125,
-            84.99151785714285
+            84.97782738095226,
+            84.96227678571422,
+            84.98377976190481
           ],
           "usable": true,
           "clipped": false,
-          "fitted_relative_luminance": 0.0918317426284766,
-          "residual": 0.0009900314450689146
+          "fitted_relative_luminance": 0.09190797616171191,
+          "residual": 0.0010662649783042266
         },
         {
           "index": 4,
           "code": 113,
           "target_relative_luminance": 0.1651321945016676,
           "camera_rgb8": [
-            108.40111607142858,
-            108.40870535714286,
-            108.38660714285714
+            108.41212797619045,
+            108.38816964285708,
+            108.40357142857157
           ],
           "usable": true,
           "clipped": false,
-          "fitted_relative_luminance": 0.16403539036405193,
-          "residual": -0.0010968041376156756
+          "fitted_relative_luminance": 0.16399218715921857,
+          "residual": -0.0011400073424490398
         },
         {
           "index": 5,
           "code": 142,
           "target_relative_luminance": 0.2704977910130658,
           "camera_rgb8": [
-            133.77098214285715,
-            133.78191964285713,
-            133.75446428571428
+            133.77023809523803,
+            133.76971726190476,
+            133.76369047619067
           ],
           "usable": true,
           "clipped": false,
-          "fitted_relative_luminance": 0.267196843165901,
-          "residual": -0.003300947847164837
+          "fitted_relative_luminance": 0.2671588057979821,
+          "residual": -0.0033389852150836896
         },
         {
           "index": 6,
           "code": 170,
           "target_relative_luminance": 0.4019777798321958,
           "camera_rgb8": [
-            158.95267857142858,
-            158.97142857142856,
-            158.953125
+            158.9739583333334,
+            158.97254464285726,
+            158.95446428571432
           ],
           "usable": true,
           "clipped": false,
-          "fitted_relative_luminance": 0.3973749784695476,
-          "residual": -0.004602801362648179
+          "fitted_relative_luminance": 0.3974105592522812,
+          "residual": -0.004567220579914599
         },
         {
           "index": 7,
           "code": 198,
           "target_relative_luminance": 0.5647115057049292,
           "camera_rgb8": [
-            184.6875,
-            184.71387987012986,
-            184.7148944805195
+            184.70643939393935,
+            184.7270021645021,
+            184.7073187229438
           ],
           "usable": true,
           "clipped": false,
-          "fitted_relative_luminance": 0.5608756410405458,
-          "residual": -0.0038358646643834593
+          "fitted_relative_luminance": 0.5609756374550621,
+          "residual": -0.003735868249867158
         },
         {
           "index": 8,
           "code": 227,
           "target_relative_luminance": 0.7681511472475069,
           "camera_rgb8": [
-            211.6203125,
-            211.60825892857142,
-            211.62589285714284
+            211.612351190476,
+            211.59650297619058,
+            211.60007440476173
           ],
           "usable": true,
           "clipped": false,
-          "fitted_relative_luminance": 0.7665538933082465,
-          "residual": -0.0015972539392603569
+          "fitted_relative_luminance": 0.7664718624647966,
+          "residual": -0.0016792847827102886
         },
         {
           "index": 9,
           "code": 255,
           "target_relative_luminance": 1.0,
           "camera_rgb8": [
-            238.1421875,
-            238.1419642857143,
-            238.14888392857142
+            238.1264880952381,
+            238.1421875000001,
+            238.15885416666663
           ],
           "usable": true,
           "clipped": false,
-          "fitted_relative_luminance": 1.0059896258371255,
-          "residual": 0.0059896258371254785
+          "fitted_relative_luminance": 1.0059918521508964,
+          "residual": 0.005991852150896371
         }
       ],
       "model": "per channel affine in linear light: display = gain * camera + offset",
       "colour_note": "The chart is neutral gray, so this fit corrects luminance and per channel gain. It cannot correct the camera's colour matrix, so red flash counts from camera footage are an indication and not a calibrated measurement."
     },
     "gray_field_flicker_check": {
-      "frames": 8,
-      "mean_relative_luminance": 0.21353636423458427,
-      "peak_to_peak": 0.00011344839272198204,
-      "standard_deviation": 3.428089340853411e-05,
-      "dominant_hz": 30.0,
-      "dominant_amplitude": 3.598304003050077e-05,
-      "tolerance": 0.0059896258371254785,
+      "frames": 24,
+      "mean_relative_luminance": 0.21354410751827882,
+      "peak_to_peak": 0.00011345231293480307,
+      "standard_deviation": 2.9703600043263202e-05,
+      "dominant_hz": 20.000000000000004,
+      "dominant_amplitude": 2.4853102267229828e-05,
+      "tolerance": 0.005991852150896371,
       "tolerance_source": "the worst patch residual of this take's calibration",
       "passes": true,
-      "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+      "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+      "frames_averaged": 24
     }
   },
   "summary": {
-    "trials_run": 26,
+    "trials_run": 29,
     "trials_with_an_error": 0,
     "verdict_agreement": {
-      "numerator": 26,
-      "denominator": 26,
+      "numerator": 29,
+      "denominator": 29,
       "value": 1.0,
-      "wilson_lo": 0.8712710781407846,
+      "wilson_lo": 0.8830302015002593,
       "wilson_hi": 1.0
     },
     "exact_rate_agreement_on_flashing_clips": {
@@ -281,17 +283,17 @@
     },
     "covered_runs_with_a_leak": {
       "numerator": 0,
-      "denominator": 4,
+      "denominator": 7,
       "value": 0.0,
-      "wilson_lo": 0.0,
-      "wilson_hi": 0.4898908364545973
+      "wilson_lo": 2.7755575615628914e-17,
+      "wilson_hi": 0.3543304350666875
     },
     "covered_runs_with_any_flash_counted": {
       "numerator": 0,
-      "denominator": 4,
+      "denominator": 7,
       "value": 0.0,
-      "wilson_lo": 0.0,
-      "wilson_hi": 0.4898908364545973
+      "wilson_lo": 2.7755575615628914e-17,
+      "wilson_hi": 0.3543304350666875
     },
     "by_camera_frame_rate": {
       "240fps": {
@@ -342,6 +344,24 @@
       }
     },
     "interval_method": "Wilson score interval, 95%, two sided, no continuity correction, from eval/metrics.py. The trials are simulated clips chosen by hand, not a sample from any population, so the interval describes this simulation and nothing else. A rate of 0 of n still has an upper bound, which is why it is reported that way."
+  },
+  "published": {
+    "trials": 29,
+    "trials_with_an_error": 0,
+    "verdict_correct": 29,
+    "verdict_total": 29,
+    "exact_rate_correct": 18,
+    "exact_rate_total": 20,
+    "within_one_correct": 20,
+    "within_one_total": 20,
+    "exact_up_to_hz": 6.0,
+    "worst_overcount_per_second": 1.0,
+    "worst_undercount_per_second": 0.0,
+    "covered_runs": 7,
+    "covered_runs_with_a_leak": 0,
+    "covered_leak_upper_95": 0.3543304350666875,
+    "covered_leak_upper_95_method": "Wilson score interval, 95%, two sided, no continuity correction, on 0 of 7, from eval/metrics.py. Zero leaks is not zero risk: this is the upper end of what seven runs can rule out.",
+    "note": "Simulated footage, from eval/meter_validate.py. Not a measurement of any phone, TV or stick."
   },
   "trials": [
     {
@@ -427,18 +447,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 85.57
+      "seconds": 19.06
     },
     {
       "trial": "rate_2hz_240fps",
@@ -523,18 +544,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 72.48
+      "seconds": 19.22
     },
     {
       "trial": "rate_3hz_240fps",
@@ -619,18 +641,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 93.43
+      "seconds": 14.97
     },
     {
       "trial": "rate_4hz_240fps",
@@ -715,18 +738,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 81.98
+      "seconds": 20.5
     },
     {
       "trial": "rate_5hz_240fps",
@@ -811,18 +835,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 44.37
+      "seconds": 20.34
     },
     {
       "trial": "rate_6hz_240fps",
@@ -907,18 +932,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 88.01
+      "seconds": 17.42
     },
     {
       "trial": "rate_10hz_240fps",
@@ -1003,18 +1029,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 110.48
+      "seconds": 18.58
     },
     {
       "trial": "rate_12hz_240fps",
@@ -1099,18 +1126,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 108.81
+      "seconds": 21.0
     },
     {
       "trial": "rate_1hz_60fps",
@@ -1195,18 +1223,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 30.88
+      "seconds": 8.88
     },
     {
       "trial": "rate_2hz_60fps",
@@ -1291,18 +1320,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 32.73
+      "seconds": 7.8
     },
     {
       "trial": "rate_3hz_60fps",
@@ -1387,18 +1417,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 38.36
+      "seconds": 7.54
     },
     {
       "trial": "rate_4hz_60fps",
@@ -1483,18 +1514,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 49.76
+      "seconds": 7.48
     },
     {
       "trial": "rate_5hz_60fps",
@@ -1579,18 +1611,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 49.52
+      "seconds": 8.37
     },
     {
       "trial": "rate_6hz_60fps",
@@ -1675,18 +1708,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 62.9
+      "seconds": 7.68
     },
     {
       "trial": "rate_10hz_60fps",
@@ -1771,18 +1805,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 38.83
+      "seconds": 5.84
     },
     {
       "trial": "rate_12hz_60fps",
@@ -1867,18 +1902,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 38.92
+      "seconds": 5.32
     },
     {
       "trial": "red_6hz_240fps",
@@ -1963,18 +1999,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 98.02
+      "seconds": 14.28
     },
     {
       "trial": "red_6hz_60fps",
@@ -2059,18 +2096,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 39.81
+      "seconds": 5.99
     },
     {
       "trial": "area_small_patch_240fps",
@@ -2155,18 +2193,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 91.1
+      "seconds": 13.82
     },
     {
       "trial": "area_half_patch_240fps",
@@ -2251,18 +2290,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 102.49
+      "seconds": 15.58
     },
     {
       "trial": "amplitude_below_threshold_240fps",
@@ -2347,18 +2387,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 70.02
+      "seconds": 14.46
     },
     {
       "trial": "amplitude_above_threshold_240fps",
@@ -2443,18 +2484,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 92.79
+      "seconds": 20.02
     },
     {
       "trial": "covered_static_240fps",
@@ -2539,18 +2581,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 58.94
+      "seconds": 14.54
     },
     {
       "trial": "covered_static_60fps",
@@ -2635,18 +2678,310 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 21.6
+      "seconds": 5.53
+    },
+    {
+      "trial": "covered_240fps_noisy_24",
+      "arm": "covered",
+      "what_it_tests": "a cover filmed with four times the read noise and three times the shot noise: the meter still has to sit at zero",
+      "clip": {
+        "name": "covered_240fps_noisy",
+        "flash_hz": 0.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          24,
+          24,
+          24
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 0.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.014,
+        "shot_noise": 0.018000000000000002,
+        "seed": 4242,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 0.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20295
+      },
+      "measured": {
+        "peak_flashes_per_second": 0,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 24,
+        "mean_relative_luminance": 0.19453068291100373,
+        "peak_to_peak": 0.0003863692984334144,
+        "standard_deviation": 9.527383404475826e-05,
+        "dominant_hz": 40.00000000000001,
+        "dominant_amplitude": 8.06804037724492e-05,
+        "tolerance": 0.0035678645212375293,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
+      },
+      "seconds": 17.31
+    },
+    {
+      "trial": "covered_60fps_noisy_24",
+      "arm": "covered",
+      "what_it_tests": "a cover filmed with four times the read noise and three times the shot noise: the meter still has to sit at zero",
+      "clip": {
+        "name": "covered_60fps_noisy",
+        "flash_hz": 0.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          24,
+          24,
+          24
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 0.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 60.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.014,
+        "shot_noise": 0.018000000000000002,
+        "seed": 4243,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 0.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20295
+      },
+      "measured": {
+        "peak_flashes_per_second": 0,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 150,
+        "fps_measured": 60.00008053702086,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 24,
+        "mean_relative_luminance": 0.18911223600622062,
+        "peak_to_peak": 0.0004435758135255541,
+        "standard_deviation": 9.313883111705943e-05,
+        "dominant_hz": 27.500000000000004,
+        "dominant_amplitude": 7.991242045004506e-05,
+        "tolerance": 0.011834029489467879,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
+      },
+      "seconds": 6.22
+    },
+    {
+      "trial": "covered_240fps_noisy_dark_8",
+      "arm": "covered",
+      "what_it_tests": "a cover filmed with four times the read noise and three times the shot noise: the meter still has to sit at zero",
+      "clip": {
+        "name": "covered_240fps_noisy_dark",
+        "flash_hz": 0.0,
+        "duration_ms": 2500.0,
+        "display_fps": 120,
+        "width": 320,
+        "height": 180,
+        "low_rgb": [
+          40,
+          40,
+          40
+        ],
+        "high_rgb": [
+          230,
+          230,
+          230
+        ],
+        "background_rgb": [
+          8,
+          8,
+          8
+        ],
+        "patch_fraction": 1.0,
+        "ramp_to_rgb": null,
+        "crf": 20,
+        "frame_count": 300,
+        "designed_flashes_per_second": 0.0,
+        "designed_window_coverage": 1.0
+      },
+      "camera": {
+        "fps": 240.0,
+        "exposure_ms": 4.166666666666667,
+        "width": 384,
+        "height": 216,
+        "tv_box": [
+          0.13,
+          0.15,
+          0.87,
+          0.85
+        ],
+        "bezel_fraction": 0.02,
+        "room_level": 0.015,
+        "bezel_level": 0.004,
+        "gain": 0.85,
+        "flare": 0.012,
+        "encoding_gamma": 2.2,
+        "blur_sigma": 1.1,
+        "read_noise": 0.014,
+        "shot_noise": 0.018000000000000002,
+        "seed": 4242,
+        "phase_fraction": 0.31,
+        "crf": 18,
+        "note": "A model of a camera, not a measurement of one. Blur, noise, gain, flare and the exposure window are chosen to be plausible, not fitted to any phone."
+      },
+      "expected": {
+        "peak_flashes_per_second": 0.0,
+        "above_limit": false,
+        "leaks": 0
+      },
+      "display_encode": {
+        "frames_written": 300,
+        "bytes": 20295
+      },
+      "measured": {
+        "peak_flashes_per_second": 0,
+        "general_peak_per_second": 0,
+        "red_peak_per_second": 0,
+        "above_limit": false,
+        "leaks": 0,
+        "frames": 599,
+        "fps_measured": 239.99967893019542,
+        "clipped_frame_fraction": 0.0,
+        "publishable": true
+      },
+      "verdict_correct": true,
+      "rate_exact": true,
+      "rate_within_one": true,
+      "leaks_correct": true,
+      "flicker_check": {
+        "frames": 24,
+        "mean_relative_luminance": 0.19453068291100373,
+        "peak_to_peak": 0.0003863692984334144,
+        "standard_deviation": 9.527383404475826e-05,
+        "dominant_hz": 40.00000000000001,
+        "dominant_amplitude": 8.06804037724492e-05,
+        "tolerance": 0.0035678645212375293,
+        "tolerance_source": "the worst patch residual of this take's calibration",
+        "passes": true,
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
+      },
+      "seconds": 22.39
     },
     {
       "trial": "covered_ramp_240fps",
@@ -2735,18 +3070,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 30.0,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 20.000000000000004,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 70.99
+      "seconds": 17.95
     },
     {
       "trial": "covered_bright_60fps",
@@ -2831,18 +3167,19 @@
       "rate_within_one": true,
       "leaks_correct": true,
       "flicker_check": {
-        "frames": 8,
-        "mean_relative_luminance": 0.21353636423458427,
-        "peak_to_peak": 0.00011344839272198204,
-        "standard_deviation": 3.428089340853411e-05,
-        "dominant_hz": 7.5,
-        "dominant_amplitude": 3.598304003050077e-05,
-        "tolerance": 0.0059896258371254785,
+        "frames": 24,
+        "mean_relative_luminance": 0.21354410751827882,
+        "peak_to_peak": 0.00011345231293480307,
+        "standard_deviation": 2.9703600043263202e-05,
+        "dominant_hz": 5.000000000000001,
+        "dominant_amplitude": 2.4853102267229828e-05,
+        "tolerance": 0.005991852150896371,
         "tolerance_source": "the worst patch residual of this take's calibration",
         "passes": true,
-        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9."
+        "statement": "Ripple on a still gray screen, measured in relative luminance on the screen region. A take that fails this is excluded, per docs/EVAL_PLAN.md section 9.",
+        "frames_averaged": 24
       },
-      "seconds": 25.31
+      "seconds": 5.43
     }
   ],
   "what_this_does_not_cover": [
@@ -2860,5 +3197,6 @@
       "note": "flashmap does not need this rule, because a file changes on a frame boundary and never shows the middle of an edge. It is worth a look all the same, for footage that was itself filmed off a screen."
     }
   ],
-  "runtime_seconds": 1704.1
+  "runtime_seconds": 388.2,
+  "resummarised_on": "2026-09-17"
 }
