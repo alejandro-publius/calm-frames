@@ -75,3 +75,21 @@ scheduling ahead rather than reacting.
    verified map and a safe rendition, play it in kid mode.
 4. **Upstream pull request open.** Mon Oct 12, so the Devpost contribution URL
    exists. The work is done; opening it needs a fork under Alex's account.
+
+## Phase 8, the five features asked for after the recovery
+
+Added Thu Sep 17, 2026, late. Each is complete with tests and docs or it does not
+land at all. Order matters: A first, because the pattern rule changes what a map
+contains and everything downstream reads maps.
+
+| | Feature | What it means | State |
+|---|---|---|---|
+| **A** | Regular-pattern rule in flashmap | Ofcom and BT.1702 also flag high-contrast regular patterns, which WCAG 2.3.1 does not cover. A separate rule with its own profile flag, its own conformance clips, and precision and recall with Wilson intervals. The hide plan and verify treat a pattern segment exactly like a flash segment. | Thresholds are being quoted into docs/SPEC_SOURCES.md first. **No code until that lands**, because CLAUDE.md forbids a threshold that is not quoted from a primary source. |
+| **B** | Family profiles | Up to four kids, each with a preset and room settings, one household PIN, a picker on the kid home screen, per-profile hidden-segment logs. No profile can be weaker than WCAG. | In progress |
+| **C** | Audio cue before a hide | A soft chime a fixed time before the cover, on by default, off in the parent area. It must never fire without a cover following it, as a mutation-checked property. | In progress |
+| **D** | Report page | `flashmap report` writes a self-contained HTML report per title: the flash timeline, hidden segments, presets, licence and hashes. Plus an upload page wired to the pipeline so a judge can drop in a clip. Deploy-ready, not deployed, until STATUS.md says the Paid plan is confirmed. Every image in the report passes flashmap. | Not started |
+| **E** | Map registry | A static index of signed maps keyed by file hash, served beside the maps, with a lookup in the hook so any Vega app can fetch a map for a file it already has. A tampered index entry fails closed. | In progress |
+
+The three loose ends that came with them are done: the cover-reason logging and
+the two lead-time distributions, the verify status for a title with no flagged
+segments, and the chaos re-run.
