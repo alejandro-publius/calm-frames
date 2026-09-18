@@ -300,7 +300,7 @@ Log suppression ended at level [info]. [140] logs were suppressed
 
 A run that produced covers, position reports and errors produced no readable record of any of it. The suppression is reported after the fact and there is no way to ask for it back.
 
-**Severity.** High. A measurement whose evidence can be deleted by a log rate limiter is not a measurement. This is the single change that cost the most rework in the measurement chain.
+**Severity.** High. A measurement whose evidence can be deleted by a log rate limiter is not a measurement. This is the one that cost the most rework in the measurement chain.
 
 **Workaround.** Two changes. Timing lines now print with `console.warn`, which survives more than `console.log` does. More to the point, the evidence no longer goes through the device log at all: `eval/vvd_timing_run.py` serves the clip and the run config over HTTP and collects the events the app posts back to it, and `results/*_events.json` is what the analysis reads. The device log is a convenience now, never the evidence.
 
@@ -312,7 +312,7 @@ A run that produced covers, position reports and errors produced no readable rec
 
 **Task.** Watch what the app is doing during a run on the device.
 
-**Steps.** Built both packages, `react-native build-kepler --build-type Release` and `--build-type Debug`, and streamed the device log while the app ran.
+**Steps.** Built both packages, `react-native build-kepler --build-type Release` and `--build-type Debug`, and installed the debug one for every run where the app's own output mattered.
 
 **Expected.** The app's own log lines, whichever package is installed.
 
