@@ -52,6 +52,7 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
 | **Next session, first thing** | Fix the pattern crop defect in section 4c: a full-frame six-pair pattern with a near-black edge bar escapes the rule, because the picture detector crops that bar as pillarbox and the count falls to five pairs. A hazard reaches a child. `docs/VERIFY_PASS_2.md` reproduces it. | It is the only thing on this page where something flashing or striped gets through. |
 | **Next session, after that** | Decide whether the three unreachable features get wired or get cut. Per-profile logs and the household hide log both need one shared store between the player screen and the kid mode route. The registry needs one `lookupMap` call in the shelf. Neither is large; both were left because the lanes that built them did not own the file. | They are built and tested and a judge cannot see any of them. Section 4c has the detail. |
+| **Before you label, one command** | Run `make ffmpeg-ps-pool` and `make naive-luma-pool` over the sixteen calm Wikimedia clips, then rebuild the pool. | The pool shrank when IRIS joined, from 40 segments over 15 titles to <!--n results/realclips_status.json:segments -->34<!--/n--> over <!--n results/realclips_status.json:titles -->9<!--/n-->, and the half that nothing flagged went from 12 windows to 6. IRIS cannot read six clips including the three ISS night passes, which carried most of that negative half, and a title joins the pool only once every candidate list has seen it. That is the guard working rather than a fault. Running the two ffmpeg based lists over the calm sixteen more than replaces what was lost, and it is better to label one pool than two. |
 | **Any evening, about an hour** | Label the <!--n results/realclips_status.json:segments -->34<!--/n--> blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all of them. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. The pool was recut on Sep 18 when EA IRIS joined as a candidate list, so the segment ids are not the ones an earlier version of this page named. |
 | **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add that line to this file. It has to start a line of its own: no bullet, no table cell, no backticks. The exact wording is in the refusal `make deploy` prints. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Seventeen tests now cover both locks, run against a copy of the script so this file is never touched. Nothing has touched AWS. |
 | **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
@@ -202,6 +203,24 @@ pattern gets the identical cover interval a flash gets, `pipeline.verify` passes
 with the cover proven drawn, wcag and extra-cautious never report a pattern, and
 the smooth-flow exemption failed safe on every ambiguous case put to it and logged
 every exemption it did apply.
+
+### One environment change you cannot undo
+
+Building EA IRIS pulled in Homebrew's opencv@4, which upgraded ffmpeg from 8.1.2
+to 9.0.1 and relinked it. **ffmpeg 9 removed `-vsync`**, which broke every
+labelling plot with "no frames decoded" until `eval/plots.py` and
+`eval/labeling/plots.py` moved to `-fps_mode passthrough`. Rolling back is not
+available: the 8.1.2 binary no longer starts, because x265 moved under it.
+
+What that costs. The ffmpeg based baseline results in `results/baselines/` were
+measured on 8.1.2 and still say so in their own files. **If they are re-run,
+re-run them as a set rather than piecemeal**, or the table will mix two versions
+of the tool and nothing will say which row came from which.
+
+One finding about IRIS itself, worth knowing before anyone leans on it: it
+reports PASS with exit 0 on two Theora files it cannot decode at all, writing an
+empty frame-data file. It is recorded in `results/baselines/iris_failures.json`,
+and it is the reason no report is written for a clip it could not read.
 
 **Still open, in rough order of what would help most:**
 
