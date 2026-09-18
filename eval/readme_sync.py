@@ -31,10 +31,19 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 
+# The dotted path may contain spaces, because a JSON key can: results/screening.json
+# has keys like "Blender open movies" and "NASA SVS 5011" under per_source. An earlier
+# version of this pattern ended the path at the first space, so fifteen markers in the
+# README matched nothing and were skipped without a word. They happened to be right,
+# which is worse: the guard would not have noticed them going wrong.
 MARKER = re.compile(
-    r"<!--n\s+(?P<source>[^\s:]+):(?P<path>[^\s]+)\s*-->(?P<value>.*?)<!--/n-->",
+    r"<!--n\s+(?P<source>[^\s:]+):(?P<path>[^\n]+?)\s*-->(?P<value>.*?)<!--/n-->",
     re.DOTALL,
 )
+
+# Every way of opening a marker, however badly written. Anything this finds that MARKER
+# does not is a marker nobody is checking, and this script refuses to be quiet about it.
+ANY_MARKER_OPENING = re.compile(r"<!--n\b.*?-->", re.DOTALL)
 
 # "eval" covers the evaluation lane's own write-ups, including eval/harness_runs/README.md,
 # so every number in them is checked by the same CI step as the README.
@@ -143,6 +152,18 @@ def main() -> int:
             return match.group(0)
 
         updated = MARKER.sub(replace, text)
+
+        # A marker this script cannot parse is a number nobody is checking, and the
+        # README says every number on the page is checked. So say so and fail, rather
+        # than walking past it.
+        parsed = {match.group(0) for match in MARKER.finditer(text)}
+        for opening in ANY_MARKER_OPENING.finditer(text):
+            if not any(opening.group(0) in whole for whole in parsed):
+                problems.append(
+                    f"{file.relative_to(REPO)}: cannot parse the marker "
+                    f"{opening.group(0)!r}, so nothing checks the number inside it"
+                )
+
         if changed and not args.check:
             file.write_text(updated, encoding="utf-8")
             rewritten += 1
