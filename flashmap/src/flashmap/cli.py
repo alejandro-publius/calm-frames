@@ -162,6 +162,25 @@ def _describe(result: AnalysisResult) -> str:
             )
     else:
         lines.append("no segment broke the thresholds")
+    if result.profile.pattern is not None:
+        lines.append(
+            f"{len(result.pattern_segments)} regular pattern segment(s), from "
+            "ITU-R BT.1702-3 Attachment 1 to Annex 1, which is informative and is not a WCAG "
+            "rule. WCAG 2.2 SC 2.3.1 does not cover regular patterns."
+        )
+        for pattern in result.pattern_segments:
+            lines.append(
+                f"  {pattern.start_ms:.0f} to {pattern.end_ms:.0f} ms  pattern  "
+                f"{pattern.stripe_pairs} light and dark pairs  "
+                f"area {pattern.area_fraction:.3f} over {pattern.area_limit:.2f}  "
+                f"motion {pattern.motion}"
+            )
+        for exemption in result.pattern_exemptions:
+            lines.append(
+                f"  {exemption.start_ms:.0f} to {exemption.end_ms:.0f} ms  pattern NOT hidden: "
+                "the smooth flow exemption was applied, area "
+                f"{exemption.area_fraction:.3f}, {exemption.stripe_pairs} pairs"
+            )
     return "\n".join(lines)
 
 
