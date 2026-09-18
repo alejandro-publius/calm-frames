@@ -1,0 +1,1258 @@
+{
+  "statement": "Every safety property Calm Frames claims has a mutation that breaks the code guarding it. The kill rate below is killed divided by attempted, rounded down, over the mutations in eval/mutate_gate.py only. It is not a whole-codebase mutation score and it does not stand in for one.",
+  "tool": "eval/mutate_gate.py",
+  "generated_utc": "2026-09-18T05:23:45Z",
+  "how_a_kill_is_counted": "The tests that guard the mutated line are run as whole files. A kill needs at least one named failing test and no collection or compile error, because both of those also exit non-zero and neither is a test catching anything.",
+  "negative_control": {
+    "description": "every selection run unmutated before any mutation was applied",
+    "all_green": true,
+    "selections": [
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/coverSchedule.test.ts"
+        ],
+        "green": true,
+        "tests_run": 39,
+        "seconds": 1.2,
+        "detail": ""
+      },
+      {
+        "lane": "py",
+        "tests": [
+          "pipeline/tests/test_hideplan.py"
+        ],
+        "green": true,
+        "tests_run": 33,
+        "seconds": 0.2,
+        "detail": ""
+      },
+      {
+        "lane": "py",
+        "tests": [
+          "flashmap/tests/test_sidecar.py"
+        ],
+        "green": true,
+        "tests_run": 32,
+        "seconds": 1.2,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/coverHarness.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 13,
+        "seconds": 1.0,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/seekSafety.test.ts"
+        ],
+        "green": true,
+        "tests_run": 29,
+        "seconds": 1.0,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/coverHarness.test.tsx",
+          "test/calmframes/useFlashGuard.test.tsx",
+          "test/calmframes/mutationSurvivors.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 30,
+        "seconds": 1.1,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/flashMap.test.ts",
+          "test/calmframes/useFlashGuard.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 33,
+        "seconds": 1.1,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/flashMap.test.ts"
+        ],
+        "green": true,
+        "tests_run": 22,
+        "seconds": 1.0,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/flashMap.test.ts",
+          "test/calmframes/mutationSurvivors.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 28,
+        "seconds": 1.0,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/useFlashGuard.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 11,
+        "seconds": 1.1,
+        "detail": ""
+      },
+      {
+        "lane": "py",
+        "tests": [
+          "pipeline/tests/test_verify.py"
+        ],
+        "green": true,
+        "tests_run": 52,
+        "seconds": 36.6,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/coverSchedule.test.ts",
+          "test/calmframes/household.test.ts"
+        ],
+        "green": true,
+        "tests_run": 63,
+        "seconds": 1.2,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/household.test.ts",
+          "test/calmframes/mutationSurvivors.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 30,
+        "seconds": 1.0,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/household.test.ts"
+        ],
+        "green": true,
+        "tests_run": 24,
+        "seconds": 1.0,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/household.test.ts",
+          "test/calmframes/useFlashGuard.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 35,
+        "seconds": 1.1,
+        "detail": ""
+      },
+      {
+        "lane": "py",
+        "tests": [
+          "flashmap/tests/test_room.py"
+        ],
+        "green": true,
+        "tests_run": 10,
+        "seconds": 1.2,
+        "detail": ""
+      },
+      {
+        "lane": "py",
+        "tests": [
+          "pipeline/tests/test_bif.py"
+        ],
+        "green": true,
+        "tests_run": 13,
+        "seconds": 0.2,
+        "detail": ""
+      },
+      {
+        "lane": "py",
+        "tests": [
+          "pipeline/tests/test_hideplan.py",
+          "pipeline/tests/test_bif.py"
+        ],
+        "green": true,
+        "tests_run": 46,
+        "seconds": 0.4,
+        "detail": ""
+      },
+      {
+        "lane": "py",
+        "tests": [
+          "pipeline/tests/test_stills.py",
+          "pipeline/tests/test_bif.py"
+        ],
+        "green": true,
+        "tests_run": 25,
+        "seconds": 0.9,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/coverSchedule.test.ts",
+          "test/calmframes/useFlashGuard.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 50,
+        "seconds": 1.1,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/coverSchedule.test.ts",
+          "test/calmframes/mutationSurvivors.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 45,
+        "seconds": 1.0,
+        "detail": ""
+      },
+      {
+        "lane": "pyapp",
+        "tests": [
+          "eval/property_scheduler_test.py"
+        ],
+        "green": true,
+        "tests_run": 15,
+        "seconds": 1.5,
+        "detail": ""
+      }
+    ]
+  },
+  "totals": {
+    "mutations": 57,
+    "killed": 55,
+    "survived": 2,
+    "survived_and_not_equivalent": 0,
+    "kill_rate": 0.9649,
+    "kill_rate_percent": 96.49,
+    "as_a_fraction": "55/57"
+  },
+  "equivalent_mutants_that_were_killed_after_all": [],
+  "properties": {
+    "cover before segment": {
+      "mutations": 5,
+      "killed": 5,
+      "survivors": []
+    },
+    "cover held through stalls and seeks": {
+      "mutations": 6,
+      "killed": 5,
+      "survivors": [
+        "background-hides-at-once"
+      ]
+    },
+    "fail closed on a map that is missing": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "fail closed on a map that is stale": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "fail closed on a map that is unsigned": {
+      "mutations": 2,
+      "killed": 1,
+      "survivors": [
+        "fail-closed-unsigned"
+      ]
+    },
+    "fail closed on a map that was tampered with": {
+      "mutations": 2,
+      "killed": 2,
+      "survivors": []
+    },
+    "fail closed on a map bound to the wrong file": {
+      "mutations": 3,
+      "killed": 3,
+      "survivors": []
+    },
+    "fail closed on a map signed by a key we do not hold": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "fail closed on a map in a version we do not read": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "fail closed on a map that cannot be read": {
+      "mutations": 3,
+      "killed": 3,
+      "survivors": []
+    },
+    "fail closed while a map is still being checked": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "fail closed on a map the guard rejected": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "red segments always opaque": {
+      "mutations": 5,
+      "killed": 5,
+      "survivors": []
+    },
+    "room rule never weaker than WCAG": {
+      "mutations": 4,
+      "killed": 4,
+      "survivors": []
+    },
+    "BIF and posters only from calm frames": {
+      "mutations": 5,
+      "killed": 5,
+      "survivors": []
+    },
+    "verify blocks publishing on any violation": {
+      "mutations": 4,
+      "killed": 4,
+      "survivors": []
+    },
+    "rendition start offset": {
+      "mutations": 7,
+      "killed": 7,
+      "survivors": []
+    },
+    "the property tests are not vacuous": {
+      "mutations": 5,
+      "killed": 5,
+      "survivors": []
+    }
+  },
+  "survivors": [
+    {
+      "id": "background-hides-at-once",
+      "property": "cover held through stalls and seeks",
+      "lane": "app",
+      "file": "src/calmframes/useCoverHarness.ts",
+      "breaks": "going to the background stops hiding the picture at once, and waits for the next scheduler tick instead",
+      "tests": [
+        "test/calmframes/coverHarness.test.tsx",
+        "test/calmframes/useFlashGuard.test.tsx",
+        "test/calmframes/mutationSurvivors.test.tsx"
+      ],
+      "killed": false,
+      "evidence": "",
+      "survived_because": "every test passed with the guard broken (30 ran)",
+      "seconds": 1.2,
+      "equivalent": "the cover still goes on at once, by a second path. foreground is in the dependency list of the tick effect, and that effect calls tick() itself before setting its interval, so a change of foreground tears the effect down, builds it again and covers synchronously. The picture is hidden in the same commit either way and no test can see a difference. It was checked rather than assumed: coverHarness.test.tsx now has a test that flips foreground and advances no timers at all, and it stays green with this mutation applied and goes red when foreground is also taken out of that dependency list, which is the only way to actually remove the behaviour. Worth knowing that the redundancy is what makes this equivalent: drop foreground from those deps as a tidy-up and the guard on line 318 becomes load bearing again.",
+      "tests_run": 30
+    },
+    {
+      "id": "fail-closed-unsigned",
+      "property": "fail closed on a map that is unsigned",
+      "lane": "app",
+      "file": "src/calmframes/flashMap.ts",
+      "breaks": "a map with no signature block is read as if it had one",
+      "tests": [
+        "test/calmframes/flashMap.test.ts"
+      ],
+      "killed": false,
+      "evidence": "",
+      "survived_because": "every test passed with the guard broken (22 ran)",
+      "seconds": 1.0,
+      "equivalent": "the unsigned path is guarded three times over. With the first check gone, a map with no signature block reaches the algorithm check, where asString(undefined) is not 'ed25519', and is refused as 'unsigned' again. Only the diagnostic detail changes, and nothing user facing reads it: useFlashGuard shows rejectionMessage(reason). No test can tell the two apart, and writing one that pins the wording would be testing a log line.",
+      "tests_run": 22
+    }
+  ],
+  "mutations": [
+    {
+      "id": "cover-before-segment-app",
+      "property": "cover before segment",
+      "lane": "app",
+      "file": "src/calmframes/coverSchedule.ts",
+      "breaks": "the guard band no longer runs ahead of the segment, so the cover arrives exactly when the flashing does",
+      "tests": [
+        "test/calmframes/coverSchedule.test.ts"
+      ],
+      "killed": true,
+      "evidence": "the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 0 ms; the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 3 ms; the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 67 ms",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 39
+    },
+    {
+      "id": "cover-before-segment-min-cover-grows-the-start",
+      "property": "cover before segment",
+      "lane": "app",
+      "file": "src/calmframes/coverSchedule.ts",
+      "breaks": "a short segment reaches its minimum length by moving its start later, which is the one direction a cover may never move",
+      "tests": [
+        "test/calmframes/coverSchedule.test.ts"
+      ],
+      "killed": true,
+      "evidence": "buildCoverIntervals \u203a never starts a cover later than the guard band promised",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 39
+    },
+    {
+      "id": "cover-before-segment-pipeline",
+      "property": "cover before segment",
+      "lane": "py",
+      "file": "pipeline/hideplan.py",
+      "breaks": "the hide plan the pipeline publishes loses its lead on every segment",
+      "tests": [
+        "pipeline/tests/test_hideplan.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_hideplan.py::TestGuardBand::test_widens_both_sides",
+      "survived_because": "",
+      "seconds": 0.2,
+      "tests_run": 1
+    },
+    {
+      "id": "cover-before-segment-flashmap",
+      "property": "cover before segment",
+      "lane": "py",
+      "file": "flashmap/src/flashmap/analyze.py",
+      "breaks": "a segment starts where the window failed rather than where the window began, so the map itself understates the flashing",
+      "tests": [
+        "flashmap/tests/test_sidecar.py"
+      ],
+      "killed": true,
+      "evidence": "flashmap/tests/test_sidecar.py::test_segment_fields - assert 400 > 400",
+      "survived_because": "",
+      "seconds": 0.4,
+      "tests_run": 3
+    },
+    {
+      "id": "covers-merge-rather-than-blink",
+      "property": "cover before segment",
+      "lane": "app",
+      "file": "src/calmframes/coverSchedule.ts",
+      "breaks": "two intervals that touch exactly stop merging, so the cover blinks off for an instant between them",
+      "tests": [
+        "test/calmframes/coverSchedule.test.ts"
+      ],
+      "killed": true,
+      "evidence": "buildCoverIntervals \u203a merges intervals that touch exactly, so the cover cannot blink off",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 39
+    },
+    {
+      "id": "hold-through-stall",
+      "property": "cover held through stalls and seeks",
+      "lane": "app",
+      "file": "src/calmframes/useCoverHarness.ts",
+      "breaks": "buffering and stalling stop making the playhead uncertain, so the estimate keeps running while the picture is frozen on a frame nobody checked",
+      "tests": [
+        "test/calmframes/coverHarness.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "useCoverHarness \u203a timing mode hides the picture at once when buffering starts",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 13
+    },
+    {
+      "id": "hold-until-confirmed-outside",
+      "property": "cover held through stalls and seeks",
+      "lane": "app",
+      "file": "src/calmframes/useCoverHarness.ts",
+      "breaks": "the scheduler stops honouring the uncertain flag, so a held cover comes off on the next tick instead of waiting for playback to be confirmed",
+      "tests": [
+        "test/calmframes/coverHarness.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "useCoverHarness \u203a keeps the cover on until playback is confirmed again",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 13
+    },
+    {
+      "id": "seek-covers-first",
+      "property": "cover held through stalls and seeks",
+      "lane": "app",
+      "file": "src/calmframes/seekSafety.ts",
+      "breaks": "a seek that lands inside a flagged interval no longer covers before it moves the playhead",
+      "tests": [
+        "test/calmframes/seekSafety.test.ts"
+      ],
+      "killed": true,
+      "evidence": "planSeek \u203a covers first for a target inside an interval; planSeek \u203a covers first for a target inside the guard band, not only the segment; the one function, from each source \u203a seek-bar covers before it seeks",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 29
+    },
+    {
+      "id": "seek-keyframe-lookback",
+      "property": "cover held through stalls and seeks",
+      "lane": "app",
+      "file": "src/calmframes/seekSafety.ts",
+      "breaks": "a seek just past an interval stops counting as landing inside it, so the decoder can put a frame from the flashing part on screen",
+      "tests": [
+        "test/calmframes/seekSafety.test.ts"
+      ],
+      "killed": true,
+      "evidence": "planSeek \u203a covers first for a target just after an interval, which decodes from inside it; SafeMediaControlHandler \u203a covers first on fast forward and rewind that land inside",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 29
+    },
+    {
+      "id": "seek-confirm-margin",
+      "property": "cover held through stalls and seeks",
+      "lane": "app",
+      "file": "src/calmframes/seekSafety.ts",
+      "breaks": "the cover comes off on the first report outside the interval, with no margin for a playhead that is still settling",
+      "tests": [
+        "test/calmframes/seekSafety.test.ts"
+      ],
+      "killed": true,
+      "evidence": "holding the cover until playback is confirmed outside \u203a keeps the cover on while reports still land inside",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 29
+    },
+    {
+      "id": "background-hides-at-once",
+      "property": "cover held through stalls and seeks",
+      "lane": "app",
+      "file": "src/calmframes/useCoverHarness.ts",
+      "breaks": "going to the background stops hiding the picture at once, and waits for the next scheduler tick instead",
+      "tests": [
+        "test/calmframes/coverHarness.test.tsx",
+        "test/calmframes/useFlashGuard.test.tsx",
+        "test/calmframes/mutationSurvivors.test.tsx"
+      ],
+      "killed": false,
+      "evidence": "",
+      "survived_because": "every test passed with the guard broken (30 ran)",
+      "seconds": 1.2,
+      "equivalent": "the cover still goes on at once, by a second path. foreground is in the dependency list of the tick effect, and that effect calls tick() itself before setting its interval, so a change of foreground tears the effect down, builds it again and covers synchronously. The picture is hidden in the same commit either way and no test can see a difference. It was checked rather than assumed: coverHarness.test.tsx now has a test that flips foreground and advances no timers at all, and it stays green with this mutation applied and goes red when foreground is also taken out of that dependency list, which is the only way to actually remove the behaviour. Worth knowing that the redundancy is what makes this equivalent: drop foreground from those deps as a tidy-up and the guard on line 318 becomes load bearing again.",
+      "tests_run": 30
+    },
+    {
+      "id": "fail-closed-missing",
+      "property": "fail closed on a map that is missing",
+      "lane": "app",
+      "file": "src/calmframes/flashMap.ts",
+      "breaks": "a title with no map is read as an empty one instead of being refused",
+      "tests": [
+        "test/calmframes/flashMap.test.ts",
+        "test/calmframes/useFlashGuard.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "verifyFlashMap \u203a fails closed when the map is missing",
+      "survived_because": "",
+      "seconds": 1.2,
+      "tests_run": 33
+    },
+    {
+      "id": "fail-closed-stale",
+      "property": "fail closed on a map that is stale",
+      "lane": "app",
+      "file": "src/calmframes/flashMap.ts",
+      "breaks": "a map made any number of years ago is accepted as a current check",
+      "tests": [
+        "test/calmframes/flashMap.test.ts",
+        "test/calmframes/useFlashGuard.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "verifyFlashMap \u203a fails closed when the map is stale; useFlashGuard \u203a keeps the picture hidden when the map is older than the limit",
+      "survived_because": "",
+      "seconds": 1.2,
+      "tests_run": 33
+    },
+    {
+      "id": "fail-closed-unsigned",
+      "property": "fail closed on a map that is unsigned",
+      "lane": "app",
+      "file": "src/calmframes/flashMap.ts",
+      "breaks": "a map with no signature block is read as if it had one",
+      "tests": [
+        "test/calmframes/flashMap.test.ts"
+      ],
+      "killed": false,
+      "evidence": "",
+      "survived_because": "every test passed with the guard broken (22 ran)",
+      "seconds": 1.0,
+      "equivalent": "the unsigned path is guarded three times over. With the first check gone, a map with no signature block reaches the algorithm check, where asString(undefined) is not 'ed25519', and is refused as 'unsigned' again. Only the diagnostic detail changes, and nothing user facing reads it: useFlashGuard shows rejectionMessage(reason). No test can tell the two apart, and writing one that pins the wording would be testing a log line.",
+      "tests_run": 22
+    },
+    {
+      "id": "fail-closed-tampered",
+      "property": "fail closed on a map that was tampered with",
+      "lane": "app",
+      "file": "src/calmframes/flashMap.ts",
+      "breaks": "a segment can be removed from a signed map and the app will still play it",
+      "tests": [
+        "test/calmframes/flashMap.test.ts",
+        "test/calmframes/useFlashGuard.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "useFlashGuard \u203a keeps the picture hidden when the map has been tampered with; verifyFlashMap \u203a fails closed when one character of the map was changed after signing; verifyFlashMap \u203a fails closed when a segment is added to a signed map",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 33
+    },
+    {
+      "id": "fail-closed-wrong-hash",
+      "property": "fail closed on a map bound to the wrong file",
+      "lane": "app",
+      "file": "src/calmframes/flashMap.ts",
+      "breaks": "a map made for another film answers for this one",
+      "tests": [
+        "test/calmframes/flashMap.test.ts"
+      ],
+      "killed": true,
+      "evidence": "verifyFlashMap \u203a fails closed when the map is bound to a different file",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 22
+    },
+    {
+      "id": "fail-closed-unknown-key",
+      "property": "fail closed on a map signed by a key we do not hold",
+      "lane": "app",
+      "file": "src/calmframes/flashMap.ts",
+      "breaks": "the map's own key is trusted instead of the one the app ships, so anybody can sign a map for this app",
+      "tests": [
+        "test/calmframes/flashMap.test.ts"
+      ],
+      "killed": true,
+      "evidence": "verifyFlashMap \u203a fails closed when the map was signed by a key we do not hold",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 22
+    },
+    {
+      "id": "fail-closed-wrong-version",
+      "property": "fail closed on a map in a version we do not read",
+      "lane": "app",
+      "file": "src/calmframes/flashMap.ts",
+      "breaks": "a map in a format this build has never seen is read anyway",
+      "tests": [
+        "test/calmframes/flashMap.test.ts"
+      ],
+      "killed": true,
+      "evidence": "verifyFlashMap \u203a refuses a version it does not understand",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 22
+    },
+    {
+      "id": "fail-closed-bad-segment-list",
+      "property": "fail closed on a map that cannot be read",
+      "lane": "app",
+      "file": "src/calmframes/flashMap.ts",
+      "breaks": "a segment with a negative or reversed time is skipped instead of refusing the whole map, so the part it described is never covered",
+      "tests": [
+        "test/calmframes/flashMap.test.ts",
+        "test/calmframes/mutationSurvivors.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "a signed map that says something impossible \u203a is refused whole, rather than having the bad segment quietly dropped",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 28
+    },
+    {
+      "id": "fail-closed-guard-starts-hidden",
+      "property": "fail closed while a map is still being checked",
+      "lane": "app",
+      "file": "src/calmframes/useFlashGuard.ts",
+      "breaks": "the picture is visible before any map has verified, which is the whole of fail closed",
+      "tests": [
+        "test/calmframes/useFlashGuard.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "useFlashGuard \u203a starts with the picture hidden, before any map has been checked; useFlashGuard \u203a keeps the picture hidden when the map cannot be fetched; useFlashGuard \u203a keeps the picture hidden and says why when the map does not verify",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 11
+    },
+    {
+      "id": "fail-closed-guard-keeps-going-on-rejection",
+      "property": "fail closed on a map the guard rejected",
+      "lane": "app",
+      "file": "src/calmframes/useFlashGuard.ts",
+      "breaks": "a rejected map leaves the title verified, so the picture plays uncovered",
+      "tests": [
+        "test/calmframes/useFlashGuard.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "useFlashGuard \u203a keeps the picture hidden when the map cannot be fetched; useFlashGuard \u203a keeps the picture hidden and says why when the map does not verify; useFlashGuard \u203a keeps the picture hidden when the map has been tampered with",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 11
+    },
+    {
+      "id": "fail-closed-sidecar-unsigned-python",
+      "property": "fail closed on a map that is unsigned",
+      "lane": "py",
+      "file": "flashmap/src/flashmap/sidecar.py",
+      "breaks": "the analyzer's own reader stops refusing an unsigned map, so the pipeline would publish one",
+      "tests": [
+        "flashmap/tests/test_sidecar.py"
+      ],
+      "killed": true,
+      "evidence": "flashmap/tests/test_sidecar.py::test_an_unsigned_map_is_refused_unless_you_ask_for_it",
+      "survived_because": "",
+      "seconds": 0.7,
+      "tests_run": 9
+    },
+    {
+      "id": "fail-closed-sidecar-wrong-hash-python",
+      "property": "fail closed on a map bound to the wrong file",
+      "lane": "py",
+      "file": "flashmap/src/flashmap/sidecar.py",
+      "breaks": "a map verifies against a file it was not made from",
+      "tests": [
+        "flashmap/tests/test_sidecar.py"
+      ],
+      "killed": true,
+      "evidence": "flashmap/tests/test_sidecar.py::test_a_map_for_a_different_file_does_not_verify",
+      "survived_because": "",
+      "seconds": 0.8,
+      "tests_run": 14
+    },
+    {
+      "id": "fail-closed-sidecar-signature-covers-body",
+      "property": "fail closed on a map that was tampered with",
+      "lane": "py",
+      "file": "flashmap/src/flashmap/sidecar.py",
+      "breaks": "the signature stops covering the segments, so they can be edited freely",
+      "tests": [
+        "flashmap/tests/test_sidecar.py"
+      ],
+      "killed": true,
+      "evidence": "flashmap/tests/test_sidecar.py::test_changing_one_segment_breaks_the_signature",
+      "survived_because": "",
+      "seconds": 0.7,
+      "tests_run": 11
+    },
+    {
+      "id": "fail-closed-sidecar-segment-list",
+      "property": "fail closed on a map that cannot be read",
+      "lane": "py",
+      "file": "flashmap/src/flashmap/sidecar.py",
+      "breaks": "a signed map whose segments are strings, or not a list, or end before they start, verifies cleanly, so a studio is told its map is fine when no player will take it",
+      "tests": [
+        "flashmap/tests/test_sidecar.py"
+      ],
+      "killed": true,
+      "evidence": "flashmap/tests/test_sidecar.py::test_a_segment_that_makes_no_sense_fails_the_map[segments0-ends at 100]",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 22
+    },
+    {
+      "id": "fail-closed-sidecar-segment-ends-after-it-starts",
+      "property": "fail closed on a map that cannot be read",
+      "lane": "py",
+      "file": "flashmap/src/flashmap/sidecar.py",
+      "breaks": "the one segment check that costs coverage, a flash that ends before it starts, stops being made",
+      "tests": [
+        "flashmap/tests/test_sidecar.py"
+      ],
+      "killed": true,
+      "evidence": "flashmap/tests/test_sidecar.py::test_a_segment_that_makes_no_sense_fails_the_map[segments0-ends at 100]",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 22
+    },
+    {
+      "id": "verify-checks-the-source-hash",
+      "property": "fail closed on a map bound to the wrong file",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "verify stops noticing that the file on disk is not the file the title was built from",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestAWrongHash::test_a_source_file_that_changed_since_ingest_is_caught",
+      "survived_because": "",
+      "seconds": 12.5,
+      "tests_run": 16
+    },
+    {
+      "id": "red-survives-merging",
+      "property": "red segments always opaque",
+      "lane": "app",
+      "file": "src/calmframes/coverSchedule.ts",
+      "breaks": "a red segment merged into a general one loses its red reason, and a dim cover does not satisfy the red rule",
+      "tests": [
+        "test/calmframes/coverSchedule.test.ts",
+        "test/calmframes/household.test.ts"
+      ],
+      "killed": true,
+      "evidence": "buildCoverIntervals \u203a makes a merged interval red when any part of it is red; presets \u203a keeps a red segment red through the union",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 63
+    },
+    {
+      "id": "red-is-the-default-reason",
+      "property": "red segments always opaque",
+      "lane": "app",
+      "file": "src/calmframes/flashMap.ts",
+      "breaks": "a reason this build has not seen is treated as general rather than red, so a future map's stricter category gets the weaker cover",
+      "tests": [
+        "test/calmframes/flashMap.test.ts",
+        "test/calmframes/mutationSurvivors.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "a reason this build has never seen \u203a gets the opaque cover, not the dim one",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 28
+    },
+    {
+      "id": "red-is-never-dimmed-pipeline",
+      "property": "red segments always opaque",
+      "lane": "py",
+      "file": "pipeline/hideplan.py",
+      "breaks": "the pipeline lets a red interval be dimmed",
+      "tests": [
+        "pipeline/tests/test_hideplan.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_hideplan.py::TestRedIsNeverDimmed::test_a_red_interval_is_opaque",
+      "survived_because": "",
+      "seconds": 0.2,
+      "tests_run": 17
+    },
+    {
+      "id": "red-survives-merging-pipeline",
+      "property": "red segments always opaque",
+      "lane": "py",
+      "file": "pipeline/hideplan.py",
+      "breaks": "merging drops the red reason in the hide plan too",
+      "tests": [
+        "pipeline/tests/test_hideplan.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_hideplan.py::TestRedIsNeverDimmed::test_red_makes_a_whole_merged_interval_red",
+      "survived_because": "",
+      "seconds": 0.2,
+      "tests_run": 20
+    },
+    {
+      "id": "verify-red-always-opaque",
+      "property": "red segments always opaque",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "verify stops blocking a plan that dims a red interval",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestATamperedMap::test_verify_catches_a_dim_rule_that_lets_red_through",
+      "survived_because": "",
+      "seconds": 10.8,
+      "tests_run": 14
+    },
+    {
+      "id": "room-cannot-shorten-the-guard-band",
+      "property": "room rule never weaker than WCAG",
+      "lane": "app",
+      "file": "src/calmframes/household.ts",
+      "breaks": "a preset can set a guard band below the WCAG default, which is a household setting making the app weaker",
+      "tests": [
+        "test/calmframes/household.test.ts",
+        "test/calmframes/mutationSurvivors.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "the household floor \u203a holds even for a preset that asks for less than WCAG",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 30
+    },
+    {
+      "id": "room-keeps-the-wcag-map",
+      "property": "room rule never weaker than WCAG",
+      "lane": "app",
+      "file": "src/calmframes/household.ts",
+      "breaks": "the broadcast preset swaps the WCAG map out instead of adding to it",
+      "tests": [
+        "test/calmframes/household.test.ts"
+      ],
+      "killed": true,
+      "evidence": "presets \u203a every preset keeps the WCAG map, it never swaps it out; per title status \u203a is pending when the preset asks for a map the title does not have",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 24
+    },
+    {
+      "id": "room-stricter-than-the-map-is-refused",
+      "property": "room rule never weaker than WCAG",
+      "lane": "app",
+      "file": "src/calmframes/household.ts",
+      "breaks": "a map that says nothing about its area windows is treated as answering for any room, however close the sofa is",
+      "tests": [
+        "test/calmframes/household.test.ts",
+        "test/calmframes/useFlashGuard.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "the room \u203a refuses a map with no windows at all",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 35
+    },
+    {
+      "id": "room-window-is-added-not-swapped",
+      "property": "room rule never weaker than WCAG",
+      "lane": "py",
+      "file": "flashmap/src/flashmap/analyze.py",
+      "breaks": "the room window replaces the WCAG one rather than being added to it, so a large room could produce a weaker analysis than WCAG asks for",
+      "tests": [
+        "flashmap/tests/test_room.py"
+      ],
+      "killed": true,
+      "evidence": "flashmap/tests/test_room.py::test_the_room_window_is_added_to_the_profile_window_not_swapped_for_it",
+      "survived_because": "",
+      "seconds": 0.3,
+      "tests_run": 3
+    },
+    {
+      "id": "bif-frames-come-from-calm-moments",
+      "property": "BIF and posters only from calm frames",
+      "lane": "py",
+      "file": "pipeline/bif.py",
+      "breaks": "trickplay frames are taken from the slot time whatever is happening there, so scrubbing shows the flashing frame by frame",
+      "tests": [
+        "pipeline/tests/test_bif.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_bif.py::TestFramesComeFromCalmMoments::test_a_slot_inside_a_covered_span_is_sampled_from_elsewhere",
+      "survived_because": "",
+      "seconds": 0.2,
+      "tests_run": 8
+    },
+    {
+      "id": "calm-margin-keeps-clear-of-the-edge",
+      "property": "BIF and posters only from calm frames",
+      "lane": "py",
+      "file": "pipeline/hideplan.py",
+      "breaks": "the calm margin disappears, so a still may be taken from the moment just before a flash where it is already building",
+      "tests": [
+        "pipeline/tests/test_hideplan.py",
+        "pipeline/tests/test_bif.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_hideplan.py::TestCalmMoments::test_a_time_inside_the_margin_is_not_calm",
+      "survived_because": "",
+      "seconds": 0.3,
+      "tests_run": 24
+    },
+    {
+      "id": "posters-snap-to-calm",
+      "property": "BIF and posters only from calm frames",
+      "lane": "py",
+      "file": "pipeline/posters.py",
+      "breaks": "a poster time is never moved off a flagged moment",
+      "tests": [
+        "pipeline/tests/test_stills.py",
+        "pipeline/tests/test_bif.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_bif.py::TestFramesComeFromCalmMoments::test_a_slot_inside_a_covered_span_is_sampled_from_elsewhere",
+      "survived_because": "",
+      "seconds": 0.9,
+      "tests_run": 20
+    },
+    {
+      "id": "verify-bif-calm",
+      "property": "BIF and posters only from calm frames",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "verify stops blocking a title whose trickplay strip was cut from the flashing",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestFramesFromFlaggedMoments::test_a_trickplay_frame_from_a_flagged_moment_is_caught",
+      "survived_because": "",
+      "seconds": 16.4,
+      "tests_run": 21
+    },
+    {
+      "id": "verify-bif-from-safe-rendition",
+      "property": "BIF and posters only from calm frames",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "trickplay frames cut from the original file rather than the covered rendition are accepted",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestFramesFromFlaggedMoments::test_trickplay_taken_from_the_original_is_caught",
+      "survived_because": "",
+      "seconds": 17.1,
+      "tests_run": 22
+    },
+    {
+      "id": "verify-report-fails-on-any-check",
+      "property": "verify blocks publishing on any violation",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "a report with failing checks says it passed, which is the single line that decides whether a title reaches kid mode",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestARenditionWithAViolation::test_a_violation_left_in_the_safe_rendition_blocks_publishing",
+      "survived_because": "",
+      "seconds": 1.9,
+      "tests_run": 2
+    },
+    {
+      "id": "verify-writes-the-verdict-to-the-catalog",
+      "property": "verify blocks publishing on any violation",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "the catalog marks a failed title verified, so kid mode lists it",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestTheCommandLineBlocksPublishing::test_a_broken_title_exits_non_zero_and_stays_out_of_kid_mode",
+      "survived_because": "",
+      "seconds": 20.6,
+      "tests_run": 26
+    },
+    {
+      "id": "verify-cover-is-actually-drawn",
+      "property": "verify blocks publishing on any violation",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "a rendition that still shows the film under its cover passes the check that measures the cover against the still",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestARenditionWithAViolation::test_a_rendition_that_covered_nothing_is_caught_without_the_analyzer",
+      "survived_because": "",
+      "seconds": 4.3,
+      "tests_run": 5
+    },
+    {
+      "id": "verify-safe-rendition-is-clean",
+      "property": "verify blocks publishing on any violation",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "a kid safe rendition with flashing left in it is published",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestARenditionWithAViolation::test_a_violation_left_in_the_safe_rendition_blocks_publishing",
+      "survived_because": "",
+      "seconds": 1.9,
+      "tests_run": 2
+    },
+    {
+      "id": "rendition-offset-limit-app",
+      "property": "rendition start offset",
+      "lane": "app",
+      "file": "src/calmframes/coverSchedule.ts",
+      "breaks": "the schedule accepts an offset verify would never publish, so it builds covers in the wrong places instead of refusing",
+      "tests": [
+        "test/calmframes/coverSchedule.test.ts",
+        "test/calmframes/useFlashGuard.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 100000 ms; useFlashGuard \u203a keeps the picture hidden when the rendition is further off than verify allows",
+      "survived_because": "",
+      "seconds": 1.2,
+      "tests_run": 50
+    },
+    {
+      "id": "rendition-offset-is-applied",
+      "property": "rendition start offset",
+      "lane": "app",
+      "file": "src/calmframes/coverSchedule.ts",
+      "breaks": "only one end of the interval moves onto the rendition's timeline, so the cover is the wrong length and ends late",
+      "tests": [
+        "test/calmframes/coverSchedule.test.ts",
+        "test/calmframes/mutationSurvivors.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "the rendition start offset \u203a moves both ends of the interval, not just the start",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 45
+    },
+    {
+      "id": "rendition-offset-must-be-a-number",
+      "property": "rendition start offset",
+      "lane": "app",
+      "file": "src/calmframes/coverSchedule.ts",
+      "breaks": "a NaN offset poisons every interval boundary instead of being refused",
+      "tests": [
+        "test/calmframes/coverSchedule.test.ts"
+      ],
+      "killed": true,
+      "evidence": "the rendition start offset \u203a refuses an offset that is not a number",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 39
+    },
+    {
+      "id": "rendition-offset-fail-closed-path",
+      "property": "rendition start offset",
+      "lane": "app",
+      "file": "src/calmframes/useFlashGuard.ts",
+      "breaks": "a schedule the app refused to build leaves the title playing with no intervals at all, which is the worst possible answer",
+      "tests": [
+        "test/calmframes/useFlashGuard.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "useFlashGuard \u203a keeps the picture hidden when the rendition is further off than verify allows",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 11
+    },
+    {
+      "id": "rendition-offset-limit-pipeline",
+      "property": "rendition start offset",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "verify publishes a rendition whose timeline starts anywhere at all",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestTheRenditionMustMatchTheSource::test_a_start_that_slid_too_far_blocks_publishing",
+      "survived_because": "",
+      "seconds": 27.6,
+      "tests_run": 36
+    },
+    {
+      "id": "rendition-offset-follows-a-narrow-guard-band",
+      "property": "rendition start offset",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "a household with a guard band narrower than the offset limit stops narrowing the limit with it, which is a setting making the check weaker",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestComparingAMapToItsSource::test_a_narrow_guard_band_narrows_the_offset_tolerance",
+      "survived_because": "",
+      "seconds": 32.2,
+      "tests_run": 45
+    },
+    {
+      "id": "property-cover-before-segment",
+      "property": "the property tests are not vacuous",
+      "lane": "pyapp",
+      "file": "src/calmframes/coverSchedule.ts",
+      "breaks": "the guard band stops running ahead of the segment, which the hypothesis tests have to find at any guard band, minimum cover and rendition offset",
+      "tests": [
+        "eval/property_scheduler_test.py"
+      ],
+      "killed": true,
+      "evidence": "eval/property_scheduler_test.py::test_the_cover_is_on_a_whole_guard_band_early",
+      "survived_because": "",
+      "seconds": 4.4,
+      "tests_run": 2
+    },
+    {
+      "id": "property-red-survives-merging",
+      "property": "the property tests are not vacuous",
+      "lane": "pyapp",
+      "file": "src/calmframes/coverSchedule.ts",
+      "breaks": "merging drops the red reason, over random timelines rather than one fixture",
+      "tests": [
+        "eval/property_scheduler_test.py"
+      ],
+      "killed": true,
+      "evidence": "eval/property_scheduler_test.py::test_any_red_source_makes_the_whole_interval_red",
+      "survived_because": "",
+      "seconds": 7.6,
+      "tests_run": 5
+    },
+    {
+      "id": "property-intervals-never-touch",
+      "property": "the property tests are not vacuous",
+      "lane": "pyapp",
+      "file": "src/calmframes/coverSchedule.ts",
+      "breaks": "two intervals that touch exactly stop merging, which no fixture in the jest suite happens to hit at every guard band",
+      "tests": [
+        "eval/property_scheduler_test.py"
+      ],
+      "killed": true,
+      "evidence": "eval/property_scheduler_test.py::test_two_intervals_that_meet_at_a_point_are_merged",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 4
+    },
+    {
+      "id": "property-seek-covers-first",
+      "property": "the property tests are not vacuous",
+      "lane": "pyapp",
+      "file": "src/calmframes/seekSafety.ts",
+      "breaks": "the keyframe lookback disappears, at every gap the property test tries",
+      "tests": [
+        "eval/property_scheduler_test.py"
+      ],
+      "killed": true,
+      "evidence": "eval/property_scheduler_test.py::test_a_seek_just_past_a_hidden_span_still_covers_first",
+      "survived_because": "",
+      "seconds": 4.7,
+      "tests_run": 9
+    },
+    {
+      "id": "property-clock-re-anchors",
+      "property": "the property tests are not vacuous",
+      "lane": "pyapp",
+      "file": "src/calmframes/mediaClock.ts",
+      "breaks": "starting and stopping the clock stops re-anchoring it, so the estimate invents the media time a stall took",
+      "tests": [
+        "eval/property_scheduler_test.py"
+      ],
+      "killed": true,
+      "evidence": "eval/property_scheduler_test.py::test_the_estimate_matches_the_player_when_nothing_drifts",
+      "survived_because": "",
+      "seconds": 5.3,
+      "tests_run": 13
+    },
+    {
+      "id": "rendition-offset-is-recorded",
+      "property": "rendition start offset",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "the offset the player subtracts is reported as zero, so every live cover runs that far late",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestTheRenditionMustMatchTheSource::test_the_offset_is_recorded_so_a_player_can_subtract_it",
+      "survived_because": "",
+      "seconds": 30.0,
+      "tests_run": 39
+    }
+  ]
+}
