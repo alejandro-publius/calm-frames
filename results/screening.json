@@ -2,7 +2,7 @@
   "generated_on": "2026-09-17",
   "profile": "wcag",
   "adapter_entry_point": "flashmap.analyze_file(path, profile)",
-  "clips_analyzed_ok": 20,
+  "clips_analyzed_ok": 36,
   "clips_failed": 0,
   "per_source": {
     "1930 public-domain film": {
@@ -105,6 +105,40 @@
       ],
       "titles_with_a_red_segment": [],
       "flagged_share_of_analysed_time": 0.0
+    },
+    "Wikimedia Commons": {
+      "files": 16,
+      "flagged_files": 3,
+      "flagged_segments": 19,
+      "files_failed_to_decode": 0,
+      "segments_by_rule": {
+        "general": 19,
+        "red": 0
+      },
+      "flagged_seconds": 33.689,
+      "analysed_seconds": 425.28,
+      "max_flashes_in_window": 11,
+      "max_area_fraction": 0.914931,
+      "titles": [
+        "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm",
+        "HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm",
+        "HAZARD_wc_clouds_seloncourt.ogv",
+        "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv",
+        "HAZARD_wc_irminger_waves_without_sound_ooi.webm",
+        "HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
+        "HAZARD_wc_planepassingthundercloud.ogv",
+        "HAZARD_wc_sea_of_clouds_over_asia.webm",
+        "HAZARD_wc_stockfootage_setting_sun.webm",
+        "HAZARD_wc_sunset_at_the_sea_of_azov.webm",
+        "HAZARD_wc_sunset_in_spain.webm",
+        "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv",
+        "HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm",
+        "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm",
+        "HAZARD_wc_water_waves_greece.ogv",
+        "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm"
+      ],
+      "titles_with_a_red_segment": [],
+      "flagged_share_of_analysed_time": 0.0792
     },
     "Wikimedia Commons fireworks": {
       "files": 4,
@@ -4744,6 +4778,30 @@
       ]
     },
     {
+      "file": "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 446,
+      "variable_frame_rate": true,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 446,
+      "variable_frame_rate": true,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_clouds_seloncourt.ogv",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 715,
+      "variable_frame_rate": false,
+      "segments": []
+    },
+    {
       "file": "HAZARD_wc_fireworks_buenos_aires.webm",
       "source": "Wikimedia Commons fireworks",
       "flagged_segments": 0,
@@ -5010,6 +5068,109 @@
       ]
     },
     {
+      "file": "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 1661,
+      "variable_frame_rate": false,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_irminger_waves_without_sound_ooi.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 3,
+      "frame_count": 261,
+      "variable_frame_rate": true,
+      "segments": [
+        {
+          "start_s": 0.0,
+          "end_s": 3.704,
+          "reason": "general",
+          "area_fraction": 0.9149305555555556,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 3.104,
+          "end_s": 4.938,
+          "reason": "general",
+          "area_fraction": 0.3246527777777778,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        },
+        {
+          "start_s": 4.138,
+          "end_s": 8.675,
+          "reason": "general",
+          "area_fraction": 0.5013020833333334,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 10
+        }
+      ]
+    },
+    {
+      "file": "HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 4,
+      "frame_count": 900,
+      "variable_frame_rate": true,
+      "segments": [
+        {
+          "start_s": 0.867,
+          "end_s": 5.3,
+          "reason": "general",
+          "area_fraction": 0.4973958333333333,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 5.533,
+          "end_s": 9.9,
+          "reason": "general",
+          "area_fraction": 0.3563368055555556,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        },
+        {
+          "start_s": 24.033,
+          "end_s": 25.4,
+          "reason": "general",
+          "area_fraction": 0.3233506944444444,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 9
+        },
+        {
+          "start_s": 24.933,
+          "end_s": 29.967,
+          "reason": "general",
+          "area_fraction": 0.7252604166666666,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 11
+        }
+      ]
+    },
+    {
       "file": "HAZARD_wc_lightning_240fps.webm",
       "source": "Wikimedia Commons lightning",
       "flagged_segments": 3,
@@ -5144,6 +5305,219 @@
       ]
     },
     {
+      "file": "HAZARD_wc_planepassingthundercloud.ogv",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 673,
+      "variable_frame_rate": false,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_sea_of_clouds_over_asia.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 512,
+      "variable_frame_rate": true,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_stockfootage_setting_sun.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 350,
+      "variable_frame_rate": true,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_sunset_at_the_sea_of_azov.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 807,
+      "variable_frame_rate": true,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_sunset_in_spain.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 941,
+      "variable_frame_rate": true,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 1007,
+      "variable_frame_rate": false,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 850,
+      "variable_frame_rate": true,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 7154,
+      "variable_frame_rate": true,
+      "segments": []
+    },
+    {
+      "file": "HAZARD_wc_water_waves_greece.ogv",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 12,
+      "frame_count": 699,
+      "variable_frame_rate": false,
+      "segments": [
+        {
+          "start_s": 2.4,
+          "end_s": 3.4,
+          "reason": "general",
+          "area_fraction": 0.2983156028368794,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 6
+        },
+        {
+          "start_s": 2.48,
+          "end_s": 4.96,
+          "reason": "general",
+          "area_fraction": 0.47429078014184395,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 4.08,
+          "end_s": 5.08,
+          "reason": "general",
+          "area_fraction": 0.2703900709219858,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 4.2,
+          "end_s": 5.2,
+          "reason": "general",
+          "area_fraction": 0.29521276595744683,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 7.2,
+          "end_s": 10.0,
+          "reason": "general",
+          "area_fraction": 0.4853723404255319,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 10.8,
+          "end_s": 13.84,
+          "reason": "general",
+          "area_fraction": 0.37943262411347517,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 8
+        },
+        {
+          "start_s": 12.92,
+          "end_s": 13.96,
+          "reason": "general",
+          "area_fraction": 0.28147163120567376,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 13.08,
+          "end_s": 14.08,
+          "reason": "general",
+          "area_fraction": 0.25842198581560283,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 6
+        },
+        {
+          "start_s": 26.52,
+          "end_s": 27.52,
+          "reason": "general",
+          "area_fraction": 0.3102836879432624,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 26.6,
+          "end_s": 27.64,
+          "reason": "general",
+          "area_fraction": 0.262854609929078,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 26.76,
+          "end_s": 27.76,
+          "reason": "general",
+          "area_fraction": 0.28147163120567376,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        },
+        {
+          "start_s": 26.84,
+          "end_s": 27.92,
+          "reason": "general",
+          "area_fraction": 0.3049645390070922,
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 7
+        }
+      ]
+    },
+    {
+      "file": "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm",
+      "source": "Wikimedia Commons",
+      "flagged_segments": 0,
+      "frame_count": 1464,
+      "variable_frame_rate": false,
+      "segments": []
+    },
+    {
       "file": "markers.mp4",
       "source": "unlabeled",
       "flagged_segments": 0,
@@ -5153,11 +5527,11 @@
     }
   ],
   "totals": {
-    "clips": 20,
-    "flagged_segments": 437,
-    "sources_with_at_least_one_flag": 5,
+    "clips": 36,
+    "flagged_segments": 456,
+    "sources_with_at_least_one_flag": 6,
     "segments_by_rule": {
-      "general": 437,
+      "general": 456,
       "red": 0
     },
     "red_rule_segments": 0,
@@ -5185,6 +5559,29 @@
         "HAZARD_wc_fireworks_ignis_brunensis.ogv"
       ],
       "rows_kept_from_the_earlier_run": 16,
+      "note": "these files were screened again and their rows replaced. Every other row is from the run named in generated_on."
+    },
+    {
+      "on": "2026-09-17",
+      "files": [
+        "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm",
+        "HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm",
+        "HAZARD_wc_clouds_seloncourt.ogv",
+        "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv",
+        "HAZARD_wc_irminger_waves_without_sound_ooi.webm",
+        "HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
+        "HAZARD_wc_planepassingthundercloud.ogv",
+        "HAZARD_wc_sea_of_clouds_over_asia.webm",
+        "HAZARD_wc_stockfootage_setting_sun.webm",
+        "HAZARD_wc_sunset_at_the_sea_of_azov.webm",
+        "HAZARD_wc_sunset_in_spain.webm",
+        "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv",
+        "HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm",
+        "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm",
+        "HAZARD_wc_water_waves_greece.ogv",
+        "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm"
+      ],
+      "rows_kept_from_the_earlier_run": 20,
       "note": "these files were screened again and their rows replaced. Every other row is from the run named in generated_on."
     }
   ],

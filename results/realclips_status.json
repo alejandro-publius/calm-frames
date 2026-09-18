@@ -38,7 +38,7 @@
    "git_state": "committed"
   }
  },
- "pool_key_sha256": "9f54e77a59d1ae23433656a59cd010a0b468ba61041052d94ec123121578a130",
+ "pool_key_sha256": "bd713e5863a4050327109608eb7f88a816364437f27b50702919f856dc1a4cf8",
  "plots": {
   "directory": "eval/labeling/plots",
   "one_per_segment": 40,
