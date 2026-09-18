@@ -120,3 +120,50 @@ What the same run measured about the player, in results/vvd_timeupdate_stats.jso
 Read that carefully, because it is the argument for the design. In this run the player went quiet for over five seconds between position reports while the clip kept playing. A cover that waited for timeupdate would have been that late. The wall-clock scheduler kept covering through the gap, and the drift figure is the price: with no position report for five seconds, the estimate had run nearly three seconds away from the player by the time one arrived. That is why anything which makes the playhead uncertain, including a stall, hides the picture at once rather than trusting the estimate.
 
 The cadence is not stable on this device. The same clip played smoothly earlier in the evening and choppily here, so treat these as virtual device numbers only. The stick is what GATE 1 measures.
+
+## 2026-09-17, night: what the late cover actually was
+
+The run on Sep 17 left one cover going on 86 ms after its marker, and the
+guess written down at the time was that the JavaScript thread had been
+unavailable for about a third of a second. That was a guess. Nothing measured
+the thread.
+
+The scheduler now records the gap between two runs of its own tick. It asks
+every 50 ms whether the cover should be on, so a gap far past that is the
+thread being away rather than the schedule being wrong.
+
+The first run with that instrument is not a characterization of anything, and
+it is kept at `results/under_load/` rather than in `results/` for that reason.
+The machine was carrying a load average of 218 at the time, from eight working
+agents, two ingest jobs and four verify jobs, on top of the virtual device
+itself. Under that:
+
+- the worst gap between two scheduler ticks was 72.8 seconds;
+- seven passes out of ten could not start the app at all;
+- nine trials came back where fifty were asked for;
+- the worst cover landed 426 ms late in media time, against 86 ms on the
+  quiet machine.
+
+**That last line is the useful one.** The lateness scales with how starved the
+thread is. A quiet machine gave one cover 86 ms late; a machine at load 218
+gave one 426 ms late and lost most of its runs entirely. That is the
+relationship the thread explanation predicts, and it is the first direct
+evidence for it rather than an inference from a gap in the timestamps.
+
+Two things follow, and the second matters more.
+
+**The 86 ms cover was a host artifact, not a design fault.** The schedule fires
+correctly and the thread was not there to run it. Nothing in `coverSchedule.ts`
+or `mediaClock.ts` accounts for it.
+
+**A Fire TV stick can be a loaded machine too.** A stick doing a background
+download, an app update, or simply running a heavier title has less headroom
+than this Mac does when it is quiet. So "it was only host load" is not a reason
+to stop worrying. It is a reason to find out what the worst tick gap is on the
+real device under realistic conditions, and to set the guard band above it.
+That measurement is now part of stick day.
+
+The citable software level result is still the quiet-machine run in
+`results/gate1_software_vvd.json`, which predates the instrument and so has no
+tick gap in it. A clean re-run with the instrument, on an idle machine, is
+still owed and is listed in docs/STATUS.md.
