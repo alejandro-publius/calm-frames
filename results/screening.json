@@ -2,7 +2,7 @@
   "generated_on": "2026-09-17",
   "profile": "wcag",
   "adapter_entry_point": "flashmap.analyze_file(path, profile)",
-  "clips_analyzed_ok": 36,
+  "clips_analyzed_ok": 38,
   "clips_failed": 0,
   "per_source": {
     "1930 public-domain film": {
@@ -185,7 +185,7 @@
       "flagged_share_of_analysed_time": 0.0868
     },
     "unlabeled": {
-      "files": 1,
+      "files": 3,
       "flagged_files": 0,
       "flagged_segments": 0,
       "files_failed_to_decode": 0,
@@ -198,7 +198,9 @@
       "max_flashes_in_window": 0,
       "max_area_fraction": 0.0,
       "titles": [
-        "markers.mp4"
+        "markers.mp4",
+        "markers50.mp4",
+        "markers_packed.mp4"
       ],
       "titles_with_a_red_segment": [],
       "flagged_share_of_analysed_time": null
@@ -5524,10 +5526,26 @@
       "frame_count": 3600,
       "variable_frame_rate": false,
       "segments": []
+    },
+    {
+      "file": "markers50.mp4",
+      "source": "unlabeled",
+      "flagged_segments": 0,
+      "frame_count": 6300,
+      "variable_frame_rate": false,
+      "segments": []
+    },
+    {
+      "file": "markers_packed.mp4",
+      "source": "unlabeled",
+      "flagged_segments": 0,
+      "frame_count": 360,
+      "variable_frame_rate": false,
+      "segments": []
     }
   ],
   "totals": {
-    "clips": 36,
+    "clips": 38,
     "flagged_segments": 456,
     "sources_with_at_least_one_flag": 6,
     "segments_by_rule": {
@@ -5544,47 +5562,7 @@
     "passes": true,
     "note": "Planning target from BUILD_PROMPT 2.4, not a spec number. Self-filmed positives are counted separately in the README."
   },
-  "renamed_to_hazard": [
-    "HAZARD_bbb_720p_surround.mp4",
-    "HAZARD_sintel_2048_stereo_512kb.mp4",
-    "HAZARD_tears_of_steel_720p.mov"
-  ],
-  "rescreens": [
-    {
-      "on": "2026-09-17",
-      "files": [
-        "HAZARD_iss_night_pass_africa_mideast.ogv",
-        "HAZARD_iss_night_pass_europe_to_asia.ogv",
-        "HAZARD_iss_night_pass_malaysia.ogv",
-        "HAZARD_wc_fireworks_ignis_brunensis.ogv"
-      ],
-      "rows_kept_from_the_earlier_run": 16,
-      "note": "these files were screened again and their rows replaced. Every other row is from the run named in generated_on."
-    },
-    {
-      "on": "2026-09-17",
-      "files": [
-        "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm",
-        "HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm",
-        "HAZARD_wc_clouds_seloncourt.ogv",
-        "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv",
-        "HAZARD_wc_irminger_waves_without_sound_ooi.webm",
-        "HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
-        "HAZARD_wc_planepassingthundercloud.ogv",
-        "HAZARD_wc_sea_of_clouds_over_asia.webm",
-        "HAZARD_wc_stockfootage_setting_sun.webm",
-        "HAZARD_wc_sunset_at_the_sea_of_azov.webm",
-        "HAZARD_wc_sunset_in_spain.webm",
-        "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv",
-        "HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm",
-        "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm",
-        "HAZARD_wc_water_waves_greece.ogv",
-        "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm"
-      ],
-      "rows_kept_from_the_earlier_run": 20,
-      "note": "these files were screened again and their rows replaced. Every other row is from the run named in generated_on."
-    }
-  ],
+  "renamed_to_hazard": [],
   "self_filmed_needed": {
     "what_this_is": "a shooting list, not a measurement. It says what has to be filmed because no licensed footage we could find covers it.",
     "flash_limit_per_second_from_profile": 3,

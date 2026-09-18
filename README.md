@@ -276,8 +276,8 @@ The harness side works and nothing crashed, but playback did not run in that tak
 
 | What | Value |
 |---|---|
-| Clips in the pool | <!--n results/screening.json:totals.clips -->36<!--/n--> |
-| Analyzed cleanly | <!--n results/screening.json:clips_analyzed_ok -->36<!--/n--> |
+| Clips in the pool | <!--n results/screening.json:totals.clips -->38<!--/n--> |
+| Analyzed cleanly | <!--n results/screening.json:clips_analyzed_ok -->38<!--/n--> |
 | flashmap could not decode | <!--n results/screening.json:clips_failed -->0<!--/n--> |
 | Flagged segments found | <!--n results/screening.json:totals.flagged_segments -->456<!--/n--> |
 | Sources with at least one flag | <!--n results/screening.json:totals.sources_with_at_least_one_flag -->6<!--/n--> |
@@ -294,9 +294,9 @@ Per source:
 | DVIDS | <!--n results/screening.json:per_source.DVIDS.files -->2<!--/n--> | <!--n results/screening.json:per_source.DVIDS.flagged_files -->2<!--/n--> | <!--n results/screening.json:per_source.DVIDS.flagged_segments -->9<!--/n--> |
 | NASA SVS 5011 | <!--n results/screening.json:per_source.NASA SVS 5011.files -->1<!--/n--> | <!--n results/screening.json:per_source.NASA SVS 5011.flagged_files -->0<!--/n--> | <!--n results/screening.json:per_source.NASA SVS 5011.flagged_segments -->0<!--/n--> |
 | NASA ISS time-lapse | <!--n results/screening.json:per_source.NASA ISS time-lapse.files -->3<!--/n--> | <!--n results/screening.json:per_source.NASA ISS time-lapse.flagged_files -->0<!--/n--> | <!--n results/screening.json:per_source.NASA ISS time-lapse.flagged_segments -->0<!--/n--> |
-| unlabeled | <!--n results/screening.json:per_source.unlabeled.files -->1<!--/n--> | <!--n results/screening.json:per_source.unlabeled.flagged_files -->0<!--/n--> | <!--n results/screening.json:per_source.unlabeled.flagged_segments -->0<!--/n--> |
+| unlabeled | <!--n results/screening.json:per_source.unlabeled.files -->3<!--/n--> | <!--n results/screening.json:per_source.unlabeled.flagged_files -->0<!--/n--> | <!--n results/screening.json:per_source.unlabeled.flagged_segments -->0<!--/n--> |
 
-The `unlabeled` row is one file that carries no source label in `media/LICENSES.csv`, and `NASA ISS time-lapse` is three night time-lapses that decode cleanly and flash at nothing, so they contribute no segments. Both are in the table because every source in the results file has to be, and the Files column has to add up to the <!--n results/screening.json:clips_analyzed_ok -->36<!--/n--> analyzed cleanly. `eval/tests/test_screening_table_is_complete.py` fails if either stops being true, because this table had already lost a row once.
+The `unlabeled` row is three files that carry no source label in `media/LICENSES.csv`, and they are not content: they are the marker clips the timing harness plays against itself, so the honest count of screened footage is three lower than the pool total. `NASA ISS time-lapse` is three night time-lapses that decode cleanly and flash at nothing, so they contribute no segments. Both are in the table because every source in the results file has to be, and the Files column has to add up to the <!--n results/screening.json:clips_analyzed_ok -->38<!--/n--> analyzed cleanly. `eval/tests/test_screening_table_is_complete.py` fails if either stops being true, because this table had already lost a row once.
 
 The plain `Wikimedia Commons` row is sixteen calm clips, clouds, waves and sunsets, downloaded to give the pool something that should not flash at all. Three of them do: two stretches of sea and a lake panorama, nineteen segments between them, every one on the general rule. Sunlight on moving water is a real thing to flag, not a bug in the analyser, and it is worth knowing before anyone claims a false positive rate from calm footage. Those sixteen are screened but are not in the labelling pool: the two ffmpeg based baselines have not run on them, and a title joins that pool only once every candidate list has seen it.
 
