@@ -104,7 +104,8 @@ The VIDEO RULES in `docs/BUILD_PROMPT.md` say to open with a terminal where `veg
 |---|---|
 | A device the app runs on: the stick on Vega OS 1.2 in developer mode, **or** the Vega Virtual Device | The virtual device works today. The stick is an upgrade |
 | A camera view of that device's screen | Confirmed for a television. **Not yet confirmed for the virtual device window**, see the section above |
-| Kid mode, the countdown card, the parent area behind a PIN | Built, not yet seen on hardware |
+| **Kid mode reachable in the app, not only in tests** | **Blocked.** `app/src/screens/PlayerScreen.tsx` reads `route.params.guarded` and nothing in `app/src` sets it, and `KidHomeScreen` and `ParentAreaScreen` are imported only by tests. So the guard never engages for a user in the app as committed. Found by mock judge 1, written up in [`docs/MOCK_JUDGE_1.md`](MOCK_JUDGE_1.md). **Nine of the ten camera shots cannot be filmed until the app lane wires this up.** It is the single biggest thing standing between this script and a video |
+| The countdown card, the cover, the parent area behind a PIN | Built and tested. Not yet reachable from the app, see the row above |
 | The camera-fed meter beside the screen | `eval/meter.py` is built. It needs a calibration filmed on the same screen, which is part of stick day |
 | At least one verified title with a real flagged segment in it | The pipeline produces these. Pick one with a clean calm moment either side of the flagged span |
 | The drop-in hook, so there is a diff to show | [`docs/INTEGRATION_DIFF.md`](INTEGRATION_DIFF.md) |

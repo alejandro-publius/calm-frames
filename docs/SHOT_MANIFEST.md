@@ -18,6 +18,8 @@ So there is no screen recording route for any app shot, on either device. A tele
 
 **One thing has to be settled before that plan is trusted.** Nobody has pointed a camera at the virtual device window and confirmed the app is visible in it. The capture APIs miss the GPU layer; whether a camera does too is a different question and it is unanswered. It is R00 below, it takes two minutes, and it decides whether any of this can happen without the stick.
 
+**And one thing has to be built before any of it matters.** Kid mode is not reachable in the app as committed: `app/src/screens/PlayerScreen.tsx` reads `route.params.guarded` and nothing in `app/src` sets it, while `KidHomeScreen` and `ParentAreaScreen` are imported only by tests. Mock judge 1 found it and [`docs/MOCK_JUDGE_1.md`](MOCK_JUDGE_1.md) writes it up. **Nine of the ten camera shots are shots of kid mode, so all nine are blocked on the app lane wiring those screens into the navigation stack.** That is not this lane's fix, and it is the first thing to ask about. The tenth, S01, is the home screen and the terminal, and it can be filmed without it.
+
 ## 2. The four routes
 
 | Route | What it is | Waits on |
@@ -45,23 +47,23 @@ Route B has two legs:
 | Shot | Beat | What | Route | Waits on | Where it comes from | Lands in | Status |
 |---|---|---|---|---|---|---|---|
 | **S01** | 1 | The device running the app, and a terminal running `vega device info` in the same frame | A + C in one frame | A device, plus R00 on the virtual one | Camera. The terminal is in shot, not composited | `media/video/raw/S01_*.mov` | not captured |
-| **S02** | 2 | Close on the kid mode row, a hand on the remote, no faces | A | A device, plus R00. Consent | Camera | `media/video/raw/S02_*.mov` | not captured |
-| **S03** | 3 | The countdown card, its own countdown running to zero | A | A device, plus R00. A verified title with a flagged span | Camera | `media/video/raw/S03_*.mov` | not captured |
-| **S04** | 4 | The covered picture with captions running, the meter beside the screen at 0, sound audible, one unbroken take | A | Meter calibration. **Prefer the stick**, see the meter note in the script | Camera, with `eval/meter.py run` live on a second screen inside the frame | `media/video/raw/S04_*.mov` | not captured |
+| **S02** | 2 | Close on the kid mode row, a hand on the remote, no faces | A | **Kid mode wired up.** A device, plus R00. Consent | Camera | `media/video/raw/S02_*.mov` | not captured |
+| **S03** | 3 | The countdown card, its own countdown running to zero | A | **Kid mode wired up.** A device, plus R00. A verified title with a flagged span | Camera | `media/video/raw/S03_*.mov` | not captured |
+| **S04** | 4 | The covered picture with captions running, the meter beside the screen at 0, sound audible, one unbroken take | A | **Kid mode wired up.** Meter calibration. **Prefer the stick**, see the meter note in the script | Camera, with `eval/meter.py run` live on a second screen inside the frame | `media/video/raw/S04_*.mov` | not captured |
 | **S05** | 4 | The luminance trace for the same seconds, flagged span marked | D | Nothing | `eval/plots.py` over the demo title, with the flagged span drawn from its signed map | `results/plots/demo_title_trace.png` | not captured |
-| **S06** | 5 | The Alexa skip landing inside the flagged part, still covered, meter still 0 | A | Meter calibration. **Prefer the stick**, same note | Camera, same rig as S04 | `media/video/raw/S06_*.mov` | not captured |
-| **S07** | 6 | The parent area PIN entry | A | A device, plus R00 | Camera. Use a throwaway PIN for the take, not the one in the release notes | `media/video/raw/S07_*.mov` | not captured |
-| **S08** | 6 | Household settings, and the hidden count going up when the room changes | A | A device, plus R00. A title whose count actually moves | Camera | `media/video/raw/S08_*.mov` | not captured |
-| **S09** | 7 | A card press, a D-pad seek and a voice command, same title, no reload | A | A device, plus R00 | Camera | `media/video/raw/S09_*.mov` | not captured |
+| **S06** | 5 | The Alexa skip landing inside the flagged part, still covered, meter still 0 | A | **Kid mode wired up.** Meter calibration. **Prefer the stick**, same note | Camera, same rig as S04 | `media/video/raw/S06_*.mov` | not captured |
+| **S07** | 6 | The parent area PIN entry | A | **The parent area reachable from the app.** A device, plus R00 | Camera. Use a throwaway PIN for the take, not the one in the release notes | `media/video/raw/S07_*.mov` | not captured |
+| **S08** | 6 | Household settings, and the hidden count going up when the room changes | A | **The parent area reachable from the app.** A device, plus R00. A title whose count actually moves | Camera | `media/video/raw/S08_*.mov` | not captured |
+| **S09** | 7 | A card press, a D-pad seek and a voice command, same title, no reload | A | **Kid mode wired up.** A device, plus R00 | Camera | `media/video/raw/S09_*.mov` | not captured |
 | **S10** | 8 | A title going through the pipeline | C | Nothing | Terminal recording of the real pipeline run | `media/video/raw/S10_pipeline.mov` | not captured |
 | **S11** | 8 | `verify` refusing a second title, reason printed | C | Nothing | Terminal recording. Use a title verify really refuses | `media/video/raw/S11_verify_refuses.mov` | not captured |
-| **S12** | 8 | The kid mode row with the refused title absent | A | A device, plus R00 | Camera | `media/video/raw/S12_*.mov` | not captured |
+| **S12** | 8 | The kid mode row with the refused title absent | A | **Kid mode wired up.** A device, plus R00 | Camera | `media/video/raw/S12_*.mov` | not captured |
 | **S13** | 9 | `python -m flashmap check` exiting 1 with its segment list | C | Nothing | Terminal recording | `media/video/raw/S13_flashmap_check.mov` | not captured |
 | **S14** | 9 | A pull request adding a flashing asset, our Action red, job summary open | C | A scratch repository with the workflow in it | Browser recording | `media/video/raw/S14_action_red.mov` | not captured |
 | **S15** | 10 | The hook diff, still, readable in one look | C | Nothing | Screen capture of `docs/INTEGRATION_DIFF.md` or the diff itself in an editor | `media/video/raw/S15_hook_diff.png` | not captured |
 | **S16** | 11 | The README results tables, scrolled to "Not measured yet" | C | Nothing | Screen recording of the rendered README | `media/video/raw/S16_results_tables.mov` | not captured |
 | **S17** | 11 | `python eval/readme_sync.py --check` passing | C | Nothing | Terminal recording | `media/video/raw/S17_readme_sync.mov` | not captured |
-| **S18** | 12 | The screen, calm, playing, end card over it | A | A device, plus R00 | Camera | `media/video/raw/S18_*.mov` | not captured |
+| **S18** | 12 | The screen, calm, playing, end card over it | A | **Kid mode wired up.** A device, plus R00 | Camera | `media/video/raw/S18_*.mov` | not captured |
 
 **Ten shots are a camera on a screen. Eight need no device at all.** The eight are S05, S10, S11, S13, S14, S15, S16 and S17, all on route C or D. S14 needs a scratch repository set up first. The other seven are ready to capture as soon as a lane has time.
 
@@ -100,7 +102,9 @@ R01 covers all of them in one run. Anything in that list that does not render, o
 
 **Now, needs one setup step.** S14: a scratch repository with `flashmap/examples/flash-check.yml` in it and a pull request that adds a flashing asset. Check the job summary renders no thumbnail of the asset before recording, and do not open the pull request's Files tab on camera, because GitHub previews images there.
 
-**The moment the virtual device is free, before anything else.** R00. Ask the main session first. It is two minutes and it decides whether eight of the ten camera shots can be filmed without the stick. Then R03, which is a confidence check rather than a blocker.
+**Blocked on the app lane, and it comes first.** Kid mode has to be reachable from the app's own navigation before nine of the ten camera shots exist to be filmed. Ask about it before planning a filming day.
+
+**The moment the virtual device is free.** R00. Ask the main session first. It is two minutes and it decides whether eight of the ten camera shots can be filmed without the stick. Then R03, which is a confidence check rather than a blocker.
 
 **Stick day, about Sep 20.** R04, the meter calibration. Without it the meter in S04 and S06 is uncalibrated, and the script says what to do in that case rather than pretending otherwise.
 
