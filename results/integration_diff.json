@@ -4,5 +4,28 @@
   "lines_added": 32,
   "lines_replaced": 2,
   "files_touched": 4,
+  "per_file": {
+    "src/components/Seekbar.tsx": {
+      "added": 3,
+      "replaced": 1
+    },
+    "src/screens/PlayerScreen.tsx": {
+      "added": 23,
+      "replaced": 0
+    },
+    "src/w3cmedia/mediacontrols/PlaybackControls.tsx": {
+      "added": 3,
+      "replaced": 1
+    },
+    "src/w3cmedia/mediacontrols/VideoPlayerUI.tsx": {
+      "added": 3,
+      "replaced": 0
+    }
+  },
+  "busiest_file": "src/screens/PlayerScreen.tsx",
+  "busiest_file_lines_added": 23,
+  "other_files_lines_added_each": [
+    3
+  ],
   "diff_sha256": "1666328c6debf10fc48cc86e195724298099a5ee1812c73405f62c1ce196003b"
 }

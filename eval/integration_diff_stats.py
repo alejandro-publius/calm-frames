@@ -47,6 +47,23 @@ def measure(text: str) -> dict:
     if not files:
         raise SystemExit(f"{DOC}: the diff block has no 'diff --git' header")
 
+    # Per file, because the shape of the change matters as much as its size:
+    # the work is concentrated in one file and the other three are small.
+    per_file: dict[str, dict[str, int]] = {}
+    current: str | None = None
+    for ln in lines:
+        if ln.startswith("diff --git "):
+            current = ln.split()[-1]
+            per_file[current] = {"added": 0, "replaced": 0}
+        elif current is None:
+            continue
+        elif ln.startswith("+") and not ln.startswith("+++"):
+            per_file[current]["added"] += 1
+        elif ln.startswith("-") and not ln.startswith("---"):
+            per_file[current]["replaced"] += 1
+
+    busiest = max(per_file.items(), key=lambda kv: kv[1]["added"] + kv[1]["replaced"])
+
     return {
         "generated_from": "docs/INTEGRATION_DIFF.md",
         "what_this_is": (
@@ -56,6 +73,12 @@ def measure(text: str) -> dict:
         "lines_added": len(added),
         "lines_replaced": len(removed),
         "files_touched": len(files),
+        "per_file": per_file,
+        "busiest_file": busiest[0],
+        "busiest_file_lines_added": busiest[1]["added"],
+        "other_files_lines_added_each": sorted(
+            {counts["added"] for name, counts in per_file.items() if name != busiest[0]}
+        ),
         "diff_sha256": hashlib.sha256(body.encode("utf-8")).hexdigest(),
     }
 
