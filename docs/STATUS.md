@@ -50,8 +50,6 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | **Same session** | Film the layering test, then the 240 fps marker run. | **This is the only thing that can produce a GATE 1 number.** Phone at 240 fps, exposure locked, TV in game mode with motion smoothing off. `make stick-day` prints what to film and where the files go. |
 | **Before then** | Confirm your phone films 240 fps and the TV has a game mode. | Assumed, never confirmed. If either is wrong, GATE 1 needs a different plan and it is better to know now. |
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
-| **Next session, first thing** | Fix the pattern crop defect in section 4c: a full-frame six-pair pattern with a near-black edge bar escapes the rule, because the picture detector crops that bar as pillarbox and the count falls to five pairs. A hazard reaches a child. `docs/VERIFY_PASS_2.md` reproduces it. | It is the only thing on this page where something flashing or striped gets through. |
-| **Next session, after that** | Decide whether the three unreachable features get wired or get cut. Per-profile logs and the household hide log both need one shared store between the player screen and the kid mode route. The registry needs one `lookupMap` call in the shelf. Neither is large; both were left because the lanes that built them did not own the file. | They are built and tested and a judge cannot see any of them. Section 4c has the detail. |
 | **Before you label, one command** | Run `make ffmpeg-ps-pool` and `make naive-luma-pool` over the sixteen calm Wikimedia clips, then rebuild the pool. | The pool shrank when IRIS joined, from 40 segments over 15 titles to <!--n results/realclips_status.json:segments -->34<!--/n--> over <!--n results/realclips_status.json:titles -->9<!--/n-->, and the half that nothing flagged went from 12 windows to 6. IRIS cannot read six clips including the three ISS night passes, which carried most of that negative half, and a title joins the pool only once every candidate list has seen it. That is the guard working rather than a fault. Running the two ffmpeg based lists over the calm sixteen more than replaces what was lost, and it is better to label one pool than two. |
 | **Any evening, about an hour** | Label the <!--n results/realclips_status.json:segments -->34<!--/n--> blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all of them. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. The pool was recut on Sep 18 when EA IRIS joined as a candidate list, so the segment ids are not the ones an earlier version of this page named. |
 | **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add that line to this file. It has to start a line of its own: no bullet, no table cell, no backticks. The exact wording is in the refusal `make deploy` prints. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Seventeen tests now cover both locks, run against a copy of the script so this file is never touched. Nothing has touched AWS. |
@@ -174,7 +172,21 @@ the pattern rule**, and the same finding is waiting there and in any title with
 credits. It is probably also part of why the pattern rule's raw precision is
 0.527 while its settled precision is 0.937.
 
-### One defect in the pattern rule, found by the second verifier pass
+### The pattern crop defect, fixed on Sep 18
+
+**It is closed.** A black edge bar is read as a stripe rather than a pillarbox
+now, so the full-frame six pair grating that used to pass the broadcast profile
+is flagged, and `detect_picture` only ever crops less than it did. The flash side
+was checked rather than assumed: 402 flash-design clips through the old and new
+detector, picture rectangle changed on none, so the published flash precision and
+recall stand. Reproduced here before and after.
+
+The three features that were built but unreachable are wired too: the hide log
+has a producer and the parent area shows it, the shelf asks the registry before
+falling back to a bundled map, and the chime reaches the platform with our asset.
+None of those was ever a job for Alex, and they are off the dated list.
+
+### What that defect was, kept for the record
 
 **A full-frame pattern at the count boundary can escape the rule entirely.** Six
 pairs of black to peak white stripes, filling the frame, PASSES the broadcast
