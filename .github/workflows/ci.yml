@@ -60,7 +60,13 @@ jobs:
               pip install -e "./$pkg[dev]" || pip install -e "./$pkg"
             fi
           done
-          pip install pytest==9.1.1
+          # eval/ has no pyproject.toml, so the loop above skips it and nothing
+          # installs what its tests import. flashmap brings av, numpy and
+          # cryptography, and flashmap[dev] brings pytest, hypothesis and pyyaml.
+          # matplotlib is the one left over, and without it
+          # eval/tests/test_labeling_plots.py fails to import and takes the whole
+          # job down with it, which is what hid the scheduler failure below.
+          pip install pytest==9.1.1 matplotlib==3.11.2
       - name: Test
         run: |
           # Skip anything marked slow: the full conformance suite runs locally
