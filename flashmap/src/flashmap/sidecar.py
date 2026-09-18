@@ -113,6 +113,11 @@ def build_map(result: AnalysisResult, created_utc: str | None = None) -> dict[st
             "frame_count": result.frame_count,
             "first_pts_ms": None if result.first_pts_ms is None else round(result.first_pts_ms, 3),
             "last_pts_ms": None if result.last_pts_ms is None else round(result.last_pts_ms, 3),
+            "last_coded_pts_ms": (
+                None
+                if result.last_coded_pts_ms is None
+                else round(result.last_coded_pts_ms, 3)
+            ),
             "variable_frame_rate": result.variable_frame_rate,
             "frame_interval_ms": {k: round(v, 3) for k, v in result.frame_interval_ms.items()},
             "timestamp_source": source.timestamp_source,

@@ -15,8 +15,10 @@ What it will not do:
   the windows that every detector saw.
 
 The headline interval is Wilson, as the plan says for this set, because each clip was generated
-independently. The bootstrap over clips is reported beside it, and it is the wider of the two,
-because windows inside one clip are not independent.
+independently. The bootstrap over clips is reported beside it, and it is not automatically the
+wider of the two: recall clusters by clip so its bootstrap comes out wider, while precision is
+nearly the same on every positive clip, so its bootstrap comes out narrower. Both are in the
+file.
 """
 
 from __future__ import annotations
@@ -25,6 +27,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 import statistics
 import subprocess
 import sys
@@ -199,19 +202,74 @@ def excluded_reason(row: dict, clip: dict) -> str | None:
     return None
 
 
+def band(value: float, edges: list[float]) -> str:
+    """A readable band label for a continuous axis.
+
+    Exact values make a curve with one or two clips per point, which is unreadable and whose
+    intervals say nothing. The edges are placed tightly around each limit, because that is
+    where the answer changes, and loosely away from it, where it does not.
+    """
+    if value < edges[0]:
+        return f"under {edges[0]:g}"
+    for low, high in zip(edges, edges[1:]):
+        if low <= value < high:
+            return f"{low:g} to {high:g}"
+    return f"{edges[-1]:g} and over"
+
+
+def _near_split(points: list[dict]) -> dict[str, object]:
+    """Recall and its counts, split by whether the clip sits near a limit or clear of one."""
+    out: dict[str, object] = {}
+    for point in points:
+        key = "recall_near_limits" if str(point["bucket"]) == "True" else "recall_away_from_limits"
+        row = point.get("flashmap")
+        if not isinstance(row, dict):
+            continue
+        value = row.get("recall")
+        out[key] = None if value is None else round(value, 3)
+        out[f"{key}_clips"] = point["clips"]
+        out[f"{key}_positive_windows"] = row["counts"]["tp"] + row["counts"]["fn"]
+    return out
+
+
+def _bucket_order(bucket: object) -> tuple[int, float, str]:
+    """Sort a curve's buckets: numbers in order, bands by their lower edge, names last."""
+    text = str(bucket)
+    try:
+        return (0, float(text), "")
+    except ValueError:
+        pass
+    found = re.findall(r"-?\d*\.?\d+", text)
+    if found:
+        low = float(found[0])
+        return (0, low - (0.001 if text.startswith("under") else 0.0), "")
+    return (1, 0.0, text)
+
+
 def bucket_key(clip: dict, truth: dict, axis: str, spec: dict):
     if axis == "flash_rate_hz":
-        return clip["flash_hz"]
+        # float, always: the spine writes 10 and the cross product writes 10.0, and two buckets
+        # for one rate would split the very points this axis exists to compare.
+        return float(clip["flash_hz"])
     if axis == "observed_flash_rate_hz":
-        return round(truth["observed_flash_rate_hz"] * 2) / 2
+        return round(truth["observed_flash_rate_hz"])
     if axis == "luminance_step_over_limit":
-        return round(truth["general_delta"] / spec["general_min_delta"], 2)
+        return band(
+            truth["general_delta"] / spec["general_min_delta"],
+            [0.5, 0.8, 0.9, 0.95, 1.0, 1.05, 1.1, 1.25, 2.0],
+        )
     if axis == "field_coverage_over_limit":
-        return round(truth["field_coverage"] / spec["area_fraction_limit"], 1)
+        return band(
+            truth["field_coverage"] / spec["area_fraction_limit"],
+            [0.5, 0.85, 0.95, 1.0, 1.05, 1.15, 1.5, 2.0, 4.0],
+        )
     if axis == "area_fraction_of_picture":
-        return round(truth["drawn_area_fraction"], 2)
+        return band(truth["drawn_area_fraction"], [0.02, 0.05, 0.1, 0.2, 0.35, 0.5])
     if axis == "ucs_distance_over_limit":
-        return round(truth["ucs_distance"] / spec["red_min_ucs_distance"], 2)
+        return band(
+            truth["ucs_distance"] / spec["red_min_ucs_distance"],
+            [0.5, 0.9, 0.95, 1.0, 1.05, 1.1, 1.3],
+        )
     if axis == "frame_rate":
         return clip["fps"]
     if axis == "timing":
@@ -418,10 +476,13 @@ def build(design_path: Path, raw_path: Path) -> dict:
         axis: defaultdict(lambda: defaultdict(Tally)) for axis in CURVE_AXES
     }
     curve_clips: dict[str, dict[str, int]] = {axis: defaultdict(int) for axis in CURVE_AXES}
+    curve_near: dict[str, dict[str, int]] = {axis: defaultdict(int) for axis in CURVE_AXES}
     for row, clip, predictions, every_window, shared, truth in per_row:
         for axis in CURVE_AXES:
             key = str(bucket_key(clip, clip["truth"], axis, spec))
             curve_clips[axis][key] += 1
+            if clip["near_threshold"]:
+                curve_near[axis][key] += 1
             for name in curve_detectors:
                 if name not in predictions:
                     continue
@@ -436,7 +497,18 @@ def build(design_path: Path, raw_path: Path) -> dict:
     for axis, buckets in curves.items():
         points = []
         for key, per_detector in buckets.items():
-            point: dict[str, object] = {"bucket": key, "clips": curve_clips[axis][key]}
+            clips_here = curve_clips[axis][key]
+            point: dict[str, object] = {
+                "bucket": key,
+                "clips": clips_here,
+                # How much of this bucket is boundary cases. The design puts its near threshold
+                # rows at the flash rates either side of the limit, so a dip on the rate axis
+                # can be other limits being near rather than the rate being hard. Without this
+                # share next to the point, that confound is invisible.
+                "near_threshold_share": round(curve_near[axis][key] / clips_here, 3)
+                if clips_here
+                else None,
+            }
             for name, tally in per_detector.items():
                 summary = tally.as_dict()
                 point[name] = {
@@ -453,11 +525,29 @@ def build(design_path: Path, raw_path: Path) -> dict:
                     "counts": summary["counts"],
                 }
             points.append(point)
-        try:
-            points.sort(key=lambda point: float(point["bucket"]))
-        except ValueError:
-            points.sort(key=lambda point: str(point["bucket"]))
+        points.sort(key=lambda point: _bucket_order(point["bucket"]))
         curve_out[axis] = points
+
+    def flat(tally_name: str, universe: str, prefix: str) -> dict[str, object]:
+        """Flat, marker friendly copies of the numbers a document is allowed to quote.
+
+        eval/readme_sync.py reads a dotted path with no spaces in it, and the table keys here
+        are sentences. So the publishable numbers get short keys of their own, rounded to what
+        a document should show, and a document quotes these and nothing else.
+        """
+        tally = tallies[universe].get(tally_name)
+        if tally is None:
+            return {}
+        row = tally.as_dict()
+        out: dict[str, object] = {}
+        for metric in ("precision", "recall"):
+            value = row[metric]["value"]
+            out[f"{prefix}_{metric}"] = None if value is None else round(value, 3)
+            out[f"{prefix}_{metric}_lo"] = round(row[metric]["wilson_lo"], 3)
+            out[f"{prefix}_{metric}_hi"] = round(row[metric]["wilson_hi"], 3)
+            out[f"{prefix}_{metric}_denominator"] = row[metric]["denominator"]
+        out[f"{prefix}_f1"] = None if row["f1"] is None else round(row["f1"], 3)
+        return out
 
     measured = len(rows)
     designed = len(clips)
@@ -496,6 +586,57 @@ def build(design_path: Path, raw_path: Path) -> dict:
             "design_seed": design["seed"],
         },
         "exclusions": dict(exclusions),
+        "published": {
+            "clips_designed": designed,
+            "clips_measured": measured,
+            "clips_kept": len(kept),
+            "windows": windows_total,
+            "positive_windows": positives_total,
+            "excluded_clips": sum(exclusions.values()),
+            **flat("flashmap", "all_windows", "flashmap"),
+            **flat("flashmap", "windows_every_detector_saw", "flashmap_shared"),
+            **flat("flashmap@half_window", "all_windows", "flashmap_half"),
+            **(
+                flat(f"naive_luma_diff@{naive_pick}", "windows_every_detector_saw", "naive")
+                if naive_pick is not None
+                else {}
+            ),
+            **(
+                flat(
+                    f"ffmpeg_photosensitivity@{ffmpeg_pick}",
+                    "windows_every_detector_saw",
+                    "ffmpeg",
+                )
+                if ffmpeg_pick is not None
+                else {}
+            ),
+            "naive_best_threshold": naive_pick,
+            "ffmpeg_best_threshold": ffmpeg_pick,
+            # The split that explains the recall number: away from every limit flashmap finds
+            # everything, and the misses are all boundary cases. Both halves get published so
+            # neither can be quoted on its own.
+            **_near_split(curve_out.get("near_threshold", [])),
+            # Where the false positives actually are. The shared universe drops the first
+            # second of every clip, so the difference between the two false positive counts is
+            # exactly the hide that lands in the calm second before the flashing.
+            "false_positives_total": tallies["all_windows"]["flashmap"].fp,
+            "false_positives_in_the_calm_lead_in": (
+                tallies["all_windows"]["flashmap"].fp
+                - tallies["windows_every_detector_saw"]["flashmap"].fp
+            ),
+            "false_positives_elsewhere": tallies["windows_every_detector_saw"]["flashmap"].fp,
+            "clip_level_precision": round(
+                clip_level["tp"] / max(1, clip_level["tp"] + clip_level["fp"]), 3
+            ),
+            "clip_level_recall": round(
+                clip_level["tp"] / max(1, clip_level["tp"] + clip_level["fn"]), 3
+            ),
+            "what_these_are": (
+                "the same numbers as the tables below, rounded and with short keys, because "
+                "eval/readme_sync.py quotes a dotted path with no spaces in it. A document "
+                "quotes these."
+            ),
+        },
         "headline_all_windows": table("all_windows"),
         "baseline_table_windows_every_detector_saw": table("windows_every_detector_saw"),
         "baselines_not_run": {

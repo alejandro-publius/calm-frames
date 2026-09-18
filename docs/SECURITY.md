@@ -145,11 +145,22 @@ install rather than leaving a hook that blocks every commit. The version is
 pinned to 8.30.1, the same one CI downloads, because rules move between versions
 and a hook that disagrees with CI teaches people to pass `--no-verify`.
 
-The allowlist in `.gitleaks.toml` covers only directories of generated or third
-party files that are never committed: the Shaka Player checkout, installed
-packages, build output. Nothing under our own source, docs, results or
-infrastructure is allowlisted. Keep it that way: an allowlist that grows to
-silence a real finding is how a key ships.
+`.gitleaks.toml` needs gitleaks 8.19 or later, which is what the pin gives you.
+
+It holds three allowlists and should not grow a fourth without an argument. The
+first covers directories of generated or third party files that are never
+committed: the Shaka Player checkout, installed packages, build output, the CDK
+template. The other two name one value and one line shape, both checked by hand
+on Sep 17, 2026 and both false positives on the word "key": the offline demo's
+Ed25519 public key, which the app carries on purpose, and `pool_key_sha256` in
+`results/realclips_status.json`, which is a digest of the labeling pool's
+blinding key file rather than a key.
+
+Nothing under our own source, docs, results or infrastructure is allowlisted by
+directory. Keep it that way: an allowlist that grows to silence a real finding is
+how a key ships. When a new false positive turns up, name the value or the line,
+prove a real secret of the same shape is still caught, and write down what you
+checked.
 
 On a finding, whether from the hook or from CI:
 

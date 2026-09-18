@@ -36,7 +36,9 @@ MARKER = re.compile(
     re.DOTALL,
 )
 
-DEFAULT_TARGETS = ["README.md", "docs", "eval/harness_runs/README.md"]
+# "eval" covers the evaluation lane's own write-ups, including eval/harness_runs/README.md,
+# so every number in them is checked by the same CI step as the README.
+DEFAULT_TARGETS = ["README.md", "docs", "eval"]
 
 
 def resolve(data: object, dotted: str) -> object:
@@ -68,13 +70,21 @@ def render(value: object) -> str:
 
 
 def markdown_files(targets: list[str]) -> list[Path]:
+    """Every markdown file under the targets, each one once.
+
+    Deduplicated because a file and a directory that contains it can both be named, and
+    checking one file twice would count its numbers twice.
+    """
     files: list[Path] = []
+    seen: set[Path] = set()
     for target in targets:
         path = REPO / target
-        if path.is_dir():
-            files.extend(sorted(path.rglob("*.md")))
-        elif path.is_file():
-            files.append(path)
+        candidates = sorted(path.rglob("*.md")) if path.is_dir() else [path] if path.is_file() else []
+        for candidate in candidates:
+            resolved = candidate.resolve()
+            if resolved not in seen:
+                seen.add(resolved)
+                files.append(candidate)
     return files
 
 

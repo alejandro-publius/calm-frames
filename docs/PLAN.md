@@ -30,16 +30,26 @@ every seek path is safe. Any Vega video app can add it with a small hook.
 
 ## The withdrawn timing number
 
-There is no cover lead time figure yet, from any run, on any device, and the
-submission documents say so plainly rather than leaving a gap that looks like
-an oversight. A rehearsal run appeared to show all twenty markers covered in
-time. The run never played: the player reported positions up to about a
+There is no screen-level cover lead time, and there will not be one until the
+stick arrives. There is now a software-level figure from the virtual device,
+and the submission documents say plainly which of the two they are quoting. A
+rehearsal run appeared to show all twenty markers covered in time. The run never played: the player reported positions up to about a
 quarter of a second and got no further, while the cover scheduler, which runs
 on a wall clock by design, kept advancing its own estimate and fired every
 cover on time against it. A stricter second script refused to count any of it.
 Both analysis scripts now require a position report from the player before a
-lead time is counted. `results/gate1_software_vvd.json` is the citable record:
-zero trials counted, 150 dropped. The full retraction is in docs/GATES.md.
+lead time is counted, and the run was done again on a packed clip under that
+rule: 49 usable trials from 22 app launches, 48 covered in time, a median lead
+of 488 ms against a 500 ms guard band, and one cover that went on 86 ms after
+its marker had started. That last one is the finding that matters. The
+scheduler re-checks every 50 ms and re-anchors on every position report, so a
+cover that late means the JavaScript thread was unavailable for about a third
+of a second, and the guard band has to be wider than the worst such pause.
+Nothing yet measures that pause on real hardware.
+
+`results/gate1_software_vvd.json` ships with the events it came from, and
+`eval/verify_gate1_archive.py` rebuilds the summary from them in CI. The full
+retraction of the original number is in docs/GATES.md.
 
 `results/vvd_timeupdate_stats.json` is unaffected and is still the argument for
 scheduling ahead rather than reacting.

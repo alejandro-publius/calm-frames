@@ -17,7 +17,7 @@ from pipeline.bif import (
     write_bif,
 )
 from pipeline.flashmap_adapter import MapSegment
-from pipeline.hideplan import build_cover_intervals, is_calm
+from pipeline.hideplan import build_cover_intervals, is_calm, is_fully_covered
 
 
 def seg(start, end, reason="general"):
@@ -100,10 +100,35 @@ class TestFramesComeFromCalmMoments:
         bad = all_frames_calm(frames, intervals, margin_ms=1000)
         assert [frame.source_ms for frame in bad] == [10_000]
 
-    def test_a_title_flagged_end_to_end_gets_no_trickplay(self):
+    def test_a_title_flagged_end_to_end_is_sampled_from_under_the_cover(self):
+        """This used to raise, and refusing the title was the wrong answer.
+
+        A title with no calm moment anywhere has the cover down from end to end, so every
+        frame of its kid safe rendition is the cover still. A picture taken from there shows
+        the cover and not the film. The margin still applies, so nothing comes from close
+        enough to the edge of a span to catch the flash building.
+        """
         intervals = build_cover_intervals([seg(0, 30_000)], guard_band_ms=0)
-        with pytest.raises(PipelineError):
-            plan_bif_frames(intervals, 30_000, interval_ms=10_000, margin_ms=1000)
+        frames = plan_bif_frames(intervals, 30_000, interval_ms=10_000, margin_ms=1000)
+        assert frames
+        assert not any(
+            is_calm(intervals, frame.source_ms, margin_ms=1000) for frame in frames
+        )
+        assert all(
+            is_fully_covered(intervals, frame.source_ms, margin_ms=1000)
+            for frame in frames
+        )
+
+    def test_a_title_with_a_calm_moment_never_samples_from_under_the_cover(self):
+        """The fallback is only for a title that has nowhere calm to go.
+
+        While there is somewhere calm, that is where the picture comes from, which is what
+        keeps the ordinary rule as strict as it was.
+        """
+        intervals = build_cover_intervals([seg(9000, 11_000)], guard_band_ms=500)
+        frames = plan_bif_frames(intervals, 30_000, interval_ms=2000, margin_ms=1000)
+        assert frames
+        assert all(is_calm(intervals, frame.source_ms, margin_ms=1000) for frame in frames)
 
     def test_a_zero_length_title_is_refused(self):
         with pytest.raises(PipelineError):

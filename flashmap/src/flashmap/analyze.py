@@ -89,6 +89,9 @@ class AnalysisResult:
     last_pts_ms: float | None
     variable_frame_rate: bool
     frame_interval_ms: dict[str, float]
+    last_coded_pts_ms: float | None = None
+    """The timestamp of the last frame that carried a picture of its own. It sits before
+    `last_pts_ms` when the file ends on repeated frames, which is what empty packets mean."""
     picture_source: str = DETECTED
     """`detected` or `carried`, see flashmap.picture."""
     detected_picture: PictureRect | None = None
@@ -200,6 +203,7 @@ class StreamingAnalyzer:
         self._open: dict[str, _OpenSegment | None] = {"general": None, "red": None}
         self._closed: list[Segment] = []
         self._last_pts: float | None = None
+        self._last_coded_pts: float | None = None
         self._first_pts: float | None = None
         self.frame_count = 0
         self._intervals: list[float] = []
@@ -215,6 +219,8 @@ class StreamingAnalyzer:
             if self._first_pts is None:
                 self._first_pts = frame.pts_ms
             self._last_pts = frame.pts_ms
+            if not frame.repeats_previous:
+                self._last_coded_pts = frame.pts_ms
             self.frame_count += 1
             self._step(frame)
 
@@ -348,6 +354,12 @@ class StreamingAnalyzer:
     def last_pts_ms(self) -> float | None:
         return self._last_pts
 
+    @property
+    def last_coded_pts_ms(self) -> float | None:
+        """Where the pictures stop, which is before where the file stops when it ends on
+        repeated frames. A re-encode that drops those repeats ends here instead."""
+        return self._last_coded_pts
+
 
 def _chunked(
     frames: Iterator[AnalysisFrame], chunk_frames: int, overlap: int
@@ -433,6 +445,7 @@ def analyze_file(
         last_pts_ms=analyzer.last_pts_ms,
         variable_frame_rate=variable,
         frame_interval_ms=stats,
+        last_coded_pts_ms=analyzer.last_coded_pts_ms,
         picture_source=picture_source,
         detected_picture=detected,
     )

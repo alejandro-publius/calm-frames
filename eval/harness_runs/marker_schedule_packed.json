@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "generator": "eval/marker_clip.py",
+  "note": "Timing markers for the GATE 1 rehearsal. Not hazardous: one pair of opposing luminance changes every six seconds, far below the three per second WCAG counts as flashing.",
+  "clip": {
+    "file_name": "markers_packed.mp4",
+    "sha256": "1c57cfe921ca58787e813350a19a1307c5d80bb076f07b80bff0c858a4bd0500",
+    "duration_s": 12.0,
+    "fps": 30,
+    "width": 1280,
+    "height": 720,
+    "base_srgb": 110,
+    "marker_srgb": 235,
+    "base_relative_luminance": 0.1559,
+    "marker_relative_luminance": 0.8308
+  },
+  "reference_patch": {
+    "x": 48,
+    "y": 48,
+    "width": 96,
+    "height": 96
+  },
+  "markers": [
+    {
+      "index": 1,
+      "start_ms": 2000,
+      "end_ms": 2500
+    },
+    {
+      "index": 2,
+      "start_ms": 4500,
+      "end_ms": 5000
+    },
+    {
+      "index": 3,
+      "start_ms": 7000,
+      "end_ms": 7500
+    }
+  ]
+}

@@ -92,6 +92,26 @@ def wall_clock_at_media(events: list[dict], media_ms: float) -> float | None:
     return before[0] + fraction * span_wall
 
 
+def stalled_between(events: list[dict], start_wall: float, end_wall: float) -> bool:
+    """Did playback stop between the cover going on and the marker being due.
+
+    A stall makes the lead time meaningless as a measure of scheduling. If the
+    player buffers for forty seconds, the cover was indeed on for forty
+    seconds before the marker appeared, but that says nothing about whether
+    the schedule fires early enough: it says the cover was held, which it is
+    supposed to do. Those trials are recorded and excluded rather than
+    averaged in, because leaving them in makes the numbers look better than
+    the scheduler is.
+    """
+    for event in events:
+        if event.get("kind") not in ("waiting", "stalled", "pause"):
+            continue
+        when = event.get("wallClockMs")
+        if isinstance(when, (int, float)) and start_wall <= when <= end_wall:
+            return True
+    return False
+
+
 def trials_from_events(events: list[dict], schedule: dict, guard_band_ms: int) -> list[dict]:
     covers_on = [
         e
@@ -117,6 +137,16 @@ def trials_from_events(events: list[dict], schedule: dict, guard_band_ms: int) -
                     "marker": marker["index"],
                     "counted": False,
                     "why": "no timeupdate on both sides of the marker",
+                }
+            )
+            continue
+        if stalled_between(events, cover["wallClockMs"], due):
+            trials.append(
+                {
+                    "marker": marker["index"],
+                    "counted": False,
+                    "why": "playback stalled between the cover and the marker",
+                    "uncounted_lead_ms": round(due - cover["wallClockMs"], 1),
                 }
             )
             continue
@@ -150,6 +180,7 @@ def main() -> int:
 
     schedule = json.loads(args.schedule.read_text())
     all_trials: list[dict] = []
+    pooled_events: list[dict] = []
     runs: list[dict] = []
 
     for index in range(args.passes):
@@ -184,6 +215,7 @@ def main() -> int:
         runs.append({"pass": index + 1, "events": len(events), "trials": counted_now})
         print(f"  {len(events)} events, {counted_now} usable trials")
         all_trials.extend(trials)
+        pooled_events.extend(events)
         events_path.unlink(missing_ok=True)
         raw.unlink(missing_ok=True)
 
@@ -214,7 +246,12 @@ def main() -> int:
         "required_lead_ms": REQUIRED_LEAD_MS,
         "passes": runs,
         "trials_counted": len(counted),
-        "trials_dropped_no_timeupdate": len(all_trials) - len(counted),
+        "trials_dropped_no_timeupdate": len(
+            [t for t in all_trials if not t.get("counted") and "stalled" not in str(t.get("why", ""))]
+        ),
+        "trials_dropped_playback_stalled": len(
+            [t for t in all_trials if "stalled" in str(t.get("why", ""))]
+        ),
         "in_time": len(in_time),
         "in_time_fraction": round(len(in_time) / len(counted), 4) if counted else None,
         "wilson_95_interval": wilson_interval(len(in_time), len(counted)),
@@ -224,6 +261,10 @@ def main() -> int:
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(result, indent=2) + "\n")
+    # Keep the events behind the summary, so anyone can recompute it.
+    args.out.with_name(args.out.stem + "_events.json").write_text(
+        json.dumps(pooled_events, indent=2) + "\n"
+    )
     print(json.dumps({k: v for k, v in result.items() if k != "passes"}, indent=2))
     return 0 if len(counted) >= args.target_trials else 1
 

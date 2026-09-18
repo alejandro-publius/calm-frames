@@ -10,7 +10,7 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 Calm Frames is a verified safety layer for kids with photosensitive epilepsy, and it is never a video player. Every frame of a title is checked before that title can play in kid mode, and the result is an Ed25519 signed flash map bound to the file's SHA-256. When a child plays the title, the player hides each flagged segment before it starts while the sound and the captions keep going, then says what was hidden. The layer adapts to the household, because a parent gives the TV size and the seat distance and picks a preset, and a household setting can only ever make it stricter than WCAG, never weaker. Voice, D-pad and on-screen cards all run through one seek function, so every path to a new playhead position is safe: if the target lands inside a flagged interval or its guard band, the picture is covered first and the seek happens second. Any Vega video app can add the same protection with a small hook, and any studio can check its own content before publishing with the open-source analyzer and its GitHub Action.
 
-**Status, Sep 17 2026.** This is a build in progress for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The analyzer, the pipeline, the cover layer and the measurement harnesses are built and tested. Nothing has been measured on a physical Fire TV stick yet, and there is no cover lead time number yet from any device. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
+**Status, Sep 17 2026.** This is a build in progress for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The analyzer, the pipeline, the cover layer and the measurement harnesses are built and tested. Nothing has been measured on a physical Fire TV stick yet, so there is no screen-level cover lead time. There is a software-level one from the virtual device, and one of its 49 trials covered late. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
 
 ## Contents
 
@@ -116,9 +116,9 @@ Recorded by `eval/vvd_smoke.py` into [`results/vvd_smoke.json`](results/vvd_smok
 | Crash lines | <!--n results/vvd_smoke.json:crash_lines -->0<!--/n--> |
 | Peak memory, kB | <!--n results/vvd_smoke.json:peak_pss_kb -->353178<!--/n--> |
 
-### Cover timing: there is no number yet, and here is why
+### Cover timing: a software-level number, and one late cover
 
-**There is no cover lead time figure yet, from any run, on any device.** That is a gap on purpose, and it is worth explaining, because an earlier version of this page had one.
+**There is still no screen-level lead time, and there will not be one until the stick arrives.** What there is now is a software-level number from the virtual device, and the story of how it was almost published wrong is worth keeping, because an earlier version of this page had a figure that was not real.
 
 A rehearsal run appeared to show all twenty markers covered in time with a worst lead of 449 ms. Those numbers have been withdrawn. The run they came from never actually played: the player reported positions between 0.17 s and <!--n results/gate1_rehearsal_vvd.json:furthest_position_the_player_reported_ms -->259<!--/n--> ms and got no further, while the cover scheduler, which runs on a wall clock by design, kept advancing its own estimate and fired every cover on time against that estimate. The analysis then agreed with itself. A stricter second script refused to count any of it, which is how it surfaced. Both analysis scripts now require a position report from the player before a lead time is counted.
 
@@ -129,14 +129,26 @@ Re-run under that rule, this is what the same evidence says:
 | Markers in the clip | <!--n results/gate1_rehearsal_vvd.json:markers_in_schedule -->20<!--/n--> | gate1_rehearsal_vvd.json |
 | Markers counted | <!--n results/gate1_rehearsal_vvd.json:markers_counted -->0<!--/n--> | gate1_rehearsal_vvd.json |
 | Markers not counted, no position report | <!--n results/gate1_rehearsal_vvd.json:markers_not_counted -->20<!--/n--> | gate1_rehearsal_vvd.json |
-| Software-level trials counted | <!--n results/gate1_software_vvd.json:trials_counted -->0<!--/n--> | gate1_software_vvd.json |
-| Software-level trials dropped for lack of position reports | <!--n results/gate1_software_vvd.json:trials_dropped_no_timeupdate -->150<!--/n--> | gate1_software_vvd.json |
+That rehearsal clip is 20 markers long and none of them survived the rule. The measurement was then run again on a packed clip, across <!--n results/gate1_software_vvd.json:trials_counted -->49<!--/n--> usable trials from 22 app launches:
+
+| What | Value | Source |
+|---|---|---|
+| Trials counted | <!--n results/gate1_software_vvd.json:trials_counted -->49<!--/n--> | gate1_software_vvd.json |
+| Covered in time | <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> | gate1_software_vvd.json |
+| Dropped, no position report either side | <!--n results/gate1_software_vvd.json:trials_dropped_no_timeupdate -->4<!--/n--> | gate1_software_vvd.json |
+| Dropped, playback stalled mid-trial | <!--n results/gate1_software_vvd.json:trials_dropped_playback_stalled -->2<!--/n--> | gate1_software_vvd.json |
+| Median lead | <!--n results/gate1_software_vvd.json:lead_ms.median -->488.4<!--/n--> ms | gate1_software_vvd.json |
+| Worst lead | <!--n results/gate1_software_vvd.json:worst_lead_ms -->-86<!--/n--> ms | gate1_software_vvd.json |
 | Guard band | <!--n results/gate1_software_vvd.json:guard_band_ms -->500<!--/n--> ms | gate1_software_vvd.json |
 | Required lead | <!--n results/gate1_software_vvd.json:required_lead_ms -->150<!--/n--> ms | gate1_software_vvd.json |
 
-[`results/gate1_software_vvd.json`](results/gate1_software_vvd.json) is a real, citable result: zero trials counted and 150 dropped. It is evidence of the rule this project runs on, which is that a number nobody can support does not get published. The retraction is written out in full in [docs/GATES.md](docs/GATES.md).
+The median sits about where the 500 ms guard band puts it, which is the scheduler doing its job. Two things in that table matter more than the median.
 
-Worth being clear about what a software-level figure would and would not be, when one exists. It measures the gap between the moment the app applied the cover and the moment the marker was due. Everything after the app sets its state, which is the React commit, the compositor, scan-out and the panel, is unmeasured, and all of it lands in the real figure. **GATE 1 is 50 trials filmed at 240 frames a second against a real Fire TV stick**, and nothing short of that is a lead time for this project.
+**One cover was late.** The worst lead is negative: in one trial the cover went on 86 ms after the marker had already started. Every other pass fired at the first position report past the guard band, around 6.5 s into the clip. In that one, the report at 6.744 s was skipped and the cover fired at 7.079 s. The scheduler re-anchors to media time on every report and re-checks every 50 ms, so a 335 ms gap means the JavaScript thread was not available, not that the schedule was wrong. **The guard band has to be wider than the worst pause of that thread**, and nothing yet measures what that worst pause is on real hardware. That is now the first thing GATE 1 has to find out.
+
+**The evidence rebuilds itself.** [`results/gate1_software_vvd.json`](results/gate1_software_vvd.json) ships with the events it was computed from, and `eval/verify_gate1_archive.py` runs in CI to rebuild the summary from those events and fail if the two ever disagree. That check exists because the first attempt to rebuild it by hand got 54 trials rather than 49, with one lead of 13.3 s, by splitting the passes on the wrong marker. The wrong answer looked completely ordinary.
+
+A software-level figure measures the gap between the moment the app applied the cover and the moment the marker was due. Everything after the app sets its state, which is the React commit, the compositor, scan-out and the panel, is unmeasured, and all of it lands in the real figure. Treat this as an upper bound on how well the real thing can do. **GATE 1 is 50 trials filmed at 240 frames a second against a real Fire TV stick**, and nothing short of that is a lead time for this project.
 
 ### What the player does, which Amazon does not document
 
@@ -304,7 +316,8 @@ Worth knowing before trusting this with a child.
 - **Live streams and other apps' content are out of scope.** So are DRM titles from other apps.
 - **HDR is not measured.** flashmap refuses HLG and PQ input rather than measuring it with the wrong transfer curve.
 - **Theora `.ogv` does not decode**, which is four of the twenty clips in the screening pool.
-- **There is no cover lead time number.** Not on the stick, not on the virtual device. The one run that produced one was withdrawn because the player never reported a position while the scheduler ran on its own clock. Until GATE 1 is filmed, the timing claim in this README is a design argument and not a measurement.
+- **There is no screen-level cover lead time.** The software-level number above is the app's own timing on the virtual device, and it stops at the moment the app sets its state. Until GATE 1 is filmed on a stick at 240 fps, the timing claim in this README is an upper bound and a design argument, not a measurement of what a screen showed.
+- **One cover in 49 went on after its marker started.** The cause looks like the JavaScript thread being unavailable for about a third of a second, which the 500 ms guard band did not cover. Until the worst thread pause is measured on real hardware, the right guard band is unknown.
 - **The layering question is open.** The one recorded run is inconclusive, because playback did not run in that take.
 - **Red flash coverage is untested against real footage**, because no free source in the pool has a saturated red strobe.
 - **The room rule can only add hides.** A household cannot make Calm Frames weaker than WCAG. That is a design rule and it is enforced in code, but it also means a household cannot switch protection off for one title without leaving kid mode.

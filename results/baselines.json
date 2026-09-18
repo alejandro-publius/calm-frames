@@ -1,0 +1,2793 @@
+{
+ "generated_on": "2026-09-17",
+ "git_commit": "c520e854ee8036ba5a02b0533099b96bba159e05",
+ "set": "the generated conformance suite, the same clips and windows for every detector",
+ "sample": {
+  "clips_designed": 3000,
+  "clips_measured": 475,
+  "clips_kept": 467,
+  "clips_with_baselines": 467,
+  "windows_kept": 1401,
+  "ground_truth_positive_windows": 324,
+  "is_complete_run": false,
+  "statement": "467 clips measured and kept, of 3000 clips in the committed design. 8 were measured and excluded. The run order is the whole spine (152 rows that walk one axis at a time) followed by the cross product shuffled with the committed seed, so a partial run is a random sample of the cross product with every sweep complete. Every number in this file is from that sample and from nothing else."
+ },
+ "exclusions": {
+  "decoded luminance off the intended waveform": 8
+ },
+ "table": {
+  "flashmap (this project)": {
+   "counts": {
+    "tp": 290,
+    "fp": 14,
+    "fn": 34,
+    "tn": 596
+   },
+   "precision": {
+    "value": 0.9539473684210527,
+    "wilson_lo": 0.9241932878451844,
+    "wilson_hi": 0.9723721099973444,
+    "numerator": 290,
+    "denominator": 304
+   },
+   "recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8569363148090341,
+    "wilson_hi": 0.9239289269479998,
+    "numerator": 290,
+    "denominator": 324
+   },
+   "f1": 0.9235668789808917,
+   "precision_bootstrap_over_clips": {
+    "lo": 0.9210526315789473,
+    "hi": 0.9868421052631579,
+    "resamples": 10000,
+    "groups": 152,
+    "seed": 20260917
+   },
+   "recall_bootstrap_over_clips": {
+    "lo": 0.845679012345679,
+    "hi": 0.9382716049382716,
+    "resamples": 10000,
+    "groups": 162,
+    "seed": 20260917
+   },
+   "segment_recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8383776426456437,
+    "wilson_hi": 0.9334438361945305,
+    "numerator": 145,
+    "denominator": 162
+   },
+   "onset_lead_windows": {
+    "median": 0,
+    "min": 0,
+    "max": 0,
+    "share_early_or_on_time": 1.0,
+    "n": 145,
+    "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started"
+   },
+   "false_positive_seconds_per_minute_of_calm": 1.3770491803278688,
+   "calm_windows": 610
+  },
+  "flashmap, half window rule": {
+   "counts": {
+    "tp": 290,
+    "fp": 14,
+    "fn": 34,
+    "tn": 596
+   },
+   "precision": {
+    "value": 0.9539473684210527,
+    "wilson_lo": 0.9241932878451844,
+    "wilson_hi": 0.9723721099973444,
+    "numerator": 290,
+    "denominator": 304
+   },
+   "recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8569363148090341,
+    "wilson_hi": 0.9239289269479998,
+    "numerator": 290,
+    "denominator": 324
+   },
+   "f1": 0.9235668789808917,
+   "precision_bootstrap_over_clips": {
+    "lo": 0.9210526315789473,
+    "hi": 0.9868421052631579,
+    "resamples": 10000,
+    "groups": 152,
+    "seed": 20260917
+   },
+   "recall_bootstrap_over_clips": {
+    "lo": 0.845679012345679,
+    "hi": 0.9382716049382716,
+    "resamples": 10000,
+    "groups": 162,
+    "seed": 20260917
+   },
+   "segment_recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8383776426456437,
+    "wilson_hi": 0.9334438361945305,
+    "numerator": 145,
+    "denominator": 162
+   },
+   "onset_lead_windows": {
+    "median": 0,
+    "min": 0,
+    "max": 0,
+    "share_early_or_on_time": 1.0,
+    "n": 145,
+    "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started"
+   },
+   "false_positive_seconds_per_minute_of_calm": 1.3770491803278688,
+   "calm_windows": 610
+  },
+  "flashmap, flash bounds only (diagnostic, not the hide)": {
+   "counts": {
+    "tp": 290,
+    "fp": 14,
+    "fn": 34,
+    "tn": 596
+   },
+   "precision": {
+    "value": 0.9539473684210527,
+    "wilson_lo": 0.9241932878451844,
+    "wilson_hi": 0.9723721099973444,
+    "numerator": 290,
+    "denominator": 304
+   },
+   "recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8569363148090341,
+    "wilson_hi": 0.9239289269479998,
+    "numerator": 290,
+    "denominator": 324
+   },
+   "f1": 0.9235668789808917,
+   "precision_bootstrap_over_clips": {
+    "lo": 0.9210526315789473,
+    "hi": 0.9868421052631579,
+    "resamples": 10000,
+    "groups": 152,
+    "seed": 20260917
+   },
+   "recall_bootstrap_over_clips": {
+    "lo": 0.845679012345679,
+    "hi": 0.9382716049382716,
+    "resamples": 10000,
+    "groups": 162,
+    "seed": 20260917
+   },
+   "segment_recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8383776426456437,
+    "wilson_hi": 0.9334438361945305,
+    "numerator": 145,
+    "denominator": 162
+   },
+   "onset_lead_windows": {
+    "median": 0,
+    "min": 0,
+    "max": 0,
+    "share_early_or_on_time": 1.0,
+    "n": 145,
+    "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started"
+   },
+   "false_positive_seconds_per_minute_of_calm": 1.3770491803278688,
+   "calm_windows": 610
+  },
+  "naive mean luminance differencing (best threshold on this suite, 4 luma codes)": {
+   "counts": {
+    "tp": 262,
+    "fp": 131,
+    "fn": 62,
+    "tn": 479
+   },
+   "precision": {
+    "value": 0.6666666666666666,
+    "wilson_lo": 0.6186449928581867,
+    "wilson_hi": 0.7114616456701985,
+    "numerator": 262,
+    "denominator": 393
+   },
+   "recall": {
+    "value": 0.808641975308642,
+    "wilson_lo": 0.7622910094191739,
+    "wilson_hi": 0.8477599607035089,
+    "numerator": 262,
+    "denominator": 324
+   },
+   "f1": 0.7308228730822873,
+   "precision_bootstrap_over_clips": {
+    "lo": 0.6015228426395939,
+    "hi": 0.7307692307692307,
+    "resamples": 10000,
+    "groups": 202,
+    "seed": 20260917
+   },
+   "recall_bootstrap_over_clips": {
+    "lo": 0.7469135802469136,
+    "hi": 0.8672839506172839,
+    "resamples": 10000,
+    "groups": 162,
+    "seed": 20260917
+   },
+   "segment_recall": {
+    "value": 0.8148148148148148,
+    "wilson_lo": 0.7479546299230058,
+    "wilson_hi": 0.8670906110277579,
+    "numerator": 132,
+    "denominator": 162
+   },
+   "onset_lead_windows": {
+    "median": 0.0,
+    "min": 0,
+    "max": 1,
+    "share_early_or_on_time": 0.9848484848484849,
+    "n": 132,
+    "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started"
+   },
+   "false_positive_seconds_per_minute_of_calm": 12.885245901639344,
+   "calm_windows": 610
+  },
+  "ffmpeg photosensitivity filter (best difference threshold on this suite, 1 codes, first second dropped)": {
+   "counts": {
+    "tp": 308,
+    "fp": 530,
+    "fn": 16,
+    "tn": 80
+   },
+   "precision": {
+    "value": 0.36754176610978523,
+    "wilson_lo": 0.3355717523252586,
+    "wilson_hi": 0.4007206366110241,
+    "numerator": 308,
+    "denominator": 838
+   },
+   "recall": {
+    "value": 0.9506172839506173,
+    "wilson_lo": 0.9212967651434294,
+    "wilson_hi": 0.9693776512356873,
+    "numerator": 308,
+    "denominator": 324
+   },
+   "f1": 0.5301204819277109,
+   "precision_bootstrap_over_clips": {
+    "lo": 0.3213859020310633,
+    "hi": 0.4138755980861244,
+    "resamples": 10000,
+    "groups": 420,
+    "seed": 20260917
+   },
+   "recall_bootstrap_over_clips": {
+    "lo": 0.9166666666666666,
+    "hi": 0.9783950617283951,
+    "resamples": 10000,
+    "groups": 162,
+    "seed": 20260917
+   },
+   "segment_recall": {
+    "value": 0.9567901234567902,
+    "wilson_lo": 0.9135046277168113,
+    "wilson_hi": 0.9789139571921401,
+    "numerator": 155,
+    "denominator": 162
+   },
+   "onset_lead_windows": {
+    "median": 0,
+    "min": 0,
+    "max": 0,
+    "share_early_or_on_time": 1.0,
+    "n": 155,
+    "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started"
+   },
+   "false_positive_seconds_per_minute_of_calm": 52.131147540983605,
+   "calm_windows": 610
+  }
+ },
+ "table_universe": "the windows every detector saw. ffmpeg's photosensitivity filter has its first second dropped, so window 0 of every clip is missing from its denominator, and leaving it in the others' denominators would compare them on different windows.",
+ "flashmap_over_all_windows": {
+  "flashmap (this project)": {
+   "counts": {
+    "tp": 290,
+    "fp": 156,
+    "fn": 34,
+    "tn": 921
+   },
+   "precision": {
+    "value": 0.6502242152466368,
+    "wilson_lo": 0.6048525188455042,
+    "wilson_hi": 0.6930302071070898,
+    "numerator": 290,
+    "denominator": 446
+   },
+   "recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8569363148090341,
+    "wilson_hi": 0.9239289269479998,
+    "numerator": 290,
+    "denominator": 324
+   },
+   "f1": 0.7532467532467533,
+   "precision_bootstrap_over_clips": {
+    "lo": 0.6330275229357798,
+    "hi": 0.6651884700665188,
+    "resamples": 10000,
+    "groups": 152,
+    "seed": 20260917
+   },
+   "recall_bootstrap_over_clips": {
+    "lo": 0.845679012345679,
+    "hi": 0.9382716049382716,
+    "resamples": 10000,
+    "groups": 162,
+    "seed": 20260917
+   },
+   "segment_recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8383776426456437,
+    "wilson_hi": 0.9334438361945305,
+    "numerator": 145,
+    "denominator": 162
+   },
+   "onset_lead_windows": {
+    "median": -1,
+    "min": -1,
+    "max": 0,
+    "share_early_or_on_time": 1.0,
+    "n": 145,
+    "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started"
+   },
+   "false_positive_seconds_per_minute_of_calm": 8.690807799442897,
+   "calm_windows": 1077
+  },
+  "flashmap, half window rule": {
+   "counts": {
+    "tp": 290,
+    "fp": 136,
+    "fn": 34,
+    "tn": 941
+   },
+   "precision": {
+    "value": 0.6807511737089202,
+    "wilson_lo": 0.6350352317371543,
+    "wilson_hi": 0.7232363980458635,
+    "numerator": 290,
+    "denominator": 426
+   },
+   "recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8569363148090341,
+    "wilson_hi": 0.9239289269479998,
+    "numerator": 290,
+    "denominator": 324
+   },
+   "f1": 0.7733333333333334,
+   "precision_bootstrap_over_clips": {
+    "lo": 0.6587677725118484,
+    "hi": 0.7024424515907922,
+    "resamples": 10000,
+    "groups": 152,
+    "seed": 20260917
+   },
+   "recall_bootstrap_over_clips": {
+    "lo": 0.845679012345679,
+    "hi": 0.9382716049382716,
+    "resamples": 10000,
+    "groups": 162,
+    "seed": 20260917
+   },
+   "segment_recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8383776426456437,
+    "wilson_hi": 0.9334438361945305,
+    "numerator": 145,
+    "denominator": 162
+   },
+   "onset_lead_windows": {
+    "median": -1,
+    "min": -1,
+    "max": 0,
+    "share_early_or_on_time": 1.0,
+    "n": 145,
+    "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started"
+   },
+   "false_positive_seconds_per_minute_of_calm": 7.576601671309192,
+   "calm_windows": 1077
+  },
+  "flashmap, flash bounds only (diagnostic, not the hide)": {
+   "counts": {
+    "tp": 290,
+    "fp": 14,
+    "fn": 34,
+    "tn": 1063
+   },
+   "precision": {
+    "value": 0.9539473684210527,
+    "wilson_lo": 0.9241932878451844,
+    "wilson_hi": 0.9723721099973444,
+    "numerator": 290,
+    "denominator": 304
+   },
+   "recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8569363148090341,
+    "wilson_hi": 0.9239289269479998,
+    "numerator": 290,
+    "denominator": 324
+   },
+   "f1": 0.9235668789808917,
+   "precision_bootstrap_over_clips": {
+    "lo": 0.9210526315789473,
+    "hi": 0.9868421052631579,
+    "resamples": 10000,
+    "groups": 152,
+    "seed": 20260917
+   },
+   "recall_bootstrap_over_clips": {
+    "lo": 0.845679012345679,
+    "hi": 0.9382716049382716,
+    "resamples": 10000,
+    "groups": 162,
+    "seed": 20260917
+   },
+   "segment_recall": {
+    "value": 0.8950617283950617,
+    "wilson_lo": 0.8383776426456437,
+    "wilson_hi": 0.9334438361945305,
+    "numerator": 145,
+    "denominator": 162
+   },
+   "onset_lead_windows": {
+    "median": 0,
+    "min": 0,
+    "max": 0,
+    "share_early_or_on_time": 1.0,
+    "n": 145,
+    "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started"
+   },
+   "false_positive_seconds_per_minute_of_calm": 0.7799442896935933,
+   "calm_windows": 1077
+  }
+ },
+ "flashmap_over_all_windows_note": "flashmap hides the whole failing one second period, which begins in the calm second before the flashing. Over all windows that shows as false positives, and it is the difference between the two tables here. Neither number is the flattering one to quote on its own.",
+ "operating_points": {
+  "chosen_on": "this conformance suite, by best F1, before any real clip is touched",
+  "naive_luma_diff": {
+   "sweep": [
+    {
+     "threshold": 2,
+     "precision": 0.5343511450381679,
+     "recall": 0.8641975308641975,
+     "f1": 0.660377358490566,
+     "counts": {
+      "tp": 280,
+      "fp": 244,
+      "fn": 44,
+      "tn": 366
+     }
+    },
+    {
+     "threshold": 4,
+     "precision": 0.6666666666666666,
+     "recall": 0.808641975308642,
+     "f1": 0.7308228730822873,
+     "counts": {
+      "tp": 262,
+      "fp": 131,
+      "fn": 62,
+      "tn": 479
+     }
+    },
+    {
+     "threshold": 6,
+     "precision": 0.7604166666666666,
+     "recall": 0.6759259259259259,
+     "f1": 0.7156862745098039,
+     "counts": {
+      "tp": 219,
+      "fp": 69,
+      "fn": 105,
+      "tn": 541
+     }
+    },
+    {
+     "threshold": 8,
+     "precision": 0.8215767634854771,
+     "recall": 0.6111111111111112,
+     "f1": 0.7008849557522123,
+     "counts": {
+      "tp": 198,
+      "fp": 43,
+      "fn": 126,
+      "tn": 567
+     }
+    },
+    {
+     "threshold": 10,
+     "precision": 0.8770491803278688,
+     "recall": 0.33024691358024694,
+     "f1": 0.4798206278026906,
+     "counts": {
+      "tp": 107,
+      "fp": 15,
+      "fn": 217,
+      "tn": 595
+     }
+    },
+    {
+     "threshold": 12,
+     "precision": 0.896551724137931,
+     "recall": 0.24074074074074073,
+     "f1": 0.3795620437956204,
+     "counts": {
+      "tp": 78,
+      "fp": 9,
+      "fn": 246,
+      "tn": 601
+     }
+    },
+    {
+     "threshold": 15,
+     "precision": 1.0,
+     "recall": 0.15432098765432098,
+     "f1": 0.267379679144385,
+     "counts": {
+      "tp": 50,
+      "fp": 0,
+      "fn": 274,
+      "tn": 610
+     }
+    },
+    {
+     "threshold": 20,
+     "precision": 1.0,
+     "recall": 0.07407407407407407,
+     "f1": 0.13793103448275862,
+     "counts": {
+      "tp": 24,
+      "fp": 0,
+      "fn": 300,
+      "tn": 610
+     }
+    },
+    {
+     "threshold": 25,
+     "precision": 1.0,
+     "recall": 0.018518518518518517,
+     "f1": 0.03636363636363636,
+     "counts": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 318,
+      "tn": 610
+     }
+    },
+    {
+     "threshold": 30,
+     "precision": null,
+     "recall": 0.0,
+     "f1": null,
+     "counts": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 324,
+      "tn": 610
+     }
+    },
+    {
+     "threshold": 40,
+     "precision": null,
+     "recall": 0.0,
+     "f1": null,
+     "counts": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 324,
+      "tn": 610
+     }
+    },
+    {
+     "threshold": 50,
+     "precision": null,
+     "recall": 0.0,
+     "f1": null,
+     "counts": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 324,
+      "tn": 610
+     }
+    },
+    {
+     "threshold": 60,
+     "precision": null,
+     "recall": 0.0,
+     "f1": null,
+     "counts": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 324,
+      "tn": 610
+     }
+    }
+   ],
+   "best_f1_operating_point": {
+    "threshold": 4,
+    "precision": 0.6666666666666666,
+    "recall": 0.808641975308642,
+    "f1": 0.7308228730822873,
+    "counts": {
+     "tp": 262,
+     "fp": 131,
+     "fn": 62,
+     "tn": 479
+    }
+   }
+  },
+  "ffmpeg_photosensitivity": {
+   "sweep": [
+    {
+     "threshold": 1,
+     "precision": 0.36754176610978523,
+     "recall": 0.9506172839506173,
+     "f1": 0.5301204819277109,
+     "counts": {
+      "tp": 308,
+      "fp": 530,
+      "fn": 16,
+      "tn": 80
+     }
+    },
+    {
+     "threshold": 2,
+     "precision": 0.36678614097968937,
+     "recall": 0.9475308641975309,
+     "f1": 0.5288544358311801,
+     "counts": {
+      "tp": 307,
+      "fp": 530,
+      "fn": 17,
+      "tn": 80
+     }
+    },
+    {
+     "threshold": 4,
+     "precision": 0.36678614097968937,
+     "recall": 0.9475308641975309,
+     "f1": 0.5288544358311801,
+     "counts": {
+      "tp": 307,
+      "fp": 530,
+      "fn": 17,
+      "tn": 80
+     }
+    },
+    {
+     "threshold": 8,
+     "precision": 0.36614645858343337,
+     "recall": 0.941358024691358,
+     "f1": 0.5272255834053586,
+     "counts": {
+      "tp": 305,
+      "fp": 528,
+      "fn": 19,
+      "tn": 82
+     }
+    },
+    {
+     "threshold": 16,
+     "precision": 0.36231884057971014,
+     "recall": 0.9259259259259259,
+     "f1": 0.5208333333333334,
+     "counts": {
+      "tp": 300,
+      "fp": 528,
+      "fn": 24,
+      "tn": 82
+     }
+    },
+    {
+     "threshold": 32,
+     "precision": 0.3537331701346389,
+     "recall": 0.8919753086419753,
+     "f1": 0.5065731814198071,
+     "counts": {
+      "tp": 289,
+      "fp": 528,
+      "fn": 35,
+      "tn": 82
+     }
+    }
+   ],
+   "best_f1_operating_point": {
+    "threshold": 1,
+    "precision": 0.36754176610978523,
+    "recall": 0.9506172839506173,
+    "f1": 0.5301204819277109,
+    "counts": {
+     "tp": 308,
+     "fp": 530,
+     "fn": 16,
+     "tn": 80
+    }
+   }
+  },
+  "note": "flashmap's own thresholds are not tuned on either set. They come from the spec text and are the same numbers the analyser ships with."
+ },
+ "blind_spots_measured": {
+  "area_fraction_of_picture": {
+   "why_this_axis": "neither baseline has an area rule, so a small strobe that WCAG excuses should still move their numbers",
+   "points": [
+    {
+     "bucket": "under 0.02",
+     "clips": 13,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 39
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 26
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.0,
+      "precision_wilson": [
+       0.0,
+       0.16112515805281938
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 20,
+       "fn": 0,
+       "tn": 6
+      }
+     }
+    },
+    {
+     "bucket": "0.02 to 0.05",
+     "clips": 88,
+     "near_threshold_share": 0.864,
+     "flashmap": {
+      "precision": 0.5945945945945946,
+      "precision_wilson": [
+       0.43485964730229365,
+       0.7365348180798572
+      ],
+      "recall": 0.6111111111111112,
+      "recall_wilson": [
+       0.44864459096605147,
+       0.75215126934629
+      ],
+      "counts": {
+       "tp": 22,
+       "fp": 15,
+       "fn": 14,
+       "tn": 213
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": 0.0,
+      "recall_wilson": [
+       0.0,
+       0.09641862859446367
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 36,
+       "tn": 140
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.21621621621621623,
+      "precision_wilson": [
+       0.15752530756462213,
+       0.28926609807385006
+      ],
+      "recall": 0.8888888888888888,
+      "recall_wilson": [
+       0.7468519140963513,
+       0.9559335969968435
+      ],
+      "counts": {
+       "tp": 32,
+       "fp": 116,
+       "fn": 4,
+       "tn": 24
+      }
+     }
+    },
+    {
+     "bucket": "0.05 to 0.1",
+     "clips": 60,
+     "near_threshold_share": 0.517,
+     "flashmap": {
+      "precision": 0.5333333333333333,
+      "precision_wilson": [
+       0.30116980025498397,
+       0.7519046463426261
+      ],
+      "recall": 0.5714285714285714,
+      "recall_wilson": [
+       0.3259064457965074,
+       0.7861920109552588
+      ],
+      "counts": {
+       "tp": 8,
+       "fp": 7,
+       "fn": 6,
+       "tn": 159
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.4,
+      "precision_wilson": [
+       0.11762077423264783,
+       0.769275718723987
+      ],
+      "recall": 0.14285714285714285,
+      "recall_wilson": [
+       0.040093921271464966,
+       0.39941379496970353
+      ],
+      "counts": {
+       "tp": 2,
+       "fp": 3,
+       "fn": 12,
+       "tn": 103
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.11538461538461539,
+      "precision_wilson": [
+       0.06724977629813572,
+       0.19092049629605806
+      ],
+      "recall": 0.8571428571428571,
+      "recall_wilson": [
+       0.6005862050302965,
+       0.9599060787285351
+      ],
+      "counts": {
+       "tp": 12,
+       "fp": 92,
+       "fn": 2,
+       "tn": 14
+      }
+     }
+    },
+    {
+     "bucket": "0.1 to 0.2",
+     "clips": 57,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.5372251158005144,
+       0.7750619392484925
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.908190131774416,
+       0.9999999999999999
+      ],
+      "counts": {
+       "tp": 38,
+       "fp": 19,
+       "fn": 0,
+       "tn": 114
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.6274509803921569,
+      "precision_wilson": [
+       0.4902521346885088,
+       0.7467948053373558
+      ],
+      "recall": 0.8421052631578947,
+      "recall_wilson": [
+       0.6958318822077686,
+       0.9255613658484106
+      ],
+      "counts": {
+       "tp": 32,
+       "fp": 19,
+       "fn": 6,
+       "tn": 57
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.3673469387755102,
+      "precision_wilson": [
+       0.2785887752216772,
+       0.46611244664734003
+      ],
+      "recall": 0.9473684210526315,
+      "recall_wilson": [
+       0.8271453786822962,
+       0.9854457918527075
+      ],
+      "counts": {
+       "tp": 36,
+       "fp": 62,
+       "fn": 2,
+       "tn": 14
+      }
+     }
+    },
+    {
+     "bucket": "0.2 to 0.35",
+     "clips": 185,
+     "near_threshold_share": 0.384,
+     "flashmap": {
+      "precision": 0.6556016597510373,
+      "precision_wilson": [
+       0.5935912150666875,
+       0.7127294561188455
+      ],
+      "recall": 0.9186046511627907,
+      "recall_wilson": [
+       0.868022220126896,
+       0.9508972825077874
+      ],
+      "counts": {
+       "tp": 158,
+       "fp": 83,
+       "fn": 14,
+       "tn": 300
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.6890756302521008,
+      "precision_wilson": [
+       0.6276581309844386,
+       0.7444864981410734
+      ],
+      "recall": 0.9534883720930233,
+      "recall_wilson": [
+       0.9109166200708987,
+       0.9762461744500086
+      ],
+      "counts": {
+       "tp": 164,
+       "fp": 74,
+       "fn": 8,
+       "tn": 124
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.47277936962750716,
+      "precision_wilson": [
+       0.4209813586643019,
+       0.525170093992356
+      ],
+      "recall": 0.9593023255813954,
+      "recall_wilson": [
+       0.9183881731975246,
+       0.9801485033044198
+      ],
+      "counts": {
+       "tp": 165,
+       "fp": 184,
+       "fn": 7,
+       "tn": 14
+      }
+     }
+    },
+    {
+     "bucket": "0.35 to 0.5",
+     "clips": 40,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.5405686645211968,
+       0.7727073847647731
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.9123783988027135,
+       1.0
+      ],
+      "counts": {
+       "tp": 40,
+       "fp": 20,
+       "fn": 0,
+       "tn": 60
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.6779661016949152,
+      "precision_wilson": [
+       0.5510500442652536,
+       0.7831242475811436
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.9123783988027135,
+       1.0
+      ],
+      "counts": {
+       "tp": 40,
+       "fp": 19,
+       "fn": 0,
+       "tn": 21
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.5064935064935064,
+      "precision_wilson": [
+       0.39720009365287134,
+       0.6151697969278761
+      ],
+      "recall": 0.975,
+      "recall_wilson": [
+       0.8711863103652591,
+       0.9955731684973186
+      ],
+      "counts": {
+       "tp": 39,
+       "fp": 38,
+       "fn": 1,
+       "tn": 2
+      }
+     }
+    },
+    {
+     "bucket": "0.5 and over",
+     "clips": 24,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.5033399787115652,
+       0.7978538117569468
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8620237953250198,
+       1.0
+      ],
+      "counts": {
+       "tp": 24,
+       "fp": 12,
+       "fn": 0,
+       "tn": 36
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.6,
+      "precision_wilson": [
+       0.44595893660346186,
+       0.7365167431570808
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8620237953250198,
+       1.0
+      ],
+      "counts": {
+       "tp": 24,
+       "fp": 16,
+       "fn": 0,
+       "tn": 8
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.5714285714285714,
+      "precision_wilson": [
+       0.4220623987810458,
+       0.7088234882381393
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8620237953250198,
+       1.0
+      ],
+      "counts": {
+       "tp": 24,
+       "fp": 18,
+       "fn": 0,
+       "tn": 6
+      }
+     }
+    }
+   ]
+  },
+  "red_mode": {
+   "why_this_axis": "neither baseline has a red rule. A luminance matched red flash is invisible to a relative luminance detector and visible to one that reads gamma encoded luma, so what they score here is an accident of their colour handling and not the red rule",
+   "points": [
+    {
+     "bucket": "near_red_distance_0.9",
+     "clips": 19,
+     "near_threshold_share": 1.0,
+     "flashmap": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 57
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 38
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.0,
+      "precision_wilson": [
+       0.0,
+       0.09641862859446367
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 36,
+       "fn": 0,
+       "tn": 2
+      }
+     }
+    },
+    {
+     "bucket": "near_red_ratio_0.9",
+     "clips": 26,
+     "near_threshold_share": 1.0,
+     "flashmap": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 78
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 52
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.0,
+      "precision_wilson": [
+       0.0,
+       0.08029560375848066
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 44,
+       "fn": 0,
+       "tn": 8
+      }
+     }
+    },
+    {
+     "bucket": "near_red_distance_0.95",
+     "clips": 17,
+     "near_threshold_share": 1.0,
+     "flashmap": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 51
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 34
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.0,
+      "precision_wilson": [
+       0.0,
+       0.11351339317396876
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 30,
+       "fn": 0,
+       "tn": 4
+      }
+     }
+    },
+    {
+     "bucket": "near_red_ratio_0.95",
+     "clips": 2,
+     "near_threshold_share": 1.0,
+     "flashmap": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 6
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 4
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.0,
+      "precision_wilson": [
+       0.0,
+       0.4898908364545973
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 4,
+       "fn": 0,
+       "tn": 0
+      }
+     }
+    },
+    {
+     "bucket": "near_red_distance_1.05",
+     "clips": 22,
+     "near_threshold_share": 1.0,
+     "flashmap": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": 0.0,
+      "recall_wilson": [
+       0.0,
+       0.2775327998628892
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 10,
+       "tn": 56
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.6,
+      "precision_wilson": [
+       0.31267376973365824,
+       0.8318196702937638
+      ],
+      "recall": 0.6,
+      "recall_wilson": [
+       0.31267376973365824,
+       0.8318196702937638
+      ],
+      "counts": {
+       "tp": 6,
+       "fp": 4,
+       "fn": 4,
+       "tn": 30
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.25,
+      "precision_wilson": [
+       0.14187118639096302,
+       0.40193961420768026
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.7224672001371107,
+       0.9999999999999999
+      ],
+      "counts": {
+       "tp": 10,
+       "fp": 30,
+       "fn": 0,
+       "tn": 4
+      }
+     }
+    },
+    {
+     "bucket": "near_red_distance_1.1",
+     "clips": 26,
+     "near_threshold_share": 1.0,
+     "flashmap": {
+      "precision": 0.375,
+      "precision_wilson": [
+       0.18481232558863633,
+       0.6135895945449727
+      ],
+      "recall": 0.375,
+      "recall_wilson": [
+       0.18481232558863633,
+       0.6135895945449727
+      ],
+      "counts": {
+       "tp": 6,
+       "fp": 10,
+       "fn": 10,
+       "tn": 52
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.6,
+      "precision_wilson": [
+       0.31267376973365824,
+       0.8318196702937638
+      ],
+      "recall": 0.375,
+      "recall_wilson": [
+       0.18481232558863633,
+       0.6135895945449727
+      ],
+      "counts": {
+       "tp": 6,
+       "fp": 4,
+       "fn": 10,
+       "tn": 32
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.3,
+      "precision_wilson": [
+       0.18074845229746528,
+       0.45430018818144935
+      ],
+      "recall": 0.75,
+      "recall_wilson": [
+       0.5050168346449122,
+       0.8981793250878696
+      ],
+      "counts": {
+       "tp": 12,
+       "fp": 28,
+       "fn": 4,
+       "tn": 8
+      }
+     }
+    },
+    {
+     "bucket": "gray_only",
+     "clips": 198,
+     "near_threshold_share": 0.323,
+     "flashmap": {
+      "precision": 0.65814696485623,
+      "precision_wilson": [
+       0.6039657867447343,
+       0.708493322516045
+      ],
+      "recall": 0.9363636363636364,
+      "recall_wilson": [
+       0.896031718383495,
+       0.9617182311189322
+      ],
+      "counts": {
+       "tp": 206,
+       "fp": 107,
+       "fn": 14,
+       "tn": 267
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.7807017543859649,
+      "precision_wilson": [
+       0.7225866084418875,
+       0.829514817468286
+      ],
+      "recall": 0.8090909090909091,
+      "recall_wilson": [
+       0.7520278334203967,
+       0.8555450474771558
+      ],
+      "counts": {
+       "tp": 178,
+       "fp": 50,
+       "fn": 42,
+       "tn": 126
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.5645161290322581,
+      "precision_wilson": [
+       0.5137255774843965,
+       0.6139878476140832
+      ],
+      "recall": 0.9545454545454546,
+      "recall_wilson": [
+       0.9183641030841384,
+       0.9751254276475566
+      ],
+      "counts": {
+       "tp": 210,
+       "fp": 162,
+       "fn": 10,
+       "tn": 14
+      }
+     }
+    },
+    {
+     "bucket": "nonred_control",
+     "clips": 42,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 126
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.0,
+      "precision_wilson": [
+       0.0,
+       0.07134759913335872
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 50,
+       "fn": 0,
+       "tn": 34
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.0,
+      "precision_wilson": [
+       3.469446951953614e-18,
+       0.05065117259645781
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 72,
+       "fn": 0,
+       "tn": 12
+      }
+     }
+    },
+    {
+     "bucket": "red_gray_matched",
+     "clips": 61,
+     "near_threshold_share": 0.016,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.5771523809129953,
+       0.745584537199427
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.9530621902878059,
+       1.0
+      ],
+      "counts": {
+       "tp": 78,
+       "fp": 39,
+       "fn": 0,
+       "tn": 66
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.8275862068965517,
+      "precision_wilson": [
+       0.7348297312608015,
+       0.89263707453443
+      ],
+      "recall": 0.9230769230769231,
+      "recall_wilson": [
+       0.8421677019381915,
+       0.9642695359976443
+      ],
+      "counts": {
+       "tp": 72,
+       "fp": 15,
+       "fn": 6,
+       "tn": 29
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.5759479565875538,
+       0.7465191986928323
+      ],
+      "recall": 0.9743589743589743,
+      "recall_wilson": [
+       0.9112472996432415,
+       0.9929399065272408
+      ],
+      "counts": {
+       "tp": 76,
+       "fp": 38,
+       "fn": 2,
+       "tn": 6
+      }
+     }
+    },
+    {
+     "bucket": "red_same_chroma",
+     "clips": 54,
+     "near_threshold_share": 0.019,
+     "flashmap": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 162
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.0,
+      "precision_wilson": [
+       0.0,
+       0.32440756488388023
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 8,
+       "fn": 0,
+       "tn": 100
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.0,
+      "precision_wilson": [
+       3.469446951953614e-18,
+       0.04275819728574222
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 86,
+       "fn": 0,
+       "tn": 22
+      }
+     }
+    }
+   ]
+  },
+  "flash_rate_hz": {
+   "why_this_axis": "neither baseline has a one second window, so three flashes in a second and three in ten seconds look the same to them",
+   "points": [
+    {
+     "bucket": "1.0",
+     "clips": 20,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 60
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.0,
+      "precision_wilson": [
+       2.7755575615628914e-17,
+       0.29914504841954404
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 9,
+       "fn": 0,
+       "tn": 31
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.0,
+      "precision_wilson": [
+       0.0,
+       0.1071791982550706
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 32,
+       "fn": 0,
+       "tn": 8
+      }
+     }
+    },
+    {
+     "bucket": "2.0",
+     "clips": 19,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": null,
+      "precision_wilson": [
+       0.0,
+       1.0
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "tn": 57
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.0,
+      "precision_wilson": [
+       0.0,
+       0.1936076805344365
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 16,
+       "fn": 0,
+       "tn": 22
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.0,
+      "precision_wilson": [
+       0.0,
+       0.09641862859446367
+      ],
+      "recall": null,
+      "recall_wilson": [
+       0.0,
+       1.0
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 36,
+       "fn": 0,
+       "tn": 2
+      }
+     }
+    },
+    {
+     "bucket": "3.0",
+     "clips": 57,
+     "near_threshold_share": 0.965,
+     "flashmap": {
+      "precision": 0.0,
+      "precision_wilson": [
+       1.3877787807814457e-17,
+       0.2153108027376358
+      ],
+      "recall": 0.0,
+      "recall_wilson": [
+       0.0,
+       0.6576197724933469
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 14,
+       "fn": 2,
+       "tn": 155
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.0,
+      "precision_wilson": [
+       1.3877787807814457e-17,
+       0.2153108027376358
+      ],
+      "recall": 0.0,
+      "recall_wilson": [
+       0.0,
+       0.6576197724933469
+      ],
+      "counts": {
+       "tp": 0,
+       "fp": 14,
+       "fn": 2,
+       "tn": 98
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.020833333333333332,
+      "precision_wilson": [
+       0.005731969852430421,
+       0.07280713517784211
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.34238022750665303,
+       1.0
+      ],
+      "counts": {
+       "tp": 2,
+       "fp": 94,
+       "fn": 0,
+       "tn": 18
+      }
+     }
+    },
+    {
+     "bucket": "4.0",
+     "clips": 34,
+     "near_threshold_share": 1.0,
+     "flashmap": {
+      "precision": 1.0,
+      "precision_wilson": [
+       0.6096657120978346,
+       1.0
+      ],
+      "recall": 0.3,
+      "recall_wilson": [
+       0.1454772448676043,
+       0.5189728183535235
+      ],
+      "counts": {
+       "tp": 6,
+       "fp": 0,
+       "fn": 14,
+       "tn": 82
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 1.0,
+      "precision_wilson": [
+       0.6096657120978346,
+       1.0
+      ],
+      "recall": 0.3,
+      "recall_wilson": [
+       0.1454772448676043,
+       0.5189728183535235
+      ],
+      "counts": {
+       "tp": 6,
+       "fp": 0,
+       "fn": 14,
+       "tn": 48
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.25,
+      "precision_wilson": [
+       0.15517054688270684,
+       0.376926421476675
+      ],
+      "recall": 0.7,
+      "recall_wilson": [
+       0.4810271816464765,
+       0.8545227551323956
+      ],
+      "counts": {
+       "tp": 14,
+       "fp": 42,
+       "fn": 6,
+       "tn": 6
+      }
+     }
+    },
+    {
+     "bucket": "5.0",
+     "clips": 40,
+     "near_threshold_share": 1.0,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.299993315138392,
+       0.9032285888942195
+      ],
+      "recall": 0.4,
+      "recall_wilson": [
+       0.16818032970623614,
+       0.6873262302663417
+      ],
+      "counts": {
+       "tp": 4,
+       "fp": 2,
+       "fn": 6,
+       "tn": 108
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.6,
+      "precision_wilson": [
+       0.31267376973365824,
+       0.8318196702937638
+      ],
+      "recall": 0.6,
+      "recall_wilson": [
+       0.31267376973365824,
+       0.8318196702937638
+      ],
+      "counts": {
+       "tp": 6,
+       "fp": 4,
+       "fn": 4,
+       "tn": 66
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.13157894736842105,
+      "precision_wilson": [
+       0.07306881567918964,
+       0.22554119436880626
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.7224672001371107,
+       0.9999999999999999
+      ],
+      "counts": {
+       "tp": 10,
+       "fp": 66,
+       "fn": 0,
+       "tn": 4
+      }
+     }
+    },
+    {
+     "bucket": "6.0",
+     "clips": 21,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.46706316838131745,
+       0.8202780967270223
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8063923194655637,
+       1.0
+      ],
+      "counts": {
+       "tp": 16,
+       "fp": 8,
+       "fn": 0,
+       "tn": 39
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.7,
+      "precision_wilson": [
+       0.4810271816464765,
+       0.8545227551323956
+      ],
+      "recall": 0.875,
+      "recall_wilson": [
+       0.639771727342413,
+       0.9650225122567595
+      ],
+      "counts": {
+       "tp": 14,
+       "fp": 6,
+       "fn": 2,
+       "tn": 20
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.4117647058823529,
+      "precision_wilson": [
+       0.2636596836387115,
+       0.5777840612118749
+      ],
+      "recall": 0.875,
+      "recall_wilson": [
+       0.639771727342413,
+       0.9650225122567595
+      ],
+      "counts": {
+       "tp": 14,
+       "fp": 20,
+       "fn": 2,
+       "tn": 6
+      }
+     }
+    },
+    {
+     "bucket": "8.0",
+     "clips": 14,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.4878005164454384,
+       0.8076950191632386
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8388748419471806,
+       1.0
+      ],
+      "counts": {
+       "tp": 20,
+       "fp": 10,
+       "fn": 0,
+       "tn": 12
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 1.0,
+      "precision_wilson": [
+       0.8388748419471806,
+       1.0
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8388748419471806,
+       1.0
+      ],
+      "counts": {
+       "tp": 20,
+       "fp": 0,
+       "fn": 0,
+       "tn": 8
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.7142857142857143,
+      "precision_wilson": [
+       0.5294071156670428,
+       0.8474600394333092
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8388748419471806,
+       1.0
+      ],
+      "counts": {
+       "tp": 20,
+       "fp": 8,
+       "fn": 0,
+       "tn": 0
+      }
+     }
+    },
+    {
+     "bucket": "10.0",
+     "clips": 143,
+     "near_threshold_share": 0.322,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.6055945502839866,
+       0.7226135877370519
+      ],
+      "recall": 0.9318181818181818,
+      "recall_wilson": [
+       0.884618660586976,
+       0.9605702129727481
+      ],
+      "counts": {
+       "tp": 164,
+       "fp": 82,
+       "fn": 12,
+       "tn": 171
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.8275862068965517,
+      "precision_wilson": [
+       0.7645442908388691,
+       0.8764760918995491
+      ],
+      "recall": 0.8181818181818182,
+      "recall_wilson": [
+       0.7546072999470542,
+       0.8681634489916902
+      ],
+      "counts": {
+       "tp": 144,
+       "fp": 30,
+       "fn": 32,
+       "tn": 80
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.6263736263736264,
+      "precision_wilson": [
+       0.5676071091609858,
+       0.6816330165554816
+      ],
+      "recall": 0.9715909090909091,
+      "recall_wilson": [
+       0.9352296387454299,
+       0.9878055784316374
+      ],
+      "counts": {
+       "tp": 171,
+       "fp": 102,
+       "fn": 5,
+       "tn": 8
+      }
+     }
+    },
+    {
+     "bucket": "12.0",
+     "clips": 20,
+     "near_threshold_share": 0.05,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.39062208887279953,
+       0.8618799089087867
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.6755924351161198,
+       1.0
+      ],
+      "counts": {
+       "tp": 8,
+       "fp": 4,
+       "fn": 0,
+       "tn": 48
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.36363636363636365,
+      "precision_wilson": [
+       0.19733204670366125,
+       0.5704829190986899
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.6755924351161198,
+       1.0
+      ],
+      "counts": {
+       "tp": 8,
+       "fp": 14,
+       "fn": 0,
+       "tn": 18
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.21052631578947367,
+      "precision_wilson": [
+       0.11074791842995879,
+       0.363457794753274
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.6755924351161198,
+       1.0
+      ],
+      "counts": {
+       "tp": 8,
+       "fp": 30,
+       "fn": 0,
+       "tn": 2
+      }
+     }
+    },
+    {
+     "bucket": "15.0",
+     "clips": 16,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.46706316838131745,
+       0.8202780967270223
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8063923194655637,
+       1.0
+      ],
+      "counts": {
+       "tp": 16,
+       "fp": 8,
+       "fn": 0,
+       "tn": 24
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 1.0,
+      "precision_wilson": [
+       0.8063923194655637,
+       1.0
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8063923194655637,
+       1.0
+      ],
+      "counts": {
+       "tp": 16,
+       "fp": 0,
+       "fn": 0,
+       "tn": 16
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.5714285714285714,
+      "precision_wilson": [
+       0.3907078562746876,
+       0.734914528758763
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8063923194655637,
+       1.0
+      ],
+      "counts": {
+       "tp": 16,
+       "fp": 12,
+       "fn": 0,
+       "tn": 4
+      }
+     }
+    },
+    {
+     "bucket": "18.0",
+     "clips": 22,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.47824760507320074,
+       0.8135673850128435
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8241207763533425,
+       1.0
+      ],
+      "counts": {
+       "tp": 18,
+       "fp": 9,
+       "fn": 0,
+       "tn": 39
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.46706316838131745,
+       0.8202780967270223
+      ],
+      "recall": 0.8888888888888888,
+      "recall_wilson": [
+       0.672002348698212,
+       0.9689804773543876
+      ],
+      "counts": {
+       "tp": 16,
+       "fp": 8,
+       "fn": 2,
+       "tn": 18
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.4090909090909091,
+      "precision_wilson": [
+       0.2768785562754973,
+       0.555902462589681
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.8241207763533425,
+       1.0
+      ],
+      "counts": {
+       "tp": 18,
+       "fp": 26,
+       "fn": 0,
+       "tn": 0
+      }
+     }
+    },
+    {
+     "bucket": "20.0",
+     "clips": 21,
+     "near_threshold_share": 0.048,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.43749467295945105,
+       0.837212252491663
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.7575059933447592,
+       1.0
+      ],
+      "counts": {
+       "tp": 12,
+       "fp": 6,
+       "fn": 0,
+       "tn": 45
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.5,
+      "precision_wilson": [
+       0.2992980081982123,
+       0.7007019918017877
+      ],
+      "recall": 0.8333333333333334,
+      "recall_wilson": [
+       0.5519691377470267,
+       0.9530348578161462
+      ],
+      "counts": {
+       "tp": 10,
+       "fp": 10,
+       "fn": 2,
+       "tn": 20
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.3333333333333333,
+      "precision_wilson": [
+       0.19750227679220683,
+       0.5039210557219438
+      ],
+      "recall": 0.9166666666666666,
+      "recall_wilson": [
+       0.646120088858883,
+       0.9851349055950829
+      ],
+      "counts": {
+       "tp": 11,
+       "fp": 22,
+       "fn": 1,
+       "tn": 8
+      }
+     }
+    },
+    {
+     "bucket": "24.0",
+     "clips": 16,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.43749467295945105,
+       0.837212252491663
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.7575059933447592,
+       1.0
+      ],
+      "counts": {
+       "tp": 12,
+       "fp": 6,
+       "fn": 0,
+       "tn": 30
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.625,
+      "precision_wilson": [
+       0.38641040545502714,
+       0.8151876744113636
+      ],
+      "recall": 0.8333333333333334,
+      "recall_wilson": [
+       0.5519691377470267,
+       0.9530348578161462
+      ],
+      "counts": {
+       "tp": 10,
+       "fp": 6,
+       "fn": 2,
+       "tn": 14
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.38461538461538464,
+      "precision_wilson": [
+       0.22428594435712795,
+       0.5746514991488447
+      ],
+      "recall": 0.8333333333333334,
+      "recall_wilson": [
+       0.5519691377470267,
+       0.9530348578161462
+      ],
+      "counts": {
+       "tp": 10,
+       "fp": 16,
+       "fn": 2,
+       "tn": 4
+      }
+     }
+    },
+    {
+     "bucket": "30.0",
+     "clips": 24,
+     "near_threshold_share": 0.042,
+     "flashmap": {
+      "precision": 0.6666666666666666,
+      "precision_wilson": [
+       0.4537345197425524,
+       0.8280524739491653
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.7846891972623643,
+       1.0
+      ],
+      "counts": {
+       "tp": 14,
+       "fp": 7,
+       "fn": 0,
+       "tn": 51
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.46153846153846156,
+      "precision_wilson": [
+       0.2875585353039122,
+       0.6454206125314121
+      ],
+      "recall": 0.8571428571428571,
+      "recall_wilson": [
+       0.6005862050302965,
+       0.9599060787285351
+      ],
+      "counts": {
+       "tp": 12,
+       "fp": 14,
+       "fn": 2,
+       "tn": 20
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.3684210526315789,
+      "precision_wilson": [
+       0.23384219247155955,
+       0.5271604044299099
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.7846891972623643,
+       1.0
+      ],
+      "counts": {
+       "tp": 14,
+       "fp": 24,
+       "fn": 0,
+       "tn": 10
+      }
+     }
+    }
+   ]
+  },
+  "near_threshold": {
+   "why_this_axis": "the clips that sit within 15% of a limit, against the ones that do not",
+   "points": [
+    {
+     "bucket": "False",
+     "clips": 289,
+     "near_threshold_share": 0.0,
+     "flashmap": {
+      "precision": 0.6594594594594595,
+      "precision_wilson": [
+       0.6097552070196289,
+       0.7058866171168333
+      ],
+      "recall": 1.0,
+      "recall_wilson": [
+       0.9845003380831723,
+       1.0
+      ],
+      "counts": {
+       "tp": 244,
+       "fp": 126,
+       "fn": 0,
+       "tn": 497
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.6808510638297872,
+      "precision_wilson": [
+       0.6286417122378096,
+       0.7288858638689482
+      ],
+      "recall": 0.9180327868852459,
+      "recall_wilson": [
+       0.876792667932257,
+       0.9463141721044938
+      ],
+      "counts": {
+       "tp": 224,
+       "fp": 105,
+       "fn": 20,
+       "tn": 229
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.4541984732824427,
+      "precision_wilson": [
+       0.4120551847501456,
+       0.497008419106888
+      ],
+      "recall": 0.9754098360655737,
+      "recall_wilson": [
+       0.9473998127592713,
+       0.9886824759099744
+      ],
+      "counts": {
+       "tp": 238,
+       "fp": 286,
+       "fn": 6,
+       "tn": 48
+      }
+     }
+    },
+    {
+     "bucket": "True",
+     "clips": 178,
+     "near_threshold_share": 1.0,
+     "flashmap": {
+      "precision": 0.6052631578947368,
+      "precision_wilson": [
+       0.4928629663895856,
+       0.7075341735967013
+      ],
+      "recall": 0.575,
+      "recall_wilson": [
+       0.4656928984656886,
+       0.6774343821039822
+      ],
+      "counts": {
+       "tp": 46,
+       "fp": 30,
+       "fn": 34,
+       "tn": 424
+      }
+     },
+     "naive_luma_diff@4": {
+      "precision": 0.59375,
+      "precision_wilson": [
+       0.4714520812860451,
+       0.7054309075028039
+      ],
+      "recall": 0.475,
+      "recall_wilson": [
+       0.36924733297407564,
+       0.5830435735027005
+      ],
+      "counts": {
+       "tp": 38,
+       "fp": 26,
+       "fn": 42,
+       "tn": 250
+      }
+     },
+     "ffmpeg_photosensitivity@1": {
+      "precision": 0.2229299363057325,
+      "precision_wilson": [
+       0.18039930259835352,
+       0.2721579545775907
+      ],
+      "recall": 0.875,
+      "recall_wilson": [
+       0.7849719790084033,
+       0.9306644238399513
+      ],
+      "counts": {
+       "tp": 70,
+       "fp": 244,
+       "fn": 10,
+       "tn": 32
+      }
+     }
+    }
+   ]
+  }
+ },
+ "environment_when_written": {
+  "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "xcode_select_path": "/Library/Developer/CommandLineTools",
+  "docker": {
+   "server_version": "29.5.2",
+   "vm_memory_bytes": 8307167232,
+   "vm_cpus": 4,
+   "containers_running": 6,
+   "container_names": [
+    "datahub-datahub-actions-quickstart-1",
+    "datahub-datahub-gms-quickstart-1",
+    "datahub-frontend-quickstart-1",
+    "datahub-mysql-1",
+    "datahub-kafka-broker-1",
+    "datahub-opensearch-1"
+   ],
+   "iris_image_built": false
+  }
+ },
+ "not_run": {
+  "EA IRIS": {
+   "ran": false,
+   "why": "the pinned image at eval/baselines/iris/ has never built, and building it here would have taken the shared machine for a long time: the shared colima VM had 6 containers from another project running on 4 CPUs and 7.7 GiB. CLAUDE.md forbids touching containers, images or volumes this project did not create, and the build is a vcpkg source build of the whole IRIS dependency tree on two jobs. Skipped rather than fought, as the lane brief asked.",
+   "how_to_run_it_later": "make iris-build, then make iris-run VIDEO=... OUT=...",
+   "effect_on_this_table": "no IRIS number appears anywhere in this repository. The cross-check of our ground truth against IRIS that EVAL_PLAN section 4 asks for has not happened, so the ground truth stands on the spec text alone."
+  },
+  "Apple VideoFlashingReduction": {
+   "ran": false,
+   "why": "it needs Xcode, and xcode-select reports '/Library/Developer/CommandLineTools', which is Command Line Tools only. It is also cut list item 4 in EVAL_PLAN section 6, so it was never part of the committed comparison.",
+   "effect_on_this_table": "none, it was never in it"
+  }
+ },
+ "what_the_baselines_are": {
+  "naive mean luminance differencing": "one number per frame, the mean of the luma plane, thresholded on the change between frames. No area, no colour, no one second window, no linear light. eval/baselines/naive_luma_diff/run.py",
+  "ffmpeg photosensitivity filter": "a mitigator, not a reporter: it rewrites frames it thinks are unsafe, so a flag is inferred from where its output differs from the unfiltered decode. Its first second is dropped. eval/baselines/ffmpeg_photosensitivity/run.py",
+  "not a safety claim": "neither baseline is a safety tool and neither one's output is a conformance result. They are here to show what has to be added on top."
+ },
+ "published": {
+  "clips_designed": 3000,
+  "clips_measured": 475,
+  "clips_kept": 467,
+  "windows": 1401,
+  "positive_windows": 324,
+  "excluded_clips": 8,
+  "flashmap_precision": 0.65,
+  "flashmap_precision_lo": 0.605,
+  "flashmap_precision_hi": 0.693,
+  "flashmap_precision_denominator": 446,
+  "flashmap_recall": 0.895,
+  "flashmap_recall_lo": 0.857,
+  "flashmap_recall_hi": 0.924,
+  "flashmap_recall_denominator": 324,
+  "flashmap_f1": 0.753,
+  "flashmap_shared_precision": 0.954,
+  "flashmap_shared_precision_lo": 0.924,
+  "flashmap_shared_precision_hi": 0.972,
+  "flashmap_shared_precision_denominator": 304,
+  "flashmap_shared_recall": 0.895,
+  "flashmap_shared_recall_lo": 0.857,
+  "flashmap_shared_recall_hi": 0.924,
+  "flashmap_shared_recall_denominator": 324,
+  "flashmap_shared_f1": 0.924,
+  "flashmap_half_precision": 0.681,
+  "flashmap_half_precision_lo": 0.635,
+  "flashmap_half_precision_hi": 0.723,
+  "flashmap_half_precision_denominator": 426,
+  "flashmap_half_recall": 0.895,
+  "flashmap_half_recall_lo": 0.857,
+  "flashmap_half_recall_hi": 0.924,
+  "flashmap_half_recall_denominator": 324,
+  "flashmap_half_f1": 0.773,
+  "naive_precision": 0.667,
+  "naive_precision_lo": 0.619,
+  "naive_precision_hi": 0.711,
+  "naive_precision_denominator": 393,
+  "naive_recall": 0.809,
+  "naive_recall_lo": 0.762,
+  "naive_recall_hi": 0.848,
+  "naive_recall_denominator": 324,
+  "naive_f1": 0.731,
+  "ffmpeg_precision": 0.368,
+  "ffmpeg_precision_lo": 0.336,
+  "ffmpeg_precision_hi": 0.401,
+  "ffmpeg_precision_denominator": 838,
+  "ffmpeg_recall": 0.951,
+  "ffmpeg_recall_lo": 0.921,
+  "ffmpeg_recall_hi": 0.969,
+  "ffmpeg_recall_denominator": 324,
+  "ffmpeg_f1": 0.53,
+  "naive_best_threshold": 4,
+  "ffmpeg_best_threshold": 1,
+  "recall_away_from_limits": 1.0,
+  "recall_away_from_limits_clips": 289,
+  "recall_away_from_limits_positive_windows": 244,
+  "recall_near_limits": 0.575,
+  "recall_near_limits_clips": 178,
+  "recall_near_limits_positive_windows": 80,
+  "clip_level_precision": 0.954,
+  "clip_level_recall": 0.895,
+  "what_these_are": "the same numbers as the tables below, rounded and with short keys, because eval/readme_sync.py quotes a dotted path with no spaces in it. A document quotes these.",
+  "iris_ran": false,
+  "apple_videoflashingreduction_ran": false,
+  "detectors_compared": 5
+ }
+}

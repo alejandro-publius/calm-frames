@@ -19,7 +19,11 @@ Apache-2.0. Part of [Calm Frames](../README.md), and usable on its own.
 - **Real frame timestamps** from the container. There is no assumed frame rate anywhere.
   Variable frame rate input comes out right.
 - **Letterbox and pillarbox detection**, so the area is measured on the picture. Every map says
-  so and carries the bar geometry it removed.
+  so and carries the bar geometry it removed, in the file's own coded pixels, so a re-encode
+  can be measured on the same rectangle rather than on one detected in the re-encode.
+- **Ogg Theora empty packets** kept in the timeline. A frame identical to the one before it is
+  written as a zero length packet, libavcodec refuses one outright, and the picture a player
+  shows for that packet's time is the one in front of it.
 - **The room rule**: a household gives its TV diagonal and seat distance, and flashmap adds the
   10 degree field for that room as a second area window. A room setting can only add hides.
 - **Correct colour handling**: a tagged stream uses its tag, an untagged HD stream is decoded
@@ -63,6 +67,12 @@ python -m flashmap analyze VIDEO --profile wcag --out MAP.json \
 
 # the broadcast profile, with an assumed peak white
 python -m flashmap analyze VIDEO --profile broadcast --out MAP.json --peak-nits 200
+
+# measure a re-encode on the picture rectangle out of the original's map, rather than on one
+# detected in the re-encode. Re-encoding nudges the outermost rows, and one row read as a
+# letterbox bar shrinks the rectangle and lifts every area fraction measured against it.
+python -m flashmap analyze RENDITION.mp4 --profile wcag --out CHECK.json \
+    --picture-from SOURCE_MAP.json
 
 # check a map is real, is for this file, and was signed by a key you hold
 python -m flashmap verify MAP.json VIDEO --pub team_key.pub.pem

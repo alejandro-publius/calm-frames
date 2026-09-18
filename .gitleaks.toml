@@ -1,21 +1,23 @@
 # Secret scanning config.
 #
-# The default rules are kept. The allowlist below only covers directories that
-# hold generated or third-party files that are never committed: the Shaka
-# Player checkout and the bundles built from it during npm install, installed
-# packages, build output, and the CDK template written by `make synth`.
-# Scanning them produces hundreds of false matches from minified demo code,
-# which buries a real finding.
+# The default rules are kept. Three allowlists, no more, and each one says what
+# it covers and why. Needs gitleaks 8.19 or later for the [[allowlists]] form,
+# which is what CI downloads and what .pre-commit-config.yaml pins.
 #
-# Nothing under our own source, docs, results or infrastructure is allowlisted.
-#
-# One exception is listed by value rather than by path, below, because the
-# alternative would have been to allowlist a directory of real tests.
+# Nothing under our own source, docs, results or infrastructure is allowlisted
+# by directory. The two exceptions below are named by value and by line shape,
+# because the alternative was to allowlist a directory of real tests and a
+# directory of real results.
 
 [extend]
 useDefault = true
 
-[allowlist]
+# 1. Generated and third-party files, none of which are committed: the Shaka
+# Player checkout and the bundles built from it during npm install, installed
+# packages, build output, and the CDK template written by `make synth`.
+# Scanning them produces hundreds of false matches from minified demo code,
+# which buries a real finding.
+[[allowlists]]
 description = "Generated and third-party files, none of which are committed"
 paths = [
   '''app/src/w3cmedia/shakaplayer/dist/''',
@@ -26,20 +28,40 @@ paths = [
   '''\.venv/''',
 ]
 
-# The offline demo's Ed25519 PUBLIC key, which app/test/calmframes/*.ts and
-# *.tsx carry inline so a test can check a signature without reading a file.
-# gitleaks' generic-api-key rule sees 44 characters of base64 and cannot tell a
-# published public key from a secret, so this names that one string and nothing
-# else.
+# 2. The offline demo's Ed25519 PUBLIC key, which app/src/calmframes/offlineTitle.ts
+# and app/test/calmframes/*.ts carry inline so the app can check the bundled
+# title's signature with no file system and no network. gitleaks' generic-api-key
+# rule sees 44 characters of base64 and cannot tell a published public key from a
+# secret, so this names that one string and nothing else.
 #
-# Checked on Sep 17, 2026 rather than assumed: this is byte for byte the key in
+# Checked on Sep 17, 2026 rather than assumed: it is byte for byte the key in
 # app/test/calmframes/fixtures/offline_demo_key.pub.pem, whose key id is
 # sha256:9d32df3b18c97a7e895a2f76bf58c189259a8e2de1b1ca02da4830d1e057b26a. The
-# private half has never been in this repository and docs/SECURITY.md says
-# where it lives.
+# private half has never been in this repository and docs/SECURITY.md says where
+# it lives.
 #
-# If the demo key is ever rotated this line stops matching and the new one gets
+# If the demo key is ever rotated this stops matching and the new one gets
 # flagged, which is the right way round: someone has to look at it.
+[[allowlists]]
+description = "The offline demo Ed25519 public key, published on purpose"
 regexes = [
   '''533gF/bCDXyQppRnqiiT41\+JwyyUYRN8P4YVZnCbKLQ=''',
+]
+
+# 3. pool_key_sha256 in results/realclips_status.json, written by
+# eval/realclips/report.py. It is the SHA-256 of the labeling pool's blinding
+# key file, recorded so a scored report can prove which blinding it was scored
+# against, the same way every other file in results/ records a digest. The word
+# "key" in the field name is what trips generic-api-key; the value is a hash and
+# a hash of a key is not a key.
+#
+# Matched on the whole line, not on the value, so this excuses that one field
+# and not any 64 character hex string anywhere. Checked on Sep 17, 2026: with
+# this in place a real `api_key = "<64 hex>"` is still caught, and so is a
+# random 44 character base64 key next to the word KEY.
+[[allowlists]]
+description = "pool_key_sha256, a digest of the blinding key file, not a key"
+regexTarget = "line"
+regexes = [
+  '''"pool_key_sha256":\s*"[0-9a-f]{64}"''',
 ]

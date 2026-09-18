@@ -129,3 +129,5 @@ jobs:
           python-version-file: .python-version
       - name: Check every published number against results/
         run: python3 eval/readme_sync.py --check
+      - name: Rebuild the lead time summary from its own events
+        run: python3 eval/verify_gate1_archive.py

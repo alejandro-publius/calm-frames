@@ -1,0 +1,42 @@
+{
+ "generated_on": "2026-09-17",
+ "state": "awaiting labels",
+ "what_is_ready": [
+  "the blinded pool (eval/labeling/pool.json) and its key",
+  "one plot per segment (eval/labeling/plots/), no detector output on any of them",
+  "blank sheets for two labellers (eval/labeling/labels_*.csv)",
+  "the written guide (eval/labeling/GUIDE.md), which quotes the spec",
+  "this analysis, which computes the metrics, the kappa and the bootstrap as soon as the sheets have answers in them"
+ ],
+ "what_is_missing": "the labels. Nobody on this lane labels anything.",
+ "segments": 40,
+ "titles": 16,
+ "sources": [
+  "1930 public-domain film",
+  "Blender open movies",
+  "DVIDS",
+  "NASA ISS time-lapse",
+  "NASA SVS 5011",
+  "Wikimedia Commons fireworks",
+  "Wikimedia Commons lightning"
+ ],
+ "source_count": 7,
+ "windows_to_label": 400,
+ "sheets": {
+  "labels_labeller_a.csv": {
+   "path": "eval/labeling/labels_labeller_a.csv",
+   "sha256": "a05b7663486e725073e055a17a24538be4521db5250b52ca41294ecfa8d86013",
+   "answered_windows": 0,
+   "unlabelable_windows": 0,
+   "git_state": "untracked"
+  },
+  "labels_labeller_b.csv": {
+   "path": "eval/labeling/labels_labeller_b.csv",
+   "sha256": "a05b7663486e725073e055a17a24538be4521db5250b52ca41294ecfa8d86013",
+   "answered_windows": 0,
+   "unlabelable_windows": 0,
+   "git_state": "untracked"
+  }
+ },
+ "pool_key_sha256": "58fb0c55c1e7873e7517607d86b2d93a5f2a59e2d4a1eab0417c38c4703e8f9e"
+}

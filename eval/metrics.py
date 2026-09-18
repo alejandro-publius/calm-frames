@@ -17,8 +17,15 @@ Definitions, all from docs/EVAL_PLAN.md:
 - the headline interval on the conformance suite is Wilson 95%, no continuity correction.
 
 The Wilson interval treats windows as independent Bernoulli trials, which windows inside one
-clip are not. That is why the real clip set uses a bootstrap over titles instead, and why both
+clip are not. That is why the real clip set uses a bootstrap over groups instead, and why both
 are reported for both sets.
+
+Which of the two comes out wider depends on how the errors cluster, and it is not always the
+bootstrap. On the conformance suite the recall bootstrap is wider than Wilson, because a clip
+tends to be found or missed as a whole, while the precision bootstrap is narrower, because
+nearly every positive clip carries the same two false positive windows by construction and so
+there is almost nothing for a resample to move. Both are reported and neither is picked after
+the fact.
 """
 
 from __future__ import annotations

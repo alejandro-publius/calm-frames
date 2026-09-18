@@ -77,6 +77,7 @@ class ClipTruth:
     drawn_area_fraction: float
     observed_flash_rate_hz: float
     mean_luminance_by_state: list[float]
+    coded_frame_mean_luminance_by_state: list[float]
     frames: int
 
     def as_dict(self) -> dict[str, object]:
@@ -97,6 +98,9 @@ class ClipTruth:
             "drawn_area_fraction": round(self.drawn_area_fraction, 6),
             "observed_flash_rate_hz": round(self.observed_flash_rate_hz, 4),
             "mean_luminance_by_state": [round(v, 6) for v in self.mean_luminance_by_state],
+            "coded_frame_mean_luminance_by_state": [
+                round(v, 6) for v in self.coded_frame_mean_luminance_by_state
+            ],
             "frames": self.frames,
         }
 
@@ -279,6 +283,8 @@ def clip_truth(clip: dict, spec: SpecNumbers | None = None) -> ClipTruth:
     )
 
     flashing_span_ms = max(1.0, duration_ms - float(clip["flash_start_ms"]))
+    coded_area = float(int(clip["width"]) * int(clip["height"]))
+    picture_share = (picture.width * picture.height) / coded_area if coded_area else 1.0
     drawn_area = sum(r.area for r in rects) / float(picture.width * picture.height)
 
     return ClipTruth(
@@ -300,6 +306,14 @@ def clip_truth(clip: dict, spec: SpecNumbers | None = None) -> ClipTruth:
         mean_luminance_by_state=[
             _mean_luminance(picture, rects, background, state_a, spec),
             _mean_luminance(picture, rects, background, state_b, spec),
+        ],
+        # The same means over the whole coded frame, black letterbox bars included. A decoder
+        # hands back the coded frame, so this is the number the encoding fidelity check has to
+        # compare against; comparing the picture-only mean against a decode of the whole frame
+        # made every letterboxed clip look like the encoder had mangled it.
+        coded_frame_mean_luminance_by_state=[
+            _mean_luminance(picture, rects, background, state_a, spec) * picture_share,
+            _mean_luminance(picture, rects, background, state_b, spec) * picture_share,
         ],
         frames=len(times),
     )

@@ -40,10 +40,17 @@ from . import PipelineError
 from .catalog import STATUS_FAILED, STATUS_VERIFIED, read_entry, update_index, write_entry
 from .flashmap_adapter import FlashMapDoc, FlashmapAdapter, MapFormatError, load_map
 from .hashing import sha256_file
-from .hideplan import DEFAULT_CALM_MARGIN_MS, HidePlan, build_cover_intervals, is_calm
+from .hideplan import (
+    DEFAULT_CALM_MARGIN_MS,
+    HidePlan,
+    build_cover_intervals,
+    is_calm,
+    may_be_sampled,
+)
 from .layout import TitleLayout
+from .posters import STILL_FROM_NEUTRAL_CARD, STILL_FROM_SOURCE
 from .probe import VideoProbe
-from .render import cover_psnr, render_cover_model
+from .render import cover_psnr, render_cover_model, still_is_flat
 
 # A covered span must match the cover still at least this closely, in dB.
 # Identical frames give inf. A span that still shows the film scores far lower.
@@ -52,10 +59,17 @@ COVER_PSNR_MIN_DB = 30.0
 # affordable on a feature length title.
 COVER_SAMPLE_LIMIT = 6
 
-# How far a rendition's timing may sit from the source's and still be showing
-# the same picture at the same moment: half a frame. Less than that and nothing
-# has moved by a whole frame anywhere. This is an engineering tolerance, not a
-# number from a spec, and docs/SPEC_SOURCES.md is where spec numbers live.
+# How far a rendition may run longer or shorter than the source and still be
+# showing the same pictures at the same moments: half a frame. Less than that
+# and nothing has moved by a whole frame anywhere.
+#
+# Where the timeline starts is judged more loosely, at one whole frame, because
+# a re-encode routinely renumbers the first presentation timestamp to zero and
+# one frame is the smallest step a picture can move by. The frame count and the
+# span are what catch a rendition that really lost or gained time.
+#
+# Both are engineering tolerances, not numbers from a spec, and
+# docs/SPEC_SOURCES.md is where spec numbers live.
 TIMING_TOLERANCE_FRAMES = 0.5
 
 
@@ -181,8 +195,10 @@ def compare_rendition_to_source(
     ships describes the source. The rendition is the file that actually plays, and the hide
     plan built from the source only lines up with it if the two agree on where the picture is
     and when each frame arrives. So: the same coded frame, the same picture rectangle, the
-    same number of frames, and a timeline that has not slid or stretched by as much as half a
-    frame.
+    same number of frames, a span that has not stretched by as much as half a frame, and a
+    start that has not moved by as much as a whole frame. The two bars differ because a
+    re-encode routinely renumbers the first presentation timestamp to zero while keeping every
+    picture where it was.
 
     Returns (passed, problems, data). Anything that cannot be read is a problem, never a pass.
     """
@@ -230,10 +246,10 @@ def compare_rendition_to_source(
             src_span = src["last_pts_ms"] - src["first_pts_ms"]
             ren_span = ren["last_pts_ms"] - ren["first_pts_ms"]
             span_change = abs(ren_span - src_span)
-            if start_shift > tolerance_ms:
+            if start_shift > median:
                 problems.append(
                     f"the rendition starts {start_shift:.3f} ms away from the source, "
-                    f"and half a frame is {tolerance_ms:.3f} ms"
+                    f"and one frame is {median:.3f} ms"
                 )
             if span_change > tolerance_ms:
                 problems.append(
@@ -498,18 +514,24 @@ def verify_title(
                 built_with=built_with,
                 required=calm_margin_ms,
             )
+            # A frame may come from a calm moment, or from one where the cover is down the
+            # whole way, because the rendition shows the cover still there and not the film.
+            # A title that flashes end to end only has the second kind.
             bad = [
                 frame
                 for frame in frames
-                if not is_calm(
-                    plan.intervals, float(frame["source_ms"]), margin_ms=calm_margin_ms
+                if not may_be_sampled(
+                    plan.intervals,
+                    float(frame["source_ms"]),
+                    plan.duration_ms,
+                    margin_ms=calm_margin_ms,
                 )
             ]
             report.add(
                 f"bif_calm:{preset}",
                 not bad and bool(frames),
                 f"{prefix}{len(bad)} of {len(frames)} trickplay frame(s) came "
-                f"from a flagged moment",
+                f"from a moment that is neither calm nor under the cover",
                 bad_times=[frame["source_ms"] for frame in bad][:20],
                 frame_count=len(frames),
             )
@@ -534,8 +556,11 @@ def verify_title(
             bad = [
                 poster
                 for poster in posters
-                if not is_calm(
-                    plan.intervals, float(poster["time_ms"]), margin_ms=calm_margin_ms
+                if not may_be_sampled(
+                    plan.intervals,
+                    float(poster["time_ms"]),
+                    plan.duration_ms,
+                    margin_ms=calm_margin_ms,
                 )
             ]
             missing = [
@@ -544,8 +569,8 @@ def verify_title(
             report.add(
                 f"posters_calm:{preset}",
                 not bad and bool(posters) and not missing,
-                f"{prefix}{len(bad)} of {len(posters)} poster(s) came from a "
-                f"flagged moment, {len(missing)} missing on disk",
+                f"{prefix}{len(bad)} of {len(posters)} poster(s) came from a moment "
+                f"that is neither calm nor under the cover, {len(missing)} missing on disk",
                 bad_times=[poster["time_ms"] for poster in bad][:20],
                 missing=missing[:20],
             )
@@ -554,7 +579,44 @@ def verify_title(
     # preset's plan.
     if layout.still_manifest_path.exists():
         still_info = json.loads(layout.still_manifest_path.read_text())
-        still_ms = float(still_info.get("time_ms", -1))
+        still_from = str(still_info.get("from", STILL_FROM_SOURCE))
+    else:
+        still_info, still_from = {}, ""
+
+    if still_from == STILL_FROM_NEUTRAL_CARD:
+        # A title that flashes end to end has no frame that may be shown, so the cover is a
+        # flat card instead of a refusal. "Flat" is measured here, not believed: a frame of
+        # the film is never one colour, so this is what stops a neutral card being a way to
+        # smuggle a flagged frame through.
+        try:
+            flat, detail = still_is_flat(layout.still_path)
+        except PipelineError as exc:
+            flat, detail = False, {"error": str(exc)}
+        report.add(
+            "cover_still_calm",
+            flat,
+            "the cover is a neutral card because every moment in this title is inside a "
+            "flagged span"
+            + (
+                ", and it measures as one flat colour"
+                if flat
+                else f", but it is not one flat colour: {detail}"
+            ),
+            still_from=still_from,
+            **detail,
+        )
+    elif still_info and still_info.get("time_ms") is None:
+        # A still that says it came out of the film has to say when. Without that there is no
+        # way to ask whether the moment was calm, and an unanswerable question is a failure.
+        report.add(
+            "cover_still_calm",
+            False,
+            f"the cover still says it came from {still_from!r} but not from when, so "
+            "whether that moment was calm cannot be checked",
+            still_from=still_from,
+        )
+    elif still_info:
+        still_ms = float(still_info["time_ms"])
         bad_presets = []
         for preset in presets:
             try:

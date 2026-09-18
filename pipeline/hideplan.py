@@ -183,6 +183,67 @@ def is_calm(
     return True
 
 
+def is_fully_covered(
+    intervals: Sequence[CoverInterval],
+    time_ms: float,
+    *,
+    margin_ms: float = DEFAULT_CALM_MARGIN_MS,
+) -> bool:
+    """True when the cover is already down here, with the margin to spare on both sides.
+
+    Stricter than ``is_covered``, which only asks whether the time falls inside an interval.
+
+    A picture taken here shows the cover still and not the film, so it is safe even though the
+    moment is not calm. That matters for a title that flashes end to end: it has no calm moment
+    at all, and refusing to give it a poster or a trickplay strip would refuse the title.
+
+    This is only ever true of the kid safe rendition, where the cover is burned in. What holds
+    the rendition to it is verify's cover_actually_drawn check, which measures the rendition
+    against the cover still rather than taking the plan's word for it.
+    """
+    return any(
+        interval.start_ms <= time_ms - margin_ms and time_ms + margin_ms <= interval.end_ms
+        for interval in intervals
+    )
+
+
+def may_be_sampled(
+    intervals: Sequence[CoverInterval],
+    time_ms: float,
+    duration_ms: float,
+    *,
+    margin_ms: float = DEFAULT_CALM_MARGIN_MS,
+) -> bool:
+    """May a poster or a trickplay frame come from this moment?
+
+    A calm moment always may. A moment under the cover may only when the title has no calm
+    moment anywhere, which is the one case where the strict rule would refuse the title
+    rather than protect anyone. While there is somewhere calm to take a picture from, that is
+    where it has to come from.
+
+    What must never happen either way is a frame taken close enough to a flagged span to show
+    the flash building, which is what the margin is for.
+    """
+    if is_calm(intervals, time_ms, margin_ms=margin_ms):
+        return True
+    if calm_ranges(intervals, duration_ms, margin_ms=margin_ms):
+        return False
+    return is_fully_covered(intervals, time_ms, margin_ms=margin_ms)
+
+
+def covered_ranges(
+    intervals: Sequence[CoverInterval],
+    *,
+    margin_ms: float = DEFAULT_CALM_MARGIN_MS,
+) -> list[tuple[float, float]]:
+    """The spans where the cover is down with the margin to spare on both sides."""
+    ranges = [
+        (interval.start_ms + margin_ms, interval.end_ms - margin_ms)
+        for interval in intervals
+    ]
+    return sorted((a, b) for a, b in ranges if b - a > 0)
+
+
 def calm_ranges(
     intervals: Sequence[CoverInterval],
     duration_ms: float,
@@ -215,7 +276,24 @@ def nearest_calm_time_ms(
     margin_ms: float = DEFAULT_CALM_MARGIN_MS,
 ) -> float | None:
     """The calm time closest to ``time_ms``, or None when the title has none."""
-    ranges = calm_ranges(intervals, duration_ms, margin_ms=margin_ms)
+    return _nearest_in_ranges(
+        calm_ranges(intervals, duration_ms, margin_ms=margin_ms), time_ms
+    )
+
+
+def nearest_covered_time_ms(
+    intervals: Sequence[CoverInterval],
+    time_ms: float,
+    *,
+    margin_ms: float = DEFAULT_CALM_MARGIN_MS,
+) -> float | None:
+    """The closest moment that is under the cover, or None when nothing is."""
+    return _nearest_in_ranges(covered_ranges(intervals, margin_ms=margin_ms), time_ms)
+
+
+def _nearest_in_ranges(
+    ranges: Sequence[tuple[float, float]], time_ms: float
+) -> float | None:
     if not ranges:
         return None
     best: float | None = None

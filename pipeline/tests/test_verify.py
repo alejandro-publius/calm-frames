@@ -17,6 +17,7 @@ from pipeline.catalog import STATUS_FAILED, kid_mode_titles, read_entry
 from pipeline.flashmap_adapter import FlashmapAdapter, parse_map
 from pipeline.hideplan import HidePlan
 from pipeline.ingest import IngestOptions, ingest_title
+from pipeline.render import still_is_flat
 from pipeline.verify import compare_rendition_to_source
 from pipeline.verify import main as verify_main
 from pipeline.verify import verify_title
@@ -531,11 +532,23 @@ class TestTheRenditionMustMatchTheSource:
         assert failed
         assert "frames" in failed[0].detail
 
-    def test_a_timeline_that_slid_a_whole_frame_blocks_publishing(self, built):
-        built["analyzer"].set_geometry("safe.mp4", first_pts_ms=40.0, last_pts_ms=3340.0)
+    def test_a_timeline_that_slid_more_than_a_frame_blocks_publishing(self, built):
+        built["analyzer"].set_geometry("safe.mp4", first_pts_ms=100.0, last_pts_ms=3400.0)
         report = run_verify(built)
         assert not report.passed
         assert "rendition_matches_source:wcag" in failed_names(report)
+
+    def test_a_start_renumbered_by_one_frame_is_allowed(self, built):
+        """A re-encode routinely puts the first presentation timestamp at zero.
+
+        The pictures and their spacing are the same, so nothing has moved relative to
+        anything else, and refusing this would refuse most renditions.
+        """
+        built["analyzer"].set_geometry(
+            "clip.mp4", first_pts_ms=33.333, last_pts_ms=3333.333
+        )
+        report = run_verify(built)
+        assert report.passed, failed_names(report)
 
     def test_a_timeline_that_stretched_blocks_publishing(self, built):
         built["analyzer"].set_geometry("safe.mp4", last_pts_ms=3400.0)
@@ -602,3 +615,99 @@ class TestComparingAMapToItsSource:
         matched, problems, _ = compare_rendition_to_source(self._doc(), bare)
         assert not matched
         assert len(problems) >= 3
+
+
+class TestATitleThatFlashesEndToEnd:
+    """No frame of it may be shown, so the cover is a card rather than a refusal.
+
+    Refusing the title was the old answer and it was the wrong one: the film still cannot be
+    watched safely without the cover, and the cover does not have to come out of the film.
+    What must not happen is a flagged frame being shown because nothing calm was found, so
+    verify measures the card rather than believing the manifest.
+    """
+
+    @pytest.fixture
+    def flagged_throughout(self, tmp_path, analyzer, keypair):
+        private, public = keypair
+        source = make_calm_clip(tmp_path / "clip.mp4", seconds=8.0)
+        analyzer.flag("clip.mp4", segments_all=[[0, 8000, "general"]])
+        result = ingest_title(
+            source,
+            tmp_path / "out",
+            IngestOptions(
+                presets=["wcag"],
+                key=str(private),
+                pub=str(public),
+                poster_count=1,
+                bif_interval_ms=2000,
+                x264_preset="ultrafast",
+                allow_dim=False,
+                skip_verify=True,
+            ),
+        )
+        return {"layout": result.layout, "source": source, "public": public}
+
+    def test_the_title_is_ingested_instead_of_refused(self, flagged_throughout):
+        layout = flagged_throughout["layout"]
+        assert layout.still_path.exists()
+        manifest = json.loads(layout.still_manifest_path.read_text())
+        assert manifest["from"] == "neutral-card"
+        assert manifest["time_ms"] is None
+        assert "no frame of it that may be shown" in manifest["why"]
+
+    def test_the_catalog_entry_says_the_cover_is_a_card(self, flagged_throughout):
+        entry = read_entry(flagged_throughout["layout"].entry_path)
+        assert entry.notes["cover_still_from"] == "neutral-card"
+
+    def test_the_card_is_one_flat_colour(self, flagged_throughout):
+        flat, detail = still_is_flat(flagged_throughout["layout"].still_path)
+        assert flat, detail
+
+    def test_verify_measures_the_card_rather_than_believing_the_manifest(
+        self, flagged_throughout, tmp_path
+    ):
+        layout = flagged_throughout["layout"]
+        # A frame of the film put in the card's place, with the manifest still claiming a
+        # card. Verify has to catch that, because on a title like this every frame is flagged.
+        from pipeline.render import extract_still
+
+        extract_still(
+            flagged_throughout["source"], time_s=1.0, out_path=layout.still_path,
+            width=64, height=48,
+        )
+        report = verify_title(
+            layout,
+            source=flagged_throughout["source"],
+            presets=["wcag"],
+            adapter=FlashmapAdapter(),
+            pub_key=flagged_throughout["public"],
+            rerender_cover_model=False,
+        )
+        assert not report.passed
+        assert "cover_still_calm" in failed_names(report)
+
+    def test_a_real_card_passes_that_check(self, flagged_throughout):
+        report = verify_title(
+            flagged_throughout["layout"],
+            source=flagged_throughout["source"],
+            presets=["wcag"],
+            adapter=FlashmapAdapter(),
+            pub_key=flagged_throughout["public"],
+            rerender_cover_model=False,
+        )
+        check = [c for c in report.checks if c.name == "cover_still_calm"][0]
+        assert check.passed
+        assert check.data["still_from"] == "neutral-card"
+
+
+class TestACoverStillThatCannotBeChecked:
+    def test_a_still_from_the_film_with_no_time_blocks_publishing(self, built):
+        """Fail closed. A question that cannot be answered is not an answer of yes."""
+        manifest = json.loads(built["layout"].still_manifest_path.read_text())
+        manifest["time_ms"] = None
+        built["layout"].still_manifest_path.write_text(json.dumps(manifest))
+        report = run_verify(built)
+        assert not report.passed
+        failed = [c for c in report.failures if c.name == "cover_still_calm"]
+        assert failed
+        assert "not from when" in failed[0].detail

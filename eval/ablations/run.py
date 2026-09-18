@@ -47,7 +47,7 @@ _EVAL_DIR = Path(__file__).resolve().parents[1]
 if str(_EVAL_DIR) not in sys.path:
     sys.path.insert(0, str(_EVAL_DIR))
 
-from conformance.generate_analyze import sweep_leftovers  # noqa: E402
+from conformance.generate_analyze import _init_worker, sweep_leftovers  # noqa: E402
 from conformance.render import HAZARD_PREFIX, render_clip, scratch_dir  # noqa: E402
 from conformance.spec import load_spec  # noqa: E402
 from metrics import confusion, rate_with_interval, windows_from_intervals  # noqa: E402
@@ -202,9 +202,18 @@ def score(rows: list[dict], clips: dict, arm: str) -> dict:
     }
 
 
-def sample_clips(design: dict, count: int, seed_field: str = "order_index") -> list[dict]:
-    """An even spread across the committed run order, so the sample is not the spine alone."""
-    clips = sorted(design["clips"], key=lambda clip: clip[seed_field])
+def sample_clips(design: dict, count: int, measured: set[str] | None = None) -> list[dict]:
+    """An even spread across the committed run order, so the sample is not the spine alone.
+
+    Clips the main run has already measured come first. The default arm has to be compared
+    against that run clip for clip, and a sample of clips nobody has measured yet would leave
+    that check with nothing to compare.
+    """
+    clips = sorted(design["clips"], key=lambda clip: clip["order_index"])
+    if measured:
+        preferred = [clip for clip in clips if clip["clip_id"] in measured]
+        if len(preferred) >= count:
+            clips = preferred
     if count >= len(clips):
         return clips
     step = len(clips) / count
@@ -212,10 +221,10 @@ def sample_clips(design: dict, count: int, seed_field: str = "order_index") -> l
 
 
 def run_detection(design: dict, count: int, workers: int, raw_rows: dict) -> dict:
-    clips = sample_clips(design, count)
+    clips = sample_clips(design, count, measured=set(raw_rows))
     started = time.time()
     rows: list[dict] = []
-    with ProcessPoolExecutor(max_workers=workers) as pool:
+    with ProcessPoolExecutor(max_workers=workers, initializer=_init_worker) as pool:
         for row in pool.map(detection_worker, [(clip, ARMS) for clip in clips]):
             rows.append(row)
     by_id = {clip["clip_id"]: clip for clip in design["clips"]}
@@ -377,7 +386,7 @@ def run_cover(design: dict, raw_rows: dict, count: int, workers: int) -> dict:
         return {"error": "no flagged clips to cover yet"}
 
     rows: list[dict] = []
-    with ProcessPoolExecutor(max_workers=workers) as pool:
+    with ProcessPoolExecutor(max_workers=workers, initializer=_init_worker) as pool:
         for row in pool.map(cover_worker, chosen):
             rows.append(row)
 
@@ -413,6 +422,47 @@ def run_cover(design: dict, raw_rows: dict, count: int, workers: int) -> dict:
     }
 
 
+def publishable(report: dict) -> dict:
+    """Flat, marker friendly copies of the numbers a document may quote.
+
+    eval/readme_sync.py reads a dotted path with no spaces in it, so the numbers a write-up
+    quotes get short keys here rather than being dug out of the tables by hand.
+    """
+    out: dict[str, object] = {}
+    detection = report.get("detection") or {}
+    arms = detection.get("arms") or {}
+    if arms:
+        out["clips"] = detection.get("clips")
+        out["default_arm_mismatches"] = detection["default_arm_matches_main_run"]["mismatched"]
+        out["default_arm_clips_compared"] = detection["default_arm_matches_main_run"][
+            "clips_compared"
+        ]
+        for arm, row in arms.items():
+            for metric in ("precision", "recall"):
+                value = row[metric]["value"]
+                out[f"{arm}_{metric}"] = None if value is None else round(value, 3)
+                change = row.get(f"{metric}_change_vs_default")
+                if change is not None:
+                    out[f"{arm}_{metric}_change"] = round(change, 3)
+    cover = report.get("cover") or {}
+    for label, key in (("red", "red_segments"), ("non_red", "non_red_segments"), ("all", "all")):
+        row = cover.get(key)
+        if isinstance(row, dict) and "uncovered" in row:
+            out[f"cover_{label}_clips"] = row["uncovered"]["clips"]
+            out[f"cover_{label}_uncovered_flagged"] = row["uncovered"]["clips_still_flagged"]
+            out[f"cover_{label}_dim_flagged"] = row["dim_10_percent"]["clips_still_flagged"]
+            out[f"cover_{label}_opaque_flagged"] = row["opaque"]["clips_still_flagged"]
+    guard = report.get("guard_band") or {}
+    covered = guard.get("covered_before_onset") or {}
+    for band, per_latency in covered.items():
+        for latency, row in per_latency.items():
+            value = row["value"]
+            out[f"guard_{band}ms_latency_{latency}ms"] = None if value is None else round(value, 3)
+    if guard.get("clips"):
+        out["guard_clips"] = guard["clips"]
+    return out
+
+
 def load_raw(path: Path) -> dict[str, dict]:
     rows: dict[str, dict] = {}
     if not path.exists():
@@ -437,6 +487,7 @@ def main() -> int:
     parser.add_argument("--skip", action="append", default=[], choices=["detection", "guard", "cover"])
     arguments = parser.parse_args()
 
+    sweep_leftovers(fail=False)  # nothing from an earlier job survives into this one
     design = json.loads(arguments.design.read_text())
     raw_rows = load_raw(arguments.raw)
 
@@ -447,19 +498,28 @@ def main() -> int:
     report["design_seed"] = design["seed"]
     report["ground_truth"] = "the same committed truth the conformance report uses"
 
+    def save(stage: str) -> None:
+        """Write the file after every stage.
+
+        The three groups take a long time under load, and a run that only writes at the very
+        end throws away an hour of finished arms if it is stopped in the last one. Each stage
+        lands on disk as soon as it is done, and a later run merges into the same file.
+        """
+        report["published"] = publishable(report)
+        arguments.out.write_text(json.dumps(report, indent=1, default=str) + "\n")
+        print(f"{stage} done, written to {arguments.out}", flush=True)
+
     if "detection" not in arguments.skip:
         report["detection"] = run_detection(
             design, arguments.detection_clips, arguments.workers, raw_rows
         )
-        print("detection arms done", flush=True)
+        save("detection arms")
     if "guard" not in arguments.skip:
         report["guard_band"] = run_guard_band(design, raw_rows)
-        print("guard band simulation done", flush=True)
+        save("guard band simulation")
     if "cover" not in arguments.skip:
         report["cover"] = run_cover(design, raw_rows, arguments.cover_clips, arguments.workers)
-        print("cover arms done", flush=True)
-
-    arguments.out.write_text(json.dumps(report, indent=1, default=str) + "\n")
+        save("cover arms")
     leftovers = sweep_leftovers()
     print(f"wrote {arguments.out}, {leftovers} hazard files leaked")
     return 1 if leftovers else 0

@@ -1,0 +1,383 @@
+{
+  "recorded_utc": "2026-09-18T00:53:22+00:00",
+  "what_this_is": "A rehearsal of the GATE 1 analysis against the events the app posted during a run on the Vega Virtual Device. It measures what the app believed about media time, not what the screen showed.",
+  "what_this_is_not": "GATE 1. That is 50 trials filmed at 240 fps on a real Fire TV stick, which is the only way to see what the screen did. The virtual device's screen cannot be recorded on this machine: macOS exposes no capture device without the Screen Recording permission, and the window is not captured anyway because the app draws on a GPU layer that both screen grabs and QEMU's screendump miss.",
+  "source_events": "results/stick_day/timing_events.json",
+  "clip_sha256": "fad744279f9c9f085b9cd23b78d5a206e99f565b5cd42bb64bda0762157a391e",
+  "guard_band_ms": 500,
+  "required_lead_ms": 150,
+  "markers_in_schedule": 50,
+  "furthest_position_the_player_reported_ms": 8782,
+  "markers_counted": 2,
+  "markers_not_counted": 43,
+  "markers_covered_in_time": 2,
+  "covered_in_time_fraction": 1.0,
+  "wilson_95_interval": {
+    "low": 0.3424,
+    "high": 1.0
+  },
+  "lead_ms": {
+    "count": 2,
+    "min": 303.0,
+    "median": 398.5,
+    "p95": 494.0,
+    "max": 494.0
+  },
+  "worst_lead_ms": 303,
+  "trials": [
+    {
+      "marker": 1,
+      "marker_start_ms": 4000,
+      "covered": true,
+      "counted": true,
+      "cover_on_media_ms": 3697,
+      "lead_ms": 303,
+      "in_time": true
+    },
+    {
+      "marker": 2,
+      "marker_start_ms": 8000,
+      "covered": true,
+      "counted": true,
+      "cover_on_media_ms": 7506.0,
+      "lead_ms": 494.0,
+      "in_time": true
+    },
+    {
+      "marker": 3,
+      "marker_start_ms": 12000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 4,
+      "marker_start_ms": 16000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 5,
+      "marker_start_ms": 20000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 6,
+      "marker_start_ms": 24000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 7,
+      "marker_start_ms": 28000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 8,
+      "marker_start_ms": 32000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 9,
+      "marker_start_ms": 36000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 10,
+      "marker_start_ms": 40000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 11,
+      "marker_start_ms": 44000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 12,
+      "marker_start_ms": 48000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 13,
+      "marker_start_ms": 52000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 14,
+      "marker_start_ms": 56000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 15,
+      "marker_start_ms": 60000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 16,
+      "marker_start_ms": 64000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 17,
+      "marker_start_ms": 68000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 18,
+      "marker_start_ms": 72000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 19,
+      "marker_start_ms": 76000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 20,
+      "marker_start_ms": 80000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 21,
+      "marker_start_ms": 84000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 22,
+      "marker_start_ms": 88000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 23,
+      "marker_start_ms": 92000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 24,
+      "marker_start_ms": 96000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 25,
+      "marker_start_ms": 100000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 26,
+      "marker_start_ms": 104000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 27,
+      "marker_start_ms": 108000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 28,
+      "marker_start_ms": 112000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 29,
+      "marker_start_ms": 116000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 30,
+      "marker_start_ms": 120000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 31,
+      "marker_start_ms": 124000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 32,
+      "marker_start_ms": 128000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 33,
+      "marker_start_ms": 132000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 34,
+      "marker_start_ms": 136000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 35,
+      "marker_start_ms": 140000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 36,
+      "marker_start_ms": 144000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 37,
+      "marker_start_ms": 148000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 38,
+      "marker_start_ms": 152000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 39,
+      "marker_start_ms": 156000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 40,
+      "marker_start_ms": 160000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 41,
+      "marker_start_ms": 164000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 42,
+      "marker_start_ms": 168000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 43,
+      "marker_start_ms": 172000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 44,
+      "marker_start_ms": 176000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 45,
+      "marker_start_ms": 180000,
+      "covered": true,
+      "counted": false,
+      "why": "the player never reached this part of the clip, so the cover fired against an estimate and there is nothing here to measure"
+    },
+    {
+      "marker": 46,
+      "marker_start_ms": 184000,
+      "covered": false,
+      "lead_ms": null,
+      "note": "no cover-on for this interval in the run"
+    },
+    {
+      "marker": 47,
+      "marker_start_ms": 188000,
+      "covered": false,
+      "lead_ms": null,
+      "note": "no cover-on for this interval in the run"
+    },
+    {
+      "marker": 48,
+      "marker_start_ms": 192000,
+      "covered": false,
+      "lead_ms": null,
+      "note": "no cover-on for this interval in the run"
+    },
+    {
+      "marker": 49,
+      "marker_start_ms": 196000,
+      "covered": false,
+      "lead_ms": null,
+      "note": "no cover-on for this interval in the run"
+    },
+    {
+      "marker": 50,
+      "marker_start_ms": 200000,
+      "covered": false,
+      "lead_ms": null,
+      "note": "no cover-on for this interval in the run"
+    }
+  ]
+}

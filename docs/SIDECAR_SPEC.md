@@ -60,11 +60,12 @@ version number.
 | `path` | string | the file's base name only, never a full path |
 | `sha256` | string | 64 lowercase hex characters, of the whole file. **This is the binding.** |
 | `size_bytes` | integer | |
-| `coded_width`, `coded_height` | integer | the decoded frame size, bars included |
+| `coded_width`, `coded_height` | integer | the frame size the file declares, bars included. Some decoders hand back a frame a few columns wider, because the codec pads to its block size; the size here is the one the file says and the one a re-encode of it gets made at. |
 | `container_frame_rate` | string or null | `"30000/1001"` style. Informational. flashmap never uses it for timing and neither should you. |
 | `duration_ms` | number or null | from the container, may be absent |
 | `frame_count` | integer | frames actually analysed |
 | `first_pts_ms`, `last_pts_ms` | number or null | real presentation timestamps of the first and last analysed frame |
+| `last_coded_pts_ms` | number or null | the timestamp of the last frame that carried a picture of its own. It sits before `last_pts_ms` when the file ends on repeated frames, which is what an empty packet means in Ogg Theora. Anything that re-encodes the file drops those repeats and ends early, so a tool building a rendition holds the last picture for the difference. |
 | `variable_frame_rate` | boolean | true when the measured frame intervals are not all the same |
 | `frame_interval_ms` | object | `min`, `max`, `median` of the measured intervals |
 | `timestamp_source` | string | `container-pts` in version 1 |
@@ -125,12 +126,15 @@ measured on it.
 
 `pipeline/verify.py` uses this. It measures the kid safe rendition on the source's rectangle,
 and it separately refuses to publish a title whose rendition does not have the source's coded
-frame size, the source's picture rectangle, the source's frame count and a timeline that has
-neither slid nor stretched by as much as half a frame.
+frame size, the source's picture rectangle, the source's frame count, a span that has not
+stretched by as much as half a frame and a start that has not moved by as much as a whole
+frame. The start is judged more loosely because a re-encode routinely renumbers the first
+presentation timestamp to zero while leaving every picture where it was.
 
 ### Why this is still version 1
 
-`coded`, `source` and `detected` are new optional keys. They do not change the meaning of any
+`picture.coded`, `picture.source`, `picture.detected` and `source.last_coded_pts_ms` are new
+optional keys. They do not change the meaning of any
 key that was already here, none is removed, and nothing about how segments are computed has
 changed for a file measured the ordinary way. The versioning rule above allows exactly that
 inside version 1, and a reader that ignores all three still reads every map correctly. A map
@@ -279,7 +283,7 @@ reader must re-serialise rather than hash the file.
     "container_frame_rate": "20/1",
     "duration_ms": null,
     "frame_count": 30,
-    "first_pts_ms": 0.0, "last_pts_ms": 1450.0,
+    "first_pts_ms": 0.0, "last_pts_ms": 1450.0, "last_coded_pts_ms": 1450.0,
     "variable_frame_rate": false,
     "frame_interval_ms": { "min": 50.0, "max": 50.0, "median": 50.0 },
     "timestamp_source": "container-pts"

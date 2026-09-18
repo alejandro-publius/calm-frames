@@ -57,6 +57,13 @@ DEFAULT_HLS_SEGMENT_S = 4.0
 
 TEXT_SUBTITLE_CODECS = {"subrip", "srt", "mov_text", "ass", "ssa", "webvtt", "text"}
 
+# The cover card for a title that flashes end to end and has no calm frame to take a still
+# from. A flat dark neutral grey: dark enough that it can never be the bright side of a flash,
+# light enough to read as a card someone meant to put there rather than a dead screen. It is
+# a look choice, not a number from a spec, and verify does not take it on trust: it measures
+# the card and refuses anything that is not one flat colour.
+NEUTRAL_STILL_RGB = (40, 40, 40)
+
 
 @dataclass
 class RenderResult:
@@ -115,6 +122,42 @@ def _colour_tag_args(probe: VideoProbe) -> list[str]:
     return args
 
 
+def _try_seeked_frame(args: list[str], out_path: Path) -> list[str] | None:
+    """Run a seek and grab, and say nothing rather than raising when it lands past the end.
+
+    Seeking past a file's last coded frame makes ffmpeg exit non zero, which is fine and not
+    a reason to give up on the title. The caller has a second way to get the frame.
+    """
+    try:
+        return ffmpegtool.run_ffmpeg(args).cmd
+    except ffmpegtool.FFmpegError:
+        out_path.unlink(missing_ok=True)
+        return None
+
+
+def _last_frame_up_to(
+    source: str | Path,
+    *,
+    time_s: float,
+    out_path: Path,
+    filters: list[str],
+) -> list[str]:
+    """The last frame at or before ``time_s``, for a file that has none after it.
+
+    A container can run on past its last coded frame. Ogg Theora does it as a matter of
+    course: a frame that repeats the one before it is written as an empty packet, and a file
+    whose tail is all repeats has a last decodable frame well before the end of its duration.
+    Seeking into that tail gives nothing back at all. The picture a player shows there is the
+    last real frame, so that is what gets taken.
+
+    ``-update 1`` writes every frame over the same file, so the last one written wins.
+    """
+    args = ["-i", str(source), "-t", f"{max(0.0, time_s):.6f}"]
+    args += filters
+    args += ["-update", "1", str(out_path)]
+    return ffmpegtool.run_ffmpeg(args).cmd
+
+
 def extract_still(
     source: str | Path,
     *,
@@ -126,14 +169,18 @@ def extract_still(
     """One frame, written as a PNG. Used for the cover still and for posters."""
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    filters = ["-vf", f"scale={width}:{height}"] if width and height else []
     args = ["-ss", f"{max(0.0, time_s):.6f}", "-i", str(source), "-frames:v", "1"]
-    if width and height:
-        args += ["-vf", f"scale={width}:{height}"]
+    args += filters
     args += ["-update", "1", str(out_path)]
-    result = ffmpegtool.run_ffmpeg(args)
+    cmd = _try_seeked_frame(args, out_path)
+    if cmd is None or not out_path.exists():
+        cmd = _last_frame_up_to(
+            source, time_s=time_s, out_path=out_path, filters=filters
+        )
     if not out_path.exists():
         raise PipelineError(f"no still frame was written at {time_s} s of {source}")
-    return RenderResult(path=out_path, cmd=result.cmd)
+    return RenderResult(path=out_path, cmd=cmd)
 
 
 def extract_jpeg(
@@ -147,25 +194,102 @@ def extract_jpeg(
 ) -> RenderResult:
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    args = [
-        "-ss",
-        f"{max(0.0, time_s):.6f}",
-        "-i",
-        str(source),
-        "-frames:v",
-        "1",
-        "-vf",
-        f"scale={width}:{height}",
-        "-q:v",
-        str(quality),
-        "-update",
-        "1",
-        str(out_path),
-    ]
-    result = ffmpegtool.run_ffmpeg(args)
+    filters = ["-vf", f"scale={width}:{height}", "-q:v", str(quality)]
+    args = ["-ss", f"{max(0.0, time_s):.6f}", "-i", str(source), "-frames:v", "1"]
+    args += filters
+    args += ["-update", "1", str(out_path)]
+    cmd = _try_seeked_frame(args, out_path)
+    if cmd is None or not out_path.exists():
+        cmd = _last_frame_up_to(
+            source, time_s=time_s, out_path=out_path, filters=filters
+        )
     if not out_path.exists():
         raise PipelineError(f"no jpeg was written at {time_s} s of {source}")
-    return RenderResult(path=out_path, cmd=result.cmd)
+    return RenderResult(path=out_path, cmd=cmd)
+
+
+def make_neutral_still(
+    out_path: str | Path,
+    *,
+    width: int,
+    height: int,
+    rgb: tuple[int, int, int] = NEUTRAL_STILL_RGB,
+) -> RenderResult:
+    """A flat neutral card, for a title with no calm frame to take a cover from.
+
+    A title that flashes from end to end has no frame that may be shown, so refusing it was
+    the only safe answer while the cover had to come out of the film. It does not have to. A
+    card made here comes from nothing in the title, which is what makes it safe, and the
+    manifest says plainly that the cover is a card and not a frame of the film.
+    """
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    colour = "0x{:02X}{:02X}{:02X}".format(*rgb)
+    result = ffmpegtool.run_ffmpeg(
+        [
+            "-f",
+            "lavfi",
+            "-i",
+            f"color=c={colour}:s={int(width)}x{int(height)}",
+            "-frames:v",
+            "1",
+            "-update",
+            "1",
+            str(out_path),
+        ]
+    )
+    if not out_path.exists():
+        raise PipelineError(f"no neutral cover still was written at {out_path}")
+    return RenderResult(path=out_path, cmd=result.cmd, notes={"rgb": list(rgb)})
+
+
+_FLAT_RE = re.compile(r"lavfi\.signalstats\.([YUV])(MIN|MAX)=([0-9.]+)")
+
+
+def still_is_flat(still_path: str | Path) -> tuple[bool, dict]:
+    """Is this image one flat colour?
+
+    This is the check that makes "the cover is a neutral card" something verify knows rather
+    than something the pipeline claims. A frame lifted out of a film is never flat. It reads
+    the extremes of each plane straight out of ffmpeg, so nothing in the pipeline gets to say
+    what the picture was.
+    """
+    still_path = Path(still_path)
+    if not still_path.exists():
+        raise PipelineError(f"no cover still to measure at {still_path}")
+    result = ffmpegtool.run_ffmpeg(
+        [
+            "-i",
+            str(still_path),
+            "-vf",
+            "signalstats,metadata=print",
+            "-f",
+            "null",
+            "-",
+        ]
+    )
+    found: dict[str, float] = {}
+    for line in (result.stderr or "").splitlines():
+        match = _FLAT_RE.search(line)
+        if match:
+            found[f"{match.group(1)}{match.group(2)}"] = float(match.group(3))
+    wanted = [f"{plane}{end}" for plane in ("Y", "U", "V") for end in ("MIN", "MAX")]
+    missing = [key for key in wanted if key not in found]
+    if missing:
+        # Fail closed. A statistic that did not come back is not a statistic that said the
+        # picture was flat, and treating an absent number as zero would read every gap as
+        # proof of the thing being checked for.
+        raise PipelineError(
+            f"ffmpeg did not report {', '.join(missing)} for {still_path}, so whether it is "
+            "one flat colour is unknown"
+        )
+    spreads = {
+        plane: found[f"{plane}MAX"] - found[f"{plane}MIN"] for plane in ("Y", "U", "V")
+    }
+    return all(value == 0.0 for value in spreads.values()), {
+        "extremes": found,
+        "spreads": spreads,
+    }
 
 
 _PSNR_RE = re.compile(r"average:([0-9.]+|inf)")
@@ -234,25 +358,43 @@ def render_safe_master(
     crf: int = DEFAULT_CRF,
     x264_preset: str = DEFAULT_PRESET,
     segment_seconds: float = DEFAULT_HLS_SEGMENT_S,
+    pad_tail_ms: float = 0.0,
 ) -> RenderResult:
     """One MP4 with every flagged span plus guard band replaced by the still.
 
     The HLS rendition is packaged from this file by stream copy, and the same
     file is what verify re-analyzes, so what the analyzer sees is exactly what
     the player streams.
+
+    ``pad_tail_ms`` holds the last frame for that much longer at the end. A
+    container can outlive its last coded frame: Ogg Theora writes a repeated
+    frame as an empty packet, so a file ending on repeats has a last coded
+    frame well before its duration, and ffmpeg drops those packets when it
+    re-encodes. Without the hold the rendition comes out that much shorter
+    than the title, which is both a missing tail and a rendition that no
+    longer has the source's frame timing. Holding the last frame puts the
+    time back and shows exactly what the source shows there.
     """
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     expression = enable_expression(intervals)
+    hold = (
+        f"tpad=stop_mode=clone:stop_duration={pad_tail_ms / 1000.0:.6f},"
+        if pad_tail_ms > 0
+        else ""
+    )
 
     args: list[str] = ["-i", str(source)]
     if expression:
         args += ["-loop", "1", "-i", str(still_path)]
         filtergraph = (
+            f"[0:v]{hold}null[base];"
             f"[1:v]scale={probe.width}:{probe.height},setsar=1[still];"
-            f"[0:v][still]overlay=0:0:shortest=1:enable='{expression}'[v]"
+            f"[base][still]overlay=0:0:shortest=1:enable='{expression}'[v]"
         )
         args += ["-filter_complex", filtergraph, "-map", "[v]"]
+    elif hold:
+        args += ["-map", "0:v:0", "-vf", hold.rstrip(",")]
     else:
         args += ["-map", "0:v:0"]
 

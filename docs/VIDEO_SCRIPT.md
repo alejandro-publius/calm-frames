@@ -38,7 +38,7 @@
 
 Every number that appears comes from `results/` and matches the README. There are only three in this cut, and each one is marked in this file, so `python eval/readme_sync.py --check` covers them too.
 
-**There is no cover lead time number**, on any device, and none appears in this video. The one run that produced one was withdrawn. The voiceover says what is measured and what is not, and does not imply a timing figure we do not have.
+**There is no screen-level cover lead time**, and none appears in this video. The one run that claimed one was withdrawn. The software-level figure that exists now is not said out loud either, because a viewer cannot be expected to hold the difference in their head. The voiceover says what is measured and what is not, and does not imply a timing figure we do not have.
 
 ---
 

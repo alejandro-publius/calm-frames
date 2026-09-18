@@ -293,13 +293,22 @@ def probe(path: str | Path, policy: ColorPolicy = ColorPolicy(), analysis_width:
         if stream.duration is not None and stream.time_base is not None:
             duration_ms = float(stream.duration * stream.time_base) * 1000.0
         aw, ah = _analysis_size(first.width, first.height, analysis_width)
+        # The size the file says it is, which is the size every other tool reports and the
+        # size a re-encode of it gets made at. Some decoders hand back a frame a few columns
+        # wider than that: three Ogg Theora clips in this project's pool declare 840 by 560
+        # and decode to 844 by 560, because the codec pads to its block size. flashmap scales
+        # the whole decoded frame, padding included, which can only add a sliver of edge to
+        # the measurement. Reporting the padded width as the file's size would be wrong, and
+        # it would stop a rendition ever being measured against the rectangle in this map.
+        declared_width = stream.width or first.width
+        declared_height = stream.height or first.height
 
     return SourceInfo(
         path=str(path),
         sha256=sha256_file(path),
         size_bytes=path.stat().st_size,
-        coded_width=first.width,
-        coded_height=first.height,
+        coded_width=declared_width,
+        coded_height=declared_height,
         analysis_width=aw,
         analysis_height=ah,
         container_frame_rate=None if rate is None else f"{rate.numerator}/{rate.denominator}",

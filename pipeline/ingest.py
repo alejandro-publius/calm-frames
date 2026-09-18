@@ -48,7 +48,7 @@ from .catalog import (
     write_entry,
 )
 from .ffmpegtool import require_tools
-from .flashmap_adapter import FlashmapAdapter, iter_presets
+from .flashmap_adapter import FlashmapAdapter, iter_presets, tail_to_hold_ms
 from .hashing import fingerprint, sha256_file
 from .hideplan import (
     DEFAULT_CALM_MARGIN_MS,
@@ -64,6 +64,8 @@ from .posters import (
     DEFAULT_POSTER_COUNT,
     DEFAULT_POSTER_WIDTH,
     DEFAULT_SAMPLE_FPS,
+    STILL_FROM_NEUTRAL_CARD,
+    STILL_FROM_SOURCE,
     LumaSeries,
     choose_calm_times,
     choose_cover_still_time,
@@ -76,6 +78,8 @@ from .render import (
     DEFAULT_CRF,
     DEFAULT_HLS_SEGMENT_S,
     DEFAULT_PRESET,
+    NEUTRAL_STILL_RGB,
+    make_neutral_still,
     package_hls,
     render_cover_model,
     render_safe_master,
@@ -298,27 +302,47 @@ def ingest_title(
 
     # 5. The cover still, one calm frame reused by every preset.
     def do_still() -> dict:
-        time_ms = choose_cover_still_time(
-            union, duration_ms, margin_ms=options.calm_margin_ms, series=series
-        )
-        extract_cover_still(
-            source,
-            time_ms=time_ms,
-            out_path=layout.still_path,
-            width=probe.width,
-            height=probe.height,
-        )
-        layout.still_manifest_path.write_text(
-            json.dumps(
-                {
-                    "time_ms": time_ms,
-                    "from": "source",
-                    "calm_margin_ms": options.calm_margin_ms,
-                },
-                indent=2,
+        # A title that flashes end to end has no frame that may be shown, so the cover is a
+        # flat neutral card instead. That is not a quiet refusal: the manifest and the catalog
+        # entry both say the cover is a card and not a frame of the film, and verify measures
+        # the card rather than believing it.
+        try:
+            time_ms: float | None = choose_cover_still_time(
+                union, duration_ms, margin_ms=options.calm_margin_ms, series=series
             )
-        )
-        return {"time_ms": time_ms}
+        except PipelineError:
+            time_ms = None
+
+        if time_ms is None:
+            make_neutral_still(
+                layout.still_path, width=probe.width, height=probe.height
+            )
+            manifest = {
+                "time_ms": None,
+                "from": STILL_FROM_NEUTRAL_CARD,
+                "calm_margin_ms": options.calm_margin_ms,
+                "neutral_rgb": list(NEUTRAL_STILL_RGB),
+                "why": (
+                    "every moment in this title is inside a flagged span, so there is no "
+                    "frame of it that may be shown. The cover is a flat neutral card that "
+                    "came from nothing in the title."
+                ),
+            }
+        else:
+            extract_cover_still(
+                source,
+                time_ms=time_ms,
+                out_path=layout.still_path,
+                width=probe.width,
+                height=probe.height,
+            )
+            manifest = {
+                "time_ms": time_ms,
+                "from": STILL_FROM_SOURCE,
+                "calm_margin_ms": options.calm_margin_ms,
+            }
+        layout.still_manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True))
+        return {"time_ms": time_ms, "from": manifest["from"]}
 
     steps.run(
         "still",
@@ -345,6 +369,7 @@ def ingest_title(
                 crf=options.crf,
                 x264_preset=options.x264_preset,
                 segment_seconds=options.segment_seconds,
+                pad_tail_ms=tail_to_hold_ms(layout.map_path(preset)),
             )
             hls = package_hls(
                 layout.safe_master(preset),
@@ -531,6 +556,11 @@ def ingest_title(
             "subtitle_streams": len(probe.subtitle_streams),
             "guard_band_ms": options.guard_band_ms,
             "allow_dim": options.allow_dim,
+            # Where the cover still came from, so kid mode can say so rather than letting a
+            # neutral card pass for a frame of the film.
+            "cover_still_from": json.loads(layout.still_manifest_path.read_text()).get(
+                "from", STILL_FROM_SOURCE
+            ),
         },
     )
     write_entry(layout.entry_path, entry)

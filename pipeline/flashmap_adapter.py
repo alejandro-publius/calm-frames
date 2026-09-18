@@ -460,6 +460,34 @@ class FlashmapAdapter:
         return self._run(args, timeout_s=timeout_s)
 
 
+def tail_to_hold_ms(map_path: str | Path) -> float:
+    """How long the last picture has to be held for a rendition to end where the title does.
+
+    A container can outlive its last coded frame. Ogg Theora writes a frame identical to the
+    one before it as an empty packet, so a file that ends on repeats has a last coded frame
+    well before its duration. flashmap keeps those repeats in the timeline, because that is
+    what a player shows. ffmpeg drops them when it re-encodes, so without this the rendition
+    comes out short: three NASA clips in this project's pool lose between 1.4 and 1.8 seconds
+    off the end, which is both a missing tail and a rendition that no longer has the source's
+    frame timing.
+
+    Returns 0 whenever the file ends on its last picture, which is almost every file, and
+    whenever the map does not say. Nothing is padded on a guess.
+    """
+    try:
+        doc = load_map(map_path)
+    except MapFormatError:
+        return 0.0
+    source = doc.raw.get("source") if isinstance(doc.raw, dict) else None
+    if not isinstance(source, dict):
+        return 0.0
+    last = source.get("last_pts_ms")
+    last_coded = source.get("last_coded_pts_ms")
+    if not isinstance(last, (int, float)) or not isinstance(last_coded, (int, float)):
+        return 0.0
+    return max(0.0, float(last) - float(last_coded))
+
+
 def iter_presets(value: Iterable[str] | None) -> list[str]:
     if not value:
         return list(PRESETS)

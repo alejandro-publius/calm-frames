@@ -126,7 +126,9 @@ def fidelity(path: Path, clip: dict, spec) -> dict:
     from conformance.truth import clip_truth
 
     truth = clip_truth(clip, spec)
-    intended_by_state = truth.mean_luminance_by_state
+    # The decoder returns the coded frame, bars and all, so the comparison is against the mean
+    # over the coded frame and not over the picture inside it.
+    intended_by_state = truth.coded_frame_mean_luminance_by_state
     times, states = frame_plan(
         duration_ms=float(clip["duration_ms"]),
         fps=float(clip["fps"]),
@@ -251,8 +253,21 @@ def run_one(clip: dict, with_baselines: bool) -> dict:
     return row
 
 
+def _terminate(signum, frame):  # noqa: ARG001
+    """Turn a kill signal into an exception so the `finally` that deletes the clip runs.
+
+    Learned the hard way on Sep 17, 2026: this job was stopped with SIGTERM to restart it with
+    more workers, the default handler tore the workers down where they stood, and two hazard
+    clips outlived their job. Python's default SIGTERM does not run `finally` blocks. This one
+    does, and the parent sweeps at start and at exit as well, so it now takes two failures in a
+    row rather than one for a strobe to survive.
+    """
+    raise SystemExit(f"stopped by signal {signum}")
+
+
 def _init_worker() -> None:
     signal.signal(signal.SIGINT, signal.SIG_IGN)
+    signal.signal(signal.SIGTERM, _terminate)
 
 
 def already_done(raw_path: Path) -> set[str]:
@@ -299,6 +314,13 @@ def main() -> int:
     parser.add_argument("--no-baselines", action="store_true")
     parser.add_argument("--progress-every", type=int, default=25)
     arguments = parser.parse_args()
+
+    # Anything left over from an earlier job goes before this one starts. A hazard file with
+    # nobody responsible for it is the thing this whole design exists to prevent.
+    swept = sweep_leftovers(fail=False)
+    if swept:
+        print(f"swept {swept} hazard file(s) left by an earlier run", file=sys.stderr)
+    signal.signal(signal.SIGTERM, _terminate)
 
     design = json.loads(arguments.design.read_text())
     clips = sorted(design["clips"], key=lambda row: row["order_index"])
@@ -348,9 +370,21 @@ def main() -> int:
                             f"{rate:.2f} clips/s, about {left / 60:.1f} min left",
                             flush=True,
                         )
-            except KeyboardInterrupt:
-                print("stopping, the rows already written stay valid", file=sys.stderr)
-                pool.shutdown(cancel_futures=True)
+            except BaseException as stop:  # noqa: BLE001 - Ctrl-C, SIGTERM, anything
+                # cancel_futures matters more than it looks. Leaving the executor by any other
+                # route calls shutdown(wait=True), which keeps handing the workers the whole
+                # remaining queue while nobody is reading the answers: the job looks stopped,
+                # the rows stop appearing, and it quietly carries on making strobes. Seen on
+                # Sep 17, 2026 when this run was stopped to give the ablations the cores.
+                print(
+                    f"stopping ({type(stop).__name__}), cancelling the queue. "
+                    "The rows already written stay valid.",
+                    file=sys.stderr,
+                )
+                pool.shutdown(cancel_futures=True, wait=True)
+                sweep_leftovers(fail=False)
+                if not isinstance(stop, KeyboardInterrupt):
+                    raise
 
     leftovers = sweep_leftovers()
     elapsed = time.time() - started

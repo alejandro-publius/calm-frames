@@ -24,10 +24,19 @@ from .hideplan import (
     DEFAULT_CALM_MARGIN_MS,
     CoverInterval,
     calm_ranges,
+    covered_ranges,
     is_calm,
+    may_be_sampled,
     nearest_calm_time_ms,
+    nearest_covered_time_ms,
 )
 from .render import extract_jpeg, extract_still
+
+# What the cover still is, as written into the still manifest and read back by verify.
+STILL_FROM_SOURCE = "source"
+"""A calm frame taken out of the title."""
+STILL_FROM_NEUTRAL_CARD = "neutral-card"
+"""A flat card, because the title flashes end to end and has no frame that may be shown."""
 
 DEFAULT_SAMPLE_FPS = 2.0
 DEFAULT_POSTER_COUNT = 3
@@ -113,16 +122,25 @@ def choose_calm_times(
     count: int,
     margin_ms: float = DEFAULT_CALM_MARGIN_MS,
     series: LumaSeries | None = None,
+    calm_only: bool = False,
 ) -> list[float]:
-    """Calm moments in milliseconds, spread across the title.
+    """Moments a picture may be taken from, in milliseconds, spread across the title.
 
     Candidates are taken from the middle of each calm range and from an even
     grid inside it. When a luminance series is available the quietest
     candidate per slot wins.
+
+    ``calm_only`` turns off the fallback to moments that are under the cover, which is what
+    the cover still itself wants: a cover cannot be cut out of the cover.
     """
     if count <= 0:
         return []
     ranges = calm_ranges(intervals, duration_ms, margin_ms=margin_ms)
+    if not ranges and not calm_only:
+        # A title that flashes end to end has no calm moment, but the cover is down the whole
+        # way, so the kid safe rendition shows the cover still everywhere. A picture taken
+        # from there shows the cover and not the film.
+        ranges = covered_ranges(intervals, margin_ms=margin_ms)
     if not ranges:
         raise PipelineError(
             "this title has no calm moment outside the flagged spans, so no "
@@ -164,7 +182,12 @@ def choose_cover_still_time(
 ) -> float:
     """The single frame used as the cover inside the safe rendition."""
     picks = choose_calm_times(
-        intervals, duration_ms, count=1, margin_ms=margin_ms, series=series
+        intervals,
+        duration_ms,
+        count=1,
+        margin_ms=margin_ms,
+        series=series,
+        calm_only=True,
     )
     if not picks:
         raise PipelineError("no calm moment is available for the cover still")
@@ -178,13 +201,17 @@ def snap_to_calm(
     *,
     margin_ms: float = DEFAULT_CALM_MARGIN_MS,
 ) -> float:
-    """Move a time to the nearest calm moment, or fail loudly."""
-    if is_calm(intervals, time_ms, margin_ms=margin_ms):
+    """Move a time to the nearest moment a picture may be taken from, or fail loudly."""
+    if may_be_sampled(intervals, time_ms, duration_ms, margin_ms=margin_ms):
         return time_ms
     snapped = nearest_calm_time_ms(intervals, time_ms, duration_ms, margin_ms=margin_ms)
     if snapped is None:
+        # Nothing in this title is calm, so it flashes end to end. The cover is down
+        # everywhere, and a picture taken from under it shows the cover and not the film.
+        snapped = nearest_covered_time_ms(intervals, time_ms, margin_ms=margin_ms)
+    if snapped is None:
         raise PipelineError(
-            f"no calm moment near {time_ms:.0f} ms, so no frame may be taken there"
+            f"no calm or covered moment near {time_ms:.0f} ms, so no frame may be taken there"
         )
     return snapped
 

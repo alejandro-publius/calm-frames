@@ -4,92 +4,75 @@ Updated Thu Sep 17, 2026, late evening PT.
 
 ## 1. The head-start kits are still not here, asked for twice
 
-**`day-one-head-start.zip` is not on this machine.** Not at the repo root, not in `~/Downloads` (which holds no zip at all now), nowhere within four levels of your home folder, and Spotlight finds nothing by that name. `headstart/` is still the empty directory from day one. Neither `rubric-amazon.md` nor `outreach-kit.md` is here either.
+**`day-one-head-start.zip` is not on this machine.** Not at the repo root, not in `~/Downloads`, nowhere within four levels of your home folder, and Spotlight finds nothing by that name. `headstart/` is still the empty directory from day one. Neither `rubric-amazon.md` nor `outreach-kit.md` is here.
 
-They were meant to be the test oracle: the kit's flashmap tests to run against ours, the spec-exact WCAG and BT.1702-3 numbers to diff our thresholds against, the clip pool in STRESS_TEST.md and the Vega API sheet. Without them there is no independent implementation to check ours against. What we have instead: docs/SPEC_SOURCES.md quotes primary sources for every threshold and names what could not be verified, and the conformance suite computes its ground truth from the spec text in a module that cannot import flashmap.
+They were meant to be the test oracle: the kit's flashmap tests to run against ours, spec-exact WCAG and BT.1702-3 numbers to diff our thresholds against, the clip pool in STRESS_TEST.md and the Vega API sheet. Everything they were meant to bring has been built here instead, listed in docs/PLAN.md.
 
-**If the zip exists somewhere, the fastest fix is to tell me the exact path.** If it is gone, nothing is waiting on it.
+**If the zip exists, the fastest fix is to tell me the exact path.** If it is gone, nothing is waiting on it. What stands in for it: docs/SPEC_SOURCES.md quotes a primary source for every threshold and names what could not be verified, and the conformance suite computes its ground truth from the spec text in a module that cannot import flashmap.
 
-Rather than wait, everything they were meant to bring was built here:
+## 2. What you have to do, in order, with dates
 
-| Missing kit | What replaced it |
-|---|---|
-| flashmap | `flashmap/`, written from scratch, 200 tests, every threshold quoted in docs/SPEC_SOURCES.md |
-| calm-timing | `eval/marker_clip.py`, `eval/vvd_timing_run.py`, `eval/gate1_rehearsal.py` |
-| evkit.readme_sync | `eval/readme_sync.py`, which CI runs on every push |
-| evkit.friction | `docs/friction_pending.md`, 11 entries |
-| calm-vega-notes | Measured on the device instead, and written into docs/GATES.md and CLAUDE.md |
-| rubric-amazon.md | The rules read from Devpost and recorded below |
-| outreach-kit.md | `docs/outreach/`, three drafts ready for Friday |
+| When | What | Why it needs you |
+|---|---|---|
+| **Fri Sep 18** | Send the three outreach emails in `docs/outreach/`. | Each needs a recipient and your name. They ask only about wording and flow, and say plainly that nothing we send contains flashing. |
+| **When the stick arrives, about Sep 20** | Update it to Vega OS 1.2, turn on developer mode, plug it in by USB, then run `make stick-day`. | The whole measurement chain waits on real hardware. The script prints the developer-mode steps, refuses a wrong OS build, installs, runs the layering test and then the marker run. It took about 6 minutes end to end against the virtual device. |
+| **Same session** | Film the layering test, then the 240 fps marker run. | **This is the only thing that can produce a GATE 1 number.** Phone at 240 fps, exposure locked, TV in game mode with motion smoothing off. `make stick-day` prints what to film and where the files go. |
+| **Before then** | Confirm your phone films 240 fps and the TV has a game mode. | Assumed, never confirmed. If either is wrong, GATE 1 needs a different plan and it is better to know now. |
+| **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
+| **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add the line `AWS Paid plan: confirmed` to this file. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Both locks were tested. Nothing has touched AWS. |
+| **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
+| **Oct 19 to 20** | Film the video from `docs/VIDEO_SCRIPT.md`, timed to 2:55. | |
+| **Wed Oct 21** | Make the repo public, then run the final checks. | The rules need it public with the licence visible at submission. |
+| **Thu Oct 22** | Press submit. `docs/SUBMISSION.md` has every field, with the ones needing you marked. | |
 
-Treat the kits as a second opinion if they turn up, and re-record any number taken with our version.
+### The red footage, specifically
 
-## 2. The repo
+Every flagged segment in the screened pool fired the general rule. **Not one fired the red rule.** The pool has no saturated red strobe and no sustained regular strobe, and no free third-party footage was found that covers it. So the clips to film are red emergency-vehicle lights, red stage lighting, and a steady strobe. docs/SAFETY.md applies in full: whoever films is not photosensitive and does not look at the lights.
 
-Private at **github.com/alejandro-publius/calm-frames**, branch `main`, **CI green** on ubuntu-latest: the Vega app, the Python packages, a secret scan, and a check that every published number still matches the file in `results/` it came from. Nothing runs on macOS runners. It goes public during the final checks on Oct 21.
+## 3. A number was published and withdrawn
 
-## 3. Where each lane stands
+An earlier status said the GATE 1 rehearsal covered 20 of 20 markers in time, worst lead 449 ms. **It was wrong and it is gone.** The run never played: the player reported positions up to 0.26 s and no further, while the cover scheduler, which runs on a wall clock by design, advanced its own estimate and fired every cover on time against it. The analysis compared two views of the same clock and found perfect agreement.
 
-### Lane A, the cover and GATE 1
-- The marker clip and its schedule are made by `eval/marker_clip.py`: 20 markers, one gentle gray to white step each. Measured after generation: 20 rising edges, zero offset from the schedule, 0.333 transitions per second against WCAG's three. The clip stays out of git; the schedule and its hash are committed.
-- The cover scheduler runs on a wall clock re-synced to media time, knows about playback rate and pauses, and hides the picture at once on seeking, buffering, stalling, pausing and backgrounding. 81 tests across the Calm Frames modules.
-- **A number was published and then withdrawn.** An earlier status said the rehearsal covered 20 of 20 markers in time with a worst lead of 449 ms. It was wrong: the run never played, the player never got past 0.26 s, and the scheduler fired every cover on time against its own wall-clock estimate, so the analysis agreed with itself. A stricter second script refused to count any of it, which is how it surfaced. Both scripts now require a position report from the player before counting a lead time. docs/GATES.md carries the full retraction.
-- **There is no cover lead time number yet, from any run, on any device.** `results/gate1_software_vvd.json` records 0 counted trials and 150 dropped, which is the honest state. Getting one needs playback that actually runs, and the virtual device has not managed a sustained play of the marker clip. GATE 1 on the stick does not depend on solving that.
-- Measured about the player, which Amazon does not document: `timeupdate` is irregular, and in the recorded run it went quiet for over five seconds while the clip played on. `results/vvd_timeupdate_stats.json`. This is the argument for scheduling ahead rather than reacting.
-- The layering test ran and is **inconclusive**: the cover toggled 8 times on schedule and nothing crashed, but playback did not run in that take, so it says nothing about sound continuing. Recorded that way in `results/vvd_layering_rehearsal.json`.
+It surfaced because a second, stricter script needed a position report from the player before counting anything, and returned zero usable trials. Both scripts now refuse to count a marker the player never reached, and a third rule was added after that: a trial where playback stalled between the cover and the marker is recorded and excluded, because the cover being held for forty seconds says nothing about whether the schedule fires early enough. The full retraction is in docs/GATES.md.
 
-### Lane B, flashmap v1
-Built from scratch. WCAG general and red flash on sliding one second windows, sliding ten degree area windows, letterbox and pillarbox with the area measured on the picture, real container timestamps, robustness to burned in subtitles, chunked analysis with the property test that chunked equals whole file, the room rule that can only add hides, Ed25519 signed sidecars, the CLI, docs/SIDECAR_SPEC.md, and the GitHub Action with a fixture. **200 tests, 42 mutations written and all 42 killed.** A transition bug surfaced and was fixed: the state machine could not reverse, so a pixel that dipped before rising stayed stuck.
+## 4. Where each lane stands
 
-Checked independently before it was committed: it passes our calm marker clip, flags a 7.5 Hz alternation as a general flash over the full area, flags a red alternation as both general and red, and exits 1 on a failing file, which is what the Action depends on.
+**The app.** Countdown card with a D-pad Skip, the cover, the after-card, and a minimum cover length. Fail closed for missing, stale, unsigned, unparseable and wrong-hash maps, with real Ed25519 verification written for Vega, which has no crypto API, checked against RFC 8032 vectors. Seek safety through one function for the seek bar, D-pad, trickplay and Alexa transport commands. VoiceView announcements, a parent area behind a PIN where room settings can only add hides, and a kid home with shield badges. **The app's own UI passes flashmap: 9 screens, 0 segments, checked in CI.** 563 tests, 15 mutations all seen red.
 
-### Lane C, screening day
-Media pool downloaded with the licence checked before each download and recorded in `media/LICENSES.csv`: Blender open movies, NASA SVS and ISS time-lapses, DVIDS, Wikimedia, two 1930 public domain films. Three sources were skipped rather than guessed, with the reason recorded. `eval/plots.py` renders a hazard file as plots so nobody has to open one, and it does not import flashmap. The ffmpeg photosensitivity and naive luminance baselines run. **EA IRIS is not built**: its Dockerfile is pinned and reviewed, but the shared colima VM has another project's services in it and a vcpkg build of OpenCV there could have the kernel kill their containers instead of the compiler.
+**flashmap.** WCAG general and red flash, area windows, letterbox handling, real timestamps, chunked analysis, the room rule, signed sidecars, the CLI and the GitHub Action. Theora decoding is fixed with a regression fixture. Over 200 tests, 42 mutations all killed.
 
-**GATE 2's target is already met, eight days early.** `results/screening.json`: <!--n results/screening.json:totals.flagged_segments -->432<!--/n--> flagged segments across <!--n results/screening.json:totals.sources_with_at_least_one_flag -->5<!--/n--> sources, against a target of 15 segments from 4 sources. 20 clips, <!--n results/screening.json:clips_analyzed_ok -->16<!--/n--> analyzed cleanly and <!--n results/screening.json:clips_failed -->4<!--/n--> that flashmap could not decode.
+**The pipeline.** Ingest, hide plan, kid-safe renditions, trickplay and posters from the safe rendition only, signed maps, and a verify step that blocks publishing and was mutation tested. The CDK app synthesizes with zero NAT gateways and a $20 budget alarm, and refuses to deploy.
 
-**The self-filmed gap has a name: red.** Every one of the 432 segments fired the general rule and not one fired the red rule. The pool has no saturated red strobe and no sustained regular strobe, and no free third-party footage was found that covers it. So the clips you film should be exactly that: red emergency-vehicle lights or red stage lighting, and a steady strobe. Everything in docs/SAFETY.md applies: whoever films is not photosensitive and does not look at the lights.
+**Evaluation.** The conformance suite runs with ground truth computed from the spec text in a module that cannot import flashmap. The real-clip labelling pack is ready: 40 segments, 16 titles, 7 sources, blinded, with plots that show no detector output and blank sheets for two labellers. Nobody has labelled anything, which is correct: that is your step and Rachel's.
 
-**Two real bugs came out of the screening run**, both logged for lane B: flashmap cannot decode Theora `.ogv` (4 clips, `avcodec_send_packet` returned 22), and re-encoding shifts the picture rectangle it detects, which lifts area fractions and is what blocked a title in the pipeline.
+**Release.** `make test`, `reproduce`, `synth`, `release`, `stick-day`, `hooks` and `scan` all run. `make release` built six packages, staged three architectures with checksums, printed the release command and stopped without publishing.
 
-### Lane D, the pipeline
+**Submission.** README, `docs/SUBMISSION.md`, `docs/FRICTION_LOG.md`, `docs/OPEN_SOURCE_PR.md` and `docs/VIDEO_SCRIPT.md` are written, with every number traced to `results/` and checked by CI.
 
-**4 titles verified end to end, not yet 5.** Six were ingested; two were refused by verify, which is verify doing its job. One was blocked because re-encoding shifts the picture rectangle flashmap detects, which lifts every area fraction and pushes spans just over the 25 percent line, and one because the title is flagged end to end and has no calm moment to take a cover still from. Two more titles were still ingesting when this was written.
+## 5. What is not done
 
-`pipeline/ingest.py` runs end to end, idempotent and keyed by the source hash, through probe, analyze per preset, hide plan, kid safe rendition, trickplay and posters from the safe rendition only, signed map and catalog entry. `pipeline/verify.py` blocks publishing and was mutation tested: a violation left in a rendition, a violation under the modelled cover, a tampered map, a wrong hash, a poster from a flagged moment all fail it. The CDK app synthesizes and is unit tested, never deployed: **zero NAT gateways, a 20 dollar budget alarm**, private buckets, a GitHub OIDC role. Estimated cost about 5 dollars in a month where 25 titles are ingested, under a dollar after. **185 tests.**
+- **No cover lead time on real hardware**, and none is possible until the stick arrives. There is now a software-level figure in `results/gate1_software_vvd.json`: 49 trials, 48 covered in time, median lead 488 ms, and one cover that went on 86 ms late because the JavaScript thread paused for about a third of a second. It is labelled as software-level: it cannot see the React commit, the compositor, scan-out or the panel, so it is an upper bound on how well the real thing can do, never a prediction of it.
+- **Fewer than 20 titles pass verify.** Verify refuses titles for real reasons, which is the point of it.
+- **EA IRIS is not built**, so the baselines table has ffmpeg and naive but no IRIS. The shared Docker VM has another project's services in it, and a vcpkg OpenCV build there could get their containers killed rather than the compiler.
+- **The conformance run is partial**, and `results/conformance.json` says so in its own statement field rather than implying a full 3,000-clip run.
+- **The demo PIN does not exist yet**, so the release notes say so.
 
-### Lane E, docs and people
-`docs/outreach/` holds the three emails for Friday, each asking only for feedback on wording and flow and saying plainly that nothing we send contains flashing. `docs/EVAL_PLAN.md` is committed before any real clip is labelled, which is the point of committing it.
+## 6. The numbers
 
-## 4. The numbers so far
-
-All from `results/`, all checked by CI:
+Every one comes from `results/`, and CI fails if a document drifts from them.
 
 | What | Value | Source |
 |---|---|---|
-| Cover lead time | none yet, withdrawn, see GATES.md | gate1_software_vvd.json |
-| Longest gap between player position reports | 5219 ms | vvd_timeupdate_stats.json |
-| Guard band | 500 ms | gate1_rehearsal_vvd.json |
-| App tests | 415 | jest |
-| flashmap tests | 200, 42 of 42 mutations killed | pytest |
-| Pipeline tests | 185 | pytest |
-| Flagged segments found | 432 across 5 sources | screening.json |
-| Clips flashmap could not decode | 4 of 20 | screening.json |
-| Titles verified end to end | 4 | pipeline catalog |
-| Friction log entries | 11 | docs/friction_pending.md |
+| flashmap precision, partial conformance run | <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n--> (<!--n results/conformance.json:published.flashmap_precision_lo -->0.605<!--/n--> to <!--n results/conformance.json:published.flashmap_precision_hi -->0.693<!--/n-->) | conformance.json |
+| flashmap recall, same run | <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> | conformance.json |
+| Clips measured, of 3000 designed | <!--n results/conformance.json:published.clips_kept -->467<!--/n--> | conformance.json |
+| Flagged segments in the pool | <!--n results/screening.json:totals.flagged_segments -->432<!--/n--> across <!--n results/screening.json:totals.sources_with_at_least_one_flag -->5<!--/n--> sources | screening.json |
+| Red-rule segments found | none | screening.json |
+| Longest gap between player position reports | <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms | vvd_timeupdate_stats.json |
+| Segments ready for blind labelling | <!--n results/realclips_status.json:segments -->40<!--/n--> across <!--n results/realclips_status.json:titles -->16<!--/n--> titles | realclips_status.json |
 
-## 5. What I need from you
+## 7. Next
 
-1. **The kits**, if they still exist. Everything they blocked has been built around, so this is no longer urgent, but the real calm-timing would be a useful second opinion on the marker clip.
-2. **The stick.** Assumed ordered, arriving about Sep 20. Everything that needs a screen is queued behind it: the layering test's real questions, GATE 1 itself, and the KPI run.
-3. **Two pending checks from Wednesday**, which I have assumed rather than confirmed: that your phone films 240 fps, and that the TV has a game mode with motion smoothing off.
-4. **AWS is untouched**, as instructed. The stack synthesizes and is tested; nothing is deployed and no credentials were used. When the account is on the Paid plan with the budget alarm, say so and it can go up.
-5. **Screen recording permission**, only if you want a screen-recorded rehearsal on the virtual device. macOS exposes no capture device to ffmpeg without it. Worth knowing: even with permission, the virtual device's window is not captured, so this may be a dead end. It does not affect GATE 1, which films a TV with a phone.
-
-## 6. Next
-
-1. Fix the two flashmap bugs the screening found: Theora decode, and keeping the picture rectangle across a re-encode.
-2. Get a fifth title through verify, by giving flashmap a way to keep the picture rectangle across a re-encode, or by generating a neutral cover still for a title with no calm moment.
-3. Build the IRIS image when the shared Docker VM is free.
-4. Phase 4: kid mode, the parent area behind a PIN, seek safety across voice, D-pad and cards, and the drop-in hook.
-5. When the stick arrives: OS 1.2, developer mode, the layering test, then GATE 1 for real.
+1. Send the emails tomorrow.
+2. When the stick arrives: `make stick-day`, then film. That is the gate.
+3. Meanwhile: more titles through verify, IRIS when the Docker VM frees up, and finish the conformance run.

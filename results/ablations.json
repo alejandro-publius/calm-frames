@@ -1,0 +1,426 @@
+{
+ "generated_on": "2026-09-17",
+ "design_seed": 20260917,
+ "ground_truth": "the same committed truth the conformance report uses",
+ "detection": {
+  "clips": 150,
+  "errors": 0,
+  "seconds": 4359.8,
+  "default_arm_matches_main_run": {
+   "clips_compared": 150,
+   "mismatched": 0,
+   "examples": [],
+   "meaning": "with every flag at its default this harness must produce the segments the main conformance run produced, clip for clip. A mismatch here invalidates every ablation number in this file."
+  },
+  "arms": {
+   "default": {
+    "counts": {
+     "tp": 88,
+     "fp": 43,
+     "fn": 10,
+     "tn": 309
+    },
+    "precision": {
+     "value": 0.6717557251908397,
+     "wilson_lo": 0.5874541794197865,
+     "wilson_hi": 0.7462710738781544,
+     "numerator": 88,
+     "denominator": 131
+    },
+    "recall": {
+     "value": 0.8979591836734694,
+     "wilson_lo": 0.8222723377188418,
+     "wilson_hi": 0.9436239966741063,
+     "numerator": 88,
+     "denominator": 98
+    },
+    "precision_change_vs_default": 0.0,
+    "recall_change_vs_default": 0.0
+   },
+   "red_rule_off": {
+    "counts": {
+     "tp": 64,
+     "fp": 31,
+     "fn": 34,
+     "tn": 321
+    },
+    "precision": {
+     "value": 0.6736842105263158,
+     "wilson_lo": 0.5742551255842591,
+     "wilson_hi": 0.7596128726599239,
+     "numerator": 64,
+     "denominator": 95
+    },
+    "recall": {
+     "value": 0.6530612244897959,
+     "wilson_lo": 0.5546614299076583,
+     "wilson_hi": 0.7399140833203984,
+     "numerator": 64,
+     "denominator": 98
+    },
+    "precision_change_vs_default": 0.001928,
+    "recall_change_vs_default": -0.244898
+   },
+   "area_rule_off": {
+    "counts": {
+     "tp": 90,
+     "fp": 87,
+     "fn": 8,
+     "tn": 265
+    },
+    "precision": {
+     "value": 0.5084745762711864,
+     "wilson_lo": 0.435431393463088,
+     "wilson_hi": 0.5811577228798326,
+     "numerator": 90,
+     "denominator": 177
+    },
+    "recall": {
+     "value": 0.9183673469387755,
+     "wilson_lo": 0.8471171284576644,
+     "wilson_hi": 0.9580559410323579,
+     "numerator": 90,
+     "denominator": 98
+    },
+    "precision_change_vs_default": -0.163281,
+    "recall_change_vs_default": 0.020408
+   },
+   "darker_image_rule_off": {
+    "counts": {
+     "tp": 88,
+     "fp": 46,
+     "fn": 10,
+     "tn": 306
+    },
+    "precision": {
+     "value": 0.6567164179104478,
+     "wilson_lo": 0.5729651372644813,
+     "wilson_hi": 0.7317327407131025,
+     "numerator": 88,
+     "denominator": 134
+    },
+    "recall": {
+     "value": 0.8979591836734694,
+     "wilson_lo": 0.8222723377188418,
+     "wilson_hi": 0.9436239966741063,
+     "numerator": 88,
+     "denominator": 98
+    },
+    "precision_change_vs_default": -0.015039,
+    "recall_change_vs_default": 0.0
+   },
+   "srgb_linearization_off": {
+    "counts": {
+     "tp": 84,
+     "fp": 43,
+     "fn": 14,
+     "tn": 309
+    },
+    "precision": {
+     "value": 0.6614173228346457,
+     "wilson_lo": 0.5754538537128384,
+     "wilson_hi": 0.7379024812710648,
+     "numerator": 84,
+     "denominator": 127
+    },
+    "recall": {
+     "value": 0.8571428571428571,
+     "wilson_lo": 0.7743875696687049,
+     "wilson_hi": 0.9129552945300946,
+     "numerator": 84,
+     "denominator": 98
+    },
+    "precision_change_vs_default": -0.010338,
+    "recall_change_vs_default": -0.040816
+   }
+  },
+  "what_each_arm_does": {
+   "default": "the shipped WCAG profile, nothing changed",
+   "red_rule_off": "the saturated red ratio put above 1, so no red flash can ever be found",
+   "area_rule_off": "the area limit put at zero, so any flashing area at all qualifies",
+   "darker_image_rule_off": "the darker-image limit put above 1, so a flash counts however bright both states are",
+   "srgb_linearization_off": "the sRGB to linear light step replaced by the identity, so every threshold is applied to gamma encoded values instead"
+  }
+ },
+ "guard_band": {
+  "simulated": true,
+  "how": "the app's own scheduler, app/src/calmframes/coverSchedule.ts, run through Node over the flash maps the conformance run measured. No video is played and no device is involved.",
+  "question": "is the cover fully in place before the flashing starts, for a clip flashmap flagged",
+  "onset_definition": "the first frame of the clip's flashing section, known from the design",
+  "assumed_render_latency_ms": [
+   0,
+   33,
+   66,
+   100,
+   200
+  ],
+  "latency_is_assumed_not_measured": "results/gate1_timing.json does not exist yet, so there is no measured cover latency to put here. Read the rows as: at this guard band, the cover is in place in time as long as the player takes no longer than this to put it up.",
+  "min_cover_ms": 400,
+  "clips": 144,
+  "covered_before_onset": {
+   "0": {
+    "0": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "33": {
+     "value": 0.9791666666666666,
+     "wilson_lo": 0.9405424671304959,
+     "wilson_hi": 0.992889880607427,
+     "numerator": 141,
+     "denominator": 144
+    },
+    "66": {
+     "value": 0.9791666666666666,
+     "wilson_lo": 0.9405424671304959,
+     "wilson_hi": 0.992889880607427,
+     "numerator": 141,
+     "denominator": 144
+    },
+    "100": {
+     "value": 0.9791666666666666,
+     "wilson_lo": 0.9405424671304959,
+     "wilson_hi": 0.992889880607427,
+     "numerator": 141,
+     "denominator": 144
+    },
+    "200": {
+     "value": 0.9791666666666666,
+     "wilson_lo": 0.9405424671304959,
+     "wilson_hi": 0.992889880607427,
+     "numerator": 141,
+     "denominator": 144
+    }
+   },
+   "100": {
+    "0": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "33": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "66": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "100": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "200": {
+     "value": 0.9791666666666666,
+     "wilson_lo": 0.9405424671304959,
+     "wilson_hi": 0.992889880607427,
+     "numerator": 141,
+     "denominator": 144
+    }
+   },
+   "250": {
+    "0": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "33": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "66": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "100": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "200": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    }
+   },
+   "500": {
+    "0": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "33": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "66": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "100": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    },
+    "200": {
+     "value": 1.0,
+     "wilson_lo": 0.9740163628569635,
+     "wilson_hi": 1.0,
+     "numerator": 144,
+     "denominator": 144
+    }
+   }
+  }
+ },
+ "cover": {
+  "clips": 60,
+  "how": "each clip is rendered again with the cover applied over the picture in linear light, then analysed by flashmap exactly as the verify step does. Nothing is played and nobody watches.",
+  "all": {
+   "uncovered": {
+    "clips_still_flagged": 60,
+    "clips": 60,
+    "share_still_flagged": 1.0
+   },
+   "dim_10_percent": {
+    "clips_still_flagged": 27,
+    "clips": 60,
+    "share_still_flagged": 0.45
+   },
+   "opaque": {
+    "clips_still_flagged": 0,
+    "clips": 60,
+    "share_still_flagged": 0.0
+   }
+  },
+  "red_segments": {
+   "uncovered": {
+    "clips_still_flagged": 30,
+    "clips": 30,
+    "share_still_flagged": 1.0
+   },
+   "dim_10_percent": {
+    "clips_still_flagged": 27,
+    "clips": 30,
+    "share_still_flagged": 0.9
+   },
+   "opaque": {
+    "clips_still_flagged": 0,
+    "clips": 30,
+    "share_still_flagged": 0.0
+   }
+  },
+  "non_red_segments": {
+   "uncovered": {
+    "clips_still_flagged": 30,
+    "clips": 30,
+    "share_still_flagged": 1.0
+   },
+   "dim_10_percent": {
+    "clips_still_flagged": 0,
+    "clips": 30,
+    "share_still_flagged": 0.0
+   },
+   "opaque": {
+    "clips_still_flagged": 0,
+    "clips": 30,
+    "share_still_flagged": 0.0
+   }
+  },
+  "dim_definition": "a cover passing a tenth of the light, which is 90% dark",
+  "why_red_is_always_opaque": "dimming multiplies all three channels by the same factor, which leaves the chromaticity where it was, and the red rule reads chromaticity. So a dim cover cannot clear a red flash, whatever the luminance does. The red rows here are the measurement of that, not an argument for it."
+ },
+ "published": {
+  "clips": 150,
+  "default_arm_mismatches": 0,
+  "default_arm_clips_compared": 150,
+  "default_precision": 0.672,
+  "default_precision_change": 0.0,
+  "default_recall": 0.898,
+  "default_recall_change": 0.0,
+  "red_rule_off_precision": 0.674,
+  "red_rule_off_precision_change": 0.002,
+  "red_rule_off_recall": 0.653,
+  "red_rule_off_recall_change": -0.245,
+  "area_rule_off_precision": 0.508,
+  "area_rule_off_precision_change": -0.163,
+  "area_rule_off_recall": 0.918,
+  "area_rule_off_recall_change": 0.02,
+  "darker_image_rule_off_precision": 0.657,
+  "darker_image_rule_off_precision_change": -0.015,
+  "darker_image_rule_off_recall": 0.898,
+  "darker_image_rule_off_recall_change": 0.0,
+  "srgb_linearization_off_precision": 0.661,
+  "srgb_linearization_off_precision_change": -0.01,
+  "srgb_linearization_off_recall": 0.857,
+  "srgb_linearization_off_recall_change": -0.041,
+  "cover_red_clips": 30,
+  "cover_red_uncovered_flagged": 30,
+  "cover_red_dim_flagged": 27,
+  "cover_red_opaque_flagged": 0,
+  "cover_non_red_clips": 30,
+  "cover_non_red_uncovered_flagged": 30,
+  "cover_non_red_dim_flagged": 0,
+  "cover_non_red_opaque_flagged": 0,
+  "cover_all_clips": 60,
+  "cover_all_uncovered_flagged": 60,
+  "cover_all_dim_flagged": 27,
+  "cover_all_opaque_flagged": 0,
+  "guard_0ms_latency_0ms": 1.0,
+  "guard_0ms_latency_33ms": 0.979,
+  "guard_0ms_latency_66ms": 0.979,
+  "guard_0ms_latency_100ms": 0.979,
+  "guard_0ms_latency_200ms": 0.979,
+  "guard_100ms_latency_0ms": 1.0,
+  "guard_100ms_latency_33ms": 1.0,
+  "guard_100ms_latency_66ms": 1.0,
+  "guard_100ms_latency_100ms": 1.0,
+  "guard_100ms_latency_200ms": 0.979,
+  "guard_250ms_latency_0ms": 1.0,
+  "guard_250ms_latency_33ms": 1.0,
+  "guard_250ms_latency_66ms": 1.0,
+  "guard_250ms_latency_100ms": 1.0,
+  "guard_250ms_latency_200ms": 1.0,
+  "guard_500ms_latency_0ms": 1.0,
+  "guard_500ms_latency_33ms": 1.0,
+  "guard_500ms_latency_66ms": 1.0,
+  "guard_500ms_latency_100ms": 1.0,
+  "guard_500ms_latency_200ms": 1.0,
+  "guard_clips": 144
+ }
+}

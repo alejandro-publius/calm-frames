@@ -6,9 +6,9 @@ answers a packet that has a buffer and no bytes with EINVAL, which is the 22. So
 packet is never handed to the decoder now. It keeps its place in the timeline and repeats the
 picture in front of it, which is what a player shows for that slice of time.
 
-`fixtures/calm_sweep_theora.ogv` is a 24 frame grey sweep where frames 8 to 12 repeat frame 7,
-so 5 of its 24 packets are empty. Nothing in it flashes. How it was built is in
-fixtures/README.md.
+`fixtures/calm_sweep_theora.ogv` is a 24 frame grey sweep where frames 8 to 12 repeat frame 7
+and frames 20 to 23 repeat frame 19, so 9 of its 24 packets are empty. Nothing in it flashes.
+How it was built is in fixtures/README.md.
 """
 
 from __future__ import annotations
@@ -24,7 +24,7 @@ from conftest import FIXTURES
 THEORA_CLIP = FIXTURES / "calm_sweep_theora.ogv"
 
 FRAME_COUNT = 24
-EMPTY_PACKETS = 5
+EMPTY_PACKETS = 9
 FRAME_INTERVAL_MS = 100.0
 
 
@@ -71,3 +71,29 @@ def test_theora_analyses():
     assert not result.variable_frame_rate
     assert result.frame_interval_ms["median"] == pytest.approx(FRAME_INTERVAL_MS)
     assert result.passes
+
+
+def test_the_map_says_where_the_pictures_stop():
+    """A file that ends on repeats stops showing new pictures before it stops running.
+
+    Anything that re-encodes it drops the repeats and ends early, so the map has to say where
+    the pictures stop as well as where the file does. pipeline/render.py holds the last
+    picture for the difference.
+    """
+    result = analyze_file(THEORA_CLIP, WCAG)
+    assert result.last_coded_pts_ms is not None
+    assert result.last_coded_pts_ms < result.last_pts_ms
+    tail_repeats = sum(
+        1 for frame in iter_frames(THEORA_CLIP, probe(THEORA_CLIP)) if frame.repeats_previous
+    )
+    assert tail_repeats == EMPTY_PACKETS
+    assert result.last_pts_ms - result.last_coded_pts_ms == pytest.approx(
+        4 * FRAME_INTERVAL_MS
+    )
+
+
+def test_a_file_that_ends_on_a_picture_says_so():
+    from conftest import FIXTURES as _F
+
+    result = analyze_file(_F / "calm_sweep.mp4", WCAG)
+    assert result.last_coded_pts_ms == pytest.approx(result.last_pts_ms)

@@ -1,0 +1,248 @@
+{
+ "generated_on": "2026-09-17",
+ "what_this_is": "the blinded segment pool for the real clip labelling. Each row is a ten second segment of some video, with an opaque id and a plot. No title, no source, no detector output. Label from the plot alone, following GUIDE.md.",
+ "segment_seconds": 10.0,
+ "window_seconds": 1,
+ "segments": [
+  {
+   "segment_id": "seg000",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg000.png"
+  },
+  {
+   "segment_id": "seg001",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg001.png"
+  },
+  {
+   "segment_id": "seg002",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg002.png"
+  },
+  {
+   "segment_id": "seg003",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg003.png"
+  },
+  {
+   "segment_id": "seg004",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg004.png"
+  },
+  {
+   "segment_id": "seg005",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg005.png"
+  },
+  {
+   "segment_id": "seg006",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg006.png"
+  },
+  {
+   "segment_id": "seg007",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg007.png"
+  },
+  {
+   "segment_id": "seg008",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg008.png"
+  },
+  {
+   "segment_id": "seg009",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg009.png"
+  },
+  {
+   "segment_id": "seg010",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg010.png"
+  },
+  {
+   "segment_id": "seg011",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg011.png"
+  },
+  {
+   "segment_id": "seg012",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg012.png"
+  },
+  {
+   "segment_id": "seg013",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg013.png"
+  },
+  {
+   "segment_id": "seg014",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg014.png"
+  },
+  {
+   "segment_id": "seg015",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg015.png"
+  },
+  {
+   "segment_id": "seg016",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg016.png"
+  },
+  {
+   "segment_id": "seg017",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg017.png"
+  },
+  {
+   "segment_id": "seg018",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg018.png"
+  },
+  {
+   "segment_id": "seg019",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg019.png"
+  },
+  {
+   "segment_id": "seg020",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg020.png"
+  },
+  {
+   "segment_id": "seg021",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg021.png"
+  },
+  {
+   "segment_id": "seg022",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg022.png"
+  },
+  {
+   "segment_id": "seg023",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg023.png"
+  },
+  {
+   "segment_id": "seg024",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg024.png"
+  },
+  {
+   "segment_id": "seg025",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg025.png"
+  },
+  {
+   "segment_id": "seg026",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg026.png"
+  },
+  {
+   "segment_id": "seg027",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg027.png"
+  },
+  {
+   "segment_id": "seg028",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg028.png"
+  },
+  {
+   "segment_id": "seg029",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg029.png"
+  },
+  {
+   "segment_id": "seg030",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg030.png"
+  },
+  {
+   "segment_id": "seg031",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg031.png"
+  },
+  {
+   "segment_id": "seg032",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg032.png"
+  },
+  {
+   "segment_id": "seg033",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg033.png"
+  },
+  {
+   "segment_id": "seg034",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg034.png"
+  },
+  {
+   "segment_id": "seg035",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg035.png"
+  },
+  {
+   "segment_id": "seg036",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg036.png"
+  },
+  {
+   "segment_id": "seg037",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg037.png"
+  },
+  {
+   "segment_id": "seg038",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg038.png"
+  },
+  {
+   "segment_id": "seg039",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg039.png"
+  }
+ ]
+}
