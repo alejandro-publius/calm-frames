@@ -232,7 +232,20 @@ export function useCoverHarness(
       if (kind === 'playing' || kind === 'seeked' || kind === 'timeupdate') {
         clockRef.current = setRunning(clockRef.current, true, wallClockMs);
       }
-      if (kind === 'pause' || kind === 'ended' || kind === 'stalled') {
+      // `waiting` belongs here beside `stalled`. It is the event a player fires
+      // when it runs out of data, and it is the common one: `stalled` only
+      // arrives after the fetch has been quiet for seconds, and some players
+      // never send it at all. Without this the clock kept running through every
+      // buffer, so the estimate came out the far side ahead of the playhead by
+      // the length of the buffer. The picture was covered throughout, because
+      // `waiting` is already an uncertain event, but the drift and the cover
+      // lead measured off that clock were wrong by the same amount.
+      if (
+        kind === 'pause' ||
+        kind === 'ended' ||
+        kind === 'stalled' ||
+        kind === 'waiting'
+      ) {
         clockRef.current = setRunning(clockRef.current, false, wallClockMs);
       }
 

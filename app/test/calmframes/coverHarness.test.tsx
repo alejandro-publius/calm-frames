@@ -107,6 +107,7 @@ const Harness = ({
   return (
     <>
       <Text testID="covered">{state.covered ? 'covered' : 'clear'}</Text>
+      <Text testID="worstDriftMs">{String(Math.round(state.worstDriftMs))}</Text>
       <CoverLayer visible={state.covered} />
     </>
   );
@@ -171,6 +172,48 @@ describe('useCoverHarness', () => {
 
     act(() => media.fire('waiting'));
     expect(screen.getByTestId('covered').props.children).toBe('covered');
+  });
+
+  it('does not let the estimate run on through a buffer', () => {
+    // `waiting` is the event a player fires when it runs out of data, and it is
+    // the common one: `stalled` only arrives after the fetch has been quiet for
+    // seconds. The picture covers either way, because both are uncertain events.
+    // What this checks is the clock underneath: an estimate that keeps advancing
+    // through a buffer comes out the far side ahead of the playhead, and every
+    // number taken off it, the drift and the cover lead, is wrong by the length
+    // of the buffer.
+    const media = makeMediaElement();
+    const intervals = buildCoverIntervals([{ startMs: 60_000, endMs: 61_000 }]);
+    render(<Harness media={media} mode="timing" intervals={intervals} />);
+
+    // The drift is the observable, not the estimate: while the picture is
+    // covered the state stops being written, because applyCover returns early
+    // once covered is already true. The drift is measured against the clock
+    // itself, on the next event the player sends.
+    media.currentTime = 1.0;
+    act(() => media.fire('playing'));
+    act(() => jest.advanceTimersByTime(100));
+    // The first report always reads as a whole second of drift, because the
+    // clock starts at zero and the player starts at one. That is the baseline
+    // to beat, not a number to bound: what matters is that the buffer adds
+    // nothing to it.
+    const before = Number(screen.getByTestId('worstDriftMs').props.children);
+
+    // Four seconds of buffering. The playhead does not move, and the player
+    // sends nothing at all until it has data again.
+    act(() => media.fire('waiting'));
+    act(() => jest.advanceTimersByTime(4_000));
+
+    // Back with data, still at the second it stopped on.
+    act(() => media.fire('playing'));
+    // More than one tick on purpose. The tick that flips the cover back off
+    // writes mediaTimeMs through applyCover, and the drift update right after it
+    // is skipped because it sees that same mediaTimeMs already in the state. The
+    // tick after that one is the first that can carry the drift.
+    act(() => jest.advanceTimersByTime(200));
+    const after = Number(screen.getByTestId('worstDriftMs').props.children);
+
+    expect(Math.abs(after)).toBeLessThanOrEqual(Math.abs(before));
   });
 
   it('timing mode hides the picture at once when a seek starts', () => {
