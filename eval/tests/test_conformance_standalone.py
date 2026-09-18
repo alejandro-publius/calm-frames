@@ -1,4 +1,4 @@
-"""Guard: the conformance ground truth must not import flashmap.
+"""Guard: the conformance ground truth and the inspection plots must not import flashmap.
 
 The generated clips are only worth measuring because their true answer is computed from the
 spec text and from what the generator drew, by code that shares nothing with the analyser under
@@ -12,8 +12,15 @@ Two checks, because either alone can be fooled:
 2. an actual import in a fresh interpreter, which catches a module that reaches flashmap
    through something else it imports.
 
+The same two checks cover eval/plots.py and eval/labeling/plots.py, which are how a person looks
+at a hazard clip without playing it, for the same reason: an inspection tool that shared code
+with the analyser would stop being an independent look at the file.
+
 To confirm the guard is live, add `import flashmap` to eval/conformance/truth.py and watch both
-go red. Verified Sep 17, 2026: they do.
+go red. Verified Sep 17, 2026: they do. Repeated against eval/labeling/plots.py the same day,
+once that file was added to the list, because until then nothing checked it: the runtime check
+imported only the conformance modules, so an import reached through labelling code would have
+gone unseen.
 """
 
 from __future__ import annotations
@@ -31,6 +38,10 @@ GROUND_TRUTH_MODULES = [
     EVAL_DIR / "conformance" / "spec.py",
     EVAL_DIR / "conformance" / "geometry.py",
     EVAL_DIR / "plots.py",
+    # The labelling figures are the only thing two people will ever see of a hazard clip, and
+    # they are the evidence the detector is scored against. If this module reached flashmap, the
+    # labels would be agreeing with the analyser rather than with the spec.
+    EVAL_DIR / "labeling" / "plots.py",
 ]
 FORBIDDEN_ROOT = "flashmap"
 
@@ -59,6 +70,7 @@ def test_importing_the_ground_truth_does_not_pull_flashmap_in():
     program = (
         "import sys; sys.path.insert(0, %r);"
         "import conformance.truth, conformance.spec, conformance.geometry;"
+        "import labeling.plots;"
         "print(any(name == 'flashmap' or name.startswith('flashmap.') for name in sys.modules))"
         % str(EVAL_DIR)
     )

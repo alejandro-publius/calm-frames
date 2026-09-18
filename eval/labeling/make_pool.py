@@ -46,6 +46,10 @@ MEDIA = REPO / "media"
 BASELINES = REPO / "results" / "baselines"
 OUT_DIR = _EVAL_DIR / "labeling"
 
+# The candidate lists the pool is the union of. A title only joins the pool if every one of them
+# has looked at it. IRIS is not here: see `candidate_list_missing` in the key.
+CANDIDATE_LISTS = ("flashmap", "ffmpeg_photosensitivity", "naive_luma_diff")
+
 SEED = 20260917
 SEGMENT_SECONDS = 10.0
 FLAGGED_TARGET = 28
@@ -192,11 +196,19 @@ def build() -> dict:
         if "not verified" in row["license"].lower() or "verify" in row["notes"].lower():
             skipped[name] = "license line not confirmed, dropped at screening"
             continue
-        if title_key(name) not in flags:
-            # No detector has looked at this title at all. Its "unflagged" time is unflagged
-            # only in the sense that nobody ran anything on it, which is not the same thing and
-            # would put windows nobody has measured into the negative half of the pool.
-            skipped[name] = "no detector has analysed it yet, so it has no candidate list"
+        looked = flags.get(title_key(name), {})
+        missing = [detector for detector in CANDIDATE_LISTS if detector not in looked]
+        if missing:
+            # Every detector has to have looked at a title before any of its time can join the
+            # pool. Time is "unflagged" only when every candidate list ran and none of them
+            # flagged it. One detector's silence on a title nobody else analysed is not the same
+            # thing, and it would put windows nobody has measured into the negative half, where
+            # they would count as false positives for whichever detector did run.
+            ran = sorted(looked) or ["nothing"]
+            skipped[name] = (
+                f"only {', '.join(ran)} has a candidate list for it; "
+                f"{', '.join(missing)} never ran on it"
+            )
             continue
         duration = float(row["duration_s"] or 0.0)
         if duration <= SEGMENT_SECONDS:
@@ -302,7 +314,12 @@ def build() -> dict:
                 "sole_source": sole_source,
                 "per_title": per_title,
             },
-            "candidate_lists_used": ["flashmap", "ffmpeg_photosensitivity", "naive_luma_diff"],
+            "candidate_lists_used": list(CANDIDATE_LISTS),
+            "titles_need_every_candidate_list": (
+                "a title joins the pool only when every list above has analysed it. A title only "
+                "one of them has seen has no unflagged time in the sense this pool means, because "
+                "the other lists never had the chance to flag it."
+            ),
             "candidate_list_missing": {
                 "EA IRIS": (
                     "the image has never built on this machine, so no segment in this pool was "
