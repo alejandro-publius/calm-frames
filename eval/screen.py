@@ -9,6 +9,11 @@ It reads media/LICENSES.csv to learn which source each file came from, runs
 flashmap over every clip, renames anything with at least one flagged segment to
 HAZARD_<name>, and writes per-source counts to results/screening.json.
 
+The per-source table, the split of segments by which rule fired, and the list of
+clips we still have to film come from eval/screening_table.py, which this script
+calls before it writes. That module can also refresh the table on a file an older
+run wrote, and check it for drift.
+
 FLASHMAP IS NOT READY YET (Sep 17, 2026). flashmap/ is an empty directory. This
 script refuses to invent numbers: with no flashmap it prints what it found and
 exits non-zero, and results/screening.json is not written at all. An absent file
@@ -36,7 +41,13 @@ import sys
 from datetime import date
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+_EVAL_DIR = Path(__file__).resolve().parent
+if str(_EVAL_DIR) not in sys.path:
+    sys.path.insert(0, str(_EVAL_DIR))
+
+import screening_table  # noqa: E402
+
+REPO = _EVAL_DIR.parent
 MEDIA = REPO / "media"
 LEDGER = MEDIA / "LICENSES.csv"
 OUT = REPO / "results" / "screening.json"
@@ -234,7 +245,7 @@ def main() -> int:
     total_segments = sum(b["flagged_segments"] for b in per_source.values())
     sources_with_hits = sum(1 for b in per_source.values() if b["flagged_segments"])
 
-    report = {
+    report: dict = {
         "generated_on": date.today().isoformat(),
         "profile": args.preset,
         "adapter_entry_point": ENTRY_POINT,
@@ -257,11 +268,17 @@ def main() -> int:
         },
         "renamed_to_hazard": renamed,
     }
+    # The per-source positives table and the shooting list for what the pool still lacks. It
+    # rebuilds per_source from per_file, splitting the segments by which rule fired, because a
+    # flagged segment count with no rule beside it hides whether the red rule ever fired.
+    screening_table.enrich(report)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(report, indent=2) + "\n")
 
     print(f"\n{total_segments} flagged segments across {sources_with_hits} sources "
           f"-> {args.out}")
+    print(f"  by rule: {report['totals']['segments_by_rule']}")
+    print(f"  {report['totals']['red_rule_statement']}")
     print(f"clips analyzed {analyzed_ok}, failed {len(clips) - analyzed_ok}")
     print(f"GATE 2 ({GATE2_MIN_SEGMENTS} segments from {GATE2_MIN_SOURCES} sources): "
           f"{'PASS' if report['gate2']['passes'] else 'short'}")
