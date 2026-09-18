@@ -129,6 +129,7 @@ export function titleDataFor(entry: CheckedTitle): TitleData {
 export function guardedParamsFor(
   entry: CheckedTitle,
   settings: HouseholdSettings,
+  chimeEnabled = true,
 ) {
   return {
     sha256: entry.title.sha256,
@@ -136,6 +137,9 @@ export function guardedParamsFor(
     settings,
     durationMs: entry.title.durationMs,
     titleId: entry.title.id,
+    // The household switch travels with the title, because the player screen
+    // is where the cue is raised and it has no other way to learn the answer.
+    chimeEnabled,
   };
 }
 
@@ -209,7 +213,7 @@ const KidModeScreen = ({
   const play = (entry: CheckedTitle) => {
     navigation.navigate(Screens.PLAYER_SCREEN, {
       data: titleDataFor(entry),
-      guarded: guardedParamsFor(entry, settings),
+      guarded: guardedParamsFor(entry, settings, family.chimeEnabled !== false),
     });
   };
 

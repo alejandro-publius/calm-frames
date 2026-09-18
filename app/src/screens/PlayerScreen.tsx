@@ -60,6 +60,8 @@ import {
 } from '../calmframes/playerAccess';
 import { useCoverHarness } from '../calmframes/useCoverHarness';
 import { useFlashGuard } from '../calmframes/useFlashGuard';
+import { useChimeCue } from '../calmframes/useChimeCue';
+import { playChime } from '../calmframes/chimeSound';
 import { useUiCapture } from '../calmframes/uiCapture';
 import { playerFrame } from '../calmframes/uiFrames';
 import { ShakaPlayer } from '../w3cmedia/shakaplayer/ShakaPlayer';
@@ -159,6 +161,21 @@ const PlayerScreen = ({
     titleName: data.title,
     ready: isVideoInitialized && Boolean(guardedParams),
   });
+  // The courtesy sound. useChimeCue decides whether a chime is owed and
+  // refuses to raise one that no cover follows, so everything this call does is
+  // hand it the numbers the guard already reports and a way to make a noise.
+  // chimeSound swallows every audio failure, so a machine with no audio path
+  // plays nothing and the title is unaffected.
+  useChimeCue({
+    intervals: guard.intervals,
+    mediaTimeMs: guard.mediaTimeMs,
+    covered: guard.covered,
+    verified: guard.status === 'verified',
+    enabled: guardedParams?.chimeEnabled !== false,
+    playChime,
+    titleId: guardedParams?.titleId ?? data.id,
+  });
+
   // Three answers, and only three: the guard is running, a measurement
   // harness is running, or the picture stays hidden. playerAccess.ts says why
   // this is decided here rather than trusted to whoever navigated.

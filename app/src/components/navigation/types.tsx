@@ -84,6 +84,8 @@ export type AppStackParamList = {
       /** Or where to fetch them from. */
       mapUrls?: Partial<Record<string, string>>;
       settings?: HouseholdSettings;
+      /** The household chime switch. Absent is treated as on. */
+      chimeEnabled?: boolean;
       durationMs?: number;
       /**
        * How far the rendition about to play sits from the source the map

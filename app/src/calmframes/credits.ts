@@ -342,6 +342,14 @@ export const CREDIT_ENTRIES: CreditEntry[] = [
     obligations: [],
   },
   {
+    title: 'The Calm Frames chime',
+    license: 'CC0-1.0',
+    credit: 'Calm Frames, generated with ffmpeg',
+    source: 'https://github.com/alejandro-publius/calm-frames/blob/main/app/assets/raw/sound/README.md',
+    collection: 'unknown',
+    obligations: [],
+  },
+  {
     title: 'Water Waves Greece',
     license: 'CC BY 3.0',
     credit: 'Tanzania via Wikimedia Commons, CC BY 3.0',

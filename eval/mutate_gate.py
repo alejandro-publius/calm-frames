@@ -151,6 +151,17 @@ class RunResult:
 MUTATIONS: list[Mutation] = [
     # ---------------------------------------------------------- cover before segment
     Mutation(
+        mid="chime-only-before-a-cover",
+        prop="a chime only ever sounds before a cover",
+        lane="app",
+        path="src/calmframes/chimeCue.ts",
+        old="    if (untilMs > 0 && untilMs <= leadMs) {",
+        new="    if (untilMs <= leadMs) {",
+        tests=("test/calmframes/chimeCue.test.tsx",),
+        why="the cue stops checking that the part is still ahead of the playhead, so a "
+        "seek past a flagged part sounds a chime with nothing hidden after it",
+    ),
+    Mutation(
         mid="cover-before-segment-app",
         prop="cover before segment",
         lane="app",
