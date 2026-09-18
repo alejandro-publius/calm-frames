@@ -1,6 +1,12 @@
 # Build files
 node_modules
-package-lock.json
+
+# package-lock.json is NOT ignored, although the sample this was copied from
+# ignored it. Without it in the repository `npm ci` cannot run, so CI fell back
+# to `npm install` and resolved 73 ranged versions fresh on every run. That
+# makes the build different from one day to the next, makes the dependency
+# audit describe a tree that only exists on one laptop, and makes the bill of
+# materials uncheckable. An application commits its lock file.
 
 # Other files
 *.iml
