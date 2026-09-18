@@ -12,6 +12,12 @@ name: Audit
 # None of them touches an AWS account. The image job builds and never pushes,
 # and there is no deploy workflow in this repository on purpose: a deploy is a
 # thing a person does at a terminal, after HUMAN CHECKPOINT D.
+#
+# When `dependencies` goes red on a day nobody changed anything, it is doing its
+# job: a new advisory has been published against a package that already has an
+# exception. Read it, then run `make audit-update` to bring the ids in and say
+# in scripts/audit_exceptions.toml whether it changes the reasoning. Do not
+# widen an exception to make the red go away.
 
 on:
   push:
@@ -62,10 +68,11 @@ jobs:
           python-version-file: .python-version
       - name: Install the SBOM tool
         run: python -m pip install cyclonedx-bom==7.4.0
-      - name: Install app dependencies
-        working-directory: app
-        run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
       - name: Regenerate and compare
+        # No npm install here on purpose. The app's bill is read from
+        # package-lock.json rather than from node_modules, because an installed
+        # tree is platform specific and this job would otherwise fail on Linux
+        # over a package that only exists on a Mac.
         run: python3 scripts/sbom.py --check
 
   infra:

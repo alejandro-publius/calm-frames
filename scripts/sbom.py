@@ -75,9 +75,18 @@ def python_bill(requirements: Path, out: Path) -> None:
 
 
 def app_bill(out: Path) -> None:
+    """From app/package-lock.json, deliberately, not from node_modules.
+
+    An installed tree is platform specific: fsevents is there on a Mac and not
+    on a Linux runner, so a bill read from node_modules would differ between the
+    machine that wrote it and the machine that checks it, and the check in CI
+    would fail for a reason that has nothing to do with anybody's dependencies.
+    The lock file lists every package with its platform constraints, so it gives
+    the same answer everywhere, and it is also what `npm ci` installs from.
+    """
     app = REPO / "app"
-    if not (app / "node_modules").exists():
-        raise SystemExit("app/node_modules is missing. Run npm ci in app/ first")
+    if not (app / "package-lock.json").exists():
+        raise SystemExit("app/package-lock.json is missing")
     subprocess.run(
         [
             "npx",
@@ -91,6 +100,7 @@ def app_bill(out: Path) -> None:
             # reports as errors. They are the sample's, they do not change the
             # list of packages, and without this the tool writes nothing.
             "--ignore-npm-errors",
+            "--package-lock-only",
             "--output-reproducible",
         ],
         check=True,
