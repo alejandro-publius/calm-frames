@@ -30,6 +30,8 @@ import { describeHideEntry, HideLogStore, totalHiddenMs } from './hideLog';
 import { attemptPin, PIN_LENGTH, PinGateState } from './parentGate';
 import ShieldBadge from './ShieldBadge';
 import { CheckedTitle } from './titleStatus';
+import { useUiCapture } from './uiCapture';
+import { PARENT_LOCKED_FRAME, PARENT_OPEN_FRAME } from './uiFrames';
 
 export interface ParentAreaScreenProps {
   gate: PinGateState;
@@ -57,6 +59,10 @@ const ParentAreaScreen = ({
   const [unlocked, setUnlocked] = React.useState(false);
   const [entered, setEntered] = React.useState('');
   const [message, setMessage] = React.useState('Enter the PIN to change settings.');
+  useUiCapture(
+    unlocked ? PARENT_OPEN_FRAME : PARENT_LOCKED_FRAME,
+    unlocked ? 'parent area open' : 'parent area locked',
+  );
 
   const press = (digit: string) => {
     const next = `${entered}${digit}`;

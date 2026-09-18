@@ -24,6 +24,8 @@ import {
 import { CALM_COLORS, CALM_SPACE, CALM_TYPE, scale } from './calmStyles';
 import ShieldBadge from './ShieldBadge';
 import { CheckedTitle, kidModeTitles } from './titleStatus';
+import { useUiCapture } from './uiCapture';
+import { KID_HOME_FOCUSED_FRAME, KID_HOME_FRAME } from './uiFrames';
 
 export interface KidHomeScreenProps {
   /** Every title that has been checked, in any state. */
@@ -42,6 +44,13 @@ const KidHomeScreen = ({
   const listed = kidModeTitles(titles);
   const hiddenCount = titles.length - listed.length;
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
+
+  // The app records what it paints, because Vega gives it no way to read its
+  // own pixels. See uiCapture.ts.
+  useUiCapture(
+    focusedId ? KID_HOME_FOCUSED_FRAME : KID_HOME_FRAME,
+    focusedId ? 'poster focused' : 'kid home',
+  );
 
   return (
     <View testID={testID} style={styles.screen}>

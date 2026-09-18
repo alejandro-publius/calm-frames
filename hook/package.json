@@ -1,0 +1,28 @@
+{
+  "name": "@calm-frames/flash-guard",
+  "version": "0.1.0",
+  "description": "A drop in flash guard for Vega video apps: verified flash maps, a cover that hides flagged parts while sound and captions keep playing, cards, VoiceView announcements and one safe seek path.",
+  "license": "Apache-2.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "keywords": [
+    "vega",
+    "fire-tv",
+    "accessibility",
+    "photosensitive-epilepsy",
+    "wcag-2.3.1"
+  ],
+  "peerDependencies": {
+    "@amazon-devices/kepler-media-controls": ">=1.0.0",
+    "@amazon-devices/react-native-w3cmedia": ">=2.3.0",
+    "react": ">=19.0.0",
+    "react-native": ">=0.83.0"
+  },
+  "scripts": {
+    "sync": "node tools/sync.mjs"
+  }
+}

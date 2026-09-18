@@ -1,0 +1,24 @@
+{
+  "source": "app/src/calmframes",
+  "files": {
+    "announce.ts": "d67e13b47de80d16",
+    "CalmCard.tsx": "6c8860868a56a427",
+    "calmStyles.ts": "4f53b9f36d896b9b",
+    "canonicalJson.ts": "1097285aae9b21aa",
+    "cards.ts": "4df203129d28ec43",
+    "CoverLayer.tsx": "4d6308a7dcb644cc",
+    "coverSchedule.ts": "a0ac0bea0f4c0228",
+    "ed25519.ts": "8a8e37cc128b0603",
+    "flashMap.ts": "2da9b5fbb93a7658",
+    "hideLog.ts": "6757b6fbd46f97f8",
+    "household.ts": "691ec43ab4c58a06",
+    "mediaClock.ts": "627d8e5ecb3266f9",
+    "SafeMediaControlHandler.ts": "969f943f7b4916b6",
+    "seekSafety.ts": "410732df66f7006b",
+    "sha512.ts": "66a52df731d2968b",
+    "timingLog.ts": "70462e7f304c266b",
+    "titleStatus.ts": "1926e538f4c3234b",
+    "useCoverHarness.ts": "d7cf8850730d5920",
+    "useFlashGuard.ts": "14c8676e6aa8fae0"
+  }
+}

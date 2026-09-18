@@ -1,0 +1,158 @@
+/**
+ * Mirrored from app/src/calmframes by hook/tools/sync.mjs. Do not edit here:
+ * edit the app copy and run `node hook/tools/sync.mjs`.
+ */
+/**
+ * The cover: the view that hides the picture while sound and captions keep
+ * going.
+ *
+ * It sits above the video surface (zIndex 0) and below the captions view
+ * (zIndex 2), which is what lets a caption stay readable over a hidden
+ * picture. It is driven by state, never by setNativeProps, which throws on
+ * React Native 0.83.
+ *
+ * A reference patch can be left uncovered. The camera harness films that patch
+ * to know, frame by frame, that the recording is of a running screen rather
+ * than a frozen or blanked one, so the cover is drawn as four rectangles
+ * around it rather than one full-screen rectangle.
+ */
+
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+
+export interface ReferencePatch {
+  /** Distance from the left edge of the screen, in pixels. */
+  x: number;
+  /** Distance from the top edge of the screen, in pixels. */
+  y: number;
+  width: number;
+  height: number;
+}
+
+export interface CoverLayerProps {
+  visible: boolean;
+  /**
+   * Opaque hides the picture completely. Dim is only ever allowed for general
+   * (non-red) segments at 90% or darker, and the pipeline's verify step has to
+   * model it, so the default is opaque.
+   */
+  mode?: 'opaque' | 'dim';
+  /** Opacity for dim mode, 0.9 or higher. */
+  dimOpacity?: number;
+  /** Screen area to leave uncovered for the camera harness. */
+  referencePatch?: ReferencePatch;
+  screenWidth?: number;
+  screenHeight?: number;
+  testID?: string;
+}
+
+export const COVER_Z_INDEX = 1;
+
+const CoverLayer = ({
+  visible,
+  mode = 'opaque',
+  dimOpacity = 0.9,
+  referencePatch,
+  screenWidth,
+  screenHeight,
+  testID = 'calm-frames-cover',
+}: CoverLayerProps) => {
+  if (!visible) {
+    return null;
+  }
+
+  const opacity = mode === 'dim' ? Math.max(0.9, dimOpacity) : 1;
+
+  if (!referencePatch || screenWidth === undefined || screenHeight === undefined) {
+    return (
+      <View
+        testID={testID}
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
+        style={[styles.fill, { opacity }]}
+      />
+    );
+  }
+
+  // Four rectangles around the patch: above, below, left of it and right of
+  // it. Together they cover everything except the patch.
+  const patchRight = referencePatch.x + referencePatch.width;
+  const patchBottom = referencePatch.y + referencePatch.height;
+
+  return (
+    <View testID={testID} style={styles.container} pointerEvents="none">
+      <View
+        testID={`${testID}-top`}
+        style={[
+          styles.piece,
+          { opacity, left: 0, top: 0, width: screenWidth, height: referencePatch.y },
+        ]}
+      />
+      <View
+        testID={`${testID}-bottom`}
+        style={[
+          styles.piece,
+          {
+            opacity,
+            left: 0,
+            top: patchBottom,
+            width: screenWidth,
+            height: Math.max(0, screenHeight - patchBottom),
+          },
+        ]}
+      />
+      <View
+        testID={`${testID}-left`}
+        style={[
+          styles.piece,
+          {
+            opacity,
+            left: 0,
+            top: referencePatch.y,
+            width: referencePatch.x,
+            height: referencePatch.height,
+          },
+        ]}
+      />
+      <View
+        testID={`${testID}-right`}
+        style={[
+          styles.piece,
+          {
+            opacity,
+            left: patchRight,
+            top: referencePatch.y,
+            width: Math.max(0, screenWidth - patchRight),
+            height: referencePatch.height,
+          },
+        ]}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: COVER_Z_INDEX,
+  },
+  fill: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: '#000000',
+    zIndex: COVER_Z_INDEX,
+  },
+  piece: {
+    position: 'absolute',
+    backgroundColor: '#000000',
+  },
+});
+
+export default CoverLayer;

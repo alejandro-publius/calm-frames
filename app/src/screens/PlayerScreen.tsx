@@ -55,6 +55,8 @@ import { SafeMediaControlHandler } from '../calmframes/SafeMediaControlHandler';
 import { NO_CARD } from '../calmframes/cards';
 import { useCoverHarness } from '../calmframes/useCoverHarness';
 import { useFlashGuard } from '../calmframes/useFlashGuard';
+import { useUiCapture } from '../calmframes/uiCapture';
+import { playerFrame } from '../calmframes/uiFrames';
 import { ShakaPlayer } from '../w3cmedia/shakaplayer/ShakaPlayer';
 
 const BACKGROUND_STATE: AppStateStatus = 'background';
@@ -154,6 +156,12 @@ const PlayerScreen = ({
   // measurement, kid mode is the product.
   const covered = guarding ? guard.covered : cover.covered;
   const card = guarding ? guard.card : NO_CARD;
+  // The app records its own layer, because Vega gives it no way to read its
+  // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
+  useUiCapture(
+    React.useMemo(() => playerFrame(covered, card.kind), [covered, card.kind]),
+    'player',
+  );
   const keplerAppStateManager: IKeplerAppStateManager =
     useKeplerAppStateManager();
   const componentInstance: IComponentInstance =

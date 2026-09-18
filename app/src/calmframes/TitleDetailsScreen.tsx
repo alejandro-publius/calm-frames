@@ -13,6 +13,8 @@ import FlashMapStrip from './FlashMapStrip';
 import { coverOptionsFor, DEFAULT_SETTINGS, HouseholdSettings } from './household';
 import ShieldBadge from './ShieldBadge';
 import { CheckedTitle } from './titleStatus';
+import { useUiCapture } from './uiCapture';
+import { TITLE_DETAILS_FRAME } from './uiFrames';
 
 export interface TitleDetailsScreenProps {
   entry: CheckedTitle;
@@ -39,6 +41,7 @@ const TitleDetailsScreen = ({
     [entry.segments, settings, durationMs],
   );
   const [focused, setFocused] = React.useState<string | null>(null);
+  useUiCapture(TITLE_DETAILS_FRAME, 'title details');
 
   const hiddenSeconds = Math.round(totalCoveredMs(intervals) / 1000);
 

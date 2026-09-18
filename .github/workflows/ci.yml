@@ -78,6 +78,32 @@ jobs:
             echo "no Python tests yet"
           fi
 
+  ui-flashmap:
+    name: The app's own UI passes flashmap
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
+      - name: Install flashmap
+        run: pip install -e ./flashmap
+      - name: Install app dependencies
+        working-directory: app
+        run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
+      - name: Render every screen and check it for flashing
+        # Kid mode hides flashing in other people's video. An app that flashed
+        # its own cards while doing it would be absurd, so every screen and
+        # transition is rendered, turned into a lossless video and run through
+        # the same analyzer we point at content.
+        working-directory: app
+        run: npm run ui:flashmap
+
   secrets:
     name: Secret scan
     runs-on: ubuntu-latest
