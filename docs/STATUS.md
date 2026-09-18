@@ -50,6 +50,7 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | **Same session** | Film the layering test, then the 240 fps marker run. | **This is the only thing that can produce a GATE 1 number.** Phone at 240 fps, exposure locked, TV in game mode with motion smoothing off. `make stick-day` prints what to film and where the files go. |
 | **Before then** | Confirm your phone films 240 fps and the TV has a game mode. | Assumed, never confirmed. If either is wrong, GATE 1 needs a different plan and it is better to know now. |
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
+| **Next session, before anything else** | Decide whether the three unreachable features get wired or get cut. Per-profile logs and the household hide log both need one shared store between the player screen and the kid mode route. The registry needs one `lookupMap` call in the shelf. Neither is large; both were left because the lanes that built them did not own the file. | They are built and tested and a judge cannot see any of them. Section 4c has the detail. |
 | **Any evening, about an hour** | Label the 40 blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all 40. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. |
 | **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add that line to this file. It has to start a line of its own: no bullet, no table cell, no backticks. The exact wording is in the refusal `make deploy` prints. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Seventeen tests now cover both locks, run against a copy of the script so this file is never touched. Nothing has touched AWS. |
 | **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
@@ -85,7 +86,7 @@ It surfaced because a second, stricter script needed a position report from the 
 
 ## 4. Where each lane stands
 
-**The app.** Countdown card with a D-pad Skip, the cover, the after-card, and a minimum cover length. Fail closed for missing, stale, unsigned, unparseable and wrong-hash maps, with real Ed25519 verification written for Vega, which has no crypto API, checked against RFC 8032 vectors. Seek safety through one function for the seek bar, D-pad, trickplay and Alexa transport commands. VoiceView announcements, a parent area behind a PIN where room settings can only add hides, and a kid home with shield badges. **The app's own UI passes flashmap: 20 screens and transitions, 0 segments, checked in CI.**
+**The app.** Countdown card with a D-pad Skip, the cover, the after-card, and a minimum cover length. Fail closed for missing, stale, unsigned, unparseable and wrong-hash maps, with real Ed25519 verification written for Vega, which has no crypto API, checked against RFC 8032 vectors. Seek safety through one function for the seek bar, D-pad, trickplay and Alexa transport commands. VoiceView announcements, a parent area behind a PIN where room settings can only add hides, and a kid home with shield badges. **The app's own UI passes flashmap: 24 screens and transitions, 0 segments, checked in CI.**
 
 **Kid mode is reachable.** The app opens on Calm Frames: the first run sets a PIN, a preset and the room, then the shelf, a title, and the parent area behind that PIN. The shelf hands the player the map it verified, and the player itself now refuses to show a picture without one, so the five sample screens that still navigate to it the old way get a black picture and a card saying the title is not checked. A first run, empty and error states for every screen, and a ten foot pass measured rather than eyeballed: 32 units is the smallest text anywhere, 5.12 to 1 the worst contrast, 96 by 54 units the safe margins on every screen. The virtual device cannot be photographed, so those are measurements off the rendered screens, in `app/build/ui-capture/ten-foot.json`. 671 tests, and every new guard was broken on purpose and seen red before it was trusted.
 
@@ -127,6 +128,43 @@ measured on the rendition. Those titles now carry the outcome `no flagged
 segments`, and a preset that has intervals cannot pass unless the drawn check ran
 for it and passed. Four counts that add up are in `results/verify_pool.json` and
 are published through markers wherever a title count appears.
+
+## 4c. The five features, and the honest state of each
+
+All five landed with tests and docs. Two Fable verifier passes attacked them and
+found nothing that FAILS, which is written up in `docs/VERIFY_PASS_1.md`. What
+they did find is a pattern worth naming: **three of these are built and tested but
+not yet reachable in the running app**, for the same reason the hide log was.
+
+| | Feature | Built | Reachable in the app |
+|---|---|---|---|
+| A | Regular-pattern rule (BT.1702-3 Guideline 2) | Yes, with its own profile flag, conformance clips and a separate verdict | Yes, through the broadcast preset the pipeline already runs |
+| B | Family profiles | Yes, four kids, one PIN, picker on the shelf | Partly, see below |
+| C | Chime before a hide | Yes, and it now has a sound and is wired into the player | **Never heard on a device** |
+| D | Report page and upload page | Yes, self contained, every image checked | Yes, locally. Not deployed and it refuses to be |
+| E | Map registry | Yes, signed index, tampering fails closed | **No: nothing calls `lookupMap` yet** |
+
+Four specific gaps, none of them hidden:
+
+- **Per-profile hide logs are empty in the running app.** `KidModeScreen` holds
+  `profileLogs` with no setter, so nothing writes to them. The keying and the
+  parent view are real and tested; the producer is missing, which is the same
+  shared-store problem the household log has.
+- **The shelf picker has no lock.** A child can pick another child's profile. The
+  household floor is still enforced, so nobody can get below it, but per-kid
+  strictness above the floor is advisory rather than protected.
+- **Nothing in the app or the hook calls `lookupMap`.** The registry verifies,
+  refuses and fails closed exactly as claimed, but the app does not consult it, so
+  the feature is available rather than in use.
+- **The registry's rollback window is 30 days.** Anyone who can serve both the
+  index and the maps can replay a 29 day old index and its maps. That is the
+  design's declared bound, not a defect, and it is worth saying in days.
+
+One thing the report page does not do, which its own tests now record: its image
+check does not cover the stripe hazard, because a timeline lane padded into the
+analysis frame fills about a fourteenth of it, under the pattern rule's area
+limit. What keeps that picture safe is the cap of five bars per lane, taken from
+the same BT.1702-3 criterion rather than chosen.
 
 **Still open, in rough order of what would help most:**
 
