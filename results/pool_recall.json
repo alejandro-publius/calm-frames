@@ -41,35 +41,35 @@
   "HAZARD_pd1930_frozen_frolics.mp4",
   "HAZARD_sintel_2048_stereo_512kb.mp4",
   "HAZARD_tears_of_steel_720p.mov",
+  "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm",
+  "HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm",
   "HAZARD_wc_fireworks_buenos_aires.webm",
   "HAZARD_wc_fireworks_ignis_brunensis.ogv",
   "HAZARD_wc_fireworks_rieti.ogv",
   "HAZARD_wc_fireworks_summer.webm",
+  "HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
   "HAZARD_wc_lightning_240fps.webm",
   "HAZARD_wc_lightning_blackout.webm",
   "HAZARD_wc_lightning_condensed.webm",
-  "HAZARD_wc_lightning_slowmo.webm"
+  "HAZARD_wc_lightning_slowmo.webm",
+  "HAZARD_wc_sea_of_clouds_over_asia.webm",
+  "HAZARD_wc_stockfootage_setting_sun.webm",
+  "HAZARD_wc_sunset_at_the_sea_of_azov.webm",
+  "HAZARD_wc_sunset_in_spain.webm",
+  "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv",
+  "HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm",
+  "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm",
+  "HAZARD_wc_water_waves_greece.ogv",
+  "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm"
  ],
  "titles_skipped": {
   "HAZARD_iss_night_pass_africa_mideast.ogv": "only ffmpeg_photosensitivity, flashmap, naive_luma_diff has a candidate list for it; iris never ran on it",
   "HAZARD_iss_night_pass_europe_to_asia.ogv": "only ffmpeg_photosensitivity, flashmap, naive_luma_diff has a candidate list for it; iris never ran on it",
   "HAZARD_iss_night_pass_malaysia.ogv": "only ffmpeg_photosensitivity, flashmap, naive_luma_diff has a candidate list for it; iris never ran on it",
-  "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_clouds_seloncourt.ogv": "only flashmap has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff, iris never ran on it",
-  "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv": "only flashmap has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff, iris never ran on it",
-  "HAZARD_wc_irminger_waves_without_sound_ooi.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_jezioro_cisie_panorama_1080p.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_planepassingthundercloud.ogv": "only flashmap has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff, iris never ran on it",
-  "HAZARD_wc_sea_of_clouds_over_asia.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_stockfootage_setting_sun.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_sunset_at_the_sea_of_azov.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_sunset_in_spain.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_water_waves_greece.ogv": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
-  "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm": "only flashmap, iris has a candidate list for it; ffmpeg_photosensitivity, naive_luma_diff never ran on it",
+  "HAZARD_wc_clouds_seloncourt.ogv": "only ffmpeg_photosensitivity, flashmap, naive_luma_diff has a candidate list for it; iris never ran on it",
+  "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv": "only ffmpeg_photosensitivity, flashmap, naive_luma_diff has a candidate list for it; iris never ran on it",
+  "HAZARD_wc_irminger_waves_without_sound_ooi.webm": "shorter than one 10 s segment",
+  "HAZARD_wc_planepassingthundercloud.ogv": "only ffmpeg_photosensitivity, flashmap, naive_luma_diff has a candidate list for it; iris never ran on it",
   "app/assets/raw/sound/calm-chime.mp3": "file not in media/ under either name"
  },
  "all_titles": {
@@ -80,73 +80,73 @@
     "naive_luma_diff",
     "iris"
    ],
-   "union_windows": 2277,
-   "titles": 16,
+   "union_windows": 2425,
+   "titles": 28,
    "table": {
     "flashmap": {
      "recall_against_the_union": {
-      "value": 0.6262626262626263,
-      "wilson_lo": 0.6061941906229954,
-      "wilson_hi": 0.6459057516050378,
-      "numerator": 1426,
-      "denominator": 2277
+      "value": 0.6,
+      "wilson_lo": 0.5803582742870582,
+      "wilson_hi": 0.6193254054519594,
+      "numerator": 1455,
+      "denominator": 2425
      },
      "bootstrap_over_titles": {
-      "lo": 0.35271470228540264,
-      "hi": 0.7960612170087976,
+      "lo": 0.32432105492589364,
+      "hi": 0.7632648439018689,
       "resamples": 10000,
-      "groups": 16,
+      "groups": 28,
       "seed": 20260917
      },
-     "windows_only_this_list_proposed": 439
+     "windows_only_this_list_proposed": 452
     },
     "ffmpeg_photosensitivity": {
      "recall_against_the_union": {
-      "value": 0.8041282389108476,
-      "wilson_lo": 0.787320664276777,
-      "wilson_hi": 0.8199113704811812,
-      "numerator": 1831,
-      "denominator": 2277
+      "value": 0.8107216494845361,
+      "wilson_lo": 0.7946436314664501,
+      "wilson_hi": 0.825816791970044,
+      "numerator": 1966,
+      "denominator": 2425
      },
      "bootstrap_over_titles": {
-      "lo": 0.6862634922600152,
-      "hi": 0.9283032101997618,
+      "lo": 0.6990445468509985,
+      "hi": 0.9291394353294175,
       "resamples": 10000,
-      "groups": 16,
+      "groups": 28,
       "seed": 20260917
      },
-     "windows_only_this_list_proposed": 821
+     "windows_only_this_list_proposed": 940
     },
     "naive_luma_diff": {
      "recall_against_the_union": {
-      "value": 0.03469477382520861,
-      "wilson_lo": 0.027927246471292598,
-      "wilson_hi": 0.04302966208313803,
+      "value": 0.03257731958762886,
+      "wilson_lo": 0.026217839958294943,
+      "wilson_hi": 0.04041535185953372,
       "numerator": 79,
-      "denominator": 2277
+      "denominator": 2425
      },
      "bootstrap_over_titles": {
-      "lo": 0.019416971290787965,
-      "hi": 0.06621963000938012,
+      "lo": 0.018090338656356387,
+      "hi": 0.061497703431875515,
       "resamples": 10000,
-      "groups": 16,
+      "groups": 28,
       "seed": 20260917
      },
      "windows_only_this_list_proposed": 4
     },
     "iris": {
      "recall_against_the_union": {
-      "value": 0.0030742204655248135,
-      "wilson_lo": 0.0014899516271795485,
-      "wilson_hi": 0.00633236269970884,
+      "value": 0.00288659793814433,
+      "wilson_lo": 0.001398974253050586,
+      "wilson_hi": 0.005946692034018193,
       "numerator": 7,
-      "denominator": 2277
+      "denominator": 2425
      },
      "bootstrap_over_titles": {
-      "lo": 0.000605867835350768,
-      "hi": 0.008701642564452291,
+      "lo": 0.0004858674704748728,
+      "hi": 0.008092528082957972,
       "resamples": 10000,
-      "groups": 16,
+      "groups": 28,
       "seed": 20260917
      },
      "windows_only_this_list_proposed": 0
@@ -159,56 +159,56 @@
     "ffmpeg_photosensitivity",
     "naive_luma_diff"
    ],
-   "union_windows": 2277,
-   "titles": 16,
+   "union_windows": 2425,
+   "titles": 28,
    "table": {
     "flashmap": {
      "recall_against_the_union": {
-      "value": 0.6262626262626263,
-      "wilson_lo": 0.6061941906229954,
-      "wilson_hi": 0.6459057516050378,
-      "numerator": 1426,
-      "denominator": 2277
+      "value": 0.6,
+      "wilson_lo": 0.5803582742870582,
+      "wilson_hi": 0.6193254054519594,
+      "numerator": 1455,
+      "denominator": 2425
      },
      "bootstrap_over_titles": {
-      "lo": 0.35271470228540264,
-      "hi": 0.7960612170087976,
+      "lo": 0.32432105492589364,
+      "hi": 0.7632648439018689,
       "resamples": 10000,
-      "groups": 16,
+      "groups": 28,
       "seed": 20260917
      },
-     "windows_only_this_list_proposed": 439
+     "windows_only_this_list_proposed": 452
     },
     "ffmpeg_photosensitivity": {
      "recall_against_the_union": {
-      "value": 0.8041282389108476,
-      "wilson_lo": 0.787320664276777,
-      "wilson_hi": 0.8199113704811812,
-      "numerator": 1831,
-      "denominator": 2277
+      "value": 0.8107216494845361,
+      "wilson_lo": 0.7946436314664501,
+      "wilson_hi": 0.825816791970044,
+      "numerator": 1966,
+      "denominator": 2425
      },
      "bootstrap_over_titles": {
-      "lo": 0.6862634922600152,
-      "hi": 0.9283032101997618,
+      "lo": 0.6990445468509985,
+      "hi": 0.9291394353294175,
       "resamples": 10000,
-      "groups": 16,
+      "groups": 28,
       "seed": 20260917
      },
-     "windows_only_this_list_proposed": 821
+     "windows_only_this_list_proposed": 940
     },
     "naive_luma_diff": {
      "recall_against_the_union": {
-      "value": 0.03469477382520861,
-      "wilson_lo": 0.027927246471292598,
-      "wilson_hi": 0.04302966208313803,
+      "value": 0.03257731958762886,
+      "wilson_lo": 0.026217839958294943,
+      "wilson_hi": 0.04041535185953372,
       "numerator": 79,
-      "denominator": 2277
+      "denominator": 2425
      },
      "bootstrap_over_titles": {
-      "lo": 0.019416971290787965,
-      "hi": 0.06621963000938012,
+      "lo": 0.018090338656356387,
+      "hi": 0.061497703431875515,
       "resamples": 10000,
-      "groups": 16,
+      "groups": 28,
       "seed": 20260917
      },
      "windows_only_this_list_proposed": 4
@@ -217,7 +217,7 @@
   }
  },
  "pool_segments": {
-  "segments": 34,
+  "segments": 40,
   "now": {
    "candidate_lists": [
     "flashmap",
@@ -225,73 +225,73 @@
     "naive_luma_diff",
     "iris"
    ],
-   "union_windows": 204,
-   "titles": 9,
+   "union_windows": 173,
+   "titles": 16,
    "table": {
     "flashmap": {
      "recall_against_the_union": {
-      "value": 0.6666666666666666,
-      "wilson_lo": 0.5994243813290842,
-      "wilson_hi": 0.7277480720680215,
-      "numerator": 136,
-      "denominator": 204
+      "value": 0.5144508670520231,
+      "wilson_lo": 0.4404741037896836,
+      "wilson_hi": 0.5877998090887985,
+      "numerator": 89,
+      "denominator": 173
      },
      "bootstrap_over_titles": {
-      "lo": 0.42990654205607476,
-      "hi": 0.8426966292134831,
+      "lo": 0.19760097639116672,
+      "hi": 0.7132867132867133,
       "resamples": 10000,
-      "groups": 9,
+      "groups": 16,
       "seed": 20260917
      },
-     "windows_only_this_list_proposed": 26
+     "windows_only_this_list_proposed": 32
     },
     "ffmpeg_photosensitivity": {
      "recall_against_the_union": {
-      "value": 0.8725490196078431,
-      "wilson_lo": 0.8198068600942048,
-      "wilson_hi": 0.9115198004405018,
-      "numerator": 178,
-      "denominator": 204
+      "value": 0.815028901734104,
+      "wilson_lo": 0.7505517911390538,
+      "wilson_hi": 0.8658195096118577,
+      "numerator": 141,
+      "denominator": 173
      },
      "bootstrap_over_titles": {
-      "lo": 0.7254876562023773,
-      "hi": 0.9712655455059355,
+      "lo": 0.6718638392857142,
+      "hi": 0.9381840628507295,
       "resamples": 10000,
-      "groups": 9,
+      "groups": 16,
       "seed": 20260917
      },
-     "windows_only_this_list_proposed": 63
+     "windows_only_this_list_proposed": 83
     },
     "naive_luma_diff": {
      "recall_against_the_union": {
-      "value": 0.058823529411764705,
-      "wilson_lo": 0.03396627690998608,
-      "wilson_hi": 0.09998899350944015,
-      "numerator": 12,
-      "denominator": 204
+      "value": 0.017341040462427744,
+      "wilson_lo": 0.005914752805222811,
+      "wilson_hi": 0.049736557053472324,
+      "numerator": 3,
+      "denominator": 173
      },
      "bootstrap_over_titles": {
-      "lo": 0.006287354974803705,
-      "hi": 0.1450381679389313,
+      "lo": 0.0,
+      "hi": 0.04878048780487805,
       "resamples": 10000,
-      "groups": 9,
+      "groups": 16,
       "seed": 20260917
      },
      "windows_only_this_list_proposed": 0
     },
     "iris": {
      "recall_against_the_union": {
-      "value": 0.00980392156862745,
-      "wilson_lo": 0.0026927192157608845,
-      "wilson_hi": 0.03503535902804605,
-      "numerator": 2,
-      "denominator": 204
+      "value": 0.0,
+      "wilson_lo": 0.0,
+      "wilson_hi": 0.02172261440451652,
+      "numerator": 0,
+      "denominator": 173
      },
      "bootstrap_over_titles": {
       "lo": 0.0,
-      "hi": 0.03076923076923077,
+      "hi": 0.0,
       "resamples": 10000,
-      "groups": 9,
+      "groups": 16,
       "seed": 20260917
      },
      "windows_only_this_list_proposed": 0
@@ -304,56 +304,56 @@
     "ffmpeg_photosensitivity",
     "naive_luma_diff"
    ],
-   "union_windows": 204,
-   "titles": 9,
+   "union_windows": 173,
+   "titles": 16,
    "table": {
     "flashmap": {
      "recall_against_the_union": {
-      "value": 0.6666666666666666,
-      "wilson_lo": 0.5994243813290842,
-      "wilson_hi": 0.7277480720680215,
-      "numerator": 136,
-      "denominator": 204
+      "value": 0.5144508670520231,
+      "wilson_lo": 0.4404741037896836,
+      "wilson_hi": 0.5877998090887985,
+      "numerator": 89,
+      "denominator": 173
      },
      "bootstrap_over_titles": {
-      "lo": 0.42990654205607476,
-      "hi": 0.8426966292134831,
+      "lo": 0.19760097639116672,
+      "hi": 0.7132867132867133,
       "resamples": 10000,
-      "groups": 9,
+      "groups": 16,
       "seed": 20260917
      },
-     "windows_only_this_list_proposed": 26
+     "windows_only_this_list_proposed": 32
     },
     "ffmpeg_photosensitivity": {
      "recall_against_the_union": {
-      "value": 0.8725490196078431,
-      "wilson_lo": 0.8198068600942048,
-      "wilson_hi": 0.9115198004405018,
-      "numerator": 178,
-      "denominator": 204
+      "value": 0.815028901734104,
+      "wilson_lo": 0.7505517911390538,
+      "wilson_hi": 0.8658195096118577,
+      "numerator": 141,
+      "denominator": 173
      },
      "bootstrap_over_titles": {
-      "lo": 0.7254876562023773,
-      "hi": 0.9712655455059355,
+      "lo": 0.6718638392857142,
+      "hi": 0.9381840628507295,
       "resamples": 10000,
-      "groups": 9,
+      "groups": 16,
       "seed": 20260917
      },
-     "windows_only_this_list_proposed": 63
+     "windows_only_this_list_proposed": 83
     },
     "naive_luma_diff": {
      "recall_against_the_union": {
-      "value": 0.058823529411764705,
-      "wilson_lo": 0.03396627690998608,
-      "wilson_hi": 0.09998899350944015,
-      "numerator": 12,
-      "denominator": 204
+      "value": 0.017341040462427744,
+      "wilson_lo": 0.005914752805222811,
+      "wilson_hi": 0.049736557053472324,
+      "numerator": 3,
+      "denominator": 173
      },
      "bootstrap_over_titles": {
-      "lo": 0.006287354974803705,
-      "hi": 0.1450381679389313,
+      "lo": 0.0,
+      "hi": 0.04878048780487805,
       "resamples": 10000,
-      "groups": 9,
+      "groups": 16,
       "seed": 20260917
      },
      "windows_only_this_list_proposed": 0
@@ -362,19 +362,19 @@
   }
  },
  "what_iris_cost_the_estimate": {
-  "flashmap_recall_before_iris_was_a_candidate_list": 0.6262626262626263,
-  "flashmap_recall_now": 0.6262626262626263,
+  "flashmap_recall_before_iris_was_a_candidate_list": 0.6,
+  "flashmap_recall_now": 0.6,
   "difference": 0.0,
   "iris_only_windows": 0,
   "read_it_like_this": "the first number is what this repository could have published while IRIS was missing. The second is the same measurement against a union that now includes IRIS. The drop is the part of the old estimate that was optimism, and it is no longer unknown."
  },
  "published": {
-  "flashmap_pool_recall": 0.6262626262626263,
-  "flashmap_pool_recall_lo": 0.35271470228540264,
-  "flashmap_pool_recall_hi": 0.7960612170087976,
-  "flashmap_pool_recall_before_iris": 0.6262626262626263,
-  "union_windows": 2277,
-  "titles": 16,
+  "flashmap_pool_recall": 0.6,
+  "flashmap_pool_recall_lo": 0.32432105492589364,
+  "flashmap_pool_recall_hi": 0.7632648439018689,
+  "flashmap_pool_recall_before_iris": 0.6,
+  "union_windows": 2425,
+  "titles": 28,
   "iris_only_windows": 0,
   "candidate_lists": 4,
   "iris_clips_analyzed": 32,

@@ -1,0 +1,53 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_lightning_blackout.webm",
+  "sha256": "a139990fcf99ef8b713b8cdf26fd69b43e6478e131e85f6bbc0010f01ac8a376",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 213,
+  "frames_dropped_as_warmup": 14,
+  "frames_analyzed": 199,
+  "flagged_frames": 72,
+  "segment_count": 6,
+  "segments": [
+    {
+      "start_s": 1.056,
+      "end_s": 1.968,
+      "duration_s": 0.912
+    },
+    {
+      "start_s": 5.617,
+      "end_s": 6.67,
+      "duration_s": 1.053
+    },
+    {
+      "start_s": 7.301,
+      "end_s": 7.792,
+      "duration_s": 0.491
+    },
+    {
+      "start_s": 8.284,
+      "end_s": 8.424,
+      "duration_s": 0.14
+    },
+    {
+      "start_s": 9.828,
+      "end_s": 11.231,
+      "duration_s": 1.403
+    },
+    {
+      "start_s": 14.249,
+      "end_s": 14.95,
+      "duration_s": 0.701
+    }
+  ],
+  "warmup_would_have_flagged": 6,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

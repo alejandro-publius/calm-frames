@@ -1,0 +1,28 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv",
+  "sha256": "6e73ebed882b75fd615d315148916cff55bca0bdb98ff6f430e08c5b2595a38a",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 1007,
+  "frames_dropped_as_warmup": 25,
+  "frames_analyzed": 982,
+  "flagged_frames": 1,
+  "segment_count": 1,
+  "segments": [
+    {
+      "start_s": 10.24,
+      "end_s": 10.24,
+      "duration_s": 0.0
+    }
+  ],
+  "warmup_would_have_flagged": 0,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

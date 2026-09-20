@@ -1,0 +1,18 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_sea_of_clouds_over_asia.webm",
+  "sha256": "5055b5a79e6635428d54a9b50deca980975d50525cbc93158f87db2b8db90cec",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 512,
+  "flagged_frames": 0,
+  "segment_count": 0,
+  "segments": [],
+  "segments_dropped_as_single_cut": 0,
+  "max_frame_to_frame_delta": 5.23,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

@@ -1,0 +1,55 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_fireworks_rieti.ogv",
+  "sha256": "6dcfb11d06811c9369d30b6d9f5d5438b8779084999134f85bc4542b7180048b",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 452,
+  "flagged_frames": 13,
+  "segment_count": 6,
+  "segments": [
+    {
+      "start_s": 0.9,
+      "end_s": 0.933,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 1.2,
+      "end_s": 1.233,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 2.4,
+      "end_s": 2.433,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 3.733,
+      "end_s": 3.767,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 6.7,
+      "end_s": 6.733,
+      "duration_s": 0.033,
+      "frames": 2
+    },
+    {
+      "start_s": 7.833,
+      "end_s": 7.867,
+      "duration_s": 0.033,
+      "frames": 2
+    }
+  ],
+  "segments_dropped_as_single_cut": 1,
+  "max_frame_to_frame_delta": 39.69,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

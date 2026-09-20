@@ -1,0 +1,28 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "markers50.mp4",
+  "sha256": "fad744279f9c9f085b9cd23b78d5a206e99f565b5cd42bb64bda0762157a391e",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 6300,
+  "frames_dropped_as_warmup": 30,
+  "frames_analyzed": 6270,
+  "flagged_frames": 6270,
+  "segment_count": 1,
+  "segments": [
+    {
+      "start_s": 1.0,
+      "end_s": 209.967,
+      "duration_s": 208.967
+    }
+  ],
+  "warmup_would_have_flagged": 30,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

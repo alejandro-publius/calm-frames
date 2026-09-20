@@ -1,0 +1,43 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv",
+  "sha256": "2c0fb45445dcfcff83fca373ee7439ea4bc80f0e7201eaa41b0699c06aefccb2",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 1661,
+  "frames_dropped_as_warmup": 30,
+  "frames_analyzed": 1631,
+  "flagged_frames": 1558,
+  "segment_count": 4,
+  "segments": [
+    {
+      "start_s": 1.0,
+      "end_s": 4.233,
+      "duration_s": 3.233
+    },
+    {
+      "start_s": 4.533,
+      "end_s": 4.7,
+      "duration_s": 0.167
+    },
+    {
+      "start_s": 5.333,
+      "end_s": 5.6,
+      "duration_s": 0.267
+    },
+    {
+      "start_s": 5.9,
+      "end_s": 55.3,
+      "duration_s": 49.4
+    }
+  ],
+  "warmup_would_have_flagged": 29,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

@@ -157,12 +157,12 @@ this":
 
 Prepared, not labelled. Nobody on this lane labels a segment.
 
-<!--n results/realclips_status.json:segments -->34<!--/n--> ten second segments were cut from
-<!--n results/realclips_status.json:titles -->9<!--/n--> titles across
+<!--n results/realclips_status.json:segments -->40<!--/n--> ten second segments were cut from
+<!--n results/realclips_status.json:titles -->16<!--/n--> titles across
 <!--n results/realclips_status.json:source_count -->5<!--/n--> sources, as the
 union of what flashmap, ffmpeg's filter, naive differencing and EA IRIS each flagged, plus time
 none of them flagged. That is
-<!--n results/realclips_status.json:windows_to_label -->340<!--/n--> one second windows to call.
+<!--n results/realclips_status.json:windows_to_label -->400<!--/n--> one second windows to call.
 Each segment has an opaque id and one plot, with no title, no source, no position in the film and
 no detector output anywhere on the figure. `eval/labeling/GUIDE.md` quotes the spec conditions
 and says what is not a flash.
@@ -176,8 +176,8 @@ VM, and it has run over every clip it can decode, so the recall estimate is no l
 by an unknown amount. The amount turned out to be
 <!--n results/pool_recall.json:published.iris_only_windows -->0<!--/n-->: not one window in the
 union came from IRIS alone, so flashmap's coverage of the union is
-<!--n results/pool_recall.json:published.flashmap_pool_recall -->0.626263<!--/n--> with IRIS in it and
-<!--n results/pool_recall.json:published.flashmap_pool_recall_before_iris -->0.626263<!--/n--> without.
+<!--n results/pool_recall.json:published.flashmap_pool_recall -->0.6<!--/n--> with IRIS in it and
+<!--n results/pool_recall.json:published.flashmap_pool_recall_before_iris -->0.6<!--/n--> without.
 IRIS flagged <!--n results/pool_recall.json:published.iris_flagged_segments -->6<!--/n--> segments
 across the whole pool, against flashmap's
 <!--n results/screening.json:totals.flagged_segments -->456<!--/n-->, and raised
@@ -199,12 +199,15 @@ fixed, the four were re-run on Sep 17, and `results/screening.json` records that
 fireworks display with five flagged segments.
 
 A title joins the pool only when every candidate list has analysed it. Sixteen clips downloaded
-later in the day have no candidate list from either ffmpeg based baseline, so their time is not
-unflagged in the sense this pool means and they are skipped, with the reason recorded per title
-in `pool_key.json`. IRIS has run over those sixteen, so the two ffmpeg based lists are the only
-thing still holding them out; `make ffmpeg-ps-pool` and `make naive-luma-pool` would close it.
-A title IRIS could not decode is kept out by the same rule, and `results/baselines/iris_failures.json`
-names each one.
+later in the day had no candidate list from either ffmpeg based baseline, so their time was not
+unflagged in the sense this pool means and they were skipped. Both baselines were re-run over
+every clip on Sep 19, on one ffmpeg version rather than piecemeal, and those sixteen are in the
+pool now: it went from <!--n results/realclips_status.json:segments -->40<!--/n--> segments over
+<!--n results/realclips_status.json:titles -->16<!--/n--> titles before IRIS joined, down to 34
+over 9 while IRIS was the only list that had seen the calm sixteen, and back to 40 over 16 with
+the unflagged half twice the size it was. A title IRIS could not decode is still kept out by the
+same rule, and `results/baselines/iris_failures.json` names each one, with the reason recorded
+per title in `pool_key.json`.
 
 Do not rebuild the pool once labelling has begun: a segment id is a position in a shuffled list,
 so the answers would end up describing different segments. `make_pool` refuses while any sheet

@@ -1,0 +1,73 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_sunset_in_spain.webm",
+  "sha256": "882fd00072bc75483cfaa8f0c14b1b4c07ece4fe23f98d8a3d86591cf298f993",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 941,
+  "frames_dropped_as_warmup": 24,
+  "frames_analyzed": 917,
+  "flagged_frames": 582,
+  "segment_count": 10,
+  "segments": [
+    {
+      "start_s": 1.004,
+      "end_s": 7.01,
+      "duration_s": 6.006
+    },
+    {
+      "start_s": 13.183,
+      "end_s": 13.391,
+      "duration_s": 0.208
+    },
+    {
+      "start_s": 14.392,
+      "end_s": 14.392,
+      "duration_s": 0.0
+    },
+    {
+      "start_s": 16.686,
+      "end_s": 16.978,
+      "duration_s": 0.292
+    },
+    {
+      "start_s": 17.312,
+      "end_s": 17.354,
+      "duration_s": 0.042
+    },
+    {
+      "start_s": 17.687,
+      "end_s": 18.855,
+      "duration_s": 1.168
+    },
+    {
+      "start_s": 19.814,
+      "end_s": 22.692,
+      "duration_s": 2.878
+    },
+    {
+      "start_s": 23.109,
+      "end_s": 24.152,
+      "duration_s": 1.043
+    },
+    {
+      "start_s": 24.486,
+      "end_s": 26.571,
+      "duration_s": 2.085
+    },
+    {
+      "start_s": 26.988,
+      "end_s": 39.209,
+      "duration_s": 12.221
+    }
+  ],
+  "warmup_would_have_flagged": 24,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

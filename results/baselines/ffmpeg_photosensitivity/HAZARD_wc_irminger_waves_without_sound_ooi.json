@@ -1,0 +1,28 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_irminger_waves_without_sound_ooi.webm",
+  "sha256": "fdb4340eb6240f87bd37cae174591f3e74ca29817a2c60f9223c985745cc4345",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 261,
+  "frames_dropped_as_warmup": 30,
+  "frames_analyzed": 231,
+  "flagged_frames": 231,
+  "segment_count": 1,
+  "segments": [
+    {
+      "start_s": 1.001,
+      "end_s": 8.675,
+      "duration_s": 7.674
+    }
+  ],
+  "warmup_would_have_flagged": 30,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

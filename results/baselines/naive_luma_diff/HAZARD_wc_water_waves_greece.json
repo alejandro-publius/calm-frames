@@ -1,0 +1,18 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_water_waves_greece.ogv",
+  "sha256": "1314f759e5f51883d3dd75e2da834c05298508843f28f1bcb08491a2dec453bd",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 698,
+  "flagged_frames": 0,
+  "segment_count": 0,
+  "segments": [],
+  "segments_dropped_as_single_cut": 0,
+  "max_frame_to_frame_delta": 3.48,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

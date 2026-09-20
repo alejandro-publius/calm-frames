@@ -1,0 +1,28 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_lightning_240fps.webm",
+  "sha256": "cfc9677fdeebdb20c19144fe5b581924f9d887dd811946764c56f9e759887391",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 337,
+  "frames_dropped_as_warmup": 29,
+  "frames_analyzed": 308,
+  "flagged_frames": 308,
+  "segment_count": 1,
+  "segments": [
+    {
+      "start_s": 1.0,
+      "end_s": 11.233,
+      "duration_s": 10.233
+    }
+  ],
+  "warmup_would_have_flagged": 29,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

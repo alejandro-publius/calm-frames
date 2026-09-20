@@ -1,0 +1,18 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_sunset_at_the_sea_of_azov.webm",
+  "sha256": "f15d1e62167494aac6bb0a2dcedc78efc2d4db292196e3bb17eb43c05bd9f10c",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 807,
+  "flagged_frames": 0,
+  "segment_count": 0,
+  "segments": [],
+  "segments_dropped_as_single_cut": 0,
+  "max_frame_to_frame_delta": 4.34,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

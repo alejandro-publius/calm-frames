@@ -1,0 +1,18 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "markers50.mp4",
+  "sha256": "fad744279f9c9f085b9cd23b78d5a206e99f565b5cd42bb64bda0762157a391e",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 6300,
+  "flagged_frames": 100,
+  "segment_count": 0,
+  "segments": [],
+  "segments_dropped_as_single_cut": 100,
+  "max_frame_to_frame_delta": 107.09,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

@@ -1,0 +1,28 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_planepassingthundercloud.ogv",
+  "sha256": "dd5ad178b8aa8efd433e93f41f8a713d48dfa2d6943baeb5442bd28c6f349e3d",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 668,
+  "frames_dropped_as_warmup": 24,
+  "frames_analyzed": 644,
+  "flagged_frames": 2,
+  "segment_count": 1,
+  "segments": [
+    {
+      "start_s": 27.75,
+      "end_s": 28.0,
+      "duration_s": 0.25
+    }
+  ],
+  "warmup_would_have_flagged": 9,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

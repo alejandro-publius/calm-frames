@@ -1,0 +1,43 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_water_waves_greece.ogv",
+  "sha256": "1314f759e5f51883d3dd75e2da834c05298508843f28f1bcb08491a2dec453bd",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 698,
+  "frames_dropped_as_warmup": 25,
+  "frames_analyzed": 673,
+  "flagged_frames": 6,
+  "segment_count": 4,
+  "segments": [
+    {
+      "start_s": 9.36,
+      "end_s": 9.36,
+      "duration_s": 0.0
+    },
+    {
+      "start_s": 13.92,
+      "end_s": 13.92,
+      "duration_s": 0.0
+    },
+    {
+      "start_s": 14.32,
+      "end_s": 14.36,
+      "duration_s": 0.04
+    },
+    {
+      "start_s": 23.56,
+      "end_s": 23.6,
+      "duration_s": 0.04
+    }
+  ],
+  "warmup_would_have_flagged": 11,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

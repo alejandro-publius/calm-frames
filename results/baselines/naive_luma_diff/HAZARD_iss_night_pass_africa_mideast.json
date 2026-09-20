@@ -1,0 +1,18 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_iss_night_pass_africa_mideast.ogv",
+  "sha256": "6cc28917ac33c02323d3e102176b305e37c856714bdcd44d5d35374571b4c5f7",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 444,
+  "flagged_frames": 0,
+  "segment_count": 0,
+  "segments": [],
+  "segments_dropped_as_single_cut": 0,
+  "max_frame_to_frame_delta": 4.97,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

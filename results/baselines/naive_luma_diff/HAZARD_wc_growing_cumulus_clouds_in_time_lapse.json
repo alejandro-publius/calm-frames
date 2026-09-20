@@ -1,0 +1,18 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv",
+  "sha256": "2c0fb45445dcfcff83fca373ee7439ea4bc80f0e7201eaa41b0699c06aefccb2",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 1661,
+  "flagged_frames": 0,
+  "segment_count": 0,
+  "segments": [],
+  "segments_dropped_as_single_cut": 0,
+  "max_frame_to_frame_delta": 11.1,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

@@ -9,37 +9,37 @@
   "this analysis, which computes the metrics, the kappa and the bootstrap as soon as the sheets have answers in them"
  ],
  "what_is_missing": "the labels. Nobody on this lane labels anything.",
- "segments": 34,
- "titles": 9,
+ "segments": 40,
+ "titles": 16,
  "sources": [
   "1930 public-domain film",
   "Blender open movies",
-  "DVIDS",
-  "Wikimedia Commons fireworks",
-  "Wikimedia Commons lightning"
+  "NASA SVS 5011",
+  "Wikimedia Commons",
+  "Wikimedia Commons fireworks"
  ],
  "source_count": 5,
- "windows_to_label": 340,
+ "windows_to_label": 400,
  "sheets": {
   "labels_labeller_a.csv": {
    "path": "eval/labeling/labels_labeller_a.csv",
    "sha256": "019d0ad7c514866d105258ea2ac62f391e4f51c5573b11ba09a898c386623cb4",
    "answered_windows": 0,
    "unlabelable_windows": 0,
-   "git_state": "modified"
+   "git_state": "committed"
   },
   "labels_labeller_b.csv": {
    "path": "eval/labeling/labels_labeller_b.csv",
    "sha256": "019d0ad7c514866d105258ea2ac62f391e4f51c5573b11ba09a898c386623cb4",
    "answered_windows": 0,
    "unlabelable_windows": 0,
-   "git_state": "modified"
+   "git_state": "committed"
   }
  },
- "pool_key_sha256": "1416fbfe179c16dff54ac7ccb2b615b52f6f67a5a796da321f92b13227ba33b6",
+ "pool_key_sha256": "ade473ed8d0c9548274f4bf54c0df71d19d43334906e7b1ef74236cd7ca78c41",
  "plots": {
   "directory": "eval/labeling/plots",
-  "one_per_segment": 34,
+  "one_per_segment": 40,
   "missing": []
  }
 }

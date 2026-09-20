@@ -1,0 +1,33 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_iss_night_pass_europe_to_asia.ogv",
+  "sha256": "bb4f04655ad089e7b0291c9d26ea372c290035e42e06439813ae5946381dfb6c",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 582,
+  "frames_dropped_as_warmup": 1,
+  "frames_analyzed": 581,
+  "flagged_frames": 10,
+  "segment_count": 2,
+  "segments": [
+    {
+      "start_s": 49.167,
+      "end_s": 49.667,
+      "duration_s": 0.5
+    },
+    {
+      "start_s": 50.0,
+      "end_s": 50.167,
+      "duration_s": 0.167
+    }
+  ],
+  "warmup_would_have_flagged": 0,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

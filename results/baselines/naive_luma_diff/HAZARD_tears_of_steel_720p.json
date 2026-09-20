@@ -1,0 +1,43 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_tears_of_steel_720p.mov",
+  "sha256": "efa9062d9cdb7a338e40ad530dfdf234806743f29ae6a1a136b97ece4e588e8f",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 17620,
+  "flagged_frames": 96,
+  "segment_count": 4,
+  "segments": [
+    {
+      "start_s": 215.542,
+      "end_s": 215.792,
+      "duration_s": 0.25,
+      "frames": 5
+    },
+    {
+      "start_s": 308.0,
+      "end_s": 308.5,
+      "duration_s": 0.5,
+      "frames": 7
+    },
+    {
+      "start_s": 438.458,
+      "end_s": 438.583,
+      "duration_s": 0.125,
+      "frames": 3
+    },
+    {
+      "start_s": 491.583,
+      "end_s": 492.5,
+      "duration_s": 0.917,
+      "frames": 13
+    }
+  ],
+  "segments_dropped_as_single_cut": 68,
+  "max_frame_to_frame_delta": 90.27,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

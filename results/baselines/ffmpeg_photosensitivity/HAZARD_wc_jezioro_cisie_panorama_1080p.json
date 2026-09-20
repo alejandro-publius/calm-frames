@@ -1,0 +1,43 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
+  "sha256": "fafb7339b9ee3aee08a290ae3addaed5501ed167825ad8f42adff64ef2831da8",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 900,
+  "frames_dropped_as_warmup": 30,
+  "frames_analyzed": 870,
+  "flagged_frames": 515,
+  "segment_count": 4,
+  "segments": [
+    {
+      "start_s": 1.0,
+      "end_s": 12.267,
+      "duration_s": 11.267
+    },
+    {
+      "start_s": 12.9,
+      "end_s": 13.2,
+      "duration_s": 0.3
+    },
+    {
+      "start_s": 14.633,
+      "end_s": 14.633,
+      "duration_s": 0.0
+    },
+    {
+      "start_s": 23.267,
+      "end_s": 29.967,
+      "duration_s": 6.7
+    }
+  ],
+  "warmup_would_have_flagged": 30,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

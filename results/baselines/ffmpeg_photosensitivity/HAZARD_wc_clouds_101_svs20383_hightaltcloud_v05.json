@@ -1,0 +1,28 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm",
+  "sha256": "290051905c18fbef8505d7395c9bb730041cba9da4c71658d7ad32a0bd841d5a",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 446,
+  "frames_dropped_as_warmup": 30,
+  "frames_analyzed": 416,
+  "flagged_frames": 416,
+  "segment_count": 1,
+  "segments": [
+    {
+      "start_s": 1.008,
+      "end_s": 14.855,
+      "duration_s": 13.847
+    }
+  ],
+  "warmup_would_have_flagged": 30,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

@@ -1,0 +1,31 @@
+{
+  "baseline": "naive_luma_diff",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_dvids_illumination_flares.mp4",
+  "sha256": "edace50ba797fbe65463ea5a80d243bae2c00eae685c0f9535ab576f0c7f543f",
+  "params": {
+    "threshold_luma_codes": 20.0,
+    "merge_gap_s": 0.25,
+    "min_frames_per_segment": 2
+  },
+  "frames_analyzed": 2205,
+  "flagged_frames": 12,
+  "segment_count": 2,
+  "segments": [
+    {
+      "start_s": 36.036,
+      "end_s": 36.103,
+      "duration_s": 0.067,
+      "frames": 2
+    },
+    {
+      "start_s": 57.858,
+      "end_s": 57.925,
+      "duration_s": 0.067,
+      "frames": 2
+    }
+  ],
+  "segments_dropped_as_single_cut": 8,
+  "max_frame_to_frame_delta": 125.09,
+  "notes": "Whole-frame mean luma only. No area, no color, no rate window, no linear light. Not a conformance result and not a safety claim."
+}

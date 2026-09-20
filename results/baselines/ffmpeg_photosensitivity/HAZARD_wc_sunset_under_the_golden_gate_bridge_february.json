@@ -1,0 +1,28 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm",
+  "sha256": "b062a3db37fdd7c3d46e7d4da03e6736f4cc76ecacc720f3ddfe2786d5c10177",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 7154,
+  "frames_dropped_as_warmup": 300,
+  "frames_analyzed": 6854,
+  "flagged_frames": 5,
+  "segment_count": 1,
+  "segments": [
+    {
+      "start_s": 8.448,
+      "end_s": 8.468,
+      "duration_s": 0.02
+    }
+  ],
+  "warmup_would_have_flagged": 0,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}

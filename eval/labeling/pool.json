@@ -207,6 +207,42 @@
    "seconds": 10.0,
    "windows": 10,
    "plot": "plots/seg033.png"
+  },
+  {
+   "segment_id": "seg034",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg034.png"
+  },
+  {
+   "segment_id": "seg035",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg035.png"
+  },
+  {
+   "segment_id": "seg036",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg036.png"
+  },
+  {
+   "segment_id": "seg037",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg037.png"
+  },
+  {
+   "segment_id": "seg038",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg038.png"
+  },
+  {
+   "segment_id": "seg039",
+   "seconds": 10.0,
+   "windows": 10,
+   "plot": "plots/seg039.png"
   }
  ]
 }

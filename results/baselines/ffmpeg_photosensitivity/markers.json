@@ -1,8 +1,8 @@
 {
   "baseline": "ffmpeg_photosensitivity",
-  "tool_version": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
   "video": "markers.mp4",
-  "sha256": "90f5f8ed9534bc5b9a5f7ce9ab5a8c9a1c1a7bcd96ff5e616b32b3a99423dff2",
+  "sha256": "a9fcb9dec4dc9a1dbac1800f34ca9fa35aa4e6b8d0c6d03a05968409cc97a5b0",
   "params": {
     "frames": 30,
     "threshold": 1.0,

@@ -1,0 +1,28 @@
+{
+  "baseline": "ffmpeg_photosensitivity",
+  "tool_version": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "video": "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm",
+  "sha256": "e5ea8d156902829a441ee864df0ff72898d83d24cad622f3eae386e7c77b339b",
+  "params": {
+    "frames": 30,
+    "threshold": 1.0,
+    "skip": 1,
+    "warmup_dropped_s": 1.0,
+    "diff_codes": 2,
+    "merge_gap_s": 0.25
+  },
+  "frames_seen": 1464,
+  "frames_dropped_as_warmup": 50,
+  "frames_analyzed": 1414,
+  "flagged_frames": 1414,
+  "segment_count": 1,
+  "segments": [
+    {
+      "start_s": 1.0,
+      "end_s": 29.26,
+      "duration_s": 28.26
+    }
+  ],
+  "warmup_would_have_flagged": 50,
+  "notes": "The filter is a mitigator; flags are inferred from where its output differs from the unfiltered decode. No area rule, no color rule, no red-flash rule. Not a conformance result."
+}
