@@ -1342,12 +1342,15 @@ second way.
 - **What it is worth, measured:** `results/pattern_text_precision.json`, 123
   rendered pictures with ground truth from what was drawn. Precision 0.381 with
   the test off, 0.821 (0.673 to 0.910) at 0.85. Recall 0.941 (0.809 to 0.984),
-  unchanged across the whole sweep from 0 to 0.85 and falling above it.
+  unchanged across the whole sweep from 0 to 0.85 and falling above it. **The
+  entry below supersedes these numbers**: the suite grew to 171 pictures and the
+  detector gained the spacing half of the test, and the sweep was re-run.
 - **Cost, and it is not zero.** Body text at a fixed leading is a row of
   repetitive elements at a constant spacing, which Guideline 2 says a pattern may
   be formed by, so a column scan through a paragraph still has a period and it is
   the leading. Two of the report page's nine frames still carry a finding, at
-  0.259 and 0.289 against a 0.25 limit. That is left standing. Loosening the
+  0.259 and 0.289 against a 0.25 limit, one frame at 0.262 after the entry below.
+  That is left standing. Loosening the
   detector until our own page passes would be the same mistake in the other
   direction, and the page's verdict is printed rather than asserted on.
 - **Second cost:** three more tuning numbers in the sidecar, and one of them,
@@ -1358,3 +1361,54 @@ second way.
   search that re-applied the pair count could not find the period of the first
   count the attachment can fail. That was a live false negative during this
   session and two existing tests caught it within minutes.
+
+## 2026-09-20: the ITC/Ofcom guidance note, read at last, and a spacing test the count needs
+
+- **Decision:** read the ITC Guidance Note from an Internet Archive capture,
+  quote it in flashmap/docs/SPEC_SOURCES.md section 8.4, and add the second half
+  of the periodicity test: the period the autocorrelation finds has to agree with
+  the spacing of the boundaries that were counted, to within `spacing_tolerance`,
+  at a whole multiple up to `MAX_HARMONIC`.
+- **Why the source:** it is the document BT.1702-3's attachment reads like, and
+  section 8.3 had been carrying a guess about how the two differ. ofcom.org.uk is
+  still shut to every method tried, including headless Chrome, which gets the
+  Cloudflare challenge page. The Internet Archive serves the file; SHA-256 and the
+  exact capture URL are in 8.4.
+- **What it settled:** every number matches BT.1702-3 Attachment 1 exactly, so
+  nothing in the profile changed. The 8.3 guess was right and is no longer a
+  guess: Ofcom makes the contrast condition its own clause applying in addition to
+  the area condition, and the two read the same way. And it gives no periodicity
+  measure, no spatial frequency, no stripe width, no pattern duration, no field of
+  view and no contrast ratio, which is the negative result it was wanted for: the
+  tuning constants stay tuning.
+- **Why the spacing test:** the note counts "light-dark pairs of clearly
+  discernible stripes". The count is a count of boundaries, so the boundaries have
+  to be the thing that repeats, and a strong autocorrelation peak on its own does
+  not say that. A motif of twelve irregular bars repeated eight times has a clean
+  peak at the motif length and 96 counted boundaries at no regular spacing at all.
+- **What it cost, and what it bought.** The suite grew to 171 pictures, adding
+  every type size and colour pair this product actually ships, at both the app's
+  scale and the report page's. Precision at the pre-registered 0.85 went from
+  0.821 to 0.914 (0.776 to 0.970) and recall stayed at 0.941 (0.809 to 0.984).
+  **Not one of the 94 pages of text is called a pattern now.** The report page is
+  down from two failing display frames to one, at 0.262 against a 0.25 limit, and
+  that one is recorded rather than tuned away, which is the instruction and is
+  also the right call. The app's 25 screens pass.
+- **The pre-registered 0.85 was not moved**, and it has now survived two changes
+  to the suite. Recall is still flat from 0 through 0.85 and still drops above it.
+- **One mistake, caught by measuring rather than by review.** The spacing test
+  first compared the lag against `2 * bar_width` and nothing else. Lags are whole
+  samples and a real bar width is not, so a grating at 2.23 samples a bar has a
+  period of 4.45 that no integer lag sits on, and the strongest lag is the second
+  harmonic. That version dropped five real gratings, every one horizontal, the
+  worst a 32 pair grating over 80 per cent of the screen, and recall fell from
+  0.941 to 0.794 before it was found. Whole multiples up to three are allowed now,
+  and both directions of that ceiling are mutation tested.
+- **One thing found in Appendix I that changes nothing and should be known.** The
+  note's voltage to luminance table disagrees with the BT.1886 curve flashmap uses,
+  by up to 8.8 cd/m2 in the middle of the range. For the darker-bar condition ours
+  is stricter; for the 20 cd/m2 difference condition ours is the more permissive in
+  the dark half, reading a step the table calls 20 as 15.7 from a darker level of
+  100 mV. BT.1886 is what the recommendation in force asks for and Appendix I
+  describes itself as a typical CRT relationship, so nothing was changed. The table
+  and the arithmetic are in SPEC_SOURCES 8.4.

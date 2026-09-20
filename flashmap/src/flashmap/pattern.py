@@ -67,6 +67,13 @@ MOTION_SMOOTH_FLOW = "smooth-flow"
 MOTION_UNCERTAIN = "uncertain"
 """Not enough evidence to call it. Takes the stricter 25% area and never the exemption."""
 
+MAX_HARMONIC = 3
+"""How many whole multiples of the expected period the lag search may land on and still count
+as the same spacing. A signal that repeats every P also repeats every 2P and every 3P, and an
+integer lag search on a non integer bar width often finds one of those rather than P itself.
+Three is enough for every bar width the analysis resolution can hold and small enough that an
+unrelated period cannot pass as a harmonic."""
+
 
 @dataclass(frozen=True)
 class PatternSettings:
@@ -125,6 +132,18 @@ class PatternSettings:
     0.95 would buy 0.14 of precision and cost 0.21 of recall, and recall is the side a child
     is on."""
 
+    spacing_tolerance: float = 0.25
+    """How far the measured period may sit from a whole multiple of twice the mean counted bar
+    width, measured on that multiple, before the bars that were counted are not the thing that
+    repeats. At the first harmonic this is 25 per cent; at the third it is 8 per cent of the
+    period, which is the right direction, because a higher harmonic needs more evidence.
+
+    The Ofcom/ITC guidance note and BT.1702-3 both count "light-dark pairs of clearly
+    discernible stripes" and neither says how evenly spaced they have to be, so this is
+    detector tuning like everything else in this class. It is here because a peak on its own
+    is not the test: the count the rule applies is a count of boundaries, so the boundaries
+    have to be the thing that repeats."""
+
     min_cycles_for_period: int = 3
     """How many whole cycles of a candidate period have to fit inside the run of bars before
     that period counts as measured. Detector tuning, and deliberately well under the spec's
@@ -165,6 +184,7 @@ class PatternSettings:
             "require_periodicity": self.require_periodicity,
             "min_autocorrelation_peak": self.min_autocorrelation_peak,
             "min_cycles_for_period": self.min_cycles_for_period,
+            "spacing_tolerance": self.spacing_tolerance,
             "contrast_reversal_correlation": self.contrast_reversal_correlation,
             "flow_direction_agreement": self.flow_direction_agreement,
             "flow_speed_spread": self.flow_speed_spread,
@@ -360,6 +380,8 @@ def periodic_lines(
     *,
     min_cycles: int,
     min_peak: float,
+    bar_width: NDArray[np.float64] | None = None,
+    spacing_tolerance: float = 0.25,
 ) -> tuple[NDArray[np.bool_], NDArray[np.float32], NDArray[np.float32]]:
     """Which scanlines carry a repeating signal, and what one cycle of it measures.
 
@@ -383,7 +405,16 @@ def periodic_lines(
       * the smallest lag that is a local maximum and reaches `min_peak` is the period. Smallest
         rather than largest, because a run that also correlates at twice the period is a run
         with more cycles in it, and taking the fundamental is the reading that keeps a pattern
-        inside the rule rather than letting it slip under the cycle count.
+        inside the rule rather than letting it slip under the cycle count;
+      * and the period has to agree with the spacing of the bars that were actually counted.
+        `bar_width` is `(last - first) / (bars - 2)`, the mean distance between the counted
+        boundaries, and one cycle is two bars, so a run of evenly spaced stripes has
+        `period` close to `2 * bar_width`. The two estimates are independent: one comes from
+        the boundary positions, the other from the shape of the whole signal. When they
+        disagree the bars that were counted are not the thing that repeats, which is what a
+        strong peak on its own cannot tell you. This is the "at consistent spacing" half of
+        the test, and without it a picture can qualify on peak strength while the pairs the
+        rule counts sit at no regular spacing at all.
 
     `min_peak` is detector tuning. BT.1702-3 gives no spatial frequency band, no stripe width
     and no regularity measure, so nothing here is quoted from a spec and
@@ -443,6 +474,34 @@ def periodic_lines(
 
     found = hit.any(axis=1)
     smallest = np.argmax(hit, axis=1)
+
+    if bar_width is not None:
+        # The pair count the rule applies comes from the counted boundaries, so those
+        # boundaries have to be the ones that repeat. One cycle is a light bar and a dark bar,
+        # so a run of evenly spaced stripes has a period near 2 * bar_width.
+        #
+        # Near a whole multiple of it, not near it. Lags are whole samples and a real bar
+        # width is not: a twelve pair grating across 54 analysis rows is 2.22 samples a bar,
+        # so its period is 4.43 and no integer lag sits on it. The strongest integer lag is
+        # then 9, the second harmonic, which is a period the signal really does have. Comparing
+        # against 2 * bar_width alone reads that as a disagreement and drops the pattern, and
+        # it dropped five real gratings, every one of them horizontal, when this test was
+        # first written that way. A harmless looking comparison, and it was a false negative
+        # on a 32 pair grating covering 80 per cent of the screen.
+        expected = 2.0 * np.asarray(bar_width, dtype=np.float64)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            ratio = np.where(expected > 0, smallest.astype(np.float64) / expected, 0.0)
+        harmonic = np.rint(ratio)
+        spacing_agrees = (
+            (expected > 0)
+            & (smallest > 0)
+            & (harmonic >= 1)
+            & (harmonic <= MAX_HARMONIC)
+            & (np.abs(ratio - harmonic) <= spacing_tolerance)
+        )
+        found = found & spacing_agrees
+        smallest = np.where(found, smallest, 0)
+
     periodic = found
     period = np.where(found, smallest, 0).astype(np.float32)
     peak = np.where(
@@ -510,6 +569,7 @@ def stripe_mask(
     require_periodicity: bool = True,
     min_autocorrelation_peak: float = 0.85,
     min_cycles_for_period: int = 3,
+    spacing_tolerance: float = 0.25,
 ) -> PatternScan:
     """The pixels inside a qualifying run of stripes, and what was found there.
 
@@ -574,6 +634,9 @@ def stripe_mask(
         low, high = _spans(line_bars, line_first, line_last, length)
 
         if require_periodicity:
+            line_bar_width = (line_last - line_first).astype(np.float64) / np.maximum(
+                1, line_bars - 2
+            )
             is_periodic, _period, _peak = periodic_lines(
                 lines,
                 counts_bars,
@@ -581,6 +644,8 @@ def stripe_mask(
                 high,
                 min_cycles=min_cycles,
                 min_peak=min_autocorrelation_peak,
+                bar_width=line_bar_width,
+                spacing_tolerance=spacing_tolerance,
             )
             qualifies = counts_bars & is_periodic
         else:
@@ -758,6 +823,7 @@ class PatternTracker:
             require_periodicity=self.settings.require_periodicity,
             min_autocorrelation_peak=self.settings.min_autocorrelation_peak,
             min_cycles_for_period=self.settings.min_cycles_for_period,
+            spacing_tolerance=self.settings.spacing_tolerance,
         )
         region_mean = (
             float(frame[scan.mask].mean()) if scan.mask.any() else float(frame.mean())

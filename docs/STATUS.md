@@ -21,13 +21,14 @@ was only testing alternation, so every glyph edge counted as a bar and all nine
 display frames of our own report page read as a pattern over 44 to 64 per cent of
 the screen. A run of bars now has to have a period before it contributes any
 area, measured by autocorrelation, and what that is worth is measured rather than
-asserted: 123 rendered pages and gratings, precision
-<!--n results/pattern_text_precision.json:published.pattern_text_precision_without_periodicity -->0.381<!--/n-->
+asserted: 171 rendered pages and gratings, including every type size and
+colour pair this product ships, precision
+<!--n results/pattern_text_precision.json:published.pattern_text_precision_without_periodicity -->0.2462<!--/n-->
 to
-<!--n results/pattern_text_precision.json:published.pattern_text_precision -->0.8205<!--/n-->
+<!--n results/pattern_text_precision.json:published.pattern_text_precision -->0.9143<!--/n-->
 with recall unchanged at
 <!--n results/pattern_text_precision.json:published.pattern_text_recall -->0.9412<!--/n-->.
-Seven of the nine frames are clean now and two still are not, for a different
+Eight of the nine frames are clean now and one still is not, for a different
 reason that is written down and not tuned away. Separately, ffmpeg 8.1.2 is gone
 from this machine, so both ffmpeg based baselines were re-run over every clip on
 9.0.1 in one go, a check now fails any results directory holding two tool
@@ -162,14 +163,14 @@ renders the whole page at 1280 px, cuts it into nine display frames and runs the
 analyzer over each under the broadcast profile, with a negative control that
 proves the check can refuse a striped page.
 
-**Seven of the nine display frames pass now, and two do not.** This block used to
+**Eight of the nine display frames pass now, and one does not.** This block used to
 say the page could not pass at all, and that was true of the rule as it then
 stood: every glyph edge is a Guideline 1 step, so all nine frames read 16 to 25
 stripe pairs over 44 to 64 per cent against a 25 per cent limit. Guideline 2 is
 about *regular* patterns though, and counting steps is not a test of regularity.
 A run of bars now contributes area only when the signal inside it has a period,
-and a line of glyphs does not have one. The two frames that still carry a finding
-do it at 0.259 and 0.289, and it is not the glyphs any more: it is the line
+and a line of glyphs does not have one. The one frame that still carries a finding
+does it at 0.262, and it is not the glyphs any more: it is the line
 rhythm. Body text at a fixed leading is a row of repetitive elements at a
 constant spacing, which is one of the things Guideline 2 says a pattern may be
 formed by, so a column scan down a paragraph has a period and it is the leading.
@@ -268,9 +269,9 @@ and it is the reason no report is written for a clip it could not read.
    whose reports can be 5219 ms apart, which trades the thing this app exists for
    against a cosmetic gain, so it has not been done. If it is done, the cap has to
    be measured against the worst report gap, not chosen.
-2. **The report page's line rhythm.** Two of its nine display frames carry a
-   pattern finding at 0.259 and 0.289 against a 0.25 limit, from body text at a
-   fixed leading rather than from the glyphs. Section 4c says why it is left
+2. **The report page's line rhythm.** One of its nine display frames carries a
+   pattern finding at 0.262 against a 0.25 limit, from body text at a fixed
+   leading rather than from the glyphs. Section 4c says why it is left
    standing. What would close it for good is a primary source that says a
    paragraph is not a clearly discernible stripe pattern, and Ofcom's guidance
    note is the likeliest one. **Retried on Sep 19 and it is still shut.** A plain
@@ -334,11 +335,11 @@ Every one comes from `results/`, and CI fails if a document drifts from them.
 | Of those, no flagged segments | <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> | verify_pool.json |
 | Of those, failed | <!--n results/verify_pool.json:failed -->9<!--/n--> | verify_pool.json |
 | The four add up to the titles on disk | <!--n results/verify_pool.json:adds_up -->yes<!--/n--> | verify_pool.json |
-| Pattern rule precision on text, UI and gratings | <!--n results/pattern_text_precision.json:published.pattern_text_precision -->0.8205<!--/n--> (<!--n results/pattern_text_precision.json:published.pattern_text_precision_lo -->0.6733<!--/n--> to <!--n results/pattern_text_precision.json:published.pattern_text_precision_hi -->0.9102<!--/n-->) | pattern_text_precision.json |
-| The same, with the periodicity test off | <!--n results/pattern_text_precision.json:published.pattern_text_precision_without_periodicity -->0.381<!--/n--> | pattern_text_precision.json |
+| Pattern rule precision on text, UI and gratings | <!--n results/pattern_text_precision.json:published.pattern_text_precision -->0.9143<!--/n--> (<!--n results/pattern_text_precision.json:published.pattern_text_precision_lo -->0.7762<!--/n--> to <!--n results/pattern_text_precision.json:published.pattern_text_precision_hi -->0.9704<!--/n-->) | pattern_text_precision.json |
+| The same, with the periodicity test off | <!--n results/pattern_text_precision.json:published.pattern_text_precision_without_periodicity -->0.2462<!--/n--> | pattern_text_precision.json |
 | Pattern rule recall on the same set | <!--n results/pattern_text_precision.json:published.pattern_text_recall -->0.9412<!--/n--> (<!--n results/pattern_text_precision.json:published.pattern_text_recall_lo -->0.8091<!--/n--> to <!--n results/pattern_text_precision.json:published.pattern_text_recall_hi -->0.9837<!--/n-->) | pattern_text_precision.json |
 | The same, with the periodicity test off | <!--n results/pattern_text_precision.json:published.pattern_text_recall_without_periodicity -->0.9412<!--/n--> | pattern_text_precision.json |
-| Pictures it was measured on | <!--n results/pattern_text_precision.json:pictures -->123<!--/n-->, <!--n results/pattern_text_precision.json:ground_truth_positive -->34<!--/n--> positive by what was drawn | pattern_text_precision.json |
+| Pictures it was measured on | <!--n results/pattern_text_precision.json:pictures -->171<!--/n-->, <!--n results/pattern_text_precision.json:ground_truth_positive -->34<!--/n--> positive by what was drawn | pattern_text_precision.json |
 
 ## 7. Next
 
@@ -377,7 +378,7 @@ for a day over a zero byte test file and the clean tree hid it; it is green
 again. The pattern rule now requires a period before a run of bars counts, which
 took the report page from nine failing display frames to two and put the app's
 own screens in front of the rule for the first time. Precision on text and UI
-went from 0.381 to 0.821 with recall unchanged, measured on 123 drawn pictures
+went from 0.246 to 0.914 with recall unchanged, measured on 171 drawn pictures
 whose ground truth does not import flashmap. Both ffmpeg baselines were re-run as
 one set on 9.0.1, the container's ffmpeg is pinned, a check now refuses a results
 directory holding two tool versions, and the labelling pool is back to 40

@@ -541,12 +541,10 @@ Consequences, and they are firm:
 
 ### 8.3 Sources that could not be read, and vendor claims that are not sources
 
-- **Ofcom's guidance note on flashing images and regular patterns.** Every ofcom.org.uk URL
-  tried on 2026-09-17 answered HTTP 403 behind a Cloudflare interstitial, to a plain fetch and
-  to curl with a desktop user agent alike, and no browser was connected to that session.
-  **Retried on 2026-09-19 with a browser engine and it is still shut**: headless Chrome, the
-  same binary `eval/report_page_check.py` renders with, got the "Just a moment..." challenge
-  page instead of the document. It needs a browser a person is sitting in front of. **No
+- **Ofcom's guidance note on flashing images and regular patterns: read on 2026-09-20, and
+  it has its own section now.** See section 8.4. ofcom.org.uk itself is still shut to every
+  method tried, including a real browser engine; the document was read from an Internet
+  Archive capture instead, and section 8.4 says exactly what that costs. **No
   number is taken from Ofcom and nothing in the code cites Ofcom.** Worth retrying from a
   machine with a browser: Ofcom's wording states the contrast condition as its own clause that
   must apply in addition to the area condition, where the ITU attachment states it as a
@@ -559,6 +557,116 @@ Consequences, and they are firm:
 - **The Japanese NAB and ARIB guidance**, which BT.1702-3 alludes to as regional variation. No
   primary English copy read. Not used.
 - **ISO 9241-391**, still behind a paywall, as recorded in section 4.
+
+### 8.4 The ITC/Ofcom guidance note, read at last, and what it settles
+
+**Read on 2026-09-20. Verified as text. Not fetched from ofcom.org.uk.**
+
+Document: *ITC Guidance Note for Licensees on Flashing Images and Regular Patterns in
+Television*. First issued November 1994, first revised September 1999, revised and re-issued
+July 2001, editorial amendment June 2002. Ofcom stamps **"LEGACY DOCUMENT"** across the head
+of every page, which is the document's own statement about its standing and is repeated here
+rather than smoothed over.
+
+Where it came from, precisely, because this matters more than usual:
+
+| | |
+| --- | --- |
+| Publisher's URL | `https://www.ofcom.org.uk/__data/assets/pdf_file/0021/16248/gn_flash.pdf` |
+| That URL, on 2026-09-17 and again on 2026-09-20 | HTTP 403 to a plain fetch, to curl with a desktop user agent, and the Cloudflare "Just a moment..." challenge page to headless Chrome, which is a real browser engine |
+| Actually read from | `https://web.archive.org/web/20230127154114/https://www.ofcom.org.uk/__data/assets/pdf_file/0021/16248/gn_flash.pdf` |
+| SHA-256 of the file read | `e5b858967a2c0476a49fcf6e06e766ce1f0fe49c4f3bd1aee947a2fad7774ffa` |
+| Size and extent | 636,043 bytes, 6 pages |
+| Text layer | extracted with pypdf 6.19.0; whitespace normalised, no word, number or punctuation changed |
+
+**So this is a mirror, not the publisher.** The Internet Archive's copy is the provenance,
+and nobody here has held the file Ofcom serves. That is a weaker chain than every other
+source on this page and it is the reason this entry says so twice.
+
+Verified quote, paragraph 5:
+
+> A potentially harmful regular pattern contains clearly discernible stripes when there are
+> more than five light-dark pairs of stripes in any orientation. The stripes may be parallel
+> or radial, curved or straight, and may be formed by rows of repetitive elements such as
+> polka dots. If the stripes change direction, oscillate, flash or reverse in contrast they
+> are more likely to be harmful than if they are stationary. If the patterns obviously flow
+> smoothly across, into, or out of the screen in one direction they are exempt from
+> restriction.
+
+Verified quote, paragraph 5.1:
+
+> Potentially harmful patterns are not permitted when either of the following two conditions
+> apply:
+>
+> i. the stripes are stationary and the pattern occupies more than 40% of the displayed
+>    screen area; or
+>
+> ii. the stripes change direction, oscillate, flash, or reverse in contrast and the pattern
+>     occupies more than twenty five per cent of screen area; and in addition to either of
+>     the above two conditions applying, when
+>
+> iii. the screen luminance of the darker bars in the pattern is below 160 cd.m-2 and differs
+>      from the lighter bars by 20 cd.m-2 or more (see notes 1 and 2).
+
+Verified quote, footnote 2, which is where the peak white comes from:
+
+> For the purpose of measurements made to check compliance with these guidelines, pictures
+> are assumed to be displayed in accordance with the 'home viewing environment' described in
+> Recommendation ITU-R BT.500 in which peak white corresponds to a screen illumination of
+> 200 cd.m-2.
+
+**Four things this settles, and no number moves.**
+
+1. **Every number matches BT.1702-3 Attachment 1 exactly**: more than five light-dark pairs,
+   40% stationary, 25% changing, darker bar below 160 cd/m2, difference 20 cd/m2 or more,
+   smooth flow exempt, peak white 200 cd/m2. Nothing in `profiles.BROADCAST_SDR.pattern`
+   changes and nothing needed to. Two independent documents now carry the same numbers.
+2. **The hedge in section 8.3 is resolved.** That section guessed that Ofcom states the
+   contrast condition as its own clause applying in addition to the area condition, where the
+   ITU attachment states it as a sentence, and that the two read the same way. They do: 5.1
+   makes it condition iii, applying "in addition to either of the above two conditions". The
+   guess was right and it is no longer a guess.
+3. **It gives no periodicity measure, no spatial frequency band, no stripe width, no duration
+   for patterns, no field of view and no contrast ratio.** Checked by reading all six pages.
+   So every number in `PatternSettings` remains detector tuning and none of them acquires a
+   source. That is a negative result and it is the main thing this document was wanted for.
+4. **It does carry one caution, and it is not a threshold.** Paragraph 2 says that if the
+   risk of seizures increases with duration, "it is possible that a sequence of flashing
+   images lasting more than 5 seconds might constitute a risk even when it complies with the
+   guidelines below". That is a conditional about unknown cumulative risk, stated as a
+   possibility. It must not become a rule in flashmap, and it is recorded because a reader of
+   our output should know the guidance itself says compliance is not the same as safety.
+
+#### Appendix I, and a disagreement worth knowing about
+
+The note's Appendix I gives a voltage to luminance table for a display of gamma 2.2 with peak
+white at 200 cd/m2, as an alternative to a spot photometer, and pins the two thresholds to it:
+234 mV gives 20.1 cd/m2 and 631 mV gives 160 cd/m2.
+
+flashmap reads luminance through the BT.1886 curve at peak 200, which is what BT.1702-3 and
+section 5 of this page specify. The two do not agree, and the gap is not small:
+
+| Luma, mV | Appendix I, cd/m2 | flashmap's BT.1886 at peak 200 |
+| --- | --- | --- |
+| 100 | 3.8 | 1.87 |
+| 234 | 20.1 | 14.42 |
+| 400 | 61.0 | 52.21 |
+| 631 | 160.0 | 155.91 |
+| 700 | 200.0 | 200.00 |
+
+**Which direction each condition moves in.** For the darker-bar condition our curve is the
+stricter of the two: a bar at 631 mV is exactly 160 by the table, which is not below it, and
+155.91 by ours, which is. For the **difference** condition ours is the more permissive, and
+that is the direction that lets content through. A step that Appendix I calls exactly
+20 cd/m2 reads on our curve as 15.68 cd/m2 from a darker level of 100 mV, 17.26 from 200 mV
+and 18.82 from 300 mV; above about 400 mV ours becomes the stricter one again.
+
+**Nothing has been changed on the strength of this.** BT.1886 is what the recommendation in
+force asks for, and Appendix I describes itself as the typical relationship for a domestic
+display of the CRT era, offered for convenience when electrical measurement is easier than a
+photometer. They are two instruments, not two thresholds. But a reader comparing a flashmap
+verdict with a measurement made off Appendix I should expect them to disagree near the limit
+in the dark half of the range, and the size of it is in the table above.
 
 ---
 
@@ -647,16 +755,31 @@ code. Each one is named in the sidecar so that a consumer can see the reading th
      added, every display frame of flashmap's own report page read as a pattern over 44 to
      64 per cent of the screen.
 
-     So a run of bars contributes area only when the signal inside it has a period: its
-     unbiased autocorrelation, searched from two samples up to a third of the run, has a
-     local maximum reaching `min_autocorrelation_peak`, and the smallest such lag is taken
-     as the period. Three numbers here are detector tuning and none is a threshold:
+     So a run of bars contributes area only when it passes two tests, because the guidance
+     counts *pairs of stripes*, not signal strength. First a period: the unbiased
+     autocorrelation, searched from two samples up to a third of the run, has a local maximum
+     reaching `min_autocorrelation_peak`, and the smallest such lag is the period. Then
+     consistent spacing: that period has to agree with the spacing of the boundaries that
+     were actually counted, `2 * bar_width`, to within `spacing_tolerance`. The second test
+     is what makes the count a count of regular stripes rather than a count of edges on a
+     line that happened to correlate somewhere. Four numbers, all detector tuning, none a
+     threshold:
 
      | Setting | Default | What it is |
      | --- | --- | --- |
-     | `require_periodicity` | true | whether the test runs at all. Off is for the ablation, and the map records which way it ran |
+     | `require_periodicity` | true | whether the two tests run at all. Off is for the ablation, and the map records which way it ran |
      | `min_autocorrelation_peak` | 0.85 | how strong the repeat has to be, 0 to 1 |
      | `min_cycles_for_period` | 3 | how many whole cycles of a candidate period must fit in the run before that period is measurable |
+     | `spacing_tolerance` | 0.25 | how far the period may sit from a whole multiple of `2 * bar_width` |
+
+     **A whole multiple, not the value itself**, and the reason is worth keeping. Lags are
+     whole samples and a real bar width is not. A twelve pair grating across 54 analysis rows
+     is 2.22 samples a bar, so its period is 4.43 and no integer lag sits on it; the
+     strongest integer lag is 9, the second harmonic, which is a period the signal really
+     has. Comparing against `2 * bar_width` alone reads that as a disagreement. Written that
+     way it dropped five real gratings, every one of them horizontal, the worst a 32 pair
+     grating covering 80 per cent of the screen, and the measurement caught it rather than a
+     reviewer. `MAX_HARMONIC` is 3.
 
      `min_cycles_for_period` is deliberately well under the spec's pair count and must stay
      there. A twelve bar grating filling the picture spans five and a half periods, not six,
@@ -667,17 +790,21 @@ code. Each one is named in the sidecar so that a consumer can see the reading th
 
      `min_autocorrelation_peak` was chosen by a rule fixed before the numbers were read, the
      largest peak at which recall does not fall, because a threshold picked to make one page
-     pass is not a measurement. `results/pattern_text_precision.json` holds the sweep over
-     123 rendered pages and gratings: recall is flat at 0.941 from 0 through 0.85 and drops
-     above it, while precision goes from 0.381 with the test off to 0.821 at 0.85.
+     pass is not a measurement. It has survived two changes to the suite since, which is the
+     point of pre-registering it. `results/pattern_text_precision.json` holds the sweep over
+     171 rendered pages and gratings, including every type size and colour pair this product
+     actually ships: recall is flat at 0.941 from 0 through 0.85 and drops above it, while
+     precision goes from 0.246 with the tests off to 0.914 at 0.85. Not one of the 94 pages
+     of text is called a pattern.
 
      What it does not fix, and this is written down rather than tuned away: body text at a
      fixed leading is a row of repetitive elements at a constant spacing, which Guideline 2
-     says a pattern may be formed by, so a column scan through a paragraph has a period and
-     it is the leading. Two of the report page's nine display frames still carry a finding
-     for that reason, at 0.259 and 0.289 of the frame against a 0.25 limit. Nothing in the
-     attachment exempts it and the scope sentence's "clearly discernible" is a judgement no
-     number there supplies, so flashmap reports it.
+     and the ITC note both say a pattern may be formed by, so a column scan through a
+     paragraph can still have a period and it is the leading. One of the report page's nine
+     display frames carries a finding for that reason, at 0.262 of the frame against a 0.25
+     limit, down from nine frames at 0.44 to 0.74. Nothing in either document exempts it and
+     "clearly discernible" is a judgement neither supplies a number for, so flashmap reports
+     it. The app's own 25 screens pass.
 
    There is no persistence time, no stripe width and no spatial frequency band in this list,
    because BT.1702-3 gives none and a vendor page is not a source (section 8.3).

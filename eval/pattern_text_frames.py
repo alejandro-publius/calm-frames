@@ -41,6 +41,30 @@ CREAM = (243, 232, 211)
 SAFFRON = (230, 169, 87)
 INK = (23, 50, 60)
 BRONZE = (184, 122, 44)
+SURFACE = (23, 59, 71)
+"""#173B47, a card on the ground. flashmap/src/flashmap/report.py SURFACE."""
+TEXT_DIM = (207, 224, 220)
+"""#CFE0DC. report.py TEXT_DIM."""
+
+# The type this product actually sets, at the size a 1280 wide display frame draws it. Two
+# scales, because there are two surfaces and they are not the same.
+#
+# The app's sizes are 1080p units from app/src/calmframes/calmStyles.ts CALM_TYPE, scaled by
+# 1280/1920 the way scaleUxToDp does: SMALL 32, BODY 36, CARD_DETAIL and BUTTON 38, SECTION
+# 44, CARD_TITLE 56, SCREEN_TITLE 64. The report page's are the px in report.py's stylesheet.
+APP_TYPE_PX = {"small": 21, "body": 24, "card-detail": 25, "section": 29,
+               "card-title": 37, "screen-title": 43}
+REPORT_TYPE_PX = {"table": 13, "body": 14, "lead": 17, "h3": 21, "h1": 30}
+
+# The pairs a reader actually sees on these surfaces, with their contrast ratios as
+# report.py records them. Cream on teal is the one that started this: 160.77 against
+# 8.47 cd/m2 through the profile's own curve.
+SHIPPED_PAIRS = (
+    ("cream-on-teal", TEAL, CREAM),
+    ("cream-on-surface", SURFACE, CREAM),
+    ("dim-on-teal", TEAL, TEXT_DIM),
+    ("ink-on-saffron", SAFFRON, INK),
+)
 
 WORDS = (
     "every title is scanned frame by frame before it can play and the map it "
@@ -248,6 +272,36 @@ def frames() -> list[Frame]:
                 lambda s=size, l=leading, g=ground, i=ink: text_page(s, l, 1, g, i, "DejaVuSerif.ttf"),
                 note=f"{size} px serif body text, {name}",
             )
+    # The type this product sets, at the size it is drawn, in the colours it is drawn in.
+    # Every combination, because the question is whether any surface we ship reads as a
+    # pattern and a sample of them cannot answer that.
+    roles: dict[int, list[str]] = {}
+    for surface, sizes in (("app", APP_TYPE_PX), ("report", REPORT_TYPE_PX)):
+        for role, size in sizes.items():
+            roles.setdefault(size, []).append(f"{surface} {role}")
+    for size in sorted(roles):
+        who = " and ".join(roles[size])
+        for name, ground, ink in SHIPPED_PAIRS:
+            add(
+                f"shipped-{size}px-{name}",
+                "text",
+                lambda s=size, g=ground, i=ink: text_page(s, 1.45, 1, g, i),
+                note=f"{who} at {size} px on a 1280 wide display, {name}",
+            )
+    # The leading a paragraph is set at is the thing the line rhythm is made of, so the
+    # shipped body sizes are also drawn at the tightest and loosest leading either surface
+    # uses. Tight leading is the harder case and it is the one that was failing.
+    for surface, size in (("app", APP_TYPE_PX["body"]), ("report", REPORT_TYPE_PX["body"])):
+        for leading in (1.2, 1.35, 1.6, 1.9):
+            add(
+                f"shipped-{surface}-body-{size}px-leading-{leading}",
+                "text",
+                lambda s=size, l=leading: text_page(s, l, 1, TEAL, CREAM),
+                note=f"{surface} body at {size} px, {leading} leading, cream on teal",
+            )
+    # 26 px at 1.55 cream on teal, which is what the report page sets its body at, is
+    # already in the generic sweep above as text-26px-1.55-1col-cream-on-teal. It is not
+    # added again here: a suite that draws the same picture twice counts one case as two.
     for rows in (10, 16, 24):
         for name, ground, ink in palettes[:2]:
             add(

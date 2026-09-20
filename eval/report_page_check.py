@@ -32,9 +32,9 @@ What the run holds the page to
    rule's own bar scanner should find nothing at all inside a lane, at the size
    the page draws it. This is the condition the negative control breaks.
 
-3. **The whole page's own pattern numbers, printed every run.** Read them. Two
-   of the nine display frames do not pass this rule, and it is not the timeline:
-   see below.
+3. **The whole page's own pattern numbers, printed every run.** Read them. One
+   of the nine display frames does not pass this rule, and it is not the
+   timeline: see below.
 
 4. **The negative control has to move the measured pattern area.** The two pages
    differ only inside the lanes, so if every display frame of the striped page
@@ -55,18 +55,22 @@ widths 384, 640 and 1280 gave 37 to 77, 71 to 152 and 82 to 176 pairs, over as
 much as 93% of the frame.
 
 What changed. Guideline 2 is about *regular* patterns, and counting steps is not
-a test of regularity. flashmap now requires a period: a run of bars contributes
-area only when its own autocorrelation has a peak at one lag, which a grating
-has and a line of glyphs does not. `results/pattern_text_precision.json`
-measures what that is worth on 123 rendered pages and gratings: precision goes
-from 0.381 to 0.821 and recall does not move from 0.941.
+a test of regularity. flashmap requires two things of a run of bars before it
+contributes area: a period, found by autocorrelation, and agreement between that
+period and the spacing of the boundaries that were actually counted. The second
+half matters as much as the first, because the rule counts *pairs of stripes*,
+so the pairs have to be the thing that repeats.
+`results/pattern_text_precision.json` measures what that is worth on 171
+rendered pages and gratings, including every type size and colour pair this
+product ships: precision goes from 0.246 to 0.914 and recall does not move from
+0.941. Not one of the 94 pages of text is called a pattern.
 
-What is left, and it is a different thing. Two of the nine frames still hold a
-finding, at 0.259 and 0.289 of the frame against the 0.25 limit. It is not the
-glyphs any more, it is the **line rhythm**: body text at a fixed leading is a
-row of repetitive elements at a constant spacing, which is what BT.1702-3
-Guideline 2 says a pattern may be formed by. A column scan through a paragraph
-has a period, and it is the leading.
+What is left, and it is a different thing. One of the nine frames still holds a
+finding, at 0.262 of the frame against the 0.25 limit. It is not the glyphs any
+more, it is the **line rhythm**: body text at a fixed leading is a row of
+repetitive elements at a constant spacing, which is what both BT.1702-3
+Guideline 2 and the ITC guidance note say a pattern may be formed by. A column
+scan through a paragraph has a period, and it is the leading.
 
 That is left standing rather than tuned away. The rule as written does not
 exempt it, the scope sentence's "clearly discernible" is a judgement no number

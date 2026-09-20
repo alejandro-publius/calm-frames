@@ -612,3 +612,79 @@ def test_the_peak_does_not_fall_away_as_the_period_grows(rule):
     assert max(peaks.values()) - min(peaks.values()) < 0.1, (
         f"the peak must not depend on how many cycles happen to fit: {peaks}"
     )
+
+
+def test_the_counted_bars_have_to_be_the_thing_that_repeats(rule):
+    """A strong peak is not the test. The rule counts pairs, so the pairs have to be regular.
+
+    This line is a motif of twelve irregular bars repeated eight times: a real coarse repeat,
+    which the autocorrelation finds at lag 24 with a clean peak, over 96 counted boundaries
+    at no regular spacing at all. Without the spacing test the rule would count 48 pairs of
+    "stripes" that are nothing of the kind.
+
+    Seen to fail by dropping `& spacing_agrees` from periodic_lines, which is what the first
+    version of the periodicity test did: the second assertion goes red.
+    """
+    widths = (1, 1, 1, 1, 4, 4, 3, 1, 1, 2, 2, 3)
+    motif: list[float] = []
+    light = True
+    for width in widths:
+        motif.extend([180.0 if light else 5.0] * width)
+        light = not light
+    line = _line((motif * 20)[:192])
+    bars, first, last = scan_bars(line, BROADCAST_SDR.general.min_delta,
+                                  BROADCAST_SDR.general.dark_image_below)
+    low, high = _spans(bars, first, last, 192)
+    bar_width = (last - first).astype(float) / np.maximum(1, bars - 2)
+    assert int(bars[0]) >= 2 * (rule.more_than_pairs + 1), (
+        "the point of this case is that the bar count gate lets it through"
+    )
+
+    on_peak_alone, period, peak = periodic_lines(
+        line, bars >= 12, low, high, min_cycles=3, min_peak=0.85
+    )
+    assert bool(on_peak_alone[0]) and peak[0] >= 0.85, (
+        "the coarse repeat is real, so the peak test has to accept it; if this fails the "
+        "case has stopped being the one the test below is about"
+    )
+
+    with_spacing, _, _ = periodic_lines(
+        line, bars >= 12, low, high, min_cycles=3, min_peak=0.85, bar_width=bar_width
+    )
+    assert not bool(with_spacing[0]), (
+        f"period {period[0]} against a mean bar spacing of {2 * bar_width[0]:.2f} is "
+        f"{period[0] / (2 * bar_width[0]):.1f} times it, which is not the same spacing"
+    )
+
+
+def test_a_period_may_be_a_whole_multiple_of_the_bar_spacing(rule):
+    """The harmonic rule, and the false negative it exists to prevent.
+
+    Lags are whole samples and a real bar width is not. Twenty four bars across 54 samples is
+    2.23 samples a bar, so the period is 4.45 and no integer lag sits on it; the strongest
+    integer lag is 9, the second harmonic, which is a period this signal really does have.
+    Comparing the lag against 2 * bar_width alone calls that a disagreement and throws the
+    grating away. Written that way it lost five real gratings out of the precision suite, all
+    of them horizontal, the worst a thirty two pair grating over 80 per cent of the screen.
+
+    Seen to fail by setting the harmonic ceiling to 1: this goes red, which is the detector
+    refusing a grating.
+    """
+    line = _bar_line(54, 24)
+    bars, first, last = scan_bars(line, BROADCAST_SDR.general.min_delta,
+                                  BROADCAST_SDR.general.dark_image_below)
+    low, high = _spans(bars, first, last, 54)
+    bar_width = (last - first).astype(float) / np.maximum(1, bars - 2)
+    periodic, period, _ = periodic_lines(
+        line, bars >= 12, low, high, min_cycles=3, min_peak=0.85, bar_width=bar_width
+    )
+    assert bool(periodic[0]), "a real grating, refused because its period is not an integer"
+    assert period[0] == pytest.approx(2 * 2.0 * bar_width[0], abs=1.0), (
+        "it should have landed on the second harmonic"
+    )
+
+
+def test_the_shipped_tuning_carries_the_spacing_numbers(rule):
+    tuning = rule.settings.as_dict()
+    assert 0.0 < tuning["spacing_tolerance"] < 1.0
+    assert tuning["min_cycles_for_period"] >= 2
