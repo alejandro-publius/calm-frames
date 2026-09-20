@@ -51,7 +51,7 @@ include eval/baselines/naive_luma_diff/naive_luma.mk
         release release-notes stick-day stick-day-vvd hooks hooks-selftest \
         image image-smoke image-context image-push \
         audit audit-check audit-update sbom sbom-check \
-        scan scan-tree pins clean
+        scan scan-tree pins baseline-versions clean
 
 help: ## show this list
 	@echo "Calm Frames targets:"
@@ -224,6 +224,9 @@ scan-tree: ## gitleaks over the whole working directory, including ignored files
 
 pins: ## report any dependency version that is not pinned
 	@$(PY) $(REPO)/scripts/check_pins.py
+
+baseline-versions: ## fail if a baseline results directory holds two tool versions
+	@$(PY) $(REPO)/eval/baseline_versions.py --list
 
 # ------------------------------------------------------- the camera meter
 #

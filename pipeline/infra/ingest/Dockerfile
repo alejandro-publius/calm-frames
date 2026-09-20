@@ -32,9 +32,24 @@ LABEL org.opencontainers.image.title="calm-frames-ingest" \
 # ffmpeg carries the decoders, the x264 encoder and ffprobe. No recommends, so
 # this does not drag in a desktop stack. The apt lists go afterwards: they are
 # the largest thing in the layer and nothing at run time reads them.
+#
+# Pinned by exact apt version, not by the bare package name. The bare name was
+# what this line used to say, and it meant the decoder inside the image could
+# change under a rebuild without anything in the repository changing. It is not
+# the same ffmpeg as the one on the machine this was written on, which is 9.0.1
+# from Homebrew, and docs/ENVIRONMENT.md says so under "The three ffmpegs".
+#
+# When Debian ships a security update it bumps the deb12uN suffix and drops the
+# superseded version from the mirror, so one day this build will stop with
+# "Version '...' for 'ffmpeg' was not found". That is the pin working. Read the
+# current version off https://packages.debian.org/bookworm/ffmpeg, change the
+# ARG, and record the change in docs/ENVIRONMENT.md.
+ARG FFMPEG_APT_VERSION=7:5.1.9-0+deb12u1
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y --no-install-recommends "ffmpeg=${FFMPEG_APT_VERSION}" \
+    && rm -rf /var/lib/apt/lists/* \
+    && ffmpeg -version | head -1 \
+    && ffmpeg -hide_banner -filters | grep -q photosensitivity
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \

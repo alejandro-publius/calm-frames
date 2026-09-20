@@ -1,6 +1,7 @@
 # Environment
 
-Recorded Thu Sep 17, 2026. Update this file whenever a tool is added or a version changes.
+Recorded Thu Sep 17, 2026. Updated Sat Sep 19, 2026 for ffmpeg. Update this file
+whenever a tool is added or a version changes.
 
 ## Machine
 
@@ -33,7 +34,7 @@ The system `python3` on PATH is 3.9.13 and too old. Run Python through `.venv/bi
 |---|---|---|
 | git | 2.39.5 (Apple Git-154) | |
 | gh | 2.92.0 | Signed in as alejandro-publius |
-| ffmpeg and ffprobe | 8.1.2 | Encoders include libx264, libx264rgb, libvpx, libvpx-vp9 |
+| ffmpeg and ffprobe | 9.0.1 (Homebrew `9.0.1_1`, arm64) | Was 8.1.2 until Sep 18, 2026. Encoders include libx264, libx264rgb, libvpx, libvpx-vp9. See "The three ffmpegs" below before quoting a number that came out of one. |
 | Docker | client 29.7.2, engine 29.5.2 | Engine runs in colima 0.10.3 (aarch64 VM, 2 CPUs, 4 GiB). The VM is shared with other projects: do not restart colima or remove containers without checking first. |
 | jq | 1.6 (Apple build) | |
 | uv | 0.11.28 | Covers what pipx would do |
@@ -56,3 +57,50 @@ Not installed yet: AWS CDK (will be pinned in `pipeline/infra/package.json`), cm
   ```
 - It also symlinks `kepler` and `vvman` to `vega` for older scripts (the sample's npm scripts still call `kepler`).
 - Telemetry is on by default: https://developer.amazon.com/docs/vega/latest/telemetry.html explains how to opt out.
+
+## The three ffmpegs
+
+There is no single ffmpeg in this project, and that is worth saying plainly
+before anyone reads two numbers as if one tool produced both.
+
+| Where | Version | What runs on it |
+|---|---|---|
+| This Mac, on PATH | 9.0.1 (Homebrew) | Every baseline in `results/baselines/`, the labelling plots, the marker clips, the conformance generate-analyse-delete loop, both selftests |
+| The ingest container | 5.1.9 (Debian bookworm, apt `7:5.1.9-0+deb12u1`) | The pipeline when it runs on Fargate. Pinned in `pipeline/infra/ingest/Dockerfile` |
+| CI runners | whatever `apt-get install ffmpeg` gives ubuntu-latest that day | The CI jobs that need a decoder. Nothing published comes off a CI ffmpeg |
+
+They are three different decoders and three different filter graphs. A number
+measured on one is not a number measured on another, which is why every baseline
+report carries its own `tool_version` string and why `eval/baseline_versions.py`
+refuses a results directory that holds more than one.
+
+### The 8.1.2 to 9.0.1 upgrade, and why there is no way back
+
+Building EA IRIS on Sep 18, 2026 pulled in Homebrew's `opencv@4`, which upgraded
+ffmpeg from 8.1.2 to 9.0.1 and relinked it. Nobody asked for that upgrade.
+
+Rolling back is not available. The 8.1.2 binary is still on disk and no longer
+starts, because x265 moved under it.
+
+What it broke, and what fixed it: **ffmpeg 9 removed `-vsync`**. It exits with
+"Unrecognized option 'vsync'" before it opens the file, so every labelling plot
+came back as "no frames decoded". `eval/plots.py` and `eval/labeling/plots.py`
+now pass `-fps_mode passthrough`, which means the same thing and has been in
+ffmpeg since 5.0, so it works on all three of the above.
+
+What it cost: the ffmpeg baseline rows in `results/baselines/` were measured on
+8.1.2. They are being re-run on 9.0.1 as one set rather than piecemeal, because
+a table with some rows from each version is a table nobody can read.
+
+### Pinning, and what a pin here can and cannot do
+
+The container is pinned exactly, by apt version, so a rebuild cannot quietly
+pick up a different decoder. Debian bumps the `deb12uN` suffix for security
+updates and drops the superseded version from the mirror, so that pin will one
+day fail the build rather than drift. That is the intended failure: read the new
+version, change the one `ARG` line, and note the change here.
+
+The Mac cannot be pinned the same way. Homebrew has no supported downgrade path
+for a formula another formula depends on, and this is a shared machine. What
+stands in for a pin is the record: every baseline report stamps the build string
+it ran under, and the one-version check fails if a directory ever holds two.

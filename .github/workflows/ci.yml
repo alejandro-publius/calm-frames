@@ -195,3 +195,5 @@ jobs:
         run: python3 eval/verify_gate1_archive.py
       - name: Recount the integration diff the README quotes
         run: python3 eval/integration_diff_stats.py --check
+      - name: One baseline directory, one tool version
+        run: python3 eval/baseline_versions.py

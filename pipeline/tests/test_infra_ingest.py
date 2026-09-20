@@ -17,6 +17,7 @@ mutations are listed in docs/SECURITY.md.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -406,6 +407,33 @@ class TestTheImageItself:
         assert from_lines, "there is no FROM line"
         for line in from_lines:
             assert "@sha256:" in line, "the FROM line must pin a digest"
+
+    def test_ffmpeg_is_pinned_to_one_apt_version(self, dockerfile):
+        """The guard: a bare package name lets the decoder change under a rebuild.
+
+        This image's ffmpeg is not the one on the machine that wrote it, and
+        neither is the one on a CI runner. docs/ENVIRONMENT.md lists all three.
+        The pin is what makes the container's decoder a fact of the commit
+        rather than a fact of the day the build ran.
+
+        Seen to fail by putting the bare name back. The failure reads:
+          AssertionError: apt installs ffmpeg without an exact version
+        """
+        installs = [
+            line for line in dockerfile.splitlines() if "apt-get install" in line and "ffmpeg" in line
+        ]
+        assert installs, "the image never installs ffmpeg"
+        for line in installs:
+            assert re.search(r"ffmpeg=\$\{?FFMPEG_APT_VERSION\}?|ffmpeg=[0-9]", line), (
+                "apt installs ffmpeg without an exact version"
+            )
+
+        arg_lines = [line for line in dockerfile.splitlines() if line.startswith("ARG FFMPEG_APT_VERSION=")]
+        assert len(arg_lines) == 1, "there is no single ARG holding the pinned ffmpeg version"
+        pinned = arg_lines[0].split("=", 1)[1].strip()
+        assert re.fullmatch(r"\d+:\d+\.\d+\.\d+-[0-9a-z+.~]+", pinned), (
+            f"the pinned ffmpeg version does not look like a Debian version: {pinned!r}"
+        )
 
     def test_every_python_package_is_installed_from_a_hash(self, dockerfile):
         assert "--require-hashes" in dockerfile
