@@ -47,23 +47,22 @@ import sys
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
-
-import numpy as np
+from typing import TYPE_CHECKING
 
 REPO = Path(__file__).resolve().parent.parent
 for extra in (REPO / "eval", REPO / "flashmap" / "src"):
     if str(extra) not in sys.path:
         sys.path.insert(0, str(extra))
 
-from conformance.pattern_spec import load_pattern_spec  # noqa: E402
-from metrics import Z_95, f1, wilson  # noqa: E402
-from pattern_text_frames import HEIGHT, WIDTH, Frame, frames  # noqa: E402
+# Only the standard library and eval/metrics.py, which is also pure Python, at import time.
+# `--check` re-scores a committed report from its own rows and has to run in the numbers job,
+# which installs nothing: no numpy, no Pillow, no flashmap. Everything the measuring run needs
+# is imported inside `measure_everything`, so a missing drawing library cannot stop the check
+# that guards the published numbers.
+from metrics import f1, wilson  # noqa: E402
 
-from flashmap import color as color_math  # noqa: E402
-from flashmap.decode import iter_frames, probe  # noqa: E402
-from flashmap.pattern import stripe_mask  # noqa: E402
-from flashmap.picture import detect_picture  # noqa: E402
-from flashmap.profiles import get_profile  # noqa: E402
+if TYPE_CHECKING:  # pragma: no cover - typing only
+    import numpy as np
 
 OUT = REPO / "results" / "pattern_text_precision.json"
 PROFILE = "broadcast"
@@ -83,10 +82,31 @@ class Measured:
     note: str
     drawn_area: float
     drawn_pairs: int
-    metric: np.ndarray
+    metric: "np.ndarray"
 
 
-def metric_frame(frame: Frame, work: Path) -> np.ndarray:
+def _heavy():
+    """Import everything the measuring run needs, and nothing the check needs.
+
+    Kept in one place so the two paths cannot drift: if a drawing or decoding import
+    creeps back to the top of the file, `--check` stops running in the numbers job and
+    the guard on the published numbers goes with it.
+    """
+    global np, color_math, iter_frames, probe, stripe_mask, detect_picture, get_profile
+    global load_pattern_spec, frames, Frame, HEIGHT, WIDTH
+    import numpy as np  # noqa: PLW0603
+
+    from conformance.pattern_spec import load_pattern_spec
+    from pattern_text_frames import HEIGHT, WIDTH, Frame, frames
+
+    from flashmap import color as color_math
+    from flashmap.decode import iter_frames, probe
+    from flashmap.pattern import stripe_mask
+    from flashmap.picture import detect_picture
+    from flashmap.profiles import get_profile
+
+
+def metric_frame(frame: "Frame", work: Path) -> "np.ndarray":
     """Draw it, encode it losslessly, and decode it the way the analyzer does.
 
     Through a real encode and a real decode rather than scaling the array here, because the
@@ -209,6 +229,7 @@ def main() -> int:
         print("ffmpeg is not on PATH", file=sys.stderr)
         return 2
 
+    _heavy()
     spec = load_pattern_spec()
     profile = get_profile(PROFILE)
     wanted = [f for f in frames() if not arguments.only or f.kind == arguments.only]
