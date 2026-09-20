@@ -53,6 +53,7 @@ __all__ = [
     "PatternSettings",
     "PatternObservation",
     "PatternTracker",
+    "periodic_lines",
     "scan_bars",
     "stripe_mask",
 ]
@@ -103,6 +104,37 @@ class PatternSettings:
     min_profile_samples: int = 8
     """A stripe profile shorter than this says nothing about motion."""
 
+    require_periodicity: bool = True
+    """Whether a run of bars has to repeat before it counts as a pattern at all.
+
+    This is what separates a grating from a paragraph. `scan_bars` counts alternating steps
+    that reach the Guideline 1 flash difference and text is full of those, so without this the
+    rule reads any readable page as a pattern over most of the screen. With it, only a run that
+    holds a period contributes area. Turning it off is for the ablation that measures what it
+    bought, not for analysis: the map records which way it ran."""
+
+    min_autocorrelation_peak: float = 0.85
+    """How strong the repeat has to be, as the unbiased autocorrelation at the period, from 0
+    to 1. Detector tuning. BT.1702-3 gives no regularity measure, so nothing here is quoted.
+
+    Chosen by a rule fixed before the numbers were read, because a threshold picked to make
+    a particular page pass is not a measurement: **the largest peak at which recall does not
+    fall**. On the 123 picture set in `results/pattern_text_precision.json` recall is flat at
+    0.941 from 0 through 0.85 and drops at 0.90, so 0.85 is where the rule lands. Precision
+    over the same sweep goes from 0.381 with the test off to 0.821 at 0.85. Raising it to
+    0.95 would buy 0.14 of precision and cost 0.21 of recall, and recall is the side a child
+    is on."""
+
+    min_cycles_for_period: int = 3
+    """How many whole cycles of a candidate period have to fit inside the run of bars before
+    that period counts as measured. Detector tuning, and deliberately well under the spec's
+    pair count: the pair count is already a gate of its own, and asking the periodicity search
+    to re-apply it drops the very case the rule is sharpest about. A twelve bar grating filling
+    the picture spans five and a half periods, not six, because the run is measured from the
+    first counted boundary to the last plus half a bar at each end, so a search that insisted
+    on six whole cycles could never find that pattern's period. Three is the floor at which an
+    autocorrelation peak says anything about regularity at all."""
+
     contrast_reversal_correlation: float = -0.30
     """Zero lag correlation at or below this means light bars became dark bars."""
 
@@ -130,6 +162,9 @@ class PatternSettings:
             "min_match_peak": self.min_match_peak,
             "ambiguity_ratio": self.ambiguity_ratio,
             "min_profile_samples": self.min_profile_samples,
+            "require_periodicity": self.require_periodicity,
+            "min_autocorrelation_peak": self.min_autocorrelation_peak,
+            "min_cycles_for_period": self.min_cycles_for_period,
             "contrast_reversal_correlation": self.contrast_reversal_correlation,
             "flow_direction_agreement": self.flow_direction_agreement,
             "flow_speed_spread": self.flow_speed_spread,
@@ -287,26 +322,133 @@ def _diagonal_profile(array: NDArray[np.float32], flip: bool) -> NDArray[np.floa
     return (total / np.maximum(1, count)).astype(np.float32)
 
 
-def _span_mask(
+def _spans(
     bars: NDArray[np.int32],
     first: NDArray[np.int32],
     last: NDArray[np.int32],
     length: int,
-    min_bars: int,
-) -> NDArray[np.bool_]:
-    """The stretch of each qualifying scanline the stripes occupy.
+) -> tuple[NDArray[np.float64], NDArray[np.float64]]:
+    """Where each scanline's run of bars starts and ends, in samples.
 
     A boundary sits between two bars, so the outermost bars reach about half a bar past the
     outermost boundaries. Taking the boundaries alone would report a pattern smaller than the
     one on the screen, and under reporting an area is the direction that lets a hazard through.
     Half a bar at each end is the symmetric choice and it is detector tuning, not a threshold.
     """
-    qualifies = bars >= min_bars
     width = (last - first).astype(np.float64) / np.maximum(1, bars - 2)
     low = np.clip(first - width / 2.0, 0, length - 1)
     high = np.clip(last + width / 2.0, 0, length - 1)
+    return low, high
+
+
+def _span_mask(
+    qualifies: NDArray[np.bool_],
+    low: NDArray[np.float64],
+    high: NDArray[np.float64],
+    length: int,
+) -> NDArray[np.bool_]:
+    """The stretch of each qualifying scanline the stripes occupy."""
     index = np.arange(length)[None, :]
     return qualifies[:, None] & (index >= low[:, None]) & (index <= high[:, None])
+
+
+def periodic_lines(
+    lines: NDArray[np.floating],
+    qualifies: NDArray[np.bool_],
+    low: NDArray[np.float64],
+    high: NDArray[np.float64],
+    *,
+    min_cycles: int,
+    min_peak: float,
+) -> tuple[NDArray[np.bool_], NDArray[np.float32], NDArray[np.float32]]:
+    """Which scanlines carry a repeating signal, and what one cycle of it measures.
+
+    This is the "regular" in regular pattern, and it is the part `scan_bars` on its own cannot
+    supply. `scan_bars` counts alternating steps that reach the Guideline 1 flash difference.
+    A line of text is full of those: cream on teal is 160.77 against 8.47 cd/m2, so every glyph
+    edge is a step, and a scan line crossed through a paragraph counts dozens of them. What it
+    is not is regular. Letters are different widths, words are separated by different gaps, and
+    the sequence of steps has no period. A grating's does.
+
+    So each qualifying line is tested for a period before it is allowed to contribute any area:
+
+      * the signal inside the line's run of bars has its own mean removed and everything
+        outside the run set to zero, so only the run is measured;
+      * its autocorrelation is taken with an FFT and corrected for the shrinking overlap, which
+        is the usual unbiased estimate. Without that correction a long period is penalised
+        purely for being long, and the penalty grows exactly where the rule cares most;
+      * lags are searched from 2 samples up to run / `min_cycles`, so a period only counts if
+        the run holds at least `min_cycles` whole cycles of it. `min_cycles` is the spec's own
+        pair count, not a second number: more than five pairs means six cycles;
+      * the smallest lag that is a local maximum and reaches `min_peak` is the period. Smallest
+        rather than largest, because a run that also correlates at twice the period is a run
+        with more cycles in it, and taking the fundamental is the reading that keeps a pattern
+        inside the rule rather than letting it slip under the cycle count.
+
+    `min_peak` is detector tuning. BT.1702-3 gives no spatial frequency band, no stripe width
+    and no regularity measure, so nothing here is quoted from a spec and
+    flashmap/docs/SPEC_SOURCES.md section 8 says as much.
+
+    Returns (periodic, period_samples, peak). `peak` is the normalised unbiased
+    autocorrelation at the period, which is the evidence the decision rests on and is worth
+    having out here rather than only inside the comparison. A line that did not qualify is
+    never periodic and its period and peak are 0.
+    """
+    array = np.asarray(lines, dtype=np.float32)
+    count, length = array.shape
+    periodic = np.zeros(count, dtype=bool)
+    period = np.zeros(count, dtype=np.float32)
+    peak = np.zeros(count, dtype=np.float32)
+    if not qualifies.any() or length < 4 or min_cycles < 1:
+        return periodic, period, peak
+
+    index = np.arange(length)[None, :]
+    inside = qualifies[:, None] & (index >= low[:, None]) & (index <= high[:, None])
+    run = inside.sum(axis=1)
+    # A run has to hold min_cycles whole cycles of a period of at least 2 samples, which is the
+    # shortest thing that can alternate at all.
+    usable = qualifies & (run >= 2 * min_cycles)
+    if not usable.any():
+        return periodic, period, peak
+
+    centred = array - (
+        np.where(run[:, None] > 0, (array * inside).sum(axis=1, keepdims=True), 0.0)
+        / np.maximum(1, run)[:, None]
+    )
+    centred = np.where(inside, centred, 0.0).astype(np.float64)
+
+    nfft = int(1 << int(np.ceil(np.log2(max(4, 2 * length)))))
+    spectrum = np.fft.rfft(centred, n=nfft, axis=1)
+    correlation = np.fft.irfft(spectrum * np.conjugate(spectrum), n=nfft, axis=1)[:, :length]
+
+    energy = correlation[:, 0]
+    alive = usable & (energy > 0)
+    if not alive.any():
+        return periodic, period, peak
+
+    # The unbiased estimate: at lag k only run - k samples of the run overlap themselves.
+    overlap = np.maximum(1.0, run[:, None].astype(np.float64) - np.arange(length)[None, :])
+    scaled = correlation * (run[:, None].astype(np.float64) / overlap)
+    normalised = np.where(energy[:, None] > 0, scaled / np.maximum(1e-12, energy[:, None]), 0.0)
+
+    longest = np.floor_divide(run, min_cycles)
+    lag = np.arange(length)[None, :]
+    searchable = (lag >= 2) & (lag <= longest[:, None]) & alive[:, None]
+    # A local maximum, so the rising side of one peak is not mistaken for a period of its own.
+    rises = np.zeros_like(searchable)
+    rises[:, 1:-1] = (normalised[:, 1:-1] >= normalised[:, :-2]) & (
+        normalised[:, 1:-1] >= normalised[:, 2:]
+    )
+    hit = searchable & rises & (normalised >= min_peak)
+
+    found = hit.any(axis=1)
+    smallest = np.argmax(hit, axis=1)
+    periodic = found
+    period = np.where(found, smallest, 0).astype(np.float32)
+    peak = np.where(
+        found, np.take_along_axis(normalised, smallest[:, None], axis=1)[:, 0], 0.0
+    ).astype(np.float32)
+    return periodic, period, peak
 
 
 @dataclass(frozen=True)
@@ -334,6 +476,11 @@ class PatternScan:
     orientation: str | None
     profile: NDArray[np.float32] | None
     bar_width: float
+    counted_area_fraction: float = 0.0
+    """What the area would have been before the periodicity test, kept so the cost of that
+    test is visible in the map rather than being something a reader has to take on trust."""
+    periodic_lines: int = 0
+    """How many scanlines carried a repeating signal, across all four families."""
 
 
 def _profile_bar_width(
@@ -360,6 +507,9 @@ def stripe_mask(
     min_bars: int,
     orientations: tuple[str, ...],
     min_profile_samples: int = 8,
+    require_periodicity: bool = True,
+    min_autocorrelation_peak: float = 0.85,
+    min_cycles_for_period: int = 3,
 ) -> PatternScan:
     """The pixels inside a qualifying run of stripes, and what was found there.
 
@@ -402,32 +552,64 @@ def stripe_mask(
     )
     bars, first, last = scan_bars(stacked, min_delta, dark_below)
 
+    # The spec's count is `min_bars` and it is applied on its own, a few lines down. The
+    # number here is how many cycles a period needs before it is measurable, which is a
+    # different question and a smaller number. PatternSettings.min_cycles_for_period says why.
+    min_cycles = max(1, min_cycles_for_period)
+
     mask = np.zeros((height, width), dtype=bool)
+    counted = np.zeros((height, width), dtype=bool)
     dominant: _Scan | None = None
+    periodic_total = 0
     offset = 0
     for orientation, lines, rows, columns, valid in families:
         count = lines.shape[0]
         piece = slice(offset, offset + count)
         offset += count
         line_bars = bars[piece]
-        span = _span_mask(line_bars, first[piece], last[piece], lines.shape[1], min_bars)
-        qualifies = line_bars >= min_bars
-        best = int(line_bars.max()) if line_bars.size else 0
+        line_first = first[piece]
+        line_last = last[piece]
+        length = lines.shape[1]
+        counts_bars = line_bars >= min_bars
+        low, high = _spans(line_bars, line_first, line_last, length)
+
+        if require_periodicity:
+            is_periodic, _period, _peak = periodic_lines(
+                lines,
+                counts_bars,
+                low,
+                high,
+                min_cycles=min_cycles,
+                min_peak=min_autocorrelation_peak,
+            )
+            qualifies = counts_bars & is_periodic
+        else:
+            qualifies = counts_bars
+        periodic_total += int(qualifies.sum())
+
+        span = _span_mask(qualifies, low, high, length)
+        counted_span = _span_mask(counts_bars, low, high, length)
+        best = int(line_bars[qualifies].max()) if qualifies.any() else 0
 
         profile: NDArray[np.float32] | None = None
         if orientation == "rows":
             mask |= span
+            counted |= counted_span
             if qualifies.any():
                 profile = lines[qualifies].mean(axis=0).astype(np.float32)
         elif orientation == "columns":
             mask |= span.T
+            counted |= counted_span.T
             if qualifies.any():
                 profile = lines[qualifies].mean(axis=0).astype(np.float32)
         else:
             hits = span & valid
             if hits.any():
                 mask[rows[hits], columns[hits]] = True
-            if qualifies.any() and lines.shape[1] >= min_profile_samples:
+            counted_hits = counted_span & valid
+            if counted_hits.any():
+                counted[rows[counted_hits], columns[counted_hits]] = True
+            if qualifies.any() and length >= min_profile_samples:
                 profile = _diagonal_profile(array, flip=orientation == "antidiagonal")
 
         scan = _Scan(
@@ -449,6 +631,8 @@ def stripe_mask(
         orientation=dominant.orientation if qualifying else None,
         profile=dominant.profile if qualifying else None,
         bar_width=dominant.bar_width if qualifying else 0.0,
+        counted_area_fraction=float(counted.mean()) if counted.size else 0.0,
+        periodic_lines=periodic_total,
     )
 
 
@@ -571,6 +755,9 @@ class PatternTracker:
             min_bars=self.min_bars,
             orientations=self.settings.orientations,
             min_profile_samples=self.settings.min_profile_samples,
+            require_periodicity=self.settings.require_periodicity,
+            min_autocorrelation_peak=self.settings.min_autocorrelation_peak,
+            min_cycles_for_period=self.settings.min_cycles_for_period,
         )
         region_mean = (
             float(frame[scan.mask].mean()) if scan.mask.any() else float(frame.mean())

@@ -635,6 +635,47 @@ code. Each one is named in the sidecar so that a consumer can see the reading th
      map as its own interval in `pattern_exemptions`, so a reviewer sees what was let through
      instead of finding a silence. docs/DECISIONS.md carries the reasoning.
 
+   - **what makes a run of bars "regular".** Guideline 2 is about regular patterns and the
+     attachment counts pairs of stripes, but neither says how a detector decides that a run
+     of light and dark steps repeats rather than merely alternates. Counting steps alone is
+     not enough, and the case that proves it is text: cream on teal is 160.77 against
+     8.47 cd/m2, so every glyph edge clears the Guideline 1 difference and a scan line
+     through a paragraph counts dozens of bars at no spacing in particular. Before this was
+     added, every display frame of flashmap's own report page read as a pattern over 44 to
+     64 per cent of the screen.
+
+     So a run of bars contributes area only when the signal inside it has a period: its
+     unbiased autocorrelation, searched from two samples up to a third of the run, has a
+     local maximum reaching `min_autocorrelation_peak`, and the smallest such lag is taken
+     as the period. Three numbers here are detector tuning and none is a threshold:
+
+     | Setting | Default | What it is |
+     | --- | --- | --- |
+     | `require_periodicity` | true | whether the test runs at all. Off is for the ablation, and the map records which way it ran |
+     | `min_autocorrelation_peak` | 0.85 | how strong the repeat has to be, 0 to 1 |
+     | `min_cycles_for_period` | 3 | how many whole cycles of a candidate period must fit in the run before that period is measurable |
+
+     `min_cycles_for_period` is deliberately well under the spec's pair count and must stay
+     there. A twelve bar grating filling the picture spans five and a half periods, not six,
+     because the run is measured from the first counted boundary to the last plus half a bar
+     at each end, so a search insisting on six whole cycles could not find the period of the
+     very first count the attachment can fail. The pair count is a gate of its own and is
+     applied on its own.
+
+     `min_autocorrelation_peak` was chosen by a rule fixed before the numbers were read, the
+     largest peak at which recall does not fall, because a threshold picked to make one page
+     pass is not a measurement. `results/pattern_text_precision.json` holds the sweep over
+     123 rendered pages and gratings: recall is flat at 0.941 from 0 through 0.85 and drops
+     above it, while precision goes from 0.381 with the test off to 0.821 at 0.85.
+
+     What it does not fix, and this is written down rather than tuned away: body text at a
+     fixed leading is a row of repetitive elements at a constant spacing, which Guideline 2
+     says a pattern may be formed by, so a column scan through a paragraph has a period and
+     it is the leading. Two of the report page's nine display frames still carry a finding
+     for that reason, at 0.259 and 0.289 of the frame against a 0.25 limit. Nothing in the
+     attachment exempts it and the scope sentence's "clearly discernible" is a judgement no
+     number there supplies, so flashmap reports it.
+
    There is no persistence time, no stripe width and no spatial frequency band in this list,
    because BT.1702-3 gives none and a vendor page is not a source (section 8.3).
 

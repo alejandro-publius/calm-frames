@@ -197,3 +197,5 @@ jobs:
         run: python3 eval/integration_diff_stats.py --check
       - name: One baseline directory, one tool version
         run: python3 eval/baseline_versions.py
+      - name: Re-score the pattern rule's text and UI report from its own rows
+        run: python3 eval/pattern_text_precision.py --check

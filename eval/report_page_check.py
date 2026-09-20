@@ -32,36 +32,54 @@ What the run holds the page to
    rule's own bar scanner should find nothing at all inside a lane, at the size
    the page draws it. This is the condition the negative control breaks.
 
-3. **The whole page's own pattern numbers, printed every run.** Read them. The
-   report page does not pass this rule, and that is not the timeline: see below.
+3. **The whole page's own pattern numbers, printed every run.** Read them. Two
+   of the nine display frames do not pass this rule, and it is not the timeline:
+   see below.
+
+4. **The negative control has to move the measured pattern area.** The two pages
+   differ only inside the lanes, so if every display frame of the striped page
+   measures the same as the report page's, the whole page run is blind to the
+   timeline. The area is read off a run with the area limits set to zero, so it
+   is the area the rule marked rather than only the area it failed on.
 
 What this check found, and did not paper over
 ---------------------------------------------
 
-The report page fails the regular pattern rule on its text. Cream on teal is
-160.77 cd/m2 against 8.47 cd/m2, so every glyph edge is a Guideline 1 step, and
-a line of text crossed by a scan line is a row of them. On the page this check
-builds, all nine display frames hold a pattern finding, at 16 to 25 pairs over
-44% to 64% of the frame against a 25% area limit. Analysing more finely does not
-rescue it, it sharpens it: the same nine frames at analysis widths 384, 640 and
-1280 give 37 to 77, 71 to 152 and 82 to 176 pairs, over as much as 93% of the
-frame.
+Cream on teal is 160.77 cd/m2 against 8.47 cd/m2, so every glyph edge is a
+Guideline 1 step and a line of text crossed by a scan line is a row of them.
+When this check was first written the rule counted those steps and stopped
+there, and all nine display frames of the page held a pattern finding, at 16 to
+25 pairs over 44% to 64% of the frame against a 25% area limit. Analysing more
+finely sharpened it rather than rescuing it: the same nine frames at analysis
+widths 384, 640 and 1280 gave 37 to 77, 71 to 152 and 82 to 176 pairs, over as
+much as 93% of the frame.
 
-That is a property of the detector applied to text, not a hazard the report can
-design away. Readable text needs 4.5:1, and at an SDR peak of 200 cd/m2 there is
-no pair of colours with that ratio whose luminance difference is under
-20 cd/m2 or whose darker state is above 160 cd/m2, so any page a person can read
-holds Guideline 1 steps at every glyph. BT.1702-3's own scope sentence asks for
-the guidelines to be applied "when flashing or regular patterns are clearly
-discernible", and a paragraph of text is not a clearly discernible stripe
-pattern, but nothing in the attachment's numbers says so and flashmap does not
-guess. The app's own screen check, app/tools/ui_flashmap.mjs, runs `--profile
-wcag`, which has no pattern rule, so this is the first time anything in this
-repo has put text in front of the pattern rule.
+What changed. Guideline 2 is about *regular* patterns, and counting steps is not
+a test of regularity. flashmap now requires a period: a run of bars contributes
+area only when its own autocorrelation has a peak at one lag, which a grating
+has and a line of glyphs does not. `results/pattern_text_precision.json`
+measures what that is worth on 123 rendered pages and gratings: precision goes
+from 0.381 to 0.821 and recall does not move from 0.941.
 
-So the page's own verdict is printed and not asserted on, and what is asserted
-is the timeline: the rule's bar scanner must find nothing in it. docs/DECISIONS.md
-carries the reasoning and the cost.
+What is left, and it is a different thing. Two of the nine frames still hold a
+finding, at 0.259 and 0.289 of the frame against the 0.25 limit. It is not the
+glyphs any more, it is the **line rhythm**: body text at a fixed leading is a
+row of repetitive elements at a constant spacing, which is what BT.1702-3
+Guideline 2 says a pattern may be formed by. A column scan through a paragraph
+has a period, and it is the leading.
+
+That is left standing rather than tuned away. The rule as written does not
+exempt it, the scope sentence's "clearly discernible" is a judgement no number
+in the attachment supplies, and a detector loosened until our own page passes is
+not a detector any more. So the page's own verdict is printed and not asserted
+on, and what is asserted is the timeline, the absence of flash, and that the
+negative control is refused. docs/DECISIONS.md carries the reasoning and the
+cost.
+
+The app's own screen check, app/tools/ui_flashmap.mjs, used to run
+`--profile wcag` only, which has no pattern rule. It now runs the broadcast
+profile as well and the app's 25 screens pass it. Those frames hold no text, so
+what they test is whether the layout of the app's own blocks is a pattern.
 
 SAFETY. The negative control is a deliberately striped page, which is the
 hazard this whole exercise is about. It is built under a HAZARD_ name in a
@@ -79,7 +97,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -386,6 +404,18 @@ class FrameFinding:
     passes: bool
     flash_segments: list[dict[str, Any]] = field(default_factory=list)
     pattern_segments: list[dict[str, Any]] = field(default_factory=list)
+    pattern_area_measured: float = 0.0
+    """The pattern area the rule found, whether or not it was over the limit.
+
+    The segments above only exist when the area cleared a limit, so before this the whole
+    page comparison could only see a difference between two pages when at least one of them
+    failed. Once the periodicity test landed neither page failed on its text any more, and
+    the striped timeline is about four per cent of a display, which is nowhere near the
+    twenty five per cent limit and should not be: a stripe pattern that small is not over
+    the rule and the rule is right to say so. So the comparison needs the area itself, and
+    this is the same analyzer run against a copy of the profile whose area limits are zero,
+    which makes every pattern region report itself.
+    """
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -393,6 +423,7 @@ class FrameFinding:
             "passes": self.passes,
             "flash_segments": self.flash_segments,
             "pattern_segments": self.pattern_segments,
+            "pattern_area_measured": round(self.pattern_area_measured, 6),
         }
 
 
@@ -416,6 +447,7 @@ def analyse_frame(frame: np.ndarray, work: Path, index: int) -> FrameFinding:
         check=True, capture_output=True,
     )
     result = analyze_file(video, profile=get_profile("broadcast"))
+    measuring = analyze_file(video, profile=_no_area_limit())
     picture.unlink(missing_ok=True)
     video.unlink(missing_ok=True)
     return FrameFinding(
@@ -423,6 +455,26 @@ def analyse_frame(frame: np.ndarray, work: Path, index: int) -> FrameFinding:
         passes=result.passes,
         flash_segments=[segment.as_dict() for segment in result.segments],
         pattern_segments=[segment.as_dict() for segment in result.pattern_segments],
+        pattern_area_measured=max(
+            (float(segment.area_fraction) for segment in measuring.pattern_segments),
+            default=0.0,
+        ),
+    )
+
+
+def _no_area_limit():
+    """The broadcast profile with both pattern area limits set to zero.
+
+    Not a profile anything ships. It is a measuring instrument: with no limit to clear, every
+    region the rule marks reports its own area, so this run says how much pattern is on a
+    frame rather than whether that amount was enough. The stripe count and the bar difference
+    are untouched, because those are what decide which pixels get marked at all.
+    """
+    profile = get_profile("broadcast")
+    return replace(
+        profile,
+        name=f"{profile.name}-measuring",
+        pattern=replace(profile.pattern, stationary_area_limit=0.0, changing_area_limit=0.0),
     )
 
 
@@ -584,7 +636,8 @@ def measure(
 
 
 def _worst_area(frame: FrameFinding) -> float:
-    return max((float(p["area_fraction"]) for p in frame.pattern_segments), default=0.0)
+    """How much of the frame the rule marked, limit or no limit. See FrameFinding."""
+    return frame.pattern_area_measured
 
 
 def report(result: PageResult, *, quiet: bool = False) -> None:

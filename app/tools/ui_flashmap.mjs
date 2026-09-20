@@ -178,6 +178,23 @@ async function main() {
   const output = `${result.stdout ?? ''}${result.stderr ?? ''}`;
   process.stdout.write(output);
 
+  // The second pass, and the reason it is a second one. The wcag profile has no regular
+  // pattern rule at all, so until now nothing in the app's own screens had ever been put in
+  // front of ITU-R BT.1702-3 Guideline 2. The broadcast profile carries it.
+  //
+  // What this pass can and cannot see. These frames are painted from the colours the app
+  // records it drew, one block per painted colour, so there is no text in them: this asks
+  // whether the layout of the app's own blocks forms a regular pattern, not what the rule
+  // makes of a glyph. eval/pattern_text_precision.py is where text is measured.
+  console.log('\nthe same screens under the broadcast profile, which carries the regular pattern rule:');
+  const pattern = spawnSync(
+    pythonCommand(),
+    ['-m', 'flashmap', 'check', videoPath, '--profile', 'broadcast'],
+    { cwd: repoRoot, encoding: 'utf8' },
+  );
+  const patternOutput = `${pattern.stdout ?? ''}${pattern.stderr ?? ''}`;
+  process.stdout.write(patternOutput);
+
   writeFileSync(
     join(outDir, 'ui-flashmap.json'),
     `${JSON.stringify(
@@ -191,8 +208,13 @@ async function main() {
         video: 'build/ui-capture/ui-screens.mp4',
         flashmap_exit: result.status,
         flashmap_output: output.trim(),
+        pattern_profile: 'broadcast',
+        pattern_exit: pattern.status,
+        pattern_output: patternOutput.trim(),
         note:
           'Each painted colour is given a block a full WCAG ten degree window wide, which is larger than the real surfaces, so this overstates the flashing area rather than understating it.',
+        pattern_note:
+          'The broadcast pass adds ITU-R BT.1702-3 Guideline 2, which the wcag profile does not carry. These frames hold no text, so it asks whether the layout of the app\'s own blocks is a regular pattern. What the rule makes of glyphs is measured in results/pattern_text_precision.json.',
       },
       null,
       2,
@@ -205,8 +227,18 @@ async function main() {
     );
     process.exit(result.status ?? 1);
   }
+  if (pattern.status !== 0) {
+    console.error(
+      `\nflashmap exited ${pattern.status} under the broadcast profile. The app's own screens ` +
+        'hold a regular pattern finding. That is not a WCAG failure, because WCAG 2.2 SC 2.3.1 ' +
+        'has no pattern rule, but it is a layout a child should not be shown.',
+    );
+    process.exit(pattern.status ?? 1);
+  }
   console.log(
-    `\nflashmap: no segment broke the thresholds across ${frames.length} screens and transitions.`,
+    `\nflashmap: no segment broke the thresholds across ${frames.length} screens and ` +
+      'transitions, under the wcag profile and under the broadcast profile with the regular ' +
+      'pattern rule.',
   );
 }
 

@@ -27,9 +27,11 @@ from flashmap.pattern import (
     MOTION_UNCERTAIN,
     PatternSettings,
     PatternTracker,
+    periodic_lines,
     scan_bars,
     stripe_mask,
 )
+from flashmap.pattern import _spans
 
 W, H = 384, 216
 
@@ -444,3 +446,169 @@ def test_the_map_stays_readable_by_a_consumer_that_knows_only_start_and_end(haza
         assert segment["end_ms"] > segment["start_ms"]
         assert segment["start_ms"] >= 0
     assert document["summary"]["pass"] == (not document["segments"])
+
+
+# ---- the periodicity test ---------------------------------------------------------------
+#
+# "Regular patterns" is the guideline's own word and scan_bars on its own does not check it:
+# it counts alternating steps that reach the Guideline 1 flash difference, and a page of
+# readable text is full of those. Every guard below was broken on purpose and seen red; the
+# mutation is named in each docstring.
+
+
+def _line(values) -> np.ndarray:
+    return np.asarray(values, dtype=np.float32)[None, :]
+
+
+def _bar_line(length: int, bars: int, dark: float = 5.0, light: float = 180.0) -> np.ndarray:
+    bar = length / bars
+    xs = np.arange(length)
+    return _line(np.where((np.floor(xs / bar).astype(int) % 2) == 0, light, dark))
+
+
+def _scan(frame, rule, **kwargs):
+    return stripe_mask(
+        frame,
+        min_delta=BROADCAST_SDR.general.min_delta,
+        dark_below=BROADCAST_SDR.general.dark_image_below,
+        min_bars=2 * (rule.more_than_pairs + 1),
+        orientations=("rows",),
+        **kwargs,
+    )
+
+
+def test_an_even_grating_is_periodic_and_its_period_is_one_pair(rule):
+    line = _bar_line(192, 12)
+    bars, first, last = scan_bars(line, BROADCAST_SDR.general.min_delta,
+                                  BROADCAST_SDR.general.dark_image_below)
+    low, high = _spans(bars, first, last, 192)
+    periodic, period, peak = periodic_lines(
+        line, bars >= 12, low, high, min_cycles=PatternSettings().min_cycles_for_period,
+        min_peak=PatternSettings().min_autocorrelation_peak,
+    )
+    assert bool(periodic[0]), "a twelve bar grating is the definition of regular"
+    assert period[0] == pytest.approx(192 / 6, abs=2), (
+        "one cycle is a light bar and a dark bar, so six pairs across 192 samples is 32"
+    )
+
+
+def test_the_cycle_floor_does_not_re_apply_the_spec_pair_count(rule):
+    """The regression this constant exists for.
+
+    A twelve bar grating filling the picture spans five and a half periods, because the run
+    is measured from the first counted boundary to the last plus half a bar at each end. A
+    periodicity search told to find six whole cycles inside that run cannot, so the first
+    count the attachment can fail would have stopped being found at all. That is a hazard
+    walking out of the detector, so the floor is three and the pair count is a gate of its
+    own.
+
+    Seen to fail by setting min_cycles to the pair gate, which is what the first version did:
+    the assertion below goes red with `assert False`.
+    """
+    line = _bar_line(192, 12)
+    bars, first, last = scan_bars(line, BROADCAST_SDR.general.min_delta,
+                                  BROADCAST_SDR.general.dark_image_below)
+    low, high = _spans(bars, first, last, 192)
+    at_the_pair_count, _, _ = periodic_lines(line, bars >= 12, low, high, min_cycles=6, min_peak=0.5)
+    at_the_floor, _, _ = periodic_lines(
+        line, bars >= 12, low, high,
+        min_cycles=PatternSettings().min_cycles_for_period, min_peak=0.5,
+    )
+    assert not bool(at_the_pair_count[0]), (
+        "this documents why the floor is not the pair count; if this passes the run length "
+        "arithmetic has changed and the comment above needs rewriting"
+    )
+    assert bool(at_the_floor[0])
+
+
+def test_irregular_high_contrast_edges_are_not_a_pattern(rule):
+    """A line of text, reduced to what it is: plenty of steps, no period.
+
+    The widths and gaps below are a real scan line's worth of glyph strokes rather than a
+    grating's. Every step clears the Guideline 1 difference, so scan_bars counts far more
+    than twelve bars, and nothing about it repeats.
+
+    Seen to fail by returning `qualifies` unchanged from periodic_lines, which is what the
+    detector did before this: the area assertion goes red at 1.0.
+    """
+    rng = np.random.default_rng(20260919)
+    values = []
+    light = True
+    while len(values) < 192:
+        width = int(rng.integers(1, 9))
+        values.extend([180.0 if light else 5.0] * width)
+        light = not light
+    line = _line(values[:192])
+    bars, _, _ = scan_bars(line, BROADCAST_SDR.general.min_delta,
+                           BROADCAST_SDR.general.dark_image_below)
+    assert int(bars[0]) >= 2 * (rule.more_than_pairs + 1), (
+        "the point of this case is that the bar count gate does let it through"
+    )
+    frame = np.repeat(line, 64, axis=0)
+    assert _scan(frame, rule, require_periodicity=False).area_fraction == pytest.approx(1.0)
+    assert _scan(frame, rule).area_fraction == 0.0
+
+
+def test_turning_the_periodicity_test_off_restores_the_old_reading(rule):
+    """The ablation has to be real, or the number it produces means nothing."""
+    rng = np.random.default_rng(7)
+    values = []
+    light = True
+    while len(values) < 192:
+        values.extend([180.0 if light else 5.0] * int(rng.integers(1, 9)))
+        light = not light
+    frame = np.repeat(_line(values[:192]), 64, axis=0)
+    off = _scan(frame, rule, require_periodicity=False)
+    on = _scan(frame, rule)
+    assert off.area_fraction > on.area_fraction
+    assert on.counted_area_fraction == pytest.approx(off.area_fraction), (
+        "counted_area_fraction is what the area would have been without the test, so it has "
+        "to match the ablation exactly"
+    )
+
+
+def test_a_grating_still_fails_end_to_end_with_the_periodicity_test_on(hazard_clip, rule):
+    """The whole point of the rule, checked through the shipped path rather than a helper."""
+    frames = [clipgen.grating(W, H, FAILING_PAIRS, DARK, BRIGHT)] * 40
+    path = hazard_clip("periodic_sixpairs.mkv", frames, fps=20)
+    result = analyse(path)
+    assert result.pattern_segments
+    assert result.pattern_segments[0].stripe_pairs == FAILING_PAIRS
+
+
+def test_the_tuning_says_which_way_it_ran(rule):
+    """A map that does not record whether the periodicity test was on cannot be compared
+    with one that does. Seen to fail by dropping either key from as_dict."""
+    tuning = rule.settings.as_dict()
+    assert tuning["require_periodicity"] is True
+    assert 0.0 < tuning["min_autocorrelation_peak"] <= 1.0
+    assert tuning["min_cycles_for_period"] >= 2
+    assert "not thresholds" in tuning["what_these_are"]
+
+
+def test_the_peak_does_not_fall_away_as_the_period_grows(rule):
+    """The unbiased correction, and what it is worth.
+
+    At lag k only run - k samples of the run overlap themselves, so a raw autocorrelation
+    reports a long period as weaker than a short one for no reason but its length. A grating
+    with three cycles in the run would come back at about two thirds of a grating with
+    twenty, and the threshold would then mean something different at each spatial frequency.
+    Dividing by the overlap takes that out.
+
+    Seen to fail by dropping the correction: the four cycle peak comes back near 0.71 and
+    this goes red.
+    """
+    peaks = {}
+    for cycles in (4, 6, 12, 24):
+        line = _bar_line(480, 2 * cycles)
+        bars, first, last = scan_bars(line, BROADCAST_SDR.general.min_delta,
+                                      BROADCAST_SDR.general.dark_image_below)
+        low, high = _spans(bars, first, last, 480)
+        _, _, peak = periodic_lines(line, bars >= 2, low, high, min_cycles=3, min_peak=0.5)
+        peaks[cycles] = float(peak[0])
+    assert min(peaks.values()) > 0.9, (
+        f"a pure square wave should correlate with itself at its own period: {peaks}"
+    )
+    assert max(peaks.values()) - min(peaks.values()) < 0.1, (
+        f"the peak must not depend on how many cycles happen to fit: {peaks}"
+    )
