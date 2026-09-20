@@ -42,6 +42,24 @@ analyzer that sits outside the six items but was found by them, so it comes firs
   produced. The grey clips in the six items (codes 96 and 160) are not affected, which is why
   they all tripped the rule.
 
+## Note added 2026-09-19: two numbers on this page have moved again
+
+The area fractions quoted below (0.922 and 0.531) were measured before the
+`_span_mask` widening this page's header already warns about, and before the
+periodicity test landed on 2026-09-19. Both changes move an area fraction, so
+neither number should be quoted from here. The verdicts do not move: a pattern
+segment still gets the same cover interval as a flash segment, is still never
+dimmed, and `pipeline.verify` still passes a pattern title with the cover proven
+drawn, which flashmap/tests/test_pattern.py and the pipeline suite both check on
+every run.
+
+The FAILS item above is closed. A black edge bar is read as a stripe rather than
+a pillarbox now, and the full frame six pair grating that used to pass the
+broadcast profile is flagged. flashmap/tests/test_pattern.py holds the
+regression, and it went red again during the 2026-09-19 work when the
+periodicity search briefly re-applied the spec's pair count, which is what a
+regression test is for.
+
 ## The six items
 
 1. **HOLDS.** Clip: `clipgen.grating(384, 216, 6, (96,96,96), (160,160,160))` x 40 at 20 fps,

@@ -1,37 +1,41 @@
 # Status
 
-Updated Thu Sep 17, 2026, late evening PT.
+Updated Sat Sep 19, 2026, late.
 
-## 0. Where the recovery pass left things
+## 0. Where things stand
 
-The tree is clean and pushed, and the two suites the CI command runs are green
-here: 973 Python tests and 671 app tests. Three things were making CI red and all
-three are fixed. The python job never installed matplotlib, so
-`eval/tests/test_labeling_plots.py` failed to import and took the whole job down
-at collection, which is worse than one red test because it hid the other two
-behind it. Under that, a scheduler property was failing for real. And the new
-hardening job was red until a full mutation report existed, which it now does. The screening sweep and the ingest chain that were still going have
-finished; the re-verify gave <!--n results/verify_pool.json:analyzed -->30<!--/n-->
-titles a verdict, which is **<!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n-->
-with the cover proven drawn, <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n-->
-with no flagged segment at all and <!--n results/verify_pool.json:failed -->9<!--/n-->
-failed**. Every title that passed has a row in `media/LICENSES.csv`.
+**The build was red and nobody knew.** The tree was clean, pushed and level with
+origin, which is what the last session handed over, and the Vega app job had been
+failing on main since that push. One file did it:
+`app/test/calmframes/hideLog.test.tsx` went in at zero bytes beside the real tests
+for the same change, and jest treats a suite with no tests as a failure. It is
+gone, the tests it was meant to hold were already in
+`app/test/screens/hideLog.test.tsx`, and the app suite is 90 suites, 786 passed,
+4 skipped. The lesson is in CLAUDE.md's new resume section: a clean tree is not a
+green build, and the two have to be checked separately. Nothing else was
+half-finished, no orphaned job was running, and no partial JSON was in `results/`.
 
-Two defects came out of the recovery rather than out of a plan, and both are the
-kind that a green suite was hiding. The media clock kept running through every
-buffer, because `waiting` was missing from the list of events that stop it while
-`stalled` and `pause` were on it; a four second buffer left the estimate 4,000 ms
-ahead of the playhead. The picture stayed covered throughout, so this was never a
-hole in the cover, but every number taken off that clock, which is the drift and
-the cover lead GATE 1 reports, was wrong by the length of the buffer. Separately
-the property harness was answering a seek that lands inside a stall with a
-position report a stalled player never sends, which is what the 75 ms failure
-was. Both are fixed, both were seen red first, and the estimate error across
-every case probed is now 0.00 ms rather than merely inside its bound. The full
-mutation gate ran for the first time and then again after the fixes: 57
-mutations, 55 killed, and the 2 that live are both declared equivalent with
-their reasoning in the file. The third survivor of the first run was a real gap
-in the property tests and is closed.
+**The pattern rule stopped reading text as stripes, and both ffmpeg baselines
+were re-run as one set.** Guideline 2 is about *regular* patterns and the rule
+was only testing alternation, so every glyph edge counted as a bar and all nine
+display frames of our own report page read as a pattern over 44 to 64 per cent of
+the screen. A run of bars now has to have a period before it contributes any
+area, measured by autocorrelation, and what that is worth is measured rather than
+asserted: 123 rendered pages and gratings, precision
+<!--n results/pattern_text_precision.json:published.pattern_text_precision_without_periodicity -->0.381<!--/n-->
+to
+<!--n results/pattern_text_precision.json:published.pattern_text_precision -->0.8205<!--/n-->
+with recall unchanged at
+<!--n results/pattern_text_precision.json:published.pattern_text_recall -->0.9412<!--/n-->.
+Seven of the nine frames are clean now and two still are not, for a different
+reason that is written down and not tuned away. Separately, ffmpeg 8.1.2 is gone
+from this machine, so both ffmpeg based baselines were re-run over every clip on
+9.0.1 in one go, a check now fails any results directory holding two tool
+versions, and the container's ffmpeg is pinned by exact apt version. That re-run
+also closed the item that was holding the sixteen calm clips out of the labelling
+pool: it is back to <!--n results/realclips_status.json:segments -->40<!--/n-->
+segments over <!--n results/realclips_status.json:titles -->16<!--/n--> titles,
+with the unflagged half twice the size it was.
 
 ## 1. The head-start kits are still not here, asked for twice
 
@@ -45,13 +49,12 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 
 | When | What | Why it needs you |
 |---|---|---|
-| **Fri Sep 18** | Send the three outreach emails in `docs/outreach/`. | Each needs a recipient and your name. They ask only about wording and flow, and say plainly that nothing we send contains flashing. |
-| **When the stick arrives, about Sep 20** | Update it to Vega OS 1.2, turn on developer mode, plug it in by USB, then run `make stick-day`. | The whole measurement chain waits on real hardware. The script prints the developer-mode steps, refuses a wrong OS build, installs, runs the layering test and then the marker run. It took about 6 minutes end to end against the virtual device. |
+| **Overdue, was Fri Sep 18** | Send the three outreach emails in `docs/outreach/`. | Each needs a recipient and your name. They ask only about wording and flow, and say plainly that nothing we send contains flashing. |
+| **When the stick arrives, about Sep 20, so probably tomorrow** | Update it to Vega OS 1.2, turn on developer mode, plug it in by USB, then run `make stick-day`. | The whole measurement chain waits on real hardware. The script prints the developer-mode steps, refuses a wrong OS build, installs, runs the layering test and then the marker run. It took about 6 minutes end to end against the virtual device. |
 | **Same session** | Film the layering test, then the 240 fps marker run. | **This is the only thing that can produce a GATE 1 number.** Phone at 240 fps, exposure locked, TV in game mode with motion smoothing off. `make stick-day` prints what to film and where the files go. |
 | **Before then** | Confirm your phone films 240 fps and the TV has a game mode. | Assumed, never confirmed. If either is wrong, GATE 1 needs a different plan and it is better to know now. |
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
-| **Before you label, one command** | Run `make ffmpeg-ps-pool` and `make naive-luma-pool` over the sixteen calm Wikimedia clips, then rebuild the pool. | The pool shrank when IRIS joined, from 40 segments over 15 titles to <!--n results/realclips_status.json:segments -->40<!--/n--> over <!--n results/realclips_status.json:titles -->16<!--/n-->, and the half that nothing flagged went from 12 windows to 6. IRIS cannot read six clips including the three ISS night passes, which carried most of that negative half, and a title joins the pool only once every candidate list has seen it. That is the guard working rather than a fault. Running the two ffmpeg based lists over the calm sixteen more than replaces what was lost, and it is better to label one pool than two. |
-| **Any evening, about an hour** | Label the <!--n results/realclips_status.json:segments -->40<!--/n--> blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all of them. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. The pool was recut on Sep 18 when EA IRIS joined as a candidate list, so the segment ids are not the ones an earlier version of this page named. |
+| **Any evening, about an hour** | Label the <!--n results/realclips_status.json:segments -->40<!--/n--> blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all of them. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. **The pool was recut again on Sep 19**, after both ffmpeg based baselines ran over every clip and let the sixteen calm Wikimedia clips in, so the segment ids have moved a second time and are not the ones any earlier version of this page named. It is 40 segments over 16 titles, 28 flagged and 12 unflagged, which is twice the unflagged half it had on Sep 18. Nothing is waiting on this now except the two of you. |
 | **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add that line to this file. It has to start a line of its own: no bullet, no table cell, no backticks. The exact wording is in the refusal `make deploy` prints. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Seventeen tests now cover both locks, run against a copy of the script so this file is never touched. Nothing has touched AWS. |
 | **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
 | **Oct 19 to 20** | Film the video from `docs/VIDEO_SCRIPT.md`, timed to 2:55. | |
@@ -159,18 +162,40 @@ renders the whole page at 1280 px, cuts it into nine display frames and runs the
 analyzer over each under the broadcast profile, with a negative control that
 proves the check can refuse a striped page.
 
-**The page as a whole does not pass the pattern rule, and cannot.** Its text does
-it: cream on teal is 160.77 against 8.47 cd/m2, so every glyph edge is a
-Guideline 1 step, and all nine frames read 16 to 25 stripe pairs over 44 to 64
-per cent against a 25 per cent limit. No readable text avoids that at SDR peak
-200. So the check asserts on the timeline and prints the page verdict rather than
-pretending the page passes.
+**Seven of the nine display frames pass now, and two do not.** This block used to
+say the page could not pass at all, and that was true of the rule as it then
+stood: every glyph edge is a Guideline 1 step, so all nine frames read 16 to 25
+stripe pairs over 44 to 64 per cent against a 25 per cent limit. Guideline 2 is
+about *regular* patterns though, and counting steps is not a test of regularity.
+A run of bars now contributes area only when the signal inside it has a period,
+and a line of glyphs does not have one. The two frames that still carry a finding
+do it at 0.259 and 0.289, and it is not the glyphs any more: it is the line
+rhythm. Body text at a fixed leading is a row of repetitive elements at a
+constant spacing, which is one of the things Guideline 2 says a pattern may be
+formed by, so a column scan down a paragraph has a period and it is the leading.
 
-That is worth carrying further than the report page. **`app/tools/ui_flashmap.mjs`
-runs the wcag profile, so the app's own screens have never been put in front of
-the pattern rule**, and the same finding is waiting there and in any title with
-credits. It is probably also part of why the pattern rule's raw precision is
-0.527 while its settled precision is 0.937.
+**That is left standing rather than tuned away**, and the reason is in
+docs/DECISIONS.md. Nothing in the attachment exempts it, "clearly discernible" in
+the scope sentence is a judgement no number there supplies, and a detector
+loosened until our own page passes is not a detector. The check asserts on the
+timeline, on the absence of flash and on the negative control being refused, and
+prints the page's own verdict beside them.
+
+**The app's own screens are in front of the pattern rule now and they pass it.**
+`app/tools/ui_flashmap.mjs` ran the wcag profile only, which has no pattern rule.
+It runs the broadcast profile as well, all 25 screens and transitions pass both,
+and a non-zero exit from either fails the job. What that check can and cannot see
+is worth knowing: those frames are painted from the colours the app records it
+drew, one block per colour, so there is no text in them. It asks whether the
+layout of the app's own blocks is a regular pattern. What the rule makes of a
+glyph is measured somewhere else, in `results/pattern_text_precision.json`.
+
+**The 0.527 raw precision was never about text, and saying so was a guess.** An
+earlier version of this page suggested text was probably part of why the pattern
+rule's raw precision is 0.527 against 0.937 settled. It is not: every clip in
+that suite is a grating and none of them holds a glyph. The gap is window
+alignment, which is what "settled" means. The text question needed its own
+measurement and now has one.
 
 ### The pattern crop defect, fixed on Sep 18
 
@@ -243,15 +268,25 @@ and it is the reason no report is written for a clip it could not read.
    whose reports can be 5219 ms apart, which trades the thing this app exists for
    against a cosmetic gain, so it has not been done. If it is done, the cap has to
    be measured against the worst report gap, not chosen.
-2. **The two ffmpeg based lists have still not run on the 16 calm clips**, so those
-   titles are screened and are not in the labelling pool. EA IRIS has now run on
-   them and is a candidate list, so the two ffmpeg based lists are the only thing
-   holding them out: `make ffmpeg-ps-pool` and `make naive-luma-pool` close it.
-   Worth doing, because adding IRIS shrank the pool from 40 segments across 15
-   titles to <!--n results/realclips_status.json:segments -->40<!--/n--> across
-   <!--n results/realclips_status.json:titles -->16<!--/n-->: the three ISS night
-   passes dropped out because IRIS cannot decode them, and they were carrying half
-   the unflagged half of the pool.
+2. **The report page's line rhythm.** Two of its nine display frames carry a
+   pattern finding at 0.259 and 0.289 against a 0.25 limit, from body text at a
+   fixed leading rather than from the glyphs. Section 4c says why it is left
+   standing. What would close it for good is a primary source that says a
+   paragraph is not a clearly discernible stripe pattern, and Ofcom's guidance
+   note is the likeliest one. **Retried on Sep 19 and it is still shut.** A plain
+   fetch answered 403, and headless Chrome, which is a real browser engine, got
+   the Cloudflare "Just a moment..." interstitial rather than the page. It needs
+   a browser somebody is sitting in front of, which is Alex or nobody.
+3. **The pattern rule's periodicity numbers come off rendered pictures, not off
+   real footage.** `results/pattern_text_precision.json` is 123 pages and
+   gratings this repository drew. Nothing has measured what the periodicity test
+   does to a film's credits, a brick wall, a picket fence or a striped shirt, and
+   those are the cases where a false negative would matter. The screened pool has
+   no pattern positive in it at all, so there is nothing to measure it against
+   yet.
+4. **EA IRIS is not in the pattern conformance loop**, unchanged from Sep 18, and
+   the reason is unchanged: putting a second process in the generate, analyse and
+   delete loop means keeping thousands of flashing clips alive for it.
 
 ## 5. What is not done
 
@@ -299,29 +334,53 @@ Every one comes from `results/`, and CI fails if a document drifts from them.
 | Of those, no flagged segments | <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> | verify_pool.json |
 | Of those, failed | <!--n results/verify_pool.json:failed -->9<!--/n--> | verify_pool.json |
 | The four add up to the titles on disk | <!--n results/verify_pool.json:adds_up -->yes<!--/n--> | verify_pool.json |
+| Pattern rule precision on text, UI and gratings | <!--n results/pattern_text_precision.json:published.pattern_text_precision -->0.8205<!--/n--> (<!--n results/pattern_text_precision.json:published.pattern_text_precision_lo -->0.6733<!--/n--> to <!--n results/pattern_text_precision.json:published.pattern_text_precision_hi -->0.9102<!--/n-->) | pattern_text_precision.json |
+| The same, with the periodicity test off | <!--n results/pattern_text_precision.json:published.pattern_text_precision_without_periodicity -->0.381<!--/n--> | pattern_text_precision.json |
+| Pattern rule recall on the same set | <!--n results/pattern_text_precision.json:published.pattern_text_recall -->0.9412<!--/n--> (<!--n results/pattern_text_precision.json:published.pattern_text_recall_lo -->0.8091<!--/n--> to <!--n results/pattern_text_precision.json:published.pattern_text_recall_hi -->0.9837<!--/n-->) | pattern_text_precision.json |
+| The same, with the periodicity test off | <!--n results/pattern_text_precision.json:published.pattern_text_recall_without_periodicity -->0.9412<!--/n--> | pattern_text_precision.json |
+| Pictures it was measured on | <!--n results/pattern_text_precision.json:pictures -->123<!--/n-->, <!--n results/pattern_text_precision.json:ground_truth_positive -->34<!--/n--> positive by what was drawn | pattern_text_precision.json |
 
 ## 7. Next
 
-1. Send the emails tomorrow.
-2. When the stick arrives: `make stick-day`, then film. That is the gate. **Add one measurement to it:** the worst gap between two scheduler ticks. The harness re-checks every 50 ms, so logging the longest gap between consecutive checks gives the worst pause of the JavaScript thread, and the guard band should be set above it rather than at the 500 ms we picked by judgement. This is not instrumented yet.
-3. Meanwhile: more titles through verify, the two ffmpeg based lists over the 16 calm clips so they can join the labelling pool, and finish the conformance run.
+**Yours, in order.** The table in section 2 is the full list with dates. The
+three that are live right now:
+
+1. **Send the three outreach emails.** They were due Fri Sep 18 and they are the
+   only thing on the list nothing else depends on.
+2. **Confirm the phone films 240 fps and the TV has a game mode**, before the
+   stick arrives, because if either is wrong GATE 1 needs a different plan.
+3. **When the stick arrives:** `make stick-day`, then film. That is the gate.
+   **One measurement to add to it:** the worst gap between two scheduler ticks.
+   The harness re-checks every 50 ms, so logging the longest gap between
+   consecutive checks gives the worst pause of the JavaScript thread, and the
+   guard band should be set above it rather than at the 500 ms we picked by
+   judgement. This is still not instrumented.
+
+**Mine, in order, and none of it is waiting on you.**
+
+1. Instrument the scheduler tick gap, so the stick run measures it the first time
+   rather than the second.
+2. Put a negative control in `app/tools/ui_flashmap.mjs`. It runs the broadcast
+   profile now and the screens pass, and a check that has never been seen to
+   refuse anything is not yet evidence.
+3. Finish the conformance run, which is still partial and says so.
+4. A third mock judge. Both existing passes read clones from before phase 8, so
+   neither has seen kid mode wired up, the five features reachable, or the
+   pattern rule's precision work.
+5. More titles through verify. Only 7 of the 30 with a verdict prove anything
+   about covering, and that number only moves with footage that actually flashes.
 
 ---
 
-**Status line, Thu Sep 17 late (infrastructure and security lane).** Everything
-for one `make deploy` is ready and still refuses to run. Found and fixed one
-lock that had been open since it was written: the guard's grep matched the row
-in this file that tells you to add the line. The container build was stopped
-part way because it helped push the shared Docker VM into its memory limit and
-killed another project's container, which was restarted; the build is verified
-on a CI runner from now on. Nothing has touched AWS.
-
-**Status line, Fri Sep 18 early (baselines and evaluation lane).** EA IRIS is
-built and is the fourth candidate list, so the recall caveat is gone and a
-measured number stands where it was. It was built on the host in about two
-minutes, not in the shared Docker VM, which was never touched. The amount the
-old estimate was optimistic by turned out to be zero: not one window in the
-union came from IRIS alone. IRIS cannot decode six of the pool's clips and calls
-them PASS without saying it never looked, so those titles are kept out and named
-in `results/baselines/iris_failures.json`. That shrank the pool, and section 4c
-says what closes it again.
+**Status line, Sat Sep 19 late (recovery, then the pattern rule).** Main was red
+for a day over a zero byte test file and the clean tree hid it; it is green
+again. The pattern rule now requires a period before a run of bars counts, which
+took the report page from nine failing display frames to two and put the app's
+own screens in front of the rule for the first time. Precision on text and UI
+went from 0.381 to 0.821 with recall unchanged, measured on 123 drawn pictures
+whose ground truth does not import flashmap. Both ffmpeg baselines were re-run as
+one set on 9.0.1, the container's ffmpeg is pinned, a check now refuses a results
+directory holding two tool versions, and the labelling pool is back to 40
+segments over 16 titles with twice the unflagged half. Eleven mutations killed
+across the session. Nothing has touched AWS and nothing has been pushed to the
+upstream sample.

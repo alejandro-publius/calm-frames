@@ -543,7 +543,10 @@ Consequences, and they are firm:
 
 - **Ofcom's guidance note on flashing images and regular patterns.** Every ofcom.org.uk URL
   tried on 2026-09-17 answered HTTP 403 behind a Cloudflare interstitial, to a plain fetch and
-  to curl with a desktop user agent alike, and no browser was connected to that session. **No
+  to curl with a desktop user agent alike, and no browser was connected to that session.
+  **Retried on 2026-09-19 with a browser engine and it is still shut**: headless Chrome, the
+  same binary `eval/report_page_check.py` renders with, got the "Just a moment..." challenge
+  page instead of the document. It needs a browser a person is sitting in front of. **No
   number is taken from Ofcom and nothing in the code cites Ofcom.** Worth retrying from a
   machine with a browser: Ofcom's wording states the contrast condition as its own clause that
   must apply in addition to the area condition, where the ITU attachment states it as a

@@ -1296,3 +1296,65 @@ second way.
   now has 9.0.1. Re-running either ffmpeg based baseline will produce numbers
   from a different decoder, and they should be re-run as a set rather than one
   clip at a time. The `photosensitivity` filter is still present in ffmpeg 9.
+
+## 2026-09-19: the container's ffmpeg is pinned, this Mac's cannot be, and a check stops a table mixing them
+
+- **Decision:** pin the ingest container's ffmpeg to the exact Debian apt version
+  behind an `ARG`, record all three ffmpegs this project uses in
+  docs/ENVIRONMENT.md, and add `eval/baseline_versions.py`, which fails when one
+  baseline results directory holds reports from two tool versions. It runs in the
+  numbers job.
+- **Why:** the 8.1.2 to 9.0.1 upgrade the entry above describes was not asked
+  for, and nothing in the repository would have noticed a second one. The
+  container was installing the bare package name, so its decoder could change
+  under a rebuild with no commit; it is Debian bookworm's 5.1.9, which is neither
+  the Mac's nor a CI runner's, and docs/ENVIRONMENT.md never said so. Separately,
+  every baseline report already stamped the build it ran under and nothing read
+  those stamps, so a piecemeal re-run would have produced a table with rows from
+  two tools and nothing saying which was which.
+- **Cost:** Debian drops a superseded version from the mirror when it ships a
+  security update, so the pin will one day fail the build instead of drifting.
+  That is the intended failure and the comment beside it says what to do. The Mac
+  cannot be pinned the same way: Homebrew has no supported downgrade for a
+  formula another formula depends on, and this machine is shared. What stands in
+  for a pin there is the record and the check.
+
+## 2026-09-19: a run of bars has to repeat before it counts as a pattern
+
+- **Decision:** add a periodicity test to the regular pattern rule. A scanline's
+  run of bars contributes area only when the signal inside it has a period: its
+  unbiased autocorrelation, searched from two samples to a third of the run, has
+  a local maximum reaching `min_autocorrelation_peak`. The area thresholds then
+  apply to the periodic region only.
+- **Why:** Guideline 2 is about *regular* patterns and `scan_bars` was not
+  testing regularity, only alternation. Cream on teal is 160.77 against
+  8.47 cd/m2, so every glyph edge clears the Guideline 1 difference and a scan
+  line through a paragraph counts dozens of bars at no spacing in particular.
+  All nine display frames of our own report page read as a pattern over 44 to 64
+  per cent of the screen, which is not a hazard and is not something a readable
+  page can design away: at an SDR peak of 200 cd/m2 no pair of colours at 4.5:1
+  has a difference under 20 cd/m2 with the darker state above 160.
+- **The threshold was chosen by a rule fixed before the numbers were read:** the
+  largest peak at which recall does not fall. That rule matters more than the
+  value. A number picked because it makes our own page pass is not a
+  measurement, and this is exactly the shape of mistake docs/STATUS.md already
+  records four times, where the friendlier of two siblings got published.
+- **What it is worth, measured:** `results/pattern_text_precision.json`, 123
+  rendered pictures with ground truth from what was drawn. Precision 0.381 with
+  the test off, 0.821 (0.673 to 0.910) at 0.85. Recall 0.941 (0.809 to 0.984),
+  unchanged across the whole sweep from 0 to 0.85 and falling above it.
+- **Cost, and it is not zero.** Body text at a fixed leading is a row of
+  repetitive elements at a constant spacing, which Guideline 2 says a pattern may
+  be formed by, so a column scan through a paragraph still has a period and it is
+  the leading. Two of the report page's nine frames still carry a finding, at
+  0.259 and 0.289 against a 0.25 limit. That is left standing. Loosening the
+  detector until our own page passes would be the same mistake in the other
+  direction, and the page's verdict is printed rather than asserted on.
+- **Second cost:** three more tuning numbers in the sidecar, and one of them,
+  `min_cycles_for_period`, is load bearing in a way that is easy to get wrong. It
+  must stay well under the spec's pair count. A twelve bar grating filling the
+  picture spans five and a half periods, not six, because the run is measured
+  from the first counted boundary to the last plus half a bar at each end, so a
+  search that re-applied the pair count could not find the period of the first
+  count the attachment can fail. That was a live false negative during this
+  session and two existing tests caught it within minutes.

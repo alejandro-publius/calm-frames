@@ -1,15 +1,46 @@
 # Calm Frames: rules for every session
 
-**Current phase:** Phase 8 done, Thu Sep 17, 2026, late. Phases 0 to 2 are done apart
-from what needs the stick. All five phase 8 features are in with tests and docs: the
-BT.1702-3 regular-pattern rule, family profiles, the chime, the report and upload
-pages, and the signed map registry. Three of them are built but not reachable in the
-running app, and docs/STATUS.md section 4c says which and why. The mutation gate, the
-two lead-time distributions and the four verify counts are all in place.
+**Current phase:** Phase 9, the pattern rule's precision, Sat Sep 19, 2026. Phases 0 to 2
+are done apart from what needs the stick, and all five phase 8 features are in, tested,
+documented and reachable in the running app. Phase 9 so far: the regular-pattern rule
+requires a period before a run of bars counts, so text is no longer read as stripes; both
+ffmpeg baselines were re-run as one set on ffmpeg 9.0.1; the labelling pool is back to 40
+segments over 16 titles. docs/STATUS.md section 0 is the short version and section 2 is
+Alex's dated list.
 **The head-start kits never arrived.** flashmap, calm-timing, evkit and the notes were all written here instead. docs/PLAN.md lists what replaced what. If the kits turn up, treat them as a second opinion and re-record any number taken with our version.
 **Repo:** private at github.com/alejandro-publius/calm-frames, main, CI green on ubuntu runners. It goes public during the final checks on Oct 21, because the rules need it public with the licence visible at submission.
 
 Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/BUILD_PROMPT.md (the full plan, phases, gates, kill rules, cut list), docs/DECISIONS.md, docs/GATES.md.
+
+## How to resume, from a session with no memory
+
+1. **Read, in this order.** `docs/STATUS.md` section 0 and section 2 first, then this file,
+   then `docs/BUILD_PROMPT.md`, `docs/DECISIONS.md` (newest entries are at the bottom),
+   `docs/GATES.md`, and `docs/VERIFY_PASS_2.md` if the work touches the pattern rule.
+   `git log --oneline -40` after that, because a commit message here carries the reasoning.
+2. **Check the tree and the build before touching anything.** `git status`, then
+   `gh run list --limit 4`. A clean tree is not the same as a green build: on Sep 18 the tree
+   was clean, pushed and up to date with origin while the Vega app job had been red on main
+   for a day over a zero byte test file. Read the failing job, do not assume.
+3. **Check for jobs that should be running.** `ps aux | grep -E 'ffmpeg|pytest|run.py'`. The
+   colima `limactl usernet` process belongs to another project and is always there; leave it.
+   Logs from background runs go under `.logs/`, which is gitignored.
+4. **Restart commands for the long jobs**, all safe to re-run and all writing to `.logs/`:
+   - `make ffmpeg-ps-pool` and `make naive-luma-pool`, about 40 minutes each over the whole
+     of `media/`. Afterwards delete any un-prefixed report whose `HAZARD_` twin now exists,
+     then `python eval/baseline_versions.py` must pass.
+   - `.venv/bin/python eval/pattern_text_precision.py`, about 4 minutes, writes
+     `results/pattern_text_precision.json`.
+   - `.venv/bin/python eval/report_page_check.py`, about 2 minutes, needs Chrome.
+   - `cd app && npm run ui:flashmap`, about 1 minute.
+   - `.venv/bin/python eval/labeling/make_pool.py` then `eval/labeling/plots.py`, about a
+     minute. **Never once labelling has started**: a segment id is a position in a shuffled
+     list. `make_pool` refuses while any sheet has an answer in it.
+5. **Before any number reaches a document:** `python eval/readme_sync.py` to rewrite, then
+   `--check`. The drift checker cannot see prose, so re-read the sentences around a number
+   that moved.
+6. **Before pushing:** `make ci`, or at least `make test-app` and
+   `.venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"`.
 
 ## What this is
 
