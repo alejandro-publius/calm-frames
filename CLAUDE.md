@@ -17,8 +17,10 @@ segments over 16 titles. docs/STATUS.md section 0 is the short version and secti
 Alex's dated list.
 **The head-start kits never arrived.** flashmap, calm-timing, evkit and the notes were all written here instead. docs/PLAN.md lists what replaced what. If the kits turn up, treat them as a second opinion and re-record any number taken with our version.
 **Repo:** private at github.com/alejandro-publius/calm-frames. Work is on
-`codex/signed-scene-holds-2026-09-29`; main remains unchanged. The inspected
-HEAD push CI passed on Sep 20; the Sep 28 scheduled Audit and Sep 29 retry failed
+`codex/signed-scene-holds-2026-09-29`, published as
+[draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1); main remains
+unchanged. Both review workflows failed before any runner or step started. The
+main commit's inspected push CI passed on Sep 20; the Sep 28 scheduled Audit and Sep 29 retry failed
 before any runner or step started. The scene-hold tree must pass GitHub CI before
 main is updated. It goes public during the final checks on Oct 21, because the rules
 need it public with the licence visible at submission.

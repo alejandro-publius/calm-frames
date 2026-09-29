@@ -115,6 +115,17 @@ The exact startup restriction is not available through the connector; billing
 or minute limits are only possibilities, not confirmed causes. An external
 Actions startup fix is needed before CI can supply the remaining evidence.
 
+The exact tested tree is published in
+[draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1). Immediately
+after publication, the local branch matched its canonical GitHub commit with a
+clean worktree. The new
+[CI run](https://github.com/alejandro-publius/calm-frames/actions/runs/36646189829)
+and [Audit run](https://github.com/alejandro-publius/calm-frames/actions/runs/36646189802)
+reproduced the startup restriction in every job: no assigned runner and no
+executed steps. No assertion ran or failed remotely. The complete committed
+tree also passed the local secret scan after publication. Main is unchanged;
+the draft is not ready to merge until complete remote checks pass.
+
 The Sep 19 work below is the earlier phase history, not a new measurement run.
 
 **The build was red and nobody knew.** The tree was clean, pushed and level with

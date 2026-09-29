@@ -815,6 +815,13 @@ attempt recorded zero runner milliseconds. The Sep 21 scheduled Audit on the
 same main commit passed. No dependency audit command ran in either failed
 attempt, so this is not evidence of a dependency finding.
 
+After publishing the exact locally tested tree as
+[draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1), both its
+[CI run](https://github.com/alejandro-publius/calm-frames/actions/runs/36646189829)
+and [Audit run](https://github.com/alejandro-publius/calm-frames/actions/runs/36646189802)
+failed every job with no assigned runner and no executed steps. This reproduces
+the restriction on the proposed tree without supplying any test result.
+
 **Severity.** High for completing CI, not an Amazon or application failure.
 
 **Workaround.** None in the repository. The exact startup annotation is not
