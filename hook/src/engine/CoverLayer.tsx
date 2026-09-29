@@ -18,7 +18,7 @@
  */
 
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
 export interface ReferencePatch {
   /** Distance from the left edge of the screen, in pixels. */
@@ -39,6 +39,8 @@ export interface CoverLayerProps {
   mode?: 'opaque' | 'dim';
   /** Opacity for dim mode, 0.9 or higher. */
   dimOpacity?: number;
+  /** A still from a verified signed scene hold, never an unchecked URL. */
+  imageUri?: string;
   /** Screen area to leave uncovered for the camera harness. */
   referencePatch?: ReferencePatch;
   screenWidth?: number;
@@ -52,6 +54,7 @@ const CoverLayer = ({
   visible,
   mode = 'opaque',
   dimOpacity = 0.9,
+  imageUri,
   referencePatch,
   screenWidth,
   screenHeight,
@@ -62,15 +65,27 @@ const CoverLayer = ({
   }
 
   const opacity = mode === 'dim' ? Math.max(0.9, dimOpacity) : 1;
+  const coverOpacity = imageUri ? 1 : opacity;
 
-  if (!referencePatch || screenWidth === undefined || screenHeight === undefined) {
+  if (
+    !referencePatch ||
+    screenWidth === undefined ||
+    screenHeight === undefined
+  ) {
     return (
       <View
         testID={testID}
         accessibilityElementsHidden
         importantForAccessibility="no-hide-descendants"
-        style={[styles.fill, { opacity }]}
-      />
+        style={[styles.fill, { opacity: coverOpacity }]}>
+        {imageUri && !referencePatch ? (
+          <SceneStill
+            key={imageUri}
+            uri={imageUri}
+            testID={`${testID}-still`}
+          />
+        ) : null}
+      </View>
     );
   }
 
@@ -85,7 +100,13 @@ const CoverLayer = ({
         testID={`${testID}-top`}
         style={[
           styles.piece,
-          { opacity, left: 0, top: 0, width: screenWidth, height: referencePatch.y },
+          {
+            opacity,
+            left: 0,
+            top: 0,
+            width: screenWidth,
+            height: referencePatch.y,
+          },
         ]}
       />
       <View
@@ -128,6 +149,25 @@ const CoverLayer = ({
         ]}
       />
     </View>
+  );
+};
+
+/** A new URI mounts a fresh native image; failure leaves its black parent intact. */
+const SceneStill = ({ uri, testID }: { uri: string; testID: string }) => {
+  const [failed, setFailed] = React.useState(false);
+  if (failed) {
+    return null;
+  }
+  return (
+    <Image
+      testID={testID}
+      source={{ uri }}
+      style={StyleSheet.absoluteFill}
+      resizeMode="contain"
+      fadeDuration={0}
+      accessible={false}
+      onError={() => setFailed(true)}
+    />
   );
 };
 

@@ -1,6 +1,14 @@
 # Calm Frames: rules for every session
 
-**Current phase:** Phase 9, the pattern rule's precision, Sat Sep 19, 2026. Phases 0 to 2
+**Current phase:** Phase 10, signed scene holds, Tue Sep 29, 2026. Scene-specific
+preceding images now join the signed map, rendition, cover model and live guard.
+They never change intervals or thresholds. Focused regressions and the final
+broad app suite, final selected Python sweep and complete mutation measurement
+pass. The final-source native Debug build passes on all three configured
+architectures; remote CI is blocked before runner startup.
+The upload-server HTTP fixtures need an unrestricted runner, and
+real-device image, caption and timing composition still need benign-media proof.
+Phase 9's pattern-rule precision work remains recorded below. Phases 0 to 2
 are done apart from what needs the stick, and all five phase 8 features are in, tested,
 documented and reachable in the running app. Phase 9 so far: the regular-pattern rule
 requires a period before a run of bars counts, so text is no longer read as stripes; both
@@ -8,7 +16,12 @@ ffmpeg baselines were re-run as one set on ffmpeg 9.0.1; the labelling pool is b
 segments over 16 titles. docs/STATUS.md section 0 is the short version and section 2 is
 Alex's dated list.
 **The head-start kits never arrived.** flashmap, calm-timing, evkit and the notes were all written here instead. docs/PLAN.md lists what replaced what. If the kits turn up, treat them as a second opinion and re-record any number taken with our version.
-**Repo:** private at github.com/alejandro-publius/calm-frames, main, CI green on ubuntu runners. It goes public during the final checks on Oct 21, because the rules need it public with the licence visible at submission.
+**Repo:** private at github.com/alejandro-publius/calm-frames. Work is on
+`codex/signed-scene-holds-2026-09-29`; main remains unchanged. The inspected
+HEAD push CI passed on Sep 20; the Sep 28 scheduled Audit and Sep 29 retry failed
+before any runner or step started. The scene-hold tree must pass GitHub CI before
+main is updated. It goes public during the final checks on Oct 21, because the rules
+need it public with the licence visible at submission.
 
 Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/BUILD_PROMPT.md (the full plan, phases, gates, kill rules, cut list), docs/DECISIONS.md, docs/GATES.md.
 

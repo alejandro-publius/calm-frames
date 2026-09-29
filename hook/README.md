@@ -49,10 +49,17 @@ const guard = useFlashGuard({
 });
 
 // Between the video surface and the captions view.
-<CoverLayer visible={guard.covered} mode={guard.coverMode} />
+<CoverLayer visible={guard.covered} mode={guard.coverMode} imageUri={guard.coverImageUri} />
 // Above both.
 <CalmCard card={guard.card} onSkip={guard.skipTo} />
 ```
+
+Maps produced with scene holds carry checked JPEGs inside their signed payload.
+The guard selects one only when its bounds contain the entire scheduled cover.
+Pass `coverImageUri` to the cover to keep the scene's preceding context visible
+while sound and captions continue. The image is fully opaque and sits over a
+black backing; absent images, rejected maps, uncertain playback and image-load
+failures retain that backing. The countdown and seek rules are unchanged.
 
 Then two rules for the rest of the app:
 

@@ -42,6 +42,7 @@ export const MIRRORED = [
   'mediaClock.ts',
   'SafeMediaControlHandler.ts',
   'seekSafety.ts',
+  'sceneHolds.ts',
   'sha512.ts',
   'timingLog.ts',
   'titleStatus.ts',

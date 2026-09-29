@@ -10,7 +10,15 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 Calm Frames is a verified safety layer for kids with photosensitive epilepsy, and it is never a video player. Every frame of a title is checked before that title can play in kid mode, and the result is an Ed25519 signed flash map bound to the file's SHA-256. When a child plays the title, the player hides each flagged segment before it starts while the sound and the captions keep going, then says what was hidden. The layer adapts to the household, because a parent gives the TV size and the seat distance and picks a preset, and a household setting can only ever make it stricter than WCAG, never weaker. Voice, D-pad and on-screen cards all run through one seek function, so every path to a new playhead position is safe: if the target lands inside a flagged interval or its guard band, the picture is covered first and the seek happens second. Any Vega video app can add the same protection with a small hook, and any studio can check its own content before publishing with the open-source analyzer and its GitHub Action.
 
-**Status, Sep 17 2026.** This is a build in progress for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The analyzer, the pipeline, the cover layer and the measurement harnesses are built and tested. Nothing has been measured on a physical Fire TV stick yet, so there is no screen-level cover lead time. There is a software-level one from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time. Six produced no usable evidence and one was late. Counting the six as failures, which is the strict reading, that is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> you get from the trials that could be measured. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
+**Status, Sep 29 2026.** This is a build in progress for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The analyzer, the pipeline, the cover layer and the measurement harnesses are built and tested. Nothing has been measured on a physical Fire TV stick yet, so there is no screen-level cover lead time. There is a software-level one from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time. Six produced no usable evidence and one was late. Counting the six as failures, which is the strict reading, that is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> you get from the trials that could be measured. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
+
+**Scene holds, Sep 29.** Hidden intervals can now show a checked still from the
+preceding context, helping keep the story in view while audio and captions continue.
+The pipeline binds each JPEG to the signed map and uses the same image in the
+pre-covered rendition and the live-cover model. Missing images, uncertain
+playback, seeks and image decode errors use an opaque black cover. This changes
+the presentation, not the detector thresholds or hide timing. Native image and
+caption composition still need a physical-device check.
 
 ## Contents
 
@@ -441,11 +449,28 @@ Copy [`flashmap/examples/flash-check.yml`](flashmap/examples/flash-check.yml) in
 ### The pipeline
 
 ```sh
-python -m pipeline.ingest --source VIDEO          # probe, analyze, hide plan, rendition, posters, sign
-python -m pipeline.verify --title <sha256>        # the gate that blocks publishing
+python -m pipeline.ingest VIDEO --workdir build/ingest  # probe, analyze, hide plan, rendition, posters
+python -m pipeline.verify --workdir build/ingest --sha SHA256  # the publication gate
 ```
 
 Ingest is idempotent and keyed by the source file's SHA-256, so a repeated run picks up where it stopped.
+
+Scene holds are enabled by default when ingest has a signing key:
+
+```sh
+python -m pipeline.ingest VIDEO --workdir build/ingest --key /path/to/team_key.pem \
+    --pub /path/to/team_key.pub.pem
+```
+
+For each covered interval, ingest selects an exact preceding source frame outside
+every requested preset's guarded intervals and calm margin, with a five-second
+lookback. If no eligible frame exists, extraction fails, or the still fails its
+pattern check, it uses a flat neutral image. The inline JPEGs are bounded and
+signed; intervals without a descriptor use black. Verification checks their
+source provenance, bytes, and the encoded MP4, HLS and live-cover model before
+publication. `--no-scene-holds` retains the legacy rendition and cover path.
+Existing maps without scene holds remain supported. The wire contract is in
+[`docs/SIDECAR_SPEC.md`](docs/SIDECAR_SPEC.md).
 
 ### AWS
 
@@ -473,6 +498,9 @@ Worth knowing before trusting this with a child.
 - **There is no screen-level cover lead time.** The software-level number above is the app's own timing on the virtual device, and it stops at the moment the app sets its state. Until GATE 1 is filmed on a stick at 240 fps, the timing claim in this README is an upper bound and a design argument, not a measurement of what a screen showed.
 - **One cover in 49 went on after its marker started.** The cause looks like the JavaScript thread being unavailable for about a third of a second, which the 500 ms guard band did not cover. Until the worst thread pause is measured on real hardware, the right guard band is unknown.
 - **The layering question is open.** The one recorded run is inconclusive, because playback did not run in that take.
+- **Scene-hold composition is not measured on a TV.** The encoded outputs and
+  runtime guards have automated checks, but native image loading, aspect ratio,
+  captions and cover timing still need a physical-device run with benign media.
 - **Red flash coverage is untested against real footage**, because no free source in the pool has a saturated red strobe.
 - **The room rule can only add hides.** A household cannot make Calm Frames weaker than WCAG. That is a design rule and it is enforced in code, but it also means a household cannot switch protection off for one title without leaving kid mode.
 - **None of it has been seen running on a stick.** The guard hook, the PIN gate, the seek safety engine, the calm card and the VoiceView announcements exist in `app/src/calmframes/`, and the standalone [`hook/`](hook/) package that ships them to other apps exists too, with its own README and the integration diff above. What has not happened is any of it running on real hardware.

@@ -108,6 +108,12 @@ class TitleLayout:
     def cover_model_path(self, preset: str) -> Path:
         return self.verify_dir / f"cover_model_{preset}.mp4"
 
+    def scene_manifest(self, preset: str) -> Path:
+        return self.root / "scene_holds" / preset / "manifest.json"
+
+    def scene_image(self, preset: str, index: int) -> Path:
+        return self.root / "scene_holds" / preset / f"hold_{index:03d}.jpg"
+
     def verify_map_path(self, preset: str, kind: str) -> Path:
         return self.verify_dir / f"{kind}_{preset}.json"
 

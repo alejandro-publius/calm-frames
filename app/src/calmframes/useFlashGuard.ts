@@ -24,7 +24,15 @@
  * and only a verified map can turn it off.
  */
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { Image } from 'react-native';
 import { announceForAccessibility } from './announce';
 import { Card, cardAt, cardChanged, NO_CARD } from './cards';
 import {
@@ -38,6 +46,7 @@ import {
   VerifiedFlashMap,
   verifyFlashMap,
 } from './flashMap';
+import { HideCause, HideLogEntry } from './hideLog';
 import {
   coverOptionsFor,
   DEFAULT_SETTINGS,
@@ -46,7 +55,7 @@ import {
   PRESETS,
   unionSegments,
 } from './household';
-import { HideCause, HideLogEntry } from './hideLog';
+import { SceneHold, sceneHoldForInterval } from './sceneHolds';
 import {
   createSeekEngine,
   SeekEngine,
@@ -103,6 +112,8 @@ export interface FlashGuardState {
   blockedReason?: string;
   covered: boolean;
   coverMode: 'opaque' | 'dim';
+  /** Only a checked still for the complete current scheduled interval. */
+  coverImageUri?: string;
   card: Card;
   intervals: CoverInterval[];
   mediaTimeMs: number;
@@ -118,7 +129,9 @@ export interface FlashGuardState {
 
 async function defaultFetchText(url: string): Promise<string | null> {
   try {
-    const response = await fetch(url, { headers: { 'cache-control': 'no-cache' } });
+    const response = await fetch(url, {
+      headers: { 'cache-control': 'no-cache' },
+    });
     if (!response.ok) {
       return null;
     }
@@ -150,19 +163,89 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
   } = options;
 
   const [status, setStatus] = useState<GuardStatus>('loading');
-  const [rejection, setRejection] = useState<MapRejection | undefined>(undefined);
+  const [rejection, setRejection] = useState<MapRejection | undefined>(
+    undefined,
+  );
   const [blockedReason, setBlockedReason] = useState<string | undefined>(
     'Checking this title.',
   );
   const [segments, setSegments] = useState<CoverInterval[]>([]);
   const [seekHolding, setSeekHolding] = useState(false);
   const [hiddenMs, setHiddenMs] = useState(0);
+  const [sceneHolds, setSceneHolds] = useState<SceneHold[]>([]);
+  const [sceneSeekDisruptions, setSceneSeekDisruptions] = useState(0);
+
+  // Bind a verified result to its actual map texts as well as the title. A
+  // replacement map must start covered on the very render that receives it,
+  // before the asynchronous check can finish. Compare primitive fields so an
+  // inline mapTexts object does not restart verification on every render.
+  const verificationInput = useMemo(
+    () => ({
+      wcagText: mapTexts?.wcag,
+      broadcastText: mapTexts?.broadcast,
+      wcagUrl: mapUrls?.wcag,
+      broadcastUrl: mapUrls?.broadcast,
+      expectedSha256,
+      publicKeyBase64,
+      titleId,
+      preset: settings.preset,
+      tvDiagonalIn: settings.tvDiagonalIn,
+      seatDistanceIn: settings.seatDistanceIn,
+      durationMs,
+      renditionStartOffsetMs,
+      maxMapAgeMs,
+    }),
+    [
+      mapTexts?.wcag,
+      mapTexts?.broadcast,
+      mapUrls?.wcag,
+      mapUrls?.broadcast,
+      expectedSha256,
+      publicKeyBase64,
+      titleId,
+      settings.preset,
+      settings.tvDiagonalIn,
+      settings.seatDistanceIn,
+      durationMs,
+      renditionStartOffsetMs,
+      maxMapAgeMs,
+    ],
+  );
+  const [checkedInput, setCheckedInput] = useState<object | null>(null);
+  const activeStatus: GuardStatus =
+    checkedInput === verificationInput ? status : 'loading';
 
   const coverOptions = useMemo(() => coverOptionsFor(settings), [settings]);
 
   const intervals = useMemo(() => segments, [segments]);
   const intervalsRef = useRef<CoverInterval[]>(intervals);
   intervalsRef.current = intervals;
+  const committedSceneIntervalsRef = useRef<CoverInterval[]>(intervals);
+  const presentedSceneIntervalRef = useRef<CoverInterval | undefined>(undefined);
+  const sceneBlackoutsRef = useRef({
+    input: verificationInput,
+    intervals: new Set<string>(),
+    uncertaintyCount: -1,
+    seekDisruptions: sceneSeekDisruptions,
+  });
+  const latchSceneInterval = useCallback((interval?: CoverInterval) => {
+    if (interval) {
+      sceneBlackoutsRef.current.intervals.add(
+        `${interval.startMs}:${interval.endMs}`,
+      );
+    }
+  }, []);
+  const latchSceneAt = useCallback(
+    (mediaTimeMs: number) => {
+      // Preserve every interrupted interval for this map/title session, not
+      // just the current playhead. Seeking back must not revive its still.
+      latchSceneInterval(presentedSceneIntervalRef.current);
+      latchSceneInterval(
+        intervalAt(committedSceneIntervalsRef.current, mediaTimeMs),
+      );
+    },
+    [latchSceneInterval],
+  );
 
   // Load and check the maps. Anything that goes wrong leaves the picture
   // hidden and names a reason.
@@ -172,6 +255,8 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
 
     const run = async () => {
       setStatus('loading');
+      setCheckedInput(null);
+      setSceneHolds([]);
       setBlockedReason('Checking this title.');
       const verifiedMaps: VerifiedFlashMap[] = [];
       for (const profile of preset.mapProfiles) {
@@ -190,6 +275,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
             return;
           }
           setStatus('blocked');
+          setCheckedInput(verificationInput);
           setRejection(verdict.reason);
           setBlockedReason(rejectionMessage(verdict.reason));
           setSegments([]);
@@ -200,6 +286,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
             return;
           }
           setStatus('blocked');
+          setCheckedInput(verificationInput);
           setRejection('missing');
           setBlockedReason(
             'This room is stricter than the check that was run, so the picture stays hidden.',
@@ -227,6 +314,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
           return;
         }
         setStatus('blocked');
+        setCheckedInput(verificationInput);
         setRejection('wrong-file');
         setBlockedReason(
           'This title does not line up with the check that was run, so the picture stays hidden.',
@@ -235,9 +323,11 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
         return;
       }
       setSegments(built);
+      setSceneHolds(verifiedMaps.flatMap((map) => map.sceneHolds ?? []));
       setRejection(undefined);
       setBlockedReason(undefined);
       setStatus('verified');
+      setCheckedInput(verificationInput);
     };
 
     void run();
@@ -245,22 +335,16 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    expectedSha256,
-    publicKeyBase64,
-    settings,
-    durationMs,
-    coverOptions,
-    renditionStartOffsetMs,
-  ]);
+  }, [verificationInput]);
 
   // The schedule itself, on the harness that GATE 1 measured.
   const harness = useCoverHarness(mediaRef, {
-    mode: status === 'verified' && ready ? 'timing' : 'off',
+    mode: activeStatus === 'verified' && ready ? 'timing' : 'off',
     intervals,
     foreground,
     ready,
     scheduleLabel: `flash-guard:${titleId}`,
+    onUncertainty: latchSceneAt,
   });
 
   const seekEngine = useMemo(
@@ -268,6 +352,11 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
       createSeekEngine({
         getIntervals: () => intervalsRef.current,
         getDurationMs: () => durationMs,
+        onPlan: (plan) => {
+          latchSceneAt(plan.targetMs);
+          latchSceneInterval(plan.interval);
+          setSceneSeekDisruptions((count) => count + 1);
+        },
         setCover: (covered) => setSeekHolding(covered),
         seekTo: (targetMs) => {
           const element = mediaRef.current as
@@ -291,17 +380,124 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
   }, [harness.mediaTimeMs, seekEngine]);
 
   const covered =
-    status !== 'verified' || !ready || harness.covered || seekHolding;
+    activeStatus !== 'verified' || !ready || harness.covered || seekHolding;
+  const currentInterval = intervalAt(intervals, harness.mediaTimeMs);
+  const blackout = sceneBlackoutsRef.current;
+  const ownsBlackout = blackout.input === verificationInput;
+  const disrupted =
+    ownsBlackout &&
+    ((blackout.uncertaintyCount >= 0 &&
+      blackout.uncertaintyCount !== harness.uncertaintyCount) ||
+      blackout.seekDisruptions !== sceneSeekDisruptions);
+  // A checked static image can still flash if repeatedly removed and restored.
+  // Any disruption therefore keeps this interval black for the whole session.
+  const sceneIsLatchedBlack = currentInterval
+    ? blackout.intervals.has(`${currentInterval.startMs}:${currentInterval.endMs}`)
+    : false;
+  const coverImageUri =
+    ownsBlackout &&
+    !disrupted &&
+    activeStatus === 'verified' &&
+    ready &&
+    foreground &&
+    covered &&
+    harness.covered &&
+    !harness.uncertain &&
+    !seekHolding &&
+    !sceneIsLatchedBlack
+      ? sceneHoldForInterval(
+          sceneHolds,
+          currentInterval,
+          renditionStartOffsetMs,
+        )?.imageDataUri
+      : undefined;
+
+  useLayoutEffect(() => {
+    // Render can be abandoned by Suspense. Only a committed identity may
+    // replace the one bounded owner or forget its interval history.
+    if (sceneBlackoutsRef.current.input !== verificationInput) {
+      sceneBlackoutsRef.current = {
+        input: verificationInput,
+        intervals: new Set<string>(),
+        uncertaintyCount: -1,
+        seekDisruptions: sceneSeekDisruptions,
+      };
+      presentedSceneIntervalRef.current = undefined;
+    }
+    committedSceneIntervalsRef.current = intervals;
+    if (disrupted || harness.uncertain || seekHolding || !foreground || !ready) {
+      latchSceneAt(harness.mediaTimeMs);
+    }
+    const committed = sceneBlackoutsRef.current;
+    committed.uncertaintyCount = harness.uncertaintyCount;
+    committed.seekDisruptions = sceneSeekDisruptions;
+    presentedSceneIntervalRef.current = coverImageUri
+      ? currentInterval
+      : undefined;
+  }, [
+    verificationInput,
+    intervals,
+    currentInterval,
+    coverImageUri,
+    disrupted,
+    harness.uncertain,
+    harness.uncertaintyCount,
+    harness.mediaTimeMs,
+    sceneSeekDisruptions,
+    seekHolding,
+    foreground,
+    ready,
+    latchSceneAt,
+  ]);
+
+  const prefetchedImages = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    prefetchedImages.current.clear();
+  }, [verificationInput]);
+  useEffect(() => {
+    if (
+      activeStatus !== 'verified' ||
+      !ready ||
+      typeof Image.prefetch !== 'function'
+    ) {
+      return;
+    }
+    const next = intervals.find(
+      (interval) => interval.endMs > harness.mediaTimeMs,
+    );
+    const uri = sceneHoldForInterval(
+      sceneHolds,
+      next,
+      renditionStartOffsetMs,
+    )?.imageDataUri;
+    if (uri && !prefetchedImages.current.has(uri)) {
+      prefetchedImages.current.add(uri);
+      // An unsupported prefetch or a failed decode leaves the opaque black
+      // backing in charge. Preloading is never evidence that a still is safe.
+      try {
+        Image.prefetch(uri).catch(() => {});
+      } catch {
+        // Some device builds have no prefetch implementation.
+      }
+    }
+  }, [
+    activeStatus,
+    ready,
+    intervals,
+    harness.mediaTimeMs,
+    sceneHolds,
+    renditionStartOffsetMs,
+  ]);
 
   const card = useMemo(
     () =>
-      status === 'verified'
+      activeStatus === 'verified'
         ? cardAt(intervals, harness.mediaTimeMs)
         : cardAt([], 0, {
             rejection: rejection ?? 'missing',
             blockedDetail: blockedReason,
           }),
-    [status, intervals, harness.mediaTimeMs, rejection, blockedReason],
+    [activeStatus, intervals, harness.mediaTimeMs, rejection, blockedReason],
   );
 
   // Say each card once, and never the same words twice in a row.
@@ -316,7 +512,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
   // One log entry per interval that was actually covered.
   const loggedIntervals = useRef<Set<number>>(new Set());
   useEffect(() => {
-    if (!covered || status !== 'verified') {
+    if (!covered || activeStatus !== 'verified') {
       return;
     }
     const interval = intervalAt(intervalsRef.current, harness.mediaTimeMs);
@@ -337,10 +533,11 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
       reason: interval.reason,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [covered, harness.mediaTimeMs, status]);
+  }, [covered, harness.mediaTimeMs, activeStatus]);
 
   const requestSeek = useCallback(
-    (source: SeekSource, targetMs: number) => seekEngine.requestSeek(source, targetMs),
+    (source: SeekSource, targetMs: number) =>
+      seekEngine.requestSeek(source, targetMs),
     [seekEngine],
   );
 
@@ -352,7 +549,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
   );
 
   return {
-    status,
+    status: activeStatus,
     rejection,
     blockedReason,
     covered,
@@ -360,6 +557,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
     // pipeline's verify step modelled it. Nothing here opts into that yet, so
     // the cover is always opaque.
     coverMode: 'opaque',
+    coverImageUri,
     card,
     intervals,
     mediaTimeMs: harness.mediaTimeMs,

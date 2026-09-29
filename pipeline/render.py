@@ -44,6 +44,7 @@ from . import PipelineError
 from . import ffmpegtool
 from .hideplan import DIM, DIM_MAX_LUMINANCE, OPAQUE, CoverInterval, HidePlan, cover_mode
 from .probe import VideoProbe
+from .sceneholds import SceneHold
 
 BT1886_GAMMA = 2.4
 SRGB_GAMMA = 2.2
@@ -348,6 +349,35 @@ def _subtitle_plan(probe: VideoProbe) -> tuple[bool, list[str]]:
     return bool(text_streams), skipped
 
 
+def _scene_filter(
+    args: list[str],
+    intervals: Sequence[CoverInterval],
+    scene_holds: Sequence[SceneHold],
+    probe: VideoProbe,
+    *,
+    hold: str = "",
+) -> str:
+    """Opaque images over a black fallback, with the original interval times."""
+    expression = enable_expression(intervals)
+    black = (
+        "drawbox=x=0:y=0:w=iw:h=ih:color=black@1:t=fill:"
+        f"enable='{expression}'" if expression else "null"
+    )
+    chains = [f"[0:v]{hold}{black}[scene_base0]"]
+    for index, image in enumerate(scene_holds, 1):
+        if not image.path.is_file():
+            raise PipelineError(f"a scene hold asset is missing: {image.path}")
+        args += ["-loop", "1", "-i", str(image.path)]
+        expression = enable_expression([CoverInterval(image.start_ms, image.end_ms)])
+        chains.append(f"[{index}:v]scale={probe.width}:{probe.height},setsar=1[scene_img{index}]")
+        chains.append(
+            f"[scene_base{index - 1}][scene_img{index}]overlay=0:0:shortest=1:"
+            f"enable='{expression}'[scene_base{index}]"
+        )
+    chains.append(f"[scene_base{len(scene_holds)}]format=yuv420p[v]")
+    return ";".join(chains)
+
+
 def render_safe_master(
     source: str | Path,
     *,
@@ -359,6 +389,7 @@ def render_safe_master(
     x264_preset: str = DEFAULT_PRESET,
     segment_seconds: float = DEFAULT_HLS_SEGMENT_S,
     pad_tail_ms: float = 0.0,
+    scene_holds: Sequence[SceneHold] | None = None,
 ) -> RenderResult:
     """One MP4 with every flagged span plus guard band replaced by the still.
 
@@ -385,7 +416,10 @@ def render_safe_master(
     )
 
     args: list[str] = ["-i", str(source)]
-    if expression:
+    if scene_holds is not None:
+        graph = _scene_filter(args, intervals, scene_holds, probe, hold=hold)
+        args += ["-filter_complex_threads", "1", "-filter_complex", graph, "-map", "[v]"]
+    elif expression:
         args += ["-loop", "1", "-i", str(still_path)]
         filtergraph = (
             f"[0:v]{hold}null[base];"
@@ -436,6 +470,7 @@ def render_safe_master(
             "audio_copied": probe.has_audio,
             "subtitles_carried": keep_subs,
             "subtitles_skipped": skipped_subs,
+            "scene_hold_count": None if scene_holds is None else len(scene_holds),
         },
     )
 
@@ -505,6 +540,7 @@ def render_cover_model(
     crf: int = DEFAULT_VERIFY_CRF,
     x264_preset: str = "veryfast",
     dim_alpha: float = DIM_MAX_LUMINANCE,
+    scene_holds: Sequence[SceneHold] | None = None,
 ) -> RenderResult:
     """Draw the on-device cover schedule over the original video.
 
@@ -514,6 +550,23 @@ def render_cover_model(
     """
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    if scene_holds is not None:
+        # Image holds are fully opaque even where the legacy plan allows dim.
+        # The same assets are used here and in the pre-covered rendition.
+        args = ["-i", str(source)]
+        graph = _scene_filter(args, plan.intervals, scene_holds, probe)
+        args += ["-filter_complex_threads", "1", "-filter_complex", graph,
+                 "-map", "[v]", "-an", "-sn", "-c:v", "libx264",
+                 "-preset", x264_preset, "-crf", str(crf)]
+        args += _colour_tag_args(probe)
+        if probe.duration_s > 0:
+            args += ["-t", f"{probe.duration_s:.6f}"]
+        args += [str(out_path)]
+        result = ffmpegtool.run_ffmpeg(args)
+        return RenderResult(path=out_path, cmd=result.cmd,
+                            notes={"scene_hold_count": len(scene_holds),
+                                   "dim_spans": 0, "opaque_spans": len(plan.intervals)})
 
     dim_spans = [i for i in plan.intervals if cover_mode(i, allow_dim=plan.allow_dim) == DIM]
     opaque_spans = [

@@ -158,6 +158,26 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
   });
 
+  it('never shows an unchecked picture after playing confirms with a missing map', async () => {
+    const media = makeMediaElement();
+    render(
+      <Guarded
+        media={media}
+        mapUrl="https://example.invalid/map.json"
+        fetchText={async () => null}
+      />,
+    );
+    await settle();
+    await act(async () => {
+      media.fire('playing');
+      jest.advanceTimersByTime(100);
+    });
+    // Assert the picture itself, not just the rejection category. Treating a
+    // missing map as an empty verified one would otherwise leave it exposed.
+    expect(read('covered')).toBe('covered');
+    expect(read('status')).toBe('blocked');
+  });
+
   it('uncovers only once a signed map has verified', async () => {
     const media = makeMediaElement();
     render(<Guarded media={media} />);

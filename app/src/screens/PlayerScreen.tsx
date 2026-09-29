@@ -32,6 +32,25 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
+import CalmCard from '../calmframes/CalmCard';
+import { NO_CARD } from '../calmframes/cards';
+import { playChime } from '../calmframes/chimeSound';
+import CoverLayer from '../calmframes/CoverLayer';
+import { buildCoverIntervals } from '../calmframes/coverSchedule';
+import { recordHide } from '../calmframes/hideLogStore';
+import { OFFLINE_PUBLIC_KEY_BASE64 } from '../calmframes/offlineTitle';
+import {
+  mustStayHidden,
+  playbackAccess,
+  UNGUARDED_CARD,
+} from '../calmframes/playerAccess';
+import { SafeMediaControlHandler } from '../calmframes/SafeMediaControlHandler';
+import { beacon } from '../calmframes/timingLog';
+import { useUiCapture } from '../calmframes/uiCapture';
+import { playerFrame } from '../calmframes/uiFrames';
+import { useChimeCue } from '../calmframes/useChimeCue';
+import { useCoverHarness } from '../calmframes/useCoverHarness';
+import { useFlashGuard } from '../calmframes/useFlashGuard';
 import BufferingWindow from '../components/BufferingWindow';
 import {
   AppStackParamList,
@@ -46,25 +65,6 @@ import { FrameImageSource } from '../services/bif/FrameImageSource';
 import { COLORS } from '../styles/Colors';
 import { VideoHandler } from '../utils/VideoHandler';
 import VideoPlayerUI from '../w3cmedia/mediacontrols/VideoPlayerUI';
-import { beacon } from '../calmframes/timingLog';
-import CalmCard from '../calmframes/CalmCard';
-import CoverLayer from '../calmframes/CoverLayer';
-import { buildCoverIntervals } from '../calmframes/coverSchedule';
-import { OFFLINE_PUBLIC_KEY_BASE64 } from '../calmframes/offlineTitle';
-import { SafeMediaControlHandler } from '../calmframes/SafeMediaControlHandler';
-import { NO_CARD } from '../calmframes/cards';
-import {
-  mustStayHidden,
-  playbackAccess,
-  UNGUARDED_CARD,
-} from '../calmframes/playerAccess';
-import { useCoverHarness } from '../calmframes/useCoverHarness';
-import { useFlashGuard } from '../calmframes/useFlashGuard';
-import { recordHide } from '../calmframes/hideLogStore';
-import { useChimeCue } from '../calmframes/useChimeCue';
-import { playChime } from '../calmframes/chimeSound';
-import { useUiCapture } from '../calmframes/uiCapture';
-import { playerFrame } from '../calmframes/uiFrames';
 import { ShakaPlayer } from '../w3cmedia/shakaplayer/ShakaPlayer';
 
 const BACKGROUND_STATE: AppStateStatus = 'background';
@@ -404,7 +404,10 @@ const PlayerScreen = ({
 
   const setupEventListeners = useCallback(() => {
     if (Platform.isTV) {
-      backHandlerSubscription.current = BackHandler.addEventListener('hardwareBackPress', navigateBack);
+      backHandlerSubscription.current = BackHandler.addEventListener(
+        'hardwareBackPress',
+        navigateBack,
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Platform.isTV]);
@@ -556,6 +559,7 @@ const PlayerScreen = ({
             */}
             <CoverLayer
               visible={covered}
+              imageUri={access === 'guarded' ? guard.coverImageUri : undefined}
               referencePatch={route.params.referencePatch}
               screenWidth={deviceWidth}
               screenHeight={deviceHeight}

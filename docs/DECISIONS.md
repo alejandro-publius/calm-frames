@@ -1412,3 +1412,93 @@ second way.
   100 mV. BT.1886 is what the recommendation in force asks for and Appendix I
   describes itself as a typical CRT relationship, so nothing was changed. The table
   and the arithmetic are in SPEC_SOURCES 8.4.
+
+## 2026-09-29: carry scene-specific holds in authenticated maps
+
+- **Decision:** add an optional `scene_holds` presentation field to version 1
+  maps, containing an opaque preceding-context JPEG per eligible covered
+  interval. Use the same bytes in the prepared rendition and live cover model.
+  Keep cover timing, segment lists, room floors and seek safety unchanged.
+- **Why:** one still reused throughout a title and a black live cover lose the
+  scene's context. Holding a preceding checked image while sound and captions
+  continue is a bounded way to improve story continuity. Inline signed images
+  bind the presentation asset to the map without trusting a mutable image URL.
+- **Cost:** larger maps and image decoding on the player. Bound the number,
+  individual image size and total payload; fall back to an opaque cover when
+  an image is unavailable or the runtime interval is stricter. Validate the
+  actual render and its transitions before publishing. No story-comprehension,
+  physical-screen timing or clinical result is claimed by this change.
+- **Review refinements:** keep the native image aspect intact over opaque black,
+  and check pattern findings at the encoded output resolution during every
+  hold, including HLS after correcting its transport time origin. This does not
+  apply the broadcast source policy outside holds. Include actual image,
+  manifest, map, output and verification-report bytes in cache checks; withdraw
+  a prior catalog verdict before re-ingest so an early failure cannot leave it
+  playable. Keep the legacy path covered by explicit legacy fixtures.
+
+## 2026-09-29: latch interrupted scene holds black and verify cached preview bytes
+
+- **Decision:** after uncertainty, a seek, backgrounding or an unready player
+  interrupts a covered interval, retain an opaque black presentation for that
+  interval throughout the verified map/title session. Resuming or seeking back
+  must not restore its image; a later uninterrupted interval remains eligible.
+- **Why:** an independently reproduced sequence of four waiting/playing cycles
+  alternated the checked image and black within 400 ms of simulated time. The
+  image itself being checked does not make that sequence acceptable. Synchronous
+  event notifications and a monotonic event counter retain disruptions even when
+  React batches the uncertainty and resume into one render. The hide schedule,
+  thresholds and seek funnel are unchanged.
+- **Commit boundary:** an uncommitted title render must not erase a committed
+  title's blacklist or replace its presentation-event callback. Reset latch
+  ownership and update event/presented-interval references only when the new
+  render commits. Mismatched ownership stays black while verification catches
+  up. This keeps one bounded session history without retaining every map text.
+- **Cache boundary:** the probe and preview steps now compare recorded hashes
+  of their actual outputs before reuse. Register poster JPEGs as step outputs,
+  not only their manifest, so deleting or changing a preview causes restoration
+  from the source. Include probe, global still, BIF, poster and manifest bytes
+  in the final verification fingerprint as well as the signed scene assets.
+- **Test boundary:** the property compiler now tracks the new parser as a cache
+  prerequisite. A forced compile caught a numeric-narrowing error that a cached
+  compiled scheduler had hidden. Both strict app compilation and the property's
+  non-strict compilation must work; stale compiled bytes are not evidence about
+  the edited parser.
+- **Limit:** encoded-output checks and simulated event tests do not establish
+  native image composition or cover timing on a physical television. Those
+  measurements remain required before any corresponding claim.
+
+## 2026-09-29: preserve the mutation baseline during CI checks
+
+- **Decision:** `--check` must compare the real run against the existing
+  committed report without replacing that report. Unexpected non-equivalent
+  survivors must fail even if a baseline already names them. CI writes the
+  actual measurement to a separate ignored path and retains it as an artifact.
+- **Why:** review found the gate writing its result to the default canonical
+  path before comparing it. The comparison then read the same newly written
+  result as its expectation, so score and inventory drift could escape CI.
+- **Evidence boundary:** add regressions proving a failed comparison leaves
+  the baseline bytes unchanged. A newly registered mutant is not a measured
+  kill, and an interrupted run is not a complete report. The full current
+  inventory has now completed with every unmodified control green and no
+  unexpected survivors; `results/mutation.json` contains the actual measurement.
+- **Publishing boundary:** Alex asked to continue in-scope work without further
+  permission questions. Use an isolated review branch for unrestricted CI
+  evidence, not as a claim that the code is ready. Do not update main until its
+  proposed tree has passed the complete required checks.
+- **Artifact boundary:** upload only `.logs/mutation-ci.json` with hidden-file
+  inclusion enabled. The action excludes files in hidden directories by default;
+  leaving that setting out would discard the report on a failed drift check.
+
+## 2026-09-29: distinguish an Actions startup failure from an audit result
+
+- **Evidence:** the Sep 28 scheduled Audit on the unchanged main commit failed
+  in all four jobs before any runner or step started. One Sep 29 retry reproduced
+  `runner_id: 0` and empty steps, with no runner logs. The Sep 21 scheduled Audit
+  on that same commit passed.
+- **Decision:** do not change dependencies, widen audit exceptions, disable jobs
+  or make the private repository public based on a run that never reached code.
+  Record the startup restriction separately and keep main unchanged until the
+  complete proposed tree has actual passing checks. Account or billing changes
+  are outside this code-and-testing task.
+- **Limit:** the connected API cannot retrieve the startup annotation. Quota or
+  billing is a possible explanation, not an established cause.

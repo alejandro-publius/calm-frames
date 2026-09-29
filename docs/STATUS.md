@@ -1,8 +1,121 @@
 # Status
 
-Updated Sat Sep 19, 2026, late.
+Updated Tue Sep 29, 2026.
 
 ## 0. Where things stand
+
+**Scene holds are implemented; local regression gates pass and remote CI is blocked.** Each
+scheduled hide can show a checked frame from the preceding context, or a flat
+neutral image when no eligible frame exists. The inline JPEG and exact source
+timestamp join the existing map signature. The safe rendition, HLS and live-cover
+model use the same image, with provenance and actual-byte verification before
+publication. The runtime selects an image only for a completely contained
+scheduled interval, keeps an opaque black backing, preserves image aspect ratio,
+and returns to black on seeks, stalls, pauses, backgrounding, invalid maps or
+decode failures. Detector thresholds, signed segments and guard timing did not
+change. The standalone hook and integration example include the new image prop.
+
+Focused benign-media pipeline tests and app guard tests pass, including altered
+assets at unchanged paths, false provenance with a valid signature, an initial
+neutral cover, and an unchanged restart. The new guards were deliberately broken
+and their tests failed before restoration. Physical-device image, caption and
+timing composition remain unmeasured. Nothing has been deployed; main stays
+unchanged until the complete required checks pass.
+
+The final broad app suite, TypeScript check and lint passed with Watchman
+disabled. The first Python regression run exposed two legacy-only fixture
+assumptions and an integration-diff checksum drift; both are fixed. The final
+Python sweep passed in four serial groups: 1,270 tests passed, 11 deselected,
+with no failures, errors or skips. The exclusions are exactly two existing slow
+tests and nine upload-server HTTP fixtures that cannot bind a localhost socket
+in this restricted environment. Those HTTP cases still need an unrestricted
+runner; no server test is being counted as a pass here. Reproduction commands:
+
+```sh
+cd app
+node node_modules/jest/bin/jest.js --ci --watchman=false --runInBand
+cd ..
+.venv/bin/python -m pytest flashmap -q -m 'not slow' \
+    -k 'not TestTheServer and not TestAMeasuredClip'
+.venv/bin/python -m pytest pipeline -q -m 'not slow' \
+    --ignore=pipeline/tests/test_infra.py --ignore=pipeline/tests/test_infra_ingest.py \
+    -k 'not TestTheServer and not TestAMeasuredClip'
+.venv/bin/python -m pytest eval -q -m 'not slow' \
+    -k 'not TestTheServer and not TestAMeasuredClip'
+.venv/bin/python -m pytest pipeline/tests/test_infra.py pipeline/tests/test_infra_ingest.py \
+    -q -m 'not slow' \
+    -k 'not TestTheServer and not TestAMeasuredClip'
+```
+
+Use the pinned Node 22 runtime and `CALM_FRAMES_REQUIRE_NODE=1` for Python. The
+ordinary CI suite still includes both HTTP
+test classes. The integration patch was regenerated and its checksum remeasured;
+the published line counts did not change.
+
+Initial implementation checks: the app suite, TypeScript, lint, in-sandbox Python regression suite,
+integration checksum, published-number drift check, changed-code secret scans
+and whitespace checks passed. The scene-specific guards also passed independent
+review and deliberately failing mutation controls. Existing signed titles must
+be re-ingested with their signing key to gain image descriptors; the bundled
+calm title and original media pool were not changed.
+
+Pre-push hardening found and fixed repeated
+image/black changes during buffering within one covered interval. The runtime
+now latches interrupted intervals black for the verified map/title session,
+including batched uncertainty/resume events and seeks back into an earlier
+interval. Review also reproduced a suspended, uncommitted title render clearing
+the original title's latch. Commit-only latch ownership and presentation refs
+now fix that case too. The final focused run passed 45 guard/playback tests;
+strict TypeScript, targeted lint and three independent isolated runtime
+regressions passed. Cached probe, still, BIF and poster artifacts
+also now check their recorded output bytes and restore altered previews before
+reuse. A fresh property compile exposed a numeric-narrowing error hidden by an
+incomplete compiler-cache dependency list; both are fixed, with a regression
+for the cache dependency. Strict TypeScript and 241 freshly compiled property
+tests pass. None of this is physical-device evidence.
+
+The restricted runner also could not fetch the SBOM generator from PyPI, and
+headless Chrome exited before the report-page screenshot. Those checks are
+unverified here, not passes. GitHub CI still needs to check the proposed tree,
+including the nine HTTP fixtures. The review branch is
+`codex/signed-scene-holds-2026-09-29`; publication does not certify remote CI or
+authorize deployment.
+
+An earlier native bundle attempt and an outdated broad Jest rerun were stopped while the
+runtime changed and host load was excessive. Two existing registry tests timed
+out in that interrupted rerun. Neither interrupted command counts as a pass;
+the final-source sequential app rerun now passes: 91 suites, 832 tests and 57
+snapshots, with the existing one skipped suite and four skipped tests unchanged.
+The final-source `build-vega --build-type Debug --max-workers 2
+--check-manifest true` also passed, producing aarch64, armv7 and x86_64 packages
+with manifest and ABI validation. The build emitted a non-fatal telemetry DNS
+warning; no device was installed or media played. Debug packaging is not
+physical-TV evidence. The earlier stopped mutation run had reached only
+unmutated controls and produced no new canonical report.
+
+The earlier broad Python rerun was also stopped under excessive host load, so
+its partial progress is not a final-source pass. The completed serial sweep
+above supersedes it. The complete mutation measurement passes, with no
+unexpected survivors and every unmodified control green. The two remaining
+survivors are the existing documented equivalent checks. Actual measurements
+are in `results/mutation.json`, not an inferred score. Review caught `--check`
+overwriting its expected report before comparing
+it; the fix preserves the baseline, including path aliases, rejects skipped
+controls and independently rejects unexpected survivors. All 83 harness
+regressions pass, including deliberately failing controls for those guards.
+CI retains the actual measurement as a separate artifact, with hidden-file
+upload enabled only for that exact report path. None of these local checks
+means the full GitHub suite is green. Alex asked to continue in-scope work
+without further permission questions. The isolated review branch carries the
+proposed tree for CI; main stays unchanged until the complete required checks
+pass. The existing main branch's Sep 28 scheduled Audit failed before any
+runner started. A Sep 29 retry reproduced the same condition in all four jobs:
+`runner_id: 0`, no steps, no runner logs. This is not a dependency finding.
+The exact startup restriction is not available through the connector; billing
+or minute limits are only possibilities, not confirmed causes. An external
+Actions startup fix is needed before CI can supply the remaining evidence.
+
+The Sep 19 work below is the earlier phase history, not a new measurement run.
 
 **The build was red and nobody knew.** The tree was clean, pushed and level with
 origin, which is what the last session handed over, and the Vega app job had been
@@ -385,3 +498,9 @@ directory holding two tool versions, and the labelling pool is back to 40
 segments over 16 titles with twice the unflagged half. Eleven mutations killed
 across the session. Nothing has touched AWS and nothing has been pushed to the
 upstream sample.
+
+Tue Sep 29, 2026: signed scene holds are implemented and verified locally across
+the pipeline, player and hook. HTTP fixtures need an unrestricted runner, and
+native image/caption composition needs a benign-media physical-device check.
+The proposed tree is on `codex/signed-scene-holds-2026-09-29`. Main remains
+unchanged pending complete CI; no deployment has been made.

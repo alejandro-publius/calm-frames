@@ -64,7 +64,7 @@ index d1776de..46a8b23 100644
 +      requestSeek('seek-bar', value * SECOND_IN_MILIS);
        videoRef.current.play();
 diff --git src/screens/PlayerScreen.tsx src/screens/PlayerScreen.tsx
-index a8a3bbf..4c8aa92 100644
+index a8a3bbf..f06700a 100644
 --- src/screens/PlayerScreen.tsx
 +++ src/screens/PlayerScreen.tsx
 @@ -24,2 +24,8 @@ import {
@@ -98,7 +98,7 @@ index a8a3bbf..4c8aa92 100644
    );
 @@ -435,2 +455,3 @@ const PlayerScreen = ({
              />
-+            <CoverLayer visible={guard.covered} mode={guard.coverMode} />
++            <CoverLayer visible={guard.covered} mode={guard.coverMode} imageUri={guard.coverImageUri} />
              <KeplerCaptionsView
 @@ -448,4 +469,6 @@ const PlayerScreen = ({
          )}
@@ -139,8 +139,10 @@ index b15cfd4..4873b25 100644
 ## Reading it
 
 **`src/screens/PlayerScreen.tsx`** does the work. `useFlashGuard` takes the
-player ref and where the map is, and gives back `covered`, `card`,
-`requestSeek` and `seekEngine`. `CoverLayer` goes between the video surface and
+player ref and where the map is, and gives back `covered`, `coverImageUri`,
+`card`, `requestSeek` and `seekEngine`. A signed scene hold can keep a preceding
+still visible during a scheduled hide; every uncertain state stays black.
+`CoverLayer` goes between the video surface and
 the captions view, which is what keeps captions readable while the picture is
 hidden. `CalmCard` goes above both. `SafeMediaControlHandler` is handed to the
 player's media control focus, so a spoken "skip forward" goes through the same

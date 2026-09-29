@@ -51,6 +51,9 @@ def built(tmp_path, analyzer, keypair):
         bif_interval_ms=2000,
         x264_preset="ultrafast",
         skip_verify=True,
+        # These regression guards concern the legacy single-still sampling
+        # path. test_sceneholds.py covers the new per-interval default.
+        scene_holds=False,
     )
     result = ingest_title(source, tmp_path / "out", options)
     return {
@@ -80,6 +83,8 @@ def calm_built(tmp_path, analyzer, keypair):
         bif_interval_ms=2000,
         x264_preset="ultrafast",
         skip_verify=True,
+        # Keep the legacy zero-interval proof path explicit as well.
+        scene_holds=False,
     )
     result = ingest_title(source, tmp_path / "out", options)
     return {
