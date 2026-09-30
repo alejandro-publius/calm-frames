@@ -1,13 +1,23 @@
 # Calm Frames: rules for every session
 
-**Current phase:** Phase 10, signed scene holds, Tue Sep 29, 2026. Scene-specific
+**Current phase:** Phase 10, signed scene holds and AWS-free workflow, Tue Sep 29, 2026. Scene-specific
 preceding images now join the signed map, rendition, cover model and live guard.
 They never change intervals or thresholds. Focused regressions and the final
 broad app suite, final selected Python sweep and complete mutation measurement
 pass. The final-source native Debug build passes on all three configured
 architectures; remote CI is blocked before runner startup.
-The upload-server HTTP fixtures need an unrestricted runner, and
+The upload-server HTTP fixtures now pass on the unrestricted runner, and
 real-device image, caption and timing composition still need benign-media proof.
+The follow-up local-library receipt wraps normal ingest and verify, without
+serving media or connecting the app shelf. Household review and title plans are
+presentation-only; settings and the PIN remain in memory. The hook now has a
+clean offline tarball-consumer check using current Vega peers. The final local
+app, Python and package tests and native Debug build pass for these changes;
+see STATUS section 0.
+The fresh unrestricted dependency audit is red on a new `image-size` advisory.
+Its official patch breaks the SDK's legacy build-tool API; no exception or
+risky override was added. Hold the follow-up push until a compatible repair
+and a passing audit, in line with Alex's ready-only push requirement.
 Phase 9's pattern-rule precision work remains recorded below. Phases 0 to 2
 are done apart from what needs the stick, and all five phase 8 features are in, tested,
 documented and reachable in the running app. Phase 9 so far: the regular-pattern rule
@@ -20,6 +30,8 @@ Alex's dated list.
 `codex/signed-scene-holds-2026-09-29`, published as
 [draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1); main remains
 unchanged. Both review workflows failed before any runner or step started. The
+unrestricted startup annotation identifies failed account payments or a
+spending limit, not a code failure; account settings were not changed. The
 main commit's inspected push CI passed on Sep 20; the Sep 28 scheduled Audit and Sep 29 retry failed
 before any runner or step started. The scene-hold tree must pass GitHub CI before
 main is updated. It goes public during the final checks on Oct 21, because the rules

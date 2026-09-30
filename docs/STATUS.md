@@ -4,6 +4,55 @@ Updated Tue Sep 29, 2026.
 
 ## 0. Where things stand
 
+**AWS-free product workflow improvements pass local tests; the dependency audit holds publication.**
+The app reviews the chosen household before opening its checked library, and
+each verified title explains its selected preset, room, checked maps and
+fallback behavior. Pending, failed or incomplete-profile entries get no ready
+viewing plan. These changes are presentation-only and retain the approved
+limits wording. Household settings and the PIN remain in memory in this demo.
+
+`pipeline.local_library` wraps existing ingest and verification in one local
+preparation command and issues a receipt for complete checked renditions only.
+Its verified-only snapshot rechecks recorded bytes, withdraws a failed
+re-import, rejects unsafe artifact paths and refuses overlapping imports. It
+does not serve source media, connect the Vega shelf or establish physical-TV
+readiness. The hook can be locally packed and installed in a clean offline
+consumer, with current Vega peer types, TypeScript, Metro and Babel checks.
+That check is now included in CI and `make ci`; nothing is published to npm.
+
+Final regression evidence for this follow-up: the app has 840 passing tests
+and 57 passing snapshots, with its existing one skipped suite and four skipped
+tests unchanged. Strict TypeScript and lint pass; broad lint retains existing
+warnings and the changed files have no warnings. The final full Python command
+below passes 1,334 tests with no failures or skips; only the two existing slow
+tests are deselected. This includes all nine HTTP cases and all 55 local-library
+tests. The latter include a real benign ffmpeg/flashmap CLI run preparing all
+three presets, not just fabricated wrapper contracts.
+
+```sh
+CALM_FRAMES_REQUIRE_NODE=1 .venv/bin/python -m pytest flashmap pipeline eval -q -m 'not slow'
+```
+
+Use the pinned Node 22 runtime on PATH. The hook's ten guard tests and actual
+offline tarball-consumer check pass. The UI's encoded color-model check passes
+WCAG and broadcast for every captured screen and transition. Published-number
+drift, integration checksum, SBOM and staged secret checks pass. The earlier
+broad Python run found stale README source anchors; correcting them restores
+the link regression without relaxing it. Every new UI guard and the local
+wrapper/package guard groups have observed assertion-red controls followed by
+restored green source. The final-source native Debug build passes for armv7,
+aarch64 and x86_64, with manifest and ABI validation. Nothing was installed or
+played on a device. These checks are not physical-TV or usability evidence.
+
+The fresh unrestricted dependency audit found a new unaccounted `image-size`
+advisory, [GHSA-w3rx-r6r6-pgpr](https://github.com/advisories/GHSA-w3rx-r6r6-pgpr).
+The official patched version is incompatible with the older SDK build-tool
+API. No risky override, downgrade or extra exception was applied. These
+follow-up changes are committed locally, but their push is held while the
+audit gate is red, as Alex requested ready-only pushes. The published branch
+and main remain unchanged. This is separate from the GitHub Actions payment
+or spending-limit restriction; connecting AWS would resolve neither issue.
+
 **Scene holds are implemented; local regression gates pass and remote CI is blocked.** Each
 scheduled hide can show a checked frame from the preceding context, or a flat
 neutral image when no eligible frame exists. The inline JPEG and exact source
@@ -24,12 +73,13 @@ unchanged until the complete required checks pass.
 
 The final broad app suite, TypeScript check and lint passed with Watchman
 disabled. The first Python regression run exposed two legacy-only fixture
-assumptions and an integration-diff checksum drift; both are fixed. The final
+assumptions and an integration-diff checksum drift; both are fixed. That earlier
 Python sweep passed in four serial groups: 1,270 tests passed, 11 deselected,
 with no failures, errors or skips. The exclusions are exactly two existing slow
 tests and nine upload-server HTTP fixtures that cannot bind a localhost socket
-in this restricted environment. Those HTTP cases still need an unrestricted
-runner; no server test is being counted as a pass here. Reproduction commands:
+in that restricted environment. The later unrestricted run passed all nine
+HTTP cases with no errors in 8.54 seconds. The current full sweep can include
+them; the earlier sweep's reproduction commands were:
 
 ```sh
 cd app
@@ -74,10 +124,11 @@ incomplete compiler-cache dependency list; both are fixed, with a regression
 for the cache dependency. Strict TypeScript and 241 freshly compiled property
 tests pass. None of this is physical-device evidence.
 
-The restricted runner also could not fetch the SBOM generator from PyPI, and
+The earlier restricted runner also could not fetch the SBOM generator from PyPI, and
 headless Chrome exited before the report-page screenshot. Those checks are
-unverified here, not passes. GitHub CI still needs to check the proposed tree,
-including the nine HTTP fixtures. The review branch is
+unverified in that run, not passes. The current unrestricted SBOM check passes:
+every committed bill matches the generator's output. GitHub CI still needs to
+check the proposed tree. The review branch is
 `codex/signed-scene-holds-2026-09-29`; publication does not certify remote CI or
 authorize deployment.
 
@@ -111,9 +162,12 @@ proposed tree for CI; main stays unchanged until the complete required checks
 pass. The existing main branch's Sep 28 scheduled Audit failed before any
 runner started. A Sep 29 retry reproduced the same condition in all four jobs:
 `runner_id: 0`, no steps, no runner logs. This is not a dependency finding.
-The exact startup restriction is not available through the connector; billing
-or minute limits are only possibilities, not confirmed causes. An external
-Actions startup fix is needed before CI can supply the remaining evidence.
+The later unrestricted annotation read confirms GitHub's account-level
+restriction: jobs were not started because recent account payments failed or
+the spending limit needs increasing. The message does not say which of those
+conditions applies. No account setting was changed. An external Actions
+startup fix is needed before CI can supply the remaining evidence; connecting
+AWS would not fix it.
 
 The exact tested tree is published in
 [draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1). Immediately
@@ -511,7 +565,13 @@ across the session. Nothing has touched AWS and nothing has been pushed to the
 upstream sample.
 
 Tue Sep 29, 2026: signed scene holds are implemented and verified locally across
-the pipeline, player and hook. HTTP fixtures need an unrestricted runner, and
+the pipeline, player and hook. All nine HTTP fixtures now pass unrestricted, and
 native image/caption composition needs a benign-media physical-device check.
 The proposed tree is on `codex/signed-scene-holds-2026-09-29`. Main remains
 unchanged pending complete CI; no deployment has been made.
+
+Tue Sep 29, 2026, AWS-free follow-up: the local preparation receipt, household
+review, title viewing plan and installed hook-consumer check are implemented
+and pass the final local app/Python/package checks and native Debug build.
+A new unaccounted dependency advisory holds publication. No cloud connection, deployment, npm
+publication, durable-settings claim or physical-TV evidence has been added.

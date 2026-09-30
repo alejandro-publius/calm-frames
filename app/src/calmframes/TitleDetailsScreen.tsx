@@ -18,12 +18,17 @@ import { CALM_COLORS, CALM_SPACE, CALM_TYPE, scale } from './calmStyles';
 import { noticeForTitle } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import FlashMapStrip from './FlashMapStrip';
-import { coverOptionsFor, DEFAULT_SETTINGS, HouseholdSettings } from './household';
+import {
+  coverOptionsFor,
+  DEFAULT_SETTINGS,
+  HouseholdSettings,
+} from './household';
 import ShieldBadge from './ShieldBadge';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle } from './titleStatus';
 import { useUiCapture } from './uiCapture';
 import { TITLE_DETAILS_BLOCKED_FRAME, TITLE_DETAILS_FRAME } from './uiFrames';
+import ViewingPlan from './ViewingPlan';
 
 export interface TitleDetailsScreenProps {
   entry: CheckedTitle;
@@ -93,6 +98,14 @@ const TitleDetailsScreen = ({
               />
             </View>
           ) : null}
+
+          <View style={styles.block}>
+            <ViewingPlan
+              entry={entry}
+              settings={settings}
+              testID={`${testID}-plan`}
+            />
+          </View>
         </>
       )}
 

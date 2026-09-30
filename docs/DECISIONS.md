@@ -1500,5 +1500,68 @@ second way.
   Record the startup restriction separately and keep main unchanged until the
   complete proposed tree has actual passing checks. Account or billing changes
   are outside this code-and-testing task.
-- **Limit:** the connected API cannot retrieve the startup annotation. Quota or
-  billing is a possible explanation, not an established cause.
+- **Initial limit:** the connected API could not retrieve the startup annotation.
+  The later unrestricted read did: GitHub says jobs were not started because
+  recent account payments failed or the spending limit needs increasing. It
+  does not identify which of those two account conditions applies. No account
+  billing or repository-visibility setting was changed.
+
+## 2026-09-29: make the local preparation result usable without cloud deployment
+
+- **Decision:** add a separate local-library wrapper around existing ingest and
+  verification, with explicit external keys, requested presets, a per-source
+  receipt and a verified-only snapshot. It never enables `skip_verify` or
+  changes the upload server's measure-and-delete contract.
+- **Why:** a developer needs one preparation command and a readable next step
+  before AWS delivery is available. Catalog booleans alone do not establish
+  readiness: source/result identity, complete reports and current output bytes
+  are checked before listing. Failed re-imports withdraw the prior receipt.
+- **Cost:** a per-workspace nonblocking lock prevents overlapping imports, and
+  refreshing the snapshot hashes its checked inputs again. Unsafe artifact
+  paths, symlinks and unexpected HLS references cannot be listed. This is a
+  local status receipt, not cryptographic publication authority, an app-shelf
+  connection, a clinical result or physical-TV evidence.
+
+## 2026-09-29: explain the household's actual checked viewing plan
+
+- **Decision:** review the selected household at the end of setup and show a
+  title's plan only for a verified entry with every required preset map. Use
+  existing calm surfaces, television-size type and the approved limits text.
+- **Why:** a parent should see their choices and what the title's check means
+  before choosing Play. Pending and failed entries must not look approved, and
+  an old Standard check must not imply that Broadcast has already been checked.
+- **Cost:** presentation-only UI and assertion regressions. The status and
+  required-profile guards were each removed in isolation; the corresponding
+  assertions failed, then passed when the guards were restored. Settings and
+  the PIN remain in memory. Detector, schedule and seek rules are unchanged.
+
+## 2026-09-29: test an installed hook package rather than a source alias
+
+- **Decision:** support and document a locally packed tarball, include the
+  repository licence and an explicit React Native source entry, and exercise
+  that tarball in a clean offline consumer in CI and `make ci`.
+- **Why:** installing the monorepo's GitHub root cannot select its hook folder.
+  A source mirror test alone cannot catch omitted packed dependencies, broken
+  exports or a consumer resolving the wrong entry.
+- **Cost:** the check uses installed app tooling and current real Vega peer
+  types after the clean install. It checks package inventory, import closure,
+  TypeScript, Metro and Babel; it does not publish to npm or certify native
+  playback or compatibility with future peer versions.
+
+## 2026-09-29: retain the new dependency-audit blocker without a risky override
+
+- **Evidence:** an unrestricted fresh audit reaches the public advisory
+  databases and fails on `image-size`, npm source `1239766`,
+  [GHSA-w3rx-r6r6-pgpr](https://github.com/advisories/GHSA-w3rx-r6r6-pgpr).
+  The installed version is `0.6.3`, pulled in by the SDK's older build tooling.
+  Malformed ICNS input can hang its asset parser.
+- **Decision:** do not add the advisory to an exception, downgrade to escape
+  the affected range, or force the patched `2.0.3` under an incompatible
+  consumer. The old Metro expects a callable CommonJS export and synchronous
+  file input; the official patched API does not supply that legacy entry.
+- **Cost:** this audit remains red until a compatible dependency repair is
+  validated. Alex requested pushes only when ready and checks pass, so these
+  follow-up changes can be committed locally but are not pushed while that
+  gate is red. Main and the published review branch remain unchanged. This
+  blocker is separate from GitHub's account-level Actions startup restriction
+  and has nothing to do with connecting AWS.

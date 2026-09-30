@@ -32,7 +32,13 @@
  */
 
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import CalmButton from './CalmButton';
 import {
   CALM_COLORS,
@@ -47,17 +53,18 @@ import {
   EXPLAINER_TITLE,
   Notice,
   ROOM_ONLY_ADDS,
-  seatChosen,
   SEAT_DISTANCE_TITLE,
+  seatChosen,
   televisionChosen,
   TV_SIZE_TITLE,
 } from './copy';
 import {
   DEFAULT_SETTINGS,
+  describeRoom,
   HouseholdSettings,
   PRESET_NAMES,
-  PRESETS,
   PresetName,
+  PRESETS,
   SEAT_DISTANCE_CHOICES_IN,
   TV_DIAGONAL_CHOICES_IN,
 } from './household';
@@ -378,6 +385,20 @@ const FirstRunScreen = ({
       style={styles.screen}
       contentContainerStyle={styles.content}>
       {header}
+      <View style={styles.review} testID={`${testID}-review`}>
+        <Text style={styles.section} accessibilityRole="header">
+          Your household
+        </Text>
+        <Text style={styles.explainerLine} testID={`${testID}-review-preset`}>
+          {PRESETS[settings.preset].title}
+        </Text>
+        <Text style={styles.explainerLine} testID={`${testID}-review-room`}>
+          {describeRoom(settings)}
+        </Text>
+        <Text style={styles.note}>
+          A title waits for a new check if this room needs a stricter map.
+        </Text>
+      </View>
       <View style={styles.explainer} testID={`${testID}-explainer`}>
         {EXPLAINER_LINES.map((line, index) => (
           <Text
@@ -395,7 +416,7 @@ const FirstRunScreen = ({
       <View style={styles.buttons}>
         <CalmButton
           testID={`${testID}-done`}
-          label="Done"
+          label="Open checked library"
           onPress={finish}
           hasTVPreferredFocus
         />
@@ -405,6 +426,12 @@ const FirstRunScreen = ({
 };
 
 const styles = StyleSheet.create({
+  review: {
+    backgroundColor: CALM_COLORS.SURFACE,
+    borderRadius: scale(12),
+    padding: scale(CALM_SPACE.BLOCK),
+    marginBottom: scale(CALM_SPACE.BLOCK),
+  },
   screen: {
     flex: 1,
     backgroundColor: CALM_COLORS.BACKGROUND,

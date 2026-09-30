@@ -40,6 +40,13 @@ jobs:
       - name: Test
         working-directory: app
         run: npx jest --colors=false --ci
+      - name: Hook package guard tests
+        run: npm --prefix hook run test:package
+      - name: Check the installed offline hook consumer
+        # Reuses the current app's Vega peer types after installing the packed
+        # tarball in a fresh consumer. This is not an npm publication or a
+        # physical-device check, and it needs no registry access.
+        run: npm --prefix hook run check:package
 
   python:
     name: Python packages

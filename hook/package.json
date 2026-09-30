@@ -5,9 +5,14 @@
   "license": "Apache-2.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
+  "react-native": "src/index.ts",
   "files": [
-    "src",
-    "README.md"
+    "src/index.ts",
+    "src/pixelUtils.ts",
+    "src/mirror.json",
+    "src/engine",
+    "README.md",
+    "LICENSE"
   ],
   "keywords": [
     "vega",
@@ -23,6 +28,8 @@
     "react-native": ">=0.83.0"
   },
   "scripts": {
-    "sync": "node tools/sync.mjs"
+    "sync": "node tools/sync.mjs",
+    "test:package": "node --test tools/check_package.test.mjs",
+    "check:package": "node tools/check_package.mjs"
   }
 }

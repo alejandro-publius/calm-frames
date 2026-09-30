@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-09-18T04:08:05Z",
+  "generated_utc": "2026-09-30T00:47:20Z",
   "python": {
     "ran": true,
     "sources": [
@@ -218,10 +218,9 @@
         "severity": "high",
         "direct": false,
         "ids": [
-          "1138808",
-          "1138809"
+          "1239766"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "inquirer",
@@ -514,12 +513,14 @@
   "published": {
     "python_packages_with_advisories": 0,
     "npm_packages_with_advisories": 59,
-    "npm_advisories_total": 45,
+    "npm_advisories_total": 44,
     "npm_critical": 6,
     "npm_high": 25,
     "exception_groups": 3,
     "exceptions_in_the_shipped_bundle": 1
   },
   "statement": "pip-audit and npm audit, run over what this project installs. Every finding is either fixed or listed in scripts/audit_exceptions.toml with a reason and a review date. The npm findings come almost entirely from the Vega SDK sample's pinned toolchain.",
-  "problems": []
+  "problems": [
+    "npm: image-size has advisory(s) nobody has read yet: 1239766"
+  ]
 }

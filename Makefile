@@ -46,7 +46,8 @@ include eval/baselines/naive_luma_diff/naive_luma.mk
 
 .DEFAULT_GOAL := help
 
-.PHONY: help test test-app test-flashmap test-pipeline test-eval ci \
+.PHONY: help test test-app test-flashmap test-pipeline test-eval test-hook-package ci \
+        local-library \
         reproduce reproduce-release reproduce-all synth cdk-diff deploy destroy \
         release release-notes stick-day stick-day-vvd hooks hooks-selftest \
         image image-smoke image-context image-push \
@@ -87,10 +88,17 @@ test-pipeline: ## pipeline pytest, including the CDK unit tests
 test-eval: ## the standalone eval tests, which CI also runs
 	cd $(REPO) && $(PY) -m pytest eval -q -m "not slow"
 
+test-hook-package: ## pack and check a clean offline hook consumer with current Vega peers
+	cd $(REPO) && $(NODE_ENV) && npm --prefix hook run test:package
+	cd $(REPO) && $(NODE_ENV) && npm --prefix hook run check:package
+
+local-library: ## prepare a verified local title, using LOCAL_LIBRARY_ARGS (no AWS)
+	cd $(REPO) && $(PY) -m pipeline.local_library $(LOCAL_LIBRARY_ARGS)
+
 ci: ## everything CI runs, in CI's order, before you push
 	cd $(REPO)/app && $(NODE_ENV) && npm run typecheck
 	cd $(REPO)/app && $(NODE_ENV) && npx eslint src test --ext .ts,.tsx
-	$(MAKE) test test-eval
+	$(MAKE) test test-eval test-hook-package
 	$(MAKE) scan
 	$(PY) eval/readme_sync.py --check
 	# The audit workflow's jobs, in its order. These reach the public advisory

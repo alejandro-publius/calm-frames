@@ -126,7 +126,7 @@ The app is the demo. These four are the part that keeps working after the judgin
 
 **1. The hook, so any Vega video app gets the same protection.** The guard is one React hook with no knowledge of our screens, navigation or storage. [`docs/INTEGRATION_DIFF.md`](docs/INTEGRATION_DIFF.md) is the real `git diff` of adding it to a clean [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) checkout at tag `v0.24-RN83`: <!--n results/integration_diff.json:lines_added -->32<!--/n--> lines added and <!--n results/integration_diff.json:lines_replaced -->2<!--/n--> replaced across <!--n results/integration_diff.json:files_touched -->4<!--/n--> files. <!--n results/integration_diff.json:busiest_file_lines_added -->23<!--/n--> of those added lines are in one file, `src/screens/PlayerScreen.tsx`, and each of the other three files adds exactly <!--n results/integration_diff.json:other_files_lines_added_each.0 -->3<!--/n--> lines. `hook/tools/make_integration_diff.mjs` regenerates that patch from the pinned checkout, and `eval/integration_diff_stats.py` counts what is committed file by file, so every number in this paragraph is measured rather than asserted.
 
-What an app gets for it: every flagged part of a title hidden before it starts while sound and captions keep going, a card ahead of it with a D-pad Skip and a card afterwards, a missing or stale or unsigned or wrong-hash map keeping the picture hidden, every seek path safe including Alexa and the remote's transport commands, and a VoiceView announcement for each card. What it costs: one rule, which is that nothing in the app writes `currentTime` or calls `fastSeek` any more. Everything goes through `guard.requestSeek`. The package README is [`hook/README.md`](hook/README.md). **The package is not published to npm yet**, so today an app adds it from this repository rather than by installing it. The name `@calm-frames/flash-guard` was free when we checked on Sep 17, 2026, and that is the whole of the claim on it.
+What an app gets for it: every flagged part of a title hidden before it starts while sound and captions keep going, a card ahead of it with a D-pad Skip and a card afterwards, a missing or stale or unsigned or wrong-hash map keeping the picture hidden, every seek path safe including Alexa and the remote's transport commands, and a VoiceView announcement for each card. What it costs: one rule, which is that nothing in the app writes `currentTime` or calls `fastSeek` any more. Everything goes through `guard.requestSeek`. The package README is [`hook/README.md`](hook/README.md). **The package is not published to npm yet**, but a Vega app can now install a locally packed tarball from a reviewed checkout. The offline consumer check uses that installed tarball, current Vega peer types, Metro resolution and React Native transforms, not repository-source aliases. The name `@calm-frames/flash-guard` was free when we checked on Sep 17, 2026, and that is the whole of the claim on it.
 
 **2. The GitHub Action, so a studio can catch it before it ships.** [`flashmap/examples/flash-check.yml`](flashmap/examples/flash-check.yml) drops into any repository that holds images or video. Every pull request that adds or changes one is measured against WCAG 2.2 SC 2.3.1, and the job fails when a file goes over the general or red flash thresholds. Exit codes are `0` under the thresholds, `1` over them and `2` when flashmap could not tell, and a caller that treats `2` as a pass has a hole in it. The analyzer is Apache-2.0 and runs standalone, so this works for a studio, a game team, a marketing site or a documentation repository with animated GIFs in it, none of whom have to care that Calm Frames exists.
 
@@ -152,7 +152,7 @@ The rules ask whether a project "could realistically serve an audience beyond th
 
 - **The analyzer and the Action need no distribution at all.** `flashmap` is Apache-2.0 and standalone. A studio, a game team or a documentation repository adopts it by copying one workflow file. That route is open today and needs nobody's permission.
 - **The sidecar spec needs adoption, not distribution.** It is worth something the moment a second player reads a map it did not make. That has not happened and it is the thing we would most like to be asked about.
-- **The hook needs publishing.** It is not on npm yet, so today an app vendors it from this repository.
+- **The hook needs publishing.** It is not on npm yet. Local tarball installation is checked with the current Vega peers, not a fresh registry or physical-device install.
 - **The app itself would need the Fire TV Appstore, and we have not started that.** No developer account submission, no listing, no policy review. A safety claim in a store listing is a different bar from a safety claim in a README, and the wording would have to be checked by someone qualified before it went near a store. **We are not claiming a route we have not walked.**
 
 The honest shape of it: three of the four things above can travel without us, and the app is the one that cannot. That is the opposite of how most entries are built, and it is deliberate.
@@ -179,15 +179,15 @@ The three numbers about the integration diff are markers pointing at `results/in
 
 ## Required tech at runtime
 
-Every row links the exact file and line in this repository. Line numbers are against `main`; the symbol name is given too, so a moved line is still findable.
+Every row links the exact file and line in this repository. Line numbers are against the commit containing this README; the symbol name is given too, so a moved line is still findable.
 
 | Required technology | Package | Called at | What it does here |
 |---|---|---|---|
 | **W3C media player** | `@amazon-devices/react-native-w3cmedia` | [`app/src/utils/VideoHandler.ts:147`](app/src/utils/VideoHandler.ts#L147) `new VideoPlayer()`, imported at [`:5`](app/src/utils/VideoHandler.ts#L5) `VideoPlayer`; attached to Shaka at [`:274`](app/src/utils/VideoHandler.ts#L274) `new ShakaPlayer(...)` | All playback. Calm Frames never replaces it and never lowers its opacity. It reads `currentTime`, `playbackRate` and the media events from it, and covers on top of it. |
 | **W3C media player, video surface** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:546`](app/src/screens/PlayerScreen.tsx#L546) `KeplerVideoSurfaceView`, imported at [`:17`](app/src/screens/PlayerScreen.tsx#L17) `KeplerVideoSurfaceView` | The hardware video layer at zIndex 0. The cover sits above it, which is what keeps the sound running while the picture is hidden. |
 | **Vega Media Controls** | `@amazon-devices/kepler-media-controls` | Focus set at [`app/src/utils/VideoHandler.ts:158`](app/src/utils/VideoHandler.ts#L158) `setMediaControlFocus(...)`. The safe handler is [`app/src/calmframes/SafeMediaControlHandler.ts:49`](app/src/calmframes/SafeMediaControlHandler.ts#L49) `class SafeMediaControlHandler`, with `handleSeek` at [`:68`](app/src/calmframes/SafeMediaControlHandler.ts#L68) and `handleFastForward` at [`:89`](app/src/calmframes/SafeMediaControlHandler.ts#L89) | System and voice transport, and the path an Alexa "skip forward" arrives on. It can land the playhead inside a flagged interval without the remote being touched, so none of these handlers call `super`. Each one goes through [`app/src/calmframes/seekSafety.ts`](app/src/calmframes/seekSafety.ts), `planSeek` at [`:113`](app/src/calmframes/seekSafety.ts#L113). |
-| **KeplerCaptionsView** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:563`](app/src/screens/PlayerScreen.tsx#L563) `KeplerCaptionsView`, the element; the handle is set by [`:513`](app/src/screens/PlayerScreen.tsx#L513) `setCaptionViewHandle` | Captions, at zIndex 2, above the cover. One captions view per process. This is the reason a hidden segment is still followable: the words carry on over a black picture. |
-| **Accessibility APIs** | `react-native` `AccessibilityInfo`, plus the `com.amazon.devconf.privilege.accessibility` privilege at [`app/manifest.toml:91`](app/manifest.toml#L91) | [`app/src/calmframes/announce.ts:58`](app/src/calmframes/announce.ts#L58) `announceForAccessibilityWithOptions(message, { queue: true })`; the card carries `accessibilityLiveRegion="polite"` at [`app/src/calmframes/CalmCard.tsx:79`](app/src/calmframes/CalmCard.tsx#L79) and `accessibilityRole="alert"` at [`:80`](app/src/calmframes/CalmCard.tsx#L80); the cover is hidden from the tree at [`app/src/calmframes/CoverLayer.tsx:66`](app/src/calmframes/CoverLayer.tsx#L66) `accessibilityElementsHidden` | VoiceView is told what is about to be hidden, and told it in a queue rather than by interrupting, because a child hearing "flashing part coming up" cut off halfway is worse than hearing it a beat later. The cover itself is taken out of the accessibility tree, so VoiceView never reads a black rectangle and focus never lands on it. |
+| **KeplerCaptionsView** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:567`](app/src/screens/PlayerScreen.tsx#L567) `KeplerCaptionsView`, the element; the handle is set by [`:513`](app/src/screens/PlayerScreen.tsx#L513) `setCaptionViewHandle` | Captions, at zIndex 2, above the cover. One captions view per process. This is the reason a hidden segment is still followable: the words carry on over a black picture. |
+| **Accessibility APIs** | `react-native` `AccessibilityInfo`, plus the `com.amazon.devconf.privilege.accessibility` privilege at [`app/manifest.toml:91`](app/manifest.toml#L91) | [`app/src/calmframes/announce.ts:58`](app/src/calmframes/announce.ts#L58) `announceForAccessibilityWithOptions(message, { queue: true })`; the card carries `accessibilityLiveRegion="polite"` at [`app/src/calmframes/CalmCard.tsx:79`](app/src/calmframes/CalmCard.tsx#L79) and `accessibilityRole="alert"` at [`:80`](app/src/calmframes/CalmCard.tsx#L80); the cover is hidden from the tree at [`app/src/calmframes/CoverLayer.tsx:74`](app/src/calmframes/CoverLayer.tsx#L74) `accessibilityElementsHidden` | VoiceView is told what is about to be hidden, and told it in a queue rather than by interrupting, because a child hearing "flashing part coming up" cut off halfway is worse than hearing it a beat later. The cover itself is taken out of the accessibility tree, so VoiceView never reads a black rectangle and focus never lands on it. |
 
 The whole guard is one hook, [`app/src/calmframes/useFlashGuard.ts`](app/src/calmframes/useFlashGuard.ts). Give it a player and where the map is, and it verifies the map, builds the schedule, drives the cover, decides the card, announces it and hands back the one seek function every control has to use. It deliberately knows nothing about Calm Frames screens, navigation or storage, which is what makes it the thing another Vega app can drop in. Around it: the cover is [`app/src/calmframes/CoverLayer.tsx`](app/src/calmframes/CoverLayer.tsx), the scheduler is [`coverSchedule.ts`](app/src/calmframes/coverSchedule.ts) and [`mediaClock.ts`](app/src/calmframes/mediaClock.ts), the map check is [`flashMap.ts`](app/src/calmframes/flashMap.ts), the PIN is [`parentGate.ts`](app/src/calmframes/parentGate.ts) and the run harness is [`useCoverHarness.ts`](app/src/calmframes/useCoverHarness.ts).
 
@@ -471,6 +471,41 @@ source provenance, bytes, and the encoded MP4, HLS and live-cover model before
 publication. `--no-scene-holds` retains the legacy rendition and cover path.
 Existing maps without scene holds remain supported. The wire contract is in
 [`docs/SIDECAR_SPEC.md`](docs/SIDECAR_SPEC.md).
+
+### A checked local library, without AWS
+
+One command wraps ingest and verification and prints a readiness receipt:
+
+```sh
+python -m pipeline.local_library prepare /path/to/calm-video.mp4 \
+    --workdir build/local-library --key /path/to/team_key.pem \
+    --pub /path/to/team_key.pub.pem --title 'Our calm video' \
+    --presets wcag,broadcast,extra-cautious
+python -m pipeline.local_library catalog --workdir build/local-library
+```
+
+Use a benign clip, external signing keys and the normal pipeline dependencies.
+Nothing is served, opened, played or uploaded automatically. The receipt links
+only the prepared MP4, HLS, map and verification report, not the source video,
+private key or cover model. `local-library.json` lists only complete checked
+titles, and rebuilding it rechecks current artifact bytes against the receipt.
+A failed re-import withdraws the old ready receipt. Overlapping imports into
+the same workspace are refused rather than racing shared catalog writes.
+
+The receipt says **ready for local playback of the prepared rendition**. It
+does not populate the Vega app shelf, verify live playback on a television or
+replace a consuming player's signed-map check. This workflow uses the existing
+pipeline with its verification enabled, not a weaker local approval path.
+
+Detailed commands, exit statuses and workspace limits are in
+[`pipeline/LOCAL_LIBRARY.md`](pipeline/LOCAL_LIBRARY.md).
+
+In the app, setup now ends with a review of the chosen preset, television size
+and seating distance. A checked title's viewing plan explains which maps were
+checked, how scene holds fall back to an opaque cover, and the limits of the
+protection. Pending or failed titles get no ready plan. These are presentation
+changes; timing, seek guards and household floors are unchanged. Household
+settings and the PIN are still in memory in the demo, not durable storage.
 
 ### AWS
 
