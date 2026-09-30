@@ -1565,3 +1565,55 @@ second way.
   gate is red. Main and the published review branch remain unchanged. This
   blocker is separate from GitHub's account-level Actions startup restriction
   and has nothing to do with connecting AWS.
+
+## 2026-09-29: adapt the legacy asset API around the official parser fix
+
+- **Decision:** keep the SDK and Metro versions unchanged, replace only Metro
+  0.54.1's vulnerable `image-size` resolution with a private local API adapter,
+  and pin its real parser to official `image-size@2.0.4` under an explicit npm
+  alias. No parser code is copied and no audit exception is widened.
+- **Why:** the official fix does not preserve Metro's callable CommonJS and
+  synchronous filename interface. The small adapter restores that interface,
+  bounded partial reads and descriptor cleanup while every parse uses upstream.
+  Both packages retain their actual identities in the lockfile and SBOM.
+- **Evidence:** the old malformed-ICNS buffer, filename and callback paths
+  time out in isolated byte-only children; all three now terminate with an
+  error. Timeout is a failed regression, never a successful rejection. Actual
+  Metro PNG, JPEG and SVG asset tests and a relocated clean offline consumer
+  pass. The full app lockfile also installs with clean offline `npm ci`, using
+  its unchanged tracked `.npmrc`, with real Metro resolution and all rejection
+  modes checked again. Cleanup, bound and partial-read guards were observed assertion-red
+  in copied controls and green after restoration. The fresh audit gate passes.
+- **Cost:** maintain the local interface shim and exact upstream pin when the
+  SDK changes. Local dependency readiness does not resolve the hosted Actions
+  account restriction or establish real-TV playback readiness.
+
+## 2026-09-29: expose physical-TV prerequisites without executing a device session
+
+- **Decision:** add a read-only hardware preflight and Makefile target. Check
+  live SDK connection, literal physical identity, explicit serial, developer
+  mode, pinned OS/build and actual bounded Debug package members. Never scan
+  the LAN, install, launch, play, reset or manufacture a gate result.
+- **Why:** the current SDK connection has no physical or virtual device. The
+  bundled benign clip has audio but no captions or scene holds, and the old
+  timing runner uses QEMU host paths. Basic smoke, composition and camera
+  timing must remain separate rather than treating a software log as proof.
+- **Cost:** HUMAN CHECKPOINT B, a checked benign captioned sham-hold fixture,
+  physical-target timing-runner adaptation and HUMAN CHECKPOINT E1 footage
+  remain required. Synthetic SDK/archive regressions validate only these
+  preflight guards, not native decoding, playback or physical composition.
+
+## 2026-09-29: diagnose Actions billing without changing account finances
+
+- **Evidence:** Actions is enabled and the repository connection has admin
+  permission, but the current jobs still have zero assigned runners and no
+  steps. GitHub's annotation says a recent payment failed or the spending
+  limit needs increasing. Read-only personal billing endpoints return 404;
+  the installed GitHub plugin provides no account-billing control.
+- **Decision:** ask the owner to inspect Billing and plans without sharing
+  card details. Do not infer which condition applies, broaden authorization,
+  purchase minutes, change payment details, raise an unspecified budget,
+  register a persistent self-hosted runner or make the private repo public.
+- **Cost:** complete hosted CI still waits on the owner's account action.
+  Continue local implementation and tests; keep main unchanged until its
+  proposed tree passes the complete required checks. AWS remains disconnected.

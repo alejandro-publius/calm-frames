@@ -10,8 +10,8 @@ Every gate result and every kill rule that fires is logged here with the date an
 | HUMAN CHECKPOINT F: outreach emails drafted and sent | Fri Sep 18 | Blocked: `docs/outreach-kit.md` not provided yet |
 | VVD plays the renamed sample | Sat Sep 19 | **Done Sep 17**, two days early. Evidence in results/vvd_smoke.json |
 | HUMAN CHECKPOINT B: stick on Vega OS 1.2, developer mode, USB | Mon Sep 21 (SDK 0.23 fallback after) | Waiting on the stick |
-| Layering test (1.5) | When the stick is ready | **Harness built and tested.** Waiting on the stick. Steps below. |
-| GATE 1: overlay timing, 48 of 50 covered 150 ms early (HUMAN CHECKPOINT E1) | Wed Sep 23 (Fri Sep 25 latest) | **Harness built and tested.** Waiting on the stick and on the calm-timing marker clip. |
+| Layering test (1.5) | When the stick is ready | Virtual-device harness exists; physical target and benign captioned sham-hold fixture still required. No TV composition result. |
+| GATE 1: overlay timing, 48 of 50 covered 150 ms early (HUMAN CHECKPOINT E1) | Wed Sep 23 (Fri Sep 25 latest) | Read-only physical preflight added Sep 29. Waiting on the stick, physical-target runner adaptation and camera footage. Existing timing runner uses QEMU paths. |
 | HUMAN CHECKPOINT C: self-filmed flashing footage | Thu Sep 24 | Waiting |
 | GATE 2: 15 real flagged segments from 4 sources | Fri Sep 25 | Not started |
 | HUMAN CHECKPOINT D: AWS Paid plan, $20 alarm, credits requested | Before the first deploy | Waiting |
@@ -24,6 +24,25 @@ Every gate result and every kill rule that fires is logged here with the date an
 | HUMAN CHECKPOINT G: submit | Thu Oct 22 | |
 
 ## Log
+
+### 2026-09-29: physical-TV prerequisites checked, no device session run
+
+The SDK's actual read-only connection check reports no connected device; its
+virtual-device status is stopped. The current armv7 Debug archive contains the
+exact reviewed calm video and map, and passes package-identity preflight.
+`eval/benign_hardware_validation.py` returns a blocked receipt and exit status
+2, with every installation, playback, composition and physical gate flag false.
+The Makefile target runs only this preflight, not an install or playback session.
+
+Its synthetic SDK/archive guard tests do not establish native decoding or TV
+behavior. HUMAN CHECKPOINT B still needs the physical stick, developer mode,
+explicit serial and pinned Vega OS 1.2 build 2101020054720. The bundled calm
+gradient has audio but no captions or scheduled scene images, so it cannot
+validate their layering. A checked benign captioned fixture with labelled sham
+holds must be integrated before composition tests. The existing `stick-day`
+timing path calls a QEMU-specific runner; do not run it unchanged on hardware.
+HUMAN CHECKPOINT E1 still requires real-TV footage at locked 240 fps. No benign
+media was opened or played in this preflight and no AWS connection was made.
 
 ### 2026-09-17: HUMAN CHECKPOINT A passed
 Detected macOS 15.1.1 (24B91) on an Apple M1 (arm64) with 16 GB memory and 1.2 TiB free disk. Vega SDK 0.24 supports macOS on Apple silicon. Vega CLI 1.3.4 and SDK 0.24.9914 installed cleanly the same morning. Details in docs/ENVIRONMENT.md.

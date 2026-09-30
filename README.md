@@ -507,6 +507,29 @@ protection. Pending or failed titles get no ready plan. These are presentation
 changes; timing, seek guards and household floors are unchanged. Household
 settings and the PIN are still in memory in the demo, not durable storage.
 
+### Read-only physical-TV preflight
+
+After building a Debug package, check its actual bundled benign-media bytes
+and the SDK's current device connection without installing or playing anything:
+
+```sh
+make hardware-preflight HARDWARE_PREFLIGHT_ARGS="--vpkg app/build/armv7-debug/calm-frames-app_armv7.vpkg"
+```
+
+An absent device returns a blocked receipt and exit status 2. After HUMAN
+CHECKPOINT B, add `--device SERIAL --checkpoint-b-confirmed` and select the
+package matching that physical device's architecture. The check requires the
+pinned Vega OS build, developer mode and an explicit target; a virtual device
+cannot qualify. Any printed install/launch commands are proposals, never
+executed by this preflight.
+
+The bundled calm gradient can check basic launch and seek behavior only: it
+has audio but no captions or scheduled scene images. Caption/image composition
+needs a separately prepared and integrated benign fixture. Screen timing
+still needs a real TV and the HUMAN CHECKPOINT E1 camera recording. Do not run
+`stick-day` unchanged on physical hardware: its timing runner uses virtual-device
+QEMU host paths. A successful preflight is not a playback or safety result.
+
 ### AWS
 
 The CDK app in [`pipeline/infra/`](pipeline/infra/) synthesizes and is unit tested. **Nothing is deployed and no AWS credentials have been used.** It has zero NAT gateways, a 20 US dollar budget alarm, private buckets, and a GitHub OIDC role so no AWS key is ever stored anywhere.

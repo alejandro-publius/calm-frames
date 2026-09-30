@@ -6,7 +6,7 @@
 #   make synth       the CDK stack, offline, no AWS account touched
 #   make deploy      refuses until HUMAN CHECKPOINT D is confirmed
 #   make release     builds the three .vpkg files and stops before publishing
-#   make stick-day   unboxing to GATE 1 footage, and the same run on the VVD
+#   make stick-day   legacy workflow; physical timing still needs adaptation
 #
 # Written for GNU Make 3.81, the version macOS ships. No .ONESHELL, no
 # .SHELLFLAGS (3.82 and later only), nothing that needs a newer make.
@@ -47,7 +47,7 @@ include eval/baselines/naive_luma_diff/naive_luma.mk
 .DEFAULT_GOAL := help
 
 .PHONY: help test test-app test-flashmap test-pipeline test-eval test-hook-package ci \
-        local-library \
+        local-library hardware-preflight \
         reproduce reproduce-release reproduce-all synth cdk-diff deploy destroy \
         release release-notes stick-day stick-day-vvd hooks hooks-selftest \
         image image-smoke image-context image-push \
@@ -71,6 +71,7 @@ help: ## show this list
 	@echo "  PY=$(PY)"
 	@echo "  STICK_DAY_ARGS   passed to scripts/stick_day.py (try --help)"
 	@echo "  RELEASE_ARGS     passed to scripts/release.sh (try --help)"
+	@echo "  HARDWARE_PREFLIGHT_ARGS  read-only package/device checks (try --help)"
 
 # ---------------------------------------------------------------- tests
 
@@ -94,6 +95,9 @@ test-hook-package: ## pack and check a clean offline hook consumer with current 
 
 local-library: ## prepare a verified local title, using LOCAL_LIBRARY_ARGS (no AWS)
 	cd $(REPO) && $(PY) -m pipeline.local_library $(LOCAL_LIBRARY_ARGS)
+
+hardware-preflight: ## read-only benign package/device checks; no install or playback
+	cd $(REPO) && $(NODE_ENV) && $(PY) eval/benign_hardware_validation.py $(HARDWARE_PREFLIGHT_ARGS)
 
 ci: ## everything CI runs, in CI's order, before you push
 	cd $(REPO)/app && $(NODE_ENV) && npm run typecheck
@@ -210,10 +214,10 @@ release-notes: ## the release notes and attachment list, without rebuilding
 
 # ------------------------------------------------------------ stick day
 
-stick-day: ## unboxing to GATE 1 footage: dev mode, OS check, install, layering, markers
+stick-day: ## legacy workflow; physical-target timing still needs adaptation
 	$(PY) $(REPO)/scripts/stick_day.py $(STICK_DAY_ARGS)
 
-stick-day-vvd: ## the same run against the Vega Virtual Device, to prove it
+stick-day-vvd: ## virtual-device rehearsal only; never physical-TV proof
 	$(PY) $(REPO)/scripts/stick_day.py --target vvd $(STICK_DAY_ARGS)
 
 # --------------------------------------------------------------- secrets

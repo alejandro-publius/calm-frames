@@ -354,23 +354,32 @@ that were read, who accepted it, why, and the date it has to be looked at again.
 
 As of the last run:
 
-**The Sep 29 unrestricted audit is blocked.** It found a new, unaccounted
-`image-size@0.6.3` advisory, npm source `1239766`,
+**The Sep 29 dependency repair passes the fresh audit gate with unchanged written exceptions.** The earlier
+run found a new, unaccounted `image-size@0.6.3` advisory, npm source `1239766`,
 [GHSA-w3rx-r6r6-pgpr / CVE-2025-71330](https://github.com/advisories/GHSA-w3rx-r6r6-pgpr).
 Malformed ICNS data can hang the legacy build-tool asset parser. The upstream
 fix is `2.0.3`, but that API no longer provides the callable CommonJS module
 and synchronous filename input expected by the SDK's older Metro dependency.
-No downgrade, fork or widened exception was applied. A compatible toolchain
-repair and a passing fresh audit are required before publication or merge.
-The totals below are the actual failed audit's findings, not an all-clear.
+The SDK's Metro 0.54.1 now resolves a private local API adapter that delegates
+every parse to the exact official `image-size@2.0.4`. It restores the callable
+Buffer, synchronous filename and callback interfaces without copying parsers.
+Reads remain bounded and descriptors close on success or failure. The adapter
+keeps its own name; the official parser retains its registry identity and
+integrity in the lockfile and SBOM. No advisory suppression, downgrade or new
+exception was added. Compatibility and terminating-error regressions pass,
+including actual Metro PNG, JPEG and SVG asset handling.
+
+The totals below remain findings covered by the existing written exceptions,
+not a claim of zero vulnerabilities or production readiness. GitHub's separate
+account-level runner restriction and physical-TV validation are still pending.
 
 | | |
 |---|---|
 | Python packages with an advisory, across the container, the CDK and the venv | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
-| npm packages with an advisory in app/ | <!--n results/audit.json:published.npm_packages_with_advisories -->59<!--/n--> |
-| npm advisories behind them | <!--n results/audit.json:published.npm_advisories_total -->44<!--/n--> |
+| npm packages with an advisory in app/ | <!--n results/audit.json:published.npm_packages_with_advisories -->58<!--/n--> |
+| npm advisories behind them | <!--n results/audit.json:published.npm_advisories_total -->43<!--/n--> |
 | of which critical | <!--n results/audit.json:published.npm_critical -->6<!--/n--> |
-| of which high | <!--n results/audit.json:published.npm_high -->25<!--/n--> |
+| of which high | <!--n results/audit.json:published.npm_high -->24<!--/n--> |
 | exception groups, each with its reasons | <!--n results/audit.json:published.exception_groups -->3<!--/n--> |
 
 The three groups, in short. The full reasoning is in the TOML file, in
@@ -405,7 +414,7 @@ regenerated reproducibly so CI can diff them:
 | File | What it covers | Components |
 |---|---|---|
 | `docs/SBOM.ingest.cdx.json` | the Python packages in the ingest container | <!--n results/sbom.json:published.ingest_components -->12<!--/n--> |
-| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1109<!--/n--> |
+| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1110<!--/n--> |
 | `docs/SBOM.cdk.cdx.json` | what synthesizes and deploys the stack | <!--n results/sbom.json:published.cdk_components -->2<!--/n--> |
 
 What they do not cover: the Debian packages apt installs inside the image.

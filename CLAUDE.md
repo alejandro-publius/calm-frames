@@ -14,10 +14,18 @@ presentation-only; settings and the PIN remain in memory. The hook now has a
 clean offline tarball-consumer check using current Vega peers. The final local
 app, Python and package tests and native Debug build pass for these changes;
 see STATUS section 0.
-The fresh unrestricted dependency audit is red on a new `image-size` advisory.
-Its official patch breaks the SDK's legacy build-tool API; no exception or
-risky override was added. Hold the follow-up push until a compatible repair
-and a passing audit, in line with Alex's ready-only push requirement.
+The earlier `image-size` audit blocker is repaired with a small local legacy
+API adapter around exact official parser 2.0.4. The fresh audit and regenerated
+SBOM check pass, without a copied parser or widened exception. Existing written
+SDK/tooling exceptions remain. All 860 app tests and 1,378 selected Python tests
+pass, with existing skips/deselections unchanged. The rebuilt native Debug
+packages pass manifest/ABI checks for all three configured architectures.
+The read-only hardware preflight checks current package bytes but reports no
+connected device. The bundled calm clip cannot test caption/scene-hold layering;
+a checked benign fixture, physical-target runner adaptation and real-TV camera
+proof remain required. Do not run the QEMU-based timing path on hardware unchanged.
+Publish only locally checked changes to the isolated review branch; main still
+waits for complete hosted CI, in line with Alex's ready-only push requirement.
 Phase 9's pattern-rule precision work remains recorded below. Phases 0 to 2
 are done apart from what needs the stick, and all five phase 8 features are in, tested,
 documented and reachable in the running app. Phase 9 so far: the regular-pattern rule

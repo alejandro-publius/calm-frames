@@ -66,6 +66,8 @@
     "base-64": "1.0.0",
     "fastestsmallesttextencoderdecoder": "~1.0.22",
     "formik": "~2.4.6",
+    "image-size": "file:vendor/image-size-legacy",
+    "image-size-modern": "npm:image-size@2.0.4",
     "jest-fetch-mock": "~3.0.3",
     "lodash": "~4.17.21",
     "react": "19.2.0",
@@ -118,6 +120,11 @@
   },
   "resolutions": {
     "@types/react": "^19.2.0"
+  },
+  "overrides": {
+    "metro@0.54.1": {
+      "image-size": "$image-size"
+    }
   },
   "engines": {
     "node": ">=22"

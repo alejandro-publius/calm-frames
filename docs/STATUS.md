@@ -4,7 +4,7 @@ Updated Tue Sep 29, 2026.
 
 ## 0. Where things stand
 
-**AWS-free product workflow improvements pass local tests; the dependency audit holds publication.**
+**Local dependency repair and product checks pass; hosted CI and physical TV remain blocked.**
 The app reviews the chosen household before opening its checked library, and
 each verified title explains its selected preset, room, checked maps and
 fallback behavior. Pending, failed or incomplete-profile entries get no ready
@@ -20,11 +20,11 @@ readiness. The hook can be locally packed and installed in a clean offline
 consumer, with current Vega peer types, TypeScript, Metro and Babel checks.
 That check is now included in CI and `make ci`; nothing is published to npm.
 
-Final regression evidence for this follow-up: the app has 840 passing tests
+Final regression evidence for this follow-up: the app has 860 passing tests
 and 57 passing snapshots, with its existing one skipped suite and four skipped
 tests unchanged. Strict TypeScript and lint pass; broad lint retains existing
 warnings and the changed files have no warnings. The final full Python command
-below passes 1,334 tests with no failures or skips; only the two existing slow
+below passes 1,378 tests with no failures or skips; only the two existing slow
 tests are deselected. This includes all nine HTTP cases and all 55 local-library
 tests. The latter include a real benign ffmpeg/flashmap CLI run preparing all
 three presets, not just fabricated wrapper contracts.
@@ -44,14 +44,40 @@ restored green source. The final-source native Debug build passes for armv7,
 aarch64 and x86_64, with manifest and ABI validation. Nothing was installed or
 played on a device. These checks are not physical-TV or usability evidence.
 
-The fresh unrestricted dependency audit found a new unaccounted `image-size`
+The earlier unrestricted dependency audit found an unaccounted `image-size`
 advisory, [GHSA-w3rx-r6r6-pgpr](https://github.com/advisories/GHSA-w3rx-r6r6-pgpr).
-The official patched version is incompatible with the older SDK build-tool
-API. No risky override, downgrade or extra exception was applied. These
-follow-up changes are committed locally, but their push is held while the
-audit gate is red, as Alex requested ready-only pushes. The published branch
-and main remain unchanged. This is separate from the GitHub Actions payment
-or spending-limit restriction; connecting AWS would resolve neither issue.
+It is now repaired: a private local adapter preserves the older Metro API while
+delegating every parse to official `image-size@2.0.4`. All twenty focused
+compatibility, actual-asset and terminating-error regressions pass, and the
+new guards have observed assertion-red controls. The fresh audit gate and
+regenerated SBOM check pass with no widened exception or parser fork. Existing
+documented SDK/tooling findings remain; this is not zero vulnerabilities.
+The actual app manifest, lock, vendored source and tracked `.npmrc` also pass
+`npm ci --offline --ignore-scripts` in an isolated clean directory, followed
+by real legacy Metro asset resolution and all ICNS rejection modes. The SDK's
+existing `legacy-peer-deps=true` setting is unchanged; this does not establish
+strict peer-version compatibility.
+These follow-up changes belong on the isolated draft review branch, not main
+or a production deployment. Main remains unchanged pending complete hosted CI.
+
+The read-only `make hardware-preflight` target checks current package bytes and
+live SDK identity without installing, launching or playing media. Its actual
+run confirms the rebuilt armv7 package's exact bundled benign video and map,
+but returns a blocked receipt: no connected device and the virtual device is
+stopped. All forty-four synthetic preflight tests pass; copied guard controls
+were observed assertion-red, then restored green. Those tests are not native
+decoding or TV evidence. The bundled calm gradient has audio but no captions or
+scene holds. A checked benign captioned sham-hold fixture, physical-target
+timing-runner adaptation and locked real-TV camera footage remain required.
+Do not run `stick-day` unchanged on hardware: its timing path uses QEMU hosts.
+
+Actions is enabled and the repository connection has admin permission, but
+every inspected job still stops before runner startup. GitHub reports a failed
+account payment or a spending-limit restriction; read-only billing endpoints
+and the installed GitHub integration cannot identify or change the account
+condition. The owner must inspect [Billing and plans](https://github.com/settings/billing).
+No payment, budget, visibility or persistent runner setting was changed. AWS
+remains disconnected and would resolve neither remaining blocker.
 
 **Scene holds are implemented; local regression gates pass and remote CI is blocked.** Each
 scheduled hide can show a checked frame from the preceding context, or a flat
@@ -127,7 +153,11 @@ tests pass. None of this is physical-device evidence.
 The earlier restricted runner also could not fetch the SBOM generator from PyPI, and
 headless Chrome exited before the report-page screenshot. Those checks are
 unverified in that run, not passes. The current unrestricted SBOM check passes:
-every committed bill matches the generator's output. GitHub CI still needs to
+every committed bill matches the generator's output. The current headless
+Chrome report-page check also completes: no flash or timeline bar boundaries,
+and the striped negative control is refused. Its existing body-text pattern
+finding remains printed and documented, not waived or called an all-clear.
+The brand-image check also passes. GitHub CI still needs to
 check the proposed tree. The review branch is
 `codex/signed-scene-holds-2026-09-29`; publication does not certify remote CI or
 authorize deployment.
@@ -169,7 +199,7 @@ conditions applies. No account setting was changed. An external Actions
 startup fix is needed before CI can supply the remaining evidence; connecting
 AWS would not fix it.
 
-The exact tested tree is published in
+The earlier scene-hold tree was published in
 [draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1). Immediately
 after publication, the local branch matched its canonical GitHub commit with a
 clean worktree. The new
@@ -229,8 +259,8 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | When | What | Why it needs you |
 |---|---|---|
 | **Overdue, was Fri Sep 18** | Send the three outreach emails in `docs/outreach/`. | Each needs a recipient and your name. They ask only about wording and flow, and say plainly that nothing we send contains flashing. |
-| **When the stick arrives, about Sep 20, so probably tomorrow** | Update it to Vega OS 1.2, turn on developer mode, plug it in by USB, then run `make stick-day`. | The whole measurement chain waits on real hardware. The script prints the developer-mode steps, refuses a wrong OS build, installs, runs the layering test and then the marker run. It took about 6 minutes end to end against the virtual device. |
-| **Same session** | Film the layering test, then the 240 fps marker run. | **This is the only thing that can produce a GATE 1 number.** Phone at 240 fps, exposure locked, TV in game mode with motion smoothing off. `make stick-day` prints what to film and where the files go. |
+| **When the stick is available** | Confirm Vega OS 1.2 build 2101020054720, developer mode and a configured connection, then run `make hardware-preflight` with the matching Debug package and explicit device serial. | The read-only preflight checks actual package bytes and live SDK identity. It neither installs nor plays media. Do not run `stick-day` unchanged on hardware: its timing runner still uses QEMU paths. |
+| **After the physical-device preflight** | Prepare and integrate a checked benign captioned fixture with labelled sham holds, adapt the timing runner for the explicit physical target, then film composition and the 240 fps marker run. | **Only screen footage can produce a GATE 1 result.** The bundled calm gradient has no captions or scene holds. Phone at 240 fps, exposure locked, TV in game mode with motion smoothing off; software logs alone cannot validate screen timing. |
 | **Before then** | Confirm your phone films 240 fps and the TV has a game mode. | Assumed, never confirmed. If either is wrong, GATE 1 needs a different plan and it is better to know now. |
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
 | **Any evening, about an hour** | Label the <!--n results/realclips_status.json:segments -->40<!--/n--> blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all of them. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. **The pool was recut again on Sep 19**, after both ffmpeg based baselines ran over every clip and let the sixteen calm Wikimedia clips in, so the segment ids have moved a second time and are not the ones any earlier version of this page named. It is 40 segments over 16 titles, 28 flagged and 12 unflagged, which is twice the unflagged half it had on Sep 18. Nothing is waiting on this now except the two of you. |
@@ -528,7 +558,11 @@ three that are live right now:
    only thing on the list nothing else depends on.
 2. **Confirm the phone films 240 fps and the TV has a game mode**, before the
    stick arrives, because if either is wrong GATE 1 needs a different plan.
-3. **When the stick arrives:** `make stick-day`, then film. That is the gate.
+3. **When the stick arrives:** run the read-only `make hardware-preflight`
+   with the matching Debug package and explicit serial first. Physical-target
+   timing-runner adaptation and a benign captioned sham-hold fixture are still
+   required before the filmed gate session; `stick-day` is not hardware-ready
+   unchanged.
    **One measurement to add to it:** the worst gap between two scheduler ticks.
    The harness re-checks every 50 ms, so logging the longest gap between
    consecutive checks gives the worst pause of the JavaScript thread, and the
