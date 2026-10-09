@@ -10,8 +10,11 @@
  *
  * Seen to fail, Oct 9 2026: with skipOwnsSelect={false} hard wired in
  * PlayerScreen, the countdown test reported Expected true, Received false.
+ * With the per change line taken out of handleAppStateChange, both app state
+ * tests went red.
  */
 
+import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import { act, render, screen } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
@@ -211,5 +214,66 @@ describe('the player hands OK to Skip only while Skip is on screen', () => {
     expect(cardKind()).toBe('Not checked yet');
     expect(screen.queryByTestId('calm-card-skip')).toBeNull();
     expect(chromeProps().skipOwnsSelect).toBe(false);
+  });
+});
+
+/** The 'change' listener PlayerScreen gave Kepler most recently. */
+function appStateListener(): (state: string) => void {
+  const manager = (useKeplerAppStateManager as jest.Mock).mock.results[0]
+    .value as { addAppStateListener: jest.Mock };
+  const changes = manager.addAppStateListener.mock.calls.filter(
+    (call) => call[0] === 'change',
+  );
+  expect(changes.length).toBeGreaterThan(0);
+  return changes[changes.length - 1][1];
+}
+
+describe('every Kepler app state change leaves a debug line', () => {
+  let log: jest.SpyInstance;
+
+  beforeEach(() => {
+    mockMedia = makeMedia();
+    jest.useFakeTimers();
+    jest.setSystemTime(BURSTS_MADE_AT + 1_000);
+    log = jest.spyOn(console, 'log').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    log.mockRestore();
+    jest.useRealTimers();
+  });
+
+  const appStateLines = () =>
+    log.mock.calls
+      .map((call) => String(call[0]))
+      .filter((line) => line.startsWith('[PlayerScreen.tsx] - handleAppStateChange'));
+
+  it('says which state arrived, and that a kid mode player leaves on background', async () => {
+    renderPlayer({ guarded });
+    await settle();
+    const listener = appStateListener();
+
+    act(() => listener('inactive'));
+    act(() => listener('active'));
+    act(() => listener('background'));
+
+    expect(appStateLines()).toEqual([
+      '[PlayerScreen.tsx] - handleAppStateChange - KeplerAppStateChange to inactive',
+      '[PlayerScreen.tsx] - handleAppStateChange - KeplerAppStateChange to active',
+      '[PlayerScreen.tsx] - handleAppStateChange - KeplerAppStateChange to background',
+      '[PlayerScreen.tsx] - handleAppStateChange - background, leaving the player',
+    ]);
+  });
+
+  it('says a measurement run stays on the player when it is sent to the background', async () => {
+    renderPlayer({ coverTest: 'layering', toggleEveryMs: 1_000 });
+    await settle();
+
+    act(() => appStateListener()('background'));
+
+    expect(appStateLines()).toEqual([
+      '[PlayerScreen.tsx] - handleAppStateChange - KeplerAppStateChange to background',
+      '[PlayerScreen.tsx] - handleAppStateChange - background, a measurement run stays on the player',
+    ]);
   });
 });

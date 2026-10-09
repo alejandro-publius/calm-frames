@@ -418,8 +418,13 @@ const PlayerScreen = ({
 
   const handleAppStateChange = useCallback(
     (nextAppState: KeplerAppStateChangeData): void => {
+      // A line for every change, and one for what the player did about it,
+      // so a device log shows each state the app passed through. console.log,
+      // which the Release build strips.
       console.log(
-        '[PlayerScreen.tsx] - handleAppStateChange - k_content_per: handleAppStateChange',
+        `[PlayerScreen.tsx] - handleAppStateChange - KeplerAppStateChange to ${String(
+          nextAppState,
+        )}`,
       );
       if (nextAppState === BACKGROUND_STATE) {
         setShowBuffering(false);
@@ -429,8 +434,14 @@ const PlayerScreen = ({
           // screen would tear the player down mid-run. The cover is already
           // on: useCoverHarness hides the picture as soon as the playhead
           // becomes uncertain, which includes going to the background.
+          console.log(
+            '[PlayerScreen.tsx] - handleAppStateChange - background, a measurement run stays on the player',
+          );
           return;
         }
+        console.log(
+          '[PlayerScreen.tsx] - handleAppStateChange - background, leaving the player',
+        );
         navigateBack();
       }
     },
