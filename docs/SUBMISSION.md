@@ -8,6 +8,11 @@ rewritten against the current implementation; recheck the remaining fields and
 replace every **NEEDS ALEX** before submission. The current assessment and next
 acceptance criteria are in [HACKATHON_REVIEW.md](HACKATHON_REVIEW.md).
 
+**Updated October 9** for the AWS deploy of that night (sections 3, 5, 10 and 11),
+the friction log's counts (section 14), the upstream text's wording (section
+12.4), the dates below and the list in section 16. Everything else still reads
+as of October 2.
+
 **How to use this file.** Each numbered section below corresponds to a planned
 Devpost field. Final field names still need checking in the live form.
 
@@ -18,11 +23,17 @@ Devpost field. Final field names still need checking in the live form.
 | When | What |
 |---|---|
 | Mon Oct 12 | The upstream pull request is open, so the contribution URL exists |
+| Fri Oct 16, 12:00 PT | Devpost's early eligibility check. Entries submitted by then are checked, and Devpost says what needs fixing. Optional, and only worth it with a near-complete entry, video link included |
+| Mon Oct 19, 9 to 10 AM PT | Office Hours #2 with the Amazon team. Optional; register through the link in the Devpost update |
 | Mon Oct 19 to Tue Oct 20 | Film the video from [`docs/VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md) |
 | Wed Oct 21 | Make the repository public, run the final checks, tag the judged release |
-| Wed Oct 21, 12:00 PT | Last moment to request the 150 US dollar AWS credits |
 | **Thu Oct 22** | **Press submit** |
 | Fri Oct 23, 12:00 PT | The deadline. We are a day early on purpose |
+
+The two new rows come from the hackathon's announcements as the Oct 9 plan
+recorded them. Devpost answers automated requests with HTTP 403, so confirm both
+in a browser before relying on them. The AWS credit request that used to be on
+this list is gone: the form closed on Oct 7, 2026 (section 11.3).
 
 ---
 
@@ -116,8 +127,10 @@ The catalog binds each preset's prepared video, captions and maps to their exact
 bytes, and the player refuses substituted delivery paths. Adding a title means
 rebuilding the package. Arbitrary imports use the pre-covered picture with an
 opaque live fallback; union scene images remain unfinished. The AWS CDK stack
-synthesizes and has template tests, but it has not been deployed and is not a
-working cloud service.
+has template tests and was deployed once, on Oct 9, 2026. A calm test clip went
+through it twice that night: unsigned, it was analyzed and refused; signed, it
+was published to S3, DynamoDB and CloudFront (section 11). The TV app does not
+call AWS: its library is compiled into the package.
 
 ### Challenges we ran into
 
@@ -173,7 +186,7 @@ and record only feedback actually received.
 ### Built with
 
 ```
-Vega SDK 0.24, React Native 0.83, TypeScript, Amazon W3C media player, Vega Media Controls, KeplerCaptionsView, Kepler UI and file system packages, AsyncStorage, Python 3.12, PyAV, FFmpeg, NumPy, Ed25519, pytest, Jest, GitHub Actions, AWS CDK (undeployed infrastructure)
+Vega SDK 0.24, React Native 0.83, TypeScript, Amazon W3C media player, Vega Media Controls, KeplerCaptionsView, Kepler UI and file system packages, AsyncStorage, Python 3.12, PyAV, FFmpeg, NumPy, Ed25519, pytest, Jest, GitHub Actions, AWS CDK, Amazon S3, Amazon CloudFront, Amazon DynamoDB, AWS Fargate on Amazon ECS, Amazon ECR, AWS Lambda, AWS Systems Manager Parameter Store
 ```
 
 ## 4. Track
@@ -193,7 +206,7 @@ AWS Builder
 
 A project can win at most one track prize and one mini challenge prize. Open Source is the one to lead with: the analyzer, the Action, the sidecar specification and the hook are licensed under Apache-2.0 in the current private repository. The intended upstream fix is prepared but has not been opened publicly.
 
-**Both mini challenges remain incomplete.** Open Source needs a qualifying public contribution and its URL; our private main repository alone does not establish that. AWS Builder has an undeployed, tested CDK stack, and the rules do not explicitly resolve whether that qualifies. Section 11 records that uncertainty. Describe only the work actually delivered when selecting mini challenges.
+**Open Source remains incomplete.** It needs a qualifying public contribution and its URL; our private main repository alone does not establish that. **AWS Builder now has a deployed stack**: it went up on Oct 9, 2026 and ran a calm test clip twice (section 11). Whether a pipeline that prepares titles, rather than one the TV streams from, is what the judges want is theirs to decide, and section 11.2 says so. Describe only the work actually delivered when selecting mini challenges.
 
 ## 6. Repository URL
 
@@ -366,14 +379,14 @@ SAFETY, PLEASE READ
 
 ### 10.1 The five questions, once per tool
 
-Amazon asks five questions about every tool an entry used. **The answers live in [`docs/FEEDBACK.md`](FEEDBACK.md)**, which covers thirteen tools: the Vega SDK and CLI, the Vega Virtual Device, `vega-video-sample`, the W3C media player, Vega Media Controls, KeplerCaptionsView, the accessibility APIs, AWS CDK, AWS Fargate on ECS, Amazon S3, Amazon CloudFront, the Kepler UI and file system packages, and GitHub Actions.
+Amazon asks five questions about every tool an entry used. **The answers live in [`docs/FEEDBACK.md`](FEEDBACK.md)**, which covers eighteen tools: the Vega SDK and CLI, the Vega Virtual Device, `vega-video-sample`, the W3C media player, Vega Media Controls, KeplerCaptionsView, the accessibility APIs, AWS CDK, AWS Fargate on ECS, Amazon S3, Amazon CloudFront, AWS Lambda, Amazon DynamoDB, Amazon ECR, Systems Manager Parameter Store with KMS, AWS Budgets, the Kepler UI and file system packages, and GitHub Actions.
 
 That file is the one to paste from, and it is deliberately the only copy, so this document cannot drift away from it. If the form wants the answers inline, paste `docs/FEEDBACK.md` from its "1. Vega SDK and Vega CLI" heading down to the "Feature requests" heading. Nothing in it needs editing first.
 
 Two things a reader should know about it, which it says itself:
 
 - Every complaint points at something that happened during the build, and the long version with exact commands and exact output is a numbered entry in [`docs/FRICTION_LOG.md`](FRICTION_LOG.md).
-- Fargate, S3 and CloudFront say in their first line that nothing is deployed and no AWS credential has been used, and they answer as far as a synthesized template and a unit test can. Their onboarding question is answered "not answerable yet" rather than made up.
+- The AWS sections answer from the night of Oct 9, 2026: one deploy, one update and two runs of a calm test clip. Each says where one night of use is all there is, rather than writing an operational opinion it has not earned.
 
 The heaviest complaint, in one line each, is in that file's "At a glance" table.
 
@@ -381,25 +394,76 @@ The heaviest complaint, in one line each, is in that file's "At a glance" table.
 
 **This block belongs in the Product Feedback answer, not in a field of its own.** The rules put the AWS Builder requirement inside this field: the Stage One checklist line reads "AWS Builder: which AWS services were used and how, inside the Product Feedback answer". So paste `docs/FEEDBACK.md` first, then paste this table at the end of the same box. Section 11 is the reasoning about whether we qualify at all, and it is not a substitute for having the table here.
 
-Section 11.1 is the sentence that has to be read before the table: the stack synthesizes and is unit tested, and **nothing has ever been deployed and no AWS credential has ever been used.** Read every row as "how it is used in the stack as written and tested", not as "how it behaved in production".
+**What ran, and when.** The stack was deployed once, on Oct 9, 2026, after Alex
+confirmed HUMAN CHECKPOINT D. He ran `make deploy` in his own terminal, from a
+detached worktree at commit c5724de, and approved the IAM changes at the CDK
+prompt himself. `CalmFramesStack` in us-east-1 was created between 00:21 and
+00:25 PDT, updated at 00:33 to give the ingest task a signing key, and stands at
+<!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n--> with
+<!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n--> resources and
+<!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways. A calm
+marker clip, never a `HAZARD_` file, went through it twice. Unsigned, at 00:27,
+the task ran <!--n results/aws_deploy_2026-10-09.json:runs.0.steps_run -->11<!--/n--> steps,
+failed verify on the missing signature and published
+<!--n results/aws_deploy_2026-10-09.json:runs.0.published_objects -->0<!--/n--> objects. Signed
+with a cloud demo key, at 00:35, it ran
+<!--n results/aws_deploy_2026-10-09.json:runs.1.steps_run -->12<!--/n--> steps, published
+<!--n results/aws_deploy_2026-10-09.json:runs.1.published_objects -->16<!--/n--> objects and
+wrote <!--n results/aws_deploy_2026-10-09.json:runs.1.catalog_rows -->1<!--/n--> catalog row,
+and CloudFront served the title entry, a poster and the HLS master playlist. The
+record is [`results/aws_deploy_2026-10-09.json`](../results/aws_deploy_2026-10-09.json),
+written from read-only calls, with every account id, bucket name, domain, ARN
+and repository URI left out.
+
+Read each row as "how it is built, and what it did on Oct 9", and nothing more:
+one night, one short calm clip, no real title and no load. **The TV app does not
+call AWS.** Its library is compiled into the package, and the cloud demo key is
+one the app does not trust, so a map made in the cloud plays on no TV
+([`docs/SECURITY.md`](SECURITY.md), "A signing key in the cloud"). AWS is where a
+title is prepared, not where it is watched.
 
 | Service | How it is used | Why this one |
 |---|---|---|
-| **Amazon S3** | Two private buckets. `source` takes uploads and is never reachable from the internet. `delivery` holds kid-safe renditions, signed maps, posters and trickplay. | Object storage with a lifecycle rule for the raw uploads, which are the large and short-lived part. |
-| **Amazon CloudFront** | Serves the delivery bucket through origin access control, so the bucket itself stays private. Signed URLs when a public key is configured. | The app needs range requests and reasonable latency for HLS. Origin access control means no public bucket. |
-| **Amazon DynamoDB** | The title catalog, on demand, keyed by the source file's SHA-256, with the same fields as the local JSON catalog. | On-demand billing suits a workload that is quiet most of the time, and the hash key is the natural identity for a title. |
-| **AWS Fargate on Amazon ECS** | The ingest task, ARM64, running the same container as the local pipeline. | No servers to keep alive between titles, and the same image runs locally, so what CI tests is what runs. |
-| **Amazon ECR** | Holds that image. | It is where a Fargate task definition reads from. |
+| **Amazon S3** | Two private buckets. `source` takes uploads and is never reachable from the internet; an upload under `uploads/` starts the pipeline. `delivery` holds kid-safe renditions, signed maps, posters and trickplay: <!--n results/aws_deploy_2026-10-09.json:read_back.delivery_objects -->16<!--/n--> objects after the signed run. | Object storage with a lifecycle rule for the raw uploads, which are the large and short-lived part. |
+| **Amazon CloudFront** | Serves the delivery bucket through origin access control, so the bucket itself stays private. Signed URLs when a public key is configured; the Oct 9 stack has none, so it serves a title to anyone who has its path. A byte range request came back <!--n results/aws_deploy_2026-10-09.json:read_back.byte_range_status -->206<!--/n-->. | The app needs range requests and reasonable latency for HLS. Origin access control means no public bucket. |
+| **Amazon DynamoDB** | The title catalog, on demand, keyed by the source file's SHA-256, with the same fields as the local JSON catalog. The refused run wrote no row and the signed run wrote one. | On-demand billing suits a workload that is quiet most of the time, and the hash key is the natural identity for a title. |
+| **AWS Fargate on Amazon ECS** | The ingest task, ARM64, <!--n results/aws_deploy_2026-10-09.json:stack.task_cpu_units -->2048<!--/n--> CPU units and <!--n results/aws_deploy_2026-10-09.json:stack.task_memory_mib -->4096<!--/n--> MiB, running the same container as the local pipeline. | No servers to keep alive between titles, and the same image runs locally, so what CI tests is what runs. |
+| **Amazon ECR** | Holds that image, <!--n results/aws_deploy_2026-10-09.json:image.size_mb -->279<!--/n--> MB, with ECR's basic scan on push. | It is where a Fargate task definition reads from. |
 | **AWS Lambda** | A small function started by an S3 upload notification, which runs the Fargate task. | The plan rules out Step Functions and EventBridge while the cut list still has items on it, and one small function is the least machinery that does the job. |
+| **AWS Systems Manager Parameter Store, with AWS KMS** | Holds the cloud demo signing key as a SecureString under the account's own `aws/ssm` key. The task role may read that one parameter, and decrypt it only through SSM. | The task gets a key without one in the image or its environment, and it is never a key the TV trusts. |
 | **Amazon VPC** | Public subnets only, `nat_gateways=0`, the task gets a public IP. | The CDK default of a NAT gateway per availability zone would have been the biggest line on the bill. |
-| **AWS IAM with GitHub OIDC** | The deploy role that GitHub Actions assumes. | No AWS access key is ever stored in the repository or in GitHub secrets. |
-| **AWS Budgets** | A 20 US dollar budget alarm. | A hard stop on a hobby project's spending, set before anything can spend. |
-| **Amazon CloudWatch Logs** | Task logs with a retention setting. | Retention means old logs stop costing money on their own. |
-| **Cost allocation tags** | On everything in the stack. | So the bill can be read per project. |
+| **AWS IAM with GitHub OIDC** | **Defined and unit tested, not deployed.** The stack can make a deploy role for GitHub Actions to assume. The Oct 9 deploy left `githubRepo` empty, so neither the OIDC provider nor the role exists and no workflow can reach the account. The deploy ran from Alex's terminal with his own credentials. | No AWS access key is ever stored in the repository or in GitHub secrets. |
+| **AWS Budgets** | A <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollar monthly budget with alerts at 50 and 80 percent of actual spend and 100 percent of forecast, counting costs tagged `Project=calm-frames`. That tag was not yet active for cost allocation on Oct 9, so the budget cannot alert anyone until it is. | A warning on a hobby project's spending, made in the same deploy as everything it watches. It is a warning, not a brake. |
+| **Amazon CloudWatch Logs** | Task logs, kept <!--n results/aws_deploy_2026-10-09.json:stack.stack_log_group_retention_days -->14<!--/n--> days. Both runs' logs are there. | Retention means old logs stop costing money on their own. |
+| **Cost allocation tags** | On everything in the stack, and on the CDK bootstrap and the SSM parameter. | So the bill can be read per project, once the tag is active. |
 
-**Cost.** Estimated at about 5 US dollars in a month where 25 titles are ingested, and under a dollar in a month after that. This is an estimate from the stack's shape, not a bill anybody has received. `make destroy` leaves nothing billable.
+**Cost.** Estimated at <!--n results/cost_estimate.json:published.monthly_total_usd -->1.34<!--/n--> US
+dollars a month for <!--n results/cost_estimate.json:assumptions.titles_per_month -->20<!--/n-->
+titles of <!--n results/cost_estimate.json:assumptions.minutes_per_title -->10<!--/n--> minutes
+each, from list prices read on Sep 17, 2026, and
+<!--n results/cost_estimate.json:published.task_time_quadruple_usd -->2.52<!--/n--> if every ingest
+task ran four times as long as the
+<!--n results/cost_estimate.json:assumptions.task_minutes_per_title -->15<!--/n--> minutes
+assumed. That task time is the estimate's largest unknown, and the Oct 9 runs do
+not settle it, because a short calm clip says nothing about a full-length title.
+It is an estimate, not a bill. The bill is the measure, and the budget above
+cannot see it until the tag is active. The stack stays up until the results,
+about Dec 3. `make destroy` then removes the stack, and the few pieces that live
+outside it are removed by hand, as
+[`pipeline/infra/README.md`](../pipeline/infra/README.md) lists under "Taking it down".
 
-**What we would tell another builder.** The `ec2.Vpc` default is one NAT gateway per availability zone, which is 65 to 100 US dollars a month and would have been the largest line on this project's bill by a wide margin. Asserting on the synthesized template, before deploying anything, is the cheapest safety net available, and it is what let us be confident about cost and privacy settings with no account attached. Both of those are written up properly in [`docs/FEEDBACK.md`](FEEDBACK.md) section 8.
+**What we would tell another builder.** Two things from before the deploy, and
+four from the night itself. The `ec2.Vpc` default is one NAT gateway per
+availability zone: two of them would add
+<!--n results/cost_estimate.json:published.nat_gateways_would_add_usd -->65.7<!--/n--> US dollars a
+month in hourly charges alone, far more than everything else in this stack put
+together. Asserting on the synthesized template, before deploying anything, is
+the cheapest safety net available. Then, on Oct 9: the CDK CLI has to be at least
+the version the library declares, or it stops right after synth; export
+`AWS_REGION`, because the CLI resolves its own region over `CDK_DEFAULT_REGION`;
+bootstrap from a directory with no `cdk.json` in it; and deploy from a terminal,
+because the IAM approval prompt needs one. All of it is written up in
+[`docs/FEEDBACK.md`](FEEDBACK.md) sections 8 to 16.
 
 ---
 
@@ -407,34 +471,33 @@ Section 11.1 is the sentence that has to be read before the table: the stack syn
 
 ### 11.1 What exists, stated plainly before anything else
 
-The AWS work in this project is **an AWS CDK application in [`pipeline/infra/`](../pipeline/infra/) that synthesizes to a CloudFormation template and is unit tested against that template.** That is the whole of it, and here is what that does and does not mean:
+The AWS work in this project is **an AWS CDK application in [`pipeline/infra/`](../pipeline/infra/), unit tested against its synthesized template and deployed once, on Oct 9, 2026.** Here is what that does and does not mean, with every number read from [`results/aws_deploy_2026-10-09.json`](../results/aws_deploy_2026-10-09.json):
 
-- the stack is written, and `make synth` builds the template offline with no account attached;
-- the template is asserted on in unit tests, which is how we know about the zero NAT gateways, the private buckets, the budget alarm and the OIDC role;
-- **nothing has ever been deployed. No AWS credential has been used. No AWS API has been called by this project at any time.** `make deploy` refuses to run until HUMAN CHECKPOINT D is confirmed, and that lock was tested;
-- so no number in this section is a bill, a metric or a log line. The cost figure further down is an estimate from the stack's shape and is labelled as one.
+- **The stack runs.** `CalmFramesStack`, in us-east-1, was created between 00:21 and 00:25 PDT from commit c5724de and updated at 00:33 to wire in a cloud signing key. At 02:50 it read <!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n-->, with <!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n--> resources, <!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways and <!--n results/aws_deploy_2026-10-09.json:stack.outputs_total -->5<!--/n--> outputs.
+- **A person deployed it, with the checkpoint confirmed first.** Alex confirmed HUMAN CHECKPOINT D, ran `make deploy` in his own terminal and approved the IAM changes at the CDK prompt: <!--n results/aws_deploy_2026-10-09.json:iam_approval.statement_rows -->20<!--/n--> statement rows, <!--n results/aws_deploy_2026-10-09.json:iam_approval.managed_policy_rows -->3<!--/n--> managed policies and <!--n results/aws_deploy_2026-10-09.json:iam_approval.security_group_rows -->1<!--/n--> security group rule. The checkpoint's credit request clause is void, because the form closed on Oct 7, and he waived it ([`docs/GATES.md`](GATES.md)).
+- **It ran twice, on a calm marker clip, never a `HAZARD_` file.** Unsigned, at 00:27 PDT, the task analyzed the clip and refused to publish it, exit <!--n results/aws_deploy_2026-10-09.json:runs.0.exit_code -->1<!--/n-->: the fail closed rule, on AWS. Signed with a cloud demo key, at 00:35, it published <!--n results/aws_deploy_2026-10-09.json:runs.1.published_objects -->16<!--/n--> objects and <!--n results/aws_deploy_2026-10-09.json:runs.1.catalog_rows -->1<!--/n--> catalog row <!--n results/aws_deploy_2026-10-09.json:runs.1.seconds_upload_to_published -->66.5<!--/n--> seconds after the upload, and CloudFront served the HLS master playlist with HTTP <!--n results/aws_deploy_2026-10-09.json:runs.1.cloudfront_status.hls_master_playlist -->200<!--/n-->. A short calm clip measures neither a real title's time nor its cost.
+- **The TV does not use it.** The cloud demo key is not one the app trusts, by design, so a map made in the cloud plays on no TV. The app's library is compiled into its package. AWS is where a title is prepared, not where it is watched.
+- **Not deployed, on purpose:** the GitHub OIDC provider and deploy role, which are defined and unit tested, and CloudFront signed URLs.
+- **The budget cannot warn anyone yet.** The <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollar budget counts costs tagged `Project=calm-frames`, and that tag was not active for cost allocation on Oct 9.
+- **Nothing in the repository names the account.** The record was written from read-only calls with every account id, bucket name, domain, ARN and repository URI left out. [`docs/GATES.md`](GATES.md), [`docs/SECURITY.md`](SECURITY.md) and [`pipeline/infra/README.md`](../pipeline/infra/README.md) tell the same night in more detail.
 
-### 11.2 Whether this qualifies is an open question, and it is Alex's to settle
+**NEEDS ALEX:** activate `Project` as a cost allocation tag (Billing and Cost Management, Cost allocation tags, User-defined), so the budget can see the bill. [`pipeline/infra/README.md`](../pipeline/infra/README.md) has the steps.
+
+### 11.2 Whether this qualifies, now that it is deployed
 
 The rules page, Project Requirements, says:
 
 > AWS Builder (Mini Challenge): Any primary track project that incorporates AWS services (i.e. Amazon Bedrock, AgentCore, Strands SDK, Kiro Crew, SageMaker, etc.) with documented integrations.
 
-Neither the rules page nor the overview page defines "incorporates", and neither says whether a deployment is required. A synthesized, unit tested, undeployed stack is documented and integrated in the sense that the code exists and is tested, and it is not integrated in the sense that nothing has ever run. **We cannot tell from the rules text which reading applies, so this document does not claim the mini challenge.** It describes what exists and lets a judge decide.
+Neither the rules page nor the overview page defines "incorporates". Until Oct 9 the open question was whether a synthesized, unit tested, undeployed stack counts. That question is gone: the stack is deployed and has run. What a judge may still weigh is where AWS sits. It prepares titles: an upload becomes a checked, signed rendition, a catalog row and a CloudFront path. It is not in the playback path, because the TV plays a library compiled into its package. We say that plainly and let the judges decide, rather than claiming the prize for ourselves.
 
-Three routes settle it, and they are Alex's calls, not the build's:
-
-1. **Ask the hackathon manager.** One question, and the answer is authoritative in a way that our reading never will be. This is the cheapest route and it should go first.
-2. **Deploy once.** Put the account on the Paid plan, set the 20 dollar budget alarm, confirm HUMAN CHECKPOINT D, run `make deploy`, ingest one title, and the doubt is gone. `make destroy` leaves nothing billable afterwards.
-3. **Kiro Crew.** The rules say it qualifies on its own: "Kiro Crew qualifies on its own as a development tool used during the hackathon[,] a submission does not need to also call a runtime AWS service". **We have not used Kiro Crew and nothing in this submission may imply that we have.** It is listed because it is a route that exists, not because it is a route we have taken.
-
-Route 1 then route 2 is the order that costs least. Doing nothing is also a choice: we enter the mini challenge, describe the stack as it is, and a judge decides.
+**Kiro Crew is a route we have not taken.** The rules say it qualifies on its own: "Kiro Crew qualifies on its own as a development tool used during the hackathon[,] a submission does not need to also call a runtime AWS service". **We have not used Kiro Crew and nothing in this submission may imply that we have.**
 
 ### 11.3 Which AWS services, and how
 
-**The table is in [section 10.2](#102-which-aws-services-we-used-and-how), because that is the field the rules name.** It is one copy on purpose, so the two cannot drift. Eleven services and settings: S3, CloudFront, DynamoDB, Fargate on ECS, ECR, Lambda, VPC with zero NAT gateways, IAM with GitHub OIDC, Budgets, CloudWatch Logs, and cost allocation tags on everything.
+**The table is in [section 10.2](#102-which-aws-services-we-used-and-how), because that is the field the rules name.** It is one copy on purpose, so the two cannot drift. Twelve services and settings: S3, CloudFront, DynamoDB, Fargate on ECS, ECR, Lambda, Systems Manager Parameter Store with KMS, VPC with zero NAT gateways, IAM with a GitHub OIDC role that is defined but not deployed, Budgets, CloudWatch Logs, and cost allocation tags on everything.
 
-**NEEDS ALEX:** request the 150 US dollar AWS credits by **Wednesday October 21 at 12:00 PT**, while supplies last. Either form link works, both resolve to the same Google Form.
+**No credit request.** Requesting the 150 US dollar AWS credits is no longer a step: the form closed on Oct 7, 2026. Alex's own AWS credits cover the stack, and HUMAN CHECKPOINT D was amended to say so ([`docs/GATES.md`](GATES.md), [`docs/DECISIONS.md`](DECISIONS.md)).
 
 ---
 
@@ -480,14 +543,14 @@ downstream.
 
 UPSTREAM
 
-A pull request to AmazonAppDev/vega-video-sample, the Fire TV video sample that
-most Vega video apps start from, fixing a real playback defect we hit while
-building on it, with a test that fails without the fix. Details, including the
-root cause and the test, are in docs/OPEN_SOURCE_PR.md in our repository.
+A pull request to AmazonAppDev/vega-video-sample, Amazon's reference video app
+for Vega, fixing a real playback defect we hit while building on it, with three
+tests, two of which fail without the fix. Details, including the root cause and
+the tests, are in docs/OPEN_SOURCE_PR.md in our repository.
 
 Why it matters: every developer who starts from that sample inherits the bug.
-A fix there is worth more than a fix in our own fork, because it is the
-starting point rather than one app.
+A fix there is worth more than a fix in our own fork, because it is a starting
+point rather than one app.
 
 DOWNSTREAM
 
@@ -510,8 +573,8 @@ from a primary source are named there and are not used as thresholds.
 
 The sidecar specification is published so that a flash map is portable: a studio
 can ship one with a title and any player can honour it. The hook package ships
-the playback side, so a Vega video app can get the same protection by giving one
-hook a player and a map URL.
+the playback side, so a Vega video app built on Amazon's W3C media player can get
+the same protection by giving one hook a player and a map URL.
 ```
 
 ---
@@ -555,11 +618,11 @@ And two differences, because the precedent is not the same product. Apple's dete
 
 ## 14. Friction log
 
-**The full log, in Amazon's six fields, is [`docs/FRICTION_LOG.md`](FRICTION_LOG.md)**, which Lane G owns. It holds **thirty entries: four High, thirteen Medium and thirteen Low.** Each one has the task, the steps with the exact commands, expected versus actual with the exact output, severity, the workaround we used, and a suggestion.
+**The full log, in Amazon's six fields, is [`docs/FRICTION_LOG.md`](FRICTION_LOG.md)**, which Lane G owns. It holds **thirty-five entries: six High, thirteen Medium and sixteen Low.** Each one has the task, the steps with the exact commands, expected versus actual with the exact output, severity, the workaround we used, and a suggestion. Entries 1 to 28 are on Amazon's surface, 29 to 33 are the wider toolchain, and 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues; the log says so in its own summary.
 
 If the Devpost form wants the entries inline rather than a link, paste the body of that file from its "Summary" heading down. Nothing in it needs editing first.
 
-The four High entries, so the list reads in the right order:
+The six High entries, so the list reads in the right order:
 
 | # | What broke |
 |---|---|
@@ -567,8 +630,10 @@ The four High entries, so the list reads in the right order:
 | 14 | No way to get a frame of what the app drew, from inside the app or from outside it |
 | 15 | No crypto API on the platform, so Ed25519 signature checking had to be written by hand |
 | 22 | Playback on the virtual device is not steady, and the error says `UNKNOWN` |
+| 26 | The player's `timeupdate` cadence and `currentTime` resolution are undocumented, and the reports are not regular |
+| 35 | Every GitHub Actions Audit job failed before a runner or a step started. Not an Amazon issue. Hosted runners have run real steps again since Oct 5 |
 
-**NEEDS ALEX:** read the thirty entries and confirm you are happy for them to be published as written. They name real defects in Amazon's tools, in plain words, with the exact output. That is what the log is for, and it is still your name on the submission.
+**NEEDS ALEX:** read the thirty-five entries and confirm you are happy for them to be published as written. They name real defects in Amazon's tools, in plain words, with the exact output. That is what the log is for, and it is still your name on the submission.
 
 ---
 
@@ -595,21 +660,23 @@ One list, in date order, so nothing is missed on submission day.
 
 | # | What | When | Field it unblocks |
 |---|---|---|---|
-| 0 | **Settle the AWS Builder question.** Ask the hackathon manager whether a synthesized, unit tested, undeployed CDK stack counts as "incorporating AWS services". If the answer is no or nobody answers, decide between deploying once and dropping the mini challenge. Kiro Crew is a third route we have not taken and must not imply we have | **As early as possible.** Route 2 needs the paid plan first, so a late yes is worth less than an early one | 5, 11 |
+| 0 | **Done Oct 9: the AWS Builder question.** The stack is deployed and has run twice (section 11), so whether an undeployed stack counts no longer arises. Kiro Crew is a route we have not taken and must not imply we have | Done | 5, 11 |
 | 0b | **Settle whether a camera can see the Vega Virtual Device window.** Two minutes with a phone. It decides whether the video can be filmed without the stick, and the rules allow the simulator, so this is the Stage One line | **The moment the virtual device is free** | 7 |
+| 0c | **Activate `Project` as a cost allocation tag**, so the 20 dollar budget can see the bill. Until then it cannot warn anyone (section 11.1) | **Now.** A new tag can take up to a day to appear for activation | 11 |
 | 1 | **Confirm the GitHub username** to credit on the Open Source fields, and which account forks the upstream repository | Before Mon Oct 12 | 12.3 |
 | 2 | **Open the upstream pull request** from a fork under your own account, and paste the URL | By Mon Oct 12 | 12.1 |
 | 3 | **Set the demo PIN** once, then put it in the testing instructions, the README and the Release notes | Before the release is built | 9 |
-| 4 | **AWS: confirm the Paid plan and the 20 dollar budget alarm**, which is HUMAN CHECKPOINT D | Before any deploy, and it is the gate on route 2 of item 0 | 11 |
+| 4 | **Done Oct 9: HUMAN CHECKPOINT D.** The Paid plan and the 20 dollar budget are in place, and the credit clause is void because the form closed on Oct 7 | Done | 11 |
 | 5 | **Any outreach reply you want quoted** goes into `docs/VALIDATION.md`, with permission | By Fri Oct 16 | 15 |
 | 6 | **Film the video** from `docs/VIDEO_SCRIPT.md`, with the shot manifest beside it | **Mon Oct 19 to Tue Oct 20** | 7 |
 | 7 | **Run `eval/check_video.sh` on the final file**, confirm exit 0, and commit `results/video_check.json` | Before pasting the video URL | 7 |
 | 8 | **Upload the video** and check the link works while logged out | Before Thu Oct 22 | 7 |
-| 9 | **Read the thirty friction entries** and confirm you are happy for them to be published as written | Before submission | 14 |
-| 10 | **Request the 150 dollar AWS credits** | By **Wed Oct 21, 12:00 PT** | 11 |
-| 11 | **Make the repository public** and confirm Apache-2.0 shows in GitHub's About box | **Wed Oct 21**, during the final checks | 6 |
-| 12 | **Publish the release** and paste the `.vpkg` links and the tag into the testing instructions | **Wed Oct 21**, after the final checks | 9 |
-| 13 | **Confirm the team and entrant details**: name, team, eligibility, country of residence, contact email | Submission day | 15 |
-| 14 | **Press submit** at HUMAN CHECKPOINT G | **Thu Oct 22** | all |
+| 9 | **Read the thirty-five friction entries** and confirm you are happy for them to be published as written | Before submission | 14 |
+| 10 | **Make the repository public** and confirm Apache-2.0 shows in GitHub's About box | **Wed Oct 21**, during the final checks | 6 |
+| 11 | **Publish the release** and paste the `.vpkg` links and the tag into the testing instructions | **Wed Oct 21**, after the final checks | 9 |
+| 12 | **Confirm the team and entrant details**: name, team, eligibility, country of residence, contact email | Submission day | 15 |
+| 13 | **Press submit** at HUMAN CHECKPOINT G | **Thu Oct 22** | all |
+
+Requesting the 150 dollar AWS credits used to be on this list. It is gone: the form closed on Oct 7, 2026, and Alex's own AWS credits cover the stack.
 
 The deadline is **Friday October 23 at 12:00 PT**. We submit a day early on purpose, so that a form problem on the day is a problem with a day left in it rather than a problem with an hour.

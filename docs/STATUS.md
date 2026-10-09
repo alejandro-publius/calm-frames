@@ -1,10 +1,76 @@
 # Status
 
-Updated Fri Oct 2, 2026.
+Updated Fri Oct 9, 2026.
 
 ## 0. Where things stand
 
-**Oct 2 terminal follow-up.** Checked local preparation now reaches the TV
+### Oct 9, 2026: the Oct 2 to 3 work is pushed, hosted CI passes but for Audit, and AWS is deployed
+
+**The review branch.** The Oct 2 and 3 work was committed and pushed to
+`codex/signed-scene-holds-2026-09-29` as two commits: 8154e27 at 00:59 PDT backs
+up the Harbor demo, the prepared library, the saved household setup and the
+full conformance run, and 956bc65 at 01:00 repoints three README links the
+player changes had moved. Hosted runners take jobs again. Every run from Sep 28 to Sep 30 stopped before a
+runner started, which GitHub put down to a failed account payment or a spending
+limit; that is over, because the Oct 5 scheduled Audit on main ran real steps in
+all four of its jobs, and every run since has too. CI on 956bc65 failed one
+colour fidelity test on the x86 runner. eb59c69, at 02:03, sized that tolerance
+from one 8-bit code, and on eb59c69 all six CI jobs pass. Audit fails two of its
+four jobs there: npm audit reports advisories that have no written exception,
+and the bills of materials have drifted from what the generator writes. Its
+stack and image jobs pass. Draft PR #1's head is eb59c69. Main is unchanged,
+and stays that way until Audit passes too.
+
+**AWS is deployed.** Alex confirmed HUMAN CHECKPOINT D in chat and at his own
+terminal, with its credit request clause void because the form closed on Oct 7
+(docs/GATES.md). From a detached worktree at c5724de he ran `make deploy`
+himself and approved the IAM changes at the CDK prompt. `CalmFramesStack` in
+us-east-1 was created between 00:21 and 00:25 PDT, updated at 00:33 to wire in a
+cloud demo signing key, and reads
+<!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n-->, with
+<!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n--> resources,
+<!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways and no
+GitHub OIDC role. Two cloud runs of the calm marker clip followed. At 00:27,
+unsigned, the task ran
+<!--n results/aws_deploy_2026-10-09.json:runs.0.steps_run -->11<!--/n--> steps, published
+<!--n results/aws_deploy_2026-10-09.json:runs.0.published_objects -->0<!--/n--> objects and exited
+<!--n results/aws_deploy_2026-10-09.json:runs.0.exit_code -->1<!--/n-->: the fail closed rule, on AWS.
+At 00:35, signed, it ran
+<!--n results/aws_deploy_2026-10-09.json:runs.1.steps_run -->12<!--/n--> steps, published
+<!--n results/aws_deploy_2026-10-09.json:runs.1.published_objects -->16<!--/n--> objects and wrote
+<!--n results/aws_deploy_2026-10-09.json:runs.1.catalog_rows -->1<!--/n--> catalog row, and
+CloudFront served the title entry, a poster and the HLS master playlist. The app
+does not trust the cloud key, so those maps play on no TV. The budget cannot
+warn anyone until the `Project` cost allocation tag is activated, which is
+Alex's to do. The record, with every account identifier left out, is
+`results/aws_deploy_2026-10-09.json`; docs/GATES.md, docs/DECISIONS.md,
+docs/SECURITY.md and pipeline/infra/README.md carry the rest.
+
+The line `scripts/aws_guard.sh` reads as its first lock lived only in the deploy
+worktree's own copy of this file and was never committed, so the committed
+lock stays closed and the next deploy needs a person again. The record branch,
+`wip/aws-record-2026-10-09`, moves the CDK CLI pin to 2.1142.0 and makes
+`SIGNING_KEY_PARAMETER` a deploy variable. A deploy from a checkout without
+those commits needs `CDK="npx --yes aws-cdk@2.1142.0"` on the command line, and
+any deploy needs `SIGNING_KEY_PARAMETER=/calm-frames/cloud-signing-key`, or it
+takes the cloud key away from the task.
+
+**The complete conformance run finished.** It ended on Oct 3 at 00:11 PDT with
+status complete:
+<!--n results/conformance_current_full_2026-10-02.json:summary.clips_measured -->3000<!--/n--> clips
+measured, <!--n results/conformance_current_full_2026-10-02.json:summary.clips_kept -->2999<!--/n-->
+kept and <!--n results/conformance_current_full_2026-10-02.json:summary.clips_excluded -->1<!--/n-->
+excluded by the fidelity rule, for decoded luminance off the intended waveform.
+The finisher then wrote `results/conformance_current_report_2026-10-02.json`
+and the paired protocol comparison. None of its aggregate numbers is published
+yet: README.md and docs/SUBMISSION.md still quote the archived partial run,
+labelled partial, until a verifier pass adopts the complete one.
+
+### Oct 2 terminal follow-up
+
+Corrected on Oct 9 where it had gone stale: the conformance run and hosted CI.
+
+Checked local preparation now reaches the TV
 shelf through a bounded, immutable packaged library. Source identity and the
 played rendition identity are distinct. The compiler imports a reviewed catalog;
 the player accepts its key only for exact preset, media, map and caption
@@ -40,22 +106,22 @@ all planned takes as unobserved.
 The fresh old-protocol conformance recheck reproduces the archive. A generator
 color matrix/range mismatch was found with static encoded swatches and fixed;
 this is an evaluation-protocol correction, not a detector improvement. The
-full corrected run is active with two workers. Its log is
-`.logs/conformance-current-full-2026-10-02.log`, its PID file is beside that log,
-and its durable journal is `results/conformance_current_full_2026-10-02.journal.jsonl`.
+full corrected run, started with two workers, finished on Oct 3 at 00:11 PDT
+with status complete (the Oct 9 entry above has its counts). Its log is
+`.logs/conformance-current-full-2026-10-02.log` and its durable journal is
+`results/conformance_current_full_2026-10-02.journal.jsonl`.
 Both legacy Make targets now refuse to append the new encoding protocol to the
-old archive. Do not invoke the direct legacy generator, mix current rows into
-the old archive, or edit fingerprinted detector/generator/spec/design inputs
-during measurement. The direct generator's equivalent guard must be added only
-after the active measurement and pinned reports finish.
-The bounded detached finisher is recorded in
-`.logs/conformance-finish-2026-10-02.pid`; its log and
-`conformance-finish-2026-10-02.status.json` are beside it. It checks pinned inputs,
-then writes `results/conformance_current_report_2026-10-02.json` and
-`results/conformance_protocol_comparison_2026-10-02.json`. Keep those two report
-wrapper sources unchanged while it waits. The separate current report and paired
-comparison must pass before publishing new aggregate numbers. Existing aggregate
-claims remain explicitly historical.
+old archive. Do not invoke the direct legacy generator or mix current rows into
+the old archive. The direct generator's equivalent guard was to wait until the
+measurement and its pinned reports finished; they have, and as of Oct 9 the
+guard has not been added.
+The bounded detached finisher checked the pinned inputs, wrote
+`results/conformance_current_report_2026-10-02.json` and
+`results/conformance_protocol_comparison_2026-10-02.json`, and recorded status
+complete in `.logs/conformance-finish-2026-10-02.status.json`. The current
+report and the paired comparison still have to pass review before any new
+aggregate number is published. Existing aggregate claims remain explicitly
+historical.
 
 Native observation is blocked: the simulator start attempt reported operation
 not permitted, no usable target is connected, and the fresh read-only smoke
@@ -65,12 +131,13 @@ captions/holds; that is not playback or screen composition evidence. The new
 captures the current household journey without resetting data. Its logs cannot
 establish native storage durability, captions layering or physical screen timing.
 
-GitHub was reachable through the connector. The published review commit's CI
-and Audit jobs still failed without any steps or logs, so no successful hosted
-run covers this work. Main, access settings and AWS are unchanged. Local changes
-remain on the existing review branch. Do not merge main until complete hosted
-CI passes. Account access, native observation, public contribution, video,
-release publication and final submission remain separate actions.
+On Oct 2 the published review commit's CI and Audit jobs had failed without
+any steps or logs. That is no longer so: hosted runners run again, and on
+eb59c69 CI passes and Audit fails on npm advisories and SBOM drift (the Oct 9
+entry above). Main and access settings are unchanged; AWS is not, since Oct 9.
+The work is pushed on the existing review branch. Do not merge main until
+Audit passes as well. Native observation, public contribution, video, release
+publication and final submission remain separate actions.
 
 Evidence: `.logs/prepared-app-full-final.log`, `prepared-python-final.log`,
 `prepared-types.log`, `prepared-lint-full.log`, `prepared-node.log`,
@@ -450,7 +517,7 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | **Before then** | Confirm your phone films 240 fps and the TV has a game mode. | Assumed, never confirmed. If either is wrong, GATE 1 needs a different plan and it is better to know now. |
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
 | **Any evening, about an hour** | Label the <!--n results/realclips_status.json:segments -->40<!--/n--> blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all of them. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. **The pool was recut again on Sep 19**, after both ffmpeg based baselines ran over every clip and let the sixteen calm Wikimedia clips in, so the segment ids have moved a second time and are not the ones any earlier version of this page named. It is 40 segments over 16 titles, 28 flagged and 12 unflagged, which is twice the unflagged half it had on Sep 18. Nothing is waiting on this now except the two of you. |
-| **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add that line to this file. It has to start a line of its own: no bullet, no table cell, no backticks. The exact wording is in the refusal `make deploy` prints. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Seventeen tests now cover both locks, run against a copy of the script so this file is never touched. Nothing has touched AWS. |
+| **Done Oct 9, one step left** | HUMAN CHECKPOINT D is confirmed and the stack is deployed (section 0). Left for you: activate `Project` as a cost allocation tag in Billing, so the $20 budget can see the bill. `pipeline/infra/README.md` has the steps. | For any later deploy, the lock line goes into the deploy worktree's own copy of this file, never this one. `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set, and `pipeline/tests/test_aws_guard.py` fails if the committed file ever carries it. |
 | **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
 | **Oct 19 to 20** | Film the video from `docs/VIDEO_SCRIPT.md`, timed to 2:55. | |
 | **Wed Oct 21** | Make the repo public, then run the final checks. | This is the chosen publication plan. The rules also permit private reviewer access; see `docs/SUBMISSION.md`. |
@@ -705,7 +772,7 @@ and it is the reason no report is written for a clip it could not read.
   <!--n results/verify_pool.json:not_analyzed.no_entry_json -->3<!--/n-->
   directories have no verdict at all, so they are in none of the four counts.
 - **EA IRIS does not run on the conformance suite**, so that table still has ffmpeg and naive and no IRIS. It is built and it has run over the real clip pool; what it is not in is the generate-analyse-delete loop, because putting a second process in that loop means keeping three thousand flashing clips alive for it. The pinned Docker image is still unbuilt and stays that way on this machine: the shared VM has another project's services in it, and a vcpkg OpenCV build there could get their containers killed rather than the compiler.
-- **The conformance run is partial**, and `results/conformance.json` says so in its own statement field rather than implying a full 3,000-clip run.
+- **The complete conformance run is not adopted yet.** It finished on Oct 3 (section 0), but `results/conformance.json`, which the README quotes, is still the archived partial run, and it says so in its own statement field rather than implying a full 3,000-clip run.
 - **The demo PIN does not exist yet**, so the release notes say so.
 - **Nothing in the app has been opened on a device since kid mode was wired up.** Every screen, the first run, the play path and the player's refusal are checked in the app's own test suite, and none of it has been seen on the virtual device or the stick. The bundled clip's URI is `file:///pkg/assets/raw/offline/calm_gradient.mp4`, which is where the Kepler file system README says package assets land, and that has never been played.
 - **Native household-storage durability still needs a device check.** The Oct 2 implementation restores the saved family and PIN gate through the SDK storage adapter; local restart regressions pass, but this is not an observation on a physical TV.
@@ -795,3 +862,10 @@ review, title viewing plan and installed hook-consumer check are implemented
 and pass the final local app/Python/package checks and native Debug build.
 A new unaccounted dependency advisory holds publication. No cloud connection, deployment, npm
 publication, durable-settings claim or physical-TV evidence has been added.
+
+Fri Oct 9, 2026: the Oct 2 to 3 work is pushed (8154e27, 956bc65) and eb59c69
+fixed the one x86 test that failed, so CI passes on the review branch and only
+Audit is red, on npm advisories and SBOM drift. The AWS stack was deployed that
+night and ran the calm marker clip twice, refused unsigned and published signed,
+with the record in `results/aws_deploy_2026-10-09.json`. The complete
+conformance run finished on Oct 3 and waits to be adopted. Main is unchanged.
