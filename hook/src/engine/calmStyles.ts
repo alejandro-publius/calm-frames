@@ -113,6 +113,29 @@ export const CALM_SPACE = {
   SAFE_Y: 54,
 } as const;
 
+/**
+ * Where the player puts its own words, in 1080p units from the top left.
+ *
+ * Captions own the bottom of the picture. PlayerScreen's KeplerCaptionsView
+ * ends 120 units above the bottom edge and its cues stack upward from there.
+ * The card used to stand 160 units up from the bottom, inside that band, so
+ * it covered the captions at the very moment a hidden picture made them the
+ * only way to follow the story. It now hangs from the upper part of the safe
+ * area instead.
+ *
+ * A labelled demo's practice label sits on a plate in the top left corner of
+ * the safe area, on a row of its own: one line of small text on the plate
+ * ends about 125 units down, and the card starts at 160.
+ *
+ * test/calmframes/tenFoot.test.tsx renders the player in each card state and
+ * fails if the card, the plate and the caption band overlap.
+ */
+export const PLAYER_LAYOUT = {
+  PLATE_TOP: CALM_SPACE.SAFE_Y,
+  PLATE_LEFT: CALM_SPACE.SAFE_X,
+  CARD_TOP: 160,
+} as const;
+
 /** The smallest text Calm Frames draws, in 1080p units. */
 export const MINIMUM_TEXT_SIZE = 32;
 

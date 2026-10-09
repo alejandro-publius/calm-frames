@@ -29,7 +29,6 @@ import {
   AppStateStatus,
   Platform,
   StyleSheet,
-  Text,
   useWindowDimensions,
   View,
 } from 'react-native';
@@ -41,10 +40,14 @@ import {
   bundledTitlePublicKey,
   isBundledBenignStory,
 } from '../calmframes/benignStory';
-import { CALM_COLORS, CALM_TYPE, scale } from '../calmframes/calmStyles';
-import { NO_CARD } from '../calmframes/cards';
+import { cardOffersSkip, NO_CARD } from '../calmframes/cards';
 import { playChime } from '../calmframes/chimeSound';
+import CornerPlate from '../calmframes/CornerPlate';
 import CoverLayer from '../calmframes/CoverLayer';
+import {
+  showDefaultCaptions,
+  TextTrackListLike,
+} from '../calmframes/defaultCaptions';
 import { buildCoverIntervals } from '../calmframes/coverSchedule';
 import { recordHide } from '../calmframes/hideLogStore';
 import { OFFLINE_PUBLIC_KEY_BASE64 } from '../calmframes/offlineTitle';
@@ -144,6 +147,28 @@ const PlayerScreen = ({
     beacon('PlayerScreen.videoInitialized', { isVideoInitialized });
   }, [isVideoInitialized]);
 
+  // Captions on from the start when the title ships a caption track, once
+  // per player; after that the caption menu decides. VideoHandler adds the
+  // title's tracks before the media loads, so they exist by the time the
+  // player says it is initialized. See defaultCaptions.ts.
+  const captionsDefaulted = useRef(false);
+  React.useEffect(() => {
+    if (!isVideoInitialized || captionsDefaulted.current) {
+      return;
+    }
+    captionsDefaulted.current = true;
+    const shown = showDefaultCaptions(
+      videoRef.current?.textTracks as TextTrackListLike | undefined,
+      data.textTrack,
+    );
+    if (shown !== CAPTION_DISABLE_ID) {
+      console.log(
+        `[PlayerScreen.tsx] - captions - on by default, track ${shown}`,
+      );
+      setCaptionID(shown);
+    }
+  }, [isVideoInitialized, data.textTrack]);
+
   const cover = useCoverHarness(videoRef, {
     mode: coverTest,
     intervals: coverIntervals,
@@ -242,7 +267,10 @@ const PlayerScreen = ({
   // The app records its own layer, because Vega gives it no way to read its
   // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
   useUiCapture(
-    React.useMemo(() => playerFrame(covered, card.kind), [covered, card.kind]),
+    React.useMemo(
+      () => playerFrame(covered, card.kind, benignDemo),
+      [covered, card.kind, benignDemo],
+    ),
     'player',
   );
   const keplerAppStateManager: IKeplerAppStateManager =
@@ -418,8 +446,13 @@ const PlayerScreen = ({
 
   const handleAppStateChange = useCallback(
     (nextAppState: KeplerAppStateChangeData): void => {
+      // A line for every change, and one for what the player did about it,
+      // so a device log shows each state the app passed through. console.log,
+      // which the Release build strips.
       console.log(
-        '[PlayerScreen.tsx] - handleAppStateChange - k_content_per: handleAppStateChange',
+        `[PlayerScreen.tsx] - handleAppStateChange - KeplerAppStateChange to ${String(
+          nextAppState,
+        )}`,
       );
       if (nextAppState === BACKGROUND_STATE) {
         setShowBuffering(false);
@@ -429,8 +462,14 @@ const PlayerScreen = ({
           // screen would tear the player down mid-run. The cover is already
           // on: useCoverHarness hides the picture as soon as the playhead
           // becomes uncertain, which includes going to the background.
+          console.log(
+            '[PlayerScreen.tsx] - handleAppStateChange - background, a measurement run stays on the player',
+          );
           return;
         }
+        console.log(
+          '[PlayerScreen.tsx] - handleAppStateChange - background, leaving the player',
+        );
         navigateBack();
       }
     },
@@ -625,10 +664,12 @@ const PlayerScreen = ({
             benignDemo ? 'Skip the practice hold' : undefined
           }
         />
+        {/*
+          The practice label, on a plate in the top left corner: a row of its
+          own above the card, and nowhere near the captions.
+        */}
         {benignDemo && (
-          <Text style={styles.demoLabel} testID="benign-demo-label">
-            {BENIGN_STORY_LABEL}
-          </Text>
+          <CornerPlate label={BENIGN_STORY_LABEL} testID="benign-demo" />
         )}
         {showVideoPlayerUI && (
           <VideoPlayerUI
@@ -639,6 +680,10 @@ const PlayerScreen = ({
             setSelectedCaptionInVideoPlayer={setSelectedCaptionInVideoPlayer}
             bifFrameImagesRef={bifFrameImagesRef}
             videoData={data}
+            // The card's Skip button has focus during a countdown, so OK is
+            // Skip's and the sample must not pause or show its controls.
+            skipOwnsSelect={cardOffersSkip(card)}
+            selectedCaptionId={captionID}
             requestSeek={
               guarding
                 ? (source, targetMs) => {
@@ -666,16 +711,10 @@ const arePlayerPropsEqual = (
 export default React.memo(PlayerScreen, arePlayerPropsEqual);
 
 export const styles = StyleSheet.create({
-  demoLabel: {
-    position: 'absolute',
-    top: scale(100),
-    left: scale(80),
-    right: scale(80),
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    padding: scale(16),
-    zIndex: 4,
-  },
+  // Where captions are drawn: the renderer stacks cue lines upward from this
+  // view's bottom edge, so the bottom of the picture is theirs. The card and
+  // the practice plate keep to the top (PLAYER_LAYOUT in calmStyles.ts), and
+  // tenFoot.test.tsx fails if either reaches down into the captions.
   captions: {
     width: '100%',
     height: '100%',

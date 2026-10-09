@@ -43,12 +43,34 @@ interface VideoPlayerUIProps {
    * currentTime themselves.
    */
   requestSeek?: (source: SeekSource, targetMs: number) => void;
+  /**
+   * Calm Frames: true while a countdown card's Skip button is on screen.
+   *
+   * Skip takes D-pad focus the moment a countdown appears, so OK is a press
+   * on Skip. The sample also reads OK as play or pause, and any key as a
+   * reason to bring its controls up. Either one then would pause the title
+   * under the card, or drop the controls over it, just as the child chooses
+   * to skip.
+   */
+  skipOwnsSelect?: boolean;
+  /**
+   * Calm Frames: the caption track PlayerScreen has showing. A title that
+   * ships captions starts with them on, so the caption menu has to open on
+   * that track rather than on Off.
+   */
+  selectedCaptionId?: string;
 }
 export const areVideoPlayerUIPropsEqual = (
   prevProps: VideoPlayerUIProps,
   nextProps: VideoPlayerUIProps,
 ) => {
-  return areComponentPropsEqual(prevProps.title, nextProps.title);
+  // The key handler reads skipOwnsSelect and the caption menu needs
+  // selectedCaptionId, so a change to either has to render.
+  return (
+    areComponentPropsEqual(prevProps.title, nextProps.title) &&
+    prevProps.skipOwnsSelect === nextProps.skipOwnsSelect &&
+    prevProps.selectedCaptionId === nextProps.selectedCaptionId
+  );
 };
 
 export const VideoPlayerUI = React.memo(
@@ -61,6 +83,8 @@ export const VideoPlayerUI = React.memo(
     bifFrameImagesRef,
     videoData,
     requestSeek,
+    skipOwnsSelect = false,
+    selectedCaptionId,
   }: VideoPlayerUIProps) => {
     const [captionMenuVisibility, setCaptionMenuVisibility] =
       useState<boolean>(false);
@@ -104,9 +128,13 @@ export const VideoPlayerUI = React.memo(
 
       if (evt && evt.eventKeyAction === EVENT_KEY_DOWN) {
         let playbackEvent: IPlaybackEvent | undefined;
+        // OK on a countdown card is a press on Skip, so the sample neither
+        // brings its controls up for it nor reads it as play or pause.
+        const okIsSkip =
+          skipOwnsSelect && evt.eventType === DPADEventType.SELECT;
         setPlayerControlType(evt.eventType);
 
-        if (!captionMenuVisibility) {
+        if (!captionMenuVisibility && !okIsSkip) {
           showMediaControls
             ? handleShowControlsOnKeyEvent()
             : handleShowControls();
@@ -161,6 +189,12 @@ export const VideoPlayerUI = React.memo(
 
               case DPADEventType.SELECT: {
                 console.info('k_content_per: VideoPlayerUI : select');
+                if (okIsSkip) {
+                  console.log(
+                    '[VideoPlayerUI.tsx] - select - OK is a press on Skip, the countdown card has focus',
+                  );
+                  break;
+                }
                 // pause video
                 if (!showMediaControls) {
                   playPauseVideo();
@@ -232,6 +266,7 @@ export const VideoPlayerUI = React.memo(
               videoRef={videoRef}
               setSelectedCaptionInMenuBar={setSelectedCaptionInMenuBar}
               setCaptionMenuVisibility={setCaptionVisibility}
+              selectedCaptionId={selectedCaptionId}
             />
           </LinearGradient>
         )}

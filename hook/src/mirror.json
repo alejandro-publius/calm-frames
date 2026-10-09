@@ -2,10 +2,10 @@
   "source": "app/src/calmframes",
   "files": {
     "announce.ts": "d67e13b47de80d16",
-    "CalmCard.tsx": "b05cf1b50bb60d6b",
-    "calmStyles.ts": "bf5c47803e183f15",
+    "CalmCard.tsx": "0c6f32abfb42930b",
+    "calmStyles.ts": "7e1348bc76aee00f",
     "canonicalJson.ts": "1097285aae9b21aa",
-    "cards.ts": "4df203129d28ec43",
+    "cards.ts": "23bf59c4f9afccdd",
     "CoverLayer.tsx": "ce1c3f785861d009",
     "coverSchedule.ts": "0fc0b8ba87e15973",
     "ed25519.ts": "8a8e37cc128b0603",
@@ -14,13 +14,13 @@
     "household.ts": "691ec43ab4c58a06",
     "mapRegistry.ts": "393c3a04178b508b",
     "mediaClock.ts": "627d8e5ecb3266f9",
-    "SafeMediaControlHandler.ts": "969f943f7b4916b6",
+    "SafeMediaControlHandler.ts": "87cdd9e1a5a03701",
     "seekSafety.ts": "410732df66f7006b",
     "sceneHolds.ts": "a11f9a7461b37ec0",
     "sha512.ts": "66a52df731d2968b",
     "timingLog.ts": "3a56e6734c3f8e18",
     "titleStatus.ts": "b957b8cc6e58a08c",
     "useCoverHarness.ts": "5eaa61f38033cb48",
-    "useFlashGuard.ts": "14159ad5c8222e0b"
+    "useFlashGuard.ts": "65657024d109e312"
   }
 }

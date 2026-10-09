@@ -38,7 +38,7 @@ import {
 } from 'react';
 import { Image } from 'react-native';
 import { announceForAccessibility } from './announce';
-import { Card, cardAt, cardChanged, NO_CARD } from './cards';
+import { Card, cardAt, cardChanged, CHECKING_CARD, NO_CARD } from './cards';
 import {
   buildCoverIntervals,
   CoverInterval,
@@ -508,16 +508,22 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
     renditionStartOffsetMs,
   ]);
 
-  const scheduledCard = useMemo(
-    () =>
-      activeStatus === 'verified'
-        ? cardAt(intervals, harness.mediaTimeMs)
-        : cardAt([], 0, {
-            rejection: rejection ?? 'missing',
-            blockedDetail: blockedReason,
-          }),
-    [activeStatus, intervals, harness.mediaTimeMs, rejection, blockedReason],
-  );
+  const scheduledCard = useMemo(() => {
+    if (activeStatus === 'verified') {
+      return cardAt(intervals, harness.mediaTimeMs);
+    }
+    // Still checking is not a refusal. The refusal card would say "Not
+    // checked yet", or repeat why the previous map was turned away, about a
+    // check that has not finished. The picture is hidden either way, because
+    // covered above never looks at the card.
+    if (activeStatus === 'loading') {
+      return CHECKING_CARD;
+    }
+    return cardAt([], 0, {
+      rejection: rejection ?? 'missing',
+      blockedDetail: blockedReason,
+    });
+  }, [activeStatus, intervals, harness.mediaTimeMs, rejection, blockedReason]);
   const card = useMemo(() => {
     if (!cardCopy || activeStatus !== 'verified') {
       return scheduledCard;

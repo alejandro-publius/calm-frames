@@ -17,9 +17,16 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
+import { BENIGN_STORY_LABEL } from '../../src/calmframes/benignStory';
 import CalmCard from '../../src/calmframes/CalmCard';
 import { CALM_COLORS } from '../../src/calmframes/calmStyles';
-import { Card, cardAt, NO_CARD } from '../../src/calmframes/cards';
+import CornerPlate from '../../src/calmframes/CornerPlate';
+import {
+  Card,
+  cardAt,
+  CHECKING_CARD,
+  NO_CARD,
+} from '../../src/calmframes/cards';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import CreditsScreen from '../../src/calmframes/CreditsScreen';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
@@ -90,11 +97,23 @@ function makeTitle(id: string, status: CheckedTitle['status']): CheckedTitle {
   };
 }
 
-/** What the player paints over the video, for one card state. */
-const PlayerLayer = ({ covered, card }: { covered: boolean; card: Card }) => (
+/**
+ * What the player paints over the video, for one card state. `plate` adds the
+ * practice plate the labelled Harbor demo carries, as PlayerScreen draws it.
+ */
+const PlayerLayer = ({
+  covered,
+  card,
+  plate = false,
+}: {
+  covered: boolean;
+  card: Card;
+  plate?: boolean;
+}) => (
   <>
     <CoverLayer visible={covered} />
     <CalmCard card={card} />
+    {plate ? <CornerPlate label={BENIGN_STORY_LABEL} testID="benign-demo" /> : null}
   </>
 );
 
@@ -263,6 +282,10 @@ describe('what the app paints', () => {
     for (const frame of [
       KID_HOME_PROFILES_FRAME,
       PARENT_PROFILE_FRAME,
+      // The player while the map is still being checked.
+      playerFrame(true, 'checking'),
+      // The Harbor demo between its holds, when only its plate is painted.
+      playerFrame(false, 'none', true),
       // Seen to fail by taking this one back out of ALL_UI_FRAMES:
       //     expect(received).toBe(expected) // Object.is equality
       //     Expected: true
@@ -375,29 +398,34 @@ describe('what the app paints', () => {
 
   it('matches what the player layer reports, covered and clear', () => {
     const cases: Array<[boolean, Card]> = [
+      [true, CHECKING_CARD],
       [false, NO_CARD],
       [false, cardAt(intervals, 16_000)],
       [true, cardAt(intervals, 22_000)],
       [false, cardAt(intervals, 24_600)],
       [true, cardAt([], 0, { rejection: 'missing' })],
     ];
-    for (const [covered, card] of cases) {
-      const expected = playerFrame(covered, card.kind);
-      const actual = renderedFrame(expected.screen, (
-        <PlayerLayer covered={covered} card={card} />
-      ));
-      // Every colour the app's own layer paints, in paint order. With the
-      // cover off there is no background of ours, so the first colour found is
-      // already one of the surfaces.
-      const painted =
-        actual.background === '#000000' && actual.surfaces.length === 0 && !covered
-          ? []
-          : [actual.background, ...actual.surfaces];
-      if (covered) {
-        expect(painted[0]).toBe(CALM_COLORS.COVER);
-        expect(painted.slice(1)).toEqual(expected.surfaces);
-      } else {
-        expect(painted).toEqual(expected.surfaces);
+    // Each state twice: as any title shows it, and as the Harbor demo shows
+    // it with its practice plate on screen as well.
+    for (const plate of [false, true]) {
+      for (const [covered, card] of cases) {
+        const expected = playerFrame(covered, card.kind, plate);
+        const actual = renderedFrame(expected.screen, (
+          <PlayerLayer covered={covered} card={card} plate={plate} />
+        ));
+        // Every colour the app's own layer paints, in paint order. With the
+        // cover off there is no background of ours, so the first colour found
+        // is already one of the surfaces.
+        const painted =
+          actual.background === '#000000' && actual.surfaces.length === 0 && !covered
+            ? []
+            : [actual.background, ...actual.surfaces];
+        if (covered) {
+          expect(painted[0]).toBe(CALM_COLORS.COVER);
+          expect(painted.slice(1)).toEqual(expected.surfaces);
+        } else {
+          expect(painted).toEqual(expected.surfaces);
+        }
       }
     }
   });
@@ -512,6 +540,10 @@ describe('the capture path', () => {
         stops: [{ name: 'title-details', reason: 'open a title' }],
       },
       {
+        element: <PlayerLayer covered={true} card={CHECKING_CARD} />,
+        stops: [{ name: 'player-covered-checking', reason: 'checking the map' }],
+      },
+      {
         element: <PlayerLayer covered={false} card={NO_CARD} />,
         stops: [{ name: 'player-clear-none', reason: 'play' }],
       },
@@ -532,6 +564,27 @@ describe('the capture path', () => {
           <PlayerLayer covered={true} card={cardAt([], 0, { rejection: 'missing' })} />
         ),
         stops: [{ name: 'player-covered-unverified', reason: 'title not checked' }],
+      },
+      // The Harbor demo, which carries its practice plate the whole time.
+      {
+        element: <PlayerLayer covered={true} card={CHECKING_CARD} plate />,
+        stops: [{ name: 'player-covered-checking-plate', reason: 'demo, checking the map' }],
+      },
+      {
+        element: <PlayerLayer covered={false} card={NO_CARD} plate />,
+        stops: [{ name: 'player-clear-none-plate', reason: 'demo plays' }],
+      },
+      {
+        element: <PlayerLayer covered={false} card={cardAt(intervals, 16_000)} plate />,
+        stops: [{ name: 'player-clear-countdown-plate', reason: 'demo countdown' }],
+      },
+      {
+        element: <PlayerLayer covered={true} card={cardAt(intervals, 22_000)} plate />,
+        stops: [{ name: 'player-covered-covering-plate', reason: 'demo practice hold' }],
+      },
+      {
+        element: <PlayerLayer covered={false} card={cardAt(intervals, 24_600)} plate />,
+        stops: [{ name: 'player-clear-after-plate', reason: 'demo hold over' }],
       },
       {
         element: (

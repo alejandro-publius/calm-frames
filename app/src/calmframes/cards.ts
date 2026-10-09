@@ -10,6 +10,8 @@
  *   kept playing."
  *   A map that did not verify: the picture stays hidden and a card says the
  *   title is not checked yet.
+ *   A map still being checked: the picture stays hidden and a card says the
+ *   check is under way. That is not a refusal, so it is not the same card.
  *
  * This module is the whole decision, as one pure function of the schedule and
  * the playhead. Keeping it pure is what lets the wording, the timing and the
@@ -19,7 +21,13 @@
 import { CoverInterval, intervalAt, nextIntervalAfter } from './coverSchedule';
 import { MapRejection, rejectionMessage } from './flashMap';
 
-export type CardKind = 'none' | 'countdown' | 'covering' | 'after' | 'unverified';
+export type CardKind =
+  | 'none'
+  | 'checking'
+  | 'countdown'
+  | 'covering'
+  | 'after'
+  | 'unverified';
 
 export interface Card {
   kind: CardKind;
@@ -45,6 +53,22 @@ export const AFTER_CARD_MS = 5_000;
 export const SKIP_MARGIN_MS = 100;
 
 export const NO_CARD: Card = { kind: 'none', title: '', announcement: '' };
+
+/**
+ * The card while the map is still being checked.
+ *
+ * Nothing has gone wrong yet, so this is not the "Not checked yet" card a
+ * refused map gets. The picture is hidden either way: the guard starts
+ * covered and only a verified map uncovers it, whatever the card says. There
+ * is nothing coming up to skip, so there is no Skip button.
+ */
+export const CHECKING_CARD: Card = {
+  kind: 'checking',
+  title: 'Checking this title',
+  detail: 'The picture stays hidden until the check passes.',
+  announcement:
+    'Checking this title. The picture stays hidden until the check passes.',
+};
 
 function secondsWord(milliseconds: number): string {
   const seconds = Math.max(1, Math.round(milliseconds / 1000));
@@ -138,6 +162,17 @@ export function cardAt(
   }
 
   return NO_CARD;
+}
+
+/**
+ * True when this card carries a Skip button.
+ *
+ * CalmCard draws the button from this, and the player asks the same question
+ * to decide who owns OK: while Skip is on screen it has D-pad focus, so OK is
+ * a press on Skip and not a reason to pause the title or bring up controls.
+ */
+export function cardOffersSkip(card: Card): boolean {
+  return card.kind === 'countdown' && card.skipToMs !== undefined;
 }
 
 /**

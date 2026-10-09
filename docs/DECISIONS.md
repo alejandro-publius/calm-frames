@@ -1925,3 +1925,50 @@ second way.
 - **Cost:** `scripts/release.sh` attaches the three `.vpkg` files and
   `SHA256SUMS`, not the hook tarball. The release work has to add it, and its
   checksum, or this line has to change again before the release is published.
+
+## 2026-10-09: the player's first P0 block, for the build rehearsed Saturday
+
+Five changes on `wip/ui-player-card-2026-10-09`, app code and tests only, each
+with a guard test seen red before it was trusted. None has been seen on a
+device yet.
+
+- **Decision:** while a countdown card offers Skip, OK belongs to Skip.
+  VideoPlayerUI neither toggles play nor brings up the sample's controls for
+  SELECT then; every other key behaves as before. **Why:** Skip has D-pad
+  focus during a countdown, and the sample also reacting to the same key
+  paused the title under the card or put its controls over it. **Cost:** OK
+  cannot pause during the five seconds of a countdown; the remote's play and
+  pause key still can.
+- **Decision:** a title that ships a caption track starts with its first track
+  showing, and CaptionMenu takes the track id the player passes down. **Why:**
+  captions are what keep a hidden part followable. A menu that started at Off
+  with a track on left that track running when Off was chosen, and two tracks
+  showing after a change of language. **Cost:** captions are on for every such
+  title, the sample's own included, and there is no household setting to start
+  them off. Amazon's w3cmedia README says nothing renders until the system
+  setting ClosedCaptioningEnabled is 1, so the device walk checks that first.
+- **Decision:** one console.log line for every KeplerAppStateChange the player
+  receives and every Vega Media Controls callback, the seventeen that do not
+  move the playhead included. **Why:** device bring-up needs to see which
+  commands arrive and how many per press. console.log because the Release
+  build strips it; a test compiles each file both ways. **Cost:** seventeen
+  pass-through overrides in SafeMediaControlHandler that exist only for the
+  line. Each still hands the call to the base class unchanged, and a test reads
+  the pinned SDK's declaration and fails if a callback is left without one.
+- **Decision:** the card hangs from 160 units down instead of standing 160 up
+  from the bottom, and the Harbor practice label moves onto a plate in the top
+  left corner of the safe area, TEXT_DIM on SURFACE at 32 units. The ten foot
+  pass renders the real player and fails if the card, the plate and the
+  caption band overlap, taking the band as 240 units above the captions
+  view's bottom edge. **Why:** the card sat over the captions, and the bare
+  label sat where the card now goes, at 3.25 to 1 over the mid grey that
+  stands in for video. **Cost:** the card covers part of the upper picture
+  during its countdown and after windows, and while the sample's controls are
+  up their header draws over it, which is the P1 chrome work. The check
+  measures styles with a deliberately generous ruler, not pixels.
+- **Decision:** while the guard is still checking a map, the card says
+  "Checking this title" instead of the "Not checked yet" refusal. **Why:**
+  every title opened on what read as a failure, and a replacement map kept the
+  last refusal's wording until its own check finished. The picture is hidden
+  either way. **Cost:** one more card kind, `checking`, and more frames for the
+  UI flash run, which passes across 33 screens and transitions.

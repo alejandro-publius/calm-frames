@@ -2,7 +2,9 @@
  * The card: the one thing on screen that speaks to the child.
  *
  * It sits above the cover so it stays readable while the picture is hidden,
- * and below nothing else. Four things it has to get right:
+ * and below nothing else. It hangs from the upper part of the safe area, out
+ * of the band at the bottom where captions are drawn (PLAYER_LAYOUT in
+ * calmStyles.ts says why). Four things it has to get right:
  *
  * - it announces itself. accessibilityLiveRegion="polite" and the web
  *   aria-live="polite" attribute both go on the card, and the caller also
@@ -21,9 +23,10 @@ import {
   CALM_SPACE,
   CALM_TYPE,
   FOCUS_RING_WIDTH,
+  PLAYER_LAYOUT,
   scale,
 } from './calmStyles';
-import { Card } from './cards';
+import { Card, cardOffersSkip } from './cards';
 
 export interface CalmCardProps {
   card: Card;
@@ -49,8 +52,7 @@ const CalmCard = ({
   );
   const [focused, setFocused] = React.useState(false);
 
-  const showSkip =
-    allowSkip && card.kind === 'countdown' && card.skipToMs !== undefined;
+  const showSkip = allowSkip && cardOffersSkip(card);
 
   useEffect(() => {
     // A new countdown puts focus on Skip. requestTVFocus is the supported way
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: scale(160),
+    top: scale(PLAYER_LAYOUT.CARD_TOP),
     alignItems: 'center',
     zIndex: CARD_Z_INDEX,
   },
