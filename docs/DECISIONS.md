@@ -1712,3 +1712,43 @@ second way.
   leaving their publication for the authorized public contribution step. Cost:
   no external write; observed faulty controls and restored focused tests support
   the prepared patch without claiming an upstream merge or native test.
+
+
+## 2026-10-09: size the colour fidelity tolerance from one 8-bit code
+
+- **Decision:** the colour encoding fidelity test
+  (`test_fidelity_decode_uses_declared_or_inferred_matrix_and_range`) now
+  allows up to the luminance change of moving every channel of the intended
+  colour one 8-bit code, never less than the old 0.004. White gets 0.0089; the
+  three [255, 58, 58] cases stay at 0.004. The comparison is `<=` with 1e-12
+  added only for floating-point noise, so a decode exactly one code off on
+  every channel passes. This is a test tolerance, not a detector threshold,
+  and the test computes it from the parsed sRGB and luminance constants.
+- **Why:** hosted CI run 37902331109 failed only the full-range white case, at
+  a decoded mean of 0.99558 against 1.0. PyAV 18.1.0's x86_64 builds (the
+  macOS wheel under Rosetta, and the exact Linux wheel CI installs) reproduce
+  that mean bit for bit. Their libswscale RGB to YUV step puts 7/8 of the
+  white chroma samples at 127 instead of 128, so 7/8 of the pixels decode to
+  (253, 255, 253). Apple silicon returns exactly 1.0, and libx264 runs
+  lossless (qp 0) here, so the codec is not involved. The old 0.004 is less
+  than half of what one code on every channel costs at white, so rounding
+  alone could cross it.
+- **Evidence:** with the new bound, a full-range clip encoded with limited
+  levels still fails the white case (0.169 against 0.0089). A decoder that
+  always applies BT.601, ignores the declared range, or drops the untagged
+  height rule still fails the affected red cases (0.021 to 0.049 against
+  0.004). Each mutation went red on arm64 and on x86_64 with the mutated
+  module confirmed as the one imported, and each restore went green. Under
+  x86_64 the old test fails with CI's exact message and the new one passes.
+- **Known gap, older than this change:** a decoder hard-coded to BT.709 passes
+  all 13 tests on both architectures, because every fidelity case is BT.709.
+  Closing it with BT.601 red cases needs its own tolerance: on x86_64 with the
+  CI wheel, BT.601 limited-range red decodes to (253, 57, 57), an error of
+  0.00476, above both 0.004 and that colour's one-code bound of 0.00299
+  (arm64: 0.00198).
+- **Cost:** white now accepts up to one code of rounding on every channel.
+  That hides nothing this case can see: no matrix error moves white, and the
+  range error it guards moves it by 0.169. The red cases are unchanged.
+  libswscale's portable C path, which neither platform takes, decodes them
+  0.0042 low, so a runner without SIMD would fail them under the old limit and
+  the new one alike.

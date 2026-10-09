@@ -82,4 +82,15 @@ def test_fidelity_decode_uses_declared_or_inferred_matrix_and_range(
     _, _, means = round_trip(tagging, height, intended, matrix, color_range)
     spec = load_spec()
     expected = float(spec.relative_luminance(spec.srgb_to_linear(np.array(intended) / 255)))
-    assert means and max(abs(mean - expected) for mean in means) < 0.004
+    # libswscale rounds differently per platform. On x86_64 it puts the white swatch's
+    # chroma one code low, so it decodes to a mean of 0.99558, while Apple silicon
+    # returns 1.0. A wrong matrix or range moves these means by 0.02 or more, so allow
+    # up to the luminance change of moving every channel one 8-bit code (0.0089 at
+    # white), and never less than the 0.004 used before. The 1e-12 only absorbs
+    # floating-point noise, so a decode exactly one code off on every channel passes.
+    one_code = max(
+        abs(spec.luminance_of_srgb8(np.clip(np.add(intended, step), 0, 255)) - expected)
+        for step in (-1, 1)
+    )
+    tolerance = max(0.004, one_code)
+    assert means and max(abs(mean - expected) for mean in means) <= tolerance + 1e-12
