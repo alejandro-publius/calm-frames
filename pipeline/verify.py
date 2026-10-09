@@ -57,10 +57,13 @@ from .catalog import (
 from .flashmap_adapter import PATTERN, FlashMapDoc, FlashmapAdapter, MapFormatError, load_map
 from .hashing import sha256_file
 from .hideplan import (
+    APP_PLAYBACK_MAPS,
+    APP_PLAYBACK_RECIPE,
     DEFAULT_CALM_MARGIN_MS,
     DEFAULT_GUARD_BAND_MS,
     HidePlan,
     build_cover_intervals,
+    build_app_playback_plan,
     is_calm,
     may_be_sampled,
     union_intervals,
@@ -463,6 +466,7 @@ def verify_title(
     distance_ft: float | None = None,
     calm_margin_ms: float = DEFAULT_CALM_MARGIN_MS,
     rerender_cover_model: bool = True,
+    playback_compatible: bool | None = None,
 ) -> VerifyReport:
     source = Path(source)
     report = VerifyReport(
@@ -488,6 +492,20 @@ def verify_title(
 
     probe_data = json.loads(layout.probe_path.read_text())
     probe = VideoProbe.from_dict(probe_data)
+    entry = read_entry(layout.entry_path) if layout.entry_path.exists() else None
+    recorded_recipe = entry.notes.get("playback_recipe") if entry is not None else None
+    if playback_compatible is None:
+        playback_compatible = recorded_recipe == APP_PLAYBACK_RECIPE
+    if recorded_recipe not in (None, APP_PLAYBACK_RECIPE):
+        report.add("playback_recipe", False, "the preparation names an unknown playback recipe")
+    if playback_compatible:
+        required = {name for preset in presets for name in APP_PLAYBACK_MAPS.get(preset, ())}
+        report.add("playback_recipe_profiles", required.issubset(presets),
+                   "every map used by the app recipe must receive independent signature and source checks")
+        if entry is not None:
+            room = entry.notes.get("analysis_room", {})
+            diag_in = diag_in if diag_in is not None else room.get("diag_in")
+            distance_ft = distance_ft if distance_ft is not None else room.get("distance_ft")
 
     # No preset means no map was looked at, and a report that reached the end without
     # looking at one would otherwise pass on the two checks that do not need a preset.
@@ -555,21 +573,40 @@ def verify_title(
         except PipelineError as exc:
             report.add(f"plan_present:{preset}", False, f"{prefix}{exc}")
             continue
-        expected = build_cover_intervals(
-            source_map.segments,
-            guard_band_ms=plan.guard_band_ms,
-            min_cover_ms=plan.min_cover_ms,
-            duration_ms=plan.duration_ms,
-        )
+        try:
+            if playback_compatible:
+                canonical = build_app_playback_plan(
+                    {name: load_map(layout.map_path(name)) for name in APP_PLAYBACK_MAPS[preset]},
+                    source_sha256=layout.sha256, duration_ms=probe.duration_ms, preset=preset,
+                )
+                expected = canonical.intervals
+                recipe_matches = (
+                    plan.recipe == APP_PLAYBACK_RECIPE and plan.profile == preset
+                    and plan.source_sha256 == layout.sha256
+                    and plan.duration_ms == canonical.duration_ms
+                    and plan.guard_band_ms == canonical.guard_band_ms
+                    and plan.min_cover_ms == canonical.min_cover_ms
+                    and plan.allow_dim is False
+                )
+            else:
+                expected = build_cover_intervals(
+                    source_map.segments, guard_band_ms=plan.guard_band_ms,
+                    min_cover_ms=plan.min_cover_ms, duration_ms=plan.duration_ms,
+                )
+                recipe_matches = plan.recipe is None
+        except (PipelineError, OSError, ValueError, TypeError, KeyError) as exc:
+            report.add(f"plan_matches_map:{preset}", False, f"{prefix}{exc}")
+            continue
         expected_pairs = [(i.start_ms, i.end_ms, i.reason) for i in expected]
         stored_pairs = [(i.start_ms, i.end_ms, i.reason) for i in plan.intervals]
         report.add(
             f"plan_matches_map:{preset}",
-            expected_pairs == stored_pairs,
+            recipe_matches and expected_pairs == stored_pairs,
             f"{prefix}hide plan has {len(stored_pairs)} intervals, the map "
             f"produces {len(expected_pairs)}",
             stored=len(stored_pairs),
             expected=len(expected_pairs),
+            recipe=plan.recipe,
         )
 
         scene_images: list[SceneHold] | None = None
@@ -775,7 +812,7 @@ def verify_title(
                 f"{prefix}could not model the on-device cover: {exc}",
             )
 
-        if scene_images is not None:
+        if scene_images is not None or playback_compatible:
             # The transport files are the delivered output. Analyze them too,
             # rather than assuming a clean intermediate MP4 proves delivery.
             try:
@@ -806,13 +843,14 @@ def verify_title(
                 report.add(f"hls_timing_matches_master:{preset}", matched,
                            f"{prefix}HLS relative frame timing matches the checked MP4" if matched else "; ".join(problems),
                            transport_pts_shift_ms=shift, **data)
-                if plan.intervals:
+                if plan.intervals and scene_images is not None:
                     scores = _scene_cover_proof(layout.master_playlist(preset), plan, scene_images, probe)
                     report.add(f"scene_hls_drawn:{preset}", bool(scores) and min(scores) >= COVER_PSNR_MIN_DB,
                                f"{prefix}the delivered HLS uses the checked interval images")
             except (PipelineError, OSError, ValueError, TypeError, KeyError) as exc:
                 report.add(f"hls_rendition_clean:{preset}", False, f"{prefix}could not verify delivered HLS: {exc}")
 
+        if scene_images is not None:
             for kind, output in (("safe", safe_master), ("model", cover_model),
                                  ("hls", layout.master_playlist(preset))):
                 try:

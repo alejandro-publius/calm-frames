@@ -1,38 +1,42 @@
 # Calm Frames: rules for every session
 
-**Current phase:** Phase 10, signed scene holds and AWS-free workflow, Tue Sep 29, 2026. Scene-specific
-preceding images now join the signed map, rendition, cover model and live guard.
-They never change intervals or thresholds. Focused regressions and the final
-broad app suite, final selected Python sweep and complete mutation measurement
-pass. The final-source native Debug build passes on all three configured
-architectures; remote CI is blocked before runner startup.
-The upload-server HTTP fixtures now pass on the unrestricted runner, and
-real-device image, caption and timing composition still need benign-media proof.
-The follow-up local-library receipt wraps normal ingest and verify, without
-serving media or connecting the app shelf. Household review and title plans are
-presentation-only; settings and the PIN remain in memory. The hook now has a
-clean offline tarball-consumer check using current Vega peers. The final local
-app, Python and package tests and native Debug build pass for these changes;
-see STATUS section 0.
-The earlier `image-size` audit blocker is repaired with a small local legacy
-API adapter around exact official parser 2.0.4. The fresh audit and regenerated
-SBOM check pass, without a copied parser or widened exception. Existing written
-SDK/tooling exceptions remain. All 860 app tests and 1,378 selected Python tests
-pass, with existing skips/deselections unchanged. The rebuilt native Debug
-packages pass manifest/ABI checks for all three configured architectures.
-The read-only hardware preflight checks current package bytes but reports no
-connected device. The bundled calm clip cannot test caption/scene-hold layering;
-a checked benign fixture, physical-target runner adaptation and real-TV camera
-proof remain required. Do not run the QEMU-based timing path on hardware unchanged.
-Publish only locally checked changes to the isolated review branch; main still
-waits for complete hosted CI, in line with Alex's ready-only push requirement.
-Phase 9's pattern-rule precision work remains recorded below. Phases 0 to 2
-are done apart from what needs the stick, and all five phase 8 features are in, tested,
-documented and reachable in the running app. Phase 9 so far: the regular-pattern rule
-requires a period before a run of bars counts, so text is no longer read as stripes; both
-ffmpeg baselines were re-run as one set on ffmpeg 9.0.1; the labelling pool is back to 40
-segments over 16 titles. docs/STATUS.md section 0 is the short version and section 2 is
-Alex's dated list.
+**Current phase:** Phase 10, signed scene holds, durable household setup and a
+benign captioned demo and checked packaged library, Fri Oct 2, 2026. The current default shelf includes the
+original gradient and Harbor story. Harbor uses clearly labelled sham holds,
+original non-flashing media, a verified pre-covered master, signed context
+images and external captions. Its fixed per-title Extra cautious preparation
+matches the displayed plan without changing saved household preferences.
+A separate demo key is accepted only for the exact packaged title identity.
+The read-only hardware preflight pins its reviewed proof and checks package
+members before reporting that caption/hold fixtures are available.
+
+Household state persists in a validated local record. Failed reads/writes block
+the library; retries retain the intended change; the parent area unlocks after
+saving the PIN gate. Profile history clears only after committed removal, and
+caption Off now disables the selected native track. Hide history itself remains
+in memory. Native storage durability and current image/caption composition still
+need observation. Software checks and packaged fixture availability are not
+physical-TV proof. Do not run the QEMU timing path on a physical target unchanged.
+
+The latest project assessment is in `docs/HACKATHON_REVIEW.md`; it distinguishes
+subjective quality from incomplete submission evidence. The reusable autonomous
+work prompt is `docs/CONTINUATION_PROMPT.md`. Follow its current STATUS handoff,
+complete the native benign journey next. Checked local receipts now export a
+bounded immutable library into the app build. The app selects the exact preset
+rendition and accepts its compiled key only for full title membership. The local
+wrapper uses the app's map unions/timing; generic imports use opaque live fallback,
+while the separate labelled Harbor demo retains signed scene holds. Adding a
+prepared title requires rebuilding the package. No remote service was added.
+The hook has an offline tarball-consumer check, not independent adoption proof.
+See STATUS section 0 for final local checks and limitations; older counts and
+runs below it are historical. GitHub connector reads show the published review commit's CI/Audit jobs failed
+without steps or logs. There is no successful hosted run for these changes.
+The full corrected conformance evaluation is running; its PID/log and frozen
+inputs are in STATUS. Preserve the legacy archive and keep protocol corrections
+separate from detector improvements. Keep main unchanged until complete hosted
+CI passes. No AWS deployment, public
+release or submission has occurred in this follow-up.
+
 **The head-start kits never arrived.** flashmap, calm-timing, evkit and the notes were all written here instead. docs/PLAN.md lists what replaced what. If the kits turn up, treat them as a second opinion and re-record any number taken with our version.
 **Repo:** private at github.com/alejandro-publius/calm-frames. Work is on
 `codex/signed-scene-holds-2026-09-29`, published as
@@ -42,8 +46,9 @@ unrestricted startup annotation identifies failed account payments or a
 spending limit, not a code failure; account settings were not changed. The
 main commit's inspected push CI passed on Sep 20; the Sep 28 scheduled Audit and Sep 29 retry failed
 before any runner or step started. The scene-hold tree must pass GitHub CI before
-main is updated. It goes public during the final checks on Oct 21, because the rules
-need it public with the licence visible at submission.
+main is updated. The chosen plan is to make it public during the final checks on Oct 21
+with the licence visible. Current rules also allow private reviewer access;
+see the rechecked requirements in docs/SUBMISSION.md.
 
 Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/BUILD_PROMPT.md (the full plan, phases, gates, kill rules, cut list), docs/DECISIONS.md, docs/GATES.md.
 

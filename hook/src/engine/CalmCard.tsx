@@ -19,12 +19,7 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
   CALM_COLORS,
   CALM_SPACE,
@@ -40,6 +35,7 @@ export interface CalmCardProps {
   onSkip?: (toMs: number) => void;
   /** Turn the Skip button off, for screens with no player behind them. */
   allowSkip?: boolean;
+  skipAccessibilityLabel?: string;
   testID?: string;
 }
 
@@ -49,6 +45,7 @@ const CalmCard = ({
   card,
   onSkip,
   allowSkip = true,
+  skipAccessibilityLabel = 'Skip the flashing part',
   testID = 'calm-card',
 }: CalmCardProps) => {
   const skipRef = useRef<React.ComponentRef<typeof TouchableOpacity> | null>(
@@ -63,9 +60,9 @@ const CalmCard = ({
     // A new countdown puts focus on Skip. requestTVFocus is the supported way
     // to move focus from an app; setNativeProps throws on React Native 0.83.
     if (showSkip) {
-      const handle = skipRef.current as unknown as
-        | { requestTVFocus?: () => void }
-        | null;
+      const handle = skipRef.current as unknown as {
+        requestTVFocus?: () => void;
+      } | null;
       handle?.requestTVFocus?.();
     }
   }, [showSkip, card.interval?.startMs]);
@@ -101,7 +98,7 @@ const CalmCard = ({
             ref={skipRef}
             testID={`${testID}-skip`}
             accessibilityRole="button"
-            accessibilityLabel="Skip the flashing part"
+            accessibilityLabel={skipAccessibilityLabel}
             activeOpacity={1}
             hasTVPreferredFocus
             onFocus={() => setFocused(true)}

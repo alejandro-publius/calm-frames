@@ -1,0 +1,2849 @@
+{
+  "baseline_operating_points": {},
+  "baseline_table_windows_every_detector_saw": {},
+  "baselines_not_run": {
+    "Apple VideoFlashingReduction": "Not measured in this fresh current-source run.",
+    "EA IRIS": "Not measured in this fresh current-source run.",
+    "ffmpeg_photosensitivity": "Not measured in this fresh current-source run.",
+    "naive_luma_diff": "Not measured in this fresh current-source run."
+  },
+  "clip_level": {
+    "counts": {
+      "fn": 95,
+      "fp": 40,
+      "tn": 2325,
+      "tp": 539
+    },
+    "meaning": "does the clip fail at all, which is what `flashmap check` answers",
+    "precision": {
+      "denominator": 579,
+      "numerator": 539,
+      "value": 0.9309153713298791,
+      "wilson_hi": 0.9488584324920397,
+      "wilson_lo": 0.9072920565443154
+    },
+    "recall": {
+      "denominator": 634,
+      "numerator": 539,
+      "value": 0.8501577287066246,
+      "wilson_hi": 0.8758276880623783,
+      "wilson_lo": 0.8202700551305966
+    }
+  },
+  "encoding_protocol": "explicit-yuv-matrix-range-v2-2026-10-02",
+  "environment": {
+    "libav": {
+      "libavcodec": [
+        62,
+        28,
+        102
+      ],
+      "libavdevice": [
+        62,
+        3,
+        102
+      ],
+      "libavfilter": [
+        11,
+        14,
+        102
+      ],
+      "libavformat": [
+        62,
+        12,
+        102
+      ],
+      "libavutil": [
+        60,
+        26,
+        102
+      ],
+      "libswresample": [
+        6,
+        3,
+        102
+      ],
+      "libswscale": [
+        9,
+        5,
+        102
+      ]
+    },
+    "numpy": "2.5.3",
+    "pyav": "18.1.0",
+    "python": "3.12.13"
+  },
+  "error_curves": {
+    "area_fraction_of_picture": [
+      {
+        "bucket": "under 0.02",
+        "clips": 91,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 273,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "0.02 to 0.05",
+        "clips": 678,
+        "flashmap": {
+          "counts": {
+            "fn": 92,
+            "fp": 75,
+            "tn": 1747,
+            "tp": 120
+          },
+          "precision": 0.6153846153846154,
+          "precision_wilson": [
+            0.5454977949456525,
+            0.6808131578450274
+          ],
+          "recall": 0.5660377358490566,
+          "recall_wilson": [
+            0.4987325125461866,
+            0.6309923334263401
+          ]
+        },
+        "near_threshold_share": 0.817
+      },
+      {
+        "bucket": "0.05 to 0.1",
+        "clips": 470,
+        "flashmap": {
+          "counts": {
+            "fn": 36,
+            "fp": 58,
+            "tn": 1252,
+            "tp": 64
+          },
+          "precision": 0.5245901639344263,
+          "precision_wilson": [
+            0.4365832905642543,
+            0.6110957498428433
+          ],
+          "recall": 0.64,
+          "recall_wilson": [
+            0.5423540245160874,
+            0.7272877959859567
+          ]
+        },
+        "near_threshold_share": 0.655
+      },
+      {
+        "bucket": "0.1 to 0.2",
+        "clips": 422,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 92,
+            "tn": 990,
+            "tp": 184
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.6091000541705134,
+            0.7196575230223219
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9795494623774134,
+            0.9999999999999999
+          ]
+        },
+        "near_threshold_share": 0.002
+      },
+      {
+        "bucket": "0.2 to 0.35",
+        "clips": 775,
+        "flashmap": {
+          "counts": {
+            "fn": 62,
+            "fp": 190,
+            "tn": 1701,
+            "tp": 372
+          },
+          "precision": 0.6619217081850534,
+          "precision_wilson": [
+            0.6218295527002606,
+            0.6998153129469431
+          ],
+          "recall": 0.8571428571428571,
+          "recall_wilson": [
+            0.8210831299403866,
+            0.8869357059984729
+          ]
+        },
+        "near_threshold_share": 0.434
+      },
+      {
+        "bucket": "0.35 to 0.5",
+        "clips": 332,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 106,
+            "tn": 678,
+            "tp": 212
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.6131373349374954,
+            0.7162173740189265
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9822024052205588,
+            0.9999999999999999
+          ]
+        },
+        "near_threshold_share": 0.009
+      },
+      {
+        "bucket": "0.5 and over",
+        "clips": 231,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 63,
+            "tn": 504,
+            "tp": 126
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5967301402490455,
+            0.7299630946251938
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9704142355178014,
+            0.9999999999999998
+          ]
+        },
+        "near_threshold_share": 0.0
+      }
+    ],
+    "color_tagging": [
+      {
+        "bucket": "bt709",
+        "clips": 2120,
+        "flashmap": {
+          "counts": {
+            "fn": 142,
+            "fp": 431,
+            "tn": 5007,
+            "tp": 780
+          },
+          "precision": 0.6440957886044592,
+          "precision_wilson": [
+            0.6167128758675146,
+            0.6705674087045904
+          ],
+          "recall": 0.8459869848156182,
+          "recall_wilson": [
+            0.8212562267442847,
+            0.8678466363016877
+          ]
+        },
+        "near_threshold_share": 0.403
+      },
+      {
+        "bucket": "full_range",
+        "clips": 306,
+        "flashmap": {
+          "counts": {
+            "fn": 12,
+            "fp": 63,
+            "tn": 729,
+            "tp": 114
+          },
+          "precision": 0.6440677966101694,
+          "precision_wilson": [
+            0.5711575952964933,
+            0.7108573825331586
+          ],
+          "recall": 0.9047619047619048,
+          "recall_wilson": [
+            0.8408950441878753,
+            0.9446783845646307
+          ]
+        },
+        "near_threshold_share": 0.395
+      },
+      {
+        "bucket": "untagged_hd",
+        "clips": 289,
+        "flashmap": {
+          "counts": {
+            "fn": 20,
+            "fp": 46,
+            "tn": 707,
+            "tp": 94
+          },
+          "precision": 0.6714285714285714,
+          "precision_wilson": [
+            0.5899564466174406,
+            0.7437442846844747
+          ],
+          "recall": 0.8245614035087719,
+          "recall_wilson": [
+            0.7444999446318382,
+            0.8834624103878611
+          ]
+        },
+        "near_threshold_share": 0.388
+      },
+      {
+        "bucket": "untagged_sd",
+        "clips": 284,
+        "flashmap": {
+          "counts": {
+            "fn": 16,
+            "fp": 44,
+            "tn": 702,
+            "tp": 90
+          },
+          "precision": 0.6716417910447762,
+          "precision_wilson": [
+            0.5883152934352234,
+            0.7454014300640353
+          ],
+          "recall": 0.8490566037735849,
+          "recall_wilson": [
+            0.7687968486643733,
+            0.9049014142182972
+          ]
+        },
+        "near_threshold_share": 0.405
+      }
+    ],
+    "compression_crf": [
+      {
+        "bucket": "18",
+        "clips": 721,
+        "flashmap": {
+          "counts": {
+            "fn": 50,
+            "fp": 116,
+            "tn": 1781,
+            "tp": 216
+          },
+          "precision": 0.6506024096385542,
+          "precision_wilson": [
+            0.5978590732300557,
+            0.6999004718575268
+          ],
+          "recall": 0.8120300751879699,
+          "recall_wilson": [
+            0.7607620321779023,
+            0.8544140075807052
+          ]
+        },
+        "near_threshold_share": 0.413
+      },
+      {
+        "bucket": "23",
+        "clips": 813,
+        "flashmap": {
+          "counts": {
+            "fn": 36,
+            "fp": 189,
+            "tn": 1846,
+            "tp": 368
+          },
+          "precision": 0.6606822262118492,
+          "precision_wilson": [
+            0.6203804838210474,
+            0.6987827969684848
+          ],
+          "recall": 0.9108910891089109,
+          "recall_wilson": [
+            0.8791012968412365,
+            0.934940514798032
+          ]
+        },
+        "near_threshold_share": 0.38
+      },
+      {
+        "bucket": "28",
+        "clips": 704,
+        "flashmap": {
+          "counts": {
+            "fn": 46,
+            "fp": 128,
+            "tn": 1706,
+            "tp": 232
+          },
+          "precision": 0.6444444444444445,
+          "precision_wilson": [
+            0.5937100977080826,
+            0.692128685857406
+          ],
+          "recall": 0.8345323741007195,
+          "recall_wilson": [
+            0.786350375672711,
+            0.8735951155913408
+          ]
+        },
+        "near_threshold_share": 0.395
+      },
+      {
+        "bucket": "lossless",
+        "clips": 761,
+        "flashmap": {
+          "counts": {
+            "fn": 58,
+            "fp": 151,
+            "tn": 1812,
+            "tp": 262
+          },
+          "precision": 0.6343825665859564,
+          "precision_wilson": [
+            0.586894601745477,
+            0.6793936900046653
+          ],
+          "recall": 0.81875,
+          "recall_wilson": [
+            0.7728426710242731,
+            0.857095202720767
+          ]
+        },
+        "near_threshold_share": 0.417
+      }
+    ],
+    "field_coverage_over_limit": [
+      {
+        "bucket": "under 0.5",
+        "clips": 186,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 558,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.005
+      },
+      {
+        "bucket": "0.5 to 0.85",
+        "clips": 171,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 513,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "0.85 to 0.95",
+        "clips": 364,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 1092,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.997
+      },
+      {
+        "bucket": "0.95 to 1",
+        "clips": 190,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 570,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "1 to 1.05",
+        "clips": 130,
+        "flashmap": {
+          "counts": {
+            "fn": 60,
+            "fp": 12,
+            "tn": 310,
+            "tp": 8
+          },
+          "precision": 0.4,
+          "precision_wilson": [
+            0.21880653237281708,
+            0.6134184992377468
+          ],
+          "recall": 0.11764705882352941,
+          "recall_wilson": [
+            0.06083492602331342,
+            0.21534903719791698
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "1.05 to 1.15",
+        "clips": 434,
+        "flashmap": {
+          "counts": {
+            "fn": 118,
+            "fp": 87,
+            "tn": 981,
+            "tp": 116
+          },
+          "precision": 0.5714285714285714,
+          "precision_wilson": [
+            0.5026482842907314,
+            0.6375557162290066
+          ],
+          "recall": 0.49572649572649574,
+          "recall_wilson": [
+            0.43225383636128756,
+            0.5593372007526087
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "1.15 to 1.5",
+        "clips": 141,
+        "flashmap": {
+          "counts": {
+            "fn": 2,
+            "fp": 36,
+            "tn": 325,
+            "tp": 60
+          },
+          "precision": 0.625,
+          "precision_wilson": [
+            0.5251071844189874,
+            0.7152739186165937
+          ],
+          "recall": 0.967741935483871,
+          "recall_wilson": [
+            0.8897953040501456,
+            0.9911086285001833
+          ]
+        },
+        "near_threshold_share": 0.298
+      },
+      {
+        "bucket": "1.5 to 2",
+        "clips": 245,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 81,
+            "tn": 492,
+            "tp": 162
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.60520824406267,
+            0.7229376046411267
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9768365591570956,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.008
+      },
+      {
+        "bucket": "2 to 4",
+        "clips": 256,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 75,
+            "tn": 543,
+            "tp": 150
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.6027283150990514,
+            0.7250095012324085
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9750297556319235,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.008
+      },
+      {
+        "bucket": "4 and over",
+        "clips": 882,
+        "flashmap": {
+          "counts": {
+            "fn": 10,
+            "fp": 293,
+            "tn": 1761,
+            "tp": 582
+          },
+          "precision": 0.6651428571428571,
+          "precision_wilson": [
+            0.6332108304636274,
+            0.6956311888782972
+          ],
+          "recall": 0.9831081081081081,
+          "recall_wilson": [
+            0.9691876476662598,
+            0.9907992608179503
+          ]
+        },
+        "near_threshold_share": 0.043
+      }
+    ],
+    "flash_rate_hz": [
+      {
+        "bucket": "1.0",
+        "clips": 168,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 504,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "2.0",
+        "clips": 167,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 501,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "3.0",
+        "clips": 421,
+        "flashmap": {
+          "counts": {
+            "fn": 12,
+            "fp": 80,
+            "tn": 1171,
+            "tp": 0
+          },
+          "precision": 0.0,
+          "precision_wilson": [
+            0.0,
+            0.0458181295355271
+          ],
+          "recall": 0.0,
+          "recall_wilson": [
+            2.7755575615628914e-17,
+            0.24249400665524085
+          ]
+        },
+        "near_threshold_share": 0.995
+      },
+      {
+        "bucket": "4.0",
+        "clips": 344,
+        "flashmap": {
+          "counts": {
+            "fn": 86,
+            "fp": 0,
+            "tn": 884,
+            "tp": 62
+          },
+          "precision": 1.0,
+          "precision_wilson": [
+            0.9416559278986275,
+            0.9999999999999999
+          ],
+          "recall": 0.4189189189189189,
+          "recall_wilson": [
+            0.34246750390049413,
+            0.4994728977104978
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "5.0",
+        "clips": 380,
+        "flashmap": {
+          "counts": {
+            "fn": 78,
+            "fp": 30,
+            "tn": 964,
+            "tp": 68
+          },
+          "precision": 0.6938775510204082,
+          "precision_wilson": [
+            0.5967555815878502,
+            0.7763734018343551
+          ],
+          "recall": 0.4657534246575342,
+          "recall_wilson": [
+            0.3867570668607269,
+            0.54650572917247
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "6.0",
+        "clips": 143,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 39,
+            "tn": 312,
+            "tp": 78
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5771523809129953,
+            0.745584537199427
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9530621902878059,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "8.0",
+        "clips": 155,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 57,
+            "tn": 294,
+            "tp": 114
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5930342849353151,
+            0.7329753490752055
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9674014658411584,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.013
+      },
+      {
+        "bucket": "10.0",
+        "clips": 298,
+        "flashmap": {
+          "counts": {
+            "fn": 12,
+            "fp": 129,
+            "tn": 495,
+            "tp": 258
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.6182649299431723,
+            0.7117921740018346
+          ],
+          "recall": 0.9555555555555556,
+          "recall_wilson": [
+            0.923934113122868,
+            0.9743958952674097
+          ]
+        },
+        "near_threshold_share": 0.158
+      },
+      {
+        "bucket": "12.0",
+        "clips": 158,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 43,
+            "tn": 345,
+            "tp": 86
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5815391163837179,
+            0.7421550102973226
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9572418027142576,
+            0.9999999999999999
+          ]
+        },
+        "near_threshold_share": 0.006
+      },
+      {
+        "bucket": "15.0",
+        "clips": 173,
+        "flashmap": {
+          "counts": {
+            "fn": 2,
+            "fp": 53,
+            "tn": 358,
+            "tp": 106
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5902248348896469,
+            0.7352451061427451
+          ],
+          "recall": 0.9814814814814815,
+          "recall_wilson": [
+            0.9349809519962323,
+            0.9949067756552313
+          ]
+        },
+        "near_threshold_share": 0.012
+      },
+      {
+        "bucket": "18.0",
+        "clips": 154,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 46,
+            "tn": 324,
+            "tp": 92
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.584443372266166,
+            0.7398623729119763
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9599186107143782,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.006
+      },
+      {
+        "bucket": "20.0",
+        "clips": 142,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 45,
+            "tn": 291,
+            "tp": 90
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5835079155098996,
+            0.7406027671509253
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9590643744356734,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.014
+      },
+      {
+        "bucket": "24.0",
+        "clips": 172,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 34,
+            "tn": 414,
+            "tp": 68
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5706063272058552,
+            0.7506288520786568
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9465286634799296,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "30.0",
+        "clips": 124,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 28,
+            "tn": 288,
+            "tp": 56
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5605282305356535,
+            0.7582278599927931
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9358060632812366,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.032
+      }
+    ],
+    "frame_rate": [
+      {
+        "bucket": "24",
+        "clips": 563,
+        "flashmap": {
+          "counts": {
+            "fn": 32,
+            "fp": 93,
+            "tn": 1400,
+            "tp": 164
+          },
+          "precision": 0.6381322957198443,
+          "precision_wilson": [
+            0.5777462126996508,
+            0.6944497806865323
+          ],
+          "recall": 0.8367346938775511,
+          "recall_wilson": [
+            0.7786102414431707,
+            0.881913359510102
+          ]
+        },
+        "near_threshold_share": 0.425
+      },
+      {
+        "bucket": "25",
+        "clips": 546,
+        "flashmap": {
+          "counts": {
+            "fn": 38,
+            "fp": 90,
+            "tn": 1336,
+            "tp": 174
+          },
+          "precision": 0.6590909090909091,
+          "precision_wilson": [
+            0.5999956647154544,
+            0.7136226988114319
+          ],
+          "recall": 0.8207547169811321,
+          "recall_wilson": [
+            0.7635590939694065,
+            0.8665330150400087
+          ]
+        },
+        "near_threshold_share": 0.414
+      },
+      {
+        "bucket": "30",
+        "clips": 727,
+        "flashmap": {
+          "counts": {
+            "fn": 52,
+            "fp": 200,
+            "tn": 1567,
+            "tp": 362
+          },
+          "precision": 0.6441281138790036,
+          "precision_wilson": [
+            0.6036887159262757,
+            0.6826105600893674
+          ],
+          "recall": 0.8743961352657005,
+          "recall_wilson": [
+            0.8389923071807371,
+            0.9029158818126114
+          ]
+        },
+        "near_threshold_share": 0.391
+      },
+      {
+        "bucket": "50",
+        "clips": 567,
+        "flashmap": {
+          "counts": {
+            "fn": 44,
+            "fp": 93,
+            "tn": 1392,
+            "tp": 172
+          },
+          "precision": 0.6490566037735849,
+          "precision_wilson": [
+            0.5898364557908211,
+            0.7040170307456051
+          ],
+          "recall": 0.7962962962962963,
+          "recall_wilson": [
+            0.7376287018607025,
+            0.8446090647854817
+          ]
+        },
+        "near_threshold_share": 0.406
+      },
+      {
+        "bucket": "60",
+        "clips": 596,
+        "flashmap": {
+          "counts": {
+            "fn": 24,
+            "fp": 108,
+            "tn": 1450,
+            "tp": 206
+          },
+          "precision": 0.6560509554140127,
+          "precision_wilson": [
+            0.6019082435189489,
+            0.706421577152071
+          ],
+          "recall": 0.8956521739130435,
+          "recall_wilson": [
+            0.8494340405356986,
+            0.9288710595002823
+          ]
+        },
+        "near_threshold_share": 0.374
+      }
+    ],
+    "letterbox": [
+      {
+        "bucket": "0.0",
+        "clips": 1845,
+        "flashmap": {
+          "counts": {
+            "fn": 140,
+            "fp": 380,
+            "tn": 4287,
+            "tp": 728
+          },
+          "precision": 0.6570397111913358,
+          "precision_wilson": [
+            0.6285892759832463,
+            0.6844049888367723
+          ],
+          "recall": 0.8387096774193549,
+          "recall_wilson": [
+            0.8127576808301088,
+            0.8616768669320091
+          ]
+        },
+        "near_threshold_share": 0.407
+      },
+      {
+        "bucket": "0.125",
+        "clips": 586,
+        "flashmap": {
+          "counts": {
+            "fn": 22,
+            "fp": 113,
+            "tn": 1445,
+            "tp": 178
+          },
+          "precision": 0.6116838487972509,
+          "precision_wilson": [
+            0.5545795772787807,
+            0.6658778857251904
+          ],
+          "recall": 0.89,
+          "recall_wilson": [
+            0.839073090026985,
+            0.926227555398747
+          ]
+        },
+        "near_threshold_share": 0.389
+      },
+      {
+        "bucket": "0.25",
+        "clips": 568,
+        "flashmap": {
+          "counts": {
+            "fn": 28,
+            "fp": 91,
+            "tn": 1413,
+            "tp": 172
+          },
+          "precision": 0.6539923954372624,
+          "precision_wilson": [
+            0.5946568626014839,
+            0.7088941686287438
+          ],
+          "recall": 0.86,
+          "recall_wilson": [
+            0.8051011913429243,
+            0.9013301736654437
+          ]
+        },
+        "near_threshold_share": 0.394
+      }
+    ],
+    "luminance_step_over_limit": [
+      {
+        "bucket": "under 0.5",
+        "clips": 2374,
+        "flashmap": {
+          "counts": {
+            "fn": 140,
+            "fp": 353,
+            "tn": 6001,
+            "tp": 628
+          },
+          "precision": 0.6401630988786952,
+          "precision_wilson": [
+            0.6096361257526292,
+            0.669596635558314
+          ],
+          "recall": 0.8177083333333334,
+          "recall_wilson": [
+            0.7888437742743613,
+            0.8434104204479864
+          ]
+        },
+        "near_threshold_share": 0.409
+      },
+      {
+        "bucket": "0.5 to 0.8",
+        "clips": 81,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 243,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.012
+      },
+      {
+        "bucket": "0.8 to 0.9",
+        "clips": 20,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 60,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "0.9 to 0.95",
+        "clips": 56,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 168,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "0.95 to 1",
+        "clips": 40,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 120,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "1 to 1.05",
+        "clips": 43,
+        "flashmap": {
+          "counts": {
+            "fn": 36,
+            "fp": 6,
+            "tn": 83,
+            "tp": 4
+          },
+          "precision": 0.4,
+          "precision_wilson": [
+            0.16818032970623614,
+            0.6873262302663417
+          ],
+          "recall": 0.1,
+          "recall_wilson": [
+            0.03957952868260636,
+            0.230517752275223
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "1.05 to 1.1",
+        "clips": 35,
+        "flashmap": {
+          "counts": {
+            "fn": 6,
+            "fp": 4,
+            "tn": 87,
+            "tp": 8
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.39062208887279953,
+            0.8618799089087867
+          ],
+          "recall": 0.5714285714285714,
+          "recall_wilson": [
+            0.3259064457965074,
+            0.7861920109552588
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "1.1 to 1.25",
+        "clips": 85,
+        "flashmap": {
+          "counts": {
+            "fn": 6,
+            "fp": 44,
+            "tn": 117,
+            "tp": 88
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5825404478082282,
+            0.7413665565922355
+          ],
+          "recall": 0.9361702127659575,
+          "recall_wilson": [
+            0.8676702644900562,
+            0.970420264702426
+          ]
+        },
+        "near_threshold_share": 0.141
+      },
+      {
+        "bucket": "1.25 to 2",
+        "clips": 38,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 24,
+            "tn": 42,
+            "tp": 48
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5517960435660518,
+            0.7646535655684621
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9258998703338824,
+            0.9999999999999999
+          ]
+        },
+        "near_threshold_share": 0.079
+      },
+      {
+        "bucket": "2 and over",
+        "clips": 227,
+        "flashmap": {
+          "counts": {
+            "fn": 2,
+            "fp": 153,
+            "tn": 224,
+            "tp": 302
+          },
+          "precision": 0.6637362637362637,
+          "precision_wilson": [
+            0.6191167737851949,
+            0.7056141264759913
+          ],
+          "recall": 0.993421052631579,
+          "recall_wilson": [
+            0.9763336489822854,
+            0.9981939573682892
+          ]
+        },
+        "near_threshold_share": 0.093
+      }
+    ],
+    "near_threshold": [
+      {
+        "bucket": "False",
+        "clips": 1797,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 459,
+            "tn": 4022,
+            "tp": 910
+          },
+          "precision": 0.664718772826881,
+          "precision_wilson": [
+            0.6392811374074688,
+            0.6892345823810496
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9957963618485296,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "True",
+        "clips": 1202,
+        "flashmap": {
+          "counts": {
+            "fn": 190,
+            "fp": 125,
+            "tn": 3123,
+            "tp": 168
+          },
+          "precision": 0.5733788395904437,
+          "precision_wilson": [
+            0.5161575809384544,
+            0.6287008905528002
+          ],
+          "recall": 0.4692737430167598,
+          "recall_wilson": [
+            0.4181782869816578,
+            0.5210216043970086
+          ]
+        },
+        "near_threshold_share": 1.0
+      }
+    ],
+    "observed_flash_rate_hz": [
+      {
+        "bucket": "0",
+        "clips": 233,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 699,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "1",
+        "clips": 31,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 93,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "2",
+        "clips": 588,
+        "flashmap": {
+          "counts": {
+            "fn": 12,
+            "fp": 80,
+            "tn": 1672,
+            "tp": 0
+          },
+          "precision": 0.0,
+          "precision_wilson": [
+            0.0,
+            0.0458181295355271
+          ],
+          "recall": 0.0,
+          "recall_wilson": [
+            2.7755575615628914e-17,
+            0.24249400665524085
+          ]
+        },
+        "near_threshold_share": 0.713
+      },
+      {
+        "bucket": "4",
+        "clips": 730,
+        "flashmap": {
+          "counts": {
+            "fn": 164,
+            "fp": 31,
+            "tn": 1863,
+            "tp": 132
+          },
+          "precision": 0.8098159509202454,
+          "precision_wilson": [
+            0.7427075771988555,
+            0.8626575443597225
+          ],
+          "recall": 0.44594594594594594,
+          "recall_wilson": [
+            0.39037165265076085,
+            0.5029052806797428
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "5",
+        "clips": 33,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 12,
+            "tn": 63,
+            "tp": 24
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5033399787115652,
+            0.7978538117569468
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.8620237953250198,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "6",
+        "clips": 224,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 64,
+            "tn": 480,
+            "tp": 128
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.597294457887554,
+            0.729500493423528
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9708630437264916,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "7",
+        "clips": 28,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 7,
+            "tn": 63,
+            "tp": 14
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.4537345197425524,
+            0.8280524739491653
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.7846891972623643,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "8",
+        "clips": 166,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 60,
+            "tn": 318,
+            "tp": 120
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5949523288522202,
+            0.7314158385072421
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9689808335812966,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.012
+      },
+      {
+        "bucket": "9",
+        "clips": 33,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 13,
+            "tn": 60,
+            "tp": 26
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5097739439934599,
+            0.7936704381040163
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.8712710781407846,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "10",
+        "clips": 369,
+        "flashmap": {
+          "counts": {
+            "fn": 12,
+            "fp": 148,
+            "tn": 651,
+            "tp": 296
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.6215540532933791,
+            0.7089200399040886
+          ],
+          "recall": 0.961038961038961,
+          "recall_wilson": [
+            0.933144676913101,
+            0.9775745105676671
+          ]
+        },
+        "near_threshold_share": 0.13
+      },
+      {
+        "bucket": "12",
+        "clips": 187,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 56,
+            "tn": 393,
+            "tp": 112
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5923605407777569,
+            0.7335212364389537
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9668386529330562,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.011
+      },
+      {
+        "bucket": "13",
+        "clips": 2,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 6,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "14",
+        "clips": 109,
+        "flashmap": {
+          "counts": {
+            "fn": 2,
+            "fp": 34,
+            "tn": 223,
+            "tp": 68
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5706063272058552,
+            0.7506288520786568
+          ],
+          "recall": 0.9714285714285714,
+          "recall_wilson": [
+            0.9016774388157609,
+            0.9921293880545587
+          ]
+        },
+        "near_threshold_share": 0.009
+      },
+      {
+        "bucket": "15",
+        "clips": 4,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 2,
+            "tn": 6,
+            "tp": 4
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.299993315138392,
+            0.9032285888942195
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "16",
+        "clips": 10,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 3,
+            "tn": 21,
+            "tp": 6
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.3542021355803963,
+            0.879416181613089
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.6096657120978346,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "17",
+        "clips": 2,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 6,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "18",
+        "clips": 67,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 20,
+            "tn": 141,
+            "tp": 40
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5405686645211968,
+            0.7727073847647731
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9123783988027135,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "20",
+        "clips": 87,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 24,
+            "tn": 189,
+            "tp": 48
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5517960435660518,
+            0.7646535655684621
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.9258998703338824,
+            0.9999999999999999
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "22",
+        "clips": 1,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 3,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "23",
+        "clips": 3,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 2,
+            "tn": 3,
+            "tp": 4
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.299993315138392,
+            0.9032285888942195
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "24",
+        "clips": 69,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 21,
+            "tn": 144,
+            "tp": 42
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.5436724114497559,
+            0.7705038553539602
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.916201209134296,
+            0.9999999999999999
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "30",
+        "clips": 23,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 7,
+            "tn": 48,
+            "tp": 14
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.4537345197425524,
+            0.8280524739491653
+          ],
+          "recall": 1.0,
+          "recall_wilson": [
+            0.7846891972623643,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      }
+    ],
+    "red_mode": [
+      {
+        "bucket": "near_red_distance_0.9",
+        "clips": 180,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 540,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "near_red_ratio_0.9",
+        "clips": 183,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 549,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "near_red_distance_0.95",
+        "clips": 188,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 564,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "near_red_ratio_0.95",
+        "clips": 2,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 6,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "near_red_distance_1.05",
+        "clips": 207,
+        "flashmap": {
+          "counts": {
+            "fn": 78,
+            "fp": 36,
+            "tn": 455,
+            "tp": 52
+          },
+          "precision": 0.5909090909090909,
+          "precision_wilson": [
+            0.4864808526118738,
+            0.6877324079945095
+          ],
+          "recall": 0.4,
+          "recall_wilson": [
+            0.3198243104508396,
+            0.4859160017880467
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "near_red_distance_1.1",
+        "clips": 205,
+        "flashmap": {
+          "counts": {
+            "fn": 60,
+            "fp": 66,
+            "tn": 415,
+            "tp": 74
+          },
+          "precision": 0.5285714285714286,
+          "precision_wilson": [
+            0.44622818016783383,
+            0.6093886083824855
+          ],
+          "recall": 0.5522388059701493,
+          "recall_wilson": [
+            0.467757456128161,
+            0.6338085031977003
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "gray_only",
+        "clips": 739,
+        "flashmap": {
+          "counts": {
+            "fn": 50,
+            "fp": 231,
+            "tn": 1486,
+            "tp": 450
+          },
+          "precision": 0.6607929515418502,
+          "precision_wilson": [
+            0.6244212278289047,
+            0.6953608139550738
+          ],
+          "recall": 0.9,
+          "recall_wilson": [
+            0.8705780903680599,
+            0.9233224372626984
+          ]
+        },
+        "near_threshold_share": 0.313
+      },
+      {
+        "bucket": "nonred_control",
+        "clips": 432,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 1296,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.0
+      },
+      {
+        "bucket": "red_gray_matched",
+        "clips": 431,
+        "flashmap": {
+          "counts": {
+            "fn": 2,
+            "fp": 251,
+            "tn": 538,
+            "tp": 502
+          },
+          "precision": 0.6666666666666666,
+          "precision_wilson": [
+            0.6322255356184864,
+            0.6994159159361187
+          ],
+          "recall": 0.996031746031746,
+          "recall_wilson": [
+            0.9856481523079429,
+            0.9989110862408289
+          ]
+        },
+        "near_threshold_share": 0.009
+      },
+      {
+        "bucket": "red_same_chroma",
+        "clips": 432,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 1296,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 0.005
+      }
+    ],
+    "resolution": [
+      {
+        "bucket": "480p",
+        "clips": 1577,
+        "flashmap": {
+          "counts": {
+            "fn": 70,
+            "fp": 322,
+            "tn": 3735,
+            "tp": 604
+          },
+          "precision": 0.652267818574514,
+          "precision_wilson": [
+            0.6210211822433527,
+            0.6822563252552447
+          ],
+          "recall": 0.8961424332344213,
+          "recall_wilson": [
+            0.8708216192899845,
+            0.9169732154034422
+          ]
+        },
+        "near_threshold_share": 0.393
+      },
+      {
+        "bucket": "720p",
+        "clips": 807,
+        "flashmap": {
+          "counts": {
+            "fn": 66,
+            "fp": 133,
+            "tn": 1978,
+            "tp": 244
+          },
+          "precision": 0.6472148541114059,
+          "precision_wilson": [
+            0.5977164546391633,
+            0.6937434099032118
+          ],
+          "recall": 0.7870967741935484,
+          "recall_wilson": [
+            0.7381569834205145,
+            0.829008363913969
+          ]
+        },
+        "near_threshold_share": 0.414
+      },
+      {
+        "bucket": "1080p",
+        "clips": 454,
+        "flashmap": {
+          "counts": {
+            "fn": 38,
+            "fp": 94,
+            "tn": 1068,
+            "tp": 162
+          },
+          "precision": 0.6328125,
+          "precision_wilson": [
+            0.5722056515609918,
+            0.6894923865758861
+          ],
+          "recall": 0.81,
+          "recall_wilson": [
+            0.7499876129240015,
+            0.8583282847220932
+          ]
+        },
+        "near_threshold_share": 0.407
+      },
+      {
+        "bucket": "2160p",
+        "clips": 161,
+        "flashmap": {
+          "counts": {
+            "fn": 16,
+            "fp": 35,
+            "tn": 364,
+            "tp": 68
+          },
+          "precision": 0.6601941747572816,
+          "precision_wilson": [
+            0.5644389490131616,
+            0.7444299148553299
+          ],
+          "recall": 0.8095238095238095,
+          "recall_wilson": [
+            0.7127625740629011,
+            0.8792130226327857
+          ]
+        },
+        "near_threshold_share": 0.391
+      }
+    ],
+    "shape": [
+      {
+        "bucket": "band",
+        "clips": 756,
+        "flashmap": {
+          "counts": {
+            "fn": 36,
+            "fp": 151,
+            "tn": 1831,
+            "tp": 250
+          },
+          "precision": 0.6234413965087282,
+          "precision_wilson": [
+            0.5750579767297813,
+            0.6694821953375453
+          ],
+          "recall": 0.8741258741258742,
+          "recall_wilson": [
+            0.8306590989403965,
+            0.9076755784750515
+          ]
+        },
+        "near_threshold_share": 0.406
+      },
+      {
+        "bucket": "center_rect",
+        "clips": 852,
+        "flashmap": {
+          "counts": {
+            "fn": 46,
+            "fp": 230,
+            "tn": 1846,
+            "tp": 434
+          },
+          "precision": 0.6536144578313253,
+          "precision_wilson": [
+            0.6166329333306723,
+            0.6888287856231537
+          ],
+          "recall": 0.9041666666666667,
+          "recall_wilson": [
+            0.874533384205187,
+            0.92738218736593
+          ]
+        },
+        "near_threshold_share": 0.36
+      },
+      {
+        "bucket": "offset_rect",
+        "clips": 701,
+        "flashmap": {
+          "counts": {
+            "fn": 56,
+            "fp": 124,
+            "tn": 1683,
+            "tp": 240
+          },
+          "precision": 0.6593406593406593,
+          "precision_wilson": [
+            0.6092159997042894,
+            0.706137251590162
+          ],
+          "recall": 0.8108108108108109,
+          "recall_wilson": [
+            0.7623190674277887,
+            0.8513385659218158
+          ]
+        },
+        "near_threshold_share": 0.408
+      },
+      {
+        "bucket": "scatter",
+        "clips": 690,
+        "flashmap": {
+          "counts": {
+            "fn": 52,
+            "fp": 79,
+            "tn": 1785,
+            "tp": 154
+          },
+          "precision": 0.6609442060085837,
+          "precision_wilson": [
+            0.5979883978936508,
+            0.7186791330928913
+          ],
+          "recall": 0.7475728155339806,
+          "recall_wilson": [
+            0.6840905240696395,
+            0.8019907325763944
+          ]
+        },
+        "near_threshold_share": 0.438
+      }
+    ],
+    "timing": [
+      {
+        "bucket": "cfr",
+        "clips": 2414,
+        "flashmap": {
+          "counts": {
+            "fn": 154,
+            "fp": 481,
+            "tn": 5735,
+            "tp": 872
+          },
+          "precision": 0.6444937176644494,
+          "precision_wilson": [
+            0.6186120736822738,
+            0.6695571869621053
+          ],
+          "recall": 0.8499025341130604,
+          "recall_wilson": [
+            0.8267443933952735,
+            0.8704502998754807
+          ]
+        },
+        "near_threshold_share": 0.399
+      },
+      {
+        "bucket": "vfr_alternating",
+        "clips": 304,
+        "flashmap": {
+          "counts": {
+            "fn": 16,
+            "fp": 51,
+            "tn": 745,
+            "tp": 100
+          },
+          "precision": 0.6622516556291391,
+          "precision_wilson": [
+            0.5836251711421988,
+            0.7328275436100037
+          ],
+          "recall": 0.8620689655172413,
+          "recall_wilson": [
+            0.787644450634584,
+            0.913281596382919
+          ]
+        },
+        "near_threshold_share": 0.418
+      },
+      {
+        "bucket": "vfr_dropped",
+        "clips": 281,
+        "flashmap": {
+          "counts": {
+            "fn": 20,
+            "fp": 52,
+            "tn": 665,
+            "tp": 106
+          },
+          "precision": 0.6708860759493671,
+          "precision_wilson": [
+            0.5943227026372024,
+            0.7393371666786519
+          ],
+          "recall": 0.8412698412698413,
+          "recall_wilson": [
+            0.7675124813817829,
+            0.8948337428605262
+          ]
+        },
+        "near_threshold_share": 0.395
+      }
+    ],
+    "ucs_distance_over_limit": [
+      {
+        "bucket": "under 0.5",
+        "clips": 1603,
+        "flashmap": {
+          "counts": {
+            "fn": 50,
+            "fp": 231,
+            "tn": 4078,
+            "tp": 450
+          },
+          "precision": 0.6607929515418502,
+          "precision_wilson": [
+            0.6244212278289047,
+            0.6953608139550738
+          ],
+          "recall": 0.9,
+          "recall_wilson": [
+            0.8705780903680599,
+            0.9233224372626984
+          ]
+        },
+        "near_threshold_share": 0.145
+      },
+      {
+        "bucket": "0.5 to 0.9",
+        "clips": 185,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 555,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "0.9 to 0.95",
+        "clips": 368,
+        "flashmap": {
+          "counts": {
+            "fn": 0,
+            "fp": 0,
+            "tn": 1104,
+            "tp": 0
+          },
+          "precision": null,
+          "precision_wilson": [
+            0.0,
+            1.0
+          ],
+          "recall": null,
+          "recall_wilson": [
+            0.0,
+            1.0
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "1 to 1.05",
+        "clips": 207,
+        "flashmap": {
+          "counts": {
+            "fn": 78,
+            "fp": 36,
+            "tn": 455,
+            "tp": 52
+          },
+          "precision": 0.5909090909090909,
+          "precision_wilson": [
+            0.4864808526118738,
+            0.6877324079945095
+          ],
+          "recall": 0.4,
+          "recall_wilson": [
+            0.3198243104508396,
+            0.4859160017880467
+          ]
+        },
+        "near_threshold_share": 1.0
+      },
+      {
+        "bucket": "1.1 to 1.3",
+        "clips": 636,
+        "flashmap": {
+          "counts": {
+            "fn": 62,
+            "fp": 317,
+            "tn": 953,
+            "tp": 576
+          },
+          "precision": 0.64501679731243,
+          "precision_wilson": [
+            0.6130725195037335,
+            0.6757187684688065
+          ],
+          "recall": 0.9028213166144201,
+          "recall_wilson": [
+            0.8773688898149999,
+            0.9234519249457244
+          ]
+        },
+        "near_threshold_share": 0.329
+      }
+    ]
+  },
+  "exclusions": {
+    "decoded luminance off the intended waveform": 1
+  },
+  "flashmap_version": "1.0.0",
+  "generated_on": "2026-10-03",
+  "git_commit": "c5724de2016cfb9c275e3524542376c585c987e4",
+  "ground_truth": {
+    "design_seed": 20260917,
+    "design_sha256": "834a719bbd3bbad3e62e1f9bd1a4062b7fd766b1864a2ba9340c8927d5397c7b",
+    "imports_flashmap": false,
+    "source": "computed from the spec text by eval/conformance/truth.py",
+    "spec_file": "flashmap/docs/SPEC_SOURCES.md",
+    "spec_sha256": "7c8d170c15bc9587f68ee61b494aa634640daa2a51ef51d43efc1037cd81ae67"
+  },
+  "hazard_files_remaining": 0,
+  "headline_all_windows": {
+    "flashmap (this project)": {
+      "calm_windows": 7729,
+      "counts": {
+        "fn": 190,
+        "fp": 584,
+        "tn": 7145,
+        "tp": 1078
+      },
+      "f1": 0.7358361774744028,
+      "false_positive_seconds_per_minute_of_calm": 4.533574847975158,
+      "onset_lead_windows": {
+        "max": 0,
+        "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started",
+        "median": -1,
+        "min": -1,
+        "n": 539,
+        "share_early_or_on_time": 1.0
+      },
+      "precision": {
+        "denominator": 1662,
+        "numerator": 1078,
+        "value": 0.6486161251504212,
+        "wilson_hi": 0.67120132885299,
+        "wilson_lo": 0.6253454988083408
+      },
+      "precision_bootstrap_over_clips": {
+        "groups": 579,
+        "hi": 0.6594594594594595,
+        "lo": 0.6371895820714718,
+        "resamples": 10000,
+        "seed": 20260917
+      },
+      "recall": {
+        "denominator": 1268,
+        "numerator": 1078,
+        "value": 0.8501577287066246,
+        "wilson_hi": 0.8687440679771992,
+        "wilson_lo": 0.8294561627523382
+      },
+      "recall_bootstrap_over_clips": {
+        "groups": 634,
+        "hi": 0.8769716088328076,
+        "lo": 0.8217665615141956,
+        "resamples": 10000,
+        "seed": 20260917
+      },
+      "segment_recall": {
+        "denominator": 634,
+        "numerator": 539,
+        "value": 0.8501577287066246,
+        "wilson_hi": 0.8758276880623783,
+        "wilson_lo": 0.8202700551305966
+      }
+    },
+    "flashmap, flash bounds only (diagnostic, not the hide)": {
+      "calm_windows": 7729,
+      "counts": {
+        "fn": 190,
+        "fp": 80,
+        "tn": 7649,
+        "tp": 1078
+      },
+      "f1": 0.8887056883759276,
+      "false_positive_seconds_per_minute_of_calm": 0.621037650407556,
+      "onset_lead_windows": {
+        "max": 0,
+        "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started",
+        "median": 0,
+        "min": 0,
+        "n": 539,
+        "share_early_or_on_time": 1.0
+      },
+      "precision": {
+        "denominator": 1158,
+        "numerator": 1078,
+        "value": 0.9309153713298791,
+        "wilson_hi": 0.9441421644136916,
+        "wilson_lo": 0.9148390609705372
+      },
+      "precision_bootstrap_over_clips": {
+        "groups": 579,
+        "hi": 0.9499136442141624,
+        "lo": 0.9084628670120898,
+        "resamples": 10000,
+        "seed": 20260917
+      },
+      "recall": {
+        "denominator": 1268,
+        "numerator": 1078,
+        "value": 0.8501577287066246,
+        "wilson_hi": 0.8687440679771992,
+        "wilson_lo": 0.8294561627523382
+      },
+      "recall_bootstrap_over_clips": {
+        "groups": 634,
+        "hi": 0.8769716088328076,
+        "lo": 0.8217665615141956,
+        "resamples": 10000,
+        "seed": 20260917
+      },
+      "segment_recall": {
+        "denominator": 634,
+        "numerator": 539,
+        "value": 0.8501577287066246,
+        "wilson_hi": 0.8758276880623783,
+        "wilson_lo": 0.8202700551305966
+      }
+    },
+    "flashmap, half window rule": {
+      "calm_windows": 7729,
+      "counts": {
+        "fn": 190,
+        "fp": 460,
+        "tn": 7269,
+        "tp": 1078
+      },
+      "f1": 0.7683535281539559,
+      "false_positive_seconds_per_minute_of_calm": 3.5709664898434466,
+      "onset_lead_windows": {
+        "max": 0,
+        "meaning": "first predicted positive window minus first true positive window, so a negative number means the detector was already hiding before the flashing started",
+        "median": -1,
+        "min": -1,
+        "n": 539,
+        "share_early_or_on_time": 1.0
+      },
+      "precision": {
+        "denominator": 1538,
+        "numerator": 1078,
+        "value": 0.7009102730819246,
+        "wilson_hi": 0.723269084561149,
+        "wilson_lo": 0.6775503359210896
+      },
+      "precision_bootstrap_over_clips": {
+        "groups": 579,
+        "hi": 0.7157626107961149,
+        "lo": 0.6858965968586388,
+        "resamples": 10000,
+        "seed": 20260917
+      },
+      "recall": {
+        "denominator": 1268,
+        "numerator": 1078,
+        "value": 0.8501577287066246,
+        "wilson_hi": 0.8687440679771992,
+        "wilson_lo": 0.8294561627523382
+      },
+      "recall_bootstrap_over_clips": {
+        "groups": 634,
+        "hi": 0.8769716088328076,
+        "lo": 0.8217665615141956,
+        "resamples": 10000,
+        "seed": 20260917
+      },
+      "segment_recall": {
+        "denominator": 634,
+        "numerator": 539,
+        "value": 0.8501577287066246,
+        "wilson_hi": 0.8758276880623783,
+        "wilson_lo": 0.8202700551305966
+      }
+    }
+  },
+  "hidden_window_share": {
+    "share": 0.18472824274758254,
+    "windows_flashmap_would_hide": 1662,
+    "windows_measured": 8997
+  },
+  "kind": "complete_current_source_conformance_report",
+  "known_disagreements": {
+    "leading_hide": "flashmap hides the whole failing one second period, which starts before the flashing does. Under the any overlap rule that shows up as false positive windows in the calm lead-in. It is the direction a safety layer should err in, and it is counted here rather than excused: see onset_lead_windows.",
+    "one_second_period_boundary": "The ground truth counts flashes in a half open one second period and flashmap counts them in a closed trailing one. On a clean square wave at exactly the flash limit the closed reading finds one more flash than the half open one. Look at the flash_rate_hz error curve at 3 Hz to see what it costs. Neither reading is written in the spec."
+  },
+  "limits": "Synthetic SDR intended-signal conformance, not clinical validation or a device test. Matrix/range conversion was corrected after the archived evaluation under a logged protocol deviation. Production detector thresholds and resolution are unchanged. Encoded near-limit signals can still cross thresholds. Baselines, IRIS ground-truth cross-checks and real-clip human labeling were not completed by this run.",
+  "measurement_sha256": "a1c722d6a79a4685c69c3297abe417ac9c21cc79ec6958b0619c080a70b01f59",
+  "profile": "wcag",
+  "published": {
+    "clip_level_precision": 0.931,
+    "clip_level_recall": 0.85,
+    "clips_designed": 3000,
+    "clips_kept": 2999,
+    "clips_measured": 3000,
+    "excluded_clips": 1,
+    "false_positives_elsewhere": 80,
+    "false_positives_in_the_calm_lead_in": 504,
+    "false_positives_total": 584,
+    "flashmap_f1": 0.736,
+    "flashmap_half_f1": 0.768,
+    "flashmap_half_precision": 0.701,
+    "flashmap_half_precision_denominator": 1538,
+    "flashmap_half_precision_hi": 0.723,
+    "flashmap_half_precision_lo": 0.678,
+    "flashmap_half_recall": 0.85,
+    "flashmap_half_recall_denominator": 1268,
+    "flashmap_half_recall_hi": 0.869,
+    "flashmap_half_recall_lo": 0.829,
+    "flashmap_precision": 0.649,
+    "flashmap_precision_denominator": 1662,
+    "flashmap_precision_hi": 0.671,
+    "flashmap_precision_lo": 0.625,
+    "flashmap_recall": 0.85,
+    "flashmap_recall_denominator": 1268,
+    "flashmap_recall_hi": 0.869,
+    "flashmap_recall_lo": 0.829,
+    "positive_windows": 1268,
+    "recall_away_from_limits": 1.0,
+    "recall_away_from_limits_clips": 1797,
+    "recall_away_from_limits_positive_windows": 910,
+    "recall_near_limits": 0.469,
+    "recall_near_limits_clips": 1202,
+    "recall_near_limits_positive_windows": 358,
+    "what_these_are": "the same numbers as the tables below, rounded and with short keys, because eval/readme_sync.py quotes a dotted path with no spaces in it. A document quotes these.",
+    "windows": 8997
+  },
+  "report_wrapper_sha256": "3e4cede806f09ed1c30942207dfcc02716344695ab4e05fa79f4257d643bd934",
+  "sample": {
+    "clips_designed": 3000,
+    "clips_kept": 2999,
+    "clips_measured": 3000,
+    "clips_with_baselines": 0,
+    "ground_truth_positive_windows": 1268,
+    "is_complete_run": true,
+    "statement": "All 3000 frozen clip identities were measured afresh with one recorded source tree and encoding protocol. Every exclusion is counted. Both preregistered window-overlap rules and the diagnostic tight-bounds rule use these same rows.",
+    "windows_kept": 8997
+  },
+  "source_sha256": {
+    "eval/conformance/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "eval/conformance/design.py": "69eded0178a9dc8d0ec4eaec7fe101472aa5a20849c9da061da8204fbeb2993b",
+    "eval/conformance/generate_analyze.py": "4a3d3f0c4f7ac3caff699b8a584189f54331c5bd0bf0f080e1fab07841bfb640",
+    "eval/conformance/geometry.py": "f5e85c99aa2e0dd443ad7dc482c1d43b6a1b31e7249615918dc8d7918b311499",
+    "eval/conformance/pattern_geometry.py": "5bf9ec62764bbd7335acc665c3f6bf5075f4c92bdae9f3bb3e9a630d9b4711c9",
+    "eval/conformance/pattern_run.py": "ce4d3031e5ec72e34400fcd9f0e2070a737680f65540c774e8836416bed22c31",
+    "eval/conformance/pattern_spec.py": "e81fdf17b3a023e1462ebf7754bc981a9a63d93b819b8078aa643096d4912b32",
+    "eval/conformance/pattern_truth.py": "2dea5884511adc7efb2b48694642104e6dd2ac81febfdb587aedfbbdfb1ee5f9",
+    "eval/conformance/recheck.py": "4c2e797994a2b15a99307d2bd863d8a8b9c60b18bd5ace1ea38add0f36a6b08a",
+    "eval/conformance/render.py": "b1f77207ce94e2c72623975dc8194bce37081fa9aa2b07a13718e26cb6f804a2",
+    "eval/conformance/report.py": "7d67cc893d128da670e67e722e28d4777370cd8b523961e545416c8f9d62c397",
+    "eval/conformance/spec.py": "4ee44f91d1006418d85f8d63a7bdb79bfcb1589588fbd7375be205e5c885294b",
+    "eval/conformance/truth.py": "73294a484940751d3cce890ef4edde96a7e8c853aa0351d067c951a0112084ba",
+    "eval/metrics.py": "4e693dc55ac144381ec0972565472e8fe39f818b73ef547692fc759c6af8364d",
+    "flashmap/docs/SPEC_SOURCES.md": "2bc46f47b0d23801eaef2bafa5b668518858db4be1316e1fe91008f01d193015",
+    "flashmap/src/flashmap/__init__.py": "dc9409216ab1c59cdbeba98f0982c021a57d1cdfe693c5100e7287004d019270",
+    "flashmap/src/flashmap/__main__.py": "a39d126b13eec328d5f748b00b58986af066fb6225ba439cb5ebcfcf47680500",
+    "flashmap/src/flashmap/analyze.py": "46734d89fc36863b800314247967281c772f85361d7567c5056daef61a6cb4ba",
+    "flashmap/src/flashmap/area.py": "1d2e64d08bf5644e269e24ce8695e07be780397b98e581cbfe293c6e1c732acc",
+    "flashmap/src/flashmap/ci.py": "22e9c9b2d329543d9a830aeb62dbe08165e769d69914b9da8461264e82f855bb",
+    "flashmap/src/flashmap/cli.py": "34c8d80daeb53229fd12f763a078195f824637f6cefde4aab91299af738e00d0",
+    "flashmap/src/flashmap/color.py": "cf6730eda0b210818d8fa996bffb7e2c52f32ce224047a783e48dadde889f3e8",
+    "flashmap/src/flashmap/decode.py": "a807be5c69c404542a128d5a67c2c53aa8baf9239ad55817672c7cf8ca9587bc",
+    "flashmap/src/flashmap/flash.py": "42609764538beef77e5ff7b88fb800cc75e5db720bd13ee11aac777299db2be3",
+    "flashmap/src/flashmap/pattern.py": "c40d3574b5bf1e55101dd506a3f01508428d68721666eb8ecbd164941299b07c",
+    "flashmap/src/flashmap/picture.py": "dcaa67814922783cdfe9801f7bd780545db41ec610d18c0cababd2644dfe0a21",
+    "flashmap/src/flashmap/pngout.py": "c8170701fb23398b40be6c0cedaf26204d3c8016b236bba3428e0cacea40eb9e",
+    "flashmap/src/flashmap/profiles.py": "938e9a58e6d5c5ef7511a216304e88303158f86f4759725087cf2f7020ee8f88",
+    "flashmap/src/flashmap/report.py": "21dc98cbcb40cef898dc71a11a4b2b0cd255e67625565aaebe2fac0924778189",
+    "flashmap/src/flashmap/room.py": "b70535de3b40424ac57387e4607dc20fd26e03394ebb5f63c0f97395ddb693fb",
+    "flashmap/src/flashmap/sidecar.py": "465126c88bb1565ea3721ffbb1c5c4ad355a70a10b15bcc8cf4cc6d732697324",
+    "flashmap/src/flashmap/signing.py": "b11b554a200d445ef45ed7af1e10b47788505c64a99d14d01831578fa5eda1c7"
+  },
+  "window_rules": {
+    "baselines": "the two frame based baselines have no intervals, so a flagged frame marks the window that contains it, which is the mapping EVAL_PLAN section 6 gives them. The half window rule does not apply to them and is not reported for them.",
+    "primary": "any overlap at all between a detector interval and the window",
+    "sensitivity": "at least half the window covered, reported as @half_window"
+  }
+}

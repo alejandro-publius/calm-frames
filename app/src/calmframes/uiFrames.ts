@@ -16,6 +16,18 @@ import { CALM_COLORS } from './calmStyles';
 import { CardKind } from './cards';
 import { UiFrame } from './uiCapture';
 
+export const HOUSEHOLD_LOADING_FRAME: UiFrame = {
+  screen: 'household-loading',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE],
+};
+
+export const HOUSEHOLD_ERROR_FRAME: UiFrame = {
+  screen: 'household-error',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE],
+};
+
 export const KID_HOME_FRAME: UiFrame = {
   screen: 'kid-home',
   background: CALM_COLORS.BACKGROUND,
@@ -211,6 +223,8 @@ export function playerFrame(covered: boolean, cardKind: CardKind): UiFrame {
 
 /** Every frame the app can show, for the flashmap run. */
 export const ALL_UI_FRAMES: UiFrame[] = [
+  HOUSEHOLD_LOADING_FRAME,
+  HOUSEHOLD_ERROR_FRAME,
   FIRST_RUN_PIN_FRAME,
   FIRST_RUN_PRESET_FRAME,
   FIRST_RUN_ROOM_FRAME,

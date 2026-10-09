@@ -20,6 +20,11 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
+
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  getItem: jest.fn(async () => null),
+  setItem: jest.fn(async () => undefined),
+}));
 import {
   fallsThroughToLocalMap,
   resolveCatalog,
@@ -123,6 +128,7 @@ async function openShelf(options: ShelfOptions = {}) {
       fireEvent.press(screen.getByTestId(`kid-mode-first-run-key-${digit}`));
     }
   };
+  await screen.findByTestId('kid-mode-first-run');
   type('1357');
   type('1357');
   fireEvent.press(screen.getByTestId('kid-mode-first-run-next'));
@@ -138,11 +144,12 @@ async function openShelf(options: ShelfOptions = {}) {
 }
 
 /** Open the parent area on an already open shelf, through the PIN. */
-function openParentArea() {
+async function openParentArea() {
   fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
   for (const digit of '1357') {
     fireEvent.press(screen.getByTestId(`kid-mode-parent-key-${digit}`));
   }
+  await screen.findByTestId('kid-mode-parent-open');
 }
 
 describe('the registry served it', () => {
@@ -323,7 +330,7 @@ describe('the registry entry was tampered with', () => {
     });
     expect(screen.queryByTestId('kid-mode-home-poster-bursts')).toBeNull();
 
-    openParentArea();
+    await openParentArea();
     expect(screen.getByTestId('kid-mode-parent-reason-bursts').props.children).toContain(
       'the picture stays hidden',
     );

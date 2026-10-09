@@ -5,7 +5,7 @@
 
 After HUMAN CHECKPOINT B, repeat with --device SERIAL --checkpoint-b-confirmed.
 The optional commands in the receipt are for a human-reviewed benign smoke
-session only. The existing bundled clip cannot test caption/scene-hold layering.
+session only. Caption/scene-hold checks require the exact reviewed story bundle.
 Saved device reports and virtual-device software results are not physical proof.
 """
 
@@ -28,6 +28,17 @@ MAP_MEMBER = "assets/raw/offline/calm_gradient.flashmap.json"
 # The reviewed, non-hazardous bundled fixture. Updating it requires new proof.
 BENIGN_SHA256 = "af2934dc45c9519bcace8db253d0a9e0c10f9db6682a04ad2cf3f906e1755224"
 MAP_SHA256 = "28dff7b168b97d7c31c010ffeb0bf7cbde9c66f0d7f5da7132dfb8fbe896bd4f"
+STORY_PREFIX = "assets/raw/benign-story/"
+STORY_PROOF_MEMBER = STORY_PREFIX + "verification.json"
+# Pin the reviewed proof itself, not its self-reported success fields. Its hash
+# commits to every artifact digest below; changing the demo requires re-review.
+STORY_PROOF_SHA256 = "1bd952cc9e84c9620059e216f97f28ce3a5cea8d8ff9dc9a28633d6746d3292c"
+STORY_ASSET_NAMES = frozenset({
+    "README.md", "demo.pub.pem", "harbor.mp4", "harbor.precovered.mp4", "harbor.vtt",
+    "harbor.wcag.json", "harbor.broadcast.json", "harbor.extra-cautious.json",
+    "measured-source.wcag.json", "measured-source.broadcast.json",
+    "measured-source.extra-cautious.json",
+})
 MAX_PACKAGE_BYTES = 128 * 1024 * 1024
 MAX_MEMBER_BYTES = 8 * 1024 * 1024
 
@@ -99,12 +110,12 @@ def collect_inventory(device: str | None = None) -> dict:
     }
 
 
-def _member(package: Path, name: str) -> bytes:
-    """Read one fixed member, without extracting files or following its paths."""
+def _tar_output(package: Path, arguments: list[str], members: tuple[str, ...] = ()) -> bytes:
+    """Read bounded tar output without extracting anything onto the filesystem."""
     # System tar supports the SDK's zstd package and ordinary test tar archives.
     # Limit the stream before retaining it, and kill an oversized member reader.
     process = subprocess.Popen(
-        ["tar", "-xOf", str(package), name], stdout=subprocess.PIPE,
+        ["tar", *arguments, str(package), *members], stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL,
     )
     def stop_reader() -> None:
@@ -130,6 +141,40 @@ def _member(package: Path, name: str) -> bytes:
         process.wait()
         if process.stdout is not None:
             process.stdout.close()
+
+
+def _member(package: Path, name: str) -> bytes:
+    """Read one fixed member, without extracting files or following its paths."""
+    return _tar_output(package, ["-xOf"], (name,))
+
+
+def _inspect_story(package: Path) -> dict:
+    """Accept no story, or the complete byte-exact reviewed benign story."""
+    names = _tar_output(package, ["-tf"]).decode("utf-8").splitlines()
+    story_members = [name for name in names if name.startswith(STORY_PREFIX)
+                     and name != STORY_PREFIX]
+    if not story_members:
+        return {"captions_available": False, "scene_holds_available": False}
+    expected_members = {STORY_PREFIX + name for name in STORY_ASSET_NAMES}
+    expected_members.add(STORY_PROOF_MEMBER)
+    if (set(story_members) != expected_members
+            or len(story_members) != len(expected_members)):
+        raise ValueError("story fixture is missing, duplicated or unreviewed")
+    proof_bytes = _member(package, STORY_PROOF_MEMBER)
+    if hashlib.sha256(proof_bytes).hexdigest() != STORY_PROOF_SHA256:
+        raise ValueError("story verification proof is not the reviewed proof")
+    proof = json.loads(proof_bytes)
+    hashes = proof["assets_sha256"]
+    for name in STORY_ASSET_NAMES:
+        if hashlib.sha256(_member(package, STORY_PREFIX + name)).hexdigest() != hashes[name]:
+            raise ValueError("story package asset differs from the reviewed proof")
+    return {
+        "captions_available": True, "scene_holds_available": True,
+        "benign_story_proof_sha256": STORY_PROOF_SHA256,
+        "benign_story_playback_sha256": hashes["harbor.precovered.mp4"],
+        "benign_story_caption_sha256": hashes["harbor.vtt"],
+        "benign_story_uses_sham_intervals": True,
+    }
 
 
 def inspect_package(package: Path) -> dict:
@@ -160,6 +205,7 @@ def inspect_package(package: Path) -> dict:
             raise ValueError("package identity does not match Calm Frames")
         if not _member(package, f"lib/{architecture}/com.amazon.keplerscript.carousel.so"):
             raise ValueError("package architecture member is empty")
+        story = _inspect_story(package)
         after = package.stat()
         if (before.st_ino, before.st_size, before.st_mtime_ns) != (
                 after.st_ino, after.st_size, after.st_mtime_ns):
@@ -168,7 +214,7 @@ def inspect_package(package: Path) -> dict:
             "ok": True, "file": package.name, "architecture": architecture,
             "sha256": digest.hexdigest(), "benign_video_sha256": BENIGN_SHA256,
             "bundled_map_sha256": MAP_SHA256,
-            "captions_available": False, "scene_holds_available": False,
+            **story,
         }
     except (OSError, ValueError, UnicodeError, subprocess.TimeoutExpired):
         return {"ok": False, "problem": "package/benign asset identity preflight failed"}
@@ -196,6 +242,22 @@ def build_plan(inventory: dict, package: dict, *, checkpoint_b_confirmed: bool =
         blockers.append("checked_benign_debug_package_required")
     elif identity.get("architecture") != package.get("architecture"):
         blockers.append("package_device_architecture_mismatch")
+    story_available = (package.get("ok") is True
+                       and package.get("benign_story_proof_sha256") == STORY_PROOF_SHA256
+                       and package.get("captions_available") is True
+                       and package.get("scene_holds_available") is True)
+    fixture_status = "not_run" if story_available else "blocked_missing_fixture"
+    title = "Harbor story (benign demo)" if story_available else "Calm gradient (bundled)"
+    composition_action = (
+        "Use Harbor story (benign demo), keeping its sham-interval label visible. "
+        "Film opaque backing, image aspect ratio and readable captions while listening "
+        "for audio gaps. Repeat with each preset; these are practice holds, not detections."
+        if story_available else
+        "The bundled clip has audio but no captions or scheduled scene images. "
+        "Prepare and explicitly integrate a checked benign captioned fixture "
+        "with labelled sham intervals before this test. Film opaque backing, "
+        "image aspect ratio and readable captions while listening for audio gaps."
+    )
     return {
         "version": 1, "mode": "read-only-benign-hardware-preflight",
         "status": "blocked" if blockers else "ready_for_human_reviewed_benign_smoke",
@@ -206,14 +268,11 @@ def build_plan(inventory: dict, package: dict, *, checkpoint_b_confirmed: bool =
         "steps": [
             {"id": "benign_launch_seek", "status": "not_run",
              "action": "After root acknowledgement, install this exact package on the named "
-                       "physical target. Manually choose Calm gradient (bundled), then pause, "
+                       f"physical target. Manually choose {title}, then pause, "
                        "resume, rewind and seek with the remote. Record crashes and black screens."},
-            {"id": "caption_image_composition", "status": "blocked_missing_fixture",
-             "action": "The bundled clip has audio but no captions or scheduled scene images. "
-                       "Prepare and explicitly integrate a checked benign captioned fixture "
-                       "with labelled sham intervals before this test. Film opaque backing, "
-                       "image aspect ratio and readable captions while listening for audio gaps."},
-            {"id": "uncertainty_latch", "status": "blocked_missing_fixture",
+            {"id": "caption_image_composition", "status": fixture_status,
+             "action": composition_action},
+            {"id": "uncertainty_latch", "status": fixture_status,
              "action": "On that benign fixture, pause/resume and seek into/back into a hold. "
                        "The interrupted hold must stay black; a later clean hold may use its image."},
             {"id": "camera_timing", "status": "pending_human_checkpoint_e1",

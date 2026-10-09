@@ -1,120 +1,85 @@
 # Shot manifest
 
-Every shot [`docs/VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md) needs, how it is captured, and what it waits on. Shot numbers `S01` to `S18` are the same in both files.
+Capture plan for [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md), updated October 2. Shot IDs
+remain S01-S18. **No shot below is marked captured.** Existing logs, generated
+assets and tests are preparation evidence, not a completed native filming take.
+Raw footage belongs under gitignored `media/video/raw/`.
 
-The point of this file is to get everything that does not need a device captured before filming day, Oct 19 to 20, so that the only thing left then is pointing a camera at a screen.
+The app now exposes kid mode, title details, playback and the parent area through
+normal navigation. The remaining filming dependency is a visible, checked
+native build and observed behavior on its display. The current sandbox cannot
+establish screen visibility by interpreting a log or a black capture as success.
 
-**Nothing in this file has been captured yet.** The Status column says so for every row, and it is updated as each one lands.
+## Capture routes
 
----
-
-## 1. Which device, and the capture problem, stated once
-
-The rules let a Fire TV entry show the app on **a real Fire TV device or the Fire TV/Vega simulator**. The quote and the reasoning are in [`docs/VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md) under "The device the video shows", and in `docs/RUBRIC.md` section 2.2. So the ten camera shots can be filmed against the Vega Virtual Device, and the stick is an upgrade rather than a dependency.
-
-What does not change is the capture problem. The virtual device's screen cannot be captured on this machine. macOS screen grabs and QEMU's `screendump` both come back black, because the app draws on a GPU layer that neither capture sees. This is written up in `docs/ENVIRONMENT.md`, in `app/src/calmframes/uiCapture.ts`, in friction log entry 9 and in feature request 2. There is no workaround and none is coming before the deadline.
-
-So there is no screen recording route for any app shot, on either device. A television cannot be screen recorded and the virtual device comes back black. Every app shot is a camera pointed at a screen: a television with the stick in it, or the monitor the virtual device window is on.
-
-**One thing has to be settled before that plan is trusted.** Nobody has pointed a camera at the virtual device window and confirmed the app is visible in it. The capture APIs miss the GPU layer; whether a camera does too is a different question and it is unanswered. It is R00 below, it takes two minutes, and it decides whether any of this can happen without the stick.
-
-**And one thing has to be built before any of it matters.** Kid mode is not reachable in the app as committed: `app/src/screens/PlayerScreen.tsx` reads `route.params.guarded` and nothing in `app/src` sets it, while `KidHomeScreen` and `ParentAreaScreen` are imported only by tests. Mock judge 1 found it and [`docs/MOCK_JUDGE_1.md`](MOCK_JUDGE_1.md) writes it up. **Nine of the ten camera shots are shots of kid mode, so all nine are blocked on the app lane wiring those screens into the navigation stack.** That is not this lane's fix, and it is the first thing to ask about. The tenth, S01, is the home screen and the terminal, and it can be filmed without it.
-
-## 2. The four routes
-
-| Route | What it is | Waits on |
+| Route | Use | Boundary |
 |---|---|---|
-| **A. Camera on the screen** | A phone or camera pointed at the screen the app is running on: a television with the stick in it, or the monitor showing the virtual device window. The only way to show the app running. | A device, and R00 if that device is the virtual one. The meter calibration for S04 and S06 |
-| **B. The app's own capture path** | `app/src/calmframes/uiCapture.ts`. The app reports the colours it paints, screen by screen and transition by transition. **Not a photograph.** It never appears in the cut | Nothing for the offline leg. The Vega Virtual Device for the on-device leg |
-| **C. Desktop capture** | A screen recording of a terminal, a browser or an editor on this machine | Nothing |
-| **D. Generated from results** | A figure drawn from a committed results file or a signed flash map | Nothing |
+| **A. Native camera take** | Camera pointed at the television or monitor showing the actual app. A directly captured native display can be used if its correctness is first verified. | Historical macOS/QEMU captures missed the GPU layer. Confirm the chosen route with a visible current app. Label the simulator when used. |
+| **B. Desktop recording** | Terminal, editor and local check output. | This documents tools; it does not prove the app was visible on a device. |
+| **C. Static evidence figure** | Readable signed schedule, result table or integration excerpt. | Clearly label sham schedules, historical measurements and local mutation tests. |
 
-### What route B is for, and what it is not for
+The app's color-frame capture path is excluded from the cut. It measures colors
+declared by UI components, not the complete rendered screen. It cannot stand in
+for a screenshot, caption-composition take or hardware timing measurement.
 
-Route B exists so that every screen the video needs can be checked before anyone films it: that it is the right screen, that it paints the colours it is supposed to, and that the transition between two of them does not itself flash. That is the whole job.
+## Shot inventory
 
-It is **not** a screenshot and it must never be cut into the video or into a still. What it produces is a list of painted colours per screen, which `app/tools/ui_flashmap.mjs` turns into blocks of colour so flashmap can measure the transitions. A viewer shown one of those would reasonably think they were looking at the app. They would not be. That is the "nothing mocked is shown as real" rule, and route B is the most tempting way to break it.
+| Shot | Script time | Actual content | Route | Prerequisite and truth check | Capture destination | Status |
+|---|---|---|---|---|---|---|
+| **S01** | 0:00-0:10 | Actual app beside `vega device info --device <target>` in one frame | A | Explicit connected target and matching checked package. Name the simulator if used. | `media/video/raw/S01_device.mov` | not captured |
+| **S02** | 0:10-0:22 | Checked kid shelf, focused Harbor benign-demo card | A | First-run setup completed. No patient or child participation is required. | `media/video/raw/S02_shelf.mov` | not captured |
+| **S03** | 0:10-0:22 | Harbor details, Play and the native practice countdown | A | Fixed Extra cautious plan and `Benign demo: practice holds, no flashing` label visible. | `media/video/raw/S03_countdown.mov` | not captured |
+| **S04** | 0:22-0:47 | Unbroken Harbor take through scene holds, moving captions and gentle tone | A | Select `English practice captions`; observe composition and audio directly. No meter or physical timing claim. | `media/video/raw/S04_hold_captions.mov` | not captured |
+| **S05** | 0:47-0:58 | Signed sham schedule and bound Harbor source identity | C | Derive from packaged benign-story maps. Label synthetic intervals and do not imply actual flashes. | `media/video/raw/S05_signed_practice.png` | not captured |
+| **S06** | 0:58-1:12 | Remote seek into a practice hold, pause/resume and opaque fallback | A | Real D-pad interaction on the same demo. Alexa is optional only after verified on that target. | `media/video/raw/S06_seek.mov` | not captured |
+| **S07** | 1:12-1:28 | Locked parent area, then successful PIN gate | A | Conceal entered PIN. Opening after failed storage is not success. | `media/video/raw/S07_parent_gate.mov` | not captured |
+| **S08** | 1:12-1:28 | Household preset and room controls | A | Do not claim the benign demo's fixed preparation changes with household settings. No staged hidden-count increase. | `media/video/raw/S08_settings.mov` | not captured |
+| **S09** | 1:28-1:38 | Relaunch without data reset, same selected profile/settings and locked parent area | A | Directly observe persistence before claiming it. Fresh logs alone do not establish durability. | `media/video/raw/S09_restart.mov` | not captured |
+| **S10** | 1:38-2:00 | Owned Harbor normal preparation and ready receipt | B | Use neutral-caption source from `eval.prepare_owned_harbor`; no synthetic detector intervals. Show the actual run, with waiting time clearly edited. | `media/video/raw/S10_prepare.mov` | not captured |
+| **S11** | 1:38-2:00 | Python export check and Node exact-byte build gate | B | Show actual commands and distinct source/rendition hashes. No key material in the recording. | `media/video/raw/S11_export.mov` | not captured |
+| **S12** | 1:38-2:00 | Distinct `Harbor story (prepared locally)` on shelf and in playback | A | Fresh build containing the checked export. Clean imported source has no detected cover interval and does not carry scene images. | `media/video/raw/S12_prepared_shelf.mov` | not captured |
+| **S13** | 2:00-2:13 | Analyzer command or a real artifact-tampering rejection test | B | No hazardous preview. Any deliberate mutation is explicitly labelled a local negative test. | `media/video/raw/S13_local_check.mov` | not captured |
+| **S14** | 2:00-2:13 | CI workflow source and local verification output | B | Hosted CI startup is account-blocked; do not show its red status as an analyzer rejection or invent a PR run. | `media/video/raw/S14_workflow.mov` | not captured |
+| **S15** | 2:13-2:26 | Hook integration excerpt and offline consumer check | B or C | State that independent adoption has not been observed. Keep text readable without scrolling. | `media/video/raw/S15_hook.mov` | not captured |
+| **S16** | 2:26-2:43 | Current results, weaker near-limit performance and unmeasured rows | B | Use current README and committed results. No physical-TV claim inferred from software timing. | `media/video/raw/S16_results.mov` | not captured |
+| **S17** | 2:26-2:43 | Actual `eval/readme_sync.py --check` output | B | Run against the same text used in the final cut. Passing drift checks does not independently validate a metric. | `media/video/raw/S17_drift_check.mov` | not captured |
+| **S18** | 2:43-2:53 | Calm native app and closing product claim | A | Approved wording and accurate repository visibility. No seizure-prevention claim. | `media/video/raw/S18_close.mov` | not captured |
 
-Route B has two legs:
+The two Harbor titles must remain distinct in the edit. The benign demo has
+signed scene images and synthetic practice intervals. The normal prepared import
+uses the canonical opaque plan, genuine analysis and neutral story captions.
+Its clean source cannot demonstrate hiding a detected hazard.
 
-- **Offline leg.** `npm run ui:capture` in `app/` renders every screen in `ALL_UI_FRAMES` (`app/src/calmframes/uiFrames.ts`) with the real components and writes `app/build/ui-capture/ui-frames.json`. No device is involved, so this can run any time the tree is quiet. It answers "does this screen exist and paint what it says it paints".
-- **On-device leg.** The app running on the virtual device posts its own timeline back to the machine that started it, through `postUiCapture`. This is the one that proves the real app on the real OS visited those states in that order. **It needs the virtual device, which is busy.** Do not start, stop or use the device until the main session says it is free.
+## Rehearsal and evidence checklist
 
-## 3. The manifest
+| ID | Check | Command or action | What it proves |
+|---|---|---|---|
+| **R00** | Display visibility | Observe the app on the selected target and test the intended camera/capture route. | The native app can actually be seen in the planned take. Still pending direct observation. |
+| **R01** | Prepared asset delivery | `.venv/bin/python -m pipeline.packaged_library check --output app/assets/raw/prepared-library`, then `cd app && node tools/check_prepared_library.mjs` | The packaged namespace matches its immutable manifests and compiled catalog. It does not prove playback. |
+| **R02** | Benign native preflight | `.venv/bin/python -m eval.benign_native_smoke --device <target> --vpkg <matching-debug-package>` | Read-only target, package and benign-fixture checks. Physical targets retain their separate checkpoint. |
+| **R03** | Native journey and restart | Add `--execute --restart` to R02 in a permitted device session; operate the visible app as prompted. | Fresh software playback events only. Record image/caption composition and saved-state observations separately. Never reset data to manufacture a pass. |
+| **R04** | Owned import reproducibility | `.venv/bin/python -m eval.prepare_owned_harbor --workdir build/video-import-proof --output build/video-import-export` | Actual analysis, verification, captions and immutable export from owned non-flashing media. A temporary signing key is deleted. This isolated rehearsal output does not alter the app catalog. |
+| **R05** | UI color checks | `cd app && npm run ui:capture && npm run ui:flashmap` when the tree is quiet | Component color-frame checks. No screen composition, camera exposure or physical timing claim. |
+| **R06** | Final video gate | `eval/check_video.sh <final-file> --max-seconds 179` | The finished cut measures within the chosen flash and duration checks. Exit zero is required before upload. |
 
-`Route` is from the table above. `Waits on` is what stops it being captured today.
+Use a fresh work directory for R04. The proof signer is temporary, and rerunning
+against an old workspace is not a key-rotation workflow. Only a separately
+reviewed export into the app assets followed by a new native build changes S12.
 
-| Shot | Beat | What | Route | Waits on | Where it comes from | Lands in | Status |
-|---|---|---|---|---|---|---|---|
-| **S01** | 1 | The device running the app, and a terminal running `vega device info` in the same frame | A + C in one frame | A device, plus R00 on the virtual one | Camera. The terminal is in shot, not composited | `media/video/raw/S01_*.mov` | not captured |
-| **S02** | 2 | Close on the kid mode row, a hand on the remote, no faces | A | **Kid mode wired up.** A device, plus R00. Consent | Camera | `media/video/raw/S02_*.mov` | not captured |
-| **S03** | 3 | The countdown card, its own countdown running to zero | A | **Kid mode wired up.** A device, plus R00. A verified title with a flagged span | Camera | `media/video/raw/S03_*.mov` | not captured |
-| **S04** | 4 | The covered picture with captions running, the meter beside the screen at 0, sound audible, one unbroken take | A | **Kid mode wired up.** Meter calibration. **Prefer the stick**, see the meter note in the script | Camera, with `eval/meter.py run` live on a second screen inside the frame | `media/video/raw/S04_*.mov` | not captured |
-| **S05** | 4 | The luminance trace for the same seconds, flagged span marked | D | Nothing | `eval/plots.py` over the demo title, with the flagged span drawn from its signed map | `results/plots/demo_title_trace.png` | not captured |
-| **S06** | 5 | The Alexa skip landing inside the flagged part, still covered, meter still 0 | A | **Kid mode wired up.** Meter calibration. **Prefer the stick**, same note | Camera, same rig as S04 | `media/video/raw/S06_*.mov` | not captured |
-| **S07** | 6 | The parent area PIN entry | A | **The parent area reachable from the app.** A device, plus R00 | Camera. Use a throwaway PIN for the take, not the one in the release notes | `media/video/raw/S07_*.mov` | not captured |
-| **S08** | 6 | Household settings, and the hidden count going up when the room changes | A | **The parent area reachable from the app.** A device, plus R00. A title whose count actually moves | Camera | `media/video/raw/S08_*.mov` | not captured |
-| **S09** | 7 | A card press, a D-pad seek and a voice command, same title, no reload | A | **Kid mode wired up.** A device, plus R00 | Camera | `media/video/raw/S09_*.mov` | not captured |
-| **S10** | 8 | A title going through the pipeline | C | Nothing | Terminal recording of the real pipeline run | `media/video/raw/S10_pipeline.mov` | not captured |
-| **S11** | 8 | `verify` refusing a second title, reason printed | C | Nothing | Terminal recording. Use a title verify really refuses | `media/video/raw/S11_verify_refuses.mov` | not captured |
-| **S12** | 8 | The kid mode row with the refused title absent | A | **Kid mode wired up.** A device, plus R00 | Camera | `media/video/raw/S12_*.mov` | not captured |
-| **S13** | 9 | `python -m flashmap check` exiting 1 with its segment list | C | Nothing | Terminal recording | `media/video/raw/S13_flashmap_check.mov` | not captured |
-| **S14** | 9 | A pull request adding a flashing asset, our Action red, job summary open | C | A scratch repository with the workflow in it | Browser recording | `media/video/raw/S14_action_red.mov` | not captured |
-| **S15** | 10 | The hook diff, still, readable in one look | C | Nothing | Screen capture of `docs/INTEGRATION_DIFF.md` or the diff itself in an editor | `media/video/raw/S15_hook_diff.png` | not captured |
-| **S16** | 11 | The README results tables, scrolled to "Not measured yet" | C | Nothing | Screen recording of the rendered README | `media/video/raw/S16_results_tables.mov` | not captured |
-| **S17** | 11 | `python eval/readme_sync.py --check` passing | C | Nothing | Terminal recording | `media/video/raw/S17_readme_sync.mov` | not captured |
-| **S18** | 12 | The screen, calm, playing, end card over it | A | **Kid mode wired up.** A device, plus R00 | Camera | `media/video/raw/S18_*.mov` | not captured |
+## Order of work
 
-**Ten shots are a camera on a screen. Eight need no device at all.** The eight are S05, S10, S11, S13, S14, S15, S16 and S17, all on route C or D. S14 needs a scratch repository set up first. The other seven are ready to capture as soon as a lane has time.
+1. Keep source, export and native build checks green before recording. Desktop
+   shots S10, S11, S13-S17 can be captured without a visible target.
+2. Confirm R00. Then film S01-S04 and S06 in one native session, with the benign
+   label and external captions visible.
+3. Film S07-S09 without clearing application data. If persistence is not
+   observed, leave S09 pending and remove the durability line from any draft cut.
+4. Film the distinct prepared title for S12, then S18. Keep original audio where
+   it demonstrates continuity and avoid covering all of it with narration.
+5. Time the English read and final edit. Run R06, preserve its result, and check
+   the eventual public link while logged out. Nothing in this manifest publishes
+   a video, opens a PR or sends feedback to another person.
 
-Of the ten, eight can be filmed against the virtual device once R00 says a camera can see it. S04 and S06 are the two that should still prefer the stick, because of the meter calibration.
-
-`media/` is gitignored, so raw footage and the cut never enter the repository. `results/plots/` is tracked, so S05 is committed along with everything else that gets published.
-
-## 4. The rehearsal captures, which are not shots
-
-These do not appear in the video. They are how every screen is checked before a camera is pointed at it, so that filming day finds no surprises.
-
-| # | What | Route | Waits on | Command |
-|---|---|---|---|---|
-| **R00** | **Can a camera see the app in the virtual device window at all?** Eight of the ten camera shots depend on the answer | A, rehearsed | **The virtual device, which is busy.** Ask the main session first | Put the app on the device, point a phone at the monitor, look. Two minutes. Record the answer here |
-| **R01** | Every screen in `ALL_UI_FRAMES` renders, and paints the colours it declares | B, offline leg | Nothing, but the tree has to be quiet: this writes `app/build/ui-capture/` and another lane's jest run would clash | `cd app && npm run ui:capture` |
-| **R02** | No screen or transition in that list breaks the flash thresholds | B, offline leg | R01 | `cd app && npm run ui:flashmap` |
-| **R03** | The real app on the real OS visits those states in that order | B, on-device leg | **The virtual device, which is busy.** Ask the main session first | A device session with a capture sink, the same way the timing log is posted |
-| **R04** | The meter reads zero over a covered span and non-zero either side | A, rehearsed | Stick, meter calibration | `eval/meter.py chart`, film it, `eval/meter.py calibrate`, then `eval/meter.py run` |
-
-The screens the video actually needs, by their names in `ALL_UI_FRAMES`:
-
-| Shot | Screen name |
-|---|---|
-| S02, S12 | `kid-home`, `kid-home-focused` |
-| S03 | `player-clear-countdown` |
-| S04, S06 | `player-covered-covering`, then `player-clear-after` on the tail |
-| S07 | `parent-area-locked` |
-| S08 | `parent-area-open` |
-| S09 | `title-details`, plus the player states above |
-
-R01 covers all of them in one run. Anything in that list that does not render, or renders the wrong thing, is a problem to find now rather than with a camera in hand.
-
-## 5. Order of work
-
-**Now, needs nothing.** S05, S10, S11, S13, S15, S16, S17, and R01 and R02 when the tree is quiet.
-
-**Now, needs one setup step.** S14: a scratch repository with `flashmap/examples/flash-check.yml` in it and a pull request that adds a flashing asset. Check the job summary renders no thumbnail of the asset before recording, and do not open the pull request's Files tab on camera, because GitHub previews images there.
-
-**Blocked on the app lane, and it comes first.** Kid mode has to be reachable from the app's own navigation before nine of the ten camera shots exist to be filmed. Ask about it before planning a filming day.
-
-**The moment the virtual device is free.** R00. Ask the main session first. It is two minutes and it decides whether eight of the ten camera shots can be filmed without the stick. Then R03, which is a confidence check rather than a blocker.
-
-**Stick day, about Sep 20.** R04, the meter calibration. Without it the meter in S04 and S06 is uncalibrated, and the script says what to do in that case rather than pretending otherwise.
-
-**Filming day, Oct 19 to 20.** The ten camera shots, in this order so the rig moves as little as possible: S01, then S02, S03, S04, S06 as one continuous session with the meter in frame, then S07, S08, S09, S12, then S18 last while the picture is already calm.
-
-## 6. Hard rules for this lane
-
-- **Never cut a route B render into the video, or into a still, or into the README.** It is a block of colour, not the app. Label it as a frame record wherever it appears in a document.
-- **Never open a `HAZARD_` file in a player** to find a shot. S05 is a trace drawn by a decoder, and that is the only way any of that material is looked at.
-- **Never present a black virtual-device screen grab as the app.** The capture is black because the capture is broken, and a viewer cannot tell the difference between that and a cover working.
-- **If the video is shot on the virtual device, name it on screen.** The rules allow the simulator, so there is nothing to hide, and a viewer who works it out for themselves trusts everything else less.
-- **Film only inside our own app.** The Fire TV home screen shows other companies' app tiles.
-- **`vega device list` appears in no shot.** It crashes. `vega device info` is the command in S01.
+No calibrated meter, physical-TV lead time, patient outcome, external adoption
+or hosted CI result is required as a substitute for missing native footage.
+Each has its own evidence requirement; software tests do not supply it.

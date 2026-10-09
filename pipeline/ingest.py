@@ -52,11 +52,14 @@ from .ffmpegtool import require_tools
 from .flashmap_adapter import FlashmapAdapter, iter_presets, tail_to_hold_ms
 from .hashing import fingerprint, sha256_file
 from .hideplan import (
+    APP_PLAYBACK_MAPS,
+    APP_PLAYBACK_RECIPE,
     DEFAULT_CALM_MARGIN_MS,
     DEFAULT_GUARD_BAND_MS,
     DEFAULT_MIN_COVER_MS,
     HidePlan,
     build_hide_plan,
+    build_app_playback_plan,
     total_covered_ms,
     union_intervals,
 )
@@ -119,6 +122,7 @@ class IngestOptions:
     skip_verify: bool = False
     title: str | None = None
     scene_holds: bool = True
+    playback_compatible: bool = False
 
 
 @dataclass
@@ -198,6 +202,17 @@ def ingest_title(
     options = options or IngestOptions()
     adapter = adapter or FlashmapAdapter()
     presets = iter_presets(options.presets)
+    if options.playback_compatible:
+        required = {name for preset in presets for name in APP_PLAYBACK_MAPS[preset]}
+        if not required.issubset(presets):
+            raise PipelineError("App-compatible preparation requires WCAG and Broadcast maps together.")
+    # Use one explicit room for every map in the app recipe. Otherwise the
+    # legacy extra-cautious preset silently picks a different analysis room.
+    diag_in = options.diag_in if options.diag_in is not None else (85.0 if options.playback_compatible else None)
+    distance_ft = options.distance_ft if options.distance_ft is not None else (4.0 if options.playback_compatible else None)
+    # Union-only intervals may have no segment in one map. Do not attach scene
+    # descriptors that imply otherwise; verified global stills remain available.
+    scene_holds_enabled = options.scene_holds and not options.playback_compatible
     require_tools()
 
     source = Path(source).resolve()
@@ -257,8 +272,8 @@ def ingest_title(
                 source,
                 profile=preset,
                 out_path=layout.map_path(preset),
-                diag_in=options.diag_in,
-                distance_ft=options.distance_ft,
+                diag_in=diag_in,
+                distance_ft=distance_ft,
                 key=options.key,
             )
             return {"segments": doc.violation_count, "signed": doc.is_signed}
@@ -268,8 +283,8 @@ def ingest_title(
             {
                 "sha": sha,
                 "preset": preset,
-                "diag_in": options.diag_in,
-                "distance_ft": options.distance_ft,
+                "diag_in": diag_in,
+                "distance_ft": distance_ft,
                 "signed": bool(options.key),
             },
             [layout.map_path(preset)],
@@ -284,7 +299,10 @@ def ingest_title(
             from .flashmap_adapter import load_map
 
             doc = load_map(layout.map_path(preset))
-            plan = build_hide_plan(
+            plan = build_app_playback_plan(
+                {name: load_map(layout.map_path(name)) for name in APP_PLAYBACK_MAPS[preset]},
+                source_sha256=sha, duration_ms=duration_ms, preset=preset,
+            ) if options.playback_compatible else build_hide_plan(
                 doc,
                 source_sha256=sha,
                 duration_ms=duration_ms,
@@ -309,10 +327,13 @@ def ingest_title(
                 "min_cover_ms": options.min_cover_ms,
                 "allow_dim": options.allow_dim,
                 "duration_ms": duration_ms,
+                "playback_recipe": APP_PLAYBACK_RECIPE if options.playback_compatible else None,
             },
             [layout.plan_path(preset)],
             do_plan,
-            depends_on=[f"analyze:{preset}", "probe"],
+            depends_on=[*[f"analyze:{name}" for name in (
+                APP_PLAYBACK_MAPS[preset] if options.playback_compatible else (preset,)
+            )], "probe"],
         )
         if preset not in plans:
             plans[preset] = HidePlan.from_dict(json.loads(layout.plan_path(preset).read_text()))
@@ -400,7 +421,7 @@ def ingest_title(
 
         scene_images = None
         scene_bytes = None
-        if options.scene_holds and options.key:
+        if scene_holds_enabled and options.key:
             scene_outputs = [layout.scene_manifest(preset)]
 
             def do_scenes(preset: str = preset, plan: HidePlan = plan) -> dict:
@@ -649,7 +670,10 @@ def ingest_title(
             "cover_still_from": json.loads(layout.still_manifest_path.read_text()).get(
                 "from", STILL_FROM_SOURCE
             ),
-            "scene_holds": bool(options.scene_holds and options.key),
+            "scene_holds": bool(scene_holds_enabled and options.key),
+            **({"playback_recipe": APP_PLAYBACK_RECIPE, "analysis_room": {
+                "diag_in": diag_in, "distance_ft": distance_ft,
+            }} if options.playback_compatible else {}),
         },
     )
     write_entry(layout.entry_path, entry)
@@ -675,6 +699,7 @@ def ingest_title(
         "pub": options.pub,
         "public_key_bytes": sha256_file(options.pub) if options.pub and Path(options.pub).is_file() else None,
         "calm_margin_ms": options.calm_margin_ms,
+        "playback_recipe": APP_PLAYBACK_RECIPE if options.playback_compatible else None,
         # An unchanged filename or a cached report is not evidence that the
         # same map, image or encoded output is still on disk.
         "artifact_bytes": {
@@ -693,7 +718,7 @@ def ingest_title(
         },
         "scene_assets": {
             preset: scene_identity(layout, preset)
-            for preset in presets if options.scene_holds and options.key
+            for preset in presets if scene_holds_enabled and options.key
         },
     }
     parents = {
@@ -732,8 +757,9 @@ def ingest_title(
         presets=presets,
         adapter=adapter,
         pub_key=options.pub,
-        diag_in=options.diag_in,
-        distance_ft=options.distance_ft,
+        diag_in=diag_in,
+        distance_ft=distance_ft,
+        playback_compatible=options.playback_compatible,
         calm_margin_ms=options.calm_margin_ms,
         rerender_cover_model=False,
     )
@@ -794,6 +820,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--force", action="store_true", help="redo finished work")
     parser.add_argument("--no-scene-holds", action="store_true",
                         help="use the legacy global still and black or dim live cover")
+    parser.add_argument("--playback-compatible", action="store_true",
+                        help="use the app's fixed profile unions, timing and opaque fallback")
     parser.add_argument(
         "--skip-verify",
         action="store_true",
@@ -822,6 +850,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         force=args.force,
         skip_verify=args.skip_verify,
         scene_holds=not args.no_scene_holds,
+        playback_compatible=args.playback_compatible,
     )
 
     adapter = FlashmapAdapter()

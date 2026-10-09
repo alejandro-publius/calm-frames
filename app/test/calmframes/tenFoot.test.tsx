@@ -42,6 +42,7 @@ import { Card, cardAt } from '../../src/calmframes/cards';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
 import FirstRunScreen from '../../src/calmframes/FirstRunScreen';
+import HouseholdStorageScreen from '../../src/calmframes/HouseholdStorageScreen';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
@@ -187,6 +188,10 @@ interface Case {
 }
 
 const CASES: Case[] = [
+  { name: 'household-loading', element: <HouseholdStorageScreen failed={false} onRetry={jest.fn()} />,
+    background: CALM_COLORS.BACKGROUND, screen: true },
+  { name: 'household-error', element: <HouseholdStorageScreen failed onRetry={jest.fn()} />,
+    background: CALM_COLORS.BACKGROUND, screen: true },
   {
     name: 'first-run-pin',
     element: <FirstRunScreen onDone={jest.fn()} newSalt={() => 'seed'} rounds={4} />,

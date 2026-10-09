@@ -42,10 +42,12 @@ conformance-design: ## write the clip manifest and its ground truth. Fast, no vi
 	$(PY) $(EVAL_DIR)/conformance/design.py
 
 conformance: $(RESULTS)/conformance_design.json ## generate, analyse and delete clips. Resumable. LIMIT=n for a sample
+	$(PY) $(EVAL_DIR)/conformance_resume_guard.py
 	$(PY) $(EVAL_DIR)/conformance/generate_analyze.py --workers $(CONFORMANCE_WORKERS) \
 		$(if $(LIMIT),--limit $(LIMIT),)
 
 conformance-full: $(RESULTS)/conformance_design.json ## the whole committed design, hours not minutes, then the tables
+	$(PY) $(EVAL_DIR)/conformance_resume_guard.py
 	$(PY) $(EVAL_DIR)/conformance/generate_analyze.py --workers $(CONFORMANCE_WORKERS)
 	$(MAKE) -f $(EVAL_DIR)/reproduce.mk conformance-report baselines-table reproduce
 

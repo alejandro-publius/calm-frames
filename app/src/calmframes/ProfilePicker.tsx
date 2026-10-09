@@ -63,6 +63,7 @@ export interface ProfilePickerProps {
    */
   chosenWord?: string;
   testID?: string;
+  disabled?: boolean;
 }
 
 const ProfilePicker = ({
@@ -73,6 +74,7 @@ const ProfilePicker = ({
   chosenLine,
   chosenWord = 'watching',
   testID = 'profile-picker',
+  disabled = false,
 }: ProfilePickerProps) => {
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
 
@@ -94,12 +96,13 @@ const ProfilePicker = ({
           const focused = focusedId === profile.id;
           return (
             <TouchableOpacity
+              disabled={disabled || undefined}
               key={profile.id}
               testID={`${testID}-${profile.id}`}
               accessibilityRole="radio"
               // checked is what a radio carries. selected stays beside it
               // because the rest of the app reads that way today.
-              accessibilityState={{ checked: chosen, selected: chosen }}
+              accessibilityState={{ checked: chosen, selected: chosen, ...(disabled ? { disabled: true } : {}) }}
               accessibilityLabel={`${profile.name}${chosen ? `, ${chosenWord}` : ''}`}
               activeOpacity={1}
               onFocus={() => setFocusedId(profile.id)}

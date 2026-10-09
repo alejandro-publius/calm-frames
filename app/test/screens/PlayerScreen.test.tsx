@@ -20,6 +20,10 @@ import React from 'react';
 // babel-jest hoists the jest.mock calls below above this import, so the player
 // is loaded with the stand ins already in place.
 import PlayerScreen from '../../src/screens/PlayerScreen';
+import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
+import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
+
+const mockPreBuffer = jest.fn();
 
 jest.mock('../../src/w3cmedia/mediacontrols/VideoPlayerUI', () => 'VideoPlayerUI');
 jest.mock('../../src/services/bif/bifService', () => ({
@@ -50,6 +54,7 @@ jest.mock('../../src/utils/VideoHandler', () => ({
     }
 
     preBufferVideo() {
+      mockPreBuffer();
       this.setInitialized(true);
     }
 
@@ -83,6 +88,17 @@ function renderPlayer(params: Record<string, unknown>) {
 }
 
 describe('the player with nothing to check', () => {
+  beforeEach(() => mockPreBuffer.mockClear());
+
+  it('rejects substituted prepared media before initializing the player, even with a harness flag', () => {
+    const title = packagedLibrary.titles(DEFAULT_SETTINGS)[0];
+    renderPlayer({ data: { ...data, id: title.id, uri: 'https://example.invalid/substituted.mp4' },
+      guarded: { sha256: title.sha256, maps: title.maps, settings: DEFAULT_SETTINGS },
+      coverTest: 'layering' });
+    expect(mockPreBuffer).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('kepler-video-surface-view')).toBeNull();
+    expect(screen.getByTestId('calm-card-title').props.children).toBe('Not checked yet');
+  });
   it('keeps the picture hidden and says why', () => {
     renderPlayer({});
     expect(screen.getByTestId('calm-frames-cover')).toBeTruthy();

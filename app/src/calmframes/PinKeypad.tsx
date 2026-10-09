@@ -27,6 +27,7 @@ export interface PinKeypadProps {
   onDigit: (digit: string) => void;
   /** Where the first press should land, for the D-pad. */
   autoFocus?: boolean;
+  disabled?: boolean;
   /**
    * What the screen calls itself.
    *
@@ -43,6 +44,7 @@ const PinKeypad = ({
   entered,
   onDigit,
   autoFocus = true,
+  disabled = false,
   idPrefix,
 }: PinKeypadProps) => {
   const [focusedDigit, setFocusedDigit] = React.useState<string | null>(null);
@@ -62,6 +64,8 @@ const PinKeypad = ({
             testID={`${idPrefix}-key-${digit}`}
             accessibilityRole="button"
             accessibilityLabel={digit}
+            accessibilityState={{ disabled }}
+            disabled={disabled || undefined}
             activeOpacity={1}
             hasTVPreferredFocus={autoFocus && digit === '1'}
             onFocus={() => setFocusedDigit(digit)}

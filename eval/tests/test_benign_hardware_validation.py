@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import io
 import json
 import subprocess
@@ -38,16 +39,28 @@ def package(tmp_path):
         # Fake native bytes are used only to test the archive membership guard.
         "lib/armv7/com.amazon.keplerscript.carousel.so": b"synthetic-not-a-native-library",
     }
-    def write(overrides=None):
+    def write(overrides=None, extra_members=()):
         data = dict(members)
         data.update(overrides or {})
         with tarfile.open(destination, "w:gz") as archive:
-            for name, value in data.items():
+            for name, value in [*data.items(), *extra_members]:
                 if value is not None:
                     member = tarfile.TarInfo(name)
                     member.size = len(value)
                     archive.addfile(member, io.BytesIO(value))
         return destination
+    return write
+
+
+@pytest.fixture
+def story_package(package):
+    members = {
+        hardware.STORY_PREFIX + name:
+            (hardware.REPO / "app" / hardware.STORY_PREFIX / name).read_bytes()
+        for name in [*hardware.STORY_ASSET_NAMES, "verification.json"]
+    }
+    def write(overrides=None, extra_members=()):
+        return package({**members, **(overrides or {})}, extra_members=extra_members)
     return write
 
 
@@ -67,6 +80,80 @@ def test_exact_bundled_bytes_allow_only_preflight_not_physical_proof(package, ph
     assert steps["uncertainty_latch"] == "blocked_missing_fixture"
     assert steps["benign_launch_seek"] == "not_run"
     assert steps["camera_timing"] == "pending_human_checkpoint_e1"
+
+
+def test_exact_story_assets_allow_composition_steps_but_never_physical_proof(
+        story_package, physical):
+    checked = hardware.inspect_package(story_package())
+    assert checked["ok"] is True
+    assert checked["benign_story_proof_sha256"] == hardware.STORY_PROOF_SHA256
+    assert checked["captions_available"] is True
+    assert checked["scene_holds_available"] is True
+    assert checked["benign_story_uses_sham_intervals"] is True
+    plan = hardware.build_plan(physical, checked, checkpoint_b_confirmed=True)
+    assert plan["status"] == "ready_for_human_reviewed_benign_smoke"
+    steps = {item["id"]: item for item in plan["steps"]}
+    assert steps["caption_image_composition"]["status"] == "not_run"
+    assert "practice holds, not detections" in steps["caption_image_composition"]["action"]
+    assert steps["uncertainty_latch"]["status"] == "not_run"
+    assert steps["camera_timing"]["status"] == "pending_human_checkpoint_e1"
+    for key in ("physical_tv_validated", "composition_tested", "gate_1_passed",
+                "installed", "launched"):
+        assert plan[key] is False
+
+
+@pytest.mark.parametrize("name", sorted(hardware.STORY_ASSET_NAMES | {"verification.json"}))
+@pytest.mark.parametrize("replacement", [None, b"changed-unreviewed-story-bytes"])
+def test_absent_or_changed_story_member_rejects_entire_package(
+        story_package, name, replacement):
+    checked = hardware.inspect_package(story_package({hardware.STORY_PREFIX + name: replacement}))
+    assert checked["ok"] is False
+
+
+def test_story_proof_cannot_authorize_itself_with_rewritten_hashes(story_package):
+    proof = json.loads((hardware.REPO / "app" / hardware.STORY_PROOF_MEMBER).read_text())
+    # A locally fabricated success record must not authorize different bytes.
+    replacement = b"not-the-reviewed-caption"
+    proof["assets_sha256"]["harbor.vtt"] = hashlib.sha256(replacement).hexdigest()
+    proof["production_pipeline_passed"] = True
+    checked = hardware.inspect_package(story_package({
+        hardware.STORY_PREFIX + "harbor.vtt": replacement,
+        hardware.STORY_PROOF_MEMBER: json.dumps(proof).encode(),
+    }))
+    assert checked["ok"] is False
+
+
+@pytest.mark.parametrize("extra", ["unreviewed.mp4", "harbor.vtt"])
+def test_extra_or_duplicate_story_archive_members_are_rejected(story_package, extra):
+    path = story_package(extra_members=[(hardware.STORY_PREFIX + extra, b"unreviewed")])
+    assert hardware.inspect_package(path)["ok"] is False
+
+
+def test_claimed_caption_and_hold_availability_without_reviewed_proof_stays_unavailable(
+        package, physical):
+    checked = hardware.inspect_package(package())
+    checked.update(captions_available=True, scene_holds_available=True)
+    plan = hardware.build_plan(physical, checked, checkpoint_b_confirmed=True)
+    assert plan["steps"][1]["status"] == "blocked_missing_fixture"
+    assert plan["steps"][2]["status"] == "blocked_missing_fixture"
+
+
+def test_failed_package_cannot_offer_composition_steps(story_package, physical):
+    checked = hardware.inspect_package(story_package())
+    checked["ok"] = False
+    plan = hardware.build_plan(physical, checked, checkpoint_b_confirmed=True)
+    assert plan["steps"][1]["status"] == "blocked_missing_fixture"
+    assert plan["steps"][2]["status"] == "blocked_missing_fixture"
+
+
+@pytest.mark.parametrize("field", ["captions_available", "scene_holds_available"])
+@pytest.mark.parametrize("value", [False, "true"])
+def test_story_availability_requires_confirmed_capabilities(story_package, physical, field, value):
+    checked = hardware.inspect_package(story_package())
+    checked[field] = value
+    plan = hardware.build_plan(physical, checked, checkpoint_b_confirmed=True)
+    assert plan["steps"][1]["status"] == "blocked_missing_fixture"
+    assert plan["steps"][2]["status"] == "blocked_missing_fixture"
 
 
 @pytest.mark.parametrize("field,value,blocker", [

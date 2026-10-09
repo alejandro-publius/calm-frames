@@ -1,0 +1,183 @@
+{
+  "color": {
+    "analysis_height": 108,
+    "analysis_width": 192,
+    "luminance_model": "wcag-relative-luminance-srgb",
+    "matrix": "bt601",
+    "matrix_source": "inferred-sd-bt601",
+    "pixel_format": "yuv420p",
+    "range": "limited",
+    "range_source": "default-limited",
+    "transfer_tag": "2"
+  },
+  "created_utc": "2026-10-02T07:23:51Z",
+  "demonstration": {
+    "label": "Benign demonstration: scheduled practice holds, no flashing.",
+    "original_measured_segment_count": 0,
+    "synthetic_intervals": true
+  },
+  "generator": {
+    "name": "flashmap",
+    "version": "1.0.0"
+  },
+  "pattern_exemptions": [],
+  "picture": {
+    "coded": {
+      "height": 360,
+      "left": 0,
+      "top": 0,
+      "width": 640
+    },
+    "frame_height": 108,
+    "frame_width": 192,
+    "height": 108,
+    "left": 0,
+    "letterbox": false,
+    "measured_on": "picture",
+    "note": "Area fractions in this map were measured on the picture rectangle above, not on the full coded frame. Letterbox and pillarbox bars were removed first.",
+    "pillarbox": false,
+    "source": "detected",
+    "top": 0,
+    "width": 192
+  },
+  "profile": {
+    "area_fraction_limit": 0.25,
+    "area_window_mode": "ten-degree-field",
+    "area_windows": [
+      {
+        "height_px": 36,
+        "name": "wcag-10deg",
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)",
+        "width_px": 64
+      },
+      {
+        "height_px": 22,
+        "name": "room-10deg",
+        "room": {
+          "display_aspect": "16:9",
+          "display_height_in": 41.672,
+          "display_width_in": 74.084,
+          "field_degrees": 10.0,
+          "field_inches": 8.399,
+          "seat_distance_in": 48.0,
+          "tv_diagonal_in": 85.0
+        },
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "width_px": 22
+      }
+    ],
+    "exceptions_not_implemented": [
+      "WCAG fine balanced pattern exception (white noise, checkerboards under 0.1 degree). Content the exception would excuse is still reported."
+    ],
+    "flash_limit_per_second": 3,
+    "general_flash": {
+      "dark_image_below": 0.8,
+      "metric": "wcag-relative-luminance",
+      "min_delta": 0.1,
+      "source": "WCAG 2.2 general flash and red flash thresholds (SPEC_SOURCES section 2)"
+    },
+    "name": "wcag",
+    "pattern_rule": null,
+    "pattern_rule_source": null,
+    "peak_nits": null,
+    "red_flash": {
+      "min_ucs_distance": 0.2,
+      "saturated_red_ratio": 0.8,
+      "source": "WCAG 2.2 thresholds Note 3 and Understanding 2.3.1 (SPEC_SOURCES sections 2, 4)"
+    },
+    "red_opposing_rule": "enter-saturated-red-paired-with-leave",
+    "room": {
+      "display_aspect": "16:9",
+      "display_height_in": 41.672,
+      "display_width_in": 74.084,
+      "field_degrees": 10.0,
+      "field_inches": 8.399,
+      "seat_distance_in": 48.0,
+      "tv_diagonal_in": 85.0
+    },
+    "rules_not_implemented": [
+      "the fine balanced pattern exception",
+      "any HDR rule",
+      "any regular pattern rule, because WCAG 2.2 has none. See the broadcast profile"
+    ],
+    "spec_sources": "flashmap/docs/SPEC_SOURCES.md",
+    "title": "WCAG 2.2 Success Criterion 2.3.1, general and red flash thresholds",
+    "transition_pairing": "non-overlapping",
+    "transition_rule": "declared-on-first-frame-meeting-threshold",
+    "window_ms": 1000,
+    "window_placement": "trailing-closed-window-at-every-frame"
+  },
+  "scene_holds": {
+    "holds": [
+      {
+        "end_ms": 9000.0,
+        "frame_ms": 3916.6666666666665,
+        "image_data_uri": "data:image/jpeg;base64,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",
+        "start_ms": 5000.0
+      },
+      {
+        "end_ms": 16000.0,
+        "frame_ms": 10916.666666666666,
+        "image_data_uri": "data:image/jpeg;base64,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",
+        "start_ms": 12000.0
+      }
+    ],
+    "version": 1
+  },
+  "schema": "https://calm-frames.github.io/schemas/flashmap-map-v1.json",
+  "segments": [
+    {
+      "end_ms": 8000,
+      "reason": "general",
+      "start_ms": 6000
+    },
+    {
+      "end_ms": 15000,
+      "reason": "general",
+      "start_ms": 13000
+    }
+  ],
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "sha256:f1f85a0d5a9f9ff600ae3f4b230ce3d9a6e1d6b00b39c27ea4e08a2babb5f8bd",
+    "payload_sha256": "afba2bd3df094a6c894373317f363fc992e87518bf0e298b1aa76d79163024ce",
+    "public_key": "5vDmD97Pljdw0RSevwy/4EqueRmv106/+MrCBLTwTJ8=",
+    "value": "cyDUwt4GsDKnDploqnVFCu2w1cjS7hdT/+JZ7YV2q26I66/OzYEU3T8YC6sm9Z5vCvUF5IAQoskrGqhjLhTqAg=="
+  },
+  "source": {
+    "coded_height": 360,
+    "coded_width": 640,
+    "container_frame_rate": "12/1",
+    "duration_ms": 20000.0,
+    "first_pts_ms": 0.0,
+    "frame_count": 240,
+    "frame_interval_ms": {
+      "max": 83.333,
+      "median": 83.333,
+      "min": 83.333
+    },
+    "last_coded_pts_ms": 19916.667,
+    "last_pts_ms": 19916.667,
+    "path": "harbor.mp4",
+    "sha256": "e7f47f540966ba3bb1c8940e8f8d6d9489741aafe91658cf1fac2e378bf06c6a",
+    "size_bytes": 200222,
+    "timestamp_source": "container-pts",
+    "variable_frame_rate": false
+  },
+  "summary": {
+    "area_measured_on": "picture",
+    "flash_pass": false,
+    "general_segment_count": 2,
+    "hidden_ms": 4000,
+    "pass": false,
+    "pattern_exemption_count": 0,
+    "pattern_findings_are_not_wcag": "WCAG 2.2 SC 2.3.1 does not cover regular patterns. A pattern segment is an extra hide from an informative ITU recommendation, never a WCAG finding, and `flash_pass` is the only verdict a WCAG claim may be read from.",
+    "pattern_pass": true,
+    "pattern_rule_applied": false,
+    "pattern_rule_source": null,
+    "pattern_segment_count": 0,
+    "red_segment_count": 0,
+    "segment_count": 2
+  },
+  "version": 1
+}

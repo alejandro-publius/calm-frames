@@ -1617,3 +1617,98 @@ second way.
 - **Cost:** complete hosted CI still waits on the owner's account action.
   Continue local implementation and tests; keep main unchanged until its
   proposed tree passes the complete required checks. AWS remains disconnected.
+
+
+## 2026-10-02: restore household setup before allowing viewing
+
+- **Decision:** save the family and PIN gate as one bounded, versioned local
+  record using the app's existing SDK storage adapter. Validate every preset,
+  room, profile and PIN field before showing the shelf. Keep invalid records
+  and read failures blocked rather than resetting their floor or parent PIN.
+- **Why:** setup that disappears on restart makes the family repeat onboarding
+  and loses its stricter room and preset. Losing failed attempts on restart
+  also defeats the local keypad lockout. A PIN result must be saved before
+  allowing the parent area to open or another attempt to start.
+- **Evidence:** restart, strict-floor, retry, lockout, pending-write and stale
+  read regressions exercise the real app route against injected local storage.
+  Removing the loading block, record validation, save-before-unlock, retained
+  write retry and stale-read guard each caused an assertion failure, followed
+  by restored green source. The full app suite, strict TypeScript, lint and
+  native Debug builds pass. The broad Python run has no assertion failures;
+  its existing HTTP fixtures error on the sandbox localhost bind restriction.
+  Loading and error notices enter the existing
+  rendered palette and ten-foot measurements.
+- **Cost:** a malformed or unsupported record requires repair outside kid mode;
+  the app offers retry but no PIN-free reset. This does not encrypt local
+  storage or defend against someone who can run code on the device. Native
+  process-restart durability still needs device validation. Hide history
+  remains in memory. No detector, threshold, map, timing or seek rule changed.
+
+## 2026-10-02: correct repository access instructions using current rules
+
+- **Decision:** keep the planned public release while documenting the allowed
+  private reviewer route and current named Amazon accounts. Preserve historical
+  mock reviews as historical records. Do not change visibility or invitations.
+- **Why:** the overview and rules fetched when this pass began both list
+  `testing@devpost.com` and named reviewers rather than a single Amazon account.
+  Invitations should be issued at submission and their acceptance checked.
+- **Cost:** the owner still chooses the actual access route and final publication
+  timing. Documentation does not establish accepted invitations, a published
+  video, an open-source contribution or an AWS integration running in cloud.
+
+
+## 2026-10-02: demonstrate story continuity and separate evidence from ambition
+
+- **Decision:** score the current project against live Devpost criteria, keep
+  submission completeness separate, and replace overbroad submission claims
+  with implemented behavior and the unfavorable measurement denominators too.
+- **Why:** the strongest idea was difficult to see in the original gradient;
+  an extensive test suite cannot substitute for a working product demonstration.
+- **Cost:** a benign original captioned story with clearly labelled sham holds,
+  actual pipeline checks, fixed packaged trust and conservative per-title
+  preparation. The demo uses Extra cautious coverage without changing saved
+  household settings. Current TV composition and playback remain unverified.
+- **Review fixes:** history deletion follows committed household removal;
+  turning captions off uses the current selected native track. Both had
+  observed failing regression cases before correction.
+- **Continuation:** keep an explicit implement, validate and review loop in
+  `docs/CONTINUATION_PROMPT.md`, with a precise handoff at real session limits.
+  It does not promise unlimited credits, deploy services or publish the repo.
+
+
+## 2026-10-02: terminal completion and packaged prepared media
+
+- Decision: connect local receipts through a bounded compiled library with
+  immutable content-addressed generations. Keep original SHA and rendition SHA
+  separate; accept the public key only for an exact compiled title and preset.
+  Recheck source assets and every native archive. Why: a source-bound signed map
+  alone cannot identify the changed video delivered to the player. Cost: adding
+  a title requires a new build; the namespace is deliberately small and previous
+  generations are retained rather than deleted automatically.
+- Decision: use one explicit room, the app's complete profile unions and its
+  fixed cover timings for local imports. Recompute the plan during verification.
+  Omit union scene descriptors until the signed descriptor contract can represent
+  them correctly. Why: separate profile plans can be shorter than the app's union
+  and a union hold may not belong to the individual source map. Cost: generic
+  imports use the verified pre-covered picture and opaque live fallback; the
+  existing labelled scene-hold demo and legacy pipeline remain available.
+- Decision: import the owned Harbor source with neutral captions through genuine
+  analysis, without adding synthetic findings. Keep it separate from the
+  explicitly labelled practice-hold demo. Cost: two distinguishable shelf items;
+  this proves the delivery path, not detector recall or physical playback.
+- Decision: replace the legacy smoke CLI with a read-only default preflight and
+  explicit-target capture of the current household/Harbor journey. Never reset
+  data, synthesize successful observations or treat logs as camera proof. Cost:
+  native completion waits for an accessible target; sandbox launch is denied.
+- Decision: make the final-video duration gate exclusive. Why: exactly three
+  minutes violates the under-three-minute submission requirement. Cost: none;
+  the real benign boundary regression was red before the fix and green after it.
+- Decision: recheck the full frozen synthetic design after correcting its
+  RGB/YUV matrix and range encoding, preserving the old-protocol recheck and
+  archive. Thresholds, production analysis resolution and truth labels are
+  unchanged. Cost: a long local CPU run; no cloud spend. Report exclusions,
+  near-limit weaknesses and paired protocol effects before changing claims.
+- Decision: reapply and test the existing upstream patches in isolated scratch,
+  leaving their publication for the authorized public contribution step. Cost:
+  no external write; observed faulty controls and restored focused tests support
+  the prepared patch without claiming an upstream merge or native test.

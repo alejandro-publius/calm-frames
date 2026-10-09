@@ -24,6 +24,10 @@
     "app:build": "run-s build:release && npm run app:install && npm run app:launch",
     "build:release": "react-native build-kepler --build-type Release",
     "build:debug": "react-native build-kepler --build-type Debug",
+    "prebuild:release": "node tools/check_prepared_library.mjs",
+    "prebuild:debug": "node tools/check_prepared_library.mjs",
+    "postbuild:release": "node tools/check_prepared_library.mjs --packages Release",
+    "postbuild:debug": "node tools/check_prepared_library.mjs --packages Debug",
     "build:app": "npm-run-all build:release build:debug",
     "ui:capture": "jest --ci --coverage=false test/calmframes/uiCapture.test.tsx",
     "ui:flashmap": "npm run ui:capture && node tools/ui_flashmap.mjs"

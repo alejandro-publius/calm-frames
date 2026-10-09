@@ -1,8 +1,15 @@
-# Devpost submission, ready to paste
+# Devpost submission draft
 
 Every field for **Build, Ship, Shape: Amazon Developer Hackathon**, Fire TV track, with the Open Source and AWS Builder mini challenges.
 
-**How to use this file.** Each numbered section below is one Devpost field. Copy the block under the heading. Anything marked **NEEDS ALEX** cannot be filled in by the build, and section 16 lists every one of them again with a date.
+**Status, October 2.** This draft is not ready to submit. The video, judged release,
+reviewer access and public contribution URL still need evidence. Section 3 was
+rewritten against the current implementation; recheck the remaining fields and
+replace every **NEEDS ALEX** before submission. The current assessment and next
+acceptance criteria are in [HACKATHON_REVIEW.md](HACKATHON_REVIEW.md).
+
+**How to use this file.** Each numbered section below corresponds to a planned
+Devpost field. Final field names still need checking in the live form.
 
 **Re-check before pasting.** The Devpost form's exact field names and character limits should be read off the live form on the day, because this file is written from the build plan rather than from the form.
 
@@ -28,95 +35,145 @@ Calm Frames
 ## 2. Tagline
 
 ```
-A verified safety layer for Fire TV that hides flashing before it starts, for kids with photosensitive epilepsy.
+A Fire TV accessibility prototype that checks videos ahead of playback and preserves story context during hidden scenes.
 ```
 
 Alternates, if the form wants something shorter:
 
 ```
-Every frame checked before it plays. The picture hides, the sound and captions keep going.
+Check the video ahead of time. Hold the scene. Keep following the story.
 ```
 
 ```
-Fire TV kid mode for photosensitive epilepsy: verified before play, hidden before the flash.
+Calm Frames: checked playback and context-preserving scene holds for Fire TV.
 ```
 
 ## 3. Description
 
-Devpost splits this into headed sections. They are written out separately below so each one can be pasted into its own box.
+Use these headings in the project description. Confirm the live form's layout
+before pasting them.
 
 ### Inspiration
 
-About 3 percent of people with epilepsy are photosensitive, and it is more common in children and adolescents. Flashing at roughly 5 to 30 times a second is the most likely trigger. A 2025 Epilepsy Foundation working group told media designers to avoid bright flashing in the 10 to 20 Hz range.
+A flashing scene can interrupt a family's shared viewing experience. Hiding the
+picture also removes the visual context that makes a story understandable. We
+wanted to explore both problems together: check a title before playback, then
+preserve its sound, captions and a calm image when a scene needs covering.
 
-Now picture Maya. She is twelve, she has photosensitive epilepsy, and tonight she is at a sleepover picking a film on somebody else's living room television, with no adult sitting next to her to screen it first. Nothing on that television knows what is in the next ninety minutes. (Maya is a composite persona, not a real person. She is labelled as one on screen in our demo video too.)
-
-Other platforms have partial answers: Apple has a Dim Flashing Lights setting, there are desktop filters, and there are research prototypes that detect flashes and overlay them live. What none of them do is check the whole title before it is allowed to play, and then guarantee that every way of jumping into it is safe.
-
-That is the gap Calm Frames fills, and Fire TV is where it belongs, because the television is the screen a child uses without supervision.
+Our intended audience is families affected by photosensitivity. Maya, a child used
+in our early design narrative, is a composite persona. We have not yet collected
+feedback from families or clinicians, and we do not claim clinical validation.
 
 ### What it does
 
-Calm Frames is a verified safety layer, and it is never a video player.
+Calm Frames is a Fire TV accessibility prototype for family entertainment and
+multi-modal UX, with an offline video analyzer, a checked rendition pipeline and
+a Vega player. The pipeline analyzes a source
+against published flash limits, signs the resulting map and binds it to the
+source's SHA-256. Its verification step must pass before publishing the prepared
+title. Kid mode is designed to play a pre-covered rendition, with a live cover
+as an additional layer.
 
-Every frame of a title is measured before that title can appear in kid mode. The result is an Ed25519 signed flash map, bound to the file's SHA-256, that lists each interval that goes over the WCAG 2.2 general flash or red flash threshold. A verify step blocks publishing: a title whose rendition still contains a violation, whose map is tampered with, whose hash is wrong, or whose poster was taken from a flagged moment, does not reach kid mode at all.
+Scene holds preserve a still from the preceding context during a hidden
+interval. The pipeline checks these images and binds their identities to the
+signed map. Missing images, decode failures or uncertain playback fall back to
+an opaque cover. Captions and audio can continue while the image is held; their
+composition on a physical television still needs measurement.
 
-During playback the app hides each flagged segment before it starts. The picture goes, the sound keeps going and the captions keep running above the cover, so the story stays followable. Afterwards the app says what it hid.
+Parents set room dimensions, profiles and a minimum preset behind a PIN. Those
+settings persist locally, and storage errors block the library until resolved.
+Stricter household choices can add hides but cannot relax the standard floor.
+Voice transport, the D-pad and on-screen seek controls share the same guarded
+seek path.
 
-It adapts to the household. A parent gives the television diagonal and the seat distance behind a PIN, and picks a preset. The room rule then adds a second area window for that room's ten degree visual field. A household setting can only ever add hides. It cannot make Calm Frames weaker than WCAG.
+There are also developer adoption paths: an analyzer and GitHub Action for
+content preparation, a documented sidecar format, and a locally installable
+Vega hook package. The hook has an offline consumer build check and a measured
+integration patch for Amazon's sample player. Use by an independently maintained
+app has not yet been demonstrated.
 
-Voice, D-pad and on-screen cards all run through one seek function. If the target lands inside a flagged interval or its guard band, the picture is covered first and the seek happens second. An Alexa "skip forward" that would drop the playhead into the middle of a flagged scene is as safe as pressing right on the remote.
-
-And any Vega video app can add the same protection with a small hook, while any studio can check its own content before publishing with the open-source analyzer and its GitHub Action.
-
-Two of the Fire TV track's six priority categories are this project by name. It is **family entertainment**, because the whole thing exists so a child can pick a title on the family television without a parent having to preview it first. And it is **multi-modal UX**, because voice, D-pad and on-screen cards are not three ways into the same app: they are three inputs to one seek function that covers the picture before it moves the playhead. A spoken "skip forward" and a press of the remote go through the same gate, and neither can land inside a flagged interval. That is multi-modal UX combining voice, D-pad and visual in a single flow, and the single flow is the part that stops working if you build it three times.
-
-Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
+Calm Frames reduces exposure to flashing above published limits in the videos
+it plays. It is not a medical device. It works only with content prepared for
+this player; it does not cover other streaming apps or their DRM content.
 
 ### How we built it
 
-Four pieces.
+The Python analyzer measures frames and their timestamps, produces per-preset
+maps and signs them with Ed25519. The preparation pipeline builds the covered
+rendition, posters and context images, then verifies its artifacts. The native
+app uses Amazon's W3C media player, Media Controls, captions view and React
+Native for Vega. A shared scheduler and seek function coordinate the cover.
 
-**flashmap**, an Apache-2.0 Python package, measures video against WCAG 2.2 Success Criterion 2.3.1: both the general flash rule and the red flash rule, with the saturated red test done in the CIE 1976 UCS chromaticity diagram. It slides a one second window to every position for the three-flashes-a-second limit, and slides a ten degree area window for the 25 percent rule, because the specification says "any 10 degree visual field" rather than a fixed grid. It reads real container timestamps, so variable frame rate input comes out right. It detects letterbox and pillarbox so area is measured on the picture rather than on the bars. Chunked analysis gives byte for byte the same map as a whole file run, which is a property test rather than a claim. Every threshold in the code is quoted, with a link, in `flashmap/docs/SPEC_SOURCES.md`, and the three things that could not be verified from a primary source are named there and are not used.
+The strongest design choice came from an observed failure: irregular player
+position reports and a stalled JavaScript thread can make a live overlay late.
+That is why the pipeline builds a pre-covered rendition, and why the app covers
+when playback becomes uncertain. A verified signature ties the schedule to a
+trusted signing key and the named source; it does not prove that the detector
+found every hazard.
 
-**The pipeline** takes a title through probe, analyze per preset, hide plan, kid-safe rendition, trickplay, posters taken only from the safe rendition, signing, and a catalog entry. It is idempotent and keyed by the source hash. `pipeline/verify.py` is the gate, and it was mutation tested: a violation left in a rendition, a violation under the modelled cover, a tampered map, a wrong hash and a poster from a flagged moment all fail it.
-
-**The Fire TV app** is built on `AmazonAppDev/vega-video-sample` at tag `v0.24-RN83`. Playback stays on `@amazon-devices/react-native-w3cmedia`. The cover is a plain React Native view between the video surface at zIndex 0 and `KeplerCaptionsView` at zIndex 2, driven by state rather than `setNativeProps`, which throws on React Native 0.83.
-
-**The infrastructure** is an AWS CDK stack with zero NAT gateways, a 20 dollar budget alarm, private buckets and a GitHub OIDC role.
-
-The hardest design decision came out of a measurement. The player's own position reports are irregular: in a recorded run the longest gap between two of them was <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms while the clip kept playing. A cover that waited for a position report before acting would have been that late. So the scheduler runs on a wall clock re-synced to media time at every report, and anything that makes the playhead uncertain, including a stall, a seek, a pause or the app being backgrounded, hides the picture at once instead of trusting the estimate. Amazon does not document either figure, so we measured them.
+Checked local receipts can now export a bounded library into the app package.
+The catalog binds each preset's prepared video, captions and maps to their exact
+bytes, and the player refuses substituted delivery paths. Adding a title means
+rebuilding the package. Arbitrary imports use the pre-covered picture with an
+opaque live fallback; union scene images remain unfinished. The AWS CDK stack
+synthesizes and has template tests, but it has not been deployed and is not a
+working cloud service.
 
 ### Challenges we ran into
 
-The virtual device has no supported way to press a remote button or capture the screen, so we drive it through QEMU's QMP socket. Key injection works. Screenshots come back black, because the app renders on a GPU layer the capture does not see, so playback evidence comes from device logs rather than pictures. `vega device list` crashes with a TypeError while a device is running, so every script uses `vega device info` and `vega device is-connected` instead. And on OS 1.2 there is no path from the host into another package's data directory, although the sample's README documents one, so a measurement run is started from a button inside the app or from a config the app fetches over HTTP. Every one of those is in the friction log with its exact output, alongside twenty-six more.
+Our simulator timing record contains <!--n results/gate1_software_vvd.json:in_time -->48<!--/n-->
+on-time trials out of <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n-->
+attempts. Six attempts produced no usable evidence, and one was late. Restricting
+the denominator to the <!--n results/gate1_software_vvd.json:trials_counted -->49<!--/n-->
+measurable trials would conceal the failed attempts. These are software events,
+not camera measurements of a television. Physical screen timing remains open.
 
-The real one is this. We do not have a cover lead time number, and for a while we thought we did. A rehearsal run appeared to show every marker covered in time with a worst lead of 449 ms. It was wrong. The player in that run never got past about a quarter of a second, while the cover scheduler, which runs on a wall clock by design, kept advancing its own estimate and fired every cover on time against that estimate. The analysis agreed with itself. A stricter second script refused to count any of it, which is how it surfaced, and both scripts now require a position report from the player before a lead time is counted. Those numbers were withdrawn from everywhere they appeared, and the retraction is written out in `docs/GATES.md`. Run again on a packed clip under the new rule, the measurement gave <!--n results/gate1_software_vvd.json:trials_counted -->49<!--/n--> usable trials with <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time, a median lead of <!--n results/gate1_software_vvd.json:lead_ms.median -->488.4<!--/n--> ms, and one cover that went on 86 ms after its marker started because the JavaScript thread stalled. We kept that last one in the README rather than rounding it away, because it is the thing that tells us the guard band is not yet known to be wide enough. The real measurement is 50 trials filmed at 240 frames a second against a real Fire TV stick, and it has not happened yet.
+Detector evaluation also has material limits. The archived partial conformance
+run kept <!--n results/conformance.json:published.clips_kept -->467<!--/n--> of
+<!--n results/conformance.json:published.clips_designed -->3000<!--/n--> designed
+clips. Overall recall was <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n-->
+over <!--n results/conformance.json:published.flashmap_recall_denominator -->324<!--/n-->
+positive windows. Recall on positive windows near a limit was
+<!--n results/conformance.json:published.recall_near_limits -->0.575<!--/n-->
+over <!--n results/conformance.json:published.recall_near_limits_positive_windows -->80<!--/n-->
+positive windows.
+We publish both because the latter limits the reliability claims we can make.
+Unit tests, signature checks and benign demonstrations do not replace this
+unfinished evaluation.
 
 ### Accomplishments we are proud of
 
-Three.
+The pipeline can reject a changed map or invalid rendition before publication.
+All transport paths share a guarded seek. Context images use the same signed
+descriptors in rendering and the live cover. Household state survives a restart
+in integration tests, including PIN lockouts and stricter settings.
 
-The first is that nothing here is asserted. Every number in the README, in this text and in the video is written as a marker pointing at a file in `results/`, a script checks that they still match, and CI fails the build if any of them drifts. A number nobody can trace is worse than no number, so rows with no measurement behind them are left empty.
-
-The second is that the failures are in the record, including the one that cost us our best-looking number. We withdrew a timing result that our own analysis had blessed, because a second and stricter script would not count it, and the withdrawal is written out in full rather than quietly deleted. The layering run came back inconclusive because playback did not run in that take, and it is published as inconclusive. Four of twenty screening clips could not be decoded, and that is in the results file. Two titles were refused by verify, which is verify doing its job.
-
-The third is that nobody on this project watched a strobe at full speed to build it. Hazard files are inspected as luminance plots, conformance clips are made and measured and deleted in the same job, and prevented exposure is computed from the flash map rather than demonstrated by playing flashing content with the filter off.
+These behaviors have regression tests and deliberately broken controls. Native
+Debug packages build for the configured architectures. Current screen behavior,
+caption composition and storage durability still need observation on the target.
+Published measurements point to versioned result files; inconclusive and failed
+measurements remain visible alongside successful ones.
 
 ### What we learned
 
-That the safety property is a scheduling problem, not a detection problem. Detecting a flash is arithmetic on pixels and it is testable offline. Being *on the screen before the flash*, through seeks, stalls, rate changes and an app coming back from the background, is where the work is, and it is the part a specification does not help with.
-
-And that a fail-closed default changes what you build. Once a missing, stale, unsigned, unparseable or wrong-hash map means the picture stays hidden, every question about error handling answers itself.
+Detection, prepared-media integrity and screen delivery are separate problems.
+A signature cannot correct a missed flash, and a passing software scheduler test
+cannot establish when pixels reached a television. Keeping those boundaries
+visible has made both the implementation and its claims more precise.
 
 ### What is next
 
-Filming the real gates on the stick. Self-filmed red strobe footage, because no free source we found has a saturated red strobe, under the safety rules. The upstream pull request. And the feature request that would help most: a system-wide Fire TV setting for dimming flashing lights, so this protection is not one app's job.
+Demonstrate context-preserving holds using benign media with explicitly labelled
+sham intervals, capture the current app on a Vega simulator or Fire TV, and
+measure physical composition. Extend the checked packaged library to preserve
+signed scene images across preset unions. Ask families and
+accessibility reviewers whether the flow and its limitations are understandable,
+and record only feedback actually received.
 
 ### Built with
 
 ```
-Vega SDK 0.24 · Vega CLI · React Native 0.83 · TypeScript · @amazon-devices/react-native-w3cmedia · Shaka Player · Kepler Media Controls · KeplerCaptionsView · Kepler UI Components · Kepler File System · react-native-kepler · AccessibilityInfo / VoiceView · Python 3.12 · PyAV / FFmpeg · NumPy · Ed25519 · pytest · Jest · AWS CDK · Amazon S3 · Amazon DynamoDB · AWS Fargate · AWS Lambda · Amazon CloudFront · Amazon ECR · AWS Budgets · AWS IAM with GitHub OIDC · Amazon CloudWatch Logs · GitHub Actions
+Vega SDK 0.24, React Native 0.83, TypeScript, Amazon W3C media player, Vega Media Controls, KeplerCaptionsView, Kepler UI and file system packages, AsyncStorage, Python 3.12, PyAV, FFmpeg, NumPy, Ed25519, pytest, Jest, GitHub Actions, AWS CDK (undeployed infrastructure)
 ```
 
 ## 4. Track
@@ -134,9 +191,9 @@ Open Source (primary)
 AWS Builder
 ```
 
-A project can win at most one track prize and one mini challenge prize. Open Source is the one to lead with: the analyzer, the Action, the sidecar specification and the hook are all published under Apache-2.0, and the upstream fix goes back to the sample every Vega video app starts from.
+A project can win at most one track prize and one mini challenge prize. Open Source is the one to lead with: the analyzer, the Action, the sidecar specification and the hook are licensed under Apache-2.0 in the current private repository. The intended upstream fix is prepared but has not been opened publicly.
 
-**Open Source is solid. AWS Builder is not certain, and section 11 says exactly why.** The short version: the rules ask for a project that "incorporates AWS services ... with documented integrations", and our stack synthesizes, is unit tested and has never been deployed. Nobody here can tell from the rules text whether that counts. Entering both is still right, because entering costs nothing and the answer might be yes. Claiming it as won is not.
+**Both mini challenges remain incomplete.** Open Source needs a qualifying public contribution and its URL; our private main repository alone does not establish that. AWS Builder has an undeployed, tested CDK stack, and the rules do not explicitly resolve whether that qualifies. Section 11 records that uncertainty. Describe only the work actually delivered when selecting mini challenges.
 
 ## 6. Repository URL
 
@@ -144,7 +201,15 @@ A project can win at most one track prize and one mini challenge prize. Open Sou
 https://github.com/alejandro-publius/calm-frames
 ```
 
-**NEEDS ALEX:** the repository is private today and goes public during the final checks on **Wednesday October 21**, because the rules need it public with the licence visible at submission. Confirm it is public, and that Apache-2.0 shows in GitHub's About box, before pasting this.
+**NEEDS ALEX:** the current plan is to make the repository public during the
+final checks on **Wednesday October 21**. Confirm Apache-2.0 is visible in
+GitHub's About box before pasting this. Making it public is our chosen plan,
+not the only route the rules permit. The rules rechecked on **October 1** also
+allow a private repository shared with `testing@devpost.com` and Amazon's named
+reviewers: `chris-trag`, `knmeiss`, `giolaq`, `anishamalde`, `mosesroth` and
+`emersonsklar`. If using that route, send invitations at submission and check
+acceptance before the invitations expire after seven days. No permissions or
+visibility have been changed by this documentation update.
 
 ## 7. Video URL
 
@@ -224,10 +289,16 @@ RUN IT ON THE VIRTUAL DEVICE
   npm install
   npm run build:debug
   cd ..
-  python3 eval/vvd_smoke.py --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
+  .venv/bin/python -m eval.benign_native_smoke --device Simulator \
+      --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
 
-  This starts the virtual device if it is not running, installs and launches the
-  app, drives the remote, plays a title, and writes results/vvd_smoke.json.
+  This is read-only preflight. Once it reports a connected, matching target,
+  repeat with --execute --restart. Use the visible remote to complete setup,
+  open Harbor story (benign demo), read its practice plan, enable captions,
+  play, pause and seek. After restart, check saved settings and the parent PIN.
+  The runner captures fresh software logs; a person must observe screen and
+  caption composition. It does not start or reset the simulator. Current
+  native footage remains required.
 
   Two notes. `vega virtual-device status` says running before the device is
   usable, so wait for `vega device is-connected`. And `vega device list` crashes
@@ -242,9 +313,10 @@ RUN IT ON A STICK
   measurement run is in the log.
 
 PARENT AREA
-  The parent area is behind a four digit PIN, set on the device by whoever sets
-  the app up. The PIN itself is never stored: what is stored is a salted,
-  iterated hash of it.
+  The parent area is behind a four digit PIN, set during first-run setup.
+  Family settings, the salted iterated PIN hash and lockouts are stored
+  locally. Plaintext PIN digits are not saved. Storage errors block the
+  library until resolved. Physical-device durability is not yet measured.
 
   Demo PIN: NEEDS ALEX
 

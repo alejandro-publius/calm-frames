@@ -77,8 +77,10 @@ export type AppStackParamList = {
      * the cards and routes every seek through one function.
      */
     guarded?: {
-      /** SHA-256 of the file about to play, from the catalog entry. */
+      /** SHA-256 of the analyzed source named by the signed map. */
       sha256: string;
+      /** Separate digest of a compiled prepared rendition, when present. */
+      renditionSha256?: string;
       /** Map text per profile name, exactly as it was written. */
       maps?: Partial<Record<string, string | null>>;
       /** Or where to fetch them from. */

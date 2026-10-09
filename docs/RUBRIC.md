@@ -1,7 +1,8 @@
 # The rubric we are actually judged against
 
 Everything on this page comes from the hackathon's own pages, fetched and read
-on **Thu Sep 17, 2026**:
+on **Thu Sep 17, 2026**, with repository access requirements rechecked on
+**Thu Oct 1, 2026**:
 
 - Overview and requirements: <https://amazonappdev2026.devpost.com/>
 - Official rules: <https://amazonappdev2026.devpost.com/rules>
@@ -118,7 +119,7 @@ quoted next to it.
 | 4 | The video carries no third party trademarks and no copyrighted music or footage without permission | Submission Requirements, video | |
 | 5 | There is a text description explaining features and functionality | Submission Requirements | |
 | 6 | The GitHub repository holds all source code, assets and instructions needed to run the project | Submission Requirements | |
-| 7 | The repository is public with a licence detectable and visible in the About box, or private and shared with testing@devpost.com and @AmazonAppDev | Submission Requirements | |
+| 7 | The repository is public with a licence detectable and visible in the About box, or private and shared with testing@devpost.com and the named Amazon reviewers | Submission Requirements | |
 | 8 | Setup and run instructions are clear, and the project is shown functioning | Project Requirements, Functionality | |
 | 9 | Product feedback answers all five questions, for every tool, API and SDK used | Submission Requirements, Product Feedback | |
 | 10 | The primary track is named | Submission Requirements | |
@@ -130,16 +131,13 @@ quoted next to it.
 | 16 | Judges can reach the project free of charge, with credentials if anything is private | Testing | |
 | 17 | Everything is in English | Language Requirements | |
 
-Line 7 verbatim, because it is the one that changed on Sep 16:
-
-> Provide a URL to your code repository for judging and testing on GitHub. The
-> repository must contain all necessary source code, assets, and instructions
-> required for the project to be functional. The repository must be either
-> public and open source by including an open source license file OR private and
-> shared with testing@devpost.com and @AmazonAppDev.
->
-> For public repositories: this license should be detectable and visible at the
-> top of the repository page (in the About section).
+Line 7 was rechecked on **Thu Oct 1, 2026** against both linked pages. Public
+repositories need an open-source licence visible in GitHub's About section.
+Private repositories must be shared with `testing@devpost.com` and these Amazon
+reviewer accounts: `chris-trag`, `knmeiss`, `giolaq`, `anishamalde`, `mosesroth`
+and `emersonsklar`. Add reviewers at submission, then confirm their invitations
+are accepted; invitations expire after seven days. The older single-account
+reference was replaced by the current list. No repository access was changed.
 
 Line 16 verbatim, because it has a clause about hardware that concerns us:
 
@@ -380,7 +378,7 @@ in `docs/SUBMISSION.md`, which is Lane H's file.
 | Field | What the rules ask for |
 |---|---|
 | Text description | "a text description that should explain the features and functionality of your Project" |
-| Repository URL | GitHub, all source, assets and run instructions; public with a visible licence, or private and shared with testing@devpost.com and @AmazonAppDev |
+| Repository URL | GitHub, all source, assets and run instructions; public with a visible licence, or private and shared with testing@devpost.com and the named Amazon reviewers |
 | Demo video URL | Under three minutes, YouTube or Vimeo, public, English, shows the project on the device |
 | Product feedback | The five questions below, for every tool, API and SDK used |
 | Track | Fire TV |

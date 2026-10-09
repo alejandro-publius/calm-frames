@@ -107,6 +107,10 @@ export interface FlashGuardOptions {
   maxMapAgeMs?: number;
   /** Called once per cover, for the parent area's log. */
   onHide?: (entry: HideLogEntry) => void;
+  /** Presentation copy for a labelled demo. Does not change timing or refusals. */
+  cardCopy?: (
+    card: Readonly<Card>,
+  ) => Pick<Card, 'title' | 'detail' | 'announcement'>;
 }
 
 export interface FlashGuardState {
@@ -164,6 +168,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
     nowMs = Date.now,
     maxMapAgeMs,
     onHide,
+    cardCopy,
   } = options;
 
   const [status, setStatus] = useState<GuardStatus>('loading');
@@ -225,7 +230,9 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
   const intervalsRef = useRef<CoverInterval[]>(intervals);
   intervalsRef.current = intervals;
   const committedSceneIntervalsRef = useRef<CoverInterval[]>(intervals);
-  const presentedSceneIntervalRef = useRef<CoverInterval | undefined>(undefined);
+  const presentedSceneIntervalRef = useRef<CoverInterval | undefined>(
+    undefined,
+  );
   const sceneBlackoutsRef = useRef({
     input: verificationInput,
     intervals: new Set<string>(),
@@ -396,7 +403,9 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
   // A checked static image can still flash if repeatedly removed and restored.
   // Any disruption therefore keeps this interval black for the whole session.
   const sceneIsLatchedBlack = currentInterval
-    ? blackout.intervals.has(`${currentInterval.startMs}:${currentInterval.endMs}`)
+    ? blackout.intervals.has(
+        `${currentInterval.startMs}:${currentInterval.endMs}`,
+      )
     : false;
   const coverImageUri =
     ownsBlackout &&
@@ -429,7 +438,13 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
       presentedSceneIntervalRef.current = undefined;
     }
     committedSceneIntervalsRef.current = intervals;
-    if (disrupted || harness.uncertain || seekHolding || !foreground || !ready) {
+    if (
+      disrupted ||
+      harness.uncertain ||
+      seekHolding ||
+      !foreground ||
+      !ready
+    ) {
       latchSceneAt(harness.mediaTimeMs);
     }
     const committed = sceneBlackoutsRef.current;
@@ -493,7 +508,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
     renditionStartOffsetMs,
   ]);
 
-  const card = useMemo(
+  const scheduledCard = useMemo(
     () =>
       activeStatus === 'verified'
         ? cardAt(intervals, harness.mediaTimeMs)
@@ -503,6 +518,18 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
           }),
     [activeStatus, intervals, harness.mediaTimeMs, rejection, blockedReason],
   );
+  const card = useMemo(() => {
+    if (!cardCopy || activeStatus !== 'verified') {
+      return scheduledCard;
+    }
+    const copy = cardCopy(scheduledCard);
+    return {
+      ...scheduledCard,
+      title: copy.title,
+      detail: copy.detail,
+      announcement: copy.announcement,
+    };
+  }, [scheduledCard, cardCopy, activeStatus]);
 
   // Say each card once, and never the same words twice in a row.
   const lastCard = useRef<Card>(NO_CARD);

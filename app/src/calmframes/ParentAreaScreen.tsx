@@ -106,7 +106,6 @@ import {
   setFloor,
   setProfileSettings,
 } from './profiles';
-import { forgetProfile } from './hideLogStore';
 import ShieldBadge from './ShieldBadge';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle } from './titleStatus';
@@ -131,7 +130,7 @@ const LOG_LINES_SHOWN = 20;
 
 export interface ParentAreaScreenProps {
   gate: PinGateState;
-  onGateChange: (state: PinGateState) => void;
+  onGateChange: (state: PinGateState) => void | Promise<void>;
   settings: HouseholdSettings;
   onSettingsChange: (settings: HouseholdSettings) => void;
   log: HideLogStore;
@@ -158,6 +157,7 @@ export interface ParentAreaScreenProps {
   /** Opens the credits. Behind the PIN, because it is a parent's screen. */
   onCredits?: () => void;
   testID?: string;
+  saving?: boolean;
 }
 
 const ParentAreaScreen = ({
@@ -175,9 +175,12 @@ const ParentAreaScreen = ({
   onSetPin,
   onCredits,
   testID = 'parent-area',
+  saving = false,
 }: ParentAreaScreenProps) => {
   const [unlocked, setUnlocked] = React.useState(false);
   const [entered, setEntered] = React.useState('');
+  const [savingPin, setSavingPin] = React.useState(false);
+  const savingPinRef = React.useRef(false);
   // Whose settings the sections below are changing. The household first,
   // because it is the floor and a parent reads down from it.
   const [editingId, setEditingId] = React.useState<string>(EVERYONE_ID);
@@ -217,6 +220,9 @@ const ParentAreaScreen = ({
   useUiCapture(frame, reason);
 
   const press = (digit: string) => {
+    if (savingPinRef.current) {
+      return;
+    }
     const next = `${entered}${digit}`;
     if (next.length < PIN_LENGTH) {
       setEntered(next);
@@ -224,20 +230,35 @@ const ParentAreaScreen = ({
     }
     const now = nowMs();
     const result = attemptPin(gate, next, now);
-    onGateChange(result.state);
     setEntered('');
-    if (result.ok) {
-      setUnlocked(true);
-      setNotice(PIN_PROMPT);
-      return;
+    const finish = () => {
+      if (result.ok) {
+        setUnlocked(true);
+        setNotice(PIN_PROMPT);
+        return;
+      }
+      const lockedOut =
+        result.state.lockedUntilMs !== null && now < result.state.lockedUntilMs;
+      setNotice({
+        title: lockedOut ? PIN_LOCKED_TITLE : PIN_WRONG_TITLE,
+        detail: result.message,
+        tone: 'blocked',
+      });
+    };
+    const change = onGateChange(result.state);
+    if (change) {
+      savingPinRef.current = true;
+      setSavingPin(true);
+      change.then(finish).catch(() => {
+        setNotice({ title: 'The parent area stays locked',
+          detail: 'Your PIN settings could not be saved. Try again.', tone: 'blocked' });
+      }).finally(() => {
+        savingPinRef.current = false;
+        setSavingPin(false);
+      });
+    } else {
+      finish();
     }
-    const lockedOut =
-      result.state.lockedUntilMs !== null && now < result.state.lockedUntilMs;
-    setNotice({
-      title: lockedOut ? PIN_LOCKED_TITLE : PIN_WRONG_TITLE,
-      detail: result.message,
-      tone: 'blocked',
-    });
   };
 
   if (!unlocked) {
@@ -250,11 +271,12 @@ const ParentAreaScreen = ({
           <StatusNotice testID={`${testID}-message`} notice={notice} />
         </View>
         {gate.record ? (
-          <PinKeypad entered={entered.length} onDigit={press} idPrefix={testID} />
+          <PinKeypad entered={entered.length} onDigit={press} idPrefix={testID} disabled={savingPin || saving} />
         ) : null}
         <View style={styles.buttons}>
           {!gate.record && onSetPin ? (
             <CalmButton
+              disabled={saving || undefined}
               testID={`${testID}-set-pin`}
               label="Set a PIN"
               onPress={onSetPin}
@@ -263,7 +285,7 @@ const ParentAreaScreen = ({
           ) : null}
           {onBack ? (
             <View style={styles.secondButton}>
-              <CalmButton testID={`${testID}-back`} label="Back" onPress={onBack} />
+              <CalmButton disabled={saving || undefined} testID={`${testID}-back`} label="Back" onPress={onBack} />
             </View>
           ) : null}
         </View>
@@ -326,9 +348,16 @@ const ParentAreaScreen = ({
         {PARENT_AREA_TITLE}
       </Text>
 
+      {saving ? (
+        <Text style={styles.note} accessibilityLiveRegion="polite" testID={`${testID}-saving`}>
+          Saving your household settings
+        </Text>
+      ) : null}
+
       {family && onFamilyChange ? (
         <>
           <ProfilePicker
+            disabled={saving || undefined}
             testID={`${testID}-profiles`}
             title={PROFILES_PARENT_TITLE}
             chosenWord={SETTINGS_STATE_WORD}
@@ -360,6 +389,7 @@ const ParentAreaScreen = ({
                 notice={removeKidPrompt(editingProfile.name)}>
                 <View style={styles.buttons}>
                   <CalmButton
+                    disabled={saving || undefined}
                     testID={`${testID}-remove-keep`}
                     label={keepKidLabel(editingProfile.name)}
                     onPress={() => setAskedToRemove(null)}
@@ -367,13 +397,12 @@ const ParentAreaScreen = ({
                   />
                   <View style={styles.secondButton}>
                     <CalmButton
+                      disabled={saving || undefined}
                       testID={`${testID}-remove-confirm`}
                       label={removeKidLabel(editingProfile.name)}
                       onPress={() => {
-                        // The confirmation says the record goes too, so it
-                        // goes. Before this the entries stayed in the store
-                        // out of sight and the Everyone view still held them.
-                        forgetProfile(editingProfile.id);
+                        // The route forgets this profile's history after the
+                        // household write commits, including a save retry.
                         onFamilyChange(removeProfile(family, editingProfile.id));
                         setAskedToRemove(null);
                         setEditingId(EVERYONE_ID);
@@ -387,6 +416,7 @@ const ParentAreaScreen = ({
             <View style={styles.buttons}>
               {canAddProfile(family) ? (
                 <CalmButton
+                  disabled={saving || undefined}
                   testID={`${testID}-add-profile`}
                   label="Add a kid"
                   // Named apart from the start. Two chips both reading Kid is
@@ -412,6 +442,7 @@ const ParentAreaScreen = ({
               {editingProfile && removable ? (
                 <View style={styles.secondButton}>
                   <CalmButton
+                    disabled={saving || undefined}
                     testID={`${testID}-remove-profile`}
                     label={removeKidLabel(editingProfile.name)}
                     // Asks. Nothing is removed on this press, because what it
@@ -432,10 +463,11 @@ const ParentAreaScreen = ({
         const chosen = shown.preset === name;
         return (
           <TouchableOpacity
+            disabled={saving || undefined}
             key={name}
             testID={`${testID}-preset-${name}`}
             accessibilityRole="radio"
-            accessibilityState={{ checked: chosen, selected: chosen }}
+            accessibilityState={{ checked: chosen, selected: chosen, ...(saving ? { disabled: true } : {}) }}
             accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
             activeOpacity={1}
             onFocus={() => setFocusedRow(`preset-${name}`)}
@@ -474,10 +506,11 @@ const ParentAreaScreen = ({
           const chosen = shown.tvDiagonalIn === inches;
           return (
             <TouchableOpacity
+              disabled={saving || undefined}
               key={`tv-${inches}`}
               testID={`${testID}-tv-${inches}`}
               accessibilityRole="radio"
-              accessibilityState={{ checked: chosen, selected: chosen }}
+              accessibilityState={{ checked: chosen, selected: chosen, ...(saving ? { disabled: true } : {}) }}
               accessibilityLabel={`${inches} inch television${chosen ? ', chosen' : ''}`}
               activeOpacity={1}
               onFocus={() => setFocusedRow(`tv-${inches}`)}
@@ -513,10 +546,11 @@ const ParentAreaScreen = ({
           const feet = Math.round(inches / 12);
           return (
             <TouchableOpacity
+              disabled={saving || undefined}
               key={`seat-${inches}`}
               testID={`${testID}-seat-${inches}`}
               accessibilityRole="radio"
-              accessibilityState={{ checked: chosen, selected: chosen }}
+              accessibilityState={{ checked: chosen, selected: chosen, ...(saving ? { disabled: true } : {}) }}
               accessibilityLabel={`${feet} feet away${chosen ? ', chosen' : ''}`}
               activeOpacity={1}
               onFocus={() => setFocusedRow(`seat-${inches}`)}
@@ -583,6 +617,7 @@ const ParentAreaScreen = ({
           </Text>
           <View style={styles.buttons}>
             <CalmButton
+              disabled={saving || undefined}
               testID={`${testID}-chime`}
               label={family.chimeEnabled ? CHIME_ON_LABEL : CHIME_OFF_LABEL}
               accessibilityLabel={`${
@@ -635,10 +670,11 @@ const ParentAreaScreen = ({
       {onBack || onCredits ? (
         <View style={styles.buttons}>
           {onBack ? (
-            <CalmButton testID={`${testID}-back`} label="Back" onPress={onBack} />
+            <CalmButton disabled={saving || undefined} testID={`${testID}-back`} label="Back" onPress={onBack} />
           ) : null}
           {onCredits ? (
             <CalmButton
+              disabled={saving || undefined}
               testID={`${testID}-credits`}
               label="Credits and licences"
               onPress={onCredits}

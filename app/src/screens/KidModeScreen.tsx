@@ -21,18 +21,27 @@
  * - it never lists a title that did not verify. That is kidModeTitles, and
  *   the parent area is the only place the others appear.
  *
- * Not done yet, and worth knowing: the PIN and the room setting live in
- * memory, so the first run comes back on the next launch. Writing them to
- * /data is a small job and a separate one.
+ * Household setup is restored before the shelf opens. Storage failures keep
+ * it closed rather than replacing the saved floor or PIN with defaults.
  */
 
 import { RouteProp } from '@amazon-devices/react-navigation__core';
 import { StackNavigationProp } from '@amazon-devices/react-navigation__stack';
 import React from 'react';
 import { BackHandler, Platform } from 'react-native';
+import HouseholdStorageScreen from '../calmframes/HouseholdStorageScreen';
+import {
+  deviceHouseholdStorage,
+  HouseholdStorage,
+} from '../calmframes/householdStorage';
+import { useSavedHousehold } from '../calmframes/useSavedHousehold';
 import FirstRunScreen, { FirstRunResult } from '../calmframes/FirstRunScreen';
-import { DEFAULT_SETTINGS, HouseholdSettings, PRESETS } from '../calmframes/household';
-import { useHideLogs } from '../calmframes/hideLogStore';
+import {
+  DEFAULT_SETTINGS,
+  HouseholdSettings,
+  PRESETS,
+} from '../calmframes/household';
+import { forgetProfile, useHideLogs } from '../calmframes/hideLogStore';
 import {
   refusedTitle,
   useMapSources,
@@ -55,15 +64,22 @@ import {
   offlineTitle,
 } from '../calmframes/offlineTitle';
 import CreditsScreen from '../calmframes/CreditsScreen';
+import {
+  benignStoryTitle,
+  benignStorySettings,
+  bundledTitlePublicKey,
+} from '../calmframes/benignStory';
 import ParentAreaScreen from '../calmframes/ParentAreaScreen';
 import { emptyPinGate, PinGateState } from '../calmframes/parentGate';
-import { CatalogTitle, CheckedTitle, checkTitle } from '../calmframes/titleStatus';
-import TitleDetailsScreen from '../calmframes/TitleDetailsScreen';
 import {
-  AppStackParamList,
-  Screens,
-} from '../components/navigation/types';
+  CatalogTitle,
+  CheckedTitle,
+  checkTitle,
+} from '../calmframes/titleStatus';
+import TitleDetailsScreen from '../calmframes/TitleDetailsScreen';
+import { AppStackParamList, Screens } from '../components/navigation/types';
 import { TitleData } from '../types/TitleData';
+import { concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
 
 export type KidModeView =
   | 'first-run'
@@ -76,8 +92,8 @@ export interface KidModeScreenProps {
   navigation: StackNavigationProp<AppStackParamList, Screens.KID_MODE_SCREEN>;
   route?: RouteProp<AppStackParamList, Screens.KID_MODE_SCREEN>;
   /**
-   * The catalog. Defaults to the title bundled inside the package, which is
-   * the one that needs no network and no backend, so a judge with the device
+   * The catalog. Defaults to the titles bundled inside the package, which
+   * need no network and no backend, so a judge with the device
    * in flight mode still gets a working kid mode.
    */
   catalog?: CatalogTitle[];
@@ -105,11 +121,13 @@ export interface KidModeScreenProps {
   newSalt?: () => string;
   nowMs?: () => number;
   testID?: string;
+  /** Tests can provide local storage without a native device. */
+  householdStorage?: HouseholdStorage;
 }
 
-/** The bundled title, and nothing else until a backend is wired in. */
-export function defaultCatalog(): CatalogTitle[] {
-  return [offlineTitle(OFFLINE_VIDEO_URI)];
+/** The bundled demos and checked prepared library are available offline. */
+export function defaultCatalog(settings = DEFAULT_SETTINGS): CatalogTitle[] {
+  return [offlineTitle(OFFLINE_VIDEO_URI), benignStoryTitle(), ...packagedLibrary.titles(settings)];
 }
 
 /**
@@ -134,6 +152,7 @@ export function titleDataFor(entry: CheckedTitle): TitleData {
     mediaType: 'video',
     mediaSourceType: 'url',
     uri: entry.title.uri,
+    textTrack: entry.title.textTrack,
     categories: [],
     channelID: '',
     posterUrl: entry.title.posterUrl ?? '',
@@ -159,8 +178,10 @@ export function guardedParamsFor(
 ) {
   return {
     sha256: entry.title.sha256,
+    renditionSha256: entry.title.renditionSha256,
+    renditionStartOffsetMs: entry.title.renditionStartOffsetMs,
     maps: entry.title.maps,
-    settings,
+    settings: benignStorySettings(entry.title, settings),
     durationMs: entry.title.durationMs,
     titleId: entry.title.id,
     // The household switch travels with the title, because the player screen
@@ -182,19 +203,49 @@ const KidModeScreen = ({
   newSalt = makeLocalSalt,
   nowMs = Date.now,
   testID = 'kid-mode',
+  householdStorage = deviceHouseholdStorage,
 }: KidModeScreenProps) => {
   // The family is the one record: the household floor, the kids and which of
   // them the shelf is for. The settings the guard runs with are derived from
   // it rather than stored beside it, so there is no second copy to disagree.
-  const [family, setFamily] = React.useState<Family>(() => newFamily(DEFAULT_SETTINGS));
-  const [gate, setGate] = React.useState<PinGateState>(emptyPinGate());
+  const saved = useSavedHousehold(householdStorage);
+  const committedFamily = saved.value?.family;
+  const previousFamily = React.useRef<Family | null>(null);
+  React.useEffect(() => {
+    if (!committedFamily) {
+      return;
+    }
+    const previous = previousFamily.current;
+    previousFamily.current = committedFamily;
+    for (const profile of previous?.profiles ?? []) {
+      if (!committedFamily.profiles.some((one) => one.id === profile.id)) {
+        forgetProfile(profile.id);
+      }
+    }
+  }, [committedFamily]);
+  const family = saved.value?.family ?? newFamily(DEFAULT_SETTINGS);
+  const gate = saved.value?.gate ?? emptyPinGate();
+  const setFamily = (next: Family) => {
+    if (saved.phase === 'ready' && saved.value) {
+      saved.write({ ...saved.value, family: next });
+    }
+  };
+  const setGate = async (next: PinGateState) => {
+    if (
+      !saved.value ||
+      saved.phase !== 'ready' ||
+      !(await saved.write({ ...saved.value, gate: next }))
+    ) {
+      throw new Error('PIN state was not saved');
+    }
+  };
   // The player covers the flagged parts and knows what it hid. It writes each
   // one into the shared store in hideLogStore.ts, which is a module rather
   // than state on either screen, so a hide survives the player being torn down
   // on the way back here. The logs are kept per profile, so one kid's record
   // cannot land in another's.
   const profileLogs = useHideLogs();
-  const [view, setView] = React.useState<KidModeView>('first-run');
+  const [view, setView] = React.useState<KidModeView>('home');
   const [openId, setOpenId] = React.useState<string | null>(null);
 
   const watching = activeProfile(family);
@@ -205,7 +256,7 @@ const KidModeScreen = ({
     [family, watching],
   );
 
-  const entries = React.useMemo(() => catalog ?? defaultCatalog(), [catalog]);
+  const entries = React.useMemo(() => catalog ?? defaultCatalog(settings), [catalog, settings]);
   // Where each title's map comes from: the signed index first, by the file's
   // hash, then the map the package or the catalog carried. With no index
   // configured this is the catalog itself and nothing is fetched.
@@ -229,8 +280,10 @@ const KidModeScreen = ({
           return waitingTitle(one.title);
         }
         return checkTitle(one.title, {
-          settings,
-          publicKeyBase64,
+          settings: benignStorySettings(one.title, settings),
+          publicKeyBase64: concernsPackagedLibrary(one.title)
+            ? packagedLibrary.publicKeyFor(one.title, settings) ?? ''
+            : bundledTitlePublicKey(one.title, publicKeyBase64),
           nowMs: nowMs(),
         });
       }),
@@ -244,26 +297,34 @@ const KidModeScreen = ({
     if (!Platform.isTV) {
       return undefined;
     }
-    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
-      if (view === 'details' || view === 'parent') {
-        setView('home');
-        setOpenId(null);
-        return true;
-      }
-      return false;
-    });
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        if (view === 'details' || view === 'parent') {
+          setView('home');
+          setOpenId(null);
+          return true;
+        }
+        return false;
+      },
+    );
     return () => subscription.remove();
   }, [view]);
 
   const finishFirstRun = (result: FirstRunResult) => {
-    setGate(result.gate);
     // The first run sets the floor, not one kid's settings. Every profile is
     // measured against it afterwards and the stricter one wins.
-    setFamily((previous) => setFloor(previous, result.settings));
-    setView('home');
+    saved.write({
+      version: 1,
+      gate: result.gate,
+      family: setFloor(family, result.settings),
+    });
   };
 
   const play = (entry: CheckedTitle) => {
+    if (saved.phase !== 'ready' || !saved.value) {
+      return;
+    }
     navigation.navigate(Screens.PLAYER_SCREEN, {
       data: titleDataFor(entry),
       guarded: guardedParamsFor(
@@ -275,7 +336,21 @@ const KidModeScreen = ({
     });
   };
 
-  if (view === 'first-run') {
+  if (
+    saved.phase === 'loading' ||
+    saved.phase === 'error' ||
+    (saved.phase === 'saving' && !saved.value)
+  ) {
+    return (
+      <HouseholdStorageScreen
+        testID={`${testID}-storage`}
+        failed={saved.phase === 'error'}
+        onRetry={saved.retry}
+      />
+    );
+  }
+
+  if (!saved.value || view === 'first-run') {
     return (
       <FirstRunScreen
         testID={`${testID}-first-run`}
@@ -289,6 +364,7 @@ const KidModeScreen = ({
   if (view === 'parent') {
     return (
       <ParentAreaScreen
+        saving={saved.phase === 'saving'}
         testID={`${testID}-parent`}
         gate={gate}
         onGateChange={setGate}
@@ -322,6 +398,7 @@ const KidModeScreen = ({
   if (view === 'details' && open) {
     return (
       <TitleDetailsScreen
+        saving={saved.phase === 'saving'}
         testID={`${testID}-details`}
         entry={open}
         settings={settings}
@@ -336,11 +413,14 @@ const KidModeScreen = ({
 
   return (
     <KidHomeScreen
+      saving={saved.phase === 'saving'}
       testID={`${testID}-home`}
       titles={titles}
       profiles={family.profiles}
       activeProfileId={family.activeProfileId}
-      onChooseProfile={(profile) => setFamily(selectProfile(family, profile.id))}
+      onChooseProfile={(profile) =>
+        setFamily(selectProfile(family, profile.id))
+      }
       onOpen={(entry) => {
         setOpenId(entry.title.id);
         setView('details');

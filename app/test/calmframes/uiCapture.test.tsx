@@ -24,6 +24,7 @@ import CoverLayer from '../../src/calmframes/CoverLayer';
 import CreditsScreen from '../../src/calmframes/CreditsScreen';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
 import FirstRunScreen from '../../src/calmframes/FirstRunScreen';
+import HouseholdStorageScreen from '../../src/calmframes/HouseholdStorageScreen';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
@@ -41,6 +42,8 @@ import {
 } from '../../src/calmframes/uiCapture';
 import {
   ALL_UI_FRAMES,
+  HOUSEHOLD_LOADING_FRAME,
+  HOUSEHOLD_ERROR_FRAME,
   FIRST_RUN_EXPLAINER_FRAME,
   FIRST_RUN_PIN_FRAME,
   FIRST_RUN_PRESET_FRAME,
@@ -179,6 +182,12 @@ function blockedTitle(): CheckedTitle {
 }
 
 describe('what the app paints', () => {
+  it('measures household storage loading and errors from the rendered screen', () => {
+    expect(renderedFrame('household-loading', <HouseholdStorageScreen failed={false} onRetry={jest.fn()} />))
+      .toEqual(HOUSEHOLD_LOADING_FRAME);
+    expect(renderedFrame('household-error', <HouseholdStorageScreen failed onRetry={jest.fn()} />))
+      .toEqual(HOUSEHOLD_ERROR_FRAME);
+  });
   it('reads the colours off a rendered tree, background first', () => {
     const frame = renderedFrame('kid-home', (
       <KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />
@@ -433,6 +442,10 @@ describe('the capture path', () => {
       act?: () => void;
     }
     const scenes: Array<{ element: React.ReactElement; stops: Stop[] }> = [
+      { element: <HouseholdStorageScreen failed={false} onRetry={jest.fn()} />,
+        stops: [{ name: 'household-loading', reason: 'restoring household' }] },
+      { element: <HouseholdStorageScreen failed onRetry={jest.fn()} />,
+        stops: [{ name: 'household-error', reason: 'storage unavailable' }] },
       {
         element: firstRun(),
         stops: [

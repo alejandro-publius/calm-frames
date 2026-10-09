@@ -2,9 +2,20 @@
 
 **Target:** [`AmazonAppDev/vega-video-sample`](https://github.com/AmazonAppDev/vega-video-sample), the Fire TV video sample that most Vega video apps start from. It has merged an outside contributor's pull request before: #7, opened June 18 2026 by an account with no association to the repository, merged July 6 2026. So they do take them.
 
-**Status, Thu Sep 17 2026.** The branch is finished and verified. Two commits and three tests, sitting as ready-to-apply patch files in [`docs/upstream-pr/`](upstream-pr/). **Nothing has been pushed and no pull request has been opened**, because the branch has to live in a fork under Alex's own GitHub account. Everything needed to open it is in this file. Due by Monday October 12.
+**Status, Fri Oct 2 2026.** The two existing patches and their three added tests
+were reapplied and revalidated locally against the pristine sample. They remain
+ready-to-apply files in [`docs/upstream-pr/`](upstream-pr/). **No public fork,
+issue or pull request has been created.** The contribution link remains due by
+Monday October 12.
 
-**Checked against the live repository today:**
+The Oct 2 read-only GitHub check found upstream `main` still at
+[`ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`](https://github.com/AmazonAppDev/vega-video-sample/commit/ef8e4da89b22ef7973d0d41beedfa2b42f7bb272).
+The [contributor guide](https://github.com/AmazonAppDev/vega-video-sample/blob/main/CONTRIBUTING.md)
+was unchanged, and targeted Shaka issue and pull request searches returned no
+matches. The current local evidence is recorded below; the broader historical
+suite results keep their original dates.
+
+**Historical live repository check, Sep 17 2026:**
 
 | What | Result, Sep 17 2026 |
 |---|---|
@@ -14,7 +25,8 @@
 | Every issue and pull request ever filed | 11, none of them about Shaka load failures or a stuck buffering spinner. This is not a duplicate |
 | Licence | MIT-0 |
 
-Re-run those checks on the day. `main` has not moved in six weeks, but the patch has to go on top of whatever `main` is then.
+Re-run those checks before publishing. The patch has to go on top of the
+upstream `main` that exists then.
 
 ---
 
@@ -291,9 +303,32 @@ The three tests are three different claims:
 
 ## What was verified, and how
 
+**Revalidated Oct 2 2026, Node 22.23.2.** A fresh scratch repository was
+extracted with `git archive cf8b752:app`, the pristine local copy of the current
+upstream commit. Both existing patches applied cleanly with `git am`.
+Dependencies were borrowed through scratch-only symlinks and the same four
+empty mock-resolution stubs described below. The project checkout and installed
+dependencies were not modified.
+
+| Current focused check | Result |
+|---|---|
+| Pristine `VideoHandler.test.ts` | 3 passed |
+| Both patches applied, then restored after controls | 6 passed in each run |
+| Remove the new promise rejection handler | 2 failed, 4 passed |
+| Remove only its teardown guard | 1 failed, 5 passed |
+| Revert only `ShakaPlayer.ts`, keep the handler | 6 passed; the existing mocked-Shaka coverage gap remains |
+| ESLint and Prettier on the three changed files | Both exit 0 |
+| Final scratch diff and working tree | No whitespace errors; clean after restoration |
+
+The commands, return codes and scratch provenance are recorded in
+`.logs/upstream-shaka-review.json`; individual logs use
+`.logs/upstream-shaka-*.log`. This recheck covers promise error handling in unit
+tests. It adds no device or external adoption evidence. The historical full
+suite and type checks below were not rerun in this checkpoint.
+
 Two clean checkouts of upstream `ef8e4da` were made in a scratch directory from commit `cf8b752` of this repository, which is that commit byte for byte. `node_modules` is a directory of symlinks into this repository's `app/node_modules`, plus four resolution stubs for `@amazon-devices` packages that Calm Frames removed from its own install and the pristine `jest.setup.ts` still mocks: `kepler-channel`, `kepler-media-account-login`, `kepler-media-content-launcher` and `kepler-epg-sync-scheduler`. Each stub is an empty module that exists only so `jest.mock` can resolve a path. Nothing else about the sample was touched, and this repository's own `node_modules` was not written to.
 
-Run on Sep 17 2026, Node 22.23.2:
+Historical broad run on Sep 17 2026, Node 22.23.2:
 
 | Step | Result |
 |---|---|

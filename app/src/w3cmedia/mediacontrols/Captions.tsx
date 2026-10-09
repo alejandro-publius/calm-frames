@@ -64,8 +64,7 @@ export const CaptionMenu = React.memo(
       setSelectedCaption(CAPTION_DISABLE_ID);
       removeCurrentCaption();
       setCaptionMenuVisibility(false);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [setSelectedCaption, removeCurrentCaption, setCaptionMenuVisibility]);
 
     return (
       <TVFocusGuideView trapFocusLeft trapFocusRight trapFocusUp>

@@ -8,9 +8,9 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 ## What it is
 
-Calm Frames is a verified safety layer for kids with photosensitive epilepsy, and it is never a video player. Every frame of a title is checked before that title can play in kid mode, and the result is an Ed25519 signed flash map bound to the file's SHA-256. When a child plays the title, the player hides each flagged segment before it starts while the sound and the captions keep going, then says what was hidden. The layer adapts to the household, because a parent gives the TV size and the seat distance and picks a preset, and a household setting can only ever make it stricter than WCAG, never weaker. Voice, D-pad and on-screen cards all run through one seek function, so every path to a new playhead position is safe: if the target lands inside a flagged interval or its guard band, the picture is covered first and the seek happens second. Any Vega video app can add the same protection with a small hook, and any studio can check its own content before publishing with the open-source analyzer and its GitHub Action.
+Calm Frames combines an offline video analyzer, a checked rendition pipeline and a Vega player for families affected by photosensitivity. Before playback, the pipeline analyzes the source, signs its flash map and verifies the prepared rendition. The player adds a scheduled cover, context images and guarded seeks, with audio and captions intended to preserve the story. Parent settings can make the standard floor stricter and now persist locally. A reusable hook and analyzer provide adoption paths for other developers. Detection, delivery integrity and physical screen behavior have separate limits, recorded below; a signature is not proof that every hazard was detected.
 
-**Status, Sep 29 2026.** This is a build in progress for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The analyzer, the pipeline, the cover layer and the measurement harnesses are built and tested. Nothing has been measured on a physical Fire TV stick yet, so there is no screen-level cover lead time. There is a software-level one from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time. Six produced no usable evidence and one was late. Counting the six as failures, which is the strict reading, that is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> you get from the trials that could be measured. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
+**Status, Oct 2 2026.** This is a build in progress for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The analyzer, the pipeline, the cover layer and the measurement harnesses are built and tested. Nothing has been measured on a physical Fire TV stick yet, so there is no screen-level cover lead time. There is a software-level one from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time. Six produced no usable evidence and one was late. Counting the six as failures, which is the strict reading, that is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> you get from the trials that could be measured. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
 
 **Scene holds, Sep 29.** Hidden intervals can now show a checked still from the
 preceding context, helping keep the story in view while audio and captions continue.
@@ -19,6 +19,10 @@ pre-covered rendition and the live-cover model. Missing images, uncertain
 playback, seeks and image decode errors use an opaque black cover. This changes
 the presentation, not the detector thresholds or hide timing. Native image and
 caption composition still need a physical-device check.
+
+The current [hackathon assessment](docs/HACKATHON_REVIEW.md) separates the
+project score from missing submission evidence. The [continuation prompt](docs/CONTINUATION_PROMPT.md)
+provides the next agent with an evidence-driven improvement loop.
 
 ## Contents
 
@@ -492,10 +496,29 @@ titles, and rebuilding it rechecks current artifact bytes against the receipt.
 A failed re-import withdraws the old ready receipt. Overlapping imports into
 the same workspace are refused rather than racing shared catalog writes.
 
-The receipt says **ready for local playback of the prepared rendition**. It
-does not populate the Vega app shelf, verify live playback on a television or
-replace a consuming player's signed-map check. This workflow uses the existing
-pipeline with its verification enabled, not a weaker local approval path.
+The receipt says **ready for local playback of the prepared rendition**. To
+include the checked titles in the next Vega build, export their prepared assets:
+
+```sh
+python -m pipeline.packaged_library export --workdir build/local-library \
+    --output app/assets/raw/prepared-library --pub /path/to/team_key.pub.pem
+python -m pipeline.packaged_library check --output app/assets/raw/prepared-library
+cd app && npm run build:debug
+```
+
+The app selects the prepared rendition for the household's preset. The compiled
+catalog keeps the analyzed source hash distinct from the rendition hash and
+binds the local media, signed maps and extracted captions. Build checks verify
+those exact bytes again inside every package. Playback rejects a substituted
+route before loading its media and still performs the normal signed-map check.
+This is a bounded library packaged at build time; adding titles requires a new
+build. It does not establish native playback or physical-TV composition.
+
+Local preparation now uses the app's profile unions and guard timings, with
+opaque live fallback and a verified pre-covered picture. Its default analysis
+room covers the current selectable room sizes. Signed per-interval scene images
+remain available in the separate scene-hold pipeline and the labelled Harbor
+practice demo; arbitrary prepared imports do not yet carry union scene images.
 
 Detailed commands, exit statuses and workspace limits are in
 [`pipeline/LOCAL_LIBRARY.md`](pipeline/LOCAL_LIBRARY.md).
@@ -504,8 +527,16 @@ In the app, setup now ends with a review of the chosen preset, television size
 and seating distance. A checked title's viewing plan explains which maps were
 checked, how scene holds fall back to an opaque cover, and the limits of the
 protection. Pending or failed titles get no ready plan. These are presentation
-changes; timing, seek guards and household floors are unchanged. Household
-settings and the PIN are still in memory in the demo, not durable storage.
+changes; timing, seek guards and household floors are unchanged.
+
+Household setup is saved locally for later app launches: the selected
+child, profiles, room, preset, chime choice, salted PIN hash and failed-attempt
+lockout are saved together in a versioned local record. The library opens only
+after that record is read and validated. Unreadable or malformed records keep
+it closed; a failed save offers a retry of the intended change. No plaintext
+PIN or unlocked parent session is saved. The hide history remains in memory.
+These paths are covered by app regressions, with native storage behavior on
+physical Fire TV still awaiting validation.
 
 ### Read-only physical-TV preflight
 

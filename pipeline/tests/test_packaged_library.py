@@ -1,0 +1,264 @@
+"""Package contracts use fabricated media; real CLI integration is separate."""
+from __future__ import annotations
+
+import json
+import os
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+
+from pipeline import packaged_library as packaged
+from pipeline.hashing import sha256_file
+from pipeline.hideplan import HidePlan
+from pipeline.registry import load_private_key, sign_document, write_registry
+
+from .test_local_library import _replace_report, stub_workspace  # noqa: F401
+
+
+@pytest.fixture
+def ready(stub_workspace, monkeypatch, tmp_path):
+    state = stub_workspace
+    state.presets = list(packaged.PRESETS)
+    state.output = tmp_path / "package"
+    def artifacts(result):
+        for preset in state.presets:
+            doc = {"version": 1, "source": {"sha256": result.sha256, "duration_ms": 1000},
+                   "profile": {"name": "broadcast" if preset == "broadcast" else "wcag"},
+                   "segments": [], "summary": {"pass": True, "segment_count": 0}}
+            write_registry(sign_document(doc, load_private_key(state.private)), result.layout.map_path(preset))
+            plan = HidePlan(preset, result.sha256, 500, 400, 1000, True, [])
+            result.layout.plan_path(preset).write_text(json.dumps(plan.to_dict()))
+        def offsets(data):
+            for check in data["checks"]:
+                if check["name"].startswith("rendition_matches_source:"):
+                    check["data"]["start_offset_ms"] = 0
+        _replace_report(result, offsets)
+    state.fault = artifacts
+    monkeypatch.setattr(packaged, "probe_video", lambda _path: SimpleNamespace(duration_ms=1000, subtitle_streams=[]))
+    assert state.run()["status"] == "ready"
+    return state
+
+
+def export(state):
+    return packaged.export_packaged_library(state.root, state.output, pub=state.public)
+
+
+def test_complete_export_has_separate_source_and_delivered_hashes_and_no_source_or_key(ready):
+    manifest = export(ready)
+    title = manifest["titles"][0]
+    assert title["sourceSha256"] == sha256_file(ready.source)
+    assert title["id"] == "prepared-" + title["sourceSha256"]
+    assert set(title["maps"]) == set(packaged.PRESETS)
+    assert set(title["renditions"]) == set(packaged.PRESETS)
+    for preset, rendition in title["renditions"].items():
+        actual = ready.output / manifest["bundleId"] / rendition["path"]
+        assert sha256_file(actual) == rendition["sha256"] != title["sourceSha256"]
+        assert rendition["startOffsetMs"] == 0
+        assert rendition["guardBandMs"] == packaged.TIMING[preset][0]
+    assert packaged.check_packaged_library(ready.output) == manifest
+    assert not list(ready.output.rglob("*.pem"))
+    assert not any(path.name == ready.source.name for path in ready.output.rglob("*"))
+    encoded = json.dumps(manifest)
+    assert str(ready.source) not in encoded
+    assert ready.private.read_text() not in encoded
+    assert ready.public.read_text() not in encoded
+    assert export(ready) == manifest
+
+
+@pytest.mark.parametrize("kind", ["map", "media", "report", "plan", "receipt"])
+def test_modified_preparation_cannot_replace_existing_export(ready, kind):
+    manifest = export(ready)
+    before = (ready.output / "catalog.ts").read_bytes()
+    paths = {"map": ready.result.layout.map_path("wcag"),
+             "media": ready.result.layout.safe_master("wcag"),
+             "report": ready.result.layout.verify_report_path,
+             "plan": ready.result.layout.plan_path("wcag"),
+             "receipt": ready.root / "local-receipts" / f"{ready.result.sha256}.json"}
+    paths[kind].write_text("changed")
+    with pytest.raises(packaged.PackagedLibraryError):
+        export(ready)
+    assert (ready.output / "catalog.ts").read_bytes() == before
+    assert packaged.check_packaged_library(ready.output) == manifest
+
+
+def test_wrong_trusted_signer_and_partial_presets_refuse(ready, tmp_path):
+    from cryptography.hazmat.primitives import serialization
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+    other = tmp_path / "other.pub.pem"
+    other.write_bytes(Ed25519PrivateKey.generate().public_key().public_bytes(
+        serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
+    with pytest.raises(Exception, match="key|signed|public"):
+        packaged.export_packaged_library(ready.root, ready.output, pub=other)
+    assert not (ready.output / "catalog.ts").exists()
+    ready.presets = ["wcag", "broadcast"]
+    assert ready.run()["status"] == "ready"
+    with pytest.raises(packaged.PackagedLibraryError, match="all three"):
+        export(ready)
+
+
+@pytest.mark.parametrize("changed", ["source", "profile"])
+def test_valid_signature_does_not_override_required_source_and_profile(ready, changed):
+    path = ready.result.layout.map_path("broadcast")
+    document = json.loads(path.read_text())
+    if changed == "source":
+        document["source"]["sha256"] = "0" * 64
+    else:
+        document["profile"]["name"] = "wcag"
+    write_registry(sign_document(document, load_private_key(ready.private)), path)
+    receipt_path = ready.root / "local-receipts" / f"{ready.result.sha256}.json"
+    receipt = json.loads(receipt_path.read_text())
+    receipt["artifacts"] = packaged.local._artifacts(ready.result.layout, ready.presets)
+    receipt["verification"]["checked_inputs_sha256"] = packaged.local._inputs_digest(ready.result.layout)
+    receipt_path.write_text(json.dumps(receipt))
+    with pytest.raises(packaged.PackagedLibraryError, match="wrong source or profile"):
+        export(ready)
+
+
+@pytest.mark.parametrize("change", ["module", "manifest", "missing", "bytes", "extra", "symlink", "hardlink"])
+def test_package_checker_refuses_changed_or_unexpected_bytes(ready, tmp_path, change):
+    manifest = export(ready)
+    bundle = ready.output / manifest["bundleId"]
+    media = bundle / manifest["titles"][0]["renditions"]["wcag"]["path"]
+    if change == "module":
+        (ready.output / "catalog.ts").write_text("export const PACKAGED_LIBRARY_JSON = '{}';")
+    elif change == "manifest":
+        (bundle / "manifest.json").write_text("{}")
+    elif change == "missing":
+        media.unlink()
+    elif change == "bytes":
+        media.write_bytes(b"CHANGED BYTES")
+    elif change == "extra":
+        (bundle / "private.pem").write_text("not a real key")
+    else:
+        other = tmp_path / "unowned.mp4"
+        other.write_bytes(media.read_bytes())
+        media.unlink()
+        if change == "symlink":
+            media.symlink_to(other)
+        else:
+            os.link(other, media)
+    with pytest.raises(packaged.local.LocalLibraryError):
+        packaged.check_packaged_library(ready.output)
+
+
+@pytest.mark.parametrize("kind", ["output", "ancestor", "input"])
+def test_symlink_roots_or_inputs_are_never_followed(ready, tmp_path, kind):
+    if kind == "input":
+        media = ready.result.layout.safe_master("wcag")
+        outside = tmp_path / "unowned"
+        outside.write_bytes(media.read_bytes())
+        media.unlink()
+        media.symlink_to(outside)
+    elif kind == "output":
+        other = tmp_path / "outside"
+        other.mkdir()
+        ready.output.symlink_to(other)
+    else:
+        parent = tmp_path / "alias"
+        parent.symlink_to(tmp_path)
+        ready.output = parent / "package"
+    with pytest.raises(packaged.local.LocalLibraryError):
+        export(ready)
+
+
+def test_selected_missing_title_is_not_silently_omitted(ready):
+    with pytest.raises(packaged.PackagedLibraryError, match="selected title"):
+        packaged.export_packaged_library(ready.root, ready.output, pub=ready.public,
+                                         source_shas=["0" * 64])
+
+
+def test_stream_copy_hashes_the_bytes_read_instead_of_a_previous_filename_hash(ready, tmp_path):
+    destination = tmp_path / "copied.mp4"
+    with pytest.raises(packaged.PackagedLibraryError, match="changed"):
+        packaged._copy_checked(ready.result.layout.safe_master("wcag"), destination,
+                               "0" * 64, ready.root)
+
+
+def test_prepared_plan_must_include_both_profiles_and_extra_cautious_timing(ready):
+    from pipeline.flashmap_adapter import MapSegment, load_map
+    layout = ready.result.layout
+    maps = {preset: load_map(layout.map_path(preset)) for preset in packaged.PRESETS}
+    maps["wcag"].segments = [MapSegment(300, 400, "general")]
+    with pytest.raises(packaged.PackagedLibraryError, match="complete cover schedule"):
+        packaged.require_runtime_plan(layout, maps, "broadcast", 1000)
+    maps["wcag"].segments = []
+    maps["broadcast"].segments = [MapSegment(300, 400, "red")]
+    with pytest.raises(packaged.PackagedLibraryError, match="complete cover schedule"):
+        packaged.require_runtime_plan(layout, maps, "extra-cautious", 1000)
+
+
+def test_empty_sentinel_is_explicit_and_cannot_hide_bundle_assets(tmp_path):
+    text = '{"version":1,"titles":[]}'
+    (tmp_path / "catalog.json").write_text(text)
+    (tmp_path / "catalog.ts").write_text(packaged.catalog_module(text))
+    assert packaged.check_packaged_library(tmp_path) == {"version": 1, "titles": []}
+    (tmp_path / "unexpected.mp4").write_bytes(b"not media")
+    with pytest.raises(packaged.PackagedLibraryError, match="empty library"):
+        packaged.check_packaged_library(tmp_path)
+
+
+@pytest.mark.parametrize("empty", [False, True])
+@pytest.mark.parametrize("change", ["bytes", "symlink", "hardlink", "directory"])
+def test_export_lock_cannot_carry_unreviewed_data_or_aliases(ready, tmp_path, empty, change):
+    if empty:
+        ready.output.mkdir()
+        text = '{"version":1,"titles":[]}'
+        (ready.output / "catalog.json").write_text(text)
+        (ready.output / "catalog.ts").write_text(packaged.catalog_module(text))
+    else:
+        export(ready)
+    lock = ready.output / ".local-library.lock"
+    lock.unlink(missing_ok=True)
+    if change == "bytes":
+        lock.write_bytes(b"UNREVIEWED DATA")
+    elif change == "directory":
+        lock.mkdir()
+    else:
+        outside = tmp_path / "external-lock"
+        outside.write_bytes(b"")
+        if change == "symlink":
+            lock.symlink_to(outside)
+        else:
+            os.link(outside, lock)
+    with pytest.raises(packaged.local.LocalLibraryError):
+        packaged.check_packaged_library(ready.output)
+
+
+def test_entire_output_namespace_is_checked_including_retained_generations(ready):
+    original = export(ready)
+    receipt_path = ready.root / "local-receipts" / f"{ready.result.sha256}.json"
+    receipt = json.loads(receipt_path.read_text())
+    receipt["title"] = "Another title for the same checked artifact"
+    receipt_path.write_text(json.dumps(receipt))
+    current = export(ready)
+    assert current["bundleId"] != original["bundleId"]
+    assert packaged.check_packaged_library(ready.output) == current
+    old = ready.output / original["bundleId"] / original["titles"][0]["renditions"]["wcag"]["path"]
+    old.write_bytes(b"CHANGED RETAINED BYTES")
+    with pytest.raises(packaged.PackagedLibraryError, match="differs"):
+        packaged.check_packaged_library(ready.output)
+
+
+def test_arbitrary_sibling_file_never_ships_unchecked(ready):
+    export(ready)
+    (ready.output / "unexpected.bin").write_bytes(b"UNEXPECTED")
+    with pytest.raises(packaged.PackagedLibraryError, match="unexpected file"):
+        packaged.check_packaged_library(ready.output)
+    with pytest.raises(packaged.PackagedLibraryError, match="unexpected file"):
+        export(ready)
+
+
+def test_retained_generation_byte_budget_applies_before_publication(ready, monkeypatch):
+    export(ready)
+    before = (ready.output / "catalog.ts").read_bytes()
+    receipt_path = ready.root / "local-receipts" / f"{ready.result.sha256}.json"
+    receipt = json.loads(receipt_path.read_text())
+    receipt["title"] = "A second generation"
+    receipt_path.write_text(json.dumps(receipt))
+    size = sum(path.stat().st_size for path in ready.output.rglob("*") if path.is_file())
+    monkeypatch.setattr(packaged, "MAX_BUNDLE_BYTES", size + 1)
+    with pytest.raises(packaged.PackagedLibraryError, match="byte budget"):
+        export(ready)
+    assert (ready.output / "catalog.ts").read_bytes() == before
+    assert not list(ready.output.glob(".stage-*"))

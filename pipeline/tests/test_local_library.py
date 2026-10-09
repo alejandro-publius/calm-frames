@@ -398,7 +398,8 @@ def test_real_cli_prepares_all_presets_with_actual_analyzer_and_no_source_public
         document = json.loads((root / artifacts["map"]).read_text())
         assert document["generator"]["name"] == "flashmap"
         assert document["signature"]["algorithm"] == "ed25519"
-        for name in (*library._CORE_CHECKS, "scene_assets", "bif_calm", "posters_calm"):
+        assert "scene_holds" not in document
+        for name in (*library._CORE_CHECKS, "bif_calm", "posters_calm"):
             assert checks[f"{name}:{preset}"] is True
     assert not list(root.rglob("*.pem"))
     assert str(source) not in completed.stdout

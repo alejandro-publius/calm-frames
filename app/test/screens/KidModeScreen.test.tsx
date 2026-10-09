@@ -11,8 +11,13 @@
  * reach it on a device.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
+
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  getItem: jest.fn(async () => null),
+  setItem: jest.fn(async () => undefined),
+}));
 import { OFFLINE_MAP_JSON } from '../../src/calmframes/offlineMapText';
 import {
   OFFLINE_TITLE_ID,
@@ -27,11 +32,12 @@ import KidModeScreen, {
 import { checkTitle } from '../../src/calmframes/titleStatus';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { OFFLINE_PUBLIC_KEY_BASE64 } from '../../src/calmframes/offlineTitle';
+import { BENIGN_STORY_ID, BENIGN_STORY_URI } from '../../src/calmframes/benignStory';
 
 /** A moment when the bundled map is neither unmade nor stale. */
 const NOW = Date.parse(JSON.parse(OFFLINE_MAP_JSON).created_utc) + 60_000;
 
-function renderKidMode() {
+async function renderKidMode() {
   const navigate = jest.fn();
   render(
     <KidModeScreen
@@ -40,11 +46,12 @@ function renderKidMode() {
       nowMs={() => NOW}
     />,
   );
+  await screen.findByTestId('kid-mode-first-run');
   return { navigate };
 }
 
 /** The first run, end to end, with the PIN 1357. */
-function finishFirstRun() {
+async function finishFirstRun() {
   const type = (digits: string) => {
     for (const digit of digits) {
       fireEvent.press(screen.getByTestId(`kid-mode-first-run-key-${digit}`));
@@ -54,20 +61,34 @@ function finishFirstRun() {
   type('1357');
   fireEvent.press(screen.getByTestId('kid-mode-first-run-next'));
   fireEvent.press(screen.getByTestId('kid-mode-first-run-next'));
-  fireEvent.press(screen.getByTestId('kid-mode-first-run-done'));
+  await act(async () => {
+    fireEvent.press(screen.getByTestId('kid-mode-first-run-done'));
+  });
 }
 
 describe('reaching Calm Frames', () => {
-  it('opens on the first run, and lands on the shelf when it is done', () => {
-    renderKidMode();
+  it('opens the labelled story with captions and the prepared Extra cautious timing', async () => {
+    const { navigate } = await renderKidMode();
+    await finishFirstRun();
+    fireEvent.press(screen.getByTestId(`kid-mode-home-poster-${BENIGN_STORY_ID}`));
+    expect(JSON.stringify(screen.getByTestId('kid-mode-details-demo-label').props.children)).toContain('practice holds, no flashing');
+    expect(screen.getByTestId('kid-mode-details-summary').props.children).toContain('8 seconds');
+    fireEvent.press(screen.getByTestId('kid-mode-details-play'));
+    const [, params] = navigate.mock.calls[0];
+    expect(params.data.uri).toBe(BENIGN_STORY_URI);
+    expect(params.data.textTrack[0].uri).toMatch(/harbor\.vtt$/);
+    expect(params.guarded.settings.preset).toBe('extra-cautious');
+  });
+  it('opens on the first run, and lands on the shelf when it is done', async () => {
+    await renderKidMode();
     expect(screen.getByTestId('kid-mode-first-run')).toBeTruthy();
-    finishFirstRun();
+    await finishFirstRun();
     expect(screen.getByTestId('kid-mode-home')).toBeTruthy();
   });
 
-  it('lists the bundled title, checked by the real reader', () => {
-    renderKidMode();
-    finishFirstRun();
+  it('lists the bundled title, checked by the real reader', async () => {
+    await renderKidMode();
+    await finishFirstRun();
     expect(
       screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`),
     ).toBeTruthy();
@@ -77,9 +98,9 @@ describe('reaching Calm Frames', () => {
     ).toBe('Checked');
   });
 
-  it('opens the title, then hands the player the map it verified', () => {
-    const { navigate } = renderKidMode();
-    finishFirstRun();
+  it('opens the title, then hands the player the map it verified', async () => {
+    const { navigate } = await renderKidMode();
+    await finishFirstRun();
     fireEvent.press(screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`));
     expect(screen.getByTestId('kid-mode-details')).toBeTruthy();
 
@@ -95,12 +116,12 @@ describe('reaching Calm Frames', () => {
     expect(params.guarded.settings).toEqual(DEFAULT_SETTINGS);
   });
 
-  it('never navigates to the player without the map', () => {
+  it('never navigates to the player without the map', async () => {
     // The whole project is the claim that nothing plays unchecked, so every
     // call this screen can make to the player is checked, not just the one in
     // the happy path above.
-    const { navigate } = renderKidMode();
-    finishFirstRun();
+    const { navigate } = await renderKidMode();
+    await finishFirstRun();
     fireEvent.press(screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
@@ -117,9 +138,9 @@ describe('reaching Calm Frames', () => {
     }
   });
 
-  it('reaches the parent area, behind the PIN that was just set', () => {
-    renderKidMode();
-    finishFirstRun();
+  it('reaches the parent area, behind the PIN that was just set', async () => {
+    await renderKidMode();
+    await finishFirstRun();
     fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
     expect(screen.getByTestId('kid-mode-parent')).toBeTruthy();
     expect(screen.queryByTestId('kid-mode-parent-open')).toBeNull();
@@ -127,12 +148,13 @@ describe('reaching Calm Frames', () => {
     for (const digit of '1357') {
       fireEvent.press(screen.getByTestId(`kid-mode-parent-key-${digit}`));
     }
+    await screen.findByTestId('kid-mode-parent-open');
     expect(screen.getByTestId('kid-mode-parent-open')).toBeTruthy();
   });
 
-  it('comes back to the shelf from the parent area', () => {
-    renderKidMode();
-    finishFirstRun();
+  it('comes back to the shelf from the parent area', async () => {
+    await renderKidMode();
+    await finishFirstRun();
     fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
     fireEvent.press(screen.getByTestId('kid-mode-parent-back'));
     expect(screen.getByTestId('kid-mode-home')).toBeTruthy();

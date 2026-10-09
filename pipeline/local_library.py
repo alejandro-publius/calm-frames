@@ -374,7 +374,8 @@ def prepare_local_title(source: str | Path, workdir: str | Path, *,
             result = ingest_title(
                 source, root,
                 IngestOptions(presets=requested, key=str(Path(key).resolve()),
-                              pub=str(Path(pub).resolve()), title=name, skip_verify=False),
+                              pub=str(Path(pub).resolve()), title=name, skip_verify=False,
+                              playback_compatible=True),
                 adapter=adapter,
             )
             if result.verify_report is not None and result.verify_passed is not True:

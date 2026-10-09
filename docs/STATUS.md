@@ -1,15 +1,201 @@
 # Status
 
-Updated Tue Sep 29, 2026.
+Updated Fri Oct 2, 2026.
 
 ## 0. Where things stand
+
+**Oct 2 terminal follow-up.** Checked local preparation now reaches the TV
+shelf through a bounded, immutable packaged library. Source identity and the
+played rendition identity are distinct. The compiler imports a reviewed catalog;
+the player accepts its key only for exact preset, media, map and caption
+membership. A substituted route cannot initialize media. Source and native
+archive checks reject changed assets, stale catalogs, extra files, aliases and
+links. One original, non-flashing Harbor story was prepared through normal
+analysis with neutral captions and no synthetic detections. It is separate from
+the labelled Harbor practice demo with sham scene holds.
+
+The local wrapper uses the app's full profile unions and timing at an explicit
+room covering the current selectable sizes. Verification recomputes that plan
+and checks the required signed maps. Prepared imports use the verified covered
+picture and opaque live fallback; union scene-image descriptors remain future
+work. Legacy signed scene-hold ingestion still works.
+
+Current checks: 941 app tests and 57 snapshots pass, with the existing one
+skipped suite and four skipped tests. Strict TypeScript passes. Lint has zero
+errors and the existing 100 warnings. The pipeline regression selection passes
+238 tests, and 106 benign fixture/native-preflight/video-boundary tests pass.
+The Node source/archive tamper suite passes 10 tests. Debug and Release builds
+finish for all three architectures; their actual prepared catalog/media bytes
+match the current build input. Debug identity, ELF and Harbor fixture checks
+pass. Hook tarball consumer and encoded UI checks pass. New guards have
+observed assertion failures with broken controls, followed by restored green.
+
+The final-video gate now requires strictly less than its duration limit;
+actual benign encoded clips below, exactly at and above three minutes verify
+the boundary. The upstream Shaka patches still apply to the current upstream
+commit and pass their six focused tests. No public issue, fork or PR was opened.
+The script and shot manifest now describe the current Harbor journey and label
+all planned takes as unobserved.
+
+The fresh old-protocol conformance recheck reproduces the archive. A generator
+color matrix/range mismatch was found with static encoded swatches and fixed;
+this is an evaluation-protocol correction, not a detector improvement. The
+full corrected run is active with two workers. Its log is
+`.logs/conformance-current-full-2026-10-02.log`, its PID file is beside that log,
+and its durable journal is `results/conformance_current_full_2026-10-02.journal.jsonl`.
+Both legacy Make targets now refuse to append the new encoding protocol to the
+old archive. Do not invoke the direct legacy generator, mix current rows into
+the old archive, or edit fingerprinted detector/generator/spec/design inputs
+during measurement. The direct generator's equivalent guard must be added only
+after the active measurement and pinned reports finish.
+The bounded detached finisher is recorded in
+`.logs/conformance-finish-2026-10-02.pid`; its log and
+`conformance-finish-2026-10-02.status.json` are beside it. It checks pinned inputs,
+then writes `results/conformance_current_report_2026-10-02.json` and
+`results/conformance_protocol_comparison_2026-10-02.json`. Keep those two report
+wrapper sources unchanged while it waits. The separate current report and paired
+comparison must pass before publishing new aggregate numbers. Existing aggregate
+claims remain explicitly historical.
+
+Native observation is blocked: the simulator start attempt reported operation
+not permitted, no usable target is connected, and the fresh read-only smoke
+preflight remains blocked. The current package contains verified Harbor
+captions/holds; that is not playback or screen composition evidence. The new
+`eval.benign_native_smoke` runner is ready for a matching explicit target and
+captures the current household journey without resetting data. Its logs cannot
+establish native storage durability, captions layering or physical screen timing.
+
+GitHub was reachable through the connector. The published review commit's CI
+and Audit jobs still failed without any steps or logs, so no successful hosted
+run covers this work. Main, access settings and AWS are unchanged. Local changes
+remain on the existing review branch. Do not merge main until complete hosted
+CI passes. Account access, native observation, public contribution, video,
+release publication and final submission remain separate actions.
+
+Evidence: `.logs/prepared-app-full-final.log`, `prepared-python-final.log`,
+`prepared-types.log`, `prepared-lint-full.log`, `prepared-node.log`,
+`prepared-native.log`, `prepared-release.log`, `prepared-packages.log`,
+`prepared-native-proof.json`, `prepared-native-preflight.json`,
+`prepared-hook.log`, `prepared-ui-final.log`, `prepared-secrets.log`,
+`app-recipe-regression.log`, `app-recipe-controls.log`, and
+`upstream-shaka-review.json`. Commands for importing/building are in
+`pipeline/LOCAL_LIBRARY.md`; next native takes are in `docs/SHOT_MANIFEST.md`.
+Current local package checksums and inventory are in
+`build/native-review-2026-10-02/SHA256SUMS` and `packages.json`. These are review
+builds, not a published or tagged judged release.
+
+### Earlier Oct 2 checkpoints (historical)
+
+**Oct 2 hackathon review and continuation checkpoint.** The live Devpost rules
+were rechecked. [HACKATHON_REVIEW.md](HACKATHON_REVIEW.md) records a disclosed
+subjective score, submission blockers and acceptance criteria. The submission
+narrative now separates implemented behavior, measured results and unfinished
+native evidence. The score describes the project before this follow-up; adding
+a demo fixture alone does not raise it.
+
+[CONTINUATION_PROMPT.md](CONTINUATION_PROMPT.md) is the requested reusable prompt
+for sustained iteration. It directs an agent to implement, verify and obtain
+independent review, then repeat within its available session budget. At a limit,
+record the exact next task here so another session can resume.
+
+The bundled Harbor story adds original non-flashing artwork, a quiet tone,
+captions and explicitly signed sham holds. The production preparation pipeline
+checked its source under every preset and verified the prepared outputs. The
+app plays the bundled pre-covered master, uses its fixed per-title Extra cautious
+plan and preserves the household's saved preferences. The demo key is scoped to
+its fixed bundled identity. Labels identify practice holds instead of detected
+flashes. The package preflight pins the reviewed proof and checks all referenced
+bytes before marking caption and image fixtures available. These are prepared
+assets and software checks; current native playback, caption layering and TV
+screen timing are still unobserved.
+
+Independent review also found and fixed failed-save profile deletion erasing
+history too early, and caption Off retaining the previous native track. Their
+regressions were observed failing before the fixes. The original gradient stays
+available, and local prepared-title delivery remains disconnected from the shelf.
+
+Final local checkpoint: 915 app tests and 57 snapshots pass, with the existing
+one skipped suite and four skipped tests unchanged. The 81 targeted Python
+fixture/preflight tests pass. Strict TypeScript and lint pass; broad lint has
+zero errors and the same 100 existing warnings. The packed hook's offline
+consumer check, integration checksum, encoded UI color checks under both
+profiles, changed-file secret scan, marker drift and whitespace checks pass.
+Final native Debug packages build for armv7, aarch64 and x86_64; package identity,
+exact story/caption bytes and ELF architecture checks pass. New demo/preflight
+guards have observed failing controls followed by restored green checks.
+
+Evidence logs are `.logs/benign-story-app.log`, `benign-story-python.log`,
+`benign-story-types.log`, `benign-story-lint.log`, `benign-story-native.log`,
+`benign-story-packages.log`, `benign-story-hook.log`, `benign-story-ui.log` and
+`benign-story-secrets.log` under `.logs/`. No device playback was attempted in
+this follow-up. The prior broad Python sandbox HTTP limitation still applies;
+this follow-up ran the affected Python suites instead of rerunning that known
+socket restriction. No jobs remain running at handoff. Changes are local and
+uncommitted on the existing review branch.
+
+Rebuilding the demo rotates its key and proof. Independently recheck the
+artifacts, then update the pinned proof digest in the package preflight;
+otherwise preflight correctly refuses the newly generated bundle.
+
+**Oct 2 follow-up: household setup now has a durable local record.** The shelf
+waits for a validated saved family and PIN gate before it opens. Profile choice,
+room, preset, chime preference, salted PIN hash and lockout state are saved
+together. A read error or invalid record blocks setup and viewing rather than
+falling back to Standard or creating another PIN. A failed save retries the
+intended change; the parent area opens only after its gate update is saved.
+Controls say when a save is pending and do not race another setting change.
+Plaintext PINs and unlocked sessions are never written. Hide history remains
+in memory. Native storage durability still needs a real device check.
+
+Restart, strict-floor, write-retry, lockout and stale-read tests cover the app
+flow. Deliberately broken loading, validation, save-before-unlock, retry and
+stale-read guards each produced assertion failures before source restoration.
+The new storage notices also enter the rendered color and ten-foot checks.
+Final local verification passes the full app suite and its existing snapshots,
+strict TypeScript, lint, both encoded UI flash profiles, published-number drift,
+integration checksum, changed-file secret scan and whitespace checks. Broad
+lint retains existing warnings; changed files have no new warnings. Native
+Debug builds complete for armv7, aarch64 and x86_64, and each package passes
+identity, exact bundled benign media/map and ELF architecture checks.
+
+The broad Python regression run has no assertion failures. Existing upload HTTP
+fixtures error before their tests run because the sandbox refuses binding a
+localhost socket with `PermissionError: [Errno 1] Operation not permitted`.
+Every other selected test passes; the existing slow cases remain deselected.
+The HTTP cases need the unrestricted runner, not changed assertions or a mocked
+server. None of these checks establishes physical-TV storage durability.
+GitHub access from this environment fails at the network connection, so hosted
+CI was not refreshed; the Sep 29 startup restriction remains historical evidence.
+Main, repository visibility, collaborators and AWS are unchanged.
+
+The hackathon access guidance was rechecked during this pass. The chosen plan
+is still to make the repo public at final checks, but the current rules also
+permit a private repo shared with Devpost and named Amazon reviewers. Updated
+instructions are in `docs/RUBRIC.md` and `docs/SUBMISSION.md`.
+
+Next engineering priorities, in order:
+
+1. Observe the current Harbor story journey on a Vega simulator or physical
+   target: set up a household, open its plan, enable English captions, play,
+   pause/resume, seek through a practice hold, and restart. Record actual
+   behavior and fix it before calling the demo complete. Physical validation
+   still needs the target-specific runner and the applicable human checkpoints.
+2. Connect local preparation receipts to the app's checked catalog, retaining
+   signed-map, exact delivered-rendition and required-preset checks at the player
+   boundary. Do not treat the analyzed source hash as a delivered-file digest.
+3. Capture the under-three-minute device or simulator video, gather authorized
+   feedback and finish submission evidence. Complete hosted CI still needs
+   external access/startup resolution; main remains unchanged until checks pass.
+
+### Prior Sep 29 checks and implementation history
 
 **Local dependency repair and product checks pass; hosted CI and physical TV remain blocked.**
 The app reviews the chosen household before opening its checked library, and
 each verified title explains its selected preset, room, checked maps and
 fallback behavior. Pending, failed or incomplete-profile entries get no ready
 viewing plan. These changes are presentation-only and retain the approved
-limits wording. Household settings and the PIN remain in memory in this demo.
+limits wording. Those Sep 29 changes still used in-memory setup; the Oct 2
+follow-up above adds its local storage.
 
 `pipeline.local_library` wraps existing ingest and verification in one local
 preparation command and issues a receipt for complete checked renditions only.
@@ -267,7 +453,7 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | **Before any deploy** | Put AWS on the Paid plan, set the $20 budget alarm, then add that line to this file. It has to start a line of its own: no bullet, no table cell, no backticks. The exact wording is in the refusal `make deploy` prints. | `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set. Seventeen tests now cover both locks, run against a copy of the script so this file is never touched. Nothing has touched AWS. |
 | **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
 | **Oct 19 to 20** | Film the video from `docs/VIDEO_SCRIPT.md`, timed to 2:55. | |
-| **Wed Oct 21** | Make the repo public, then run the final checks. | The rules need it public with the licence visible at submission. |
+| **Wed Oct 21** | Make the repo public, then run the final checks. | This is the chosen publication plan. The rules also permit private reviewer access; see `docs/SUBMISSION.md`. |
 | **Thu Oct 22** | Press submit. `docs/SUBMISSION.md` has every field, with the ones needing you marked. | |
 
 ### The red footage, specifically
@@ -522,8 +708,8 @@ and it is the reason no report is written for a clip it could not read.
 - **The conformance run is partial**, and `results/conformance.json` says so in its own statement field rather than implying a full 3,000-clip run.
 - **The demo PIN does not exist yet**, so the release notes say so.
 - **Nothing in the app has been opened on a device since kid mode was wired up.** Every screen, the first run, the play path and the player's refusal are checked in the app's own test suite, and none of it has been seen on the virtual device or the stick. The bundled clip's URI is `file:///pkg/assets/raw/offline/calm_gradient.mp4`, which is where the Kepler file system README says package assets land, and that has never been played.
-- **The PIN and the room setting live in memory**, so the first run comes back on every launch. Writing them to `/data` is a small job and a separate one.
-- **The hide log has no way back from the player**, so the parent area says nothing has been hidden rather than inventing entries. It needs a store the player screen and the kid mode route share.
+- **Native household-storage durability still needs a device check.** The Oct 2 implementation restores the saved family and PIN gate through the SDK storage adapter; local restart regressions pass, but this is not an observation on a physical TV.
+- **Hide history is still in memory.** The shared store already carries player entries back to the parent area, but it does not retain them after a process restart.
 
 ## 6. The numbers
 

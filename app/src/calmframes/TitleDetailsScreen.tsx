@@ -29,22 +29,33 @@ import { CheckedTitle } from './titleStatus';
 import { useUiCapture } from './uiCapture';
 import { TITLE_DETAILS_BLOCKED_FRAME, TITLE_DETAILS_FRAME } from './uiFrames';
 import ViewingPlan from './ViewingPlan';
+import {
+  BENIGN_STORY_LABEL,
+  benignStorySettings,
+  isBundledBenignStory,
+} from './benignStory';
 
 export interface TitleDetailsScreenProps {
   entry: CheckedTitle;
   settings?: HouseholdSettings;
   onPlay: (entry: CheckedTitle) => void;
+  saving?: boolean;
   onBack?: () => void;
   testID?: string;
 }
 
 const TitleDetailsScreen = ({
   entry,
-  settings = DEFAULT_SETTINGS,
+  settings: householdSettings = DEFAULT_SETTINGS,
   onPlay,
+  saving = false,
   onBack,
   testID = 'title-details',
 }: TitleDetailsScreenProps) => {
+  const settings = React.useMemo(
+    () => benignStorySettings(entry.title, householdSettings),
+    [entry.title, householdSettings],
+  );
   const durationMs = entry.title.durationMs ?? 0;
   const intervals = React.useMemo(
     () =>
@@ -72,6 +83,14 @@ const TitleDetailsScreen = ({
         {entry.title.title}
       </Text>
       <ShieldBadge status={entry.status} testID={`${testID}-badge`} />
+      {isBundledBenignStory(entry.title) && (
+        <Text style={styles.summary} testID={`${testID}-demo-label`}>
+          {BENIGN_STORY_LABEL}. This original harbor story uses scheduled
+          practice holds with Extra cautious timing to demonstrate scene
+          continuity. Enable English practice captions in the player. The gentle
+          tone continues during each hold.
+        </Text>
+      )}
 
       {notice ? (
         <View style={styles.block}>
@@ -112,20 +131,34 @@ const TitleDetailsScreen = ({
       <View style={styles.buttons}>
         <CalmButton
           testID={`${testID}-play`}
-          label={playable ? 'Play' : 'Not ready to play'}
-          accessibilityLabel={
-            playable
-              ? `Play ${entry.title.title}`
-              : `${entry.title.title} is not ready to play. ${notice?.detail ?? ''}`
+          label={
+            saving
+              ? 'Saving your settings'
+              : playable
+              ? 'Play'
+              : 'Not ready to play'
           }
-          disabled={!playable}
+          accessibilityLabel={
+            saving
+              ? 'Saving your settings'
+              : playable
+              ? `Play ${entry.title.title}`
+              : `${entry.title.title} is not ready to play. ${
+                  notice?.detail ?? ''
+                }`
+          }
+          disabled={!playable || saving}
           hasTVPreferredFocus
           onPress={() => onPlay(entry)}
         />
 
         {onBack ? (
           <View style={styles.secondButton}>
-            <CalmButton testID={`${testID}-back`} label="Back" onPress={onBack} />
+            <CalmButton
+              testID={`${testID}-back`}
+              label="Back"
+              onPress={onBack}
+            />
           </View>
         ) : null}
       </View>

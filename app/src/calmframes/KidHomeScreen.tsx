@@ -83,6 +83,7 @@ export interface KidHomeScreenProps {
   activeProfileId?: string;
   onChooseProfile?: (profile: Profile) => void;
   testID?: string;
+  saving?: boolean;
 }
 
 const KidHomeScreen = ({
@@ -94,6 +95,7 @@ const KidHomeScreen = ({
   activeProfileId,
   onChooseProfile,
   testID = 'kid-home',
+  saving = false,
 }: KidHomeScreenProps) => {
   const listed = kidModeTitles(titles);
   const hiddenCount = titles.length - listed.length;
@@ -139,13 +141,14 @@ const KidHomeScreen = ({
         </Text>
         {empty ? null : (
           <Text style={styles.subtitle} testID={`${testID}-subtitle`}>
-            {KID_HOME_SUBTITLE}
+            {saving ? 'Saving who is watching' : KID_HOME_SUBTITLE}
           </Text>
         )}
       </View>
 
       {picking && profiles && onChooseProfile ? (
         <ProfilePicker
+          disabled={saving || undefined}
           testID={`${testID}-profiles`}
           title={PROFILES_KID_TITLE}
           chosenWord={WATCHING_STATE_WORD}
@@ -178,6 +181,8 @@ const KidHomeScreen = ({
               const focused = focusedId === entry.title.id;
               return (
                 <TouchableOpacity
+                  disabled={saving || undefined}
+                  accessibilityState={saving ? { disabled: true } : undefined}
                   key={entry.title.id}
                   testID={`${testID}-poster-${entry.title.id}`}
                   accessibilityRole="button"

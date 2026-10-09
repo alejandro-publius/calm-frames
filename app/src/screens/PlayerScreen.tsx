@@ -29,10 +29,19 @@ import {
   AppStateStatus,
   Platform,
   StyleSheet,
+  Text,
   useWindowDimensions,
   View,
 } from 'react-native';
 import CalmCard from '../calmframes/CalmCard';
+import { concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
+import {
+  benignStoryCard,
+  BENIGN_STORY_LABEL,
+  bundledTitlePublicKey,
+  isBundledBenignStory,
+} from '../calmframes/benignStory';
+import { CALM_COLORS, CALM_TYPE, scale } from '../calmframes/calmStyles';
 import { NO_CARD } from '../calmframes/cards';
 import { playChime } from '../calmframes/chimeSound';
 import CoverLayer from '../calmframes/CoverLayer';
@@ -146,13 +155,26 @@ const PlayerScreen = ({
   // Kid mode. The guard checks the map again here, right before play, so a
   // title that passed on the shelf cannot play on a map that has since gone
   // missing or gone stale.
-  const guardedParams = route.params.guarded;
+  const preparedRoute = concernsPackagedLibrary(data);
+  const preparedRouteAccepted = preparedRoute && packagedLibrary.acceptsRoute(data, route.params.guarded);
+  const rejectedPreparedRoute = preparedRoute && !preparedRouteAccepted;
+  const guardedParams = rejectedPreparedRoute ? undefined : route.params.guarded;
+  const bundledIdentity = {
+    id: data.id,
+    uri: data.uri,
+    sha256: guardedParams?.sha256,
+  };
+  const benignDemo = isBundledBenignStory(bundledIdentity);
   const guard = useFlashGuard({
     mediaRef: videoRef,
     mapTexts: guardedParams?.maps,
     mapUrls: guardedParams?.mapUrls,
     expectedSha256: guardedParams?.sha256 ?? '',
-    publicKeyBase64: OFFLINE_PUBLIC_KEY_BASE64,
+    publicKeyBase64: preparedRouteAccepted ? packagedLibrary.publicKeyBase64 : bundledTitlePublicKey(
+      bundledIdentity,
+      OFFLINE_PUBLIC_KEY_BASE64,
+    ),
+    cardCopy: benignDemo ? benignStoryCard : undefined,
     settings: guardedParams?.settings,
     durationMs: guardedParams?.durationMs,
     // How far the rendition about to play sits from the source the map
@@ -165,12 +187,17 @@ const PlayerScreen = ({
     // fires this once per interval it actually covered; everything added here
     // is what the guard has no way of knowing: whose sitting it was and which
     // preset the schedule was built under.
-    onHide: (entry) =>
+    onHide: (entry) => {
+      // Practice holds are disclosed demonstrations, not family exposure history.
+      if (benignDemo) {
+        return;
+      }
       recordHide(entry, {
         profileId: guardedParams?.profileId,
         profileName: guardedParams?.profileName,
         preset: guardedParams?.settings?.preset,
-      }),
+      });
+    },
   });
   // The courtesy sound. useChimeCue decides whether a chime is owed and
   // refuses to raise one that no cover follows, so everything this call does is
@@ -192,7 +219,7 @@ const PlayerScreen = ({
   // this is decided here rather than trusted to whoever navigated.
   const access = playbackAccess({
     guarded: guardedParams,
-    coverTest,
+    coverTest: rejectedPreparedRoute ? 'off' : coverTest,
   });
   const guarding = access === 'guarded';
   // The measurement harness and the guard never run at once: a run is a
@@ -204,7 +231,13 @@ const PlayerScreen = ({
     card = guard.card;
   } else if (mustStayHidden(access)) {
     covered = true;
-    card = UNGUARDED_CARD;
+    card = rejectedPreparedRoute
+      ? {
+          ...UNGUARDED_CARD,
+          detail: 'This prepared title could not be checked. Return to the library.',
+          announcement: 'Not checked yet. This prepared title could not be checked. Return to the library.',
+        }
+      : UNGUARDED_CARD;
   }
   // The app records its own layer, because Vega gives it no way to read its
   // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
@@ -270,6 +303,10 @@ const PlayerScreen = ({
   }, [isVideoEnded]);
 
   useEffect(() => {
+    if (rejectedPreparedRoute) {
+      setShowBuffering(false);
+      return undefined;
+    }
     console.log(
       '[PlayerScreen.tsx] - Initialize media player: componentInstance',
       componentInstance,
@@ -581,7 +618,18 @@ const PlayerScreen = ({
           The card sits above the cover, so it stays readable while the picture
           is hidden, and it is the only thing on screen that speaks.
         */}
-        <CalmCard card={card} onSkip={guard.skipTo} />
+        <CalmCard
+          card={card}
+          onSkip={guard.skipTo}
+          skipAccessibilityLabel={
+            benignDemo ? 'Skip the practice hold' : undefined
+          }
+        />
+        {benignDemo && (
+          <Text style={styles.demoLabel} testID="benign-demo-label">
+            {BENIGN_STORY_LABEL}
+          </Text>
+        )}
         {showVideoPlayerUI && (
           <VideoPlayerUI
             videoRef={videoRef}
@@ -618,6 +666,16 @@ const arePlayerPropsEqual = (
 export default React.memo(PlayerScreen, arePlayerPropsEqual);
 
 export const styles = StyleSheet.create({
+  demoLabel: {
+    position: 'absolute',
+    top: scale(100),
+    left: scale(80),
+    right: scale(80),
+    color: CALM_COLORS.TEXT,
+    fontSize: scale(CALM_TYPE.BODY),
+    padding: scale(16),
+    zIndex: 4,
+  },
   captions: {
     width: '100%',
     height: '100%',
