@@ -27,6 +27,7 @@ go red with "assert 0 == 1" and the message about what is still locked.
 from __future__ import annotations
 
 import os
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -270,3 +271,61 @@ class TestThisRepositoryIsStillLocked:
             if not stripped or stripped.startswith("#"):
                 continue
             assert "aws_guard.sh" in stripped, f"deploy runs {stripped!r} outside the guard"
+
+
+class TestTheDeployRecordNamesNoAccount:
+    """What the repository says about the Oct 9 deploy gives the account away nowhere.
+
+    The record in results/aws_deploy_2026-10-09.json was written from describe
+    calls whose raw output is full of the account id, the bucket names, the
+    distribution domain, ARNs and the ECR repository URI. The repository goes
+    public on Oct 21, so each of those shapes is looked for here, in the record
+    and in the two documents that describe the deploy. A failure names the shape
+    and the file, never the value, so the CI log does not repeat the leak.
+
+    Seen to fail, Oct 9 2026: a twelve digit number put in the record's
+    region field, an ARN in its stack name, the real distribution domain in
+    pipeline/infra/README.md and an email address in the record each turned
+    this red, and each went green again when taken out.
+    """
+
+    # The shapes, not the values. A placeholder account id that every AWS
+    # document uses is allowed, and so is the all zeros one `make synth` passes.
+    PLACEHOLDER_ACCOUNTS = {"000000000000", "123456789012"}
+    SHAPES = {
+        "an account id": re.compile(r"(?<!\d)\d{12}(?!\d)"),
+        "an ARN": re.compile(r"arn:aws[a-z-]*:"),
+        "a CloudFront distribution domain": re.compile(r"\b[a-z0-9]{8,}\.cloudfront\.net\b"),
+        "an ECR repository URI": re.compile(r"\.dkr\.ecr\."),
+        "a generated bucket, table or log group name": re.compile(
+            r"(?i)\bcalmframesstack-[a-z0-9]+-[a-z0-9]{6,}"
+        ),
+    }
+    EMAIL = re.compile(r"[\w.+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}")
+
+    def records(self) -> list[Path]:
+        return sorted((REPO / "results").glob("aws_*.json"))
+
+    def documents(self) -> list[Path]:
+        return [REPO / "docs" / "SECURITY.md", REPO / "pipeline" / "infra" / "README.md"]
+
+    def leaks(self, path: Path, shapes: dict[str, re.Pattern[str]]) -> list[str]:
+        text = path.read_text(encoding="utf-8")
+        found = []
+        for what, shape in shapes.items():
+            hits = [hit for hit in shape.findall(text) if hit not in self.PLACEHOLDER_ACCOUNTS]
+            if hits:
+                found.append(f"{path.relative_to(REPO)} has {len(hits)} x {what}")
+        return found
+
+    def test_the_record_exists(self):
+        assert [path.name for path in self.records()] == ["aws_deploy_2026-10-09.json"]
+
+    def test_the_record_names_no_account_bucket_domain_or_person(self):
+        shapes = dict(self.SHAPES, **{"an email address": self.EMAIL})
+        found = [leak for path in self.records() for leak in self.leaks(path, shapes)]
+        assert found == []
+
+    def test_the_documents_about_the_deploy_name_no_account(self):
+        found = [leak for path in self.documents() for leak in self.leaks(path, self.SHAPES)]
+        assert found == []

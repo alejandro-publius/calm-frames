@@ -1,0 +1,317 @@
+{
+  "what_this_is": "The first deploy of the Calm Frames AWS stack and the two ingest runs that followed it, on the night of 2026-10-09. Written from read-only describe, list and get calls made between 02:20 and 02:51 PDT the same night, and from the evidence saved during the deploy outside the repository. Every account id, bucket name, distribution domain, ARN, repository URI and email address is left out on purpose.",
+  "recorded_on": "2026-10-09",
+  "times_are": "Pacific Daylight Time (UTC-7), written as ISO 8601 with the offset",
+  "region": "us-east-1",
+  "redacted": [
+    "the account id",
+    "bucket names",
+    "the CloudFront distribution domain",
+    "ARNs",
+    "the ECR repository URI",
+    "the budget email address",
+    "IAM user, role and session names"
+  ],
+  "stack_status": "UPDATE_COMPLETE",
+  "cli_version": "2.1142.0",
+  "bootstrap_version": 32,
+  "oidc_role_created": false,
+  "checkpoint_d": {
+    "confirmed_on": "2026-10-09",
+    "confirmed_by": "Alex, in chat and at his own terminal",
+    "lock_line_committed": false,
+    "lock_line_lives_in": "docs/STATUS.md of a separate deploy worktree, never committed, so pipeline/tests/test_aws_guard.py keeps the committed lock closed",
+    "credit_request_clause": "void since the credit request form closed on 2026-10-07. Alex waived it; his own AWS credits cover the bill."
+  },
+  "deployed_from": {
+    "commit": "c5724de",
+    "checkout": "a detached worktree at that commit, so the deploy built from committed code only",
+    "run_by": "Alex, in his own terminal, both times",
+    "command": "make deploy CHECKPOINT_D=confirmed, with CDK set to aws-cdk@2.1142.0 on the command line",
+    "update_command_added": "-c calmframes:signingKeyParameter=/calm-frames/cloud-signing-key, inside the CDK variable, because scripts/aws_guard.sh had no way to pass it",
+    "iam_changes_approved_by": "Alex, typing y at the CDK prompt, which needs a terminal (TTY)"
+  },
+  "cdk": {
+    "cli_version": "2.1142.0",
+    "cli_version_pinned_in_repo_at_deploy": "2.1032.0",
+    "why_the_pin_was_overridden": "CLI 2.1032.0 cannot read the cloud assembly that aws-cdk-lib 2.270.0 writes (schema 54). 2.1142.0 is the minimum CLI version the library's bundled cloud assembly schema declares.",
+    "aws_cdk_lib": "2.270.0",
+    "cloud_assembly_schema": 54,
+    "library_minimum_cli_version": "2.1142.0",
+    "bootstrap_stack": "CDKToolkit",
+    "bootstrap_version": 32,
+    "bootstrap_minimum_for_this_stack": 6,
+    "bootstrap_minimum_for_lookups": 8,
+    "bootstrap_created": "2026-10-09T00:15:46-07:00",
+    "bootstrap_tags": {
+      "Project": "calm-frames"
+    },
+    "ecs_service_linked_role_created": "2026-10-09T00:15:43-07:00",
+    "ecs_service_linked_role_note": "created before the first deploy. ECS had never been used in the account, and a first cluster made by CloudFormation without that role is reported to fail, which would have rolled back the whole stack, CloudFront distribution included.",
+    "pinned_cli_error": "This CDK CLI is not compatible with the CDK library used by your application. Please upgrade the CLI to the latest version. (Cloud assembly schema version mismatch: Maximum schema version supported is 48.x.x, but found 54.0.0. You need at least CLI version 2.1142.0 to read this manifest.)"
+  },
+  "stack": {
+    "name": "CalmFramesStack",
+    "status": "UPDATE_COMPLETE",
+    "status_read_at": "2026-10-09T02:50:45-07:00",
+    "change_set_created": "2026-10-09T00:21:17-07:00",
+    "create_started": "2026-10-09T00:21:42-07:00",
+    "create_complete": "2026-10-09T00:25:13-07:00",
+    "create_seconds": 210.9,
+    "update_started": "2026-10-09T00:33:44-07:00",
+    "update_complete": "2026-10-09T00:34:24-07:00",
+    "update_seconds": 39.9,
+    "update_reason": "wire the cloud demo signing key in: the task definition names one SSM SecureString parameter and the task role may read only that one",
+    "update_changed": [
+      "IngestTask: the task definition, replaced, revision 1 to 2",
+      "IngestTaskTaskRoleDefaultPolicy: the task role's policy, two statements added",
+      "StartIngestServiceRoleDefaultPolicy: the starter Lambda's policy, pointed at revision 2",
+      "StartIngest: the starter Lambda's configuration, pointed at revision 2"
+    ],
+    "update_changed_count": 4,
+    "resources_total": 42,
+    "resources_by_type": {
+      "AWS::Budgets::Budget": 1,
+      "AWS::CDK::Metadata": 1,
+      "AWS::CloudFront::Distribution": 1,
+      "AWS::CloudFront::OriginAccessControl": 1,
+      "AWS::DynamoDB::Table": 1,
+      "AWS::EC2::InternetGateway": 1,
+      "AWS::EC2::Route": 2,
+      "AWS::EC2::RouteTable": 2,
+      "AWS::EC2::SecurityGroup": 1,
+      "AWS::EC2::Subnet": 2,
+      "AWS::EC2::SubnetRouteTableAssociation": 2,
+      "AWS::EC2::VPC": 1,
+      "AWS::EC2::VPCGatewayAttachment": 1,
+      "AWS::ECR::Repository": 1,
+      "AWS::ECS::Cluster": 1,
+      "AWS::ECS::TaskDefinition": 1,
+      "AWS::IAM::Policy": 4,
+      "AWS::IAM::Role": 5,
+      "AWS::Lambda::Function": 3,
+      "AWS::Lambda::Permission": 1,
+      "AWS::Logs::LogGroup": 2,
+      "AWS::S3::Bucket": 2,
+      "AWS::S3::BucketPolicy": 2,
+      "Custom::S3AutoDeleteObjects": 2,
+      "Custom::S3BucketNotifications": 1
+    },
+    "outputs_total": 5,
+    "output_names": [
+      "CatalogTableName",
+      "DeliveryBucketName",
+      "DistributionDomain",
+      "IngestImageRepository",
+      "SourceBucketName"
+    ],
+    "nat_gateways": 0,
+    "oidc_provider_created": false,
+    "oidc_role_created": false,
+    "oidc_note": "githubRepo was left empty on purpose, so the stack made no GitHub OIDC provider and no deploy role. No workflow in this repository deploys.",
+    "task_definition_revision": 2,
+    "task_cpu_units": 2048,
+    "task_memory_mib": 4096,
+    "task_architecture": "ARM64",
+    "stack_log_group_retention_days": 14,
+    "cost_tags": {
+      "Project": "calm-frames",
+      "Component": "pipeline",
+      "Environment": "hackathon",
+      "CostCenter": "calm-frames-hackathon",
+      "ManagedBy": "cdk"
+    }
+  },
+  "iam_approval": {
+    "statement_rows": 20,
+    "managed_policy_rows": 3,
+    "security_group_rows": 1,
+    "counted_from": "Alex's terminal output of the first make deploy: every row marked + in each of the three tables the CDK printed before asking",
+    "count_note": "The rehearsal before the deploy predicted 19 statement rows. Alex's saved terminal output has 20 rows marked +, in 17 bordered groups, and 20 is what he approved."
+  },
+  "budget": {
+    "name": "calm-frames-monthly",
+    "limit_usd": 20,
+    "notifications": [
+      "actual spend above 50 percent",
+      "actual spend above 80 percent",
+      "forecast spend above 100 percent"
+    ],
+    "filter": "cost allocation tag Project=calm-frames",
+    "actual_spend_usd": 0.0,
+    "actual_spend_read_at": "2026-10-09T02:50:58-07:00",
+    "project_tag_listed_as_cost_allocation_tag": false,
+    "project_tag_checked_at": "2026-10-09T02:50:47-07:00",
+    "what_that_means": "Cost Explorer did not list Project as a cost allocation tag. A new tag shows up there up to a day after tagged resources first cost something, and then it has to be activated in Billing. Until it is active the budget's tag filter matches no cost, so its alarms cannot fire."
+  },
+  "image": {
+    "tags": [
+      "c5724de",
+      "latest"
+    ],
+    "built_from": "c5724de",
+    "digest_short": "10f3500db514",
+    "size_bytes": 279029517,
+    "size_mb": 279,
+    "pushed": "2026-10-09T00:26:14-07:00",
+    "images_in_repository": 1,
+    "scan_on_push": {
+      "kind": "ECR basic scanning",
+      "status": "COMPLETE",
+      "completed": "2026-10-09T00:26:30-07:00",
+      "findings_total": 101,
+      "critical": 8,
+      "high": 56,
+      "medium": 30,
+      "low": 7,
+      "packages_with_findings": [
+        "ffmpeg",
+        "perl",
+        "openssl",
+        "libssh",
+        "pcre2",
+        "cjson",
+        "util-linux",
+        "glibc",
+        "tiff",
+        "jpeg-xl",
+        "librsvg",
+        "zlib",
+        "gcc-12"
+      ],
+      "note": "Every finding is in a Debian package from the base image or the pinned ffmpeg install, not in the Python packages, which pip-audit reports separately."
+    },
+    "build_context_note": "The pushed image carries pipeline/infra/cdk.context.json, the CDK lookup cache the deploy wrote into the worktree minutes earlier. It holds an availability zone lookup keyed by the account id. .dockerignore now excludes it."
+  },
+  "signing_key": {
+    "kind": "cloud demo key, made for this deploy and nothing else",
+    "algorithm": "Ed25519",
+    "is_release_key": false,
+    "generated": "2026-10-09T00:31:41-07:00",
+    "generated_with": "flashmap keygen, by Claude's session, into ~/.calm-frames/keys/cloud_demo_2026-10.pem, outside the repository",
+    "store": "SSM Parameter Store SecureString, standard tier, encrypted with the account's aws/ssm KMS key",
+    "parameter_name": "/calm-frames/cloud-signing-key",
+    "parameter_version": 1,
+    "parameter_created": "2026-10-09T00:31:45-07:00",
+    "parameter_tags": {
+      "Project": "calm-frames"
+    },
+    "task_role_may": [
+      "ssm:GetParameter on that one parameter",
+      "kms:Decrypt only when the call arrives through SSM in us-east-1"
+    ],
+    "key_id_short": "9fa44e490266",
+    "app_trusted_key_id_short": "9d32df3b18c9",
+    "app_trusted_key_is": "OFFLINE_PUBLIC_KEY_BASE64 in app/src/calmframes/offlineTitle.ts, the key the app checks general maps against",
+    "other_keys_compared": {
+      "harbor_demo_key": "f1f85a0d5a9f",
+      "prepared_library_key": "053f8d65efb4",
+      "prepared_library_older_generation_key": "4a487f9e5c1c",
+      "team_key_on_the_build_machine": "8c94e0403c83"
+    },
+    "app_trusts_it": false,
+    "why_the_app_refuses_its_maps": "The app accepts a map only when its key equals a key compiled into the build. The cloud key's id matches none of the five compared here, so a map it signed is refused as an unknown key and the picture stays hidden.",
+    "signs_the_judged_release": false,
+    "delete_at_teardown": true
+  },
+  "runs_total": 2,
+  "runs": [
+    {
+      "run": 1,
+      "signed": false,
+      "source_file": "markers_packed.mp4",
+      "source_sha256_short": "1c57cfe921ca",
+      "starter_lambda_invoked": "2026-10-09T00:27:06-07:00",
+      "task_definition_revision": 1,
+      "task_created": "2026-10-09T00:27:07-07:00",
+      "started": "2026-10-09T00:27:33-07:00",
+      "container_exited": "2026-10-09T00:27:51-07:00",
+      "stopped": "2026-10-09T00:28:15-07:00",
+      "seconds_started_to_stopped": 42.6,
+      "seconds_container_ran": 18.5,
+      "steps_run": 11,
+      "steps_skipped": 0,
+      "verdict": "blocked",
+      "verify_passed": false,
+      "failed_check": "map_signature:wcag",
+      "published_objects": 0,
+      "catalog_rows_written": 0,
+      "exit_code": 1,
+      "last_log_line": "verify did not pass for 1c57cfe921ca (status 'failed'), so nothing is published",
+      "what_it_shows": "With no signing key in the cloud the task did the whole analysis and then refused to publish. That is the fail closed rule working on AWS, not a fault."
+    },
+    {
+      "run": 2,
+      "signed": true,
+      "signing_key": "the cloud demo key",
+      "source_file": "markers_packed.mp4",
+      "source_sha256_short": "1c57cfe921ca",
+      "uploaded": "2026-10-09T00:34:57-07:00",
+      "starter_lambda_invoked": "2026-10-09T00:34:58-07:00",
+      "task_definition_revision": 2,
+      "task_created": "2026-10-09T00:34:58-07:00",
+      "started": "2026-10-09T00:35:20-07:00",
+      "container_exited": "2026-10-09T00:36:03-07:00",
+      "stopped": "2026-10-09T00:36:30-07:00",
+      "seconds_started_to_stopped": 70.4,
+      "seconds_container_ran": 43.5,
+      "seconds_upload_to_published": 66.5,
+      "steps_run": 12,
+      "steps_skipped": 0,
+      "verdict": "publishable",
+      "verify_passed": true,
+      "published_objects": 16,
+      "published_by": "2026-10-09T00:36:04-07:00",
+      "catalog_rows": 1,
+      "catalog_row_status": "verified",
+      "catalog_row_presets": [
+        "wcag"
+      ],
+      "flagged_segments": 0,
+      "exit_code": 0,
+      "cloudfront_checked_at": "2026-10-09T00:36:49-07:00",
+      "cloudfront_status": {
+        "title_entry": 200,
+        "poster": 200,
+        "hls_master_playlist": 200
+      }
+    }
+  ],
+  "delivered_objects_by_kind": {
+    "entry": 1,
+    "verify_report": 1,
+    "map": 1,
+    "plan": 1,
+    "bif_and_index": 2,
+    "poster_index": 1,
+    "posters": 3,
+    "safe_mp4": 1,
+    "hls_playlists": 2,
+    "hls_segments": 3
+  },
+  "read_back": {
+    "checked_at": "2026-10-09T02:40:11-07:00",
+    "cloudfront_head_status": {
+      "title_entry": 200,
+      "poster": 200,
+      "hls_master_playlist": 200
+    },
+    "map_get_status": 200,
+    "byte_range_status": 206,
+    "byte_range_bytes": 1024,
+    "safe_mp4_bytes": 34801,
+    "delivery_objects": 16,
+    "catalog_rows": 1,
+    "map_signature_valid_against_its_own_key": true,
+    "map_payload_hash_matches": true,
+    "map_source_sha256_matches_clip": true,
+    "map_segments": 0,
+    "map_key_id_short": "9fa44e490266"
+  },
+  "cost_note": "Everything here is on the account's normal bill. The budget's 0.0 USD actual spend at 02:50 PDT says nothing yet, because of the inactive tag above.",
+  "teardown_leftovers": [
+    "two /aws/lambda log groups that the CDK custom resource handlers created at run time, outside the stack, with no retention set",
+    "the CDKToolkit bootstrap stack, its asset bucket and its ECR repository",
+    "the SSM parameter /calm-frames/cloud-signing-key and the local copy of the cloud demo key"
+  ]
+}
