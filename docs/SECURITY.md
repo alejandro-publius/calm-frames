@@ -520,8 +520,8 @@ Three things the deploy showed that are not fixed by a commit:
   <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollar
   monthly budget filters on the cost allocation tag `Project=calm-frames`, and
   at 02:50 PDT Cost Explorer listed no cost allocation tag named `Project`. A
-  new tag shows up there up to a day after tagged resources first cost
-  something, and it then has to be activated in Billing. Until it is, the
+  new tag can take up to a day to show up there after it is first put on a
+  resource, and it then has to be activated in Billing. Until it is, the
   filter matches no cost, and the bill has to be read by hand.
 - **The pushed image has known vulnerabilities in its Debian packages.** ECR's
   basic scan on push reported

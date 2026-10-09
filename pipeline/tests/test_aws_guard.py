@@ -247,6 +247,33 @@ class TestTheSigningKeyIsNeverDroppedQuietly:
         assert "is blocked" in result.stderr
         assert "[would run]" not in result.stdout
 
+    def test_the_infra_makefile_sends_the_same_context(self):
+        """`make -C pipeline/infra diff` is the other road to the CDK.
+
+        Dry run only (`make -n`), with echo as the CDK, so nothing runs. Seen
+        to fail, Oct 9 2026: without the `$(if ...)` line in
+        pipeline/infra/Makefile the key's context was missing and this went red.
+        """
+        env = dict(os.environ)
+        env.update(NO_CREDENTIALS)
+        env.pop("SIGNING_KEY_PARAMETER", None)
+
+        def dry_run(*extra: str) -> str:
+            finished = subprocess.run(
+                ["make", "-n", "-C", str(REPO / "pipeline" / "infra"), "diff", "CDK=echo [would run]", *extra],
+                capture_output=True,
+                text=True,
+                env=env,
+                timeout=60,
+            )
+            assert finished.returncode == 0, finished.stderr
+            return finished.stdout
+
+        assert f"-c calmframes:signingKeyParameter={self.PARAMETER}" in dry_run(
+            f"SIGNING_KEY_PARAMETER={self.PARAMETER}"
+        )
+        assert "signingKeyParameter" not in dry_run()
+
 
 class TestThePushScriptChecksTheLocksItself:
     """Running the push script directly is no way around the guard."""

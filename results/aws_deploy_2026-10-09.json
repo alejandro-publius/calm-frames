@@ -142,7 +142,7 @@
     "actual_spend_read_at": "2026-10-09T02:50:58-07:00",
     "project_tag_listed_as_cost_allocation_tag": false,
     "project_tag_checked_at": "2026-10-09T02:50:47-07:00",
-    "what_that_means": "Cost Explorer did not list Project as a cost allocation tag. A new tag shows up there up to a day after tagged resources first cost something, and then it has to be activated in Billing. Until it is active the budget's tag filter matches no cost, so its alarms cannot fire."
+    "what_that_means": "Cost Explorer did not list Project as a cost allocation tag. A new tag can take up to a day to show up there after it is first put on a resource, and then it has to be activated in Billing. Until it is active the budget's tag filter matches no cost, so its alarms cannot fire."
   },
   "image": {
     "tags": [
