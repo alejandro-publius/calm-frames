@@ -1875,3 +1875,53 @@ second way.
   instead of 0, because the ledger gives the clip a duration; nothing published
   reads that field. `eval/fetch_media.py` rewrites the ledger from its own list
   and would drop these rows, as it would the chime's.
+
+## 2026-10-09: one feedback section per AWS service, answered from the deploy
+
+- **Decision:** Rewrite docs/FEEDBACK.md's AWS answers from the night of Oct 9
+  and give each service the stack used its own five questions: CDK, Fargate,
+  S3 and CloudFront as before, and now Lambda, DynamoDB, ECR, Parameter Store
+  with KMS, and Budgets. The Kepler packages and GitHub Actions move from 12
+  and 13 to 17 and 18. Only facts in `results/aws_deploy_2026-10-09.json`,
+  `results/cost_estimate.json` or the committed infra docs are published, and
+  the two quoted AWS pages were read that night.
+- **Why:** Amazon asks the five questions of every tool an entry used, and the
+  AWS Builder field is answered inside the product feedback. Sections that said
+  "nothing is deployed" became false on Oct 9, and five services had no answer
+  at all.
+- **Cost:** Section numbers moved. The two references inside FEEDBACK.md and
+  SUBMISSION.md section 10.1 follow; docs/MOCK_JUDGE_2.md still cites the old
+  numbers and is left as the historical review it is. The starter Lambda's run
+  durations exist only in the saved evidence outside the repository, so they are
+  not quoted. Each answer is one night and one short clip deep, and says so.
+
+## 2026-10-09: the cost line stays the estimate, with its worse sibling beside it
+
+- **Decision:** Replace SUBMISSION.md's unsourced "about 5 US dollars" with the
+  <!--n results/cost_estimate.json:published.monthly_total_usd -->1.34<!--/n--> a month in
+  `results/cost_estimate.json`, published next to its
+  <!--n results/cost_estimate.json:published.task_time_quadruple_usd -->2.52<!--/n--> for a task four
+  times as long, rather than a figure worked out from the Oct 9
+  runs.
+- **Why:** The estimate's largest unknown is how long the ingest task runs per
+  title. The only runs so far are a short calm clip, which says nothing about a
+  full-length title, and the bill cannot be read per project until the
+  `Project` tag is active. The NAT figure moves the same way, from an unsourced
+  "65 to 100" to the file's
+  <!--n results/cost_estimate.json:published.nat_gateways_would_add_usd -->65.7<!--/n-->.
+- **Cost:** `results/cost_estimate.json` still says "Nothing has been deployed"
+  in its own statement field. That is the file's wording from Sep 17, and it is
+  left for the next regeneration of the estimate rather than edited by hand.
+
+## 2026-10-09: the integration page installs the release tarball
+
+- **Decision:** docs/INTEGRATION_DIFF.md's `npm install @calm-frames/flash-guard`
+  becomes installing `calm-frames-flash-guard-0.1.0.tgz` from the GitHub
+  Release, with a line saying the release does not exist yet and pointing at
+  hook/README.md for packing the same tarball meanwhile.
+- **Why:** The package is not on npm, so the old line failed for anyone who ran
+  it. A release asset is the one install path a reader outside this repository
+  can follow.
+- **Cost:** `scripts/release.sh` attaches the three `.vpkg` files and
+  `SHA256SUMS`, not the hook tarball. The release work has to add it, and its
+  checksum, or this line has to change again before the release is published.
