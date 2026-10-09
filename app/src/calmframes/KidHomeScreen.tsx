@@ -51,7 +51,7 @@ import {
 } from './copy';
 import ProfilePicker from './ProfilePicker';
 import { Profile } from './profiles';
-import { shelfPoster } from './shelf';
+import { shelfLabel, shelfPoster, spokenShelfLabel } from './shelf';
 import ShieldBadge from './ShieldBadge';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle, kidModeTitles } from './titleStatus';
@@ -184,6 +184,7 @@ const KidHomeScreen = ({
             {listed.map((entry, index) => {
               const focused = focusedId === entry.title.id;
               const poster = shelfPoster(entry);
+              const label = shelfLabel(entry.title);
               return (
                 <TouchableOpacity
                   disabled={saving || undefined}
@@ -191,7 +192,7 @@ const KidHomeScreen = ({
                   key={entry.title.id}
                   testID={`${testID}-poster-${entry.title.id}`}
                   accessibilityRole="button"
-                  accessibilityLabel={`${entry.title.title}, checked`}
+                  accessibilityLabel={`${spokenShelfLabel(label)}, checked`}
                   activeOpacity={1}
                   hasTVPreferredFocus={index === 0}
                   onFocus={() => setFocusedId(entry.title.id)}
@@ -213,9 +214,22 @@ const KidHomeScreen = ({
                   ) : (
                     <View style={styles.posterImage} />
                   )}
-                  <Text style={styles.posterTitle} numberOfLines={2}>
-                    {entry.title.title}
-                  </Text>
+                  <View style={styles.posterText}>
+                    <Text
+                      style={styles.posterTitle}
+                      numberOfLines={2}
+                      testID={`${testID}-poster-title-${entry.title.id}`}>
+                      {label.name}
+                    </Text>
+                    {label.qualifier ? (
+                      <Text
+                        style={styles.posterQualifier}
+                        numberOfLines={2}
+                        testID={`${testID}-poster-qualifier-${entry.title.id}`}>
+                        {label.qualifier}
+                      </Text>
+                    ) : null}
+                  </View>
                   <ShieldBadge
                     status={entry.status}
                     testID={`${testID}-badge-${entry.title.id}`}
@@ -294,10 +308,17 @@ const styles = StyleSheet.create({
     // picture for a title with no still. uiFrames.ts counts it either way.
     backgroundColor: CALM_COLORS.BORDER,
   },
+  posterText: { marginVertical: scale(CALM_SPACE.TIGHT) },
   posterTitle: {
     color: CALM_COLORS.TEXT,
     fontSize: scale(CALM_TYPE.BODY),
-    marginVertical: scale(CALM_SPACE.TIGHT),
+    fontWeight: '600',
+  },
+  // The second line. TEXT_DIM holds the text floor on the resting card and
+  // on the focused one; shelf.test.tsx measures both.
+  posterQualifier: {
+    color: CALM_COLORS.TEXT_DIM,
+    fontSize: scale(CALM_TYPE.SMALL),
   },
   footer: {
     paddingTop: scale(CALM_SPACE.ROW),

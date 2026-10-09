@@ -13,6 +13,8 @@ export const BENIGN_STORY_ID = 'calm-frames-benign-story';
 export const BENIGN_STORY_URI =
   'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4';
 export const BENIGN_STORY_LABEL = 'Benign demo: practice holds, no flashing';
+/** Harbor's second line on the shelf, under its name. */
+export const BENIGN_STORY_SHELF_QUALIFIER = 'Benign demo, practice holds';
 
 export function benignStoryTitle(): CatalogTitle {
   return {
