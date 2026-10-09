@@ -470,6 +470,53 @@ class TestTheImageItself:
             assert forbidden not in allowed
         assert "**/*.pem" in meaningful
 
+    def test_the_build_context_leaves_out_what_a_deploy_or_an_install_writes(self):
+        """The guard: generated files inside the allowed directories stay out.
+
+        The image pushed on Oct 9, 2026 carried pipeline/infra/cdk.context.json,
+        the CDK lookup cache the deploy had written into the checkout minutes
+        before the build, and that file holds an availability zone lookup keyed
+        by the account id. The editable install of flashmap in the venv writes
+        flashmap/src/flashmap.egg-info/, which `flashmap/*.egg-info/` does not
+        reach, and pytest leaves flashmap/.pytest_cache/ behind.
+
+        Read through scripts/build_context.py, the matcher `make image-context`
+        uses. It reimplements docker's rules rather than calling docker, so the
+        second half checks that the code the image needs still goes in, which
+        stops this from passing by excluding everything.
+
+        Seen to fail, Oct 9 2026: removing each of the three new .dockerignore
+        lines in turn turned this red with that path named, and restoring the
+        line turned it green.
+        """
+        import importlib.util  # noqa: PLC0415
+
+        spec = importlib.util.spec_from_file_location(
+            "build_context", REPO / "scripts" / "build_context.py"
+        )
+        build_context = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(build_context)
+        rules = build_context.read_rules(REPO / ".dockerignore")
+
+        for generated in (
+            "pipeline/infra/cdk.context.json",
+            "flashmap/src/flashmap.egg-info",
+            "flashmap/src/flashmap.egg-info/PKG-INFO",
+            "flashmap/.pytest_cache",
+            "flashmap/.pytest_cache/v/cache/nodeids",
+        ):
+            assert not build_context.included(generated, rules), (
+                f"{generated} would be sent to the docker daemon"
+            )
+        for needed in (
+            "flashmap/pyproject.toml",
+            "flashmap/src/flashmap/analyze.py",
+            "pipeline/ingest.py",
+            "pipeline/infra/ingest/entrypoint.py",
+            "pipeline/infra/ingest/requirements.txt",
+        ):
+            assert build_context.included(needed, rules), f"{needed} is needed and left out"
+
 
 class TestTheStackKnowsAboutTheContainer:
     """The parts of the template that only exist because of this container."""
