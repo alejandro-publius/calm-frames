@@ -1752,3 +1752,126 @@ second way.
   libswscale's portable C path, which neither platform takes, decodes them
   0.0042 low, so a runner without SIMD would fail them under the old limit and
   the new one alike.
+
+## 2026-10-09: HUMAN CHECKPOINT D, amended and confirmed
+
+- **Decision:** Treat HUMAN CHECKPOINT D as confirmed on Oct 9, 2026, with its
+  third clause, "the $150 credit request is in", recorded as void and waived
+  rather than met. Alex confirmed it in chat, where he asked for the deploy,
+  and at his own terminal, where he ran `make deploy CHECKPOINT_D=confirmed`
+  and approved the IAM changes himself. docs/GATES.md has the entry.
+- **Why:** The credit request form closed on Oct 7, so nobody could meet that
+  clause any more, and the credits are not needed: Alex's own AWS credits cover
+  the bill, and he waived the clause. The other two hold. The account moved to
+  the Paid plan at 23:03 PDT on Oct 8 (CloudTrail), and the 20 dollar budget
+  exists with its three alerts.
+- **Cost:** The budget cannot warn anyone yet. It counts only costs tagged
+  `Project=calm-frames`, and at 02:50 PDT Cost Explorer listed no such cost
+  allocation tag, so until Alex activates it the bill is read by hand. The lock
+  line went only into the deploy worktree's copy of docs/STATUS.md and was never
+  committed, so the committed lock stays closed and the next deploy needs a
+  person to open it again.
+
+## 2026-10-09: deploy without the GitHub OIDC role
+
+- **Decision:** Leave `githubRepo` empty on the first deploy, so the stack made
+  no GitHub OIDC provider and no deploy role, and record that rather than
+  redeploying to add them.
+- **Why:** Nothing in this repository deploys from CI, on purpose. A role that
+  nothing assumes is standing permission with no use, and the control that
+  matters here is a person at a terminal reading the IAM table before typing
+  `y`, which CI cannot do. Adding the role later is one redeploy with
+  `GITHUB_REPO` set, and its IAM rows would come up for approval then.
+- **Cost:** docs/SECURITY.md described AWS access as a GitHub OIDC role; it now
+  says the one deploy used the operator's own CLI credentials in his terminal.
+  CLAUDE.md's rule, AWS access from CI only through OIDC, still holds, because
+  CI has no AWS access at all.
+
+## 2026-10-09: a separate cloud demo signing key, which the app does not trust
+
+- **Decision:** Give the ingest task a throwaway Ed25519 key made for the cloud,
+  `cloud_demo_2026-10`, kept as the SSM SecureString
+  `/calm-frames/cloud-signing-key` under the account's `aws/ssm` key and readable
+  by the task role alone, through SSM alone. Never the release key or
+  `team_key.pem`, and never compile its public half into the app.
+- **Why:** Without a key the task refuses to publish, which the first run
+  proved. With the release key in SSM, a key a running task can read would be a
+  key the TV believes. A key the app does not trust lets the cloud run end to end
+  while a leak changes nothing on the TV: its id starts
+  <!--n results/aws_deploy_2026-10-09.json:signing_key.key_id_short -->9fa44e490266<!--/n-->, and the
+  key the app checks maps against starts
+  <!--n results/aws_deploy_2026-10-09.json:signing_key.app_trusted_key_id_short -->9d32df3b18c9<!--/n-->.
+- **Cost:** The maps the cloud makes play on no TV. They are evidence of the
+  pipeline running on AWS, not titles, and the demo shelf stays the packaged one.
+  A redeploy without `SIGNING_KEY_PARAMETER` takes the wiring out again, which
+  is why `scripts/aws_guard.sh` now passes it and says on every deploy whether a
+  key is wired in. The parameter and the local copy outlive `make destroy` and
+  are deleted by hand.
+
+## 2026-10-09: keep the stack up until the results, about Dec 3
+
+- **Decision:** Leave CalmFramesStack running through judging and take it down
+  with `make destroy` after the winners are announced, about Dec 3, 2026, then
+  remove what lives outside it (pipeline/infra/README.md, "Taking it down").
+  Only read-only checks in between.
+- **Why:** The AWS Builder evidence is a deployed stack and its recorded runs. A
+  judge who looks during judging should find what the documents describe, not a
+  stack that was taken down the week the video was cut.
+- **Cost:** Idle, the stack bills storage only: the
+  <!--n results/aws_deploy_2026-10-09.json:image.size_mb -->279<!--/n--> MB image in ECR at
+  $<!--n results/cost_estimate.json:unit_prices.ecr_gb_month.usd -->0.1<!--/n--> per GB month, a few
+  kilobytes in S3 and DynamoDB, and the log groups. That is cents a month at list
+  prices, but the bill is the measure, and the budget cannot see it until the
+  tag is active. For the whole time, CloudFront serves the delivered calm title
+  to anyone who has its path: a kid safe rendition and a map no TV trusts.
+
+## 2026-10-09: pin the CDK CLI to 2.1142.0
+
+- **Decision:** Move the CDK CLI pin from 2.1032.0 to 2.1142.0 in
+  `scripts/aws_guard.sh`, `pipeline/infra/Makefile` and the bootstrap command in
+  `pipeline/infra/README.md`, and test that the three agree and meet the minimum
+  the installed aws-cdk-lib declares.
+- **Why:** aws-cdk-lib 2.270.0 writes cloud assembly schema 54, and the old pin
+  stops right after synth with "Cloud assembly schema version mismatch: Maximum
+  schema version supported is 48.x.x, but found 54.0.0. You need at least CLI
+  version 2.1142.0 to read this manifest." The deploy ran on 2.1142.0, named on
+  the command line. A bisect in scratch that night found CLIs from 2.1126.0 on
+  already read the manifest and synthesized a byte-identical template, but
+  2.1142.0 is what the library declares and what the stack was deployed with.
+- **Cost:** The library and the CLI now move together: bumping aws-cdk-lib means
+  bumping the pin, or the version test fails in the Audit workflow's infra job.
+  That test needs aws-cdk-lib, so it skips in the CI Python job.
+
+## 2026-10-09: the ingest image was built in the shared Docker VM after all
+
+- **Decision:** Record that the Oct 9 `make deploy` built the ingest image in the
+  shared colima VM on this Mac, which the Sep 17 entry "stop building the
+  container on this Mac" ruled out, and keep the risk in front of the next build.
+- **Why:** `scripts/push_ingest_image.sh` builds before it pushes, so a deploy
+  from this Mac builds here. The Sep 17 decision added an image job on a runner
+  but left `make image` and the push script building locally. This time the
+  build finished and nothing else was hurt: every other project's container
+  still read up for two or three weeks the next morning, and the two that exited
+  137 date from Sep 17.
+- **Cost:** The memory risk the Sep 17 entry describes is still there for every
+  deploy from this Mac, and the planned rebuild for the Harbor run is the next
+  one. Watch the VM while it builds, or build on a runner and push from there.
+  Two local images from that night, about 1 GB each in the VM (the pushed one
+  under two tags, and a dry run build), are ours and can be removed once the
+  rebuild has replaced them.
+
+## 2026-10-09: ledger rows for our own marker clip and story, kept out of the pool
+
+- **Decision:** Give `media/markers_packed.mp4` and the Harbor story
+  `app/assets/raw/benign-story/harbor.mp4` rows in `media/LICENSES.csv` marked
+  "Ours", CC0-1.0, like the chime's, so NOTICE and the credits screen name them.
+  The labelling pool now keeps out every row whose note starts "Ours.".
+- **Why:** Every asset we ship or measure with should have one row saying where
+  it came from. But the marker clip sits in media/, every candidate list has a
+  result for it and it is longer than a segment, so the next pool rebuild would
+  have drawn windows from it. Run against the main checkout's media/, it came
+  out eligible.
+- **Cost:** The screening table's unlabeled row now counts 12 analysed seconds
+  instead of 0, because the ledger gives the clip a duration; nothing published
+  reads that field. `eval/fetch_media.py` rewrites the ledger from its own list
+  and would drop these rows, as it would the chime's.
