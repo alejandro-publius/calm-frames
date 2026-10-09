@@ -8,9 +8,10 @@ rewritten against the current implementation; recheck the remaining fields and
 replace every **NEEDS ALEX** before submission. The current assessment and next
 acceptance criteria are in [HACKATHON_REVIEW.md](HACKATHON_REVIEW.md).
 
-**Updated October 9** for the AWS deploy of that night (sections 10.2 and 11), the
-friction log's counts (section 14), the dates below and the list in section 16.
-Everything else still reads as of October 2.
+**Updated October 9** for the AWS deploy of that night (sections 3, 5, 10 and 11),
+the friction log's counts (section 14), the upstream text's wording (section
+12.4), the dates below and the list in section 16. Everything else still reads
+as of October 2.
 
 **How to use this file.** Each numbered section below corresponds to a planned
 Devpost field. Final field names still need checking in the live form.
