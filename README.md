@@ -1,6 +1,6 @@
 # Calm Frames
 
-**A verified safety layer for Fire TV, for kids with photosensitive epilepsy.**
+**Every frame checked before it plays, on Fire TV, for kids with photosensitive epilepsy.**
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
@@ -82,8 +82,9 @@ provides the next agent with an evidence-driven improvement loop.
   |                map  ->  the picture stays hidden                      |
   +----------------------------------------------------------------------+
 
-  Other Vega video apps add the same protection with a small hook.
-  Studios check their own content in CI with the flashmap GitHub Action.
+  A Vega video app built on Amazon's W3C media player can add the same
+  protection with a small hook. Studios can check their own content in CI
+  with the flashmap GitHub Action.
 ```
 
 Two things in that picture are worth saying out loud.
@@ -128,7 +129,7 @@ The same abstract records that "Government and regulatory agencies require scree
 
 The app is the demo. These four are the part that keeps working after the judging period, and none of them needs anyone to install Calm Frames.
 
-**1. The hook, so any Vega video app gets the same protection.** The guard is one React hook with no knowledge of our screens, navigation or storage. [`docs/INTEGRATION_DIFF.md`](docs/INTEGRATION_DIFF.md) is the real `git diff` of adding it to a clean [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) checkout at tag `v0.24-RN83`: <!--n results/integration_diff.json:lines_added -->32<!--/n--> lines added and <!--n results/integration_diff.json:lines_replaced -->2<!--/n--> replaced across <!--n results/integration_diff.json:files_touched -->4<!--/n--> files. <!--n results/integration_diff.json:busiest_file_lines_added -->23<!--/n--> of those added lines are in one file, `src/screens/PlayerScreen.tsx`, and each of the other three files adds exactly <!--n results/integration_diff.json:other_files_lines_added_each.0 -->3<!--/n--> lines. `hook/tools/make_integration_diff.mjs` regenerates that patch from the pinned checkout, and `eval/integration_diff_stats.py` counts what is committed file by file, so every number in this paragraph is measured rather than asserted.
+**1. The hook, so a Vega video app built on Amazon's W3C media player gets the same protection.** The guard is one React hook with no knowledge of our screens, navigation or storage. [`docs/INTEGRATION_DIFF.md`](docs/INTEGRATION_DIFF.md) is the real `git diff` of adding it to a clean [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) checkout at tag `v0.24-RN83`: <!--n results/integration_diff.json:lines_added -->32<!--/n--> lines added and <!--n results/integration_diff.json:lines_replaced -->2<!--/n--> replaced across <!--n results/integration_diff.json:files_touched -->4<!--/n--> files. <!--n results/integration_diff.json:busiest_file_lines_added -->23<!--/n--> of those added lines are in one file, `src/screens/PlayerScreen.tsx`, and each of the other three files adds exactly <!--n results/integration_diff.json:other_files_lines_added_each.0 -->3<!--/n--> lines. `hook/tools/make_integration_diff.mjs` regenerates that patch from the pinned checkout, and `eval/integration_diff_stats.py` counts what is committed file by file, so every number in this paragraph is measured rather than asserted.
 
 What an app gets for it: every flagged part of a title hidden before it starts while sound and captions keep going, a card ahead of it with a D-pad Skip and a card afterwards, a missing or stale or unsigned or wrong-hash map keeping the picture hidden, every seek path safe including Alexa and the remote's transport commands, and a VoiceView announcement for each card. What it costs: one rule, which is that nothing in the app writes `currentTime` or calls `fastSeek` any more. Everything goes through `guard.requestSeek`. The package README is [`hook/README.md`](hook/README.md). **The package is not published to npm yet**, but a Vega app can now install a locally packed tarball from a reviewed checkout. The offline consumer check uses that installed tarball, current Vega peer types, Metro resolution and React Native transforms, not repository-source aliases. The name `@calm-frames/flash-guard` was free when we checked on Sep 17, 2026, and that is the whole of the claim on it.
 

@@ -1,6 +1,6 @@
 # The upstream contribution
 
-**Target:** [`AmazonAppDev/vega-video-sample`](https://github.com/AmazonAppDev/vega-video-sample), the Fire TV video sample that most Vega video apps start from. It has merged an outside contributor's pull request before: #7, opened June 18 2026 by an account with no association to the repository, merged July 6 2026. So they do take them.
+**Target:** [`AmazonAppDev/vega-video-sample`](https://github.com/AmazonAppDev/vega-video-sample), Amazon's reference video app for Vega. It has merged an outside contributor's pull request before: #7, opened June 18 2026 by an account with no association to the repository, merged July 6 2026. So they do take them.
 
 **Status, Fri Oct 2 2026.** The two existing patches and their three added tests
 were reapplied and revalidated locally against the pristine sample. They remain
@@ -522,7 +522,7 @@ anything awaitable, and harmless if it never does.
 
 7. **Push the branch to your fork and open the pull request** with the title and body above, referencing the issue number.
 
-8. **Record the links.** Paste the pull request URL into `docs/SUBMISSION.md` field 11.1 and your GitHub username into 11.3. The fields are listed at the end of this file.
+8. **Record the links.** Paste the pull request URL into `docs/SUBMISSION.md` field 12.1 and your GitHub username into 12.3. The fields are listed at the end of this file.
 
 One decision that is yours, not this machine's: the patches carry no co-author or generated-with trailer. Our own repository puts one on every commit. A contribution to someone else's repository goes out under your name, so the trailer is left off rather than added on your behalf. Add one before pushing if you would rather it were there.
 
@@ -536,11 +536,11 @@ Three fields in `docs/SUBMISSION.md` depend on this file. None of them can be fi
 
 | Field | What goes in it | State |
 |---|---|---|
-| 11.1 Contribution URL | The pull request URL, `https://github.com/AmazonAppDev/vega-video-sample/pull/<n>`. If the issue is filed first and the pull request is late, the issue URL is a usable stand-in on the same repository | **NEEDS ALEX.** Nothing is pushed. Due Mon Oct 12 |
-| 11.3 GitHub username | The account that owns the fork, which is the account that appears on the pull request | **NEEDS ALEX.** The repository here is under `alejandro-publius`; confirm the same account forks upstream, or say which one does |
-| 11.4 What we did, and why it matters | Already written. The upstream half can now say three tests rather than two, and that both guards were seen to fail | Ready, one word to update |
+| 12.1 Contribution URL | The pull request URL, `https://github.com/AmazonAppDev/vega-video-sample/pull/<n>`. If the issue is filed first and the pull request is late, the issue URL is a usable stand-in on the same repository | **NEEDS ALEX.** Nothing is pushed. Due Mon Oct 12 |
+| 12.3 GitHub username | The account that owns the fork, which is the account that appears on the pull request | **NEEDS ALEX.** The repository here is under `alejandro-publius`; confirm the same account forks upstream, or say which one does |
+| 12.4 What we did, and why it matters | Written. The upstream half says three tests, two of which fail without the fix | Ready |
 
-Section 9.3 of `docs/SUBMISSION.md`, the vega-video-sample feedback, can also pick up two things that were measured today: `jest --ci` exits 1 on a clean checkout over two obsolete snapshot entries, and `main` has not moved since Aug 6 2026. Both are in `docs/FEEDBACK.md` under the sample.
+The vega-video-sample feedback already carries two things measured while this was prepared: `jest --ci` exits 1 on a clean checkout over two obsolete snapshot entries, and `main` has not moved since Aug 6 2026. Both are in `docs/FEEDBACK.md` section 3, which is what `docs/SUBMISSION.md` section 10 pastes from.
 
 ---
 

@@ -27,7 +27,16 @@ is the point: after this, no code in the sample writes `currentTime` or calls
 
 ## Before you start
 
-    npm install @calm-frames/flash-guard
+The package is not on npm. Download its tarball,
+`calm-frames-flash-guard-0.1.0.tgz`, from the project's GitHub Release and
+install that file into the app:
+
+    npm install ./calm-frames-flash-guard-0.1.0.tgz --ignore-scripts
+
+The release is not published yet. Until it is, pack the same tarball from a
+reviewed checkout, as [`hook/README.md`](../hook/README.md) shows. Either way
+the import name stays `@calm-frames/flash-guard`, which is what the diff below
+uses.
 
 Two things the app has to supply:
 
