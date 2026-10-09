@@ -125,9 +125,20 @@ export interface KidModeScreenProps {
   householdStorage?: HouseholdStorage;
 }
 
-/** The bundled demos and checked prepared library are available offline. */
+/**
+ * The bundled demos and checked prepared library are available offline.
+ *
+ * The order is the shelf's order, and the first title the shelf lists takes
+ * the D-pad focus. Harbor leads because it is the one that shows the whole
+ * journey: captions, a countdown and a practice hold. The gradient has none of
+ * those, so it goes last, where it still proves a title plays with no network.
+ */
 export function defaultCatalog(settings = DEFAULT_SETTINGS): CatalogTitle[] {
-  return [offlineTitle(OFFLINE_VIDEO_URI), benignStoryTitle(), ...packagedLibrary.titles(settings)];
+  return [
+    benignStoryTitle(),
+    ...packagedLibrary.titles(settings),
+    offlineTitle(OFFLINE_VIDEO_URI),
+  ];
 }
 
 /**
