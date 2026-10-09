@@ -210,6 +210,19 @@ describe('the shelf a household lands on', () => {
     );
     expect(asking).toEqual([BENIGN_STORY_ID]);
   });
+
+  it("shows Harbor's signed still on the route a household really takes, and no other picture", async () => {
+    await renderKidMode();
+    await finishFirstRun();
+    const pictured = shelfOrder().filter(
+      (id) => screen.queryByTestId(`kid-mode-home-poster-image-${id}`) !== null,
+    );
+    expect(pictured).toEqual([BENIGN_STORY_ID]);
+    expect(
+      screen.getByTestId(`kid-mode-home-poster-image-${BENIGN_STORY_ID}`).props
+        .source.uri,
+    ).toMatch(/^data:image\/jpeg;base64,/);
+  });
 });
 
 describe('what goes to the player', () => {

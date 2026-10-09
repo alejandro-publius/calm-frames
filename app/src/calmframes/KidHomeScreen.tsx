@@ -8,6 +8,9 @@
  *   route;
  * - nothing plays a preview. There is no autoplaying video and no motion
  *   anywhere on this screen;
+ * - a poster's picture is a still: one the catalog published, or Harbor's own
+ *   signed scene still (shelf.ts). No title borrows another title's picture,
+ *   and a title with none keeps a plain block;
  * - every poster carries the shield, and focus is a thick ring rather than a
  *   colour change or a wobble.
  *
@@ -48,6 +51,7 @@ import {
 } from './copy';
 import ProfilePicker from './ProfilePicker';
 import { Profile } from './profiles';
+import { shelfPoster } from './shelf';
 import ShieldBadge from './ShieldBadge';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle, kidModeTitles } from './titleStatus';
@@ -179,6 +183,7 @@ const KidHomeScreen = ({
             showsVerticalScrollIndicator={false}>
             {listed.map((entry, index) => {
               const focused = focusedId === entry.title.id;
+              const poster = shelfPoster(entry);
               return (
                 <TouchableOpacity
                   disabled={saving || undefined}
@@ -193,15 +198,20 @@ const KidHomeScreen = ({
                   onBlur={() => setFocusedId(null)}
                   onPress={() => onOpen(entry)}
                   style={[styles.poster, focused ? styles.posterFocused : null]}>
-                  {entry.title.posterUrl ? (
+                  {poster ? (
                     <Image
-                      source={{ uri: entry.title.posterUrl }}
+                      source={{ uri: poster }}
                       style={styles.posterImage}
-                      // A still. Nothing on this screen plays by itself.
+                      // A still, never cropped, so a burned-in label stays
+                      // whole, and drawn without a fade: nothing on this
+                      // screen moves by itself.
+                      resizeMode="contain"
+                      fadeDuration={0}
+                      accessible={false}
                       testID={`${testID}-poster-image-${entry.title.id}`}
                     />
                   ) : (
-                    <View style={[styles.posterImage, styles.posterBlank]} />
+                    <View style={styles.posterImage} />
                   )}
                   <Text style={styles.posterTitle} numberOfLines={2}>
                     {entry.title.title}
@@ -277,10 +287,13 @@ const styles = StyleSheet.create({
   },
   posterImage: {
     width: '100%',
-    height: scale(180),
+    // The signed stills are 16:9, so the block is too and nothing letterboxes.
+    aspectRatio: 16 / 9,
     borderRadius: scale(8),
+    // The block a poster sits in before its picture is there, and the whole
+    // picture for a title with no still. uiFrames.ts counts it either way.
+    backgroundColor: CALM_COLORS.BORDER,
   },
-  posterBlank: { backgroundColor: CALM_COLORS.BORDER },
   posterTitle: {
     color: CALM_COLORS.TEXT,
     fontSize: scale(CALM_TYPE.BODY),
