@@ -42,7 +42,7 @@ import {
   isBundledBenignStory,
 } from '../calmframes/benignStory';
 import { CALM_COLORS, CALM_TYPE, scale } from '../calmframes/calmStyles';
-import { NO_CARD } from '../calmframes/cards';
+import { cardOffersSkip, NO_CARD } from '../calmframes/cards';
 import { playChime } from '../calmframes/chimeSound';
 import CoverLayer from '../calmframes/CoverLayer';
 import { buildCoverIntervals } from '../calmframes/coverSchedule';
@@ -639,6 +639,9 @@ const PlayerScreen = ({
             setSelectedCaptionInVideoPlayer={setSelectedCaptionInVideoPlayer}
             bifFrameImagesRef={bifFrameImagesRef}
             videoData={data}
+            // The card's Skip button has focus during a countdown, so OK is
+            // Skip's and the sample must not pause or show its controls.
+            skipOwnsSelect={cardOffersSkip(card)}
             requestSeek={
               guarding
                 ? (source, targetMs) => {

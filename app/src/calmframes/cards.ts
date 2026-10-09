@@ -165,6 +165,17 @@ export function cardAt(
 }
 
 /**
+ * True when this card carries a Skip button.
+ *
+ * CalmCard draws the button from this, and the player asks the same question
+ * to decide who owns OK: while Skip is on screen it has D-pad focus, so OK is
+ * a press on Skip and not a reason to pause the title or bring up controls.
+ */
+export function cardOffersSkip(card: Card): boolean {
+  return card.kind === 'countdown' && card.skipToMs !== undefined;
+}
+
+/**
  * True when this card replaces the one on screen.
  *
  * Cards are announced once each. Without this the countdown would re-announce

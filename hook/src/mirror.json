@@ -2,10 +2,10 @@
   "source": "app/src/calmframes",
   "files": {
     "announce.ts": "d67e13b47de80d16",
-    "CalmCard.tsx": "b05cf1b50bb60d6b",
+    "CalmCard.tsx": "a542f964f6c396ee",
     "calmStyles.ts": "bf5c47803e183f15",
     "canonicalJson.ts": "1097285aae9b21aa",
-    "cards.ts": "21651ff18fb6a59c",
+    "cards.ts": "23bf59c4f9afccdd",
     "CoverLayer.tsx": "ce1c3f785861d009",
     "coverSchedule.ts": "0fc0b8ba87e15973",
     "ed25519.ts": "8a8e37cc128b0603",

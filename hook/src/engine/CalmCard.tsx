@@ -27,7 +27,7 @@ import {
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
-import { Card } from './cards';
+import { Card, cardOffersSkip } from './cards';
 
 export interface CalmCardProps {
   card: Card;
@@ -53,8 +53,7 @@ const CalmCard = ({
   );
   const [focused, setFocused] = React.useState(false);
 
-  const showSkip =
-    allowSkip && card.kind === 'countdown' && card.skipToMs !== undefined;
+  const showSkip = allowSkip && cardOffersSkip(card);
 
   useEffect(() => {
     // A new countdown puts focus on Skip. requestTVFocus is the supported way
