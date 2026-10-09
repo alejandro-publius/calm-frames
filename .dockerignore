@@ -24,9 +24,17 @@ flashmap/.hypothesis/
 flashmap/build/
 flashmap/dist/
 flashmap/*.egg-info/
+# An editable install of flashmap (the venv has one) writes its egg-info under
+# src/, where the line above does not reach.
+flashmap/**/*.egg-info/
+flashmap/.pytest_cache/
 pipeline/**/__pycache__/
 pipeline/tests/
 pipeline/infra/cdk.out/
+# The CDK's lookup cache. A real deploy writes it next to cdk.json, and it holds
+# an availability zone lookup keyed by the account id. The image pushed on
+# Oct 9, 2026 carried one, because the deploy wrote it minutes before the build.
+pipeline/infra/cdk.context.json
 **/*.pyc
 **/*.pem
 **/.DS_Store

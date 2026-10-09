@@ -38,7 +38,8 @@ BEGIN = "<!-- BEGIN media credits, written by eval/attribution.py. Do not edit b
 END = "<!-- END media credits -->"
 
 # Titles that no page gives us a name for. Everything on Wikimedia Commons is named by its own
-# file page, so only these eight need one written down. A ledger row that is neither a Commons
+# file page, so only the eight sourced titles and our own three below need one written down
+# (eleven in all, Oct 9, 2026). A ledger row that is neither a Commons
 # file nor listed here fails the test in eval/tests/test_attribution.py rather than getting an
 # invented name off its file name.
 TITLES = {
@@ -46,6 +47,10 @@ TITLES = {
     # asset that ships has one row saying where it came from, even when the
     # answer is that we made it and there is nothing to credit.
     "app/assets/raw/sound/calm-chime.mp3": "The Calm Frames chime",
+    # Ours too, for the same reason: the story the app ships, and the marker
+    # clip the timing harness and the Oct 9 AWS runs used.
+    "app/assets/raw/benign-story/harbor.mp4": "Harbor story (benign demo)",
+    "media/markers_packed.mp4": "The Calm Frames timing marker clip",
     "bbb_720p_surround.mp4": "Big Buck Bunny",
     "sintel_2048_stereo_512kb.mp4": "Sintel",
     "tears_of_steel_720p.mov": "Tears of Steel",

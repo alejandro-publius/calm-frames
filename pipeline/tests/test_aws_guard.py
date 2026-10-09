@@ -27,6 +27,7 @@ go red with "assert 0 == 1" and the message about what is still locked.
 from __future__ import annotations
 
 import os
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -181,6 +182,99 @@ class TestWithBothLocksOpen:
         assert "[stub push] ran" in result.stdout
 
 
+def would_run(result: subprocess.CompletedProcess) -> str:
+    """The one command line the guard handed to the stand-in CDK."""
+    lines = [line for line in result.stdout.splitlines() if line.startswith("[would run]")]
+    assert len(lines) == 1, f"expected one CDK command, got {lines!r}"
+    return lines[0]
+
+
+class TestTheSigningKeyIsNeverDroppedQuietly:
+    """SIGNING_KEY_PARAMETER keeps the cloud key wired in, and leaving it out is said aloud.
+
+    The stack wires the ingest task to a signing key only when the
+    calmframes:signingKeyParameter context is passed. On Oct 9 that context was
+    added by hand inside the CDK variable, and the guard had no way to pass it,
+    so the next routine `make deploy` would have taken the key away without a
+    word and every later upload would have published nothing.
+
+    Seen to fail, Oct 9 2026, one mutation at a time: dropping the line that
+    adds the context turned the deploy and diff tests red; loosening the name
+    check to match anything let `*`, the first of the six bad names tried,
+    through with exit 0; and dropping the call that reports the key turned the
+    "none" test and the deploy test red. Each restore went green.
+    """
+
+    PARAMETER = "/calm-frames/cloud-signing-key"
+
+    def test_a_named_parameter_reaches_the_deploy(self, fake_repo):
+        confirm_status(fake_repo)
+        result = run_guard(fake_repo, CHECKPOINT_D="confirmed", SIGNING_KEY_PARAMETER=self.PARAMETER)
+        assert result.returncode == 0
+        command = would_run(result)
+        assert command.startswith("[would run] deploy CalmFramesStack ")
+        assert f"-c calmframes:signingKeyParameter={self.PARAMETER}" in command
+        assert f"Signing key: the task may read the SSM parameter {self.PARAMETER}" in result.stdout
+
+    def test_a_diff_shows_the_same_template_the_deploy_would(self, fake_repo):
+        confirm_status(fake_repo)
+        result = run_guard(
+            fake_repo, "diff", CHECKPOINT_D="confirmed", SIGNING_KEY_PARAMETER=self.PARAMETER
+        )
+        assert result.returncode == 0
+        assert f"-c calmframes:signingKeyParameter={self.PARAMETER}" in would_run(result)
+
+    def test_without_it_the_deploy_says_the_key_goes(self, fake_repo):
+        confirm_status(fake_repo)
+        result = run_guard(fake_repo, CHECKPOINT_D="confirmed")
+        assert result.returncode == 0
+        assert "signingKeyParameter" not in would_run(result)
+        assert "Signing key: none." in result.stdout
+        assert f"SIGNING_KEY_PARAMETER={self.PARAMETER} to keep it" in result.stdout
+
+    def test_a_name_ssm_would_refuse_is_refused_here(self, fake_repo):
+        """The value lands in a word-split command line and in an IAM resource ARN."""
+        confirm_status(fake_repo)
+        for bad in ("*", "/calm-frames/*", "/calm-frames/key extra", "/calm-frames/key;id", "$(id)", "/a//b"):
+            result = run_guard(fake_repo, CHECKPOINT_D="confirmed", SIGNING_KEY_PARAMETER=bad)
+            assert result.returncode == 2, f"{bad!r} was accepted"
+            assert "is not an SSM parameter name" in result.stderr
+            assert "[would run]" not in result.stdout
+
+    def test_the_locks_still_come_first(self, fake_repo):
+        result = run_guard(fake_repo, SIGNING_KEY_PARAMETER=self.PARAMETER)
+        assert result.returncode == 1
+        assert "is blocked" in result.stderr
+        assert "[would run]" not in result.stdout
+
+    def test_the_infra_makefile_sends_the_same_context(self):
+        """`make -C pipeline/infra diff` is the other road to the CDK.
+
+        Dry run only (`make -n`), with echo as the CDK, so nothing runs. Seen
+        to fail, Oct 9 2026: without the `$(if ...)` line in
+        pipeline/infra/Makefile the key's context was missing and this went red.
+        """
+        env = dict(os.environ)
+        env.update(NO_CREDENTIALS)
+        env.pop("SIGNING_KEY_PARAMETER", None)
+
+        def dry_run(*extra: str) -> str:
+            finished = subprocess.run(
+                ["make", "-n", "-C", str(REPO / "pipeline" / "infra"), "diff", "CDK=echo [would run]", *extra],
+                capture_output=True,
+                text=True,
+                env=env,
+                timeout=60,
+            )
+            assert finished.returncode == 0, finished.stderr
+            return finished.stdout
+
+        assert f"-c calmframes:signingKeyParameter={self.PARAMETER}" in dry_run(
+            f"SIGNING_KEY_PARAMETER={self.PARAMETER}"
+        )
+        assert "signingKeyParameter" not in dry_run()
+
+
 class TestThePushScriptChecksTheLocksItself:
     """Running the push script directly is no way around the guard."""
 
@@ -215,6 +309,46 @@ class TestThePushScriptChecksTheLocksItself:
         result = self.run_push(fake_repo)
         assert result.returncode == 1
         assert "blocked" in result.stderr
+
+    def test_a_document_that_only_talks_about_the_line_does_not_open_it(self, fake_repo):
+        """The Sep 17 defect, still alive in the second script until Oct 9.
+
+        The guard's pattern was anchored on Sep 17 after a row of
+        docs/STATUS.md that quotes the line opened its lock. This script kept
+        an unanchored copy, so the same row opened its lock too. `aws` and
+        `docker` are stubs on PATH here, so even with the lock wrongly open the
+        script reaches no account and no daemon.
+
+        Seen to fail, Oct 9 2026: with the pattern unanchored again, the script
+        walked past both locks into the stubs and exited 0, and this test and
+        the one below went red.
+        """
+        status = fake_repo / "docs" / "STATUS.md"
+        status.write_text(
+            "| Before any deploy | then add the line `AWS Paid plan: confirmed` "
+            "to this file. |\n"
+        )
+        stubs = fake_repo / "stubs"
+        stubs.mkdir()
+        for tool in ("aws", "docker"):
+            stub = stubs / tool
+            stub.write_text(f'#!/usr/bin/env bash\necho "[stub {tool}] $*"\n')
+            stub.chmod(0o755)
+        result = self.run_push(
+            fake_repo, CHECKPOINT_D="confirmed", PATH=f"{stubs}{os.pathsep}{os.environ['PATH']}"
+        )
+        assert result.returncode == 1
+        assert "blocked" in result.stderr
+        assert "[stub" not in result.stdout
+
+    def test_both_scripts_read_the_line_the_same_way(self):
+        def pattern(path: Path) -> str:
+            found = re.findall(r"^STATUS_PATTERN='([^']*)'$", path.read_text(), re.MULTILINE)
+            assert len(found) == 1, f"{path.name} should set STATUS_PATTERN once"
+            return found[0]
+
+        assert pattern(PUSH) == pattern(GUARD)
+        assert pattern(PUSH).startswith("^")
 
 
 class TestThisRepositoryIsStillLocked:
@@ -270,3 +404,115 @@ class TestThisRepositoryIsStillLocked:
             if not stripped or stripped.startswith("#"):
                 continue
             assert "aws_guard.sh" in stripped, f"deploy runs {stripped!r} outside the guard"
+
+
+CLI_PIN = re.compile(r"aws-cdk@(\d+)\.(\d+)\.(\d+)")
+# Every place a person or a script reads the CDK CLI version from.
+PINNED_IN = (
+    REPO / "scripts" / "aws_guard.sh",
+    REPO / "pipeline" / "infra" / "Makefile",
+    REPO / "pipeline" / "infra" / "README.md",
+)
+
+
+def cli_pins() -> dict[str, set[tuple[int, int, int]]]:
+    return {
+        str(path.relative_to(REPO)): {
+            tuple(int(part) for part in match.groups())
+            for match in CLI_PIN.finditer(path.read_text(encoding="utf-8"))
+        }
+        for path in PINNED_IN
+    }
+
+
+class TestTheCliCanReadWhatTheLibraryWrites:
+    """The pinned CDK CLI is one version, and it reads what the pinned library writes.
+
+    The Oct 9 deploy could not use the pin it found here. CLI 2.1032.0 stops
+    right after synth with "Cloud assembly schema version mismatch: Maximum
+    schema version supported is 48.x.x, but found 54.0.0. You need at least
+    CLI version 2.1142.0 to read this manifest.", so the deploy ran with the
+    CLI named on the command line instead. A pin that only works when somebody
+    overrides it is not a pin.
+
+    Seen to fail, Oct 9 2026: putting 2.1032.0 back in scripts/aws_guard.sh
+    alone turned both tests red, one for the disagreement and one for the
+    version; putting it back in all three files turned only the version test
+    red, with the library's own minimum, 2.1142.0, in the message.
+    """
+
+    def test_every_place_names_one_version(self):
+        pins = cli_pins()
+        assert all(pins.values()), f"a file lost its aws-cdk@ pin: {pins}"
+        versions = set().union(*pins.values())
+        assert len(versions) == 1, f"the CDK CLI is pinned to more than one version: {pins}"
+
+    def test_the_pin_is_at_least_the_minimum_the_library_declares(self):
+        schema = pytest.importorskip(
+            "aws_cdk.cloud_assembly_schema", reason="aws-cdk-lib is needed for this check"
+        )
+        minimum = tuple(int(part) for part in schema.Manifest.cli_version().split("."))
+        for where, versions in cli_pins().items():
+            for version in versions:
+                assert version >= minimum, (
+                    f"{where} pins aws-cdk@{'.'.join(map(str, version))}, and the installed "
+                    f"aws-cdk-lib needs at least {'.'.join(map(str, minimum))}"
+                )
+
+
+class TestTheDeployRecordNamesNoAccount:
+    """What the repository says about the Oct 9 deploy gives the account away nowhere.
+
+    The record in results/aws_deploy_2026-10-09.json was written from describe
+    calls whose raw output is full of the account id, the bucket names, the
+    distribution domain, ARNs and the ECR repository URI. The repository goes
+    public on Oct 21, so each of those shapes is looked for here, in the record
+    and in the two documents that describe the deploy. A failure names the shape
+    and the file, never the value, so the CI log does not repeat the leak.
+
+    Seen to fail, Oct 9 2026: a twelve digit number put in the record's
+    region field, an ARN in its stack name, the real distribution domain in
+    pipeline/infra/README.md and an email address in the record each turned
+    this red, and each went green again when taken out.
+    """
+
+    # The shapes, not the values. A placeholder account id that every AWS
+    # document uses is allowed, and so is the all zeros one `make synth` passes.
+    PLACEHOLDER_ACCOUNTS = {"000000000000", "123456789012"}
+    SHAPES = {
+        "an account id": re.compile(r"(?<!\d)\d{12}(?!\d)"),
+        "an ARN": re.compile(r"arn:aws[a-z-]*:"),
+        "a CloudFront distribution domain": re.compile(r"\b[a-z0-9]{8,}\.cloudfront\.net\b"),
+        "an ECR repository URI": re.compile(r"\.dkr\.ecr\."),
+        "a generated bucket, table or log group name": re.compile(
+            r"(?i)\bcalmframesstack-[a-z0-9]+-[a-z0-9]{6,}"
+        ),
+    }
+    EMAIL = re.compile(r"[\w.+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}")
+
+    def records(self) -> list[Path]:
+        return sorted((REPO / "results").glob("aws_*.json"))
+
+    def documents(self) -> list[Path]:
+        return [REPO / "docs" / "SECURITY.md", REPO / "pipeline" / "infra" / "README.md"]
+
+    def leaks(self, path: Path, shapes: dict[str, re.Pattern[str]]) -> list[str]:
+        text = path.read_text(encoding="utf-8")
+        found = []
+        for what, shape in shapes.items():
+            hits = [hit for hit in shape.findall(text) if hit not in self.PLACEHOLDER_ACCOUNTS]
+            if hits:
+                found.append(f"{path.relative_to(REPO)} has {len(hits)} x {what}")
+        return found
+
+    def test_the_record_exists(self):
+        assert [path.name for path in self.records()] == ["aws_deploy_2026-10-09.json"]
+
+    def test_the_record_names_no_account_bucket_domain_or_person(self):
+        shapes = dict(self.SHAPES, **{"an email address": self.EMAIL})
+        found = [leak for path in self.records() for leak in self.leaks(path, shapes)]
+        assert found == []
+
+    def test_the_documents_about_the_deploy_name_no_account(self):
+        found = [leak for path in self.documents() for leak in self.leaks(path, self.SHAPES)]
+        assert found == []

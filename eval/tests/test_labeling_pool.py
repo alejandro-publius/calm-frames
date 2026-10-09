@@ -89,6 +89,65 @@ def test_a_title_only_one_list_has_seen_is_kept_out(monkeypatch, tmp_path):
     assert "HAZARD_invented_seen_by_all.mp4" in chosen
 
 
+def test_a_clip_the_ledger_calls_ours_is_kept_out(monkeypatch, tmp_path):
+    """Our own generated clips never join, even when every list has analysed them.
+
+    The row below is FABRICATED FOR TEST ONLY, shaped like the one media/markers_packed.mp4 got
+    on Oct 9, 2026: a note that starts "Ours.", a result from every candidate list and a length
+    of more than one segment. Nothing but the ledger's own word keeps a clip like that out.
+
+    Break it: drop the "Ours." half of make_pool.is_our_own, and this goes red with the clip
+    in the pool. Seen to fail that way on Oct 9, 2026.
+    """
+    licenses = dict(FABRICATED_LICENSES)
+    licenses["media/invented_ours.mp4"] = {
+        "file": "media/invented_ours.mp4",
+        "license": "CC0-1.0",
+        "duration_s": "120",
+        "notes": "Ours. FABRICATED FOR TEST ONLY.",
+    }
+    flags = dict(FABRICATED_FLAGS)
+    flags["invented_ours"] = {name: [] for name in make_pool.CANDIDATE_LISTS}
+    _patch(monkeypatch, tmp_path)
+    monkeypatch.setattr(make_pool, "load_licenses", lambda: licenses)
+
+    titles, skipped = make_pool.eligible_titles(flags)
+
+    assert "invented_ours.mp4" not in [name for name, _, _ in titles]
+    assert skipped.get("media/invented_ours.mp4") == "our own generated clip, not real content"
+    assert "HAZARD_invented_seen_by_all.mp4" in [name for name, _, _ in titles]
+
+
+def test_the_real_ledger_keeps_every_clip_of_ours_out(monkeypatch):
+    """The committed ledger and the committed candidate lists, with every file found.
+
+    find_media is the only stand-in: it says every file is on disk, as it is on the machine that
+    builds the pool, so the only thing left between our own clips and the pool is the rule
+    above. No media file is opened.
+
+    Break it: drop the "Ours." half of make_pool.is_our_own, and this goes red naming
+    markers_packed.mp4, which every candidate list has a result for. Seen to fail that way on
+    Oct 9, 2026.
+    """
+    licenses = make_pool.load_licenses()
+    ours = {
+        name
+        for name, row in licenses.items()
+        if (row.get("notes") or "").startswith("Ours.") or name in make_pool.NOT_REAL_CONTENT
+    }
+    assert "media/markers_packed.mp4" in ours
+    monkeypatch.setattr(make_pool, "find_media", lambda name: Path("/nonexistent") / Path(name).name)
+
+    titles, skipped = make_pool.eligible_titles(make_pool.detector_intervals())
+
+    joined = {name for name, _, _ in titles}
+    assert joined.isdisjoint({Path(name).name for name in ours}), (
+        f"our own clips joined the pool: {sorted(joined & {Path(n).name for n in ours})}"
+    )
+    for name in ours:
+        assert skipped.get(name) == "our own generated clip, not real content"
+
+
 def test_the_sheet_the_labeller_reads_gives_nothing_away(monkeypatch, tmp_path):
     """Break it: copy `file`, `source` or `proposed_by` into a sheet row, and this goes red."""
     _patch(monkeypatch, tmp_path)

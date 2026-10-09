@@ -14,7 +14,7 @@ Every gate result and every kill rule that fires is logged here with the date an
 | GATE 1: overlay timing, 48 of 50 covered 150 ms early (HUMAN CHECKPOINT E1) | Wed Sep 23 (Fri Sep 25 latest) | Read-only physical preflight added Sep 29. Waiting on the stick, physical-target runner adaptation and camera footage. Existing timing runner uses QEMU paths. |
 | HUMAN CHECKPOINT C: self-filmed flashing footage | Thu Sep 24 | Waiting |
 | GATE 2: 15 real flagged segments from 4 sources | Fri Sep 25 | Not started |
-| HUMAN CHECKPOINT D: AWS Paid plan, $20 alarm, credits requested | Before the first deploy | Waiting |
+| HUMAN CHECKPOINT D: AWS Paid plan, $20 alarm (the credit request clause is void since Oct 7 and waived) | Before the first deploy | **Confirmed** Oct 9 by Alex, in chat and at his own terminal. The stack was deployed that night; see the log |
 | GATE 3: end to end on the stick | Fri Oct 2 | Not started |
 | Upstream pull request opened | Mon Oct 12 | Not started |
 | HUMAN CHECKPOINT E2: 200 screen-level events | Oct 8 to 13 | Not started |
@@ -24,6 +24,66 @@ Every gate result and every kill rule that fires is logged here with the date an
 | HUMAN CHECKPOINT G: submit | Thu Oct 22 | |
 
 ## Log
+
+### 2026-10-09: HUMAN CHECKPOINT D confirmed, amended, and the stack deployed once
+
+**Confirmed** on Oct 9, 2026 by Alex, twice over: in chat, where he asked for
+the deploy, and at his own terminal, where he ran
+`make deploy CHECKPOINT_D=confirmed` himself and approved the IAM changes at
+the CDK prompt.
+
+What the checkpoint asks, item by item:
+
+| Item | State on Oct 9 |
+|---|---|
+| The account on the Paid plan | Done. CloudTrail shows the account plan upgrade at 23:03 PDT on Oct 8 |
+| The $20 budget alarm in place | The budget exists: <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollars a month, alerts at 50 and 80 percent of actual spend and 100 percent of forecast. **It cannot fire yet**: it counts only costs tagged `Project=calm-frames`, and that tag is not yet active for cost allocation. Activating it is Alex's (pipeline/infra/README.md) |
+| The $150 credit request in | **Void, and waived.** The credit request form closed on Oct 7, so this clause could no longer be met by anyone. Alex waived it; his own AWS credits cover the bill |
+
+The amendment is recorded in docs/DECISIONS.md the same day.
+
+**The locks.** The line `scripts/aws_guard.sh` reads went into the deploy
+worktree's own copy of docs/STATUS.md (`~/calm-frames-aws-deploy`), which was
+never committed. The committed docs/STATUS.md does not carry it, on purpose,
+and `pipeline/tests/test_aws_guard.py` fails if it ever does, so the lock in this
+repository stays closed and the next deploy needs a person again.
+
+**What was deployed**, from a detached worktree at c5724de, with CDK CLI
+<!--n results/aws_deploy_2026-10-09.json:cli_version -->2.1142.0<!--/n--> and bootstrap version
+<!--n results/aws_deploy_2026-10-09.json:bootstrap_version -->32<!--/n-->:
+
+| What | Value |
+|---|---|
+| Stack | CalmFramesStack, us-east-1, created 00:21 to 00:25 PDT, updated 00:33 to wire in the cloud demo signing key |
+| Status | <!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n--> |
+| Resources | <!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n-->, with <!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways |
+| Outputs | <!--n results/aws_deploy_2026-10-09.json:stack.outputs_total -->5<!--/n--> |
+| IAM changes Alex approved | <!--n results/aws_deploy_2026-10-09.json:iam_approval.statement_rows -->20<!--/n--> statement rows, <!--n results/aws_deploy_2026-10-09.json:iam_approval.managed_policy_rows -->3<!--/n--> managed policies, <!--n results/aws_deploy_2026-10-09.json:iam_approval.security_group_rows -->1<!--/n--> security group rule |
+| GitHub OIDC role created | <!--n results/aws_deploy_2026-10-09.json:oidc_role_created -->no<!--/n--> |
+| Ingest image | c5724de and latest, <!--n results/aws_deploy_2026-10-09.json:image.size_mb -->279<!--/n--> MB, digest <!--n results/aws_deploy_2026-10-09.json:image.digest_short -->10f3500db514<!--/n--> |
+
+**Two runs of the calm marker clip**, `markers_packed.mp4`, never a `HAZARD_`
+file:
+
+| | Unsigned, 00:27 PDT | Signed with the cloud demo key, 00:35 PDT |
+|---|---|---|
+| Steps run | <!--n results/aws_deploy_2026-10-09.json:runs.0.steps_run -->11<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.steps_run -->12<!--/n--> |
+| Verify passed | <!--n results/aws_deploy_2026-10-09.json:runs.0.verify_passed -->no<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.verify_passed -->yes<!--/n--> |
+| Objects published | <!--n results/aws_deploy_2026-10-09.json:runs.0.published_objects -->0<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.published_objects -->16<!--/n--> |
+| Catalog rows | <!--n results/aws_deploy_2026-10-09.json:runs.0.catalog_rows -->0<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.catalog_rows -->1<!--/n--> |
+| Exit code | <!--n results/aws_deploy_2026-10-09.json:runs.0.exit_code -->1<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.exit_code -->0<!--/n--> |
+| Task started to stopped, seconds | <!--n results/aws_deploy_2026-10-09.json:runs.0.seconds_started_to_stopped -->42.6<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.seconds_started_to_stopped -->70.4<!--/n--> |
+
+The unsigned run is the fail closed rule holding on AWS: the whole analysis ran
+and nothing was published. After the signed run, CloudFront served the title
+entry, a poster and the HLS master playlist with HTTP 200, and a read back at
+02:40 PDT found the same, plus a 206 for a byte range. The cloud demo key is not
+one the app trusts, so these maps play on no TV (docs/SECURITY.md, "A signing
+key in the cloud"). The run used a 12 second calm clip; nothing here measures a
+real title's time or cost.
+
+The full record, with every account identifier left out, is
+`results/aws_deploy_2026-10-09.json`.
 
 ### 2026-09-29: physical-TV prerequisites checked, no device session run
 
