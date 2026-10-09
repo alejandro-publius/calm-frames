@@ -23,7 +23,11 @@ set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 STACK="${STACK:-CalmFramesStack}"
 STATUS_FILE="$REPO/docs/STATUS.md"
-STATUS_PATTERN='AWS Paid plan:[[:space:]]*confirmed'
+# Anchored at the start of a line, exactly as scripts/aws_guard.sh reads it, so
+# a document that talks about the line is not a document that says it. This
+# copy was left unanchored when the guard's was fixed on Sep 17, so a row of
+# docs/STATUS.md that quotes the line opened this lock on its own until Oct 9.
+STATUS_PATTERN='^AWS Paid plan:[[:space:]]*confirmed'
 DOCKER_BUILD="${DOCKER_BUILD:-docker build}"
 DOCKERFILE="pipeline/infra/ingest/Dockerfile"
 

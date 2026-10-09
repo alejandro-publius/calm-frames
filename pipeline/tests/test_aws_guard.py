@@ -283,6 +283,46 @@ class TestThePushScriptChecksTheLocksItself:
         assert result.returncode == 1
         assert "blocked" in result.stderr
 
+    def test_a_document_that_only_talks_about_the_line_does_not_open_it(self, fake_repo):
+        """The Sep 17 defect, still alive in the second script until Oct 9.
+
+        The guard's pattern was anchored on Sep 17 after a row of
+        docs/STATUS.md that quotes the line opened its lock. This script kept
+        an unanchored copy, so the same row opened its lock too. `aws` and
+        `docker` are stubs on PATH here, so even with the lock wrongly open the
+        script reaches no account and no daemon.
+
+        Seen to fail, Oct 9 2026: with the pattern unanchored again, the script
+        walked past both locks into the stubs and exited 0, and this test and
+        the one below went red.
+        """
+        status = fake_repo / "docs" / "STATUS.md"
+        status.write_text(
+            "| Before any deploy | then add the line `AWS Paid plan: confirmed` "
+            "to this file. |\n"
+        )
+        stubs = fake_repo / "stubs"
+        stubs.mkdir()
+        for tool in ("aws", "docker"):
+            stub = stubs / tool
+            stub.write_text(f'#!/usr/bin/env bash\necho "[stub {tool}] $*"\n')
+            stub.chmod(0o755)
+        result = self.run_push(
+            fake_repo, CHECKPOINT_D="confirmed", PATH=f"{stubs}{os.pathsep}{os.environ['PATH']}"
+        )
+        assert result.returncode == 1
+        assert "blocked" in result.stderr
+        assert "[stub" not in result.stdout
+
+    def test_both_scripts_read_the_line_the_same_way(self):
+        def pattern(path: Path) -> str:
+            found = re.findall(r"^STATUS_PATTERN='([^']*)'$", path.read_text(), re.MULTILINE)
+            assert len(found) == 1, f"{path.name} should set STATUS_PATTERN once"
+            return found[0]
+
+        assert pattern(PUSH) == pattern(GUARD)
+        assert pattern(PUSH).startswith("^")
+
 
 class TestThisRepositoryIsStillLocked:
     """The state of the real files, which is what actually protects the account."""
