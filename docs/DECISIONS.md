@@ -1752,3 +1752,59 @@ second way.
   libswscale's portable C path, which neither platform takes, decodes them
   0.0042 low, so a runner without SIMD would fail them under the old limit and
   the new one alike.
+
+
+## 2026-10-09: Harbor's practice cards in the real pattern, and the shelf's first frame
+
+- **Decision:** the Harbor practice cards follow the pattern a family meets on
+  a checked title. Countdown: "Practice hold coming up" with the live "In N
+  seconds. Press Skip to jump past it." Covering: "Holding a calm scene" with
+  "Practice hold. Sound and captions keep playing." After: "Held N seconds for
+  practice" with "Sound and captions kept playing. No flashing was present."
+  Only `app/src/calmframes/benignStory.ts` changed. The media, the signed maps
+  and `benignStoryData.ts` did not, so the demo key and the pinned proof stay
+  put (K11: Harbor is never regenerated for wording).
+- **Why:** the finish plan's video storyboard quotes the after card exactly as
+  the app draws it, and the Oct 2 cards ("A practice hold is coming", "The
+  story carries on") showed neither the real countdown nor the real after card.
+- **Cost:** "no flashing" is now on one card instead of three. The corner label
+  and the label burned into the picture still say it for the whole story. On
+  Harbor v1 the first hold's after card never shows: the second hold starts
+  inside the countdown lead, and the countdown wins, as on a real title. Only
+  the second hold's after card can be filmed.
+- **Decision:** the shelf opens on Harbor with the D-pad focus, then the
+  checked prepared library, then the calm gradient last. `defaultCatalog` is
+  the order.
+- **Why:** Harbor is the one title that shows the whole journey (captions, a
+  countdown, a practice hold), and the shot list films the shelf with Harbor
+  focused (SHOT_MANIFEST S02). The gradient has none of those.
+- **Cost:** coming back from a title puts the focus on Harbor, not on the
+  poster that was opened. Restoring focus on purpose is in the second UI block.
+- **Decision:** Harbor's poster is the first of the two stills its own signed
+  WCAG map already carries, shown only when its check passed, it is the bundled
+  Harbor by id, uri and hash, the check read the WCAG map, and that map text is
+  the compiled one. The prepared Harbor and the gradient keep a plain block.
+  No image was added to the package.
+- **Why:** the plan asks for stills from the signed hold images and no new
+  media. Lending Harbor's still to the prepared Harbor would put another file's
+  signature, and its burned-in "BENIGN DEMO - NO FLASHING" label, on a title
+  that is neither.
+- **Cost:** two of three posters are still plain blocks. The UI flash run
+  paints colours, not pictures, so it never sees the still: the still does not
+  move, comes from a title whose source measured no violations, and sits in a
+  block smaller than the area that run paints for each colour. The block keeps
+  its BORDER fill under the picture, which keeps the reported frames true, and
+  posters are now 16:9 rather than a fixed 180 units tall, so a still is never
+  cropped.
+- **Decision:** a poster reads as a name, then a second line: "Harbor story"
+  over "Benign demo, practice holds", "Harbor story" over "Prepared locally",
+  "Calm gradient" over "Bundled". The shelf splits a trailing "(...)" off the
+  catalog title, and Harbor's line is written out so that it says practice.
+- **Why:** the first frame reads as titles rather than file labels, and the
+  two Harbors stay told apart by the second line.
+- **Cost:** the shelf and the details page now word the same title two ways.
+  The catalog, the details page, the parent area, the player, the hide log,
+  the docs and the native smoke steps keep the full title, so nothing that
+  names a title by it had to change.
+- **Evidence:** every guard was seen to fail with its code broken on purpose
+  and restored (the commit messages list each one).
