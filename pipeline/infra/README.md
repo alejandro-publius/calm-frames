@@ -49,7 +49,7 @@ export AWS_REGION=us-east-1
 export CDK_DEFAULT_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
 export CDK_DEFAULT_REGION=$AWS_REGION
 
-npx --yes aws-cdk@2.1032.0 bootstrap aws://$CDK_DEFAULT_ACCOUNT/$AWS_REGION
+npx --yes aws-cdk@2.1142.0 bootstrap aws://$CDK_DEFAULT_ACCOUNT/$AWS_REGION
 ```
 
 Three things worth knowing about that command:

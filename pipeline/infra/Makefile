@@ -6,7 +6,7 @@
 # the budget alarm confirmed, the credit request in).
 
 PY ?= ../../.venv/bin/python
-CDK ?= npx --yes aws-cdk@2.1032.0
+CDK ?= npx --yes aws-cdk@2.1142.0
 STACK ?= CalmFramesStack
 BUDGET_EMAIL ?=
 GITHUB_REPO ?=

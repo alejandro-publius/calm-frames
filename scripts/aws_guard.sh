@@ -42,7 +42,13 @@ STATUS_FILE="$REPO/docs/STATUS.md"
 # not a document that says it.
 STATUS_PATTERN='^AWS Paid plan:[[:space:]]*confirmed'
 
-CDK="${CDK:-npx --yes aws-cdk@2.1032.0}"
+# The CLI has to be able to read what the pinned library writes. aws-cdk-lib
+# 2.270.0 writes cloud assembly schema 54 and declares 2.1142.0 as the oldest
+# CLI that reads it; the 2.1032.0 this line used to name stops right after
+# synth with "Cloud assembly schema version mismatch". The Oct 9 deploy ran on
+# 2.1142.0. pipeline/tests/test_aws_guard.py checks this pin against the
+# library and against the other two places it is written.
+CDK="${CDK:-npx --yes aws-cdk@2.1142.0}"
 STACK="${STACK:-CalmFramesStack}"
 CONTEXT="-c calmframes:budgetEmail=${BUDGET_EMAIL:-} -c calmframes:githubRepo=${GITHUB_REPO:-}"
 

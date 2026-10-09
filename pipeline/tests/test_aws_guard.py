@@ -273,6 +273,60 @@ class TestThisRepositoryIsStillLocked:
             assert "aws_guard.sh" in stripped, f"deploy runs {stripped!r} outside the guard"
 
 
+CLI_PIN = re.compile(r"aws-cdk@(\d+)\.(\d+)\.(\d+)")
+# Every place a person or a script reads the CDK CLI version from.
+PINNED_IN = (
+    REPO / "scripts" / "aws_guard.sh",
+    REPO / "pipeline" / "infra" / "Makefile",
+    REPO / "pipeline" / "infra" / "README.md",
+)
+
+
+def cli_pins() -> dict[str, set[tuple[int, int, int]]]:
+    return {
+        str(path.relative_to(REPO)): {
+            tuple(int(part) for part in match.groups())
+            for match in CLI_PIN.finditer(path.read_text(encoding="utf-8"))
+        }
+        for path in PINNED_IN
+    }
+
+
+class TestTheCliCanReadWhatTheLibraryWrites:
+    """The pinned CDK CLI is one version, and it reads what the pinned library writes.
+
+    The Oct 9 deploy could not use the pin it found here. CLI 2.1032.0 stops
+    right after synth with "Cloud assembly schema version mismatch: Maximum
+    schema version supported is 48.x.x, but found 54.0.0. You need at least
+    CLI version 2.1142.0 to read this manifest.", so the deploy ran with the
+    CLI named on the command line instead. A pin that only works when somebody
+    overrides it is not a pin.
+
+    Seen to fail, Oct 9 2026: putting 2.1032.0 back in scripts/aws_guard.sh
+    alone turned both tests red, one for the disagreement and one for the
+    version; putting it back in all three files turned only the version test
+    red, with the library's own minimum, 2.1142.0, in the message.
+    """
+
+    def test_every_place_names_one_version(self):
+        pins = cli_pins()
+        assert all(pins.values()), f"a file lost its aws-cdk@ pin: {pins}"
+        versions = set().union(*pins.values())
+        assert len(versions) == 1, f"the CDK CLI is pinned to more than one version: {pins}"
+
+    def test_the_pin_is_at_least_the_minimum_the_library_declares(self):
+        schema = pytest.importorskip(
+            "aws_cdk.cloud_assembly_schema", reason="aws-cdk-lib is needed for this check"
+        )
+        minimum = tuple(int(part) for part in schema.Manifest.cli_version().split("."))
+        for where, versions in cli_pins().items():
+            for version in versions:
+                assert version >= minimum, (
+                    f"{where} pins aws-cdk@{'.'.join(map(str, version))}, and the installed "
+                    f"aws-cdk-lib needs at least {'.'.join(map(str, minimum))}"
+                )
+
+
 class TestTheDeployRecordNamesNoAccount:
     """What the repository says about the Oct 9 deploy gives the account away nowhere.
 
