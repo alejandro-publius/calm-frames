@@ -242,6 +242,8 @@ export const ALL_UI_FRAMES: UiFrame[] = [
   PARENT_PROFILE_FRAME,
   PARENT_REMOVE_KID_FRAME,
   CREDITS_FRAME,
+  // The map is still being checked, so the picture is hidden behind a card.
+  playerFrame(true, 'checking'),
   playerFrame(false, 'none'),
   playerFrame(false, 'countdown'),
   playerFrame(true, 'covering'),

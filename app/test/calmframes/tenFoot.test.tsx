@@ -38,7 +38,7 @@ import {
   MINIMUM_TEXT_CONTRAST,
   MINIMUM_TEXT_SIZE,
 } from '../../src/calmframes/calmStyles';
-import { Card, cardAt } from '../../src/calmframes/cards';
+import { Card, cardAt, CHECKING_CARD } from '../../src/calmframes/cards';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
 import FirstRunScreen from '../../src/calmframes/FirstRunScreen';
@@ -408,6 +408,12 @@ const CASES: Case[] = [
       'parent-area-profiles-profile-1',
       'parent-area-remove-profile',
     ],
+  },
+  {
+    name: 'player-checking',
+    element: <PlayerLayer covered card={CHECKING_CARD} />,
+    background: CALM_COLORS.COVER,
+    screen: false,
   },
   {
     name: 'player-countdown',

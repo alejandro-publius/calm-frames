@@ -19,7 +19,12 @@ import path from 'path';
 import React from 'react';
 import CalmCard from '../../src/calmframes/CalmCard';
 import { CALM_COLORS } from '../../src/calmframes/calmStyles';
-import { Card, cardAt, NO_CARD } from '../../src/calmframes/cards';
+import {
+  Card,
+  cardAt,
+  CHECKING_CARD,
+  NO_CARD,
+} from '../../src/calmframes/cards';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import CreditsScreen from '../../src/calmframes/CreditsScreen';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
@@ -263,6 +268,8 @@ describe('what the app paints', () => {
     for (const frame of [
       KID_HOME_PROFILES_FRAME,
       PARENT_PROFILE_FRAME,
+      // The player while the map is still being checked.
+      playerFrame(true, 'checking'),
       // Seen to fail by taking this one back out of ALL_UI_FRAMES:
       //     expect(received).toBe(expected) // Object.is equality
       //     Expected: true
@@ -375,6 +382,7 @@ describe('what the app paints', () => {
 
   it('matches what the player layer reports, covered and clear', () => {
     const cases: Array<[boolean, Card]> = [
+      [true, CHECKING_CARD],
       [false, NO_CARD],
       [false, cardAt(intervals, 16_000)],
       [true, cardAt(intervals, 22_000)],
@@ -510,6 +518,10 @@ describe('the capture path', () => {
           <TitleDetailsScreen entry={makeTitle('ok', 'verified')} onPlay={jest.fn()} />
         ),
         stops: [{ name: 'title-details', reason: 'open a title' }],
+      },
+      {
+        element: <PlayerLayer covered={true} card={CHECKING_CARD} />,
+        stops: [{ name: 'player-covered-checking', reason: 'checking the map' }],
       },
       {
         element: <PlayerLayer covered={false} card={NO_CARD} />,

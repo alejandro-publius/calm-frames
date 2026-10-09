@@ -141,7 +141,39 @@ describe('useFlashGuard', () => {
     expect(read('status')).toBe('loading');
     expect(read('covered')).toBe('covered');
     expect(screen.queryByTestId('calm-frames-cover')).toBeTruthy();
-    expect(read('card-kind')).toBe('unverified');
+    // Still checking is not the same as refused, so it gets its own card
+    // rather than the "Not checked yet" one a failed map gets.
+    expect(read('card-kind')).toBe('checking');
+    expect(screen.getByTestId('calm-card-title').props.children).toBe(
+      'Checking this title',
+    );
+    expect(screen.queryByTestId('calm-card-skip')).toBeNull();
+  });
+
+  it('shows the checking card for a replacement map, not the last refusal', async () => {
+    const media = makeMediaElement();
+    const { rerender } = render(<Guarded media={media} mapText={null} />);
+    await settle();
+    expect(screen.getByTestId('calm-card-title').props.children).toBe(
+      'Not checked yet',
+    );
+
+    // A new map arrives and is still being fetched. The refusal belonged to
+    // the old one, so it must not be what the card says now.
+    rerender(
+      <Guarded
+        media={media}
+        mapUrl="https://example.invalid/replacement.json"
+        fetchText={() => new Promise<string | null>(() => {})}
+      />,
+    );
+    await settle();
+    expect(read('status')).toBe('loading');
+    expect(read('covered')).toBe('covered');
+    expect(read('card-kind')).toBe('checking');
+    expect(screen.getByTestId('calm-card-title').props.children).toBe(
+      'Checking this title',
+    );
   });
 
   it('keeps the picture hidden when the map cannot be fetched', async () => {

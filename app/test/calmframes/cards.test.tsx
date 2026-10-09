@@ -15,6 +15,7 @@ import {
   Card,
   cardAt,
   cardChanged,
+  CHECKING_CARD,
   COUNTDOWN_LEAD_MS,
   NO_CARD,
   SKIP_MARGIN_MS,
@@ -107,12 +108,29 @@ describe('cardAt', () => {
     }
   });
 
+  it('has a card of its own for a title that is still being checked', () => {
+    // Being checked is not being refused. The wording says the picture waits
+    // for the check, and there is nothing to skip, so no Skip button either.
+    expect(CHECKING_CARD.kind).toBe('checking');
+    expect(CHECKING_CARD.title).toBe('Checking this title');
+    expect(CHECKING_CARD.title).not.toBe(
+      cardAt([], 0, { rejection: 'missing' }).title,
+    );
+    expect(CHECKING_CARD.detail).toMatch(/picture stays hidden/);
+    expect(CHECKING_CARD.announcement).toBe(
+      `${CHECKING_CARD.title}. ${CHECKING_CARD.detail}`,
+    );
+    expect(CHECKING_CARD.skipToMs).toBeUndefined();
+    expect(CHECKING_CARD.interval).toBeUndefined();
+  });
+
   it('has no dashes and none of the banned words anywhere', () => {
     const cards: Card[] = [
       cardAt(intervals, 15_000),
       cardAt(intervals, 22_000),
       cardAt(intervals, 24_600),
       cardAt(intervals, 0, { rejection: 'missing' }),
+      CHECKING_CARD,
     ];
     for (const card of cards) {
       const text = `${card.title} ${card.detail ?? ''} ${card.announcement}`;
