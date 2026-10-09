@@ -44,8 +44,9 @@ confirmed HUMAN CHECKPOINT D and ran `make deploy` in his own terminal;
 `CalmFramesStack` in us-east-1 ran the calm marker clip twice, refused unsigned
 and published signed, and `results/aws_deploy_2026-10-09.json` is the record,
 with no account identifier in it or anywhere else in the repo. Keep it that
-way. A deploy needs `CDK="npx --yes aws-cdk@2.1142.0"` on the command line
-until the pin bump on `wip/aws-record-2026-10-09` lands, and
+way. The CDK CLI is pinned to 2.1142.0 now that the record branch is merged
+into the review branch, so only a checkout without that merge needs
+`CDK="npx --yes aws-cdk@2.1142.0"` on the command line. Every deploy needs
 `SIGNING_KEY_PARAMETER=/calm-frames/cloud-signing-key`, or it takes the cloud
 demo key away from the task. The lock line `make deploy` reads goes only into
 a deploy worktree's own copy of docs/STATUS.md, never the committed one. No
