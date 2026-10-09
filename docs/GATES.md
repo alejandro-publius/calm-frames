@@ -70,7 +70,7 @@ file:
 | Steps run | <!--n results/aws_deploy_2026-10-09.json:runs.0.steps_run -->11<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.steps_run -->12<!--/n--> |
 | Verify passed | <!--n results/aws_deploy_2026-10-09.json:runs.0.verify_passed -->no<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.verify_passed -->yes<!--/n--> |
 | Objects published | <!--n results/aws_deploy_2026-10-09.json:runs.0.published_objects -->0<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.published_objects -->16<!--/n--> |
-| Catalog rows | <!--n results/aws_deploy_2026-10-09.json:runs.0.catalog_rows_written -->0<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.catalog_rows -->1<!--/n--> |
+| Catalog rows | <!--n results/aws_deploy_2026-10-09.json:runs.0.catalog_rows -->0<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.catalog_rows -->1<!--/n--> |
 | Exit code | <!--n results/aws_deploy_2026-10-09.json:runs.0.exit_code -->1<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.exit_code -->0<!--/n--> |
 | Task started to stopped, seconds | <!--n results/aws_deploy_2026-10-09.json:runs.0.seconds_started_to_stopped -->42.6<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.seconds_started_to_stopped -->70.4<!--/n--> |
 

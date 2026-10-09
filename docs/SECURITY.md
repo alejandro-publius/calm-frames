@@ -574,8 +574,8 @@ what has run, how often, and what still has not.
   <!--n results/aws_deploy_2026-10-09.json:runs.1.catalog_rows -->1<!--/n--> catalog row, and exited
   <!--n results/aws_deploy_2026-10-09.json:runs.1.exit_code -->0<!--/n-->. No long title, no real
   footage and nothing hostile has been through it.
-- **The ingest container has been built end to end once**, by `make deploy` on
-  this Mac at commit c5724de, and pushed at
+- **The ingest container has been built end to end on this Mac**, on Oct 9 at
+  commit c5724de, and the build `make deploy` made was pushed at
   <!--n results/aws_deploy_2026-10-09.json:image.size_mb -->279<!--/n--> MB. It does not yet have the
   Oct 2 pipeline changes, and the `image` job in `.github/workflows/audit.yml`
   remains the check that builds it from a fresh clone.

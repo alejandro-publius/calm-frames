@@ -1,5 +1,5 @@
 {
-  "what_this_is": "The first deploy of the Calm Frames AWS stack and the two ingest runs that followed it, on the night of 2026-10-09. Written from read-only describe, list and get calls made between 02:20 and 02:51 PDT the same night, and from the evidence saved during the deploy outside the repository. Every account id, bucket name, distribution domain, ARN, repository URI and email address is left out on purpose.",
+  "what_this_is": "The first deploy of the Calm Frames AWS stack and the two ingest runs that followed it, on the night of 2026-10-09. Written from read-only describe, list and get calls made between 02:20 and 03:19 PDT the same night, and from the evidence saved during the deploy outside the repository. Every account id, bucket name, distribution domain, ARN, repository URI and email address is left out on purpose.",
   "recorded_on": "2026-10-09",
   "times_are": "Pacific Daylight Time (UTC-7), written as ISO 8601 with the offset",
   "region": "us-east-1",
@@ -235,7 +235,7 @@
       "verify_passed": false,
       "failed_check": "map_signature:wcag",
       "published_objects": 0,
-      "catalog_rows_written": 0,
+      "catalog_rows": 0,
       "exit_code": 1,
       "last_log_line": "verify did not pass for 1c57cfe921ca (status 'failed'), so nothing is published",
       "what_it_shows": "With no signing key in the cloud the task did the whole analysis and then refused to publish. That is the fail closed rule working on AWS, not a fault."
@@ -306,7 +306,8 @@
     "map_payload_hash_matches": true,
     "map_source_sha256_matches_clip": true,
     "map_segments": 0,
-    "map_key_id_short": "9fa44e490266"
+    "map_key_id_short": "9fa44e490266",
+    "counts_read_at": "2026-10-09T03:18:38-07:00"
   },
   "cost_note": "Everything here is on the account's normal bill. The budget's 0.0 USD actual spend at 02:50 PDT says nothing yet, because of the inactive tag above.",
   "teardown_leftovers": [

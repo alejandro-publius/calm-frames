@@ -52,8 +52,8 @@ You need:
   asked for is void: the form closed on Oct 7, 2026, and docs/GATES.md has the
   waiver);
 - the AWS CLI, signed in (`aws sts get-caller-identity` works);
-- Node 22 (`.nvmrc`) on `PATH`, and the project venv first on `PATH` for
-  `python3` (see "The deploy");
+- Node 22 (`.nvmrc`) on `PATH`, and the project venv for `python3` (see "The
+  deploy");
 - docker, for the ingest image;
 - `pip install -r pipeline/infra/requirements.txt` in the venv.
 
@@ -87,9 +87,10 @@ npx --yes aws-cdk@2.1142.0 bootstrap aws://$CDK_DEFAULT_ACCOUNT/$AWS_REGION --ta
 
 What each part of that is for, all learned on Oct 9:
 
-- **Run it from a directory without a `cdk.json`.** In `pipeline/infra` the CLI
-  synthesizes the app before it bootstraps, which needs the venv, Node 22 and
-  the stack's context, and none of that is what bootstrapping is for.
+- **Run it from a directory without a `cdk.json`.** Inside `pipeline/infra` the
+  CLI picks up the app's `cdk.json`, and without an environment on the command
+  line it runs the app to find one, which needs the venv, Node 22 and the
+  stack's context. A neutral directory keeps bootstrapping to just that.
 - **Export `AWS_REGION`.** The CLI resolves its own region and writes it over any
   `CDK_DEFAULT_REGION` you export. On the machine used on Oct 9 a fresh terminal
   resolved us-west-2, so without `AWS_REGION=us-east-1` the bootstrap and the
@@ -106,9 +107,10 @@ What each part of that is for, all learned on Oct 9:
 Three things worth knowing about what it makes:
 
 - **It costs almost nothing and it is not free.** The bootstrap bucket holds the
-  templates and assets of each deploy, a few megabytes, and the bootstrap ECR
-  repository holds the image if you deploy one. Pennies a month, inside the 20
-  dollar budget once the tag above is on it and activated.
+  templates and assets of each deploy, a few megabytes. The bootstrap ECR
+  repository stays empty here, because the ingest image goes to the stack's own
+  repository. Pennies a month, inside the 20 dollar budget once the tag above is
+  on it and activated.
 - **It creates IAM roles named `cdk-<qualifier>-*-<account>-<region>`.** Those
   are the names the GitHub deploy role in this stack is allowed to assume, and
   nothing else. See `_github_deploy_role` in `calm_frames_stack.py`. The
