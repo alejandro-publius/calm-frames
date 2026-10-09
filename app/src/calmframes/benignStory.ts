@@ -63,31 +63,55 @@ export function benignStorySettings(
     : settings;
 }
 
-/** The guard still supplies timing and refusals; only practice copy changes. */
+/**
+ * Whole seconds, worded the way the real after card words them.
+ *
+ * cards.ts keeps its own copy private and is mirrored into hook/, so this one
+ * is repeated here and benignStory.test.tsx holds the two to the same numbers.
+ */
+function secondsPhrase(milliseconds: number): string {
+  const seconds = Math.max(1, Math.round(milliseconds / 1000));
+  return `${seconds} second${seconds === 1 ? '' : 's'}`;
+}
+
+/**
+ * The guard still supplies timing and refusals; only practice copy changes.
+ *
+ * The cards follow the real pattern a family meets on a checked title: the
+ * countdown with the live seconds and what Skip does, the hold itself, then
+ * how long it lasted. Each one says practice, and none of them says anything
+ * was hidden, because these holds are scheduled and nothing here flashes.
+ */
 export function benignStoryCard(card: Card): Card {
   if (card.kind === 'countdown') {
+    const seconds = Math.max(0, card.secondsLeft ?? 0);
+    const left = `${seconds} second${seconds === 1 ? '' : 's'}`;
     return {
       ...card,
-      title: 'A practice hold is coming',
-      detail: 'No flashing. The gentle tone and captions continue.',
-      announcement: 'A practice hold is coming. No flashing is present.',
+      title: 'Practice hold coming up',
+      detail: `In ${left}. Press Skip to jump past it.`,
+      announcement: `Practice hold coming up in ${left}. Press Skip to jump past it.`,
     };
   }
   if (card.kind === 'covering') {
     return {
       ...card,
       title: 'Holding a calm scene',
-      detail: 'Practice hold. No flashing is present.',
+      detail: 'Practice hold. Sound and captions keep playing.',
       announcement:
-        'Holding a calm scene for practice. No flashing is present.',
+        'Holding a calm scene for practice. Sound and captions keep playing.',
     };
   }
   if (card.kind === 'after') {
+    const title = card.interval
+      ? `Held ${secondsPhrase(card.interval.endMs - card.interval.startMs)} for practice`
+      : 'Held a calm scene for practice';
+    const detail = 'Sound and captions kept playing. No flashing was present.';
     return {
       ...card,
-      title: 'The story carries on',
-      detail: 'That was a scheduled practice hold, not a detected flash.',
-      announcement: 'The story carries on after a scheduled practice hold.',
+      title,
+      detail,
+      announcement: `${title}. ${detail}`,
     };
   }
   return card;
