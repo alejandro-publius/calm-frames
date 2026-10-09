@@ -51,6 +51,7 @@ const BRING_UP_LINES: Array<[string, string[]]> = [
       'KeplerAppStateChange to ',
       'a measurement run stays on the player',
       'background, leaving the player',
+      'on by default, track ',
     ],
   ],
   [

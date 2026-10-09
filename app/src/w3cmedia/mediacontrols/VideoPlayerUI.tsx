@@ -53,15 +53,23 @@ interface VideoPlayerUIProps {
    * to skip.
    */
   skipOwnsSelect?: boolean;
+  /**
+   * Calm Frames: the caption track PlayerScreen has showing. A title that
+   * ships captions starts with them on, so the caption menu has to open on
+   * that track rather than on Off.
+   */
+  selectedCaptionId?: string;
 }
 export const areVideoPlayerUIPropsEqual = (
   prevProps: VideoPlayerUIProps,
   nextProps: VideoPlayerUIProps,
 ) => {
-  // The key handler reads skipOwnsSelect, so a change to it has to render.
+  // The key handler reads skipOwnsSelect and the caption menu needs
+  // selectedCaptionId, so a change to either has to render.
   return (
     areComponentPropsEqual(prevProps.title, nextProps.title) &&
-    prevProps.skipOwnsSelect === nextProps.skipOwnsSelect
+    prevProps.skipOwnsSelect === nextProps.skipOwnsSelect &&
+    prevProps.selectedCaptionId === nextProps.selectedCaptionId
   );
 };
 
@@ -76,6 +84,7 @@ export const VideoPlayerUI = React.memo(
     videoData,
     requestSeek,
     skipOwnsSelect = false,
+    selectedCaptionId,
   }: VideoPlayerUIProps) => {
     const [captionMenuVisibility, setCaptionMenuVisibility] =
       useState<boolean>(false);
@@ -257,6 +266,7 @@ export const VideoPlayerUI = React.memo(
               videoRef={videoRef}
               setSelectedCaptionInMenuBar={setSelectedCaptionInMenuBar}
               setCaptionMenuVisibility={setCaptionVisibility}
+              selectedCaptionId={selectedCaptionId}
             />
           </LinearGradient>
         )}

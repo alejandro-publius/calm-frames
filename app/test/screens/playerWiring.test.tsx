@@ -11,7 +11,9 @@
  * Seen to fail, Oct 9 2026: with skipOwnsSelect={false} hard wired in
  * PlayerScreen, the countdown test reported Expected true, Received false.
  * With the per change line taken out of handleAppStateChange, both app state
- * tests went red.
+ * tests went red. With showDefaultCaptions always answering Off, the first
+ * caption test went red with the track still hidden; with PlayerScreen
+ * passing no selectedCaptionId, both caption tests went red.
  */
 
 import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
@@ -24,6 +26,7 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
   getItem: jest.fn(async () => null),
   setItem: jest.fn(async () => undefined),
 }));
+import { CAPTION_DISABLE_ID } from '../../src/constants';
 import PlayerScreen from '../../src/screens/PlayerScreen';
 
 jest.mock('../../src/w3cmedia/mediacontrols/VideoPlayerUI', () => 'VideoPlayerUI');
@@ -31,13 +34,62 @@ jest.mock('../../src/services/bif/bifService', () => ({
   getBifFrameImageSource: jest.fn(async () => null),
 }));
 
+/**
+ * The player package, as jest.setup.ts fakes it, with one change: the
+ * captions view is a host element instead of nothing, so its show prop can be
+ * read.
+ */
+jest.mock('@amazon-devices/react-native-w3cmedia', () => {
+  const ReactActual = jest.requireActual('react');
+  class KeplerMediaControlHandler {
+    async handlePlay() {}
+    async handlePause() {}
+    async handleStop() {}
+    async handleTogglePlayPause() {}
+    async handleStartOver() {}
+    async handleFastForward() {}
+    async handleRewind() {}
+    async handleSeek() {}
+    async handleSkipForward() {}
+    async handleSkipBackward() {}
+  }
+  return {
+    __esModule: true,
+    KeplerVideoSurfaceView: ({
+      onSurfaceViewCreated,
+    }: {
+      onSurfaceViewCreated: (handle: string) => void;
+    }) => {
+      onSurfaceViewCreated('SurfaceViewCreated');
+      return null;
+    },
+    KeplerCaptionsView: (props: {
+      onCaptionViewCreated?: (handle: string) => void;
+    }) => {
+      props.onCaptionViewCreated?.('CaptionViewCreated');
+      return ReactActual.createElement('KeplerCaptionsView', props);
+    },
+    VideoPlayer: jest.fn(),
+    KeplerMediaControlHandler,
+  };
+});
+
 /** The fake player for the current test. A jest factory may only reach mock* names. */
 let mockMedia: FakeMedia | null = null;
+
+interface FakeTrack {
+  id: string;
+  label: string;
+  language: string;
+  mode: string;
+}
 
 interface FakeMedia {
   currentTime: number;
   playbackRate: number;
   currentSrc: string;
+  /** Only the caption tests give the player any text tracks. */
+  textTracks?: FakeTrack[] & { getTrackById: (id: string) => FakeTrack | null };
   addEventListener: (type: string, listener: () => void) => void;
   removeEventListener: (type: string, listener: () => void) => void;
   fire: (type: string) => void;
@@ -275,5 +327,65 @@ describe('every Kepler app state change leaves a debug line', () => {
       '[PlayerScreen.tsx] - handleAppStateChange - KeplerAppStateChange to background',
       '[PlayerScreen.tsx] - handleAppStateChange - background, a measurement run stays on the player',
     ]);
+  });
+});
+
+function trackList(...tracks: FakeTrack[]) {
+  return Object.assign([...tracks], {
+    getTrackById: (id: string) => tracks.find((track) => track.id === id) ?? null,
+  });
+}
+
+/** The props of the one captions view on screen. */
+function captionsViewProps(): Record<string, unknown> {
+  const found = screen.UNSAFE_root.findAll(
+    (node) => (node.type as unknown) === 'KeplerCaptionsView',
+  );
+  expect(found).toHaveLength(1);
+  return found[0].props as Record<string, unknown>;
+}
+
+describe('a title that ships captions starts with them on', () => {
+  beforeEach(() => {
+    mockMedia = makeMedia();
+    jest.useFakeTimers();
+    jest.setSystemTime(BURSTS_MADE_AT + 1_000);
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  it('turns the shipped track on, shows the captions view and tells the menu', async () => {
+    const english = { id: 'n-1', label: 'English captions', language: 'en', mode: 'hidden' };
+    const shaka = { id: 'n-0', label: 'Shaka Player TextTrack', language: '', mode: 'hidden' };
+    (mockMedia as FakeMedia).textTracks = trackList(shaka, english);
+    renderPlayer({
+      data: {
+        ...data,
+        textTrack: [
+          { label: 'English captions', language: 'en', uri: 'file:///pkg/a.vtt', mimeType: 'text/vtt' },
+        ],
+      },
+      guarded,
+    });
+    await settle();
+
+    expect(english.mode).toBe('showing');
+    expect(shaka.mode).toBe('hidden');
+    expect(captionsViewProps().show).toBe(true);
+    // The menu is told too, or it would open on Off with English showing.
+    expect(chromeProps().selectedCaptionId).toBe('n-1');
+  });
+
+  it('leaves the captions off for a title that ships none', async () => {
+    const shaka = { id: 'n-0', label: 'Shaka Player TextTrack', language: '', mode: 'hidden' };
+    (mockMedia as FakeMedia).textTracks = trackList(shaka);
+    renderPlayer({ guarded });
+    await settle();
+
+    expect(shaka.mode).toBe('hidden');
+    expect(captionsViewProps().show).toBe(false);
+    expect(chromeProps().selectedCaptionId).toBe(CAPTION_DISABLE_ID);
   });
 });

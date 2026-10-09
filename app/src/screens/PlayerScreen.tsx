@@ -45,6 +45,10 @@ import { CALM_COLORS, CALM_TYPE, scale } from '../calmframes/calmStyles';
 import { cardOffersSkip, NO_CARD } from '../calmframes/cards';
 import { playChime } from '../calmframes/chimeSound';
 import CoverLayer from '../calmframes/CoverLayer';
+import {
+  showDefaultCaptions,
+  TextTrackListLike,
+} from '../calmframes/defaultCaptions';
 import { buildCoverIntervals } from '../calmframes/coverSchedule';
 import { recordHide } from '../calmframes/hideLogStore';
 import { OFFLINE_PUBLIC_KEY_BASE64 } from '../calmframes/offlineTitle';
@@ -143,6 +147,28 @@ const PlayerScreen = ({
   React.useEffect(() => {
     beacon('PlayerScreen.videoInitialized', { isVideoInitialized });
   }, [isVideoInitialized]);
+
+  // Captions on from the start when the title ships a caption track, once
+  // per player; after that the caption menu decides. VideoHandler adds the
+  // title's tracks before the media loads, so they exist by the time the
+  // player says it is initialized. See defaultCaptions.ts.
+  const captionsDefaulted = useRef(false);
+  React.useEffect(() => {
+    if (!isVideoInitialized || captionsDefaulted.current) {
+      return;
+    }
+    captionsDefaulted.current = true;
+    const shown = showDefaultCaptions(
+      videoRef.current?.textTracks as TextTrackListLike | undefined,
+      data.textTrack,
+    );
+    if (shown !== CAPTION_DISABLE_ID) {
+      console.log(
+        `[PlayerScreen.tsx] - captions - on by default, track ${shown}`,
+      );
+      setCaptionID(shown);
+    }
+  }, [isVideoInitialized, data.textTrack]);
 
   const cover = useCoverHarness(videoRef, {
     mode: coverTest,
@@ -653,6 +679,7 @@ const PlayerScreen = ({
             // The card's Skip button has focus during a countdown, so OK is
             // Skip's and the sample must not pause or show its controls.
             skipOwnsSelect={cardOffersSkip(card)}
+            selectedCaptionId={captionID}
             requestSeek={
               guarding
                 ? (source, targetMs) => {

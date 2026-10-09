@@ -23,14 +23,21 @@ export const CaptionMenu = React.memo(
     video,
     setSelectedCaption,
     setCaptionMenuVisibility,
+    selectedCaptionId,
   }: CaptionMenuProps) => {
-    const [captionID, setCaptionID] = useState<string>(CAPTION_DISABLE_ID);
+    const [ownCaptionID, setCaptionID] = useState<string>(CAPTION_DISABLE_ID);
+    // Calm Frames: the player turns a title's captions on by itself, so the
+    // id it passes down is the one showing. Starting from the menu's own Off
+    // instead would mark Off as chosen while a track played, and Off would
+    // then leave that track running.
+    const captionID = selectedCaptionId ?? ownCaptionID;
 
     const removeCurrentCaption = useCallback(() => {
       if (captionID !== CAPTION_DISABLE_ID) {
         console.log('Disabling Captions');
-        if (video && video.textTracks) {
-          video.textTracks.getTrackById(captionID)!.mode = 'hidden';
+        const current = video?.textTracks?.getTrackById(captionID);
+        if (current) {
+          current.mode = 'hidden';
         }
       }
       setCaptionID(CAPTION_DISABLE_ID);
