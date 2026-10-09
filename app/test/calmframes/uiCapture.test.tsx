@@ -17,7 +17,16 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
-import { BENIGN_STORY_LABEL } from '../../src/calmframes/benignStory';
+// The real shelf below comes from KidModeScreen's catalog, and that screen
+// reads the saved household.
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  getItem: jest.fn(async () => null),
+  setItem: jest.fn(async () => undefined),
+}));
+import {
+  BENIGN_STORY_ID,
+  BENIGN_STORY_LABEL,
+} from '../../src/calmframes/benignStory';
 import CalmCard from '../../src/calmframes/CalmCard';
 import { CALM_COLORS } from '../../src/calmframes/calmStyles';
 import CornerPlate from '../../src/calmframes/CornerPlate';
@@ -75,6 +84,7 @@ import {
   Family,
   newFamily,
 } from '../../src/calmframes/profiles';
+import { checkedShelf } from './shelfFixtures';
 
 const OUT_DIR = path.join(__dirname, '..', '..', 'build', 'ui-capture');
 
@@ -229,6 +239,54 @@ describe('what the app paints', () => {
       screen.toJSON() as unknown as RenderedNode,
     );
     expect(focused).toEqual(KID_HOME_FOCUSED_FRAME);
+  });
+
+  /**
+   * The shelf a household really opens on: Harbor's signed still first, then
+   * the plain blocks of the titles that carry none.
+   *
+   * A picture is not a colour, so what keeps the reported frames true is the
+   * BORDER block under every poster picture. Seen to fail with that block
+   * taken off the picture: the focused shelf read the card colour before
+   * BORDER,
+   *
+   *     -     "#66A0B4",
+   *           "#173B47",
+   *     +     "#66A0B4",
+   *
+   * and a shelf where every poster has a picture lost BORDER altogether.
+   */
+  it('matches what the real bundled shelf reports, at rest and with Harbor focused', () => {
+    expect(
+      renderedFrame('kid-home', (
+        <KidHomeScreen titles={checkedShelf()} onOpen={jest.fn()} />
+      )),
+    ).toEqual(KID_HOME_FRAME);
+
+    render(<KidHomeScreen titles={checkedShelf()} onOpen={jest.fn()} />);
+    fireEvent(screen.getByTestId(`kid-home-poster-${BENIGN_STORY_ID}`), 'focus');
+    expect(
+      frameFromTree('kid-home-focused', screen.toJSON() as unknown as RenderedNode),
+    ).toEqual(KID_HOME_FOCUSED_FRAME);
+  });
+
+  it('matches what the shelf reports when every poster has a picture', () => {
+    const pictured = ['one', 'two'].map((id) => {
+      const entry = makeTitle(id, 'verified');
+      return {
+        ...entry,
+        title: { ...entry.title, posterUrl: `https://example.invalid/${id}.jpg` },
+      };
+    });
+    expect(
+      renderedFrame('kid-home', <KidHomeScreen titles={pictured} onOpen={jest.fn()} />),
+    ).toEqual(KID_HOME_FRAME);
+
+    render(<KidHomeScreen titles={pictured} onOpen={jest.fn()} />);
+    fireEvent(screen.getByTestId('kid-home-poster-one'), 'focus');
+    expect(
+      frameFromTree('kid-home-focused', screen.toJSON() as unknown as RenderedNode),
+    ).toEqual(KID_HOME_FOCUSED_FRAME);
   });
 
   it('matches what the shelf with a family on it reports, in each of its states', () => {

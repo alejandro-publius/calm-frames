@@ -291,7 +291,11 @@ describe('the registry had nothing, so the map the app holds served it', () => {
   });
 
   it('asks nothing at all when no index is configured', () => {
-    const done = withoutRegistry(defaultCatalog()[0], ['wcag']);
+    // The gradient by name: it is the title whose map is compiled in, and it
+    // is no longer the first one in the catalog.
+    const bundled = defaultCatalog().find((title) => title.id === OFFLINE_TITLE_ID);
+    expect(bundled).toBeDefined();
+    const done = withoutRegistry(bundled!, ['wcag']);
     expect(done.sources.wcag).toBe('bundled');
     expect(done.refusal).toBeUndefined();
   });

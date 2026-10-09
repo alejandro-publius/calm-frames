@@ -33,6 +33,7 @@ import { checkTitle } from '../../src/calmframes/titleStatus';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { OFFLINE_PUBLIC_KEY_BASE64 } from '../../src/calmframes/offlineTitle';
 import { BENIGN_STORY_ID, BENIGN_STORY_URI } from '../../src/calmframes/benignStory';
+import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
 
 /** A moment when the bundled map is neither unmade nor stale. */
 const NOW = Date.parse(JSON.parse(OFFLINE_MAP_JSON).created_utc) + 60_000;
@@ -161,8 +162,75 @@ describe('reaching Calm Frames', () => {
   });
 });
 
+describe('the shelf a household lands on', () => {
+  /**
+   * The ids of the posters on the shelf, in the order they are drawn.
+   *
+   * Every poster is a button with this test id and nothing else, so the
+   * picture, title and qualifier inside it are left out by name.
+   */
+  const shelfOrder = () =>
+    screen
+      .getAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)
+      .map((poster) => String(poster.props.testID).replace('kid-mode-home-poster-', ''));
+
+  it('keeps Harbor first and the gradient last in the bundled catalog', () => {
+    const ids = defaultCatalog().map((title) => title.id);
+    expect(ids[0]).toBe(BENIGN_STORY_ID);
+    expect(ids[ids.length - 1]).toBe(OFFLINE_TITLE_ID);
+    expect(ids.slice(1, -1)).toEqual(
+      packagedLibrary.titles(DEFAULT_SETTINGS).map((title) => title.id),
+    );
+  });
+
+  /**
+   * Seen to fail with the gradient put back at the front of defaultCatalog:
+   *
+   *     Expected: "calm-frames-benign-story"
+   *     Received: "calm-frames-offline"
+   *
+   * and with KidHomeScreen giving the focus to the second poster instead:
+   *
+   *     -   "calm-frames-benign-story",
+   *     +   "prepared-4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
+   */
+  it('opens on Harbor with the focus on it, and puts the gradient last', async () => {
+    await renderKidMode();
+    await finishFirstRun();
+    const ids = shelfOrder();
+    expect(ids.length).toBeGreaterThanOrEqual(3);
+    expect(ids[0]).toBe(BENIGN_STORY_ID);
+    expect(ids[ids.length - 1]).toBe(OFFLINE_TITLE_ID);
+    expect(ids).toContain(packagedLibrary.titles(DEFAULT_SETTINGS)[0].id);
+    // Only one poster asks for the focus, and it is Harbor's.
+    const asking = ids.filter(
+      (id) =>
+        screen.getByTestId(`kid-mode-home-poster-${id}`).props
+          .hasTVPreferredFocus === true,
+    );
+    expect(asking).toEqual([BENIGN_STORY_ID]);
+  });
+
+  it("shows Harbor's signed still on the route a household really takes, and no other picture", async () => {
+    await renderKidMode();
+    await finishFirstRun();
+    const pictured = shelfOrder().filter(
+      (id) => screen.queryByTestId(`kid-mode-home-poster-image-${id}`) !== null,
+    );
+    expect(pictured).toEqual([BENIGN_STORY_ID]);
+    expect(
+      screen.getByTestId(`kid-mode-home-poster-image-${BENIGN_STORY_ID}`).props
+        .source.uri,
+    ).toMatch(/^data:image\/jpeg;base64,/);
+  });
+});
+
 describe('what goes to the player', () => {
-  const entry = checkTitle(defaultCatalog()[0], {
+  const gradient = defaultCatalog().find((title) => title.id === OFFLINE_TITLE_ID);
+  if (!gradient) {
+    throw new Error('the bundled catalog has lost the gradient');
+  }
+  const entry = checkTitle(gradient, {
     settings: DEFAULT_SETTINGS,
     publicKeyBase64: OFFLINE_PUBLIC_KEY_BASE64,
     nowMs: NOW,
