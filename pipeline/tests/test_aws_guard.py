@@ -182,6 +182,72 @@ class TestWithBothLocksOpen:
         assert "[stub push] ran" in result.stdout
 
 
+def would_run(result: subprocess.CompletedProcess) -> str:
+    """The one command line the guard handed to the stand-in CDK."""
+    lines = [line for line in result.stdout.splitlines() if line.startswith("[would run]")]
+    assert len(lines) == 1, f"expected one CDK command, got {lines!r}"
+    return lines[0]
+
+
+class TestTheSigningKeyIsNeverDroppedQuietly:
+    """SIGNING_KEY_PARAMETER keeps the cloud key wired in, and leaving it out is said aloud.
+
+    The stack wires the ingest task to a signing key only when the
+    calmframes:signingKeyParameter context is passed. On Oct 9 that context was
+    added by hand inside the CDK variable, and the guard had no way to pass it,
+    so the next routine `make deploy` would have taken the key away without a
+    word and every later upload would have published nothing.
+
+    Seen to fail, Oct 9 2026, one mutation at a time: dropping the line that
+    adds the context turned the deploy and diff tests red; loosening the name
+    check to match anything let `*`, the first of the six bad names tried,
+    through with exit 0; and dropping the call that reports the key turned the
+    "none" test and the deploy test red. Each restore went green.
+    """
+
+    PARAMETER = "/calm-frames/cloud-signing-key"
+
+    def test_a_named_parameter_reaches_the_deploy(self, fake_repo):
+        confirm_status(fake_repo)
+        result = run_guard(fake_repo, CHECKPOINT_D="confirmed", SIGNING_KEY_PARAMETER=self.PARAMETER)
+        assert result.returncode == 0
+        command = would_run(result)
+        assert command.startswith("[would run] deploy CalmFramesStack ")
+        assert f"-c calmframes:signingKeyParameter={self.PARAMETER}" in command
+        assert f"Signing key: the task may read the SSM parameter {self.PARAMETER}" in result.stdout
+
+    def test_a_diff_shows_the_same_template_the_deploy_would(self, fake_repo):
+        confirm_status(fake_repo)
+        result = run_guard(
+            fake_repo, "diff", CHECKPOINT_D="confirmed", SIGNING_KEY_PARAMETER=self.PARAMETER
+        )
+        assert result.returncode == 0
+        assert f"-c calmframes:signingKeyParameter={self.PARAMETER}" in would_run(result)
+
+    def test_without_it_the_deploy_says_the_key_goes(self, fake_repo):
+        confirm_status(fake_repo)
+        result = run_guard(fake_repo, CHECKPOINT_D="confirmed")
+        assert result.returncode == 0
+        assert "signingKeyParameter" not in would_run(result)
+        assert "Signing key: none." in result.stdout
+        assert f"SIGNING_KEY_PARAMETER={self.PARAMETER} to keep it" in result.stdout
+
+    def test_a_name_ssm_would_refuse_is_refused_here(self, fake_repo):
+        """The value lands in a word-split command line and in an IAM resource ARN."""
+        confirm_status(fake_repo)
+        for bad in ("*", "/calm-frames/*", "/calm-frames/key extra", "/calm-frames/key;id", "$(id)", "/a//b"):
+            result = run_guard(fake_repo, CHECKPOINT_D="confirmed", SIGNING_KEY_PARAMETER=bad)
+            assert result.returncode == 2, f"{bad!r} was accepted"
+            assert "is not an SSM parameter name" in result.stderr
+            assert "[would run]" not in result.stdout
+
+    def test_the_locks_still_come_first(self, fake_repo):
+        result = run_guard(fake_repo, SIGNING_KEY_PARAMETER=self.PARAMETER)
+        assert result.returncode == 1
+        assert "is blocked" in result.stderr
+        assert "[would run]" not in result.stdout
+
+
 class TestThePushScriptChecksTheLocksItself:
     """Running the push script directly is no way around the guard."""
 
