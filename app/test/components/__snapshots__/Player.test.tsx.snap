@@ -27,10 +27,10 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
     style={
       {
         "alignItems": "center",
-        "bottom": 160,
         "left": 0,
         "position": "absolute",
         "right": 0,
+        "top": 160,
         "zIndex": 3,
       }
     }

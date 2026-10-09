@@ -207,15 +207,23 @@ export const VIDEO_BEHIND = 'video';
  * What the player paints over the video.
  *
  * With the cover on, the app paints the whole screen black. With it off, the
- * app paints only the card, and the video shows through.
+ * app paints only the card, and the video shows through. A labelled demo also
+ * paints its practice plate the whole time it plays. The plate is the card's
+ * colour, so it adds a surface only when there is no card on screen.
  */
-export function playerFrame(covered: boolean, cardKind: CardKind): UiFrame {
+export function playerFrame(
+  covered: boolean,
+  cardKind: CardKind,
+  plate = false,
+): UiFrame {
   const surfaces: string[] = [];
-  if (cardKind !== 'none') {
+  if (cardKind !== 'none' || plate) {
     surfaces.push(CALM_COLORS.SURFACE);
   }
   return {
-    screen: `player-${covered ? 'covered' : 'clear'}-${cardKind}`,
+    screen: `player-${covered ? 'covered' : 'clear'}-${cardKind}${
+      plate ? '-plate' : ''
+    }`,
     background: covered ? CALM_COLORS.COVER : VIDEO_BEHIND,
     surfaces,
   };
@@ -249,4 +257,11 @@ export const ALL_UI_FRAMES: UiFrame[] = [
   playerFrame(true, 'covering'),
   playerFrame(false, 'after'),
   playerFrame(true, 'unverified'),
+  // The labelled Harbor demo, which carries its practice plate throughout.
+  playerFrame(true, 'checking', true),
+  playerFrame(false, 'none', true),
+  playerFrame(false, 'countdown', true),
+  playerFrame(true, 'covering', true),
+  playerFrame(false, 'after', true),
+  playerFrame(true, 'unverified', true),
 ];

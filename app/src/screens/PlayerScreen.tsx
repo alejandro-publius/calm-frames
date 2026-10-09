@@ -29,7 +29,6 @@ import {
   AppStateStatus,
   Platform,
   StyleSheet,
-  Text,
   useWindowDimensions,
   View,
 } from 'react-native';
@@ -41,9 +40,9 @@ import {
   bundledTitlePublicKey,
   isBundledBenignStory,
 } from '../calmframes/benignStory';
-import { CALM_COLORS, CALM_TYPE, scale } from '../calmframes/calmStyles';
 import { cardOffersSkip, NO_CARD } from '../calmframes/cards';
 import { playChime } from '../calmframes/chimeSound';
+import CornerPlate from '../calmframes/CornerPlate';
 import CoverLayer from '../calmframes/CoverLayer';
 import {
   showDefaultCaptions,
@@ -268,7 +267,10 @@ const PlayerScreen = ({
   // The app records its own layer, because Vega gives it no way to read its
   // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
   useUiCapture(
-    React.useMemo(() => playerFrame(covered, card.kind), [covered, card.kind]),
+    React.useMemo(
+      () => playerFrame(covered, card.kind, benignDemo),
+      [covered, card.kind, benignDemo],
+    ),
     'player',
   );
   const keplerAppStateManager: IKeplerAppStateManager =
@@ -662,10 +664,12 @@ const PlayerScreen = ({
             benignDemo ? 'Skip the practice hold' : undefined
           }
         />
+        {/*
+          The practice label, on a plate in the top left corner: a row of its
+          own above the card, and nowhere near the captions.
+        */}
         {benignDemo && (
-          <Text style={styles.demoLabel} testID="benign-demo-label">
-            {BENIGN_STORY_LABEL}
-          </Text>
+          <CornerPlate label={BENIGN_STORY_LABEL} testID="benign-demo" />
         )}
         {showVideoPlayerUI && (
           <VideoPlayerUI
@@ -707,16 +711,10 @@ const arePlayerPropsEqual = (
 export default React.memo(PlayerScreen, arePlayerPropsEqual);
 
 export const styles = StyleSheet.create({
-  demoLabel: {
-    position: 'absolute',
-    top: scale(100),
-    left: scale(80),
-    right: scale(80),
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    padding: scale(16),
-    zIndex: 4,
-  },
+  // Where captions are drawn: the renderer stacks cue lines upward from this
+  // view's bottom edge, so the bottom of the picture is theirs. The card and
+  // the practice plate keep to the top (PLAYER_LAYOUT in calmStyles.ts), and
+  // tenFoot.test.tsx fails if either reaches down into the captions.
   captions: {
     width: '100%',
     height: '100%',
