@@ -445,7 +445,7 @@ A judge who would rather not use a terminal can run the same thing from a page:
 python -m pipeline.upload_server            # http://127.0.0.1:8765
 ```
 
-Drop in a clip, get the report back. It runs on this machine only. The clip is measured by the pipeline's own analyzer door and deleted before the answer is sent, it is never played and there is no route that serves it back. **Nothing is deployed.** Anything that would reach AWS waits behind the same two locks as `make deploy`, and neither has ever been open here.
+Drop in a clip, get the report back. It runs on this machine only. The clip is measured by the pipeline's own analyzer door and deleted before the answer is sent, it is never played and there is no route that serves it back. **The page sends nothing to AWS.** Anything that would reach AWS waits behind the same two locks as `make deploy`. Those were opened once, on Oct 9, 2026, by a person, for the deploy under [AWS](#aws) below, in a separate deploy worktree; the committed repository never holds the open lock.
 
 ### The GitHub Action
 
@@ -564,10 +564,12 @@ QEMU host paths. A successful preflight is not a playback or safety result.
 
 ### AWS
 
-The CDK app in [`pipeline/infra/`](pipeline/infra/) synthesizes and is unit tested. **Nothing is deployed and no AWS credentials have been used.** It has zero NAT gateways, a 20 US dollar budget alarm, private buckets, and a GitHub OIDC role so no AWS key is ever stored anywhere.
+The CDK app in [`pipeline/infra/`](pipeline/infra/) synthesizes, is unit tested, and was **deployed once, on Oct 9, 2026**, by hand from a terminal, with the IAM changes read and approved at the CDK prompt. `CalmFramesStack` in us-east-1 stands at <!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n--> with <!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n--> resources and <!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways, private buckets and a <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollar budget. A calm test clip went through it twice that night: unsigned, it was analyzed and refused, and nothing was published; signed with a cloud demo key, it was published to S3, DynamoDB and CloudFront. The GitHub OIDC deploy role is defined and unit tested but was not created, so no AWS key is stored in the repository or in CI.
+
+The TV app does not call AWS. Its library is compiled into the package, and the cloud demo key is one the app does not trust, so a map made in the cloud plays on no TV. The record of that night, with every account identifier left out, is [`results/aws_deploy_2026-10-09.json`](results/aws_deploy_2026-10-09.json); [`pipeline/infra/README.md`](pipeline/infra/README.md) has the deploy, what it taught and how to take it down.
 
 ```sh
-cd pipeline/infra && cdk synth            # safe: no account is touched
+make synth                                # offline: no credentials, no account touched
 ```
 
 ### The parent area and the demo PIN
