@@ -447,13 +447,17 @@ paragraphs, because a one line reason is how an exception becomes permanent.
 2. **Developer tooling.** jest, metro, the community CLI and their helpers. They
    run on a developer's machine or a CI runner, over this repository's own
    files. This is the build machine's risk, not the television's.
-3. **Two leftovers from the sample**, with a review date of Oct 5 rather than a
-   shrug. `xmldom` is a direct dependency with sixteen advisories, several
-   critical, no fix in the 0.6 line, and zero imports anywhere in `app/src` or
-   `app/test`. It should be deleted from `app/package.json`. `lodash` has a fix
-   inside the range `package.json` already allows, so `npm update lodash` takes
-   it. Both files belong to the app lane, which is why this is a recommendation
-   here rather than a change.
+3. **The expired sample dependency group.** Its October 5 review date remains
+   expired. The October 10 review found the prior zero-import claim was wrong:
+   generated `app/src/w3cmedia/polyfills/DOMParserPolyfill.ts` imports `xmldom`,
+   so the group now correctly has `ships = true`. Removing that dependency
+   without replacing the parser would break the bundle. Hoisted lodash is
+   already patched in the lockfile, but a nested exact vendor pin remains.
+   Candidate fixes need compatibility verification; the exception was not renewed.
+
+The audit snapshot's advisory findings and original scan timestamp are unchanged.
+Its published shipped-group count was recomputed after this classification
+correction, with a separate review annotation. No fresh advisory scan is claimed.
 
 The check fails four ways, each one broken on purpose and watched: a package
 with no exception, a new advisory against a package that has one, an exception
@@ -605,3 +609,16 @@ Until the repository is public, tell Alex. After that, open a private security
 advisory on GitHub rather than an issue, and do not attach media: a clip that
 demonstrates a problem with flash detection is a hazard file, and
 docs/SAFETY.md applies to it.
+
+
+## Publication review: generated Amazon polyfill notice
+
+The independent review flagged the generated
+`app/src/w3cmedia/polyfills/DOMParserPolyfill.ts` header, which says
+"AMAZON PROPRIETARY/CONFIDENTIAL" and points to an accompanying LICENSE.TXT.
+The sample root `app/LICENSE` is MIT No Attribution, but no LICENSE.TXT was
+found beside the extracted `shaka-rel` polyfill. Its build script copies the
+source from the supplied Shaka patch archive. Preserve those notices and
+confirm the applicable redistribution terms before making the source public;
+this local review does not decide that the root license supersedes the header.
+The review bundle remains a local artifact, not a published source release.

@@ -32,8 +32,26 @@ retains the 32-unit floor, with six-unit reserved focus outlines. New art is
 included in image checks; the final native recording is analyzed separately
 because the palette simulation does not inspect image pixels or native layout.
 
-## Validation in progress
+## Validation
 
 The first native render exposed oversized hero artwork despite a passing type
-check. Explicit image heights correct it. The final parent screens, full native
-journey, recording and exact commit receipt are still being completed.
+check. Explicit image heights correct it. Native parent controls, PIN correction, settings persistence, full-plan scrolling,
+remote transport and playback have been exercised. The final receipt is
+`results/redesign_validation_2026-10-10.json`; it distinguishes intermediate
+observations from final-package captures.
+
+The independent Ultracode review prompted removal of repeated schedule copy
+and focused text underlines alongside stable six-unit outlines. Native validation
+then exposed settings losing focus during saves. The deferred-write regression
+failed before the fix; controls now retain focus while blocked handlers prevent
+repeat writes. The unavailable badge says "Needs check", without claiming that
+analysis is running. No detection, signature or timing threshold was changed.
+
+
+The final all-screen comparison is `build/submission-redesign/native-screen-review.png`.
+Its source hashes and intermediate/final scope are in the native receipt.
+It caught a repeated unavailable-title explanation. The last one-sentence fix
+now renders that reason once; 85 affected tests, type checking, rebuild/install,
+PIN unlock, native unavailable-title display, loading Back/replay and cold launch
+were rerun. The demo's playback scenes are from the preceding otherwise
+identical build, explicitly identified by hash rather than relabelled as final.

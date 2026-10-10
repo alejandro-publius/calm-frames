@@ -104,3 +104,17 @@ The Mac cannot be pinned the same way. Homebrew has no supported downgrade path
 for a formula another formula depends on, and this is a shared machine. What
 stands in for a pin is the record: every baseline report stamps the build string
 it ran under, and the one-version check fails if a directory ever holds two.
+
+## Python setup for a fresh reviewer checkout
+
+From the repository root with uv installed:
+
+```sh
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python -e "./flashmap[dev]"
+```
+
+This installs the analyzer and the dependencies used by the benign package
+preflight. `eval/readme_sync.py --check` uses the standard library. The broader
+infra suite additionally uses `pipeline/infra/requirements.txt`; do not confuse
+that with a requirement to deploy AWS to run the simulator.

@@ -118,7 +118,9 @@ def main():
     final=OUT/'Calm-Frames-demo-English.mp4'
     run(['ffmpeg','-v','error','-y','-f','concat','-safe','0','-i',str(concat),'-c','copy','-movflags','+faststart',str(final)])
     (OUT/'Calm-Frames-demo-English.srt').write_text('\n'.join(captions))
-    result={'video':str(final.relative_to(ROOT)), 'sha256':hashlib.sha256(final.read_bytes()).hexdigest(),
+    result={'capture_source_commit':'cba1a29f300b17b11cfaaf723c6f34d4d8bdf190',
+            'capture_package_sha256':'12f757db105ed2aa15d19017963ec63748917e2c4141e0026120390b3be6ecd1',
+            'video':str(final.relative_to(ROOT)), 'sha256':hashlib.sha256(final.read_bytes()).hexdigest(),
             'duration_seconds':float(probe(final)), 'language':'English', 'narration':'macOS Samantha synthetic narration',
             'footage':'Actual Vega Virtual Device recordings and disclosed still captures; editorial brand/status cards',
             'edits':'Cuts, scaling, constant-frame-rate encoding, footer subtitles, narration and native audio gain. No generated app footage.',

@@ -6,13 +6,25 @@ Updated Sat Oct 10, 2026.
 
 ### Oct 10: approved native redesign
 
-The approved Documents archive is implemented on the current branch. Native
-onboarding, PIN correction, library artwork, details scrolling and focus have
-been checked. Final recording and evidence are being completed; follow the
-completion checklist for their current status. `docs/design/NATIVE_IMPLEMENTATION.md`
-records font configuration and the preserved brief. Claude Fable 5.1 with explicit
-max effort completed implementation and an Ultracode independent UX review through
-the existing Max subscription. No API billing or global configuration changes.
+The approved Documents archive is implemented and installed as aarch64 Debug
+from app source `73fbbed`. The native receipt binds the exact package hash:
+`results/redesign_validation_2026-10-10.json`. The full design journey was
+observed, and final review fixes retain settings focus and remove repeated copy.
+All-screen comparison, PIN/remote checks, persistence, holds, transport and
+loading Back/replay are recorded with their exact build scope.
+
+The refreshed English video is `build/submission-redesign/Calm-Frames-demo-English.mp4`.
+Its WCAG and broadcast finished-file gates pass. Video captures are from cba1a29;
+the subsequent copy-only build and affected native reruns are identified, not
+silently relabelled. Full app/Python suites passed, and the last copy fix passed
+85 affected tests and TypeScript. Use the completion checklist for artifacts.
+
+Claude's existing Max subscription completed implementation and an independent
+Ultracode UX review on actual `claude-fable-5-1`. Explicit max effort was accepted;
+provider telemetry does not separately echo effort. No API billing changes.
+AWS work was preserved, without a new deployment or additional costs. Dependency
+Audit, generated Amazon polyfill redistribution review, hosted rerun, entrant
+fields and publication are still open. Earlier entries below are historical.
 
 ### Oct 10: prior reviewed simulator build and submission preparation
 

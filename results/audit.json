@@ -950,9 +950,9 @@
     "npm_critical": 7,
     "npm_high": 83,
     "exception_groups": 3,
-    "exceptions_in_the_shipped_bundle": 1
+    "exceptions_in_the_shipped_bundle": 2
   },
-  "statement": "pip-audit and npm audit, run over what this project installs. Every finding is either fixed or listed in scripts/audit_exceptions.toml with a reason and a review date. The npm findings come almost entirely from the Vega SDK sample's pinned toolchain.",
+  "statement": "Saved pip-audit/npm audit findings with corrected local bundle classification. Nonempty problems block acceptance; unresolved and expired findings are not waived.",
   "problems": [
     "the exception 'left-over-from-the-sample' was due for review on 2026-10-05",
     "npm: @amazon-devices/kepler-content-personalization (high) has no exception",
@@ -1019,5 +1019,9 @@
     "npm: metro-transform-worker (high) has no exception",
     "npm: shell-quote has advisory(s) nobody has read yet: 1241332",
     "npm: sprintf-js (moderate) has no exception"
-  ]
+  ],
+  "classification_review": {
+    "date": "2026-10-10",
+    "change": "xmldom is imported by generated DOMParserPolyfill; corrected shipped classification only. Advisory findings, expiry, accepted IDs and original scan timestamp unchanged. No fresh scan."
+  }
 }

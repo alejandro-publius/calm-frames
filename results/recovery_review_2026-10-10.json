@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-10",
+  "source_commit": "c231443ecb3c2abdbfee84071e0a32601f2cc447",
+  "prior_implementation_commit": "cffdf7b",
+  "package": {
+    "ok": true,
+    "file": "calm-frames-app_aarch64.vpkg",
+    "architecture": "aarch64",
+    "sha256": "eb4dff99cd51582f505359221f427b326f17b32ec2afbe21df77c5f6e1a5d12b",
+    "benign_video_sha256": "af2934dc45c9519bcace8db253d0a9e0c10f9db6682a04ad2cf3f906e1755224",
+    "bundled_map_sha256": "28dff7b168b97d7c31c010ffeb0bf7cbde9c66f0d7f5da7132dfb8fbe896bd4f",
+    "captions_available": true,
+    "scene_holds_available": true,
+    "benign_story_proof_sha256": "1bd952cc9e84c9620059e216f97f28ce3a5cea8d8ff9dc9a28633d6746d3292c",
+    "benign_story_playback_sha256": "fd4432d841c20153159f4bc5515bad36fd5808feaf1de7014413d34534ee014c",
+    "benign_story_caption_sha256": "5970f3b962f634ea2475b3ba2db0943b604c2bf141881557f2f53079dc1df844",
+    "benign_story_uses_sham_intervals": true
+  },
+  "checks": {
+    "regressions_observed_red": 3,
+    "focused_tests_passed": 14,
+    "full_app_tests_passed": 1066,
+    "snapshots_passed": 57,
+    "existing_tests_skipped": 4,
+    "typecheck": "passed",
+    "changed_files_lint": "passed with zero warnings",
+    "python_audit_classification": "65 existing problems remain blocking; no waiver or expiry change"
+  },
+  "native": {
+    "installed_and_launched": true,
+    "rapid_back_returns_to_focused_play": true,
+    "evidence": ".logs/native-recovery-review.png",
+    "evidence_sha256": "a582358f5d68cbd483609bf5c94ff10a3bce74a26116ef68c4e6c3d6d69f88f9"
+  },
+  "scope": "Recovery behavior changed; approved visual redesign not yet applied because requested design files have not been located. Existing English demo depicts prior recorded checkpoint, not this package."
+}

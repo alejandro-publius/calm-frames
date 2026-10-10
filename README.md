@@ -10,14 +10,14 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 Calm Frames combines an offline video analyzer, a checked rendition pipeline and a Vega player for families affected by photosensitivity. Before playback, the pipeline analyzes the source, signs its flash map and verifies the prepared rendition. The player adds a scheduled cover, context images and guarded seeks, with audio and captions intended to preserve the story. Parent settings can make the standard floor stricter and now persist locally. A reusable hook and analyzer provide adoption paths for other developers. Detection, delivery integrity and physical screen behavior have separate limits, recorded below; a signature is not proof that every hazard was detected.
 
-**October 10 simulator finish.** The native benign journey and final English
+**October 10 approved design and simulator finish.** The native benign journey and final English
 video are complete locally. PIN correction, saved settings, all three presets,
 catalog playback, captions/audio through both practice holds, transport fallback
 and focus return were observed on Vega Virtual Device. The final implementation
 commit and exact package hash are in
 [the completion checklist](docs/COMPLETION_CHECKLIST.md) and
-[the native receipt](results/native_validation_2026-10-10.json).
-The local demo is `build/submission/Calm-Frames-demo-English.mp4`, with a source
+[the native receipt](results/redesign_validation_2026-10-10.json).
+The local demo is `build/submission-redesign/Calm-Frames-demo-English.mp4`, with a source
 manifest and passed finished-file check in `results/`. Dependency Audit and
 publication remain open. No physical-device validation or cloud-catalog
 consumption is implied.
@@ -30,7 +30,8 @@ The pipeline binds each JPEG to the signed map and uses the same image in the
 pre-covered rendition and the live-cover model. Missing images, uncertain
 playback, seeks and image decode errors use an opaque black cover. This changes
 the presentation, not the detector thresholds or hide timing. Native image and
-caption composition still need direct observation on the Vega Virtual Device.
+caption composition were subsequently observed on the Vega Virtual Device in
+the October 10 recordings. This remains simulator evidence, not physical timing.
 
 The current [hackathon assessment](docs/HACKATHON_REVIEW.md) separates the
 project score from missing submission evidence. The [continuation prompt](docs/CONTINUATION_PROMPT.md)
@@ -200,10 +201,10 @@ Every row links the exact file and line in this repository. Line numbers are aga
 
 | Required technology | Package | Called at | What it does here |
 |---|---|---|---|
-| **W3C media player** | `@amazon-devices/react-native-w3cmedia` | [`app/src/utils/VideoHandler.ts:147`](app/src/utils/VideoHandler.ts#L147) `new VideoPlayer()`, imported at [`:5`](app/src/utils/VideoHandler.ts#L5) `VideoPlayer`; attached to Shaka at [`:274`](app/src/utils/VideoHandler.ts#L274) `new ShakaPlayer(...)` | All playback. Calm Frames never replaces it and never lowers its opacity. It reads `currentTime`, `playbackRate` and the media events from it, and covers on top of it. |
-| **W3C media player, video surface** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:625`](app/src/screens/PlayerScreen.tsx#L625) `KeplerVideoSurfaceView`, imported at [`:17`](app/src/screens/PlayerScreen.tsx#L17) `KeplerVideoSurfaceView` | The hardware video layer at zIndex 0. The cover sits above it, which is what keeps the sound running while the picture is hidden. |
+| **W3C media player** | `@amazon-devices/react-native-w3cmedia` | [`app/src/utils/VideoHandler.ts:147`](app/src/utils/VideoHandler.ts#L147) `new VideoPlayer()`, imported at [`:5`](app/src/utils/VideoHandler.ts#L5) `VideoPlayer`; attached to Shaka at [`:286`](app/src/utils/VideoHandler.ts#L286) `new ShakaPlayer(...)` | All playback. Calm Frames never replaces it and never lowers its opacity. It reads `currentTime`, `playbackRate` and the media events from it, and covers on top of it. |
+| **W3C media player, video surface** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:645`](app/src/screens/PlayerScreen.tsx#L645) `KeplerVideoSurfaceView`, imported at [`:17`](app/src/screens/PlayerScreen.tsx#L17) `KeplerVideoSurfaceView` | The hardware video layer at zIndex 0. The cover sits above it, which is what keeps the sound running while the picture is hidden. |
 | **Vega Media Controls** | `@amazon-devices/kepler-media-controls` | Focus set at [`app/src/utils/VideoHandler.ts:158`](app/src/utils/VideoHandler.ts#L158) `setMediaControlFocus(...)`. The safe handler is [`app/src/calmframes/SafeMediaControlHandler.ts:54`](app/src/calmframes/SafeMediaControlHandler.ts#L54) `class SafeMediaControlHandler`, with `handleSeek` at [`:80`](app/src/calmframes/SafeMediaControlHandler.ts#L80) and `handleFastForward` at [`:107`](app/src/calmframes/SafeMediaControlHandler.ts#L107) | System and voice transport, and the path an Alexa "skip forward" arrives on. It can land the playhead inside a flagged interval without the remote being touched, so none of these handlers call `super`. Each one goes through [`app/src/calmframes/seekSafety.ts`](app/src/calmframes/seekSafety.ts), `planSeek` at [`:113`](app/src/calmframes/seekSafety.ts#L113). |
-| **KeplerCaptionsView** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:643`](app/src/screens/PlayerScreen.tsx#L643) `KeplerCaptionsView`, the element; the handle is set by [`:589`](app/src/screens/PlayerScreen.tsx#L589) `setCaptionViewHandle` | Captions, at zIndex 2, above the cover. One captions view per process. This is the reason a hidden segment is still followable: the words carry on over a black picture. |
+| **KeplerCaptionsView** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:665`](app/src/screens/PlayerScreen.tsx#L665) `KeplerCaptionsView`, the element; the handle is set by [`:612`](app/src/screens/PlayerScreen.tsx#L612) `setCaptionViewHandle` | Captions, at zIndex 2, above the cover. One captions view per process. This is the reason a hidden segment is still followable: the words carry on over a black picture. |
 | **Accessibility APIs** | `react-native` `AccessibilityInfo`, plus the `com.amazon.devconf.privilege.accessibility` privilege at [`app/manifest.toml:91`](app/manifest.toml#L91) | [`app/src/calmframes/announce.ts:58`](app/src/calmframes/announce.ts#L58) `announceForAccessibilityWithOptions(message, { queue: true })`; the card carries `accessibilityLiveRegion="polite"` at [`app/src/calmframes/CalmCard.tsx:78`](app/src/calmframes/CalmCard.tsx#L78) and `accessibilityRole="alert"` at [`:79`](app/src/calmframes/CalmCard.tsx#L79); the cover is hidden from the tree at [`app/src/calmframes/CoverLayer.tsx:74`](app/src/calmframes/CoverLayer.tsx#L74) `accessibilityElementsHidden` | VoiceView is told what is about to be hidden, and told it in a queue rather than by interrupting, because a child hearing "flashing part coming up" cut off halfway is worse than hearing it a beat later. The cover itself is taken out of the accessibility tree, so VoiceView never reads a black rectangle and focus never lands on it. |
 
 The whole guard is one hook, [`app/src/calmframes/useFlashGuard.ts`](app/src/calmframes/useFlashGuard.ts). Give it a player and where the map is, and it verifies the map, builds the schedule, drives the cover, decides the card, announces it and hands back the one seek function every control has to use. It deliberately knows nothing about Calm Frames screens, navigation or storage, which is what makes it the thing another Vega app can drop in. Around it: the cover is [`app/src/calmframes/CoverLayer.tsx`](app/src/calmframes/CoverLayer.tsx), the scheduler is [`coverSchedule.ts`](app/src/calmframes/coverSchedule.ts) and [`mediaClock.ts`](app/src/calmframes/mediaClock.ts), the map check is [`flashMap.ts`](app/src/calmframes/flashMap.ts), the PIN is [`parentGate.ts`](app/src/calmframes/parentGate.ts) and the run harness is [`useCoverHarness.ts`](app/src/calmframes/useCoverHarness.ts).
@@ -422,6 +423,8 @@ Then run the checked benign journey preflight:
 ```
 
 After successful preflight, repeat with `--execute --restart` to collect fresh software logs. Use the visible remote to complete setup, select Harbor story (benign demo), enable English practice captions, and observe playback, practice holds, sound, seeks, parent settings and restart. Logs alone do not prove screen composition or audio continuity. `eval/vvd_smoke.py` now delegates to the same benign smoke entrypoint; its historical helper functions remain for separate timing tools.
+
+For a fresh Python environment, follow [the reviewer setup](docs/ENVIRONMENT.md#python-setup-for-a-fresh-reviewer-checkout) before the preflight.
 
 The simulator-only submission does not require a physical Fire TV device.
 

@@ -8,7 +8,7 @@ rewritten against the current implementation; recheck the remaining fields and
 replace every **NEEDS ALEX** before submission. Current completion and remaining blockers are in
 [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md).
 
-**Current evidence.** The completed corrected conformance report is adopted below, with its weaker near-limit result, and the README quotes the same report. The AWS deployment is recorded, but the app consumes its compiled local catalog, not AWS output. On Oct 9 and 10 the aarch64 Debug package was installed on the Vega Virtual Device and the benign journey was observed on its screen and recorded with ScreenCaptureKit, picture and audio: onboarding with a mismatched PIN confirmation and a Delete correction; the saved Kid profile, room size and distance, Broadcast preset and chime setting surviving a relaunch; the parent gate staying locked on a wrong PIN, opening on the right one and locking again after Credits Back; all three catalog titles playing under compatible Standard settings, prepared Harbor also under Broadcast and Extra cautious, and the gradient correctly unavailable under stricter requirements; both scheduled Harbor holds with changing English captions above the held picture and non-silent audio throughout; and pause, resume and forward and backward seeks into holds showing the opaque fallback. These are observations of the recorded simulator screen, not screen timing measurements. The record is [`results/native_validation_2026-10-10.json`](../results/native_validation_2026-10-10.json), bound to the final source commit and package hash, with earlier package observations identified separately. The final cut is `build/submission/Calm-Frames-demo-English.mp4`, with English synthetic narration and disclosed actual captures. Its manifest and finished-file check are in `results/`. The latest hosted CI run, on dcb27a1, passed. The Audit workflow failed on dependency advisories, SBOM drift and a CDK CLI minimum of 2.1144.0 above the repository's 2.1142.0 pin. In the reviewed local changes all three SBOMs reproduce byte for byte, the CDK transitive pins are corrected and the infra tests pass locally; there has been no hosted rerun, the advisories are unresolved, and main stays unchanged until Audit passes. Publication links remain pending.
+**Current evidence.** The approved native redesign is installed on the Vega Virtual Device. The October 10 receipt, [`results/redesign_validation_2026-10-10.json`](../results/redesign_validation_2026-10-10.json), binds final app source `73fbbed` to its aarch64 Debug package and identifies earlier observations separately. PIN mismatch/Delete, all offered presets and compatible catalog titles, saved settings, remote focus, Harbor holds with captions/audio, transport fallback and recovery were exercised. The final restart preserves Kid, Extra cautious, a 55-inch TV, a 10-foot household distance and chime Off; Kid's effective distance remains its stricter 8 feet. Positive real-cover history is integration-tested only. The English demo is `build/submission-redesign/Calm-Frames-demo-English.mp4`, with disclosed actual captures and synthetic narration. The corrected conformance report below retains its weaker near-limit result. Saved AWS publication worked, but the app consumes its compiled local catalog. Latest saved hosted CI passed on dcb27a1; Audit failed on advisories, SBOM drift and a CDK CLI minimum mismatch. Local SBOM/CDK fixes reproduce, with no hosted rerun; advisories remain unresolved. Main and publication links are unchanged. Before public source release, resolve the generated Amazon polyfill notice identified in docs/SECURITY.md.
 
 **How to use this file.** Each numbered section below corresponds to a planned
 Devpost field. Final field names still need checking in the live form.
@@ -19,7 +19,7 @@ Devpost field. Final field names still need checking in the live form.
 
 | When | What |
 |---|---|
-| Done, Oct 9 to 10 | The native simulator takes were recorded: `.logs/native-final-harbor.mp4` and `.logs/native-prepared-standard.mp4`, outside git. No re-filming is needed |
+| Done, Oct 9 to 10 | Native simulator takes recorded. Exact clips used in the current cut are listed in `results/redesign_demo_manifest_2026-10-10.json` |
 | Mon Oct 12 | The upstream pull request is open, so the contribution URL exists |
 | Fri Oct 16, 12:00 PT | Devpost's early eligibility check. Entries submitted by then are checked, and Devpost says what needs fixing. Optional, and only worth it with a near-complete entry, video link included. The takes exist; this row is reachable only if the final English edit is uploaded before then, otherwise drop it |
 | Mon Oct 19, 9 to 10 AM PT | Office Hours #2 with the Amazon team. Optional; register through the link in the Devpost update |
@@ -226,19 +226,19 @@ visibility have been changed by this documentation update.
 NEEDS ALEX
 ```
 
-**Local video is finished:** `build/submission/Calm-Frames-demo-English.mp4`.
-It is <!--n results/video_check.json:duration_s -->146.021<!--/n--> seconds,
+**Local video is finished:** `build/submission-redesign/Calm-Frames-demo-English.mp4`.
+It is <!--n results/redesign_video_check.json:duration_s -->156.021<!--/n--> seconds,
 in English with disclosed macOS Samantha synthetic narration, actual simulator
 footage/stills and editorial cards. The final duration/WCAG check passes.
 The exact script is [`docs/VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md); all shot sources
-and hashes are in `results/demo_manifest_2026-10-10.json`. Remaining: upload,
+and hashes are in `results/redesign_demo_manifest_2026-10-10.json`. Remaining: upload,
 public URL and logged-out viewing check. No re-filming is required.
 
 Three checks before pasting:
 
-1. `eval/check_video.sh <final file> --max-seconds 179` exits 0, and `results/video_check.json` is committed. It runs flashmap over the finished cut and, with that flag, refuses any file of 179 seconds or longer, which is the same gate the script and shot manifest require. Exit 2 means flashmap could not tell, and that is a failure too.
+1. `eval/check_video.sh <final file> --max-seconds 179` exits 0, and `results/redesign_video_check.json` is committed. It runs flashmap over the finished cut and, with that flag, refuses any file of 179 seconds or longer, which is the same gate the script and shot manifest require. Exit 2 means flashmap could not tell, and that is a failure too.
 2. The link works while logged out, on YouTube or Vimeo, in English.
-3. The on-screen and spoken wording is "reduces exposure to flashing above published limits in the videos it plays; not a medical device". Never "prevents seizures", never "seizure-proof".
+3. Any exposure-reduction claim must carry its limits. The on-screen plan uses "reduces exposure to flashing above published limits in the videos it plays; not a medical device". The English narration says detection can miss flashing and this is not a medical device. No seizure-prevention claim.
 
 ## 7a. Thumbnail, gallery image and "try it out" link
 
@@ -246,7 +246,7 @@ Devpost forms usually ask for a thumbnail or gallery image and offer a "try it o
 
 | Field | Proposed answer | State |
 |---|---|---|
-| Thumbnail or gallery image | [`docs/brand/firetv-app-icon-1280x720.png`](brand/firetv-app-icon-1280x720.png), the 1280 x 720 opaque Fire TV tile: the mark beside the wordmark and the line "A calmer way to watch". It passed the brand asset flash checks on Oct 9 ([`docs/brand/README.md`](brand/README.md)) | Proposed. Confirm the live form's accepted size and format on the day, and read the actual PNG before uploading |
+| Thumbnail or gallery image | [`docs/brand/firetv-app-icon-1280x720.png`](brand/firetv-app-icon-1280x720.png), the 1280 x 720 opaque Fire TV tile: the mark beside the wordmark and the line "A calmer way to watch". The approved design version passed the brand asset flash checks on Oct 10 ([`docs/brand/README.md`](brand/README.md)) | Proposed. Confirm the live form's accepted size and format on the day, and read the actual PNG before uploading |
 | "Try it out" link | The judged release page, section 9, once it exists | **NEEDS ALEX.** No release has been published, so there is no link yet. Do not use a placeholder URL |
 
 ## 8. Required technologies
@@ -274,11 +274,13 @@ The whole guard is one hook, `app/src/calmframes/useFlashGuard.ts`. Give it a pl
 ## 9. Testing instructions
 
 ```
-Calm Frames is meant to be reviewed on the Vega Virtual Device. The Debug
-package was installed there on Oct 9, and the visible journey below was
-observed on its screen and recorded on Oct 9 and 10; the record is
-results/native_validation_2026-10-10.json.
-On the Apple Silicon development Mac, use the aarch64 package.
+Calm Frames is meant to be reviewed on the Vega Virtual Device. The approved-design Debug
+package was installed there on Oct 10. The visible journey was observed and
+recorded, with intermediate and final observations distinguished in
+results/redesign_validation_2026-10-10.json.
+On the Apple Silicon development Mac, use the aarch64 package. This package
+is not for an Intel Mac. The install/launch commands below are the ones used
+for the native checks.
 
 REVIEWABLE PACKAGE
   The judged release and SHA256SUMS have not been published yet.
@@ -288,6 +290,8 @@ BUILD AND RUN ON THE SIMULATOR
   Vega SDK 0.24.9914, Vega CLI 1.3.4, Node 22, Python 3.12 and JDK 21.
   From the repository root:
 
+  uv venv --python 3.12 .venv
+  uv pip install --python .venv/bin/python -e "./flashmap[dev]"
   source ~/vega/env
   eval "$(fnm env)" && fnm use
   export JAVA_HOME=/opt/homebrew/opt/openjdk@21
@@ -296,10 +300,10 @@ BUILD AND RUN ON THE SIMULATOR
   npm run build:debug -- --target aarch64
   cd ..
   nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
-  vega device is-connected
-  vega device info
-  vega run-app app/build/aarch64-debug/calm-frames-app_aarch64.vpkg \
-      io.github.alejandropublius.calmframes.main --deviceId VirtualDevice
+  vega device is-connected --device Simulator
+  vega device info --device Simulator
+  vega device install-app --device Simulator --packagePath app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
+  vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main
 
   Start only if stopped; wait for is-connected before installing.
   Debug builds retain app logs. Avoid vega device list on this SDK.
@@ -308,8 +312,8 @@ BUILD AND RUN ON THE SIMULATOR
       --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
 
   This is read-only preflight. After it succeeds, repeat with --execute
-  --restart. Use the visible remote to complete setup, open Harbor story
-  (benign demo), enable English practice captions, play, pause and seek.
+  --restart. Use the visible remote to complete setup, open Harbor: Scene hold demo, choose Watch demo, and play, pause and seek.
+  English captions are included; the separate hero Watch now plays prepared Harbor.
   Buttons can also be sent from the host. This is the form that works on
   this CLI; the documented vega exec form looks for a missing host executable:
 
@@ -323,12 +327,12 @@ BUILD AND RUN ON THE SIMULATOR
   the expected result, not a defect.
   A physical Fire TV stick and hardware timing recording are not required.
 
-PARENT AREA
-  The parent area is behind a four digit PIN, set during first-run setup.
+PARENTAL CONTROLS
+  Parental controls are behind a four digit PIN, set during first-run setup.
   Family settings, the salted iterated PIN hash and lockouts are stored
   locally. Plaintext PIN digits are not saved. Storage errors block the
   library until resolved. On the Vega Virtual Device the saved profile, room,
-  preset and chime setting survived a relaunch, and the parent area locked
+  preset and chime setting survived a relaunch, and parental controls locked
   again after Credits Back.
 
   Fresh install: choose and confirm your own PIN in onboarding.
@@ -382,7 +386,7 @@ SAFETY, PLEASE READ
 
 Amazon asks five questions about every tool an entry used. **The answers live in [`docs/FEEDBACK.md`](FEEDBACK.md)**, which covers eighteen tools: the Vega SDK and CLI, the Vega Virtual Device, `vega-video-sample`, the W3C media player, Vega Media Controls, KeplerCaptionsView, the accessibility APIs, AWS CDK, AWS Fargate on ECS, Amazon S3, Amazon CloudFront, AWS Lambda, Amazon DynamoDB, Amazon ECR, Systems Manager Parameter Store with KMS, AWS Budgets, the Kepler UI and file system packages, and GitHub Actions.
 
-That file is the one to paste from, and it is deliberately the only copy, so this document cannot drift away from it. If the form wants the answers inline, paste `docs/FEEDBACK.md` from its "1. Vega SDK and Vega CLI" heading down to the "Feature requests" heading. Its "At a glance" table and sections 1, 2, 6, 7 and 18 were corrected on Oct 9 to match the body and the simulator-only scope, and again on Oct 10 against the native observations in `results/native_validation_2026-10-10.json`; re-read it once more on the day before pasting.
+That file is the one to paste from, and it is deliberately the only copy, so this document cannot drift away from it. If the form wants the answers inline, paste `docs/FEEDBACK.md` from its "1. Vega SDK and Vega CLI" heading down to the "Feature requests" heading. Its "At a glance" table and sections 1, 2, 6, 7 and 18 were corrected on Oct 9 to match the body and the simulator-only scope, and again on Oct 10 against the native observations in `results/redesign_validation_2026-10-10.json`; re-read it once more on the day before pasting.
 
 Two things a reader should know about it, which it says itself:
 
@@ -659,7 +663,7 @@ Preparation, local tests and capture can proceed autonomously. Alex is needed fo
 | # | What | When | Field it unblocks |
 |---|---|---|---|
 | 0 | **Done Oct 9: the AWS Builder question.** The stack is deployed and has run twice (section 11), so whether an undeployed stack counts no longer arises. Kiro Crew is a route we have not taken and must not imply we have | Done | 5, 11 |
-| 0b | **Done Oct 9 to 10: simulator screen recording.** ScreenCaptureKit recorded the simulator window with picture and audio; the saved takes show both Harbor holds, their English captions and non-silent sound, and the record is `results/native_validation_2026-10-10.json` | Done | 7 |
+| 0b | **Done Oct 9 to 10: simulator screen recording.** ScreenCaptureKit recorded the simulator window with picture and audio; the saved takes show both Harbor holds, their English captions and non-silent sound, and the record is `results/redesign_validation_2026-10-10.json` | Done | 7 |
 | 0c | **Activate `Project` as a cost allocation tag**, so the 20 dollar budget can see the bill. Until then it cannot warn anyone (section 11.1) | **Now.** A new tag can take up to a day to appear for activation | 11 |
 | 1 | **Confirm the GitHub username** to credit on the Open Source fields, and which account forks the upstream repository | Before Mon Oct 12 | 12.3 |
 | 2 | **Open the upstream pull request** from a fork under your own account, and paste the URL | By Mon Oct 12 | 12.1 |
@@ -667,7 +671,7 @@ Preparation, local tests and capture can proceed autonomously. Alex is needed fo
 | 4 | **Done Oct 9: HUMAN CHECKPOINT D.** The Paid plan and the 20 dollar budget are in place, and the credit clause is void because the form closed on Oct 7 | Done | 11 |
 | 5 | **Any outreach reply you want quoted** goes into `docs/VALIDATION.md`, with permission | By Fri Oct 16 | 15 |
 | 6 | **Done Oct 10: English demo edited.** Actual simulator footage, labelled still captures, synthetic English narration, subtitles and source manifest | Done | 7 |
-| 7 | **Done Oct 10: finished-file check.** Duration below three minutes and WCAG check pass; receipt in `results/video_check.json` | Done | 7 |
+| 7 | **Done Oct 10: finished-file check.** Duration below three minutes and WCAG check pass; receipt in `results/redesign_video_check.json` | Done | 7 |
 | 8 | **Upload the video** and check the link works while logged out | Before Thu Oct 22 | 7 |
 | 9 | **Read the thirty-five friction entries** and confirm you are happy for them to be published as written | Before submission | 14 |
 | 9b | **Get Audit green on the review branch, then merge PR #1 into main.** On dcb27a1 CI passes and Audit fails on dependency advisories, SBOM drift and the CDK CLI minimum. The SBOM and CDK pin fixes are in the reviewed local commits and reproduce locally, without a hosted rerun; the advisories are unresolved. A public repository shows main by default, and main does not yet hold the scene-hold work, so the merge has to land before item 10 and the judged tag is cut from main after it | Before **Wed Oct 21** | 6, 9 |

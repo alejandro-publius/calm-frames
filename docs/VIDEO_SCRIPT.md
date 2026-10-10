@@ -1,44 +1,41 @@
 # English demo script
 
-The finished local cut is `build/submission/Calm-Frames-demo-English.mp4`.
-It uses actual Vega Virtual Device footage, disclosed native still captures,
-and editorial brand/status cards. Narration is macOS Samantha text to speech,
-in English, with burned-in subtitles and a companion SRT. No human voice,
-customer feedback, medical outcome or physical-device measurement is implied.
+Finished local cut: `build/submission-redesign/Calm-Frames-demo-English.mp4`.
+Actual Vega Virtual Device recordings and disclosed still captures, with editorial
+brand/status cards. Narration is macOS Samantha text to speech in English.
+Burned-in subtitles and a companion SRT are included. No human voice, customer
+feedback, medical outcome or physical-device measurement is implied.
 
-The current encoded duration and hash are in
-`results/demo_manifest_2026-10-10.json`; `results/video_check.json` records the
-finished-file duration and WCAG gate. The broadcast profile also passes in
-`results/video_check_broadcast.json`. The duration is strictly below three minutes.
-The raw takes remain under `.logs/`; the review bundle preserves used sources.
+Encoded duration and hash: `results/redesign_demo_manifest_2026-10-10.json`.
+Finished-file gates: `results/redesign_video_check.json` and
+`results/redesign_video_check_broadcast.json`.
 
 ## Exact narration and cut
 
 | Start | Duration | Narration |
 |---|---|---|
 | 0:00 | 6 s | Calm Frames. A calmer way to watch. |
-| 0:06 | 10 s | This accessibility prototype is running on the Vega Virtual Device. Its shelf contains checked, packaged videos. |
-| 0:16 | 12 s | Harbor is original, non-flashing media. This practice title uses two scheduled holds to demonstrate scene continuity. The intervals are synthetic, not detected flashing. |
-| 0:28 | 25 s | Watch the practice holds. The recorded tone and English captions continue while a calm scene is held. |
-| 0:53 | 20 s | Here the remote seeks forward and backward, pauses, and resumes. The player uses an opaque fallback when playback is disrupted. This is behavior, not a screen timing measurement. |
-| 1:13 | 8 s | A parent PIN protects settings. Wrong entries stay locked, and a partial entry can be corrected with Delete. |
-| 1:21 | 10 s | Parents choose Standard, Broadcast, or Extra cautious. Stricter choices cannot relax the household floor. Each prepared preset was played in the simulator. |
-| 1:31 | 12 s | Room settings, the selected profile, and the chime switch survive restart. Practice holds are excluded from exposure history. Actual cover history is kept in memory. |
-| 1:43 | 19 s | This separate Harbor title went through real local preparation, with no synthetic detector intervals. The app plays the verified rendition compiled into its catalog. This source had no detected flashing. |
-| 2:02 | 18 s | The saved AWS run published a signed title, but this app consumes its local library. Detection can miss flashing. Calm Frames is not a medical device. Dependency security findings remain open. |
-| 2:20 | 6 s | Calm Frames. A calmer way to watch. |
+| 0:06 | 10 s | Calm Frames is running on the Vega Virtual Device. This redesigned library contains the checked videos packaged with the app. |
+| 0:16 | 12 s | Harbor is original, non-flashing media. The scene hold demo adds two scheduled holds. These are examples, not detected flashing. |
+| 0:28 | 26 s | Watch the scheduled holds. The recorded tone and English captions continue while the picture holds a calm scene. |
+| 0:54 | 22 s | The remote seeks, pauses, and resumes. Interrupted playback uses an opaque cover. This demonstrates behavior, not physical screen timing. |
+| 1:16 | 9 s | A PIN protects parental controls. Incorrect entries stay locked, and Delete corrects a partial entry. |
+| 1:25 | 12 s | Parents choose Standard, Broadcast, or Extra cautious. Each choice was tested in Vega. A child cannot relax the settings chosen for everyone. |
+| 1:37 | 12 s | Settings survive restart. Scheduled demo holds are excluded from exposure history. Actual cover history is not saved across app restarts. |
+| 1:49 | 21 s | This separate Harbor title uses real local preparation without the demonstration holds. The app plays its checked, packaged rendition. The source had no detected flashing. |
+| 2:10 | 20 s | The saved AWS run published a signed title. The app uses its local library. Detection can miss flashing. Calm Frames is not a medical device. Dependency security findings remain open. |
+| 2:30 | 6 s | Calm Frames. A calmer way to watch. |
 
 ## Reproduce and publish
 
 Run `.venv/bin/python eval/assemble_demo.py` on this Mac with FFmpeg, Pillow,
-the source captures and the Samantha voice installed. Then run
-`bash eval/check_video.sh build/submission/Calm-Frames-demo-English.mp4 --max-seconds 179`.
-The editor checks each narration length, preserves native audio with disclosed
-level gain, and records all source hashes. It never synthesizes app footage.
+the recorded sources and Samantha installed. The assembler checks narration
+length, retains native audio with disclosed gain and hashes every source.
+Run `bash eval/check_video.sh build/submission-redesign/Calm-Frames-demo-English.mp4
+--max-seconds 179 --out results/redesign_video_check.json` as one command; repeat
+with `--profile broadcast` and the broadcast output path.
 
-The prototype is a compiled local library. The saved AWS run is separate.
-Detection misses are disclosed, live overlay timing is not guaranteed, and
-open dependency security findings remain visible. Practice intervals are
-synthetic and labelled. Practice does not create exposure-history entries.
-
-The public video URL and logged-out viewing check remain pending publication.
+The app uses a compiled local library. Saved AWS publication is a separate
+pipeline. Detection misses and unresolved dependency security findings are
+stated. Practice holds are synthetic and excluded from exposure history.
+Public upload, the video URL and logged-out viewing check remain pending.

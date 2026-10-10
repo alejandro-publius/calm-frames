@@ -910,3 +910,18 @@ The first eleven and the Sep 29 entries, 34 and 35, were written here as they ha
   background exit. Tests reproduced both failures; idempotent exit cleanup now
   separates hardware menu dismissal from forced teardown. Native rapid Back
   returns once to title details with Play focused. Severity: major; app defect.
+
+## October 10 approved native redesign
+
+- Vega custom fonts rendered as fallback from `assets/raw/fonts`; moving the
+  licensed static faces to `assets/fonts` produced the intended weights.
+- Aspect ratio alone did not constrain native hero art. Explicit TV-unit image
+  heights fixed the oversized first render.
+- Disabling a focused setting during a save removed native focus. Keep it in
+  the focus order, report disabled accessibility state and block its handler.
+  Deferred-write regression was observed failing before the fix.
+- Native recording must be checked for changing frames, duration and audio. A
+  navigation-only take was rejected instead of being presented as playback.
+- Ultracode noninteractive reviews completed after using the supported per-call
+  background wait ceiling; actual Fable 5.1 model is logged, max effort is an
+  accepted request rather than independently echoed provider telemetry.
