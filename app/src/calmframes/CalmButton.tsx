@@ -22,13 +22,14 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import {
   CALM_COLORS,
   CALM_SPACE,
-  CALM_TYPE,
+  CALM_TEXT,
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
 
 export interface CalmButtonProps {
   label: string;
+  primary?: boolean;
   onPress?: () => void;
   /** What a screen reader says. Defaults to the label. */
   accessibilityLabel?: string;
@@ -40,6 +41,7 @@ export interface CalmButtonProps {
 
 const CalmButton = ({
   label,
+  primary = false,
   onPress,
   accessibilityLabel,
   disabled = false,
@@ -61,12 +63,13 @@ const CalmButton = ({
       onPress={onPress}
       style={[
         styles.button,
+        primary && !disabled ? styles.primary : null,
         disabled ? styles.buttonDisabled : null,
-        focused && !disabled ? styles.buttonFocused : null,
+        focused && !disabled ? (primary ? styles.primaryFocused : styles.buttonFocused) : null,
       ]}>
       <Text
         testID={`${testID}-label`}
-        style={[styles.label, disabled ? styles.labelDisabled : null]}>
+        style={[styles.label, focused && !disabled ? styles.focusedLabel : null, primary && !disabled ? (focused ? styles.focusedPrimaryLabel : styles.primaryLabel) : null, disabled ? styles.labelDisabled : null]}>
         {label}
       </Text>
     </TouchableOpacity>
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
     borderRadius: scale(12),
     borderWidth: scale(FOCUS_RING_WIDTH),
-    borderColor: CALM_COLORS.BORDER,
+    borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,
   },
   buttonFocused: {
@@ -94,9 +97,13 @@ const styles = StyleSheet.create({
   },
   label: {
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BUTTON),
-    fontWeight: '600',
+    ...CALM_TEXT.control,
   },
+  focusedLabel: { textDecorationLine: 'underline' },
+  primary: { backgroundColor: CALM_COLORS.FOCUS_RING, borderColor: CALM_COLORS.FOCUS_RING },
+  primaryFocused: { backgroundColor: CALM_COLORS.INK, borderColor: CALM_COLORS.FOCUS_RING },
+  focusedPrimaryLabel: { color: CALM_COLORS.TEXT },
+  primaryLabel: { color: CALM_COLORS.INK },
   labelDisabled: {
     color: CALM_COLORS.TEXT_DIM,
   },

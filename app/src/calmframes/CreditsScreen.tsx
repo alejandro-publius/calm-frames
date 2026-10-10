@@ -21,25 +21,24 @@
  * are both written from the ledger by eval/attribution.py, and CI fails if
  * either drifts, so what a parent reads here is what the repository says.
  *
- * Reached from the parent area, behind the PIN: "Credits and licences" in
- * ParentAreaScreen, routed by KidModeScreen's 'credits' view. The parent area
- * rather than kid mode, because this is a screen for the adult.
+ * Reached from parental controls, behind the PIN: "Credits and licences" in
+ * ParentAreaScreen, routed by KidModeScreen's 'credits' view. Behind the PIN
+ * rather than in kid mode, because this is a screen for the adult.
  *
  * That route is the point of it. NOTICE ships with the source, which is no use
  * to somebody holding a remote, and CC BY asks for attribution where a person
  * can actually read it. screens.test.tsx has the reachability test, and it was
  * seen red with the button removed.
+ *
+ * Each entry is a quiet card: the title, the collection it came from, the
+ * licence, the credit line, then any condition under those. The one control
+ * is the shared button, so its ring is the same ring as everywhere else.
  */
 
 import React from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { CALM_COLORS, CALM_SPACE, CALM_TYPE, scale } from './calmStyles';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import CalmButton from './CalmButton';
+import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { CREDIT_ENTRIES, CreditEntry } from './credits';
 import { useUiCapture } from './uiCapture';
 import { CREDITS_FRAME } from './uiFrames';
@@ -96,7 +95,6 @@ const CreditsScreen = ({
   onBack,
   testID = 'credits',
 }: CreditsScreenProps) => {
-  const [focused, setFocused] = React.useState(false);
   useUiCapture(CREDITS_FRAME, 'credits');
 
   return (
@@ -104,17 +102,19 @@ const CreditsScreen = ({
       testID={testID}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      <Text style={styles.title} testID={`${testID}-title`}>
-        {CREDITS_TITLE}
-      </Text>
-      <Text style={styles.intro} testID={`${testID}-intro`}>
-        {CREDITS_INTRO}
-      </Text>
-      <Text style={styles.count} testID={`${testID}-count`}>
-        {entries.length} {entries.length === 1 ? 'title' : 'titles'}
-      </Text>
+      <View style={styles.header}>
+        <Text style={styles.title} testID={`${testID}-title`}>
+          {CREDITS_TITLE}
+        </Text>
+        <Text style={styles.intro} testID={`${testID}-intro`}>
+          {CREDITS_INTRO}
+        </Text>
+        <Text style={styles.count} testID={`${testID}-count`}>
+          {entries.length} {entries.length === 1 ? 'title' : 'titles'}
+        </Text>
+      </View>
 
-      {entries.map(entry => (
+      {entries.map((entry) => (
         <CreditRow
           key={entry.title}
           entry={entry}
@@ -124,18 +124,12 @@ const CreditsScreen = ({
 
       {onBack ? (
         <View style={styles.buttons}>
-          <TouchableOpacity
+          <CalmButton
             testID={`${testID}-back`}
-            accessibilityRole="button"
-            accessibilityLabel="Back"
-            activeOpacity={1}
-            hasTVPreferredFocus
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
+            label="Back"
             onPress={onBack}
-            style={[styles.button, focused ? styles.buttonFocused : null]}>
-            <Text style={styles.buttonLabel}>Back</Text>
-          </TouchableOpacity>
+            hasTVPreferredFocus
+          />
         </View>
       ) : null}
     </ScrollView>
@@ -143,79 +137,68 @@ const CreditsScreen = ({
 };
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
+  screen: {
+    flex: 1,
+    backgroundColor: CALM_COLORS.BACKGROUND,
+    paddingHorizontal: scale(CALM_SPACE.SAFE_X),
+    paddingVertical: scale(CALM_SPACE.SAFE_Y),
+  },
   content: {
-    padding: scale(CALM_SPACE.EDGE),
+    paddingBottom: scale(CALM_SPACE.SAFE_Y),
+  },
+  header: {
+    marginBottom: scale(CALM_SPACE.BLOCK),
   },
   title: {
+    ...CALM_TEXT.screen,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.SCREEN_TITLE),
-    fontWeight: '700',
   },
   intro: {
+    ...CALM_TEXT.body,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
     marginTop: scale(CALM_SPACE.TIGHT),
     maxWidth: scale(1500),
   },
   count: {
+    ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.SMALL),
     marginTop: scale(CALM_SPACE.TIGHT),
   },
   entry: {
     alignSelf: 'stretch',
     maxWidth: scale(1500),
-    marginTop: scale(CALM_SPACE.BLOCK),
-    padding: scale(CALM_SPACE.ROW),
-    borderRadius: scale(16),
+    marginBottom: scale(CALM_SPACE.TIGHT),
+    paddingVertical: scale(CALM_SPACE.ROW),
+    paddingHorizontal: scale(CALM_SPACE.BLOCK),
+    borderRadius: scale(12),
     backgroundColor: CALM_COLORS.SURFACE,
   },
   entryTitle: {
+    ...CALM_TEXT.card,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.CARD_TITLE),
-    fontWeight: '600',
   },
   collection: {
+    ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.SMALL),
-    marginTop: scale(CALM_SPACE.TIGHT),
   },
   license: {
+    ...CALM_TEXT.body,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
     marginTop: scale(CALM_SPACE.TIGHT),
   },
   credit: {
+    ...CALM_TEXT.body,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
     marginTop: scale(CALM_SPACE.TIGHT),
   },
   condition: {
+    ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.SMALL),
     marginTop: scale(CALM_SPACE.TIGHT),
   },
   buttons: {
     flexDirection: 'row',
     marginTop: scale(CALM_SPACE.BLOCK),
-  },
-  button: {
-    paddingVertical: scale(CALM_SPACE.TIGHT),
-    paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(12),
-    borderWidth: scale(4),
-    borderColor: CALM_COLORS.BORDER,
-    backgroundColor: CALM_COLORS.SURFACE,
-  },
-  buttonFocused: {
-    borderColor: CALM_COLORS.FOCUS_RING,
-    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
-  },
-  buttonLabel: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BUTTON),
-    fontWeight: '600',
   },
 });
 

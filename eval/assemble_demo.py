@@ -11,30 +11,30 @@ import textwrap
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'build/submission'
+OUT = ROOT / 'build/submission-redesign'
 FONT = '/System/Library/Fonts/Supplemental/Arial.ttf'
 # Source, start offset, duration, English narration. PNGs are disclosed stills.
 SHOTS = [
  ('docs/brand/firetv-app-icon-1280x720.png', 0, 6,
   'Calm Frames. A calmer way to watch.'),
- ('.logs/native-final-shelf.png', 0, 10,
-  'This accessibility prototype is running on the Vega Virtual Device. Its shelf contains checked, packaged videos.'),
- ('.logs/native-practice-before-seek.png', 0, 12,
-  'Harbor is original, non-flashing media. This practice title uses two scheduled holds to demonstrate scene continuity. The intervals are synthetic, not detected flashing.'),
- ('.logs/native-reviewed-harbor.mp4', 2, 25,
-  'Watch the practice holds. The recorded tone and English captions continue while a calm scene is held.'),
- ('.logs/native-guarded-transport.mp4', 5, 20,
-  'Here the remote seeks forward and backward, pauses, and resumes. The player uses an opaque fallback when playback is disrupted. This is behavior, not a screen timing measurement.'),
- ('.logs/native-credits-return.png', 0, 8,
-  'A parent PIN protects settings. Wrong entries stay locked, and a partial entry can be corrected with Delete.'),
- ('.logs/native-extra-selected2.png', 0, 10,
-  'Parents choose Standard, Broadcast, or Extra cautious. Stricter choices cannot relax the household floor. Each prepared preset was played in the simulator.'),
- ('.logs/native-kid-history-visible.png', 0, 12,
-  'Room settings, the selected profile, and the chime switch survive restart. Practice holds are excluded from exposure history. Actual cover history is kept in memory.'),
- ('.logs/native-broadcast-play.mp4', 3, 19,
-  'This separate Harbor title went through real local preparation, with no synthetic detector intervals. The app plays the verified rendition compiled into its catalog. This source had no detected flashing.'),
- ('build/submission/status-card.png', 0, 18,
-  'The saved AWS run published a signed title, but this app consumes its local library. Detection can miss flashing. Calm Frames is not a medical device. Dependency security findings remain open.'),
+ ('.logs/redesign-final-library.png', 0, 10,
+  'Calm Frames is running on the Vega Virtual Device. This redesigned library contains the checked videos packaged with the app.'),
+ ('.logs/redesign-final-details.png', 0, 12,
+  'Harbor is original, non-flashing media. The scene hold demo adds two scheduled holds. These are examples, not detected flashing.'),
+ ('.logs/redesign-final-harbor.mp4', 2, 26,
+  'Watch the scheduled holds. The recorded tone and English captions continue while the picture holds a calm scene.'),
+ ('.logs/redesign-final-transport.mp4', 2, 22,
+  'The remote seeks, pauses, and resumes. Interrupted playback uses an opaque cover. This demonstrates behavior, not physical screen timing.'),
+ ('.logs/redesign-final-pin.png', 0, 9,
+  'A PIN protects parental controls. Incorrect entries stay locked, and Delete corrects a partial entry.'),
+ ('.logs/redesign-final-parent.png', 0, 12,
+  'Parents choose Standard, Broadcast, or Extra cautious. Each choice was tested in Vega. A child cannot relax the settings chosen for everyone.'),
+ ('.logs/redesign-final-history.png', 0, 12,
+  'Settings survive restart. Scheduled demo holds are excluded from exposure history. Actual cover history is not saved across app restarts.'),
+ ('.logs/redesign-final-prepared.mp4', 2, 21,
+  'This separate Harbor title uses real local preparation without the demonstration holds. The app plays its checked, packaged rendition. The source had no detected flashing.'),
+ ('build/submission-redesign/status-card.png', 0, 20,
+  'The saved AWS run published a signed title. The app uses its local library. Detection can miss flashing. Calm Frames is not a medical device. Dependency security findings remain open.'),
  ('docs/brand/firetv-app-icon-1280x720.png', 0, 6,
   'Calm Frames. A calmer way to watch.'),
 ]
@@ -57,7 +57,7 @@ def stamp(seconds):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    card = Image.new('RGB', (1920,1080), '#1d4b58')
+    card = Image.new('RGB', (1920,1080), '#102F3A')
     draw = ImageDraw.Draw(card)
     draw.text((115,115), 'Prototype status', font=ImageFont.truetype(FONT,76), fill='#f4ead3')
     lines = ['Prepared, compiled local library', 'AWS publication is a separate demonstrated pipeline',
@@ -82,7 +82,7 @@ def main():
         overlay=Image.new('RGBA',(1920,1080),(0,0,0,0))
         d=ImageDraw.Draw(overlay)
         d.rectangle((0,944,1920,1080),fill=(12,32,39,255))
-        label='Vega Virtual Device | Actual capture' if source.startswith('.logs') else 'Calm Frames | Editorial card'
+        label=('Vega Virtual Device | Actual still capture' if source_path.suffix=='.png' else 'Vega Virtual Device | Actual video capture') if source.startswith('.logs') else 'Calm Frames | Editorial card'
         d.text((55,952),label, font=ImageFont.truetype(FONT,23),fill='#e6ab55')
         # The subtitle footer occupies only the capture's black lower margin.
         lines=textwrap.wrap(narration,width=110)
@@ -123,7 +123,7 @@ def main():
             'footage':'Actual Vega Virtual Device recordings and disclosed still captures; editorial brand/status cards',
             'edits':'Cuts, scaling, constant-frame-rate encoding, footer subtitles, narration and native audio gain. No generated app footage.',
             'shots':manifest}
-    (ROOT/'results/demo_manifest_2026-10-10.json').write_text(json.dumps(result,indent=2)+'\n')
+    (ROOT/'results/redesign_demo_manifest_2026-10-10.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k!='shots'}))
 
 if __name__=='__main__':

@@ -48,6 +48,8 @@ REPO = Path(__file__).resolve().parent.parent
 # fails if a PNG exists under docs/brand or app/assets/image and is not named
 # here, so the check cannot quietly stop covering a file somebody added.
 ASSETS = [
+    REPO / "app/assets/image/tv/harbor.png",
+    REPO / "app/assets/image/tv/gradient.png",
     REPO / "app/assets/image/CalmFrames.png",
     REPO / "docs/brand/appstore-icon-512.png",
     REPO / "docs/brand/appstore-icon-114.png",
@@ -59,7 +61,7 @@ ASSETS = [
 
 # CALM_COLORS.BACKGROUND in app/src/calmframes/calmStyles.ts, used only to pad a
 # non-16:9 image out to the frame. Nothing is cut against it.
-PAD = "#1F4D5C"
+PAD = "#102F3A"
 
 WIDTH, HEIGHT, FPS = 640, 360, 24
 HOLD_SECONDS = 2
@@ -124,9 +126,9 @@ def main() -> int:
     if arguments.json:
         print(json.dumps({
             "statement": (
-                "Every brand image analysed on its own, held two seconds. Nothing "
-                "is cut against anything else, because none of these images "
-                "follows another anywhere a person sees them."
+                "Every brand and title image analysed on its own, held two seconds. "
+                "Native recordings and UI palette simulations check transitions separately; "
+                "this individual asset check does not measure screen transitions."
             ),
             "tool": "eval/brand_assets_check.py",
             "profile": "wcag",

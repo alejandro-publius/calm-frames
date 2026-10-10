@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { CALM_COLORS, CALM_SPACE, CALM_TYPE, scale } from './calmStyles';
+import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { SAFETY_NOTE } from './copy';
 import { describeRoom, HouseholdSettings, PRESETS } from './household';
 import { CheckedTitle } from './titleStatus';
@@ -73,19 +73,16 @@ const styles = StyleSheet.create({
   },
   heading: {
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.SECTION),
-    fontWeight: '700',
+    ...CALM_TEXT.section,
   },
   label: {
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    fontWeight: '600',
+    ...CALM_TEXT.body,
     marginTop: scale(CALM_SPACE.TIGHT),
   },
   line: {
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    marginTop: scale(CALM_SPACE.TIGHT),
+    ...CALM_TEXT.body, marginTop: scale(CALM_SPACE.TIGHT),
   },
 });
 

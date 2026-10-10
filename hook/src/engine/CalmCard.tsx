@@ -25,7 +25,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
   CALM_COLORS,
   CALM_SPACE,
-  CALM_TYPE,
+  CALM_TEXT,
   FOCUS_RING_WIDTH,
   PLAYER_LAYOUT,
   scale,
@@ -136,14 +136,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.CARD_TITLE),
-    fontWeight: '600',
+    ...CALM_TEXT.card,
     textAlign: 'center',
   },
   detail: {
     color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.CARD_DETAIL),
-    marginTop: scale(CALM_SPACE.TIGHT),
+    ...CALM_TEXT.body, marginTop: scale(CALM_SPACE.TIGHT),
     textAlign: 'center',
   },
   skip: {
@@ -161,8 +159,7 @@ const styles = StyleSheet.create({
   },
   skipLabel: {
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BUTTON),
-    fontWeight: '600',
+    ...CALM_TEXT.control,
   },
 });
 

@@ -125,7 +125,7 @@ describe('reaching Calm Frames', () => {
     const { navigate } = await renderKidMode();
     await finishFirstRun();
     fireEvent.press(screen.getByTestId(`kid-mode-home-poster-${BENIGN_STORY_ID}`));
-    expect(JSON.stringify(screen.getByTestId('kid-mode-details-demo-label').props.children)).toContain('practice holds, no flashing');
+    expect(JSON.stringify(screen.getByTestId('kid-mode-details-demo-label').props.children)).toContain('scheduled scene holds');
     expect(screen.getByTestId('kid-mode-details-summary').props.children).toContain('8 seconds');
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     const [, params] = navigate.mock.calls[0];
@@ -147,9 +147,9 @@ describe('reaching Calm Frames', () => {
       screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`),
     ).toBeTruthy();
     expect(
-      screen.getByTestId(`kid-mode-home-badge-${OFFLINE_TITLE_ID}-label`).props
-        .children,
-    ).toBe('Checked');
+      screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`).props
+        .accessibilityLabel,
+    ).toContain('checked');
   });
 
   it('opens the title, then hands the player the map it verified', async () => {
@@ -328,20 +328,21 @@ describe('the shelf a household lands on', () => {
         screen.getByTestId(`kid-mode-home-poster-${id}`).props
           .hasTVPreferredFocus === true,
     );
-    expect(asking).toEqual([BENIGN_STORY_ID]);
+    expect(asking).toEqual([]);
+    expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
   });
 
-  it("shows Harbor's signed still on the route a household really takes, and no other picture", async () => {
+  it("shows the approved title illustrations without changing playback stills", async () => {
     await renderKidMode();
     await finishFirstRun();
     const pictured = shelfOrder().filter(
       (id) => screen.queryByTestId(`kid-mode-home-poster-image-${id}`) !== null,
     );
-    expect(pictured).toEqual([BENIGN_STORY_ID]);
+    expect(pictured).toEqual(shelfOrder());
     expect(
       screen.getByTestId(`kid-mode-home-poster-image-${BENIGN_STORY_ID}`).props
-        .source.uri,
-    ).toMatch(/^data:image\/jpeg;base64,/);
+        .source,
+    ).toEqual(require('../../assets/image/tv/harbor.png'));
   });
 });
 

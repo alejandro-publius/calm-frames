@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import BackButton from '../../components/BackButton';
-import { COLORS } from '../../styles/Colors';
+import { CALM_COLORS, CALM_TEXT } from '../../calmframes/calmStyles';
 import { scaleUxToDp } from '../../utils/pixelUtils';
 
 interface Header {
@@ -34,9 +34,8 @@ const styles = StyleSheet.create({
     paddingLeft: scaleUxToDp(20),
   },
   title: {
-    color: COLORS.WHITE,
-    fontWeight: '500',
-    fontSize: scaleUxToDp(70),
+    ...CALM_TEXT.screen,
+    color: CALM_COLORS.TEXT,
     textAlign: 'right',
     width: '90%',
   },

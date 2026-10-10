@@ -2,8 +2,8 @@
   "source": "app/src/calmframes",
   "files": {
     "announce.ts": "d67e13b47de80d16",
-    "CalmCard.tsx": "0c6f32abfb42930b",
-    "calmStyles.ts": "7e1348bc76aee00f",
+    "CalmCard.tsx": "04a0343befb46c0d",
+    "calmStyles.ts": "98d9067b06af5a8d",
     "canonicalJson.ts": "1097285aae9b21aa",
     "cards.ts": "23bf59c4f9afccdd",
     "CoverLayer.tsx": "ce1c3f785861d009",

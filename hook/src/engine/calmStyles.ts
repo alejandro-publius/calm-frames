@@ -2,65 +2,22 @@
  * Mirrored from app/src/calmframes by hook/tools/sync.mjs. Do not edit here:
  * edit the app copy and run `node hook/tools/sync.mjs`.
  */
-/**
- * How Calm Frames looks, in one place.
- *
- * Three things drive every choice here:
- *
- * - Ten foot reading. Everything is sized for a television across a room, so
- *   the smallest text on any Calm Frames screen is 32 units at 1080p and the
- *   card headings are 56.
- * - Focus you can see from the sofa. A focused control gets a thick bright
- *   border and a lighter fill, never a colour change alone, and never an
- *   animation: kid mode has no motion.
- * - The app's own screens have to pass flashmap. The palette is deliberately
- *   narrow and dark, and every screen shares one background, so moving between
- *   screens is a small luminance step rather than a flash. test/calmframes/
- *   uiCapture.test.tsx measures that on the real rendered screens.
- *
- * The numbers below are measured, not admired. The virtual device cannot be
- * photographed, so test/calmframes/tenFoot.test.tsx renders every screen and
- * every state and checks each one against these: the type floor, the safe
- * margins, the focus ring width and the contrast ratios. Change a number here
- * and that test says what it did to every screen.
- */
-
 import { scaleUxToDp } from '../pixelUtils';
 
-/**
- * The palette, and what each colour is allowed to carry.
- *
- * The five at the top are the brand: they are the same five constants at the
- * head of `app/assets/brand/make_logo.py`, so the mark on the shelf and the
- * screen behind it cannot drift apart.
- *
- * What each may be used for is decided by measured contrast rather than taste,
- * against the 4.5:1 text floor and the 3:1 non-text floor below:
- *
- *   cream on teal      7.60:1   text, any size
- *   saffron on teal    4.47:1   rings and fills only, and it misses the text
- *                               floor by 0.03, so it never becomes a label
- *   dark saffron       2.58:1   edges and fills only. It carries nothing: ink
- *                               on it is 3.76:1 and cream on it is 2.95:1
- *   ink on cream      11.10:1   text on a light surface
- *   ink on saffron     6.53:1   the label on a saffron fill
- *
- * tenFoot.test.tsx measures every rendered line against the colour actually
- * painted behind it, so a colour used in the wrong place fails there.
- */
+/** Approved TV palette. Contrast is checked against rendered text and focus. */
 export const CALM_COLORS = {
   /** Every Calm Frames screen sits on this. */
-  BACKGROUND: '#1F4D5C',
+  BACKGROUND: '#102F3A',
   /** A card on the ground, and the same card with focus on it. */
-  SURFACE: '#173B47',
-  SURFACE_FOCUSED: '#286070',
+  SURFACE: '#1A414B',
+  SURFACE_FOCUSED: '#234B55',
   BORDER: '#66A0B4',
-  /** The accent. A ring and a fill, never a label. */
+  /** Focus, primary actions and sparse metadata on the dark background. */
   FOCUS_RING: '#E6A957',
   /** The secondary accent. Edges and fills only, it carries no text at all. */
   ACCENT_DARK: '#B87A2C',
   TEXT: '#F3E8D3',
-  TEXT_DIM: '#CFE0DC',
+  TEXT_DIM: '#BDD0CF',
   /** Text on a light surface, where cream would disappear. */
   INK: '#17323C',
   /** The shield on a checked title. */
@@ -73,26 +30,15 @@ export const CALM_COLORS = {
   COVER: '#000000',
 } as const;
 
-/**
- * Type sizes in 1080p units, scaled to the device by scaleUxToDp.
- *
- * Why the smallest is 32 rather than something smaller. On a 55 inch 16:9
- * television the picture is about 27 inches tall, so one unit at 1080p is
- * about 0.025 inches. A 32 unit line has a cap height near 0.57 inches, and
- * from a sofa 8 feet away that is about 20 arcminutes. Reading stays
- * comfortable down to roughly 16 to 20 arcminutes and gets tiring below it,
- * and a tired parent at the end of the day is the person this is for. The
- * earlier floor of 28 units came out at about 18 arcminutes, which is the edge
- * of that range rather than inside it.
- */
+/** Legacy size tokens in 1080p units. Named CALM_TEXT styles below add real faces and line heights. */
 export const CALM_TYPE = {
-  CARD_TITLE: 56,
+  CARD_TITLE: 38,
   CARD_DETAIL: 38,
   SCREEN_TITLE: 64,
-  SECTION: 44,
+  SECTION: 42,
   BODY: 36,
   SMALL: 32,
-  BUTTON: 38,
+  BUTTON: 36,
 } as const;
 
 export const CALM_SPACE = {
@@ -166,3 +112,18 @@ export const MINIMUM_TEXT_CONTRAST = 4.5;
 export const MINIMUM_FOCUS_CONTRAST = 3;
 
 export const scale = scaleUxToDp;
+
+/** Licensed static Inter faces packaged in assets/fonts. No synthetic weight. */
+export const CALM_FONT = { regular: 'InterRegular', medium: 'InterMedium', semibold: 'InterSemiBold' } as const;
+const typography = (size: number, height: number, face: string) => ({
+  fontFamily: face, fontSize: scale(size), lineHeight: scale(height), fontWeight: '400' as const,
+});
+export const CALM_TEXT = {
+  feature: typography(80, 92, CALM_FONT.semibold),
+  screen: typography(64, 76, CALM_FONT.semibold),
+  section: typography(42, 54, CALM_FONT.semibold),
+  card: typography(38, 48, CALM_FONT.medium),
+  body: typography(36, 48, CALM_FONT.regular),
+  control: typography(36, 46, CALM_FONT.semibold),
+  supporting: typography(32, 42, CALM_FONT.regular),
+} as const;

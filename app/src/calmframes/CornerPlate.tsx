@@ -17,7 +17,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import {
   CALM_COLORS,
   CALM_SPACE,
-  CALM_TYPE,
+  CALM_TEXT,
   PLAYER_LAYOUT,
   scale,
 } from './calmStyles';
@@ -54,8 +54,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.SMALL),
-  },
+    ...CALM_TEXT.supporting, },
 });
 
 export default CornerPlate;

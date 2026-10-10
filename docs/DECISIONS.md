@@ -2081,3 +2081,11 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
   **Why:** SDK dependency Audit is still red, the cloud pipeline is separate,
   and synthetic practice must not create false exposure history. **Cost:**
   the entry is reviewable but is not yet a released or submitted product.
+
+## October 10: approved native TV design
+
+- **Decision:** apply the user-approved Documents archive to the current Mac branch. Preserve signed assets, playback gates and household logic. **Why:** the older cloud checkout does not include the current Harbor and recovery work.
+- **Decision:** bundle licensed static Inter faces in Vega's `assets/fonts` directory. **Why:** native before/after captures verified the correct directory and real weights; the image exposes no Ember semibold.
+- **Decision:** use concept artwork only for browsing and keep scheduled demo holds distinct from detected hazards. **Why:** the design must not alter media provenance or safety claims.
+- **Decision:** use a stable outline plus focused text underline. **Why:** the independent Ultracode review requested a non-color focus cue without layout movement.
+- **Decision:** keep actual native still/video sources and disclose narration in the redesigned demo. **Why:** a browser reference is not simulator evidence.

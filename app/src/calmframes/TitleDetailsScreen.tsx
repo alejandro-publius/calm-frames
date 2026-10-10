@@ -14,7 +14,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
-import { CALM_COLORS, CALM_SPACE, CALM_TYPE, scale } from './calmStyles';
+import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { noticeForTitle } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import FlashMapStrip from './FlashMapStrip';
@@ -23,14 +23,13 @@ import {
   DEFAULT_SETTINGS,
   HouseholdSettings,
 } from './household';
-import ShieldBadge from './ShieldBadge';
+import TitleArtwork, { titlePresentation } from './TitleArtwork';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle } from './titleStatus';
 import { useUiCapture } from './uiCapture';
 import { TITLE_DETAILS_BLOCKED_FRAME, TITLE_DETAILS_FRAME } from './uiFrames';
 import ViewingPlan from './ViewingPlan';
 import {
-  BENIGN_STORY_LABEL,
   benignStorySettings,
   isBundledBenignStory,
 } from './benignStory';
@@ -72,6 +71,8 @@ const TitleDetailsScreen = ({
     playable ? 'title details' : 'title details, not ready',
   );
 
+  const presentation = titlePresentation(entry.title);
+  const demo = isBundledBenignStory(entry.title);
   const hiddenSeconds = Math.round(totalCoveredMs(intervals) / 1000);
 
   return (
@@ -79,18 +80,20 @@ const TitleDetailsScreen = ({
       testID={testID}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      <Text style={styles.title} testID={`${testID}-title`}>
-        {entry.title.title}
-      </Text>
-      <ShieldBadge status={entry.status} testID={`${testID}-badge`} />
-      {isBundledBenignStory(entry.title) && (
-        <Text style={styles.summary} testID={`${testID}-demo-label`}>
-          {BENIGN_STORY_LABEL}. This original harbor story uses scheduled
-          practice holds with Extra cautious timing to demonstrate scene
-          continuity. Enable English practice captions in the player. The gentle
-          tone continues during each hold.
-        </Text>
-      )}
+      {onBack ? <CalmButton testID={`${testID}-back`} label="Back to library" onPress={onBack} /> : null}
+      <View style={styles.hero}>
+        <View style={styles.heroCopy}>
+          <Text style={styles.eyebrow}>{presentation.kind}</Text>
+          <Text style={styles.title} testID={`${testID}-title`}>{presentation.name}</Text>
+          {presentation.description ? <Text style={styles.summary} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
+          <View style={styles.buttons}>
+            <CalmButton primary testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playable ? presentation.action : 'Unavailable'}
+              accessibilityLabel={saving ? 'Saving your changes...' : playable ? `${presentation.action}: ${presentation.name}` : `${presentation.name} is unavailable. ${notice?.detail ?? ''}`}
+              disabled={!playable || saving} hasTVPreferredFocus onPress={() => onPlay(entry)} />
+          </View>
+        </View>
+        <View style={styles.heroArt}><TitleArtwork entry={entry} testID={`${testID}-artwork`} /></View>
+      </View>
 
       {notice ? (
         <View style={styles.block}>
@@ -98,19 +101,21 @@ const TitleDetailsScreen = ({
         </View>
       ) : (
         <>
+          {demo ? <Text style={styles.summary}>The holds are added at set times to demonstrate how the picture changes while sound and captions continue. Harbor was created without flashing effects.</Text> : null}
           <Text style={styles.summary} testID={`${testID}-summary`}>
             {intervals.length === 0
-              ? 'The check found nothing over the flash limits in this title.'
-              : `${intervals.length} part${
+              ? 'The check found no segments above the flash limits. Checks can miss hazards.'
+              : `${intervals.length} ${demo ? 'scheduled hold' : 'part'}${
                   intervals.length === 1 ? '' : 's'
-                } will be hidden, ${hiddenSeconds} second${
+                } ${demo ? (intervals.length === 1 ? 'is included' : 'are included') : 'will be hidden'}, ${hiddenSeconds} second${
                   hiddenSeconds === 1 ? '' : 's'
-                } in all. Sound and captions keep playing.`}
+                } in all.${demo ? '' : ' Sound and captions keep playing.'}`}
           </Text>
 
           {durationMs > 0 ? (
             <View style={styles.block}>
               <FlashMapStrip
+                showCaption={false}
                 intervals={intervals}
                 durationMs={durationMs}
                 testID={`${testID}-strip`}
@@ -128,67 +133,21 @@ const TitleDetailsScreen = ({
         </>
       )}
 
-      <View style={styles.buttons}>
-        <CalmButton
-          testID={`${testID}-play`}
-          label={
-            saving
-              ? 'Saving your settings'
-              : playable
-              ? 'Play'
-              : 'Not ready to play'
-          }
-          accessibilityLabel={
-            saving
-              ? 'Saving your settings'
-              : playable
-              ? `Play ${entry.title.title}`
-              : `${entry.title.title} is not ready to play. ${
-                  notice?.detail ?? ''
-                }`
-          }
-          disabled={!playable || saving}
-          hasTVPreferredFocus
-          onPress={() => onPlay(entry)}
-        />
-
-        {onBack ? (
-          <View style={styles.secondButton}>
-            <CalmButton
-              testID={`${testID}-back`}
-              label="Back"
-              onPress={onBack}
-            />
-          </View>
-        ) : null}
-      </View>
+      {onBack ? <View style={styles.block}><CalmButton testID={`${testID}-back-bottom`} label="Back to library" onPress={onBack} /></View> : null}
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
-  content: {
-    paddingHorizontal: scale(CALM_SPACE.SAFE_X),
-    paddingVertical: scale(CALM_SPACE.SAFE_Y),
-  },
-  title: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.SCREEN_TITLE),
-    fontWeight: '700',
-    marginBottom: scale(CALM_SPACE.TIGHT),
-  },
-  summary: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    marginTop: scale(CALM_SPACE.BLOCK),
-  },
+  content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y) },
+  hero: { flexDirection: 'row', alignItems: 'center', gap: scale(64), marginVertical: scale(32) },
+  heroCopy: { width: scale(850) },
+  heroArt: { flex: 1 },
+  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING },
+  title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginVertical: scale(20) },
+  summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, marginTop: scale(20) },
   block: { marginTop: scale(CALM_SPACE.BLOCK) },
-  buttons: {
-    flexDirection: 'row',
-    marginTop: scale(CALM_SPACE.BLOCK),
-  },
-  secondButton: { marginLeft: scale(CALM_SPACE.ROW) },
+  buttons: { flexDirection: 'row', marginTop: scale(CALM_SPACE.BLOCK) },
 });
-
 export default TitleDetailsScreen;

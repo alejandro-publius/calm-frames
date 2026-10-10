@@ -4,7 +4,17 @@ Updated Sat Oct 10, 2026.
 
 ## 0. Where things stand
 
-### Oct 10: reviewed simulator build and submission preparation
+### Oct 10: approved native redesign
+
+The approved Documents archive is implemented on the current branch. Native
+onboarding, PIN correction, library artwork, details scrolling and focus have
+been checked. Final recording and evidence are being completed; follow the
+completion checklist for their current status. `docs/design/NATIVE_IMPLEMENTATION.md`
+records font configuration and the preserved brief. Claude Fable 5.1 with explicit
+max effort completed implementation and an Ultracode independent UX review through
+the existing Max subscription. No API billing or global configuration changes.
+
+### Oct 10: prior reviewed simulator build and submission preparation
 
 The authoritative current checklist is [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md).
 The native journey is observed and recorded: setup/PIN correction, saved room,

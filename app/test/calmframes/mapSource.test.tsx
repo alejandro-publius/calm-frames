@@ -179,8 +179,8 @@ describe('the registry served it', () => {
 
     expect(screen.queryByTestId('kid-mode-home-poster-bursts')).toBeTruthy();
     expect(
-      screen.getByTestId('kid-mode-home-badge-bursts-label').props.children,
-    ).toBe('Checked');
+      screen.getByTestId('kid-mode-home-poster-bursts').props.accessibilityLabel,
+    ).toContain('checked');
 
     fireEvent.press(screen.getByTestId('kid-mode-home-poster-bursts'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));

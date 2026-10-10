@@ -29,43 +29,24 @@ export const HOUSEHOLD_ERROR_FRAME: UiFrame = {
 };
 
 export const KID_HOME_FRAME: UiFrame = {
-  screen: 'kid-home',
-  background: CALM_COLORS.BACKGROUND,
-  // BORDER is the block a poster sits in before its picture is there.
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.BORDER],
+  screen: 'kid-home', background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE],
 };
-
 export const KID_HOME_FOCUSED_FRAME: UiFrame = {
-  screen: 'kid-home-focused',
-  background: CALM_COLORS.BACKGROUND,
-  surfaces: [
-    CALM_COLORS.SURFACE_FOCUSED,
-    CALM_COLORS.BORDER,
-    CALM_COLORS.SURFACE,
-  ],
+  screen: 'kid-home-focused', background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE, CALM_COLORS.SURFACE_FOCUSED],
 };
-
-/**
- * The shelf with the family picker on it.
- *
- * The chips carry the chosen fill, which neither a focused poster nor the
- * offline banner adds on its own, so this one frame is what the shelf paints
- * in all three of those states once a household has profiles. An empty shelf
- * never shows the picker, so it is not one of them.
- *
- * The order is the order the shelf paints them when the kid who is watching is
- * first in the row. Another kid watching moves the chosen fill along the row
- * and changes nothing else: the same colours, in a different order, and the
- * flash check reads the colours.
- */
 export const KID_HOME_PROFILES_FRAME: UiFrame = {
-  screen: 'kid-home-profiles',
-  background: CALM_COLORS.BACKGROUND,
-  surfaces: [
-    CALM_COLORS.SURFACE_FOCUSED,
-    CALM_COLORS.SURFACE,
-    CALM_COLORS.BORDER,
-  ],
+  screen: 'kid-home-profiles', background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
+};
+export const KID_HOME_PROFILES_FOCUSED_FRAME: UiFrame = {
+  screen: 'kid-home-profiles-focused', background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE_FOCUSED],
+};
+export const KID_HOME_PICKER_FRAME: UiFrame = {
+  screen: 'kid-home-picker', background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.FOCUS_RING],
 };
 
 /** Nothing has been checked yet, so the shelf is one notice. */
@@ -79,13 +60,13 @@ export const KID_HOME_EMPTY_FRAME: UiFrame = {
 export const KID_HOME_OFFLINE_FRAME: UiFrame = {
   screen: 'kid-home-offline',
   background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.BORDER],
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
 };
 
 export const TITLE_DETAILS_FRAME: UiFrame = {
   screen: 'title-details',
   background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.PENDING, CALM_COLORS.FAILED],
+  surfaces: [CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE, CALM_COLORS.PENDING, CALM_COLORS.FAILED],
 };
 
 /**
@@ -242,6 +223,8 @@ export const ALL_UI_FRAMES: UiFrame[] = [
   KID_HOME_EMPTY_FRAME,
   KID_HOME_OFFLINE_FRAME,
   KID_HOME_PROFILES_FRAME,
+  KID_HOME_PROFILES_FOCUSED_FRAME,
+  KID_HOME_PICKER_FRAME,
   TITLE_DETAILS_FRAME,
   TITLE_DETAILS_BLOCKED_FRAME,
   PARENT_LOCKED_FRAME,

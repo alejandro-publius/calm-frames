@@ -5,10 +5,16 @@
 #include <QPainter>
 #include <QSvgRenderer>
 #include <QString>
+#include <QFontDatabase>
+#include <QDir>
+#include <QFileInfo>
 
 int main(int argc, char **argv) {
     QGuiApplication app(argc, argv);
     if (argc != 5) return 2;
+    QDir fonts(QFileInfo(QString::fromLocal8Bit(argv[1])).absolutePath() + "/../fonts");
+    for (const auto &file : fonts.entryList({"*.ttf"}, QDir::Files))
+        QFontDatabase::addApplicationFont(fonts.filePath(file));
     QSvgRenderer svg(QString::fromLocal8Bit(argv[1]));
     const int width = QString::fromLocal8Bit(argv[2]).toInt();
     const int height = QString::fromLocal8Bit(argv[3]).toInt();

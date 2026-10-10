@@ -1,30 +1,5 @@
-/**
- * Kid mode: the shelf.
- *
- * What it does not do matters as much as what it does:
- *
- * - it never lists a title whose map did not verify. The list it renders comes
- *   from kidModeTitles, so an unchecked title cannot reach the grid by any
- *   route;
- * - nothing plays a preview. There is no autoplaying video and no motion
- *   anywhere on this screen;
- * - a poster's picture is a still: one the catalog published, or Harbor's own
- *   signed scene still (shelf.ts). No title borrows another title's picture,
- *   and a title with none keeps a plain block;
- * - every poster carries the shield, and focus is a thick ring rather than a
- *   colour change or a wobble.
- *
- * When there is nothing to show it says so rather than showing an empty room.
- * The two ways that happens read differently, because they are different: no
- * title has finished being checked yet, or the service that publishes checks
- * cannot be reached. The second one is not a reason to show anything
- * unchecked, so the shelf keeps whatever already carries its own check, which
- * is the title bundled inside the app.
- */
-
 import React from 'react';
 import {
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -35,15 +10,13 @@ import CalmButton from './CalmButton';
 import {
   CALM_COLORS,
   CALM_SPACE,
-  CALM_TYPE,
+  CALM_TEXT,
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
 import {
   BACKEND_UNREACHABLE,
   BACKEND_UNREACHABLE_EMPTY,
-  KID_HOME_SUBTITLE,
-  KID_HOME_TITLE,
   NO_TITLES,
   PROFILES_KID_TITLE,
   WATCHING_STATE_WORD,
@@ -51,8 +24,8 @@ import {
 } from './copy';
 import ProfilePicker from './ProfilePicker';
 import { Profile } from './profiles';
-import { shelfLabel, shelfPoster, spokenShelfLabel } from './shelf';
-import ShieldBadge from './ShieldBadge';
+import TitleArtwork, { titlePresentation } from './TitleArtwork';
+import { Image } from 'react-native';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle, kidModeTitles } from './titleStatus';
 import { useUiCapture } from './uiCapture';
@@ -62,12 +35,15 @@ import {
   KID_HOME_FRAME,
   KID_HOME_OFFLINE_FRAME,
   KID_HOME_PROFILES_FRAME,
+  KID_HOME_PROFILES_FOCUSED_FRAME,
+  KID_HOME_PICKER_FRAME,
 } from './uiFrames';
 
 export interface KidHomeScreenProps {
   /** Every title that has been checked, in any state. */
   titles: CheckedTitle[];
   onOpen: (entry: CheckedTitle) => void;
+  onPlay?: (entry: CheckedTitle) => void;
   /** Last opened title, retained by the route while this shelf is unmounted. */
   returnFocusId?: string | null;
   onOpenParentArea?: () => void;
@@ -95,6 +71,7 @@ export interface KidHomeScreenProps {
 const KidHomeScreen = ({
   titles,
   onOpen,
+  onPlay,
   returnFocusId,
   onOpenParentArea,
   offline = false,
@@ -105,6 +82,9 @@ const KidHomeScreen = ({
   saving = false,
 }: KidHomeScreenProps) => {
   const listed = kidModeTitles(titles);
+  const [choosingProfile, setChoosingProfile] = React.useState(false);
+  const featured = listed.find((entry) => titlePresentation(entry.title).action === 'Watch now') ?? listed[0];
+  const feature = featured ? titlePresentation(featured.title) : null;
   const hiddenCount = titles.length - listed.length;
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
     ? returnFocusId
@@ -128,7 +108,7 @@ const KidHomeScreen = ({
     frame = KID_HOME_EMPTY_FRAME;
     reason = offline ? 'shelf empty, service unreachable' : 'shelf empty';
   } else if (picking) {
-    frame = KID_HOME_PROFILES_FRAME;
+    frame = choosingProfile ? KID_HOME_PICKER_FRAME : focusedId ? KID_HOME_PROFILES_FOCUSED_FRAME : KID_HOME_PROFILES_FRAME;
     reason = offline
       ? 'shelf with profiles, service unreachable'
       : focusedId
@@ -146,31 +126,21 @@ const KidHomeScreen = ({
   return (
     <View testID={testID} style={styles.screen}>
       <View style={styles.header}>
-        <Text style={styles.title} testID={`${testID}-title`}>
-          {KID_HOME_TITLE}
-        </Text>
-        {empty ? null : (
-          <Text style={styles.subtitle} testID={`${testID}-subtitle`}>
-            {saving ? 'Saving who is watching' : KID_HOME_SUBTITLE}
-          </Text>
-        )}
+        <View style={styles.brand}>
+          <Image source={require('../../assets/image/CalmFrames.png')} style={styles.mark} fadeDuration={0} />
+          <Text style={styles.wordmark}>Calm Frames</Text>
+        </View>
+        <View style={styles.navigation}>
+          {picking && profiles ? <CalmButton testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
+            disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
+          {onOpenParentArea ? <CalmButton testID={`${testID}-parent-area`} label="Parental controls" accessibilityLabel="Parental controls, needs a PIN" hasTVPreferredFocus={empty && !saving} onPress={onOpenParentArea} /> : null}
+        </View>
       </View>
-
-      {picking && profiles && onChooseProfile ? (
-        <ProfilePicker
-          disabled={saving || undefined}
-          testID={`${testID}-profiles`}
-          title={PROFILES_KID_TITLE}
-          chosenWord={WATCHING_STATE_WORD}
-          chosenLine={whoIsWatching(
-            (profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name,
-          )}
-          profiles={profiles}
-          activeProfileId={activeProfileId ?? profiles[0].id}
-          onChoose={onChooseProfile}
-        />
+      {choosingProfile && picking && profiles && onChooseProfile ? (
+        <ProfilePicker disabled={saving || undefined} testID={`${testID}-profiles`} title={PROFILES_KID_TITLE}
+          chosenWord={WATCHING_STATE_WORD} chosenLine={whoIsWatching((profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name)}
+          profiles={profiles} activeProfileId={activeProfileId ?? profiles[0].id} onChoose={onChooseProfile} />
       ) : null}
-
       {empty ? (
         <StatusNotice
           testID={`${testID}-empty`}
@@ -183,66 +153,37 @@ const KidHomeScreen = ({
               <StatusNotice testID={`${testID}-offline`} notice={BACKEND_UNREACHABLE} />
             </View>
           ) : null}
-          <ScrollView
-            contentContainerStyle={styles.grid}
-            horizontal={false}
-            showsVerticalScrollIndicator={false}>
-            {listed.map((entry) => {
-              const focused = focusedId === entry.title.id;
-              const poster = shelfPoster(entry);
-              const label = shelfLabel(entry.title);
-              return (
-                <TouchableOpacity
-                  disabled={saving || undefined}
-                  accessibilityState={saving ? { disabled: true } : undefined}
-                  key={entry.title.id}
-                  testID={`${testID}-poster-${entry.title.id}`}
-                  accessibilityRole="button"
-                  accessibilityLabel={`${spokenShelfLabel(label)}, checked`}
-                  activeOpacity={1}
-                  hasTVPreferredFocus={!saving && entry.title.id === preferredId}
-                  onFocus={() => setFocusedId(entry.title.id)}
-                  onBlur={() => setFocusedId(null)}
-                  onPress={() => onOpen(entry)}
+          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+            {featured && feature ? <View style={styles.hero}>
+              <View style={styles.heroCopy}>
+                <Text style={styles.eyebrow}>{feature.kind}</Text>
+                <Text style={styles.featureTitle}>{feature.name}</Text>
+                <Text style={styles.description}>{feature.description}</Text>
+                <View style={styles.actions}>
+                  <CalmButton primary testID={`${testID}-watch`} label={feature.action} accessibilityLabel={`${feature.action}: ${feature.name}`}
+                    disabled={saving} hasTVPreferredFocus={!returnFocusId && !saving} onPress={() => (onPlay ?? onOpen)(featured)} />
+                  <CalmButton testID={`${testID}-more-info`} label="More info" onPress={() => onOpen(featured)} disabled={saving} />
+                </View>
+              </View>
+              <View style={styles.heroArt}><TitleArtwork entry={featured} testID={`${testID}-hero-art`} /></View>
+            </View> : null}
+            <Text style={styles.section} testID={`${testID}-title`}>Your library</Text>
+            <View style={styles.grid}>
+              {listed.map((entry) => {
+                const focused = focusedId === entry.title.id;
+                const label = titlePresentation(entry.title);
+                return <TouchableOpacity disabled={saving || undefined} accessibilityState={saving ? { disabled: true } : undefined}
+                  key={entry.title.id} testID={`${testID}-poster-${entry.title.id}`} accessibilityRole="button"
+                  accessibilityLabel={`${label.name}, ${label.kind ?? ''}, checked`} activeOpacity={1}
+                  hasTVPreferredFocus={!saving && Boolean(returnFocusId) && entry.title.id === preferredId}
+                  onFocus={() => setFocusedId(entry.title.id)} onBlur={() => setFocusedId(null)} onPress={() => onOpen(entry)}
                   style={[styles.poster, focused ? styles.posterFocused : null]}>
-                  {poster ? (
-                    <Image
-                      source={{ uri: poster }}
-                      style={styles.posterImage}
-                      // A still, never cropped, so a burned-in label stays
-                      // whole, and drawn without a fade: nothing on this
-                      // screen moves by itself.
-                      resizeMode="contain"
-                      fadeDuration={0}
-                      accessible={false}
-                      testID={`${testID}-poster-image-${entry.title.id}`}
-                    />
-                  ) : (
-                    <View style={styles.posterImage} />
-                  )}
-                  <View style={styles.posterText}>
-                    <Text
-                      style={styles.posterTitle}
-                      numberOfLines={2}
-                      testID={`${testID}-poster-title-${entry.title.id}`}>
-                      {label.name}
-                    </Text>
-                    {label.qualifier ? (
-                      <Text
-                        style={styles.posterQualifier}
-                        numberOfLines={2}
-                        testID={`${testID}-poster-qualifier-${entry.title.id}`}>
-                        {label.qualifier}
-                      </Text>
-                    ) : null}
-                  </View>
-                  <ShieldBadge
-                    status={entry.status}
-                    testID={`${testID}-badge-${entry.title.id}`}
-                  />
-                </TouchableOpacity>
-              );
-            })}
+                  <TitleArtwork compact entry={entry} testID={`${testID}-poster-image-${entry.title.id}`} />
+                  <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={2} testID={`${testID}-poster-title-${entry.title.id}`}>{label.name}</Text>
+                  {label.kind ? <Text style={styles.posterQualifier} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{label.kind}</Text> : null}
+                </TouchableOpacity>;
+              })}
+            </View>
           </ScrollView>
         </>
       )}
@@ -251,92 +192,39 @@ const KidHomeScreen = ({
         {hiddenCount > 0 ? (
           <Text style={styles.footerText} testID={`${testID}-hidden-count`}>
             {hiddenCount} more {hiddenCount === 1 ? 'title is' : 'titles are'} unavailable.
-            A grown up can see why in Parent area.
+            Open Parental controls to see why.
           </Text>
         ) : null}
-        {onOpenParentArea ? (
-          <CalmButton
-            testID={`${testID}-parent-area`}
-            label="Parent area"
-            hasTVPreferredFocus={empty && !saving}
-            accessibilityLabel="Parent area, needs a PIN"
-            onPress={onOpenParentArea}
-          />
-        ) : null}
+
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: CALM_COLORS.BACKGROUND,
-    paddingHorizontal: scale(CALM_SPACE.SAFE_X),
-    paddingTop: scale(CALM_SPACE.SAFE_Y),
-    paddingBottom: scale(CALM_SPACE.SAFE_Y),
-  },
-  header: { marginBottom: scale(CALM_SPACE.BLOCK) },
-  title: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.SCREEN_TITLE),
-    fontWeight: '700',
-  },
-  subtitle: {
-    color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.BODY),
-    marginTop: scale(CALM_SPACE.TIGHT),
-  },
-  banner: { marginBottom: scale(CALM_SPACE.BLOCK) },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  poster: {
-    width: scale(320),
-    marginRight: scale(CALM_SPACE.BLOCK),
-    marginBottom: scale(CALM_SPACE.BLOCK),
-    padding: scale(CALM_SPACE.TIGHT),
-    borderRadius: scale(14),
-    borderWidth: scale(FOCUS_RING_WIDTH),
-    borderColor: CALM_COLORS.BORDER,
-    backgroundColor: CALM_COLORS.SURFACE,
-  },
-  posterFocused: {
-    borderColor: CALM_COLORS.FOCUS_RING,
-    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
-  },
-  posterImage: {
-    width: '100%',
-    // The signed stills are 16:9, so the block is too and nothing letterboxes.
-    aspectRatio: 16 / 9,
-    borderRadius: scale(8),
-    // The block a poster sits in before its picture is there, and the whole
-    // picture for a title with no still. uiFrames.ts counts it either way.
-    backgroundColor: CALM_COLORS.BORDER,
-  },
-  posterText: { marginVertical: scale(CALM_SPACE.TIGHT) },
-  posterTitle: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    fontWeight: '600',
-  },
-  // The second line. TEXT_DIM holds the text floor on the resting card and
-  // on the focused one; shelf.test.tsx measures both.
-  posterQualifier: {
-    color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.SMALL),
-  },
-  footer: {
-    paddingTop: scale(CALM_SPACE.ROW),
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  footerText: {
-    color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.SMALL),
-  },
+  focusedLabel: { textDecorationLine: 'underline' },
+  screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND, paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y) },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: scale(32) },
+  brand: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
+  mark: { width: scale(72), height: scale(72) },
+  wordmark: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT },
+  navigation: { flexDirection: 'row', gap: scale(20) },
+  scrollContent: { paddingBottom: scale(12) },
+  hero: { flexDirection: 'row', alignItems: 'center', gap: scale(64), marginBottom: scale(32) },
+  heroCopy: { width: scale(790) },
+  heroArt: { flex: 1 },
+  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, marginBottom: scale(12) },
+  featureTitle: { ...CALM_TEXT.feature, color: CALM_COLORS.TEXT, marginBottom: scale(20) },
+  description: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(32) },
+  actions: { flexDirection: 'row', gap: scale(20) },
+  section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, marginBottom: scale(20) },
+  banner: { marginBottom: scale(20) },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: scale(20) },
+  poster: { width: scale(560), padding: scale(6), borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: CALM_COLORS.BACKGROUND, backgroundColor: CALM_COLORS.BACKGROUND },
+  posterFocused: { borderColor: CALM_COLORS.FOCUS_RING, backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
+  posterTitle: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT, marginTop: scale(12) },
+  posterQualifier: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
+  footer: { paddingTop: scale(12) },
+  footerText: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
 });
-
 export default KidHomeScreen;

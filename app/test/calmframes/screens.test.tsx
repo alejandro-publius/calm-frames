@@ -134,6 +134,7 @@ describe('FlashMapStrip', () => {
     expect(describeStrip(intervals, 600_000)).toBe(
       '2 scheduled covers, 7 seconds in all, spread through about 10 minutes.',
     );
+    expect(describeStrip(intervals, 20_000)).toContain('spread through 20 seconds.');
     expect(describeStrip([], 600_000)).toBe(
       'No parts were flagged by these checks.',
     );
@@ -908,6 +909,7 @@ describe('family profiles on the screens', () => {
         onChooseProfile={onChooseProfile}
       />,
     );
+    fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
     // The answer is a sentence under the row, not a word on a chip.
     expect(screen.getByTestId('kid-home-profiles-chosen').props.children).toBe(
       'Robin is watching.',
@@ -962,6 +964,7 @@ describe('family profiles on the screens', () => {
     );
 
     const view = render(shelf('profile-1'));
+    fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
     const before = chipText();
     view.rerender(shelf('profile-2'));
 
@@ -984,6 +987,7 @@ describe('family profiles on the screens', () => {
         onChooseProfile={jest.fn()}
       />,
     );
+    fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
     // A radio group, labelled with the question it is asking, and the chosen
     // chip carries the state a radio carries rather than only a fill colour.
     expect(

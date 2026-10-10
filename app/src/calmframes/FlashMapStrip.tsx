@@ -12,7 +12,7 @@
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { CALM_COLORS, CALM_SPACE, CALM_TYPE, scale } from './calmStyles';
+import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { CoverInterval, totalCoveredMs } from './coverSchedule';
 
 export interface FlashMapStripProps {
@@ -20,6 +20,7 @@ export interface FlashMapStripProps {
   durationMs: number;
   /** Strip width in 1080p units. */
   width?: number;
+  showCaption?: boolean;
   testID?: string;
 }
 
@@ -61,15 +62,17 @@ export function describeStrip(
   const seconds = Math.max(1, Math.round(totalCoveredMs(intervals) / 1000));
   const parts = intervals.length;
   const minutes = Math.max(1, Math.round(durationMs / 60_000));
+  const duration = durationMs < 60_000 ? `${Math.round(durationMs / 1000)} seconds` : `about ${minutes} minute${minutes === 1 ? '' : 's'}`;
   return `${parts} scheduled cover${parts === 1 ? '' : 's'}, ${seconds} second${
     seconds === 1 ? '' : 's'
-  } in all, spread through about ${minutes} minute${minutes === 1 ? '' : 's'}.`;
+  } in all, spread through ${duration}.`;
 }
 
 const FlashMapStrip = ({
   intervals,
   durationMs,
   width = 1200,
+  showCaption = true,
   testID = 'flash-map-strip',
 }: FlashMapStripProps) => {
   const marks = stripMarks(intervals, durationMs);
@@ -95,9 +98,9 @@ const FlashMapStrip = ({
           />
         ))}
       </View>
-      <Text style={styles.caption} testID={`${testID}-caption`}>
+      {showCaption ? <Text style={styles.caption} testID={`${testID}-caption`}>
         {description}
-      </Text>
+      </Text> : null}
     </View>
   );
 };
@@ -119,8 +122,7 @@ const styles = StyleSheet.create({
   caption: {
     marginTop: scale(CALM_SPACE.TIGHT),
     color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.SMALL),
-  },
+    ...CALM_TEXT.supporting, },
 });
 
 export default FlashMapStrip;

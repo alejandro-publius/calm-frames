@@ -1,0 +1,26 @@
+{
+  "archive": "~/Documents/calm-frames-tv-design.zip",
+  "sha256": "19b5f8947c13f829ccf19c3b832816ea6ed9510f918b17964abb95c8ccbe29c4",
+  "read": [
+    "IMPLEMENTATION_BRIEF.md",
+    "COPY_GUIDE.md",
+    "END_TO_END_CHECKLIST.md",
+    "START_HERE.md"
+  ],
+  "assets": {
+    "app/assets/fonts/InterMedium.ttf": "40b97d81716a919262e708e915f9319dca1014d712ea52c9eb6661a1367c6437",
+    "app/assets/fonts/InterSemiBold.ttf": "301021c260714f3dc70f752f7e819d5390aaea49da31bfb2ce5dbf1267cc9a5b",
+    "app/assets/fonts/LICENSE-Inter": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a",
+    "app/assets/fonts/InterRegular.ttf": "042a0371486c9ac72f17d718b3c1ca82da81457894860e0f091e33bbeef85817",
+    "app/assets/image/tv/gradient.png": "e2e4cc24711bd3c0e4d51977850759aaa5eccb08e10b609f457f5247a2ef9db7",
+    "app/assets/image/tv/harbor.png": "2e452ac25d7334ea0d712de1775e13777dd45accf5d7008ff1bbf76e14c39fe6"
+  },
+  "artwork": "Original SVG presentation illustrations supplied in the approved entrant design archive; no external image download. Never used as signed playback holds.",
+  "font": "Inter, SIL Open Font License; static 400/500/600 faces instantiated from supplied InterVariable.woff2 at optical size 24. Font family names match filenames in assets/fonts.",
+  "native_evidence": [
+    ".logs/redesign-first-library.png",
+    ".logs/redesign-second-library.png",
+    ".logs/redesign-third-library.png"
+  ],
+  "status": "Implementation and final native validation in progress"
+}

@@ -20,13 +20,20 @@
  * - it carries the approved sentence about what this is and is not, word for
  *   word, from copy.ts.
  *
+ * The PIN steps put the words on the left and the keypad on the right, the
+ * way a television asks for a code, so the whole step fits on one screen with
+ * nothing to scroll to. The other steps are the same page shape as parental
+ * controls: a heading, a helper line, then rows and chips with the same quiet
+ * resting look, the same chosen fill and the same focus ring, so a parent
+ * meets each control here the way they will meet it again later.
+ *
  * No motion anywhere, including here: the steps do not slide and nothing
  * counts down on screen.
  *
  * Each list of choices is a radio group and says so, labelled with the
  * question it is asking, and each choice carries `checked` rather than
  * `selected` alone, which is what a radio carries. Without the role a screen
- * reader read three questions as thirteen unrelated buttons. The two rooms
+ * reader read three questions as thirteen unrelated buttons. The two room
  * rows also say in words which chip is the chosen one, because a fill colour
  * is not a state everybody on the sofa can read.
  */
@@ -43,11 +50,12 @@ import CalmButton from './CalmButton';
 import {
   CALM_COLORS,
   CALM_SPACE,
-  CALM_TYPE,
+  CALM_TEXT,
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
 import {
+  CHOSEN_WORD,
   EXPLAINER_LINES,
   EXPLAINER_TARGET_SECONDS,
   EXPLAINER_TITLE,
@@ -128,21 +136,35 @@ const STEP_NUMBER: Record<FirstRunStep, number> = {
 };
 export const FIRST_RUN_STEPS = 4;
 
+/** Under the heading on the strictness step. The same rows are in parental controls. */
+const PRESET_STEP_NOTE = 'You can change this later in parental controls.';
+
+/** Under the review of the household, before the library opens. */
+const REVIEW_NOTE =
+  'If this room needs a stricter check than a title has, that title waits until it is checked again.';
+
+/**
+ * The notice beside the keypad.
+ *
+ * The heading already says what to do, so the notice says why and what to
+ * watch out for rather than saying the heading again.
+ */
 const PIN_NOTICES: Record<'pin' | 'confirm' | 'mismatch', Notice> = {
   pin: {
-    title: 'Choose a four digit PIN',
+    title: 'Your PIN keeps parental controls locked',
     detail:
-      'This keeps the settings where a child cannot change them. It stays on this device and it is never sent anywhere.',
+      'Choose four digits you will remember. The PIN stays on this television and is never sent anywhere.',
     tone: 'calm',
   },
   confirm: {
-    title: 'Type it again',
-    detail: 'There is no way to recover a PIN on this device, so it is worth checking.',
+    title: 'Make sure it matches',
+    detail:
+      'There is no way to recover a PIN on this television, so it is worth checking.',
     tone: 'calm',
   },
   mismatch: {
     title: 'Those two did not match',
-    detail: 'Start again and choose a four digit PIN.',
+    detail: 'Start again and enter the same four digits both times.',
     tone: 'blocked',
   },
 };
@@ -210,7 +232,7 @@ const FirstRunScreen = ({
           A calmer way to watch
         </Text>
       </View>
-      <Text style={styles.title} testID={`${testID}-title`}>
+      <Text style={styles.title} testID={`${testID}-title`} accessibilityRole="header">
         {STEP_TITLES[step]}
       </Text>
     </View>
@@ -224,15 +246,17 @@ const FirstRunScreen = ({
     return (
       <View testID={testID} style={styles.screen}>
         {header}
-        <View style={styles.block}>
-          <StatusNotice testID={`${testID}-notice`} notice={notice} />
+        <View style={styles.columns}>
+          <View style={styles.aside}>
+            <StatusNotice testID={`${testID}-notice`} notice={notice} />
+          </View>
+          <PinKeypad
+            entered={entered.length}
+            onDigit={press}
+            onDelete={() => setEntered((value) => value.slice(0, -1))}
+            idPrefix={testID}
+          />
         </View>
-        <PinKeypad
-          entered={entered.length}
-          onDigit={press}
-          onDelete={() => setEntered((value) => value.slice(0, -1))}
-          idPrefix={testID}
-        />
       </View>
     );
   }
@@ -244,12 +268,14 @@ const FirstRunScreen = ({
         style={styles.screen}
         contentContainerStyle={styles.content}>
         {header}
+        <Text style={styles.helper}>{PRESET_STEP_NOTE}</Text>
         <View
           accessibilityRole="radiogroup"
           accessibilityLabel={STEP_TITLES.preset}
           aria-label={STEP_TITLES.preset}>
           {PRESET_NAMES.map((name: PresetName, index) => {
             const chosen = settings.preset === name;
+            const key = `preset-${name}`;
             return (
               <TouchableOpacity
                 key={name}
@@ -261,19 +287,23 @@ const FirstRunScreen = ({
                 accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
                 activeOpacity={1}
                 hasTVPreferredFocus={index === 0}
-                onFocus={() => setFocusedRow(`preset-${name}`)}
+                onFocus={() => setFocusedRow(key)}
                 onBlur={() => setFocusedRow(null)}
                 onPress={() => setSettings({ ...settings, preset: name })}
                 style={[
                   styles.row,
-                  chosen ? styles.rowSelected : null,
-                  focusedRow === `preset-${name}` ? styles.rowFocused : null,
+                  chosen ? styles.chosen : null,
+                  focusedRow === key ? styles.focused : null,
                 ]}>
-                <Text style={styles.rowTitle}>
-                  {PRESETS[name].title}
-                  {chosen ? ' (chosen)' : ''}
-                </Text>
-                <Text style={styles.rowDetail}>{PRESETS[name].description}</Text>
+                <View style={styles.rowText}>
+                  <Text style={[styles.rowTitle, focusedRow === key ? styles.focusedLabel : null]}>{PRESETS[name].title}</Text>
+                  <Text style={styles.rowDetail}>{PRESETS[name].description}</Text>
+                </View>
+                <View style={styles.rowState}>
+                  {chosen ? (
+                    <Text style={styles.rowStateWord}>{CHOSEN_WORD}</Text>
+                  ) : null}
+                </View>
               </TouchableOpacity>
             );
           })}
@@ -296,7 +326,7 @@ const FirstRunScreen = ({
         style={styles.screen}
         contentContainerStyle={styles.content}>
         {header}
-        <Text style={styles.note}>{ROOM_ONLY_ADDS}</Text>
+        <Text style={styles.helper}>{ROOM_ONLY_ADDS}</Text>
 
         <Text style={styles.section} accessibilityRole="header">
           {TV_SIZE_TITLE}
@@ -308,25 +338,26 @@ const FirstRunScreen = ({
           aria-label={TV_SIZE_TITLE}>
           {TV_DIAGONAL_CHOICES_IN.map((inches, index) => {
             const chosen = settings.tvDiagonalIn === inches;
+            const key = `tv-${inches}`;
             return (
               <TouchableOpacity
-                key={`tv-${inches}`}
+                key={key}
                 testID={`${testID}-tv-${inches}`}
                 accessibilityRole="radio"
                 accessibilityState={{ checked: chosen, selected: chosen }}
                 accessibilityLabel={`${inches} inch television${chosen ? ', chosen' : ''}`}
                 activeOpacity={1}
                 hasTVPreferredFocus={index === 0}
-                onFocus={() => setFocusedRow(`tv-${inches}`)}
+                onFocus={() => setFocusedRow(key)}
                 onBlur={() => setFocusedRow(null)}
                 onPress={() => setSettings({ ...settings, tvDiagonalIn: inches })}
                 style={[
-                  styles.choice,
-                  chosen ? styles.rowSelected : null,
-                  focusedRow === `tv-${inches}` ? styles.rowFocused : null,
+                  styles.chip,
+                  chosen ? styles.chosen : null,
+                  focusedRow === key ? styles.focused : null,
                 ]}>
                 <Text
-                  style={styles.choiceLabel}
+                  style={[styles.chipLabel, focusedRow === key ? styles.focusedLabel : null]}
                   testID={`${testID}-tv-${inches}-label`}>
                   {inches} inch
                 </Text>
@@ -349,24 +380,25 @@ const FirstRunScreen = ({
           {SEAT_DISTANCE_CHOICES_IN.map((inches) => {
             const chosen = settings.seatDistanceIn === inches;
             const feet = Math.round(inches / 12);
+            const key = `seat-${inches}`;
             return (
               <TouchableOpacity
-                key={`seat-${inches}`}
+                key={key}
                 testID={`${testID}-seat-${inches}`}
                 accessibilityRole="radio"
                 accessibilityState={{ checked: chosen, selected: chosen }}
                 accessibilityLabel={`${feet} feet away${chosen ? ', chosen' : ''}`}
                 activeOpacity={1}
-                onFocus={() => setFocusedRow(`seat-${inches}`)}
+                onFocus={() => setFocusedRow(key)}
                 onBlur={() => setFocusedRow(null)}
                 onPress={() => setSettings({ ...settings, seatDistanceIn: inches })}
                 style={[
-                  styles.choice,
-                  chosen ? styles.rowSelected : null,
-                  focusedRow === `seat-${inches}` ? styles.rowFocused : null,
+                  styles.chip,
+                  chosen ? styles.chosen : null,
+                  focusedRow === key ? styles.focused : null,
                 ]}>
                 <Text
-                  style={styles.choiceLabel}
+                  style={[styles.chipLabel, focusedRow === key ? styles.focusedLabel : null]}
                   testID={`${testID}-seat-${inches}-label`}>
                   {feet} ft
                 </Text>
@@ -396,18 +428,16 @@ const FirstRunScreen = ({
       contentContainerStyle={styles.content}>
       {header}
       <View style={styles.review} testID={`${testID}-review`}>
-        <Text style={styles.section} accessibilityRole="header">
+        <Text style={styles.reviewTitle} accessibilityRole="header">
           Your household
         </Text>
-        <Text style={styles.explainerLine} testID={`${testID}-review-preset`}>
+        <Text style={styles.reviewLine} testID={`${testID}-review-preset`}>
           {PRESETS[settings.preset].title}
         </Text>
-        <Text style={styles.explainerLine} testID={`${testID}-review-room`}>
+        <Text style={styles.reviewLine} testID={`${testID}-review-room`}>
           {describeRoom(settings)}
         </Text>
-        <Text style={styles.note}>
-          A title waits for a new check if this room needs a stricter map.
-        </Text>
+        <Text style={styles.reviewNote}>{REVIEW_NOTE}</Text>
       </View>
       <View style={styles.explainer} testID={`${testID}-explainer`}>
         {EXPLAINER_LINES.map((line, index) => (
@@ -420,8 +450,8 @@ const FirstRunScreen = ({
         ))}
       </View>
       <Text style={styles.note} testID={`${testID}-reading-time`}>
-        About {EXPLAINER_TARGET_SECONDS} seconds to read. It is here in the parent
-        area whenever you want it again.
+        About {EXPLAINER_TARGET_SECONDS} seconds to read. You can find it again
+        under parental controls.
       </Text>
       <View style={styles.buttons}>
         <CalmButton
@@ -435,13 +465,15 @@ const FirstRunScreen = ({
   );
 };
 
+/**
+ * The column at the right edge of a row that holds the word Chosen, in 1080p
+ * units. Every row reserves it, so the word moving from one row to another
+ * re-wraps nothing and moves nothing.
+ */
+const STATE_COLUMN = 200;
+
 const styles = StyleSheet.create({
-  review: {
-    backgroundColor: CALM_COLORS.SURFACE,
-    borderRadius: scale(12),
-    padding: scale(CALM_SPACE.BLOCK),
-    marginBottom: scale(CALM_SPACE.BLOCK),
-  },
+  focusedLabel: { textDecorationLine: 'underline' },
   screen: {
     flex: 1,
     backgroundColor: CALM_COLORS.BACKGROUND,
@@ -450,90 +482,145 @@ const styles = StyleSheet.create({
   },
   content: { paddingBottom: scale(CALM_SPACE.SAFE_Y) },
   header: { marginBottom: scale(CALM_SPACE.BLOCK) },
-  brandRow: { flexDirection: 'row', justifyContent: 'space-between' },
-  step: {
-    color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.SMALL),
+  brandRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: scale(CALM_SPACE.TIGHT),
+  },
+  step: {
+    ...CALM_TEXT.supporting,
+    color: CALM_COLORS.TEXT_DIM,
   },
   title: {
+    ...CALM_TEXT.screen,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.SCREEN_TITLE),
-    fontWeight: '700',
+  },
+  helper: {
+    ...CALM_TEXT.supporting,
+    color: CALM_COLORS.TEXT_DIM,
+    marginBottom: scale(CALM_SPACE.ROW),
+    maxWidth: scale(1500),
+  },
+  /** The PIN steps: words on the left, the keypad on the right. */
+  columns: { flexDirection: 'row', alignItems: 'flex-start' },
+  aside: {
+    flex: 1,
+    maxWidth: scale(960),
+    marginRight: scale(CALM_SPACE.EDGE),
   },
   section: {
+    ...CALM_TEXT.section,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.SECTION),
-    fontWeight: '600',
     marginTop: scale(CALM_SPACE.BLOCK),
-    marginBottom: scale(CALM_SPACE.TIGHT),
+    marginBottom: scale(CALM_SPACE.ROW),
   },
-  block: { marginBottom: scale(CALM_SPACE.BLOCK) },
-  explainer: {
+  /** A settings row. Quiet at rest: the ring is there, in the card's own colour. */
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: scale(CALM_SPACE.ROW),
+    paddingHorizontal: scale(CALM_SPACE.BLOCK),
+    marginBottom: scale(CALM_SPACE.TIGHT),
+    borderRadius: scale(12),
+    borderWidth: scale(FOCUS_RING_WIDTH),
+    borderColor: CALM_COLORS.SURFACE,
+    backgroundColor: CALM_COLORS.SURFACE,
+  },
+  /** Chosen is a fill and a word. Focus is the ring. They stack. */
+  chosen: {
+    borderColor: CALM_COLORS.SURFACE_FOCUSED,
+    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+  },
+  focused: {
+    borderColor: CALM_COLORS.FOCUS_RING,
+    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+  },
+  rowText: { flex: 1 },
+  rowTitle: {
+    ...CALM_TEXT.control,
+    color: CALM_COLORS.TEXT,
+  },
+  rowDetail: {
+    ...CALM_TEXT.supporting,
+    color: CALM_COLORS.TEXT_DIM,
+  },
+  rowState: {
+    width: scale(STATE_COLUMN),
+    marginLeft: scale(CALM_SPACE.ROW),
+    alignItems: 'flex-end',
+  },
+  rowStateWord: {
+    ...CALM_TEXT.supporting,
+    color: CALM_COLORS.TEXT,
+  },
+  choices: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    marginRight: scale(CALM_SPACE.ROW),
+    marginBottom: scale(CALM_SPACE.ROW),
+    paddingVertical: scale(CALM_SPACE.TIGHT),
+    paddingHorizontal: scale(CALM_SPACE.BLOCK),
+    borderRadius: scale(12),
+    borderWidth: scale(FOCUS_RING_WIDTH),
+    borderColor: CALM_COLORS.SURFACE,
+    backgroundColor: CALM_COLORS.SURFACE,
+  },
+  chipLabel: {
+    ...CALM_TEXT.control,
+    color: CALM_COLORS.TEXT,
+  },
+  /**
+   * Which chip in the row above is the chosen one, in words.
+   *
+   * The same line parental controls draw under the same two rows, from the
+   * same copy, because a parent meets these chips twice and they should read
+   * the same way both times.
+   */
+  chosenLine: {
+    ...CALM_TEXT.body,
+    color: CALM_COLORS.TEXT,
+  },
+  review: {
     alignSelf: 'stretch',
     maxWidth: scale(1500),
     padding: scale(CALM_SPACE.BLOCK),
     borderRadius: scale(16),
-    borderWidth: scale(FOCUS_RING_WIDTH),
-    borderColor: CALM_COLORS.BORDER,
     backgroundColor: CALM_COLORS.SURFACE,
+  },
+  reviewTitle: {
+    ...CALM_TEXT.section,
+    color: CALM_COLORS.TEXT,
+    marginBottom: scale(CALM_SPACE.TIGHT),
+  },
+  reviewLine: {
+    ...CALM_TEXT.body,
+    color: CALM_COLORS.TEXT,
+  },
+  reviewNote: {
+    ...CALM_TEXT.supporting,
+    color: CALM_COLORS.TEXT_DIM,
+    marginTop: scale(CALM_SPACE.TIGHT),
+  },
+  explainer: {
+    marginTop: scale(CALM_SPACE.BLOCK),
+    maxWidth: scale(1500),
   },
   explainerLine: {
+    ...CALM_TEXT.body,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    marginBottom: scale(CALM_SPACE.ROW),
+    marginBottom: scale(CALM_SPACE.TIGHT),
   },
   note: {
+    ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.SMALL),
     marginTop: scale(CALM_SPACE.ROW),
-  },
-  row: {
-    padding: scale(CALM_SPACE.ROW),
-    marginBottom: scale(CALM_SPACE.TIGHT),
-    borderRadius: scale(12),
-    borderWidth: scale(FOCUS_RING_WIDTH),
-    borderColor: CALM_COLORS.BORDER,
-    backgroundColor: CALM_COLORS.SURFACE,
-  },
-  rowSelected: { backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
-  rowFocused: { borderColor: CALM_COLORS.FOCUS_RING },
-  rowTitle: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    fontWeight: '600',
-  },
-  rowDetail: { color: CALM_COLORS.TEXT_DIM, fontSize: scale(CALM_TYPE.SMALL) },
-  choices: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: scale(CALM_SPACE.TIGHT),
-  },
-  choice: {
-    marginRight: scale(CALM_SPACE.TIGHT),
-    marginBottom: scale(CALM_SPACE.TIGHT),
-    paddingVertical: scale(CALM_SPACE.TIGHT),
-    paddingHorizontal: scale(CALM_SPACE.ROW),
-    borderRadius: scale(10),
-    borderWidth: scale(FOCUS_RING_WIDTH),
-    borderColor: CALM_COLORS.BORDER,
-    backgroundColor: CALM_COLORS.SURFACE,
-  },
-  choiceLabel: { color: CALM_COLORS.TEXT, fontSize: scale(CALM_TYPE.SMALL) },
-  /**
-   * Which chip in the row above is the chosen one, in words.
-   *
-   * The same line the parent area draws under the same two rows, from the same
-   * copy, because a parent meets these chips twice and they should read the
-   * same way both times.
-   */
-  chosenLine: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    marginTop: scale(CALM_SPACE.TIGHT),
+    maxWidth: scale(1500),
   },
   buttons: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     marginTop: scale(CALM_SPACE.BLOCK),
   },
 });

@@ -2,15 +2,16 @@
  * Who is watching.
  *
  * One row of large targets, used in two places: on the shelf so a kid can say
- * it is them, and in the parent area so a grown up can pick whose settings and
- * whose record they are looking at.
+ * it is them, and in parental controls so a grown up can pick whose settings
+ * and whose record they are looking at.
  *
  * The rules it follows are the ones every control in this app follows. Chosen
  * is a fill and a word, focus is the ring, and the two stack rather than
  * fighting: a chosen profile that also has focus shows the chosen fill inside
  * the focus ring, so nobody has to tell two shades of the same colour apart
- * from the sofa. Nothing moves when focus moves, because the border is the
- * same width in both states.
+ * from the sofa. The chips are quiet at rest, a card with no visible outline,
+ * and nothing moves when focus moves, because the ring's width is reserved
+ * whether or not a chip has focus.
  *
  * Nothing moves when the choice moves either, and that took a change. The word
  * used to sit on the chosen chip, in brackets, which made that chip wider than
@@ -26,7 +27,7 @@
  * rather than five unrelated buttons.
  *
  * The name is the only thing on a chip. What a profile is set to belongs in
- * the parent area, not on a shelf a child is reading.
+ * parental controls, not on a shelf a child is reading.
  */
 
 import React from 'react';
@@ -34,7 +35,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
   CALM_COLORS,
   CALM_SPACE,
-  CALM_TYPE,
+  CALM_TEXT,
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
@@ -57,9 +58,9 @@ export interface ProfilePickerProps {
   /**
    * The state word a screen reader hears on the chosen chip.
    *
-   * The shelf says watching, because that is what the row is asking. The
-   * parent area says showing, because nobody is watching a settings page and
-   * what the chip does there is decide what the screen below it shows.
+   * The shelf says watching, because that is what the row is asking. Parental
+   * controls say showing, because nobody is watching a settings page and what
+   * the chip does there is decide what the page below it shows.
    */
   chosenWord?: string;
   testID?: string;
@@ -113,7 +114,7 @@ const ProfilePicker = ({
                 chosen ? styles.chipChosen : null,
                 focused ? styles.chipFocused : null,
               ]}>
-              <Text style={styles.name} testID={`${testID}-${profile.id}-name`}>
+              <Text style={[styles.name, focused ? styles.focusedLabel : null]} testID={`${testID}-${profile.id}-name`}>
                 {profile.name}
               </Text>
             </TouchableOpacity>
@@ -128,37 +129,42 @@ const ProfilePicker = ({
 };
 
 const styles = StyleSheet.create({
+  focusedLabel: { textDecorationLine: 'underline' },
   block: { marginBottom: scale(CALM_SPACE.BLOCK) },
   title: {
+    ...CALM_TEXT.section,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.SECTION),
-    fontWeight: '600',
-    marginBottom: scale(CALM_SPACE.TIGHT),
+    marginBottom: scale(CALM_SPACE.ROW),
   },
   row: { flexDirection: 'row', flexWrap: 'wrap' },
+  /** Quiet at rest: the ring is there, in the card's own colour. */
   chip: {
     marginRight: scale(CALM_SPACE.ROW),
-    marginBottom: scale(CALM_SPACE.TIGHT),
+    marginBottom: scale(CALM_SPACE.ROW),
     paddingVertical: scale(CALM_SPACE.TIGHT),
-    paddingHorizontal: scale(CALM_SPACE.ROW),
+    paddingHorizontal: scale(CALM_SPACE.BLOCK),
     borderRadius: scale(12),
     borderWidth: scale(FOCUS_RING_WIDTH),
-    borderColor: CALM_COLORS.BORDER,
+    borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,
   },
   /** Chosen is a fill and a word. Focus is the ring. They stack. */
-  chipChosen: { backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
-  chipFocused: { borderColor: CALM_COLORS.FOCUS_RING },
+  chipChosen: {
+    borderColor: CALM_COLORS.SURFACE_FOCUSED,
+    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+  },
+  chipFocused: {
+    borderColor: CALM_COLORS.FOCUS_RING,
+    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+  },
   name: {
+    ...CALM_TEXT.control,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    fontWeight: '600',
   },
   /** The word half of "a fill and a word", where it cannot move a control. */
   chosenLine: {
+    ...CALM_TEXT.body,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    marginTop: scale(CALM_SPACE.TIGHT),
   },
 });
 

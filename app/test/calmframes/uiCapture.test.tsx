@@ -69,6 +69,8 @@ import {
   KID_HOME_FRAME,
   KID_HOME_OFFLINE_FRAME,
   KID_HOME_PROFILES_FRAME,
+  KID_HOME_PROFILES_FOCUSED_FRAME,
+  KID_HOME_PICKER_FRAME,
   PARENT_LOCKED_FRAME,
   PARENT_OPEN_FRAME,
   PARENT_PROFILE_FRAME,
@@ -302,8 +304,11 @@ describe('what the app paints', () => {
     render(familyShelf());
     fireEvent(screen.getByTestId('kid-home-poster-ok'), 'focus');
     expect(
-      frameFromTree('kid-home-profiles', screen.toJSON() as unknown as RenderedNode),
-    ).toEqual(KID_HOME_PROFILES_FRAME);
+      frameFromTree('kid-home-profiles-focused', screen.toJSON() as unknown as RenderedNode),
+    ).toEqual(KID_HOME_PROFILES_FOCUSED_FRAME);
+    fireEvent(screen.getByTestId('kid-home-poster-ok'), 'blur');
+    fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
+    expect(frameFromTree('kid-home-picker', screen.toJSON() as unknown as RenderedNode)).toEqual(KID_HOME_PICKER_FRAME);
   });
 
   it('matches what the parent area reports with a family in it', () => {
@@ -339,6 +344,8 @@ describe('what the app paints', () => {
     const named = new Set(ALL_UI_FRAMES.map((frame) => frame.screen));
     for (const frame of [
       KID_HOME_PROFILES_FRAME,
+  KID_HOME_PROFILES_FOCUSED_FRAME,
+  KID_HOME_PICKER_FRAME,
       PARENT_PROFILE_FRAME,
       // The player while the map is still being checked.
       playerFrame(true, 'checking'),
@@ -583,12 +590,12 @@ describe('the capture path', () => {
         ],
       },
       {
-        // One stop, not two. A shelf with a picker on it paints the same
-        // colours whichever kid is chosen, so a second stop would be dropped
-        // as a repeat and would only make the timeline look longer.
+        // The compact header, focused poster and expanded profile picker.
         element: familyShelf(),
         stops: [
-          { name: 'kid-home-profiles', reason: 'the shelf asks who is watching' },
+          { name: 'kid-home-profiles', reason: 'active profile in the header' },
+          { name: 'kid-home-profiles-focused', reason: 'a focused poster', act: () => fireEvent(screen.getByTestId('kid-home-poster-ok'), 'focus') },
+          { name: 'kid-home-picker', reason: 'choose a profile', act: () => { fireEvent(screen.getByTestId('kid-home-poster-ok'), 'blur'); press('kid-home-choose-profile'); } },
         ],
       },
       {

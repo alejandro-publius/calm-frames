@@ -79,13 +79,11 @@ Three things worth knowing:
 
 ## The wordmark font
 
-The tile asks for `Amazon Ember` first, which is what Vega draws React Native
-text in and what `src/components/rotator/AutoRotator.tsx` names outright. Ember
-is Amazon's, it is not on this machine, and it is not ours to redistribute, so
-the PNG checked in here is rendered in the first fallback that is installed.
-Anything with Ember available, including the device, gets the real font from the
-SVG. If the tile is ever rebuilt on a machine with Ember, the PNG will change
-and that is the intended outcome.
+The approved October 10 redesign uses bundled InterSemiBold for the wordmark
+and InterRegular for the brand line. The Qt renderer registers the same static
+licensed faces as the app. The SIL license is in `app/assets/fonts/` and
+`docs/design/assets/`. Deep teal is now #102F3A across the tile and app.
+No Amazon font files are redistributed.
 
 ## October 9 review
 

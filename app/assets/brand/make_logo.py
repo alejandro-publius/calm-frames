@@ -1,12 +1,8 @@
 # Calm Frames mark: a peaceful monk and one open halo inside a rounded frame.
-TEAL="#1F4D5C"; CREAM="#F3E8D3"; SAFF="#E6A957"; SAFFD="#B87A2C"; INK="#17323C"
+TEAL="#102F3A"; CREAM="#F3E8D3"; SAFF="#E6A957"; SAFFD="#B87A2C"; INK="#17323C"
 
-# The app's UI font. Vega draws React Native text in Amazon Ember, and
-# src/components/rotator/AutoRotator.tsx names it outright, so the wordmark asks
-# for it first. Ember is Amazon's and is not on this machine, so the PNG checked
-# in beside this script is rendered in the first fallback that is. Anything with
-# Ember installed, including the device, gets the real thing from the SVG.
-UI_FONT = "Amazon Ember, Amazon Ember Display, Helvetica Neue, Arial, sans-serif"
+# Licensed Inter faces are bundled by the app and registered by render_qt.cpp.
+UI_FONT = "InterSemiBold"
 
 def halo(cx, cy, radius, stroke=18):
     # An open lower arc leaves breathing room around the robe. One line keeps
@@ -55,9 +51,9 @@ def tile():
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">'
             f'<rect width="1280" height="720" fill="{TEAL}"/>'
             f'<g>{inner}</g>'
-            f'<text x="590" y="310" font-family="{UI_FONT}" font-weight="bold" font-size="100" fill="{CREAM}">Calm</text>'
-            f'<text x="590" y="420" font-family="{UI_FONT}" font-weight="bold" font-size="100" fill="{CREAM}">Frames</text>'
-            f'<text x="594" y="490" font-family="{UI_FONT}" font-size="32" fill="{CREAM}">A calmer way to watch</text>'
+            f'<text x="590" y="310" font-family="{UI_FONT}" font-weight="normal" font-size="100" fill="{CREAM}">Calm</text>'
+            f'<text x="590" y="420" font-family="{UI_FONT}" font-weight="normal" font-size="100" fill="{CREAM}">Frames</text>'
+            f'<text x="594" y="490" font-family="InterRegular" font-size="32" fill="{CREAM}">A calmer way to watch</text>'
             f'</svg>')
 T = tile()
 

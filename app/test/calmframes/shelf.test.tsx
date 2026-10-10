@@ -59,15 +59,15 @@ describe('the pictures on the shelf', () => {
     );
   });
 
-  it("puts Harbor's own first signed still on its poster, uncropped and without a fade", () => {
+  it("keeps signed playback stills separate from approved presentation artwork", () => {
     const still = verifiedFirstStill();
     expect(still).toMatch(/^data:image\/jpeg;base64,/);
     expect(shelfPoster(harbor)).toBe(still);
 
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const image = screen.getByTestId(`kid-home-poster-image-${BENIGN_STORY_ID}`);
-    expect(image.props.source).toEqual({ uri: still });
-    expect(image.props.resizeMode).toBe('contain');
+    expect(image.props.source).toEqual(require('../../assets/image/tv/harbor.png'));
+    expect(image.props.resizeMode).toBe('cover');
     expect(image.props.fadeDuration).toBe(0);
   });
 
@@ -78,13 +78,13 @@ describe('the pictures on the shelf', () => {
    *     Expected: undefined
    *     Received: "data:image/jpeg;base64,/9j//gAPTGF2YzYz..."
    */
-  it('lends no title a picture it does not carry', () => {
+  it('uses dedicated illustration assets for the known prepared story and test clip', () => {
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     for (const entry of others) {
       expect(shelfPoster(entry)).toBeUndefined();
       expect(
         screen.queryByTestId(`kid-home-poster-image-${entry.title.id}`),
-      ).toBeNull();
+      ).toBeTruthy();
     }
   });
 
@@ -152,24 +152,21 @@ describe('the words on the shelf', () => {
   it('names each bundled title, and says what it is on the line under the name', () => {
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     expect(posterWords(BENIGN_STORY_ID)).toEqual([
-      'Harbor story',
-      'Benign demo, practice holds',
-      'Checked',
+      'Harbor: Scene hold demo',
+      'Scheduled scene holds',
     ]);
     expect(posterWords(preparedId)).toEqual([
-      'Harbor story',
-      'Prepared locally',
-      'Checked',
+      'Harbor',
+      'Original story',
     ]);
     expect(posterWords(OFFLINE_TITLE_ID)).toEqual([
       'Calm gradient',
-      'Bundled',
-      'Checked',
+      'Playback test',
     ]);
     expect(
       screen.getByTestId(`kid-home-poster-${BENIGN_STORY_ID}`).props
         .accessibilityLabel,
-    ).toBe('Harbor story, Benign demo, practice holds, checked');
+    ).toBe('Harbor: Scene hold demo, Scheduled scene holds, checked');
   });
 
   /**
@@ -183,8 +180,9 @@ describe('the words on the shelf', () => {
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const [benignName, benignLine] = posterWords(BENIGN_STORY_ID);
     const [preparedName, preparedLine] = posterWords(preparedId);
-    expect(benignName).toBe(preparedName);
-    expect(benignLine).toMatch(/practice/i);
+    expect(benignName).toBe('Harbor: Scene hold demo');
+    expect(preparedName).toBe('Harbor');
+    expect(benignLine).toMatch(/scheduled scene holds/i);
     expect(preparedLine).not.toMatch(/practice|demo/i);
   });
 
@@ -236,24 +234,22 @@ describe('the words on the shelf', () => {
    */
   it('draws the second line at the ten foot floors, resting and focused', () => {
     const floors = { textSizeUnits: 32, textContrast: 4.5 };
-    const secondLines = ['Benign demo, practice holds', 'Prepared locally', 'Bundled'];
+    const secondLines = ['Scheduled scene holds', 'Original story', 'Playback test'];
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const measured = () =>
-      measureText(screen.toJSON() as unknown as RenderedNode, {
-        background: CALM_COLORS.BACKGROUND,
-      }).filter((line) => secondLines.includes(line.text));
+      measureText(screen.toJSON() as unknown as RenderedNode, { background: CALM_COLORS.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);
 
     const resting = measured();
     expect(resting.map((line) => line.text).sort()).toEqual([...secondLines].sort());
     for (const line of resting) {
-      expect(line.background).toBe(CALM_COLORS.SURFACE);
+      expect(line.background).toBe(CALM_COLORS.BACKGROUND);
       expect(line.fontSize).toBeGreaterThanOrEqual(floors.textSizeUnits);
       expect(line.contrast).toBeGreaterThanOrEqual(floors.textContrast);
     }
 
     fireEvent(screen.getByTestId(`kid-home-poster-${BENIGN_STORY_ID}`), 'focus');
     const focused = measured().find(
-      (line) => line.text === 'Benign demo, practice holds',
+      (line) => line.text === 'Scheduled scene holds',
     );
     expect(focused?.background).toBe(CALM_COLORS.SURFACE_FOCUSED);
     expect(focused?.contrast).toBeGreaterThanOrEqual(floors.textContrast);

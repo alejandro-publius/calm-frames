@@ -12,7 +12,7 @@
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { CALM_COLORS, CALM_SPACE, CALM_TYPE, scale } from './calmStyles';
+import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { badgeLabel, TitleStatus } from './titleStatus';
 
 export interface ShieldBadgeProps {
@@ -48,8 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: CALM_COLORS.SURFACE,
   },
   label: {
-    fontSize: scale(CALM_TYPE.SMALL),
-    fontWeight: '600',
+    ...CALM_TEXT.supporting,
   },
 });
 

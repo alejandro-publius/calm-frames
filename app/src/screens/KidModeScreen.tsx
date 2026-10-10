@@ -1,3 +1,4 @@
+import { titlePresentation } from '../calmframes/TitleArtwork';
 /**
  * Calm Frames, as a person meets it.
  *
@@ -158,7 +159,7 @@ function makeLocalSalt(): string {
 export function titleDataFor(entry: CheckedTitle): TitleData {
   return {
     id: entry.title.id,
-    title: entry.title.title,
+    title: titlePresentation(entry.title).name,
     description: '',
     mediaType: 'video',
     mediaSourceType: 'url',
@@ -451,6 +452,10 @@ const KidModeScreen = ({
       saving={saved.phase === 'saving'}
       testID={`${testID}-home`}
       titles={titles}
+      onPlay={(entry) => {
+        setLastOpenedId(entry.title.id);
+        play(entry);
+      }}
       returnFocusId={lastOpenedId}
       profiles={family.profiles}
       activeProfileId={family.activeProfileId}

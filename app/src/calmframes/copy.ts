@@ -57,7 +57,7 @@ export interface Notice {
 export const NO_TITLES: Notice = {
   title: 'Nothing is ready to watch yet',
   detail:
-    'Every title is checked all the way through before it can show up here. A grown up can see what is being checked in the parent area.',
+    'Every title is checked all the way through before it can show up here. A grown up can see what is being checked in parental controls.',
   tone: 'waiting',
 };
 
@@ -106,17 +106,25 @@ export const TITLE_STALE: Notice = {
   tone: 'blocked',
 };
 
-/** The parent area, before a PIN exists. */
+/** Parental controls, before a PIN exists. */
 export const PIN_NOT_SET: Notice = {
-  title: 'No PIN yet',
-  detail: 'Set a four digit PIN so the settings stay where a child cannot change them.',
+  title: 'Set up a PIN to continue',
+  detail:
+    'A four digit PIN keeps parental controls where a child cannot change them.',
   tone: 'waiting',
 };
 
-/** The keypad, before anyone has typed anything. */
+/**
+ * The keypad, before anyone has typed anything.
+ *
+ * The heading above it already says Parental controls, so the notice does not
+ * say it again. The title is the one thing to do, and the detail says what the
+ * PIN is for and where it stays.
+ */
 export const PIN_PROMPT: Notice = {
-  title: 'Enter the PIN',
-  detail: 'Enter the PIN to change settings.',
+  title: 'Enter your PIN',
+  detail:
+    'Your PIN opens parental controls. It stays on this television and is never sent anywhere.',
   tone: 'calm',
 };
 
@@ -125,14 +133,43 @@ export const PIN_PROMPT: Notice = {
  *
  * The line underneath comes from parentGate, which counts the tries and the
  * lockout, so the numbers in it are the ones the gate is really using rather
- * than a second copy that could disagree.
+ * than a second copy that could disagree. The titles name no number and no
+ * time for the same reason: the gate's own line carries both.
  */
-export const PIN_WRONG_TITLE = 'Try that again';
-export const PIN_LOCKED_TITLE = 'Locked for a minute';
+export const PIN_WRONG_TITLE = 'Try again';
+export const PIN_LOCKED_TITLE = 'Locked for now';
+
+/** A PIN attempt that could not be written down, so the gate stays shut. */
+export const PIN_SAVE_FAILED: Notice = {
+  title: 'Parental controls stay locked',
+  detail: "The PIN attempt couldn't be saved. Try again.",
+  tone: 'blocked',
+};
 
 export const KID_HOME_TITLE = 'Ready to watch';
 export const KID_HOME_SUBTITLE = 'Every title here has been checked all the way through.';
-export const PARENT_AREA_TITLE = 'Parent area';
+/** What the shelf calls the way in. The page itself is headed Parental controls. */
+export const PARENT_AREA_TITLE = 'Parental controls';
+export const PARENTAL_CONTROLS_TITLE = 'Parental controls';
+/** One line under the heading, saying what the page is for. */
+export const PARENTAL_CONTROLS_LEAD =
+  'Change how strict Calm Frames is, read what was hidden, and check the status of every title.';
+/** While a change is being written to the household record. */
+export const SAVING_CHANGES = 'Saving your changes…';
+
+/** Button labels, the ones a television usually uses. */
+export const BACK_TO_LIBRARY_LABEL = 'Back to library';
+export const SET_PIN_LABEL = 'Set up a PIN';
+export const CREDITS_LABEL = 'Credits and licences';
+export const ADD_KID_LABEL = 'Add a kid';
+
+/**
+ * The word at the edge of a chosen settings row.
+ *
+ * The same word the room chips use in their sentences and in their screen
+ * reader labels, so a page has one word for one state.
+ */
+export const CHOSEN_WORD = 'Chosen';
 
 /** What the room settings can and cannot do, said the same way everywhere. */
 export const ROOM_ONLY_ADDS =
@@ -244,12 +281,12 @@ export function nextKidName(base: string, taken: string[]): string {
   return `${base} ${index}`;
 }
 
-/** The rule about profiles, said the same way as the one about rooms. */
+/** The rule about kids' settings, said the same way as the one about rooms. */
 export const PROFILE_ONLY_ADDS =
-  'A profile can only add hidden parts to what Everyone is set to. It never takes any away.';
+  "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.";
 
-/** Four is the most, and the parent area says so before the button is gone. */
-export const PROFILES_FULL = 'Four profiles is the most. Remove one to add another.';
+/** Four is the most, and the page says so before the button is gone. */
+export const PROFILES_FULL = 'Up to four kids can be added. Remove one to add another.';
 
 /**
  * The question before a kid is removed.
@@ -281,7 +318,7 @@ export const PROFILES_FULL = 'Four profiles is the most. Remove one to add anoth
 export function removeKidPrompt(name: string): Notice {
   return {
     title: `Remove ${name}?`,
-    detail: `${name}'s own settings and ${name}'s record of what was hidden both go. Everyone else is left as they are, and this cannot be undone.`,
+    detail: `${name}'s settings and ${name}'s record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.`,
     tone: 'calm',
   };
 }
@@ -427,17 +464,18 @@ export function hidesByDay(entries: HideLogEntry[], nowMs: number): HideDay[] {
 /**
  * The chime before a hide.
  *
- * The label says what the sound does, not what the feature is called, and it
- * carries its own state so a parent reading it from the sofa does not have to
- * work out whether a highlighted row means on or off. The note underneath says
- * the thing that matters most about the switch: turning it off changes nothing
- * about what is hidden.
+ * It is one settings row: a plain label, the state word at the row's edge, and
+ * a helper line under the label saying the thing that matters most about the
+ * switch, which is that turning it off changes nothing about what is hidden.
+ * The state is a word rather than a highlight, so a parent reading it from the
+ * sofa does not have to work out which way round a colour means.
  */
-export const CHIME_SECTION_TITLE = 'Sound before a hide';
-export const CHIME_ON_LABEL = 'A soft chime plays first: on';
-export const CHIME_OFF_LABEL = 'A soft chime plays first: off';
+export const CHIME_SECTION_TITLE = 'Sound';
+export const CHIME_ROW_TITLE = 'Chime before a hide';
+export const CHIME_ON_LABEL = 'On';
+export const CHIME_OFF_LABEL = 'Off';
 export const CHIME_NOTE =
-  'The chime sounds a couple of seconds before the picture goes dark, so nobody is taken by surprise. Turning it off changes nothing about what is hidden.';
+  'A soft chime sounds a couple of seconds before the picture goes dark. Turning it off changes nothing about what is hidden.';
 
 /**
  * The first run explainer.
