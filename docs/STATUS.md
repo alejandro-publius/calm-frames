@@ -4,6 +4,26 @@ Updated Sat Oct 10, 2026.
 
 ## 0. Where things stand
 
+### Oct 10: cloud continuation received the finished source
+
+The cloud checkout received `d451a90` from the existing review branch, including
+`402c167` and the approved native redesign. The transfer is no longer blocked on
+the Mac. Current cloud checks and their limitations are recorded in
+`results/cloud_continuation_2026-10-10.json`.
+
+Dependency scanning now refuses empty, malformed or failed scanner responses;
+a scanner error cannot be accepted as a clean audit. Existing dependency
+findings and the expired exception remain unresolved. The upstream sample
+license review covers both the tracked player wrapper and the source archive;
+see [AMAZON_SAMPLE_LICENSE_REVIEW.md](AMAZON_SAMPLE_LICENSE_REVIEW.md).
+
+The private release's upload receipt is tracked, but this cloud session has not
+downloaded its assets: GitHub API access is blocked by the current environment
+network policy. The required API domain is saved in the environment draft for
+review and publication. Native package and demo inputs are unchanged. The Mac
+simulator results remain the native evidence; this Linux cloud environment does
+not provide Vega playback or Claude subscription access.
+
 ### Oct 10: GitHub push and private review assets
 
 At the user's explicit request, the completed branch was pushed through

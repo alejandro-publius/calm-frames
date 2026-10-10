@@ -2100,3 +2100,11 @@ missing-check notice and specific missing-map reason differed in wording, so
 noticeForTitle appended both. Align the generic sentence with the existing
 missing-map reason so the existing equality check displays it once. This is
 copy only; title eligibility, signatures and thresholds are unchanged.
+
+
+## Oct 10: cloud handoff and dependency scanner failures
+
+- **Decision:** receive the finished `d451a90` review branch in the existing cloud checkout. **Why:** source and design work can continue while the Mac is unavailable. **Cost:** refresh local dependencies and preserve separate provenance for the uploaded native artifacts.
+- **Decision:** make malformed reports and scanner failures fail the dependency gate. **Why:** empty output or error JSON previously looked like a clean scan. **Cost:** offline regression tests and schema checks against real npm and pip-audit reports; no new dependency exception.
+- **Decision:** preserve native package inputs while documenting current advisories and the conflicting Amazon sample notices. **Why:** changing the playback integration requires another Vega build and playback check. **Cost:** dependency Audit and redistribution review remain open.
+- **Decision:** save the missing GitHub API network domain through environment configuration. **Why:** source Git access works but direct private artifact verification is blocked. **Cost:** configuration must be reviewed, saved and published before that route can be retried; no alternate client was used to bypass the denial.

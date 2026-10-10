@@ -1,0 +1,179 @@
+{
+  "generated_utc": "2026-10-10T23:42:29.645014+00:00",
+  "source": {
+    "received_commit": "d451a901ef32cc1d2a945cd74cd15f322bd9ef94",
+    "contains_finished_redesign": "402c1672fcc15dfbd73a572f60b37dbfaac14480",
+    "branch": "codex/signed-scene-holds-2026-09-29",
+    "application_inputs_changed_in_cloud": false
+  },
+  "environment": {
+    "platform": "Linux",
+    "python": "3.12.14",
+    "node": "22.23.3",
+    "vega_installed": false,
+    "claude_subscription_available_here": false
+  },
+  "release_assets": {
+    "receipt": "results/github_push_2026-10-10.json",
+    "receipt_sha256": "f9ec6ecd5fbd66082eb55b9ec43eb1288ab157e4ea9407982fce13eab49de8a5",
+    "uploaded_count_reported_by_mac": 9,
+    "independently_downloaded_in_cloud": false,
+    "blocker": "GitHub API network access denied. Required api.github.com addition saved in environment draft; not applied or published."
+  },
+  "app_validation": {
+    "typecheck_exit_code": 0,
+    "initial_full_run": {
+      "passed": 1063,
+      "failed": 3,
+      "skipped": 4,
+      "snapshots_passed": 57,
+      "failure_cause": "Sandbox blocked Node spawnSync in imageSizeLegacy security regressions."
+    },
+    "scoped_rerun": {
+      "module": "test/calmframes/imageSizeLegacy.test.ts",
+      "passed": 20,
+      "exit_code": 0,
+      "correction": "Scoped host permission to create Node child processes."
+    },
+    "all_enabled_tests_passed_across_runs": 1066,
+    "native_validation_rerun_here": false
+  },
+  "dependency_gate_validation": {
+    "new_tests_passed": 31,
+    "before_fix_failed": 19,
+    "before_fix_passed": 8,
+    "npm_report_schema_validated": true,
+    "pip_audit_version": "2.9.0",
+    "cdk_scanned": 13,
+    "cdk_findings": 0,
+    "ingest_scanned": 12,
+    "ingest_findings": 0,
+    "development_venv_audit_rerun": false
+  },
+  "fresh_npm_audit": {
+    "raw_response_sha256": "e2a970d3b9bab9cf58a4a73594136098381d98f33865775625b6c34745138544",
+    "totals": {
+      "info": 0,
+      "low": 2,
+      "moderate": 28,
+      "high": 83,
+      "critical": 7,
+      "total": 120
+    },
+    "distinct_advisory_ids": 49,
+    "lockfile_sha256": "0249e2eec9c5e57780425716e01f1a15a6a66dfbf029f978484944ddebf08cfa",
+    "exception_file_unchanged": true,
+    "accepted": false
+  },
+  "license_review": {
+    "upstream_commit": "ef8e4da89b22ef7973d0d41beedfa2b42f7bb272",
+    "notice_source_files": 13,
+    "polyfill_source_files": 6,
+    "sample_components": 5,
+    "upstream_files": [
+      {
+        "path": "LICENSE",
+        "bytes": 951,
+        "sha256": "b536616d94ecb64a8b08ed9ef4def0693ff7665348255ef0dd672c3ff951d432"
+      },
+      {
+        "path": "src/w3cmedia/shakaplayer/ShakaPlayer.ts",
+        "bytes": 17057,
+        "sha256": "dfab51c125235a0ffc7c4dec9b1e0dd86fec52475f74bcb2bb9c2287dc80a574"
+      },
+      {
+        "path": "shaka-setup/shaka-rel-v4.8.5-r1.2.tar.gz",
+        "bytes": 71978,
+        "sha256": "f5e475b8a3793e56b2f888936f05424f672658abeac6c55e3d0e7073e06a8b8e"
+      }
+    ],
+    "upstream_root_license_txt_status": 404,
+    "redistribution_terms_resolved": false,
+    "clarification_request_sent": false
+  },
+  "publication": {
+    "merge_performed": false,
+    "release_published": false,
+    "repo_visibility_changed": false,
+    "devpost_submitted": false,
+    "aws_deployment_performed": false
+  },
+  "python_validation": {
+    "initial_full_run": {
+      "passed": 1574,
+      "failed": 10,
+      "slow_deselected": 2,
+      "duration_s": 419.03
+    },
+    "setup_corrections": [
+      "Installed current pinned aws-cdk.cloud-assembly-schema 54.24.0 and jsii 1.140.0 from pipeline/infra/requirements.txt.",
+      "Preserved the inherited no-AWS-identity profile and supplied a credentials-free profile configuration only for offline Moto tests.",
+      "Used a writable JSII_RUNTIME_PACKAGE_CACHE_ROOT."
+    ],
+    "affected_rerun": {
+      "modules": [
+        "pipeline/tests/test_aws_guard.py",
+        "pipeline/tests/test_infra_ingest.py",
+        "eval/tests/test_dep_audit.py"
+      ],
+      "passed": 104,
+      "duration_s": 6.71
+    },
+    "existing_enabled_tests_passed_across_runs": 1584,
+    "new_guard_tests_passed": 31,
+    "all_enabled_tests_passed_across_runs": 1615,
+    "slow_tests_run": false,
+    "pip_check": "No broken requirements found."
+  },
+  "functional_smoke": {
+    "loopback_port": 8766,
+    "fresh_current_source_server": true,
+    "page_get_status": 200,
+    "generated_calm_clip_seconds": 2,
+    "report_post_status": 200,
+    "title_chart_and_no_video_disclosure_verified": true,
+    "aws_called": false
+  },
+  "secret_scan": {
+    "version": "8.30.1",
+    "official_archive_sha256": "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb",
+    "baseline_committed_tree": "d451a90",
+    "baseline_passed": true
+  },
+  "validation_logs": [
+    {
+      "path": ".logs/cloud-sync-app-tests.log",
+      "sha256": "05dcfcf4911fa14409859090bb25304abd411c15f7fe9d3414f1f2541bf8a04d"
+    },
+    {
+      "path": ".logs/cloud-sync-app-child-tests.log",
+      "sha256": "8da8d51cf943de893aa3afb34cc76025bfbcc859d4dc41c1ca03603f34bebbba"
+    },
+    {
+      "path": ".logs/cloud-sync-types.log",
+      "sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828"
+    },
+    {
+      "path": ".logs/cloud-sync-python-tests.log",
+      "sha256": "726f50f8b57dfde20cf0e01999de7a5397956281366c97dec663b49ec46b7f0a"
+    },
+    {
+      "path": ".logs/cloud-sync-python-rerun.log",
+      "sha256": "9620bc4cbe5b7c8137de1d20d683b0a26ab61119169bec16eb8bf7162013ae29"
+    },
+    {
+      "path": ".logs/cloud-sync-dep-audit-tests.log",
+      "sha256": "9f9f214c5c355babd8397abe95585ba317e6814d315101bdccdfb0ed52fa83be"
+    },
+    {
+      "path": ".logs/cloud-sync-secret-scan.log",
+      "sha256": "e01457339fce2a3a03c820d94807974a742c9bbdbcbaf558b889e500c613d81a"
+    }
+  ],
+  "limits": [
+    "Local test passes do not clear the dependency Audit or licensing review.",
+    "Native Vega playback and the final demo were not rerun in the Linux cloud.",
+    "Private assets are supported by the tracked Mac upload receipt, not an independent cloud download.",
+    "No GitHub Actions status for this new cloud change has been fetched through the blocked API."
+  ]
+}

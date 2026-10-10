@@ -112,6 +112,18 @@ captures and native receipt provide that evidence.
   Signed cloud publication worked in that record. The app uses its compiled
   local catalog and does not consume the cloud output. No new cloud costs.
 
+## Cloud continuation
+
+The cloud checkout received the finished `d451a90` source and reran the current
+app and Python checks. Environment-specific failures passed after scoped child
+process permission, refreshed Python pins and isolated Moto configuration.
+New dependency-scanner regression tests also pass. Exact full-run and rerun
+counts are separate in `results/cloud_continuation_2026-10-10.json`.
+
+The approved native package inputs are unchanged. Native playback remains backed
+by the Mac receipt. Direct cloud verification of private release assets awaits
+the saved GitHub API network setting; Git source synchronization works.
+
 ## Still open
 
 - [ ] Dependency Audit remains failed: unresolved SDK/transitive advisories and
@@ -119,8 +131,10 @@ captures and native receipt provide that evidence.
   Audit now passes SBOM, stack and container jobs, failing dependency audit
   only. Saved AWS evidence also has inactive Project cost tagging and
   container security findings.
-- [ ] Confirm redistribution terms for the generated Amazon DOMParser polyfill
-  before public source release; the specific header issue is in `docs/SECURITY.md`.
+- [ ] Resolve the conflicting Amazon license notices in the tracked Shaka player
+  wrapper and source files inside its integration archive before public source
+  release. See [`AMAZON_SAMPLE_LICENSE_REVIEW.md`](AMAZON_SAMPLE_LICENSE_REVIEW.md)
+  for verified upstream evidence and an unsent clarification request.
 - [ ] Entrant name, country, eligibility and contact email need the entrant's
   values. Upstream patch metadata needs the chosen public author identity.
 - [ ] Public video/release/reviewer-access links and upstream PR URL remain

@@ -451,15 +451,27 @@ paragraphs, because a one line reason is how an exception becomes permanent.
    expired. The October 10 review found the prior zero-import claim was wrong:
    generated `app/src/w3cmedia/polyfills/DOMParserPolyfill.ts` imports `xmldom`,
    so the group now correctly has `ships = true`. Removing that dependency
-   without replacing the parser would break the bundle. Hoisted lodash is
-   already patched in the lockfile, but a nested exact vendor pin remains.
+   without replacing the parser would break the bundle. The October 10 cloud
+   audit also confirms that hoisted lodash 4.17.23 remains affected by
+   [GHSA-r5fr-rjxr-66jc](https://github.com/advisories/GHSA-r5fr-rjxr-66jc)
+   (affected range `>=4.0.0 <=4.17.23`) and
+   [GHSA-f23m-r3pf-42rh](https://github.com/advisories/GHSA-f23m-r3pf-42rh)
+   (affected range `<=4.17.23`). The nested exact vendor pin at 4.17.21 is also
+   affected; deduplicating it onto 4.17.23 would not resolve those findings.
    Candidate fixes need compatibility verification; the exception was not renewed.
 
-The audit snapshot's advisory findings and original scan timestamp are unchanged.
-Its published shipped-group count was recomputed after this classification
-correction, with a separate review annotation. No fresh advisory scan is claimed.
+The earlier shipped-group classification correction left the saved audit
+snapshot's advisory findings and original scan timestamp unchanged. Its published
+shipped-group count was recomputed with a separate review annotation; that
+correction itself did not represent a fresh advisory scan.
 
-The check fails four ways, each one broken on purpose and watched: a package
+Scanner execution and report validation also fail closed: empty output, error
+JSON, unexpected exit statuses, incomplete records and skipped dependencies
+cannot be accepted as a clean scan. The October 10 cloud receipt records the
+regression tests and compatibility checks against real scanner responses in
+`results/cloud_continuation_2026-10-10.json`.
+
+The original exception-policy checks fail four ways, each one broken on purpose and watched: a package
 with no exception, a new advisory against a package that has one, an exception
 past its review date, and an exception with nobody's name on it.
 
@@ -611,17 +623,22 @@ demonstrates a problem with flash detection is a hazard file, and
 docs/SAFETY.md applies to it.
 
 
-## Publication review: generated Amazon polyfill notice
+## Publication review: Amazon sample license notices
 
-The independent review flagged the generated
-`app/src/w3cmedia/polyfills/DOMParserPolyfill.ts` header, which says
-"AMAZON PROPRIETARY/CONFIDENTIAL" and points to an accompanying LICENSE.TXT.
-The sample root `app/LICENSE` is MIT No Attribution, but no LICENSE.TXT was
-found beside the extracted `shaka-rel` polyfill. Its build script copies the
-source from the supplied Shaka patch archive. Preserve those notices and
-confirm the applicable redistribution terms before making the source public;
-this local review does not decide that the root license supersedes the header.
-The review bundle remains a local artifact, not a published source release.
+The generated `DOMParserPolyfill.ts` and the tracked
+`app/src/w3cmedia/shakaplayer/ShakaPlayer.ts` carry an
+"AMAZON PROPRIETARY/CONFIDENTIAL" notice referring to LICENSE.TXT. An October 10
+check of the official pinned upstream source confirmed the same inconsistency:
+the sample root LICENSE grants MIT-0, while <!--n results/cloud_continuation_2026-10-10.json:license_review.notice_source_files -->13<!--/n--> source files inside its supplied
+Shaka archive carry the file-specific notice. The local archive is byte-identical
+to upstream, contains no license file, and the upstream root LICENSE.TXT URL
+returns 404. Replacing `xmldom` alone does not resolve these notices.
+
+See [`AMAZON_SAMPLE_LICENSE_REVIEW.md`](AMAZON_SAMPLE_LICENSE_REVIEW.md) for exact
+URLs, hashes, affected integration paths, and an unsent clarification request.
+Preserve the notices and resolve their scope before public source release; this
+review does not establish that redistribution is prohibited or that the root
+license supersedes them. The review bundle is uploaded to a private draft release.
 
 ## October 10 pushed checkpoint
 
