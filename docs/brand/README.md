@@ -1,9 +1,11 @@
 # The Calm Frames mark
 
-A calm monk sitting inside a rounded frame, with an aura of plain concentric
-lines. Teal ground, cream skin and text, saffron robe. The aura is drawn as
-still, evenly spaced rings on purpose: this is an app about flashing, so the
-mark holds still.
+A peaceful monk inside a rounded frame, with one open halo. Teal ground,
+cream face and text, saffron robe. The single open line stays readable at
+small sizes. The identity is still, with no pulsing or animated halo.
+
+The brand line is **A calmer way to watch**. It describes the experience;
+it is not a clinical or detection guarantee.
 
 ## Making the files
 
@@ -11,10 +13,11 @@ mark holds still.
     ../../../.venv/bin/python make_logo.py   # writes the three SVGs
     ./render.sh                              # writes every PNG
 
-`make_logo.py` draws the three SVGs. `render.sh` renders them at the sizes
-Amazon asks for, through headless Chrome, because this Mac has no
-rsvg-convert, no cairosvg and no inkscape and both Python routes need a native
-cairo. Nothing else has to be installed.
+`make_logo.py` draws the three SVGs. `render.sh` renders them at the requested
+sizes using the installed Qt SVG engine, with headless Chrome as a fallback.
+`render_qt.cpp` is the small native renderer, compiled under `build/brand`.
+The Qt route needs the macOS command line tools and `pkg-config Qt6Svg`.
+No new renderer was downloaded for the October 9 refresh.
 
 Both are checked in, so every image here can be rebuilt from the two scripts.
 
@@ -28,7 +31,7 @@ Both are checked in, so every image here can be rebuilt from the two scripts.
 
 ## The sizes, and where each one is required
 
-Checked against Amazon's own pages on 2026-09-17. Quotes below so this can be
+Rechecked against Amazon's own listing page on 2026-10-09. Quotes below so this can be
 re-checked rather than trusted.
 
 | File here | Size | Format | Required by |
@@ -83,6 +86,19 @@ the PNG checked in here is rendered in the first fallback that is installed.
 Anything with Ember available, including the device, gets the real font from the
 SVG. If the tile is ever rebuilt on a machine with Ember, the PNG will change
 and that is the intended outcome.
+
+## October 9 review
+
+The 512 px and 114 px listing icons and 48 px preview retain the closed eyes,
+smile and open halo. The tile uses full-opacity cream for both the name and
+brand line. Its teal ground is opaque; the rounded icons retain transparent
+corners. The manifest icon is generated from the same source as the large
+listing icon. Review the actual PNGs after changing renderers or fonts.
+
+Run `.venv/bin/python eval/brand_assets_check.py` and the brand asset tests,
+then the app's `ui:flashmap`, manifest and ten-foot checks. These checks do not
+establish native screen composition. Current run evidence is recorded in
+`docs/COMPLETION_CHECKLIST.md`.
 
 ## The palette
 

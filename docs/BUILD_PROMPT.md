@@ -1,5 +1,11 @@
 # Calm Frames: the full terminal build prompt
 
+**Current scope, Oct 9:** the user's later instructions supersede the hardware
+and possible-teammate plan below. Solo entry, identity-verified Amazon Developer
+account, Vega Virtual Device exclusively, no physical-TV or camera-timing
+prerequisites. Use [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md) for current
+acceptance and blockers. Keep the historical specification thresholds intact.
+
 This replaces `prompt-calm-frames.md`. It covers every Calm Frames step in one place: setup, day-one device probes, the build, the evaluation, the video and the submission. The roadblocks from the stress test are built in as dated gates with fallbacks, so Claude Code hits them on purpose, early, instead of by surprise.
 
 ## Set it up (5 minutes)

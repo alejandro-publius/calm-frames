@@ -52,7 +52,7 @@ Everything here is real. Each entry is something that cost time on this build, w
 
 **Entries 1 to 28 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. **Entries 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues.** They are marked separately so nobody has to guess which are Amazon's.
 
-Nothing in entries 1 to 33 blocked the build outright, because every one of them had a way around it. The first five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26). Entry 35 currently blocks complete CI evidence and has no in-repository workaround.
+Nothing in entries 1 to 33 blocked the build outright, because every one of them had a way around it. The first five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26). Entry 35 records a historical startup block; runners resumed by October 5. The latest saved Audit failures concern dependencies and SBOM drift, not runner startup.
 
 Three entries say plainly that they are a platform rule we adopted and designed around rather than a failure we watched: 13, 27 and 28. They are in the log because each one shaped the build and each cost time to establish, and they are labelled so that nobody reads them as a crash we saw.
 
@@ -750,6 +750,22 @@ One honest note about that paste. Our verification checkout lives at a very deep
 
 ## 34. Restricted automation blocks Watchman and local HTTP listeners
 
+**October 9 follow-up.** In the restricted finishing session, `ps` was denied,
+Vega status could not write its SDK log, and `vega virtual-device start -t 30`
+failed while registering QEMU with the host. `claude auth status` returned
+`loggedIn: false`; one read-only CLI task returned `Not logged in`. This is
+not evidence that the user's normal terminal lacks subscription access.
+No credentials, billing method or permission controls were changed. The
+simulator and subscription check require the normal host session.
+
+`fnm env` also tried to write outside the workspace; using the already installed
+Node 22 binary directly worked. The Python collection step hit jsii's host
+cache timestamp write; `JSII_RUNTIME_PACKAGE_CACHE_ROOT` selects a writable
+build cache without changing tests. The pinned CycloneDX generators were
+already cached and could run directly: all three regenerated SBOM files matched
+the committed bytes. The app's aarch64 Debug build succeeded. These outcomes
+separate a build from the still-blocked simulator validation.
+
 **Task.** Run scene-hold and regression tests on Sep 29, 2026.
 
 **Steps.** From `app/`, ran Node 22 Jest through `fnm exec --using 22 npm test`
@@ -871,3 +887,26 @@ The first eleven and the Sep 29 entries, 34 and 35, were written here as they ha
 | 33 ffmpeg photosensitivity filter | `eval/baselines/run_all.py`, commit `daec5b7` |
 | 34 restricted sockets | Sep 29 scene-hold verification; commands and limitations recorded in docs/STATUS.md |
 | 35 Actions startup | Audit run 36431466841, attempts 1 and 2, inspected Sep 29; no runners or steps |
+
+## October 10: native package playback and capture
+
+- Task: run Harbor on Apple silicon Vega Virtual Device. Expected packaged MP4
+  and WebVTT to open. Native GStreamer treated `file:///pkg/...` as a literal
+  file name and failed. Normalize this package prefix to `/pkg/...` only at the
+  native media boundary; keep the signed catalog identity unchanged. Both
+  prepared and practice Harbor now play. Severity: blocking.
+- Task: keep captions above a scheduled scene image. A z-index directly on the
+  native caption view did not place it above the RN image cover. A retained,
+  non-collapsible RN host with that stacking style fixes both observed holds.
+  Severity: blocking. Suggestion: document native surface composition examples.
+- Task: capture the simulator while Stage Manager backgrounds it. Screenshot
+  capture could return an older GPU frame, confusing navigation validation.
+  Activate Vega before capture and review actual recording frames. Static
+  screens create variable-rate video with few frames; use frame timestamps,
+  not a presumed constant frame count. Severity: major test friction.
+
+- Task: leave playback reliably. Independent review found Back and background
+  could queue duplicate navigation, and an open captions menu could consume a
+  background exit. Tests reproduced both failures; idempotent exit cleanup now
+  separates hardware menu dismissal from forced teardown. Native rapid Back
+  returns once to title details with Play focused. Severity: major; app defect.

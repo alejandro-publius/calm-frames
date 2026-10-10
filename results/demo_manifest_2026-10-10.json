@@ -1,0 +1,143 @@
+{
+  "video": "build/submission/Calm-Frames-demo-English.mp4",
+  "sha256": "27b18b85d760e0ea9cb2d57bebe9139da6696f87888b96818ef0a9872c5c6bc7",
+  "duration_seconds": 146.021354,
+  "language": "English",
+  "narration": "macOS Samantha synthetic narration",
+  "footage": "Actual Vega Virtual Device recordings and disclosed still captures; editorial brand/status cards",
+  "edits": "Cuts, scaling, constant-frame-rate encoding, footer subtitles, narration and native audio gain. No generated app footage.",
+  "shots": [
+    {
+      "source": "docs/brand/firetv-app-icon-1280x720.png",
+      "source_sha256": "2e60674ec83d595ee2ed6318f5dbef111318d88b5b4d8870b176f8a7b6be0321",
+      "source_start_seconds": 0,
+      "output_start_seconds": 0,
+      "duration_seconds": 6,
+      "still": true,
+      "narration": "Calm Frames. A calmer way to watch.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/native-final-shelf.png",
+      "source_sha256": "5d01297196fc34f3c31c1f3d234724467fc85ec98f55eaee4c05c261c9f73432",
+      "source_start_seconds": 0,
+      "output_start_seconds": 6,
+      "duration_seconds": 10,
+      "still": true,
+      "narration": "This accessibility prototype is running on the Vega Virtual Device. Its shelf contains checked, packaged videos.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/native-practice-before-seek.png",
+      "source_sha256": "8dbaa020d7cb305740289ffb498aefcb00b02f5c1cfac233729a40761ee9f03b",
+      "source_start_seconds": 0,
+      "output_start_seconds": 16,
+      "duration_seconds": 12,
+      "still": true,
+      "narration": "Harbor is original, non-flashing media. This practice title uses two scheduled holds to demonstrate scene continuity. The intervals are synthetic, not detected flashing.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/native-reviewed-harbor.mp4",
+      "source_sha256": "55b3fd68ebf2237c2d6c6c83d19f1272669497075372cbe26c3a8b776deb3cab",
+      "source_start_seconds": 2,
+      "output_start_seconds": 28,
+      "duration_seconds": 25,
+      "still": false,
+      "narration": "Watch the practice holds. The recorded tone and English captions continue while a calm scene is held.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 15.99
+    },
+    {
+      "source": ".logs/native-guarded-transport.mp4",
+      "source_sha256": "322b43d742c0fa838e38bc030fec1c933c494ad5e4146698f41cfc5dc19eb990",
+      "source_start_seconds": 5,
+      "output_start_seconds": 53,
+      "duration_seconds": 20,
+      "still": false,
+      "narration": "Here the remote seeks forward and backward, pauses, and resumes. The player uses an opaque fallback when playback is disrupted. This is behavior, not a screen timing measurement.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 15.99
+    },
+    {
+      "source": ".logs/native-credits-return.png",
+      "source_sha256": "b19382783dae35117929f3df85d7e95a1ea899d4f794f4a7687271ac1bcc0955",
+      "source_start_seconds": 0,
+      "output_start_seconds": 73,
+      "duration_seconds": 8,
+      "still": true,
+      "narration": "A parent PIN protects settings. Wrong entries stay locked, and a partial entry can be corrected with Delete.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/native-extra-selected2.png",
+      "source_sha256": "6f80616525aeff0f00b6cb92ebaa6a4583dc0fa29c5d5f3ed8fb0f1caa14fe17",
+      "source_start_seconds": 0,
+      "output_start_seconds": 81,
+      "duration_seconds": 10,
+      "still": true,
+      "narration": "Parents choose Standard, Broadcast, or Extra cautious. Stricter choices cannot relax the household floor. Each prepared preset was played in the simulator.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/native-kid-history-visible.png",
+      "source_sha256": "e753b43831cf7d6412375ef20f423bdb7cd6f2058106bb836d99d3784bef7f37",
+      "source_start_seconds": 0,
+      "output_start_seconds": 91,
+      "duration_seconds": 12,
+      "still": true,
+      "narration": "Room settings, the selected profile, and the chime switch survive restart. Practice holds are excluded from exposure history. Actual cover history is kept in memory.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": ".logs/native-broadcast-play.mp4",
+      "source_sha256": "f9577c4f18ee3e973d237cd5a40cec8125ad8132501cac427301ea08c3eec114",
+      "source_start_seconds": 3,
+      "output_start_seconds": 103,
+      "duration_seconds": 19,
+      "still": false,
+      "narration": "This separate Harbor title went through real local preparation, with no synthetic detector intervals. The app plays the verified rendition compiled into its catalog. This source had no detected flashing.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 15.99
+    },
+    {
+      "source": "build/submission/status-card.png",
+      "source_sha256": "d0e1f49ff52eadbb5050c01468e7d49336b7cb6b3e9b85ab0fb920286d682453",
+      "source_start_seconds": 0,
+      "output_start_seconds": 122,
+      "duration_seconds": 18,
+      "still": true,
+      "narration": "The saved AWS run published a signed title, but this app consumes its local library. Detection can miss flashing. Calm Frames is not a medical device. Dependency security findings remain open.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    },
+    {
+      "source": "docs/brand/firetv-app-icon-1280x720.png",
+      "source_sha256": "2e60674ec83d595ee2ed6318f5dbef111318d88b5b4d8870b176f8a7b6be0321",
+      "source_start_seconds": 0,
+      "output_start_seconds": 140,
+      "duration_seconds": 6,
+      "still": true,
+      "narration": "Calm Frames. A calmer way to watch.",
+      "narration_voice": "macOS Samantha TTS",
+      "native_audio_gain_db": 0
+    }
+  ],
+  "review": {
+    "all_shot_frames_inspected": true,
+    "final_hold_frame": "build/submission/demo-final-hold.png",
+    "audio_peak_dbfs": -1.7,
+    "voice": "synthetic English Samantha; no human voice impersonation",
+    "final_source_commit": "cffdf7b786ed0eceac147ad82ef613d7ed16135a",
+    "final_package_sha256": "df238b9a64a7019ea103159bf00354f9451985672ad0c776936f60ad16c3a5df",
+    "earlier_footage": "Other native clips/stills precede the final exit-only fix; see native receipt prior_native_package.",
+    "wcag": "passed",
+    "broadcast": "passed"
+  }
+}

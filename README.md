@@ -1,6 +1,6 @@
 # Calm Frames
 
-**Every frame checked before it plays, on Fire TV, for kids with photosensitive epilepsy.**
+**A calmer way to watch**
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
@@ -10,7 +10,19 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 Calm Frames combines an offline video analyzer, a checked rendition pipeline and a Vega player for families affected by photosensitivity. Before playback, the pipeline analyzes the source, signs its flash map and verifies the prepared rendition. The player adds a scheduled cover, context images and guarded seeks, with audio and captions intended to preserve the story. Parent settings can make the standard floor stricter and now persist locally. A reusable hook and analyzer provide adoption paths for other developers. Detection, delivery integrity and physical screen behavior have separate limits, recorded below; a signature is not proof that every hazard was detected.
 
-**Status, Oct 2 2026.** This is a build in progress for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The analyzer, the pipeline, the cover layer and the measurement harnesses are built and tested. Nothing has been measured on a physical Fire TV stick yet, so there is no screen-level cover lead time. There is a software-level one from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time. Six produced no usable evidence and one was late. Counting the six as failures, which is the strict reading, that is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> you get from the trials that could be measured. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
+**October 10 simulator finish.** The native benign journey and final English
+video are complete locally. PIN correction, saved settings, all three presets,
+catalog playback, captions/audio through both practice holds, transport fallback
+and focus return were observed on Vega Virtual Device. The final implementation
+commit and exact package hash are in
+[the completion checklist](docs/COMPLETION_CHECKLIST.md) and
+[the native receipt](results/native_validation_2026-10-10.json).
+The local demo is `build/submission/Calm-Frames-demo-English.mp4`, with a source
+manifest and passed finished-file check in `results/`. Dependency Audit and
+publication remain open. No physical-device validation or cloud-catalog
+consumption is implied.
+
+**Status, Oct 9 2026.** This is a solo entry. The submission validation and demo use the Vega Virtual Device exclusively; physical hardware and camera timing are outside this submission scope. This is a build in progress for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The analyzer, the pipeline, the cover layer and the measurement harnesses are built and tested. Nothing has been measured on a physical Fire TV stick yet, so there is no screen-level cover lead time. There is a software-level one from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time. Six produced no usable evidence and one was late. Counting the six as failures, which is the strict reading, that is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> you get from the trials that could be measured. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
 
 **Scene holds, Sep 29.** Hidden intervals can now show a checked still from the
 preceding context, helping keep the story in view while audio and captions continue.
@@ -18,7 +30,7 @@ The pipeline binds each JPEG to the signed map and uses the same image in the
 pre-covered rendition and the live-cover model. Missing images, uncertain
 playback, seeks and image decode errors use an opaque black cover. This changes
 the presentation, not the detector thresholds or hide timing. Native image and
-caption composition still need a physical-device check.
+caption composition still need direct observation on the Vega Virtual Device.
 
 The current [hackathon assessment](docs/HACKATHON_REVIEW.md) separates the
 project score from missing submission evidence. The [continuation prompt](docs/CONTINUATION_PROMPT.md)
@@ -129,7 +141,7 @@ The same abstract records that "Government and regulatory agencies require scree
 
 The app is the demo. These four are the part that keeps working after the judging period, and none of them needs anyone to install Calm Frames.
 
-**1. The hook, so a Vega video app built on Amazon's W3C media player gets the same protection.** The guard is one React hook with no knowledge of our screens, navigation or storage. [`docs/INTEGRATION_DIFF.md`](docs/INTEGRATION_DIFF.md) is the real `git diff` of adding it to a clean [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) checkout at tag `v0.24-RN83`: <!--n results/integration_diff.json:lines_added -->32<!--/n--> lines added and <!--n results/integration_diff.json:lines_replaced -->2<!--/n--> replaced across <!--n results/integration_diff.json:files_touched -->4<!--/n--> files. <!--n results/integration_diff.json:busiest_file_lines_added -->23<!--/n--> of those added lines are in one file, `src/screens/PlayerScreen.tsx`, and each of the other three files adds exactly <!--n results/integration_diff.json:other_files_lines_added_each.0 -->3<!--/n--> lines. `hook/tools/make_integration_diff.mjs` regenerates that patch from the pinned checkout, and `eval/integration_diff_stats.py` counts what is committed file by file, so every number in this paragraph is measured rather than asserted.
+**1. The hook, so a Vega video app built on Amazon's W3C media player can reuse the scheduler and guarded seeks.** The guard is one React hook with no knowledge of our screens, navigation or storage. [`docs/INTEGRATION_DIFF.md`](docs/INTEGRATION_DIFF.md) is the real `git diff` of adding it to a clean [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) checkout at tag `v0.24-RN83`: <!--n results/integration_diff.json:lines_added -->32<!--/n--> lines added and <!--n results/integration_diff.json:lines_replaced -->2<!--/n--> replaced across <!--n results/integration_diff.json:files_touched -->4<!--/n--> files. <!--n results/integration_diff.json:busiest_file_lines_added -->23<!--/n--> of those added lines are in one file, `src/screens/PlayerScreen.tsx`, and each of the other three files adds exactly <!--n results/integration_diff.json:other_files_lines_added_each.0 -->3<!--/n--> lines. `hook/tools/make_integration_diff.mjs` regenerates that patch from the pinned checkout, and `eval/integration_diff_stats.py` counts what is committed file by file, so every number in this paragraph is measured rather than asserted.
 
 What an app gets for it: every flagged part of a title hidden before it starts while sound and captions keep going, a card ahead of it with a D-pad Skip and a card afterwards, a missing or stale or unsigned or wrong-hash map keeping the picture hidden, every seek path safe including Alexa and the remote's transport commands, and a VoiceView announcement for each card. What it costs: one rule, which is that nothing in the app writes `currentTime` or calls `fastSeek` any more. Everything goes through `guard.requestSeek`. The package README is [`hook/README.md`](hook/README.md). **The package is not published to npm yet**, but a Vega app can now install a locally packed tarball from a reviewed checkout. The offline consumer check uses that installed tarball, current Vega peer types, Metro resolution and React Native transforms, not repository-source aliases. The name `@calm-frames/flash-guard` was free when we checked on Sep 17, 2026, and that is the whole of the claim on it.
 
@@ -221,7 +233,7 @@ Recorded by `eval/vvd_smoke.py` into [`results/vvd_smoke.json`](results/vvd_smok
 
 ### Cover timing: a software-level number, and one late cover
 
-**There is still no screen-level lead time, and there will not be one until the stick arrives.** What there is now is a software-level number from the virtual device, and the story of how it was almost published wrong is worth keeping, because an earlier version of this page had a figure that was not real.
+**There is still no screen-level lead time. The simulator software events below do not measure pixel delivery.** What there is now is a software-level number from the virtual device, and the story of how it was almost published wrong is worth keeping, because an earlier version of this page had a figure that was not real.
 
 A rehearsal run appeared to show all twenty markers covered in time with a worst lead of 449 ms. Those numbers have been withdrawn. The run they came from never actually played: the player reported positions between 0.17 s and <!--n results/gate1_rehearsal_vvd.json:furthest_position_the_player_reported_ms -->259<!--/n--> ms and got no further, while the cover scheduler, which runs on a wall clock by design, kept advancing its own estimate and fired every cover on time against that estimate. The analysis then agreed with itself. A stricter second script refused to count any of it, which is how it surfaced. Both analysis scripts now require a position report from the player before a lead time is counted.
 
@@ -251,11 +263,11 @@ That rehearsal clip is 20 markers long and none of them survived the rule. The m
 
 The median sits about where the 500 ms guard band puts it. **That is the friendliest row in the table and it is not the one to judge this by.** The 95th percentile lead is <!--n results/gate1_software_vvd.json:lead_ms.p95 -->4097<!--/n--> ms and the longest is <!--n results/gate1_software_vvd.json:lead_ms.max -->6197.5<!--/n--> ms, against a guard band of <!--n results/gate1_software_vvd.json:guard_band_ms -->500<!--/n--> ms. A cover that goes on four seconds early is safe and it is not the schedule working: it is the cover firing whenever the next position report happened to arrive, which on this clip was about every 6.5 s. So the scheduler is doing less of the work than the median suggests, and the position reports are doing more. Three things in that table matter more than the median.
 
-**One cover was late.** The worst lead is negative: in one trial the cover went on 86 ms after the marker had already started. Every other pass fired at the first position report past the guard band, around 6.5 s into the clip. In that one, the report at 6.744 s was skipped and the cover fired at 7.079 s. The scheduler re-anchors to media time on every report and re-checks every 50 ms, so a 335 ms gap means the JavaScript thread was not available, not that the schedule was wrong. **The guard band has to be wider than the worst pause of that thread.** Nothing measures that pause on real hardware yet, and that is the first thing GATE 1 has to find out. It has been measured here, though, and the number is bad enough that it belongs in this section rather than one click away. Re-running the same harness with the host under load ([`results/under_load/gate1_software_vvd_load218.json`](results/under_load/gate1_software_vvd_load218.json), written up in [docs/GATES.md](docs/GATES.md)) gave <!--n results/under_load/gate1_software_vvd_load218.json:in_time -->8<!--/n--> of <!--n results/under_load/gate1_software_vvd_load218.json:trials_counted -->9<!--/n--> trials in time, a worst lead of <!--n results/under_load/gate1_software_vvd_load218.json:worst_lead_ms -->-454.6<!--/n--> ms, and a worst gap between two scheduler ticks of <!--n results/under_load/gate1_software_vvd_load218.json:worst_tick_gap_ms -->72755<!--/n--> ms. That is seventy-two seconds in which a 50 ms timer did not run. A guard band cannot be wider than that, which means the guard band is the wrong instrument for a machine under that much load, and the honest position is that we do not yet know what is.
+**One cover was late.** The worst lead is negative: in one trial the cover went on 86 ms after the marker had already started. Every other pass fired at the first position report past the guard band, around 6.5 s into the clip. In that one, the report at 6.744 s was skipped and the cover fired at 7.079 s. The scheduler re-anchors to media time on every report and re-checks every 50 ms, so a 335 ms gap means the JavaScript thread was not available, not that the schedule was wrong. **The guard band has to be wider than the worst pause of that thread.** Nothing measures that pause on real hardware yet, and no physical timing claim is made. It has been measured here, though, and the number is bad enough that it belongs in this section rather than one click away. Re-running the same harness with the host under load ([`results/under_load/gate1_software_vvd_load218.json`](results/under_load/gate1_software_vvd_load218.json), written up in [docs/GATES.md](docs/GATES.md)) gave <!--n results/under_load/gate1_software_vvd_load218.json:in_time -->8<!--/n--> of <!--n results/under_load/gate1_software_vvd_load218.json:trials_counted -->9<!--/n--> trials in time, a worst lead of <!--n results/under_load/gate1_software_vvd_load218.json:worst_lead_ms -->-454.6<!--/n--> ms, and a worst gap between two scheduler ticks of <!--n results/under_load/gate1_software_vvd_load218.json:worst_tick_gap_ms -->72755<!--/n--> ms. That is seventy-two seconds in which a 50 ms timer did not run. A guard band cannot be wider than that, which means the guard band is the wrong instrument for a machine under that much load, and the honest position is that we do not yet know what is.
 
 **The evidence rebuilds itself.** [`results/gate1_software_vvd.json`](results/gate1_software_vvd.json) ships with the events it was computed from, and `eval/verify_gate1_archive.py` runs in CI to rebuild the summary from those events and fail if the two ever disagree. That check exists because the first attempt to rebuild it by hand got 54 trials rather than 49, with one lead of 13.3 s, by splitting the passes on the wrong marker. The wrong answer looked completely ordinary.
 
-A software-level figure measures the gap between the moment the app applied the cover and the moment the marker was due. Everything after the app sets its state, which is the React commit, the compositor, scan-out and the panel, is unmeasured, and all of it lands in the real figure. Treat this as an upper bound on how well the real thing can do. **GATE 1 is 50 trials filmed at 240 frames a second against a real Fire TV stick**, and nothing short of that is a lead time for this project.
+A software-level figure measures the gap between the moment the app applied the cover and the moment the marker was due. Everything after the app sets its state, which is the React commit, the compositor, scan-out and the panel, is unmeasured, and all of it lands in the real figure. Treat this as an upper bound on how well the real thing can do. The historical GATE 1 camera protocol is outside the simulator-only submission scope. These software events do not establish physical screen lead time.
 
 ### What the player does, which Amazon does not document
 
@@ -283,7 +295,7 @@ Recorded into [`results/vvd_layering_rehearsal.json`](results/vvd_layering_rehea
 | Verdict | <!--n results/vvd_layering_rehearsal.json:layering.verdict -->inconclusive<!--/n--> |
 | Media seconds advanced while covered | <!--n results/vvd_layering_rehearsal.json:layering.media_seconds_advanced_while_covered -->0.05<!--/n--> |
 
-The harness side works and nothing crashed, but playback did not run in that take, so the run says nothing about whether the sound keeps going under a cover. It is recorded as inconclusive rather than dressed up. The real answer comes from filming a stick.
+The harness side works and nothing crashed, but playback did not run in that take, so the run says nothing about whether the sound keeps going under a cover. It is recorded as inconclusive rather than dressed up. The current simulator journey must directly demonstrate continuing sound; this historical take does not.
 
 ### Screening real footage
 
@@ -321,27 +333,29 @@ An earlier version of this table had four failures, all Theora `.ogv`, which fla
 
 ### How well the analyzer does, on the conformance suite
 
-This is the number that says whether any of the rest is worth having. Recorded by the conformance suite into [`results/conformance.json`](results/conformance.json), whose ground truth is computed from the quoted spec text in a module that cannot import flashmap.
+The complete corrected synthetic SDR evaluation is recorded in [`results/conformance_current_report_2026-10-02.json`](results/conformance_current_report_2026-10-02.json), whose ground truth is computed from the quoted spec text in a module that cannot import flashmap.
 
 | What | Value |
 |---|---|
-| Clips measured and kept | <!--n results/conformance.json:published.clips_kept -->467<!--/n--> of <!--n results/conformance.json:published.clips_designed -->3000<!--/n--> designed |
-| Windows judged | <!--n results/conformance.json:published.windows -->1401<!--/n-->, of which <!--n results/conformance.json:published.positive_windows -->324<!--/n--> are positive in the ground truth |
-| Precision | <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n--> (<!--n results/conformance.json:published.flashmap_precision_lo -->0.605<!--/n--> to <!--n results/conformance.json:published.flashmap_precision_hi -->0.693<!--/n-->) |
-| Recall | <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> (<!--n results/conformance.json:published.flashmap_recall_lo -->0.857<!--/n--> to <!--n results/conformance.json:published.flashmap_recall_hi -->0.924<!--/n-->) |
-| Recall away from a limit | <!--n results/conformance.json:published.recall_away_from_limits -->1<!--/n--> over <!--n results/conformance.json:published.recall_away_from_limits_positive_windows -->244<!--/n--> positive windows |
-| **Recall on clips that sit on a limit** | **<!--n results/conformance.json:published.recall_near_limits -->0.575<!--/n-->** over <!--n results/conformance.json:published.recall_near_limits_positive_windows -->80<!--/n--> positive windows |
+| Clips measured and kept | <!--n results/conformance_current_report_2026-10-02.json:published.clips_kept -->2999<!--/n--> of <!--n results/conformance_current_report_2026-10-02.json:published.clips_designed -->3000<!--/n--> designed |
+| Windows judged | <!--n results/conformance_current_report_2026-10-02.json:published.windows -->8997<!--/n-->, of which <!--n results/conformance_current_report_2026-10-02.json:published.positive_windows -->1268<!--/n--> are positive in the ground truth |
+| Precision | <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision -->0.649<!--/n--> (<!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision_lo -->0.625<!--/n--> to <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision_hi -->0.671<!--/n-->) |
+| Recall | <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall -->0.85<!--/n--> (<!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall_lo -->0.829<!--/n--> to <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall_hi -->0.869<!--/n-->) |
+| Recall away from a limit | <!--n results/conformance_current_report_2026-10-02.json:published.recall_away_from_limits -->1<!--/n--> over <!--n results/conformance_current_report_2026-10-02.json:published.recall_away_from_limits_positive_windows -->910<!--/n--> positive windows |
+| **Recall on clips that sit on a limit** | **<!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits -->0.469<!--/n-->** over <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits_positive_windows -->358<!--/n--> positive windows |
 
-**This run is partial and the file says so in its own statement field.** <!--n results/conformance.json:published.clips_measured -->475<!--/n--> clips were measured, <!--n results/conformance.json:published.excluded_clips -->8<!--/n--> were excluded and <!--n results/conformance.json:published.clips_kept -->467<!--/n--> kept, out of a committed design of <!--n results/conformance.json:published.clips_designed -->3000<!--/n-->. Nothing here should be read as a finished evaluation.
+All <!--n results/conformance_current_report_2026-10-02.json:published.clips_measured -->3000<!--/n--> frozen clip identities were measured, with <!--n results/conformance_current_report_2026-10-02.json:published.excluded_clips -->1<!--/n--> fidelity exclusion. The report was independently rebuilt from the saved measurement rows on Oct 9 and matched byte for byte. The generator's matrix/range conversion was corrected under a logged protocol deviation; detector thresholds, intended-signal truth labels and production resolution were unchanged. Encoded near-limit signals can still cross thresholds, and those misses remain scored as misses.
+
+The [archived partial report](results/conformance.json) and [paired protocol comparison](results/conformance_protocol_comparison_2026-10-02.json) remain intact. Baselines were not rerun for this complete evaluation. The comparisons below are historical, not matched comparisons against the new report. This is synthetic conformance evidence, not clinical validation, human-labelled real-video recall or a device test.
 
 **What those two numbers mean for a child in front of the TV**, said plainly:
 
-- Precision of <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n--> means roughly a third of the windows flashmap flags are not over the threshold. The cost of that is picture hidden that did not need hiding. It is the direction we would rather err in, and it is still a cost, because a title full of unnecessary covers is a title a child stops choosing.
-- Recall of <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> means about one positive window in ten is missed across the whole suite. **That blended number flatters the part that matters, and the split says so.** Away from a limit, recall is <!--n results/conformance.json:published.recall_away_from_limits -->1<!--/n--> over <!--n results/conformance.json:published.recall_away_from_limits_positive_windows -->244<!--/n--> positive windows in <!--n results/conformance.json:published.recall_away_from_limits_clips -->289<!--/n--> clips. On the <!--n results/conformance.json:published.recall_near_limits_clips -->178<!--/n--> clips that sit **on** a limit it is <!--n results/conformance.json:published.recall_near_limits -->0.575<!--/n--> over <!--n results/conformance.json:published.recall_near_limits_positive_windows -->80<!--/n--> positive windows, which is closer to four missed in ten than one. A safety tool lives at the limit, so that is the number to judge it by, and it is the reason this is a layer that reduces exposure rather than one that removes it. It is also the reason the approved wording is the wording it is. [`eval/EVAL_RESULTS.md`](eval/EVAL_RESULTS.md) works through what that split means.
+- Precision of <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision -->0.649<!--/n--> means roughly a third of the windows flashmap flags are not over the threshold. The cost of that is picture hidden that did not need hiding. It is the direction we would rather err in, and it is still a cost, because a title full of unnecessary covers is a title a child stops choosing.
+- Recall of <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall -->0.85<!--/n--> means positive windows are still missed across the whole suite. **That blended number flatters the part that matters, and the split says so.** Away from a limit, recall is <!--n results/conformance_current_report_2026-10-02.json:published.recall_away_from_limits -->1<!--/n--> over <!--n results/conformance_current_report_2026-10-02.json:published.recall_away_from_limits_positive_windows -->910<!--/n--> positive windows in <!--n results/conformance_current_report_2026-10-02.json:published.recall_away_from_limits_clips -->1797<!--/n--> clips. On the <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits_clips -->1202<!--/n--> clips that sit **on** a limit it is <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits -->0.469<!--/n--> over <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits_positive_windows -->358<!--/n--> positive windows, so more than half of the near-limit positive windows are missed. A safety tool lives at the limit, so that is the number to judge it by, and it is the reason this is a layer that reduces exposure rather than one that removes it. It is also the reason the approved wording is the wording it is. The archived discussion in [`eval/EVAL_RESULTS.md`](eval/EVAL_RESULTS.md) retains its historical figures; the table here uses the completed run.
 
-Neither number has anything to say about the red flash rule against real footage, because the pool has no saturated red strobe. The ablation in [`results/ablations.json`](results/ablations.json) shows what the red rule is carrying on the synthetic suite: with it on, <!--n results/ablations.json:detection.arms.default.recall.numerator -->88<!--/n--> of <!--n results/ablations.json:detection.arms.default.recall.denominator -->98<!--/n--> positive windows are found; with it off, <!--n results/ablations.json:detection.arms.red_rule_off.recall.numerator -->64<!--/n--> of <!--n results/ablations.json:detection.arms.red_rule_off.recall.denominator -->98<!--/n-->.
+Neither number has anything to say about the red flash rule against real footage, because the pool has no saturated red strobe. The historical ablation in [`results/ablations.json`](results/ablations.json) shows what the red rule is carrying on the synthetic suite: with it on, <!--n results/ablations.json:detection.arms.default.recall.numerator -->88<!--/n--> of <!--n results/ablations.json:detection.arms.default.recall.denominator -->98<!--/n--> positive windows are found; with it off, <!--n results/ablations.json:detection.arms.red_rule_off.recall.numerator -->64<!--/n--> of <!--n results/ablations.json:detection.arms.red_rule_off.recall.denominator -->98<!--/n-->.
 
-### Baselines
+### Baselines (historical)
 
 Three independent tools were run over the same pool, so flashmap can be compared against something rather than trusted on its own. Per-clip results are in [`results/baselines/`](results/baselines/): `ffmpeg_photosensitivity` (FFmpeg's own photosensitivity filter, a mitigator whose flags are inferred from where its output differs from the unfiltered decode), `naive_luma_diff` (whole-frame mean luma only, no area rule, no colour rule, no rate window) and `iris` ([EA IRIS](https://github.com/electronicarts/IRIS), a published photosensitivity analyser, through its own example app built from source at a pinned commit). None of the three is a conformance result and none is a safety claim.
 
@@ -357,9 +371,9 @@ These rows exist so nobody has to guess what is missing.
 
 | What | Why it is empty |
 |---|---|
-| GATE 1: covers drawn early, filmed at 240 fps | Needs the Fire TV stick. |
-| Any cover lead time at all, on any device | The one run that produced one was withdrawn, because the player never reported a position. See above. |
-| GATE 3: end to end on the stick | Needs the stick. |
+| Physical screen-level cover timing | Unmeasured and outside the simulator-only submission scope. |
+| Current Harbor simulator journey | Requires a visible current build and recorded observation; historical software timing is not screen timing. |
+| Physical device end-to-end behavior | Outside this submission scope; no hardware validation is claimed. |
 | Prevented exposure, in seconds | Computed from flash maps once the KPI run happens. Never by playing flashing content with the filter off. |
 | Test counts | The suites run in CI. No results file records their counts, so no number is published here. |
 | Red flash segments from real footage | The free pool has none. Self-filmed red clips are the plan, under the rules in [docs/SAFETY.md](docs/SAFETY.md). |
@@ -384,30 +398,32 @@ export JAVA_HOME=/opt/homebrew/opt/openjdk@21
 
 ### The app on the Vega Virtual Device
 
-```sh
-cd app
-npm install                             # postinstall builds Shaka Player, so JAVA_HOME matters
-npm run build:debug                     # a debug build: release builds strip console.log
-
-cd ..
-python3 eval/vvd_smoke.py --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
-```
-
-`eval/vvd_smoke.py` starts the virtual device if it is not running, installs and launches the app, drives the remote, plays a title and writes `results/vvd_smoke.json`.
-
-Two things to know before you script against the device. `vega virtual-device status` says running before the device is usable, so wait for `vega device is-connected` instead. And `vega device list` crashes with a TypeError on this SDK, so use `vega device info`. Both are in the [friction log](docs/FRICTION_LOG.md), entries 6 and 8.
-
-### The app on a Fire TV stick
+Use the aarch64 package on this Apple Silicon Mac. From the repository root:
 
 ```sh
 cd app
 npm install
-npm run build:debug                     # builds every architecture; the stick takes armv7
-vega device is-connected                # not "vega device list", which crashes
-vega run-app build/armv7-debug/calm-frames-app_armv7.vpkg
+npm run build:debug -- --target aarch64
+cd ..
+nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
+vega device is-connected
+vega device info
+vega run-app app/build/aarch64-debug/calm-frames-app_aarch64.vpkg \
+  io.github.alejandropublius.calmframes.main --deviceId VirtualDevice
 ```
 
-The stick needs Vega OS 1.2 with developer mode on, connected over USB. The package ID must not begin with `com.amazon`, or developer mode will not sideload it.
+Start the virtual device only if it is stopped. Wait until `vega device is-connected` confirms readiness before installing. The CLI's `virtual-device status` can report running before it is usable; avoid `vega device list`, which previously failed on this SDK. The explicit interactive component ID makes the install and launch request unambiguous.
+
+Then run the checked benign journey preflight:
+
+```sh
+.venv/bin/python -m eval.benign_native_smoke --device Simulator \
+  --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
+```
+
+After successful preflight, repeat with `--execute --restart` to collect fresh software logs. Use the visible remote to complete setup, select Harbor story (benign demo), enable English practice captions, and observe playback, practice holds, sound, seeks, parent settings and restart. Logs alone do not prove screen composition or audio continuity. `eval/vvd_smoke.py` now delegates to the same benign smoke entrypoint; its historical helper functions remain for separate timing tools.
+
+The simulator-only submission does not require a physical Fire TV device.
 
 ### The analyzer on its own
 
@@ -536,31 +552,11 @@ lockout are saved together in a versioned local record. The library opens only
 after that record is read and validated. Unreadable or malformed records keep
 it closed; a failed save offers a retry of the intended change. No plaintext
 PIN or unlocked parent session is saved. The hide history remains in memory.
-These paths are covered by app regressions, with native storage behavior on
-physical Fire TV still awaiting validation.
+These paths are covered by app regressions, with native storage behavior still requiring the current simulator restart check.
 
-### Read-only physical-TV preflight
+### Current validation scope
 
-After building a Debug package, check its actual bundled benign-media bytes
-and the SDK's current device connection without installing or playing anything:
-
-```sh
-make hardware-preflight HARDWARE_PREFLIGHT_ARGS="--vpkg app/build/armv7-debug/calm-frames-app_armv7.vpkg"
-```
-
-An absent device returns a blocked receipt and exit status 2. After HUMAN
-CHECKPOINT B, add `--device SERIAL --checkpoint-b-confirmed` and select the
-package matching that physical device's architecture. The check requires the
-pinned Vega OS build, developer mode and an explicit target; a virtual device
-cannot qualify. Any printed install/launch commands are proposals, never
-executed by this preflight.
-
-The bundled calm gradient can check basic launch and seek behavior only: it
-has audio but no captions or scheduled scene images. Caption/image composition
-needs a separately prepared and integrated benign fixture. Screen timing
-still needs a real TV and the HUMAN CHECKPOINT E1 camera recording. Do not run
-`stick-day` unchanged on physical hardware: its timing runner uses virtual-device
-QEMU host paths. A successful preflight is not a playback or safety result.
+Use the benign simulator preflight above and the Harbor capture plan in [docs/SHOT_MANIFEST.md](docs/SHOT_MANIFEST.md). Historical hardware preflight and camera protocols remain in the repository for future work; they are not submission prerequisites. No physical-TV timing or composition result is claimed.
 
 ### AWS
 
@@ -576,7 +572,7 @@ make synth                                # offline: no credentials, no account 
 
 The parent area is behind a four digit PIN, set on the device by whoever sets the app up. The PIN itself is never stored: what is stored is a salted, iterated hash of it ([`app/src/calmframes/parentGate.ts`](app/src/calmframes/parentGate.ts), which is also plain about what that does and does not buy).
 
-**The demo PIN for judges is not set yet.** It will be published here and in the GitHub Release notes once the demo build exists. This README will not carry a made-up one.
+**There is no preset PIN in the package.** On a fresh simulator installation, choose and confirm your own PIN during onboarding. Installing the package on another simulator does not transfer household state. For an already configured demo simulator, use its owner-provided PIN; do not clear existing data to bypass the gate.
 
 ## Limits
 
@@ -586,16 +582,16 @@ Worth knowing before trusting this with a child.
 - **Only titles that passed verify can play in kid mode.** Anything else is not protected, because it was never measured.
 - **Live streams and other apps' content are out of scope.** So are DRM titles from other apps.
 - **HDR is not measured.** flashmap refuses HLG and PQ input rather than measuring it with the wrong transfer curve.
-- **Theora `.ogv` does not decode**, which is four of the twenty clips in the screening pool.
-- **There is no screen-level cover lead time.** The software-level number above is the app's own timing on the virtual device, and it stops at the moment the app sets its state. Until GATE 1 is filmed on a stick at 240 fps, the timing claim in this README is an upper bound and a design argument, not a measurement of what a screen showed.
+- **Decoder support is bounded.** The earlier Theora failures were fixed and rescreened; unsupported or undecodable inputs still fail closed.
+- **There is no screen-level cover lead time.** The software-level number above is the app's own timing on the virtual device, and it stops at the moment the app sets its state. The timing claim is a software observation, not a measurement of what a screen showed; physical camera timing is outside this submission scope.
 - **One cover in 49 went on after its marker started.** The cause looks like the JavaScript thread being unavailable for about a third of a second, which the 500 ms guard band did not cover. Until the worst thread pause is measured on real hardware, the right guard band is unknown.
 - **The layering question is open.** The one recorded run is inconclusive, because playback did not run in that take.
 - **Scene-hold composition is not measured on a TV.** The encoded outputs and
   runtime guards have automated checks, but native image loading, aspect ratio,
-  captions and cover timing still need a physical-device run with benign media.
+  captions and continuing audio still need direct observation in the current benign simulator journey. No physical cover timing is claimed.
 - **Red flash coverage is untested against real footage**, because no free source in the pool has a saturated red strobe.
 - **The room rule can only add hides.** A household cannot make Calm Frames weaker than WCAG. That is a design rule and it is enforced in code, but it also means a household cannot switch protection off for one title without leaving kid mode.
-- **None of it has been seen running on a stick.** The guard hook, the PIN gate, the seek safety engine, the calm card and the VoiceView announcements exist in `app/src/calmframes/`, and the standalone [`hook/`](hook/) package that ships them to other apps exists too, with its own README and the integration diff above. What has not happened is any of it running on real hardware.
+- **Physical hardware is untested and outside this submission scope.** The Vega Virtual Device journey is the acceptance target. Simulator observations do not establish physical display behavior.
 
 ## Safety
 

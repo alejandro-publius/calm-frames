@@ -1,5 +1,17 @@
 # Calm Frames: rules for every session
 
+**Active scope, Oct 9 finishing session.** Alex is entering solo and has an
+identity-verified Amazon Developer account. Use only the Vega Virtual Device.
+Physical sticks, camera timing, TV rehearsal and hardware gates are outside
+this submission's completion criteria. Preserve their historical measurements
+and limitations without treating them as pending work for Alex. The brand line
+is "A calmer way to watch". The current checklist is
+`docs/COMPLETION_CHECKLIST.md`; it supersedes older next-action lists below.
+Do not publish, submit, change repository visibility or incur additional cloud
+costs before the reviewable work is complete and Alex approves those actions.
+Claude CLI workers require verified existing subscription authentication and
+one successful small task first; no API keys or permission bypasses.
+
 **Current phase:** Phase 10, signed scene holds, durable household setup and a
 benign captioned demo and checked packaged library, Fri Oct 2, 2026, with the
 state brought up to Fri Oct 9 at the end of this section. The current default shelf includes the
@@ -15,8 +27,8 @@ Household state persists in a validated local record. Failed reads/writes block
 the library; retries retain the intended change; the parent area unlocks after
 saving the PIN gate. Profile history clears only after committed removal, and
 caption Off now disables the selected native track. Hide history itself remains
-in memory. Native storage durability and current image/caption composition still
-need observation. Software checks and packaged fixture availability are not
+in memory. Native storage durability and image/caption composition were observed on the
+Vega Virtual Device on Oct 9 and 10; see the current receipt. Software checks and packaged fixture availability are not
 physical-TV proof. Do not run the QEMU timing path on a physical target unchanged.
 
 The latest project assessment is in `docs/HACKATHON_REVIEW.md`; it distinguishes
@@ -32,25 +44,22 @@ The hook has an offline tarball-consumer check, not independent adoption proof.
 See STATUS section 0 for final local checks and limitations; older counts and
 runs below it are historical.
 
-**Where it stands on Oct 9.** Hosted CI runs again, and on eb59c69 all six CI
-jobs pass; Audit fails two of its four jobs, on npm advisories that have no
-written exception and on SBOM drift. Keep main unchanged until Audit passes
-too. The full corrected conformance run finished on Oct 3 with status
-complete: 3,000 clips measured, 1 excluded by the fidelity rule. Its numbers
-are not adopted yet, so the README still quotes the archived partial run.
-Preserve the legacy archive and keep protocol corrections separate from
-detector improvements. **AWS is deployed and recorded.** On Oct 9 Alex
-confirmed HUMAN CHECKPOINT D and ran `make deploy` in his own terminal;
-`CalmFramesStack` in us-east-1 ran the calm marker clip twice, refused unsigned
-and published signed, and `results/aws_deploy_2026-10-09.json` is the record,
-with no account identifier in it or anywhere else in the repo. Keep it that
-way. The CDK CLI is pinned to 2.1142.0 now that the record branch is merged
-into the review branch, so only a checkout without that merge needs
-`CDK="npx --yes aws-cdk@2.1142.0"` on the command line. Every deploy needs
-`SIGNING_KEY_PARAMETER=/calm-frames/cloud-signing-key`, or it takes the cloud
-demo key away from the task. The lock line `make deploy` reads goes only into
-a deploy worktree's own copy of docs/STATUS.md, never the committed one. No
-public release or submission has occurred.
+**Current finishing checkpoint, Oct 10.** Follow `docs/COMPLETION_CHECKLIST.md`.
+The full native benign journey, saved settings, three presets, catalog playback,
+remote transport, captions through both holds and native recording are observed.
+The final English demo is prepared locally. Full app and Python suites pass;
+all formerly blocked localhost tests and the failed UI invocation are resolved.
+Claude Fable 5.1 with explicit max effort completed bounded subscription workers.
+SBOM/CDK fixes reproduce locally; dependency Audit remains failed and hosted
+rerun is pending. No physical timing claim, cloud consumption by the app,
+publication or submission is implied. Exact provenance lives in the native receipt.
+
+AWS deployment remains the saved Oct 9 evidence in
+`results/aws_deploy_2026-10-09.json`. The app consumes its compiled local
+catalog and does not trust or consume the cloud catalog. Preserve the separate
+deploy worktree and its checkpoint line. A new deployment still requires
+approval and the signing-key parameter; this finishing task does not authorize
+additional cloud costs. Budget tag activation and image findings remain open.
 
 **The head-start kits never arrived.** flashmap, calm-timing, evkit and the notes were all written here instead. docs/PLAN.md lists what replaced what. If the kits turn up, treat them as a second opinion and re-record any number taken with our version.
 **Repo:** private at github.com/alejandro-publius/calm-frames. Work is on
@@ -152,7 +161,7 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 ### Security and ops
 - No secrets in the repo. gitleaks runs in CI and as a pre-commit hook. AWS access from CI only through GitHub OIDC.
 - The map-signing private key never enters the repo; the app ships only the public key.
-- CDK: `natGateways: 0`, $20 budget alarm, cost tags, `make destroy` leaves nothing billable. No AWS deploy until HUMAN CHECKPOINT D is confirmed.
+- CDK: `natGateways: 0`, $20 budget alarm, cost tags, `make destroy` does not remove the bootstrap resources or manually created signing parameter; inspect the saved deployment record for remaining resources. No AWS deploy until HUMAN CHECKPOINT D is confirmed.
 - Pinned: Vega SDK 0.24.9914, sample tag `v0.24-RN83` (commit ef8e4da), Node 22 (`.nvmrc`), Python 3.12 (`.python-version`, `.venv`).
 - The colima Docker VM on this Mac is shared with other projects. Never restart colima or remove containers, images or volumes we didn't create.
 - Commit small and often. Once the judged release tag exists, never move it.
@@ -188,7 +197,7 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 - Start it detached, or it dies with the shell that started it. `eval/vvd_smoke.py` handles this.
 - `vega virtual-device status` says running before the device is usable. Wait for `vega device is-connected` instead.
 - `vega device list` crashes with a TypeError. Use `vega device info` and `vega device is-connected`.
-- Remote buttons: Amazon's Vega 0.24 docs describe `inputd-cli`, built into Fire TV devices and the Vega Virtual Device and run from the host as `vega exec inputd-cli button_press KEY_BACK`. The full command set needs developer mode; on the virtual device that is `vsm developer-mode enable` inside `vega exec device shell -d VirtualDevice`. Read at developer.amazon.com/docs/vega/0.24/inputdcli.html on Oct 9, 2026, and not yet tried here. Until it has been, `eval/vvd_control.py` presses keys through QEMU's QMP socket.
+- Remote buttons: Amazon's Vega 0.24 docs describe `inputd-cli`, built into Fire TV devices and the Vega Virtual Device and run from the host as `vega exec inputd-cli button_press KEY_BACK`. The full command set needs developer mode; on the virtual device that is `vsm developer-mode enable` inside `vega exec device shell -d VirtualDevice`. Read at developer.amazon.com/docs/vega/0.24/inputdcli.html on Oct 9, 2026. On this CLI, `vega device run-cmd --device Simulator --command 'inputd-cli --help'` works; the documented `vega exec inputd-cli` route instead looks for a missing host executable. Until it has been, `eval/vvd_control.py` presses keys through QEMU's QMP socket.
 - Screenshots: no CLI command for them has turned up in the docs read so far. `eval/vvd_control.py` takes one through QMP, and it comes back black because the app renders on a GPU layer the capture misses, so verify playback from device logs.
 - Release builds strip `console.log`. Use the debug package when you need the app's own logs.
 - The build rewrites `app/manifest.toml`, adding a `[[needs.module]]` entry per installed `@amazon-devices` package. Removing a feature means removing its dependency too, or the app still declares it needs that module.

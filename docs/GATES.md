@@ -1,5 +1,13 @@
 # Gates, checkpoints and kill rules
 
+**Active scope override, Oct 9.** Alex requests a solo, Vega Virtual Device-only
+submission. Physical-target checkpoints B, E1 and E2 and TV rehearsal are not
+completion prerequisites. Their historical thresholds and outcomes remain
+unchanged; no simulator log can claim those gates passed. Current acceptance
+is the full benign simulator journey and verified screen recording in
+[COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md). Publication, submission,
+visibility changes and additional cloud costs still require final approval.
+
 Every gate result and every kill rule that fires is logged here with the date and evidence.
 
 ## Status board

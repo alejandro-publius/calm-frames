@@ -1,7 +1,5 @@
 # Decisions
 
-Each entry: date, decision, why, what it costs. Newest at the bottom.
-
 ## 2026-09-17: Build on the M1 MacBook
 - **Decision:** Develop on this Mac (macOS 15.1.1, Apple M1, 16 GB). No Ubuntu SSD.
 - **Why:** Vega SDK 0.24 supports macOS on Apple silicon, so HUMAN CHECKPOINT A passes and no kill rule applies. Apple silicon support continues after Dec 15, 2026, when Intel support ends.
@@ -2027,3 +2025,59 @@ device yet.
   names a title by it had to change.
 - **Evidence:** every guard was seen to fail with its code broken on purpose
   and restored (the commit messages list each one).
+
+
+## 2026-10-09: simulator-only finishing scope and evidence
+
+- **Decision:** preserve `dcb27a1` and the separate deployment worktree; use
+  the Vega Virtual Device exclusively. **Why:** Alex's current instructions
+  supersede the old hardware schedule and possible teammate. **Cost:** no
+  physical screen-timing or clinical claim; simulator behavior must still be
+  observed directly.
+- **Decision:** add a Delete key for partial PIN entry, remember the last opened
+  checked shelf title, and consume Back from Credits. **Why:** remote correction
+  and return navigation were incomplete. **Cost:** another keypad control in
+  the existing last row. Regression controls failed before these fixes; actual
+  D-pad focus remains a simulator check.
+- **Decision:** retain the monk and palette, replace concentric rings with one
+  open halo, and use "A calmer way to watch". **Why:** the requested identity
+  needs one consistent small-size silhouette and accurate brand line. **Cost:**
+  regenerated icons and tile. The installed Qt renderer avoids dependence on
+  browser capture and keeps transparent icon corners and an opaque listing tile.
+- **Decision:** adopt the complete corrected conformance report without
+  rerunning hazardous generators. **Why:** its recorded input hashes and exact
+  report rebuild passed independent review. **Cost:** lower recall than the
+  archived partial headline, disclosed alongside the weaker near-limit result.
+  The encoding-protocol correction and unmatched historical baselines remain
+  explicit. Detector thresholds are unchanged.
+- **Decision:** stop Claude delegation at the authentication probe. **Why:**
+  `auth status` reports not logged in here and the small task failed. **Cost:**
+  existing subscription access must be made available before Claude work can
+  proceed. No API key, billing change or permission bypass was attempted.
+
+Each entry: date, decision, why, what it costs. Newest at the bottom.
+
+
+## October 10, 2026: complete the simulator evidence
+
+- **Decision:** use the verified host Claude Max session with explicit Fable 5.1
+  and max effort. **Why:** the small subscription probe succeeded. **Cost:**
+  subscription allowance only, no API keys or billing changes. Ultracode works
+  noninteractively but its background wait ceiling ended an unfinished review;
+  bounded ordinary CLI workers completed useful fixes and independent reviews.
+- **Decision:** normalize package URIs only at the native media boundary and
+  retain an RN caption host. **Why:** native errors and screenshots established
+  the file-open and caption-stacking failures. **Cost:** small regression-tested
+  changes, no signed identity or threshold changes.
+- **Decision:** make exit cleanup idempotent and independent of the captions
+  menu. **Why:** final review and observed-red tests reproduced duplicate Back
+  and blocked background teardown. **Cost:** three regression tests and a final
+  rebuilt package/native playback rerun.
+- **Decision:** ship a local review cut with disclosed synthetic English voice,
+  actual native video/stills and a source manifest. **Why:** it demonstrates the
+  running app truthfully below three minutes. **Cost:** local recording/encoding;
+  no fabricated feedback, hazard viewing, public upload or cloud execution.
+- **Decision:** report security findings and history-test scope explicitly.
+  **Why:** SDK dependency Audit is still red, the cloud pipeline is separate,
+  and synthetic practice must not create false exposure history. **Cost:**
+  the entry is reviewable but is not yet a released or submitted product.

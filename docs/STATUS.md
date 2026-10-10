@@ -1,8 +1,26 @@
 # Status
 
-Updated Fri Oct 9, 2026.
+Updated Sat Oct 10, 2026.
 
 ## 0. Where things stand
+
+### Oct 10: reviewed simulator build and submission preparation
+
+The authoritative current checklist is [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md).
+The native journey is observed and recorded: setup/PIN correction, saved room,
+profile, preset and chime, all offered presets and catalog availability, both
+Harbor holds with English captions/audio, transport fallback and focus return.
+Practice is excluded from history; positive attribution is integration-tested.
+Player exit races from the final independent review are fixed with red/green
+regressions and an affected native rerun. App/Python/type/UI checks pass.
+The English simulator demo and branding assets are prepared locally.
+
+Exact package and source provenance: `results/native_validation_2026-10-10.json`.
+Claude Max access works; Fable 5.1/max bounded reviews completed. AWS deployment
+worktree was preserved and no cloud costs were incurred. Local SBOM/CDK fixes
+pass, but dependency advisories remain open and hosted Audit has not been rerun.
+Public links, upstream author identity, entrant fields and publication remain open.
+Only the Vega Virtual Device is in scope. Earlier entries below are historical.
 
 ### Oct 9, 2026: the Oct 2 to 3 work is pushed, hosted CI passes but for Audit, and AWS is deployed
 

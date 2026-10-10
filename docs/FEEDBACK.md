@@ -14,19 +14,19 @@ Amazon asks five questions about every tool an entry used. This file answers the
 
 Every measured number in this file is marked and checked against `results/` by CI, so a figure that drifts from what was measured fails the build.
 
-**Environment for everything below unless a section says otherwise:** macOS 15.1.1 (24B91) on Apple M1, 16 GB. Vega CLI 1.3.4, Vega SDK 0.24.9914, Vega <!--n results/vvd_smoke.json:device.build -->OS 1.2 (TV Ship/101520710)<!--/n--> on the Vega Virtual Device, Node 22, React Native 0.83, September 2026. No physical Fire TV stick yet, which is why nothing below claims anything about hardware. **For the AWS sections:** us-east-1, CDK CLI <!--n results/aws_deploy_2026-10-09.json:cdk.cli_version -->2.1142.0<!--/n--> with aws-cdk-lib <!--n results/aws_deploy_2026-10-09.json:cdk.aws_cdk_lib -->2.270.0<!--/n-->, run from the same Mac on the night of Oct 9, 2026, in Pacific Daylight Time.
+**Environment for everything below unless a section says otherwise:** macOS 15.1.1 (24B91) on Apple M1, 16 GB. Vega CLI 1.3.4, Vega SDK 0.24.9914, Vega <!--n results/vvd_smoke.json:device.build -->OS 1.2 (TV Ship/101520710)<!--/n--> on the Vega Virtual Device, Node 22, React Native 0.83, September 2026, with the native journey observed on Oct 9 and 10, 2026. This submission is simulator-only and uses no physical Fire TV device, which is why nothing below claims anything about hardware. **For the AWS sections:** us-east-1, CDK CLI <!--n results/aws_deploy_2026-10-09.json:cdk.cli_version -->2.1142.0<!--/n--> with aws-cdk-lib <!--n results/aws_deploy_2026-10-09.json:cdk.aws_cdk_lib -->2.270.0<!--/n-->, run from the same Mac on the night of Oct 9, 2026, in Pacific Daylight Time.
 
 ## At a glance
 
 | # | Tool | Heaviest complaint | Build with it again |
 |---|---|---|---|
-| 1 | Vega SDK and Vega CLI | `vega device list` crashes; no input or capture commands | Yes |
-| 2 | Vega Virtual Device | The screen cannot be captured at all, and playback is not steady | Yes for development, no for evidence |
+| 1 | Vega SDK and Vega CLI | `vega device list` crashes; `inputd-cli` works only through `vega device run-cmd`, not the documented `vega exec` form, and no CLI screenshot command turned up | Yes |
+| 2 | Vega Virtual Device | QMP and plain window captures missed the app picture, the composited recording that works is undocumented, and playback is not steady | Yes for development and recorded journeys; not for screen timing |
 | 3 | `vega-video-sample` | A failed load is silent; the README documents a workflow OS 1.2 cannot do | Yes, and we are sending a fix back |
 | 4 | `react-native-w3cmedia` | `timeupdate` cadence and `currentTime` resolution are undocumented | Yes, with that documented |
 | 5 | Vega Media Controls | A voice seek can move the playhead without the app's UI, and that is not called out | Yes |
 | 6 | KeplerCaptionsView | The z-order contract is not written down anywhere | Yes |
-| 7 | The accessibility APIs | No system signal for photosensitivity, and no capture to check our own screens with | Yes |
+| 7 | The accessibility APIs | No system signal for photosensitivity, and no in-app capture to check our own screens with | Yes |
 | 8 | AWS CDK | A CLI older than the library stops right after synth; four more traps on the first deploy | Yes |
 | 9 | AWS Fargate on ECS | With no NAT gateway the task needs a public IP, and nothing documents the cheap and still private pattern | Yes |
 | 10 | Amazon S3 | Nothing that cost us time | Yes |
@@ -37,7 +37,7 @@ Every measured number in this file is marked and checked against `results/` by C
 | 15 | Systems Manager Parameter Store and KMS | CloudFormation cannot make a SecureString, so the key lives outside the stack | Yes |
 | 16 | AWS Budgets | A budget filtered on a new tag cannot fire until the tag is activated, and nothing says so | Yes |
 | 17 | Kepler UI Components, react-native-kepler, Kepler File System | The build rewrites `manifest.toml`; the data directory cannot be written from the host | Yes |
-| 18 | GitHub Actions | Nothing that cost us time | Yes |
+| 18 | GitHub Actions | Three days of runs that never started, which cost the pre-publication CI evidence for the scene-hold tree | Yes |
 
 ---
 
@@ -53,32 +53,32 @@ Every measured number in this file is marked and checked against `results/` by C
 - `vega virtual-device status` reports `"running":true` about twenty seconds before the device can take a command, so every script has to poll `vega device is-connected` instead and every developer finds this out the same way.
 - The same command exits non-zero before the first start, where "no instance yet" is a normal state, and prints the internal command line with it.
 - The virtual device sometimes exits with nothing written to its own log after "Virtual device ready", so a scripted run has to check for the device before every step.
-- There is no `vega device key` and no `vega device screenshot`. See section 2; for an accessibility project this is the one that hurt.
+- Earlier work missed the documented `inputd-cli` remote-input route. The Oct 9 documentation review found it written as `vega exec inputd-cli button_press KEY_BACK`; on this CLI that form looks for a host executable that does not exist. The form that works, used on Oct 9 and 10, is `vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_DOWN'`. No CLI screenshot command was found in the pages reviewed. See section 2 for the capture story.
 - `vega device copy-to --help` has its `--source` and `--destination` descriptions the wrong way round, contradicting its own examples printed immediately below.
 
 Two smaller ones, both about the installer: with stdout redirected to a file it writes progress frame by frame, so our install log was 2.5 MB holding 39,131 `Extracted Files: n/39131` lines, and it appends `source ~/vega/env` to every shell startup file it can find, with no way to opt out.
 
 **Onboarding, zero to hello world.** Good once you find the right page, and the right page is hard to find. `https://developer.amazon.com/docs/vega/0.24/` is a 404, and so is `/latest/`. System requirements are split between the install page and the release notes, and the install page says Node 18 while the samples declare Node 22 or later, so following the install page gives you a Node the samples reject. From a working shell to the sample playing video on the virtual device was under a day, and most of that day went on documentation rather than tools.
 
-**Would we build with it again.** Yes. What we hit are rough edges in the CLI rather than limits in the platform, and every one of them had a way around it. The missing input and capture commands are the only ones that would change the answer if they stayed missing, because an accessibility app has to be able to check its own screens.
+**Would we build with it again.** Yes. What we hit are rough edges in the CLI rather than limits in the platform, and every one of them had a way around it. Discoverable input and composited capture documentation matter because an accessibility app has to check its own screens.
 
 ---
 
 ## 2. Vega Virtual Device
 
-**What we used it for.** All development, and every measurement in this submission that is not on hardware: the smoke test, the layering run and the cover timing runs. It is also where the app was driven from a script, over the QEMU control socket, because the CLI cannot press buttons.
+**What we used it for.** All development and device measurements in this simulator-only submission: the smoke test, the layering run, the cover timing runs, and on Oct 9 and 10 the whole benign journey, observed on its screen and recorded. It is also where the app was driven from a script, over the QEMU control socket, before `inputd-cli` was reached through `vega device run-cmd`.
 
-**What worked well.** It is a real OS 1.2 image on ARM, and the app that runs there is the app that will run on the stick. It let the whole project start before any hardware arrived, which on a two-month build is most of its value. The recorded smoke run played a Blender title over HLS with <!--n results/vvd_smoke.json:segment_fetches_during_play -->8<!--/n--> segment fetches during <!--n results/vvd_smoke.json:play_seconds -->40<!--/n--> seconds of play, <!--n results/vvd_smoke.json:streaming_errors -->0<!--/n--> streaming errors and <!--n results/vvd_smoke.json:crash_lines -->0<!--/n--> crash lines, at a peak of <!--n results/vvd_smoke.json:peak_pss_kb -->353178<!--/n--> kB.
+**What worked well.** It is a real OS 1.2 image on ARM, and it is the only device used for this submission. It supports development without purchasing hardware; behavior on a physical device is not inferred from it. The recorded smoke run played a Blender title over HLS with <!--n results/vvd_smoke.json:segment_fetches_during_play -->8<!--/n--> segment fetches during <!--n results/vvd_smoke.json:play_seconds -->40<!--/n--> seconds of play, <!--n results/vvd_smoke.json:streaming_errors -->0<!--/n--> streaming errors and <!--n results/vvd_smoke.json:crash_lines -->0<!--/n--> crash lines, at a peak of <!--n results/vvd_smoke.json:peak_pss_kb -->353178<!--/n--> kB. On Oct 9 and 10 it carried the whole benign journey, recorded: onboarding, settings surviving a relaunch, the parent gate, all three catalog titles, both Harbor holds with changing English captions and non-silent audio, and pause, resume and seeks into holds.
 
 **What needs work.** Three things, and the first is the serious one.
 
-- **The screen cannot be captured, by any route we could find.** `vega device` has no screenshot command. The device is QEMU, so we went to its QMP socket: key injection works, and `screendump` returns black, because the app draws on a GPU layer the capture does not see. Capturing the window from macOS does not work either: a full screen grab with the virtual device frontmost returned the desktop behind it. So we cannot look at our own screens at all, and every piece of playback evidence has to be reconstructed from device logs. For an app whose whole purpose is to keep flashing off a screen, not being able to see the screen is the single worst thing in this list.
+- **Capture is undocumented, and the obvious routes miss the picture.** QMP `screendump` returned black and one macOS full-screen grab showed the desktop behind the virtual device. What worked, on Oct 9 and 10, was a ScreenCaptureKit recording of the simulator window, H.264 picture with AAC audio, and even that came back with stale frames after overnight inactivity under Stage Manager until the capture helper activated the Vega window first. The saved takes show both Harbor holds, their changing English captions and non-silent audio, inspected by eye. None of this is in Amazon's documentation, and logs and synthetic UI color frames cannot replace it.
 - **Playback is not steady.** Of four runs in one afternoon, two played cleanly, one failed with `Category: UNKNOWN, Position: 0.084` on the same HLS stream, and one never started. A later timing measurement needed 22 app launches to collect <!--n results/gate1_software_vvd.json:trials_counted -->49<!--/n--> usable trials. The error carries a category of `UNKNOWN` and a position, and nothing else to act on.
 - **The device backgrounds an app nobody is touching**, and a backgrounded app stops playing. A person holding a remote never hits this. A camera rig with nobody pressing anything hits it every time, so our runs press a key the app does not bind, every few seconds, to keep the device awake without touching playback.
 
 **Onboarding, zero to hello world.** Quick to start and confusing to script against, because the readiness signal is not one. Budget time for two discoveries nothing warns you about: that `status` is not readiness, and that the black screenshot you are looking at is black for a reason rather than because the app failed.
 
-**Would we build with it again.** Yes for development. No for evidence. Every number we take from it is labelled a virtual device number, and the gates that matter are filmed at 240 fps against a real stick.
+**Would we build with it again.** Yes. Label simulator measurements as such, distinguish software events from displayed frames, and inspect the saved recording directly, which is what the Oct 9 and 10 takes are for. Physical camera timing is outside this submission scope.
 
 ---
 
@@ -150,7 +150,7 @@ One more thing that is a design choice rather than a defect, and worth knowing: 
 - **The z-order contract is not written down.** Video surface at the bottom, our own views in the middle, captions on top. We rely on it completely and we found it by trying it. It should be a stated contract, because if it ever changed, an accessibility layer built on it would fail silently and look like a rendering glitch.
 - **One captions view per process should be said loudly.** We designed around it from the start, so we never hit it, and an app that adds a second one finds out at runtime rather than at build time. A note in the API reference costs nothing.
 
-One thing we could not check yet, and will not pretend we did: whether captions stay readable over the cover on a real screen. The layering test exists and the harness runs, but the virtual device cannot be photographed, so the verdict in `results/vvd_layering_rehearsal.json` is <!--n results/vvd_layering_rehearsal.json:layering.verdict -->inconclusive<!--/n-->. That is a question for the stick and a pair of eyes.
+Whether captions stay readable over the cover on screen was checked on Oct 9 and 10, after a fix on our side: captions had been stacking behind the cover image, and once that was corrected the ScreenCaptureKit recordings of the Vega Virtual Device show both scheduled Harbor holds with changing English captions above the held picture, with non-silent audio throughout. The earlier harness verdict in `results/vvd_layering_rehearsal.json` stays <!--n results/vvd_layering_rehearsal.json:layering.verdict -->inconclusive<!--/n-->, because its captures missed the app picture; the recordings, inspected by eye, are the evidence, which is R00 and S04 in [`docs/SHOT_MANIFEST.md`](SHOT_MANIFEST.md). No physical device was used.
 
 **Onboarding, zero to hello world.** Fine through the sample. Not obvious from the API alone.
 
@@ -169,7 +169,7 @@ One thing we could not check yet, and will not pretend we did: whether captions 
 - **There is no system-wide signal for photosensitivity.** A television knows the volume the household likes, the caption style they prefer and whether a screen reader is on. It does not know that the person in front of it must not be shown flashing. So every app has to invent its own protection, and a child's safety depends on which app they happened to open. Apple ships "Dim Flashing Lights" at the system level. Fire TV should too, and it should be readable by any app, in the same way `AccessibilityInfo.isScreenReaderEnabled()` is readable now.
 - **Announcements are fire and forget.** `announceForAccessibility` returns nothing and throws nothing. There is no way to ask whether VoiceView is running, whether the announcement was spoken, or whether it was dropped, so an app cannot fall back to something visible when speech is unavailable. Ours is written to never throw and to never block the cover, which is the safe shape, and it is a shape forced by not being able to ask.
 - **The privilege is quiet when it is missing.** Without `com.amazon.devconf.privilege.accessibility` in the manifest, no announcement is made and nothing says why. Since the build rewrites `manifest.toml` (section 17), we hold that line in place with a test.
-- **There is no way to check your own screens.** This is section 2's capture problem seen from the accessibility side. WCAG 2.3.1 applies to an app's own interface, not only to the video it plays, and on Vega today a developer cannot get a single frame of what their app drew, from inside the app or outside it. React Native 0.83 has no `takeSnapshot`, no `@amazon-devices` package offers a view capture, and the platform's own capture returns black. We had to make the app record what it paints, screen by screen, and turn that record into a video our analyzer could read, which is a real answer but it is not a photograph of the screen.
+- **There is no documented way to check your own screens.** This is section 2's capture problem seen from the accessibility side. WCAG 2.3.1 applies to an app's own interface, not only to the video it plays, and on Vega today a developer cannot get a frame of what their app drew from inside the app, and the outside routes we tried did not give one either. React Native 0.83 has no `takeSnapshot`, no `@amazon-devices` package offers a view capture, and the QMP screendump we tried returned black. A composited host screen recording does capture the app (section 2), which gives a person evidence to inspect but gives the app no way to check itself. We had to make the app record what it paints, screen by screen, and turn that record into a video our analyzer could read, which is a real answer but it is not a photograph of the screen.
 
 **Onboarding, zero to hello world.** Good if you arrive from React Native. The manifest privilege is the one piece that is not where you expect it, and it is the piece that silently disables everything else.
 
@@ -337,11 +337,11 @@ One thing we could not check yet, and will not pretend we did: whether captions 
 
 ## 18. GitHub Actions
 
-**What we used it for.** Four jobs on `ubuntu-latest`: the Vega app (typecheck, lint, jest), the Python packages, a secret scan, and a check that every published number in every document still matches the file in `results/` it came from. It is also how we ship the flash check to other people, as a composite action a studio can drop into a repository in one file.
+**What we used it for.** Two workflows on `ubuntu-latest`. CI has six jobs: the Vega app (typecheck, lint, jest, the prepared package checks and the hook consumer check), the Python packages, the app's own UI through flashmap, a hardening job with the mutation gate, property tests and the map fuzz corpus, a secret scan, and a check that every published number in every document still matches the file in `results/` it came from. Audit has four more: pip-audit and npm audit, whether the bills of materials are current, the CDK stack and container rules, and an ARM64 build of the ingest image. It is also how we ship the flash check to other people, as a composite action a studio can drop into a repository in one file.
 
 **What worked well.** Composite actions made it cheap to publish our analyzer as something someone else can adopt in one file, which is most of what "open source" means for a tool like this. `actions/setup-node` reading `.nvmrc` and `actions/setup-python` reading `.python-version` keeps CI pinned to the same versions as the laptop with no duplication.
 
-**What needs work.** Nothing that cost us time. One thing worth saying for other Vega projects: we found no published way to run the Vega SDK or its virtual device on a hosted runner, and we did not attempt it, since the SDK is a 5.4 GB install and the virtual device is a QEMU guest. So our app job runs `npm install --ignore-scripts` to skip the Shaka build, mocks the player and tests the logic, and everything device-shaped is a local run with its output committed to `results/` and checked in CI from there.
+**What needs work.** Two things. First, from Sep 28 to Sep 30 every run on this repository, CI and Audit alike, failed in two or three seconds with no runner assigned and no step executed; GitHub's annotation put it down to a failed account payment or a spending limit rather than code. That is friction entry 35, and it cost the pre-publication CI evidence for the scene-hold tree for those three days. It ended by Oct 5, when the scheduled Audit on main ran real steps, and runners have taken every job since. On dcb27a1, the latest hosted commit, CI passes in all six jobs and Audit fails on npm advisories that have no written exception, bills of materials that have drifted from what the generator writes, and a CDK CLI minimum of 2.1144.0 above the repository's 2.1142.0 pin. Those three are findings on our side, not GitHub's. Since then, in the reviewed local changes, all three bills of materials reproduce byte for byte with the pinned generators, the CDK transitive pins are corrected and the infra tests pass locally; no hosted rerun has happened, so nothing here claims Audit is green, and the advisories are unresolved. Second, for other Vega projects: we found no published way to run the Vega SDK or its virtual device on a hosted runner, and we did not attempt it, since the SDK is a 5.4 GB install and the virtual device is a QEMU guest. So our app job runs `npm install --ignore-scripts` to skip the Shaka build, mocks the player and tests the logic, and everything device-shaped is a local run with its output committed to `results/` and checked in CI from there.
 
 **Onboarding, zero to hello world.** Fast.
 
@@ -356,7 +356,7 @@ One thing we could not check yet, and will not pretend we did: whether captions 
 | # | Priority | Request | Why |
 |---|---|---|---|
 | 1 | **Critical** | **A system-wide Fire TV "dim flashing lights" setting**, in Accessibility settings next to the existing options, readable by any app through the accessibility APIs the way `isScreenReaderEnabled` is readable now. | Photosensitivity is a property of the person, not of an app. A child should not have to hope that the app they opened happens to have built protection. A system setting turns this from one app's feature into a platform guarantee and gives every developer a single flag to respect. Apple has one. Fire TV does not. We would delete half of our own settings screen the day this ships, and gladly. |
-| 2 | **Critical** | **`vega device screenshot` that captures the composited output**, and `vega device key` for remote input. | There is no supported way to see what an app drew or to press a button from a script. For an accessibility app this is not a convenience: WCAG 2.3.1 applies to our own interface and we cannot look at it. Our workaround goes through QEMU's QMP socket, which is undocumented, virtual-device only, and returns black for anything drawn on the GPU layer. |
+| 2 | **Critical** | **Document composited simulator capture and make remote automation easy to discover.** | Earlier QMP and macOS capture attempts missed the app picture; a ScreenCaptureKit recording of the simulator window captured picture, captions and sound on Oct 9 and 10, and no Amazon page describes that route. Amazon documents `inputd-cli` for scripted buttons, and on this CLI it works only as `vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_DOWN'`, not the documented `vega exec` form. A documented recording path and a working documented input command would make accessibility checks reproducible. |
 | 3 | **Critical** | **A way to get one frame of what an app drew, from inside the app.** A `takeSnapshot`-style view capture in a Vega module would do it. | Same gap from the other side. React Native 0.83 removed `takeSnapshot` and no `@amazon-devices` package replaces it, so an app cannot check its own rendering at all. Any app with a self-test, a visual regression suite or an accessibility claim about its own UI needs this. |
 | 4 | **Important** | **Document the `timeupdate` cadence and `currentTime` resolution of the W3C media player, with a stated guarantee.** | We measured a median gap of <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.median -->426<!--/n--> ms and a longest gap of <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms during continuous playback, and a smallest reported step of <!--n results/vvd_timeupdate_stats.json:current_time_precision_ms -->3<!--/n--> ms. Captions, chapter skips, ad insertion and our covers all have to act at a precise media time. Today every developer measures this themselves and each one gets a different answer. |
 | 5 | **Important** | **Fix `vega device list`**, which crashes with `Cannot read properties of undefined (reading 'trim')` while a device is connected and every other device command works. | It is the obvious way to script against a device and the first thing a new developer tries. The message gives no clue what to fix. |
@@ -378,22 +378,3 @@ One thing we could not check yet, and will not pretend we did: whether captions 
 | 21 | **Nice-to-have** | **A published way to build and test a Vega app on a hosted CI runner**, or a plain statement that there is not one and why. | We could not find one, and a 5.4 GB SDK plus a QEMU guest is not something you try speculatively on a runner. Today every Vega project keeps a laptop in the loop for anything device-shaped. |
 
 The first one is the one that matters. The rest of this list is a fortnight of engineering work at Amazon. The first is a policy decision, and it would protect far more children than anything we can ship.
-
----
-
-## For Lane H: what this changes in other documents
-
-This file and the friction log grew past what other documents say about them. None of these files belong to this lane, so here is the list rather than the edit.
-
-| File and line | What it says now | What is true |
-|---|---|---|
-| `docs/SUBMISSION.md` section 9 | Product feedback for nine tools, written inline | Thirteen tools are answered here, including the accessibility APIs, Fargate, S3 and CloudFront, which section 9 did not cover. Section 9 can either absorb this file or link to it |
-| `docs/SUBMISSION.md` section 12 | Fourteen feature requests | Twenty-one here, in the same priority scale. The three Critical ones are the system setting and the two capture gaps |
-| `docs/SUBMISSION.md` section 13 | "eleven entries: four Medium and seven Low" | Thirty-three entries: five High, thirteen Medium, fifteen Low. Twenty-eight are on Amazon's surface and five are the wider toolchain |
-| `docs/SUBMISSION.md` line 77 | "alongside seven more" | Alongside thirty more |
-| `docs/SUBMISSION.md` section 14, item 10 | "Read the eleven friction entries" | Read the thirty-three |
-| `docs/SUBMISSION.md` section 11.4 | The upstream half says two tests | Three tests now, and both guards were seen to fail |
-| `docs/PLAN.md` lines 62 to 63 | Nine tools, fourteen requests, eleven entries | As above |
-| `docs/VIDEO_SCRIPT.md` line 60 | Calls the `vega device list` crash "feature request 4" | It is request 4 in `docs/SUBMISSION.md` section 12 and request 5 in this file. If section 12 adopts this list, that line needs the new number, or better, the name instead of a number |
-
-Two things that did not change. Friction entries 1 to 11 keep their numbers, so `README.md` line 332 pointing at entries 6 and 8 is still right, and `docs/VIDEO_SCRIPT.md` pointing at entry 6 is still right.

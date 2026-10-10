@@ -1,7 +1,7 @@
 # Releasing
 
 Two things get released: the app, as three `.vpkg` files on a GitHub Release,
-and flashmap, as a package on PyPI. Neither has been released yet.
+and flashmap, as a package on PyPI. Neither has been released yet. The current hackathon submission uses the Vega Virtual Device exclusively. A physical device check and PyPI publication are not prerequisites for the simulator demo.
 
 ## The app
 
@@ -14,15 +14,18 @@ into `build/release/<tag>/`, writes `SHA256SUMS` and `NOTES.md`, prints the
 `gh release create` command it would run, and stops without running it.
 
 It stops on purpose. Once the judged release tag exists it can never move, so
-creating it is a person's decision, made after reading the notes.
+creating it needs Alex's final publication approval after reviewing the packages, checksums and notes. Local assembly and verification can proceed before that approval.
 
 To publish, when the time comes:
 
 1. `make release` and read `build/release/<tag>/NOTES.md` end to end;
-2. check the demo PIN is in there and is the PIN the app really uses;
-3. run the `gh release create` line the script printed;
-4. install from the release on a real stick before telling anyone about it:
-   `vega run-app calm-frames-<version>-armv7.vpkg`.
+2. ensure the notes explain that fresh installs choose their own PIN;
+3. install and launch the exact aarch64 release on the Vega Virtual Device:
+   `vega run-app calm-frames-<version>-aarch64.vpkg io.github.alejandropublius.calmframes.main --deviceId VirtualDevice`;
+4. rerun the Harbor journey and inspect the saved simulator recording;
+5. request Alex's final publication approval with the package hashes, notes and
+   verified recording, then run the printed `gh release create` command only
+   after approval.
 
 What the notes carry: which file is for which device, the install steps, the
 package id, the Vega OS version the packages declare, and how to check the

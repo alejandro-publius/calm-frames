@@ -21,9 +21,9 @@ deleted when the stack comes down (see "A signing key in the cloud").
 
 ## What this has to withstand
 
-A threat model for a project whose whole point is that a child does not see a
-flash. The thing being protected is not data. It is the guarantee, and the ways
-to break the guarantee are more interesting than the ways to break in.
+The threat model covers map integrity, prepared media, local settings and build
+dependencies. Cryptographic verification authenticates a map and its binding;
+it does not establish that the detector found every flashing interval.
 
 | What an attacker wants | How they would try | What stops them |
 |---|---|---|
@@ -35,8 +35,9 @@ to break the guarantee are more interesting than the ways to break in.
 
 ### A tampered map
 
-The map is the whole guarantee: it says which parts of a title flash. A map an
-attacker can edit is a player that hides nothing.
+The map records the intervals the analyzer flagged. An attacker who could
+change an accepted map could suppress covers. Signatures protect that record,
+not the completeness of detection.
 
 Every map is signed with Ed25519 over the canonical bytes of the document with
 the signature block removed, and the app checks four things before it will show
@@ -55,9 +56,9 @@ test:
 
 Missing, unparseable and wrong-version join that list, and every one of them
 ends the same way: the picture stays hidden and a card says the title is not
-checked. That is the fail closed rule, and it is what makes the whole design
-safe against an attacker who can write to the delivery bucket, the CDN or the
-device's own storage. The worst they achieve is a title that will not play.
+checked. These checks are designed to reject altered delivery records. They
+do not guarantee security against every storage or decoder exploit; package
+identity checks and the unresolved dependency findings remain relevant.
 
 What this does not defend against: someone who can run code on the device, or
 who holds the signing key. The key is why docs/SECURITY.md spends most of its
@@ -73,8 +74,7 @@ A file crafted to exploit one would be running inside our analyzer.
 Where the analyzer runs decides what that is worth:
 
 - **On a laptop**, over files a person downloaded on purpose and recorded in
-  `media/LICENSES.csv` with a checked licence and a SHA-256. The input is not
-  hostile because nobody hostile chose it.
+  `media/LICENSES.csv` with a checked licence and a SHA-256. Those provenance checks do not prove a decoder input is non-malicious.
 - **In the ingest task on AWS**, over whatever landed in the source bucket. That
   is the one place where a stranger's file could reach the decoder, so the task
   is the narrow one: no inbound access at all, a task role that can read one
@@ -400,7 +400,12 @@ that every finding is either fixed or written down, in
 `scripts/audit_exceptions.toml`, with the packages it covers, the advisory ids
 that were read, who accepted it, why, and the date it has to be looked at again.
 
-As of the last run:
+Current host rerun, Oct 9 evening: `results/audit.json` reproduces the hosted
+failure. New advisories and an expired exception are unaccounted for. The
+current totals below are not all covered by accepted exceptions. The Python
+scan covered the ingest and CDK requirements; it did not include a venv freeze.
+
+Historical repair, Sep 29:
 
 **The Sep 29 dependency repair passes the fresh audit gate with unchanged written exceptions.** The earlier
 run found a new, unaccounted `image-size@0.6.3` advisory, npm source `1239766`,
@@ -417,17 +422,17 @@ integrity in the lockfile and SBOM. No advisory suppression, downgrade or new
 exception was added. Compatibility and terminating-error regressions pass,
 including actual Metro PNG, JPEG and SVG asset handling.
 
-The totals below remain findings covered by the existing written exceptions,
-not a claim of zero vulnerabilities or production readiness. GitHub's separate
-account-level runner restriction and physical-TV validation are still pending.
+The image-size repair remains in place. It does not resolve the new findings
+below. GitHub runners now work; latest CI passed and Audit failed three jobs
+on dcb27a1. Only simulator validation is required for this submission.
 
 | | |
 |---|---|
-| Python packages with an advisory, across the container, the CDK and the venv | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
-| npm packages with an advisory in app/ | <!--n results/audit.json:published.npm_packages_with_advisories -->58<!--/n--> |
-| npm advisories behind them | <!--n results/audit.json:published.npm_advisories_total -->43<!--/n--> |
-| of which critical | <!--n results/audit.json:published.npm_critical -->6<!--/n--> |
-| of which high | <!--n results/audit.json:published.npm_high -->24<!--/n--> |
+| Python packages with an advisory in the scanned ingest and CDK requirements | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
+| npm packages with an advisory in app/ | <!--n results/audit.json:published.npm_packages_with_advisories -->120<!--/n--> |
+| npm advisories behind them | <!--n results/audit.json:published.npm_advisories_total -->49<!--/n--> |
+| of which critical | <!--n results/audit.json:published.npm_critical -->7<!--/n--> |
+| of which high | <!--n results/audit.json:published.npm_high -->83<!--/n--> |
 | exception groups, each with its reasons | <!--n results/audit.json:published.exception_groups -->3<!--/n--> |
 
 The three groups, in short. The full reasoning is in the TOML file, in
@@ -463,7 +468,7 @@ regenerated reproducibly so CI can diff them:
 |---|---|---|
 | `docs/SBOM.ingest.cdx.json` | the Python packages in the ingest container | <!--n results/sbom.json:published.ingest_components -->12<!--/n--> |
 | `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1110<!--/n--> |
-| `docs/SBOM.cdk.cdx.json` | what synthesizes and deploys the stack | <!--n results/sbom.json:published.cdk_components -->2<!--/n--> |
+| `docs/SBOM.cdk.cdx.json` | what synthesizes and deploys the stack | <!--n results/sbom.json:published.cdk_components -->5<!--/n--> |
 
 What they do not cover: the Debian packages apt installs inside the image.
 ffmpeg pulls in a long list of libraries, and listing them properly means

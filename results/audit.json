@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-09-30T01:09:38Z",
+  "generated_utc": "2026-10-10T04:40:25Z",
   "python": {
     "ran": true,
     "sources": [
@@ -24,14 +24,42 @@
     "totals": {
       "info": 0,
       "low": 2,
-      "moderate": 26,
-      "high": 24,
-      "critical": 6,
-      "total": 58
+      "moderate": 28,
+      "high": 83,
+      "critical": 7,
+      "total": 120
     },
     "findings": [
       {
         "package": "@amazon-devices/kepler-cli-platform",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "@amazon-devices/kepler-content-personalization",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "@amazon-devices/kepler-epg-provider",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "@amazon-devices/kepler-file-system",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "@amazon-devices/kepler-media-controls",
         "severity": "high",
         "direct": true,
         "ids": [],
@@ -45,11 +73,74 @@
         "fix_available": true
       },
       {
+        "package": "@amazon-devices/keplermediadescriptor",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@amazon-devices/keplerscript-appstore-iap-lib",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "@amazon-devices/keplerscript-netmgr-lib",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "@amazon-devices/keplerscript-turbomodule-api",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "@amazon-devices/react-native-async-storage__async-storage",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@amazon-devices/react-native-device-info",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": false
+      },
+      {
         "package": "@amazon-devices/react-native-kepler",
         "severity": "high",
         "direct": true,
         "ids": [],
         "fix_available": true
+      },
+      {
+        "package": "@amazon-devices/react-native-localize",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": false
+      },
+      {
+        "package": "@amazon-devices/react-native-vector-icons",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@amazon-devices/react-native-w3cmedia",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": false
       },
       {
         "package": "@amazon-devices/react-navigation__core",
@@ -73,11 +164,81 @@
         "fix_available": false
       },
       {
-        "package": "@jest/fake-timers",
+        "package": "@istanbuljs/load-nyc-config",
         "severity": "moderate",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "@jest/console",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@jest/core",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@jest/environment",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@jest/expect",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@jest/fake-timers",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@jest/globals",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@jest/reporters",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@jest/test-result",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@jest/test-sequencer",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@jest/transform",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "@microsoft/api-extractor",
@@ -103,21 +264,77 @@
       {
         "package": "@react-native-community/cli",
         "severity": "critical",
+        "direct": true,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@react-native-community/cli-clean",
+        "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "@react-native-community/cli-config",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@react-native-community/cli-config-android",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@react-native-community/cli-config-apple",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@react-native-community/cli-doctor",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "@react-native-community/cli-platform-android",
         "severity": "critical",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "@react-native-community/cli-platform-apple",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "@react-native-community/cli-platform-ios",
-        "severity": "moderate",
+        "severity": "high",
         "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@react-native/community-cli-plugin",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@react-native/metro-config",
+        "severity": "high",
+        "direct": true,
         "ids": [],
         "fix_available": false
       },
@@ -143,6 +360,41 @@
         "fix_available": true
       },
       {
+        "package": "@types/jest",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@typescript-eslint/eslint-plugin",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@typescript-eslint/type-utils",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@typescript-eslint/typescript-estree",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "@typescript-eslint/utils",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
         "package": "ajv",
         "severity": "moderate",
         "direct": false,
@@ -156,16 +408,52 @@
         "severity": "moderate",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "argparse",
+        "severity": "moderate",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "babel-jest",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "babel-plugin-istanbul",
+        "severity": "moderate",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "braces",
         "severity": "high",
         "direct": false,
         "ids": [
-          "1098094"
+          "1098094",
+          "1240992"
         ],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "cosmiconfig",
+        "severity": "moderate",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "create-jest",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "cross-spawn",
@@ -174,7 +462,7 @@
         "ids": [
           "1104663"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "decode-uri-component",
@@ -190,60 +478,190 @@
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "expect",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "external-editor",
         "severity": "low",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "fast-glob",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "fbjs",
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "fbjs-scripts",
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "find-workspaces",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "globby",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "handlebars",
+        "severity": "critical",
+        "direct": false,
+        "ids": [
+          "1241676",
+          "1241677",
+          "1241678"
+        ],
+        "fix_available": true
       },
       {
         "package": "inquirer",
         "severity": "low",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "isomorphic-fetch",
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "jest",
+        "severity": "high",
+        "direct": true,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "jest-circus",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "jest-cli",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "jest-config",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "jest-environment-node",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "jest-haste-map",
-        "severity": "moderate",
+        "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "jest-message-util",
-        "severity": "moderate",
+        "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "jest-resolve",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "jest-resolve-dependencies",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "jest-runner",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "jest-runtime",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "jest-snapshot",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "jest-util",
         "severity": "moderate",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "jest-watcher",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "js-yaml",
+        "severity": "moderate",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
+      },
+      {
+        "package": "jscodeshift",
+        "severity": "high",
         "direct": false,
         "ids": [],
         "fix_available": false
@@ -266,7 +684,7 @@
         "ids": [
           "1093556"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "mem",
@@ -275,14 +693,14 @@
         "ids": [
           "1085685"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "metro",
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "metro-cache",
@@ -296,21 +714,35 @@
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "metro-core",
         "severity": "moderate",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "metro-file-map",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "metro-inspector-proxy",
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
+      },
+      {
+        "package": "metro-transform-worker",
+        "severity": "high",
+        "direct": false,
+        "ids": [],
+        "fix_available": true
       },
       {
         "package": "micromatch",
@@ -319,7 +751,7 @@
         "ids": [
           "1098681"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "minimatch",
@@ -339,7 +771,7 @@
         "ids": [
           "1095073"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "node-notifier",
@@ -348,14 +780,14 @@
         "ids": [
           "1086436"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "os-locale",
         "severity": "high",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "query-string",
@@ -371,16 +803,16 @@
         "ids": [
           "1099563"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "react-native",
         "severity": "critical",
-        "direct": false,
+        "direct": true,
         "ids": [
           "1089027"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "react-native-tscodegen-types",
@@ -394,7 +826,7 @@
         "severity": "moderate",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "shell-quote",
@@ -402,7 +834,8 @@
         "direct": false,
         "ids": [
           "1120422",
-          "1123944"
+          "1123944",
+          "1241332"
         ],
         "fix_available": true
       },
@@ -414,6 +847,15 @@
         "fix_available": true
       },
       {
+        "package": "sprintf-js",
+        "severity": "moderate",
+        "direct": false,
+        "ids": [
+          "1241202"
+        ],
+        "fix_available": true
+      },
+      {
         "package": "tmp",
         "severity": "high",
         "direct": false,
@@ -421,7 +863,7 @@
           "1109537",
           "1120654"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "toml",
@@ -440,7 +882,7 @@
         "ids": [
           "1119441"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "ws",
@@ -450,14 +892,14 @@
           "1118731",
           "1123262"
         ],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "xcode",
         "severity": "moderate",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "xmldom",
@@ -488,7 +930,7 @@
         "severity": "moderate",
         "direct": false,
         "ids": [],
-        "fix_available": false
+        "fix_available": true
       },
       {
         "package": "yargs-parser",
@@ -497,19 +939,85 @@
         "ids": [
           "1088811"
         ],
-        "fix_available": false
+        "fix_available": true
       }
     ]
   },
   "published": {
     "python_packages_with_advisories": 0,
-    "npm_packages_with_advisories": 58,
-    "npm_advisories_total": 43,
-    "npm_critical": 6,
-    "npm_high": 24,
+    "npm_packages_with_advisories": 120,
+    "npm_advisories_total": 49,
+    "npm_critical": 7,
+    "npm_high": 83,
     "exception_groups": 3,
     "exceptions_in_the_shipped_bundle": 1
   },
   "statement": "pip-audit and npm audit, run over what this project installs. Every finding is either fixed or listed in scripts/audit_exceptions.toml with a reason and a review date. The npm findings come almost entirely from the Vega SDK sample's pinned toolchain.",
-  "problems": []
+  "problems": [
+    "the exception 'left-over-from-the-sample' was due for review on 2026-10-05",
+    "npm: @amazon-devices/kepler-content-personalization (high) has no exception",
+    "npm: @amazon-devices/kepler-epg-provider (high) has no exception",
+    "npm: @amazon-devices/kepler-file-system (high) has no exception",
+    "npm: @amazon-devices/kepler-media-controls (high) has no exception",
+    "npm: @amazon-devices/keplermediadescriptor (high) has no exception",
+    "npm: @amazon-devices/keplerscript-appstore-iap-lib (high) has no exception",
+    "npm: @amazon-devices/keplerscript-netmgr-lib (high) has no exception",
+    "npm: @amazon-devices/keplerscript-turbomodule-api (high) has no exception",
+    "npm: @amazon-devices/react-native-async-storage__async-storage (high) has no exception",
+    "npm: @amazon-devices/react-native-device-info (high) has no exception",
+    "npm: @amazon-devices/react-native-localize (high) has no exception",
+    "npm: @amazon-devices/react-native-vector-icons (high) has no exception",
+    "npm: @amazon-devices/react-native-w3cmedia (high) has no exception",
+    "npm: @istanbuljs/load-nyc-config (moderate) has no exception",
+    "npm: @jest/console (high) has no exception",
+    "npm: @jest/core (high) has no exception",
+    "npm: @jest/environment (high) has no exception",
+    "npm: @jest/expect (high) has no exception",
+    "npm: @jest/globals (high) has no exception",
+    "npm: @jest/reporters (high) has no exception",
+    "npm: @jest/test-result (high) has no exception",
+    "npm: @jest/test-sequencer (high) has no exception",
+    "npm: @jest/transform (high) has no exception",
+    "npm: @react-native-community/cli-clean (high) has no exception",
+    "npm: @react-native-community/cli-config (high) has no exception",
+    "npm: @react-native-community/cli-config-android (high) has no exception",
+    "npm: @react-native-community/cli-config-apple (high) has no exception",
+    "npm: @react-native-community/cli-doctor (high) has no exception",
+    "npm: @react-native-community/cli-platform-apple (high) has no exception",
+    "npm: @react-native/community-cli-plugin (high) has no exception",
+    "npm: @react-native/metro-config (high) has no exception",
+    "npm: @types/jest (high) has no exception",
+    "npm: @typescript-eslint/eslint-plugin (high) has no exception",
+    "npm: @typescript-eslint/type-utils (high) has no exception",
+    "npm: @typescript-eslint/typescript-estree (high) has no exception",
+    "npm: @typescript-eslint/utils (high) has no exception",
+    "npm: argparse (moderate) has no exception",
+    "npm: babel-jest (high) has no exception",
+    "npm: babel-plugin-istanbul (moderate) has no exception",
+    "npm: braces has advisory(s) nobody has read yet: 1240992",
+    "npm: cosmiconfig (moderate) has no exception",
+    "npm: create-jest (high) has no exception",
+    "npm: expect (high) has no exception",
+    "npm: fast-glob (high) has no exception",
+    "npm: find-workspaces (high) has no exception",
+    "npm: globby (high) has no exception",
+    "npm: handlebars (critical) has no exception",
+    "npm: jest (high) has no exception",
+    "npm: jest-circus (high) has no exception",
+    "npm: jest-cli (high) has no exception",
+    "npm: jest-config (high) has no exception",
+    "npm: jest-environment-node (high) has no exception",
+    "npm: jest-resolve (high) has no exception",
+    "npm: jest-resolve-dependencies (high) has no exception",
+    "npm: jest-runner (high) has no exception",
+    "npm: jest-runtime (high) has no exception",
+    "npm: jest-snapshot (high) has no exception",
+    "npm: jest-watcher (high) has no exception",
+    "npm: js-yaml (moderate) has no exception",
+    "npm: jscodeshift (high) has no exception",
+    "npm: metro-file-map (high) has no exception",
+    "npm: metro-transform-worker (high) has no exception",
+    "npm: shell-quote has advisory(s) nobody has read yet: 1241332",
+    "npm: sprintf-js (moderate) has no exception"
+  ]
 }

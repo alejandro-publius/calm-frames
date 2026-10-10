@@ -1,5 +1,18 @@
 # The upstream contribution
 
+**October 10 final local check.** GitHub API confirms upstream main is still
+`ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`. All eleven issues and pull requests
+were checked; none concerns this Shaka rejection fix. The current contribution
+guide still asks for current-main, duplicate and local-test checks. The preserved
+patched pristine sample passes all six focused tests again today, with a clean
+working tree. The earlier observed-red controls and mock limitations below
+remain relevant. Evidence: `results/upstream_review_2026-10-10.json`.
+
+The contribution remains worthwhile and prepared as the two patches below.
+Placeholder patch author metadata must be replaced with the entrant's chosen
+public identity before publication. No fork, PR or qualifying public contribution
+URL has been created. October 12 is a project target, not the hackathon deadline.
+
 **Target:** [`AmazonAppDev/vega-video-sample`](https://github.com/AmazonAppDev/vega-video-sample), Amazon's reference video app for Vega. It has merged an outside contributor's pull request before: #7, opened June 18 2026 by an account with no association to the repository, merged July 6 2026. So they do take them.
 
 **Status, Fri Oct 2 2026.** The two existing patches and their three added tests
@@ -344,7 +357,7 @@ Historical broad run on Sep 17 2026, Node 22.23.2:
 
 **The three failing tests and the four type errors are both artifacts of where the checkout lives, and neither is an upstream defect.** The failures are snapshot mismatches in `DrawerContent.test.tsx` and `Preview.test.tsx`, where the recorded snapshot holds an asset `testUri` that is written relative to the project root: from a deep scratch path it comes out absolute and the snapshot does not match. The same two suites pass in `app/` in this repository, which is the same code at a normal path. The `TS2742` errors are the usual complaint about a symlinked `node_modules` outside the project and name four store slices nobody touched. Both appear identically with and without the change.
 
-One real upstream problem did turn up while running the suite, and it is not this pull request's subject: **`npx jest --ci` exits 1 on a clean checkout with every test passing**, because `test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap` holds two snapshot entries no current test produces, and `--ci` treats an obsolete snapshot as a failure. Deleting those two entries fixes it. It is worth a sentence in the pull request so a reviewer does not blame this change for a red run, and it is worth a separate one-line pull request.
+One real upstream problem did turn up while running the suite, and it is not this pull request's subject: **`npx jest --ci` exits 1 on a clean checkout with every test passing**, because `test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap` holds two snapshot entries no current test produces, and `--ci` treats an obsolete snapshot as a failure. Deleting those two entries fixes it. It is worth a sentence in the pull request so a reviewer does not blame this change for a red run, and it is worth a separate two-line pull request.
 
 **The guards were broken on purpose and seen to go red**, which is the rule in this project: a green new test proves nothing on its own.
 
@@ -383,14 +396,14 @@ The one race worth naming is teardown. Backing out of the player mid-load calls 
 
 | Field | Value |
 |-------|-------|
-| Device | Virtual Device (Vega Virtual Device), and the same code path on a physical device |
+| Device | Vega Virtual Device. No physical device was used |
 | App Version | 3.24.0 (manifest.toml) |
 | Image Build | Vega OS 1.2 (TV Ship/101520710) |
 | VDT Version | Vega CLI 1.3.4, Vega SDK 0.24.9914 |
 | Video/Img showing the issue | Not included. The symptom is a spinner that never stops, which is not informative as a video. The unit tests in this PR reproduce it deterministically. |
 | Expected Behavior | When Shaka fails to load a source, the app reports a playback error. `loadAdaptiveMediaPlayer` documents this itself: its comment block says the method "4. Handles any loading errors", and it has a try/catch around the load that calls `setIsVideoError(true)`. |
 | Current Behaviour | The error is never seen. `ShakaPlayer.load()` is declared `void` and calls `internalLoad(content)` without returning or awaiting it, so a rejection from `this.player.load(content.uri)` becomes an unhandled rejection. The caller's try/catch in `VideoHandler.loadAdaptiveMediaPlayer` can only catch a synchronous throw, so it never fires. `setIsVideoError` is never called, `ErrorView` never renders, and `showBuffering` (initialised true in `PlayerScreen.tsx`, cleared only on `playing` / `seeked` / `timeupdate` / error) stays up for good. The user sees a spinner forever with no error. |
-| Reproduction Rate | 5 out of 5. Any source Shaka cannot load reproduces it: a 404 manifest, a plain MP4 handed to Shaka because its `format` field is not the literal "MP4", or a server that does not answer byte ranges. The unit tests added here reproduce it 5 out of 5 with no device. |
+| Reproduction Rate | Deterministic. The unit tests added here reproduce it on every run with no device. On the Vega Virtual Device it reproduced each time we handed Shaka a plain MP4 over HTTP, which happens when a title's `format` field is not the literal "MP4", and each time the server answered a byte range request with 200 instead of 206. Any other source Shaka cannot load, such as a 404 manifest, takes the same code path; we did not count trials of those. |
 
 For Pull Requests:
 
@@ -450,10 +463,11 @@ For Pull Requests:
   all six tests green. It is a one-line contract change.
 
   Unrelated, and flagging it so a red CI run is not blamed on this change:
-  `npx jest --ci` exits 1 on a clean checkout of main with every test passing,
-  because `test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap`
+  `npx jest --ci` exits 1 on a clean checkout of main at ef8e4da (Aug 6 2026)
+  with every test passing, because
+  `test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap`
   holds two snapshot entries that no current test produces, and `--ci` counts
-  an obsolete snapshot as a failure. Happy to send that one-line deletion as a
+  an obsolete snapshot as a failure. Happy to send that two-line deletion as a
   separate PR if it would help.
 
 * Dependencies added/modified: none.
@@ -477,7 +491,9 @@ anything awaitable, and harmless if it never does.
 
 * [x] I have reviewed my own code
 * [x] I have tested my changes
-* [x] I have updated the documentation accordingly
+* [ ] I have updated the documentation accordingly. No documentation change
+  is included: the comment block on `loadAdaptiveMediaPlayer` already says the
+  method handles loading errors, and this change makes the code match it.
 ```
 
 ---
