@@ -342,17 +342,17 @@ const PlayerScreen = ({
     setupEventListeners();
     if (rejectedPreparedRoute) {
       setShowBuffering(false);
-      return removeEventListeners;
+    } else {
+      console.log(
+        '[PlayerScreen.tsx] - Initialize media player: componentInstance',
+        componentInstance,
+      );
+      console.log(
+        '[PlayerScreen.tsx] - Video Handler invoke preBufferVideo',
+        videoHandler.data,
+      );
+      videoHandler.preBufferVideo(componentInstance);
     }
-    console.log(
-      '[PlayerScreen.tsx] - Initialize media player: componentInstance',
-      componentInstance,
-    );
-    console.log(
-      '[PlayerScreen.tsx] - Video Handler invoke preBufferVideo',
-      videoHandler.data,
-    );
-    videoHandler.preBufferVideo(componentInstance);
     const changeSubscription = addKeplerAppStateListenerCallback(
       'change',
       handleAppStateChange,

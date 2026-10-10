@@ -22,6 +22,7 @@ import React from 'react';
 import PlayerScreen from '../../src/screens/PlayerScreen';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import { focusManager } from '../../src/utils/FocusManager';
 
 const mockPreBuffer = jest.fn();
 let mockVideoError: (error: boolean) => void;
@@ -83,7 +84,7 @@ const data = {
 };
 
 function renderPlayer(params: Record<string, unknown>) {
-  render(
+  return render(
     <PlayerScreen
       navigation={{ goBack: jest.fn() } as never}
       route={{ params: { data, ...params } } as never}
@@ -103,6 +104,19 @@ describe('the player with nothing to check', () => {
     expect(screen.queryByTestId('kepler-video-surface-view')).toBeNull();
     expect(screen.getByTestId('calm-card-title').props.children).toBe('Not checked yet');
   });
+  it('restores registered focus after a rejected prepared route', () => {
+    const restore = jest.spyOn(focusManager, 'restoreFocus');
+    const title = packagedLibrary.titles(DEFAULT_SETTINGS)[0];
+    const { unmount } = renderPlayer({
+      data: { ...data, id: title.id, uri: 'https://example.invalid/substituted.mp4' },
+      guarded: { sha256: title.sha256, maps: title.maps, settings: DEFAULT_SETTINGS },
+      focusId: title.id,
+    });
+    unmount();
+    expect(restore).toHaveBeenCalledWith(`player_return_${title.id}`);
+    restore.mockRestore();
+  });
+
   it('keeps the picture hidden and says why', () => {
     renderPlayer({});
     expect(screen.getByTestId('calm-frames-cover')).toBeTruthy();

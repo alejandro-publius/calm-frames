@@ -187,22 +187,22 @@ packages = [
 [[exception]]
 group = "left-over-from-the-sample"
 ecosystem = "npm"
-ships = false
+ships = true
 accepted_by = "Alex, on the infrastructure and security lane's recommendation"
 review_by = "2026-10-05"
 why = """
-Two dependencies the sample brought that Calm Frames does not use.
+October 10 correction: xmldom is used by the generated Shaka DOMParserPolyfill
+and is included in the app bundle. The prior zero-import and ships=false
+classification was wrong. The expiry and accepted advisory list are unchanged;
+this correction does not renew or widen the exception.
 
-xmldom 0.6.0 is a direct dependency with sixteen advisories against it, several
-critical, and no fix in the 0.6 line. Nothing in app/src or app/test imports it:
-`npm ls xmldom` shows it hanging off the app package and nothing else. The fix
-is to delete the line from app/package.json, which is the app lane's file and
-their manifest to regenerate, so it is written here as a recommendation with a
-short review date rather than done from this lane.
+xmldom 0.6.0 has sixteen recorded advisories, several critical. Deleting it
+would break the generated parser import. A maintained-fork alias needs explicit
+compatibility and advisory verification before it can replace this version.
 
-lodash 4.17.21 has a fix inside the range app/package.json already allows
-(`~4.17.21`), so `npm update lodash` in app/ takes it without touching
-package.json. One file imports it. Same lane, same short date.
+The hoisted lodash is 4.17.23, but kepler-cli-platform still pins a nested
+4.17.21 exactly. An ordinary npm update cannot replace that exact vendor edge.
+A scoped override would need build verification, not just a changed lockfile.
 
 This entry expires two weeks before the release build on purpose. If it is
 still here on Oct 5, the answer is no longer "we will get to it".

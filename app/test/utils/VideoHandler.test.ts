@@ -124,6 +124,39 @@ describe('VideoHandler', () => {
     });
   });
 
+  it('settles quietly when leaving while media control focus is pending', async () => {
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    let resolveFocus!: () => void;
+    const focus = new Promise<void>((resolve) => { resolveFocus = resolve; });
+    const initialize = jest.fn().mockResolvedValue(undefined);
+    const setMediaControlFocus = jest.fn(() => focus);
+    videoHandler.destroyVideoElements = jest.fn().mockResolvedValue(true);
+    mockVideoRef.current = { initialize, setMediaControlFocus } as unknown as VideoPlayer;
+    const pending = videoHandler.preBufferVideo({} as never);
+    await Promise.resolve();
+    expect(setMediaControlFocus).toHaveBeenCalled();
+    mockVideoRef.current = null;
+    resolveFocus();
+    await expect(pending).resolves.toBeUndefined();
+    expect(initialize).not.toHaveBeenCalled();
+  });
+
+  it('does not attach listeners or load after leaving during initialization', async () => {
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    let resolveInitialize!: () => void;
+    const initialized = new Promise<void>((resolve) => { resolveInitialize = resolve; });
+    videoHandler.destroyVideoElements = jest.fn().mockResolvedValue(true);
+    videoHandler.setupEventListeners = jest.fn();
+    videoHandler.loadVideoElements = jest.fn();
+    mockVideoRef.current = { initialize: jest.fn(() => initialized) } as unknown as VideoPlayer;
+    await videoHandler.preBufferVideo();
+    mockVideoRef.current = null;
+    resolveInitialize();
+    await new Promise(process.nextTick);
+    expect(videoHandler.setupEventListeners).not.toHaveBeenCalled();
+    expect(videoHandler.loadVideoElements).not.toHaveBeenCalled();
+  });
+
   describe('destroyMediaPlayerSync', () => {
     it('should successfully destroy media player for MP4 content', () => {
       const { mockVideoRef, videoHandler } = createVideoHandler();

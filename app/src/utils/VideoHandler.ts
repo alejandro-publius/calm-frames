@@ -146,7 +146,8 @@ export class VideoHandler {
         );
         this.videoRef.current = new VideoPlayer();
       }
-      (global as any).gmedia = this.videoRef.current;
+      const media = this.videoRef.current;
+      (global as any).gmedia = media;
 
       // KMC (Kepler Media Controls) integration
       try {
@@ -155,7 +156,7 @@ export class VideoHandler {
             '[VideoHandler.ts] - preBufferVideo - KMC :  set Media Control Focus',
           );
 
-          await this.videoRef.current.setMediaControlFocus(
+          await media.setMediaControlFocus(
             componentInstance,
             this.mediaControlHandler ??
               new AppOverrideMediaControlHandler(
@@ -172,15 +173,22 @@ export class VideoHandler {
         console.error('Error during KMC execution', error);
       }
 
-      // Initialize the video player and set up content loading
-      this.videoRef.current
+      // Leaving or replacing the player while native setup is pending cancels
+      // this initialization; never attach listeners to a later media instance.
+      if (this.videoRef.current !== media) {
+        return;
+      }
+      media
         .initialize()
         .then(() => {
+          if (this.videoRef.current !== media) {
+            return;
+          }
           console.log(
             '[VideoHandler.ts] - preBufferVideo - Video Player Initialized',
           );
           this.setupEventListeners();
-          this.videoRef!!.current!!.autoplay = false;
+          media.autoplay = false;
           this.loadVideoElements();
         })
         .catch((error) => {

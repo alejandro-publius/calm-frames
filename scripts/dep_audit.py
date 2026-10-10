@@ -288,10 +288,9 @@ def main(argv: list[str] | None = None) -> int:
     exceptions = load_exceptions()
     report["published"] = published_numbers(report, exceptions)
     report["statement"] = (
-        "pip-audit and npm audit, run over what this project installs. Every "
-        "finding is either fixed or listed in scripts/audit_exceptions.toml with "
-        "a reason and a review date. The npm findings come almost entirely from "
-        "the Vega SDK sample's pinned toolchain."
+        "pip-audit and npm audit over the scanned project dependencies. Findings, "
+        "exception coverage and expired reviews are recorded below. Nonempty "
+        "problems block audit acceptance; listing a finding does not waive it."
     )
 
     if args.update_ids:
