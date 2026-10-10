@@ -26,6 +26,9 @@ go red with "assert 0 == 1" and the message about what is still locked.
 
 from __future__ import annotations
 
+import importlib.metadata
+import importlib.util
+import json
 import os
 import re
 import shutil
@@ -435,10 +438,16 @@ class TestTheCliCanReadWhatTheLibraryWrites:
     CLI named on the command line instead. A pin that only works when somebody
     overrides it is not a pin.
 
+    The minimum is declared by the aws-cdk.cloud-assembly-schema package, not
+    by aws-cdk-lib, which only asks for a schema in a range. The first hosted
+    run of the test below, on dcb27a1 the same day, installed that range fresh
+    and got a newer schema declaring 2.1144.0, so it went red there while the
+    frozen venv here stayed green. The class after this one pins the schema.
+
     Seen to fail, Oct 9 2026: putting 2.1032.0 back in scripts/aws_guard.sh
     alone turned both tests red, one for the disagreement and one for the
     version; putting it back in all three files turned only the version test
-    red, with the library's own minimum, 2.1142.0, in the message.
+    red, with the schema's own minimum, 2.1142.0, in the message.
     """
 
     def test_every_place_names_one_version(self):
@@ -452,12 +461,302 @@ class TestTheCliCanReadWhatTheLibraryWrites:
             "aws_cdk.cloud_assembly_schema", reason="aws-cdk-lib is needed for this check"
         )
         minimum = tuple(int(part) for part in schema.Manifest.cli_version().split("."))
+        declared_by = f"aws-cdk.cloud-assembly-schema {installed_version('aws-cdk.cloud-assembly-schema')}"
         for where, versions in cli_pins().items():
             for version in versions:
                 assert version >= minimum, (
                     f"{where} pins aws-cdk@{'.'.join(map(str, version))}, and the installed "
-                    f"aws-cdk-lib needs at least {'.'.join(map(str, minimum))}"
+                    f"{declared_by} declares at least {'.'.join(map(str, minimum))}"
                 )
+
+
+INFRA_REQUIREMENTS = REPO / "pipeline" / "infra" / "requirements.txt"
+# An exact pin on a line of its own, the way pip reads it: name==version, then
+# at most a comment.
+EXACT_PIN = re.compile(r"^([A-Za-z0-9][A-Za-z0-9._-]*)==([^\s#;,]+)", re.MULTILINE)
+
+
+def infra_pins() -> dict[str, str]:
+    """Every exact pin in pipeline/infra/requirements.txt, by lower case name."""
+    text = INFRA_REQUIREMENTS.read_text(encoding="utf-8")
+    return {name.lower(): version for name, version in EXACT_PIN.findall(text)}
+
+
+def installed_version(package: str) -> str:
+    """The version in this interpreter, or a skip that the hosted job turns into a failure."""
+    try:
+        return importlib.metadata.version(package)
+    except importlib.metadata.PackageNotFoundError:
+        pytest.skip(f"{package} is not installed; aws-cdk-lib is needed for this check")
+
+
+class TestWhatAwsCdkLibPullsInIsPinnedToo:
+    """aws-cdk-lib declares ranges for its own runtime, and a fresh install takes the newest.
+
+    pipeline/infra/requirements.txt pinned aws-cdk-lib and constructs and
+    nothing else. aws-cdk-lib 2.270.0 asks for aws-cdk.cloud-assembly-schema
+    >=54.11.0,<55.0.0, jsii >=1.139.0,<2.0.0 and
+    aws-cdk.asset-node-proxy-agent-v6 >=2.1.2,<3.0.0. The schema writes the
+    manifest and declares the oldest CLI that reads it; jsii is the bridge
+    every construct runs through; the proxy agent is a Lambda layer asset
+    whose hash can reach the template. This venv froze 54.24.0, 1.140.0 and
+    2.1.3, which is what the Oct 9, 2026 deploy ran with, and the hosted Audit
+    runner on dcb27a1 installed the ranges fresh and got a schema that
+    declares CLI 2.1144.0. Each of the three is pinned now at the version
+    installed here, and this test keeps the file and the venv saying the same
+    thing, so `make ci` and a fresh install test one set of packages.
+
+    Seen to fail, Oct 9 2026: with the three lines absent from the
+    requirements file, all three cases went red naming the missing pin and
+    the version this venv has; adding the lines turned them green.
+    """
+
+    FLOATING_IN_AWS_CDK_LIB = (
+        "aws-cdk.cloud-assembly-schema",
+        "jsii",
+        "aws-cdk.asset-node-proxy-agent-v6",
+    )
+
+    @pytest.mark.parametrize("package", FLOATING_IN_AWS_CDK_LIB)
+    def test_it_is_pinned_to_the_version_installed_here(self, package):
+        installed = installed_version(package)
+        pins = infra_pins()
+        assert package in pins, (
+            f"pipeline/infra/requirements.txt does not pin {package}; aws-cdk-lib declares "
+            f"only a range for it, so a fresh install floats where this venv has {installed}"
+        )
+        assert pins[package] == installed, (
+            f"pipeline/infra/requirements.txt pins {package}=={pins[package]} and this venv "
+            f"has {installed}; a fresh install and `make ci` would test two different things"
+        )
+
+
+SBOM_SCRIPT = REPO / "scripts" / "sbom.py"
+AUDIT_WORKFLOW = REPO / ".github" / "workflows" / "audit.yml"
+PYTHON_BILLS = (REPO / "docs" / "SBOM.ingest.cdx.json", REPO / "docs" / "SBOM.cdk.cdx.json")
+APP_BILL = REPO / "docs" / "SBOM.app.cdx.json"
+# Where the sbom job tells scripts/sbom.py to leave the fresh bills, and what
+# the job uploads when the compare fails. Under .logs/, which is gitignored.
+KEPT_BILLS = ".logs/sbom-check"
+
+
+def recorded_tools(bill: Path) -> dict[str, str]:
+    """name -> version of every generator a committed bill says wrote it."""
+    document = json.loads(bill.read_text(encoding="utf-8"))
+    return {tool["name"]: tool["version"] for tool in document["metadata"]["tools"]["components"]}
+
+
+def sbom_job() -> str:
+    """The sbom job of the Audit workflow as text, the way test_mutate_gate reads ci.yml."""
+    workflow = AUDIT_WORKFLOW.read_text(encoding="utf-8")
+    return workflow.split("\n  sbom:\n", 1)[1].split("\n  infra:\n", 1)[0]
+
+
+class TestTheBillsRecordThePinnedGenerators:
+    """What a bill says wrote it is content to the byte compare, so it is pinned too.
+
+    These live in this file rather than one of their own because the Audit
+    workflow's infra job runs this file on the hosted runner, which is where
+    the drift showed. On dcb27a1 (Oct 9, 2026) the app bill failed the compare
+    with the same package-lock.json on both sides: scripts/sbom.py pinned
+    @cyclonedx/cyclonedx-npm@6.0.1 and left its library to a caret range, so
+    the runner's fresh install resolved a different @cyclonedx/cyclonedx-library
+    than the 10.3.0 the committed bill records under metadata.tools. The two
+    Python bills matched by luck. cyclonedx-bom==7.4.0 leaves
+    cyclonedx-python-lib floating the same way, and both sides happened to
+    resolve 11.12.0. Every version asserted here is read from the committed
+    bills, so a bill regenerated by a different generator fails these tests
+    instead of being committed quietly.
+
+    Seen to fail, Oct 9 2026: with the library pins absent from
+    scripts/sbom.py and the workflow, the Node version taken from .nvmrc and
+    no artifact step, the four tests after the first went red one cause each;
+    adding the pins, the exact Node and the artifact step turned them green.
+    """
+
+    def test_the_python_bills_were_written_by_one_pair(self):
+        tools = {bill.name: recorded_tools(bill) for bill in PYTHON_BILLS}
+        pairs = {(t["cyclonedx-py"], t["cyclonedx-python-lib"]) for t in tools.values()}
+        assert len(pairs) == 1, f"the Python bills were written by different generators: {tools}"
+
+    def test_the_script_pins_the_generator_and_its_library(self):
+        script = SBOM_SCRIPT.read_text(encoding="utf-8")
+        python = recorded_tools(PYTHON_BILLS[0])
+        app = recorded_tools(APP_BILL)
+        for pin in (
+            f"cyclonedx-bom=={python['cyclonedx-py']}",
+            f"cyclonedx-python-lib=={python['cyclonedx-python-lib']}",
+            f"@cyclonedx/cyclonedx-npm@{app['cyclonedx-npm']}",
+            f"@cyclonedx/cyclonedx-library@{app['cyclonedx-library']}",
+        ):
+            assert pin in script, (
+                f"scripts/sbom.py does not pin {pin}, which the committed bills record "
+                f"under metadata.tools; without it the bytes depend on the day's resolve"
+            )
+
+    def test_the_audit_workflow_installs_the_same_python_pair(self):
+        python = recorded_tools(PYTHON_BILLS[0])
+        job = sbom_job()
+        for pin in (
+            f"cyclonedx-bom=={python['cyclonedx-py']}",
+            f"cyclonedx-python-lib=={python['cyclonedx-python-lib']}",
+        ):
+            assert pin in job, f"the sbom job in .github/workflows/audit.yml does not install {pin}"
+
+    def test_the_sbom_job_pins_node_exactly(self):
+        """npm is a tool entry in the app bill, and npm comes with Node.
+
+        .nvmrc says 22, which is right for the app and floats for this one job:
+        every Node 22 release that bundles a newer npm would fail the compare
+        with no change in this repository. The committed bill records npm
+        10.9.8, which the local Node 22.23.2 ships with; the dcb27a1 run took
+        22.23.3 from .nvmrc.
+        """
+        job = sbom_job()
+        assert "node-version-file" not in job, "the sbom job takes its Node from .nvmrc, which floats"
+        assert re.search(r"^\s+node-version:\s*\d+\.\d+\.\d+\s*$", job, re.MULTILINE), (
+            "the sbom job does not pin an exact Node version"
+        )
+
+    def test_a_failed_compare_keeps_what_it_wrote(self):
+        """The next failure names itself: the fresh bills and the report become an artifact."""
+        job = sbom_job()
+        assert f"scripts/sbom.py --check --keep {KEPT_BILLS}" in job, (
+            "the sbom job does not tell scripts/sbom.py where to leave the fresh bills"
+        )
+        retain = job.split("uses: actions/upload-artifact@v4", 1)
+        assert len(retain) == 2, "the sbom job has no artifact step"
+        assert "if: failure()" in retain[0].rsplit("      - name:", 1)[1]
+        assert f"path: {KEPT_BILLS}" in retain[1]
+        assert "include-hidden-files: true" in retain[1], ".logs is a hidden directory"
+        assert ".logs/" in (REPO / ".gitignore").read_text(encoding="utf-8").splitlines()
+
+
+def load_sbom_script():
+    """scripts/sbom.py as a module. Importing it runs no generator."""
+    spec = importlib.util.spec_from_file_location("calm_frames_sbom", SBOM_SCRIPT)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+class TestACompareFailureNamesItsCause:
+    """scripts/sbom.py --check tells the environment, a dependency and anything else apart.
+
+    The dcb27a1 failure said "does not match what is installed" about a bill
+    whose components were identical on both sides, and the fresh bill was gone
+    with the runner. explain() now reads both bills back and says which of
+    three things happened, with the first differing line, and report.json
+    carries the same as data for the artifact. These tests run it on small
+    synthetic bills, one cause at a time, and run the generator readback on
+    the committed app bill, which ties the script's pins to the bills a second
+    way, through the script's own reader.
+
+    Seen to fail, Oct 9 2026: with the tools comparison in explain() disabled,
+    the environment case went red for the missing "generators differ" line and
+    the pins case stayed green; restoring it turned everything green.
+    """
+
+    @staticmethod
+    def bill(**changes) -> dict:
+        document = {
+            "bomFormat": "CycloneDX",
+            "specVersion": "1.6",
+            "metadata": {
+                "tools": {
+                    "components": [
+                        {"type": "application", "name": "npm", "version": "10.9.8"},
+                        {
+                            "type": "library",
+                            "name": "cyclonedx-library",
+                            "group": "@cyclonedx",
+                            "version": "10.3.0",
+                        },
+                    ]
+                }
+            },
+            "components": [
+                {"type": "library", "name": "a", "version": "1.0.0", "purl": "pkg:npm/a@1.0.0"},
+                {
+                    "type": "library",
+                    "name": "b",
+                    "version": "2.0.0",
+                    "purl": "pkg:npm/b@2.0.0",
+                    "licenses": [{"license": {"id": "MIT"}}],
+                },
+            ],
+        }
+        document.update(changes)
+        return document
+
+    @staticmethod
+    def write(path: Path, document: dict) -> Path:
+        path.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
+        return path
+
+    def test_a_different_generator_is_called_the_environment(self, tmp_path):
+        sbom = load_sbom_script()
+        committed = self.write(tmp_path / "committed.json", self.bill())
+        fresh = self.bill()
+        fresh["metadata"]["tools"]["components"][0]["version"] = "10.9.9"
+        lines, report = sbom.explain(committed, self.write(tmp_path / "fresh.json", fresh))
+        assert any("the generators differ" in line for line in lines), lines
+        assert any("npm: committed 10.9.8, fresh 10.9.9" in line for line in lines), lines
+        assert not any("added:" in line or "removed:" in line for line in lines), lines
+        assert report["committed"]["tools"]["npm"] == "10.9.8"
+        assert report["fresh"]["tools"]["npm"] == "10.9.9"
+        assert report["added"] == [] and report["removed"] == []
+
+    def test_a_moved_dependency_is_listed_by_purl(self, tmp_path):
+        sbom = load_sbom_script()
+        committed = self.write(tmp_path / "committed.json", self.bill())
+        fresh = self.bill()
+        fresh["components"] = fresh["components"][1:] + [
+            {"type": "library", "name": "c", "version": "3.0.0", "purl": "pkg:npm/c@3.0.0"}
+        ]
+        lines, report = sbom.explain(committed, self.write(tmp_path / "fresh.json", fresh))
+        assert not any("the generators differ" in line for line in lines), lines
+        assert any("components: 2 committed, 2 fresh, 1 added, 1 removed" in line for line in lines), lines
+        assert any(line.strip() == "added: pkg:npm/c@3.0.0" for line in lines), lines
+        assert any(line.strip() == "removed: pkg:npm/a@1.0.0" for line in lines), lines
+        assert report["added"] == ["pkg:npm/c@3.0.0"]
+        assert report["removed"] == ["pkg:npm/a@1.0.0"]
+
+    def test_anything_else_is_shown_by_its_first_differing_line(self, tmp_path):
+        sbom = load_sbom_script()
+        committed = self.write(tmp_path / "committed.json", self.bill())
+        fresh = self.bill()
+        fresh["components"][1]["licenses"][0]["license"]["id"] = "Apache-2.0"
+        fresh_path = self.write(tmp_path / "fresh.json", fresh)
+        lines, report = sbom.explain(committed, fresh_path)
+        assert any("same generators and the same components" in line for line in lines), lines
+        expected = next(
+            number
+            for number, (left, right) in enumerate(
+                zip(committed.read_text().splitlines(), fresh_path.read_text().splitlines()), 1
+            )
+            if left != right
+        )
+        assert report["first_difference"] == {
+            "line": expected,
+            "committed": '"id": "MIT"',
+            "fresh": '"id": "Apache-2.0"',
+        }
+        assert f"first difference at line {expected}:" in lines
+
+    def test_the_readback_knows_the_pinned_generators(self, tmp_path):
+        sbom = load_sbom_script()
+        assert sbom.pinned_version("cyclonedx-bom==7.4.0") == "7.4.0"
+        assert sbom.pinned_version("@cyclonedx/cyclonedx-library@10.3.0") == "10.3.0"
+        wrong = self.bill()
+        wrong["metadata"]["tools"]["components"][1]["version"] = "10.4.0"
+        found = sbom.unpinned_generators(self.write(tmp_path / "SBOM.app.cdx.json", wrong))
+        assert len(found) == 1 and "cyclonedx-library 10.4.0 wrote it" in found[0], found
+        assert f"pins {sbom.PINNED_TOOLS['cyclonedx-library']}" in found[0]
+        # The committed bills were written by the pinned generators, read the
+        # same way the script reads a fresh one.
+        for bill in (*PYTHON_BILLS, APP_BILL):
+            assert sbom.unpinned_generators(bill) == [], bill.name
 
 
 class TestTheDeployRecordNamesNoAccount:

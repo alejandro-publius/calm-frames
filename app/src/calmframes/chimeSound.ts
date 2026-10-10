@@ -60,7 +60,7 @@ async function element(): Promise<AudioLike | null> {
     if (typeof player.initialize === 'function') {
       await player.initialize();
     }
-    player.src = CHIME_URI;
+    player.src = CHIME_URI.slice('file://'.length);
     player.volume = CHIME_VOLUME;
     cached = player;
     return cached;

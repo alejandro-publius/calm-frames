@@ -46,12 +46,18 @@ STATUS_FILE="$REPO/docs/STATUS.md"
 # not a document that says it.
 STATUS_PATTERN='^AWS Paid plan:[[:space:]]*confirmed'
 
-# The CLI has to be able to read what the pinned library writes. aws-cdk-lib
-# 2.270.0 writes cloud assembly schema 54 and declares 2.1142.0 as the oldest
-# CLI that reads it; the 2.1032.0 this line used to name stops right after
-# synth with "Cloud assembly schema version mismatch". The Oct 9 deploy ran on
-# 2.1142.0. pipeline/tests/test_aws_guard.py checks this pin against the
-# library and against the other two places it is written.
+# The CLI has to be able to read what the pinned library writes. The cloud
+# assembly manifest, and the oldest CLI that can read it, are declared by the
+# aws-cdk.cloud-assembly-schema package, not by aws-cdk-lib, which only asks
+# for a schema in the range >=54.11.0,<55.0.0. pipeline/infra/requirements.txt
+# pins the schema at 54.24.0, which writes schema 54 and declares 2.1142.0.
+# The 2.1032.0 this line used to name stops right after synth with "Cloud
+# assembly schema version mismatch". The Oct 9 deploy ran on 2.1142.0 with
+# that schema. The same day, before the schema was pinned, a fresh install on
+# the hosted Audit runner took a newer 54.x declaring 2.1144.0 and the pin
+# test went red there alone. pipeline/tests/test_aws_guard.py checks this pin
+# against the installed schema, checks the schema itself is pinned, and checks
+# the other two places this version is written agree.
 CDK="${CDK:-npx --yes aws-cdk@2.1142.0}"
 STACK="${STACK:-CalmFramesStack}"
 CONTEXT="-c calmframes:budgetEmail=${BUDGET_EMAIL:-} -c calmframes:githubRepo=${GITHUB_REPO:-}"

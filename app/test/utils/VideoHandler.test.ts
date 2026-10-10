@@ -73,7 +73,32 @@ describe('VideoHandler', () => {
     };
   };
 
+  it.each([
+    ['file:///pkg/assets/raw/benign-story/harbor.vtt', '/pkg/assets/raw/benign-story/harbor.vtt'],
+    ['https://example.invalid/captions.vtt', 'https://example.invalid/captions.vtt'],
+  ])('passes the native subtitle source for %s', (uri, expected) => {
+    // Native filesrc treated file:///pkg/... as a literal filename and
+    // aborted Harbor playback. Keep remote URLs unchanged.
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    const addTextTrack = jest.fn();
+    mockVideoRef.current = { addTextTrack, textTracks: [] } as unknown as VideoPlayer;
+    videoHandler.data.textTrack = [{ uri, label: 'English', language: 'en', mimeType: 'text/vtt' }];
+    videoHandler.loadSubtitles();
+    expect(addTextTrack).toHaveBeenCalledWith('subtitles', 'English', 'en', expected, 'text/vtt');
+  });
+
   describe('preBufferVideo', () => {
+    it('opens a packaged video using its native path without changing catalog identity', () => {
+      const { videoHandler } = createVideoHandler();
+      const uri = 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4';
+      videoHandler.data.uri = uri;
+      const video = { src: '', autoplay: false, pause: jest.fn(), load: jest.fn() };
+      videoHandler.loadStaticMediaPlayer(video);
+      expect(video.src).toBe('/pkg/assets/raw/benign-story/harbor.precovered.mp4');
+      expect(videoHandler.data.uri).toBe(uri);
+      expect(video.load).toHaveBeenCalled();
+    });
+
     it('should initialize video player and setup event listeners', async () => {
       const { mockVideoRef, videoHandler } = createVideoHandler();
 

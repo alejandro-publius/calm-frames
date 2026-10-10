@@ -220,7 +220,7 @@ const ParentAreaScreen = ({
   useUiCapture(frame, reason);
 
   const press = (digit: string) => {
-    if (savingPinRef.current) {
+    if (savingPinRef.current || saving) {
       return;
     }
     const next = `${entered}${digit}`;
@@ -271,7 +271,17 @@ const ParentAreaScreen = ({
           <StatusNotice testID={`${testID}-message`} notice={notice} />
         </View>
         {gate.record ? (
-          <PinKeypad entered={entered.length} onDigit={press} idPrefix={testID} disabled={savingPin || saving} />
+          <PinKeypad
+            entered={entered.length}
+            onDigit={press}
+            onDelete={() => {
+              if (!savingPinRef.current && !saving) {
+                setEntered((value) => value.slice(0, -1));
+              }
+            }}
+            idPrefix={testID}
+            disabled={savingPin || saving}
+          />
         ) : null}
         <View style={styles.buttons}>
           {!gate.record && onSetPin ? (

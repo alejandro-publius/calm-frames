@@ -68,6 +68,8 @@ export interface KidHomeScreenProps {
   /** Every title that has been checked, in any state. */
   titles: CheckedTitle[];
   onOpen: (entry: CheckedTitle) => void;
+  /** Last opened title, retained by the route while this shelf is unmounted. */
+  returnFocusId?: string | null;
   onOpenParentArea?: () => void;
   /**
    * The service that publishes checks could not be reached.
@@ -93,6 +95,7 @@ export interface KidHomeScreenProps {
 const KidHomeScreen = ({
   titles,
   onOpen,
+  returnFocusId,
   onOpenParentArea,
   offline = false,
   profiles,
@@ -103,6 +106,9 @@ const KidHomeScreen = ({
 }: KidHomeScreenProps) => {
   const listed = kidModeTitles(titles);
   const hiddenCount = titles.length - listed.length;
+  const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
+    ? returnFocusId
+    : listed[0]?.title.id;
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
   const empty = listed.length === 0;
   // With nothing to watch, the shelf does not ask who is watching: there is
@@ -181,7 +187,7 @@ const KidHomeScreen = ({
             contentContainerStyle={styles.grid}
             horizontal={false}
             showsVerticalScrollIndicator={false}>
-            {listed.map((entry, index) => {
+            {listed.map((entry) => {
               const focused = focusedId === entry.title.id;
               const poster = shelfPoster(entry);
               const label = shelfLabel(entry.title);
@@ -194,7 +200,7 @@ const KidHomeScreen = ({
                   accessibilityRole="button"
                   accessibilityLabel={`${spokenShelfLabel(label)}, checked`}
                   activeOpacity={1}
-                  hasTVPreferredFocus={index === 0}
+                  hasTVPreferredFocus={!saving && entry.title.id === preferredId}
                   onFocus={() => setFocusedId(entry.title.id)}
                   onBlur={() => setFocusedId(null)}
                   onPress={() => onOpen(entry)}
@@ -244,14 +250,15 @@ const KidHomeScreen = ({
       <View style={styles.footer}>
         {hiddenCount > 0 ? (
           <Text style={styles.footerText} testID={`${testID}-hidden-count`}>
-            {hiddenCount} more {hiddenCount === 1 ? 'title is' : 'titles are'} still
-            being checked.
+            {hiddenCount} more {hiddenCount === 1 ? 'title is' : 'titles are'} unavailable.
+            A grown up can see why in Parent area.
           </Text>
         ) : null}
         {onOpenParentArea ? (
           <CalmButton
             testID={`${testID}-parent-area`}
             label="Parent area"
+            hasTVPreferredFocus={empty && !saving}
             accessibilityLabel="Parent area, needs a PIN"
             onPress={onOpenParentArea}
           />

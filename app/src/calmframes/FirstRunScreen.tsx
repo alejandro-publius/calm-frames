@@ -202,9 +202,14 @@ const FirstRunScreen = ({
 
   const header = (
     <View style={styles.header}>
-      <Text style={styles.step} testID={`${testID}-step`}>
-        Step {STEP_NUMBER[step]} of {FIRST_RUN_STEPS}
-      </Text>
+      <View style={styles.brandRow}>
+        <Text style={styles.step} testID={`${testID}-step`}>
+          Step {STEP_NUMBER[step]} of {FIRST_RUN_STEPS}
+        </Text>
+        <Text style={styles.step} testID={`${testID}-brand-line`}>
+          A calmer way to watch
+        </Text>
+      </View>
       <Text style={styles.title} testID={`${testID}-title`}>
         {STEP_TITLES[step]}
       </Text>
@@ -222,7 +227,12 @@ const FirstRunScreen = ({
         <View style={styles.block}>
           <StatusNotice testID={`${testID}-notice`} notice={notice} />
         </View>
-        <PinKeypad entered={entered.length} onDigit={press} idPrefix={testID} />
+        <PinKeypad
+          entered={entered.length}
+          onDigit={press}
+          onDelete={() => setEntered((value) => value.slice(0, -1))}
+          idPrefix={testID}
+        />
       </View>
     );
   }
@@ -440,6 +450,7 @@ const styles = StyleSheet.create({
   },
   content: { paddingBottom: scale(CALM_SPACE.SAFE_Y) },
   header: { marginBottom: scale(CALM_SPACE.BLOCK) },
+  brandRow: { flexDirection: 'row', justifyContent: 'space-between' },
   step: {
     color: CALM_COLORS.TEXT_DIM,
     fontSize: scale(CALM_TYPE.SMALL),

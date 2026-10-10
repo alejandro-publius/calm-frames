@@ -453,7 +453,7 @@ export const EXPLAINER_WORDS_PER_MINUTE = 150;
 export const EXPLAINER_TITLE = 'What Calm Frames hides, and why';
 export const EXPLAINER_LINES: string[] = [
   'Calm Frames checks a whole title before it plays.',
-  'Any part that goes over the published flash limits is hidden while the sound and the captions keep going.',
+  'Parts flagged by the checks are hidden while sound and captions continue. The checks can miss flashing.',
   'A card says what is coming, and what was hidden.',
   SAFETY_NOTE,
 ];

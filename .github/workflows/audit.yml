@@ -62,18 +62,57 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .nvmrc
+          # Exact, and in this job only. The app's bill records the npm that
+          # ran `npm ls` as a tool, and the compare below is byte for byte, so
+          # the npm has to be the one the committed bill names: 10.9.8, which
+          # ships with Node 22.23.2. Through .nvmrc, which says 22 and stays
+          # that way for everything else, setup-node takes the newest 22.x, and
+          # every Node release that bundles a newer npm would fail this job
+          # with no change in this repository. The dcb27a1 run took 22.23.3
+          # that way on Oct 9, 2026. pipeline/tests/test_aws_guard.py checks
+          # that this stays an exact version.
+          node-version: 22.23.2
       - uses: actions/setup-python@v5
         with:
           python-version-file: .python-version
-      - name: Install the SBOM tool
-        run: python -m pip install cyclonedx-bom==7.4.0
+      - name: Install the SBOM tool and the library it writes through
+        # cyclonedx-bom leaves cyclonedx-python-lib to a range, and the library
+        # writes its own version into metadata.tools of every bill. The two
+        # committed Python bills record 11.12.0, and scripts/sbom.py pins the
+        # same pair for its uvx path. The two matched on Oct 9, 2026 by luck.
+        run: python -m pip install cyclonedx-bom==7.4.0 cyclonedx-python-lib==11.12.0
+      - name: Which generators are about to run
+        # So a failed compare can be read against the tools that produced it
+        # without rerunning anything. The npm line is the one that is not
+        # pinned by any file in this repository, only by the Node above.
+        run: |
+          node --version
+          npm --version
+          python -m pip list --format=freeze | grep -i cyclonedx
       - name: Regenerate and compare
         # No npm install here on purpose. The app's bill is read from
         # package-lock.json rather than from node_modules, because an installed
         # tree is platform specific and this job would otherwise fail on Linux
         # over a package that only exists on a Mac.
-        run: python3 scripts/sbom.py --check
+        #
+        # --keep leaves the fresh bills and a report.json under .logs/, which
+        # is gitignored, so the step after this one can keep them. On a
+        # difference the script says whether the generators or the components
+        # differ and prints the first differing line.
+        run: python3 scripts/sbom.py --check --keep .logs/sbom-check
+      - name: Keep the fresh bills and the report when the compare fails
+        # The dcb27a1 failure said only "does not match what is installed" and
+        # the fresh bill was gone with the runner. With the artifact, a reader
+        # diffs the fresh bill against the committed one and reads report.json
+        # for the tool entries and component counts on both sides. Fourteen
+        # days covers two of the Monday scheduled runs.
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-check-${{ github.run_attempt }}
+          path: .logs/sbom-check
+          include-hidden-files: true
+          retention-days: 14
 
   infra:
     name: The stack and the container rules
@@ -93,6 +132,13 @@ jobs:
         run: |
           python -m pip install -r pipeline/infra/requirements.txt
           python -m pip install pytest==9.1.1 moto==5.2.3 boto3==1.43.97
+      - name: Which CDK packages this fresh install took
+        # The requirements file pins aws-cdk-lib's own runtime too (the cloud
+        # assembly schema, jsii, the node proxy agent asset) since Oct 9, 2026,
+        # when a fresh install here took a schema declaring a newer CLI minimum
+        # than the frozen venv's and the pin test failed hosted only. This line
+        # shows what was installed, so the next such failure names itself.
+        run: python -m pip list --format=freeze | grep -i -E 'aws-cdk|jsii|constructs'
       - name: Synthesize the template, with no credentials and no account
         env:
           CDK_DEFAULT_ACCOUNT: "000000000000"

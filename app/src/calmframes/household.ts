@@ -46,7 +46,7 @@ export const PRESETS: Record<PresetName, PresetDefinition> = {
     name: 'wcag',
     title: 'Standard',
     description:
-      'Hides what goes over the WCAG 2.3.1 flash thresholds. This is the floor. Nothing can go below it.',
+      'Checks against the WCAG 2.3.1 flash thresholds. This is the floor. Nothing can go below it.',
     mapProfiles: ['wcag'],
     guardBandMs: DEFAULT_GUARD_BAND_MS,
     minCoverMs: DEFAULT_MIN_COVER_MS,

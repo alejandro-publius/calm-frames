@@ -56,12 +56,12 @@ export function describeStrip(
   durationMs: number,
 ): string {
   if (intervals.length === 0) {
-    return 'Nothing in this title goes over the flash limits.';
+    return 'No parts were flagged by these checks.';
   }
   const seconds = Math.max(1, Math.round(totalCoveredMs(intervals) / 1000));
   const parts = intervals.length;
   const minutes = Math.max(1, Math.round(durationMs / 60_000));
-  return `${parts} flashing part${parts === 1 ? '' : 's'}, ${seconds} second${
+  return `${parts} scheduled cover${parts === 1 ? '' : 's'}, ${seconds} second${
     seconds === 1 ? '' : 's'
   } in all, spread through about ${minutes} minute${minutes === 1 ? '' : 's'}.`;
 }

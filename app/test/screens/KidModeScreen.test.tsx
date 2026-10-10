@@ -13,6 +13,7 @@
 
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
+import { BackHandler, Platform } from 'react-native';
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
   getItem: jest.fn(async () => null),
@@ -34,6 +35,9 @@ import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { OFFLINE_PUBLIC_KEY_BASE64 } from '../../src/calmframes/offlineTitle';
 import { BENIGN_STORY_ID, BENIGN_STORY_URI } from '../../src/calmframes/benignStory';
 import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import * as householdStorage from '../../src/calmframes/householdStorage';
+import { emptyPinGate } from '../../src/calmframes/parentGate';
+import { newFamily } from '../../src/calmframes/profiles';
 
 /** A moment when the bundled map is neither unmade nor stale. */
 const NOW = Date.parse(JSON.parse(OFFLINE_MAP_JSON).created_utc) + 60_000;
@@ -68,6 +72,55 @@ async function finishFirstRun() {
 }
 
 describe('reaching Calm Frames', () => {
+  it('returns focus to the opened title through details, player and parent area', async () => {
+    const { navigate } = await renderKidMode();
+    await finishFirstRun();
+    const lastPoster = `kid-mode-home-poster-${OFFLINE_TITLE_ID}`;
+    fireEvent.press(screen.getByTestId(lastPoster));
+    fireEvent.press(screen.getByTestId('kid-mode-details-play'));
+    expect(navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.anything());
+    // The stack retains this details route underneath the player.
+    fireEvent.press(screen.getByTestId('kid-mode-details-back'));
+    expect(screen.getByTestId(lastPoster).props.hasTVPreferredFocus).toBe(true);
+    expect(screen.getByTestId(`kid-mode-home-poster-${BENIGN_STORY_ID}`).props.hasTVPreferredFocus).toBe(false);
+    fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
+    fireEvent.press(screen.getByTestId('kid-mode-parent-back'));
+    expect(screen.getByTestId(lastPoster).props.hasTVPreferredFocus).toBe(true);
+  });
+
+  it('handles remote Back through details, parent area and credits', async () => {
+    const tv = jest.spyOn(Platform, 'isTV', 'get').mockReturnValue(true);
+    let back: (() => boolean | null | undefined) | undefined;
+    const listener = jest.spyOn(BackHandler, 'addEventListener').mockImplementation((_event, handler) => {
+      back = handler;
+      return { remove: jest.fn() };
+    });
+    try {
+      await renderKidMode();
+      await finishFirstRun();
+      const poster = `kid-mode-home-poster-${OFFLINE_TITLE_ID}`;
+      fireEvent.press(screen.getByTestId(poster));
+      act(() => { expect(back?.()).toBe(true); });
+      expect(screen.getByTestId(poster).props.hasTVPreferredFocus).toBe(true);
+      fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
+      act(() => { expect(back?.()).toBe(true); });
+      expect(screen.getByTestId(poster).props.hasTVPreferredFocus).toBe(true);
+      fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
+      for (const digit of '1357') {
+        fireEvent.press(screen.getByTestId(`kid-mode-parent-key-${digit}`));
+      }
+      await screen.findByTestId('kid-mode-parent-open');
+      fireEvent.press(screen.getByTestId('kid-mode-parent-credits'));
+      expect(screen.getByTestId('kid-mode-credits')).toBeTruthy();
+      act(() => { expect(back?.()).toBe(true); });
+      expect(screen.getByTestId('kid-mode-parent')).toBeTruthy();
+      expect(screen.queryByTestId('kid-mode-parent-open')).toBeNull();
+    } finally {
+      listener.mockRestore();
+      tv.mockRestore();
+    }
+  });
+
   it('opens the labelled story with captions and the prepared Extra cautious timing', async () => {
     const { navigate } = await renderKidMode();
     await finishFirstRun();
@@ -159,6 +212,73 @@ describe('reaching Calm Frames', () => {
     fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
     fireEvent.press(screen.getByTestId('kid-mode-parent-back'));
     expect(screen.getByTestId('kid-mode-home')).toBeTruthy();
+  });
+
+  /**
+   * Set a PIN from the parent area, then finish the first run.
+   *
+   * On a fresh device the first run is on screen because nothing is saved
+   * yet, and the route's view never left the shelf. From the parent area's
+   * Set a PIN it is on screen because the view was set to the first run on
+   * purpose, and finishing it has to set the view back, or the parent stays
+   * on the explainer with the PIN already saved and no way off it.
+   *
+   * Storage refuses a household record with no PIN in it, so no device loads
+   * one today and the parent area's Set a PIN is a guard rather than a path
+   * a household takes. To reach the press, the loaded record is handed to the
+   * route past the validator; what is written back goes through it as usual.
+   *
+   * Seen to fail with finishFirstRun writing the household and nothing else.
+   * The explainer was still on screen after Open checked library:
+   *
+   *     expect(received).toBeNull()
+   *
+   *     Received: {"_fiber": {... "elementType": "RCTScrollView", ...}}
+   *
+   *     at Object.toBeNull (test/screens/KidModeScreen.test.tsx:264:58)
+   */
+  it('leaves the first run for the shelf after Set a PIN from the parent area', async () => {
+    const loaded = jest
+      .spyOn(householdStorage, 'loadHousehold')
+      .mockResolvedValueOnce({
+        version: 1,
+        family: newFamily(DEFAULT_SETTINGS),
+        gate: emptyPinGate(),
+      });
+    const storage = {
+      getItem: jest.fn(async () => null),
+      setItem: jest.fn(async () => undefined),
+    };
+    try {
+      render(
+        <KidModeScreen
+          navigation={{ navigate: jest.fn() } as never}
+          householdStorage={storage}
+          newSalt={() => 'test-salt'}
+          nowMs={() => NOW}
+        />,
+      );
+      await screen.findByTestId('kid-mode-home');
+      fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
+      // No PIN, so no keypad: the one offer is to set one.
+      expect(screen.queryByTestId('kid-mode-parent-keypad')).toBeNull();
+      fireEvent.press(screen.getByTestId('kid-mode-parent-set-pin'));
+      expect(screen.getByTestId('kid-mode-first-run')).toBeTruthy();
+
+      await finishFirstRun();
+      expect(screen.queryByTestId('kid-mode-first-run')).toBeNull();
+      expect(screen.getByTestId('kid-mode-home')).toBeTruthy();
+      expect(storage.setItem).toHaveBeenCalledTimes(1);
+
+      // The PIN that was just set is the one the parent area now asks for.
+      fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
+      for (const digit of '1357') {
+        fireEvent.press(screen.getByTestId(`kid-mode-parent-key-${digit}`));
+      }
+      await screen.findByTestId('kid-mode-parent-open');
+    } finally {
+      loaded.mockRestore();
+    }
   });
 });
 

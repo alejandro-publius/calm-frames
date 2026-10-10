@@ -76,6 +76,7 @@ jest.mock('@amazon-devices/react-native-w3cmedia', () => {
 
 /** The fake player for the current test. A jest factory may only reach mock* names. */
 let mockMedia: FakeMedia | null = null;
+const mockGoBack = jest.fn();
 
 interface FakeTrack {
   id: string;
@@ -188,7 +189,7 @@ const guarded = {
 function renderPlayer(params: Record<string, unknown>) {
   return render(
     <PlayerScreen
-      navigation={{ goBack: jest.fn() } as never}
+      navigation={{ goBack: mockGoBack } as never}
       route={{ params: { data, ...params } } as never}
     />,
   );
@@ -227,6 +228,7 @@ const cardKind = () =>
 describe('the player hands OK to Skip only while Skip is on screen', () => {
   beforeEach(() => {
     mockMedia = makeMedia();
+    mockGoBack.mockClear();
     jest.useFakeTimers();
     jest.setSystemTime(BURSTS_MADE_AT + 1_000);
   });
@@ -285,6 +287,7 @@ describe('every Kepler app state change leaves a debug line', () => {
 
   beforeEach(() => {
     mockMedia = makeMedia();
+    mockGoBack.mockClear();
     jest.useFakeTimers();
     jest.setSystemTime(BURSTS_MADE_AT + 1_000);
     log = jest.spyOn(console, 'log').mockImplementation(() => {});
@@ -299,6 +302,44 @@ describe('every Kepler app state change leaves a debug line', () => {
     log.mock.calls
       .map((call) => String(call[0]))
       .filter((line) => line.startsWith('[PlayerScreen.tsx] - handleAppStateChange'));
+
+  it('leaves only once when Back and background race', async () => {
+    renderPlayer({ guarded });
+    await settle();
+    act(() => {
+      (chromeProps().navigateBack as () => boolean)();
+      appStateListener()('background');
+      jest.advanceTimersByTime(700);
+    });
+    expect(mockGoBack).toHaveBeenCalledTimes(1);
+  });
+
+  it('background leaves even when the caption menu is open', async () => {
+    renderPlayer({ guarded });
+    await settle();
+    act(() => {
+      (chromeProps().setCaptionStatus as (open: boolean) => void)(true);
+      appStateListener()('background');
+      jest.advanceTimersByTime(700);
+    });
+    expect(mockGoBack).toHaveBeenCalledTimes(1);
+  });
+
+  it('Back closes the caption menu before leaving the player', async () => {
+    renderPlayer({ guarded });
+    await settle();
+    act(() => {
+      (chromeProps().setCaptionStatus as (open: boolean) => void)(true);
+      (chromeProps().navigateBack as () => boolean)();
+      jest.advanceTimersByTime(700);
+    });
+    expect(mockGoBack).not.toHaveBeenCalled();
+    act(() => {
+      (chromeProps().navigateBack as () => boolean)();
+      jest.advanceTimersByTime(700);
+    });
+    expect(mockGoBack).toHaveBeenCalledTimes(1);
+  });
 
   it('says which state arrived, and that a kid mode player leaves on background', async () => {
     renderPlayer({ guarded });
@@ -348,6 +389,7 @@ function captionsViewProps(): Record<string, unknown> {
 describe('a title that ships captions starts with them on', () => {
   beforeEach(() => {
     mockMedia = makeMedia();
+    mockGoBack.mockClear();
     jest.useFakeTimers();
     jest.setSystemTime(BURSTS_MADE_AT + 1_000);
   });

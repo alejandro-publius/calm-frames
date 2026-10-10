@@ -15,7 +15,7 @@
  * test here reports a missing cover and a card that is not there.
  */
 
-import { render, screen } from '@testing-library/react-native';
+import { act, render, screen } from '@testing-library/react-native';
 import React from 'react';
 // babel-jest hoists the jest.mock calls below above this import, so the player
 // is loaded with the stand ins already in place.
@@ -24,6 +24,7 @@ import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
 
 const mockPreBuffer = jest.fn();
+let mockVideoError: (error: boolean) => void;
 
 jest.mock('../../src/w3cmedia/mediacontrols/VideoPlayerUI', () => 'VideoPlayerUI');
 jest.mock('../../src/services/bif/bifService', () => ({
@@ -48,9 +49,12 @@ jest.mock('../../src/utils/VideoHandler', () => ({
       _player: unknown,
       data: unknown,
       setIsVideoInitialized: (value: boolean) => void,
+      _setEnded: unknown,
+      setError: (value: boolean) => void,
     ) {
       this.data = data;
       this.setInitialized = setIsVideoInitialized;
+      mockVideoError = setError;
     }
 
     preBufferVideo() {
@@ -116,6 +120,16 @@ describe('the player with nothing to check', () => {
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
       'Not checked yet',
     );
+  });
+
+  it('removes the stale guard card and keeps the cover on playback failure', () => {
+    // Native Harbor failed with the countdown card still above the error.
+    renderPlayer({});
+    expect(screen.getByTestId('calm-card-title')).toBeTruthy();
+    act(() => mockVideoError(true));
+    expect(screen.queryByTestId('calm-card-title')).toBeNull();
+    expect(screen.getByTestId('error-boundary-label')).toBeTruthy();
+    expect(screen.getByTestId('calm-frames-cover')).toBeTruthy();
   });
 
   it('leaves a measurement run alone', () => {

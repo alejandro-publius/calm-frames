@@ -137,18 +137,35 @@ User-defined, select `Project`, Activate. Until then the budget's alarms cannot
 fire. At 02:50 PDT on Oct 9, Cost Explorer listed no `Project` tag at all, so
 read the bill by hand until it is active.
 
-### The CLI pin
+### The CLI pin, and the schema pin under it
 
 The CDK CLI is pinned to 2.1142.0 in three places: `scripts/aws_guard.sh`,
 `pipeline/infra/Makefile` and the bootstrap command above. The CLI has to be able
-to read the cloud assembly the pinned library writes. aws-cdk-lib 2.270.0 writes
-schema 54, and 2.1142.0 is the oldest CLI it declares support for. The 2.1032.0
-pinned here until Oct 9 stops right after synth with "Cloud assembly schema
-version mismatch: Maximum schema version supported is 48.x.x, but found 54.0.0",
-so the deploy that night named the CLI on the command line instead.
-`pipeline/tests/test_aws_guard.py` checks that the three places agree and that
-the version meets the minimum the installed library declares. When aws-cdk-lib
-moves, move the CLI with it.
+to read the cloud assembly the pinned library writes. The manifest format, and
+the oldest CLI that can read it, are declared by the `aws-cdk.cloud-assembly-schema`
+package rather than by aws-cdk-lib, which only asks for a schema in the range
+`>=54.11.0,<55.0.0`. The 2.1032.0 pinned here until Oct 9 stops right after synth
+with "Cloud assembly schema version mismatch: Maximum schema version supported is
+48.x.x, but found 54.0.0", so the deploy that night named the CLI on the command
+line instead.
+
+Until Oct 9 `requirements.txt` pinned aws-cdk-lib and constructs only, so the
+schema floated. This checkout's venv had frozen 54.24.0, which declares 2.1142.0,
+and the deploy ran with it. The hosted Audit run on dcb27a1 installed the range
+fresh, took a newer 54.x declaring 2.1144.0, and failed the CLI pin test there
+while `make ci` passed it here. `requirements.txt` now pins the schema at
+54.24.0, and with it the two other requirements aws-cdk-lib declares as ranges:
+jsii 1.140.0, the bridge every construct runs through, and the node proxy agent
+asset 2.1.3, whose hash can reach the template. Each is the version the Oct 9
+deploy ran with. `pipeline/tests/test_aws_guard.py` checks that the three CLI
+places agree, that the CLI meets the minimum the installed schema declares, and
+that each of the three pins is the version installed in the venv running the
+tests, so a fresh install and `make ci` test one set of packages.
+
+When aws-cdk-lib moves, move the schema, jsii and the proxy agent with it, then
+the CLI if the new schema declares a newer minimum, then `make sbom`: the CDK
+bill of materials lists every line of `requirements.txt` by line number, so it
+changes whenever that file does.
 
 ### Optional, before the first deploy: CloudFront signed URLs
 

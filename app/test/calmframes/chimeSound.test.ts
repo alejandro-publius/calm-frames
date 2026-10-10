@@ -57,7 +57,7 @@ describe('the chime reaches the platform', () => {
 
     expect(mockConstructed).toHaveLength(1);
     expect(mockInitialize).toHaveBeenCalled();
-    expect(mockConstructed[0].src).toBe(CHIME_URI);
+    expect(mockConstructed[0].src).toBe('/pkg/assets/raw/sound/calm-chime.mp3');
     expect(mockConstructed[0].volume).toBe(CHIME_VOLUME);
     expect(mockPlayed).toHaveBeenCalledTimes(1);
   });

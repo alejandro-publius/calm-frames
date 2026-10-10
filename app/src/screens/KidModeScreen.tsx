@@ -258,6 +258,13 @@ const KidModeScreen = ({
   const profileLogs = useHideLogs();
   const [view, setView] = React.useState<KidModeView>('home');
   const [openId, setOpenId] = React.useState<string | null>(null);
+  const [lastOpenedId, setLastOpenedId] = React.useState<string | null>(null);
+  const [focusGeneration, setFocusGeneration] = React.useState(0);
+  React.useEffect(() => navigation.addListener?.('focus', () => {
+    // Vega keeps this route mounted behind the player. Remount its current
+    // panel on return so the preferred remote control receives focus again.
+    setFocusGeneration((generation) => generation + 1);
+  }), [navigation]);
 
   const watching = activeProfile(family);
   // Never the kid's own choice on its own: the stricter of the household floor
@@ -311,6 +318,13 @@ const KidModeScreen = ({
     const subscription = BackHandler.addEventListener(
       'hardwareBackPress',
       () => {
+        if (navigation.isFocused?.() === false) {
+          return false;
+        }
+        if (view === 'credits') {
+          setView('parent');
+          return true;
+        }
         if (view === 'details' || view === 'parent') {
           setView('home');
           setOpenId(null);
@@ -320,7 +334,7 @@ const KidModeScreen = ({
       },
     );
     return () => subscription.remove();
-  }, [view]);
+  }, [navigation, view]);
 
   const finishFirstRun = (result: FirstRunResult) => {
     // The first run sets the floor, not one kid's settings. Every profile is
@@ -330,6 +344,14 @@ const KidModeScreen = ({
       gate: result.gate,
       family: setFloor(family, result.settings),
     });
+    // On a fresh device the first run is on screen because nothing is saved
+    // yet, and the view never left the shelf. From the parent area's Set a
+    // PIN it is on screen because the view was set to it on purpose, and
+    // nothing else sets it back, so without this a parent who finished stayed
+    // on the explainer with the PIN already saved. A write that fails still
+    // puts the storage screen over everything, and its retry carries this
+    // same record.
+    setView('home');
   };
 
   const play = (entry: CheckedTitle) => {
@@ -409,6 +431,7 @@ const KidModeScreen = ({
   if (view === 'details' && open) {
     return (
       <TitleDetailsScreen
+        key={`details-${focusGeneration}`}
         saving={saved.phase === 'saving'}
         testID={`${testID}-details`}
         entry={open}
@@ -424,15 +447,18 @@ const KidModeScreen = ({
 
   return (
     <KidHomeScreen
+      key={`home-${focusGeneration}`}
       saving={saved.phase === 'saving'}
       testID={`${testID}-home`}
       titles={titles}
+      returnFocusId={lastOpenedId}
       profiles={family.profiles}
       activeProfileId={family.activeProfileId}
       onChooseProfile={(profile) =>
         setFamily(selectProfile(family, profile.id))
       }
       onOpen={(entry) => {
+        setLastOpenedId(entry.title.id);
         setOpenId(entry.title.id);
         setView('details');
       }}

@@ -3,7 +3,9 @@
  * The Python export/build check binds its maps and renditions to exact package
  * bytes. This module never accepts a catalog URL or a key supplied by a route.
  */
-import { PACKAGED_LIBRARY_JSON } from '../../assets/raw/prepared-library/catalog';
+// Metro resolves .json before .ts, unlike Jest. Name the generated module
+// explicitly so the signed catalog text is the same in tests and on Vega.
+import { PACKAGED_LIBRARY_JSON } from '../../assets/raw/prepared-library/catalog.ts';
 import { base64ToBytes } from './ed25519';
 import { coverOptionsFor, HouseholdSettings, PRESET_NAMES, PresetName } from './household';
 import { CatalogTitle } from './titleStatus';

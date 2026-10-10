@@ -42,6 +42,23 @@ const type = (digits: string) => {
 };
 
 describe('the first run', () => {
+  it('corrects a digit in both PIN entries before saving the intended PIN', () => {
+    const onDone = renderFirstRun();
+    // Empty correction is harmless and does not leave the PIN step.
+    fireEvent.press(screen.getByTestId('first-run-key-delete'));
+    type('139');
+    fireEvent.press(screen.getByTestId('first-run-key-delete'));
+    expect(screen.getByTestId('first-run-entered').props.children).toBe('**');
+    type('57');
+    type('139');
+    fireEvent.press(screen.getByTestId('first-run-key-delete'));
+    type('57');
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    fireEvent.press(screen.getByTestId('first-run-done'));
+    expect(attemptPin(onDone.mock.calls[0][0].gate, '1357', 0).ok).toBe(true);
+  });
+
   it('asks for the PIN, the preset, the room and then explains itself', () => {
     const onDone = renderFirstRun();
 

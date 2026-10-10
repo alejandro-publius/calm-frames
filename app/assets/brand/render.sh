@@ -21,7 +21,13 @@ set -e
 cd "$(dirname "$0")"
 
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-if [ ! -x "$CHROME" ]; then
+QT_RENDERER=""
+if command -v pkg-config >/dev/null && pkg-config --exists Qt6Svg; then
+  mkdir -p ../../../build/brand
+  QT_RENDERER="$(cd ../../../build/brand && pwd)/render-svg"
+  c++ -std=c++17 -fPIC -isystem "$(xcrun --show-sdk-path)/usr/include/c++/v1" \
+    render_qt.cpp $(pkg-config --cflags --libs Qt6Svg) -o "$QT_RENDERER"
+elif [ ! -x "$CHROME" ]; then
   echo "Google Chrome is not at $CHROME. Install it, or render the SVGs some other way." >&2
   exit 2
 fi
@@ -33,6 +39,11 @@ mkdir -p "$DOCS" "$IMAGE"
 
 render() {  # render SVG WIDTH HEIGHT OUT
   local svg="$1" w="$2" h="$3" out="$4"
+  if [ -n "$QT_RENDERER" ]; then
+    QT_QPA_PLATFORM=offscreen "$QT_RENDERER" "$BRAND/$svg" "$w" "$h" "$out"
+    echo "  $(basename "$out")  ${w}x${h} (Qt SVG)"
+    return
+  fi
   local tmp
   tmp="$(mktemp -d)"
   cat > "$tmp/page.html" <<HTML

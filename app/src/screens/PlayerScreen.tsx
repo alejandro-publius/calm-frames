@@ -130,6 +130,8 @@ const PlayerScreen = ({
   const [videoPlayElapsedTimeM, setVideoPlayElapsedTimeM] =
     React.useState<number>(0);
   const timer = useRef<null | ReturnType<typeof setTimeout> | number>(null);
+  const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const leaving = useRef(false);
 
   const videoRef = useRef<VideoPlayer | null>(null);
   const player = useRef<ShakaPlayer | null>(null);
@@ -264,6 +266,12 @@ const PlayerScreen = ({
         }
       : UNGUARDED_CARD;
   }
+  // A failed player has no advancing timeline. Keep its picture hidden and
+  // remove the stale countdown/Skip control above the recovery screen.
+  if (isVideoError) {
+    covered = true;
+    card = NO_CARD;
+  }
   // The app records its own layer, because Vega gives it no way to read its
   // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
   useUiCapture(
@@ -323,7 +331,7 @@ const PlayerScreen = ({
       return;
     }
     timer.current = setTimeout(() => {
-      navigateBack();
+      leavePlayer();
     }, TIME_TO_GO_BACK_IF_VIDEO_ENDS);
 
     return () => clearTimeout(Number(timer.current));
@@ -331,9 +339,10 @@ const PlayerScreen = ({
   }, [isVideoEnded]);
 
   useEffect(() => {
+    setupEventListeners();
     if (rejectedPreparedRoute) {
       setShowBuffering(false);
-      return undefined;
+      return removeEventListeners;
     }
     console.log(
       '[PlayerScreen.tsx] - Initialize media player: componentInstance',
@@ -344,7 +353,6 @@ const PlayerScreen = ({
       videoHandler.data,
     );
     videoHandler.preBufferVideo(componentInstance);
-    setupEventListeners();
     const changeSubscription = addKeplerAppStateListenerCallback(
       'change',
       handleAppStateChange,
@@ -414,6 +422,10 @@ const PlayerScreen = ({
         clearTimeout(Number(timer.current));
       }
 
+      if (exitTimer.current !== null) {
+        clearTimeout(exitTimer.current);
+      }
+
       if (bifFrameImagesRef) {
         bifFrameImagesRef.current?.clearCache();
         bifFrameImagesRef.current = null;
@@ -422,11 +434,11 @@ const PlayerScreen = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const navigateBack = useCallback(() => {
-    if (captionStatus.current) {
-      captionStatus.current = false;
+  const leavePlayer = useCallback(() => {
+    if (leaving.current) {
       return true;
     }
+    leaving.current = true;
 
     reportVideoExit();
 
@@ -439,10 +451,18 @@ const PlayerScreen = ({
     clearTimeout(Number(timer.current));
 
     //Approx delay added to destroy media instance
-    setTimeout(() => navigation.goBack(), BACK_NAVIGATION_DELAY);
+    exitTimer.current = setTimeout(() => navigation.goBack(), BACK_NAVIGATION_DELAY);
     return true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const navigateBack = useCallback(() => {
+    if (captionStatus.current) {
+      captionStatus.current = false;
+      return true;
+    }
+    return leavePlayer();
+  }, [leavePlayer]);
 
   const handleAppStateChange = useCallback(
     (nextAppState: KeplerAppStateChangeData): void => {
@@ -470,10 +490,10 @@ const PlayerScreen = ({
         console.log(
           '[PlayerScreen.tsx] - handleAppStateChange - background, leaving the player',
         );
-        navigateBack();
+        leavePlayer();
       }
     },
-    [navigateBack, coverTest],
+    [leavePlayer, coverTest],
   );
 
   const backHandlerSubscription = useRef<{ remove: () => void } | null>(null);
@@ -547,9 +567,9 @@ const PlayerScreen = ({
         '[PlayerScreen.tsx] - playVideo - Error occurred while playing video {}',
         error,
       );
-      navigateBack();
+      leavePlayer();
     }
-  }, [videoRef, navigateBack, reportVideoPlaying]);
+  }, [videoRef, leavePlayer, reportVideoPlaying]);
 
   const setSurface = useCallback(async () => {
     if (surfaceHandle.current) {
@@ -640,13 +660,16 @@ const PlayerScreen = ({
               screenWidth={deviceWidth}
               screenHeight={deviceHeight}
             />
-            <KeplerCaptionsView
-              onCaptionViewCreated={onCaptionViewCreated}
-              onCaptionViewDestroyed={onCaptionViewDestroyed}
-              style={styles.captions}
-              show={captionID !== CAPTION_DISABLE_ID}
-              testID="kepler-captions-view"
-            />
+            {/* Native captions need a retained RN host to stack above the image cover. */}
+            <View style={styles.captions} pointerEvents="none" collapsable={false}>
+              <KeplerCaptionsView
+                onCaptionViewCreated={onCaptionViewCreated}
+                onCaptionViewDestroyed={onCaptionViewDestroyed}
+                style={StyleSheet.absoluteFill}
+                show={captionID !== CAPTION_DISABLE_ID}
+                testID="kepler-captions-view"
+              />
+            </View>
           </>
         )}
 
@@ -696,7 +719,7 @@ const PlayerScreen = ({
             }
           />
         )}
-        {isVideoError && <ErrorView navigateBack={navigateBack} />}
+        {isVideoError && <ErrorView navigateBack={leavePlayer} />}
       </View>
     </SafeAreaView>
   );

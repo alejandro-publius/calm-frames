@@ -130,26 +130,24 @@ It is four digits on a device anyone can pick up, and the parent area can only
 make the filter stricter, never weaker. Treat it as a lock on a drawer, not on a
 door."
 else
-  pin_block="**No PIN is published here, because the app does not ship with one.** The parent
-area is locked with a four digit PIN that a person sets on the device the first
-time they open it (app/src/calmframes/parentGate.ts: with nothing set it says
-\"No PIN is set yet\"). Only the salted hash is stored, so nobody can read the PIN
-back off a device either.
+  pin_block="**The package has no preset PIN.** On a fresh simulator installation,
+choose and confirm your own four digit PIN during onboarding. Use Delete to
+correct a partial entry. Only a salted hash is stored. Installation on another
+simulator does not transfer the original household record.
 
-Set the demo PIN on the demo stick, then build the notes with it:
-
-    make release RELEASE_ARGS=\"--pin 1234\"
-
-This file will not invent one, and a PIN in a public release should be one you
-do not use anywhere else."
+If this simulator is already configured, use its owner's PIN. Do not clear
+existing household data to bypass the parent gate."
 fi
 
 cat > "$OUT/NOTES.md" <<NOTES
 # Calm Frames $TAG
 
-A verified safety layer for kids with photosensitive epilepsy. Every frame of a
-title is analyzed before it can play in kid mode, and the player hides each
-flagged flashing segment before it starts while sound and captions carry on.
+A calmer way to watch.
+
+An accessibility prototype with analyzed, signed maps and prepared covered
+renditions. Harbor's benign practice holds use clearly labelled synthetic
+intervals. Native audio, captions, seeking and saved settings must be observed
+on the exact simulator package before describing this release as demonstrated.
 
 Not a medical device. It reduces exposure to flashing above published limits in
 the videos it plays.
@@ -169,14 +167,13 @@ need the app's own logs for a measurement run.
 
 ## Install it
 
-You need the Vega SDK CLI and a device in developer mode. \`make stick-day\`
-prints the developer mode steps and walks the whole first session.
+Use the Vega Virtual Device. On an Apple silicon Mac, install the aarch64
+package after the simulator is connected. No physical Fire TV is required.
 
     source ~/vega/env
-    vega devmode login
-    vega devmode enable-device --code <the 6 digit code on the TV>
-    vega device is-connected
-    vega run-app calm-frames-$VERSION-armv7.vpkg
+    vega virtual-device start
+    vega device is-connected --device Simulator
+    vega run-app calm-frames-$VERSION-aarch64.vpkg $PKG_ID.main --deviceId VirtualDevice
 
 Notes that save an hour:
 
@@ -184,8 +181,7 @@ Notes that save an hour:
   id starts with com.amazon, which is why this app is not called that.
 - \`vega device list\` is in Amazon's documentation but crashes with a TypeError
   on Vega CLI 1.3.4. Use \`vega device info\` and \`vega device is-connected\`.
-- the device has to be on Vega OS $OS_VERSIONS. On anything older, fall back to
-  SDK 0.23.
+- the simulator must match Vega OS $OS_VERSIONS and the package architecture.
 
 ## The PIN
 

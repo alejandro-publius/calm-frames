@@ -7,7 +7,7 @@
  * unchecked title within reach.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
 import { MINIMUM_TEXT_SIZE } from '../../src/calmframes/calmStyles';
 import {
@@ -132,10 +132,10 @@ describe('FlashMapStrip', () => {
 
   it('says out loud what the strip shows', () => {
     expect(describeStrip(intervals, 600_000)).toBe(
-      '2 flashing parts, 7 seconds in all, spread through about 10 minutes.',
+      '2 scheduled covers, 7 seconds in all, spread through about 10 minutes.',
     );
     expect(describeStrip([], 600_000)).toBe(
-      'Nothing in this title goes over the flash limits.',
+      'No parts were flagged by these checks.',
     );
   });
 
@@ -145,7 +145,7 @@ describe('FlashMapStrip', () => {
     expect(screen.getByTestId('flash-map-strip-mark-1')).toBeTruthy();
     expect(
       screen.getByTestId('flash-map-strip').props.accessibilityLabel,
-    ).toMatch(/2 flashing parts/);
+    ).toMatch(/2 scheduled covers/);
   });
 });
 
@@ -263,6 +263,26 @@ describe('the household viewing plan', () => {
 });
 
 describe('KidHomeScreen', () => {
+  it('offers parent focus when no checked title remains', () => {
+    render(<KidHomeScreen titles={[makeTitle('last', 'failed')]} onOpen={jest.fn()}
+      returnFocusId="last" onOpenParentArea={jest.fn()} />);
+    expect(screen.getByTestId('kid-home-parent-area').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.queryByTestId('kid-home-poster-last')).toBeNull();
+  });
+
+  it('restores a checked poster and falls back when that title is no longer checked', () => {
+    const shelf = (status: CheckedTitle['status']) => (
+      <KidHomeScreen titles={[makeTitle('first', 'verified'), makeTitle('last', status)]}
+        onOpen={jest.fn()} returnFocusId="last" />
+    );
+    const view = render(shelf('verified'));
+    expect(screen.getByTestId('kid-home-poster-last').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.getByTestId('kid-home-poster-first').props.hasTVPreferredFocus).toBe(false);
+    view.rerender(shelf('failed'));
+    expect(screen.queryByTestId('kid-home-poster-last')).toBeNull();
+    expect(screen.getByTestId('kid-home-poster-first').props.hasTVPreferredFocus).toBe(true);
+  });
+
   const titles = [
     makeTitle('ok', 'verified'),
     makeTitle('waiting', 'pending'),
@@ -494,6 +514,104 @@ describe('ParentAreaScreen', () => {
       fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
     }
   };
+
+  it('corrects a partial PIN without spending an attempt or opening the gate', () => {
+    const { onGateChange } = renderArea();
+    enter('139');
+    fireEvent.press(screen.getByTestId('parent-area-key-delete'));
+    expect(screen.getByTestId('parent-area-entered').props.children).toBe('**');
+    expect(onGateChange).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('parent-area-open')).toBeNull();
+    enter('57');
+    expect(onGateChange).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId('parent-area-open')).toBeTruthy();
+  });
+
+  it('does not let PIN correction reset a lockout', () => {
+    const { onGateChange } = renderArea({
+      gate: { ...gate, failedAttempts: MAX_ATTEMPTS, lockedUntilMs: 60_000 },
+    });
+    enter('139');
+    fireEvent.press(screen.getByTestId('parent-area-key-delete'));
+    enter('57');
+    expect(screen.queryByTestId('parent-area-open')).toBeNull();
+    expect(onGateChange).toHaveBeenCalledWith(expect.objectContaining({
+      failedAttempts: MAX_ATTEMPTS, lockedUntilMs: 60_000,
+    }));
+  });
+
+  it('cannot edit a partial PIN while household state is saving', () => {
+    const area = (saving: boolean) => (
+      <ParentAreaScreen gate={gate} onGateChange={jest.fn()}
+        settings={DEFAULT_SETTINGS} onSettingsChange={jest.fn()}
+        log={log} titles={titles} saving={saving} />
+    );
+    const view = render(area(false));
+    enter('13');
+    view.rerender(area(true));
+    fireEvent.press(screen.getByTestId('parent-area-key-delete'));
+    fireEvent.press(screen.getByTestId('parent-area-key-5'));
+    expect(screen.getByTestId('parent-area-entered').props.children).toBe('**');
+    view.rerender(area(false));
+    fireEvent.press(screen.getByTestId('parent-area-key-delete'));
+    expect(screen.getByTestId('parent-area-entered').props.children).toBe('*');
+  });
+
+  /**
+   * The keys stay in the focus order while a wrong PIN is being saved.
+   *
+   * The route saves every attempt before the screen answers it, and for that
+   * moment the keypad is blocked. It used to be blocked with `disabled` on
+   * each key, which TouchableOpacity turns into `focusable={false}` on the
+   * view underneath, so on the fourth digit the key under the D-pad was told
+   * it could no longer hold focus, and the parent's next press went wherever
+   * the focus had been sent. The block is now the accessibility state and the
+   * press handler, and the view is told it is focusable throughout. What a
+   * device then does with focus is not measured here; what the view is told
+   * is.
+   *
+   * Seen to fail with `disabled={disabled || undefined}` back on the key:
+   *
+   *     expect(received).toBe(expected) // Object.is equality
+   *
+   *     Expected: true
+   *     Received: false
+   */
+  it('keeps the keys focusable while a wrong PIN is being saved, and keeps them blocked', async () => {
+    let finish!: () => void;
+    const onGateChange = jest.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          finish = resolve;
+        }),
+    );
+    renderArea({ onGateChange });
+    const key = () => screen.getByTestId('parent-area-key-5');
+    expect(key().props.focusable).toBe(true);
+    expect(key().props.accessibilityState.disabled).toBe(false);
+
+    enter('0000');
+    expect(onGateChange).toHaveBeenCalledTimes(1);
+    // Blocked, said so, and still in the focus order.
+    expect(key().props.accessibilityState.disabled).toBe(true);
+    expect(key().props.focusable).toBe(true);
+    enter('13');
+    fireEvent.press(screen.getByTestId('parent-area-key-delete'));
+    expect(screen.getByTestId('parent-area-entered').props.children).toBe('');
+    expect(onGateChange).toHaveBeenCalledTimes(1);
+    expect(screen.queryByTestId('parent-area-open')).toBeNull();
+
+    await act(async () => {
+      finish();
+    });
+    expect(screen.getByTestId('parent-area-message-title').props.children).toBe(
+      PIN_WRONG_TITLE,
+    );
+    expect(key().props.accessibilityState.disabled).toBe(false);
+    expect(key().props.focusable).toBe(true);
+    enter('13');
+    expect(screen.getByTestId('parent-area-entered').props.children).toBe('**');
+  });
 
   it('offers the credits, and only once the PIN is right', () => {
     // CC BY asks for attribution where a person can read it. NOTICE ships with
