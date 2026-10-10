@@ -2092,3 +2092,11 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
 
 - **Decision:** retain focus on parent preset, room and chime controls while a save blocks presses. **Why:** native validation showed focus vanished; the deferred-write test failed with `focusable=false` before the fix and passes afterward.
 - **Decision:** update the report palette to the approved native palette and pin its newly measured lane luminances. **Why:** the existing drift test caught the mismatch. Maximum lane step is now 5.59 cd/m2 against the unchanged 20 cd/m2 difference; the half-threshold margin and five-block cap remain unchanged.
+
+## Oct 10: final unavailable-title copy
+
+The native comparison exposed a repeated hidden-picture explanation: the generic
+missing-check notice and specific missing-map reason differed in wording, so
+noticeForTitle appended both. Align the generic sentence with the existing
+missing-map reason so the existing equality check displays it once. This is
+copy only; title eligibility, signatures and thresholds are unchanged.

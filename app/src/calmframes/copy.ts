@@ -87,7 +87,7 @@ export const BACKEND_UNREACHABLE_EMPTY: Notice = {
 export const TITLE_PENDING: Notice = {
   title: 'Not ready to watch',
   detail:
-    'The picture stays hidden until the required checks pass.',
+    'This title is not checked yet, so the picture stays hidden.',
   tone: 'waiting',
 };
 
