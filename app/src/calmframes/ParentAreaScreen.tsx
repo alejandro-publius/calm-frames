@@ -357,6 +357,7 @@ const ParentAreaScreen = ({
     : family?.floor ?? settings;
 
   const choose = (change: Partial<HouseholdSettings>) => {
+    if (saving) { return; }
     if (family && onFamilyChange) {
       onFamilyChange(
         editingProfile
@@ -532,7 +533,6 @@ const ParentAreaScreen = ({
           const key = `preset-${name}`;
           return (
             <TouchableOpacity
-              disabled={saving || undefined}
               key={name}
               testID={`${testID}-preset-${name}`}
               accessibilityRole="radio"
@@ -582,7 +582,6 @@ const ParentAreaScreen = ({
             const key = `tv-${inches}`;
             return (
               <TouchableOpacity
-                disabled={saving || undefined}
                 key={key}
                 testID={`${testID}-tv-${inches}`}
                 accessibilityRole="radio"
@@ -623,7 +622,6 @@ const ParentAreaScreen = ({
             const key = `seat-${inches}`;
             return (
               <TouchableOpacity
-                disabled={saving || undefined}
                 key={key}
                 testID={`${testID}-seat-${inches}`}
                 accessibilityRole="radio"
@@ -693,7 +691,6 @@ const ParentAreaScreen = ({
             {CHIME_SECTION_TITLE}
           </Text>
           <TouchableOpacity
-            disabled={saving || undefined}
             testID={`${testID}-chime`}
             accessibilityRole="button"
             accessibilityState={{ disabled: saving }}
@@ -703,7 +700,9 @@ const ParentAreaScreen = ({
             activeOpacity={1}
             onFocus={() => setFocusedRow('chime')}
             onBlur={() => setFocusedRow(null)}
-            onPress={() => onFamilyChange(setChimeEnabled(family, !family.chimeEnabled))}
+            onPress={() => {
+              if (!saving) { onFamilyChange(setChimeEnabled(family, !family.chimeEnabled)); }
+            }}
             style={[styles.row, focusedRow === 'chime' ? styles.focused : null]}>
             <View style={styles.rowText}>
               <Text style={[styles.rowTitle, focusedRow === 'chime' ? styles.focusedLabel : null]}>{CHIME_ROW_TITLE}</Text>

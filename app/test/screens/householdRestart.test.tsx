@@ -317,6 +317,9 @@ describe('household setup across launches', () => {
       screen.getByTestId('kid-mode-parent-preset-extra-cautious'),
     );
     expect(screen.getByTestId('kid-mode-parent-saving')).toBeTruthy();
+    for (const id of ['preset-extra-cautious', 'tv-55', 'seat-96', 'chime']) {
+      expect(screen.getByTestId(`kid-mode-parent-${id}`).props.focusable).toBe(true);
+    }
     expect(
       screen.getByTestId('kid-mode-parent-preset-wcag').props.accessibilityState
         .disabled,

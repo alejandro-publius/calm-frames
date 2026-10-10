@@ -2089,3 +2089,6 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
 - **Decision:** use concept artwork only for browsing and keep scheduled demo holds distinct from detected hazards. **Why:** the design must not alter media provenance or safety claims.
 - **Decision:** use a stable outline plus focused text underline. **Why:** the independent Ultracode review requested a non-color focus cue without layout movement.
 - **Decision:** keep actual native still/video sources and disclose narration in the redesigned demo. **Why:** a browser reference is not simulator evidence.
+
+- **Decision:** retain focus on parent preset, room and chime controls while a save blocks presses. **Why:** native validation showed focus vanished; the deferred-write test failed with `focusable=false` before the fix and passes afterward.
+- **Decision:** update the report palette to the approved native palette and pin its newly measured lane luminances. **Why:** the existing drift test caught the mismatch. Maximum lane step is now 5.59 cd/m2 against the unchanged 20 cd/m2 difference; the half-threshold margin and five-block cap remain unchanged.
