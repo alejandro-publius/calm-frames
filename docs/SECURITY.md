@@ -622,3 +622,10 @@ source from the supplied Shaka patch archive. Preserve those notices and
 confirm the applicable redistribution terms before making the source public;
 this local review does not decide that the root license supersedes the header.
 The review bundle remains a local artifact, not a published source release.
+
+## October 10 pushed checkpoint
+
+Hosted CI on 402c167 passed. Audit passed the bills of materials, stack/container
+rules and ARM64 image jobs; pip-audit/npm audit failed. The SBOM/CDK repair now
+has hosted evidence, while dependency findings and the expired exception remain
+blocking. See `results/github_push_2026-10-10.json` for exact run links.

@@ -100,6 +100,10 @@ captures and native receipt provide that evidence.
   ZIP CRC and payload hashes verified; source, package, video, branding, docs
   and selected native evidence included. Bundle receipt:
   `results/redesign_review_bundle_2026-10-10.json`.
+- [x] Pushed the completed implementation to the existing GitHub branch and
+  uploaded all nine review assets as a private draft release. GitHub asset
+  digests match local hashes. See `results/github_push_2026-10-10.json` and
+  [the draft release](https://github.com/alejandro-publius/calm-frames/releases/tag/untagged-5e898f46d87868df8dd6).
 - [x] Devpost draft: `docs/SUBMISSION.md`; product feedback: `docs/FEEDBACK.md`;
   friction: `docs/FRICTION_LOG.md`; brand assets: `docs/brand/`.
 - [x] Qualifying Open Source candidate patches and instructions prepared in
@@ -111,15 +115,17 @@ captures and native receipt provide that evidence.
 ## Still open
 
 - [ ] Dependency Audit remains failed: unresolved SDK/transitive advisories and
-  an expired exception. No exceptions widened. Local SBOM/CDK fixes have no
-  hosted rerun. Saved AWS evidence also has inactive Project cost tagging and
+  an expired exception. No exceptions widened. The new hosted CI passes;
+  Audit now passes SBOM, stack and container jobs, failing dependency audit
+  only. Saved AWS evidence also has inactive Project cost tagging and
   container security findings.
 - [ ] Confirm redistribution terms for the generated Amazon DOMParser polyfill
   before public source release; the specific header issue is in `docs/SECURITY.md`.
 - [ ] Entrant name, country, eligibility and contact email need the entrant's
   values. Upstream patch metadata needs the chosen public author identity.
 - [ ] Public video/release/reviewer-access links and upstream PR URL remain
-  unpublished. No push, merge, visibility change or Devpost submission performed.
+  unpublished. Code and private draft artifacts are on GitHub. No merge,
+  visibility change, final release publication or Devpost submission performed.
 
 There is no simulator, localhost-test, recording or Claude authentication blocker.
 Publication and the unresolved security items remain distinct from local demo

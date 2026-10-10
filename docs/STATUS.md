@@ -4,6 +4,17 @@ Updated Sat Oct 10, 2026.
 
 ## 0. Where things stand
 
+### Oct 10: GitHub push and private review assets
+
+At the user's explicit request, the completed branch was pushed through
+`402c167`. CI passed; Audit passed the stack/container and SBOM jobs, with
+dependency audit still failing. Nine review artifacts are uploaded to the
+[private draft release](https://github.com/alejandro-publius/calm-frames/releases/tag/untagged-5e898f46d87868df8dd6).
+All GitHub asset digests match local SHA-256 values. The push receipt is
+`results/github_push_2026-10-10.json`. Main, repository visibility and Devpost
+submission are unchanged. Earlier local-only and no-rerun statements below
+are historical checkpoints.
+
 ### Oct 10: approved native redesign
 
 The approved Documents archive is implemented and installed as aarch64 Debug
