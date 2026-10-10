@@ -174,7 +174,7 @@ export function badgeLabel(status: TitleStatus): string {
     case 'verified':
       return 'Checked';
     case 'pending':
-      return 'Being checked';
+      return 'Needs check';
     case 'failed':
     default:
       return 'Check failed';

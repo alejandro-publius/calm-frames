@@ -262,7 +262,7 @@ describe('per title status', () => {
 
   it('has a plain badge for each status', () => {
     expect(badgeLabel('verified')).toBe('Checked');
-    expect(badgeLabel('pending')).toBe('Being checked');
+    expect(badgeLabel('pending')).toBe('Needs check');
     expect(badgeLabel('failed')).toBe('Check failed');
   });
 });

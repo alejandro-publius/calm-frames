@@ -85,9 +85,9 @@ export const BACKEND_UNREACHABLE_EMPTY: Notice = {
 
 /** A title whose check has not finished. */
 export const TITLE_PENDING: Notice = {
-  title: 'Still being checked',
+  title: 'Not ready to watch',
   detail:
-    'This title is not ready. The picture stays hidden until the check is finished.',
+    'Playback is unavailable until the required checks pass.',
   tone: 'waiting',
 };
 

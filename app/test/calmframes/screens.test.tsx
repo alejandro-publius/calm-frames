@@ -154,7 +154,7 @@ describe('ShieldBadge', () => {
   it('says the status in words, not only in colour', () => {
     for (const [status, label] of [
       ['verified', 'Checked'],
-      ['pending', 'Being checked'],
+      ['pending', 'Needs check'],
       ['failed', 'Check failed'],
     ] as const) {
       const { unmount } = render(<ShieldBadge status={status} />);
