@@ -6,7 +6,7 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 Flashing on a screen is a known seizure trigger for some people with photosensitive epilepsy, and the Epilepsy Foundation's own page says it is more common in children and adolescents. The published limits for how much flashing is too much are WCAG 2.2 success criterion 2.3.1 and, for broadcast, ITU-R BT.1702; [flashmap/docs/SPEC_SOURCES.md](flashmap/docs/SPEC_SOURCES.md) quotes both with links.
 
-A parent today has two options: preview everything first, or trust that a title is fine. Calm Frames tries to give a third: every frame of a title is measured before it can play in kid mode, and the player hides each flashing part before it reaches the screen while the sound and captions keep the story going.
+A parent today has two options: preview everything first, or trust that a title is fine. Calm Frames tries to give a third: every frame of a title is measured before it can play in kid mode, and the player hides each part the analyzer flags, on a schedule set before it plays, while the sound and captions keep the story going.
 
 ## Why it is harder than putting a black box over the bad part
 
@@ -33,6 +33,7 @@ The checks are tested by breaking them. A mutation gate breaks each safety guard
 ## Honest limits
 
 - **It is software timing, not screen timing.** The cover lead time was measured inside the app on the Vega Virtual Device; no physical television and no camera have been used. The strict reading of that run, counting the trials that produced no evidence as misses, is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->.
+- **The analyzer misses flashing that sits right on a limit more often than not.** On the generated conformance clips its recall is <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall -->0.85<!--/n--> overall but <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits -->0.469<!--/n--> on clips near a limit, and its precision near a limit is <!--n results/conformance_current_report_2026-10-02.json:published.precision_near_limits -->0.573<!--/n-->. The near-limit numbers are the ones to judge it by; the README has the full table.
 - **Detection is only as good as the pool it was tested on.** The free footage pool has no saturated red strobe, so red flash detection is tested on the generated conformance clips only.
 - **Only checked titles are protected.** Live streams, other apps and DRM titles are out of scope.
 - **A signature proves which map belongs to which file, not that every hazard was found.**

@@ -83,7 +83,7 @@ new SafeMediaControlHandler({
 ```
 
 `docs/INTEGRATION_DIFF.md` in the Calm Frames repository is that change made
-against a clean `vega-video-sample` checkout: 32 lines added across four files.
+against a clean `vega-video-sample` checkout: <!--n results/integration_diff.json:lines_added -->32<!--/n--> lines added and <!--n results/integration_diff.json:lines_replaced -->2<!--/n--> replaced across <!--n results/integration_diff.json:files_touched -->4<!--/n--> files, plus the two catalog fields and the key constant the app supplies.
 
 ## What it needs from the app
 

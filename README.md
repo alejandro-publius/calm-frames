@@ -10,13 +10,13 @@
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
-![The Calm Frames library on a television: the Harbor story in the hero, and a shelf of three checked titles](docs/design/polish/library-after.png)
+![The Calm Frames library on a television: Watch now in focus on the checked Harbor story, Robin's profile chip, and a shelf of three titles](docs/design/seamless/library-family-browser.png)
 
 | Setup | Before you watch | Parental controls |
 |---|---|---|
 | ![Setup, step 1 of 4: choose a PIN on a remote-friendly keypad](docs/design/polish/setup-after.png) | ![A title's details: the check found no segments above the flash limits, and checks can miss hazards](docs/design/polish/details-after.png) | ![Parental controls while a save is in flight, with Saving your changes beside the title](docs/design/seamless/parent-saving-browser.png) |
 
-<sub>Browser renders of the app's own React Native trees, at 54dab0b (Oct 10) and, for parental controls, the sources in 85c30f9, with the bundled Inter fonts and artwork. They are review aids, not Vega screenshots, and they show the copy from before Oct 11. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md), and more screens, with how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
+<sub>Browser renders of the app's own React Native trees with the bundled Inter fonts and artwork: the library and parental controls from the sources in 85c30f9 (Oct 11), setup and details from 54dab0b (Oct 10). They are review aids, not Vega screenshots. The shelf holds two Harbors on purpose, one with labelled practice holds and one prepared the way a real title is, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md), and more screens, with how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
 
 ---
 
@@ -197,7 +197,7 @@ The rules ask whether a project "could realistically serve an audience beyond th
 - **The hook needs publishing.** It is not on npm yet. Local tarball installation is checked with the current Vega peers, not a fresh registry or physical-device install.
 - **The app itself would need the Fire TV Appstore, and we have not started that.** No developer account submission, no listing, no policy review. A safety claim in a store listing is a different bar from a safety claim in a README, and the wording would have to be checked by someone qualified before it went near a store. **We are not claiming a route we have not walked.**
 
-The honest shape of it: three of the four things above can travel without us, and the app is the one that cannot. That is the opposite of how most entries are built, and it is deliberate.
+The shape of it: the analyzer and its Action can travel without us today, the hook and the map format can once the hook is published and a second player reads a map, and the feature request needs Amazon. The app is the one part that cannot travel at all. That is the opposite of how most entries are built, and it is deliberate.
 
 ### What has not been shown
 

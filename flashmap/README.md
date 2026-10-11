@@ -43,11 +43,8 @@ The map format is [`docs/SIDECAR_SPEC.md`](../docs/SIDECAR_SPEC.md), version 1.
 
 ## Install
 
-```sh
-python -m pip install flashmap
-```
-
-From this checkout, with the tests:
+flashmap is not on PyPI yet, and publishing it is part of the judged release. From a checkout of
+this repository, with the tests:
 
 ```sh
 python -m pip install -e 'flashmap[dev]'
