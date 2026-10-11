@@ -588,6 +588,9 @@ def ingest_title(
                 # Segments and profile thresholds are not edited. The new image
                 # payload joins the existing canonical Ed25519 signature.
                 document = dict(doc.raw, scene_holds=scene_payload(scene_images))  # noqa: B023 - steps.run calls it before the loop moves on
+                # Scene images are only read when there is a key (scene_holds_enabled and
+                # options.key, above), so this names that rather than re-checking it.
+                assert options.key, "scene holds are only built with a signing key"
                 write_registry(sign_document(document, load_private_key(options.key)),
                                layout.map_path(preset))
             elif "scene_holds" in doc.raw:

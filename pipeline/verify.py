@@ -267,8 +267,9 @@ def _geometry(doc: FlashMapDoc) -> dict:
     rect = None
     if isinstance(coded, dict):
         values = [coded.get(key) for key in ("left", "top", "width", "height")]
-        if all(isinstance(value, (int, float)) for value in values):
-            rect = tuple(int(value) for value in values)
+        numbers = [value for value in values if isinstance(value, (int, float))]
+        if len(numbers) == len(values):
+            rect = tuple(int(value) for value in numbers)
 
     def number(value):
         return float(value) if isinstance(value, (int, float)) else None
@@ -992,9 +993,9 @@ def verify_title(
         # the film is never one colour, so this is what stops a neutral card being a way to
         # smuggle a flagged frame through.
         try:
-            flat, detail = still_is_flat(layout.still_path)
+            flat, flat_detail = still_is_flat(layout.still_path)
         except PipelineError as exc:
-            flat, detail = False, {"error": str(exc)}
+            flat, flat_detail = False, {"error": str(exc)}
         report.add(
             "cover_still_calm",
             flat,
@@ -1003,10 +1004,10 @@ def verify_title(
             + (
                 ", and it measures as one flat colour"
                 if flat
-                else f", but it is not one flat colour: {detail}"
+                else f", but it is not one flat colour: {flat_detail}"
             ),
             still_from=still_from,
-            **detail,
+            **flat_detail,
         )
     elif still_info and still_info.get("time_ms") is None:
         # A still that says it came out of the film has to say when. Without that there is no

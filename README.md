@@ -613,7 +613,7 @@ cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx je
 .venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"
 .venv/bin/python eval/readme_sync.py --check    # every published number against results/
 .venv/bin/python eval/style_check.py            # no dashes, none of the three words
-make lint-py typecheck-py                       # ruff over the Python, strict mypy over flashmap
+make lint-py typecheck-py                       # ruff over the Python, mypy over flashmap and the pipeline
 ```
 
 `npm ci --ignore-scripts` skips the Shaka Player build, which the tests mock; a device package needs the full `npm install` with the JDK. `make synth`, the offline CDK synthesis, also needs `pip install -r pipeline/infra/requirements.txt` in that `.venv`. The whole Python suite passes on ffmpeg 6.1.1 as well as 9.0.1: the two tests that failed on 6.1.1 on Oct 11 were a race in the cover measurement, fixed the same day ([`results/local_python_run_2026-10-11_fixed.json`](results/local_python_run_2026-10-11_fixed.json), docs/STATUS.md section 5). `make hooks` installs the gitleaks pre-commit hook and `make hooks-selftest` watches it block a planted key; `make help` lists every target.
@@ -625,7 +625,7 @@ Every push runs two workflows, and a record of each green head is kept in `resul
 | Workflow | Job | What it refuses |
 |---|---|---|
 | CI | Vega app | A type error, a lint error (including a playhead write outside the one seek function), a failing jest test, coverage under the floors in `app/jest.config.json`, a prepared asset that does not match its record |
-| CI | Python packages | A failing analyzer, pipeline or evaluation test, Python source coverage under its floor in `.coveragerc`, a ruff finding, a strict mypy error in flashmap, and a conformance report that does not rebuild byte for byte from its own rows |
+| CI | Python packages | A failing analyzer, pipeline or evaluation test, Python source coverage under its floor in `.coveragerc`, a ruff finding, a mypy error in flashmap (strict) or the pipeline, and a conformance report that does not rebuild byte for byte from its own rows |
 | CI | The app's own UI passes flashmap | A screen of the app that flashes, checked by the same analyzer, with a negative control that has to refuse a flashing sequence and a grating |
 | CI | Mutation gate, property tests and the map fuzz corpus | A safety guard whose tests no longer notice it being broken |
 | CI | Secret scan | A committed key or token |

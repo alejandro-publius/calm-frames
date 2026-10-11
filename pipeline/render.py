@@ -562,7 +562,7 @@ def render_cover_model(
     if scene_holds is not None:
         # Image holds are fully opaque even where the legacy plan allows dim.
         # The same assets are used here and in the pre-covered rendition.
-        args = ["-i", str(source)]
+        args: list[str] = ["-i", str(source)]
         graph = _scene_filter(args, plan.intervals, scene_holds, probe)
         args += ["-filter_complex_threads", "1", "-filter_complex", graph,
                  "-map", "[v]", "-an", "-sn", "-c:v", "libx264",
@@ -598,7 +598,7 @@ def render_cover_model(
         )
     chain.append("format=yuv420p")
 
-    args: list[str] = [
+    args = [
         "-i",
         str(source),
         "-map",

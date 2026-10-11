@@ -155,6 +155,9 @@ jobs:
       - name: Typecheck flashmap
         # The package ships py.typed. Strict, from flashmap/pyproject.toml.
         run: python -m mypy --config-file flashmap/pyproject.toml
+      - name: Typecheck the pipeline
+        # Not strict: check_untyped_defs over pipeline/*.py, from pipeline/mypy.ini.
+        run: python -m mypy --config-file pipeline/mypy.ini
 
       - name: Rebuild the complete conformance report from its own rows
         # README quotes results/conformance_current_report_2026-10-02.json.

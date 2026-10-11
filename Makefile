@@ -101,8 +101,9 @@ test-hook-package: ## pack and check a clean offline hook consumer with current 
 lint-py: ## ruff over the Python code, configured by ruff.toml, the same command CI runs
 	cd $(REPO) && $(PY) -m ruff check .
 
-typecheck-py: ## mypy over the flashmap package, strict, the same command CI runs
+typecheck-py: ## mypy over flashmap (strict) and the pipeline, the same commands CI runs
 	cd $(REPO) && $(PY) -m mypy --config-file flashmap/pyproject.toml
+	cd $(REPO) && $(PY) -m mypy --config-file pipeline/mypy.ini
 
 local-library: ## prepare a verified local title, using LOCAL_LIBRARY_ARGS (no AWS)
 	cd $(REPO) && $(PY) -m pipeline.local_library $(LOCAL_LIBRARY_ARGS)

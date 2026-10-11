@@ -448,7 +448,10 @@ def export_packaged_library(workdir: str | Path, output: str | Path, *, pub: str
             raise PackagedLibraryError("Export between one and sixteen verified local titles.")
         with tempfile.TemporaryDirectory(prefix=".stage-", dir=destination) as temporary:
             staged = Path(temporary)
-            files, titles, reports, total = {}, [], {}, 0
+            files: dict[str, dict] = {}
+            titles: list[dict] = []
+            reports: dict[str, bytes] = {}
+            total = 0
             for receipt in receipts:
                 title, size = _title(receipt, root, staged, public, files, reports)
                 total += size
@@ -458,13 +461,14 @@ def export_packaged_library(workdir: str | Path, output: str | Path, *, pub: str
             manifest = {"version": VERSION, "assetRoot": ASSET_ROOT,
                         "publicKeyBase64": base64.b64encode(public_raw).decode(),
                         "titles": titles, "files": files}
-            manifest["bundleId"] = fingerprint(manifest)
+            bundle_id = fingerprint(manifest)
+            manifest["bundleId"] = bundle_id
             text = _json_text(manifest)
             if len(text.encode()) > MAX_CATALOG_BYTES:
                 raise PackagedLibraryError("The packaged catalog exceeds its byte budget.")
             (staged / "manifest.json").write_text(text)
             _check_bundle(manifest, staged)
-            immutable = destination / manifest["bundleId"]
+            immutable = destination / bundle_id
             local._path_inside(immutable, destination)
             existing_size = _check_output_root(destination, staging=staged)
             pointer_size = sum(path.stat().st_size for path in
