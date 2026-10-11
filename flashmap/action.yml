@@ -27,9 +27,12 @@ inputs:
     required: false
     default: "192"
   fail-on-error:
-    description: "Fail when a file cannot be measured, instead of skipping it."
+    description: >-
+      Fail when a file cannot be measured, for example an HDR master or a file that does not
+      decode. On by default, because a file nobody measured has not been shown to be under the
+      thresholds. Set to "false" to skip such files instead.
     required: false
-    default: "false"
+    default: "true"
   python-version:
     description: "Python to run flashmap on."
     required: false
@@ -44,7 +47,7 @@ inputs:
 
 outputs:
   failed-count:
-    description: "How many files broke the thresholds."
+    description: "How many files broke the thresholds. Files that could not be measured are not counted here."
     value: ${{ steps.check.outputs.failed-count }}
 
 runs:
@@ -105,12 +108,17 @@ runs:
         if [ "${{ inputs.fail-on-error }}" = "true" ]; then
           args+=(--fail-on-error)
         fi
+        log="$RUNNER_TEMP/flashmap-check.log"
         set +e
-        python -m flashmap.ci "${args[@]}"
-        status=$?
+        python -m flashmap.ci "${args[@]}" | tee "$log"
+        status=${PIPESTATUS[0]}
         set -e
-        echo "failed-count=$status" >> "$GITHUB_OUTPUT"
-        if [ "$status" -ne 0 ]; then
+        # The exit status says whether the job fails; the count is the FAIL lines.
+        failed=$(grep -c '^FAIL ' "$log" || true)
+        echo "failed-count=${failed:-0}" >> "$GITHUB_OUTPUT"
+        if [ "${failed:-0}" -gt 0 ]; then
           echo "::error title=WCAG 2.3.1::This change adds flashing above the general or red flash thresholds. See the job summary. Do not open the file in a player."
+        elif [ "$status" -ne 0 ]; then
+          echo "::error title=flashmap could not measure a file::A file in this change could not be measured, so it has not been shown to be under the thresholds. See the job summary."
         fi
         exit $status

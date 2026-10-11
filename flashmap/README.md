@@ -109,7 +109,10 @@ measured.
 
 The pin is a commit on this repository, because no release tag and no PyPI release exist
 yet; it moves to the judged tag once that is cut. With no `flashmap-version` the action
-installs flashmap from the checkout it came from. The checkout needs history, so use `fetch-depth: 0`. Without a base commit the action checks
+installs flashmap from the checkout it came from. A file flashmap cannot measure, such as an
+HDR master or a file that does not decode, fails the job by default, because nobody has shown
+it to be under the thresholds; set `fail-on-error: "false"` to skip such files instead. The
+`failed-count` output counts the files over the thresholds. The checkout needs history, so use `fetch-depth: 0`. Without a base commit the action checks
 every tracked file instead, which is the right thing on a scheduled run.
 
 ## Safety while working on this

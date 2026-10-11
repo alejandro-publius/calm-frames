@@ -837,12 +837,3 @@ That is not a criticism of the spec. It matters for two practical reasons:
 - The Harding FPA parameters, the Ofcom guidance note and the Japanese NAB/ARIB guidance. We
   could not read a primary copy of any of them, so no number from them appears in the code.
 - Any per-frame "risk score" or 0 to 100 scale. Nothing in either spec defines one.
-- The WCAG 2.2 contrast criteria, not yet quoted here. The app's own interface holds its text to
-  4.5 to 1 and its focus ring to 3 to 1 (`MINIMUM_TEXT_CONTRAST` and `MINIMUM_FOCUS_CONTRAST` in
-  `app/src/calmframes/calmStyles.ts`), the floors of SC 1.4.3 Contrast (Minimum) and SC 1.4.11
-  Non-text Contrast, and computes the ratio over the relative luminance quoted in section 3.
-  Those are interface design floors, not flash thresholds, and nothing in flashmap uses them. The
-  criteria, the contrast ratio definition and the large scale text definition still have to be
-  quoted here from https://www.w3.org/TR/WCAG22/ before any document calls the floors
-  published: on Oct 11, 2026 the cloud box could not reach w3.org, and they are not quoted from
-  memory. `docs/design/README.md` says the same.

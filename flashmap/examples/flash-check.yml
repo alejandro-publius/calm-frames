@@ -38,5 +38,6 @@ jobs:
         uses: alejandro-publius/calm-frames/flashmap@1b088d17c53343025b2ca37cf7615e809709ba8b
         with:
           profile: wcag
-          # Uncomment to fail when a file cannot be measured, for example an HDR master.
-          # fail-on-error: "true"
+          # A file flashmap cannot measure, for example an HDR master, fails the job by
+          # default. Uncomment only to skip such files instead.
+          # fail-on-error: "false"

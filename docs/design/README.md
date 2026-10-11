@@ -64,7 +64,9 @@ in camelCase.
 Contrast is the WCAG 2.2 contrast ratio, (L1 + 0.05) / (L2 + 0.05), over
 relative luminance. [`flashmap/docs/SPEC_SOURCES.md`](../../flashmap/docs/SPEC_SOURCES.md)
 section 3 quotes the relative luminance half; the ratio formula and the two
-floors below are the app's own constants and are not yet quoted there. The app's own arithmetic in `app/src/calmframes/uiContrast.ts` uses
+floors below are the app's own constants. WCAG 2.2's contrast ratio definition,
+SC 1.4.3 and SC 1.4.11 still have to be quoted here with links: the Oct 11 cloud
+box could not reach w3.org, and they are not quoted from memory. The app's own arithmetic in `app/src/calmframes/uiContrast.ts` uses
 the older 0.03928 break point that WCAG's Note 2 mentions; for 8-bit colours
 the two give the same answer, because no value n/255 falls between 0.03928 and
 0.04045. Ratios here are truncated to two decimals, the way `roundRatio` in
