@@ -12,7 +12,7 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 ![The Calm Frames library on a television: the Harbor story in the hero, and a shelf of three checked titles](docs/design/polish/library-after.png)
 
-<sub>A browser render of the app's own React Native tree at 54dab0b (Oct 10), with the bundled Inter fonts and artwork. It is a review aid, not a Vega screenshot, and it shows the shelf copy from before Oct 11. More screens, and how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
+<sub>A browser render of the app's own React Native tree at 54dab0b (Oct 10), with the bundled Inter fonts and artwork. It is a review aid, not a Vega screenshot, and it shows the shelf copy from before Oct 11. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md), and more screens, with how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
 
 ---
 
@@ -699,6 +699,8 @@ Thresholds are quoted, with links, in [`flashmap/docs/SPEC_SOURCES.md`](flashmap
 | [docs/EVAL_PLAN.md](docs/EVAL_PLAN.md) | Committed before any real clip was labelled |
 | [eval/EVAL_RESULTS.md](eval/EVAL_RESULTS.md) | What the conformance run actually says, including where recall falls off |
 | [docs/DECISIONS.md](docs/DECISIONS.md) | Every call made, with why and what it cost |
-| [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md) | The screens, rendered, with the design review behind them; [docs/brand/](docs/brand/) has the icons and the brand line |
+| [docs/design/README.md](docs/design/README.md) | The design page: identity, palette, contrast, type, spacing, focus, motion, sound and copy, held to the code by a test; [POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md) has the rendered screens and [docs/brand/](docs/brand/) the icons |
+| [docs/README.md](docs/README.md) | Every document in `docs/`, split into what is for readers and what is a project record |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to set up, run the checks and follow the rules; the [changelog](CHANGELOG.md) has what changed and when |
 | [docs/SECURITY.md](docs/SECURITY.md) | Secrets, the threat model, the scan findings, and what has never been run |
 | [docs/HACKATHON_REVIEW.md](docs/HACKATHON_REVIEW.md) | The Oct 2 assessment; the three mock judge reports are [1](docs/MOCK_JUDGE_1.md), [2](docs/MOCK_JUDGE_2.md) and [3](docs/MOCK_JUDGE_3.md) |
