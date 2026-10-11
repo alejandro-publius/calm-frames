@@ -283,6 +283,14 @@ schedule. An expanded household interval that does not fit stays covered with
 black. Loading, rejected maps, uncertain playback and image-load failures also
 keep the opaque fallback.
 
+A still may stand in for the opaque cover over any segment, including a red or
+a regular-pattern segment. It is one checked picture, drawn opaque and static,
+so it cannot flash, and the red rule, which is about the picture changing, is
+met by any opaque static cover; the image itself is checked under the broadcast
+pattern rule before publication, so a striped still is refused. What a still
+does not do is weaken the cover: nothing in this field changes which segments
+are covered, for how long, or what happens when playback is uncertain.
+
 Once playback uncertainty, a seek, backgrounding or an unready player interrupts
 an interval, that interval remains black for the current verified map/title
 session. Resuming or seeking back must not redisplay its still. A later,

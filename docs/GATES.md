@@ -15,13 +15,13 @@ Every gate result and every kill rule that fires is logged here with the date an
 | Item | Due | Status |
 |---|---|---|
 | HUMAN CHECKPOINT A: supported machine | Thu Sep 17 (kill if none by Sat Sep 19) | **Passed** Sep 17: macOS 15.1.1 on Apple M1 |
-| HUMAN CHECKPOINT F: outreach emails drafted and sent | Fri Sep 18 | Blocked: `docs/outreach-kit.md` not provided yet |
+| HUMAN CHECKPOINT F: outreach emails drafted and sent | Fri Sep 18 | Drafted Sep 18 without the kit, refreshed Oct 9, in `docs/outreach/`. Not sent: that is Alex's step, still open on Oct 11 |
 | VVD plays the renamed sample | Sat Sep 19 | **Done Sep 17**, two days early. Evidence in results/vvd_smoke.json |
 | HUMAN CHECKPOINT B: stick on Vega OS 1.2, developer mode, USB | Mon Sep 21 (SDK 0.23 fallback after) | Waiting on the stick |
 | Layering test (1.5) | When the stick is ready | Virtual-device harness exists; physical target and benign captioned sham-hold fixture still required. No TV composition result. |
 | GATE 1: overlay timing, 48 of 50 covered 150 ms early (HUMAN CHECKPOINT E1) | Wed Sep 23 (Fri Sep 25 latest) | Read-only physical preflight added Sep 29. Waiting on the stick, physical-target runner adaptation and camera footage. Existing timing runner uses QEMU paths. |
 | HUMAN CHECKPOINT C: self-filmed flashing footage | Thu Sep 24 | Waiting |
-| GATE 2: 15 real flagged segments from 4 sources | Fri Sep 25 | Not started |
+| GATE 2: 15 real flagged segments from 4 sources | Fri Sep 25 | **Met** by screening day: 456 flagged segments across 6 sources in `results/screening.json`. None fired the red rule, which docs/STATUS.md records |
 | HUMAN CHECKPOINT D: AWS Paid plan, $20 alarm (the credit request clause is void since Oct 7 and waived) | Before the first deploy | **Confirmed** Oct 9 by Alex, in chat and at his own terminal. The stack was deployed that night; see the log |
 | GATE 3: end to end on the stick | Fri Oct 2 | Not started |
 | Upstream pull request opened | Mon Oct 12 | Not started |

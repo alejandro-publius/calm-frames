@@ -47,12 +47,17 @@ Everything here is real. Each entry is something that cost time on this build, w
 | 33 | Toolchain | The ffmpeg photosensitivity filter misfires on its own first second | Low |
 | 34 | Local automation | Sandbox blocks Jest's Watchman socket and Python HTTP listeners | Low |
 | 35 | GitHub automation | All Audit jobs fail before a runner or step starts | High |
+| 36 | Player | A packaged `file:///pkg/...` URI is not opened by the native player | High |
+| 37 | Captions | The native caption view cannot be stacked above an RN image by z-index | High |
+| 38 | Virtual device | Capture can return an older GPU frame; a static screen records few frames | Medium |
+| 39 | Build tooling | Custom fonts render as the fallback unless they sit in `assets/fonts` | Low |
+| 40 | React Native | Disabling a focused control drops native focus | Medium |
 
-**Thirty-five entries. Six High, thirteen Medium, sixteen Low.**
+**Forty entries. Eight High, fifteen Medium, seventeen Low.**
 
-**Entries 1 to 28 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. **Entries 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues.** They are marked separately so nobody has to guess which are Amazon's.
+**Entries 1 to 28 and 36 to 40 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. **Entries 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues.** They are marked separately so nobody has to guess which are Amazon's.
 
-Nothing in entries 1 to 33 blocked the build outright, because every one of them had a way around it. The first five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26). Entry 35 records a historical startup block; runners resumed by October 5. The latest saved Audit failures concern dependencies and SBOM drift, not runner startup.
+Nothing in entries 1 to 33 blocked the build outright, because every one of them had a way around it; 36 and 37 did stop playback and captions on the device until their workarounds were found. The first five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26). Entry 35 records a historical startup block; runners resumed by October 5. The latest saved Audit failures concern dependencies and SBOM drift, not runner startup.
 
 Three entries say plainly that they are a platform rule we adopted and designed around rather than a failure we watched: 13, 27 and 28. They are in the log because each one shaped the build and each cost time to establish, and they are labelled so that nobody reads them as a crash we saw.
 
@@ -851,6 +856,86 @@ so automation can distinguish account or runner restrictions from code failures.
 
 ---
 
+## 36. A packaged `file:///pkg/...` URI is not opened by the native player as written
+
+**Task.** Play the bundled Harbor title from the package on the Vega Virtual Device.
+
+**Steps.** Handed the player the packaged MP4 and WebVTT as `file:///pkg/...` URIs, the form the Kepler file system documentation gives for package assets.
+
+**Expected.** The native player opens a package asset by its documented URI.
+
+**Actual.** Native GStreamer treated `file:///pkg/...` as a literal file name and failed to open it. The same bytes opened as `/pkg/...`.
+
+**Severity.** High. Nothing played from the package until this was found.
+
+**Workaround.** Normalize the package prefix to `/pkg/...` at the native media boundary only, in `app/src/utils/VideoHandler.ts`, and keep the signed catalog identity unchanged. Both Harbor titles play.
+
+**Suggestion.** Document the URI form the native player accepts for package assets, or accept the `file://` form the file system documentation gives.
+
+## 37. The native caption view cannot be stacked above a React Native image by z-index
+
+**Task.** Keep captions visible above a scheduled scene image during a hold.
+
+**Steps.** Set a z-index directly on the native caption view, above the React Native image that draws the cover.
+
+**Expected.** The caption view sits above the cover like any other sibling.
+
+**Actual.** The native caption view stayed under the image; a z-index on it did nothing.
+
+**Severity.** High. Captions under the cover defeat the point of a hold that keeps the story going.
+
+**Workaround.** A retained, non-collapsible React Native host view carries the stacking style and the caption view lives inside it, in `app/src/screens/PlayerScreen.tsx`. Both observed holds keep captions on top.
+
+**Suggestion.** Document native surface composition with examples: which views are native layers, and what z-index does and does not reach.
+
+## 38. Simulator capture can return an older GPU frame, and a static screen records few frames
+
+**Task.** Capture the simulator window for the demo and for navigation checks.
+
+**Steps.** Captured with ScreenCaptureKit while Stage Manager had the simulator in the background, and recorded static screens.
+
+**Expected.** A capture shows the frame on screen now, and a recording has a steady frame rate.
+
+**Actual.** A capture could return an older GPU frame, which confused navigation validation. A static screen produced variable-rate video with few frames, so a presumed constant frame count was wrong.
+
+**Severity.** Medium. Test friction rather than a product defect.
+
+**Workaround.** Activate the simulator before every capture and review the recording's actual frames; read frame timestamps rather than assuming a frame count.
+
+**Suggestion.** A CLI command that captures the simulator's screen, which entry 9 also asks for.
+
+## 39. Custom fonts render as the fallback face unless they sit in `assets/fonts`
+
+**Task.** Ship the licensed Inter faces the approved design uses.
+
+**Steps.** Put the static TTFs under `assets/raw/fonts`, then under `assets/fonts`.
+
+**Expected.** A bundled font resolves wherever the package carries it, or the documentation says where it has to be.
+
+**Actual.** Under `assets/raw/fonts` every weight rendered as the fallback face. Under `assets/fonts` the intended weights appeared.
+
+**Severity.** Low. Found by looking at the screen.
+
+**Workaround.** The fonts live in `app/assets/fonts`.
+
+**Suggestion.** Document the fonts directory, and what a fallback render looks like so it is recognised.
+
+## 40. Disabling a focused control drops native focus
+
+**Task.** Block repeated presses on a parent setting while its save is pending.
+
+**Steps.** Disabled the focused preset, room and chime controls for the length of the save.
+
+**Expected.** Focus stays where it was, or moves somewhere predictable.
+
+**Actual.** Native focus vanished with the control, and the remote had nowhere to go.
+
+**Severity.** Medium. A ten foot interface with no focus is stuck.
+
+**Workaround.** Keep the control in the focus order, report the disabled accessibility state and block its handler instead, in `app/src/calmframes/ParentAreaScreen.tsx`. The deferred-write regression was seen failing before the fix.
+
+**Suggestion.** Document focus behaviour when a focused view becomes disabled, and move focus to a neighbour by default.
+
 ## How to add one
 
 Write the six fields Amazon asks for: task, steps, expected versus actual, severity, workaround, suggestion. Real entries only, the way `CLAUDE.md` says. If it did not happen on this build, it does not go in, and if it is a platform rule we adopted rather than a failure we watched, say so in the entry itself. The log has three of those and each one is labelled.
@@ -887,41 +972,8 @@ The first eleven and the Sep 29 entries, 34 and 35, were written here as they ha
 | 33 ffmpeg photosensitivity filter | `eval/baselines/run_all.py`, commit `daec5b7` |
 | 34 restricted sockets | Sep 29 scene-hold verification; commands and limitations recorded in docs/STATUS.md |
 | 35 Actions startup | Audit run 36431466841, attempts 1 and 2, inspected Sep 29; no runners or steps |
-
-## October 10: native package playback and capture
-
-- Task: run Harbor on Apple silicon Vega Virtual Device. Expected packaged MP4
-  and WebVTT to open. Native GStreamer treated `file:///pkg/...` as a literal
-  file name and failed. Normalize this package prefix to `/pkg/...` only at the
-  native media boundary; keep the signed catalog identity unchanged. Both
-  prepared and practice Harbor now play. Severity: blocking.
-- Task: keep captions above a scheduled scene image. A z-index directly on the
-  native caption view did not place it above the RN image cover. A retained,
-  non-collapsible RN host with that stacking style fixes both observed holds.
-  Severity: blocking. Suggestion: document native surface composition examples.
-- Task: capture the simulator while Stage Manager backgrounds it. Screenshot
-  capture could return an older GPU frame, confusing navigation validation.
-  Activate Vega before capture and review actual recording frames. Static
-  screens create variable-rate video with few frames; use frame timestamps,
-  not a presumed constant frame count. Severity: major test friction.
-
-- Task: leave playback reliably. Independent review found Back and background
-  could queue duplicate navigation, and an open captions menu could consume a
-  background exit. Tests reproduced both failures; idempotent exit cleanup now
-  separates hardware menu dismissal from forced teardown. Native rapid Back
-  returns once to title details with Play focused. Severity: major; app defect.
-
-## October 10 approved native redesign
-
-- Vega custom fonts rendered as fallback from `assets/raw/fonts`; moving the
-  licensed static faces to `assets/fonts` produced the intended weights.
-- Aspect ratio alone did not constrain native hero art. Explicit TV-unit image
-  heights fixed the oversized first render.
-- Disabling a focused setting during a save removed native focus. Keep it in
-  the focus order, report disabled accessibility state and block its handler.
-  Deferred-write regression was observed failing before the fix.
-- Native recording must be checked for changing frames, duration and audio. A
-  navigation-only take was rejected instead of being presented as playback.
-- Ultracode noninteractive reviews completed after using the supported per-call
-  background wait ceiling; actual Fable 5.1 model is logged, max effort is an
-  accepted request rather than independently echoed provider telemetry.
+| 36 packaged URIs | `app/src/utils/VideoHandler.ts`, the native media boundary; `results/native_validation_2026-10-10.json` |
+| 37 caption stacking | `app/src/screens/PlayerScreen.tsx`, the retained caption host; the Oct 10 native captures |
+| 38 simulator capture | docs/SHOT_MANIFEST.md and `results/redesign_demo_manifest_2026-10-10.json`, frame timestamps rather than counts |
+| 39 fonts directory | `app/assets/fonts/`, docs/brand/README.md |
+| 40 focus on a disabled control | `app/src/calmframes/ParentAreaScreen.tsx`, the deferred-write regression in the parent area tests |

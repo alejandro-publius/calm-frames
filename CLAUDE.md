@@ -25,54 +25,21 @@ costs before the reviewable work is complete and Alex approves those actions.
 Claude CLI workers require verified existing subscription authentication and
 one successful small task first; no API keys or permission bypasses.
 
-**Current phase:** Phase 10, signed scene holds, durable household setup and a
-benign captioned demo and checked packaged library, Fri Oct 2, 2026, with the
-state brought up to Fri Oct 9 at the end of this section. The current default shelf includes the
-original gradient and Harbor story. Harbor uses clearly labelled sham holds,
-original non-flashing media, a verified pre-covered master, signed context
-images and external captions. Its fixed per-title Extra cautious preparation
-matches the displayed plan without changing saved household preferences.
-A separate demo key is accepted only for the exact packaged title identity.
-The read-only hardware preflight pins its reviewed proof and checks package
-members before reporting that caption/hold fixtures are available.
+**What the branch holds, in one paragraph.** Signed scene holds (a checked still from before a
+hide, shown in place of black, today only on the labelled Harbor demo), a durable household
+record (salted PIN hash, lockout, profiles, room, chime), a packaged library compiled into the
+app with a key accepted only for the exact titles it compiled, the labelled Harbor demo with
+practice holds, external captions and its own demo key, the approved TV design, and the Oct 9
+AWS deploy (`results/aws_deploy_2026-10-09.json`; the app does not consume the cloud catalog, a
+new deploy needs approval and the signing-key parameter, and the budget's cost tag is still not
+activated). The default shelf holds three titles: the Harbor demo, the prepared Harbor and the
+calm gradient. The native journey, saved settings, three presets, playback, transport, captions
+through both holds and native recording were observed on the Vega Virtual Device on Oct 9 and
+10 (`results/redesign_validation_2026-10-10.json`); nothing since the Oct 10 polish has been
+built or seen on a device. docs/HACKATHON_REVIEW.md is an Oct 2 assessment; the live lists are
+docs/COMPLETION_CHECKLIST.md and docs/STATUS.md section 2; the longer history is docs/STATUS.md
+section 0, newest first.
 
-Household state persists in a validated local record. Failed reads/writes block
-the library; retries retain the intended change; the parent area unlocks after
-saving the PIN gate. Profile history clears only after committed removal, and
-caption Off now disables the selected native track. Hide history itself remains
-in memory. Native storage durability and image/caption composition were observed on the
-Vega Virtual Device on Oct 9 and 10; see the current receipt. Software checks and packaged fixture availability are not
-physical-TV proof. Do not run the QEMU timing path on a physical target unchanged.
-
-The latest project assessment is in `docs/HACKATHON_REVIEW.md`; it distinguishes
-subjective quality from incomplete submission evidence. The reusable autonomous
-work prompt is `docs/CONTINUATION_PROMPT.md`. Follow its current STATUS handoff,
-complete the native benign journey next. Checked local receipts now export a
-bounded immutable library into the app build. The app selects the exact preset
-rendition and accepts its compiled key only for full title membership. The local
-wrapper uses the app's map unions/timing; generic imports use opaque live fallback,
-while the separate labelled Harbor demo retains signed scene holds. Adding a
-prepared title requires rebuilding the package. No remote service was added.
-The hook has an offline tarball-consumer check, not independent adoption proof.
-See STATUS section 0 for final local checks and limitations; older counts and
-runs below it are historical.
-
-**Current finishing checkpoint, Oct 10.** Follow `docs/COMPLETION_CHECKLIST.md`.
-The full native benign journey, saved settings, three presets, catalog playback,
-remote transport, captions through both holds and native recording are observed.
-The final English demo is prepared locally. Full app and Python suites pass;
-all formerly blocked localhost tests and the failed UI invocation are resolved.
-Claude Fable 5.1 with explicit max effort completed bounded subscription workers.
-SBOM/CDK fixes reproduce locally; dependency Audit remains failed and hosted
-rerun is pending. No physical timing claim, cloud consumption by the app,
-publication or submission is implied. Exact provenance lives in the native receipt.
-
-AWS deployment remains the saved Oct 9 evidence in
-`results/aws_deploy_2026-10-09.json`. The app consumes its compiled local
-catalog and does not trust or consume the cloud catalog. Preserve the separate
-deploy worktree and its checkpoint line. A new deployment still requires
-approval and the signing-key parameter; this finishing task does not authorize
-additional cloud costs. Budget tag activation and image findings remain open.
 
 **The head-start kits never arrived.** flashmap, calm-timing, evkit and the notes were all written here instead. docs/PLAN.md lists what replaced what. If the kits turn up, treat them as a second opinion and re-record any number taken with our version.
 **Repo:** private at github.com/alejandro-publius/calm-frames. Work is on
@@ -80,15 +47,14 @@ additional cloud costs. Budget tag activation and image findings remain open.
 [draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1), whose head
 is the Oct 11 push; main remains unchanged. Runs from Sep 28 to Sep 30 stopped
 before any runner started, which GitHub's annotation put down to failed account
-payments or a spending limit, not a code failure. That ended by Oct 5, when
-the scheduled Audit on main ran real steps, and runners have taken every job
-since. On eb59c69 CI is green in all six jobs and Audit is red in two of four:
-npm advisories with no written exception, and SBOM drift. The scene-hold tree
-must pass Audit as well before main is updated. The chosen plan is to make it public during the final checks on Oct 21
+payments or a spending limit, not a code failure; runners have taken every job
+since Oct 5. CI is green on the branch. The scene-hold tree must pass Audit as
+well before main is updated: the dependency job was repaired on Oct 11, and the
+bills of materials have to be generated with the runner's npm version. The chosen plan is to make it public during the final checks on Oct 21
 with the licence visible. Current rules also allow private reviewer access;
 see the rechecked requirements in docs/SUBMISSION.md.
 
-Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/BUILD_PROMPT.md (the full plan, phases, gates, kill rules, cut list), docs/DECISIONS.md, docs/GATES.md.
+Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/COMPLETION_CHECKLIST.md (the live checklist), docs/BUILD_PROMPT.md (the full plan, phases, gates, kill rules, cut list), docs/DECISIONS.md, docs/GATES.md.
 
 ## How to resume, from a session with no memory
 

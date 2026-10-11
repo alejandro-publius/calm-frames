@@ -6,6 +6,12 @@ brand/status cards. Narration is macOS Samantha text to speech in English.
 Burned-in subtitles and a companion SRT are included. No human voice, customer
 feedback, medical outcome or physical-device measurement is implied.
 
+The 2:10 narration below is the approved sentence. The recorded cut named above
+still carries the earlier sentence, as `results/redesign_demo_manifest_2026-10-10.json`
+records, so it has to be re-rendered (`eval/assemble_demo.py`, then
+`eval/check_video.sh` for wcag and broadcast, then the manifest) before it is
+uploaded. That re-render rides the Mac rebuild on the Oct 11 list.
+
 Encoded duration and hash: `results/redesign_demo_manifest_2026-10-10.json`.
 Finished-file gates: `results/redesign_video_check.json` and
 `results/redesign_video_check_broadcast.json`.

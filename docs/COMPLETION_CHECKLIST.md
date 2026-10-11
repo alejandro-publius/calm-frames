@@ -1,6 +1,6 @@
 # Calm Frames completion checklist
 
-Updated October 10, 2026. Solo entry, identity-verified Amazon Developer account.
+Updated October 11, 2026. Solo entry, identity-verified Amazon Developer account.
 Deadline October 23 at noon Pacific. Vega Virtual Device exclusively.
 
 ## Current design polish
@@ -146,6 +146,10 @@ the saved GitHub API network setting; Git source synchronization works.
   of `@xmldom/xmldom` 0.8.15, `lodash` is 4.18.1) and the Harbor shelf copy, so
   the same rebuild covers them; if the Vega build or playback rejects the
   parser alias, the one line in `app/package.json` reverts.
+- [ ] Re-render the narration before any upload: the recorded cut still says
+  the earlier 2:10 sentence, and `docs/VIDEO_SCRIPT.md` now carries the approved
+  one. Run `eval/assemble_demo.py`, then `eval/check_video.sh` for wcag and
+  broadcast, then regenerate the manifest, and only then replace the asset.
 - [ ] Capture the polished native screens and playback, refresh the English
   demo and its source manifest, and rerun the finished video checks. Rebuild
   the review bundle and package hashes before replacing draft release assets.

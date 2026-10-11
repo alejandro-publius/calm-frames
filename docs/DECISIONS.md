@@ -1,5 +1,7 @@
 # Decisions
 
+Each entry: date, decision, why, what it costs. Newest at the bottom.
+
 ## 2026-09-17: Build on the M1 MacBook
 - **Decision:** Develop on this Mac (macOS 15.1.1, Apple M1, 16 GB). No Ubuntu SSD.
 - **Why:** Vega SDK 0.24 supports macOS on Apple silicon, so HUMAN CHECKPOINT A passes and no kill rule applies. Apple silicon support continues after Dec 15, 2026, when Intel support ends.
@@ -1503,6 +1505,7 @@ second way.
   recent account payments failed or the spending limit needs increasing. It
   does not identify which of those two account conditions applies. No account
   billing or repository-visibility setting was changed.
+- **Cost:** two days without a hosted run while the cause sat outside the code, and a status board that said the build was red when nothing in it was; the Oct 5 scheduled run ended it.
 
 ## 2026-09-29: make the local preparation result usable without cloud deployment
 
@@ -2055,9 +2058,6 @@ device yet.
   existing subscription access must be made available before Claude work can
   proceed. No API key, billing change or permission bypass was attempted.
 
-Each entry: date, decision, why, what it costs. Newest at the bottom.
-
-
 ## October 10, 2026: complete the simulator evidence
 
 - **Decision:** use the verified host Claude Max session with explicit Fable 5.1
@@ -2092,14 +2092,16 @@ Each entry: date, decision, why, what it costs. Newest at the bottom.
 
 - **Decision:** retain focus on parent preset, room and chime controls while a save blocks presses. **Why:** native validation showed focus vanished; the deferred-write test failed with `focusable=false` before the fix and passes afterward.
 - **Decision:** update the report palette to the approved native palette and pin its newly measured lane luminances. **Why:** the existing drift test caught the mismatch. Maximum lane step is now 5.59 cd/m2 against the unchanged 20 cd/m2 difference; the half-threshold margin and five-block cap remain unchanged.
+- **Cost, for the seven decisions above:** a rebuilt package and a re-recorded demo, which the Oct 10 receipt covers, and shelf copy that the Oct 11 review had to put the practice label back into.
 
-## Oct 10: final unavailable-title copy
+## Oct 10, 2026: final unavailable-title copy
 
-The native comparison exposed a repeated hidden-picture explanation: the generic
-missing-check notice and specific missing-map reason differed in wording, so
-noticeForTitle appended both. Align the generic sentence with the existing
-missing-map reason so the existing equality check displays it once. This is
-copy only; title eligibility, signatures and thresholds are unchanged.
+- **Decision:** align the generic missing-check sentence with the existing
+  missing-map reason, so the equality check in noticeForTitle shows it once.
+  **Why:** the native comparison exposed a repeated hidden-picture explanation,
+  because the two sentences differed in wording and both were appended.
+  **Cost:** none. Copy only; title eligibility, signatures and thresholds are
+  unchanged.
 
 
 ## Oct 10: cloud handoff and dependency scanner failures
@@ -2216,3 +2218,23 @@ copy only; title eligibility, signatures and thresholds are unchanged.
   box and passes on CI and the Mac. **Why:** nothing in this tree touches that
   path, and the hosted run on the same tree is green. **Cost:** a known
   environment difference with no explanation written down.
+- **Decision:** a scene-hold still may stand in for the opaque cover over a
+  red or a pattern segment, and the sidecar spec now says so. **Why:** the
+  review found nothing restricted holds by segment reason and no decision
+  written down. A still is one checked picture, drawn opaque and static; it
+  cannot flash, the red rule is about the picture changing, and the image is
+  checked under the broadcast pattern rule before publication, so the letter
+  and the point of "red segments always get an opaque cover" are both met.
+  **Cost:** a context frame from up to five seconds before a red flash is on
+  screen during the hide instead of black. It is a single static picture and
+  that is what the rule asks for; if a reviewer with a clinical view says a
+  calm picture is worse than black there, the containment check in
+  `readSceneHolds` is one condition away from excluding red and pattern.
+- **Decision:** put the branch's five new guards into the mutation gate: the
+  still-belongs-to-a-segment check in `readSceneHolds`, the demo key's title
+  binding, the packaged library's source hash comparison, the household
+  record's PIN rounds bound, and verify's scene hold byte reproduction. **Why:**
+  the gate is the durable form of "every guard gets a test that has been seen
+  to fail", and the branch's own record of breaking them by hand is prose.
+  **Cost:** five more mutations in `results/mutation.json`, each killed by a
+  test that already existed, and about a minute more in the hardening job.
