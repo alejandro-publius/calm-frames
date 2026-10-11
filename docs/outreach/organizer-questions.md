@@ -61,9 +61,10 @@ Ask in this order, and skip any question the email or the forum has already answ
 
 1. **AWS Builder.** Does a deployed AWS pipeline with no AI services count, when it prepares videos before they reach the app and the TV app itself does not call AWS? Ours uses S3, Lambda, ECS Fargate, ECR, SSM Parameter Store with KMS, DynamoDB, CloudFront and AWS Budgets.
 2. **Open Source.** Can the contribution URL be our pull request to AmazonAppDev/vega-video-sample, with our open-source main repository as the project repository URL?
-3. **Fire TV screens in the demo.** We film the demo on a Fire TV stick, so Fire TV system screens such as the Alexa voice overlay can appear. Is that fine under the rule against third-party trademarks, or should we keep system screens out of the shot?
+3. **Fire TV screens in the demo.** We record the demo on the Vega Virtual Device, so Vega system screens can appear in it. Is that fine under the rule against third-party trademarks, or should we keep system screens out of the shot?
 4. **An AI voice.** Is a clearly disclosed AI narration voice acceptable for part of the demo video, with the first and last lines in my own voice?
-5. **How judges try it.** Do judges sideload a Release package on a Fire TV stick, use the Vega Virtual Device, or mostly go by the video and the repository? We plan to attach Release packages for armv7, aarch64 and x86_64 with SHA-256 checksums.
+5. **How judges try it.** Do judges install a package on the Vega Virtual Device, use a Fire TV device, or mostly go by the video and the repository? We plan to attach the simulator package with SHA-256 checksums.
+6. **A platform setting.** Is there a Fire TV or Vega equivalent of a system-wide setting to dim flashing lights, the way some phones have one, and who on the Fire TV team should receive a feature request for it? Our README asks for one and says we found no equivalent, which is the first thing someone inside the team should check.
 
 ## 5. When an answer comes
 

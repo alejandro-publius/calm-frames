@@ -2,9 +2,9 @@
 
 **Nothing has been collected yet. This file is empty on purpose.**
 
-As of **Thu Sep 17, 2026**, no parent, clinician, researcher, advocate, studio or
+As of **Sun Oct 11, 2026**, no parent, clinician, researcher, advocate, studio or
 app maker outside this project has seen Calm Frames, used it, or said anything
-about it. There are no quotes on this page because there are none to put here.
+about it, because none has been asked yet: the drafts below have not been sent. There are no quotes on this page because there are none to put here.
 
 This file exists so that when a reply does arrive it has somewhere to go that
 records who said it, when, and what they agreed to. It also exists so that
@@ -26,8 +26,9 @@ These are not optional and they are not a formality.
    not permission to publish it. Ask, get a yes, record the date of the yes, and
    record exactly what was agreed: name and affiliation, first name only,
    role only, or anonymous.
-4. **No endorsement is implied or reported.** Every outreach draft says plainly
-   that we have no measurements and there is nothing to approve. A reply about
+4. **No endorsement is implied or reported.** Every outreach draft asks for
+   feedback on wording, with at most one optional question about need, gives no
+   numbers, and says plainly that there is nothing to test, approve or endorse. A reply about
    wording is feedback on wording. Writing it up as support for the project
    would misrepresent the person who sent it.
 5. **Withdrawal is honoured immediately.** Anyone who changes their mind has
@@ -39,10 +40,12 @@ These are not optional and they are not a formality.
 
 ## Status of the three outreach emails
 
-The drafts are in [`docs/outreach/`](outreach/), written to be sent by Alex on
-**Fri Sep 18, 2026**. Each one asks for a single thing: whether the safety
-sentence claims more than a tool like this can support. None of them offers a
-demo and none asks for an endorsement.
+The drafts are in [`docs/outreach/`](outreach/), refreshed on **Fri Oct 9, 2026**
+for Alex to send; the first versions were due on Sep 18 and were never sent.
+Each one asks how the safety sentence reads, with one optional question about
+need that Alex can keep or delete. None of them offers a demo and none asks
+for an endorsement. A sent email with no reply is still recorded here, with its
+date, because "asked, no answer" is evidence of its own.
 
 | # | Who | Draft | Sent | Reply | Quote here? |
 |---|---|---|---|---|---|

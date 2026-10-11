@@ -27,6 +27,9 @@ The detailed evidence and outstanding decisions remain below.
   change, turn on private vulnerability reporting (Settings, Security) so the
   route `docs/SECURITY.md` and `CODE_OF_CONDUCT.md` point at exists, and read
   the code of conduct's promises once to confirm they are ones you will keep.
+  Open the Epilepsy Foundation photosensitivity page and the two Apple pages the
+  README quotes in a browser, confirm every quoted sentence still reads as
+  quoted, and update the "re-read on" date beside them in the README.
 - [ ] After approval, publish the reviewed artifacts, verify the live links and
   submit the Devpost entry. Save the actual submitted confirmation privately if
   it contains personal data; source/package IDs can go in a public receipt.
