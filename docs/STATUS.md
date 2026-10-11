@@ -21,6 +21,17 @@ identity, not native execution. The cloud has not rebuilt the Vega package or
 recorded new playback. The missing prepared-library verify reports, Amazon notice
 clarification, entrant details and final publication remain separate open tasks.
 
+Implementation `52ecf14` is pushed and independently matched with `git ls-remote`.
+The full app suite passes <!--n results/finish_preparation_2026-10-11.json:checks.app_passed -->1066<!--/n-->
+tests, and the Python suite passes <!--n results/finish_preparation_2026-10-11.json:checks.python_full.passed -->1725<!--/n-->
+with two slow tests deselected. The final affected preparation run passes
+<!--n results/finish_preparation_2026-10-11.json:checks.preparation_tests_passed -->102<!--/n--> tests,
+including the two release-target checks added after full-suite collection.
+TypeScript, the pinned SBOM comparison, existing package tamper checks, style,
+published numbers and the staged secret scan pass. Exact scope and log hashes:
+[`finish_preparation_2026-10-11.json`](../results/finish_preparation_2026-10-11.json).
+These are cloud checks, not a refreshed native demo or a newly inspected hosted run.
+
 Push small checked batches to the existing review branch and verify the remote
 commit after each push. Other terminals must fetch and reconcile that branch;
 GitHub pushes do not update another checkout automatically.

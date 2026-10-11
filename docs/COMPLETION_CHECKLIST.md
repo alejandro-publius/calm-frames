@@ -137,6 +137,16 @@ The later design polish requires a fresh Mac build and native checks. Direct
 cloud verification of the earlier private release assets awaits
 the saved GitHub API network setting; Git source synchronization works.
 
+## Current release-preparation tools
+
+- [x] Synced the shared source through `9afacc0` and pushed the simulator-focused
+  preparation tools as `52ecf14`; the GitHub branch hash matched.
+- [x] App and Python suites, final preparation guards, TypeScript, SBOM comparison,
+  style and staged secret checks pass. Exact runs and limits are in
+  [`finish_preparation_2026-10-11.json`](../results/finish_preparation_2026-10-11.json).
+- [x] Prepared [MAC_FINISH.md](MAC_FINISH.md) with current build, native verification,
+  recording and evidence-bundle commands. The commands still require a Mac run.
+
 ## Still open
 
 - [ ] Rebuild and install the current polished source on the Mac's Vega Virtual
