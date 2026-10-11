@@ -11,8 +11,12 @@ section 0 has the Oct 11 entry and section 2 the dated list. Two things this Lin
 do, so do not try: the Shaka build (`npm ci` inside shaka-player needs codeload.github.com,
 which the proxy refuses with 403) and anything on a Vega device. The Mac owes a rebuild that
 includes the Oct 11 dependency changes. The hosted Audit and CI runs on the Oct 11 push
-(ba819dc) are green in every job (`results/github_push_2026-10-11.json`); PR #1 waits only on
-Alex's merge.
+(ba819dc) are green in every job (`results/github_push_2026-10-11.json`), and again on c4dbf0f
+(`results/github_push_2026-10-11_c4dbf0f.json`); PR #1 waits only on Alex's merge. Later on
+Oct 11 a third mock judge read a fresh clone (`docs/MOCK_JUDGE_3.md`) and what it found that
+could be fixed from here was fixed; a lint rule keeps playhead writes inside `useFlashGuard.ts`;
+the sample GitHub Action pins a commit on this repository and installs flashmap from its own
+checkout; the README has a "Run the checks" block and the `make` targets work without fnm.
 
 **Active scope, Oct 9 finishing session.** Alex is entering solo and has an
 identity-verified Amazon Developer account. Use only the Vega Virtual Device.

@@ -42,6 +42,60 @@ Validation is recorded in
 This follow-up does not supply a new native build, recording or hosted CI result.
 The Mac work and entrant/publication items in the completion checklist still apply.
 
+### Oct 11, later: the third mock judge, and the handoff reviewed both ways
+
+The other session's Oct 11 commits (profile focus during saves, notice actions
+apart from their announcement, spoken credits with every condition, the original
+verify reports attached under `reports/` with a strict release gate, the hardened
+negative control, the release scripts and `docs/MAC_FINISH.md`) were read against
+the rules and their tests run here. Nothing contradicted the Oct 11 documents;
+two STATUS passages that still described exporting one report beside the catalog
+now describe the attach command. Audit and CI were green on c4dbf0f in all ten
+jobs (`results/github_push_2026-10-11_c4dbf0f.json`).
+
+**The third mock judge** is four independent readers of a fresh clone at e043d80,
+one per rubric lens (Stage One, technical implementation and design, impact and
+idea, an automated reviewer following the README as a script on Linux), and one
+writer: [`docs/MOCK_JUDGE_3.md`](MOCK_JUDGE_3.md). Stage One fails today on the
+two lines the documents already admit, the public video and the Open Source
+contribution URL. What it found that a Linux box could fix is in and pushed:
+
+- the README opens with one dated status paragraph instead of three, one of
+  which still said the audit was open; the install commands are the ones the
+  Oct 10 run used; a "Run the checks" block gives the plain commands CI runs,
+  with ffmpeg, fnm and the `.venv` named in the requirements;
+- the lead-time paragraph says what its results file says, that the long
+  wall-clock leads are the virtual device running slow and the media-time lead
+  never left the guard band, with both quoted; the cost of the false positives
+  to a viewer is published beside the precision it explains, through the wrapper;
+- the two videos that shipped without a ledger row have one (the calm gradient
+  and the prepared Harbor rendition), NOTICE and the credits screen regenerated;
+  `app/package.json` declares its licence; `app/README.md` says whose README it
+  is and states the Amazon notice caveat;
+- a lint rule refuses `currentTime` writes and `fastSeek` outside
+  `useFlashGuard.ts`, seen to fail on a probe file, with the sample's fallbacks
+  exempted by name and reason (the other session then widened it to bracket
+  syntax and increments, with a test);
+- the submission's friction field matches the log it points at, the Inspiration
+  section carries the sourced impact case, the voice path is stated as
+  test-evidenced only, and the opening narration names the audience;
+- the sample GitHub Action pins a commit on this repository and installs
+  flashmap from its own checkout, since no tag and no PyPI release exist; the
+  pipeline walkthrough carries the keys verify refuses without; the Makefile,
+  `scripts/reproduce.py` and the screen check work on a box with neither fnm
+  nor the `.venv`, the last exiting 2 with its own sentence when flashmap is
+  missing; `make test-app` and `make synth` were seen passing here that way.
+
+Its FAILs and everything native (the rebuild at the judged commit, committed
+captures, a VoiceView run, the clarification request) are in section 2 and
+`docs/COMPLETION_CHECKLIST.md`. Two Python tests fail on this box's ffmpeg
+6.1.1 and pass on the runner and on 7.1.5; both are recorded with the run's
+environment in `results/local_python_run_2026-10-11.json`.
+
+**Status line, Sun Oct 11 late.** The branch head carries both sessions' Oct 11
+work, the hosted runs are green on every head that finished, the third mock
+judge has read it, and what is left is the Mac, the merge and Alex's dated list.
+
 ### Current interaction and evidence pass
 
 The shared source was synchronized through `54954ab`. Profile choices now remain
