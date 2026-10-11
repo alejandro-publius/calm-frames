@@ -155,6 +155,11 @@ the saved GitHub API network setting; Git source synchronization works.
   `reports/` directory. Future exports carry them automatically; existing exports
   accept matching originals without changing catalog, maps, captions or video.
   Release preparation requires reports for every retained generation.
+- [x] Combined the interaction/report work with the concurrent shared update
+  and pushed `e39c10c`; the remote hash matched. Full app and Python suites pass,
+  and the updated UI analyzer passes its normal and rejection controls. Exact
+  check scope is in
+  [`interaction_evidence_2026-10-11.json`](../results/interaction_evidence_2026-10-11.json).
 
 ## Still open
 

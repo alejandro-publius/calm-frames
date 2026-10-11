@@ -6,7 +6,7 @@ Updated Sun Oct 11, 2026.
 
 ### Current interaction and evidence pass
 
-The shared source was synchronized through `e043d80`. Profile choices now remain
+The shared source was synchronized through `54954ab`. Profile choices now remain
 in the remote focus order while a save is pending, with repeated presses blocked.
 Notice action buttons remain separate from their spoken announcement, and spoken
 credits include the displayed licence conditions. The approved visual design is
@@ -24,7 +24,19 @@ gate is expected to stop until they are attached on the Mac. The current command
 and remaining native steps are in [MAC_FINISH.md](MAC_FINISH.md). This pass does not
 create new playback, recording, hosted CI or publication evidence.
 
-### Current cloud release preparation
+The combined implementation is pushed as `e39c10c`, and GitHub's branch hash
+matched. Full checks passed <!--n results/interaction_evidence_2026-10-11.json:checks.app_passed -->1071<!--/n-->
+app tests and <!--n results/interaction_evidence_2026-10-11.json:checks.python_full.passed -->1750<!--/n-->
+Python tests. Those suites ran before the concurrent merge; their app and Python
+source/test inputs remain unchanged. The updated UI analyzer passed again after
+integration, including <!--n results/interaction_evidence_2026-10-11.json:checks.ui_control_tests_passed -->16<!--/n-->
+error and cleanup guards and the actual measured controls. Generated hazard
+fixtures were removed after analysis. The current ffmpeg 7.1.5 fixture run does
+not close the separately recorded 6.1.1 still-drop finding. Exact runs, source
+hashes, limitations and push verification are in
+[`interaction_evidence_2026-10-11.json`](../results/interaction_evidence_2026-10-11.json).
+
+### Earlier cloud release preparation
 
 The checkout includes the shared branch through `9afacc0`, preserving the other
 session's dependency fixes, approved safety sentence, practice labels and hosted
