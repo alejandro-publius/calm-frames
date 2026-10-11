@@ -53,7 +53,10 @@ parallel with a skeptic on every finding, and what stood was fixed:
 - Four identifiers that had no business going public: the validation PIN
   digits, an organizer's name and address in the outreach drafts, Claude
   session ids in two results records, and the owner's macOS account name in
-  paths, one of them a scratch directory baked into the timing script.
+  paths, one of them a scratch directory baked into the timing script. The
+  first scrub of the PIN digits also rewrote three SHA-256 strings in the
+  native receipt that happened to contain them; a skeptic in the review caught
+  it and the receipt has its hashes back.
 - The Harbor artwork and the gradient had no ledger row, so neither was in
   NOTICE or on the credits screen; Inter was bundled and not credited; and
   NOTICE and the README said `app/` is MIT-0 without mentioning the Amazon
