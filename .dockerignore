@@ -38,3 +38,9 @@ pipeline/infra/cdk.context.json
 **/*.pyc
 **/*.pem
 **/.DS_Store
+
+# Tool caches; never part of the image.
+.mypy_cache/
+**/.mypy_cache/
+.ruff_cache/
+**/.ruff_cache/

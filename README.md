@@ -609,6 +609,7 @@ cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx je
 .venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"
 .venv/bin/python eval/readme_sync.py --check    # every published number against results/
 .venv/bin/python eval/style_check.py            # no dashes, none of the three words
+make lint-py typecheck-py                       # ruff over the Python, strict mypy over flashmap
 ```
 
 `npm ci --ignore-scripts` skips the Shaka Player build, which the tests mock; a device package needs the full `npm install` with the JDK. `make synth`, the offline CDK synthesis, also needs `pip install -r pipeline/infra/requirements.txt` in that `.venv`. The whole Python suite passes on ffmpeg 6.1.1 as well as 9.0.1: the two tests that failed on 6.1.1 on Oct 11 were a race in the cover measurement, fixed the same day ([`results/local_python_run_2026-10-11_fixed.json`](results/local_python_run_2026-10-11_fixed.json), docs/STATUS.md section 5). `make hooks` installs the gitleaks pre-commit hook and `make hooks-selftest` watches it block a planted key; `make help` lists every target.
