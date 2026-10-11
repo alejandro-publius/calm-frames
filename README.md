@@ -609,8 +609,10 @@ The approved wording, everywhere, is: **reduces exposure to flashing above publi
 | What | Licence |
 |---|---|
 | Calm Frames, including `flashmap/`, `pipeline/` and `eval/` | Apache-2.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE) |
-| `app/`, derived from [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) at tag `v0.24-RN83` | MIT-0, see [app/LICENSE](app/LICENSE) |
+| `app/`, derived from [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) at tag `v0.24-RN83` | MIT-0, see [app/LICENSE](app/LICENSE). The player wrapper and the Shaka archive it builds from carry Amazon's own proprietary notice beside that grant, kept as published; [docs/AMAZON_SAMPLE_LICENSE_REVIEW.md](docs/AMAZON_SAMPLE_LICENSE_REVIEW.md) says what was checked and what was asked |
 | App third-party dependencies | [app/LICENSE-THIRD-PARTY](app/LICENSE-THIRD-PARTY) |
+| Inter 4.001, the app's typeface | SIL Open Font License 1.1, see [app/assets/fonts/LICENSE-Inter](app/assets/fonts/LICENSE-Inter) |
+| Presentation artwork: the Harbor picture and the gradient | Ours, CC0-1.0, per file in [media/LICENSES.csv](media/LICENSES.csv). The Harbor picture is generated presentation art, never a film frame or a signed playback still |
 | Screening media | Per file in [media/LICENSES.csv](media/LICENSES.csv), with URL, licence, credit line, SHA-256, duration and resolution |
 
 Screening media credits: Blender open movies (Cosmos Laundromat, Sintel, Tears of Steel, Big Buck Bunny) from Blender Foundation under CC BY 3.0, with the Tears of Steel credit scroll kept and Blender logos excluded; NASA Scientific Visualization Studio and ISS time-lapse footage, following NASA's credit-line guidance; DVIDS footage, which carries a non-endorsement notice; Wikimedia Commons fireworks and lightning footage under its per-file licences; two 1930 public-domain films.

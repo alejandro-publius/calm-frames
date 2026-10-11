@@ -1,5 +1,18 @@
 # Calm Frames: rules for every session
 
+**Where things stand, Sun Oct 11, 2026.** The branch `codex/signed-scene-holds-2026-09-29`
+(draft PR #1) carries everything since Sep 20; main has not moved. On Oct 11 the dependency
+audit was repaired (`xmldom` is an alias of `@xmldom/xmldom` 0.8.15, `lodash` is 4.18.1, every
+remaining finding sorted by the device bundle in `scripts/audit_exceptions.toml`, both groups
+due for review on Oct 21), the branch was reviewed against the rules in this file and what
+stood was fixed, and two guards joined CI: `eval/style_check.py` for the style rule, and a
+rebuild of the complete conformance report from its rows in the python job. docs/STATUS.md
+section 0 has the Oct 11 entry and section 2 the dated list. Two things this Linux box cannot
+do, so do not try: the Shaka build (`npm ci` inside shaka-player needs codeload.github.com,
+which the proxy refuses with 403) and anything on a Vega device. The Mac owes a rebuild that
+includes the Oct 11 dependency changes, and the hosted Audit run on the Oct 11 push is the
+confirmation that the audit is green where it counts.
+
 **Active scope, Oct 9 finishing session.** Alex is entering solo and has an
 identity-verified Amazon Developer account. Use only the Vega Virtual Device.
 Physical sticks, camera timing, TV rehearsal and hardware gates are outside
@@ -65,7 +78,7 @@ additional cloud costs. Budget tag activation and image findings remain open.
 **Repo:** private at github.com/alejandro-publius/calm-frames. Work is on
 `codex/signed-scene-holds-2026-09-29`, published as
 [draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1), whose head
-on Oct 9 is eb59c69; main remains unchanged. Runs from Sep 28 to Sep 30 stopped
+is the Oct 11 push; main remains unchanged. Runs from Sep 28 to Sep 30 stopped
 before any runner started, which GitHub's annotation put down to failed account
 payments or a spending limit, not a code failure. That ended by Oct 5, when
 the scheduled Audit on main ran real steps, and runners have taken every job

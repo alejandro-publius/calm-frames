@@ -63,6 +63,12 @@ notice identifying which terms apply to the wrapper and the archive's source.
 The public MIT-0 grant is relevant evidence, but the contradictory file-specific
 reference remains unresolved in this review.
 
+Oct 11: sending the request below is on Alex's dated list in docs/STATUS.md,
+by Oct 13, because an answer has to have time to arrive before the repository
+goes public on Oct 21. NOTICE and the README's licence table now state the
+conflict in the open, so a public reader meets it from us rather than from
+the file headers, whichever way the answer goes.
+
 Replacing the old `xmldom` package with the maintained MIT-licensed
 `@xmldom/xmldom` can address dependency advisories after compatibility testing.
 It does not resolve Amazon's wrapper or polyfill notices. Likewise, independently

@@ -87,11 +87,18 @@ No Amazon font files are redistributed.
 
 ## Harbor presentation artwork
 
-The current `app/assets/image/tv/harbor.png` was generated with imagegen on
-October 10, 2026 using the prior Harbor illustration as its visual reference.
-The supplied output is a 1942 x 809 PNG. Its provenance and exact file hash are
-recorded in [`design_polish_2026-10-10.json`](../../results/design_polish_2026-10-10.json).
-The logo scripts do not reproduce this generated artwork.
+The current `app/assets/image/tv/harbor.png` was generated with OpenAI's image
+generation on October 10, 2026 from our own prompt, with our own earlier vector
+illustration (`app/assets/brand/tv/harbor.svg`) as the visual reference. The
+supplied output is a 1942 x 809 PNG. Its provenance, the prompt summary and the
+exact file hash are recorded in
+[`design_polish_2026-10-10.json`](../../results/design_polish_2026-10-10.json),
+and its ledger row is in `media/LICENSES.csv`. It is presentation art only,
+never a film frame or a signed playback still. It is dedicated under CC0-1.0
+with the rest of what we made; the copyright standing of a generated picture is
+unsettled, so that dedication covers whatever is ours in it and claims nothing
+more, and Alex confirms it at the Oct 21 review. The logo scripts do not
+reproduce this generated artwork.
 
 This illustration appears only in the library and title details. It is not a
 frame from Harbor or a signed playback hold. The film, checked media and hold

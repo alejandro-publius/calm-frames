@@ -2166,3 +2166,53 @@ copy only; title eligibility, signatures and thresholds are unchanged.
   forks from codeload.github.com, which the proxy answers with 403. **Cost:**
   none to the submission; the Mac builds it. Recorded so the next session does
   not spend an hour finding out.
+
+## Oct 11, 2026: the review pass over the branch, and what it changed
+
+- **Decision:** review the 56 commits against this file's rules with eight
+  parallel reviewers, one per rule dimension, and a skeptic on every finding
+  before anything was changed. **Why:** the branch was written by several
+  sessions over twelve days, none of which read the whole of it, and it is
+  about to become main. **Cost:** about two hours of agent time on a four
+  core box; the findings that stood are listed in docs/STATUS.md section 0.
+- **Decision:** publish the near-limit precision beside the pooled one, through
+  the report wrapper rather than the frozen scorer, and let CI rebuild the
+  report from its rows on every push. **Why:** 0.649 pooled was published and
+  0.573 on the clips that sit on a limit was not, which is the shape of
+  mistake this file already records four times. The wrapper is the one place
+  the published block is assembled, and the scorer's hash is pinned by the
+  measurement. **Cost:** the committed report changed in its published block
+  and its wrapper hash only; the README sentence about a one-time rebuild on
+  Oct 9 became a sentence about CI.
+- **Decision:** hold every document, Python and TypeScript file we wrote to
+  the style rule with eval/style_check.py, in CI and in `make ci`. **Why:** two
+  dashes in a design brief sat on a green build for a day. **Cost:** a line
+  that quotes a primary source with a dash in it will have to be reworded or
+  the source quoted differently; Amazon's files, the licence texts and the
+  four jest fixtures are out of its scope by path.
+- **Decision:** put "Practice holds" back on the shelf for the Harbor demo and
+  have the prepared Harbor say it is our own demo film. **Why:** labelling sham
+  holds is a hard rule, and the prepared title's frames carry the burned-in
+  demo label whatever the shelf says. **Cost:** a shorter second line than
+  "Scheduled scene holds" and one more sentence in each description; the
+  owned source without the label is a Mac job.
+- **Decision:** remove four identifiers rather than argue about each: the
+  validation PIN digits, an organizer's name and address, Claude session ids
+  and a subscription tier in two results records, the owner's macOS account
+  name in paths. **Why:** none is a secret, all go public on Oct 21, and none
+  carries evidence. **Cost:** two results records now say "withheld" where an
+  id was, and the timing script makes its own scratch directory.
+- **Decision:** state the Amazon proprietary notices in NOTICE and the README
+  now, and leave sending the clarification to Alex by Oct 13. **Why:** a
+  public reader should meet the conflict from us, and a request to Amazon in
+  Alex's name is his to send. **Cost:** none if the answer is MIT-0; if it is
+  not, the review's other options stand.
+- **Decision:** not rewrite the two commits that carry a university address as
+  author. **Why:** rewriting pushed history on the owner's branch is the
+  owner's call, and the address is on a public branch already. **Cost:** it
+  goes public with the repository unless Alex rebases those two before the
+  merge; docs/STATUS.md says so.
+- **Decision:** record and not chase a render test that fails on this Linux
+  box and passes on CI and the Mac. **Why:** nothing in this tree touches that
+  path, and the hosted run on the same tree is green. **Cost:** a known
+  environment difference with no explanation written down.

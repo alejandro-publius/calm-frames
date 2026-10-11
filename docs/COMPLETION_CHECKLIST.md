@@ -142,14 +142,27 @@ the saved GitHub API network setting; Git source synchronization works.
 - [ ] Rebuild and install the current polished source on the Mac's Vega Virtual
   Device. Check D-pad focus and return navigation, full-page scrolling, PIN
   setup and correction, saved settings, title playback, holds, audio and captions.
+  The Oct 11 tree also changes two runtime dependencies (`xmldom` is an alias
+  of `@xmldom/xmldom` 0.8.15, `lodash` is 4.18.1) and the Harbor shelf copy, so
+  the same rebuild covers them; if the Vega build or playback rejects the
+  parser alias, the one line in `app/package.json` reverts.
 - [ ] Capture the polished native screens and playback, refresh the English
   demo and its source manifest, and rerun the finished video checks. Rebuild
   the review bundle and package hashes before replacing draft release assets.
-- [ ] Dependency Audit remains failed: unresolved SDK/transitive advisories and
-  an expired exception. No exceptions widened. The new hosted CI passes;
-  Audit now passes SBOM, stack and container jobs, failing dependency audit
-  only. Saved AWS evidence also has inactive Project cost tagging and
-  container security findings.
+- [ ] Dependency Audit was repaired on Oct 11: `xmldom` replaced, `lodash`
+  moved, and every remaining finding sorted into two groups by whether the
+  package is in the device bundle (`results/bundle_packages_2026-10-11.json`).
+  `make audit-check` passes here; the hosted Audit run on the Oct 11 push is
+  the confirmation. Both groups are due for review on Oct 21, when the dates
+  move past judging. Saved AWS evidence also has inactive Project cost tagging
+  and container security findings.
+- [ ] The six prepared-library renditions under `app/assets/raw/prepared-library/`
+  ship with the hash of a verify report that is not committed. Export the
+  report beside the catalog and have `app/tools/check_prepared_library.mjs`
+  compare its hash, on the Mac where the report is.
+- [ ] Send the Amazon sample licence clarification in
+  [`AMAZON_SAMPLE_LICENSE_REVIEW.md`](AMAZON_SAMPLE_LICENSE_REVIEW.md) by Oct 13.
+  NOTICE and the README now carry the caveat either way.
 - [ ] Resolve the conflicting Amazon license notices in the tracked Shaka player
   wrapper and source files inside its integration archive before public source
   release. See [`AMAZON_SAMPLE_LICENSE_REVIEW.md`](AMAZON_SAMPLE_LICENSE_REVIEW.md)

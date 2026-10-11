@@ -1,8 +1,79 @@
 # Status
 
-Updated Sat Oct 10, 2026.
+Updated Sun Oct 11, 2026.
 
 ## 0. Where things stand
+
+### Oct 11: the audit is green again, and the branch was reviewed before it reaches main
+
+**The dependency audit passes.** `xmldom` 0.6.0, which the generated Shaka
+polyfill imports and which carried sixteen advisories into the shipped bundle
+under an exception that expired on Oct 5, is an npm alias of the maintained
+fork `@xmldom/xmldom` 0.8.15; the polyfill only subclasses its `DOMParser`,
+and the 0.8 line keeps the 0.6 behaviour on malformed input. The app's own
+`lodash` is 4.18.1, which clears the two findings against the `omit` call the
+bundle carries. Every other finding was sorted by one mechanical test: a
+Release and a Debug bundle were built here for the kepler platform and their
+source maps read, so `scripts/audit_exceptions.toml` says which
+<!--n results/audit.json:published.npm_packages_with_advisories -->119<!--/n-->
+flagged packages are in the bundle
+(<!--n results/bundle_packages_2026-10-11.json:published.flagged_in_release_bundle -->20<!--/n-->,
+plus the DevTools backend in Debug) and which are in neither
+(<!--n results/bundle_packages_2026-10-11.json:published.flagged_in_neither_bundle -->98<!--/n-->),
+behind <!--n results/audit.json:published.npm_advisories_total -->33<!--/n-->
+advisories. Both groups are due for review on Oct 21. The bundle inventory is
+a Linux build with Shaka's compiled file stubbed, which cannot change which
+npm packages are bundled; the Shaka build itself cannot run here, because its
+own `npm ci` downloads two forks from codeload.github.com and the proxy
+answers 403. **The Mac has to rebuild with the two dependency changes in**,
+the same rebuild the Oct 10 polish already needed.
+
+**The 56 commits were reviewed against the hard rules**, eight reviewers in
+parallel with a skeptic on every finding, and what stood was fixed:
+
+- docs/STATUS.md still said the complete conformance run was unpublished while
+  the README quoted it, and its summary table showed only the partial run's
+  friendlier recall. Fixed, and the near-limit recall is in the table.
+- Precision had the same shape: 0.649 pooled was published and 0.573 on the
+  clips that sit on a limit was not. The report wrapper now writes both splits,
+  the report was regenerated from the same rows, and README and SUBMISSION
+  quote both. Every headline count was re-derived from the rows and the design
+  and reproduces exactly, and CI now does that rebuild on every push.
+- Two em and en dashes in the design brief, the only two the branch added, and
+  two uses of the banned words that were already on main. `eval/style_check.py`
+  now holds every document, Python and TypeScript file we wrote to the rule, in
+  CI and in `make ci`, and was seen to fail.
+- The Oct 10 copy pass had taken "practice" off the shelf and the details hero
+  for the Harbor demo. It says "Practice holds" again, with "not detected
+  flashing" in the description, and the prepared Harbor no longer calls itself
+  an original story without saying it is our own demo film, since its frames
+  carry the burned-in demo label.
+- The video narration said only "not a medical device"; it says the approved
+  sentence in full.
+- Four identifiers that had no business going public: the validation PIN
+  digits, an organizer's name and address in the outreach drafts, Claude
+  session ids in two results records, and the owner's macOS account name in
+  paths, one of them a scratch directory baked into the timing script.
+- The Harbor artwork and the gradient had no ledger row, so neither was in
+  NOTICE or on the credits screen; Inter was bundled and not credited; and
+  NOTICE and the README said `app/` is MIT-0 without mentioning the Amazon
+  proprietary notice on the player wrapper and the Shaka archive. All three
+  are stated now, and the clarification request to Amazon is on your list.
+
+**Left standing, on purpose, each with a reason:** the six prepared-library
+renditions ship with the hash of a verify report that is not committed (the
+report is on the Mac; section 5); the bundled Harbor demo's played rendition
+hash is checked by the package preflight at build time, not by the guard at
+play time (section 5); the prepared Harbor's frames carry the burned-in
+"BENIGN DEMO" label, which the copy now admits rather than hides; and two
+commits on the branch carry a university address as author, which only a
+history rewrite can change and is your call, not mine.
+
+**One test fails on this Linux box and passes on CI and the Mac.**
+`pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still`
+reads a PSNR of 15 to 21 against the 30 it wants at 4.4 s, on ffmpeg 6.1.1 and
+PyAV 18.1.0 here; the hosted python job on the same tree is green. It is
+recorded and not chased, because nothing in this tree touches that path.
 
 ### Oct 10: cloud design polish awaits a native build
 
@@ -610,7 +681,10 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 | **By Thu Sep 24** | Film the red footage, described below. | Nothing else in the pool covers it. |
 | **Any evening, about an hour** | Label the <!--n results/realclips_status.json:segments -->40<!--/n--> blinded segments. You take `eval/labeling/labels_labeller_a.csv` and all of them. Rachel takes `labels_labeller_b.csv` and at least seg000 to seg014. Neither of you talks about a segment until both sheets are saved, and neither opens `pool_key.json`. | The pack is ready and nobody has labelled anything, which is correct: this is the step that turns the detector's output into a measured number instead of its own opinion. `eval/labeling/GUIDE.md` has the commands for afterwards, in order. Kappa and the bootstrap run the moment the sheets are in. **The pool was recut again on Sep 19**, after both ffmpeg based baselines ran over every clip and let the sixteen calm Wikimedia clips in, so the segment ids have moved a second time and are not the ones any earlier version of this page named. It is 40 segments over 16 titles, 28 flagged and 12 unflagged, which is twice the unflagged half it had on Sep 18. Nothing is waiting on this now except the two of you. |
 | **Done Oct 9, one step left** | HUMAN CHECKPOINT D is confirmed and the stack is deployed (section 0). Left for you: activate `Project` as a cost allocation tag in Billing, so the $20 budget can see the bill. `pipeline/infra/README.md` has the steps. | For any later deploy, the lock line goes into the deploy worktree's own copy of this file, never this one. `make deploy` refuses until that line exists and `CHECKPOINT_D=confirmed` is set, and `pipeline/tests/test_aws_guard.py` fails if the committed file ever carries it. |
-| **By Mon Oct 12** | Open the upstream pull request from a fork under your account. | The fix, the test and the PR text are ready in `docs/OPEN_SOURCE_PR.md`. It cannot be opened from here: it needs a fork you own. |
+| **By Mon Oct 12, tomorrow** | Open the upstream pull request from a fork under your account. | The fix, the two patches and the PR text are ready in `docs/OPEN_SOURCE_PR.md` and `docs/upstream-pr/`. It cannot be opened from here: it needs a fork you own, and the patches need your chosen public author identity. This is the Open Source mini challenge's contribution URL. |
+| **By Tue Oct 13** | Send the clarification request in `docs/AMAZON_SAMPLE_LICENSE_REVIEW.md` to Amazon, as an issue on AmazonAppDev/vega-video-sample or to the hackathon's Amazon contacts, and record where and when in that file. | The player wrapper and the Shaka archive carry a proprietary notice beside the sample's MIT-0 grant, and the repository goes public on Oct 21. NOTICE and the README state the conflict now; an answer would close it. |
+| **Next Mac session** | Rebuild the polished source with the Oct 11 dependency changes in (`xmldom` alias, `lodash` 4.18.1), install it on the virtual device, play Harbor and the gradient, then refresh the demo and the review assets. | Nothing that changed app inputs since Oct 10 has been built or seen on a device. If the Vega build or playback rejects the parser alias, revert the one line in `app/package.json`. While there: export the prepared-library verify report beside the catalog (section 5). |
+| **Wed Oct 21, with the final checks** | Re-run `make audit-update`, re-read `scripts/audit_exceptions.toml`, confirm the two groups and move both `review_by` dates past Dec 3. Confirm the CC0 dedication of the Harbor artwork in `media/LICENSES.csv`. | Both groups expire on Oct 21 on purpose, so the release build is made with the words re-read. Left as they are, the Monday audit after the tag goes red for a date rather than an advisory, in front of the judges. |
 | **Oct 19 to 20** | Film the video from `docs/VIDEO_SCRIPT.md`, timed to 2:55. | |
 | **Wed Oct 21** | Make the repo public, then run the final checks. | This is the chosen publication plan. The rules also permit private reviewer access; see `docs/SUBMISSION.md`. |
 | **Thu Oct 22** | Press submit. `docs/SUBMISSION.md` has every field, with the ones needing you marked. | |
@@ -868,6 +942,10 @@ and it is the reason no report is written for a clip it could not read.
 - **Nothing in the app has been opened on a device since kid mode was wired up.** Every screen, the first run, the play path and the player's refusal are checked in the app's own test suite, and none of it has been seen on the virtual device or the stick. The bundled clip's URI is `file:///pkg/assets/raw/offline/calm_gradient.mp4`, which is where the Kepler file system README says package assets land, and that has never been played.
 - **Native household-storage durability still needs a device check.** The Oct 2 implementation restores the saved family and PIN gate through the SDK storage adapter; local restart regressions pass, but this is not an observation on a physical TV.
 - **Hide history is still in memory.** The shared store already carries player entries back to the parent area, but it does not retain them after a process restart.
+- **The six prepared-library renditions ship with no committed verify report.** `app/assets/raw/prepared-library/catalog.json` carries the report's hash and the outcome word, and the report itself is on the Mac. The renditions are made from the Harbor story, whose own `verification.json` is committed, and CI runs the analyzer over every image the app ships; the chain for these six files still has a link outside the repository. Export the report beside the catalog and have `app/tools/check_prepared_library.mjs` compare its hash.
+- **The bundled Harbor demo's played file is not hash-checked at play time.** The guard compares the map's source hash; the demo plays `harbor.precovered.mp4`, whose hash `BENIGN_STORY_RENDITION_SHA256` exists and is read by nothing in `app/src`. The package preflight checks every bundled byte at build time, so a swapped rendition cannot reach an installed package unsigned, which is why this is recorded rather than fixed from a Linux box.
+- **The prepared Harbor's frames carry the burned-in "BENIGN DEMO" label**, because `eval/prepare_owned_harbor.py` stream-copies the demo video. The shelf copy now says it is our own demo film. Rendering the picture without the label and re-exporting is a Mac job.
+- **`pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still` fails on the Oct 11 Linux box** (PSNR 15 to 21 against 30 at 4.4 s) and passes on CI and the Mac. Not chased.
 
 ## 6. The numbers
 
@@ -898,36 +976,27 @@ Every one comes from `results/`, and CI fails if a document drifts from them.
 ## 7. Next
 
 **Yours, in order.** The table in section 2 is the full list with dates. The
-three that are live right now:
+four that are live right now:
 
-1. **Send the three outreach emails.** They were due Fri Sep 18 and they are the
-   only thing on the list nothing else depends on.
-2. **Confirm the phone films 240 fps and the TV has a game mode**, before the
-   stick arrives, because if either is wrong GATE 1 needs a different plan.
-3. **When the stick arrives:** run the read-only `make hardware-preflight`
-   with the matching Debug package and explicit serial first. Physical-target
-   timing-runner adaptation and a benign captioned sham-hold fixture are still
-   required before the filmed gate session; `stick-day` is not hardware-ready
-   unchanged.
-   **One measurement to add to it:** the worst gap between two scheduler ticks.
-   The harness re-checks every 50 ms, so logging the longest gap between
-   consecutive checks gives the worst pause of the JavaScript thread, and the
-   guard band should be set above it rather than at the 500 ms we picked by
-   judgement. This is still not instrumented.
+1. **Open the upstream pull request by Mon Oct 12.** Everything but the fork
+   and your author identity is in `docs/upstream-pr/`.
+2. **Send the Amazon licence clarification by Tue Oct 13**, so an answer can
+   arrive before the repository goes public.
+3. **Merge PR #1 once the hosted Audit run on the Oct 11 push is green.** Main
+   has not moved since Sep 20, and the judged tag is cut from main.
+4. **Next Mac session:** rebuild with the two dependency changes in, play both
+   titles on the virtual device, refresh the demo, export the prepared-library
+   verify report. The outreach emails from Sep 18 are still unsent.
 
 **Mine, in order, and none of it is waiting on you.**
 
-1. Instrument the scheduler tick gap, so the stick run measures it the first time
-   rather than the second.
-2. Put a negative control in `app/tools/ui_flashmap.mjs`. It runs the broadcast
-   profile now and the screens pass, and a check that has never been seen to
-   refuse anything is not yet evidence.
-3. Finish the conformance run, which is still partial and says so.
-4. A third mock judge. Both existing passes read clones from before phase 8, so
-   neither has seen kid mode wired up, the five features reachable, or the
-   pattern rule's precision work.
-5. More titles through verify. Only 7 of the 30 with a verdict prove anything
-   about covering, and that number only moves with footage that actually flashes.
+1. Act on whatever the remaining reviewers (engineering guarantees, docs
+   consistency, hackathon requirements) found that stands, and push.
+2. The third mock judge: both existing passes read clones from before phase 8.
+3. Instrument the scheduler tick gap and put a negative control in
+   `app/tools/ui_flashmap.mjs`, both still open from Sep 19.
+4. More titles through verify. Only 7 of the 30 with a verdict prove anything
+   about covering, and that number only moves with footage that flashes.
 
 ---
 
@@ -962,3 +1031,12 @@ Audit is red, on npm advisories and SBOM drift. The AWS stack was deployed that
 night and ran the calm marker clip twice, refused unsigned and published signed,
 with the record in `results/aws_deploy_2026-10-09.json`. The complete
 conformance run finished on Oct 3 and waits to be adopted. Main is unchanged.
+
+Sun Oct 11, 2026: the dependency audit is green (xmldom replaced, lodash
+moved, 119 packages sorted by the device bundle into two groups), the branch
+was reviewed by eight parallel reviewers with a skeptic on each finding, and
+what stood was fixed: stale conformance statements, the unpublished worse
+precision sibling, two dashes, the practice label, four identifiers, three
+licence gaps. A style guard and a conformance report rebuild run in CI now.
+Main is unchanged; the Oct 11 push is PR #1's new head. The Mac still owes
+the rebuild that every app input change since Oct 10 needs.
