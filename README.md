@@ -8,6 +8,8 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](.python-version)
 [![Node 22](https://img.shields.io/badge/node-22-blue.svg)](.nvmrc)
 
+**Calm Frames checks every frame of a title before a child can pick it, and the Fire TV player hides each part it flags before it reaches the screen while sound and captions carry the story.**
+
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
 ![The Calm Frames library on a television: Watch now in focus on the checked Harbor story, Robin's profile chip, and a shelf of three titles](docs/design/seamless/library-family-browser.png)
@@ -134,7 +136,7 @@ Two things in that picture are worth saying out loud.
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device. Everything below is written inside that sentence.
 
-Two of the Fire TV track's six priority categories are this project by name. It is **family entertainment**, because the whole thing exists so that a child can pick a title on the family television without a parent having to preview it first. And it is **multi-modal UX**, because voice, D-pad and on-screen cards are not three ways into the same app, they are three inputs to one seek function that covers the picture before it moves the playhead. A spoken "skip forward" and a press of the remote go through the same gate, and neither can land inside a flagged interval. That single flow is the part that does not work if you build it three times.
+Two of the Fire TV track's six priority categories are this project by name. It is **family entertainment**, because the whole thing exists so that a child can pick a title on the family television without a parent having to preview it first. And it is **multi-modal UX**, because voice, D-pad and on-screen cards are not three ways into the same app, they are three inputs to one seek function that covers the picture before it moves the playhead. A spoken "skip forward" and a press of the remote go through the same gate, and neither can land inside a flagged interval. That single flow is the part that does not work if you build it three times. The D-pad and on-screen paths were observed on the Vega Virtual Device; the voice path is exercised by tests only, because the virtual device has no Alexa.
 
 ### The people
 
