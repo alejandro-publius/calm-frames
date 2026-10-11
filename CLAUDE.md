@@ -39,7 +39,7 @@ starting new work, preserve concurrent changes, and verify the remote commit
 after each push. Report a blocked push promptly. Final release publication and
 submission retain their separate approval requirements above.
 
-**Final interaction scope, October 10 Pacific.** Alex requested motion and
+**Final interaction scope, Oct 11 (late Oct 10 Pacific).** Alex requested motion and
 interactive sounds after the static design review. The optional artwork-only
 entrance and separate menu confirmation tone are explicit opt-ins in parental
 controls; existing households retain still, silent menus. System reduced motion,

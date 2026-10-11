@@ -30,7 +30,7 @@ The same pass found that the two Python tests which failed on this box were a
 race in the cover proof's own measurement, not the encoder; the paragraph in
 the Oct 11 entry below and section 5 tell that story, and the fix is in.
 
-### Final interface effects, October 10 Pacific
+### Oct 11 (late Oct 10 Pacific): final interface effects
 
 The last feature pass adds optional artwork entrances and original menu selection
 sounds. Both start Off for existing and new households. Parents can save each
