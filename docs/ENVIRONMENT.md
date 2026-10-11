@@ -67,7 +67,7 @@ before anyone reads two numbers as if one tool produced both.
 |---|---|---|
 | This Mac, on PATH | 9.0.1 (Homebrew) | Every baseline in `results/baselines/`, the labelling plots, the marker clips, the conformance generate-analyse-delete loop, both selftests |
 | The ingest container | 5.1.9 (Debian bookworm, apt `7:5.1.9-0+deb12u1`) | The pipeline when it runs on Fargate. Pinned in `pipeline/infra/ingest/Dockerfile` |
-| CI runners | whatever `apt-get install ffmpeg` gives ubuntu-latest that day | The CI jobs that need a decoder. Nothing published comes off a CI ffmpeg |
+| CI runners | whatever `apt-get install ffmpeg` gives `ubuntu-24.04` (6.1.1 on Oct 11). The workflows name 24.04 rather than `ubuntu-latest` since Oct 11, because GitHub moves `ubuntu-latest` to Ubuntu 26 from Oct 19, inside the judging window | The CI jobs that need a decoder. Nothing published comes off a CI ffmpeg |
 
 They are three different decoders and three different filter graphs. A number
 measured on one is not a number measured on another, which is why every baseline
