@@ -349,6 +349,10 @@ def test_tokens_json_ratios_are_the_page_ones(page, tokens, calm_colors):
         expected = {pair_key(a, b): listed for a, b, listed in rows}
         actual = {key: f"{value:.2f}" for key, value in measured[group].items()}
         assert actual == expected, f"tokens.json contrastMeasurements.{group} is not the page's list"
+        # The page's ratios are truncated to two decimals; tokens.json has to
+        # hold exactly those, not a longer value that happens to print the same.
+        for key, value in measured[group].items():
+            assert round(value, 2) == value, f"tokens.json {group}.{key} is {value}, not two decimals"
     floors = tokens["contrastFloors"]
     assert floors == {"text": TEXT_FLOOR, "focusRing": RING_FLOOR}
 

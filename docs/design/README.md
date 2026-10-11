@@ -33,7 +33,7 @@ medical device."
 | Principle | What it means on screen |
 |---|---|
 | Calm | One clear primary action per screen. Secondary navigation is quiet. Sentence case, short lines, no badges or borders competing with the content. |
-| Still by default | Nothing moves unless a parent turns on Gentle artwork motion, and then only artwork, once. Text, focus rings, controls, setup and covers never move. Nothing fades, slides or pulses. |
+| Still by default | Nothing moves unless a parent turns on Gentle artwork motion, and then only artwork, once. Text, focus rings, controls, setup and covers never move. Apart from that one entrance, nothing fades, slides or pulses. |
 | Nothing flashes | The interface's own frames are run through flashmap under both the WCAG and broadcast profiles (`cd app && npm run ui:flashmap`), and a negative control (`node tools/ui_flashmap.mjs --negative-control`) shows that the check refuses a flashing sequence and a grating. |
 | The cover is never decorative | The cover is a safety surface. It is opaque black, or a checked still signed for that title, and red segments always get an opaque cover. Dim mode exists only for non-red segments at 90% or darker. The cover is never used as a transition, a theme, a mood or a background, and presentation artwork is never used as a cover or a hold still. |
 | Truthful | No invented ratings, durations, progress or watch history to fill a small library. Practice holds are always labelled as practice. |
@@ -50,20 +50,21 @@ in camelCase.
 | `SURFACE_FOCUSED` | `surfaceFocused` | `#234B55` | The fill of a focused or chosen control, and the quieter edge of an unavailable button. |
 | `BORDER` | `border` | `#66A0B4` | Thin edges on cards and the flash map strip, dividers, and the bar on a calm notice. Never text. |
 | `FOCUS_RING` | `focusRing` | `#E6A957` | Saffron. The focus ring, the primary action's fill, and the short label above a featured title. |
-| `ACCENT_DARK` | `accentDark` | `#B87A2C` | Dark saffron. Edges and fills only, never text. Today it draws a line on the robe in the mark and edges in the flashmap report; no app screen draws it. |
+| `ACCENT_DARK` | `accentDark` | `#B87A2C` | Dark saffron. Edges and fills only, never text. Today only the fold line on the robe in the mark draws it; the flashmap report declares it as a stylesheet variable but draws nothing with it, and no app screen draws it. |
 | `TEXT` | `text` | `#F3E8D3` | Cream. Titles, headings, body text and control labels. |
 | `TEXT_DIM` | `textDim` | `#BDD0CF` | Supporting text: descriptions, helper lines, shelf qualifiers, the step counter, unavailable labels. |
 | `INK` | `ink` | `#17323C` | Text on saffron, and the fill of the focused primary action. |
 | `VERIFIED` | `verified` | `#7FD1A3` | The Checked badge. |
-| `PENDING` | `pending` | `#E2C275` | The Needs check badge, and the bar on a waiting notice. |
-| `FAILED` | `failed` | `#F2BDB1` | The Check failed badge, and the bar on a blocked notice. A soft rose on purpose: a failed check is not an alarm. |
+| `PENDING` | `pending` | `#E2C275` | The Needs check badge, the bar on a waiting notice, and the non-red marks on the flash map strip in title details. |
+| `FAILED` | `failed` | `#F2BDB1` | The Check failed badge, the bar on a blocked notice, and the red marks on the flash map strip. A soft rose on purpose: a failed check is not an alarm. |
 | `COVER` | `cover` | `#000000` | The cover. `CoverLayer.tsx` paints the same `#000000` itself. |
 
 ## Contrast
 
-Contrast is the WCAG 2.2 contrast ratio from relative luminance, the formula
-quoted in [`flashmap/docs/SPEC_SOURCES.md`](../../flashmap/docs/SPEC_SOURCES.md)
-section 3. The app's own arithmetic in `app/src/calmframes/uiContrast.ts` uses
+Contrast is the WCAG 2.2 contrast ratio, (L1 + 0.05) / (L2 + 0.05), over
+relative luminance. [`flashmap/docs/SPEC_SOURCES.md`](../../flashmap/docs/SPEC_SOURCES.md)
+section 3 quotes the relative luminance half; the ratio formula and the two
+floors below are the app's own constants and are not yet quoted there. The app's own arithmetic in `app/src/calmframes/uiContrast.ts` uses
 the older 0.03928 break point that WCAG's Note 2 mentions; for 8-bit colours
 the two give the same answer, because no value n/255 falls between 0.03928 and
 0.04045. Ratios here are truncated to two decimals, the way `roundRatio` in
@@ -141,8 +142,9 @@ named `CALM_TEXT` styles above.
 
 ## Spacing and layout
 
-The design canvas is 1920 by 1080 units, and `scale()` turns units into device
-pixels.
+The design canvas is 1920 by 1080 units, and `scale()` turns units into dp
+(density-independent pixels) for the current screen height, rounded to the
+nearest pixel.
 
 | Token | Units | Use |
 |---|---|---|
@@ -161,7 +163,8 @@ hangs from the upper part of it (`PLAYER_LAYOUT`), and the bottom band belongs
 to captions, which must never be covered by our own words.
 
 Corners are modest: 12 units on controls and rows, 16 on cards and notices, 20
-on artwork and the viewing settings panel, 10 on badges.
+on artwork and the viewing settings panel, 32 on the focusable frame around
+library artwork, 10 on badges and 6 on the flash map strip.
 
 ## Focus
 
@@ -267,7 +270,8 @@ They come from two commits, and the code has moved since both:
   copy. Its shelf says "Scheduled scene holds" and "Original story" where the
   code now says "Practice holds" and "Checked story". Receipt:
   [`design_polish_2026-10-10.json`](../../results/design_polish_2026-10-10.json).
-- `seamless/` was rendered from `5316051` on Oct 11. It has the shelf copy but
+- `seamless/` was rendered on Oct 11 from the sources committed in `85c30f9`, on
+  base `5316051`. It has the shelf copy but
   comes before the motion and sound pass, so its parental controls have no
   Interface group with the two opt-in switches. Receipt:
   [`seamless_design_2026-10-11.json`](../../results/seamless_design_2026-10-11.json).
@@ -275,7 +279,7 @@ They come from two commits, and the code has moved since both:
 Where an image and the code differ, the code is current. They are stills, so
 none of them shows the artwork motion.
 
-![The library from 5316051: the Harbor feature with Watch now focused, and three titles on the shelf](seamless/library-family-browser.png)
+![The library from 85c30f9: the Harbor feature with Watch now focused, and three titles on the shelf](seamless/library-family-browser.png)
 
 *The library, `seamless/`, Oct 11. Watch now has focus: ink fill, saffron
 ring, underlined cream label. Browser render, not a Vega screenshot.*
@@ -285,13 +289,13 @@ ring, underlined cream label. Browser render, not a Vega screenshot.*
 *Title details, `polish/`, Oct 10, before the shelf copy changed "Original
 story" to "Checked story". Browser render, not a Vega screenshot.*
 
-![Parental controls from 5316051 while a save is pending, with Saving your changes beside the title](seamless/parent-saving-browser.png)
+![Parental controls from 85c30f9 while a save is pending, with Saving your changes beside the title](seamless/parent-saving-browser.png)
 
 *Parental controls while a save is pending, `seamless/`, Oct 11. The message
 sits beside the title so no control moves. Before the Interface group existed.
 Browser render, not a Vega screenshot.*
 
-![The setup review step from 5316051: Step 4 of 4, your household, and how Calm Frames works](seamless/setup-review-browser.png)
+![The setup review step from 85c30f9: Step 4 of 4, your household, and how Calm Frames works](seamless/setup-review-browser.png)
 
 *The last setup step, `seamless/`, Oct 11. Browser render, not a Vega
 screenshot.*
@@ -315,8 +319,9 @@ recorded in
 setup with the PIN, presets and room; saved settings surviving a restart;
 parental controls, the PIN keypad, details scrolling and credits driven by the
 remote with the outline and underline visible; Back during loading; playback
-with captions through both practice holds; and the Inter medium and semibold
-faces rendering as themselves.
+with captions through both practice holds. The Inter medium and semibold faces
+rendering as themselves was seen in the second native build and is recorded in
+[NATIVE_IMPLEMENTATION.md](NATIVE_IMPLEMENTATION.md).
 
 What has not been seen on a device:
 
