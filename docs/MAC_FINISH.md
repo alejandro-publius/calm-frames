@@ -58,12 +58,12 @@ run `npm ci` inside `app` with this JDK active. Its postinstall builds Shaka;
 `--ignore-scripts` alone is insufficient for a native package. Inspect tracked
 changes afterward. Do not use the package's destructive `clean` script.
 
-Before preparing final evidence, review the still-drop finding in
-[STATUS.md](STATUS.md) from the other Linux environment's ffmpeg 6.1.1 run.
-The follow-up belongs with the working Mac encoder: check each scene hold near
-its start, middle and end, record the encoder version and regenerate affected
-Harbor verification. Preserve the previous reports and recordings as history.
-Do not treat the passing cloud fixture suite as closing that finding.
+The still-drop finding from the other Linux environment was closed on Oct 11
+and needs nothing from this Mac: the rendition was right, the proof's
+measurement raced, and verify now samples the first frame, the middle and the
+last frame of every covered span and records the ffmpeg that measured it
+(STATUS section 5). A verify run here carries that data as a matter of course;
+preserve the previous reports and recordings as history.
 
 The final preparation gate now requires the original verification reports for
 all retained library generations. Older catalogs preserve their report hashes,
@@ -187,7 +187,7 @@ Record fresh observations for these journeys:
     each, restart and confirm it remains On; disable it, restart and confirm Off.
     Use a separate test household to exercise defaults without resetting user data.
 12. With interface motion enabled and the system reduced-motion query confirmed
-    false, observe the hero artwork move once by 6 layout units over 240 ms on
+    false, observe the hero artwork move once by <!--n results/interface_finish_2026-10-10_pacific.json:behavior.motion.translation_scaled_units -->6<!--/n--> layout units over <!--n results/interface_finish_2026-10-10_pacific.json:behavior.motion.duration_ms -->240<!--/n--> ms on
     library/details entry. There must be no text, focus or safety-cover animation.
     With motion Off, reduced motion enabled, or the query still unresolved, the
     artwork must remain still. Check background/foreground changes and rapid

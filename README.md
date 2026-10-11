@@ -357,7 +357,7 @@ These rows exist so nobody has to guess what is missing.
 | Current Harbor simulator journey | Requires a visible current build and recorded observation; historical software timing is not screen timing. |
 | Physical device end-to-end behavior | Outside this submission scope; no hardware validation is claimed. |
 | Prevented exposure, in seconds | Computed from flash maps once the KPI run happens. Never by playing flashing content with the filter off. |
-| Test counts | The suites run in CI. The records of their counts are typed records of single local runs whose logs stay outside the repo: [`results/redesign_validation_2026-10-10.json`](results/redesign_validation_2026-10-10.json) at cba1a29, and on Oct 11 two Python runs that disagree with each other because of ffmpeg, [`results/interaction_evidence_2026-10-11.json`](results/interaction_evidence_2026-10-11.json) on 7.1.5 and [`results/local_python_run_2026-10-11.json`](results/local_python_run_2026-10-11.json) on 6.1.1. [docs/STATUS.md](docs/STATUS.md) quotes them side by side. Nothing regenerates them, so no count is a headline here. |
+| Test counts | The suites run in CI. The records of their counts are typed records of single local runs whose logs stay outside the repo: [`results/redesign_validation_2026-10-10.json`](results/redesign_validation_2026-10-10.json) at cba1a29, and on Oct 11 two Python runs that disagreed with each other over a race in the cover measurement, since fixed, [`results/interaction_evidence_2026-10-11.json`](results/interaction_evidence_2026-10-11.json) on 7.1.5 and [`results/local_python_run_2026-10-11.json`](results/local_python_run_2026-10-11.json) on 6.1.1. [docs/STATUS.md](docs/STATUS.md) quotes them side by side. Nothing regenerates them, so no count is a headline here. |
 | Red flash segments from real footage | The free pool has none. Self-filmed red clips are the plan, under the rules in [docs/SAFETY.md](docs/SAFETY.md). |
 | Voice transport on a device | The virtual device has no Alexa, so no device run has delivered a spoken seek. The media-session path, `SafeMediaControlHandler`, is exercised by jest only; the D-pad and on-screen paths were observed on the virtual device. |
 
@@ -372,7 +372,7 @@ These rows exist so nobody has to guess what is missing.
 | Node | 22 (`.nvmrc`) | The sample declares `engines.node >= 22`. The `make` targets use fnm when it is installed and the node on PATH otherwise |
 | Python | 3.12 (`.python-version`) | flashmap, the pipeline and the measurement scripts, installed into `.venv` at the repository root, which the `make` targets and the scripts look for ([docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) has the `uv` steps) |
 | JDK 21 | for `npm install` only | The Shaka Player build runs in `postinstall` |
-| ffmpeg and ffprobe | 9.0.1, see [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) | The pipeline, the conformance generator and every measurement script. The published numbers came off 9.0.1; on 6.1.1 one rendition test is known to fail (docs/STATUS.md section 5) |
+| ffmpeg and ffprobe | 9.0.1, see [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) | The pipeline, the conformance generator and every measurement script. The published numbers came off 9.0.1. Two tests that failed on 6.1.1 on Oct 11 were a race in the cover measurement, not the encoder, fixed the same day (docs/STATUS.md section 5) |
 
 ```sh
 source ~/vega/env                       # Vega CLI and SDK
@@ -529,8 +529,9 @@ protection. Pending or failed titles get no ready plan. These are presentation
 changes; timing, seek guards and household floors are unchanged.
 
 Household setup is saved locally for later app launches: the selected
-child, profiles, room, preset, chime choice, salted PIN hash and failed-attempt
-lockout are saved together in a versioned local record. The library opens only
+child, profiles, room, preset, chime choice, the two interface effects (artwork
+motion and selection sounds, both off unless a parent turns them on), salted
+PIN hash and failed-attempt lockout are saved together in a versioned local record. The library opens only
 after that record is read and validated. Unreadable or malformed records keep
 it closed; a failed save offers a retry of the intended change. No plaintext
 PIN or unlocked parent session is saved. The hide history remains in memory.

@@ -4,6 +4,32 @@ Updated Sun Oct 11, 2026.
 
 ## 0. Where things stand
 
+### Oct 11, later still: the other session's last two commits reviewed, and the cover proof corrected
+
+The other session's two newest commits (opt-in artwork motion and selection
+sounds with their acceptance checklist, and the AWS credit wording qualified)
+were read by three readers, one lens each (the hard rules, code correctness,
+document consistency), with two skeptics on every finding. Nothing reached
+"block": the motion is one 240 ms settle of the artwork only, off by default,
+still under reduced motion or an unknown preference, and nothing in the range
+touches the covers, the cards, the chime or the player. What stood is fixed:
+the selection sound's ledger row now reads like the other rows of ours (CC0-1.0,
+the README on main, "Ours."), the seek lint message and the rule name the menu
+sound's audio element as the third exemption, the Oct 9 AWS record says in a new
+`amendments` field that its credit clause was reworded on Oct 11, the finish
+line in `docs/COMPLETION_CHECKLIST.md` names the merge into main and the Oct 21
+date moves, the README's and CLAUDE.md's lists of what the household record
+saves include the two interface preferences, and the Mac acceptance step quotes
+its numbers from the results record. Two notes stand without a change: with
+motion on, the artwork paints at rest and then dips and settles once the
+reduce-motion query answers, which the Mac acceptance step will see; and a menu
+sound whose player never finishes initialising stays silent for the rest of the
+screen, which is the safe direction.
+
+The same pass found that the two Python tests which failed on this box were a
+race in the cover proof's own measurement, not the encoder; the paragraph in
+the Oct 11 entry below and section 5 tell that story, and the fix is in.
+
 ### Final interface effects, October 10 Pacific
 
 The last feature pass adds optional artwork entrances and original menu selection
@@ -149,13 +175,16 @@ box, on ffmpeg 7.1.5; the same command on the Oct 11 Linux box at c4dbf0f
 collects <!--n results/local_python_run_2026-10-11.json:published.collected -->1694<!--/n-->
 and passes <!--n results/local_python_run_2026-10-11.json:published.passed -->1686<!--/n-->,
 with <!--n results/local_python_run_2026-10-11.json:published.skipped -->6<!--/n--> skipped
-and the <!--n results/local_python_run_2026-10-11.json:published.failed -->2<!--/n--> ffmpeg 6.1.1
-failures recorded below, so neither count stands without its environment
+and the <!--n results/local_python_run_2026-10-11.json:published.failed -->2<!--/n--> failures
+recorded below, which the later Oct 11 work traced to a race in the cover
+measurement and fixed, so neither count stands without its environment
 (`results/local_python_run_2026-10-11.json`). The updated UI analyzer passed again after
 integration, including <!--n results/interaction_evidence_2026-10-11.json:checks.ui_control_tests_passed -->16<!--/n-->
 error and cleanup guards and the actual measured controls. Generated hazard
 fixtures were removed after analysis. The current ffmpeg 7.1.5 fixture run does
-not close the separately recorded 6.1.1 still-drop finding. Exact runs, source
+not close the separately recorded 6.1.1 still-drop finding. That finding was
+closed later on Oct 11: it was a race in the cover measurement, not a still
+dropping, and section 5 says so. Exact runs, source
 hashes, limitations and push verification are in
 [`interaction_evidence_2026-10-11.json`](../results/interaction_evidence_2026-10-11.json).
 
@@ -290,16 +319,24 @@ play time (section 5); the prepared Harbor's frames carry the burned-in
 commits on the branch carry a university address as author, which only a
 history rewrite can change and is your call, not mine.
 
-**Two tests fail on this Linux box and pass on CI and the Mac.**
+**Two tests failed on this Linux box, and the fault was the measurement, not the rendition.**
 `pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still`
-reads a PSNR of 15 to 21 against the 30 it wants at 4.4 s, on ffmpeg 6.1.1 and
-PyAV 18.1.0 here. Later on Oct 11 the full suite on the same box also failed
+read a PSNR of 15 to 21 against the 30 it wants at 4.4 s, and later the full suite
+on the same box also failed
 `pipeline/tests/test_sceneholds_real.py::test_real_cli_checks_sham_hides_with_neutral_and_preceding_context`
-on verify's `scene_model_drawn:wcag` check, which is the cover model losing the
-still the same way the rendition does. The hosted python job on the same tree
-is green (run 38112814399 on c4dbf0f), and the other session's full run on
-ffmpeg 7.1.5 passed both. Recorded and not chased, because nothing in this tree
-touches that path; section 5 has the fix, which belongs with the Mac encoder.
+on verify's `scene_model_drawn:wcag` check. Both were written up here, that
+morning, as ffmpeg 6.1.1 losing the still part way through a hold. That was wrong,
+and the later Oct 11 work found it by reading the rendition frame by frame: the
+still is there to the last frame of the span. The measurement was the fault.
+`cover_psnr` in `pipeline/render.py` asked ffmpeg for one frame and read the
+end-of-run average line, and how many frames ffmpeg compared before it stopped
+was a race, so a sample inside a covered span averaged in the uncovered frames
+after it on a busy box and not on an idle one. The comparison now reaches
+exactly one frame, verify's cover proof samples the first frame, the middle and
+the last frame of every covered span and records the ffmpeg that measured it,
+and a test that fades the still before a span's end was seen to fail against the
+old midpoint proof. Both tests pass here now, and the mutation gate carries the
+new proof.
 
 ### Oct 10: cloud design polish awaits a native build
 
@@ -1176,7 +1213,7 @@ and it is the reason no report is written for a clip it could not read.
   replace those preparation reports. See [MAC_FINISH.md](MAC_FINISH.md).
 - **The bundled Harbor demo's played file is not hash-checked at play time.** The guard compares the map's source hash; the demo plays `harbor.precovered.mp4`, whose hash `BENIGN_STORY_RENDITION_SHA256` exists and is read by nothing in `app/src`. The package preflight checks every bundled byte at build time, so a swapped rendition cannot reach an installed package unsigned, which is why this is recorded rather than fixed from a Linux box.
 - **The prepared Harbor's frames carry the burned-in "BENIGN DEMO" label**, because `eval/prepare_owned_harbor.py` stream-copies the demo video. The shelf copy now says it is our own demo film. Rendering the picture without the label and re-exporting is a Mac job.
-- **`pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still` was reported failing in another Oct 11 Linux environment** (PSNR 15 to 21 against 30 at 4.4 s) and passes on CI and the Mac. The Oct 11 review found the shape of it: on that environment's ffmpeg 6.1.1 the overlay that draws a still over a hold loses the image part way through the interval, and the cover model for the Harbor demo did the same (42 dB at the start of a hold, 15 dB near its end). Verify's scene cover proof samples one midpoint per hold, so a still that drops only in the trailing guard band would pass the proof and rely on the analyzer. The fix is to sample each hold at its start, middle and end in `pipeline/verify.py` and record the ffmpeg version in the verify report; it has to be made where ffmpeg 9 renders, with the Harbor verification regenerated, so it is a Mac job and it is listed here rather than done blind. Later on Oct 11 the same box also failed `pipeline/tests/test_sceneholds_real.py::test_real_cli_checks_sham_hides_with_neutral_and_preceding_context` on the `scene_model_drawn:wcag` check, the cover model losing the still the same way; both tests pass on the hosted runner and on ffmpeg 7.1.5.
+- **`pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still` and `pipeline/tests/test_sceneholds_real.py::test_real_cli_checks_sham_hides_with_neutral_and_preceding_context` failed on the Oct 11 Linux box, and the write-up that morning blamed ffmpeg 6.1.1 for losing the still part way through a hold.** Read frame by frame, the rendition showed the still to the last frame of the span; the fault was `cover_psnr` in `pipeline/render.py`, which asked ffmpeg for one frame and read the end-of-run average line, an average over however many frames ffmpeg had compared before it stopped, which is a race. On a busy box the uncovered frames after the sample leaked into it. Fixed later on Oct 11: the comparison reaches exactly one frame, verify's cover proof samples the first frame, the middle and the last frame of every covered span instead of one midpoint and records the ffmpeg that measured it, and a test that fades the still before the end of a span was seen to fail against the old proof. Nothing about this needed the Mac, and the committed Harbor verification stays as it was recorded; the next verify run there carries the new proof's data.
 
 ## 6. The numbers
 

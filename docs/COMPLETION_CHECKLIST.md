@@ -19,6 +19,11 @@ The detailed evidence and outstanding decisions remain below.
 - [ ] Resolve publication licence questions, review remaining security findings,
   confirm entrant details and prepare the contribution and reviewer-access links.
   Present the finished materials for the required publication/submission approval.
+- [ ] Merge PR #1 into main before the repository goes public, since a public
+  repository shows main by default, and cut the judged tag from main.
+- [ ] At the Oct 21 final checks, move both audit exception review dates in
+  `scripts/audit_exceptions.toml` past Dec 3 and move the sample Action's pin in
+  `flashmap/examples/flash-check.yml` to the judged tag.
 - [ ] After approval, publish the reviewed artifacts, verify the live links and
   submit the Devpost entry. Save the actual submitted confirmation privately if
   it contains personal data; source/package IDs can go in a public receipt.
@@ -214,11 +219,12 @@ the saved GitHub API network setting; Git source synchronization works.
   prompt menu audio without queued cues or playback interruption, VoiceView and
   the separate warning chime on benign footage. Static UI snapshots do not
   validate animated frames or audible playback.
-- [ ] Review the still-drop finding reported in the other Linux environment
-  with ffmpeg 6.1.1. The Mac follow-up in [STATUS.md](STATUS.md) calls for checking
-  each hold near its start, middle and end, recording the encoder version and
-  regenerating affected Harbor verification with the working Mac toolchain.
-  Passing cloud fixtures alone do not close this native evidence item.
+- [x] The still-drop finding from the other Linux environment was closed on
+  Oct 11 without Mac work: the rendition was right to the last frame of each
+  span, and the proof's own measurement raced. `cover_psnr` now compares exactly
+  one frame, verify samples the first frame, the middle and the last frame of
+  every covered span and records the ffmpeg that measured it, and the mutation
+  gate carries the new proof. STATUS section 5 has the account.
 - [ ] Rebuild and install the current polished source on the Mac's Vega Virtual
   Device. Check D-pad focus and return navigation, full-page scrolling, PIN
   setup and correction, saved settings, title playback, holds, audio and captions.

@@ -16,7 +16,10 @@ includes the Oct 11 dependency changes. The hosted Audit and CI runs on the Oct 
 Oct 11 a third mock judge read a fresh clone (`docs/MOCK_JUDGE_3.md`) and what it found that
 could be fixed from here was fixed; a lint rule keeps playhead writes inside `useFlashGuard.ts`;
 the sample GitHub Action pins a commit on this repository and installs flashmap from its own
-checkout; the README has a "Run the checks" block and the `make` targets work without fnm.
+checkout; the README has a "Run the checks" block and the `make` targets work without fnm. Later still,
+the two Python tests that failed on this box were traced to a race in `cover_psnr`, not to ffmpeg
+6.1.1 as first written: the comparison now reaches one frame, and verify's cover proof samples the
+first frame, the middle and the last frame of every covered span.
 
 **Active scope, Oct 9 finishing session.** Alex is entering solo and has an
 identity-verified Amazon Developer account. Use only the Vega Virtual Device.
@@ -49,7 +52,8 @@ observations and recorded-frame checks before they are called native-verified.
 
 **What the branch holds, in one paragraph.** Signed scene holds (a checked still from before a
 hide, shown in place of black, today only on the labelled Harbor demo), a durable household
-record (salted PIN hash, lockout, profiles, room, chime), a packaged library compiled into the
+record (salted PIN hash, lockout, profiles, room, chime, and since Oct 11 the two opt-in interface
+effects, artwork motion and selection sounds, both off unless a parent turns them on), a packaged library compiled into the
 app with a key accepted only for the exact titles it compiled, the labelled Harbor demo with
 practice holds, external captions and its own demo key, the approved TV design, and the Oct 9
 AWS deploy (`results/aws_deploy_2026-10-09.json`; the app does not consume the cloud catalog, a
@@ -151,7 +155,7 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 ### Engineering guarantees (enforced in code, with tests)
 - The verify step blocks publishing. A title can't appear in kid mode until verify passes.
 - Fail closed: a missing, stale, unsigned, unparseable or wrong-hash map keeps the picture hidden.
-- Every way of moving the playhead goes through one function. Target inside an interval or guard band: cover first, then seek. A lint rule in `app/package.json` refuses `currentTime =` and `fastSeek(` outside `useFlashGuard.ts`; the sample's fallbacks are exempted by name with the reason beside each.
+- Every way of moving the playhead goes through one function. Target inside an interval or guard band: cover first, then seek. A lint rule in `app/package.json` refuses `currentTime =` and `fastSeek(` outside `useFlashGuard.ts`; the sample's fallbacks and the two audio elements (the chime, the menu sound) are exempted by name with the reason beside each.
 - Room settings can only add hides. Red segments always get an opaque cover. Dim mode only for non-red segments at 90% or darker, and verify models it.
 - Plan B (pre-covered kid-safe rendition) is always built, whatever GATE 1 says.
 

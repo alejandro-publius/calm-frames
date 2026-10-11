@@ -933,6 +933,17 @@ MUTATIONS: list[Mutation] = [
         why="an image that is not the frame it claims to be is signed and published, "
         "so the still a child sees is whatever the producer put there",
     ),
+    Mutation(
+        mid="cover-proof-reaches-the-end-of-a-span",
+        prop="verify measures the cover at the first frame, the middle and the last frame of every covered span",
+        lane="py",
+        path="pipeline/verify.py",
+        old="    return [start_s + frame_s, middle_s, end_s - frame_s]",
+        new="    return [middle_s]",
+        tests=("pipeline/tests/test_verify.py",),
+        why="a cover drawn at the middle of a span and gone before its end passes a midpoint-only "
+        "proof, which is the proof verify had until Oct 11, 2026",
+    ),
 ]
 
 

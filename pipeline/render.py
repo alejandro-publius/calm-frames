@@ -304,6 +304,14 @@ def cover_psnr(video: str | Path, still_path: str | Path, *, time_s: float) -> f
     footage, but it would not match the still. ``inf`` means the two frames
     are identical.
     """
+    # Exactly one frame reaches the comparison. ``-frames:v 1`` alone only
+    # stops the encoder: ffmpeg keeps decoding and comparing frames until the
+    # graph is torn down, and the summary line this reads is the average over
+    # every frame compared by then. How many that is depends on threads and
+    # load, so a sample just inside a covered span could average in the
+    # uncovered frames after it and fail on one machine and pass on another.
+    # Seen on Oct 11, 2026: the rendition was right to the last frame and this
+    # measurement said otherwise at 4.4 s of a span ending at 4.5 s.
     result = ffmpegtool.run_ffmpeg(
         [
             "-loglevel",
@@ -317,7 +325,8 @@ def cover_psnr(video: str | Path, still_path: str | Path, *, time_s: float) -> f
             "-frames:v",
             "1",
             "-lavfi",
-            "[0:v]scale=320:180,format=rgb24[a];[1:v]scale=320:180,format=rgb24[b];[a][b]psnr",
+            "[0:v]trim=end_frame=1,scale=320:180,format=rgb24[a];"
+            "[1:v]trim=end_frame=1,scale=320:180,format=rgb24[b];[a][b]psnr",
             "-f",
             "null",
             "-",

@@ -26,5 +26,11 @@
     "failed": 2,
     "skipped": 6,
     "collected": 1694
+  },
+  "correction": {
+    "date": "2026-10-11",
+    "finding": "why_they_fail above was wrong about the cause. Read frame by frame, the rendition showed the still to the last frame of the span. cover_psnr in pipeline/render.py asked ffmpeg for one frame and read the end-of-run average line, an average over however many frames ffmpeg compared before it stopped, which is a race that a busy box loses and an idle one wins.",
+    "fixed_by": "cover_psnr compares exactly one frame (trim=end_frame=1 on both inputs); verify's cover proof samples the first frame, the middle and the last frame of each covered span and records the ffmpeg that measured it; pipeline/tests/test_verify.py::TestTheCoverProofReachesTheEdgesOfASpan was seen to fail against the old proof; mutation cover-proof-reaches-the-end-of-a-span.",
+    "after_the_fix": "both tests pass on this box; see results/local_python_run_2026-10-11_fixed.json for the rerun once it finishes."
   }
 }

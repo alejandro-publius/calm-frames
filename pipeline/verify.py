@@ -44,7 +44,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Sequence
 
-from . import PipelineError
+from . import PipelineError, ffmpegtool
 from .catalog import (
     STATUS_FAILED,
     STATUS_PENDING,
@@ -396,6 +396,30 @@ def _load_plan(layout: TitleLayout, preset: str) -> HidePlan:
     return HidePlan.from_dict(json.loads(path.read_text()))
 
 
+COVER_SAMPLES_PER_INTERVAL = 3
+
+
+def _cover_sample_times(interval: CoverInterval, probe: VideoProbe) -> list[float]:
+    """Where a covered span is measured: its first frame, its middle, its last frame.
+
+    One midpoint used to be the whole proof. A cover that is drawn at the
+    middle of a span and gone before its end, or late to its start, passed it.
+    The first and last samples sit one frame inside the span, because the
+    boundary frame itself belongs to whichever side the encoder's timestamps
+    put it on, and the span's edges are what the analyzer's own entry and exit
+    checks cover. A span shorter than three frames is measured at its middle.
+    """
+    start_s = interval.start_ms / 1000.0
+    end_s = interval.end_ms / 1000.0
+    middle_s = (start_s + end_s) / 2.0
+    frame_s = probe.frame_interval_median_s or (
+        1.0 / probe.avg_frame_rate if probe.avg_frame_rate else 1.0 / 30.0
+    )
+    if end_s - start_s < 3 * frame_s:
+        return [middle_s]
+    return [start_s + frame_s, middle_s, end_s - frame_s]
+
+
 def _scene_cover_proof(
     video: Path, plan: HidePlan, images: Sequence[SceneHold], probe: VideoProbe
 ) -> list[float]:
@@ -403,7 +427,8 @@ def _scene_cover_proof(
 
     Full-output analysis separately checks all entry and exit transitions.
     This proof makes a missing or wrong image visible even on calm source
-    footage where the analyzer would report no violations either way.
+    footage where the analyzer would report no violations either way. Each
+    span is measured at its first frame, its middle and its last frame.
     """
     by_interval = {(h.start_ms, h.end_ms): h for h in images}
     scores = []
@@ -421,8 +446,8 @@ def _scene_cover_proof(
                 if not black.exists():
                     make_neutral_still(black, width=probe.width, height=probe.height, rgb=(0, 0, 0))
                 still = black
-            midpoint_s = (interval.start_ms + interval.end_ms) / 2000.0
-            scores.append(cover_psnr(video, still, time_s=midpoint_s))
+            for time_s in _cover_sample_times(interval, probe):
+                scores.append(cover_psnr(video, still, time_s=time_s))
     return scores
 
 
@@ -699,8 +724,11 @@ def verify_title(
                     report.add(
                         f"cover_actually_drawn:{preset}",
                         bool(scores) and min(scores) >= COVER_PSNR_MIN_DB,
-                        f"{prefix}each described scene hold and sampled black fallback match the rendition",
+                        f"{prefix}each described scene hold and sampled black fallback match the "
+                        "rendition at the first frame, the middle and the last frame of the span",
                         samples=len(scores), worst_db=min(scores) if min(scores) != float("inf") else None,
+                        samples_per_interval=COVER_SAMPLES_PER_INTERVAL,
+                        ffmpeg=ffmpegtool.ffmpeg_version(),
                     )
                 except (PipelineError, OSError) as exc:
                     report.add(f"cover_actually_drawn:{preset}", False, f"{prefix}{exc}")
@@ -708,18 +736,21 @@ def verify_title(
                 worst = None
                 worst_at = None
                 for interval in sampled:
-                    midpoint_s = (interval.start_ms + interval.end_ms) / 2000.0
-                    score = cover_psnr(safe_master, still, time_s=midpoint_s)
-                    if worst is None or score < worst:
-                        worst = score
-                        worst_at = midpoint_s
+                    for time_s in _cover_sample_times(interval, probe):
+                        score = cover_psnr(safe_master, still, time_s=time_s)
+                        if worst is None or score < worst:
+                            worst = score
+                            worst_at = time_s
                 report.add(
                     f"cover_actually_drawn:{preset}",
                     worst is not None and worst >= COVER_PSNR_MIN_DB,
-                    f"{prefix}worst covered span matched the cover still at "
-                    f"{worst} dB (need {COVER_PSNR_MIN_DB}) at {worst_at} s",
+                    f"{prefix}worst sample across the first frame, middle and last frame of "
+                    f"each covered span matched the cover still at {worst} dB "
+                    f"(need {COVER_PSNR_MIN_DB}) at {worst_at} s",
                     worst_db=None if worst == float("inf") else worst,
                     worst_at_s=worst_at,
+                    samples_per_interval=COVER_SAMPLES_PER_INTERVAL,
+                    ffmpeg=ffmpegtool.ffmpeg_version(),
                 )
 
         # 6c. Either there was nothing to cover, or the cover was proven drawn.
