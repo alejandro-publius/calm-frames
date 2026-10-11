@@ -53,6 +53,13 @@ run `npm ci` inside `app` with this JDK active. Its postinstall builds Shaka;
 `--ignore-scripts` alone is insufficient for a native package. Inspect tracked
 changes afterward. Do not use the package's destructive `clean` script.
 
+Before preparing final evidence, review the still-drop finding in
+[STATUS.md](STATUS.md) from the other Linux environment's ffmpeg 6.1.1 run.
+The follow-up belongs with the working Mac encoder: check each scene hold near
+its start, middle and end, record the encoder version and regenerate affected
+Harbor verification. Preserve the previous reports and recordings as history.
+Do not treat the passing cloud fixture suite as closing that finding.
+
 The final preparation gate now requires the original verification reports for
 all retained library generations. Older catalogs preserve their report hashes,
 but this cloud checkout does not contain the matching originals. Normal delivery

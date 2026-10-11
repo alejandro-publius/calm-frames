@@ -109,12 +109,13 @@ One more thing that is a design choice rather than a defect, and worth knowing: 
 
 **What worked well.** It is the standard W3C media element surface, so what a web developer knows transfers directly. `getVideoPlaybackQuality` gave us dropped and total frame counts, <!--n results/vvd_timeupdate_stats.json:playback_quality_last.droppedVideoFrames -->0<!--/n--> dropped of <!--n results/vvd_timeupdate_stats.json:playback_quality_last.totalVideoFrames -->1164<!--/n--> in the recorded run, which is exactly what a safety layer needs to know about the pipeline underneath it. `setMediaControlFocus` and the caption view handle are clean integration points.
 
-**What needs work.** Four things.
+**What needs work.** Five things.
 
 - **`timeupdate` cadence is not documented, and it is not regular.** In one recorded run the median gap was <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.median -->426<!--/n--> ms, the shortest <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.min -->75<!--/n--> ms and the longest <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms, while the clip kept playing throughout. A feature that reacts to `timeupdate` would have been five seconds late. Our whole design follows from that number: the cover runs on a wall clock re-anchored to media time at every report, and the price is drift, which reached <!--n results/vvd_timeupdate_stats.json:worst_wall_clock_drift_ms -->2756<!--/n--> ms in that same gap.
 - **`currentTime` resolution is not documented either.** The smallest step we saw reported was <!--n results/vvd_timeupdate_stats.json:current_time_precision_ms -->3<!--/n--> ms. Anything that must act at a precise media time needs a stated guarantee for both of these, not a number each developer measures for themselves and gets a different answer to.
 - **A plain MP4 over HTTP does not start**, where the same content over HLS does, and nothing says why. Two things had to be true before our marker clip would play at all: package it as HLS, and have the test server answer byte ranges. Python's own `SimpleHTTPRequestHandler` ignores the `Range` header and returns the whole file with a 200, and the player treats that as a broken source with no error anywhere.
 - **A stream with no audio track pauses a few seconds in.** We searched the sample for anything that waits on audio and there is nothing, so this comes from below it. Every test clip we generate now carries a silent AAC track.
+- **A packaged asset is not opened by its documented URI.** The Kepler file system documentation gives package assets as `file:///pkg/...`, and the native player treated that form as a literal file name and failed to open it; the same bytes opened as `/pkg/...`. We normalize the prefix at the native media boundary only (friction log entry 36). One documented form, accepted by both the file system and the player, would remove a blocking afternoon.
 
 **Onboarding, zero to hello world.** Good, because the sample does it for you. Hard from the API surface alone, because the surface handle and caption handle lifecycle is not obvious and the ordering matters.
 
@@ -145,10 +146,11 @@ One more thing that is a design choice rather than a defect, and worth knowing: 
 
 **What worked well.** The handle-based lifecycle, `onCaptionViewCreated` and `setCaptionViewHandle` with `clearCaptionViewHandle` on the way out, is clear and hard to get wrong once you have seen it done. The view composites above ordinary React Native views, which is the fact our whole design rests on: the cover is drawn between the video surface and the captions view.
 
-**What needs work.** Two things, both documentation.
+**What needs work.** Three things, two of them documentation.
 
 - **The z-order contract is not written down.** Video surface at the bottom, our own views in the middle, captions on top. We rely on it completely and we found it by trying it. It should be a stated contract, because if it ever changed, an accessibility layer built on it would fail silently and look like a rendering glitch.
 - **One captions view per process should be said loudly.** We designed around it from the start, so we never hit it, and an app that adds a second one finds out at runtime rather than at build time. A note in the API reference costs nothing.
+- **A z-index on the caption view itself does nothing.** When a scene hold draws a React Native image over the picture, the native caption view stayed under the image whatever z-index it carried; what works is a retained, non-collapsible React Native host view that carries the stacking style with the caption view inside it (friction log entry 37). The composition rules for native views inside React Native trees would be worth one worked example.
 
 Whether captions stay readable over the cover on screen was checked on Oct 9 and 10, after a fix on our side: captions had been stacking behind the cover image, and once that was corrected the ScreenCaptureKit recordings of the Vega Virtual Device show both scheduled Harbor holds with changing English captions above the held picture, with non-silent audio throughout. The earlier harness verdict in `results/vvd_layering_rehearsal.json` stays <!--n results/vvd_layering_rehearsal.json:layering.verdict -->inconclusive<!--/n-->, because its captures missed the app picture; the recordings, inspected by eye, are the evidence, which is R00 and S04 in [`docs/SHOT_MANIFEST.md`](SHOT_MANIFEST.md). No physical device was used.
 
@@ -323,11 +325,13 @@ Whether captions stay readable over the cover on screen was checked on Oct 9 and
 
 **What worked well.** `TVFocusGuideView` and the focus model do the hard part of ten-foot navigation, which matters here because a Skip button on a countdown card has to hold focus and has to be reachable in one press. The theme builder is sensible and got out of the way.
 
-**What needs work.** Three things.
+**What needs work.** Five things.
 
 - **The build rewrites `manifest.toml` on every build**, adding a `[[needs.module]]` entry for each installed `@amazon-devices` package. So removing a feature means removing its dependency too, or the app goes on declaring it needs a module for a feature it no longer has. It also means anything hand-written in that file lives under a tool that rewrites it, which is why two of our load-bearing blocks have a test that fails if they go missing.
 - **`setNativeProps` throws a TypeError on React Native 0.83**, and the error does not say that is why. The fix is a design change to state-driven UI rather than a patch. We banned it with a lint rule on day one, which was preventive rather than a fix, and we would rather the platform explained itself once than that every app learn this the same way.
 - **Kepler File System reads a data directory that cannot be written from the host on OS 1.2.** That is exactly the fixture-loading and configuration case it is good for, and there is no path into it: `vega device copy-to` fails with `Permission denied`, `/home` is not on the device, and `vega device run-cmd` runs inside the developer shell's own sandbox. We start runs from a button in the app and fetch the config over HTTP instead.
+- **Custom fonts render as the fallback face unless they sit in `assets/fonts`.** Under `assets/raw/fonts` every weight of the bundled Inter faces rendered as the fallback, with no warning; under `assets/fonts` the intended weights appeared (friction log entry 39). The fonts directory and what a fallback render looks like belong in the documentation.
+- **Disabling a focused control drops native focus.** Disabling the focused preset, room and chime controls for the length of a save left the remote with nowhere to go. We keep the control in the focus order, report the disabled accessibility state and block its handler instead (friction log entry 40). Moving focus to a neighbour by default would be the platform's answer.
 
 **Onboarding, zero to hello world.** Good.
 

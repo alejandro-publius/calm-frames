@@ -135,6 +135,14 @@ jobs:
         # the same analyzer we point at content.
         working-directory: app
         run: npm run ui:flashmap
+      - name: The check is seen to refuse what it must refuse
+        # A green run of the screens above means nothing unless the same
+        # painter, hold and analyzer can be seen refusing a flashing sequence
+        # and a grating. This paints both and fails if either is passed.
+        working-directory: app
+        run: |
+          node --test tools/ui_flashmap.test.mjs
+          node tools/ui_flashmap.mjs --negative-control
 
       - name: Check every image the app and the listing ship
         # The screens above are what the app draws. These are what it ships: the

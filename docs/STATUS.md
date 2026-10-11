@@ -124,6 +124,15 @@ parallel with a skeptic on every finding, and what stood was fixed:
   CLAUDE.md. Each says what is true on Oct 11 or is headed as history. Five of
   the README's line anchors had drifted by one to five lines. The Oct 10
   friction bullets are entries 36 to 40 in Amazon's six fields.
+- The app's own screens had passed flashmap in CI since Sep 17 without the
+  check ever being seen to refuse anything. `node tools/ui_flashmap.mjs
+  --negative-control` now paints a flashing sequence and a sixteen pair grating
+  with the same painter and hold, and fails unless the wcag profile refuses
+  the first, the broadcast profile refuses the second and the wcag profile
+  passes the grating, which has no pattern rule to fail. It runs after the real
+  screens in CI, and it was seen to fail with the flashing sequence replaced by
+  grey. The other Sep 19 item beside it, the scheduler tick gap, turned out to
+  have been instrumented since Sep 17.
 - The branch's five new guards (the still-belongs-to-a-segment check, the demo
   key's title binding, the packaged library's source hash, the household
   record's PIN rounds bound, verify's scene hold byte reproduction) had been
@@ -1025,7 +1034,7 @@ and it is the reason no report is written for a clip it could not read.
   replace those preparation reports. See [MAC_FINISH.md](MAC_FINISH.md).
 - **The bundled Harbor demo's played file is not hash-checked at play time.** The guard compares the map's source hash; the demo plays `harbor.precovered.mp4`, whose hash `BENIGN_STORY_RENDITION_SHA256` exists and is read by nothing in `app/src`. The package preflight checks every bundled byte at build time, so a swapped rendition cannot reach an installed package unsigned, which is why this is recorded rather than fixed from a Linux box.
 - **The prepared Harbor's frames carry the burned-in "BENIGN DEMO" label**, because `eval/prepare_owned_harbor.py` stream-copies the demo video. The shelf copy now says it is our own demo film. Rendering the picture without the label and re-exporting is a Mac job.
-- **`pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still` fails on the Oct 11 Linux box** (PSNR 15 to 21 against 30 at 4.4 s) and passes on CI and the Mac. Not chased.
+- **`pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still` was reported failing in another Oct 11 Linux environment** (PSNR 15 to 21 against 30 at 4.4 s) and passes on CI and the Mac. The Oct 11 review found the shape of it: on that environment's ffmpeg 6.1.1 the overlay that draws a still over a hold loses the image part way through the interval, and the cover model for the Harbor demo did the same (42 dB at the start of a hold, 15 dB near its end). Verify's scene cover proof samples one midpoint per hold, so a still that drops only in the trailing guard band would pass the proof and rely on the analyzer. The fix is to sample each hold at its start, middle and end in `pipeline/verify.py` and record the ffmpeg version in the verify report; it has to be made where ffmpeg 9 renders, with the Harbor verification regenerated, so it is a Mac job and it is listed here rather than done blind.
 
 ## 6. The numbers
 
@@ -1073,8 +1082,9 @@ four that are live right now:
 1. Act on whatever the remaining reviewers (engineering guarantees, docs
    consistency, hackathon requirements) found that stands, and push.
 2. The third mock judge: both existing passes read clones from before phase 8.
-3. Instrument the scheduler tick gap and put a negative control in
-   `app/tools/ui_flashmap.mjs`, both still open from Sep 19.
+3. Done Oct 11: the negative control in `app/tools/ui_flashmap.mjs` (the
+   scheduler tick gap was already instrumented, `worstTickGapMs` in
+   `useCoverHarness.ts`, since Sep 17; the Sep 19 list had not noticed).
 4. More titles through verify. Only 7 of the 30 with a verdict prove anything
    about covering, and that number only moves with footage that flashes.
 

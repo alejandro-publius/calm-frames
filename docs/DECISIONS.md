@@ -2246,9 +2246,19 @@ device yet.
 - **Decision:** make aarch64 Debug the release-preparation default and require complete input hashes for skipped builds. **Why:** the user's target is the Apple Silicon Vega Virtual Device; stale artwork, fonts or generated runtime code must not pass as current. **Cost:** older receipts without the full inventory require a rebuild. Publication instructions pin the prepared source commit and are withheld while app inputs are uncommitted.
 - **Decision:** require an explicit capture plan and matching native/demo evidence when assembling review artifacts. **Why:** the previous scripts embedded the older build identity and overwrote existing outputs. **Cost:** fill fresh provenance from the actual Mac run and select new output paths; cloud fixture checks do not substitute for native observations.
 - **Decision:** preserve existing publication boundaries while pushing checked batches frequently. **Why:** the user needs every terminal and workspace to receive the same latest source. **Cost:** fetch before work, reconcile concurrent commits and verify each pushed commit; other checkouts still need to pull the review branch.
+- **Decision:** give the app's own screen check a negative control, run in CI
+  after the real screens. **Why:** `npm run ui:flashmap` had been green since
+  Sep 17 and had never been seen to refuse anything, and the Sep 19 list said
+  so. The control paints a flashing sequence and a grating with the same
+  painter, hold and encoder as the real screens and fails unless the wcag
+  profile refuses the first, the broadcast profile refuses the second and the
+  wcag profile passes the grating. **Cost:** three more analyzer runs in that
+  job, about twenty seconds; and the lesson that the other Sep 19 item next to
+  it, the tick gap, had been done on Sep 17 and never crossed off.
 
 ## Oct 11: interaction details and original preparation evidence
 
 - **Decision:** preserve remote focus eligibility during profile saves, group only notice text for screen readers, and speak complete credits. **Why:** the interface should keep its place and expose every action and displayed attribution. **Cost:** regression checks and a fresh native focus and screen-reader pass; the approved layout stays intact.
 - **Decision:** attach exact original verification reports outside immutable media manifests. **Why:** both retained generations reference report hashes whose originals are missing here, and rewriting a manifest would change its bundle identity. **Cost:** validate raw bytes and report semantics, account for their package size, and locate the originals on the Mac. New exports include them automatically; regenerated reports cannot stand in for missing originals under old hashes.
 - **Decision:** require all referenced original reports for final release preparation, including reused packages. **Why:** a checked byte inventory alone does not fill the missing preparation evidence. **Cost:** the strict gate remains blocked on this checkout until the originals are attached. Normal inspection remains available and lists exactly what is missing.
+- **Decision:** preserve the concurrent `54954ab` update while combining this batch. **Why:** another session added a UI analyzer negative control and submission feedback during the full test run. **Cost:** reconcile the shared notes and verify the updated UI tool separately. Its generated hazard fixtures must be labelled and deleted after analysis, and analyzer errors must not count as successful refusals.

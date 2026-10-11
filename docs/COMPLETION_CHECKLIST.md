@@ -158,6 +158,11 @@ the saved GitHub API network setting; Git source synchronization works.
 
 ## Still open
 
+- [ ] Review the still-drop finding reported in the other Linux environment
+  with ffmpeg 6.1.1. The Mac follow-up in [STATUS.md](STATUS.md) calls for checking
+  each hold near its start, middle and end, recording the encoder version and
+  regenerating affected Harbor verification with the working Mac toolchain.
+  Passing cloud fixtures alone do not close this native evidence item.
 - [ ] Rebuild and install the current polished source on the Mac's Vega Virtual
   Device. Check D-pad focus and return navigation, full-page scrolling, PIN
   setup and correction, saved settings, title playback, holds, audio and captions.
