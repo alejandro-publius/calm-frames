@@ -2289,3 +2289,7 @@ device yet.
 ### 2026-10-11: confirmed entrant name and country
 
 - **Decision:** record Alex Velazquez and United States (USA) in the submission draft and completion checklist. **Why:** Alex supplied these values in response to the public entrant name and country question. **Cost:** none. This does not confirm eligibility, contact email or the upstream contribution's author identity, and does not submit or publish the entry.
+
+### 2026-10-11: finish the viewing journey with public design references
+
+- **Decision:** apply hierarchy and state-handling principles from OpenAI's public Apps SDK UI while retaining the approved TV identity. Give Harbor a shorter, truthful browse synopsis, reserve the parent page's saving space, and let setup return to earlier choices without saving or asking for the PIN again. **Why:** the recent disclosure expanded the library hero, saving moved the parent settings, and setup offered no way to revise a choice before finishing. **Cost:** another native build and review are required before recording; no new dependency, cloud deployment or artwork was added. The references and acceptance work are in `docs/design/SEAMLESS_REVIEW.md`.

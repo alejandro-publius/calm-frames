@@ -404,18 +404,22 @@ const ParentAreaScreen = ({
       style={styles.screen}
       contentContainerStyle={styles.content}>
       <View style={styles.header}>
-        <Text style={styles.title} accessibilityRole="header">
-          {PARENTAL_CONTROLS_TITLE}
-        </Text>
-        <Text style={styles.lead}>{PARENTAL_CONTROLS_LEAD}</Text>
-        {saving ? (
-          <Text
-            style={styles.saving}
-            accessibilityLiveRegion="polite"
-            testID={`${testID}-saving`}>
-            {SAVING_CHANGES}
+        <View style={styles.headerTitleRow}>
+          <Text style={[styles.title, styles.headerTitle]} accessibilityRole="header">
+            {PARENTAL_CONTROLS_TITLE}
           </Text>
-        ) : null}
+          <View style={styles.savingSlot} testID={`${testID}-saving-slot`}>
+            {saving ? (
+              <Text
+                style={styles.saving}
+                accessibilityLiveRegion="polite"
+                testID={`${testID}-saving`}>
+                {SAVING_CHANGES}
+              </Text>
+            ) : null}
+          </View>
+        </View>
+        <Text style={styles.lead}>{PARENTAL_CONTROLS_LEAD}</Text>
       </View>
 
       {family && onFamilyChange ? (
@@ -815,6 +819,8 @@ const styles = StyleSheet.create({
     paddingBottom: scale(CALM_SPACE.SAFE_Y),
   },
   header: { marginBottom: scale(GROUP_GAP) },
+  headerTitleRow: { flexDirection: 'row', alignItems: 'center', gap: scale(CALM_SPACE.BLOCK) },
+  headerTitle: { flex: 1 },
   title: {
     ...CALM_TEXT.screen,
     color: CALM_COLORS.TEXT,
@@ -828,8 +834,10 @@ const styles = StyleSheet.create({
   saving: {
     ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT,
-    marginTop: scale(CALM_SPACE.ROW),
+    textAlign: 'right',
   },
+  // Reserve the status beside the title so saving never moves the settings.
+  savingSlot: { width: scale(400), height: scale(84), justifyContent: 'center' },
   /** The locked screen: words on the left, the keypad on the right. */
   columns: { flexDirection: 'row', alignItems: 'flex-start' },
   aside: {

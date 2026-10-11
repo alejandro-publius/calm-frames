@@ -164,6 +164,53 @@ describe('the first run', () => {
     expect(onDone).not.toHaveBeenCalled();
   });
 
+  it('revises room and preset choices without repeating the PIN or saving early', () => {
+    const onDone = jest.fn<void, [FirstRunResult]>();
+    const newSalt = jest.fn(() => 'a-fresh-salt');
+    render(<FirstRunScreen onDone={onDone} newSalt={newSalt} rounds={ROUNDS} />);
+    type('2468');
+    type('2468');
+    fireEvent.press(screen.getByTestId('first-run-preset-broadcast'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    fireEvent.press(screen.getByTestId('first-run-tv-65'));
+    fireEvent.press(screen.getByTestId('first-run-seat-72'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+
+    fireEvent.press(screen.getByLabelText('Back to TV and seating'));
+    expect(screen.getByTestId('first-run-tv-65').props.accessibilityState.checked).toBe(true);
+    expect(screen.getByTestId('first-run-seat-72').props.accessibilityState.checked).toBe(true);
+    expect(screen.getByTestId('first-run-tv-65').props.hasTVPreferredFocus).toBe(true);
+    fireEvent.press(screen.getByTestId('first-run-tv-85'));
+    fireEvent.press(screen.getByTestId('first-run-seat-48'));
+
+    fireEvent.press(screen.getByLabelText('Back to viewing preset'));
+    expect(screen.getByTestId('first-run-preset-broadcast').props.accessibilityState.checked).toBe(true);
+    expect(screen.getByTestId('first-run-preset-broadcast').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.queryByTestId('first-run-back')).toBeNull();
+    fireEvent.press(screen.getByTestId('first-run-preset-extra-cautious'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    expect(screen.getByTestId('first-run-tv-85').props.accessibilityState.checked).toBe(true);
+    expect(screen.getByTestId('first-run-seat-48').props.accessibilityState.checked).toBe(true);
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    expect(screen.getByTestId('first-run-review-preset').props.children).toBe('Extra cautious');
+    expect(screen.getByTestId('first-run-review-room').props.children).toBe(
+      '85 inch television, seats about 4 feet away',
+    );
+    expect(onDone).not.toHaveBeenCalled();
+    expect(newSalt).not.toHaveBeenCalled();
+
+    fireEvent.press(screen.getByTestId('first-run-done'));
+    expect(onDone).toHaveBeenCalledTimes(1);
+    expect(newSalt).toHaveBeenCalledTimes(1);
+    const result = onDone.mock.calls[0][0];
+    expect(result.settings).toEqual({
+      preset: 'extra-cautious',
+      tvDiagonalIn: 85,
+      seatDistanceIn: 48,
+    });
+    expect(attemptPin(result.gate, '2468', 0).ok).toBe(true);
+  });
+
   it('says what the room setting can and cannot do before asking for it', () => {
     renderFirstRun();
     type('5555');

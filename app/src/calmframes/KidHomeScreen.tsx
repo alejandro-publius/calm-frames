@@ -158,7 +158,7 @@ const KidHomeScreen = ({
               <View style={styles.heroCopy}>
                 <Text style={styles.eyebrow}>{feature.kind}</Text>
                 <Text style={styles.featureTitle}>{feature.name}</Text>
-                <Text style={styles.description}>{feature.description}</Text>
+                <Text style={styles.description}>{feature.browseSynopsis ?? feature.description}</Text>
                 <View style={styles.actions}>
                   <CalmButton primary testID={`${testID}-watch`} label={feature.action} accessibilityLabel={`${feature.action}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={!returnFocusId && !saving} onPress={() => (onPlay ?? onOpen)(featured)} />

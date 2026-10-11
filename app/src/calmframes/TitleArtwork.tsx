@@ -14,6 +14,8 @@ interface TitlePresentation {
   kind?: string;
   action: string;
   description: string;
+  /** Short introduction for browsing; details keep the full description. */
+  browseSynopsis?: string;
   art?: 'harbor' | 'gradient';
 }
 
@@ -24,6 +26,7 @@ export function titlePresentation(title: CatalogTitle): TitlePresentation {
   }
   if (concernsPackagedLibrary(title) && title.title === 'Harbor story (prepared locally)') {
     return { name: 'Harbor', kind: 'Checked story', action: 'Watch now',
+      browseSynopsis: 'An original demo film about a small boat finding its way home through a quiet harbor.',
       description: 'A small boat finds its way home through a quiet harbor. Our own demo film, prepared and checked the way a real title is, with no practice holds.', art: 'harbor' };
   }
   if (title.id === OFFLINE_TITLE_ID) {

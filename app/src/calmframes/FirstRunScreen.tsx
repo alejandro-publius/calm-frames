@@ -222,6 +222,11 @@ const FirstRunScreen = ({
     });
   };
 
+  const moveToStep = (next: 'preset' | 'room' | 'explainer') => {
+    setFocusedRow(null);
+    setStep(next);
+  };
+
   const header = (
     <View style={styles.header}>
       <View style={styles.brandRow}>
@@ -290,7 +295,7 @@ const FirstRunScreen = ({
           accessibilityRole="radiogroup"
           accessibilityLabel={STEP_TITLES.preset}
           aria-label={STEP_TITLES.preset}>
-          {PRESET_NAMES.map((name: PresetName, index) => {
+          {PRESET_NAMES.map((name: PresetName) => {
             const chosen = settings.preset === name;
             const key = `preset-${name}`;
             return (
@@ -303,7 +308,7 @@ const FirstRunScreen = ({
                 accessibilityState={{ checked: chosen, selected: chosen }}
                 accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
                 activeOpacity={1}
-                hasTVPreferredFocus={index === 0}
+                hasTVPreferredFocus={chosen}
                 onFocus={() => setFocusedRow(key)}
                 onBlur={() => setFocusedRow(null)}
                 onPress={() => setSettings({ ...settings, preset: name })}
@@ -329,7 +334,7 @@ const FirstRunScreen = ({
           <CalmButton
             testID={`${testID}-next`}
             label="Next"
-            onPress={() => setStep('room')}
+            onPress={() => moveToStep('room')}
           />
         </View>
       </ScrollView>
@@ -353,7 +358,7 @@ const FirstRunScreen = ({
           accessibilityRole="radiogroup"
           accessibilityLabel={TV_SIZE_TITLE}
           aria-label={TV_SIZE_TITLE}>
-          {TV_DIAGONAL_CHOICES_IN.map((inches, index) => {
+          {TV_DIAGONAL_CHOICES_IN.map((inches) => {
             const chosen = settings.tvDiagonalIn === inches;
             const key = `tv-${inches}`;
             return (
@@ -364,7 +369,7 @@ const FirstRunScreen = ({
                 accessibilityState={{ checked: chosen, selected: chosen }}
                 accessibilityLabel={`${inches} inch television${chosen ? ', chosen' : ''}`}
                 activeOpacity={1}
-                hasTVPreferredFocus={index === 0}
+                hasTVPreferredFocus={chosen}
                 onFocus={() => setFocusedRow(key)}
                 onBlur={() => setFocusedRow(null)}
                 onPress={() => setSettings({ ...settings, tvDiagonalIn: inches })}
@@ -429,9 +434,16 @@ const FirstRunScreen = ({
 
         <View style={styles.buttons}>
           <CalmButton
+            quiet
+            testID={`${testID}-back`}
+            label="Back"
+            accessibilityLabel="Back to viewing preset"
+            onPress={() => moveToStep('preset')}
+          />
+          <CalmButton
             testID={`${testID}-next`}
             label="Next"
-            onPress={() => setStep('explainer')}
+            onPress={() => moveToStep('explainer')}
           />
         </View>
       </ScrollView>
@@ -471,6 +483,13 @@ const FirstRunScreen = ({
         under parental controls.
       </Text>
       <View style={styles.buttons}>
+        <CalmButton
+          quiet
+          testID={`${testID}-back`}
+          label="Back"
+          accessibilityLabel="Back to TV and seating"
+          onPress={() => moveToStep('room')}
+        />
         <CalmButton
           testID={`${testID}-done`}
           label="Open library"
@@ -656,6 +675,8 @@ const styles = StyleSheet.create({
   buttons: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    alignItems: 'center',
+    gap: scale(CALM_SPACE.ROW),
     marginTop: scale(CALM_SPACE.BLOCK),
   },
 });

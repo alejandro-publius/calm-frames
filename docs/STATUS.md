@@ -8,6 +8,24 @@ Alex confirmed the public entrant name as Alex Velazquez and country of residenc
 as United States (USA). Both are recorded in the submission draft. Eligibility,
 contact email and the upstream contribution's GitHub identity remain unconfirmed.
 
+### Viewing-experience refinement
+
+The library has a shorter synopsis that keeps Harbor's demo-film identity;
+details retain the full disclosure. Parent saving feedback occupies a reserved
+header space, and setup now lets a parent revise room and preset choices without
+losing the confirmed PIN or saving early. The visual identity and playback
+checks stay intact. [SEAMLESS_REVIEW.md](design/SEAMLESS_REVIEW.md) records the
+public OpenAI UI references and the native acceptance work. The updated source
+still needs the Mac rebuild and observations in [MAC_FINISH.md](MAC_FINISH.md).
+
+Cloud validation passed
+<!--n results/seamless_design_2026-10-11.json:validation.app.passed -->1074<!--/n-->
+app tests and
+<!--n results/seamless_design_2026-10-11.json:validation.python.passed -->1750<!--/n-->
+Python tests. TypeScript, scoped lint, UI checks and their rejection controls
+also pass. Source hashes, check scope and labelled browser layout proofs are
+recorded in `results/seamless_design_2026-10-11.json`.
+
 ### Shared handoff follow-up
 
 The cloud checkout received the other session's four commits through `e592d28`.

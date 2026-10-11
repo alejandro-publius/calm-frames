@@ -159,11 +159,17 @@ Record fresh observations for these journeys:
 1. Reach every library action with the D-pad; check focus, Back and return focus.
    Switch profiles and confirm focus remains visible while the choice is saved.
    Repeated presses during that save must not write another choice.
+   Check that Harbor's concise demo-film synopsis and the full library row fit
+   without clipping; its details still carry the preparation disclosure.
 2. Scroll the entire details, setup, parental controls and settings pages.
 3. Check incorrect PIN, Delete correction, successful unlock and relocking.
 4. Check fresh setup only in a preserved or separate test household; never erase
    existing user data to reach onboarding. Record any untested setup path.
+   Use Back from the review and room steps, confirm all selected choices remain,
+   and finish with the revised values without repeating the confirmed PIN.
 5. Change presets, room settings and chime; restart and verify persistence.
+   Confirm saving feedback stays beside the parent page title without moving
+   the settings or losing focus, and that it is announced politely.
 6. Play every offered compatible title; verify the stricter presets keep Harbor.
 7. Play both labelled Harbor practice holds with audible tone and English captions.
 8. Check caption Off, pause/resume, guarded seeks, Skip, loading Back and replay.

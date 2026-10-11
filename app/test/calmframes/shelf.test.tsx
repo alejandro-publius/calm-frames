@@ -24,6 +24,7 @@ import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import { OFFLINE_TITLE_ID } from '../../src/calmframes/offlineTitle';
 import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
+import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import {
   shelfLabel,
   shelfPoster,
@@ -139,6 +140,38 @@ describe('the words on the shelf', () => {
       .getByTestId(`kid-home-poster-${id}`)
       .findAll((node) => (node.type as string) === 'Text')
       .map((node) => node.props.children);
+
+  it('introduces Harbor as an original demo film while keeping preparation detail on its page', () => {
+    const prepared = shelf.find((entry) => entry.title.id === preparedId)!;
+    const onOpen = jest.fn();
+    const onPlay = jest.fn();
+    const home = render(<KidHomeScreen titles={shelf} onOpen={onOpen} onPlay={onPlay} />);
+    const synopsis = screen.getByText(/original demo film/i).props.children;
+    expect(synopsis).toMatch(/small boat/i);
+    fireEvent.press(screen.getByTestId('kid-home-more-info'));
+    expect(onOpen).toHaveBeenCalledWith(prepared);
+    fireEvent.press(screen.getByTestId('kid-home-watch'));
+    expect(onPlay).toHaveBeenCalledWith(prepared);
+    home.unmount();
+
+    render(<TitleDetailsScreen entry={prepared} onPlay={onPlay} />);
+    const fullDescription = screen.getByTestId('title-details-description').props.children;
+    expect(fullDescription).toMatch(/demo film/i);
+    expect(fullDescription).toMatch(/prepared and checked/i);
+    expect(fullDescription).toMatch(/no practice holds/i);
+    expect(synopsis.length).toBeLessThan(fullDescription.length);
+  });
+
+  it('retains the full practice-hold explanation when that demo leads the library', () => {
+    const onPlay = jest.fn();
+    render(<KidHomeScreen titles={[harbor]} onOpen={jest.fn()} onPlay={onPlay} />);
+    expect(screen.getByText(/holds are practice, not detected flashing/i)).toBeTruthy();
+    expect(screen.getByTestId(`kid-home-poster-qualifier-${BENIGN_STORY_ID}`).props.children)
+      .toMatch(/practice holds/i);
+    expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Watch demo/);
+    fireEvent.press(screen.getByTestId('kid-home-watch'));
+    expect(onPlay).toHaveBeenCalledWith(harbor);
+  });
 
   /**
    * Seen to fail with the full catalog title back on the first line and no

@@ -14,6 +14,12 @@ Review: [design/POLISH_REVIEW.md](design/POLISH_REVIEW.md).
 Cloud evidence: [`design_polish_2026-10-10.json`](../results/design_polish_2026-10-10.json).
 Native validation and refreshed demo assets remain open below.
 
+Latest refinement: [design/SEAMLESS_REVIEW.md](design/SEAMLESS_REVIEW.md), with
+browser layout proofs and check scope in
+[`seamless_design_2026-10-11.json`](../results/seamless_design_2026-10-11.json).
+This pass shortens browsing copy, keeps saving feedback stable and makes
+setup choices revisable before completion.
+
 The latest interaction pass keeps profile choices in the remote focus order
 while saving, separates notice actions from spoken announcements and includes
 all displayed licence conditions in spoken credits. These changes preserve the
@@ -163,6 +169,10 @@ the saved GitHub API network setting; Git source synchronization works.
 
 ## Still open
 
+- [ ] Review the current design refinements on Vega: the concise library
+  synopsis, stable parent saving feedback and setup Back controls. The source
+  changes and public design references are in
+  [SEAMLESS_REVIEW.md](design/SEAMLESS_REVIEW.md).
 - [ ] Review the still-drop finding reported in the other Linux environment
   with ffmpeg 6.1.1. The Mac follow-up in [STATUS.md](STATUS.md) calls for checking
   each hold near its start, middle and end, recording the encoder version and
