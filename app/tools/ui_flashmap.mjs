@@ -313,7 +313,9 @@ export async function negativeControl({
 async function main() {
   // A missing analyzer is not a threshold finding. Say so and exit 2, the
   // code flashmap itself uses for "could not tell", before anything is painted.
-  const probe = spawnSync(pythonCommand(), ['-c', 'import flashmap'], { cwd: repoRoot, encoding: 'utf8' });
+  // The checkout directory alone can satisfy `import flashmap` as a namespace.
+  // Import the real entry module to check that this interpreter can analyze.
+  const probe = spawnSync(pythonCommand(), ['-c', 'import flashmap.cli'], { cwd: repoRoot, encoding: 'utf8' });
   if (probe.error || probe.status !== 0) {
     console.error(
       `flashmap is not importable by ${pythonCommand()}. Install it first ` +

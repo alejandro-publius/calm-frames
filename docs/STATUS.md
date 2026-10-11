@@ -4,6 +4,22 @@ Updated Sun Oct 11, 2026.
 
 ## 0. Where things stand
 
+### Shared handoff follow-up
+
+The cloud checkout received the other session's four commits through `e592d28`.
+The example workflow and analyzer README now pin the commit that actually contains
+the action's self-install change; the previous pin still selected the unpublished
+PyPI version. The UI analyzer checks its real entry module, because importing the
+checkout's empty namespace did not establish that the analyzer was installed.
+The seek lint rule also covers bracket notation and playhead increments, with
+regressions against the app's actual ESLint configuration. It remains a syntax
+guard and does not follow aliases or dynamically computed property names.
+
+Validation is recorded in
+[`handoff_sync_2026-10-11.json`](../results/handoff_sync_2026-10-11.json).
+This follow-up does not supply a new native build, recording or hosted CI result.
+The Mac work and entrant/publication items in the completion checklist still apply.
+
 ### Current interaction and evidence pass
 
 The shared source was synchronized through `54954ab`. Profile choices now remain

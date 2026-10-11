@@ -1,10 +1,33 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { basename, dirname, join } from 'node:path';
 import { test } from 'node:test';
+import { fileURLToPath } from 'node:url';
 import { negativeControl } from './ui_flashmap.mjs';
+
+test('an uninstalled analyzer exits 2 before encoding, even when its namespace imports', (t) => {
+  const root = mkdtempSync(join(tmpdir(), 'ui-analyzer-preflight-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const python = join(root, 'python-without-packages');
+  writeFileSync(python, '#!/bin/sh\nexec python3 -S "$@"\n', { mode: 0o755 });
+  // A failed preflight must never reach an encoder, including when this test
+  // runs against the broken probe. The stub cannot create playable media.
+  writeFileSync(join(root, 'ffmpeg'), '#!/bin/sh\nexit 77\n', { mode: 0o755 });
+  const cwd = fileURLToPath(new URL('../../', import.meta.url));
+  const namespace = spawnSync(python, ['-c', 'import flashmap'], { cwd, encoding: 'utf8' });
+  assert.equal(namespace.status, 0, namespace.stderr);
+  const run = spawnSync(process.execPath,
+    [fileURLToPath(new URL('./ui_flashmap.mjs', import.meta.url)), '--negative-control'], {
+      cwd, encoding: 'utf8', timeout: 15000,
+      env: { ...process.env, PY: python, PATH: `${root}:${process.env.PATH}` },
+    });
+  assert.equal(run.status, 2, run.stderr);
+  assert.match(run.stderr, /flashmap is not importable/);
+  assert.match(run.stderr, /not a threshold failure/);
+});
 
 // These fixtures contain marker bytes, never encoded or playable hazard media.
 function fixture(t, change = () => {}) {

@@ -102,7 +102,7 @@ gets checked, and the job summary says which file broke which rule and where the
 measured.
 
 ```yaml
-- uses: alejandro-publius/calm-frames/flashmap@c4dbf0fb598eade433cfb3c1361b81b14d81af4e
+- uses: alejandro-publius/calm-frames/flashmap@1b088d17c53343025b2ca37cf7615e809709ba8b
   with:
     profile: wcag
 ```
