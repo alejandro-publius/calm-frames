@@ -94,6 +94,18 @@ jobs:
             echo "no Python tests yet"
           fi
 
+      - name: Rebuild the complete conformance report from its own rows
+        # README quotes results/conformance_current_report_2026-10-02.json.
+        # This rebuilds it from the frozen design and the saved measurement
+        # rows with the committed scorer, and fails on any byte that differs,
+        # so the headline cannot drift from what was measured.
+        run: |
+          python3 eval/conformance_current_report.py \
+            --design results/conformance_design.json \
+            --measurement results/conformance_current_full_2026-10-02.json \
+            --out /tmp/conformance_rebuilt.json
+          cmp /tmp/conformance_rebuilt.json results/conformance_current_report_2026-10-02.json
+          echo "the committed report is what the rows say"
   ui-flashmap:
     name: The app's own UI passes flashmap
     runs-on: ubuntu-latest
@@ -209,6 +221,11 @@ jobs:
           python-version-file: .python-version
       - name: Check every published number against results/
         run: python3 eval/readme_sync.py --check
+      - name: No dashes and none of the three words in what we wrote
+        # CLAUDE.md's style rule, held by a script rather than by a reader.
+        # Two dashes in a design brief sat on a green build for a day before
+        # a review found them, which is how this step came to exist.
+        run: python3 eval/style_check.py
       - name: Rebuild the lead time summary from its own events
         run: python3 eval/verify_gate1_archive.py
       - name: Recount the integration diff the README quotes

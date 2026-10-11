@@ -1,7 +1,7 @@
 """Fuzz playback on the Vega Virtual Device and ask whether a marker was ever showing.
 
 The property tests reason about the scheduler with a simulated player. This points the same
-question at a real one: while the player is genuinely inside a flagged span, is the picture
+question at a real one: while the player is really inside a flagged span, is the picture
 hidden, whatever is being done to it.
 
 What is done to it, all from the host so the app is the one that ships:
