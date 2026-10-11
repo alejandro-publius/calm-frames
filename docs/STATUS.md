@@ -1106,14 +1106,18 @@ four that are live right now:
 
 **Mine, in order, and none of it is waiting on you.**
 
-1. Act on whatever the remaining reviewers (engineering guarantees, docs
-   consistency, hackathon requirements) found that stands, and push.
-2. The third mock judge: both existing passes read clones from before phase 8.
+1. Done Oct 11: the review of the branch by eight readers, and what stood is
+   fixed and pushed (section 0).
+2. Done Oct 11, later: the third mock judge, four readers of a fresh clone at
+   e043d80 and one writer, `docs/MOCK_JUDGE_3.md`. What it found that a Linux
+   box could fix is in, listed in section 0 and in DECISIONS; its two FAILs,
+   the public video and the upstream pull request, are yours above.
 3. Done Oct 11: the negative control in `app/tools/ui_flashmap.mjs` (the
    scheduler tick gap was already instrumented, `worstTickGapMs` in
    `useCoverHarness.ts`, since Sep 17; the Sep 19 list had not noticed).
 4. More titles through verify. Only 7 of the 30 with a verdict prove anything
-   about covering, and that number only moves with footage that flashes.
+   about covering, and that number only moves with footage that flashes, which
+   is on the Mac and not here.
 
 ---
 

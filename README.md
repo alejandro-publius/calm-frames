@@ -567,7 +567,7 @@ cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx je
 .venv/bin/python eval/style_check.py            # no dashes, none of the three words
 ```
 
-`npm ci --ignore-scripts` skips the Shaka Player build, which the tests mock; a device package needs the full `npm install` with the JDK. Two pipeline tests compare a still drawn over a hold by PSNR and fail on ffmpeg 6.1.1 (docs/STATUS.md section 5).
+`npm ci --ignore-scripts` skips the Shaka Player build, which the tests mock; a device package needs the full `npm install` with the JDK. `make synth`, the offline CDK synthesis, also needs `pip install -r pipeline/infra/requirements.txt` in that `.venv`. Two pipeline tests compare a still drawn over a hold by PSNR and fail on ffmpeg 6.1.1 (docs/STATUS.md section 5).
 
 ## Limits
 
