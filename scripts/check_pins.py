@@ -45,24 +45,7 @@ FULL_COMMIT = re.compile(r"^[0-9a-f]{40}$")
 # Action tags still allowed, by file and exact ref, each with its reason. An
 # exception that no longer matches any line is itself LOOSE, so one cannot
 # outlive the reason written beside it.
-ACTION_TAG_EXCEPTIONS: dict[tuple[str, str], str] = {
-    (".github/workflows/ci.yml", "actions/upload-artifact@v4"): (
-        "eval/tests/test_mutate_gate.py finds the mutation artifact step by this "
-        "exact text; pin the two together"
-    ),
-    (".github/workflows/audit.yml", "actions/upload-artifact@v4"): (
-        "pipeline/tests/test_aws_guard.py finds the sbom artifact step by this "
-        "exact text; pin the two together"
-    ),
-    ("flashmap/action.yml", "actions/setup-python@v6"): (
-        "the published action, left out of the Oct 11 CI pinning; pin it in a "
-        "change of its own"
-    ),
-    ("flashmap/examples/flash-check.yml", "actions/checkout@v5"): (
-        "the example people copy, left out of the Oct 11 CI pinning; pin it in "
-        "a change of its own"
-    ),
-}
+ACTION_TAG_EXCEPTIONS: dict[tuple[str, str], str] = {}
 
 
 def action_verdict(

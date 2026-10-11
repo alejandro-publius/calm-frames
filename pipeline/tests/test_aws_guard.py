@@ -624,7 +624,7 @@ class TestTheBillsRecordThePinnedGenerators:
         assert f"scripts/sbom.py --check --keep {KEPT_BILLS}" in job, (
             "the sbom job does not tell scripts/sbom.py where to leave the fresh bills"
         )
-        retain = job.split("uses: actions/upload-artifact@v4", 1)
+        retain = job.split("uses: actions/upload-artifact@", 1)
         assert len(retain) == 2, "the sbom job has no artifact step"
         assert "if: failure()" in retain[0].rsplit("      - name:", 1)[1]
         assert f"path: {KEPT_BILLS}" in retain[1]

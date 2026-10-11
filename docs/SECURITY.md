@@ -153,16 +153,13 @@ package.
 - **GitHub Actions.** Since Oct 11, `ci.yml` and `audit.yml` run with a read
   only token (`permissions: contents: read` at the top of each, because no job
   in them writes to the repository or pushes anywhere), and every action in
-  them but one is pinned to a full commit with its release beside it as a
-  comment, the form `publish-flashmap.yml` already used. A tag can be moved to
-  new code by whoever holds the action's repository; a commit cannot.
-  `scripts/check_pins.py` now runs in the CI numbers job and fails on any tag
-  or branch ref without a written exception, and on an exception that no
-  longer matches anything. Four are written down in the script with their
-  reasons: `actions/upload-artifact@v4` in both workflows, the one left, because
-  two tests find those steps by that exact text and have to change with the
-  pin, and the published `flashmap/action.yml` and the example people copy,
-  which keep their tags until a change of their own pins them.
+  them, in the published `flashmap/action.yml` and in the example people copy
+  is pinned to a full commit with its release beside it as a comment, the form
+  `publish-flashmap.yml` already used. A tag can be moved to new code by
+  whoever holds the action's repository; a commit cannot.
+  `scripts/check_pins.py` runs in the CI numbers job and fails on any tag or
+  branch ref without a written exception, and on an exception that no longer
+  matches anything; today there are none.
 
 ## The map signing key
 

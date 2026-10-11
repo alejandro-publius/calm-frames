@@ -223,7 +223,7 @@ def test_ci_checks_the_baseline_and_keeps_separate_failure_diagnostics():
     mutation_step = hardening.split("      - name: The mutation gate\n", 1)[1]
     assert '--check --out .logs/mutation-ci.json' in mutation_step
     assert "continue-on-error" not in hardening
-    artifact = mutation_step.split("uses: actions/upload-artifact@v4", 1)
+    artifact = mutation_step.split("uses: actions/upload-artifact@", 1)
     assert len(artifact) == 2
     assert "if: always()" in artifact[0].rsplit("      - name:", 1)[1]
     assert "path: .logs/mutation-ci.json" in artifact[1]

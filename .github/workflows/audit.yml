@@ -113,7 +113,7 @@ jobs:
         # for the tool entries and component counts on both sides. Fourteen
         # days covers two of the Monday scheduled runs.
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: sbom-check-${{ github.run_attempt }}
           path: .logs/sbom-check
