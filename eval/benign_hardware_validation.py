@@ -17,8 +17,8 @@ import json
 import re
 import stat
 import subprocess
-from threading import Timer
 from pathlib import Path
+from threading import Timer
 
 REPO = Path(__file__).resolve().parent.parent
 PACKAGE_ID = "io.github.alejandropublius.calmframes"

@@ -18,14 +18,12 @@ from pathlib import Path
 from statistics import fmean, pstdev
 from typing import Sequence
 
-from . import PipelineError
-from . import ffmpegtool
+from . import PipelineError, ffmpegtool
 from .hideplan import (
     DEFAULT_CALM_MARGIN_MS,
     CoverInterval,
     calm_ranges,
     covered_ranges,
-    is_calm,
     may_be_sampled,
     nearest_calm_time_ms,
     nearest_covered_time_ms,

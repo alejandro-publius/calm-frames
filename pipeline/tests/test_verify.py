@@ -17,7 +17,7 @@ import pytest
 from pipeline import verify
 from pipeline.catalog import STATUS_FAILED, kid_mode_titles, read_entry
 from pipeline.flashmap_adapter import FlashmapAdapter, parse_map
-from pipeline.hideplan import CoverInterval, HidePlan
+from pipeline.hideplan import CoverInterval
 from pipeline.ingest import IngestOptions, ingest_title
 from pipeline.render import still_is_flat
 from pipeline.verify import (
@@ -26,9 +26,9 @@ from pipeline.verify import (
     OUTCOME_NO_FLAGGED_SEGMENTS,
     apply_to_catalog,
     compare_rendition_to_source,
+    verify_title,
 )
 from pipeline.verify import main as verify_main
-from pipeline.verify import verify_title
 
 from .clips import make_calm_clip
 from .conftest import needs_ffmpeg

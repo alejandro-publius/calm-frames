@@ -93,6 +93,17 @@ test-hook-package: ## pack and check a clean offline hook consumer with current 
 	cd $(REPO) && $(NODE_ENV) && npm --prefix hook run test:package
 	cd $(REPO) && $(NODE_ENV) && npm --prefix hook run check:package
 
+# ruff and mypy come from flashmap's dev extra, pinned there. Both run from the
+# repository root: ruff reads ruff.toml there, and mypy keeps its cache there
+# rather than inside flashmap/, which the ingest image copies whole.
+.PHONY: lint-py typecheck-py
+
+lint-py: ## ruff over the Python code, configured by ruff.toml, the same command CI runs
+	cd $(REPO) && $(PY) -m ruff check .
+
+typecheck-py: ## mypy over the flashmap package, strict, the same command CI runs
+	cd $(REPO) && $(PY) -m mypy --config-file flashmap/pyproject.toml
+
 local-library: ## prepare a verified local title, using LOCAL_LIBRARY_ARGS (no AWS)
 	cd $(REPO) && $(PY) -m pipeline.local_library $(LOCAL_LIBRARY_ARGS)
 
@@ -103,6 +114,7 @@ ci: ## everything CI runs, in CI's order, before you push
 	cd $(REPO)/app && $(NODE_ENV) && npm run typecheck
 	cd $(REPO)/app && $(NODE_ENV) && npx eslint src test --ext .ts,.tsx
 	$(MAKE) test test-eval test-hook-package
+	$(MAKE) lint-py typecheck-py
 	$(MAKE) scan
 	$(PY) eval/readme_sync.py --check
 	$(PY) eval/style_check.py

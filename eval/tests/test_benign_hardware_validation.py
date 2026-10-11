@@ -8,7 +8,6 @@ import io
 import json
 import subprocess
 import tarfile
-from pathlib import Path
 
 import pytest
 

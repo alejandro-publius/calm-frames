@@ -2,9 +2,9 @@
 import hashlib
 import importlib.util
 import json
-from pathlib import Path
 import subprocess
 import zipfile
+from pathlib import Path
 
 import pytest
 

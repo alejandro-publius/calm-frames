@@ -12,14 +12,19 @@ import os
 import shlex
 import subprocess
 import sys
-from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
 from pipeline import PipelineError
 from pipeline import local_library as library
-from pipeline.catalog import CatalogEntry, RenditionEntry, STATUS_VERIFIED, update_index, write_entry
+from pipeline.catalog import (
+    STATUS_VERIFIED,
+    CatalogEntry,
+    RenditionEntry,
+    update_index,
+    write_entry,
+)
 from pipeline.hashing import sha256_file
 from pipeline.ingest import IngestResult
 from pipeline.layout import TitleLayout

@@ -27,7 +27,6 @@ from __future__ import annotations
 
 import json
 import re
-import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -199,7 +198,7 @@ def check_node(findings: list[tuple[str, str, str]]) -> None:
     data = json.loads(path.read_text())
     ranged = 0
     for section in ("dependencies", "devDependencies"):
-        for name, spec in (data.get(section) or {}).items():
+        for spec in (data.get(section) or {}).values():
             if spec[:1] in "^~><" or spec == "*":
                 ranged += 1
     where = str(path.relative_to(REPO))

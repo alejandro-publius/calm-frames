@@ -40,8 +40,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Sequence
 
-from . import PipelineError
-from . import ffmpegtool
+from . import PipelineError, ffmpegtool
 from .hideplan import DIM, DIM_MAX_LUMINANCE, OPAQUE, CoverInterval, HidePlan, cover_mode
 from .probe import VideoProbe
 from .sceneholds import SceneHold

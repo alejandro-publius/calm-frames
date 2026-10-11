@@ -11,9 +11,9 @@ import base64
 import json
 import math
 import re
-from tempfile import TemporaryDirectory
 from dataclasses import dataclass
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from typing import Sequence
 
 from . import PipelineError, ffmpegtool

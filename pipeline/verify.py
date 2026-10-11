@@ -54,16 +54,17 @@ from .catalog import (
     update_index,
     write_entry,
 )
-from .flashmap_adapter import PATTERN, FlashMapDoc, FlashmapAdapter, MapFormatError, load_map
+from .flashmap_adapter import PATTERN, FlashmapAdapter, FlashMapDoc, MapFormatError, load_map
 from .hashing import sha256_file
 from .hideplan import (
     APP_PLAYBACK_MAPS,
     APP_PLAYBACK_RECIPE,
     DEFAULT_CALM_MARGIN_MS,
     DEFAULT_GUARD_BAND_MS,
+    CoverInterval,
     HidePlan,
-    build_cover_intervals,
     build_app_playback_plan,
+    build_cover_intervals,
     is_calm,
     may_be_sampled,
     union_intervals,

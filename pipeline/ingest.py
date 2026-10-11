@@ -44,9 +44,9 @@ from .catalog import (
     STATUS_PENDING,
     CatalogEntry,
     RenditionEntry,
+    read_entry,
     update_index,
     write_entry,
-    read_entry,
 )
 from .ffmpegtool import require_tools
 from .flashmap_adapter import FlashmapAdapter, iter_presets, tail_to_hold_ms
@@ -58,8 +58,8 @@ from .hideplan import (
     DEFAULT_GUARD_BAND_MS,
     DEFAULT_MIN_COVER_MS,
     HidePlan,
-    build_hide_plan,
     build_app_playback_plan,
+    build_hide_plan,
     total_covered_ms,
     union_intervals,
 )
@@ -88,7 +88,6 @@ from .render import (
     render_cover_model,
     render_safe_master,
 )
-from .state import Ledger
 from .sceneholds import (
     SCENE_HOLD_VERSION,
     build_scene_holds,
@@ -96,6 +95,7 @@ from .sceneholds import (
     scene_identity,
     scene_payload,
 )
+from .state import Ledger
 from .verify import VerifyReport, apply_to_catalog, verify_title, write_report
 
 
@@ -430,7 +430,7 @@ def ingest_title(
                     union=union, probe=probe, margin_ms=options.calm_margin_ms,
                     adapter=adapter,
                 )
-                scene_outputs.extend(image.path for image in images)
+                scene_outputs.extend(image.path for image in images)  # noqa: B023 - steps.run calls it before the loop moves on
                 return {"holds": len(images)}
 
             steps.run(
@@ -453,7 +453,7 @@ def ingest_title(
                 x264_preset=options.x264_preset,
                 segment_seconds=options.segment_seconds,
                 pad_tail_ms=tail_to_hold_ms(layout.map_path(preset)),
-                scene_holds=scene_images,
+                scene_holds=scene_images,  # noqa: B023 - steps.run calls it before the loop moves on
             )
             hls = package_hls(
                 layout.safe_master(preset),
@@ -552,7 +552,7 @@ def ingest_title(
                     indent=2,
                 )
             )
-            poster_outputs.extend(poster.path for poster in posters)
+            poster_outputs.extend(poster.path for poster in posters)  # noqa: B023 - steps.run calls it before the loop moves on
             return {"posters": len(posters)}
 
         steps.run(
@@ -582,12 +582,12 @@ def ingest_title(
                     f"the {preset} map was analyzed with a signing key but carries "
                     "no signature"
                 )
-            if scene_images is not None:
+            if scene_images is not None:  # noqa: B023 - steps.run calls it before the loop moves on
                 from .registry import load_private_key, sign_document, write_registry
 
                 # Segments and profile thresholds are not edited. The new image
                 # payload joins the existing canonical Ed25519 signature.
-                document = dict(doc.raw, scene_holds=scene_payload(scene_images))
+                document = dict(doc.raw, scene_holds=scene_payload(scene_images))  # noqa: B023 - steps.run calls it before the loop moves on
                 write_registry(sign_document(document, load_private_key(options.key)),
                                layout.map_path(preset))
             elif "scene_holds" in doc.raw:
@@ -616,7 +616,7 @@ def ingest_title(
                 plan=plan,
                 out_path=layout.cover_model_path(preset),
                 probe=probe,
-                scene_holds=scene_images,
+                scene_holds=scene_images,  # noqa: B023 - steps.run calls it before the loop moves on
             )
             return result.notes
 

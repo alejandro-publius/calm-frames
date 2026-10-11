@@ -5,13 +5,13 @@ temporary file is deleted by its job. The truth generator stays independent of
 flashmap: neither this decoder nor the renderer imports the detector.
 """
 
-from pathlib import Path
 import tempfile
+from pathlib import Path
 
 import av
-from av.video.reformatter import VideoReformatter
 import numpy as np
 import pytest
+from av.video.reformatter import VideoReformatter
 
 from conformance.render import decode_mean_luminance, render_clip
 from conformance.spec import load_spec

@@ -19,3 +19,30 @@ repos:
         name: scan the staged changes for secrets
         # gitleaks finds .gitleaks.toml at the root of the repository it scans,
         # so the allowlist for generated and third party files applies here too.
+
+  # The Python linter and type checker, at the releases flashmap/pyproject.toml's
+  # dev extra pins for CI. When one moves, move it here and there in the same
+  # commit. Both read the config CI reads: ruff.toml at the root, and
+  # [tool.mypy] in flashmap/pyproject.toml.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.0
+    hooks:
+      - id: ruff-check
+        name: lint the staged Python with ruff
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v2.4.0
+    hooks:
+      - id: mypy
+        name: type check the flashmap package
+        # The whole package, as CI checks it, rather than only the staged files,
+        # because a change in one module can break the types of another.
+        args: ["--config-file", "flashmap/pyproject.toml"]
+        pass_filenames: false
+        files: ^flashmap/(src/|pyproject\.toml$)
+        # mypy runs in its own environment here, so it needs flashmap's runtime
+        # dependencies to read their types, at the versions flashmap pins.
+        additional_dependencies:
+          - av==18.1.0
+          - numpy==2.5.3
+          - cryptography==50.0.1

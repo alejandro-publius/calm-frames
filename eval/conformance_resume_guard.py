@@ -10,14 +10,14 @@ from __future__ import annotations
 
 import argparse
 import json
-from pathlib import Path
 import sys
+from pathlib import Path
 
 EVAL = Path(__file__).resolve().parent
 if str(EVAL) not in sys.path:
     sys.path.insert(0, str(EVAL))
 
-from conformance.render import ENCODING_PROTOCOL
+from conformance.render import ENCODING_PROTOCOL  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
 ARCHIVE = REPO / "results/conformance_raw.jsonl"

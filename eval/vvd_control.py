@@ -26,7 +26,6 @@ import glob
 import json
 import socket
 import struct
-import subprocess
 import sys
 import time
 import zlib

@@ -21,7 +21,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 from pipeline.ffmpegtool import run_ffmpeg
 from pipeline.local_library import prepare_local_title
-from pipeline.packaged_library import export_packaged_library, check_packaged_library
+from pipeline.packaged_library import check_packaged_library, export_packaged_library
 
 REPO = Path(__file__).resolve().parent.parent
 CAPTIONS = """WEBVTT

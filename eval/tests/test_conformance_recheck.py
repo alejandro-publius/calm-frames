@@ -1,8 +1,8 @@
 """Evidence accounting contracts; fabricated rows are never detector measurements."""
 
-from concurrent.futures import Future
 import copy
 import json
+from concurrent.futures import Future
 
 import pytest
 

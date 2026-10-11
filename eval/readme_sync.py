@@ -125,7 +125,7 @@ def main() -> int:
             source = match.group("source")
             dotted = match.group("path")
             shown = match.group("value")
-            relative = file.relative_to(REPO)
+            relative = file.relative_to(REPO)  # noqa: B023 - MARKER.sub calls this in the same pass
 
             if source not in cache:
                 source_path = REPO / source

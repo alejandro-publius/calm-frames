@@ -169,7 +169,7 @@ def test_the_two_red_thresholds_overlap_against_a_neutral_background():
     colour whose red ratio sits between about 0.45 and 0.79 cannot get 0.2 away in the 1976 UCS
     diagram at all, so for gray to colour flashing the ratio only bites together with the
     distance. A clip test cannot separate the two. The boundary tests above do."""
-    from flashmap.color import red_ratio, relative_luminance, srgb_to_linear
+    from flashmap.color import red_ratio, srgb_to_linear
 
     def state(rgb):
         linear = srgb_to_linear(np.array(rgb, dtype=np.float64)[None, None, :] / 255.0)

@@ -28,7 +28,6 @@ import json
 import re
 import shutil
 import subprocess
-import sys
 import tomllib
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -328,7 +327,7 @@ def update_exception_ids(report: dict) -> None:
             re.DOTALL,
         )
         if pattern.search(text):
-            text = pattern.sub(lambda m: m.group(1) + block + "\n", text, count=1)
+            text = pattern.sub(lambda m: m.group(1) + block + "\n", text, count=1)  # noqa: B023 - sub runs it now
     EXCEPTIONS.write_text(text)
 
 

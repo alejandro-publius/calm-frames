@@ -2,14 +2,14 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import os
-from pathlib import Path
 import shutil
 import subprocess
 import sys
 import tarfile
-import io
+from pathlib import Path
 
 import pytest
 

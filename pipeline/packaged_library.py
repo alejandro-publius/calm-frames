@@ -36,7 +36,7 @@ from .hideplan import APP_PLAYBACK_TIMING, HidePlan, build_app_playback_plan
 from .layout import TitleLayout
 from .probe import probe_video
 from .registry import _check_map_signature, load_public_key
-from .verify import START_OFFSET_LIMIT_MS, OUTCOMES, VerifyReport
+from .verify import OUTCOMES, START_OFFSET_LIMIT_MS, VerifyReport
 
 VERSION = 1
 ASSET_ROOT = "assets/raw/prepared-library"

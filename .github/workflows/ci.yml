@@ -130,6 +130,12 @@ jobs:
           else
             echo "no Python tests yet"
           fi
+      - name: Lint Python
+        # ruff with ruff.toml at the root, installed by flashmap[dev] above.
+        run: python -m ruff check .
+      - name: Typecheck flashmap
+        # The package ships py.typed. Strict, from flashmap/pyproject.toml.
+        run: python -m mypy --config-file flashmap/pyproject.toml
 
       - name: Rebuild the complete conformance report from its own rows
         # README quotes results/conformance_current_report_2026-10-02.json.

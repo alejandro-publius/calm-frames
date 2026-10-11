@@ -1081,8 +1081,10 @@ def _load_map_file(path: Path) -> dict[str, Any]:
 
 def _profile_name(document: dict[str, Any], fallback: str) -> str:
     profile = document.get("profile")
-    if isinstance(profile, dict) and isinstance(profile.get("name"), str):
-        return profile["name"]
+    if isinstance(profile, dict):
+        name = profile.get("name")
+        if isinstance(name, str):
+            return name
     return fallback
 
 

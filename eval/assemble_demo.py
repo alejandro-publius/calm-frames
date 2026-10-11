@@ -7,16 +7,16 @@ or that a package was built from the operator-supplied source commit.
 from __future__ import annotations
 
 import argparse
-from dataclasses import dataclass
 import hashlib
 import json
 import math
-from pathlib import Path
 import platform
 import re
 import subprocess
 import sys
 import textwrap
+from dataclasses import dataclass
+from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 

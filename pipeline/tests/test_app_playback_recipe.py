@@ -14,7 +14,9 @@ import pytest
 from pipeline import PipelineError
 from pipeline.flashmap_adapter import FlashmapAdapter, load_map, parse_map
 from pipeline.hideplan import (
-    APP_PLAYBACK_RECIPE, APP_PLAYBACK_TIMING, HidePlan,
+    APP_PLAYBACK_RECIPE,
+    APP_PLAYBACK_TIMING,
+    HidePlan,
     build_app_playback_plan,
 )
 from pipeline.ingest import IngestOptions, ingest_title
@@ -155,8 +157,8 @@ def test_verifier_rejects_changed_recipe_fields_and_unchecked_union_inputs(tmp_p
 def test_flagged_local_preparation_reaches_packaged_export_and_plan_tampering_fails(
     tmp_path, keypair,
 ):
-    from pipeline.packaged_library import export_packaged_library, check_packaged_library
     from pipeline.layout import TitleLayout
+    from pipeline.packaged_library import check_packaged_library, export_packaged_library
     private, public = keypair
     source = make_calm_clip(tmp_path / "sham-source.mp4", seconds=8, fps=10,
                             width=160, height=90, subtitles=True)

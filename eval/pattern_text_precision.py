@@ -97,13 +97,12 @@ def _heavy():
     import numpy as np  # noqa: PLW0603
 
     from conformance.pattern_spec import load_pattern_spec
-    from pattern_text_frames import HEIGHT, WIDTH, Frame, frames
-
     from flashmap import color as color_math
     from flashmap.decode import iter_frames, probe
     from flashmap.pattern import stripe_mask
     from flashmap.picture import detect_picture
     from flashmap.profiles import get_profile
+    from pattern_text_frames import HEIGHT, WIDTH, Frame, frames
 
 
 def metric_frame(frame: "Frame", work: Path) -> "np.ndarray":

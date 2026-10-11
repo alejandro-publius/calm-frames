@@ -14,8 +14,13 @@ from pipeline.flashmap_adapter import FlashmapAdapter, MapSegment
 from pipeline.hideplan import CoverInterval, HidePlan, build_cover_intervals, is_calm
 from pipeline.ingest import IngestOptions, ingest_title
 from pipeline.probe import probe_video
-from pipeline.registry import canonical_bytes, load_private_key, load_public_key
-from pipeline.registry import sign_document, write_registry
+from pipeline.registry import (
+    canonical_bytes,
+    load_private_key,
+    load_public_key,
+    sign_document,
+    write_registry,
+)
 from pipeline.render import cover_psnr, render_cover_model, render_safe_master
 from pipeline.sceneholds import (
     MAX_HOLDS,

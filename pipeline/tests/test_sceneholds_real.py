@@ -17,8 +17,8 @@ from typing import Sequence
 from pipeline.ffmpegtool import run_ffmpeg
 from pipeline.flashmap_adapter import (
     CommandResult,
-    FlashMapDoc,
     FlashmapAdapter,
+    FlashMapDoc,
     load_map,
 )
 from pipeline.ingest import IngestOptions, ingest_title

@@ -299,7 +299,7 @@ def build() -> dict:
 
     flagged_pool: list[dict] = []
     unflagged_pool: list[dict] = []
-    for name, row, duration in titles:
+    for name, _row, duration in titles:
         intervals = flags.get(title_key(name), {})
         for window in candidate_windows(intervals, duration):
             window.update(

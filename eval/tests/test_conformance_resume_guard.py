@@ -1,7 +1,6 @@
 """Protocol checks never generate video or modify archived measurements."""
 
 import json
-from pathlib import Path
 import shlex
 import subprocess
 import sys

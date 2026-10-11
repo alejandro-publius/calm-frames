@@ -15,18 +15,22 @@ import argparse
 import json
 import re
 import subprocess
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-import sys
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from eval.benign_hardware_validation import (
-    PACKAGE_ID, REPO, _serial, build_plan as physical_plan,
-    collect_inventory, inspect_package,
+    PACKAGE_ID,
+    REPO,
+    _serial,
+    collect_inventory,
+    inspect_package,
 )
+from eval.benign_hardware_validation import build_plan as physical_plan
 
 HARBOR_URI = "file:///pkg/assets/raw/benign-story/harbor.precovered.mp4"
 LOAD_MARKER = "[VideoHandler.ts] - loadStaticMediaPlayer - Loading static player with: "
