@@ -32,7 +32,7 @@ Use the actual story synopsis in the native app. The preview's generic Harbor wo
 
 For the scene-hold demo:
 
-> This version adds scheduled scene holds to Harbor so you can see how they work during playback.
+> This version adds practice holds to Harbor at set times so you can see how a hide works during playback. The holds are practice, not detected flashing.
 
 When explaining the example holds:
 

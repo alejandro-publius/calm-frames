@@ -52,7 +52,7 @@ Calm Frames
 A calmer way to watch
 ```
 
-A Fire TV accessibility prototype that checks prepared videos and preserves story context during scheduled scene holds.
+A Fire TV accessibility prototype that checks prepared videos and keeps the story going through every scheduled hide.
 
 ## 3. Description
 

@@ -10,7 +10,7 @@ Written Fri Oct 9, 2026, for Alex to send or post. Nothing here is sent by Claud
 
 ---
 
-Hi the hackathon manager,
+Hi,
 
 I am Alex, entering the Fire TV track with Calm Frames, a Vega app for families of children with photosensitive epilepsy. I have two questions about the mini challenges.
 
@@ -46,7 +46,7 @@ Alex
 ## 3. Before sending
 
 - **Which channel.** One is enough to start with. A forum answer is public, so docs/SUBMISSION.md can link it and other entrants with the same question see it; the hackathon manager answers forum topics as the Manager (topic 45310 is one). An email gets a private answer. If there is no answer in three days, try the other channel, and take whatever is still open to Office Hours on Oct 19.
-- **The address.** the address behind the "Email the hackathon manager" link on the overview page is the "Email the hackathon manager" link at the foot of the hackathon's overview page, checked against a copy of that page saved Oct 8. The forum shows the hackathon manager by name and role.
+- **The address.** The one behind the "Email the hackathon manager" link at the foot of the hackathon's overview page, checked against a copy of that page saved Oct 8. The forum shows the hackathon manager by name and role.
 - **The rule text.** Question 1 quotes the rules page, checked against a copy saved Oct 8. Open the live page before sending and check it still reads: "Any primary track project that incorporates AWS services (i.e. Amazon Bedrock, AgentCore, Strands SDK, Kiro Crew, SageMaker, etc.) with documented integrations."
 - **The stack.** Question 1 says the stack is deployed and that one calm test clip went through it. Check both are still true on the day you send it. If the Harbor story has gone through it by then, say that instead of the test clip.
 - **The pull request.** If it is open by then, change "We plan to open a pull request" to "We opened a pull request" and add its URL.
