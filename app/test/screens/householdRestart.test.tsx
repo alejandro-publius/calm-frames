@@ -198,6 +198,43 @@ describe('household setup across launches', () => {
     expect(attemptPin(stored.gate, '1357', NOW + LOCKOUT_MS).ok).toBe(true);
   });
 
+  it('keeps profile chips focusable while saving and ignores repeated choices', async () => {
+    const family = addProfile(newFamily(DEFAULT_SETTINGS, 'Robin'), 'Sam');
+    const storage = memoryStorage(JSON.stringify({ ...RECORD, family }));
+    let finish!: () => void;
+    const originalWrite = storage.setItem.getMockImplementation()!;
+    storage.setItem.mockImplementationOnce((_key, text) => new Promise<void>((resolve) => {
+      finish = () => { originalWrite(_key, text).then(resolve); };
+    }));
+    open(storage);
+    await screen.findByTestId('kid-mode-home');
+    fireEvent.press(screen.getByTestId('kid-mode-home-choose-profile'));
+    const chip = (id: string) => screen.getByTestId(`kid-mode-home-profiles-${id}`);
+    fireEvent(chip('profile-2'), 'focus');
+    fireEvent.press(chip('profile-2'));
+
+    // This checks the focus contract sent to the native view. Actual D-pad
+    // focus after a save remains part of the simulator check.
+    for (const id of ['profile-1', 'profile-2']) {
+      expect(chip(id).props.focusable).toBe(true);
+      expect(chip(id).props.accessibilityState.disabled).toBe(true);
+    }
+    fireEvent.press(chip('profile-2'));
+    fireEvent.press(chip('profile-1'));
+    expect(storage.setItem).toHaveBeenCalledTimes(1);
+    expect(JSON.parse(storage.read()!).family.activeProfileId).toBe('profile-1');
+
+    await act(async () => { finish(); });
+    expect(chip('profile-2').props.focusable).toBe(true);
+    expect(chip('profile-2').props.accessibilityState.checked).toBe(true);
+    expect(chip('profile-2').props.accessibilityState.disabled).not.toBe(true);
+    expect(JSON.parse(storage.read()!).family.activeProfileId).toBe('profile-2');
+
+    fireEvent.press(chip('profile-1'));
+    await waitFor(() => expect(chip('profile-1').props.accessibilityState.checked).toBe(true));
+    expect(storage.setItem).toHaveBeenCalledTimes(2);
+  });
+
   it('keeps the library closed on read failure and retries without creating a new PIN', async () => {
     const storage = memoryStorage(JSON.stringify(RECORD));
     storage.getItem.mockRejectedValueOnce(new Error('unavailable'));

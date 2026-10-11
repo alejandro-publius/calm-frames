@@ -11,6 +11,11 @@ const SHA = /^[0-9a-f]{64}$/;
 const ASSET = /^titles\/[0-9a-f]{64}\/(wcag|broadcast|extra-cautious)\.(mp4|json|vtt)$/;
 const MAX_BYTES = 64 * 1024 * 1024;
 const MAX_JSON = 16 * 1024 * 1024;
+const MAX_REPORT = 4 * 1024 * 1024;
+const PRESETS = ['wcag', 'broadcast', 'extra-cautious'];
+const CORE_CHECKS = ['map_hash', 'map_signature', 'plan_matches_map', 'safe_rendition_clean',
+  'rendition_matches_source', 'cover_proof', 'cover_model_clean', 'hls_rendition_clean', 'hls_timing_matches_master'];
+const OUTCOMES = ['no flagged segments', 'cover proven drawn', 'cover not proven'];
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 
 function requireThat(value, message) {
@@ -20,6 +25,69 @@ function requireThat(value, message) {
 function record(value) {
   requireThat(value && typeof value === 'object' && !Array.isArray(value), 'Invalid prepared metadata.');
   return value;
+}
+
+function exactKeys(value, keys) {
+  return Object.keys(value).length === keys.length && keys.every((key) => Object.hasOwn(value, key));
+}
+
+function verificationReference(title) {
+  record(title);
+  const value = record(title.verification);
+  requireThat(exactKeys(value, ['reportSha256', 'checkedInputsSha256', 'outcome']) &&
+    typeof value.reportSha256 === 'string' && SHA.test(value.reportSha256) &&
+    typeof value.checkedInputsSha256 === 'string' && SHA.test(value.checkedInputsSha256) &&
+    OUTCOMES.includes(value.outcome) && typeof title.sourceSha256 === 'string' && SHA.test(title.sourceSha256),
+  'Invalid prepared verification reference.');
+  return value;
+}
+
+function checkVerificationReport(raw, digest, titles) {
+  requireThat(raw.length <= MAX_REPORT && sha(raw) === digest,
+    'Verification report bytes differ from the recorded report hash.');
+  const text = raw.toString('utf8');
+  requireThat(!/-----BEGIN [A-Z ]*PRIVATE KEY-----/.test(text), 'A verification report must not contain a private key.');
+  // Python's historical VerifyReport writer permits infinite PSNR values.
+  // Rewrite only unquoted numeric tokens, retaining Infinity as a number.
+  // Quoted paths/details and the original hashed bytes remain untouched.
+  const compatible = text.replace(/"(?:\\.|[^"\\])*"|(?<=[\s[:,])(-?Infinity)(?=[\s,}\]])/g,
+    (token, infinite) => infinite ? (infinite.startsWith('-') ? '-1e999' : '1e999') : token);
+  const report = record(JSON.parse(compatible));
+  requireThat(exactKeys(report, ['sha256', 'source_path', 'presets', 'passed', 'outcome', 'started_at', 'finished_at', 'checks']) &&
+    report.passed === true && typeof report.source_path === 'string' && report.source_path.length > 0 &&
+    Array.isArray(report.presets) && report.presets.length === PRESETS.length &&
+    report.presets.every((preset, index) => preset === PRESETS[index]) &&
+    typeof report.started_at === 'number' && Number.isFinite(report.started_at) &&
+    typeof report.finished_at === 'number' && Number.isFinite(report.finished_at) &&
+    Array.isArray(report.checks) && report.checks.length > 0,
+  'The verification report is not a complete passing report.');
+  const names = [];
+  const flagged = [];
+  const drawn = new Set();
+  for (const item of report.checks) {
+    const check = record(item);
+    requireThat(exactKeys(check, ['name', 'passed', 'detail', 'data']) &&
+      typeof check.name === 'string' && check.name.length > 0 && check.passed === true &&
+      typeof check.detail === 'string', 'The verification report is not a complete passing report.');
+    record(check.data);
+    names.push(check.name);
+    if (check.name.startsWith('plan_matches_map:')) {
+      if (Object.hasOwn(check.data, 'stored')) {
+        requireThat(typeof check.data.stored === 'number' && Number.isFinite(check.data.stored),
+          'The verification report has an invalid plan measurement.');
+      }
+      if (check.data.stored > 0) flagged.push(check.name.slice('plan_matches_map:'.length));
+    }
+    if (check.name.startsWith('cover_actually_drawn:')) drawn.add(check.name.slice('cover_actually_drawn:'.length));
+  }
+  const required = ['source_hash', ...PRESETS.flatMap((preset) => CORE_CHECKS.map((name) => `${name}:${preset}`))];
+  requireThat(new Set(names).size === names.length && required.every((name) => names.includes(name)),
+    'The verification report is missing required unique checks.');
+  const outcome = flagged.length === 0 ? 'no flagged segments' :
+    flagged.every((preset) => drawn.has(preset)) ? 'cover proven drawn' : 'cover not proven';
+  requireThat(titles.every((title) => report.sha256 === title.sourceSha256 &&
+    report.outcome === verificationReference(title).outcome && outcome === report.outcome),
+  'The verification report source or outcome differs from its title.');
 }
 
 function compactJson(raw) {
@@ -38,7 +106,7 @@ function compactJson(raw) {
 }
 
 /** A reader is either a bounded regular file or a fixed archive member. */
-export function checkPreparedNamespace(names, read, expectedCatalogSha256) {
+export function checkPreparedNamespace(names, read, expectedCatalogSha256, { requireReports = false } = {}) {
   requireThat(new Set(names).size === names.length, 'Duplicate prepared package member.');
   const all = new Set(names);
   const allowed = new Set(['catalog.json', 'catalog.ts']);
@@ -76,7 +144,9 @@ export function checkPreparedNamespace(names, read, expectedCatalogSha256) {
   }
   const empty = catalog.version === 1 && Array.isArray(catalog.titles) &&
     catalog.titles.length === 0 && Object.keys(catalog).length === 2;
-  const bundles = [...new Set(names.filter((name) => name.includes('/')).map((name) => name.split('/')[0]))];
+  const bundles = [...new Set(names.filter((name) => name.includes('/') && !name.startsWith('reports/'))
+    .map((name) => name.split('/')[0]))];
+  const reportReferences = new Map();
   requireThat(!empty || bundles.length === 0, 'An empty catalog contains undisclosed media.');
   if (!empty) requireThat(SHA.test(catalog.bundleId) && bundles.includes(catalog.bundleId), 'Missing active prepared bundle.');
   for (const bundleId of bundles) {
@@ -93,6 +163,11 @@ export function checkPreparedNamespace(names, read, expectedCatalogSha256) {
     requireThat(body !== manifestText && sha(compactJson(body)) === bundleId,
       'Prepared manifest content does not match its immutable directory.');
     if (bundleId === catalog.bundleId) requireThat(manifestBytes.equals(catalogBytes), 'Active prepared manifest differs from catalog.');
+    for (const title of manifest.titles) {
+      const digest = verificationReference(title).reportSha256;
+      if (!reportReferences.has(digest)) reportReferences.set(digest, []);
+      reportReferences.get(digest).push(title);
+    }
     const files = record(manifest.files);
     requireThat(Object.keys(files).length > 0 && Object.keys(files).length <= 16 * 9,
       'Invalid prepared asset inventory.');
@@ -104,12 +179,24 @@ export function checkPreparedNamespace(names, read, expectedCatalogSha256) {
       requireThat(sha(bytes(member)) === digest, `Prepared asset changed: ${relative}`);
     }
   }
+  const presentReports = new Set();
+  for (const name of names.filter((value) => value.startsWith('reports/'))) {
+    const match = /^reports\/([0-9a-f]{64})\.json$/.exec(name);
+    requireThat(match && reportReferences.has(match[1]), 'An unreferenced verification report is present.');
+    const digest = match[1];
+    checkVerificationReport(bytes(name, MAX_REPORT), digest, reportReferences.get(digest));
+    allowed.add(name);
+    presentReports.add(digest);
+  }
+  const missing = [...reportReferences.keys()].filter((digest) => !presentReports.has(digest)).sort();
+  requireThat(!requireReports || missing.length === 0, `Original verification reports are missing: ${missing.join(', ')}`);
   requireThat(names.every((name) => allowed.has(name)) && names.length === allowed.size,
     'The prepared namespace contains missing or unreviewed files.');
-  return { titles: catalog.titles.length, bundles: bundles.length, bytes: total, catalogSha256 };
+  return { titles: catalog.titles.length, bundles: bundles.length, bytes: total, catalogSha256,
+    verification_reports: { required: reportReferences.size, present: presentReports.size, missing } };
 }
 
-export function checkPreparedDirectory(root = path.join(APP, PREFIX)) {
+export function checkPreparedDirectory(root = path.join(APP, PREFIX), options = {}) {
   requireThat(fs.realpathSync(root) === path.resolve(root), 'Prepared root must not be a symlink.');
   const names = [];
   let entries = 0;
@@ -133,10 +220,10 @@ export function checkPreparedDirectory(root = path.join(APP, PREFIX)) {
     const full = path.join(root, name);
     requireThat(fs.statSync(full).size <= limit, 'Prepared asset exceeds its byte limit.');
     return fs.readFileSync(full);
-  });
+  }, undefined, options);
 }
 
-export function checkPreparedPackage(packagePath, expectedCatalogSha256) {
+export function checkPreparedPackage(packagePath, expectedCatalogSha256, options = {}) {
   const tarOptions = { timeout: 30_000, env: { ...process.env, LC_ALL: 'C', LANG: 'C' } };
   const listing = execFileSync('tar', ['-tf', packagePath], { ...tarOptions, maxBuffer: 1024 * 1024 }).toString('utf8');
   const verbose = execFileSync('tar', ['-tvf', packagePath], { ...tarOptions, maxBuffer: 2 * 1024 * 1024 }).toString('utf8');
@@ -158,23 +245,28 @@ export function checkPreparedPackage(packagePath, expectedCatalogSha256) {
   }
   return checkPreparedNamespace(names, (name, limit) =>
     execFileSync('tar', ['-xOf', packagePath, PREFIX + name],
-      { ...tarOptions, maxBuffer: Math.max(4096, limit + 1) }), expectedCatalogSha256);
+      { ...tarOptions, maxBuffer: Math.max(4096, limit + 1) }), expectedCatalogSha256, options);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    const result = checkPreparedDirectory();
-    if (process.argv[2] === '--packages') {
-      const kind = process.argv[3]?.toLowerCase();
+    const args = process.argv.slice(2);
+    requireThat(args.filter((arg) => arg === '--require-reports').length <= 1, 'Choose --require-reports only once.');
+    const strict = { requireReports: args.includes('--require-reports') };
+    const options = args.filter((arg) => arg !== '--require-reports');
+    requireThat(options.length === 0 || options[0] === '--packages', 'Choose --packages and/or --require-reports.');
+    const result = checkPreparedDirectory(undefined, strict);
+    if (options[0] === '--packages') {
+      const kind = options[1]?.toLowerCase();
       requireThat(kind === 'debug' || kind === 'release', 'Choose Debug or Release packages.');
       const allArches = ['armv7', 'aarch64', 'x86_64'];
-      const options = process.argv.slice(4);
-      requireThat(options.length === 0 ||
-        (options.length === 2 && options[0] === '--arch' && allArches.includes(options[1])),
+      const target = options.slice(2);
+      requireThat(target.length === 0 ||
+        (target.length === 2 && target[0] === '--arch' && allArches.includes(target[1])),
       'Choose --arch armv7, aarch64 or x86_64, or omit it to check all packages.');
-      const arches = options.length ? [options[1]] : allArches;
+      const arches = target.length ? [target[1]] : allArches;
       for (const arch of arches) {
-        checkPreparedPackage(path.join(APP, `build/${arch}-${kind}/calm-frames-app_${arch}.vpkg`), result.catalogSha256);
+        checkPreparedPackage(path.join(APP, `build/${arch}-${kind}/calm-frames-app_${arch}.vpkg`), result.catalogSha256, strict);
       }
     }
     console.log(JSON.stringify({ prepared_library: 'checked', ...result }));

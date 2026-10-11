@@ -1,7 +1,9 @@
 """Export verified local receipts into an immutable library for a Vega package.
 
 The analyzed source hash and the delivered rendition hash are distinct. Only
-prepared MP4s, authenticated maps and extracted text captions are exported.
+prepared MP4s, authenticated maps, extracted text captions and the original
+verification report bytes are exported. Report attachments do not change the
+immutable media manifests or replace missing evidence with a new analysis.
 Nothing serves a network endpoint, opens a player or copies a signing key.
 
     python -m pipeline.packaged_library export --workdir build/library \
@@ -34,7 +36,7 @@ from .hideplan import APP_PLAYBACK_TIMING, HidePlan, build_app_playback_plan
 from .layout import TitleLayout
 from .probe import probe_video
 from .registry import _check_map_signature, load_public_key
-from .verify import START_OFFSET_LIMIT_MS
+from .verify import START_OFFSET_LIMIT_MS, OUTCOMES, VerifyReport
 
 VERSION = 1
 ASSET_ROOT = "assets/raw/prepared-library"
@@ -43,9 +45,158 @@ MAX_BUNDLE_BYTES = 64 * 1024 * 1024
 MAX_MAP_BYTES = 2 * 1024 * 1024 + 256 * 1024
 MAX_CAPTION_BYTES = 256 * 1024
 MAX_CATALOG_BYTES = 16 * 1024 * 1024
+MAX_REPORT_BYTES = local.MAX_METADATA_BYTES
 _SHA = re.compile(r"[0-9a-f]{64}")
 _PATH = re.compile(r"titles/[0-9a-f]{64}/(?:wcag|broadcast|extra-cautious)\.(?:mp4|json|vtt)")
 TIMING = APP_PLAYBACK_TIMING
+
+
+def _verification_metadata(title: dict) -> dict:
+    value = title.get("verification")
+    if (not isinstance(value, dict)
+            or set(value) != {"reportSha256", "checkedInputsSha256", "outcome"}
+            or any(not isinstance(value.get(key), str) or not _SHA.fullmatch(value[key])
+                   for key in ("reportSha256", "checkedInputsSha256"))
+            or value.get("outcome") not in OUTCOMES[:-1]):
+        raise PackagedLibraryError("A packaged verification reference is invalid.")
+    return value
+
+
+def _report_references(destination: Path) -> dict[str, list[dict]]:
+    references: dict[str, list[dict]] = {}
+    for directory in destination.iterdir():
+        if _SHA.fullmatch(directory.name) and directory.is_dir():
+            manifest = json.loads(_bounded_file(directory / "manifest.json", destination, MAX_CATALOG_BYTES).read_bytes())
+            for title in manifest["titles"]:
+                digest = _verification_metadata(title)["reportSha256"]
+                references.setdefault(digest, []).append(title)
+    return references
+
+
+def _read_report(path: Path) -> bytes:
+    # Resolve only after rejecting aliases, including aliases in an input's parents.
+    path = _root(path)
+    _bounded_file(path, path.parent, MAX_REPORT_BYTES)
+    descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0))
+    try:
+        before = os.fstat(descriptor)
+        if not stat.S_ISREG(before.st_mode) or before.st_nlink != 1:
+            raise PackagedLibraryError("A verification report must be an owned regular file.")
+        with os.fdopen(descriptor, "rb", closefd=False) as reader:
+            raw = reader.read(MAX_REPORT_BYTES + 1)
+        after = os.fstat(descriptor)
+        if (len(raw) > MAX_REPORT_BYTES or (before.st_size, before.st_mtime_ns, before.st_ino)
+                != (after.st_size, after.st_mtime_ns, after.st_ino)):
+            raise PackagedLibraryError("A verification report changed or exceeded its byte bound.")
+        return raw
+    finally:
+        os.close(descriptor)
+
+
+def _check_report(raw: bytes, digest: str, titles: list[dict]) -> None:
+    if len(raw) > MAX_REPORT_BYTES or hashlib.sha256(raw).hexdigest() != digest:
+        raise PackagedLibraryError("Verification report bytes differ from the recorded report hash.")
+    # Never turn a key file into an attachment, even inside otherwise valid JSON.
+    if re.search(rb"-----BEGIN [A-Z ]*PRIVATE KEY-----", raw):
+        raise PackagedLibraryError("A verification report must not contain a private key.")
+    def constant(value):
+        # VerifyReport's historical writer permits infinite PSNR measurements.
+        # Keep these numeric values while refusing an undefined measurement.
+        if value in {"Infinity", "-Infinity"}:
+            return float(value)
+        raise PackagedLibraryError("The verification report contains an undefined measurement.")
+    data = json.loads(raw, parse_constant=constant)
+    checks = data.get("checks") if isinstance(data, dict) else None
+    if (not isinstance(data, dict) or set(data) != {
+            "sha256", "source_path", "presets", "passed", "outcome", "started_at", "finished_at", "checks"}
+            or data.get("passed") is not True or not isinstance(data.get("source_path"), str)
+            or not data["source_path"] or data.get("presets") != list(PRESETS)
+            or not isinstance(checks, list) or not checks
+            or any(not isinstance(check, dict) or set(check) != {"name", "passed", "detail", "data"}
+                   or not isinstance(check.get("name"), str) or not check["name"]
+                   or check.get("passed") is not True or not isinstance(check.get("detail"), str)
+                   or not isinstance(check.get("data"), dict) for check in checks)
+            or any(isinstance(data.get(key), bool) or not isinstance(data.get(key), (int, float))
+                   or not math.isfinite(data[key]) for key in ("started_at", "finished_at"))):
+        raise PackagedLibraryError("The verification report is not a complete passing report.")
+    names = [check["name"] for check in checks]
+    required = {"source_hash"} | {f"{name}:{preset}" for preset in PRESETS for name in local._CORE_CHECKS}
+    if len(set(names)) != len(names) or not required.issubset(names):
+        raise PackagedLibraryError("The verification report is missing required unique checks.")
+    for check in checks:
+        if check["name"].startswith("plan_matches_map:") and "stored" in check["data"]:
+            stored = check["data"]["stored"]
+            if isinstance(stored, bool) or not isinstance(stored, (int, float)) or not math.isfinite(stored):
+                raise PackagedLibraryError("The verification report has an invalid plan measurement.")
+    report = VerifyReport.from_dict(data)
+    if any(data["sha256"] != title["sourceSha256"]
+           or data["outcome"] != _verification_metadata(title)["outcome"]
+           or report.outcome != data["outcome"] for title in titles):
+        raise PackagedLibraryError("The verification report source or outcome differs from its title.")
+
+
+def _check_reports(destination: Path, references: dict[str, list[dict]], *,
+                   require_reports: bool = False) -> tuple[int, dict]:
+    directory = destination / "reports"
+    present, total = set(), 0
+    if directory.exists() or directory.is_symlink():
+        local._path_inside(directory, destination)
+        if not directory.is_dir():
+            raise PackagedLibraryError("The verification report namespace must be a directory.")
+        for path in directory.iterdir():
+            digest = path.name.removesuffix(".json")
+            if path.name != f"{digest}.json" or digest not in references:
+                raise PackagedLibraryError("An unreferenced verification report is present.")
+            raw = _read_report(path)
+            _check_report(raw, digest, references[digest])
+            present.add(digest)
+            total += len(raw)
+    missing = sorted(set(references) - present)
+    if require_reports and missing:
+        raise PackagedLibraryError("Original verification reports are missing: " + ", ".join(missing))
+    return total, {"required": len(references), "present": len(present), "missing": missing}
+
+
+def _publish_reports(destination: Path, reports: dict[str, bytes], references: dict[str, list[dict]], *,
+                     projected_total: int | None = None) -> None:
+    """Validate the entire batch before writing; roll back new attachments on failure."""
+    # Export already checked its locked inputs and final pointer sizes before
+    # committing the new generation. Backfill checks its unchanged library here.
+    total = _check_output_root(destination) if projected_total is None else 0
+    for digest, raw in reports.items():
+        if digest not in references:
+            raise PackagedLibraryError("The supplied report is not referenced by a packaged title.")
+        _check_report(raw, digest, references[digest])
+    directory = destination / "reports"
+    fresh = {digest: raw for digest, raw in reports.items() if not (directory / f"{digest}.json").exists()}
+    final_size = total + sum(map(len, fresh.values())) if projected_total is None else projected_total
+    if final_size > MAX_BUNDLE_BYTES:
+        raise PackagedLibraryError("Verification reports exceed the package byte budget.")
+    if not fresh:
+        return
+    created_directory = not directory.exists()
+    attached = []
+    try:
+        # Staging is outside the shipped namespace. An exclusive link publishes a
+        # complete file without overwriting any concurrently created destination.
+        with tempfile.TemporaryDirectory(prefix=".reports-", dir=destination.parent) as temporary:
+            stage = Path(temporary)
+            for digest, raw in fresh.items():
+                (stage / f"{digest}.json").write_bytes(raw)
+            directory.mkdir(exist_ok=True)
+            local._path_inside(directory, destination)
+            for digest in fresh:
+                target = directory / f"{digest}.json"
+                staged = stage / target.name
+                os.link(staged, target)
+                attached.append(target)
+                staged.unlink()
+    except BaseException:
+        for path in attached:
+            path.unlink(missing_ok=True)
+        if created_directory and directory.is_dir() and not directory.is_symlink() and not any(directory.iterdir()):
+            directory.rmdir()
+        raise
 
 
 class PackagedLibraryError(local.LocalLibraryError):
@@ -157,7 +308,7 @@ def _caption(prepared: Path, staged: Path, relative: str) -> tuple[dict | None, 
             "language": language, "mimeType": "text/vtt"}, destination.stat().st_size
 
 
-def _title(receipt: dict, root: Path, staged: Path, public, files: dict) -> tuple[dict, int]:
+def _title(receipt: dict, root: Path, staged: Path, public, files: dict, reports: dict) -> tuple[dict, int]:
     sha = receipt["source_sha256"]
     if receipt["presets"] != list(PRESETS):
         raise PackagedLibraryError("A packaged title needs all three verified preparation presets.")
@@ -168,7 +319,8 @@ def _title(receipt: dict, root: Path, staged: Path, public, files: dict) -> tupl
     duration = entry.duration_s * 1000
     if not math.isfinite(duration) or duration <= 0 or duration > 24 * 60 * 60 * 1000:
         raise PackagedLibraryError("The prepared title has an invalid duration.")
-    report = local._json(layout.verify_report_path, root)
+    report_bytes = _read_report(layout.verify_report_path)
+    report = json.loads(report_bytes)
     maps, map_entries, renditions = {}, {}, {}
     total = 0
     for preset in PRESETS:
@@ -212,11 +364,14 @@ def _title(receipt: dict, root: Path, staged: Path, public, files: dict) -> tupl
     if not local._still_ready(receipt, root, sha):
         raise PackagedLibraryError("The verified preparation changed during export.")
     verification = receipt["verification"]
-    return {"id": f"prepared-{sha}", "title": receipt["title"], "sourceSha256": sha,
+    title = {"id": f"prepared-{sha}", "title": receipt["title"], "sourceSha256": sha,
             "durationMs": duration, "maps": map_entries, "renditions": renditions,
             "verification": {"reportSha256": verification["report_sha256"],
                              "checkedInputsSha256": verification["checked_inputs_sha256"],
-                             "outcome": verification["outcome"]}}, total
+                             "outcome": verification["outcome"]}}
+    _check_report(report_bytes, verification["report_sha256"], [title])
+    reports[verification["report_sha256"]] = report_bytes
+    return title, total
 
 
 def _replace_text(path: Path, text: str, root: Path) -> None:
@@ -237,16 +392,19 @@ def _replace_text(path: Path, text: str, root: Path) -> None:
             temporary.unlink(missing_ok=True)
 
 
-def _check_output_root(destination: Path, *, staging: Path | None = None) -> int:
+def _check_output_root(destination: Path, *, staging: Path | None = None,
+                       require_reports: bool = False) -> int:
     """Vega packages this whole directory, including retained generations."""
     total = 0
     names = sorted(destination.iterdir())
-    if len(names) > MAX_TITLES + 4:
+    if len(names) > MAX_TITLES + 5:
         raise PackagedLibraryError("Too many retained package generations; use a fresh output directory.")
     for path in names:
         if path == staging:
             continue
         local._path_inside(path, destination)
+        if path.name == "reports":
+            continue
         if path.name in {"catalog.json", "catalog.ts", ".local-library.lock"}:
             limit = 0 if path.name == ".local-library.lock" else MAX_CATALOG_BYTES * 2
             _bounded_file(path, destination, limit)
@@ -262,6 +420,8 @@ def _check_output_root(destination: Path, *, staging: Path | None = None) -> int
         total += sum(item.stat().st_size for item in path.rglob("*") if item.is_file())
         if total > MAX_BUNDLE_BYTES:
             raise PackagedLibraryError("Retained package generations exceed the byte budget; use a fresh output directory.")
+    report_size, _ = _check_reports(destination, _report_references(destination), require_reports=require_reports)
+    total += report_size
     if total > MAX_BUNDLE_BYTES:
         raise PackagedLibraryError("The full package output exceeds its byte budget.")
     return total
@@ -288,9 +448,9 @@ def export_packaged_library(workdir: str | Path, output: str | Path, *, pub: str
             raise PackagedLibraryError("Export between one and sixteen verified local titles.")
         with tempfile.TemporaryDirectory(prefix=".stage-", dir=destination) as temporary:
             staged = Path(temporary)
-            files, titles, total = {}, [], 0
+            files, titles, reports, total = {}, [], {}, 0
             for receipt in receipts:
-                title, size = _title(receipt, root, staged, public, files)
+                title, size = _title(receipt, root, staged, public, files, reports)
                 total += size
                 if total > MAX_BUNDLE_BYTES:
                     raise PackagedLibraryError("The prepared library exceeds the package byte budget.")
@@ -313,7 +473,9 @@ def export_packaged_library(workdir: str | Path, output: str | Path, *, pub: str
             staged_size = sum(path.stat().st_size for path in staged.rglob("*") if path.is_file())
             projected = (existing_size - pointer_size + len(text.encode())
                          + len(catalog_module(text).encode())
-                         + (0 if immutable.exists() else staged_size))
+                         + (0 if immutable.exists() else staged_size)
+                         + sum(len(raw) for digest, raw in reports.items()
+                               if not (destination / "reports" / f"{digest}.json").exists()))
             if projected > MAX_BUNDLE_BYTES:
                 raise PackagedLibraryError("The full package output exceeds its byte budget; use a fresh output directory.")
             if immutable.exists():
@@ -322,6 +484,10 @@ def export_packaged_library(workdir: str | Path, output: str | Path, *, pub: str
                 os.rename(staged, immutable)
                 # TemporaryDirectory owns only its original path, not the committed bundle.
                 staged.mkdir()
+            # Reports stay outside manifests so existing catalog, signed map and
+            # rendition identities remain unchanged. They are content addressed
+            # by the verification reference the export already records.
+            _publish_reports(destination, reports, _report_references(destination), projected_total=projected)
             # The module is the app's sole entrypoint and is published last.
             # Older complete bundles are retained while a previous app build may reference them.
             _replace_text(destination / "catalog.json", text, destination)
@@ -381,6 +547,7 @@ def _check_bundle(manifest: dict, bundle: Path) -> None:
         if not _SHA.fullmatch(sha) or sha in seen or title.get("id") != f"prepared-{sha}":
             raise PackagedLibraryError("The packaged title identity is invalid.")
         seen.add(sha)
+        _verification_metadata(title)
         if set(title.get("maps", {})) != set(PRESETS) or set(title.get("renditions", {})) != set(PRESETS):
             raise PackagedLibraryError("A packaged title is missing a required preset.")
         for preset in PRESETS:
@@ -432,7 +599,7 @@ def _positive_time(value) -> bool:
             and math.isfinite(value) and 0 < value <= 24 * 60 * 60 * 1000)
 
 
-def check_packaged_library(output: str | Path) -> dict:
+def check_packaged_library(output: str | Path, *, require_reports: bool = False) -> dict:
     destination = _root(output)
     path = _bounded_file(destination / "catalog.json", destination, MAX_CATALOG_BYTES)
     text = path.read_text()
@@ -456,8 +623,32 @@ def check_packaged_library(output: str | Path) -> dict:
         raise PackagedLibraryError("The packaged bundle identifier is invalid.")
     bundle = local._path_inside(destination / bundle_id, destination)
     _check_bundle(manifest, bundle)
-    _check_output_root(destination)
+    _check_output_root(destination, require_reports=require_reports)
     return manifest
+
+
+def verification_report_status(output: str | Path, *, require_reports: bool = False) -> dict:
+    destination = _root(output)
+    check_packaged_library(destination, require_reports=require_reports)
+    return _check_reports(destination, _report_references(destination), require_reports=require_reports)[1]
+
+
+def attach_reports(output: str | Path, reports: Sequence[str | Path]) -> dict:
+    """Attach existing original reports without rewriting a catalog or media asset."""
+    destination = _root(output)
+    if not reports:
+        raise PackagedLibraryError("Supply at least one original verification report.")
+    # Do not create a new library when the caller supplied an incorrect path.
+    check_packaged_library(destination)
+    with local._lock(destination):
+        manifest = check_packaged_library(destination)
+        references = _report_references(destination)
+        candidates = {}
+        for path in reports:
+            raw = _read_report(Path(path))
+            candidates[hashlib.sha256(raw).hexdigest()] = raw
+        _publish_reports(destination, candidates, references)
+        return manifest
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -470,13 +661,22 @@ def main(argv: Sequence[str] | None = None) -> int:
     export.add_argument("--source-sha", action="append")
     check = actions.add_parser("check")
     check.add_argument("--output", required=True)
+    check.add_argument("--require-reports", action="store_true")
+    attach = actions.add_parser("attach-reports")
+    attach.add_argument("--output", required=True)
+    attach.add_argument("--report", required=True, action="append")
     args = parser.parse_args(argv)
     try:
-        manifest = (check_packaged_library(args.output) if args.action == "check" else
-                    export_packaged_library(args.workdir, args.output, pub=args.pub,
-                                            source_shas=args.source_sha))
+        if args.action == "check":
+            manifest = check_packaged_library(args.output, require_reports=args.require_reports)
+        elif args.action == "attach-reports":
+            manifest = attach_reports(args.output, args.report)
+        else:
+            manifest = export_packaged_library(args.workdir, args.output, pub=args.pub,
+                                               source_shas=args.source_sha)
         print(json.dumps({"version": VERSION, "status": "ready", "bundleId": manifest.get("bundleId"),
-                          "titles": len(manifest["titles"]), "physical_tv_validated": False}))
+                          "titles": len(manifest["titles"]), "physical_tv_validated": False,
+                          "verification_reports": verification_report_status(args.output)}))
         return 0
     except (PipelineError, OSError, ValueError, TypeError, KeyError) as exc:
         print(json.dumps({"version": VERSION, "status": "failed", "message": (

@@ -102,6 +102,17 @@ describe('the credits list', () => {
     }
   });
 
+  it('includes every visible credit and licence condition in its spoken label', () => {
+    render(<CreditsScreen />);
+    for (const entry of CREDIT_ENTRIES) {
+      const row = screen.getByTestId(`credits-entry-${entry.title}`);
+      for (const words of [entry.title, entry.collection, entry.license, entry.credit, ...entry.obligations]) {
+        expect(row.props.accessibilityLabel).toContain(words);
+        expect(row.props['aria-label']).toContain(words);
+      }
+    }
+  });
+
   it('keeps the Tears of Steel credit scroll condition', () => {
     const tears = CREDIT_ENTRIES.find(entry => entry.title === 'Tears of Steel');
     expect(tears).toBeDefined();

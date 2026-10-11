@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
+import subprocess
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -262,3 +264,180 @@ def test_retained_generation_byte_budget_applies_before_publication(ready, monke
         export(ready)
     assert (ready.output / "catalog.ts").read_bytes() == before
     assert not list(ready.output.glob(".stage-*"))
+
+
+def test_export_retains_original_report_bytes_without_changing_the_media_manifest(ready):
+    manifest = export(ready)
+    digest = manifest["titles"][0]["verification"]["reportSha256"]
+    assert (ready.output / "reports" / f"{digest}.json").read_bytes() == ready.result.layout.verify_report_path.read_bytes()
+    assert not any(name.startswith("reports/") for name in manifest["files"])
+    assert packaged.check_packaged_library(ready.output, require_reports=True) == manifest
+    assert packaged.verification_report_status(ready.output) == {"required": 1, "present": 1, "missing": []}
+
+
+def test_missing_legacy_report_is_explicit_and_exact_backfill_is_idempotent(ready):
+    manifest = export(ready)
+    digest = manifest["titles"][0]["verification"]["reportSha256"]
+    shutil.rmtree(ready.output / "reports")
+    before = {str(path.relative_to(ready.output)): path.read_bytes()
+              for path in ready.output.rglob("*") if path.is_file()}
+    assert packaged.check_packaged_library(ready.output) == manifest
+    assert packaged.verification_report_status(ready.output) == {"required": 1, "present": 0, "missing": [digest]}
+    with pytest.raises(packaged.PackagedLibraryError, match="Original verification reports are missing"):
+        packaged.check_packaged_library(ready.output, require_reports=True)
+    for _ in range(2):
+        assert packaged.attach_reports(ready.output, [ready.result.layout.verify_report_path]) == manifest
+    assert all((ready.output / name).read_bytes() == raw for name, raw in before.items())
+    assert packaged.check_packaged_library(ready.output, require_reports=True) == manifest
+
+
+def test_backfill_preflights_every_input_and_rejects_reserialized_reports(ready, tmp_path):
+    export(ready)
+    shutil.rmtree(ready.output / "reports")
+    original = ready.result.layout.verify_report_path
+    different = tmp_path / "different.json"
+    different.write_bytes(original.read_bytes() + b"\n")
+    with pytest.raises(packaged.PackagedLibraryError, match="not referenced"):
+        packaged.attach_reports(ready.output, [original, different])
+    assert not (ready.output / "reports").exists()
+    packaged.attach_reports(ready.output, [original])
+    report = next((ready.output / "reports").iterdir())
+    report.write_bytes(report.read_bytes() + b"\n")
+    with pytest.raises(packaged.PackagedLibraryError, match="report bytes differ"):
+        packaged.check_packaged_library(ready.output)
+
+
+@pytest.mark.parametrize("change", ["source", "presets", "failed", "missing", "duplicate", "outcome", "derived", "plan", "key"])
+def test_report_identity_does_not_override_its_required_evidence(ready, change):
+    manifest = export(ready)
+    title = manifest["titles"][0]
+    data = json.loads(ready.result.layout.verify_report_path.read_bytes())
+    if change == "source":
+        data["sha256"] = "0" * 64
+    elif change == "presets":
+        data["presets"] = ["wcag"]
+    elif change == "failed":
+        data["checks"][0]["passed"] = False
+    elif change == "missing":
+        data["checks"].pop()
+    elif change == "duplicate":
+        data["checks"].append(data["checks"][0])
+    elif change == "outcome":
+        data["outcome"] = "cover proven drawn"
+    elif change == "derived":
+        data["outcome"] = title["verification"]["outcome"] = "cover proven drawn"
+    elif change == "plan":
+        next(item for item in data["checks"] if item["name"] == "plan_matches_map:wcag")["data"]["stored"] = True
+    else:
+        data["source_path"] = "-----BEGIN PRIVATE KEY-----"
+    raw = json.dumps(data).encode()
+    digest = packaged.hashlib.sha256(raw).hexdigest()
+    title["verification"]["reportSha256"] = digest
+    # These are fabricated contract reports. Updating their digest deliberately
+    # reaches the semantic guard instead of merely failing the byte comparison.
+    with pytest.raises(packaged.PackagedLibraryError, match="report"):
+        packaged._check_report(raw, digest, [title])
+
+
+@pytest.mark.parametrize("change", ["symlink", "parent", "hardlink", "large", "unreferenced"])
+def test_report_attachments_are_bounded_owned_allowlisted_files(ready, tmp_path, monkeypatch, change):
+    manifest = export(ready)
+    report = ready.output / "reports" / f'{manifest["titles"][0]["verification"]["reportSha256"]}.json'
+    if change == "large":
+        monkeypatch.setattr(packaged, "MAX_REPORT_BYTES", report.stat().st_size - 1)
+    elif change == "unreferenced":
+        (report.parent / ("0" * 64 + ".json")).write_bytes(report.read_bytes())
+    elif change == "parent":
+        outside = tmp_path / "outside"
+        report.parent.rename(outside)
+        report.parent.symlink_to(outside, target_is_directory=True)
+    else:
+        outside = tmp_path / "outside.json"
+        outside.write_bytes(report.read_bytes())
+        report.unlink()
+        if change == "symlink":
+            report.symlink_to(outside)
+        else:
+            os.link(outside, report)
+    with pytest.raises(packaged.local.LocalLibraryError):
+        packaged.check_packaged_library(ready.output)
+
+
+def test_failed_batch_publication_rolls_back_all_new_report_files(ready, monkeypatch):
+    original = export(ready)
+    _replace_report(ready.result, lambda data: data.update(finished_at=1))
+    receipt_path = ready.root / "local-receipts" / f"{ready.result.sha256}.json"
+    receipt = json.loads(receipt_path.read_bytes())
+    receipt["verification"]["report_sha256"] = sha256_file(ready.result.layout.verify_report_path)
+    receipt["verification"]["checked_inputs_sha256"] = packaged.local._inputs_digest(ready.result.layout)
+    receipt_path.write_text(json.dumps(receipt))
+    current = export(ready)
+    assert current["bundleId"] != original["bundleId"]
+    reports = {path.stem: path.read_bytes() for path in (ready.output / "reports").iterdir()}
+    shutil.rmtree(ready.output / "reports")
+    real_link = packaged.os.link
+    calls = []
+    def broken_link(source, target):
+        calls.append(target)
+        if len(calls) == 2:
+            raise OSError("fabricated failure after the first attachment")
+        return real_link(source, target)
+    monkeypatch.setattr(packaged.os, "link", broken_link)
+    with pytest.raises(OSError, match="fabricated failure"):
+        packaged._publish_reports(ready.output, reports, packaged._report_references(ready.output))
+    assert not (ready.output / "reports").exists()
+    assert packaged.check_packaged_library(ready.output) == current
+
+
+def test_report_cli_exposes_missing_originals_and_strict_mode_fails(ready, capsys):
+    export(ready)
+    shutil.rmtree(ready.output / "reports")
+    assert packaged.main(["check", "--output", str(ready.output)]) == 0
+    assert json.loads(capsys.readouterr().out)["verification_reports"]["present"] == 0
+    assert packaged.main(["check", "--output", str(ready.output), "--require-reports"]) == 2
+    assert "missing" in json.loads(capsys.readouterr().out)["message"]
+    assert packaged.main(["attach-reports", "--output", str(ready.output),
+                          "--report", str(ready.result.layout.verify_report_path)]) == 0
+    assert json.loads(capsys.readouterr().out)["verification_reports"]["missing"] == []
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="Node is needed for the delivery contract roundtrip")
+def test_python_export_with_infinite_measurements_passes_node_without_rewriting_report(ready):
+    def measurements(data):
+        data["checks"][0]["data"] = {"psnr": float("inf"), "lower": float("-inf")}
+        data["checks"][0]["detail"] = 'Infinity " quoted -Infinity'
+    _replace_report(ready.result, measurements)
+    receipt_path = ready.root / "local-receipts" / f"{ready.result.sha256}.json"
+    receipt = json.loads(receipt_path.read_bytes())
+    receipt["verification"]["report_sha256"] = sha256_file(ready.result.layout.verify_report_path)
+    receipt["verification"]["checked_inputs_sha256"] = packaged.local._inputs_digest(ready.result.layout)
+    receipt_path.write_text(json.dumps(receipt))
+    manifest = export(ready)
+    script = Path(__file__).resolve().parents[2] / "app/tools/check_prepared_library.mjs"
+    result = subprocess.run(["node", "--input-type=module", "-e",
+                             f"import {{checkPreparedDirectory}} from {json.dumps(script.as_uri())};"
+                             "console.log(JSON.stringify(checkPreparedDirectory(process.argv[1], {requireReports:true})));",
+                             str(ready.output)], capture_output=True, text=True, check=True)
+    assert json.loads(result.stdout)["verification_reports"] == {"required": 1, "present": 1, "missing": []}
+    digest = manifest["titles"][0]["verification"]["reportSha256"]
+    assert (ready.output / "reports" / f"{digest}.json").read_bytes() == ready.result.layout.verify_report_path.read_bytes()
+
+
+def test_export_budget_uses_final_catalog_pointer_sizes_when_the_title_gets_shorter(ready, tmp_path, monkeypatch):
+    receipt_path = ready.root / "local-receipts" / f"{ready.result.sha256}.json"
+    receipt = json.loads(receipt_path.read_bytes())
+    receipt["title"] = "A" * 200
+    receipt_path.write_text(json.dumps(receipt))
+    export(ready)
+    original_output = ready.output
+    predicted = tmp_path / "predicted"
+    shutil.copytree(original_output, predicted)
+    receipt["title"] = "A"
+    receipt_path.write_text(json.dumps(receipt))
+    ready.output = predicted
+    expected = export(ready)
+    final_size = sum(path.stat().st_size for path in predicted.rglob("*") if path.is_file())
+    ready.output = original_output
+    monkeypatch.setattr(packaged, "MAX_BUNDLE_BYTES", final_size)
+    assert export(ready) == expected
+    assert packaged.check_packaged_library(original_output, require_reports=True) == expected

@@ -59,18 +59,22 @@ const StatusNotice = ({
 }: StatusNoticeProps) => (
   <View
     testID={testID}
-    accessible
-    accessibilityLiveRegion="polite"
-    aria-live="polite"
-    accessibilityLabel={`${notice.title}. ${notice.detail}`}
-    aria-label={`${notice.title}. ${notice.detail}`}
     style={[styles.notice, { borderLeftColor: TONE_BAR[notice.tone] }]}>
-    <Text style={styles.title} testID={`${testID}-title`}>
-      {notice.title}
-    </Text>
-    <Text style={styles.detail} testID={`${testID}-detail`}>
-      {notice.detail}
-    </Text>
+    <View
+      testID={`${testID}-announcement`}
+      accessible
+      accessibilityLiveRegion="polite"
+      aria-live="polite"
+      accessibilityLabel={`${notice.title}. ${notice.detail}`}
+      aria-label={`${notice.title}. ${notice.detail}`}>
+      <Text style={styles.title} testID={`${testID}-title`}>
+        {notice.title}
+      </Text>
+      <Text style={styles.detail} testID={`${testID}-detail`}>
+        {notice.detail}
+      </Text>
+    </View>
+    {/* Actions remain siblings of the spoken message, with their own focus. */}
     {children}
   </View>
 );

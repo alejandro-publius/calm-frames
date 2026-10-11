@@ -60,35 +60,40 @@ const CreditRow = ({
 }: {
   entry: CreditEntry;
   testID: string;
-}) => (
-  <View
-    testID={testID}
-    accessible
-    accessibilityLabel={`${entry.title}. ${entry.license}. ${entry.credit}`}
-    aria-label={`${entry.title}. ${entry.license}. ${entry.credit}`}
-    style={styles.entry}>
-    <Text style={styles.entryTitle} testID={`${testID}-title`}>
-      {entry.title}
-    </Text>
-    <Text style={styles.collection} testID={`${testID}-collection`}>
-      {entry.collection}
-    </Text>
-    <Text style={styles.license} testID={`${testID}-license`}>
-      {entry.license}
-    </Text>
-    <Text style={styles.credit} testID={`${testID}-credit`}>
-      {entry.credit}
-    </Text>
-    {entry.obligations.map((condition, index) => (
-      <Text
-        key={condition}
-        style={styles.condition}
-        testID={`${testID}-condition-${index}`}>
-        {condition}
+}) => {
+  const spokenCredit = [
+    entry.title, entry.collection, entry.license, entry.credit, ...entry.obligations,
+  ].map((part) => /[.!?]$/.test(part) ? part : `${part}.`).join(' ');
+  return (
+    <View
+      testID={testID}
+      accessible
+      accessibilityLabel={spokenCredit}
+      aria-label={spokenCredit}
+      style={styles.entry}>
+      <Text style={styles.entryTitle} testID={`${testID}-title`}>
+        {entry.title}
       </Text>
-    ))}
-  </View>
-);
+      <Text style={styles.collection} testID={`${testID}-collection`}>
+        {entry.collection}
+      </Text>
+      <Text style={styles.license} testID={`${testID}-license`}>
+        {entry.license}
+      </Text>
+      <Text style={styles.credit} testID={`${testID}-credit`}>
+        {entry.credit}
+      </Text>
+      {entry.obligations.map((condition, index) => (
+        <Text
+          key={condition}
+          style={styles.condition}
+          testID={`${testID}-condition-${index}`}>
+          {condition}
+        </Text>
+      ))}
+    </View>
+  );
+};
 
 const CreditsScreen = ({
   entries = CREDIT_ENTRIES,

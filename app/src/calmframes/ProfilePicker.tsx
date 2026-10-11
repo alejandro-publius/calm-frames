@@ -97,18 +97,23 @@ const ProfilePicker = ({
           const focused = focusedId === profile.id;
           return (
             <TouchableOpacity
-              disabled={disabled || undefined}
               key={profile.id}
               testID={`${testID}-${profile.id}`}
               accessibilityRole="radio"
               // checked is what a radio carries. selected stays beside it
               // because the rest of the app reads that way today.
+              // Keep the chip in the remote focus order while its choice is
+              // being saved, as the PIN keypad does for a pending attempt.
               accessibilityState={{ checked: chosen, selected: chosen, ...(disabled ? { disabled: true } : {}) }}
               accessibilityLabel={`${profile.name}${chosen ? `, ${chosenWord}` : ''}`}
               activeOpacity={1}
               onFocus={() => setFocusedId(profile.id)}
               onBlur={() => setFocusedId(null)}
-              onPress={() => onChoose(profile)}
+              onPress={() => {
+                if (!disabled) {
+                  onChoose(profile);
+                }
+              }}
               style={[
                 styles.chip,
                 chosen ? styles.chipChosen : null,

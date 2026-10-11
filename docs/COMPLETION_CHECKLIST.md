@@ -14,6 +14,11 @@ Review: [design/POLISH_REVIEW.md](design/POLISH_REVIEW.md).
 Cloud evidence: [`design_polish_2026-10-10.json`](../results/design_polish_2026-10-10.json).
 Native validation and refreshed demo assets remain open below.
 
+The latest interaction pass keeps profile choices in the remote focus order
+while saving, separates notice actions from spoken announcements and includes
+all displayed licence conditions in spoken credits. These changes preserve the
+approved visual design; they still need native focus and screen-reader checks.
+
 ## Earlier native tested build
 
 The earlier approved native design was implemented, reviewed and installed.
@@ -146,6 +151,10 @@ the saved GitHub API network setting; Git source synchronization works.
   [`finish_preparation_2026-10-11.json`](../results/finish_preparation_2026-10-11.json).
 - [x] Prepared [MAC_FINISH.md](MAC_FINISH.md) with current build, native verification,
   recording and evidence-bundle commands. The commands still require a Mac run.
+- [x] Added exact original report attachments under the prepared library's
+  `reports/` directory. Future exports carry them automatically; existing exports
+  accept matching originals without changing catalog, maps, captions or video.
+  Release preparation requires reports for every retained generation.
 
 ## Still open
 
@@ -171,10 +180,12 @@ the saved GitHub API network setting; Git source synchronization works.
   all six (`results/github_push_2026-10-11.json`). Both groups are due for
   review on Oct 21, when the dates move past judging. Saved AWS evidence also has inactive Project cost tagging
   and container security findings.
-- [ ] The six prepared-library renditions under `app/assets/raw/prepared-library/`
-  ship with the hash of a verify report that is not committed. Export the
-  report beside the catalog and have `app/tools/check_prepared_library.mjs`
-  compare its hash, on the Mac where the report is.
+- [ ] Attach the original verification reports for both prepared-library
+  generations. Neither original is present in this cloud checkout. The normal
+  delivery check lists their exact hashes, and the strict release gate refuses
+  to proceed until both are present and checked. Use the attachment commands in
+  [MAC_FINISH.md](MAC_FINISH.md) on the Mac where they were generated; do not
+  substitute a new report under an old hash.
 - [ ] Send the Amazon sample licence clarification in
   [`AMAZON_SAMPLE_LICENSE_REVIEW.md`](AMAZON_SAMPLE_LICENSE_REVIEW.md) by Oct 13.
   NOTICE and the README now carry the caveat either way.

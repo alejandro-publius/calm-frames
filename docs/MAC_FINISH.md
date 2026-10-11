@@ -8,7 +8,8 @@ they have not been executed in the cloud session.
 
 The latest artwork and TV layouts are pushed. The saved native package and demo
 still show the earlier design. Finish by rebuilding, observing and recording the
-current source on the existing Vega Virtual Device. No physical stick is needed.
+current source on the existing Vega Virtual Device. Include the latest focus and
+screen-reader fixes in that check. No physical stick is needed.
 
 ## 1. Reconcile the existing checkout
 
@@ -52,21 +53,44 @@ run `npm ci` inside `app` with this JDK active. Its postinstall builds Shaka;
 `--ignore-scripts` alone is insufficient for a native package. Inspect tracked
 changes afterward. Do not use the package's destructive `clean` script.
 
+The final preparation gate now requires the original verification reports for
+all retained library generations. Older catalogs preserve their report hashes,
+but this cloud checkout does not contain the matching originals. Normal delivery
+checks list missing reports; release preparation refuses to proceed without them.
+Attach the originals on the Mac before building, using their actual paths:
+
+```sh
+.venv/bin/python -m pipeline.packaged_library check --output app/assets/raw/prepared-library
+.venv/bin/python -m pipeline.packaged_library attach-reports \
+  --output app/assets/raw/prepared-library \
+  --report /path/to/first/original/verify/report.json \
+  --report /path/to/second/original/verify/report.json
+.venv/bin/python -m pipeline.packaged_library check \
+  --output app/assets/raw/prepared-library --require-reports
+```
+
+The attachment command accepts only exact report hashes already referenced by
+the library and checks source, presets, passing checks and outcome. It keeps the
+catalog, signed maps, captions and video bytes unchanged. Future exports carry
+the original reports automatically. A regenerated report is new evidence and
+cannot replace an original under its old hash. If an original is unavailable,
+record that blocker; preserve existing evidence while planning a new verified
+export. Do not bypass the strict gate.
+
+Inspect report contents before committing: originals can contain local paths and
+analyzer output. Do not redact a file while retaining its old digest. Run the
+repository's secret scan on the exact staged changes.
+
 Run the current checks and build the Apple Silicon Debug package:
 
 ```sh
 cd app
 npm run typecheck
 npm test -- --runInBand --coverage=false
-node tools/check_prepared_library.mjs
+node tools/check_prepared_library.mjs --require-reports
 cd ..
 bash scripts/release.sh --arch aarch64 --build-type Debug --tag review-polish-mac
 ```
-
-The preflight checks the existing prepared-library bytes. The checklist separately
-requires exporting the missing verify reports from this Mac and checking their
-hashes. Resolve that provenance task before final packaging. Keep the checked
-media; do not regenerate signed media merely to refresh the UI.
 
 The local release preparer builds only the selected architecture and checks its
 package identity, native runtime and exact prepared-library bytes. It saves a
@@ -84,7 +108,7 @@ target instead. To recheck its prepared-library bytes directly:
 
 ```sh
 cd app
-node tools/check_prepared_library.mjs --packages Debug --arch aarch64
+node tools/check_prepared_library.mjs --packages Debug --arch aarch64 --require-reports
 cd ..
 ```
 
@@ -126,6 +150,8 @@ vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_DO
 Record fresh observations for these journeys:
 
 1. Reach every library action with the D-pad; check focus, Back and return focus.
+   Switch profiles and confirm focus remains visible while the choice is saved.
+   Repeated presses during that save must not write another choice.
 2. Scroll the entire details, setup, parental controls and settings pages.
 3. Check incorrect PIN, Delete correction, successful unlock and relocking.
 4. Check fresh setup only in a preserved or separate test household; never erase
@@ -135,6 +161,9 @@ Record fresh observations for these journeys:
 7. Play both labelled Harbor practice holds with audible tone and English captions.
 8. Check caption Off, pause/resume, guarded seeks, Skip, loading Back and replay.
 9. Observe the interruption fallback and confirm practice holds do not add history.
+10. With the screen reader enabled, reach notice actions separately from their
+    announcements and hear every displayed credit and licence condition. Use a
+    separate test profile for removal confirmation; preserve existing household data.
 
 Use only the bundled benign media. Practice holds are synthetic examples;
 simulator observations do not measure physical screen timing. A UI or logic fix
@@ -231,7 +260,8 @@ send outreach, change billing, deploy AWS, publish or submit from this handoff.
 > Reconcile the existing review branch with the pushed cloud work while preserving
 > local edits, captures, household data and the AWS worktree. Use only the Vega
 > Virtual Device. Rebuild the latest polished source for Apple Silicon aarch64
-> Debug, validate the exact prepared package, install it, exercise the native
+> Debug after attaching the original verification reports and passing the strict
+> evidence gate, validate the exact prepared package, install it, exercise the native
 > journeys, fix observed issues and record a fresh English demo under 179 seconds.
 > Refresh capture provenance, package/video hashes, gates and the review bundle;
 > preserve the earlier evidence. Commit and push small checked batches to the

@@ -21,7 +21,9 @@ Use another tag for another preparation. The default package filename is
 `--skip-build` requires a receipt with matching package and complete app input
 hashes, including artwork, fonts, manifests, dependencies and generated runtime
 files. Old native receipts without that inventory cannot establish a current
-build. Rebuild instead. Preparation does not establish native execution.
+build. Rebuild instead. Release preparation also requires every referenced original verification report.
+Use the attachment steps in [MAC_FINISH.md](MAC_FINISH.md); `--skip-build` does
+not bypass this requirement. Preparation does not establish native execution.
 
 Use repeatable `--arch` options to choose targets, `--build-type Release` for
 Release packages, or `--all-architectures` when that broader scope is needed.

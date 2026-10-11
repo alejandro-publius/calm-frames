@@ -836,7 +836,7 @@ describe('ParentAreaScreen', () => {
 
   it('announces the PIN result politely', () => {
     renderArea();
-    const message = screen.getByTestId('parent-area-message');
+    const message = screen.getByTestId('parent-area-message-announcement');
     expect(message.props.accessibilityLiveRegion).toBe('polite');
     expect(message.props['aria-live']).toBe('polite');
   });

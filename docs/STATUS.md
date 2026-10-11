@@ -4,6 +4,26 @@ Updated Sun Oct 11, 2026.
 
 ## 0. Where things stand
 
+### Current interaction and evidence pass
+
+The shared source was synchronized through `e043d80`. Profile choices now remain
+in the remote focus order while a save is pending, with repeated presses blocked.
+Notice action buttons remain separate from their spoken announcement, and spoken
+credits include the displayed licence conditions. The approved visual design is
+preserved. These changes still need native D-pad and screen-reader observations.
+
+Prepared-library exports now preserve original verification reports in a separate
+`reports/` directory. Existing exports can attach matching originals without
+changing immutable bundle identities, signed maps or media. Both delivery checkers
+validate present report bytes and their source, presets, checks and outcome;
+release preparation additionally requires every referenced report. Normal legacy
+checks identify missing reports so existing builds can be inspected.
+
+Both originals referenced by the checked-in library remain absent here. The strict
+gate is expected to stop until they are attached on the Mac. The current commands
+and remaining native steps are in [MAC_FINISH.md](MAC_FINISH.md). This pass does not
+create new playback, recording, hosted CI or publication evidence.
+
 ### Current cloud release preparation
 
 The checkout includes the shared branch through `9afacc0`, preserving the other
@@ -997,7 +1017,12 @@ and it is the reason no report is written for a clip it could not read.
 - **Nothing since the Oct 10 polish has been opened on a device.** The journey up to build cba1a29 was observed on the Vega Virtual Device on Oct 9 and 10 (`results/redesign_validation_2026-10-10.json`); the polish, the Oct 11 dependency changes and the copy changes have not been built, installed or seen. No physical TV has ever been used.
 - **Native household-storage durability was observed on the virtual device on Oct 9 and 10**, not on a physical TV.
 - **Hide history is still in memory.** The shared store already carries player entries back to the parent area, but it does not retain them after a process restart.
-- **The six prepared-library renditions ship with no committed verify report.** `app/assets/raw/prepared-library/catalog.json` carries the report's hash and the outcome word, and the report itself is on the Mac. The renditions are made from the Harbor story, whose own `verification.json` is committed, and CI runs the analyzer over every image the app ships; the chain for these six files still has a link outside the repository. Export the report beside the catalog and have `app/tools/check_prepared_library.mjs` compare its hash.
+- **The prepared-library generations still need their original verify reports.**
+  Both manifests retain report hashes, but neither original report is present in
+  this cloud checkout. The attachment command and strict delivery check are now
+  implemented; attach the exact originals on the Mac before preparing the next
+  release. The Harbor story's separate committed `verification.json` does not
+  replace those preparation reports. See [MAC_FINISH.md](MAC_FINISH.md).
 - **The bundled Harbor demo's played file is not hash-checked at play time.** The guard compares the map's source hash; the demo plays `harbor.precovered.mp4`, whose hash `BENIGN_STORY_RENDITION_SHA256` exists and is read by nothing in `app/src`. The package preflight checks every bundled byte at build time, so a swapped rendition cannot reach an installed package unsigned, which is why this is recorded rather than fixed from a Linux box.
 - **The prepared Harbor's frames carry the burned-in "BENIGN DEMO" label**, because `eval/prepare_owned_harbor.py` stream-copies the demo video. The shelf copy now says it is our own demo film. Rendering the picture without the label and re-exporting is a Mac job.
 - **`pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still` fails on the Oct 11 Linux box** (PSNR 15 to 21 against 30 at 4.4 s) and passes on CI and the Mac. Not chased.

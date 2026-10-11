@@ -146,7 +146,7 @@ def main():
         # Use the documented target option directly. The existing npm
         # postbuild hook intentionally checks all three architectures.
         before_packages = {str(path): path.stat() if path.exists() else None for path in packages}
-        command(['node', 'tools/check_prepared_library.mjs'])
+        command(['node', 'tools/check_prepared_library.mjs', '--require-reports'])
         for arch in arches:
             command(['npm', 'exec', '--', 'react-native', 'build-kepler',
                      '--build-type', args.build_type, '--target', arch])
@@ -170,7 +170,7 @@ def main():
     for arch, package in zip(arches, packages):
         package_hash = digest(package)
         inspect_package(package, arch, manifest)
-        command(['node', 'tools/check_prepared_library.mjs', '--packages', args.build_type, '--arch', arch])
+        command(['node', 'tools/check_prepared_library.mjs', '--packages', args.build_type, '--arch', arch, '--require-reports'])
         require(digest(package) == package_hash, 'package changed during validation')
         checked.append({'path': package.relative_to(REPO).as_posix(), 'sha256': package_hash,
                         'target': f'{arch} {args.build_type}'})
@@ -222,6 +222,7 @@ These are {args.build_type} builds for Vega OS {manifest['os']['version']['targe
 Native validation is not performed by this script. Observe the exact package
 on its matching Vega Virtual Device before describing it as demonstrated.
 PREPARATION.json records build-input and package hashes; it is not playback evidence.
+Every referenced original preparation report passed the strict delivery gate.
 Debug builds retain logs. Release builds strip console.log.
 
 ## Install on the matching simulator

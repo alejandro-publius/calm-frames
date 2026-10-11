@@ -165,7 +165,7 @@ def test_default_assembles_only_aarch64_debug_and_preserves_evidence_scope(proje
     assert '--componentId' not in notes
     assert json.loads((out / 'PREPARATION.json').read_text())['native_validation_performed'] is False
     assert 'Nothing was published' in result.stdout
-    assert (project / 'commands.log').read_text().strip().endswith('--packages Debug --arch aarch64')
+    assert (project / 'commands.log').read_text().strip().endswith('--packages Debug --arch aarch64 --require-reports')
 
 
 def test_selected_release_architecture_uses_matching_package_and_notes(project):
@@ -268,3 +268,20 @@ def test_uncommitted_app_preparation_does_not_print_a_publish_command(project):
     assert result.returncode == 0, result.stderr
     assert 'gh release create' not in result.stdout
     assert 'Commit the app inputs' in result.stdout
+
+
+@pytest.mark.parametrize('skip_build', [False, True])
+def test_missing_original_reports_block_release_preparation(project, skip_build):
+    # Model the real Node gate's legacy-compatible versus strict report result.
+    (project / 'shims/node').write_text('''#!/bin/sh
+printf '%s\\n' "$*" >> "$RELEASE_TEST_LOG"
+case " $* " in *" --require-reports "*) echo 'Missing original verification reports' >&2; exit 1 ;; esac
+exit 0
+''')
+    args = ['--skip-build', '--receipt', str(receipt(project))] if skip_build else []
+    result = run_release(project, *args)
+    assert result.returncode != 0
+    assert not (project / 'build/release/v0.1.0').exists()
+    calls = (project / 'commands.log').read_text()
+    assert '--require-reports' in calls
+    assert 'build-kepler' not in calls
