@@ -83,7 +83,7 @@ Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/COM
    - `.venv/bin/python eval/pattern_text_precision.py`, about 4 minutes, writes
      `results/pattern_text_precision.json`.
    - `.venv/bin/python eval/report_page_check.py`, about 2 minutes, needs Chrome.
-   - `cd app && npm run ui:flashmap`, about 1 minute.
+   - `cd app && npm run ui:flashmap && node tools/ui_flashmap.mjs --negative-control`, about 1 minute; the second command is the control that has to refuse a flashing sequence and a grating, or the first means nothing.
    - `.venv/bin/python eval/labeling/make_pool.py` then `eval/labeling/plots.py`, about a
      minute. **Never once labelling has started**: a segment id is a position in a shuffled
      list. `make_pool` refuses while any sheet has an answer in it.

@@ -2246,3 +2246,12 @@ device yet.
 - **Decision:** make aarch64 Debug the release-preparation default and require complete input hashes for skipped builds. **Why:** the user's target is the Apple Silicon Vega Virtual Device; stale artwork, fonts or generated runtime code must not pass as current. **Cost:** older receipts without the full inventory require a rebuild. Publication instructions pin the prepared source commit and are withheld while app inputs are uncommitted.
 - **Decision:** require an explicit capture plan and matching native/demo evidence when assembling review artifacts. **Why:** the previous scripts embedded the older build identity and overwrote existing outputs. **Cost:** fill fresh provenance from the actual Mac run and select new output paths; cloud fixture checks do not substitute for native observations.
 - **Decision:** preserve existing publication boundaries while pushing checked batches frequently. **Why:** the user needs every terminal and workspace to receive the same latest source. **Cost:** fetch before work, reconcile concurrent commits and verify each pushed commit; other checkouts still need to pull the review branch.
+- **Decision:** give the app's own screen check a negative control, run in CI
+  after the real screens. **Why:** `npm run ui:flashmap` had been green since
+  Sep 17 and had never been seen to refuse anything, and the Sep 19 list said
+  so. The control paints a flashing sequence and a grating with the same
+  painter, hold and encoder as the real screens and fails unless the wcag
+  profile refuses the first, the broadcast profile refuses the second and the
+  wcag profile passes the grating. **Cost:** three more analyzer runs in that
+  job, about twenty seconds; and the lesson that the other Sep 19 item next to
+  it, the tick gap, had been done on Sep 17 and never crossed off.
