@@ -196,6 +196,10 @@ Record fresh observations for these journeys:
     glides back instead of settling in. Record which it is. Check
     background/foreground changes and rapid navigation for stale animation,
     repeated entrances or lost focus.
+13a. Seek into a practice hold on the Harbor demo with the remote while recording, and
+    step through the recording frame by frame: no frame of the film may show between the
+    seek and the cover. The seek function asks for the cover before it moves the
+    playhead; this is the observation that says the cover is also on screen first.
 13. With interface sounds enabled, hear a quiet, prompt confirmation for an
     accepted menu action, distinct from the warning chime. The press that turns
     the setting on must sound too; only the device's concurrent root can show

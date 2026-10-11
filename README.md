@@ -38,7 +38,7 @@ Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
 ### What it does underneath
 
 - **Every frame is measured before a title can play** by [flashmap](flashmap/), against WCAG 2.2 SC 2.3.1's general and red flash rules, with the thresholds quoted from their sources in [SPEC_SOURCES.md](flashmap/docs/SPEC_SOURCES.md).
-- **The flash map is signed** (Ed25519) and bound to the file's SHA-256, and **verify blocks publishing**: the pipeline renders a kid-safe rendition, and verify proves the cover is drawn at the first frame, the middle and the last frame of every covered span.
+- **The flash map is signed** (Ed25519) and bound to the file's SHA-256, and **verify blocks publishing**: the pipeline renders a kid-safe rendition, and verify analyzes the whole rendition again and proves the cover is drawn at the first frame, the middle and the last frame of the first six covered spans of each preset.
 - **The player fails closed.** A missing, stale, unsigned, unreadable or wrong-hash map keeps the picture hidden.
 - **One function moves the playhead**, so every seek path is guarded; a lint rule refuses any other.
 - **Adoptable by others**: a small hook for any Vega video app ([hook/](hook/)), the analyzer as a CLI and a GitHub Action, and a self-contained report page for a title.
@@ -656,6 +656,7 @@ Worth knowing before trusting this with a child.
 - **Decoder support is bounded.** The earlier Theora failures were fixed and rescreened; unsupported or undecodable inputs still fail closed.
 - **There is no screen-level cover lead time.** The software-level number above is the app's own timing on the virtual device, and it stops at the moment the app sets its state. The timing claim is a software observation, not a measurement of what a screen showed; physical camera timing is outside this submission scope.
 - **One cover in 49 went on after its marker started.** The cause looks like the JavaScript thread being unavailable for about a third of a second, which the 500 ms guard band did not cover. Until the worst thread pause is measured on real hardware, the right guard band is unknown.
+- **"Cover first, then seek" is the order of the calls, not yet of what is on screen.** The seek function sets the cover before it writes the playhead, and the cover is a React state update that reaches the screen on the next commit. Whether it is drawn before the player shows the new frame has not been observed frame by frame on a device; the Mac acceptance step records it.
 - **The layering question is open.** The one recorded run is inconclusive, because playback did not run in that take.
 - **Scene-hold composition is not measured on a TV.** The encoded outputs and
   runtime guards have automated checks, but native image loading, aspect ratio,
