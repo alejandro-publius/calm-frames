@@ -1,7 +1,7 @@
 {
   "statement": "Every safety property Calm Frames claims has a mutation that breaks the code guarding it. The kill rate below is killed divided by attempted, rounded down, over the mutations in eval/mutate_gate.py only. It is not a whole-codebase mutation score and it does not stand in for one.",
   "tool": "eval/mutate_gate.py",
-  "generated_utc": "2026-10-11T03:42:39Z",
+  "generated_utc": "2026-10-11T08:31:41Z",
   "how_a_kill_is_counted": "The tests that guard the mutated line are run as whole files. A kill needs at least one named failing test and no collection or compile error, because both of those also exit non-zero and neither is a test catching anything.",
   "negative_control": {
     "description": "every selection run unmutated before any mutation was applied",
@@ -15,7 +15,7 @@
         ],
         "green": true,
         "tests_run": 16,
-        "seconds": 1.7,
+        "seconds": 1.5,
         "detail": ""
       },
       {
@@ -25,7 +25,7 @@
         ],
         "green": true,
         "tests_run": 41,
-        "seconds": 1.7,
+        "seconds": 1.3,
         "detail": ""
       },
       {
@@ -35,7 +35,7 @@
         ],
         "green": true,
         "tests_run": 36,
-        "seconds": 0.5,
+        "seconds": 0.4,
         "detail": ""
       },
       {
@@ -45,7 +45,7 @@
         ],
         "green": true,
         "tests_run": 32,
-        "seconds": 1.7,
+        "seconds": 2.3,
         "detail": ""
       },
       {
@@ -55,7 +55,7 @@
         ],
         "green": true,
         "tests_run": 15,
-        "seconds": 1.9,
+        "seconds": 1.6,
         "detail": ""
       },
       {
@@ -65,7 +65,7 @@
         ],
         "green": true,
         "tests_run": 18,
-        "seconds": 2.3,
+        "seconds": 1.9,
         "detail": ""
       },
       {
@@ -75,7 +75,7 @@
         ],
         "green": true,
         "tests_run": 29,
-        "seconds": 1.8,
+        "seconds": 1.4,
         "detail": ""
       },
       {
@@ -87,7 +87,7 @@
         ],
         "green": true,
         "tests_run": 34,
-        "seconds": 2.4,
+        "seconds": 1.8,
         "detail": ""
       },
       {
@@ -98,7 +98,7 @@
         ],
         "green": true,
         "tests_run": 35,
-        "seconds": 2.1,
+        "seconds": 1.7,
         "detail": ""
       },
       {
@@ -129,7 +129,7 @@
         ],
         "green": true,
         "tests_run": 13,
-        "seconds": 1.6,
+        "seconds": 1.5,
         "detail": ""
       },
       {
@@ -138,8 +138,8 @@
           "pipeline/tests/test_verify.py"
         ],
         "green": true,
-        "tests_run": 62,
-        "seconds": 118.4,
+        "tests_run": 65,
+        "seconds": 150.1,
         "detail": ""
       },
       {
@@ -149,7 +149,7 @@
         ],
         "green": true,
         "tests_run": 9,
-        "seconds": 22.2,
+        "seconds": 27.0,
         "detail": ""
       },
       {
@@ -160,7 +160,7 @@
         ],
         "green": true,
         "tests_run": 65,
-        "seconds": 1.7,
+        "seconds": 1.5,
         "detail": ""
       },
       {
@@ -171,7 +171,7 @@
         ],
         "green": true,
         "tests_run": 30,
-        "seconds": 1.6,
+        "seconds": 1.5,
         "detail": ""
       },
       {
@@ -202,7 +202,7 @@
         ],
         "green": true,
         "tests_run": 10,
-        "seconds": 1.7,
+        "seconds": 1.9,
         "detail": ""
       },
       {
@@ -244,8 +244,8 @@
           "pipeline/tests/test_verify_pool.py"
         ],
         "green": true,
-        "tests_run": 76,
-        "seconds": 120.2,
+        "tests_run": 79,
+        "seconds": 137.7,
         "detail": ""
       },
       {
@@ -267,7 +267,7 @@
         ],
         "green": true,
         "tests_run": 47,
-        "seconds": 1.3,
+        "seconds": 1.5,
         "detail": ""
       },
       {
@@ -287,7 +287,7 @@
         ],
         "green": true,
         "tests_run": 25,
-        "seconds": 1.7,
+        "seconds": 1.6,
         "detail": ""
       },
       {
@@ -297,7 +297,7 @@
         ],
         "green": true,
         "tests_run": 16,
-        "seconds": 1.9,
+        "seconds": 3.1,
         "detail": ""
       },
       {
@@ -316,8 +316,8 @@
           "test/calmframes/householdStorage.test.ts"
         ],
         "green": true,
-        "tests_run": 25,
-        "seconds": 1.5,
+        "tests_run": 29,
+        "seconds": 1.8,
         "detail": ""
       },
       {
@@ -327,19 +327,19 @@
         ],
         "green": true,
         "tests_run": 20,
-        "seconds": 61.7,
+        "seconds": 83.2,
         "detail": ""
       }
     ]
   },
   "totals": {
-    "mutations": 67,
-    "killed": 65,
+    "mutations": 68,
+    "killed": 66,
     "survived": 2,
     "survived_and_not_equivalent": 0,
-    "kill_rate": 0.9701,
-    "kill_rate_percent": 97.01,
-    "as_a_fraction": "65/67"
+    "kill_rate": 0.9705,
+    "kill_rate_percent": 97.05,
+    "as_a_fraction": "66/68"
   },
   "equivalent_mutants_that_were_killed_after_all": [],
   "properties": {
@@ -476,6 +476,11 @@
       "mutations": 1,
       "killed": 1,
       "survivors": []
+    },
+    "verify measures the cover at the first frame, the middle and the last frame of every covered span": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
     }
   },
   "survivors": [
@@ -493,7 +498,7 @@
       "killed": false,
       "evidence": "",
       "survived_because": "every test passed with the guard broken (34 ran)",
-      "seconds": 2.2,
+      "seconds": 1.8,
       "equivalent": "the cover still goes on at once, by a second path. foreground is in the dependency list of the tick effect, and that effect calls tick() itself before setting its interval, so a change of foreground tears the effect down, builds it again and covers synchronously. The picture is hidden in the same commit either way and no test can see a difference. It was checked rather than assumed: coverHarness.test.tsx now has a test that flips foreground and advances no timers at all, and it stays green with this mutation applied and goes red when foreground is also taken out of that dependency list, which is the only way to actually remove the behaviour. Worth knowing that the redundancy is what makes this equivalent: drop foreground from those deps as a tidy-up and the guard on line 318 becomes load bearing again.",
       "tests_run": 34
     },
@@ -509,7 +514,7 @@
       "killed": false,
       "evidence": "",
       "survived_because": "every test passed with the guard broken (22 ran)",
-      "seconds": 1.8,
+      "seconds": 1.6,
       "equivalent": "the unsigned path is guarded three times over. With the first check gone, a map with no signature block reaches the algorithm check, where asString(undefined) is not 'ed25519', and is refused as 'unsigned' again. Only the diagnostic detail changes, and nothing user facing reads it: useFlashGuard shows rejectionMessage(reason). No test can tell the two apart, and writing one that pins the wording would be testing a log line.",
       "tests_run": 22
     }
@@ -527,7 +532,7 @@
       "killed": true,
       "evidence": "when a chime is due \u203a sounds a fixed time before the cover, and only then; when a chime is due \u203a never announces a part the playhead has already gone by; a chime is never left without a cover \u203a over a whole sitting, with both parts played through",
       "survived_because": "",
-      "seconds": 1.7,
+      "seconds": 1.4,
       "tests_run": 16
     },
     {
@@ -542,7 +547,7 @@
       "killed": true,
       "evidence": "the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 0 ms; the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 3 ms; the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 67 ms",
       "survived_because": "",
-      "seconds": 1.7,
+      "seconds": 1.4,
       "tests_run": 41
     },
     {
@@ -557,7 +562,7 @@
       "killed": true,
       "evidence": "buildCoverIntervals \u203a never starts a cover later than the guard band promised",
       "survived_because": "",
-      "seconds": 1.7,
+      "seconds": 1.3,
       "tests_run": 41
     },
     {
@@ -572,7 +577,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_hideplan.py::TestGuardBand::test_widens_both_sides",
       "survived_because": "",
-      "seconds": 0.5,
+      "seconds": 0.4,
       "tests_run": 1
     },
     {
@@ -602,7 +607,7 @@
       "killed": true,
       "evidence": "buildCoverIntervals \u203a merges intervals that touch exactly, so the cover cannot blink off",
       "survived_because": "",
-      "seconds": 1.7,
+      "seconds": 1.4,
       "tests_run": 41
     },
     {
@@ -617,7 +622,7 @@
       "killed": true,
       "evidence": "useCoverHarness \u203a timing mode hides the picture at once when buffering starts; useCoverHarness \u203a keeps fail-closed coverage when an optional presentation callback throws; useCoverHarness \u203a keeps the committed presentation callback during an abandoned suspended render",
       "survived_because": "",
-      "seconds": 1.7,
+      "seconds": 1.6,
       "tests_run": 15
     },
     {
@@ -632,7 +637,7 @@
       "killed": true,
       "evidence": "scene hold playback \u203a removes the still on waiting even when the scheduled cover was already on; scene hold playback \u203a removes the still on stalled even when the scheduled cover was already on; scene hold playback \u203a removes the still on pause even when the scheduled cover was already on",
       "survived_because": "",
-      "seconds": 2.2,
+      "seconds": 1.8,
       "tests_run": 18
     },
     {
@@ -647,7 +652,7 @@
       "killed": true,
       "evidence": "useCoverHarness \u203a keeps fail-closed coverage when an optional presentation callback throws; useCoverHarness \u203a keeps the cover on until playback is confirmed again",
       "survived_because": "",
-      "seconds": 1.8,
+      "seconds": 1.5,
       "tests_run": 15
     },
     {
@@ -662,7 +667,7 @@
       "killed": true,
       "evidence": "planSeek \u203a covers first for a target inside an interval; planSeek \u203a covers first for a target inside the guard band, not only the segment; the one function, from each source \u203a seek-bar covers before it seeks",
       "survived_because": "",
-      "seconds": 1.7,
+      "seconds": 1.3,
       "tests_run": 29
     },
     {
@@ -677,7 +682,7 @@
       "killed": true,
       "evidence": "planSeek \u203a covers first for a target just after an interval, which decodes from inside it; SafeMediaControlHandler \u203a covers first on fast forward and rewind that land inside",
       "survived_because": "",
-      "seconds": 1.7,
+      "seconds": 1.3,
       "tests_run": 29
     },
     {
@@ -692,7 +697,7 @@
       "killed": true,
       "evidence": "holding the cover until playback is confirmed outside \u203a keeps the cover on while reports still land inside",
       "survived_because": "",
-      "seconds": 1.7,
+      "seconds": 1.3,
       "tests_run": 29
     },
     {
@@ -709,7 +714,7 @@
       "killed": false,
       "evidence": "",
       "survived_because": "every test passed with the guard broken (34 ran)",
-      "seconds": 2.2,
+      "seconds": 1.8,
       "equivalent": "the cover still goes on at once, by a second path. foreground is in the dependency list of the tick effect, and that effect calls tick() itself before setting its interval, so a change of foreground tears the effect down, builds it again and covers synchronously. The picture is hidden in the same commit either way and no test can see a difference. It was checked rather than assumed: coverHarness.test.tsx now has a test that flips foreground and advances no timers at all, and it stays green with this mutation applied and goes red when foreground is also taken out of that dependency list, which is the only way to actually remove the behaviour. Worth knowing that the redundancy is what makes this equivalent: drop foreground from those deps as a tidy-up and the guard on line 318 becomes load bearing again.",
       "tests_run": 34
     },
@@ -726,7 +731,7 @@
       "killed": true,
       "evidence": "verifyFlashMap \u203a fails closed when the map is missing; useFlashGuard \u203a shows the checking card for a replacement map, not the last refusal; useFlashGuard \u203a shows the checking card for a replacement map, not the last refusal",
       "survived_because": "",
-      "seconds": 2.1,
+      "seconds": 1.8,
       "tests_run": 35
     },
     {
@@ -742,7 +747,7 @@
       "killed": true,
       "evidence": "verifyFlashMap \u203a fails closed when the map is stale; useFlashGuard \u203a keeps the picture hidden when the map is older than the limit",
       "survived_because": "",
-      "seconds": 2.1,
+      "seconds": 1.7,
       "tests_run": 35
     },
     {
@@ -757,7 +762,7 @@
       "killed": false,
       "evidence": "",
       "survived_because": "every test passed with the guard broken (22 ran)",
-      "seconds": 1.8,
+      "seconds": 1.6,
       "equivalent": "the unsigned path is guarded three times over. With the first check gone, a map with no signature block reaches the algorithm check, where asString(undefined) is not 'ed25519', and is refused as 'unsigned' again. Only the diagnostic detail changes, and nothing user facing reads it: useFlashGuard shows rejectionMessage(reason). No test can tell the two apart, and writing one that pins the wording would be testing a log line.",
       "tests_run": 22
     },
@@ -774,7 +779,7 @@
       "killed": true,
       "evidence": "useFlashGuard \u203a keeps the picture hidden when the map has been tampered with; verifyFlashMap \u203a fails closed when one character of the map was changed after signing; verifyFlashMap \u203a fails closed when a segment is added to a signed map",
       "survived_because": "",
-      "seconds": 2.1,
+      "seconds": 1.8,
       "tests_run": 35
     },
     {
@@ -789,7 +794,7 @@
       "killed": true,
       "evidence": "verifyFlashMap \u203a fails closed when the map is bound to a different file",
       "survived_because": "",
-      "seconds": 1.8,
+      "seconds": 1.5,
       "tests_run": 22
     },
     {
@@ -804,7 +809,7 @@
       "killed": true,
       "evidence": "verifyFlashMap \u203a fails closed when the map was signed by a key we do not hold",
       "survived_because": "",
-      "seconds": 1.8,
+      "seconds": 1.4,
       "tests_run": 22
     },
     {
@@ -819,7 +824,7 @@
       "killed": true,
       "evidence": "verifyFlashMap \u203a refuses a version it does not understand",
       "survived_because": "",
-      "seconds": 1.8,
+      "seconds": 1.4,
       "tests_run": 22
     },
     {
@@ -835,7 +840,7 @@
       "killed": true,
       "evidence": "a signed map that says something impossible \u203a is refused whole, rather than having the bad segment quietly dropped",
       "survived_because": "",
-      "seconds": 2.0,
+      "seconds": 1.7,
       "tests_run": 28
     },
     {
@@ -850,7 +855,7 @@
       "killed": true,
       "evidence": "useFlashGuard \u203a starts with the picture hidden, before any map has been checked; useFlashGuard \u203a shows the checking card for a replacement map, not the last refusal; useFlashGuard \u203a keeps the picture hidden when the map cannot be fetched",
       "survived_because": "",
-      "seconds": 2.0,
+      "seconds": 1.6,
       "tests_run": 13
     },
     {
@@ -865,7 +870,7 @@
       "killed": true,
       "evidence": "useFlashGuard \u203a shows the checking card for a replacement map, not the last refusal; useFlashGuard \u203a shows the checking card for a replacement map, not the last refusal; useFlashGuard \u203a keeps the picture hidden when the map cannot be fetched",
       "survived_because": "",
-      "seconds": 2.1,
+      "seconds": 1.6,
       "tests_run": 13
     },
     {
@@ -880,7 +885,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_sidecar.py::test_an_unsigned_map_is_refused_unless_you_ask_for_it",
       "survived_because": "",
-      "seconds": 1.5,
+      "seconds": 1.7,
       "tests_run": 9
     },
     {
@@ -895,7 +900,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_sidecar.py::test_a_map_for_a_different_file_does_not_verify",
       "survived_because": "",
-      "seconds": 1.5,
+      "seconds": 1.7,
       "tests_run": 14
     },
     {
@@ -910,7 +915,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_sidecar.py::test_changing_one_segment_breaks_the_signature",
       "survived_because": "",
-      "seconds": 1.3,
+      "seconds": 1.4,
       "tests_run": 11
     },
     {
@@ -925,7 +930,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_sidecar.py::test_a_segment_that_makes_no_sense_fails_the_map[segments0-ends at 100]",
       "survived_because": "",
-      "seconds": 1.7,
+      "seconds": 1.8,
       "tests_run": 22
     },
     {
@@ -940,7 +945,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_sidecar.py::test_a_segment_that_makes_no_sense_fails_the_map[segments0-ends at 100]",
       "survived_because": "",
-      "seconds": 1.8,
+      "seconds": 1.9,
       "tests_run": 22
     },
     {
@@ -955,7 +960,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestAWrongHash::test_a_source_file_that_changed_since_ingest_is_caught",
       "survived_because": "",
-      "seconds": 32.7,
+      "seconds": 33.8,
       "tests_run": 16
     },
     {
@@ -970,7 +975,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_cached_artifacts.py::test_same_path_changed_cached_artifact_is_regenerated_before_publication[probe]",
       "survived_because": "",
-      "seconds": 2.9,
+      "seconds": 3.6,
       "tests_run": 1
     },
     {
@@ -985,7 +990,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_cached_artifacts.py::test_same_path_changed_cached_artifact_is_regenerated_before_publication[poster]",
       "survived_because": "",
-      "seconds": 15.4,
+      "seconds": 18.3,
       "tests_run": 6
     },
     {
@@ -1001,7 +1006,7 @@
       "killed": true,
       "evidence": "buildCoverIntervals \u203a makes a merged interval red when any part of it is red; a regular pattern is its own reason \u203a loses to red, which is the strongest; presets \u203a keeps a red segment red through the union",
       "survived_because": "",
-      "seconds": 1.9,
+      "seconds": 1.5,
       "tests_run": 65
     },
     {
@@ -1017,7 +1022,7 @@
       "killed": true,
       "evidence": "a reason this build has never seen \u203a gets the opaque cover, not the dim one",
       "survived_because": "",
-      "seconds": 2.0,
+      "seconds": 1.6,
       "tests_run": 28
     },
     {
@@ -1062,7 +1067,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestATamperedMap::test_verify_catches_a_dim_rule_that_lets_red_through",
       "survived_because": "",
-      "seconds": 28.2,
+      "seconds": 30.6,
       "tests_run": 14
     },
     {
@@ -1078,7 +1083,7 @@
       "killed": true,
       "evidence": "the household floor \u203a holds even for a preset that asks for less than WCAG",
       "survived_because": "",
-      "seconds": 1.9,
+      "seconds": 1.7,
       "tests_run": 30
     },
     {
@@ -1093,7 +1098,7 @@
       "killed": true,
       "evidence": "presets \u203a every preset keeps the WCAG map, it never swaps it out; per title status \u203a is pending when the preset asks for a map the title does not have",
       "survived_because": "",
-      "seconds": 1.7,
+      "seconds": 1.4,
       "tests_run": 24
     },
     {
@@ -1109,7 +1114,7 @@
       "killed": true,
       "evidence": "the room \u203a refuses a map with no windows at all",
       "survived_because": "",
-      "seconds": 2.0,
+      "seconds": 1.7,
       "tests_run": 37
     },
     {
@@ -1124,7 +1129,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_room.py::test_the_room_window_is_added_to_the_profile_window_not_swapped_for_it",
       "survived_because": "",
-      "seconds": 0.6,
+      "seconds": 0.7,
       "tests_run": 3
     },
     {
@@ -1155,7 +1160,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_hideplan.py::TestCalmMoments::test_a_time_inside_the_margin_is_not_calm",
       "survived_because": "",
-      "seconds": 0.5,
+      "seconds": 0.6,
       "tests_run": 24
     },
     {
@@ -1171,7 +1176,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_bif.py::TestFramesComeFromCalmMoments::test_a_slot_inside_a_covered_span_is_sampled_from_elsewhere",
       "survived_because": "",
-      "seconds": 2.0,
+      "seconds": 2.1,
       "tests_run": 20
     },
     {
@@ -1186,7 +1191,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestFramesFromFlaggedMoments::test_a_trickplay_frame_from_a_flagged_moment_is_caught",
       "survived_because": "",
-      "seconds": 44.7,
+      "seconds": 45.6,
       "tests_run": 21
     },
     {
@@ -1201,7 +1206,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestFramesFromFlaggedMoments::test_trickplay_taken_from_the_original_is_caught",
       "survived_because": "",
-      "seconds": 49.7,
+      "seconds": 48.0,
       "tests_run": 22
     },
     {
@@ -1216,7 +1221,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestARenditionWithAViolation::test_a_violation_left_in_the_safe_rendition_blocks_publishing",
       "survived_because": "",
-      "seconds": 5.3,
+      "seconds": 4.9,
       "tests_run": 2
     },
     {
@@ -1231,7 +1236,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestTheCommandLineBlocksPublishing::test_a_broken_title_exits_non_zero_and_stays_out_of_kid_mode",
       "survived_because": "",
-      "seconds": 55.9,
+      "seconds": 56.8,
       "tests_run": 26
     },
     {
@@ -1247,7 +1252,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestTheCoverProofCannotBeSkipped::test_an_empty_sample_takes_the_proof_away_and_verify_refuses",
       "survived_because": "",
-      "seconds": 113.5,
+      "seconds": 123.7,
       "tests_run": 59
     },
     {
@@ -1262,7 +1267,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestARenditionWithAViolation::test_a_rendition_that_covered_nothing_is_caught_without_the_analyzer",
       "survived_because": "",
-      "seconds": 10.8,
+      "seconds": 11.2,
       "tests_run": 5
     },
     {
@@ -1277,7 +1282,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestARenditionWithAViolation::test_a_violation_left_in_the_safe_rendition_blocks_publishing",
       "survived_because": "",
-      "seconds": 4.9,
+      "seconds": 5.1,
       "tests_run": 2
     },
     {
@@ -1293,7 +1298,7 @@
       "killed": true,
       "evidence": "the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 100000 ms; useFlashGuard \u203a keeps the picture hidden when the rendition is further off than verify allows",
       "survived_because": "",
-      "seconds": 2.1,
+      "seconds": 1.8,
       "tests_run": 54
     },
     {
@@ -1309,7 +1314,7 @@
       "killed": true,
       "evidence": "the rendition start offset \u203a moves both ends of the interval, not just the start",
       "survived_because": "",
-      "seconds": 1.8,
+      "seconds": 1.6,
       "tests_run": 47
     },
     {
@@ -1324,7 +1329,7 @@
       "killed": true,
       "evidence": "the rendition start offset \u203a refuses an offset that is not a number",
       "survived_because": "",
-      "seconds": 1.6,
+      "seconds": 1.3,
       "tests_run": 41
     },
     {
@@ -1339,7 +1344,7 @@
       "killed": true,
       "evidence": "useFlashGuard \u203a keeps the picture hidden when the rendition is further off than verify allows",
       "survived_because": "",
-      "seconds": 2.1,
+      "seconds": 1.5,
       "tests_run": 13
     },
     {
@@ -1354,7 +1359,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestTheRenditionMustMatchTheSource::test_a_start_that_slid_too_far_blocks_publishing",
       "survived_because": "",
-      "seconds": 75.0,
+      "seconds": 78.6,
       "tests_run": 36
     },
     {
@@ -1369,7 +1374,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestComparingAMapToItsSource::test_a_narrow_guard_band_narrows_the_offset_tolerance",
       "survived_because": "",
-      "seconds": 86.0,
+      "seconds": 91.7,
       "tests_run": 45
     },
     {
@@ -1399,7 +1404,7 @@
       "killed": true,
       "evidence": "eval/property_scheduler_test.py::test_any_red_source_makes_the_whole_interval_red",
       "survived_because": "",
-      "seconds": 10.0,
+      "seconds": 9.8,
       "tests_run": 5
     },
     {
@@ -1429,7 +1434,7 @@
       "killed": true,
       "evidence": "eval/property_scheduler_test.py::test_a_seek_just_past_a_hidden_span_still_covers_first",
       "survived_because": "",
-      "seconds": 9.5,
+      "seconds": 9.2,
       "tests_run": 9
     },
     {
@@ -1459,7 +1464,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestTheRenditionMustMatchTheSource::test_the_offset_is_recorded_so_a_player_can_subtract_it",
       "survived_because": "",
-      "seconds": 80.3,
+      "seconds": 90.3,
       "tests_run": 39
     },
     {
@@ -1489,7 +1494,7 @@
       "killed": true,
       "evidence": "the packaged benign story \u203a does not grant the demo key if id changes; the packaged benign story \u203a does not grant the demo key if uri changes; the packaged benign story \u203a does not grant the demo key if sha256 changes",
       "survived_because": "",
-      "seconds": 2.0,
+      "seconds": 1.8,
       "tests_run": 16
     },
     {
@@ -1519,8 +1524,8 @@
       "killed": true,
       "evidence": "local household record \u203a refuses unbounded hashing",
       "survived_because": "",
-      "seconds": 1.5,
-      "tests_run": 25
+      "seconds": 1.8,
+      "tests_run": 29
     },
     {
       "id": "scene-hold-bytes-reproduce-from-provenance",
@@ -1534,8 +1539,23 @@
       "killed": true,
       "evidence": "pipeline/tests/test_sceneholds.py::test_valid_signature_cannot_paper_over_a_false_source_frame_timestamp",
       "survived_because": "",
-      "seconds": 30.7,
+      "seconds": 41.1,
       "tests_run": 12
+    },
+    {
+      "id": "cover-proof-reaches-the-end-of-a-span",
+      "property": "verify measures the cover at the first frame, the middle and the last frame of every covered span",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "a cover drawn at the middle of a span and gone before its end passes a midpoint-only proof, which is the proof verify had until Oct 11, 2026",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestTheCoverProofReachesTheEdgesOfASpan::test_a_cover_that_is_gone_before_the_span_ends_is_caught",
+      "survived_because": "",
+      "seconds": 118.6,
+      "tests_run": 63
     }
   ]
 }
