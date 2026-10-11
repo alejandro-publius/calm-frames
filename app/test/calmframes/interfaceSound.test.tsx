@@ -107,11 +107,42 @@ describe('optional menu audio controller', () => {
     await flush();
     jest.advanceTimersByTime(INTERFACE_SOUND_MAX_AGE_MS);
     expect(audio.pause).toHaveBeenCalled();
-    expect(audio.deinitialize).not.toHaveBeenCalled();
+    // The SDK aborts an initialization that has not answered when the player
+    // is deinitialized, so the release does not wait for the answer.
+    expect(audio.deinitialize).toHaveBeenCalledTimes(1);
     pending.resolve();
     await flush();
     expect(audio.play).not.toHaveBeenCalled();
     expect(audio.deinitialize).toHaveBeenCalledTimes(1);
+  });
+
+  it.each(['initialize', 'deinitialize'])('recovers from a player whose %s never answers', async (method) => {
+    const stuck = player();
+    stuck[method as 'initialize' | 'deinitialize'].mockReturnValue(new Promise<void>(() => {}));
+    const good = player();
+    const makePlayer = jest.fn().mockReturnValueOnce(stuck).mockReturnValue(good);
+    const sound = createInterfaceSoundController({ makePlayer });
+    sound.setAllowed(true);
+    sound.confirm();
+    await flush();
+    if (method === 'deinitialize') {
+      expect(stuck.play).toHaveBeenCalledTimes(1);
+      stuck.emit('ended');
+    }
+    jest.advanceTimersByTime(INTERFACE_SOUND_MAX_AGE_MS);
+    await flush();
+    expect(stuck.pause).toHaveBeenCalled();
+    expect(stuck.deinitialize).toHaveBeenCalledTimes(1);
+    // One player that never answers must not silence the menu for the rest
+    // of the screen's life: the next request after the interval gets its own.
+    jest.advanceTimersByTime(INTERFACE_SOUND_INTERVAL_MS);
+    sound.confirm();
+    await flush();
+    expect(makePlayer).toHaveBeenCalledTimes(2);
+    expect(good.play).toHaveBeenCalledTimes(1);
+    sound.stop();
+    await flush();
+    expect(good.deinitialize).toHaveBeenCalledTimes(1);
   });
 
   it.each(['ended', 'error', 'audiofocuspaused', 'audiofocuslost'])('releases the player on %s', async (event) => {

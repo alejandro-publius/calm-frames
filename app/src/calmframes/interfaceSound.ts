@@ -60,6 +60,10 @@ export function createInterfaceSoundController({
   const release = (playback: Playback) => {
     if (playback.released) { return; }
     playback.released = true;
+    // A released playback can never sound again, so the next request may make
+    // its own player at once. Waiting for this one's teardown would let a
+    // single player that never answers keep the menu silent for good.
+    if (current === playback) { current = undefined; }
     if (playback.timer) { clearTimeout(playback.timer); }
     for (const [event, listener] of playback.listeners) {
       try { playback.player.removeEventListener(event, listener); } catch { /* Silence. */ }
@@ -67,10 +71,10 @@ export function createInterfaceSoundController({
     playback.listeners = [];
     pause(playback.player);
     playback.cleanup = (async () => {
-      try { await playback.initialized; } catch { /* Release a failed player too. */ }
-      pause(playback.player);
+      // The SDK's deinitialize() aborts an initialize() that has not answered
+      // and rejects its promise, which the request's own catch releases again,
+      // so there is nothing to wait for before it.
       try { await playback.player.deinitialize(); } catch { /* Silence. */ }
-      if (current === playback) { current = undefined; }
     })();
   };
 

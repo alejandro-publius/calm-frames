@@ -19,7 +19,12 @@ the sample GitHub Action pins a commit on this repository and installs flashmap 
 checkout; the README has a "Run the checks" block and the `make` targets work without fnm. Later still,
 the two Python tests that failed on this box were traced to a race in `cover_psnr`, not to ffmpeg
 6.1.1 as first written: the comparison now reaches one frame, and verify's cover proof samples the
-first frame, the middle and the last frame of every covered span.
+first frame, the middle and the last frame of every covered span. Later still, two findings from the review of the motion and sound commits were fixed: the press
+that turns Selection sounds on is confirmed from the render that holds the saved record (on the
+device's concurrent root the write's continuation ran before that render), and a released sound
+player frees the next request instead of waiting on a teardown that may never answer; both are in
+the mutation gate, and the hosted runs on cf864d4 are green in every job
+(`results/github_push_2026-10-11_cf864d4.json`).
 
 **Active scope, Oct 9 finishing session.** Alex is entering solo and has an
 identity-verified Amazon Developer account. Use only the Vega Virtual Device.

@@ -1,4 +1,5 @@
 import React from 'react';
+import TestRenderer from 'react-test-renderer';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import KidModeScreen from '../../src/screens/KidModeScreen';
 import { useInterfaceSound } from '../../src/calmframes/useInterfaceSound';
@@ -57,6 +58,7 @@ async function unlock() {
 
 beforeEach(() => {
   jest.clearAllMocks();
+  feedback.confirm.mockReset();
   soundHook.mockReturnValue(feedback);
 });
 
@@ -86,6 +88,71 @@ it('confirms a saved menu preference only after persistence succeeds', async () 
   expect(feedback.confirm).not.toHaveBeenCalled();
   await act(async () => finish());
   expect(feedback.confirm).toHaveBeenCalledTimes(1);
+});
+
+it('confirms the press that turns selection sounds on, on the concurrent root the device uses', async () => {
+  // Fabric renders on a concurrent root, where a state update made from a
+  // promise is rendered in a later scheduler task. The write's continuation
+  // then runs before React renders the saved record, so a confirmation raised
+  // there reaches the hook while it still reads the old record and stays
+  // silent. The library's render above is a legacy root, and act() flushes
+  // the render first, so this test runs the write on a concurrent root with
+  // act() off, the way the device does.
+  const actEnvironment = global as { IS_REACT_ACT_ENVIRONMENT?: boolean };
+  const wasActEnvironment = actEnvironment.IS_REACT_ACT_ENVIRONMENT;
+  actEnvironment.IS_REACT_ACT_ENVIRONMENT = false;
+  let disk = JSON.stringify({
+    version: 1,
+    family: { ...newFamily(), interfaceSoundsEnabled: false },
+    gate: setPin(emptyPinGate(), '1357', 'interface-navigation'),
+  });
+  const storage = {
+    getItem: jest.fn(async () => disk),
+    setItem: jest.fn(async (_key: string, text: string) => { disk = text; }),
+  };
+  const navigation = { navigate: jest.fn(), isFocused: () => true, addListener: jest.fn(() => () => {}) };
+  // react-test-renderer 19.2 takes this option; its 19.1 typings do not list it.
+  const concurrentRoot: TestRenderer.TestRendererOptions & { unstable_isConcurrent: boolean } = {
+    createNodeMock: () => null,
+    unstable_isConcurrent: true,
+  };
+  const renderer = TestRenderer.create(
+    <KidModeScreen
+      navigation={navigation as never}
+      catalog={[offlineTitle('file:///pkg/assets/raw/offline/calm_gradient.mp4')]}
+      householdStorage={storage}
+      nowMs={() => NOW}
+    />,
+    concurrentRoot,
+  );
+  const host = (testID: string) =>
+    renderer.root.find((node) => node.props.testID === testID && typeof node.type === 'string');
+  try {
+    await waitFor(() => host('kid-mode-home'));
+    fireEvent.press(host('kid-mode-home-parent-area'));
+    for (const digit of '1357') {
+      fireEvent.press(host(`kid-mode-parent-key-${digit}`));
+    }
+    await waitFor(() => host('kid-mode-parent-open'));
+    feedback.confirm.mockClear();
+    expect(soundHook).toHaveBeenLastCalledWith({ enabled: false, active: true });
+    const enabledWhenConfirmed: boolean[] = [];
+    feedback.confirm.mockImplementation(() => {
+      enabledWhenConfirmed.push(soundHook.mock.calls[soundHook.mock.calls.length - 1][0].enabled);
+    });
+    let finish!: () => void;
+    storage.setItem.mockImplementationOnce(() => new Promise<void>((resolve) => { finish = resolve; }));
+    fireEvent.press(host('kid-mode-parent-interface-sounds'));
+    expect(feedback.confirm).not.toHaveBeenCalled();
+    finish();
+    await waitFor(() => expect(feedback.confirm).toHaveBeenCalledTimes(1));
+    const written = storage.setItem.mock.calls[storage.setItem.mock.calls.length - 1][1];
+    expect(JSON.parse(written).family.interfaceSoundsEnabled).toBe(true);
+    expect(enabledWhenConfirmed).toEqual([true]);
+  } finally {
+    renderer.unmount();
+    actEnvironment.IS_REACT_ACT_ENVIRONMENT = wasActEnvironment;
+  }
 });
 
 it('keeps a failed settings write silent while presenting recovery', async () => {

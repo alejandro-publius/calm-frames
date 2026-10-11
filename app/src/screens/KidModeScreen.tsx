@@ -246,11 +246,23 @@ const KidModeScreen = ({
       (saved.phase === 'ready' || saved.phase === 'saving')),
     active: interfaceActive,
   });
+  // A saved change is confirmed from the render that holds the saved record,
+  // not from the write's own continuation. On the concurrent root the device
+  // uses, that continuation runs before React has rendered the record, so the
+  // hook would still read the old one, and the press that turns the sound on
+  // would be the one press it never confirmed.
+  const [confirmSavedChange, setConfirmSavedChange] = React.useState(false);
+  React.useEffect(() => {
+    if (confirmSavedChange) {
+      setConfirmSavedChange(false);
+      interfaceSound.confirm();
+    }
+  }, [confirmSavedChange, interfaceSound]);
   const setFamily = (next: Family) => {
     if (saved.phase === 'ready' && saved.value) {
       saved.write({ ...saved.value, family: next }).then((accepted) => {
         if (accepted && next.interfaceSoundsEnabled === true) {
-          interfaceSound.confirm();
+          setConfirmSavedChange(true);
         }
       });
     }

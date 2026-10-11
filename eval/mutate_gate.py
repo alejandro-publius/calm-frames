@@ -944,6 +944,32 @@ MUTATIONS: list[Mutation] = [
         why="a cover drawn at the middle of a span and gone before its end passes a midpoint-only "
         "proof, which is the proof verify had until Oct 11, 2026",
     ),
+    # ------------------------------------------------- the opt-in menu sound stays honest
+    Mutation(
+        mid="selection-sound-confirmed-from-the-render-that-holds-the-record",
+        prop="the press that turns selection sounds on is itself confirmed",
+        lane="app",
+        path="src/screens/KidModeScreen.tsx",
+        old="          setConfirmSavedChange(true);",
+        new="          interfaceSound.confirm();",
+        tests=("test/screens/interfaceNavigation.test.tsx",),
+        why="the confirmation is raised from the write's own continuation, which on the "
+        "concurrent root the device uses runs before React has rendered the saved record, "
+        "so the hook still reads the old record and the one press that turns the sound on "
+        "is the one press it never confirms; this is the code the branch had until Oct 11, 2026",
+    ),
+    Mutation(
+        mid="released-sound-player-frees-the-next-request",
+        prop="one sound player that never answers cannot silence the menu for good",
+        lane="app",
+        path="src/calmframes/interfaceSound.ts",
+        old="    if (current === playback) { current = undefined; }\n    if (playback.timer) { clearTimeout(playback.timer); }",
+        new="    if (playback.timer) { clearTimeout(playback.timer); }",
+        tests=("test/calmframes/interfaceSound.test.tsx",),
+        why="a released playback stays the current one until its teardown finishes, so a "
+        "player whose initialize() or deinitialize() never answers refuses every later "
+        "request for the rest of the screen's life",
+    ),
 ]
 
 

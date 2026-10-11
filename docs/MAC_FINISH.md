@@ -190,10 +190,16 @@ Record fresh observations for these journeys:
     false, observe the hero artwork move once by <!--n results/interface_finish_2026-10-10_pacific.json:behavior.motion.translation_scaled_units -->6<!--/n--> layout units over <!--n results/interface_finish_2026-10-10_pacific.json:behavior.motion.duration_ms -->240<!--/n--> ms on
     library/details entry. There must be no text, focus or safety-cover animation.
     With motion Off, reduced motion enabled, or the query still unresolved, the
-    artwork must remain still. Check background/foreground changes and rapid
-    navigation for stale animation, repeated entrances or lost focus.
+    artwork must remain still. Watch the first frames of an entrance as well:
+    the artwork is painted at rest and offset only once the system's answer
+    arrives, so if that answer lands after the first frame is shown it dips and
+    glides back instead of settling in. Record which it is. Check
+    background/foreground changes and rapid navigation for stale animation,
+    repeated entrances or lost focus.
 13. With interface sounds enabled, hear a quiet, prompt confirmation for an
-    accepted menu action, distinct from the warning chime. Check rapid presses
+    accepted menu action, distinct from the warning chime. The press that turns
+    the setting on must sound too; only the device's concurrent root can show
+    that one. Check rapid presses
     and leaving a menu for overlapping, queued or late sounds. Confirm silence
     when the setting is Off, VoiceView is active, the app is backgrounded or a
     title is playing, with no interruption to film audio or captions. Separately

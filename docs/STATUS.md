@@ -20,15 +20,36 @@ sound's audio element as the third exemption, the Oct 9 AWS record says in a new
 line in `docs/COMPLETION_CHECKLIST.md` names the merge into main and the Oct 21
 date moves, the README's and CLAUDE.md's lists of what the household record
 saves include the two interface preferences, and the Mac acceptance step quotes
-its numbers from the results record. Two notes stand without a change: with
-motion on, the artwork paints at rest and then dips and settles once the
-reduce-motion query answers, which the Mac acceptance step will see; and a menu
-sound whose player never finishes initialising stays silent for the rest of the
-screen, which is the safe direction.
+its numbers from the results record.
+
+Two of the code lens's findings became fixes once the skeptics had confirmed
+them. On the concurrent root the device renders into, the press that turns
+Selection sounds on was the one press that never sounded: the write's
+continuation raised the confirmation before React had rendered the saved record,
+so the hook still read the old one and refused. The confirmation now comes from
+the render that holds the record. And one sound player whose initialize() or
+deinitialize() never answered kept the menu silent for the rest of the screen's
+life, because a released playback stayed the current one until its teardown
+finished; a released playback now frees the next request at once, and the
+SDK's deinitialize() is called without waiting on an initialize() it aborts
+anyway. Both have tests seen to fail (the first on a concurrent root with act()
+off, the only place the ordering shows; the library's legacy root and act()
+both render first) and both joined the mutation gate, now
+<!--n results/mutation.json:totals.mutations -->70<!--/n--> mutations with
+<!--n results/mutation.json:totals.killed -->68<!--/n--> killed and the same two
+documented equivalents. The third note, that the artwork could paint at rest and
+dip before it settles if the reduce-motion answer lands after the first frame,
+was refuted by both skeptics: the gap is one native round trip, and still until
+the answer arrives is the designed contract. The Mac acceptance step says to
+watch for it all the same.
 
 The same pass found that the two Python tests which failed on this box were a
 race in the cover proof's own measurement, not the encoder; the paragraph in
 the Oct 11 entry below and section 5 tell that story, and the fix is in.
+
+**Status line:** PR #1's head is green on Audit and CI again (cf864d4,
+`results/github_push_2026-10-11_cf864d4.json`); the sound fixes above are the
+next push; nothing since the Oct 10 polish has been built or seen on a device.
 
 ### Oct 11 (late Oct 10 Pacific): final interface effects
 
@@ -947,7 +968,7 @@ version of this table in git history, not here.
 | **By Mon Oct 12, tomorrow** | Open the upstream pull request from a fork under your account. | The fix, the two patches and the PR text are ready in `docs/OPEN_SOURCE_PR.md` and `docs/upstream-pr/`. It cannot be opened from here: it needs a fork you own, and the patches need your chosen public author identity. This is the Open Source mini challenge's contribution URL. |
 | **By Tue Oct 13** | Send the clarification request in `docs/AMAZON_SAMPLE_LICENSE_REVIEW.md` to Amazon, as an issue on AmazonAppDev/vega-video-sample or to the hackathon's Amazon contacts, and record where and when in that file. | The player wrapper and the Shaka archive carry a proprietary notice beside the sample's MIT-0 grant, and the repository goes public on Oct 21. NOTICE and the README state the conflict now; an answer would close it. |
 | **Next Mac session** | Rebuild the polished source with the Oct 11 dependency changes in (`xmldom` alias, `lodash` 4.18.1), install it on the virtual device, play Harbor and the gradient, then re-run `eval/assemble_demo.py` and `eval/check_video.sh`, regenerate the manifest and refresh the review assets. | Nothing that changed app inputs since Oct 10 has been built or seen on a device, and the recorded cut still carries the earlier 2:10 sentence. If the Vega build or playback rejects the parser alias, revert the one line in `app/package.json`. While there: attach the two original verify reports with `python -m pipeline.packaged_library attach-reports` and run `node tools/check_prepared_library.mjs --require-reports` (section 5, `docs/MAC_FINISH.md`). |
-| **Before Wed Oct 21, and the sooner the better** | Merge PR #1 into main. Audit and CI are green on ba819dc (`results/github_push_2026-10-11.json`) and again on c4dbf0f, the head with both sessions' Oct 11 work (`results/github_push_2026-10-11_c4dbf0f.json`). | A public repository shows main by default, and main has not moved since Sep 20. The judged tag is cut from main. |
+| **Before Wed Oct 21, and the sooner the better** | Merge PR #1 into main. Audit and CI are green on ba819dc (`results/github_push_2026-10-11.json`), on c4dbf0f, the head with both sessions' Oct 11 work (`results/github_push_2026-10-11_c4dbf0f.json`), and on cf864d4, the head with the cover proof correction and the review of the motion and sound commits (`results/github_push_2026-10-11_cf864d4.json`). | A public repository shows main by default, and main has not moved since Sep 20. The judged tag is cut from main. |
 | **By Fri Oct 16** | Any outreach reply you want quoted goes into `docs/VALIDATION.md`, with permission. | |
 | **Wed Oct 21, with the final checks** | Re-run `make audit-update`, re-read `scripts/audit_exceptions.toml`, confirm the two groups and move both `review_by` dates past Dec 3. Confirm the CC0 dedication of the Harbor artwork in `media/LICENSES.csv`. Make the repo public, run the final checks, publish the release. | Both audit groups expire on Oct 21 on purpose, so the release build is made with the words re-read; left as they are, the Monday audit after the tag goes red for a date rather than an advisory, in front of the judges. The rules need the repo public with the licence visible. |
 | **Thu Oct 22** | Press submit. `docs/SUBMISSION.md` has every field, with the ones needing you marked. | |
@@ -1250,7 +1271,7 @@ four that are live right now:
    and your author identity is in `docs/upstream-pr/`.
 2. **Send the Amazon licence clarification by Tue Oct 13**, so an answer can
    arrive before the repository goes public.
-3. **Merge PR #1.** Audit and CI are green on ba819dc and on c4dbf0f. Main has
+3. **Merge PR #1.** Audit and CI are green on ba819dc, on c4dbf0f and on cf864d4. Main has
    not moved since Sep 20, and the judged tag is cut from main.
 4. **Next Mac session:** rebuild with the two dependency changes in, play both
    titles on the virtual device, refresh the demo, attach the two original

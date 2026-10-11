@@ -1,0 +1,37 @@
+{
+  "statement": "The hosted runs on the Oct 11 push cf864d4, the head that carries the cover proof correction, the review of the other session's motion and sound commits, and the regenerated mutation baseline. Read through the GitHub Actions API on Oct 11 after both runs finished.",
+  "commit": "cf864d47f407a13a74cecc0ea532d74dce484254",
+  "branch": "codex/signed-scene-holds-2026-09-29",
+  "pull_request": 1,
+  "read_utc": "2026-10-11T12:20:00Z",
+  "runs": {
+    "audit": {
+      "id": 38137174556,
+      "conclusion": "success",
+      "jobs_green": 4,
+      "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38137174556"
+    },
+    "ci": {
+      "id": 38137174612,
+      "conclusion": "success",
+      "jobs_green": 6,
+      "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38137174612",
+      "jobs": [
+        "Vega app",
+        "Python packages",
+        "The app's own UI passes flashmap",
+        "Mutation gate, property tests and the map fuzz corpus",
+        "Secret scan",
+        "Published numbers match results"
+      ],
+      "mutation_gate": "the runner killed 66 of 68 and agreed with the committed report"
+    }
+  },
+  "note": "The push before it, 6df9441, was red in CI on the mutation gate alone: the committed report still said 67 mutations while the run found 68, because the regenerated baseline had not been pushed yet. Audit was green on 6df9441. The runs on the pushes between c4dbf0f and 6df9441 (ef8bbb4 green in both workflows; 5887b75 cancelled in both by the next push under cancel-in-progress) are listed by the Actions page and not here.",
+  "published": {
+    "audit_conclusion": "success",
+    "ci_conclusion": "success",
+    "audit_jobs_green": 4,
+    "ci_jobs_green": 6
+  }
+}
