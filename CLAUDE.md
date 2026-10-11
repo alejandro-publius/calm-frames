@@ -24,7 +24,13 @@ that turns Selection sounds on is confirmed from the render that holds the saved
 device's concurrent root the write's continuation ran before that render), and a released sound
 player frees the next request instead of waiting on a teardown that may never answer; both are in
 the mutation gate, and the hosted runs on cf864d4 are green in every job
-(`results/github_push_2026-10-11_cf864d4.json`).
+(`results/github_push_2026-10-11_cf864d4.json`). That night the repository was measured against
+Alex's tideline repository and every gap closable from Linux was closed: the README opens with a
+labelled render, what a family sees and a one-minute try; `docs/design/README.md` is the one design
+page, held to `calmStyles.ts` by a test; `WRITEUP.md`, `docs/README.md` (the docs index),
+`CHANGELOG.md`, `CONTRIBUTING.md` and the GitHub templates exist; DECISIONS opens with an index;
+ruff and strict mypy run in CI; actions are pinned to commits; and CI's Python job, which had tested
+only `eval/` since Sep 17, names all three lanes with a coverage floor in `.coveragerc`.
 
 **Active scope, Oct 9 finishing session.** Alex is entering solo and has an
 identity-verified Amazon Developer account. Use only the Vega Virtual Device.

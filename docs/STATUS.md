@@ -69,6 +69,36 @@ results by marker; the stale sentence that still said two tests fail on ffmpeg
 **Status line:** the README's first screen is rebuilt from what the tree already
 held; the remaining presentation and tooling gaps are ranked in DECISIONS.
 
+### Oct 11, night: the ranked gaps closed, and a CI job that had been testing a third of the code
+
+Every gap from the comparison that could be closed from Linux is closed, each
+pushed as its own checked commit. A design page in `docs/design/README.md`
+holds the palette the app draws, its contrast ratios, type, spacing, focus,
+motion, sound and copy, and a test keeps it, `tokens.json` and `calmStyles.ts`
+equal and recomputes every ratio. `WRITEUP.md` is the one-page account of why
+the system is built this way; `docs/README.md` indexes every document as for
+readers or a project record; `CHANGELOG.md`, `CONTRIBUTING.md`, a code of
+conduct and issue and pull request templates are in; `docs/DECISIONS.md` opens
+with an index of the twenty calls the design stands on. A test fails on any
+relative link or heading anchor in the Markdown that lands nowhere. ruff runs
+over the Python and strict mypy over flashmap, with the measured detector
+files left byte for byte as the conformance record hashes them; it found one
+real defect, a missing import in `pipeline/verify.py`. Both workflows run with
+a read only token and every action pinned to a commit, the pin check holds no
+exceptions, and the app's coverage floors moved from placeholders to one point
+under what is measured.
+
+The comparison also turned up something worse than presentation: CI's Python
+job had tested only `eval/` since Sep 17. Its lane detection used `ls` with a
+pattern that matched nothing in flashmap/ and pipeline/, so both were dropped
+and the job stayed green. It now names all three lanes, measures source
+coverage against a floor (<!--n results/coverage_2026-10-11.json:published.python_percent -->91.2<!--/n--> percent on a clean
+install, `results/coverage_2026-10-11.json`), and a test keeps the lanes named.
+
+**Status line:** the repository's presentation and tooling gaps are closed and
+pushed; the hosted run on the lane fix is the first in which CI tests the
+analyzer and the pipeline; the Mac session and Alex's dated items remain.
+
 ### Oct 11 (late Oct 10 Pacific): final interface effects
 
 The last feature pass adds optional artwork entrances and original menu selection
