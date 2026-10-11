@@ -1,6 +1,6 @@
 # English demo script
 
-Finished local cut: `build/submission-redesign/Calm-Frames-demo-English.mp4`.
+Earlier native cut, recorded October 10 before the later cloud polish: `build/submission-redesign/Calm-Frames-demo-English.mp4`.
 Actual Vega Virtual Device recordings and disclosed still captures, with editorial
 brand/status cards. Narration is macOS Samantha text to speech in English.
 Burned-in subtitles and a companion SRT are included. No human voice, customer
@@ -16,7 +16,11 @@ Encoded duration and hash: `results/redesign_demo_manifest_2026-10-10.json`.
 Finished-file gates: `results/redesign_video_check.json` and
 `results/redesign_video_check_broadcast.json`.
 
-## Exact narration and cut
+## Next recording plan
+
+The timings follow the earlier edit. The approved sentence at 2:10 is a revision
+for the next recording; the saved video still contains the older narration.
+Every claim must be checked against the fresh native session before assembly.
 
 | Start | Duration | Narration |
 |---|---|---|
@@ -32,14 +36,19 @@ Finished-file gates: `results/redesign_video_check.json` and
 | 2:10 | 20 s | The saved AWS run published a signed title. The app uses its local library. Detection can miss flashing. Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device. |
 | 2:30 | 6 s | Calm Frames. A calmer way to watch. |
 
-## Reproduce and publish
+## Prepare the next cut
 
-Run `.venv/bin/python eval/assemble_demo.py` on this Mac with FFmpeg, Pillow,
-the recorded sources and Samantha installed. The assembler checks narration
-length, retains native audio with disclosed gain and hashes every source.
-Run `bash eval/check_video.sh build/submission-redesign/Calm-Frames-demo-English.mp4
---max-seconds 179 --out results/redesign_video_check.json` as one command; repeat
-with `--profile broadcast` and the broadcast output path.
+Follow [MAC_FINISH.md](MAC_FINISH.md) for the current build, capture and assembly
+commands. The assembler requires an explicit capture manifest, package hash,
+full source commit and fresh output paths. Generate an unfilled plan with
+`.venv/bin/python eval/assemble_demo.py --write-template .logs/polish-capture-plan.json`.
+Populate it only from the newly observed native build, validate with `--dry-run`,
+then assemble on the Mac and run both finished-video checks.
+
+The narration above records the earlier cut. Review and update each claim for
+the new observations and current security findings. Old recordings do not
+establish the appearance or behavior of the latest source. Preserve their
+original hashes and receipts rather than relabelling them.
 
 The app uses a compiled local library. Saved AWS publication is a separate
 pipeline. Detection misses and unresolved dependency security findings are

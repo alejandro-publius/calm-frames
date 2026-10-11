@@ -26,6 +26,12 @@ costs before the reviewable work is complete and Alex approves those actions.
 Claude CLI workers require verified existing subscription authentication and
 one successful small task first; no API keys or permission bypasses.
 
+**Shared branch workflow.** Push small, checked batches frequently to
+`codex/signed-scene-holds-2026-09-29`, and before every handoff. Fetch before
+starting new work, preserve concurrent changes, and verify the remote commit
+after each push. Report a blocked push promptly. Final release publication and
+submission retain their separate approval requirements above.
+
 **What the branch holds, in one paragraph.** Signed scene holds (a checked still from before a
 hide, shown in place of black, today only on the labelled Harbor demo), a durable household
 record (salted PIN hash, lockout, profiles, room, chime), a packaged library compiled into the

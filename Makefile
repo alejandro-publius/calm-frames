@@ -210,10 +210,10 @@ sbom-check: ## fail if a committed bill no longer matches what is installed
 
 # -------------------------------------------------------------- release
 
-release: ## build armv7, aarch64 and x86_64 .vpkg files and stop before publishing
+release: ## prepare an aarch64 Debug simulator package and stop before publishing
 	@$(REPO)/scripts/release.sh $(RELEASE_ARGS)
 
-release-notes: ## the release notes and attachment list, without rebuilding
+release-notes: ## prepare from existing packages and matching --receipt hashes
 	@$(REPO)/scripts/release.sh --skip-build $(RELEASE_ARGS)
 
 # ------------------------------------------------------------ stick day

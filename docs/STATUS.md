@@ -4,6 +4,28 @@ Updated Sun Oct 11, 2026.
 
 ## 0. Where things stand
 
+### Current cloud release preparation
+
+The checkout includes the shared branch through `9afacc0`, preserving the other
+session's dependency fixes, approved safety sentence, practice labels and hosted
+check receipts. New preparation tools now require explicit source/package/capture
+identities and fresh output paths. Existing demo and review artifacts are preserved.
+The release default is the Apple Silicon aarch64 Debug simulator package; other
+targets must be selected. Skipping a build requires matching complete app input
+hashes, including generated runtime files, artwork and fonts.
+
+[MAC_FINISH.md](MAC_FINISH.md) is the current native finishing procedure. It covers
+safe branch synchronization, rebuilding, simulator checks, recording, an explicit
+capture plan and a review bundle tied to that build. Hash checks establish file
+identity, not native execution. The cloud has not rebuilt the Vega package or
+recorded new playback. The missing prepared-library verify reports, Amazon notice
+clarification, entrant details and final publication remain separate open tasks.
+
+Push small checked batches to the existing review branch and verify the remote
+commit after each push. Other terminals must fetch and reconcile that branch;
+GitHub pushes do not update another checkout automatically.
+
+
 ### Oct 11: the audit is green again, and the branch was reviewed before it reaches main
 
 **The dependency audit passes.** `xmldom` 0.6.0, which the generated Shaka

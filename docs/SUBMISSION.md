@@ -379,13 +379,11 @@ SAFETY, PLEASE READ
 **Before publication:**
 
 1. **First-run instructions.** Reviewers choose their own PIN on a fresh simulator. A package never transfers the current simulator's household record. If access to an already configured simulator is offered, provide its actual demonstration PIN separately.
-2. **The release links.** The release does not exist yet, because the judged tag can never move once it is created and that is a person's decision. `make release` builds all three packages, writes `SHA256SUMS` and `NOTES.md` into `build/release/<tag>/`, prints the `gh release create` line and stops. Once it is published, the links are:
+2. **The release links.** The release does not exist yet, because the judged tag can never move once it is created and that is a person's decision. `make release` prepares an aarch64 Debug simulator package by default, writes `SHA256SUMS`, `PREPARATION.json` and `NOTES.md` into a new `build/release/<tag>/`, prints the `gh release create` line and stops. Other targets or Release builds must be selected explicitly. Once it is published, the links are:
 
    ```
    https://github.com/alejandro-publius/calm-frames/releases/tag/<tag>
-   https://github.com/alejandro-publius/calm-frames/releases/download/<tag>/calm-frames-<version>-armv7.vpkg
-   https://github.com/alejandro-publius/calm-frames/releases/download/<tag>/calm-frames-<version>-aarch64.vpkg
-   https://github.com/alejandro-publius/calm-frames/releases/download/<tag>/calm-frames-<version>-x86_64.vpkg
+   https://github.com/alejandro-publius/calm-frames/releases/download/<tag>/calm-frames-<version>-aarch64-debug.vpkg
    https://github.com/alejandro-publius/calm-frames/releases/download/<tag>/SHA256SUMS
    ```
 

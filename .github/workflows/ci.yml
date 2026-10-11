@@ -59,6 +59,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version-file: .python-version
+      # Release-preparation fixtures exercise the real Node package checker.
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
       - name: Install ffmpeg
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
       - name: Install packages that exist

@@ -167,7 +167,13 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     if (process.argv[2] === '--packages') {
       const kind = process.argv[3]?.toLowerCase();
       requireThat(kind === 'debug' || kind === 'release', 'Choose Debug or Release packages.');
-      for (const arch of ['armv7', 'aarch64', 'x86_64']) {
+      const allArches = ['armv7', 'aarch64', 'x86_64'];
+      const options = process.argv.slice(4);
+      requireThat(options.length === 0 ||
+        (options.length === 2 && options[0] === '--arch' && allArches.includes(options[1])),
+      'Choose --arch armv7, aarch64 or x86_64, or omit it to check all packages.');
+      const arches = options.length ? [options[1]] : allArches;
+      for (const arch of arches) {
         checkPreparedPackage(path.join(APP, `build/${arch}-${kind}/calm-frames-app_${arch}.vpkg`), result.catalogSha256);
       }
     }

@@ -2238,3 +2238,11 @@ device yet.
   to fail", and the branch's own record of breaking them by hand is prose.
   **Cost:** five more mutations in `results/mutation.json`, each killed by a
   test that already existed, and about a minute more in the hardening job.
+
+
+## Cloud finishing tools after the shared Oct 11 checkpoint
+
+- **Decision:** synchronize `9afacc0` before completing this preparation batch. **Why:** another session pushed dependency repairs, disclosure fixes and hosted check receipts while this cloud work was in progress. **Cost:** resolve the overlapping instructions and narration without replacing either session's changes.
+- **Decision:** make aarch64 Debug the release-preparation default and require complete input hashes for skipped builds. **Why:** the user's target is the Apple Silicon Vega Virtual Device; stale artwork, fonts or generated runtime code must not pass as current. **Cost:** older receipts without the full inventory require a rebuild. Publication instructions pin the prepared source commit and are withheld while app inputs are uncommitted.
+- **Decision:** require an explicit capture plan and matching native/demo evidence when assembling review artifacts. **Why:** the previous scripts embedded the older build identity and overwrote existing outputs. **Cost:** fill fresh provenance from the actual Mac run and select new output paths; cloud fixture checks do not substitute for native observations.
+- **Decision:** preserve existing publication boundaries while pushing checked batches frequently. **Why:** the user needs every terminal and workspace to receive the same latest source. **Cost:** fetch before work, reconcile concurrent commits and verify each pushed commit; other checkouts still need to pull the review branch.

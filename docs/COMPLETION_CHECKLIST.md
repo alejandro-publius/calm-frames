@@ -148,8 +148,9 @@ the saved GitHub API network setting; Git source synchronization works.
   parser alias, the one line in `app/package.json` reverts.
 - [ ] Re-render the narration before any upload: the recorded cut still says
   the earlier 2:10 sentence, and `docs/VIDEO_SCRIPT.md` now carries the approved
-  one. Run `eval/assemble_demo.py`, then `eval/check_video.sh` for wcag and
-  broadcast, then regenerate the manifest, and only then replace the asset.
+  one. Follow [MAC_FINISH.md](MAC_FINISH.md) to supply the assembler with fresh
+  capture and package hashes, then run both finished-video checks before
+  preparing replacement assets.
 - [ ] Capture the polished native screens and playback, refresh the English
   demo and its source manifest, and rerun the finished video checks. Rebuild
   the review bundle and package hashes before replacing draft release assets.
