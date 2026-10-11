@@ -400,10 +400,31 @@ that every finding is either fixed or written down, in
 `scripts/audit_exceptions.toml`, with the packages it covers, the advisory ids
 that were read, who accepted it, why, and the date it has to be looked at again.
 
-Current host rerun, Oct 9 evening: `results/audit.json` reproduces the hosted
-failure. New advisories and an expired exception are unaccounted for. The
-current totals below are not all covered by accepted exceptions. The Python
-scan covered the ingest and CDK requirements; it did not include a venv freeze.
+Oct 11: the audit passes again, and two findings were fixed rather than
+excused. `xmldom` 0.6.0, which the generated Shaka `DOMParserPolyfill` imports
+and which carried sixteen advisories into the shipped bundle, is now an npm
+alias of the maintained fork `@xmldom/xmldom` 0.8.15: the polyfill only
+subclasses its `DOMParser`, the 0.8 line keeps the 0.6 parsing behaviour on
+malformed input (a partial document rather than an exception), and `npm audit`
+reports nothing against it. The app's own `lodash` moved from 4.17.23 to
+4.18.1, which clears the `_.omit` and `_.unset` findings from the copy the
+bundle carries; the two copies still reported are exact pins inside Node build
+tools. Every other finding was re-read and sorted by one mechanical test,
+whether the package is in the Metro bundle for the device. A Release and a
+Debug bundle were built here for the kepler platform with the SDK's own Metro
+configuration and their source maps read; the inventory is
+[`results/bundle_packages_2026-10-11.json`](../results/bundle_packages_2026-10-11.json):
+<!--n results/bundle_packages_2026-10-11.json:published.flagged_in_release_bundle -->20<!--/n-->
+flagged packages are in the Release bundle, react-devtools-core joins them in
+Debug, and
+<!--n results/bundle_packages_2026-10-11.json:published.flagged_in_neither_bundle -->98<!--/n-->
+are in neither. That is a Linux build with the compiled Shaka file stubbed,
+which cannot change which npm packages are bundled; it is not a Vega build
+or a device run, and the Mac's release build should confirm the same list
+once. Both dependency changes still need the Mac's Vega build and a run on
+the virtual device, as does everything else that changed app inputs since
+Oct 10. The Python scan covers the ingest and CDK requirements; it does not
+include a venv freeze.
 
 Historical repair, Sep 29:
 
@@ -429,41 +450,44 @@ on dcb27a1. Only simulator validation is required for this submission.
 | | |
 |---|---|
 | Python packages with an advisory in the scanned ingest and CDK requirements | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
-| npm packages with an advisory in app/ | <!--n results/audit.json:published.npm_packages_with_advisories -->120<!--/n--> |
-| npm advisories behind them | <!--n results/audit.json:published.npm_advisories_total -->49<!--/n--> |
-| of which critical | <!--n results/audit.json:published.npm_critical -->7<!--/n--> |
+| npm packages with an advisory in app/ | <!--n results/audit.json:published.npm_packages_with_advisories -->119<!--/n--> |
+| npm advisories behind them | <!--n results/audit.json:published.npm_advisories_total -->33<!--/n--> |
+| of which critical | <!--n results/audit.json:published.npm_critical -->6<!--/n--> |
 | of which high | <!--n results/audit.json:published.npm_high -->83<!--/n--> |
-| exception groups, each with its reasons | <!--n results/audit.json:published.exception_groups -->3<!--/n--> |
+| exception groups, each with its reasons | <!--n results/audit.json:published.exception_groups -->2<!--/n--> |
 
-The three groups, in short. The full reasoning is in the TOML file, in
+The two groups, in short. The full reasoning is in the TOML file, in
 paragraphs, because a one line reason is how an exception becomes permanent.
 
-1. **The Vega SDK and React Native.** The project pins SDK 0.24.9914 and the
-   sample at `v0.24-RN83` because that is what the device runs. There is no
-   newer react-native that Vega 0.24 supports, so "upgrade" is not an option
-   that leaves a working app. The advisories are denial of service and improper
-   authorization reached through input the app never hands them: the only
-   outside input it parses itself is the map, through our own reader.
-2. **Developer tooling.** jest, metro, the community CLI and their helpers. They
-   run on a developer's machine or a CI runner, over this repository's own
-   files. This is the build machine's risk, not the television's.
-3. **The expired sample dependency group.** Its October 5 review date remains
-   expired. The October 10 review found the prior zero-import claim was wrong:
-   generated `app/src/w3cmedia/polyfills/DOMParserPolyfill.ts` imports `xmldom`,
-   so the group now correctly has `ships = true`. Removing that dependency
-   without replacing the parser would break the bundle. The October 10 cloud
-   audit also confirms that hoisted lodash 4.17.23 remains affected by
-   [GHSA-r5fr-rjxr-66jc](https://github.com/advisories/GHSA-r5fr-rjxr-66jc)
-   (affected range `>=4.0.0 <=4.17.23`) and
-   [GHSA-f23m-r3pf-42rh](https://github.com/advisories/GHSA-f23m-r3pf-42rh)
-   (affected range `<=4.17.23`). The nested exact vendor pin at 4.17.21 is also
-   affected; deduplicating it onto 4.17.23 would not resolve those findings.
-   Candidate fixes need compatibility verification; the exception was not renewed.
+1. **What ships: the Vega SDK runtime and React Native.** The project pins SDK
+   0.24.9914 and the sample at `v0.24-RN83` because that is what the device
+   runs, and no newer react-native is supported by Vega 0.24. None of the
+   Amazon packages carries an advisory of its own; npm lists them for what
+   they depend on, and each chain was read: a code generation tool behind the
+   TurboModule API, build and test tools behind react-native-kepler, the deep
+   link parser behind react-navigation (the app configures no deep links), and
+   the DevTools backend that only a Debug build carries. The only outside
+   input the app parses itself is the map, through our own reader.
+2. **What does not ship: build and test tooling.** jest, babel, Metro, the
+   community CLI, the Vega CLI platform, API Extractor and the utilities under
+   them. Four advisories published in October 2026 (braces, sprintf-js,
+   shell-quote, handlebars) sit under tools everything else depends on, which
+   is why npm lists
+   <!--n results/audit.json:published.npm_packages_with_advisories -->119<!--/n-->
+   packages for
+   <!--n results/audit.json:published.npm_advisories_total -->33<!--/n-->
+   advisories. They run on a developer's machine or a CI runner, over this
+   repository's own files. This is the build machine's risk, not the
+   television's.
 
-The earlier shipped-group classification correction left the saved audit
-snapshot's advisory findings and original scan timestamp unchanged. Its published
-shipped-group count was recomputed with a separate review annotation; that
-correction itself did not represent a fresh advisory scan.
+The group that held `xmldom` and `lodash` is gone, because both were fixed:
+the October 10 review had found that the generated
+`app/src/w3cmedia/polyfills/DOMParserPolyfill.ts` imports `xmldom`, so a
+replacement had to keep that import working, and an npm alias does. Both
+remaining groups are due for review on Oct 21, the day of the final checks, so
+the release build is made with the words re-read. That review should move the
+dates past judging (Dec 3) once it is done, or the Monday audit after the tag
+will go red for a reason that has nothing to do with a new advisory.
 
 Scanner execution and report validation also fail closed: empty output, error
 JSON, unexpected exit statuses, incomplete records and skipped dependencies

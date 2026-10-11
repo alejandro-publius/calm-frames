@@ -2115,3 +2115,54 @@ copy only; title eligibility, signatures and thresholds are unchanged.
 - **Decision:** use a new imagegen Harbor illustration only for browsing. **Why:** richer title artwork can improve the library without changing the film or its signed hold images. **Cost:** preserve the generated PNG and its hash in `results/design_polish_2026-10-10.json`; inspect the rendered artwork and refreshed native recording before publishing.
 - **Decision:** replace technical viewing copy and fragmented settings descriptions with direct product language. **Why:** parents need to understand their choices without reading implementation terms. **Cost:** update existing copy expectations while preserving the approved safety sentence, cumulative preset behavior and explicit practice labels.
 - **Decision:** keep the earlier native receipt and demo as historical evidence. **Why:** cloud rendering and tests do not establish Vega layout, focus or playback for the new source. **Cost:** refresh the demo, source manifest, package and review bundle after native checks; do not relabel old assets as the polished build. See [design/POLISH_REVIEW.md](design/POLISH_REVIEW.md).
+
+## Oct 11, 2026: the dependency audit goes green by fixing two findings and sorting the rest by the bundle
+
+- **Decision:** replace `xmldom` 0.6.0 with an npm alias of `@xmldom/xmldom`
+  0.8.15 in app/package.json, keeping the import name the generated Shaka
+  `DOMParserPolyfill` uses. **Why:** sixteen advisories, one critical and
+  twelve high, in the shipped bundle, under an exception that expired on
+  Oct 5 and said in its own words that the answer was no longer "we will get
+  to it". The polyfill only subclasses the fork's `DOMParser` and calls
+  `super.parseFromString`; the 0.8 line is the fork's long term support line
+  and keeps 0.6's behaviour on malformed input, a partial document rather than
+  an exception (checked here on a DASH manifest, a TTML fragment, a mismatched
+  tag and two root elements), and `npm audit` reports nothing against it.
+  **Cost:** the Mac must rebuild and play a title on the virtual device before
+  this is trusted, the same rebuild the Oct 10 polish already needs. If the
+  Vega build or playback rejects it, the one line in app/package.json reverts
+  and the exception comes back with a review date, not a wish.
+- **Decision:** move the app's own `lodash` from 4.17.23 to 4.18.1. **Why:**
+  the bundle carries `lodash/omit`, and two advisories against `_.omit` and
+  `_.unset` cover every 4.17 release; 4.18.1 is outside both ranges. The call
+  sites pass prop names written in this repository's source, so the exposure
+  was small, and the fix is smaller. **Cost:** a minor version in the bundle,
+  covered by the jest suite here and by the Mac rebuild; the two nested 4.17
+  copies inside the Vega CLI platform and API Extractor stay, as build tools'
+  own.
+- **Decision:** sort every remaining finding into two groups by one mechanical
+  test, whether the package is in the Metro bundle for the kepler platform,
+  and record the bundle inventory in results/bundle_packages_2026-10-11.json.
+  **Why:** the old file said in its own header that nobody had read Metro's
+  module graph, and it had query-string and decode-uri-component, which
+  react-navigation ships, in the "does not ship" group. A Release and a Debug
+  bundle were built here with the SDK's Metro configuration, with Shaka's
+  compiled file stubbed because its Closure build needs GitHub tarballs the
+  proxy refuses; the stub cannot change which npm packages are bundled. Twenty
+  flagged packages are in the Release bundle, react-devtools-core joins them
+  in Debug, and the other ninety eight are in neither. **Cost:** the inventory
+  is a Linux build, not a Vega build or a device run, and it says so; the
+  Mac's release build should confirm the same list once.
+- **Decision:** keep every review date at Oct 21, the day of the final checks,
+  with this session named on the acceptance and Alex's confirmation owed.
+  **Why:** a hundred and nineteen packages under thirty three advisories is
+  not a thing to accept silently from a cloud session, and Oct 21 is when the
+  release build is made. **Cost:** on Oct 21 someone has to re-run
+  `make audit-update`, re-read the words, and move the dates past Dec 3, or
+  the Monday audit after the tag goes red for a date rather than an advisory.
+  It is on Alex's dated list in docs/STATUS.md.
+- **Decision:** the Shaka integration is not built on this machine and nothing
+  was done about it. **Why:** `shaka-player`'s own `npm ci` downloads two
+  forks from codeload.github.com, which the proxy answers with 403. **Cost:**
+  none to the submission; the Mac builds it. Recorded so the next session does
+  not spend an hour finding out.

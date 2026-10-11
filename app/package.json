@@ -73,7 +73,7 @@
     "image-size": "file:vendor/image-size-legacy",
     "image-size-modern": "npm:image-size@2.0.4",
     "jest-fetch-mock": "~3.0.3",
-    "lodash": "~4.17.21",
+    "lodash": "~4.18.1",
     "react": "19.2.0",
     "react-native": "0.83.0",
     "react-native-event-listeners": "~1.0.7",
@@ -81,7 +81,7 @@
     "react-redux": "~9.1.2",
     "recyclerlistview": "^4.2.1",
     "underscore": "^1.13.7",
-    "xmldom": "~0.6.0",
+    "xmldom": "npm:@xmldom/xmldom@~0.8.15",
     "yup": "~1.4.0"
   },
   "devDependencies": {

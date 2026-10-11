@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-10T04:40:25Z",
+  "generated_utc": "2026-10-11T02:57:43Z",
   "python": {
     "ran": true,
     "sources": [
@@ -26,8 +26,8 @@
       "low": 2,
       "moderate": 28,
       "high": 83,
-      "critical": 7,
-      "total": 120
+      "critical": 6,
+      "total": 119
     },
     "findings": [
       {
@@ -669,7 +669,7 @@
       {
         "package": "lodash",
         "severity": "high",
-        "direct": true,
+        "direct": false,
         "ids": [
           "1115806",
           "1115810",
@@ -902,30 +902,6 @@
         "fix_available": true
       },
       {
-        "package": "xmldom",
-        "severity": "critical",
-        "direct": true,
-        "ids": [
-          "1091573",
-          "1096547",
-          "1117098",
-          "1117892",
-          "1117895",
-          "1117898",
-          "1117901",
-          "1158516",
-          "1193688",
-          "1193691",
-          "1193694",
-          "1193698",
-          "1193703",
-          "1193706",
-          "1193710",
-          "1193713"
-        ],
-        "fix_available": false
-      },
-      {
         "package": "yargs",
         "severity": "moderate",
         "direct": false,
@@ -945,83 +921,13 @@
   },
   "published": {
     "python_packages_with_advisories": 0,
-    "npm_packages_with_advisories": 120,
-    "npm_advisories_total": 49,
-    "npm_critical": 7,
+    "npm_packages_with_advisories": 119,
+    "npm_advisories_total": 33,
+    "npm_critical": 6,
     "npm_high": 83,
-    "exception_groups": 3,
-    "exceptions_in_the_shipped_bundle": 2
+    "exception_groups": 2,
+    "exceptions_in_the_shipped_bundle": 1
   },
-  "statement": "Saved pip-audit/npm audit findings with corrected local bundle classification. Nonempty problems block acceptance; unresolved and expired findings are not waived.",
-  "problems": [
-    "the exception 'left-over-from-the-sample' was due for review on 2026-10-05",
-    "npm: @amazon-devices/kepler-content-personalization (high) has no exception",
-    "npm: @amazon-devices/kepler-epg-provider (high) has no exception",
-    "npm: @amazon-devices/kepler-file-system (high) has no exception",
-    "npm: @amazon-devices/kepler-media-controls (high) has no exception",
-    "npm: @amazon-devices/keplermediadescriptor (high) has no exception",
-    "npm: @amazon-devices/keplerscript-appstore-iap-lib (high) has no exception",
-    "npm: @amazon-devices/keplerscript-netmgr-lib (high) has no exception",
-    "npm: @amazon-devices/keplerscript-turbomodule-api (high) has no exception",
-    "npm: @amazon-devices/react-native-async-storage__async-storage (high) has no exception",
-    "npm: @amazon-devices/react-native-device-info (high) has no exception",
-    "npm: @amazon-devices/react-native-localize (high) has no exception",
-    "npm: @amazon-devices/react-native-vector-icons (high) has no exception",
-    "npm: @amazon-devices/react-native-w3cmedia (high) has no exception",
-    "npm: @istanbuljs/load-nyc-config (moderate) has no exception",
-    "npm: @jest/console (high) has no exception",
-    "npm: @jest/core (high) has no exception",
-    "npm: @jest/environment (high) has no exception",
-    "npm: @jest/expect (high) has no exception",
-    "npm: @jest/globals (high) has no exception",
-    "npm: @jest/reporters (high) has no exception",
-    "npm: @jest/test-result (high) has no exception",
-    "npm: @jest/test-sequencer (high) has no exception",
-    "npm: @jest/transform (high) has no exception",
-    "npm: @react-native-community/cli-clean (high) has no exception",
-    "npm: @react-native-community/cli-config (high) has no exception",
-    "npm: @react-native-community/cli-config-android (high) has no exception",
-    "npm: @react-native-community/cli-config-apple (high) has no exception",
-    "npm: @react-native-community/cli-doctor (high) has no exception",
-    "npm: @react-native-community/cli-platform-apple (high) has no exception",
-    "npm: @react-native/community-cli-plugin (high) has no exception",
-    "npm: @react-native/metro-config (high) has no exception",
-    "npm: @types/jest (high) has no exception",
-    "npm: @typescript-eslint/eslint-plugin (high) has no exception",
-    "npm: @typescript-eslint/type-utils (high) has no exception",
-    "npm: @typescript-eslint/typescript-estree (high) has no exception",
-    "npm: @typescript-eslint/utils (high) has no exception",
-    "npm: argparse (moderate) has no exception",
-    "npm: babel-jest (high) has no exception",
-    "npm: babel-plugin-istanbul (moderate) has no exception",
-    "npm: braces has advisory(s) nobody has read yet: 1240992",
-    "npm: cosmiconfig (moderate) has no exception",
-    "npm: create-jest (high) has no exception",
-    "npm: expect (high) has no exception",
-    "npm: fast-glob (high) has no exception",
-    "npm: find-workspaces (high) has no exception",
-    "npm: globby (high) has no exception",
-    "npm: handlebars (critical) has no exception",
-    "npm: jest (high) has no exception",
-    "npm: jest-circus (high) has no exception",
-    "npm: jest-cli (high) has no exception",
-    "npm: jest-config (high) has no exception",
-    "npm: jest-environment-node (high) has no exception",
-    "npm: jest-resolve (high) has no exception",
-    "npm: jest-resolve-dependencies (high) has no exception",
-    "npm: jest-runner (high) has no exception",
-    "npm: jest-runtime (high) has no exception",
-    "npm: jest-snapshot (high) has no exception",
-    "npm: jest-watcher (high) has no exception",
-    "npm: js-yaml (moderate) has no exception",
-    "npm: jscodeshift (high) has no exception",
-    "npm: metro-file-map (high) has no exception",
-    "npm: metro-transform-worker (high) has no exception",
-    "npm: shell-quote has advisory(s) nobody has read yet: 1241332",
-    "npm: sprintf-js (moderate) has no exception"
-  ],
-  "classification_review": {
-    "date": "2026-10-10",
-    "change": "xmldom is imported by generated DOMParserPolyfill; corrected shipped classification only. Advisory findings, expiry, accepted IDs and original scan timestamp unchanged. No fresh scan."
-  }
+  "statement": "pip-audit and npm audit over the scanned project dependencies. Findings, exception coverage and expired reviews are recorded below. Nonempty problems block audit acceptance; listing a finding does not waive it.",
+  "problems": []
 }
