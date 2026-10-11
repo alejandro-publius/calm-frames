@@ -53,3 +53,7 @@ pipeline/infra/cdk.context.json
 
 # Agent worktrees made by the session tooling; never part of the repository.
 .claude/worktrees/
+
+# Coverage data from local pytest-cov runs.
+.coverage
+.coverage.*
