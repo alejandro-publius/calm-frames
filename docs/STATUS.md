@@ -22,6 +22,12 @@ After this pass, freeze new features and fix only acceptance failures.
 recording, publication decisions and actual Devpost submission remain. Entrant
 form details are deferred until submission preparation and do not block app work.
 
+**Account and funding check:** the Developer account is identity-verified, and
+the saved AWS record proves a successful preparation and publication run. It does
+not prove credit coverage or application to charges. The latest saved cost-tag
+state is inactive, so live billing and budget visibility need a read-only check.
+The app still consumes its bundled library; the cloud demo catalog is separate.
+
 Alex confirmed the public entrant name as Alex Velazquez and country of residence
 as United States (USA). Both are recorded in the submission draft. Eligibility,
 contact email and the upstream contribution's GitHub identity remain unconfirmed.

@@ -1762,8 +1762,8 @@ second way.
   and at his own terminal, where he ran `make deploy CHECKPOINT_D=confirmed`
   and approved the IAM changes himself. docs/GATES.md has the entry.
 - **Why:** The credit request form closed on Oct 7, so nobody could meet that
-  clause any more, and the credits are not needed: Alex's own AWS credits cover
-  the bill, and he waived the clause. The other two hold. The account moved to
+  clause any more. Alex waived it and planned to use his existing credits for
+  eligible charges; coverage was not verified. The other two hold. The account moved to
   the Paid plan at 23:03 PDT on Oct 8 (CloudTrail), and the 20 dollar budget
   exists with its three alerts.
 - **Cost:** The budget cannot warn anyone yet. It counts only costs tagged
@@ -2300,3 +2300,5 @@ device yet.
 - **Decision:** add optional artwork entrances and an original menu confirmation sound, each Off by default. **Why:** Alex explicitly requested motion and interactive sounds after the static design review. Artwork can settle on entry while focus, text and picture covers remain still; accessibility and lifecycle checks keep uncertain states still or silent. **Cost:** new native acceptance for actual frames, audio timing, VoiceView and playback coexistence; no dependency or AWS deployment added.
 - **Decision:** confirm profile changes only after storage succeeds, and cancel menu sound before navigation to playback. **Why:** an immediate click could report an unsuccessful save or arrive over title audio. **Cost:** regressions seen failing before correction, plus controller cancellation and lifecycle mutation checks. The cloud evidence is in `results/interface_finish_2026-10-10_pacific.json`.
 - **Decision:** freeze new features after this pass and use the existing completion checklist as the only finish line. **Why:** the project needs one reviewed build, its matching demo and a submitted entry. **Cost:** the Mac must rebuild current source and close the recorded acceptance items before final publication approval; account form details are deferred and do not block app work.
+
+- **Decision:** qualify earlier statements that existing AWS credits cover the stack. **Why:** Alex's Credits page establishes active balances, while the saved deployment record establishes working infrastructure; neither establishes applicable-service coverage or actual credit application. The earlier funding statement was a plan, not a verified billing result. **Cost:** a read-only check of the stack account, credit applicability, Bills and cost-tag/budget visibility on the Mac. No billing mutation, new deployment or spending was performed here.

@@ -241,6 +241,12 @@ the saved GitHub API network setting; Git source synchronization works.
   all six (`results/github_push_2026-10-11.json`). Both groups are due for
   review on Oct 21, when the dates move past judging. Saved AWS evidence also has inactive Project cost tagging
   and container security findings.
+- [ ] Recheck AWS billing from the account that owns the deployed stack. Inspect
+  each active credit's applicable products, start/expiry dates and actual credit
+  application in Bills. The supplied Credits page shows balances, not proof that
+  every stack service is covered. Confirm the `Project` cost allocation tag is
+  active and the project budget sees costs; its last saved state was inactive.
+  Read-only verification does not require a redeploy or increased spending.
 - [ ] Attach the original verification reports for both prepared-library
   generations. Neither original is present in this cloud checkout. The normal
   delivery check lists their exact hashes, and the strict release gate refuses

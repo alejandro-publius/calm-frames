@@ -21,7 +21,7 @@
     "confirmed_by": "Alex, in chat and at his own terminal",
     "lock_line_committed": false,
     "lock_line_lives_in": "docs/STATUS.md of a separate deploy worktree, never committed, so pipeline/tests/test_aws_guard.py keeps the committed lock closed",
-    "credit_request_clause": "void since the credit request form closed on 2026-10-07. Alex waived it; his own AWS credits cover the bill."
+    "credit_request_clause": "void since the credit request form closed on 2026-10-07. Alex waived it and planned to use existing AWS credits. This deployment record does not verify credit eligibility or application to billed usage."
   },
   "deployed_from": {
     "commit": "c5724de",

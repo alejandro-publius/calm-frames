@@ -346,16 +346,15 @@ Rules page, Project Requirements:
 **Two things to watch on our own entry.**
 
 **AWS Builder says "incorporates AWS services ... with documented integrations".**
-Our CDK app synthesizes and is unit tested, and nothing has been deployed. Nobody
-on this project can say from the rules alone whether a synthesized, undeployed
-stack counts as incorporating AWS services. The page does not define
-"incorporates" and does not say a deployment is required. This is the single
-biggest open question on our entry and it should be asked of the hackathon
-manager rather than guessed at. The route that removes the doubt is the one in
-docs/STATUS.md: put AWS on the paid plan, set the budget alarm, confirm
-CHECKPOINT D, deploy once, and show it. The other route the rules open is Kiro
-Crew, which qualifies on its own as a development tool used during the
-hackathon, and we have not used it.
+The earlier undeployed-stack question was superseded by the saved October 9
+deployment and successful preparation run in
+[`aws_deploy_2026-10-09.json`](../results/aws_deploy_2026-10-09.json).
+The integration prepares and publishes titles; the TV app still plays its
+bundled library and does not trust the separate cloud demo key. State that
+boundary and the observed results in the submission's AWS services field.
+This is evidence of the integration, not a guarantee of a judging outcome.
+Credit coverage and current budget visibility still need the billing check in
+the completion checklist. Kiro Crew remains unused and must not be claimed.
 
 **Open Source says "new, additional".** Our reading is that the primary-track
 repository alone is not the mini challenge entry, and that the upstream pull

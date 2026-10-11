@@ -531,7 +531,7 @@ Neither the rules page nor the overview page defines "incorporates". Until Oct 9
 
 **The table is in [section 10.2](#102-which-aws-services-we-used-and-how), because that is the field the rules name.** It is one copy on purpose, so the two cannot drift. Twelve services and settings: S3, CloudFront, DynamoDB, Fargate on ECS, ECR, Lambda, Systems Manager Parameter Store with KMS, VPC with zero NAT gateways, IAM with a GitHub OIDC role that is defined but not deployed, Budgets, CloudWatch Logs, and cost allocation tags on everything.
 
-**No credit request.** Requesting the 150 US dollar AWS credits is no longer a step: the form closed on Oct 7, 2026. Alex's own AWS credits cover the stack, and HUMAN CHECKPOINT D was amended to say so ([`docs/GATES.md`](GATES.md), [`docs/DECISIONS.md`](DECISIONS.md)).
+**No credit request.** Requesting the 150 US dollar AWS credits is no longer a step: the form closed on Oct 7, 2026. Alex plans to use his existing AWS credits, but applicable-service coverage and actual billing application have not been verified; HUMAN CHECKPOINT D records the waived request ([`docs/GATES.md`](GATES.md), [`docs/DECISIONS.md`](DECISIONS.md)).
 
 ---
 
@@ -715,6 +715,6 @@ Preparation, local tests and capture can proceed autonomously. Alex is needed fo
 | 12 | **Confirm remaining entrant details**: eligibility and contact email; entrant name, country of residence and solo status are confirmed. Confirm the gallery image and "try it out" link on the live form (section 7a) | Submission day | 7a, 15 |
 | 13 | **Press submit** at HUMAN CHECKPOINT G | **Thu Oct 22** | all |
 
-Requesting the 150 dollar AWS credits used to be on this list. It is gone: the form closed on Oct 7, 2026, and Alex's own AWS credits cover the stack.
+Requesting the 150 dollar AWS credits used to be on this list. It is gone: the form closed on Oct 7, 2026, and Alex plans to use his existing credits. Their coverage of this stack and application to billed usage remain unverified.
 
 The deadline is **Friday October 23 at 12:00 PT**. We submit a day early on purpose, so that a form problem on the day is a problem with a day left in it rather than a problem with an hour.

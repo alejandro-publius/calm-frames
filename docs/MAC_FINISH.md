@@ -299,6 +299,14 @@ form values, public author identity, reviewer/video links, upstream contribution
 and final publication/submission are separate tasks. Do not invent credentials,
 send outreach, change billing, deploy AWS, publish or submit from this handoff.
 
+Use existing account access for a read-only AWS billing check if available.
+Confirm the stack's account matches the account with the credits, inspect each
+credit's applicable products and validity dates, and verify actual credit
+application in Bills. A credit balance alone does not establish coverage. Recheck
+whether the `Project` cost allocation tag is active and whether the budget sees
+costs; the last saved observation was inactive. Record what is observed without
+account identifiers. Report any required billing change before making it.
+
 Once the work is reviewable and publication/submission is approved, verify that
 the English video plays while logged out, reviewers can reach the final source
 and package, and the live Devpost fields use those same artifacts. Save the actual

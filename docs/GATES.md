@@ -46,7 +46,7 @@ What the checkpoint asks, item by item:
 |---|---|
 | The account on the Paid plan | Done. CloudTrail shows the account plan upgrade at 23:03 PDT on Oct 8 |
 | The $20 budget alarm in place | The budget exists: <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollars a month, alerts at 50 and 80 percent of actual spend and 100 percent of forecast. **It cannot fire yet**: it counts only costs tagged `Project=calm-frames`, and that tag is not yet active for cost allocation. Activating it is Alex's (pipeline/infra/README.md) |
-| The $150 credit request in | **Void, and waived.** The credit request form closed on Oct 7, so this clause could no longer be met by anyone. Alex waived it; his own AWS credits cover the bill |
+| The $150 credit request in | **Void, and waived.** The credit request form closed on Oct 7, so this clause could no longer be met by anyone. Alex waived it and planned to use existing AWS credits; credit coverage and application to the bill were not verified |
 
 The amendment is recorded in docs/DECISIONS.md the same day.
 
