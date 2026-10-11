@@ -21,7 +21,7 @@
     },
     {
       "path": "app/.prettierignore",
-      "sha256": "6a1c3dea3e60795af3dbd2fb72ba31d58c442e284453a1e6ba6ee5bb5the household PIN7dc"
+      "sha256": "6a1c3dea3e60795af3dbd2fb72ba31d58c442e284453a1e6ba6ee5bb544447dc"
     },
     {
       "path": "app/.prettierrc",
@@ -557,7 +557,7 @@
     },
     {
       "path": "app/src/assets/index.d.ts",
-      "sha256": "fe64c85154b8a85699e2the household PIN12d2ed53a21499e2de14d9752a729b1ea4d8fc36"
+      "sha256": "fe64c85154b8a85699e2444412d2ed53a21499e2de14d9752a729b1ea4d8fc36"
     },
     {
       "path": "app/src/assets/mini_details_bottom_gradient.png",
@@ -689,7 +689,7 @@
     },
     {
       "path": "app/src/blocks/assets/index.d.ts",
-      "sha256": "fe64c85154b8a85699e2the household PIN12d2ed53a21499e2de14d9752a729b1ea4d8fc36"
+      "sha256": "fe64c85154b8a85699e2444412d2ed53a21499e2de14d9752a729b1ea4d8fc36"
     },
     {
       "path": "app/src/blocks/assets/primary_nav_expanded_gradient.png",
