@@ -136,7 +136,7 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 ### Engineering guarantees (enforced in code, with tests)
 - The verify step blocks publishing. A title can't appear in kid mode until verify passes.
 - Fail closed: a missing, stale, unsigned, unparseable or wrong-hash map keeps the picture hidden.
-- Every way of moving the playhead goes through one function. Target inside an interval or guard band: cover first, then seek.
+- Every way of moving the playhead goes through one function. Target inside an interval or guard band: cover first, then seek. A lint rule in `app/package.json` refuses `currentTime =` and `fastSeek(` outside `useFlashGuard.ts`; the sample's fallbacks are exempted by name with the reason beside each.
 - Room settings can only add hides. Red segments always get an opaque cover. Dim mode only for non-red segments at 90% or darker, and verify models it.
 - Plan B (pre-covered kid-safe rendition) is always built, whatever GATE 1 says.
 

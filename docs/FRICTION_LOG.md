@@ -777,8 +777,9 @@ separate a build from the still-blocked simulator validation.
 with scene-hold, playback, guard, harness and map test paths. From the repo root,
 ran `.venv/bin/python -m pytest flashmap pipeline eval -q -m 'not slow'`.
 
-**Expected versus actual.** Expected the tests to start. Jest stopped before
-running any tests:
+**Expected.** The tests to start.
+
+**Actual.** Jest stopped before running any tests:
 
 ```text
 unable to talk to your watchman on ~/.local/state/watchman/<user>-state/sock! (Operation not permitted)
@@ -829,8 +830,9 @@ connected GitHub API. Inspect the Sep 28 scheduled
 [Audit run](https://github.com/alejandro-publius/calm-frames/actions/runs/36431466841),
 its jobs and timing, then retry its failed jobs once.
 
-**Expected versus actual.** Expected a runner to check out the repository and
-execute each audit. Both attempts failed all four jobs within two to three
+**Expected.** A runner to check out the repository and execute each audit.
+
+**Actual.** Both attempts failed all four jobs within two to three
 seconds, with `runner_id: 0` and `steps: []`. No runner logs exist. The first
 attempt recorded zero runner milliseconds. The Sep 21 scheduled Audit on the
 same main commit passed. No dependency audit command ran in either failed

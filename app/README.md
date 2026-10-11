@@ -1,5 +1,7 @@
 # Vega Video Sample App
 
+> This is the README of [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) at tag `v0.24-RN83`, kept as it came for provenance. It describes the sample's own features, some of which Calm Frames does not use. Calm Frames itself is described in the repository's [README](../README.md); the licence note for this directory is in the License section at the end of this file.
+
 The Vega Video Sample App is a comprehensive sample implementation showcasing how to build a production-ready streaming video app for Amazon Vega OS Fire TV Stick using the Vega Developer Tools. The Vega Video Sample App is a learning resource and a foundation for you to create your own Vega OS Fire TV Stick video streaming experiences.
 
 ![App Preview](./docs/images/home-screen.png)
@@ -1186,4 +1188,4 @@ Sample images in this project are sourced from [Pexels](https://www.pexels.com/l
 
 ## License
 
-See [LICENSE](LICENSE) file.
+See [LICENSE](LICENSE) file. In Calm Frames this directory keeps the sample's MIT-0 grant as published. The player wrapper under `src/w3cmedia/shakaplayer/` and the Shaka archive it builds from also carry Amazon's own proprietary notice; the repository's [NOTICE](../NOTICE) states that, and [docs/AMAZON_SAMPLE_LICENSE_REVIEW.md](../docs/AMAZON_SAMPLE_LICENSE_REVIEW.md) says what was checked and what was asked.

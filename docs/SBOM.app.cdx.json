@@ -98,6 +98,14 @@
       "name": "calm-frames-app",
       "version": "0.1.0",
       "bom-ref": "calm-frames-app@0.1.0",
+      "licenses": [
+        {
+          "license": {
+            "name": "SEE LICENSE IN LICENSE",
+            "acknowledgement": "declared"
+          }
+        }
+      ],
       "purl": "pkg:npm/calm-frames-app@0.1.0",
       "properties": [
         {

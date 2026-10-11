@@ -86,6 +86,7 @@ export function playChime(): void {
       }
       // Rewind first: the same element plays every chime, and a finished one
       // sitting at its end would make no sound at all.
+      // eslint-disable-next-line no-restricted-syntax -- the chime's audio element, not the picture; nothing here moves the video playhead
       player.currentTime = 0;
       await player.play();
     } catch {

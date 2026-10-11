@@ -97,6 +97,10 @@ def build_current(design_path: Path, measurement_path: Path) -> dict:
         result["published"][f"{key}_lo"] = round(low, 3)
         result["published"][f"{key}_hi"] = round(high, 3)
         result["published"][f"{key}_denominator"] = row["counts"]["tp"] + row["counts"]["fp"]
+    # What the false positives cost a viewer, published beside the precision they explain.
+    headline = result["headline_all_windows"]["flashmap (this project)"]
+    result["published"]["false_positive_seconds_per_minute_of_calm"] = round(
+        headline["false_positive_seconds_per_minute_of_calm"], 2)
     result["limits"] = (
         "Synthetic SDR intended-signal conformance, not clinical validation or a device test. "
         "Matrix/range conversion was corrected after the archived evaluation under a logged "

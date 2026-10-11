@@ -24,7 +24,7 @@ Every claim must be checked against the fresh native session before assembly.
 
 | Start | Duration | Narration |
 |---|---|---|
-| 0:00 | 6 s | Calm Frames. A calmer way to watch. |
+| 0:00 | 6 s | Calm Frames. A calmer way to watch, for families where a child has photosensitive epilepsy. |
 | 0:06 | 10 s | Calm Frames is running on the Vega Virtual Device. This redesigned library contains the checked videos packaged with the app. |
 | 0:16 | 12 s | Harbor is original, non-flashing media. The scene hold demo adds two scheduled holds. These are examples, not detected flashing. |
 | 0:28 | 26 s | Watch the scheduled holds. The recorded tone and English captions continue while the picture holds a calm scene. |

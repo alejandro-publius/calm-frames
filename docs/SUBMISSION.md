@@ -66,9 +66,23 @@ picture also removes the visual context that makes a story understandable. I
 wanted to explore both problems together: check a title before playback, then
 preserve its sound, captions and a calm image when a scene needs covering.
 
-The intended audience is families affected by photosensitivity. Maya, a child used
-in the early design narrative, is a composite persona. I have not yet collected
-feedback from families or clinicians, and I do not claim clinical validation.
+The intended audience is families where a child has photosensitive epilepsy.
+The Epilepsy Foundation's page on photosensitivity says that "for about 3% of
+people with epilepsy, exposure to flashing lights at certain intensities or to
+certain visual patterns can trigger seizures", and that it "is more common in
+children and adolescents". Its expert panel's consensus in *Epilepsia* (online
+Nov 24, 2025, in the February 2026 issue) says "signal analysis or trained human
+inspectors can identify provocative visual patterns". Broadcasters have both; a
+living room has neither. Calm Frames is the signal analysis, run before a title
+can be chosen, with the result signed and carried to the player. It reduces
+exposure to flashing above published limits in the videos it plays; it is not a
+medical device. The README's "Who it is for" section quotes both sources with
+their dates and says what they are not: they are why the problem is real, not
+where the thresholds come from.
+
+Maya, a child used in the early design narrative, is a composite persona. I have
+not yet collected feedback from families or clinicians, and I do not claim
+clinical validation.
 
 ### What it does
 
@@ -92,7 +106,9 @@ Parents set room dimensions, profiles and a minimum preset behind a PIN. Those
 settings persist locally, and storage errors block the library until resolved.
 Stricter household choices can add hides but cannot relax the standard floor.
 Voice transport, the D-pad and on-screen seek controls share the same guarded
-seek path.
+seek path. The D-pad and on-screen paths were observed on the Vega Virtual
+Device; the voice path is exercised by tests only, because the virtual device
+has no Alexa to deliver a spoken seek.
 
 There are also developer adoption paths: an analyzer and GitHub Action for
 content preparation, a documented sidecar format, and a locally installable
@@ -525,7 +541,7 @@ Neither the rules page nor the overview page defines "incorporates". Until Oct 9
 NEEDS ALEX
 ```
 
-**NEEDS ALEX:** the pull request has to be opened by **Monday October 12** so that this URL exists. The branch, the title and the body are prepared in [`docs/OPEN_SOURCE_PR.md`](OPEN_SOURCE_PR.md), which Lane G owns. It has not been opened and the branch has not been pushed anywhere, because opening it needs a fork under your own GitHub account. It does not need to be merged by the deadline, only opened.
+**NEEDS ALEX:** the pull request has to be opened by **Monday October 12** so that this URL exists. The branch, the title and the body are prepared in [`docs/OPEN_SOURCE_PR.md`](OPEN_SOURCE_PR.md). It has not been opened and the branch has not been pushed anywhere, because opening it needs a fork under your own GitHub account. It does not need to be merged by the deadline, only opened.
 
 ### 12.2 Project repository URL
 
@@ -631,11 +647,11 @@ And two differences, because the precedent is not the same product. Apple's dete
 
 ## 14. Friction log
 
-**The full log, in Amazon's six fields, is [`docs/FRICTION_LOG.md`](FRICTION_LOG.md)**, which Lane G owns. Its original table holds **thirty-five entries: six High, thirteen Medium and sixteen Low**, followed by dated native playback/capture findings. Each one has the task, the steps with the exact commands, expected versus actual with the exact output, severity, the workaround we used, and a suggestion. Entries 1 to 28 are on Amazon's surface, 29 to 33 are the wider toolchain, and 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues; the log says so in its own summary.
+**The full log, in Amazon's six fields, is [`docs/FRICTION_LOG.md`](FRICTION_LOG.md).** Its table holds **forty entries: eight High, fifteen Medium and seventeen Low**. Each one has the task, the steps with the exact commands, expected and actual with the exact output, severity, the workaround we used, and a suggestion. Entries 1 to 28 and 36 to 40 are on Amazon's surface, 29 to 33 are the wider toolchain, and 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues; the log says so in its own summary.
 
 If the Devpost form wants the entries inline rather than a link, paste the body of that file from its "Summary" heading down. Nothing in it needs editing first.
 
-The six High entries, so the list reads in the right order:
+The eight High entries, so the list reads in the right order:
 
 | # | What broke |
 |---|---|
@@ -644,7 +660,9 @@ The six High entries, so the list reads in the right order:
 | 15 | No crypto API on the platform, so Ed25519 signature checking had to be written by hand |
 | 22 | Playback on the virtual device is not steady, and the error says `UNKNOWN` |
 | 26 | The player's `timeupdate` cadence and `currentTime` resolution are undocumented, and the reports are not regular |
-| 35 | Every GitHub Actions Audit job failed before a runner or a step started, Sep 28 to 30. Not an Amazon issue. Hosted runners have run real steps since Oct 5; Audit on dcb27a1 failed on dependency advisories, SBOM drift and the CDK CLI minimum. After the Oct 10 push, Audit on 402c167 passes SBOM, stack and container jobs and fails dependency audit only |
+| 35 | Every GitHub Actions Audit job failed before a runner or a step started, Sep 28 to 30. Not an Amazon issue. Hosted runners have run real steps since Oct 5, and the Audit workflow has been green in all four jobs since the Oct 11 push (`results/github_push_2026-10-11.json`) |
+| 36 | A packaged `file:///pkg/...` URI is not opened by the native player |
+| 37 | The native caption view cannot be stacked above a React Native image by z-index |
 
 **NEEDS ALEX:** read the friction log and confirm you are happy for them to be published as written. They name real defects in Amazon's tools, in plain words, with the exact output. That is what the log is for, and it is still your name on the submission.
 

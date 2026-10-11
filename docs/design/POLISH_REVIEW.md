@@ -24,7 +24,10 @@ required; the earlier simulator package and demo do not include this pass.
 These images approximate the layout in Chromium from the actual rendered
 React Native component trees, bundled Inter fonts and artwork. They are
 review aids, not Vega screenshots. Browser text and flex measurements can
-differ from the device. Both comparison images use the same standalone shelf
+differ from the device. They were rendered from the tree committed as `54dab0b`
+on Oct 10, before the Oct 11 shelf copy changes (the practice holds label), so
+where an image and the code differ, the code is current and the image shows the
+earlier wording. Both comparison images use the same standalone shelf
 fixture; the family image additionally exercises the real profile control.
 
 | Before | After |

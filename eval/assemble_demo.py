@@ -31,7 +31,7 @@ PROVENANCE_NOTE = (
 # Timing and narration from the reviewed demo, without its old capture identity.
 TEMPLATE_SHOTS = [
     ('brand-opening', 'editorial', 0, 6,
-     'Calm Frames. A calmer way to watch.'),
+     'Calm Frames. A calmer way to watch, for families where a child has photosensitive epilepsy.'),
     ('library', 'native_still', 0, 10,
      'Calm Frames is running on the Vega Virtual Device. This redesigned library contains the checked videos packaged with the app.'),
     ('details', 'native_still', 0, 12,

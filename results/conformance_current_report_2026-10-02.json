@@ -2765,6 +2765,7 @@
     "clips_kept": 2999,
     "clips_measured": 3000,
     "excluded_clips": 1,
+    "false_positive_seconds_per_minute_of_calm": 4.53,
     "false_positives_elsewhere": 80,
     "false_positives_in_the_calm_lead_in": 504,
     "false_positives_total": 584,
@@ -2804,7 +2805,7 @@
     "what_these_are": "the same numbers as the tables below, rounded and with short keys, because eval/readme_sync.py quotes a dotted path with no spaces in it. A document quotes these.",
     "windows": 8997
   },
-  "report_wrapper_sha256": "91e92a1fa81793acd01f7ff3a521557df5a1056ba44e7f98106587000894b7fa",
+  "report_wrapper_sha256": "bbd53423860852b9584a3ab365d58e4d1fdd6a5c73f68a2ddcf215b19144149d",
   "sample": {
     "clips_designed": 3000,
     "clips_kept": 2999,

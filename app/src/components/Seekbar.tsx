@@ -105,6 +105,7 @@ const Seekbar = ({
         // target inside a flagged part is covered before the picture changes.
         requestSeek('seek-bar', value * SECOND_IN_MILIS);
       } else {
+        // eslint-disable-next-line no-restricted-syntax -- the sample's fallback, reached only when no requestSeek is wired; the Calm Frames player always wires one
         videoRef.current.fastSeek(value);
       }
       videoRef.current.play();

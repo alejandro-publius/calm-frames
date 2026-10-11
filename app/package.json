@@ -1,6 +1,7 @@
 {
   "name": "calm-frames-app",
   "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
   "files": [
     "dist"
   ],
@@ -156,9 +157,73 @@
         {
           "selector": "Literal[value='setNativeProps']",
           "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+        },
+        {
+          "selector": "AssignmentExpression[left.type='MemberExpression'][left.property.name='currentTime']",
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks and the chime's audio element are exempted by name, with the reason beside each."
+        },
+        {
+          "selector": "CallExpression[callee.type='MemberExpression'][callee.property.name='fastSeek']",
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks and the chime's audio element are exempted by name, with the reason beside each."
         }
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "src/calmframes/useFlashGuard.ts"
+        ],
+        "rules": {
+          "no-restricted-syntax": [
+            "error",
+            {
+              "selector": "MemberExpression[property.name='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            },
+            {
+              "selector": "Literal[value='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            }
+          ]
+        }
+      },
+      {
+        "files": [
+          "src/w3cmedia/shakaplayer/ShakaPlayer.ts"
+        ],
+        "rules": {
+          "no-restricted-syntax": [
+            "error",
+            {
+              "selector": "MemberExpression[property.name='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            },
+            {
+              "selector": "Literal[value='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            }
+          ]
+        }
+      },
+      {
+        "files": [
+          "test/**"
+        ],
+        "rules": {
+          "no-restricted-syntax": [
+            "error",
+            {
+              "selector": "MemberExpression[property.name='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            },
+            {
+              "selector": "Literal[value='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            }
+          ]
+        }
+      }
+    ]
   },
   "kepler": {
     "projectType": "application",

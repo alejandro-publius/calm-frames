@@ -38,8 +38,8 @@ BEGIN = "<!-- BEGIN media credits, written by eval/attribution.py. Do not edit b
 END = "<!-- END media credits -->"
 
 # Titles that no page gives us a name for. Everything on Wikimedia Commons is named by its own
-# file page, so only the eight sourced titles and our own three below need one written down
-# (eleven in all, Oct 9, 2026). A ledger row that is neither a Commons
+# file page, so only the eight sourced titles and our own seven below need one written down
+# (fifteen in all, Oct 11, 2026). A ledger row that is neither a Commons
 # file nor listed here fails the test in eval/tests/test_attribution.py rather than getting an
 # invented name off its file name.
 TITLES = {
@@ -55,6 +55,10 @@ TITLES = {
     # is a film frame or a signed playback still.
     "app/assets/image/tv/harbor.png": "Harbor presentation artwork",
     "app/assets/image/tv/gradient.png": "Calm gradient presentation artwork",
+    # The two videos the app ships besides the Harbor story: the bundled calm
+    # gradient, and the prepared Harbor rendition kid mode plays. Both are ours.
+    "app/assets/raw/offline/calm_gradient.mp4": "The calm gradient (bundled title)",
+    "app/assets/raw/prepared-library/89496fc4b45528558ce35ef9140aa659b86a5f84734156098e2f29e312f2c590/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/wcag.mp4": "Harbor story (prepared locally)",
     "bbb_720p_surround.mp4": "Big Buck Bunny",
     "sintel_2048_stereo_512kb.mp4": "Sintel",
     "tears_of_steel_720p.mov": "Tears of Steel",
