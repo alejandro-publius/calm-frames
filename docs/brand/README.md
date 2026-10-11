@@ -122,26 +122,23 @@ establish native screen composition. Current run evidence is recorded in
 
 ## The palette
 
-The logo colours at the top of `make_logo.py` match the corresponding app tokens
-in `app/src/calmframes/calmStyles.ts`. The app also defines surface and supporting
-text colours. This table reflects the current deeper teal background; contrast
-values measured against the older `#1F4D5C` ground do not describe this palette.
+The palette has one home: the [palette on the design page](../design/README.md#palette),
+which lists every `CALM_COLORS` entry in `app/src/calmframes/calmStyles.ts`
+with its use, and the pairs that carry text with their contrast ratios. This
+section keeps only what is particular to the mark.
 
-| Token | Hex | Use |
-|---|---|---|
-| Background | `#102F3A` | Screen and listing tile ground |
-| Surface | `#1A414B` | Cards and settings rows |
-| Focused surface | `#234B55` | Focused and selected controls |
-| Border | `#66A0B4` | Supporting boundaries and setup progress |
-| Cream text | `#F3E8D3` | Primary text |
-| Supporting text | `#BDD0CF` | Descriptions and secondary labels |
-| Saffron | `#E6A957` | Focus outlines, primary actions and sparse labels on the dark background |
-| Saffron dark | `#B87A2C` | Decorative edges and fills |
-| Ink | `#17323C` | Text on cream or saffron |
+The five colours at the top of `app/assets/brand/make_logo.py` are app tokens,
+and `eval/tests/test_design_page.py` fails if one of them stops being a
+palette colour:
 
-Colour permissions depend on the actual foreground and background pair.
-Decorative dark saffron carries no text. Focus keeps a stable outline and an
-underlined label so that colour is not its only cue.
-`app/test/calmframes/tenFoot.test.tsx` measures every rendered line against
-whatever is actually painted behind it, so a colour used in the wrong place
-fails there rather than here.
+| make_logo.py | Token | Hex | In the mark |
+|---|---|---|---|
+| `TEAL` | `BACKGROUND` | `#102F3A` | The ground of the icons and of the Fire TV tile |
+| `CREAM` | `TEXT` | `#F3E8D3` | The halo, the face, the wordmark and the brand line |
+| `SAFF` | `FOCUS_RING` | `#E6A957` | The robe |
+| `SAFFD` | `ACCENT_DARK` | `#B87A2C` | The single fold line across the robe |
+| `INK` | `INK` | `#17323C` | The closed eyes and the smile |
+
+The tile draws the wordmark and the brand line in full-opacity cream on the
+opaque teal ground. Contrast values measured against the older `#1F4D5C`
+ground do not describe this palette.
