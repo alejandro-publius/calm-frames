@@ -41,6 +41,12 @@ request #1, on top of main at 7110893 (2026-09-20). Main has not moved since.
 - The README opens with the product: badges, a labelled browser render, what a family sees, a one-minute try of the analyzer, a "Run the checks" block and a "How this is checked" section. (98ee292, 1b088d1, e592d28)
 - More guards in the mutation gate: the five the branch had added, the cover proof's reach to the end of a span, and the two sound fixes. (ba819dc, 41c891e, cf864d4, 9bb14c6)
 - Records of the green hosted CI and Audit runs on each pushed head, in `results/github_push_*.json`. (9afacc0, 7eb032f, 9bb14c6, 98ee292)
+- `docs/design/README.md`, the one design page: identity, palette, contrast, type, spacing, focus, motion, sound, copy, accessibility, the renders and the limits, with `eval/tests/test_design_page.py` holding it, `tokens.json` and `calmStyles.ts` to each other and recomputing every listed contrast ratio. (fb81a3f, aa34bc1)
+- `WRITEUP.md`, the one-page account of why Calm Frames is built the way it is, and `docs/README.md`, an index of every document split into what is for readers and what is a project record. (b340290, 5f256ae)
+- `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, issue templates for a bug and a title check, a pull request template that carries the project's rules, and this changelog. (5f256ae)
+- An index at the top of `docs/DECISIONS.md` of the twenty calls the design stands on, each linked to its entry or to the code that enforces it. (daeb91b)
+- `eval/tests/test_doc_links.py`, which fails on any relative link or heading anchor in the repository's Markdown that lands nowhere. (c73831f)
+- ruff over the Python code and strict mypy over the flashmap package, in CI, `make ci` and the pre-commit hooks, with the measured detector files left byte for byte as the conformance record hashes them. (561ad28)
 
 #### Changed
 
@@ -63,9 +69,12 @@ request #1, on top of main at 7110893 (2026-09-20). Main has not moved since.
 - README line anchors that had drifted point at their symbols again, and the pipeline walkthrough gives verify the public key it needs, without which it refuses the title. (1e96efd, 1b088d1)
 - The screen check says so when flashmap is missing instead of reporting a threshold failure, and checks the analyzer's real entry module. (1b088d1, 4804a7d)
 - The video duration tests hand `check_video.sh` their own interpreter, so they pass in a clone with no `.venv`. (7eb032f)
+- `pipeline/verify.py` named `CoverInterval` in an annotation without importing it; ruff found it. (561ad28)
 
 #### Security
 
+- CI and Audit run with a read only token, and every action they, the published flashmap action and its example use is pinned to a full commit; `scripts/check_pins.py` runs in CI, holds no exceptions, and refuses to report when its own negative control passes. (77c386c, d0ab78f)
+- The app's coverage floors rise from the old placeholders to one point under what is measured, and the totals are written to each run's summary. (77c386c)
 - Four identifiers that had no business going public are gone: the validation household's PIN digits, an organizer's name and address, session ids and a subscription tier in two results records, and the owner's account name in paths. None was a secret. (7568f05, e043d80)
 
 ### 2026-10-10
