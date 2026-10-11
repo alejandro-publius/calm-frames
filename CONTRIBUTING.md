@@ -93,10 +93,11 @@ Each of these is in CLAUDE.md in full. The first group overrides everything.
 
 **Truth**
 
-- Every published number comes from a file in `results/`, written as a marker,
-  `<!--n results/file.json:key -->value<!--/n-->`, which
-  `eval/readme_sync.py --check` holds to the file. Run `eval/readme_sync.py`
-  without `--check` to rewrite them.
+- Every published number comes from a file in `results/`, written as a marker
+  that names the file and the key around the value (the exact form is in
+  [CLAUDE.md](CLAUDE.md), under Truth, and any marked number in the README shows
+  it), which `eval/readme_sync.py --check` holds to the file. Run
+  `eval/readme_sync.py` without `--check` to rewrite them.
 - When a number has a worse sibling, publish both, or say in the same sentence
   why the worse one is not the honest measure.
 - Thresholds come only from

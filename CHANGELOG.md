@@ -15,9 +15,9 @@ each entry name those commits. Work done on one day and committed on a later one
 is listed under the later date, and the entry says so.
 
 **No measured numbers here.** Measurements live in `results/` and reach the
-documents through `eval/readme_sync.py`, which does not read this file, so a
-number written here could go stale with nothing to notice. Where an entry is
-about a measurement, it names the results file instead.
+documents through `eval/readme_sync.py`. A changelog entry describes a change
+on its date, and a measurement can move after it, so where an entry is about a
+measurement it names the results file instead of repeating the number.
 
 ## [Unreleased]
 
