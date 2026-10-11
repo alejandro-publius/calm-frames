@@ -19,7 +19,7 @@ sizes using the installed Qt SVG engine, with headless Chrome as a fallback.
 The Qt route needs the macOS command line tools and `pkg-config Qt6Svg`.
 No new renderer was downloaded for the October 9 refresh.
 
-Both are checked in, so every image here can be rebuilt from the two scripts.
+Both are checked in, so the logo exports here can be rebuilt from the two scripts.
 
 ## The three drawings
 
@@ -85,6 +85,21 @@ licensed faces as the app. The SIL license is in `app/assets/fonts/` and
 `docs/design/assets/`. Deep teal is now #102F3A across the tile and app.
 No Amazon font files are redistributed.
 
+## Harbor presentation artwork
+
+The current `app/assets/image/tv/harbor.png` was generated with imagegen on
+October 10, 2026 using the prior Harbor illustration as its visual reference.
+The supplied output is a 1942 x 809 PNG. Its provenance and exact file hash are
+recorded in [`design_polish_2026-10-10.json`](../../results/design_polish_2026-10-10.json).
+The logo scripts do not reproduce this generated artwork.
+
+This illustration appears only in the library and title details. It is not a
+frame from Harbor or a signed playback hold. The film, checked media and hold
+images keep their existing provenance. See
+[POLISH_REVIEW.md](../design/POLISH_REVIEW.md) for the design changes and their
+cloud evidence. A rebuilt Vega package, native composition and playback checks,
+and refreshed demo recordings are still required for this polish.
+
 ## October 9 review
 
 The 512 px and 114 px listing icons and 48 px preview retain the closed eyes,
@@ -100,21 +115,26 @@ establish native screen composition. Current run evidence is recorded in
 
 ## The palette
 
-The five colours at the top of `make_logo.py` are the app's palette tokens, in
-`app/src/calmframes/calmStyles.ts`. What each one may be used for is decided by
-measured contrast, not by taste:
+The logo colours at the top of `make_logo.py` match the corresponding app tokens
+in `app/src/calmframes/calmStyles.ts`. The app also defines surface and supporting
+text colours. This table reflects the current deeper teal background; contrast
+values measured against the older `#1F4D5C` ground do not describe this palette.
 
-| Token | Hex | Contrast on teal | What it may carry |
-|---|---|---|---|
-| Teal | `#1F4D5C` | ground | Every screen sits on it |
-| Cream | `#F3E8D3` | 7.60:1 | Text, at any size |
-| Saffron | `#E6A957` | 4.47:1 | The focus ring and fills. **Not text** |
-| Saffron dark | `#B87A2C` | 2.58:1 | Edges and fills only. Carries nothing |
-| Ink | `#17323C` | n/a | Text on cream (11.10:1) and on saffron (6.53:1) |
+| Token | Hex | Use |
+|---|---|---|
+| Background | `#102F3A` | Screen and listing tile ground |
+| Surface | `#1A414B` | Cards and settings rows |
+| Focused surface | `#234B55` | Focused and selected controls |
+| Border | `#66A0B4` | Supporting boundaries and setup progress |
+| Cream text | `#F3E8D3` | Primary text |
+| Supporting text | `#BDD0CF` | Descriptions and secondary labels |
+| Saffron | `#E6A957` | Focus outlines, primary actions and sparse labels on the dark background |
+| Saffron dark | `#B87A2C` | Decorative edges and fills |
+| Ink | `#17323C` | Text on cream or saffron |
 
-Saffron misses the 4.5:1 floor for text by 0.03, so it is a ring and a fill and
-never a label. The dark saffron carries no text at all: ink on it is 3.76:1 and
-cream on it is 2.95:1, and both are under the floor.
+Colour permissions depend on the actual foreground and background pair.
+Decorative dark saffron carries no text. Focus keeps a stable outline and an
+underlined label so that colour is not its only cue.
 `app/test/calmframes/tenFoot.test.tsx` measures every rendered line against
 whatever is actually painted behind it, so a colour used in the wrong place
 fails there rather than here.

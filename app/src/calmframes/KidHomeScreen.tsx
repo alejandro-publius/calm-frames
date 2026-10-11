@@ -133,7 +133,7 @@ const KidHomeScreen = ({
         <View style={styles.navigation}>
           {picking && profiles ? <CalmButton testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
-          {onOpenParentArea ? <CalmButton testID={`${testID}-parent-area`} label="Parental controls" accessibilityLabel="Parental controls, needs a PIN" hasTVPreferredFocus={empty && !saving} onPress={onOpenParentArea} /> : null}
+          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet testID={`${testID}-parent-area`} label="Parental controls" accessibilityLabel="Parental controls, needs a PIN" hasTVPreferredFocus={empty && !saving} onPress={onOpenParentArea} /></View> : null}
         </View>
       </View>
       {choosingProfile && picking && profiles && onChooseProfile ? (
@@ -174,12 +174,12 @@ const KidHomeScreen = ({
                 const label = titlePresentation(entry.title);
                 return <TouchableOpacity disabled={saving || undefined} accessibilityState={saving ? { disabled: true } : undefined}
                   key={entry.title.id} testID={`${testID}-poster-${entry.title.id}`} accessibilityRole="button"
-                  accessibilityLabel={`${label.name}, ${label.kind ?? ''}, checked`} activeOpacity={1}
+                  accessibilityLabel={`${label.cardName ?? label.name}, ${label.kind ?? ''}, checked`} activeOpacity={1}
                   hasTVPreferredFocus={!saving && Boolean(returnFocusId) && entry.title.id === preferredId}
                   onFocus={() => setFocusedId(entry.title.id)} onBlur={() => setFocusedId(null)} onPress={() => onOpen(entry)}
                   style={[styles.poster, focused ? styles.posterFocused : null]}>
                   <TitleArtwork compact entry={entry} testID={`${testID}-poster-image-${entry.title.id}`} />
-                  <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={2} testID={`${testID}-poster-title-${entry.title.id}`}>{label.name}</Text>
+                  <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={2} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
                   {label.kind ? <Text style={styles.posterQualifier} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{label.kind}</Text> : null}
                 </TouchableOpacity>;
               })}
@@ -204,13 +204,14 @@ const KidHomeScreen = ({
 const styles = StyleSheet.create({
   focusedLabel: { textDecorationLine: 'underline' },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND, paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y) },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: scale(32) },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: scale(20) },
   brand: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   mark: { width: scale(72), height: scale(72) },
   wordmark: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT },
   navigation: { flexDirection: 'row', gap: scale(20) },
+  navigationLink: { alignSelf: 'center' },
   scrollContent: { paddingBottom: scale(12) },
-  hero: { flexDirection: 'row', alignItems: 'center', gap: scale(64), marginBottom: scale(32) },
+  hero: { flexDirection: 'row', alignItems: 'center', gap: scale(64), marginBottom: scale(16) },
   heroCopy: { width: scale(790) },
   heroArt: { flex: 1 },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, marginBottom: scale(12) },
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, marginBottom: scale(20) },
   banner: { marginBottom: scale(20) },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: scale(20) },
-  poster: { width: scale(560), padding: scale(6), borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: CALM_COLORS.BACKGROUND, backgroundColor: CALM_COLORS.BACKGROUND },
+  poster: { width: scale(560), padding: scale(6), borderRadius: scale(32), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: CALM_COLORS.BACKGROUND, backgroundColor: CALM_COLORS.BACKGROUND },
   posterFocused: { borderColor: CALM_COLORS.FOCUS_RING, backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
   posterTitle: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT, marginTop: scale(12) },
   posterQualifier: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },

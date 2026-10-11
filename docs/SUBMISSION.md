@@ -2,13 +2,17 @@
 
 Every field for **Build, Ship, Shape: Amazon Developer Hackathon**, Fire TV track, with the Open Source and AWS Builder mini challenges.
 
-**Status, October 10.** Solo entry; validation and demo use the Vega Virtual Device exclusively. The Amazon Developer account is created and identity-verified. This draft is not ready to submit. The native simulator journey and final English video are recorded and checked locally; the judged release,
+**Status, October 10.** Solo entry; validation and demo use the Vega Virtual Device exclusively. The Amazon Developer account is created and identity-verified. This draft is not ready to submit. The earlier native simulator journey and English video are recorded and checked locally. The current cloud design polish changes app inputs and still needs a Mac build, native checks and refreshed demo assets. The judged release,
 reviewer access and public contribution URL still have no URL. Section 3 was
 rewritten against the current implementation; recheck the remaining fields and
 replace every **NEEDS ALEX** before submission. Current completion and remaining blockers are in
 [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md).
 
-**Current evidence.** The approved native redesign is installed on the Vega Virtual Device. The October 10 receipt, [`results/redesign_validation_2026-10-10.json`](../results/redesign_validation_2026-10-10.json), binds final app source `73fbbed` to its aarch64 Debug package and identifies earlier observations separately. PIN mismatch/Delete, all offered presets and compatible catalog titles, saved settings, remote focus, Harbor holds with captions/audio, transport fallback and recovery were exercised. The final restart preserves Kid, Extra cautious, a 55-inch TV, a 10-foot household distance and chime Off; Kid's effective distance remains its stricter 8 feet. Positive real-cover history is integration-tested only. The English demo is `build/submission-redesign/Calm-Frames-demo-English.mp4`, with disclosed actual captures and synthetic narration. The corrected conformance report below retains its weaker near-limit result. Saved AWS publication worked, but the app consumes its compiled local catalog. Hosted CI passed on pushed checkpoint 402c167. Audit now passes SBOM, stack and container jobs and fails dependency audit only. All nine review assets are uploaded in a private draft release; see results/github_push_2026-10-10.json. Main and public submission links are unchanged. Before public source release, resolve the generated Amazon polyfill notice identified in docs/SECURITY.md.
+**Earlier native evidence.** The October 10 receipt, [`results/redesign_validation_2026-10-10.json`](../results/redesign_validation_2026-10-10.json), binds native app source `73fbbed` to its installed aarch64 Debug package and identifies earlier observations separately. PIN mismatch/Delete, all offered presets and compatible catalog titles, saved settings, remote focus, Harbor holds with captions/audio, transport fallback and recovery were exercised. The final restart of that build preserves Kid, Extra cautious, a 55-inch TV, a 10-foot household distance and chime Off; Kid's effective distance remains its stricter 8 feet. Positive real-cover history is integration-tested only. Its English demo is `build/submission-redesign/Calm-Frames-demo-English.mp4`, with disclosed actual captures and synthetic narration. These records remain evidence of that earlier build.
+
+**Current design scope.** The cloud polish adds generated Harbor presentation art, taller library cards, quieter secondary navigation, and refined setup, parental controls and viewing settings. It has not been packaged, installed or verified on Vega here. See [design/POLISH_REVIEW.md](design/POLISH_REVIEW.md) and [`results/design_polish_2026-10-10.json`](../results/design_polish_2026-10-10.json). Rebuild on the Mac and check D-pad navigation, scrolling, saved settings and playback before refreshing the native recording, demo and draft assets. The Harbor illustration is not a film frame or signed hold image.
+
+The corrected conformance report below retains its weaker near-limit result. Saved AWS publication worked, but the app consumes its compiled local catalog. Hosted CI passed on pushed checkpoint 402c167. At that checkpoint Audit passed SBOM, stack and container jobs and failed dependency audit only. All nine earlier review assets are uploaded in a private draft release; see results/github_push_2026-10-10.json. Main and public submission links are unchanged. Dependency findings and the conflicting Amazon sample notices in [AMAZON_SAMPLE_LICENSE_REVIEW.md](AMAZON_SAMPLE_LICENSE_REVIEW.md) remain open before public release.
 
 **How to use this file.** Each numbered section below corresponds to a planned
 Devpost field. Final field names still need checking in the live form.
@@ -19,7 +23,8 @@ Devpost field. Final field names still need checking in the live form.
 
 | When | What |
 |---|---|
-| Done, Oct 9 to 10 | Native simulator takes recorded. Exact clips used in the current cut are listed in `results/redesign_demo_manifest_2026-10-10.json` |
+| Done, Oct 9 to 10 | Earlier native simulator takes recorded. Exact clips used in that cut are listed in `results/redesign_demo_manifest_2026-10-10.json` |
+| Pending, before upload | Rebuild and validate the cloud polish on the Mac, then refresh native recordings, the English demo and review assets to match |
 | Mon Oct 12 | The upstream pull request is open, so the contribution URL exists |
 | Fri Oct 16, 12:00 PT | Devpost's early eligibility check. Entries submitted by then are checked, and Devpost says what needs fixing. Optional, and only worth it with a near-complete entry, video link included. The takes exist; this row is reachable only if the final English edit is uploaded before then, otherwise drop it |
 | Mon Oct 19, 9 to 10 AM PT | Office Hours #2 with the Amazon team. Optional; register through the link in the Devpost update |
@@ -226,13 +231,15 @@ visibility have been changed by this documentation update.
 NEEDS ALEX
 ```
 
-**Local video is finished:** `build/submission-redesign/Calm-Frames-demo-English.mp4`.
+**Earlier local video is preserved:** `build/submission-redesign/Calm-Frames-demo-English.mp4`.
 It is <!--n results/redesign_video_check.json:duration_s -->156.021<!--/n--> seconds,
 in English with disclosed macOS Samantha synthetic narration, actual simulator
-footage/stills and editorial cards. The final duration/WCAG check passes.
+footage/stills and editorial cards. Its recorded duration/WCAG check passes.
 The exact script is [`docs/VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md); all shot sources
-and hashes are in `results/redesign_demo_manifest_2026-10-10.json`. Remaining: upload,
-public URL and logged-out viewing check. No re-filming is required.
+and hashes are in `results/redesign_demo_manifest_2026-10-10.json`. The current
+cloud polish requires a Mac build, native validation and refreshed captures
+before a matching demo can be published. Update its script, source manifest and
+finished-file checks, then upload and verify the public URL while logged out.
 
 Three checks before pasting:
 
@@ -274,10 +281,13 @@ The whole guard is one hook, `app/src/calmframes/useFlashGuard.ts`. Give it a pl
 ## 9. Testing instructions
 
 ```
-Calm Frames is meant to be reviewed on the Vega Virtual Device. The approved-design Debug
-package was installed there on Oct 10. The visible journey was observed and
+Calm Frames is meant to be reviewed on the Vega Virtual Device. The earlier approved-design Debug
+package from source 73fbbed was installed there on Oct 10. Its visible journey was observed and
 recorded, with intermediate and final observations distinguished in
 results/redesign_validation_2026-10-10.json.
+The subsequent cloud design polish has not been built or installed on Vega.
+Repeat native navigation, scrolling, settings, playback and recording checks
+on the rebuilt package before presenting it as the reviewed release.
 On the Apple Silicon development Mac, use the aarch64 package. This package
 is not for an Intel Mac. The install/launch commands below are the ones used
 for the native checks.
@@ -664,14 +674,15 @@ Preparation, local tests and capture can proceed autonomously. Alex is needed fo
 |---|---|---|---|
 | 0 | **Done Oct 9: the AWS Builder question.** The stack is deployed and has run twice (section 11), so whether an undeployed stack counts no longer arises. Kiro Crew is a route we have not taken and must not imply we have | Done | 5, 11 |
 | 0b | **Done Oct 9 to 10: simulator screen recording.** ScreenCaptureKit recorded the simulator window with picture and audio; the saved takes show both Harbor holds, their English captions and non-silent sound, and the record is `results/redesign_validation_2026-10-10.json` | Done | 7 |
+| 0d | **Validate and record the cloud design polish.** Rebuild on the Mac, check native D-pad focus, scrolling, saved settings and playback, then refresh the demo, manifest, package hashes and review bundle to match | Before video or release publication | 7, 9 |
 | 0c | **Activate `Project` as a cost allocation tag**, so the 20 dollar budget can see the bill. Until then it cannot warn anyone (section 11.1) | **Now.** A new tag can take up to a day to appear for activation | 11 |
 | 1 | **Confirm the GitHub username** to credit on the Open Source fields, and which account forks the upstream repository | Before Mon Oct 12 | 12.3 |
 | 2 | **Open the upstream pull request** from a fork under your own account, and paste the URL | By Mon Oct 12 | 12.1 |
 | 3 | **Done Oct 9: first-run PIN instructions verified** on the simulator, including a mismatched confirmation and a Delete correction; no preset PIN is embedded in the package | Done | 9 |
 | 4 | **Done Oct 9: HUMAN CHECKPOINT D.** The Paid plan and the 20 dollar budget are in place, and the credit clause is void because the form closed on Oct 7 | Done | 11 |
 | 5 | **Any outreach reply you want quoted** goes into `docs/VALIDATION.md`, with permission | By Fri Oct 16 | 15 |
-| 6 | **Done Oct 10: English demo edited.** Actual simulator footage, labelled still captures, synthetic English narration, subtitles and source manifest | Done | 7 |
-| 7 | **Done Oct 10: finished-file check.** Duration below three minutes and WCAG check pass; receipt in `results/redesign_video_check.json` | Done | 7 |
+| 6 | **Done for the earlier build: English demo edited.** Actual simulator footage, labelled still captures, synthetic English narration, subtitles and source manifest. Refresh for the current polish under item 0d | Earlier build complete | 7 |
+| 7 | **Done for the earlier build: finished-file check.** Duration below three minutes and WCAG check pass; receipt in `results/redesign_video_check.json`. Rerun on the refreshed cut | Earlier build complete | 7 |
 | 8 | **Upload the video** and check the link works while logged out | Before Thu Oct 22 | 7 |
 | 9 | **Read the thirty-five friction entries** and confirm you are happy for them to be published as written | Before submission | 14 |
 | 9b | **Get Audit green on the review branch, then merge PR #1 into main.** On 402c167 CI passes. Audit passes SBOM, stack and container jobs, but dependency advisories and the expired exception remain unresolved. A public repository shows main by default, and main does not yet hold the scene-hold work, so the merge has to land before item 10 and the judged tag is cut from main after it | Before **Wed Oct 21** | 6, 9 |

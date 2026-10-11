@@ -153,7 +153,7 @@ export const PARENT_AREA_TITLE = 'Parental controls';
 export const PARENTAL_CONTROLS_TITLE = 'Parental controls';
 /** One line under the heading, saying what the page is for. */
 export const PARENTAL_CONTROLS_LEAD =
-  'Change how strict Calm Frames is, read what was hidden, and check the status of every title.';
+  'Adjust viewing settings, review what was hidden, and check which titles are ready.';
 /** While a change is being written to the household record. */
 export const SAVING_CHANGES = 'Saving your changes…';
 
@@ -203,7 +203,7 @@ export const ROOM_ONLY_ADDS =
  * vocabulary to a screen that already has enough.
  */
 export const TV_SIZE_TITLE = 'Television size';
-export const SEAT_DISTANCE_TITLE = 'How far away the sofa is';
+export const SEAT_DISTANCE_TITLE = 'Viewing distance';
 
 export function televisionChosen(inches: number): string {
   return `${Math.round(inches)} inch is chosen.`;
@@ -260,8 +260,8 @@ export const SETTINGS_STATE_WORD = 'showing';
  * or one kid's own setting. Those two are not the same thing and the screen
  * should never let them look the same. Every section says whose it is now.
  */
-export const STRICTNESS_TITLE = 'How strict';
-export const ROOM_TITLE = 'The room';
+export const STRICTNESS_TITLE = 'Viewing preset';
+export const ROOM_TITLE = 'TV and seating';
 export const HIDDEN_TITLE = 'What was hidden';
 export const CHECKED_TITLES_TITLE = 'Titles';
 
@@ -471,11 +471,11 @@ export function hidesByDay(entries: HideLogEntry[], nowMs: number): HideDay[] {
  * sofa does not have to work out which way round a colour means.
  */
 export const CHIME_SECTION_TITLE = 'Sound';
-export const CHIME_ROW_TITLE = 'Chime before a hide';
+export const CHIME_ROW_TITLE = 'Chime before the picture is hidden';
 export const CHIME_ON_LABEL = 'On';
 export const CHIME_OFF_LABEL = 'Off';
 export const CHIME_NOTE =
-  'A soft chime sounds a couple of seconds before the picture goes dark. Turning it off changes nothing about what is hidden.';
+  'A soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.';
 
 /**
  * The first run explainer.
@@ -488,7 +488,7 @@ export const CHIME_NOTE =
 export const EXPLAINER_TARGET_SECONDS = 20;
 export const EXPLAINER_WORDS_PER_MINUTE = 150;
 
-export const EXPLAINER_TITLE = 'What Calm Frames hides, and why';
+export const EXPLAINER_TITLE = 'How Calm Frames works';
 export const EXPLAINER_LINES: string[] = [
   'Calm Frames checks a whole title before it plays.',
   'Parts flagged by the checks are hidden while sound and captions continue. The checks can miss flashing.',

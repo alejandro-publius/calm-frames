@@ -792,7 +792,7 @@ const ParentAreaScreen = ({
 };
 
 /** The gap between groups, in 1080p units: the larger step of the spacing scale. */
-const GROUP_GAP = 48;
+const GROUP_GAP = 56;
 
 /**
  * The column at the right edge of a row that holds the word Chosen, or On and
@@ -809,7 +809,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(CALM_SPACE.SAFE_X),
     paddingVertical: scale(CALM_SPACE.SAFE_Y),
   },
-  content: { paddingBottom: scale(CALM_SPACE.SAFE_Y) },
+  content: {
+    width: '100%',
+    maxWidth: scale(1400),
+    paddingBottom: scale(CALM_SPACE.SAFE_Y),
+  },
   header: { marginBottom: scale(GROUP_GAP) },
   title: {
     ...CALM_TEXT.screen,
@@ -819,7 +823,7 @@ const styles = StyleSheet.create({
     ...CALM_TEXT.body,
     color: CALM_COLORS.TEXT_DIM,
     marginTop: scale(CALM_SPACE.TIGHT),
-    maxWidth: scale(1500),
+    maxWidth: scale(1160),
   },
   saving: {
     ...CALM_TEXT.supporting,
@@ -854,17 +858,17 @@ const styles = StyleSheet.create({
     ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
     marginTop: scale(CALM_SPACE.TIGHT),
-    maxWidth: scale(1500),
+    maxWidth: scale(1160),
   },
   block: { marginTop: scale(CALM_SPACE.BLOCK) },
   /** A settings row. Quiet at rest: the ring is there, in the card's own colour. */
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: scale(CALM_SPACE.ROW),
+    paddingVertical: scale(24),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    marginBottom: scale(CALM_SPACE.TIGHT),
-    borderRadius: scale(12),
+    marginBottom: scale(16),
+    borderRadius: scale(16),
     borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,
@@ -886,6 +890,7 @@ const styles = StyleSheet.create({
   rowDetail: {
     ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
+    marginTop: scale(8),
   },
   rowState: {
     width: scale(STATE_COLUMN),

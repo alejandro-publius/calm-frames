@@ -8,14 +8,23 @@ import { CatalogTitle, CheckedTitle } from './titleStatus';
 import { CALM_COLORS, scale } from './calmStyles';
 import { shelfLabel, shelfPoster } from './shelf';
 
-export function titlePresentation(title: CatalogTitle) {
+interface TitlePresentation {
+  name: string;
+  cardName?: string;
+  kind?: string;
+  action: string;
+  description: string;
+  art?: 'harbor' | 'gradient';
+}
+
+export function titlePresentation(title: CatalogTitle): TitlePresentation {
   if (isBundledBenignStory(title)) {
-    return { name: 'Harbor: Scene hold demo', kind: 'Scheduled scene holds', action: 'Watch demo',
+    return { name: 'Harbor: Scene hold demo', cardName: 'Harbor demo', kind: 'Scheduled scene holds', action: 'Watch demo',
       description: 'This version adds scheduled scene holds to Harbor so you can see how they work during playback.', art: 'harbor' };
   }
   if (concernsPackagedLibrary(title) && title.title === 'Harbor story (prepared locally)') {
     return { name: 'Harbor', kind: 'Original story', action: 'Watch now',
-      description: 'A small boat makes its way through a quiet harbor and carries on toward home.', art: 'harbor' };
+      description: 'A small boat finds its way home through a quiet harbor.', art: 'harbor' };
   }
   if (title.id === OFFLINE_TITLE_ID) {
     return { name: 'Calm gradient', kind: 'Playback test', action: 'Play',
@@ -31,7 +40,7 @@ export default function TitleArtwork({ entry, testID, compact = false }: { entry
   const source = entry.status === 'verified' && presentation.art
     ? presentation.art === 'harbor' ? require('../../assets/image/tv/harbor.png') : require('../../assets/image/tv/gradient.png')
     : poster ? { uri: poster } : undefined;
-  return source ? <Image testID={testID} source={source} style={[styles.art, { height: scale(compact ? 160 : 380) }]} resizeMode={presentation.art ? 'cover' : 'contain'} fadeDuration={0} accessible={false} />
-    : <View style={[styles.art, { height: scale(compact ? 160 : 380) }]} />;
+  return source ? <Image testID={testID} source={source} style={[styles.art, { height: scale(compact ? 220 : 380) }]} resizeMode={presentation.art ? 'cover' : 'contain'} fadeDuration={0} accessible={false} />
+    : <View style={[styles.art, { height: scale(compact ? 220 : 380) }]} />;
 }
 const styles = StyleSheet.create({ art: { width: '100%', borderRadius: scale(20), backgroundColor: CALM_COLORS.SURFACE } });

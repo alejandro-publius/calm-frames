@@ -3,20 +3,32 @@
 Updated October 10, 2026. Solo entry, identity-verified Amazon Developer account.
 Deadline October 23 at noon Pacific. Vega Virtual Device exclusively.
 
-## Exact tested build
+## Current design polish
 
-Approved native design implemented, reviewed and installed. Simulator demo and
-submission materials are complete locally; publication and security items remain
-open below.
+The latest cloud work refines the library, title artwork, secondary navigation,
+setup, parental controls and viewing settings. It changes app inputs beyond the
+native package below. The current source has not been built, installed or
+verified on the Vega Virtual Device in this cloud session.
+
+Review: [design/POLISH_REVIEW.md](design/POLISH_REVIEW.md).
+Cloud evidence: [`design_polish_2026-10-10.json`](../results/design_polish_2026-10-10.json).
+Native validation and refreshed demo assets remain open below.
+
+## Earlier native tested build
+
+The earlier approved native design was implemented, reviewed and installed.
+Its simulator demo and review assets are preserved as evidence of that build;
+they do not contain the current cloud polish.
 App source: `73fbbeddf6c259b3cb4286f770ff6c2a55a63564`.
 Branch: `codex/signed-scene-holds-2026-09-29`.
 Installed package: `app/build/aarch64-debug/calm-frames-app_aarch64.vpkg`,
 aarch64 Debug for this Apple Silicon Mac. SHA-256:
 `9dbffc3addeb023d2d14893a85a065d67ddef658485a375182e7a2f79f98e726`.
 Receipt: `results/redesign_validation_2026-10-10.json`.
-Later documentation commits do not change these app inputs.
+Documentation and audit work through `8271b38` preserved these app inputs.
+The subsequent design polish changes them and requires a new native receipt.
 
-## Completed implementation and checks
+## Completed implementation and checks for the earlier build
 
 - [x] Preserved Claude's Harbor work, original recordings and separate AWS worktree.
 - [x] Applied approved IMPLEMENTATION_BRIEF.md and COPY_GUIDE.md from Documents.
@@ -49,7 +61,7 @@ Later documentation commits do not change these app inputs.
 - [x] Prior local SBOM/CDK fixes reproduce; 100 relevant infra tests pass.
   Dependency advisories are still open and have not been waived.
 
-## Native journey and evidence scope
+## Earlier native journey and evidence scope
 
 | Journey | Observation |
 |---|---|
@@ -64,7 +76,7 @@ Later documentation commits do not change these app inputs.
 | Recovery | Back during loading returns to focused Watch demo, then replay succeeds. Earlier native load-error evidence retained; final fault handling also regression-tested, not newly fault-injected |
 | Remote | Profile disclosure, PIN/Delete, preset/room/chime rows, full details plan, Credits and return focus exercised |
 
-## Run the simulator demo
+## Run the earlier simulator demo
 
 ```sh
 source ~/vega/env
@@ -88,7 +100,7 @@ vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_DO
 Do not infer native composition from the CLI smoke log alone. The observed
 captures and native receipt provide that evidence.
 
-## Submission preparation
+## Earlier submission preparation
 
 - [x] Refreshed English demo: `build/submission-redesign/Calm-Frames-demo-English.mp4`,
   companion SRT, exact script and shot manifest. Actual cba1a29 app captures;
@@ -120,12 +132,19 @@ process permission, refreshed Python pins and isolated Moto configuration.
 New dependency-scanner regression tests also pass. Exact full-run and rerun
 counts are separate in `results/cloud_continuation_2026-10-10.json`.
 
-The approved native package inputs are unchanged. Native playback remains backed
-by the Mac receipt. Direct cloud verification of private release assets awaits
+That handoff preserved the approved native package inputs through `8271b38`.
+The later design polish requires a fresh Mac build and native checks. Direct
+cloud verification of the earlier private release assets awaits
 the saved GitHub API network setting; Git source synchronization works.
 
 ## Still open
 
+- [ ] Rebuild and install the current polished source on the Mac's Vega Virtual
+  Device. Check D-pad focus and return navigation, full-page scrolling, PIN
+  setup and correction, saved settings, title playback, holds, audio and captions.
+- [ ] Capture the polished native screens and playback, refresh the English
+  demo and its source manifest, and rerun the finished video checks. Rebuild
+  the review bundle and package hashes before replacing draft release assets.
 - [ ] Dependency Audit remains failed: unresolved SDK/transitive advisories and
   an expired exception. No exceptions widened. The new hosted CI passes;
   Audit now passes SBOM, stack and container jobs, failing dependency audit
@@ -141,6 +160,7 @@ the saved GitHub API network setting; Git source synchronization works.
   unpublished. Code and private draft artifacts are on GitHub. No merge,
   visibility change, final release publication or Devpost submission performed.
 
-There is no simulator, localhost-test, recording or Claude authentication blocker.
-Publication and the unresolved security items remain distinct from local demo
-completion. No physical device or hardware timing work is required.
+Simulator, recording and Claude authentication worked in the earlier Mac session.
+The current polish still needs its own Mac build and simulator validation;
+cloud checks cannot supply that evidence. Publication and unresolved security
+items also remain open. No physical device or hardware timing work is required.

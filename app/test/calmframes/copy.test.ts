@@ -237,7 +237,7 @@ describe('the room chips, in words', () => {
 
   it('gives both rows a name, because two rows of numbers are not one row', () => {
     expect(TV_SIZE_TITLE).toBe('Television size');
-    expect(SEAT_DISTANCE_TITLE).toBe('How far away the sofa is');
+    expect(SEAT_DISTANCE_TITLE).toBe('Viewing distance');
   });
 });
 

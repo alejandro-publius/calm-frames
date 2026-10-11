@@ -67,7 +67,7 @@ describe('the first run', () => {
     );
     type('2468');
     expect(screen.getByTestId('first-run-title').props.children).toBe(
-      'Type the PIN again',
+      'Confirm your PIN',
     );
     type('2468');
 
@@ -159,7 +159,7 @@ describe('the first run', () => {
       '65 inch television, seats about 6 feet away',
     );
     expect(screen.getByTestId('first-run-done-label').props.children).toBe(
-      'Open checked library',
+      'Open library',
     );
     expect(onDone).not.toHaveBeenCalled();
   });
@@ -170,7 +170,7 @@ describe('the first run', () => {
     type('5555');
     fireEvent.press(screen.getByTestId('first-run-next'));
     expect(screen.getByTestId('first-run-title').props.children).toBe(
-      'Your television and your sofa',
+      'Your TV and seating',
     );
     expect(JSON.stringify(screen.toJSON())).toContain(
       'can only add hidden parts',
@@ -235,7 +235,7 @@ describe('the first run', () => {
     type('5555');
 
     expect(
-      screen.getByLabelText('How strict should it be').props.accessibilityRole,
+      screen.getByLabelText('Choose a viewing preset').props.accessibilityRole,
     ).toBe('radiogroup');
     expect(
       screen.getByTestId('first-run-preset-wcag').props.accessibilityState,
@@ -250,7 +250,7 @@ describe('the first run', () => {
       screen.getByLabelText('Television size').props.accessibilityRole,
     ).toBe('radiogroup');
     expect(
-      screen.getByLabelText('How far away the sofa is').props.accessibilityRole,
+      screen.getByLabelText('Viewing distance').props.accessibilityRole,
     ).toBe('radiogroup');
     expect(
       screen.getByTestId('first-run-tv-55').props.accessibilityState,

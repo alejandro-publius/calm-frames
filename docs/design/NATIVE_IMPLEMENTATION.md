@@ -1,10 +1,34 @@
 # Approved TV design implementation
 
+## October 10 cloud polish
+
+The current source adds a more prominent Harbor illustration, taller library
+cards, quieter secondary navigation, a clearer viewing settings panel, and
+more consistent setup and parental controls layouts and copy. This changes
+app inputs after the earlier native build. It has not been packaged, installed
+or observed on Vega in this cloud session.
+
+See [POLISH_REVIEW.md](POLISH_REVIEW.md) and
+[`design_polish_2026-10-10.json`](../../results/design_polish_2026-10-10.json)
+for the current changes and cloud evidence. Rebuild on the Mac, check D-pad
+focus, scrolling, saved settings and playback in the Vega Virtual Device,
+then record the changed screens and refresh the demo and review assets.
+The earlier native receipt remains valid for its recorded package and cannot
+be used as native evidence for this polish.
+
+`app/assets/image/tv/harbor.png` was generated with imagegen on October 10 from
+the prior Harbor illustration. The supplied output is a 1942 x 809 PNG used
+only for library and details presentation. It is neither a frame from the
+film nor a signed hold image. The polish receipt records its exact hash.
+
+## Earlier native implementation
+
 The October 10 user-provided archive was found in Documents. Its briefs and
 starting tokens are preserved here. The HTML is a reference, not native evidence.
 
-The native design uses the supplied Harbor and gradient SVG illustrations as
-presentation artwork. They are never substituted for signed playback hold images.
+The earlier native design used the supplied Harbor and gradient SVG illustrations
+as presentation artwork. The gradient still uses that source; the current Harbor
+PNG is described above. Neither is substituted for signed playback hold images.
 The Harbor synopsis comes from the existing story captions: a boat in the harbor
 on its way home. Catalog identity, verification, rendition selection and holds
 remain independent of the display names and art.
@@ -32,7 +56,7 @@ retains the 32-unit floor, with six-unit reserved focus outlines. New art is
 included in image checks; the final native recording is analyzed separately
 because the palette simulation does not inspect image pixels or native layout.
 
-## Validation
+## Earlier native validation
 
 The first native render exposed oversized hero artwork despite a passing type
 check. Explicit image heights correct it. Native parent controls, PIN correction, settings persistence, full-plan scrolling,

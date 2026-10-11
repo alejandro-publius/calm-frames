@@ -39,26 +39,32 @@ const ViewingPlan = ({
   return (
     <View testID={testID} style={styles.card}>
       <Text style={styles.heading} accessibilityRole="header">
-        Your viewing plan
+        Your viewing settings
       </Text>
-      <Text style={styles.label} testID={`${testID}-preset`}>
-        {preset.title}
-      </Text>
-      <Text style={styles.line} testID={`${testID}-room`}>
-        {describeRoom(settings)}
-      </Text>
-      <Text style={styles.line} testID={`${testID}-maps`}>
-        {`Checked maps: ${mapNames.join(' and ')}.`}
-      </Text>
-      <Text style={styles.line} testID={`${testID}-continuity`}>
-        A checked still when available, otherwise an opaque cover. Sound and
-        captions keep going.
-      </Text>
-      <Text style={styles.line}>
-        Seeking or uncertain playback returns to an opaque cover. Room settings
-        can only add hides.
-      </Text>
-      <Text style={styles.line} testID={`${testID}-limits`}>
+      <View style={styles.columns}>
+        <View style={styles.summary}>
+          <Text style={styles.label} testID={`${testID}-preset`}>
+            {preset.title}
+          </Text>
+          <Text style={styles.line} testID={`${testID}-room`}>
+            {describeRoom(settings)}
+          </Text>
+          <Text style={styles.line} testID={`${testID}-maps`}>
+            {`Checked against ${mapNames.join(' and ')} thresholds.`}
+          </Text>
+        </View>
+        <View style={styles.explanation}>
+          <Text style={styles.line} testID={`${testID}-continuity`}>
+            When a part is hidden, a checked still or dark screen covers the picture
+            while sound and captions continue.
+          </Text>
+          <Text style={styles.line}>
+            The picture stays covered while seeking or when playback timing is
+            uncertain. Room settings can only hide additional parts.
+          </Text>
+        </View>
+      </View>
+      <Text style={styles.limits} testID={`${testID}-limits`}>
         {SAFETY_NOTE}
       </Text>
     </View>
@@ -68,8 +74,8 @@ const ViewingPlan = ({
 const styles = StyleSheet.create({
   card: {
     backgroundColor: CALM_COLORS.SURFACE,
-    borderRadius: scale(12),
-    padding: scale(CALM_SPACE.BLOCK),
+    borderRadius: scale(20),
+    padding: scale(40),
   },
   heading: {
     color: CALM_COLORS.TEXT,
@@ -77,12 +83,24 @@ const styles = StyleSheet.create({
   },
   label: {
     color: CALM_COLORS.TEXT,
-    ...CALM_TEXT.body,
+    ...CALM_TEXT.control,
     marginTop: scale(CALM_SPACE.TIGHT),
   },
   line: {
-    color: CALM_COLORS.TEXT,
-    ...CALM_TEXT.body, marginTop: scale(CALM_SPACE.TIGHT),
+    color: CALM_COLORS.TEXT_DIM,
+    ...CALM_TEXT.supporting,
+    marginTop: scale(CALM_SPACE.TIGHT),
+  },
+  columns: { flexDirection: 'row', gap: scale(64), marginTop: scale(12) },
+  summary: { width: scale(520) },
+  explanation: { flex: 1 },
+  limits: {
+    ...CALM_TEXT.supporting,
+    color: CALM_COLORS.TEXT_DIM,
+    marginTop: scale(32),
+    paddingTop: scale(24),
+    borderTopWidth: scale(1),
+    borderTopColor: CALM_COLORS.BORDER,
   },
 });
 

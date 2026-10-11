@@ -205,12 +205,12 @@ describe('the household viewing plan', () => {
       '55 inch television, seats about 8 feet away',
     );
     expect(screen.getByTestId('title-details-plan-maps').props.children).toBe(
-      'Checked maps: WCAG 2.3.1.',
+      'Checked against WCAG 2.3.1 thresholds.',
     );
     expect(
       screen.getByTestId('title-details-plan-continuity').props.children,
     ).toMatch(
-      /checked still when available.*opaque cover.*Sound and captions/i,
+      /checked still or dark screen.*sound and captions continue/i,
     );
     expect(screen.getByTestId('title-details-plan-limits').props.children).toBe(
       SAFETY_NOTE,
@@ -258,7 +258,7 @@ describe('the household viewing plan', () => {
       '65 inch television, seats about 6 feet away',
     );
     expect(screen.getByTestId('title-details-plan-maps').props.children).toBe(
-      'Checked maps: WCAG 2.3.1 and broadcast.',
+      'Checked against WCAG 2.3.1 and broadcast thresholds.',
     );
   });
 });
@@ -804,7 +804,7 @@ describe('ParentAreaScreen', () => {
       screen.getByLabelText('Television size').props.accessibilityRole,
     ).toBe('radiogroup');
     expect(
-      screen.getByLabelText('How far away the sofa is').props.accessibilityRole,
+      screen.getByLabelText('Viewing distance').props.accessibilityRole,
     ).toBe('radiogroup');
     expect(
       screen.getByTestId('parent-area-tv-55').props.accessibilityState,
@@ -1122,16 +1122,16 @@ describe('family profiles on the screens', () => {
    */
   it('says whose each section is, so a scrolled screen cannot be misread', () => {
     renderFamilyArea();
-    expect(screen.getByText('How strict for Everyone')).toBeTruthy();
-    expect(screen.getByText('The room for Everyone')).toBeTruthy();
+    expect(screen.getByText('Viewing preset for Everyone')).toBeTruthy();
+    expect(screen.getByText('TV and seating for Everyone')).toBeTruthy();
     expect(screen.getByText('What was hidden for Everyone')).toBeTruthy();
     expect(
       screen.getByTestId('parent-area-profiles-chosen').props.children,
     ).toBe('These settings are for Everyone.');
 
     fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
-    expect(screen.getByText('How strict for Sam')).toBeTruthy();
-    expect(screen.getByText('The room for Sam')).toBeTruthy();
+    expect(screen.getByText('Viewing preset for Sam')).toBeTruthy();
+    expect(screen.getByText('TV and seating for Sam')).toBeTruthy();
     expect(screen.getByText('What was hidden for Sam')).toBeTruthy();
     expect(
       screen.getByTestId('parent-area-profiles-chosen').props.children,
@@ -1157,8 +1157,8 @@ describe('family profiles on the screens', () => {
     for (const digit of '1357') {
       fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
     }
-    expect(screen.getByText('How strict')).toBeTruthy();
-    expect(screen.getByText('The room')).toBeTruthy();
+    expect(screen.getByText('Viewing preset')).toBeTruthy();
+    expect(screen.getByText('TV and seating')).toBeTruthy();
     expect(screen.getByText('What was hidden')).toBeTruthy();
     expect(screen.queryByTestId('parent-area-profiles')).toBeNull();
   });

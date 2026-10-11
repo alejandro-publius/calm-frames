@@ -80,7 +80,7 @@ const TitleDetailsScreen = ({
       testID={testID}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      {onBack ? <CalmButton testID={`${testID}-back`} label="Back to library" onPress={onBack} /> : null}
+      {onBack ? <CalmButton quiet testID={`${testID}-back`} label="Back to library" onPress={onBack} /> : null}
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
           <Text style={styles.eyebrow}>{presentation.kind}</Text>
@@ -101,27 +101,30 @@ const TitleDetailsScreen = ({
         </View>
       ) : (
         <>
-          {demo ? <Text style={styles.summary}>The holds are added at set times to demonstrate how the picture changes while sound and captions continue. Harbor was created without flashing effects.</Text> : null}
-          <Text style={styles.summary} testID={`${testID}-summary`}>
-            {intervals.length === 0
-              ? 'The check found no segments above the flash limits. Checks can miss hazards.'
-              : `${intervals.length} ${demo ? 'scheduled hold' : 'part'}${
-                  intervals.length === 1 ? '' : 's'
-                } ${demo ? (intervals.length === 1 ? 'is included' : 'are included') : 'will be hidden'}, ${hiddenSeconds} second${
-                  hiddenSeconds === 1 ? '' : 's'
-                } in all.${demo ? '' : ' Sound and captions keep playing.'}`}
-          </Text>
+          <View style={styles.checkSummary}>
+            <Text style={styles.section} accessibilityRole="header">{demo ? 'About this demo' : 'Before you watch'}</Text>
+            {demo ? <Text style={styles.summary}>The holds are added at set times to demonstrate how the picture changes while sound and captions continue. Harbor was created without flashing effects.</Text> : null}
+            <Text style={styles.summary} testID={`${testID}-summary`}>
+              {intervals.length === 0
+                ? 'The check found no segments above the flash limits. Checks can miss hazards.'
+                : `${intervals.length} ${demo ? 'scheduled hold' : 'part'}${
+                    intervals.length === 1 ? '' : 's'
+                  } ${demo ? (intervals.length === 1 ? 'is included' : 'are included') : 'will be hidden'}, ${hiddenSeconds} second${
+                    hiddenSeconds === 1 ? '' : 's'
+                  } in all.${demo ? '' : ' Sound and captions keep playing.'}`}
+            </Text>
 
-          {durationMs > 0 ? (
-            <View style={styles.block}>
-              <FlashMapStrip
-                showCaption={false}
-                intervals={intervals}
-                durationMs={durationMs}
-                testID={`${testID}-strip`}
-              />
-            </View>
-          ) : null}
+            {durationMs > 0 ? (
+              <View style={styles.block}>
+                <FlashMapStrip
+                  showCaption={false}
+                  intervals={intervals}
+                  durationMs={durationMs}
+                  testID={`${testID}-strip`}
+                />
+              </View>
+            ) : null}
+          </View>
 
           <View style={styles.block}>
             <ViewingPlan
@@ -133,7 +136,7 @@ const TitleDetailsScreen = ({
         </>
       )}
 
-      {onBack ? <View style={styles.block}><CalmButton testID={`${testID}-back-bottom`} label="Back to library" onPress={onBack} /></View> : null}
+      {onBack ? <View style={styles.block}><CalmButton quiet testID={`${testID}-back-bottom`} label="Back to library" onPress={onBack} /></View> : null}
     </ScrollView>
   );
 };
@@ -147,6 +150,8 @@ const styles = StyleSheet.create({
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginVertical: scale(20) },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, marginTop: scale(20) },
+  section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT },
+  checkSummary: { maxWidth: scale(1200), marginTop: scale(CALM_SPACE.TIGHT) },
   block: { marginTop: scale(CALM_SPACE.BLOCK) },
   buttons: { flexDirection: 'row', marginTop: scale(CALM_SPACE.BLOCK) },
 });

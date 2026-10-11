@@ -30,6 +30,8 @@ import {
 export interface CalmButtonProps {
   label: string;
   primary?: boolean;
+  /** Quieter navigation chrome; focus keeps the same visible ring and underline. */
+  quiet?: boolean;
   onPress?: () => void;
   /** What a screen reader says. Defaults to the label. */
   accessibilityLabel?: string;
@@ -42,6 +44,7 @@ export interface CalmButtonProps {
 const CalmButton = ({
   label,
   primary = false,
+  quiet = false,
   onPress,
   accessibilityLabel,
   disabled = false,
@@ -63,6 +66,7 @@ const CalmButton = ({
       onPress={onPress}
       style={[
         styles.button,
+        quiet && !primary ? styles.quiet : null,
         primary && !disabled ? styles.primary : null,
         disabled ? styles.buttonDisabled : null,
         focused && !disabled ? (primary ? styles.primaryFocused : styles.buttonFocused) : null,
@@ -89,6 +93,12 @@ const styles = StyleSheet.create({
   buttonFocused: {
     borderColor: CALM_COLORS.FOCUS_RING,
     backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+  },
+  quiet: {
+    paddingVertical: scale(CALM_SPACE.TIGHT),
+    paddingHorizontal: scale(CALM_SPACE.ROW),
+    borderColor: CALM_COLORS.BACKGROUND,
+    backgroundColor: CALM_COLORS.BACKGROUND,
   },
   // Not faded: the same background, a quieter edge, and the word for it in the
   // label the caller passes.

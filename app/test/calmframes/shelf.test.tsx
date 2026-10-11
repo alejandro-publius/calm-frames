@@ -152,7 +152,7 @@ describe('the words on the shelf', () => {
   it('names each bundled title, and says what it is on the line under the name', () => {
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     expect(posterWords(BENIGN_STORY_ID)).toEqual([
-      'Harbor: Scene hold demo',
+      'Harbor demo',
       'Scheduled scene holds',
     ]);
     expect(posterWords(preparedId)).toEqual([
@@ -166,7 +166,7 @@ describe('the words on the shelf', () => {
     expect(
       screen.getByTestId(`kid-home-poster-${BENIGN_STORY_ID}`).props
         .accessibilityLabel,
-    ).toBe('Harbor: Scene hold demo, Scheduled scene holds, checked');
+    ).toBe('Harbor demo, Scheduled scene holds, checked');
   });
 
   /**
@@ -180,7 +180,7 @@ describe('the words on the shelf', () => {
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const [benignName, benignLine] = posterWords(BENIGN_STORY_ID);
     const [preparedName, preparedLine] = posterWords(preparedId);
-    expect(benignName).toBe('Harbor: Scene hold demo');
+    expect(benignName).toBe('Harbor demo');
     expect(preparedName).toBe('Harbor');
     expect(benignLine).toMatch(/scheduled scene holds/i);
     expect(preparedLine).not.toMatch(/practice|demo/i);

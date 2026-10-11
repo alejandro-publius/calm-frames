@@ -4,6 +4,26 @@ Updated Sat Oct 10, 2026.
 
 ## 0. Where things stand
 
+### Oct 10: cloud design polish awaits a native build
+
+The current source refines Harbor artwork, library card proportions, secondary
+navigation, viewing settings, setup and parental controls. The new Harbor PNG
+was generated from the prior illustration for presentation only; it is not a
+film frame or a signed playback hold. See
+[design/POLISH_REVIEW.md](design/POLISH_REVIEW.md) and
+[`design_polish_2026-10-10.json`](../results/design_polish_2026-10-10.json).
+
+These edits change app inputs after the earlier native source `73fbbed`.
+They have not been built, installed or observed on Vega in this cloud session.
+The Mac must rebuild and check D-pad navigation, scrolling, settings and
+playback, then capture the changed screens and refresh the demo and review
+assets. The existing native receipt, English video and private draft release
+remain valid records of the earlier build, not validation of the polish.
+
+Dependency advisories, conflicting Amazon sample notices, entrant fields and
+publication remain open. The earlier cloud and Mac checkpoints below retain
+their original evidence scope.
+
 ### Oct 10: cloud continuation received the finished source
 
 The cloud checkout received `d451a90` from the existing review branch, including
@@ -20,7 +40,7 @@ see [AMAZON_SAMPLE_LICENSE_REVIEW.md](AMAZON_SAMPLE_LICENSE_REVIEW.md).
 The private release's upload receipt is tracked, but this cloud session has not
 downloaded its assets: GitHub API access is blocked by the current environment
 network policy. The required API domain is saved in the environment draft for
-review and publication. Native package and demo inputs are unchanged. The Mac
+review and publication. At that handoff, native package and demo inputs were unchanged. The Mac
 simulator results remain the native evidence; this Linux cloud environment does
 not provide Vega playback or Claude subscription access.
 

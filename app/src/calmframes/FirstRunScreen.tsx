@@ -120,9 +120,9 @@ export interface FirstRunScreenProps {
 
 const STEP_TITLES: Record<FirstRunStep, string> = {
   pin: 'Choose a PIN',
-  confirm: 'Type the PIN again',
-  preset: 'How strict should it be',
-  room: 'Your television and your sofa',
+  confirm: 'Confirm your PIN',
+  preset: 'Choose a viewing preset',
+  room: 'Your TV and seating',
   explainer: EXPLAINER_TITLE,
 };
 
@@ -157,9 +157,9 @@ const PIN_NOTICES: Record<'pin' | 'confirm' | 'mismatch', Notice> = {
     tone: 'calm',
   },
   confirm: {
-    title: 'Make sure it matches',
+    title: 'Keep your PIN somewhere secure',
     detail:
-      'There is no way to recover a PIN on this television, so it is worth checking.',
+      'Enter the same four digits again. Your PIN cannot be recovered if you forget it.',
     tone: 'calm',
   },
   mismatch: {
@@ -225,12 +225,29 @@ const FirstRunScreen = ({
   const header = (
     <View style={styles.header}>
       <View style={styles.brandRow}>
-        <Text style={styles.step} testID={`${testID}-step`}>
+        <Text
+          style={styles.step}
+          testID={`${testID}-step`}
+          accessibilityLabel={`Step ${STEP_NUMBER[step]} of ${FIRST_RUN_STEPS}`}>
           Step {STEP_NUMBER[step]} of {FIRST_RUN_STEPS}
         </Text>
         <Text style={styles.step} testID={`${testID}-brand-line`}>
           A calmer way to watch
         </Text>
+      </View>
+      <View
+        style={styles.progress}
+        accessible={false}
+        importantForAccessibility="no-hide-descendants">
+        {Array.from({ length: FIRST_RUN_STEPS }, (_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.progressSegment,
+              index < STEP_NUMBER[step] ? styles.progressComplete : null,
+            ]}
+          />
+        ))}
       </View>
       <Text style={styles.title} testID={`${testID}-title`} accessibilityRole="header">
         {STEP_TITLES[step]}
@@ -456,7 +473,7 @@ const FirstRunScreen = ({
       <View style={styles.buttons}>
         <CalmButton
           testID={`${testID}-done`}
-          label="Open checked library"
+          label="Open library"
           onPress={finish}
           hasTVPreferredFocus
         />
@@ -480,8 +497,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(CALM_SPACE.SAFE_X),
     paddingVertical: scale(CALM_SPACE.SAFE_Y),
   },
-  content: { paddingBottom: scale(CALM_SPACE.SAFE_Y) },
-  header: { marginBottom: scale(CALM_SPACE.BLOCK) },
+  content: {
+    width: '100%',
+    maxWidth: scale(1400),
+    paddingBottom: scale(CALM_SPACE.SAFE_Y),
+  },
+  header: { maxWidth: scale(1400), marginBottom: scale(40) },
   brandRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -491,6 +512,18 @@ const styles = StyleSheet.create({
     ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
   },
+  progress: {
+    flexDirection: 'row',
+    gap: scale(12),
+    marginTop: scale(8),
+    marginBottom: scale(24),
+  },
+  progressSegment: {
+    width: scale(72),
+    borderTopWidth: scale(6),
+    borderTopColor: CALM_COLORS.BORDER,
+  },
+  progressComplete: { borderTopColor: CALM_COLORS.TEXT },
   title: {
     ...CALM_TEXT.screen,
     color: CALM_COLORS.TEXT,
@@ -498,8 +531,8 @@ const styles = StyleSheet.create({
   helper: {
     ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
-    marginBottom: scale(CALM_SPACE.ROW),
-    maxWidth: scale(1500),
+    marginBottom: scale(24),
+    maxWidth: scale(1160),
   },
   /** The PIN steps: words on the left, the keypad on the right. */
   columns: { flexDirection: 'row', alignItems: 'flex-start' },
@@ -518,10 +551,10 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: scale(CALM_SPACE.ROW),
+    paddingVertical: scale(24),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    marginBottom: scale(CALM_SPACE.TIGHT),
-    borderRadius: scale(12),
+    marginBottom: scale(16),
+    borderRadius: scale(16),
     borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,
@@ -543,6 +576,7 @@ const styles = StyleSheet.create({
   rowDetail: {
     ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
+    marginTop: scale(8),
   },
   rowState: {
     width: scale(STATE_COLUMN),
@@ -584,7 +618,7 @@ const styles = StyleSheet.create({
   },
   review: {
     alignSelf: 'stretch',
-    maxWidth: scale(1500),
+    maxWidth: scale(1400),
     padding: scale(CALM_SPACE.BLOCK),
     borderRadius: scale(16),
     backgroundColor: CALM_COLORS.SURFACE,
@@ -601,22 +635,23 @@ const styles = StyleSheet.create({
   reviewNote: {
     ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
-    marginTop: scale(CALM_SPACE.TIGHT),
+    marginTop: scale(20),
+    maxWidth: scale(1160),
   },
   explainer: {
     marginTop: scale(CALM_SPACE.BLOCK),
-    maxWidth: scale(1500),
+    maxWidth: scale(1160),
   },
   explainerLine: {
     ...CALM_TEXT.body,
     color: CALM_COLORS.TEXT,
-    marginBottom: scale(CALM_SPACE.TIGHT),
+    marginBottom: scale(20),
   },
   note: {
     ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
     marginTop: scale(CALM_SPACE.ROW),
-    maxWidth: scale(1500),
+    maxWidth: scale(1160),
   },
   buttons: {
     flexDirection: 'row',
