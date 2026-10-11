@@ -105,6 +105,10 @@ ci: ## everything CI runs, in CI's order, before you push
 	$(MAKE) test test-eval test-hook-package
 	$(MAKE) scan
 	$(PY) eval/readme_sync.py --check
+	$(PY) eval/style_check.py
+	rm -f /tmp/conformance_rebuilt.json && $(PY) eval/conformance_current_report.py --design results/conformance_design.json \
+		--measurement results/conformance_current_full_2026-10-02.json --out /tmp/conformance_rebuilt.json \
+		&& cmp /tmp/conformance_rebuilt.json results/conformance_current_report_2026-10-02.json && rm -f /tmp/conformance_rebuilt.json
 	# The audit workflow's jobs, in its order. These reach the public advisory
 	# databases and the npm registry, so they are the slow part of this target,
 	# and leaving them out would make the name of this target a lie.

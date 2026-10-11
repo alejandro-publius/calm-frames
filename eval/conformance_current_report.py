@@ -84,6 +84,19 @@ def build_current(design_path: Path, measurement_path: Path) -> dict:
         elsewhere_false_positives += len(false_positives - lead_in)
     result["published"]["false_positives_in_the_calm_lead_in"] = lead_in_false_positives
     result["published"]["false_positives_elsewhere"] = elsewhere_false_positives
+    # Precision split the same way the scorer splits recall: near a limit and clear of
+    # one. The pooled precision is the friendlier of the two, and the rule in CLAUDE.md
+    # is that the worse sibling is published beside it.
+    for point in result["error_curves"]["near_threshold"]:
+        key = "precision_near_limits" if str(point["bucket"]) == "True" else "precision_away_from_limits"
+        row = point.get("flashmap")
+        if not isinstance(row, dict) or row.get("precision") is None:
+            continue
+        low, high = row["precision_wilson"]
+        result["published"][key] = round(row["precision"], 3)
+        result["published"][f"{key}_lo"] = round(low, 3)
+        result["published"][f"{key}_hi"] = round(high, 3)
+        result["published"][f"{key}_denominator"] = row["counts"]["tp"] + row["counts"]["fp"]
     result["limits"] = (
         "Synthetic SDR intended-signal conformance, not clinical validation or a device test. "
         "Matrix/range conversion was corrected after the archived evaluation under a logged "

@@ -2787,6 +2787,14 @@
     "flashmap_recall_hi": 0.869,
     "flashmap_recall_lo": 0.829,
     "positive_windows": 1268,
+    "precision_away_from_limits": 0.665,
+    "precision_away_from_limits_denominator": 1369,
+    "precision_away_from_limits_hi": 0.689,
+    "precision_away_from_limits_lo": 0.639,
+    "precision_near_limits": 0.573,
+    "precision_near_limits_denominator": 293,
+    "precision_near_limits_hi": 0.629,
+    "precision_near_limits_lo": 0.516,
     "recall_away_from_limits": 1.0,
     "recall_away_from_limits_clips": 1797,
     "recall_away_from_limits_positive_windows": 910,
@@ -2796,7 +2804,7 @@
     "what_these_are": "the same numbers as the tables below, rounded and with short keys, because eval/readme_sync.py quotes a dotted path with no spaces in it. A document quotes these.",
     "windows": 8997
   },
-  "report_wrapper_sha256": "3e4cede806f09ed1c30942207dfcc02716344695ab4e05fa79f4257d643bd934",
+  "report_wrapper_sha256": "91e92a1fa81793acd01f7ff3a521557df5a1056ba44e7f98106587000894b7fa",
   "sample": {
     "clips_designed": 3000,
     "clips_kept": 2999,

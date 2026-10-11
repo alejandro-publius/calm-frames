@@ -146,9 +146,12 @@ over <!--n results/conformance_current_report_2026-10-02.json:published.flashmap
 positive windows. Recall on positive windows near a limit was
 <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits -->0.469<!--/n-->
 over <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits_positive_windows -->358<!--/n-->
-positive windows.
-I publish both because the latter limits the reliability claims we can make.
-The report was rebuilt from saved rows and matched byte for byte. A matrix/range encoding correction changed the evaluation protocol, not detector thresholds or truth labels. Historical baseline comparisons were not rerun. Unit tests, signatures and benign demonstrations do not establish clinical safety or real-video ground truth.
+positive windows, and precision there was
+<!--n results/conformance_current_report_2026-10-02.json:published.precision_near_limits -->0.573<!--/n--> over
+<!--n results/conformance_current_report_2026-10-02.json:published.precision_near_limits_denominator -->293<!--/n--> flagged windows, against
+<!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision -->0.649<!--/n--> pooled.
+I publish the worse numbers beside the pooled ones because the worse ones limit the reliability claims we can make.
+CI rebuilds the report from the saved rows on every push and fails if a byte differs. A matrix/range encoding correction changed the evaluation protocol, not detector thresholds or truth labels. Historical baseline comparisons were not rerun. Unit tests, signatures and benign demonstrations do not establish clinical safety or real-video ground truth.
 
 ### Accomplishments
 

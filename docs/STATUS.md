@@ -153,9 +153,10 @@ measured, <!--n results/conformance_current_full_2026-10-02.json:summary.clips_k
 kept and <!--n results/conformance_current_full_2026-10-02.json:summary.clips_excluded -->1<!--/n-->
 excluded by the fidelity rule, for decoded luminance off the intended waveform.
 The finisher then wrote `results/conformance_current_report_2026-10-02.json`
-and the paired protocol comparison. None of its aggregate numbers is published
-yet: README.md and docs/SUBMISSION.md still quote the archived partial run,
-labelled partial, until a verifier pass adopts the complete one.
+and the paired protocol comparison. Its aggregate numbers were adopted on
+Oct 10 (docs/DECISIONS.md) and are what README.md and docs/SUBMISSION.md now
+quote. The Oct 11 review re-derived every headline count from the saved rows
+and the design file, and they reproduce exactly.
 
 ### Oct 2 terminal follow-up
 
@@ -863,7 +864,6 @@ and it is the reason no report is written for a clip it could not read.
   <!--n results/verify_pool.json:not_analyzed.no_entry_json -->3<!--/n-->
   directories have no verdict at all, so they are in none of the four counts.
 - **EA IRIS does not run on the conformance suite**, so that table still has ffmpeg and naive and no IRIS. It is built and it has run over the real clip pool; what it is not in is the generate-analyse-delete loop, because putting a second process in that loop means keeping three thousand flashing clips alive for it. The pinned Docker image is still unbuilt and stays that way on this machine: the shared VM has another project's services in it, and a vcpkg OpenCV build there could get their containers killed rather than the compiler.
-- **The complete conformance run is not adopted yet.** It finished on Oct 3 (section 0), but `results/conformance.json`, which the README quotes, is still the archived partial run, and it says so in its own statement field rather than implying a full 3,000-clip run.
 - **The demo PIN does not exist yet**, so the release notes say so.
 - **Nothing in the app has been opened on a device since kid mode was wired up.** Every screen, the first run, the play path and the player's refusal are checked in the app's own test suite, and none of it has been seen on the virtual device or the stick. The bundled clip's URI is `file:///pkg/assets/raw/offline/calm_gradient.mp4`, which is where the Kepler file system README says package assets land, and that has never been played.
 - **Native household-storage durability still needs a device check.** The Oct 2 implementation restores the saved family and PIN gate through the SDK storage adapter; local restart regressions pass, but this is not an observation on a physical TV.
@@ -875,9 +875,11 @@ Every one comes from `results/`, and CI fails if a document drifts from them.
 
 | What | Value | Source |
 |---|---|---|
-| flashmap precision, partial conformance run | <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n--> (<!--n results/conformance.json:published.flashmap_precision_lo -->0.605<!--/n--> to <!--n results/conformance.json:published.flashmap_precision_hi -->0.693<!--/n-->) | conformance.json |
-| flashmap recall, same run | <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> | conformance.json |
-| Clips measured, of 3000 designed | <!--n results/conformance.json:published.clips_kept -->467<!--/n--> | conformance.json |
+| flashmap precision, complete conformance run | <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision -->0.649<!--/n--> (<!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision_lo -->0.625<!--/n--> to <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision_hi -->0.671<!--/n-->) | conformance_current_report_2026-10-02.json |
+| flashmap recall, same run | <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall -->0.85<!--/n--> (<!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall_lo -->0.829<!--/n--> to <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall_hi -->0.869<!--/n-->) | conformance_current_report_2026-10-02.json |
+| **Recall on clips that sit on a limit**, same run, the number to judge it by | <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits -->0.469<!--/n--> over <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits_positive_windows -->358<!--/n--> positive windows | conformance_current_report_2026-10-02.json |
+| Clips measured and kept, of 3000 designed | <!--n results/conformance_current_report_2026-10-02.json:published.clips_kept -->2999<!--/n--> | conformance_current_report_2026-10-02.json |
+| The archived partial run, kept for the record | precision <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n-->, recall <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> over <!--n results/conformance.json:published.clips_kept -->467<!--/n--> clips, near-limit recall <!--n results/conformance.json:published.recall_near_limits -->0.575<!--/n--> | conformance.json |
 | Flagged segments in the pool | <!--n results/screening.json:totals.flagged_segments -->456<!--/n--> across <!--n results/screening.json:totals.sources_with_at_least_one_flag -->6<!--/n--> sources | screening.json |
 | Red-rule segments found | none | screening.json |
 | Longest gap between player position reports | <!--n results/vvd_timeupdate_stats.json:timeupdate.interval_ms.max -->5219<!--/n--> ms | vvd_timeupdate_stats.json |
