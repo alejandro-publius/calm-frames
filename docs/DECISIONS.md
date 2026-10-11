@@ -2,6 +2,33 @@
 
 Each entry: date, decision, why, what it costs. Newest at the bottom.
 
+## The decisions the rest stands on
+
+Most entries below are small calls recorded so the reasoning stays in the repository. These are the ones the design rests on, oldest first, each linked to its entry or, for the founding rules from the plan, to the code that enforces them.
+
+| When | Decision | Where it is enforced |
+|---|---|---|
+| Sep 17, the plan | Every frame is measured offline before a title can reach kid mode, and verify blocks publishing | [`pipeline/verify.py`](../pipeline/verify.py) |
+| Sep 17, the plan | The cover is scheduled on a wall clock re-synced to media time, not raised when the flashing is seen | [`coverSchedule.ts`](../app/src/calmframes/coverSchedule.ts) |
+| Sep 17, the plan | One function moves the playhead: cover first, then seek | [`useFlashGuard.ts`](../app/src/calmframes/useFlashGuard.ts) and the lint rule in `app/package.json` |
+| Sep 17, the plan | A pre-covered kid-safe rendition is always built, whatever the timing gate says | [`pipeline/render.py`](../pipeline/render.py) |
+| Sep 17 | [The type floor is 32 units at 1080p and the safe margins are 96 by 54](#2026-09-17-the-type-floor-is-32-units-at-1080p-and-the-safe-margins-are-96-by-54) | `calmStyles.ts` |
+| Sep 17 | [The player decides whether it may show a picture, not the caller](#2026-09-17-the-player-decides-whether-it-may-show-a-picture-not-the-caller): fail closed | [`playerAccess.ts`](../app/src/calmframes/playerAccess.ts) |
+| Sep 18 | [A profile is never the settings that run; the stricter of household and profile is](#2026-09-18-family-profiles-and-what-stops-one-of-them-being-weaker) | [`profiles.ts`](../app/src/calmframes/profiles.ts) |
+| Sep 18 | [The map index is signed and every entry is bound to its file](#2026-09-18-the-map-registry-and-why-signing-it-is-not-enough-on-its-own) | [`mapRegistry.ts`](../app/src/calmframes/mapRegistry.ts) |
+| Sep 18 | [A chime before the hide, and what counts as the hide that follows it](#2026-09-18-a-chime-before-the-hide-and-what-counts-as-the-hide-that-follows-it) | `chimeCue.ts`, a mutation in the gate |
+| Sep 18 | [The regular pattern rule fails safe where the judgement is uncertain](#2026-09-18-the-regular-pattern-rule-and-the-judgement-that-had-to-fail-safe) | flashmap |
+| Sep 19 | [The container's ffmpeg is pinned, and a check stops a table mixing versions](#2026-09-19-the-containers-ffmpeg-is-pinned-this-macs-cannot-be-and-a-check-stops-a-table-mixing-them) | `eval/baseline_versions.py` |
+| Sep 29 | [Scene holds travel inside the authenticated map](#2026-09-29-carry-scene-specific-holds-in-authenticated-maps) | [docs/SIDECAR_SPEC.md](SIDECAR_SPEC.md) |
+| Sep 29 | [An interrupted scene hold latches to black](#2026-09-29-latch-interrupted-scene-holds-black-and-verify-cached-preview-bytes) | the mutation `disrupted-scene-stills-stay-black-on-resume` |
+| Sep 29 | [The mutation gate's check compares a real run against the committed baseline](#2026-09-29-preserve-the-mutation-baseline-during-ci-checks) | [`eval/mutate_gate.py`](../eval/mutate_gate.py) |
+| Oct 9 | [The cloud signs with a demo key the app does not trust](#2026-10-09-a-separate-cloud-demo-signing-key-which-the-app-does-not-trust) | `results/aws_deploy_2026-10-09.json` |
+| Oct 9 | [The Vega Virtual Device is the acceptance target; hardware is out of scope](#2026-10-09-simulator-only-finishing-scope-and-evidence) | [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md) |
+| Oct 10 | [The approved native TV design](#october-10-approved-native-tv-design) | [design/](design/) |
+| Oct 11 | [The audit goes green by fixing two findings and sorting the rest by the device bundle](#oct-11-2026-the-dependency-audit-goes-green-by-fixing-two-findings-and-sorting-the-rest-by-the-bundle) | `scripts/audit_exceptions.toml` |
+| Oct 11 | [Artwork motion and selection sounds are opt-in, Off by default](#oct-11-late-oct-10-pacific-final-interface-effects-and-the-finish-line) | `CalmArtworkMotion.tsx`, `interfaceSound.ts` |
+| Oct 11 | [The cover proof measures one frame, three times per span](#oct-11-later-still-the-cover-proof-was-measuring-the-wrong-thing) | [`pipeline/verify.py`](../pipeline/verify.py), a mutation in the gate |
+
 ## 2026-09-17: Build on the M1 MacBook
 - **Decision:** Develop on this Mac (macOS 15.1.1, Apple M1, 16 GB). No Ubuntu SSD.
 - **Why:** Vega SDK 0.24 supports macOS on Apple silicon, so HUMAN CHECKPOINT A passes and no kill rule applies. Apple silicon support continues after Dec 15, 2026, when Intel support ends.
