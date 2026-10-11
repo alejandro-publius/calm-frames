@@ -50,3 +50,6 @@ app/assets/raw/prepared-library/.local-library.lock
 
 # CDK writes availability-zone lookups here on a real deploy; it holds the account id
 pipeline/infra/cdk.context.json
+
+# Agent worktrees made by the session tooling; never part of the repository.
+.claude/worktrees/

@@ -20,6 +20,8 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 Calm Frames combines an offline video analyzer, a checked rendition pipeline and a Vega player for families affected by photosensitivity. Before playback, the pipeline analyzes the source, signs its flash map and verifies the prepared rendition. The player adds a scheduled cover and guarded seeks, with audio and captions intended to preserve the story; signed context images, a checked still from before the hide shown in place of black, ship today only on the labelled Harbor demo, and every prepared title uses the opaque cover. Parent settings can make the standard floor stricter and now persist locally. A reusable hook and analyzer provide adoption paths for other developers. Detection, delivery integrity and physical screen behavior have separate limits, recorded below; a signature is not proof that every hazard was detected.
 
+Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
+
 ### What a family sees
 
 - **A short setup.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
@@ -684,6 +686,7 @@ Thresholds are quoted, with links, in [`flashmap/docs/SPEC_SOURCES.md`](flashmap
 
 | File | What is in it |
 |---|---|
+| [WRITEUP.md](WRITEUP.md) | The short version: the problem, why it is harder than a black box, and the limits |
 | [docs/SUBMISSION.md](docs/SUBMISSION.md) | Every Devpost field, ready to paste |
 | [docs/RUBRIC.md](docs/RUBRIC.md) | The rules we are judged against, quoted from the hackathon's own pages |
 | [docs/VALIDATION.md](docs/VALIDATION.md) | Outreach and what anyone outside this project has said. Empty so far, and it says so |
