@@ -16,7 +16,7 @@ line-length = 100
 # bare name, and the two test directories whose helpers are imported the same
 # way.
 src = [".", "flashmap/src", "flashmap/tests", "eval", "eval/tests"]
-# Amazon's vega-video-sample files, kept as they were shipped (commit cf8b752).
+# Amazon's vega-video-sample files, added unchanged in cf8b752 from upstream tag v0.24-RN83 (ef8e4da).
 extend-exclude = ["app/samples"]
 
 [lint]

@@ -31,7 +31,7 @@ it does not establish that the detector found every flashing interval.
 | Crash or take over the analyzer | hand it a hostile video | it runs on our machines and in one task with a narrow role |
 | Turn the protection off | get past the parent PIN | a rate limited, salted, iterated hash, and settings that can only add hides |
 | Take the video | leak a CloudFront signed URL | the URL reaches a kid safe rendition and nothing else |
-| Get code into the build | a dependency, an action, an image | hashes, digests, a lock file, an audit with written exceptions, gitleaks |
+| Get code into the build | a dependency, an action, an image | hashes, digests, a lock file, an audit with written exceptions, gitleaks, actions and hooks pinned to commits, a read only workflow token |
 
 ### A tampered map
 

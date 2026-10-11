@@ -16,6 +16,6 @@
 - [ ] Every number from a measurement is a marker into `results/`, and `.venv/bin/python eval/readme_sync.py --check` passes. Where a number has a worse sibling, both are published or the sentence says why not.
 - [ ] A new guard has a test that has been seen to fail, and this description says how.
 - [ ] No hazardous media in the change, nothing under `media/` but `media/LICENSES.csv` and hashes, and no flashing content was watched to make or check it.
-- [ ] Any sentence about what Calm Frames does uses the approved wording: "reduces exposure to flashing above published limits in the videos it plays; not a medical device."
+- [ ] Any claim about what Calm Frames protects against uses the approved wording, "reduces exposure to flashing above published limits in the videos it plays; not a medical device", and never "prevents seizures" or "seizure-proof".
 - [ ] Every seek still goes through `requestSeek` in `useFlashGuard.ts`, and a missing or bad map still keeps the picture hidden.
 - [ ] No secrets, keys or account identifiers.

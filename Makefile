@@ -118,6 +118,7 @@ ci: ## everything CI runs, in CI's order, before you push
 	$(MAKE) scan
 	$(PY) eval/readme_sync.py --check
 	$(PY) eval/style_check.py
+	$(PY) scripts/check_pins.py
 	rm -f /tmp/conformance_rebuilt.json && $(PY) eval/conformance_current_report.py --design results/conformance_design.json \
 		--measurement results/conformance_current_full_2026-10-02.json --out /tmp/conformance_rebuilt.json \
 		&& cmp /tmp/conformance_rebuilt.json results/conformance_current_report_2026-10-02.json && rm -f /tmp/conformance_rebuilt.json

@@ -186,7 +186,10 @@ def check_precommit(findings: list[tuple[str, str, str]]) -> None:
         match = re.match(r"\s*rev:\s*(\S+)", line)
         if match:
             ref = match.group(1).strip("'\"")
-            verdict = "LOOSE" if ref in ("main", "master", "HEAD") else "OK"
+            # A hook rev is a git ref like an action's, and a tag can move the
+            # same way, so it is held to the same rule: a full commit, with the
+            # release in a "# frozen:" comment the way pre-commit writes it.
+            verdict = "OK" if FULL_COMMIT.match(ref) else "LOOSE"
             findings.append((verdict, f"{path.relative_to(REPO)}:{number}", f"rev: {ref}"))
 
 
@@ -238,6 +241,12 @@ def main() -> int:
     check_requirements(REPO / "pipeline" / "infra" / "requirements.txt", findings)
     check_pyproject(REPO / "flashmap" / "pyproject.toml", findings)
     check_workflows(findings)
+    # The negative control above proves the verdicts, not the file walk: a walk
+    # that read nothing would pass every action it never saw. Both everyday
+    # workflows have to have been read and to have produced action findings.
+    for required in (".github/workflows/ci.yml", ".github/workflows/audit.yml"):
+        if not any(where.startswith(required + ":") and "@" in what for _, where, what in findings):
+            findings.append(("LOOSE", required, "no action was read from this workflow; the file walk missed it"))
     check_precommit(findings)
     check_node(findings)
     check_makefile_tools(findings)

@@ -56,9 +56,15 @@ cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx je
 .venv/bin/python eval/style_check.py            # no dashes, none of the three words
 ```
 
-`make help` lists every target. `make ci` runs everything CI and the Audit
-workflow run, in their order, and is the thing to run before you push. It
-reaches the public advisory databases and the npm registry, so it is slow.
+`make help` lists every target. `make ci` is the thing to run before you push:
+the app's typecheck and lint, the test suites, the Python lint and types, the
+secret scan, the number, style and pin checks, the conformance rebuild, the
+dependency audit, the bills of materials and the infra tests. It reaches the
+public advisory databases and the npm registry, so it is slow. It leaves out
+three CI jobs that need more than a checkout: the app's own UI through flashmap
+(`cd app && npm run ui:flashmap`, which needs Chrome), the mutation gate
+(`.venv/bin/python eval/mutate_gate.py --check`, about half an hour) and the
+ARM64 image build.
 
 Three more that catch people out:
 
@@ -114,7 +120,9 @@ Each of these is in CLAUDE.md in full. The first group overrides everything.
   the picture hidden.
 - Every way of moving the playhead goes through `requestSeek` in
   `app/src/calmframes/useFlashGuard.ts`, which covers before it seeks. A lint
-  rule refuses `currentTime =` and `fastSeek(` anywhere else.
+  rule refuses `currentTime =` and `fastSeek(` anywhere else, apart from the
+  sample's fallbacks and the chime and menu sound audio elements, which
+  `app/package.json` exempts by name with the reason beside each.
 - Household and room settings can only add hides; nothing can make Calm Frames
   weaker than WCAG.
 - No secrets in the repository. gitleaks runs in CI and in the pre-commit

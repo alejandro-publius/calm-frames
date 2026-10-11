@@ -66,7 +66,8 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 
 | Path | What is in it |
 |---|---|
-| [design/](design/) | The TV design: its brief, copy guide, tokens, reviews and renders, listed below. |
+| [design/README.md](design/README.md) | The design page, the one to read first: identity, palette, contrast, type, spacing, focus, motion, sound and copy, copied from `calmStyles.ts` and held to it by `eval/tests/test_design_page.py`. |
+| [design/](design/) | The rest of the TV design record: its brief, copy guide, tokens, reviews and renders, listed below. |
 | [design/POLISH_REVIEW.md](design/POLISH_REVIEW.md) | The visual refinement of the native screens, with the before and after renders in `design/polish/`. |
 | [design/SEAMLESS_REVIEW.md](design/SEAMLESS_REVIEW.md) | The Oct 11 review of the viewing experience and the public design reference it studied, with renders in `design/seamless/`. |
 | [design/NATIVE_IMPLEMENTATION.md](design/NATIVE_IMPLEMENTATION.md) | How the approved TV design went into the native app, and which changes since have not been built or seen on Vega. |
@@ -91,7 +92,7 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 | [BUILD_PROMPT.md](BUILD_PROMPT.md) | Agent prompt: the full build prompt the coding agent worked from, with the phases, gates, kill rules and cut list. |
 | [CONTINUATION_PROMPT.md](CONTINUATION_PROMPT.md) | Agent prompt: the reusable prompt for a long improvement session, within that session's own budget. |
 | [HACKATHON_REVIEW.md](HACKATHON_REVIEW.md) | A subjective assessment against the rules on Oct 2. Not an official score. |
-| [MOCK_JUDGE_1.md](MOCK_JUDGE_1.md), [MOCK_JUDGE_2.md](MOCK_JUDGE_2.md) | Two independent agents judging a fresh clone against RUBRIC.md on Sep 17, their verdicts kept unedited. |
+| [MOCK_JUDGE_1.md](MOCK_JUDGE_1.md), [MOCK_JUDGE_2.md](MOCK_JUDGE_2.md) | Two independent agents judging a fresh clone against RUBRIC.md on Sep 17, their verdicts kept as given, apart from their headers and one marked word in judge 2. |
 | [MOCK_JUDGE_3.md](MOCK_JUDGE_3.md) | Four independent agents, one per rubric lens, judging a fresh clone on Oct 11, and what was fixed afterwards. |
 | [VERIFY_PASS_1.md](VERIFY_PASS_1.md) | The verifier lane's Sep 17 read of family profiles and the map registry. |
 | [VERIFY_PASS_2.md](VERIFY_PASS_2.md) | The verifier lane's Sep 17 read of pattern segments through the hide plan and verify. |
@@ -106,6 +107,8 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 | [CLAUDE.md](../CLAUDE.md) | The rules every working session follows, and where things stand at the top. |
 | [CONTRIBUTING.md](../CONTRIBUTING.md) | Setup, the checks, the rules in short, adding a title, and reporting a security problem. |
 | [CHANGELOG.md](../CHANGELOG.md) | What changed, by date, on main and on the review branch. |
+| [WRITEUP.md](../WRITEUP.md) | The one-page account of why the system is built the way it is, and its limits. |
+| [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) | How people here treat each other, and how to report a problem. |
 | [`flashmap/README.md`](../flashmap/README.md) | The analyzer on its own: install, the CLI and the GitHub Action. |
 | [`hook/README.md`](../hook/README.md) | The flash guard hook for a Vega video app. |
 | [`pipeline/LOCAL_LIBRARY.md`](../pipeline/LOCAL_LIBRARY.md) | Preparing a checked local library and packaging it into the app. |

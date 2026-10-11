@@ -79,6 +79,12 @@ warn_unreachable = true
 # named here, by module and error code only, until the suite is next re-run.
 # None is a fault at run time: each is a narrowing mypy cannot follow.
 
+# Each hold below turns its error codes off for the whole module, including any
+# line written later, so an edit in one of these modules should be checked with
+# the holds lifted (delete the block locally and run make typecheck-py). They
+# come out together with the next full conformance run, which may change the
+# measured bytes they protect.
+
 # A list whose first entries are (name, lines, None, None, None) tuples, later
 # joined by diagonal families that carry index arrays, and the loop over them.
 [[tool.mypy.overrides]]

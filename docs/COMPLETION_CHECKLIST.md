@@ -23,7 +23,10 @@ The detailed evidence and outstanding decisions remain below.
   repository shows main by default, and cut the judged tag from main.
 - [ ] At the Oct 21 final checks, move both audit exception review dates in
   `scripts/audit_exceptions.toml` past Dec 3 and move the sample Action's pin in
-  `flashmap/examples/flash-check.yml` to the judged tag.
+  `flashmap/examples/flash-check.yml` to the judged tag. Before the visibility
+  change, turn on private vulnerability reporting (Settings, Security) so the
+  route `docs/SECURITY.md` and `CODE_OF_CONDUCT.md` point at exists, and read
+  the code of conduct's promises once to confirm they are ones you will keep.
 - [ ] After approval, publish the reviewed artifacts, verify the live links and
   submit the Devpost entry. Save the actual submitted confirmation privately if
   it contains personal data; source/package IDs can go in a public receipt.

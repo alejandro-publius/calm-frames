@@ -42,8 +42,8 @@ Tell the maintainer, Alex, who is
 - If someone has posted flashing content, do not repost it or link to it. Say
   where it is (the issue or pull request number) and nothing more.
 
-The maintainer reads every report, keeps the reporter's name private, and will
-tell you what was done.
+The maintainer aims to read every report, to keep the reporter's name private,
+and to say what was done.
 
 ## What the maintainer may do
 
