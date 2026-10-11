@@ -620,12 +620,12 @@ Every push runs two workflows, and a record of each green head is kept in `resul
 
 | Workflow | Job | What it refuses |
 |---|---|---|
-| CI | Vega app | A type error, a lint error (including a playhead write outside the one seek function), a failing jest test, a prepared asset that does not match its record |
-| CI | Python packages | A failing analyzer, pipeline or evaluation test, and a conformance report that does not rebuild byte for byte from its own rows |
+| CI | Vega app | A type error, a lint error (including a playhead write outside the one seek function), a failing jest test, coverage under the floors in `app/jest.config.json`, a prepared asset that does not match its record |
+| CI | Python packages | A failing analyzer, pipeline or evaluation test, Python source coverage under its floor in `.coveragerc`, a ruff finding, a strict mypy error in flashmap, and a conformance report that does not rebuild byte for byte from its own rows |
 | CI | The app's own UI passes flashmap | A screen of the app that flashes, checked by the same analyzer, with a negative control that has to refuse a flashing sequence and a grating |
 | CI | Mutation gate, property tests and the map fuzz corpus | A safety guard whose tests no longer notice it being broken |
 | CI | Secret scan | A committed key or token |
-| CI | Published numbers match results | A number in a document that disagrees with `results/`, and any dash or banned word in what we wrote |
+| CI | Published numbers match results | A number in a document that disagrees with `results/`, any dash or banned word in what we wrote, and any action not pinned to a commit |
 | Audit | pip-audit and npm audit | A known advisory outside the reviewed exceptions in `scripts/audit_exceptions.toml` |
 | Audit | The bills of materials are current | A dependency change without its bill of materials |
 | Audit | The stack and the container rules | A CDK template that does not synthesize without credentials, a NAT gateway in it, or an infra test that skips instead of running |
@@ -634,6 +634,8 @@ Every push runs two workflows, and a record of each green head is kept in `resul
 **The guards are tested by breaking them.** [`eval/mutate_gate.py`](eval/mutate_gate.py) breaks each safety guard on purpose and runs the tests that should notice: <!--n results/mutation.json:totals.killed -->68<!--/n--> of <!--n results/mutation.json:totals.mutations -->70<!--/n--> mutations are caught, and the <!--n results/mutation.json:totals.survived -->2<!--/n--> that survive are written up as equivalent, an edit that cannot change what the program does. That rate covers the listed safety properties only, not the whole codebase ([`results/mutation.json`](results/mutation.json)); CI fails if a run disagrees with the committed report.
 
 **The map readers are fuzzed.** <!--n results/fuzz.json:totals.cases -->69<!--/n--> malformed flash maps go through each of the <!--n results/fuzz.json:totals.readers -->3<!--/n--> readers that open one, and a reader that accepts a bad map without hiding what it flags, or throws, is a finding: <!--n results/fuzz.json:totals.findings -->0<!--/n--> in the recorded run ([`results/fuzz.json`](results/fuzz.json), Sep 18), and CI replays the corpus on every push.
+
+**Coverage is measured and has floors.** Line coverage of the Python source is <!--n results/coverage_2026-10-11.json:published.python_percent -->91.2<!--/n--> percent (flashmap <!--n results/coverage_2026-10-11.json:published.flashmap_percent -->94.1<!--/n-->, the pipeline <!--n results/coverage_2026-10-11.json:published.pipeline_percent -->89.4<!--/n-->), measured with the CI job's own command on a clean install; the app's line coverage is <!--n results/coverage_2026-10-11.json:published.app_lines_percent -->78.11<!--/n--> percent and its branch coverage, the lowest measure, <!--n results/coverage_2026-10-11.json:published.app_branches_percent -->75.55<!--/n--> ([`results/coverage_2026-10-11.json`](results/coverage_2026-10-11.json)). Each floor sits one point under its measurement, and every run writes its totals to the run page. Until Oct 11 the Python job tested only `eval/`: its lane detection dropped flashmap and the pipeline without a word, and a test now keeps all three named.
 
 **Every published number has a source.** A number in this README, the Devpost text or the docs is written as a marker against a file in `results/`, and [`eval/readme_sync.py`](eval/readme_sync.py) fails the build on drift. It cannot see which number was chosen, so where a number has a worse sibling both are published.
 

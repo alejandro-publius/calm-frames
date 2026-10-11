@@ -34,6 +34,9 @@ dev = [
   # two releases.
   "ruff==0.17.0",
   "mypy==2.4.0",
+  # Source coverage in the CI Python job, configured by .coveragerc at the
+  # repository root.
+  "pytest-cov==7.0.0",
 ]
 
 [project.scripts]

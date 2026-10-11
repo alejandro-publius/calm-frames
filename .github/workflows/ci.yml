@@ -116,20 +116,38 @@ jobs:
           pip install pytest==9.1.1 matplotlib==3.11.2
       - name: Test
         run: |
-          # Skip anything marked slow: the full conformance suite runs locally
-          # or nightly, not on every push.
-          targets=""
-          for dir in flashmap pipeline eval; do
-            if [ -d "$dir" ] && ls "$dir"/**/test_*.py "$dir"/test_*.py "$dir"/tests >/dev/null 2>&1; then
-              targets="$targets $dir"
-            fi
-          done
-          if [ -n "$targets" ]; then
-            echo "testing:$targets"
-            pytest -q -m "not slow" $targets
-          else
-            echo "no Python tests yet"
-          fi
+          # Every Python lane, named rather than detected. Until Oct 11, 2026 a
+          # loop here picked the lanes with ls, which fails when any one of its
+          # patterns matches nothing, so flashmap and pipeline were dropped and
+          # only eval ran. eval/tests/test_ci_python_lanes.py keeps all three
+          # named here. Anything marked slow, the full conformance suite, runs
+          # locally rather than on every push. Coverage is of the source only,
+          # with its floor in .coveragerc.
+          mkdir -p .logs
+          pytest -q -m "not slow" flashmap pipeline eval \
+            --cov --cov-config=.coveragerc \
+            --cov-report=term --cov-report=json:.logs/python-coverage.json
+      - name: Python coverage on the run page
+        # The total beside the floor .coveragerc enforces, read on the run page
+        # rather than in a log. It runs after a failed Test too, and it never
+        # fails the job itself.
+        if: ${{ !cancelled() }}
+        run: |
+          python - <<'PY'
+          import configparser, json, os
+          lines = ["### Python test coverage", ""]
+          try:
+              total = json.load(open(".logs/python-coverage.json"))["totals"]
+              config = configparser.ConfigParser()
+              config.read(".coveragerc")
+              floor = config.get("report", "fail_under")
+              lines += ["| covered | floor | statements |", "| --- | --- | --- |",
+                        f"| {total['percent_covered']:.2f}% | {floor}% | {total['covered_lines']} of {total['num_statements']} |"]
+          except (OSError, KeyError, ValueError, configparser.Error) as error:
+              lines.append(f"No coverage summary was written ({error.__class__.__name__}).")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as out:
+              out.write("\n".join(lines) + "\n")
+          PY
       - name: Lint Python
         # ruff with ruff.toml at the root, installed by flashmap[dev] above.
         run: python -m ruff check .
