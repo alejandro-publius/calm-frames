@@ -152,7 +152,7 @@ describe('the packaged benign story', () => {
       JSON.stringify(
         screen.getByTestId('title-details-demo-label').props.children,
       ),
-    ).toContain('scheduled scene holds');
+    ).toContain('practice holds');
     fireEvent.press(screen.getByTestId('title-details-play'));
     expect(
       screen.getByTestId('title-details-summary').props.children,
