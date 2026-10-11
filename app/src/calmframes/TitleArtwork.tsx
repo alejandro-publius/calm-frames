@@ -19,12 +19,12 @@ interface TitlePresentation {
 
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
   if (isBundledBenignStory(title)) {
-    return { name: 'Harbor: Scene hold demo', cardName: 'Harbor demo', kind: 'Scheduled scene holds', action: 'Watch demo',
-      description: 'This version adds scheduled scene holds to Harbor so you can see how they work during playback.', art: 'harbor' };
+    return { name: 'Harbor: Scene hold demo', cardName: 'Harbor demo', kind: 'Practice holds', action: 'Watch demo',
+      description: 'This version adds practice holds to Harbor at set times so you can see how a hide works during playback. The holds are practice, not detected flashing.', art: 'harbor' };
   }
   if (concernsPackagedLibrary(title) && title.title === 'Harbor story (prepared locally)') {
-    return { name: 'Harbor', kind: 'Original story', action: 'Watch now',
-      description: 'A small boat finds its way home through a quiet harbor.', art: 'harbor' };
+    return { name: 'Harbor', kind: 'Checked story', action: 'Watch now',
+      description: 'A small boat finds its way home through a quiet harbor. Our own demo film, prepared and checked the way a real title is, with no practice holds.', art: 'harbor' };
   }
   if (title.id === OFFLINE_TITLE_ID) {
     return { name: 'Calm gradient', kind: 'Playback test', action: 'Play',

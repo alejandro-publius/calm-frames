@@ -34,7 +34,7 @@ SHOTS = [
  ('.logs/redesign-final-prepared.mp4', 2, 21,
   'This separate Harbor title uses real local preparation without the demonstration holds. The app plays its checked, packaged rendition. The source had no detected flashing.'),
  ('build/submission-redesign/status-card.png', 0, 20,
-  'The saved AWS run published a signed title. The app uses its local library. Detection can miss flashing. Calm Frames is not a medical device. Dependency security findings remain open.'),
+  'The saved AWS run published a signed title. The app uses its local library. Detection can miss flashing. Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.'),
  ('docs/brand/firetv-app-icon-1280x720.png', 0, 6,
   'Calm Frames. A calmer way to watch.'),
 ]

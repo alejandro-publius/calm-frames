@@ -205,7 +205,9 @@ const PlayerScreen = ({
     settings: guardedParams?.settings,
     durationMs: guardedParams?.durationMs,
     // How far the rendition about to play sits from the source the map
-    // describes. The bundled title plays its source, so it has none.
+    // describes. The bundled Harbor demo plays its pre-covered rendition,
+    // whose verification.json records an offset of 0 for every preset, so
+    // nothing is passed for it.
     renditionStartOffsetMs: guardedParams?.renditionStartOffsetMs,
     titleId: guardedParams?.titleId ?? data.id,
     titleName: data.title,

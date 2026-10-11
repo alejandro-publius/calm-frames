@@ -23,7 +23,7 @@ Finished-file gates: `results/redesign_video_check.json` and
 | 1:25 | 12 s | Parents choose Standard, Broadcast, or Extra cautious. Each choice was tested in Vega. A child cannot relax the settings chosen for everyone. |
 | 1:37 | 12 s | Settings survive restart. Scheduled demo holds are excluded from exposure history. Actual cover history is not saved across app restarts. |
 | 1:49 | 21 s | This separate Harbor title uses real local preparation without the demonstration holds. The app plays its checked, packaged rendition. The source had no detected flashing. |
-| 2:10 | 20 s | The saved AWS run published a signed title. The app uses its local library. Detection can miss flashing. Calm Frames is not a medical device. Dependency security findings remain open. |
+| 2:10 | 20 s | The saved AWS run published a signed title. The app uses its local library. Detection can miss flashing. Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device. |
 | 2:30 | 6 s | Calm Frames. A calmer way to watch. |
 
 ## Reproduce and publish

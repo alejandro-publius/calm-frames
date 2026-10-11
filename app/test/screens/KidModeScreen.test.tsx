@@ -125,7 +125,7 @@ describe('reaching Calm Frames', () => {
     const { navigate } = await renderKidMode();
     await finishFirstRun();
     fireEvent.press(screen.getByTestId(`kid-mode-home-poster-${BENIGN_STORY_ID}`));
-    expect(JSON.stringify(screen.getByTestId('kid-mode-details-demo-label').props.children)).toContain('scheduled scene holds');
+    expect(JSON.stringify(screen.getByTestId('kid-mode-details-demo-label').props.children)).toContain('practice holds');
     expect(screen.getByTestId('kid-mode-details-summary').props.children).toContain('8 seconds');
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     const [, params] = navigate.mock.calls[0];

@@ -153,11 +153,11 @@ describe('the words on the shelf', () => {
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     expect(posterWords(BENIGN_STORY_ID)).toEqual([
       'Harbor demo',
-      'Scheduled scene holds',
+      'Practice holds',
     ]);
     expect(posterWords(preparedId)).toEqual([
       'Harbor',
-      'Original story',
+      'Checked story',
     ]);
     expect(posterWords(OFFLINE_TITLE_ID)).toEqual([
       'Calm gradient',
@@ -166,7 +166,7 @@ describe('the words on the shelf', () => {
     expect(
       screen.getByTestId(`kid-home-poster-${BENIGN_STORY_ID}`).props
         .accessibilityLabel,
-    ).toBe('Harbor demo, Scheduled scene holds, checked');
+    ).toBe('Harbor demo, Practice holds, checked');
   });
 
   /**
@@ -182,7 +182,7 @@ describe('the words on the shelf', () => {
     const [preparedName, preparedLine] = posterWords(preparedId);
     expect(benignName).toBe('Harbor demo');
     expect(preparedName).toBe('Harbor');
-    expect(benignLine).toMatch(/scheduled scene holds/i);
+    expect(benignLine).toMatch(/practice holds/i);
     expect(preparedLine).not.toMatch(/practice|demo/i);
   });
 
@@ -234,7 +234,7 @@ describe('the words on the shelf', () => {
    */
   it('draws the second line at the ten foot floors, resting and focused', () => {
     const floors = { textSizeUnits: 32, textContrast: 4.5 };
-    const secondLines = ['Scheduled scene holds', 'Original story', 'Playback test'];
+    const secondLines = ['Practice holds', 'Checked story', 'Playback test'];
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const measured = () =>
       measureText(screen.toJSON() as unknown as RenderedNode, { background: CALM_COLORS.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);
@@ -249,7 +249,7 @@ describe('the words on the shelf', () => {
 
     fireEvent(screen.getByTestId(`kid-home-poster-${BENIGN_STORY_ID}`), 'focus');
     const focused = measured().find(
-      (line) => line.text === 'Scheduled scene holds',
+      (line) => line.text === 'Practice holds',
     );
     expect(focused?.background).toBe(CALM_COLORS.SURFACE_FOCUSED);
     expect(focused?.contrast).toBeGreaterThanOrEqual(floors.textContrast);
