@@ -1,4 +1,4 @@
-# Calm Frames — TV visual refinement
+# Calm Frames: TV visual refinement
 
 Prepared October 10, 2026. This is a proposed visual direction, not a claim that the native app has been changed.
 
@@ -40,7 +40,7 @@ Keep line lengths short; reduce prose before shrinking type. Test long profile n
 
 Use a deep teal background (`#102F3A`), a subtle second teal (`#12343F`), restrained raised surfaces (`#1A414B`), warm cream text (`#F3E8D3`), and readable secondary text (`#BDD0CF`). Reserve saffron (`#E6A957`) for the primary action and visible focus. Use dark ink on saffron. Check all actual foreground/background pairs before accepting the theme.
 
-Use 96-unit horizontal and 54-unit vertical safe margins. Align the header, hero, shelf, and action rows to one grid. Keep a compact spacing scale (12, 20, 32, 48, 64). Use modest 12–20-unit corner radii; avoid turning all content into pills or bordered boxes.
+Use 96-unit horizontal and 54-unit vertical safe margins. Align the header, hero, shelf, and action rows to one grid. Keep a compact spacing scale (12, 20, 32, 48, 64). Use modest 12 to 20 unit corner radii; avoid turning all content into pills or bordered boxes.
 
 A resting control should be quiet. A focused control gets a stable, clearly visible six-unit outline and a second non-color cue such as an inset outline or focused treatment of the action. Reserve the geometry so focus never moves surrounding content. Verify contrast against both adjacent colors. Do not use bouncing, zooming, pulsing, autoplay previews, animated backgrounds, or animated screen fades.
 
