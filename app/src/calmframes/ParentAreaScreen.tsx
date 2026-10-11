@@ -7,8 +7,8 @@
  *   the preset, the television size and the seat distance, which can only add
  *   hides;
  *   what was hidden and when;
- *   the chime, and every title's status, including the ones kid mode will not
- *   list;
+ *   interface preferences, the chime, and every title's status, including the
+ *   ones kid mode will not list;
  *   the PIN itself.
  *
  * The screen renders the keypad until the gate is open. It never renders the
@@ -469,6 +469,7 @@ const ParentAreaScreen = ({
                     <CalmButton
                       disabled={saving || undefined}
                       testID={`${testID}-remove-confirm`}
+                      sound={false}
                       label={removeKidLabel(editingProfile.name)}
                       onPress={() => {
                         // The route forgets this profile's history after the
@@ -489,6 +490,7 @@ const ParentAreaScreen = ({
                   <CalmButton
                     disabled={saving || undefined}
                     testID={`${testID}-add-profile`}
+                    sound={false}
                     label={ADD_KID_LABEL}
                     // Named apart from the start. Two chips both reading Kid
                     // is a picker nobody can use, and there is no keyboard
@@ -688,6 +690,54 @@ const ParentAreaScreen = ({
           </View>
         ))}
       </View>
+
+      {family && onFamilyChange ? (
+        <View style={styles.group}>
+          <Text style={styles.section} accessibilityRole="header">Interface</Text>
+          {([
+            {
+              id: 'interface-motion',
+              key: 'interfaceMotionEnabled',
+              title: 'Gentle artwork motion',
+              note: 'Artwork settles into place when you open the library or a title. Reduced motion keeps it still.',
+            },
+            {
+              id: 'interface-sounds',
+              key: 'interfaceSoundsEnabled',
+              title: 'Selection sounds',
+              note: 'A quiet tone confirms menu actions. Silent during playback and when a screen reader is active.',
+            },
+          ] as const).map((preference) => {
+            const enabled = family[preference.key] === true;
+            const focused = focusedRow === preference.id;
+            return (
+              <TouchableOpacity
+                key={preference.id}
+                testID={`${testID}-${preference.id}`}
+                accessibilityRole="switch"
+                accessibilityState={{ checked: enabled, disabled: saving }}
+                accessibilityLabel={`${preference.title}. ${preference.note}`}
+                activeOpacity={1}
+                onFocus={() => setFocusedRow(preference.id)}
+                onBlur={() => setFocusedRow(null)}
+                onPress={() => {
+                  if (!saving) {
+                    onFamilyChange({ ...family, [preference.key]: !enabled });
+                  }
+                }}
+                style={[styles.row, focused ? styles.focused : null]}>
+                <View style={styles.rowText}>
+                  <Text style={[styles.rowTitle, focused ? styles.focusedLabel : null]}>{preference.title}</Text>
+                  <Text style={styles.rowDetail}>{preference.note}</Text>
+                </View>
+                <View style={styles.rowState}>
+                  <Text style={styles.rowStateWord}>{enabled ? 'On' : 'Off'}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      ) : null}
 
       {family && onFamilyChange ? (
         <View style={styles.group}>

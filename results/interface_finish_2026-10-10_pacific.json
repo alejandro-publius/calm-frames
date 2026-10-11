@@ -1,0 +1,189 @@
+{
+  "date": "2026-10-10",
+  "date_timezone": "America/Los_Angeles",
+  "base_commit": "6dcce8de67f09dd4a96620a8518554922382591f",
+  "scope": "Final opt-in artwork motion and original menu sound, household persistence, cancellation and submission finish line.",
+  "source_sha256": {
+    "app/assets/raw/sound/README.md": "aaa1edd116c46a7b3fe2e0eb0f867439c3c9e81dcc6c606cf75ffa662a5fc16a",
+    "app/assets/raw/sound/generate_menu_select.py": "1463b143d47132b47f0aeab51da7a85f73a3f184501e8ed8545d0c14d129aed2",
+    "app/assets/raw/sound/menu-select.mp3": "38e2663df732562de2876fe40d3fd64f2fc9aa3ac52d745b956a88e5af2c7ab0",
+    "app/src/calmframes/CalmArtworkMotion.tsx": "eff9523ca3cef16c6485e4d4f5f3d5f1357aa46f718e3cc86c90753149d7f220",
+    "app/src/calmframes/CalmButton.tsx": "a026afe6f7719197bdb83ea5f84762ed6c870b28e52310a1f32a2eff84992809",
+    "app/src/calmframes/FirstRunScreen.tsx": "5d6aeb121716d90ad2f392d0feb0534f8c8a6213c2cde70266f8d62c9f9b297e",
+    "app/src/calmframes/KidHomeScreen.tsx": "251235fdfe8f884c2eaed7fa8806ba7d2bd8691475b92be5d69ec428e1739e4e",
+    "app/src/calmframes/ParentAreaScreen.tsx": "af8df00e15f31263e45d625c1cc47b18925030c5c99262ebe7c25ce5bdd1588d",
+    "app/src/calmframes/TitleDetailsScreen.tsx": "38b4344cf5053f512e69a9598e19788cd0e203fc7630ca85049fe03146fae729",
+    "app/src/calmframes/chimeSound.ts": "a6c4dda527b8347fbf4205844f13d2afefb8a3c7dffc7505eb4232c9cf4200fa",
+    "app/src/calmframes/credits.ts": "78ce99337bb0321569536f2fa9a3f06410bb1d7dd70a1ead4054149b10c54e81",
+    "app/src/calmframes/householdStorage.ts": "78178880f02ca4727254711964d77c798ea5f2b2775662af3215f94c1f2d2762",
+    "app/src/calmframes/interfaceSound.ts": "f394e6daecde03592de72afb2033c8b11870b109efae7110b22952114d959f95",
+    "app/src/calmframes/profiles.ts": "3b2f9dda2c41c049fe07d95063d47b3e94a0ba2a142a08c63188d1d042719c01",
+    "app/src/calmframes/useInterfaceSound.tsx": "7a7ffabb125c6a5a196067650dc9cb2fb7b64885782dde4fce75d26a61f78c60",
+    "app/src/screens/KidModeScreen.tsx": "921fb8c5cc8e7a4d657e868348a3d5598ac619f372fcb43dfa0cbe48042a2ad2",
+    "app/test/calmframes/artworkMotion.test.tsx": "68a2b54591670db1d030baa0d173489c70eca8855d6873a1f07d796ddff91f4f",
+    "app/test/calmframes/householdStorage.test.ts": "6866f59d47d1798fe61c4c7d24a2316aa29e6831141e372d33c4993b62e81c49",
+    "app/test/calmframes/interfaceSound.test.tsx": "53dcd482485694d4ad1423377692afaf9a14631f044a027e0b028a9184b133f6",
+    "app/test/calmframes/screens.test.tsx": "f360bc7839e16f3fb7f080b5f253c4d1eec17c0ee56f451829eb837f0207dec9",
+    "app/test/screens/householdRestart.test.tsx": "f5e6654f5ba36f52a31809071cc80bf91dcb770ee45c9291de26adbf86bf47ec",
+    "app/test/screens/interfaceNavigation.test.tsx": "5376b423aaf6d1ed39fc195f7dd2597f4b0e05692ffe8f9b4a76452bc6833764",
+    "eval/attribution.py": "b09f056d68ab9adadf3f7f26503ec97dfb26e1f46a7d834f48788d69851233c3"
+  },
+  "environment": {
+    "platform": "Linux cloud",
+    "node": "22",
+    "python": "3.12",
+    "ffmpeg": "7.1.5",
+    "vega_native_run": false
+  },
+  "behavior": {
+    "defaults": "Both interface effects are Off for existing and new households.",
+    "motion": {
+      "artwork_only": true,
+      "translation_scaled_units": 6,
+      "duration_ms": 240,
+      "requires_explicit_reduced_motion_false": true,
+      "unknown_preference": "still",
+      "replay_on_same_mount": false
+    },
+    "sound": {
+      "volume": 0.22,
+      "minimum_request_interval_ms": 220,
+      "maximum_request_age_ms": 220,
+      "timeout_ms": 500,
+      "screen_reader_unknown_or_enabled": "silent",
+      "playback": "cancel before navigation",
+      "profile_saves": "confirm only after successful persistence"
+    },
+    "playback_guards_changed": false
+  },
+  "validation": {
+    "app": {
+      "passed": 1146,
+      "skipped": 4,
+      "suites_passed": 110,
+      "suites_skipped": 1,
+      "snapshots_passed": 57,
+      "exit_code": 0,
+      "command": "cd app && node node_modules/jest/bin/jest.js --runInBand --coverage=false",
+      "log": ".logs/interface-app-final-host.log",
+      "scope": "Full suite after profile feedback fix, before generated sound attribution follow-up. Host subprocess permissions used."
+    },
+    "python_full": {
+      "passed": 1737,
+      "failed_permission_only": 4,
+      "errors_permission_only": 9,
+      "deselected": 2,
+      "exit_code": 1,
+      "command": ".venv/bin/python -m pytest flashmap pipeline eval -q -m \"not slow\"",
+      "log": ".logs/interface-python-final.log",
+      "diagnosis": "Nine localhost HTTP fixtures blocked by socket permission and four package tests blocked by spawnSync tar EPERM."
+    },
+    "python_permission_rerun": {
+      "passed": 37,
+      "exit_code": 0,
+      "command": ".venv/bin/python -m pytest pipeline/tests/test_upload_server.py eval/tests/test_release_package_gate.py -q",
+      "log": ".logs/interface-python-permission-rerun.log",
+      "scope": "Both affected files under scoped host execution, including all thirteen failures. Counts overlap the full run and must not be added."
+    },
+    "typescript": {
+      "exit_code": 0,
+      "log": ".logs/interface-typecheck-final.log"
+    },
+    "scoped_lint": {
+      "exit_code": 0,
+      "warnings": 0,
+      "log": ".logs/interface-lint-final.log",
+      "scope": "All changed application/test implementations; comment-only chimeSound.ts excluded from scoped lint."
+    },
+    "ui": {
+      "static_screens": 36,
+      "profiles": [
+        "wcag",
+        "broadcast"
+      ],
+      "negative_controls": "Both real rejection controls and the grating acceptance control passed.",
+      "log": ".logs/interface-ui-final.log",
+      "limitation": "Static host-tree rendering does not establish intermediate animated-frame behavior."
+    },
+    "red_before_green": {
+      "motion_guard_mutations": 3,
+      "sound_guard_mutations": 10,
+      "legacy_storage_regressions": 4,
+      "profile_feedback_regressions": 4,
+      "pre_playback_stop_mutation": 1,
+      "all_restored": true
+    },
+    "independent_review": "No remaining implementation blockers after fixing premature Add kid and Remove confirmation sounds. Read-only review; native behavior remains pending.",
+    "attribution_follow_up": {
+      "app_passed": 11,
+      "python_passed": 11,
+      "ledger_entries": 43,
+      "check_exit_code": 0,
+      "scope": "After adding only the generated menu sound credit and attribution title mapping; app credits and Python attribution suites."
+    }
+  },
+  "asset": {
+    "path": "app/assets/raw/sound/menu-select.mp3",
+    "sha256": "38e2663df732562de2876fe40d3fd64f2fc9aa3ac52d745b956a88e5af2c7ab0",
+    "bytes": 2708,
+    "origin": "Original sine-wave synthesis; no third-party samples.",
+    "license": "Apache-2.0",
+    "codec": "mp3",
+    "sample_rate": 48000,
+    "channels": 1,
+    "container_duration_seconds": 0.144,
+    "decoded_samples": 5040,
+    "mean_volume_dbfs": -32.0,
+    "peak_volume_dbfs": -21.0,
+    "clipping_observed": false
+  },
+  "native_acceptance_pending": [
+    "Build exact reviewed source and attach original verification reports.",
+    "Observe motion with reduced-motion and lifecycle changes; analyze recorded intermediate frames.",
+    "Observe audible timing, volume, cancellation, VoiceView and separation from the warning chime and title audio.",
+    "Rerun native journeys and regenerate the matching demo, manifest and review bundle."
+  ],
+  "finish_line": "docs/COMPLETION_CHECKLIST.md; feature freeze after this pass; completion requires actual Devpost submitted confirmation.",
+  "new_native_package": false,
+  "published_or_submitted": false,
+  "new_aws_deployment": false,
+  "local_log_sha256": {
+    ".logs/artwork-motion-green.log": "6bd91951bb7c20d9d8a6422ee6562a0fd3dc9f868c13cfc0c5274385b16bfb6a",
+    ".logs/artwork-motion-initial.log": "539d4c21d0990cd62abd86f24eb8761ea43e9e944cc29c63b1591b2628ecff47",
+    ".logs/artwork-motion-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".logs/artwork-motion-red-cancellation.log": "8b11cb4abcf1669eee12f0187d9e23f78b4d35d7d1c2f7093a4df729218979fe",
+    ".logs/artwork-motion-red-late-replay.log": "ba11dd7ae009f1ff2a022b738e6f88f3ccb0782a9db8752ce75f9227fd4690e2",
+    ".logs/artwork-motion-red-reduction.log": "06b457430fd9341b0d040bc13a14127a2de83b69cc4d8719791bfad43472db58",
+    ".logs/artwork-motion-typecheck.log": "82619225716d4dcfac867b855c41e2ab29f1028c9845cb269390082f39b80330",
+    ".logs/interface-app-final-host.log": "ed73d9d3b8cb8a4ef047cff68f9334e2a7bfd1e3fab188d5138746997b2f64ea",
+    ".logs/interface-app-final.log": "6c862cbf2daaf6856a5f2c2ada6f7b5b5809e382282d3b6086fa102a905cddef",
+    ".logs/interface-integration-green.log": "b1ff705321e2b4b1c015f7d2c1fed410c3fe37d8cc800a2111b941b342787c72",
+    ".logs/interface-lint-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".logs/interface-navigation-red.log": "1c45a794900ba8f3455b2608dbd06bea70229a6d8e62ca196c756b38f5e88817",
+    ".logs/interface-profile-feedback-green.log": "d52e0441538ecaf67835ee704573a6061b4ba97894e1a72a256c47b9200df462",
+    ".logs/interface-profile-feedback-red.log": "b409f8c6a078ce38c0f7c846959e7a2b2c0c75bf711960c6489cc0cf0d1790ff",
+    ".logs/interface-python-final.log": "e8cdd331395b920f21fca42572799d9c1f208c144a4eab1ef7e960e7970b6bb1",
+    ".logs/interface-python-permission-rerun.log": "8280a62edc918e81e1cc297f6b2393225db115249418432beb5bd4732f404451",
+    ".logs/interface-root-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".logs/interface-sound-green.log": "58de42f1af2bd6e6c4e685a4c025c8841b028c94ae1dbb2ee4896406ac48895b",
+    ".logs/interface-sound-level.log": "c00a4fb5faceacd62fb8300b78d6fc618690781d920e77fced2d9457c0e1b9b5",
+    ".logs/interface-sound-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".logs/interface-sound-red-before-button.log": "7f9c169ec8c2c9afbe59f422d322194f5b204a82cf2a470cdcdc853306c162f6",
+    ".logs/interface-sound-red-cleanup.log": "4e4e072ad26c059237eb3b917d6a57790a0ffa2683ac63e57289c43775801ecf",
+    ".logs/interface-sound-red-foreground.log": "0bdcaed339b88ef182dae1c575f6768e1a2f27d67ebf887f104eb36fd9ffda98",
+    ".logs/interface-sound-red-pending-cancel.log": "578069c969975de614810e357419be237a4b508863f54de78f7a36301aa45382",
+    ".logs/interface-sound-red-permission.log": "57707df43d4ba461a5f9a51216b29559da28a8e8ee6a3ed94faa45a77b98b73a",
+    ".logs/interface-sound-red-play-opt-out.log": "ead2b0c592c08a35eea2d0878bb31c8c8d61fd48abb1375ad4466175319ba0ea",
+    ".logs/interface-sound-red-rate-limit.log": "df9131e37b786dd7755600f9f68c741cd88244667e4c9d6d101020c8b73aa077",
+    ".logs/interface-sound-red-reader-race.log": "17ad00de0497e271063c11b8a868cb8133621ea21a9d34774ce8c72754a63f77",
+    ".logs/interface-sound-red-request-age.log": "b72cbf4f48f66b0f42e5802a09ced4edaa2d4939bdc4ca8a97a6a219f6de1195",
+    ".logs/interface-sound-red-screen-reader.log": "055d9d452eb9261bb02d6b0881997dc560e1c0454f63fa58bd0762567d49f023",
+    ".logs/interface-sound-red-stop-latch.log": "f243c97ea2e6ea80410418606f9f7bafe86056dfce448856bb20c47272654489",
+    ".logs/interface-sound-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".logs/interface-storage-green.log": "cbbece745d9621fd7ca828b6375f95e0e59454e24e8a74740d0533d185d7b690",
+    ".logs/interface-storage-red.log": "7227a6b41cf6e37dcbb8c16cbda76f69cefa1c287859b44780899337c231b45e",
+    ".logs/interface-typecheck-final.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+    ".logs/interface-typecheck.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+    ".logs/interface-ui-final.log": "f67ee05679551ff3e36825483bf3052a141b1c6d1d17d1a65c3001c3d031877c"
+  }
+}

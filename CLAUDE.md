@@ -36,6 +36,17 @@ starting new work, preserve concurrent changes, and verify the remote commit
 after each push. Report a blocked push promptly. Final release publication and
 submission retain their separate approval requirements above.
 
+**Final interaction scope, October 10 Pacific.** Alex requested motion and
+interactive sounds after the static design review. The optional artwork-only
+entrance and separate menu confirmation tone are explicit opt-ins in parental
+controls; existing households retain still, silent menus. System reduced motion,
+screen-reader state and lifecycle cancellation govern the effects. Keep focus,
+text, setup and picture covers unchanged. This supersedes the earlier blanket
+no-motion preference, not the flash guards or native evidence requirements.
+Finish this pass, then freeze new features and use the finish line in
+`docs/COMPLETION_CHECKLIST.md`. The current effects still need their Mac/Vega
+observations and recorded-frame checks before they are called native-verified.
+
 **What the branch holds, in one paragraph.** Signed scene holds (a checked still from before a
 hide, shown in place of black, today only on the labelled Harbor demo), a durable household
 record (salted PIN hash, lockout, profiles, room, chime), a packaged library compiled into the

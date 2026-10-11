@@ -4,6 +4,24 @@ Updated Sun Oct 11, 2026.
 
 ## 0. Where things stand
 
+### Final interface effects, October 10 Pacific
+
+The last feature pass adds optional artwork entrances and original menu selection
+sounds. Both start Off for existing and new households. Parents can save each
+preference independently; reduced-motion and screen-reader settings, app lifecycle
+and entry into playback constrain the effects. Profile changes confirm only after
+their storage write succeeds. Focus, text and picture covers remain stationary.
+
+Implementation evidence, source hashes and the permission-scoped test reruns are
+recorded in `results/interface_finish_2026-10-10_pacific.json`. This is cloud source
+validation; the latest effects have not been built or observed on Vega. The next
+work is the exact native acceptance and fresh demo in [MAC_FINISH.md](MAC_FINISH.md).
+After this pass, freeze new features and fix only acceptance failures.
+
+**Status line:** motion and menu sound are implemented; the final native package,
+recording, publication decisions and actual Devpost submission remain. Entrant
+form details are deferred until submission preparation and do not block app work.
+
 Alex confirmed the public entrant name as Alex Velazquez and country of residence
 as United States (USA). Both are recorded in the submission draft. Eligibility,
 contact email and the upstream contribution's GitHub identity remain unconfirmed.

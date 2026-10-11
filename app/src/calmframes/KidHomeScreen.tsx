@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import CalmButton from './CalmButton';
+import CalmArtworkMotion from './CalmArtworkMotion';
 import {
   CALM_COLORS,
   CALM_SPACE,
@@ -29,6 +30,7 @@ import { Image } from 'react-native';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle, kidModeTitles } from './titleStatus';
 import { useUiCapture } from './uiCapture';
+import { useInterfaceFeedback } from './useInterfaceSound';
 import {
   KID_HOME_EMPTY_FRAME,
   KID_HOME_FOCUSED_FRAME,
@@ -66,6 +68,8 @@ export interface KidHomeScreenProps {
   onChooseProfile?: (profile: Profile) => void;
   testID?: string;
   saving?: boolean;
+  interfaceMotionEnabled?: boolean;
+  interfaceActive?: boolean;
 }
 
 const KidHomeScreen = ({
@@ -80,7 +84,10 @@ const KidHomeScreen = ({
   onChooseProfile,
   testID = 'kid-home',
   saving = false,
+  interfaceMotionEnabled = false,
+  interfaceActive = true,
 }: KidHomeScreenProps) => {
+  const feedback = useInterfaceFeedback();
   const listed = kidModeTitles(titles);
   const [choosingProfile, setChoosingProfile] = React.useState(false);
   const featured = listed.find((entry) => titlePresentation(entry.title).action === 'Watch now') ?? listed[0];
@@ -160,12 +167,16 @@ const KidHomeScreen = ({
                 <Text style={styles.featureTitle}>{feature.name}</Text>
                 <Text style={styles.description}>{feature.browseSynopsis ?? feature.description}</Text>
                 <View style={styles.actions}>
-                  <CalmButton primary testID={`${testID}-watch`} label={feature.action} accessibilityLabel={`${feature.action}: ${feature.name}`}
+                  <CalmButton primary sound={false} testID={`${testID}-watch`} label={feature.action} accessibilityLabel={`${feature.action}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={!returnFocusId && !saving} onPress={() => (onPlay ?? onOpen)(featured)} />
                   <CalmButton testID={`${testID}-more-info`} label="More info" onPress={() => onOpen(featured)} disabled={saving} />
                 </View>
               </View>
-              <View style={styles.heroArt}><TitleArtwork entry={featured} testID={`${testID}-hero-art`} /></View>
+              <View style={styles.heroArt}>
+                <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
+                  <TitleArtwork entry={featured} testID={`${testID}-hero-art`} />
+                </CalmArtworkMotion>
+              </View>
             </View> : null}
             <Text style={styles.section} testID={`${testID}-title`}>Your library</Text>
             <View style={styles.grid}>
@@ -176,7 +187,9 @@ const KidHomeScreen = ({
                   key={entry.title.id} testID={`${testID}-poster-${entry.title.id}`} accessibilityRole="button"
                   accessibilityLabel={`${label.cardName ?? label.name}, ${label.kind ?? ''}, checked`} activeOpacity={1}
                   hasTVPreferredFocus={!saving && Boolean(returnFocusId) && entry.title.id === preferredId}
-                  onFocus={() => setFocusedId(entry.title.id)} onBlur={() => setFocusedId(null)} onPress={() => onOpen(entry)}
+                  onFocus={() => setFocusedId(entry.title.id)} onBlur={() => setFocusedId(null)} onPress={() => {
+                    if (!saving) { onOpen(entry); feedback.confirm(); }
+                  }}
                   style={[styles.poster, focused ? styles.posterFocused : null]}>
                   <TitleArtwork compact entry={entry} testID={`${testID}-poster-image-${entry.title.id}`} />
                   <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={2} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>

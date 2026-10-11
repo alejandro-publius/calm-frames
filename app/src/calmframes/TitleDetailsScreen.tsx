@@ -2,7 +2,7 @@
  * The details page, with the still flash map strip.
  *
  * It says what the check found before anything plays: how many parts will be
- * hidden, how long they add up to and where they fall. No preview, no motion.
+ * hidden, how long they add up to and where they fall. No video preview.
  *
  * A title that did not verify gets this page too, and that is the point of it.
  * Instead of the strip and a summary it shows one notice saying what happened
@@ -14,6 +14,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
+import CalmArtworkMotion from './CalmArtworkMotion';
 import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { noticeForTitle } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
@@ -41,6 +42,8 @@ export interface TitleDetailsScreenProps {
   saving?: boolean;
   onBack?: () => void;
   testID?: string;
+  interfaceMotionEnabled?: boolean;
+  interfaceActive?: boolean;
 }
 
 const TitleDetailsScreen = ({
@@ -50,6 +53,8 @@ const TitleDetailsScreen = ({
   saving = false,
   onBack,
   testID = 'title-details',
+  interfaceMotionEnabled = false,
+  interfaceActive = true,
 }: TitleDetailsScreenProps) => {
   const settings = React.useMemo(
     () => benignStorySettings(entry.title, householdSettings),
@@ -87,12 +92,16 @@ const TitleDetailsScreen = ({
           <Text style={styles.title} testID={`${testID}-title`}>{presentation.name}</Text>
           {presentation.description ? <Text style={styles.summary} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
           <View style={styles.buttons}>
-            <CalmButton primary testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playable ? presentation.action : 'Unavailable'}
+            <CalmButton primary sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playable ? presentation.action : 'Unavailable'}
               accessibilityLabel={saving ? 'Saving your changes...' : playable ? `${presentation.action}: ${presentation.name}` : `${presentation.name} is unavailable. ${notice?.detail ?? ''}`}
               disabled={!playable || saving} hasTVPreferredFocus onPress={() => onPlay(entry)} />
           </View>
         </View>
-        <View style={styles.heroArt}><TitleArtwork entry={entry} testID={`${testID}-artwork`} /></View>
+        <View style={styles.heroArt}>
+          <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
+            <TitleArtwork entry={entry} testID={`${testID}-artwork`} />
+          </CalmArtworkMotion>
+        </View>
       </View>
 
       {notice ? (

@@ -354,7 +354,7 @@ describe('household setup across launches', () => {
       screen.getByTestId('kid-mode-parent-preset-extra-cautious'),
     );
     expect(screen.getByTestId('kid-mode-parent-saving')).toBeTruthy();
-    for (const id of ['preset-extra-cautious', 'tv-55', 'seat-96', 'chime']) {
+    for (const id of ['preset-extra-cautious', 'tv-55', 'seat-96', 'chime', 'interface-motion', 'interface-sounds']) {
       expect(screen.getByTestId(`kid-mode-parent-${id}`).props.focusable).toBe(true);
     }
     expect(
@@ -362,6 +362,8 @@ describe('household setup across launches', () => {
         .disabled,
     ).toBe(true);
     fireEvent.press(screen.getByTestId('kid-mode-parent-preset-wcag'));
+    fireEvent.press(screen.getByTestId('kid-mode-parent-interface-motion'));
+    fireEvent.press(screen.getByTestId('kid-mode-parent-interface-sounds'));
     expect(storage.setItem).toHaveBeenCalledTimes(2);
     await act(async () => {
       finish();
@@ -370,6 +372,35 @@ describe('household setup across launches', () => {
     expect(JSON.parse(storage.read()!).family.floor.preset).toBe(
       'extra-cautious',
     );
+    expect(JSON.parse(storage.read()!).family.interfaceMotionEnabled).toBe(false);
+    expect(JSON.parse(storage.read()!).family.interfaceSoundsEnabled).toBe(false);
+  });
+
+  it('keeps interface choices across restart while preserving the PIN and viewing floor', async () => {
+    const storage = memoryStorage(JSON.stringify(RECORD));
+    const first = open(storage);
+    await screen.findByTestId('kid-mode-home');
+    fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
+    type('kid-mode-parent', '1357');
+    await screen.findByTestId('kid-mode-parent-open');
+    for (const id of ['interface-motion', 'interface-sounds']) {
+      fireEvent.press(screen.getByTestId(`kid-mode-parent-${id}`));
+      await waitFor(() => expect(screen.getByTestId(`kid-mode-parent-${id}`).props.accessibilityState.checked).toBe(true));
+    }
+    const saved = JSON.parse(storage.read()!);
+    expect(saved.family.floor).toEqual(RECORD.family.floor);
+    expect(saved.family.chimeEnabled).toBe(RECORD.family.chimeEnabled);
+    expect(saved.gate.record).toEqual(RECORD.gate.record);
+    first.unmount();
+    open(storage);
+    await screen.findByTestId('kid-mode-home');
+    fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
+    expect(screen.queryByTestId('kid-mode-parent-open')).toBeNull();
+    type('kid-mode-parent', '1357');
+    await screen.findByTestId('kid-mode-parent-open');
+    for (const id of ['interface-motion', 'interface-sounds']) {
+      expect(screen.getByTestId(`kid-mode-parent-${id}`).props.accessibilityState.checked).toBe(true);
+    }
   });
 
   it('ignores a stale read failure after a different storage source has loaded', async () => {

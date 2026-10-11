@@ -36,6 +36,7 @@ import {
   HouseholdStorage,
 } from '../calmframes/householdStorage';
 import { useSavedHousehold } from '../calmframes/useSavedHousehold';
+import { InterfaceSoundContext, useInterfaceSound } from '../calmframes/useInterfaceSound';
 import FirstRunScreen, { FirstRunResult } from '../calmframes/FirstRunScreen';
 import {
   DEFAULT_SETTINGS,
@@ -237,9 +238,21 @@ const KidModeScreen = ({
   }, [committedFamily]);
   const family = saved.value?.family ?? newFamily(DEFAULT_SETTINGS);
   const gate = saved.value?.gate ?? emptyPinGate();
+  const [interfaceActive, setInterfaceActive] = React.useState(
+    () => navigation.isFocused?.() !== false,
+  );
+  const interfaceSound = useInterfaceSound({
+    enabled: Boolean(saved.value && family.interfaceSoundsEnabled === true &&
+      (saved.phase === 'ready' || saved.phase === 'saving')),
+    active: interfaceActive,
+  });
   const setFamily = (next: Family) => {
     if (saved.phase === 'ready' && saved.value) {
-      saved.write({ ...saved.value, family: next });
+      saved.write({ ...saved.value, family: next }).then((accepted) => {
+        if (accepted && next.interfaceSoundsEnabled === true) {
+          interfaceSound.confirm();
+        }
+      });
     }
   };
   const setGate = async (next: PinGateState) => {
@@ -261,11 +274,19 @@ const KidModeScreen = ({
   const [openId, setOpenId] = React.useState<string | null>(null);
   const [lastOpenedId, setLastOpenedId] = React.useState<string | null>(null);
   const [focusGeneration, setFocusGeneration] = React.useState(0);
-  React.useEffect(() => navigation.addListener?.('focus', () => {
-    // Vega keeps this route mounted behind the player. Remount its current
-    // panel on return so the preferred remote control receives focus again.
-    setFocusGeneration((generation) => generation + 1);
-  }), [navigation]);
+  React.useEffect(() => {
+    const removeFocus = navigation.addListener?.('focus', () => {
+      // Vega keeps this route mounted behind the player. Restore its controls
+      // on return, and permit menu feedback only while this route is active.
+      setInterfaceActive(true);
+      setFocusGeneration((generation) => generation + 1);
+    });
+    const removeBlur = navigation.addListener?.('blur', () => {
+      interfaceSound.stop();
+      setInterfaceActive(false);
+    });
+    return () => { removeFocus?.(); removeBlur?.(); };
+  }, [navigation, interfaceSound]);
 
   const watching = activeProfile(family);
   // Never the kid's own choice on its own: the stricter of the household floor
@@ -324,18 +345,20 @@ const KidModeScreen = ({
         }
         if (view === 'credits') {
           setView('parent');
+          interfaceSound.confirm();
           return true;
         }
         if (view === 'details' || view === 'parent') {
           setView('home');
           setOpenId(null);
+          interfaceSound.confirm();
           return true;
         }
         return false;
       },
     );
     return () => subscription.remove();
-  }, [navigation, view]);
+  }, [navigation, view, interfaceSound]);
 
   const finishFirstRun = (result: FirstRunResult) => {
     // The first run sets the floor, not one kid's settings. Every profile is
@@ -359,6 +382,9 @@ const KidModeScreen = ({
     if (saved.phase !== 'ready' || !saved.value) {
       return;
     }
+    // Invalidate pending menu audio before the player can request audio focus.
+    interfaceSound.stop();
+    setInterfaceActive(false);
     navigation.navigate(Screens.PLAYER_SCREEN, {
       data: titleDataFor(entry),
       guarded: guardedParamsFor(
@@ -370,12 +396,18 @@ const KidModeScreen = ({
     });
   };
 
+  const withInterfaceFeedback = (content: React.ReactElement) => (
+    <InterfaceSoundContext.Provider value={interfaceSound}>
+      {content}
+    </InterfaceSoundContext.Provider>
+  );
+
   if (
     saved.phase === 'loading' ||
     saved.phase === 'error' ||
     (saved.phase === 'saving' && !saved.value)
   ) {
-    return (
+    return withInterfaceFeedback(
       <HouseholdStorageScreen
         testID={`${testID}-storage`}
         failed={saved.phase === 'error'}
@@ -385,7 +417,7 @@ const KidModeScreen = ({
   }
 
   if (!saved.value || view === 'first-run') {
-    return (
+    return withInterfaceFeedback(
       <FirstRunScreen
         testID={`${testID}-first-run`}
         onDone={finishFirstRun}
@@ -396,7 +428,7 @@ const KidModeScreen = ({
   }
 
   if (view === 'parent') {
-    return (
+    return withInterfaceFeedback(
       <ParentAreaScreen
         saving={saved.phase === 'saving'}
         testID={`${testID}-parent`}
@@ -421,7 +453,7 @@ const KidModeScreen = ({
   // asks for attribution somewhere a person can actually read it, which NOTICE
   // in the repository is not for somebody holding a remote.
   if (view === 'credits') {
-    return (
+    return withInterfaceFeedback(
       <CreditsScreen
         testID={`${testID}-credits`}
         onBack={() => setView('parent')}
@@ -430,10 +462,12 @@ const KidModeScreen = ({
   }
 
   if (view === 'details' && open) {
-    return (
+    return withInterfaceFeedback(
       <TitleDetailsScreen
         key={`details-${focusGeneration}`}
         saving={saved.phase === 'saving'}
+        interfaceMotionEnabled={family.interfaceMotionEnabled === true}
+        interfaceActive={interfaceActive}
         testID={`${testID}-details`}
         entry={open}
         settings={settings}
@@ -446,10 +480,12 @@ const KidModeScreen = ({
     );
   }
 
-  return (
+  return withInterfaceFeedback(
     <KidHomeScreen
       key={`home-${focusGeneration}`}
       saving={saved.phase === 'saving'}
+      interfaceMotionEnabled={family.interfaceMotionEnabled === true}
+      interfaceActive={interfaceActive}
       testID={`${testID}-home`}
       titles={titles}
       onPlay={(entry) => {

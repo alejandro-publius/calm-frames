@@ -59,6 +59,8 @@ export function validateHousehold(value: unknown): SavedHousehold {
     family.profiles.length < 1 ||
     family.profiles.length > MAX_PROFILES ||
     typeof family.chimeEnabled !== 'boolean' ||
+    (family.interfaceMotionEnabled !== undefined && typeof family.interfaceMotionEnabled !== 'boolean') ||
+    (family.interfaceSoundsEnabled !== undefined && typeof family.interfaceSoundsEnabled !== 'boolean') ||
     typeof record.salt !== 'string' ||
     record.salt.length < 1 ||
     record.salt.length > 128 ||
@@ -106,6 +108,8 @@ export function validateHousehold(value: unknown): SavedHousehold {
       profiles,
       activeProfileId: family.activeProfileId as string,
       chimeEnabled: family.chimeEnabled,
+      interfaceMotionEnabled: family.interfaceMotionEnabled === true,
+      interfaceSoundsEnabled: family.interfaceSoundsEnabled === true,
     },
     gate: {
       record: { salt: record.salt, hash: record.hash, rounds: PIN_ROUNDS },

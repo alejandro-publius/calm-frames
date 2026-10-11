@@ -47,6 +47,52 @@ const RECORD: SavedHousehold = {
 };
 
 describe('local household record', () => {
+  it('restores older households with interface effects off without changing the floor or PIN', () => {
+    const legacy = JSON.parse(JSON.stringify(RECORD));
+    delete legacy.family.interfaceMotionEnabled;
+    delete legacy.family.interfaceSoundsEnabled;
+    const restored = validateHousehold(legacy);
+    expect(restored.family).toMatchObject({
+      interfaceMotionEnabled: false,
+      interfaceSoundsEnabled: false,
+      floor: RECORD.family.floor,
+      profiles: RECORD.family.profiles,
+      chimeEnabled: RECORD.family.chimeEnabled,
+    });
+    expect(restored.gate).toEqual(RECORD.gate);
+  });
+
+  it('persists explicit interface preferences separately from the warning chime', async () => {
+    let disk: string | null = null;
+    const storage = {
+      getItem: jest.fn(async () => disk),
+      setItem: jest.fn(async (_key: string, text: string) => { disk = text; }),
+    };
+    await saveHousehold(storage, {
+      ...RECORD,
+      family: {
+        ...RECORD.family,
+        interfaceMotionEnabled: true,
+        interfaceSoundsEnabled: true,
+        chimeEnabled: false,
+      },
+    });
+    expect((await loadHousehold(storage))?.family).toMatchObject({
+      interfaceMotionEnabled: true,
+      interfaceSoundsEnabled: true,
+      chimeEnabled: false,
+      floor: RECORD.family.floor,
+    });
+  });
+
+  it.each(['interfaceMotionEnabled', 'interfaceSoundsEnabled'])(
+    'rejects malformed %s rather than enabling an effect', (key) => {
+      const malformed = JSON.parse(JSON.stringify(RECORD));
+      malformed.family[key] = 'true';
+      expect(() => validateHousehold(malformed)).toThrow();
+    },
+  );
+
   it('restores the exact strict floor, selected child, chime and PIN lockout', async () => {
     let disk: string | null = null;
     const storage = {

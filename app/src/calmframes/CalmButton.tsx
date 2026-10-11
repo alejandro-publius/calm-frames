@@ -13,8 +13,8 @@
  * - Nothing fades. A button that cannot be pressed says so in words and in its
  *   colours, rather than being drawn at half opacity, which is unreadable
  *   across a room and unreadable to a camera.
- * - `activeOpacity` is 1, so pressing does not dim it either. There is no
- *   motion in this app.
+ * - `activeOpacity` is 1, so pressing does not dim it either. Controls stay
+ *   stationary while artwork can have its own optional entry motion.
  */
 
 import React from 'react';
@@ -26,6 +26,7 @@ import {
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
+import { useInterfaceFeedback } from './useInterfaceSound';
 
 export interface CalmButtonProps {
   label: string;
@@ -37,6 +38,8 @@ export interface CalmButtonProps {
   accessibilityLabel?: string;
   /** Drawn as unavailable, and it does not call back. */
   disabled?: boolean;
+  /** Disable confirmation for actions that start playback or confirm elsewhere. */
+  sound?: boolean;
   hasTVPreferredFocus?: boolean;
   testID?: string;
 }
@@ -48,10 +51,12 @@ const CalmButton = ({
   onPress,
   accessibilityLabel,
   disabled = false,
+  sound = true,
   hasTVPreferredFocus = false,
   testID = 'calm-button',
 }: CalmButtonProps) => {
   const [focused, setFocused] = React.useState(false);
+  const feedback = useInterfaceFeedback();
   return (
     <TouchableOpacity
       testID={testID}
@@ -63,7 +68,13 @@ const CalmButton = ({
       disabled={disabled}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
-      onPress={onPress}
+      onPress={() => {
+        if (disabled || !onPress) { return; }
+        onPress();
+        if (sound) {
+          try { feedback.confirm(); } catch { /* The action already succeeded. */ }
+        }
+      }}
       style={[
         styles.button,
         quiet && !primary ? styles.quiet : null,

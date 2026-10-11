@@ -3,7 +3,36 @@
 Updated October 11, 2026. Solo entry, identity-verified Amazon Developer account.
 Deadline October 23 at noon Pacific. Vega Virtual Device exclusively.
 
+## Finish line
+
+This is the single completion checklist. Finish the current motion and sound
+pass, then freeze new features and fix only failures of the acceptance checks.
+The detailed evidence and outstanding decisions remain below.
+
+- [ ] Push the checked final app source and prepare its matching package with
+  every required original verification report. Preserve the strict release gate.
+- [ ] Complete the native journeys in [MAC_FINISH.md](MAC_FINISH.md), including
+  motion, interface sounds, the separate warning chime and VoiceView. Record the
+  exact build, observations and any unresolved failure.
+- [ ] Produce the matching native demo, capture manifest, package hashes and
+  review bundle. Check the final recording, including animated frames and audio.
+- [ ] Resolve publication licence questions, review remaining security findings,
+  confirm entrant details and prepare the contribution and reviewer-access links.
+  Present the finished materials for the required publication/submission approval.
+- [ ] After approval, publish the reviewed artifacts, verify the live links and
+  submit the Devpost entry. Save the actual submitted confirmation privately if
+  it contains personal data; source/package IDs can go in a public receipt.
+
+A local bundle, draft release or completed Devpost draft does not close the last
+item. No physical device, extra architecture, package-registry publication or
+new AWS deployment is needed to finish the simulator entry.
+
 ## Current design polish
+
+The motion and sound implementation and cloud checks are recorded in
+[`interface_finish_2026-10-10_pacific.json`](../results/interface_finish_2026-10-10_pacific.json).
+This closes the current feature pass, while the native acceptance below remains
+open. Entrant form details can wait until the matching app and demo are ready.
 
 The latest cloud work refines the library, title artwork, secondary navigation,
 setup, parental controls and viewing settings. It changes app inputs beyond the
@@ -24,6 +53,13 @@ The latest interaction pass keeps profile choices in the remote focus order
 while saving, separates notice actions from spoken announcements and includes
 all displayed licence conditions in spoken credits. These changes preserve the
 approved visual design; they still need native focus and screen-reader checks.
+
+The final interaction acceptance also covers optional, persisted interface motion
+and interface sounds, both Off for new and existing households unless enabled.
+Motion is limited to one short artwork entrance on library/details entry; text,
+focus and safety covers remain static. Quiet menu confirmation sounds are separate
+from the warning chime. These are acceptance requirements for the current pass,
+not claims that the native behavior has been observed.
 
 ## Earlier native tested build
 
@@ -173,6 +209,11 @@ the saved GitHub API network setting; Git source synchronization works.
   synopsis, stable parent saving feedback and setup Back controls. The source
   changes and public design references are in
   [SEAMLESS_REVIEW.md](design/SEAMLESS_REVIEW.md).
+- [ ] Complete the motion and sound acceptance in [MAC_FINISH.md](MAC_FINISH.md):
+  Off defaults, On/Off persistence, reduced-motion and foreground behavior,
+  prompt menu audio without queued cues or playback interruption, VoiceView and
+  the separate warning chime on benign footage. Static UI snapshots do not
+  validate animated frames or audible playback.
 - [ ] Review the still-drop finding reported in the other Linux environment
   with ffmpeg 6.1.1. The Mac follow-up in [STATUS.md](STATUS.md) calls for checking
   each hold near its start, middle and end, recording the encoder version and

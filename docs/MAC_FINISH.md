@@ -11,6 +11,11 @@ still show the earlier design. Finish by rebuilding, observing and recording the
 current source on the existing Vega Virtual Device. Include the latest focus and
 screen-reader fixes in that check. No physical stick is needed.
 
+The finish line is in [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md#finish-line).
+After the current motion and sound pass, freeze new features and fix only
+acceptance failures. Native evidence must match the final app inputs and package;
+the project is submitted only when the actual Devpost confirmation is saved.
+
 ## 1. Reconcile the existing checkout
 
 Use the existing Mac checkout and review branch. Preserve local work, recordings,
@@ -177,10 +182,31 @@ Record fresh observations for these journeys:
 10. With the screen reader enabled, reach notice actions separately from their
     announcements and hear every displayed credit and licence condition. Use a
     separate test profile for removal confirmation; preserve existing household data.
+11. Check interface motion and interface sounds separately. Both must default
+    to Off in new households and existing records without these settings. Enable
+    each, restart and confirm it remains On; disable it, restart and confirm Off.
+    Use a separate test household to exercise defaults without resetting user data.
+12. With interface motion enabled and the system reduced-motion query confirmed
+    false, observe the hero artwork move once by 6 layout units over 240 ms on
+    library/details entry. There must be no text, focus or safety-cover animation.
+    With motion Off, reduced motion enabled, or the query still unresolved, the
+    artwork must remain still. Check background/foreground changes and rapid
+    navigation for stale animation, repeated entrances or lost focus.
+13. With interface sounds enabled, hear a quiet, prompt confirmation for an
+    accepted menu action, distinct from the warning chime. Check rapid presses
+    and leaving a menu for overlapping, queued or late sounds. Confirm silence
+    when the setting is Off, VoiceView is active, the app is backgrounded or a
+    title is playing, with no interruption to film audio or captions. Separately
+    enable and disable the warning chime on bundled benign footage and record
+    whether it is actually heard. Saved settings and audible film tone alone
+    do not establish that either cue plays.
 
 Use only the bundled benign media. Practice holds are synthetic examples;
 simulator observations do not measure physical screen timing. A UI or logic fix
 requires a new package and affected native observations before final recording.
+Keep passed, failed and untested observations separate, including any unavailable
+system accessibility setting. Static UI snapshot checks do not validate animated
+frames, native sound latency or accessibility behavior.
 
 ## 4. Capture, assemble and bind the evidence
 
@@ -190,6 +216,12 @@ zero seconds saves a PNG. Capture the composited Vega window and native audio.
 Keep Vega foregrounded and avoid taking screenshots during video capture.
 macOS Screen Recording permission, if absent, needs the user's OS interaction;
 continue independent preparation while that is unavailable.
+
+Record the native motion and sound acceptance as well as the submission shots.
+Analyze a capture that includes the enabled entrance animation with the existing
+WCAG and broadcast checks; a static render or a demo recorded with motion Off
+cannot establish that its animated frames pass. Preserve the capture and results
+as evidence. The final assembled submission video must also pass both checks.
 
 Save new captures to a fresh local directory. Preserve the earlier recordings,
 package, demo and receipts. Reuse the sequence in [SHOT_MANIFEST.md](SHOT_MANIFEST.md)
@@ -267,6 +299,13 @@ form values, public author identity, reviewer/video links, upstream contribution
 and final publication/submission are separate tasks. Do not invent credentials,
 send outreach, change billing, deploy AWS, publish or submit from this handoff.
 
+Once the work is reviewable and publication/submission is approved, verify that
+the English video plays while logged out, reviewers can reach the final source
+and package, and the live Devpost fields use those same artifacts. Save the actual
+submitted confirmation, not just a draft preview. Keep confirmation pages or
+receipts containing personal data outside Git in private storage; a public
+receipt may identify the submitted source commit and package/video hashes.
+
 ## Copy and paste into the agent on the Mac
 
 > Continue Calm Frames from docs/MAC_FINISH.md and the current completion checklist.
@@ -276,6 +315,9 @@ send outreach, change billing, deploy AWS, publish or submit from this handoff.
 > Debug after attaching the original verification reports and passing the strict
 > evidence gate, validate the exact prepared package, install it, exercise the native
 > journeys, fix observed issues and record a fresh English demo under 179 seconds.
+> Include motion, interface sounds, VoiceView and the separate warning chime in
+> the native acceptance checks. After this pass, add no new features; fix only
+> acceptance failures. Analyze captured animated frames as well as the final demo.
 > Refresh capture provenance, package/video hashes, gates and the review bundle;
 > preserve the earlier evidence. Commit and push small checked batches to the
 > existing review branch. Routine inspection, builds, fixes, simulator operation

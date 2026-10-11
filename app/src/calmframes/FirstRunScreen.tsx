@@ -27,8 +27,8 @@
  * resting look, the same chosen fill and the same focus ring, so a parent
  * meets each control here the way they will meet it again later.
  *
- * No motion anywhere, including here: the steps do not slide and nothing
- * counts down on screen.
+ * Setup remains still: the steps do not slide and nothing counts down on
+ * screen. Optional artwork motion belongs to the library and title details.
  *
  * Each list of choices is a radio group and says so, labelled with the
  * question it is asking, and each choice carries `checked` rather than

@@ -13,11 +13,10 @@
  * `KeplerCaptionsView`, and a second video surface would be a problem, but an
  * audio element is not a video surface.
  *
- * **Nothing here has made a sound on a device.** The import is resolved at call
- * time and every failure is swallowed, so on a machine without the module, which
- * is every test run and every simulator, the chime is silent and the player is
- * unaffected. That is the right failure: a cue that cannot be heard is a missed
- * courtesy, and a cue that throws inside a player is a broken title.
+ * Audible warning-cue playback still needs explicit native verification.
+ * Recorded film audio does not establish that this separate cue was heard.
+ * The import is resolved at call time and audio failures are swallowed: a
+ * missing courtesy sound must not interrupt the picture guard or the title.
  */
 
 /** Where the bundled chime lands in the package, the same way the offline clip does. */

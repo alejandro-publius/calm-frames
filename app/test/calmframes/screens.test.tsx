@@ -1100,6 +1100,18 @@ describe('family profiles on the screens', () => {
     expect(next.profiles).toEqual(twoKids.profiles);
   });
 
+  it.each([
+    ['interface-motion', 'interfaceMotionEnabled'],
+    ['interface-sounds', 'interfaceSoundsEnabled'],
+  ] as const)('enables %s without changing playback or the warning chime', (id, key) => {
+    const { onFamilyChange } = renderFamilyArea();
+    const control = screen.getByTestId(`parent-area-${id}`);
+    expect(control.props.accessibilityState.checked).toBe(false);
+    fireEvent.press(control);
+    expect(onFamilyChange).toHaveBeenCalledTimes(1);
+    expect(onFamilyChange.mock.calls[0][0]).toEqual({ ...twoKids, [key]: true });
+  });
+
   it('says the chime is off when it is off', () => {
     renderFamilyArea({ family: setChimeEnabled(twoKids, false) });
     expect(screen.getByTestId('parent-area-chime-label').props.children).toBe(

@@ -19,8 +19,9 @@ not advice or approval from OpenAI's internal design team.
 | [Empty-state structure](https://github.com/openai/apps-sdk-ui/blob/0f00143c7a639906f1621fe58e1b6be7b5bea46d/src/components/EmptyMessage/EmptyMessage.tsx) | Review loading, empty and failure states with the same care as the library, using useful text and an available next action. |
 
 The app retains its own monk and halo, teal surfaces, cream text and saffron
-focus. No web component dependency, hover behavior, decorative motion, pulsing
-indicator or smaller web type scale was added.
+focus. This initial pass added no web component dependency, hover behavior,
+decorative motion, pulsing indicator or smaller web type scale. The later
+optional interface effects are described below.
 
 ## Changes in this pass
 
@@ -61,6 +62,32 @@ Source hashes, screenshot hashes, measurements, check results and scope limits
 are recorded in
 [`seamless_design_2026-10-11.json`](../../results/seamless_design_2026-10-11.json).
 Browser text metrics and flex layout may differ from the native renderer.
+
+## Final interface effects
+
+After this review, Alex requested motion and interactive sounds. Parental
+controls now offer Gentle artwork motion and Selection sounds independently.
+Both are Off for new and existing households until a parent enables them;
+existing PIN, viewing settings and warning-chime preferences are preserved.
+
+The library and title artwork can settle into place once when a page opens.
+Text, focus rings, setup and playback covers stay stationary and fully opaque.
+Motion requires the system preference to explicitly allow it. Unknown or failed
+preference queries keep artwork still; leaving, backgrounding or disabling the
+effect cancels the entrance without replaying it later on the same page.
+
+The original selection tone confirms accepted menu actions and successful
+settings saves. Focus movement and Watch actions stay silent. The sound is
+separate from the warning before a cover; it is stopped before playback and
+suppressed when screen-reader status is unknown or enabled. Late initialization,
+rapid requests and audio failures must not delay an action or queue later cues.
+
+The installed Vega SDK provides the native animation and audio APIs used here.
+Unit tests establish the lifecycle rules, not perceived quality, real audio
+focus or native rendering. These changes follow the browser proofs above;
+their intermediate animation frames and sounds are not demonstrated by those
+images or by the static UI colour check. The native acceptance and recorded-video
+checks in [MAC_FINISH.md](../MAC_FINISH.md) remain required.
 
 ## What makes the product finished
 
