@@ -35,6 +35,7 @@ Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
 - **A card before anything is hidden.** "Flashing part coming up", with Skip in focus, a few seconds ahead, and an optional chime.
 - **The story keeps going.** During a hidden part a checked still from just before it, or a dark cover, stands over the picture while sound and captions continue; afterwards one line says what was hidden.
 - **Parental controls behind the PIN.** Presets, the room, the chime, a profile per child (which can only be stricter than the household), and two opt-in effects, a gentle artwork entrance and quiet selection sounds, both Off unless a parent turns them on.
+- **What it keeps stays on the television.** The household record (the salted hash of the PIN, the profiles, presets, room and switches) is saved on the device, and the list of what was hidden lives in memory only, so it is gone after a restart. A release build sends nothing about the household anywhere: its only network request fetches a flash map when a catalog entry names a web address, and the default shelf is compiled into the app. The timing and capture beacons run in debug builds only ([`harnessConfig.ts`](app/src/calmframes/harnessConfig.ts), [`timingLog.ts`](app/src/calmframes/timingLog.ts)).
 - **Built for the remote and for screen readers.** The D-pad reaches every control, cards are announced, and reduced motion keeps the artwork still. VoiceView is covered by tests and still owes its check on the device.
 
 ### What it does underneath
