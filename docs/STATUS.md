@@ -96,8 +96,10 @@ coverage against a floor (<!--n results/coverage_2026-10-11.json:published.pytho
 install, `results/coverage_2026-10-11.json`), and a test keeps the lanes named.
 
 **Status line:** the repository's presentation and tooling gaps are closed and
-pushed; the hosted run on the lane fix is the first in which CI tests the
-analyzer and the pipeline; the Mac session and Alex's dated items remain.
+pushed, and 6ecb5df is green in all ten jobs with the Python job testing the
+analyzer and the pipeline on the runner (<!--n results/github_push_2026-10-11_6ecb5df.json:published.python_tests_passed_on_the_runner -->1633<!--/n--> passed,
+<!--n results/github_push_2026-10-11_6ecb5df.json:published.python_tests_skipped_on_the_runner -->96<!--/n--> skipped for media the runner does not have); the Mac session and
+Alex's dated items remain.
 
 ### Oct 11 (late Oct 10 Pacific): final interface effects
 
@@ -1017,7 +1019,7 @@ version of this table in git history, not here.
 | **By Mon Oct 12, tomorrow** | Open the upstream pull request from a fork under your account. | The fix, the two patches and the PR text are ready in `docs/OPEN_SOURCE_PR.md` and `docs/upstream-pr/`. It cannot be opened from here: it needs a fork you own, and the patches need your chosen public author identity. This is the Open Source mini challenge's contribution URL. |
 | **By Tue Oct 13** | Send the clarification request in `docs/AMAZON_SAMPLE_LICENSE_REVIEW.md` to Amazon, as an issue on AmazonAppDev/vega-video-sample or to the hackathon's Amazon contacts, and record where and when in that file. | The player wrapper and the Shaka archive carry a proprietary notice beside the sample's MIT-0 grant, and the repository goes public on Oct 21. NOTICE and the README state the conflict now; an answer would close it. |
 | **Next Mac session** | Rebuild the polished source with the Oct 11 dependency changes in (`xmldom` alias, `lodash` 4.18.1), install it on the virtual device, play Harbor and the gradient, then re-run `eval/assemble_demo.py` and `eval/check_video.sh`, regenerate the manifest and refresh the review assets. | Nothing that changed app inputs since Oct 10 has been built or seen on a device, and the recorded cut still carries the earlier 2:10 sentence. If the Vega build or playback rejects the parser alias, revert the one line in `app/package.json`. While there: attach the two original verify reports with `python -m pipeline.packaged_library attach-reports` and run `node tools/check_prepared_library.mjs --require-reports` (section 5, `docs/MAC_FINISH.md`). Also from the Mac, which can reach w3.org: quote WCAG 2.2 SC 1.4.3, SC 1.4.11, the contrast ratio definition and the large scale text definition into `flashmap/docs/SPEC_SOURCES.md`, where the last bullet says what is missing. |
-| **Before Wed Oct 21, and the sooner the better** | Merge PR #1 into main. Audit and CI are green on ba819dc (`results/github_push_2026-10-11.json`), on c4dbf0f, the head with both sessions' Oct 11 work (`results/github_push_2026-10-11_c4dbf0f.json`), on cf864d4, the head with the cover proof correction and the review of the motion and sound commits (`results/github_push_2026-10-11_cf864d4.json`), and on 9bb14c6, the head with the two sound fixes (`results/github_push_2026-10-11_9bb14c6.json`). | A public repository shows main by default, and main has not moved since Sep 20. The judged tag is cut from main. |
+| **Before Wed Oct 21, and the sooner the better** | Merge PR #1 into main. Audit and CI are green on ba819dc (`results/github_push_2026-10-11.json`), on c4dbf0f, the head with both sessions' Oct 11 work (`results/github_push_2026-10-11_c4dbf0f.json`), on cf864d4, the head with the cover proof correction and the review of the motion and sound commits (`results/github_push_2026-10-11_cf864d4.json`), on 9bb14c6, the head with the two sound fixes (`results/github_push_2026-10-11_9bb14c6.json`), and on 6ecb5df, the first head on which CI tests the analyzer and the pipeline (`results/github_push_2026-10-11_6ecb5df.json`). | A public repository shows main by default, and main has not moved since Sep 20. The judged tag is cut from main. |
 | **By Fri Oct 16** | Any outreach reply you want quoted goes into `docs/VALIDATION.md`, with permission. | |
 | **Wed Oct 21, with the final checks** | Re-run `make audit-update`, re-read `scripts/audit_exceptions.toml`, confirm the two groups and move both `review_by` dates past Dec 3. Confirm the CC0 dedication of the Harbor artwork in `media/LICENSES.csv`. Make the repo public, run the final checks, publish the release. | Both audit groups expire on Oct 21 on purpose, so the release build is made with the words re-read; left as they are, the Monday audit after the tag goes red for a date rather than an advisory, in front of the judges. The rules need the repo public with the licence visible. |
 | **Thu Oct 22** | Press submit. `docs/SUBMISSION.md` has every field, with the ones needing you marked. | |
@@ -1320,7 +1322,7 @@ four that are live right now:
    and your author identity is in `docs/upstream-pr/`.
 2. **Send the Amazon licence clarification by Tue Oct 13**, so an answer can
    arrive before the repository goes public.
-3. **Merge PR #1.** Audit and CI are green on ba819dc, on c4dbf0f, on cf864d4 and on 9bb14c6. Main has
+3. **Merge PR #1.** Audit and CI are green on ba819dc, on c4dbf0f, on cf864d4, on 9bb14c6 and on 6ecb5df. Main has
    not moved since Sep 20, and the judged tag is cut from main.
 4. **Next Mac session:** rebuild with the two dependency changes in, play both
    titles on the virtual device, refresh the demo, attach the two original

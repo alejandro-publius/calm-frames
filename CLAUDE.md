@@ -30,7 +30,8 @@ labelled render, what a family sees and a one-minute try; `docs/design/README.md
 page, held to `calmStyles.ts` by a test; `WRITEUP.md`, `docs/README.md` (the docs index),
 `CHANGELOG.md`, `CONTRIBUTING.md` and the GitHub templates exist; DECISIONS opens with an index;
 ruff and strict mypy run in CI; actions are pinned to commits; and CI's Python job, which had tested
-only `eval/` since Sep 17, names all three lanes with a coverage floor in `.coveragerc`.
+only `eval/` since Sep 17, names all three lanes with a coverage floor in `.coveragerc`; 6ecb5df is green in every job
+(`results/github_push_2026-10-11_6ecb5df.json`), and every job runs on `ubuntu-24.04`.
 
 **Active scope, Oct 9 finishing session.** Alex is entering solo and has an
 identity-verified Amazon Developer account. Use only the Vega Virtual Device.
