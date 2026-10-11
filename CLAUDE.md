@@ -84,7 +84,10 @@ Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/COM
    `--check`. The drift checker cannot see prose, so re-read the sentences around a number
    that moved.
 6. **Before pushing:** `make ci`, or at least `make test-app` and
-   `.venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"`.
+   `.venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"`. If
+   `app/package-lock.json` changed, `make sbom` has to run under the npm the
+   runner has (10.9.8 on Oct 11; `npm install -g npm@10.9.8`), because the app
+   bill records the npm that wrote it and the hosted check compares bytes.
 
 ## What this is
 

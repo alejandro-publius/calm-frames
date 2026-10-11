@@ -59,6 +59,23 @@ parallel with a skeptic on every finding, and what stood was fixed:
   NOTICE and the README said `app/` is MIT-0 without mentioning the Amazon
   proprietary notice on the player wrapper and the Shaka archive. All three
   are stated now, and the clarification request to Amazon is on your list.
+- The documents a fresh session reads first still described the Sep 19 scope:
+  physical stick steps and a labelling partner on your list, a plan that said
+  the app was not started, a gates board that said the outreach kit was missing
+  and screening had not begun, and three stacked "current" paragraphs in
+  CLAUDE.md. Each says what is true on Oct 11 or is headed as history. Five of
+  the README's line anchors had drifted by one to five lines. The Oct 10
+  friction bullets are entries 36 to 40 in Amazon's six fields.
+- The branch's five new guards (the still-belongs-to-a-segment check, the demo
+  key's title binding, the packaged library's source hash, the household
+  record's PIN rounds bound, verify's scene hold byte reproduction) had been
+  broken by hand once and were in no durable record. They are in the mutation
+  gate now, each killed by a test that already existed.
+- The first hosted Audit run on the Oct 11 push failed its bills of materials
+  job for one line: the app bill records the npm that wrote it, and this box
+  had 10.9.4 where the runner and the Mac have 10.9.8. Regenerated under
+  10.9.8. `make sbom` has to run under the runner's npm, which CLAUDE.md now
+  says.
 
 **Left standing, on purpose, each with a reason:** the six prepared-library
 renditions ship with the hash of a verify report that is not committed (the
