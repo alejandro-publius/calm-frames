@@ -2,7 +2,17 @@
 
 **A calmer way to watch**
 
+[![CI](https://github.com/alejandro-publius/calm-frames/actions/workflows/ci.yml/badge.svg)](https://github.com/alejandro-publius/calm-frames/actions/workflows/ci.yml)
+[![Audit](https://github.com/alejandro-publius/calm-frames/actions/workflows/audit.yml/badge.svg)](https://github.com/alejandro-publius/calm-frames/actions/workflows/audit.yml)
+[![Licence: Apache-2.0](https://img.shields.io/badge/licence-Apache--2.0-blue.svg)](LICENSE)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](.python-version)
+[![Node 22](https://img.shields.io/badge/node-22-blue.svg)](.nvmrc)
+
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
+
+![The Calm Frames library on a television: the Harbor story in the hero, and a shelf of three checked titles](docs/design/polish/library-after.png)
+
+<sub>A browser render of the app's own React Native tree at 54dab0b (Oct 10), with the bundled Inter fonts and artwork. It is a review aid, not a Vega screenshot, and it shows the shelf copy from before Oct 11. More screens, and how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
 
 ---
 
@@ -10,17 +20,48 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 Calm Frames combines an offline video analyzer, a checked rendition pipeline and a Vega player for families affected by photosensitivity. Before playback, the pipeline analyzes the source, signs its flash map and verifies the prepared rendition. The player adds a scheduled cover and guarded seeks, with audio and captions intended to preserve the story; signed context images, a checked still from before the hide shown in place of black, ship today only on the labelled Harbor demo, and every prepared title uses the opaque cover. Parent settings can make the standard floor stricter and now persist locally. A reusable hook and analyzer provide adoption paths for other developers. Detection, delivery integrity and physical screen behavior have separate limits, recorded below; a signature is not proof that every hazard was detected.
 
-**Where things stand, Sun Oct 11, 2026.** A solo entry for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The Vega Virtual Device is the acceptance target; no physical Fire TV has been used and no screen-level timing has been measured anywhere. The analyzer, the pipeline, the cover layer, the signed scene holds, the household record and the packaged library are built and tested. The native benign journey and an English demo video were recorded on Oct 10 from build cba1a29 (package 73fbbed): PIN correction, saved settings, all three presets, catalog playback, captions and audio through both practice holds, transport fallback and focus return, with the exact package hash in [the completion checklist](docs/COMPLETION_CHECKLIST.md) and [the native receipt](results/redesign_validation_2026-10-10.json). The source has changed since, through the Oct 10 polish and the Oct 11 dependency, copy and focus changes, and has not been built, installed or recorded on the simulator again yet; the recorded cut also carries an earlier closing sentence and has to be re-rendered before upload. The software-level cover lead time from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time; six produced no usable evidence and one was late, so the strict reading is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> from the trials that could be measured. The dependency audit has been green on the hosted runner since the Oct 11 push ([results/github_push_2026-10-11.json](results/github_push_2026-10-11.json)); the public video, the upstream pull request and the release are still open, and [docs/STATUS.md](docs/STATUS.md) section 2 is the dated list of what remains. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
+### What a family sees
 
-The [hackathon assessment](docs/HACKATHON_REVIEW.md), dated Oct 2, separates the project score from the missing submission evidence, and the three mock judge reports are [docs/MOCK_JUDGE_1.md](docs/MOCK_JUDGE_1.md), [docs/MOCK_JUDGE_2.md](docs/MOCK_JUDGE_2.md) and [docs/MOCK_JUDGE_3.md](docs/MOCK_JUDGE_3.md).
+- **A short setup.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
+- **A library of checked titles only.** A title plays in kid mode only after its flash map is verified; one that has not verified shows Needs check and stays hidden.
+- **A card before anything is hidden.** "Flashing part coming up", with Skip in focus, a few seconds ahead, and an optional chime.
+- **The story keeps going.** During a hidden part a checked still from just before it, or a dark cover, stands over the picture while sound and captions continue; afterwards one line says what was hidden.
+- **Parental controls behind the PIN.** Presets, the room, the chime, a profile per child (which can only be stricter than the household), and two opt-in effects, a gentle artwork entrance and quiet selection sounds, both Off unless a parent turns them on.
+- **Built for the remote and for screen readers.** The D-pad reaches every control, cards are announced, and reduced motion keeps the artwork still. VoiceView is covered by tests and still owes its check on the device.
+
+### What it does underneath
+
+- **Every frame is measured before a title can play** by [flashmap](flashmap/), against WCAG 2.2 SC 2.3.1's general and red flash rules, with the thresholds quoted from their sources in [SPEC_SOURCES.md](flashmap/docs/SPEC_SOURCES.md).
+- **The flash map is signed** (Ed25519) and bound to the file's SHA-256, and **verify blocks publishing**: the pipeline renders a kid-safe rendition, and verify proves the cover is drawn at the first frame, the middle and the last frame of every covered span.
+- **The player fails closed.** A missing, stale, unsigned, unreadable or wrong-hash map keeps the picture hidden.
+- **One function moves the playhead**, so every seek path is guarded; a lint rule refuses any other.
+- **Adoptable by others**: a small hook for any Vega video app ([hook/](hook/)), the analyzer as a CLI and a GitHub Action, and a self-contained report page for a title.
+
+### Try it in a minute
+
+The analyzer runs on any machine with Python 3.12; PyAV brings its own FFmpeg. The clip is the project's own Harbor story, CC0, with no flashing in it.
+
+```sh
+python -m pip install -e 'flashmap[dev]'
+python -m flashmap check app/assets/raw/benign-story/harbor.mp4 --profile wcag
+python -m flashmap report app/assets/raw/benign-story/harbor.mp4 --out report.html --license-csv media/LICENSES.csv
+```
+
+The first prints `PASS`, the second writes one HTML page for the title that opens with the network off. The TV app itself needs the Vega SDK on a Mac; [Install and run](#install-and-run) has both.
+
+### Where things stand
+
+**Sun Oct 11, 2026.** A solo entry for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The Vega Virtual Device is the acceptance target; no physical Fire TV has been used and no screen-level timing has been measured anywhere. The analyzer, the pipeline, the cover layer, the signed scene holds, the household record and the packaged library are built and tested. The native benign journey and an English demo video were recorded on Oct 10 from build cba1a29 (package 73fbbed): PIN correction, saved settings, all three presets, catalog playback, captions and audio through both practice holds, transport fallback and focus return, with the exact package hash in [the completion checklist](docs/COMPLETION_CHECKLIST.md) and [the native receipt](results/redesign_validation_2026-10-10.json). The source has changed since, through the Oct 10 polish and the Oct 11 dependency, copy and focus changes, and has not been built, installed or recorded on the simulator again yet; the recorded cut also carries an earlier closing sentence and has to be re-rendered before upload. The software-level cover lead time from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time; six produced no usable evidence and one was late, so the strict reading is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> from the trials that could be measured. The dependency audit has been green on the hosted runner since the Oct 11 push ([results/github_push_2026-10-11.json](results/github_push_2026-10-11.json)); the public video, the upstream pull request and the release are still open, and [docs/STATUS.md](docs/STATUS.md) section 2 is the dated list of what remains. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
 
 ## Contents
 
+- [What it is](#what-it-is): what a family sees, what it does underneath, and how to try it
 - [How it fits together](#how-it-fits-together)
 - [Who it is for, and how it leaves this hackathon](#who-it-is-for-and-how-it-leaves-this-hackathon)
 - [Required tech at runtime](#required-tech-at-runtime)
 - [What has been measured](#what-has-been-measured)
 - [Install and run](#install-and-run)
+- [How this is checked](#how-this-is-checked)
 - [Limits](#limits)
 - [Safety](#safety)
 - [Licences and credits](#licences-and-credits)
@@ -568,7 +609,32 @@ cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx je
 .venv/bin/python eval/style_check.py            # no dashes, none of the three words
 ```
 
-`npm ci --ignore-scripts` skips the Shaka Player build, which the tests mock; a device package needs the full `npm install` with the JDK. `make synth`, the offline CDK synthesis, also needs `pip install -r pipeline/infra/requirements.txt` in that `.venv`. Two pipeline tests compare a still drawn over a hold by PSNR and fail on ffmpeg 6.1.1 (docs/STATUS.md section 5).
+`npm ci --ignore-scripts` skips the Shaka Player build, which the tests mock; a device package needs the full `npm install` with the JDK. `make synth`, the offline CDK synthesis, also needs `pip install -r pipeline/infra/requirements.txt` in that `.venv`. The whole Python suite passes on ffmpeg 6.1.1 as well as 9.0.1: the two tests that failed on 6.1.1 on Oct 11 were a race in the cover measurement, fixed the same day ([`results/local_python_run_2026-10-11_fixed.json`](results/local_python_run_2026-10-11_fixed.json), docs/STATUS.md section 5). `make hooks` installs the gitleaks pre-commit hook and `make hooks-selftest` watches it block a planted key; `make help` lists every target.
+
+## How this is checked
+
+Every push runs two workflows, and a record of each green head is kept in `results/github_push_*.json`.
+
+| Workflow | Job | What it refuses |
+|---|---|---|
+| CI | Vega app | A type error, a lint error (including a playhead write outside the one seek function), a failing jest test, a prepared asset that does not match its record |
+| CI | Python packages | A failing analyzer, pipeline or evaluation test, and a conformance report that does not rebuild byte for byte from its own rows |
+| CI | The app's own UI passes flashmap | A screen of the app that flashes, checked by the same analyzer, with a negative control that has to refuse a flashing sequence and a grating |
+| CI | Mutation gate, property tests and the map fuzz corpus | A safety guard whose tests no longer notice it being broken |
+| CI | Secret scan | A committed key or token |
+| CI | Published numbers match results | A number in a document that disagrees with `results/`, and any dash or banned word in what we wrote |
+| Audit | pip-audit and npm audit | A known advisory outside the reviewed exceptions in `scripts/audit_exceptions.toml` |
+| Audit | The bills of materials are current | A dependency change without its bill of materials |
+| Audit | The stack and the container rules | A CDK template that does not synthesize without credentials, a NAT gateway in it, or an infra test that skips instead of running |
+| Audit | The ingest image builds for ARM64 | An ingest image that does not build |
+
+**The guards are tested by breaking them.** [`eval/mutate_gate.py`](eval/mutate_gate.py) breaks each safety guard on purpose and runs the tests that should notice: <!--n results/mutation.json:totals.killed -->68<!--/n--> of <!--n results/mutation.json:totals.mutations -->70<!--/n--> mutations are caught, and the <!--n results/mutation.json:totals.survived -->2<!--/n--> that survive are written up as equivalent, an edit that cannot change what the program does. That rate covers the listed safety properties only, not the whole codebase ([`results/mutation.json`](results/mutation.json)); CI fails if a run disagrees with the committed report.
+
+**The map readers are fuzzed.** <!--n results/fuzz.json:totals.cases -->69<!--/n--> malformed flash maps go through each of the <!--n results/fuzz.json:totals.readers -->3<!--/n--> readers that open one, and a reader that accepts a bad map without hiding what it flags, or throws, is a finding: <!--n results/fuzz.json:totals.findings -->0<!--/n--> in the recorded run ([`results/fuzz.json`](results/fuzz.json), Sep 18), and CI replays the corpus on every push.
+
+**Every published number has a source.** A number in this README, the Devpost text or the docs is written as a marker against a file in `results/`, and [`eval/readme_sync.py`](eval/readme_sync.py) fails the build on drift. It cannot see which number was chosen, so where a number has a worse sibling both are published.
+
+**What has never been run** is listed, by name, in [docs/SECURITY.md](docs/SECURITY.md#what-has-never-been-run).
 
 ## Limits
 
@@ -630,3 +696,6 @@ Thresholds are quoted, with links, in [`flashmap/docs/SPEC_SOURCES.md`](flashmap
 | [docs/EVAL_PLAN.md](docs/EVAL_PLAN.md) | Committed before any real clip was labelled |
 | [eval/EVAL_RESULTS.md](eval/EVAL_RESULTS.md) | What the conformance run actually says, including where recall falls off |
 | [docs/DECISIONS.md](docs/DECISIONS.md) | Every call made, with why and what it cost |
+| [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md) | The screens, rendered, with the design review behind them; [docs/brand/](docs/brand/) has the icons and the brand line |
+| [docs/SECURITY.md](docs/SECURITY.md) | Secrets, the threat model, the scan findings, and what has never been run |
+| [docs/HACKATHON_REVIEW.md](docs/HACKATHON_REVIEW.md) | The Oct 2 assessment; the three mock judge reports are [1](docs/MOCK_JUDGE_1.md), [2](docs/MOCK_JUDGE_2.md) and [3](docs/MOCK_JUDGE_3.md) |

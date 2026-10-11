@@ -49,7 +49,7 @@ What these do not cover, and it matters: the Debian packages inside the ingest
 image. ffmpeg and its libraries are installed with apt at build time, and
 listing them properly means reading the built image with a scanner, which needs
 the image built. The base image is pinned by digest, which is the part that
-makes the set of Debian packages knowable at all, and docs/SBOM.md says so
+makes the set of Debian packages knowable at all, and docs/SECURITY.md says so
 rather than leaving a reader to assume the bill is complete.
 """
 

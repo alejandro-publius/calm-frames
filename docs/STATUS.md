@@ -47,9 +47,27 @@ The same pass found that the two Python tests which failed on this box were a
 race in the cover proof's own measurement, not the encoder; the paragraph in
 the Oct 11 entry below and section 5 tell that story, and the fix is in.
 
-**Status line:** PR #1's head is green on Audit and CI again (cf864d4,
-`results/github_push_2026-10-11_cf864d4.json`); the sound fixes above are the
-next push; nothing since the Oct 10 polish has been built or seen on a device.
+**Status line:** the sound fixes above are pushed as 9bb14c6 and green on Audit
+and CI in every job (`results/github_push_2026-10-11_9bb14c6.json`); nothing
+since the Oct 10 polish has been built or seen on a device.
+
+### Oct 11, evening: the README's first screen, measured against tideline
+
+Alex asked how close the project is and for the repository to read with the
+rigor of his tideline repository and beyond it, design first. A comparison of
+the two trees, one reader per dimension with a skeptic on every major gap,
+found Calm Frames ahead on the checks themselves (two workflows with ten jobs,
+a mutation gate, a fuzz corpus, a published-numbers check, a licence ledger)
+and behind on how it presents them. The README now opens with badges, a render
+of the library labelled as a browser render of the real tree, what a family
+sees, what it does underneath, a one-minute way to try the analyzer on the
+project's own clip, and the dated status below that; a new "How this is
+checked" section names every CI and Audit job and quotes the mutation and fuzz
+results by marker; the stale sentence that still said two tests fail on ffmpeg
+6.1.1 is corrected; docs/SECURITY.md and the design review are linked.
+
+**Status line:** the README's first screen is rebuilt from what the tree already
+held; the remaining presentation and tooling gaps are ranked in DECISIONS.
 
 ### Oct 11 (late Oct 10 Pacific): final interface effects
 
@@ -968,7 +986,7 @@ version of this table in git history, not here.
 | **By Mon Oct 12, tomorrow** | Open the upstream pull request from a fork under your account. | The fix, the two patches and the PR text are ready in `docs/OPEN_SOURCE_PR.md` and `docs/upstream-pr/`. It cannot be opened from here: it needs a fork you own, and the patches need your chosen public author identity. This is the Open Source mini challenge's contribution URL. |
 | **By Tue Oct 13** | Send the clarification request in `docs/AMAZON_SAMPLE_LICENSE_REVIEW.md` to Amazon, as an issue on AmazonAppDev/vega-video-sample or to the hackathon's Amazon contacts, and record where and when in that file. | The player wrapper and the Shaka archive carry a proprietary notice beside the sample's MIT-0 grant, and the repository goes public on Oct 21. NOTICE and the README state the conflict now; an answer would close it. |
 | **Next Mac session** | Rebuild the polished source with the Oct 11 dependency changes in (`xmldom` alias, `lodash` 4.18.1), install it on the virtual device, play Harbor and the gradient, then re-run `eval/assemble_demo.py` and `eval/check_video.sh`, regenerate the manifest and refresh the review assets. | Nothing that changed app inputs since Oct 10 has been built or seen on a device, and the recorded cut still carries the earlier 2:10 sentence. If the Vega build or playback rejects the parser alias, revert the one line in `app/package.json`. While there: attach the two original verify reports with `python -m pipeline.packaged_library attach-reports` and run `node tools/check_prepared_library.mjs --require-reports` (section 5, `docs/MAC_FINISH.md`). |
-| **Before Wed Oct 21, and the sooner the better** | Merge PR #1 into main. Audit and CI are green on ba819dc (`results/github_push_2026-10-11.json`), on c4dbf0f, the head with both sessions' Oct 11 work (`results/github_push_2026-10-11_c4dbf0f.json`), and on cf864d4, the head with the cover proof correction and the review of the motion and sound commits (`results/github_push_2026-10-11_cf864d4.json`). | A public repository shows main by default, and main has not moved since Sep 20. The judged tag is cut from main. |
+| **Before Wed Oct 21, and the sooner the better** | Merge PR #1 into main. Audit and CI are green on ba819dc (`results/github_push_2026-10-11.json`), on c4dbf0f, the head with both sessions' Oct 11 work (`results/github_push_2026-10-11_c4dbf0f.json`), on cf864d4, the head with the cover proof correction and the review of the motion and sound commits (`results/github_push_2026-10-11_cf864d4.json`), and on 9bb14c6, the head with the two sound fixes (`results/github_push_2026-10-11_9bb14c6.json`). | A public repository shows main by default, and main has not moved since Sep 20. The judged tag is cut from main. |
 | **By Fri Oct 16** | Any outreach reply you want quoted goes into `docs/VALIDATION.md`, with permission. | |
 | **Wed Oct 21, with the final checks** | Re-run `make audit-update`, re-read `scripts/audit_exceptions.toml`, confirm the two groups and move both `review_by` dates past Dec 3. Confirm the CC0 dedication of the Harbor artwork in `media/LICENSES.csv`. Make the repo public, run the final checks, publish the release. | Both audit groups expire on Oct 21 on purpose, so the release build is made with the words re-read; left as they are, the Monday audit after the tag goes red for a date rather than an advisory, in front of the judges. The rules need the repo public with the licence visible. |
 | **Thu Oct 22** | Press submit. `docs/SUBMISSION.md` has every field, with the ones needing you marked. | |
@@ -1271,7 +1289,7 @@ four that are live right now:
    and your author identity is in `docs/upstream-pr/`.
 2. **Send the Amazon licence clarification by Tue Oct 13**, so an answer can
    arrive before the repository goes public.
-3. **Merge PR #1.** Audit and CI are green on ba819dc, on c4dbf0f and on cf864d4. Main has
+3. **Merge PR #1.** Audit and CI are green on ba819dc, on c4dbf0f, on cf864d4 and on 9bb14c6. Main has
    not moved since Sep 20, and the judged tag is cut from main.
 4. **Next Mac session:** rebuild with the two dependency changes in, play both
    titles on the virtual device, refresh the demo, attach the two original
