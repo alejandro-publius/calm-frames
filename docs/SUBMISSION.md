@@ -672,13 +672,13 @@ The eight High entries, so the list reads in the right order:
 
 ## 15. Team and entrant details
 
-The supplied entrant context fills the two confirmed fields below. Personal eligibility and contact details still require Alex.
+The confirmed entrant details are recorded below. Personal eligibility and contact details still require Alex.
 
 | Field | Answer |
 |---|---|
-| Entrant name or team name | NEEDS ALEX |
+| Entrant name or team name | Alex Velazquez |
 | Team members, if any | Solo entrant; no additional team members |
-| Country of residence | NEEDS ALEX |
+| Country of residence | United States (USA) |
 | Eligibility confirmation | NEEDS ALEX |
 | Contact email | NEEDS ALEX |
 | Amazon developer account | Created and identity-verified, as confirmed by Alex |
@@ -712,7 +712,7 @@ Preparation, local tests and capture can proceed autonomously. Alex is needed fo
 | 9e | **Review `scripts/audit_exceptions.toml`** at the final checks: re-run `make audit-update`, re-read both groups, move both `review_by` dates past Dec 3, and confirm the CC0 dedication of the Harbor artwork in `media/LICENSES.csv` | **Wed Oct 21** | 6 |
 | 10 | **Make the repository public** and confirm Apache-2.0 shows in GitHub's About box | **Wed Oct 21**, during the final checks | 6 |
 | 11 | **Publish the release** and paste the `.vpkg` links and the tag into the testing instructions | **Wed Oct 21**, after the final checks | 9 |
-| 12 | **Confirm remaining entrant details**: name, eligibility, country of residence, contact email; solo status is already confirmed. Confirm the gallery image and "try it out" link on the live form (section 7a) | Submission day | 7a, 15 |
+| 12 | **Confirm remaining entrant details**: eligibility and contact email; entrant name, country of residence and solo status are confirmed. Confirm the gallery image and "try it out" link on the live form (section 7a) | Submission day | 7a, 15 |
 | 13 | **Press submit** at HUMAN CHECKPOINT G | **Thu Oct 22** | all |
 
 Requesting the 150 dollar AWS credits used to be on this list. It is gone: the form closed on Oct 7, 2026, and Alex's own AWS credits cover the stack.

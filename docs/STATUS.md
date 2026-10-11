@@ -4,6 +4,10 @@ Updated Sun Oct 11, 2026.
 
 ## 0. Where things stand
 
+Alex confirmed the public entrant name as Alex Velazquez and country of residence
+as United States (USA). Both are recorded in the submission draft. Eligibility,
+contact email and the upstream contribution's GitHub identity remain unconfirmed.
+
 ### Shared handoff follow-up
 
 The cloud checkout received the other session's four commits through `e592d28`.

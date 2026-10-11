@@ -2285,3 +2285,7 @@ device yet.
 
 - **Decision:** both sample action references pin `1b088d17c53343025b2ca37cf7615e809709ba8b`, the existing commit containing self-installation. **Why:** the earlier pin resolved, but its action still defaulted to the unpublished PyPI version. Reading and exercising the pinned install step confirms it selects its own checkout. **Cost:** the reference still needs the planned release update; this is an offline check, not a new hosted run.
 - **Decision:** the UI preflight imports `flashmap.cli`, and the seek lint rule covers bracket notation and playhead increments. **Why:** an uninstalled checkout can satisfy `import flashmap` as an empty namespace, and alternate seek syntax bypassed the new rule. Both regressions failed before the fixes and pass after them. **Cost:** the lint check is syntactic, with no alias or dynamic-property analysis; native playback still needs the Mac checks.
+
+### 2026-10-11: confirmed entrant name and country
+
+- **Decision:** record Alex Velazquez and United States (USA) in the submission draft and completion checklist. **Why:** Alex supplied these values in response to the public entrant name and country question. **Cost:** none. This does not confirm eligibility, contact email or the upstream contribution's author identity, and does not submit or publish the entry.

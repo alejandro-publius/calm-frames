@@ -203,8 +203,10 @@ the saved GitHub API network setting; Git source synchronization works.
   wrapper and source files inside its integration archive before public source
   release. See [`AMAZON_SAMPLE_LICENSE_REVIEW.md`](AMAZON_SAMPLE_LICENSE_REVIEW.md)
   for verified upstream evidence and an unsent clarification request.
-- [ ] Entrant name, country, eligibility and contact email need the entrant's
-  values. Upstream patch metadata needs the chosen public author identity.
+- [x] Public entrant name and country confirmed: Alex Velazquez, United States
+  (USA). Recorded in the submission draft.
+- [ ] Eligibility and contact email need the entrant's confirmation. Upstream
+  patch metadata still needs the chosen public author identity.
 - [ ] Public video/release/reviewer-access links and upstream PR URL remain
   unpublished. Code and private draft artifacts are on GitHub. No merge,
   visibility change, final release publication or Devpost submission performed.
