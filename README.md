@@ -12,7 +12,11 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 ![The Calm Frames library on a television: the Harbor story in the hero, and a shelf of three checked titles](docs/design/polish/library-after.png)
 
-<sub>A browser render of the app's own React Native tree at 54dab0b (Oct 10), with the bundled Inter fonts and artwork. It is a review aid, not a Vega screenshot, and it shows the shelf copy from before Oct 11. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md), and more screens, with how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
+| Setup | Before you watch | Parental controls |
+|---|---|---|
+| ![Setup, step 1 of 4: choose a PIN on a remote-friendly keypad](docs/design/polish/setup-after.png) | ![A title's details: the check found no segments above the flash limits, and checks can miss hazards](docs/design/polish/details-after.png) | ![Parental controls while a save is in flight, with Saving your changes beside the title](docs/design/seamless/parent-saving-browser.png) |
+
+<sub>Browser renders of the app's own React Native trees, at 54dab0b (Oct 10) and, for parental controls, the sources in 85c30f9, with the bundled Inter fonts and artwork. They are review aids, not Vega screenshots, and they show the copy from before Oct 11. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md), and more screens, with how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
 
 ---
 
