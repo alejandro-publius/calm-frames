@@ -153,12 +153,12 @@ the saved GitHub API network setting; Git source synchronization works.
 - [ ] Capture the polished native screens and playback, refresh the English
   demo and its source manifest, and rerun the finished video checks. Rebuild
   the review bundle and package hashes before replacing draft release assets.
-- [ ] Dependency Audit was repaired on Oct 11: `xmldom` replaced, `lodash`
+- [x] Dependency Audit was repaired on Oct 11: `xmldom` replaced, `lodash`
   moved, and every remaining finding sorted into two groups by whether the
   package is in the device bundle (`results/bundle_packages_2026-10-11.json`).
-  `make audit-check` passes here; the hosted Audit run on the Oct 11 push is
-  the confirmation. Both groups are due for review on Oct 21, when the dates
-  move past judging. Saved AWS evidence also has inactive Project cost tagging
+  The hosted Audit run on the Oct 11 push is green in all four jobs and CI in
+  all six (`results/github_push_2026-10-11.json`). Both groups are due for
+  review on Oct 21, when the dates move past judging. Saved AWS evidence also has inactive Project cost tagging
   and container security findings.
 - [ ] The six prepared-library renditions under `app/assets/raw/prepared-library/`
   ship with the hash of a verify report that is not committed. Export the

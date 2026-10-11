@@ -666,7 +666,9 @@ license supersedes them. The review bundle is uploaded to a private draft releas
 
 ## October 10 pushed checkpoint
 
-Hosted CI on 402c167 passed. Audit passed the bills of materials, stack/container
-rules and ARM64 image jobs; pip-audit/npm audit failed. The SBOM/CDK repair now
-has hosted evidence, while dependency findings and the expired exception remain
-blocking. See `results/github_push_2026-10-10.json` for exact run links.
+Hosted, Oct 11: on the push that repaired the audit, the Audit workflow is
+green in all four jobs and CI in all six; the run ids are in
+`results/github_push_2026-10-11.json`. The first Oct 11 push failed the bills
+of materials job for one line, the npm version the app bill records, and the
+bill was regenerated under the runner's npm. The Oct 10 record,
+`results/github_push_2026-10-10.json`, keeps the earlier failure as it was.

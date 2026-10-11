@@ -28,7 +28,9 @@ own `npm ci` downloads two forks from codeload.github.com and the proxy
 answers 403. **The Mac has to rebuild with the two dependency changes in**,
 the same rebuild the Oct 10 polish already needed.
 
-**The 56 commits were reviewed against the hard rules**, eight reviewers in
+**Hosted, on the Oct 11 push (ba819dc):** Audit <!--n results/github_push_2026-10-11.json:published.audit_conclusion -->success<!--/n--> in all four jobs, the first green Audit on the branch, and CI <!--n results/github_push_2026-10-11.json:published.ci_conclusion -->success<!--/n--> in all six, with the two new steps in them. The run ids are in `results/github_push_2026-10-11.json`.
+
+**The branch's commits were reviewed against the hard rules**, eight reviewers in
 parallel with a skeptic on every finding, and what stood was fixed:
 
 - docs/STATUS.md still said the complete conformance run was unpublished while
@@ -704,7 +706,7 @@ version of this table in git history, not here.
 | **By Mon Oct 12, tomorrow** | Open the upstream pull request from a fork under your account. | The fix, the two patches and the PR text are ready in `docs/OPEN_SOURCE_PR.md` and `docs/upstream-pr/`. It cannot be opened from here: it needs a fork you own, and the patches need your chosen public author identity. This is the Open Source mini challenge's contribution URL. |
 | **By Tue Oct 13** | Send the clarification request in `docs/AMAZON_SAMPLE_LICENSE_REVIEW.md` to Amazon, as an issue on AmazonAppDev/vega-video-sample or to the hackathon's Amazon contacts, and record where and when in that file. | The player wrapper and the Shaka archive carry a proprietary notice beside the sample's MIT-0 grant, and the repository goes public on Oct 21. NOTICE and the README state the conflict now; an answer would close it. |
 | **Next Mac session** | Rebuild the polished source with the Oct 11 dependency changes in (`xmldom` alias, `lodash` 4.18.1), install it on the virtual device, play Harbor and the gradient, then re-run `eval/assemble_demo.py` and `eval/check_video.sh`, regenerate the manifest and refresh the review assets. | Nothing that changed app inputs since Oct 10 has been built or seen on a device, and the recorded cut still carries the earlier 2:10 sentence. If the Vega build or playback rejects the parser alias, revert the one line in `app/package.json`. While there: export the prepared-library verify report beside the catalog (section 5). |
-| **Before Wed Oct 21** | Confirm the hosted Audit run is green, then merge PR #1 into main. | A public repository shows main by default, and main has not moved since Sep 20. The judged tag is cut from main. |
+| **Before Wed Oct 21, and the sooner the better** | Merge PR #1 into main. Audit and CI are green on ba819dc (`results/github_push_2026-10-11.json`). | A public repository shows main by default, and main has not moved since Sep 20. The judged tag is cut from main. |
 | **By Fri Oct 16** | Any outreach reply you want quoted goes into `docs/VALIDATION.md`, with permission. | |
 | **Wed Oct 21, with the final checks** | Re-run `make audit-update`, re-read `scripts/audit_exceptions.toml`, confirm the two groups and move both `review_by` dates past Dec 3. Confirm the CC0 dedication of the Harbor artwork in `media/LICENSES.csv`. Make the repo public, run the final checks, publish the release. | Both audit groups expire on Oct 21 on purpose, so the release build is made with the words re-read; left as they are, the Monday audit after the tag goes red for a date rather than an advisory, in front of the judges. The rules need the repo public with the licence visible. |
 | **Thu Oct 22** | Press submit. `docs/SUBMISSION.md` has every field, with the ones needing you marked. | |
@@ -1002,8 +1004,8 @@ four that are live right now:
    and your author identity is in `docs/upstream-pr/`.
 2. **Send the Amazon licence clarification by Tue Oct 13**, so an answer can
    arrive before the repository goes public.
-3. **Merge PR #1 once the hosted Audit run on the Oct 11 push is green.** Main
-   has not moved since Sep 20, and the judged tag is cut from main.
+3. **Merge PR #1.** Audit and CI are green on ba819dc. Main has not moved since
+   Sep 20, and the judged tag is cut from main.
 4. **Next Mac session:** rebuild with the two dependency changes in, play both
    titles on the virtual device, refresh the demo, export the prepared-library
    verify report. The outreach emails from Sep 18 are still unsent.
@@ -1058,5 +1060,5 @@ was reviewed by eight parallel reviewers with a skeptic on each finding, and
 what stood was fixed: stale conformance statements, the unpublished worse
 precision sibling, two dashes, the practice label, four identifiers, three
 licence gaps. A style guard and a conformance report rebuild run in CI now.
-Main is unchanged; the Oct 11 push is PR #1's new head. The Mac still owes
+Main is unchanged; the Oct 11 push is PR #1's new head, and Audit and CI are green on it. The Mac still owes
 the rebuild that every app input change since Oct 10 needs.

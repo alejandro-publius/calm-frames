@@ -10,8 +10,9 @@ rebuild of the complete conformance report from its rows in the python job. docs
 section 0 has the Oct 11 entry and section 2 the dated list. Two things this Linux box cannot
 do, so do not try: the Shaka build (`npm ci` inside shaka-player needs codeload.github.com,
 which the proxy refuses with 403) and anything on a Vega device. The Mac owes a rebuild that
-includes the Oct 11 dependency changes, and the hosted Audit run on the Oct 11 push is the
-confirmation that the audit is green where it counts.
+includes the Oct 11 dependency changes. The hosted Audit and CI runs on the Oct 11 push
+(ba819dc) are green in every job (`results/github_push_2026-10-11.json`); PR #1 waits only on
+Alex's merge.
 
 **Active scope, Oct 9 finishing session.** Alex is entering solo and has an
 identity-verified Amazon Developer account. Use only the Vega Virtual Device.
