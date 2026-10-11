@@ -52,6 +52,14 @@ export const CREDIT_ENTRIES: CreditEntry[] = [
     obligations: [],
   },
   {
+    title: 'Calm gradient presentation artwork',
+    license: 'CC0-1.0',
+    credit: 'Calm Frames, rendered from our own vector artwork',
+    source: 'https://github.com/alejandro-publius/calm-frames/blob/main/docs/brand/README.md',
+    collection: 'unknown',
+    obligations: [],
+  },
+  {
     title: 'Clouds 101 (SVS20383 - HightAltCloud V05)',
     license: 'Public domain',
     credit: 'NASA\'s Scientific Visualization Studio - Advocates in Manpower Management, Inc./Jenny McElligott via Wikimedia Commons, Public domain',
@@ -131,6 +139,14 @@ export const CREDIT_ENTRIES: CreditEntry[] = [
     credit: 'Wolf170278 via Wikimedia Commons, CC0',
     source: 'https://commons.wikimedia.org/wiki/File%3AGrowing%20cumulus%20clouds%20in%20time%20lapse.ogv',
     collection: 'Wikimedia Commons',
+    obligations: [],
+  },
+  {
+    title: 'Harbor presentation artwork',
+    license: 'CC0-1.0',
+    credit: 'Calm Frames, presentation artwork generated with OpenAI image generation from our own prompt and our own earlier illustration',
+    source: 'https://github.com/alejandro-publius/calm-frames/blob/main/docs/brand/README.md',
+    collection: 'unknown',
     obligations: [],
   },
   {

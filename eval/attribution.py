@@ -51,6 +51,10 @@ TITLES = {
     # clip the timing harness and the Oct 9 AWS runs used.
     "app/assets/raw/benign-story/harbor.mp4": "Harbor story (benign demo)",
     "media/markers_packed.mp4": "The Calm Frames timing marker clip",
+    # The two presentation pictures the shelf and the details page draw. Neither
+    # is a film frame or a signed playback still.
+    "app/assets/image/tv/harbor.png": "Harbor presentation artwork",
+    "app/assets/image/tv/gradient.png": "Calm gradient presentation artwork",
     "bbb_720p_surround.mp4": "Big Buck Bunny",
     "sintel_2048_stereo_512kb.mp4": "Sintel",
     "tears_of_steel_720p.mov": "Tears of Steel",
