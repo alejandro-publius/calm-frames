@@ -874,6 +874,65 @@ MUTATIONS: list[Mutation] = [
         why="the offset the player subtracts is reported as zero, so every live cover "
         "runs that far late",
     ),
+    # ---- the Oct 2 to 10 guards: signed scene holds, the packaged library, the
+    # demo key and the household record. Each was broken by hand and seen red
+    # when it was written; this is the durable version of that.
+    Mutation(
+        mid="scene-still-belongs-to-a-covered-segment",
+        prop="a scene hold still only ever stands over a segment of its own map",
+        lane="app",
+        path="src/calmframes/sceneHolds.ts",
+        old="    if (\n      !segments.some(\n        (segment) => segment.startMs >= startMs && segment.endMs <= endMs,\n      ) ||\n      (frameMs !== null &&",
+        new="    if (\n      (frameMs !== null &&",
+        tests=("test/calmframes/sceneHolds.test.ts",),
+        why="a signed still with no flagged segment inside its bounds is accepted, so a "
+        "producer can put a picture over any moment of the film and call it a hold",
+    ),
+    Mutation(
+        mid="demo-key-only-for-the-bundled-title",
+        prop="the demo key unlocks one bundled title and nothing else",
+        lane="app",
+        path="src/calmframes/benignStory.ts",
+        old="  return isBundledBenignStory(title) ? BENIGN_STORY_PUBLIC_KEY : fallback;",
+        new="  return BENIGN_STORY_PUBLIC_KEY;",
+        tests=("test/calmframes/benignStory.test.tsx",),
+        why="any catalog entry is verified against the demo key, so a map signed with "
+        "the demo's private key plays any title in kid mode",
+    ),
+    Mutation(
+        mid="packaged-route-must-match-the-source-hash",
+        prop="the packaged library accepts a route only for the exact source it compiled",
+        lane="app",
+        path="src/calmframes/packagedLibrary.ts",
+        old="        expected.sha256 === guarded.sha256 && expected.durationMs === guarded.durationMs &&",
+        new="        expected.durationMs === guarded.durationMs &&",
+        tests=("test/calmframes/packagedLibrary.test.tsx",),
+        why="a route naming a different source file with the same id and duration is "
+        "accepted, and the compiled key then verifies a map for a file it was never "
+        "compiled for",
+    ),
+    Mutation(
+        mid="household-record-keeps-the-pin-rounds-bounded",
+        prop="a stored household record cannot change how the PIN is hashed",
+        lane="app",
+        path="src/calmframes/householdStorage.ts",
+        old="    record.rounds !== PIN_ROUNDS ||",
+        new="    record.rounds < 1 ||",
+        tests=("test/calmframes/householdStorage.test.ts",),
+        why="a record carrying a rounds count of its own is accepted, so a tampered "
+        "store can make every PIN check hash for as long as it likes, or not at all",
+    ),
+    Mutation(
+        mid="scene-hold-bytes-reproduce-from-provenance",
+        prop="verify refuses a scene hold image that does not reproduce from its stated frame",
+        lane="py",
+        path="pipeline/sceneholds.py",
+        old='            if reproduced.read_bytes() != image.path.read_bytes():\n                raise PipelineError("scene hold bytes do not reproduce from their stated provenance")',
+        new='            if False:\n                raise PipelineError("scene hold bytes do not reproduce from their stated provenance")',
+        tests=("pipeline/tests/test_sceneholds.py",),
+        why="an image that is not the frame it claims to be is signed and published, "
+        "so the still a child sees is whatever the producer put there",
+    ),
 ]
 
 
