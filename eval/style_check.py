@@ -34,7 +34,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 
-DASHES = re.compile("[—–]")
+DASHES = re.compile("[" + chr(0x2014) + chr(0x2013) + "]")
 WORDS = re.compile(r"\b(genuinely|honestly|straightforward)\b", re.IGNORECASE)
 RULE_STATEMENT = ("genuinely", "honestly", "straightforward")
 
@@ -52,6 +52,8 @@ EXCLUDED_PREFIXES = (
     "docs/design/assets/",
 )
 EXCLUDED_BASENAMES = {"LICENSE", "LICENSE-Inter", "Inter-LICENSE.txt", "LICENSE.txt"}
+# The rule's own implementation and its fixtures have to name what they refuse.
+EXCLUDED_FILES = {"eval/style_check.py", "eval/tests/test_style_check.py"}
 
 
 def tracked_files(staged: bool = False) -> list[str]:
@@ -61,7 +63,7 @@ def tracked_files(staged: bool = False) -> list[str]:
 
 
 def in_scope(relative: str) -> bool:
-    if relative.startswith(EXCLUDED_PREFIXES):
+    if relative in EXCLUDED_FILES or relative.startswith(EXCLUDED_PREFIXES):
         return False
     path = Path(relative)
     if path.name in EXCLUDED_BASENAMES or path.name.startswith("LICENSE"):

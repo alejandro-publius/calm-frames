@@ -23,7 +23,7 @@ spec.loader.exec_module(style_check)
 
 
 def test_an_em_dash_and_an_en_dash_are_both_refused():
-    found = style_check.violations("one — two\nthree – four\nfive\n", "x.md")
+    found = style_check.violations("one " + chr(0x2014) + " two\nthree " + chr(0x2013) + " four\nfive\n", "x.md")
     assert found == ["x.md:1: em or en dash", "x.md:2: em or en dash"]
 
 
@@ -51,6 +51,8 @@ def test_the_scope_leaves_other_peoples_files_and_the_fixtures_alone():
     assert not style_check.in_scope("app/src/w3cmedia/shakaplayer/ShakaPlayer.ts")
     assert not style_check.in_scope("app/assets/fonts/LICENSE-Inter")
     assert not style_check.in_scope("app/assets/image/tv/harbor.png")
+    assert not style_check.in_scope("eval/style_check.py")
+    assert not style_check.in_scope("eval/tests/test_style_check.py")
 
 
 def test_the_repository_passes_its_own_rule():
