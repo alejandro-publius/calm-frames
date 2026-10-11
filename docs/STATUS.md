@@ -336,7 +336,7 @@ exactly one frame, verify's cover proof samples the first frame, the middle and
 the last frame of every covered span and records the ffmpeg that measured it,
 and a test that fades the still before a span's end was seen to fail against the
 old midpoint proof. Both tests pass here now, and the mutation gate carries the
-new proof.
+new proof. The same command on the same box afterwards: <!--n results/local_python_run_2026-10-11_fixed.json:published.passed -->1722<!--/n--> passed, <!--n results/local_python_run_2026-10-11_fixed.json:published.failed -->0<!--/n--> failed, <!--n results/local_python_run_2026-10-11_fixed.json:published.skipped -->1<!--/n--> skipped (`results/local_python_run_2026-10-11_fixed.json`).
 
 ### Oct 10: cloud design polish awaits a native build
 
