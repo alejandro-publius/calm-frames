@@ -314,5 +314,13 @@
     "two /aws/lambda log groups that the CDK custom resource handlers created at run time, outside the stack, with no retention set",
     "the CDKToolkit bootstrap stack, its asset bucket and its ECR repository",
     "the SSM parameter /calm-frames/cloud-signing-key and the local copy of the cloud demo key"
+  ],
+  "amendments": [
+    {
+      "date": "2026-10-11",
+      "field": "checkpoint_d.credit_request_clause",
+      "why": "the Oct 9 wording said Alex's own AWS credits cover the bill. Whether the credits apply to these services, and whether they were applied to the charges, was never verified, so the clause now says the credits were planned cover, not verified cover. The deployment facts in this record are unchanged.",
+      "recorded_in": "docs/DECISIONS.md, Oct 11, 'qualify earlier statements that existing AWS credits cover the stack'"
+    }
   ]
 }

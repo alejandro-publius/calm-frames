@@ -25,8 +25,9 @@ sound on the virtual device or on a stick.
 
 `menu-select.mp3` is an original Calm Frames interface sound, created on October
 10, 2026. It is generated entirely from sine waves by `generate_menu_select.py`;
-there are no recordings, samples, or external sound libraries. It is covered by
-the repository's license and needs no third-party attribution.
+there are no recordings, samples, or external sound libraries. It is ours,
+dedicated to the public domain under CC0-1.0 like the chime, and needs no
+third-party attribution.
 
 Regenerate it from the repository root with:
 

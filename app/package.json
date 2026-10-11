@@ -160,27 +160,27 @@
         },
         {
           "selector": "AssignmentExpression[left.type='MemberExpression'][left.property.name='currentTime']",
-          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks and the chime's audio element are exempted by name, with the reason beside each."
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
         },
         {
           "selector": "AssignmentExpression[left.type='MemberExpression'][left.computed=true][left.property.value='currentTime']",
-          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks and the chime's audio element are exempted by name, with the reason beside each."
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
         },
         {
           "selector": "UpdateExpression[argument.type='MemberExpression'][argument.property.name='currentTime']",
-          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks and the chime's audio element are exempted by name, with the reason beside each."
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
         },
         {
           "selector": "UpdateExpression[argument.type='MemberExpression'][argument.computed=true][argument.property.value='currentTime']",
-          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks and the chime's audio element are exempted by name, with the reason beside each."
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
         },
         {
           "selector": "CallExpression[callee.type='MemberExpression'][callee.property.name='fastSeek']",
-          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks and the chime's audio element are exempted by name, with the reason beside each."
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
         },
         {
           "selector": "CallExpression[callee.type='MemberExpression'][callee.computed=true][callee.property.value='fastSeek']",
-          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks and the chime's audio element are exempted by name, with the reason beside each."
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
         }
       ]
     },
