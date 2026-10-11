@@ -385,6 +385,8 @@ RUN THE WHOLE THING
   make test         the app's jest suite, flashmap and pipeline pytest
   make reproduce    rebuild every table and figure from committed results
   make synth        the CDK stack, offline, with no AWS account touched
+  The targets look for the repository .venv and use fnm when it is there;
+  the plain commands they wrap are in the README under "Run the checks".
 
 SAFETY, PLEASE READ
   Do not open any file under media/ with a HAZARD_ prefix in a player. They

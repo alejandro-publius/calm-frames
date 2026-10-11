@@ -26,7 +26,7 @@ DOCKER_BUILD ?= docker build
 # Node comes from fnm and is pinned by .nvmrc. The Shaka Player build that runs
 # during npm install needs a JDK, which is why JAVA_HOME is set for builds and
 # left out of test runs that do not need it.
-NODE_ENV := source ~/vega/env >/dev/null 2>&1 && eval "$$(fnm env --shell bash)" && fnm use 22 >/dev/null
+NODE_ENV := { [ -f ~/vega/env ] && source ~/vega/env >/dev/null 2>&1; } ; if command -v fnm >/dev/null 2>&1; then eval "$$(fnm env --shell bash)" && fnm use 22 >/dev/null; fi
 
 # Pieces other lanes own, included so `make <their target>` works from the root
 # and each file still runs standalone with `make -f <file>`.

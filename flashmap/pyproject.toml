@@ -35,7 +35,7 @@ dev = [
 flashmap = "flashmap.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/calm-frames/calm-frames"
+Homepage = "https://github.com/alejandro-publius/calm-frames"
 
 [tool.setuptools.packages.find]
 where = ["src"]

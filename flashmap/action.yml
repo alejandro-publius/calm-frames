@@ -36,10 +36,11 @@ inputs:
     default: "3.12"
   flashmap-version:
     description: >-
-      What to install. A version specifier such as ==1.0.0, or a path to a checkout of this
-      package.
+      What to install. Empty installs the checkout this action came from, which is the
+      version named after the @ in the uses line. A version specifier such as ==1.0.0
+      installs from PyPI once a release exists there, and a path installs a local checkout.
     required: false
-    default: "==1.0.0"
+    default: ""
 
 outputs:
   failed-count:
@@ -59,7 +60,9 @@ runs:
       run: |
         set -euo pipefail
         spec="${{ inputs.flashmap-version }}"
-        if [ -d "$spec" ]; then
+        if [ -z "$spec" ]; then
+          python -m pip install --disable-pip-version-check "${{ github.action_path }}"
+        elif [ -d "$spec" ]; then
           python -m pip install --disable-pip-version-check "$spec"
         else
           python -m pip install --disable-pip-version-check "flashmap$spec"

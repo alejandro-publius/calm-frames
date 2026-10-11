@@ -123,7 +123,7 @@ The app is the demo. These four are the part that keeps working after the judgin
 
 What an app gets for it: every flagged part of a title hidden before it starts while sound and captions keep going, a card ahead of it with a D-pad Skip and a card afterwards, a missing or stale or unsigned or wrong-hash map keeping the picture hidden, every seek path safe including Alexa and the remote's transport commands, and a VoiceView announcement for each card. What it costs: one rule, which is that nothing in the app writes `currentTime` or calls `fastSeek` any more. Everything goes through `guard.requestSeek`. The package README is [`hook/README.md`](hook/README.md). **The package is not published to npm yet**, but a Vega app can now install a locally packed tarball from a reviewed checkout. The offline consumer check uses that installed tarball, current Vega peer types, Metro resolution and React Native transforms, not repository-source aliases. The name `@calm-frames/flash-guard` was free when we checked on Sep 17, 2026, and that is the whole of the claim on it.
 
-**2. The GitHub Action, so a studio can catch it before it ships.** [`flashmap/examples/flash-check.yml`](flashmap/examples/flash-check.yml) drops into any repository that holds images or video. Every pull request that adds or changes one is measured against WCAG 2.2 SC 2.3.1, and the job fails when a file goes over the general or red flash thresholds. Exit codes are `0` under the thresholds, `1` over them and `2` when flashmap could not tell, and a caller that treats `2` as a pass has a hole in it. The analyzer is Apache-2.0 and runs standalone, so this works for a studio, a game team, a marketing site or a documentation repository with animated GIFs in it, none of whom have to care that Calm Frames exists.
+**2. The GitHub Action, so a studio can catch it before it ships.** [`flashmap/examples/flash-check.yml`](flashmap/examples/flash-check.yml) drops into any repository that holds images or video. Every pull request that adds or changes one is measured against WCAG 2.2 SC 2.3.1, and the job fails when a file goes over the general or red flash thresholds. Exit codes are `0` under the thresholds, `1` over them and `2` when flashmap could not tell, and a caller that treats `2` as a pass has a hole in it. The sample pins the action to a commit on this repository, because no release tag and no PyPI release exist yet, and the action installs flashmap from the checkout it came from; the pin moves to the judged tag once it is cut. The analyzer is Apache-2.0 and runs standalone, so this works for a studio, a game team, a marketing site or a documentation repository with animated GIFs in it, none of whom have to care that Calm Frames exists.
 
 **3. The sidecar spec, so a map is portable.** [`docs/SIDECAR_SPEC.md`](docs/SIDECAR_SPEC.md) is the flash map format, version 1: what was measured, under which profile, with which colour assumptions, which segments were flagged, and an Ed25519 signature over a canonical serialization bound to the source file's SHA-256. It is written so that a player that has never seen our code can read a map it did not make, check the signature and the hash, and honour it. That is the difference between one app having a feature and a format existing. The spec also has a section on what a map does not say, which is the part a second implementer needs most.
 
@@ -369,8 +369,8 @@ These rows exist so nobody has to guess what is missing.
 |---|---|---|
 | Vega SDK | 0.24.9914 | The SDK this is pinned to |
 | Vega CLI | 1.3.4 | Device and virtual device commands |
-| Node | 22 (`.nvmrc`) | The sample declares `engines.node >= 22` |
-| Python | 3.12 (`.python-version`) | flashmap, the pipeline and the measurement scripts |
+| Node | 22 (`.nvmrc`) | The sample declares `engines.node >= 22`. The `make` targets use fnm when it is installed and the node on PATH otherwise |
+| Python | 3.12 (`.python-version`) | flashmap, the pipeline and the measurement scripts, installed into `.venv` at the repository root, which the `make` targets and the scripts look for ([docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) has the `uv` steps) |
 | JDK 21 | for `npm install` only | The Shaka Player build runs in `postinstall` |
 | ffmpeg and ffprobe | 9.0.1, see [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) | The pipeline, the conformance generator and every measurement script. The published numbers came off 9.0.1; on 6.1.1 one rendition test is known to fail (docs/STATUS.md section 5) |
 
@@ -456,18 +456,14 @@ Copy [`flashmap/examples/flash-check.yml`](flashmap/examples/flash-check.yml) in
 ### The pipeline
 
 ```sh
-python -m pipeline.ingest VIDEO --workdir build/ingest  # probe, analyze, hide plan, rendition, posters
-python -m pipeline.verify --workdir build/ingest --sha SHA256  # the publication gate
-```
-
-Ingest is idempotent and keyed by the source file's SHA-256, so a repeated run picks up where it stopped.
-
-Scene holds are enabled by default when ingest has a signing key:
-
-```sh
+python -m flashmap keygen --out /path/to/team_key.pem    # once; the .pub.pem lands beside it
 python -m pipeline.ingest VIDEO --workdir build/ingest --key /path/to/team_key.pem \
-    --pub /path/to/team_key.pub.pem
+    --pub /path/to/team_key.pub.pem   # probe, analyze, hide plan, rendition, posters, scene holds
+python -m pipeline.verify --workdir build/ingest --sha SHA256 \
+    --pub /path/to/team_key.pub.pem   # the publication gate
 ```
+
+Verify refuses a map whose signature it cannot check, so `--pub` is not optional: without it the `map_signature` check fails and the title cannot publish. Ingest is idempotent and keyed by the source file's SHA-256, so a repeated run picks up where it stopped. Scene holds are enabled by default when ingest has a signing key.
 
 For each covered interval, ingest selects an exact preceding source frame outside
 every requested preset's guarded intervals and calm margin, with a five-second
@@ -559,6 +555,19 @@ make synth                                # offline: no credentials, no account 
 The parent area is behind a four digit PIN, set on the device by whoever sets the app up. The PIN itself is never stored: what is stored is a salted, iterated hash of it ([`app/src/calmframes/parentGate.ts`](app/src/calmframes/parentGate.ts), which is also plain about what that does and does not buy).
 
 **There is no preset PIN in the package.** On a fresh simulator installation, choose and confirm your own PIN during onboarding. Installing the package on another simulator does not transfer household state. For an already configured demo simulator, use its owner-provided PIN; do not clear existing data to bypass the gate.
+
+### Run the checks
+
+The same commands CI runs, for a checkout on any box. `make ci` wraps them and uses fnm and the repository `.venv` when they are there.
+
+```sh
+cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx jest --ci --colors=false && cd ..
+.venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"
+.venv/bin/python eval/readme_sync.py --check    # every published number against results/
+.venv/bin/python eval/style_check.py            # no dashes, none of the three words
+```
+
+`npm ci --ignore-scripts` skips the Shaka Player build, which the tests mock; a device package needs the full `npm install` with the JDK. Two pipeline tests compare a still drawn over a hold by PSNR and fail on ffmpeg 6.1.1 (docs/STATUS.md section 5).
 
 ## Limits
 

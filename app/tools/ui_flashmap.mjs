@@ -112,6 +112,9 @@ function paint(frame) {
 }
 
 function pythonCommand() {
+  // PY names an interpreter, as it does for check_video.sh and the Makefile;
+  // otherwise the repository .venv, otherwise whatever python3 is on PATH.
+  if (process.env.PY) return process.env.PY;
   const venv = join(repoRoot, '.venv', 'bin', 'python');
   return existsSync(venv) ? venv : 'python3';
 }
@@ -308,6 +311,17 @@ export async function negativeControl({
 }
 
 async function main() {
+  // A missing analyzer is not a threshold finding. Say so and exit 2, the
+  // code flashmap itself uses for "could not tell", before anything is painted.
+  const probe = spawnSync(pythonCommand(), ['-c', 'import flashmap'], { cwd: repoRoot, encoding: 'utf8' });
+  if (probe.error || probe.status !== 0) {
+    console.error(
+      `flashmap is not importable by ${pythonCommand()}. Install it first ` +
+        '(python -m pip install -e "flashmap[dev]" from the repository root, or create the ' +
+        'repository .venv). This is not a threshold failure.',
+    );
+    process.exit(2);
+  }
   if (process.argv.includes('--negative-control')) {
     process.exit(await negativeControl());
   }

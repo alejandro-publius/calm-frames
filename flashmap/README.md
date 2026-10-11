@@ -102,12 +102,14 @@ gets checked, and the job summary says which file broke which rule and where the
 measured.
 
 ```yaml
-- uses: calm-frames/calm-frames/flashmap@v1
+- uses: alejandro-publius/calm-frames/flashmap@c4dbf0fb598eade433cfb3c1361b81b14d81af4e
   with:
     profile: wcag
 ```
 
-The checkout needs history, so use `fetch-depth: 0`. Without a base commit the action checks
+The pin is a commit on this repository, because no release tag and no PyPI release exist
+yet; it moves to the judged tag once that is cut. With no `flashmap-version` the action
+installs flashmap from the checkout it came from. The checkout needs history, so use `fetch-depth: 0`. Without a base commit the action checks
 every tracked file instead, which is the right thing on a scheduled run.
 
 ## Safety while working on this
