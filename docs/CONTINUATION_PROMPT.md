@@ -6,7 +6,7 @@ it cannot create unlimited credits or automatically extend platform limits.
 
 ```text
 Act as my lead product engineer, accessibility reviewer and skeptical hackathon
-judge for Calm Frames in /Users/alexvintera/calm-frames. Keep improving the actual
+judge for Calm Frames in the repository checkout. Keep improving the actual
 project until the available agent/session budget or a hard tool limit is reached.
 I want a polished, distinctive Amazon Devpost submission and a convincing working
 product. Do the work, test it and challenge it. Do not stop after an audit, plan,

@@ -92,7 +92,7 @@ tr '\r' '\n' < vega_install.log | grep -v -E '\[[=-]+\]'
 
 **Expected.** A flag to skip rc edits, the way rustup has `--no-modify-path`, or an edit to only the current shell's file.
 
-**Actual.** `source "/Users/alexvintera/vega/env"` was appended to both `~/.zshrc` and `~/.zprofile`. The script's list also includes `.bashrc`, `.bash_profile` and `.profile`. A zsh login shell now sources the env file twice. No environment variable in the script turns this off.
+**Actual.** `source "~/vega/env"` was appended to both `~/.zshrc` and `~/.zprofile`. The script's list also includes `.bashrc`, `.bash_profile` and `.profile`. A zsh login shell now sources the env file twice. No environment variable in the script turns this off.
 
 **Severity.** Low.
 
@@ -776,7 +776,7 @@ ran `.venv/bin/python -m pytest flashmap pipeline eval -q -m 'not slow'`.
 running any tests:
 
 ```text
-unable to talk to your watchman on /Users/alexvintera/.local/state/watchman/alexvintera-state/sock! (Operation not permitted)
+unable to talk to your watchman on ~/.local/state/watchman/<user>-state/sock! (Operation not permitted)
 ```
 
 The Python run executed its other checks, but the nine upload-server cases failed
@@ -807,7 +807,7 @@ silently counted as passes.
 
 A bounded read-only Docker check found a client but could not access the Colima
 daemon socket: `permission denied` on
-`/Users/alexvintera/.colima/default/docker.sock`. No containers, images, builds,
+`~/.colima/default/docker.sock`. No containers, images, builds,
 network settings or shared services were changed. Docker is not an available
 alternative HTTP-test runner in this session.
 

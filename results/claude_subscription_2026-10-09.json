@@ -2,7 +2,7 @@
   "model": "claude-fable-5-1",
   "effort_requested": "max",
   "worker_effort": "max (Workflow agent options)",
-  "authentication": "claude.ai / firstParty / Max; host auth status verified",
+  "authentication": "withheld: an account identifier with no evidential use, removed Oct 11",
   "billing_configuration_changed": false,
   "ultracode_noninteractive_supported": true,
   "workflow_status": "killed",
@@ -22,7 +22,7 @@
   ],
   "ordinary_cli_reviews": {
     "playback_review": {
-      "session_id": "72482",
+      "session_id": "withheld",
       "actual_model": "claude-fable-5-1",
       "provider": "firstParty",
       "effort_requested": "max",
@@ -35,7 +35,7 @@
       "other_findings": "Native capture staleness explains earlier focus observations; adaptive paths outside current local MP4 catalog remain outside this test."
     },
     "submission_edit": {
-      "session_id": "a9c30907-f3f5-4c20-980e-3407cc1b552f",
+      "session_id": "withheld",
       "actual_model": "claude-fable-5-1",
       "provider": "firstParty",
       "effort_requested": "max",

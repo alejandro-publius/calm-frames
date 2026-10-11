@@ -53,7 +53,7 @@ Not installed yet: AWS CDK (will be pinned in `pipeline/infra/package.json`), cm
 - The installer appended this block to `~/.zshrc` and `~/.zprofile`:
   ```
   #Vega CLI
-  source "/Users/alexvintera/vega/env"
+  source "$HOME/vega/env"
   ```
 - It also symlinks `kepler` and `vvman` to `vega` for older scripts (the sample's npm scripts still call `kepler`).
 - Telemetry is on by default: https://developer.amazon.com/docs/vega/latest/telemetry.html explains how to opt out.

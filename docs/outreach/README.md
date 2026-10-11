@@ -14,7 +14,7 @@ Refreshed Fri Oct 9, 2026. The three emails were first written for Fri Sep 18 (H
 | `researcher.md` | An academic who works on photosensitive epilepsy and media | The corresponding-author address in a paper you have read, or their department page |
 | `accessibility-advocate.md` | An accessibility group or an individual advocate | A contact address they publish themselves |
 | `discord-checkin.md` | A Vega developer, in the Devpost Discord channel #amazon-developer-checkin | None: a public post. Link the repository only once it is public. |
-| `organizer-questions.md` | The hackathon manager by email, or the Devpost forum, plus a list for Office Hours #2 on Mon Oct 19 | janet@devpost.com, the "Email the hackathon manager" link on the hackathon's overview page |
+| `organizer-questions.md` | The hackathon manager by email, or the Devpost forum, plus a list for Office Hours #2 on Mon Oct 19 | the address behind the "Email the hackathon manager" link on the overview page, the "Email the hackathon manager" link on the hackathon's overview page |
 
 ## The optional question about need
 

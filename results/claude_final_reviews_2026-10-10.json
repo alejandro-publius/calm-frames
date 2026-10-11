@@ -1,13 +1,13 @@
 {
   "date": "2026-10-10",
-  "authentication": "Verified loggedIn=true, authMethod=claude.ai, apiProvider=firstParty, subscriptionType=max before these calls. No API keys or billing configuration changes.",
+  "authentication": "withheld: an account identifier with no evidential use, removed Oct 11",
   "model_requested": "claude-fable-5-1[1m]",
   "effort_requested": "max",
   "effort_verification": "Accepted by CLI; per-result telemetry reports canonical model but does not echo effort.",
   "reviews": [
     {
       "task": "deliverable",
-      "session_id": "201a318a-a307-47df-b854-51e6e40a4b18",
+      "session_id": "withheld",
       "actual_model": "claude-fable-5-1",
       "provider": "firstParty",
       "status": "completed",
@@ -18,7 +18,7 @@
     },
     {
       "task": "dependencies",
-      "session_id": "ef9913fe-7a16-4b93-b1f1-bd216edaf029",
+      "session_id": "withheld",
       "actual_model": "claude-fable-5-1",
       "provider": "firstParty",
       "status": "completed",
@@ -29,7 +29,7 @@
     },
     {
       "task": "exit lifecycle review",
-      "session_id": "682e6d28-727d-47d0-9c65-f2ab0c8daff9",
+      "session_id": "withheld",
       "actual_model": "claude-fable-5-1",
       "provider": "firstParty",
       "status": "completed",

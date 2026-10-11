@@ -21,7 +21,7 @@
     },
     {
       "path": "app/.prettierignore",
-      "sha256": "6a1c3dea3e60795af3dbd2fb72ba31d58c442e284453a1e6ba6ee5bb544447dc"
+      "sha256": "6a1c3dea3e60795af3dbd2fb72ba31d58c442e284453a1e6ba6ee5bb5the household PIN7dc"
     },
     {
       "path": "app/.prettierrc",
@@ -557,7 +557,7 @@
     },
     {
       "path": "app/src/assets/index.d.ts",
-      "sha256": "fe64c85154b8a85699e2444412d2ed53a21499e2de14d9752a729b1ea4d8fc36"
+      "sha256": "fe64c85154b8a85699e2the household PIN12d2ed53a21499e2de14d9752a729b1ea4d8fc36"
     },
     {
       "path": "app/src/assets/mini_details_bottom_gradient.png",
@@ -689,7 +689,7 @@
     },
     {
       "path": "app/src/blocks/assets/index.d.ts",
-      "sha256": "fe64c85154b8a85699e2444412d2ed53a21499e2de14d9752a729b1ea4d8fc36"
+      "sha256": "fe64c85154b8a85699e2the household PIN12d2ed53a21499e2de14d9752a729b1ea4d8fc36"
     },
     {
       "path": "app/src/blocks/assets/primary_nav_expanded_gradient.png",
@@ -2524,7 +2524,7 @@
   "native": {
     "settings_focus": "Observed disappearing focus before fix; deferred-write regression observed red (1 failed, 14 passed) and green (15 passed). Native Broadcast selection now retains the outline and underline after save.",
     "onboarding": "Fresh install on combined redesign build: mismatched confirmation rejected; Delete removed a partial digit; PIN created; all presets selected; room/explainer completed. Final later changes add focus underlines and copy consistency; first-run gating unchanged.",
-    "pin": "On recorded cba1a29 package: remote 1111 rejected with 4 tries left; partial 4 then remote Delete cleared entry; 4444 unlocked; Credits Back relocked. Final copy-only build also unlocked after reinstall.",
+    "pin": "On recorded cba1a29 package: remote 1111 rejected with 4 tries left; partial 4 then remote Delete cleared entry; the household PIN unlocked; Credits Back relocked. Final copy-only build also unlocked after reinstall.",
     "presets": "Standard selected with three titles; Broadcast and Extra cautious selected with gradient unavailable. Prepared Harbor observed under Broadcast; final recording uses Extra cautious.",
     "restart": "Terminate and relaunch preserved Kid profile, Extra cautious household floor, 55-inch TV, 10-foot household distance and chime Off. Kid effective distance remains 8 feet because profile settings can only tighten the floor.",
     "history": "Empty Everyone history observed after synthetic practice. Positive real-cover attribution remains integration-tested; no hazardous-source native run.",

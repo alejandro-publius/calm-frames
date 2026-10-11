@@ -88,7 +88,7 @@ vega device launch-app --device Simulator --appName io.github.alejandropublius.c
 
 If Vega is already running, omit the start command. Existing household data is
 preserved. Fresh installs choose their own PIN. The synthetic local validation
-household uses 4444; it is not a built-in package PIN or user credential.
+household uses a PIN that is not in the repository; there is no built-in package PIN.
 Choose the first shelf card, Harbor: Scene hold demo, and select Watch demo.
 The hero Watch now action plays the separately prepared Harbor title.
 Use the visible remote or:
