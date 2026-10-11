@@ -28,7 +28,14 @@ The combined implementation is pushed as `e39c10c`, and GitHub's branch hash
 matched. Full checks passed <!--n results/interaction_evidence_2026-10-11.json:checks.app_passed -->1071<!--/n-->
 app tests and <!--n results/interaction_evidence_2026-10-11.json:checks.python_full.passed -->1750<!--/n-->
 Python tests. Those suites ran before the concurrent merge; their app and Python
-source/test inputs remain unchanged. The updated UI analyzer passed again after
+source/test inputs remain unchanged. That Python count is from that session's
+box, on ffmpeg 7.1.5; the same command on the Oct 11 Linux box at c4dbf0f
+collects <!--n results/local_python_run_2026-10-11.json:published.collected -->1694<!--/n-->
+and passes <!--n results/local_python_run_2026-10-11.json:published.passed -->1686<!--/n-->,
+with <!--n results/local_python_run_2026-10-11.json:published.skipped -->6<!--/n--> skipped
+and the <!--n results/local_python_run_2026-10-11.json:published.failed -->2<!--/n--> ffmpeg 6.1.1
+failures recorded below, so neither count stands without its environment
+(`results/local_python_run_2026-10-11.json`). The updated UI analyzer passed again after
 integration, including <!--n results/interaction_evidence_2026-10-11.json:checks.ui_control_tests_passed -->16<!--/n-->
 error and cleanup guards and the actual measured controls. Generated hazard
 fixtures were removed after analysis. The current ffmpeg 7.1.5 fixture run does
@@ -156,20 +163,27 @@ parallel with a skeptic on every finding, and what stood was fixed:
   10.9.8. `make sbom` has to run under the runner's npm, which CLAUDE.md now
   says.
 
-**Left standing, on purpose, each with a reason:** the six prepared-library
-renditions ship with the hash of a verify report that is not committed (the
-report is on the Mac; section 5); the bundled Harbor demo's played rendition
+**Left standing, on purpose, each with a reason:** the prepared library's two
+generations reference verify reports that are not in the checkout (the
+originals are on the Mac; the attach command and the strict gate that refuses
+a release without them landed later on Oct 11, section 5 and
+`docs/MAC_FINISH.md`); the bundled Harbor demo's played rendition
 hash is checked by the package preflight at build time, not by the guard at
 play time (section 5); the prepared Harbor's frames carry the burned-in
 "BENIGN DEMO" label, which the copy now admits rather than hides; and two
 commits on the branch carry a university address as author, which only a
 history rewrite can change and is your call, not mine.
 
-**One test fails on this Linux box and passes on CI and the Mac.**
+**Two tests fail on this Linux box and pass on CI and the Mac.**
 `pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still`
 reads a PSNR of 15 to 21 against the 30 it wants at 4.4 s, on ffmpeg 6.1.1 and
-PyAV 18.1.0 here; the hosted python job on the same tree is green. It is
-recorded and not chased, because nothing in this tree touches that path.
+PyAV 18.1.0 here. Later on Oct 11 the full suite on the same box also failed
+`pipeline/tests/test_sceneholds_real.py::test_real_cli_checks_sham_hides_with_neutral_and_preceding_context`
+on verify's `scene_model_drawn:wcag` check, which is the cover model losing the
+still the same way the rendition does. The hosted python job on the same tree
+is green (run 38112814399 on c4dbf0f), and the other session's full run on
+ffmpeg 7.1.5 passed both. Recorded and not chased, because nothing in this tree
+touches that path; section 5 has the fix, which belongs with the Mac encoder.
 
 ### Oct 10: cloud design polish awaits a native build
 
@@ -779,8 +793,8 @@ version of this table in git history, not here.
 | **Now** | Activate `Project` as a cost allocation tag in Billing, so the $20 budget can see the bill. `pipeline/infra/README.md` has the steps. | HUMAN CHECKPOINT D is done and the stack is deployed; until the tag is active the budget cannot warn anyone. A new tag can take a day to appear. |
 | **By Mon Oct 12, tomorrow** | Open the upstream pull request from a fork under your account. | The fix, the two patches and the PR text are ready in `docs/OPEN_SOURCE_PR.md` and `docs/upstream-pr/`. It cannot be opened from here: it needs a fork you own, and the patches need your chosen public author identity. This is the Open Source mini challenge's contribution URL. |
 | **By Tue Oct 13** | Send the clarification request in `docs/AMAZON_SAMPLE_LICENSE_REVIEW.md` to Amazon, as an issue on AmazonAppDev/vega-video-sample or to the hackathon's Amazon contacts, and record where and when in that file. | The player wrapper and the Shaka archive carry a proprietary notice beside the sample's MIT-0 grant, and the repository goes public on Oct 21. NOTICE and the README state the conflict now; an answer would close it. |
-| **Next Mac session** | Rebuild the polished source with the Oct 11 dependency changes in (`xmldom` alias, `lodash` 4.18.1), install it on the virtual device, play Harbor and the gradient, then re-run `eval/assemble_demo.py` and `eval/check_video.sh`, regenerate the manifest and refresh the review assets. | Nothing that changed app inputs since Oct 10 has been built or seen on a device, and the recorded cut still carries the earlier 2:10 sentence. If the Vega build or playback rejects the parser alias, revert the one line in `app/package.json`. While there: export the prepared-library verify report beside the catalog (section 5). |
-| **Before Wed Oct 21, and the sooner the better** | Merge PR #1 into main. Audit and CI are green on ba819dc (`results/github_push_2026-10-11.json`). | A public repository shows main by default, and main has not moved since Sep 20. The judged tag is cut from main. |
+| **Next Mac session** | Rebuild the polished source with the Oct 11 dependency changes in (`xmldom` alias, `lodash` 4.18.1), install it on the virtual device, play Harbor and the gradient, then re-run `eval/assemble_demo.py` and `eval/check_video.sh`, regenerate the manifest and refresh the review assets. | Nothing that changed app inputs since Oct 10 has been built or seen on a device, and the recorded cut still carries the earlier 2:10 sentence. If the Vega build or playback rejects the parser alias, revert the one line in `app/package.json`. While there: attach the two original verify reports with `python -m pipeline.packaged_library attach-reports` and run `node tools/check_prepared_library.mjs --require-reports` (section 5, `docs/MAC_FINISH.md`). |
+| **Before Wed Oct 21, and the sooner the better** | Merge PR #1 into main. Audit and CI are green on ba819dc (`results/github_push_2026-10-11.json`) and again on c4dbf0f, the head with both sessions' Oct 11 work (`results/github_push_2026-10-11_c4dbf0f.json`). | A public repository shows main by default, and main has not moved since Sep 20. The judged tag is cut from main. |
 | **By Fri Oct 16** | Any outreach reply you want quoted goes into `docs/VALIDATION.md`, with permission. | |
 | **Wed Oct 21, with the final checks** | Re-run `make audit-update`, re-read `scripts/audit_exceptions.toml`, confirm the two groups and move both `review_by` dates past Dec 3. Confirm the CC0 dedication of the Harbor artwork in `media/LICENSES.csv`. Make the repo public, run the final checks, publish the release. | Both audit groups expire on Oct 21 on purpose, so the release build is made with the words re-read; left as they are, the Monday audit after the tag goes red for a date rather than an advisory, in front of the judges. The rules need the repo public with the licence visible. |
 | **Thu Oct 22** | Press submit. `docs/SUBMISSION.md` has every field, with the ones needing you marked. | |
@@ -1046,7 +1060,7 @@ and it is the reason no report is written for a clip it could not read.
   replace those preparation reports. See [MAC_FINISH.md](MAC_FINISH.md).
 - **The bundled Harbor demo's played file is not hash-checked at play time.** The guard compares the map's source hash; the demo plays `harbor.precovered.mp4`, whose hash `BENIGN_STORY_RENDITION_SHA256` exists and is read by nothing in `app/src`. The package preflight checks every bundled byte at build time, so a swapped rendition cannot reach an installed package unsigned, which is why this is recorded rather than fixed from a Linux box.
 - **The prepared Harbor's frames carry the burned-in "BENIGN DEMO" label**, because `eval/prepare_owned_harbor.py` stream-copies the demo video. The shelf copy now says it is our own demo film. Rendering the picture without the label and re-exporting is a Mac job.
-- **`pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still` was reported failing in another Oct 11 Linux environment** (PSNR 15 to 21 against 30 at 4.4 s) and passes on CI and the Mac. The Oct 11 review found the shape of it: on that environment's ffmpeg 6.1.1 the overlay that draws a still over a hold loses the image part way through the interval, and the cover model for the Harbor demo did the same (42 dB at the start of a hold, 15 dB near its end). Verify's scene cover proof samples one midpoint per hold, so a still that drops only in the trailing guard band would pass the proof and rely on the analyzer. The fix is to sample each hold at its start, middle and end in `pipeline/verify.py` and record the ffmpeg version in the verify report; it has to be made where ffmpeg 9 renders, with the Harbor verification regenerated, so it is a Mac job and it is listed here rather than done blind.
+- **`pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still` was reported failing in another Oct 11 Linux environment** (PSNR 15 to 21 against 30 at 4.4 s) and passes on CI and the Mac. The Oct 11 review found the shape of it: on that environment's ffmpeg 6.1.1 the overlay that draws a still over a hold loses the image part way through the interval, and the cover model for the Harbor demo did the same (42 dB at the start of a hold, 15 dB near its end). Verify's scene cover proof samples one midpoint per hold, so a still that drops only in the trailing guard band would pass the proof and rely on the analyzer. The fix is to sample each hold at its start, middle and end in `pipeline/verify.py` and record the ffmpeg version in the verify report; it has to be made where ffmpeg 9 renders, with the Harbor verification regenerated, so it is a Mac job and it is listed here rather than done blind. Later on Oct 11 the same box also failed `pipeline/tests/test_sceneholds_real.py::test_real_cli_checks_sham_hides_with_neutral_and_preceding_context` on the `scene_model_drawn:wcag` check, the cover model losing the still the same way; both tests pass on the hosted runner and on ffmpeg 7.1.5.
 
 ## 6. The numbers
 
@@ -1083,11 +1097,12 @@ four that are live right now:
    and your author identity is in `docs/upstream-pr/`.
 2. **Send the Amazon licence clarification by Tue Oct 13**, so an answer can
    arrive before the repository goes public.
-3. **Merge PR #1.** Audit and CI are green on ba819dc. Main has not moved since
-   Sep 20, and the judged tag is cut from main.
+3. **Merge PR #1.** Audit and CI are green on ba819dc and on c4dbf0f. Main has
+   not moved since Sep 20, and the judged tag is cut from main.
 4. **Next Mac session:** rebuild with the two dependency changes in, play both
-   titles on the virtual device, refresh the demo, export the prepared-library
-   verify report. The outreach emails from Sep 18 are still unsent.
+   titles on the virtual device, refresh the demo, attach the two original
+   prepared-library verify reports (`docs/MAC_FINISH.md`). The outreach emails
+   from Sep 18 are still unsent.
 
 **Mine, in order, and none of it is waiting on you.**
 

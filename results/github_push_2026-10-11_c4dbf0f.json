@@ -1,0 +1,36 @@
+{
+  "statement": "The hosted runs on the second Oct 11 push, c4dbf0f, the head that carries the other session's interaction and report attachment work and this session's review. Read through the GitHub Actions API on Oct 11 after both runs finished.",
+  "commit": "c4dbf0fb598eade433cfb3c1361b81b14d81af4e",
+  "branch": "codex/signed-scene-holds-2026-09-29",
+  "pull_request": 1,
+  "read_utc": "2026-10-11T05:14:00Z",
+  "runs": {
+    "audit": {
+      "id": 38112814387,
+      "conclusion": "success",
+      "jobs_green": 4,
+      "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38112814387"
+    },
+    "ci": {
+      "id": 38112814399,
+      "conclusion": "success",
+      "jobs_green": 6,
+      "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38112814399",
+      "jobs": [
+        "Vega app",
+        "Python packages",
+        "The app's own UI passes flashmap",
+        "Mutation gate, property tests and the map fuzz corpus",
+        "Secret scan",
+        "Published numbers match results"
+      ]
+    }
+  },
+  "note": "The runs on the two pushes between ba819dc and c4dbf0f (e043d80 green in both workflows; 9afacc0, 54954ab and e39c10c cancelled in CI by the next push under cancel-in-progress, Audit green on 54954ab) are listed by the Actions page and not here.",
+  "published": {
+    "audit_conclusion": "success",
+    "ci_conclusion": "success",
+    "audit_jobs_green": 4,
+    "ci_jobs_green": 6
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "statement": "One run of the Python suite on the Oct 11 Linux box, at the pushed head c4dbf0f, with the command CLAUDE.md names for a push. It is here because the count published from the other session's box does not reproduce on this one, and a count with no environment beside it is not a measurement.",
+  "command": ".venv/bin/python -m pytest flashmap pipeline eval -q -m \"not slow\" -p no:cacheprovider",
+  "commit": "c4dbf0fb598eade433cfb3c1361b81b14d81af4e",
+  "generated_utc": "2026-10-11T05:01:00Z",
+  "environment": {
+    "os": "Linux x86_64, 4 CPUs",
+    "python": "3.12",
+    "ffmpeg": "6.1.1-3ubuntu5",
+    "pyav": "18.1.0",
+    "chrome": "present"
+  },
+  "passed": 1686,
+  "failed": 2,
+  "skipped": 6,
+  "deselected": 2,
+  "collected": 1694,
+  "duration_seconds": 421.18,
+  "failed_tests": [
+    "pipeline/tests/test_render.py::TestSafeRendition::test_the_covered_span_shows_the_still",
+    "pipeline/tests/test_sceneholds_real.py::test_real_cli_checks_sham_hides_with_neutral_and_preceding_context"
+  ],
+  "why_they_fail": "Both are verify's PSNR comparisons against a still drawn over a hold. On this box's ffmpeg 6.1.1 the overlay loses the still part way through the interval (docs/STATUS.md section 5). The hosted python job on the same commit is green (CI run 38112814399) and the other session's run on ffmpeg 7.1.5 passed both.",
+  "published": {
+    "passed": 1686,
+    "failed": 2,
+    "skipped": 6,
+    "collected": 1694
+  }
+}
