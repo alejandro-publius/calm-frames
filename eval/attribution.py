@@ -56,6 +56,7 @@ TITLES = {
     # frames or signed playback stills.
     "app/assets/image/tv/harbor.png": "Harbor presentation artwork",
     "app/assets/image/tv/harbor-cinematic.png": "Harbor cinematic presentation artwork",
+    "app/assets/image/tv/harbor-water.png": "Harbor opening artwork",
     "app/assets/image/tv/gradient.png": "Calm gradient presentation artwork",
     # The two videos the app ships besides the Harbor story: the bundled calm
     # gradient, and the prepared Harbor rendition kid mode plays. Both are ours.
