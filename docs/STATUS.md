@@ -4,6 +4,37 @@ Updated Oct 13, 2026.
 
 ## 0. Where things stand
 
+### Oct 13 (Mac): the polished source is built and seen on the device
+
+The cinematic source was built for aarch64 Debug on the Mac and installed on the
+Vega Virtual Device. The canonical package is rebuilt from the library-fix commit
+so its build receipt's source is reproducible. Native observations and hashes are
+in `results/polish_native_validation.json`.
+
+Seen on the device: the cinematic library hero and panoramic Harbor art, D-pad
+focus across Watch now, More info, both shelf cards and the header buttons with a
+visible outline, library-to-details-and-back navigation, the Harbor demo and
+Checked-story details pages with their open layouts and picture timelines, the
+PIN gate (a wrong PIN is rejected with the tries-remaining message), the practice
+holds playing with the hold cover, the Holding a calm scene card, the Skip
+countdown and changing English captions over continuing sound, and the prepared
+Harbor playing through Watch now with its watermark and captions.
+
+One fix came out of the session: at the fresh top of the library scroll the shelf
+cards' qualifier lines were cut off under the fixed footer. The vertical spacing
+above the shelf was tightened; the full app suite and typecheck pass and the fix
+was re-observed on the rebuilt package.
+
+The parent-area interior (settings, preset/room/chime/motion/sound rows, settings
+persistence across restart and the exposure-history view) was not re-observed
+because it needs the validation household's PIN, which is not in the repository
+and was not recovered. The gate and keypad code are unchanged from the Oct 10
+on-device receipt and the ParentAreaScreen changes are covered by the app suite.
+That PIN also blocks the settings, history and PIN-unlock demo shots. The
+ScreenCaptureKit recorder captures the practice-hold playback well (its overlays
+keep repainting) but only a few frames of the prepared Harbor once its controls
+hide; a still carries that shot instead.
+
 ### Oct 13: the next demo and submission story are prepared
 
 The demo assembler now keeps the complete native picture above its subtitles,

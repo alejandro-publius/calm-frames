@@ -11,11 +11,19 @@ The current presentation source is pushed; finish the matching native build and
 final demo next.
 The detailed evidence and outstanding decisions remain below.
 
-- [ ] Push the checked final app source and prepare its matching package with
-  every required original verification report. Preserve the strict release gate.
-- [ ] Complete the native journeys in [MAC_FINISH.md](MAC_FINISH.md), including
-  motion, interface sounds, the separate warning chime and VoiceView. Record the
-  exact build, observations and any unresolved failure.
+- [x] Pushed the checked final app source and prepared its matching package with
+  both original verification reports attached. The strict release gate
+  (`check --require-reports`) passes. Package built from `06190c7` for aarch64
+  Debug, SHA-256 `29774e27bdea4fea98bb2a684f7da12b8c2c3bf56f64b2e8ed401dd809f016d8`.
+- [~] Completed the reachable native journeys in [MAC_FINISH.md](MAC_FINISH.md) on
+  the Vega Virtual Device: library/hero, D-pad focus, details, PIN gate and wrong
+  entry, practice holds with cover and captions, and prepared Harbor playback.
+  Fixed one observed issue (library shelf labels clipped under the footer).
+  Observations and hashes: `results/polish_native_validation.json`. Still blocked
+  on the validation household PIN: the parent-area interior (settings, preset/room/
+  chime/motion/sound rows, persistence across restart, exposure history) and
+  VoiceView. The gate/keypad code is unchanged from the Oct 10 on-device receipt
+  and the parent-screen changes are covered by the app suite.
 - [ ] Produce the matching native demo, capture manifest, package hashes and
   review bundle. Check the final recording, including animated frames and audio.
 - [ ] Resolve publication licence questions, review remaining security findings,
