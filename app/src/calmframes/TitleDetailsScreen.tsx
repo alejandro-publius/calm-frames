@@ -80,9 +80,12 @@ const TitleDetailsScreen = ({
   const presentation = titlePresentation(entry.title);
   const demo = isBundledBenignStory(entry.title);
   const hiddenSeconds = Math.round(totalCoveredMs(intervals) / 1000);
+  const scrollRef = React.useRef<ScrollView>(null);
+  const infoTop = React.useRef(0);
 
   return (
     <ScrollView
+      ref={scrollRef}
       testID={testID}
       style={styles.screen}
       contentContainerStyle={styles.content}>
@@ -90,7 +93,7 @@ const TitleDetailsScreen = ({
       <View style={styles.hero}>
         <View style={styles.heroArt} pointerEvents="none">
           <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
-            <TitleArtwork immersive entry={entry} height={480} testID={`${testID}-artwork`} />
+            <TitleArtwork immersive entry={entry} height={360} testID={`${testID}-artwork`} />
           </CalmArtworkMotion>
           <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
             start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artSky} />
@@ -112,6 +115,21 @@ const TitleDetailsScreen = ({
           </View>
         </View>
       </View>
+
+      {playable ? (
+        <View testID={`${testID}-info`} style={styles.infoAnchor}
+          onLayout={({ nativeEvent }) => { infoTop.current = nativeEvent.layout.y; }}>
+          <View>
+            <CalmButton quiet testID={`${testID}-show-info`} label="Picture holds & settings ↓"
+              accessibilityLabel="Picture holds and viewing settings. Scroll down to read more."
+              onPress={() => scrollRef.current?.scrollTo({
+                // Keep this same focused control in view above the explanation.
+                y: Math.max(0, infoTop.current - scale(CALM_SPACE.SAFE_Y)),
+                animated: false,
+              })} />
+          </View>
+        </View>
+      ) : null}
 
       {notice ? (
         <View style={styles.block}>
@@ -141,6 +159,8 @@ const TitleDetailsScreen = ({
                   <FlashMapStrip
                     width={1040}
                     showCaption={false}
+                    showKey
+                    holdLabel={demo ? 'Practice hold' : 'Picture covered'}
                     intervals={intervals}
                     durationMs={durationMs}
                     testID={`${testID}-strip`}
@@ -160,7 +180,7 @@ const TitleDetailsScreen = ({
         </>
       )}
 
-      {onBack ? <View style={styles.footer}><CalmButton quiet testID={`${testID}-back-bottom`} label="Back to library" onPress={onBack} /></View> : null}
+      {onBack ? <View style={styles.footer}><View><CalmButton quiet testID={`${testID}-back-bottom`} label="Back to library" onPress={onBack} /></View></View> : null}
     </ScrollView>
   );
 };
@@ -171,18 +191,19 @@ const styles = StyleSheet.create({
   navigation: { width: '100%', maxWidth: scale(1440), alignItems: 'flex-start', marginBottom: scale(16) },
   hero: { width: '100%', maxWidth: scale(1440), alignItems: 'center', overflow: 'hidden' },
   heroCopy: { width: '100%', maxWidth: scale(1000), alignItems: 'center', paddingTop: scale(12) },
-  heroArt: { width: '100%', maxWidth: scale(1280) },
+  heroArt: { width: '100%', maxWidth: scale(1120) },
   artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(56) },
   artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(160) },
   artEdge: { position: 'absolute', top: 0, bottom: 0, right: 0, width: scale(120) },
   kicker: { alignItems: 'center', marginBottom: scale(8) },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, textAlign: 'center' },
-  title: { ...CALM_TEXT.feature, fontSize: scale(84), lineHeight: scale(96), color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'center' },
+  title: { ...CALM_TEXT.feature, fontSize: scale(72), lineHeight: scale(84), color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'center' },
   longTitle: { fontSize: scale(72), lineHeight: scale(84) },
   synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'center' },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'center' },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, textAlign: 'center' },
-  checkSummary: { width: '100%', maxWidth: scale(1040), gap: scale(24), marginTop: scale(72) },
+  infoAnchor: { width: '100%', maxWidth: scale(1040), alignItems: 'center', marginTop: scale(12) },
+  checkSummary: { width: '100%', maxWidth: scale(1040), gap: scale(20), marginTop: scale(32) },
   chapterHeading: { alignItems: 'center' },
   chapterContent: { gap: scale(24) },
   timeline: { marginTop: scale(8) },

@@ -15,6 +15,12 @@ redesign was built; its second teal `#12343F` never shipped), the
 [polish review](POLISH_REVIEW.md) and the [seamless review](SEAMLESS_REVIEW.md).
 Where one of them and this page differ, this page and the code are current.
 
+The Oct 13 [details refinement](detail-refinement/README.md) brings a centered
+Picture holds & settings action into the first screen and adds duration labels
+and a plain-language timeline key. Its before/after browser previews and focused
+check receipt cover the isolated design branch; native focus behavior still
+needs a Mac/Vega observation.
+
 ## Identity
 
 A peaceful monk inside a rounded frame, with one open halo. Deep teal ground,

@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-13",
+  "baseline_commit": "4c9996d70dcc3327663679845f7c888648297d59",
+  "branch": "codex/design-details-2026-10-13",
+  "scope": "Details discovery, focus-preserving scroll, timeline time scale and key; design/UI/UX only.",
+  "source_sha256": {
+    "app/src/calmframes/TitleDetailsScreen.tsx": "075d347e5d9abd32322f7fdd00f9efdb54b84d6d247910d791c68be3139c5985",
+    "app/src/calmframes/FlashMapStrip.tsx": "f807fdc383633371fa1a682ffc9d69b118493cfef3f8e56051881baa4ec8e9eb",
+    "app/test/calmframes/detailDiscovery.test.tsx": "13b7bd30f0d43fc4f10cc8f2becb31afbde4628be74cb786f9bb7c0dbe93a466",
+    "eval/preview/harbor.fixture.tsx": "29b312a556374ea39480162cab63a43e54a366cae4d264a53a35432933ecc9f1",
+    "eval/preview/render_harbor.py": "1404d4d73e0abb4209592aea9e0e32a4ca90b8ddaf8f488fcd719c589946881c"
+  },
+  "preview_sha256": {
+    "docs/design/detail-refinement/after/bounds.json": "1c65188ea6616f6ecbf0e63042eac1f266f2ae61f3a423a7b14af20575f653a8",
+    "docs/design/detail-refinement/after/details-demo-bottom-browser.png": "f10f684c4f2e8145bc207301d2669121ef5147fe14281b4f1209d55493cf2d0b",
+    "docs/design/detail-refinement/after/details-demo-browser.png": "e78e6fb0c00d88b03eee6bc0f6eba5e6b54f4df43c913fd46d05c62f2cfd7bfc",
+    "docs/design/detail-refinement/after/details-demo-plan-browser.png": "199b073a4a13d266edb50b1727d855878536dab3456de6414916dfb193fc6183",
+    "docs/design/detail-refinement/after/details-harbor-bottom-browser.png": "955475164e4ae7fe42d8d1d3d1edf9ba70b294df31b25c77c56d3f37c1577199",
+    "docs/design/detail-refinement/after/details-harbor-browser.png": "a9d72682ba3721b4b9be366781c3eac461996ac0acc6225d806fb80d15d8bc02",
+    "docs/design/detail-refinement/after/details-harbor-plan-browser.png": "833923ddea7957fe764eec8a925e2d6e7da2cd2666b1f063c9a376378114a8ba",
+    "docs/design/detail-refinement/after/details-unavailable-browser.png": "937ebcdb288a4ed059a69fceb4c657a8bbe107a7746a2d0b499f1cd560b0ee6d",
+    "docs/design/detail-refinement/after/library-browser.png": "067878f28fe58708ebc135d52018a7fb857d4909db53e4f3a6af44ed54bd126a",
+    "docs/design/detail-refinement/before/bounds.json": "38f65eeef0250d111fd756edfeb38e7c8c6f47c092d267640ca8ffe09f5f3003",
+    "docs/design/detail-refinement/before/details-demo-bottom-browser.png": "5fa6ad712b6374641c002b386bf679c007e91ad459e29ff015d6dd0727893148",
+    "docs/design/detail-refinement/before/details-demo-browser.png": "531e757a7aa7da270db44eb64c16619740af423b8d1ed7bd9d182784b3490c7e",
+    "docs/design/detail-refinement/before/details-demo-plan-browser.png": "794c5fe37db4cbfacc8f64e3f487be26af795895232d5cb1087f25a23c3414b3",
+    "docs/design/detail-refinement/before/details-harbor-bottom-browser.png": "eb8d1db34966d0d225a286599170850eef519fc822a7564ba92dcc7ae953f8f6",
+    "docs/design/detail-refinement/before/details-harbor-browser.png": "d8d60a82bd46957be49213aa7c2c89a57110e80e09e567b894ff4bb2620a8bde",
+    "docs/design/detail-refinement/before/details-harbor-plan-browser.png": "3dfd7fc71d67a6a2a5f5571398d824846c8dc69d317b2da9a6d386c8af6c2ca8",
+    "docs/design/detail-refinement/before/details-unavailable-browser.png": "c8d87de0c18818787155294408fc940afae34ad644dc16dc4aac3e6d7c9862a1",
+    "docs/design/detail-refinement/before/library-browser.png": "067878f28fe58708ebc135d52018a7fb857d4909db53e4f3a6af44ed54bd126a"
+  },
+  "rendering": {
+    "kind": "Chromium approximation of exported React Native host trees",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "before_source": "clean detached worktree at baseline_commit",
+    "native_capture": false,
+    "library_identical_before_after": true,
+    "bounds_checks": {
+      "both_details_buttons_centered": true,
+      "both_details_buttons_within_safe_area": true,
+      "initial_button_y": 896,
+      "initial_button_bottom": 978,
+      "scrolled_button_y": 54
+    }
+  },
+  "validation": {
+    "focused_jest": {
+      "passed": 166,
+      "suites": 6,
+      "coverage": false,
+      "files": [
+        "detailDiscovery",
+        "screens",
+        "tenFoot",
+        "artworkMotion",
+        "uiCapture",
+        "benignStory"
+      ]
+    },
+    "preview_export": {
+      "passed": 1,
+      "fixture": "eval/preview/harbor.fixture.tsx"
+    },
+    "negative_control": {
+      "source": "baseline_commit",
+      "file": "detailDiscovery.test.tsx",
+      "expected_failed": 5,
+      "unchanged_unavailable_case_passed": 1,
+      "reason": "Action and timeline annotations absent on baseline."
+    },
+    "typecheck": {
+      "passed": true,
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.json --noEmit --preserveSymlinks",
+      "note": "preserveSymlinks is needed because this worktree shares node_modules; ordinary tsc reports TS2742 in unchanged Redux slices through the external dependency path."
+    },
+    "targeted_eslint": true,
+    "preview_ruff": true,
+    "design_page_pytest": {
+      "passed": 21
+    }
+  },
+  "preserved": {
+    "media_and_catalog_diff": [],
+    "shared_branch_unchanged": true,
+    "household_data_touched": false
+  },
+  "remaining_native_checks": [
+    "D-pad navigation to the details action and retained native focus after scrolling",
+    "Navigation back up from the explanation and bottom Back to library",
+    "VoiceView reading order and timeline description"
+  ],
+  "limitations": [
+    "React component focus events and a mocked scrollTo do not validate the Vega focus engine.",
+    "Browser layout approximates Yoga; the images are not native observations.",
+    "No claim of full CI, native build, playback or release validation."
+  ]
+}
