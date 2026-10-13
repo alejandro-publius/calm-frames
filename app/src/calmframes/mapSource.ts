@@ -113,7 +113,7 @@ export function fallsThroughToLocalMap(reason: RegistryRefusal): boolean {
 
 /** What the shelf says about a title while the index has not answered. */
 export const REGISTRY_WAITING =
-  'The list of checked titles has not answered yet, so the picture stays hidden.';
+  'The library is not responding. The picture stays hidden.';
 
 async function defaultFetchText(url: string): Promise<string | null> {
   try {

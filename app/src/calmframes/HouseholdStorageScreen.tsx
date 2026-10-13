@@ -3,15 +3,14 @@
  *
  * The library stays closed until the saved settings and the PIN gate have been
  * read, and it stays closed if that read or a later write fails. This screen
- * is what a person sees in both cases: one notice, the same shape as every
- * other state in the app, with a way to try again only when something has
- * actually failed. Nothing here offers a way past the record, because the
- * record is what decides what may play.
+ * shows the still wave opening while loading, or a notice and retry after an
+ * error. Nothing here offers a way past the record, which decides what may play.
  */
 
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import CalmButton from './CalmButton';
+import HarborOpening from './HarborOpening';
 import { CALM_COLORS, CALM_SPACE, scale } from './calmStyles';
 import StatusNotice from './StatusNotice';
 import { useUiCapture } from './uiCapture';
@@ -30,19 +29,15 @@ export default function HouseholdStorageScreen({
     failed ? HOUSEHOLD_ERROR_FRAME : HOUSEHOLD_LOADING_FRAME,
     failed ? 'household storage unavailable' : 'household storage loading',
   );
+  if (!failed) return <HarborOpening testID={testID} />;
   return (
     <View testID={testID} style={styles.screen}>
       <StatusNotice
         notice={{
-          title: failed
-            ? "Your settings couldn't be opened or saved"
-            : 'Loading your settings',
-          detail: failed
-            ? 'Your library stays closed until your settings and PIN are available. Try again.'
-            : 'Your settings and PIN stay on this television.',
-          tone: failed ? 'blocked' : 'waiting',
+          title: "Your settings couldn't be opened or saved",
+          detail: 'Your library stays closed until your settings and PIN are available. Try again.',
+          tone: 'blocked',
         }}>
-        {failed ? (
           <View style={styles.buttons}>
             <CalmButton
               testID={`${testID}-retry`}
@@ -51,7 +46,6 @@ export default function HouseholdStorageScreen({
               hasTVPreferredFocus
             />
           </View>
-        ) : null}
       </StatusNotice>
     </View>
   );

@@ -145,7 +145,7 @@ describe('useFlashGuard', () => {
     // rather than the "Not checked yet" one a failed map gets.
     expect(read('card-kind')).toBe('checking');
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Checking this title',
+      'Getting your story ready',
     );
     expect(screen.queryByTestId('calm-card-skip')).toBeNull();
   });
@@ -155,7 +155,7 @@ describe('useFlashGuard', () => {
     const { rerender } = render(<Guarded media={media} mapText={null} />);
     await settle();
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Not checked yet',
+      'This title is unavailable',
     );
 
     // A new map arrives and is still being fetched. The refusal belonged to
@@ -172,7 +172,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('checking');
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Checking this title',
+      'Getting your story ready',
     );
   });
 
@@ -232,7 +232,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('unverified');
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Not checked yet',
+      'This title is unavailable',
     );
   });
 
@@ -344,7 +344,7 @@ describe('useFlashGuard', () => {
     expect(read('status')).toBe('blocked');
     expect(read('covered')).toBe('covered');
     expect(screen.getByTestId('calm-card-detail').props.children).toMatch(
-      /stricter than the check/,
+      /current viewing settings/,
     );
   });
 

@@ -214,7 +214,7 @@ export function createPackagedLibrary(raw: string) {
   try {
     manifest = parseManifest(raw);
   } catch {
-    problem = 'The prepared library could not be checked.';
+    problem = 'The library could not be opened.';
   }
   const uri = (path: string) => `file:///pkg/${ASSET_ROOT}/${manifest.bundleId}/${path}`;
   const titles = (settings: HouseholdSettings): CatalogTitle[] => {

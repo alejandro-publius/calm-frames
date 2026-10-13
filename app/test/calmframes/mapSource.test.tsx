@@ -180,7 +180,7 @@ describe('the registry served it', () => {
     expect(screen.queryByTestId('kid-mode-home-poster-bursts')).toBeTruthy();
     expect(
       screen.getByTestId('kid-mode-home-poster-bursts').props.accessibilityLabel,
-    ).toContain('checked');
+    ).toBe('Test pattern');
 
     fireEvent.press(screen.getByTestId('kid-mode-home-poster-bursts'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
@@ -336,7 +336,7 @@ describe('the registry entry was tampered with', () => {
 
     await openParentArea();
     expect(screen.getByTestId('kid-mode-parent-reason-bursts').props.children).toContain(
-      'the picture stays hidden',
+      'The picture stays hidden',
     );
   });
 

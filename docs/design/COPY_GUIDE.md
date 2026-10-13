@@ -65,3 +65,12 @@ The preview's limitations and implementation links sit under “About this previ
 Read each complete native screen aloud. Remove duplicated labels, unexplained technical terms, and marketing language that interrupts the task. Check wrapping at the real TV font size, preserve remote focus and accessibility labels, and keep all state-dependent messages truthful.
 
 Carry this copy direction through onboarding, library, details, playback, PIN, settings, errors, and empty states while preserving the already approved visual design.
+
+## Current direction, Oct 13
+
+Write for someone choosing a story, not someone reviewing a build. Use
+"Original story", "Watch now" and specific error messages. Do not add
+"checked", "validated" or "verified" as reassurance in browsing labels,
+announcements or marketing copy. Explain viewing limits where parents choose
+settings; preserve the safety note. Internal status names and technical reports
+retain their precise meaning.

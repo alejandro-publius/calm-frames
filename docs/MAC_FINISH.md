@@ -1,5 +1,12 @@
 # Finish the polished simulator demo on the Mac
 
+**Oct 13 visual work:** the shared branch adds the water opening and replaces
+technical reassurance in app copy with natural viewing language. Include those
+changes before a native capture. Cloud work is also replacing the actual
+geometric Harbor footage: Alex's latest screenshot showed the playing film,
+not the loading screen. Do not record a final demo of that old movie. Fetch
+the next media milestone before rebuilding. Preserve current Mac artifacts.
+
 Design baseline: `2f15069`, with the Handlebars patch in `41c34fc` and the
 current demo assembler and recording plan. Sync the full shared branch. Use the current
 [completion checklist](COMPLETION_CHECKLIST.md) if later work changes this state.

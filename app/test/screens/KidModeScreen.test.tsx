@@ -149,7 +149,7 @@ describe('reaching Calm Frames', () => {
     expect(
       screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`).props
         .accessibilityLabel,
-    ).toContain('checked');
+    ).toBe('Calm gradient, Playback test');
   });
 
   it('opens the title, then hands the player the map it verified', async () => {

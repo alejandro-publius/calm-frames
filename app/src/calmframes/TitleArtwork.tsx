@@ -25,9 +25,9 @@ export function titlePresentation(title: CatalogTitle): TitlePresentation {
       description: 'This version adds practice holds to Harbor at set times so you can see how a hide works during playback. The holds are practice, not detected flashing.', art: 'harbor' };
   }
   if (concernsPackagedLibrary(title) && title.title === 'Harbor story (prepared locally)') {
-    return { name: 'Harbor', kind: 'Checked story', action: 'Watch now',
-      browseSynopsis: 'An original demo film following a small boat home through a quiet harbor.',
-      description: 'A small boat finds its way home through a quiet harbor. Our own demo film, prepared and checked the way a real title is, with no practice holds.', art: 'harbor-cinematic' };
+    return { name: 'Harbor', kind: 'Original story', action: 'Watch now',
+      browseSynopsis: 'Follow a small boat home through a quiet harbor.',
+      description: 'A small boat follows the evening light home through a quiet harbor. An original Calm Frames short.', art: 'harbor-cinematic' };
   }
   if (title.id === OFFLINE_TITLE_ID) {
     return { name: 'Calm gradient', kind: 'Playback test', action: 'Play',

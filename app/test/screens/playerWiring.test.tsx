@@ -265,7 +265,7 @@ describe('the player hands OK to Skip only while Skip is on screen', () => {
     // which has nothing to skip.
     renderPlayer({});
     await settle();
-    expect(cardKind()).toBe('Not checked yet');
+    expect(cardKind()).toBe('This title is unavailable');
     expect(screen.queryByTestId('calm-card-skip')).toBeNull();
     expect(chromeProps().skipOwnsSelect).toBe(false);
   });

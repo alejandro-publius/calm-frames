@@ -31,6 +31,7 @@ import { StackNavigationProp } from '@amazon-devices/react-navigation__stack';
 import React from 'react';
 import { BackHandler, Platform } from 'react-native';
 import HouseholdStorageScreen from '../calmframes/HouseholdStorageScreen';
+import HarborOpening from '../calmframes/HarborOpening';
 import {
   deviceHouseholdStorage,
   HouseholdStorage,
@@ -283,6 +284,14 @@ const KidModeScreen = ({
   // cannot land in another's.
   const profileLogs = useHideLogs();
   const [view, setView] = React.useState<KidModeView>('home');
+  const [arrivalFinished, setArrivalFinished] = React.useState(false);
+  // Consume launch once, including motion-off and first-run households. Returning
+  // from playback or changing a preference never replays the opening.
+  React.useEffect(() => {
+    if (saved.phase === 'ready' && (!saved.value || family.interfaceMotionEnabled !== true)) {
+      setArrivalFinished(true);
+    }
+  }, [saved.phase, saved.value, family.interfaceMotionEnabled]);
   const [openId, setOpenId] = React.useState<string | null>(null);
   const [lastOpenedId, setLastOpenedId] = React.useState<string | null>(null);
   const [focusGeneration, setFocusGeneration] = React.useState(0);
@@ -437,6 +446,10 @@ const KidModeScreen = ({
         settings={settings}
       />
     );
+  }
+
+  if (!arrivalFinished && family.interfaceMotionEnabled === true && view === 'home') {
+    return <HarborOpening motionEnabled active={interfaceActive} onFinish={() => setArrivalFinished(true)} />;
   }
 
   if (view === 'parent') {

@@ -54,9 +54,9 @@ in camelCase.
 | `TEXT` | `text` | `#F3E8D3` | Cream. Titles, headings, body text and control labels. |
 | `TEXT_DIM` | `textDim` | `#BDD0CF` | Supporting text: descriptions, helper lines, shelf qualifiers, the step counter, unavailable labels. |
 | `INK` | `ink` | `#17323C` | Text on saffron, and the fill of the focused primary action. |
-| `VERIFIED` | `verified` | `#7FD1A3` | The Checked badge. |
-| `PENDING` | `pending` | `#E2C275` | The Needs check badge, the bar on a waiting notice, and the non-red marks on the flash map strip in title details. |
-| `FAILED` | `failed` | `#F2BDB1` | The Check failed badge, the bar on a blocked notice, and the red marks on the flash map strip. A soft rose on purpose: a failed check is not an alarm. |
+| `VERIFIED` | `verified` | `#7FD1A3` | The Ready to watch badge. |
+| `PENDING` | `pending` | `#E2C275` | The Preparing badge, the bar on a waiting notice, and the non-red marks on the flash map strip in title details. |
+| `FAILED` | `failed` | `#F2BDB1` | The Unavailable badge, the bar on a blocked notice, and the red marks on the flash map strip. |
 | `COVER` | `cover` | `#000000` | The cover. `CoverLayer.tsx` paints the same `#000000` itself. |
 
 ## Contrast
@@ -90,12 +90,12 @@ Every pair Calm Frames draws text in.
 | `TEXT_DIM` | `BACKGROUND` | 8.78 | Synopsis, shelf qualifiers, the step counter, the brand line in setup. |
 | `TEXT_DIM` | `SURFACE` | 6.88 | Helper text in rows and cards, the practice plate, unavailable button labels. |
 | `TEXT_DIM` | `SURFACE_FOCUSED` | 5.92 | Helper text inside a focused or chosen row. The lowest pair. |
-| `FOCUS_RING` | `BACKGROUND` | 6.83 | The short label above the featured title, such as "Checked story". |
+| `FOCUS_RING` | `BACKGROUND` | 6.83 | The short label above the featured title, such as "Original story". |
 | `INK` | `FOCUS_RING` | 6.53 | The primary action at rest, such as Watch now. |
 | `TEXT` | `INK` | 11.10 | The primary action with focus on it. |
-| `VERIFIED` | `SURFACE` | 6.07 | The Checked badge. |
-| `PENDING` | `SURFACE` | 6.41 | The Needs check badge. |
-| `FAILED` | `SURFACE` | 6.67 | The Check failed badge. |
+| `VERIFIED` | `SURFACE` | 6.07 | The Ready to watch badge. |
+| `PENDING` | `SURFACE` | 6.41 | The Preparing badge. |
+| `FAILED` | `SURFACE` | 6.67 | The Unavailable badge. |
 
 `ACCENT_DARK`, `BORDER` and `COVER` never carry text. Saffron carries text
 only on the dark ground. The ten-foot test,
@@ -270,6 +270,29 @@ in notices, and never "prevents seizures" or "seizure-proof".
 
 ## Renders
 
+### Oct 13: water opening and natural copy
+
+The library calls Harbor an Original story. Browsing and screen-reader labels
+no longer announce that every title was checked. Loading, unavailable titles
+and parental controls describe what is happening and what the viewer can do.
+The playback rules and the safety note are preserved.
+
+The opening fills the screen with a close view of Harbor's water and a small
+Calm Frames wordmark. It cuts into the library once startup is complete. When
+interface motion is enabled, a single 1.4 second drift precedes that cut;
+reduced motion, Back, a background event or a failed preference query settles
+it. It never replays on returning from a story. Motion remains off by default.
+
+![Water opening, browser approximation](arrival/opening-browser.png)
+
+![Library with Original story and natural browsing copy, browser approximation](arrival/library-browser.png)
+
+[Opening sequence, browser approximation](arrival/opening-browser.mp4).
+These are browser renders of the app's component tree, not a Vega recording.
+The actual film shown after Watch now still needs its separate artwork update.
+
+### Earlier open-layout checkpoint
+
 These are Chromium renders of the actual rendered React Native component
 trees, with the bundled Inter faces and the real artwork, at 1920 by 1080. The
 household, focus and saving states are synthetic inputs. **They are not Vega
@@ -294,7 +317,7 @@ Earlier review images remain below as historical references:
   [`cinematic_design_2026-10-11.json`](../../results/cinematic_design_2026-10-11.json).
 - `polish/` was rendered from `54dab0b` on Oct 10, before the Oct 11 shelf
   copy. Its shelf says "Scheduled scene holds" and "Original story" where the
-  code now says "Practice holds" and "Checked story". Receipt:
+  later October 11 code said "Practice holds" and "Checked story". Receipt:
   [`design_polish_2026-10-10.json`](../../results/design_polish_2026-10-10.json).
 - `seamless/` was rendered on Oct 11 from the sources committed in `85c30f9`, on
   base `5316051`. It has the shelf copy but

@@ -126,7 +126,17 @@ It is presentation artwork, never a film frame or a signed playback hold.
 `eval/brand_assets_check.py` checks this asset independently; that check does
 not establish native screen composition or the behavior of transitions.
 
-## October 9 review
+## October 13 water opening
+
+`app/assets/image/tv/harbor-water.png` is the opening's background plate. It was
+generated with OpenAI image generation from our `harbor-cinematic.png`, asking
+for a close view of the same harbor's teal water and warm reflections. No text
+or interface is painted into the image. The app adds the mark and wordmark.
+It uses the repository's Apache-2.0 license. Its provenance and digest are in
+`media/LICENSES.csv` and the in-app credits include it. It is presentation art,
+not a frame from the old geometric movie or a signed playback still.
+
+## October 9 review of the mark
 
 The 512 px and 114 px listing icons and 48 px preview retain the closed eyes,
 smile and open halo. The tile uses full-opacity cream for both the name and

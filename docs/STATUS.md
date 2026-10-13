@@ -4,6 +4,18 @@ Updated Oct 13, 2026.
 
 ## 0. Where things stand
 
+### Oct 13: natural app copy and a water opening
+
+The app now says Original story and describes availability without repeating
+checked or verified in the viewing interface. Startup uses Harbor water art
+with an optional one-time drift, followed by the library. Browser previews are
+in [the design page](design/README.md). The platform splash hands over on layout.
+This source has not been rebuilt or observed on Vega from the cloud session.
+
+Alex's newest screenshot shows the old geometric **playing film**. Replacing
+that footage with artwork matching the rich Harbor scene is the next active
+task; the current media and earlier recordings still contain the old film.
+
 ### Oct 13: the next demo and submission story are prepared
 
 The demo assembler now keeps the complete native picture above its subtitles,
