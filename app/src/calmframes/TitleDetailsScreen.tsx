@@ -130,7 +130,7 @@ const TitleDetailsScreen = ({
               {demo ? <Text style={styles.summary}>The holds are added at set times to demonstrate how the picture changes while sound and captions continue. Harbor was created without flashing effects.</Text> : null}
               <Text style={styles.summary} testID={`${testID}-summary`}>
                 {intervals.length === 0
-                  ? 'The check found no segments above the flash limits. Checks can miss hazards.'
+                  ? 'This story plays without picture holds. Some flashing may still go undetected.'
                   : `${intervals.length} ${demo ? 'scheduled hold' : 'part'}${
                       intervals.length === 1 ? '' : 's'
                     } ${demo ? (intervals.length === 1 ? 'is included' : 'are included') : 'will be hidden'}, ${hiddenSeconds} second${

@@ -57,7 +57,7 @@ export interface Notice {
 export const NO_TITLES: Notice = {
   title: 'Nothing is ready to watch yet',
   detail:
-    'Every title is checked all the way through before it can show up here. A grown up can see what is being checked in parental controls.',
+    'New stories will appear here when they are ready. A grown up can open parental controls for more details.',
   tone: 'waiting',
 };
 
@@ -69,17 +69,17 @@ export const NO_TITLES: Notice = {
  * signed check, so it keeps working with no network at all.
  */
 export const BACKEND_UNREACHABLE: Notice = {
-  title: 'We cannot look for new titles',
+  title: 'New titles are unavailable',
   detail:
-    'The title that came with the app still plays, because its check is inside the app. Anything new stays off the shelf until this works again.',
+    'You can still watch the stories on this television. Try again later for new titles.',
   tone: 'waiting',
 };
 
 /** The backend is unreachable and there is not even a bundled title. */
 export const BACKEND_UNREACHABLE_EMPTY: Notice = {
-  title: 'We cannot look for new titles',
+  title: 'New titles are unavailable',
   detail:
-    'There is nothing checked on this device yet, so there is nothing to watch. Nothing plays here until it has been checked.',
+    'There are no stories on this television yet. Try again later.',
   tone: 'waiting',
 };
 
@@ -87,22 +87,22 @@ export const BACKEND_UNREACHABLE_EMPTY: Notice = {
 export const TITLE_PENDING: Notice = {
   title: 'Not ready to watch',
   detail:
-    'This title is not checked yet, so the picture stays hidden.',
+    'This title is still being prepared. The picture stays hidden for now.',
   tone: 'waiting',
 };
 
 /** A title whose check was there and did not pass. */
 export const TITLE_FAILED: Notice = {
-  title: 'This title did not pass its check',
-  detail: 'The picture stays hidden. Nothing plays until a check passes.',
+  title: 'This title is unavailable',
+  detail: 'This version cannot play in Calm Frames. The picture stays hidden.',
   tone: 'blocked',
 };
 
 /** A title whose check is too old to trust. */
 export const TITLE_STALE: Notice = {
-  title: 'This check is too old',
+  title: 'This title needs an update',
   detail:
-    'The picture stays hidden until the title is checked again. An old check may have been made using older limits.',
+    'The picture stays hidden until a newer version is available.',
   tone: 'blocked',
 };
 
@@ -147,13 +147,13 @@ export const PIN_SAVE_FAILED: Notice = {
 };
 
 export const KID_HOME_TITLE = 'Ready to watch';
-export const KID_HOME_SUBTITLE = 'Every title here has been checked all the way through.';
+export const KID_HOME_SUBTITLE = 'Find a story to settle into.';
 /** What the shelf calls the way in. The page itself is headed Parental controls. */
 export const PARENT_AREA_TITLE = 'Parental controls';
 export const PARENTAL_CONTROLS_TITLE = 'Parental controls';
 /** One line under the heading, saying what the page is for. */
 export const PARENTAL_CONTROLS_LEAD =
-  'Adjust viewing settings, review what was hidden, and check which titles are ready.';
+  'Manage viewing preferences, profiles and your library.';
 /** While a change is being written to the household record. */
 export const SAVING_CHANGES = 'Saving your changes…';
 
@@ -490,8 +490,8 @@ export const EXPLAINER_WORDS_PER_MINUTE = 150;
 
 export const EXPLAINER_TITLE = 'How Calm Frames works';
 export const EXPLAINER_LINES: string[] = [
-  'Calm Frames checks a whole title before it plays.',
-  'Parts flagged by the checks are hidden while sound and captions continue. The checks can miss flashing.',
+  'Calm Frames prepares each story before you watch.',
+  'Detected flashing is covered while sound and captions continue. Some flashing may go undetected.',
   'A card says what is coming, and what was hidden.',
   SAFETY_NOTE,
 ];
@@ -523,7 +523,8 @@ export function noticeForTitle(entry: CheckedTitle): Notice | null {
   // The reader's own wording for this rejection is more specific than the
   // general line, so it goes underneath rather than replacing it.
   return entry.reason && entry.reason !== base.detail
-    ? { ...base, detail: `${base.detail} ${entry.reason}` }
+    ? { ...base, detail: /picture stays hidden/i.test(entry.reason)
+        ? entry.reason : `${entry.reason} The picture stays hidden.` }
     : base;
 }
 

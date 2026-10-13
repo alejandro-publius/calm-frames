@@ -54,12 +54,12 @@ const ViewingPlan = ({
               {describeRoom(settings)}
             </Text>
             <Text style={styles.line} testID={`${testID}-maps`}>
-              {`Checked against ${mapNames.join(' and ')} thresholds.`}
+              {`Flash limits: ${mapNames.join(' and ')}.`}
             </Text>
           </View>
           <View style={styles.explanation}>
             <Text style={styles.line} testID={`${testID}-continuity`}>
-              When a part is hidden, a checked still or dark screen covers the picture
+              When a part is hidden, a still image or dark screen covers the picture
               while sound and captions continue.
             </Text>
             <Text style={styles.line}>

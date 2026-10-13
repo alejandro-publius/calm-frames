@@ -141,7 +141,7 @@ const PRESET_STEP_NOTE = 'You can change this later in parental controls.';
 
 /** Under the review of the household, before the library opens. */
 const REVIEW_NOTE =
-  'If this room needs a stricter check than a title has, that title waits until it is checked again.';
+  'Your library shows the titles available with these viewing settings.';
 
 /**
  * The notice beside the keypad.

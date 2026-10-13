@@ -19,7 +19,8 @@ import { UiFrame } from './uiCapture';
 export const HOUSEHOLD_LOADING_FRAME: UiFrame = {
   screen: 'household-loading',
   background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE],
+  // Presentation artwork is measured separately in the rendered opening clip.
+  surfaces: [],
 };
 
 export const HOUSEHOLD_ERROR_FRAME: UiFrame = {

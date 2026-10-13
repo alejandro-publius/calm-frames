@@ -980,7 +980,7 @@ describe('the player keeps its words apart', () => {
       },
       proof: () =>
         expect(screen.getByTestId('calm-card-title').props.children).toBe(
-          'Not checked yet',
+          'This title is unavailable',
         ),
     },
   ];

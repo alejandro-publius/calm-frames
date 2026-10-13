@@ -193,7 +193,7 @@ const KidHomeScreen = ({
                 const label = titlePresentation(entry.title);
                 return <TouchableOpacity disabled={saving || undefined} accessibilityState={saving ? { disabled: true } : undefined}
                   key={entry.title.id} testID={`${testID}-poster-${entry.title.id}`} accessibilityRole="button"
-                  accessibilityLabel={`${label.cardName ?? label.name}, ${label.kind ?? ''}, checked`} activeOpacity={1}
+                  accessibilityLabel={[label.cardName ?? label.name, label.kind].filter(Boolean).join(', ')} activeOpacity={1}
                   hasTVPreferredFocus={!saving && Boolean(returnFocusId) && entry.title.id === preferredId}
                   onFocus={() => setFocusedId(entry.title.id)} onBlur={() => setFocusedId(null)} onPress={() => {
                     if (!saving) { onOpen(entry); feedback.confirm(); }

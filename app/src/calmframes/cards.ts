@@ -64,10 +64,10 @@ export const NO_CARD: Card = { kind: 'none', title: '', announcement: '' };
  */
 export const CHECKING_CARD: Card = {
   kind: 'checking',
-  title: 'Checking this title',
-  detail: 'The picture stays hidden until the check passes.',
+  title: 'Getting your story ready',
+  detail: 'Your story will begin in a moment.',
   announcement:
-    'Checking this title. The picture stays hidden until the check passes.',
+    'Getting your story ready. Your story will begin in a moment.',
 };
 
 function secondsWord(milliseconds: number): string {
@@ -106,9 +106,9 @@ export function cardAt(
     const detail = options.blockedDetail ?? rejectionMessage(options.rejection);
     return {
       kind: 'unverified',
-      title: 'Not checked yet',
+      title: 'This title is unavailable',
       detail,
-      announcement: `Not checked yet. ${detail}`,
+      announcement: `This title is unavailable. ${detail}`,
     };
   }
 

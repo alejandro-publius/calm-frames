@@ -153,9 +153,9 @@ describe('FlashMapStrip', () => {
 describe('ShieldBadge', () => {
   it('says the status in words, not only in colour', () => {
     for (const [status, label] of [
-      ['verified', 'Checked'],
-      ['pending', 'Needs check'],
-      ['failed', 'Check failed'],
+      ['verified', 'Ready to watch'],
+      ['pending', 'Preparing'],
+      ['failed', 'Unavailable'],
     ] as const) {
       const { unmount } = render(<ShieldBadge status={status} />);
       expect(screen.getByTestId('shield-badge-label').props.children).toBe(
@@ -205,12 +205,12 @@ describe('the household viewing plan', () => {
       '55 inch television, seats about 8 feet away',
     );
     expect(screen.getByTestId('title-details-plan-maps').props.children).toBe(
-      'Checked against WCAG 2.3.1 thresholds.',
+      'Flash limits: WCAG 2.3.1.',
     );
     expect(
       screen.getByTestId('title-details-plan-continuity').props.children,
     ).toMatch(
-      /checked still or dark screen.*sound and captions continue/i,
+      /still image or dark screen.*sound and captions continue/i,
     );
     expect(screen.getByTestId('title-details-plan-limits').props.children).toBe(
       SAFETY_NOTE,
@@ -258,7 +258,7 @@ describe('the household viewing plan', () => {
       '65 inch television, seats about 6 feet away',
     );
     expect(screen.getByTestId('title-details-plan-maps').props.children).toBe(
-      'Checked against WCAG 2.3.1 and broadcast thresholds.',
+      'Flash limits: WCAG 2.3.1 and broadcast.',
     );
   });
 });
@@ -694,7 +694,7 @@ describe('ParentAreaScreen', () => {
     );
     expect(
       screen.getByTestId('parent-area-status-bad-label').props.children,
-    ).toBe('Check failed');
+    ).toBe('Unavailable');
   });
 
   it('says why a title is not on the shelf, in the same words as its page', () => {

@@ -50,6 +50,7 @@ REPO = Path(__file__).resolve().parent.parent
 ASSETS = [
     REPO / "app/assets/image/tv/harbor.png",
     REPO / "app/assets/image/tv/harbor-cinematic.png",
+    REPO / "app/assets/image/tv/harbor-water.png",
     REPO / "app/assets/image/tv/gradient.png",
     REPO / "app/assets/image/CalmFrames.png",
     REPO / "docs/brand/appstore-icon-512.png",

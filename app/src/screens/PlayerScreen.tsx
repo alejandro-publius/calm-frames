@@ -263,8 +263,8 @@ const PlayerScreen = ({
     card = rejectedPreparedRoute
       ? {
           ...UNGUARDED_CARD,
-          detail: 'This prepared title could not be checked. Return to the library.',
-          announcement: 'Not checked yet. This prepared title could not be checked. Return to the library.',
+          detail: 'This title cannot be opened. Return to the library.',
+          announcement: 'This title is unavailable. Return to the library.',
         }
       : UNGUARDED_CARD;
   }
