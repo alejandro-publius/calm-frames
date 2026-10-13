@@ -5,8 +5,9 @@ Deadline October 23 at noon Pacific. Vega Virtual Device exclusively.
 
 ## Finish line
 
-This is the single completion checklist. Finish the current motion and sound
-pass, then freeze new features and fix only failures of the acceptance checks.
+This is the single completion checklist. Alex subsequently selected a cinematic
+storybook visual pass, now combined with Claude's pushed improvements. Finish
+that presentation before the matching native build and final demo.
 The detailed evidence and outstanding decisions remain below.
 
 - [ ] Push the checked final app source and prepare its matching package with
@@ -39,6 +40,13 @@ item. No physical device, extra architecture, package-registry publication or
 new AWS deployment is needed to finish the simulator entry.
 
 ## Current design polish
+
+The cinematic library and title-details source is combined with Claude's work
+through `49f3a18`. Current browser previews and source hashes are linked from
+[the design page](design/README.md) and recorded in
+[`cinematic_design_2026-10-11.json`](../results/cinematic_design_2026-10-11.json).
+The new presentation artwork remains separate from the actual film and signed
+playback stills. These previews do not replace the Mac build below.
 
 The motion and sound implementation and cloud checks are recorded in
 [`interface_finish_2026-10-10_pacific.json`](../results/interface_finish_2026-10-10_pacific.json).

@@ -30,11 +30,11 @@ export const HOUSEHOLD_ERROR_FRAME: UiFrame = {
 
 export const KID_HOME_FRAME: UiFrame = {
   screen: 'kid-home', background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE],
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
 };
 export const KID_HOME_FOCUSED_FRAME: UiFrame = {
   screen: 'kid-home-focused', background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE, CALM_COLORS.SURFACE_FOCUSED],
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE_FOCUSED],
 };
 export const KID_HOME_PROFILES_FRAME: UiFrame = {
   screen: 'kid-home-profiles', background: CALM_COLORS.BACKGROUND,
@@ -66,7 +66,7 @@ export const KID_HOME_OFFLINE_FRAME: UiFrame = {
 export const TITLE_DETAILS_FRAME: UiFrame = {
   screen: 'title-details',
   background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE, CALM_COLORS.PENDING, CALM_COLORS.FAILED],
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING, CALM_COLORS.PENDING, CALM_COLORS.FAILED],
 };
 
 /**
@@ -78,7 +78,7 @@ export const TITLE_DETAILS_FRAME: UiFrame = {
 export const TITLE_DETAILS_BLOCKED_FRAME: UiFrame = {
   screen: 'title-details-blocked',
   background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE],
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
 };
 
 export const PARENT_LOCKED_FRAME: UiFrame = {

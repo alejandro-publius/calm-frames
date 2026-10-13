@@ -85,12 +85,15 @@ const TitleDetailsScreen = ({
       testID={testID}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      {onBack ? <CalmButton quiet testID={`${testID}-back`} label="Back to library" onPress={onBack} /> : null}
+      {onBack ? <View style={styles.navigation}><CalmButton quiet testID={`${testID}-back`} label="Back to library" onPress={onBack} /></View> : null}
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
-          <Text style={styles.eyebrow}>{presentation.kind}</Text>
-          <Text style={styles.title} testID={`${testID}-title`}>{presentation.name}</Text>
-          {presentation.description ? <Text style={styles.summary} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
+          <View style={styles.kicker}>
+            <View style={styles.kickerRule} accessible={false} />
+            <Text style={styles.eyebrow}>{presentation.kind}</Text>
+          </View>
+          <Text style={[styles.title, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
+          {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
           <View style={styles.buttons}>
             <CalmButton primary sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playable ? presentation.action : 'Unavailable'}
               accessibilityLabel={saving ? 'Saving your changes...' : playable ? `${presentation.action}: ${presentation.name}` : `${presentation.name} is unavailable. ${notice?.detail ?? ''}`}
@@ -99,7 +102,7 @@ const TitleDetailsScreen = ({
         </View>
         <View style={styles.heroArt}>
           <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
-            <TitleArtwork entry={entry} testID={`${testID}-artwork`} />
+            <TitleArtwork entry={entry} height={380} testID={`${testID}-artwork`} />
           </CalmArtworkMotion>
         </View>
       </View>
@@ -111,31 +114,37 @@ const TitleDetailsScreen = ({
       ) : (
         <>
           <View style={styles.checkSummary}>
-            <Text style={styles.section} accessibilityRole="header">{demo ? 'About this demo' : 'Before you watch'}</Text>
-            {demo ? <Text style={styles.summary}>The holds are added at set times to demonstrate how the picture changes while sound and captions continue. Harbor was created without flashing effects.</Text> : null}
-            <Text style={styles.summary} testID={`${testID}-summary`}>
-              {intervals.length === 0
-                ? 'The check found no segments above the flash limits. Checks can miss hazards.'
-                : `${intervals.length} ${demo ? 'scheduled hold' : 'part'}${
-                    intervals.length === 1 ? '' : 's'
-                  } ${demo ? (intervals.length === 1 ? 'is included' : 'are included') : 'will be hidden'}, ${hiddenSeconds} second${
-                    hiddenSeconds === 1 ? '' : 's'
-                  } in all.${demo ? '' : ' Sound and captions keep playing.'}`}
-            </Text>
+            <View style={styles.chapterHeading}>
+              <View style={styles.chapterRule} accessible={false} />
+              <Text style={styles.section} accessibilityRole="header">{demo ? 'About this demo' : 'Before you watch'}</Text>
+            </View>
+            <View style={styles.chapterContent}>
+              {demo ? <Text style={styles.summary}>The holds are added at set times to demonstrate how the picture changes while sound and captions continue. Harbor was created without flashing effects.</Text> : null}
+              <Text style={styles.summary} testID={`${testID}-summary`}>
+                {intervals.length === 0
+                  ? 'The check found no segments above the flash limits. Checks can miss hazards.'
+                  : `${intervals.length} ${demo ? 'scheduled hold' : 'part'}${
+                      intervals.length === 1 ? '' : 's'
+                    } ${demo ? (intervals.length === 1 ? 'is included' : 'are included') : 'will be hidden'}, ${hiddenSeconds} second${
+                      hiddenSeconds === 1 ? '' : 's'
+                    } in all.${demo ? '' : ' Sound and captions keep playing.'}`}
+              </Text>
 
-            {durationMs > 0 ? (
-              <View style={styles.block}>
-                <FlashMapStrip
-                  showCaption={false}
-                  intervals={intervals}
-                  durationMs={durationMs}
-                  testID={`${testID}-strip`}
-                />
-              </View>
-            ) : null}
+              {durationMs > 0 ? (
+                <View style={styles.timeline}>
+                  <Text style={styles.timelineLabel}>Picture timeline</Text>
+                  <FlashMapStrip
+                    showCaption={false}
+                    intervals={intervals}
+                    durationMs={durationMs}
+                    testID={`${testID}-strip`}
+                  />
+                </View>
+              ) : null}
+            </View>
           </View>
 
-          <View style={styles.block}>
+          <View style={styles.viewingChapter}>
             <ViewingPlan
               entry={entry}
               settings={settings}
@@ -145,7 +154,7 @@ const TitleDetailsScreen = ({
         </>
       )}
 
-      {onBack ? <View style={styles.block}><CalmButton quiet testID={`${testID}-back-bottom`} label="Back to library" onPress={onBack} /></View> : null}
+      {onBack ? <View style={styles.footer}><CalmButton quiet testID={`${testID}-back-bottom`} label="Back to library" onPress={onBack} /></View> : null}
     </ScrollView>
   );
 };
@@ -153,15 +162,27 @@ const TitleDetailsScreen = ({
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y) },
-  hero: { flexDirection: 'row', alignItems: 'center', gap: scale(64), marginVertical: scale(32) },
-  heroCopy: { width: scale(850) },
-  heroArt: { flex: 1 },
+  navigation: { marginBottom: scale(36) },
+  hero: { flexDirection: 'row', alignItems: 'center', gap: scale(56), padding: scale(48), borderRadius: scale(32), backgroundColor: CALM_COLORS.SURFACE },
+  heroCopy: { width: scale(650), paddingVertical: scale(8) },
+  heroArt: { flex: 1, padding: scale(8), borderRadius: scale(28), backgroundColor: CALM_COLORS.BACKGROUND },
+  kicker: { flexDirection: 'row', alignItems: 'center', gap: scale(20), marginBottom: scale(24) },
+  kickerRule: { width: scale(44), height: scale(3), backgroundColor: CALM_COLORS.FOCUS_RING },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING },
-  title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginVertical: scale(20) },
-  summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, marginTop: scale(20) },
+  title: { ...CALM_TEXT.feature, fontSize: scale(104), lineHeight: scale(116), color: CALM_COLORS.TEXT, marginBottom: scale(28) },
+  longTitle: { fontSize: scale(72), lineHeight: scale(84) },
+  synopsis: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM },
+  summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT },
-  checkSummary: { maxWidth: scale(1200), marginTop: scale(CALM_SPACE.TIGHT) },
+  checkSummary: { flexDirection: 'row', alignItems: 'flex-start', gap: scale(72), marginTop: scale(64), paddingHorizontal: scale(8) },
+  chapterHeading: { width: scale(344) },
+  chapterRule: { width: scale(56), height: scale(3), backgroundColor: CALM_COLORS.FOCUS_RING, marginBottom: scale(20) },
+  chapterContent: { flex: 1, gap: scale(24), paddingTop: scale(12) },
+  timeline: { marginTop: scale(8) },
+  timelineLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12) },
+  viewingChapter: { marginTop: scale(56) },
   block: { marginTop: scale(CALM_SPACE.BLOCK) },
-  buttons: { flexDirection: 'row', marginTop: scale(CALM_SPACE.BLOCK) },
+  buttons: { flexDirection: 'row', marginTop: scale(36) },
+  footer: { marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.SURFACE_FOCUSED },
 });
 export default TitleDetailsScreen;

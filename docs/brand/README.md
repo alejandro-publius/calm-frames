@@ -87,7 +87,7 @@ No Amazon font files are redistributed.
 
 ## Harbor presentation artwork
 
-The current `app/assets/image/tv/harbor.png` was generated with OpenAI's image
+The earlier `app/assets/image/tv/harbor.png` was generated with OpenAI's image
 generation on October 10, 2026 from our own prompt, with our own earlier vector
 illustration (`app/assets/brand/tv/harbor.svg`) as the visual reference. The
 supplied output is a 1942 x 809 PNG. Its provenance, the prompt summary and the
@@ -106,6 +106,25 @@ images keep their existing provenance. See
 [POLISH_REVIEW.md](../design/POLISH_REVIEW.md) for the design changes and their
 cloud evidence. A rebuilt Vega package, native composition and playback checks,
 and refreshed demo recordings are still required for this polish.
+
+### Cinematic Harbor artwork
+
+`app/assets/image/tv/harbor-cinematic.png` develops that illustration into the
+cinematic storybook direction selected for the app. It was generated with
+OpenAI image generation on October 11, 2026, using our existing `harbor.png`
+as its visual reference. The prompt asked for a coastal diorama with paper
+and clay textures, a saffron sailboat, a lighthouse at sunset, and quiet teal
+space on the left for the interface. The image contains no interface text.
+
+The supplied PNG is 1944 x 809 pixels. Its SHA-256 is
+`62cbb3b83a5112a414846b64df440b71b0c47a13a923e5c8c024265eb92d0b8c`.
+This new asset uses the repository's Apache-2.0 license; its source, credit,
+and hash are recorded separately in `media/LICENSES.csv`. The logo scripts
+do not reproduce it.
+
+It is presentation artwork, never a film frame or a signed playback hold.
+`eval/brand_assets_check.py` checks this asset independently; that check does
+not establish native screen composition or the behavior of transitions.
 
 ## October 9 review
 

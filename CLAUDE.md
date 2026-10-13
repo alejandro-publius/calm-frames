@@ -1,5 +1,12 @@
 # Calm Frames: rules for every session
 
+**Current visual pass.** Alex selected the cinematic storybook direction and
+asked to combine it with Claude's pushed improvements. The visual pass builds on
+`49f3a18`, preserves its sound and pipeline fixes, and refines the library and
+title details. This explicit request supersedes the earlier feature freeze for
+these visual changes. Inspect the current previews and receipt linked from
+`docs/design/README.md`; they are browser renders, not a new native package.
+
 **Where things stand, Sun Oct 11, 2026.** The branch `codex/signed-scene-holds-2026-09-29`
 (draft PR #1) carries everything since Sep 20; main has not moved. On Oct 11 the dependency
 audit was repaired (`xmldom` is an alias of `@xmldom/xmldom` 0.8.15, `lodash` is 4.18.1, every

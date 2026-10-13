@@ -4,6 +4,17 @@ Updated Sun Oct 11, 2026.
 
 ## 0. Where things stand
 
+### Cinematic design combined with Claude's updates
+
+The saved cinematic storybook pass now builds on `49f3a18`, preserving Claude's
+sound, pipeline and repository improvements. The library uses a panoramic
+Harbor scene, larger title and distinct artwork for the story and practice demo.
+Title details have a framed story opening and a labelled picture timeline.
+Current browser previews are on [the design page](design/README.md); the receipt
+is `results/cinematic_design_2026-10-11.json`. Only the affected design and
+integration checks were rerun for this pass. Native packaging and demo capture
+remain with the Mac workflow.
+
 ### Oct 11, later still: the other session's last two commits reviewed, and the cover proof corrected
 
 The other session's two newest commits (opt-in artwork motion and selection

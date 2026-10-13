@@ -142,6 +142,11 @@ Keep text in sentence case. Shorten the words before shrinking the type.
 `CALM_TYPE` in the same file holds older size-only tokens; new work uses the
 named `CALM_TEXT` styles above.
 
+The cinematic library and details use a larger title treatment within their
+hero composition, with smaller variants for long names. Their exact local
+sizes remain in `KidHomeScreen.tsx` and `TitleDetailsScreen.tsx`; the shared
+type roles above continue to govern the rest of the interface.
+
 ## Spacing and layout
 
 The design canvas is 1920 by 1080 units, and `scale()` turns units into dp
@@ -266,7 +271,21 @@ These are Chromium renders of the actual rendered React Native component
 trees, with the bundled Inter faces and the real artwork, at 1920 by 1080. The
 household, focus and saving states are synthetic inputs. **They are not Vega
 screenshots**, and browser text and flex layout can differ from the device.
-They come from two commits, and the code has moved since both:
+The current cinematic library and details combine the visual pass with Claude's
+work through `49f3a18`. Their exact source and image hashes are recorded in
+[`cinematic_design_2026-10-11.json`](../../results/cinematic_design_2026-10-11.json).
+The large Harbor scene is presentation artwork, not a frame from the film.
+Text and actions sit on solid teal; the artwork blends into its edge. The
+practice-hold demo retains its earlier illustration, so the two versions are
+visually distinct. These stills do not demonstrate the optional entry motion.
+
+![Current cinematic library with the illustrated Harbor feature and three distinct covers](cinematic/library-browser.png)
+
+![Current Harbor details with a large title, complete panorama and viewing information](cinematic/details-browser.png)
+
+[Viewing settings after scrolling](cinematic/details-bottom-browser.png).
+
+Earlier review images remain below as historical references:
 
 - `polish/` was rendered from `54dab0b` on Oct 10, before the Oct 11 shelf
   copy. Its shelf says "Scheduled scene holds" and "Original story" where the

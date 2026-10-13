@@ -52,9 +52,10 @@ TITLES = {
     # clip the timing harness and the Oct 9 AWS runs used.
     "app/assets/raw/benign-story/harbor.mp4": "Harbor story (benign demo)",
     "media/markers_packed.mp4": "The Calm Frames timing marker clip",
-    # The two presentation pictures the shelf and the details page draw. Neither
-    # is a film frame or a signed playback still.
+    # The presentation pictures for the shelf and details page are never film
+    # frames or signed playback stills.
     "app/assets/image/tv/harbor.png": "Harbor presentation artwork",
+    "app/assets/image/tv/harbor-cinematic.png": "Harbor cinematic presentation artwork",
     "app/assets/image/tv/gradient.png": "Calm gradient presentation artwork",
     # The two videos the app ships besides the Harbor story: the bundled calm
     # gradient, and the prepared Harbor rendition kid mode plays. Both are ours.

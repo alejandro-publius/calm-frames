@@ -1,4 +1,5 @@
 import React from 'react';
+import LinearGradient from '@amazon-devices/react-linear-gradient';
 import {
   ScrollView,
   StyleSheet,
@@ -162,9 +163,17 @@ const KidHomeScreen = ({
           ) : null}
           <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
             {featured && feature ? <View style={styles.hero}>
+              <View style={styles.heroArt} pointerEvents="none">
+                <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
+                  <TitleArtwork immersive height={460} entry={featured} testID={`${testID}-hero-art`} />
+                </CalmArtworkMotion>
+              </View>
+              <View style={styles.heroScrim} pointerEvents="none" />
+              <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
+                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.heroFade} />
               <View style={styles.heroCopy}>
-                <Text style={styles.eyebrow}>{feature.kind}</Text>
-                <Text style={styles.featureTitle}>{feature.name}</Text>
+                <View style={styles.kicker}><View style={styles.kickerRule} /><Text style={styles.eyebrow}>{feature.kind}</Text></View>
+                <Text style={[styles.featureTitle, feature.name.length > 18 ? styles.longFeatureTitle : null]}>{feature.name}</Text>
                 <Text style={styles.description}>{feature.browseSynopsis ?? feature.description}</Text>
                 <View style={styles.actions}>
                   <CalmButton primary sound={false} testID={`${testID}-watch`} label={feature.action} accessibilityLabel={`${feature.action}: ${feature.name}`}
@@ -172,13 +181,8 @@ const KidHomeScreen = ({
                   <CalmButton testID={`${testID}-more-info`} label="More info" onPress={() => onOpen(featured)} disabled={saving} />
                 </View>
               </View>
-              <View style={styles.heroArt}>
-                <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
-                  <TitleArtwork entry={featured} testID={`${testID}-hero-art`} />
-                </CalmArtworkMotion>
-              </View>
             </View> : null}
-            <Text style={styles.section} testID={`${testID}-title`}>Your library</Text>
+            <View style={styles.sectionHeading}><Text style={styles.section} testID={`${testID}-title`}>Your library</Text><View style={styles.sectionRule} /></View>
             <View style={styles.grid}>
               {listed.map((entry) => {
                 const focused = focusedId === entry.title.id;
@@ -191,7 +195,7 @@ const KidHomeScreen = ({
                     if (!saving) { onOpen(entry); feedback.confirm(); }
                   }}
                   style={[styles.poster, focused ? styles.posterFocused : null]}>
-                  <TitleArtwork compact entry={entry} testID={`${testID}-poster-image-${entry.title.id}`} />
+                  <TitleArtwork compact height={180} entry={entry} testID={`${testID}-poster-image-${entry.title.id}`} />
                   <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={2} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
                   {label.kind ? <Text style={styles.posterQualifier} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{label.kind}</Text> : null}
                 </TouchableOpacity>;
@@ -224,17 +228,24 @@ const styles = StyleSheet.create({
   navigation: { flexDirection: 'row', gap: scale(20) },
   navigationLink: { alignSelf: 'center' },
   scrollContent: { paddingBottom: scale(12) },
-  hero: { flexDirection: 'row', alignItems: 'center', gap: scale(64), marginBottom: scale(16) },
-  heroCopy: { width: scale(790) },
-  heroArt: { flex: 1 },
-  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, marginBottom: scale(12) },
-  featureTitle: { ...CALM_TEXT.feature, color: CALM_COLORS.TEXT, marginBottom: scale(20) },
-  description: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(32) },
+  hero: { minHeight: scale(460), justifyContent: 'center', borderRadius: scale(28), overflow: 'hidden', marginBottom: scale(24) },
+  heroCopy: { width: scale(690), paddingVertical: scale(24) },
+  heroArt: { position: 'absolute', top: 0, left: scale(430), right: 0 },
+  heroScrim: { position: 'absolute', left: 0, top: 0, bottom: 0, width: scale(700), backgroundColor: CALM_COLORS.BACKGROUND },
+  heroFade: { position: 'absolute', top: 0, bottom: 0, left: scale(700), width: scale(250) },
+  kicker: { flexDirection: 'row', alignItems: 'center', gap: scale(16), marginBottom: scale(12) },
+  kickerRule: { width: scale(44), height: scale(4), borderRadius: scale(2), backgroundColor: CALM_COLORS.FOCUS_RING },
+  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING },
+  featureTitle: { ...CALM_TEXT.feature, fontSize: scale(104), lineHeight: scale(116), letterSpacing: scale(-3), color: CALM_COLORS.TEXT, marginBottom: scale(16) },
+  longFeatureTitle: { fontSize: scale(64), lineHeight: scale(76), letterSpacing: scale(-1) },
+  description: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, marginBottom: scale(28), maxWidth: scale(660) },
   actions: { flexDirection: 'row', gap: scale(20) },
-  section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, marginBottom: scale(20) },
+  sectionHeading: { flexDirection: 'row', alignItems: 'center', gap: scale(28), marginBottom: scale(12) },
+  section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT },
+  sectionRule: { flex: 1, height: scale(2), backgroundColor: CALM_COLORS.SURFACE },
   banner: { marginBottom: scale(20) },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: scale(20) },
-  poster: { width: scale(560), padding: scale(6), borderRadius: scale(32), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: CALM_COLORS.BACKGROUND, backgroundColor: CALM_COLORS.BACKGROUND },
+  poster: { width: scale(560), padding: scale(6), paddingBottom: scale(14), borderRadius: scale(26), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: CALM_COLORS.BACKGROUND, backgroundColor: CALM_COLORS.BACKGROUND },
   posterFocused: { borderColor: CALM_COLORS.FOCUS_RING, backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
   posterTitle: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT, marginTop: scale(12) },
   posterQualifier: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
