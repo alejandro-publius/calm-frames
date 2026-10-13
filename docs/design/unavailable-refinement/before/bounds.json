@@ -1,0 +1,2494 @@
+{
+  "1080/bad-signature": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 574,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 674,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 786,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 812,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 440,
+      "y": 916,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 480,
+      "y": 1014,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1207,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1225,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/generic": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThis title is unavailable. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 574,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 674,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 786,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 812,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title is unavailable. The picture stays hidden.",
+      "x": 440,
+      "y": 916,
+      "width": 1040,
+      "height": 178
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title is unavailable. The picture stays hidden.",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 114
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is unavailable. The picture stays hidden.",
+      "x": 480,
+      "y": 1014,
+      "width": 968,
+      "height": 48
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1159,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1177,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/long-title": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nA quiet journey along the coast at sunset\nUnavailable\nThis title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "A quiet journey along the coast at sunset",
+      "x": 460,
+      "y": 532,
+      "width": 1000,
+      "height": 168
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 740,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 766,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 440,
+      "y": 870,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 480,
+      "y": 902,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 902,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 480,
+      "y": 968,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1161,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1179,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/missing": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nNot ready to watch\nThis title is still being prepared. The picture stays hidden for now.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 574,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 674,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 786,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 812,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "Not ready to watch\nThis title is still being prepared. The picture stays hidden for now.",
+      "x": 440,
+      "y": 916,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "Not ready to watch\nThis title is still being prepared. The picture stays hidden for now.",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "Not ready to watch",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is still being prepared. The picture stays hidden for now.",
+      "x": 480,
+      "y": 1014,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1207,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1225,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/stale": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title needs an update\nThis title needs an update. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 574,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 674,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 786,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 812,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title needs an update\nThis title needs an update. The picture stays hidden.",
+      "x": 440,
+      "y": 916,
+      "width": 1040,
+      "height": 178
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title needs an update\nThis title needs an update. The picture stays hidden.",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 114
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title needs an update",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title needs an update. The picture stays hidden.",
+      "x": 480,
+      "y": 1014,
+      "width": 968,
+      "height": 48
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1159,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1177,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/unknown-key": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 574,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 674,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 786,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 812,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.",
+      "x": 440,
+      "y": 916,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title comes from an unsupported source. The picture stays hidden.",
+      "x": 480,
+      "y": 1014,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1207,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1225,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/unparseable": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThe playback information could not be opened. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 574,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 674,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 786,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 812,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information could not be opened. The picture stays hidden.",
+      "x": 440,
+      "y": 916,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information could not be opened. The picture stays hidden.",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information could not be opened. The picture stays hidden.",
+      "x": 480,
+      "y": 1014,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1207,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1225,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/unsigned": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThis title is missing playback information. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 574,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 674,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 786,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 812,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title is missing playback information. The picture stays hidden.",
+      "x": 440,
+      "y": 916,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title is missing playback information. The picture stays hidden.",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is missing playback information. The picture stays hidden.",
+      "x": 480,
+      "y": 1014,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1207,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1225,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/viewing-settings": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nNot ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 574,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 674,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 786,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 812,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "Not ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 440,
+      "y": 916,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "Not ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "Not ready to watch",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 480,
+      "y": 1014,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1207,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1225,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/wrong-file": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 574,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 674,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 786,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 812,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 440,
+      "y": 916,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 480,
+      "y": 1014,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1207,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1225,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/wrong-version": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 240,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 266,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 400,
+      "y": 152,
+      "width": 1120,
+      "height": 360
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 843.765625,
+      "y": 574,
+      "width": 232.453125,
+      "height": 84
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 460,
+      "y": 674,
+      "width": 1000,
+      "height": 88
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 824.5625,
+      "y": 786,
+      "width": 270.859375,
+      "height": 98
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 862.5625,
+      "y": 812,
+      "width": 194.859375,
+      "height": 46
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 440,
+      "y": 916,
+      "width": 1040,
+      "height": 226
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 162
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 480,
+      "y": 948,
+      "width": 968,
+      "height": 54
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 480,
+      "y": 1014,
+      "width": 968,
+      "height": 96
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 813.65625,
+      "y": 1207,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 839.65625,
+      "y": 1225,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "720/bad-signature": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 383,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 306.5,
+      "y": 450,
+      "width": 667,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 524,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 541,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 293.5,
+      "y": 610,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 319.5,
+      "y": 675,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 804,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 816,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/generic": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThis title is unavailable. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 383,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 306.5,
+      "y": 450,
+      "width": 667,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 524,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 541,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title is unavailable. The picture stays hidden.",
+      "x": 293.5,
+      "y": 610,
+      "width": 693,
+      "height": 118
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title is unavailable. The picture stays hidden.",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 76
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is unavailable. The picture stays hidden.",
+      "x": 319.5,
+      "y": 675,
+      "width": 646,
+      "height": 32
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 772,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 784,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/long-title": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nA quiet journey along the coast at sunset\nUnavailable\nThis title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "A quiet journey along the coast at sunset",
+      "x": 306.5,
+      "y": 355,
+      "width": 667,
+      "height": 112
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 494,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 511,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 293.5,
+      "y": 580,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 319.5,
+      "y": 601,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 601,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information for this title appears to have changed. The picture stays hidden.",
+      "x": 319.5,
+      "y": 645,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 774,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 786,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/missing": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nNot ready to watch\nThis title is still being prepared. The picture stays hidden for now.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 383,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 306.5,
+      "y": 450,
+      "width": 667,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 524,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 541,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "Not ready to watch\nThis title is still being prepared. The picture stays hidden for now.",
+      "x": 293.5,
+      "y": 610,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "Not ready to watch\nThis title is still being prepared. The picture stays hidden for now.",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "Not ready to watch",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is still being prepared. The picture stays hidden for now.",
+      "x": 319.5,
+      "y": 675,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 804,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 816,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/stale": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title needs an update\nThis title needs an update. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 383,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 306.5,
+      "y": 450,
+      "width": 667,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 524,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 541,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title needs an update\nThis title needs an update. The picture stays hidden.",
+      "x": 293.5,
+      "y": 610,
+      "width": 693,
+      "height": 118
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title needs an update\nThis title needs an update. The picture stays hidden.",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 76
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title needs an update",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title needs an update. The picture stays hidden.",
+      "x": 319.5,
+      "y": 675,
+      "width": 646,
+      "height": 32
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 772,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 784,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/unknown-key": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 383,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 306.5,
+      "y": 450,
+      "width": 667,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 524,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 541,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.",
+      "x": 293.5,
+      "y": 610,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title comes from an unsupported source. The picture stays hidden.",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title comes from an unsupported source. The picture stays hidden.",
+      "x": 319.5,
+      "y": 675,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 804,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 816,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/unparseable": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThe playback information could not be opened. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 383,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 306.5,
+      "y": 450,
+      "width": 667,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 524,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 541,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information could not be opened. The picture stays hidden.",
+      "x": 293.5,
+      "y": 610,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information could not be opened. The picture stays hidden.",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information could not be opened. The picture stays hidden.",
+      "x": 319.5,
+      "y": 675,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 804,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 816,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/unsigned": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThis title is missing playback information. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 383,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 306.5,
+      "y": 450,
+      "width": 667,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 524,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 541,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title is missing playback information. The picture stays hidden.",
+      "x": 293.5,
+      "y": 610,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title is missing playback information. The picture stays hidden.",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is missing playback information. The picture stays hidden.",
+      "x": 319.5,
+      "y": 675,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 804,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 816,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/viewing-settings": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nNot ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 383,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 306.5,
+      "y": 450,
+      "width": 667,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 524,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 541,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "Not ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 293.5,
+      "y": 610,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "Not ready to watch\nThis title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "Not ready to watch",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title is unavailable with your current viewing settings. The picture stays hidden.",
+      "x": 319.5,
+      "y": 675,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 804,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 816,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/wrong-file": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 383,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 306.5,
+      "y": 450,
+      "width": 667,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 524,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 541,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 293.5,
+      "y": 610,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThe playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "The playback information belongs to a different version of this title. The picture stays hidden.",
+      "x": 319.5,
+      "y": 675,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 804,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 816,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/wrong-version": [
+    {
+      "id": "title-details",
+      "text": "Back to library\nOriginal story\nHarbor\nA small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.\nUnavailable\nThis title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.\nBack to library",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "id": "title-details-back",
+      "text": "Back to library",
+      "x": 160,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-label",
+      "text": "Back to library",
+      "x": 177,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "title-details-hero-motion",
+      "text": "",
+      "x": 266.5,
+      "y": 102,
+      "width": 747,
+      "height": 240
+    },
+    {
+      "id": "title-details-title",
+      "text": "Harbor",
+      "x": 562.515625,
+      "y": 383,
+      "width": 154.96875,
+      "height": 56
+    },
+    {
+      "id": "title-details-description",
+      "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+      "x": 306.5,
+      "y": 450,
+      "width": 667,
+      "height": 58
+    },
+    {
+      "id": "title-details-play",
+      "text": "Unavailable",
+      "x": 550.046875,
+      "y": 524,
+      "width": 179.90625,
+      "height": 65
+    },
+    {
+      "id": "title-details-play-label",
+      "text": "Unavailable",
+      "x": 575.046875,
+      "y": 541,
+      "width": 129.90625,
+      "height": 31
+    },
+    {
+      "id": "title-details-notice",
+      "text": "This title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 293.5,
+      "y": 610,
+      "width": 693,
+      "height": 150
+    },
+    {
+      "id": "title-details-notice-announcement",
+      "text": "This title is unavailable\nThis title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 108
+    },
+    {
+      "id": "title-details-notice-title",
+      "text": "This title is unavailable",
+      "x": 319.5,
+      "y": 631,
+      "width": 646,
+      "height": 36
+    },
+    {
+      "id": "title-details-notice-detail",
+      "text": "This title needs a newer version of Calm Frames. The picture stays hidden.",
+      "x": 319.5,
+      "y": 675,
+      "width": 646,
+      "height": 64
+    },
+    {
+      "id": "title-details-back-bottom",
+      "text": "Back to library",
+      "x": 542.765625,
+      "y": 804,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "title-details-back-bottom-label",
+      "text": "Back to library",
+      "x": 559.765625,
+      "y": 816,
+      "width": 160.453125,
+      "height": 31
+    }
+  ]
+}

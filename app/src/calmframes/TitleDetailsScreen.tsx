@@ -6,8 +6,8 @@
  *
  * A title that did not verify gets this page too, and that is the point of it.
  * Instead of the strip and a summary it shows one notice saying what happened
- * and that the picture stays hidden, and the play control is drawn as
- * unavailable rather than left out, so nobody hunts for it. There is no state
+ * and that the picture stays hidden, with a focused way back to the library.
+ * No playback action is offered for an unchecked title. There is no state
  * of this screen where an unverified title can be started.
  */
 
@@ -83,6 +83,29 @@ const TitleDetailsScreen = ({
   const scrollRef = React.useRef<ScrollView>(null);
   const infoTop = React.useRef(0);
 
+  if (notice) {
+    // Remove only an exact repeated heading, never a distinct rejection reason.
+    const repeatedHeading = `${notice.title}. `;
+    const displayNotice = notice.detail.startsWith(repeatedHeading)
+      ? { ...notice, detail: notice.detail.slice(repeatedHeading.length) }
+      : notice;
+    return (
+      <ScrollView testID={testID} style={styles.screen}
+        contentContainerStyle={[styles.content, styles.unavailableContent]}>
+        <View style={styles.unavailableBody}>
+          <Text style={styles.title} accessibilityRole="header" testID={`${testID}-title`}>
+            {presentation.name}
+          </Text>
+          <StatusNotice testID={`${testID}-notice`} notice={displayNotice} />
+          {onBack ? <View style={styles.unavailableAction}>
+            <CalmButton primary hasTVPreferredFocus testID={`${testID}-back`}
+              label="Back to library" onPress={onBack} />
+          </View> : null}
+        </View>
+      </ScrollView>
+    );
+  }
+
   return (
     <ScrollView
       ref={scrollRef}
@@ -109,9 +132,9 @@ const TitleDetailsScreen = ({
           <Text style={[styles.title, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
           <View style={styles.buttons}>
-            <CalmButton primary sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playable ? presentation.action : 'Unavailable'}
-              accessibilityLabel={saving ? 'Saving your changes...' : playable ? `${presentation.action}: ${presentation.name}` : `${presentation.name} is unavailable. ${notice?.detail ?? ''}`}
-              disabled={!playable || saving} hasTVPreferredFocus onPress={() => onPlay(entry)} />
+            <CalmButton primary sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : presentation.action}
+              accessibilityLabel={saving ? 'Saving your changes...' : `${presentation.action}: ${presentation.name}`}
+              disabled={saving} hasTVPreferredFocus onPress={() => onPlay(entry)} />
           </View>
         </View>
       </View>
@@ -131,12 +154,7 @@ const TitleDetailsScreen = ({
         </View>
       ) : null}
 
-      {notice ? (
-        <View style={styles.block}>
-          <StatusNotice testID={`${testID}-notice`} notice={notice} />
-        </View>
-      ) : (
-        <>
+      <>
           <View style={styles.checkSummary}>
             <View style={styles.chapterHeading}>
               <Text style={styles.section} accessibilityRole="header">{demo ? 'About this demo' : 'Before you watch'}</Text>
@@ -177,8 +195,7 @@ const TitleDetailsScreen = ({
               testID={`${testID}-plan`}
             />
           </View>
-        </>
-      )}
+      </>
 
       {onBack ? <View style={styles.footer}><View><CalmButton quiet testID={`${testID}-back-bottom`} label="Back to library" onPress={onBack} /></View></View> : null}
     </ScrollView>
@@ -209,7 +226,9 @@ const styles = StyleSheet.create({
   timeline: { marginTop: scale(8) },
   timelineLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12), textAlign: 'center' },
   viewingChapter: { width: '100%', maxWidth: scale(1040), marginTop: scale(56) },
-  block: { width: '100%', maxWidth: scale(1040), marginTop: scale(CALM_SPACE.BLOCK) },
+  unavailableContent: { flexGrow: 1, justifyContent: 'center' },
+  unavailableBody: { width: '100%', maxWidth: scale(1040), alignItems: 'center', gap: scale(24) },
+  unavailableAction: { marginTop: scale(16) },
   buttons: { flexDirection: 'row', justifyContent: 'center', marginTop: scale(24) },
   footer: { width: '100%', maxWidth: scale(1040), alignItems: 'center', marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.SURFACE_FOCUSED },
 });

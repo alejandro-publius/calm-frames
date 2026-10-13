@@ -228,7 +228,7 @@ describe('the household viewing plan', () => {
         />,
       );
       expect(screen.queryByTestId('title-details-plan')).toBeNull();
-      fireEvent.press(screen.getByTestId('title-details-play'));
+      expect(screen.queryByTestId('title-details-play')).toBeNull();
       expect(onPlay).not.toHaveBeenCalled();
     },
   );
@@ -397,9 +397,7 @@ describe('TitleDetailsScreen', () => {
         onPlay={onPlay}
       />,
     );
-    const play = screen.getByTestId('title-details-play');
-    expect(play.props.accessibilityState).toEqual({ disabled: true });
-    fireEvent.press(play);
+    expect(screen.queryByTestId('title-details-play')).toBeNull();
     expect(onPlay).not.toHaveBeenCalled();
     expect(
       screen.getByTestId('title-details-notice-title').props.children,
@@ -422,7 +420,7 @@ describe('TitleDetailsScreen', () => {
         onPlay={onPlay}
       />,
     );
-    fireEvent.press(screen.getByTestId('title-details-play'));
+    expect(screen.queryByTestId('title-details-play')).toBeNull();
     expect(onPlay).not.toHaveBeenCalled();
     expect(
       screen.getByTestId('title-details-notice-title').props.children,
@@ -439,7 +437,7 @@ describe('TitleDetailsScreen', () => {
 
     const onPlay = jest.fn();
     render(<TitleDetailsScreen entry={stale} onPlay={onPlay} />);
-    fireEvent.press(screen.getByTestId('title-details-play'));
+    expect(screen.queryByTestId('title-details-play')).toBeNull();
     expect(onPlay).not.toHaveBeenCalled();
     expect(
       screen.getByTestId('title-details-notice-title').props.children,

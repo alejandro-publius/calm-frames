@@ -21,6 +21,11 @@ and a plain-language timeline key. Its before/after browser previews and focused
 check receipt cover the isolated design branch; native focus behavior still
 needs a Mac/Vega observation.
 
+The following [unavailable-state refinement](unavailable-refinement/README.md)
+keeps the title, specific reason and focused Back action together in the initial
+viewport. It removes the unused artwork space and repeated status wording,
+while preserving the playable details layout. Comparisons cover 1080p and 720p.
+
 ## Identity
 
 A peaceful monk inside a rounded frame, with one open halo. Deep teal ground,

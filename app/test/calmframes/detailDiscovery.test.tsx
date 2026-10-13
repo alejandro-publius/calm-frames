@@ -64,7 +64,7 @@ describe('details discovery', () => {
     const view = render(<TitleDetailsScreen entry={{ ...harbor(), status: 'failed' }} onPlay={onPlay} />);
     expect(view.queryByTestId('title-details-show-info')).toBeNull();
     expect(view.queryByTestId('title-details-strip')).toBeNull();
-    fireEvent.press(view.getByTestId('title-details-play'));
+    expect(view.queryByTestId('title-details-play')).toBeNull();
     expect(onPlay).not.toHaveBeenCalled();
   });
 
