@@ -213,6 +213,9 @@ original verification report was found in that archive or its nested source ZIP.
   the mixed audio peak. Encoder checks use benign synthetic fixtures only.
   [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) is the fresh recording plan;
   [SUBMISSION_COPY.md](SUBMISSION_COPY.md) is the copy-ready project story.
+- [x] The checked [submission packet](submission/README.md) is saved on the
+  shared branch with labelled browser previews, brand assets, copy and the next
+  capture plan. It contains no new native package or finished video.
 - [x] Synced the shared source through `9afacc0` and pushed the simulator-focused
   preparation tools as `52ecf14`; the GitHub branch hash matched.
 - [x] App and Python suites, final preparation guards, TypeScript, SBOM comparison,

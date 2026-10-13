@@ -21,6 +21,12 @@ hash matched GitHub, but the two original library verification reports were not
 inside it. Native packaging, recording and release work remain open in the
 completion checklist. Receipt: `results/submission_preparation_2026-10-13.json`.
 
+The checked [submission packet](submission/README.md) is included on the shared
+branch because the managed environment blocked the GitHub release-upload host.
+It contains writing, design previews, brand assets and the next capture plan;
+the existing draft release's earlier package and video were not replaced.
+Source and artifact details: `results/github_handoff_2026-10-13.json`.
+
 ### Oct 13: the new dependency Audit failure fixed
 
 The shared design commit passed hosted implementation CI. Its Audit job found

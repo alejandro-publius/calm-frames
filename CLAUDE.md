@@ -1,5 +1,16 @@
 # Calm Frames: rules for every session
 
+**Latest finishing checkpoint, Oct 13.** The open cinematic layout is pushed as
+`2f15069`, the Handlebars audit fix as `41c34fc`, and the improved demo assembler
+and submission copy as `7444d21`. The next step is the Mac workflow in
+`docs/MAC_FINISH.md`, after reconciling any local work. The new recording plan
+uses short Inter subtitle cues and keeps the complete native picture visible.
+`docs/submission/README.md` links the checked draft packet. Its gallery contains
+browser previews; there is no new native package or final demo. The strict
+library gate still needs two original reports, neither found in the recovered
+earlier review archive. Alex asked to avoid repeating the whole project review;
+continue from the current receipts and run checks appropriate to actual changes.
+
 **Current visual pass.** Alex selected the cinematic storybook direction and
 asked to combine it with Claude's pushed improvements. The latest refinement
 builds on `b882d39`: remove the large text panels, extend the Harbor scene to
@@ -7,7 +18,7 @@ the screen edge and use quiet secondary actions. This explicit request supersede
 these visual changes. Inspect the current previews and receipt linked from
 `docs/design/README.md`; they are browser renders, not a new native package.
 
-**Where things stand, Sun Oct 11, 2026.** The branch `codex/signed-scene-holds-2026-09-29`
+**Earlier checkpoint, Sun Oct 11, 2026.** The branch `codex/signed-scene-holds-2026-09-29`
 (draft PR #1) carries everything since Sep 20; main has not moved. On Oct 11 the dependency
 audit was repaired (`xmldom` is an alias of `@xmldom/xmldom` 0.8.15, `lodash` is 4.18.1, every
 remaining finding sorted by the device bundle in `scripts/audit_exceptions.toml`, both groups
