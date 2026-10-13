@@ -3,3 +3,21 @@ aws-cdk-lib==2.270.0
 constructs==10.8.1
 # constructs is pinned to the version this stack was tested with. aws-cdk-lib
 # accepts any 10.x, and "any 10.x" is how a template changes under you.
+#
+# The three below are aws-cdk-lib's own requirements, which it declares as
+# ranges, pinned to what the Oct 9, 2026 deploy ran with (this checkout's venv,
+# frozen). Each one changes something a range lets move under a fresh install.
+# Keep the lines above exactly as they are: the CDK bill of materials refers to
+# a requirement by its line number.
+aws-cdk.cloud-assembly-schema==54.24.0
+# Writes the cloud assembly manifest and declares the oldest CDK CLI that can
+# read it. 54.24.0 declares 2.1142.0, the CLI pinned in scripts/aws_guard.sh.
+# aws-cdk-lib 2.270.0 accepts >=54.11.0,<55.0.0, and on Oct 9, 2026 a fresh
+# install on the hosted Audit runner took a newer 54.x declaring 2.1144.0,
+# which failed the CLI pin test there while the frozen venv here passed it.
+jsii==1.140.0
+# The Python to JavaScript bridge every construct runs through. aws-cdk-lib
+# accepts >=1.139.0,<2.0.0; the schema above needs >=1.140.0.
+aws-cdk.asset-node-proxy-agent-v6==2.1.3
+# A Lambda layer asset whose hash can appear in the template. aws-cdk-lib
+# accepts >=2.1.2,<3.0.0.

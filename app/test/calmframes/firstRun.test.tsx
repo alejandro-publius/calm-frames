@@ -15,10 +15,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
-import {
-  EXPLAINER_LINES,
-  SAFETY_NOTE,
-} from '../../src/calmframes/copy';
+import { EXPLAINER_LINES, SAFETY_NOTE } from '../../src/calmframes/copy';
 import FirstRunScreen, {
   FirstRunResult,
 } from '../../src/calmframes/FirstRunScreen';
@@ -45,6 +42,23 @@ const type = (digits: string) => {
 };
 
 describe('the first run', () => {
+  it('corrects a digit in both PIN entries before saving the intended PIN', () => {
+    const onDone = renderFirstRun();
+    // Empty correction is harmless and does not leave the PIN step.
+    fireEvent.press(screen.getByTestId('first-run-key-delete'));
+    type('139');
+    fireEvent.press(screen.getByTestId('first-run-key-delete'));
+    expect(screen.getByTestId('first-run-entered').props.children).toBe('**');
+    type('57');
+    type('139');
+    fireEvent.press(screen.getByTestId('first-run-key-delete'));
+    type('57');
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    fireEvent.press(screen.getByTestId('first-run-done'));
+    expect(attemptPin(onDone.mock.calls[0][0].gate, '1357', 0).ok).toBe(true);
+  });
+
   it('asks for the PIN, the preset, the room and then explains itself', () => {
     const onDone = renderFirstRun();
 
@@ -53,7 +67,7 @@ describe('the first run', () => {
     );
     type('2468');
     expect(screen.getByTestId('first-run-title').props.children).toBe(
-      'Type the PIN again',
+      'Confirm your PIN',
     );
     type('2468');
 
@@ -99,7 +113,9 @@ describe('the first run', () => {
     type('2222');
 
     // Back to the first step, saying why, with nothing carried over.
-    expect(screen.getByTestId('first-run-title').props.children).toBe('Choose a PIN');
+    expect(screen.getByTestId('first-run-title').props.children).toBe(
+      'Choose a PIN',
+    );
     expect(screen.getByTestId('first-run-notice-title').props.children).toBe(
       'Those two did not match',
     );
@@ -126,15 +142,86 @@ describe('the first run', () => {
     expect(onDone.mock.calls[0][0].settings).toEqual(DEFAULT_SETTINGS);
   });
 
+  it('reviews the chosen household before opening the checked library', () => {
+    const onDone = renderFirstRun();
+    type('5555');
+    type('5555');
+    fireEvent.press(screen.getByTestId('first-run-preset-broadcast'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    fireEvent.press(screen.getByTestId('first-run-tv-65'));
+    fireEvent.press(screen.getByTestId('first-run-seat-72'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+
+    expect(screen.getByTestId('first-run-review-preset').props.children).toBe(
+      'Broadcast',
+    );
+    expect(screen.getByTestId('first-run-review-room').props.children).toBe(
+      '65 inch television, seats about 6 feet away',
+    );
+    expect(screen.getByTestId('first-run-done-label').props.children).toBe(
+      'Open library',
+    );
+    expect(onDone).not.toHaveBeenCalled();
+  });
+
+  it('revises room and preset choices without repeating the PIN or saving early', () => {
+    const onDone = jest.fn<void, [FirstRunResult]>();
+    const newSalt = jest.fn(() => 'a-fresh-salt');
+    render(<FirstRunScreen onDone={onDone} newSalt={newSalt} rounds={ROUNDS} />);
+    type('2468');
+    type('2468');
+    fireEvent.press(screen.getByTestId('first-run-preset-broadcast'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    fireEvent.press(screen.getByTestId('first-run-tv-65'));
+    fireEvent.press(screen.getByTestId('first-run-seat-72'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+
+    fireEvent.press(screen.getByLabelText('Back to TV and seating'));
+    expect(screen.getByTestId('first-run-tv-65').props.accessibilityState.checked).toBe(true);
+    expect(screen.getByTestId('first-run-seat-72').props.accessibilityState.checked).toBe(true);
+    expect(screen.getByTestId('first-run-tv-65').props.hasTVPreferredFocus).toBe(true);
+    fireEvent.press(screen.getByTestId('first-run-tv-85'));
+    fireEvent.press(screen.getByTestId('first-run-seat-48'));
+
+    fireEvent.press(screen.getByLabelText('Back to viewing preset'));
+    expect(screen.getByTestId('first-run-preset-broadcast').props.accessibilityState.checked).toBe(true);
+    expect(screen.getByTestId('first-run-preset-broadcast').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.queryByTestId('first-run-back')).toBeNull();
+    fireEvent.press(screen.getByTestId('first-run-preset-extra-cautious'));
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    expect(screen.getByTestId('first-run-tv-85').props.accessibilityState.checked).toBe(true);
+    expect(screen.getByTestId('first-run-seat-48').props.accessibilityState.checked).toBe(true);
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    expect(screen.getByTestId('first-run-review-preset').props.children).toBe('Extra cautious');
+    expect(screen.getByTestId('first-run-review-room').props.children).toBe(
+      '85 inch television, seats about 4 feet away',
+    );
+    expect(onDone).not.toHaveBeenCalled();
+    expect(newSalt).not.toHaveBeenCalled();
+
+    fireEvent.press(screen.getByTestId('first-run-done'));
+    expect(onDone).toHaveBeenCalledTimes(1);
+    expect(newSalt).toHaveBeenCalledTimes(1);
+    const result = onDone.mock.calls[0][0];
+    expect(result.settings).toEqual({
+      preset: 'extra-cautious',
+      tvDiagonalIn: 85,
+      seatDistanceIn: 48,
+    });
+    expect(attemptPin(result.gate, '2468', 0).ok).toBe(true);
+  });
+
   it('says what the room setting can and cannot do before asking for it', () => {
     renderFirstRun();
     type('5555');
     type('5555');
     fireEvent.press(screen.getByTestId('first-run-next'));
     expect(screen.getByTestId('first-run-title').props.children).toBe(
-      'Your television and your sofa',
+      'Your TV and seating',
     );
-    expect(JSON.stringify(screen.toJSON())).toContain('can only add hidden parts');
+    expect(JSON.stringify(screen.toJSON())).toContain(
+      'can only add hidden parts',
+    );
   });
 
   it('carries the approved sentence in the explainer, and nothing stronger', () => {
@@ -195,7 +282,7 @@ describe('the first run', () => {
     type('5555');
 
     expect(
-      screen.getByLabelText('How strict should it be').props.accessibilityRole,
+      screen.getByLabelText('Choose a viewing preset').props.accessibilityRole,
     ).toBe('radiogroup');
     expect(
       screen.getByTestId('first-run-preset-wcag').props.accessibilityState,
@@ -206,11 +293,11 @@ describe('the first run', () => {
 
     fireEvent.press(screen.getByTestId('first-run-next'));
 
-    expect(screen.getByLabelText('Television size').props.accessibilityRole).toBe(
-      'radiogroup',
-    );
     expect(
-      screen.getByLabelText('How far away the sofa is').props.accessibilityRole,
+      screen.getByLabelText('Television size').props.accessibilityRole,
+    ).toBe('radiogroup');
+    expect(
+      screen.getByLabelText('Viewing distance').props.accessibilityRole,
     ).toBe('radiogroup');
     expect(
       screen.getByTestId('first-run-tv-55').props.accessibilityState,
@@ -255,7 +342,9 @@ describe('the first run', () => {
 
     const chipText = () =>
       TV_DIAGONAL_CHOICES_IN.map((inches) =>
-        String(screen.getByTestId(`first-run-tv-${inches}-label`).props.children),
+        String(
+          screen.getByTestId(`first-run-tv-${inches}-label`).props.children,
+        ),
       );
     const before = chipText();
 

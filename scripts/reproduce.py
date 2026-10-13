@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -32,7 +33,11 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 OUT = REPO / "build" / "reproduce"
-PY = str(REPO / ".venv" / "bin" / "python")
+# The repository .venv when there is one, PY when the caller names one, and
+# otherwise the interpreter running this script, so a clone with no .venv
+# still gets a clear failure from the check and not a missing file.
+_VENV = REPO / ".venv" / "bin" / "python"
+PY = os.environ.get("PY") or (str(_VENV) if _VENV.exists() else sys.executable)
 
 # Fields that move every run and say nothing about the result.
 VOLATILE = {"recorded_utc", "source_events"}

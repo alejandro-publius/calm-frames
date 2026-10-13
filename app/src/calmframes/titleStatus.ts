@@ -39,8 +39,19 @@ export interface CatalogTitle {
   title: string;
   uri: string;
   posterUrl?: string;
-  /** SHA-256 of the file that will play, from the published catalog entry. */
+  /** SHA-256 of the analyzed source. Prepared renditions retain its map. */
   sha256: string;
+  /** Exact prepared file, separately checked when the package is built. */
+  renditionSha256?: string;
+  /** Verified alignment of prepared media time with its analyzed source. */
+  renditionStartOffsetMs?: number;
+  /** Captions delivered separately from the prepared picture. */
+  textTrack?: Array<{
+    label: string;
+    language: string;
+    uri: string;
+    mimeType: 'text/vtt';
+  }>;
   /** Map text per profile name, as it was written. Missing is not an error. */
   maps?: Partial<Record<string, string | null>>;
   durationMs?: number;
@@ -63,7 +74,8 @@ export interface CheckedTitle {
   verifiedProfiles: string[];
 }
 
-export interface CheckTitleOptions extends Omit<VerifyMapOptions, 'expectedSha256'> {
+export interface CheckTitleOptions
+  extends Omit<VerifyMapOptions, 'expectedSha256'> {
   settings: HouseholdSettings;
 }
 
@@ -92,7 +104,8 @@ export function checkTitle(
     if (!verdict.ok) {
       // A map that is simply not there yet is pending. A map that is there and
       // wrong is a failure, and the parent area says which.
-      const status: TitleStatus = verdict.reason === 'missing' ? 'pending' : 'failed';
+      const status: TitleStatus =
+        verdict.reason === 'missing' ? 'pending' : 'failed';
       return {
         title,
         status,
@@ -111,7 +124,10 @@ export function checkTitle(
     mapCoversRoom(map, options.settings),
   );
   const segments = unionSegments(verified);
-  const hiddenMs = verified.reduce((total, map) => Math.max(total, map.hiddenMs), 0);
+  const hiddenMs = verified.reduce(
+    (total, map) => Math.max(total, map.hiddenMs),
+    0,
+  );
   const checkedAtMs = verified.reduce(
     (latest, map) => Math.max(latest, map.createdUtcMs),
     0,
@@ -122,7 +138,7 @@ export function checkTitle(
       title,
       status: 'pending',
       reason:
-        'This room is stricter than the check that was run, so this title has to be checked again before kid mode can show it.',
+        'This title is unavailable with your current viewing settings.',
       segments,
       hiddenMs,
       checkedAtMs,
@@ -156,11 +172,11 @@ export function kidModeTitles(checked: CheckedTitle[]): CheckedTitle[] {
 export function badgeLabel(status: TitleStatus): string {
   switch (status) {
     case 'verified':
-      return 'Checked';
+      return 'Ready to watch';
     case 'pending':
-      return 'Being checked';
+      return 'Preparing';
     case 'failed':
     default:
-      return 'Check failed';
+      return 'Unavailable';
   }
 }

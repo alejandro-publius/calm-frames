@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-13",
+  "scope": "Natural viewing copy and water artwork at startup",
+  "parent_commit": "83bc1f07c520ed4571c70f63d8418c2d65e5682e",
+  "app_tests": {
+    "passed": 263,
+    "suites": 14
+  },
+  "typescript": "passed",
+  "eslint": "passed with existing warnings",
+  "python_brand_and_design_tests": {
+    "passed": 23
+  },
+  "ui_palette": {
+    "screens": 36,
+    "wcag": "passed",
+    "broadcast": "passed"
+  },
+  "browser_motion": {
+    "seconds": 3.4,
+    "wcag": "passed",
+    "broadcast": "passed",
+    "description": "React Native host-tree browser approximation: 1.4 second single artwork drift, cut to library; not a Vega recording"
+  },
+  "native_package_built": false,
+  "native_observed": false,
+  "playable_film": "Separate cinematic film change is in progress. This checkpoint does not replace the old Harbor media.",
+  "assets": {
+    "app/assets/image/tv/harbor-water.png": {
+      "sha256": "3771f44bb89e52edd364db7be196c48b10671bebc4c29b75b55a559f47e9284f",
+      "bytes": 1813560
+    },
+    "docs/design/arrival/opening-browser.png": {
+      "sha256": "ee16133cbe402c17610173c51396488b93cb9baec98f52ea0ff4a7ffdc327de6",
+      "bytes": 1535589
+    },
+    "docs/design/arrival/library-browser.png": {
+      "sha256": "67b2861ffaaa9c4fc3b188451997bc2bc79baeb5a14ad4b4f62518372c95113e",
+      "bytes": 966547
+    },
+    "docs/design/arrival/opening-browser.mp4": {
+      "sha256": "9a72f457d0a13b7ce7ae1b34482002314697d718755d6a171b6fd59f02990ca7",
+      "bytes": 726931
+    }
+  },
+  "limits": [
+    "Startup remains still until saved preferences are known. Motion is off by default and skipped for reduced motion, unknown accessibility state, backgrounding or Back.",
+    "No change to map signature, media identity or refusal decisions.",
+    "Only visible copy and announcements use viewing language; technical evidence keeps its precise terminology."
+  ]
+}

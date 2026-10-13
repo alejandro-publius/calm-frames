@@ -12,23 +12,26 @@ It is not a medical device.
 
 ## Install
 
-**This package is not on npm yet.** Nothing has been published under the name
-`@calm-frames/flash-guard`, so the command below does not work today and is
-written down for when it does. Until then, take the package straight from the
-repository:
+**This package is not on npm yet.** Install a local tarball from a reviewed
+checkout of the repository. Run the first two commands from the repository
+root, then install the tarball into your Vega app:
 
-```
-npm install github:alejandro-publius/calm-frames#main --workspace-root  # the hook/ folder
-```
-
-or copy `hook/src` into your app, which is all the package is.
-
-```
-npm install @calm-frames/flash-guard   # once it is published
+```sh
+CALM_HOOK_PACK_DIR="$(mktemp -d)"
+npm pack ./hook --offline --ignore-scripts --pack-destination "$CALM_HOOK_PACK_DIR"
+cd /absolute/path/to/your-vega-app
+npm install "$CALM_HOOK_PACK_DIR/calm-frames-flash-guard-0.1.0.tgz" --ignore-scripts
 ```
 
 Peers: `react`, `react-native`, `@amazon-devices/react-native-w3cmedia` and
-`@amazon-devices/kepler-media-controls`.
+`@amazon-devices/kepler-media-controls`. They must be installed in the consuming
+app. A GitHub-root npm install cannot select this monorepo's `hook/` subfolder.
+
+The tarball contains the public TypeScript/TSX sources, their mirrored engine
+dependencies, the README and Apache licence. Metro uses the `react-native`
+source entry; TypeScript uses the matching `types` entry. The consumer must
+transform TypeScript/TSX through its React Native tooling. This is not a package
+that plain Node can execute with `require()`.
 
 ## Use
 
@@ -49,10 +52,17 @@ const guard = useFlashGuard({
 });
 
 // Between the video surface and the captions view.
-<CoverLayer visible={guard.covered} mode={guard.coverMode} />
+<CoverLayer visible={guard.covered} mode={guard.coverMode} imageUri={guard.coverImageUri} />
 // Above both.
 <CalmCard card={guard.card} onSkip={guard.skipTo} />
 ```
+
+Maps produced with scene holds carry checked JPEGs inside their signed payload.
+The guard selects one only when its bounds contain the entire scheduled cover.
+Pass `coverImageUri` to the cover to keep the scene's preceding context visible
+while sound and captions continue. The image is fully opaque and sits over a
+black backing; absent images, rejected maps, uncertain playback and image-load
+failures retain that backing. The countdown and seek rules are unchanged.
 
 Then two rules for the rest of the app:
 
@@ -73,7 +83,7 @@ new SafeMediaControlHandler({
 ```
 
 `docs/INTEGRATION_DIFF.md` in the Calm Frames repository is that change made
-against a clean `vega-video-sample` checkout: 32 lines added across four files.
+against a clean `vega-video-sample` checkout: <!--n results/integration_diff.json:lines_added -->32<!--/n--> lines added and <!--n results/integration_diff.json:lines_replaced -->2<!--/n--> replaced across <!--n results/integration_diff.json:files_touched -->4<!--/n--> files, plus the two catalog fields and the key constant the app supplies.
 
 ## What it needs from the app
 
@@ -126,3 +136,27 @@ the WCAG 2.3.1 general and red flash thresholds and writes a signed sidecar.
 
 Apache-2.0. The mirrored engine under `src/engine` is generated from
 `app/src/calmframes` by `hook/tools/sync.mjs`; edit it there.
+
+## Check the package from a checkout
+
+With Node 22 and the app's existing dependencies installed, run from the
+repository root:
+
+```sh
+npm --prefix hook run test:package
+npm --prefix hook run check:package
+```
+
+The second command packs this checkout, installs that exact tarball in a clean
+temporary consumer with scripts disabled and registry access disabled, then
+links only the four current app runtime peers and React types. It checks all
+public exports through the installed package's TypeScript resolution, resolves
+the source entry and relative imports with the installed Metro resolver and
+React Native defaults, and transforms every packed TS/TSX file with the app's
+React Native Babel preset.
+The file allowlist rejects keys, media, fixtures, development tools and private
+app files. Both the tarball and temporary consumer are removed afterward.
+
+This checks source-package installation with the current Vega peer types, not
+a fresh registry install, native-device behavior, future peer compatibility or
+npm publication. The check and sync tools are checkout-only and are not packed.

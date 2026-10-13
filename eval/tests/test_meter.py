@@ -197,7 +197,7 @@ def test_one_strobe_is_one_leak():
 def test_two_strobes_with_a_quiet_gap_are_two_leaks():
     def two_bursts():
         time_ms = 0.0
-        for burst in range(2):
+        for _burst in range(2):
             for frame, offset in square_wave(8, 240, 1.5):
                 yield frame, time_ms + offset
             time_ms += 1500.0

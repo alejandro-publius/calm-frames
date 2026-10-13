@@ -16,44 +16,38 @@ import { CALM_COLORS } from './calmStyles';
 import { CardKind } from './cards';
 import { UiFrame } from './uiCapture';
 
+export const HOUSEHOLD_LOADING_FRAME: UiFrame = {
+  screen: 'household-loading',
+  background: CALM_COLORS.BACKGROUND,
+  // Presentation artwork is measured separately in the rendered opening clip.
+  surfaces: [],
+};
+
+export const HOUSEHOLD_ERROR_FRAME: UiFrame = {
+  screen: 'household-error',
+  background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE],
+};
+
 export const KID_HOME_FRAME: UiFrame = {
-  screen: 'kid-home',
-  background: CALM_COLORS.BACKGROUND,
-  // BORDER is the block a poster sits in before its picture is there.
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.BORDER],
+  screen: 'kid-home', background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
 };
-
 export const KID_HOME_FOCUSED_FRAME: UiFrame = {
-  screen: 'kid-home-focused',
-  background: CALM_COLORS.BACKGROUND,
-  surfaces: [
-    CALM_COLORS.SURFACE_FOCUSED,
-    CALM_COLORS.BORDER,
-    CALM_COLORS.SURFACE,
-  ],
+  screen: 'kid-home-focused', background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE_FOCUSED],
 };
-
-/**
- * The shelf with the family picker on it.
- *
- * The chips carry the chosen fill, which neither a focused poster nor the
- * offline banner adds on its own, so this one frame is what the shelf paints
- * in all three of those states once a household has profiles. An empty shelf
- * never shows the picker, so it is not one of them.
- *
- * The order is the order the shelf paints them when the kid who is watching is
- * first in the row. Another kid watching moves the chosen fill along the row
- * and changes nothing else: the same colours, in a different order, and the
- * flash check reads the colours.
- */
 export const KID_HOME_PROFILES_FRAME: UiFrame = {
-  screen: 'kid-home-profiles',
-  background: CALM_COLORS.BACKGROUND,
-  surfaces: [
-    CALM_COLORS.SURFACE_FOCUSED,
-    CALM_COLORS.SURFACE,
-    CALM_COLORS.BORDER,
-  ],
+  screen: 'kid-home-profiles', background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
+};
+export const KID_HOME_PROFILES_FOCUSED_FRAME: UiFrame = {
+  screen: 'kid-home-profiles-focused', background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE_FOCUSED],
+};
+export const KID_HOME_PICKER_FRAME: UiFrame = {
+  screen: 'kid-home-picker', background: CALM_COLORS.BACKGROUND,
+  surfaces: [CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
 };
 
 /** Nothing has been checked yet, so the shelf is one notice. */
@@ -67,13 +61,13 @@ export const KID_HOME_EMPTY_FRAME: UiFrame = {
 export const KID_HOME_OFFLINE_FRAME: UiFrame = {
   screen: 'kid-home-offline',
   background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.BORDER],
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
 };
 
 export const TITLE_DETAILS_FRAME: UiFrame = {
   screen: 'title-details',
   background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.PENDING, CALM_COLORS.FAILED],
+  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING, CALM_COLORS.PENDING, CALM_COLORS.FAILED],
 };
 
 /**
@@ -195,15 +189,23 @@ export const VIDEO_BEHIND = 'video';
  * What the player paints over the video.
  *
  * With the cover on, the app paints the whole screen black. With it off, the
- * app paints only the card, and the video shows through.
+ * app paints only the card, and the video shows through. A labelled demo also
+ * paints its practice plate the whole time it plays. The plate is the card's
+ * colour, so it adds a surface only when there is no card on screen.
  */
-export function playerFrame(covered: boolean, cardKind: CardKind): UiFrame {
+export function playerFrame(
+  covered: boolean,
+  cardKind: CardKind,
+  plate = false,
+): UiFrame {
   const surfaces: string[] = [];
-  if (cardKind !== 'none') {
+  if (cardKind !== 'none' || plate) {
     surfaces.push(CALM_COLORS.SURFACE);
   }
   return {
-    screen: `player-${covered ? 'covered' : 'clear'}-${cardKind}`,
+    screen: `player-${covered ? 'covered' : 'clear'}-${cardKind}${
+      plate ? '-plate' : ''
+    }`,
     background: covered ? CALM_COLORS.COVER : VIDEO_BEHIND,
     surfaces,
   };
@@ -211,6 +213,8 @@ export function playerFrame(covered: boolean, cardKind: CardKind): UiFrame {
 
 /** Every frame the app can show, for the flashmap run. */
 export const ALL_UI_FRAMES: UiFrame[] = [
+  HOUSEHOLD_LOADING_FRAME,
+  HOUSEHOLD_ERROR_FRAME,
   FIRST_RUN_PIN_FRAME,
   FIRST_RUN_PRESET_FRAME,
   FIRST_RUN_ROOM_FRAME,
@@ -220,6 +224,8 @@ export const ALL_UI_FRAMES: UiFrame[] = [
   KID_HOME_EMPTY_FRAME,
   KID_HOME_OFFLINE_FRAME,
   KID_HOME_PROFILES_FRAME,
+  KID_HOME_PROFILES_FOCUSED_FRAME,
+  KID_HOME_PICKER_FRAME,
   TITLE_DETAILS_FRAME,
   TITLE_DETAILS_BLOCKED_FRAME,
   PARENT_LOCKED_FRAME,
@@ -228,9 +234,18 @@ export const ALL_UI_FRAMES: UiFrame[] = [
   PARENT_PROFILE_FRAME,
   PARENT_REMOVE_KID_FRAME,
   CREDITS_FRAME,
+  // The map is still being checked, so the picture is hidden behind a card.
+  playerFrame(true, 'checking'),
   playerFrame(false, 'none'),
   playerFrame(false, 'countdown'),
   playerFrame(true, 'covering'),
   playerFrame(false, 'after'),
   playerFrame(true, 'unverified'),
+  // The labelled Harbor demo, which carries its practice plate throughout.
+  playerFrame(true, 'checking', true),
+  playerFrame(false, 'none', true),
+  playerFrame(false, 'countdown', true),
+  playerFrame(true, 'covering', true),
+  playerFrame(false, 'after', true),
+  playerFrame(true, 'unverified', true),
 ];

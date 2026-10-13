@@ -76,7 +76,7 @@ export function describeHideEntry(entry: HideLogEntry): string {
   const clock = `${twoDigits(when.getHours())}:${twoDigits(when.getMinutes())}`;
   const what =
     entry.cause === 'unverified'
-      ? 'kept the picture hidden, title not checked'
+      ? 'kept the picture hidden, title unavailable'
       : `hid ${formatDuration(entry.durationMs)}`;
   const where =
     entry.cause === 'unverified' ? '' : ` at ${formatPosition(entry.positionMs)}`;

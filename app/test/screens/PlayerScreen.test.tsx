@@ -15,11 +15,17 @@
  * test here reports a missing cover and a card that is not there.
  */
 
-import { render, screen } from '@testing-library/react-native';
+import { act, render, screen } from '@testing-library/react-native';
 import React from 'react';
 // babel-jest hoists the jest.mock calls below above this import, so the player
 // is loaded with the stand ins already in place.
 import PlayerScreen from '../../src/screens/PlayerScreen';
+import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
+import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import { focusManager } from '../../src/utils/FocusManager';
+
+const mockPreBuffer = jest.fn();
+let mockVideoError: (error: boolean) => void;
 
 jest.mock('../../src/w3cmedia/mediacontrols/VideoPlayerUI', () => 'VideoPlayerUI');
 jest.mock('../../src/services/bif/bifService', () => ({
@@ -44,12 +50,16 @@ jest.mock('../../src/utils/VideoHandler', () => ({
       _player: unknown,
       data: unknown,
       setIsVideoInitialized: (value: boolean) => void,
+      _setEnded: unknown,
+      setError: (value: boolean) => void,
     ) {
       this.data = data;
       this.setInitialized = setIsVideoInitialized;
+      mockVideoError = setError;
     }
 
     preBufferVideo() {
+      mockPreBuffer();
       this.setInitialized(true);
     }
 
@@ -74,7 +84,7 @@ const data = {
 };
 
 function renderPlayer(params: Record<string, unknown>) {
-  render(
+  return render(
     <PlayerScreen
       navigation={{ goBack: jest.fn() } as never}
       route={{ params: { data, ...params } } as never}
@@ -83,11 +93,35 @@ function renderPlayer(params: Record<string, unknown>) {
 }
 
 describe('the player with nothing to check', () => {
+  beforeEach(() => mockPreBuffer.mockClear());
+
+  it('rejects substituted prepared media before initializing the player, even with a harness flag', () => {
+    const title = packagedLibrary.titles(DEFAULT_SETTINGS)[0];
+    renderPlayer({ data: { ...data, id: title.id, uri: 'https://example.invalid/substituted.mp4' },
+      guarded: { sha256: title.sha256, maps: title.maps, settings: DEFAULT_SETTINGS },
+      coverTest: 'layering' });
+    expect(mockPreBuffer).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('kepler-video-surface-view')).toBeNull();
+    expect(screen.getByTestId('calm-card-title').props.children).toBe('This title is unavailable');
+  });
+  it('restores registered focus after a rejected prepared route', () => {
+    const restore = jest.spyOn(focusManager, 'restoreFocus');
+    const title = packagedLibrary.titles(DEFAULT_SETTINGS)[0];
+    const { unmount } = renderPlayer({
+      data: { ...data, id: title.id, uri: 'https://example.invalid/substituted.mp4' },
+      guarded: { sha256: title.sha256, maps: title.maps, settings: DEFAULT_SETTINGS },
+      focusId: title.id,
+    });
+    unmount();
+    expect(restore).toHaveBeenCalledWith(`player_return_${title.id}`);
+    restore.mockRestore();
+  });
+
   it('keeps the picture hidden and says why', () => {
     renderPlayer({});
     expect(screen.getByTestId('calm-frames-cover')).toBeTruthy();
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Not checked yet',
+      'This title is unavailable',
     );
     expect(screen.getByTestId('calm-card-detail').props.children).toMatch(
       /picture stays hidden/,
@@ -98,8 +132,18 @@ describe('the player with nothing to check', () => {
     renderPlayer({ guarded: { sha256: 'a'.repeat(64) } });
     expect(screen.getByTestId('calm-frames-cover')).toBeTruthy();
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Not checked yet',
+      'This title is unavailable',
     );
+  });
+
+  it('removes the stale guard card and keeps the cover on playback failure', () => {
+    // Native Harbor failed with the countdown card still above the error.
+    renderPlayer({});
+    expect(screen.getByTestId('calm-card-title')).toBeTruthy();
+    act(() => mockVideoError(true));
+    expect(screen.queryByTestId('calm-card-title')).toBeNull();
+    expect(screen.getByTestId('error-boundary-label')).toBeTruthy();
+    expect(screen.getByTestId('calm-frames-cover')).toBeTruthy();
   });
 
   it('leaves a measurement run alone', () => {

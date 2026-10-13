@@ -32,6 +32,37 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
+import CalmCard from '../calmframes/CalmCard';
+import { concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
+import {
+  benignStoryCard,
+  BENIGN_STORY_LABEL,
+  bundledTitlePublicKey,
+  isBundledBenignStory,
+} from '../calmframes/benignStory';
+import { cardOffersSkip, NO_CARD } from '../calmframes/cards';
+import { playChime } from '../calmframes/chimeSound';
+import CornerPlate from '../calmframes/CornerPlate';
+import CoverLayer from '../calmframes/CoverLayer';
+import {
+  showDefaultCaptions,
+  TextTrackListLike,
+} from '../calmframes/defaultCaptions';
+import { buildCoverIntervals } from '../calmframes/coverSchedule';
+import { recordHide } from '../calmframes/hideLogStore';
+import { OFFLINE_PUBLIC_KEY_BASE64 } from '../calmframes/offlineTitle';
+import {
+  mustStayHidden,
+  playbackAccess,
+  UNGUARDED_CARD,
+} from '../calmframes/playerAccess';
+import { SafeMediaControlHandler } from '../calmframes/SafeMediaControlHandler';
+import { beacon } from '../calmframes/timingLog';
+import { useUiCapture } from '../calmframes/uiCapture';
+import { playerFrame } from '../calmframes/uiFrames';
+import { useChimeCue } from '../calmframes/useChimeCue';
+import { useCoverHarness } from '../calmframes/useCoverHarness';
+import { useFlashGuard } from '../calmframes/useFlashGuard';
 import BufferingWindow from '../components/BufferingWindow';
 import {
   AppStackParamList,
@@ -46,25 +77,6 @@ import { FrameImageSource } from '../services/bif/FrameImageSource';
 import { COLORS } from '../styles/Colors';
 import { VideoHandler } from '../utils/VideoHandler';
 import VideoPlayerUI from '../w3cmedia/mediacontrols/VideoPlayerUI';
-import { beacon } from '../calmframes/timingLog';
-import CalmCard from '../calmframes/CalmCard';
-import CoverLayer from '../calmframes/CoverLayer';
-import { buildCoverIntervals } from '../calmframes/coverSchedule';
-import { OFFLINE_PUBLIC_KEY_BASE64 } from '../calmframes/offlineTitle';
-import { SafeMediaControlHandler } from '../calmframes/SafeMediaControlHandler';
-import { NO_CARD } from '../calmframes/cards';
-import {
-  mustStayHidden,
-  playbackAccess,
-  UNGUARDED_CARD,
-} from '../calmframes/playerAccess';
-import { useCoverHarness } from '../calmframes/useCoverHarness';
-import { useFlashGuard } from '../calmframes/useFlashGuard';
-import { recordHide } from '../calmframes/hideLogStore';
-import { useChimeCue } from '../calmframes/useChimeCue';
-import { playChime } from '../calmframes/chimeSound';
-import { useUiCapture } from '../calmframes/uiCapture';
-import { playerFrame } from '../calmframes/uiFrames';
 import { ShakaPlayer } from '../w3cmedia/shakaplayer/ShakaPlayer';
 
 const BACKGROUND_STATE: AppStateStatus = 'background';
@@ -118,6 +130,8 @@ const PlayerScreen = ({
   const [videoPlayElapsedTimeM, setVideoPlayElapsedTimeM] =
     React.useState<number>(0);
   const timer = useRef<null | ReturnType<typeof setTimeout> | number>(null);
+  const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const leaving = useRef(false);
 
   const videoRef = useRef<VideoPlayer | null>(null);
   const player = useRef<ShakaPlayer | null>(null);
@@ -135,6 +149,28 @@ const PlayerScreen = ({
     beacon('PlayerScreen.videoInitialized', { isVideoInitialized });
   }, [isVideoInitialized]);
 
+  // Captions on from the start when the title ships a caption track, once
+  // per player; after that the caption menu decides. VideoHandler adds the
+  // title's tracks before the media loads, so they exist by the time the
+  // player says it is initialized. See defaultCaptions.ts.
+  const captionsDefaulted = useRef(false);
+  React.useEffect(() => {
+    if (!isVideoInitialized || captionsDefaulted.current) {
+      return;
+    }
+    captionsDefaulted.current = true;
+    const shown = showDefaultCaptions(
+      videoRef.current?.textTracks as TextTrackListLike | undefined,
+      data.textTrack,
+    );
+    if (shown !== CAPTION_DISABLE_ID) {
+      console.log(
+        `[PlayerScreen.tsx] - captions - on by default, track ${shown}`,
+      );
+      setCaptionID(shown);
+    }
+  }, [isVideoInitialized, data.textTrack]);
+
   const cover = useCoverHarness(videoRef, {
     mode: coverTest,
     intervals: coverIntervals,
@@ -146,17 +182,32 @@ const PlayerScreen = ({
   // Kid mode. The guard checks the map again here, right before play, so a
   // title that passed on the shelf cannot play on a map that has since gone
   // missing or gone stale.
-  const guardedParams = route.params.guarded;
+  const preparedRoute = concernsPackagedLibrary(data);
+  const preparedRouteAccepted = preparedRoute && packagedLibrary.acceptsRoute(data, route.params.guarded);
+  const rejectedPreparedRoute = preparedRoute && !preparedRouteAccepted;
+  const guardedParams = rejectedPreparedRoute ? undefined : route.params.guarded;
+  const bundledIdentity = {
+    id: data.id,
+    uri: data.uri,
+    sha256: guardedParams?.sha256,
+  };
+  const benignDemo = isBundledBenignStory(bundledIdentity);
   const guard = useFlashGuard({
     mediaRef: videoRef,
     mapTexts: guardedParams?.maps,
     mapUrls: guardedParams?.mapUrls,
     expectedSha256: guardedParams?.sha256 ?? '',
-    publicKeyBase64: OFFLINE_PUBLIC_KEY_BASE64,
+    publicKeyBase64: preparedRouteAccepted ? packagedLibrary.publicKeyBase64 : bundledTitlePublicKey(
+      bundledIdentity,
+      OFFLINE_PUBLIC_KEY_BASE64,
+    ),
+    cardCopy: benignDemo ? benignStoryCard : undefined,
     settings: guardedParams?.settings,
     durationMs: guardedParams?.durationMs,
     // How far the rendition about to play sits from the source the map
-    // describes. The bundled title plays its source, so it has none.
+    // describes. The bundled Harbor demo plays its pre-covered rendition,
+    // whose verification.json records an offset of 0 for every preset, so
+    // nothing is passed for it.
     renditionStartOffsetMs: guardedParams?.renditionStartOffsetMs,
     titleId: guardedParams?.titleId ?? data.id,
     titleName: data.title,
@@ -165,12 +216,17 @@ const PlayerScreen = ({
     // fires this once per interval it actually covered; everything added here
     // is what the guard has no way of knowing: whose sitting it was and which
     // preset the schedule was built under.
-    onHide: (entry) =>
+    onHide: (entry) => {
+      // Practice holds are disclosed demonstrations, not family exposure history.
+      if (benignDemo) {
+        return;
+      }
       recordHide(entry, {
         profileId: guardedParams?.profileId,
         profileName: guardedParams?.profileName,
         preset: guardedParams?.settings?.preset,
-      }),
+      });
+    },
   });
   // The courtesy sound. useChimeCue decides whether a chime is owed and
   // refuses to raise one that no cover follows, so everything this call does is
@@ -192,7 +248,7 @@ const PlayerScreen = ({
   // this is decided here rather than trusted to whoever navigated.
   const access = playbackAccess({
     guarded: guardedParams,
-    coverTest,
+    coverTest: rejectedPreparedRoute ? 'off' : coverTest,
   });
   const guarding = access === 'guarded';
   // The measurement harness and the guard never run at once: a run is a
@@ -204,12 +260,27 @@ const PlayerScreen = ({
     card = guard.card;
   } else if (mustStayHidden(access)) {
     covered = true;
-    card = UNGUARDED_CARD;
+    card = rejectedPreparedRoute
+      ? {
+          ...UNGUARDED_CARD,
+          detail: 'This title cannot be opened. Return to the library.',
+          announcement: 'This title is unavailable. Return to the library.',
+        }
+      : UNGUARDED_CARD;
+  }
+  // A failed player has no advancing timeline. Keep its picture hidden and
+  // remove the stale countdown/Skip control above the recovery screen.
+  if (isVideoError) {
+    covered = true;
+    card = NO_CARD;
   }
   // The app records its own layer, because Vega gives it no way to read its
   // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
   useUiCapture(
-    React.useMemo(() => playerFrame(covered, card.kind), [covered, card.kind]),
+    React.useMemo(
+      () => playerFrame(covered, card.kind, benignDemo),
+      [covered, card.kind, benignDemo],
+    ),
     'player',
   );
   const keplerAppStateManager: IKeplerAppStateManager =
@@ -262,7 +333,7 @@ const PlayerScreen = ({
       return;
     }
     timer.current = setTimeout(() => {
-      navigateBack();
+      leavePlayer();
     }, TIME_TO_GO_BACK_IF_VIDEO_ENDS);
 
     return () => clearTimeout(Number(timer.current));
@@ -270,16 +341,20 @@ const PlayerScreen = ({
   }, [isVideoEnded]);
 
   useEffect(() => {
-    console.log(
-      '[PlayerScreen.tsx] - Initialize media player: componentInstance',
-      componentInstance,
-    );
-    console.log(
-      '[PlayerScreen.tsx] - Video Handler invoke preBufferVideo',
-      videoHandler.data,
-    );
-    videoHandler.preBufferVideo(componentInstance);
     setupEventListeners();
+    if (rejectedPreparedRoute) {
+      setShowBuffering(false);
+    } else {
+      console.log(
+        '[PlayerScreen.tsx] - Initialize media player: componentInstance',
+        componentInstance,
+      );
+      console.log(
+        '[PlayerScreen.tsx] - Video Handler invoke preBufferVideo',
+        videoHandler.data,
+      );
+      videoHandler.preBufferVideo(componentInstance);
+    }
     const changeSubscription = addKeplerAppStateListenerCallback(
       'change',
       handleAppStateChange,
@@ -349,6 +424,10 @@ const PlayerScreen = ({
         clearTimeout(Number(timer.current));
       }
 
+      if (exitTimer.current !== null) {
+        clearTimeout(exitTimer.current);
+      }
+
       if (bifFrameImagesRef) {
         bifFrameImagesRef.current?.clearCache();
         bifFrameImagesRef.current = null;
@@ -357,11 +436,11 @@ const PlayerScreen = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const navigateBack = useCallback(() => {
-    if (captionStatus.current) {
-      captionStatus.current = false;
+  const leavePlayer = useCallback(() => {
+    if (leaving.current) {
       return true;
     }
+    leaving.current = true;
 
     reportVideoExit();
 
@@ -374,15 +453,28 @@ const PlayerScreen = ({
     clearTimeout(Number(timer.current));
 
     //Approx delay added to destroy media instance
-    setTimeout(() => navigation.goBack(), BACK_NAVIGATION_DELAY);
+    exitTimer.current = setTimeout(() => navigation.goBack(), BACK_NAVIGATION_DELAY);
     return true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const navigateBack = useCallback(() => {
+    if (captionStatus.current) {
+      captionStatus.current = false;
+      return true;
+    }
+    return leavePlayer();
+  }, [leavePlayer]);
+
   const handleAppStateChange = useCallback(
     (nextAppState: KeplerAppStateChangeData): void => {
+      // A line for every change, and one for what the player did about it,
+      // so a device log shows each state the app passed through. console.log,
+      // which the Release build strips.
       console.log(
-        '[PlayerScreen.tsx] - handleAppStateChange - k_content_per: handleAppStateChange',
+        `[PlayerScreen.tsx] - handleAppStateChange - KeplerAppStateChange to ${String(
+          nextAppState,
+        )}`,
       );
       if (nextAppState === BACKGROUND_STATE) {
         setShowBuffering(false);
@@ -392,19 +484,28 @@ const PlayerScreen = ({
           // screen would tear the player down mid-run. The cover is already
           // on: useCoverHarness hides the picture as soon as the playhead
           // becomes uncertain, which includes going to the background.
+          console.log(
+            '[PlayerScreen.tsx] - handleAppStateChange - background, a measurement run stays on the player',
+          );
           return;
         }
-        navigateBack();
+        console.log(
+          '[PlayerScreen.tsx] - handleAppStateChange - background, leaving the player',
+        );
+        leavePlayer();
       }
     },
-    [navigateBack, coverTest],
+    [leavePlayer, coverTest],
   );
 
   const backHandlerSubscription = useRef<{ remove: () => void } | null>(null);
 
   const setupEventListeners = useCallback(() => {
     if (Platform.isTV) {
-      backHandlerSubscription.current = BackHandler.addEventListener('hardwareBackPress', navigateBack);
+      backHandlerSubscription.current = BackHandler.addEventListener(
+        'hardwareBackPress',
+        navigateBack,
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Platform.isTV]);
@@ -468,9 +569,9 @@ const PlayerScreen = ({
         '[PlayerScreen.tsx] - playVideo - Error occurred while playing video {}',
         error,
       );
-      navigateBack();
+      leavePlayer();
     }
-  }, [videoRef, navigateBack, reportVideoPlaying]);
+  }, [videoRef, leavePlayer, reportVideoPlaying]);
 
   const setSurface = useCallback(async () => {
     if (surfaceHandle.current) {
@@ -556,17 +657,21 @@ const PlayerScreen = ({
             */}
             <CoverLayer
               visible={covered}
+              imageUri={access === 'guarded' ? guard.coverImageUri : undefined}
               referencePatch={route.params.referencePatch}
               screenWidth={deviceWidth}
               screenHeight={deviceHeight}
             />
-            <KeplerCaptionsView
-              onCaptionViewCreated={onCaptionViewCreated}
-              onCaptionViewDestroyed={onCaptionViewDestroyed}
-              style={styles.captions}
-              show={captionID !== CAPTION_DISABLE_ID}
-              testID="kepler-captions-view"
-            />
+            {/* Native captions need a retained RN host to stack above the image cover. */}
+            <View style={styles.captions} pointerEvents="none" collapsable={false}>
+              <KeplerCaptionsView
+                onCaptionViewCreated={onCaptionViewCreated}
+                onCaptionViewDestroyed={onCaptionViewDestroyed}
+                style={StyleSheet.absoluteFill}
+                show={captionID !== CAPTION_DISABLE_ID}
+                testID="kepler-captions-view"
+              />
+            </View>
           </>
         )}
 
@@ -577,7 +682,20 @@ const PlayerScreen = ({
           The card sits above the cover, so it stays readable while the picture
           is hidden, and it is the only thing on screen that speaks.
         */}
-        <CalmCard card={card} onSkip={guard.skipTo} />
+        <CalmCard
+          card={card}
+          onSkip={guard.skipTo}
+          skipAccessibilityLabel={
+            benignDemo ? 'Skip the practice hold' : undefined
+          }
+        />
+        {/*
+          The practice label, on a plate in the top left corner: a row of its
+          own above the card, and nowhere near the captions.
+        */}
+        {benignDemo && (
+          <CornerPlate label={BENIGN_STORY_LABEL} testID="benign-demo" />
+        )}
         {showVideoPlayerUI && (
           <VideoPlayerUI
             videoRef={videoRef}
@@ -587,6 +705,10 @@ const PlayerScreen = ({
             setSelectedCaptionInVideoPlayer={setSelectedCaptionInVideoPlayer}
             bifFrameImagesRef={bifFrameImagesRef}
             videoData={data}
+            // The card's Skip button has focus during a countdown, so OK is
+            // Skip's and the sample must not pause or show its controls.
+            skipOwnsSelect={cardOffersSkip(card)}
+            selectedCaptionId={captionID}
             requestSeek={
               guarding
                 ? (source, targetMs) => {
@@ -599,7 +721,7 @@ const PlayerScreen = ({
             }
           />
         )}
-        {isVideoError && <ErrorView navigateBack={navigateBack} />}
+        {isVideoError && <ErrorView navigateBack={leavePlayer} />}
       </View>
     </SafeAreaView>
   );
@@ -614,6 +736,10 @@ const arePlayerPropsEqual = (
 export default React.memo(PlayerScreen, arePlayerPropsEqual);
 
 export const styles = StyleSheet.create({
+  // Where captions are drawn: the renderer stacks cue lines upward from this
+  // view's bottom edge, so the bottom of the picture is theirs. The card and
+  // the practice plate keep to the top (PLAYER_LAYOUT in calmStyles.ts), and
+  // tenFoot.test.tsx fails if either reaches down into the captions.
   captions: {
     width: '100%',
     height: '100%',

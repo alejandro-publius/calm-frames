@@ -21,7 +21,8 @@ clip instead, which draws a graph and never shows a frame.
 Encoding notes
 --------------
 The frames are drawn in 8 bit sRGB, which is the space the thresholds are written in, and
-handed to libx264. The generator records the exact drawn values, so the ground truth is about
+explicitly converted to the declared YUV matrix/range before libx264. The generator records
+the exact drawn values, so the ground truth is about
 what was drawn and not about what was asked for. What comes back out of the decoder is a
 slightly different signal, because 4:2:0, limited range and lossy coding all move it, and that
 difference is part of what the suite measures rather than something to hide.
@@ -46,12 +47,16 @@ from conformance.spec import SpecNumbers  # noqa: E402
 __all__ = ["render_clip", "decode_mean_luminance", "HAZARD_PREFIX", "scratch_dir"]
 
 HAZARD_PREFIX = "HAZARD_conformance_"
+ENCODING_PROTOCOL = "explicit-yuv-matrix-range-v2-2026-10-02"
 
 # Color tagging variants. The numbers are the AVColorSpace / AVColorPrimaries /
 # AVColorTransferCharacteristic enum values from FFmpeg, not thresholds.
 _BT709 = 1
 _BT601_SD = 6  # smpte170m, what an untagged SD stream is treated as
 _RANGE_JPEG = 2
+# An explicit convention for untagged media, not a threshold from either ITU standard.
+# See flashmap/docs/SPEC_SOURCES.md section 6 and the dated evaluation deviation.
+_UNTAGGED_HD_MIN_HEIGHT = 720
 
 
 def scratch_dir() -> Path:
@@ -90,6 +95,7 @@ def render_clip(clip: dict, destination: Path) -> dict:
     The caller owns the file and must delete it. See the safety note at the top of this file.
     """
     import av
+    from av.video.reformatter import VideoReformatter
 
     width, height = int(clip["width"]), int(clip["height"])
     times, states = frame_plan(
@@ -102,7 +108,13 @@ def render_clip(clip: dict, destination: Path) -> dict:
     )
     frames = state_frames(clip)
     tagging = str(clip.get("color_tagging", "bt709"))
+    matrix = "ITU709"
+    if tagging == "bt601" or (tagging.startswith("untagged")
+                              and height < _UNTAGGED_HD_MIN_HEIGHT):
+        matrix = "ITU601"
+    color_range = "JPEG" if tagging == "full_range" else "MPEG"
     crf = clip.get("crf", 23)
+    reformatter = VideoReformatter()
 
     container = av.open(str(destination), "w")
     try:
@@ -123,10 +135,10 @@ def render_clip(clip: dict, destination: Path) -> dict:
             stream.codec_context.color_primaries = _BT709
             stream.codec_context.color_trc = _BT709
             stream.codec_context.colorspace = _BT709
-        elif tagging == "untagged_hd":
-            pass  # no tags at all, HD sized: flashmap has to guess BT.709
-        elif tagging == "untagged_sd":
-            pass  # no tags at all, SD sized: flashmap has to guess BT.601
+        elif tagging in ("untagged_hd", "untagged_sd"):
+            # Cross-design labels mix resolutions. Actual height determines conversion;
+            # keep the frozen name/identity and leave the stream metadata unspecified.
+            pass
         elif tagging == "full_range":
             stream.codec_context.color_primaries = _BT709
             stream.codec_context.color_trc = _BT709
@@ -140,7 +152,14 @@ def render_clip(clip: dict, destination: Path) -> dict:
             raise ValueError(f"unknown color_tagging {tagging!r}")
 
         for time_ms, state in zip(times, states):
-            frame = av.VideoFrame.from_ndarray(frames[state], format="rgb24")
+            source = av.VideoFrame.from_ndarray(frames[state], format="rgb24")
+            frame = reformatter.reformat(
+                source, format="yuv420p", src_color_range="JPEG",
+                dst_colorspace=matrix, dst_color_range=color_range,
+            )
+            if tagging.startswith("untagged"):
+                frame.colorspace = 2  # AVCOL_SPC_UNSPECIFIED
+                frame.color_range = 0  # AVCOL_RANGE_UNSPECIFIED
             frame.pts = int(round(time_ms))
             frame.time_base = Fraction(1, 1000)
             container.mux(stream.encode(frame))
@@ -150,6 +169,9 @@ def render_clip(clip: dict, destination: Path) -> dict:
     os.chmod(destination, 0o600)
 
     return {
+        "protocol": ENCODING_PROTOCOL,
+        "conversion_matrix": matrix,
+        "conversion_range": color_range,
         "frames_written": len(times),
         "first_pts_ms": times[0] if times else None,
         "last_pts_ms": times[-1] if times else None,
@@ -169,16 +191,29 @@ def decode_mean_luminance(
     It does not import flashmap and it is not a detector. It decides nothing about flashing.
     """
     import av
+    from av.video.reformatter import VideoReformatter
 
     times: list[float] = []
     means: list[float] = []
+    reformatter = VideoReformatter()
     with av.open(str(path)) as container:
         video = container.streams.video[0]
         video.thread_type = "AUTO"
         for frame in container.decode(video):
             if frame.pts is None:
                 continue
-            array = frame.to_ndarray(format="rgb24", width=work_width, height=max(2, work_width * frame.height // frame.width))
+            # Use the stream's declared matrix/range, or the same documented local
+            # convention used to encode untagged clips. No detector code is imported.
+            matrix = "ITU709" if frame.colorspace == _BT709 else "ITU601"
+            if frame.colorspace == 2 and frame.height >= _UNTAGGED_HD_MIN_HEIGHT:
+                matrix = "ITU709"
+            color_range = "JPEG" if (frame.color_range == _RANGE_JPEG
+                                      or frame.format.name.startswith("yuvj")) else "MPEG"
+            array = reformatter.reformat(
+                frame, format="rgb24", width=work_width,
+                height=max(2, work_width * frame.height // frame.width),
+                src_colorspace=matrix, src_color_range=color_range, dst_color_range="JPEG",
+            ).to_ndarray()
             linear = spec.srgb_to_linear(array.astype(np.float64) / 255.0)
             luminance = spec.relative_luminance(linear)
             times.append(float(frame.pts * frame.time_base * 1000))

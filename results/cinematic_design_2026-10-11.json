@@ -1,0 +1,156 @@
+{
+  "date": "2026-10-11",
+  "date_timezone": "America/Los_Angeles",
+  "base_commit": "49f3a18c560138a8dfdd4f22b13af120d7d31d15",
+  "scope": "Combine Claude commits through 49f3a18 with cinematic storybook library, title artwork and title-details composition.",
+  "source_sha256": {
+    "app/src/calmframes/KidHomeScreen.tsx": "6006922ac87fc8602445eb3bb87142554a8f67fedb90a0cd275ec25ef63e5f42",
+    "app/src/calmframes/TitleArtwork.tsx": "ed8747c655f4d0cbcbde4290fe2ee604bf09c34e17965aeae5ed5e010638784b",
+    "app/src/calmframes/TitleDetailsScreen.tsx": "10c19374e8315a233235476945a0809346b8a8d1334c5d44fdd49401b12f4a21",
+    "app/src/calmframes/credits.ts": "f7932b8bb0bf9ee1e6f8614d29799a8b966c0a64ea51bc7daac3a73d8a2c7512",
+    "app/src/calmframes/uiFrames.ts": "1bad19e920434a56d996a26ca3a367bebe5d902cf0fe770dd0acfb7974cb5220",
+    "app/src/calmframes/interfaceSound.ts": "ceed70428d324f04382d573c9cde5b34519b82311688b9d5fc15d923606419b6",
+    "app/src/screens/KidModeScreen.tsx": "ca2b63bc40f7f36e7876c6ccef39d31a0d210af0d595d0f6a2bb5604951c0995",
+    "eval/attribution.py": "de591ec4ded033df874a7e9e62cd1d5f21aa0dc5f3282c027259f84f6a76a649",
+    "eval/brand_assets_check.py": "3bf1c9d59872cea409c443e422ae23b23ac518593ae8f71081c8ce8204cb1cab"
+  },
+  "artwork": {
+    "path": "app/assets/image/tv/harbor-cinematic.png",
+    "sha256": "62cbb3b83a5112a414846b64df440b71b0c47a13a923e5c8c024265eb92d0b8c",
+    "origin": "Generated with OpenAI image generation, using our earlier harbor.png as a reference. Coastal diorama with soft paper/clay texture, sailboat, lighthouse, saffron light and quiet teal space on the left.",
+    "license": "Apache-2.0",
+    "dimensions": [
+      1944,
+      809
+    ],
+    "bytes": 1840636,
+    "purpose": "Presentation illustration only; never a film frame or signed playback still.",
+    "individual_image_check": {
+      "asset": "app/assets/image/tv/harbor-cinematic.png",
+      "passed": true,
+      "profile": "wcag",
+      "flashmap": "PASS /tmp/tmp7kpm5tap/still.mkv: below the wcag thresholds",
+      "scope": "Individual presentation image only, not screen transitions or native composition."
+    }
+  },
+  "browser_preview": {
+    "label": "Browser layout approximations from actual React Native host trees, not Vega captures.",
+    "browser": "151.0.7922.173",
+    "viewport": {
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1
+    },
+    "method": "Actual rendered host nodes, actual text, actual flattened styles, approved original images and bundled Inter fonts. Host View uses flex-column, border-box and flexShrink=0; ScrollView uses its actual contentContainerStyle.",
+    "limitations": [
+      "Browser flex and text layout approximate React Native Yoga/native text metrics.",
+      "Jest mocks do not provide native focus traversal, screen-reader behavior, scrolling-on-focus, rendering, media, persistence, or performance evidence.",
+      "Focus events and settings state are synthetic inputs listed in each tree file.",
+      "PNG screenshots are browser layout proofs, not Vega captures.",
+      "Axis-aligned native gradients use exported colors, locations and start/end points in an embedded SVG. Native interpolation and compositing can differ. Unsupported angle/diagonal gradients refuse rendering."
+    ],
+    "synthetic_inputs": "Robin/Sam household, default viewing settings, real checkedShelf fixtures, simulated focus on Watch now, optional motion Off.",
+    "image_sha256": {
+      "docs/design/cinematic/library-browser.png": "54aae83dd2b590478084f8346e4b1dd1ddf52854dda2ad3a71e1d06dee1bdd30",
+      "docs/design/cinematic/details-browser.png": "b2586d17c9f517a10697a35fbdfa46b392853c3ed19d4e739bc6b5a5183eff04",
+      "docs/design/cinematic/details-bottom-browser.png": "bc25fa526d331ea1780ecbc795ef43051a051ab57ddf51ceb0eb159959fcbef8"
+    },
+    "library_qualifier_bounds": [
+      {
+        "testID": "kid-home-poster-qualifier-calm-frames-benign-story",
+        "x": 108,
+        "y": 974,
+        "width": 536,
+        "height": 42
+      },
+      {
+        "testID": "kid-home-poster-qualifier-prepared-4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
+        "x": 688,
+        "y": 974,
+        "width": 536,
+        "height": 42
+      },
+      {
+        "testID": "kid-home-poster-qualifier-calm-frames-offline",
+        "x": 1268,
+        "y": 974,
+        "width": 536,
+        "height": 42
+      }
+    ],
+    "library_scroll": [
+      {
+        "clientHeight": 876,
+        "scrollHeight": 876,
+        "scrollWidth": 1728,
+        "clientWidth": 1728
+      }
+    ],
+    "details_play_button": [
+      {
+        "x": 144,
+        "y": 666,
+        "width": 263.5,
+        "height": 98
+      }
+    ],
+    "helper_sha256": {
+      "screenshot.cjs": "a62d08dd81dba2f11cf613ac2ea7b2d1fcbfc4379c2a56d8105a8be20b7c624b",
+      "export.py": "2e06f03c91da037342661ed48025a9a254029b53b795524582f1ac7a8d29ca8d",
+      "render.py": "1a94dc8a4845a2e507f3612dba98320ab4a4c45cad9ab49f723a378acbfa1e41",
+      "README.md": "f008284d542d3051dc9a1846a8aaf906c58214515b3b042ed0711e3f7ceeb210",
+      "export.fixture.tsx": "654b095d51ebc0f471693f54a75cba1d95c435037e5aa0b912e8e6e9267d2aed"
+    },
+    "observations": [
+      "All three library qualifiers are inside the bottom TV margin.",
+      "The full lighthouse and sailboat appear in the details panorama.",
+      "Watch now is visible on the first details view.",
+      "The story and practice-hold demo use distinct artwork."
+    ]
+  },
+  "validation": {
+    "scope": "Affected checks only, per the user request to avoid repeating the whole project review.",
+    "app": {
+      "passed": 219,
+      "suites_passed": 8,
+      "log": ".logs/cinematic-combined-tests.log",
+      "command": "cd app && node node_modules/jest/bin/jest.js --runInBand --coverage=false test/calmframes/screens.test.tsx test/calmframes/tenFoot.test.tsx test/calmframes/uiCapture.test.tsx test/calmframes/shelf.test.tsx test/calmframes/interfaceSound.test.tsx test/calmframes/artworkMotion.test.tsx test/screens/interfaceNavigation.test.tsx test/calmframes/credits.test.tsx"
+    },
+    "typecheck": {
+      "exit_code": 0,
+      "log": ".logs/cinematic-combined-typecheck.log"
+    },
+    "scoped_lint": {
+      "exit_code": 0,
+      "warnings": 0,
+      "log": ".logs/cinematic-combined-lint.log"
+    },
+    "ui_palette": {
+      "screens": 36,
+      "profiles": [
+        "wcag",
+        "broadcast"
+      ],
+      "negative_controls": "passed",
+      "log": ".logs/cinematic-ui-check.log",
+      "scope": "Recorded palette model; does not establish actual intermediate animation frames or native compositing."
+    },
+    "python": {
+      "passed": 39,
+      "log": ".logs/cinematic-combined-python.log",
+      "command": ".venv/bin/python -m pytest eval/tests/test_attribution.py eval/tests/test_brand_assets.py eval/tests/test_design_page.py eval/tests/test_doc_links.py -q",
+      "scope": "Artwork registration, generated attribution, design tokens and documentation links."
+    }
+  },
+  "native_build_or_capture": false,
+  "publication_or_submission": false,
+  "new_aws_spending": false,
+  "log_sha256": {
+    ".logs/cinematic-combined-tests.log": "83c80c983ac30f6f0b4d11f7bb05841dd6bd61ceea037bacbdc1bb41628ad5a9",
+    ".logs/cinematic-combined-typecheck.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+    ".logs/cinematic-combined-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".logs/cinematic-ui-check.log": "7f50816f1bf4c3fc8df92d6a26eef2a0fcbcba154831a45e84a1cd9a9f65b915",
+    ".logs/cinematic-art-image-check.json": "319416a5fbb54967a23e24dde06147586b35c429a3895666f95a3bcd09ebb655",
+    ".logs/cinematic-combined-python.log": "43bafe6a6e931e4b3d2bfdcb99623b4a7ab807bcb3cc64b46280d0438d1610fc"
+  }
+}

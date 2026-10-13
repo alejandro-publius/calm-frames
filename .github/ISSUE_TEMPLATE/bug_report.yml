@@ -1,0 +1,60 @@
+name: Bug report
+description: Something in the app, flashmap, the pipeline or the hook did not do what it should.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Do not attach hazardous media, and never watch flashing content to reproduce a problem.**
+        If a clip is involved, give its source page and its SHA-256 instead of the file. A clip that
+        shows a problem with flash detection is a hazard file, and [docs/SAFETY.md](https://github.com/alejandro-publius/calm-frames/blob/main/docs/SAFETY.md)
+        applies to it. Exposure the filter should have prevented is worked out from the flash map, never by playing the clip.
+
+        A security problem does not belong in a public issue: see "Reporting something" in
+        [docs/SECURITY.md](https://github.com/alejandro-publius/calm-frames/blob/main/docs/SECURITY.md#reporting-something).
+  - type: dropdown
+    id: part
+    attributes:
+      label: Which part
+      options:
+        - The Vega app
+        - flashmap, the analyzer
+        - The pipeline (ingest, verify, the local library)
+        - The hook (@calm-frames/flash-guard)
+        - The GitHub Action
+        - The documents
+        - Something else, or not sure
+    validations:
+      required: true
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened
+      description: What you did, step by step, and what you saw. Paste commands and their output as text rather than screenshots.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: build
+    attributes:
+      label: The build or commit
+      description: The commit (`git rev-parse --short HEAD`), the package or release name, or the output of `python -m flashmap --version`.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Where it ran
+      description: The operating system, and whichever apply, Python, Node, ffmpeg, the Vega SDK and the device (the Vega Virtual Device or a Fire TV).
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety
+      options:
+        - label: I have not attached or linked any flashing media, and I did not watch flashing content to reproduce this.
+          required: true

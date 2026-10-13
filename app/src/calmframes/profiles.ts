@@ -94,6 +94,9 @@ export interface Family {
    * off changes nothing about what is hidden.
    */
   chimeEnabled: boolean;
+  /** Optional for old records; only an explicit true enables an interface effect. */
+  interfaceMotionEnabled?: boolean;
+  interfaceSoundsEnabled?: boolean;
 }
 
 /**
@@ -148,6 +151,8 @@ export function newFamily(
     profiles: [first],
     activeProfileId: first.id,
     chimeEnabled: CHIME_ON_BY_DEFAULT,
+    interfaceMotionEnabled: false,
+    interfaceSoundsEnabled: false,
   };
 }
 
@@ -176,6 +181,8 @@ export function clampFamily(family: Partial<Family> | null | undefined): Family 
     profiles,
     activeProfileId: active,
     chimeEnabled: family?.chimeEnabled !== false,
+    interfaceMotionEnabled: family?.interfaceMotionEnabled === true,
+    interfaceSoundsEnabled: family?.interfaceSoundsEnabled === true,
   };
 }
 

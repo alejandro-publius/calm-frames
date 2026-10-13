@@ -1,0 +1,36 @@
+{
+  "statement": "The hosted runs on the Oct 11 push 9bb14c6, the head that fixes the silent first press of Selection sounds and the stuck sound player, with both guards in the mutation gate. Read through the GitHub Actions API on Oct 11 after both runs finished.",
+  "commit": "9bb14c6cdae568f98cf095c35dff41fe5e33eedc",
+  "branch": "codex/signed-scene-holds-2026-09-29",
+  "pull_request": 1,
+  "read_utc": "2026-10-11T13:12:00Z",
+  "runs": {
+    "audit": {
+      "id": 38140014120,
+      "conclusion": "success",
+      "jobs_green": 4,
+      "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38140014120"
+    },
+    "ci": {
+      "id": 38140014134,
+      "conclusion": "success",
+      "jobs_green": 6,
+      "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38140014134",
+      "jobs": [
+        "Vega app",
+        "Python packages",
+        "The app's own UI passes flashmap",
+        "Mutation gate, property tests and the map fuzz corpus",
+        "Secret scan",
+        "Published numbers match results"
+      ],
+      "mutation_gate": "the runner agreed with the committed report of 70 mutations, 68 killed"
+    }
+  },
+  "published": {
+    "audit_conclusion": "success",
+    "ci_conclusion": "success",
+    "audit_jobs_green": 4,
+    "ci_jobs_green": 6
+  }
+}

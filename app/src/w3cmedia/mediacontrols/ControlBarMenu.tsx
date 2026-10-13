@@ -10,12 +10,15 @@ interface ControlBarMenuProps {
   videoRef: React.MutableRefObject<VideoPlayer | null>;
   setSelectedCaptionInMenuBar: (id: string) => void;
   setCaptionMenuVisibility: (visible: boolean) => void;
+  /** Calm Frames: the caption track the player has showing. */
+  selectedCaptionId?: string;
 }
 const ControlBarMenu = ({
   captionMenuVisibility,
   videoRef,
   setSelectedCaptionInMenuBar,
   setCaptionMenuVisibility,
+  selectedCaptionId,
 }: ControlBarMenuProps) => {
   const setSelectedCaption = (id: string) => {
     setSelectedCaptionInMenuBar(id);
@@ -28,6 +31,7 @@ const ControlBarMenu = ({
         video={videoRef.current as VideoPlayer}
         setSelectedCaption={setSelectedCaption}
         setCaptionMenuVisibility={setCaptionMenuVisibility}
+        selectedCaptionId={selectedCaptionId}
       />
     </View>
   );

@@ -27,6 +27,11 @@ import {
 } from './canonicalJson';
 import { CoverReason, FlashSegment } from './coverSchedule';
 import { base64ToBytes, verifyEd25519 } from './ed25519';
+import {
+  MAX_SCENE_MAP_TEXT_LENGTH,
+  readSceneHolds,
+  SceneHold,
+} from './sceneHolds';
 
 export type MapRejection =
   | 'missing'
@@ -60,6 +65,8 @@ export interface VerifiedFlashMap {
   keyId: string;
   /** Every area window the analysis used, for the room comparison. */
   windows: FlashMapWindow[];
+  /** Authenticated optional stills. Legacy maps have none. */
+  sceneHolds?: SceneHold[];
 }
 
 export type MapVerdict =
@@ -96,7 +103,9 @@ function reject(reason: MapRejection, detail: string): MapVerdict {
   return { ok: false, reason, detail };
 }
 
-function asRecord(value: JsonPlain | undefined): { [key: string]: JsonPlain } | null {
+function asRecord(
+  value: JsonPlain | undefined,
+): { [key: string]: JsonPlain } | null {
   if (value === null || value === undefined || typeof value !== 'object') {
     return null;
   }
@@ -122,9 +131,8 @@ function asString(value: JsonPlain | undefined): string | null {
  * seconds precision, so that is all this accepts.
  */
 export function parseCreatedUtc(text: string): number | null {
-  const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d+)?Z$/.exec(
-    text,
-  );
+  const match =
+    /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d+)?Z$/.exec(text);
   if (!match) {
     return null;
   }
@@ -165,8 +173,8 @@ function readSegments(value: JsonPlain | undefined): FlashSegment[] | null {
       reasonText === 'general'
         ? 'general'
         : reasonText === 'pattern'
-          ? 'pattern'
-          : 'red';
+        ? 'pattern'
+        : 'red';
     segments.push({ startMs, endMs, reason });
   }
   return segments.sort((a, b) => a.startMs - b.startMs);
@@ -203,7 +211,13 @@ export function verifyFlashMap(
   text: string | null | undefined,
   options: VerifyMapOptions,
 ): MapVerdict {
-  if (text === null || text === undefined || text.trim().length === 0) {
+  if (text === null || text === undefined || text.length === 0) {
+    return reject('missing', 'no map was found for this title');
+  }
+  if (text.length > MAX_SCENE_MAP_TEXT_LENGTH) {
+    return reject('unparseable', 'the map is larger than this player accepts');
+  }
+  if (text.trim().length === 0) {
     return reject('missing', 'no map was found for this title');
   }
 
@@ -287,13 +301,20 @@ export function verifyFlashMap(
   if (options.nowMs - createdUtcMs > maxAgeMs) {
     return reject(
       'stale',
-      `the map was made ${new Date(createdUtcMs).toISOString()} and has not been refreshed`,
+      `the map was made ${new Date(
+        createdUtcMs,
+      ).toISOString()} and has not been refreshed`,
     );
   }
 
   const segments = readSegments(plain.segments);
   if (!segments) {
     return reject('unparseable', 'the map has no usable segment list');
+  }
+  const durationMs = asNumber(source.duration_ms);
+  const sceneHolds = readSceneHolds(plain.scene_holds, segments, durationMs);
+  if (!sceneHolds) {
+    return reject('unparseable', 'the map has no usable scene holds');
   }
 
   const profile = asRecord(plain.profile);
@@ -306,10 +327,11 @@ export function verifyFlashMap(
     ok: true,
     map: {
       segments,
+      sceneHolds,
       source: {
         path,
         sha256: sha256.toLowerCase(),
-        durationMs: source ? asNumber(source.duration_ms) : null,
+        durationMs,
       },
       profileName: (profile ? asString(profile.name) : null) ?? 'unknown',
       hiddenMs: (summary ? asNumber(summary.hidden_ms) : null) ?? 0,
@@ -335,21 +357,21 @@ export function verifyFlashMap(
 export function rejectionMessage(reason: MapRejection): string {
   switch (reason) {
     case 'missing':
-      return 'This title is not checked yet, so the picture stays hidden.';
+      return 'This title is still being prepared. The picture stays hidden for now.';
     case 'stale':
-      return 'This title was checked too long ago, so the picture stays hidden.';
+      return 'This title needs an update. The picture stays hidden.';
     case 'unsigned':
-      return 'This title has no signed check, so the picture stays hidden.';
+      return 'This title is missing playback information. The picture stays hidden.';
     case 'unknown-key':
-      return 'This title was checked by someone we do not know, so the picture stays hidden.';
+      return 'This title comes from an unsupported source. The picture stays hidden.';
     case 'bad-signature':
-      return 'The check for this title was changed after it was signed, so the picture stays hidden.';
+      return 'The playback information for this title appears to have changed. The picture stays hidden.';
     case 'wrong-file':
-      return 'The check for this title belongs to a different file, so the picture stays hidden.';
+      return 'The playback information belongs to a different version of this title. The picture stays hidden.';
     case 'wrong-version':
-      return 'The check for this title is in a newer format than this app reads, so the picture stays hidden.';
+      return 'This title needs a newer version of Calm Frames. The picture stays hidden.';
     case 'unparseable':
     default:
-      return 'The check for this title could not be read, so the picture stays hidden.';
+      return 'The playback information could not be opened. The picture stays hidden.';
   }
 }

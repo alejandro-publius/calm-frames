@@ -20,6 +20,11 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
+
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  getItem: jest.fn(async () => null),
+  setItem: jest.fn(async () => undefined),
+}));
 import {
   fallsThroughToLocalMap,
   resolveCatalog,
@@ -123,6 +128,7 @@ async function openShelf(options: ShelfOptions = {}) {
       fireEvent.press(screen.getByTestId(`kid-mode-first-run-key-${digit}`));
     }
   };
+  await screen.findByTestId('kid-mode-first-run');
   type('1357');
   type('1357');
   fireEvent.press(screen.getByTestId('kid-mode-first-run-next'));
@@ -138,11 +144,12 @@ async function openShelf(options: ShelfOptions = {}) {
 }
 
 /** Open the parent area on an already open shelf, through the PIN. */
-function openParentArea() {
+async function openParentArea() {
   fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
   for (const digit of '1357') {
     fireEvent.press(screen.getByTestId(`kid-mode-parent-key-${digit}`));
   }
+  await screen.findByTestId('kid-mode-parent-open');
 }
 
 describe('the registry served it', () => {
@@ -172,8 +179,8 @@ describe('the registry served it', () => {
 
     expect(screen.queryByTestId('kid-mode-home-poster-bursts')).toBeTruthy();
     expect(
-      screen.getByTestId('kid-mode-home-badge-bursts-label').props.children,
-    ).toBe('Checked');
+      screen.getByTestId('kid-mode-home-poster-bursts').props.accessibilityLabel,
+    ).toBe('Test pattern');
 
     fireEvent.press(screen.getByTestId('kid-mode-home-poster-bursts'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
@@ -284,7 +291,11 @@ describe('the registry had nothing, so the map the app holds served it', () => {
   });
 
   it('asks nothing at all when no index is configured', () => {
-    const done = withoutRegistry(defaultCatalog()[0], ['wcag']);
+    // The gradient by name: it is the title whose map is compiled in, and it
+    // is no longer the first one in the catalog.
+    const bundled = defaultCatalog().find((title) => title.id === OFFLINE_TITLE_ID);
+    expect(bundled).toBeDefined();
+    const done = withoutRegistry(bundled!, ['wcag']);
     expect(done.sources.wcag).toBe('bundled');
     expect(done.refusal).toBeUndefined();
   });
@@ -323,9 +334,9 @@ describe('the registry entry was tampered with', () => {
     });
     expect(screen.queryByTestId('kid-mode-home-poster-bursts')).toBeNull();
 
-    openParentArea();
+    await openParentArea();
     expect(screen.getByTestId('kid-mode-parent-reason-bursts').props.children).toContain(
-      'the picture stays hidden',
+      'The picture stays hidden',
     );
   });
 

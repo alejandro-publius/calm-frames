@@ -1,0 +1,133 @@
+{
+  "base_commit": "b882d397269a3e776acf9d0655fdb23cf5326a24",
+  "scope": "Remove decorative text panels, extend Harbor artwork to the screen edge and quiet secondary controls. Preserve remote focus and playback behavior.",
+  "source_sha256": {
+    "app/src/calmframes/KidHomeScreen.tsx": "7fb6c2a33c8e4a23eb4b169e786018d21dcf0c012ba152fc45a661d6710d2577",
+    "app/src/calmframes/TitleDetailsScreen.tsx": "67ce986ccb7fb61d51a3cb52936c400053eb5c8fe0b3b9da8016fedde00e9e92",
+    "app/src/calmframes/ViewingPlan.tsx": "d437dd4b47cbd2bfbe44dbbd1f5d1bae082be84287d03b0c134e06830914620b",
+    "app/src/calmframes/uiFrames.ts": "cde87a7dd15eda7cb942ef6f8d1e36c5460a6845670671c7926581ac9658dc61",
+    "app/src/calmframes/TitleArtwork.tsx": "ed8747c655f4d0cbcbde4290fe2ee604bf09c34e17965aeae5ed5e010638784b"
+  },
+  "artwork": {
+    "path": "app/assets/image/tv/harbor-cinematic.png",
+    "sha256": "62cbb3b83a5112a414846b64df440b71b0c47a13a923e5c8c024265eb92d0b8c",
+    "changed": false,
+    "purpose": "Presentation illustration only, never a film frame or signed playback still."
+  },
+  "browser_preview": {
+    "label": "Browser layout approximations of actual React Native host trees; not Vega captures.",
+    "browser": "151.0.7922.173",
+    "viewport": {
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1
+    },
+    "image_sha256": {
+      "docs/design/open/library-browser.png": "50f9210b3ce96f928b6741ba2e62b04892a3300a188b1c97a516d178ede7a5d8",
+      "docs/design/open/details-browser.png": "af937016db449e14e406b9ce05013e14af1a238399cd9ce2961b70a94dc122fe",
+      "docs/design/open/details-bottom-browser.png": "d05613f0248e8252f7e717054317988e09cd0b0b141381694ea19576556d0157"
+    },
+    "helper_sha256": {
+      "export.py": "2e06f03c91da037342661ed48025a9a254029b53b795524582f1ac7a8d29ca8d",
+      "export.fixture.tsx": "654b095d51ebc0f471693f54a75cba1d95c435037e5aa0b912e8e6e9267d2aed",
+      "render.py": "1a94dc8a4845a2e507f3612dba98320ab4a4c45cad9ab49f723a378acbfa1e41",
+      "screenshot.cjs": "a62d08dd81dba2f11cf613ac2ea7b2d1fcbfc4379c2a56d8105a8be20b7c624b"
+    },
+    "inputs": "Real checkedShelf titles; synthetic Robin/Sam household, default viewing settings and focused Watch action; optional artwork motion Off.",
+    "library_qualifier_bounds": [
+      {
+        "testID": "kid-home-poster-qualifier-calm-frames-benign-story",
+        "x": 108,
+        "y": 958,
+        "width": 536,
+        "height": 42
+      },
+      {
+        "testID": "kid-home-poster-qualifier-prepared-4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
+        "x": 688,
+        "y": 958,
+        "width": 536,
+        "height": 42
+      },
+      {
+        "testID": "kid-home-poster-qualifier-calm-frames-offline",
+        "x": 1268,
+        "y": 958,
+        "width": 536,
+        "height": 42
+      }
+    ],
+    "library_scroll": [
+      {
+        "clientHeight": 876,
+        "scrollHeight": 876,
+        "scrollWidth": 1824,
+        "clientWidth": 1824
+      }
+    ],
+    "details_scroll": [
+      {
+        "clientHeight": 1080,
+        "scrollHeight": 1667,
+        "scrollWidth": 1920,
+        "clientWidth": 1920
+      }
+    ],
+    "observations": [
+      "Title details and viewing settings have no enclosing filled panels.",
+      "The artwork reaches the right screen edge; text sits on solid teal.",
+      "Library qualifiers remain within the bottom TV margin.",
+      "Watch now and the picture timeline appear on the first details view."
+    ],
+    "limitations": [
+      "Browser flex and text layout approximate React Native Yoga/native text metrics.",
+      "Jest mocks do not provide native focus traversal, screen-reader behavior, scrolling-on-focus, rendering, media, persistence, or performance evidence.",
+      "Focus events and settings state are synthetic inputs listed in each tree file.",
+      "PNG screenshots are browser layout proofs, not Vega captures.",
+      "Axis-aligned native gradients use exported colors, locations and start/end points in an embedded SVG. Native interpolation and compositing can differ. Unsupported angle/diagonal gradients refuse rendering."
+    ]
+  },
+  "validation": {
+    "scope": "Existing checks affected by this visual refinement only; no repeat of the full project audit.",
+    "app": {
+      "passed": 144,
+      "suites_passed": 4,
+      "log": ".logs/open-layout-tests.log",
+      "command": "cd app && node node_modules/jest/bin/jest.js --runInBand --coverage=false test/calmframes/screens.test.tsx test/calmframes/tenFoot.test.tsx test/calmframes/uiCapture.test.tsx test/calmframes/artworkMotion.test.tsx"
+    },
+    "typecheck": {
+      "exit_code": 0,
+      "log": ".logs/open-layout-typecheck.log"
+    },
+    "scoped_lint": {
+      "exit_code": 0,
+      "warnings": 0,
+      "log": ".logs/open-layout-lint.log"
+    },
+    "ui_palette": {
+      "screens": 36,
+      "profiles": [
+        "wcag",
+        "broadcast"
+      ],
+      "negative_controls": "passed",
+      "log": ".logs/open-layout-ui.log",
+      "scope": "Declared palette model only. It does not verify actual composited or animated native frames."
+    },
+    "design_documentation": {
+      "passed": 26,
+      "log": ".logs/open-layout-docs.log",
+      "command": ".venv/bin/python -m pytest eval/tests/test_design_page.py eval/tests/test_doc_links.py -q"
+    },
+    "log_sha256": {
+      ".logs/open-layout-tests.log": "0e54c00d52a7b5b37eb382268d9b84529c3ccd5f017dd2cdca492566fcbd5ae5",
+      ".logs/open-layout-typecheck.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+      ".logs/open-layout-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      ".logs/open-layout-ui.log": "f67ee05679551ff3e36825483bf3052a141b1c6d1d17d1a65c3001c3d031877c",
+      ".logs/open-layout-docs.log": "cf9b536bfc17e583f86e2a4c33f085ee24f3089c45165e3a7cec0106c6892f56"
+    }
+  },
+  "native_status": "The matching Vega package and simulator observations remain pending on the Mac. No native build, deployment or submission was performed in this refinement.",
+  "date": "2026-10-13",
+  "date_timezone": "Etc/UTC"
+}

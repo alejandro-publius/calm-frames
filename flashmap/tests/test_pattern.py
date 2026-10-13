@@ -27,11 +27,11 @@ from flashmap.pattern import (
     MOTION_UNCERTAIN,
     PatternSettings,
     PatternTracker,
+    _spans,
     periodic_lines,
     scan_bars,
     stripe_mask,
 )
-from flashmap.pattern import _spans
 
 W, H = 384, 216
 

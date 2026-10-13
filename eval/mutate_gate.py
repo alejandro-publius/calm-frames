@@ -228,6 +228,17 @@ MUTATIONS: list[Mutation] = [
         "keeps running while the picture is frozen on a frame nobody checked",
     ),
     Mutation(
+        mid="disrupted-scene-stills-stay-black-on-resume",
+        prop="disrupted scene stills cannot flash on resume",
+        lane="app",
+        path="src/calmframes/useFlashGuard.ts",
+        old="    !harness.uncertain &&\n    !seekHolding &&\n    !sceneIsLatchedBlack",
+        new="    !harness.uncertain && !seekHolding",
+        tests=("test/calmframes/sceneHoldPlayback.test.tsx",),
+        why="waiting still turns the image black, but playing restores a bright "
+        "still in the same interval, so repeated resume events can create flashes",
+    ),
+    Mutation(
         mid="hold-until-confirmed-outside",
         prop="cover held through stalls and seeks",
         lane="app",
@@ -306,10 +317,21 @@ MUTATIONS: list[Mutation] = [
         prop="fail closed on a map that is missing",
         lane="app",
         path="src/calmframes/flashMap.ts",
-        old="  if (text === null || text === undefined || text.trim().length === 0) {\n    return reject('missing', 'no map was found for this title');\n  }",
-        new="  if (text === null || text === undefined) {\n    text = '{}';\n  }",
+        old="  if (text === null || text === undefined || text.length === 0) {\n    return reject('missing', 'no map was found for this title');\n  }",
+        new=(
+            "  if (text === null || text === undefined || text.length === 0) {\n"
+            "    // MUTANT: trust a missing map as a checked, empty schedule.\n"
+            "    return { ok: true, map: {\n"
+            "      segments: [],\n"
+            "      source: { path: '', sha256: options.expectedSha256, durationMs: null },\n"
+            "      profileName: 'wcag', hiddenMs: 0, createdUtcMs: options.nowMs,\n"
+            "      keyId: '', windows: [{ name: 'room', widthFraction: 0 }],\n"
+            "    } };\n"
+            "  }"
+        ),
         tests=("test/calmframes/flashMap.test.ts", "test/calmframes/useFlashGuard.test.tsx"),
-        why="a title with no map is read as an empty one instead of being refused",
+        why="missing map input returns a verified empty schedule without a signature "
+        "or analysis, so playing confirmation can uncover the unchecked picture",
     ),
     Mutation(
         mid="fail-closed-stale",
@@ -399,7 +421,7 @@ MUTATIONS: list[Mutation] = [
         prop="fail closed while a map is still being checked",
         lane="app",
         path="src/calmframes/useFlashGuard.ts",
-        old="  const covered =\n    status !== 'verified' || !ready || harness.covered || seekHolding;",
+        old="  const covered =\n    activeStatus !== 'verified' || !ready || harness.covered || seekHolding;",
         new="  const covered = harness.covered || seekHolding;",
         tests=("test/calmframes/useFlashGuard.test.tsx",),
         why="the picture is visible before any map has verified, which is the whole of "
@@ -480,6 +502,28 @@ MUTATIONS: list[Mutation] = [
         why="verify stops noticing that the file on disk is not the file the title was "
         "built from",
     ),
+    Mutation(
+        mid="cached-artifacts-check-the-actual-output-bytes",
+        prop="cached metadata and previews stay bound to their checked bytes",
+        lane="py",
+        path="pipeline/ingest.py",
+        old="            if not check_output_bytes or (",
+        new="            if True or not check_output_bytes or (",
+        tests=("pipeline/tests/test_cached_artifacts.py",),
+        why="an artifact changed at the same path is trusted from its old cache "
+        "record instead of being regenerated before publication",
+    ),
+    Mutation(
+        mid="cached-posters-are-recorded-as-outputs",
+        prop="cached metadata and previews stay bound to their checked bytes",
+        lane="py",
+        path="pipeline/ingest.py",
+        old="            poster_outputs.extend(poster.path for poster in posters)",
+        new="            poster_outputs.extend([])",
+        tests=("pipeline/tests/test_cached_artifacts.py",),
+        why="poster JPEGs disappear from the ledger's output list, so a changed "
+        "or missing poster can reuse a previously checked step",
+    ),
     # ------------------------------------------------------- red segments always opaque
     Mutation(
         mid="red-survives-merging",
@@ -497,8 +541,8 @@ MUTATIONS: list[Mutation] = [
         prop="red segments always opaque",
         lane="app",
         path="src/calmframes/flashMap.ts",
-        old="    const reason: CoverReason = reasonText === 'general' ? 'general' : 'red';",
-        new="    const reason: CoverReason = reasonText === 'red' ? 'red' : 'general';",
+        old="    const reason: CoverReason =\n      reasonText === 'general'\n        ? 'general'\n        : reasonText === 'pattern'\n        ? 'pattern'\n        : 'red';",
+        new="    const reason: CoverReason =\n      reasonText === 'red'\n        ? 'red'\n        : reasonText === 'pattern'\n        ? 'pattern'\n        : 'general';",
         tests=(
             "test/calmframes/flashMap.test.ts",
             "test/calmframes/mutationSurvivors.test.tsx",
@@ -511,8 +555,8 @@ MUTATIONS: list[Mutation] = [
         prop="red segments always opaque",
         lane="py",
         path="pipeline/hideplan.py",
-        old="    if interval.reason == RED:\n        return OPAQUE\n    return DIM if allow_dim else OPAQUE",
-        new="    return DIM if allow_dim else OPAQUE",
+        old="    if interval.reason in (RED, PATTERN):\n        return OPAQUE\n    return DIM if allow_dim else OPAQUE",
+        new="    if interval.reason == PATTERN:\n        return OPAQUE\n    return DIM if allow_dim else OPAQUE",
         tests=("pipeline/tests/test_hideplan.py",),
         why="the pipeline lets a red interval be dimmed",
     ),
@@ -734,8 +778,8 @@ MUTATIONS: list[Mutation] = [
         prop="rendition start offset",
         lane="app",
         path="src/calmframes/useFlashGuard.ts",
-        old="      } catch {\n        if (cancelled) {\n          return;\n        }\n        setStatus('blocked');\n        setRejection('wrong-file');",
-        new="      } catch {\n        if (cancelled) {\n          return;\n        }\n        built = [];\n        setStatus('verified');\n        setRejection('wrong-file');",
+        old="      } catch {\n        if (cancelled) {\n          return;\n        }\n        setStatus('blocked');\n        setCheckedInput(verificationInput);\n        setRejection('wrong-file');",
+        new="      } catch {\n        if (cancelled) {\n          return;\n        }\n        built = [];\n        setStatus('verified');\n        setCheckedInput(verificationInput);\n        setRejection('wrong-file');",
         tests=("test/calmframes/useFlashGuard.test.tsx",),
         why="a schedule the app refused to build leaves the title playing with no "
         "intervals at all, which is the worst possible answer",
@@ -829,6 +873,102 @@ MUTATIONS: list[Mutation] = [
         tests=("pipeline/tests/test_verify.py",),
         why="the offset the player subtracts is reported as zero, so every live cover "
         "runs that far late",
+    ),
+    # ---- the Oct 2 to 10 guards: signed scene holds, the packaged library, the
+    # demo key and the household record. Each was broken by hand and seen red
+    # when it was written; this is the durable version of that.
+    Mutation(
+        mid="scene-still-belongs-to-a-covered-segment",
+        prop="a scene hold still only ever stands over a segment of its own map",
+        lane="app",
+        path="src/calmframes/sceneHolds.ts",
+        old="    if (\n      !segments.some(\n        (segment) => segment.startMs >= startMs && segment.endMs <= endMs,\n      ) ||\n      (frameMs !== null &&",
+        new="    if (\n      (frameMs !== null &&",
+        tests=("test/calmframes/sceneHolds.test.ts",),
+        why="a signed still with no flagged segment inside its bounds is accepted, so a "
+        "producer can put a picture over any moment of the film and call it a hold",
+    ),
+    Mutation(
+        mid="demo-key-only-for-the-bundled-title",
+        prop="the demo key unlocks one bundled title and nothing else",
+        lane="app",
+        path="src/calmframes/benignStory.ts",
+        old="  return isBundledBenignStory(title) ? BENIGN_STORY_PUBLIC_KEY : fallback;",
+        new="  return BENIGN_STORY_PUBLIC_KEY;",
+        tests=("test/calmframes/benignStory.test.tsx",),
+        why="any catalog entry is verified against the demo key, so a map signed with "
+        "the demo's private key plays any title in kid mode",
+    ),
+    Mutation(
+        mid="packaged-route-must-match-the-source-hash",
+        prop="the packaged library accepts a route only for the exact source it compiled",
+        lane="app",
+        path="src/calmframes/packagedLibrary.ts",
+        old="        expected.sha256 === guarded.sha256 && expected.durationMs === guarded.durationMs &&",
+        new="        expected.durationMs === guarded.durationMs &&",
+        tests=("test/calmframes/packagedLibrary.test.tsx",),
+        why="a route naming a different source file with the same id and duration is "
+        "accepted, and the compiled key then verifies a map for a file it was never "
+        "compiled for",
+    ),
+    Mutation(
+        mid="household-record-keeps-the-pin-rounds-bounded",
+        prop="a stored household record cannot change how the PIN is hashed",
+        lane="app",
+        path="src/calmframes/householdStorage.ts",
+        old="    record.rounds !== PIN_ROUNDS ||",
+        new="    record.rounds < 1 ||",
+        tests=("test/calmframes/householdStorage.test.ts",),
+        why="a record carrying a rounds count of its own is accepted, so a tampered "
+        "store can make every PIN check hash for as long as it likes, or not at all",
+    ),
+    Mutation(
+        mid="scene-hold-bytes-reproduce-from-provenance",
+        prop="verify refuses a scene hold image that does not reproduce from its stated frame",
+        lane="py",
+        path="pipeline/sceneholds.py",
+        old='            if reproduced.read_bytes() != image.path.read_bytes():\n                raise PipelineError("scene hold bytes do not reproduce from their stated provenance")',
+        new='            if False:\n                raise PipelineError("scene hold bytes do not reproduce from their stated provenance")',
+        tests=("pipeline/tests/test_sceneholds.py",),
+        why="an image that is not the frame it claims to be is signed and published, "
+        "so the still a child sees is whatever the producer put there",
+    ),
+    Mutation(
+        mid="cover-proof-reaches-the-end-of-a-span",
+        prop="verify measures the cover at the first frame, the middle and the last frame of every covered span",
+        lane="py",
+        path="pipeline/verify.py",
+        old="    return [start_s + frame_s, middle_s, end_s - frame_s]",
+        new="    return [middle_s]",
+        tests=("pipeline/tests/test_verify.py",),
+        why="a cover drawn at the middle of a span and gone before its end passes a midpoint-only "
+        "proof, which is the proof verify had until Oct 11, 2026",
+    ),
+    # ------------------------------------------------- the opt-in menu sound stays honest
+    Mutation(
+        mid="selection-sound-confirmed-from-the-render-that-holds-the-record",
+        prop="the press that turns selection sounds on is itself confirmed",
+        lane="app",
+        path="src/screens/KidModeScreen.tsx",
+        old="          setConfirmSavedChange(true);",
+        new="          interfaceSound.confirm();",
+        tests=("test/screens/interfaceNavigation.test.tsx",),
+        why="the confirmation is raised from the write's own continuation, which on the "
+        "concurrent root the device uses runs before React has rendered the saved record, "
+        "so the hook still reads the old record and the one press that turns the sound on "
+        "is the one press it never confirms; this is the code the branch had until Oct 11, 2026",
+    ),
+    Mutation(
+        mid="released-sound-player-frees-the-next-request",
+        prop="one sound player that never answers cannot silence the menu for good",
+        lane="app",
+        path="src/calmframes/interfaceSound.ts",
+        old="    if (current === playback) { current = undefined; }\n    if (playback.timer) { clearTimeout(playback.timer); }",
+        new="    if (playback.timer) { clearTimeout(playback.timer); }",
+        tests=("test/calmframes/interfaceSound.test.tsx",),
+        why="a released playback stays the current one until its teardown finishes, so a "
+        "player whose initialize() or deinitialize() never answers refuses every later "
+        "request for the rest of the screen's life",
     ),
 ]
 
@@ -1009,7 +1149,7 @@ def run_tests(lane: str, tests: tuple[str, ...], env_extra: dict[str, str] | Non
         env = _python_env(env_extra)
     else:
         command = [
-            "npx", "jest", "--ci", "--colors=false", "--coverage=false",
+            "npx", "jest", "--ci", "--colors=false", "--coverage=false", "--watchman=false",
             "--runInBand", "--silent", *tests,
         ]
         env = dict(os.environ)
@@ -1218,7 +1358,10 @@ def floor_to(value: float, places: int) -> float:
     return math.floor(value * scale) / scale
 
 
-def build_report(records: list[dict], controls: list[dict], control_green: bool) -> dict:
+def build_report(
+    records: list[dict], controls: list[dict], control_green: bool,
+    *, controls_performed: bool = True,
+) -> dict:
     killed = [record for record in records if record["killed"]]
     survived = [record for record in records if not record["killed"]]
     unexpected = [record for record in survived if "equivalent" not in record]
@@ -1252,8 +1395,13 @@ def build_report(records: list[dict], controls: list[dict], control_green: bool)
             "of those also exit non-zero and neither is a test catching anything."
         ),
         "negative_control": {
-            "description": "every selection run unmutated before any mutation was applied",
-            "all_green": control_green,
+            "description": (
+                "every selection run unmutated before any mutation was applied"
+                if controls_performed
+                else "skipped by --skip-control; no green baseline was established"
+            ),
+            "performed": controls_performed,
+            "all_green": control_green and controls_performed,
             "selections": controls,
         },
         "totals": {
@@ -1274,12 +1422,13 @@ def build_report(records: list[dict], controls: list[dict], control_green: bool)
     }
 
 
-def compare_with_committed(report: dict) -> int:
+def compare_with_committed(report: dict, committed: dict | None = None) -> int:
     """Fail when this run disagrees with the report in the repository."""
-    if not REPORT_PATH.exists():
-        print(f"no committed report at {REPORT_PATH}", file=sys.stderr)
-        return 1
-    committed = json.loads(REPORT_PATH.read_text())
+    if committed is None:
+        if not REPORT_PATH.exists():
+            print(f"no committed report at {REPORT_PATH}", file=sys.stderr)
+            return 1
+        committed = json.loads(REPORT_PATH.read_text())
     problems = []
     if committed["totals"]["mutations"] != report["totals"]["mutations"]:
         problems.append(
@@ -1311,12 +1460,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--property", action="append", default=[], help="run these properties only")
     parser.add_argument("--list", action="store_true", help="print the mutations and stop")
     parser.add_argument("--check", action="store_true", help="fail if the committed report disagrees")
-    parser.add_argument("--out", default=str(REPORT_PATH), help="where to write the report")
+    parser.add_argument(
+        "--out", default=str(REPORT_PATH),
+        help="report output; --check writes only to a path other than its committed baseline",
+    )
     parser.add_argument(
         "--skip-control", action="store_true",
         help="skip the unmutated runs, for a quick look only",
     )
     args = parser.parse_args(argv)
+    if args.check and args.skip_control:
+        print("--check requires negative controls; --skip-control is for quick looks only", file=sys.stderr)
+        return 2
 
     selected = [
         mutation
@@ -1341,12 +1496,23 @@ def main(argv: list[str] | None = None) -> int:
         print("two mutations share an id", file=sys.stderr)
         return 2
 
+    # Preserve the baseline before any work starts. In check mode, the measured
+    # report must never replace the document it is compared against, including
+    # when --out names that document explicitly or through a path alias.
+    committed = None
+    if args.check:
+        try:
+            committed = json.loads(REPORT_PATH.read_text())
+        except (OSError, json.JSONDecodeError) as error:
+            print(f"cannot read committed report at {REPORT_PATH}: {error}", file=sys.stderr)
+            return 1
+
     lanes = {mutation.lane for mutation in selected}
     print(f"copying {', '.join(sorted(lanes))} into {BUILD}")
     prepare(lanes)
 
     controls: list[dict] = []
-    control_green = True
+    control_green = not args.skip_control
     if not args.skip_control:
         print("\nnegative control, nothing mutated:")
         controls, control_green = negative_control(selected)
@@ -1367,15 +1533,24 @@ def main(argv: list[str] | None = None) -> int:
         if not record["killed"]:
             print(f"            because: {record['survived_because']}")
 
-    report = build_report(records, controls, control_green)
+    report = build_report(
+        records, controls, control_green, controls_performed=not args.skip_control,
+    )
     out = Path(args.out)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(report, indent=2, sort_keys=False) + "\n")
+    comparison_status = compare_with_committed(report, committed) if args.check else 0
+    same_as_baseline = out.resolve() == REPORT_PATH.resolve()
+    if args.check and out.exists() and REPORT_PATH.exists():
+        same_as_baseline = same_as_baseline or out.samefile(REPORT_PATH)
+    writes_report = not args.check or not same_as_baseline
+    if writes_report:
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(report, indent=2, sort_keys=False) + "\n")
 
     totals = report["totals"]
+    destination = f"written to {out}" if writes_report else f"compared with {REPORT_PATH}"
     print(
         f"\nkill rate {totals['as_a_fraction']} = {totals['kill_rate']} "
-        f"({totals['kill_rate_percent']}%), written to {out}"
+        f"({totals['kill_rate_percent']}%), {destination}"
     )
     if report["survivors"]:
         print(f"\n{len(report['survivors'])} survivor(s):")
@@ -1388,7 +1563,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"\n{mid} was called equivalent and a test caught it. Remove that claim.")
 
     if args.check:
-        return compare_with_committed(report)
+        return 1 if comparison_status or totals["survived_and_not_equivalent"] else 0
     return 0 if not report["totals"]["survived_and_not_equivalent"] else 1
 
 

@@ -1,10 +1,34 @@
 # The upstream contribution
 
-**Target:** [`AmazonAppDev/vega-video-sample`](https://github.com/AmazonAppDev/vega-video-sample), the Fire TV video sample that most Vega video apps start from. It has merged an outside contributor's pull request before: #7, opened June 18 2026 by an account with no association to the repository, merged July 6 2026. So they do take them.
+**October 10 final local check.** GitHub API confirms upstream main is still
+`ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`. All eleven issues and pull requests
+were checked; none concerns this Shaka rejection fix. The current contribution
+guide still asks for current-main, duplicate and local-test checks. The preserved
+patched pristine sample passes all six focused tests again today, with a clean
+working tree. The earlier observed-red controls and mock limitations below
+remain relevant. Evidence: `results/upstream_review_2026-10-10.json`.
 
-**Status, Thu Sep 17 2026.** The branch is finished and verified. Two commits and three tests, sitting as ready-to-apply patch files in [`docs/upstream-pr/`](upstream-pr/). **Nothing has been pushed and no pull request has been opened**, because the branch has to live in a fork under Alex's own GitHub account. Everything needed to open it is in this file. Due by Monday October 12.
+The contribution remains worthwhile and prepared as the two patches below.
+Placeholder patch author metadata must be replaced with the entrant's chosen
+public identity before publication. No fork, PR or qualifying public contribution
+URL has been created. October 12 is a project target, not the hackathon deadline.
 
-**Checked against the live repository today:**
+**Target:** [`AmazonAppDev/vega-video-sample`](https://github.com/AmazonAppDev/vega-video-sample), Amazon's reference video app for Vega. It has merged an outside contributor's pull request before: #7, opened June 18 2026 by an account with no association to the repository, merged July 6 2026. So they do take them.
+
+**Status, Fri Oct 2 2026.** The two existing patches and their three added tests
+were reapplied and revalidated locally against the pristine sample. They remain
+ready-to-apply files in [`docs/upstream-pr/`](upstream-pr/). **No public fork,
+issue or pull request has been created.** The contribution link remains due by
+Monday October 12.
+
+The Oct 2 read-only GitHub check found upstream `main` still at
+[`ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`](https://github.com/AmazonAppDev/vega-video-sample/commit/ef8e4da89b22ef7973d0d41beedfa2b42f7bb272).
+The [contributor guide](https://github.com/AmazonAppDev/vega-video-sample/blob/main/CONTRIBUTING.md)
+was unchanged, and targeted Shaka issue and pull request searches returned no
+matches. The current local evidence is recorded below; the broader historical
+suite results keep their original dates.
+
+**Historical live repository check, Sep 17 2026:**
 
 | What | Result, Sep 17 2026 |
 |---|---|
@@ -14,7 +38,8 @@
 | Every issue and pull request ever filed | 11, none of them about Shaka load failures or a stuck buffering spinner. This is not a duplicate |
 | Licence | MIT-0 |
 
-Re-run those checks on the day. `main` has not moved in six weeks, but the patch has to go on top of whatever `main` is then.
+Re-run those checks before publishing. The patch has to go on top of the
+upstream `main` that exists then.
 
 ---
 
@@ -291,9 +316,32 @@ The three tests are three different claims:
 
 ## What was verified, and how
 
+**Revalidated Oct 2 2026, Node 22.23.2.** A fresh scratch repository was
+extracted with `git archive cf8b752:app`, the pristine local copy of the current
+upstream commit. Both existing patches applied cleanly with `git am`.
+Dependencies were borrowed through scratch-only symlinks and the same four
+empty mock-resolution stubs described below. The project checkout and installed
+dependencies were not modified.
+
+| Current focused check | Result |
+|---|---|
+| Pristine `VideoHandler.test.ts` | 3 passed |
+| Both patches applied, then restored after controls | 6 passed in each run |
+| Remove the new promise rejection handler | 2 failed, 4 passed |
+| Remove only its teardown guard | 1 failed, 5 passed |
+| Revert only `ShakaPlayer.ts`, keep the handler | 6 passed; the existing mocked-Shaka coverage gap remains |
+| ESLint and Prettier on the three changed files | Both exit 0 |
+| Final scratch diff and working tree | No whitespace errors; clean after restoration |
+
+The commands, return codes and scratch provenance are recorded in
+`.logs/upstream-shaka-review.json`; individual logs use
+`.logs/upstream-shaka-*.log`. This recheck covers promise error handling in unit
+tests. It adds no device or external adoption evidence. The historical full
+suite and type checks below were not rerun in this checkpoint.
+
 Two clean checkouts of upstream `ef8e4da` were made in a scratch directory from commit `cf8b752` of this repository, which is that commit byte for byte. `node_modules` is a directory of symlinks into this repository's `app/node_modules`, plus four resolution stubs for `@amazon-devices` packages that Calm Frames removed from its own install and the pristine `jest.setup.ts` still mocks: `kepler-channel`, `kepler-media-account-login`, `kepler-media-content-launcher` and `kepler-epg-sync-scheduler`. Each stub is an empty module that exists only so `jest.mock` can resolve a path. Nothing else about the sample was touched, and this repository's own `node_modules` was not written to.
 
-Run on Sep 17 2026, Node 22.23.2:
+Historical broad run on Sep 17 2026, Node 22.23.2:
 
 | Step | Result |
 |---|---|
@@ -309,7 +357,7 @@ Run on Sep 17 2026, Node 22.23.2:
 
 **The three failing tests and the four type errors are both artifacts of where the checkout lives, and neither is an upstream defect.** The failures are snapshot mismatches in `DrawerContent.test.tsx` and `Preview.test.tsx`, where the recorded snapshot holds an asset `testUri` that is written relative to the project root: from a deep scratch path it comes out absolute and the snapshot does not match. The same two suites pass in `app/` in this repository, which is the same code at a normal path. The `TS2742` errors are the usual complaint about a symlinked `node_modules` outside the project and name four store slices nobody touched. Both appear identically with and without the change.
 
-One real upstream problem did turn up while running the suite, and it is not this pull request's subject: **`npx jest --ci` exits 1 on a clean checkout with every test passing**, because `test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap` holds two snapshot entries no current test produces, and `--ci` treats an obsolete snapshot as a failure. Deleting those two entries fixes it. It is worth a sentence in the pull request so a reviewer does not blame this change for a red run, and it is worth a separate one-line pull request.
+One real upstream problem did turn up while running the suite, and it is not this pull request's subject: **`npx jest --ci` exits 1 on a clean checkout with every test passing**, because `test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap` holds two snapshot entries no current test produces, and `--ci` treats an obsolete snapshot as a failure. Deleting those two entries fixes it. It is worth a sentence in the pull request so a reviewer does not blame this change for a red run, and it is worth a separate two-line pull request.
 
 **The guards were broken on purpose and seen to go red**, which is the rule in this project: a green new test proves nothing on its own.
 
@@ -348,14 +396,14 @@ The one race worth naming is teardown. Backing out of the player mid-load calls 
 
 | Field | Value |
 |-------|-------|
-| Device | Virtual Device (Vega Virtual Device), and the same code path on a physical device |
+| Device | Vega Virtual Device. No physical device was used |
 | App Version | 3.24.0 (manifest.toml) |
 | Image Build | Vega OS 1.2 (TV Ship/101520710) |
 | VDT Version | Vega CLI 1.3.4, Vega SDK 0.24.9914 |
 | Video/Img showing the issue | Not included. The symptom is a spinner that never stops, which is not informative as a video. The unit tests in this PR reproduce it deterministically. |
 | Expected Behavior | When Shaka fails to load a source, the app reports a playback error. `loadAdaptiveMediaPlayer` documents this itself: its comment block says the method "4. Handles any loading errors", and it has a try/catch around the load that calls `setIsVideoError(true)`. |
 | Current Behaviour | The error is never seen. `ShakaPlayer.load()` is declared `void` and calls `internalLoad(content)` without returning or awaiting it, so a rejection from `this.player.load(content.uri)` becomes an unhandled rejection. The caller's try/catch in `VideoHandler.loadAdaptiveMediaPlayer` can only catch a synchronous throw, so it never fires. `setIsVideoError` is never called, `ErrorView` never renders, and `showBuffering` (initialised true in `PlayerScreen.tsx`, cleared only on `playing` / `seeked` / `timeupdate` / error) stays up for good. The user sees a spinner forever with no error. |
-| Reproduction Rate | 5 out of 5. Any source Shaka cannot load reproduces it: a 404 manifest, a plain MP4 handed to Shaka because its `format` field is not the literal "MP4", or a server that does not answer byte ranges. The unit tests added here reproduce it 5 out of 5 with no device. |
+| Reproduction Rate | Deterministic. The unit tests added here reproduce it on every run with no device. On the Vega Virtual Device it reproduced each time we handed Shaka a plain MP4 over HTTP, which happens when a title's `format` field is not the literal "MP4", and each time the server answered a byte range request with 200 instead of 206. Any other source Shaka cannot load, such as a 404 manifest, takes the same code path; we did not count trials of those. |
 
 For Pull Requests:
 
@@ -415,10 +463,11 @@ For Pull Requests:
   all six tests green. It is a one-line contract change.
 
   Unrelated, and flagging it so a red CI run is not blamed on this change:
-  `npx jest --ci` exits 1 on a clean checkout of main with every test passing,
-  because `test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap`
+  `npx jest --ci` exits 1 on a clean checkout of main at ef8e4da (Aug 6 2026)
+  with every test passing, because
+  `test/blocks/components/MediaItemShoveler/__snapshots__/MediaItemShoveler.test.tsx.snap`
   holds two snapshot entries that no current test produces, and `--ci` counts
-  an obsolete snapshot as a failure. Happy to send that one-line deletion as a
+  an obsolete snapshot as a failure. Happy to send that two-line deletion as a
   separate PR if it would help.
 
 * Dependencies added/modified: none.
@@ -442,7 +491,9 @@ anything awaitable, and harmless if it never does.
 
 * [x] I have reviewed my own code
 * [x] I have tested my changes
-* [x] I have updated the documentation accordingly
+* [ ] I have updated the documentation accordingly. No documentation change
+  is included: the comment block on `loadAdaptiveMediaPlayer` already says the
+  method handles loading errors, and this change makes the code match it.
 ```
 
 ---
@@ -487,7 +538,7 @@ anything awaitable, and harmless if it never does.
 
 7. **Push the branch to your fork and open the pull request** with the title and body above, referencing the issue number.
 
-8. **Record the links.** Paste the pull request URL into `docs/SUBMISSION.md` field 11.1 and your GitHub username into 11.3. The fields are listed at the end of this file.
+8. **Record the links.** Paste the pull request URL into `docs/SUBMISSION.md` field 12.1 and your GitHub username into 12.3. The fields are listed at the end of this file.
 
 One decision that is yours, not this machine's: the patches carry no co-author or generated-with trailer. Our own repository puts one on every commit. A contribution to someone else's repository goes out under your name, so the trailer is left off rather than added on your behalf. Add one before pushing if you would rather it were there.
 
@@ -501,11 +552,11 @@ Three fields in `docs/SUBMISSION.md` depend on this file. None of them can be fi
 
 | Field | What goes in it | State |
 |---|---|---|
-| 11.1 Contribution URL | The pull request URL, `https://github.com/AmazonAppDev/vega-video-sample/pull/<n>`. If the issue is filed first and the pull request is late, the issue URL is a usable stand-in on the same repository | **NEEDS ALEX.** Nothing is pushed. Due Mon Oct 12 |
-| 11.3 GitHub username | The account that owns the fork, which is the account that appears on the pull request | **NEEDS ALEX.** The repository here is under `alejandro-publius`; confirm the same account forks upstream, or say which one does |
-| 11.4 What we did, and why it matters | Already written. The upstream half can now say three tests rather than two, and that both guards were seen to fail | Ready, one word to update |
+| 12.1 Contribution URL | The pull request URL, `https://github.com/AmazonAppDev/vega-video-sample/pull/<n>`. If the issue is filed first and the pull request is late, the issue URL is a usable stand-in on the same repository | **NEEDS ALEX.** Nothing is pushed. Due Mon Oct 12 |
+| 12.3 GitHub username | The account that owns the fork, which is the account that appears on the pull request | **NEEDS ALEX.** The repository here is under `alejandro-publius`; confirm the same account forks upstream, or say which one does |
+| 12.4 What we did, and why it matters | Written. The upstream half says three tests, two of which fail without the fix | Ready |
 
-Section 9.3 of `docs/SUBMISSION.md`, the vega-video-sample feedback, can also pick up two things that were measured today: `jest --ci` exits 1 on a clean checkout over two obsolete snapshot entries, and `main` has not moved since Aug 6 2026. Both are in `docs/FEEDBACK.md` under the sample.
+The vega-video-sample feedback already carries two things measured while this was prepared: `jest --ci` exits 1 on a clean checkout over two obsolete snapshot entries, and `main` has not moved since Aug 6 2026. Both are in `docs/FEEDBACK.md` section 3, which is what `docs/SUBMISSION.md` section 10 pastes from.
 
 ---
 

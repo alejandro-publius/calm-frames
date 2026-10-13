@@ -98,18 +98,27 @@ const Harness = ({
   mode,
   intervals,
   foreground = true,
+  onUncertainty,
 }: {
   media: MediaElementLike;
   mode: 'layering' | 'timing';
   intervals?: ReturnType<typeof buildCoverIntervals>;
   foreground?: boolean;
+  onUncertainty?: (mediaTimeMs: number) => void;
 }) => {
   const ref = React.useRef<MediaElementLike | null>(media);
-  const state = useCoverHarness(ref, { mode, intervals, tickMs: 50, foreground });
+  const state = useCoverHarness(ref, {
+    mode,
+    intervals,
+    tickMs: 50,
+    foreground,
+    onUncertainty,
+  });
   return (
     <>
       <Text testID="covered">{state.covered ? 'covered' : 'clear'}</Text>
       <Text testID="worstDriftMs">{String(Math.round(state.worstDriftMs))}</Text>
+      <Text testID="uncertaintyCount">{state.uncertaintyCount}</Text>
       <CoverLayer visible={state.covered} />
     </>
   );
@@ -173,6 +182,60 @@ describe('useCoverHarness', () => {
     expect(screen.getByTestId('covered').props.children).toBe('clear');
 
     act(() => media.fire('waiting'));
+    expect(screen.getByTestId('covered').props.children).toBe('covered');
+  });
+
+  it('keeps fail-closed coverage when an optional presentation callback throws', () => {
+    const media = makeMediaElement();
+    render(
+      <Harness
+        media={media}
+        mode="timing"
+        intervals={[]}
+        onUncertainty={() => {
+          throw new Error('presentation failed');
+        }}
+      />,
+    );
+    expect(() => act(() => media.fire('waiting'))).not.toThrow();
+    expect(screen.getByTestId('covered').props.children).toBe('covered');
+    expect(screen.getByTestId('uncertaintyCount').props.children).toBe(1);
+    act(() => jest.advanceTimersByTime(500));
+    expect(screen.getByTestId('covered').props.children).toBe('covered');
+  });
+
+  it('keeps the committed presentation callback during an abandoned suspended render', () => {
+    const media = makeMediaElement();
+    const original = jest.fn();
+    const neverShown = jest.fn();
+    const pending = new Promise<void>(() => {});
+    function Suspender({ block }: { block: boolean }) {
+      if (block) {
+        throw pending;
+      }
+      return null;
+    }
+    function Scenario({
+      callback,
+      block,
+    }: {
+      callback: (mediaTimeMs: number) => void;
+      block: boolean;
+    }) {
+      return (
+        <React.Suspense fallback={<Text testID="pending-harness">Pending</Text>}>
+          <Harness media={media} mode="timing" onUncertainty={callback} />
+          <Suspender block={block} />
+        </React.Suspense>
+      );
+    }
+    const view = render(<Scenario callback={original} block={false} />);
+    view.rerender(<Scenario callback={neverShown} block />);
+    expect(screen.getByTestId('pending-harness')).toBeTruthy();
+    act(() => media.fire('waiting'));
+    expect(neverShown).not.toHaveBeenCalled();
+    expect(original).toHaveBeenCalledTimes(1);
+    view.rerender(<Scenario callback={original} block={false} />);
     expect(screen.getByTestId('covered').props.children).toBe('covered');
   });
 

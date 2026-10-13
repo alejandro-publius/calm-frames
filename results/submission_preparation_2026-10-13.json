@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-13",
+  "base_commit": "41c34fcf25c8a488b46a6bf09ea14289479eb211",
+  "scope": "Demo encoder presentation, next native recording plan and draft submission copy. No app playback changes, native build, final video, publication or submission.",
+  "source_sha256": {
+    "eval/assemble_demo.py": "fc3f82d607d0caacc33eb161734a82d88e98ea42fca9ff896bd0c28403fa2073",
+    "eval/tests/test_assemble_demo.py": "1806fbcc2b9cc8e3e63a5e9f6b04b9301b786c631a649a546f870e95eaab1fc7",
+    "docs/VIDEO_SCRIPT.md": "156eecd5d0bc38f6d632766d37bd33dfa7f1473ce28e5bbc6799f51499a7d5a4",
+    "docs/MAC_FINISH.md": "dede4fe97e75b94ea404959dd4f5f25096241107dcac7cca6d8f451de9d410f3",
+    "docs/SUBMISSION_COPY.md": "4c3d007a7e7d11607fecb4015bd4f503d063670de3dbdb97fed8c8125c0aef33",
+    "docs/SUBMISSION.md": "bfa70c8825393b56f256fc5888a437dd9d7698c1ef5ef953848d3fec7f2317c6"
+  },
+  "checks": {
+    "focused_tests": {
+      "passed": 79,
+      "seconds": 10.59,
+      "files": [
+        "eval/tests/test_assemble_demo.py",
+        "eval/tests/test_package_redesign_review.py",
+        "eval/tests/test_doc_links.py",
+        "eval/tests/test_doc_line_links.py"
+      ],
+      "log": ".logs/finish-demo-final-tests.log"
+    },
+    "ruff": {
+      "version": "0.17.0",
+      "result": "passed",
+      "files": [
+        "eval/assemble_demo.py",
+        "eval/tests/test_assemble_demo.py"
+      ]
+    },
+    "negative_controls": {
+      "source_restored_sha256": "fc3f82d607d0caacc33eb161734a82d88e98ea42fca9ff896bd0c28403fa2073",
+      "controls": [
+        {
+          "control": "source-bottom-hidden",
+          "exit_code": 1,
+          "expected_assertion_seen": true,
+          "log": ".logs/finish-demo-control-source-bottom-hidden.log"
+        },
+        {
+          "control": "audio-limiter-removed",
+          "exit_code": 1,
+          "expected_assertion_seen": true,
+          "log": ".logs/finish-demo-control-audio-limiter-removed.log"
+        }
+      ]
+    },
+    "visual_inspection": "Inspected the current library browser preview and a synthetic encoder frame. Source bottom and subtitle footer remain separate; actual native frames and audio need the Mac run.",
+    "synthetic_encoder_only": true
+  },
+  "planned_demo": {
+    "shots": 11,
+    "duration_seconds": 156,
+    "new_native_recording_exists": false,
+    "macos_samantha_tts_run": false,
+    "narration_timing": "Estimated cue timings; review the actual spoken audio before publication."
+  },
+  "earlier_review_archive": {
+    "release_id": 409221460,
+    "asset_id": 629246726,
+    "name": "calm-frames-redesign-review-2026-10-10.zip",
+    "sha256": "29685a79b1b0f51a93d43484fa1ba38630fb582d20ff60d5fb08f97ff61eac6c",
+    "download_matches_github_digest": true,
+    "original_reports_found": false,
+    "searched": "JSON entries in the review archive and its nested source archive, compared by exact required SHA-256.",
+    "required_report_sha256": [
+      "296b390bca42bca1a2339ff312a7ccb05c331d00186a7636b368c8df4af8446b",
+      "be5f6ecc536bb267b7a844cd08e4d5babc9f4f4769d05178d9edde8fd4585178"
+    ]
+  },
+  "hosted_audit": {
+    "commit": "41c34fcf25c8a488b46a6bf09ea14289479eb211",
+    "run_id": 38410755248,
+    "conclusion": "success",
+    "scope": "Existing exception policy; not a claim of zero vulnerabilities."
+  },
+  "remaining": [
+    "Original library reports or a new separately verified export",
+    "Mac build and current Vega observations, including motion and audio",
+    "Matching native demo and finished-file checks",
+    "Amazon sample license clarification and final security review",
+    "Actual public contribution, video and reviewer-access links",
+    "Reviewed publication and Devpost submission"
+  ]
+}

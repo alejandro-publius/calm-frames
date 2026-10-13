@@ -1,5 +1,5 @@
 /**
- * The block that says why there is nothing to watch.
+ * The block that says why there is nothing to watch, and every other state.
  *
  * Every empty state and every error state in Calm Frames is this one
  * component, so they are the same shape, the same size and the same distance
@@ -11,23 +11,24 @@
  * - it announces itself. A state that arrives while someone is looking
  *   elsewhere is no use if it is silent, so the block is a polite live region
  *   and carries its own words as its label;
- * - colour is never the only signal. The tone sets the border colour, and the
- *   title says the same thing in words;
+ * - colour is never the only signal. The tone sets the colour of the bar down
+ *   the block's left edge, and the title says the same thing in words;
  * - it never offers a way past itself. A notice about a title that did not
  *   pass its check has no play button in it, because there is nothing to play.
  *   Whatever a caller puts in `children` sits below the words, and the screens
  *   only ever put a way back there.
+ *
+ * The tone used to be a ring all the way round the block, the same width as
+ * the focus ring. That made a notice look like a control waiting for focus,
+ * and on a page of quiet cards it was the one thing drawn in an outline. A
+ * bar down one edge is the shape a television uses for a message, and it
+ * paints no new colour: the fill is the card colour every other frame already
+ * has, and uiFrames.ts counts fills, not borders.
  */
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {
-  CALM_COLORS,
-  CALM_SPACE,
-  CALM_TYPE,
-  FOCUS_RING_WIDTH,
-  scale,
-} from './calmStyles';
+import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { Notice, NoticeTone } from './copy';
 
 export interface StatusNoticeProps {
@@ -37,11 +38,19 @@ export interface StatusNoticeProps {
   testID?: string;
 }
 
-const TONE_BORDER: Record<NoticeTone, string> = {
+const TONE_BAR: Record<NoticeTone, string> = {
   calm: CALM_COLORS.BORDER,
   waiting: CALM_COLORS.PENDING,
   blocked: CALM_COLORS.FAILED,
 };
+
+/**
+ * The bar down the left edge, in 1080p units.
+ *
+ * A little wider than the focus ring, so it reads as a mark on the card rather
+ * than as one side of an outline.
+ */
+const BAR_WIDTH = 8;
 
 const StatusNotice = ({
   notice,
@@ -50,18 +59,22 @@ const StatusNotice = ({
 }: StatusNoticeProps) => (
   <View
     testID={testID}
-    accessible
-    accessibilityLiveRegion="polite"
-    aria-live="polite"
-    accessibilityLabel={`${notice.title}. ${notice.detail}`}
-    aria-label={`${notice.title}. ${notice.detail}`}
-    style={[styles.notice, { borderColor: TONE_BORDER[notice.tone] }]}>
-    <Text style={styles.title} testID={`${testID}-title`}>
-      {notice.title}
-    </Text>
-    <Text style={styles.detail} testID={`${testID}-detail`}>
-      {notice.detail}
-    </Text>
+    style={[styles.notice, { borderLeftColor: TONE_BAR[notice.tone] }]}>
+    <View
+      testID={`${testID}-announcement`}
+      accessible
+      accessibilityLiveRegion="polite"
+      aria-live="polite"
+      accessibilityLabel={`${notice.title}. ${notice.detail}`}
+      aria-label={`${notice.title}. ${notice.detail}`}>
+      <Text style={styles.title} testID={`${testID}-title`}>
+        {notice.title}
+      </Text>
+      <Text style={styles.detail} testID={`${testID}-detail`}>
+        {notice.detail}
+      </Text>
+    </View>
+    {/* Actions remain siblings of the spoken message, with their own focus. */}
     {children}
   </View>
 );
@@ -70,19 +83,19 @@ const styles = StyleSheet.create({
   notice: {
     alignSelf: 'stretch',
     maxWidth: scale(1500),
-    padding: scale(CALM_SPACE.BLOCK),
+    paddingVertical: scale(CALM_SPACE.BLOCK),
+    paddingHorizontal: scale(CALM_SPACE.BLOCK),
     borderRadius: scale(16),
-    borderWidth: scale(FOCUS_RING_WIDTH),
+    borderLeftWidth: scale(BAR_WIDTH),
     backgroundColor: CALM_COLORS.SURFACE,
   },
   title: {
+    ...CALM_TEXT.section,
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.CARD_TITLE),
-    fontWeight: '600',
   },
   detail: {
+    ...CALM_TEXT.body,
     color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.BODY),
     marginTop: scale(CALM_SPACE.TIGHT),
   },
 });

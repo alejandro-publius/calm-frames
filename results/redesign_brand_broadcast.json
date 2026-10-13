@@ -1,0 +1,51 @@
+{
+  "profile": "broadcast",
+  "assets": [
+    {
+      "asset": "app/assets/image/tv/harbor.png",
+      "passed": true,
+      "output": "PASS /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpwtzo7id1/still.mkv: below the broadcast thresholds\n"
+    },
+    {
+      "asset": "app/assets/image/tv/gradient.png",
+      "passed": true,
+      "output": "PASS /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpwtzo7id1/still.mkv: below the broadcast thresholds\n"
+    },
+    {
+      "asset": "app/assets/image/CalmFrames.png",
+      "passed": true,
+      "output": "PASS /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpwtzo7id1/still.mkv: below the broadcast thresholds\n"
+    },
+    {
+      "asset": "docs/brand/appstore-icon-512.png",
+      "passed": true,
+      "output": "PASS /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpwtzo7id1/still.mkv: below the broadcast thresholds\n"
+    },
+    {
+      "asset": "docs/brand/appstore-icon-114.png",
+      "passed": true,
+      "output": "PASS /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpwtzo7id1/still.mkv: below the broadcast thresholds\n"
+    },
+    {
+      "asset": "docs/brand/firetv-app-icon-1280x720.png",
+      "passed": true,
+      "output": "PASS /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpwtzo7id1/still.mkv: below the broadcast thresholds\n"
+    },
+    {
+      "asset": "docs/brand/preview-1024.png",
+      "passed": true,
+      "output": "PASS /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpwtzo7id1/still.mkv: below the broadcast thresholds\n"
+    },
+    {
+      "asset": "docs/brand/preview-256.png",
+      "passed": true,
+      "output": "PASS /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpwtzo7id1/still.mkv: below the broadcast thresholds\n"
+    },
+    {
+      "asset": "docs/brand/preview-48.png",
+      "passed": true,
+      "output": "PASS /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/tmpwtzo7id1/still.mkv: below the broadcast thresholds\n"
+    }
+  ],
+  "failed": 0
+}

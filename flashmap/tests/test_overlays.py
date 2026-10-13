@@ -8,8 +8,6 @@ analyser still sees flashing that a subtitle happens to sit on top of.
 
 from __future__ import annotations
 
-import pytest
-
 import clipgen
 from flashmap import WCAG, analyze_file
 from flashmap.area import wcag_reference_window

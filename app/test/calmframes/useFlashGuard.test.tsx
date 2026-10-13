@@ -141,7 +141,39 @@ describe('useFlashGuard', () => {
     expect(read('status')).toBe('loading');
     expect(read('covered')).toBe('covered');
     expect(screen.queryByTestId('calm-frames-cover')).toBeTruthy();
-    expect(read('card-kind')).toBe('unverified');
+    // Still checking is not the same as refused, so it gets its own card
+    // rather than the "Not checked yet" one a failed map gets.
+    expect(read('card-kind')).toBe('checking');
+    expect(screen.getByTestId('calm-card-title').props.children).toBe(
+      'Getting your story ready',
+    );
+    expect(screen.queryByTestId('calm-card-skip')).toBeNull();
+  });
+
+  it('shows the checking card for a replacement map, not the last refusal', async () => {
+    const media = makeMediaElement();
+    const { rerender } = render(<Guarded media={media} mapText={null} />);
+    await settle();
+    expect(screen.getByTestId('calm-card-title').props.children).toBe(
+      'This title is unavailable',
+    );
+
+    // A new map arrives and is still being fetched. The refusal belonged to
+    // the old one, so it must not be what the card says now.
+    rerender(
+      <Guarded
+        media={media}
+        mapUrl="https://example.invalid/replacement.json"
+        fetchText={() => new Promise<string | null>(() => {})}
+      />,
+    );
+    await settle();
+    expect(read('status')).toBe('loading');
+    expect(read('covered')).toBe('covered');
+    expect(read('card-kind')).toBe('checking');
+    expect(screen.getByTestId('calm-card-title').props.children).toBe(
+      'Getting your story ready',
+    );
   });
 
   it('keeps the picture hidden when the map cannot be fetched', async () => {
@@ -156,6 +188,26 @@ describe('useFlashGuard', () => {
     await settle();
     expect(read('status')).toBe('blocked');
     expect(read('covered')).toBe('covered');
+  });
+
+  it('never shows an unchecked picture after playing confirms with a missing map', async () => {
+    const media = makeMediaElement();
+    render(
+      <Guarded
+        media={media}
+        mapUrl="https://example.invalid/map.json"
+        fetchText={async () => null}
+      />,
+    );
+    await settle();
+    await act(async () => {
+      media.fire('playing');
+      jest.advanceTimersByTime(100);
+    });
+    // Assert the picture itself, not just the rejection category. Treating a
+    // missing map as an empty verified one would otherwise leave it exposed.
+    expect(read('covered')).toBe('covered');
+    expect(read('status')).toBe('blocked');
   });
 
   it('uncovers only once a signed map has verified', async () => {
@@ -180,7 +232,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('unverified');
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Not checked yet',
+      'This title is unavailable',
     );
   });
 
@@ -292,7 +344,7 @@ describe('useFlashGuard', () => {
     expect(read('status')).toBe('blocked');
     expect(read('covered')).toBe('covered');
     expect(screen.getByTestId('calm-card-detail').props.children).toMatch(
-      /stricter than the check/,
+      /current viewing settings/,
     );
   });
 

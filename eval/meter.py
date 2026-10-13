@@ -258,9 +258,9 @@ def write_still_video(
     viewer may scale, letterbox or sharpen, and the calibration would be measuring that instead
     of the panel.
     """
-    import av
-
     from fractions import Fraction
+
+    import av
 
     count = max(1, int(round(seconds * fps)))
     array = np.ascontiguousarray(image)

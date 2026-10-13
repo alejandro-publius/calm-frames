@@ -31,7 +31,7 @@ def test_every_shipped_image_is_in_the_list():
         path.resolve()
         for folder in SEARCHED
         if folder.is_dir()
-        for path in folder.glob("*.png")
+        for path in folder.rglob("*.png")
     }
     listed = {asset.resolve() for asset in ASSETS}
 

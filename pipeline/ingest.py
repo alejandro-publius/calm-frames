@@ -44,6 +44,7 @@ from .catalog import (
     STATUS_PENDING,
     CatalogEntry,
     RenditionEntry,
+    read_entry,
     update_index,
     write_entry,
 )
@@ -51,10 +52,13 @@ from .ffmpegtool import require_tools
 from .flashmap_adapter import FlashmapAdapter, iter_presets, tail_to_hold_ms
 from .hashing import fingerprint, sha256_file
 from .hideplan import (
+    APP_PLAYBACK_MAPS,
+    APP_PLAYBACK_RECIPE,
     DEFAULT_CALM_MARGIN_MS,
     DEFAULT_GUARD_BAND_MS,
     DEFAULT_MIN_COVER_MS,
     HidePlan,
+    build_app_playback_plan,
     build_hide_plan,
     total_covered_ms,
     union_intervals,
@@ -84,6 +88,13 @@ from .render import (
     render_cover_model,
     render_safe_master,
 )
+from .sceneholds import (
+    SCENE_HOLD_VERSION,
+    build_scene_holds,
+    read_scene_holds,
+    scene_identity,
+    scene_payload,
+)
 from .state import Ledger
 from .verify import VerifyReport, apply_to_catalog, verify_title, write_report
 
@@ -110,6 +121,8 @@ class IngestOptions:
     force: bool = False
     skip_verify: bool = False
     title: str | None = None
+    scene_holds: bool = True
+    playback_compatible: bool = False
 
 
 @dataclass
@@ -138,6 +151,13 @@ class _Steps:
         self.ran: list[str] = []
         self.skipped: list[str] = []
 
+    def _output_hashes(self, outputs: Sequence[Path]) -> dict[str, str | None]:
+        root = self.ledger.title_dir.resolve()
+        return {
+            str(path.resolve().relative_to(root)): sha256_file(path) if path.is_file() else None
+            for path in outputs
+        }
+
     def run(
         self,
         name: str,
@@ -147,14 +167,26 @@ class _Steps:
         *,
         depends_on: Sequence[str] = (),
         cache_result: bool = True,
+        check_output_bytes: bool = False,
     ) -> str:
         parents = {dep: self.fingerprints.get(dep, "") for dep in depends_on}
         fp = fingerprint({"v": VERSION, "step": name, "in": payload, "parents": parents})
         self.fingerprints[name] = fp
         if cache_result and not self.force and self.ledger.is_done(name, fp):
-            self.skipped.append(name)
-            return fp
+            previous = self.ledger.get(name)
+            if not check_output_bytes or (
+                previous is not None
+                and previous.extra.get("output_sha256") == self._output_hashes(
+                    [self.ledger.title_dir / output for output in previous.outputs]
+                )
+            ):
+                self.skipped.append(name)
+                return fp
         extra = work() or {}
+        if check_output_bytes:
+            # Probe and preview metadata affect what can be displayed. Restore
+            # changed cached artifacts from their source, not their filenames.
+            extra["output_sha256"] = self._output_hashes(outputs)
         self.ledger.record(name, fp, outputs, extra)
         self.ran.append(name)
         return fp
@@ -170,6 +202,17 @@ def ingest_title(
     options = options or IngestOptions()
     adapter = adapter or FlashmapAdapter()
     presets = iter_presets(options.presets)
+    if options.playback_compatible:
+        required = {name for preset in presets for name in APP_PLAYBACK_MAPS[preset]}
+        if not required.issubset(presets):
+            raise PipelineError("App-compatible preparation requires WCAG and Broadcast maps together.")
+    # Use one explicit room for every map in the app recipe. Otherwise the
+    # legacy extra-cautious preset silently picks a different analysis room.
+    diag_in = options.diag_in if options.diag_in is not None else (85.0 if options.playback_compatible else None)
+    distance_ft = options.distance_ft if options.distance_ft is not None else (4.0 if options.playback_compatible else None)
+    # Union-only intervals may have no segment in one map. Do not attach scene
+    # descriptors that imply otherwise; verified global stills remain available.
+    scene_holds_enabled = options.scene_holds and not options.playback_compatible
     require_tools()
 
     source = Path(source).resolve()
@@ -179,6 +222,15 @@ def ingest_title(
     sha = sha256_file(source)
     layout = TitleLayout(workdir, sha)
     layout.root.mkdir(parents=True, exist_ok=True)
+    # Re-ingest must withdraw a previous verdict before any cached artifact is
+    # trusted. A missing or changed scene image must never leave the old title
+    # playable merely because this run failed before writing the final entry.
+    if layout.entry_path.exists():
+        previous_entry = read_entry(layout.entry_path)
+        previous_entry.status = STATUS_PENDING
+        previous_entry.verified = False
+        write_entry(layout.entry_path, previous_entry)
+        update_index(layout.index_path, previous_entry)
     ledger = Ledger(layout.root)
     stat = source.stat()
     ledger.set_source(
@@ -206,7 +258,8 @@ def ingest_title(
             "frames": probe.frame_count,
         }
 
-    steps.run("probe", {"sha": sha}, [layout.probe_path], do_probe)
+    steps.run("probe", {"sha": sha}, [layout.probe_path], do_probe,
+              check_output_bytes=True)
     probe = probe_holder.get("probe") or VideoProbe.from_dict(
         json.loads(layout.probe_path.read_text())
     )
@@ -219,8 +272,8 @@ def ingest_title(
                 source,
                 profile=preset,
                 out_path=layout.map_path(preset),
-                diag_in=options.diag_in,
-                distance_ft=options.distance_ft,
+                diag_in=diag_in,
+                distance_ft=distance_ft,
                 key=options.key,
             )
             return {"segments": doc.violation_count, "signed": doc.is_signed}
@@ -230,8 +283,8 @@ def ingest_title(
             {
                 "sha": sha,
                 "preset": preset,
-                "diag_in": options.diag_in,
-                "distance_ft": options.distance_ft,
+                "diag_in": diag_in,
+                "distance_ft": distance_ft,
                 "signed": bool(options.key),
             },
             [layout.map_path(preset)],
@@ -246,7 +299,10 @@ def ingest_title(
             from .flashmap_adapter import load_map
 
             doc = load_map(layout.map_path(preset))
-            plan = build_hide_plan(
+            plan = build_app_playback_plan(
+                {name: load_map(layout.map_path(name)) for name in APP_PLAYBACK_MAPS[preset]},
+                source_sha256=sha, duration_ms=duration_ms, preset=preset,
+            ) if options.playback_compatible else build_hide_plan(
                 doc,
                 source_sha256=sha,
                 duration_ms=duration_ms,
@@ -271,10 +327,13 @@ def ingest_title(
                 "min_cover_ms": options.min_cover_ms,
                 "allow_dim": options.allow_dim,
                 "duration_ms": duration_ms,
+                "playback_recipe": APP_PLAYBACK_RECIPE if options.playback_compatible else None,
             },
             [layout.plan_path(preset)],
             do_plan,
-            depends_on=[f"analyze:{preset}", "probe"],
+            depends_on=[*[f"analyze:{name}" for name in (
+                APP_PLAYBACK_MAPS[preset] if options.playback_compatible else (preset,)
+            )], "probe"],
         )
         if preset not in plans:
             plans[preset] = HidePlan.from_dict(json.loads(layout.plan_path(preset).read_text()))
@@ -353,11 +412,35 @@ def ingest_title(
         [layout.still_path, layout.still_manifest_path],
         do_still,
         depends_on=["luma", *[f"plan:{p}" for p in presets]],
+        check_output_bytes=True,
     )
 
     # 6 to 9, per preset.
     for preset in presets:
         plan = plans[preset]
+
+        scene_images = None
+        scene_bytes = None
+        if scene_holds_enabled and options.key:
+            scene_outputs = [layout.scene_manifest(preset)]
+
+            def do_scenes(preset: str = preset, plan: HidePlan = plan) -> dict:
+                images = build_scene_holds(
+                    source, layout=layout, preset=preset, intervals=plan.intervals,
+                    union=union, probe=probe, margin_ms=options.calm_margin_ms,
+                    adapter=adapter,
+                )
+                scene_outputs.extend(image.path for image in images)  # noqa: B023 - steps.run calls it before the loop moves on
+                return {"holds": len(images)}
+
+            steps.run(
+                f"scene_holds:{preset}",
+                {"version": SCENE_HOLD_VERSION, "calm_margin_ms": options.calm_margin_ms},
+                scene_outputs, do_scenes,
+                depends_on=["probe", *[f"plan:{p}" for p in presets]],
+            )
+            scene_images = read_scene_holds(layout, preset)
+            scene_bytes = scene_identity(layout, preset)
 
         def do_rendition(preset: str = preset, plan: HidePlan = plan) -> dict:
             result = render_safe_master(
@@ -370,6 +453,7 @@ def ingest_title(
                 x264_preset=options.x264_preset,
                 segment_seconds=options.segment_seconds,
                 pad_tail_ms=tail_to_hold_ms(layout.map_path(preset)),
+                scene_holds=scene_images,  # noqa: B023 - steps.run calls it before the loop moves on
             )
             hls = package_hls(
                 layout.safe_master(preset),
@@ -385,6 +469,7 @@ def ingest_title(
                 "crf": options.crf,
                 "x264_preset": options.x264_preset,
                 "segment_seconds": options.segment_seconds,
+                "scene_holds": scene_bytes,
             },
             [layout.safe_master(preset), layout.master_playlist(preset)],
             do_rendition,
@@ -433,7 +518,10 @@ def ingest_title(
             [layout.bif_path(preset), layout.bif_manifest(preset)],
             do_bif,
             depends_on=[f"rendition:{preset}"],
+            check_output_bytes=True,
         )
+
+        poster_outputs = [layout.posters_manifest(preset)]
 
         def do_posters(preset: str = preset, plan: HidePlan = plan) -> dict:
             times = choose_calm_times(
@@ -464,6 +552,7 @@ def ingest_title(
                     indent=2,
                 )
             )
+            poster_outputs.extend(poster.path for poster in posters)  # noqa: B023 - steps.run calls it before the loop moves on
             return {"posters": len(posters)}
 
         steps.run(
@@ -473,9 +562,10 @@ def ingest_title(
                 "width": options.poster_width,
                 "calm_margin_ms": options.calm_margin_ms,
             },
-            [layout.posters_manifest(preset)],
+            poster_outputs,
             do_posters,
             depends_on=[f"rendition:{preset}"],
+            check_output_bytes=True,
         )
 
         def do_signed_map(preset: str = preset) -> dict:
@@ -492,11 +582,32 @@ def ingest_title(
                     f"the {preset} map was analyzed with a signing key but carries "
                     "no signature"
                 )
+            if scene_images is not None:  # noqa: B023 - steps.run calls it before the loop moves on
+                from .registry import load_private_key, sign_document, write_registry
+
+                # Segments and profile thresholds are not edited. The new image
+                # payload joins the existing canonical Ed25519 signature.
+                document = dict(doc.raw, scene_holds=scene_payload(scene_images))  # noqa: B023 - steps.run calls it before the loop moves on
+                # Scene images are only read when there is a key (scene_holds_enabled and
+                # options.key, above), so this names that rather than re-checking it.
+                assert options.key, "scene holds are only built with a signing key"
+                write_registry(sign_document(document, load_private_key(options.key)),
+                               layout.map_path(preset))
+            elif "scene_holds" in doc.raw:
+                from .registry import load_private_key, sign_document, write_registry
+
+                document = dict(doc.raw)
+                document.pop("scene_holds")
+                if options.key:
+                    document = sign_document(document, load_private_key(options.key))
+                else:
+                    document.pop("signature", None)
+                write_registry(document, layout.map_path(preset))
             return {"signed": doc.is_signed, "bound": True}
 
         steps.run(
             f"signed_map:{preset}",
-            {"key": bool(options.key)},
+            {"key": bool(options.key), "scene_holds": scene_bytes},
             [layout.map_path(preset)],
             do_signed_map,
             depends_on=[f"analyze:{preset}"],
@@ -508,12 +619,13 @@ def ingest_title(
                 plan=plan,
                 out_path=layout.cover_model_path(preset),
                 probe=probe,
+                scene_holds=scene_images,  # noqa: B023 - steps.run calls it before the loop moves on
             )
             return result.notes
 
         steps.run(
             f"cover_model:{preset}",
-            {"allow_dim": options.allow_dim},
+            {"allow_dim": options.allow_dim, "scene_holds": scene_bytes},
             [layout.cover_model_path(preset)],
             do_cover_model,
             depends_on=[f"plan:{preset}"],
@@ -561,6 +673,10 @@ def ingest_title(
             "cover_still_from": json.loads(layout.still_manifest_path.read_text()).get(
                 "from", STILL_FROM_SOURCE
             ),
+            "scene_holds": bool(scene_holds_enabled and options.key),
+            **({"playback_recipe": APP_PLAYBACK_RECIPE, "analysis_room": {
+                "diag_in": diag_in, "distance_ft": distance_ft,
+            }} if options.playback_compatible else {}),
         },
     )
     write_entry(layout.entry_path, entry)
@@ -581,15 +697,38 @@ def ingest_title(
     # 11. Verify. A pass is cached, a failure never is.
     previous = ledger.get("verify")
     verify_payload = {
+        "scene_verification_version": 2,
         "presets": presets,
         "pub": options.pub,
+        "public_key_bytes": sha256_file(options.pub) if options.pub and Path(options.pub).is_file() else None,
         "calm_margin_ms": options.calm_margin_ms,
+        "playback_recipe": APP_PLAYBACK_RECIPE if options.playback_compatible else None,
+        # An unchanged filename or a cached report is not evidence that the
+        # same map, image or encoded output is still on disk.
+        "artifact_bytes": {
+            str(path): sha256_file(path) if path.is_file() else None
+            for preset in presets
+            for path in (
+                layout.probe_path, layout.still_path, layout.still_manifest_path,
+                layout.map_path(preset), layout.plan_path(preset),
+                layout.safe_master(preset), layout.cover_model_path(preset),
+                layout.scene_manifest(preset),
+                layout.bif_path(preset), layout.bif_manifest(preset),
+                layout.posters_manifest(preset),
+                *sorted(layout.posters_dir(preset).glob("*")),
+                *sorted(layout.hls_dir(preset).glob("*")),
+            )
+        },
+        "scene_assets": {
+            preset: scene_identity(layout, preset)
+            for preset in presets if scene_holds_enabled and options.key
+        },
     }
     parents = {
         name: steps.fingerprints[name]
         for name in steps.fingerprints
         if name.split(":")[0]
-        in {"probe", "plan", "rendition", "bif", "posters", "still", "signed_map", "cover_model"}
+        in {"probe", "plan", "rendition", "bif", "posters", "still", "scene_holds", "signed_map", "cover_model"}
     }
     verify_fp = fingerprint(
         {"v": VERSION, "step": "verify", "in": verify_payload, "parents": parents}
@@ -600,6 +739,7 @@ def ingest_title(
         and previous.fingerprint == verify_fp
         and previous.extra.get("passed") is True
         and layout.verify_report_path.exists()
+        and previous.extra.get("report_sha256") == sha256_file(layout.verify_report_path)
     )
     if cached_pass:
         report_data = json.loads(layout.verify_report_path.read_text())
@@ -620,8 +760,9 @@ def ingest_title(
         presets=presets,
         adapter=adapter,
         pub_key=options.pub,
-        diag_in=options.diag_in,
-        distance_ft=options.distance_ft,
+        diag_in=diag_in,
+        distance_ft=distance_ft,
+        playback_compatible=options.playback_compatible,
         calm_margin_ms=options.calm_margin_ms,
         rerender_cover_model=False,
     )
@@ -631,7 +772,8 @@ def ingest_title(
         "verify",
         verify_fp,
         [layout.verify_report_path],
-        {"passed": report.passed, "failures": [c.name for c in report.failures]},
+        {"passed": report.passed, "failures": [c.name for c in report.failures],
+         "report_sha256": sha256_file(layout.verify_report_path)},
     )
     result.steps_run.append("verify")
     result.verify_passed = report.passed
@@ -679,6 +821,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="the household does not allow a dim cover, so every cover is opaque",
     )
     parser.add_argument("--force", action="store_true", help="redo finished work")
+    parser.add_argument("--no-scene-holds", action="store_true",
+                        help="use the legacy global still and black or dim live cover")
+    parser.add_argument("--playback-compatible", action="store_true",
+                        help="use the app's fixed profile unions, timing and opaque fallback")
     parser.add_argument(
         "--skip-verify",
         action="store_true",
@@ -706,6 +852,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         x264_preset=args.x264_preset,
         force=args.force,
         skip_verify=args.skip_verify,
+        scene_holds=not args.no_scene_holds,
+        playback_compatible=args.playback_compatible,
     )
 
     adapter = FlashmapAdapter()

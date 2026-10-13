@@ -1,0 +1,17 @@
+{
+  "duration_limit_s": 179,
+  "duration_s": 146.021354,
+  "duration_verdict": "pass",
+  "flashmap_exit": 0,
+  "flashmap_verdict": "pass",
+  "flashmap_version": "1.0.0",
+  "map": "results/video_check_broadcast.map.json",
+  "profile": "broadcast",
+  "recorded_utc": "2026-10-10T18:24:37+00:00",
+  "segments_over_threshold": 0,
+  "verdict": "pass",
+  "video": "Calm-Frames-demo-English.mp4",
+  "video_bytes": 5856317,
+  "video_sha256": "27b18b85d760e0ea9cb2d57bebe9139da6696f87888b96818ef0a9872c5c6bc7",
+  "what_this_is": "The gate on the demo video file: flashmap over the finished cut, plus its length. Written by eval/check_video.sh. A pass here is about this file and nothing else."
+}

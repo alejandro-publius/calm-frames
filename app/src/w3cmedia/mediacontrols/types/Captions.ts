@@ -28,4 +28,9 @@ export interface CaptionMenuProps {
   video: VideoPlayer;
   setSelectedCaption: (id: string) => void;
   setCaptionMenuVisibility: (visible: boolean) => void;
+  /**
+   * Calm Frames: the track the player has showing, when it chose one itself.
+   * Left out, the menu keeps its own choice the way the sample did.
+   */
+  selectedCaptionId?: string;
 }

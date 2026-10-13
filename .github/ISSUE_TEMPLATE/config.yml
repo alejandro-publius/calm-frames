@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security problem
+    url: https://github.com/alejandro-publius/calm-frames/security/advisories/new
+    about: Privately, never in a public issue, and with no media attached. "Reporting something" in docs/SECURITY.md says how.
+  - name: The safety rules
+    url: https://github.com/alejandro-publius/calm-frames/blob/main/docs/SAFETY.md
+    about: Read before attaching anything. Never attach or link flashing media, and never watch it to reproduce a problem.

@@ -261,7 +261,7 @@ def frames() -> list[Frame]:
                 add(
                     f"text-{size}px-{leading}-{columns}col-{name}",
                     "text",
-                    lambda s=size, l=leading, c=columns, g=ground, i=ink: text_page(s, l, c, g, i),
+                    lambda s=size, ld=leading, c=columns, g=ground, i=ink: text_page(s, ld, c, g, i),
                     note=f"{size} px body text, {leading} leading, {columns} column(s), {name}",
                 )
     for size, leading in ((26, 1.55), (20, 1.8)):
@@ -269,7 +269,7 @@ def frames() -> list[Frame]:
             add(
                 f"text-serif-{size}px-{leading}-{name}",
                 "text",
-                lambda s=size, l=leading, g=ground, i=ink: text_page(s, l, 1, g, i, "DejaVuSerif.ttf"),
+                lambda s=size, ld=leading, g=ground, i=ink: text_page(s, ld, 1, g, i, "DejaVuSerif.ttf"),
                 note=f"{size} px serif body text, {name}",
             )
     # The type this product sets, at the size it is drawn, in the colours it is drawn in.
@@ -296,7 +296,7 @@ def frames() -> list[Frame]:
             add(
                 f"shipped-{surface}-body-{size}px-leading-{leading}",
                 "text",
-                lambda s=size, l=leading: text_page(s, l, 1, TEAL, CREAM),
+                lambda s=size, ld=leading: text_page(s, ld, 1, TEAL, CREAM),
                 note=f"{surface} body at {size} px, {leading} leading, cream on teal",
             )
     # 26 px at 1.55 cream on teal, which is what the report page sets its body at, is
@@ -315,7 +315,7 @@ def frames() -> list[Frame]:
             add(
                 f"cards-{across}x{down}-{ground[0]}{card[0]}",
                 "ui",
-                lambda a=across, d=down, g=ground, c=card, l=label: card_grid(a, d, g, c, l),
+                lambda a=across, d=down, g=ground, c=card, lb=label: card_grid(a, d, g, c, lb),
                 note=f"{across} by {down} card grid",
             )
 

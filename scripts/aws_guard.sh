@@ -3,9 +3,10 @@
 # The gate in front of every command that would reach an AWS account.
 #
 # The rule for this project is synthesize only until HUMAN CHECKPOINT D is
-# confirmed: the account on the Paid plan, the $20 budget alarm in place, the
-# credit request in. Until then nothing may call AWS, and `make synth` is the
-# thing that actually runs.
+# confirmed: the account on the Paid plan and the $20 budget alarm in place.
+# (It also asked for the $150 credit request to be in. That form closed on
+# Oct 7, 2026, and Alex waived the clause; docs/GATES.md has the entry.) Until
+# then nothing may call AWS, and `make synth` is the thing that actually runs.
 #
 # Two locks, both of which have to be open:
 #
@@ -29,8 +30,11 @@
 #
 #          make deploy CHECKPOINT_D=confirmed
 #
-# A variable alone cannot open it, and a document alone cannot open it. Neither
-# lock has ever been opened in this repository.
+# A variable alone cannot open it, and a document alone cannot open it. The
+# committed docs/STATUS.md never says the line, on purpose, and a test keeps it
+# that way. Both locks were opened once, on Oct 9, 2026, in a separate deploy
+# worktree whose docs/STATUS.md carried the line and was never committed; that
+# deploy is recorded in results/aws_deploy_2026-10-09.json.
 
 set -u
 
@@ -42,9 +46,51 @@ STATUS_FILE="$REPO/docs/STATUS.md"
 # not a document that says it.
 STATUS_PATTERN='^AWS Paid plan:[[:space:]]*confirmed'
 
-CDK="${CDK:-npx --yes aws-cdk@2.1032.0}"
+# The CLI has to be able to read what the pinned library writes. The cloud
+# assembly manifest, and the oldest CLI that can read it, are declared by the
+# aws-cdk.cloud-assembly-schema package, not by aws-cdk-lib, which only asks
+# for a schema in the range >=54.11.0,<55.0.0. pipeline/infra/requirements.txt
+# pins the schema at 54.24.0, which writes schema 54 and declares 2.1142.0.
+# The 2.1032.0 this line used to name stops right after synth with "Cloud
+# assembly schema version mismatch". The Oct 9 deploy ran on 2.1142.0 with
+# that schema. The same day, before the schema was pinned, a fresh install on
+# the hosted Audit runner took a newer 54.x declaring 2.1144.0 and the pin
+# test went red there alone. pipeline/tests/test_aws_guard.py checks this pin
+# against the installed schema, checks the schema itself is pinned, and checks
+# the other two places this version is written agree.
+CDK="${CDK:-npx --yes aws-cdk@2.1142.0}"
 STACK="${STACK:-CalmFramesStack}"
 CONTEXT="-c calmframes:budgetEmail=${BUDGET_EMAIL:-} -c calmframes:githubRepo=${GITHUB_REPO:-}"
+
+# The map signing key the ingest task reads from SSM, if it has one. The stack
+# only wires a key in when this context is passed, so a deploy without it takes
+# the wiring out again: the task loses its read on the parameter and goes back
+# to publishing nothing. On Oct 9 the key was added by putting the -c inside
+# the CDK variable, which is easy to forget the next time. Now it is a variable
+# of its own, and every deploy and diff says which way it is going.
+SIGNING_KEY_PARAMETER="${SIGNING_KEY_PARAMETER:-}"
+if [ -n "$SIGNING_KEY_PARAMETER" ]; then
+  # SSM's own rule for a name: letters, digits, _ . - and / between levels.
+  # Anything else is refused, because the value is split into words on the CDK
+  # command line and ends up in an IAM resource ARN, where a * would let the
+  # task read every parameter in the account.
+  if ! [[ "$SIGNING_KEY_PARAMETER" =~ ^/?[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)*$ ]]; then
+    echo "aws_guard: SIGNING_KEY_PARAMETER is not an SSM parameter name: '$SIGNING_KEY_PARAMETER'" >&2
+    echo "  use letters, digits, _ . - and /, for example /calm-frames/cloud-signing-key" >&2
+    exit 2
+  fi
+  CONTEXT="$CONTEXT -c calmframes:signingKeyParameter=$SIGNING_KEY_PARAMETER"
+fi
+
+say_which_key() {
+  if [ -n "$SIGNING_KEY_PARAMETER" ]; then
+    echo "Signing key: the task may read the SSM parameter $SIGNING_KEY_PARAMETER and signs maps with it."
+  else
+    echo "Signing key: none. SIGNING_KEY_PARAMETER is not set, so this template gives the task no key."
+    echo "  A stack that has one loses it on this deploy and publishes nothing until it is put back."
+    echo "  The Oct 9 stack has one: add SIGNING_KEY_PARAMETER=/calm-frames/cloud-signing-key to keep it."
+  fi
+}
 
 status_says_confirmed() {
   [ -f "$STATUS_FILE" ] && grep -Eqi "$STATUS_PATTERN" "$STATUS_FILE"
@@ -85,6 +131,9 @@ if [ "$status_ok" = 1 ] && [ "$variable_ok" = 1 ]; then
     *) echo "aws_guard: unknown action '$ACTION'" >&2; exit 2 ;;
   esac
   echo "HUMAN CHECKPOINT D is confirmed in docs/STATUS.md and on this command line."
+  case "$ACTION" in
+    deploy|diff) say_which_key ;;
+  esac
   echo "Running: $CDK $* $CONTEXT"
   # cdk.json runs the app as `python3 app.py`, and on a fresh clone the python3
   # on PATH is whatever the machine has, which here is 3.9 and has no
@@ -104,7 +153,7 @@ cat >&2 <<REFUSED
 make $ACTION is blocked.
 
 No AWS deploy happens until HUMAN CHECKPOINT D is confirmed: the account on the
-Paid plan, the \$20 budget alarm in place, the credit request in.
+Paid plan and the \$20 budget alarm in place.
 
   docs/STATUS.md says the plan is confirmed?  $status_line
   CHECKPOINT_D=confirmed on this command?     $variable_line
@@ -125,8 +174,10 @@ When the account really is on the Paid plan:
      table cell and not inside backticks: the match is anchored, so a sentence
      about the line does not count as the line;
   2. run: make $ACTION CHECKPOINT_D=confirmed BUDGET_EMAIL=you@example.com GITHUB_REPO=owner/repo
+     and, when the task should sign maps, SIGNING_KEY_PARAMETER=/name/of/the/parameter.
 
-make destroy leaves nothing billable: every stateful resource in the stack is
-set to Delete. See pipeline/infra/calm_frames_stack.py.
+make destroy removes every stateful resource in the stack: each is set to
+Delete (see pipeline/infra/calm_frames_stack.py). The few things that live
+outside the stack are listed under "Taking it down" in pipeline/infra/README.md.
 REFUSED
 exit 1

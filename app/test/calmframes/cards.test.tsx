@@ -15,6 +15,7 @@ import {
   Card,
   cardAt,
   cardChanged,
+  CHECKING_CARD,
   COUNTDOWN_LEAD_MS,
   NO_CARD,
   SKIP_MARGIN_MS,
@@ -102,9 +103,25 @@ describe('cardAt', () => {
     for (const rejection of ['missing', 'stale', 'unsigned', 'unparseable', 'wrong-file'] as const) {
       const card = cardAt(intervals, 22_000, { rejection });
       expect(card.kind).toBe('unverified');
-      expect(card.title).toBe('Not checked yet');
+      expect(card.title).toBe('This title is unavailable');
       expect(card.detail).toMatch(/picture stays hidden/);
     }
+  });
+
+  it('has a card of its own for a title that is still being checked', () => {
+    // Being checked is not being refused. The wording says the picture waits
+    // for the check, and there is nothing to skip, so no Skip button either.
+    expect(CHECKING_CARD.kind).toBe('checking');
+    expect(CHECKING_CARD.title).toBe('Getting your story ready');
+    expect(CHECKING_CARD.title).not.toBe(
+      cardAt([], 0, { rejection: 'missing' }).title,
+    );
+    expect(CHECKING_CARD.detail).toBe('Your story will begin in a moment.');
+    expect(CHECKING_CARD.announcement).toBe(
+      `${CHECKING_CARD.title}. ${CHECKING_CARD.detail}`,
+    );
+    expect(CHECKING_CARD.skipToMs).toBeUndefined();
+    expect(CHECKING_CARD.interval).toBeUndefined();
   });
 
   it('has no dashes and none of the banned words anywhere', () => {
@@ -113,6 +130,7 @@ describe('cardAt', () => {
       cardAt(intervals, 22_000),
       cardAt(intervals, 24_600),
       cardAt(intervals, 0, { rejection: 'missing' }),
+      CHECKING_CARD,
     ];
     for (const card of cards) {
       const text = `${card.title} ${card.detail ?? ''} ${card.announcement}`;
@@ -170,8 +188,8 @@ describe('announceForAccessibility', () => {
     (AccessibilityInfo as unknown as Record<string, unknown>).announceForAccessibility =
       plain;
 
-    expect(announceForAccessibility('Not checked yet')).toBe(true);
-    expect(plain).toHaveBeenCalledWith('Not checked yet');
+    expect(announceForAccessibility('This title is unavailable')).toBe(true);
+    expect(plain).toHaveBeenCalledWith('This title is unavailable');
   });
 
   it('never throws when the runtime has no announcement api at all', () => {

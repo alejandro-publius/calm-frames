@@ -1,0 +1,31 @@
+{
+  "reviewed_date": "2026-10-02",
+  "kind": "subjective_project_assessment",
+  "basis": "Repository source and recorded evidence before the October 2 demo improvement; no new native playback observed for this assessment.",
+  "official_score": false,
+  "winning_probability": false,
+  "scale_max": 10,
+  "weight_per_criterion": 0.25,
+  "scores": {
+    "tech_implementation": 7,
+    "design": 6,
+    "potential_impact": 6,
+    "quality_of_idea": 9
+  },
+  "overall_out_of_100": 70,
+  "bonus_assumed": 0,
+  "submission_ready": false,
+  "requirements_source": "https://amazonappdev2026.devpost.com/rules",
+  "overview_source": "https://amazonappdev2026.devpost.com/",
+  "evidence": [
+    "docs/STATUS.md",
+    "docs/VALIDATION.md",
+    "docs/GATES.md",
+    "app/src/screens/KidModeScreen.tsx",
+    "app/src/calmframes/offlineTitle.ts",
+    "pipeline/local_library.py",
+    "results/conformance.json",
+    "results/gate1_software_vvd.json"
+  ],
+  "limits": "Source review is not a judge decision, user study, clinical validation, security certification or current native demonstration. Scores do not imply submission eligibility. Reassess only when new observed evidence closes a material gap."
+}

@@ -80,5 +80,5 @@ export function mustStayHidden(access: PlaybackAccess): boolean {
 export const UNGUARDED_CARD: Card = cardAt([], 0, {
   rejection: 'missing',
   blockedDetail:
-    'This title has not been checked, so the picture stays hidden. Sound and captions keep playing.',
+    'This title is unavailable. The picture stays hidden while sound and captions keep playing.',
 });

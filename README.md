@@ -1,24 +1,78 @@
 # Calm Frames
 
-**A verified safety layer for Fire TV, for kids with photosensitive epilepsy.**
+**A calmer way to watch**
+
+[![CI](https://github.com/alejandro-publius/calm-frames/actions/workflows/ci.yml/badge.svg)](https://github.com/alejandro-publius/calm-frames/actions/workflows/ci.yml)
+[![Audit](https://github.com/alejandro-publius/calm-frames/actions/workflows/audit.yml/badge.svg)](https://github.com/alejandro-publius/calm-frames/actions/workflows/audit.yml)
+[![Licence: Apache-2.0](https://img.shields.io/badge/licence-Apache--2.0-blue.svg)](LICENSE)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](.python-version)
+[![Node 22](https://img.shields.io/badge/node-22-blue.svg)](.nvmrc)
+
+**Calm Frames checks every frame of a title before a child can pick it, and the Fire TV player hides each part it flags before it reaches the screen while sound and captions carry the story.**
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
+
+![Browser preview of the Calm Frames library: panoramic Harbor artwork, Watch now in focus, quiet profile navigation and a shelf of three titles](docs/design/centered/library-browser.png)
+
+| Setup | Before you watch | Parental controls |
+|---|---|---|
+| ![Setup, step 1 of 4: choose a PIN on a remote-friendly keypad](docs/design/polish/setup-after.png) | ![Centered Harbor artwork, title, story description and Watch now control](docs/design/centered/details-harbor-browser.png) | ![Parental controls while a save is in flight, with Saving your changes beside the title](docs/design/seamless/parent-saving-browser.png) |
+
+<sub>Browser renders of the app's own React Native trees with the bundled Inter fonts and artwork: the current library and details center the Harbor scene, title, description and actions ([source and render receipt](results/centered_harbor_2026-10-13.json)); parental controls are from 85c30f9 and setup from 54dab0b. They are review aids, not Vega screenshots. The shelf holds two Harbors on purpose, one with labelled practice holds and one prepared the way a real title is, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md), and more screens, with how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
 
 ---
 
 ## What it is
 
-Calm Frames is a verified safety layer for kids with photosensitive epilepsy, and it is never a video player. Every frame of a title is checked before that title can play in kid mode, and the result is an Ed25519 signed flash map bound to the file's SHA-256. When a child plays the title, the player hides each flagged segment before it starts while the sound and the captions keep going, then says what was hidden. The layer adapts to the household, because a parent gives the TV size and the seat distance and picks a preset, and a household setting can only ever make it stricter than WCAG, never weaker. Voice, D-pad and on-screen cards all run through one seek function, so every path to a new playhead position is safe: if the target lands inside a flagged interval or its guard band, the picture is covered first and the seek happens second. Any Vega video app can add the same protection with a small hook, and any studio can check its own content before publishing with the open-source analyzer and its GitHub Action.
+Calm Frames combines an offline video analyzer, a checked rendition pipeline and a Vega player for families affected by photosensitivity. Before playback, the pipeline analyzes the source, signs its flash map and verifies the prepared rendition. The player adds a scheduled cover and guarded seeks, with audio and captions intended to preserve the story; signed context images, a checked still from before the hide shown in place of black, ship today only on the labelled Harbor demo, and every prepared title uses the opaque cover. Parent settings can make the standard floor stricter and now persist locally. A reusable hook and analyzer provide adoption paths for other developers. Detection, delivery integrity and physical screen behavior have separate limits, recorded below; a signature is not proof that every hazard was detected.
 
-**Status, Sep 17 2026.** This is a build in progress for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The analyzer, the pipeline, the cover layer and the measurement harnesses are built and tested. Nothing has been measured on a physical Fire TV stick yet, so there is no screen-level cover lead time. There is a software-level one from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time. Six produced no usable evidence and one was late. Counting the six as failures, which is the strict reading, that is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> you get from the trials that could be measured. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
+Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
+
+### What a family sees
+
+- **A short setup.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
+- **A library of checked titles only.** A title plays in kid mode only after its flash map is verified; one that has not verified shows Needs check and stays hidden.
+- **A card before anything is hidden.** "Flashing part coming up", with Skip in focus, a few seconds ahead, and an optional chime.
+- **The story keeps going.** During a hidden part a checked still from just before it, or a dark cover, stands over the picture while sound and captions continue; afterwards one line says what was hidden.
+- **Parental controls behind the PIN.** Presets, the room, the chime, a profile per child (which can only be stricter than the household), and two opt-in effects, a gentle artwork entrance and quiet selection sounds, both Off unless a parent turns them on.
+- **What it keeps stays on the television.** The household record (the salted hash of the PIN, the profiles, presets, room and switches) is saved on the device, and the list of what was hidden lives in memory only, so it is gone after a restart. A release build sends nothing about the household anywhere: its only network request fetches a flash map when a catalog entry names a web address, and the default shelf is compiled into the app. The timing and capture beacons run in debug builds only ([`harnessConfig.ts`](app/src/calmframes/harnessConfig.ts), [`timingLog.ts`](app/src/calmframes/timingLog.ts)).
+- **Built for the remote and for screen readers.** The D-pad reaches every control, cards are announced, and reduced motion keeps the artwork still. VoiceView is covered by tests and still owes its check on the device.
+
+### What it does underneath
+
+- **Every frame is measured before a title can play** by [flashmap](flashmap/), against WCAG 2.2 SC 2.3.1's general and red flash rules, with the thresholds quoted from their sources in [SPEC_SOURCES.md](flashmap/docs/SPEC_SOURCES.md).
+- **The flash map is signed** (Ed25519) and bound to the file's SHA-256, and **verify blocks publishing**: the pipeline renders a kid-safe rendition, and verify analyzes the whole rendition again and proves the cover is drawn at the first frame, the middle and the last frame of the first six covered spans of each preset.
+- **The player fails closed.** A missing, stale, unsigned, unreadable or wrong-hash map keeps the picture hidden.
+- **One function moves the playhead**, so every seek path is guarded; a lint rule refuses any other.
+- **Adoptable by others**: a small hook for any Vega video app ([hook/](hook/)), the analyzer as a CLI and a GitHub Action, and a self-contained report page for a title.
+
+### Try it in a minute
+
+The analyzer runs on any machine with Python 3.12; PyAV brings its own FFmpeg. The clip is the project's own Harbor film under Apache-2.0, with generated artwork, animated water, original captions and synthesized ambience. The production source checks pass all three flash profiles.
+
+```sh
+python -m pip install -e 'flashmap[dev]'
+python -m flashmap check app/assets/raw/benign-story/harbor.mp4 --profile wcag
+python -m flashmap report app/assets/raw/benign-story/harbor.mp4 --out report.html --license-csv media/LICENSES.csv
+```
+
+The first prints `PASS`, the second writes one HTML page for the title that opens with the network off. The TV app itself needs the Vega SDK on a Mac; [Install and run](#install-and-run) has both.
+
+### Where things stand
+
+**Oct 13 visual update.** The library and details now use centered compositions, and both Harbor titles contain a new 20 second water-and-lighthouse film. The latest Mac observation covers the earlier source at `06190c7` ([receipt](results/polish_native_validation.json)); this centered layout and new film still need a matching Mac build and recording. [Preview and media evidence](results/centered_harbor_2026-10-13.json).
+
+Earlier checkpoint: **Sun Oct 11, 2026.** A solo entry for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The Vega Virtual Device is the acceptance target; no physical Fire TV has been used and no screen-level timing has been measured anywhere. The analyzer, the pipeline, the cover layer, the signed scene holds, the household record and the packaged library are built and tested. The native benign journey and an English demo video were recorded on Oct 10 from build cba1a29 (package 73fbbed): PIN correction, saved settings, all three presets, catalog playback, captions and audio through both practice holds, transport fallback and focus return, with the exact package hash in [the completion checklist](docs/COMPLETION_CHECKLIST.md) and [the native receipt](results/redesign_validation_2026-10-10.json). The source has changed since, through the Oct 10 polish and the Oct 11 dependency, copy and focus changes, and has not been built, installed or recorded on the simulator again yet; the recorded cut also carries an earlier closing sentence and has to be re-rendered before upload. The software-level cover lead time from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time; six produced no usable evidence and one was late, so the strict reading is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> from the trials that could be measured. The dependency audit has been green on the hosted runner since the Oct 11 push ([results/github_push_2026-10-11.json](results/github_push_2026-10-11.json)); the public video, the upstream pull request and the release are still open, and [docs/STATUS.md](docs/STATUS.md) section 2 is the dated list of what remains. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
 
 ## Contents
 
+- [What it is](#what-it-is): what a family sees, what it does underneath, and how to try it
 - [How it fits together](#how-it-fits-together)
 - [Who it is for, and how it leaves this hackathon](#who-it-is-for-and-how-it-leaves-this-hackathon)
 - [Required tech at runtime](#required-tech-at-runtime)
 - [What has been measured](#what-has-been-measured)
 - [Install and run](#install-and-run)
+- [How this is checked](#how-this-is-checked)
 - [Limits](#limits)
 - [Safety](#safety)
 - [Licences and credits](#licences-and-credits)
@@ -70,8 +124,9 @@ Calm Frames is a verified safety layer for kids with photosensitive epilepsy, an
   |                map  ->  the picture stays hidden                      |
   +----------------------------------------------------------------------+
 
-  Other Vega video apps add the same protection with a small hook.
-  Studios check their own content in CI with the flashmap GitHub Action.
+  A Vega video app built on Amazon's W3C media player can add the same
+  protection with a small hook. Studios can check their own content in CI
+  with the flashmap GitHub Action.
 ```
 
 Two things in that picture are worth saying out loud.
@@ -84,7 +139,7 @@ Two things in that picture are worth saying out loud.
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device. Everything below is written inside that sentence.
 
-Two of the Fire TV track's six priority categories are this project by name. It is **family entertainment**, because the whole thing exists so that a child can pick a title on the family television without a parent having to preview it first. And it is **multi-modal UX**, because voice, D-pad and on-screen cards are not three ways into the same app, they are three inputs to one seek function that covers the picture before it moves the playhead. A spoken "skip forward" and a press of the remote go through the same gate, and neither can land inside a flagged interval. That single flow is the part that does not work if you build it three times.
+Two of the Fire TV track's six priority categories are this project by name. It is **family entertainment**, because the whole thing exists so that a child can pick a title on the family television without a parent having to preview it first. And it is **multi-modal UX**, because voice, D-pad and on-screen cards are not three ways into the same app, they are three inputs to one seek function that covers the picture before it moves the playhead. A spoken "skip forward" and a press of the remote go through the same gate, and neither can land inside a flagged interval. That single flow is the part that does not work if you build it three times. The D-pad and on-screen paths were observed on the Vega Virtual Device; the voice path is exercised by tests only, because the virtual device has no Alexa.
 
 ### The people
 
@@ -116,11 +171,11 @@ The same abstract records that "Government and regulatory agencies require scree
 
 The app is the demo. These four are the part that keeps working after the judging period, and none of them needs anyone to install Calm Frames.
 
-**1. The hook, so any Vega video app gets the same protection.** The guard is one React hook with no knowledge of our screens, navigation or storage. [`docs/INTEGRATION_DIFF.md`](docs/INTEGRATION_DIFF.md) is the real `git diff` of adding it to a clean [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) checkout at tag `v0.24-RN83`: <!--n results/integration_diff.json:lines_added -->32<!--/n--> lines added and <!--n results/integration_diff.json:lines_replaced -->2<!--/n--> replaced across <!--n results/integration_diff.json:files_touched -->4<!--/n--> files. <!--n results/integration_diff.json:busiest_file_lines_added -->23<!--/n--> of those added lines are in one file, `src/screens/PlayerScreen.tsx`, and each of the other three files adds exactly <!--n results/integration_diff.json:other_files_lines_added_each.0 -->3<!--/n--> lines. `hook/tools/make_integration_diff.mjs` regenerates that patch from the pinned checkout, and `eval/integration_diff_stats.py` counts what is committed file by file, so every number in this paragraph is measured rather than asserted.
+**1. The hook, so a Vega video app built on Amazon's W3C media player can reuse the scheduler and guarded seeks.** The guard is one React hook with no knowledge of our screens, navigation or storage. [`docs/INTEGRATION_DIFF.md`](docs/INTEGRATION_DIFF.md) is the real `git diff` of adding it to a clean [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) checkout at tag `v0.24-RN83`: <!--n results/integration_diff.json:lines_added -->32<!--/n--> lines added and <!--n results/integration_diff.json:lines_replaced -->2<!--/n--> replaced across <!--n results/integration_diff.json:files_touched -->4<!--/n--> files. <!--n results/integration_diff.json:busiest_file_lines_added -->23<!--/n--> of those added lines are in one file, `src/screens/PlayerScreen.tsx`, and each of the other three files adds exactly <!--n results/integration_diff.json:other_files_lines_added_each.0 -->3<!--/n--> lines. `hook/tools/make_integration_diff.mjs` regenerates that patch from the pinned checkout, and `eval/integration_diff_stats.py` counts what is committed file by file, so every number in this paragraph is measured rather than asserted.
 
-What an app gets for it: every flagged part of a title hidden before it starts while sound and captions keep going, a card ahead of it with a D-pad Skip and a card afterwards, a missing or stale or unsigned or wrong-hash map keeping the picture hidden, every seek path safe including Alexa and the remote's transport commands, and a VoiceView announcement for each card. What it costs: one rule, which is that nothing in the app writes `currentTime` or calls `fastSeek` any more. Everything goes through `guard.requestSeek`. The package README is [`hook/README.md`](hook/README.md). **The package is not published to npm yet**, so today an app adds it from this repository rather than by installing it. The name `@calm-frames/flash-guard` was free when we checked on Sep 17, 2026, and that is the whole of the claim on it.
+What an app gets for it: every flagged part of a title hidden before it starts while sound and captions keep going, a card ahead of it with a D-pad Skip and a card afterwards, a missing or stale or unsigned or wrong-hash map keeping the picture hidden, every seek path safe including Alexa and the remote's transport commands, and a VoiceView announcement for each card. What it costs: one rule, which is that nothing in the app writes `currentTime` or calls `fastSeek` any more. Everything goes through `guard.requestSeek`. The package README is [`hook/README.md`](hook/README.md). **The package is not published to npm yet**, but a Vega app can now install a locally packed tarball from a reviewed checkout. The offline consumer check uses that installed tarball, current Vega peer types, Metro resolution and React Native transforms, not repository-source aliases. The name `@calm-frames/flash-guard` was free when we checked on Sep 17, 2026, and that is the whole of the claim on it.
 
-**2. The GitHub Action, so a studio can catch it before it ships.** [`flashmap/examples/flash-check.yml`](flashmap/examples/flash-check.yml) drops into any repository that holds images or video. Every pull request that adds or changes one is measured against WCAG 2.2 SC 2.3.1, and the job fails when a file goes over the general or red flash thresholds. Exit codes are `0` under the thresholds, `1` over them and `2` when flashmap could not tell, and a caller that treats `2` as a pass has a hole in it. The analyzer is Apache-2.0 and runs standalone, so this works for a studio, a game team, a marketing site or a documentation repository with animated GIFs in it, none of whom have to care that Calm Frames exists.
+**2. The GitHub Action, so a studio can catch it before it ships.** [`flashmap/examples/flash-check.yml`](flashmap/examples/flash-check.yml) drops into any repository that holds images or video. Every pull request that adds or changes one is measured against WCAG 2.2 SC 2.3.1, and the job fails when a file goes over the general or red flash thresholds. Exit codes are `0` under the thresholds, `1` over them and `2` when flashmap could not tell, and a caller that treats `2` as a pass has a hole in it; the Action fails a file it cannot measure by default for that reason. The sample pins the action to a commit on this repository, because no release tag and no PyPI release exist yet, and the action installs flashmap from the checkout it came from; the pin moves to the judged tag once it is cut. The analyzer is Apache-2.0 and runs standalone, so this works for a studio, a game team, a marketing site or a documentation repository with animated GIFs in it, none of whom have to care that Calm Frames exists.
 
 **3. The sidecar spec, so a map is portable.** [`docs/SIDECAR_SPEC.md`](docs/SIDECAR_SPEC.md) is the flash map format, version 1: what was measured, under which profile, with which colour assumptions, which segments were flagged, and an Ed25519 signature over a canonical serialization bound to the source file's SHA-256. It is written so that a player that has never seen our code can read a map it did not make, check the signature and the hash, and honour it. That is the difference between one app having a feature and a format existing. The spec also has a section on what a map does not say, which is the part a second implementer needs most.
 
@@ -144,16 +199,16 @@ The rules ask whether a project "could realistically serve an audience beyond th
 
 - **The analyzer and the Action need no distribution at all.** `flashmap` is Apache-2.0 and standalone. A studio, a game team or a documentation repository adopts it by copying one workflow file. That route is open today and needs nobody's permission.
 - **The sidecar spec needs adoption, not distribution.** It is worth something the moment a second player reads a map it did not make. That has not happened and it is the thing we would most like to be asked about.
-- **The hook needs publishing.** It is not on npm yet, so today an app vendors it from this repository.
+- **The hook needs publishing.** It is not on npm yet. Local tarball installation is checked with the current Vega peers, not a fresh registry or physical-device install.
 - **The app itself would need the Fire TV Appstore, and we have not started that.** No developer account submission, no listing, no policy review. A safety claim in a store listing is a different bar from a safety claim in a README, and the wording would have to be checked by someone qualified before it went near a store. **We are not claiming a route we have not walked.**
 
-The honest shape of it: three of the four things above can travel without us, and the app is the one that cannot. That is the opposite of how most entries are built, and it is deliberate.
+The shape of it: the analyzer and its Action can travel without us today, the hook and the map format can once the hook is published and a second player reads a map, and the feature request needs Amazon. The app is the one part that cannot travel at all. That is the opposite of how most entries are built, and it is deliberate.
 
 ### What has not been shown
 
 - **Nobody outside this project has used it or commented on it yet.** No parent, no clinician, no studio. [`docs/VALIDATION.md`](docs/VALIDATION.md) is the place those quotes will go, and it is marked as empty until they arrive. Nothing in this README should be read as anyone else's endorsement.
 - **It is not a medical device and it does not prevent seizures.** It reduces exposure to flashing above published limits in the videos it plays.
-- **Only titles that passed verify are protected, and passing verify means two different things.** <!--n results/verify_pool.json:analyzed -->30<!--/n--> titles have a verdict. <!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n--> had a flagged segment, a cover planned for it, and the cover measured on the rendition that plays. <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> had no flagged segment at all: the analyzer looked and nothing was over the thresholds, which for cloud and sunset footage is the right answer and is not evidence that any cover works. <!--n results/verify_pool.json:failed -->9<!--/n--> failed and cannot play. **The 7 is the number to read as evidence**, and adding more calm footage raises the other one without adding any. Anything that was never through verify was never measured. The rest of what is not true yet is in [Limits](#limits), including the fact that no cover has been timed on a physical stick.
+- **Only titles that passed verify are protected, and passing verify means two different things.** <!--n results/verify_pool.json:analyzed -->30<!--/n--> titles have a verdict. <!--n results/verify_pool.json:cover_proven_drawn -->7<!--/n--> had a flagged segment, a cover planned for it, and the cover measured on the rendition that plays. <!--n results/verify_pool.json:no_flagged_segments -->14<!--/n--> had no flagged segment at all: the analyzer looked and nothing was over the thresholds, which for cloud and sunset footage is the right answer and is not evidence that any cover works. <!--n results/verify_pool.json:failed -->9<!--/n--> failed verify and cannot play; a title that fails is kept out of kid mode whatever the reason, and the pool record keeps only the count, not the reasons. Four more titles in the pool have no verdict at all, <!--n results/verify_pool.json:not_analyzed.no_entry_json -->3<!--/n--> that never got an entry and <!--n results/verify_pool.json:not_analyzed.pending -->1<!--/n--> still pending, and they are in none of these counts. **The 7 is the number to read as evidence**, and adding more calm footage raises the other one without adding any. Anything that was never through verify was never measured. The rest of what is not true yet is in [Limits](#limits), including the fact that no cover has been timed on a physical stick.
 
 ### Where the numbers here came from
 
@@ -171,15 +226,17 @@ The three numbers about the integration diff are markers pointing at `results/in
 
 ## Required tech at runtime
 
-Every row links the exact file and line in this repository. Line numbers are against `main`; the symbol name is given too, so a moved line is still findable.
+Every row links the exact file and line in this repository. Line numbers are against the commit containing this README; the symbol name is given too, so a moved line is still findable.
 
 | Required technology | Package | Called at | What it does here |
 |---|---|---|---|
-| **W3C media player** | `@amazon-devices/react-native-w3cmedia` | [`app/src/utils/VideoHandler.ts:147`](app/src/utils/VideoHandler.ts#L147) `new VideoPlayer()`, imported at [`:5`](app/src/utils/VideoHandler.ts#L5) `VideoPlayer`; attached to Shaka at [`:274`](app/src/utils/VideoHandler.ts#L274) `new ShakaPlayer(...)` | All playback. Calm Frames never replaces it and never lowers its opacity. It reads `currentTime`, `playbackRate` and the media events from it, and covers on top of it. |
-| **W3C media player, video surface** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:546`](app/src/screens/PlayerScreen.tsx#L546) `KeplerVideoSurfaceView`, imported at [`:17`](app/src/screens/PlayerScreen.tsx#L17) `KeplerVideoSurfaceView` | The hardware video layer at zIndex 0. The cover sits above it, which is what keeps the sound running while the picture is hidden. |
-| **Vega Media Controls** | `@amazon-devices/kepler-media-controls` | Focus set at [`app/src/utils/VideoHandler.ts:158`](app/src/utils/VideoHandler.ts#L158) `setMediaControlFocus(...)`. The safe handler is [`app/src/calmframes/SafeMediaControlHandler.ts:49`](app/src/calmframes/SafeMediaControlHandler.ts#L49) `class SafeMediaControlHandler`, with `handleSeek` at [`:68`](app/src/calmframes/SafeMediaControlHandler.ts#L68) and `handleFastForward` at [`:89`](app/src/calmframes/SafeMediaControlHandler.ts#L89) | System and voice transport, and the path an Alexa "skip forward" arrives on. It can land the playhead inside a flagged interval without the remote being touched, so none of these handlers call `super`. Each one goes through [`app/src/calmframes/seekSafety.ts`](app/src/calmframes/seekSafety.ts), `planSeek` at [`:113`](app/src/calmframes/seekSafety.ts#L113). |
-| **KeplerCaptionsView** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:563`](app/src/screens/PlayerScreen.tsx#L563) `KeplerCaptionsView`, the element; the handle is set by [`:513`](app/src/screens/PlayerScreen.tsx#L513) `setCaptionViewHandle` | Captions, at zIndex 2, above the cover. One captions view per process. This is the reason a hidden segment is still followable: the words carry on over a black picture. |
-| **Accessibility APIs** | `react-native` `AccessibilityInfo`, plus the `com.amazon.devconf.privilege.accessibility` privilege at [`app/manifest.toml:91`](app/manifest.toml#L91) | [`app/src/calmframes/announce.ts:58`](app/src/calmframes/announce.ts#L58) `announceForAccessibilityWithOptions(message, { queue: true })`; the card carries `accessibilityLiveRegion="polite"` at [`app/src/calmframes/CalmCard.tsx:79`](app/src/calmframes/CalmCard.tsx#L79) and `accessibilityRole="alert"` at [`:80`](app/src/calmframes/CalmCard.tsx#L80); the cover is hidden from the tree at [`app/src/calmframes/CoverLayer.tsx:66`](app/src/calmframes/CoverLayer.tsx#L66) `accessibilityElementsHidden` | VoiceView is told what is about to be hidden, and told it in a queue rather than by interrupting, because a child hearing "flashing part coming up" cut off halfway is worse than hearing it a beat later. The cover itself is taken out of the accessibility tree, so VoiceView never reads a black rectangle and focus never lands on it. |
+| **W3C media player** | `@amazon-devices/react-native-w3cmedia` | [`app/src/utils/VideoHandler.ts:147`](app/src/utils/VideoHandler.ts#L147) `new VideoPlayer()`, imported at [`:5`](app/src/utils/VideoHandler.ts#L5) `VideoPlayer`; attached to Shaka at [`:286`](app/src/utils/VideoHandler.ts#L286) `new ShakaPlayer(...)` | All playback. Calm Frames never replaces it and never lowers its opacity. It reads `currentTime`, `playbackRate` and the media events from it, and covers on top of it. |
+| **W3C media player, video surface** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:647`](app/src/screens/PlayerScreen.tsx#L647) `KeplerVideoSurfaceView`, imported at [`:17`](app/src/screens/PlayerScreen.tsx#L17) `KeplerVideoSurfaceView` | The hardware video layer at zIndex 0. The cover sits above it, which is what keeps the sound running while the picture is hidden. |
+| **Vega Media Controls** | `@amazon-devices/react-native-w3cmedia` for the handler base class and the focus call; the session and time types come from `@amazon-devices/kepler-media-controls`, whose module `app/manifest.toml` declares | Focus set at [`app/src/utils/VideoHandler.ts:159`](app/src/utils/VideoHandler.ts#L159) `setMediaControlFocus(...)`. The safe handler is [`app/src/calmframes/SafeMediaControlHandler.ts:54`](app/src/calmframes/SafeMediaControlHandler.ts#L54) `class SafeMediaControlHandler`, with `handleSeek` at [`:80`](app/src/calmframes/SafeMediaControlHandler.ts#L80) and `handleFastForward` at [`:107`](app/src/calmframes/SafeMediaControlHandler.ts#L107) | System and voice transport, and the path an Alexa "skip forward" arrives on. It can land the playhead inside a flagged interval without the remote being touched, so none of these handlers call `super`. Each one goes through [`app/src/calmframes/seekSafety.ts`](app/src/calmframes/seekSafety.ts), `planSeek` at [`:113`](app/src/calmframes/seekSafety.ts#L113). |
+| **KeplerCaptionsView** | `@amazon-devices/react-native-w3cmedia` | [`app/src/screens/PlayerScreen.tsx:667`](app/src/screens/PlayerScreen.tsx#L667) `KeplerCaptionsView`, the element; the handle is set by [`:614`](app/src/screens/PlayerScreen.tsx#L614) `setCaptionViewHandle` | Captions, at zIndex 2, above the cover. One captions view per process. This is the reason a hidden segment is still followable: the words carry on over a black picture. |
+| **Accessibility APIs** | `react-native` `AccessibilityInfo`, plus the `com.amazon.devconf.privilege.accessibility` privilege at [`app/manifest.toml:96`](app/manifest.toml#L96) | [`app/src/calmframes/announce.ts:58`](app/src/calmframes/announce.ts#L58) `announceForAccessibilityWithOptions(message, { queue: true })`; the card carries `accessibilityLiveRegion="polite"` at [`app/src/calmframes/CalmCard.tsx:78`](app/src/calmframes/CalmCard.tsx#L78) and `accessibilityRole="alert"` at [`:79`](app/src/calmframes/CalmCard.tsx#L79); the cover is hidden from the tree at [`app/src/calmframes/CoverLayer.tsx:74`](app/src/calmframes/CoverLayer.tsx#L74) `accessibilityElementsHidden` | VoiceView is told what is about to be hidden, and told it in a queue rather than by interrupting, because a child hearing "flashing part coming up" cut off halfway is worse than hearing it a beat later. The cover itself is taken out of the accessibility tree, so VoiceView never reads a black rectangle and focus never lands on it. |
+| **Kepler UI Components and `react-native-kepler`** | `@amazon-devices/kepler-ui-components`, `@amazon-devices/react-native-kepler` | The seek bar is the components' own, [`app/src/components/Seekbar.tsx:9`](app/src/components/Seekbar.tsx#L9) `KUICSeekbar`, inside a [`:10`](app/src/components/Seekbar.tsx#L10) `TVFocusGuideView`; the drawer uses the same guide at [`app/src/components/navigation/navigationDrawerContent/DrawerItemList.tsx:8`](app/src/components/navigation/navigationDrawerContent/DrawerItemList.tsx#L8) `react-native-kepler` | Ten foot focus management and the themed seek bar, which is one of the seek paths that has to go through the one guarded seek function. |
+| **Kepler File System** | `@amazon-devices/kepler-file-system` | [`app/src/calmframes/harnessConfig.ts:24`](app/src/calmframes/harnessConfig.ts#L24) `KeplerFileSystem`, read at [`:197`](app/src/calmframes/harnessConfig.ts#L197) `getEntries` and [`:203`](app/src/calmframes/harnessConfig.ts#L203) `readFileAsString` | Looks in the app's own data directory for a measurement run config at startup. On OS 1.2 the host cannot write a file there, so when none is found a debug build fetches the config over HTTP instead. |
 
 The whole guard is one hook, [`app/src/calmframes/useFlashGuard.ts`](app/src/calmframes/useFlashGuard.ts). Give it a player and where the map is, and it verifies the map, builds the schedule, drives the cover, decides the card, announces it and hands back the one seek function every control has to use. It deliberately knows nothing about Calm Frames screens, navigation or storage, which is what makes it the thing another Vega app can drop in. Around it: the cover is [`app/src/calmframes/CoverLayer.tsx`](app/src/calmframes/CoverLayer.tsx), the scheduler is [`coverSchedule.ts`](app/src/calmframes/coverSchedule.ts) and [`mediaClock.ts`](app/src/calmframes/mediaClock.ts), the map check is [`flashMap.ts`](app/src/calmframes/flashMap.ts), the PIN is [`parentGate.ts`](app/src/calmframes/parentGate.ts) and the run harness is [`useCoverHarness.ts`](app/src/calmframes/useCoverHarness.ts).
 
@@ -208,7 +265,7 @@ Recorded by `eval/vvd_smoke.py` into [`results/vvd_smoke.json`](results/vvd_smok
 
 ### Cover timing: a software-level number, and one late cover
 
-**There is still no screen-level lead time, and there will not be one until the stick arrives.** What there is now is a software-level number from the virtual device, and the story of how it was almost published wrong is worth keeping, because an earlier version of this page had a figure that was not real.
+**There is still no screen-level lead time. The simulator software events below do not measure pixel delivery.** What there is now is a software-level number from the virtual device, and the story of how it was almost published wrong is worth keeping, because an earlier version of this page had a figure that was not real.
 
 A rehearsal run appeared to show all twenty markers covered in time with a worst lead of 449 ms. Those numbers have been withdrawn. The run they came from never actually played: the player reported positions between 0.17 s and <!--n results/gate1_rehearsal_vvd.json:furthest_position_the_player_reported_ms -->259<!--/n--> ms and got no further, while the cover scheduler, which runs on a wall clock by design, kept advancing its own estimate and fired every cover on time against that estimate. The analysis then agreed with itself. A stricter second script refused to count any of it, which is how it surfaced. Both analysis scripts now require a position report from the player before a lead time is counted.
 
@@ -232,17 +289,19 @@ That rehearsal clip is 20 markers long and none of them survived the rule. The m
 | Median lead | <!--n results/gate1_software_vvd.json:lead_ms.median -->488.4<!--/n--> ms | gate1_software_vvd.json |
 | 95th percentile lead | <!--n results/gate1_software_vvd.json:lead_ms.p95 -->4097<!--/n--> ms | gate1_software_vvd.json |
 | Longest lead | <!--n results/gate1_software_vvd.json:lead_ms.max -->6197.5<!--/n--> ms | gate1_software_vvd.json |
+| 95th percentile lead, in media time | <!--n results/gate1_software_vvd.json:lead_media_ms.p95 -->491<!--/n--> ms | gate1_software_vvd.json |
+| Longest lead, in media time | <!--n results/gate1_software_vvd.json:lead_media_ms.max -->500<!--/n--> ms | gate1_software_vvd.json |
 | Worst lead | <!--n results/gate1_software_vvd.json:worst_lead_ms -->-86<!--/n--> ms | gate1_software_vvd.json |
 | Guard band | <!--n results/gate1_software_vvd.json:guard_band_ms -->500<!--/n--> ms | gate1_software_vvd.json |
 | Required lead | <!--n results/gate1_software_vvd.json:required_lead_ms -->150<!--/n--> ms | gate1_software_vvd.json |
 
-The median sits about where the 500 ms guard band puts it. **That is the friendliest row in the table and it is not the one to judge this by.** The 95th percentile lead is <!--n results/gate1_software_vvd.json:lead_ms.p95 -->4097<!--/n--> ms and the longest is <!--n results/gate1_software_vvd.json:lead_ms.max -->6197.5<!--/n--> ms, against a guard band of <!--n results/gate1_software_vvd.json:guard_band_ms -->500<!--/n--> ms. A cover that goes on four seconds early is safe and it is not the schedule working: it is the cover firing whenever the next position report happened to arrive, which on this clip was about every 6.5 s. So the scheduler is doing less of the work than the median suggests, and the position reports are doing more. Three things in that table matter more than the median.
+The median sits about where the 500 ms guard band puts it. **That is the friendliest row in the table and it is not the one to judge this by.** The 95th percentile lead is <!--n results/gate1_software_vvd.json:lead_ms.p95 -->4097<!--/n--> ms and the longest is <!--n results/gate1_software_vvd.json:lead_ms.max -->6197.5<!--/n--> ms, against a guard band of <!--n results/gate1_software_vvd.json:guard_band_ms -->500<!--/n--> ms. A cover that goes on four seconds early is safe, and it is not the schedule firing early. The results file and [docs/GATES.md](docs/GATES.md) trace every trial with more than 1.5 s of wall-clock lead to the virtual device playing slower than real time near the start of the clip: in media time, which is what the schedule works in, the same covers led by <!--n results/gate1_software_vvd.json:lead_media_ms.p95 -->491<!--/n--> ms at the 95th percentile and <!--n results/gate1_software_vvd.json:lead_media_ms.max -->500<!--/n--> ms at most, inside the band. The wall-clock rows stay in the table because they are what a clock on the wall would have seen on that device; the media-time rows are the measure of the schedule itself. Three things in that table matter more than the median.
 
-**One cover was late.** The worst lead is negative: in one trial the cover went on 86 ms after the marker had already started. Every other pass fired at the first position report past the guard band, around 6.5 s into the clip. In that one, the report at 6.744 s was skipped and the cover fired at 7.079 s. The scheduler re-anchors to media time on every report and re-checks every 50 ms, so a 335 ms gap means the JavaScript thread was not available, not that the schedule was wrong. **The guard band has to be wider than the worst pause of that thread.** Nothing measures that pause on real hardware yet, and that is the first thing GATE 1 has to find out. It has been measured here, though, and the number is bad enough that it belongs in this section rather than one click away. Re-running the same harness with the host under load ([`results/under_load/gate1_software_vvd_load218.json`](results/under_load/gate1_software_vvd_load218.json), written up in [docs/GATES.md](docs/GATES.md)) gave <!--n results/under_load/gate1_software_vvd_load218.json:in_time -->8<!--/n--> of <!--n results/under_load/gate1_software_vvd_load218.json:trials_counted -->9<!--/n--> trials in time, a worst lead of <!--n results/under_load/gate1_software_vvd_load218.json:worst_lead_ms -->-454.6<!--/n--> ms, and a worst gap between two scheduler ticks of <!--n results/under_load/gate1_software_vvd_load218.json:worst_tick_gap_ms -->72755<!--/n--> ms. That is seventy-two seconds in which a 50 ms timer did not run. A guard band cannot be wider than that, which means the guard band is the wrong instrument for a machine under that much load, and the honest position is that we do not yet know what is.
+**One cover was late.** The worst lead is negative: in one trial the cover went on 86 ms after the marker had already started. Every other pass fired at the first position report past the guard band, around 6.5 s into the clip. In that one, the report at 6.744 s was skipped and the cover fired at 7.079 s. The scheduler re-anchors to media time on every report and re-checks every 50 ms, so a 335 ms gap means the JavaScript thread was not available, not that the schedule was wrong. **The guard band has to be wider than the worst pause of that thread.** Nothing measures that pause on real hardware yet, and no physical timing claim is made. It has been measured here, though, and the number is bad enough that it belongs in this section rather than one click away. Re-running the same harness with the host under load ([`results/under_load/gate1_software_vvd_load218.json`](results/under_load/gate1_software_vvd_load218.json), written up in [docs/GATES.md](docs/GATES.md)) gave <!--n results/under_load/gate1_software_vvd_load218.json:in_time -->8<!--/n--> of <!--n results/under_load/gate1_software_vvd_load218.json:trials_counted -->9<!--/n--> trials in time, a worst lead of <!--n results/under_load/gate1_software_vvd_load218.json:worst_lead_ms -->-454.6<!--/n--> ms, and a worst gap between two scheduler ticks of <!--n results/under_load/gate1_software_vvd_load218.json:worst_tick_gap_ms -->72755<!--/n--> ms. That is seventy-two seconds in which a 50 ms timer did not run. A guard band cannot be wider than that, which means the guard band is the wrong instrument for a machine under that much load, and the honest position is that we do not yet know what is.
 
 **The evidence rebuilds itself.** [`results/gate1_software_vvd.json`](results/gate1_software_vvd.json) ships with the events it was computed from, and `eval/verify_gate1_archive.py` runs in CI to rebuild the summary from those events and fail if the two ever disagree. That check exists because the first attempt to rebuild it by hand got 54 trials rather than 49, with one lead of 13.3 s, by splitting the passes on the wrong marker. The wrong answer looked completely ordinary.
 
-A software-level figure measures the gap between the moment the app applied the cover and the moment the marker was due. Everything after the app sets its state, which is the React commit, the compositor, scan-out and the panel, is unmeasured, and all of it lands in the real figure. Treat this as an upper bound on how well the real thing can do. **GATE 1 is 50 trials filmed at 240 frames a second against a real Fire TV stick**, and nothing short of that is a lead time for this project.
+A software-level figure measures the gap between the moment the app applied the cover and the moment the marker was due. Everything after the app sets its state, which is the React commit, the compositor, scan-out and the panel, is unmeasured, and all of it lands in the real figure. Treat this as an upper bound on how well the real thing can do. The historical GATE 1 camera protocol is outside the simulator-only submission scope. These software events do not establish physical screen lead time.
 
 ### What the player does, which Amazon does not document
 
@@ -270,7 +329,7 @@ Recorded into [`results/vvd_layering_rehearsal.json`](results/vvd_layering_rehea
 | Verdict | <!--n results/vvd_layering_rehearsal.json:layering.verdict -->inconclusive<!--/n--> |
 | Media seconds advanced while covered | <!--n results/vvd_layering_rehearsal.json:layering.media_seconds_advanced_while_covered -->0.05<!--/n--> |
 
-The harness side works and nothing crashed, but playback did not run in that take, so the run says nothing about whether the sound keeps going under a cover. It is recorded as inconclusive rather than dressed up. The real answer comes from filming a stick.
+The harness side works and nothing crashed, but playback did not run in that take, so the run says nothing about whether the sound keeps going under a cover. It is recorded as inconclusive rather than dressed up. The current simulator journey must directly demonstrate continuing sound; this historical take does not.
 
 ### Screening real footage
 
@@ -308,27 +367,29 @@ An earlier version of this table had four failures, all Theora `.ogv`, which fla
 
 ### How well the analyzer does, on the conformance suite
 
-This is the number that says whether any of the rest is worth having. Recorded by the conformance suite into [`results/conformance.json`](results/conformance.json), whose ground truth is computed from the quoted spec text in a module that cannot import flashmap.
+The complete corrected synthetic SDR evaluation is recorded in [`results/conformance_current_report_2026-10-02.json`](results/conformance_current_report_2026-10-02.json), whose ground truth is computed from the quoted spec text in a module that cannot import flashmap.
 
 | What | Value |
 |---|---|
-| Clips measured and kept | <!--n results/conformance.json:published.clips_kept -->467<!--/n--> of <!--n results/conformance.json:published.clips_designed -->3000<!--/n--> designed |
-| Windows judged | <!--n results/conformance.json:published.windows -->1401<!--/n-->, of which <!--n results/conformance.json:published.positive_windows -->324<!--/n--> are positive in the ground truth |
-| Precision | <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n--> (<!--n results/conformance.json:published.flashmap_precision_lo -->0.605<!--/n--> to <!--n results/conformance.json:published.flashmap_precision_hi -->0.693<!--/n-->) |
-| Recall | <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> (<!--n results/conformance.json:published.flashmap_recall_lo -->0.857<!--/n--> to <!--n results/conformance.json:published.flashmap_recall_hi -->0.924<!--/n-->) |
-| Recall away from a limit | <!--n results/conformance.json:published.recall_away_from_limits -->1<!--/n--> over <!--n results/conformance.json:published.recall_away_from_limits_positive_windows -->244<!--/n--> positive windows |
-| **Recall on clips that sit on a limit** | **<!--n results/conformance.json:published.recall_near_limits -->0.575<!--/n-->** over <!--n results/conformance.json:published.recall_near_limits_positive_windows -->80<!--/n--> positive windows |
+| Clips measured and kept | <!--n results/conformance_current_report_2026-10-02.json:published.clips_kept -->2999<!--/n--> of <!--n results/conformance_current_report_2026-10-02.json:published.clips_designed -->3000<!--/n--> designed |
+| Windows judged | <!--n results/conformance_current_report_2026-10-02.json:published.windows -->8997<!--/n-->, of which <!--n results/conformance_current_report_2026-10-02.json:published.positive_windows -->1268<!--/n--> are positive in the ground truth |
+| Precision | <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision -->0.649<!--/n--> (<!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision_lo -->0.625<!--/n--> to <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision_hi -->0.671<!--/n-->) pooled over every flagged window; on clips that sit on a limit it is **<!--n results/conformance_current_report_2026-10-02.json:published.precision_near_limits -->0.573<!--/n-->** (<!--n results/conformance_current_report_2026-10-02.json:published.precision_near_limits_lo -->0.516<!--/n--> to <!--n results/conformance_current_report_2026-10-02.json:published.precision_near_limits_hi -->0.629<!--/n-->) over <!--n results/conformance_current_report_2026-10-02.json:published.precision_near_limits_denominator -->293<!--/n--> flagged windows, and away from one <!--n results/conformance_current_report_2026-10-02.json:published.precision_away_from_limits -->0.665<!--/n-->. What the false positives cost a viewer across the suite: <!--n results/conformance_current_report_2026-10-02.json:published.false_positive_seconds_per_minute_of_calm -->4.53<!--/n--> seconds hidden per minute of calm footage, most of it the one second lead-in flashmap hides before a flash starts, which the report counts rather than excuses |
+| Recall | <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall -->0.85<!--/n--> (<!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall_lo -->0.829<!--/n--> to <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall_hi -->0.869<!--/n-->) |
+| Recall away from a limit | <!--n results/conformance_current_report_2026-10-02.json:published.recall_away_from_limits -->1<!--/n--> over <!--n results/conformance_current_report_2026-10-02.json:published.recall_away_from_limits_positive_windows -->910<!--/n--> positive windows |
+| **Recall on clips that sit on a limit** | **<!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits -->0.469<!--/n-->** over <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits_positive_windows -->358<!--/n--> positive windows |
 
-**This run is partial and the file says so in its own statement field.** <!--n results/conformance.json:published.clips_measured -->475<!--/n--> clips were measured, <!--n results/conformance.json:published.excluded_clips -->8<!--/n--> were excluded and <!--n results/conformance.json:published.clips_kept -->467<!--/n--> kept, out of a committed design of <!--n results/conformance.json:published.clips_designed -->3000<!--/n-->. Nothing here should be read as a finished evaluation.
+All <!--n results/conformance_current_report_2026-10-02.json:published.clips_measured -->3000<!--/n--> frozen clip identities were measured, with <!--n results/conformance_current_report_2026-10-02.json:published.excluded_clips -->1<!--/n--> fidelity exclusion. CI rebuilds the report from the frozen design and the saved measurement rows with the committed scorer on every push, and fails on any byte that differs. The generator's matrix/range conversion was corrected under a logged protocol deviation; detector thresholds, intended-signal truth labels and production resolution were unchanged. Encoded near-limit signals can still cross thresholds, and those misses remain scored as misses.
+
+The [archived partial report](results/conformance.json) and [paired protocol comparison](results/conformance_protocol_comparison_2026-10-02.json) remain intact. Baselines were not rerun for this complete evaluation. The comparisons below are historical, not matched comparisons against the new report. This is synthetic conformance evidence, not clinical validation, human-labelled real-video recall or a device test.
 
 **What those two numbers mean for a child in front of the TV**, said plainly:
 
-- Precision of <!--n results/conformance.json:published.flashmap_precision -->0.65<!--/n--> means roughly a third of the windows flashmap flags are not over the threshold. The cost of that is picture hidden that did not need hiding. It is the direction we would rather err in, and it is still a cost, because a title full of unnecessary covers is a title a child stops choosing.
-- Recall of <!--n results/conformance.json:published.flashmap_recall -->0.895<!--/n--> means about one positive window in ten is missed across the whole suite. **That blended number flatters the part that matters, and the split says so.** Away from a limit, recall is <!--n results/conformance.json:published.recall_away_from_limits -->1<!--/n--> over <!--n results/conformance.json:published.recall_away_from_limits_positive_windows -->244<!--/n--> positive windows in <!--n results/conformance.json:published.recall_away_from_limits_clips -->289<!--/n--> clips. On the <!--n results/conformance.json:published.recall_near_limits_clips -->178<!--/n--> clips that sit **on** a limit it is <!--n results/conformance.json:published.recall_near_limits -->0.575<!--/n--> over <!--n results/conformance.json:published.recall_near_limits_positive_windows -->80<!--/n--> positive windows, which is closer to four missed in ten than one. A safety tool lives at the limit, so that is the number to judge it by, and it is the reason this is a layer that reduces exposure rather than one that removes it. It is also the reason the approved wording is the wording it is. [`eval/EVAL_RESULTS.md`](eval/EVAL_RESULTS.md) works through what that split means.
+- Precision of <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_precision -->0.649<!--/n--> means roughly a third of the windows flashmap flags are not over the threshold. The cost of that is picture hidden that did not need hiding. It is the direction we would rather err in, and it is still a cost, because a title full of unnecessary covers is a title a child stops choosing. On the clips that sit on a limit, precision is <!--n results/conformance_current_report_2026-10-02.json:published.precision_near_limits -->0.573<!--/n--> over <!--n results/conformance_current_report_2026-10-02.json:published.precision_near_limits_denominator -->293<!--/n--> flagged windows, so there nearly half of what is hidden did not need hiding, and that is the price of the recall the next line gives.
+- Recall of <!--n results/conformance_current_report_2026-10-02.json:published.flashmap_recall -->0.85<!--/n--> means positive windows are still missed across the whole suite. **That blended number flatters the part that matters, and the split says so.** Away from a limit, recall is <!--n results/conformance_current_report_2026-10-02.json:published.recall_away_from_limits -->1<!--/n--> over <!--n results/conformance_current_report_2026-10-02.json:published.recall_away_from_limits_positive_windows -->910<!--/n--> positive windows in <!--n results/conformance_current_report_2026-10-02.json:published.recall_away_from_limits_clips -->1797<!--/n--> clips. On the <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits_clips -->1202<!--/n--> clips that sit **on** a limit it is <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits -->0.469<!--/n--> over <!--n results/conformance_current_report_2026-10-02.json:published.recall_near_limits_positive_windows -->358<!--/n--> positive windows, so more than half of the near-limit positive windows are missed. A safety tool lives at the limit, so that is the number to judge it by, and it is the reason this is a layer that reduces exposure rather than one that removes it. It is also the reason the approved wording is the wording it is. The archived discussion in [`eval/EVAL_RESULTS.md`](eval/EVAL_RESULTS.md) retains its historical figures; the table here uses the completed run.
 
-Neither number has anything to say about the red flash rule against real footage, because the pool has no saturated red strobe. The ablation in [`results/ablations.json`](results/ablations.json) shows what the red rule is carrying on the synthetic suite: with it on, <!--n results/ablations.json:detection.arms.default.recall.numerator -->88<!--/n--> of <!--n results/ablations.json:detection.arms.default.recall.denominator -->98<!--/n--> positive windows are found; with it off, <!--n results/ablations.json:detection.arms.red_rule_off.recall.numerator -->64<!--/n--> of <!--n results/ablations.json:detection.arms.red_rule_off.recall.denominator -->98<!--/n-->.
+Neither number has anything to say about the red flash rule against real footage, because the pool has no saturated red strobe. The historical ablation in [`results/ablations.json`](results/ablations.json) shows what the red rule is carrying on the synthetic suite: with it on, <!--n results/ablations.json:detection.arms.default.recall.numerator -->88<!--/n--> of <!--n results/ablations.json:detection.arms.default.recall.denominator -->98<!--/n--> positive windows are found; with it off, <!--n results/ablations.json:detection.arms.red_rule_off.recall.numerator -->64<!--/n--> of <!--n results/ablations.json:detection.arms.red_rule_off.recall.denominator -->98<!--/n-->.
 
-### Baselines
+### Baselines (historical)
 
 Three independent tools were run over the same pool, so flashmap can be compared against something rather than trusted on its own. Per-clip results are in [`results/baselines/`](results/baselines/): `ffmpeg_photosensitivity` (FFmpeg's own photosensitivity filter, a mitigator whose flags are inferred from where its output differs from the unfiltered decode), `naive_luma_diff` (whole-frame mean luma only, no area rule, no colour rule, no rate window) and `iris` ([EA IRIS](https://github.com/electronicarts/IRIS), a published photosensitivity analyser, through its own example app built from source at a pinned commit). None of the three is a conformance result and none is a safety claim.
 
@@ -344,12 +405,13 @@ These rows exist so nobody has to guess what is missing.
 
 | What | Why it is empty |
 |---|---|
-| GATE 1: covers drawn early, filmed at 240 fps | Needs the Fire TV stick. |
-| Any cover lead time at all, on any device | The one run that produced one was withdrawn, because the player never reported a position. See above. |
-| GATE 3: end to end on the stick | Needs the stick. |
+| Physical screen-level cover timing | Unmeasured and outside the simulator-only submission scope. |
+| Current Harbor simulator journey | Requires a visible current build and recorded observation; historical software timing is not screen timing. |
+| Physical device end-to-end behavior | Outside this submission scope; no hardware validation is claimed. |
 | Prevented exposure, in seconds | Computed from flash maps once the KPI run happens. Never by playing flashing content with the filter off. |
-| Test counts | The suites run in CI. No results file records their counts, so no number is published here. |
+| Test counts | The suites run in CI. The records of their counts are typed records of single local runs whose logs stay outside the repo: [`results/redesign_validation_2026-10-10.json`](results/redesign_validation_2026-10-10.json) at cba1a29, and on Oct 11 two Python runs that disagreed with each other over a race in the cover measurement, since fixed, [`results/interaction_evidence_2026-10-11.json`](results/interaction_evidence_2026-10-11.json) on 7.1.5 and [`results/local_python_run_2026-10-11.json`](results/local_python_run_2026-10-11.json) on 6.1.1. [docs/STATUS.md](docs/STATUS.md) quotes them side by side. Nothing regenerates them, so no count is a headline here. |
 | Red flash segments from real footage | The free pool has none. Self-filmed red clips are the plan, under the rules in [docs/SAFETY.md](docs/SAFETY.md). |
+| Voice transport on a device | The virtual device has no Alexa, so no device run has delivered a spoken seek. The media-session path, `SafeMediaControlHandler`, is exercised by jest only; the D-pad and on-screen paths were observed on the virtual device. |
 
 ## Install and run
 
@@ -359,9 +421,10 @@ These rows exist so nobody has to guess what is missing.
 |---|---|---|
 | Vega SDK | 0.24.9914 | The SDK this is pinned to |
 | Vega CLI | 1.3.4 | Device and virtual device commands |
-| Node | 22 (`.nvmrc`) | The sample declares `engines.node >= 22` |
-| Python | 3.12 (`.python-version`) | flashmap, the pipeline and the measurement scripts |
+| Node | 22 (`.nvmrc`) | The sample declares `engines.node >= 22`. The `make` targets use fnm when it is installed and the node on PATH otherwise |
+| Python | 3.12 (`.python-version`) | flashmap, the pipeline and the measurement scripts, installed into `.venv` at the repository root, which the `make` targets and the scripts look for ([docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) has the `uv` steps) |
 | JDK 21 | for `npm install` only | The Shaka Player build runs in `postinstall` |
+| ffmpeg and ffprobe | 9.0.1, see [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) | The pipeline, the conformance generator and every measurement script. The published numbers came off 9.0.1. Two tests that failed on 6.1.1 on Oct 11 were a race in the cover measurement, not the encoder, fixed the same day (docs/STATUS.md section 5) |
 
 ```sh
 source ~/vega/env                       # Vega CLI and SDK
@@ -371,30 +434,34 @@ export JAVA_HOME=/opt/homebrew/opt/openjdk@21
 
 ### The app on the Vega Virtual Device
 
-```sh
-cd app
-npm install                             # postinstall builds Shaka Player, so JAVA_HOME matters
-npm run build:debug                     # a debug build: release builds strip console.log
-
-cd ..
-python3 eval/vvd_smoke.py --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
-```
-
-`eval/vvd_smoke.py` starts the virtual device if it is not running, installs and launches the app, drives the remote, plays a title and writes `results/vvd_smoke.json`.
-
-Two things to know before you script against the device. `vega virtual-device status` says running before the device is usable, so wait for `vega device is-connected` instead. And `vega device list` crashes with a TypeError on this SDK, so use `vega device info`. Both are in the [friction log](docs/FRICTION_LOG.md), entries 6 and 8.
-
-### The app on a Fire TV stick
+Use the aarch64 package on this Apple Silicon Mac. From the repository root:
 
 ```sh
 cd app
 npm install
-npm run build:debug                     # builds every architecture; the stick takes armv7
-vega device is-connected                # not "vega device list", which crashes
-vega run-app build/armv7-debug/calm-frames-app_armv7.vpkg
+npm run build:debug -- --target aarch64
+cd ..
+nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
+vega device is-connected --device Simulator
+vega device info --device Simulator
+vega device install-app --device Simulator --packagePath app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
+vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main
 ```
 
-The stick needs Vega OS 1.2 with developer mode on, connected over USB. The package ID must not begin with `com.amazon`, or developer mode will not sideload it.
+Start the virtual device only if it is stopped. Wait until `vega device is-connected` confirms readiness before installing. The CLI's `virtual-device status` can report running before it is usable; avoid `vega device list`, which previously failed on this SDK. These are the install and launch commands the Oct 10 run used ([docs/COMPLETION_CHECKLIST.md](docs/COMPLETION_CHECKLIST.md)); the app name is the interactive component's ID, which keeps the launch unambiguous.
+
+Then run the checked benign journey preflight:
+
+```sh
+.venv/bin/python -m eval.benign_native_smoke --device Simulator \
+  --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
+```
+
+After successful preflight, repeat with `--execute --restart` to collect fresh software logs. Use the visible remote to complete setup, select Harbor story (benign demo), enable English practice captions, and observe playback, practice holds, sound, seeks, parent settings and restart. Logs alone do not prove screen composition or audio continuity. `eval/vvd_smoke.py` now delegates to the same benign smoke entrypoint; its historical helper functions remain for separate timing tools.
+
+For a fresh Python environment, follow [the reviewer setup](docs/ENVIRONMENT.md#python-setup-for-a-fresh-reviewer-checkout) before the preflight.
+
+The simulator-only submission does not require a physical Fire TV device.
 
 ### The analyzer on its own
 
@@ -432,7 +499,7 @@ A judge who would rather not use a terminal can run the same thing from a page:
 python -m pipeline.upload_server            # http://127.0.0.1:8765
 ```
 
-Drop in a clip, get the report back. It runs on this machine only. The clip is measured by the pipeline's own analyzer door and deleted before the answer is sent, it is never played and there is no route that serves it back. **Nothing is deployed.** Anything that would reach AWS waits behind the same two locks as `make deploy`, and neither has ever been open here.
+Drop in a clip, get the report back. It runs on this machine only. The clip is measured by the pipeline's own analyzer door and deleted before the answer is sent, it is never played and there is no route that serves it back. **The page sends nothing to AWS.** Anything that would reach AWS waits behind the same two locks as `make deploy`. Those were opened once, on Oct 9, 2026, by a person, for the deploy under [AWS](#aws) below, in a separate deploy worktree; the committed repository never holds the open lock.
 
 ### The GitHub Action
 
@@ -441,25 +508,147 @@ Copy [`flashmap/examples/flash-check.yml`](flashmap/examples/flash-check.yml) in
 ### The pipeline
 
 ```sh
-python -m pipeline.ingest --source VIDEO          # probe, analyze, hide plan, rendition, posters, sign
-python -m pipeline.verify --title <sha256>        # the gate that blocks publishing
+python -m flashmap keygen --out /path/to/team_key.pem    # once; the .pub.pem lands beside it
+python -m pipeline.ingest VIDEO --workdir build/ingest --key /path/to/team_key.pem \
+    --pub /path/to/team_key.pub.pem   # probe, analyze, hide plan, rendition, posters, scene holds
+python -m pipeline.verify --workdir build/ingest --sha SHA256 \
+    --pub /path/to/team_key.pub.pem   # the publication gate
 ```
 
-Ingest is idempotent and keyed by the source file's SHA-256, so a repeated run picks up where it stopped.
+Verify refuses a map whose signature it cannot check, so `--pub` is not optional: without it the `map_signature` check fails and the title cannot publish. Ingest is idempotent and keyed by the source file's SHA-256, so a repeated run picks up where it stopped. Scene holds are enabled by default when ingest has a signing key.
+
+For each covered interval, ingest selects an exact preceding source frame outside
+every requested preset's guarded intervals and calm margin, with a five-second
+lookback. If no eligible frame exists, extraction fails, or the still fails its
+pattern check, it uses a flat neutral image. The inline JPEGs are bounded and
+signed; intervals without a descriptor use black. Verification checks their
+source provenance, bytes, and the encoded MP4, HLS and live-cover model before
+publication. `--no-scene-holds` retains the legacy rendition and cover path.
+Existing maps without scene holds remain supported. The wire contract is in
+[`docs/SIDECAR_SPEC.md`](docs/SIDECAR_SPEC.md).
+
+### A checked local library, without AWS
+
+One command wraps ingest and verification and prints a readiness receipt:
+
+```sh
+python -m pipeline.local_library prepare /path/to/calm-video.mp4 \
+    --workdir build/local-library --key /path/to/team_key.pem \
+    --pub /path/to/team_key.pub.pem --title 'Our calm video' \
+    --presets wcag,broadcast,extra-cautious
+python -m pipeline.local_library catalog --workdir build/local-library
+```
+
+Use a benign clip, external signing keys and the normal pipeline dependencies.
+Nothing is served, opened, played or uploaded automatically. The receipt links
+only the prepared MP4, HLS, map and verification report, not the source video,
+private key or cover model. `local-library.json` lists only complete checked
+titles, and rebuilding it rechecks current artifact bytes against the receipt.
+A failed re-import withdraws the old ready receipt. Overlapping imports into
+the same workspace are refused rather than racing shared catalog writes.
+
+The receipt says **ready for local playback of the prepared rendition**. To
+include the checked titles in the next Vega build, export their prepared assets:
+
+```sh
+python -m pipeline.packaged_library export --workdir build/local-library \
+    --output app/assets/raw/prepared-library --pub /path/to/team_key.pub.pem
+python -m pipeline.packaged_library check --output app/assets/raw/prepared-library
+cd app && npm run build:debug
+```
+
+The app selects the prepared rendition for the household's preset. The compiled
+catalog keeps the analyzed source hash distinct from the rendition hash and
+binds the local media, signed maps and extracted captions. Build checks verify
+those exact bytes again inside every package. Playback rejects a substituted
+route before loading its media and still performs the normal signed-map check.
+This is a bounded library packaged at build time; adding titles requires a new
+build. It does not establish native playback or physical-TV composition.
+
+Local preparation now uses the app's profile unions and guard timings, with
+opaque live fallback and a verified pre-covered picture. Its default analysis
+room covers the current selectable room sizes. Signed per-interval scene images
+remain available in the separate scene-hold pipeline and the labelled Harbor
+practice demo; arbitrary prepared imports do not yet carry union scene images.
+
+Detailed commands, exit statuses and workspace limits are in
+[`pipeline/LOCAL_LIBRARY.md`](pipeline/LOCAL_LIBRARY.md).
+
+In the app, setup now ends with a review of the chosen preset, television size
+and seating distance. A checked title's viewing plan explains which maps were
+checked, how scene holds fall back to an opaque cover, and the limits of the
+protection. Pending or failed titles get no ready plan. These are presentation
+changes; timing, seek guards and household floors are unchanged.
+
+Household setup is saved locally for later app launches: the selected
+child, profiles, room, preset, chime choice, the two interface effects (artwork
+motion and selection sounds, both off unless a parent turns them on), salted
+PIN hash and failed-attempt lockout are saved together in a versioned local record. The library opens only
+after that record is read and validated. Unreadable or malformed records keep
+it closed; a failed save offers a retry of the intended change. No plaintext
+PIN or unlocked parent session is saved. The hide history remains in memory.
+These paths are covered by app regressions, with native storage behavior still requiring the current simulator restart check.
+
+### Current validation scope
+
+Use the benign simulator preflight above and the Harbor capture plan in [docs/SHOT_MANIFEST.md](docs/SHOT_MANIFEST.md). Historical hardware preflight and camera protocols remain in the repository for future work; they are not submission prerequisites. No physical-TV timing or composition result is claimed.
 
 ### AWS
 
-The CDK app in [`pipeline/infra/`](pipeline/infra/) synthesizes and is unit tested. **Nothing is deployed and no AWS credentials have been used.** It has zero NAT gateways, a 20 US dollar budget alarm, private buckets, and a GitHub OIDC role so no AWS key is ever stored anywhere.
+The CDK app in [`pipeline/infra/`](pipeline/infra/) synthesizes, is unit tested, and was **deployed once, on Oct 9, 2026**, by hand from a terminal, with the IAM changes read and approved at the CDK prompt. `CalmFramesStack` in us-east-1 stands at <!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n-->: <!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n--> resources, <!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways, private buckets and a <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollar budget. A calm test clip went through it twice that night: unsigned, it was analyzed and refused, and nothing was published; signed with a cloud demo key, it was published to S3, DynamoDB and CloudFront. The GitHub OIDC deploy role is defined and unit tested but was not created, so no AWS key is stored in the repository or in CI.
+
+The TV app does not call AWS. Its library is compiled into the package, and the cloud demo key is one the app does not trust, so a map made in the cloud plays on no TV. The record of that night, with every account identifier left out, is [`results/aws_deploy_2026-10-09.json`](results/aws_deploy_2026-10-09.json); [`pipeline/infra/README.md`](pipeline/infra/README.md) has the deploy, what it taught and how to take it down.
 
 ```sh
-cd pipeline/infra && cdk synth            # safe: no account is touched
+make synth                                # offline: no credentials, no account touched
 ```
 
 ### The parent area and the demo PIN
 
 The parent area is behind a four digit PIN, set on the device by whoever sets the app up. The PIN itself is never stored: what is stored is a salted, iterated hash of it ([`app/src/calmframes/parentGate.ts`](app/src/calmframes/parentGate.ts), which is also plain about what that does and does not buy).
 
-**The demo PIN for judges is not set yet.** It will be published here and in the GitHub Release notes once the demo build exists. This README will not carry a made-up one.
+**There is no preset PIN in the package.** On a fresh simulator installation, choose and confirm your own PIN during onboarding. Installing the package on another simulator does not transfer household state. For an already configured demo simulator, use its owner-provided PIN; do not clear existing data to bypass the gate.
+
+### Run the checks
+
+The same commands CI runs, for a checkout on any box. `make ci` wraps them and uses fnm and the repository `.venv` when they are there.
+
+```sh
+cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx jest --ci --colors=false && cd ..
+.venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"
+.venv/bin/python eval/readme_sync.py --check    # every published number against results/
+.venv/bin/python eval/style_check.py            # no dashes, none of the three words
+make lint-py typecheck-py                       # ruff over the Python, mypy over flashmap and the pipeline
+```
+
+`npm ci --ignore-scripts` skips the Shaka Player build, which the tests mock; a device package needs the full `npm install` with the JDK. `make synth`, the offline CDK synthesis, also needs `pip install -r pipeline/infra/requirements.txt` in that `.venv`. The whole Python suite passes on ffmpeg 6.1.1 as well as 9.0.1: the two tests that failed on 6.1.1 on Oct 11 were a race in the cover measurement, fixed the same day ([`results/local_python_run_2026-10-11_fixed.json`](results/local_python_run_2026-10-11_fixed.json), docs/STATUS.md section 5). `make hooks` installs the gitleaks pre-commit hook and `make hooks-selftest` watches it block a planted key; `make help` lists every target.
+
+## How this is checked
+
+Every push runs two workflows, and a record of each green head is kept in `results/github_push_*.json`.
+
+| Workflow | Job | What it refuses |
+|---|---|---|
+| CI | Vega app | A type error, a lint error (including a playhead write outside the one seek function), a failing jest test, coverage under the floors in `app/jest.config.json`, a prepared asset that does not match its record |
+| CI | Python packages | A failing analyzer, pipeline or evaluation test, Python source coverage under its floor in `.coveragerc`, a ruff finding, a mypy error in flashmap (strict) or the pipeline, and a conformance report that does not rebuild byte for byte from its own rows |
+| CI | The app's own UI passes flashmap | A screen of the app that flashes, checked by the same analyzer, with a negative control that has to refuse a flashing sequence and a grating |
+| CI | Mutation gate, property tests and the map fuzz corpus | A safety guard whose tests no longer notice it being broken |
+| CI | Secret scan | A committed key or token |
+| CI | Published numbers match results | A number in a document that disagrees with `results/`, any dash or banned word in what we wrote, and any action not pinned to a commit |
+| Audit | pip-audit and npm audit | A known advisory outside the reviewed exceptions in `scripts/audit_exceptions.toml` |
+| Audit | The bills of materials are current | A dependency change without its bill of materials |
+| Audit | The stack and the container rules | A CDK template that does not synthesize without credentials, a NAT gateway in it, or an infra test that skips instead of running |
+| Audit | The ingest image builds for ARM64 | An ingest image that does not build |
+
+**The guards are tested by breaking them.** [`eval/mutate_gate.py`](eval/mutate_gate.py) breaks each safety guard on purpose and runs the tests that should notice: <!--n results/mutation.json:totals.killed -->68<!--/n--> of <!--n results/mutation.json:totals.mutations -->70<!--/n--> mutations are caught, and the <!--n results/mutation.json:totals.survived -->2<!--/n--> that survive are written up as equivalent, an edit that cannot change what the program does. That rate covers the listed safety properties only, not the whole codebase ([`results/mutation.json`](results/mutation.json)); CI fails if a run disagrees with the committed report.
+
+**The map readers are fuzzed.** <!--n results/fuzz.json:totals.cases -->69<!--/n--> malformed flash maps go through each of the <!--n results/fuzz.json:totals.readers -->3<!--/n--> readers that open one, and a reader that accepts a bad map without hiding what it flags, or throws, is a finding: <!--n results/fuzz.json:totals.findings -->0<!--/n--> in the recorded run ([`results/fuzz.json`](results/fuzz.json), Sep 18), and CI replays the corpus on every push.
+
+**Coverage is measured and has floors.** Line coverage of the Python source is <!--n results/coverage_2026-10-11.json:published.python_percent -->91.2<!--/n--> percent (flashmap <!--n results/coverage_2026-10-11.json:published.flashmap_percent -->94.1<!--/n-->, the pipeline <!--n results/coverage_2026-10-11.json:published.pipeline_percent -->89.4<!--/n-->), measured with the CI job's own command on a clean install; the app's line coverage is <!--n results/coverage_2026-10-11.json:published.app_lines_percent -->78.11<!--/n--> percent and its branch coverage, the lowest measure, <!--n results/coverage_2026-10-11.json:published.app_branches_percent -->75.55<!--/n--> ([`results/coverage_2026-10-11.json`](results/coverage_2026-10-11.json)). Each floor sits one point under its measurement, and every run writes its totals to the run page. Until Oct 11 the Python job tested only `eval/`: its lane detection dropped flashmap and the pipeline without a word, and a test now keeps all three named.
+
+**Every published number has a source.** A number in this README, the Devpost text or the docs is written as a marker against a file in `results/`, and [`eval/readme_sync.py`](eval/readme_sync.py) fails the build on drift. It cannot see which number was chosen, so where a number has a worse sibling both are published.
+
+**What has never been run** is listed, by name, in [docs/SECURITY.md](docs/SECURITY.md#what-has-never-been-run).
 
 ## Limits
 
@@ -469,13 +658,17 @@ Worth knowing before trusting this with a child.
 - **Only titles that passed verify can play in kid mode.** Anything else is not protected, because it was never measured.
 - **Live streams and other apps' content are out of scope.** So are DRM titles from other apps.
 - **HDR is not measured.** flashmap refuses HLG and PQ input rather than measuring it with the wrong transfer curve.
-- **Theora `.ogv` does not decode**, which is four of the twenty clips in the screening pool.
-- **There is no screen-level cover lead time.** The software-level number above is the app's own timing on the virtual device, and it stops at the moment the app sets its state. Until GATE 1 is filmed on a stick at 240 fps, the timing claim in this README is an upper bound and a design argument, not a measurement of what a screen showed.
+- **Decoder support is bounded.** The earlier Theora failures were fixed and rescreened; unsupported or undecodable inputs still fail closed.
+- **There is no screen-level cover lead time.** The software-level number above is the app's own timing on the virtual device, and it stops at the moment the app sets its state. The timing claim is a software observation, not a measurement of what a screen showed; physical camera timing is outside this submission scope.
 - **One cover in 49 went on after its marker started.** The cause looks like the JavaScript thread being unavailable for about a third of a second, which the 500 ms guard band did not cover. Until the worst thread pause is measured on real hardware, the right guard band is unknown.
+- **"Cover first, then seek" is the order of the calls, not yet of what is on screen.** The seek function sets the cover before it writes the playhead, and the cover is a React state update that reaches the screen on the next commit. Whether it is drawn before the player shows the new frame has not been observed frame by frame on a device; the Mac acceptance step records it.
 - **The layering question is open.** The one recorded run is inconclusive, because playback did not run in that take.
+- **Scene-hold composition is not measured on a TV.** The encoded outputs and
+  runtime guards have automated checks, but native image loading, aspect ratio,
+  captions and continuing audio still need direct observation in the current benign simulator journey. No physical cover timing is claimed.
 - **Red flash coverage is untested against real footage**, because no free source in the pool has a saturated red strobe.
 - **The room rule can only add hides.** A household cannot make Calm Frames weaker than WCAG. That is a design rule and it is enforced in code, but it also means a household cannot switch protection off for one title without leaving kid mode.
-- **None of it has been seen running on a stick.** The guard hook, the PIN gate, the seek safety engine, the calm card and the VoiceView announcements exist in `app/src/calmframes/`, and the standalone [`hook/`](hook/) package that ships them to other apps exists too, with its own README and the integration diff above. What has not happened is any of it running on real hardware.
+- **Physical hardware is untested and outside this submission scope.** The Vega Virtual Device journey is the acceptance target. Simulator observations do not establish physical display behavior.
 
 ## Safety
 
@@ -490,8 +683,12 @@ The approved wording, everywhere, is: **reduces exposure to flashing above publi
 | What | Licence |
 |---|---|
 | Calm Frames, including `flashmap/`, `pipeline/` and `eval/` | Apache-2.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE) |
-| `app/`, derived from [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) at tag `v0.24-RN83` | MIT-0, see [app/LICENSE](app/LICENSE) |
+| `app/`, derived from [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) at tag `v0.24-RN83` | MIT-0, see [app/LICENSE](app/LICENSE). The player wrapper and the Shaka archive it builds from carry Amazon's own proprietary notice beside that grant, kept as published; [docs/AMAZON_SAMPLE_LICENSE_REVIEW.md](docs/AMAZON_SAMPLE_LICENSE_REVIEW.md) says what was checked and what was asked |
 | App third-party dependencies | [app/LICENSE-THIRD-PARTY](app/LICENSE-THIRD-PARTY) |
+| Inter 4.001, the app's typeface | SIL Open Font License 1.1, see [app/assets/fonts/LICENSE-Inter](app/assets/fonts/LICENSE-Inter) |
+| Presentation artwork and animation plates | Ours, per file in [media/LICENSES.csv](media/LICENSES.csv): the cinematic Harbor and water plates are Apache-2.0; the earlier illustration and gradient are CC0-1.0. Playback stills are extracted and signed through the pipeline |
+| Our own videos: the Harbor film, its prepared renditions, and the calm gradient | Ours, per file in [media/LICENSES.csv](media/LICENSES.csv): the current cinematic Harbor is Apache-2.0; the historical geometric film and calm gradient are CC0-1.0 |
+| The sample's photographs under `app/src/assets/movie-content/` | [Pexels licence](https://www.pexels.com/license/), as the sample's own `app/README.md` states. Only the sample's own screens draw them; kid mode draws our artwork |
 | Screening media | Per file in [media/LICENSES.csv](media/LICENSES.csv), with URL, licence, credit line, SHA-256, duration and resolution |
 
 Screening media credits: Blender open movies (Cosmos Laundromat, Sintel, Tears of Steel, Big Buck Bunny) from Blender Foundation under CC BY 3.0, with the Tears of Steel credit scroll kept and Blender logos excluded; NASA Scientific Visualization Studio and ISS time-lapse footage, following NASA's credit-line guidance; DVIDS footage, which carries a non-endorsement notice; Wikimedia Commons fireworks and lightning footage under its per-file licences; two 1930 public-domain films.
@@ -502,6 +699,7 @@ Thresholds are quoted, with links, in [`flashmap/docs/SPEC_SOURCES.md`](flashmap
 
 | File | What is in it |
 |---|---|
+| [WRITEUP.md](WRITEUP.md) | The short version: the problem, why it is harder than a black box, and the limits |
 | [docs/SUBMISSION.md](docs/SUBMISSION.md) | Every Devpost field, ready to paste |
 | [docs/RUBRIC.md](docs/RUBRIC.md) | The rules we are judged against, quoted from the hackathon's own pages |
 | [docs/VALIDATION.md](docs/VALIDATION.md) | Outreach and what anyone outside this project has said. Empty so far, and it says so |
@@ -514,3 +712,8 @@ Thresholds are quoted, with links, in [`flashmap/docs/SPEC_SOURCES.md`](flashmap
 | [docs/EVAL_PLAN.md](docs/EVAL_PLAN.md) | Committed before any real clip was labelled |
 | [eval/EVAL_RESULTS.md](eval/EVAL_RESULTS.md) | What the conformance run actually says, including where recall falls off |
 | [docs/DECISIONS.md](docs/DECISIONS.md) | Every call made, with why and what it cost |
+| [docs/design/README.md](docs/design/README.md) | The design page: identity, palette, contrast, type, spacing, focus, motion, sound and copy, held to the code by a test; [POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md) has the rendered screens and [docs/brand/](docs/brand/) the icons |
+| [docs/README.md](docs/README.md) | Every document in `docs/`, split into what is for readers and what is a project record |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to set up, run the checks and follow the rules; the [changelog](CHANGELOG.md) has what changed and when |
+| [docs/SECURITY.md](docs/SECURITY.md) | Secrets, the threat model, the scan findings, and what has never been run |
+| [docs/HACKATHON_REVIEW.md](docs/HACKATHON_REVIEW.md) | The Oct 2 assessment; the three mock judge reports are [1](docs/MOCK_JUDGE_1.md), [2](docs/MOCK_JUDGE_2.md) and [3](docs/MOCK_JUDGE_3.md) |

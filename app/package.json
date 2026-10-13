@@ -1,6 +1,7 @@
 {
   "name": "calm-frames-app",
   "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
   "files": [
     "dist"
   ],
@@ -24,6 +25,10 @@
     "app:build": "run-s build:release && npm run app:install && npm run app:launch",
     "build:release": "react-native build-kepler --build-type Release",
     "build:debug": "react-native build-kepler --build-type Debug",
+    "prebuild:release": "node tools/check_prepared_library.mjs",
+    "prebuild:debug": "node tools/check_prepared_library.mjs",
+    "postbuild:release": "node tools/check_prepared_library.mjs --packages Release",
+    "postbuild:debug": "node tools/check_prepared_library.mjs --packages Debug",
     "build:app": "npm-run-all build:release build:debug",
     "ui:capture": "jest --ci --coverage=false test/calmframes/uiCapture.test.tsx",
     "ui:flashmap": "npm run ui:capture && node tools/ui_flashmap.mjs"
@@ -66,8 +71,10 @@
     "base-64": "1.0.0",
     "fastestsmallesttextencoderdecoder": "~1.0.22",
     "formik": "~2.4.6",
+    "image-size": "file:vendor/image-size-legacy",
+    "image-size-modern": "npm:image-size@2.0.4",
     "jest-fetch-mock": "~3.0.3",
-    "lodash": "~4.17.21",
+    "lodash": "~4.18.1",
     "react": "19.2.0",
     "react-native": "0.83.0",
     "react-native-event-listeners": "~1.0.7",
@@ -75,7 +82,7 @@
     "react-redux": "~9.1.2",
     "recyclerlistview": "^4.2.1",
     "underscore": "^1.13.7",
-    "xmldom": "~0.6.0",
+    "xmldom": "npm:@xmldom/xmldom@~0.8.15",
     "yup": "~1.4.0"
   },
   "devDependencies": {
@@ -119,6 +126,11 @@
   "resolutions": {
     "@types/react": "^19.2.0"
   },
+  "overrides": {
+    "metro@0.54.1": {
+      "image-size": "$image-size"
+    }
+  },
   "engines": {
     "node": ">=22"
   },
@@ -145,9 +157,89 @@
         {
           "selector": "Literal[value='setNativeProps']",
           "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+        },
+        {
+          "selector": "AssignmentExpression[left.type='MemberExpression'][left.property.name='currentTime']",
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
+        },
+        {
+          "selector": "AssignmentExpression[left.type='MemberExpression'][left.computed=true][left.property.value='currentTime']",
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
+        },
+        {
+          "selector": "UpdateExpression[argument.type='MemberExpression'][argument.property.name='currentTime']",
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
+        },
+        {
+          "selector": "UpdateExpression[argument.type='MemberExpression'][argument.computed=true][argument.property.value='currentTime']",
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
+        },
+        {
+          "selector": "CallExpression[callee.type='MemberExpression'][callee.property.name='fastSeek']",
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
+        },
+        {
+          "selector": "CallExpression[callee.type='MemberExpression'][callee.computed=true][callee.property.value='fastSeek']",
+          "message": "Every way of moving the playhead goes through requestSeek from src/calmframes/useFlashGuard.ts, which covers before it seeks. Only that file writes currentTime or calls fastSeek; the sample's fallbacks, the chime's audio element and the menu sound's audio element are exempted by name, with the reason beside each."
         }
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "src/calmframes/useFlashGuard.ts"
+        ],
+        "rules": {
+          "no-restricted-syntax": [
+            "error",
+            {
+              "selector": "MemberExpression[property.name='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            },
+            {
+              "selector": "Literal[value='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            }
+          ]
+        }
+      },
+      {
+        "files": [
+          "src/w3cmedia/shakaplayer/ShakaPlayer.ts"
+        ],
+        "rules": {
+          "no-restricted-syntax": [
+            "error",
+            {
+              "selector": "MemberExpression[property.name='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            },
+            {
+              "selector": "Literal[value='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            }
+          ]
+        }
+      },
+      {
+        "files": [
+          "test/**"
+        ],
+        "rules": {
+          "no-restricted-syntax": [
+            "error",
+            {
+              "selector": "MemberExpression[property.name='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            },
+            {
+              "selector": "Literal[value='setNativeProps']",
+              "message": "setNativeProps throws a TypeError on React Native 0.83. Drive the UI through state instead."
+            }
+          ]
+        }
+      }
+    ]
   },
   "kepler": {
     "projectType": "application",

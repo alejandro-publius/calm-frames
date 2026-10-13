@@ -3,9 +3,9 @@
   "target": "vvd",
   "what_this_is": "A stick day session. On the virtual device it proves every step that does not need eyes on a television.",
   "preflight": {
-    "package": "/Users/alexvintera/calm-frames/app/build/aarch64-debug/calm-frames-app_aarch64.vpkg",
-    "schedule": "/Users/alexvintera/calm-frames/eval/harness_runs/marker_schedule_50.json",
-    "clip": "/Users/alexvintera/calm-frames/media/markers50.mp4",
+    "package": "~/calm-frames/app/build/aarch64-debug/calm-frames-app_aarch64.vpkg",
+    "schedule": "~/calm-frames/eval/harness_runs/marker_schedule_50.json",
+    "clip": "~/calm-frames/media/markers50.mp4",
     "device_busy": null
   },
   "developer_mode": {
@@ -27,12 +27,12 @@
     "cover_on": 7,
     "cover_off": 7,
     "timeupdates": 57,
-    "out": "/Users/alexvintera/calm-frames/results/stick_day/layering.json"
+    "out": "~/calm-frames/results/stick_day/layering.json"
   },
   "timing": {
     "ran": true,
     "ok": true,
-    "analysis": "/Users/alexvintera/calm-frames/results/stick_day/gate1.json",
+    "analysis": "~/calm-frames/results/stick_day/gate1.json",
     "covered_in_time": 2,
     "counted": 2,
     "worst_lead_ms": 303

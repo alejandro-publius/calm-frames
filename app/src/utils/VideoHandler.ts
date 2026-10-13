@@ -146,7 +146,8 @@ export class VideoHandler {
         );
         this.videoRef.current = new VideoPlayer();
       }
-      (global as any).gmedia = this.videoRef.current;
+      const media = this.videoRef.current;
+      (global as any).gmedia = media;
 
       // KMC (Kepler Media Controls) integration
       try {
@@ -155,7 +156,7 @@ export class VideoHandler {
             '[VideoHandler.ts] - preBufferVideo - KMC :  set Media Control Focus',
           );
 
-          await this.videoRef.current.setMediaControlFocus(
+          await media.setMediaControlFocus(
             componentInstance,
             this.mediaControlHandler ??
               new AppOverrideMediaControlHandler(
@@ -172,15 +173,22 @@ export class VideoHandler {
         console.error('Error during KMC execution', error);
       }
 
-      // Initialize the video player and set up content loading
-      this.videoRef.current
+      // Leaving or replacing the player while native setup is pending cancels
+      // this initialization; never attach listeners to a later media instance.
+      if (this.videoRef.current !== media) {
+        return;
+      }
+      media
         .initialize()
         .then(() => {
+          if (this.videoRef.current !== media) {
+            return;
+          }
           console.log(
             '[VideoHandler.ts] - preBufferVideo - Video Player Initialized',
           );
           this.setupEventListeners();
-          this.videoRef!!.current!!.autoplay = false;
+          media.autoplay = false;
           this.loadVideoElements();
         })
         .catch((error) => {
@@ -240,10 +248,14 @@ export class VideoHandler {
       pause: () => void;
       load: () => void;
     }) => {
-      video.src = this.data.uri;
+      // Vega's native filesrc accepts a path, not a file:// URL. Keep the
+      // catalog URI unchanged for identity/signature checks and diagnostics.
+      video.src = this.data.uri.startsWith('file:///pkg/')
+        ? this.data.uri.slice('file://'.length)
+        : this.data.uri;
       video.pause();
       console.log(
-        `[VideoHandler.ts] - loadStaticMediaPlayer - Loading static player with: ${video.src}`,
+        `[VideoHandler.ts] - loadStaticMediaPlayer - Loading static player with: ${this.data.uri}`,
       );
       video.load();
     },
@@ -314,14 +326,22 @@ export class VideoHandler {
     const source = this.data;
     if (source?.textTrack && source.textTrack.length > 0) {
       for (let i: number = 0; i < source.textTrack.length; i++) {
+        const track = source.textTrack[i];
+        // Vega's native filesrc takes a local path for external captions too.
+        // Passing file:///pkg/... here aborts the whole player.
+        // Translate only our package-local files; route verification continues
+        // to compare the original catalog URI and exact caption digest.
+        const nativeCaptionSource = track.uri.startsWith('file:///pkg/')
+          ? track.uri.slice('file://'.length)
+          : track.uri;
         console.log(
-          `[VideoHandler.ts] - loadSubtitles - Loading subtitles from: ${source.uri} [${source.textTrack[i].language}]`,
+          `[VideoHandler.ts] - loadSubtitles - Loading subtitles from: ${nativeCaptionSource} [${track.language}]`,
         );
         this.videoRef.current?.addTextTrack(
           'subtitles',
           source.textTrack[i].label,
           source.textTrack[i].language,
-          source.textTrack[i].uri,
+          nativeCaptionSource,
           source.textTrack[i].mimeType,
         );
         console.log(

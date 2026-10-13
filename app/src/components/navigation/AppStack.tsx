@@ -8,6 +8,7 @@ import { AppDispatch } from '../../store';
 import { fetchPlaylists } from '../../store/search/searchSlice';
 import { WithSuspense } from '../../utils/WithSuspense';
 import AppDrawer from './AppDrawer';
+import HarborOpening from '../../calmframes/HarborOpening';
 import { AppStackParamList, Screens } from './types';
 
 const DetailsScreen = React.lazy(() => import('../../screens/DetailsScreen'));
@@ -42,7 +43,7 @@ const AppStack = () => {
       screenOptions={navigationOptions}>
       <Stack.Screen
         name={Screens.KID_MODE_SCREEN}
-        component={WithSuspense(KidModeScreen)}
+        component={WithSuspense(KidModeScreen, <HarborOpening />)}
       />
       <Stack.Screen name={Screens.APP_DRAWER} component={AppDrawer} />
       <Stack.Screen

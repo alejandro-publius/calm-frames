@@ -73,7 +73,32 @@ describe('VideoHandler', () => {
     };
   };
 
+  it.each([
+    ['file:///pkg/assets/raw/benign-story/harbor.vtt', '/pkg/assets/raw/benign-story/harbor.vtt'],
+    ['https://example.invalid/captions.vtt', 'https://example.invalid/captions.vtt'],
+  ])('passes the native subtitle source for %s', (uri, expected) => {
+    // Native filesrc treated file:///pkg/... as a literal filename and
+    // aborted Harbor playback. Keep remote URLs unchanged.
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    const addTextTrack = jest.fn();
+    mockVideoRef.current = { addTextTrack, textTracks: [] } as unknown as VideoPlayer;
+    videoHandler.data.textTrack = [{ uri, label: 'English', language: 'en', mimeType: 'text/vtt' }];
+    videoHandler.loadSubtitles();
+    expect(addTextTrack).toHaveBeenCalledWith('subtitles', 'English', 'en', expected, 'text/vtt');
+  });
+
   describe('preBufferVideo', () => {
+    it('opens a packaged video using its native path without changing catalog identity', () => {
+      const { videoHandler } = createVideoHandler();
+      const uri = 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4';
+      videoHandler.data.uri = uri;
+      const video = { src: '', autoplay: false, pause: jest.fn(), load: jest.fn() };
+      videoHandler.loadStaticMediaPlayer(video);
+      expect(video.src).toBe('/pkg/assets/raw/benign-story/harbor.precovered.mp4');
+      expect(videoHandler.data.uri).toBe(uri);
+      expect(video.load).toHaveBeenCalled();
+    });
+
     it('should initialize video player and setup event listeners', async () => {
       const { mockVideoRef, videoHandler } = createVideoHandler();
 
@@ -97,6 +122,39 @@ describe('VideoHandler', () => {
       expect(mockVideoRef.current.autoplay).toBe(false);
       expect(mockVideoRef.current).not.toBeNull();
     });
+  });
+
+  it('settles quietly when leaving while media control focus is pending', async () => {
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    let resolveFocus!: () => void;
+    const focus = new Promise<void>((resolve) => { resolveFocus = resolve; });
+    const initialize = jest.fn().mockResolvedValue(undefined);
+    const setMediaControlFocus = jest.fn(() => focus);
+    videoHandler.destroyVideoElements = jest.fn().mockResolvedValue(true);
+    mockVideoRef.current = { initialize, setMediaControlFocus } as unknown as VideoPlayer;
+    const pending = videoHandler.preBufferVideo({} as never);
+    await Promise.resolve();
+    expect(setMediaControlFocus).toHaveBeenCalled();
+    mockVideoRef.current = null;
+    resolveFocus();
+    await expect(pending).resolves.toBeUndefined();
+    expect(initialize).not.toHaveBeenCalled();
+  });
+
+  it('does not attach listeners or load after leaving during initialization', async () => {
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    let resolveInitialize!: () => void;
+    const initialized = new Promise<void>((resolve) => { resolveInitialize = resolve; });
+    videoHandler.destroyVideoElements = jest.fn().mockResolvedValue(true);
+    videoHandler.setupEventListeners = jest.fn();
+    videoHandler.loadVideoElements = jest.fn();
+    mockVideoRef.current = { initialize: jest.fn(() => initialized) } as unknown as VideoPlayer;
+    await videoHandler.preBufferVideo();
+    mockVideoRef.current = null;
+    resolveInitialize();
+    await new Promise(process.nextTick);
+    expect(videoHandler.setupEventListeners).not.toHaveBeenCalled();
+    expect(videoHandler.loadVideoElements).not.toHaveBeenCalled();
   });
 
   describe('destroyMediaPlayerSync', () => {

@@ -1,0 +1,28 @@
+{
+  "statement": "The same command as results/local_python_run_2026-10-11.json, on the same box, after the cover proof measurement was fixed and verify's proof widened to three samples per span. The two tests that failed in that record pass here; the count is higher because the other session's release and report tests and this session's proof tests joined the suite in between.",
+  "command": ".venv/bin/python -m pytest flashmap pipeline eval -q -m \"not slow\" -p no:cacheprovider",
+  "commit": "189fb3664f2a98cd5cb76b23e72e5f366150d2ab",
+  "generated_utc": "2026-10-11T08:40:00Z",
+  "environment": {
+    "os": "Linux x86_64, 4 CPUs",
+    "python": "3.12",
+    "ffmpeg": "6.1.1-3ubuntu5",
+    "pyav": "18.1.0",
+    "chrome": "present",
+    "load": "the mutation gate's negative controls were running on the same box throughout"
+  },
+  "passed": 1722,
+  "failed": 0,
+  "skipped": 1,
+  "deselected": 2,
+  "collected": 1723,
+  "duration_seconds": 506.99,
+  "failed_tests": [],
+  "what_changed_since_the_earlier_record": "pipeline/render.py cover_psnr compares exactly one frame; pipeline/verify.py samples the first frame, the middle and the last frame of each covered span and records the ffmpeg version; pipeline/tests/test_verify.py gained TestTheCoverProofReachesTheEdgesOfASpan.",
+  "published": {
+    "passed": 1722,
+    "failed": 0,
+    "skipped": 1,
+    "collected": 1723
+  }
+}

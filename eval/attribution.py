@@ -38,7 +38,8 @@ BEGIN = "<!-- BEGIN media credits, written by eval/attribution.py. Do not edit b
 END = "<!-- END media credits -->"
 
 # Titles that no page gives us a name for. Everything on Wikimedia Commons is named by its own
-# file page, so only these eight need one written down. A ledger row that is neither a Commons
+# file page, so the sourced titles and our own assets below need one written down.
+# A ledger row that is neither a Commons
 # file nor listed here fails the test in eval/tests/test_attribution.py rather than getting an
 # invented name off its file name.
 TITLES = {
@@ -46,6 +47,22 @@ TITLES = {
     # asset that ships has one row saying where it came from, even when the
     # answer is that we made it and there is nothing to credit.
     "app/assets/raw/sound/calm-chime.mp3": "The Calm Frames chime",
+    "app/assets/raw/sound/menu-select.mp3": "The Calm Frames selection sound",
+    # Ours too, for the same reason: the story the app ships, and the marker
+    # clip the timing harness and the Oct 9 AWS runs used.
+    "app/assets/raw/benign-story/harbor.mp4": "Harbor story (benign demo)",
+    "media/markers_packed.mp4": "The Calm Frames timing marker clip",
+    # The presentation pictures for the shelf and details page are never film
+    # frames or signed playback stills.
+    "app/assets/image/tv/harbor.png": "Harbor presentation artwork",
+    "app/assets/image/tv/harbor-cinematic.png": "Harbor cinematic presentation artwork",
+    "app/assets/image/tv/harbor-water.png": "Harbor opening artwork",
+    'app/assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/wcag.mp4': "Harbor cinematic story (prepared locally)",
+    "app/assets/image/tv/gradient.png": "Calm gradient presentation artwork",
+    # The two videos the app ships besides the Harbor story: the bundled calm
+    # gradient, and the prepared Harbor rendition kid mode plays. Both are ours.
+    "app/assets/raw/offline/calm_gradient.mp4": "The calm gradient (bundled title)",
+    "app/assets/raw/prepared-library/89496fc4b45528558ce35ef9140aa659b86a5f84734156098e2f29e312f2c590/titles/4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f/wcag.mp4": "Harbor story (prepared locally)",
     "bbb_720p_surround.mp4": "Big Buck Bunny",
     "sintel_2048_stereo_512kb.mp4": "Sintel",
     "tears_of_steel_720p.mov": "Tears of Steel",

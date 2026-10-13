@@ -92,13 +92,13 @@ __all__ = [
 # file and fails if these drift from it.
 # ---------------------------------------------------------------------------
 
-BACKGROUND = "#1F4D5C"  # teal ground, every Calm Frames screen sits on it
-SURFACE = "#173B47"  # a card on the ground
+BACKGROUND = "#102F3A"  # teal ground, every Calm Frames screen sits on it
+SURFACE = "#1A414B"  # a card on the ground
 BORDER = "#66A0B4"
 FOCUS_RING = "#E6A957"  # saffron: rings and edges only, never a label
 ACCENT_DARK = "#B87A2C"  # dark saffron: edges only, carries nothing
-TEXT = "#F3E8D3"  # cream, 7.60:1 on teal
-TEXT_DIM = "#CFE0DC"
+TEXT = "#F3E8D3"  # cream on teal
+TEXT_DIM = "#BDD0CF"
 INK = "#17323C"  # text on a light surface
 COVER = "#000000"  # the cover itself, and the lane's own track
 
@@ -143,35 +143,13 @@ MAX_BLOCKS_PER_LANE = 5
 # the BT.709 luma of the sRGB bytes, (0.2126 R + 0.7152 G + 0.0722 B) / 255,
 # which is what the decoder hands back for a picture 720 lines or taller:
 #
-#   LANE_GROUND   #000000   V = 0.0000  ->  200 * 0.0000 ** 2.4 =  0.00 cd/m2
-#   LANE_GENERAL  #173B47   V = 0.2048  ->  200 * 0.2048 ** 2.4 =  4.45 cd/m2
-#   LANE_RED      #1F4D5C   V = 0.2679  ->  200 * 0.2679 ** 2.4 =  8.47 cd/m2
-#
-#   widest step a lane can hold   8.47 - 0.00  =   8.47 cd/m2
-#   the Guideline 1 difference                     20.00 cd/m2
-#   headroom                                       11.53 cd/m2
-#
-# so a lane spends 42% of the difference that would make one of its edges a bar
-# boundary. A picture under 720 lines decodes through BT.601, whose coefficients
-# put the same three colours 7.51 cd/m2 apart, so the number above is the worse
-# of the two. None of this is the measurement: flashmap/tests/test_report.py
-# puts the real pixels of a lane through color.bt1886_nits and then through
-# pattern.scan_bars with the profile's own numbers, and eval/report_page_check.py
-# puts the whole rendered page through the analyzer at display size.
-#
-# What it costs, measured the same way. Under that ceiling the palette buys
-# 2.27:1 for a red block and 1.75:1 for a general block against the track, where
-# the saffron fill this replaced was 5.81:1. No drawing under this rule can be
-# bright: the brightest grey that still stays under the difference above black
-# is 19.66 cd/m2, which is 3.39:1, and that is the whole ceiling. The dark end
-# of the curve is where the palette buys the most visible step per cd/m2, which
-# is why the track is the app's own COVER black rather than a card colour.
-# One alternative was measured and not taken: one fill of SURFACE_FOCUSED at
-# 14.42 cd/m2 is 3.00:1, the non-text floor the app's palette is built to, but
-# it spends 72% of the difference rather than 42% and leaves the two kinds of
-# block nothing but their height to tell them apart. So the kinds are told apart
-# by shape before colour, the lane keeps an outline on the page, and every span
-# is in the table underneath to the millisecond.
+# Approved October 10 palette, measured with lane_nits below:
+#   LANE_GROUND   #000000    0.00 cd/m2
+#   LANE_GENERAL  #1A414B    5.59 cd/m2
+#   LANE_RED      #102F3A    2.52 cd/m2
+# The maximum step is 5.59 cd/m2, leaving 14.41 cd/m2 below the unchanged
+# 20 cd/m2 difference. The half-threshold margin, block cap and scanner
+# tests remain unchanged; the explicit palette pin records the new measurement.
 LANE_GROUND = COVER
 LANE_GENERAL = SURFACE
 LANE_RED = BACKGROUND
@@ -1103,8 +1081,10 @@ def _load_map_file(path: Path) -> dict[str, Any]:
 
 def _profile_name(document: dict[str, Any], fallback: str) -> str:
     profile = document.get("profile")
-    if isinstance(profile, dict) and isinstance(profile.get("name"), str):
-        return profile["name"]
+    if isinstance(profile, dict):
+        name = profile.get("name")
+        if isinstance(name, str):
+            return name
     return fallback
 
 

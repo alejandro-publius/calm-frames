@@ -2,7 +2,9 @@
  * The card: the one thing on screen that speaks to the child.
  *
  * It sits above the cover so it stays readable while the picture is hidden,
- * and below nothing else. Four things it has to get right:
+ * and below nothing else. It hangs from the upper part of the safe area, out
+ * of the band at the bottom where captions are drawn (PLAYER_LAYOUT in
+ * calmStyles.ts says why). Four things it has to get right:
  *
  * - it announces itself. accessibilityLiveRegion="polite" and the web
  *   aria-live="polite" attribute both go on the card, and the caller also
@@ -15,20 +17,16 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
   CALM_COLORS,
   CALM_SPACE,
-  CALM_TYPE,
+  CALM_TEXT,
   FOCUS_RING_WIDTH,
+  PLAYER_LAYOUT,
   scale,
 } from './calmStyles';
-import { Card } from './cards';
+import { Card, cardOffersSkip } from './cards';
 
 export interface CalmCardProps {
   card: Card;
@@ -36,6 +34,7 @@ export interface CalmCardProps {
   onSkip?: (toMs: number) => void;
   /** Turn the Skip button off, for screens with no player behind them. */
   allowSkip?: boolean;
+  skipAccessibilityLabel?: string;
   testID?: string;
 }
 
@@ -45,6 +44,7 @@ const CalmCard = ({
   card,
   onSkip,
   allowSkip = true,
+  skipAccessibilityLabel = 'Skip the flashing part',
   testID = 'calm-card',
 }: CalmCardProps) => {
   const skipRef = useRef<React.ComponentRef<typeof TouchableOpacity> | null>(
@@ -52,16 +52,15 @@ const CalmCard = ({
   );
   const [focused, setFocused] = React.useState(false);
 
-  const showSkip =
-    allowSkip && card.kind === 'countdown' && card.skipToMs !== undefined;
+  const showSkip = allowSkip && cardOffersSkip(card);
 
   useEffect(() => {
     // A new countdown puts focus on Skip. requestTVFocus is the supported way
     // to move focus from an app; setNativeProps throws on React Native 0.83.
     if (showSkip) {
-      const handle = skipRef.current as unknown as
-        | { requestTVFocus?: () => void }
-        | null;
+      const handle = skipRef.current as unknown as {
+        requestTVFocus?: () => void;
+      } | null;
       handle?.requestTVFocus?.();
     }
   }, [showSkip, card.interval?.startMs]);
@@ -97,7 +96,7 @@ const CalmCard = ({
             ref={skipRef}
             testID={`${testID}-skip`}
             accessibilityRole="button"
-            accessibilityLabel="Skip the flashing part"
+            accessibilityLabel={skipAccessibilityLabel}
             activeOpacity={1}
             hasTVPreferredFocus
             onFocus={() => setFocused(true)}
@@ -117,7 +116,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: scale(160),
+    top: scale(PLAYER_LAYOUT.CARD_TOP),
     alignItems: 'center',
     zIndex: CARD_Z_INDEX,
   },
@@ -133,14 +132,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.CARD_TITLE),
-    fontWeight: '600',
+    ...CALM_TEXT.card,
     textAlign: 'center',
   },
   detail: {
     color: CALM_COLORS.TEXT_DIM,
-    fontSize: scale(CALM_TYPE.CARD_DETAIL),
-    marginTop: scale(CALM_SPACE.TIGHT),
+    ...CALM_TEXT.body, marginTop: scale(CALM_SPACE.TIGHT),
     textAlign: 'center',
   },
   skip: {
@@ -158,8 +155,7 @@ const styles = StyleSheet.create({
   },
   skipLabel: {
     color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BUTTON),
-    fontWeight: '600',
+    ...CALM_TEXT.control,
   },
 });
 

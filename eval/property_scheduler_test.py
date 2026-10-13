@@ -27,7 +27,6 @@ into a failure rather than a skip.
 
 from __future__ import annotations
 
-import pytest
 from hypothesis import HealthCheck, assume, given, settings
 from hypothesis import strategies as st
 

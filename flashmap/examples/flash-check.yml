@@ -26,13 +26,18 @@ jobs:
   flash-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           fetch-depth: 0
 
       - name: Check for flashing above the WCAG thresholds
-        uses: calm-frames/calm-frames/flashmap@v1
+        # Pinned to a commit on this repository, because no release tag and no
+        # PyPI release exist yet; the pin moves to the judged tag once it is cut.
+        # With no flashmap-version given, the action installs flashmap from the
+        # checkout it came from, so the pin above is the version you get.
+        uses: alejandro-publius/calm-frames/flashmap@1b088d17c53343025b2ca37cf7615e809709ba8b
         with:
           profile: wcag
-          # Uncomment to fail when a file cannot be measured, for example an HDR master.
-          # fail-on-error: "true"
+          # A file flashmap cannot measure, for example an HDR master, fails the job by
+          # default. Uncomment only to skip such files instead.
+          # fail-on-error: "false"

@@ -6,7 +6,7 @@
 #   make synth       the CDK stack, offline, no AWS account touched
 #   make deploy      refuses until HUMAN CHECKPOINT D is confirmed
 #   make release     builds the three .vpkg files and stops before publishing
-#   make stick-day   unboxing to GATE 1 footage, and the same run on the VVD
+#   make stick-day   legacy workflow; physical timing still needs adaptation
 #
 # Written for GNU Make 3.81, the version macOS ships. No .ONESHELL, no
 # .SHELLFLAGS (3.82 and later only), nothing that needs a newer make.
@@ -26,7 +26,7 @@ DOCKER_BUILD ?= docker build
 # Node comes from fnm and is pinned by .nvmrc. The Shaka Player build that runs
 # during npm install needs a JDK, which is why JAVA_HOME is set for builds and
 # left out of test runs that do not need it.
-NODE_ENV := source ~/vega/env >/dev/null 2>&1 && eval "$$(fnm env --shell bash)" && fnm use 22 >/dev/null
+NODE_ENV := { [ -f ~/vega/env ] && source ~/vega/env >/dev/null 2>&1; } ; if command -v fnm >/dev/null 2>&1; then eval "$$(fnm env --shell bash)" && fnm use 22 >/dev/null; fi
 
 # Pieces other lanes own, included so `make <their target>` works from the root
 # and each file still runs standalone with `make -f <file>`.
@@ -46,7 +46,8 @@ include eval/baselines/naive_luma_diff/naive_luma.mk
 
 .DEFAULT_GOAL := help
 
-.PHONY: help test test-app test-flashmap test-pipeline test-eval ci \
+.PHONY: help test test-app test-flashmap test-pipeline test-eval test-hook-package ci \
+        local-library hardware-preflight \
         reproduce reproduce-release reproduce-all synth cdk-diff deploy destroy \
         release release-notes stick-day stick-day-vvd hooks hooks-selftest \
         image image-smoke image-context image-push \
@@ -70,6 +71,7 @@ help: ## show this list
 	@echo "  PY=$(PY)"
 	@echo "  STICK_DAY_ARGS   passed to scripts/stick_day.py (try --help)"
 	@echo "  RELEASE_ARGS     passed to scripts/release.sh (try --help)"
+	@echo "  HARDWARE_PREFLIGHT_ARGS  read-only package/device checks (try --help)"
 
 # ---------------------------------------------------------------- tests
 
@@ -87,12 +89,40 @@ test-pipeline: ## pipeline pytest, including the CDK unit tests
 test-eval: ## the standalone eval tests, which CI also runs
 	cd $(REPO) && $(PY) -m pytest eval -q -m "not slow"
 
+test-hook-package: ## pack and check a clean offline hook consumer with current Vega peers
+	cd $(REPO) && $(NODE_ENV) && npm --prefix hook run test:package
+	cd $(REPO) && $(NODE_ENV) && npm --prefix hook run check:package
+
+# ruff and mypy come from flashmap's dev extra, pinned there. Both run from the
+# repository root: ruff reads ruff.toml there, and mypy keeps its cache there
+# rather than inside flashmap/, which the ingest image copies whole.
+.PHONY: lint-py typecheck-py
+
+lint-py: ## ruff over the Python code, configured by ruff.toml, the same command CI runs
+	cd $(REPO) && $(PY) -m ruff check .
+
+typecheck-py: ## mypy over flashmap (strict) and the pipeline, the same commands CI runs
+	cd $(REPO) && $(PY) -m mypy --config-file flashmap/pyproject.toml
+	cd $(REPO) && $(PY) -m mypy --config-file pipeline/mypy.ini
+
+local-library: ## prepare a verified local title, using LOCAL_LIBRARY_ARGS (no AWS)
+	cd $(REPO) && $(PY) -m pipeline.local_library $(LOCAL_LIBRARY_ARGS)
+
+hardware-preflight: ## read-only benign package/device checks; no install or playback
+	cd $(REPO) && $(NODE_ENV) && $(PY) eval/benign_hardware_validation.py $(HARDWARE_PREFLIGHT_ARGS)
+
 ci: ## everything CI runs, in CI's order, before you push
 	cd $(REPO)/app && $(NODE_ENV) && npm run typecheck
 	cd $(REPO)/app && $(NODE_ENV) && npx eslint src test --ext .ts,.tsx
-	$(MAKE) test test-eval
+	$(MAKE) test test-eval test-hook-package
+	$(MAKE) lint-py typecheck-py
 	$(MAKE) scan
 	$(PY) eval/readme_sync.py --check
+	$(PY) eval/style_check.py
+	$(PY) scripts/check_pins.py
+	rm -f /tmp/conformance_rebuilt.json && $(PY) eval/conformance_current_report.py --design results/conformance_design.json \
+		--measurement results/conformance_current_full_2026-10-02.json --out /tmp/conformance_rebuilt.json \
+		&& cmp /tmp/conformance_rebuilt.json results/conformance_current_report_2026-10-02.json && rm -f /tmp/conformance_rebuilt.json
 	# The audit workflow's jobs, in its order. These reach the public advisory
 	# databases and the npm registry, so they are the slow part of this target,
 	# and leaving them out would make the name of this target a lie.
@@ -194,18 +224,18 @@ sbom-check: ## fail if a committed bill no longer matches what is installed
 
 # -------------------------------------------------------------- release
 
-release: ## build armv7, aarch64 and x86_64 .vpkg files and stop before publishing
+release: ## prepare an aarch64 Debug simulator package and stop before publishing
 	@$(REPO)/scripts/release.sh $(RELEASE_ARGS)
 
-release-notes: ## the release notes and attachment list, without rebuilding
+release-notes: ## prepare from existing packages and matching --receipt hashes
 	@$(REPO)/scripts/release.sh --skip-build $(RELEASE_ARGS)
 
 # ------------------------------------------------------------ stick day
 
-stick-day: ## unboxing to GATE 1 footage: dev mode, OS check, install, layering, markers
+stick-day: ## legacy workflow; physical-target timing still needs adaptation
 	$(PY) $(REPO)/scripts/stick_day.py $(STICK_DAY_ARGS)
 
-stick-day-vvd: ## the same run against the Vega Virtual Device, to prove it
+stick-day-vvd: ## virtual-device rehearsal only; never physical-TV proof
 	$(PY) $(REPO)/scripts/stick_day.py --target vvd $(STICK_DAY_ARGS)
 
 # --------------------------------------------------------------- secrets

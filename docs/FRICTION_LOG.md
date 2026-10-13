@@ -45,12 +45,19 @@ Everything here is real. Each entry is something that cost time on this build, w
 | 31 | Toolchain | Re-encoding moves the picture rectangle, which moves every area fraction | Medium |
 | 32 | Toolchain | A re-encode renumbers the first timestamp, so the rendition slides | Medium |
 | 33 | Toolchain | The ffmpeg photosensitivity filter misfires on its own first second | Low |
+| 34 | Local automation | Sandbox blocks Jest's Watchman socket and Python HTTP listeners | Low |
+| 35 | GitHub automation | All Audit jobs fail before a runner or step starts | High |
+| 36 | Player | A packaged `file:///pkg/...` URI is not opened by the native player | High |
+| 37 | Captions | The native caption view cannot be stacked above an RN image by z-index | High |
+| 38 | Virtual device | Capture can return an older GPU frame; a static screen records few frames | Medium |
+| 39 | Build tooling | Custom fonts render as the fallback unless they sit in `assets/fonts` | Low |
+| 40 | React Native | Disabling a focused control drops native focus | Medium |
 
-**Thirty-three entries. Five High, thirteen Medium, fifteen Low.**
+**Forty entries. Eight High, fifteen Medium, seventeen Low.**
 
-**Entries 1 to 28 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. They are marked separately so nobody has to guess which are Amazon's.
+**Entries 1 to 28 and 36 to 40 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. **Entries 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues.** They are marked separately so nobody has to guess which are Amazon's.
 
-Nothing here blocked the build outright, because every one of them had a way around it. The five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26).
+Nothing in entries 1 to 33 blocked the build outright, because every one of them had a way around it; 36 and 37 did stop playback and captions on the device until their workarounds were found. The first five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26). Entry 35 records a historical startup block; runners resumed by October 5. The Audit failures between then and Oct 11 were dependencies and bills of materials, not runner startup, and the Oct 11 push is green.
 
 Three entries say plainly that they are a platform rule we adopted and designed around rather than a failure we watched: 13, 27 and 28. They are in the log because each one shaped the build and each cost time to establish, and they are labelled so that nobody reads them as a crash we saw.
 
@@ -90,7 +97,7 @@ tr '\r' '\n' < vega_install.log | grep -v -E '\[[=-]+\]'
 
 **Expected.** A flag to skip rc edits, the way rustup has `--no-modify-path`, or an edit to only the current shell's file.
 
-**Actual.** `source "/Users/alexvintera/vega/env"` was appended to both `~/.zshrc` and `~/.zprofile`. The script's list also includes `.bashrc`, `.bash_profile` and `.profile`. A zsh login shell now sources the env file twice. No environment variable in the script turns this off.
+**Actual.** `source "/Users/<user>/vega/env"` was appended to both `~/.zshrc` and `~/.zprofile`. The script's list also includes `.bashrc`, `.bash_profile` and `.profile`. A zsh login shell now sources the env file twice. No environment variable in the script turns this off.
 
 **Severity.** Low.
 
@@ -746,6 +753,191 @@ One honest note about that paste. Our verification checkout lives at a very deep
 
 **Suggestion.** None for Amazon. For anyone comparing detectors: check what your baseline does to a control clip before you report a difference.
 
+## 34. Restricted automation blocks Watchman and local HTTP listeners
+
+**October 9 follow-up.** In the restricted finishing session, `ps` was denied,
+Vega status could not write its SDK log, and `vega virtual-device start -t 30`
+failed while registering QEMU with the host. `claude auth status` returned
+`loggedIn: false`; one read-only CLI task returned `Not logged in`. This is
+not evidence that the user's normal terminal lacks subscription access.
+No credentials, billing method or permission controls were changed. The
+simulator and subscription check require the normal host session.
+
+`fnm env` also tried to write outside the workspace; using the already installed
+Node 22 binary directly worked. The Python collection step hit jsii's host
+cache timestamp write; `JSII_RUNTIME_PACKAGE_CACHE_ROOT` selects a writable
+build cache without changing tests. The pinned CycloneDX generators were
+already cached and could run directly: all three regenerated SBOM files matched
+the committed bytes. The app's aarch64 Debug build succeeded. These outcomes
+separate a build from the still-blocked simulator validation.
+
+**Task.** Run scene-hold and regression tests on Sep 29, 2026.
+
+**Steps.** From `app/`, ran Node 22 Jest through `fnm exec --using 22 npm test`
+with scene-hold, playback, guard, harness and map test paths. From the repo root,
+ran `.venv/bin/python -m pytest flashmap pipeline eval -q -m 'not slow'`.
+
+**Expected.** The tests to start.
+
+**Actual.** Jest stopped before running any tests:
+
+```text
+unable to talk to your watchman on ~/.local/state/watchman/<user>-state/sock! (Operation not permitted)
+```
+
+The Python run executed its other checks, but the nine upload-server cases failed
+in fixture setup at `socket.bind` for `127.0.0.1`, with
+`PermissionError: [Errno 1] Operation not permitted`.
+
+**Severity.** Low. These are local sandbox constraints, not Vega failures.
+
+**Workaround.** Add `--watchman=false` to use Jest's file crawler. The broader app
+run kept coverage enabled and completed with Watchman disabled. Re-run Python
+without the two HTTP test classes to check the remaining suite, and record those
+server tests as unverified here rather than treating them as passes. They still
+need an unrestricted runner.
+
+During the pre-push hardening pass, `make sbom-check` also could not fetch
+`cyclonedx-bom` from PyPI because DNS access was restricted. The report-page
+Chrome process exited with code -6 before producing a screenshot; its cause is
+not established. A broad Jest rerun timed out in two existing registry tests
+while host load was excessive, and the native build, broad reruns and incomplete
+mutation run were stopped. Those interrupted or blocked checks are not passes.
+Focused runtime regressions, strict TypeScript and targeted lint then passed;
+complete final-source validation still needs a suitable runner.
+
+The later final-source sequential app and selected Python sweeps passed, as did
+native Debug packaging on all three configured architectures. The remaining
+HTTP, report-page, SBOM and full remote CI checks are still unverified, not
+silently counted as passes.
+
+A bounded read-only Docker check found a client but could not access the Colima
+daemon socket: `permission denied` on
+`~/.colima/default/docker.sock`. No containers, images, builds,
+network settings or shared services were changed. Docker is not an available
+alternative HTTP-test runner in this session.
+
+**Suggestion.** Document restricted-runner commands and retain the full suite in CI.
+
+---
+
+## 35. GitHub Actions fails before starting an Audit runner
+
+**Task.** Obtain complete pre-publication CI evidence for the scene-hold changes.
+
+**Steps.** On Sep 29, read the current main commit's workflow history through the
+connected GitHub API. Inspect the Sep 28 scheduled
+[Audit run](https://github.com/alejandro-publius/calm-frames/actions/runs/36431466841),
+its jobs and timing, then retry its failed jobs once.
+
+**Expected.** A runner to check out the repository and execute each audit.
+
+**Actual.** Both attempts failed all four jobs within two to three
+seconds, with `runner_id: 0` and `steps: []`. No runner logs exist. The first
+attempt recorded zero runner milliseconds. The Sep 21 scheduled Audit on the
+same main commit passed. No dependency audit command ran in either failed
+attempt, so this is not evidence of a dependency finding.
+
+After publishing the exact locally tested tree as
+[draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1), both its
+[CI run](https://github.com/alejandro-publius/calm-frames/actions/runs/36646189829)
+and [Audit run](https://github.com/alejandro-publius/calm-frames/actions/runs/36646189802)
+failed every job with no assigned runner and no executed steps. This reproduces
+the restriction on the proposed tree without supplying any test result.
+
+**Severity.** High for completing CI, not an Amazon or application failure.
+
+**Workaround.** None in the repository. The exact startup annotation is not
+available through this connector. Account quota or billing is possible, not
+confirmed. Resolve the Actions startup restriction in GitHub, then rerun the
+complete required checks. Local validation continues, and main stays unchanged.
+Do not widen audit exceptions, disable jobs or change repository visibility.
+
+**Suggestion.** Expose startup-failure annotations through the workflow-run API
+so automation can distinguish account or runner restrictions from code failures.
+
+---
+
+## 36. A packaged `file:///pkg/...` URI is not opened by the native player as written
+
+**Task.** Play the bundled Harbor title from the package on the Vega Virtual Device.
+
+**Steps.** Handed the player the packaged MP4 and WebVTT as `file:///pkg/...` URIs, the form the Kepler file system documentation gives for package assets.
+
+**Expected.** The native player opens a package asset by its documented URI.
+
+**Actual.** Native GStreamer treated `file:///pkg/...` as a literal file name and failed to open it. The same bytes opened as `/pkg/...`.
+
+**Severity.** High. Nothing played from the package until this was found.
+
+**Workaround.** Normalize the package prefix to `/pkg/...` at the native media boundary only, in `app/src/utils/VideoHandler.ts`, and keep the signed catalog identity unchanged. Both Harbor titles play.
+
+**Suggestion.** Document the URI form the native player accepts for package assets, or accept the `file://` form the file system documentation gives.
+
+## 37. The native caption view cannot be stacked above a React Native image by z-index
+
+**Task.** Keep captions visible above a scheduled scene image during a hold.
+
+**Steps.** Set a z-index directly on the native caption view, above the React Native image that draws the cover.
+
+**Expected.** The caption view sits above the cover like any other sibling.
+
+**Actual.** The native caption view stayed under the image; a z-index on it did nothing.
+
+**Severity.** High. Captions under the cover defeat the point of a hold that keeps the story going.
+
+**Workaround.** A retained, non-collapsible React Native host view carries the stacking style and the caption view lives inside it, in `app/src/screens/PlayerScreen.tsx`. Both observed holds keep captions on top.
+
+**Suggestion.** Document native surface composition with examples: which views are native layers, and what z-index does and does not reach.
+
+## 38. Simulator capture can return an older GPU frame, and a static screen records few frames
+
+**Task.** Capture the simulator window for the demo and for navigation checks.
+
+**Steps.** Captured with ScreenCaptureKit while Stage Manager had the simulator in the background, and recorded static screens.
+
+**Expected.** A capture shows the frame on screen now, and a recording has a steady frame rate.
+
+**Actual.** A capture could return an older GPU frame, which confused navigation validation. A static screen produced variable-rate video with few frames, so a presumed constant frame count was wrong.
+
+**Severity.** Medium. Test friction rather than a product defect.
+
+**Workaround.** Activate the simulator before every capture and review the recording's actual frames; read frame timestamps rather than assuming a frame count.
+
+**Suggestion.** A CLI command that captures the simulator's screen, which entry 9 also asks for.
+
+## 39. Custom fonts render as the fallback face unless they sit in `assets/fonts`
+
+**Task.** Ship the licensed Inter faces the approved design uses.
+
+**Steps.** Put the static TTFs under `assets/raw/fonts`, then under `assets/fonts`.
+
+**Expected.** A bundled font resolves wherever the package carries it, or the documentation says where it has to be.
+
+**Actual.** Under `assets/raw/fonts` every weight rendered as the fallback face. Under `assets/fonts` the intended weights appeared.
+
+**Severity.** Low. Found by looking at the screen.
+
+**Workaround.** The fonts live in `app/assets/fonts`.
+
+**Suggestion.** Document the fonts directory, and what a fallback render looks like so it is recognised.
+
+## 40. Disabling a focused control drops native focus
+
+**Task.** Block repeated presses on a parent setting while its save is pending.
+
+**Steps.** Disabled the focused preset, room and chime controls for the length of the save.
+
+**Expected.** Focus stays where it was, or moves somewhere predictable.
+
+**Actual.** Native focus vanished with the control, and the remote had nowhere to go.
+
+**Severity.** Medium. A ten foot interface with no focus is stuck.
+
+**Workaround.** Keep the control in the focus order, report the disabled accessibility state and block its handler instead, in `app/src/calmframes/ParentAreaScreen.tsx`. The deferred-write regression was seen failing before the fix.
+
+**Suggestion.** Document focus behaviour when a focused view becomes disabled, and move focus to a neighbour by default.
+
 ## How to add one
 
 Write the six fields Amazon asks for: task, steps, expected versus actual, severity, workaround, suggestion. Real entries only, the way `CLAUDE.md` says. If it did not happen on this build, it does not go in, and if it is a platform rule we adopted rather than a failure we watched, say so in the entry itself. The log has three of those and each one is labelled.
@@ -754,7 +946,7 @@ Give it the next number here, add its row to the summary table at the top, and u
 
 ## Where the log's later entries came from
 
-The first eleven were written here as they happened. The other twenty-two were not: the lanes hit them while working rather than while keeping notes, so each one was found again in a commit, a code comment, a results file or a decision entry. Here is where each came from, so nobody has to take the log on trust.
+The first eleven and the Sep 29 entries, 34 and 35, were written here as they happened. Entries 12 to 33 were not: the lanes hit them while working rather than while keeping notes, so each one was found again in a commit, a code comment, a results file or a decision entry. Here is where each came from, so nobody has to take the log on trust.
 
 | # in the log | Where the evidence is |
 |---|---|
@@ -780,3 +972,10 @@ The first eleven were written here as they happened. The other twenty-two were n
 | 31 re-encode moves the rectangle | `flashmap/src/flashmap/analyze.py` `carried_picture`, `picture.py`, commit `d89b063` |
 | 32 re-encode renumbers the first timestamp | `pipeline/verify.py` `compare_rendition_to_source`, docs/SIDECAR_SPEC.md, commit `4436eda` |
 | 33 ffmpeg photosensitivity filter | `eval/baselines/run_all.py`, commit `daec5b7` |
+| 34 restricted sockets | Sep 29 scene-hold verification; commands and limitations recorded in docs/STATUS.md |
+| 35 Actions startup | Audit run 36431466841, attempts 1 and 2, inspected Sep 29; no runners or steps |
+| 36 packaged URIs | `app/src/utils/VideoHandler.ts`, the native media boundary; `results/native_validation_2026-10-10.json` |
+| 37 caption stacking | `app/src/screens/PlayerScreen.tsx`, the retained caption host; the Oct 10 native captures |
+| 38 simulator capture | docs/SHOT_MANIFEST.md and `results/redesign_demo_manifest_2026-10-10.json`, frame timestamps rather than counts |
+| 39 fonts directory | `app/assets/fonts/`, docs/brand/README.md |
+| 40 focus on a disabled control | `app/src/calmframes/ParentAreaScreen.tsx`, the deferred-write regression in the parent area tests |

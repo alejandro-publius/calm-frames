@@ -237,7 +237,7 @@ describe('the room chips, in words', () => {
 
   it('gives both rows a name, because two rows of numbers are not one row', () => {
     expect(TV_SIZE_TITLE).toBe('Television size');
-    expect(SEAT_DISTANCE_TITLE).toBe('How far away the sofa is');
+    expect(SEAT_DISTANCE_TITLE).toBe('Viewing distance');
   });
 });
 
@@ -326,15 +326,15 @@ describe('which notice a title gets', () => {
     expect(notice?.tone).toBe('blocked');
   });
 
-  it('keeps the wording from the reader underneath the general line', () => {
+  it('explains a refusal once, without repeating the general status', () => {
     const notice = noticeForTitle(
       entry({
         status: 'failed',
         rejection: 'wrong-file',
-        reason: 'The check for this title belongs to a different file.',
+        reason: 'The playback information belongs to a different version of this title.',
       }),
     );
-    expect(notice?.detail).toContain(TITLE_FAILED.detail);
-    expect(notice?.detail).toContain('belongs to a different file');
+    expect(notice?.title).toBe(TITLE_FAILED.title);
+    expect(notice?.detail).toBe('The playback information belongs to a different version of this title. The picture stays hidden.');
   });
 });

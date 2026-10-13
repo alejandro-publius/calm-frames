@@ -7,7 +7,7 @@
  * unchecked title within reach.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
 import { MINIMUM_TEXT_SIZE } from '../../src/calmframes/calmStyles';
 import {
@@ -18,6 +18,7 @@ import {
   NO_TITLES,
   PIN_NOT_SET,
   PIN_WRONG_TITLE,
+  SAFETY_NOTE,
   TITLE_FAILED,
   TITLE_PENDING,
   TITLE_STALE,
@@ -29,26 +30,16 @@ import FlashMapStrip, {
   stripMarks,
 } from '../../src/calmframes/FlashMapStrip';
 import {
-  DEFAULT_SETTINGS,
-  HouseholdSettings,
-  TV_DIAGONAL_CHOICES_IN,
-} from '../../src/calmframes/household';
-import {
   addHideEntry,
   emptyHideLog,
   HideLogEntry,
 } from '../../src/calmframes/hideLog';
-import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import {
-  addProfile,
-  addProfileHide,
-  effectiveSettings,
-  emptyProfileLogs,
-  Family,
-  newFamily,
-  setChimeEnabled,
-  setFloor,
-} from '../../src/calmframes/profiles';
+  DEFAULT_SETTINGS,
+  HouseholdSettings,
+  TV_DIAGONAL_CHOICES_IN,
+} from '../../src/calmframes/household';
+import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import { OFFLINE_MAP_JSON } from '../../src/calmframes/offlineMapText';
 import {
   OFFLINE_PUBLIC_KEY_BASE64,
@@ -60,9 +51,20 @@ import {
   MAX_ATTEMPTS,
   setPin,
 } from '../../src/calmframes/parentGate';
+import {
+  addProfile,
+  addProfileHide,
+  effectiveSettings,
+  emptyProfileLogs,
+  Family,
+  newFamily,
+  setChimeEnabled,
+  setFloor,
+} from '../../src/calmframes/profiles';
 import ShieldBadge from '../../src/calmframes/ShieldBadge';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
-import { checkTitle, CheckedTitle } from '../../src/calmframes/titleStatus';
+import { CheckedTitle, checkTitle } from '../../src/calmframes/titleStatus';
+import ViewingPlan from '../../src/calmframes/ViewingPlan';
 
 function makeTitle(
   id: string,
@@ -130,10 +132,11 @@ describe('FlashMapStrip', () => {
 
   it('says out loud what the strip shows', () => {
     expect(describeStrip(intervals, 600_000)).toBe(
-      '2 flashing parts, 7 seconds in all, spread through about 10 minutes.',
+      '2 scheduled covers, 7 seconds in all, spread through about 10 minutes.',
     );
+    expect(describeStrip(intervals, 20_000)).toContain('spread through 20 seconds.');
     expect(describeStrip([], 600_000)).toBe(
-      'Nothing in this title goes over the flash limits.',
+      'No parts were flagged by these checks.',
     );
   });
 
@@ -141,27 +144,146 @@ describe('FlashMapStrip', () => {
     render(<FlashMapStrip intervals={intervals} durationMs={600_000} />);
     expect(screen.getByTestId('flash-map-strip-mark-0')).toBeTruthy();
     expect(screen.getByTestId('flash-map-strip-mark-1')).toBeTruthy();
-    expect(screen.getByTestId('flash-map-strip').props.accessibilityLabel).toMatch(
-      /2 flashing parts/,
-    );
+    expect(
+      screen.getByTestId('flash-map-strip').props.accessibilityLabel,
+    ).toMatch(/2 scheduled covers/);
   });
 });
 
 describe('ShieldBadge', () => {
   it('says the status in words, not only in colour', () => {
     for (const [status, label] of [
-      ['verified', 'Checked'],
-      ['pending', 'Being checked'],
-      ['failed', 'Check failed'],
+      ['verified', 'Ready to watch'],
+      ['pending', 'Preparing'],
+      ['failed', 'Unavailable'],
     ] as const) {
       const { unmount } = render(<ShieldBadge status={status} />);
-      expect(screen.getByTestId('shield-badge-label').props.children).toBe(label);
+      expect(screen.getByTestId('shield-badge-label').props.children).toBe(
+        label,
+      );
       unmount();
     }
   });
 });
 
+describe('the household viewing plan', () => {
+  it.each(['pending', 'failed'] as const)(
+    'keeps the standalone plan hidden for a %s entry',
+    (status) => {
+      render(
+        <ViewingPlan
+          entry={makeTitle('blocked', status)}
+          settings={DEFAULT_SETTINGS}
+        />,
+      );
+      expect(screen.queryByTestId('viewing-plan')).toBeNull();
+    },
+  );
+
+  it('does not call an old Standard check a ready Broadcast plan', () => {
+    render(
+      <ViewingPlan
+        entry={makeTitle('old-check', 'verified')}
+        settings={{ ...DEFAULT_SETTINGS, preset: 'broadcast' }}
+      />,
+    );
+    expect(screen.queryByTestId('viewing-plan')).toBeNull();
+  });
+
+  it('explains the checked maps, selected room and playback fallback without overclaiming', () => {
+    render(
+      <TitleDetailsScreen
+        entry={makeTitle('plan', 'verified')}
+        settings={DEFAULT_SETTINGS}
+        onPlay={jest.fn()}
+      />,
+    );
+    expect(screen.getByTestId('title-details-plan-preset').props.children).toBe(
+      'Standard',
+    );
+    expect(screen.getByTestId('title-details-plan-room').props.children).toBe(
+      '55 inch television, seats about 8 feet away',
+    );
+    expect(screen.getByTestId('title-details-plan-maps').props.children).toBe(
+      'Flash limits: WCAG 2.3.1.',
+    );
+    expect(
+      screen.getByTestId('title-details-plan-continuity').props.children,
+    ).toMatch(
+      /still image or dark screen.*sound and captions continue/i,
+    );
+    expect(screen.getByTestId('title-details-plan-limits').props.children).toBe(
+      SAFETY_NOTE,
+    );
+  });
+
+  it.each(['pending', 'failed'] as const)(
+    'never presents a ready viewing plan for a %s title',
+    (status) => {
+      const onPlay = jest.fn();
+      render(
+        <TitleDetailsScreen
+          entry={makeTitle('blocked-plan', status)}
+          onPlay={onPlay}
+        />,
+      );
+      expect(screen.queryByTestId('title-details-plan')).toBeNull();
+      fireEvent.press(screen.getByTestId('title-details-play'));
+      expect(onPlay).not.toHaveBeenCalled();
+    },
+  );
+
+  it('updates the viewing plan when the household changes instead of showing stale choices', () => {
+    const entry = makeTitle('plan', 'verified', {
+      verifiedProfiles: ['wcag', 'broadcast'],
+    });
+    const { rerender } = render(
+      <TitleDetailsScreen entry={entry} onPlay={jest.fn()} />,
+    );
+    rerender(
+      <TitleDetailsScreen
+        entry={entry}
+        settings={{
+          preset: 'extra-cautious',
+          tvDiagonalIn: 65,
+          seatDistanceIn: 72,
+        }}
+        onPlay={jest.fn()}
+      />,
+    );
+    expect(screen.getByTestId('title-details-plan-preset').props.children).toBe(
+      'Extra cautious',
+    );
+    expect(screen.getByTestId('title-details-plan-room').props.children).toBe(
+      '65 inch television, seats about 6 feet away',
+    );
+    expect(screen.getByTestId('title-details-plan-maps').props.children).toBe(
+      'Flash limits: WCAG 2.3.1 and broadcast.',
+    );
+  });
+});
+
 describe('KidHomeScreen', () => {
+  it('offers parent focus when no checked title remains', () => {
+    render(<KidHomeScreen titles={[makeTitle('last', 'failed')]} onOpen={jest.fn()}
+      returnFocusId="last" onOpenParentArea={jest.fn()} />);
+    expect(screen.getByTestId('kid-home-parent-area').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.queryByTestId('kid-home-poster-last')).toBeNull();
+  });
+
+  it('restores a checked poster and falls back when that title is no longer checked', () => {
+    const shelf = (status: CheckedTitle['status']) => (
+      <KidHomeScreen titles={[makeTitle('first', 'verified'), makeTitle('last', status)]}
+        onOpen={jest.fn()} returnFocusId="last" />
+    );
+    const view = render(shelf('verified'));
+    expect(screen.getByTestId('kid-home-poster-last').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.getByTestId('kid-home-poster-first').props.hasTVPreferredFocus).toBe(false);
+    view.rerender(shelf('failed'));
+    expect(screen.queryByTestId('kid-home-poster-last')).toBeNull();
+    expect(screen.getByTestId('kid-home-poster-first').props.hasTVPreferredFocus).toBe(true);
+  });
+
   const titles = [
     makeTitle('ok', 'verified'),
     makeTitle('waiting', 'pending'),
@@ -224,9 +346,13 @@ describe('KidHomeScreen', () => {
   });
 
   it('has no video and nothing that plays by itself', () => {
-    const { toJSON } = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} />);
+    const { toJSON } = render(
+      <KidHomeScreen titles={titles} onOpen={jest.fn()} />,
+    );
     const tree = JSON.stringify(toJSON());
-    expect(tree).not.toMatch(/autoPlay|shouldPlay|Video|KeplerVideoSurfaceView/i);
+    expect(tree).not.toMatch(
+      /autoPlay|shouldPlay|Video|KeplerVideoSurfaceView/i,
+    );
     // An Image is a still. That is the only picture on this screen.
     expect(screen.getByTestId('kid-home-poster-image-ok')).toBeTruthy();
   });
@@ -275,9 +401,9 @@ describe('TitleDetailsScreen', () => {
     expect(play.props.accessibilityState).toEqual({ disabled: true });
     fireEvent.press(play);
     expect(onPlay).not.toHaveBeenCalled();
-    expect(screen.getByTestId('title-details-notice-title').props.children).toBe(
-      TITLE_PENDING.title,
-    );
+    expect(
+      screen.getByTestId('title-details-notice-title').props.children,
+    ).toBe(TITLE_PENDING.title);
     // Nothing to show about a title that has not been checked.
     expect(screen.queryByTestId('title-details-strip')).toBeNull();
     expect(screen.queryByTestId('title-details-summary')).toBeNull();
@@ -298,12 +424,12 @@ describe('TitleDetailsScreen', () => {
     );
     fireEvent.press(screen.getByTestId('title-details-play'));
     expect(onPlay).not.toHaveBeenCalled();
-    expect(screen.getByTestId('title-details-notice-title').props.children).toBe(
-      TITLE_FAILED.title,
-    );
-    expect(screen.getByTestId('title-details-notice-detail').props.children).toMatch(
-      /changed after it was signed/,
-    );
+    expect(
+      screen.getByTestId('title-details-notice-title').props.children,
+    ).toBe(TITLE_FAILED.title);
+    expect(
+      screen.getByTestId('title-details-notice-detail').props.children,
+    ).toMatch(/changed after it was signed/);
   });
 
   it('will not play a title whose check is too old, checked with the real reader', () => {
@@ -315,9 +441,9 @@ describe('TitleDetailsScreen', () => {
     render(<TitleDetailsScreen entry={stale} onPlay={onPlay} />);
     fireEvent.press(screen.getByTestId('title-details-play'));
     expect(onPlay).not.toHaveBeenCalled();
-    expect(screen.getByTestId('title-details-notice-title').props.children).toBe(
-      TITLE_STALE.title,
-    );
+    expect(
+      screen.getByTestId('title-details-notice-title').props.children,
+    ).toBe(TITLE_STALE.title);
   });
 
   it('plays a checked title', () => {
@@ -390,6 +516,104 @@ describe('ParentAreaScreen', () => {
     }
   };
 
+  it('corrects a partial PIN without spending an attempt or opening the gate', () => {
+    const { onGateChange } = renderArea();
+    enter('139');
+    fireEvent.press(screen.getByTestId('parent-area-key-delete'));
+    expect(screen.getByTestId('parent-area-entered').props.children).toBe('**');
+    expect(onGateChange).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('parent-area-open')).toBeNull();
+    enter('57');
+    expect(onGateChange).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId('parent-area-open')).toBeTruthy();
+  });
+
+  it('does not let PIN correction reset a lockout', () => {
+    const { onGateChange } = renderArea({
+      gate: { ...gate, failedAttempts: MAX_ATTEMPTS, lockedUntilMs: 60_000 },
+    });
+    enter('139');
+    fireEvent.press(screen.getByTestId('parent-area-key-delete'));
+    enter('57');
+    expect(screen.queryByTestId('parent-area-open')).toBeNull();
+    expect(onGateChange).toHaveBeenCalledWith(expect.objectContaining({
+      failedAttempts: MAX_ATTEMPTS, lockedUntilMs: 60_000,
+    }));
+  });
+
+  it('cannot edit a partial PIN while household state is saving', () => {
+    const area = (saving: boolean) => (
+      <ParentAreaScreen gate={gate} onGateChange={jest.fn()}
+        settings={DEFAULT_SETTINGS} onSettingsChange={jest.fn()}
+        log={log} titles={titles} saving={saving} />
+    );
+    const view = render(area(false));
+    enter('13');
+    view.rerender(area(true));
+    fireEvent.press(screen.getByTestId('parent-area-key-delete'));
+    fireEvent.press(screen.getByTestId('parent-area-key-5'));
+    expect(screen.getByTestId('parent-area-entered').props.children).toBe('**');
+    view.rerender(area(false));
+    fireEvent.press(screen.getByTestId('parent-area-key-delete'));
+    expect(screen.getByTestId('parent-area-entered').props.children).toBe('*');
+  });
+
+  /**
+   * The keys stay in the focus order while a wrong PIN is being saved.
+   *
+   * The route saves every attempt before the screen answers it, and for that
+   * moment the keypad is blocked. It used to be blocked with `disabled` on
+   * each key, which TouchableOpacity turns into `focusable={false}` on the
+   * view underneath, so on the fourth digit the key under the D-pad was told
+   * it could no longer hold focus, and the parent's next press went wherever
+   * the focus had been sent. The block is now the accessibility state and the
+   * press handler, and the view is told it is focusable throughout. What a
+   * device then does with focus is not measured here; what the view is told
+   * is.
+   *
+   * Seen to fail with `disabled={disabled || undefined}` back on the key:
+   *
+   *     expect(received).toBe(expected) // Object.is equality
+   *
+   *     Expected: true
+   *     Received: false
+   */
+  it('keeps the keys focusable while a wrong PIN is being saved, and keeps them blocked', async () => {
+    let finish!: () => void;
+    const onGateChange = jest.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          finish = resolve;
+        }),
+    );
+    renderArea({ onGateChange });
+    const key = () => screen.getByTestId('parent-area-key-5');
+    expect(key().props.focusable).toBe(true);
+    expect(key().props.accessibilityState.disabled).toBe(false);
+
+    enter('0000');
+    expect(onGateChange).toHaveBeenCalledTimes(1);
+    // Blocked, said so, and still in the focus order.
+    expect(key().props.accessibilityState.disabled).toBe(true);
+    expect(key().props.focusable).toBe(true);
+    enter('13');
+    fireEvent.press(screen.getByTestId('parent-area-key-delete'));
+    expect(screen.getByTestId('parent-area-entered').props.children).toBe('');
+    expect(onGateChange).toHaveBeenCalledTimes(1);
+    expect(screen.queryByTestId('parent-area-open')).toBeNull();
+
+    await act(async () => {
+      finish();
+    });
+    expect(screen.getByTestId('parent-area-message-title').props.children).toBe(
+      PIN_WRONG_TITLE,
+    );
+    expect(key().props.accessibilityState.disabled).toBe(false);
+    expect(key().props.focusable).toBe(true);
+    enter('13');
+    expect(screen.getByTestId('parent-area-entered').props.children).toBe('**');
+  });
+
   it('offers the credits, and only once the PIN is right', () => {
     // CC BY asks for attribution where a person can read it. NOTICE ships with
     // the source, which is not much use to somebody holding a remote, so this
@@ -416,9 +640,9 @@ describe('ParentAreaScreen', () => {
     expect(screen.getByTestId('parent-area-message-title').props.children).toBe(
       PIN_WRONG_TITLE,
     );
-    expect(screen.getByTestId('parent-area-message-detail').props.children).toMatch(
-      /not right/,
-    );
+    expect(
+      screen.getByTestId('parent-area-message-detail').props.children,
+    ).toMatch(/not right/);
   });
 
   it('says how many tries are left, and then that it is locked', () => {
@@ -438,9 +662,9 @@ describe('ParentAreaScreen', () => {
       />,
     );
     enter('0000');
-    expect(screen.getByTestId('parent-area-message-detail').props.children).toMatch(
-      new RegExp(`${MAX_ATTEMPTS - 1} tries left`),
-    );
+    expect(
+      screen.getByTestId('parent-area-message-detail').props.children,
+    ).toMatch(new RegExp(`${MAX_ATTEMPTS - 1} tries left`));
     expect(live.failedAttempts).toBe(1);
   });
 
@@ -459,16 +683,18 @@ describe('ParentAreaScreen', () => {
     renderArea();
     enter('1357');
     expect(screen.getByTestId('parent-area-open')).toBeTruthy();
-    expect(screen.getByTestId('parent-area-preset-extra-cautious')).toBeTruthy();
+    expect(
+      screen.getByTestId('parent-area-preset-extra-cautious'),
+    ).toBeTruthy();
     expect(screen.getByTestId('parent-area-room').props.children).toMatch(
       /55 inch television/,
     );
     expect(screen.getByTestId('parent-area-log-0').props.children).toMatch(
       /Title ok: hid 5 seconds at 1:00/,
     );
-    expect(screen.getByTestId('parent-area-status-bad-label').props.children).toBe(
-      'Check failed',
-    );
+    expect(
+      screen.getByTestId('parent-area-status-bad-label').props.children,
+    ).toBe('Unavailable');
   });
 
   it('says why a title is not on the shelf, in the same words as its page', () => {
@@ -574,11 +800,11 @@ describe('ParentAreaScreen', () => {
     );
     // The rows say which question they are asking, and the chips carry the
     // state a radio carries rather than only a fill.
-    expect(screen.getByLabelText('Television size').props.accessibilityRole).toBe(
-      'radiogroup',
-    );
     expect(
-      screen.getByLabelText('How far away the sofa is').props.accessibilityRole,
+      screen.getByLabelText('Television size').props.accessibilityRole,
+    ).toBe('radiogroup');
+    expect(
+      screen.getByLabelText('Viewing distance').props.accessibilityRole,
     ).toBe('radiogroup');
     expect(
       screen.getByTestId('parent-area-tv-55').props.accessibilityState,
@@ -589,11 +815,15 @@ describe('ParentAreaScreen', () => {
 
     const chipText = () =>
       TV_DIAGONAL_CHOICES_IN.map((inches) =>
-        String(screen.getByTestId(`parent-area-tv-${inches}-label`).props.children),
+        String(
+          screen.getByTestId(`parent-area-tv-${inches}-label`).props.children,
+        ),
       );
     const before = chipText();
 
-    view.rerender(area({ ...DEFAULT_SETTINGS, tvDiagonalIn: 85, seatDistanceIn: 48 }));
+    view.rerender(
+      area({ ...DEFAULT_SETTINGS, tvDiagonalIn: 85, seatDistanceIn: 48 }),
+    );
     expect(screen.getByTestId('parent-area-tv-chosen').props.children).toBe(
       '85 inch is chosen.',
     );
@@ -606,7 +836,7 @@ describe('ParentAreaScreen', () => {
 
   it('announces the PIN result politely', () => {
     renderArea();
-    const message = screen.getByTestId('parent-area-message');
+    const message = screen.getByTestId('parent-area-message-announcement');
     expect(message.props.accessibilityLiveRegion).toBe('polite');
     expect(message.props['aria-live']).toBe('polite');
   });
@@ -629,7 +859,10 @@ describe('ParentAreaScreen', () => {
  * these logs are keyed by profile.
  */
 describe('family profiles on the screens', () => {
-  const twoKids: Family = addProfile(newFamily(DEFAULT_SETTINGS, 'Robin'), 'Sam');
+  const twoKids: Family = addProfile(
+    newFamily(DEFAULT_SETTINGS, 'Robin'),
+    'Sam',
+  );
   const gate = setPin(emptyPinGate(), '1357', 'seed', 4);
 
   function hide(atMs: number, titleName: string): HideLogEntry {
@@ -676,6 +909,7 @@ describe('family profiles on the screens', () => {
         onChooseProfile={onChooseProfile}
       />,
     );
+    fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
     // The answer is a sentence under the row, not a word on a chip.
     expect(screen.getByTestId('kid-home-profiles-chosen').props.children).toBe(
       'Robin is watching.',
@@ -730,6 +964,7 @@ describe('family profiles on the screens', () => {
     );
 
     const view = render(shelf('profile-1'));
+    fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
     const before = chipText();
     view.rerender(shelf('profile-2'));
 
@@ -752,13 +987,15 @@ describe('family profiles on the screens', () => {
         onChooseProfile={jest.fn()}
       />,
     );
+    fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
     // A radio group, labelled with the question it is asking, and the chosen
     // chip carries the state a radio carries rather than only a fill colour.
-    expect(screen.getByLabelText('Who is watching').props.accessibilityRole).toBe(
-      'radiogroup',
-    );
     expect(
-      screen.getByTestId('kid-home-profiles-profile-1').props.accessibilityState,
+      screen.getByLabelText('Who is watching').props.accessibilityRole,
+    ).toBe('radiogroup');
+    expect(
+      screen.getByTestId('kid-home-profiles-profile-1').props
+        .accessibilityState,
     ).toEqual({ checked: true, selected: true });
     expect(
       screen.getByTestId('kid-home-profiles-profile-2').props.accessibilityState,
@@ -766,7 +1003,12 @@ describe('family profiles on the screens', () => {
   });
 
   it('leaves the shelf exactly as it was for a household with no profiles', () => {
-    render(<KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />);
+    render(
+      <KidHomeScreen
+        titles={[makeTitle('ok', 'verified')]}
+        onOpen={jest.fn()}
+      />,
+    );
     expect(screen.queryByTestId('kid-home-profiles')).toBeNull();
   });
 
@@ -838,9 +1080,9 @@ describe('family profiles on the screens', () => {
     const strict: Family = setFloor(twoKids, { preset: 'extra-cautious' });
     renderFamilyArea({ family: strict });
     fireEvent.press(screen.getByTestId('parent-area-profiles-profile-1'));
-    expect(screen.getByTestId('parent-area-floor-effect').props.children).toContain(
-      'Extra cautious',
-    );
+    expect(
+      screen.getByTestId('parent-area-floor-effect').props.children,
+    ).toContain('Extra cautious');
   });
 
   it('offers the chime, on, and turns it off without touching anything else', () => {
@@ -856,6 +1098,18 @@ describe('family profiles on the screens', () => {
     // Turning the sound off changes nothing about what is hidden.
     expect(next.floor).toEqual(twoKids.floor);
     expect(next.profiles).toEqual(twoKids.profiles);
+  });
+
+  it.each([
+    ['interface-motion', 'interfaceMotionEnabled'],
+    ['interface-sounds', 'interfaceSoundsEnabled'],
+  ] as const)('enables %s without changing playback or the warning chime', (id, key) => {
+    const { onFamilyChange } = renderFamilyArea();
+    const control = screen.getByTestId(`parent-area-${id}`);
+    expect(control.props.accessibilityState.checked).toBe(false);
+    fireEvent.press(control);
+    expect(onFamilyChange).toHaveBeenCalledTimes(1);
+    expect(onFamilyChange.mock.calls[0][0]).toEqual({ ...twoKids, [key]: true });
   });
 
   it('says the chime is off when it is off', () => {
@@ -880,20 +1134,20 @@ describe('family profiles on the screens', () => {
    */
   it('says whose each section is, so a scrolled screen cannot be misread', () => {
     renderFamilyArea();
-    expect(screen.getByText('How strict for Everyone')).toBeTruthy();
-    expect(screen.getByText('The room for Everyone')).toBeTruthy();
+    expect(screen.getByText('Viewing preset for Everyone')).toBeTruthy();
+    expect(screen.getByText('TV and seating for Everyone')).toBeTruthy();
     expect(screen.getByText('What was hidden for Everyone')).toBeTruthy();
-    expect(screen.getByTestId('parent-area-profiles-chosen').props.children).toBe(
-      'These settings are for Everyone.',
-    );
+    expect(
+      screen.getByTestId('parent-area-profiles-chosen').props.children,
+    ).toBe('These settings are for Everyone.');
 
     fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
-    expect(screen.getByText('How strict for Sam')).toBeTruthy();
-    expect(screen.getByText('The room for Sam')).toBeTruthy();
+    expect(screen.getByText('Viewing preset for Sam')).toBeTruthy();
+    expect(screen.getByText('TV and seating for Sam')).toBeTruthy();
     expect(screen.getByText('What was hidden for Sam')).toBeTruthy();
-    expect(screen.getByTestId('parent-area-profiles-chosen').props.children).toBe(
-      'These settings are for Sam.',
-    );
+    expect(
+      screen.getByTestId('parent-area-profiles-chosen').props.children,
+    ).toBe('These settings are for Sam.');
   });
 
   /**
@@ -915,8 +1169,8 @@ describe('family profiles on the screens', () => {
     for (const digit of '1357') {
       fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
     }
-    expect(screen.getByText('How strict')).toBeTruthy();
-    expect(screen.getByText('The room')).toBeTruthy();
+    expect(screen.getByText('Viewing preset')).toBeTruthy();
+    expect(screen.getByText('TV and seating')).toBeTruthy();
     expect(screen.getByText('What was hidden')).toBeTruthy();
     expect(screen.queryByTestId('parent-area-profiles')).toBeNull();
   });
@@ -937,7 +1191,11 @@ describe('family profiles on the screens', () => {
   it('says where the list stops rather than showing twenty of twenty five', () => {
     let logs = emptyProfileLogs();
     for (let index = 0; index < 25; index += 1) {
-      logs = addProfileHide(logs, 'profile-1', hide(1_000 + index * 1_000, 'Title ok'));
+      logs = addProfileHide(
+        logs,
+        'profile-1',
+        hide(1_000 + index * 1_000, 'Title ok'),
+      );
     }
     renderFamilyArea({ profileLogs: logs });
 
@@ -968,12 +1226,12 @@ describe('family profiles on the screens', () => {
       nowMs: () => new Date(2026, 8, 17, 21, 0).getTime(),
     });
 
-    expect(screen.getByTestId('parent-area-log-day-2026-09-17').props.children).toBe(
-      'Today',
-    );
-    expect(screen.getByTestId('parent-area-log-day-2026-09-16').props.children).toBe(
-      'Yesterday',
-    );
+    expect(
+      screen.getByTestId('parent-area-log-day-2026-09-17').props.children,
+    ).toBe('Today');
+    expect(
+      screen.getByTestId('parent-area-log-day-2026-09-16').props.children,
+    ).toBe('Yesterday');
     // The lines keep their place in the whole list, newest first.
     expect(screen.getByTestId('parent-area-log-0').props.children).toContain(
       'Tonight title',
@@ -987,12 +1245,19 @@ describe('family profiles on the screens', () => {
   it('gives a new kid a name nobody else in the household has', () => {
     // There is no keyboard in the parent area, so two chips both reading Kid
     // would be a picker with no way out of the ambiguity.
-    const withKid: Family = addProfile(newFamily(DEFAULT_SETTINGS, 'Kid'), 'Robin');
+    const withKid: Family = addProfile(
+      newFamily(DEFAULT_SETTINGS, 'Kid'),
+      'Robin',
+    );
     const { onFamilyChange } = renderFamilyArea({ family: withKid });
     fireEvent.press(screen.getByTestId('parent-area-add-profile'));
 
     const next: Family = onFamilyChange.mock.calls[0][0];
-    expect(next.profiles.map((one) => one.name)).toEqual(['Kid', 'Robin', 'Kid 2']);
+    expect(next.profiles.map((one) => one.name)).toEqual([
+      'Kid',
+      'Robin',
+      'Kid 2',
+    ]);
   });
 
   /**
@@ -1037,9 +1302,9 @@ describe('family profiles on the screens', () => {
 
     // Nothing has happened yet. The screen has asked.
     expect(onFamilyChange).not.toHaveBeenCalled();
-    expect(screen.getByTestId('parent-area-remove-question-title').props.children).toBe(
-      'Remove Sam?',
-    );
+    expect(
+      screen.getByTestId('parent-area-remove-question-title').props.children,
+    ).toBe('Remove Sam?');
     expect(
       screen.getByTestId('parent-area-remove-question-detail').props.children,
     ).toContain('cannot be undone');

@@ -16,13 +16,20 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Read only, for every job. Nothing here writes to the repository, opens an
+# issue, comments on a pull request or pushes to a registry. The checkout
+# needs to read the code, and upload-artifact uses the runner's own token
+# rather than this one. A job that ever needs more gets its own block.
+permissions:
+  contents: read
+
 jobs:
   app:
     name: Vega app
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version-file: .nvmrc
       - name: Install dependencies
@@ -34,21 +41,61 @@ jobs:
       - name: Typecheck
         working-directory: app
         run: npm run typecheck
+      - name: Check prepared package assets and tamper controls
+        working-directory: app
+        run: node tools/check_prepared_library.mjs && node --test tools/check_prepared_library.test.mjs tools/catalog_resolution.test.cjs tools/seek_lint_guard.test.mjs
       - name: Lint
         working-directory: app
         run: npx eslint src test --ext .ts,.tsx
       - name: Test
         working-directory: app
         run: npx jest --colors=false --ci
+      - name: Coverage totals on the run page
+        # The four totals beside the floors app/jest.config.json enforces, so
+        # the margin is read on the run page rather than in a log. It runs
+        # after a failed Test too, which is when a missed floor needs reading,
+        # and it never fails the job itself: no summary file is a line saying
+        # so, not a red step.
+        if: ${{ !cancelled() }}
+        run: |
+          node -e '
+          const fs = require("fs");
+          const out = process.env.GITHUB_STEP_SUMMARY;
+          const lines = ["### App test coverage", ""];
+          try {
+            const total = JSON.parse(fs.readFileSync("app/coverage/coverage-summary.json", "utf8")).total;
+            const floor = JSON.parse(fs.readFileSync("app/jest.config.json", "utf8")).coverageThreshold.global;
+            lines.push("| measure | covered | floor | count |", "| --- | --- | --- | --- |");
+            for (const key of ["statements", "branches", "functions", "lines"]) {
+              const t = total[key];
+              lines.push(`| ${key} | ${t.pct}% | ${floor[key]}% | ${t.covered} of ${t.total} |`);
+            }
+          } catch (error) {
+            lines.push(`No coverage totals: ${error.message}`);
+          }
+          fs.appendFileSync(out, lines.join("\n") + "\n");
+          console.log(lines.join("\n"));
+          '
+      - name: Hook package guard tests
+        run: npm --prefix hook run test:package
+      - name: Check the installed offline hook consumer
+        # Reuses the current app's Vega peer types after installing the packed
+        # tarball in a fresh consumer. This is not an npm publication or a
+        # physical-device check, and it needs no registry access.
+        run: npm --prefix hook run check:package
 
   python:
     name: Python packages
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version-file: .python-version
+      # Release-preparation fixtures exercise the real Node package checker.
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: .nvmrc
       - name: Install ffmpeg
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
       - name: Install packages that exist
@@ -62,37 +109,77 @@ jobs:
           done
           # eval/ has no pyproject.toml, so the loop above skips it and nothing
           # installs what its tests import. flashmap brings av, numpy and
-          # cryptography, and flashmap[dev] brings pytest, hypothesis and pyyaml.
+          # cryptography, and flashmap[dev] brings pytest, hypothesis, pyyaml, ruff,
+          # mypy and pytest-cov.
           # matplotlib is the one left over, and without it
           # eval/tests/test_labeling_plots.py fails to import and takes the whole
           # job down with it, which is what hid the scheduler failure below.
           pip install pytest==9.1.1 matplotlib==3.11.2
       - name: Test
         run: |
-          # Skip anything marked slow: the full conformance suite runs locally
-          # or nightly, not on every push.
-          targets=""
-          for dir in flashmap pipeline eval; do
-            if [ -d "$dir" ] && ls "$dir"/**/test_*.py "$dir"/test_*.py "$dir"/tests >/dev/null 2>&1; then
-              targets="$targets $dir"
-            fi
-          done
-          if [ -n "$targets" ]; then
-            echo "testing:$targets"
-            pytest -q -m "not slow" $targets
-          else
-            echo "no Python tests yet"
-          fi
+          # Every Python lane, named rather than detected. Until Oct 11, 2026 a
+          # loop here picked the lanes with ls, which fails when any one of its
+          # patterns matches nothing, so flashmap and pipeline were dropped and
+          # only eval ran. eval/tests/test_ci_python_lanes.py keeps all three
+          # named here. Anything marked slow, the full conformance suite, runs
+          # locally rather than on every push. Coverage is of the source only,
+          # with its floor in .coveragerc.
+          mkdir -p .logs
+          pytest -q -m "not slow" flashmap pipeline eval \
+            --cov --cov-config=.coveragerc \
+            --cov-report=term --cov-report=json:.logs/python-coverage.json
+      - name: Python coverage on the run page
+        # The total beside the floor .coveragerc enforces, read on the run page
+        # rather than in a log. It runs after a failed Test too, and it never
+        # fails the job itself.
+        if: ${{ !cancelled() }}
+        run: |
+          python - <<'PY'
+          import configparser, json, os
+          lines = ["### Python test coverage", ""]
+          try:
+              total = json.load(open(".logs/python-coverage.json"))["totals"]
+              config = configparser.ConfigParser()
+              config.read(".coveragerc")
+              floor = config.get("report", "fail_under")
+              lines += ["| covered | floor | statements |", "| --- | --- | --- |",
+                        f"| {total['percent_covered']:.2f}% | {floor}% | {total['covered_lines']} of {total['num_statements']} |"]
+          except (OSError, KeyError, ValueError, configparser.Error) as error:
+              lines.append(f"No coverage summary was written ({error.__class__.__name__}).")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as out:
+              out.write("\n".join(lines) + "\n")
+          PY
+      - name: Lint Python
+        # ruff with ruff.toml at the root, installed by flashmap[dev] above.
+        run: python -m ruff check .
+      - name: Typecheck flashmap
+        # The package ships py.typed. Strict, from flashmap/pyproject.toml.
+        run: python -m mypy --config-file flashmap/pyproject.toml
+      - name: Typecheck the pipeline
+        # Not strict: check_untyped_defs over pipeline/*.py, from pipeline/mypy.ini.
+        run: python -m mypy --config-file pipeline/mypy.ini
 
+      - name: Rebuild the complete conformance report from its own rows
+        # README quotes results/conformance_current_report_2026-10-02.json.
+        # This rebuilds it from the frozen design and the saved measurement
+        # rows with the committed scorer, and fails on any byte that differs,
+        # so the headline cannot drift from what was measured.
+        run: |
+          python3 eval/conformance_current_report.py \
+            --design results/conformance_design.json \
+            --measurement results/conformance_current_full_2026-10-02.json \
+            --out /tmp/conformance_rebuilt.json
+          cmp /tmp/conformance_rebuilt.json results/conformance_current_report_2026-10-02.json
+          echo "the committed report is what the rows say"
   ui-flashmap:
     name: The app's own UI passes flashmap
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version-file: .nvmrc
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version-file: .python-version
       - name: Install ffmpeg
@@ -109,6 +196,14 @@ jobs:
         # the same analyzer we point at content.
         working-directory: app
         run: npm run ui:flashmap
+      - name: The check is seen to refuse what it must refuse
+        # A green run of the screens above means nothing unless the same
+        # painter, hold and analyzer can be seen refusing a flashing sequence
+        # and a grating. This paints both and fails if either is passed.
+        working-directory: app
+        run: |
+          node --test tools/ui_flashmap.test.mjs
+          node tools/ui_flashmap.mjs --negative-control
 
       - name: Check every image the app and the listing ship
         # The screens above are what the app draws. These are what it ships: the
@@ -131,18 +226,18 @@ jobs:
 
   hardening:
     name: Mutation gate, property tests and the map fuzz corpus
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # The longest job here, about twenty minutes. It breaks every safety guard on purpose
     # and runs the tests that have to notice, one guard at a time, and most of that time is
     # the pipeline verify suite, which renders video. It earns the minutes: a green test
     # suite that has never been seen to fail is the one thing this project cannot afford.
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version-file: .nvmrc
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version-file: .python-version
       - name: Install ffmpeg
@@ -164,13 +259,21 @@ jobs:
       - name: The mutation gate
         # --check runs the gate and then fails if it disagrees with results/mutation.json:
         # a new survivor, a lower kill rate, or a different number of mutations.
-        run: make mutate MUTATE_ARGS=--check
+        run: make mutate MUTATE_ARGS="--check --out .logs/mutation-ci.json"
+      - name: Retain the actual mutation measurement, including a failed drift check
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: mutation-measurement-${{ github.run_attempt }}
+          path: .logs/mutation-ci.json
+          include-hidden-files: true
+          retention-days: 7
 
   secrets:
     name: Secret scan
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
       - name: gitleaks
@@ -183,14 +286,27 @@ jobs:
 
   numbers:
     name: Published numbers match results
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version-file: .python-version
       - name: Check every published number against results/
         run: python3 eval/readme_sync.py --check
+      - name: No dashes and none of the three words in what we wrote
+        # CLAUDE.md's style rule, held by a script rather than by a reader.
+        # Two dashes in a design brief sat on a green build for a day before
+        # a review found them, which is how this step came to exist.
+        run: python3 eval/style_check.py
+      - name: Every action is pinned to a commit, and every install to a version
+        # A tag such as v4 can be moved to new code by whoever holds the
+        # action's repository, and the next run would take it. This fails on
+        # a tag or branch ref that has no written exception in
+        # scripts/check_pins.py, and on an exception that matches nothing. It
+        # refuses its own negative control first, so a checker that waves tags
+        # through fails here too. Standard library only, like this whole job.
+        run: python3 scripts/check_pins.py
       - name: Rebuild the lead time summary from its own events
         run: python3 eval/verify_gate1_archive.py
       - name: Recount the integration diff the README quotes

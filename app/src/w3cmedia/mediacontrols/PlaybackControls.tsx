@@ -44,6 +44,7 @@ export const seek = (
         newTime * 1000,
       );
     } else {
+      // eslint-disable-next-line no-restricted-syntax -- the sample's fallback, reached only when no requestSeek is wired; the Calm Frames player always wires one
       videoRef.current.currentTime = newTime;
     }
     if (videoRef.current.paused) {

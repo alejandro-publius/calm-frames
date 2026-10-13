@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "date": "2026-10-13",
+  "base_commit": "09ee50e",
+  "status": "cloud implementation and media complete; current native build and recording pending",
+  "changes": [
+    "Centered artwork, title, description and controls on the library and details",
+    "Short Harbor display title with separate Practice holds label",
+    "Bounded centered supporting column and picture timeline",
+    "Card labels fit above the fixed footer at 1080p",
+    "Centered water-opening wordmark; reduced motion and screen readers bypass animation",
+    "Both playable Harbor versions now contain the new animated film"
+  ],
+  "film": {
+    "duration_seconds": 20,
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "frames": 480,
+    "water_cut_seconds": 2.5,
+    "method": "Blender 4.3.2 Cycles CPU; 2.5D animation of the approved artwork, masked water distortion and camera movement",
+    "audio": "Original synthesized water ambience",
+    "captions": "Original English story captions",
+    "practice_holds": "Two explicitly scheduled demonstration intervals; ordinary story has no synthetic intervals",
+    "source_production_checks": {
+      "passed": true,
+      "count": 68
+    }
+  },
+  "prepared_library": {
+    "prepared_library": "checked",
+    "titles": 1,
+    "bundles": 3,
+    "bytes": 9270143,
+    "catalogSha256": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79",
+    "verification_reports": {
+      "required": 3,
+      "present": 3,
+      "missing": []
+    }
+  },
+  "checks": {
+    "affected_ui_tests": {
+      "passed": 153,
+      "suites": 5
+    },
+    "media_app_tests": {
+      "passed": 76,
+      "suites": 4,
+      "note": "51 tests and then 25 packaged-library tests; a mistyped fourth path was corrected"
+    },
+    "python_media_tests": {
+      "passed": 114
+    },
+    "delivery_node_tests": {
+      "passed": 24
+    },
+    "typecheck": "passed",
+    "ruff_changed_python": "passed",
+    "ui_palette_frames": {
+      "count": 36,
+      "profiles": [
+        "wcag",
+        "broadcast"
+      ],
+      "passed": true
+    },
+    "attribution": "NOTICE and credits.ts match 46 ledger titles",
+    "published_numbers": 650,
+    "docs_design_attribution_tests": {
+      "passed": 44
+    },
+    "lint": {
+      "errors": 0,
+      "existing_warnings": 4
+    },
+    "staged_secret_scan": "passed",
+    "staged_style": "passed"
+  },
+  "browser": {
+    "engine": "151.0.7922.173",
+    "viewport": {
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1
+    },
+    "source": "Actual component host trees, existing Jest native mocks, synthetic household",
+    "native_execution": false,
+    "layout_checks": {
+      "library-family": {
+        "cardLabelBottom": 968,
+        "footerTop": null,
+        "allLabelsVisibleAtRest": true,
+        "horizontalScrollAbsent": true
+      },
+      "library-unavailable": {
+        "cardLabelBottom": 968,
+        "footerTop": 984,
+        "allLabelsVisibleAtRest": true,
+        "horizontalScrollAbsent": true
+      },
+      "details-demo": {
+        "titleCenterX": 959.9921875,
+        "playCenterX": 959.9921875,
+        "playBottom": 1016,
+        "timelineCenterX": 960.0,
+        "horizontalScrollAbsent": true
+      },
+      "details-harbor": {
+        "titleCenterX": 959.9921875,
+        "playCenterX": 960.0,
+        "playBottom": 1016,
+        "timelineCenterX": 960.0,
+        "horizontalScrollAbsent": true
+      }
+    },
+    "measurements": "docs/design/centered/browser-measurements.json"
+  },
+  "source_sha256": {
+    "app/src/calmframes/HarborOpening.tsx": "c8340ea9a82b018c339884a0260e21336a76df7108879de421628bb34c3821ae",
+    "app/src/calmframes/KidHomeScreen.tsx": "d60ce2b64029dda67c6a851786fb1c851bcb0d6e809f0f65468ead8aa659bdd0",
+    "app/src/calmframes/TitleDetailsScreen.tsx": "9fef6e6b1cd7ead8c8fb9e60ce575f9902886c75fd887aae6e5bf2d7ba034dd0",
+    "app/src/calmframes/TitleArtwork.tsx": "53742f9a31059f1c9192609e15e7fd3c4122600336414caae55c29b165176912",
+    "app/src/calmframes/ViewingPlan.tsx": "5a40631a8b5f42597c67a90b8db53270a13c2c567a6c249b18a7bc33b359dbd6",
+    "eval/render_harbor.py": "ae58234400c866ab052f7266423af7324515c7e57d5a051b856200f0adfda90f",
+    "eval/benign_story.py": "50a15c6e457f9e4bc7eed7f55e2ebac7877a7c1a28b148b773bdc994a7b725df",
+    "eval/prepare_owned_harbor.py": "4471eac254960ac1212dad974aa9ba8279ec8e9679e5d5202f434f736d15262d",
+    "app/assets/raw/benign-story/harbor.mp4": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043",
+    "app/assets/raw/benign-story/harbor.precovered.mp4": "e26ce98019406f65765f172404329d0327db60b2bc8e95d958cd74a70011b150",
+    "app/assets/raw/benign-story/verification.json": "3673491addb72b9bdbcdd9cd6c3b6abac4ee5f77225e0cc6364fed4f52d4fe45",
+    "app/assets/raw/prepared-library/catalog.json": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79",
+    "app/assets/raw/prepared-library/catalog.ts": "a6175eaa4e0d32dd8128279b0d3bd3de7d065b1d8ac8eb25c15ff3aa2f3ce4fd"
+  },
+  "preview_sha256": {
+    "docs/design/centered/details-demo-bottom-browser.png": "5fa6ad712b6374641c002b386bf679c007e91ad459e29ff015d6dd0727893148",
+    "docs/design/centered/details-demo-browser.png": "531e757a7aa7da270db44eb64c16619740af423b8d1ed7bd9d182784b3490c7e",
+    "docs/design/centered/details-harbor-browser.png": "d8d60a82bd46957be49213aa7c2c89a57110e80e09e567b894ff4bb2620a8bde",
+    "docs/design/centered/library-browser.png": "0796e9d9e6e66600189517424fb15b2f017160a249184f2fe126eee15568c6b9",
+    "docs/design/centered/library-unavailable-browser.png": "3614d368685d8d40f3bd8e018ce1bfcb263849e6d607f6bf86849d7ff232d638",
+    "docs/design/centered/opening-browser.png": "8243f582fcad204cbf7b574435d75dda7a12c138edc773125674b93fe3bab010"
+  },
+  "preserved_mac_work": {
+    "latest_native_source": "06190c7adae8fffbe9dd9274fc0ef5af6ff772fc",
+    "receipt": "results/polish_native_validation.json",
+    "original_reports_commit": "f58ef98",
+    "scope": "Earlier layout and geometric film. Does not cover the centered layout, HarborOpening, current film or current media identities."
+  },
+  "remaining": [
+    "Build and observe current source on the Mac Vega Virtual Device",
+    "Record a matching simulator demo and review package",
+    "Existing publication licence questions and final publication/submission approval"
+  ],
+  "not_performed": [
+    "Native Vega execution in cloud",
+    "New AWS deployment",
+    "Release publication",
+    "Devpost submission",
+    "Paid Claude calls"
+  ]
+}

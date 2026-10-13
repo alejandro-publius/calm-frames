@@ -55,7 +55,7 @@ Check the final demo video before it is uploaded.
 Options:
   --out FILE          where to write the record. Default results/video_check.json
   --profile NAME      which flashmap profile to measure against. Default wcag
-  --max-seconds N     length limit in seconds. Default 180, which is 3:00
+  --max-seconds N     exclusive length limit in seconds. Default 180 (under 3:00)
   --skip-duration     do not check the length, and record that it was skipped
   --selftest          prove this script fails on a flashing file and passes on
                       a calm one. Builds both, measures both, deletes both
@@ -162,13 +162,13 @@ check_one() {
         return 2
         ;;
     esac
-    if awk -v d="$duration" -v m="$MAX_SECONDS" 'BEGIN { exit !(d > 0 && d <= m) }'; then
+    if awk -v d="$duration" -v m="$MAX_SECONDS" 'BEGIN { exit !(d > 0 && d < m) }'; then
       duration_verdict="pass"
       printf 'length:  %.2f s, under the %s s limit\n' "$duration" "$MAX_SECONDS"
     else
       duration_verdict="fail"
       status=1
-      printf 'length:  %.2f s, OVER the %s s limit\n' "$duration" "$MAX_SECONDS"
+      printf 'length:  %.2f s, AT OR OVER the %s s limit\n' "$duration" "$MAX_SECONDS"
     fi
   fi
   echo

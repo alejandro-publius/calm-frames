@@ -1,0 +1,96 @@
+{
+  "recorded_utc": "2026-10-11T05:39:00.882164+00:00",
+  "base_commit": "e592d2856e43907c914d33282346fa5bbfb1d710",
+  "branch": "codex/signed-scene-holds-2026-09-29",
+  "environment": {
+    "os": "Linux x86_64",
+    "python": "3.12.14",
+    "node": "22.23.3",
+    "ffmpeg": "7.1.5-0+deb13u1"
+  },
+  "changes": [
+    "Both example references select the existing self-install action instead of the earlier PyPI default.",
+    "The UI preflight imports the analyzer entry module instead of the empty checkout namespace.",
+    "The seek lint rule covers direct and literal computed writes, updates and calls while preserving named exemptions."
+  ],
+  "checks": {
+    "app": {
+      "command": "make test-app",
+      "exit_code": 0,
+      "passed": 1071,
+      "skipped": 4,
+      "snapshots_passed": 57
+    },
+    "python": {
+      "command": ".venv/bin/python -m pytest flashmap pipeline eval -q -m \"not slow\"",
+      "exit_code": 0,
+      "passed": 1750,
+      "deselected": 2,
+      "duration_seconds": 430.77
+    },
+    "typescript": {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    "lint": {
+      "command": "npm run lint",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 100
+    },
+    "tooling_regressions": {
+      "command": "node --test tools/seek_lint_guard.test.mjs tools/ui_flashmap.test.mjs",
+      "exit_code": 0,
+      "passed": 32
+    },
+    "ui_model": {
+      "screens": 36,
+      "wcag_exit": 0,
+      "broadcast_exit": 0,
+      "negative_control_exit": 0,
+      "hazard_scratch_removed": true
+    },
+    "action_reference": {
+      "commit": "1b088d17c53343025b2ca37cf7615e809709ba8b",
+      "both_examples_agree": true,
+      "remote_branch_ancestor": true,
+      "pinned_shell_installs_own_checkout": true,
+      "method": "Read the pinned action with git show and execute its install shell with an argument-recording Python stand-in; no install or hosted run."
+    },
+    "red_before_green": {
+      "missing_analyzer_regression_failed_before_fix": true,
+      "new_seek_guard_regressions_failed_before_fix": 7
+    },
+    "independent_review": "No concrete blockers in the final source diff."
+  },
+  "scope": "App and Python sources at the fetched base remain unchanged. Tooling tests, lint and UI checks were run after the final guard changes. The full Python run uses the retained offline Moto configuration.",
+  "limits": [
+    "No new native package, simulator observation, screen-reader observation or recording.",
+    "No hosted CI or Audit run independently inspected for this follow-up.",
+    "The seek guard does not follow aliases or dynamically computed property names.",
+    "The separate FFmpeg 6.1.1 still-drop finding and missing original reports remain open in the Mac handoff.",
+    "Entrant fields, licence clarification, final publication and submission remain open."
+  ],
+  "reviewed_file_sha256": {
+    ".github/workflows/ci.yml": "b0f7b9be115e182a77a0133d0751eef1e91d069a68e1590c8c0083fc9eb2638f",
+    "app/package.json": "c8963dc2a0518b11519df28ea5931de02d854d004e205d9faf1e33086773ce42",
+    "app/tools/seek_lint_guard.test.mjs": "53a08c545bc00ebce838a06fc7c616fd8f15dfbb503c8f49f67c67372e0db87d",
+    "app/tools/ui_flashmap.mjs": "6087f687757c25e94915780836f7700d36811cbf4a6141c6063bdf51d3b64e41",
+    "app/tools/ui_flashmap.test.mjs": "e4bc85b6e37e035a90b377cbef5f0f800be465df09fb71fd18e9965b18f276b1",
+    "docs/DECISIONS.md": "e1b8af04f29b60d9809bf1ae2a94a8a46ac9c79c6d8dd45459aa9f97f3bc9a98",
+    "docs/STATUS.md": "ff4baced159aa3ae749977a650a34b67f5685fa6a225bd2c6b9d047b55b3a394",
+    "flashmap/README.md": "cfe19d4867c2a03a03ec3016c8fe17eefdc891f08dc8bb60ab0cf6e36c101965",
+    "flashmap/examples/flash-check.yml": "704b0ef86dee9b7e2ec56188bf361e8ce6e047a38c328c08bf7b9fe4f6618ebd"
+  },
+  "local_log_sha256": {
+    ".logs/handoff-sync-app.log": "30be186e485e1bed32f0ed8e3b1a76d88be6240d00468e3cd063a541decdf09f",
+    ".logs/handoff-sync-python.log": "f424c5ba4c1fac9bb7cba4a5e49aacb514ceb5adf48f20f3324210b9eff7130d",
+    ".logs/handoff-sync-typecheck.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+    ".logs/handoff-sync-lint.log": "2af17294cb99669f8d3321043a1445a3b7ed2a43f026ae2b15a448843d0195f4",
+    ".logs/handoff-node-guards.log": "25462098222681ea0783ed78d9ffca67d369fcd81e19438199736f64f2527c7d",
+    ".logs/handoff-ui.log": "f67ee05679551ff3e36825483bf3052a141b1c6d1d17d1a65c3001c3d031877c",
+    ".logs/handoff-analyzer-preflight-red.log": "555a02f8fe3a8e12862f343f4a93c0a466f224a45f761c548d9bd0e53f4c531c",
+    ".logs/seek-lint-guard-red.log": "d3ac7ee49a52789969ab16df017f79f9cc620d4f28e38d25d2e9873d6dca42de",
+    ".logs/seek-lint-guard-green.log": "8ad5169938674cb950b2eb98ac5f2e1c2d27c10a95db67c9a618f00b10941214"
+  }
+}

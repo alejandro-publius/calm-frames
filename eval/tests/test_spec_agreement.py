@@ -42,6 +42,7 @@ def test_the_two_readings_of_the_ten_degree_field_agree():
 
 def test_the_two_readings_of_the_colour_arithmetic_agree():
     import numpy as np
+
     from flashmap import color as flashmap_color
 
     spec = load_spec()

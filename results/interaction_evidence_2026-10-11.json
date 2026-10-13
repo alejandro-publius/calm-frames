@@ -1,0 +1,335 @@
+{
+  "generated_utc": "2026-10-11T04:49:12.748640+00:00",
+  "scope": "Cloud interaction fixes, original report attachment and delivery checks, and safe UI analyzer controls. No native Vega execution, recording, deployment or publication.",
+  "source_commit": "e39c10c1c66a14796c95ec750ba54570a7c0046f",
+  "interaction_implementation_commit": "a7cade33a6c03699d0ac0bc42467c862292a7454",
+  "synchronized_remote_commit": "54954ab738959ee69af4ff24ed746fc723d6ff73",
+  "branch": "codex/signed-scene-holds-2026-09-29",
+  "checks": {
+    "app_passed": 1071,
+    "app_skipped": 4,
+    "snapshots_passed": 57,
+    "typecheck": "passed",
+    "scoped_app_lint": "passed",
+    "python_full": {
+      "passed": 1750,
+      "deselected": 2,
+      "duration_seconds": 571.2
+    },
+    "node_delivery_tests_passed": 23,
+    "catalog_resolution_tests_passed": 1,
+    "release_tests_passed": 37,
+    "ui_control_tests_passed": 16,
+    "ui_screens": 36,
+    "ui_profiles": [
+      "wcag",
+      "broadcast"
+    ],
+    "ui_negative_control": {
+      "held_ms": 100,
+      "flashing_frames": 20,
+      "grating_frames": 10,
+      "grating_pairs": 16,
+      "verdicts": {
+        "flashing_sequence_refused_by_wcag": true,
+        "grating_refused_by_broadcast": true,
+        "grating_passed_by_wcag_which_has_no_pattern_rule": true
+      },
+      "flash_wcag_exit": 1,
+      "pattern_broadcast_exit": 1,
+      "pattern_wcag_exit": 0,
+      "note": "The same painter, hold and encoder as the real screens. A control the check cannot refuse would mean the real run proves nothing."
+    },
+    "style": "passed",
+    "published_numbers": "passed",
+    "staged_secret_scan": "passed"
+  },
+  "validation_scope": [
+    "The first app run had three EPERM child-process failures; the full host-permitted rerun passed all enabled tests.",
+    "The complete app and Python suites ran before integrating 54954ab. App source/tests and all Python source/tests are identical in the merged tree.",
+    "The changed UI analyzer was rerun after integration, including both normal profiles, 16 guards and genuine measured negative controls.",
+    "The 37 release tests and preparation-report tests are included in the full Python count; targeted counts are not additional suite totals.",
+    "The report suffix parity guard passed in the final Node run. Original prepared media, captions, maps and catalogs have no changes against e043d80.",
+    "Current FFmpeg is 7.1.5-0+deb13u1. Passing current fixtures does not close the still-drop finding from another environment using ffmpeg 6.1.1."
+  ],
+  "guard_evidence": {
+    "initial_ui_regression_failures": 4,
+    "profile_handler_mutation_failed": true,
+    "report_guard_mutations": [
+      {
+        "name": "python_report_hash",
+        "exit_code": 1,
+        "killed": true
+      },
+      {
+        "name": "python_report_source",
+        "exit_code": 1,
+        "killed": true
+      },
+      {
+        "name": "python_report_checks",
+        "exit_code": 1,
+        "killed": true
+      },
+      {
+        "name": "python_report_outcome",
+        "exit_code": 1,
+        "killed": true
+      },
+      {
+        "name": "python_report_strict",
+        "exit_code": 1,
+        "killed": true
+      },
+      {
+        "name": "python_report_rollback",
+        "exit_code": 1,
+        "killed": true
+      },
+      {
+        "name": "node_report_hash",
+        "exit_code": 1,
+        "killed": true
+      },
+      {
+        "name": "node_report_source",
+        "exit_code": 1,
+        "killed": true
+      },
+      {
+        "name": "node_report_strict",
+        "exit_code": 1,
+        "killed": true
+      },
+      {
+        "name": "node_infinity_boundaries",
+        "exit_code": 1,
+        "killed": true
+      }
+    ],
+    "additional_full_suffix_regression_failed_before_fix": true,
+    "strict_release_regressions_failed_before_fix": 2,
+    "ui_control_regressions_failed_before_fix": 16
+  },
+  "verification_reports": {
+    "required": 2,
+    "present": 0,
+    "missing": [
+      "296b390bca42bca1a2339ff312a7ccb05c331d00186a7636b368c8df4af8446b",
+      "be5f6ecc536bb267b7a844cd08e4d5babc9f4f4769d05178d9edde8fd4585178"
+    ]
+  },
+  "strict_checks": {
+    "python_exit": 2,
+    "node_exit": 1,
+    "outcome": "Expected refusal: both original verification reports are absent."
+  },
+  "evidence_logs": [
+    {
+      "path": ".logs/finish-accessibility-app.log",
+      "sha256": "c8ac1ae0d84b78aa6b4598a334ef9ea69a6b7f785d2fa8513c05f1ce003d202f"
+    },
+    {
+      "path": ".logs/finish-accessibility-app-host.log",
+      "sha256": "46a229b5609f1bbd2f68880b30dfe77dc03a0711ffe0cc113e290853217aab26"
+    },
+    {
+      "path": ".logs/finish-accessibility-typecheck.log",
+      "sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828"
+    },
+    {
+      "path": ".logs/product-accessibility-red.log",
+      "sha256": "a24ee815bcdfb64df4ea76b1c42f1744fc366bb965d92ecbf6dd50deaa94633a"
+    },
+    {
+      "path": ".logs/product-profile-handler-red.log",
+      "sha256": "3ec8d04c874006fa5fedc070817d79b2c73183d6702a8167ac079a4168323fe7"
+    },
+    {
+      "path": ".logs/product-accessibility-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".logs/finish-interaction-python.log",
+      "sha256": "48279b9a941920aa384e83d1a1ee548197dedf08a06f2f396908d4cf2baa932b"
+    },
+    {
+      "path": ".logs/prepared-reports-node-green.log",
+      "sha256": "437bcb8ddc8a9abd70b3b1e3b5db6ad1b1c82e2f902a16bd72df8534a3266528"
+    },
+    {
+      "path": ".logs/finish-interaction-catalog.log",
+      "sha256": "37fc389e7a11404499e7cfe1e6d7310660630ca551a54643a7b909002be6ed77"
+    },
+    {
+      "path": ".logs/prepared-report-mutations.json",
+      "sha256": "8988f1285f256410d6ab6be346d8a337d66f158a5d7421aeed1b7c1511d92f5b"
+    },
+    {
+      "path": ".logs/node-report-full-suffix-red.log",
+      "sha256": "f8822f20caed11f6981158a962b19d56c38cbdc7b3961919af93855977c5392c"
+    },
+    {
+      "path": ".logs/report-release-red.log",
+      "sha256": "c1dc202a3b5f862e88c360405b7e77531fed923f794e1062cbc81b4aeef9c929"
+    },
+    {
+      "path": ".logs/report-release-green.log",
+      "sha256": "0de4d4b5e30944dd2e1a3657ea45951f2dd6b5ad29f745bba4981f10a0de93c6"
+    },
+    {
+      "path": ".logs/finish-report-python-inspect.json",
+      "sha256": "1196f5e2b5a0e6bb938b88c3ed287b859c31ca86b53a0f35d67c6d31695c7c12"
+    },
+    {
+      "path": ".logs/finish-report-python-strict.json",
+      "sha256": "0d2b9a690d34754b443075992c60dd7c0d4db039048d38867a06f239a570e27b"
+    },
+    {
+      "path": ".logs/finish-report-node-inspect.json",
+      "sha256": "c9c712c89b74e9ef5ed5bcfba0a709fc3033bf033f243f94b259880cf0f91441"
+    },
+    {
+      "path": ".logs/finish-report-node-strict.log",
+      "sha256": "6cefc16b0a2ba7ed777b36bf88d51eece9c4a7441e4cd2f6af55237d407e90cb"
+    },
+    {
+      "path": ".logs/finish-interaction-ui-integrated.log",
+      "sha256": "2634d0b729c01247af042bcfc79e9254fdd05cdcf131232b765150d4a395fe2a"
+    },
+    {
+      "path": ".logs/ui-control-guards-red.log",
+      "sha256": "9a8d413320a0e1da107d794fa12762a0a67479041edc99daf1a513be7aa91256"
+    },
+    {
+      "path": ".logs/ui-control-guards-green.log",
+      "sha256": "983adae7229f21c857c5a3b7ac7e2c18fa72c4c7173ad3159f7b6ee17178718f"
+    },
+    {
+      "path": ".logs/ui-control-actual-green.log",
+      "sha256": "479589e20089a934c3d53c626ba68c30b9b0180e51df922d4b920eaf3a748dd4"
+    },
+    {
+      "path": ".logs/finish-interaction-staged-secrets.log",
+      "sha256": "8029ec68f3e71a6b202cf933e731fff6794c8c8b8e44f5909469879ca5241f56"
+    },
+    {
+      "path": ".logs/finish-integration-staged-secrets.log",
+      "sha256": "0ac2ed90fe638d0238ccfa91f1df7d2725f7e4612a99db3d7e786fd619df2fa2"
+    }
+  ],
+  "changed_files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "fc89876a6008ac58126269f699e62cc6aca9b4505eac4ac032a063b5beee3045"
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "cb620e97ff20fc902b891f83bbfacae1e3b7784b8e20bf5d17223741a7b0cba2"
+    },
+    {
+      "path": "README.md",
+      "sha256": "8cc5767ab307842cd4bcadf5fc52f1dda1a6c7344af6a81fa7295ac37082a0d7"
+    },
+    {
+      "path": "app/src/calmframes/CreditsScreen.tsx",
+      "sha256": "2e1326974770086f5839c48f0af9d2f617f5803a35006cf83df06b501ea8850c"
+    },
+    {
+      "path": "app/src/calmframes/ProfilePicker.tsx",
+      "sha256": "880851f7f94f41b61f316156bfb5eb3874fc78473f83d598853e29a5c791cae5"
+    },
+    {
+      "path": "app/src/calmframes/StatusNotice.tsx",
+      "sha256": "d193212f4b96dee2666bde1b28596b2fdcceacea6728c25f45fc3932b374b965"
+    },
+    {
+      "path": "app/test/calmframes/credits.test.tsx",
+      "sha256": "91a557b9e858f2d59971f9cb148c2b0447975dbf915130ed8aeca91f20ddbab8"
+    },
+    {
+      "path": "app/test/calmframes/notices.test.tsx",
+      "sha256": "dc1420e4e2e796ba930872dc1e2f526e27c2ec710ee0fabfea106207122db0e9"
+    },
+    {
+      "path": "app/test/calmframes/profilePicker.test.tsx",
+      "sha256": "0a7662655d520abd7beba069b21ea69b64cebc9f1193ad3e9c1cf83e3222491a"
+    },
+    {
+      "path": "app/test/calmframes/screens.test.tsx",
+      "sha256": "06c2f14f6fb76169908ac7454a9d5b98cafbbb2de13a8e300c6ac6345112d5df"
+    },
+    {
+      "path": "app/test/screens/householdRestart.test.tsx",
+      "sha256": "d0446565161024d2b7a8a890bfc8c310c809628ca81d8a470a2d7c5d4380a36b"
+    },
+    {
+      "path": "app/tools/check_prepared_library.mjs",
+      "sha256": "db03dbdac2a6368a843d72f0008d838e72034ffbb79bead9bc9bacd3f7a47225"
+    },
+    {
+      "path": "app/tools/check_prepared_library.test.mjs",
+      "sha256": "474d0ab52933ac857bc4574228da65ca02219f0a55e169dbb93b3a3b401575b9"
+    },
+    {
+      "path": "app/tools/ui_flashmap.mjs",
+      "sha256": "39ebf6ff20b2fbffae09dd78e80535a441744daf9b64114294c9c392154047fe"
+    },
+    {
+      "path": "app/tools/ui_flashmap.test.mjs",
+      "sha256": "e112ed0c6db9ac67d3225d78681f370dceab5c065c000227ee66d6b2cbbf71e3"
+    },
+    {
+      "path": "docs/COMPLETION_CHECKLIST.md",
+      "sha256": "1f7eb141f793fd1fc53951475a76c16037d216a349f055f7ffeb714bb06a9372"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "sha256": "d7a548152b47ce04e604ad58fb1d2258ac45822c47094894834a7ed85a0e7c45"
+    },
+    {
+      "path": "docs/FEEDBACK.md",
+      "sha256": "7fb0aa5d5c51bc3dc649af2eb90143349da19a56d391ab928cbb9a1405103802"
+    },
+    {
+      "path": "docs/MAC_FINISH.md",
+      "sha256": "9d18c5ecf2e7008f3f28526fb5b8a8d03be37a28ae3581b5a5ac1b5064370ab5"
+    },
+    {
+      "path": "docs/RELEASE.md",
+      "sha256": "214a78c43bdf0a6f72a941d3d0b7666b88d7b00dc79b3f662e379868dacc110b"
+    },
+    {
+      "path": "docs/STATUS.md",
+      "sha256": "b7be84bd9ae0a54d453ee0e21ee07763fb0219774d969ed0f9499068f91f048a"
+    },
+    {
+      "path": "eval/tests/test_release.py",
+      "sha256": "7c79ebb31c5069e3758238a232c152ff527afc741daaaad884659a9ad490578d"
+    },
+    {
+      "path": "pipeline/packaged_library.py",
+      "sha256": "214dd2304e41f7c4dfda0e338f23e9d0b6dcf30e8d8ab2429f9fc4fd7b985fa0"
+    },
+    {
+      "path": "pipeline/tests/test_packaged_library.py",
+      "sha256": "2ed64c4fd1f2630fe2f0083c6909c82d60ebfe699c4cc6be11a307aefa3aeda8"
+    },
+    {
+      "path": "scripts/release.sh",
+      "sha256": "95f9099f047ba84a4b5f34da7fa4e0fd3e10a9ac1bb893f0ca8dd32e4ce20e2f"
+    }
+  ],
+  "push": {
+    "remote_verified_commit": "e39c10c1c66a14796c95ec750ba54570a7c0046f",
+    "verified_by": "Successful non-force push followed by matching git ls-remote."
+  },
+  "limits": [
+    "Mac Vega rebuild, native focus/accessibility/playback checks and refreshed demo remain open.",
+    "Both original prepared-library reports are absent; strict preparation must remain blocked until exact originals are attached.",
+    "The Mac verification follow-up for scene-hold start/middle/end coverage and encoder provenance remains open.",
+    "Amazon sample licence clarification, entrant details, publication links and final submission remain open.",
+    "No hosted check for this commit has been independently inspected; the applied cloud policy still excludes the GitHub API.",
+    "No Mac control, Claude subscription delegation or AWS deployment took place in this cloud batch."
+  ]
+}

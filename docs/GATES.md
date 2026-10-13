@@ -1,5 +1,13 @@
 # Gates, checkpoints and kill rules
 
+**Active scope override, Oct 9.** Alex requests a solo, Vega Virtual Device-only
+submission. Physical-target checkpoints B, E1 and E2 and TV rehearsal are not
+completion prerequisites. Their historical thresholds and outcomes remain
+unchanged; no simulator log can claim those gates passed. Current acceptance
+is the full benign simulator journey and verified screen recording in
+[COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md). Publication, submission,
+visibility changes and additional cloud costs still require final approval.
+
 Every gate result and every kill rule that fires is logged here with the date and evidence.
 
 ## Status board
@@ -7,14 +15,14 @@ Every gate result and every kill rule that fires is logged here with the date an
 | Item | Due | Status |
 |---|---|---|
 | HUMAN CHECKPOINT A: supported machine | Thu Sep 17 (kill if none by Sat Sep 19) | **Passed** Sep 17: macOS 15.1.1 on Apple M1 |
-| HUMAN CHECKPOINT F: outreach emails drafted and sent | Fri Sep 18 | Blocked: `docs/outreach-kit.md` not provided yet |
+| HUMAN CHECKPOINT F: outreach emails drafted and sent | Fri Sep 18 | Drafted Sep 18 without the kit, refreshed Oct 9, in `docs/outreach/`. Not sent: that is Alex's step, still open on Oct 11 |
 | VVD plays the renamed sample | Sat Sep 19 | **Done Sep 17**, two days early. Evidence in results/vvd_smoke.json |
 | HUMAN CHECKPOINT B: stick on Vega OS 1.2, developer mode, USB | Mon Sep 21 (SDK 0.23 fallback after) | Waiting on the stick |
-| Layering test (1.5) | When the stick is ready | **Harness built and tested.** Waiting on the stick. Steps below. |
-| GATE 1: overlay timing, 48 of 50 covered 150 ms early (HUMAN CHECKPOINT E1) | Wed Sep 23 (Fri Sep 25 latest) | **Harness built and tested.** Waiting on the stick and on the calm-timing marker clip. |
+| Layering test (1.5) | When the stick is ready | Virtual-device harness exists; physical target and benign captioned sham-hold fixture still required. No TV composition result. |
+| GATE 1: overlay timing, 48 of 50 covered 150 ms early (HUMAN CHECKPOINT E1) | Wed Sep 23 (Fri Sep 25 latest) | Read-only physical preflight added Sep 29. Waiting on the stick, physical-target runner adaptation and camera footage. Existing timing runner uses QEMU paths. |
 | HUMAN CHECKPOINT C: self-filmed flashing footage | Thu Sep 24 | Waiting |
-| GATE 2: 15 real flagged segments from 4 sources | Fri Sep 25 | Not started |
-| HUMAN CHECKPOINT D: AWS Paid plan, $20 alarm, credits requested | Before the first deploy | Waiting |
+| GATE 2: 15 real flagged segments from 4 sources | Fri Sep 25 | **Met** by screening day: 456 flagged segments across 6 sources in `results/screening.json`. None fired the red rule, which docs/STATUS.md records |
+| HUMAN CHECKPOINT D: AWS Paid plan, $20 alarm (the credit request clause is void since Oct 7 and waived) | Before the first deploy | **Confirmed** Oct 9 by Alex, in chat and at his own terminal. The stack was deployed that night; see the log |
 | GATE 3: end to end on the stick | Fri Oct 2 | Not started |
 | Upstream pull request opened | Mon Oct 12 | Not started |
 | HUMAN CHECKPOINT E2: 200 screen-level events | Oct 8 to 13 | Not started |
@@ -24,6 +32,85 @@ Every gate result and every kill rule that fires is logged here with the date an
 | HUMAN CHECKPOINT G: submit | Thu Oct 22 | |
 
 ## Log
+
+### 2026-10-09: HUMAN CHECKPOINT D confirmed, amended, and the stack deployed once
+
+**Confirmed** on Oct 9, 2026 by Alex, twice over: in chat, where he asked for
+the deploy, and at his own terminal, where he ran
+`make deploy CHECKPOINT_D=confirmed` himself and approved the IAM changes at
+the CDK prompt.
+
+What the checkpoint asks, item by item:
+
+| Item | State on Oct 9 |
+|---|---|
+| The account on the Paid plan | Done. CloudTrail shows the account plan upgrade at 23:03 PDT on Oct 8 |
+| The $20 budget alarm in place | The budget exists: <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollars a month, alerts at 50 and 80 percent of actual spend and 100 percent of forecast. **It cannot fire yet**: it counts only costs tagged `Project=calm-frames`, and that tag is not yet active for cost allocation. Activating it is Alex's (pipeline/infra/README.md) |
+| The $150 credit request in | **Void, and waived.** The credit request form closed on Oct 7, so this clause could no longer be met by anyone. Alex waived it and planned to use existing AWS credits; credit coverage and application to the bill were not verified |
+
+The amendment is recorded in docs/DECISIONS.md the same day.
+
+**The locks.** The line `scripts/aws_guard.sh` reads went into the deploy
+worktree's own copy of docs/STATUS.md (`~/calm-frames-aws-deploy`), which was
+never committed. The committed docs/STATUS.md does not carry it, on purpose,
+and `pipeline/tests/test_aws_guard.py` fails if it ever does, so the lock in this
+repository stays closed and the next deploy needs a person again.
+
+**What was deployed**, from a detached worktree at c5724de, with CDK CLI
+<!--n results/aws_deploy_2026-10-09.json:cli_version -->2.1142.0<!--/n--> and bootstrap version
+<!--n results/aws_deploy_2026-10-09.json:bootstrap_version -->32<!--/n-->:
+
+| What | Value |
+|---|---|
+| Stack | CalmFramesStack, us-east-1, created 00:21 to 00:25 PDT, updated 00:33 to wire in the cloud demo signing key |
+| Status | <!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n--> |
+| Resources | <!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n-->, with <!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways |
+| Outputs | <!--n results/aws_deploy_2026-10-09.json:stack.outputs_total -->5<!--/n--> |
+| IAM changes Alex approved | <!--n results/aws_deploy_2026-10-09.json:iam_approval.statement_rows -->20<!--/n--> statement rows, <!--n results/aws_deploy_2026-10-09.json:iam_approval.managed_policy_rows -->3<!--/n--> managed policies, <!--n results/aws_deploy_2026-10-09.json:iam_approval.security_group_rows -->1<!--/n--> security group rule |
+| GitHub OIDC role created | <!--n results/aws_deploy_2026-10-09.json:oidc_role_created -->no<!--/n--> |
+| Ingest image | c5724de and latest, <!--n results/aws_deploy_2026-10-09.json:image.size_mb -->279<!--/n--> MB, digest <!--n results/aws_deploy_2026-10-09.json:image.digest_short -->10f3500db514<!--/n--> |
+
+**Two runs of the calm marker clip**, `markers_packed.mp4`, never a `HAZARD_`
+file:
+
+| | Unsigned, 00:27 PDT | Signed with the cloud demo key, 00:35 PDT |
+|---|---|---|
+| Steps run | <!--n results/aws_deploy_2026-10-09.json:runs.0.steps_run -->11<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.steps_run -->12<!--/n--> |
+| Verify passed | <!--n results/aws_deploy_2026-10-09.json:runs.0.verify_passed -->no<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.verify_passed -->yes<!--/n--> |
+| Objects published | <!--n results/aws_deploy_2026-10-09.json:runs.0.published_objects -->0<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.published_objects -->16<!--/n--> |
+| Catalog rows | <!--n results/aws_deploy_2026-10-09.json:runs.0.catalog_rows -->0<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.catalog_rows -->1<!--/n--> |
+| Exit code | <!--n results/aws_deploy_2026-10-09.json:runs.0.exit_code -->1<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.exit_code -->0<!--/n--> |
+| Task started to stopped, seconds | <!--n results/aws_deploy_2026-10-09.json:runs.0.seconds_started_to_stopped -->42.6<!--/n--> | <!--n results/aws_deploy_2026-10-09.json:runs.1.seconds_started_to_stopped -->70.4<!--/n--> |
+
+The unsigned run is the fail closed rule holding on AWS: the whole analysis ran
+and nothing was published. After the signed run, CloudFront served the title
+entry, a poster and the HLS master playlist with HTTP 200, and a read back at
+02:40 PDT found the same, plus a 206 for a byte range. The cloud demo key is not
+one the app trusts, so these maps play on no TV (docs/SECURITY.md, "A signing
+key in the cloud"). The run used a 12 second calm clip; nothing here measures a
+real title's time or cost.
+
+The full record, with every account identifier left out, is
+`results/aws_deploy_2026-10-09.json`.
+
+### 2026-09-29: physical-TV prerequisites checked, no device session run
+
+The SDK's actual read-only connection check reports no connected device; its
+virtual-device status is stopped. The current armv7 Debug archive contains the
+exact reviewed calm video and map, and passes package-identity preflight.
+`eval/benign_hardware_validation.py` returns a blocked receipt and exit status
+2, with every installation, playback, composition and physical gate flag false.
+The Makefile target runs only this preflight, not an install or playback session.
+
+Its synthetic SDK/archive guard tests do not establish native decoding or TV
+behavior. HUMAN CHECKPOINT B still needs the physical stick, developer mode,
+explicit serial and pinned Vega OS 1.2 build 2101020054720. The bundled calm
+gradient has audio but no captions or scheduled scene images, so it cannot
+validate their layering. A checked benign captioned fixture with labelled sham
+holds must be integrated before composition tests. The existing `stick-day`
+timing path calls a QEMU-specific runner; do not run it unchanged on hardware.
+HUMAN CHECKPOINT E1 still requires real-TV footage at locked 240 fps. No benign
+media was opened or played in this preflight and no AWS connection was made.
 
 ### 2026-09-17: HUMAN CHECKPOINT A passed
 Detected macOS 15.1.1 (24B91) on an Apple M1 (arm64) with 16 GB memory and 1.2 TiB free disk. Vega SDK 0.24 supports macOS on Apple silicon. Vega CLI 1.3.4 and SDK 0.24.9914 installed cleanly the same morning. Details in docs/ENVIRONMENT.md.
