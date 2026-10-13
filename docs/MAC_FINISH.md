@@ -1,7 +1,7 @@
 # Finish the polished simulator demo on the Mac
 
-Design baseline: `54dab0b`, plus the shared fixes through `9afacc0`. This handoff
-uses the accompanying updated build, capture and review tools. Sync those changes too. Use the current
+Design baseline: `2f15069`, with the Handlebars patch in `41c34fc` and the
+current demo assembler and recording plan. Sync the full shared branch. Use the current
 [completion checklist](COMPLETION_CHECKLIST.md) if later work changes this state.
 These Mac commands were checked against repository scripts and earlier receipts;
 they have not been executed in the cloud session.
@@ -164,8 +164,10 @@ Record fresh observations for these journeys:
 1. Reach every library action with the D-pad; check focus, Back and return focus.
    Switch profiles and confirm focus remains visible while the choice is saved.
    Repeated presses during that save must not write another choice.
-   Check that Harbor's concise demo-film synopsis and the full library row fit
-   without clipping; its details still carry the preparation disclosure.
+   Check that Harbor's panorama reaches the right edge, the full library row
+   stays within the reading margins, and the title/details copy has no enclosing
+   panel. Focus must remain clear on the quiet More info and profile actions.
+   The details still carry the preparation disclosure and full viewing settings.
 2. Scroll the entire details, setup, parental controls and settings pages.
 3. Check incorrect PIN, Delete correction, successful unlock and relocking.
 4. Check fresh setup only in a preserved or separate test household; never erase
@@ -234,9 +236,10 @@ cannot establish that its animated frames pass. Preserve the capture and results
 as evidence. The final assembled submission video must also pass both checks.
 
 Save new captures to a fresh local directory. Preserve the earlier recordings,
-package, demo and receipts. Reuse the sequence in [SHOT_MANIFEST.md](SHOT_MANIFEST.md)
-and [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md), replacing the actual app shots with the
-polished build and updating claims to match the new observations.
+package, demo and receipts. Follow the current [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md),
+which now asks for native video of library navigation, details, PIN correction
+and parental controls. [SHOT_MANIFEST.md](SHOT_MANIFEST.md) records the older cut
+only. Update every narration claim to match the new observations.
 
 The assembler now requires an explicit capture manifest. Generate its template:
 
@@ -265,6 +268,10 @@ bash eval/check_video.sh build/submission-polish/Calm-Frames-demo-English.mp4 \
 The preflight checks the supplied hashes and media before Mac assembly.
 Check audio for clipping and intelligibility, captions for readability, and
 the entire finished edit for stale frames or accidental desktop/account details.
+The current assembler preserves the full app picture above its subtitle area,
+uses the bundled Inter font and produces short timed SRT cues. Review the cue
+timing against Samantha's actual delivery. It mixes native sound without the
+older automatic boost, so listen to the quiet portions after narration too.
 Record the exact final source commit and fresh package/video hashes:
 
 ```sh

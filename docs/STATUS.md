@@ -4,13 +4,31 @@ Updated Oct 13, 2026.
 
 ## 0. Where things stand
 
+### Oct 13: the next demo and submission story are prepared
+
+The demo assembler now keeps the complete native picture above its subtitles,
+uses the app's Inter fonts and displays narration in short timed cues. Native
+audio stays at its captured level through a limiter. Both still and video
+encoders passed benign fixture checks, including controls that exposed hidden
+source pixels and clipping when those protections were removed. This is encoder
+evidence, not a new Vega recording or Mac narration run.
+
+The recording plan puts live remote interaction near the opening and preserves
+time to hear the practice holds. [SUBMISSION_COPY.md](SUBMISSION_COPY.md) is the
+shorter project story, and [MAC_FINISH.md](MAC_FINISH.md) names the current design
+and capture work. The earlier private review archive was downloaded and its
+hash matched GitHub, but the two original library verification reports were not
+inside it. Native packaging, recording and release work remain open in the
+completion checklist. Receipt: `results/submission_preparation_2026-10-13.json`.
+
 ### Oct 13: the new dependency Audit failure fixed
 
 The shared design commit passed hosted implementation CI. Its Audit job found
 a new Handlebars advisory under ts-jest. The lockfile now selects the patched
 4.7.10 release, the app bill of materials is regenerated with the runner's npm,
 and Handlebars has left the tooling exception. The current local audit passes
-the existing policy, and the affected UI tests pass. No other dependency moved
+the existing policy, and the affected UI tests pass. Hosted Audit also passed
+on `41c34fc`. No other dependency moved
 and no exception date was extended. Receipt: `results/audit_patch_2026-10-13.json`.
 
 ### Open layouts for the cinematic design

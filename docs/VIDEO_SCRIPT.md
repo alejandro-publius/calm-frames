@@ -1,56 +1,73 @@
-# English demo script
+# English demo script and recording plan
 
-Earlier native cut, recorded October 10 before the later cloud polish: `build/submission-redesign/Calm-Frames-demo-English.mp4`.
-Actual Vega Virtual Device recordings and disclosed still captures, with editorial
-brand/status cards. Narration is macOS Samantha text to speech in English.
-Burned-in subtitles and a companion SRT are included. No human voice, customer
-feedback, medical outcome or physical-device measurement is implied.
+This is the next recording plan for the current cinematic design. It is a plan,
+not a claim that a new native video exists. The October 10 cut and its exact
+narration remain preserved in `results/redesign_demo_manifest_2026-10-10.json`
+and [SHOT_MANIFEST.md](SHOT_MANIFEST.md). Do not replace their source identities.
 
-The 2:10 narration below is the approved sentence. The recorded cut named above
-still carries the earlier sentence, as `results/redesign_demo_manifest_2026-10-10.json`
-records, so it has to be re-rendered (`eval/assemble_demo.py`, then
-`eval/check_video.sh` for wcag and broadcast, then the manifest) before it is
-uploaded. That re-render rides the Mac rebuild on the Oct 11 list.
-
-Encoded duration and hash: `results/redesign_demo_manifest_2026-10-10.json`.
-Finished-file gates: `results/redesign_video_check.json` and
-`results/redesign_video_check_broadcast.json`.
+The story follows a family's viewing journey: choose a title, understand its
+practice holds, keep the sound and captions going, then show the parent and
+preparation controls behind the experience. The first app shot should show
+actual D-pad interaction. Use the original non-flashing Harbor media throughout.
 
 ## Next recording plan
 
-The timings follow the earlier edit. The approved sentence at 2:10 is a revision
-for the next recording; the saved video still contains the older narration.
-Every claim must be checked against the fresh native session before assembly.
+The target is 2:36, leaving room below the required three-minute limit. These
+are planned edit lengths; the assembled file is measured separately. The exact
+narration is also the default in `eval/assemble_demo.py`. Review each claim
+against the fresh native observations before filling the capture manifest.
 
-| Start | Duration | Narration |
-|---|---|---|
-| 0:00 | 6 s | Calm Frames. A calmer way to watch, for families where a child has photosensitive epilepsy. |
-| 0:06 | 10 s | Calm Frames is running on the Vega Virtual Device. This redesigned library contains the checked videos packaged with the app. |
-| 0:16 | 12 s | Harbor is original, non-flashing media. The scene hold demo adds two scheduled holds. These are examples, not detected flashing. |
-| 0:28 | 26 s | Watch the scheduled holds. The recorded tone and English captions continue while the picture holds a calm scene. |
-| 0:54 | 22 s | The remote seeks, pauses, and resumes. Interrupted playback uses an opaque cover. This demonstrates behavior, not physical screen timing. |
-| 1:16 | 9 s | A PIN protects parental controls. Incorrect entries stay locked, and Delete corrects a partial entry. |
-| 1:25 | 12 s | Parents choose Standard, Broadcast, or Extra cautious. Each choice was tested in Vega. A child cannot relax the settings chosen for everyone. |
-| 1:37 | 12 s | Settings survive restart. Scheduled demo holds are excluded from exposure history. Actual cover history is not saved across app restarts. |
-| 1:49 | 21 s | This separate Harbor title uses real local preparation without the demonstration holds. The app plays its checked, packaged rendition. The source had no detected flashing. |
-| 2:10 | 20 s | The saved AWS run published a signed title. The app uses its local library. Detection can miss flashing. Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device. |
-| 2:30 | 6 s | Calm Frames. A calmer way to watch. |
+| Start | Length | Picture to record | Narration |
+|---|---|---|---|
+| 0:00 | 6 s | Editorial opening using the approved Calm Frames brand tile. | Calm Frames helps families affected by photosensitivity share a calmer movie night. |
+| 0:06 | 10 s | Record real D-pad focus across Watch now, More info and the Harbor demo shelf card. Keep the full library in view. | On the Vega Virtual Device, families browse checked titles with a remote. The quiet library opens directly into a story. |
+| 0:16 | 12 s | Open Harbor demo, show the Practice holds label and the picture timeline, then focus Watch demo. | Harbor is our original, non-flashing demo film. Two scheduled practice holds show the player in action. These are examples, not detected flashing. |
+| 0:28 | 26 s | One continuous native take containing both practice holds, changing English captions and the recorded tone. Leave the un-narrated remainder audible. | When the picture holds a checked still, the recorded tone and English captions continue. Watch both scheduled holds, without showing hazardous footage. |
+| 0:54 | 22 s | Record pause, resume, forward/back seek and the opaque interruption fallback. Preserve the real action order. | Every seek passes through the same guard. Pause, skip or go back with the remote; interrupted playback keeps an opaque cover in place. |
+| 1:16 | 9 s | Use a synthetic test household to show a wrong PIN, Delete and correction. Record the actual remote interaction. | Parental controls stay behind a PIN. A clear Delete action makes corrections easy. |
+| 1:25 | 12 s | Show the viewing preset, room and separate motion/sound settings. Capture enabled effects separately for acceptance before featuring them. | Parents choose the viewing preset and room. Child profiles can only make settings stricter. Gentle artwork motion and selection sounds are optional. |
+| 1:37 | 12 s | An actual native still of the observed history state. Separately observe restart persistence; never imply this still demonstrates a restart. | The household choices stay saved after restarting. Practice holds never enter exposure history, and actual cover history clears when the app restarts. |
+| 1:49 | 21 s | Play the prepared Harbor title, which has no practice holds, after its checked details page. | This version of Harbor went through the real preparation pipeline. Its signed map is checked before playback; the rendition is packaged with the app. |
+| 2:10 | 20 s | Editorial status card: saved AWS publication is separate from the app's local library; include detection limits and the approved medical-device wording. | AWS has also published a signed title through a separate cloud pipeline. Detection can miss flashing. Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device. |
+| 2:30 | 6 s | Editorial closing using the approved mark and brand line. Mention the reusable analyzer and hook. | A reusable analyzer and player hook, built for calmer family viewing. |
 
-## Prepare the next cut
+## Presentation
 
-Follow [MAC_FINISH.md](MAC_FINISH.md) for the current build, capture and assembly
-commands. The assembler requires an explicit capture manifest, package hash,
-full source commit and fresh output paths. Generate an unfilled plan with
-`.venv/bin/python eval/assemble_demo.py --write-template .logs/polish-capture-plan.json`.
-Populate it only from the newly observed native build, validate with `--dry-run`,
-then assemble on the Mac and run both finished-video checks.
+The assembler uses the app's bundled Inter fonts, teal background, cream
+subtitles and saffron capture labels. It fits the complete source image above
+a dedicated subtitle area, preserving the bottom of the app and its own
+captions. Narration appears in short cues of at most two measured lines, then
+clears so the native footage can carry the scene. The companion SRT uses the
+same cues. Cue timing is estimated from spoken word share and the measured
+narration length; check it against the actual voice before publication.
 
-The narration above records the earlier cut. Review and update each claim for
-the new observations and current security findings. Old recordings do not
-establish the appearance or behavior of the latest source. Preserve their
-original hashes and receipts rather than relabelling them.
+Narration is disclosed as macOS Samantha synthetic speech. Native audio is mixed
+at its captured level through a peak limiter, with no automatic boost. Listen to
+the complete result: a limiter is not proof that the film tone, menu sounds and
+narration are all intelligible. Keep the longer holds/transport shots quiet after
+the voice finishes so a judge can hear what the player does.
 
-The app uses a compiled local library. Saved AWS publication is a separate
-pipeline. Detection misses and unresolved dependency security findings are
-stated. Practice holds are synthetic and excluded from exposure history.
-Public upload, the video URL and logged-out viewing check remain pending.
+Actual stills, native recordings and editorial cards remain visibly labelled.
+The Harbor practice holds are scheduled examples, not detector findings. The
+saved AWS publication is a separate pipeline; the app uses its local packaged
+library. This recording does not measure physical television timing.
+
+## Assemble the matching cut
+
+Follow [MAC_FINISH.md](MAC_FINISH.md) for the current build and native capture.
+Generate a fresh, unfilled plan:
+
+```sh
+.venv/bin/python eval/assemble_demo.py --write-template .logs/final-capture-plan.json
+```
+
+Supply the full source commit, installed package hash, actual capture files and
+their hashes. Use fresh output paths. Run `--dry-run`, assemble on the Mac, then
+run `eval/check_video.sh` under both WCAG and broadcast with `--max-seconds 179`.
+Check the finished audio, subtitle timing, source framing and every narration
+claim. Preserve the finished-video checks and the new source manifest.
+
+Browser previews can illustrate the design in the project gallery, clearly
+labelled as previews. They cannot replace the native footage required by the
+Fire TV track. Publication, the final video URL and logged-out viewing remain
+separate steps after the matched recording is ready.

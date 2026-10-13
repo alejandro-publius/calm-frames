@@ -1,13 +1,14 @@
 # Calm Frames completion checklist
 
-Updated October 11, 2026. Solo entry, identity-verified Amazon Developer account.
+Updated October 13, 2026. Solo entry, identity-verified Amazon Developer account.
 Deadline October 23 at noon Pacific. Vega Virtual Device exclusively.
 
 ## Finish line
 
 This is the single completion checklist. Alex subsequently selected a cinematic
-storybook visual pass, now combined with Claude's pushed improvements. Finish
-that presentation before the matching native build and final demo.
+storybook visual pass, now combined with Claude's pushed improvements.
+The current presentation source is pushed; finish the matching native build and
+final demo next.
 The detailed evidence and outstanding decisions remain below.
 
 - [ ] Push the checked final app source and prepare its matching package with
@@ -201,11 +202,17 @@ counts are separate in `results/cloud_continuation_2026-10-10.json`.
 
 That handoff preserved the approved native package inputs through `8271b38`.
 The later design polish requires a fresh Mac build and native checks. Direct
-cloud verification of the earlier private release assets awaits
-the saved GitHub API network setting; Git source synchronization works.
+cloud verification of the earlier private release assets was recovered on
+October 13: the review ZIP download matches GitHub's SHA-256. Neither missing
+original verification report was found in that archive or its nested source ZIP.
 
 ## Current release-preparation tools
 
+- [x] The current demo assembler preserves the complete native picture above
+  short Inter subtitles, keeps native audio at its captured level and limits
+  the mixed audio peak. Encoder checks use benign synthetic fixtures only.
+  [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) is the fresh recording plan;
+  [SUBMISSION_COPY.md](SUBMISSION_COPY.md) is the copy-ready project story.
 - [x] Synced the shared source through `9afacc0` and pushed the simulator-focused
   preparation tools as `52ecf14`; the GitHub branch hash matched.
 - [x] App and Python suites, final preparation guards, TypeScript, SBOM comparison,
@@ -225,9 +232,10 @@ the saved GitHub API network setting; Git source synchronization works.
 
 ## Still open
 
-- [ ] Review the current design refinements on Vega: the concise library
-  synopsis, stable parent saving feedback and setup Back controls. The source
-  changes and public design references are in
+- [ ] Review the current cinematic library and open text layouts on Vega,
+  including quiet secondary actions, stable parent saving feedback and setup
+  Back controls. The latest previews and source receipt are on
+  [the design page](design/README.md); the earlier interaction changes are in
   [SEAMLESS_REVIEW.md](design/SEAMLESS_REVIEW.md).
 - [ ] Complete the motion and sound acceptance in [MAC_FINISH.md](MAC_FINISH.md):
   Off defaults, On/Off persistence, reduced-motion and foreground behavior,
@@ -247,9 +255,9 @@ the saved GitHub API network setting; Git source synchronization works.
   of `@xmldom/xmldom` 0.8.15, `lodash` is 4.18.1) and the Harbor shelf copy, so
   the same rebuild covers them; if the Vega build or playback rejects the
   parser alias, the one line in `app/package.json` reverts.
-- [ ] Re-render the narration before any upload: the recorded cut still says
-  the earlier 2:10 sentence, and `docs/VIDEO_SCRIPT.md` now carries the approved
-  one. Follow [MAC_FINISH.md](MAC_FINISH.md) to supply the assembler with fresh
+- [ ] Re-render the narration before any upload: the new recording plan uses
+  live remote interaction earlier and shorter subtitle cues. Follow
+  [MAC_FINISH.md](MAC_FINISH.md) to supply the assembler with fresh
   capture and package hashes, then run both finished-video checks before
   preparing replacement assets.
 - [ ] Capture the polished native screens and playback, refresh the English

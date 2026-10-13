@@ -14,44 +14,48 @@ import platform
 import re
 import subprocess
 import sys
-import textwrap
 from dataclasses import dataclass
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-FONT = '/System/Library/Fonts/Supplemental/Arial.ttf'
+FONT = ROOT / 'app/assets/fonts/InterRegular.ttf'
+LABEL_FONT = ROOT / 'app/assets/fonts/InterMedium.ttf'
+FRAME_HEIGHT = 880
+CAPTION_WIDTH = 1728
+CAPTION_SIZE = 38
+CAPTION_LINE_HEIGHT = 48
 KINDS = {'native_still', 'native_video', 'editorial'}
 PROVENANCE_NOTE = (
     'Capture observations and the package/source association are operator-supplied. '
     'Validated hashes establish file identity; they do not independently prove '
     'that these frames were observed in Vega or built from the stated commit.'
 )
-# Timing and narration from the reviewed demo, without its old capture identity.
+# The next recording plan. Source identity stays blank until a fresh native run.
 TEMPLATE_SHOTS = [
     ('brand-opening', 'editorial', 0, 6,
-     'Calm Frames. A calmer way to watch, for families where a child has photosensitive epilepsy.'),
-    ('library', 'native_still', 0, 10,
-     'Calm Frames is running on the Vega Virtual Device. This redesigned library contains the checked videos packaged with the app.'),
-    ('details', 'native_still', 0, 12,
-     'Harbor is original, non-flashing media. The scene hold demo adds two scheduled holds. These are examples, not detected flashing.'),
+     'Calm Frames helps families affected by photosensitivity share a calmer movie night.'),
+    ('library', 'native_video', 0, 10,
+     'On the Vega Virtual Device, families browse checked titles with a remote. The quiet library opens directly into a story.'),
+    ('details', 'native_video', 0, 12,
+     'Harbor is our original, non-flashing demo film. Two scheduled practice holds show the player in action. These are examples, not detected flashing.'),
     ('harbor-holds', 'native_video', 2, 26,
-     'Watch the scheduled holds. The recorded tone and English captions continue while the picture holds a calm scene.'),
+     'When the picture holds a checked still, the recorded tone and English captions continue. Watch both scheduled holds, without showing hazardous footage.'),
     ('transport', 'native_video', 2, 22,
-     'The remote seeks, pauses, and resumes. Interrupted playback uses an opaque cover. This demonstrates behavior, not physical screen timing.'),
-    ('pin', 'native_still', 0, 9,
-     'A PIN protects parental controls. Incorrect entries stay locked, and Delete corrects a partial entry.'),
-    ('parent', 'native_still', 0, 12,
-     'Parents choose Standard, Broadcast, or Extra cautious. Each choice was tested in Vega. A child cannot relax the settings chosen for everyone.'),
+     'Every seek passes through the same guard. Pause, skip or go back with the remote; interrupted playback keeps an opaque cover in place.'),
+    ('pin', 'native_video', 0, 9,
+     'Parental controls stay behind a PIN. A clear Delete action makes corrections easy.'),
+    ('parent', 'native_video', 0, 12,
+     'Parents choose the viewing preset and room. Child profiles can only make settings stricter. Gentle artwork motion and selection sounds are optional.'),
     ('history', 'native_still', 0, 12,
-     'Settings survive restart. Scheduled demo holds are excluded from exposure history. Actual cover history is not saved across app restarts.'),
+     'The household choices stay saved after restarting. Practice holds never enter exposure history, and actual cover history clears when the app restarts.'),
     ('prepared-harbor', 'native_video', 2, 21,
-     'This separate Harbor title uses real local preparation without the demonstration holds. The app plays its checked, packaged rendition. The source had no detected flashing.'),
+     'This version of Harbor went through the real preparation pipeline. Its signed map is checked before playback; the rendition is packaged with the app.'),
     ('prototype-status', 'editorial', 0, 20,
-     'The saved AWS run published a signed title. The app uses its local library. Detection can miss flashing. Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.'),
+     'AWS has also published a signed title through a separate cloud pipeline. Detection can miss flashing. Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.'),
     ('brand-closing', 'editorial', 0, 6,
-     'Calm Frames. A calmer way to watch.'),
+     'A reusable analyzer and player hook, built for calmer family viewing.'),
 ]
 
 
@@ -242,6 +246,110 @@ def stamp(seconds):
     return f'{ms//3600000:02}:{ms//60000%60:02}:{ms//1000%60:02},{ms%1000:03}'
 
 
+def caption_cues(text: str, speech_seconds: float, duration: float) -> list[dict]:
+    """Fit readable phrases to the bundled font; timing follows spoken word share.
+
+    These are estimated subtitle timings, not speech alignment or observations
+    of native playback. Each cue uses at most two measured lines.
+    """
+    if not math.isfinite(speech_seconds) or not 0 < speech_seconds <= duration - 0.3:
+        raise ValueError('Narration must fit inside its shot with time to finish')
+    words = text.split()
+    if not words:
+        raise ValueError('Narration cannot be empty')
+    font = ImageFont.truetype(str(FONT), CAPTION_SIZE)
+    lines: list[str] = []
+    current: list[str] = []
+    for word in words:
+        if font.getlength(word) > CAPTION_WIDTH:
+            raise ValueError('A narration word is too wide for the subtitle area')
+        candidate = ' '.join([*current, word])
+        if current and (font.getlength(candidate) > CAPTION_WIDTH or len(current) >= 9):
+            lines.append(' '.join(current))
+            current = []
+        current.append(word)
+    if current:
+        lines.append(' '.join(current))
+    cues = []
+    spoken_words = 0
+    for index in range(0, len(lines), 2):
+        pair = lines[index:index + 2]
+        start = speech_seconds * spoken_words / len(words)
+        spoken_words += sum(len(line.split()) for line in pair)
+        end = speech_seconds * spoken_words / len(words)
+        if spoken_words == len(words):
+            end = min(duration, end + 0.5)
+        cues.append({'start_seconds': start, 'end_seconds': end, 'lines': pair})
+    return cues
+
+
+def render_shot(shot: Shot, voice: Path, directory: Path, index: int) -> tuple[Path, list[dict]]:
+    """Fit the whole source above the subtitles without cropping native captions.
+
+    This encoder can be exercised with benign synthetic fixtures on Linux.
+    Producing the actual narrated demo still requires the Mac capture and TTS.
+    """
+    speech_seconds = float(media_info(voice)['format']['duration'])
+    cues = caption_cues(shot.narration, speech_seconds, shot.duration)
+    footer = Image.new('RGBA', (1920, 1080), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(footer)
+    draw.rectangle((0, FRAME_HEIGHT, 1920, 1080), fill='#102F3A')
+    label = {
+        'native_still': 'Vega Virtual Device | Actual still capture',
+        'native_video': 'Vega Virtual Device | Actual video capture',
+        'editorial': 'Calm Frames | Editorial card',
+    }[shot.kind]
+    draw.text((96, 898), label + ' | Synthetic narration',
+              font=ImageFont.truetype(str(LABEL_FONT), 24), fill='#E6A957', anchor='lt')
+    footer_path = directory / f'footer-{index:02}.png'
+    footer.save(footer_path)
+    font = ImageFont.truetype(str(FONT), CAPTION_SIZE)
+    overlays = []
+    for cue_index, cue in enumerate(cues):
+        overlay = Image.new('RGBA', (1920, 1080), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(overlay)
+        for line_index, line in enumerate(cue['lines']):
+            draw.text((96, 940 + line_index * CAPTION_LINE_HEIGHT), line,
+                      font=font, fill='#F3E8D3', anchor='lt')
+        path = directory / f'caption-{index:02}-{cue_index:02}.png'
+        overlay.save(path)
+        overlays.append(path)
+    args = ['ffmpeg', '-v', 'error', '-n']
+    still = shot.kind != 'native_video'
+    if still:
+        args += ['-loop', '1', '-framerate', '30', '-i', str(shot.source)]
+    else:
+        args += ['-ss', str(shot.start), '-i', str(shot.source)]
+    args += ['-loop', '1', '-i', str(footer_path), '-i', str(voice)]
+    for overlay in overlays:
+        args += ['-loop', '1', '-i', str(overlay)]
+    graph = (
+        f'[0:v]scale=1920:{FRAME_HEIGHT}:force_original_aspect_ratio=decrease:'
+        'force_divisible_by=2,setsar=1,fps=30,'
+        'pad=1920:1080:(ow-iw)/2:0:color=0x102F3A[frame];'
+        '[frame][1:v]overlay=0:0:shortest=1[caption0];'
+    )
+    for cue_index, cue in enumerate(cues):
+        graph += (
+            f'[caption{cue_index}][{cue_index + 3}:v]overlay=0:0:shortest=1:'
+            f"enable='gte(t,{cue['start_seconds']:.6f})*lt(t,{cue['end_seconds']:.6f})'"
+            f'[caption{cue_index + 1}];'
+        )
+    if still:
+        graph += '[2:a]aresample=48000,apad,alimiter=limit=0.95:level=0[outa]'
+    else:
+        graph += (
+            '[0:a]aresample=48000,apad[native];[2:a]aresample=48000,apad[voice];'
+            '[native][voice]amix=inputs=2:normalize=0,alimiter=limit=0.95:level=0[outa]'
+        )
+    dest = directory / f'part-{index:02}.mp4'
+    args += ['-filter_complex', graph, '-map', f'[caption{len(cues)}]', '-map', '[outa]',
+             '-t', str(shot.duration), '-c:v', 'libx264', '-preset', 'fast', '-crf', '20',
+             '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-ac', '2', str(dest)]
+    run(args)
+    return dest, cues
+
+
 def assemble(plan: Plan) -> dict:
     """Render on macOS only, after all source hashes and media passed preflight."""
     if platform.system() != 'Darwin':
@@ -261,49 +369,17 @@ def assemble(plan: Plan) -> dict:
         textfile = plan.output / f'voice-{i:02}.txt'
         textfile.write_text(shot.narration + '\n')
         run(['say', '-v', 'Samantha', '-r', '165', '-o', str(voice), '-f', str(textfile)])
-        voice_seconds = float(media_info(voice)['format']['duration'])
-        if voice_seconds > shot.duration - 0.3:
-            raise ValueError(f'{shot.name}: narration is too long; revise the plan and choose new output paths')
-        overlay = Image.new('RGBA', (1920, 1080), (0, 0, 0, 0))
-        draw = ImageDraw.Draw(overlay)
-        draw.rectangle((0, 944, 1920, 1080), fill=(12, 32, 39, 255))
-        label = {
-            'native_still': 'Vega Virtual Device | Actual still capture',
-            'native_video': 'Vega Virtual Device | Actual video capture',
-            'editorial': 'Calm Frames | Editorial card',
-        }[shot.kind]
-        draw.text((55, 952), label, font=ImageFont.truetype(FONT, 23), fill='#e6ab55')
-        lines = textwrap.wrap(shot.narration, width=110)
-        font = ImageFont.truetype(FONT, 30 if len(lines) > 2 else 34)
-        for j, line in enumerate(lines):
-            draw.text((55, 987 + j * 29), line, font=font, fill='#f4ead3')
-        overlay_path = plan.output / f'footer-{i:02}.png'
-        overlay.save(overlay_path)
-        args = ['ffmpeg', '-v', 'error', '-n']
-        still = shot.kind != 'native_video'
-        if still:
-            args += ['-loop', '1', '-framerate', '30', '-i', str(shot.source)]
-        else:
-            args += ['-ss', str(shot.start), '-i', str(shot.source)]
-        args += ['-loop', '1', '-i', str(overlay_path), '-i', str(voice)]
-        graph = '[0:v]scale=1920:1080,setsar=1,fps=30[v];[v][1:v]overlay=0:0:shortest=1[outv];'
-        if still:
-            graph += '[2:a]aresample=48000,apad[outa]'
-        else:
-            graph += '[0:a]aresample=48000,volume=6.3,apad[native];[2:a]aresample=48000,apad[voice];[native][voice]amix=inputs=2:normalize=0[outa]'
-        dest = plan.output / f'part-{i:02}.mp4'
-        args += ['-filter_complex', graph, '-map', '[outv]', '-map', '[outa]', '-t', str(shot.duration),
-                 '-c:v', 'libx264', '-preset', 'fast', '-crf', '20', '-pix_fmt', 'yuv420p',
-                 '-c:a', 'aac', '-b:a', '192k', str(dest)]
-        run(args)
+        _, cues = render_shot(shot, voice, plan.output, i)
         manifest.append({
             'name': shot.name, 'kind': shot.kind, 'source': display_path(shot.source),
             'source_sha256': shot.sha256, 'source_start_seconds': shot.start,
             'output_start_seconds': cursor, 'duration_seconds': shot.duration,
-            'still': still, 'narration': shot.narration, 'narration_voice': 'macOS Samantha TTS',
-            'native_audio_gain_db': 0 if still else 15.99,
+            'still': shot.kind != 'native_video', 'narration': shot.narration, 'narration_voice': 'macOS Samantha TTS',
+            'native_audio_gain_db': 0, 'subtitle_cues': cues,
         })
-        captions.append(f'{i+1}\n{stamp(cursor)} --> {stamp(cursor+shot.duration)}\n{shot.narration}\n')
+        for cue in cues:
+            caption_text = '\n'.join(cue['lines'])
+            captions.append(f"{len(captions)+1}\n{stamp(cursor+cue['start_seconds'])} --> {stamp(cursor+cue['end_seconds'])}\n{caption_text}\n")
         cursor += shot.duration
         print(f'Encoded shot {i+1}: {shot.duration}s', flush=True)
     concat = plan.output / 'parts.txt'
@@ -321,7 +397,9 @@ def assemble(plan: Plan) -> dict:
         'duration_seconds': float(media_info(final)['format']['duration']),
         'language': 'English', 'narration': 'macOS Samantha synthetic narration',
         'footage': 'Operator-identified Vega Virtual Device recordings and still captures; disclosed editorial cards',
-        'edits': 'Cuts, scaling, constant-frame-rate encoding, footer subtitles, narration and native audio gain. No generated app footage.',
+        'edits': 'Cuts, aspect-preserving scaling with the full source above a dedicated subtitle area, constant-frame-rate encoding, timed subtitles and narration mixed with native audio at unity gain through a peak limiter. No generated app footage.',
+        'subtitle_timing': 'Estimated from each cue word count and the measured narration duration. Review against the spoken audio before publication.',
+        'fonts': {display_path(path): sha256(path) for path in [FONT, LABEL_FONT]},
         'shots': manifest,
     }
     if result['duration_seconds'] >= 180:

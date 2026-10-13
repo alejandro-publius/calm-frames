@@ -2,7 +2,7 @@
 
 Every field for **Build, Ship, Shape: Amazon Developer Hackathon**, Fire TV track, with the Open Source and AWS Builder mini challenges.
 
-**Status, October 10.** Solo entry; validation and demo use the Vega Virtual Device exclusively. The Amazon Developer account is created and identity-verified. This draft is not ready to submit. The earlier native simulator journey and English video are recorded and checked locally. The current cloud design polish changes app inputs and still needs a Mac build, native checks and refreshed demo assets. The judged release,
+**Status, October 13.** Solo entry; validation and demo use the Vega Virtual Device exclusively. The Amazon Developer account is created and identity-verified. This draft is not ready to submit. The earlier native simulator journey and English video are recorded and checked locally. The current cloud design polish changes app inputs and still needs a Mac build, native checks and refreshed demo assets. The judged release,
 reviewer access and public contribution URL still have no URL. Section 3 was
 rewritten against the current implementation; recheck the remaining fields and
 replace every **NEEDS ALEX** before submission. Current completion and remaining blockers are in
@@ -10,7 +10,22 @@ replace every **NEEDS ALEX** before submission. Current completion and remaining
 
 **Earlier native evidence.** The October 10 receipt, [`results/redesign_validation_2026-10-10.json`](../results/redesign_validation_2026-10-10.json), binds native app source `73fbbed` to its installed aarch64 Debug package and identifies earlier observations separately. PIN mismatch/Delete, all offered presets and compatible catalog titles, saved settings, remote focus, Harbor holds with captions/audio, transport fallback and recovery were exercised. The final restart of that build preserves Kid, Extra cautious, a 55-inch TV, a 10-foot household distance and chime Off; Kid's effective distance remains its stricter 8 feet. Positive real-cover history is integration-tested only. Its English demo is `build/submission-redesign/Calm-Frames-demo-English.mp4`, with disclosed actual captures and synthetic narration. These records remain evidence of that earlier build.
 
-**Current design scope.** The cloud polish adds generated Harbor presentation art, taller library cards, quieter secondary navigation, and refined setup, parental controls and viewing settings. It has not been packaged, installed or verified on Vega here. See [design/POLISH_REVIEW.md](design/POLISH_REVIEW.md) and [`results/design_polish_2026-10-10.json`](../results/design_polish_2026-10-10.json). Rebuild on the Mac and check D-pad navigation, scrolling, saved settings and playback before refreshing the native recording, demo and draft assets. The Harbor illustration is not a film frame or signed hold image.
+**Current design scope.** The cinematic library uses a panoramic Harbor scene,
+distinct story covers and open typography, with the enclosing text panels
+removed in `2f15069`. Quiet secondary actions keep their visible remote focus.
+Motion and menu sounds are optional and Off by default. Current browser previews
+and source hashes are on [the design page](design/README.md) and in
+[`open_layout_design.json`](../results/open_layout_design.json). This source has
+not been packaged, installed or verified on Vega here. Follow
+[MAC_FINISH.md](MAC_FINISH.md) before refreshing the native recording, demo and
+draft assets. The Harbor illustration is presentation art, not a film frame or
+signed hold image.
+
+**Submission copy.** [SUBMISSION_COPY.md](SUBMISSION_COPY.md) is the shorter
+project story for the form. This file retains the detailed field guidance,
+technical limits and external links still to complete. The new recording plan
+is [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md); its shorter captions and complete-source
+framing are implemented in the assembler, awaiting fresh native footage.
 
 The corrected conformance report below retains its weaker near-limit result. Saved AWS publication worked, but the app consumes its compiled local catalog. Hosted CI passed on pushed checkpoint 402c167. At that checkpoint Audit passed SBOM, stack and container jobs and failed dependency audit only. All nine earlier review assets are uploaded in a private draft release; see results/github_push_2026-10-10.json. Main and public submission links are unchanged. The dependency audit was repaired on Oct 11 (`xmldom` replaced by its maintained fork, `lodash` moved, every remaining finding sorted by whether it is in the device bundle), and the hosted Audit run on the Oct 11 push came back <!--n results/github_push_2026-10-11.json:published.audit_conclusion -->success<!--/n--> in all four jobs, with CI <!--n results/github_push_2026-10-11.json:published.ci_conclusion -->success<!--/n--> in all six (`results/github_push_2026-10-11.json`). The conflicting Amazon sample notices in [AMAZON_SAMPLE_LICENSE_REVIEW.md](AMAZON_SAMPLE_LICENSE_REVIEW.md) remain open before public release, with the caveat now stated in NOTICE and the README.
 
@@ -25,7 +40,7 @@ Devpost field. Final field names still need checking in the live form.
 |---|---|
 | Done, Oct 9 to 10 | Earlier native simulator takes recorded. Exact clips used in that cut are listed in `results/redesign_demo_manifest_2026-10-10.json` |
 | Pending, before upload | Rebuild and validate the cloud polish on the Mac, then refresh native recordings, the English demo and review assets to match |
-| Mon Oct 12 | The upstream pull request is open, so the contribution URL exists |
+| Pending, before claiming Open Source | Open the reviewed qualifying contribution after approval and record its actual public URL |
 | Fri Oct 16, 12:00 PT | Devpost's early eligibility check. Entries submitted by then are checked, and Devpost says what needs fixing. Optional, and only worth it with a near-complete entry, video link included. The takes exist; this row is reachable only if the final English edit is uploaded before then, otherwise drop it |
 | Mon Oct 19, 9 to 10 AM PT | Office Hours #2 with the Amazon team. Optional; register through the link in the Devpost update |
 | Before Thu Oct 22 | Upload the completed checked English demo and verify its public link |
@@ -109,6 +124,13 @@ Voice transport, the D-pad and on-screen seek controls share the same guarded
 seek path. The D-pad and on-screen paths were observed on the Vega Virtual
 Device; the voice path is exercised by tests only, because the virtual device
 has no Alexa to deliver a spoken seek.
+
+The current interface brings the story artwork forward, using warm cream text,
+deep teal backgrounds and a clear remote focus outline. Back returns to the
+previous choice, a PIN can be corrected with Delete, and parental controls keep
+the viewing preferences together. Optional artwork motion and selection sounds
+leave the default menus still and silent. This design is implemented in source;
+the matching Vega package and recording remain pending.
 
 There are also developer adoption paths: an analyzer and GitHub Action for
 content preparation, a documented sidecar format, and a locally installable
@@ -254,15 +276,17 @@ NEEDS ALEX
 It is <!--n results/redesign_video_check.json:duration_s -->156.021<!--/n--> seconds,
 in English with disclosed macOS Samantha synthetic narration, actual simulator
 footage/stills and editorial cards. Its recorded duration/WCAG check passes.
-The exact script is [`docs/VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md); all shot sources
-and hashes are in `results/redesign_demo_manifest_2026-10-10.json`. The current
+Its exact narration, shot sources and hashes are in
+`results/redesign_demo_manifest_2026-10-10.json`, with the historical cut listed
+in [SHOT_MANIFEST.md](SHOT_MANIFEST.md). [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) now
+contains the next recording plan. The current
 cloud polish requires a Mac build, native validation and refreshed captures
 before a matching demo can be published. Update its script, source manifest and
 finished-file checks, then upload and verify the public URL while logged out.
 
 Three checks before pasting:
 
-1. `eval/check_video.sh <final file> --max-seconds 179` exits 0, and `results/redesign_video_check.json` is committed. It runs flashmap over the finished cut and, with that flag, refuses any file of 179 seconds or longer, which is the same gate the script and shot manifest require. Exit 2 means flashmap could not tell, and that is a failure too.
+1. Run `eval/check_video.sh <final file> --max-seconds 179` under both WCAG and broadcast, with fresh result paths as shown in [MAC_FINISH.md](MAC_FINISH.md). Preserve the October 10 results. The check refuses any file of 179 seconds or longer; exit 2 means flashmap could not tell and also fails the gate.
 2. The link works while logged out, on YouTube or Vimeo, in English.
 3. Any exposure-reduction claim must carry its limits. The on-screen plan uses "reduces exposure to flashing above published limits in the videos it plays; not a medical device". The English narration says detection can miss flashing and this is not a medical device. No seizure-prevention claim.
 
@@ -273,6 +297,7 @@ Devpost forms usually ask for a thumbnail or gallery image and offer a "try it o
 | Field | Proposed answer | State |
 |---|---|---|
 | Thumbnail or gallery image | [`docs/brand/firetv-app-icon-1280x720.png`](brand/firetv-app-icon-1280x720.png), the 1280 x 720 opaque Fire TV tile: the mark beside the wordmark and the line "A calmer way to watch". The approved design version passed the brand asset flash checks on Oct 10 ([`docs/brand/README.md`](brand/README.md)) | Proposed. Confirm the live form's accepted size and format on the day, and read the actual PNG before uploading |
+| Current design gallery | [Library](design/open/library-browser.png), [title details](design/open/details-browser.png) and [viewing settings](design/open/details-bottom-browser.png) | Browser design previews. Label each as a preview; replace or supplement with matching Vega captures after the Mac run |
 | "Try it out" link | The judged release page, section 9, once it exists | **NEEDS ALEX.** No release has been published, so there is no link yet. Do not use a placeholder URL |
 
 ## 8. Required technologies

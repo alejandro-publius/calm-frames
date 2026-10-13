@@ -194,3 +194,85 @@ def test_real_assembly_refuses_linux_before_outputs_or_commands(capture, monkeyp
     with pytest.raises(ValueError, match='requires macOS'):
         demo.assemble(plan)
     assert not commands and not output.exists() and not result.exists()
+
+
+def test_caption_cues_fit_measured_font_and_preserve_all_words():
+    text = ' '.join(['Wide words WWWWWW remain readable without covering the app.'] * 5)
+    cues = demo.caption_cues(text, 20, 24)
+    font = demo.ImageFont.truetype(str(demo.FONT), demo.CAPTION_SIZE)
+    assert len(cues) > 1
+    assert ' '.join(line for cue in cues for line in cue['lines']).split() == text.split()
+    assert all(1 <= len(cue['lines']) <= 2 for cue in cues)
+    assert all(font.getlength(line) <= demo.CAPTION_WIDTH for cue in cues for line in cue['lines'])
+    assert cues[0]['start_seconds'] == 0
+    assert all(a['end_seconds'] == b['start_seconds'] for a, b in zip(cues, cues[1:]))
+    assert 20 <= cues[-1]['end_seconds'] < 24
+
+
+@pytest.mark.parametrize('speech', [0, -1, float('nan'), float('inf'), 10])
+def test_caption_timing_refuses_missing_or_overlong_narration(speech):
+    with pytest.raises(ValueError, match='Narration must fit'):
+        demo.caption_cues('Keep the full app visible.', speech, 10)
+
+
+def test_caption_cues_refuse_a_word_that_cannot_fit():
+    with pytest.raises(ValueError, match='too wide'):
+        demo.caption_cues('W' * 300, 3, 5)
+
+
+@pytest.mark.parametrize('kind', ['native_still', 'native_video'])
+def test_real_encoder_keeps_bottom_of_source_visible_and_limits_audio(tmp_path, kind):
+    """Only solid colour fixtures and a synthetic tone; never app/native evidence."""
+    import array
+    import io
+    import math
+    import subprocess
+    import wave
+
+    from PIL import Image, ImageChops, ImageDraw
+
+    source = tmp_path / 'synthetic-source.png'
+    picture = Image.new('RGB', (320, 180), '#102F3A')
+    ImageDraw.Draw(picture).rectangle((0, 160, 319, 179), fill='#E6A957')
+    picture.save(source)
+    voice = tmp_path / 'synthetic-tone.wav'
+    samples = array.array('h', (round(0.8 * 32767 * math.sin(2 * math.pi * 330 * i / 48000))
+                                for i in range(48000)))
+    with wave.open(str(voice), 'wb') as audio:
+        audio.setparams((1, 2, 48000, 0, 'NONE', 'not compressed'))
+        audio.writeframes(samples.tobytes())
+    if kind == 'native_video':
+        clip = tmp_path / 'synthetic-source.mp4'
+        subprocess.run(['ffmpeg', '-v', 'error', '-n', '-loop', '1', '-i', str(source),
+                        '-stream_loop', '-1', '-i', str(voice), '-t', '2', '-r', '30',
+                        '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', str(clip)],
+                       check=True)
+        source = clip
+    shot = demo.Shot('encoder-fixture', source, demo.sha256(source), kind, 0, 2,
+                     'The full picture remains visible while short subtitle cues explain '
+                     'the scene. Each cue has room to breathe, and the complete source stays above it.')
+    output, cues = demo.render_shot(shot, voice, tmp_path, 0)
+    frame = subprocess.check_output(['ffmpeg', '-v', 'error', '-ss', '0.2', '-i', str(output),
+                                     '-frames:v', '1', '-f', 'image2pipe', '-vcodec', 'png', '-'])
+    with Image.open(io.BytesIO(frame)) as image:
+        # The amber stripe is at the very bottom of the original picture.
+        # A footer over an uncropped full-screen source would hide that stripe.
+        assert all(abs(a - b) < 8 for a, b in zip(image.getpixel((960, 860)), (230, 169, 87)))
+        assert image.size == (1920, 1080)
+        caption_region = image.crop((96, 940, 1824, 1026)).convert('RGB')
+        delta = ImageChops.difference(caption_region, Image.new('RGB', caption_region.size, '#102F3A'))
+        assert max(high for _, high in delta.getextrema()) > 40
+    last_frame = subprocess.check_output(['ffmpeg', '-v', 'error', '-ss', '1.8', '-i', str(output),
+                                          '-frames:v', '1', '-f', 'image2pipe', '-vcodec', 'png', '-'])
+    with Image.open(io.BytesIO(last_frame)) as image:
+        caption_region = image.crop((96, 940, 1824, 1026)).convert('RGB')
+        delta = ImageChops.difference(caption_region, Image.new('RGB', caption_region.size, '#102F3A'))
+        assert max(high for _, high in delta.getextrema()) < 8
+    decoded = subprocess.check_output(['ffmpeg', '-v', 'error', '-i', str(output),
+                                       '-map', '0:a:0', '-f', 'f32le', '-'])
+    samples_out = array.array('f')
+    samples_out.frombytes(decoded)
+    # Measure encoded channels directly; downmixing stereo can add 3 dB.
+    peak = max(abs(value) for value in samples_out)
+    assert 0.1 < peak < 1.0
+    assert len(cues) > 1 and cues[-1]['end_seconds'] <= 2

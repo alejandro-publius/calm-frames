@@ -2388,3 +2388,8 @@ device yet.
 ### Oct 13: fix the new Handlebars advisory
 
 - **Decision:** update only Handlebars to 4.7.10 and remove its exception. **Why:** the latest hosted dependency job failed on a newly reported injection advisory in 4.7.9, and a compatible patch was available. **Cost:** refresh the app SBOM with the CI-pinned npm, re-run the dependency audit and affected Jest suites; no SDK upgrade or exception extension.
+
+### Oct 13: prepare the matched demo and a shorter submission story
+
+- **Decision:** fit the complete source picture above short Inter subtitle cues, with native audio at its captured level and a limiter on the mixed track. **Why:** the prior footer covered the bottom of the source and long narration paragraphs competed with the app; automatically boosting native sound made the result harder to balance. **Cost:** fresh Mac narration, listening and finished-file checks are still needed. Linux encoder checks use clearly identified synthetic fixtures, with observed failures when the framing and limiter protections are removed.
+- **Decision:** introduce actual remote interaction earlier in the next recording plan and prepare a shorter product story alongside the detailed submission draft. **Why:** a judge needs to understand the family's experience and see the app working before the technical explanation. **Cost:** fresh native video replaces several earlier stills, and the current-source qualification remains until that video exists. The earlier cut and its exact narration remain historical evidence.
