@@ -225,7 +225,11 @@ const KidHomeScreen = ({
 const styles = StyleSheet.create({
   focusedLabel: { textDecorationLine: 'underline' },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND, paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y) },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: scale(20) },
+  // Vertical spacing above the shelf is tight on purpose: at the top of the
+  // scroll, both shelf cards and their qualifiers have to sit above the fixed
+  // footer notice. Seen clipped on the Vega Virtual Device on Oct 13 with the
+  // earlier spacing (hero gap 24, heading gap 12, poster bottom 14).
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: scale(12) },
   brand: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   mark: { width: scale(72), height: scale(72) },
   wordmark: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT },
@@ -233,7 +237,7 @@ const styles = StyleSheet.create({
   navigationLink: { alignSelf: 'center' },
   libraryScroll: { marginRight: scale(-CALM_SPACE.SAFE_X) },
   scrollContent: { paddingRight: scale(CALM_SPACE.SAFE_X), paddingBottom: scale(12) },
-  hero: { minHeight: scale(460), justifyContent: 'center', overflow: 'hidden', marginRight: scale(-CALM_SPACE.SAFE_X), marginBottom: scale(24) },
+  hero: { minHeight: scale(460), justifyContent: 'center', overflow: 'hidden', marginRight: scale(-CALM_SPACE.SAFE_X) },
   heroCopy: { width: scale(690), paddingVertical: scale(24) },
   heroArt: { position: 'absolute', top: 0, left: scale(430), right: 0 },
   heroScrim: { position: 'absolute', left: 0, top: 0, bottom: 0, width: scale(700), backgroundColor: CALM_COLORS.BACKGROUND },
@@ -247,14 +251,14 @@ const styles = StyleSheet.create({
   longFeatureTitle: { fontSize: scale(64), lineHeight: scale(76), letterSpacing: scale(-1) },
   description: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, marginBottom: scale(28), maxWidth: scale(660) },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
-  sectionHeading: { flexDirection: 'row', alignItems: 'center', gap: scale(28), marginBottom: scale(12) },
+  sectionHeading: { flexDirection: 'row', alignItems: 'center', gap: scale(28), marginBottom: scale(4) },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT },
   sectionRule: { flex: 1, height: scale(2), backgroundColor: CALM_COLORS.SURFACE },
   banner: { marginBottom: scale(20) },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: scale(20) },
-  poster: { width: scale(560), padding: scale(6), paddingBottom: scale(14), borderRadius: scale(26), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: CALM_COLORS.BACKGROUND, backgroundColor: CALM_COLORS.BACKGROUND },
+  poster: { width: scale(560), padding: scale(6), paddingBottom: scale(8), borderRadius: scale(26), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: CALM_COLORS.BACKGROUND, backgroundColor: CALM_COLORS.BACKGROUND },
   posterFocused: { borderColor: CALM_COLORS.FOCUS_RING, backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
-  posterTitle: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT, marginTop: scale(12) },
+  posterTitle: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT, marginTop: scale(8) },
   posterQualifier: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
   footer: { paddingTop: scale(12) },
   footerText: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
