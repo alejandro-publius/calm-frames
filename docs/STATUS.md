@@ -4,6 +4,15 @@ Updated Oct 13, 2026.
 
 ## 0. Where things stand
 
+### Oct 13: the new dependency Audit failure fixed
+
+The shared design commit passed hosted implementation CI. Its Audit job found
+a new Handlebars advisory under ts-jest. The lockfile now selects the patched
+4.7.10 release, the app bill of materials is regenerated with the runner's npm,
+and Handlebars has left the tooling exception. The current local audit passes
+the existing policy, and the affected UI tests pass. No other dependency moved
+and no exception date was extended. Receipt: `results/audit_patch_2026-10-13.json`.
+
 ### Open layouts for the cinematic design
 
 Alex asked to remove the slide-like boxes around the text. The latest source
@@ -324,12 +333,12 @@ and the 0.8 line keeps the 0.6 behaviour on malformed input. The app's own
 bundle carries. Every other finding was sorted by one mechanical test: a
 Release and a Debug bundle were built here for the kepler platform and their
 source maps read, so `scripts/audit_exceptions.toml` says which
-<!--n results/audit.json:published.npm_packages_with_advisories -->119<!--/n-->
+<!--n results/audit.json:published.npm_packages_with_advisories -->118<!--/n-->
 flagged packages are in the bundle
 (<!--n results/bundle_packages_2026-10-11.json:published.flagged_in_release_bundle -->20<!--/n-->,
 plus the DevTools backend in Debug) and which are in neither
 (<!--n results/bundle_packages_2026-10-11.json:published.flagged_in_neither_bundle -->98<!--/n-->),
-behind <!--n results/audit.json:published.npm_advisories_total -->33<!--/n-->
+behind <!--n results/audit.json:published.npm_advisories_total -->30<!--/n-->
 advisories. Both groups are due for review on Oct 21. The bundle inventory is
 a Linux build with Shaka's compiled file stubbed, which cannot change which
 npm packages are bundled; the Shaka build itself cannot run here, because its

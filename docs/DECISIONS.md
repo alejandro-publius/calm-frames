@@ -2384,3 +2384,7 @@ device yet.
 ### Open text layouts after the cinematic review
 
 - **Decision:** remove the filled panels around title details and viewing settings, extend the illustration to the screen edge and use quiet secondary actions. **Why:** Alex found the text boxes too much like presentation slides. Space and typography now group the information, while remote focus keeps its visible outline. **Cost:** a focused visual and UI check, refreshed browser previews and a later matching Vega build. No new art, dependency or playback behavior.
+
+### Oct 13: fix the new Handlebars advisory
+
+- **Decision:** update only Handlebars to 4.7.10 and remove its exception. **Why:** the latest hosted dependency job failed on a newly reported injection advisory in 4.7.9, and a compatible patch was available. **Cost:** refresh the app SBOM with the CI-pinned npm, re-run the dependency audit and affected Jest suites; no SDK upgrade or exception extension.

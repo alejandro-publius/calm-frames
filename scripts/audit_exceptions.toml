@@ -25,6 +25,8 @@
 # behaviour), and the app's own lodash moved from 4.17.23 to 4.18.1. Both
 # changes still need the Mac's Vega build and a run on the virtual device,
 # like every other change to app inputs since Oct 10.
+# On Oct 13, handlebars left the tooling exception after a targeted patch to
+# 4.7.10 fixed its template-injection advisories, including GHSA-p8wg-vrv2-v86f.
 
 [[exception]]
 group = "in-the-device-bundle"
@@ -150,7 +152,7 @@ and istanbul, Metro and the React Native community CLI, the Vega CLI platform
 API Extractor and the Rushstack libraries it pulls in, the TypeScript ESLint
 plugin, and the small utilities under them (micromatch, braces, minimatch,
 fast-glob, globby, js-yaml, argparse, sprintf-js, cosmiconfig, ajv, yargs,
-tmp, shell-quote, cross-spawn, execa, ws, uuid, toml, handlebars and the
+tmp, shell-quote, cross-spawn, execa, ws, uuid, toml and the
 rest).
 
 Two names here look like they should ship and do not. react-native 0.83.0 is
@@ -173,10 +175,8 @@ GHSA-hp3w-g68c-fv3c) sits under argparse 1 and js-yaml 3, so under
 cosmiconfig, istanbul and the Rushstack command line. shell-quote (command
 injection through a line terminator, GHSA-pqg4-j6r4-53mv, beside its two
 older findings) sits under the community CLI's editor launcher and under
-DevTools' Node side. handlebars (three JavaScript injection findings through
-precompiled templates) sits under ts-jest, which renders its own command
-line's configuration templates with it. The inputs all of these take, a glob
-pattern, a format string, a shell command, a template, come from this
+DevTools' Node side. The inputs these take, a glob
+pattern, a format string or a shell command, come from this
 repository's own configuration and test files, never from a video, a map or
 anything a viewer controls.
 
@@ -241,7 +241,6 @@ packages = [
   "fbjs-scripts",
   "find-workspaces",
   "globby",
-  "handlebars",
   "inquirer",
   "isomorphic-fetch",
   "jest",
@@ -341,7 +340,6 @@ packages = [
 "fbjs-scripts" = []
 "find-workspaces" = []
 "globby" = []
-"handlebars" = ["1241676", "1241677", "1241678"]
 "inquirer" = []
 "isomorphic-fetch" = []
 "jest" = []

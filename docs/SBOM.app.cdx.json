@@ -26576,8 +26576,8 @@
     {
       "type": "library",
       "name": "handlebars",
-      "version": "4.7.9",
-      "bom-ref": "calm-frames-app@0.1.0|handlebars@4.7.9",
+      "version": "4.7.10",
+      "bom-ref": "calm-frames-app@0.1.0|handlebars@4.7.10",
       "licenses": [
         {
           "license": {
@@ -26586,15 +26586,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/handlebars@4.7.9",
+      "purl": "pkg:npm/handlebars@4.7.10",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/handlebars/-/handlebars-4.7.9.tgz",
+          "url": "https://registry.npmjs.org/handlebars/-/handlebars-4.7.10.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "e04ef5134ae939a42e251d80df10d9f863351f2598bf5725479f2d0bc7a640d7907b7447ecc03349b6adf95d301bbf0b401a3a9ba6f3486fcbe2906e0ac82751"
+              "content": "3f954931533baa0067eaf8d7330f161bdb9523e9dc7f6a62ef68f875ee32cf96542cb8f6446a8b61a28e606b20cab562434b5e3ce565375b430825d7b45a972a"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -63632,7 +63632,7 @@
       "ref": "calm-frames-app@0.1.0|growly@1.3.0"
     },
     {
-      "ref": "calm-frames-app@0.1.0|handlebars@4.7.9",
+      "ref": "calm-frames-app@0.1.0|handlebars@4.7.10",
       "dependsOn": [
         "calm-frames-app@0.1.0|minimist@1.2.8",
         "calm-frames-app@0.1.0|neo-async@2.6.2",
@@ -68770,7 +68770,7 @@
         "calm-frames-app@0.1.0|babel-jest@29.7.0",
         "calm-frames-app@0.1.0|bs-logger@0.2.6",
         "calm-frames-app@0.1.0|fast-json-stable-stringify@2.1.0",
-        "calm-frames-app@0.1.0|handlebars@4.7.9",
+        "calm-frames-app@0.1.0|handlebars@4.7.10",
         "calm-frames-app@0.1.0|jest-util@29.7.0",
         "calm-frames-app@0.1.0|jest@29.7.0",
         "calm-frames-app@0.1.0|json5@2.2.3",

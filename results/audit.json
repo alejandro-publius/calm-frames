@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-11T02:57:43Z",
+  "generated_utc": "2026-10-13T14:05:54Z",
   "python": {
     "ran": true,
     "sources": [
@@ -26,8 +26,8 @@
       "low": 2,
       "moderate": 28,
       "high": 83,
-      "critical": 6,
-      "total": 119
+      "critical": 5,
+      "total": 118
     },
     "findings": [
       {
@@ -530,17 +530,6 @@
         "fix_available": true
       },
       {
-        "package": "handlebars",
-        "severity": "critical",
-        "direct": false,
-        "ids": [
-          "1241676",
-          "1241677",
-          "1241678"
-        ],
-        "fix_available": true
-      },
-      {
         "package": "inquirer",
         "severity": "low",
         "direct": false,
@@ -921,9 +910,9 @@
   },
   "published": {
     "python_packages_with_advisories": 0,
-    "npm_packages_with_advisories": 119,
-    "npm_advisories_total": 33,
-    "npm_critical": 6,
+    "npm_packages_with_advisories": 118,
+    "npm_advisories_total": 30,
+    "npm_critical": 5,
     "npm_high": 83,
     "exception_groups": 2,
     "exceptions_in_the_shipped_bundle": 1

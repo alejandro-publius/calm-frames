@@ -456,9 +456,9 @@ on dcb27a1. Only simulator validation is required for this submission.
 | | |
 |---|---|
 | Python packages with an advisory in the scanned ingest and CDK requirements | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
-| npm packages with an advisory in app/ | <!--n results/audit.json:published.npm_packages_with_advisories -->119<!--/n--> |
-| npm advisories behind them | <!--n results/audit.json:published.npm_advisories_total -->33<!--/n--> |
-| of which critical | <!--n results/audit.json:published.npm_critical -->6<!--/n--> |
+| npm packages with an advisory in app/ | <!--n results/audit.json:published.npm_packages_with_advisories -->118<!--/n--> |
+| npm advisories behind them | <!--n results/audit.json:published.npm_advisories_total -->30<!--/n--> |
+| of which critical | <!--n results/audit.json:published.npm_critical -->5<!--/n--> |
 | of which high | <!--n results/audit.json:published.npm_high -->83<!--/n--> |
 | exception groups, each with its reasons | <!--n results/audit.json:published.exception_groups -->2<!--/n--> |
 
@@ -476,15 +476,21 @@ paragraphs, because a one line reason is how an exception becomes permanent.
    input the app parses itself is the map, through our own reader.
 2. **What does not ship: build and test tooling.** jest, babel, Metro, the
    community CLI, the Vega CLI platform, API Extractor and the utilities under
-   them. Four advisories published in October 2026 (braces, sprintf-js,
-   shell-quote, handlebars) sit under tools everything else depends on, which
+   them. Advisories on braces, sprintf-js and shell-quote
+   sit under tools everything else depends on, which
    is why npm lists
-   <!--n results/audit.json:published.npm_packages_with_advisories -->119<!--/n-->
+   <!--n results/audit.json:published.npm_packages_with_advisories -->118<!--/n-->
    packages for
-   <!--n results/audit.json:published.npm_advisories_total -->33<!--/n-->
+   <!--n results/audit.json:published.npm_advisories_total -->30<!--/n-->
    advisories. They run on a developer's machine or a CI runner, over this
    repository's own files. This is the build machine's risk, not the
    television's.
+
+On October 13, Handlebars was updated from 4.7.9 to 4.7.10 under ts-jest.
+The registry identifies the previous version as affected by
+GHSA-xw65-4hp5-5hc7, GHSA-8r5x-fm3f-whwj and GHSA-p8wg-vrv2-v86f.
+Handlebars is removed from the tooling exception; the remaining review dates
+and acceptance conditions are unchanged.
 
 The group that held `xmldom` and `lodash` is gone, because both were fixed:
 the October 10 review had found that the generated
