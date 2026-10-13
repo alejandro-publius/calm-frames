@@ -122,7 +122,9 @@ This new asset uses the repository's Apache-2.0 license; its source, credit,
 and hash are recorded separately in `media/LICENSES.csv`. The logo scripts
 do not reproduce it.
 
-It is presentation artwork, never a film frame or a signed playback hold.
+It is presentation artwork and now a source plate for the October 13 animated
+Harbor film. Playback holds are extracted from the analyzed film; this PNG is
+never handed directly to the cover layer.
 `eval/brand_assets_check.py` checks this asset independently; that check does
 not establish native screen composition or the behavior of transitions.
 

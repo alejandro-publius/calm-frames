@@ -37,6 +37,7 @@ export default function HarborOpening({
     let animation: Animated.CompositeAnimation | undefined;
     let lifecycle: { remove(): void } | undefined;
     let reduction: { remove(): void } | undefined;
+    let screenReader: { remove(): void } | undefined;
     let back: { remove(): void } | undefined;
     const complete = () => {
       if (!alive || done) return;
@@ -56,10 +57,16 @@ export default function HarborOpening({
         reduction = AccessibilityInfo.addEventListener('reduceMotionChanged', (reduced) => {
           if (reduced !== false) complete();
         });
+        screenReader = AccessibilityInfo.addEventListener('screenReaderChanged', (enabled) => {
+          if (enabled !== false) complete();
+        });
         back = BackHandler.addEventListener('hardwareBackPress', () => { complete(); return true; });
-        const reduced = await AccessibilityInfo.isReduceMotionEnabled();
+        const [reduced, spoken] = await Promise.all([
+          AccessibilityInfo.isReduceMotionEnabled(),
+          AccessibilityInfo.isScreenReaderEnabled(),
+        ]);
         if (!alive || done) return;
-        if (reduced !== false) { complete(); return; }
+        if (reduced !== false || spoken !== false) { complete(); return; }
         animation = Animated.timing(progress, {
           toValue: 1,
           duration: HARBOR_OPENING_MS,
@@ -79,6 +86,7 @@ export default function HarborOpening({
       animation?.stop();
       lifecycle?.remove();
       reduction?.remove();
+      screenReader?.remove();
       back?.remove();
     };
   }, [active, canFinish, manager, motionEnabled, progress]);
@@ -109,7 +117,7 @@ const styles = StyleSheet.create({
   wave: { position: 'absolute', top: scale(-20), bottom: scale(-20), left: scale(-24), right: scale(-24) },
   image: { width: '100%', height: '100%' },
   shore: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(400) },
-  copy: { position: 'absolute', bottom: scale(60), left: scale(CALM_SPACE.SAFE_X), right: scale(CALM_SPACE.SAFE_X), flexDirection: 'row', alignItems: 'center', gap: scale(20) },
+  copy: { position: 'absolute', bottom: scale(60), left: scale(CALM_SPACE.SAFE_X), right: scale(CALM_SPACE.SAFE_X), flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: scale(20) },
   mark: { width: scale(64), height: scale(64) },
   title: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT },
 });

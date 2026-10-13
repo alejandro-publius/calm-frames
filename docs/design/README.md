@@ -171,8 +171,9 @@ to captions, which must never be covered by our own words.
 
 Corners are modest: 12 units on controls and rows, 16 on cards and notices, 20
 on shelf artwork, 26 on its focusable frame, 10 on badges and 6 on the flash map
-strip. The featured scene reaches the right screen edge and blends into the
-teal background. Title copy and viewing settings sit directly on that background,
+strip. The featured scene is centered and blends into the teal background.
+Library artwork is 720 units wide; details artwork is 1280. Title copy stays
+within 1000 units and supporting details within 1040. Title copy and viewing settings sit directly on that background,
 with space, headings and fine dividers doing the grouping. Secondary actions rest directly on the background and gain a visible outline
 on focus.
 
@@ -270,7 +271,34 @@ in notices, and never "prevents seizures" or "seizure-proof".
 
 ## Renders
 
-### Oct 13: water opening and natural copy
+### Oct 13: centered Harbor composition and the new film
+
+The library and details center the artwork, title, short description and controls.
+The title reads Harbor; Practice holds sits above it as a separate label. Library
+cards and their labels fit above the footer at 1920 by 1080. Supporting details
+stay in a centered column, including the picture timeline and viewing settings.
+
+![Centered library, browser approximation](centered/library-browser.png)
+
+![Centered Harbor demo details, browser approximation](centered/details-demo-browser.png)
+
+[Supporting details](centered/details-demo-bottom-browser.png) and
+[library with an unavailable title](centered/library-unavailable-browser.png).
+These are browser renders of actual component trees with synthetic household
+inputs. They do not replace the matching Vega build.
+
+Both playable Harbor versions now use the same 20 second animated illustration:
+a 2.5 second water opening cuts to the bright boat and lighthouse, with slow
+ripples, synthesized water ambience and story captions. The demo adds two
+scheduled practice holds; the ordinary story plays through. The boat rests in
+the harbor. This is a Blender animated illustration, not a fully modeled 3D scene.
+
+[Watch the new source film](../../app/assets/raw/benign-story/harbor.mp4).
+Production media and layout evidence: [receipt](../../results/centered_harbor_2026-10-13.json).
+The Oct 13 Mac receipt covers the earlier source at `06190c7`; a native build and
+recording containing this centered layout and film are still needed.
+
+### Earlier Oct 13 checkpoint: water opening and natural copy
 
 The library calls Harbor an Original story. Browsing and screen-reader labels
 no longer announce that every title was checked. Loading, unavailable titles
@@ -289,7 +317,8 @@ it. It never replays on returning from a story. Motion remains off by default.
 
 [Opening sequence, browser approximation](arrival/opening-browser.mp4).
 These are browser renders of the app's component tree, not a Vega recording.
-The actual film shown after Watch now still needs its separate artwork update.
+At this checkpoint the actual film still used the earlier geometric illustration.
+The newer film is linked above.
 
 ### Earlier open-layout checkpoint
 

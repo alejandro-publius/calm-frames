@@ -103,18 +103,14 @@ consume the balance. Prefer one implementation owner over repeated review teams.
 
 ### Milestone 1: recover evidence and build the current app
 
-Use [MAC_FINISH.md](MAC_FINISH.md) to locate and attach the two exact original
-prepared-library verification reports. Search the project's existing build,
-pipeline and log directories and known project archives. The cloud review ZIP
-and its nested source ZIP were already searched without finding either report.
-Do not repeat that search or scan unrelated personal files.
-
-If an original cannot be recovered, inspect the real benign source material and
-existing authorized local signing workflow. A separately prepared and verified
-new library export can supply new evidence; preserve the old export and receipts.
-Never substitute a regenerated report under an old digest or relax the strict
-release gate. If required source material or signing access is missing, record
-the exact blocker and continue independent preparation.
+The October 13 cloud work replaced both Harbor films and centered the browsing
+and details layouts. Sync the full shared branch first. Use [MAC_FINISH.md](MAC_FINISH.md)
+to build with the fresh cinematic catalog, whose original report is included.
+The strict Python and Node delivery gates passed in cloud. The older
+generations and their original reports recovered in `f58ef98` remain packaged.
+The active catalog selects the new film. The native receipt for `06190c7` is
+historical evidence for the earlier layout and film; do not repeat the report search.
+Preserve the release gate and previous Mac recordings as historical evidence.
 
 Build the current aarch64 Debug package with its source/input receipt. Install
 it on the existing virtual device without erasing household data. Fix actual

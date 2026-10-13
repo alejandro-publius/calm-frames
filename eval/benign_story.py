@@ -9,6 +9,7 @@ Run from the repository: .venv/bin/python -m eval.benign_story
 """
 from __future__ import annotations
 
+import argparse
 import base64
 import json
 import shutil
@@ -19,8 +20,8 @@ from tempfile import TemporaryDirectory
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-from PIL import Image, ImageDraw, ImageFont
 
+from eval.render_harbor import render_harbor
 from pipeline.flashmap_adapter import FlashmapAdapter, load_map
 from pipeline.hashing import sha256_file
 from pipeline.ingest import IngestOptions, ingest_title
@@ -39,64 +40,47 @@ SHAM_SEGMENTS = [
 ]
 CAPTIONS = """WEBVTT
 
-00:00:00.000 --> 00:00:04.500
-A small boat follows the quiet harbor.
+00:00:00.400 --> 00:00:02.300
+Evening settles over the water.
 
-00:00:05.000 --> 00:00:09.000
-Practice hold: the story and gentle tone continue.
+00:00:03.000 --> 00:00:06.000
+A small boat rests in the harbor.
 
-00:00:09.500 --> 00:00:11.500
-The boat carries on toward home.
+00:00:07.000 --> 00:00:10.000
+Sunlight follows the ripples.
 
-00:00:12.000 --> 00:00:16.000
-Another practice hold. No flashing is present.
+00:00:11.000 --> 00:00:14.000
+The lighthouse watches over the bay.
 
-00:00:16.500 --> 00:00:20.000
-The harbor is still here when the picture returns.
+00:00:15.000 --> 00:00:19.500
+A quiet moment before home.
 """
 
 
-def make_story(path: Path) -> Path:
-    """Original geometric art, slow motion, small contrast, continuous audio."""
+def make_story(path: Path, rendered: Path | None = None) -> Path:
+    """Mux the cinematic water/harbor render with original ambience and captions."""
     path.parent.mkdir(parents=True, exist_ok=True)
+    if rendered is None:
+        rendered = path.parent / "picture.mp4"
+        render_harbor(rendered)
+    picture = probe_video(rendered)
+    if ((picture.width, picture.height, picture.frame_count) != (1280, 720, 480)
+            or abs(picture.duration_ms - DURATION_MS) > 50):
+        raise ValueError("Harbor requires the full 20 second, 1280x720, 24 fps render.")
     captions = path.with_suffix(".vtt")
     captions.write_text(CAPTIONS)
     command = [
         "ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-y",
-        "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", "640x360", "-r", "12",
-        "-i", "pipe:0", "-f", "lavfi", "-i", "sine=frequency=220:duration=20",
-        "-i", str(captions), "-map", "0:v", "-map", "1:a", "-map", "2:s",
-        "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p",
-        "-c:a", "aac", "-af", "volume=0.12", "-c:s", "mov_text",
-        "-metadata:s:s:0", "language=eng", "-t", "20", "-movflags", "+faststart",
-        str(path),
+        "-i", str(rendered), "-f", "lavfi", "-i",
+        "anoisesrc=color=pink:amplitude=0.14:seed=23:d=20:r=48000",
+        "-i", str(captions), "-map", "0:v:0", "-map", "1:a", "-map", "2:s",
+        "-c:v", "copy", "-c:a", "aac", "-af",
+        "highpass=f=100,lowpass=f=1300,volume='0.24+0.08*sin(2*PI*t/7)':eval=frame,"
+        "afade=t=in:d=1,afade=t=out:st=19:d=1",
+        "-c:s", "mov_text", "-metadata:s:s:0", "language=eng", "-t", "20",
+        "-movflags", "+faststart", str(path),
     ]
-    font = ImageFont.load_default(size=17)
-    process = subprocess.Popen(command, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-    try:
-        assert process.stdin is not None
-        for frame in range(240):
-            canvas = Image.new("RGB", (640, 360), "#313e46")
-            draw = ImageDraw.Draw(canvas)
-            draw.ellipse((450, 62, 500, 112), fill="#777c72")
-            draw.polygon([(0, 215), (130, 115), (275, 215)], fill="#46545a")
-            draw.polygon([(170, 215), (360, 135), (560, 215)], fill="#3c4b52")
-            draw.rectangle((0, 215, 640, 360), fill="#3c555e")
-            x = round(65 + frame * 1.9)
-            draw.polygon([(x - 25, 252), (x + 28, 252), (x + 17, 264), (x - 13, 264)], fill="#7a807b")
-            draw.line((x, 211, x, 252), fill="#969a8c", width=2)
-            draw.polygon([(x - 2, 215), (x - 2, 248), (x - 21, 248)], fill="#969a8c")
-            draw.text((22, 19), "BENIGN DEMO - NO FLASHING", fill="#c4c9c5", font=font)
-            process.stdin.write(canvas.tobytes())
-        process.stdin.close()
-        process.stdin = None
-        _, errors = process.communicate(timeout=120)
-        if process.returncode != 0:
-            raise RuntimeError(errors.decode("utf-8")[-2000:])
-    finally:
-        if process.poll() is None:
-            process.kill()
-            process.wait()
+    subprocess.run(command, check=True, capture_output=True, timeout=120)
     return path
 
 
@@ -139,10 +123,10 @@ class DemonstrationAnalyzer(FlashmapAdapter):
         return result
 
 
-def build_demo() -> dict:
+def build_demo(rendered: Path | None = None) -> dict:
     work = REPO / "build/benign-story"
     work.mkdir(parents=True, exist_ok=True)
-    source = make_story(work / "harbor.mp4")
+    source = make_story(work / "harbor.mp4", rendered)
     with TemporaryDirectory(prefix="calm-frames-demo-key-") as private_dir:
         private = Ed25519PrivateKey.generate()
         key = Path(private_dir) / "signing.pem"
@@ -187,7 +171,7 @@ def build_demo() -> dict:
             "version": 1, "label": DEMO_LABEL, "source_sha256": sha256_file(source),
             "playback": "bundled verified extra-cautious pre-covered master with live guard",
             "playback_sha256": sha256_file(rendition),
-            "source_license": "CC0-1.0; original artwork, captions and generated tone",
+            "source_license": "Apache-2.0; generated Harbor artwork, Blender animation, original captions and synthesized ambience",
             "source_measured_clean_presets": sorted(adapter.clean_profiles),
             "synthetic_intervals": SHAM_SEGMENTS,
             "production_pipeline_passed": report["passed"],
@@ -215,4 +199,7 @@ def build_demo() -> dict:
 
 
 if __name__ == "__main__":
-    print(json.dumps(build_demo(), indent=2))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--rendered", type=Path, help="Existing silent Harbor render; the real source analysis still runs.")
+    args = parser.parse_args()
+    print(json.dumps(build_demo(args.rendered), indent=2))

@@ -79,7 +79,7 @@ export const TITLE_DETAILS_FRAME: UiFrame = {
 export const TITLE_DETAILS_BLOCKED_FRAME: UiFrame = {
   screen: 'title-details-blocked',
   background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
+  surfaces: [CALM_COLORS.SURFACE],
 };
 
 export const PARENT_LOCKED_FRAME: UiFrame = {

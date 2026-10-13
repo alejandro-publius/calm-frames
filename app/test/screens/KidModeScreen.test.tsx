@@ -342,7 +342,7 @@ describe('the shelf a household lands on', () => {
     expect(
       screen.getByTestId(`kid-mode-home-poster-image-${BENIGN_STORY_ID}`).props
         .source,
-    ).toEqual(require('../../assets/image/tv/harbor.png'));
+    ).toEqual(require('../../assets/image/tv/harbor-cinematic.png'));
   });
 });
 

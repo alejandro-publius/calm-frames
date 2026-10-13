@@ -4,9 +4,34 @@ Updated Oct 13, 2026.
 
 ## 0. Where things stand
 
-### Oct 13 (Mac): the polished source is built and seen on the device
+### Oct 13: centered composition and the cinematic Harbor film
 
-The cinematic source was built for aarch64 Debug on the Mac and installed on the
+The library and title pages now center the artwork, title, short description and
+actions within bounded widths. The demo title is Harbor, with Practice holds as
+its separate label. Supporting details continue in a narrower column below.
+[The design page](design/README.md) contains browser previews of the actual
+component trees. Startup uses water artwork with a centered wordmark.
+
+Both playable Harbor titles now use a 20 second, 720p animated illustration:
+2.5 seconds of rippling water, then the bright sailboat and lighthouse. The
+source has synthesized water ambience and story captions. The demo adds its
+scheduled practice holds; the ordinary story plays through. No test banner is
+burned into the picture. Source, maps, keys, renditions and evidence were rebuilt
+through the production pipeline. All 68 demo production checks passed.
+
+The new prepared-library generation includes its original report, and both
+Python and Node strict delivery checks pass. The two older generations remain packaged with their original reports, recovered
+on the Mac in `f58ef98`. The catalog selects the new cinematic generation. No
+historical report was substituted or invented.
+
+This source and media still need a fresh Mac/Vega build, playback and recording.
+Earlier native packages and demonstrations show the previous film and layout.
+No current native observation, final release or submission is claimed here.
+
+### Oct 13 (Mac): the earlier layout and film observed at `06190c7`
+
+The source at `06190c7`, before this centered layout, water opening and new film,
+was built for aarch64 Debug on the Mac and installed on the
 Vega Virtual Device. The canonical package is rebuilt from the library-fix commit
 so its build receipt's source is reproducible. Native observations and hashes are
 in `results/polish_native_validation.json`.
@@ -34,17 +59,6 @@ That PIN also blocks the settings, history and PIN-unlock demo shots. The
 ScreenCaptureKit recorder captures the practice-hold playback well (its overlays
 keep repainting) but only a few frames of the prepared Harbor once its controls
 hide; a still carries that shot instead.
-### Oct 13: natural app copy and a water opening
-
-The app now says Original story and describes availability without repeating
-checked or verified in the viewing interface. Startup uses Harbor water art
-with an optional one-time drift, followed by the library. Browser previews are
-in [the design page](design/README.md). The platform splash hands over on layout.
-This source has not been rebuilt or observed on Vega from the cloud session.
-
-Alex's newest screenshot shows the old geometric **playing film**. Replacing
-that footage with artwork matching the rich Harbor scene is the next active
-task; the current media and earlier recordings still contain the old film.
 
 ### Oct 13: the next demo and submission story are prepared
 

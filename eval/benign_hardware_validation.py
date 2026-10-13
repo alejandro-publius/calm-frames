@@ -32,7 +32,8 @@ STORY_PREFIX = "assets/raw/benign-story/"
 STORY_PROOF_MEMBER = STORY_PREFIX + "verification.json"
 # Pin the reviewed proof itself, not its self-reported success fields. Its hash
 # commits to every artifact digest below; changing the demo requires re-review.
-STORY_PROOF_SHA256 = "1bd952cc9e84c9620059e216f97f28ce3a5cea8d8ff9dc9a28633d6746d3292c"
+# October 13 cinematic source: reviewed software evidence, native playback still pending.
+STORY_PROOF_SHA256 = "3673491addb72b9bdbcdd9cd6c3b6abac4ee5f77225e0cc6364fed4f52d4fe45"
 STORY_ASSET_NAMES = frozenset({
     "README.md", "demo.pub.pem", "harbor.mp4", "harbor.precovered.mp4", "harbor.vtt",
     "harbor.wcag.json", "harbor.broadcast.json", "harbor.extra-cautious.json",

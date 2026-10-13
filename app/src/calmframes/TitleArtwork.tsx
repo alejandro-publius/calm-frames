@@ -21,13 +21,13 @@ interface TitlePresentation {
 
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
   if (isBundledBenignStory(title)) {
-    return { name: 'Harbor: Scene hold demo', cardName: 'Harbor demo', kind: 'Practice holds', action: 'Watch demo',
-      description: 'This version adds practice holds to Harbor at set times so you can see how a hide works during playback. The holds are practice, not detected flashing.', art: 'harbor' };
+    return { name: 'Harbor', cardName: 'Harbor demo', kind: 'Practice holds', action: 'Watch demo',
+      description: 'Two scheduled practice holds show how the picture pauses while sound and captions continue.', art: 'harbor-cinematic' };
   }
   if (concernsPackagedLibrary(title) && title.title === 'Harbor story (prepared locally)') {
     return { name: 'Harbor', kind: 'Original story', action: 'Watch now',
-      browseSynopsis: 'Follow a small boat home through a quiet harbor.',
-      description: 'A small boat follows the evening light home through a quiet harbor. An original Calm Frames short.', art: 'harbor-cinematic' };
+      browseSynopsis: 'Settle into a quiet harbor at sunset.',
+      description: 'A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.', art: 'harbor-cinematic' };
   }
   if (title.id === OFFLINE_TITLE_ID) {
     return { name: 'Calm gradient', kind: 'Playback test', action: 'Play',

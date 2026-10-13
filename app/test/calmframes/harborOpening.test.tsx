@@ -21,6 +21,7 @@ const flush = async () => { await act(async () => { await Promise.resolve(); });
 describe('waves into the library', () => {
   let lifecycle: (state: string) => void;
   let reduction: (reduced: boolean) => void;
+  let screenReader: (enabled: boolean) => void;
   let skip: () => boolean | null | undefined;
   let completeAnimation: (result: { finished: boolean }) => void;
   let start: jest.Mock;
@@ -42,8 +43,9 @@ describe('waves into the library', () => {
         return { remove: removed };
       },
     });
-    jest.spyOn(events, 'addEventListener').mockImplementation((_name, callback) => {
-      reduction = callback;
+    jest.spyOn(events, 'addEventListener').mockImplementation((name, callback) => {
+      if (name === 'reduceMotionChanged') reduction = callback;
+      if (name === 'screenReaderChanged') screenReader = callback;
       return { remove: removed };
     });
     jest.spyOn(BackHandler, 'addEventListener').mockImplementation((_name, callback) => {
@@ -51,6 +53,7 @@ describe('waves into the library', () => {
       return { remove: removed };
     });
     query = jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(false);
+    jest.spyOn(AccessibilityInfo, 'isScreenReaderEnabled').mockResolvedValue(false);
     timing = jest.spyOn(Animated, 'timing').mockReturnValue({ start, stop, reset: jest.fn() });
   });
   afterEach(() => { jest.restoreAllMocks(); jest.useRealTimers(); });
@@ -96,13 +99,23 @@ describe('waves into the library', () => {
     expect(finish).toHaveBeenCalledTimes(1);
   });
 
-  it.each(['background', 'reduction', 'back', 'inactive', 'off'])('settles immediately on %s', async (event) => {
+  it.each([true, undefined])('opens the library directly for screen-reader state %s', async (enabled) => {
+    (AccessibilityInfo.isScreenReaderEnabled as jest.Mock).mockResolvedValue(enabled);
+    const finish = jest.fn();
+    render(<HarborOpening motionEnabled onFinish={finish} />);
+    await flush();
+    expect(timing).not.toHaveBeenCalled();
+    expect(finish).toHaveBeenCalledTimes(1);
+  });
+
+  it.each(['background', 'reduction', 'screenReader', 'back', 'inactive', 'off'])('settles immediately on %s', async (event) => {
     const finish = jest.fn();
     const view = render(<HarborOpening motionEnabled onFinish={finish} />);
     await flush();
     act(() => {
       if (event === 'background') lifecycle('background');
       if (event === 'reduction') reduction(true);
+      if (event === 'screenReader') screenReader(true);
       if (event === 'back') expect(skip()).toBe(true);
     });
     if (event === 'inactive') view.rerender(<HarborOpening motionEnabled active={false} onFinish={finish} />);
@@ -131,7 +144,7 @@ describe('waves into the library', () => {
     act(() => jest.runOnlyPendingTimers());
     expect(timing).not.toHaveBeenCalled();
     expect(finish).not.toHaveBeenCalled();
-    expect(removed).toHaveBeenCalledTimes(3);
+    expect(removed).toHaveBeenCalledTimes(4);
   });
 
   it('opens the actual shelf after arrival and does not replay after details', async () => {

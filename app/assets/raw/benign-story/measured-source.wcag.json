@@ -3,14 +3,14 @@
     "analysis_height": 108,
     "analysis_width": 192,
     "luminance_model": "wcag-relative-luminance-srgb",
-    "matrix": "bt601",
-    "matrix_source": "inferred-sd-bt601",
+    "matrix": "bt709",
+    "matrix_source": "inferred-hd-bt709",
     "pixel_format": "yuv420p",
     "range": "limited",
     "range_source": "default-limited",
     "transfer_tag": "2"
   },
-  "created_utc": "2026-10-02T07:23:51Z",
+  "created_utc": "2026-10-13T21:11:38Z",
   "generator": {
     "name": "flashmap",
     "version": "1.0.0"
@@ -18,10 +18,10 @@
   "pattern_exemptions": [],
   "picture": {
     "coded": {
-      "height": 360,
+      "height": 720,
       "left": 0,
       "top": 0,
-      "width": 640
+      "width": 1280
     },
     "frame_height": 108,
     "frame_width": 192,
@@ -106,28 +106,28 @@
   "segments": [],
   "signature": {
     "algorithm": "ed25519",
-    "key_id": "sha256:f1f85a0d5a9f9ff600ae3f4b230ce3d9a6e1d6b00b39c27ea4e08a2babb5f8bd",
-    "payload_sha256": "e5344539310fdac21d4b56bc57ef9128f098e7a86cdef81b39b5bc51e0eb9f8b",
-    "public_key": "5vDmD97Pljdw0RSevwy/4EqueRmv106/+MrCBLTwTJ8=",
-    "value": "CcFdQuGEBBdlWViNInyWiqwV9OiAvL4cnaAxEMw3WqSrSUEDu3Bt+1igAydsHd29IBshVIWun1qeKn2/Q8ERBw=="
+    "key_id": "sha256:4f417dc28efcb7b395cea210029ff86041f2f5625332158e419a7de5ed216ba2",
+    "payload_sha256": "e121efebafb680975a78fd494fe31aee02ded465f0dc43e54c849bda2bb71deb",
+    "public_key": "JrtaxJ3DP2blwqnCpEBREnJseC/O7HG2dfvhEniWuhw=",
+    "value": "bCcdb/NtN8hFzH69FMKDA41WaayEy/qpHCl6OqymcZLCrYyt6pi0p5lXbatFq1NXkLKPB5GNZYq6RNFER86UCA=="
   },
   "source": {
-    "coded_height": 360,
-    "coded_width": 640,
-    "container_frame_rate": "12/1",
+    "coded_height": 720,
+    "coded_width": 1280,
+    "container_frame_rate": "24/1",
     "duration_ms": 20000.0,
     "first_pts_ms": 0.0,
-    "frame_count": 240,
+    "frame_count": 480,
     "frame_interval_ms": {
-      "max": 83.333,
-      "median": 83.333,
-      "min": 83.333
+      "max": 41.667,
+      "median": 41.667,
+      "min": 41.667
     },
-    "last_coded_pts_ms": 19916.667,
-    "last_pts_ms": 19916.667,
+    "last_coded_pts_ms": 19958.333,
+    "last_pts_ms": 19958.333,
     "path": "harbor.mp4",
-    "sha256": "e7f47f540966ba3bb1c8940e8f8d6d9489741aafe91658cf1fac2e378bf06c6a",
-    "size_bytes": 200222,
+    "sha256": "a86e96f46b52a5db96decd9903966d6387da802b4e684eb1b66505074f0fd043",
+    "size_bytes": 4538880,
     "timestamp_source": "container-pts",
     "variable_frame_rate": false
   },

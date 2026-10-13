@@ -12,9 +12,9 @@ import { HouseholdSettings } from './household';
 export const BENIGN_STORY_ID = 'calm-frames-benign-story';
 export const BENIGN_STORY_URI =
   'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4';
-export const BENIGN_STORY_LABEL = 'Benign demo: practice holds, no flashing';
+export const BENIGN_STORY_LABEL = 'Practice holds';
 /** Harbor's second line on the shelf, under its name. */
-export const BENIGN_STORY_SHELF_QUALIFIER = 'Benign demo, practice holds';
+export const BENIGN_STORY_SHELF_QUALIFIER = 'Practice holds demo';
 
 export function benignStoryTitle(): CatalogTitle {
   return {
@@ -112,7 +112,7 @@ let compiledStill: { uri: string | undefined } | null = null;
  * that came from anywhere else gets no picture, so the poster is never a
  * still nobody signed. No new image ships for it: the still is one of the two
  * the signed map already carries for its practice holds, and it shows the
- * story's own burned-in "benign demo" label.
+ * same scene as the film. The player supplies the practice label.
  */
 export function benignStoryPoster(entry: CheckedTitle): string | undefined {
   if (

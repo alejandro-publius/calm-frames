@@ -1,15 +1,16 @@
 # Calm Frames: rules for every session
 
-**Latest finishing checkpoint, Oct 13.** The open cinematic layout is pushed as
-`2f15069`, the Handlebars audit fix as `41c34fc`, and the improved demo assembler
-and submission copy as `7444d21`. The next step is the Mac workflow in
-`docs/MAC_FINISH.md`, after reconciling any local work. The new recording plan
-uses short Inter subtitle cues and keeps the complete native picture visible.
-`docs/submission/README.md` links the checked draft packet. Its gallery contains
-browser previews; there is no new native package or final demo. The strict
-library gate still needs two original reports, neither found in the recovered
-earlier review archive. Alex asked to avoid repeating the whole project review;
-continue from the current receipts and run checks appropriate to actual changes.
+**Latest finishing checkpoint, Oct 13.** The library and details now center
+artwork, titles, short descriptions and actions. Both playable Harbor versions
+use the new 20 second cinematic film: water opening, bright boat/lighthouse,
+animated reflections, water ambience and story captions. Practice holds remain
+explicitly scheduled. The new prepared catalog includes its original report;
+strict Python and Node delivery gates pass. The two older generations and their original reports, recovered on the Mac in
+`f58ef98`, are retained. The current catalog selects the new film. The latest
+Mac native receipt covers `06190c7`, before this centered layout and new film.
+Rebuild and record the full current branch on the Mac using `docs/MAC_FINISH.md`.
+No new native build or recording is claimed from cloud. Alex requested focused
+work, so use current receipts and run checks appropriate to actual changes.
 
 **Current visual pass.** Alex selected the cinematic storybook direction and
 asked to combine it with Claude's pushed improvements. The latest refinement
@@ -96,8 +97,8 @@ new deploy needs approval and the signing-key parameter, and the budget's cost t
 activated). The default shelf holds three titles: the Harbor demo, the prepared Harbor and the
 calm gradient. The native journey, saved settings, three presets, playback, transport, captions
 through both holds and native recording were observed on the Vega Virtual Device on Oct 9 and
-10 (`results/redesign_validation_2026-10-10.json`); nothing since the Oct 10 polish has been
-built or seen on a device. docs/HACKATHON_REVIEW.md is an Oct 2 assessment; the live lists are
+10 (`results/redesign_validation_2026-10-10.json`); the later Oct 13 receipt in `results/polish_native_validation.json` covers
+`06190c7`. The centered layout, water opening and new film still need a Mac build. docs/HACKATHON_REVIEW.md is an Oct 2 assessment; the live lists are
 docs/COMPLETION_CHECKLIST.md and docs/STATUS.md section 2; the longer history is docs/STATUS.md
 section 0, newest first.
 

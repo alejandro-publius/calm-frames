@@ -11,11 +11,14 @@ The current presentation source is pushed; finish the matching native build and
 final demo next.
 The detailed evidence and outstanding decisions remain below.
 
-- [x] Pushed the checked final app source and prepared its matching package with
+- [x] Built the earlier Oct 13 source at `06190c7` and prepared its package with
   both original verification reports attached. The strict release gate
   (`check --require-reports`) passes. Package built from `06190c7` for aarch64
   Debug, SHA-256 `29774e27bdea4fea98bb2a684f7da12b8c2c3bf56f64b2e8ed401dd809f016d8`.
-- [~] Completed the reachable native journeys in [MAC_FINISH.md](MAC_FINISH.md) on
+- [ ] Rebuild the current centered layout, water opening and cinematic film on
+  the Mac. The `06190c7` package above predates these changes. All three prepared
+  generations now include their original reports and pass strict delivery checks.
+- [~] Completed the reachable native journeys for the earlier `06190c7` package in [MAC_FINISH.md](MAC_FINISH.md) on
   the Vega Virtual Device: library/hero, D-pad focus, details, PIN gate and wrong
   entry, practice holds with cover and captions, and prepared Harbor playback.
   Fixed one observed issue (library shelf labels clipped under the footer).
@@ -50,13 +53,20 @@ new AWS deployment is needed to finish the simulator entry.
 
 ## Current design polish
 
-The cinematic library and title-details source includes Claude's work through
+The latest layout centers the Harbor artwork, title, short description and actions.
+Both playable titles contain the new 20 second water/harbor film, with story
+captions and water ambience. Current browser previews and the film are linked
+from [the design page](design/README.md). The new film passed all 68 production
+checks; its native build and recording remain open.
+
+The earlier cinematic library and title-details source includes Claude's work through
 `49f3a18` and the later removal of decorative text panels on base `b882d39`.
 Current browser previews and source hashes are linked from
 [the design page](design/README.md) and recorded in
 [`open_layout_design.json`](../results/open_layout_design.json).
-The new presentation artwork remains separate from the actual film and signed
-playback stills. These previews do not replace the Mac build below.
+The current film animates the presentation artwork. Playback stills are
+extracted and signed through the production pipeline; artwork is never
+substituted directly for a hold still. These previews do not replace the Mac build below.
 
 The motion and sound implementation and cloud checks are recorded in
 [`interface_finish_2026-10-10_pacific.json`](../results/interface_finish_2026-10-10_pacific.json).
@@ -287,12 +297,11 @@ original verification report was found in that archive or its nested source ZIP.
   every stack service is covered. Confirm the `Project` cost allocation tag is
   active and the project budget sees costs; its last saved state was inactive.
   Read-only verification does not require a redeploy or increased spending.
-- [ ] Attach the original verification reports for both prepared-library
-  generations. Neither original is present in this cloud checkout. The normal
-  delivery check lists their exact hashes, and the strict release gate refuses
-  to proceed until both are present and checked. Use the attachment commands in
-  [MAC_FINISH.md](MAC_FINISH.md) on the Mac where they were generated; do not
-  substitute a new report under an old hash.
+- [x] Prepare the cinematic Harbor library with its own original report. The
+  October 13 fresh export passes both strict delivery checks with one required
+  report present. Earlier geometric generations are retired from the package
+  and retained in Git history; their missing reports were not fabricated.
+  The matching native build and recording remain pending.
 - [ ] Send the Amazon sample licence clarification in
   [`AMAZON_SAMPLE_LICENSE_REVIEW.md`](AMAZON_SAMPLE_LICENSE_REVIEW.md) by Oct 13.
   NOTICE and the README now carry the caveat either way.

@@ -57,6 +57,7 @@ TITLES = {
     "app/assets/image/tv/harbor.png": "Harbor presentation artwork",
     "app/assets/image/tv/harbor-cinematic.png": "Harbor cinematic presentation artwork",
     "app/assets/image/tv/harbor-water.png": "Harbor opening artwork",
+    'app/assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/wcag.mp4': "Harbor cinematic story (prepared locally)",
     "app/assets/image/tv/gradient.png": "Calm gradient presentation artwork",
     # The two videos the app ships besides the Harbor story: the bundled calm
     # gradient, and the prepared Harbor rendition kid mode plays. Both are ours.

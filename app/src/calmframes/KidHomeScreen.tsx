@@ -165,18 +165,17 @@ const KidHomeScreen = ({
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroArt} pointerEvents="none">
                 <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
-                  <TitleArtwork immersive height={460} entry={featured} testID={`${testID}-hero-art`} />
+                  <TitleArtwork immersive height={240} entry={featured} testID={`${testID}-hero-art`} />
                 </CalmArtworkMotion>
                 <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
                   start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artSky} />
                 <LinearGradient pointerEvents="none" colors={['#102F3A00', CALM_COLORS.BACKGROUND]}
                   start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artFloor} />
+                <LinearGradient pointerEvents="none" colors={['#102F3A00', CALM_COLORS.BACKGROUND]}
+                  start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.artEdge} />
               </View>
-              <View style={styles.heroScrim} pointerEvents="none" />
-              <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
-                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.heroFade} />
               <View style={styles.heroCopy}>
-                <View style={styles.kicker}><View style={styles.kickerRule} /><Text style={styles.eyebrow}>{feature.kind}</Text></View>
+                <View style={styles.kicker}><Text style={styles.eyebrow}>{feature.kind}</Text></View>
                 <Text style={[styles.featureTitle, feature.name.length > 18 ? styles.longFeatureTitle : null]}>{feature.name}</Text>
                 <Text style={styles.description}>{feature.browseSynopsis ?? feature.description}</Text>
                 <View style={styles.actions}>
@@ -186,7 +185,7 @@ const KidHomeScreen = ({
                 </View>
               </View>
             </View> : null}
-            <View style={styles.sectionHeading}><Text style={styles.section} testID={`${testID}-title`}>Your library</Text><View style={styles.sectionRule} /></View>
+            <View style={styles.sectionHeading}><Text style={styles.section} testID={`${testID}-title`}>Your library</Text></View>
             <View style={styles.grid}>
               {listed.map((entry) => {
                 const focused = focusedId === entry.title.id;
@@ -199,7 +198,7 @@ const KidHomeScreen = ({
                     if (!saving) { onOpen(entry); feedback.confirm(); }
                   }}
                   style={[styles.poster, focused ? styles.posterFocused : null]}>
-                  <TitleArtwork compact height={180} entry={entry} testID={`${testID}-poster-image-${entry.title.id}`} />
+                  <TitleArtwork compact height={120} entry={entry} testID={`${testID}-poster-image-${entry.title.id}`} />
                   <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={2} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
                   {label.kind ? <Text style={styles.posterQualifier} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{label.kind}</Text> : null}
                 </TouchableOpacity>;
@@ -225,42 +224,36 @@ const KidHomeScreen = ({
 const styles = StyleSheet.create({
   focusedLabel: { textDecorationLine: 'underline' },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND, paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y) },
-  // Vertical spacing above the shelf is tight on purpose: at the top of the
-  // scroll, both shelf cards and their qualifiers have to sit above the fixed
-  // footer notice. Seen clipped on the Vega Virtual Device on Oct 13 with the
-  // earlier spacing (hero gap 24, heading gap 12, poster bottom 14).
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: scale(12) },
+  // Keep shelf labels above the fixed footer at 1080p, including focus padding.
+  header: { width: '100%', maxWidth: scale(1440), alignSelf: 'center', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: scale(12) },
   brand: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   mark: { width: scale(72), height: scale(72) },
   wordmark: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT },
   navigation: { flexDirection: 'row', gap: scale(20) },
   navigationLink: { alignSelf: 'center' },
-  libraryScroll: { marginRight: scale(-CALM_SPACE.SAFE_X) },
-  scrollContent: { paddingRight: scale(CALM_SPACE.SAFE_X), paddingBottom: scale(12) },
-  hero: { minHeight: scale(460), justifyContent: 'center', overflow: 'hidden', marginRight: scale(-CALM_SPACE.SAFE_X) },
-  heroCopy: { width: scale(690), paddingVertical: scale(24) },
-  heroArt: { position: 'absolute', top: 0, left: scale(430), right: 0 },
-  heroScrim: { position: 'absolute', left: 0, top: 0, bottom: 0, width: scale(700), backgroundColor: CALM_COLORS.BACKGROUND },
-  heroFade: { position: 'absolute', top: 0, bottom: 0, left: scale(700), width: scale(250) },
-  artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(56) },
-  artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(88) },
-  kicker: { flexDirection: 'row', alignItems: 'center', gap: scale(16), marginBottom: scale(12) },
-  kickerRule: { width: scale(44), height: scale(4), borderRadius: scale(2), backgroundColor: CALM_COLORS.FOCUS_RING },
-  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING },
-  featureTitle: { ...CALM_TEXT.feature, fontSize: scale(104), lineHeight: scale(116), letterSpacing: scale(-3), color: CALM_COLORS.TEXT, marginBottom: scale(16) },
-  longFeatureTitle: { fontSize: scale(64), lineHeight: scale(76), letterSpacing: scale(-1) },
-  description: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, marginBottom: scale(28), maxWidth: scale(660) },
-  actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
-  sectionHeading: { flexDirection: 'row', alignItems: 'center', gap: scale(28), marginBottom: scale(4) },
+  libraryScroll: { flex: 1 },
+  scrollContent: { alignItems: 'center', paddingBottom: scale(12) },
+  hero: { width: '100%', maxWidth: scale(1440), alignItems: 'center', overflow: 'hidden' },
+  heroCopy: { width: '100%', maxWidth: scale(1000), alignItems: 'center', paddingTop: scale(8) },
+  heroArt: { width: '100%', maxWidth: scale(720) },
+  artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(32) },
+  artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(100) },
+  artEdge: { position: 'absolute', top: 0, bottom: 0, right: 0, width: scale(100) },
+  kicker: { alignItems: 'center', marginBottom: scale(8) },
+  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, textAlign: 'center' },
+  featureTitle: { ...CALM_TEXT.feature, fontSize: scale(60), lineHeight: scale(68), letterSpacing: scale(-2), color: CALM_COLORS.TEXT, marginBottom: scale(8), textAlign: 'center' },
+  longFeatureTitle: { fontSize: scale(52), lineHeight: scale(60), letterSpacing: scale(-1) },
+  description: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(40), color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12), textAlign: 'center' },
+  actions: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: scale(20) },
+  sectionHeading: { alignItems: 'center', marginTop: scale(8), marginBottom: scale(4) },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT },
-  sectionRule: { flex: 1, height: scale(2), backgroundColor: CALM_COLORS.SURFACE },
   banner: { marginBottom: scale(20) },
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: scale(20) },
-  poster: { width: scale(560), padding: scale(6), paddingBottom: scale(8), borderRadius: scale(26), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: CALM_COLORS.BACKGROUND, backgroundColor: CALM_COLORS.BACKGROUND },
+  grid: { width: '100%', maxWidth: scale(1720), flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: scale(20) },
+  poster: { width: scale(400), padding: scale(6), paddingBottom: scale(8), borderRadius: scale(26), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: CALM_COLORS.BACKGROUND, backgroundColor: CALM_COLORS.BACKGROUND },
   posterFocused: { borderColor: CALM_COLORS.FOCUS_RING, backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
-  posterTitle: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT, marginTop: scale(8) },
-  posterQualifier: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
-  footer: { paddingTop: scale(12) },
-  footerText: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
+  posterTitle: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT, marginTop: scale(8), textAlign: 'center' },
+  posterQualifier: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'center' },
+  footer: { paddingTop: scale(12), alignItems: 'center' },
+  footerText: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'center', maxWidth: scale(1440) },
 });
 export default KidHomeScreen;

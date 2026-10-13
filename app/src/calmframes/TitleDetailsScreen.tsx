@@ -90,19 +90,17 @@ const TitleDetailsScreen = ({
       <View style={styles.hero}>
         <View style={styles.heroArt} pointerEvents="none">
           <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
-            <TitleArtwork immersive entry={entry} height={560} testID={`${testID}-artwork`} />
+            <TitleArtwork immersive entry={entry} height={480} testID={`${testID}-artwork`} />
           </CalmArtworkMotion>
           <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
             start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artSky} />
           <LinearGradient pointerEvents="none" colors={['#102F3A00', CALM_COLORS.BACKGROUND]}
             start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artFloor} />
+          <LinearGradient pointerEvents="none" colors={['#102F3A00', CALM_COLORS.BACKGROUND]}
+            start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.artEdge} />
         </View>
-        <View style={styles.heroScrim} pointerEvents="none" />
-        <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
-          start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.heroFade} />
         <View style={styles.heroCopy}>
           <View style={styles.kicker}>
-            <View style={styles.kickerRule} accessible={false} />
             <Text style={styles.eyebrow}>{presentation.kind}</Text>
           </View>
           <Text style={[styles.title, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
@@ -123,11 +121,10 @@ const TitleDetailsScreen = ({
         <>
           <View style={styles.checkSummary}>
             <View style={styles.chapterHeading}>
-              <View style={styles.chapterRule} accessible={false} />
               <Text style={styles.section} accessibilityRole="header">{demo ? 'About this demo' : 'Before you watch'}</Text>
             </View>
             <View style={styles.chapterContent}>
-              {demo ? <Text style={styles.summary}>The holds are added at set times to demonstrate how the picture changes while sound and captions continue. Harbor was created without flashing effects.</Text> : null}
+              {demo ? <Text style={styles.summary}>Harbor was created without flashing effects. The two picture holds are scheduled demonstrations.</Text> : null}
               <Text style={styles.summary} testID={`${testID}-summary`}>
                 {intervals.length === 0
                   ? 'This story plays without picture holds. Some flashing may still go undetected.'
@@ -142,6 +139,7 @@ const TitleDetailsScreen = ({
                 <View style={styles.timeline}>
                   <Text style={styles.timelineLabel}>Picture timeline</Text>
                   <FlashMapStrip
+                    width={1040}
                     showCaption={false}
                     intervals={intervals}
                     durationMs={durationMs}
@@ -169,32 +167,29 @@ const TitleDetailsScreen = ({
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
-  content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y) },
-  navigation: { marginBottom: scale(36) },
-  hero: { minHeight: scale(560), justifyContent: 'center', overflow: 'hidden', marginRight: scale(-CALM_SPACE.SAFE_X) },
-  heroCopy: { width: scale(650), paddingVertical: scale(8) },
-  heroArt: { position: 'absolute', top: 0, left: scale(430), right: 0 },
-  heroScrim: { position: 'absolute', top: 0, bottom: 0, left: 0, width: scale(700), backgroundColor: CALM_COLORS.BACKGROUND },
-  heroFade: { position: 'absolute', top: 0, bottom: 0, left: scale(700), width: scale(250) },
+  content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'center' },
+  navigation: { width: '100%', maxWidth: scale(1440), alignItems: 'flex-start', marginBottom: scale(16) },
+  hero: { width: '100%', maxWidth: scale(1440), alignItems: 'center', overflow: 'hidden' },
+  heroCopy: { width: '100%', maxWidth: scale(1000), alignItems: 'center', paddingTop: scale(12) },
+  heroArt: { width: '100%', maxWidth: scale(1280) },
   artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(56) },
-  artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(100) },
-  kicker: { flexDirection: 'row', alignItems: 'center', gap: scale(20), marginBottom: scale(24) },
-  kickerRule: { width: scale(44), height: scale(3), backgroundColor: CALM_COLORS.FOCUS_RING },
-  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING },
-  title: { ...CALM_TEXT.feature, fontSize: scale(104), lineHeight: scale(116), color: CALM_COLORS.TEXT, marginBottom: scale(28) },
+  artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(160) },
+  artEdge: { position: 'absolute', top: 0, bottom: 0, right: 0, width: scale(120) },
+  kicker: { alignItems: 'center', marginBottom: scale(8) },
+  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, textAlign: 'center' },
+  title: { ...CALM_TEXT.feature, fontSize: scale(84), lineHeight: scale(96), color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'center' },
   longTitle: { fontSize: scale(72), lineHeight: scale(84) },
-  synopsis: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM },
-  summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM },
-  section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT },
-  checkSummary: { flexDirection: 'row', alignItems: 'flex-start', gap: scale(72), marginTop: scale(64) },
-  chapterHeading: { width: scale(344) },
-  chapterRule: { width: scale(56), height: scale(3), backgroundColor: CALM_COLORS.FOCUS_RING, marginBottom: scale(20) },
-  chapterContent: { flex: 1, gap: scale(24), paddingTop: scale(12) },
+  synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'center' },
+  summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'center' },
+  section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, textAlign: 'center' },
+  checkSummary: { width: '100%', maxWidth: scale(1040), gap: scale(24), marginTop: scale(72) },
+  chapterHeading: { alignItems: 'center' },
+  chapterContent: { gap: scale(24) },
   timeline: { marginTop: scale(8) },
-  timelineLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12) },
-  viewingChapter: { marginTop: scale(56) },
-  block: { marginTop: scale(CALM_SPACE.BLOCK) },
-  buttons: { flexDirection: 'row', marginTop: scale(36) },
-  footer: { marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.SURFACE_FOCUSED },
+  timelineLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12), textAlign: 'center' },
+  viewingChapter: { width: '100%', maxWidth: scale(1040), marginTop: scale(56) },
+  block: { width: '100%', maxWidth: scale(1040), marginTop: scale(CALM_SPACE.BLOCK) },
+  buttons: { flexDirection: 'row', justifyContent: 'center', marginTop: scale(24) },
+  footer: { width: '100%', maxWidth: scale(1040), alignItems: 'center', marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.SURFACE_FOCUSED },
 });
 export default TitleDetailsScreen;

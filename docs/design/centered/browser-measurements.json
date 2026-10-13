@@ -1,0 +1,1801 @@
+{
+  "opening": {
+    "title": "opening | browser layout approximation",
+    "fontsLoaded": false,
+    "imagesLoaded": true,
+    "scrollViews": [],
+    "nodes": [
+      {
+        "id": "0",
+        "testID": "harbor-opening",
+        "nativeType": "View",
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "id": "0.0",
+        "nativeType": "View",
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "id": "0.0.0",
+        "testID": "harbor-opening-water",
+        "nativeType": "View",
+        "x": -24,
+        "y": -20,
+        "width": 1968,
+        "height": 1120
+      },
+      {
+        "id": "0.0.0.0",
+        "nativeType": "Image",
+        "x": -24,
+        "y": -20,
+        "width": 1968,
+        "height": 1120
+      },
+      {
+        "id": "0.0.1",
+        "nativeType": "LinearGradient",
+        "x": 0,
+        "y": 680,
+        "width": 1920,
+        "height": 400
+      },
+      {
+        "id": "0.1",
+        "nativeType": "View",
+        "x": 96,
+        "y": 956,
+        "width": 1728,
+        "height": 64
+      },
+      {
+        "id": "0.1.0",
+        "nativeType": "Image",
+        "x": 803.515625,
+        "y": 956,
+        "width": 64,
+        "height": 64
+      },
+      {
+        "id": "0.1.1",
+        "nativeType": "Text",
+        "text": "Calm Frames",
+        "x": 887.515625,
+        "y": 964,
+        "width": 228.96875,
+        "height": 48
+      }
+    ]
+  },
+  "library-family": {
+    "title": "library-family | browser layout approximation",
+    "fontsLoaded": true,
+    "imagesLoaded": true,
+    "scrollViews": [
+      {
+        "clientHeight": 866,
+        "scrollHeight": 866,
+        "scrollWidth": 1728,
+        "clientWidth": 1728
+      }
+    ],
+    "nodes": [
+      {
+        "id": "0",
+        "testID": "kid-home",
+        "nativeType": "View",
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "id": "0.0",
+        "nativeType": "View",
+        "x": 240,
+        "y": 54,
+        "width": 1440,
+        "height": 82
+      },
+      {
+        "id": "0.0.0",
+        "nativeType": "View",
+        "x": 240,
+        "y": 59,
+        "width": 312.046875,
+        "height": 72
+      },
+      {
+        "id": "0.0.0.0",
+        "nativeType": "Image",
+        "x": 240,
+        "y": 59,
+        "width": 72,
+        "height": 72
+      },
+      {
+        "id": "0.0.0.1",
+        "nativeType": "Text",
+        "text": "Calm Frames",
+        "x": 332,
+        "y": 72,
+        "width": 220.046875,
+        "height": 46
+      },
+      {
+        "id": "0.0.1",
+        "nativeType": "View",
+        "x": 1176.015625,
+        "y": 54,
+        "width": 503.984375,
+        "height": 82
+      },
+      {
+        "id": "0.0.1.0",
+        "testID": "kid-home-choose-profile",
+        "nativeType": "View",
+        "x": 1176.015625,
+        "y": 54,
+        "width": 147.59375,
+        "height": 82
+      },
+      {
+        "id": "0.0.1.0.0",
+        "testID": "kid-home-choose-profile-label",
+        "nativeType": "Text",
+        "text": "Robin",
+        "x": 1202.015625,
+        "y": 72,
+        "width": 95.59375,
+        "height": 46
+      },
+      {
+        "id": "0.0.1.1",
+        "nativeType": "View",
+        "x": 1343.609375,
+        "y": 54,
+        "width": 336.390625,
+        "height": 82
+      },
+      {
+        "id": "0.0.1.1.0",
+        "testID": "kid-home-parent-area",
+        "nativeType": "View",
+        "x": 1343.609375,
+        "y": 54,
+        "width": 336.390625,
+        "height": 82
+      },
+      {
+        "id": "0.0.1.1.0.0",
+        "testID": "kid-home-parent-area-label",
+        "nativeType": "Text",
+        "text": "Parental controls",
+        "x": 1369.609375,
+        "y": 72,
+        "width": 284.390625,
+        "height": 46
+      },
+      {
+        "id": "0.1",
+        "nativeType": "RCTScrollView",
+        "x": 96,
+        "y": 148,
+        "width": 1728,
+        "height": 866
+      },
+      {
+        "id": "0.1.0",
+        "nativeType": "View",
+        "x": 96,
+        "y": 148,
+        "width": 1728,
+        "height": 846
+      },
+      {
+        "id": "0.1.0.0",
+        "nativeType": "View",
+        "x": 240,
+        "y": 148,
+        "width": 1440,
+        "height": 524
+      },
+      {
+        "id": "0.1.0.0.0",
+        "nativeType": "View",
+        "x": 600,
+        "y": 148,
+        "width": 720,
+        "height": 240
+      },
+      {
+        "id": "0.1.0.0.0.0",
+        "testID": "kid-home-hero-motion",
+        "nativeType": "View",
+        "x": 600,
+        "y": 148,
+        "width": 720,
+        "height": 240
+      },
+      {
+        "id": "0.1.0.0.0.0.0",
+        "testID": "kid-home-hero-art",
+        "nativeType": "Image",
+        "x": 600,
+        "y": 148,
+        "width": 720,
+        "height": 240
+      },
+      {
+        "id": "0.1.0.0.0.1",
+        "nativeType": "LinearGradient",
+        "x": 600,
+        "y": 148,
+        "width": 720,
+        "height": 32
+      },
+      {
+        "id": "0.1.0.0.0.2",
+        "nativeType": "LinearGradient",
+        "x": 600,
+        "y": 288,
+        "width": 720,
+        "height": 100
+      },
+      {
+        "id": "0.1.0.0.0.3",
+        "nativeType": "LinearGradient",
+        "x": 1220,
+        "y": 148,
+        "width": 100,
+        "height": 240
+      },
+      {
+        "id": "0.1.0.0.1",
+        "nativeType": "View",
+        "x": 460,
+        "y": 388,
+        "width": 1000,
+        "height": 284
+      },
+      {
+        "id": "0.1.0.0.1.0",
+        "nativeType": "View",
+        "x": 863.953125,
+        "y": 396,
+        "width": 192.078125,
+        "height": 42
+      },
+      {
+        "id": "0.1.0.0.1.0.0",
+        "nativeType": "Text",
+        "text": "Original story",
+        "x": 863.953125,
+        "y": 396,
+        "width": 192.078125,
+        "height": 42
+      },
+      {
+        "id": "0.1.0.0.1.1",
+        "nativeType": "Text",
+        "text": "Harbor",
+        "x": 869.140625,
+        "y": 446,
+        "width": 181.71875,
+        "height": 68
+      },
+      {
+        "id": "0.1.0.0.1.2",
+        "nativeType": "Text",
+        "text": "Settle into a quiet harbor at sunset.",
+        "x": 709.0625,
+        "y": 522,
+        "width": 501.875,
+        "height": 40
+      },
+      {
+        "id": "0.1.0.0.1.3",
+        "nativeType": "View",
+        "x": 712.53125,
+        "y": 574,
+        "width": 494.9375,
+        "height": 98
+      },
+      {
+        "id": "0.1.0.0.1.3.0",
+        "testID": "kid-home-watch",
+        "nativeType": "View",
+        "x": 712.53125,
+        "y": 574,
+        "width": 263.5,
+        "height": 98
+      },
+      {
+        "id": "0.1.0.0.1.3.0.0",
+        "testID": "kid-home-watch-label",
+        "nativeType": "Text",
+        "text": "Watch now",
+        "x": 750.53125,
+        "y": 600,
+        "width": 187.5,
+        "height": 46
+      },
+      {
+        "id": "0.1.0.0.1.3.1",
+        "testID": "kid-home-more-info",
+        "nativeType": "View",
+        "x": 996.03125,
+        "y": 574,
+        "width": 211.4375,
+        "height": 82
+      },
+      {
+        "id": "0.1.0.0.1.3.1.0",
+        "testID": "kid-home-more-info-label",
+        "nativeType": "Text",
+        "text": "More info",
+        "x": 1022.03125,
+        "y": 592,
+        "width": 159.4375,
+        "height": 46
+      },
+      {
+        "id": "0.1.0.1",
+        "nativeType": "View",
+        "x": 847.890625,
+        "y": 680,
+        "width": 224.203125,
+        "height": 54
+      },
+      {
+        "id": "0.1.0.1.0",
+        "testID": "kid-home-title",
+        "nativeType": "Text",
+        "text": "Your library",
+        "x": 847.890625,
+        "y": 680,
+        "width": 224.203125,
+        "height": 54
+      },
+      {
+        "id": "0.1.0.2",
+        "nativeType": "View",
+        "x": 100,
+        "y": 738,
+        "width": 1720,
+        "height": 244
+      },
+      {
+        "id": "0.1.0.2.0",
+        "testID": "kid-home-poster-calm-frames-benign-story",
+        "nativeType": "View",
+        "x": 340,
+        "y": 738,
+        "width": 400,
+        "height": 244
+      },
+      {
+        "id": "0.1.0.2.0.0",
+        "testID": "kid-home-poster-image-calm-frames-benign-story",
+        "nativeType": "Image",
+        "x": 352,
+        "y": 750,
+        "width": 376,
+        "height": 120
+      },
+      {
+        "id": "0.1.0.2.0.1",
+        "testID": "kid-home-poster-title-calm-frames-benign-story",
+        "nativeType": "Text",
+        "text": "Harbor demo",
+        "x": 352,
+        "y": 878,
+        "width": 376,
+        "height": 48
+      },
+      {
+        "id": "0.1.0.2.0.2",
+        "testID": "kid-home-poster-qualifier-calm-frames-benign-story",
+        "nativeType": "Text",
+        "text": "Practice holds",
+        "x": 352,
+        "y": 926,
+        "width": 376,
+        "height": 42
+      },
+      {
+        "id": "0.1.0.2.1",
+        "testID": "kid-home-poster-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+        "nativeType": "View",
+        "x": 760,
+        "y": 738,
+        "width": 400,
+        "height": 244
+      },
+      {
+        "id": "0.1.0.2.1.0",
+        "testID": "kid-home-poster-image-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+        "nativeType": "Image",
+        "x": 772,
+        "y": 750,
+        "width": 376,
+        "height": 120
+      },
+      {
+        "id": "0.1.0.2.1.1",
+        "testID": "kid-home-poster-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+        "nativeType": "Text",
+        "text": "Harbor",
+        "x": 772,
+        "y": 878,
+        "width": 376,
+        "height": 48
+      },
+      {
+        "id": "0.1.0.2.1.2",
+        "testID": "kid-home-poster-qualifier-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+        "nativeType": "Text",
+        "text": "Original story",
+        "x": 772,
+        "y": 926,
+        "width": 376,
+        "height": 42
+      },
+      {
+        "id": "0.1.0.2.2",
+        "testID": "kid-home-poster-calm-frames-offline",
+        "nativeType": "View",
+        "x": 1180,
+        "y": 738,
+        "width": 400,
+        "height": 244
+      },
+      {
+        "id": "0.1.0.2.2.0",
+        "testID": "kid-home-poster-image-calm-frames-offline",
+        "nativeType": "Image",
+        "x": 1192,
+        "y": 750,
+        "width": 376,
+        "height": 120
+      },
+      {
+        "id": "0.1.0.2.2.1",
+        "testID": "kid-home-poster-title-calm-frames-offline",
+        "nativeType": "Text",
+        "text": "Calm gradient",
+        "x": 1192,
+        "y": 878,
+        "width": 376,
+        "height": 48
+      },
+      {
+        "id": "0.1.0.2.2.2",
+        "testID": "kid-home-poster-qualifier-calm-frames-offline",
+        "nativeType": "Text",
+        "text": "Playback test",
+        "x": 1192,
+        "y": 926,
+        "width": 376,
+        "height": 42
+      },
+      {
+        "id": "0.2",
+        "nativeType": "View",
+        "x": 96,
+        "y": 1014,
+        "width": 1728,
+        "height": 12
+      }
+    ]
+  },
+  "library-unavailable": {
+    "title": "library-unavailable | browser layout approximation",
+    "fontsLoaded": true,
+    "imagesLoaded": true,
+    "scrollViews": [
+      {
+        "clientHeight": 824,
+        "scrollHeight": 846,
+        "scrollWidth": 1728,
+        "clientWidth": 1728
+      }
+    ],
+    "nodes": [
+      {
+        "id": "0",
+        "testID": "kid-home",
+        "nativeType": "View",
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "id": "0.0",
+        "nativeType": "View",
+        "x": 240,
+        "y": 54,
+        "width": 1440,
+        "height": 82
+      },
+      {
+        "id": "0.0.0",
+        "nativeType": "View",
+        "x": 240,
+        "y": 59,
+        "width": 312.046875,
+        "height": 72
+      },
+      {
+        "id": "0.0.0.0",
+        "nativeType": "Image",
+        "x": 240,
+        "y": 59,
+        "width": 72,
+        "height": 72
+      },
+      {
+        "id": "0.0.0.1",
+        "nativeType": "Text",
+        "text": "Calm Frames",
+        "x": 332,
+        "y": 72,
+        "width": 220.046875,
+        "height": 46
+      },
+      {
+        "id": "0.0.1",
+        "nativeType": "View",
+        "x": 1176.015625,
+        "y": 54,
+        "width": 503.984375,
+        "height": 82
+      },
+      {
+        "id": "0.0.1.0",
+        "testID": "kid-home-choose-profile",
+        "nativeType": "View",
+        "x": 1176.015625,
+        "y": 54,
+        "width": 147.59375,
+        "height": 82
+      },
+      {
+        "id": "0.0.1.0.0",
+        "testID": "kid-home-choose-profile-label",
+        "nativeType": "Text",
+        "text": "Robin",
+        "x": 1202.015625,
+        "y": 72,
+        "width": 95.59375,
+        "height": 46
+      },
+      {
+        "id": "0.0.1.1",
+        "nativeType": "View",
+        "x": 1343.609375,
+        "y": 54,
+        "width": 336.390625,
+        "height": 82
+      },
+      {
+        "id": "0.0.1.1.0",
+        "testID": "kid-home-parent-area",
+        "nativeType": "View",
+        "x": 1343.609375,
+        "y": 54,
+        "width": 336.390625,
+        "height": 82
+      },
+      {
+        "id": "0.0.1.1.0.0",
+        "testID": "kid-home-parent-area-label",
+        "nativeType": "Text",
+        "text": "Parental controls",
+        "x": 1369.609375,
+        "y": 72,
+        "width": 284.390625,
+        "height": 46
+      },
+      {
+        "id": "0.1",
+        "nativeType": "RCTScrollView",
+        "x": 96,
+        "y": 148,
+        "width": 1728,
+        "height": 824
+      },
+      {
+        "id": "0.1.0",
+        "nativeType": "View",
+        "x": 96,
+        "y": 148,
+        "width": 1728,
+        "height": 846
+      },
+      {
+        "id": "0.1.0.0",
+        "nativeType": "View",
+        "x": 240,
+        "y": 148,
+        "width": 1440,
+        "height": 524
+      },
+      {
+        "id": "0.1.0.0.0",
+        "nativeType": "View",
+        "x": 600,
+        "y": 148,
+        "width": 720,
+        "height": 240
+      },
+      {
+        "id": "0.1.0.0.0.0",
+        "testID": "kid-home-hero-motion",
+        "nativeType": "View",
+        "x": 600,
+        "y": 148,
+        "width": 720,
+        "height": 240
+      },
+      {
+        "id": "0.1.0.0.0.0.0",
+        "testID": "kid-home-hero-art",
+        "nativeType": "Image",
+        "x": 600,
+        "y": 148,
+        "width": 720,
+        "height": 240
+      },
+      {
+        "id": "0.1.0.0.0.1",
+        "nativeType": "LinearGradient",
+        "x": 600,
+        "y": 148,
+        "width": 720,
+        "height": 32
+      },
+      {
+        "id": "0.1.0.0.0.2",
+        "nativeType": "LinearGradient",
+        "x": 600,
+        "y": 288,
+        "width": 720,
+        "height": 100
+      },
+      {
+        "id": "0.1.0.0.0.3",
+        "nativeType": "LinearGradient",
+        "x": 1220,
+        "y": 148,
+        "width": 100,
+        "height": 240
+      },
+      {
+        "id": "0.1.0.0.1",
+        "nativeType": "View",
+        "x": 460,
+        "y": 388,
+        "width": 1000,
+        "height": 284
+      },
+      {
+        "id": "0.1.0.0.1.0",
+        "nativeType": "View",
+        "x": 863.953125,
+        "y": 396,
+        "width": 192.078125,
+        "height": 42
+      },
+      {
+        "id": "0.1.0.0.1.0.0",
+        "nativeType": "Text",
+        "text": "Original story",
+        "x": 863.953125,
+        "y": 396,
+        "width": 192.078125,
+        "height": 42
+      },
+      {
+        "id": "0.1.0.0.1.1",
+        "nativeType": "Text",
+        "text": "Harbor",
+        "x": 869.140625,
+        "y": 446,
+        "width": 181.71875,
+        "height": 68
+      },
+      {
+        "id": "0.1.0.0.1.2",
+        "nativeType": "Text",
+        "text": "Settle into a quiet harbor at sunset.",
+        "x": 709.0625,
+        "y": 522,
+        "width": 501.875,
+        "height": 40
+      },
+      {
+        "id": "0.1.0.0.1.3",
+        "nativeType": "View",
+        "x": 712.53125,
+        "y": 574,
+        "width": 494.9375,
+        "height": 98
+      },
+      {
+        "id": "0.1.0.0.1.3.0",
+        "testID": "kid-home-watch",
+        "nativeType": "View",
+        "x": 712.53125,
+        "y": 574,
+        "width": 263.5,
+        "height": 98
+      },
+      {
+        "id": "0.1.0.0.1.3.0.0",
+        "testID": "kid-home-watch-label",
+        "nativeType": "Text",
+        "text": "Watch now",
+        "x": 750.53125,
+        "y": 600,
+        "width": 187.5,
+        "height": 46
+      },
+      {
+        "id": "0.1.0.0.1.3.1",
+        "testID": "kid-home-more-info",
+        "nativeType": "View",
+        "x": 996.03125,
+        "y": 574,
+        "width": 211.4375,
+        "height": 82
+      },
+      {
+        "id": "0.1.0.0.1.3.1.0",
+        "testID": "kid-home-more-info-label",
+        "nativeType": "Text",
+        "text": "More info",
+        "x": 1022.03125,
+        "y": 592,
+        "width": 159.4375,
+        "height": 46
+      },
+      {
+        "id": "0.1.0.1",
+        "nativeType": "View",
+        "x": 847.890625,
+        "y": 680,
+        "width": 224.203125,
+        "height": 54
+      },
+      {
+        "id": "0.1.0.1.0",
+        "testID": "kid-home-title",
+        "nativeType": "Text",
+        "text": "Your library",
+        "x": 847.890625,
+        "y": 680,
+        "width": 224.203125,
+        "height": 54
+      },
+      {
+        "id": "0.1.0.2",
+        "nativeType": "View",
+        "x": 100,
+        "y": 738,
+        "width": 1720,
+        "height": 244
+      },
+      {
+        "id": "0.1.0.2.0",
+        "testID": "kid-home-poster-calm-frames-benign-story",
+        "nativeType": "View",
+        "x": 550,
+        "y": 738,
+        "width": 400,
+        "height": 244
+      },
+      {
+        "id": "0.1.0.2.0.0",
+        "testID": "kid-home-poster-image-calm-frames-benign-story",
+        "nativeType": "Image",
+        "x": 562,
+        "y": 750,
+        "width": 376,
+        "height": 120
+      },
+      {
+        "id": "0.1.0.2.0.1",
+        "testID": "kid-home-poster-title-calm-frames-benign-story",
+        "nativeType": "Text",
+        "text": "Harbor demo",
+        "x": 562,
+        "y": 878,
+        "width": 376,
+        "height": 48
+      },
+      {
+        "id": "0.1.0.2.0.2",
+        "testID": "kid-home-poster-qualifier-calm-frames-benign-story",
+        "nativeType": "Text",
+        "text": "Practice holds",
+        "x": 562,
+        "y": 926,
+        "width": 376,
+        "height": 42
+      },
+      {
+        "id": "0.1.0.2.1",
+        "testID": "kid-home-poster-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+        "nativeType": "View",
+        "x": 970,
+        "y": 738,
+        "width": 400,
+        "height": 244
+      },
+      {
+        "id": "0.1.0.2.1.0",
+        "testID": "kid-home-poster-image-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+        "nativeType": "Image",
+        "x": 982,
+        "y": 750,
+        "width": 376,
+        "height": 120
+      },
+      {
+        "id": "0.1.0.2.1.1",
+        "testID": "kid-home-poster-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+        "nativeType": "Text",
+        "text": "Harbor",
+        "x": 982,
+        "y": 878,
+        "width": 376,
+        "height": 48
+      },
+      {
+        "id": "0.1.0.2.1.2",
+        "testID": "kid-home-poster-qualifier-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+        "nativeType": "Text",
+        "text": "Original story",
+        "x": 982,
+        "y": 926,
+        "width": 376,
+        "height": 42
+      },
+      {
+        "id": "0.2",
+        "nativeType": "View",
+        "x": 96,
+        "y": 972,
+        "width": 1728,
+        "height": 54
+      },
+      {
+        "id": "0.2.0",
+        "testID": "kid-home-hidden-count",
+        "nativeType": "Text",
+        "text": "1 more title is unavailable. Open Parental controls to see why.",
+        "x": 522.546875,
+        "y": 984,
+        "width": 874.890625,
+        "height": 42
+      }
+    ]
+  },
+  "details-harbor": {
+    "title": "details-harbor | browser layout approximation",
+    "fontsLoaded": true,
+    "imagesLoaded": true,
+    "scrollViews": [
+      {
+        "clientHeight": 1080,
+        "scrollHeight": 2283,
+        "scrollWidth": 1920,
+        "clientWidth": 1920
+      }
+    ],
+    "nodes": [
+      {
+        "id": "0",
+        "testID": "title-details",
+        "nativeType": "RCTScrollView",
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "id": "0.0",
+        "nativeType": "View",
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 2283
+      },
+      {
+        "id": "0.0.0",
+        "nativeType": "View",
+        "x": 240,
+        "y": 54,
+        "width": 1440,
+        "height": 82
+      },
+      {
+        "id": "0.0.0.0",
+        "testID": "title-details-back",
+        "nativeType": "View",
+        "x": 240,
+        "y": 54,
+        "width": 292.671875,
+        "height": 82
+      },
+      {
+        "id": "0.0.0.0.0",
+        "testID": "title-details-back-label",
+        "nativeType": "Text",
+        "text": "Back to library",
+        "x": 266,
+        "y": 72,
+        "width": 240.671875,
+        "height": 46
+      },
+      {
+        "id": "0.0.1",
+        "nativeType": "View",
+        "x": 240,
+        "y": 152,
+        "width": 1440,
+        "height": 864
+      },
+      {
+        "id": "0.0.1.0",
+        "nativeType": "View",
+        "x": 320,
+        "y": 152,
+        "width": 1280,
+        "height": 480
+      },
+      {
+        "id": "0.0.1.0.0",
+        "testID": "title-details-hero-motion",
+        "nativeType": "View",
+        "x": 320,
+        "y": 152,
+        "width": 1280,
+        "height": 480
+      },
+      {
+        "id": "0.0.1.0.0.0",
+        "testID": "title-details-artwork",
+        "nativeType": "Image",
+        "x": 320,
+        "y": 152,
+        "width": 1280,
+        "height": 480
+      },
+      {
+        "id": "0.0.1.0.1",
+        "nativeType": "LinearGradient",
+        "x": 320,
+        "y": 152,
+        "width": 1280,
+        "height": 56
+      },
+      {
+        "id": "0.0.1.0.2",
+        "nativeType": "LinearGradient",
+        "x": 320,
+        "y": 472,
+        "width": 1280,
+        "height": 160
+      },
+      {
+        "id": "0.0.1.0.3",
+        "nativeType": "LinearGradient",
+        "x": 1480,
+        "y": 152,
+        "width": 120,
+        "height": 480
+      },
+      {
+        "id": "0.0.1.1",
+        "nativeType": "View",
+        "x": 460,
+        "y": 632,
+        "width": 1000,
+        "height": 384
+      },
+      {
+        "id": "0.0.1.1.0",
+        "nativeType": "View",
+        "x": 863.953125,
+        "y": 644,
+        "width": 192.078125,
+        "height": 42
+      },
+      {
+        "id": "0.0.1.1.0.0",
+        "nativeType": "Text",
+        "text": "Original story",
+        "x": 863.953125,
+        "y": 644,
+        "width": 192.078125,
+        "height": 42
+      },
+      {
+        "id": "0.0.1.1.1",
+        "testID": "title-details-title",
+        "nativeType": "Text",
+        "text": "Harbor",
+        "x": 824.390625,
+        "y": 694,
+        "width": 271.203125,
+        "height": 96
+      },
+      {
+        "id": "0.0.1.1.2",
+        "testID": "title-details-description",
+        "nativeType": "Text",
+        "text": "A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.",
+        "x": 460,
+        "y": 806,
+        "width": 1000,
+        "height": 88
+      },
+      {
+        "id": "0.0.1.1.3",
+        "nativeType": "View",
+        "x": 828.25,
+        "y": 918,
+        "width": 263.5,
+        "height": 98
+      },
+      {
+        "id": "0.0.1.1.3.0",
+        "testID": "title-details-play",
+        "nativeType": "View",
+        "x": 828.25,
+        "y": 918,
+        "width": 263.5,
+        "height": 98
+      },
+      {
+        "id": "0.0.1.1.3.0.0",
+        "testID": "title-details-play-label",
+        "nativeType": "Text",
+        "text": "Watch now",
+        "x": 866.25,
+        "y": 944,
+        "width": 187.5,
+        "height": 46
+      },
+      {
+        "id": "0.0.2",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1088,
+        "width": 1040,
+        "height": 288
+      },
+      {
+        "id": "0.0.2.0",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1088,
+        "width": 1040,
+        "height": 54
+      },
+      {
+        "id": "0.0.2.0.0",
+        "nativeType": "Text",
+        "text": "Before you watch",
+        "x": 788.953125,
+        "y": 1088,
+        "width": 342.078125,
+        "height": 54
+      },
+      {
+        "id": "0.0.2.1",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1166,
+        "width": 1040,
+        "height": 210
+      },
+      {
+        "id": "0.0.2.1.0",
+        "testID": "title-details-summary",
+        "nativeType": "Text",
+        "text": "This story plays without picture holds. Some flashing may still go undetected.",
+        "x": 440,
+        "y": 1166,
+        "width": 1040,
+        "height": 96
+      },
+      {
+        "id": "0.0.2.1.1",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1294,
+        "width": 1040,
+        "height": 82
+      },
+      {
+        "id": "0.0.2.1.1.0",
+        "nativeType": "Text",
+        "text": "Picture timeline",
+        "x": 440,
+        "y": 1294,
+        "width": 1040,
+        "height": 42
+      },
+      {
+        "id": "0.0.2.1.1.1",
+        "testID": "title-details-strip",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1348,
+        "width": 1040,
+        "height": 28
+      },
+      {
+        "id": "0.0.2.1.1.1.0",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1348,
+        "width": 1040,
+        "height": 28
+      },
+      {
+        "id": "0.0.3",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1432,
+        "width": 1040,
+        "height": 650
+      },
+      {
+        "id": "0.0.3.0",
+        "testID": "title-details-plan",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1432,
+        "width": 1040,
+        "height": 650
+      },
+      {
+        "id": "0.0.3.0.0",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1481,
+        "width": 1040,
+        "height": 54
+      },
+      {
+        "id": "0.0.3.0.0.0",
+        "nativeType": "Text",
+        "text": "Your viewing settings",
+        "x": 440,
+        "y": 1481,
+        "width": 1040,
+        "height": 54
+      },
+      {
+        "id": "0.0.3.0.1",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1559,
+        "width": 1040,
+        "height": 523
+      },
+      {
+        "id": "0.0.3.0.1.0",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1559,
+        "width": 1040,
+        "height": 382
+      },
+      {
+        "id": "0.0.3.0.1.0.0",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1559,
+        "width": 1040,
+        "height": 166
+      },
+      {
+        "id": "0.0.3.0.1.0.0.0",
+        "testID": "title-details-plan-preset",
+        "nativeType": "Text",
+        "text": "Standard",
+        "x": 440,
+        "y": 1571,
+        "width": 1040,
+        "height": 46
+      },
+      {
+        "id": "0.0.3.0.1.0.0.1",
+        "testID": "title-details-plan-room",
+        "nativeType": "Text",
+        "text": "55 inch television, seats about 8 feet away",
+        "x": 440,
+        "y": 1629,
+        "width": 1040,
+        "height": 42
+      },
+      {
+        "id": "0.0.3.0.1.0.0.2",
+        "testID": "title-details-plan-maps",
+        "nativeType": "Text",
+        "text": "Flash limits: WCAG 2.3.1.",
+        "x": 440,
+        "y": 1683,
+        "width": 1040,
+        "height": 42
+      },
+      {
+        "id": "0.0.3.0.1.0.1",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1749,
+        "width": 1040,
+        "height": 192
+      },
+      {
+        "id": "0.0.3.0.1.0.1.0",
+        "testID": "title-details-plan-continuity",
+        "nativeType": "Text",
+        "text": "When a part is hidden, a still image or dark screen covers the picture while sound and captions continue.",
+        "x": 440,
+        "y": 1761,
+        "width": 1040,
+        "height": 84
+      },
+      {
+        "id": "0.0.3.0.1.0.1.1",
+        "nativeType": "Text",
+        "text": "The picture stays covered while seeking or when playback timing is uncertain. Room settings can only hide additional parts.",
+        "x": 440,
+        "y": 1857,
+        "width": 1040,
+        "height": 84
+      },
+      {
+        "id": "0.0.3.0.1.1",
+        "testID": "title-details-plan-limits",
+        "nativeType": "Text",
+        "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+        "x": 440,
+        "y": 1973,
+        "width": 1040,
+        "height": 109
+      },
+      {
+        "id": "0.0.4",
+        "nativeType": "View",
+        "x": 440,
+        "y": 2122,
+        "width": 1040,
+        "height": 107
+      },
+      {
+        "id": "0.0.4.0",
+        "testID": "title-details-back-bottom",
+        "nativeType": "View",
+        "x": 440,
+        "y": 2147,
+        "width": 292.671875,
+        "height": 82
+      },
+      {
+        "id": "0.0.4.0.0",
+        "testID": "title-details-back-bottom-label",
+        "nativeType": "Text",
+        "text": "Back to library",
+        "x": 466,
+        "y": 2165,
+        "width": 240.671875,
+        "height": 46
+      }
+    ]
+  },
+  "details-demo": {
+    "title": "details-demo | browser layout approximation",
+    "fontsLoaded": true,
+    "imagesLoaded": true,
+    "scrollViews": [
+      {
+        "clientHeight": 1080,
+        "scrollHeight": 2355,
+        "scrollWidth": 1920,
+        "clientWidth": 1920
+      }
+    ],
+    "nodes": [
+      {
+        "id": "0",
+        "testID": "title-details",
+        "nativeType": "RCTScrollView",
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "id": "0.0",
+        "nativeType": "View",
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 2355
+      },
+      {
+        "id": "0.0.0",
+        "nativeType": "View",
+        "x": 240,
+        "y": 54,
+        "width": 1440,
+        "height": 82
+      },
+      {
+        "id": "0.0.0.0",
+        "testID": "title-details-back",
+        "nativeType": "View",
+        "x": 240,
+        "y": 54,
+        "width": 292.671875,
+        "height": 82
+      },
+      {
+        "id": "0.0.0.0.0",
+        "testID": "title-details-back-label",
+        "nativeType": "Text",
+        "text": "Back to library",
+        "x": 266,
+        "y": 72,
+        "width": 240.671875,
+        "height": 46
+      },
+      {
+        "id": "0.0.1",
+        "nativeType": "View",
+        "x": 240,
+        "y": 152,
+        "width": 1440,
+        "height": 864
+      },
+      {
+        "id": "0.0.1.0",
+        "nativeType": "View",
+        "x": 320,
+        "y": 152,
+        "width": 1280,
+        "height": 480
+      },
+      {
+        "id": "0.0.1.0.0",
+        "testID": "title-details-hero-motion",
+        "nativeType": "View",
+        "x": 320,
+        "y": 152,
+        "width": 1280,
+        "height": 480
+      },
+      {
+        "id": "0.0.1.0.0.0",
+        "testID": "title-details-artwork",
+        "nativeType": "Image",
+        "x": 320,
+        "y": 152,
+        "width": 1280,
+        "height": 480
+      },
+      {
+        "id": "0.0.1.0.1",
+        "nativeType": "LinearGradient",
+        "x": 320,
+        "y": 152,
+        "width": 1280,
+        "height": 56
+      },
+      {
+        "id": "0.0.1.0.2",
+        "nativeType": "LinearGradient",
+        "x": 320,
+        "y": 472,
+        "width": 1280,
+        "height": 160
+      },
+      {
+        "id": "0.0.1.0.3",
+        "nativeType": "LinearGradient",
+        "x": 1480,
+        "y": 152,
+        "width": 120,
+        "height": 480
+      },
+      {
+        "id": "0.0.1.1",
+        "nativeType": "View",
+        "x": 460,
+        "y": 632,
+        "width": 1000,
+        "height": 384
+      },
+      {
+        "id": "0.0.1.1.0",
+        "nativeType": "View",
+        "x": 857.796875,
+        "y": 644,
+        "width": 204.390625,
+        "height": 42
+      },
+      {
+        "id": "0.0.1.1.0.0",
+        "nativeType": "Text",
+        "text": "Practice holds",
+        "x": 857.796875,
+        "y": 644,
+        "width": 204.390625,
+        "height": 42
+      },
+      {
+        "id": "0.0.1.1.1",
+        "testID": "title-details-title",
+        "nativeType": "Text",
+        "text": "Harbor",
+        "x": 824.390625,
+        "y": 694,
+        "width": 271.203125,
+        "height": 96
+      },
+      {
+        "id": "0.0.1.1.2",
+        "testID": "title-details-demo-label",
+        "nativeType": "Text",
+        "text": "Two scheduled practice holds show how the picture pauses while sound and captions continue.",
+        "x": 460,
+        "y": 806,
+        "width": 1000,
+        "height": 88
+      },
+      {
+        "id": "0.0.1.1.3",
+        "nativeType": "View",
+        "x": 816.25,
+        "y": 918,
+        "width": 287.484375,
+        "height": 98
+      },
+      {
+        "id": "0.0.1.1.3.0",
+        "testID": "title-details-play",
+        "nativeType": "View",
+        "x": 816.25,
+        "y": 918,
+        "width": 287.484375,
+        "height": 98
+      },
+      {
+        "id": "0.0.1.1.3.0.0",
+        "testID": "title-details-play-label",
+        "nativeType": "Text",
+        "text": "Watch demo",
+        "x": 854.25,
+        "y": 944,
+        "width": 211.484375,
+        "height": 46
+      },
+      {
+        "id": "0.0.2",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1088,
+        "width": 1040,
+        "height": 360
+      },
+      {
+        "id": "0.0.2.0",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1088,
+        "width": 1040,
+        "height": 54
+      },
+      {
+        "id": "0.0.2.0.0",
+        "nativeType": "Text",
+        "text": "About this demo",
+        "x": 798.890625,
+        "y": 1088,
+        "width": 322.21875,
+        "height": 54
+      },
+      {
+        "id": "0.0.2.1",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1166,
+        "width": 1040,
+        "height": 282
+      },
+      {
+        "id": "0.0.2.1.0",
+        "nativeType": "Text",
+        "text": "Harbor was created without flashing effects. The two picture holds are scheduled demonstrations.",
+        "x": 440,
+        "y": 1166,
+        "width": 1040,
+        "height": 96
+      },
+      {
+        "id": "0.0.2.1.1",
+        "testID": "title-details-summary",
+        "nativeType": "Text",
+        "text": "2 scheduled holds are included, 8 seconds in all.",
+        "x": 440,
+        "y": 1286,
+        "width": 1040,
+        "height": 48
+      },
+      {
+        "id": "0.0.2.1.2",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1366,
+        "width": 1040,
+        "height": 82
+      },
+      {
+        "id": "0.0.2.1.2.0",
+        "nativeType": "Text",
+        "text": "Picture timeline",
+        "x": 440,
+        "y": 1366,
+        "width": 1040,
+        "height": 42
+      },
+      {
+        "id": "0.0.2.1.2.1",
+        "testID": "title-details-strip",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1420,
+        "width": 1040,
+        "height": 28
+      },
+      {
+        "id": "0.0.2.1.2.1.0",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1420,
+        "width": 1040,
+        "height": 28
+      },
+      {
+        "id": "0.0.2.1.2.1.0.0",
+        "testID": "title-details-strip-mark-0",
+        "nativeType": "View",
+        "x": 702,
+        "y": 1422,
+        "width": 208,
+        "height": 24
+      },
+      {
+        "id": "0.0.2.1.2.1.0.1",
+        "testID": "title-details-strip-mark-1",
+        "nativeType": "View",
+        "x": 1066,
+        "y": 1422,
+        "width": 208,
+        "height": 24
+      },
+      {
+        "id": "0.0.3",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1504,
+        "width": 1040,
+        "height": 650
+      },
+      {
+        "id": "0.0.3.0",
+        "testID": "title-details-plan",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1504,
+        "width": 1040,
+        "height": 650
+      },
+      {
+        "id": "0.0.3.0.0",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1553,
+        "width": 1040,
+        "height": 54
+      },
+      {
+        "id": "0.0.3.0.0.0",
+        "nativeType": "Text",
+        "text": "Your viewing settings",
+        "x": 440,
+        "y": 1553,
+        "width": 1040,
+        "height": 54
+      },
+      {
+        "id": "0.0.3.0.1",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1631,
+        "width": 1040,
+        "height": 523
+      },
+      {
+        "id": "0.0.3.0.1.0",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1631,
+        "width": 1040,
+        "height": 382
+      },
+      {
+        "id": "0.0.3.0.1.0.0",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1631,
+        "width": 1040,
+        "height": 166
+      },
+      {
+        "id": "0.0.3.0.1.0.0.0",
+        "testID": "title-details-plan-preset",
+        "nativeType": "Text",
+        "text": "Extra cautious",
+        "x": 440,
+        "y": 1643,
+        "width": 1040,
+        "height": 46
+      },
+      {
+        "id": "0.0.3.0.1.0.0.1",
+        "testID": "title-details-plan-room",
+        "nativeType": "Text",
+        "text": "55 inch television, seats about 8 feet away",
+        "x": 440,
+        "y": 1701,
+        "width": 1040,
+        "height": 42
+      },
+      {
+        "id": "0.0.3.0.1.0.0.2",
+        "testID": "title-details-plan-maps",
+        "nativeType": "Text",
+        "text": "Flash limits: WCAG 2.3.1 and broadcast.",
+        "x": 440,
+        "y": 1755,
+        "width": 1040,
+        "height": 42
+      },
+      {
+        "id": "0.0.3.0.1.0.1",
+        "nativeType": "View",
+        "x": 440,
+        "y": 1821,
+        "width": 1040,
+        "height": 192
+      },
+      {
+        "id": "0.0.3.0.1.0.1.0",
+        "testID": "title-details-plan-continuity",
+        "nativeType": "Text",
+        "text": "When a part is hidden, a still image or dark screen covers the picture while sound and captions continue.",
+        "x": 440,
+        "y": 1833,
+        "width": 1040,
+        "height": 84
+      },
+      {
+        "id": "0.0.3.0.1.0.1.1",
+        "nativeType": "Text",
+        "text": "The picture stays covered while seeking or when playback timing is uncertain. Room settings can only hide additional parts.",
+        "x": 440,
+        "y": 1929,
+        "width": 1040,
+        "height": 84
+      },
+      {
+        "id": "0.0.3.0.1.1",
+        "testID": "title-details-plan-limits",
+        "nativeType": "Text",
+        "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+        "x": 440,
+        "y": 2045,
+        "width": 1040,
+        "height": 109
+      },
+      {
+        "id": "0.0.4",
+        "nativeType": "View",
+        "x": 440,
+        "y": 2194,
+        "width": 1040,
+        "height": 107
+      },
+      {
+        "id": "0.0.4.0",
+        "testID": "title-details-back-bottom",
+        "nativeType": "View",
+        "x": 440,
+        "y": 2219,
+        "width": 292.671875,
+        "height": 82
+      },
+      {
+        "id": "0.0.4.0.0",
+        "testID": "title-details-back-bottom-label",
+        "nativeType": "Text",
+        "text": "Back to library",
+        "x": 466,
+        "y": 2237,
+        "width": 240.671875,
+        "height": 46
+      }
+    ]
+  },
+  "browser": "151.0.7922.173",
+  "viewport": {
+    "width": 1920,
+    "height": 1080,
+    "deviceScaleFactor": 1
+  },
+  "blockedRequests": [],
+  "screenshotSha256": {
+    "docs/design/centered/details-demo-bottom-browser.png": "5fa6ad712b6374641c002b386bf679c007e91ad459e29ff015d6dd0727893148",
+    "docs/design/centered/details-demo-browser.png": "531e757a7aa7da270db44eb64c16619740af423b8d1ed7bd9d182784b3490c7e",
+    "docs/design/centered/details-harbor-browser.png": "d8d60a82bd46957be49213aa7c2c89a57110e80e09e567b894ff4bb2620a8bde",
+    "docs/design/centered/library-browser.png": "0796e9d9e6e66600189517424fb15b2f017160a249184f2fe126eee15568c6b9",
+    "docs/design/centered/library-unavailable-browser.png": "3614d368685d8d40f3bd8e018ce1bfcb263849e6d607f6bf86849d7ff232d638",
+    "docs/design/centered/opening-browser.png": "8243f582fcad204cbf7b574435d75dda7a12c138edc773125674b93fe3bab010"
+  },
+  "helperSha256": "833b54e9656a94b9ac82cdc1f37236d5613510e3aab8d024a06bfe0004084520",
+  "scope": "Browser approximation of actual React Native host trees. Synthetic household and callbacks, not Vega execution.",
+  "layoutChecks": {
+    "library-family": {
+      "cardLabelBottom": 968,
+      "footerTop": null,
+      "allLabelsVisibleAtRest": true,
+      "horizontalScrollAbsent": true
+    },
+    "library-unavailable": {
+      "cardLabelBottom": 968,
+      "footerTop": 984,
+      "allLabelsVisibleAtRest": true,
+      "horizontalScrollAbsent": true
+    },
+    "details-demo": {
+      "titleCenterX": 959.9921875,
+      "playCenterX": 959.9921875,
+      "playBottom": 1016,
+      "timelineCenterX": 960.0,
+      "horizontalScrollAbsent": true
+    },
+    "details-harbor": {
+      "titleCenterX": 959.9921875,
+      "playCenterX": 960.0,
+      "playBottom": 1016,
+      "timelineCenterX": 960.0,
+      "horizontalScrollAbsent": true
+    }
+  }
+}

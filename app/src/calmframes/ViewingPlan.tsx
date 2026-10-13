@@ -39,7 +39,6 @@ const ViewingPlan = ({
   return (
     <View testID={testID} style={styles.section}>
       <View style={styles.chapterHeading}>
-        <View style={styles.chapterRule} accessible={false} />
         <Text style={styles.heading} accessibilityRole="header">
           Your viewing settings
         </Text>
@@ -78,33 +77,34 @@ const ViewingPlan = ({
 
 const styles = StyleSheet.create({
   section: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: scale(72),
+    alignItems: 'center',
+    gap: scale(24),
     paddingTop: scale(48),
     borderTopWidth: scale(1),
     borderTopColor: CALM_COLORS.SURFACE_FOCUSED,
   },
-  chapterHeading: { width: scale(344) },
-  chapterRule: { width: scale(56), height: scale(3), backgroundColor: CALM_COLORS.FOCUS_RING, marginBottom: scale(20) },
-  content: { flex: 1 },
+  chapterHeading: { width: '100%' },
+  content: { width: '100%' },
   heading: {
     color: CALM_COLORS.TEXT,
     ...CALM_TEXT.section,
+    textAlign: 'center',
   },
   label: {
     color: CALM_COLORS.TEXT,
     ...CALM_TEXT.control,
     marginTop: scale(CALM_SPACE.TIGHT),
+    textAlign: 'center',
   },
   line: {
     color: CALM_COLORS.TEXT_DIM,
     ...CALM_TEXT.supporting,
     marginTop: scale(CALM_SPACE.TIGHT),
+    textAlign: 'center',
   },
-  columns: { flexDirection: 'row', gap: scale(48) },
-  summary: { width: scale(380) },
-  explanation: { flex: 1 },
+  columns: { alignItems: 'center', gap: scale(24) },
+  summary: { width: '100%' },
+  explanation: { width: '100%' },
   limits: {
     ...CALM_TEXT.supporting,
     color: CALM_COLORS.TEXT_DIM,
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     paddingTop: scale(24),
     borderTopWidth: scale(1),
     borderTopColor: CALM_COLORS.SURFACE_FOCUSED,
+    textAlign: 'center',
   },
 });
 

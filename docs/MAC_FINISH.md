@@ -1,11 +1,11 @@
 # Finish the polished simulator demo on the Mac
 
-**Oct 13 visual work:** the shared branch adds the water opening and replaces
-technical reassurance in app copy with natural viewing language. Include those
-changes before a native capture. Cloud work is also replacing the actual
-geometric Harbor footage: Alex's latest screenshot showed the playing film,
-not the loading screen. Do not record a final demo of that old movie. Fetch
-the next media milestone before rebuilding. Preserve current Mac artifacts.
+**Oct 13 visual work:** fetch the full shared branch before rebuilding. The
+library and details now use centered compositions, shorter copy and bounded
+text widths. Both Harbor titles contain the new animated water/boat/lighthouse
+film, with new maps, demo key, captions and package identities. The fresh
+prepared catalog includes its original report. Do not restore the older catalog
+or use an older recording for the final demo. Preserve previous Mac artifacts.
 
 Design baseline: `2f15069`, with the Handlebars patch in `41c34fc` and the
 current demo assembler and recording plan. Sync the full shared branch. Use the current
@@ -72,29 +72,19 @@ last frame of every covered span and records the ffmpeg that measured it
 (STATUS section 5). A verify run here carries that data as a matter of course;
 preserve the previous reports and recordings as history.
 
-The final preparation gate now requires the original verification reports for
-all retained library generations. Older catalogs preserve their report hashes,
-but this cloud checkout does not contain the matching originals. Normal delivery
-checks list missing reports; release preparation refuses to proceed without them.
-Attach the originals on the Mac before building, using their actual paths:
+The October 13 cinematic library is a new export with its own original
+verification report. Both strict delivery checks passed in cloud. Confirm the
+current files after syncing:
 
 ```sh
-.venv/bin/python -m pipeline.packaged_library check --output app/assets/raw/prepared-library
-.venv/bin/python -m pipeline.packaged_library attach-reports \
-  --output app/assets/raw/prepared-library \
-  --report /path/to/first/original/verify/report.json \
-  --report /path/to/second/original/verify/report.json
 .venv/bin/python -m pipeline.packaged_library check \
   --output app/assets/raw/prepared-library --require-reports
 ```
 
-The attachment command accepts only exact report hashes already referenced by
-the library and checks source, presets, passing checks and outcome. It keeps the
-catalog, signed maps, captions and video bytes unchanged. Future exports carry
-the original reports automatically. A regenerated report is new evidence and
-cannot replace an original under its old hash. If an original is unavailable,
-record that blocker; preserve existing evidence while planning a new verified
-export. Do not bypass the strict gate.
+The two older generations remain packaged with their original reports, recovered
+on the Mac in `f58ef98`. All three generations pass the strict report gate. The
+current catalog selects the new cinematic export. Preserve the Oct 13 native
+receipt for `06190c7`; it describes the earlier layout and geometric film.
 
 Inspect report contents before committing: originals can contain local paths and
 analyzer output. Do not redact a file while retaining its old digest. Run the

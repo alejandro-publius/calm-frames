@@ -67,7 +67,7 @@ describe('the pictures on the shelf', () => {
 
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const image = screen.getByTestId(`kid-home-poster-image-${BENIGN_STORY_ID}`);
-    expect(image.props.source).toEqual(require('../../assets/image/tv/harbor.png'));
+    expect(image.props.source).toEqual(require('../../assets/image/tv/harbor-cinematic.png'));
     expect(image.props.resizeMode).toBe('cover');
     expect(image.props.fadeDuration).toBe(0);
   });
@@ -141,13 +141,13 @@ describe('the words on the shelf', () => {
       .findAll((node) => (node.type as string) === 'Text')
       .map((node) => node.props.children);
 
-  it('introduces Harbor as an original demo film while keeping preparation detail on its page', () => {
+  it('introduces Harbor with a brief story synopsis while keeping preparation detail on its page', () => {
     const prepared = shelf.find((entry) => entry.title.id === preparedId)!;
     const onOpen = jest.fn();
     const onPlay = jest.fn();
     const home = render(<KidHomeScreen titles={shelf} onOpen={onOpen} onPlay={onPlay} />);
-    const synopsis = screen.getByText(/original demo film/i).props.children;
-    expect(synopsis).toMatch(/small boat/i);
+    const synopsis = screen.getByText(/quiet harbor at sunset/i).props.children;
+    expect(synopsis).toMatch(/quiet harbor/i);
     fireEvent.press(screen.getByTestId('kid-home-more-info'));
     expect(onOpen).toHaveBeenCalledWith(prepared);
     fireEvent.press(screen.getByTestId('kid-home-watch'));
@@ -156,16 +156,16 @@ describe('the words on the shelf', () => {
 
     render(<TitleDetailsScreen entry={prepared} onPlay={onPlay} />);
     const fullDescription = screen.getByTestId('title-details-description').props.children;
-    expect(fullDescription).toMatch(/demo film/i);
-    expect(fullDescription).toMatch(/prepared and checked/i);
-    expect(fullDescription).toMatch(/no practice holds/i);
+    expect(fullDescription).toMatch(/original Calm Frames short/i);
+    expect(fullDescription).toMatch(/lighthouse/i);
+    expect(fullDescription).not.toMatch(/checked|validated|verified/i);
     expect(synopsis.length).toBeLessThan(fullDescription.length);
   });
 
   it('retains the full practice-hold explanation when that demo leads the library', () => {
     const onPlay = jest.fn();
     render(<KidHomeScreen titles={[harbor]} onOpen={jest.fn()} onPlay={onPlay} />);
-    expect(screen.getByText(/holds are practice, not detected flashing/i)).toBeTruthy();
+    expect(screen.getByText(/two scheduled practice holds/i)).toBeTruthy();
     expect(screen.getByTestId(`kid-home-poster-qualifier-${BENIGN_STORY_ID}`).props.children)
       .toMatch(/practice holds/i);
     expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Watch demo/);
@@ -190,7 +190,7 @@ describe('the words on the shelf', () => {
     ]);
     expect(posterWords(preparedId)).toEqual([
       'Harbor',
-      'Checked story',
+      'Original story',
     ]);
     expect(posterWords(OFFLINE_TITLE_ID)).toEqual([
       'Calm gradient',
@@ -199,7 +199,7 @@ describe('the words on the shelf', () => {
     expect(
       screen.getByTestId(`kid-home-poster-${BENIGN_STORY_ID}`).props
         .accessibilityLabel,
-    ).toBe('Harbor demo, Practice holds, checked');
+    ).toBe('Harbor demo, Practice holds');
   });
 
   /**
@@ -245,7 +245,7 @@ describe('the words on the shelf', () => {
   it("writes Harbor's own second line only for the bundled Harbor", () => {
     expect(shelfLabel(benignStoryTitle())).toEqual({
       name: 'Harbor story',
-      qualifier: 'Benign demo, practice holds',
+      qualifier: 'Practice holds demo',
     });
     // Anything else with the same words is read like any catalog title.
     expect(
@@ -267,7 +267,7 @@ describe('the words on the shelf', () => {
    */
   it('draws the second line at the ten foot floors, resting and focused', () => {
     const floors = { textSizeUnits: 32, textContrast: 4.5 };
-    const secondLines = ['Practice holds', 'Checked story', 'Playback test'];
+    const secondLines = ['Practice holds', 'Original story', 'Playback test'];
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const measured = () =>
       measureText(screen.toJSON() as unknown as RenderedNode, { background: CALM_COLORS.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);
