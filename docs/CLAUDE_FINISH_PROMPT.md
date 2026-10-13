@@ -1,9 +1,55 @@
 # Focused Mac finishing task
 
-Paste the following task into the existing Claude Code or Codex session on the
-Mac with `~/calm-frames`, the Vega SDK and the original project artifacts.
+Use the following task on the Mac with `~/calm-frames`, the Vega SDK and the
+original project artifacts. For the restricted promotional credits described
+by Alex, test the noninteractive `claude -p` route with an API key from the
+credited organization. Pasting the task into an interactive subscription chat
+does not establish that those promotional credits are used.
 The cloud session prepared this task but has not started Claude, used API
 credits, connected to the Mac or scheduled an unattended reviewer.
+
+## Noninteractive launch on the Mac
+
+The official Claude CLI version 2.1.296 was inspected in the cloud without an
+API request. Its help confirms `-p`, `--allowedTools`, `--output-format json`
+and `--max-budget-usd`; the budget option works only in print mode. Check the
+installed Mac CLI's help too. The account-specific promotion's coverage and
+expiry must be checked in Console; they were supplied in the user's pasted
+explanation and have not been independently verified in this cloud session.
+
+Create or use an API key in the organization holding the promotional credits.
+From the ordinary Mac terminal, the following zsh commands read it without
+echoing it or placing the key itself in command history. The key is passed only
+to the selected Claude process; the existing interactive login is preserved.
+
+```sh
+cd ~/calm-frames
+read -s 'calm_claude_key?Anthropic API key from the credited organization: '
+printf '\n'
+ANTHROPIC_API_KEY="$calm_claude_key" claude -p \
+  'Reply API_CONNECTION_OK. Do not use tools or change files.' \
+  --allowedTools 'Read,Glob,Grep' --max-budget-usd 1 --output-format json
+```
+
+Before the larger task, confirm this request succeeded and check Console usage
+and billing attribution in that organization. A successful request alone does
+not establish which balance paid for it. If it still reports low credits, stop
+and inspect the credited organization, key, promotion coverage and expiry.
+Do not keep repeating interactive login or silently use purchased credits.
+
+After the test is accepted and its billing route is confirmed, run:
+
+```sh
+ANTHROPIC_API_KEY="$calm_claude_key" claude -p \
+  'Safely sync origin/codex/signed-scene-holds-2026-09-29, preserving local work and recordings. Read the latest docs/CLAUDE_FINISH_PROMPT.md and execute its Task section. Finish the existing Mac/Vega build and matching demo, and push each checked milestone.' \
+  --allowedTools 'Read,Glob,Grep,Edit,Write,Bash' --max-budget-usd 24
+unset calm_claude_key
+```
+
+The first test and finishing call have separate limits, totaling US$25 for this
+pass. Tool permissions let the local agent run the documented build/capture and
+Git workflow. The task below retains the publication and communication limits.
+Actual running behavior, billing and Mac permissions remain to be observed.
 
 ## Task
 
@@ -45,6 +91,9 @@ prompt alone is not a spending cap. Verify the installed CLI's budget support
 before invoking it, and keep calls sequential under one cumulative allowance.
 Run one small read-only task first and confirm its actual model and API usage
 without exposing credentials. Save cost metadata locally and report the total.
+When launched with the commands above, reuse the completed US$1 connection test
+and work within the remaining US$24 call limit. Do not start nested paid CLI
+workers whose spending is outside that call's budget.
 
 If credentials or an enforceable limit are unavailable, report that specific
 prerequisite and continue work available to the current local agent without
