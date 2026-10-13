@@ -1,8 +1,18 @@
 # Status
 
-Updated Sun Oct 11, 2026.
+Updated Oct 13, 2026.
 
 ## 0. Where things stand
+
+### Open layouts for the cinematic design
+
+Alex asked to remove the slide-like boxes around the text. The latest source
+builds on `b882d39`, removes the title-details and viewing-settings panels,
+extends the Harbor scene to the screen edge and makes secondary actions quiet.
+The remote focus outline remains. Current previews and the scoped check receipt
+are linked from [the design page](design/README.md) and
+[`open_layout_design.json`](../results/open_layout_design.json).
+These are browser previews; the matching Vega build remains with the Mac workflow.
 
 ### Cinematic design combined with Claude's updates
 

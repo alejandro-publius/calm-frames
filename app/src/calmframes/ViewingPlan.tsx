@@ -37,46 +37,57 @@ const ViewingPlan = ({
   );
 
   return (
-    <View testID={testID} style={styles.card}>
-      <Text style={styles.heading} accessibilityRole="header">
-        Your viewing settings
-      </Text>
-      <View style={styles.columns}>
-        <View style={styles.summary}>
-          <Text style={styles.label} testID={`${testID}-preset`}>
-            {preset.title}
-          </Text>
-          <Text style={styles.line} testID={`${testID}-room`}>
-            {describeRoom(settings)}
-          </Text>
-          <Text style={styles.line} testID={`${testID}-maps`}>
-            {`Checked against ${mapNames.join(' and ')} thresholds.`}
-          </Text>
-        </View>
-        <View style={styles.explanation}>
-          <Text style={styles.line} testID={`${testID}-continuity`}>
-            When a part is hidden, a checked still or dark screen covers the picture
-            while sound and captions continue.
-          </Text>
-          <Text style={styles.line}>
-            The picture stays covered while seeking or when playback timing is
-            uncertain. Room settings can only hide additional parts.
-          </Text>
-        </View>
+    <View testID={testID} style={styles.section}>
+      <View style={styles.chapterHeading}>
+        <View style={styles.chapterRule} accessible={false} />
+        <Text style={styles.heading} accessibilityRole="header">
+          Your viewing settings
+        </Text>
       </View>
-      <Text style={styles.limits} testID={`${testID}-limits`}>
-        {SAFETY_NOTE}
-      </Text>
+      <View style={styles.content}>
+        <View style={styles.columns}>
+          <View style={styles.summary}>
+            <Text style={styles.label} testID={`${testID}-preset`}>
+              {preset.title}
+            </Text>
+            <Text style={styles.line} testID={`${testID}-room`}>
+              {describeRoom(settings)}
+            </Text>
+            <Text style={styles.line} testID={`${testID}-maps`}>
+              {`Checked against ${mapNames.join(' and ')} thresholds.`}
+            </Text>
+          </View>
+          <View style={styles.explanation}>
+            <Text style={styles.line} testID={`${testID}-continuity`}>
+              When a part is hidden, a checked still or dark screen covers the picture
+              while sound and captions continue.
+            </Text>
+            <Text style={styles.line}>
+              The picture stays covered while seeking or when playback timing is
+              uncertain. Room settings can only hide additional parts.
+            </Text>
+          </View>
+        </View>
+        <Text style={styles.limits} testID={`${testID}-limits`}>
+          {SAFETY_NOTE}
+        </Text>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    backgroundColor: CALM_COLORS.SURFACE,
-    borderRadius: scale(20),
-    padding: scale(40),
+  section: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: scale(72),
+    paddingTop: scale(48),
+    borderTopWidth: scale(1),
+    borderTopColor: CALM_COLORS.SURFACE_FOCUSED,
   },
+  chapterHeading: { width: scale(344) },
+  chapterRule: { width: scale(56), height: scale(3), backgroundColor: CALM_COLORS.FOCUS_RING, marginBottom: scale(20) },
+  content: { flex: 1 },
   heading: {
     color: CALM_COLORS.TEXT,
     ...CALM_TEXT.section,
@@ -91,8 +102,8 @@ const styles = StyleSheet.create({
     ...CALM_TEXT.supporting,
     marginTop: scale(CALM_SPACE.TIGHT),
   },
-  columns: { flexDirection: 'row', gap: scale(64), marginTop: scale(12) },
-  summary: { width: scale(520) },
+  columns: { flexDirection: 'row', gap: scale(48) },
+  summary: { width: scale(380) },
   explanation: { flex: 1 },
   limits: {
     ...CALM_TEXT.supporting,
@@ -100,7 +111,7 @@ const styles = StyleSheet.create({
     marginTop: scale(32),
     paddingTop: scale(24),
     borderTopWidth: scale(1),
-    borderTopColor: CALM_COLORS.BORDER,
+    borderTopColor: CALM_COLORS.SURFACE_FOCUSED,
   },
 });
 

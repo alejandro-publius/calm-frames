@@ -46,7 +46,7 @@ export const KID_HOME_PROFILES_FOCUSED_FRAME: UiFrame = {
 };
 export const KID_HOME_PICKER_FRAME: UiFrame = {
   screen: 'kid-home-picker', background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.FOCUS_RING],
+  surfaces: [CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
 };
 
 /** Nothing has been checked yet, so the shelf is one notice. */

@@ -11,6 +11,7 @@
  * of this screen where an unverified title can be started.
  */
 
+import LinearGradient from '@amazon-devices/react-linear-gradient';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
@@ -87,6 +88,18 @@ const TitleDetailsScreen = ({
       contentContainerStyle={styles.content}>
       {onBack ? <View style={styles.navigation}><CalmButton quiet testID={`${testID}-back`} label="Back to library" onPress={onBack} /></View> : null}
       <View style={styles.hero}>
+        <View style={styles.heroArt} pointerEvents="none">
+          <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
+            <TitleArtwork immersive entry={entry} height={560} testID={`${testID}-artwork`} />
+          </CalmArtworkMotion>
+          <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
+            start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artSky} />
+          <LinearGradient pointerEvents="none" colors={['#102F3A00', CALM_COLORS.BACKGROUND]}
+            start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artFloor} />
+        </View>
+        <View style={styles.heroScrim} pointerEvents="none" />
+        <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
+          start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.heroFade} />
         <View style={styles.heroCopy}>
           <View style={styles.kicker}>
             <View style={styles.kickerRule} accessible={false} />
@@ -99,11 +112,6 @@ const TitleDetailsScreen = ({
               accessibilityLabel={saving ? 'Saving your changes...' : playable ? `${presentation.action}: ${presentation.name}` : `${presentation.name} is unavailable. ${notice?.detail ?? ''}`}
               disabled={!playable || saving} hasTVPreferredFocus onPress={() => onPlay(entry)} />
           </View>
-        </View>
-        <View style={styles.heroArt}>
-          <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
-            <TitleArtwork entry={entry} height={380} testID={`${testID}-artwork`} />
-          </CalmArtworkMotion>
         </View>
       </View>
 
@@ -163,9 +171,13 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y) },
   navigation: { marginBottom: scale(36) },
-  hero: { flexDirection: 'row', alignItems: 'center', gap: scale(56), padding: scale(48), borderRadius: scale(32), backgroundColor: CALM_COLORS.SURFACE },
+  hero: { minHeight: scale(560), justifyContent: 'center', overflow: 'hidden', marginRight: scale(-CALM_SPACE.SAFE_X) },
   heroCopy: { width: scale(650), paddingVertical: scale(8) },
-  heroArt: { flex: 1, padding: scale(8), borderRadius: scale(28), backgroundColor: CALM_COLORS.BACKGROUND },
+  heroArt: { position: 'absolute', top: 0, left: scale(430), right: 0 },
+  heroScrim: { position: 'absolute', top: 0, bottom: 0, left: 0, width: scale(700), backgroundColor: CALM_COLORS.BACKGROUND },
+  heroFade: { position: 'absolute', top: 0, bottom: 0, left: scale(700), width: scale(250) },
+  artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(56) },
+  artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(100) },
   kicker: { flexDirection: 'row', alignItems: 'center', gap: scale(20), marginBottom: scale(24) },
   kickerRule: { width: scale(44), height: scale(3), backgroundColor: CALM_COLORS.FOCUS_RING },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING },
@@ -174,7 +186,7 @@ const styles = StyleSheet.create({
   synopsis: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT },
-  checkSummary: { flexDirection: 'row', alignItems: 'flex-start', gap: scale(72), marginTop: scale(64), paddingHorizontal: scale(8) },
+  checkSummary: { flexDirection: 'row', alignItems: 'flex-start', gap: scale(72), marginTop: scale(64) },
   chapterHeading: { width: scale(344) },
   chapterRule: { width: scale(56), height: scale(3), backgroundColor: CALM_COLORS.FOCUS_RING, marginBottom: scale(20) },
   chapterContent: { flex: 1, gap: scale(24), paddingTop: scale(12) },

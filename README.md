@@ -12,13 +12,13 @@
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
-![Browser preview of the cinematic Calm Frames library: Watch now in focus on the checked Harbor story, Robin's profile chip, and a shelf of three titles](docs/design/cinematic/library-browser.png)
+![Browser preview of the Calm Frames library: panoramic Harbor artwork, Watch now in focus, quiet profile navigation and a shelf of three titles](docs/design/open/library-browser.png)
 
 | Setup | Before you watch | Parental controls |
 |---|---|---|
-| ![Setup, step 1 of 4: choose a PIN on a remote-friendly keypad](docs/design/polish/setup-after.png) | ![A title's details: the check found no segments above the flash limits, and checks can miss hazards](docs/design/cinematic/details-browser.png) | ![Parental controls while a save is in flight, with Saving your changes beside the title](docs/design/seamless/parent-saving-browser.png) |
+| ![Setup, step 1 of 4: choose a PIN on a remote-friendly keypad](docs/design/polish/setup-after.png) | ![A title's details: the check found no segments above the flash limits, and checks can miss hazards](docs/design/open/details-browser.png) | ![Parental controls while a save is in flight, with Saving your changes beside the title](docs/design/seamless/parent-saving-browser.png) |
 
-<sub>Browser renders of the app's own React Native trees with the bundled Inter fonts and artwork: the current cinematic library and details combine the visual pass with Claude's work through 49f3a18 ([source and render receipt](results/cinematic_design_2026-10-11.json)); parental controls are from 85c30f9 and setup from 54dab0b. They are review aids, not Vega screenshots. The shelf holds two Harbors on purpose, one with labelled practice holds and one prepared the way a real title is, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md), and more screens, with how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
+<sub>Browser renders of the app's own React Native trees with the bundled Inter fonts and artwork: the current library and details refine b882d39 with open text layouts and artwork reaching the screen edge ([source and render receipt](results/open_layout_design.json)); parental controls are from 85c30f9 and setup from 54dab0b. They are review aids, not Vega screenshots. The shelf holds two Harbors on purpose, one with labelled practice holds and one prepared the way a real title is, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md), and more screens, with how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
 
 ---
 

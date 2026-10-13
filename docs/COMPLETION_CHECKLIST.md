@@ -41,10 +41,11 @@ new AWS deployment is needed to finish the simulator entry.
 
 ## Current design polish
 
-The cinematic library and title-details source is combined with Claude's work
-through `49f3a18`. Current browser previews and source hashes are linked from
+The cinematic library and title-details source includes Claude's work through
+`49f3a18` and the later removal of decorative text panels on base `b882d39`.
+Current browser previews and source hashes are linked from
 [the design page](design/README.md) and recorded in
-[`cinematic_design_2026-10-11.json`](../results/cinematic_design_2026-10-11.json).
+[`open_layout_design.json`](../results/open_layout_design.json).
 The new presentation artwork remains separate from the actual film and signed
 playback stills. These previews do not replace the Mac build below.
 

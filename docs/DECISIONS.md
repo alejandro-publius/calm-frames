@@ -2380,3 +2380,7 @@ device yet.
 
 - **Decision:** preserve Claude's pushed work through `49f3a18` and apply the saved visual changes on top. **Why:** Alex requested a richer, warmer presentation and asked to continue from the shared repository without repeating the whole project review. **Cost:** reconcile the artwork ledger and generated credits; run the affected UI, sound integration, attribution and design-document checks only.
 - **Decision:** use a panoramic Harbor feature, distinct story/demo covers, a larger title hierarchy and a labelled picture timeline. **Why:** the previous layout repeated the same image and gave the artwork too little presence. **Cost:** fresh browser previews and a later matching native build; presentation art is never substituted for film content or signed playback stills. No new dependency, AWS deployment or publication.
+
+### Open text layouts after the cinematic review
+
+- **Decision:** remove the filled panels around title details and viewing settings, extend the illustration to the screen edge and use quiet secondary actions. **Why:** Alex found the text boxes too much like presentation slides. Space and typography now group the information, while remote focus keeps its visible outline. **Cost:** a focused visual and UI check, refreshed browser previews and a later matching Vega build. No new art, dependency or playback behavior.

@@ -1,9 +1,9 @@
 # Calm Frames: rules for every session
 
 **Current visual pass.** Alex selected the cinematic storybook direction and
-asked to combine it with Claude's pushed improvements. The visual pass builds on
-`49f3a18`, preserves its sound and pipeline fixes, and refines the library and
-title details. This explicit request supersedes the earlier feature freeze for
+asked to combine it with Claude's pushed improvements. The latest refinement
+builds on `b882d39`: remove the large text panels, extend the Harbor scene to
+the screen edge and use quiet secondary actions. This explicit request supersedes the earlier feature freeze for
 these visual changes. Inspect the current previews and receipt linked from
 `docs/design/README.md`; they are browser renders, not a new native package.
 

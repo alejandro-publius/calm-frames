@@ -139,7 +139,7 @@ const KidHomeScreen = ({
           <Text style={styles.wordmark}>Calm Frames</Text>
         </View>
         <View style={styles.navigation}>
-          {picking && profiles ? <CalmButton testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
+          {picking && profiles ? <CalmButton quiet testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
           {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet testID={`${testID}-parent-area`} label="Parental controls" accessibilityLabel="Parental controls, needs a PIN" hasTVPreferredFocus={empty && !saving} onPress={onOpenParentArea} /></View> : null}
         </View>
@@ -161,12 +161,16 @@ const KidHomeScreen = ({
               <StatusNotice testID={`${testID}-offline`} notice={BACKEND_UNREACHABLE} />
             </View>
           ) : null}
-          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+          <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroArt} pointerEvents="none">
                 <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
                   <TitleArtwork immersive height={460} entry={featured} testID={`${testID}-hero-art`} />
                 </CalmArtworkMotion>
+                <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
+                  start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artSky} />
+                <LinearGradient pointerEvents="none" colors={['#102F3A00', CALM_COLORS.BACKGROUND]}
+                  start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artFloor} />
               </View>
               <View style={styles.heroScrim} pointerEvents="none" />
               <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
@@ -178,7 +182,7 @@ const KidHomeScreen = ({
                 <View style={styles.actions}>
                   <CalmButton primary sound={false} testID={`${testID}-watch`} label={feature.action} accessibilityLabel={`${feature.action}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={!returnFocusId && !saving} onPress={() => (onPlay ?? onOpen)(featured)} />
-                  <CalmButton testID={`${testID}-more-info`} label="More info" onPress={() => onOpen(featured)} disabled={saving} />
+                  <CalmButton quiet testID={`${testID}-more-info`} label="More info" onPress={() => onOpen(featured)} disabled={saving} />
                 </View>
               </View>
             </View> : null}
@@ -227,19 +231,22 @@ const styles = StyleSheet.create({
   wordmark: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT },
   navigation: { flexDirection: 'row', gap: scale(20) },
   navigationLink: { alignSelf: 'center' },
-  scrollContent: { paddingBottom: scale(12) },
-  hero: { minHeight: scale(460), justifyContent: 'center', borderRadius: scale(28), overflow: 'hidden', marginBottom: scale(24) },
+  libraryScroll: { marginRight: scale(-CALM_SPACE.SAFE_X) },
+  scrollContent: { paddingRight: scale(CALM_SPACE.SAFE_X), paddingBottom: scale(12) },
+  hero: { minHeight: scale(460), justifyContent: 'center', overflow: 'hidden', marginRight: scale(-CALM_SPACE.SAFE_X), marginBottom: scale(24) },
   heroCopy: { width: scale(690), paddingVertical: scale(24) },
   heroArt: { position: 'absolute', top: 0, left: scale(430), right: 0 },
   heroScrim: { position: 'absolute', left: 0, top: 0, bottom: 0, width: scale(700), backgroundColor: CALM_COLORS.BACKGROUND },
   heroFade: { position: 'absolute', top: 0, bottom: 0, left: scale(700), width: scale(250) },
+  artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(56) },
+  artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(88) },
   kicker: { flexDirection: 'row', alignItems: 'center', gap: scale(16), marginBottom: scale(12) },
   kickerRule: { width: scale(44), height: scale(4), borderRadius: scale(2), backgroundColor: CALM_COLORS.FOCUS_RING },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING },
   featureTitle: { ...CALM_TEXT.feature, fontSize: scale(104), lineHeight: scale(116), letterSpacing: scale(-3), color: CALM_COLORS.TEXT, marginBottom: scale(16) },
   longFeatureTitle: { fontSize: scale(64), lineHeight: scale(76), letterSpacing: scale(-1) },
   description: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, marginBottom: scale(28), maxWidth: scale(660) },
-  actions: { flexDirection: 'row', gap: scale(20) },
+  actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   sectionHeading: { flexDirection: 'row', alignItems: 'center', gap: scale(28), marginBottom: scale(12) },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT },
   sectionRule: { flex: 1, height: scale(2), backgroundColor: CALM_COLORS.SURFACE },
