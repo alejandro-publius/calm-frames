@@ -50,6 +50,7 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 | [SUBMISSION.md](SUBMISSION.md) | The Devpost submission draft, field by field. Not submitted; what Alex still has to supply is marked NEEDS ALEX. |
 | [SUBMISSION_COPY.md](SUBMISSION_COPY.md) | The shorter project story prepared for the Devpost description, with current design and evidence limits. |
 | [submission/README.md](submission/README.md) | Download the checked draft packet with current copy, labelled browser previews, brand assets and the Mac recording plan. |
+| [CLAUDE_FINISH_PROMPT.md](CLAUDE_FINISH_PROMPT.md) | A bounded Mac finishing task for Claude Code or a local Codex session, with API billing verification and milestone pushes. |
 | [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) | The next native recording plan, narration, readable subtitle treatment and checks before the finished cut can be uploaded. |
 | [SHOT_MANIFEST.md](SHOT_MANIFEST.md) | The shots in the Oct 10 recording of the earlier native build, with their source hashes, and what has to be captured again. |
 | [FEEDBACK.md](FEEDBACK.md) | Amazon's five product feedback questions, answered once for every tool the project used, and the feature requests. |

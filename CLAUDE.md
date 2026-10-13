@@ -60,8 +60,13 @@ is "A calmer way to watch". The current checklist is
 `docs/COMPLETION_CHECKLIST.md`; it supersedes older next-action lists below.
 Do not publish, submit, change repository visibility or incur additional cloud
 costs before the reviewable work is complete and Alex approves those actions.
-Claude CLI workers require verified existing subscription authentication and
-one successful small task first; no API keys or permission bypasses.
+For the Oct 13 finishing pass, Alex requested help using available Anthropic API
+credits. This supersedes the earlier subscription-only preference for that pass.
+Verify the actual billing route and one small task before paid delegation. Use
+securely configured credentials, preserve the existing subscription login, and
+never print keys or switch billing silently. Start with an enforced bounded
+budget; the available credit balance is not a spending target. The focused
+handoff is [docs/CLAUDE_FINISH_PROMPT.md](docs/CLAUDE_FINISH_PROMPT.md).
 
 **Shared branch workflow.** Push small, checked batches frequently to
 `codex/signed-scene-holds-2026-09-29`, and before every handoff. Fetch before
