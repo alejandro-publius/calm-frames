@@ -1,0 +1,204 @@
+{
+  "status": "package_built_native_validation_blocked",
+  "recorded_utc": "2026-10-14T04:53:52.585100+00:00",
+  "source_commit": "dba88d5cbc96d1fc399f4b51701037af16869328",
+  "evidence_branch": "codex/native-design-validation-2026-10-14",
+  "native_task": "codex://threads/01a138bb-a422-7746-9293-caf676f250f3",
+  "preflight": {
+    "checkout": "~/calm-frames",
+    "checkout_commit": "09ee50e",
+    "checkout_clean": true,
+    "existing_worktrees_preserved": 3,
+    "remote_design_commit": "dba88d5cbc96d1fc399f4b51701037af16869328",
+    "remote_shared_commit": "4c9996d70dcc3327663679845f7c888648297d59",
+    "newer_design_remote_work": false,
+    "other_active_project_workers_reported": false,
+    "initial_simulator": "stopped"
+  },
+  "package": {
+    "path": "app/build/aarch64-debug/calm-frames-app_aarch64.vpkg",
+    "sha256": "3b39ff37e87dfc81cb7acadf833ef1f7b3a4861a38f32ea2de56eab2b75e58cb",
+    "target": "aarch64 Debug"
+  },
+  "app_inputs_committed": true,
+  "build_receipt": "results/native-design-2026-10-14/build-receipt.json",
+  "release_directory": "build/release/native-design-2026-10-14",
+  "toolchain": {
+    "node": "22.23.2",
+    "java": "existing /opt/homebrew/opt/openjdk@21",
+    "python": "3.12.13",
+    "vega_sdk": "0.24.9914"
+  },
+  "build_context": [
+    "Copied existing node_modules into isolated checkout; lockfile unchanged against existing checkout.",
+    "Copied existing generated Shaka dist and polyfills; complete bytes inventoried in build receipt.",
+    "Initial attempts failed for missing polyfills, then sandbox SDK workspace permissions.",
+    "Elevated build hung waiting on shared Watchman. Interrupted only this build process; used per-command watchman shim returning exit 1 to use Node filesystem crawling. Shared Watchman service untouched.",
+    "No tracked application source changed."
+  ],
+  "validation": {
+    "typecheck": "passed",
+    "targeted_eslint": {
+      "passed": true,
+      "files": 28,
+      "paths": [
+        "app/src/calmframes/FlashMapStrip.tsx",
+        "app/src/calmframes/ParentAreaScreen.tsx",
+        "app/src/calmframes/TitleDetailsScreen.tsx",
+        "app/src/calmframes/calmStyles.ts",
+        "app/src/calmframes/usePlaybackPresentation.ts",
+        "app/src/components/BackButton.tsx",
+        "app/src/components/ErrorView.tsx",
+        "app/src/components/Seekbar.tsx",
+        "app/src/screens/PlayerScreen.tsx",
+        "app/src/w3cmedia/mediacontrols/CaptionButton.tsx",
+        "app/src/w3cmedia/mediacontrols/CaptionMenuItem.tsx",
+        "app/src/w3cmedia/mediacontrols/Captions.tsx",
+        "app/src/w3cmedia/mediacontrols/ControlBar.tsx",
+        "app/src/w3cmedia/mediacontrols/ControlBarMenu.tsx",
+        "app/src/w3cmedia/mediacontrols/PlayPauseButton.tsx",
+        "app/src/w3cmedia/mediacontrols/PlaybackControls.tsx",
+        "app/src/w3cmedia/mediacontrols/PlayerButton.tsx",
+        "app/src/w3cmedia/mediacontrols/VideoPlayerHeader.tsx",
+        "app/src/w3cmedia/mediacontrols/VideoPlayerUI.tsx",
+        "app/test/calmframes/detailDiscovery.test.tsx",
+        "app/test/calmframes/parentNavigation.test.tsx",
+        "app/test/calmframes/playbackUi.test.tsx",
+        "app/test/calmframes/playbackUiHarness.tsx",
+        "app/test/calmframes/screens.test.tsx",
+        "app/test/calmframes/unavailableDetails.test.tsx",
+        "app/test/calmframes/unavailableFixtures.ts",
+        "app/test/w3cmedia/mediacontrols/CaptionSelection.test.tsx",
+        "app/test/w3cmedia/mediacontrols/ControlBarMenu.test.tsx"
+      ]
+    },
+    "focused_jest": {
+      "suites": 26,
+      "tests_passed": 273,
+      "snapshots_passed": 22,
+      "note": "Two runs: 228 tests + 45 seek/media tests. Existing delayed-exit warning in first run."
+    },
+    "design_pytest": {
+      "passed": 21
+    },
+    "full_jest": {
+      "suites_passed": 112,
+      "suites_failed": 4,
+      "suites_skipped": 1,
+      "tests_passed": 1189,
+      "tests_failed": 4,
+      "tests_skipped": 4,
+      "snapshots_passed": 55,
+      "snapshots_failed": 2,
+      "failures": [
+        "Player.test.tsx old unavailable copy snapshot",
+        "ControlBar.test.tsx old spacing snapshot",
+        "revokedKey.test.ts old rejection-message expectation",
+        "hookMirror.test.ts caption-position comment mirror drift"
+      ],
+      "scope_decision": "Recorded unchanged baseline failures; no broad CI cleanup."
+    },
+    "prepared_library": {
+      "titles": 1,
+      "bundles": 3,
+      "bytes": 9270143,
+      "required_original_reports": 3,
+      "present_original_reports": 3,
+      "packaged_bytes": "verified"
+    },
+    "native_preflight": "blocked; OS/architecture messages are consequences of absent device identity, not observed incompatibility",
+    "staged_secret_scan": "passed: gitleaks, no leaks",
+    "git_diff_check": "passed after trimming receipt whitespace"
+  },
+  "commands": [
+    "git ls-remote origin refs/heads/codex/design-details-2026-10-13 refs/heads/codex/signed-scene-holds-2026-09-29",
+    "git fetch origin codex/design-details-2026-10-13",
+    "git worktree add -b codex/native-design-validation-2026-10-14 <workspace>/calm-frames-native dba88d5cbc96d1fc399f4b51701037af16869328",
+    "node app/tools/check_prepared_library.mjs --require-reports",
+    "source /Users/alexvintera/vega/env && export PATH=$PWD/.logs/native-design-2026-10-14/build-bin:/Users/alexvintera/.local/share/fnm/node-versions/v22.23.2/installation/bin:$PATH && export JAVA_HOME=/opt/homebrew/opt/openjdk@21 && RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag native-design-2026-10-14",
+    "cd app; npm run typecheck",
+    "cd app; npm test -- --runInBand --coverage=false --watchman=false",
+    "Focused Jest file selectors preserved in focused-jest.txt and seek-media-jest.txt",
+    "app/node_modules/.bin/eslint <28 TS/TSX app/src and app/test files changed between 4c9996d and dba88d5>",
+    "~/calm-frames/.venv/bin/python -m pytest -q eval/tests/test_design_page.py",
+    "vega virtual-device start; vega device list; vega virtual-device status",
+    "~/calm-frames/build/finish-tools/calm-record-window .logs/native-design-2026-10-14/preflight-vega.png 0",
+    "~/calm-frames/.venv/bin/python -m eval.benign_native_smoke --device Simulator --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg"
+  ],
+  "installed": false,
+  "native_observed_passes": [],
+  "capture_files": [],
+  "native_untested": [
+    "moving Harbor water/boat/lighthouse playback",
+    "library and details D-pad focus, Back and return focus",
+    "parent settings and legitimate household unlock",
+    "captions and multiline cue layout",
+    "pause/resume after six-second control hiding",
+    "both practice holds and Skip",
+    "simultaneous hold plus controls or caption menu plus multiline cue",
+    "recoverable playback errors and return focus",
+    "VoiceView output",
+    "household persistence"
+  ],
+  "blockers": [
+    {
+      "action": "Install package and perform native UI validation",
+      "target": "existing Vega Virtual Device / Simulator",
+      "state": "blocked_not_attempted_install",
+      "reason": "Vega process hangs on startup and exits; no connected target or native window",
+      "required_user_action": "Open the existing Vega Virtual Device from a normal local desktop session and leave its window running and connected. Do not reset or erase its data."
+    },
+    {
+      "action": "Inspect separate Terminal GUI launch route",
+      "target": "com.apple.Terminal",
+      "state": "denied",
+      "reason": "Computer-use tool safety policy prohibits this app; not retried"
+    }
+  ],
+  "preserved": [
+    "all existing checkouts and branches",
+    "existing recordings and packages",
+    "household data and PIN",
+    "media, signed maps, guard timing, verification, persistence"
+  ],
+  "fixes": [],
+  "fix_reason": "No material native defect could be observed; accepted UI source left unchanged.",
+  "evidence_files": [
+    {
+      "path": "results/native-design-2026-10-14/build-receipt.json",
+      "sha256": "093e2d3c194d77fffccdbdf536108d1c65fa810d849e1d35d1b534a508c5bb40"
+    },
+    {
+      "path": "results/native-design-2026-10-14/design-pytest.txt",
+      "sha256": "05d90f1b42234a898bc8c3511fd81afe39e578d31635335fadf9a77181c9110e"
+    },
+    {
+      "path": "results/native-design-2026-10-14/focused-jest.txt",
+      "sha256": "115eebbcfcf35a7f531d4175bda0e08931f35861acc471328aef74756c7e98f0"
+    },
+    {
+      "path": "results/native-design-2026-10-14/full-suite-failures.txt",
+      "sha256": "0b9d16a7cbc065d1223b695593e28d58a616c8faff8ef903a2aea88e1f3eb28e"
+    },
+    {
+      "path": "results/native-design-2026-10-14/native-preflight.json",
+      "sha256": "8e436b3c22fe879cf44d0310532f58e4cd3a1131a115fa212065f721dd68a504"
+    },
+    {
+      "path": "results/native-design-2026-10-14/seek-media-jest.txt",
+      "sha256": "7b9d3179316da010d5984a6d2fd82df99059c7c9bbcd888808827c0ff02a02f8"
+    },
+    {
+      "path": "results/native-design-2026-10-14/simulator-diagnostics.txt",
+      "sha256": "d40dea09ddebc3061f0da37eb4a3d6725334a304183b9df24cd4bc411e395a3c"
+    },
+    {
+      "path": "results/native-design-2026-10-14/targeted-eslint.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/native-design-2026-10-14/typecheck.txt",
+      "sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a"
+    }
+  ]
+}
