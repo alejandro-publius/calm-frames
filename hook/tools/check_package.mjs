@@ -19,7 +19,7 @@ export const REQUIRED_EXPORTS = [
 ];
 export const PEERS = [
   'react', 'react-native', '@amazon-devices/react-native-w3cmedia',
-  '@amazon-devices/kepler-media-controls',
+  '@amazon-devices/kepler-media-controls', '@amazon-devices/react-linear-gradient',
 ];
 export const EXPECTED_FILES = [
   'package.json', 'README.md', 'LICENSE', 'src/index.ts', 'src/pixelUtils.ts',

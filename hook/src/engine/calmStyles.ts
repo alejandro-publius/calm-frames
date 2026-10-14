@@ -4,26 +4,28 @@
  */
 import { scaleUxToDp } from '../pixelUtils';
 
-/** Approved TV palette. Contrast is checked against rendered text and focus. */
+/** Approved dusk coast palette; shared across application screens. Contrast is checked against rendered text and focus. */
 export const CALM_COLORS = {
   /** Every Calm Frames screen sits on this. */
-  BACKGROUND: '#102F3A',
+  BACKGROUND: '#151C26',
   /** A card on the ground, and the same card with focus on it. */
-  SURFACE: '#1A414B',
-  SURFACE_FOCUSED: '#234B55',
-  BORDER: '#66A0B4',
-  /** Focus, primary actions and sparse metadata on the dark background. */
-  FOCUS_RING: '#E6A957',
+  SURFACE: '#303B48',
+  SURFACE_FOCUSED: '#3B4856',
+  BORDER: '#697585',
+  /** Lighthouse gold is reserved for focus. */
+  FOCUS_RING: '#E6B963',
+  PRIMARY: '#D88B72',
+  TEXT_DISABLED: '#9DA4AE',
   /** The secondary accent. Edges and fills only, it carries no text at all. */
-  ACCENT_DARK: '#B87A2C',
-  TEXT: '#F3E8D3',
-  TEXT_DIM: '#BDD0CF',
+  ACCENT_DARK: '#8E5648',
+  TEXT: '#F4ECDD',
+  TEXT_DIM: '#BDC2C9',
   /** Text on a light surface, where cream would disappear. */
-  INK: '#17323C',
+  INK: '#151C26',
   /** The shield on a checked title. */
-  VERIFIED: '#7FD1A3',
+  VERIFIED: '#E7D9BF',
   /** A title still being checked. */
-  PENDING: '#E2C275',
+  PENDING: '#B9C9DA',
   /** A title whose check failed. Not a warning red, this is not an alarm. */
   FAILED: '#F2BDB1',
   /** The cover itself. */
@@ -116,15 +118,16 @@ export const MINIMUM_FOCUS_CONTRAST = 3;
 
 export const scale = scaleUxToDp;
 
-/** Licensed static Inter faces packaged in assets/fonts. No synthetic weight. */
-export const CALM_FONT = { regular: 'InterRegular', medium: 'InterMedium', semibold: 'InterSemiBold' } as const;
+/** Licensed static display/UI faces packaged in assets/fonts. No synthetic weight. */
+export const CALM_FONT = { regular: 'CalmSansRegular', medium: 'CalmSansSemibold', semibold: 'CalmSansSemibold', display: 'CalmDisplaySemibold' } as const;
 const typography = (size: number, height: number, face: string) => ({
   fontFamily: face, fontSize: scale(size), lineHeight: scale(height), fontWeight: '400' as const,
 });
 export const CALM_TEXT = {
-  feature: typography(80, 92, CALM_FONT.semibold),
-  screen: typography(64, 76, CALM_FONT.semibold),
-  section: typography(42, 54, CALM_FONT.semibold),
+  feature: typography(80, 92, CALM_FONT.display),
+  screen: typography(64, 76, CALM_FONT.display),
+  section: typography(42, 54, CALM_FONT.display),
+  numeral: typography(64, 76, CALM_FONT.semibold),
   card: typography(38, 48, CALM_FONT.medium),
   body: typography(36, 48, CALM_FONT.regular),
   control: typography(36, 46, CALM_FONT.semibold),
