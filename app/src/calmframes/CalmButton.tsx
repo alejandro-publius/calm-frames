@@ -28,6 +28,7 @@ import {
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
+import { ControlSurfaceStudy } from './CalmControlSurface';
 import { useInterfaceFeedback } from './useInterfaceSound';
 
 export interface CalmButtonProps {
@@ -70,9 +71,11 @@ const CalmButton = ({
   const [pressed, setPressed] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
   const feedback = useInterfaceFeedback();
+  const study = React.useContext(ControlSurfaceStudy);
   return (
     <TouchableOpacity
       testID={testID}
+      surfaceKind={primary ? 'primary' : tertiary || (quiet && compact) ? 'tertiary' : 'secondary'}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ disabled }}
@@ -100,7 +103,7 @@ const CalmButton = ({
       ]}>
       <Text
         testID={`${testID}-label`}
-        style={[styles.label, compact ? styles.compactLabel : null, focused && !disabled ? styles.focusedLabel : null, primary && !disabled ? ((focused || pressed) ? styles.focusedPrimaryLabel : styles.primaryLabel) : null, disabled ? styles.labelDisabled : null]}>
+        style={[styles.label, compact ? styles.compactLabel : null, focused && !disabled ? styles.focusedLabel : null, primary && !disabled ? ((focused || pressed) ? styles.focusedPrimaryLabel : styles.primaryLabel) : null, disabled ? styles.labelDisabled : null, study && primary && !disabled ? styles.primaryLabel : null]}>
         {label}
       </Text>
     </TouchableOpacity>

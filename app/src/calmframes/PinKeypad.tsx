@@ -90,6 +90,7 @@ const PinKeypad = ({
         {KEYS.map((digit) => (
           <TouchableOpacity
             key={digit}
+            surfaceKind="keypad"
             testID={`${idPrefix}-key-${digit}`}
             accessibilityRole="button"
             accessibilityLabel={digit === 'delete' ? 'Delete the last digit' : digit}
