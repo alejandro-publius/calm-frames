@@ -123,8 +123,10 @@ const PlayerScreen = ({
   const setCaptionStatus = (status: boolean) => {
     captionStatus.current = status;
   };
+  const captionsDefaulted = useRef(false);
   const [captionID, setCaptionID] = React.useState<string>(CAPTION_DISABLE_ID);
   const setSelectedCaptionInVideoPlayer = (id: string) => {
+    captionsDefaulted.current = true; // A user choice always wins over initialization.
     setCaptionID(id);
   };
   const [isVideoEnded, setVideoEnded] = React.useState<boolean>(false);
@@ -152,11 +154,10 @@ const PlayerScreen = ({
     beacon('PlayerScreen.videoInitialized', { isVideoInitialized });
   }, [isVideoInitialized]);
 
-  // Captions on from the start when the title ships a caption track, once
-  // per player; after that the caption menu decides. VideoHandler adds the
+  // Apply the title's initial caption default once; then the menu decides.
+  // Ambient Harbor descriptions start Off. VideoHandler adds the
   // title's tracks before the media loads, so they exist by the time the
   // player says it is initialized. See defaultCaptions.ts.
-  const captionsDefaulted = useRef(false);
   React.useEffect(() => {
     if (!isVideoInitialized || captionsDefaulted.current) {
       return;
@@ -165,6 +166,7 @@ const PlayerScreen = ({
     const shown = showDefaultCaptions(
       videoRef.current?.textTracks as TextTrackListLike | undefined,
       data.textTrack,
+      data.id,
     );
     if (shown !== CAPTION_DISABLE_ID) {
       console.log(
@@ -172,7 +174,7 @@ const PlayerScreen = ({
       );
       setCaptionID(shown);
     }
-  }, [isVideoInitialized, data.textTrack]);
+  }, [isVideoInitialized, data.textTrack, data.id]);
 
   const cover = useCoverHarness(videoRef, {
     mode: coverTest,

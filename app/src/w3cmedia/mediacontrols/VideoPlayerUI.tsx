@@ -256,6 +256,7 @@ export const VideoPlayerUI = React.memo(
             )}
 
             <Seekbar
+              hasTVPreferredFocus={!skipOwnsSelect}
               seekBarRef={seekBarRef}
               videoRef={videoRef}
               bifFrameImagesRef={bifFrameImagesRef}

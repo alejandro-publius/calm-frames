@@ -46,12 +46,14 @@ const Seekbar = ({
   testID,
   handleShowControlsOnKeyEvent,
   requestSeek,
+  hasTVPreferredFocus = true,
 }: {
   videoRef: React.MutableRefObject<VideoPlayer | null>;
   videoData: TitleData;
   bifFrameImagesRef: React.MutableRefObject<FrameImageSource | null>;
   seekBarRef: React.MutableRefObject<null>;
   testID?: string;
+  hasTVPreferredFocus?: boolean;
   handleShowControlsOnKeyEvent;
   /**
    * Calm Frames: the one safe seek function. When it is given, the bar never
@@ -364,10 +366,11 @@ const Seekbar = ({
           </Text>
         </View>
         <TVFocusGuideView
-          hasTVPreferredFocus={true}
+          hasTVPreferredFocus={hasTVPreferredFocus}
           autoFocus
           style={styles.seekbar}>
           <KUICSeekbar
+            hasTVPreferredFocus={hasTVPreferredFocus}
             ref={seekBarRef}
             currentValue={progress}
             totalValue={totalValue}

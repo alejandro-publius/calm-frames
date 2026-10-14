@@ -20,6 +20,7 @@ jest.mock('@amazon-devices/react-native-kepler', () => {
   const RN = jest.requireActual('react-native');
   return {
     useTVEventHandler: jest.fn(),
+    BackHandler: { addEventListener: () => ({ remove() {} }) },
     TVFocusGuideView: ({ children, ...props }: any) => ReactActual.createElement(RN.View, props, children),
     useKeplerAppStateManager: () => ({ getComponentInstance: () => ({}), addAppStateListener: () => ({ remove() {} }) }),
   };

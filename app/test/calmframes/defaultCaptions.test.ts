@@ -79,3 +79,19 @@ describe('captions on by default', () => {
     );
   });
 });
+
+
+describe('optional ambient scene descriptions', () => {
+  it.each(['calm-frames-benign-story', 'prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e'])('starts %s Off without removing its track', titleId => {
+    const english = { ...englishTrack(), mode: 'showing' };
+    const tracks = trackList(english);
+    expect(showDefaultCaptions(tracks, shipped, titleId)).toBe(CAPTION_DISABLE_ID);
+    expect(tracks).toHaveLength(1);
+    expect(english.mode).toBe('hidden');
+  });
+  it('keeps dialogue and unrelated demo caption defaults on', () => {
+    const english = englishTrack();
+    expect(showDefaultCaptions(trackList(english), shipped, 'dialogue-demo')).toBe(english.id);
+    expect(english.mode).toBe('showing');
+  });
+});

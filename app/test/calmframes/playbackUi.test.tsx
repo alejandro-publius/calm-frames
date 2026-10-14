@@ -1,6 +1,6 @@
-import { startPlayer, mockMedia, mockGuard, mockError, mockSeekFocus } from './playbackUiHarness';
+import { startPlayer, mockMedia, mockGuard, mockError, mockSeekFocus, remote } from './playbackUiHarness';
 import { act, fireEvent } from '@testing-library/react-native';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { CALM_COLORS, FOCUS_RING_WIDTH } from '../../src/calmframes/calmStyles';
 
 beforeEach(() => {
@@ -8,7 +8,20 @@ beforeEach(() => {
   jest.spyOn(console, 'log').mockImplementation(() => {});
   mockSeekFocus.mockClear();
 });
-afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); jest.restoreAllMocks(); });
+
+test.each(['none', 'countdown'] as const)('seekbar yields initial and restored preferred focus to Skip during %s', kind => {
+  jest.spyOn(Platform, 'isTV', 'get').mockReturnValue(true);
+  const view = startPlayer(kind);
+  expect(view.getByTestId('kui-seekbar').props.hasTVPreferredFocus).toBe(kind !== 'countdown');
+  act(() => jest.advanceTimersByTime(6000));
+  expect(view.queryByTestId('kui-seekbar')).toBeNull();
+  remote('down');
+  expect(view.getByTestId('kui-seekbar').props.hasTVPreferredFocus).toBe(kind !== 'countdown');
+  if (kind === 'countdown') {
+    expect(view.getByTestId('calm-card-skip').props.hasTVPreferredFocus).toBe(true);
+  }
+});
 
 test('initialized playback exposes named captions and a stationary contrasting focus ring', () => {
   const view = startPlayer();
@@ -24,19 +37,27 @@ test('initialized playback exposes named captions and a stationary contrasting f
   expect(view.getByTestId('kui-seekbar')).toBeTruthy();
 });
 
-test('caption choices expose the active track and selecting Off returns focus to the seekbar', () => {
+test('ambient Harbor starts Off, honors explicit On through playback updates, and can return Off', () => {
   const view = startPlayer();
   fireEvent.press(view.getByTestId('video-player-caption-btn'));
   const english = view.getByRole('radio', { name: 'English practice captions' });
-  expect(english.props.accessibilityState.checked).toBe(true);
-  expect(english.props.hasTVPreferredFocus).toBe(true);
+  expect(english.props.accessibilityState.checked).toBe(false);
+  expect(view.getByRole('radio', { name: 'Off' }).props.accessibilityState.checked).toBe(true);
+  expect(mockMedia.textTracks[0].mode).toBe('hidden');
+  expect(view.getByTestId('kepler-captions-view').props.show).toBe(false);
+  fireEvent.press(english);
+  act(() => { mockMedia.pause(); mockMedia.play(); mockMedia.fire('timeupdate'); });
+  expect(mockMedia.textTracks[0].mode).toBe('showing');
+  expect(view.getByTestId('kepler-captions-view').props.show).toBe(true);
+  fireEvent.press(view.getByTestId('video-player-caption-btn'));
+  expect(view.getByRole('radio', { name: 'English practice captions' }).props.accessibilityState.checked).toBe(true);
   const off = view.getByRole('radio', { name: 'Off' });
   fireEvent(off, 'focus');
   expect(StyleSheet.flatten(view.getByRole('radio', { name: 'Off' }).props.style).borderColor).toBe(CALM_COLORS.FOCUS_RING);
   fireEvent.press(off);
   expect(view.queryByRole('radio', { name: 'Off' })).toBeNull();
   expect(mockMedia.textTracks[0].mode).toBe('hidden');
-  expect(mockSeekFocus).toHaveBeenCalledTimes(1);
+  expect(mockSeekFocus).toHaveBeenCalledTimes(2);
 });
 
 test.each(['covering', 'countdown', 'none'] as const)('pause stays visible after controls hide in %s state and clears on Play', kind => {

@@ -1,20 +1,7 @@
-/**
- * Captions on from the start, for a title that ships them.
- *
- * Captions are half of what keeps a hidden part followable: while the cover is
- * on, the words carry on above it. A child who first has to find
- * the caption menu has already missed the part they were for. So a title that
- * ships a caption track starts with that track showing, and the caption menu
- * turns it off like any other choice.
- *
- * Only the title's own tracks count. Shaka adds text tracks of its own to an
- * adaptive stream, labelled "Shaka Player ...", which CaptionOptions keeps out
- * of the menu for the same reason. A title that ships no captions is left as
- * it was.
- *
- * This decides which track and sets its mode. PlayerScreen does it once, when
- * the player is ready, and keeps the chosen id so the captions view shows and
- * the caption menu opens on the right choice.
+/** Initial caption choice. Dialogue tracks remain on by default. The two
+ * bundled ambient Harbor films use optional visual descriptions, so start
+ * those Off. This runs once per player; explicit menu choices own it afterward.
+ * There is currently no persisted caption preference.
  */
 
 import { CAPTION_DISABLE_ID } from '../constants';
@@ -55,22 +42,30 @@ function titleTracks(tracks: TextTrackListLike | null | undefined): TextTrackLik
   return found;
 }
 
-/**
- * Show the title's first shipped caption track, and say which one it is.
- *
- * Returns the id of the track now showing, or CAPTION_DISABLE_ID when the
- * title ships no captions or the player has none of them. Any other title
- * track that was showing is hidden, so one track shows at a time, which is
- * what the caption menu keeps to as well.
+/** Exact ambient title identities, not a rule for all demos or all captions. */
+export function usesOptionalSceneDescriptions(titleId?: string): boolean {
+  return titleId === 'calm-frames-benign-story' ||
+    titleId === 'prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e';
+}
+
+/** Select the initial track; an Off result leaves all title tracks hidden.
+ * Call only before a user has selected a caption option.
  */
 export function showDefaultCaptions(
   tracks: TextTrackListLike | null | undefined,
   shipped: ShippedTrack[] | null | undefined,
+  titleId?: string,
 ): string {
   if (!shipped || shipped.length === 0) {
     return CAPTION_DISABLE_ID;
   }
   const candidates = titleTracks(tracks);
+  if (usesOptionalSceneDescriptions(titleId)) {
+    for (const track of candidates) {
+      if (track.mode === 'showing') track.mode = 'hidden';
+    }
+    return CAPTION_DISABLE_ID;
+  }
   const first = shipped[0];
   const chosen =
     candidates.find(
