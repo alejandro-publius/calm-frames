@@ -158,6 +158,14 @@ export const CREDIT_ENTRIES: CreditEntry[] = [
     obligations: [],
   },
   {
+    title: 'Harbor illustrated presentation artwork',
+    license: 'Apache-2.0',
+    credit: 'Calm Frames, rendered from our own vector artwork',
+    source: 'https://github.com/alejandro-publius/calm-frames/blob/codex/signed-scene-holds-2026-09-29/app/assets/brand/tv/harbor.svg',
+    collection: 'unknown',
+    obligations: [],
+  },
+  {
     title: 'Harbor opening artwork',
     license: 'Apache-2.0',
     credit: 'Calm Frames, generated with OpenAI image generation using our Harbor artwork as a reference',
