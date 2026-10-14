@@ -40,6 +40,7 @@ import {
   KID_HOME_FRAME,
   KID_HOME_OFFLINE_FRAME,
   KID_HOME_PROFILES_FRAME,
+  KID_HOME_PROFILES_OFFLINE_FRAME,
   KID_HOME_PROFILES_FOCUSED_FRAME,
   KID_HOME_PICKER_FRAME,
 } from './uiFrames';
@@ -127,7 +128,7 @@ const KidHomeScreen = ({
     frame = KID_HOME_EMPTY_FRAME;
     reason = offline ? 'shelf empty, service unreachable' : 'shelf empty';
   } else if (picking) {
-    frame = choosingProfile ? KID_HOME_PICKER_FRAME : focusedId ? KID_HOME_PROFILES_FOCUSED_FRAME : KID_HOME_PROFILES_FRAME;
+    frame = choosingProfile ? KID_HOME_PICKER_FRAME : focusedId ? KID_HOME_PROFILES_FOCUSED_FRAME : offline ? KID_HOME_PROFILES_OFFLINE_FRAME : KID_HOME_PROFILES_FRAME;
     reason = offline
       ? 'shelf with profiles, service unreachable'
       : focusedId

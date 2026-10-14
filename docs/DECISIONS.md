@@ -2448,3 +2448,20 @@ Claude's isolated seekbar reproduction was reviewed and reproduced against
 focus ownership when Skip appears. The disabled picture-break prototype was
 not integrated. BufferingWindow remains reserved for Claude's separate work.
 No paid service, new credential, deployment, merge or household reset was used.
+
+### Oct 14: integration review corrections
+
+The full app suite on 5365f0c exposed six stale UI surface-inventory assertions
+for the illustrated home and loading scene. Record the ripple surface and the
+new paint order, including a distinct offline-profile frame. This solid-colour
+inventory does not prove artwork pixels or motion. Focused capture tests pass.
+
+Independent review found that the opening shell promised a library destination
+when play began from details. Use Back and Going back without changing the
+stack or title-focus restoration. Tests cover both home and details callers.
+
+Claude's fa766f3 loading component and proposed player patch were reviewed,
+not merged. The proposed patch predates the opening shell and can announce
+Loading behind it while a verified title waits for its first frame. It needs
+explicit suppression during the shell and immediate errors before integration.
+The existing combined candidate remains the basis of the one native preview.

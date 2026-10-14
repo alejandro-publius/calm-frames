@@ -80,12 +80,24 @@ describe('reaching Calm Frames', () => {
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     expect(navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.anything());
     // The stack retains this details route underneath the player.
+    expect(screen.getByTestId('kid-mode-details-play').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.queryByTestId('kid-mode-home-watch')).toBeNull();
     fireEvent.press(screen.getByTestId('kid-mode-details-back'));
     expect(screen.getByTestId(lastPoster).props.hasTVPreferredFocus).toBe(true);
     expect(screen.getByTestId(`kid-mode-home-poster-${BENIGN_STORY_ID}`).props.hasTVPreferredFocus).toBe(false);
     fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
     fireEvent.press(screen.getByTestId('kid-mode-parent-back'));
     expect(screen.getByTestId(lastPoster).props.hasTVPreferredFocus).toBe(true);
+  });
+
+  it('retains the home caller when playback begins with Watch now', async () => {
+    const { navigate } = await renderKidMode();
+    await finishFirstRun();
+    fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
+    expect(navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN,
+      expect.objectContaining({ showHomeOpening: true }));
+    expect(screen.getByTestId('kid-mode-home-watch')).toBeTruthy();
+    expect(screen.queryByTestId('kid-mode-details-play')).toBeNull();
   });
 
   it('handles remote Back through details, parent area and credits', async () => {

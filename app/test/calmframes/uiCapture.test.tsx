@@ -69,6 +69,7 @@ import {
   KID_HOME_FRAME,
   KID_HOME_OFFLINE_FRAME,
   KID_HOME_PROFILES_FRAME,
+  KID_HOME_PROFILES_OFFLINE_FRAME,
   KID_HOME_PROFILES_FOCUSED_FRAME,
   KID_HOME_PICKER_FRAME,
   PARENT_LOCKED_FRAME,
@@ -292,14 +293,13 @@ describe('what the app paints', () => {
   });
 
   it('matches what the shelf with a family on it reports, in each of its states', () => {
-    // One frame covers all three, and that is the claim being checked rather
-    // than assumed: the chips carry the chosen fill, so a focused poster and
-    // the offline banner add nothing new to what is painted.
+    // The offline banner paints before the hero, so its surface order has
+    // its own inventory entry. Focus and the profile picker remain measured.
     expect(renderedFrame('kid-home-profiles', familyShelf())).toEqual(
       KID_HOME_PROFILES_FRAME,
     );
-    expect(renderedFrame('kid-home-profiles', familyShelf(true))).toEqual(
-      KID_HOME_PROFILES_FRAME,
+    expect(renderedFrame('kid-home-profiles-offline', familyShelf(true))).toEqual(
+      KID_HOME_PROFILES_OFFLINE_FRAME,
     );
     render(familyShelf());
     fireEvent(screen.getByTestId('kid-home-poster-ok'), 'focus');

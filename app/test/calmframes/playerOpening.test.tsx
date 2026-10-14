@@ -23,7 +23,18 @@ test('a real playback error replaces the opening and retains an exit', () => {
   expect(view.queryByTestId('player-home-opening')).toBeNull();
   expect(view.getByTestId('player-error')).toBeTruthy();
   fireEvent.press(view.getByTestId('player-error-back'));
-  expect(view.getByText('Returning to your library.')).toBeTruthy();
+  expect(view.getByText('Going back...')).toBeTruthy();
+  act(() => jest.advanceTimersByTime(700));
+  expect(view.goBack).toHaveBeenCalledTimes(1);
+});
+
+// The same shell is used over either retained caller; Back must not name a destination.
+test('opening uses destination-neutral Back and returns through the existing stack', () => {
+  const view = startPlayer('none', true);
+  expect(view.getByText('Back')).toBeTruthy();
+  expect(view.queryByText('Back to library')).toBeNull();
+  fireEvent.press(view.getByTestId('player-opening-back'));
+  expect(view.queryByText('Returning to your library.')).toBeNull();
   act(() => jest.advanceTimersByTime(700));
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });

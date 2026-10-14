@@ -19,8 +19,8 @@ import { UiFrame } from './uiCapture';
 export const HOUSEHOLD_LOADING_FRAME: UiFrame = {
   screen: 'household-loading',
   background: CALM_COLORS.BACKGROUND,
-  // Presentation artwork is measured separately in the rendered opening clip.
-  surfaces: [],
+  // This inventory models declared solid surfaces, not artwork pixels or motion.
+  surfaces: ['#77A19E'],
 };
 
 export const HOUSEHOLD_ERROR_FRAME: UiFrame = {
@@ -31,37 +31,41 @@ export const HOUSEHOLD_ERROR_FRAME: UiFrame = {
 
 export const KID_HOME_FRAME: UiFrame = {
   screen: 'kid-home', background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
+  surfaces: ['#77A19E', CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE],
 };
 export const KID_HOME_FOCUSED_FRAME: UiFrame = {
   screen: 'kid-home-focused', background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE_FOCUSED],
+  surfaces: ['#77A19E', CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.SURFACE],
 };
 export const KID_HOME_PROFILES_FRAME: UiFrame = {
   screen: 'kid-home-profiles', background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
+  surfaces: ['#77A19E', CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE],
+};
+export const KID_HOME_PROFILES_OFFLINE_FRAME: UiFrame = {
+  screen: 'kid-home-profiles-offline', background: CALM_COLORS.BACKGROUND,
+  surfaces: ['#77A19E', CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
 };
 export const KID_HOME_PROFILES_FOCUSED_FRAME: UiFrame = {
   screen: 'kid-home-profiles-focused', background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE_FOCUSED],
+  surfaces: ['#77A19E', CALM_COLORS.FOCUS_RING, CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.SURFACE],
 };
 export const KID_HOME_PICKER_FRAME: UiFrame = {
   screen: 'kid-home-picker', background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
+  surfaces: ['#77A19E', CALM_COLORS.SURFACE_FOCUSED, CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
 };
 
 /** Nothing has been checked yet, so the shelf is one notice. */
 export const KID_HOME_EMPTY_FRAME: UiFrame = {
   screen: 'kid-home-empty',
   background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE],
+  surfaces: ['#77A19E', CALM_COLORS.SURFACE],
 };
 
 /** The service is unreachable, so a notice sits above what still verifies. */
 export const KID_HOME_OFFLINE_FRAME: UiFrame = {
   screen: 'kid-home-offline',
   background: CALM_COLORS.BACKGROUND,
-  surfaces: [CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
+  surfaces: ['#77A19E', CALM_COLORS.SURFACE, CALM_COLORS.FOCUS_RING],
 };
 
 export const TITLE_DETAILS_FRAME: UiFrame = {
@@ -224,6 +228,7 @@ export const ALL_UI_FRAMES: UiFrame[] = [
   KID_HOME_EMPTY_FRAME,
   KID_HOME_OFFLINE_FRAME,
   KID_HOME_PROFILES_FRAME,
+  KID_HOME_PROFILES_OFFLINE_FRAME,
   KID_HOME_PROFILES_FOCUSED_FRAME,
   KID_HOME_PICKER_FRAME,
   TITLE_DETAILS_FRAME,

@@ -10,10 +10,10 @@ export default function PlayerOpening({ title, onBack, returning = false }: { ti
     <View style={styles.copy}>
       <Text style={styles.eyebrow}>A calmer way to watch</Text>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.detail} accessibilityLiveRegion="polite">{returning ? 'Returning to your library.' : 'Opening your checked title...'}</Text>
+      <Text style={styles.detail} accessibilityLiveRegion="polite">{returning ? 'Going back...' : 'Opening your checked title...'}</Text>
       <View style={styles.actions}>
         <CalmButton primary disabled label={returning ? 'Returning...' : 'Opening...'} />
-        {!returning ? <CalmButton quiet testID="player-opening-back" label="Back to library" hasTVPreferredFocus onPress={onBack} /> : null}
+        {!returning ? <CalmButton quiet testID="player-opening-back" label="Back" hasTVPreferredFocus onPress={onBack} /> : null}
       </View>
     </View>
   </View>;
