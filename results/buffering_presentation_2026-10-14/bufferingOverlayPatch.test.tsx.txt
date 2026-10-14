@@ -1,0 +1,78 @@
+// Applies only with results/buffering_presentation_2026-10-14/player-overlay-integration.patch.
+// The playback harness first: its SDK mocks must be in place before anything else.
+import { mockError, mockGuard, startPlayer } from './playbackUiHarness';
+import { act } from '@testing-library/react-native';
+import { StyleSheet } from 'react-native';
+import { CHECKING_CARD } from '../../src/calmframes/cards';
+import { MIN_VISIBLE_MS, REVEAL_DELAY_MS } from '../../src/components/BufferingWindow';
+
+// The harness's VideoHandler keeps the player's setShowBuffering; borrow it.
+let setBuffering: (value: boolean) => void = () => undefined;
+const { VideoHandler } = jest.requireMock('../../src/utils/VideoHandler');
+const preBuffer = VideoHandler.prototype.preBufferVideo;
+VideoHandler.prototype.preBufferVideo = function (...args: unknown[]) {
+  setBuffering = this.buffering;
+  return preBuffer.apply(this, args);
+};
+
+function advance(ms: number) {
+  act(() => jest.advanceTimersByTime(ms));
+}
+
+beforeEach(() => {
+  jest.useFakeTimers();
+  jest.spyOn(console, 'log').mockImplementation(() => {});
+});
+afterEach(() => {
+  jest.clearAllTimers();
+  jest.useRealTimers();
+  jest.restoreAllMocks();
+});
+
+test('a stall mid-story never dims the picture, and a long one gets a small status that does not blink', () => {
+  const view = startPlayer();
+  expect(view.queryByTestId('buffering-view')).toBeNull();
+  act(() => setBuffering(true));
+  advance(REVEAL_DELAY_MS - 1);
+  expect(view.queryByTestId('buffering-view')).toBeNull();
+  expect(view.queryByTestId('calm-frames-cover')).toBeNull();
+  advance(1);
+  expect(view.getByTestId('buffering-status')).toBeTruthy();
+  expect(StyleSheet.flatten(view.getByTestId('buffering-view').props.style).backgroundColor).toBeUndefined();
+  act(() => setBuffering(false));
+  expect(view.getByTestId('buffering-status')).toBeTruthy();
+  advance(MIN_VISIBLE_MS);
+  expect(view.queryByTestId('buffering-view')).toBeNull();
+});
+
+test('a stall during a hold leaves the cover and its still exactly as they were', () => {
+  const view = startPlayer('covering');
+  expect(view.getByTestId('calm-frames-cover-still')).toBeTruthy();
+  act(() => setBuffering(true));
+  advance(REVEAL_DELAY_MS);
+  expect(view.getByTestId('calm-frames-cover')).toBeTruthy();
+  expect(view.getByTestId('calm-frames-cover-still')).toBeTruthy();
+  expect(view.getByTestId('calm-card')).toBeTruthy();
+  expect(view.getByTestId('buffering-status')).toBeTruthy();
+});
+
+test('no second message while the card already says the story is on its way', () => {
+  const view = startPlayer();
+  mockGuard.card = CHECKING_CARD;
+  act(() => setBuffering(true));
+  advance(REVEAL_DELAY_MS * 2);
+  expect(view.getByTestId('calm-card')).toBeTruthy();
+  expect(view.queryByTestId('buffering-status')).toBeNull();
+});
+
+test('an error replaces the status and keeps its way back', () => {
+  const view = startPlayer();
+  act(() => setBuffering(true));
+  advance(REVEAL_DELAY_MS);
+  expect(view.getByTestId('buffering-status')).toBeTruthy();
+  act(() => mockError(true));
+  advance(MIN_VISIBLE_MS);
+  expect(view.queryByTestId('buffering-status')).toBeNull();
+  expect(view.getByTestId('player-error')).toBeTruthy();
+  expect(view.getByTestId('player-error-back').props.hasTVPreferredFocus).toBe(true);
+});

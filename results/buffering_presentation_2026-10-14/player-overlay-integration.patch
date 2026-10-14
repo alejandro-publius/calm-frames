@@ -1,0 +1,25 @@
+diff --git a/app/src/screens/PlayerScreen.tsx b/app/src/screens/PlayerScreen.tsx
+index c28e7ae..d7cd2ab 100644
+--- a/app/src/screens/PlayerScreen.tsx
++++ b/app/src/screens/PlayerScreen.tsx
+@@ -680,9 +680,17 @@ const PlayerScreen = ({
+           </>
+         )}
+ 
+-        {showBuffering && (
+-          <BufferingWindow backgroundColor={COLORS.SEMI_TRANSPARENT} />
+-        )}
++        {/*
++          Loading never dims or blanks the scene: what of a title is hidden is
++          the cover's decision alone. A short wait shows nothing and a longer
++          one a small status, except while the card already says the story is
++          on its way. BufferingWindow.tsx says why.
++        */}
++        <BufferingWindow
++          presentation="overlay"
++          visible={showBuffering && !isVideoError}
++          statusText={card.kind === 'checking' ? null : undefined}
++        />
+         {/*
+           The card sits above the cover, so it stays readable while the picture
+           is hidden, and it is the only thing on screen that speaks.

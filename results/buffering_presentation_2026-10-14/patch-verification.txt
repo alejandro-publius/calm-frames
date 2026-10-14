@@ -1,0 +1,5 @@
+patch test on the unpatched player: Tests:       2 failed, 2 passed, 4 total
+patch test with the patch: Tests:       4 passed, 4 total
+typecheck with the patch: exit 0 (after fixing a type in the new BufferingWindow test, not in the patch)
+existing player suites with the patch: Tests:       125 passed, 125 total
+eslint patched files: exit 0

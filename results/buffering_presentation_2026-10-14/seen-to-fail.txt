@@ -1,0 +1,11 @@
+baseline: Tests:       38 passed, 38 total
+B1 status shows at once: Tests:       14 failed, 24 passed, 38 total
+B2 no minimum display time: Tests:       1 failed, 37 passed, 38 total
+B3 translucent backdrop drawn at once: Tests:       2 failed, 36 passed, 38 total
+B4 overlay dims the scene: Tests:       1 failed, 37 passed, 38 total
+B5 drawn above the error screen: Tests:       2 failed, 36 passed, 38 total
+B6 overlay takes presses: Tests:       2 failed, 36 passed, 38 total
+B7 status animated: Tests:       2 failed, 36 passed, 38 total
+B8 resumed wait blinks the status: Tests:       16 failed, 22 passed, 38 total
+restored: identical
+after restore: Tests:       38 passed, 38 total

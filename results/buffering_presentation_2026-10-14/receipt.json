@@ -1,0 +1,69 @@
+{
+ "what_this_is": "Software evidence for the quieter loading presentation in app/src/components/BufferingWindow.tsx. Jest in an isolated worktree; no Vega build, simulator run or recording.",
+ "recorded_on": "2026-10-14",
+ "branch": "claude/buffering-presentation-2026-10-14",
+ "base_commit": "e51529cc06438ed9b7c57f1ef1ea0d5cfa9a173a",
+ "files_changed_on_branch": [
+  "app/src/components/BufferingWindow.tsx",
+  "app/test/components/BufferingWindow.test.tsx",
+  "results/buffering_presentation_2026-10-14/"
+ ],
+ "files_not_changed": "PlayerScreen.tsx, Seekbar.tsx, home, navigation, copy and every other Codex-owned file. The snapshot file is unchanged.",
+ "source_sha256": {
+  "app/src/components/BufferingWindow.tsx": "731b79cbee1d6928ac5568a2e6fe1af95a4435486c1de77039cafdc7702d7fff",
+  "results/buffering_presentation_2026-10-14/player-overlay-integration.patch": "cda1480f453c705c2ffa7971f7099c9ae03d072449fb2a3fe9077f0860e476f0"
+ },
+ "rules": {
+  "reveal_delay_ms": 1000,
+  "min_visible_ms": 500,
+  "status_text": "Loading",
+  "z_index": 5,
+  "error_view_z_index": 6
+ },
+ "before": [
+  "A looping Lottie spinner appeared the moment any wait began.",
+  "In the player, a full-screen rgba(0, 0, 0, 0.4) layer at zIndex 5 appeared on every waiting or seeking event and left on every playing or seeked event, above the cover, captions and calm card.",
+  "Repeated seeks could therefore dim and undim the whole picture several times a second. The app's own flash-check inventory (ALL_UI_FRAMES) has no frame for this layer."
+ ],
+ "after_with_the_current_caller": [
+  "No animation in any state.",
+  "A wait shorter than one second draws nothing: no dimming and no status.",
+  "A longer wait gets the translucent layer and a static Loading status, not a spinner.",
+  "Opaque screen loading, used by the Suspense fallbacks, keeps its black backdrop at once and its first frame is unchanged (the existing snapshot passes)."
+ ],
+ "after_with_the_integration_patch": [
+  "The player never dims or blanks the scene; picture, cover, still and card stay as they were.",
+  "A small Loading plate appears in the middle only after one second of continuous waiting, stays at least half a second, and never while the checking card already explains the wait.",
+  "An error hides the status and keeps Go back focused; the status sits below the error screen and takes no focus or presses."
+ ],
+ "checks": {
+  "focused": {
+   "command": "npx jest --runInBand --watchman=false --ci test/components/BufferingWindow.test.tsx",
+   "passed": 39,
+   "failed": 0,
+   "snapshots_passed": 1,
+   "line_coverage_pct": 100
+  },
+  "full_app_suite": {
+   "command": "npx jest --ci --colors=false --watchman=false",
+   "passed": 1234,
+   "skipped": 4,
+   "failed": 0,
+   "snapshots_passed": 57,
+   "reference": "results/native-checkpoint-2026-10-14/outer-only-full-tests.txt records 1198 passed on e51529c; this branch removes the 3 old spinner tests and adds 39"
+  },
+  "typecheck": "passed",
+  "eslint": {
+   "errors": 0,
+   "warnings": 101,
+   "warnings_in_changed_files": 0
+  }
+ },
+ "seen_to_fail": "seen-to-fail.txt in this folder: eight deliberate breaks of the component each turned the focused tests red, and the restored file was byte identical and green.",
+ "integration_patch_verification": "patch-verification.txt in this folder: the patch's own test fails 2 of 4 on the unpatched player and passes 4 of 4 with the patch; typecheck, lint and 125 existing player tests pass with the patch applied. The patch was then reverted.",
+ "not_done": [
+  "No native build, simulator run or recording; the change has not been seen on Vega.",
+  "The Lottie dependency stays in app/package.json although nothing imports it now. Removing it changes the lockfile, the bill of materials and the build manifest, so it is left for Codex.",
+  "No frame for the loading plate was added to the app's flash-check inventory in uiFrames.ts, which is outside this lane."
+ ]
+}
