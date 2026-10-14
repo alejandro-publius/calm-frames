@@ -1,0 +1,43 @@
+{
+  "kind": "Documentation-only morning handoff",
+  "branch": "codex/design-integration-2026-10-14",
+  "runtime_source_commit": "cce5f22ccdc07fb5c9022d7ed9d0963b9df98a5b",
+  "runtime_evidence_commit": "d38793a4bc04d71b8a9ee5c6f7013cce79ae1077",
+  "package": {
+    "path": "/Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-home/build/release/design-loading-integrated-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "target": "aarch64 Debug",
+    "bytes": 21578634,
+    "sha256": "9c7381f7e3033eb5e57cd6b47dca556ca93a969a595612c4314c1b3daf753627"
+  },
+  "canonical_handoff": "docs/MORNING_HANDOFF.md",
+  "demo_plan": "results/loading-integration-2026-10-14/demo-plan.json",
+  "runtime_files_changed": false,
+  "package_sha256_rechecked": true,
+  "handoff_local_links_checked": 18,
+  "historical_receipts_modified": false,
+  "superseded_entrypoints": [
+    "CLAUDE.md",
+    "README.md",
+    "docs/STATUS.md",
+    "docs/README.md",
+    "docs/MAC_FINISH.md",
+    "docs/COMPLETION_CHECKLIST.md",
+    "docs/CLAUDE_FINISH_PROMPT.md",
+    "docs/design/README.md"
+  ],
+  "independent_review": "Accepts cce5f22 pending native evidence; no concrete source blocker. Native checks: single Loading announcement, no queued Loading after error, actual stall continuity or black-cover fallback.",
+  "separate_blockers": [
+    "Mac locked: manual macOS unlock required; no automatic unlock retry or workaround.",
+    "Forgotten household PIN: parent settings inaccessible independently; no PIN retrieval/reset/data deletion authorized.",
+    "Current native motion/timing/D-pad/VoiceView/combined overlays and matching recording unverified.",
+    "Later licence/security/entrant/reviewer-access/publication/submission review and approvals remain open."
+  ],
+  "judging_evidence": "docs/RUBRIC.md, existing September 17 read and October 1 access recheck, no new research.",
+  "scope": "No runtime/UI change, install/relaunch, new feature, backend work, publication, submission or shared/main merge.",
+  "documentation_checks": {
+    "design_page_pytest": "21 passed",
+    "staged_style": "passed",
+    "staged_diff_check": "passed",
+    "staged_secret_scan": "passed"
+  }
+}

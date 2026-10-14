@@ -8,8 +8,8 @@ reviews and the bills of materials.
 
 If you are new here, read the [repository README](../README.md) first, then
 [SAFETY.md](SAFETY.md) before you run anything. For what is true today, the
-live lists are [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md) and
-[STATUS.md](STATUS.md) section 2.
+operational source is [MORNING_HANDOFF.md](MORNING_HANDOFF.md), with
+[STATUS.md](STATUS.md) as the history. Older checklists are superseded for execution.
 
 **Why the working records are public.** The project's rule is that the
 reasoning behind every call stays in the repository: each decision with its

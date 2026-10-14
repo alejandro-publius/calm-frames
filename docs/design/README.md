@@ -1,5 +1,14 @@
 # Calm Frames design
 
+**Current reviewed candidate:** [morning handoff](../MORNING_HANDOFF.md),
+[home](../../results/design-integration-review-2026-10-14/home-browser.png),
+[optional explanation](../../results/design-integration-review-2026-10-14/how-it-works-browser.png)
+and [opening](../../results/design-integration-review-2026-10-14/opening-browser.png).
+These browser renders precede only the compatible static loading integration;
+current native motion/timing/VoiceView remain unverified. Older refinements below
+are design history, not instructions to restore an earlier home or package.
+
+
 This is the one page to read before designing anything for Calm Frames. It
 describes the interface the code draws today. The source of truth is
 [`app/src/calmframes/calmStyles.ts`](../../app/src/calmframes/calmStyles.ts):

@@ -1,5 +1,13 @@
 # Calm Frames: rules for every session
 
+**Current integration instructions, October 14.** Read
+[docs/MORNING_HANDOFF.md](docs/MORNING_HANDOFF.md) first. Its exact branch,
+source, package and scope supersede older finishing/shared-branch instructions
+below. Current work stays on `codex/design-integration-2026-10-14`; no shared/main
+merge, paid process, publication, PIN reset or disabled picture-break integration.
+The Mac lock requires manual user unlock; do not retry or bypass it.
+
+
 **Latest finishing checkpoint, Oct 13.** The library and details now center
 artwork, titles, short descriptions and actions. Both playable Harbor versions
 use the new 20 second cinematic film: water opening, bright boat/lighthouse,

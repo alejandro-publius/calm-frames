@@ -4,6 +4,15 @@ Updated Oct 14, 2026.
 
 ## 0. Where things stand
 
+**Current execution handoff:** [MORNING_HANDOFF.md](MORNING_HANDOFF.md).
+Use only branch `codex/design-integration-2026-10-14`, runtime source `cce5f22`
+and the `design-loading-integrated-2026-10-14` package named there. The older
+entries below are dated history, including statements that loading was separate,
+native work was paused, or a prior source still needed building. Those statements
+do not override the current handoff. Section 2's old action schedule is historical;
+no merge, publication, paid process or PIN/data reset is authorized by it.
+
+
 ### Oct 14: loading integration complete, native access still blocked
 
 Source `cce5f22` integrates Claude's reviewed loading component with suppression
@@ -1159,7 +1168,7 @@ They were meant to be the test oracle: the kit's flashmap tests to run against o
 
 **If the zip exists, the fastest fix is to tell me the exact path.** If it is gone, nothing is waiting on it. What stands in for it: docs/SPEC_SOURCES.md quotes a primary source for every threshold and names what could not be verified, and the conformance suite computes its ground truth from the spec text in a module that cannot import flashmap.
 
-## 2. What you have to do, in order, with dates
+## 2. Historical action schedule (superseded by MORNING_HANDOFF.md)
 
 The scope changed on Oct 9: a solo entry, the Vega Virtual Device only, and the
 physical stick, the camera, the TV and the labelling partner out of the

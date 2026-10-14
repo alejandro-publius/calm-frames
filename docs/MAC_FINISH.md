@@ -1,5 +1,13 @@
 # Finish the polished simulator demo on the Mac
 
+> **Superseded operational instructions, October 14.** Use
+> [MORNING_HANDOFF.md](MORNING_HANDOFF.md) and its single current source/package.
+> The material below is historical context, not the current execution plan.
+> Do not follow its older shared-branch merge, package, paid-Claude, publication
+> or submission steps. Preserve earlier receipts and artifacts. No new feature,
+> PIN reset, data clearing or disabled picture-break merge is authorized.
+
+
 **Oct 13 visual work:** fetch the full shared branch before rebuilding. The
 library and details now use centered compositions, shorter copy and bounded
 text widths. Both Harbor titles contain the new animated water/boat/lighthouse

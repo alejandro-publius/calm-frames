@@ -1,5 +1,13 @@
 # Calm Frames completion checklist
 
+> **Superseded operational instructions, October 14.** Use
+> [MORNING_HANDOFF.md](MORNING_HANDOFF.md) and its single current source/package.
+> The material below is historical context, not the current execution plan.
+> Do not follow its older shared-branch merge, package, paid-Claude, publication
+> or submission steps. Preserve earlier receipts and artifacts. No new feature,
+> PIN reset, data clearing or disabled picture-break merge is authorized.
+
+
 Updated October 13, 2026. Solo entry, identity-verified Amazon Developer account.
 Deadline October 23 at noon Pacific. Vega Virtual Device exclusively.
 

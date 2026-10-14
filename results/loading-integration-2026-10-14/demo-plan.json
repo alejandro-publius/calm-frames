@@ -3,6 +3,7 @@
   "package": "/Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-home/build/release/design-loading-integrated-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
   "commands_after_unlock_and_resuming_native_preview": [
     "source /Users/alexvintera/vega/env",
+    "shasum -a 256 /Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-home/build/release/design-loading-integrated-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
     "vega device is-connected --device Simulator",
     "vega device install-app --device Simulator --packagePath /Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-home/build/release/design-loading-integrated-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
     "vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main"
@@ -13,7 +14,8 @@
     "Home Watch now: ordinary Harbor opening and playback, Back to home; More info then Watch now, Back to details with focus restored.",
     "Pause with controls hidden past six seconds; resume. Enable optional captions and capture hold plus controls/menu with multiline cue if available without modifying shipped VTT.",
     "Check saved still/reduced motion only through an accessible legitimate setting; if PIN or OS permissions block access, leave unchanged and record the exact block.",
-    "During a real post-opening wait, confirm the static Loading plate appears without dimming; verify the opening screen and errors never have a competing Loading announcement."
+    "During a real post-opening wait, confirm the static Loading plate appears without dimming; verify the opening screen and errors never have a competing Loading announcement.",
+    "VoiceView: verify explicit Loading announcement plus polite live region produce one utterance and no queued Loading after an error. Actual stall continuity or black-cover fallback must be observed; software signed-hold tests use mocked guard state."
   ],
   "rules": [
     "Keep one installed session open. No reset, uninstall, household-data clear or PIN retrieval.",
@@ -23,5 +25,14 @@
   "limitations": [
     "Native first-frame readiness, motion pixels, D-pad and VoiceView for this exact source still unobserved.",
     "The shipped VTT has original single-line cues; prior multiline fixture capture is not proof for the new candidate."
-  ]
+  ],
+  "canonical_handoff": "docs/MORNING_HANDOFF.md",
+  "branch": "codex/design-integration-2026-10-14",
+  "source_commit": "cce5f22ccdc07fb5c9022d7ed9d0963b9df98a5b",
+  "evidence_commit": "d38793a4bc04d71b8a9ee5c6f7013cce79ae1077",
+  "package_sha256": "9c7381f7e3033eb5e57cd6b47dca556ca93a969a595612c4314c1b3daf753627",
+  "supersedes": "Earlier demo plans and package instructions; historical receipts remain unchanged.",
+  "separate_parental_pin_issue": "Mac unlock does not unlock parental controls. Existing forgotten PIN is not retrieved, guessed or reset; no recovery feature or data deletion is authorized. Parent-area checks remain blocked independently.",
+  "loading_integration": "fa766f3 component already adapted into current source; no additional Claude merge needed. Disabled picture-break prototype excluded.",
+  "independent_loading_review": "Accepted cce5f22 pending native evidence, no concrete source blocker. Logs independently confirmed 63 focused and 1254 full passes, 4 skips, 57 snapshots."
 }

@@ -2,6 +2,12 @@
 
 **A calmer way to watch**
 
+**Current integration handoff, October 14:**
+[one branch, source, package and native validation plan](docs/MORNING_HANDOFF.md).
+The aarch64 Debug candidate is built and software-checked; native UI verification
+is blocked by the Mac lock, with parental PIN access a separate issue. This
+private working checkpoint does not authorize publication or submission.
+
 [![CI](https://github.com/alejandro-publius/calm-frames/actions/workflows/ci.yml/badge.svg)](https://github.com/alejandro-publius/calm-frames/actions/workflows/ci.yml)
 [![Audit](https://github.com/alejandro-publius/calm-frames/actions/workflows/audit.yml/badge.svg)](https://github.com/alejandro-publius/calm-frames/actions/workflows/audit.yml)
 [![Licence: Apache-2.0](https://img.shields.io/badge/licence-Apache--2.0-blue.svg)](LICENSE)
@@ -12,13 +18,13 @@
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
-![Browser preview of the Calm Frames library: panoramic Harbor artwork, Watch now in focus, quiet profile navigation and a shelf of three titles](docs/design/centered/library-browser.png)
+![Browser preview of the current illustrated Harbor home with Watch now, Try the demo and optional How it works](results/design-integration-review-2026-10-14/home-browser.png)
 
 | Setup | Before you watch | Parental controls |
 |---|---|---|
 | ![Setup, step 1 of 4: choose a PIN on a remote-friendly keypad](docs/design/polish/setup-after.png) | ![Centered Harbor artwork, title, story description and Watch now control](docs/design/centered/details-harbor-browser.png) | ![Parental controls while a save is in flight, with Saving your changes beside the title](docs/design/seamless/parent-saving-browser.png) |
 
-<sub>Browser renders of the app's own React Native trees with the bundled Inter fonts and artwork: the current library and details center the Harbor scene, title, description and actions ([source and render receipt](results/centered_harbor_2026-10-13.json)); parental controls are from 85c30f9 and setup from 54dab0b. They are review aids, not Vega screenshots. The shelf holds two Harbors on purpose, one with labelled practice holds and one prepared the way a real title is, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md), and more screens, with how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
+<sub>The large home image is the reviewed integration's browser render of actual React Native host trees. The smaller setup/details/parent images are historical previews, not current native evidence. Current opening and explanation previews, exact source/package, checks and limitations are linked from [the morning handoff](docs/MORNING_HANDOFF.md). No image here is a Vega screenshot of the final candidate.</sub>
 
 ---
 
@@ -60,7 +66,7 @@ The first prints `PASS`, the second writes one HTML page for the title that open
 
 ### Where things stand
 
-**Oct 13 visual update.** The library and details now use centered compositions, and both Harbor titles contain a new 20 second water-and-lighthouse film. The latest Mac observation covers the earlier source at `06190c7` ([receipt](results/polish_native_validation.json)); this centered layout and new film still need a matching Mac build and recording. [Preview and media evidence](results/centered_harbor_2026-10-13.json).
+**Current integration:** the illustrated library-first flow and compatible static loading are built from `cce5f22` on `codex/design-integration-2026-10-14`. [Current evidence](results/loading-integration-2026-10-14/receipt.json) records the passing exact-source suite and package hash. [Morning handoff](docs/MORNING_HANDOFF.md) is the single execution plan. The following checkpoints are historical and do not select a package for installation.
 
 Earlier checkpoint: **Sun Oct 11, 2026.** A solo entry for the Fire TV track of Build, Ship, Shape: Amazon Developer Hackathon. The Vega Virtual Device is the acceptance target; no physical Fire TV has been used and no screen-level timing has been measured anywhere. The analyzer, the pipeline, the cover layer, the signed scene holds, the household record and the packaged library are built and tested. The native benign journey and an English demo video were recorded on Oct 10 from build cba1a29 (package 73fbbed): PIN correction, saved settings, all three presets, catalog playback, captions and audio through both practice holds, transport fallback and focus return, with the exact package hash in [the completion checklist](docs/COMPLETION_CHECKLIST.md) and [the native receipt](results/redesign_validation_2026-10-10.json). The source has changed since, through the Oct 10 polish and the Oct 11 dependency, copy and focus changes, and has not been built, installed or recorded on the simulator again yet; the recorded cut also carries an earlier closing sentence and has to be re-rendered before upload. The software-level cover lead time from the virtual device: of the <!--n results/gate1_software_vvd.json:trials_attempted -->55<!--/n--> trials started, <!--n results/gate1_software_vvd.json:in_time -->48<!--/n--> covered in time; six produced no usable evidence and one was late, so the strict reading is <!--n results/gate1_software_vvd.json:in_time_strict_fraction -->0.8727<!--/n-->, not the <!--n results/gate1_software_vvd.json:in_time_fraction -->0.9796<!--/n--> from the trials that could be measured. The dependency audit has been green on the hosted runner since the Oct 11 push ([results/github_push_2026-10-11.json](results/github_push_2026-10-11.json)); the public video, the upstream pull request and the release are still open, and [docs/STATUS.md](docs/STATUS.md) section 2 is the dated list of what remains. Every number below says where it came from, and the rows with nothing in them are measurements that have not happened.
 
