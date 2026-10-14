@@ -1,6 +1,6 @@
 # Immersive Harbor composition study — 14 October 2026
 
-One alternative Home + Details composition, isolated on `codex/immersive-composition-study-2026-10-14`. Source: `c91b285026635a6b1323c6830d5be8813be8ceb4`. Base: `c8e4b346dc7ba323ca21972d489900c04d8530fa` (integrated application source `e05216284b2e3e85e8a73275432568c512c7317c`). The approved integration branch remains unchanged. Native task: `codex://threads/01a138bb-a422-7746-9293-caf676f250f3`.
+One alternative Home + Details composition, isolated on `codex/immersive-composition-study-2026-10-14`. Source: `4a9169a8b495c83ae14c1c53458fd9cdbd4436ee`. Base: `c8e4b346dc7ba323ca21972d489900c04d8530fa` (integrated application source `e05216284b2e3e85e8a73275432568c512c7317c`). The approved integration branch remains unchanged. Native task: `codex://threads/01a138bb-a422-7746-9293-caf676f250f3`.
 
 ## Composition
 
@@ -47,3 +47,7 @@ Both 1920×1080 and 1280×720 renders were inspected. All Home Watch/Details/How
 Library upload succeeded for the comparison and both full-size screens. Returned version/identity xattrs were applied using the existing Python environment after system Python proved too old for the helper. No duplicate uploads were created.
 
 Native interaction is still pending: earlier Computer Use app selection returned “Computer Use permissions are not granted.” No new permission evidence exists; no retry, Terminal UI bypass, app-data reset, household PIN action, installation or live validation was attempted for this study. The user must grant the requested Computer Use access before native inspection can resume. Mobbin sign-in/authorization is a separate pending user action. Neither blocker prevents reviewing this composition.
+
+## Copy correction before delivery
+
+Removed the newly introduced “A Calm Frames original” eyebrow from Home; Details now retains only the verified duration for Harbor. Home now says “On supported titles, marked scenes use a still picture while sound continues.” Details’ no-holds disclosure remains unchanged. Regenerated the existing component exports and comparison only; no wider design or testing cycle. The two export fixtures and existing render bounds/contrast assertions passed during regeneration. Comparison and full-size Library images were replaced in place at version 1; current IDs are in library-files.json. Earlier broader validation results above describe the prior implementation pass.

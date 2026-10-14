@@ -1,33 +1,33 @@
 {
-  "source_commit": "c91b285026635a6b1323c6830d5be8813be8ceb4",
+  "source_commit": "4a9169a8b495c83ae14c1c53458fd9cdbd4436ee",
   "baseline_app_commit": "e05216284b2e3e85e8a73275432568c512c7317c",
   "baseline_evidence_commit": "c8e4b346dc7ba323ca21972d489900c04d8530fa",
   "rendering": "React Native component host trees translated to Chromium; not Vega or VoiceView evidence",
   "files": [
     {
       "path": "1080/details.png",
-      "sha256": "87268b232c160a17ce13ef3ceba9ecf8572519f767791fc7eec0a6dbd868c22a",
-      "bytes": 476585
+      "sha256": "f920ec51aa0c2af0414eceb58af6bd94304b8fbc7c2c77649578ff544586a2d8",
+      "bytes": 470364
     },
     {
       "path": "1080/home.png",
-      "sha256": "6fb6ce919db773a0e4bafe06ba036f195eeed107704af75b960ce3882508ce2f",
-      "bytes": 460688
+      "sha256": "ed0af3154f30eeec0360114cd839d38105e739325a3ca73240dd88ff5648e13b",
+      "bytes": 460080
     },
     {
       "path": "720/details.png",
-      "sha256": "89d6e8908ab2afc256c355dce07acb77c6bd440503afbe996ff59e5d640ee2ae",
-      "bytes": 253929
+      "sha256": "5fbbc9d7a5f687f14a628df1ed13ae5ee89b2f66b463bf70ac0b02aa9fa1b61f",
+      "bytes": 249936
     },
     {
       "path": "720/home.png",
-      "sha256": "b29594ea30a0ed77a8846a804d5e552c0595e4ab87dc1866c14d1e40e771b668",
-      "bytes": 240347
+      "sha256": "02469a1bc1c038a54cc6f85826e774184721b489680cc80d3172420525ac9ef6",
+      "bytes": 239446
     },
     {
       "path": "before-after.png",
-      "sha256": "a3c49c3c7b9bee8eb481b7a0498ad30bd4a35fb7a1d40921b31ea950de06bb1a",
-      "bytes": 576285
+      "sha256": "16f69bc9e60a7ed1c82f92425a3ef8b7633034a29f674a15fb8a4318b198f4d3",
+      "bytes": 573622
     }
   ]
 }

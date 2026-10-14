@@ -1,17 +1,20 @@
 [
   {
     "path": "before-after.png",
-    "file_id": "file_00000000d93c81fd97db562fb14aafe4",
-    "library_file_id": "libfile_8b5c9287fa788191849ca0b02f37412d"
+    "file_id": "file_000000005e5481fdad2cc24b6e6cc710",
+    "library_file_id": "libfile_8b5c9287fa788191849ca0b02f37412d",
+    "current_version_number": 1
   },
   {
     "path": "1080/home.png",
-    "file_id": "file_00000000dd9881f8a85977344596236c",
-    "library_file_id": "libfile_1a401dccf5a48191a790451ad49bb9dd"
+    "file_id": "file_00000000e8dc8230a5b6280cfa85864b",
+    "library_file_id": "libfile_1a401dccf5a48191a790451ad49bb9dd",
+    "current_version_number": 1
   },
   {
     "path": "1080/details.png",
-    "file_id": "file_00000000b22c8230b5c8c9813239e5ce",
-    "library_file_id": "libfile_6d21026f5c848191bfac0d71531dc1b9"
+    "file_id": "file_000000007cbc8230b8336d34f0feacea",
+    "library_file_id": "libfile_6d21026f5c848191bfac0d71531dc1b9",
+    "current_version_number": 1
   }
 ]
