@@ -82,7 +82,8 @@ def receipt(repo, arch='aarch64', kind='debug'):
 
 def run_release(repo, *args, env=None):
     settings = dict(os.environ, PATH=str(repo / 'shims') + os.pathsep + os.environ['PATH'],
-                    RELEASE_TEST_LOG=str(repo / 'commands.log'), RELEASE_PYTHON=sys.executable)
+                    RELEASE_TEST_LOG=str(repo / 'commands.log'), RELEASE_PYTHON=sys.executable,
+                    DEMO_PIN='')
     settings.update(env or {})
     return subprocess.run(['bash', str(repo / 'scripts/release.sh'), *args], cwd=repo,
                           text=True, capture_output=True, env=settings, timeout=20)
@@ -175,6 +176,24 @@ def test_selected_release_architecture_uses_matching_package_and_notes(project):
     notes = (project / 'build/release/v0.1.0/NOTES.md').read_text()
     assert 'calm-frames-0.1.0-x86_64.vpkg' in notes
     assert 'aarch64.vpkg' not in notes
+
+
+@pytest.mark.parametrize('source', ['argument', 'environment'])
+def test_reviewer_documents_never_include_supplied_pin(project, source):
+    # Deliberately fake sentinel; never inspect a real household or credential.
+    sentinel = '8642'
+    args = ['--pin', sentinel] if source == 'argument' else []
+    settings = {'DEMO_PIN': sentinel} if source == 'environment' else {}
+    result = run_release(project, '--skip-build', '--receipt', str(receipt(project)),
+                         *args, env=settings)
+    assert result.returncode == 0, result.stderr
+    out = project / 'build/release/v0.1.0'
+    for name in ('NOTES.md', 'PREPARATION.json', 'SHA256SUMS'):
+        assert sentinel not in (out / name).read_text()
+    assert sentinel not in result.stdout + result.stderr
+    notes = (out / 'NOTES.md').read_text()
+    assert 'choose and confirm your own four digit PIN' in notes
+    assert "owner's PIN and preserve existing household data" in notes
 
 
 @pytest.mark.parametrize('args', [('--arch', 'mips'), ('--build-type', 'Other'), ('--tag',), ('--pin', '123x'), ('--tag', '$(id)'), ('--tag', '-option')])

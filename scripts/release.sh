@@ -14,7 +14,6 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
-import os
 from pathlib import Path
 import re
 import shlex
@@ -116,7 +115,7 @@ def main():
     parser.add_argument('--build-type', choices=('Debug', 'Release'), default='Debug')
     parser.add_argument('--receipt', action='append', type=Path, default=[], help='package and complete app_source_files hash receipt; repeat for multiple targets')
     parser.add_argument('--tag')
-    parser.add_argument('--pin', default=os.environ.get('DEMO_PIN', ''), help='PIN already configured on the demo simulator; never sets an embedded PIN')
+    parser.add_argument('--pin', default='', help='deprecated compatibility option; ignored and never written to reviewer documents; do not supply a household PIN')
     args = parser.parse_args(sys.argv[2:])
     require(not (args.arch and args.all_architectures), 'choose --arch or --all-architectures')
     arches = list(ARCHES) if args.all_architectures else list(dict.fromkeys(args.arch or ['aarch64']))
@@ -202,7 +201,6 @@ def main():
         (stage / 'PREPARATION.json').write_text(json.dumps(preparation, indent=2) + '\n')
         table = '\n'.join(f'| {name} | {arch} {args.build_type} |' for arch, name in zip(arches, names))
         instructions = '\n'.join(f'    vega device install-app --device Simulator --packagePath {name}' for name in names)
-        pin = (f'The existing demo simulator PIN is `{args.pin}`. This does not set a PIN in the package.\n\n' if args.pin else '')
         (stage / 'NOTES.md').write_text(f'''# Calm Frames {tag}
 
 A calmer way to watch.
@@ -238,7 +236,7 @@ Fire TV is required. Install only the package matching the connected simulator.
 
 ## Parent PIN
 
-{pin}On a fresh installation, choose and confirm your own four digit PIN during
+On a fresh installation, choose and confirm your own four digit PIN during
 onboarding. Only a salted hash is stored. On a configured simulator, use its
 owner's PIN and preserve existing household data.
 
