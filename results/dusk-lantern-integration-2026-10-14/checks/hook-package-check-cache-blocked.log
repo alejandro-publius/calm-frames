@@ -1,0 +1,28 @@
+
+> @calm-frames/flash-guard@0.1.0 check:package
+> node tools/check_package.mjs
+
+Error: Command failed: /Users/alexvintera/.local/share/fnm/node-versions/v22.23.2/installation/bin/npm pack --offline --ignore-scripts --json --pack-destination /var/folders/zv/vxrp0js555l3b3vqr1m4gstw0000gn/T/calm-hook-package-UuQjaJ
+npm error code EPERM
+npm error syscall open
+npm error path /Users/alexvintera/.npm/_cacache/tmp/3d419787
+npm error errno -1
+npm error
+npm error Your cache folder contains root-owned files, due to a bug in
+npm error previous versions of npm which has since been addressed.
+npm error
+npm error To permanently fix this problem, please run:
+npm error   sudo chown -R 501:20 "/Users/alexvintera/.npm"
+npm error Log files were not written due to an error writing to the directory: /Users/alexvintera/.npm/_logs
+npm error You can rerun the command with `--loglevel=verbose` to see the logs in your terminal
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at checkExecSyncError (node:child_process:916:11)
+    at execFileSync (node:child_process:952:15)
+    at command (file:///Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-dusk-final/hook/tools/check_package.mjs:109:10)
+    at checkPackage (file:///Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-dusk-final/hook/tools/check_package.mjs:223:31)
+    at file:///Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-dusk-final/hook/tools/check_package.mjs:263:3
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)

@@ -35,5 +35,8 @@
       "path": "static/calm-frames-dusk-lantern-home-static.png",
       "sha256": "ee61390e21a5e87a0673114b31ae4ef630a9b7f9900a32b8565f3f423897a1d0"
     }
-  ]
+  ],
+  "final_candidate_source_commit": "437f5cf7fb5c2e10dfc5043f170550a122bbd1ce",
+  "final_candidate_app_inputs_match_capture_source": true,
+  "final_preparation": "checks/FINAL_PREPARATION.json"
 }

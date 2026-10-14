@@ -28,9 +28,13 @@ Home and Details were freshly rendered from this candidate at 1920x1080 and 1280
 - [Verified Library IDs](../results/dusk-lantern-integration-2026-10-14/static/library-files.json)
 - [Capture hashes](../results/dusk-lantern-integration-2026-10-14/ARTIFACT_MANIFEST.json)
 
-## Pending boundaries
+## Repair integration and remaining native boundary
 
-Claude separately owns the reported hook mirror/package dependency fix and repository prose-style violations. Those files were not modified here. This receipt will be supplemented after that commit is delivered and checked.
+Claude completed `claude/repo-blockers-2026-10-14` clean and pushed at `8ef8a0e`. Reviewed and cherry-picked `f698049` and `8ef8a0e` as `d6a032d` and `437f5cf`. The fix adds the missing CalmControlSurface mirror, declares the existing gradient runtime as a peer, synchronizes the stale mirrored controls/tokens, and replaces the ten prohibited punctuation occurrences. It changes no app input.
+
+Independent verification passed: all 5 hook-mirror tests, all 10 package tests, offline packed-consumer install/typecheck/Metro/React Native transformation, and the whole-repository style check. The first package check could not write the default npm cache; a workspace-local cache resolved that environmental issue without permission or ownership changes. No full-suite rerun is claimed.
+
+Final candidate source: **437f5cf7fb5c2e10dfc5043f170550a122bbd1ce**. The strict release preparer compared the complete app-input inventory and package hash to the original build receipt and passed. [Final preparation record](../results/dusk-lantern-integration-2026-10-14/checks/FINAL_PREPARATION.json). Final package path: `build/release/dusk-lantern-final-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`; SHA-256 and size are unchanged. This is a verified reuse of the fresh `6a6212c` build, with identical app inputs, not a claim that another compilation occurred. The requested snapshots remain exact matches for those unchanged inputs.
 
 Native observation remains blocked by the earlier Computer Use permission failure. No new permission evidence was provided, and no denied action was retried or bypassed. Claude also reported Simulator Device not found; that was not independently re-probed here. This package has not been installed or launched. Actual moving playback, hidden controls, simultaneous hold/caption-menu/multiline cue, D-pad, VoiceView and recovery remain unverified for this candidate.
 

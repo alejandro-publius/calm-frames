@@ -1,6 +1,6 @@
 # Dusk lantern final-build installation and demonstration outline
 
-Prepared 14 October 2026 while Claude completes its design handoff. This is an execution outline, not native verification. Final source SHA and package SHA-256 must be filled from the integration build receipt.
+Prepared 14 October 2026 from the checked integration candidate. This is an execution outline, not native verification. Final candidate source: `437f5cf7fb5c2e10dfc5043f170550a122bbd1ce`. The complete app inputs match build source `6a6212c7fc3b0327a1491554e7a9a7f1067e2066`. Package SHA-256: `48cbad6d97e912e7ee091ffabd15bb035966fa4952a55754b36406cb4dc51198`. Package: `build/release/dusk-lantern-final-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`.
 
 ## Before installation
 

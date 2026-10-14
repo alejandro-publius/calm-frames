@@ -16,3 +16,15 @@ source /Users/alexvintera/vega/env
 PATH begins with local .logs/integration/build-bin watchman shim and existing Node 22 installation; JAVA_HOME=/opt/homebrew/opt/openjdk@21
 RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag dusk-lantern-integration-2026-10-14
 Passed, package identity/runtime and exact prepared-library bytes/reports checked. No install, launch, publication or native verification.
+
+Integrated f698049 and 8ef8a0e as d6a032d and 437f5cf on the isolated candidate.
+npm --prefix app test -- --runInBand --coverage=false --watchman=false --testPathPattern=hookMirror.test
+5 passed.
+npm --prefix hook run test:package
+10 passed.
+npm_config_cache="$PWD/.logs/hook-npm-cache" npm --prefix hook run check:package
+Passed: 29 files, 90 exports; offline consumer install, actual existing peer types, TypeScript 5.8.3, Metro resolution and React Native transform. Initial attempt could not write the default npm cache; the retry used an isolated writable cache. No ownership/permission changes or registry dependency downloads.
+python3 eval/style_check.py
+Passed over the tracked repository.
+RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --skip-build --receipt app/build/aarch64-debug/release-build-receipt.json --arch aarch64 --build-type Debug --tag dusk-lantern-final-2026-10-14
+Passed at source 437f5cf7fb5c2e10dfc5043f170550a122bbd1ce. Complete app input inventory and package hash match the fresh build. No app files changed in either repair commit. Native validation remains false.

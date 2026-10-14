@@ -1,0 +1,17 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false --testPathPattern=hookMirror.test
+
+ PASS  test/calmframes/hookMirror.test.ts
+  the hook package mirror
+    ✓ mirrors the engine, and nothing else (4 ms)
+    ✓ is byte for byte what the sync script would write today (10 ms)
+    ✓ leaves no import pointing outside the package (2 ms)
+    ✓ exports the hook and the pieces an app has to draw
+    ✓ declares the runtime it needs as peers, not as dependencies
+
+Test Suites: 1 passed, 1 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        0.657 s
+Ran all test suites matching /hookMirror.test/i.
