@@ -9,6 +9,7 @@ import { fetchPlaylists } from '../../store/search/searchSlice';
 import { WithSuspense } from '../../utils/WithSuspense';
 import AppDrawer from './AppDrawer';
 import HarborOpening from '../../calmframes/HarborOpening';
+import { playerRouteFallback } from './playerRouteFallback';
 import { AppStackParamList, Screens } from './types';
 
 const DetailsScreen = React.lazy(() => import('../../screens/DetailsScreen'));
@@ -52,7 +53,7 @@ const AppStack = () => {
       />
       <Stack.Screen
         name={Screens.PLAYER_SCREEN}
-        component={WithSuspense(PlayerScreen)}
+        component={WithSuspense(PlayerScreen, playerRouteFallback)}
       />
 
       <Stack.Screen

@@ -3,14 +3,18 @@ import { StyleSheet, Text, View } from 'react-native';
 import HomeHarborScene from './HomeHarborScene';
 import CalmPageHeader from './CalmPageHeader';
 import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
-export default function PlayerOpening({ title, onBack, returning = false }: { title: string; onBack: () => void; returning?: boolean }) {
+/**
+ * liveStatus is false only for the route's loading stand-in
+ * (playerRouteFallback.tsx), so the status is announced once, by the player.
+ */
+export default function PlayerOpening({ title, onBack, returning = false, liveStatus = true }: { title: string; onBack: () => void; returning?: boolean; liveStatus?: boolean }) {
   return <View testID="player-home-opening" style={styles.screen}>
     <HomeHarborScene />
     <CalmPageHeader onBack={!returning ? onBack : undefined} backLabel="Back" backTestID="player-opening-back" preferredBack />
     <View style={styles.copy}>
       <Text style={styles.eyebrow}>A calmer way to watch</Text>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.detail} accessibilityLiveRegion="polite">{returning ? 'Going back...' : 'Opening your story...'}</Text>
+      <Text style={styles.detail} accessibilityLiveRegion={liveStatus ? 'polite' : 'none'}>{returning ? 'Going back...' : 'Opening your story...'}</Text>
 
     </View>
   </View>;

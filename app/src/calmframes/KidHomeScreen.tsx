@@ -48,13 +48,27 @@ import {
   KID_HOME_PICKER_FRAME,
 } from './uiFrames';
 
+/** The shelf control a title was opened or started from. */
+export type ReturnFocusControl = 'watch' | 'details' | 'poster';
+
 export interface KidHomeScreenProps {
   /** Every title that has been checked, in any state. */
   titles: CheckedTitle[];
   onOpen: (entry: CheckedTitle) => void;
   onPlay?: (entry: CheckedTitle) => void;
+  /**
+   * Called with the shelf control just pressed, right before onOpen or onPlay,
+   * so the route can bring focus back to that control afterwards.
+   */
+  onLaunchControl?: (control: ReturnFocusControl) => void;
   /** Last opened title, retained by the route while this shelf is unmounted. */
   returnFocusId?: string | null;
+  /**
+   * Which control opened it. The featured title has Watch and Details side by
+   * side, so the id alone cannot say which one to return to; without this,
+   * Back from playback started with Watch put focus on Details.
+   */
+  returnFocusControl?: ReturnFocusControl;
   onOpenParentArea?: () => void;
   /**
    * The service that publishes checks could not be reached.
@@ -84,6 +98,8 @@ const KidHomeScreen = ({
   onOpen,
   onPlay,
   returnFocusId,
+  returnFocusControl,
+  onLaunchControl,
   onOpenParentArea,
   offline = false,
   profiles,
@@ -115,6 +131,15 @@ const KidHomeScreen = ({
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
     ? returnFocusId
     : listed[0]?.title.id;
+  // Exactly one control takes the remote's focus when the shelf comes back:
+  // the one that was pressed, or, for a press from the introduction, which
+  // reports none, How it works.
+  const returningToFeatured = Boolean(featured) && returnFocusId === featured?.title.id;
+  const fromIntroduction = returnFocusId === demo?.title.id || returnFocusId === playbackCheck?.title.id;
+  const returnTo: ReturnFocusControl | 'learn' | null = saving ? null
+    : returnToIntroduction ? 'learn'
+    : !returnFocusId ? 'watch'
+    : returnFocusControl ?? (fromIntroduction ? 'learn' : returningToFeatured ? 'details' : 'poster');
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
   const empty = listed.length === 0;
   // With nothing to watch, the shelf does not ask who is watching: there is
@@ -188,14 +213,14 @@ const KidHomeScreen = ({
                 <Text style={styles.description}>{feature.browseSynopsis ?? feature.description}</Text>
                 <View style={styles.actions}>
                   <CalmButton primary sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={feature.action} accessibilityLabel={`${feature.action}: ${feature.name}`}
-                    disabled={saving} hasTVPreferredFocus={!returnFocusId && !returnToIntroduction && !saving} onPress={() => (onPlay ?? onOpen)(featured)} />
-                  <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" hasTVPreferredFocus={returnFocusId === featured.title.id && !returnToIntroduction && !saving} onPress={() => onOpen(featured)} disabled={saving} />
+                    disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
+                  <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
               </View>
               <View style={styles.purpose}>
                 <Text style={styles.purposeTitle}>Watch with fewer flashes.</Text>
                 <Text style={styles.purposeCopy}>A still picture covers marked scenes. Sound continues.</Text>
-                <View style={styles.learn}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" hasTVPreferredFocus={(returnToIntroduction || returnFocusId === demo?.title.id || returnFocusId === playbackCheck?.title.id) && !saving}
+                <View style={styles.learn}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" hasTVPreferredFocus={returnTo === 'learn'}
                   disabled={saving} onPress={() => { setChoosingProfile(false); setShowIntroduction(true); }} />
 </View>
               </View>
@@ -208,9 +233,9 @@ const KidHomeScreen = ({
                 return <TouchableOpacity disabled={saving || undefined} accessibilityState={saving ? { disabled: true } : undefined}
                   key={entry.title.id} testID={`${testID}-poster-${entry.title.id}`} accessibilityRole="button"
                   accessibilityLabel={[label.cardName ?? label.name, label.kind].filter(Boolean).join(', ')} activeOpacity={1}
-                  hasTVPreferredFocus={!saving && !returnToIntroduction && Boolean(returnFocusId) && entry.title.id === preferredId}
+                  hasTVPreferredFocus={returnTo === 'poster' && entry.title.id === preferredId}
                   onFocus={() => setFocusedId(entry.title.id)} onBlur={() => setFocusedId(null)} onPress={() => {
-                    if (!saving) { onOpen(entry); feedback.confirm(); }
+                    if (!saving) { onLaunchControl?.('poster'); onOpen(entry); feedback.confirm(); }
                   }}
                   style={[styles.poster, focused ? styles.posterFocused : null]}>
                   <View style={styles.posterArt}><TitleArtwork illustrated compact height={116} entry={entry} testID={`${testID}-poster-image-${entry.title.id}`} /></View>
