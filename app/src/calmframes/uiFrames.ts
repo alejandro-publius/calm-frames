@@ -189,6 +189,11 @@ export const CREDITS_FRAME: UiFrame = {
  */
 export const VIDEO_BEHIND = 'video';
 
+/** Static in-play status; the scene remains visible beneath its small plate. */
+export const PLAYER_BUFFERING_FRAME: UiFrame = {
+  screen: 'player-buffering', background: VIDEO_BEHIND, surfaces: [CALM_COLORS.SURFACE],
+};
+
 /**
  * What the player paints over the video.
  *
@@ -217,6 +222,7 @@ export function playerFrame(
 
 /** Every frame the app can show, for the flashmap run. */
 export const ALL_UI_FRAMES: UiFrame[] = [
+  PLAYER_BUFFERING_FRAME,
   HOUSEHOLD_LOADING_FRAME,
   HOUSEHOLD_ERROR_FRAME,
   FIRST_RUN_PIN_FRAME,

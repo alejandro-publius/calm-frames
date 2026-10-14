@@ -2465,3 +2465,21 @@ not merged. The proposed patch predates the opening shell and can announce
 Loading behind it while a verified title waits for its first frame. It needs
 explicit suppression during the shell and immediate errors before integration.
 The existing combined candidate remains the basis of the one native preview.
+
+### Oct 14: integrate the compatible loading presentation
+
+Adapt Claude's dedicated component from fa766f3 into the combined player.
+Ordinary buffering keeps a static Loading plate mounted across short event
+changes, with a one-second reveal delay and half-second minimum display.
+The plate has no scene-dimming backdrop and takes no presses or focus.
+Initial opening, return, blocked verification and playback error states
+unmount it, cancelling timers and hidden announcements. The checking card
+suppresses the duplicate words. This resolves the prior review conflict.
+
+Focused tests cover verified opening with zero ready frames, post-opening
+buffering, the hidden announcement, signed still retention, countdown Skip,
+immediate error recovery and return cancellation. Removing the opening
+suppression makes the regression test fail. The loading plate is included
+in the declared solid-surface inventory; native pixels and VoiceView remain
+unobserved while the Mac is locked. No disabled picture-break prototype,
+dependency cleanup, guard changes or unrelated Claude commits are integrated.

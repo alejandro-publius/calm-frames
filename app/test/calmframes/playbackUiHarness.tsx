@@ -56,7 +56,7 @@ jest.mock('../../src/utils/VideoHandler', () => ({
       error: (value: boolean) => void, _elapsed: unknown,
       buffering: (value: boolean) => void) {
       this.video = video; this.data = data; this.initialized = initialized;
-      this.buffering = buffering; mockError = error;
+      this.buffering = buffering; mockError = error; mockBuffering = buffering;
     }
     preBufferVideo() { this.video.current = mockMedia; this.initialized(true); this.buffering(false); }
     destroyVideoElements() {}
@@ -65,6 +65,7 @@ jest.mock('../../src/utils/VideoHandler', () => ({
 
 export const mockSeekFocus = jest.fn();
 export let mockError: (value: boolean) => void;
+export let mockBuffering: (value: boolean) => void;
 export let mockMedia: ReturnType<typeof makeMedia>;
 export let mockGuard: any;
 export function makeMedia() {

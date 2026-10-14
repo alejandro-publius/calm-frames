@@ -13,10 +13,12 @@
  * rather than photographed. uiCapture.ts says what was tried.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act as flushReact, fireEvent, render, screen } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
+import { View } from 'react-native';
+import BufferingWindow, { REVEAL_DELAY_MS } from '../../src/components/BufferingWindow';
 // The real shelf below comes from KidModeScreen's catalog, and that screen
 // reads the saved household.
 jest.mock('@react-native-async-storage/async-storage', () => ({
@@ -58,6 +60,8 @@ import {
 } from '../../src/calmframes/uiCapture';
 import {
   ALL_UI_FRAMES,
+  PLAYER_BUFFERING_FRAME,
+  VIDEO_BEHIND,
   HOUSEHOLD_LOADING_FRAME,
   HOUSEHOLD_ERROR_FRAME,
   FIRST_RUN_EXPLAINER_FRAME,
@@ -214,6 +218,16 @@ function blockedTitle(): CheckedTitle {
 }
 
 describe('what the app paints', () => {
+  it('measures the static buffering plate without dimming the scene', () => {
+    jest.useFakeTimers();
+    try {
+      expect(renderedFrame('player-buffering', (
+        <View style={{ backgroundColor: VIDEO_BEHIND }}><BufferingWindow presentation="overlay" /></View>
+      ), () => flushReact(() => jest.advanceTimersByTime(REVEAL_DELAY_MS)))).toEqual(PLAYER_BUFFERING_FRAME);
+      expect(ALL_UI_FRAMES).toContain(PLAYER_BUFFERING_FRAME);
+    } finally { jest.useRealTimers(); }
+  });
+
   it('measures household storage loading and errors from the rendered screen', () => {
     expect(renderedFrame('household-loading', <HouseholdStorageScreen failed={false} onRetry={jest.fn()} />))
       .toEqual(HOUSEHOLD_LOADING_FRAME);

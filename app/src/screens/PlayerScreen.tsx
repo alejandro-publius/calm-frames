@@ -690,12 +690,16 @@ const PlayerScreen = ({
           </>
         )}
 
-        {showBuffering && (
-          <BufferingWindow backgroundColor={COLORS.SEMI_TRANSPARENT} />
+        {/* Opening, return and errors own their feedback. Unmounting cancels
+            pending loading announcements; ordinary stalls keep the status mounted
+            long enough to avoid blinking, without dimming the verified picture. */}
+        {!showOpeningShell && !isVideoError && !(guarding && guard.status === 'blocked') && (
+          <BufferingWindow presentation="overlay" visible={showBuffering}
+            statusText={card.kind === 'checking' ? null : undefined} />
         )}
         {/*
           The card sits above the cover, so it stays readable while the picture
-          is hidden, and it is the only thing on screen that speaks.
+          is hidden, and keeps its own accessible status and Skip action.
         */}
         {!showOpeningShell && <CalmCard
           card={pausedCard(card, paused)}
