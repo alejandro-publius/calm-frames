@@ -1,10 +1,11 @@
 # The submission packet
 
 Reconciled Oct 14, 2026. The packet is the five documents below, written
-against the official rules and the repository's receipts. It sits on the
-working integration baseline `codex/core-reliability-2026-10-14` at
-`cfddc4adb8bcdd17a861e6489f5fb50693c282d3`, which is a candidate, not the final
-judged release. Nothing is submitted, published, uploaded or recorded, and
+against the official rules and the repository's receipts. It now describes the
+final integration candidate `claude/final-candidate-2026-10-14`, whose package
+was built from `93cf80028529992cedc4439cb29a59d6ff024188`; the root
+[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) has the package hash, the checks and
+the owner's remaining actions. It is a candidate, not the final judged release. Nothing is submitted, published, uploaded or recorded, and
 recording is not yet authorized.
 
 | File | What it holds |
@@ -15,7 +16,8 @@ recording is not yet authorized.
 | [REVIEWER_QUICKSTART.md](REVIEWER_QUICKSTART.md) | Setup, run and demo steps for a judge, with unexecuted commands marked |
 | [OPEN_DECISIONS.md](OPEN_DECISIONS.md) | What is pending and what only Alex can decide, mandatory first |
 
-The longer field-by-field draft remains [../SUBMISSION.md](../SUBMISSION.md).
+The longer field-by-field draft remains [../SUBMISSION.md](../SUBMISSION.md),
+and the handoff for the candidate is [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md).
 
 ## The Oct 13 draft ZIP, kept as history
 
@@ -43,8 +45,8 @@ upload attempt and source identity are recorded in
 
 ## What comes next
 
-Approve the single 2D composition with dimensional artwork, apply it, then run
-one native walkthrough and recording on the Vega Virtual Device following
-[MAC_FINISH.md](../MAC_FINISH.md). The remaining licence, security, access and
+The coastal composition is approved and applied. Run the native acceptance in
+[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 3 on the Vega Virtual Device,
+then the recording, following [MAC_FINISH.md](../MAC_FINISH.md). The remaining licence, security, access and
 submission steps are in [the completion checklist](../COMPLETION_CHECKLIST.md)
 and [OPEN_DECISIONS.md](OPEN_DECISIONS.md).

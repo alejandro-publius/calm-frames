@@ -4,6 +4,19 @@ Updated Oct 14, 2026.
 
 ## 0. Where things stand
 
+### Oct 14, evening: the final integration candidate
+
+`claude/final-candidate-2026-10-14` carries Codex's approved coastal interface
+(`b22d275`), the submission packet, ledger rows and regenerated credits for
+both new pictures, the hook mirror, and the fixes that hold the coastal menus
+to the ten foot floors (`93cf800`). The full app suite passes on that commit:
+1295 tests, 4 skipped, 57 snapshots. One aarch64 Debug package was built from
+it, SHA-256 `d53444ab…`, 728 recorded inputs, prepared library checked with
+all three reports; `FINAL_HANDOFF.md` has the rest. Not installed, launched,
+recorded, pushed, merged or published. The water study stays separate and the
+still artwork is the release default. The owner's next step is the native
+acceptance in the handoff, then the recording.
+
 ### Oct 14: quiet integration review
 
 Source `2d95206` fixes destination-specific Back wording and the home/loading

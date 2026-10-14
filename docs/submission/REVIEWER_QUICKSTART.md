@@ -6,10 +6,12 @@ below were executed while writing this file.** Where a command has been run by
 an earlier session, the receipt that records it is named; everything else is
 marked unverified.
 
-The working integration baseline is `codex/core-reliability-2026-10-14` at
-`cfddc4adb8bcdd17a861e6489f5fb50693c282d3`, a candidate; the final judged
-release is still to be selected ([OPEN_DECISIONS.md](OPEN_DECISIONS.md)). Use
-the branch or tag named in the submission form.
+The final integration candidate is `claude/final-candidate-2026-10-14`; its
+package was built from `93cf80028529992cedc4439cb29a59d6ff024188`
+([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)). The judged release is still to
+be selected ([OPEN_DECISIONS.md](OPEN_DECISIONS.md)); use the branch or tag
+named in the submission form. The app runs on Vega OS and has only ever run on
+the Vega Virtual Device; Fire OS devices cannot install it.
 
 ## 1. What you need
 
@@ -82,7 +84,10 @@ PIN into `NOTES.md`; `--pin` is kept as a deprecated option whose value is unuse
 `cfddc4a` exists as build output outside git in the reliability worktree,
 `build/release/core-reliability-cfddc4a-2026-10-14/`, SHA-256
 `e315e16d19172a5aadc1bfa8a9364bcf9205d51870ec610b92eb01ea9d2841dd`, with its 723
-recorded source inputs verified and `native_validation_performed: false`.
+recorded source inputs verified and `native_validation_performed: false`. The
+final candidate's package is `build/release/final-candidate-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, SHA-256 `d53444ab70f38d24fb4cb1c468ebe78e0ed24cc6932c45235e50dd174fb2a25a`, 28,664,945 bytes, 728 recorded inputs, built from `93cf800`, in the final candidate's worktree; the
+receipt beside it records the inputs and the prepared library check. Neither
+package has been installed or run.
 
 ```sh
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
@@ -122,8 +127,7 @@ Logs do not prove what was on screen; look at the simulator.
    confirm them; there is no preset PIN in the package and it is never stored in
    plain text. Pick a profile, a viewing preset and the room.
 2. **Home.** Move focus with the D-pad across Play, Details, Try picture holds,
-   Parental controls and How it works. The line under Harbor reads "20 sec ·
-   No picture holds".
+   Settings and Help. The line under Harbor reads "20 sec · No picture holds".
 3. **Try picture holds.** Select it, read "20 sec · 2 practice holds" on the
    details page, then Play. Watch the countdown and Skip, then the first hold:
    the picture holds a still, the "Holding a calm scene" card appears, captions
@@ -132,7 +136,7 @@ Logs do not prove what was on screen; look at the simulator.
 4. **Transport.** Pause and resume; seek back into a hold and watch the cover
    appear before the picture moves; press Back and see focus return to the tile.
 5. **Harbor.** Play the ordinary title: the same film with zero holds.
-6. **Parental controls.** Enter a wrong PIN and see it rejected with the tries
+6. **Settings.** Enter a wrong PIN and see it rejected with the tries
    remaining, correct it with Delete, enter the right one. Change the preset or
    the room, relaunch the app and see the choice kept. Practice holds never
    enter the exposure history, so an empty history after the demo is correct.
@@ -141,6 +145,20 @@ Steps 1 to 3, 5 and the PIN gate of step 6 were observed on Oct 13 and 14 on
 earlier builds; the settings interior and the restart were last observed on the
 Oct 10 build. The seek into a hold has only test coverage. Re-verify everything
 on the final package.
+
+## 4a. A browser preview, without a device
+
+```sh
+cd app && npx jest --ci --watchman=false --coverage=false test/calmframes/coastalExport.test.tsx && cd ..
+.venv/bin/python eval/preview/coastal_preview.py
+.venv/bin/python -m http.server 4174 --bind 127.0.0.1 --directory build/coastal-preview
+```
+
+Then open <http://127.0.0.1:4174/>. It is an HTML export of the rendered
+component trees with CSS approximations: Home links to Details, the practice
+entry, Help and Settings, and keyboard focus cycles. Play, PIN keys and unmapped
+actions only show a notice. It does not run the native handlers, media,
+persistence, PIN checks, D-pad spatial navigation or VoiceView.
 
 ## 5. The analyzer, the Action and the hook, without the app
 

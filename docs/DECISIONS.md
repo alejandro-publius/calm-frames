@@ -2488,3 +2488,11 @@ The first complete integrated run found one remaining inventory mismatch:
 the early bootstrap wave and the later illustrated household loader shared
 a frame name despite different solid surfaces. Give the bootstrap its own
 measured entry. No startup timing, artwork or loading behavior changes.
+
+## 2026-10-14, evening: the final candidate
+
+- **Decision:** keep the approved still coastal artwork as the release default and leave Codex's moving-water study separate and unmerged. **Why:** the study is a browser canvas distorting masked water pixels; the native stack has no canvas and no supported path to it without new rendering code or a looping video that would have to be released before playback and checked on the device. A reliable app outranks animation. **Cost:** no ambient motion on the device beyond the existing opt-in ripples.
+- **Decision:** keep the approved terracotta ring on a focused coastal primary and move the storage error screen's Try again onto the page instead of changing the colour. **Why:** no single colour clears 3 to 1 against both the teal fill and the panel colour by more than a hair, while on the page the approved ring clears it; the menus' other rings are deep teal. **Cost:** the error screen's button sits under the notice rather than inside it.
+- **Decision:** a pressed coastal primary keeps its ink fill. **Why:** switching to the light surface while the label stayed ivory made the label unreadable for the length of a press. **Cost:** none.
+- **Decision:** the ten foot pass accepts each palette's own ring colours, with its contrast floors unchanged, and the tests that asserted the dark palette on menu screens assert the coast. **Why:** the rule they encode is the floor, not the hex. **Cost:** a palette change now needs a test edit, which is the point.
+- **Decision:** ledger the coastal artwork as distributed under the repository's Apache-2.0 with no ownership or dedication claim, and `harbor-illustrated.png` as a render of our own SVG. **Why:** that is what the provenance file and a pixel comparison say, and nothing more. **Cost:** the owner still confirms the position at the Oct 21 review.

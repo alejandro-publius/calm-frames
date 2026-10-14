@@ -1,8 +1,9 @@
 # Open decisions and blockers
 
-Reconciled Oct 14, 2026 to the working integration baseline
-`codex/core-reliability-2026-10-14` at `cfddc4adb8bcdd17a861e6489f5fb50693c282d3`.
-That commit is a candidate, not the final judged release. Mandatory items come
+Updated Oct 14, 2026 (evening) for the final integration candidate
+`claude/final-candidate-2026-10-14`, package source `93cf800`
+([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)). It is a candidate, not the
+final judged release. Mandatory items come
 first; the mini challenges are optional and do not block the submission. Where
 evidence does not exist, the row says so instead of inventing it.
 
@@ -10,7 +11,10 @@ evidence does not exist, the row says so instead of inventing it.
 
 ### 1. Final release selection: pending
 
-The candidate includes the Oct 14 playback recovery fix (a failed player setup
+The final candidate `93cf800` carries the approved coastal interface, the
+ledger and credits for its artwork, the hook mirror and the fixes that hold
+the coastal menus to the ten foot floors; its package and checks are in the
+handoff. Underneath it, the reliability candidate `cfddc4a` includes the Oct 14 playback recovery fix (a failed player setup
 reaches the recovery screen at once) and the release helper fix that keeps a
 supplied PIN out of reviewer documents. Its bounded checks passed
 ([`results/core-reliability-2026-10-14.json`](../../results/core-reliability-2026-10-14.json),
@@ -26,19 +30,17 @@ since Sep 20.
 visual approval and native validation below, then the merge to `main` and the
 tag that never moves.
 
-### 2. Final visual approval: pending
+### 2. Final visual approval: done on Oct 14
 
-The next product step is approving the single 2D composition with dimensional
-artwork, then applying it before the final device walkthrough. The composition
-is not built: it needs the sculpted character artwork described in the asset
-brief, which no tool in this environment can generate.
-
-**Needs:** the artwork file with its provenance, then Alex's approval of the
-one composition.
+Alex approved the ivory coast design with the dimensional coastal artwork; it
+is applied in `b22d275` and held to the repository's floors in `93cf800`. What
+remains is seeing it on the device (item 3). The artwork's ledger row records
+its generation provenance without any ownership or dedication claim.
 
 ### 3. Native validation: pending
 
-No build of the candidate has been installed, observed or recorded. The last
+No build of the final candidate has been installed, observed or recorded; the
+acceptance checklist is in [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 3. The last
 native sessions were on `06190c7` (Oct 13) and `dba88d5` / `00905510` (Oct 14),
 and both stopped short: the parent-area interior needs the test household's
 PIN, which only Alex has, and the Oct 14 session ended when the Mac locked. The

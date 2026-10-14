@@ -24,6 +24,23 @@ measurement it names the results file instead of repeating the number.
 The review branch `codex/signed-scene-holds-2026-09-29`, published as draft pull
 request #1, on top of main at 7110893 (2026-09-20). Main has not moved since.
 
+### 2026-10-14
+
+The final integration candidate `claude/final-candidate-2026-10-14`, built
+from `93cf800` and not yet merged anywhere; `FINAL_HANDOFF.md` has the package.
+
+#### Changed
+
+- Every menu screen paints the approved ivory coast with the dimensional coastal artwork; playback keeps its dark controls. (b22d275)
+- A pressed coastal primary keeps its ink fill, the storage error screen's Try again sits on the page where its focus ring clears 3 to 1, the play glyph is drawn at the text floor, and the declared frame inventory and the tests that named the dark palette for menu screens follow the coast. (93cf800)
+- A failed player setup reaches the recovery screen at once instead of after the opening timeout, and the release helper never writes a supplied PIN into reviewer notes. (aa0494f, cfddc4a)
+
+#### Added
+
+- Ledger rows, NOTICE sections and credits entries for the coastal artwork and for `harbor-illustrated.png`, the latter traced to a pixel-identical render of our own `harbor.svg`. (cf53d39, 58bd1a7)
+- The submission packet under `docs/submission/` and the handoff `FINAL_HANDOFF.md`. (fbcbe20, 5065314)
+- The coastal control files in the hook package mirror. (53ab01b)
+
 ### 2026-10-11
 
 #### Added

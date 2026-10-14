@@ -57,8 +57,15 @@ that Alexa requests arrive on all go through one function. A target inside a
 flagged interval is covered first, then sought. A missing, unsigned, stale or
 mismatched map keeps the picture hidden.
 
-**How it works, in the app.** A short page in plain words: supported titles
-only, and detection can miss flashing.
+**Help, in the app.** A short page in plain words: supported titles only,
+and detection can miss flashing.
+
+**The screen itself.** An ivory and teal coast with dimensional artwork: a
+seated figure on a rock, a lighthouse island, a boat. Home shows Harbor, its
+length and hold count, Play and Details, one line on what picture holds are,
+and the practice entry; Help and Settings sit in the header. Playback keeps
+dark controls over the video. Text is sized for a room and every focused
+control shows a ring.
 
 ## How it is built
 
@@ -141,10 +148,13 @@ they are the ones that bound what the app can promise.
 - All observations are from the Vega Virtual Device. No physical television
   timing was measured, and no clinical validation or feedback from families or
   clinicians exists yet.
-- The working candidate (`cfddc4a`, with the Oct 14 playback recovery fix) has
-  been built but not installed or observed on the device; the observations
-  above are of earlier builds of the same app. [Replace with the final build's
-  receipt before pasting.]
+- The final candidate (`93cf800`, with the coastal interface and the Oct 14
+  playback recovery fix) has been built but not installed or observed on the
+  device; the observations above are of earlier builds of the same app.
+  [Replace with the final build's receipt before pasting.]
+- It runs on Vega OS and has only run on the Vega Virtual Device. Fire OS
+  devices, which is most Fire TV sticks and Cubes in homes today, cannot
+  install it.
 
 ## Not shipped, planned
 
