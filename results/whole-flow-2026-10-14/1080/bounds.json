@@ -68,42 +68,42 @@
     {
       "id": "kid-home-watch",
       "x": 96,
-      "y": 486,
+      "y": 528,
       "width": 263.5,
       "height": 88
     },
     {
       "id": "kid-home-watch-label",
       "x": 134,
-      "y": 507,
+      "y": 549,
       "width": 187.5,
       "height": 46
     },
     {
       "id": "kid-home-more-info",
       "x": 379.5,
-      "y": 486,
-      "width": 319.734375,
+      "y": 528,
+      "width": 167.515625,
       "height": 88
     },
     {
       "id": "kid-home-more-info-label",
       "x": 405.5,
-      "y": 507,
-      "width": 267.734375,
+      "y": 549,
+      "width": 115.515625,
       "height": 46
     },
     {
       "id": "kid-home-learn",
       "x": 96,
-      "y": 606,
+      "y": 648,
       "width": 238.796875,
       "height": 88
     },
     {
       "id": "kid-home-learn-label",
       "x": 122,
-      "y": 629,
+      "y": 671,
       "width": 186.796875,
       "height": 42
     }
@@ -8384,6 +8384,92 @@
       "y": 388,
       "width": 968,
       "height": 96
+    }
+  ],
+  "01-home-parent-focused": [
+    {
+      "id": "kid-home",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "home-harbor-scene",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "id": "home-water-ripples",
+      "x": 1050,
+      "y": 690,
+      "width": 720,
+      "height": 120
+    },
+    {
+      "id": "kid-home-parent-area",
+      "x": 1529.40625,
+      "y": 54,
+      "width": 294.59375,
+      "height": 88
+    },
+    {
+      "id": "kid-home-parent-area-label",
+      "x": 1555.40625,
+      "y": 77,
+      "width": 242.59375,
+      "height": 42
+    },
+    {
+      "id": "kid-home-title",
+      "x": 96,
+      "y": 332,
+      "width": 206.625,
+      "height": 76
+    },
+    {
+      "id": "kid-home-watch",
+      "x": 96,
+      "y": 528,
+      "width": 263.5,
+      "height": 88
+    },
+    {
+      "id": "kid-home-watch-label",
+      "x": 134,
+      "y": 549,
+      "width": 187.5,
+      "height": 46
+    },
+    {
+      "id": "kid-home-more-info",
+      "x": 379.5,
+      "y": 528,
+      "width": 167.515625,
+      "height": 88
+    },
+    {
+      "id": "kid-home-more-info-label",
+      "x": 405.5,
+      "y": 549,
+      "width": 115.515625,
+      "height": 46
+    },
+    {
+      "id": "kid-home-learn",
+      "x": 96,
+      "y": 648,
+      "width": 238.796875,
+      "height": 88
+    },
+    {
+      "id": "kid-home-learn-label",
+      "x": 122,
+      "y": 671,
+      "width": 186.796875,
+      "height": 42
     }
   ]
 }

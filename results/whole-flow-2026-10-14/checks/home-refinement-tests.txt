@@ -1,0 +1,6 @@
+Command: npm --prefix app test -- --runInBand --coverage=false --watchman=false --testPathPattern='(homeIntroduction|shelf|uiCapture|wholeFlowDesign|KidModeScreen|tenFoot).test'
+Test Suites: 6 passed, 6 total
+Tests:       100 passed, 100 total
+Snapshots:   0 total
+Time:        9.989 s, estimated 10 s
+Ran all test suites matching /(homeIntroduction|shelf|uiCapture|wholeFlowDesign|KidModeScreen|tenFoot).test/i.

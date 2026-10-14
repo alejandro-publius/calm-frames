@@ -1,9 +1,9 @@
 {
-  "source_commit": "28904a0690d736a0b97eb80b04943c5d49f8117b",
+  "source_commit": "e49f712b7a0d74b3fbc41a4a0c90e232fa559bdc",
   "app_inputs_committed": true,
   "package": {
     "path": "app/build/aarch64-debug/calm-frames-app_aarch64.vpkg",
-    "sha256": "0826bda9cc11b37a4794ba3782e99fd57d45f065d93491ec7c03c508ad0a2366",
+    "sha256": "d43f7060ca5468239cbca3e55ac46093db50de71fba158a161f8ec90d6b06208",
     "target": "aarch64 Debug"
   },
   "app_source_files": [
@@ -1113,7 +1113,7 @@
     },
     {
       "path": "app/src/calmframes/CalmButton.tsx",
-      "sha256": "259076f51dc147dc093ab0d78cffa3633868775c717a05ec95e09f1412a6784d"
+      "sha256": "96c75136a0f6dd9c8d10c41edec553d1a72401055016418ab738cf00ec31b441"
     },
     {
       "path": "app/src/calmframes/CalmCard.tsx",
@@ -1161,7 +1161,7 @@
     },
     {
       "path": "app/src/calmframes/KidHomeScreen.tsx",
-      "sha256": "b0c1fdd93ded1eef2408c60007b1f0bab92252da853578ba56610a56b6b3bd8e"
+      "sha256": "05ecc59ad69f991cc0fb2f9ae779d1fd3ae2b30664ecf2714f39bceb5d728077"
     },
     {
       "path": "app/src/calmframes/ParentAreaScreen.tsx",
@@ -1357,7 +1357,7 @@
     },
     {
       "path": "app/src/calmframes/uiContrast.ts",
-      "sha256": "b949491d1c948d50841ee6811e8859ccbec9abdface326d7ce64de0669ac848d"
+      "sha256": "a2c7dfee14feb561c8c3043040840b18672783a3882526364771cb9748f84d3f"
     },
     {
       "path": "app/src/calmframes/uiFrames.ts",
@@ -2245,7 +2245,7 @@
     },
     {
       "path": "app/test/calmframes/homeIntroduction.test.tsx",
-      "sha256": "0be5d9712405a0146e7966edfd69cef5bd7d250e02c0c789bd062e4e7ffe1adf"
+      "sha256": "9b3a7b98cc51c99827dd79b1b3ad88fe48d6024059d208e248cbcad11a0919d0"
     },
     {
       "path": "app/test/calmframes/hookMirror.test.ts",
@@ -2369,7 +2369,7 @@
     },
     {
       "path": "app/test/calmframes/shelf.test.tsx",
-      "sha256": "09029337da888cadd67e6a53c43f93f07887e9c64ec65edb066227e19b40aa5e"
+      "sha256": "9ea377df0108ae582737175333ee73bd57c0b5e5f4bdc7972881c3fa3748931d"
     },
     {
       "path": "app/test/calmframes/shelfFixtures.ts",

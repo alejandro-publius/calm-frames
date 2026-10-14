@@ -1,0 +1,23 @@
+{
+  "parent-label-background-1080-home-parent-focused.png": {
+    "minimumTextContrast": 7.828725535412667,
+    "pixelsSampled": 10164,
+    "passes4_5": true
+  },
+  "parent-label-background-1080-home.png": {
+    "minimumTextContrast": 6.74564378702778,
+    "pixelsSampled": 10164,
+    "passes4_5": true
+  },
+  "parent-label-background-720-home-parent-focused.png": {
+    "minimumTextContrast": 7.828725535412667,
+    "pixelsSampled": 4452,
+    "passes4_5": true
+  },
+  "parent-label-background-720-home.png": {
+    "minimumTextContrast": 6.842230832619619,
+    "pixelsSampled": 4452,
+    "passes4_5": true
+  },
+  "focusRingOnFill": 4.607098964272758
+}

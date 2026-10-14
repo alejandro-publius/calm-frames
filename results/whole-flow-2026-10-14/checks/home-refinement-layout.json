@@ -1,0 +1,154 @@
+{
+  "1080": {
+    "home": {
+      "parentTarget": {
+        "x": 1529.40625,
+        "y": 54,
+        "width": 294.59375,
+        "height": 88
+      },
+      "labelStyle": {
+        "color": "rgb(243, 232, 211)",
+        "textShadow": "none"
+      },
+      "descriptionLines": [
+        {
+          "x": 96,
+          "y": 421,
+          "width": 580.125,
+          "height": 39
+        },
+        {
+          "x": 676.125,
+          "y": 421,
+          "width": 8.4375,
+          "height": 39
+        },
+        {
+          "x": 96,
+          "y": 463,
+          "width": 558.765625,
+          "height": 39
+        }
+      ],
+      "controlStyle": {
+        "fill": "rgba(0, 0, 0, 0)",
+        "border": "rgba(0, 0, 0, 0)",
+        "borderWidth": "6px"
+      }
+    },
+    "home-parent-focused": {
+      "parentTarget": {
+        "x": 1529.40625,
+        "y": 54,
+        "width": 294.59375,
+        "height": 88
+      },
+      "labelStyle": {
+        "color": "rgb(243, 232, 211)",
+        "textShadow": "none"
+      },
+      "descriptionLines": [
+        {
+          "x": 96,
+          "y": 421,
+          "width": 580.125,
+          "height": 39
+        },
+        {
+          "x": 676.125,
+          "y": 421,
+          "width": 8.4375,
+          "height": 39
+        },
+        {
+          "x": 96,
+          "y": 463,
+          "width": 558.765625,
+          "height": 39
+        }
+      ],
+      "controlStyle": {
+        "fill": "rgb(35, 75, 85)",
+        "border": "rgb(230, 169, 87)",
+        "borderWidth": "6px"
+      }
+    }
+  },
+  "720": {
+    "home": {
+      "parentTarget": {
+        "x": 1022.796875,
+        "y": 36,
+        "width": 193.203125,
+        "height": 59
+      },
+      "labelStyle": {
+        "color": "rgb(243, 232, 211)",
+        "textShadow": "none"
+      },
+      "descriptionLines": [
+        {
+          "x": 64,
+          "y": 281,
+          "width": 380.71875,
+          "height": 25
+        },
+        {
+          "x": 444.71875,
+          "y": 281,
+          "width": 5.546875,
+          "height": 25
+        },
+        {
+          "x": 64,
+          "y": 309,
+          "width": 366.703125,
+          "height": 25
+        }
+      ],
+      "controlStyle": {
+        "fill": "rgba(0, 0, 0, 0)",
+        "border": "rgba(0, 0, 0, 0)",
+        "borderWidth": "4px"
+      }
+    },
+    "home-parent-focused": {
+      "parentTarget": {
+        "x": 1022.796875,
+        "y": 36,
+        "width": 193.203125,
+        "height": 59
+      },
+      "labelStyle": {
+        "color": "rgb(243, 232, 211)",
+        "textShadow": "none"
+      },
+      "descriptionLines": [
+        {
+          "x": 64,
+          "y": 281,
+          "width": 380.71875,
+          "height": 25
+        },
+        {
+          "x": 444.71875,
+          "y": 281,
+          "width": 5.546875,
+          "height": 25
+        },
+        {
+          "x": 64,
+          "y": 309,
+          "width": 366.703125,
+          "height": 25
+        }
+      ],
+      "controlStyle": {
+        "fill": "rgb(35, 75, 85)",
+        "border": "rgb(230, 169, 87)",
+        "borderWidth": "4px"
+      }
+    }
+  }
+}

@@ -21,7 +21,7 @@ with sync_playwright() as p:
             folder /= '720'
         resolution = OUT / str(height)
         checks[str(height)] = {}
-        for name in ('home', 'home-parent-focused'):
+        for name in ('home', 'home-parent-focused', 'how-it-works'):
             tree = json.loads((folder / (name + '.json')).read_text())
             page.set_content(f'''<!doctype html><style>{fonts}
 *{{box-sizing:border-box}}html,body{{margin:0;width:{width}px;height:{height}px;background:#102f3a}}body{{display:flex;flex-direction:column;overflow:hidden}}
@@ -36,6 +36,8 @@ with sync_playwright() as p:
             bounds = json.loads(bounds_path.read_text())
             bounds['01-' + name] = ids
             bounds_path.write_text(json.dumps(bounds, indent=2) + '\n')
+            if name == 'how-it-works':
+                continue
             label = page.locator('[data-testid="kid-home-parent-area-label"]')
             label_style = label.evaluate('e=>{const s=getComputedStyle(e);return {color:s.color,textShadow:s.textShadow}}')
             assert label_style == {'color': 'rgb(243, 232, 211)', 'textShadow': 'none'}
