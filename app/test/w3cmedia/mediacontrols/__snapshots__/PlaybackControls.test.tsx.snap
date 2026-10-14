@@ -42,8 +42,8 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -89,8 +89,8 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -135,8 +135,8 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -193,8 +193,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -240,8 +240,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -286,8 +286,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -344,8 +344,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -391,8 +391,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -437,8 +437,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -495,8 +495,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -542,8 +542,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -588,8 +588,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",

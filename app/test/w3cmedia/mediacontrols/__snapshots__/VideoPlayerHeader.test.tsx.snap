@@ -19,9 +19,9 @@ exports[`VideoPlayerHeader tests component renders correctly with title 1`] = `
     numberOfLines={1}
     style={
       {
-        "color": "#F3E8D3",
+        "color": "#F4ECDD",
         "flexShrink": 1,
-        "fontFamily": "InterSemiBold",
+        "fontFamily": "CalmDisplaySemibold",
         "fontSize": 42,
         "fontWeight": "400",
         "lineHeight": 54,
@@ -66,8 +66,8 @@ exports[`VideoPlayerHeader tests component renders correctly with title 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
@@ -102,9 +102,9 @@ exports[`VideoPlayerHeader tests component renders correctly without title 1`] =
     numberOfLines={1}
     style={
       {
-        "color": "#F3E8D3",
+        "color": "#F4ECDD",
         "flexShrink": 1,
-        "fontFamily": "InterSemiBold",
+        "fontFamily": "CalmDisplaySemibold",
         "fontSize": 42,
         "fontWeight": "400",
         "lineHeight": 54,
@@ -147,8 +147,8 @@ exports[`VideoPlayerHeader tests component renders correctly without title 1`] =
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#1A414B",
-        "borderColor": "#1A414B",
+        "backgroundColor": "#303B48",
+        "borderColor": "#303B48",
         "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",

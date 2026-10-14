@@ -46,9 +46,9 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         numberOfLines={1}
         style={
           {
-            "color": "#F3E8D3",
+            "color": "#F4ECDD",
             "flexShrink": 1,
-            "fontFamily": "InterSemiBold",
+            "fontFamily": "CalmDisplaySemibold",
             "fontSize": 42,
             "fontWeight": "400",
             "lineHeight": 54,
@@ -93,8 +93,8 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "#1A414B",
-            "borderColor": "#1A414B",
+            "backgroundColor": "#303B48",
+            "borderColor": "#303B48",
             "borderRadius": 18,
             "borderWidth": 6,
             "flexDirection": "row",
@@ -149,8 +149,8 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "#1A414B",
-            "borderColor": "#1A414B",
+            "backgroundColor": "#303B48",
+            "borderColor": "#303B48",
             "borderRadius": 18,
             "borderWidth": 6,
             "flexDirection": "row",
@@ -196,8 +196,8 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "#1A414B",
-            "borderColor": "#1A414B",
+            "backgroundColor": "#303B48",
+            "borderColor": "#303B48",
             "borderRadius": 18,
             "borderWidth": 6,
             "flexDirection": "row",
@@ -242,8 +242,8 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "#17323C",
-            "borderColor": "#1A414B",
+            "backgroundColor": "#303B48",
+            "borderColor": "#303B48",
             "borderRadius": 18,
             "borderWidth": 6,
             "flexDirection": "row",

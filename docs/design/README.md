@@ -284,6 +284,24 @@ in notices, and never "prevents seizures" or "seizure-proof".
 
 ## Renders
 
+### Oct 14: dusk lantern Home and Details
+
+The harbor leads. The title sits low left at one size on Home and Details, Watch
+now is the only coral action, and the right of Home is the lantern: the benefit,
+the supported-title limitation, a sentence about the demo and the Picture hold
+demo control. How it works and Parental controls are quiet header actions, so
+nothing stands over the lighthouse. Details carries one factual line under the
+title. The account, the safe-area and contrast checks and the build steps are in
+[DUSK_LANTERN_2026-10-14.md](../DUSK_LANTERN_2026-10-14.md).
+
+![Dusk lantern Home, browser render of the component tree](../../results/dusk-lantern-2026-10-14/1080/home.png)
+
+![Dusk lantern Details, browser render of the component tree](../../results/dusk-lantern-2026-10-14/1080/details.png)
+
+[Before and after at 1080p](../../results/dusk-lantern-2026-10-14/before-after.png).
+Browser renders, not Vega screenshots; nothing in them has been seen on the
+device.
+
 ### Oct 13: centered Harbor composition and the new film
 
 The library and details center the artwork, title, short description and controls.

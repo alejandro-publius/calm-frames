@@ -97,6 +97,7 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 | [HACKATHON_REVIEW.md](HACKATHON_REVIEW.md) | A subjective assessment against the rules on Oct 2. Not an official score. |
 | [MOCK_JUDGE_1.md](MOCK_JUDGE_1.md), [MOCK_JUDGE_2.md](MOCK_JUDGE_2.md) | Two independent agents judging a fresh clone against RUBRIC.md on Sep 17, their verdicts kept as given, apart from their headers and one marked word in judge 2. |
 | [MOCK_JUDGE_3.md](MOCK_JUDGE_3.md) | Four independent agents, one per rubric lens, judging a fresh clone on Oct 11, and what was fixed afterwards. |
+| [DUSK_LANTERN_2026-10-14.md](DUSK_LANTERN_2026-10-14.md) | The finished Home and Details composition of Oct 14: what a family sees, the supported-content scope, matched before and after renders, build and install steps, and credits. |
 | [VERIFY_PASS_1.md](VERIFY_PASS_1.md) | The verifier lane's Sep 17 read of family profiles and the map registry. |
 | [VERIFY_PASS_2.md](VERIFY_PASS_2.md) | The verifier lane's Sep 17 read of pattern segments through the hide plan and verify. |
 | [SBOM.app.cdx.json](SBOM.app.cdx.json), [SBOM.cdk.cdx.json](SBOM.cdk.cdx.json), [SBOM.ingest.cdx.json](SBOM.ingest.cdx.json) | CycloneDX bills of materials for the Vega app, the CDK stack and the ingest container. `make sbom` writes them and the Audit workflow fails when one is stale. |
