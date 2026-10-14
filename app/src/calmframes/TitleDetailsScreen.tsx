@@ -80,6 +80,15 @@ const TitleDetailsScreen = ({
   );
 
   const hiddenSeconds = Math.round(totalCoveredMs(intervals) / 1000);
+  // One line of facts under the title, the way a film page lists its runtime.
+  const holdCount = intervals.length;
+  const meta = [
+    demo ? 'Optional demo' : null,
+    durationMs > 0 ? `${Math.round(durationMs / 1000)} sec` : null,
+    demo
+      ? `${holdCount} practice hold${holdCount === 1 ? '' : 's'}`
+      : holdCount === 0 ? 'No picture holds' : `${holdCount} part${holdCount === 1 ? '' : 's'} covered`,
+  ].filter((item): item is string => item !== null);
   const scrollRef = React.useRef<ScrollView>(null);
   const infoTop = React.useRef(0);
 
@@ -114,8 +123,8 @@ const TitleDetailsScreen = ({
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
-          <View style={styles.kicker}><Text style={styles.eyebrow}>{demo ? 'Optional demo' : presentation.art === 'harbor-cinematic' ? '' : 'About this story'}{durationMs > 0 ? `${demo || presentation.art !== 'harbor-cinematic' ? ' · ' : ''}${Math.round(durationMs / 1000)} sec` : ''}</Text></View>
           <Text style={[styles.title, styles.heroTitle, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
+          <Text style={styles.meta} testID={`${testID}-meta`}>{meta.join(' · ')}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
           </View>
         <View style={styles.actionRail}>
@@ -203,10 +212,9 @@ const styles = StyleSheet.create({
   artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(56) },
   artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(160) },
   artEdge: { position: 'absolute', top: 0, bottom: 0, right: 0, width: scale(120) },
-  kicker: { alignItems: 'flex-start', marginBottom: scale(8) },
-  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
+  meta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left', marginBottom: scale(16) },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
-  heroTitle: { fontSize: scale(144), lineHeight: scale(162) },
+  heroTitle: { fontSize: scale(120), lineHeight: scale(134), marginBottom: scale(8) },
   longTitle: { fontSize: scale(64), lineHeight: scale(76) },
   synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },

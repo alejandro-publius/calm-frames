@@ -88,6 +88,19 @@ describe('Back from playback and details on the real shelf', () => {
     expect(preferred()).toEqual(['kid-mode-home-more-info']);
   });
 
+  it('Picture hold demo, then Back from its page: focus returns to the demo control', async () => {
+    const { navigation, returnFromPlayer } = await startShelf();
+    fireEvent.press(screen.getByTestId('kid-mode-home-demo'));
+    expect(screen.getByTestId('kid-mode-details-play').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('Optional demo · 20 sec · 2 practice holds');
+    fireEvent.press(screen.getByTestId('kid-mode-details-play'));
+    expect(navigation.navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.anything());
+    returnFromPlayer();
+    expect(preferred()).toEqual(['kid-mode-details-play']);
+    fireEvent.press(screen.getByTestId('kid-mode-details-back'));
+    expect(preferred()).toEqual(['kid-mode-home-demo']);
+  });
+
   it('Watch, then a title from How it works: Back returns to How it works, not Watch', async () => {
     const { returnFromPlayer } = await startShelf();
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));

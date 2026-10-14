@@ -12,7 +12,9 @@ import CalmPageHeader from './CalmPageHeader';
 import { OFFLINE_TITLE_ID } from './offlineTitle';
 import HomeHarborScene from './HomeHarborScene';
 import PictureHoldIntroduction from './PictureHoldIntroduction';
-import { isBundledBenignStory } from './benignStory';
+import { benignStorySettings, isBundledBenignStory } from './benignStory';
+import { buildCoverIntervals } from './coverSchedule';
+import { coverOptionsFor, DEFAULT_SETTINGS } from './household';
 import {
   CALM_CONTROL,
   CALM_COLORS,
@@ -49,7 +51,7 @@ import {
 } from './uiFrames';
 
 /** The shelf control a title was opened or started from. */
-export type ReturnFocusControl = 'watch' | 'details' | 'poster';
+export type ReturnFocusControl = 'watch' | 'details' | 'poster' | 'demo';
 
 export interface KidHomeScreenProps {
   /** Every title that has been checked, in any state. */
@@ -127,6 +129,20 @@ const KidHomeScreen = ({
   const otherStories = listed.filter((entry) => (!hasMainStory || (!isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID)) && (entry !== featured || !titlePresentation(entry.title).art || !hasMainStory));
   const playbackCheck = listed.find((entry) => entry.title.id === OFFLINE_TITLE_ID);
   const feature = featured ? titlePresentation(featured.title) : null;
+  // Said plainly beside the actions: a checked story with nothing to hold is
+  // not protected by a hold, and the demo is where a hold can be seen.
+  const featuredHasNoHolds = Boolean(featured) && featured!.status === 'verified'
+    && !isBundledBenignStory(featured!.title) && (featured!.segments?.length ?? 0) === 0;
+  const demoSeconds = Math.round((demo?.title.durationMs ?? 0) / 1000);
+  // Counted the way the demo's own page counts them: the merged schedule, not
+  // the raw segments of each map.
+  const demoHolds = React.useMemo(() => demo ? buildCoverIntervals(demo.segments ?? [], {
+    ...coverOptionsFor(benignStorySettings(demo.title, DEFAULT_SETTINGS)),
+    durationMs: demo.title.durationMs,
+  }).length : 0, [demo]);
+  const demoLine = demo && demoSeconds > 0 && demoHolds > 0
+    ? `Try the ${demoSeconds}-second Harbor demo with ${demoHolds} practice holds.`
+    : null;
   const hiddenCount = titles.length - listed.length;
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
     ? returnFocusId
@@ -173,7 +189,7 @@ const KidHomeScreen = ({
     reason = 'poster focused';
   }
   if (!empty && !otherStories.length && !choosingProfile && !offline) {
-    frame = focusedId === 'watch' ? KID_HOME_STORY_WATCH_FRAME : focusedId === 'details' ? KID_HOME_STORY_FOCUSED_FRAME : KID_HOME_STORY_FRAME;
+    frame = focusedId === 'watch' ? KID_HOME_STORY_WATCH_FRAME : focusedId === 'details' || focusedId === 'demo' ? KID_HOME_STORY_FOCUSED_FRAME : KID_HOME_STORY_FRAME;
     reason = frame.screen;
   }
   useUiCapture(frame, reason);
@@ -184,6 +200,8 @@ const KidHomeScreen = ({
       <CalmPageHeader onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
+          {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" hasTVPreferredFocus={returnTo === 'learn'}
+            disabled={saving} onPress={() => { setChoosingProfile(false); setShowIntroduction(true); }} /></View> : null}
           {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parental controls" accessibilityLabel="Parental controls, needs a PIN" hasTVPreferredFocus={empty && !saving} onPress={onOpenParentArea} /></View> : null}
       </CalmPageHeader>
       {choosingProfile && picking && profiles && onChooseProfile ? (
@@ -215,13 +233,19 @@ const KidHomeScreen = ({
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
                   <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
+                {featuredHasNoHolds ? <Text style={styles.plainLabel} testID={`${testID}-no-holds`}>{`${feature.name} plays without picture holds.`}</Text> : null}
               </View>
               <View style={styles.purpose}>
                 <Text style={styles.purposeTitle}>Watch with fewer flashes.</Text>
                 <Text style={styles.purposeCopy}>On supported titles, marked scenes use a still picture while sound continues.</Text>
-                <View style={styles.learn}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" hasTVPreferredFocus={returnTo === 'learn'}
-                  disabled={saving} onPress={() => { setChoosingProfile(false); setShowIntroduction(true); }} />
-</View>
+                {demo && demo !== featured ? <>
+                  {demoLine ? <Text style={styles.purposeCopy}>{demoLine}</Text> : null}
+                  <View style={styles.learn}><CalmButton quiet testID={`${testID}-demo`} label="Picture hold demo"
+                    accessibilityLabel={demoLine ? `Picture hold demo. ${demoLine}` : 'Picture hold demo'}
+                    hasTVPreferredFocus={returnTo === 'demo'} disabled={saving}
+                    onFocus={() => setFocusedId('demo')} onBlur={() => setFocusedId(null)}
+                    onPress={() => { onLaunchControl?.('demo'); onOpen(demo); }} /></View>
+                </> : null}
               </View>
             </View> : null}
             {otherStories.length > 0 ? <View style={styles.sectionHeading}><Text style={styles.section}>More to watch</Text></View> : null}
@@ -274,16 +298,18 @@ const styles = StyleSheet.create({
   libraryScroll: { flex: 1 },
   scrollContent: { paddingBottom: scale(12) },
   hero: { width: '100%', minHeight: scale(780), flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', paddingBottom: scale(40) },
-  heroCopy: { width: scale(1020), paddingTop: scale(290), alignItems: 'flex-start' },
-  purpose: { width: scale(520), paddingLeft: scale(36), borderLeftWidth: scale(1), borderLeftColor: CALM_COLORS.BORDER },
-  purposeTitle: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT, marginBottom: scale(8) },
+  heroCopy: { width: scale(1000), paddingTop: scale(290), alignItems: 'flex-start' },
+  // The lantern: the one place that says what a hold is and where to see one.
+  purpose: { width: scale(600), paddingLeft: scale(36), gap: scale(12) },
+  purposeTitle: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT },
   purposeCopy: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
+  plainLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginTop: scale(20) },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12) },
-  featureTitle: { ...CALM_TEXT.screen, fontSize: scale(156), lineHeight: scale(174), color: CALM_COLORS.TEXT, marginBottom: scale(12) },
+  featureTitle: { ...CALM_TEXT.screen, fontSize: scale(120), lineHeight: scale(134), color: CALM_COLORS.TEXT, marginBottom: scale(12) },
   longFeatureTitle: { fontSize: scale(64), lineHeight: scale(76) },
   description: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, maxWidth: scale(900), marginBottom: scale(32) },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
-  learn: { flexDirection: 'row', marginTop: scale(20) },
+  learn: { flexDirection: 'row', marginTop: scale(8) },
   sectionHeading: { alignItems: 'flex-start', marginBottom: scale(24) },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT },
   banner: { marginBottom: scale(20) },
