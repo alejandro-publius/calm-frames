@@ -1,15 +1,18 @@
 # Demo video: narration and shot plan
 
 A plan for a 2:40 English video of the real app on the Vega Virtual Device.
-Written Oct 14, 2026; nothing has been recorded or captured for it. The rules
+Written Oct 14, 2026; nothing has been recorded or captured for it, and
+recording is not yet authorized: it waits for the final visual approval, the
+final release selection and native validation. The rules
 ask for a video under three minutes that shows the project running on an actual
 Fire TV device or the Fire TV/Vega simulator, public on YouTube or Vimeo, with
 no third-party trademarks or copyrighted music.
 
 The value shows first, then the whole core journey, then the technical
 contribution. Native shots use the exact build that becomes the judged release;
-the screen labels below are the current copy on `codex/dusk-lantern-integration-2026-10-14`
-and must be re-read against that build.
+the screen labels below are the Home and Details copy on the working candidate
+`codex/core-reliability-2026-10-14` at `cfddc4a`, which carries the Oct 14 concise
+copy unchanged, and must be re-read against the final build.
 
 **Placeholders.** `[UNVERIFIED]` marks behavior nobody has observed on the
 current build. Record it only if the native session confirms it; otherwise cut

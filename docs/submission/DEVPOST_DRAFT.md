@@ -126,6 +126,9 @@ they are the ones that bound what the app can promise.
   <!--n results/mutation.json:totals.mutations -->70<!--/n--> deliberate mutations
   are caught, and the two survivors are written up as equivalent edits.
 - Fail closed was shown on AWS as well as in tests: the unsigned clip was refused.
+- A bounded reliability pass on Oct 14 made a failed player setup reach the
+  recovery screen at once instead of after a timeout, with the regression
+  recorded in `results/core-reliability-2026-10-14.json`.
 - Every published number traces to a results file and CI fails on drift.
 
 ## Limitations
@@ -138,9 +141,10 @@ they are the ones that bound what the app can promise.
 - All observations are from the Vega Virtual Device. No physical television
   timing was measured, and no clinical validation or feedback from families or
   clinicians exists yet.
-- The current interface design has been built but not yet observed on the
-  device; the observations above are of earlier builds of the same app.
-  [Replace with the final build's receipt before pasting.]
+- The working candidate (`cfddc4a`, with the Oct 14 playback recovery fix) has
+  been built but not installed or observed on the device; the observations
+  above are of earlier builds of the same app. [Replace with the final build's
+  receipt before pasting.]
 
 ## Not shipped, planned
 
@@ -159,8 +163,9 @@ Parameter Store.
 
 ## Track and mini challenges
 
-Primary track: Fire TV (family entertainment, multi-modal UX). Mini challenges:
-[Open Source: contribution URL needed] and [AWS Builder: owner decision].
+Primary track: Fire TV (family entertainment, multi-modal UX). The mini
+challenges are optional and do not block this submission: [Open Source:
+contribution URL needed] and [AWS Builder: owner decision].
 
 ## Links to fill in
 

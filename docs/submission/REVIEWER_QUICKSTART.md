@@ -6,9 +6,10 @@ below were executed while writing this file.** Where a command has been run by
 an earlier session, the receipt that records it is named; everything else is
 marked unverified.
 
-The code line a judge should check out is not settled yet
-([OPEN_DECISIONS.md](OPEN_DECISIONS.md)). Until it is, use the branch named in
-the submission form.
+The working integration baseline is `codex/core-reliability-2026-10-14` at
+`cfddc4adb8bcdd17a861e6489f5fb50693c282d3`, a candidate; the final judged
+release is still to be selected ([OPEN_DECISIONS.md](OPEN_DECISIONS.md)). Use
+the branch or tag named in the submission form.
 
 ## 1. What you need
 
@@ -47,11 +48,18 @@ cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx je
 ```
 
 `npm ci --ignore-scripts` skips the Shaka build, which the tests mock; a device
-package needs the full `npm install` with the JDK. Unverified here. The app
-suite and typecheck last ran on Oct 14 on `00905510`
+package needs the full `npm install` with the JDK. Unverified here. On the candidate, the bounded reliability pass recorded 88 tests passing
+across 8 suites with typecheck and focused lint
+([`results/core-reliability-2026-10-14.json`](../../results/core-reliability-2026-10-14.json)),
+and the release helper's 39 tests passing
+([`results/release-pin-license-review-2026-10-14.json`](../../results/release-pin-license-review-2026-10-14.json)).
+The last full app suite in the repository ran on Oct 14 on `00905510`
 ([`results/native-checkpoint-2026-10-14/receipt.json`](../../results/native-checkpoint-2026-10-14/receipt.json):
-<!--n results/native-checkpoint-2026-10-14/receipt.json:checks.full_jest.passed -->1198<!--/n--> passed, <!--n results/native-checkpoint-2026-10-14/receipt.json:checks.full_jest.skipped -->4<!--/n--> skipped) and the hosted `Vega app` job is red on the shared PR
-branch head `4c9996d`, so expect failures there until the reliability lane lands.
+<!--n results/native-checkpoint-2026-10-14/receipt.json:checks.full_jest.passed -->1198<!--/n--> passed,
+<!--n results/native-checkpoint-2026-10-14/receipt.json:checks.full_jest.skipped -->4<!--/n--> skipped).
+The hosted `Vega app` job that failed on Oct 13 ran on the shared PR branch head
+`4c9996d`; it predates this candidate and does not describe it. The candidate
+has no hosted run because it has no pull request.
 
 ## 3. Build, install and launch on the Vega Virtual Device
 
@@ -68,6 +76,13 @@ and package identity, and writes `build/release/<tag>/` with the package,
 Python 3.12 on `RELEASE_PYTHON` or at `.venv/bin/python`. The older route is
 `npm run build:debug -- --target aarch64` inside `app`. Unverified here; the
 Oct 14 receipts record the exact `release.sh` line that produced their packages.
+Since `cfddc4a` the helper no longer reads `DEMO_PIN` and never writes a supplied
+PIN into `NOTES.md`; `--pin` is kept as a deprecated option whose value is unused
+(`results/release-pin-license-review-2026-10-14.json`). A package built from
+`cfddc4a` exists as build output outside git in the reliability worktree,
+`build/release/core-reliability-cfddc4a-2026-10-14/`, SHA-256
+`e315e16d19172a5aadc1bfa8a9364bcf9205d51870ec610b92eb01ea9d2841dd`, with its 723
+recorded source inputs verified and `native_validation_performed: false`.
 
 ```sh
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
@@ -175,7 +190,7 @@ No value here is a secret, and no secret is needed to review the app.
 |---|---|---|
 | `JAVA_HOME` | `npm install` in `app` | JDK 21 for the Shaka build |
 | `RELEASE_PYTHON` | `scripts/release.sh` | Python used by the release preparer; defaults to `.venv/bin/python` |
-| `DEMO_PIN` | `scripts/release.sh --pin` | Describes an already configured demo simulator in the release notes only; never embeds a PIN |
+| `DEMO_PIN` | formerly `scripts/release.sh` | No longer read since `cfddc4a`; `--pin` remains as a deprecated option whose value is unused, so no PIN reaches a reviewer document |
 | `CHECKPOINT_D` | `Makefile`, `pipeline/upload_server.py` | Must read `confirmed` before anything can reach AWS |
 | `AWS_REGION`, `CDK_DEFAULT_ACCOUNT`, `CDK_DEFAULT_REGION` | CDK deploy only | Not needed for `make synth` |
 | `CALM_FRAMES_CHROME` | `eval/report_page_check.py` | A Chrome binary for the report page check |

@@ -1,121 +1,138 @@
 # Open decisions and blockers
 
-Oct 14, 2026. Only items that stop the submission or that Alex alone can
-decide, in order of how much they matter to Stage One (pass or fail on a
-working, demonstrated app) and then to the mini challenges. Where evidence does
-not exist, the row says so instead of inventing it.
+Reconciled Oct 14, 2026 to the working integration baseline
+`codex/core-reliability-2026-10-14` at `cfddc4adb8bcdd17a861e6489f5fb50693c282d3`.
+That commit is a candidate, not the final judged release. Mandatory items come
+first; the mini challenges are optional and do not block the submission. Where
+evidence does not exist, the row says so instead of inventing it.
 
-## 1. No native run or video of the final app (blocks Stage One)
+## Mandatory before submission
 
-The rules require footage of the project running on a Fire TV device or the
-Vega simulator, and a public video link. No build of the current source
-(`af192ac`, or whichever line is chosen in item 2) has been installed, observed
-or recorded. The two Oct 14 packages were built but never launched
-(`results/concise-copy-2026-10-14/ARTIFACT_MANIFEST.json`,
-`results/dusk-lantern-integration-2026-10-14/ARTIFACT_MANIFEST.json`). The last
+### 1. Final release selection: pending
+
+The candidate includes the Oct 14 playback recovery fix (a failed player setup
+reaches the recovery screen at once) and the release helper fix that keeps a
+supplied PIN out of reviewer documents. Its bounded checks passed
+([`results/core-reliability-2026-10-14.json`](../../results/core-reliability-2026-10-14.json),
+[`results/release-pin-license-review-2026-10-14.json`](../../results/release-pin-license-review-2026-10-14.json)).
+A package built from it, with its 723 recorded source inputs verified, exists as
+build output outside git in the reliability worktree and has not been installed
+or run. The candidate has no hosted run because it has no pull request; the
+`Vega app` job that failed on Oct 13 ran on the shared PR branch head `4c9996d`
+and does not describe this candidate. `main` is at `7110893` and has not moved
+since Sep 20.
+
+**Needs:** Alex to name the head that becomes the judged release, after the
+visual approval and native validation below, then the merge to `main` and the
+tag that never moves.
+
+### 2. Final visual approval: pending
+
+The next product step is approving the single 2D composition with dimensional
+artwork, then applying it before the final device walkthrough. The composition
+is not built: it needs the sculpted character artwork described in the asset
+brief, which no tool in this environment can generate.
+
+**Needs:** the artwork file with its provenance, then Alex's approval of the
+one composition.
+
+### 3. Native validation: pending
+
+No build of the candidate has been installed, observed or recorded. The last
 native sessions were on `06190c7` (Oct 13) and `dba88d5` / `00905510` (Oct 14),
-and both stopped short: the parent-area interior needs the test household's PIN,
-which only Alex has, and the Oct 14 session ended when the Mac locked and could
-not be unlocked by the agent. The earlier English cut is of the Oct 10 build and
-was never uploaded.
+and both stopped short: the parent-area interior needs the test household's
+PIN, which only Alex has, and the Oct 14 session ended when the Mac locked. The
+final walkthrough waits for item 2.
 
-**Needs:** Alex at the Mac, unlocked, with the simulator visible; a fresh test
-household or the existing PIN entered by Alex; then the steps in
-[../MAC_FINISH.md](../MAC_FINISH.md) and [DEMO_SCRIPT.md](DEMO_SCRIPT.md); a
-YouTube or Vimeo account for the upload; a logged-out check of the link.
+**Needs:** Alex at the Mac with the simulator visible, a fresh test household
+or the existing PIN entered by Alex, and the steps in
+[../MAC_FINISH.md](../MAC_FINISH.md).
 
-## 2. Which source becomes the judged release (blocks items 1, 3 and 4)
+### 4. The demonstration video: pending, recording not authorized
 
-Four lines exist and none is marked final: the shared PR branch
-`codex/signed-scene-holds-2026-09-29` at `4c9996d` (hosted `Vega app` job red
-on Oct 13), the packet base `codex/dusk-lantern-integration-2026-10-14` at
-`af192ac` (no hosted run, no native observation), the native validation line
-`codex/native-design-validation-2026-10-14` at `00905510` (observed, older
-copy), and the reliability lane `codex/core-reliability-2026-10-14` still in
-flight. `main` is at `7110893` and has not moved since Sep 20. A public
-repository shows `main`, and the judged tag must never move once it exists.
+The rules require footage of the project on the simulator and a public YouTube
+or Vimeo link. [DEMO_SCRIPT.md](DEMO_SCRIPT.md) is ready; nothing is recorded,
+and recording is not yet authorized. The earlier English cut is of the Oct 10
+build and was never uploaded.
 
-**Needs:** Alex to name the integration order and the one head that gets
-built, observed, recorded, merged to `main` and tagged. Evidence of a green
-hosted run on that head does not exist yet.
+**Needs:** authorization after items 2 and 3, a hosting account, a decision on
+the narration voice (the earlier cut used disclosed macOS synthetic speech),
+and a logged-out check of the link.
 
-## 3. Repository access route (blocks Stage One if neither is done)
+### 5. Reviewer access: pending
 
-The rules allow either a public repository with the licence visible in About,
-or a private one shared with `testing@devpost.com` and the six Amazon reviewers.
-Today the repository is private, GitHub already detects Apache License 2.0, and
-the About description and topics are empty. Going public needs the merge in
-item 2, the audit exception dates in `scripts/audit_exceptions.toml` moved past
-Dec 3, private vulnerability reporting switched on, and item 6 settled. The
-private route needs the invitations sent at submission and accepted within
-seven days.
+Either a public repository with the licence visible in About, or a private one
+shared with `testing@devpost.com` and the six Amazon reviewers. Today the
+repository is private, GitHub already detects Apache License 2.0, and the About
+description and topics are empty. Going public also needs the merge in item 1,
+the audit exception dates in `scripts/audit_exceptions.toml` moved past Dec 3,
+private vulnerability reporting switched on, and item 7 settled. The private
+route needs invitations sent at submission and accepted within seven days.
 
-**Needs:** Alex's choice, and the About box filled in either way. Only the
-owner can change visibility or add collaborators.
+**Needs:** Alex's choice; only the owner can change visibility or add
+collaborators, and the About box is empty either way.
 
-## 4. Open Source mini challenge: no contribution URL
-
-The upstream fix for `AmazonAppDev/vega-video-sample` is prepared with its
-tests ([../OPEN_SOURCE_PR.md](../OPEN_SOURCE_PR.md)) but no fork or pull
-request exists, because it needs a fork under Alex's GitHub account and the
-patches need a public author identity. The alternative is to present the
-repository's own Apache-2.0 packages (flashmap, the Action, the sidecar
-specification, the hook) as the new open-source project once the repository is
-public; the rule text says "a new, additional open-source project", and
-whether a package inside the primary repository satisfies "additional" is not
-defined anywhere on the rules page.
-
-**Needs:** the GitHub username to credit, the fork, and the choice of
-contribution. Without a URL the mini challenge cannot be entered.
-
-## 5. Entrant details
+### 6. Entrant details
 
 Eligibility (age of majority, no Sponsor or Administrator affiliation) and the
 contact email are marked NEEDS ALEX in [../SUBMISSION.md](../SUBMISSION.md)
 section 15. There is no record of a Devpost registration in the repository.
 Name, country and solo status are recorded.
 
-## 6. Licence items before any public release
+### 7. Licence items before any public release
 
-Owned by the release and licence lane; the decisions are Alex's. The Amazon
-sample's player wrapper and Shaka archive carry a proprietary notice beside the
-sample's MIT-0 grant, and the clarification request in
-[../AMAZON_SAMPLE_LICENSE_REVIEW.md](../AMAZON_SAMPLE_LICENSE_REVIEW.md) is
-unsent (the plan had it due Oct 13). The CC0 dedication of the generated Harbor
-artwork is for Alex to confirm. `app/assets/image/tv/harbor-illustrated.png`
-has no row in `media/LICENSES.csv`. No evidence of an answer from Amazon exists.
+The release and licence lane owns the inspection; the decisions are Alex's.
 
-## 7. AWS Builder: enter or not, and the inactive cost tag
+- **Amazon's sample notices stay unresolved.** The player wrapper and the Shaka
+  archive carry a proprietary notice beside the sample's MIT-0 grant. The Oct 14
+  read-only inspection classifies this as an unresolved scope of permission due
+  to contradictory notices, neither an attribution omission nor proof of a
+  prohibition ([`results/release-pin-license-review-2026-10-14.json`](../../results/release-pin-license-review-2026-10-14.json)).
+  The clarification request in
+  [../AMAZON_SAMPLE_LICENSE_REVIEW.md](../AMAZON_SAMPLE_LICENSE_REVIEW.md) is
+  unsent, and no answer from Amazon exists.
+- **CC0 dedications.** The completion checklist asks Alex to confirm the CC0
+  dedication of the generated Harbor artwork on Oct 21.
+- **The illustrated harbor is now ledgered.** `app/assets/image/tv/harbor-illustrated.png`
+  entered the tree on Oct 14 in commit `aa8dea1` and is a pixel-identical render
+  of our own `app/assets/brand/tv/harbor.svg` at twice its size, verified
+  locally by rendering the SVG and comparing every pixel. Its ledger row records
+  that and asserts no new dedication.
+
+## Optional mini challenges (do not block the submission)
+
+### 8. Open Source: no contribution URL
+
+The upstream fix for `AmazonAppDev/vega-video-sample` is prepared with its
+tests ([../OPEN_SOURCE_PR.md](../OPEN_SOURCE_PR.md)) but no fork or pull
+request exists: it needs a fork under Alex's GitHub account and a public author
+identity. The alternative is to present the repository's own Apache-2.0
+packages (flashmap, the Action, the sidecar specification, the hook) as the new
+open-source project once the repository is public; whether a package inside the
+primary repository satisfies the rule's "new, additional open-source project"
+is not defined on the rules page.
+
+**Needs:** the GitHub username to credit, the fork, and the choice of
+contribution. Without a URL the mini challenge is simply not entered.
+
+### 9. AWS Builder: enter or not, and the inactive cost tag
 
 The stack is deployed and documented, so the entry is possible. The `Project`
-cost allocation tag was inactive on Oct 9, so the 20 dollar budget cannot
-warn anyone; whether the credits on the account cover this stack has not been
-verified in Bills. The stack is planned to stay up until about Dec 3. Nothing
-in the repository shows the current bill.
+cost allocation tag was inactive on Oct 9, so the budget cannot warn anyone,
+and whether the account's credits cover this stack has not been verified in
+Bills. Nothing in the repository shows the current bill.
 
 **Needs:** Alex to activate the tag, read the bill, and decide whether to
-enter the mini challenge and whether to keep the stack up through judging.
-
-## 8. Approval to publish the friction log and product feedback
-
-Both name real defects in Amazon's tools with exact output. Alex has not yet
-confirmed they go out as written ([../SUBMISSION.md](../SUBMISSION.md) section 14).
-
-## 9. Narration voice and hosting
-
-The earlier cut used macOS synthetic speech, disclosed on screen. Decide whether
-to keep that or record a voice, and which account hosts the video.
-
-## 10. The Oct 10 draft release on GitHub
-
-A private draft release (`review-redesign-2026-10-10`) holds the Oct 10 build's
-package and video. Decide whether it is replaced by the judged release or
-deleted before the repository changes visibility.
+enter and whether to keep the stack up through judging.
 
 ## Also noted, not blocking
 
-- Devpost's early eligibility check on Oct 16 and the office hours on Oct 19 are
-  recorded from announcements and were not re-read.
-- The form's exact field names and limits are unread; read them off the live form.
-- The gallery image is proposed (`docs/brand/firetv-app-icon-1280x720.png`) and
-  the form's accepted size is unknown.
+- Approval to publish the friction log and product feedback as written
+  ([../SUBMISSION.md](../SUBMISSION.md) section 14).
+- The private draft release `review-redesign-2026-10-10` holds the Oct 10
+  build's package and video; replace or delete it before visibility changes.
+- Devpost's early eligibility check on Oct 16 and the office hours on Oct 19
+  are recorded from announcements and were not re-read.
+- The form's exact field names and limits are unread; read them off the live
+  form. The gallery image is proposed (`docs/brand/firetv-app-icon-1280x720.png`)
+  and the form's accepted size is unknown.
