@@ -6,16 +6,35 @@ exports[`VideoPlayerHeader tests component renders correctly with title 1`] = `
     {
       "alignItems": "center",
       "flexDirection": "row",
-      "justifyContent": "space-between",
-      "opacity": 0.8,
-      "paddingLeft": 20,
-      "paddingRight": 40,
-      "paddingVertical": 10,
+      "gap": 20,
+      "justifyContent": "flex-end",
+      "paddingLeft": 480,
+      "paddingRight": 96,
+      "paddingTop": 54,
       "width": "100%",
     }
   }
 >
+  <Text
+    numberOfLines={1}
+    style={
+      {
+        "color": "#F3E8D3",
+        "flexShrink": 1,
+        "fontFamily": "InterSemiBold",
+        "fontSize": 42,
+        "fontWeight": "400",
+        "lineHeight": 54,
+        "textAlign": "right",
+      }
+    }
+    testID="video-player-header"
+  >
+    Movie Title
+  </Text>
   <View
+    accessibilityLabel="Back"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -47,10 +66,12 @@ exports[`VideoPlayerHeader tests component renders correctly with title 1`] = `
     style={
       {
         "alignItems": "center",
+        "borderColor": "transparent",
+        "borderRadius": 42,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
-        "width": 125,
+        "padding": 12,
       }
     }
   >
@@ -58,23 +79,6 @@ exports[`VideoPlayerHeader tests component renders correctly with title 1`] = `
       testID="header_back_icon"
     />
   </View>
-  <Text
-    numberOfLines={1}
-    style={
-      {
-        "color": "#F3E8D3",
-        "fontFamily": "InterSemiBold",
-        "fontSize": 64,
-        "fontWeight": "400",
-        "lineHeight": 76,
-        "textAlign": "right",
-        "width": "90%",
-      }
-    }
-    testID="video-player-header"
-  >
-    Movie Title
-  </Text>
 </View>
 `;
 
@@ -84,16 +88,33 @@ exports[`VideoPlayerHeader tests component renders correctly without title 1`] =
     {
       "alignItems": "center",
       "flexDirection": "row",
-      "justifyContent": "space-between",
-      "opacity": 0.8,
-      "paddingLeft": 20,
-      "paddingRight": 40,
-      "paddingVertical": 10,
+      "gap": 20,
+      "justifyContent": "flex-end",
+      "paddingLeft": 480,
+      "paddingRight": 96,
+      "paddingTop": 54,
       "width": "100%",
     }
   }
 >
+  <Text
+    numberOfLines={1}
+    style={
+      {
+        "color": "#F3E8D3",
+        "flexShrink": 1,
+        "fontFamily": "InterSemiBold",
+        "fontSize": 42,
+        "fontWeight": "400",
+        "lineHeight": 54,
+        "textAlign": "right",
+      }
+    }
+    testID="video-player-header"
+  />
   <View
+    accessibilityLabel="Back"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -125,10 +146,12 @@ exports[`VideoPlayerHeader tests component renders correctly without title 1`] =
     style={
       {
         "alignItems": "center",
+        "borderColor": "transparent",
+        "borderRadius": 42,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
-        "width": 125,
+        "padding": 12,
       }
     }
   >
@@ -136,20 +159,5 @@ exports[`VideoPlayerHeader tests component renders correctly without title 1`] =
       testID="header_back_icon"
     />
   </View>
-  <Text
-    numberOfLines={1}
-    style={
-      {
-        "color": "#F3E8D3",
-        "fontFamily": "InterSemiBold",
-        "fontSize": 64,
-        "fontWeight": "400",
-        "lineHeight": 76,
-        "textAlign": "right",
-        "width": "90%",
-      }
-    }
-    testID="video-player-header"
-  />
 </View>
 `;

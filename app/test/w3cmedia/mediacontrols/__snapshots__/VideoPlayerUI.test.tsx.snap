@@ -33,16 +33,35 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         {
           "alignItems": "center",
           "flexDirection": "row",
-          "justifyContent": "space-between",
-          "opacity": 0.8,
-          "paddingLeft": 20,
-          "paddingRight": 40,
-          "paddingVertical": 10,
+          "gap": 20,
+          "justifyContent": "flex-end",
+          "paddingLeft": 480,
+          "paddingRight": 96,
+          "paddingTop": 54,
           "width": "100%",
         }
       }
     >
+      <Text
+        numberOfLines={1}
+        style={
+          {
+            "color": "#F3E8D3",
+            "flexShrink": 1,
+            "fontFamily": "InterSemiBold",
+            "fontSize": 42,
+            "fontWeight": "400",
+            "lineHeight": 54,
+            "textAlign": "right",
+          }
+        }
+        testID="video-player-header"
+      >
+        Beautiful Whale Tail Uvita Costa Rica
+      </Text>
       <View
+        accessibilityLabel="Back"
+        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -74,10 +93,12 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
+            "borderColor": "transparent",
+            "borderRadius": 42,
+            "borderWidth": 6,
             "flexDirection": "row",
             "opacity": 1,
-            "padding": 25,
-            "width": 125,
+            "padding": 12,
           }
         }
       >
@@ -85,23 +106,6 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
           testID="header_back_icon"
         />
       </View>
-      <Text
-        numberOfLines={1}
-        style={
-          {
-            "color": "#F3E8D3",
-            "fontFamily": "InterSemiBold",
-            "fontSize": 64,
-            "fontWeight": "400",
-            "lineHeight": 76,
-            "textAlign": "right",
-            "width": "90%",
-          }
-        }
-        testID="video-player-header"
-      >
-        Beautiful Whale Tail Uvita Costa Rica
-      </Text>
     </View>
     <View
       style={
@@ -112,6 +116,8 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
       }
     >
       <View
+        accessibilityLabel="Rewind 10 seconds"
+        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -142,9 +148,12 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
+            "borderColor": "transparent",
+            "borderRadius": 40,
+            "borderWidth": 6,
             "flexDirection": "row",
             "opacity": 1,
-            "padding": 25,
+            "padding": 18,
           }
         }
         testID="player-btn-seek-backward"
@@ -152,6 +161,8 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         <Text />
       </View>
       <View
+        accessibilityLabel="Pause"
+        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -183,9 +194,12 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
+            "borderColor": "transparent",
+            "borderRadius": 40,
+            "borderWidth": 6,
             "flexDirection": "row",
             "opacity": 1,
-            "padding": 25,
+            "padding": 18,
           }
         }
         testID="player-btn-play-pause"
@@ -193,6 +207,8 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         <Text />
       </View>
       <View
+        accessibilityLabel="Forward 10 seconds"
+        accessibilityRole="button"
         accessibilityState={
           {
             "busy": undefined,
@@ -223,9 +239,12 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
+            "borderColor": "transparent",
+            "borderRadius": 40,
+            "borderWidth": 6,
             "flexDirection": "row",
             "opacity": 1,
-            "padding": 25,
+            "padding": 18,
           }
         }
         testID="player-btn-seek-forward"
@@ -239,6 +258,8 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
           "alignItems": "center",
           "flexDirection": "row",
           "justifyContent": "flex-end",
+          "marginBottom": 54,
+          "marginHorizontal": 96,
         }
       }
       testID="control-bar"
@@ -246,9 +267,9 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
     <View
       style={
         {
-          "bottom": 90,
+          "bottom": 360,
           "position": "absolute",
-          "right": 0,
+          "right": 96,
         }
       }
     />

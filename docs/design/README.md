@@ -31,6 +31,11 @@ unlocked settings column, adds Back beside the heading and moves profile
 management beside the selector so viewing presets appear sooner. The PIN
 screens and all settings semantics remain unchanged.
 
+The Oct 14 [playback refinement](playback-refinement/README.md) adds named
+controls and visible focus, pause-aware hold messages that survive hidden
+controls, and a recovery screen above the safety cover. Before/after browser
+comparisons cover both TV resolutions; native acceptance remains pending.
+
 ## Identity
 
 A peaceful monk inside a rounded frame, with one open halo. Deep teal ground,

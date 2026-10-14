@@ -6,13 +6,17 @@ import {
   Text,
   TouchableOpacity,
   ViewStyle,
+  AccessibilityState,
 } from 'react-native';
+import { CALM_COLORS, FOCUS_RING_WIDTH } from '../../calmframes/calmStyles';
 import FocusableElement from '../../components/FocusableElement';
 import { COLORS } from '../../styles/Colors';
 import { scaleUxToDp } from '../../utils/pixelUtils';
 
 export interface PlayerButtonProps {
   onPress: () => void;
+  accessibilityLabel: string;
+  accessibilityState?: AccessibilityState;
   icon: string;
   size: number;
   overrideStyle?: StyleProp<ViewStyle>;
@@ -25,6 +29,8 @@ export const PlayerButton = React.forwardRef(
   (
     {
       onPress,
+      accessibilityLabel,
+      accessibilityState,
       icon,
       size,
       overrideStyle,
@@ -36,15 +42,18 @@ export const PlayerButton = React.forwardRef(
   ) => {
     return (
       <FocusableElement
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel}
+        accessibilityState={accessibilityState}
         onBlur={onBlur}
         focusableElementRef={ref as RefObject<React.ComponentRef<typeof TouchableOpacity>> | null}
         style={[styles.buttonContainer, overrideStyle]}
-        onFocusOverrideStyle={[styles.buttonFocus, { borderRadius: size }]}
+        onFocusOverrideStyle={[styles.buttonFocus, { borderRadius: scaleUxToDp(size) }]}
         onPress={onPress}
         hasTVPreferredFocus={hasTVPreferredFocus}
         testID={testID}>
         <Text>
-          <MaterialIcons name={icon} size={size} color={COLORS.WHITE} />
+          <MaterialIcons name={icon} size={scaleUxToDp(size)} color={COLORS.WHITE} />
         </Text>
       </FocusableElement>
     );
@@ -53,7 +62,10 @@ export const PlayerButton = React.forwardRef(
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    padding: scaleUxToDp(25),
+    padding: scaleUxToDp(18),
+    borderWidth: scaleUxToDp(FOCUS_RING_WIDTH),
+    borderColor: 'transparent',
+    borderRadius: scaleUxToDp(40),
     alignItems: 'center',
     flexDirection: 'row',
   },
@@ -62,7 +74,8 @@ const styles = StyleSheet.create({
     tintColor: COLORS.WHITE,
   },
   buttonFocus: {
-    backgroundColor: COLORS.DARK_GRAY + 'D9',
+    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+    borderColor: CALM_COLORS.FOCUS_RING,
   },
 });
 

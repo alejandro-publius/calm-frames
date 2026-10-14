@@ -423,7 +423,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '90%',
     padding: scaleUxToDp(25),
-    marginBottom: scaleUxToDp(80),
+    marginBottom: scaleUxToDp(160),
     zIndex: 2,
   },
   seekbar: {
@@ -432,8 +432,8 @@ const styles = StyleSheet.create({
   },
   time: {
     color: COLORS.WHITE,
-    fontSize: scaleUxToDp(25),
-    marginHorizontal: 30,
+    fontSize: scaleUxToDp(32),
+    marginHorizontal: scaleUxToDp(20),
   },
   hiddenBar: {
     backgroundColor: 'transparent',

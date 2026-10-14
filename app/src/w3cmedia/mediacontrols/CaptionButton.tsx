@@ -42,15 +42,15 @@ const CaptionButton = ({
   }, [playerControlType, captionMenuVisibility, isCaptionButtonFocused]);
 
   return (
-    <TVFocusGuideView
-      trapFocusLeft={captionMenuVisibility}
-      style={styles.captionsButtonContainer}>
+    <TVFocusGuideView trapFocusLeft={captionMenuVisibility}>
       <PlayerButton
+        accessibilityLabel={captionsExist ? 'Captions' : 'Captions unavailable'}
+        accessibilityState={{ expanded: captionMenuVisibility }}
         ref={captionButtonRef}
         onBlur={onBlurCaptionButton}
         onPress={onPress}
         icon={CaptionIcon}
-        size={40}
+        size={48}
         overrideStyle={
           captionMenuVisibility ? styles.captionSelected : undefined
         }
@@ -70,11 +70,7 @@ export default React.memo(CaptionButton, areCaptionButtonPropsEqual);
 
 const styles = StyleSheet.create({
   captionSelected: {
-    margin: 10,
     backgroundColor: COLORS.DARK_GRAY + 'D9',
     borderRadius: scaleUxToDp(40),
-  },
-  captionsButtonContainer: {
-    margin: 10,
   },
 });

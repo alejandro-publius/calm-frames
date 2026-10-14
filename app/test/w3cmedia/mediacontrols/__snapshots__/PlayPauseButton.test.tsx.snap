@@ -2,6 +2,8 @@
 
 exports[`PlayPauseButton tests component renders correctly 1`] = `
 <View
+  accessibilityLabel="Play"
+  accessibilityRole="button"
   accessibilityState={
     {
       "busy": undefined,
@@ -32,9 +34,12 @@ exports[`PlayPauseButton tests component renders correctly 1`] = `
   style={
     {
       "alignItems": "center",
+      "borderColor": "transparent",
+      "borderRadius": 40,
+      "borderWidth": 6,
       "flexDirection": "row",
       "opacity": 1,
-      "padding": 25,
+      "padding": 18,
     }
   }
   testID="player-btn-play-pause"
@@ -45,6 +50,8 @@ exports[`PlayPauseButton tests component renders correctly 1`] = `
 
 exports[`PlayPauseButton tests component renders correctly with \`paused\` and \`ended\` negative 1`] = `
 <View
+  accessibilityLabel="Pause"
+  accessibilityRole="button"
   accessibilityState={
     {
       "busy": undefined,
@@ -75,9 +82,12 @@ exports[`PlayPauseButton tests component renders correctly with \`paused\` and \
   style={
     {
       "alignItems": "center",
+      "borderColor": "transparent",
+      "borderRadius": 40,
+      "borderWidth": 6,
       "flexDirection": "row",
       "opacity": 1,
-      "padding": 25,
+      "padding": 18,
     }
   }
   testID="player-btn-play-pause"

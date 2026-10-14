@@ -2,6 +2,8 @@
 
 exports[`CaptionMenuItem tests component renders correctly 1`] = `
 <View
+  accessibilityLabel="Some Text"
+  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -31,6 +33,8 @@ exports[`CaptionMenuItem tests component renders correctly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
+      "borderColor": "transparent",
+      "borderWidth": 6,
       "opacity": 1,
     }
   }
@@ -39,8 +43,10 @@ exports[`CaptionMenuItem tests component renders correctly 1`] = `
     style={
       {
         "color": "#FFFFFF",
-        "fontSize": 30,
-        "fontWeight": "500",
+        "fontFamily": "InterRegular",
+        "fontSize": 32,
+        "fontWeight": "400",
+        "lineHeight": 42,
         "marginVertical": 4,
         "padding": 20,
       }
@@ -54,10 +60,12 @@ exports[`CaptionMenuItem tests component renders correctly 1`] = `
 
 exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
 <View
+  accessibilityLabel="Some Text"
+  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
-      "checked": undefined,
+      "checked": true,
       "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
@@ -74,6 +82,7 @@ exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  hasTVPreferredFocus={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -84,6 +93,8 @@ exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
   style={
     {
       "backgroundColor": "#80808066",
+      "borderColor": "transparent",
+      "borderWidth": 6,
       "opacity": 1,
     }
   }
@@ -92,8 +103,10 @@ exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
     style={
       {
         "color": "#FFFFFF",
-        "fontSize": 30,
-        "fontWeight": "500",
+        "fontFamily": "InterRegular",
+        "fontSize": 32,
+        "fontWeight": "400",
+        "lineHeight": 42,
         "marginVertical": 4,
         "padding": 20,
       }

@@ -62,6 +62,8 @@ import { useUiCapture } from '../calmframes/uiCapture';
 import { playerFrame } from '../calmframes/uiFrames';
 import { useChimeCue } from '../calmframes/useChimeCue';
 import { useCoverHarness } from '../calmframes/useCoverHarness';
+import { scale } from '../calmframes/calmStyles';
+import { pausedCard, usePlaybackPaused } from '../calmframes/usePlaybackPresentation';
 import { useFlashGuard } from '../calmframes/useFlashGuard';
 import BufferingWindow from '../components/BufferingWindow';
 import {
@@ -140,6 +142,7 @@ const PlayerScreen = ({
   const TIME_TO_GO_BACK_IF_VIDEO_ENDS = 2300;
   const BACK_NAVIGATION_DELAY = 700;
   const showVideoPlayerUI = !isVideoError;
+  const paused = usePlaybackPaused(videoRef, isVideoInitialized);
 
   React.useEffect(() => {
     beacon('PlayerScreen.mount', { coverTest, uri: route.params.data?.uri });
@@ -683,7 +686,7 @@ const PlayerScreen = ({
           is hidden, and it is the only thing on screen that speaks.
         */}
         <CalmCard
-          card={card}
+          card={pausedCard(card, paused)}
           onSkip={guard.skipTo}
           skipAccessibilityLabel={
             benignDemo ? 'Skip the practice hold' : undefined
@@ -698,9 +701,11 @@ const PlayerScreen = ({
         )}
         {showVideoPlayerUI && (
           <VideoPlayerUI
+            key={isVideoInitialized ? 'ready' : 'loading'}
             videoRef={videoRef}
             navigateBack={navigateBack}
             title={route.params.data.title}
+            paused={paused}
             setCaptionStatus={setCaptionStatus}
             setSelectedCaptionInVideoPlayer={setSelectedCaptionInVideoPlayer}
             bifFrameImagesRef={bifFrameImagesRef}
@@ -744,7 +749,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     left: 0,
-    bottom: 120,
+    bottom: scale(240),
     position: 'absolute',
     backgroundColor: 'transparent',
     flexDirection: 'column',

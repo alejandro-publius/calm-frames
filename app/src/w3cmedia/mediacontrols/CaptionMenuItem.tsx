@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import FocusableElement from '../../components/FocusableElement';
+import { CALM_COLORS, CALM_TEXT, FOCUS_RING_WIDTH } from '../../calmframes/calmStyles';
 import { COLORS } from '../../styles/Colors';
 import { areComponentPropsEqual } from '../../utils/lodashHelper';
 import { scaleUxToDp } from '../../utils/pixelUtils';
@@ -19,7 +20,11 @@ export const CaptionMenuItem = React.memo(
     return (
       <FocusableElement
         onPress={onPress}
-        style={selected && styles.selectedMenuItem}
+        accessibilityRole="radio"
+        accessibilityLabel={text}
+        accessibilityState={{ checked: selected }}
+        hasTVPreferredFocus={selected}
+        style={[styles.menuItem, selected && styles.selectedMenuItem]}
         onFocusOverrideStyle={styles.focusedMenuItem}
         testID={testID}>
         <Text style={styles.menuItemText} testID={'video-player-caption-menu'}>
@@ -34,11 +39,11 @@ export const CaptionMenuItem = React.memo(
 const styles = StyleSheet.create({
   menuItemText: {
     color: COLORS.WHITE,
-    fontWeight: '500',
-    fontSize: scaleUxToDp(30),
+    ...CALM_TEXT.supporting,
     marginVertical: scaleUxToDp(4),
     padding: scaleUxToDp(20),
   },
-  focusedMenuItem: { backgroundColor: COLORS.GRAY + 'E6' },
+  menuItem: { borderWidth: scaleUxToDp(FOCUS_RING_WIDTH), borderColor: 'transparent' },
+  focusedMenuItem: { backgroundColor: CALM_COLORS.SURFACE_FOCUSED, borderColor: CALM_COLORS.FOCUS_RING },
   selectedMenuItem: { backgroundColor: COLORS.GRAY + '66' },
 });

@@ -10,7 +10,8 @@ import {
 } from '@amazon-devices/react-native-kepler';
 import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from '../../calmframes/calmStyles';
 import { SeekSource } from '../../calmframes/seekSafety';
 import Seekbar from '../../components/Seekbar';
 import {
@@ -59,6 +60,7 @@ interface VideoPlayerUIProps {
    * that track rather than on Off.
    */
   selectedCaptionId?: string;
+  paused?: boolean;
 }
 export const areVideoPlayerUIPropsEqual = (
   prevProps: VideoPlayerUIProps,
@@ -69,7 +71,8 @@ export const areVideoPlayerUIPropsEqual = (
   return (
     areComponentPropsEqual(prevProps.title, nextProps.title) &&
     prevProps.skipOwnsSelect === nextProps.skipOwnsSelect &&
-    prevProps.selectedCaptionId === nextProps.selectedCaptionId
+    prevProps.selectedCaptionId === nextProps.selectedCaptionId &&
+    prevProps.paused === nextProps.paused
   );
 };
 
@@ -85,6 +88,7 @@ export const VideoPlayerUI = React.memo(
     requestSeek,
     skipOwnsSelect = false,
     selectedCaptionId,
+    paused = false,
   }: VideoPlayerUIProps) => {
     const [captionMenuVisibility, setCaptionMenuVisibility] =
       useState<boolean>(false);
@@ -232,6 +236,11 @@ export const VideoPlayerUI = React.memo(
 
     return (
       <View style={styles.uiContainer} testID="video-player-ui-view">
+        {paused && !showMediaControls && (
+          <View style={styles.paused} testID="player-paused" accessible accessibilityRole="text" accessibilityLiveRegion="polite">
+            <Text style={styles.pausedText}>Paused. Press Play to continue.</Text>
+          </View>
+        )}
         {showMediaControls && (
           <LinearGradient
             colors={[
@@ -277,6 +286,11 @@ export const VideoPlayerUI = React.memo(
 );
 
 const styles = StyleSheet.create({
+  paused: {
+    position: 'absolute', top: scale(CALM_SPACE.SAFE_Y), right: scale(CALM_SPACE.SAFE_X),
+    backgroundColor: CALM_COLORS.SURFACE, padding: scale(16), borderRadius: scale(12),
+  },
+  pausedText: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT },
   ui: {
     height: '100%',
     width: '100%',

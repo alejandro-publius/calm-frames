@@ -101,7 +101,7 @@ describe('a menu opened on captions the player already turned on', () => {
    * Whether the menu item with this label is drawn as the chosen one.
    *
    * FocusableElement is the TouchableOpacity stand in here, and CaptionMenuItem
-   * gives it a style only when the item is selected.
+   * exposes the chosen track through its checked accessibility state.
    */
   const chosen = (label: string) => {
     let node = screen.getByText(label).parent;
@@ -111,7 +111,7 @@ describe('a menu opened on captions the player already turned on', () => {
     if (!node) {
       throw new Error(`no menu item drawn for ${label}`);
     }
-    return Boolean(node.props.style);
+    return node.props.accessibilityState?.checked === true;
   };
 
   it('shows the playing track as the chosen one, not Off', () => {

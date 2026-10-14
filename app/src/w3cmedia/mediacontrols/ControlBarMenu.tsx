@@ -52,7 +52,7 @@ export default React.memo(ControlBarMenu, areControlBarMenuPropsEqual);
 const styles = StyleSheet.create({
   playerMenusContainer: {
     position: 'absolute',
-    bottom: scaleUxToDp(90),
-    right: 0,
+    bottom: scaleUxToDp(360),
+    right: scaleUxToDp(96),
   },
 });

@@ -100,7 +100,7 @@ export const CaptionMenu = React.memo(
 const styles = StyleSheet.create({
   menu: {
     backgroundColor: COLORS.BLACK + 'E6',
-    width: scaleUxToDp(250),
+    width: scaleUxToDp(480),
     justifyContent: 'center',
     zIndex: 30,
     borderRadius: scaleUxToDp(15),

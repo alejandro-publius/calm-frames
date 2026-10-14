@@ -1,0 +1,153 @@
+{
+  "date": "2026-10-14",
+  "branch": "codex/design-details-2026-10-13",
+  "baseline_commit": "4302bff04312d74cc970a4d4a4757e6ab84216b4",
+  "scope": "Playback presentation: accessible focus, paused hold/countdown copy, persistent pause status, control spacing, and visible error recovery.",
+  "source_sha256": {
+    "app/src/calmframes/calmStyles.ts": "31f0c26fde7c2dcb538e642b57063d2433df1fd7ad173d92f4a3f73a74108e82",
+    "app/src/calmframes/usePlaybackPresentation.ts": "b621bbca91aedc6bd0d3cb2759a86eb9bfebd7c70d09afb3c8e9772aa01bb503",
+    "app/src/components/BackButton.tsx": "0a4e1e679f043c6a70e45266772c089baf8aff9648d55e67ee5a9231b9f8a371",
+    "app/src/components/ErrorView.tsx": "f90933a6cba4427538563fa047cde9274379ce30f672ed3fc259171d7c61f65d",
+    "app/src/components/Seekbar.tsx": "cb27cf6b56a355c2c51695c914657d18cd082c0bb78e2b7f7f7c6adb6538338c",
+    "app/src/screens/PlayerScreen.tsx": "b6ffcb881838e6d5483bf089ab19ea779e99a1584a88b5ece2fa057a918b28e1",
+    "app/src/w3cmedia/mediacontrols/CaptionButton.tsx": "43587fdf766cb2f46655eb35a258b27e9fa86c471a42c677207bdcd5462e76d8",
+    "app/src/w3cmedia/mediacontrols/CaptionMenuItem.tsx": "8d153ab6a338977771f3b427c4901e28b4af670885f7939345ac172e738b642a",
+    "app/src/w3cmedia/mediacontrols/Captions.tsx": "495550f2937b6e8957845f8440963d7d425f586c87f5f94e9ee791733d726df2",
+    "app/src/w3cmedia/mediacontrols/ControlBar.tsx": "9da8f481addcca6c4e4891eceb9431dc9b8aaac3af22c7b174767bf81478a869",
+    "app/src/w3cmedia/mediacontrols/ControlBarMenu.tsx": "b743d3849b165277fda7c2ca213ff744c375f787270f295fd159528cb480f0d5",
+    "app/src/w3cmedia/mediacontrols/PlayPauseButton.tsx": "f9fcfae071b46fbe46c817aa7e6dd18272687c4ab375bae6ffcf6f1e87585ca9",
+    "app/src/w3cmedia/mediacontrols/PlaybackControls.tsx": "cae4cce44eb262b6370745271ee26982427fe63b562aa4efb65d33feb1809985",
+    "app/src/w3cmedia/mediacontrols/PlayerButton.tsx": "b55af23bb60b53bedea4cdc48a13296e31b33c7b77b7cb9ab4bd6d82de9fb3de",
+    "app/src/w3cmedia/mediacontrols/VideoPlayerHeader.tsx": "d5ebb27e840a4f7bd1a9928e731a6bb713c369b6f7db4c0ef24aa458cc19d9d1",
+    "app/src/w3cmedia/mediacontrols/VideoPlayerUI.tsx": "016724fd6194c09b6b6e2451fd57954c70d2299a0973ac5de2483f6ce07de839",
+    "app/test/calmframes/playbackUi.test.tsx": "77564de11a778fe29bd827bbaaec2c6143982a97c98be4535c4bcf816d9b075e",
+    "app/test/calmframes/playbackUiHarness.tsx": "07b8e4ab6316ea4de6878eb3e9d1abe52ad74797d134e57731effa2892c07f13",
+    "eval/preview/playback.fixture.tsx": "c4ab723738806ae8619d13bac1431f6db0ad3cc76f6d0e6de6bbe8aeacf48099",
+    "eval/preview/render_playback.py": "0640de1b0b5fefc1ebf550f379c52d405244994bf612450443b37461548f88b0"
+  },
+  "preview_sha256": {
+    "docs/design/playback-refinement/after/1080/caption-menu.png": "13b1cda41d47efa842a5cea018485ffac44e6c2591c7af9a90f2ad440104a044",
+    "docs/design/playback-refinement/after/1080/controls-back.png": "83b1a64e0b683362c22b20f04d77d2eea53cb793a20bbb569184858989378302",
+    "docs/design/playback-refinement/after/1080/controls-captions.png": "0365f0055fdfc962589ab73fa60fc1cad619656dd61df5c6369882161eceff3a",
+    "docs/design/playback-refinement/after/1080/error.png": "769afe86de9b07108beeb18479302cc90d2e981ae9abea46493e6bf21be8163d",
+    "docs/design/playback-refinement/after/1080/paused-countdown.png": "e72cdc0b4ee12e4b8b299afeae86687a422e90880d19b9f9aa770303cfd5b603",
+    "docs/design/playback-refinement/after/1080/paused-hold.png": "fd0c9a333678ae9d2449c8a99ef31339ee845f21c9004e86944ace247744342b",
+    "docs/design/playback-refinement/after/1080/paused-story.png": "a6ce252ea1944080357b165f7841d6b904afb17001f980d3c4ae7f50dc40e53e",
+    "docs/design/playback-refinement/after/1080/playing-hold.png": "6b2c92578020ffd30202fff3e1ce24051a60c4b023f722596cbac838d0934626",
+    "docs/design/playback-refinement/after/720/caption-menu.png": "7edb2b643750981c35231969d5cfacdccbad377bdf2d907770498aa67f7b3512",
+    "docs/design/playback-refinement/after/720/controls-back.png": "d6fbe92fb30a9de3f3b65d67f8f320822f9f756f21621d84eed38cf050cf76d8",
+    "docs/design/playback-refinement/after/720/controls-captions.png": "42d50a4d751335fef44600a78d6712442d4aae7e62172e10893ab21cf5016537",
+    "docs/design/playback-refinement/after/720/error.png": "7cfc0aa5664d0cee69d86a066968376f38d8f0a01af760aae14e8eacec4fbee6",
+    "docs/design/playback-refinement/after/720/paused-countdown.png": "ed54ddc541e392ee121729adf96795fea62d6aa8c2a66b49f9416d0007e877d6",
+    "docs/design/playback-refinement/after/720/paused-hold.png": "c81c95416a0e7454f0fcbbd2651984e61c788eb9cd80234bffca1cd7d806e48d",
+    "docs/design/playback-refinement/after/720/paused-story.png": "162e299693985ece4952bd93d536d261c7f008541e2563010fd33238c41d27df",
+    "docs/design/playback-refinement/after/720/playing-hold.png": "f75a0668f291450a981cf3dcc295225039e997248b1008b2b6b3c1240467c32e",
+    "docs/design/playback-refinement/after/bounds.json": "d28cd5de9083a2eb722df2e57c56374221e1d1c54b10f7ab1b863b4761053e2e",
+    "docs/design/playback-refinement/after/checks.json": "085b8d357baa1fd74f8df8047d516058883d53c5e8d5b6c9c6755d2dc203c4d9",
+    "docs/design/playback-refinement/before/1080/caption-menu.png": "ef431e198ae1361c596b6e6ea550e75cba5a7a1326b34237ac5ec3c92c7da845",
+    "docs/design/playback-refinement/before/1080/controls-back.png": "6ea355570b0ec7c376e89db40cfc7b8a6b415936cace4bb2bb63732b2401f037",
+    "docs/design/playback-refinement/before/1080/controls-captions.png": "6dd33f5401ac876717c863696d8d974a0f10a70eae7319cd39668d6af97a60a9",
+    "docs/design/playback-refinement/before/1080/error.png": "90bc0e19eb7d8f385f55586cb55e473cd4176d186cc62b5a5ca37251d74bce1d",
+    "docs/design/playback-refinement/before/1080/paused-countdown.png": "542337e7d888616b1d01ad0e7b022b0ffd9e45b263785ab4f360036c7509a30a",
+    "docs/design/playback-refinement/before/1080/paused-hold.png": "0b4167667329e6ddbef50d8e60b2ca4a485140966726f5b263c809733f43eaf9",
+    "docs/design/playback-refinement/before/1080/paused-story.png": "5c6a2d41a4b1ed3faa38a52e64824098ae99418354f4eceaf5e1b86e481461d4",
+    "docs/design/playback-refinement/before/1080/playing-hold.png": "0b4167667329e6ddbef50d8e60b2ca4a485140966726f5b263c809733f43eaf9",
+    "docs/design/playback-refinement/before/720/caption-menu.png": "4dbf1adb445548f751be8343e9475675c4f83623eba55a67fbc3828a14835d11",
+    "docs/design/playback-refinement/before/720/controls-back.png": "226d504ce87e933b9574341beac633b0a454e1a1a5286702bcfb23a0da503cde",
+    "docs/design/playback-refinement/before/720/controls-captions.png": "0a1e7fad39e6591eac71e747213ca693531362cf593edcc12049f133976ec3d3",
+    "docs/design/playback-refinement/before/720/error.png": "fb515c020978c1604ebd05ac2b2007f01ade4d127546e225b52391d21cbb881f",
+    "docs/design/playback-refinement/before/720/paused-countdown.png": "3d0b47f71ca0cd906477e87e31baa59349d147735f9beaee0bf8bb5dec476ccc",
+    "docs/design/playback-refinement/before/720/paused-hold.png": "f28d50af7d13c0326ff47183620f5ef3a043c2ca02b013eb41a975fb9d2093e1",
+    "docs/design/playback-refinement/before/720/paused-story.png": "47f7ba20427d3f7dc1b0ce6514e32d4115e263457e2e832635c6e6bacbf77261",
+    "docs/design/playback-refinement/before/720/playing-hold.png": "f28d50af7d13c0326ff47183620f5ef3a043c2ca02b013eb41a975fb9d2093e1",
+    "docs/design/playback-refinement/before/bounds.json": "465b7dbce4cd7a749b47fd013ebf4dd25cd0499516568cbad9ac250fca156dca",
+    "docs/design/playback-refinement/before/checks.json": "e5ab1faf8293e4ef8acb694b3fe6bbb59c23638428ff9291eed6192fbef68f9b"
+  },
+  "confirmed_before": [
+    "Icon-only controls lacked accessible labels and visible outline focus. Back overlapped the Practice holds plate.",
+    "Paused holds still claimed sound/captions were playing after controls auto-hid.",
+    "The error screen was obscured by the retained safety cover.",
+    "Initially mounted controls did not receive the initialized media duration/text tracks; refreshing them exposes the seekbar, whose original row overlapped the captions button."
+  ],
+  "validation": {
+    "focused_jest": {
+      "passed": 238,
+      "failed": 0,
+      "suites": 22,
+      "snapshots_passed": 22,
+      "scope": [
+        "playbackUi",
+        "PlayerScreen",
+        "tenFoot",
+        "w3cmedia/mediacontrols",
+        "BackButton",
+        "skipOwnsOk",
+        "cards",
+        "seekSafety",
+        "benignStory"
+      ],
+      "note": "Jest completed successfully with the existing delayed-exit/open-handles warning; no native timing result is inferred."
+    },
+    "negative_control": {
+      "baseline": "4302bff",
+      "new_regression_cases": 6,
+      "failed_on_baseline": 6,
+      "reason": "Missing accessible roles/focus, missing persistent paused state, and missing recovery overlay; same real player UI harness."
+    },
+    "typecheck": "passed: tsc -p tsconfig.json --noEmit --preserveSymlinks (Node 22; dependencies supplied by existing recovery checkout)",
+    "targeted_eslint": "passed, no warnings",
+    "ruff_preview_renderer": "passed",
+    "design_page_pytest": {
+      "passed": 21
+    },
+    "browser_checks": {
+      "1080": {
+        "error_message_visible": true,
+        "error_back_visible": true,
+        "paused_hold_identified": true,
+        "paused_story_identified": true,
+        "controls_within_safe_area": true,
+        "seekbar_above_caption_button": true,
+        "menu_above_caption_band": true,
+        "controls-back_gold_focus_ring": true,
+        "controls-captions_gold_focus_ring": true,
+        "caption-menu_gold_focus_ring": true
+      },
+      "720": {
+        "error_message_visible": true,
+        "error_back_visible": true,
+        "paused_hold_identified": true,
+        "paused_story_identified": true,
+        "controls_within_safe_area": true,
+        "seekbar_above_caption_button": true,
+        "menu_above_caption_band": true,
+        "controls-back_gold_focus_ring": true,
+        "controls-captions_gold_focus_ring": true,
+        "caption-menu_gold_focus_ring": true
+      }
+    },
+    "staged_style": "passed",
+    "staged_secret_scan": "passed: gitleaks 8.30.1, exact staged diff, no leaks",
+    "proof_links": "passed"
+  },
+  "preserved": [
+    "Media and signed maps",
+    "Guard timing and seek routing",
+    "Verification and persistence",
+    "Accepted details and parent settings layouts",
+    "Shared PR branch at 4c9996d"
+  ],
+  "limitations": [
+    "Browser approximations, not native Vega screenshots.",
+    "Static existing artwork substitutes for the native video surface; hold uses the existing signed demo image.",
+    "One current VTT cue substitutes for native captions; SDK seekbar is a simplified browser bar.",
+    "Guard inputs and media events are simulated, so playback/verification/safety performance is not revalidated by these previews.",
+    "Focus request wiring and preferred focus are tested; actual D-pad and VoiceView behavior still require Mac/Vega."
+  ],
+  "native_verified": false,
+  "native_pending": [
+    "Observe initial controls, focus entry/return and VoiceView labels.",
+    "Observe pause/resume and scheduled-hold messaging after controls hide.",
+    "Verify caption placement, seek/transport interaction and error recovery on the matching native build."
+  ]
+}

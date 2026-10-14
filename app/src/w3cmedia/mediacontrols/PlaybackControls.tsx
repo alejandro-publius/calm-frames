@@ -158,6 +158,7 @@ const PlaybackControls = ({
         onBlur={onBlurBackwardSeek}
         onPress={handleSeekBackward}
         icon={'replay-10'}
+        accessibilityLabel="Rewind 10 seconds"
         testID="player-btn-seek-backward"
         size={PLAYER_BUTTON_SIZE}
       />
@@ -172,6 +173,7 @@ const PlaybackControls = ({
         key={'player-btn-seek-forward'}
         onPress={handleSeekForward}
         icon={'forward-10'}
+        accessibilityLabel="Forward 10 seconds"
         testID="player-btn-seek-forward"
         size={PLAYER_BUTTON_SIZE}
         ref={skipForwardRef}
