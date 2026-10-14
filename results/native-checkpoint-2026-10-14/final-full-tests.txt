@@ -1,0 +1,3809 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false
+
+ PASS  test/calmframes/playbackUi.test.tsx
+ PASS  test/screens/KidModeScreen.test.tsx (7.71 s)
+ PASS  test/screens/householdRestart.test.tsx
+ PASS  test/screens/interfaceNavigation.test.tsx
+ PASS  test/screens/hideLog.test.tsx
+  ● Console
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+ PASS  test/calmframes/tenFoot.test.tsx
+  ● Console
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'calm-frames-benign-story',
+        title: 'Harbor story (benign demo)',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: 'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4',
+        textTrack: [
+          {
+            label: 'English practice captions',
+            language: 'en',
+            uri: 'file:///pkg/assets/raw/benign-story/harbor.vtt',
+            mimeType: 'text/vtt'
+          }
+        ],
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+ PASS  test/calmframes/mapSource.test.tsx
+ PASS  test/calmframes/releaseLogs.test.ts
+ PASS  test/calmframes/screens.test.tsx
+ PASS  test/calmframes/uiCapture.test.tsx
+ PASS  test/calmframes/benignStory.test.tsx
+ PASS  test/calmframes/detailDiscovery.test.tsx
+ PASS  test/screens/HomeScreen.test.tsx
+  ● Console
+
+    console.log
+      [ HomeScreen.tsx ] - callCustomerListRefresh - k_content_per: Calling Report Refreshed Customer List
+
+      at log (src/screens/HomeScreen.tsx:165:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callContentEntitlementsRefresh - k_content_per: Calling Report Refreshed Content Entitlements
+
+      at log (src/screens/HomeScreen.tsx:209:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callPlaybackEventsRefresh - k_content_per: Calling Report Refreshed PlaybackEvents
+
+      at log (src/screens/HomeScreen.tsx:223:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callCustomerListRefresh - k_content_per: Calling Report Refreshed Customer List
+
+      at log (src/screens/HomeScreen.tsx:165:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callContentEntitlementsRefresh - k_content_per: Calling Report Refreshed Content Entitlements
+
+      at log (src/screens/HomeScreen.tsx:209:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callPlaybackEventsRefresh - k_content_per: Calling Report Refreshed PlaybackEvents
+
+      at log (src/screens/HomeScreen.tsx:223:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callCustomerListRefresh - k_content_per: Calling Report Refreshed Customer List
+
+      at log (src/screens/HomeScreen.tsx:165:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callContentEntitlementsRefresh - k_content_per: Calling Report Refreshed Content Entitlements
+
+      at log (src/screens/HomeScreen.tsx:209:13)
+
+    console.log
+      [ HomeScreen.tsx ] - callPlaybackEventsRefresh - k_content_per: Calling Report Refreshed PlaybackEvents
+
+      at log (src/screens/HomeScreen.tsx:223:13)
+
+ PASS  test/calmframes/firstRun.test.tsx
+ PASS  test/screens/DetailsScreen.test.tsx
+ PASS  test/calmframes/shelf.test.tsx
+ PASS  test/calmframes/imageSizeLegacy.test.ts
+ PASS  test/calmframes/sceneHolds.test.ts
+ PASS  test/calmframes/unavailableDetails.test.tsx
+ PASS  test/calmframes/harborOpening.test.tsx
+ PASS  test/calmframes/credits.test.tsx
+ PASS  test/calmframes/sceneHoldPlayback.test.tsx
+ PASS  test/screens/SettingScreen.test.tsx
+ PASS  test/calmframes/parentNavigation.test.tsx
+ PASS  test/blocks/screen/SearchResultsScreen/SearchResultsScreen.test.tsx
+ PASS  test/components/Player.test.tsx
+  ● Console
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: '169313',
+        title: 'Beautiful Whale Tail Uvita Costa Rica',
+        description: 'Beautiful Whale Tail Uvita Costa Rica',
+        duration: 86,
+        thumbnail: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        posterUrl: 'http://le2.cdn01.net/videos/0000169/0169313/thumbs/0169313__007f.jpg',
+        uri: 'https://edge-vod-media.cdn01.net/encoded/0000169/0169313/video_1880k/T7J66Z106.mp4?source=firetv&channelID=13454',
+        categories: [ 'Costa Rica Islands' ],
+        channelID: '13454',
+        rating: '2.5',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        format: 'MP4',
+        secure: false,
+        uhd: true,
+        rentAmount: '135'
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+ PASS  test/screens/SearchScreen.test.tsx
+ PASS  test/calmframes/packagedLibrary.test.tsx
+ PASS  test/calmframes/mapRegistry.test.ts
+ PASS  test/screens/playerWiring.test.tsx
+  ● Console
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: '',
+        textTrack: [
+          {
+            label: 'English captions',
+            language: 'en',
+            uri: 'file:///pkg/a.vtt',
+            mimeType: 'text/vtt'
+          }
+        ]
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - captions - on by default, track n-1
+
+      at log (src/screens/PlayerScreen.tsx:172:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'bursts',
+        title: 'Test pattern',
+        uri: 'https://example.invalid/bursts.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+ PASS  test/calmframes/householdStorage.test.ts
+ PASS  test/calmframes/useFlashGuard.test.tsx
+ PASS  test/navigation/AppDrawer.test.tsx
+ PASS  test/store/search/searchSlice.test.ts
+ PASS  test/w3cmedia/mediacontrols/VideoPlayerUI.test.tsx
+ PASS  test/calmframes/flashMap.test.ts
+ PASS  test/screens/SearchResultsScreen.test.tsx
+ PASS  test/blocks/components/MediaItemShoveler/MediaItemShoveler.test.tsx
+  ● Console
+
+    console.info
+      com.amazon.kepler.tv.pnc (JS) [INFO] [CarouselScrollable] Rendering Carousel Native Wrapper "", startIndex = 0, endIndex = 2, initialSelectedIndex : 0, initialData Length : 2, initialData Indices : [0,1]
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.info
+      com.amazon.kepler.tv.pnc (JS) [INFO] [CarouselScrollable] Rendering Carousel Native Wrapper "", startIndex = 0, endIndex = 2, initialSelectedIndex : 0, initialData Length : 2, initialData Indices : [0,1]
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.info
+      com.amazon.kepler.tv.pnc (JS) [INFO] [CarouselScrollable] Rendering Carousel Native Wrapper "", startIndex = 0, endIndex = 2, initialSelectedIndex : 0, initialData Length : 2, initialData Indices : [0,1]
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "shift" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Trying to read the "key" of an item that does not exist in the given adapter: index=-1
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+    console.debug
+      com.amazon.kepler.tv.pnc (JS) [DEBUG] Failed to retrieve the data item for the index -1 (retries: 1)
+
+      at Logger.consoleLog (node_modules/@amazon-devices/vega-carousel/dist/utils/CarouselLogger.js:153:27)
+
+ PASS  test/calmframes/household.test.ts
+ PASS  test/calmframes/skipOwnsOk.test.tsx
+  ● Console
+
+    console.log
+      [VideoPlayerUI.tsx] - select - OK is a press on Skip, the countdown card has focus
+
+      at log (src/w3cmedia/mediacontrols/VideoPlayerUI.tsx:197:27)
+
+    console.info
+      k_content_per: VideoPlayerUI : select
+
+      at info (src/w3cmedia/mediacontrols/VideoPlayerUI.tsx:195:25)
+
+    console.info
+      k_content_per: VideoPlayerUI : select
+
+      at info (src/w3cmedia/mediacontrols/VideoPlayerUI.tsx:195:25)
+
+    console.log
+      [VideoPlayerUI.tsx] - select - OK is a press on Skip, the countdown card has focus
+
+      at log (src/w3cmedia/mediacontrols/VideoPlayerUI.tsx:197:27)
+
+    console.info
+      k_content_per: VideoPlayerUI : select
+
+      at info (src/w3cmedia/mediacontrols/VideoPlayerUI.tsx:195:25)
+
+ PASS  test/calmframes/artworkMotion.test.tsx
+ PASS  test/w3cmedia/mediacontrols/PlaybackControls.test.tsx
+ PASS  test/w3cmedia/mediacontrols/CaptionSelection.test.tsx
+  ● Console
+
+    console.log
+      Disabling Captions
+
+      at log (src/w3cmedia/mediacontrols/Captions.tsx:37:17)
+
+    console.log
+      Disabling Captions
+
+      at log (src/w3cmedia/mediacontrols/Captions.tsx:37:17)
+
+    console.log
+      Disabling Captions
+
+      at log (src/w3cmedia/mediacontrols/Captions.tsx:37:17)
+
+    console.log
+      Disabling Captions
+
+      at log (src/w3cmedia/mediacontrols/Captions.tsx:37:17)
+
+ PASS  test/components/MovieGrid.test.tsx
+  ● Console
+
+    console.log
+      0
+
+      at log (test/components/MovieGrid.test.tsx:21:11)
+
+    console.log
+      0
+
+      at log (test/components/MovieGrid.test.tsx:21:11)
+
+ PASS  test/calmframes/interfaceSound.test.tsx
+ PASS  test/w3cmedia/mediacontrols/captionPlumbing.test.tsx
+ PASS  test/components/LoginInformation.test.tsx
+ PASS  test/screens/PlayerScreen.test.tsx
+  ● Console
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'sample',
+        title: 'Something from the sample catalog',
+        uri: 'https://example.invalid/sample.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'sample',
+        title: 'Something from the sample catalog',
+        uri: 'https://example.invalid/sample.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'sample',
+        title: 'Something from the sample catalog',
+        uri: 'https://example.invalid/sample.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - Initialize media player: componentInstance {
+        setSurfaceHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        },
+        setCaptionViewHandle: [Function: mockConstructor] {
+          _isMockFunction: true,
+          getMockImplementation: [Function (anonymous)],
+          mock: [Getter/Setter],
+          mockClear: [Function (anonymous)],
+          mockReset: [Function (anonymous)],
+          mockRestore: [Function (anonymous)],
+          mockReturnValueOnce: [Function (anonymous)],
+          mockResolvedValueOnce: [Function (anonymous)],
+          mockRejectedValueOnce: [Function (anonymous)],
+          mockReturnValue: [Function (anonymous)],
+          mockResolvedValue: [Function (anonymous)],
+          mockRejectedValue: [Function (anonymous)],
+          mockImplementationOnce: [Function (anonymous)],
+          withImplementation: [Function: bound withImplementation],
+          mockImplementation: [Function (anonymous)],
+          mockReturnThis: [Function (anonymous)],
+          mockName: [Function (anonymous)],
+          getMockName: [Function (anonymous)]
+        }
+      }
+
+      at log (src/screens/PlayerScreen.tsx:353:15)
+
+    console.log
+      [PlayerScreen.tsx] - Video Handler invoke preBufferVideo {
+        id: 'sample',
+        title: 'Something from the sample catalog',
+        uri: 'https://example.invalid/sample.mp4',
+        format: 'MP4',
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uhd: false,
+        secure: false,
+        rentAmount: ''
+      }
+
+      at log (src/screens/PlayerScreen.tsx:357:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+    console.log
+      [PlayerScreen.tsx] - onCaptionViewDestroyed - Destroying captionsHandle=CaptionViewDestroyed
+
+      at log (src/screens/PlayerScreen.tsx:630:13)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:565:15)
+
+ PASS  test/w3cmedia/mediacontrols/VideoPlayerHeader.test.tsx
+ PASS  test/components/Connection.test.tsx
+ PASS  test/calmframes/profiles.test.ts
+ PASS  test/components/Locale.test.tsx
+ PASS  test/navigation/DrawerContent.test.tsx
+ PASS  test/blocks/components/MediaItemGrid/MediaItemGrid.test.tsx
+  ● Console
+
+    console.error
+      An update to Root inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      31 | describe('<MediaItemGrid />', () => {
+      32 |   it('renders correctly', () => {
+    > 33 |     const tree = renderer.create(
+         |                           ^
+      34 |       <MediaItemGrid
+      35 |         playlistName={MOCK_PLAYLIST_NAME}
+      36 |         items={MOCK_VIDEO_ITEMS}
+
+      at node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14402:19
+      at runWithFiberInDEV (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:2315:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14401:9)
+      at scheduleUpdateOnFiber (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12086:9)
+      at updateContainerImpl (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14984:9)
+      at updateContainer (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14927:7)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.create (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:17369:7)
+      at Object.create (test/blocks/components/MediaItemGrid/MediaItemGrid.test.tsx:33:27)
+
+    console.error
+      An update to Root inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      43 |
+      44 |   it('renders correctly with no video items', () => {
+    > 45 |     const tree = renderer.create(
+         |                           ^
+      46 |       <MediaItemGrid
+      47 |         playlistName={MOCK_PLAYLIST_NAME}
+      48 |         items={[]}
+
+      at node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14402:19
+      at runWithFiberInDEV (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:2315:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14401:9)
+      at scheduleUpdateOnFiber (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12086:9)
+      at updateContainerImpl (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14984:9)
+      at updateContainer (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14927:7)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.create (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:17369:7)
+      at Object.create (test/blocks/components/MediaItemGrid/MediaItemGrid.test.tsx:45:27)
+
+    console.error
+      An update to Root inside a test was not wrapped in act(...).
+      
+      When testing, code that causes React state updates should be wrapped into act(...):
+      
+      act(() => {
+        /* fire events that update state */
+      });
+      /* assert on the output */
+      
+      This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+      54 |
+      55 |   it('renders correctly with no playlist name', () => {
+    > 56 |     const tree = renderer.create(
+         |                           ^
+      57 |       <MediaItemGrid
+      58 |         playlistName={''}
+      59 |         items={MOCK_VIDEO_ITEMS}
+
+      at node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14402:19
+      at runWithFiberInDEV (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:2315:13)
+      at warnIfUpdatesNotWrappedWithActDEV (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14401:9)
+      at scheduleUpdateOnFiber (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12086:9)
+      at updateContainerImpl (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14984:9)
+      at updateContainer (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:14927:7)
+      at Object.<anonymous>.process.env.NODE_ENV.exports.create (node_modules/react-test-renderer/cjs/react-test-renderer.development.js:17369:7)
+      at Object.create (test/blocks/components/MediaItemGrid/MediaItemGrid.test.tsx:56:27)
+
+ PASS  test/blocks/components/MediaContent/MediaContent.test.tsx
+ PASS  test/components/BackButton.test.tsx
+ PASS  test/components/VideoTile.test.tsx
+ PASS  test/calmframes/defaultCaptions.test.ts
+ PASS  test/calmframes/coverHarness.test.tsx
+ PASS  test/w3cmedia/mediacontrols/PlayPauseButton.test.tsx
+ PASS  test/w3cmedia/mediacontrols/CaptionButton.test.tsx
+ PASS  test/calmframes/mutationSurvivors.test.tsx
+ PASS  test/calmframes/cards.test.tsx
+ PASS  test/calmframes/copy.test.ts
+ PASS  test/calmframes/seekSafety.test.ts
+  ● Console
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSeek - asked for 12000 ms, going to 12000 ms, cover first, target 12000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSkipForward - asked for 11000 ms, going to 11000 ms, cover first, target 11000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSkipBackward - asked for 12000 ms, going to 12000 ms, cover first, target 12000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleFastForward - asked for 15000 ms, going to 15000 ms, cover first, target 15000 decodes from inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleRewind - asked for 10000 ms, going to 10000 ms, cover first, target 10000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleStartOver - asked for 0 ms, going to 0 ms, no cover needed, target 0 is clear
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSeek - asked for 12000 ms, going to 12000 ms, cover first, target 12000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSkipForward - asked for 13000 ms, going to 13000 ms, cover first, target 13000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSkipBackward - asked for 12000 ms, going to 12000 ms, cover first, target 12000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleFastForward - asked for 22000 ms, going to 22000 ms, no cover needed, target 22000 is clear
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleRewind - asked for 12000 ms, going to 12000 ms, cover first, target 12000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleStartOver - asked for 0 ms, going to 0 ms, no cover needed, target 0 is clear
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+ PASS  test/components/touchOptimized/MovieRotatorGrid.test.tsx
+ PASS  test/components/ControlBar.test.tsx
+ PASS  test/components/miniDetails/MiniDetails.test.tsx
+ PASS  test/utils/VideoHandler.test.ts
+  ● Console
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles - Loading subtitles from: /pkg/assets/raw/benign-story/harbor.vtt [en]
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:337:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles -  Loaded 0 subtitles:
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:347:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles - Loading subtitles from: https://example.invalid/captions.vtt [en]
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:337:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles -  Loaded 0 subtitles:
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:347:17)
+
+    console.log
+      [VideoHandler.ts] - loadStaticMediaPlayer - Loading static player with: file:///pkg/assets/raw/benign-story/harbor.precovered.mp4
+
+      at VideoHandler.log [as loadStaticMediaPlayer] (src/utils/VideoHandler.ts:257:15)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:168:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - Video Player Initialized
+
+      at log (src/utils/VideoHandler.ts:187:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:168:19)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:559:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:566:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:590:17)
+
+    console.log
+      [VideoHandler.ts] - Deinitialize sync completed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:601:17)
+
+    console.log
+      [VideoHandler.ts] - Sync destruction completed
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:608:15)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:559:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:566:17)
+
+    console.log
+      [VideoHandler.ts] - destroying player
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:575:17)
+
+    console.log
+      [VideoHandler.ts] - destroying Adaptive Media Player (shaka)
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:578:19)
+
+    console.log
+      [VideoHandler.ts] - player destroyed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:585:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:590:17)
+
+    console.log
+      [VideoHandler.ts] - Deinitialize sync completed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:601:17)
+
+    console.log
+      [VideoHandler.ts] - Sync destruction completed
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:608:15)
+
+ PASS  test/w3cmedia/mediacontrols/CaptionMenuItem.test.tsx
+ PASS  test/w3cmedia/mediacontrols/ControlBar.test.tsx
+ PASS  test/calmframes/coverSchedule.test.ts
+ PASS  test/components/RadioButton.test.tsx
+ PASS  test/calmframes/hookMirror.test.ts
+ PASS  test/navigation/DrawerItem.test.tsx
+ PASS  test/components/FocusableElement.test.tsx
+ PASS  test/components/miniDetails/Preview.test.tsx
+ PASS  test/w3cmedia/mediacontrols/Caption.test.tsx
+ PASS  test/calmframes/notices.test.tsx
+ PASS  test/calmframes/profilePicker.test.tsx
+ PASS  test/calmframes/mediaControlLog.test.ts
+ PASS  test/calmframes/revokedKey.test.ts
+ PASS  test/calmframes/offlineTitle.test.ts
+ PASS  test/calmframes/uiLayout.test.ts
+ PASS  test/calmframes/harnessConfig.test.ts
+  ● Console
+
+    console.warn
+      [calmframes] looking for a measurement run
+
+      194 | export async function readHarnessConfig(): Promise<HarnessConfig | null> {
+      195 |   try {
+    > 196 |     console.warn('[calmframes] looking for a measurement run');
+          |             ^
+      197 |     const entries = await FileSystem.getEntries(HARNESS_CONFIG_DIR);
+      198 |     if (!Array.isArray(entries) || !entries.includes(HARNESS_CONFIG_FILE)) {
+      199 |       // No file on the device is the normal case, because on OS 1.2 there is
+
+      at Object.warn (src/calmframes/harnessConfig.ts:196:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at Object.<anonymous> (node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12)
+      at Object.apply (src/calmframes/harnessConfig.ts:218:2)
+      at Object.apply [as readHarnessConfig] (src/calmframes/harnessConfig.ts:194:40)
+      at Object.readHarnessConfig (test/calmframes/harnessConfig.test.ts:159:33)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at Object.<anonymous> (node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12)
+
+    console.warn
+      [calmframes] looking for a measurement run
+
+      194 | export async function readHarnessConfig(): Promise<HarnessConfig | null> {
+      195 |   try {
+    > 196 |     console.warn('[calmframes] looking for a measurement run');
+          |             ^
+      197 |     const entries = await FileSystem.getEntries(HARNESS_CONFIG_DIR);
+      198 |     if (!Array.isArray(entries) || !entries.includes(HARNESS_CONFIG_FILE)) {
+      199 |       // No file on the device is the normal case, because on OS 1.2 there is
+
+      at Object.warn (src/calmframes/harnessConfig.ts:196:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at Object.<anonymous> (node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12)
+      at Object.apply (src/calmframes/harnessConfig.ts:218:2)
+      at Object.apply [as readHarnessConfig] (src/calmframes/harnessConfig.ts:194:40)
+      at Object.readHarnessConfig (test/calmframes/harnessConfig.test.ts:171:33)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at Object.<anonymous> (node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12)
+
+    console.warn
+      [calmframes] release build, not asking the network for a measurement run
+
+      165 |   const isDebugBuild = typeof __DEV__ !== 'undefined' && __DEV__;
+      166 |   if (!isDebugBuild) {
+    > 167 |     console.warn(
+          |             ^
+      168 |       '[calmframes] release build, not asking the network for a measurement run',
+      169 |     );
+      170 |     return null;
+
+      at warn (src/calmframes/harnessConfig.ts:167:13)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (src/calmframes/harnessConfig.ts:191:2)
+      at apply (src/calmframes/harnessConfig.ts:164:44)
+      at Object.readHarnessConfigFromNetwork (src/calmframes/harnessConfig.ts:201:14)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+ PASS  test/components/ForwardBackwardIcon.test.tsx
+ PASS  test/navigation/AppStack.test.tsx
+ PASS  test/calmframes/chimeCue.test.tsx
+ PASS  test/components/miniDetails/Header.test.tsx
+ PASS  test/screens/startupWaves.test.tsx
+ PASS  test/navigation/DrawerItemList.test.tsx
+ PASS  test/w3cmedia/mediacontrols/useMediaControls.test.ts
+ PASS  test/w3cmedia/mediacontrols/CaptionOptions.test.tsx
+ PASS  test/components/BufferingWindow.test.tsx
+ PASS  test/components/Rating.test.tsx
+ PASS  test/utils/AppOverrideMediaControlHandler.test.ts
+ PASS  test/w3cmedia/mediacontrols/types.test.ts
+ PASS  test/components/FocusedThumbIcon.test.tsx
+ PASS  test/components/ThumbIcon.test.tsx
+ PASS  test/utils/commonFunctions.test.ts
+ PASS  test/blocks/components/AppLogo/AppLogo.test.tsx
+ PASS  test/blocks/types/DataProviderStates.test.ts
+ PASS  test/store/search/settingsSlice.test.ts
+ PASS  test/calmframes/dayOneGuards.test.ts
+ PASS  test/utils/FocusManager.test.ts
+ PASS  test/w3cmedia/mediacontrols/ControlBarMenu.test.tsx
+ PASS  test/personalization/mock/ContentPersonalizationMocks.test.ts
+ PASS  test/calmframes/chimeSound.test.ts
+ PASS  test/calmframes/playerAccess.test.ts
+ PASS  test/calmframes/manifest.test.ts
+ PASS  test/blocks/styles/Colors.test.ts
+ PASS  test/calmframes/mediaClock.test.ts
+ PASS  test/components/MovieCarousel.test.tsx
+ PASS  test/config/AppConfig.test.ts
+ PASS  test/blocks/components/MessageBox/MessageBoxProps.test.tsx
+ PASS  test/components/GradientButton.test.tsx
+
+Test Suites: 1 skipped, 116 passed, 116 of 117 total
+Tests:       4 skipped, 1198 passed, 1202 total
+Snapshots:   57 passed, 57 total
+Time:        33.763 s
+Ran all test suites.

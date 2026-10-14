@@ -1,0 +1,36 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false test/calmframes/playbackUi.test.tsx
+
+ FAIL  test/calmframes/playbackUi.test.tsx
+  ✓ seekbar yields initial and restored preferred focus to Skip during none (75 ms)
+  ✕ seekbar yields initial and restored preferred focus to Skip during countdown (11 ms)
+  ✓ initialized playback exposes named captions and a stationary contrasting focus ring (26 ms)
+  ✓ ambient Harbor starts Off, honors explicit On through playback updates, and can return Off (18 ms)
+  ✓ pause stays visible after controls hide in covering state and clears on Play (34 ms)
+  ✓ pause stays visible after controls hide in countdown state and clears on Play (14 ms)
+  ✓ pause stays visible after controls hide in none state and clears on Play (10 ms)
+  ✓ recovery paints above the retained cover and Back leaves once (8 ms)
+
+  ● seekbar yields initial and restored preferred focus to Skip during countdown
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      14 |   jest.spyOn(Platform, 'isTV', 'get').mockReturnValue(true);
+      15 |   const view = startPlayer(kind);
+    > 16 |   expect(view.getByTestId('seekbar-focus-guide').props.hasTVPreferredFocus).toBe(kind !== 'countdown');
+         |                                                                             ^
+      17 |   act(() => jest.advanceTimersByTime(6000));
+      18 |   expect(view.queryByTestId('kui-seekbar')).toBeNull();
+      19 |   remote('down');
+
+      at toBe (test/calmframes/playbackUi.test.tsx:16:77)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 7 passed, 8 total
+Snapshots:   0 total
+Time:        0.875 s, estimated 1 s
+Ran all test suites matching /test\/calmframes\/playbackUi.test.tsx/i.
