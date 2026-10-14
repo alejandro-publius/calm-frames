@@ -1,0 +1,409 @@
+{
+  "status": "installed_native_validation_partial_user_unlock_required",
+  "recorded_utc": "2026-10-14T05:19:51Z",
+  "native_task": "codex://threads/01a138bb-a422-7746-9293-caf676f250f3",
+  "branch": "codex/native-design-validation-2026-10-14",
+  "checkout": "/Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-native",
+  "evidence_parent_commit": "5fe001ded369e645e607258e9bc1d35c0863c4a9",
+  "package_source_commit": "dba88d5cbc96d1fc399f4b51701037af16869328",
+  "package": {
+    "path": "app/build/aarch64-debug/calm-frames-app_aarch64.vpkg",
+    "bytes": 21494121,
+    "sha256": "3b39ff37e87dfc81cb7acadf833ef1f7b3a4861a38f32ea2de56eab2b75e58cb"
+  },
+  "build_receipt": "results/native-design-2026-10-14/build-receipt.json",
+  "supersedes": "Installation and native-observation status in results/native-design-2026-10-14/receipt.json and results/design-regressions-2026-10-14/receipt.json. Those earlier checkpoints remain historical evidence.",
+  "preflight": {
+    "remote_verified": "https://github.com/alejandro-publius/calm-frames.git",
+    "remote_design_baseline": "dba88d5cbc96d1fc399f4b51701037af16869328; no newer design work at preflight",
+    "shared_branch_preserved": "codex/signed-scene-holds-2026-09-29 at 4c9996d70dcc3327663679845f7c888648297d59",
+    "worker_ownership": "Only this Calm Frames thread active in app inventory; other listed project tasks idle or notLoaded. Process checks used PID, parent PID and executable name only.",
+    "simulator": "User manually opened existing Vega Virtual Device. Connected aarch64 TV, OS 1.2, Ship101520710. No further startup or restart attempted.",
+    "install": "vega device install-app reported Installing/Updating success; launch-app succeeded. No uninstall, clear-data, reset or household-PIN entry.",
+    "last_gui_state": "Practice demo playback inputs sent; capture failed after Mac locked. Current pixels unknown; simulator remains connected."
+  },
+  "observed_passes": [
+    {
+      "journey": "Library",
+      "evidence": [
+        "01-launch.png",
+        "02-library-more-info-focus.png"
+      ],
+      "result": "Existing Kid library, Harbor hero, both tiles, unavailable-title disclosure; visible gold focus on More info and title tile."
+    },
+    {
+      "journey": "Playable details and scrolling",
+      "evidence": [
+        "03-details.png",
+        "04-details-settings.png",
+        "05-details-bottom.png"
+      ],
+      "result": "Harbor Watch now preferred focus, settings disclosure, 0:20 timeline, room summary and lower Back reachable/readable with D-pad."
+    },
+    {
+      "journey": "Back and visible return focus",
+      "evidence": [
+        "06-details-return-focus.png",
+        "09-parent-locked.png"
+      ],
+      "result": "Hardware Back from details and locked parent area returns to library Harbor tile with visible focus. Return is to title tile, not necessarily original More info control."
+    },
+    {
+      "journey": "Harbor moving playback",
+      "evidence": [
+        "12c-story.png"
+      ],
+      "raw_video": ".logs/native-observation-2026-10-14/12-harbor-playback.mp4",
+      "result": "Accepted water/boat/lighthouse film visible with native Sunlight follows the ripples caption and controls hidden. End returns to details. H264 video and AAC audio recorded; audio track presence alone is not a listening/continuity pass."
+    },
+    {
+      "journey": "Pause and hidden controls",
+      "evidence": [
+        "14a-paused-controls.png",
+        "15-current-pause.png"
+      ],
+      "raw_video": ".logs/native-observation-2026-10-14/14-story-pause.mp4",
+      "result": "Play/Pause input paused at about 00:07. After more than six seconds controls hid and Paused. Press Play to continue. remained. Guard picture stayed black; no guard behavior changed."
+    },
+    {
+      "journey": "Caption menu navigation",
+      "evidence": [
+        "19-third-down.png",
+        "20-caption-menu.png"
+      ],
+      "result": "Caption button and English option show contrasting gold focus; English and Off choices visible. Opening menu observed; Off/on operation and exact Back-to-caption focus not yet verified."
+    },
+    {
+      "journey": "Practice-demo details",
+      "evidence": [
+        "23-demo-details.png"
+      ],
+      "result": "Practice holds label, two-hold explanation and Watch demo preferred focus match accepted design."
+    }
+  ],
+  "partial_or_inconclusive": [
+    {
+      "journey": "Resume with caption menu open",
+      "evidence": [
+        "21c-resume.png"
+      ],
+      "raw_video": ".logs/native-observation-2026-10-14/21-caption-menu-resume.mp4",
+      "result": "Film visible near 00:19 with menu open after Play/Pause. Timing continuity from 00:07 is not established by this recording; no multiline caption in observed frames."
+    },
+    {
+      "journey": "D-pad intermediate focus",
+      "evidence": [
+        "17-caption-focus.png",
+        "19-third-down.png"
+      ],
+      "result": "Apparent extra step between seekbar and Captions had no visible ring. Empty caption focus-guide is a source-level hypothesis only; no confirmed cause or runtime fix. Needs repeatable native before/after."
+    }
+  ],
+  "untested": [
+    "Unlocked parent settings, setting changes/persistence and unavailable-title details",
+    "Captions Off and back On, complete resume continuity and caption-menu Back return focus",
+    "Both practice holds, audio/caption continuity while held, and Skip",
+    "Required simultaneous hold plus controls OR caption menu plus multiline cue",
+    "Recoverable playback error and its return focus",
+    "VoiceView output and complete D-pad journey",
+    "Profile switch persistence"
+  ],
+  "blockers": [
+    {
+      "action": "Continue native screen inspection/capture",
+      "target": "Mac desktop and running Vega Virtual Device",
+      "state": "pending_user_action",
+      "reason": "CUA getState reported: The Mac is locked and automatic unlock could not unlock it. Recorder failed processing first sample buffer; subsequent screenshot timed out.",
+      "required_user_action": "Unlock the Mac manually and leave the existing simulator visible; reply unlocked. No restart needed."
+    },
+    {
+      "action": "Validate parent settings and unavailable titles",
+      "target": "Calm Frames household PIN gate",
+      "state": "pending_legitimate_user_unlock",
+      "reason": "PIN keypad observed; no digits entered, retrieved, guessed or reset.",
+      "required_user_action": "Open Parental controls in Calm Frames and unlock it personally. Do not send the PIN."
+    },
+    {
+      "action": "Terminal graphical-app access",
+      "target": "com.apple.Terminal",
+      "state": "denied_not_retried",
+      "reason": "Computer-use safety policy denies this app. Existing shell and simulator-specific CLI remained available; no Terminal UI workaround used."
+    }
+  ],
+  "fixes": "No native runtime UI fix: no material defect was confirmed with enough evidence to justify altering accepted design. Prior reviewed test and hook presentation corrections are in 5fe001d.",
+  "validation": "Full app:1193 passed,0 failed,4 skipped;116 suites passed,1 skipped;57 snapshots passed. Typecheck, targeted eslint,21 design tests,10 hook tests and offline package validation passed. Exact commands and outputs: results/design-regressions-2026-10-14/receipt.json. No source changes since those checks.",
+  "commands": [
+    "source /Users/alexvintera/vega/env && vega device list",
+    "vega device info --device Simulator",
+    "vega device install-app --device Simulator --packagePath app/build/aarch64-debug/calm-frames-app_aarch64.vpkg",
+    "vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main",
+    "vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_{UP,DOWN,LEFT,RIGHT,ENTER,BACK,PLAYPAUSE}' (one real key per call)",
+    "/Users/alexvintera/calm-frames/build/finish-tools/calm-record-window <output.png> 0",
+    "/Users/alexvintera/calm-frames/build/finish-tools/calm-record-window <output.mp4> <seconds>",
+    "/opt/homebrew/bin/ffprobe -v error -show_entries format=duration:stream=codec_type,duration -of json <recording>",
+    "/opt/homebrew/bin/ffmpeg -hide_banner -loglevel error -ss <seconds> -i <recording> -frames:v 1 <frame.png>",
+    "cua.getState(): Mac locked; no UI actions after this result"
+  ],
+  "capture_cautions": [
+    "Screen recordings have sparse/static frame intervals; container duration is not a precise playback-clock assertion.",
+    "Failed 24-practice-menu.mp4 was not created; 25-current.png timed out and was not created.",
+    "Mac local tool timestamps differ from authoritative UTC clock; recorded_utc uses clock tool."
+  ],
+  "tracked_screenshots": [
+    {
+      "path": "results/native-observation-2026-10-14/01-launch.png",
+      "bytes": 467736,
+      "sha256": "849a395e59f3f6b72a7543f4f5825041993ad64b2e4377b7fa8fc8e14cde073c"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/02-library-more-info-focus.png",
+      "bytes": 468138,
+      "sha256": "30b4200bdfa8db50ad7a5851b5b78f88f7d2cba903bf8e6b2fffd94eb2a7948e"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/03-details.png",
+      "bytes": 522280,
+      "sha256": "94fb35b874d0f9521e4b26bb18035476462854651d8e8398b7f82fa0df6ee838"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/04-details-settings.png",
+      "bytes": 297621,
+      "sha256": "8bc8c3fcf770d32b1fb4bc0abb9ffd14c00d5e2bded9cf56c9303af54f7c2e9f"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/05-details-bottom.png",
+      "bytes": 304544,
+      "sha256": "c4143834eb527b6fe3d24b6a88fbe99ff517a5ed3fe33e300925b29a712d917d"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/06-details-return-focus.png",
+      "bytes": 466674,
+      "sha256": "8418e2c831ea1ea4a397924e6d1c9a1e86aee844637560a2d0faf404f6a8ec48"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/09-parent-locked.png",
+      "bytes": 201648,
+      "sha256": "2e05ba65ddddc7c38b6c9d44759db945245971c0e13f18cfda8cd7b44ce90dac"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/12c-story.png",
+      "bytes": 1109054,
+      "sha256": "c185adb0155bca5c7be73ea94afb2208ce4a8a4cd5fc179bb04946f20a61f2b7"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/14a-paused-controls.png",
+      "bytes": 70441,
+      "sha256": "54465ea822306ca8c7e2d336fa623e105df0ad54aabed09a0a699222d1812380"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/15-current-pause.png",
+      "bytes": 95490,
+      "sha256": "28ab97954a402fcb29d6b2d1dfa3031daabd3f78d03115c6b456f857abc7b953"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/17-caption-focus.png",
+      "bytes": 95718,
+      "sha256": "00dd2f7240e2587355ba7f6fc7a15a614899f9ecbbe18c8f6144b52fe9d35da2"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/19-third-down.png",
+      "bytes": 103019,
+      "sha256": "a1b962fcc47e7f5d44428bd370f6e1a8e37037f289721ed816fe930ca58580cb"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/20-caption-menu.png",
+      "bytes": 104422,
+      "sha256": "0033be8896fdd6803af538dc8fd94bd95479030769f0676ea872a98d8ed95261"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/21c-resume.png",
+      "bytes": 867256,
+      "sha256": "7823074ede6d6b111bd85b943acea4a69ac3a19dfd75560d38b6eb1e227784f9"
+    },
+    {
+      "path": "results/native-observation-2026-10-14/23-demo-details.png",
+      "bytes": 515317,
+      "sha256": "9fba7855f24fe99946824825e429a44c8c5f071caefeb9ae8989c13ee3f60e63"
+    }
+  ],
+  "local_captures": [
+    {
+      "path": ".logs/native-observation-2026-10-14/01-launch.png",
+      "bytes": 467736,
+      "sha256": "849a395e59f3f6b72a7543f4f5825041993ad64b2e4377b7fa8fc8e14cde073c"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/02-library-more-info-focus.png",
+      "bytes": 468138,
+      "sha256": "30b4200bdfa8db50ad7a5851b5b78f88f7d2cba903bf8e6b2fffd94eb2a7948e"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/03-details.png",
+      "bytes": 522280,
+      "sha256": "94fb35b874d0f9521e4b26bb18035476462854651d8e8398b7f82fa0df6ee838"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/04-details-settings.png",
+      "bytes": 297621,
+      "sha256": "8bc8c3fcf770d32b1fb4bc0abb9ffd14c00d5e2bded9cf56c9303af54f7c2e9f"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/05-details-bottom.png",
+      "bytes": 304544,
+      "sha256": "c4143834eb527b6fe3d24b6a88fbe99ff517a5ed3fe33e300925b29a712d917d"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/06-details-return-focus.png",
+      "bytes": 466674,
+      "sha256": "8418e2c831ea1ea4a397924e6d1c9a1e86aee844637560a2d0faf404f6a8ec48"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/07-header-focus.png",
+      "bytes": 467250,
+      "sha256": "8b174f7901e7532f594c16f03799a2a71494e9c9c135fd3f2e11c38ed8b35493"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/08-header-focus.png",
+      "bytes": 467532,
+      "sha256": "867842554f448900f1f589e36b90c5a099243885e3e88bf1abb6404b0b33e506"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/09-parent-locked.png",
+      "bytes": 201648,
+      "sha256": "2e05ba65ddddc7c38b6c9d44759db945245971c0e13f18cfda8cd7b44ce90dac"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/10-parent-back.png",
+      "bytes": 466674,
+      "sha256": "8418e2c831ea1ea4a397924e6d1c9a1e86aee844637560a2d0faf404f6a8ec48"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/11-harbor-ready.png",
+      "bytes": 520985,
+      "sha256": "26c4f31f786ffc2fe06a7ebe368838b497524e877b6f8a532dc89870ba0c5ca7"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/12-harbor-playback.mp4",
+      "bytes": 11302018,
+      "sha256": "16f39d45830e351d6924f32fffae8be2050895a02c46b4ece3da686e3672c3f3"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/12a-story.png",
+      "bytes": 362386,
+      "sha256": "fe6fd87633f5b84bb0e7280588ccba6c306e4ec47dd9a39bec5cba9af00012bf"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/12b-story.png",
+      "bytes": 63819,
+      "sha256": "d5a6627993cea57b296660591e40a90ddc596198756e9202ecb0424a10c75a15"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/12c-story.png",
+      "bytes": 1109054,
+      "sha256": "c185adb0155bca5c7be73ea94afb2208ce4a8a4cd5fc179bb04946f20a61f2b7"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/13-after-story.png",
+      "bytes": 510483,
+      "sha256": "c3c74ad6e20757290a680a03b02e09901b3e69321bc4652075c2692486734b7d"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/14-record.log",
+      "bytes": 149,
+      "sha256": "c399a5d7bce11a01dacf521930943d1c9f76090f5e66103ef424acaafcaf809c"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/14-story-pause.mp4",
+      "bytes": 7695192,
+      "sha256": "6b3d68a1eb525f1246c3c3705734a7d87637d79ca9c8c632cb3056b124dd41eb"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/14a-paused-controls.png",
+      "bytes": 70441,
+      "sha256": "54465ea822306ca8c7e2d336fa623e105df0ad54aabed09a0a699222d1812380"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/15-current-pause.png",
+      "bytes": 95490,
+      "sha256": "28ab97954a402fcb29d6b2d1dfa3031daabd3f78d03115c6b456f857abc7b953"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/16-paused-cc-focus.png",
+      "bytes": 98590,
+      "sha256": "19818ecf4db6b7b95e31301d703a2d37c090c60337aed8514ebdf7d5b755c099"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/17-caption-focus.png",
+      "bytes": 95718,
+      "sha256": "00dd2f7240e2587355ba7f6fc7a15a614899f9ecbbe18c8f6144b52fe9d35da2"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/18-caption-menu.png",
+      "bytes": 95718,
+      "sha256": "00dd2f7240e2587355ba7f6fc7a15a614899f9ecbbe18c8f6144b52fe9d35da2"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/19-third-down.png",
+      "bytes": 103019,
+      "sha256": "a1b962fcc47e7f5d44428bd370f6e1a8e37037f289721ed816fe930ca58580cb"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/20-caption-menu.png",
+      "bytes": 104422,
+      "sha256": "0033be8896fdd6803af538dc8fd94bd95479030769f0676ea872a98d8ed95261"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/21-caption-menu-resume.mp4",
+      "bytes": 951642,
+      "sha256": "439c0297cf005e863e27402c2a8662fb4097c5c0ac1d0fe7550addfe4270007d"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/21-record.log",
+      "bytes": 149,
+      "sha256": "1021af4a5284251cb10c208c2710a0945bc54c56e7d42158c127c442fb203dd7"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/21a-menu-cue.png",
+      "bytes": 936405,
+      "sha256": "3c3e6387a5f4a1ae2755818a9a8ab657888b82fe9df6fed8ec9e7fdb238b7d41"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/21b-menu-cue.png",
+      "bytes": 977961,
+      "sha256": "b069ed425132a5bf1df43b9455977026a3a8a4cb22ec4f813894ca8ab1392c90"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/21c-resume.png",
+      "bytes": 867256,
+      "sha256": "7823074ede6d6b111bd85b943acea4a69ac3a19dfd75560d38b6eb1e227784f9"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/21d-resume.png",
+      "bytes": 886349,
+      "sha256": "fa549740d2acff77b2721e3c13051b3e6f0a07510c00c35303ca71d6f1092f5b"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/22-current.png",
+      "bytes": 463747,
+      "sha256": "3e47126a3f0df51a9a913544a96000f6f97d8851c84f6e11a442f4438d02e5a4"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/23-demo-details.png",
+      "bytes": 515317,
+      "sha256": "9fba7855f24fe99946824825e429a44c8c5f071caefeb9ae8989c13ee3f60e63"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/24-recorder.log",
+      "bytes": 414,
+      "sha256": "a018d42dd283c3eee744cd1ef119257b486f8cfc4d7ef6c8c70f3ba5b158810f"
+    }
+  ],
+  "preserved": [
+    "Original checkout and shared branch",
+    "Household data/PIN",
+    "All pre-existing recordings and packages",
+    "20-second Harbor media and signed maps",
+    "Guard timing, verification and persistence",
+    "Existing simulator instance"
+  ]
+}
