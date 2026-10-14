@@ -17,11 +17,11 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
   testID="touchable-opacity"
 >
   <View
-    accessibilityLabel="Not checked yet. This title has not been checked, so the picture stays hidden. Sound and captions keep playing."
+    accessibilityLabel="This title is unavailable. This title is unavailable. The picture stays hidden while sound and captions keep playing."
     accessibilityLiveRegion="polite"
     accessibilityRole="alert"
     accessible={true}
-    aria-label="Not checked yet. This title has not been checked, so the picture stays hidden. Sound and captions keep playing."
+    aria-label="This title is unavailable. This title is unavailable. The picture stays hidden while sound and captions keep playing."
     aria-live="polite"
     pointerEvents="box-none"
     style={
@@ -63,7 +63,7 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
         }
         testID="calm-card-title"
       >
-        Not checked yet
+        This title is unavailable
       </Text>
       <Text
         style={
@@ -79,7 +79,7 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
         }
         testID="calm-card-detail"
       >
-        This title has not been checked, so the picture stays hidden. Sound and captions keep playing.
+        This title is unavailable. The picture stays hidden while sound and captions keep playing.
       </Text>
     </View>
   </View>

@@ -453,29 +453,29 @@ export function registryRefusalMessage(
 ): string {
   switch (reason) {
     case 'registry-missing':
-      return 'The list of checked titles could not be reached, so the picture stays hidden.';
+      return 'The library is not responding. The picture stays hidden.';
     case 'registry-stale':
-      return 'The list of checked titles is too old, so the picture stays hidden.';
+      return 'The library needs an update. The picture stays hidden.';
     case 'registry-unsigned':
-      return 'The list of checked titles is not signed, so the picture stays hidden.';
+      return 'The library is missing playback information. The picture stays hidden.';
     case 'registry-unknown-key':
-      return 'The list of checked titles came from someone we do not know, so the picture stays hidden.';
+      return 'The library comes from an unsupported source. The picture stays hidden.';
     case 'registry-bad-signature':
-      return 'The list of checked titles was changed after it was signed, so the picture stays hidden.';
+      return 'The library information appears to have changed. The picture stays hidden.';
     case 'registry-wrong-version':
-      return 'The list of checked titles is in a newer format than this app reads, so the picture stays hidden.';
+      return 'The library needs a newer version of Calm Frames. The picture stays hidden.';
     case 'not-listed':
-      return 'This title is not checked yet, so the picture stays hidden.';
+      return 'This title is still being prepared. The picture stays hidden for now.';
     case 'entry-unusable':
-      return 'The list of checked titles points somewhere we will not follow, so the picture stays hidden.';
+      return 'This title uses an unsupported location. The picture stays hidden.';
     case 'not-the-listed-map':
-      return 'The check that came back is not the one listed for this title, so the picture stays hidden.';
+      return 'The playback information does not match the library. The picture stays hidden.';
     case 'map-refused':
       return mapRejection
         ? rejectionMessage(mapRejection)
-        : 'The check for this title could not be read, so the picture stays hidden.';
+        : 'The playback information could not be opened. The picture stays hidden.';
     case 'registry-unparseable':
     default:
-      return 'The list of checked titles could not be read, so the picture stays hidden.';
+      return 'The library information could not be opened. The picture stays hidden.';
   }
 }

@@ -63,7 +63,7 @@ export const CALM_SPACE = {
  * Where the player puts its own words, in 1080p units from the top left.
  *
  * Captions own the bottom of the picture. PlayerScreen's KeplerCaptionsView
- * ends 120 units above the bottom edge and its cues stack upward from there.
+ * ends 240 scaled units above the bottom edge and its cues stack upward from there.
  * The card used to stand 160 units up from the bottom, inside that band, so
  * it covered the captions at the very moment a hidden picture made them the
  * only way to follow the story. It now hangs from the upper part of the safe

@@ -142,7 +142,7 @@ export function checkTitle(
       title,
       status: 'pending',
       reason:
-        'This room is stricter than the check that was run, so this title has to be checked again before kid mode can show it.',
+        'This title is unavailable with your current viewing settings.',
       segments,
       hiddenMs,
       checkedAtMs,
@@ -176,11 +176,11 @@ export function kidModeTitles(checked: CheckedTitle[]): CheckedTitle[] {
 export function badgeLabel(status: TitleStatus): string {
   switch (status) {
     case 'verified':
-      return 'Checked';
+      return 'Ready to watch';
     case 'pending':
-      return 'Needs check';
+      return 'Preparing';
     case 'failed':
     default:
-      return 'Check failed';
+      return 'Unavailable';
   }
 }

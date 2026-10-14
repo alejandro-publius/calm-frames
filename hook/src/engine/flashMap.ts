@@ -361,21 +361,21 @@ export function verifyFlashMap(
 export function rejectionMessage(reason: MapRejection): string {
   switch (reason) {
     case 'missing':
-      return 'This title is not checked yet, so the picture stays hidden.';
+      return 'This title is still being prepared. The picture stays hidden for now.';
     case 'stale':
-      return 'This title was checked too long ago, so the picture stays hidden.';
+      return 'This title needs an update. The picture stays hidden.';
     case 'unsigned':
-      return 'This title has no signed check, so the picture stays hidden.';
+      return 'This title is missing playback information. The picture stays hidden.';
     case 'unknown-key':
-      return 'This title was checked by someone we do not know, so the picture stays hidden.';
+      return 'This title comes from an unsupported source. The picture stays hidden.';
     case 'bad-signature':
-      return 'The check for this title was changed after it was signed, so the picture stays hidden.';
+      return 'The playback information for this title appears to have changed. The picture stays hidden.';
     case 'wrong-file':
-      return 'The check for this title belongs to a different file, so the picture stays hidden.';
+      return 'The playback information belongs to a different version of this title. The picture stays hidden.';
     case 'wrong-version':
-      return 'The check for this title is in a newer format than this app reads, so the picture stays hidden.';
+      return 'This title needs a newer version of Calm Frames. The picture stays hidden.';
     case 'unparseable':
     default:
-      return 'The check for this title could not be read, so the picture stays hidden.';
+      return 'The playback information could not be opened. The picture stays hidden.';
   }
 }

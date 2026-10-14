@@ -176,7 +176,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
     undefined,
   );
   const [blockedReason, setBlockedReason] = useState<string | undefined>(
-    'Checking this title.',
+    'Getting your story ready.',
   );
   const [segments, setSegments] = useState<CoverInterval[]>([]);
   const [seekHolding, setSeekHolding] = useState(false);
@@ -268,7 +268,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
       setStatus('loading');
       setCheckedInput(null);
       setSceneHolds([]);
-      setBlockedReason('Checking this title.');
+      setBlockedReason('Getting your story ready.');
       const verifiedMaps: VerifiedFlashMap[] = [];
       for (const profile of preset.mapProfiles) {
         let text: string | null | undefined = mapTexts?.[profile];
@@ -300,7 +300,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
           setCheckedInput(verificationInput);
           setRejection('missing');
           setBlockedReason(
-            'This room is stricter than the check that was run, so the picture stays hidden.',
+            'This title is unavailable with your current viewing settings. The picture stays hidden.',
           );
           setSegments([]);
           return;
@@ -328,7 +328,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
         setCheckedInput(verificationInput);
         setRejection('wrong-file');
         setBlockedReason(
-          'This title does not line up with the check that was run, so the picture stays hidden.',
+          'The playback information belongs to a different version of this title. The picture stays hidden.',
         );
         setSegments([]);
         return;

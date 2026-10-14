@@ -59,7 +59,7 @@ export const PRESETS: Record<PresetName, PresetDefinition> = {
     name: 'broadcast',
     title: 'Broadcast',
     description:
-      'Adds broadcast flash checks to everything covered by Standard.',
+      'Adds broadcast flash limits to the Standard preset.',
     mapProfiles: ['wcag', 'broadcast'],
     guardBandMs: DEFAULT_GUARD_BAND_MS,
     minCoverMs: DEFAULT_MIN_COVER_MS,
@@ -68,7 +68,7 @@ export const PRESETS: Record<PresetName, PresetDefinition> = {
     name: 'extra-cautious',
     title: 'Extra cautious',
     description:
-      'Includes Broadcast checks and keeps the picture hidden a little longer before and after each flagged part.',
+      'Uses Broadcast limits and covers the picture a little longer around each hidden part.',
     mapProfiles: ['wcag', 'broadcast'],
     guardBandMs: 1_000,
     minCoverMs: 800,
