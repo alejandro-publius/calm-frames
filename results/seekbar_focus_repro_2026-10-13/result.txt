@@ -1,0 +1,3 @@
+on e51529c source: Tests:       1 failed, 1 total
+with the one-line fix: Tests:       1 passed, 1 total
+existing playback suites with the fix: Tests:       28 passed, 28 total

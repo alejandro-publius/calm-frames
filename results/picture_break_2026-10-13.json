@@ -1,0 +1,174 @@
+{
+ "what_this_is": "Automated evidence for the viewer picture break prototype. It is software evidence from Jest in a fresh worktree, not a Vega build, a native observation or a user study.",
+ "recorded_on": "2026-10-13",
+ "branch": "claude/evidence-and-submission-2026-10-13",
+ "base_commit": "e51529cc06438ed9b7c57f1ef1ea0d5cfa9a173a",
+ "brief_commit": "b9a22991edef0b81688df0911c70683f572ed676",
+ "implementation_commit": "06dfeb902056459542debf3579a8558b496fc756",
+ "prototype_flag": {
+  "file": "app/src/calmframes/pictureBreakConfig.ts",
+  "name": "PICTURE_BREAK_PROTOTYPE",
+  "default": false
+ },
+ "source_sha256": {
+  "app/src/calmframes/pictureBreak.ts": "e5615735dce39209e95f6fe79935c7066ffc3ea9592d7193c55a3bf2a416f055",
+  "app/src/calmframes/usePictureBreak.ts": "edab7d72fbe075a1d916b4c9dede40412688388aa40467ef60994a9b8ef95829",
+  "app/src/calmframes/PictureBreakCard.tsx": "03049a2a76f64fe035633f81f5e1736e42b5c659a984a536401b33facba68ba5",
+  "app/src/calmframes/pictureBreakConfig.ts": "c33b482e9e008f9f09c370aa3f6c5866c5f8660aeb30b389ac105e641fe404e7",
+  "app/src/screens/PlayerScreen.tsx": "d13e40d497a81bef294ed3d48b3f52637eae7673616ceab954bb47145ee2eb12"
+ },
+ "rules": {
+  "minimum_break_ms": 2000,
+  "return_clearance_ms": 2000,
+  "ok_grace_ms": 1000,
+  "property_step_ms": 10,
+  "property_seeds": 60,
+  "property_run_ms": 30000
+ },
+ "environment": {
+  "machine": "the project Mac, isolated git worktree",
+  "node": "22.23.2",
+  "npm": "10.9.8",
+  "install": "npm ci --ignore-scripts --no-audit --no-fund in app/, 1643 packages in 11 s; no node_modules or generated output copied from another checkout"
+ },
+ "checks": {
+  "picture_break_suites": {
+   "command": "npx jest --runInBand --watchman=false --coverage=false test/calmframes/pictureBreak.test.ts test/calmframes/usePictureBreak.test.tsx test/calmframes/pictureBreakPlayer.test.tsx test/calmframes/pictureBreakOff.test.tsx",
+   "passed": 156,
+   "failed": 0
+  },
+  "full_app_suite": {
+   "command": "npx jest --ci --colors=false --watchman=false",
+   "suites_passed": 120,
+   "suites_skipped": 1,
+   "passed": 1354,
+   "skipped": 4,
+   "failed": 0,
+   "snapshots_passed": 57,
+   "existing_tests_passed": 1198,
+   "existing_tests_reference": "results/native-checkpoint-2026-10-14/outer-only-full-tests.txt records 1198 passed and 4 skipped on e51529c before this change",
+   "coverage_floors_met": true,
+   "coverage_new_modules_lines_pct": {
+    "pictureBreak.ts": 100,
+    "usePictureBreak.ts": 100,
+    "PictureBreakCard.tsx": 100,
+    "pictureBreakConfig.ts": 100
+   }
+  },
+  "existing_player_suites_before_change": {
+   "command": "npx jest --runInBand --watchman=false --coverage=false test/calmframes/playbackUi.test.tsx test/screens/PlayerScreen.test.tsx test/screens/playerWiring.test.tsx test/calmframes/skipOwnsOk.test.tsx test/calmframes/uiCapture.test.tsx test/calmframes/tenFoot.test.tsx test/screens/hideLog.test.tsx",
+   "passed": 88,
+   "failed": 0,
+   "measured_on": "60eca59, before the rebase"
+  },
+  "typecheck": {
+   "command": "npm run typecheck",
+   "result": "passed"
+  },
+  "eslint": {
+   "command": "npx eslint src test --ext .ts,.tsx",
+   "errors": 0,
+   "warnings": 101,
+   "warnings_in_changed_files": 0
+  },
+  "style_check": {
+   "command": "python eval/style_check.py",
+   "result": "passed"
+  },
+  "readme_sync": {
+   "command": "python eval/readme_sync.py --check",
+   "result": "passed"
+  }
+ },
+ "seen_to_fail": {
+  "how": "Each line broke one rule or one player hookup on purpose, ran the picture break suites, then restored the file and confirmed it byte identical with cmp.",
+  "results": [
+   {
+    "id": "M1",
+    "broken": "no minimum break (MIN_BREAK_MS = 0)",
+    "failed": 64
+   },
+   {
+    "id": "M2",
+    "broken": "no clearance before a hold (RETURN_CLEARANCE_MS = 0)",
+    "failed": 35
+   },
+   {
+    "id": "M3",
+    "broken": "the break replaces the schedule instead of adding to it",
+    "failed": 6
+   },
+   {
+    "id": "M4",
+    "broken": "return allowed inside a hold",
+    "failed": 58
+   },
+   {
+    "id": "M5",
+    "broken": "no OK grace after a return",
+    "failed": 2
+   },
+   {
+    "id": "P1",
+    "broken": "player controls keep OK during a break",
+    "failed": 2
+   },
+   {
+    "id": "P2",
+    "broken": "scene still shown during a break",
+    "failed": 1
+   },
+   {
+    "id": "P3",
+    "broken": "the player ignores the break's cover",
+    "failed": 2
+   },
+   {
+    "id": "P4",
+    "broken": "unverified titles get a break",
+    "failed": 1
+   },
+   {
+    "id": "P5",
+    "broken": "prototype switched on by default",
+    "failed": 2
+   },
+   {
+    "id": "P6",
+    "broken": "the break records a frame the app flash check never analyzed",
+    "failed": 1
+   }
+  ],
+  "all_restored_and_green": true,
+  "suite_size": 156
+ },
+ "defects_found_while_building": [
+  "A second OK press right after the picture returned reached the player controls and paused the film. Fixed with a one second grace in which OK stays with the break (M5 and P1 guard it).",
+  "The first property generator used the wrong segment field names behind an unchecked cast, so every generated schedule was empty and the schedule properties passed without testing anything. Fixed with the real type; the tests now assert that schedules are non-empty and that returns were held back by holds in many runs.",
+  "The shared playback harness's remote() calls whichever key listener registered last. After a state change in the player screen that was the screen's own listener, not the controls'. No existing test calls remote(); the new tests deliver each press to every current listener in one dispatch.",
+  "After rebasing onto e51529c, the first integration test assumed captions start on; it failed against d52d657 and was rewritten before the implementation was recommitted."
+ ],
+ "not_run_here": [
+  "Vega build, install and native observation: the simulator and native builds belong to the Codex native task.",
+  "tools/ui_flashmap.mjs: the break draws no new frame; a test asserts it records only frames already in ALL_UI_FRAMES.",
+  "Python suites: no Python changed.",
+  "The adult walkthrough in docs/WORKING_BACKWARDS.md section 5: unperformed, so comprehension and preference are unknown."
+ ],
+ "base_note": "The work began on 60eca59 and was rebased onto e51529c, the native branch head at handoff, before anything was pushed. Every check below ran on the rebased tree.",
+ "adapted_to_native_changes": [
+  "d52d657 starts Harbor's captions Off. The integration tests now turn English captions on before a break in one case and keep the Off default in another; the break keeps whichever choice the viewer made.",
+  "0090551 lets the seekbar yield preferred focus when the controls do not own OK. The break sets that ownership, so it benefits once the seekbar finding below is fixed."
+ ],
+ "finding_for_codex": {
+  "summary": "Seekbar's React.memo comparison ignores the new hasTVPreferredFocus prop, so the value only changes when the seekbar remounts. A countdown card or a picture break that appears while the controls are mounted leaves the seekbar claiming preferred focus.",
+  "file": "app/src/components/Seekbar.tsx",
+  "reproduction": "results/seekbar_focus_repro_2026-10-13/seekbarFocusRepro.test.tsx.txt (copy into app/test/calmframes/ as a .tsx file to run)",
+  "proposed_fix": "results/seekbar_focus_repro_2026-10-13/proposed-fix.patch, one line added to the comparison",
+  "results": {
+   "on_e51529c": "1 failed of 1",
+   "with_fix": "1 passed of 1",
+   "existing_playback_suites_with_fix": "28 passed of 28"
+  },
+  "not_applied_here": "Seekbar.tsx belongs to the Codex native task; this branch leaves it unchanged."
+ }
+}

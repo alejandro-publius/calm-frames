@@ -4,6 +4,19 @@ Updated Oct 13, 2026.
 
 ## 0. Where things stand
 
+### Oct 13, night: a viewer picture break, built as a switched-off prototype
+
+A working backwards brief chose one improvement: a picture break the viewer
+starts with Menu, during which sound and captions carry the story on, with a
+predictable return. It is in the app behind a flag that is off, so the shipped
+player is unchanged. The full app suite, typecheck and lint pass, and eleven
+deliberate breaks of its rules each turned tests red. Nothing about it has been
+built or seen on Vega, and no viewer has tried it. The work also found that the
+seekbar's memo comparison ignores its new preferred-focus prop; a reproduction
+and a one-line fix are handed to the native task, not applied. Brief, demo plan
+and native handoff: [WORKING_BACKWARDS.md](WORKING_BACKWARDS.md). Receipt:
+`results/picture_break_2026-10-13.json`.
+
 ### Oct 13: centered composition and the cinematic Harbor film
 
 The library and title pages now center the artwork, title, short description and

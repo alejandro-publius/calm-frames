@@ -52,6 +52,7 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 | [submission/README.md](submission/README.md) | Download the checked draft packet with current copy, labelled browser previews, brand assets and the Mac recording plan. |
 | [CLAUDE_FINISH_PROMPT.md](CLAUDE_FINISH_PROMPT.md) | A bounded Mac finishing task for Claude Code or a local Codex session, with API billing verification and milestone pushes. |
 | [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) | The next native recording plan, narration, readable subtitle treatment and checks before the finished cut can be uploaded. |
+| [WORKING_BACKWARDS.md](WORKING_BACKWARDS.md) | The viewer picture break: who it is for, the hypotheses that could disprove it, the prototype behind a switch, its evidence and the native checks it still needs. |
 | [SHOT_MANIFEST.md](SHOT_MANIFEST.md) | The shots in the Oct 10 recording of the earlier native build, with their source hashes, and what has to be captured again. |
 | [FEEDBACK.md](FEEDBACK.md) | Amazon's five product feedback questions, answered once for every tool the project used, and the feature requests. |
 | [FRICTION_LOG.md](FRICTION_LOG.md) | Developer friction in Amazon's six fields, every entry traceable to a commit, a log or a results file. |
