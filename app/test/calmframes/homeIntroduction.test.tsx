@@ -1,7 +1,7 @@
 import React from 'react';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { AccessibilityInfo, Animated } from 'react-native';
+import { AccessibilityInfo, Animated, StyleSheet } from 'react-native';
 import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
@@ -73,4 +73,24 @@ test.each([true, undefined])('home remains still when reduced motion is %s', asy
   render(<HomeHarborScene enabled />);
   await act(async () => { await Promise.resolve(); });
   expect(loop).not.toHaveBeenCalled();
+});
+
+test('home states the supported-title benefit and keeps parental controls tertiary until focused', () => {
+  const parent = jest.fn();
+  const details = jest.fn();
+  const view = render(<KidHomeScreen titles={titles} onOpen={details} onOpenParentArea={parent} />);
+  expect(view.getByText('Watch with fewer flashes.')).toBeTruthy();
+  expect(view.getByText('Supported titles use a still picture during marked scenes while sound continues.')).toBeTruthy();
+  expect(view.queryByText('About this story')).toBeNull();
+  fireEvent.press(view.getByRole('button', { name: 'Details' }));
+  expect(details).toHaveBeenCalledWith(titles.find(entry => entry.title.title === 'Harbor story (prepared locally)'));
+  const control = view.getByTestId('kid-home-parent-area');
+  expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent', minHeight: 88, borderWidth: 6 });
+  fireEvent(control, 'focus');
+  expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: '#234B55', borderColor: '#E6A957', minHeight: 88, borderWidth: 6 });
+  expect(StyleSheet.flatten(view.getByTestId('kid-home-parent-area-label').props.style)).toMatchObject({ color: '#F3E8D3', textDecorationLine: 'underline' });
+  fireEvent.press(control);
+  expect(parent).toHaveBeenCalledTimes(1);
+  fireEvent(control, 'blur');
+  expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent' });
 });

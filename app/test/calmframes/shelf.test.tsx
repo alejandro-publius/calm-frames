@@ -141,8 +141,8 @@ describe('the words on the shelf', () => {
     const onOpen = jest.fn();
     const onPlay = jest.fn();
     const home = render(<KidHomeScreen titles={shelf} onOpen={onOpen} onPlay={onPlay} />);
-    const synopsis = screen.getByText(/A quieter picture/i).props.children;
-    expect(synopsis).toMatch(/Sound and stories carry on/i);
+    const synopsis = screen.getByText(/Supported titles use a still picture/i).props.children;
+    expect(synopsis).toMatch(/during marked scenes while sound continues/i);
     fireEvent.press(screen.getByTestId('kid-home-more-info'));
     expect(onOpen).toHaveBeenCalledWith(prepared);
     fireEvent.press(screen.getByTestId('kid-home-watch'));

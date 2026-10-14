@@ -17,6 +17,10 @@ test('export home, optional explanation, loading and opening from actual compone
   const home = render(<KidHomeScreen titles={checkedShelf()} onOpen={() => {}} onPlay={() => {}} onOpenParentArea={() => {}} />);
   fireEvent(home.getByTestId('kid-home-watch'), 'focus');
   save('home', home.toJSON());
+  fireEvent(home.getByTestId('kid-home-watch'), 'blur');
+  fireEvent(home.getByTestId('kid-home-parent-area'), 'focus');
+  save('home-parent-focused', home.toJSON());
+  fireEvent(home.getByTestId('kid-home-parent-area'), 'blur');
   fireEvent.press(home.getByTestId('kid-home-learn'));
   fireEvent(home.getByTestId('picture-hold-start'), 'focus');
   save('how-it-works', home.toJSON());

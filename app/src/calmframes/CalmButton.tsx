@@ -35,6 +35,8 @@ export interface CalmButtonProps {
   primary?: boolean;
   /** Quieter navigation chrome; focus keeps the same visible ring and underline. */
   quiet?: boolean;
+  /** Text-only at rest; retains a full target and the standard visible focus treatment. */
+  tertiary?: boolean;
   /** Smaller quiet links retain the minimum TV text size and full focus boundary. */
   compact?: boolean;
   onPress?: () => void;
@@ -54,6 +56,7 @@ const CalmButton = ({
   label,
   primary = false,
   quiet = false,
+  tertiary = false,
   compact = false,
   onPress,
   onFocus,
@@ -90,6 +93,7 @@ const CalmButton = ({
       style={[
         styles.button,
         quiet && !primary ? styles.quiet : null,
+        tertiary && !primary ? styles.tertiary : null,
         primary && !disabled ? styles.primary : null,
         disabled ? styles.buttonDisabled : null,
         focused && !disabled ? (primary ? styles.primaryFocused : styles.buttonFocused) : null,
@@ -125,6 +129,7 @@ const styles = StyleSheet.create({
     borderColor: CALM_COLORS.BACKGROUND,
     backgroundColor: CALM_COLORS.BACKGROUND,
   },
+  tertiary: { borderColor: 'transparent', backgroundColor: 'transparent' },
   // Not faded: the same background, a quieter edge, and the word for it in the
   // label the caller passes.
   buttonDisabled: {

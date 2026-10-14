@@ -159,7 +159,7 @@ const KidHomeScreen = ({
       <CalmPageHeader onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
-          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet compact testID={`${testID}-parent-area`} label="Parental controls" accessibilityLabel="Parental controls, needs a PIN" hasTVPreferredFocus={empty && !saving} onPress={onOpenParentArea} /></View> : null}
+          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parental controls" accessibilityLabel="Parental controls, needs a PIN" hasTVPreferredFocus={empty && !saving} onPress={onOpenParentArea} /></View> : null}
       </CalmPageHeader>
       {choosingProfile && picking && profiles && onChooseProfile ? (
         <ProfilePicker disabled={saving || undefined} testID={`${testID}-profiles`} title={PROFILES_KID_TITLE}
@@ -183,13 +183,13 @@ const KidHomeScreen = ({
           <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroCopy}>
-                <Text style={styles.eyebrow}>A calmer way to watch</Text>
+                <Text style={styles.eyebrow}>Watch with fewer flashes.</Text>
                 <Text accessibilityRole="header" testID={`${testID}-title`} style={[styles.featureTitle, feature.name.length > 18 ? styles.longFeatureTitle : null]}>{feature.name}</Text>
-                <Text style={styles.description}>A quieter picture. Sound and stories carry on.</Text>
+                <Text style={styles.description}>Supported titles use a still picture during marked scenes while sound continues.</Text>
                 <View style={styles.actions}>
                   <CalmButton primary sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={feature.action} accessibilityLabel={`${feature.action}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={!returnFocusId && !returnToIntroduction && !saving} onPress={() => (onPlay ?? onOpen)(featured)} />
-                  <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="About this story" hasTVPreferredFocus={returnFocusId === featured.title.id && !returnToIntroduction && !saving} onPress={() => onOpen(featured)} disabled={saving} />
+                  <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" hasTVPreferredFocus={returnFocusId === featured.title.id && !returnToIntroduction && !saving} onPress={() => onOpen(featured)} disabled={saving} />
                 </View>
                 <View style={styles.learn}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" hasTVPreferredFocus={(returnToIntroduction || returnFocusId === demo?.title.id || returnFocusId === playbackCheck?.title.id) && !saving}
                   disabled={saving} onPress={() => { setChoosingProfile(false); setShowIntroduction(true); }} />
