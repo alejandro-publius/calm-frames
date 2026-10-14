@@ -49,7 +49,7 @@ import {
   useMapSources,
   waitingTitle,
 } from '../calmframes/mapSource';
-import KidHomeScreen from '../calmframes/KidHomeScreen';
+import KidHomeScreen, { ReturnFocusControl } from '../calmframes/KidHomeScreen';
 import {
   activeProfile,
   allProfileHides,
@@ -285,6 +285,15 @@ const KidModeScreen = ({
   const [view, setView] = React.useState<KidModeView>('home');
   const [openId, setOpenId] = React.useState<string | null>(null);
   const [lastOpenedId, setLastOpenedId] = React.useState<string | null>(null);
+  const [lastOpenedFrom, setLastOpenedFrom] = React.useState<ReturnFocusControl | undefined>(undefined);
+  // The control the shelf reported for the press being handled now; a press
+  // that reports none, such as one from the introduction, clears it.
+  const launchControl = React.useRef<ReturnFocusControl | undefined>(undefined);
+  const rememberLaunch = (entry: CheckedTitle) => {
+    setLastOpenedId(entry.title.id);
+    setLastOpenedFrom(launchControl.current);
+    launchControl.current = undefined;
+  };
   const [focusGeneration, setFocusGeneration] = React.useState(0);
   React.useEffect(() => {
     const removeFocus = navigation.addListener?.('focus', () => {
@@ -501,18 +510,20 @@ const KidModeScreen = ({
       interfaceActive={interfaceActive}
       testID={`${testID}-home`}
       titles={titles}
+      onLaunchControl={(control) => { launchControl.current = control; }}
       onPlay={(entry) => {
-        setLastOpenedId(entry.title.id);
+        rememberLaunch(entry);
         play(entry);
       }}
       returnFocusId={lastOpenedId}
+      returnFocusControl={lastOpenedFrom}
       profiles={family.profiles}
       activeProfileId={family.activeProfileId}
       onChooseProfile={(profile) =>
         setFamily(selectProfile(family, profile.id))
       }
       onOpen={(entry) => {
-        setLastOpenedId(entry.title.id);
+        rememberLaunch(entry);
         setOpenId(entry.title.id);
         setView('details');
       }}
