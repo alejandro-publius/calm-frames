@@ -3,6 +3,8 @@ import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import LinearGradient from '@amazon-devices/react-linear-gradient';
 import React from 'react';
 import { AccessibilityInfo, Animated, BackHandler, Easing, Image, StyleSheet, Text, View } from 'react-native';
+import CalmPageHeader from './CalmPageHeader';
+import HomeHarborScene from './HomeHarborScene';
 import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { useUiCapture } from './uiCapture';
 import { HARBOR_BOOTSTRAP_FRAME } from './uiFrames';
@@ -22,7 +24,7 @@ export default function HarborOpening({
   onFinish?: () => void;
   testID?: string;
 }) {
-  useUiCapture(HARBOR_BOOTSTRAP_FRAME, 'harbor wave opening');
+  useUiCapture(onFinish ? { ...HARBOR_BOOTSTRAP_FRAME, surfaces: [] } : HARBOR_BOOTSTRAP_FRAME, 'harbor startup');
   const manager = useKeplerAppStateManager();
   const progress = React.useRef(new Animated.Value(0)).current;
   const finish = React.useRef(onFinish);
@@ -91,6 +93,14 @@ export default function HarborOpening({
     };
   }, [active, canFinish, manager, motionEnabled, progress]);
 
+  // Actual bootstrap callers have no onFinish: match the next loading/home
+  // frame without introducing a timer or reading household preferences.
+  if (!canFinish) return <View testID={testID} style={styles.screen} accessible accessibilityLabel="Calm Frames. Opening your library." accessibilityRole="progressbar">
+    <HomeHarborScene />
+    <CalmPageHeader />
+    <View style={styles.loading}><Text style={styles.loadingTitle}>Opening Calm Frames</Text></View>
+  </View>;
+
   return (
     <View testID={testID} style={styles.screen} accessible accessibilityLabel="Calm Frames. Opening your library." accessibilityRole="progressbar">
       <View style={styles.sea} pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
@@ -112,6 +122,8 @@ export default function HarborOpening({
 }
 
 const styles = StyleSheet.create({
+  loading: { paddingTop: scale(102), maxWidth: scale(750) },
+  loadingTitle: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND, overflow: 'hidden', paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y) },
   sea: { ...StyleSheet.absoluteFillObject },
   wave: { position: 'absolute', top: scale(-20), bottom: scale(-20), left: scale(-24), right: scale(-24) },

@@ -18,7 +18,7 @@ import { UiFrame } from './uiCapture';
 
 /** Early bootstrap wave, before navigation and household loading are ready. */
 export const HARBOR_BOOTSTRAP_FRAME: UiFrame = {
-  screen: 'harbor-bootstrap', background: CALM_COLORS.BACKGROUND, surfaces: [],
+  screen: 'harbor-bootstrap', background: CALM_COLORS.BACKGROUND, surfaces: ['#77A19E'],
 };
 
 export const HOUSEHOLD_LOADING_FRAME: UiFrame = {

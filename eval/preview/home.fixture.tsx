@@ -6,6 +6,7 @@ import path from 'path';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import HouseholdStorageScreen from '../../src/calmframes/HouseholdStorageScreen';
+import HarborOpening from '../../src/calmframes/HarborOpening';
 import PlayerOpening from '../../src/calmframes/PlayerOpening';
 import { checkedShelf } from './shelfFixtures';
 
@@ -21,6 +22,7 @@ test('export home, optional explanation, loading and opening from actual compone
   save('how-it-works', home.toJSON());
   expect(home.getByText(/two scheduled practice holds/)).toBeTruthy();
   home.unmount();
+  const bootstrap = render(<HarborOpening />); save('bootstrap', bootstrap.toJSON()); bootstrap.unmount();
   const loading = render(<HouseholdStorageScreen failed={false} onRetry={() => {}} />);
   save('loading', loading.toJSON()); loading.unmount();
   const opening = render(<PlayerOpening title="Harbor" onBack={() => {}} />);
