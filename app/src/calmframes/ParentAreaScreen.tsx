@@ -418,12 +418,16 @@ const ParentAreaScreen = ({
               </Text>
             ) : null}
           </View>
+          {onBack ? <CalmButton quiet hasTVPreferredFocus
+            disabled={saving || undefined}
+            testID={`${testID}-back-top`} label={BACK_TO_LIBRARY_LABEL} onPress={onBack} /> : null}
         </View>
         <Text style={styles.lead}>{PARENTAL_CONTROLS_LEAD}</Text>
       </View>
 
       {family && onFamilyChange ? (
-        <View style={styles.group}>
+        <View style={[styles.group, !confirmingRemoval ? styles.profileGroup : null]}>
+          <View style={!confirmingRemoval ? styles.profileIdentity : undefined}>
           <ProfilePicker
             disabled={saving || undefined}
             testID={`${testID}-profiles`}
@@ -447,6 +451,8 @@ const ParentAreaScreen = ({
               {floorEffect}
             </Text>
           ) : null}
+          </View>
+          <View style={!confirmingRemoval ? styles.profileManagement : undefined}>
           {confirmingRemoval && editingProfile ? (
             // The question stands in for the buttons rather than sitting
             // beside them, so the screen is asking one thing and Add a kid
@@ -509,7 +515,7 @@ const ParentAreaScreen = ({
                   />
                 </View>
               ) : (
-                <Text style={styles.helper} testID={`${testID}-profiles-full`}>
+                <Text style={[styles.helper, styles.managementNote]} testID={`${testID}-profiles-full`}>
                   {PROFILES_FULL}
                 </Text>
               )}
@@ -527,6 +533,7 @@ const ParentAreaScreen = ({
               ) : null}
             </View>
           )}
+          </View>
         </View>
       ) : null}
 
@@ -866,6 +873,7 @@ const styles = StyleSheet.create({
   content: {
     width: '100%',
     maxWidth: scale(1400),
+    alignSelf: 'center',
     paddingBottom: scale(CALM_SPACE.SAFE_Y),
   },
   header: { marginBottom: scale(GROUP_GAP) },
@@ -896,6 +904,10 @@ const styles = StyleSheet.create({
     marginRight: scale(CALM_SPACE.EDGE),
   },
   group: { marginBottom: scale(GROUP_GAP) },
+  profileGroup: { flexDirection: 'row', gap: scale(40), marginBottom: scale(16) },
+  profileIdentity: { flex: 1 },
+  profileManagement: { width: scale(360) },
+  managementNote: { maxWidth: '100%' },
   section: {
     ...CALM_TEXT.section,
     color: CALM_COLORS.TEXT,

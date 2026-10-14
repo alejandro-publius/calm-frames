@@ -26,6 +26,11 @@ keeps the title, specific reason and focused Back action together in the initial
 viewport. It removes the unused artwork space and repeated status wording,
 while preserving the playable details layout. Comparisons cover 1080p and 720p.
 
+The Oct 14 [parent-settings refinement](parent-refinement/README.md) centers the
+unlocked settings column, adds Back beside the heading and moves profile
+management beside the selector so viewing presets appear sooner. The PIN
+screens and all settings semantics remain unchanged.
+
 ## Identity
 
 A peaceful monk inside a rounded frame, with one open halo. Deep teal ground,
