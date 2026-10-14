@@ -65,6 +65,10 @@ import { useCoverHarness } from '../calmframes/useCoverHarness';
 import { scale } from '../calmframes/calmStyles';
 import { pausedCard, usePlaybackPaused } from '../calmframes/usePlaybackPresentation';
 import { useFlashGuard } from '../calmframes/useFlashGuard';
+import { coveredWithBreak, pictureBreakCopy } from '../calmframes/pictureBreak';
+import PictureBreakCard from '../calmframes/PictureBreakCard';
+import { PICTURE_BREAK_PROTOTYPE } from '../calmframes/pictureBreakConfig';
+import { usePictureBreak } from '../calmframes/usePictureBreak';
 import BufferingWindow from '../components/BufferingWindow';
 import {
   AppStackParamList,
@@ -279,12 +283,26 @@ const PlayerScreen = ({
     covered = true;
     card = NO_CARD;
   }
+  // The viewer's picture break (pictureBreak.ts). It can only add cover, it
+  // never seeks or pauses, and it exists only for a verified title.
+  const pictureBreak = usePictureBreak({
+    enabled:
+      PICTURE_BREAK_PROTOTYPE &&
+      guarding &&
+      guard.status === 'verified' &&
+      !isVideoError,
+    intervals: guard.intervals,
+    mediaTimeMs: guard.mediaTimeMs,
+  });
+  covered = coveredWithBreak(covered, pictureBreak.state);
   // The app records its own layer, because Vega gives it no way to read its
   // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
+  // A picture break draws the same cover and card as a scheduled hold.
+  const capturedCardKind = pictureBreak.resting ? 'covering' : card.kind;
   useUiCapture(
     React.useMemo(
-      () => playerFrame(covered, card.kind, benignDemo),
-      [covered, card.kind, benignDemo],
+      () => playerFrame(covered, capturedCardKind, benignDemo),
+      [covered, capturedCardKind, benignDemo],
     ),
     'player',
   );
@@ -662,7 +680,12 @@ const PlayerScreen = ({
             */}
             <CoverLayer
               visible={covered}
-              imageUri={access === 'guarded' ? guard.coverImageUri : undefined}
+              // A picture break shows the plain cover, never a scene still.
+              imageUri={
+                access === 'guarded' && !pictureBreak.resting
+                  ? guard.coverImageUri
+                  : undefined
+              }
               referencePatch={route.params.referencePatch}
               screenWidth={deviceWidth}
               screenHeight={deviceHeight}
@@ -687,13 +710,23 @@ const PlayerScreen = ({
           The card sits above the cover, so it stays readable while the picture
           is hidden, and it is the only thing on screen that speaks.
         */}
-        <CalmCard
-          card={pausedCard(card, paused)}
-          onSkip={guard.skipTo}
-          skipAccessibilityLabel={
-            benignDemo ? 'Skip the practice hold' : undefined
-          }
-        />
+        {pictureBreak.resting ? (
+          <PictureBreakCard
+            copy={pictureBreakCopy(pictureBreak.state, {
+              captionsOn: captionID !== CAPTION_DISABLE_ID,
+              paused,
+            })}
+            onReturn={pictureBreak.requestReturn}
+          />
+        ) : (
+          <CalmCard
+            card={pausedCard(card, paused)}
+            onSkip={guard.skipTo}
+            skipAccessibilityLabel={
+              benignDemo ? 'Skip the practice hold' : undefined
+            }
+          />
+        )}
         {/*
           The practice label, on a plate in the top left corner: a row of its
           own above the card, and nowhere near the captions.
@@ -714,7 +747,9 @@ const PlayerScreen = ({
             videoData={data}
             // The card's Skip button has focus during a countdown, so OK is
             // Skip's and the sample must not pause or show its controls.
-            skipOwnsSelect={cardOffersSkip(card)}
+            // During a picture break, and for a moment after it, OK is the
+            // break's (usePictureBreak.ts says why).
+            skipOwnsSelect={cardOffersSkip(card) || pictureBreak.ownsSelect}
             selectedCaptionId={captionID}
             requestSeek={
               guarding
