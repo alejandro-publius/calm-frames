@@ -4,13 +4,26 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { AccessibilityInfo, Animated, StyleSheet } from 'react-native';
 import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
-import { CALM_COLORS } from '../../src/calmframes/calmStyles';
+import { COASTAL_COLORS as CALM_COLORS } from '../../src/calmframes/calmStyles';
 import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
 import { checkedShelf } from './shelfFixtures';
 import { BENIGN_STORY_ID } from '../../src/calmframes/benignStory';
+import { InterfaceSoundContext } from '../../src/calmframes/useInterfaceSound';
 const titles = checkedShelf();
 const demo = titles.find(entry => entry.title.id === BENIGN_STORY_ID)!;
 afterEach(() => jest.restoreAllMocks());
+
+test('practice navigation succeeds even if its optional confirmation sound fails', () => {
+  const open = jest.fn();
+  const launch = jest.fn();
+  render(<InterfaceSoundContext.Provider value={{ confirm: () => { throw new Error('sound unavailable'); }, stop: jest.fn() }}>
+    <KidHomeScreen titles={titles} onOpen={open} onLaunchControl={launch} />
+  </InterfaceSoundContext.Provider>);
+  expect(() => fireEvent.press(screen.getByTestId('kid-home-demo'))).not.toThrow();
+  expect(launch).toHaveBeenCalledWith('demo');
+  expect(open).toHaveBeenCalledTimes(1);
+  expect(open).toHaveBeenCalledWith(demo);
+});
 
 test('home is the entry, with direct playback and an optional dismissible explanation', () => {
   const play = jest.fn();

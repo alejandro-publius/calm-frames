@@ -39,7 +39,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
-import { CALM_CONTROL, CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
+import { CALM_CONTROL, COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { CREDIT_ENTRIES, CreditEntry } from './credits';
 import { useUiCapture } from './uiCapture';
 import { CREDITS_FRAME } from './uiFrames';

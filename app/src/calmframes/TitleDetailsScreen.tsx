@@ -16,7 +16,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import HomeHarborScene from './HomeHarborScene';
-import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
+import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { noticeForTitle } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import FlashMapStrip from './FlashMapStrip';
@@ -130,7 +130,7 @@ const TitleDetailsScreen = ({
           </View>
         <View style={styles.actionRail}>
           <View style={styles.buttons}>
-            <CalmButton primary sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
+            <CalmButton primary playIcon sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
               accessibilityLabel={saving ? 'Saving your changes...' : `${playLabel}: ${presentation.name}`}
               disabled={saving} hasTVPreferredFocus onPress={() => onPlay(entry)} />
           </View>
@@ -205,19 +205,19 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
   navigation: { width: '100%', maxWidth: scale(1728), alignItems: 'flex-start', marginBottom: scale(16) },
-  hero: { width: '100%', minHeight: scale(670), alignItems: 'flex-start', justifyContent: 'flex-end' },
-  heroCopy: { width: '100%', maxWidth: scale(1000), alignItems: 'flex-start', paddingTop: scale(220) },
-  actionRail: { width: '100%', flexDirection: 'row', alignItems: 'center', gap: scale(48), marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.BORDER },
-  quickSummary: { ...CALM_TEXT.supporting, maxWidth: scale(850), color: CALM_COLORS.TEXT_DIM },
+  hero: { width: '100%', minHeight: scale(700), alignItems: 'flex-start', justifyContent: 'flex-start' },
+  heroCopy: { width: '100%', maxWidth: scale(720), alignItems: 'flex-start', paddingTop: scale(62) },
+  actionRail: { width: scale(620), alignItems: 'flex-start', gap: scale(26), marginTop: scale(24) },
+  quickSummary: { ...CALM_TEXT.supporting, maxWidth: scale(600), color: CALM_COLORS.TEXT_DIM },
   heroArt: { width: '100%', maxWidth: scale(1120) },
   artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(56) },
   artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(160) },
   artEdge: { position: 'absolute', top: 0, bottom: 0, right: 0, width: scale(120) },
   meta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left', marginBottom: scale(16) },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
-  heroTitle: { fontSize: scale(120), lineHeight: scale(134), marginBottom: scale(8) },
+  heroTitle: { fontSize: scale(184), lineHeight: scale(210), marginBottom: scale(8) },
   longTitle: { fontSize: scale(64), lineHeight: scale(76) },
-  synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
+  synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left', maxWidth: scale(620) },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, textAlign: 'left' },
   infoAnchor: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', marginTop: scale(12) },

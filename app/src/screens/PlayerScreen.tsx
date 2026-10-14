@@ -35,6 +35,7 @@ import {
   View,
 } from 'react-native';
 import CalmCard from '../calmframes/CalmCard';
+import { CoastalAppearance } from '../calmframes/CoastalAppearance';
 import { CALM_COLORS } from '../calmframes/calmStyles';
 import { concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
 import {
@@ -648,6 +649,7 @@ const PlayerScreen = ({
   };
 
   return (
+    <CoastalAppearance.Provider value={false}>
     <SafeAreaView style={styles.playerContainer} testID="safe-area-view">
       <View
         style={[
@@ -747,6 +749,7 @@ const PlayerScreen = ({
         {isVideoError && !returningHome && <ErrorView navigateBack={leavePlayer} />}
       </View>
     </SafeAreaView>
+    </CoastalAppearance.Provider>
   );
 };
 

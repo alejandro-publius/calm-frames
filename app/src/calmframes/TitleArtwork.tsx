@@ -5,7 +5,7 @@ import { isBundledBenignStory } from './benignStory';
 import { OFFLINE_TITLE_ID } from './offlineTitle';
 import { concernsPackagedLibrary } from './packagedLibrary';
 import { CatalogTitle, CheckedTitle } from './titleStatus';
-import { CALM_COLORS, scale } from './calmStyles';
+import { COASTAL_COLORS as CALM_COLORS, scale } from './calmStyles';
 import { shelfLabel, shelfPoster } from './shelf';
 
 interface TitlePresentation {

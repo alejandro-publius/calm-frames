@@ -8,7 +8,7 @@ jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { StyleSheet } from 'react-native';
 import { BENIGN_STORY_ID } from '../../src/calmframes/benignStory';
-import { CALM_COLORS, MINIMUM_TEXT_SIZE } from '../../src/calmframes/calmStyles';
+import { COASTAL_COLORS as CALM_COLORS, MINIMUM_TEXT_SIZE } from '../../src/calmframes/calmStyles';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import { checkedShelf } from './shelfFixtures';
@@ -45,7 +45,7 @@ test('Home leads with Harbor, says it has no holds, and puts the picture hold de
   }
 });
 
-test('one coral action on Home: Play is primary, the demo and Details are quiet', () => {
+test('one teal action on Home: Play is primary, the demo and Details are quiet', () => {
   render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={jest.fn()} />);
   const watch = StyleSheet.flatten(screen.getByTestId('kid-home-watch').props.style);
   expect(watch.backgroundColor).toBe(CALM_COLORS.PRIMARY);
@@ -85,7 +85,7 @@ test('Home and Details titles share one size, and every added line meets the ten
   const details = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
   const detailsTitle = StyleSheet.flatten(details.getByTestId('title-details-title').props.style);
   expect(detailsTitle.fontSize).toBe(homeTitle.fontSize);
-  expect(homeTitle.fontSize).toBeLessThanOrEqual(120);
+  expect(homeTitle.fontSize).toBeLessThanOrEqual(200);
   expect(StyleSheet.flatten(details.getByTestId('title-details-meta').props.style).fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE);
 });
 

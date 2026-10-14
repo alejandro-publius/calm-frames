@@ -12,7 +12,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import HomeHarborScene from './HomeHarborScene';
-import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
+import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import StatusNotice from './StatusNotice';
 import { useUiCapture } from './uiCapture';
 import { HOUSEHOLD_ERROR_FRAME, HOUSEHOLD_LOADING_FRAME } from './uiFrames';

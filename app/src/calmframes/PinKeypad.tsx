@@ -32,7 +32,7 @@ import TouchableOpacity from './CalmTouchable';
 import { StyleSheet, Text, View } from 'react-native';
 import {
   CALM_CONTROL,
-  CALM_COLORS,
+  COASTAL_COLORS as CALM_COLORS,
   CALM_SPACE,
   CALM_TEXT,
   FOCUS_RING_WIDTH,

@@ -2,6 +2,7 @@ import React from 'react';
 import TouchableOpacity from './CalmTouchable';
 import {
   BackHandler,
+  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,7 +18,7 @@ import { buildCoverIntervals } from './coverSchedule';
 import { coverOptionsFor, DEFAULT_SETTINGS } from './household';
 import {
   CALM_CONTROL,
-  CALM_COLORS,
+  COASTAL_COLORS as CALM_COLORS,
   CALM_SPACE,
   CALM_TEXT,
   FOCUS_RING_WIDTH,
@@ -203,9 +204,9 @@ const KidHomeScreen = ({
       <CalmPageHeader onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
-          {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" hasTVPreferredFocus={returnTo === 'learn'}
+          {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet compact testID={`${testID}-learn`} label="Help" accessibilityLabel="Help: How it works" hasTVPreferredFocus={returnTo === 'learn'}
             disabled={saving} onPress={() => { setChoosingProfile(false); setShowIntroduction(true); }} /></View> : null}
-          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parental controls" accessibilityLabel="Parental controls, needs a PIN" hasTVPreferredFocus={empty && !saving} onPress={onOpenParentArea} /></View> : null}
+          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Settings" accessibilityLabel="Settings: Parental controls, needs a PIN" hasTVPreferredFocus={empty && !saving} onPress={onOpenParentArea} /></View> : null}
       </CalmPageHeader>
       {choosingProfile && picking && profiles && onChooseProfile ? (
         <ProfilePicker disabled={saving || undefined} testID={`${testID}-profiles`} title={PROFILES_KID_TITLE}
@@ -232,22 +233,30 @@ const KidHomeScreen = ({
                 <Text accessibilityRole="header" testID={`${testID}-title`} style={[styles.featureTitle, feature.name.length > 18 ? styles.longFeatureTitle : null]}>{feature.name}</Text>
                 {featuredHasNoHolds ? <Text style={styles.description} testID={`${testID}-meta`}>{featuredMeta}</Text> : feature.description ? <Text style={styles.description}>{feature.description}</Text> : null}
                 <View style={styles.actions}>
-                  <CalmButton primary sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
+                  <CalmButton primary playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
                   <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
               </View>
-              <View style={styles.purpose}>
-                <Text style={styles.purposeCopy}>Picture holds on supported videos. Audio continues.</Text>
-                {demo && demo !== featured ? <>
-                  <View style={styles.learn}><CalmButton quiet testID={`${testID}-demo`} label="Try picture holds"
-                    accessibilityLabel={demoLine ? `Try picture holds. ${demoLine}` : 'Try picture holds'}
-                    hasTVPreferredFocus={returnTo === 'demo'} disabled={saving}
-                    onFocus={() => setFocusedId('demo')} onBlur={() => setFocusedId(null)}
-                    onPress={() => { onLaunchControl?.('demo'); onOpen(demo); }} /></View>
-                  {demoLine ? <Text style={styles.purposeCopy} testID={`${testID}-demo-meta`}>{demoLine}</Text> : null}
-                </> : null}
-              </View>
+              <Text style={styles.purposeCopy}>Picture holds on supported videos. Audio continues.</Text>
+              {demo && demo !== featured ? <TouchableOpacity surfaceKind="tertiary" testID={`${testID}-demo`}
+                accessibilityRole="button" accessibilityLabel={demoLine ? `Try picture holds. ${demoLine}` : 'Try picture holds'}
+                accessibilityState={{ disabled: saving }} hasTVPreferredFocus={returnTo === 'demo'} disabled={saving}
+                onFocus={() => setFocusedId('demo')} onBlur={() => setFocusedId(null)}
+                onPress={() => {
+                  if (!saving) {
+                    onLaunchControl?.('demo');
+                    onOpen(demo);
+                    try { feedback.confirm(); } catch { /* Navigation already succeeded. */ }
+                  }
+                }}
+                style={[styles.purpose, focusedId === 'demo' ? styles.posterFocused : null]}>
+                <Image source={require('../../assets/image/tv/coastal-zen.png')} style={styles.demoArt} accessible={false} fadeDuration={0} />
+                <View style={styles.demoCopy}>
+                  <Text style={[styles.demoTitle, focusedId === 'demo' ? styles.focusedLabel : null]}>Try picture holds</Text>
+                  {demoLine ? <Text style={styles.demoMeta} testID={`${testID}-demo-meta`}>{demoLine}</Text> : null}
+                </View>
+              </TouchableOpacity> : null}
             </View> : null}
             {otherStories.length > 0 ? <View style={styles.sectionHeading}><Text style={styles.section}>More to watch</Text></View> : null}
             <View style={styles.grid}>
@@ -298,15 +307,19 @@ const styles = StyleSheet.create({
   navigationLink: { alignSelf: 'center' },
   libraryScroll: { flex: 1 },
   scrollContent: { paddingBottom: scale(12) },
-  hero: { width: '100%', minHeight: scale(780), flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', paddingBottom: scale(40) },
-  heroCopy: { width: scale(1000), paddingTop: scale(290), alignItems: 'flex-start' },
+  hero: { width: '100%', minHeight: scale(810), alignItems: 'flex-start', paddingBottom: scale(36) },
+  heroCopy: { width: scale(760), paddingTop: scale(70), alignItems: 'flex-start' },
   // The lantern: the one place that says what a hold is and where to see one.
-  purpose: { width: scale(600), paddingLeft: scale(36), gap: scale(12) },
-  purposeCopy: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
+  purpose: { width: scale(600), marginTop: scale(54), flexDirection: 'row', alignItems: 'center', gap: scale(28), padding: scale(12), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: 'transparent', borderRadius: scale(24) },
+  demoArt: { width: scale(104), height: scale(104), borderRadius: scale(52) },
+  demoCopy: { flex: 1, gap: scale(4) },
+  demoTitle: { ...CALM_TEXT.section, fontSize: scale(34), lineHeight: scale(44), color: CALM_COLORS.TEXT },
+  demoMeta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
+  purposeCopy: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, width: scale(570), marginTop: scale(30) },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12) },
-  featureTitle: { ...CALM_TEXT.screen, fontSize: scale(120), lineHeight: scale(134), color: CALM_COLORS.TEXT, marginBottom: scale(12) },
+  featureTitle: { ...CALM_TEXT.screen, fontSize: scale(184), lineHeight: scale(210), color: CALM_COLORS.TEXT, marginBottom: scale(12) },
   longFeatureTitle: { fontSize: scale(64), lineHeight: scale(76) },
-  description: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, maxWidth: scale(900), marginBottom: scale(32) },
+  description: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, maxWidth: scale(600), marginBottom: scale(36) },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   learn: { flexDirection: 'row', marginTop: scale(8) },
   sectionHeading: { alignItems: 'flex-start', marginBottom: scale(24) },

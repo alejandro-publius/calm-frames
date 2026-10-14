@@ -2,7 +2,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
-import { CALM_COLORS, CALM_TEXT, scale } from './calmStyles';
+import { COASTAL_COLORS as CALM_COLORS, CALM_TEXT, scale } from './calmStyles';
 
 export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDemoDetails, disabled = false }: { onDemoDetails?: () => void; onPlaybackCheck?: () => void; onStart?: () => void; disabled?: boolean }) {
   return <View testID="picture-hold-introduction" style={styles.content}>

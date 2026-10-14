@@ -1,7 +1,7 @@
 import '@testing-library/jest-native/extend-expect';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
-import { CALM_COLORS } from '../../src/calmframes/calmStyles';
+import { COASTAL_COLORS as CALM_COLORS } from '../../src/calmframes/calmStyles';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';

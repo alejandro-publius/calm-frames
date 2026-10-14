@@ -1,5 +1,17 @@
 import { scaleUxToDp } from '../utils/pixelUtils';
 
+/** Approved ivory coast menu palette. Playback keeps CALM_COLORS below. */
+export const COASTAL_COLORS = {
+  BACKGROUND: '#F5EBDD', SURFACE: '#E9DFD0', SURFACE_FOCUSED: '#DED0BD',
+  BORDER: '#8B8173', FOCUS_RING: '#193B3C', PRIMARY: '#193B3C',
+  TEXT_DISABLED: '#60645F', ACCENT_DARK: '#98492D', TEXT: '#193234',
+  TEXT_DIM: '#40514D', INK: '#193234', VERIFIED: '#24584D',
+  PENDING: '#4E5B68', FAILED: '#873F2C', COVER: '#000000',
+} as const;
+
+/** Terracotta boundary against both the ivory page and focused deep-teal primary. */
+export const COASTAL_PRIMARY_FOCUS = '#C16C45';
+
 /** Approved dusk coast palette; shared across application screens. Contrast is checked against rendered text and focus. */
 export const CALM_COLORS = {
   /** Every Calm Frames screen sits on this. */

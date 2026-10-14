@@ -1,10 +1,12 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render as renderNative, fireEvent } from '@testing-library/react-native';
 import { StyleSheet } from 'react-native';
 import CalmButton from '../../src/calmframes/CalmButton';
 import PinKeypad from '../../src/calmframes/PinKeypad';
 import { CONTROL_MATERIAL, CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
 import { contrastRatio } from '../../src/calmframes/uiContrast';
+import { CoastalAppearance } from '../../src/calmframes/CoastalAppearance';
+const render = (element: React.ReactElement) => renderNative(element, { wrapper: ({ children }: { children: React.ReactNode }) => <CoastalAppearance.Provider value={false}>{children}</CoastalAppearance.Provider> });
 const study = (children: React.ReactNode) => <CalmControlAppearance.Provider value>{children}</CalmControlAppearance.Provider>;
 
 test('material is opt-in; the production surface and geometry remain intact', () => {

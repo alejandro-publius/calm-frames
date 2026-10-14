@@ -12,7 +12,7 @@
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
+import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { badgeLabel, TitleStatus } from './titleStatus';
 
 export interface ShieldBadgeProps {

@@ -1,7 +1,7 @@
 import '@testing-library/jest-native/extend-expect';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
-import { CALM_COLORS } from '../../src/calmframes/calmStyles';
+import { COASTAL_COLORS as CALM_COLORS } from '../../src/calmframes/calmStyles';
 import { noticeForTitle } from '../../src/calmframes/copy';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import { checkedShelf } from './shelfFixtures';

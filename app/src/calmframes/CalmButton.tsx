@@ -18,11 +18,14 @@
  */
 
 import React from 'react';
+import { CoastalAppearance } from './CoastalAppearance';
 import TouchableOpacity from './CalmTouchable';
 import { StyleSheet, Text } from 'react-native';
 import {
   CALM_CONTROL,
   CALM_COLORS,
+  COASTAL_COLORS,
+  COASTAL_PRIMARY_FOCUS,
   CALM_SPACE,
   CALM_TEXT,
   FOCUS_RING_WIDTH,
@@ -33,6 +36,7 @@ import { useInterfaceFeedback } from './useInterfaceSound';
 
 export interface CalmButtonProps {
   label: string;
+  playIcon?: boolean;
   primary?: boolean;
   /** Quieter navigation chrome; focus keeps the same visible ring and underline. */
   quiet?: boolean;
@@ -55,6 +59,7 @@ export interface CalmButtonProps {
 
 const CalmButton = ({
   label,
+  playIcon = false,
   primary = false,
   quiet = false,
   tertiary = false,
@@ -68,6 +73,8 @@ const CalmButton = ({
   hasTVPreferredFocus = false,
   testID = 'calm-button',
 }: CalmButtonProps) => {
+  const coastal = React.useContext(CoastalAppearance);
+  const styles = coastal ? coastalStyles : darkStyles;
   const [pressed, setPressed] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
   const feedback = useInterfaceFeedback();
@@ -75,7 +82,7 @@ const CalmButton = ({
   return (
     <TouchableOpacity
       testID={testID}
-      surfaceKind={primary ? 'primary' : tertiary || (quiet && compact) ? 'tertiary' : 'secondary'}
+      surfaceKind={primary ? 'primary' : tertiary || (quiet && (compact || coastal)) ? 'tertiary' : 'secondary'}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ disabled }}
@@ -101,6 +108,7 @@ const CalmButton = ({
         disabled ? styles.buttonDisabled : null,
         focused && !disabled ? (primary ? styles.primaryFocused : styles.buttonFocused) : null,
       ]}>
+      {playIcon ? <Text accessible={false} importantForAccessibility="no" style={[styles.label, styles.playIcon, styles.primaryLabel]}>▶</Text> : null}
       <Text
         testID={`${testID}-label`}
         style={[styles.label, compact ? styles.compactLabel : null, focused && !disabled ? styles.focusedLabel : null, primary && !disabled ? ((focused || pressed) ? styles.focusedPrimaryLabel : styles.primaryLabel) : null, disabled ? styles.labelDisabled : null, study && primary && !disabled ? styles.primaryLabel : null]}>
@@ -110,47 +118,52 @@ const CalmButton = ({
   );
 };
 
-const styles = StyleSheet.create({
+const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = false) => StyleSheet.create({
   button: {
     alignSelf: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
     minHeight: scale(CALM_CONTROL.MIN_HEIGHT),
     justifyContent: 'center',
     paddingVertical: scale(15),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
     borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
-    borderColor: CALM_COLORS.SURFACE,
-    backgroundColor: CALM_COLORS.SURFACE,
+    borderColor: colors.SURFACE,
+    backgroundColor: colors.SURFACE,
   },
   buttonFocused: {
-    borderColor: CALM_COLORS.FOCUS_RING,
-    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+    borderColor: colors.FOCUS_RING,
+    backgroundColor: colors.SURFACE_FOCUSED,
   },
+  playIcon: { marginRight: scale(20), fontSize: scale(30) },
   quiet: {
     paddingVertical: scale(CALM_SPACE.TIGHT),
     paddingHorizontal: scale(CALM_SPACE.ROW),
-    borderColor: CALM_COLORS.BACKGROUND,
-    backgroundColor: CALM_COLORS.BACKGROUND,
+    borderColor: coastal ? 'transparent' : colors.BACKGROUND,
+    backgroundColor: coastal ? 'transparent' : colors.BACKGROUND,
   },
   tertiary: { borderColor: 'transparent', backgroundColor: 'transparent' },
   // Not faded: the same background, a quieter edge, and the word for it in the
   // label the caller passes.
   buttonDisabled: {
-    borderColor: CALM_COLORS.SURFACE_FOCUSED,
+    borderColor: colors.SURFACE_FOCUSED,
   },
   label: {
-    color: CALM_COLORS.TEXT,
+    color: colors.TEXT,
     ...CALM_TEXT.control,
   },
   compactLabel: { ...CALM_TEXT.supporting },
   focusedLabel: { textDecorationLine: 'underline' },
-  primary: { backgroundColor: CALM_COLORS.PRIMARY, borderColor: CALM_COLORS.PRIMARY },
-  primaryFocused: { backgroundColor: CALM_COLORS.INK, borderColor: CALM_COLORS.FOCUS_RING },
-  focusedPrimaryLabel: { color: CALM_COLORS.TEXT },
-  primaryLabel: { color: CALM_COLORS.INK },
+  primary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, ...(coastal ? { borderRadius: scale(64), minWidth: scale(280), paddingHorizontal: scale(48), minHeight: scale(108) } : {}) },
+  primaryFocused: { backgroundColor: colors.INK, borderColor: coastal ? COASTAL_PRIMARY_FOCUS : colors.FOCUS_RING },
+  focusedPrimaryLabel: { color: coastal ? colors.BACKGROUND : colors.TEXT },
+  primaryLabel: { color: coastal ? colors.BACKGROUND : colors.INK },
   labelDisabled: {
-    color: CALM_COLORS.TEXT_DISABLED,
+    color: colors.TEXT_DISABLED,
   },
 });
 
+const darkStyles = makeStyles(CALM_COLORS);
+const coastalStyles = makeStyles(COASTAL_COLORS, true);
 export default CalmButton;
