@@ -13,11 +13,11 @@ afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); jest.restoreAllMo
 test.each(['none', 'countdown'] as const)('seekbar yields initial and restored preferred focus to Skip during %s', kind => {
   jest.spyOn(Platform, 'isTV', 'get').mockReturnValue(true);
   const view = startPlayer(kind);
-  expect(view.getByTestId('kui-seekbar').props.hasTVPreferredFocus).toBe(kind !== 'countdown');
+  expect(view.getByTestId('seekbar-focus-guide').props.hasTVPreferredFocus).toBe(kind !== 'countdown');
   act(() => jest.advanceTimersByTime(6000));
   expect(view.queryByTestId('kui-seekbar')).toBeNull();
   remote('down');
-  expect(view.getByTestId('kui-seekbar').props.hasTVPreferredFocus).toBe(kind !== 'countdown');
+  expect(view.getByTestId('seekbar-focus-guide').props.hasTVPreferredFocus).toBe(kind !== 'countdown');
   if (kind === 'countdown') {
     expect(view.getByTestId('calm-card-skip').props.hasTVPreferredFocus).toBe(true);
   }

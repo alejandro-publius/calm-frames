@@ -366,11 +366,11 @@ const Seekbar = ({
           </Text>
         </View>
         <TVFocusGuideView
+          testID="seekbar-focus-guide"
           hasTVPreferredFocus={hasTVPreferredFocus}
           autoFocus
           style={styles.seekbar}>
           <KUICSeekbar
-            hasTVPreferredFocus={hasTVPreferredFocus}
             ref={seekBarRef}
             currentValue={progress}
             totalValue={totalValue}
