@@ -1,0 +1,40 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false test/calmframes/bufferingOpening.test.tsx --testNamePattern=verified initial opening
+
+  console.debug
+    [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:574:15)
+
+ FAIL  test/calmframes/bufferingOpening.test.tsx
+  ✕ verified initial opening suppresses hidden Loading, then a real playback stall announces it (449 ms)
+  ○ skipped a stall during a signed hold preserves its still and card
+  ○ skipped checking card owns feedback without a duplicate announcement
+  ○ skipped error immediately removes a just-shown status and cancels its timer
+  ○ skipped returning shell cancels a pending status before it can announce
+  ○ skipped countdown Skip stays usable with the loading plate visible
+
+  ● verified initial opening suppresses hidden Loading, then a real playback stall announces it
+
+    expect(received).toBeNull()
+
+    Received: {"_fiber": {"_debugHookTypes": null, "_debugInfo": null, "_debugNeedsRemount": false, "_debugOwner": [FiberNode], "_debugStack": [Error: react-stack-top-frame], "_debugTask": null, "actualDuration": 0, "actualStartTime": 1791963285481, "alternate": null, "child": [FiberNode], "childLanes": 0, "deletions": null, "dependencies": null, "elementType": "View", "flags": 0, "index": 0, "key": null, "lanes": 0, "memoizedProps": [Object], "memoizedState": null, "mode": 3, "pendingProps": [Object], "ref": null, "refCleanup": null, "return": [FiberNode], "selfBaseDuration": 0, "sibling": null, "stateNode": [Object], "subtreeFlags": 1, "tag": 5, "treeBaseDuration": 0, "type": "View", "updateQueue": null}}
+
+      22 |   advance(REVEAL_DELAY_MS * 2);
+      23 |   expect(view.getByTestId('player-home-opening')).toBeTruthy();
+    > 24 |   expect(view.queryByTestId('buffering-status')).toBeNull();
+         |                                                  ^
+      25 |   expect(spoken).not.toHaveBeenCalledWith('Loading');
+      26 |   mockMedia.getVideoPlaybackQuality = () => ({ totalVideoFrames: 2, droppedVideoFrames: 0 });
+      27 |   advance(100);
+
+      at Object.toBeNull (test/calmframes/bufferingOpening.test.tsx:24:50)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 5 skipped, 6 total
+Snapshots:   0 total
+Time:        1.072 s
+Ran all test suites matching /test\/calmframes\/bufferingOpening.test.tsx/i with tests matching "verified initial opening".

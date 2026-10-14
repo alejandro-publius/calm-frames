@@ -1,0 +1,20 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false test/calmframes/bufferingOpening.test.tsx test/components/BufferingWindow.test.tsx test/calmframes/uiCapture.test.tsx
+
+ PASS  test/calmframes/bufferingOpening.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:574:15)
+
+ PASS  test/calmframes/uiCapture.test.tsx
+ PASS  test/components/BufferingWindow.test.tsx
+
+Test Suites: 3 passed, 3 total
+Tests:       63 passed, 63 total
+Snapshots:   1 passed, 1 total
+Time:        1.763 s, estimated 3 s
+Ran all test suites matching /test\/calmframes\/bufferingOpening.test.tsx|test\/components\/BufferingWindow.test.tsx|test\/calmframes\/uiCapture.test.tsx/i.

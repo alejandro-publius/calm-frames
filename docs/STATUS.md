@@ -4,6 +4,19 @@ Updated Oct 14, 2026.
 
 ## 0. Where things stand
 
+### Oct 14: loading integration complete, native access still blocked
+
+Source `cce5f22` integrates Claude's reviewed loading component with suppression
+during the opening/return shell, errors and blocked verification. Playback
+stalls use a static plate without dimming. The final-source app suite passes
+1254 tests, with four skipped and all 57 snapshots passing; typecheck and
+focused loading lint pass. The early bootstrap retains one existing lint
+warning unrelated to this change. A separate aarch64 Debug package and exact
+receipt are in `results/loading-integration-2026-10-14/receipt.json`.
+The Mac lock was not retried or bypassed. Native timing and VoiceView await
+manual Mac unlock and the prepared single-session demo path.
+
+
 ### Oct 14: quiet integration review
 
 Source `2d95206` fixes destination-specific Back wording and the home/loading

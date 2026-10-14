@@ -1,0 +1,76 @@
+{
+  "status": "Compatible Claude loading component integrated; final-source full app suite passed and package built. Native verification remains blocked by locked Mac.",
+  "branch": "codex/design-integration-2026-10-14",
+  "source_commit": "cce5f22ccdc07fb5c9022d7ed9d0963b9df98a5b",
+  "app_inputs_committed": true,
+  "integration_commit": "b093e875dd22074d4db72ab82d1d89c76ffbf772",
+  "claude_source_commit": "fa766f324085b8dbf18a3f99ecbe0def8d241205",
+  "package": {
+    "path": "/Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-home/build/release/design-loading-integrated-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "target": "aarch64 Debug",
+    "bytes": 21578634,
+    "sha256": "9c7381f7e3033eb5e57cd6b47dca556ca93a969a595612c4314c1b3daf753627"
+  },
+  "integration": [
+    "Copied only the reviewed BufferingWindow component and tests from the dedicated Claude branch, then adapted the player integration. Component bytes match fa766f3.",
+    "Opening/return shells, errors and blocked verification unmount the loading component, cancelling delayed status and announcements.",
+    "After playback starts, ordinary buffering uses a static plate after one second, retained at least half a second, without dimming, movement, focus or press interception.",
+    "Checking card suppresses duplicate Loading words. Signed covers, Skip, error Back and media timing remain independent.",
+    "Added the loading plate and a separate early-bootstrap frame to the solid-surface inventory."
+  ],
+  "proof": {
+    "focused_tests_passed": 63,
+    "hidden_status_mutation": "Removing showOpeningShell suppression made the regression test fail; source restored byte-for-byte.",
+    "initial_integrated_full_run": {
+      "source": "b093e875dd22074d4db72ab82d1d89c76ffbf772",
+      "passed": 1253,
+      "failed": 1,
+      "failure": "Bootstrap wave reused the newer household loading frame description."
+    },
+    "final_full_run": {
+      "source": "cce5f22ccdc07fb5c9022d7ed9d0963b9df98a5b",
+      "runs_on_this_source": 1,
+      "suites_passed": 121,
+      "suites_skipped": 1,
+      "tests_passed": 1254,
+      "tests_failed": 0,
+      "tests_skipped": 4,
+      "snapshots_passed": 57,
+      "command": "npm --prefix app test -- --runInBand --coverage=false --watchman=false"
+    },
+    "typecheck": "passed",
+    "targeted_loading_lint": "passed with zero warnings",
+    "bootstrap_lint": "zero errors; one pre-existing no-void warning at HarborOpening.tsx:82 retained, unrelated to changed inventory import",
+    "design_checks": "21 passed",
+    "ui_flashmap": "Existing captured 36-state solid-surface timeline passed WCAG and broadcast profiles. The new loading plate is separately measured by the rendered-tree unit test; this timeline does not yet exercise its timed appearance. Neither is native pixel or motion proof."
+  },
+  "test_coverage": [
+    "Verified initial opening with zero decoded frames stays silent, even after reveal delay.",
+    "After the opening shell leaves, real buffering reveals and announces Loading.",
+    "Signed hold still/card retained; countdown Skip remains callable.",
+    "Errors remove an already-visible status immediately, before minimum display delay.",
+    "Returning shell cancels pending Loading; checking card has no duplicate Loading."
+  ],
+  "native_blocker": {
+    "action": "cua.listApps() in preceding review pass",
+    "reason": "Mac locked; automatic unlock failed.",
+    "status": "blocked before native preview; no retry, install, launch, permission prompt or workaround in this pass",
+    "required_user_action": "Manually unlock the Mac before native preview resumes."
+  },
+  "preserved": [
+    "Original 20-second Harbor media, VTT, maps, verification and guard timing.",
+    "Household persistence and PIN.",
+    "All earlier package copies, recordings and worker worktrees.",
+    "Disabled picture-break prototype, unrelated Claude commits and dependencies excluded.",
+    "Main/shared branch untouched; no deployment or publication."
+  ],
+  "previews": {
+    "unchanged_by_loading_integration": true,
+    "directory": "results/design-integration-review-2026-10-14",
+    "evidence_commit": "88dbec9812fa3636037cdeeff62e7fca001a323a",
+    "kind": "Browser host-tree renders; not native playback evidence."
+  },
+  "demo_plan": "demo-plan.json",
+  "native_task": "codex://threads/01a138bb-a422-7746-9293-caf676f250f3",
+  "build_command": "source /Users/alexvintera/vega/env; PATH=$PWD/.logs/home-introduction-2026-10-14/build-bin:/Users/alexvintera/.local/share/fnm/node-versions/v22.23.2/installation/bin:$PATH JAVA_HOME=/opt/homebrew/opt/openjdk@21 RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag design-loading-integrated-2026-10-14"
+}
