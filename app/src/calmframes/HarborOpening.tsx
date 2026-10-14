@@ -5,7 +5,7 @@ import React from 'react';
 import { AccessibilityInfo, Animated, BackHandler, Easing, Image, StyleSheet, Text, View } from 'react-native';
 import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { useUiCapture } from './uiCapture';
-import { HOUSEHOLD_LOADING_FRAME } from './uiFrames';
+import { HARBOR_BOOTSTRAP_FRAME } from './uiFrames';
 
 export const HARBOR_OPENING_MS = 1400;
 export const HARBOR_WATER_DRIFT = { x: 16, y: -6 } as const;
@@ -22,7 +22,7 @@ export default function HarborOpening({
   onFinish?: () => void;
   testID?: string;
 }) {
-  useUiCapture(HOUSEHOLD_LOADING_FRAME, 'harbor wave opening');
+  useUiCapture(HARBOR_BOOTSTRAP_FRAME, 'harbor wave opening');
   const manager = useKeplerAppStateManager();
   const progress = React.useRef(new Animated.Value(0)).current;
   const finish = React.useRef(onFinish);

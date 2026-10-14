@@ -2483,3 +2483,8 @@ suppression makes the regression test fail. The loading plate is included
 in the declared solid-surface inventory; native pixels and VoiceView remain
 unobserved while the Mac is locked. No disabled picture-break prototype,
 dependency cleanup, guard changes or unrelated Claude commits are integrated.
+
+The first complete integrated run found one remaining inventory mismatch:
+the early bootstrap wave and the later illustrated household loader shared
+a frame name despite different solid surfaces. Give the bootstrap its own
+measured entry. No startup timing, artwork or loading behavior changes.

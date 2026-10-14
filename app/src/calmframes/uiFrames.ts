@@ -16,6 +16,11 @@ import { CALM_COLORS } from './calmStyles';
 import { CardKind } from './cards';
 import { UiFrame } from './uiCapture';
 
+/** Early bootstrap wave, before navigation and household loading are ready. */
+export const HARBOR_BOOTSTRAP_FRAME: UiFrame = {
+  screen: 'harbor-bootstrap', background: CALM_COLORS.BACKGROUND, surfaces: [],
+};
+
 export const HOUSEHOLD_LOADING_FRAME: UiFrame = {
   screen: 'household-loading',
   background: CALM_COLORS.BACKGROUND,
@@ -222,6 +227,7 @@ export function playerFrame(
 
 /** Every frame the app can show, for the flashmap run. */
 export const ALL_UI_FRAMES: UiFrame[] = [
+  HARBOR_BOOTSTRAP_FRAME,
   PLAYER_BUFFERING_FRAME,
   HOUSEHOLD_LOADING_FRAME,
   HOUSEHOLD_ERROR_FRAME,

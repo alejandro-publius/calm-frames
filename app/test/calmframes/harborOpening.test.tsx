@@ -4,7 +4,7 @@ import React from 'react';
 import { AccessibilityInfo, Animated, BackHandler } from 'react-native';
 import HarborOpening, { HARBOR_OPENING_MS } from '../../src/calmframes/HarborOpening';
 import { frameFromTree, RenderedNode } from '../../src/calmframes/uiCapture';
-import { HOUSEHOLD_LOADING_FRAME } from '../../src/calmframes/uiFrames';
+import { HARBOR_BOOTSTRAP_FRAME } from '../../src/calmframes/uiFrames';
 import KidModeScreen from '../../src/screens/KidModeScreen';
 import { newFamily } from '../../src/calmframes/profiles';
 import { emptyPinGate, setPin } from '../../src/calmframes/parentGate';
@@ -60,7 +60,7 @@ describe('waves into the library', () => {
 
   it('shows the real wave palette during loading without a timer or motion query', () => {
     render(<HarborOpening />);
-    expect(frameFromTree('household-loading', screen.toJSON() as unknown as RenderedNode)).toEqual(HOUSEHOLD_LOADING_FRAME);
+    expect(frameFromTree('harbor-bootstrap', screen.toJSON() as unknown as RenderedNode)).toEqual(HARBOR_BOOTSTRAP_FRAME);
     expect(screen.getByRole('progressbar').props.accessibilityLabel).toContain('Opening your library');
     expect(query).not.toHaveBeenCalled();
     expect(timing).not.toHaveBeenCalled();
