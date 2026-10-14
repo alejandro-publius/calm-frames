@@ -1,0 +1,16 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false controlSurface.test
+
+ PASS  test/calmframes/controlSurface.test.tsx
+  ✓ material is opt-in; the production surface and geometry remain intact (59 ms)
+  ✓ focus, press and release remain stationary, readable and call the real action once (23 ms)
+  ✓ disabled controls and saving keypad retain their existing activation and focus rules (10 ms)
+  ✓ tertiary has no resting plate and keeps its full target (2 ms)
+  ✓ gradient extremes preserve text contrast even when translucent teal is composited over white (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        0.877 s, estimated 1 s
+Ran all test suites matching /controlSurface.test/i.

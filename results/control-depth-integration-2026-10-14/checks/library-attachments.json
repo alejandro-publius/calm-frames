@@ -1,0 +1,82 @@
+[
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/calm-frames-before-after.png",
+    "file_id": "file_00000000bcbc81f5b59906403773494b",
+    "library_file_id": "libfile_750760a0d6f081919a9f2be215ac331c",
+    "file_name": "calm-frames-before-after.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 563633
+  },
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/home-before-after.png",
+    "file_id": "file_00000000434c81f586b26a5991ebb23f",
+    "library_file_id": "libfile_2777b4ec3b8081918c1a97bc22c16210",
+    "file_name": "home-before-after.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 798592
+  },
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/details-before-after.png",
+    "file_id": "file_000000004a2c81fd93f9d127c1ec291c",
+    "library_file_id": "libfile_a190cc8b476c81918a9a6a52adadb26a",
+    "file_name": "details-before-after.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 853565
+  },
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/settings-before-after.png",
+    "file_id": "file_000000003d3082108e101c631bb5ac86",
+    "library_file_id": "libfile_d59f75fc1f6c81918c1c88c63b0c6978",
+    "file_name": "settings-before-after.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 313343
+  }
+]
