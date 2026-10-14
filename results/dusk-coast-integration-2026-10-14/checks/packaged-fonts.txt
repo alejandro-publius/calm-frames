@@ -1,0 +1,5 @@
+assets/fonts/LICENSE-Fraunces
+assets/fonts/LICENSE-SourceSans3
+assets/fonts/CalmDisplaySemibold.ttf
+assets/fonts/CalmSansRegular.ttf
+assets/fonts/CalmSansSemibold.ttf
