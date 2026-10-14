@@ -1,8 +1,25 @@
 # Status
 
-Updated Oct 13, 2026.
+Updated Oct 14, 2026.
 
 ## 0. Where things stand
+
+### Oct 14: integrated home purpose, optional demo and playback opening
+
+The isolated `codex/design-integration-2026-10-14` candidate combines the checked
+Skip/caption fixes with the original illustrated harbor layout, concise purpose
+copy, direct Watch now and Try the demo, and optional How it works. Ambient
+scene-description captions stay Off by default. The extra timed arrival is gone.
+A still home shell remains through first-frame readiness and teardown; signed
+hold boundaries never crossfade. Only optional home ripples move. The seekbar
+memo fix now responds when preferred focus changes during a countdown.
+
+147 focused tests across 12 suites, typecheck, targeted lint and 21 design checks
+passed. Browser previews come from actual component host trees. Native UI checks
+are deliberately paused at Alex's request; this candidate is not native-verified.
+The PIN, household data, media and signed maps are untouched. Claude's disabled
+picture-break prototype is not included; BufferingWindow remains their lane.
+Evidence and package attribution: `results/home-introduction-2026-10-14/`.
 
 ### Oct 13: centered composition and the cinematic Harbor film
 

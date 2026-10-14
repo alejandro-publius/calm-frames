@@ -72,6 +72,7 @@ export function makeMedia() {
   const tracks: any = [{ id: 'english', label: 'English practice captions', language: 'en', kind: 'subtitles', mode: 'showing' }];
   tracks.getTrackById = (id: string) => tracks.find((t: any) => t.id === id);
   return {
+    readyState: 2, getVideoPlaybackQuality: () => ({ totalVideoFrames: 1, droppedVideoFrames: 0 }),
     currentTime: 6, duration: 20, currentSrc: 'fixture', paused: false, ended: false, textTracks: tracks,
     addEventListener: (type: string, fn: () => void) => { (listeners[type] ??= new Set()).add(fn); },
     removeEventListener: (type: string, fn: () => void) => listeners[type]?.delete(fn),
@@ -83,7 +84,7 @@ export function makeMedia() {
   };
 }
 export const interval = { startMs: 5000, endMs: 9000, causes: ['general'] };
-export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none'): ReturnType<typeof render> & { goBack: jest.Mock } {
+export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none', showHomeOpening = false): ReturnType<typeof render> & { goBack: jest.Mock } {
   mockMedia = makeMedia();
   mockMedia.currentTime = kind === 'countdown' ? 3 : 6;
   const raw = kind === 'none' ? NO_CARD : cardAt([interval] as never, mockMedia.currentTime * 1000);
@@ -93,7 +94,7 @@ export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none'): R
   if (kind === 'covering') mockGuard.coverImageUri = JSON.parse(title.maps!.wcag!).scene_holds.holds[0].image_data_uri;
   const goBack = jest.fn();
   const data = { ...title, title: 'Harbor', format: 'MP4', categories: [], channelID: '', posterUrl: '', description: '', mediaType: 'video', mediaSourceType: 'url', uhd: false, secure: false, rentAmount: '' };
-  const view = render(<PlayerScreen navigation={{ goBack } as never} route={{ params: { data, guarded: { sha256: title.sha256, maps: title.maps } } } as never} />);
+  const view = render(<PlayerScreen navigation={{ goBack } as never} route={{ params: { data, showHomeOpening, guarded: { sha256: title.sha256, maps: title.maps } } } as never} />);
   return { ...view, goBack };
 }
 export function remote(eventType: string) {

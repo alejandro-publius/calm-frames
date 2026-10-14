@@ -147,7 +147,7 @@ describe('waves into the library', () => {
     expect(removed).toHaveBeenCalledTimes(4);
   });
 
-  it('opens the actual shelf after arrival and does not replay after details', async () => {
+  it('opens the shelf as soon as storage is ready, without a timed arrival', async () => {
     const family = { ...newFamily(), interfaceMotionEnabled: true };
     const storage = {
       getItem: async () => JSON.stringify({ version: 1, family, gate: setPin(emptyPinGate(), '1357', 'arrival-test') }),
@@ -156,10 +156,6 @@ describe('waves into the library', () => {
     render(<KidModeScreen navigation={{ navigate: jest.fn() } as never} householdStorage={storage}
       catalog={[offlineTitle('file:///fixture.mp4')]}
       nowMs={() => Date.parse(JSON.parse(OFFLINE_MAP_JSON).created_utc) + 60_000} />);
-    await flush();
-    expect(screen.getByTestId('harbor-opening')).toBeTruthy();
-    expect(screen.queryByTestId('kid-mode-home')).toBeNull();
-    act(() => completeAnimation({ finished: true }));
     await flush();
     expect(screen.getByTestId('kid-mode-home')).toBeTruthy();
     expect(screen.queryByTestId('harbor-opening')).toBeNull();

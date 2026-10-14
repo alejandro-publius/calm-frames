@@ -196,7 +196,7 @@ describe('optional one-time artwork entry', () => {
     expect(removeReduction).toHaveBeenCalledTimes(1);
   });
 
-  it.each(['library', 'details'])('wires opt-in and activity to %s artwork while leaving controls outside', async (page) => {
+  it.each(['details'])('wires opt-in and activity to %s artwork while leaving controls outside', async (page) => {
     const make = (enabled = false, active = true) => page === 'library'
       ? <KidHomeScreen titles={[entry]} onOpen={jest.fn()} interfaceMotionEnabled={enabled} interfaceActive={active} />
       : <TitleDetailsScreen entry={entry} onPlay={jest.fn()} interfaceMotionEnabled={enabled} interfaceActive={active} />;

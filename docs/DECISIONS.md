@@ -2423,3 +2423,28 @@ build below and was not itself built or observed on the device in that session.
 - **Decision:** center the Harbor scene, short title, description and controls, with a bounded supporting column. **Why:** Alex found the text pushed toward the edges and the long demo title awkward. **Cost:** compact the library hero so all card labels remain above the fixed footer; retain the earlier Mac spacing fix's result. Browser measurements show both play controls and timelines centered at x=960 on a 1920 pixel canvas.
 - **Decision:** replace both playable geometric Harbor clips with a 20 second Blender animated illustration using the approved water and harbor plates. **Why:** Alex requested rippling water cutting to the bright sailboat and lighthouse. **Cost:** new source analysis, demo key/maps, production renditions, captions, ambience and prepared-library generation. All 68 demo production checks pass; the three retained library generations carry original reports. The ordinary story has no synthetic holds, and the practice version remains explicitly labelled.
 - **Decision:** preserve the newly pushed Mac reports and `06190c7` native receipt as history. **Why:** those observations concern the earlier layout and film and cannot establish the current source on Vega. **Cost:** the Mac must rebuild, observe and record this source before the final demo is called current. Current previews are browser approximations. No paid Claude call, AWS deployment or publication was performed here.
+
+## 2026-10-14: home explains the product without an onboarding gate
+
+The library remains the entry screen. A concise purpose line, direct Watch now
+and Try the demo actions, and optional How it works explain prepared-title
+picture holds. The original harbor SVG and zen mark remain presentation assets;
+signed media, maps, hold stills, guard timing and household storage are unchanged.
+The home scene has only optional constant-opacity ripples, with a 16-second
+loop of at most 4 horizontal and 1 vertical layout units. Saved still mode,
+reduced motion, screen reader activity, unresolved system preferences and an
+inactive scene stop that decoration. No lighthouse beam was added.
+
+The extra timed arrival was removed. Opening uses the same still scenery until
+the signed guard verifies, a surface exists, and the SDK reports current frame
+data with a non-dropped frame. It swaps atomically, without a fade through a
+signed hold. A 15-second stall reaches the existing recovery screen. Native
+presentation timing remains unobserved because Alex requested that visible
+simulator testing stop. The SDK frame counter is readiness evidence, not proof
+of a displayed native pixel. Focusable controls beneath the opening are absent.
+
+Claude's isolated seekbar reproduction was reviewed and reproduced against
+`e51529c`. Including `hasTVPreferredFocus` in the memo comparison fixes stale
+focus ownership when Skip appears. The disabled picture-break prototype was
+not integrated. BufferingWindow remains reserved for Claude's separate work.
+No paid service, new credential, deployment, merge or household reset was used.

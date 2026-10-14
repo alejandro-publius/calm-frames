@@ -20,6 +20,8 @@ import {
 import isEqual from 'lodash/isEqual';
 import React, { useCallback, useEffect, useRef } from 'react';
 import ErrorView from '../components/ErrorView';
+import PlayerOpening from '../calmframes/PlayerOpening';
+import useOpeningFrame from '../calmframes/useOpeningFrame';
 import { focusManager } from '../utils/FocusManager';
 
 import { SafeAreaView } from '@amazon-devices/react-native-safe-area-context';
@@ -116,6 +118,8 @@ const PlayerScreen = ({
   // After media initialization once media loads isVideoInitialized will change to true.
   const [isVideoInitialized, setIsVideoInitialized] =
     React.useState<boolean>(false);
+  const [surfaceReady, setSurfaceReady] = React.useState(false);
+  const [returningHome, setReturningHome] = React.useState(false);
   const surfaceHandle = useRef<string | null>(null);
   const captionViewHandle = useRef<string | null>(null);
 
@@ -256,6 +260,10 @@ const PlayerScreen = ({
     coverTest: rejectedPreparedRoute ? 'off' : coverTest,
   });
   const guarding = access === 'guarded';
+  const homeOpening = route.params.showHomeOpening === true && guarding && !isVideoError && guard.status !== 'blocked';
+  const openingFrameReady = useOpeningFrame({ media: videoRef, enabled: homeOpening && !returningHome,
+    verified: guard.status === 'verified', surfaceReady, onTimeout: () => setVideoError(true) });
+  const showOpeningShell = Boolean(homeOpening && !openingFrameReady || returningHome && route.params.showHomeOpening);
   // The measurement harness and the guard never run at once: a run is a
   // measurement, kid mode is the product.
   let covered = cover.covered;
@@ -446,6 +454,7 @@ const PlayerScreen = ({
       return true;
     }
     leaving.current = true;
+    if (route.params.showHomeOpening) setReturningHome(true);
 
     reportVideoExit();
 
@@ -598,6 +607,7 @@ const PlayerScreen = ({
         '[PlayerScreen.tsx] - onSurfaceViewCreated - Creating video surface',
       );
       surfaceHandle.current = _surfaceHandle;
+      setSurfaceReady(true);
       setSurface();
     },
     [setSurface],
@@ -687,21 +697,21 @@ const PlayerScreen = ({
           The card sits above the cover, so it stays readable while the picture
           is hidden, and it is the only thing on screen that speaks.
         */}
-        <CalmCard
+        {!showOpeningShell && <CalmCard
           card={pausedCard(card, paused)}
           onSkip={guard.skipTo}
           skipAccessibilityLabel={
             benignDemo ? 'Skip the practice hold' : undefined
           }
-        />
+        />}
         {/*
           The practice label, on a plate in the top left corner: a row of its
           own above the card, and nowhere near the captions.
         */}
-        {benignDemo && (
+        {benignDemo && !showOpeningShell && (
           <CornerPlate label={BENIGN_STORY_LABEL} testID="benign-demo" />
         )}
-        {showVideoPlayerUI && (
+        {showVideoPlayerUI && !showOpeningShell && (
           <VideoPlayerUI
             key={isVideoInitialized ? 'ready' : 'loading'}
             videoRef={videoRef}
@@ -728,7 +738,8 @@ const PlayerScreen = ({
             }
           />
         )}
-        {isVideoError && <ErrorView navigateBack={leavePlayer} />}
+        {showOpeningShell && <PlayerOpening title={data.title} returning={returningHome} onBack={leavePlayer} />}
+        {isVideoError && !returningHome && <ErrorView navigateBack={leavePlayer} />}
       </View>
     </SafeAreaView>
   );

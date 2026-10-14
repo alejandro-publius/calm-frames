@@ -464,6 +464,7 @@ export default React.memo(Seekbar, (prevProps, nextProps) => {
     prevProps.videoRef === nextProps.videoRef &&
     prevProps.videoData === nextProps.videoData &&
     prevProps.bifFrameImagesRef === nextProps.bifFrameImagesRef &&
-    prevProps.seekBarRef === nextProps.seekBarRef
+    prevProps.seekBarRef === nextProps.seekBarRef &&
+    prevProps.hasTVPreferredFocus === nextProps.hasTVPreferredFocus
   );
 });

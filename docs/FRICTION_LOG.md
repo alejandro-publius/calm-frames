@@ -979,3 +979,12 @@ The first eleven and the Sep 29 entries, 34 and 35, were written here as they ha
 | 38 simulator capture | docs/SHOT_MANIFEST.md and `results/redesign_demo_manifest_2026-10-10.json`, frame timestamps rather than counts |
 | 39 fonts directory | `app/assets/fonts/`, docs/brand/README.md |
 | 40 focus on a disabled control | `app/src/calmframes/ParentAreaScreen.tsx`, the deferred-write regression in the parent area tests |
+
+### 2026-10-14: visible native checks interrupted active desktop work
+
+Repeated simulator foregrounding was distracting before a coherent UI change
+was ready. Severity: workflow disruption. Stopped native interaction at the
+user's request and moved to an isolated code integration plus headless host-tree
+previews. Next native check should be one consolidated session after handoff.
+Terminal control was separately denied by the computer-use tool for safety;
+user-pasted prompts remain the available Claude coordination route.

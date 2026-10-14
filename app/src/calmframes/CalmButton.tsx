@@ -33,6 +33,8 @@ export interface CalmButtonProps {
   primary?: boolean;
   /** Quieter navigation chrome; focus keeps the same visible ring and underline. */
   quiet?: boolean;
+  /** Smaller quiet links retain the minimum TV text size and full focus boundary. */
+  compact?: boolean;
   onPress?: () => void;
   /** What a screen reader says. Defaults to the label. */
   accessibilityLabel?: string;
@@ -48,6 +50,7 @@ const CalmButton = ({
   label,
   primary = false,
   quiet = false,
+  compact = false,
   onPress,
   accessibilityLabel,
   disabled = false,
@@ -84,7 +87,7 @@ const CalmButton = ({
       ]}>
       <Text
         testID={`${testID}-label`}
-        style={[styles.label, focused && !disabled ? styles.focusedLabel : null, primary && !disabled ? (focused ? styles.focusedPrimaryLabel : styles.primaryLabel) : null, disabled ? styles.labelDisabled : null]}>
+        style={[styles.label, compact ? styles.compactLabel : null, focused && !disabled ? styles.focusedLabel : null, primary && !disabled ? (focused ? styles.focusedPrimaryLabel : styles.primaryLabel) : null, disabled ? styles.labelDisabled : null]}>
         {label}
       </Text>
     </TouchableOpacity>
@@ -120,6 +123,7 @@ const styles = StyleSheet.create({
     color: CALM_COLORS.TEXT,
     ...CALM_TEXT.control,
   },
+  compactLabel: { ...CALM_TEXT.supporting },
   focusedLabel: { textDecorationLine: 'underline' },
   primary: { backgroundColor: CALM_COLORS.FOCUS_RING, borderColor: CALM_COLORS.FOCUS_RING },
   primaryFocused: { backgroundColor: CALM_COLORS.INK, borderColor: CALM_COLORS.FOCUS_RING },

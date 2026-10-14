@@ -56,6 +56,8 @@ export type AppStackParamList = {
   [Screens.PLAYER_SCREEN]: {
     data: TitleData;
     focusId?: number | string;
+    /** Keep the home shell while the first checked picture becomes ready. */
+    showHomeOpening?: boolean;
     /**
      * Calm Frames cover harness. "layering" is the phase 1.5 check and
      * "timing" is the GATE 1 harness. Leave it out for normal playback.

@@ -8,10 +8,10 @@
  */
 
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
-import HarborOpening from './HarborOpening';
-import { CALM_COLORS, CALM_SPACE, scale } from './calmStyles';
+import HomeHarborScene from './HomeHarborScene';
+import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import StatusNotice from './StatusNotice';
 import { useUiCapture } from './uiCapture';
 import { HOUSEHOLD_ERROR_FRAME, HOUSEHOLD_LOADING_FRAME } from './uiFrames';
@@ -29,7 +29,14 @@ export default function HouseholdStorageScreen({
     failed ? HOUSEHOLD_ERROR_FRAME : HOUSEHOLD_LOADING_FRAME,
     failed ? 'household storage unavailable' : 'household storage loading',
   );
-  if (!failed) return <HarborOpening testID={testID} />;
+  if (!failed) return <View testID={testID} style={styles.screen}>
+    <HomeHarborScene />
+    <View style={styles.brand}><Image source={require('../../assets/image/CalmFrames.png')} style={styles.mark} fadeDuration={0} accessible={false} /><Text style={styles.wordmark}>Calm Frames</Text></View>
+    <View style={styles.loading} accessible accessibilityRole="progressbar" accessibilityLabel="Opening your library" accessibilityLiveRegion="polite">
+      <Text style={styles.heading}>Opening your library</Text>
+      <Text style={styles.detail}>Loading your saved viewing settings.</Text>
+    </View>
+  </View>;
   return (
     <View testID={testID} style={styles.screen}>
       <StatusNotice
@@ -58,6 +65,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(CALM_SPACE.SAFE_X),
     paddingVertical: scale(CALM_SPACE.SAFE_Y),
   },
+  brand: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
+  mark: { width: scale(80), height: scale(80) },
+  wordmark: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT },
+  loading: { paddingTop: scale(102), maxWidth: scale(750), gap: scale(24) },
+  heading: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT },
+  detail: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM },
   buttons: {
     flexDirection: 'row',
     marginTop: scale(CALM_SPACE.BLOCK),

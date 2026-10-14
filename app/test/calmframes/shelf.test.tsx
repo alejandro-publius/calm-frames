@@ -67,7 +67,7 @@ describe('the pictures on the shelf', () => {
 
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const image = screen.getByTestId(`kid-home-poster-image-${BENIGN_STORY_ID}`);
-    expect(image.props.source).toEqual(require('../../assets/image/tv/harbor-cinematic.png'));
+    expect(image.props.source).toEqual(require('../../assets/image/tv/harbor-illustrated.png'));
     expect(image.props.resizeMode).toBe('cover');
     expect(image.props.fadeDuration).toBe(0);
   });
@@ -146,8 +146,8 @@ describe('the words on the shelf', () => {
     const onOpen = jest.fn();
     const onPlay = jest.fn();
     const home = render(<KidHomeScreen titles={shelf} onOpen={onOpen} onPlay={onPlay} />);
-    const synopsis = screen.getByText(/quiet harbor at sunset/i).props.children;
-    expect(synopsis).toMatch(/quiet harbor/i);
+    const synopsis = screen.getByText(/prepared titles can hold/i).props.children;
+    expect(synopsis).toMatch(/sound continues/i);
     fireEvent.press(screen.getByTestId('kid-home-more-info'));
     expect(onOpen).toHaveBeenCalledWith(prepared);
     fireEvent.press(screen.getByTestId('kid-home-watch'));
@@ -159,13 +159,15 @@ describe('the words on the shelf', () => {
     expect(fullDescription).toMatch(/original Calm Frames short/i);
     expect(fullDescription).toMatch(/lighthouse/i);
     expect(fullDescription).not.toMatch(/checked|validated|verified/i);
-    expect(synopsis.length).toBeLessThan(fullDescription.length);
+    expect(screen.queryByText('Original story')).toBeNull();
   });
 
   it('retains the full practice-hold explanation when that demo leads the library', () => {
     const onPlay = jest.fn();
     render(<KidHomeScreen titles={[harbor]} onOpen={jest.fn()} onPlay={onPlay} />);
+    fireEvent.press(screen.getByTestId('kid-home-learn'));
     expect(screen.getByText(/two scheduled practice holds/i)).toBeTruthy();
+    fireEvent.press(screen.getByTestId('picture-hold-dismiss'));
     expect(screen.getByTestId(`kid-home-poster-qualifier-${BENIGN_STORY_ID}`).props.children)
       .toMatch(/practice holds/i);
     expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Watch demo/);
@@ -190,7 +192,6 @@ describe('the words on the shelf', () => {
     ]);
     expect(posterWords(preparedId)).toEqual([
       'Harbor',
-      'Original story',
     ]);
     expect(posterWords(OFFLINE_TITLE_ID)).toEqual([
       'Calm gradient',
@@ -216,7 +217,7 @@ describe('the words on the shelf', () => {
     expect(benignName).toBe('Harbor demo');
     expect(preparedName).toBe('Harbor');
     expect(benignLine).toMatch(/practice holds/i);
-    expect(preparedLine).not.toMatch(/practice|demo/i);
+    expect(preparedLine).toBeUndefined();
   });
 
   /**
@@ -267,7 +268,7 @@ describe('the words on the shelf', () => {
    */
   it('draws the second line at the ten foot floors, resting and focused', () => {
     const floors = { textSizeUnits: 32, textContrast: 4.5 };
-    const secondLines = ['Practice holds', 'Original story', 'Playback test'];
+    const secondLines = ['Practice holds', 'Playback test'];
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const measured = () =>
       measureText(screen.toJSON() as unknown as RenderedNode, { background: CALM_COLORS.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);
