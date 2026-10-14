@@ -80,8 +80,7 @@ test('home states the supported-title benefit and keeps parental controls tertia
   const parent = jest.fn();
   const details = jest.fn();
   const view = render(<KidHomeScreen titles={titles} onOpen={details} onOpenParentArea={parent} />);
-  expect(view.getByText('Watch with fewer flashes.')).toBeTruthy();
-  expect(view.getByText('On supported titles, marked scenes use a still picture while sound continues.')).toBeTruthy();
+  expect(view.getByText('Picture holds on supported videos. Audio continues.')).toBeTruthy();
   expect(view.queryByText('About this story')).toBeNull();
   fireEvent.press(view.getByRole('button', { name: 'Details' }));
   expect(details).toHaveBeenCalledWith(titles.find(entry => entry.title.title === 'Harbor story (prepared locally)'));

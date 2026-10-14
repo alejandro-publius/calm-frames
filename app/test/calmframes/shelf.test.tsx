@@ -136,14 +136,13 @@ describe('the pictures on the shelf', () => {
 describe('the words on the shelf', () => {
   const preparedId = packagedLibrary.titles(DEFAULT_SETTINGS)[0].id;
 
-  it('introduces Harbor with a brief story synopsis while keeping preparation detail on its page', () => {
+  it('uses factual Harbor metadata and preserves Play and Details actions', () => {
     const prepared = shelf.find((entry) => entry.title.id === preparedId)!;
     const onOpen = jest.fn();
     const onPlay = jest.fn();
     const home = render(<KidHomeScreen titles={shelf} onOpen={onOpen} onPlay={onPlay} />);
-    const synopsis = screen.getByText('Settle into a quiet harbor at sunset.').props.children;
-    expect(synopsis).toMatch(/quiet harbor at sunset/i);
-    expect(screen.getByText('On supported titles, marked scenes use a still picture while sound continues.')).toBeTruthy();
+    expect(screen.getByTestId('kid-home-meta').props.children).toBe('20 sec · No picture holds');
+    expect(screen.getByText('Picture holds on supported videos. Audio continues.')).toBeTruthy();
     fireEvent.press(screen.getByTestId('kid-home-more-info'));
     expect(onOpen).toHaveBeenCalledWith(prepared);
     fireEvent.press(screen.getByTestId('kid-home-watch'));
@@ -151,10 +150,8 @@ describe('the words on the shelf', () => {
     home.unmount();
 
     render(<TitleDetailsScreen entry={prepared} onPlay={onPlay} />);
-    const fullDescription = screen.getByTestId('title-details-description').props.children;
-    expect(fullDescription).toMatch(/original Calm Frames short/i);
-    expect(fullDescription).toMatch(/lighthouse/i);
-    expect(fullDescription).not.toMatch(/checked|validated|verified/i);
+    expect(screen.queryByTestId('title-details-description')).toBeNull();
+    expect(screen.getByTestId('title-details-meta').props.children).toBe('20 sec · No picture holds');
     expect(screen.queryByText('Original story')).toBeNull();
   });
 

@@ -72,6 +72,7 @@ const TitleDetailsScreen = ({
   );
   const presentation = titlePresentation(entry.title);
   const demo = isBundledBenignStory(entry.title);
+  const playLabel = presentation.action === 'Watch now' ? 'Play' : presentation.action;
   const notice = noticeForTitle(entry);
   const playable = notice === null;
   useUiCapture(
@@ -129,8 +130,8 @@ const TitleDetailsScreen = ({
           </View>
         <View style={styles.actionRail}>
           <View style={styles.buttons}>
-            <CalmButton primary sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : presentation.action}
-              accessibilityLabel={saving ? 'Saving your changes...' : `${presentation.action}: ${presentation.name}`}
+            <CalmButton primary sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
+              accessibilityLabel={saving ? 'Saving your changes...' : `${playLabel}: ${presentation.name}`}
               disabled={saving} hasTVPreferredFocus onPress={() => onPlay(entry)} />
           </View>
           <Text style={styles.quickSummary}>{intervals.length === 0 ? 'No picture holds in this story. Some flashing may still go undetected.' : `${intervals.length} ${demo ? 'practice holds' : 'parts covered'}. Sound and captions continue.`}</Text>

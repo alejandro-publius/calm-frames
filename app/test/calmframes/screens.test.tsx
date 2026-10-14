@@ -351,7 +351,7 @@ describe('KidHomeScreen', () => {
     );
     const tree = JSON.stringify(toJSON());
     expect(tree).not.toMatch(
-      /autoPlay|shouldPlay|Video|KeplerVideoSurfaceView/i,
+      /"(?:autoPlay|shouldPlay)"|"type":"[^"]*(?:Video|KeplerVideoSurfaceView)[^"]*"/i,
     );
     // An Image is a still. That is the only picture on this screen.
     expect(screen.getByTestId('kid-home-poster-image-ok')).toBeTruthy();

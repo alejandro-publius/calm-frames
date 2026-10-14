@@ -14,8 +14,6 @@ interface TitlePresentation {
   kind?: string;
   action: string;
   description: string;
-  /** Short introduction for browsing; details keep the full description. */
-  browseSynopsis?: string;
   art?: 'harbor' | 'harbor-cinematic' | 'gradient';
 }
 
@@ -26,8 +24,7 @@ export function titlePresentation(title: CatalogTitle): TitlePresentation {
   }
   if (concernsPackagedLibrary(title) && title.title === 'Harbor story (prepared locally)') {
     return { name: 'Harbor', action: 'Watch now',
-      browseSynopsis: 'Settle into a quiet harbor at sunset.',
-      description: 'A small boat rests beneath a lighthouse as evening light moves across the water. An original Calm Frames short.', art: 'harbor-cinematic' };
+      description: '', art: 'harbor-cinematic' };
   }
   if (title.id === OFFLINE_TITLE_ID) {
     return { name: 'Calm gradient', kind: 'Playback test', action: 'Play',

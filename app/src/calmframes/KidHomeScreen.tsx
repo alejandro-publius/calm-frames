@@ -141,8 +141,11 @@ const KidHomeScreen = ({
     durationMs: demo.title.durationMs,
   }).length : 0, [demo]);
   const demoLine = demo && demoSeconds > 0 && demoHolds > 0
-    ? `Try the ${demoSeconds}-second Harbor demo with ${demoHolds} practice holds.`
+    ? `${demoSeconds} sec · ${demoHolds} practice hold${demoHolds === 1 ? '' : 's'}`
     : null;
+  const featuredSeconds = Math.round((featured?.title.durationMs ?? 0) / 1000);
+  const featuredMeta = [featuredSeconds > 0 ? `${featuredSeconds} sec` : null, featuredHasNoHolds ? 'No picture holds' : null].filter(Boolean).join(' · ');
+  const featuredAction = feature?.action === 'Watch now' ? 'Play' : feature?.action;
   const hiddenCount = titles.length - listed.length;
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
     ? returnFocusId
@@ -227,24 +230,22 @@ const KidHomeScreen = ({
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroCopy}>
                 <Text accessibilityRole="header" testID={`${testID}-title`} style={[styles.featureTitle, feature.name.length > 18 ? styles.longFeatureTitle : null]}>{feature.name}</Text>
-                <Text style={styles.description}>{feature.browseSynopsis ?? feature.description}</Text>
+                {featuredHasNoHolds ? <Text style={styles.description} testID={`${testID}-meta`}>{featuredMeta}</Text> : feature.description ? <Text style={styles.description}>{feature.description}</Text> : null}
                 <View style={styles.actions}>
-                  <CalmButton primary sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={feature.action} accessibilityLabel={`${feature.action}: ${feature.name}`}
+                  <CalmButton primary sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
                   <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
-                {featuredHasNoHolds ? <Text style={styles.plainLabel} testID={`${testID}-no-holds`}>{`${feature.name} plays without picture holds.`}</Text> : null}
               </View>
               <View style={styles.purpose}>
-                <Text style={styles.purposeTitle}>Watch with fewer flashes.</Text>
-                <Text style={styles.purposeCopy}>On supported titles, marked scenes use a still picture while sound continues.</Text>
+                <Text style={styles.purposeCopy}>Picture holds on supported videos. Audio continues.</Text>
                 {demo && demo !== featured ? <>
-                  {demoLine ? <Text style={styles.purposeCopy}>{demoLine}</Text> : null}
-                  <View style={styles.learn}><CalmButton quiet testID={`${testID}-demo`} label="Picture hold demo"
-                    accessibilityLabel={demoLine ? `Picture hold demo. ${demoLine}` : 'Picture hold demo'}
+                  <View style={styles.learn}><CalmButton quiet testID={`${testID}-demo`} label="Try picture holds"
+                    accessibilityLabel={demoLine ? `Try picture holds. ${demoLine}` : 'Try picture holds'}
                     hasTVPreferredFocus={returnTo === 'demo'} disabled={saving}
                     onFocus={() => setFocusedId('demo')} onBlur={() => setFocusedId(null)}
                     onPress={() => { onLaunchControl?.('demo'); onOpen(demo); }} /></View>
+                  {demoLine ? <Text style={styles.purposeCopy} testID={`${testID}-demo-meta`}>{demoLine}</Text> : null}
                 </> : null}
               </View>
             </View> : null}
@@ -301,9 +302,7 @@ const styles = StyleSheet.create({
   heroCopy: { width: scale(1000), paddingTop: scale(290), alignItems: 'flex-start' },
   // The lantern: the one place that says what a hold is and where to see one.
   purpose: { width: scale(600), paddingLeft: scale(36), gap: scale(12) },
-  purposeTitle: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT },
   purposeCopy: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
-  plainLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginTop: scale(20) },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12) },
   featureTitle: { ...CALM_TEXT.screen, fontSize: scale(120), lineHeight: scale(134), color: CALM_COLORS.TEXT, marginBottom: scale(12) },
   longFeatureTitle: { fontSize: scale(64), lineHeight: scale(76) },
