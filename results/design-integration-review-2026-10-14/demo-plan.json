@@ -1,0 +1,26 @@
+{
+  "status": "Prepared, not executed. Mac locked at Computer Use inventory; requires manual unlock.",
+  "package": "build/release/design-integration-reviewed-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+  "commands_after_unlock_and_resuming_native_preview": [
+    "source /Users/alexvintera/vega/env",
+    "vega device is-connected --device Simulator",
+    "vega device install-app --device Simulator --packagePath /Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-home/build/release/design-integration-reviewed-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main"
+  ],
+  "one_session_path": [
+    "Home: verify original zen Harbor illustration, dominant Watch now, secondary Try the demo and optional How it works.",
+    "How it works, Back, then Try the demo: observe opening, moving Harbor film, two scheduled holds and Skip; Back returns to retained caller.",
+    "Home Watch now: ordinary Harbor opening and playback, Back to home; More info then Watch now, Back to details with focus restored.",
+    "Pause with controls hidden past six seconds; resume. Enable optional captions and capture hold plus controls/menu with multiline cue if available without modifying shipped VTT.",
+    "Check saved still/reduced motion only through an accessible legitimate setting; if PIN or OS permissions block access, leave unchanged and record the exact block."
+  ],
+  "rules": [
+    "Keep one installed session open. No reset, uninstall, household-data clear or PIN retrieval.",
+    "No Terminal UI. No disabled picture-break prototype.",
+    "If a material native defect requires another launch, finish related code fixes first and report why; do not loop."
+  ],
+  "limitations": [
+    "Native first-frame readiness, motion pixels, D-pad and VoiceView for this exact source still unobserved.",
+    "The shipped VTT has original single-line cues; prior multiline fixture capture is not proof for the new candidate."
+  ]
+}

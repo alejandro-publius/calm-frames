@@ -988,3 +988,11 @@ user's request and moved to an isolated code integration plus headless host-tree
 previews. Next native check should be one consolidated session after handoff.
 Terminal control was separately denied by the computer-use tool for safety;
 user-pasted prompts remain the available Claude coordination route.
+
+### Oct 14: consolidated native preview blocked by locked Mac
+
+After the reviewed source and focused corrections were ready, the requested
+single native session could not begin. `cua.listApps()` reported that the Mac
+was locked and automatic unlock failed. No simulator install, relaunch or
+Terminal UI action followed. A manual Mac unlock is required. The independent
+source, package and artifact work continued and the prior build was preserved.

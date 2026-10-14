@@ -4,6 +4,21 @@ Updated Oct 14, 2026.
 
 ## 0. Where things stand
 
+### Oct 14: quiet integration review
+
+Source `2d95206` fixes destination-specific Back wording and the home/loading
+surface inventory. One full app run on `5365f0c` had 1203 passes, six inventory
+failures and four skips; all 36 affected tests pass after the correction.
+Typecheck, targeted lint and the declared-surface flashmap checks pass.
+The reviewed aarch64 Debug package is preserved separately from the first build.
+The requested one-session native preview is blocked: Computer Use reports the
+Mac locked and automatic unlock failed. No installation or relaunch occurred.
+Unlocking the Mac manually is the next required action. The Claude loading
+branch was reviewed, with an opening-shell announcement conflict documented;
+it is not merged. Evidence and the runnable demo plan are in
+`results/design-integration-review-2026-10-14/receipt.json`.
+
+
 ### Oct 14: integrated home purpose, optional demo and playback opening
 
 The isolated `codex/design-integration-2026-10-14` candidate combines the checked
