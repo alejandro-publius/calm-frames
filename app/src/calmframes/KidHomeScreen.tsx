@@ -155,7 +155,7 @@ const KidHomeScreen = ({
 
   return (
     <View testID={testID} style={styles.screen}>
-      <HomeHarborScene enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
+      <HomeHarborScene immersive={!showIntroduction && !empty} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
       <CalmPageHeader onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
@@ -183,14 +183,18 @@ const KidHomeScreen = ({
           <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroCopy}>
-                <Text style={styles.eyebrow}>Watch with fewer flashes.</Text>
+                <Text style={styles.eyebrow}>{feature.art === 'harbor-cinematic' ? 'A Calm Frames original' : 'Ready to watch'}</Text>
                 <Text accessibilityRole="header" testID={`${testID}-title`} style={[styles.featureTitle, feature.name.length > 18 ? styles.longFeatureTitle : null]}>{feature.name}</Text>
-                <Text style={styles.description}>Supported titles use a still picture during marked scenes while sound continues.</Text>
+                <Text style={styles.description}>{feature.browseSynopsis ?? feature.description}</Text>
                 <View style={styles.actions}>
                   <CalmButton primary sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={feature.action} accessibilityLabel={`${feature.action}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={!returnFocusId && !returnToIntroduction && !saving} onPress={() => (onPlay ?? onOpen)(featured)} />
                   <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" hasTVPreferredFocus={returnFocusId === featured.title.id && !returnToIntroduction && !saving} onPress={() => onOpen(featured)} disabled={saving} />
                 </View>
+              </View>
+              <View style={styles.purpose}>
+                <Text style={styles.purposeTitle}>Watch with fewer flashes.</Text>
+                <Text style={styles.purposeCopy}>A still picture covers marked scenes. Sound continues.</Text>
                 <View style={styles.learn}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" hasTVPreferredFocus={(returnToIntroduction || returnFocusId === demo?.title.id || returnFocusId === playbackCheck?.title.id) && !saving}
                   disabled={saving} onPress={() => { setChoosingProfile(false); setShowIntroduction(true); }} />
 </View>
@@ -245,14 +249,17 @@ const styles = StyleSheet.create({
   navigationLink: { alignSelf: 'center' },
   libraryScroll: { flex: 1 },
   scrollContent: { paddingBottom: scale(12) },
-  hero: { width: '100%', minHeight: scale(620), alignItems: 'flex-start' },
-  heroCopy: { width: scale(800), paddingTop: scale(104), alignItems: 'flex-start' },
+  hero: { width: '100%', minHeight: scale(780), flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', paddingBottom: scale(40) },
+  heroCopy: { width: scale(1020), paddingTop: scale(290), alignItems: 'flex-start' },
+  purpose: { width: scale(520), paddingLeft: scale(36), borderLeftWidth: scale(1), borderLeftColor: CALM_COLORS.BORDER },
+  purposeTitle: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT, marginBottom: scale(8) },
+  purposeCopy: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12) },
-  featureTitle: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(12) },
+  featureTitle: { ...CALM_TEXT.screen, fontSize: scale(156), lineHeight: scale(174), color: CALM_COLORS.TEXT, marginBottom: scale(12) },
   longFeatureTitle: { fontSize: scale(64), lineHeight: scale(76) },
-  description: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, maxWidth: scale(670), marginBottom: scale(24) },
+  description: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, maxWidth: scale(900), marginBottom: scale(32) },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
-  learn: { flexDirection: 'row', marginTop: scale(32) },
+  learn: { flexDirection: 'row', marginTop: scale(20) },
   sectionHeading: { alignItems: 'flex-start', marginBottom: scale(24) },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT },
   banner: { marginBottom: scale(20) },

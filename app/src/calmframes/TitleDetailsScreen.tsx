@@ -110,18 +110,21 @@ const TitleDetailsScreen = ({
       testID={testID}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      {presentation.art === 'harbor-cinematic' || presentation.art === 'harbor' ? <HomeHarborScene enabled={interfaceMotionEnabled} active={interfaceActive} /> : null}
+      {presentation.art === 'harbor-cinematic' || presentation.art === 'harbor' ? <HomeHarborScene immersive enabled={interfaceMotionEnabled} active={interfaceActive} /> : null}
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
-          <View style={styles.kicker}><Text style={styles.eyebrow}>{demo ? 'Optional demo' : 'About this story'}</Text></View>
-          <Text style={[styles.title, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
+          <View style={styles.kicker}><Text style={styles.eyebrow}>{demo ? 'Optional demo' : presentation.art === 'harbor-cinematic' ? 'A Calm Frames original' : 'About this story'}{durationMs > 0 ? ` · ${Math.round(durationMs / 1000)} sec` : ''}</Text></View>
+          <Text style={[styles.title, styles.heroTitle, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
+          </View>
+        <View style={styles.actionRail}>
           <View style={styles.buttons}>
             <CalmButton primary sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : presentation.action}
               accessibilityLabel={saving ? 'Saving your changes...' : `${presentation.action}: ${presentation.name}`}
               disabled={saving} hasTVPreferredFocus onPress={() => onPlay(entry)} />
           </View>
+          <Text style={styles.quickSummary}>{intervals.length === 0 ? 'No picture holds in this story. Some flashing may still go undetected.' : `${intervals.length} ${demo ? 'practice holds' : 'parts covered'}. Sound and captions continue.`}</Text>
         </View>
       </View>
 
@@ -192,8 +195,10 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
   navigation: { width: '100%', maxWidth: scale(1728), alignItems: 'flex-start', marginBottom: scale(16) },
-  hero: { width: '100%', minHeight: scale(590), alignItems: 'flex-start' },
-  heroCopy: { width: '100%', maxWidth: scale(780), alignItems: 'flex-start', paddingTop: scale(72) },
+  hero: { width: '100%', minHeight: scale(670), alignItems: 'flex-start', justifyContent: 'flex-end' },
+  heroCopy: { width: '100%', maxWidth: scale(1000), alignItems: 'flex-start', paddingTop: scale(220) },
+  actionRail: { width: '100%', flexDirection: 'row', alignItems: 'center', gap: scale(48), marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.BORDER },
+  quickSummary: { ...CALM_TEXT.supporting, maxWidth: scale(850), color: CALM_COLORS.TEXT_DIM },
   heroArt: { width: '100%', maxWidth: scale(1120) },
   artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(56) },
   artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(160) },
@@ -201,6 +206,7 @@ const styles = StyleSheet.create({
   kicker: { alignItems: 'flex-start', marginBottom: scale(8) },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
+  heroTitle: { fontSize: scale(144), lineHeight: scale(162) },
   longTitle: { fontSize: scale(64), lineHeight: scale(76) },
   synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
@@ -215,7 +221,7 @@ const styles = StyleSheet.create({
   unavailableContent: { flexGrow: 1, justifyContent: 'flex-start' },
   unavailableBody: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', gap: scale(24) },
   unavailableAction: { marginTop: scale(16) },
-  buttons: { flexDirection: 'row', justifyContent: 'flex-start', marginTop: scale(24) },
+  buttons: { flexDirection: 'row', justifyContent: 'flex-start', marginTop: 0 },
   footer: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.SURFACE_FOCUSED },
 });
 export default TitleDetailsScreen;
