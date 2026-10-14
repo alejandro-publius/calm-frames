@@ -1,4 +1,4 @@
-# Immersive Harbor composition study — 14 October 2026
+# Immersive Harbor composition study, 14 October 2026
 
 One alternative Home + Details composition, isolated on `codex/immersive-composition-study-2026-10-14`. Source: `4a9169a8b495c83ae14c1c53458fd9cdbd4436ee`. Base: `c8e4b346dc7ba323ca21972d489900c04d8530fa` (integrated application source `e05216284b2e3e85e8a73275432568c512c7317c`). The approved integration branch remains unchanged. Native task: `codex://threads/01a138bb-a422-7746-9293-caf676f250f3`.
 

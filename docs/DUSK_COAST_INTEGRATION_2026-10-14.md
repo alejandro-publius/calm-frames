@@ -1,4 +1,4 @@
-# Approved dusk coast integration — 14 October 2026
+# Approved dusk coast integration, 14 October 2026
 
 Integrated the approved palette into `codex/control-depth-integration-2026-10-14`. Runtime source: **`e05216284b2e3e85e8a73275432568c512c7317c`**, following approved study `e97e0da` and prior integrated candidate `95f7411`. The study branch remains preserved.
 
@@ -30,7 +30,7 @@ All four review sheets were saved to Library; [exact attachment IDs](../results/
 
 Built aarch64 Debug at `2026-10-14T17:51:07Z` using the existing Node 22 / Vega / JDK 21 toolchain, reused generated Shaka outputs and local watchman shim. No dependencies added.
 
-Local package: `build/release/dusk-coast-integrated-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg` — **21,881,599 bytes**.
+Local package: `build/release/dusk-coast-integrated-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, **21,881,599 bytes**.
 
 SHA-256: **`d31ddafca960363ee76afaa4f2cf6eb28563cb144ea6aa0a6a9145e4fd365f2a`**.
 

@@ -1,4 +1,4 @@
-# Calm Frames typography and controls — 14 October 2026
+# Calm Frames typography and controls, 14 October 2026
 
 The isolated candidate uses Fraunces for display and section headings, Source Sans 3 for functional text and numerals, a warm cream primary action, and contoured teal secondary controls. Focus stays gold with an underline; selection retains its checkmark. Disabled saving rows retain their selected state with muted readable text. No scenery, film, guard timing or household storage changes.
 
