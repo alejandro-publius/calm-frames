@@ -192,6 +192,12 @@ export class VideoHandler {
           this.loadVideoElements();
         })
         .catch((error) => {
+          // A known setup/load failure can recover immediately. Ignore late
+          // failures from a player that Back or replacement already released.
+          if (this.videoRef.current !== media) {
+            return;
+          }
+          this.setIsVideoError(true);
           console.error(
             '[VideoHandler.ts] - preBufferVideo - Failed to initialize Video',
           );

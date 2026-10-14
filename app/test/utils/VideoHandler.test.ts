@@ -157,6 +157,42 @@ describe('VideoHandler', () => {
     expect(videoHandler.loadVideoElements).not.toHaveBeenCalled();
   });
 
+  it.each(['initialize', 'load'] as const)(
+    'reports a %s failure immediately for the current player',
+    async (failure) => {
+      const { mockVideoRef, mockSetIsVideoError, videoHandler } = createVideoHandler();
+      videoHandler.destroyVideoElements = jest.fn().mockReturnValue(true);
+      videoHandler.setupEventListeners = jest.fn();
+      videoHandler.loadVideoElements = jest.fn(() => {
+        if (failure === 'load') { throw new Error('Asset unavailable'); }
+      });
+      mockVideoRef.current = {
+        initialize: jest.fn(() => failure === 'initialize'
+          ? Promise.reject(new Error('Native initialization failed'))
+          : Promise.resolve()),
+      } as unknown as VideoPlayer;
+
+      await videoHandler.preBufferVideo();
+      await new Promise(process.nextTick);
+
+      expect(mockSetIsVideoError).toHaveBeenCalledTimes(1);
+      expect(mockSetIsVideoError).toHaveBeenCalledWith(true);
+    },
+  );
+
+  it('ignores an initialization failure after leaving playback', async () => {
+    const { mockVideoRef, mockSetIsVideoError, videoHandler } = createVideoHandler();
+    let rejectInitialize!: (reason: Error) => void;
+    const initialized = new Promise<void>((_resolve, reject) => { rejectInitialize = reject; });
+    videoHandler.destroyVideoElements = jest.fn().mockReturnValue(true);
+    mockVideoRef.current = { initialize: jest.fn(() => initialized) } as unknown as VideoPlayer;
+    await videoHandler.preBufferVideo();
+    mockVideoRef.current = null;
+    rejectInitialize(new Error('Initialization completed after Back'));
+    await new Promise(process.nextTick);
+    expect(mockSetIsVideoError).not.toHaveBeenCalled();
+  });
+
   describe('destroyMediaPlayerSync', () => {
     it('should successfully destroy media player for MP4 content', () => {
       const { mockVideoRef, videoHandler } = createVideoHandler();
