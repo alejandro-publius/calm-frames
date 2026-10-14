@@ -88,6 +88,14 @@ export const CREDIT_ENTRIES: CreditEntry[] = [
     obligations: [],
   },
   {
+    title: 'Coastal presentation artwork',
+    license: 'Apache-2.0',
+    credit: 'Calm Frames, coastal presentation artwork generated with built-in AI image generation and approved by Alex',
+    source: 'https://github.com/alejandro-publius/calm-frames/blob/main/app/assets/image/tv/coastal-zen.provenance.json',
+    collection: 'unknown',
+    obligations: [],
+  },
+  {
     title: 'Eastern Europe to Southeastern Asia at Night',
     license: 'Public domain (NASA)',
     credit: 'ISS Expedition 29 crew, NASA',
