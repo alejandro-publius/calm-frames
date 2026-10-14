@@ -1,0 +1,55 @@
+{
+  "colors": {
+    "BACKGROUND": "#151C26",
+    "SURFACE": "#303B48",
+    "SURFACE_FOCUSED": "#3B4856",
+    "BORDER": "#697585",
+    "FOCUS_RING": "#E6B963",
+    "PRIMARY": "#D88B72",
+    "TEXT_DISABLED": "#9DA4AE",
+    "ACCENT_DARK": "#8E5648",
+    "TEXT": "#F4ECDD",
+    "TEXT_DIM": "#BDC2C9",
+    "INK": "#151C26",
+    "VERIFIED": "#E7D9BF",
+    "PENDING": "#E2C275",
+    "FAILED": "#F2BDB1",
+    "COVER": "#000000"
+  },
+  "materials": {
+    "cream": [
+      "#D88B72",
+      "#C97B63"
+    ],
+    "creamPressed": [
+      "#BF705B",
+      "#D18A73"
+    ],
+    "teal": [
+      "#303B48",
+      "#293440"
+    ],
+    "tealPressed": [
+      "#222C37",
+      "#354251"
+    ],
+    "selected": [
+      "#404B59",
+      "#34404D"
+    ],
+    "disabled": [
+      "#282F39",
+      "#282F39"
+    ]
+  },
+  "contrast": {
+    "ivoryOnInk": 14.591556669599683,
+    "secondaryTextOnInk": 9.562904452236268,
+    "primaryMinimum": 4.6363139000338744,
+    "secondaryMinimum": 5.720423496846318,
+    "selectedMinimum": 4.949539740225464,
+    "disabled": 5.369846230062438,
+    "focusOnInkSeparator": 9.367522799228414,
+    "focusOnSelected": 4.848414683407901
+  }
+}

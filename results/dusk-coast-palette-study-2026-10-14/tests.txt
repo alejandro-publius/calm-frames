@@ -1,0 +1,13 @@
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false --testPathPattern=duskPaletteExport|controlSurface.test
+
+ PASS  test/calmframes/duskPaletteExport-parent.test.tsx
+ PASS  test/calmframes/duskPaletteExport-palette.test.tsx
+ PASS  test/calmframes/duskPaletteExport-home.test.tsx
+ PASS  test/calmframes/controlSurface.test.tsx
+
+Test Suites: 4 passed, 4 total
+Tests:       8 passed, 8 total
+Snapshots:   0 total
+Time:        3.392 s
+Ran all test suites matching /duskPaletteExport|controlSurface.test/i.

@@ -1,0 +1,82 @@
+[
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/dusk-coast-overview.png",
+    "file_id": "file_000000005c8c81f6947c81e7170fcda5",
+    "library_file_id": "libfile_610d09a4231c81919f959e62726c6880",
+    "file_name": "dusk-coast-overview.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 490412
+  },
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/home-palette-comparison.png",
+    "file_id": "file_00000000733881f5bdd75d097d5db32f",
+    "library_file_id": "libfile_cd25ef24064c81919a5ffcb86e42648f",
+    "file_name": "home-palette-comparison.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 1239941
+  },
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/settings-palette-comparison.png",
+    "file_id": "file_000000004f648230926b80d81f389135",
+    "library_file_id": "libfile_1ac7eba1bcf08191aee5c4c558d80560",
+    "file_name": "settings-palette-comparison.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 311267
+  },
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/states-after.png",
+    "file_id": "file_00000000d58c81fd80a29073726cc871",
+    "library_file_id": "libfile_350d6381d20481918c56394cdb885d40",
+    "file_name": "states-after.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 55757
+  }
+]
