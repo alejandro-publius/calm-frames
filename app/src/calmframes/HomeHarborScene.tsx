@@ -49,6 +49,7 @@ export default function HomeHarborScene({ enabled = false, active = true, immers
     </Animated.View>
     <LinearGradient colors={[CALM_COLORS.BACKGROUND, `${CALM_COLORS.BACKGROUND}FA`, `${CALM_COLORS.BACKGROUND}73`, `${CALM_COLORS.BACKGROUND}0F`, `${CALM_COLORS.BACKGROUND}00`]} locations={[0, 0.3, 0.52, 0.72, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={[styles.left, immersive ? styles.immersiveLeft : null]} />
     <LinearGradient colors={[`${CALM_COLORS.BACKGROUND}00`, `${CALM_COLORS.BACKGROUND}1A`, `${CALM_COLORS.BACKGROUND}D9`, CALM_COLORS.BACKGROUND]} locations={[0, 0.35, 0.72, 1]} style={[styles.floor, immersive ? styles.immersiveFloor : null]} />
+    {immersive ? <View style={styles.immersiveBase} /> : null}
     <LinearGradient colors={[`${CALM_COLORS.BACKGROUND}D1`, `${CALM_COLORS.BACKGROUND}A6`, `${CALM_COLORS.BACKGROUND}00`]} locations={[0, 0.65, 1]} style={styles.sky} />
   </View>;
 }
@@ -56,7 +57,8 @@ const styles = StyleSheet.create({
   scene: { ...StyleSheet.absoluteFillObject, backgroundColor: CALM_COLORS.BACKGROUND, overflow: 'hidden' },
   immersiveArt: { left: scale(230), top: scale(-100), width: scale(1700), height: scale(970) },
   immersiveLeft: { width: scale(1100), right: undefined, height: scale(900) },
-  immersiveFloor: { top: scale(430), height: scale(500) },
+  immersiveBase: { position: 'absolute', top: scale(740), bottom: 0, left: 0, right: 0, backgroundColor: CALM_COLORS.BACKGROUND },
+  immersiveFloor: { top: scale(320), height: scale(420) },
   art: { position: 'absolute', left: scale(530), top: scale(-10), width: scale(1440), height: scale(820) },
   ripples: { position: 'absolute', top: scale(690), left: scale(1050), width: scale(720), height: scale(120) },
   ripple: { position: 'absolute', height: scale(2), borderRadius: scale(2), backgroundColor: '#77A19E', opacity: 0.22 },
