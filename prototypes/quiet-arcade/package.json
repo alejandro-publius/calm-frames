@@ -1,0 +1,15 @@
+{
+  "name": "calm-frames-quiet-arcade-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A browser-only 3D visual prototype for Calm Frames. Not the Vega app.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "serve": "python3 -m http.server 4173 --bind 127.0.0.1",
+    "verify": "/tmp/calm-home-preview-venv/bin/python verify.py"
+  },
+  "dependencies": {
+    "three": "0.186.1"
+  }
+}

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calm Frames, quiet arcade prototype</title>
+<link rel="stylesheet" href="./styles.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "./node_modules/three/build/three.module.js",
+    "three/addons/": "./node_modules/three/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<header class="hud">
+  <div class="brand">
+    <h1>Calm Frames</h1>
+    <p id="status" class="status" aria-live="polite"></p>
+  </div>
+  <nav class="menu" aria-label="Calm Frames">
+    <button id="try-demo" type="button" aria-haspopup="dialog">Try demo</button>
+    <button id="atmosphere" type="button" aria-haspopup="dialog">Atmosphere</button>
+    <button id="still" type="button" aria-pressed="false">Still</button>
+    <button id="help" type="button" class="quiet" aria-haspopup="dialog">Help</button>
+  </nav>
+</header>
+
+<div id="stage" tabindex="0" role="application"
+  aria-label="Quiet arcade. Left and Right choose. Enter greets or selects. Escape clears. Up reaches the menu.">
+  <canvas id="scene" aria-hidden="true"></canvas>
+</div>
+
+<section id="panel" class="panel" role="dialog" aria-modal="false" aria-labelledby="panel-title" hidden>
+  <h2 id="panel-title"></h2>
+  <div id="panel-body"></div>
+</section>
+
+<div id="fallback" class="fallback" hidden>
+  <img data-src="./captures/fallback.png" alt="A still of the quiet arcade: two rounded cabinets, a stool and the lantern keeper under a warm pendant lamp.">
+  <p id="fallback-note" class="status">The 3D scene could not start here. This is a still of it.</p>
+</div>
+
+<script type="module">
+const stage = document.getElementById('stage');
+const fallback = document.getElementById('fallback');
+const status = document.getElementById('status');
+const forced = new URLSearchParams(location.search).get('fallback') === '1';
+
+function showFallback(reason) {
+  stage.hidden = true;
+  fallback.hidden = false;
+  document.body.classList.add('is-fallback');
+  const still = fallback.querySelector('img');
+  still.src = still.dataset.src;
+  document.getElementById('fallback-note').textContent =
+    `The 3D scene could not start here (${reason}). This is a still of it. The menu still works.`;
+  status.textContent = 'Still image.';
+  window.__quietArcade = { ready: true, fallback: true, reason };
+}
+
+const probe = document.createElement('canvas');
+const webgl = !forced && Boolean(probe.getContext('webgl2') || probe.getContext('webgl'));
+if (!webgl) {
+  showFallback(forced ? 'forced for review' : 'no WebGL');
+} else {
+  try {
+    const { start } = await import('./scene.js');
+    await start();
+  } catch (error) {
+    console.error(error);
+    showFallback('renderer error');
+  }
+}
+import('./menu.js').then(({ installMenu }) => installMenu()).catch((error) => {
+  console.error(error);
+  status.textContent = 'The menu could not start.';
+});
+</script>
+</body>
+</html>

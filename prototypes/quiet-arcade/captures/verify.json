@@ -1,0 +1,164 @@
+{
+  "url": "http://127.0.0.1:57013/prototypes/quiet-arcade/",
+  "steps": [
+    {
+      "step": "renders the scene",
+      "ok": true,
+      "detail": 3
+    },
+    {
+      "step": "focusing the stage focuses the first hotspot",
+      "ok": true,
+      "detail": "Lantern keeper. Press Enter to greet."
+    },
+    {
+      "step": "Right moves focus to the Harbor cabinet",
+      "ok": true,
+      "detail": "Harbor cabinet. Press Enter to select."
+    },
+    {
+      "step": "Right wraps back to the keeper",
+      "ok": true,
+      "detail": "Lantern keeper. Press Enter to greet."
+    },
+    {
+      "step": "Enter greets: the keeper bows while the lantern brightens, then rests",
+      "ok": true,
+      "detail": {
+        "peak": {
+          "bow": 0.18860761057000297,
+          "lantern": 4.711535228217947
+        },
+        "rest_bow": 2.4492935982947065e-17,
+        "rest_lantern": 2.2000000000000006
+      }
+    },
+    {
+      "step": "Escape clears the selection",
+      "ok": true,
+      "detail": "Lantern keeper. Press Enter to greet."
+    },
+    {
+      "step": "selecting the Harbor cabinet eases the camera a small distance",
+      "ok": true,
+      "detail": {
+        "drift": 0.42463219378657546
+      }
+    },
+    {
+      "step": "Escape returns the camera home",
+      "ok": true,
+      "detail": [
+        3.9,
+        2.55,
+        5.5
+      ]
+    },
+    {
+      "step": "Up moves focus to the menu",
+      "ok": true,
+      "detail": "try-demo"
+    },
+    {
+      "step": "Atmosphere opens its panel",
+      "ok": true,
+      "detail": {
+        "open": true,
+        "name": "atmosphere"
+      }
+    },
+    {
+      "step": "Forest and Coast say they are not built",
+      "ok": true,
+      "detail": [
+        "Arcade\nThis scene",
+        "Forest\nNot built yet",
+        "Coast\nNot built yet"
+      ]
+    },
+    {
+      "step": "choosing Forest only says it is not built",
+      "ok": true,
+      "detail": "Forest is not built yet."
+    },
+    {
+      "step": "Escape closes the panel and returns focus to Atmosphere",
+      "ok": true,
+      "detail": "atmosphere"
+    },
+    {
+      "step": "Try demo says the real demo is not wired here",
+      "ok": true,
+      "detail": "Prototype. The Harbor demo is not wired here. In the app, Try demo plays a 20 second film with two practice holds while sound and captions continue.\n\nClose"
+    },
+    {
+      "step": "closing Try demo dims the demo cabinet again",
+      "ok": true,
+      "detail": false
+    },
+    {
+      "step": "Help lists the keys",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "step": "Still turns on",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "step": "in Still mode the keeper does not move, only the lantern answers",
+      "ok": true,
+      "detail": {
+        "bow": 0,
+        "lantern": 4.78455218571624
+      }
+    },
+    {
+      "step": "in Still mode a cabinet selection does not animate the camera",
+      "ok": true,
+      "detail": [
+        3.7575,
+        2.54,
+        5.1325
+      ]
+    },
+    {
+      "step": "Still turns off again",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "step": "clicking the demo cabinet selects it",
+      "ok": true,
+      "detail": {
+        "x": 1389.859197923433,
+        "y": 535.8917573550865
+      }
+    },
+    {
+      "step": "clicking empty floor clears it",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "step": "no page errors",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "step": "forced fallback shows the still and keeps the menu",
+      "ok": true,
+      "detail": null
+    },
+    {
+      "step": "the menu works in the fallback",
+      "ok": true,
+      "detail": null
+    }
+  ],
+  "frames": 40,
+  "video": "captures/interaction.webm",
+  "renderer": "headless Chromium with SwiftShader, 1920 by 1080",
+  "all_ok": true
+}
