@@ -1,0 +1,44 @@
+{
+  "scope": "Bounded source and mocked-media reliability pass; no native-device verification",
+  "base_commit": "af192ac482a69dd2b61995a9b83245a17030fa15",
+  "fix_commit": "aa0494f970b99967ea99d98a35c90edc6ef0074c",
+  "branch": "codex/core-reliability-2026-10-14",
+  "task": "codex://threads/01a138bb-a422-7746-9293-caf676f250f3",
+  "finding": "Rejected native initialization and synchronous media-load exceptions were logged without setting player error state. Harbor waited for its 15-second opening timeout before offering recovery.",
+  "change": "Report a current player's setup/load failure immediately through the existing error screen; ignore failures after that media instance was released or replaced.",
+  "regression": {
+    "before": "VideoHandler: 2 new failure cases failed, 9 passed.",
+    "after": "88 tests passed across 8 suites; typecheck and focused lint passed.",
+    "coverage": [
+      "Current initialization rejection and synchronous load exception reach error state",
+      "Late initialization failure after leaving is ignored",
+      "First-run setup and household restart with in-memory storage",
+      "Home, Details and player return focus",
+      "Pause/resume after six-second controls hide, Skip and recovery Back",
+      "Ordinary Harbor zero-hold and practice two-hold presentation from checked title fixtures",
+      "Authenticated still schedule, seek/stall interruption and fail-closed cover behavior"
+    ]
+  },
+  "commands": {
+    "cwd": "app",
+    "node": "/Users/alexvintera/.local/share/fnm/node-versions/v22.23.2/installation/bin/node",
+    "test_62": "node node_modules/jest/bin/jest.js --watchman=false --runInBand --coverage=false --runTestsByPath test/utils/VideoHandler.test.ts test/calmframes/playbackUi.test.tsx test/calmframes/openingFrame.test.tsx test/screens/returnFocus.test.tsx test/calmframes/firstRun.test.tsx test/screens/householdRestart.test.tsx",
+    "test_26": "node node_modules/jest/bin/jest.js --watchman=false --runInBand --coverage=false --runTestsByPath test/calmframes/duskLantern.test.tsx test/calmframes/sceneHoldPlayback.test.tsx",
+    "typecheck": "node node_modules/typescript/bin/tsc -p tsconfig.json --noEmit",
+    "lint": "node node_modules/eslint/bin/eslint.js src/utils/VideoHandler.ts test/utils/VideoHandler.test.ts",
+    "diff": "git diff --check"
+  },
+  "local_logs": [
+    "/tmp/calm-reliability-red.log",
+    "/tmp/calm-reliability-tests.log",
+    "/tmp/calm-reliability-holds.log",
+    "/tmp/calm-reliability-typecheck.log",
+    "/tmp/calm-reliability-lint.log"
+  ],
+  "environment": "Existing node_modules and generated Shaka/polyfill runtime cloned from the candidate worktree using APFS cp -cR. No installs or dependency changes. First Jest invocation hit sandbox-denied Watchman state access; rerun with --watchman=false succeeded.",
+  "preserved": "Candidate worktree remains clean at af192ac. No visual, copy, timing, guard, media, PIN, persistence, dependency, submission or release-provenance files changed.",
+  "native_status": "Not attempted in this pass. No capture, screenshot, recording, UI automation, install or device launch. Native moving playback, D-pad and VoiceView remain unverified here.",
+  "package": null,
+  "package_note": "No new package built. The previously built af192ac candidate does not include this fix. Release/package work belongs to the separate provenance task.",
+  "remaining": "Integrate the isolated fix if desired, then build and verify through an authorized native validation path. No additional source defect confirmed in this bounded pass."
+}
