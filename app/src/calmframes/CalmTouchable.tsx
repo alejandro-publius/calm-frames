@@ -19,7 +19,7 @@ const CalmTouchable = React.forwardRef<React.ComponentRef<typeof TouchableOpacit
       onPressOut={(event) => { setPressed(false); onPressOut?.(event); }}
       onFocus={(event) => { setFocused(true); onFocus?.(event); }}
       onBlur={(event) => { setFocused(false); setPressed(false); onBlur?.(event); }}
-      style={[style, pressed && !blocked ? { backgroundColor: coastal ? colors.SURFACE_FOCUSED : colors.INK } : null, study ? styles.study : null, study && focused && !blocked ? { borderColor: coastal && surfaceKind === 'primary' ? COASTAL_PRIMARY_FOCUS : colors.FOCUS_RING } : null]}>
+      style={[style, pressed && !blocked ? { backgroundColor: coastal && surfaceKind !== 'primary' ? colors.SURFACE_FOCUSED : colors.INK } : null, study ? styles.study : null, study && focused && !blocked ? { borderColor: coastal && surfaceKind === 'primary' ? COASTAL_PRIMARY_FOCUS : colors.FOCUS_RING } : null]}>
       {study ? <CalmControlSurface kind={surfaceKind} focused={focused} pressed={pressed && !blocked} disabled={!!blocked} selected={!!(props.accessibilityState?.selected || props.accessibilityState?.checked === true)} /> : null}
       {children}
     </TouchableOpacity>;

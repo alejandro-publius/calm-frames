@@ -42,12 +42,22 @@ import CalmCard from '../../src/calmframes/CalmCard';
 import {
   CALM_COLORS,
   CALM_SPACE,
+  COASTAL_COLORS,
+  COASTAL_PRIMARY_FOCUS,
   FOCUS_RING_WIDTH,
   MINIMUM_FOCUS_CONTRAST,
   MINIMUM_TEXT_CONTRAST,
   MINIMUM_TEXT_SIZE,
 } from '../../src/calmframes/calmStyles';
 import { Card, cardAt, CHECKING_CARD } from '../../src/calmframes/cards';
+
+/**
+ * The rings a focused control may show. Playback keeps the gold ring on the dark
+ * palette; the coastal menus ring in deep teal, and a focused coastal primary rings
+ * in terracotta because teal on its teal fill would vanish. Every ring still has
+ * to clear the contrast floors against its fill and against what is outside it.
+ */
+const FOCUS_RING_COLOURS = new Set<string>([CALM_COLORS.FOCUS_RING, COASTAL_COLORS.FOCUS_RING, COASTAL_PRIMARY_FOCUS]);
 import CornerPlate from '../../src/calmframes/CornerPlate';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
@@ -325,19 +335,19 @@ interface Case {
 
 const CASES: Case[] = [
   { name: 'household-loading', element: <HouseholdStorageScreen failed={false} onRetry={jest.fn()} />,
-    background: CALM_COLORS.BACKGROUND, screen: true },
+    background: COASTAL_COLORS.BACKGROUND, screen: true },
   { name: 'household-error', element: <HouseholdStorageScreen failed onRetry={jest.fn()} />,
-    background: CALM_COLORS.BACKGROUND, screen: true },
+    background: COASTAL_COLORS.BACKGROUND, screen: true },
   {
     name: 'first-run-pin',
     element: <FirstRunScreen onDone={jest.fn()} newSalt={() => 'seed'} rounds={4} />,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
     name: 'first-run-preset',
     element: <FirstRunScreen onDone={jest.fn()} newSalt={() => 'seed'} rounds={4} />,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       'first-run-key-1',
@@ -353,7 +363,7 @@ const CASES: Case[] = [
   {
     name: 'first-run-room',
     element: <FirstRunScreen onDone={jest.fn()} newSalt={() => 'seed'} rounds={4} />,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       'first-run-key-1',
@@ -370,7 +380,7 @@ const CASES: Case[] = [
   {
     name: 'first-run-explainer',
     element: <FirstRunScreen onDone={jest.fn()} newSalt={() => 'seed'} rounds={4} />,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       'first-run-key-1',
@@ -394,7 +404,7 @@ const CASES: Case[] = [
         onOpenParentArea={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
@@ -409,13 +419,13 @@ const CASES: Case[] = [
         onChooseProfile={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
     name: 'kid-home-empty',
     element: <KidHomeScreen titles={[]} onOpen={jest.fn()} onOpenParentArea={jest.fn()} />,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
@@ -428,7 +438,7 @@ const CASES: Case[] = [
         offline
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
@@ -440,7 +450,7 @@ const CASES: Case[] = [
         onBack={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
@@ -452,7 +462,7 @@ const CASES: Case[] = [
         onBack={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
@@ -467,19 +477,19 @@ const CASES: Case[] = [
         onBack={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
     name: 'parent-area-locked',
     element: parentArea,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
     name: 'parent-area-wrong-pin',
     element: parentArea,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       'parent-area-key-2',
@@ -503,13 +513,13 @@ const CASES: Case[] = [
         onBack={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
     name: 'parent-area-open',
     element: parentArea,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       'parent-area-key-1',
@@ -521,14 +531,14 @@ const CASES: Case[] = [
   {
     name: 'parent-area-family',
     element: parentAreaWithFamily,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [...UNLOCK],
   },
   {
     name: 'parent-area-one-kid',
     element: parentAreaWithFamily,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [...UNLOCK, 'parent-area-profiles-profile-1'],
   },
@@ -537,7 +547,7 @@ const CASES: Case[] = [
     // and answers from the sofa like any other.
     name: 'parent-area-remove-kid',
     element: parentAreaWithFamily,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       ...UNLOCK,
@@ -684,7 +694,7 @@ describe('the ten foot pass', () => {
       }
 
       for (const control of result.focused) {
-        if (control.ringColour !== CALM_COLORS.FOCUS_RING) {
+        if (!FOCUS_RING_COLOURS.has(control.ringColour)) {
           problems.push(
             `${control.testID} shows ${control.ringColour} when focused, not the focus ring`,
           );

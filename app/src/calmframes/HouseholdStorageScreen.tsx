@@ -46,16 +46,17 @@ export default function HouseholdStorageScreen({
           title: "Your settings couldn't be opened or saved",
           detail: 'Your library stays closed until your settings and PIN are available. Try again.',
           tone: 'blocked',
-        }}>
-          <View style={styles.buttons}>
-            <CalmButton
-              testID={`${testID}-retry`} primary
-              label="Try again"
-              onPress={onRetry}
-              hasTVPreferredFocus
-            />
-          </View>
-      </StatusNotice>
+        }} />
+      {/* On the page, not inside the notice: a focused primary's terracotta ring
+          clears the 3 to 1 floor against the ivory page, not against the panel. */}
+      <View style={styles.buttons}>
+        <CalmButton
+          testID={`${testID}-retry`} primary
+          label="Try again"
+          onPress={onRetry}
+          hasTVPreferredFocus
+        />
+      </View>
     </View>
   );
 }

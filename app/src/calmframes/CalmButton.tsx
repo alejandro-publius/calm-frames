@@ -136,7 +136,8 @@ const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = 
     borderColor: colors.FOCUS_RING,
     backgroundColor: colors.SURFACE_FOCUSED,
   },
-  playIcon: { marginRight: scale(20), fontSize: scale(30) },
+  // Decorative, but drawn at the ten foot text floor like everything else on the screen.
+  playIcon: { marginRight: scale(20), fontSize: scale(34) },
   quiet: {
     paddingVertical: scale(CALM_SPACE.TIGHT),
     paddingHorizontal: scale(CALM_SPACE.ROW),

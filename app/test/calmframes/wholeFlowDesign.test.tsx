@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import CalmButton from '../../src/calmframes/CalmButton';
 import PlayerOpening from '../../src/calmframes/PlayerOpening';
 import ProfilePicker from '../../src/calmframes/ProfilePicker';
-import { CALM_COLORS } from '../../src/calmframes/calmStyles';
+import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { measureText, RenderedNode } from '../../src/calmframes/uiContrast';
 
@@ -19,8 +19,8 @@ test('a primary action stays legible and stationary during focus and immediate p
   expect(down.borderRadius).toBe(resting.borderRadius);
   expect(down.borderWidth).toBe(resting.borderWidth);
   expect(down.paddingHorizontal).toBe(resting.paddingHorizontal);
-  expect(down.backgroundColor).toBe(CALM_COLORS.INK);
-  for (const line of measureText(view.toJSON() as unknown as RenderedNode, { background: CALM_COLORS.BACKGROUND })) {
+  expect(down.backgroundColor).toBe(COASTAL_COLORS.INK);
+  for (const line of measureText(view.toJSON() as unknown as RenderedNode, { background: COASTAL_COLORS.BACKGROUND })) {
     expect(line.contrast).toBeGreaterThanOrEqual(4.5);
   }
   fireEvent(button(), 'pressOut', {});

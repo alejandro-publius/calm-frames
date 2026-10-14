@@ -2,7 +2,7 @@ import '@testing-library/jest-native/extend-expect';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { CALM_COLORS, CALM_SPACE, scale } from '../../src/calmframes/calmStyles';
+import { COASTAL_COLORS, CALM_SPACE, scale } from '../../src/calmframes/calmStyles';
 import FlashMapStrip from '../../src/calmframes/FlashMapStrip';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import { checkedShelf } from './shelfFixtures';
@@ -35,7 +35,7 @@ describe('details discovery', () => {
       y: Math.max(0, y - scale(CALM_SPACE.SAFE_Y)), animated: false,
     });
     expect(view.getByTestId('title-details-show-info')).toBe(info);
-    expect(info).toHaveStyle({ borderColor: CALM_COLORS.FOCUS_RING });
+    expect(info).toHaveStyle({ borderColor: COASTAL_COLORS.FOCUS_RING });
     expect(view.getByTestId('title-details-show-info-label')).toHaveStyle({ textDecorationLine: 'underline' });
     expect(onPlay).not.toHaveBeenCalled();
     scrollTo.mockRestore();
@@ -77,6 +77,6 @@ describe('details discovery', () => {
     expect(view.getByTestId('flash-map-strip-end')).toHaveTextContent('2:05');
     expect(view.getByText('Picture covered')).toBeTruthy();
     expect(view.getByText('Red-flash hold')).toBeTruthy();
-    expect(view.getByTestId('flash-map-strip-mark-1')).toHaveStyle({ backgroundColor: CALM_COLORS.FAILED });
+    expect(view.getByTestId('flash-map-strip-mark-1')).toHaveStyle({ backgroundColor: COASTAL_COLORS.FAILED });
   });
 });

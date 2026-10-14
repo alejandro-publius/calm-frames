@@ -9,7 +9,7 @@ import PinKeypad from '../../src/calmframes/PinKeypad';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
 import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
-import { CALM_COLORS, CALM_TEXT, scale } from '../../src/calmframes/calmStyles';
+import { COASTAL_COLORS, CALM_TEXT, scale } from '../../src/calmframes/calmStyles';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import { emptyPinGate, setPin } from '../../src/calmframes/parentGate';
@@ -76,7 +76,7 @@ test('export four states through real shared controls, home and an in-memory set
     expect(selected.props.accessibilityState.checked).toBe(true);
     if (state === 'Disabled') {
       expect(selected.props.accessibilityState.disabled).toBe(true);
-      expect(StyleSheet.flatten(parent.getByText('✓ Chosen').props.style).color).toBe(CALM_COLORS.TEXT_DISABLED);
+      expect(StyleSheet.flatten(parent.getByText('✓ Chosen').props.style).color).toBe(COASTAL_COLORS.TEXT_DISABLED);
     }
     if (state === 'Focus' || state === 'Pressed') fireEvent(selected, 'focus');
     if (state === 'Pressed') fireEvent(selected, 'pressIn', {});
@@ -99,12 +99,12 @@ test('export four states through real shared controls, home and an in-memory set
 });
 
 const styles = StyleSheet.create({
-  sheet: { flex: 1, paddingHorizontal: scale(96), paddingTop: scale(54), backgroundColor: CALM_COLORS.BACKGROUND },
-  heading: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT },
-  note: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginTop: scale(12), marginBottom: scale(48) },
+  sheet: { flex: 1, paddingHorizontal: scale(96), paddingTop: scale(54), backgroundColor: COASTAL_COLORS.BACKGROUND },
+  heading: { ...CALM_TEXT.screen, color: COASTAL_COLORS.TEXT },
+  note: { ...CALM_TEXT.supporting, color: COASTAL_COLORS.TEXT_DIM, marginTop: scale(12), marginBottom: scale(48) },
   columns: { flexDirection: 'row', alignItems: 'center', marginBottom: scale(24) },
-  column: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, width: scale(350) },
+  column: { ...CALM_TEXT.supporting, color: COASTAL_COLORS.TEXT_DIM, width: scale(350) },
   row: { flexDirection: 'row', alignItems: 'center', minHeight: scale(175) },
-  rowLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, width: scale(280) },
+  rowLabel: { ...CALM_TEXT.supporting, color: COASTAL_COLORS.TEXT_DIM, width: scale(280) },
   cell: { width: scale(350) },
 });

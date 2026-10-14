@@ -19,7 +19,7 @@ import {
   benignStoryTitle,
 } from '../../src/calmframes/benignStory';
 import { BENIGN_STORY_PUBLIC_KEY } from '../../src/calmframes/benignStoryData';
-import { CALM_COLORS } from '../../src/calmframes/calmStyles';
+import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
 import { verifyFlashMap } from '../../src/calmframes/flashMap';
 import TitleArtwork from '../../src/calmframes/TitleArtwork';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
@@ -69,7 +69,7 @@ describe('the pictures on the shelf', () => {
 
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const image = screen.getByTestId('home-harbor-scene').findByType(Image);
-    expect(image.props.source).toEqual(require('../../assets/image/tv/harbor-illustrated.png'));
+    expect(image.props.source).toEqual(require('../../assets/image/tv/coastal-zen.png'));
     expect(image.props.resizeMode).toBe('cover');
     expect(image.props.fadeDuration).toBe(0);
   });
@@ -231,12 +231,12 @@ describe('the words on the shelf', () => {
     const secondLines = ['Practice holds', 'Playback test'];
     render(<KidHomeScreen titles={shelf.filter(entry => entry.title.id === BENIGN_STORY_ID || entry.title.id === OFFLINE_TITLE_ID)} onOpen={jest.fn()} />);
     const measured = () =>
-      measureText(screen.toJSON() as unknown as RenderedNode, { background: CALM_COLORS.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);
+      measureText(screen.toJSON() as unknown as RenderedNode, { background: COASTAL_COLORS.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);
 
     const resting = measured();
     expect(resting.map((line) => line.text).sort()).toEqual([...secondLines].sort());
     for (const line of resting) {
-      expect(line.background).toBe(CALM_COLORS.BACKGROUND);
+      expect(line.background).toBe(COASTAL_COLORS.BACKGROUND);
       expect(line.fontSize).toBeGreaterThanOrEqual(floors.textSizeUnits);
       expect(line.contrast).toBeGreaterThanOrEqual(floors.textContrast);
     }
@@ -245,7 +245,7 @@ describe('the words on the shelf', () => {
     const focused = measured().find(
       (line) => line.text === 'Practice holds',
     );
-    expect(focused?.background).toBe(CALM_COLORS.SURFACE_FOCUSED);
+    expect(focused?.background).toBe(COASTAL_COLORS.SURFACE_FOCUSED);
     expect(focused?.contrast).toBeGreaterThanOrEqual(floors.textContrast);
   });
 });

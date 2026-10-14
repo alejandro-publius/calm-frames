@@ -18,7 +18,7 @@
  */
 import { render, screen } from '@testing-library/react-native';
 import React from 'react';
-import { CALM_COLORS } from '../../src/calmframes/calmStyles';
+import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
 import CreditsScreen from '../../src/calmframes/CreditsScreen';
 import { CREDIT_ENTRIES } from '../../src/calmframes/credits';
 import {
@@ -171,6 +171,6 @@ describe('what the credits screen paints', () => {
     const frame = frameFromTree('credits', toJSON() as unknown as RenderedNode);
     unmount();
     expect(frame).toEqual(CREDITS_FRAME);
-    expect(frame.background).toBe(CALM_COLORS.BACKGROUND);
+    expect(frame.background).toBe(COASTAL_COLORS.BACKGROUND);
   });
 });

@@ -29,7 +29,7 @@ import {
   BENIGN_STORY_LABEL,
 } from '../../src/calmframes/benignStory';
 import CalmCard from '../../src/calmframes/CalmCard';
-import { CALM_COLORS } from '../../src/calmframes/calmStyles';
+import { CALM_COLORS, COASTAL_COLORS } from '../../src/calmframes/calmStyles';
 import CornerPlate from '../../src/calmframes/CornerPlate';
 import {
   Card,
@@ -238,8 +238,8 @@ describe('what the app paints', () => {
     const frame = renderedFrame('kid-home', (
       <KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />
     ));
-    expect(frame.background).toBe(CALM_COLORS.BACKGROUND);
-    expect(frame.surfaces).toContain(CALM_COLORS.SURFACE);
+    expect(frame.background).toBe(COASTAL_COLORS.BACKGROUND);
+    expect(frame.surfaces).toContain(COASTAL_COLORS.SURFACE);
   });
 
   it('matches what the kid home reports, unfocused and focused', () => {

@@ -128,6 +128,46 @@ Material endpoint checks additionally require dark text on every normal/pressed 
 | `FOCUS_RING` | `BACKGROUND` | 9.36 | Ring against the ground. |
 | `FOCUS_RING` | `SURFACE` | 6.22 | Ring beside a slate group. |
 
+## Coastal menus, Oct 14
+
+On Oct 14 Alex approved the ivory coast for every menu screen: Home, Details,
+Help, setup, parental controls, the credits and the opening shell. Playback
+keeps the dark palette above, so the controls stay dark and readable over
+video. The switch is `CoastalAppearance` in
+`app/src/calmframes/CoastalAppearance.ts`, which `PlayerScreen` sets to false.
+The values are `COASTAL_COLORS` and `COASTAL_PRIMARY_FOCUS` in `calmStyles.ts`;
+the palette table above still describes playback.
+
+| Name | Hex | Where |
+|---|---|---|
+| BACKGROUND | `#F5EBDD` | Every menu screen |
+| SURFACE | `#E9DFD0` | Cards, notices and resting secondary controls |
+| SURFACE_FOCUSED | `#DED0BD` | A focused or pressed secondary control |
+| BORDER | `#8B8173` | Quiet edges |
+| TEXT | `#193234` | Headings and labels |
+| TEXT_DIM | `#40514D` | Supporting text |
+| TEXT_DISABLED | `#60645F` | Disabled labels |
+| PRIMARY | `#193B3C` | The one primary action, Play |
+| INK | `#193234` | A focused or pressed primary's fill |
+| FOCUS_RING | `#193B3C` | The ring on every focused menu control except a primary |
+| COASTAL_PRIMARY_FOCUS | `#C16C45` | The ring on a focused primary, because teal on its teal fill would vanish |
+| ACCENT_DARK | `#98492D` | Accents |
+| VERIFIED, PENDING, FAILED | `#24584D`, `#4E5B68`, `#873F2C` | Status marks |
+| COVER | `#000000` | Unchanged |
+
+The floors are the ones above: text at 4.5 to 1 on its background, rings at
+3 to 1 against their fill and against what is outside them.
+`app/test/calmframes/coastalAppearance.test.tsx` checks the coastal pairs and
+`tenFoot.test.tsx` measures every menu screen. A focused primary therefore
+sits on the page and never inside a surface panel: terracotta on the panel
+colour falls under 3 to 1, on the page it clears it.
+
+Artwork: `app/assets/image/tv/coastal-zen.png`, full bleed behind Home and
+the opening shell and cropped round in the practice entry. Its provenance is
+the adjacent JSON and its ledger row; no ownership or dedication is claimed
+for a generated picture. `harbor-illustrated.png` is a render of
+`app/assets/brand/tv/harbor.svg` and remains for the title posters.
+
 ## Type
 
 Fraunces supplies restrained major headings; Source Sans 3 supplies functional UI,
