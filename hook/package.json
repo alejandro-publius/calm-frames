@@ -23,6 +23,7 @@
   ],
   "peerDependencies": {
     "@amazon-devices/kepler-media-controls": ">=1.0.0",
+    "@amazon-devices/react-linear-gradient": ">=2.0.0",
     "@amazon-devices/react-native-w3cmedia": ">=2.3.0",
     "react": ">=19.0.0",
     "react-native": ">=0.83.0"

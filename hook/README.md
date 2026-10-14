@@ -23,9 +23,9 @@ cd /absolute/path/to/your-vega-app
 npm install "$CALM_HOOK_PACK_DIR/calm-frames-flash-guard-0.1.0.tgz" --ignore-scripts
 ```
 
-Peers: `react`, `react-native`, `@amazon-devices/react-native-w3cmedia` and
-`@amazon-devices/kepler-media-controls`. They must be installed in the consuming
-app. A GitHub-root npm install cannot select this monorepo's `hook/` subfolder.
+Peers: `react`, `react-native`, `@amazon-devices/react-native-w3cmedia`,
+`@amazon-devices/kepler-media-controls` and `@amazon-devices/react-linear-gradient`,
+which draws the control surfaces. They must be installed in the consuming app. A GitHub-root npm install cannot select this monorepo's `hook/` subfolder.
 
 The tarball contains the public TypeScript/TSX sources, their mirrored engine
 dependencies, the README and Apache licence. Metro uses the `react-native`
@@ -149,7 +149,7 @@ npm --prefix hook run check:package
 
 The second command packs this checkout, installs that exact tarball in a clean
 temporary consumer with scripts disabled and registry access disabled, then
-links only the four current app runtime peers and React types. It checks all
+links only the five current app runtime peers and React types. It checks all
 public exports through the installed package's TypeScript resolution, resolves
 the source entry and relative imports with the installed Metro resolver and
 React Native defaults, and transforms every packed TS/TSX file with the app's

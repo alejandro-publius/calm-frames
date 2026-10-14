@@ -29,6 +29,7 @@ const target = join(hookRoot, 'src', 'engine');
 export const MIRRORED = [
   'announce.ts',
   'CalmCard.tsx',
+  'CalmControlSurface.tsx',
   'CalmTouchable.tsx',
   'calmStyles.ts',
   'canonicalJson.ts',
