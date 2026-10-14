@@ -1,0 +1,20 @@
+[
+  {
+    "path": "calm-frames-dusk-lantern-home-static.png",
+    "file_id": "file_00000000b51881fdb74a3677c91ae354",
+    "library_file_id": "libfile_5cdf4df5a3c88191927e46c3c1d75ebd",
+    "status": "succeeded"
+  },
+  {
+    "path": "calm-frames-dusk-lantern-details-static.png",
+    "file_id": "file_00000000cb8c81f5959c52453a589b3b",
+    "library_file_id": "libfile_8bfed52bf2088191b0eee4d69a48f0bc",
+    "status": "succeeded"
+  },
+  {
+    "path": "calm-frames-dusk-lantern-comparison-static.png",
+    "file_id": "file_00000000753481fdb452ffc7de34224a",
+    "library_file_id": "libfile_db31d15477008191b2d673926ccfa159",
+    "status": "succeeded"
+  }
+]

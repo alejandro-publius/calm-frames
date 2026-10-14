@@ -1,0 +1,39 @@
+{
+  "source_commit": "6a6212c7fc3b0327a1491554e7a9a7f1067e2066",
+  "app_design_commit": "3fc27204531ad7f549ee828cb17caf800f482d0f",
+  "rendering": "Static actual-component host trees in Chromium; not native simulator captures",
+  "files": [
+    {
+      "path": "static/1080/details.png",
+      "sha256": "8dbf765fde8f73b7fda1f14575b8261ad55f15f24a2cd28b4ec20370fc46d3c9"
+    },
+    {
+      "path": "static/1080/home.png",
+      "sha256": "42773c766c47e1056b4ed3d8db041de922fb91a3c0d1623ea46d5b1683916edb"
+    },
+    {
+      "path": "static/720/details.png",
+      "sha256": "0bf8bcda02ea13dc0bca4c563242bd6cac1f132bb3c72d23c93d6f169d17c609"
+    },
+    {
+      "path": "static/720/home.png",
+      "sha256": "ee3ecddfa3b0cc0f9379c6380f728c0df353178facae7be8cbd0923b6935416e"
+    },
+    {
+      "path": "static/before-after.png",
+      "sha256": "9541230411f418dea12719d45f33be7957a9dff3a9509315dea1d4a76795af87"
+    },
+    {
+      "path": "static/calm-frames-dusk-lantern-comparison-static.png",
+      "sha256": "913481defb181c091f42fe4984798743f7887fc4f3ebcbb8f990241032783319"
+    },
+    {
+      "path": "static/calm-frames-dusk-lantern-details-static.png",
+      "sha256": "400e824139520dcce44763acd3b5fa25fa4e0c4b10bd408d9656112b8bc27f09"
+    },
+    {
+      "path": "static/calm-frames-dusk-lantern-home-static.png",
+      "sha256": "ee61390e21a5e87a0673114b31ae4ef630a9b7f9900a32b8565f3f423897a1d0"
+    }
+  ]
+}
