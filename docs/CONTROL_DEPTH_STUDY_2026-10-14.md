@@ -1,4 +1,4 @@
-# Control depth study — 14 October 2026
+# Control depth study, 14 October 2026
 
 Review candidate, not approval or a rollout. Source **04e5638d92ecd3017eef99d299cbdb480de8f0bd**, isolated branch `codex/control-depth-study-2026-10-14`, based on `e49f712b7a0d74b3fbc41a4a0c90e232fa559bdc`. The `ControlSurfaceStudy` context is false by default and is enabled only in the capture fixture. Current production surfaces, package, layout and behavior remain unchanged.
 

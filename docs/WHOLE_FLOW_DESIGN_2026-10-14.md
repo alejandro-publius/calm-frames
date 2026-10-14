@@ -1,4 +1,4 @@
-# Whole-flow design candidate — 14 October 2026
+# Whole-flow design candidate, 14 October 2026
 
 Implemented in the isolated `codex/whole-flow-design-2026-10-14` worktree, from integrated baseline `cce5f22ccdc07fb5c9022d7ed9d0963b9df98a5b`, following the user's replacement of the previously accepted home design. Final runtime source: **`28904a0690d736a0b97eb80b04943c5d49f8117b`**. The shared remote branch remains `4c9996d70dcc3327663679845f7c888648297d59` (rechecked before push).
 

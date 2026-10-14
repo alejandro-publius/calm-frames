@@ -45,7 +45,7 @@ with sync_playwright() as p:
  page=browser.new_page(viewport={'width':WIDTH,'height':HEIGHT},device_scale_factor=1)
  for name,file in inputs:
   tree=json.loads(file.read_text())
-  html=f'''<!doctype html><html><head><title>{name} — browser approximation</title><style>{fonts}
+  html=f'''<!doctype html><html><head><title>{name}: browser approximation</title><style>{fonts}
 *{{box-sizing:border-box}}html,body{{margin:0;width:{WIDTH}px;height:{HEIGHT}px;background:#151c26}}body{{display:flex;flex-direction:column;overflow:hidden}}
 .view{{display:flex;flex-direction:column;position:relative;flex-shrink:0;min-height:0;min-width:0;border-style:solid;border-width:0}}
 .text{{display:block;position:relative;flex-shrink:0;white-space:pre-wrap;border-style:solid;border-width:0}}img{{display:block;flex-shrink:0}}.scroll{{overflow:auto;scrollbar-width:none}}
@@ -82,5 +82,5 @@ with sync_playwright() as p:
   page.screenshot(path=str(OUT/f'contact-sheet-{chunk//16+1:02d}.png'))
  browser.close()
 (OUT/'bounds.json').write_text(json.dumps(bounds,indent=2)+'\n')
-(OUT/'index.html').write_text('<!doctype html><title>Calm Frames full flow browser review</title><style>body{background:#151c26;color:#f4ecdd;font:20px sans-serif}img{width:100%;max-width:1920px}figure{margin:40px 0}</style><h1>Full flow — browser approximation</h1><p>Actual component host trees. Video, native captions and native seekbar are substitutes. No native input or VoiceView pass is implied.</p>'+''.join(f'<figure><figcaption>{n}</figcaption><a href="{n}.png"><img src="{n}.png"></a></figure>' for n in captures))
+(OUT/'index.html').write_text('<!doctype html><title>Calm Frames full flow browser review</title><style>body{background:#151c26;color:#f4ecdd;font:20px sans-serif}img{width:100%;max-width:1920px}figure{margin:40px 0}</style><h1>Full flow: browser approximation</h1><p>Actual component host trees. Video, native captions and native seekbar are substitutes. No native input or VoiceView pass is implied.</p>'+''.join(f'<figure><figcaption>{n}</figcaption><a href="{n}.png"><img src="{n}.png"></a></figure>' for n in captures))
 print(f'{len(inputs)} states; {len(captures)} captures; {OUT}')
