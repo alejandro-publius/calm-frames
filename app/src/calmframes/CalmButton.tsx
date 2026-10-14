@@ -28,7 +28,7 @@ import {
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
-import { ControlSurfaceStudy } from './CalmControlSurface';
+import { CalmControlAppearance } from './CalmControlSurface';
 import { useInterfaceFeedback } from './useInterfaceSound';
 
 export interface CalmButtonProps {
@@ -71,7 +71,7 @@ const CalmButton = ({
   const [pressed, setPressed] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
   const feedback = useInterfaceFeedback();
-  const study = React.useContext(ControlSurfaceStudy);
+  const study = React.useContext(CalmControlAppearance);
   return (
     <TouchableOpacity
       testID={testID}

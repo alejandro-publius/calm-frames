@@ -1,6 +1,6 @@
 /** All setup data is ephemeral fixture data; never reads the connected household. */
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render as renderBase, fireEvent } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 import FirstRunScreen from '../../src/calmframes/FirstRunScreen';
@@ -26,3 +26,6 @@ test('export setup and credits', () => {
   save('credits', credits.toJSON()); credits.unmount();
   expect(fs.existsSync(path.join(out, 'setup-pin.json'))).toBe(true);
 });
+
+import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
+const render = (ui: React.ReactElement) => renderBase(ui, { wrapper: ({ children }: { children: React.ReactNode }) => <CalmControlAppearance.Provider value>{children}</CalmControlAppearance.Provider> });

@@ -13,6 +13,7 @@ import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import AppStack from './components/navigation/AppStack';
 import HarborOpening from './calmframes/HarborOpening';
+import { CalmControlAppearance } from './calmframes/CalmControlSurface';
 import { initializeStore } from './store';
 import { createTheme } from './styles/ThemeBuilders';
 
@@ -38,6 +39,7 @@ const App = () => {
   const theme = useMemo(() => createTheme(), []);
 
   return (
+    <CalmControlAppearance.Provider value>
     <View testID="app-root" style={styles.root} onLayout={hideSplashScreen}>
       {store ? (
         <Provider store={store}>
@@ -49,6 +51,7 @@ const App = () => {
         </Provider>
       ) : <HarborOpening />}
     </View>
+    </CalmControlAppearance.Provider>
   );
 };
 

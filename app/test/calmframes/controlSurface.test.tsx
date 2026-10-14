@@ -3,12 +3,12 @@ import { render, fireEvent } from '@testing-library/react-native';
 import { StyleSheet } from 'react-native';
 import CalmButton from '../../src/calmframes/CalmButton';
 import PinKeypad from '../../src/calmframes/PinKeypad';
-import { CONTROL_MATERIAL, ControlSurfaceStudy } from '../../src/calmframes/CalmControlSurface';
+import { CONTROL_MATERIAL, CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
 import { contrastRatio } from '../../src/calmframes/uiContrast';
-const study = (children: React.ReactNode) => <ControlSurfaceStudy.Provider value>{children}</ControlSurfaceStudy.Provider>;
+const study = (children: React.ReactNode) => <CalmControlAppearance.Provider value>{children}</CalmControlAppearance.Provider>;
 
 test('material is opt-in; the production surface and geometry remain intact', () => {
-  const view = render(<ControlSurfaceStudy.Provider value={false}><CalmButton primary label="Watch now" /></ControlSurfaceStudy.Provider>);
+  const view = render(<CalmControlAppearance.Provider value={false}><CalmButton primary label="Watch now" /></CalmControlAppearance.Provider>);
   const baseline = StyleSheet.flatten(view.getByTestId('calm-button').props.style);
   expect(baseline.backgroundColor).toBe('#E6A957');
   expect(view.UNSAFE_queryAllByType('LinearGradient' as never)).toHaveLength(0);
@@ -68,4 +68,5 @@ test('gradient extremes preserve text contrast even when translucent teal is com
   for (const color of [...CONTROL_MATERIAL.cream, ...CONTROL_MATERIAL.creamPressed]) expect(contrastRatio('#17323C', color)).toBeGreaterThanOrEqual(4.5);
   for (const color of [...CONTROL_MATERIAL.teal, ...CONTROL_MATERIAL.tealPressed, ...CONTROL_MATERIAL.selected, ...CONTROL_MATERIAL.disabled]) expect(contrastRatio('#BDD0CF', composite(color))).toBeGreaterThanOrEqual(4.5);
   expect(contrastRatio('#E6A957', '#17323C')).toBeGreaterThanOrEqual(3);
+  expect(contrastRatio('#9EB1B2', '#263E43')).toBeGreaterThanOrEqual(4.5);
 });

@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
    * when the first digit goes in or down when Delete takes the last one out.
    */
   entered: {
-    ...CALM_TEXT.screen,
+    ...CALM_TEXT.numeral,
     color: CALM_COLORS.TEXT,
     letterSpacing: scale(CALM_SPACE.TIGHT),
     minHeight: CALM_TEXT.screen.lineHeight,
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
   },
   keyLabel: {
-    ...CALM_TEXT.screen,
+    ...CALM_TEXT.numeral,
     color: CALM_COLORS.TEXT,
   },
   /**

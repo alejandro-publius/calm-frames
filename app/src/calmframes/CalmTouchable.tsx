@@ -2,14 +2,14 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps, StyleSheet } from 'react-native';
 import { CALM_COLORS } from './calmStyles';
-import { CalmControlSurface, ControlSurfaceKind, ControlSurfaceStudy } from './CalmControlSurface';
+import { CalmControlSurface, ControlSurfaceKind, CalmControlAppearance } from './CalmControlSurface';
 
 type Props = TouchableOpacityProps & { surfaceKind?: ControlSurfaceKind };
 const CalmTouchable = React.forwardRef<React.ComponentRef<typeof TouchableOpacity>, Props>(
   ({ style, onPressIn, onPressOut, onFocus, onBlur, children, surfaceKind = 'secondary', ...props }, ref) => {
     const [pressed, setPressed] = React.useState(false);
     const [focused, setFocused] = React.useState(false);
-    const study = React.useContext(ControlSurfaceStudy);
+    const study = React.useContext(CalmControlAppearance);
     const blocked = props.disabled || props.accessibilityState?.disabled;
     return <TouchableOpacity {...props} ref={ref} activeOpacity={1}
       onPressIn={(event) => { if (!blocked) setPressed(true); onPressIn?.(event); }}

@@ -112,15 +112,16 @@ export const MINIMUM_FOCUS_CONTRAST = 3;
 
 export const scale = scaleUxToDp;
 
-/** Licensed static Inter faces packaged in assets/fonts. No synthetic weight. */
-export const CALM_FONT = { regular: 'InterRegular', medium: 'InterMedium', semibold: 'InterSemiBold' } as const;
+/** Licensed static display/UI faces packaged in assets/fonts. No synthetic weight. */
+export const CALM_FONT = { regular: 'CalmSansRegular', medium: 'CalmSansSemibold', semibold: 'CalmSansSemibold', display: 'CalmDisplaySemibold' } as const;
 const typography = (size: number, height: number, face: string) => ({
   fontFamily: face, fontSize: scale(size), lineHeight: scale(height), fontWeight: '400' as const,
 });
 export const CALM_TEXT = {
-  feature: typography(80, 92, CALM_FONT.semibold),
-  screen: typography(64, 76, CALM_FONT.semibold),
-  section: typography(42, 54, CALM_FONT.semibold),
+  feature: typography(80, 92, CALM_FONT.display),
+  screen: typography(64, 76, CALM_FONT.display),
+  section: typography(42, 54, CALM_FONT.display),
+  numeral: typography(64, 76, CALM_FONT.semibold),
   card: typography(38, 48, CALM_FONT.medium),
   body: typography(36, 48, CALM_FONT.regular),
   control: typography(36, 46, CALM_FONT.semibold),

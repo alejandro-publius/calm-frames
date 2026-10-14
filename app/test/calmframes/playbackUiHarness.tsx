@@ -1,5 +1,6 @@
 /** Actual player UI; only native media, SDK widgets and guard inputs are simulated. */
 import React from 'react';
+import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
 import { act, render } from '@testing-library/react-native';
 import { useTVEventHandler } from '@amazon-devices/react-native-kepler';
 import { benignStoryCard, benignStoryTitle } from '../../src/calmframes/benignStory';
@@ -85,7 +86,7 @@ export function makeMedia() {
   };
 }
 export const interval = { startMs: 5000, endMs: 9000, causes: ['general'] };
-export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none', showHomeOpening = false): ReturnType<typeof render> & { goBack: jest.Mock } {
+export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none', showHomeOpening = false, materials = false): ReturnType<typeof render> & { goBack: jest.Mock } {
   mockMedia = makeMedia();
   mockMedia.currentTime = kind === 'countdown' ? 3 : 6;
   const raw = kind === 'none' ? NO_CARD : cardAt([interval] as never, mockMedia.currentTime * 1000);
@@ -95,7 +96,7 @@ export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none', sh
   if (kind === 'covering') mockGuard.coverImageUri = JSON.parse(title.maps!.wcag!).scene_holds.holds[0].image_data_uri;
   const goBack = jest.fn();
   const data = { ...title, title: 'Harbor', format: 'MP4', categories: [], channelID: '', posterUrl: '', description: '', mediaType: 'video', mediaSourceType: 'url', uhd: false, secure: false, rentAmount: '' };
-  const view = render(<PlayerScreen navigation={{ goBack } as never} route={{ params: { data, showHomeOpening, guarded: { sha256: title.sha256, maps: title.maps } } } as never} />);
+  const view = render(<PlayerScreen navigation={{ goBack } as never} route={{ params: { data, showHomeOpening, guarded: { sha256: title.sha256, maps: title.maps } } } as never} />, { wrapper: ({ children }: { children: React.ReactNode }) => <CalmControlAppearance.Provider value={materials}>{children}</CalmControlAppearance.Provider> });
   return { ...view, goBack };
 }
 export function remote(eventType: string) {

@@ -4,9 +4,9 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 import render_harbor as host
 ROOT=Path(__file__).resolve().parents[2]
-parser=argparse.ArgumentParser();parser.add_argument('--browser',required=True);parser.add_argument('--height',type=int,default=1080,choices=(1080,720));args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--browser',required=True);parser.add_argument('--output',default='results/whole-flow-2026-10-14');parser.add_argument('--height',type=int,default=1080,choices=(1080,720));args=parser.parse_args()
 HEIGHT=args.height;WIDTH=HEIGHT*16//9
-OUT=ROOT/'results/whole-flow-2026-10-14'/str(HEIGHT)
+OUT=ROOT/args.output/str(HEIGHT)
 OUT.mkdir(parents=True,exist_ok=True)
 host.ROOT=ROOT
 # Deliberately long two-line fixture cue: checks competing layers, not native caption layout.
@@ -27,10 +27,10 @@ def render(node):
   props=node.get('props',{})
   if not props.get('show'): return ''
   css=host.style(props.get('style'))
-  return f'<div data-testid="multiline-caption-substitute" style="{css};display:flex;align-items:center;justify-content:flex-end;flex-direction:column"><span data-testid="multiline-cue-substitute" style="font:{32*HEIGHT/1080}px InterRegular;line-height:{42*HEIGHT/1080}px;color:#f3e8d3;background:black;padding:8px 16px;text-align:center">A small boat rests beside the lighthouse.<br>The evening light moves softly across the water.</span></div>'
+  return f'<div data-testid="multiline-caption-substitute" style="{css};display:flex;align-items:center;justify-content:flex-end;flex-direction:column"><span data-testid="multiline-cue-substitute" style="font:{32*HEIGHT/1080}px CalmSansRegular;line-height:{42*HEIGHT/1080}px;color:#f3e8d3;background:black;padding:8px 16px;text-align:center">A small boat rests beside the lighthouse.<br>The evening light moves softly across the water.</span></div>'
  return original_render(node)
 host.render=render
-fonts=''.join(f'@font-face{{font-family:{n};src:url({host.data(ROOT / "app/assets/fonts" / (n+".ttf"))})}}' for n in ('InterRegular','InterMedium','InterSemiBold'))
+fonts=''.join(f'@font-face{{font-family:{n};src:url({host.data(ROOT / "app/assets/fonts" / (n+".ttf"))})}}' for n in ('CalmSansRegular','CalmSansSemibold','CalmDisplaySemibold'))
 fonts+=f'@font-face{{font-family:MaterialIcons;src:url({host.data(ROOT/"app/node_modules/@amazon-devices/react-native-vector-icons/Fonts/MaterialIcons.ttf")})}}'
 inputs=[]
 for directory,prefix in [('home-preview','01'),('design-preview/after','02'),('playback-preview/after/1080','03'),('parent-preview/after/1080','04'),('utility-preview','05'),('unavailable-preview/after/1080','06')]:

@@ -6,8 +6,8 @@ import render_harbor as host
 ROOT = Path(__file__).resolve().parents[2]
 host.ROOT = ROOT
 OUT = ROOT / 'results/control-depth-study-2026-10-14'
-parser = argparse.ArgumentParser(); parser.add_argument('--browser', required=True); args = parser.parse_args()
-fonts = ''.join(f'@font-face{{font-family:{name};src:url({host.data(ROOT / "app/assets/fonts" / (name + ".ttf"))})}}' for name in ('InterRegular', 'InterMedium', 'InterSemiBold'))
+parser = argparse.ArgumentParser(); parser.add_argument('--browser', required=True); parser.add_argument('--output',default='results/control-depth-study-2026-10-14'); args = parser.parse_args(); OUT=ROOT/args.output
+fonts = ''.join(f'@font-face{{font-family:{name};src:url({host.data(ROOT / "app/assets/fonts" / (name + ".ttf"))})}}' for name in ('CalmSansRegular', 'CalmSansSemibold', 'CalmDisplaySemibold'))
 with sync_playwright() as p:
  browser = p.chromium.launch(headless=True, executable_path=args.browser)
  for height in (1080,720):
@@ -17,9 +17,9 @@ with sync_playwright() as p:
   for name in ['controls','selected-rows','home-default','home-focus','settings-group']:
    tree=json.loads((ROOT/'app/build/control-study'/str(height)/(name+'.json')).read_text())
    if name=='selected-rows':
-    body=f'<main class="view" style="padding:{54*unit}px {96*unit}px"><h1 style="font:{64*unit}px/{76*unit}px InterRegular;margin:0">Selection and focus</h1><p style="font:{32*unit}px/{42*unit}px InterRegular;color:#bdd0cf;margin:{12*unit}px 0 {20*unit}px">Actual selected settings row · browser rendering · native pixels pending</p>'
+    body=f'<main class="view" style="padding:{54*unit}px {96*unit}px"><h1 style="font:{64*unit}px/{76*unit}px CalmSansRegular;margin:0">Selection and focus</h1><p style="font:{32*unit}px/{42*unit}px CalmSansRegular;color:#bdd0cf;margin:{12*unit}px 0 {20*unit}px">Actual selected settings row · browser rendering · native pixels pending</p>'
     for item in tree:
-     body+=f'<section class="view" style="margin-bottom:0"><span style="font:{28*unit}px/{34*unit}px InterRegular;color:#bdd0cf;margin-bottom:{6*unit}px">{item["state"]}</span>{host.render(item["tree"])}</section>'
+     body+=f'<section class="view" style="margin-bottom:0"><span style="font:{28*unit}px/{34*unit}px CalmSansRegular;color:#bdd0cf;margin-bottom:{6*unit}px">{item["state"]}</span>{host.render(item["tree"])}</section>'
     body+='</main>'
    else: body=host.render(tree)
    page.set_content(f'''<!doctype html><style>{fonts}

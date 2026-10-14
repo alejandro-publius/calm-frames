@@ -555,12 +555,12 @@ const ParentAreaScreen = ({
                 focusedRow === key ? styles.focused : null,
               ]}>
               <View style={styles.rowText}>
-                <Text style={[styles.rowTitle, focusedRow === key ? styles.focusedLabel : null]}>{PRESETS[name].title}</Text>
-                <Text style={styles.rowDetail}>{PRESETS[name].description}</Text>
+                <Text style={[styles.rowTitle, focusedRow === key ? styles.focusedLabel : null, saving ? styles.disabledRowText : null]}>{PRESETS[name].title}</Text>
+                <Text style={[styles.rowDetail, saving ? styles.disabledRowText : null]}>{PRESETS[name].description}</Text>
               </View>
               <View style={styles.rowState}>
                 {chosen ? (
-                  <Text style={styles.rowStateWord}>✓ {CHOSEN_WORD}</Text>
+                  <Text style={[styles.rowStateWord, saving ? styles.disabledRowText : null]}>✓ {CHOSEN_WORD}</Text>
                 ) : null}
               </View>
             </TouchableOpacity>
@@ -949,6 +949,7 @@ const styles = StyleSheet.create({
     backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
   },
   rowText: { flex: 1 },
+  disabledRowText: { color: '#9EB1B2' },
   rowTitle: {
     ...CALM_TEXT.control,
     color: CALM_COLORS.TEXT,

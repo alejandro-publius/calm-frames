@@ -15,7 +15,7 @@ test('export actual playback screen trees', () => {
   const folder = path.resolve(__dirname, '../../build/playback-preview', stage, String(height));
   fs.mkdirSync(folder, { recursive: true });
   for (const name of ['controls-back', 'controls-captions', 'caption-menu', 'hold-controls', 'hold-caption-menu', 'playing-hold', 'paused-hold', 'paused-countdown', 'paused-story', 'error']) {
-    const view = startPlayer(name.includes('hold') ? 'covering' : name.includes('countdown') ? 'countdown' : 'none');
+    const view = startPlayer(name.includes('hold') ? 'covering' : name.includes('countdown') ? 'countdown' : 'none', false, true);
     fireEvent.press(view.getByTestId('video-player-caption-btn'));
     fireEvent.press(view.getByRole('radio', { name: 'English practice captions' }));
     if (name.startsWith('paused')) act(() => mockMedia.pause());

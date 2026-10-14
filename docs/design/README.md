@@ -142,22 +142,26 @@ table. Calm Frames' own words on the player sit on a `SURFACE` card or plate.
 
 ## Type
 
-Inter, in three static licensed faces bundled in `app/assets/fonts`
-(`CALM_FONT`). Each face is its own family and is drawn at `fontWeight` 400,
-so the weight comes from the face and nothing is synthetically emboldened. The
-running Vega image has Amazon Ember regular and medium but no semibold, which
-is why Inter is bundled ([native notes](NATIVE_IMPLEMENTATION.md)). Sizes are
-1080p units. The smallest text anywhere is `MINIMUM_TEXT_SIZE`, 32 units.
+Fraunces supplies restrained major headings; Source Sans 3 supplies functional UI,
+body text and equal-width keypad numerals. The three static OFL faces in
+`app/assets/fonts` have unique matching family/file names, with `fontWeight` 400
+so no synthetic weight is requested. Fraunces is fixed at weight 600, optical
+size 32, softness 20 and wonk 0. License notices and pinned-source hashes live
+beside the files. The prior Inter files remain preserved. New native glyph
+rendering still needs observation; file placement follows the existing SDK
+package and previously verified project font mechanism, not an assumed new API.
+Sizes remain 1080p units, with a 32-unit minimum.
 
 | Role | Face | Size / line height | Use |
 |---|---|---|---|
-| `feature` | InterSemiBold | 80 / 92 | The featured title on the library. |
-| `screen` | InterSemiBold | 64 / 76 | Screen titles (setup, parental controls, credits, title details) and the PIN pad. |
-| `section` | InterSemiBold | 42 / 54 | Section headings in the library, details and settings. |
-| `card` | InterMedium | 38 / 48 | Titles beneath artwork, the player card's title, and the day headings in the hidden-parts history. |
-| `body` | InterRegular | 36 / 48 | Short explanations and synopses. |
-| `control` | InterSemiBold | 36 / 46 | Buttons, rows and the wordmark. |
-| `supporting` | InterRegular | 32 / 42 | Qualifiers, helper text, badges and the practice plate. |
+| `feature` | CalmDisplaySemibold | 80 / 92 | Featured titles. |
+| `screen` | CalmDisplaySemibold | 64 / 76 | Major screen and scene titles. |
+| `section` | CalmDisplaySemibold | 42 / 54 | Section headings. |
+| `numeral` | CalmSansSemibold | 64 / 76 | PIN keys and entry marks. |
+| `card` | CalmSansSemibold | 38 / 48 | Cards and small titles. |
+| `body` | CalmSansRegular | 36 / 48 | Explanations and synopses. |
+| `control` | CalmSansSemibold | 36 / 46 | Buttons and rows. |
+| `supporting` | CalmSansRegular | 32 / 42 | Qualifiers, helper text and badges. |
 
 Keep text in sentence case. Shorten the words before shrinking the type.
 `CALM_TYPE` in the same file holds older size-only tokens; new work uses the

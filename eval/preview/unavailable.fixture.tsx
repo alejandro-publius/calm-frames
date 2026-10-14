@@ -1,5 +1,5 @@
 /** Copy into app/test/calmframes for an explicit preview export only. */
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render as renderBase } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
@@ -34,3 +34,6 @@ test('export unavailable variants at the target layout size', () => {
     view.unmount();
   }
 });
+
+import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
+const render = (ui: React.ReactElement) => renderBase(ui, { wrapper: ({ children }: { children: React.ReactNode }) => <CalmControlAppearance.Provider value>{children}</CalmControlAppearance.Provider> });

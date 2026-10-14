@@ -8,7 +8,7 @@ import CalmButton from '../../src/calmframes/CalmButton';
 import PinKeypad from '../../src/calmframes/PinKeypad';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
-import { ControlSurfaceStudy } from '../../src/calmframes/CalmControlSurface';
+import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
 import { CALM_TEXT, scale } from '../../src/calmframes/calmStyles';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
@@ -18,7 +18,7 @@ import { checkedShelf } from './shelfFixtures';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 jest.mock('../../src/utils/pixelUtils', () => ({ ...jest.requireActual('../../src/utils/pixelUtils'), scaleUxToDp: (value: number) => Math.round(value * Number(process.env.CONTROL_STUDY_HEIGHT || 1080) / 1080) }));
 const states = ['Default', 'Focus', 'Pressed', 'Disabled'];
-const study = (children: React.ReactNode) => <ControlSurfaceStudy.Provider value>{children}</ControlSurfaceStudy.Provider>;
+const study = (children: React.ReactNode) => <CalmControlAppearance.Provider value>{children}</CalmControlAppearance.Provider>;
 const height = Number(process.env.CONTROL_STUDY_HEIGHT || 1080);
 const out = path.resolve(__dirname, '../../build/control-study', String(height));
 const save = (name: string, tree: unknown) => { fs.mkdirSync(out, { recursive: true }); fs.writeFileSync(path.join(out, name + '.json'), JSON.stringify(tree, null, 2)); };
@@ -74,6 +74,10 @@ test('export four states through real shared controls, home and an in-memory set
     if (state === 'Disabled') parent.rerender(study(<ParentAreaScreen {...props} saving />));
     const selected = parent.getByTestId('parent-area-preset-wcag');
     expect(selected.props.accessibilityState.checked).toBe(true);
+    if (state === 'Disabled') {
+      expect(selected.props.accessibilityState.disabled).toBe(true);
+      expect(StyleSheet.flatten(parent.getByText('✓ Chosen').props.style).color).toBe('#9EB1B2');
+    }
     if (state === 'Focus' || state === 'Pressed') fireEvent(selected, 'focus');
     if (state === 'Pressed') fireEvent(selected, 'pressIn', {});
     const tree = parent.toJSON();

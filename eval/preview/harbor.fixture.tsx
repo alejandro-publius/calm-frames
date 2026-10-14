@@ -1,6 +1,6 @@
 /** Browser preview export. No native rendering or input behavior is implied. */
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render as renderBase } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
@@ -37,3 +37,6 @@ test('export actual Harbor host trees for browser preview', () => {
     details.unmount();
   }
 });
+
+import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
+const render = (ui: React.ReactElement) => renderBase(ui, { wrapper: ({ children }: { children: React.ReactNode }) => <CalmControlAppearance.Provider value>{children}</CalmControlAppearance.Provider> });
