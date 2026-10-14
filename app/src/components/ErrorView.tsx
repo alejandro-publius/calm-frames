@@ -32,6 +32,6 @@ export const styles = StyleSheet.create({
     gap: scale(CALM_SPACE.BLOCK),
   },
   message: { alignItems: 'flex-start', maxWidth: scale(1200), gap: scale(CALM_SPACE.ROW) },
-  title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, textAlign: 'left' },
+  title: { ...CALM_TEXT.screen, color: CALM_COLORS.FAILED, textAlign: 'left' },
   detail: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
 });

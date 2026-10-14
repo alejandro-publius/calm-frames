@@ -110,7 +110,7 @@ export default function HarborOpening({
         ] }]}>
           <Image source={require('../../assets/image/tv/harbor-water.png')} style={styles.image} resizeMode="cover" fadeDuration={0} />
         </Animated.View>
-        <LinearGradient colors={['#102F3A00', CALM_COLORS.BACKGROUND]} locations={[0, 0.85]}
+        <LinearGradient colors={[`${CALM_COLORS.BACKGROUND}00`, CALM_COLORS.BACKGROUND]} locations={[0, 0.85]}
           start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.shore} />
       </View>
       <View style={styles.copy}>

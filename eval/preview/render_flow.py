@@ -22,12 +22,12 @@ def render(node):
   if kind=='Image' and props.get('source',{}).get('uri','').startswith('data:image/'):
    return f'<img style="{css};width:100%;height:100%;object-fit:contain" src="{props["source"]["uri"]}">'
   if kind=='PreviewNativeSeekBar':
-   return '<div style="height:12px;background:#667777;border-radius:6px"><div style="width:30%;height:100%;background:#f3e8d3"></div></div>'
+   return '<div style="height:12px;background:#667777;border-radius:6px"><div style="width:30%;height:100%;background:#f4ecdd"></div></div>'
  if isinstance(node,dict) and node['type']=='PreviewNativeCaptions':
   props=node.get('props',{})
   if not props.get('show'): return ''
   css=host.style(props.get('style'))
-  return f'<div data-testid="multiline-caption-substitute" style="{css};display:flex;align-items:center;justify-content:flex-end;flex-direction:column"><span data-testid="multiline-cue-substitute" style="font:{32*HEIGHT/1080}px CalmSansRegular;line-height:{42*HEIGHT/1080}px;color:#f3e8d3;background:black;padding:8px 16px;text-align:center">A small boat rests beside the lighthouse.<br>The evening light moves softly across the water.</span></div>'
+  return f'<div data-testid="multiline-caption-substitute" style="{css};display:flex;align-items:center;justify-content:flex-end;flex-direction:column"><span data-testid="multiline-cue-substitute" style="font:{32*HEIGHT/1080}px CalmSansRegular;line-height:{42*HEIGHT/1080}px;color:#f4ecdd;background:black;padding:8px 16px;text-align:center">A small boat rests beside the lighthouse.<br>The evening light moves softly across the water.</span></div>'
  return original_render(node)
 host.render=render
 fonts=''.join(f'@font-face{{font-family:{n};src:url({host.data(ROOT / "app/assets/fonts" / (n+".ttf"))})}}' for n in ('CalmSansRegular','CalmSansSemibold','CalmDisplaySemibold'))
@@ -46,7 +46,7 @@ with sync_playwright() as p:
  for name,file in inputs:
   tree=json.loads(file.read_text())
   html=f'''<!doctype html><html><head><title>{name} — browser approximation</title><style>{fonts}
-*{{box-sizing:border-box}}html,body{{margin:0;width:{WIDTH}px;height:{HEIGHT}px;background:#102f3a}}body{{display:flex;flex-direction:column;overflow:hidden}}
+*{{box-sizing:border-box}}html,body{{margin:0;width:{WIDTH}px;height:{HEIGHT}px;background:#151c26}}body{{display:flex;flex-direction:column;overflow:hidden}}
 .view{{display:flex;flex-direction:column;position:relative;flex-shrink:0;min-height:0;min-width:0;border-style:solid;border-width:0}}
 .text{{display:block;position:relative;flex-shrink:0;white-space:pre-wrap;border-style:solid;border-width:0}}img{{display:block;flex-shrink:0}}.scroll{{overflow:auto;scrollbar-width:none}}
 </style></head><body>{render(tree)}</body></html>'''
@@ -78,9 +78,9 @@ with sync_playwright() as p:
  for chunk in range(0,len(captures),16):
   subset=captures[chunk:chunk+16]
   page.set_viewport_size({'width':1280,'height':400*((len(subset)+1)//2)})
-  page.set_content('<style>body{margin:0;background:#102f3a;color:#f3e8d3;font:20px sans-serif;display:grid;grid-template-columns:640px 640px}figure{margin:0;height:400px}img{width:640px;height:360px}figcaption{padding:10px}</style>'+''.join(f'<figure><img src="{host.data(OUT/(n+".png"))}"><figcaption>{n}</figcaption></figure>' for n in subset))
+  page.set_content('<style>body{margin:0;background:#151c26;color:#f4ecdd;font:20px sans-serif;display:grid;grid-template-columns:640px 640px}figure{margin:0;height:400px}img{width:640px;height:360px}figcaption{padding:10px}</style>'+''.join(f'<figure><img src="{host.data(OUT/(n+".png"))}"><figcaption>{n}</figcaption></figure>' for n in subset))
   page.screenshot(path=str(OUT/f'contact-sheet-{chunk//16+1:02d}.png'))
  browser.close()
 (OUT/'bounds.json').write_text(json.dumps(bounds,indent=2)+'\n')
-(OUT/'index.html').write_text('<!doctype html><title>Calm Frames full flow browser review</title><style>body{background:#102f3a;color:#f3e8d3;font:20px sans-serif}img{width:100%;max-width:1920px}figure{margin:40px 0}</style><h1>Full flow — browser approximation</h1><p>Actual component host trees. Video, native captions and native seekbar are substitutes. No native input or VoiceView pass is implied.</p>'+''.join(f'<figure><figcaption>{n}</figcaption><a href="{n}.png"><img src="{n}.png"></a></figure>' for n in captures))
+(OUT/'index.html').write_text('<!doctype html><title>Calm Frames full flow browser review</title><style>body{background:#151c26;color:#f4ecdd;font:20px sans-serif}img{width:100%;max-width:1920px}figure{margin:40px 0}</style><h1>Full flow — browser approximation</h1><p>Actual component host trees. Video, native captions and native seekbar are substitutes. No native input or VoiceView pass is implied.</p>'+''.join(f'<figure><figcaption>{n}</figcaption><a href="{n}.png"><img src="{n}.png"></a></figure>' for n in captures))
 print(f'{len(inputs)} states; {len(captures)} captures; {OUT}')

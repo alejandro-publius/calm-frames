@@ -1,6 +1,6 @@
 import { scaleUxToDp } from '../utils/pixelUtils';
 
-/** Dusk coast palette study; review-only branch. Contrast is checked against rendered text and focus. */
+/** Approved dusk coast palette; shared across application screens. Contrast is checked against rendered text and focus. */
 export const CALM_COLORS = {
   /** Every Calm Frames screen sits on this. */
   BACKGROUND: '#151C26',
@@ -8,7 +8,7 @@ export const CALM_COLORS = {
   SURFACE: '#303B48',
   SURFACE_FOCUSED: '#3B4856',
   BORDER: '#697585',
-  /** Lighthouse gold is reserved for focus in the studied screens. */
+  /** Lighthouse gold is reserved for focus. */
   FOCUS_RING: '#E6B963',
   PRIMARY: '#D88B72',
   TEXT_DISABLED: '#9DA4AE',
@@ -21,7 +21,7 @@ export const CALM_COLORS = {
   /** The shield on a checked title. */
   VERIFIED: '#E7D9BF',
   /** A title still being checked. */
-  PENDING: '#E2C275',
+  PENDING: '#B9C9DA',
   /** A title whose check failed. Not a warning red, this is not an alarm. */
   FAILED: '#F2BDB1',
   /** The cover itself. */

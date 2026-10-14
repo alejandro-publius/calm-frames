@@ -25,10 +25,12 @@ test('export palette and actual control states with contrast floors', () => {
   fireEvent(view.getByTestId('palette-Focused'), 'focus');
   fireEvent(view.getByTestId('palette-Pressed'), 'pressIn', {});
   const ratios = {
+    pendingOnSlate: contrastRatio(CALM_COLORS.PENDING, CALM_COLORS.SURFACE),
+    errorOnSlate: contrastRatio(CALM_COLORS.FAILED, CALM_COLORS.SURFACE),
     ivoryOnInk: contrastRatio(CALM_COLORS.TEXT, CALM_COLORS.BACKGROUND),
     secondaryTextOnInk: contrastRatio(CALM_COLORS.TEXT_DIM, CALM_COLORS.BACKGROUND),
-    primaryMinimum: Math.min(...[...CONTROL_MATERIAL.cream, ...CONTROL_MATERIAL.creamPressed].map(c => contrastRatio(CALM_COLORS.INK, c))),
-    secondaryMinimum: Math.min(...[...CONTROL_MATERIAL.teal, ...CONTROL_MATERIAL.tealPressed].map(c => contrastRatio(CALM_COLORS.TEXT_DIM, c))),
+    primaryMinimum: Math.min(...[...CONTROL_MATERIAL.primary, ...CONTROL_MATERIAL.primaryPressed].map(c => contrastRatio(CALM_COLORS.INK, c))),
+    secondaryMinimum: Math.min(...[...CONTROL_MATERIAL.secondary, ...CONTROL_MATERIAL.secondaryPressed].map(c => contrastRatio(CALM_COLORS.TEXT_DIM, c))),
     selectedMinimum: Math.min(...CONTROL_MATERIAL.selected.map(c => contrastRatio(CALM_COLORS.TEXT_DIM, c))),
     disabled: contrastRatio(CALM_COLORS.TEXT_DISABLED, CONTROL_MATERIAL.disabled[0]),
     focusOnInkSeparator: contrastRatio(CALM_COLORS.FOCUS_RING, CALM_COLORS.INK),

@@ -20,7 +20,7 @@ export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDe
 const styles = StyleSheet.create({
   tools: { marginTop: scale(12), gap: scale(8), alignItems: 'flex-start' },
   content: { maxWidth: scale(920), paddingTop: scale(40), gap: scale(24) },
-  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING },
+  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT },
   body: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT },
   detail: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM },

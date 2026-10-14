@@ -26,11 +26,11 @@ test('focus, press and release remain stationary, readable and call the real act
   const focused = StyleSheet.flatten(control.props.style);
   expect(focused.borderColor).toBe('#E6B963');
   fireEvent(control, 'pressIn', {});
-  expect(view.UNSAFE_getByType('LinearGradient' as never).props.colors).toEqual(CONTROL_MATERIAL.creamPressed);
+  expect(view.UNSAFE_getByType('LinearGradient' as never).props.colors).toEqual(CONTROL_MATERIAL.primaryPressed);
   expect(StyleSheet.flatten(control.props.style)).toEqual(focused);
   expect(StyleSheet.flatten(view.getByTestId('calm-button-label').props.style).color).toBe('#151C26');
   fireEvent(control, 'pressOut', {});
-  expect(view.UNSAFE_getByType('LinearGradient' as never).props.colors).toEqual(CONTROL_MATERIAL.cream);
+  expect(view.UNSAFE_getByType('LinearGradient' as never).props.colors).toEqual(CONTROL_MATERIAL.primary);
   fireEvent.press(control); expect(press).toHaveBeenCalledTimes(1);
   fireEvent(control, 'blur');
   expect(StyleSheet.flatten(control.props.style).borderColor).toBe('transparent');
@@ -59,14 +59,14 @@ test('tertiary has no resting plate and keeps its full target', () => {
   expect(view.UNSAFE_queryAllByType('LinearGradient' as never)).toHaveLength(1);
 });
 
-test('gradient extremes preserve text contrast even when translucent teal is composited over white', () => {
+test('gradient extremes preserve text contrast even when translucent secondary is composited over white', () => {
   const composite = (color: string) => {
     if (color.length === 7) return color;
     const alpha = parseInt(color.slice(7), 16) / 255;
     return '#' + [1, 3, 5].map(i => Math.round(parseInt(color.slice(i, i + 2), 16) * alpha + 255 * (1 - alpha)).toString(16).padStart(2, '0')).join('');
   };
-  for (const color of [...CONTROL_MATERIAL.cream, ...CONTROL_MATERIAL.creamPressed]) expect(contrastRatio('#151C26', color)).toBeGreaterThanOrEqual(4.5);
-  for (const color of [...CONTROL_MATERIAL.teal, ...CONTROL_MATERIAL.tealPressed, ...CONTROL_MATERIAL.selected, ...CONTROL_MATERIAL.disabled]) expect(contrastRatio('#BDC2C9', composite(color))).toBeGreaterThanOrEqual(4.5);
+  for (const color of [...CONTROL_MATERIAL.primary, ...CONTROL_MATERIAL.primaryPressed]) expect(contrastRatio('#151C26', color)).toBeGreaterThanOrEqual(4.5);
+  for (const color of [...CONTROL_MATERIAL.secondary, ...CONTROL_MATERIAL.secondaryPressed, ...CONTROL_MATERIAL.selected, ...CONTROL_MATERIAL.disabled]) expect(contrastRatio('#BDC2C9', composite(color))).toBeGreaterThanOrEqual(4.5);
   expect(contrastRatio('#E6B963', '#151C26')).toBeGreaterThanOrEqual(3);
   expect(contrastRatio('#9DA4AE', '#282F39')).toBeGreaterThanOrEqual(4.5);
 });

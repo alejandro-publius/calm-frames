@@ -99,12 +99,12 @@ test('export four states through real shared controls, home and an in-memory set
 });
 
 const styles = StyleSheet.create({
-  sheet: { flex: 1, paddingHorizontal: scale(96), paddingTop: scale(54), backgroundColor: '#102F3A' },
-  heading: { ...CALM_TEXT.screen, color: '#F3E8D3' },
-  note: { ...CALM_TEXT.supporting, color: '#BDD0CF', marginTop: scale(12), marginBottom: scale(48) },
+  sheet: { flex: 1, paddingHorizontal: scale(96), paddingTop: scale(54), backgroundColor: CALM_COLORS.BACKGROUND },
+  heading: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT },
+  note: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginTop: scale(12), marginBottom: scale(48) },
   columns: { flexDirection: 'row', alignItems: 'center', marginBottom: scale(24) },
-  column: { ...CALM_TEXT.supporting, color: '#BDD0CF', width: scale(350) },
+  column: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, width: scale(350) },
   row: { flexDirection: 'row', alignItems: 'center', minHeight: scale(175) },
-  rowLabel: { ...CALM_TEXT.supporting, color: '#BDD0CF', width: scale(280) },
+  rowLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, width: scale(280) },
   cell: { width: scale(350) },
 });

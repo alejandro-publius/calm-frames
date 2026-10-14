@@ -17,8 +17,8 @@ holds it, tokens.json and the code to each other:
   clears 3 to 1, the floors calmStyles.ts names;
 - the type roles, spacing, focus width and floors on the page and in
   tokens.json are the ones calmStyles.ts defines;
-- the logo's colours in app/assets/brand/make_logo.py are palette colours,
-  and the brand page's logo table names the right token for each.
+- the original logo palette is preserved independently of the approved UI
+  palette, and the brand page records its original roles.
 
 Code is the source of truth. When this fails, change the page and
 tokens.json to match calmStyles.ts, not the other way round.
@@ -428,17 +428,15 @@ def test_focus_width_and_text_floor_agree(page, tokens, source):
 # ---------------------------------------------------------------- the mark and the renders
 
 
-def test_the_logo_colours_are_palette_colours(calm_colors):
+def test_the_original_logo_palette_is_preserved_independently_of_ui():
+    # User-approved UI palette changes must not recolor existing artwork.
+    original = {"TEAL": ("BACKGROUND", "#102F3A"), "CREAM": ("TEXT", "#F3E8D3"),
+                "SAFF": ("FOCUS_RING", "#E6A957"), "SAFFD": ("ACCENT_DARK", "#B87A2C"),
+                "INK": ("INK", "#17323C")}
     logo = dict(re.findall(r'([A-Z]+)="(#[0-9A-Fa-f]{6})"', LOGO.read_text(encoding="utf-8")))
-    assert logo, "found no colours at the top of make_logo.py"
-    by_hex = {value: name for name, value in calm_colors.items()}
-    stray = {name: value for name, value in logo.items() if value.upper() not in by_hex}
-    assert not stray, f"make_logo.py draws colours that are not in CALM_COLORS: {stray}"
-
+    assert logo == {name: value for name, (_, value) in original.items()}
     rows = table(section(BRAND.read_text(encoding="utf-8"), "## The palette"))
-    on_brand_page = {row[0]: (row[1], row[2].upper()) for row in rows}
-    expected = {name: (by_hex[value.upper()], value.upper()) for name, value in logo.items()}
-    assert on_brand_page == expected, "docs/brand/README.md maps a logo colour to the wrong token"
+    assert {row[0]: (row[1], row[2].upper()) for row in rows} == original
 
 
 def test_every_render_the_page_shows_is_there(page):
@@ -469,9 +467,8 @@ def test_the_ratio_check_notices_one_changed_ratio(page, calm_colors):
 
 
 def test_the_floor_check_refuses_a_pair_under_the_floor(calm_colors):
-    # Dark saffron on a card is a real pair of palette colours at 3.08 to 1,
-    # which is why the page says dark saffron carries no text.
-    row = ("ACCENT_DARK", "SURFACE", "3.08")
+    # Disabled text is intended for its darker neutral material, not this fill.
+    row = ("TEXT_DISABLED", "SURFACE_FOCUSED", truncated(contrast(calm_colors["TEXT_DISABLED"], calm_colors["SURFACE_FOCUSED"])))
     assert ratio_mismatches([row], calm_colors) == []
     assert floor_failures([row], calm_colors, TEXT_FLOOR) != []
     assert floor_failures([row], calm_colors, RING_FLOOR) == []

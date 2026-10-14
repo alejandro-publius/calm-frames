@@ -4,6 +4,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { AccessibilityInfo, Animated, StyleSheet } from 'react-native';
 import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
+import { CALM_COLORS } from '../../src/calmframes/calmStyles';
 import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
 import { checkedShelf } from './shelfFixtures';
 import { BENIGN_STORY_ID } from '../../src/calmframes/benignStory';
@@ -87,8 +88,8 @@ test('home states the supported-title benefit and keeps parental controls tertia
   const control = view.getByTestId('kid-home-parent-area');
   expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent', minHeight: 88, borderWidth: 6 });
   fireEvent(control, 'focus');
-  expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: '#234B55', borderColor: '#E6A957', minHeight: 88, borderWidth: 6 });
-  expect(StyleSheet.flatten(view.getByTestId('kid-home-parent-area-label').props.style)).toMatchObject({ color: '#F3E8D3', textDecorationLine: 'underline' });
+  expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: CALM_COLORS.SURFACE_FOCUSED, borderColor: CALM_COLORS.FOCUS_RING, minHeight: 88, borderWidth: 6 });
+  expect(StyleSheet.flatten(view.getByTestId('kid-home-parent-area-label').props.style)).toMatchObject({ color: CALM_COLORS.TEXT, textDecorationLine: 'underline' });
   fireEvent.press(control);
   expect(parent).toHaveBeenCalledTimes(1);
   fireEvent(control, 'blur');

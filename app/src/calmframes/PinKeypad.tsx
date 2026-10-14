@@ -115,7 +115,7 @@ const PinKeypad = ({
               digit === 'delete' ? styles.keyWide : null,
               focusedDigit === digit ? styles.keyFocused : null,
             ]}>
-            <Text style={[digit === 'delete' ? styles.deleteLabel : styles.keyLabel, focusedDigit === digit ? styles.focusedLabel : null]}>
+            <Text style={[digit === 'delete' ? styles.deleteLabel : styles.keyLabel, focusedDigit === digit ? styles.focusedLabel : null, disabled ? styles.disabledLabel : null]}>
               {digit === 'delete' ? 'Delete' : digit}
             </Text>
           </TouchableOpacity>
@@ -127,6 +127,7 @@ const PinKeypad = ({
 
 const styles = StyleSheet.create({
   focusedLabel: { textDecorationLine: 'underline' },
+  disabledLabel: { color: CALM_COLORS.TEXT_DISABLED },
   keypad: {
     width: scale(COLUMNS * (KEY_WIDTH + KEY_GAP)),
   },

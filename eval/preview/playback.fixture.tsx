@@ -1,5 +1,5 @@
 /** Native video/captions/seekbar are explicitly represented by browser substitutes. */
-import { startPlayer, mockMedia, mockError } from './playbackUiHarness';
+import { startPlayer, mockMedia, mockError, mockBuffering } from './playbackUiHarness';
 import { act, fireEvent } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
@@ -14,7 +14,7 @@ test('export actual playback screen trees', () => {
   const height = 1080;
   const folder = path.resolve(__dirname, '../../build/playback-preview', stage, String(height));
   fs.mkdirSync(folder, { recursive: true });
-  for (const name of ['controls-back', 'controls-captions', 'caption-menu', 'hold-controls', 'hold-caption-menu', 'playing-hold', 'paused-hold', 'paused-countdown', 'paused-story', 'error']) {
+  for (const name of ['controls-back', 'controls-captions', 'caption-menu', 'hold-controls', 'hold-caption-menu', 'playing-hold', 'paused-hold', 'paused-countdown', 'paused-story', 'loading', 'error']) {
     const view = startPlayer(name.includes('hold') ? 'covering' : name.includes('countdown') ? 'countdown' : 'none', false, true);
     fireEvent.press(view.getByTestId('video-player-caption-btn'));
     fireEvent.press(view.getByRole('radio', { name: 'English practice captions' }));
@@ -27,6 +27,7 @@ test('export actual playback screen trees', () => {
       fireEvent(view.getByRole('radio', { name: 'English practice captions' }), 'focus');
     }
     if (name.startsWith('paused') || name === 'playing-hold') act(() => jest.advanceTimersByTime(6000));
+    if (name === 'loading') { act(() => mockBuffering(true)); act(() => jest.advanceTimersByTime(1000)); expect(view.getByTestId('buffering-status')).toBeTruthy(); }
     if (name === 'error') act(() => mockError(true));
     const back = view.queryByTestId('player-error-back');
     if (back) fireEvent(back, 'focus');

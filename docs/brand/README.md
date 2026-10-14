@@ -82,7 +82,7 @@ Three things worth knowing:
 The approved October 10 redesign uses bundled InterSemiBold for the wordmark
 and InterRegular for the brand line. The Qt renderer registers the same static
 licensed faces as the app. The SIL license is in `app/assets/fonts/` and
-`docs/design/assets/`. Deep teal is now #102F3A across the tile and app.
+`docs/design/assets/`. The preserved tile uses #102F3A. The current app UI uses the separately approved dusk-coast palette.
 No Amazon font files are redistributed.
 
 ## Harbor presentation artwork
@@ -152,6 +152,8 @@ establish native screen composition. Current run evidence is recorded in
 `docs/COMPLETION_CHECKLIST.md`.
 
 ## The palette
+
+These are the preserved artwork palette and original token roles, not the current app UI tokens. The approved dusk-coast UI does not recolor these assets.
 
 The palette has one home: the [palette on the design page](../design/README.md#palette),
 which lists every `CALM_COLORS` entry in `app/src/calmframes/calmStyles.ts`

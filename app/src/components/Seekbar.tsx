@@ -339,7 +339,7 @@ const Seekbar = ({
    *
    */
   const getIndicatorColor = (focusedValue: boolean) =>
-    focusedValue ? COLORS.ORANGE : COLORS.GRAY;
+    focusedValue ? CALM_COLORS.FOCUS_RING : CALM_COLORS.TEXT_DIM;
 
   /**
    * Formats the thumbnail label to display human-readable time.

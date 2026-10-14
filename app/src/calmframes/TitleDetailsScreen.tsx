@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(160) },
   artEdge: { position: 'absolute', top: 0, bottom: 0, right: 0, width: scale(120) },
   kicker: { alignItems: 'flex-start', marginBottom: scale(8) },
-  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, textAlign: 'left' },
+  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
   longTitle: { fontSize: scale(64), lineHeight: scale(76) },
   synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },

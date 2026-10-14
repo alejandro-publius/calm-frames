@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   brand: { flexDirection: 'row', gap: scale(20), alignItems: 'center', height: scale(80) },
   mark: { width: scale(80), height: scale(80) }, wordmark: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT },
   copy: { paddingTop: scale(104), width: scale(800) },
-  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, marginBottom: scale(12) },
+  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12) },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(12) },
   detail: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, minHeight: scale(84), marginBottom: scale(24) },
   actions: { flexDirection: 'row', gap: scale(20), alignItems: 'center' },

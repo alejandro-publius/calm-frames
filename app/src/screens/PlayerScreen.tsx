@@ -35,6 +35,7 @@ import {
   View,
 } from 'react-native';
 import CalmCard from '../calmframes/CalmCard';
+import { CALM_COLORS } from '../calmframes/calmStyles';
 import { concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
 import {
   benignStoryCard,
@@ -773,7 +774,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 2,
   },
-  playerContainer: { backgroundColor: COLORS.GRAY, height: '100%' },
+  playerContainer: { backgroundColor: CALM_COLORS.BACKGROUND, height: '100%' },
   surfaceContainer: { backgroundColor: COLORS.BLACK, alignItems: 'stretch' },
 
   videoSurface: { zIndex: 0 },

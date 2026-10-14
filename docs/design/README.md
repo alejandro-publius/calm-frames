@@ -61,24 +61,25 @@ medical device."
 
 ## Palette
 
-Thirteen colours, all in `CALM_COLORS`. The `tokens.json` key is the same name
-in camelCase.
+Approved dusk coast interface palette. Original logo and Harbor/zen artwork are preserved; their embedded colors are not UI tokens. Shared material gradients live in `CalmControlSurface.tsx`.
 
 | Token | tokens.json | Hex | Use |
 |---|---|---|---|
-| `BACKGROUND` | `background` | `#102F3A` | The ground every screen sits on, and the listing tile ground. |
-| `SURFACE` | `surface` | `#1A414B` | Cards, settings rows, resting buttons, notices, badges, the player card and the practice plate. |
-| `SURFACE_FOCUSED` | `surfaceFocused` | `#234B55` | The fill of a focused or chosen control, and the quieter edge of an unavailable button. |
-| `BORDER` | `border` | `#66A0B4` | Thin edges on cards and the flash map strip, dividers, and the bar on a calm notice. Never text. |
-| `FOCUS_RING` | `focusRing` | `#E6A957` | Saffron. The focus ring, the primary action's fill, and the short label above a featured title. |
-| `ACCENT_DARK` | `accentDark` | `#B87A2C` | Dark saffron. Edges and fills only, never text. Today only the fold line on the robe in the mark draws it; the flashmap report declares it as a stylesheet variable but draws nothing with it, and no app screen draws it. |
-| `TEXT` | `text` | `#F3E8D3` | Cream. Titles, headings, body text and control labels. |
-| `TEXT_DIM` | `textDim` | `#BDD0CF` | Supporting text: descriptions, helper lines, shelf qualifiers, the step counter, unavailable labels. |
-| `INK` | `ink` | `#17323C` | Text on saffron, and the fill of the focused primary action. |
-| `VERIFIED` | `verified` | `#7FD1A3` | The Ready to watch badge. |
-| `PENDING` | `pending` | `#E2C275` | The Preparing badge, the bar on a waiting notice, and the non-red marks on the flash map strip in title details. |
-| `FAILED` | `failed` | `#F2BDB1` | The Unavailable badge, the bar on a blocked notice, and the red marks on the flash map strip. |
-| `COVER` | `cover` | `#000000` | The cover. `CoverLayer.tsx` paints the same `#000000` itself. |
+| `BACKGROUND` | `background` | `#151C26` | Ink ground behind interface screens; artwork retains its original palette. |
+| `SURFACE` | `surface` | `#303B48` | Weathered slate cards, notices, status plates and fallback controls. |
+| `SURFACE_FOCUSED` | `surfaceFocused` | `#3B4856` | Focused or chosen fallback controls. |
+| `BORDER` | `border` | `#697585` | Slate edges and dividers. |
+| `FOCUS_RING` | `focusRing` | `#E6B963` | Lighthouse gold for focus only, with an underline or control-specific focus cue. |
+| `PRIMARY` | `primary` | `#D88B72` | Burnt coral primary action; gradient endpoints are in CalmControlSurface.tsx. |
+| `TEXT_DISABLED` | `textDisabled` | `#9DA4AE` | Muted text on the neutral disabled material. |
+| `ACCENT_DARK` | `accentDark` | `#8E5648` | Dark coral depth below the primary control. Never text. |
+| `TEXT` | `text` | `#F4ECDD` | Warm ivory headings, body text and control labels. |
+| `TEXT_DIM` | `textDim` | `#BDC2C9` | Supporting text and metadata. |
+| `INK` | `ink` | `#151C26` | Dark text on coral and the separator inside gold focus rings. |
+| `VERIFIED` | `verified` | `#E7D9BF` | Warm pale selection edge and verified status. |
+| `PENDING` | `pending` | `#B9C9DA` | Pale slate-blue preparing status and non-red timeline marks. |
+| `FAILED` | `failed` | `#F2BDB1` | Warm error status, unavailable notices and red timeline marks. |
+| `COVER` | `cover` | `#000000` | Protective black cover; preserved independently of interface decoration. |
 
 ## Contrast
 
@@ -101,44 +102,31 @@ purpose: a television is read from across a room.
 
 ### Text on background
 
-Every pair Calm Frames draws text in.
-
 | Text | On | Ratio | Where |
 |---|---|---|---|
-| `TEXT` | `BACKGROUND` | 11.60 | Headings, titles, body text and quiet navigation on the ground. |
-| `TEXT` | `SURFACE` | 9.09 | Button labels at rest, settings rows, notices, the player card. |
-| `TEXT` | `SURFACE_FOCUSED` | 7.82 | Labels on a focused or chosen control. |
-| `TEXT_DIM` | `BACKGROUND` | 8.78 | Synopsis, shelf qualifiers, the step counter, the brand line in setup. |
-| `TEXT_DIM` | `SURFACE` | 6.88 | Helper text in rows and cards, the practice plate, unavailable button labels. |
-| `TEXT_DIM` | `SURFACE_FOCUSED` | 5.92 | Helper text inside a focused or chosen row. The lowest pair. |
-| `FOCUS_RING` | `BACKGROUND` | 6.83 | The short label above the featured title, such as "Original story". |
-| `INK` | `FOCUS_RING` | 6.53 | The primary action at rest, such as Watch now. |
-| `TEXT` | `INK` | 11.10 | The primary action with focus on it. |
-| `VERIFIED` | `SURFACE` | 6.07 | The Ready to watch badge. |
-| `PENDING` | `SURFACE` | 6.41 | The Preparing badge. |
-| `FAILED` | `SURFACE` | 6.67 | The Unavailable badge. |
+| `TEXT` | `BACKGROUND` | 14.59 | Headings and body text. |
+| `TEXT` | `SURFACE` | 9.69 | Labels on slate cards. |
+| `TEXT` | `SURFACE_FOCUSED` | 7.96 | Focused fallback labels. |
+| `TEXT_DIM` | `BACKGROUND` | 9.56 | Supporting text and metadata. |
+| `TEXT_DIM` | `SURFACE` | 6.35 | Descriptions and status plates. |
+| `TEXT_DIM` | `SURFACE_FOCUSED` | 5.21 | Supporting text on selected fallback rows. |
+| `INK` | `PRIMARY` | 6.40 | Primary action at its lightest endpoint; all endpoints are checked separately. |
+| `TEXT` | `INK` | 14.59 | Text on ink. |
+| `VERIFIED` | `SURFACE` | 8.17 | Verified status. |
+| `PENDING` | `SURFACE` | 6.73 | Preparing status. |
+| `FAILED` | `SURFACE` | 6.87 | Unavailable status. |
+| `FAILED` | `COVER` | 12.68 | Playback error heading on the retained protective black surface. |
 
-`ACCENT_DARK`, `BORDER` and `COVER` never carry text. Saffron carries text
-only on the dark ground. The ten-foot test,
-[`app/test/calmframes/tenFoot.test.tsx`](../../app/test/calmframes/tenFoot.test.tsx),
-measures every rendered line against whatever is painted behind it on every
-screen and state it renders, so a colour used in the wrong place fails there.
-Its fixtures do not reach the saffron label, the focused primary action or the
-Needs check badge as text, so those three rows rest on the code and on the
-arithmetic here.
-
-Text drawn straight over the moving picture, such as the sample player's own
-header in `app/src/w3cmedia`, has no fixed background and is not in this
-table. Calm Frames' own words on the player sit on a `SURFACE` card or plate.
+Material endpoint checks additionally require dark text on every normal/pressed coral endpoint ≥4.5:1, supporting text on every secondary/selected endpoint ≥4.5:1, and disabled text on the neutral disabled fill ≥4.5:1. The minimum across the approved material states is 4.63:1 (truncated). Focus uses a dark contour; gold directly against coral is not claimed to meet 3:1. Actual moving-picture pixels and native caption preferences are outside these solid-color measurements.
 
 ### Focus ring
 
 | Ring | Beside | Ratio | Where |
 |---|---|---|---|
-| `FOCUS_RING` | `SURFACE_FOCUSED` | 4.60 | Inside the ring of a focused control. The lowest pair. |
-| `FOCUS_RING` | `INK` | 6.53 | Inside the ring of the focused primary action. |
-| `FOCUS_RING` | `BACKGROUND` | 6.83 | Outside the ring, on the ground. |
-| `FOCUS_RING` | `SURFACE` | 5.35 | Outside the ring, on a card or group, such as Skip on the player card. |
+| `FOCUS_RING` | `SURFACE_FOCUSED` | 5.11 | Ring beside focused fallback controls. |
+| `FOCUS_RING` | `INK` | 9.36 | Dark contour separates gold from coral. |
+| `FOCUS_RING` | `BACKGROUND` | 9.36 | Ring against the ground. |
+| `FOCUS_RING` | `SURFACE` | 6.22 | Ring beside a slate group. |
 
 ## Type
 
@@ -150,7 +138,7 @@ size 32, softness 20 and wonk 0. License notices and pinned-source hashes live
 beside the files. The prior Inter files remain preserved. New native glyph
 rendering still needs observation; file placement follows the existing SDK
 package and previously verified project font mechanism, not an assumed new API.
-Sizes remain 1080p units, with a 32-unit minimum.
+Sizes remain 1080p units. `MINIMUM_TEXT_SIZE`, 32 units, is the minimum.
 
 | Role | Face | Size / line height | Use |
 |---|---|---|---|
