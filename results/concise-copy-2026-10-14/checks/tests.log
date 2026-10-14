@@ -1,0 +1,17 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false --testPathPattern=(duskLantern|homeIntroduction|shelf|screens|returnFocus|firstRun|unavailableDetails)\.test
+
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mtest/calmframes/[22m[1mscreens.test.tsx[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mtest/calmframes/[22m[1mduskLantern.test.tsx[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mtest/calmframes/[22m[1mhomeIntroduction.test.tsx[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mtest/screens/[22m[1mreturnFocus.test.tsx[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mtest/calmframes/[22m[1munavailableDetails.test.tsx[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mtest/calmframes/[22m[1mfirstRun.test.tsx[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mtest/calmframes/[22m[1mshelf.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m7 passed[39m[22m, 7 total
+[1mTests:       [22m[1m[32m132 passed[39m[22m, 132 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        7.014 s, estimated 9 s
+[2mRan all test suites[22m[2m matching [22m/(duskLantern|homeIntroduction|shelf|screens|returnFocus|firstRun|unavailableDetails)\.test/i[2m.[22m
