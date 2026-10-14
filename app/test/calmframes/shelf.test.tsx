@@ -143,7 +143,7 @@ describe('the words on the shelf', () => {
     const home = render(<KidHomeScreen titles={shelf} onOpen={onOpen} onPlay={onPlay} />);
     const synopsis = screen.getByText('Settle into a quiet harbor at sunset.').props.children;
     expect(synopsis).toMatch(/quiet harbor at sunset/i);
-    expect(screen.getByText('A still picture covers marked scenes. Sound continues.')).toBeTruthy();
+    expect(screen.getByText('On supported titles, marked scenes use a still picture while sound continues.')).toBeTruthy();
     fireEvent.press(screen.getByTestId('kid-home-more-info'));
     expect(onOpen).toHaveBeenCalledWith(prepared);
     fireEvent.press(screen.getByTestId('kid-home-watch'));

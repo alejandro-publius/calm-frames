@@ -208,7 +208,6 @@ const KidHomeScreen = ({
           <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroCopy}>
-                <Text style={styles.eyebrow}>{feature.art === 'harbor-cinematic' ? 'A Calm Frames original' : 'Ready to watch'}</Text>
                 <Text accessibilityRole="header" testID={`${testID}-title`} style={[styles.featureTitle, feature.name.length > 18 ? styles.longFeatureTitle : null]}>{feature.name}</Text>
                 <Text style={styles.description}>{feature.browseSynopsis ?? feature.description}</Text>
                 <View style={styles.actions}>
@@ -219,7 +218,7 @@ const KidHomeScreen = ({
               </View>
               <View style={styles.purpose}>
                 <Text style={styles.purposeTitle}>Watch with fewer flashes.</Text>
-                <Text style={styles.purposeCopy}>A still picture covers marked scenes. Sound continues.</Text>
+                <Text style={styles.purposeCopy}>On supported titles, marked scenes use a still picture while sound continues.</Text>
                 <View style={styles.learn}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" hasTVPreferredFocus={returnTo === 'learn'}
                   disabled={saving} onPress={() => { setChoosingProfile(false); setShowIntroduction(true); }} />
 </View>

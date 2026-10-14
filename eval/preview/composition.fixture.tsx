@@ -22,7 +22,7 @@ test('composition keeps Watch, Details, explanation and Back actions with truthf
   save('home', home.toJSON());
   fireEvent.press(home.getByTestId('kid-home-watch')); expect(onPlay).toHaveBeenCalledWith(harbor);
   fireEvent.press(home.getByTestId('kid-home-more-info')); expect(onOpen).toHaveBeenCalledWith(harbor);
-  expect(home.getByText('A still picture covers marked scenes. Sound continues.')).toBeTruthy();
+  expect(home.getByText('On supported titles, marked scenes use a still picture while sound continues.')).toBeTruthy();
   fireEvent.press(home.getByTestId('kid-home-learn')); expect(home.getByTestId('picture-hold-start')).toBeTruthy(); home.unmount();
   const details = render(<TitleDetailsScreen entry={harbor} onPlay={onPlay} onBack={onBack} />, { wrapper });
   fireEvent(details.getByTestId('title-details-play'), 'focus'); save('details', details.toJSON());

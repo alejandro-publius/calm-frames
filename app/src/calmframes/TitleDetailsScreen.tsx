@@ -114,7 +114,7 @@ const TitleDetailsScreen = ({
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
-          <View style={styles.kicker}><Text style={styles.eyebrow}>{demo ? 'Optional demo' : presentation.art === 'harbor-cinematic' ? 'A Calm Frames original' : 'About this story'}{durationMs > 0 ? ` · ${Math.round(durationMs / 1000)} sec` : ''}</Text></View>
+          <View style={styles.kicker}><Text style={styles.eyebrow}>{demo ? 'Optional demo' : presentation.art === 'harbor-cinematic' ? '' : 'About this story'}{durationMs > 0 ? `${demo || presentation.art !== 'harbor-cinematic' ? ' · ' : ''}${Math.round(durationMs / 1000)} sec` : ''}</Text></View>
           <Text style={[styles.title, styles.heroTitle, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
           </View>
