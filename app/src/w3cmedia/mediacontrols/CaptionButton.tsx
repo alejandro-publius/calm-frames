@@ -2,9 +2,8 @@ import { TVFocusGuideView } from '@amazon-devices/react-native-kepler';
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import { DPADEventType } from '../../constants';
-import { COLORS } from '../../styles/Colors';
+import { CALM_COLORS } from '../../calmframes/calmStyles';
 import { areComponentPropsEqual } from '../../utils/lodashHelper';
-import { scaleUxToDp } from '../../utils/pixelUtils';
 import PlayerButton from './PlayerButton';
 import { CaptionButtonProps } from './types/Captions';
 
@@ -70,7 +69,6 @@ export default React.memo(CaptionButton, areCaptionButtonPropsEqual);
 
 const styles = StyleSheet.create({
   captionSelected: {
-    backgroundColor: COLORS.DARK_GRAY + 'D9',
-    borderRadius: scaleUxToDp(40),
+    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
   },
 });

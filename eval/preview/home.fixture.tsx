@@ -25,4 +25,9 @@ test('export home, optional explanation, loading and opening from actual compone
   save('loading', loading.toJSON()); loading.unmount();
   const opening = render(<PlayerOpening title="Harbor" onBack={() => {}} />);
   save('opening', opening.toJSON()); opening.unmount();
+  const returning = render(<PlayerOpening title="Harbor" onBack={() => {}} returning />);
+  save('returning', returning.toJSON()); returning.unmount();
+  const error = render(<HouseholdStorageScreen failed onRetry={() => {}} />);
+  fireEvent(error.getByTestId('household-storage-retry'), 'focus');
+  save('storage-error', error.toJSON()); error.unmount();
 });

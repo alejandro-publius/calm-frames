@@ -8,8 +8,9 @@
  */
 
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
+import CalmPageHeader from './CalmPageHeader';
 import HomeHarborScene from './HomeHarborScene';
 import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import StatusNotice from './StatusNotice';
@@ -31,7 +32,7 @@ export default function HouseholdStorageScreen({
   );
   if (!failed) return <View testID={testID} style={styles.screen}>
     <HomeHarborScene />
-    <View style={styles.brand}><Image source={require('../../assets/image/CalmFrames.png')} style={styles.mark} fadeDuration={0} accessible={false} /><Text style={styles.wordmark}>Calm Frames</Text></View>
+    <CalmPageHeader />
     <View style={styles.loading} accessible accessibilityRole="progressbar" accessibilityLabel="Opening your library" accessibilityLiveRegion="polite">
       <Text style={styles.heading}>Opening your library</Text>
       <Text style={styles.detail}>Loading your saved viewing settings.</Text>
@@ -39,6 +40,7 @@ export default function HouseholdStorageScreen({
   </View>;
   return (
     <View testID={testID} style={styles.screen}>
+      <CalmPageHeader />
       <StatusNotice
         notice={{
           title: "Your settings couldn't be opened or saved",
@@ -47,7 +49,7 @@ export default function HouseholdStorageScreen({
         }}>
           <View style={styles.buttons}>
             <CalmButton
-              testID={`${testID}-retry`}
+              testID={`${testID}-retry`} primary
               label="Try again"
               onPress={onRetry}
               hasTVPreferredFocus

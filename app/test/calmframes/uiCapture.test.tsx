@@ -26,7 +26,6 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
   setItem: jest.fn(async () => undefined),
 }));
 import {
-  BENIGN_STORY_ID,
   BENIGN_STORY_LABEL,
 } from '../../src/calmframes/benignStory';
 import CalmCard from '../../src/calmframes/CalmCard';
@@ -71,6 +70,7 @@ import {
   KID_HOME_EMPTY_FRAME,
   KID_HOME_FOCUSED_FRAME,
   KID_HOME_FRAME,
+  KID_HOME_STORY_FRAME, KID_HOME_STORY_FOCUSED_FRAME, KID_HOME_STORY_WATCH_FRAME,
   KID_HOME_OFFLINE_FRAME,
   KID_HOME_PROFILES_FRAME,
   KID_HOME_PROFILES_OFFLINE_FRAME,
@@ -273,18 +273,13 @@ describe('what the app paints', () => {
    *
    * and a shelf where every poster has a picture lost BORDER altogether.
    */
-  it('matches what the real bundled shelf reports, at rest and with Harbor focused', () => {
-    expect(
-      renderedFrame('kid-home', (
-        <KidHomeScreen titles={checkedShelf()} onOpen={jest.fn()} />
-      )),
-    ).toEqual(KID_HOME_FRAME);
-
-    render(<KidHomeScreen titles={checkedShelf()} onOpen={jest.fn()} />);
-    fireEvent(screen.getByTestId(`kid-home-poster-${BENIGN_STORY_ID}`), 'focus');
-    expect(
-      frameFromTree('kid-home-focused', screen.toJSON() as unknown as RenderedNode),
-    ).toEqual(KID_HOME_FOCUSED_FRAME);
+  it('measures the simplified Harbor home at rest, Watch focus and details focus', () => {
+    const view = render(<KidHomeScreen titles={checkedShelf()} onOpen={jest.fn()} />);
+    const frame = (expected: UiFrame) => expect(frameFromTree(expected.screen, view.toJSON() as unknown as RenderedNode)).toEqual(expected);
+    frame(KID_HOME_STORY_FRAME);
+    fireEvent(view.getByTestId('kid-home-watch'), 'focus'); frame(KID_HOME_STORY_WATCH_FRAME);
+    fireEvent(view.getByTestId('kid-home-watch'), 'blur');
+    fireEvent(view.getByTestId('kid-home-more-info'), 'focus'); frame(KID_HOME_STORY_FOCUSED_FRAME);
   });
 
   it('matches what the shelf reports when every poster has a picture', () => {

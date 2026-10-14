@@ -16,9 +16,7 @@ test('home is the entry, with direct playback and an optional dismissible explan
   render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={play} />);
   expect(screen.queryByTestId('picture-hold-introduction')).toBeNull();
   expect(screen.queryByText('Original story')).toBeNull();
-  fireEvent.press(screen.getByTestId('kid-home-try-demo'));
-  expect(play).toHaveBeenCalledWith(demo);
-  play.mockClear();
+  expect(screen.queryByTestId('kid-home-try-demo')).toBeNull();
   fireEvent.press(screen.getByTestId('kid-home-learn'));
   expect(screen.getByText(/Sound continues/)).toBeTruthy();
   expect(screen.queryByTestId('kid-home-watch')).toBeNull();

@@ -2,8 +2,8 @@
   "source": "app/src/calmframes",
   "files": {
     "announce.ts": "d67e13b47de80d16",
-    "CalmCard.tsx": "04a0343befb46c0d",
-    "calmStyles.ts": "10532674ae1e7aaf",
+    "CalmCard.tsx": "9c3a864f31cbff0b",
+    "calmStyles.ts": "ce665537bc5ee6e2",
     "canonicalJson.ts": "1097285aae9b21aa",
     "cards.ts": "bf61be5761a90151",
     "CoverLayer.tsx": "ce1c3f785861d009",
@@ -21,6 +21,7 @@
     "timingLog.ts": "3a56e6734c3f8e18",
     "titleStatus.ts": "143a7521fa3eaa17",
     "useCoverHarness.ts": "5eaa61f38033cb48",
-    "useFlashGuard.ts": "987a32ab1b220676"
+    "useFlashGuard.ts": "987a32ab1b220676",
+    "CalmTouchable.tsx": "911cf02dd1cd9ced"
   }
 }

@@ -33,22 +33,44 @@ exports[`CaptionMenuItem tests component renders correctly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
+      "alignItems": "center",
       "borderColor": "transparent",
+      "borderRadius": 18,
       "borderWidth": 6,
+      "flexDirection": "row",
       "opacity": 1,
+      "paddingHorizontal": 12,
     }
   }
 >
   <Text
+    accessible={false}
     style={
       {
-        "color": "#FFFFFF",
+        "color": "#F3E8D3",
+        "fontFamily": "InterRegular",
+        "fontSize": 32,
+        "fontWeight": "400",
+        "lineHeight": 42,
+        "textAlign": "center",
+        "width": 42,
+      }
+    }
+  />
+  <Text
+    numberOfLines={2}
+    style={
+      {
+        "color": "#F3E8D3",
+        "flex": 1,
+        "flexShrink": 1,
         "fontFamily": "InterRegular",
         "fontSize": 32,
         "fontWeight": "400",
         "lineHeight": 42,
         "marginVertical": 4,
-        "padding": 20,
+        "paddingHorizontal": 12,
+        "paddingVertical": 20,
       }
     }
     testID="video-player-caption-menu"
@@ -92,23 +114,47 @@ exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
-      "backgroundColor": "#80808066",
+      "alignItems": "center",
+      "backgroundColor": "#234B55",
       "borderColor": "transparent",
+      "borderRadius": 18,
       "borderWidth": 6,
+      "flexDirection": "row",
       "opacity": 1,
+      "paddingHorizontal": 12,
     }
   }
 >
   <Text
+    accessible={false}
     style={
       {
-        "color": "#FFFFFF",
+        "color": "#F3E8D3",
+        "fontFamily": "InterRegular",
+        "fontSize": 32,
+        "fontWeight": "400",
+        "lineHeight": 42,
+        "textAlign": "center",
+        "width": 42,
+      }
+    }
+  >
+    ✓
+  </Text>
+  <Text
+    numberOfLines={2}
+    style={
+      {
+        "color": "#F3E8D3",
+        "flex": 1,
+        "flexShrink": 1,
         "fontFamily": "InterRegular",
         "fontSize": 32,
         "fontWeight": "400",
         "lineHeight": 42,
         "marginVertical": 4,
-        "padding": 20,
+        "paddingHorizontal": 12,
+        "paddingVertical": 20,
       }
     }
     testID="video-player-caption-menu"

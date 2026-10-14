@@ -20,9 +20,11 @@
  * - no motion. Nothing fades, slides or pulses.
  */
 
+import TouchableOpacity from './CalmTouchable';
 import React, { useEffect, useRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text,  View } from 'react-native';
 import {
+  CALM_CONTROL,
   CALM_COLORS,
   CALM_SPACE,
   CALM_TEXT,
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
     backgroundColor: CALM_COLORS.SURFACE,
     borderColor: CALM_COLORS.BORDER,
     borderWidth: scale(2),
-    borderRadius: scale(16),
+    borderRadius: scale(24),
     paddingVertical: scale(CALM_SPACE.BLOCK),
     paddingHorizontal: scale(CALM_SPACE.EDGE),
     alignItems: 'center',
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
     marginTop: scale(CALM_SPACE.ROW),
     paddingVertical: scale(CALM_SPACE.TIGHT),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(12),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.BORDER,
     backgroundColor: CALM_COLORS.SURFACE,

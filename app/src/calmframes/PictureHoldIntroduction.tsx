@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import { CALM_COLORS, CALM_TEXT, scale } from './calmStyles';
 
-export default function PictureHoldIntroduction({ onStart, onBack, disabled = false }: { onStart?: () => void; onBack: () => void; disabled?: boolean }) {
+export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDemoDetails, disabled = false }: { onDemoDetails?: () => void; onPlaybackCheck?: () => void; onStart?: () => void; disabled?: boolean }) {
   return <View testID="picture-hold-introduction" style={styles.content}>
     <Text style={styles.eyebrow}>How it works</Text>
     <Text style={styles.title} accessibilityRole="header">Picture holds. The story keeps going.</Text>
@@ -12,12 +12,14 @@ export default function PictureHoldIntroduction({ onStart, onBack, disabled = fa
     <Text style={styles.detail}>Try a 20-second Harbor demo with two scheduled practice holds. Skip moves past a hold; Back leaves the demo.</Text>
     <View style={styles.actions}>
       {onStart ? <CalmButton testID="picture-hold-start" primary label="Try the demo" sound={false} hasTVPreferredFocus disabled={disabled} onPress={onStart} /> : null}
-      <CalmButton testID="picture-hold-dismiss" quiet label="Back to library" hasTVPreferredFocus={!onStart} onPress={onBack} />
+      {onDemoDetails ? <CalmButton quiet testID="picture-hold-demo-details" label="About the demo" disabled={disabled} onPress={onDemoDetails} /> : null}
     </View>
+    {onPlaybackCheck ? <View style={styles.tools}><Text style={styles.detail}>Need to check your screen?</Text><CalmButton quiet compact testID="picture-hold-playback-check" label="Playback check" disabled={disabled} onPress={onPlaybackCheck} /></View> : null}
   </View>;
 }
 const styles = StyleSheet.create({
-  content: { maxWidth: scale(920), paddingTop: scale(70), gap: scale(24) },
+  tools: { marginTop: scale(12), gap: scale(8), alignItems: 'flex-start' },
+  content: { maxWidth: scale(920), paddingTop: scale(40), gap: scale(24) },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT },
   body: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT },

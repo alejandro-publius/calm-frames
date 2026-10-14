@@ -31,8 +31,10 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import TouchableOpacity from './CalmTouchable';
+import { StyleSheet, Text, View } from 'react-native';
 import {
+  CALM_CONTROL,
   CALM_COLORS,
   CALM_SPACE,
   CALM_TEXT,
@@ -119,6 +121,7 @@ const ProfilePicker = ({
                 chosen ? styles.chipChosen : null,
                 focused ? styles.chipFocused : null,
               ]}>
+              <Text accessible={false} style={styles.selectionMark}>{chosen ? '✓' : ''}</Text>
               <Text style={[styles.name, focused ? styles.focusedLabel : null]} testID={`${testID}-${profile.id}-name`}>
                 {profile.name}
               </Text>
@@ -143,12 +146,14 @@ const styles = StyleSheet.create({
   },
   row: { flexDirection: 'row', flexWrap: 'wrap' },
   /** Quiet at rest: the ring is there, in the card's own colour. */
+  selectionMark: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT, width: scale(42) },
   chip: {
+    flexDirection: 'row', alignItems: 'center',
     marginRight: scale(CALM_SPACE.ROW),
     marginBottom: scale(CALM_SPACE.ROW),
     paddingVertical: scale(CALM_SPACE.TIGHT),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(12),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,

@@ -10,19 +10,21 @@ jest.mock('react-native/Libraries/Utilities/useWindowDimensions', () => ({ __esM
 test('export actual playback screen trees', () => {
   jest.spyOn(console, 'log').mockImplementation(() => {});
   jest.useFakeTimers();
-  const stage = 'before';
+  const stage = 'after';
   const height = 1080;
   const folder = path.resolve(__dirname, '../../build/playback-preview', stage, String(height));
   fs.mkdirSync(folder, { recursive: true });
-  for (const name of ['controls-back', 'controls-captions', 'caption-menu', 'playing-hold', 'paused-hold', 'paused-countdown', 'paused-story', 'error']) {
+  for (const name of ['controls-back', 'controls-captions', 'caption-menu', 'hold-controls', 'hold-caption-menu', 'playing-hold', 'paused-hold', 'paused-countdown', 'paused-story', 'error']) {
     const view = startPlayer(name.includes('hold') ? 'covering' : name.includes('countdown') ? 'countdown' : 'none');
+    fireEvent.press(view.getByTestId('video-player-caption-btn'));
+    fireEvent.press(view.getByRole('radio', { name: 'English practice captions' }));
     if (name.startsWith('paused')) act(() => mockMedia.pause());
     if (name === 'controls-back') fireEvent(view.getByTestId('header_back_icon'), 'focus');
-    if (name === 'controls-captions' || name === 'caption-menu') fireEvent(view.getByTestId('video-player-caption-btn'), 'focus');
-    if (name === 'caption-menu') {
+    if (name === 'controls-captions' || name.includes('caption-menu')) fireEvent(view.getByTestId('video-player-caption-btn'), 'focus');
+    if (name.includes('caption-menu')) {
       fireEvent.press(view.getByTestId('video-player-caption-btn'));
       fireEvent(view.getByTestId('video-player-caption-btn'), 'blur');
-      fireEvent(view.getByTestId('caption-menu-focus-element'), 'focus');
+      fireEvent(view.getByRole('radio', { name: 'English practice captions' }), 'focus');
     }
     if (name.startsWith('paused') || name === 'playing-hold') act(() => jest.advanceTimersByTime(6000));
     if (name === 'error') act(() => mockError(true));

@@ -75,8 +75,9 @@ describe('reaching Calm Frames', () => {
   it('returns focus to the opened title through details, player and parent area', async () => {
     const { navigate } = await renderKidMode();
     await finishFirstRun();
-    const lastPoster = `kid-mode-home-poster-${OFFLINE_TITLE_ID}`;
+    const lastPoster = 'kid-mode-home-learn';
     fireEvent.press(screen.getByTestId(lastPoster));
+    fireEvent.press(screen.getByTestId('picture-hold-playback-check'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     expect(navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.anything());
     // The stack retains this details route underneath the player.
@@ -84,7 +85,7 @@ describe('reaching Calm Frames', () => {
     expect(screen.queryByTestId('kid-mode-home-watch')).toBeNull();
     fireEvent.press(screen.getByTestId('kid-mode-details-back'));
     expect(screen.getByTestId(lastPoster).props.hasTVPreferredFocus).toBe(true);
-    expect(screen.getByTestId(`kid-mode-home-poster-${BENIGN_STORY_ID}`).props.hasTVPreferredFocus).toBe(false);
+    expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(false);
     fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
     fireEvent.press(screen.getByTestId('kid-mode-parent-back'));
     expect(screen.getByTestId(lastPoster).props.hasTVPreferredFocus).toBe(true);
@@ -110,8 +111,9 @@ describe('reaching Calm Frames', () => {
     try {
       await renderKidMode();
       await finishFirstRun();
-      const poster = `kid-mode-home-poster-${OFFLINE_TITLE_ID}`;
+      const poster = 'kid-mode-home-learn';
       fireEvent.press(screen.getByTestId(poster));
+      fireEvent.press(screen.getByTestId('picture-hold-playback-check'));
       act(() => { expect(back?.()).toBe(true); });
       expect(screen.getByTestId(poster).props.hasTVPreferredFocus).toBe(true);
       fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
@@ -136,7 +138,8 @@ describe('reaching Calm Frames', () => {
   it('opens the labelled story with captions and the prepared Extra cautious timing', async () => {
     const { navigate } = await renderKidMode();
     await finishFirstRun();
-    fireEvent.press(screen.getByTestId(`kid-mode-home-poster-${BENIGN_STORY_ID}`));
+    fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
+    fireEvent.press(screen.getByTestId('picture-hold-demo-details'));
     expect(JSON.stringify(screen.getByTestId('kid-mode-details-demo-label').props.children)).toContain('practice holds');
     expect(screen.getByTestId('kid-mode-details-summary').props.children).toContain('8 seconds');
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
@@ -152,22 +155,18 @@ describe('reaching Calm Frames', () => {
     expect(screen.getByTestId('kid-mode-home')).toBeTruthy();
   });
 
-  it('lists the bundled title, checked by the real reader', async () => {
-    await renderKidMode();
-    await finishFirstRun();
-    expect(
-      screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`),
-    ).toBeTruthy();
-    expect(
-      screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`).props
-        .accessibilityLabel,
-    ).toBe('Calm gradient, Playback test');
+  it('retains the verified playback check inside optional help', async () => {
+    await renderKidMode(); await finishFirstRun();
+    expect(screen.queryByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`)).toBeNull();
+    fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
+    expect(screen.getByTestId('picture-hold-playback-check').props.accessibilityLabel).toBe('Playback check');
   });
 
   it('opens the title, then hands the player the map it verified', async () => {
     const { navigate } = await renderKidMode();
     await finishFirstRun();
-    fireEvent.press(screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`));
+    fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
+    fireEvent.press(screen.getByTestId('picture-hold-playback-check'));
     expect(screen.getByTestId('kid-mode-details')).toBeTruthy();
 
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
@@ -188,7 +187,8 @@ describe('reaching Calm Frames', () => {
     // the happy path above.
     const { navigate } = await renderKidMode();
     await finishFirstRun();
-    fireEvent.press(screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`));
+    fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
+    fireEvent.press(screen.getByTestId('picture-hold-playback-check'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
 
@@ -295,17 +295,6 @@ describe('reaching Calm Frames', () => {
 });
 
 describe('the shelf a household lands on', () => {
-  /**
-   * The ids of the posters on the shelf, in the order they are drawn.
-   *
-   * Every poster is a button with this test id and nothing else, so the
-   * picture, title and qualifier inside it are left out by name.
-   */
-  const shelfOrder = () =>
-    screen
-      .getAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)
-      .map((poster) => String(poster.props.testID).replace('kid-mode-home-poster-', ''));
-
   it('keeps Harbor first and the gradient last in the bundled catalog', () => {
     const ids = defaultCatalog().map((title) => title.id);
     expect(ids[0]).toBe(BENIGN_STORY_ID);
@@ -315,46 +304,16 @@ describe('the shelf a household lands on', () => {
     );
   });
 
-  /**
-   * Seen to fail with the gradient put back at the front of defaultCatalog:
-   *
-   *     Expected: "calm-frames-benign-story"
-   *     Received: "calm-frames-offline"
-   *
-   * and with KidHomeScreen giving the focus to the second poster instead:
-   *
-   *     -   "calm-frames-benign-story",
-   *     +   "prepared-4b1d5997c23f181c8ceded5452f18eb39b1dfc9e5bec0e97d6320847ed671d8f",
-   */
-  it('opens on Harbor with the focus on it, and puts the gradient last', async () => {
-    await renderKidMode();
-    await finishFirstRun();
-    const ids = shelfOrder();
-    expect(ids.length).toBeGreaterThanOrEqual(3);
-    expect(ids[0]).toBe(BENIGN_STORY_ID);
-    expect(ids[ids.length - 1]).toBe(OFFLINE_TITLE_ID);
-    expect(ids).toContain(packagedLibrary.titles(DEFAULT_SETTINGS)[0].id);
-    // Only one poster asks for the focus, and it is Harbor's.
-    const asking = ids.filter(
-      (id) =>
-        screen.getByTestId(`kid-mode-home-poster-${id}`).props
-          .hasTVPreferredFocus === true,
-    );
-    expect(asking).toEqual([]);
+  it('offers one dominant Harbor action and keeps diagnostics out of the primary catalog', async () => {
+    await renderKidMode(); await finishFirstRun();
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
-  });
-
-  it("shows the approved title illustrations without changing playback stills", async () => {
-    await renderKidMode();
-    await finishFirstRun();
-    const pictured = shelfOrder().filter(
-      (id) => screen.queryByTestId(`kid-mode-home-poster-image-${id}`) !== null,
-    );
-    expect(pictured).toEqual(shelfOrder());
-    expect(
-      screen.getByTestId(`kid-mode-home-poster-image-${BENIGN_STORY_ID}`).props
-        .source,
-    ).toEqual(require('../../assets/image/tv/harbor-illustrated.png'));
+    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(0);
+    expect(screen.queryByText('Practice holds')).toBeNull();
+    expect(screen.queryByText('Playback test')).toBeNull();
+    expect(screen.getByTestId('home-harbor-scene')).toBeTruthy();
+    fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
+    expect(screen.getByTestId('picture-hold-start')).toBeTruthy();
+    expect(screen.getByTestId('picture-hold-playback-check')).toBeTruthy();
   });
 });
 

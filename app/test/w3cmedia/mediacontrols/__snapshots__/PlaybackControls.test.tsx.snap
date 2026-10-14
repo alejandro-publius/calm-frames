@@ -42,8 +42,9 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -88,8 +89,9 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -133,8 +135,9 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -190,8 +193,9 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -236,8 +240,9 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -281,8 +286,9 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -338,8 +344,9 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -384,8 +391,9 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -429,8 +437,9 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -486,8 +495,9 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -532,8 +542,9 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
@@ -577,8 +588,9 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
-        "borderColor": "transparent",
-        "borderRadius": 40,
+        "backgroundColor": "#1A414B",
+        "borderColor": "#1A414B",
+        "borderRadius": 18,
         "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,

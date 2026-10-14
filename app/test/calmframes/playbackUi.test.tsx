@@ -106,3 +106,23 @@ test('recovery paints above the retained cover and Back leaves once', () => {
   act(() => jest.advanceTimersByTime(701));
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
+
+test('choosing the active caption track closes its menu without changing media or the hold', () => {
+  const view = startPlayer('covering');
+  fireEvent.press(view.getByTestId('video-player-caption-btn'));
+  fireEvent.press(view.getByRole('radio', { name: 'English practice captions' }));
+  const card = mockGuard.card;
+  const position = mockMedia.currentTime;
+  fireEvent.press(view.getByTestId('video-player-caption-btn'));
+  const selected = view.getByRole('radio', { name: 'English practice captions' });
+  expect(selected.props.accessibilityState.checked).toBe(true);
+  expect(view.getByTestId('kepler-captions-view').props.show).toBe(true);
+  expect(view.getByTestId('calm-card')).toBeTruthy();
+  fireEvent.press(selected);
+  expect(view.queryByRole('radio', { name: 'English practice captions' })).toBeNull();
+  expect(mockMedia.textTracks[0].mode).toBe('showing');
+  expect(mockMedia.currentTime).toBe(position);
+  expect(mockGuard.card).toBe(card);
+  expect(mockGuard.covered).toBe(true);
+  expect(mockSeekFocus).toHaveBeenCalledTimes(2);
+});

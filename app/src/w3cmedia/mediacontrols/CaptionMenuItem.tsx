@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import FocusableElement from '../../components/FocusableElement';
-import { CALM_COLORS, CALM_TEXT, FOCUS_RING_WIDTH } from '../../calmframes/calmStyles';
-import { COLORS } from '../../styles/Colors';
+import { CALM_CONTROL, CALM_COLORS, CALM_TEXT, FOCUS_RING_WIDTH } from '../../calmframes/calmStyles';
 import { areComponentPropsEqual } from '../../utils/lodashHelper';
 import { scaleUxToDp } from '../../utils/pixelUtils';
 import { CaptionMenuItemProps } from './types/Captions';
@@ -27,7 +26,8 @@ export const CaptionMenuItem = React.memo(
         style={[styles.menuItem, selected && styles.selectedMenuItem]}
         onFocusOverrideStyle={styles.focusedMenuItem}
         testID={testID}>
-        <Text style={styles.menuItemText} testID={'video-player-caption-menu'}>
+        <Text accessible={false} style={styles.check}>{selected ? '✓' : ''}</Text>
+        <Text numberOfLines={2} style={styles.menuItemText} testID={'video-player-caption-menu'}>
           {text}
         </Text>
       </FocusableElement>
@@ -38,12 +38,16 @@ export const CaptionMenuItem = React.memo(
 
 const styles = StyleSheet.create({
   menuItemText: {
-    color: COLORS.WHITE,
+    color: CALM_COLORS.TEXT,
     ...CALM_TEXT.supporting,
     marginVertical: scaleUxToDp(4),
-    padding: scaleUxToDp(20),
+    paddingVertical: scaleUxToDp(20),
+    paddingHorizontal: scaleUxToDp(12),
+    flex: 1,
+    flexShrink: 1,
   },
-  menuItem: { borderWidth: scaleUxToDp(FOCUS_RING_WIDTH), borderColor: 'transparent' },
+  check: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT, width: scaleUxToDp(42), textAlign: 'center' },
+  menuItem: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: scaleUxToDp(12), borderRadius: scaleUxToDp(CALM_CONTROL.RADIUS), borderWidth: scaleUxToDp(FOCUS_RING_WIDTH), borderColor: 'transparent' },
   focusedMenuItem: { backgroundColor: CALM_COLORS.SURFACE_FOCUSED, borderColor: CALM_COLORS.FOCUS_RING },
-  selectedMenuItem: { backgroundColor: COLORS.GRAY + '66' },
+  selectedMenuItem: { backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
 });

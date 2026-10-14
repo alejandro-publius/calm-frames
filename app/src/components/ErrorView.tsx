@@ -15,7 +15,7 @@ const ErrorView = ({ navigateBack }: ErrorViewProps) => (
       <Text style={styles.detail}>Go back and try opening the story again.</Text>
     </View>
     <View>
-      <CalmButton label="Go back" onPress={navigateBack} hasTVPreferredFocus sound={false} testID="player-error-back" />
+      <CalmButton primary label="Go back" onPress={navigateBack} hasTVPreferredFocus sound={false} testID="player-error-back" />
     </View>
   </View>
 );
@@ -27,11 +27,11 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     zIndex: 6,
     backgroundColor: CALM_COLORS.COVER,
-    alignItems: 'center', justifyContent: 'center',
+    alignItems: 'flex-start', justifyContent: 'center',
     paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y),
     gap: scale(CALM_SPACE.BLOCK),
   },
-  message: { alignItems: 'center', maxWidth: scale(1200), gap: scale(CALM_SPACE.ROW) },
-  title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, textAlign: 'center' },
-  detail: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'center' },
+  message: { alignItems: 'flex-start', maxWidth: scale(1200), gap: scale(CALM_SPACE.ROW) },
+  title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, textAlign: 'left' },
+  detail: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
 });

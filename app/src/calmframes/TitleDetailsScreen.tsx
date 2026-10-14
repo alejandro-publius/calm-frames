@@ -11,11 +11,11 @@
  * of this screen where an unverified title can be started.
  */
 
-import LinearGradient from '@amazon-devices/react-linear-gradient';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
-import CalmArtworkMotion from './CalmArtworkMotion';
+import CalmPageHeader from './CalmPageHeader';
+import HomeHarborScene from './HomeHarborScene';
 import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { noticeForTitle } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
@@ -25,11 +25,11 @@ import {
   DEFAULT_SETTINGS,
   HouseholdSettings,
 } from './household';
-import TitleArtwork, { titlePresentation } from './TitleArtwork';
+import { titlePresentation } from './TitleArtwork';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle } from './titleStatus';
 import { useUiCapture } from './uiCapture';
-import { TITLE_DETAILS_BLOCKED_FRAME, TITLE_DETAILS_FRAME } from './uiFrames';
+import { TITLE_DETAILS_BLOCKED_FRAME, TITLE_DETAILS_FRAME, TITLE_DETAILS_HARBOR_FRAME, TITLE_DETAILS_DEMO_FRAME } from './uiFrames';
 import ViewingPlan from './ViewingPlan';
 import {
   benignStorySettings,
@@ -70,15 +70,15 @@ const TitleDetailsScreen = ({
       }),
     [entry.segments, settings, durationMs],
   );
+  const presentation = titlePresentation(entry.title);
+  const demo = isBundledBenignStory(entry.title);
   const notice = noticeForTitle(entry);
   const playable = notice === null;
   useUiCapture(
-    playable ? TITLE_DETAILS_FRAME : TITLE_DETAILS_BLOCKED_FRAME,
+    playable ? (presentation.art === 'harbor-cinematic' ? (demo ? TITLE_DETAILS_DEMO_FRAME : TITLE_DETAILS_HARBOR_FRAME) : TITLE_DETAILS_FRAME) : TITLE_DETAILS_BLOCKED_FRAME,
     playable ? 'title details' : 'title details, not ready',
   );
 
-  const presentation = titlePresentation(entry.title);
-  const demo = isBundledBenignStory(entry.title);
   const hiddenSeconds = Math.round(totalCoveredMs(intervals) / 1000);
   const scrollRef = React.useRef<ScrollView>(null);
   const infoTop = React.useRef(0);
@@ -92,15 +92,13 @@ const TitleDetailsScreen = ({
     return (
       <ScrollView testID={testID} style={styles.screen}
         contentContainerStyle={[styles.content, styles.unavailableContent]}>
+        <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} preferredBack />
         <View style={styles.unavailableBody}>
           <Text style={styles.title} accessibilityRole="header" testID={`${testID}-title`}>
             {presentation.name}
           </Text>
           <StatusNotice testID={`${testID}-notice`} notice={displayNotice} />
-          {onBack ? <View style={styles.unavailableAction}>
-            <CalmButton primary hasTVPreferredFocus testID={`${testID}-back`}
-              label="Back to library" onPress={onBack} />
-          </View> : null}
+
         </View>
       </ScrollView>
     );
@@ -112,23 +110,11 @@ const TitleDetailsScreen = ({
       testID={testID}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      {onBack ? <View style={styles.navigation}><CalmButton quiet testID={`${testID}-back`} label="Back to library" onPress={onBack} /></View> : null}
+      {presentation.art === 'harbor-cinematic' || presentation.art === 'harbor' ? <HomeHarborScene enabled={interfaceMotionEnabled} active={interfaceActive} /> : null}
+      <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>
-        <View style={styles.heroArt} pointerEvents="none">
-          <CalmArtworkMotion enabled={interfaceMotionEnabled} active={interfaceActive} testID={`${testID}-hero-motion`}>
-            <TitleArtwork immersive entry={entry} height={360} testID={`${testID}-artwork`} />
-          </CalmArtworkMotion>
-          <LinearGradient pointerEvents="none" colors={[CALM_COLORS.BACKGROUND, '#102F3A00']}
-            start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artSky} />
-          <LinearGradient pointerEvents="none" colors={['#102F3A00', CALM_COLORS.BACKGROUND]}
-            start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.artFloor} />
-          <LinearGradient pointerEvents="none" colors={['#102F3A00', CALM_COLORS.BACKGROUND]}
-            start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.artEdge} />
-        </View>
         <View style={styles.heroCopy}>
-          <View style={styles.kicker}>
-            <Text style={styles.eyebrow}>{presentation.kind}</Text>
-          </View>
+          <View style={styles.kicker}><Text style={styles.eyebrow}>{demo ? 'Optional demo' : 'About this story'}</Text></View>
           <Text style={[styles.title, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
           <View style={styles.buttons}>
@@ -143,7 +129,7 @@ const TitleDetailsScreen = ({
         <View testID={`${testID}-info`} style={styles.infoAnchor}
           onLayout={({ nativeEvent }) => { infoTop.current = nativeEvent.layout.y; }}>
           <View>
-            <CalmButton quiet testID={`${testID}-show-info`} label="Picture holds & settings ↓"
+            <CalmButton quiet testID={`${testID}-show-info`} label="Viewing details ↓"
               accessibilityLabel="Picture holds and viewing settings. Scroll down to read more."
               onPress={() => scrollRef.current?.scrollTo({
                 // Keep this same focused control in view above the explanation.
@@ -204,32 +190,32 @@ const TitleDetailsScreen = ({
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
-  content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'center' },
-  navigation: { width: '100%', maxWidth: scale(1440), alignItems: 'flex-start', marginBottom: scale(16) },
-  hero: { width: '100%', maxWidth: scale(1440), alignItems: 'center', overflow: 'hidden' },
-  heroCopy: { width: '100%', maxWidth: scale(1000), alignItems: 'center', paddingTop: scale(12) },
+  content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
+  navigation: { width: '100%', maxWidth: scale(1728), alignItems: 'flex-start', marginBottom: scale(16) },
+  hero: { width: '100%', minHeight: scale(590), alignItems: 'flex-start' },
+  heroCopy: { width: '100%', maxWidth: scale(780), alignItems: 'flex-start', paddingTop: scale(72) },
   heroArt: { width: '100%', maxWidth: scale(1120) },
   artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(56) },
   artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(160) },
   artEdge: { position: 'absolute', top: 0, bottom: 0, right: 0, width: scale(120) },
-  kicker: { alignItems: 'center', marginBottom: scale(8) },
-  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, textAlign: 'center' },
-  title: { ...CALM_TEXT.feature, fontSize: scale(72), lineHeight: scale(84), color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'center' },
-  longTitle: { fontSize: scale(72), lineHeight: scale(84) },
-  synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'center' },
-  summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'center' },
-  section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, textAlign: 'center' },
-  infoAnchor: { width: '100%', maxWidth: scale(1040), alignItems: 'center', marginTop: scale(12) },
+  kicker: { alignItems: 'flex-start', marginBottom: scale(8) },
+  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, textAlign: 'left' },
+  title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
+  longTitle: { fontSize: scale(64), lineHeight: scale(76) },
+  synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
+  summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
+  section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, textAlign: 'left' },
+  infoAnchor: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', marginTop: scale(12) },
   checkSummary: { width: '100%', maxWidth: scale(1040), gap: scale(20), marginTop: scale(32) },
-  chapterHeading: { alignItems: 'center' },
+  chapterHeading: { alignItems: 'flex-start' },
   chapterContent: { gap: scale(24) },
   timeline: { marginTop: scale(8) },
-  timelineLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12), textAlign: 'center' },
+  timelineLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12), textAlign: 'left' },
   viewingChapter: { width: '100%', maxWidth: scale(1040), marginTop: scale(56) },
-  unavailableContent: { flexGrow: 1, justifyContent: 'center' },
-  unavailableBody: { width: '100%', maxWidth: scale(1040), alignItems: 'center', gap: scale(24) },
+  unavailableContent: { flexGrow: 1, justifyContent: 'flex-start' },
+  unavailableBody: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', gap: scale(24) },
   unavailableAction: { marginTop: scale(16) },
-  buttons: { flexDirection: 'row', justifyContent: 'center', marginTop: scale(24) },
-  footer: { width: '100%', maxWidth: scale(1040), alignItems: 'center', marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.SURFACE_FOCUSED },
+  buttons: { flexDirection: 'row', justifyContent: 'flex-start', marginTop: scale(24) },
+  footer: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.SURFACE_FOCUSED },
 });
 export default TitleDetailsScreen;

@@ -1,8 +1,8 @@
 import { TVFocusGuideView } from '@amazon-devices/react-native-kepler';
 import React, { useCallback, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { CAPTION_DISABLE_ID, CAPTION_DISABLE_TEXT } from '../../constants';
-import { COLORS } from '../../styles/Colors';
+import { CALM_COLORS, CALM_TEXT } from '../../calmframes/calmStyles';
 import { areComponentPropsEqual } from '../../utils/lodashHelper';
 import { scaleUxToDp } from '../../utils/pixelUtils';
 import { CaptionMenuItem } from './CaptionMenuItem';
@@ -46,6 +46,7 @@ export const CaptionMenu = React.memo(
     const enableCaption = useCallback(
       (id: string) => {
         if (id === captionID) {
+          setCaptionMenuVisibility(false);
           return;
         }
         removeCurrentCaption();
@@ -76,7 +77,7 @@ export const CaptionMenu = React.memo(
     return (
       <TVFocusGuideView trapFocusLeft trapFocusRight trapFocusUp>
         {captionMenuVisibility ? (
-          <View style={styles.menu}>
+          <View style={styles.menu}><Text style={styles.heading} accessibilityRole="header">Captions</Text>
             <CaptionOptions
               video={video}
               enableCaption={enableCaption}
@@ -99,15 +100,13 @@ export const CaptionMenu = React.memo(
 
 const styles = StyleSheet.create({
   menu: {
-    backgroundColor: COLORS.BLACK + 'E6',
+    backgroundColor: CALM_COLORS.SURFACE,
     width: scaleUxToDp(480),
     justifyContent: 'center',
     zIndex: 30,
-    borderRadius: scaleUxToDp(15),
+    borderRadius: scaleUxToDp(24),
+    padding: scaleUxToDp(12),
     overflow: 'hidden',
   },
-  captionSelected: {
-    backgroundColor: COLORS.DARK_GRAY + 'D9',
-    borderRadius: scaleUxToDp(40),
-  },
+  heading: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, padding: scaleUxToDp(20) },
 });

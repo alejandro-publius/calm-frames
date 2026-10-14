@@ -39,15 +39,17 @@
  */
 
 import React from 'react';
+import TouchableOpacity from './CalmTouchable';
 import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import CalmButton from './CalmButton';
+import CalmPageHeader from './CalmPageHeader';
 import {
+  CALM_CONTROL,
   CALM_COLORS,
   CALM_SPACE,
   CALM_TEXT,
@@ -229,6 +231,7 @@ const FirstRunScreen = ({
 
   const header = (
     <View style={styles.header}>
+      <CalmPageHeader />
       <View style={styles.brandRow}>
         <Text
           style={styles.step}
@@ -378,6 +381,7 @@ const FirstRunScreen = ({
                   chosen ? styles.chosen : null,
                   focusedRow === key ? styles.focused : null,
                 ]}>
+                <Text accessible={false} style={styles.selectionMark}>{chosen ? '✓' : ''}</Text>
                 <Text
                   style={[styles.chipLabel, focusedRow === key ? styles.focusedLabel : null]}
                   testID={`${testID}-tv-${inches}-label`}>
@@ -419,6 +423,7 @@ const FirstRunScreen = ({
                   chosen ? styles.chosen : null,
                   focusedRow === key ? styles.focused : null,
                 ]}>
+                <Text accessible={false} style={styles.selectionMark}>{chosen ? '✓' : ''}</Text>
                 <Text
                   style={[styles.chipLabel, focusedRow === key ? styles.focusedLabel : null]}
                   testID={`${testID}-seat-${inches}-label`}>
@@ -521,7 +526,7 @@ const styles = StyleSheet.create({
     maxWidth: scale(1400),
     paddingBottom: scale(CALM_SPACE.SAFE_Y),
   },
-  header: { maxWidth: scale(1400), marginBottom: scale(40) },
+  header: { maxWidth: scale(1400), marginBottom: scale(16) },
   brandRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -573,7 +578,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(24),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
     marginBottom: scale(16),
-    borderRadius: scale(16),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,
@@ -610,12 +615,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  selectionMark: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT, width: scale(42) },
   chip: {
+    flexDirection: 'row', alignItems: 'center',
     marginRight: scale(CALM_SPACE.ROW),
     marginBottom: scale(CALM_SPACE.ROW),
     paddingVertical: scale(CALM_SPACE.TIGHT),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(12),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,
@@ -639,7 +646,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     maxWidth: scale(1400),
     padding: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(16),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     backgroundColor: CALM_COLORS.SURFACE,
   },
   reviewTitle: {

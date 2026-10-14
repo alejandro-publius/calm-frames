@@ -8,6 +8,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
+import { Image } from 'react-native';
 jest.mock('@react-native-async-storage/async-storage', () => ({
   getItem: jest.fn(async () => null),
   setItem: jest.fn(async () => undefined),
@@ -20,6 +21,7 @@ import {
 import { BENIGN_STORY_PUBLIC_KEY } from '../../src/calmframes/benignStoryData';
 import { CALM_COLORS } from '../../src/calmframes/calmStyles';
 import { verifyFlashMap } from '../../src/calmframes/flashMap';
+import TitleArtwork from '../../src/calmframes/TitleArtwork';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import { OFFLINE_TITLE_ID } from '../../src/calmframes/offlineTitle';
 import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
@@ -66,7 +68,7 @@ describe('the pictures on the shelf', () => {
     expect(shelfPoster(harbor)).toBe(still);
 
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
-    const image = screen.getByTestId(`kid-home-poster-image-${BENIGN_STORY_ID}`);
+    const image = screen.getByTestId('home-harbor-scene').findByType(Image);
     expect(image.props.source).toEqual(require('../../assets/image/tv/harbor-illustrated.png'));
     expect(image.props.resizeMode).toBe('cover');
     expect(image.props.fadeDuration).toBe(0);
@@ -80,12 +82,12 @@ describe('the pictures on the shelf', () => {
    *     Received: "data:image/jpeg;base64,/9j//gAPTGF2YzYz..."
    */
   it('uses dedicated illustration assets for the known prepared story and test clip', () => {
-    render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     for (const entry of others) {
       expect(shelfPoster(entry)).toBeUndefined();
-      expect(
-        screen.queryByTestId(`kid-home-poster-image-${entry.title.id}`),
-      ).toBeTruthy();
+      const view = render(<TitleArtwork illustrated entry={entry} testID="art" />);
+      expect(view.getByTestId('art').props.source).toEqual(entry.title.id === OFFLINE_TITLE_ID
+        ? require('../../assets/image/tv/gradient.png') : require('../../assets/image/tv/harbor-illustrated.png'));
+      view.unmount();
     }
   });
 
@@ -134,20 +136,13 @@ describe('the pictures on the shelf', () => {
 describe('the words on the shelf', () => {
   const preparedId = packagedLibrary.titles(DEFAULT_SETTINGS)[0].id;
 
-  /** What one poster says, top to bottom, ending with its shield. */
-  const posterWords = (id: string): unknown[] =>
-    screen
-      .getByTestId(`kid-home-poster-${id}`)
-      .findAll((node) => (node.type as string) === 'Text')
-      .map((node) => node.props.children);
-
   it('introduces Harbor with a brief story synopsis while keeping preparation detail on its page', () => {
     const prepared = shelf.find((entry) => entry.title.id === preparedId)!;
     const onOpen = jest.fn();
     const onPlay = jest.fn();
     const home = render(<KidHomeScreen titles={shelf} onOpen={onOpen} onPlay={onPlay} />);
-    const synopsis = screen.getByText(/prepared titles can hold/i).props.children;
-    expect(synopsis).toMatch(/sound continues/i);
+    const synopsis = screen.getByText(/A quieter picture/i).props.children;
+    expect(synopsis).toMatch(/Sound and stories carry on/i);
     fireEvent.press(screen.getByTestId('kid-home-more-info'));
     expect(onOpen).toHaveBeenCalledWith(prepared);
     fireEvent.press(screen.getByTestId('kid-home-watch'));
@@ -175,49 +170,16 @@ describe('the words on the shelf', () => {
     expect(onPlay).toHaveBeenCalledWith(harbor);
   });
 
-  /**
-   * Seen to fail with the full catalog title back on the first line and no
-   * second line:
-   *
-   *     -   "Harbor story",
-   *     -   "Benign demo, practice holds",
-   *     +   "Harbor story (benign demo)",
-   *         "Checked",
-   */
-  it('names each bundled title, and says what it is on the line under the name', () => {
-    render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
-    expect(posterWords(BENIGN_STORY_ID)).toEqual([
-      'Harbor demo',
-      'Practice holds',
-    ]);
-    expect(posterWords(preparedId)).toEqual([
-      'Harbor',
-    ]);
-    expect(posterWords(OFFLINE_TITLE_ID)).toEqual([
-      'Calm gradient',
-      'Playback test',
-    ]);
-    expect(
-      screen.getByTestId(`kid-home-poster-${BENIGN_STORY_ID}`).props
-        .accessibilityLabel,
-    ).toBe('Harbor demo, Practice holds');
-  });
-
-  /**
-   * Seen to fail with Harbor's second line given to anything named Harbor
-   * story, the shortcut this guards against:
-   *
-   *     Expected pattern: not /practice|demo/i
-   *     Received string:      "Benign demo, practice holds"
-   */
-  it('keeps the two Harbors apart, and only the demo one says practice', () => {
-    render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
-    const [benignName, benignLine] = posterWords(BENIGN_STORY_ID);
-    const [preparedName, preparedLine] = posterWords(preparedId);
-    expect(benignName).toBe('Harbor demo');
-    expect(preparedName).toBe('Harbor');
-    expect(benignLine).toMatch(/practice holds/i);
-    expect(preparedLine).toBeUndefined();
+  it('keeps practice and playback diagnostics in optional help, with factual descriptions in details', () => {
+    const open = jest.fn();
+    render(<KidHomeScreen titles={shelf} onOpen={open} />);
+    expect(screen.queryByText('Practice holds')).toBeNull();
+    expect(screen.queryByText('Playback test')).toBeNull();
+    fireEvent.press(screen.getByTestId('kid-home-learn'));
+    fireEvent.press(screen.getByTestId('picture-hold-demo-details'));
+    expect(open).toHaveBeenCalledWith(harbor);
+    fireEvent.press(screen.getByTestId('picture-hold-playback-check'));
+    expect(open).toHaveBeenCalledWith(shelf.find(entry => entry.title.id === OFFLINE_TITLE_ID));
   });
 
   /**
@@ -269,7 +231,7 @@ describe('the words on the shelf', () => {
   it('draws the second line at the ten foot floors, resting and focused', () => {
     const floors = { textSizeUnits: 32, textContrast: 4.5 };
     const secondLines = ['Practice holds', 'Playback test'];
-    render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
+    render(<KidHomeScreen titles={shelf.filter(entry => entry.title.id === BENIGN_STORY_ID || entry.title.id === OFFLINE_TITLE_ID)} onOpen={jest.fn()} />);
     const measured = () =>
       measureText(screen.toJSON() as unknown as RenderedNode, { background: CALM_COLORS.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);
 

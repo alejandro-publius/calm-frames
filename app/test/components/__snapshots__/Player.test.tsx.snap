@@ -42,7 +42,7 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
           "alignItems": "center",
           "backgroundColor": "#1A414B",
           "borderColor": "#66A0B4",
-          "borderRadius": 16,
+          "borderRadius": 24,
           "borderWidth": 2,
           "maxWidth": 1400,
           "paddingHorizontal": 64,

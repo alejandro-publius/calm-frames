@@ -1,13 +1,13 @@
+jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import { act, render, screen } from '@testing-library/react-native';
 import React from 'react';
 import { AccessibilityInfo, Animated, Text } from 'react-native';
 import CalmArtworkMotion from '../../src/calmframes/CalmArtworkMotion';
 import { scale } from '../../src/calmframes/calmStyles';
-import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
-import TitleArtwork from '../../src/calmframes/TitleArtwork';
+import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
+import { checkedShelf } from './shelfFixtures';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
-import { CheckedTitle } from '../../src/calmframes/titleStatus';
 
 function deferred() {
   let resolve!: (value: boolean) => void;
@@ -24,10 +24,6 @@ const art = (enabled = true, active = true) => (
 // Narrow the overloaded event method at this test boundary to its boolean event.
 const accessibilityEvents = AccessibilityInfo as unknown as {
   addEventListener(name: string, callback: (value: boolean) => void): { remove(): void };
-};
-const entry: CheckedTitle = {
-  title: { id: 'motion-fixture', title: 'Motion test title', uri: 'file:///fixture.mp4', sha256: 'a'.repeat(64) },
-  status: 'verified', segments: [], hiddenMs: 0, verifiedProfiles: ['wcag'],
 };
 
 describe('optional one-time artwork entry', () => {
@@ -196,23 +192,13 @@ describe('optional one-time artwork entry', () => {
     expect(removeReduction).toHaveBeenCalledTimes(1);
   });
 
-  it.each(['details'])('wires opt-in and activity to %s artwork while leaving controls outside', async (page) => {
-    const make = (enabled = false, active = true) => page === 'library'
-      ? <KidHomeScreen titles={[entry]} onOpen={jest.fn()} interfaceMotionEnabled={enabled} interfaceActive={active} />
-      : <TitleDetailsScreen entry={entry} onPlay={jest.fn()} interfaceMotionEnabled={enabled} interfaceActive={active} />;
-    const still = render(make());
-    await flush();
-    expect(timing).not.toHaveBeenCalled();
-    still.unmount();
-    const view = render(make(true));
-    await flush();
-    expect(start).toHaveBeenCalledTimes(1);
-    const motion = screen.UNSAFE_getByType(CalmArtworkMotion);
-    expect(motion.props.children.type).toBe(TitleArtwork);
-    const action = screen.getByTestId(page === 'library' ? 'kid-home-watch' : 'title-details-play');
-    expect(action.props.hasTVPreferredFocus).toBe(true);
-    view.rerender(make(true, false));
-    expect(stop).toHaveBeenCalledTimes(1);
-    expect(start).toHaveBeenCalledTimes(1);
+  it('shares the restrained harbor scene on details, keeping controls outside it', () => {
+    const harbor = checkedShelf().find(item => item.title.title === 'Harbor story (prepared locally)')!;
+    const view = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} interfaceMotionEnabled interfaceActive={false} />);
+    const scene = view.UNSAFE_getByType(HomeHarborScene);
+    expect(scene.props.enabled).toBe(true);
+    expect(scene.props.active).toBe(false);
+    expect(view.getByTestId('title-details-play').props.hasTVPreferredFocus).toBe(true);
+    expect(scene.findAllByProps({ testID: 'title-details-play' })).toHaveLength(0);
   });
 });

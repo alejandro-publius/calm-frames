@@ -28,8 +28,10 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import TouchableOpacity from './CalmTouchable';
+import { StyleSheet, Text, View } from 'react-native';
 import {
+  CALM_CONTROL,
   CALM_COLORS,
   CALM_SPACE,
   CALM_TEXT,
@@ -146,7 +148,7 @@ const styles = StyleSheet.create({
     marginRight: scale(KEY_GAP),
     marginBottom: scale(KEY_GAP),
     paddingVertical: scale(CALM_SPACE.ROW),
-    borderRadius: scale(12),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,

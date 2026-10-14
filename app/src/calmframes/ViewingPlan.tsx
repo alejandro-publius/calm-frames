@@ -77,7 +77,7 @@ const ViewingPlan = ({
 
 const styles = StyleSheet.create({
   section: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: scale(24),
     paddingTop: scale(48),
     borderTopWidth: scale(1),
@@ -88,21 +88,21 @@ const styles = StyleSheet.create({
   heading: {
     color: CALM_COLORS.TEXT,
     ...CALM_TEXT.section,
-    textAlign: 'center',
+    textAlign: 'left',
   },
   label: {
     color: CALM_COLORS.TEXT,
     ...CALM_TEXT.control,
     marginTop: scale(CALM_SPACE.TIGHT),
-    textAlign: 'center',
+    textAlign: 'left',
   },
   line: {
     color: CALM_COLORS.TEXT_DIM,
     ...CALM_TEXT.supporting,
     marginTop: scale(CALM_SPACE.TIGHT),
-    textAlign: 'center',
+    textAlign: 'left',
   },
-  columns: { alignItems: 'center', gap: scale(24) },
+  columns: { alignItems: 'flex-start', gap: scale(24) },
   summary: { width: '100%' },
   explanation: { width: '100%' },
   limits: {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     paddingTop: scale(24),
     borderTopWidth: scale(1),
     borderTopColor: CALM_COLORS.SURFACE_FOCUSED,
-    textAlign: 'center',
+    textAlign: 'left',
   },
 });
 

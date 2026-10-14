@@ -1,3 +1,4 @@
+import { CALM_COLORS, CALM_TEXT } from '../calmframes/calmStyles';
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 
@@ -434,8 +435,8 @@ const styles = StyleSheet.create({
     marginBottom: scaleUxToDp(10),
   },
   time: {
-    color: COLORS.WHITE,
-    fontSize: scaleUxToDp(32),
+    color: CALM_COLORS.TEXT,
+    ...CALM_TEXT.supporting,
     marginHorizontal: scaleUxToDp(20),
   },
   hiddenBar: {

@@ -146,11 +146,11 @@ const FlashMapStrip = ({
 const styles = StyleSheet.create({
   scale: { flexDirection: 'row', justifyContent: 'space-between', marginTop: scale(12) },
   time: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
-  key: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: scale(32), marginTop: scale(24) },
+  key: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', gap: scale(32), marginTop: scale(24) },
   keyItem: { flexDirection: 'row', alignItems: 'center', gap: scale(12) },
   visibleSwatch: { width: scale(28), height: scale(28), borderRadius: scale(6), borderWidth: scale(2), borderColor: CALM_COLORS.BORDER, backgroundColor: CALM_COLORS.SURFACE },
   holdSwatch: { width: scale(28), height: scale(28), borderRadius: scale(3) },
-  keyNote: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'center', marginTop: scale(20) },
+  keyNote: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left', marginTop: scale(20) },
   track: {
     height: scale(28),
     borderRadius: scale(6),

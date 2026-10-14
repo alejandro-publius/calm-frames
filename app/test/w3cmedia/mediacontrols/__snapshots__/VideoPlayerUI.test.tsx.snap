@@ -93,8 +93,9 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
-            "borderColor": "transparent",
-            "borderRadius": 42,
+            "backgroundColor": "#1A414B",
+            "borderColor": "#1A414B",
+            "borderRadius": 18,
             "borderWidth": 6,
             "flexDirection": "row",
             "opacity": 1,
@@ -148,8 +149,9 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
-            "borderColor": "transparent",
-            "borderRadius": 40,
+            "backgroundColor": "#1A414B",
+            "borderColor": "#1A414B",
+            "borderRadius": 18,
             "borderWidth": 6,
             "flexDirection": "row",
             "opacity": 1,
@@ -194,8 +196,9 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
-            "borderColor": "transparent",
-            "borderRadius": 40,
+            "backgroundColor": "#1A414B",
+            "borderColor": "#1A414B",
+            "borderRadius": 18,
             "borderWidth": 6,
             "flexDirection": "row",
             "opacity": 1,
@@ -239,8 +242,9 @@ exports[`VideoPlayerUI Test Cases renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
-            "borderColor": "transparent",
-            "borderRadius": 40,
+            "backgroundColor": "#17323C",
+            "borderColor": "#1A414B",
+            "borderRadius": 18,
             "borderWidth": 6,
             "flexDirection": "row",
             "opacity": 1,

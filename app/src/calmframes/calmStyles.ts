@@ -95,6 +95,9 @@ export const MINIMUM_TEXT_SIZE = 32;
  */
 export const FOCUS_RING_WIDTH = 6;
 
+/** Fixed geometry for all interactive surfaces; selection and focus never resize them. */
+export const CALM_CONTROL = { RADIUS: 18, MIN_HEIGHT: 88 } as const;
+
 /**
  * Contrast floors, as WCAG 2.2 contrast ratios.
  *

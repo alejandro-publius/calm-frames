@@ -245,10 +245,9 @@ describe('the registry had nothing, so the map the app holds served it', () => {
       nowMs: OFFLINE_NOW,
     });
 
-    expect(
-      screen.queryByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`),
-    ).toBeTruthy();
-    fireEvent.press(screen.getByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`));
+    fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
+    expect(screen.getByTestId('picture-hold-playback-check')).toBeTruthy();
+    fireEvent.press(screen.getByTestId('picture-hold-playback-check'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     expect(navigate.mock.calls[0][1].guarded.maps.wcag).toBe(OFFLINE_MAP_JSON);
     expect(console.info).toHaveBeenCalledWith(

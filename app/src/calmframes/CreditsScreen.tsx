@@ -38,7 +38,8 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
-import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
+import CalmPageHeader from './CalmPageHeader';
+import { CALM_CONTROL, CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { CREDIT_ENTRIES, CreditEntry } from './credits';
 import { useUiCapture } from './uiCapture';
 import { CREDITS_FRAME } from './uiFrames';
@@ -107,6 +108,7 @@ const CreditsScreen = ({
       testID={testID}
       style={styles.screen}
       contentContainerStyle={styles.content}>
+      <CalmPageHeader onBack={onBack} backLabel="Back to settings" backTestID={`${testID}-back-top`} preferredBack />
       <View style={styles.header}>
         <Text style={styles.title} testID={`${testID}-title`}>
           {CREDITS_TITLE}
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
     marginBottom: scale(CALM_SPACE.TIGHT),
     paddingVertical: scale(CALM_SPACE.ROW),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(12),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     backgroundColor: CALM_COLORS.SURFACE,
   },
   entryTitle: {

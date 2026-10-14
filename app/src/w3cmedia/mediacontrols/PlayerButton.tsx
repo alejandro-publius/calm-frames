@@ -8,7 +8,7 @@ import {
   ViewStyle,
   AccessibilityState,
 } from 'react-native';
-import { CALM_COLORS, FOCUS_RING_WIDTH } from '../../calmframes/calmStyles';
+import { CALM_CONTROL, CALM_COLORS, FOCUS_RING_WIDTH } from '../../calmframes/calmStyles';
 import FocusableElement from '../../components/FocusableElement';
 import { COLORS } from '../../styles/Colors';
 import { scaleUxToDp } from '../../utils/pixelUtils';
@@ -48,12 +48,12 @@ export const PlayerButton = React.forwardRef(
         onBlur={onBlur}
         focusableElementRef={ref as RefObject<React.ComponentRef<typeof TouchableOpacity>> | null}
         style={[styles.buttonContainer, overrideStyle]}
-        onFocusOverrideStyle={[styles.buttonFocus, { borderRadius: scaleUxToDp(size) }]}
+        onFocusOverrideStyle={styles.buttonFocus}
         onPress={onPress}
         hasTVPreferredFocus={hasTVPreferredFocus}
         testID={testID}>
         <Text>
-          <MaterialIcons name={icon} size={scaleUxToDp(size)} color={COLORS.WHITE} />
+          <MaterialIcons name={icon} size={scaleUxToDp(size)} color={CALM_COLORS.TEXT} />
         </Text>
       </FocusableElement>
     );
@@ -64,8 +64,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     padding: scaleUxToDp(18),
     borderWidth: scaleUxToDp(FOCUS_RING_WIDTH),
-    borderColor: 'transparent',
-    borderRadius: scaleUxToDp(40),
+    borderColor: CALM_COLORS.SURFACE,
+    backgroundColor: CALM_COLORS.SURFACE,
+    borderRadius: scaleUxToDp(CALM_CONTROL.RADIUS),
     alignItems: 'center',
     flexDirection: 'row',
   },

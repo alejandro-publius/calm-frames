@@ -18,8 +18,10 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import TouchableOpacity from './CalmTouchable';
+import { StyleSheet, Text } from 'react-native';
 import {
+  CALM_CONTROL,
   CALM_COLORS,
   CALM_SPACE,
   CALM_TEXT,
@@ -36,6 +38,8 @@ export interface CalmButtonProps {
   /** Smaller quiet links retain the minimum TV text size and full focus boundary. */
   compact?: boolean;
   onPress?: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
   /** What a screen reader says. Defaults to the label. */
   accessibilityLabel?: string;
   /** Drawn as unavailable, and it does not call back. */
@@ -52,12 +56,15 @@ const CalmButton = ({
   quiet = false,
   compact = false,
   onPress,
+  onFocus,
+  onBlur,
   accessibilityLabel,
   disabled = false,
   sound = true,
   hasTVPreferredFocus = false,
   testID = 'calm-button',
 }: CalmButtonProps) => {
+  const [pressed, setPressed] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
   const feedback = useInterfaceFeedback();
   return (
@@ -69,8 +76,10 @@ const CalmButton = ({
       activeOpacity={1}
       hasTVPreferredFocus={hasTVPreferredFocus}
       disabled={disabled}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
+      onPressIn={() => setPressed(true)}
+      onPressOut={() => setPressed(false)}
+      onFocus={() => { setFocused(true); onFocus?.(); }}
+      onBlur={() => { setFocused(false); setPressed(false); onBlur?.(); }}
       onPress={() => {
         if (disabled || !onPress) { return; }
         onPress();
@@ -87,7 +96,7 @@ const CalmButton = ({
       ]}>
       <Text
         testID={`${testID}-label`}
-        style={[styles.label, compact ? styles.compactLabel : null, focused && !disabled ? styles.focusedLabel : null, primary && !disabled ? (focused ? styles.focusedPrimaryLabel : styles.primaryLabel) : null, disabled ? styles.labelDisabled : null]}>
+        style={[styles.label, compact ? styles.compactLabel : null, focused && !disabled ? styles.focusedLabel : null, primary && !disabled ? ((focused || pressed) ? styles.focusedPrimaryLabel : styles.primaryLabel) : null, disabled ? styles.labelDisabled : null]}>
         {label}
       </Text>
     </TouchableOpacity>
@@ -97,9 +106,11 @@ const CalmButton = ({
 const styles = StyleSheet.create({
   button: {
     alignSelf: 'flex-start',
-    paddingVertical: scale(CALM_SPACE.ROW),
+    minHeight: scale(CALM_CONTROL.MIN_HEIGHT),
+    justifyContent: 'center',
+    paddingVertical: scale(15),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(12),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,

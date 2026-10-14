@@ -46,9 +46,12 @@
  */
 
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import TouchableOpacity from './CalmTouchable';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
+import CalmPageHeader from './CalmPageHeader';
 import {
+  CALM_CONTROL,
   CALM_COLORS,
   CALM_SPACE,
   CALM_TEXT,
@@ -295,6 +298,7 @@ const ParentAreaScreen = ({
     const offersSetPin = !gate.record && Boolean(onSetPin);
     return (
       <View testID={testID} style={styles.screen}>
+        <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} backDisabled={saving} />
         <View style={styles.header}>
           <Text style={styles.title} accessibilityRole="header">
             {PARENTAL_CONTROLS_TITLE}
@@ -316,16 +320,7 @@ const ParentAreaScreen = ({
                     />
                   </View>
                 ) : null}
-                {onBack ? (
-                  <View style={styles.button}>
-                    <CalmButton
-                      disabled={saving || undefined}
-                      testID={`${testID}-back`}
-                      label={BACK_TO_LIBRARY_LABEL}
-                      onPress={onBack}
-                    />
-                  </View>
-                ) : null}
+
               </View>
             ) : null}
           </View>
@@ -403,6 +398,7 @@ const ParentAreaScreen = ({
       testID={`${testID}-open`}
       style={styles.screen}
       contentContainerStyle={styles.content}>
+      <CalmPageHeader onBack={onBack} backTestID={`${testID}-back-top`} preferredBack backDisabled={saving} />
       <View style={styles.header}>
         <View style={styles.headerTitleRow}>
           <Text style={[styles.title, styles.headerTitle]} accessibilityRole="header">
@@ -418,9 +414,7 @@ const ParentAreaScreen = ({
               </Text>
             ) : null}
           </View>
-          {onBack ? <CalmButton quiet hasTVPreferredFocus
-            disabled={saving || undefined}
-            testID={`${testID}-back-top`} label={BACK_TO_LIBRARY_LABEL} onPress={onBack} /> : null}
+
         </View>
         <Text style={styles.lead}>{PARENTAL_CONTROLS_LEAD}</Text>
       </View>
@@ -566,7 +560,7 @@ const ParentAreaScreen = ({
               </View>
               <View style={styles.rowState}>
                 {chosen ? (
-                  <Text style={styles.rowStateWord}>{CHOSEN_WORD}</Text>
+                  <Text style={styles.rowStateWord}>✓ {CHOSEN_WORD}</Text>
                 ) : null}
               </View>
             </TouchableOpacity>
@@ -609,6 +603,7 @@ const ParentAreaScreen = ({
                   chosen ? styles.chosen : null,
                   focusedRow === key ? styles.focused : null,
                 ]}>
+                <Text accessible={false} style={styles.selectionMark}>{chosen ? '✓' : ''}</Text>
                 <Text
                   style={[styles.chipLabel, focusedRow === key ? styles.focusedLabel : null]}
                   testID={`${testID}-tv-${inches}-label`}>
@@ -649,6 +644,7 @@ const ParentAreaScreen = ({
                   chosen ? styles.chosen : null,
                   focusedRow === key ? styles.focused : null,
                 ]}>
+                <Text accessible={false} style={styles.selectionMark}>{chosen ? '✓' : ''}</Text>
                 <Text
                   style={[styles.chipLabel, focusedRow === key ? styles.focusedLabel : null]}
                   testID={`${testID}-seat-${inches}-label`}>
@@ -872,8 +868,8 @@ const styles = StyleSheet.create({
   },
   content: {
     width: '100%',
-    maxWidth: scale(1400),
-    alignSelf: 'center',
+    maxWidth: scale(1728),
+    alignSelf: 'flex-start',
     paddingBottom: scale(CALM_SPACE.SAFE_Y),
   },
   header: { marginBottom: scale(GROUP_GAP) },
@@ -903,7 +899,7 @@ const styles = StyleSheet.create({
     maxWidth: scale(960),
     marginRight: scale(CALM_SPACE.EDGE),
   },
-  group: { marginBottom: scale(GROUP_GAP) },
+  group: { marginBottom: scale(GROUP_GAP), maxWidth: scale(1440) },
   profileGroup: { flexDirection: 'row', gap: scale(40), marginBottom: scale(16) },
   profileIdentity: { flex: 1 },
   profileManagement: { width: scale(360) },
@@ -938,7 +934,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(24),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
     marginBottom: scale(16),
-    borderRadius: scale(16),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,
@@ -975,12 +971,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  selectionMark: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT, width: scale(42) },
   chip: {
+    flexDirection: 'row', alignItems: 'center',
     marginRight: scale(CALM_SPACE.ROW),
     marginBottom: scale(CALM_SPACE.ROW),
     paddingVertical: scale(CALM_SPACE.TIGHT),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(12),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
     borderColor: CALM_COLORS.SURFACE,
     backgroundColor: CALM_COLORS.SURFACE,
@@ -1027,7 +1025,7 @@ const styles = StyleSheet.create({
     paddingVertical: scale(CALM_SPACE.ROW),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
     marginBottom: scale(CALM_SPACE.TIGHT),
-    borderRadius: scale(12),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     backgroundColor: CALM_COLORS.SURFACE,
   },
   cardHead: {
