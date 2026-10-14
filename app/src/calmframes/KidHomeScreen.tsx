@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   scrollContent: { paddingBottom: scale(12) },
   hero: { width: '100%', minHeight: scale(620), alignItems: 'flex-start' },
   heroCopy: { width: scale(800), paddingTop: scale(104), alignItems: 'flex-start' },
-  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.FOCUS_RING, marginBottom: scale(12) },
+  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12) },
   featureTitle: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(12) },
   longFeatureTitle: { fontSize: scale(64), lineHeight: scale(76) },
   description: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, maxWidth: scale(670), marginBottom: scale(24) },

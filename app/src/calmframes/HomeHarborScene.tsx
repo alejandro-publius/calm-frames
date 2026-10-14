@@ -47,9 +47,9 @@ export default function HomeHarborScene({ enabled = false, active = true }: { en
     <Animated.View testID="home-water-ripples" style={[styles.ripples, { transform: [{ translateX: drift }, { translateY: drift.interpolate({ inputRange: [scale(-4), scale(4)], outputRange: [scale(-1), scale(1)] }) }] }]}>
       <View style={[styles.ripple, styles.first]} /><View style={[styles.ripple, styles.second]} /><View style={[styles.ripple, styles.third]} />
     </Animated.View>
-    <LinearGradient colors={[CALM_COLORS.BACKGROUND, '#102F3AFA', '#102F3A73', '#102F3A0F', '#102F3A00']} locations={[0, 0.3, 0.52, 0.72, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.left} />
-    <LinearGradient colors={['#102F3A00', '#102F3A1A', '#102F3AD9', CALM_COLORS.BACKGROUND]} locations={[0, 0.35, 0.72, 1]} style={styles.floor} />
-    <LinearGradient colors={['#102F3AD1', '#102F3AA6', '#102F3A00']} locations={[0, 0.65, 1]} style={styles.sky} />
+    <LinearGradient colors={[CALM_COLORS.BACKGROUND, `${CALM_COLORS.BACKGROUND}FA`, `${CALM_COLORS.BACKGROUND}73`, `${CALM_COLORS.BACKGROUND}0F`, `${CALM_COLORS.BACKGROUND}00`]} locations={[0, 0.3, 0.52, 0.72, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.left} />
+    <LinearGradient colors={[`${CALM_COLORS.BACKGROUND}00`, `${CALM_COLORS.BACKGROUND}1A`, `${CALM_COLORS.BACKGROUND}D9`, CALM_COLORS.BACKGROUND]} locations={[0, 0.35, 0.72, 1]} style={styles.floor} />
+    <LinearGradient colors={[`${CALM_COLORS.BACKGROUND}D1`, `${CALM_COLORS.BACKGROUND}A6`, `${CALM_COLORS.BACKGROUND}00`]} locations={[0, 0.65, 1]} style={styles.sky} />
   </View>;
 }
 const styles = StyleSheet.create({

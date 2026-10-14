@@ -9,7 +9,7 @@ import PinKeypad from '../../src/calmframes/PinKeypad';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
 import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
-import { CALM_TEXT, scale } from '../../src/calmframes/calmStyles';
+import { CALM_COLORS, CALM_TEXT, scale } from '../../src/calmframes/calmStyles';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import { emptyPinGate, setPin } from '../../src/calmframes/parentGate';
@@ -76,7 +76,7 @@ test('export four states through real shared controls, home and an in-memory set
     expect(selected.props.accessibilityState.checked).toBe(true);
     if (state === 'Disabled') {
       expect(selected.props.accessibilityState.disabled).toBe(true);
-      expect(StyleSheet.flatten(parent.getByText('✓ Chosen').props.style).color).toBe('#9EB1B2');
+      expect(StyleSheet.flatten(parent.getByText('✓ Chosen').props.style).color).toBe(CALM_COLORS.TEXT_DISABLED);
     }
     if (state === 'Focus' || state === 'Pressed') fireEvent(selected, 'focus');
     if (state === 'Pressed') fireEvent(selected, 'pressIn', {});
