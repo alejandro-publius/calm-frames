@@ -949,7 +949,7 @@ const styles = StyleSheet.create({
     backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
   },
   rowText: { flex: 1 },
-  disabledRowText: { color: '#9EB1B2' },
+  disabledRowText: { color: CALM_COLORS.TEXT_DISABLED },
   rowTitle: {
     ...CALM_TEXT.control,
     color: CALM_COLORS.TEXT,

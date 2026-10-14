@@ -10,7 +10,7 @@ const study = (children: React.ReactNode) => <CalmControlAppearance.Provider val
 test('material is opt-in; the production surface and geometry remain intact', () => {
   const view = render(<CalmControlAppearance.Provider value={false}><CalmButton primary label="Watch now" /></CalmControlAppearance.Provider>);
   const baseline = StyleSheet.flatten(view.getByTestId('calm-button').props.style);
-  expect(baseline.backgroundColor).toBe('#E6A957');
+  expect(baseline.backgroundColor).toBe('#D88B72');
   expect(view.UNSAFE_queryAllByType('LinearGradient' as never)).toHaveLength(0);
   view.rerender(study(<CalmButton primary label="Watch now" />));
   const material = StyleSheet.flatten(view.getByTestId('calm-button').props.style);
@@ -24,11 +24,11 @@ test('focus, press and release remain stationary, readable and call the real act
   const control = view.getByTestId('calm-button');
   fireEvent(control, 'focus');
   const focused = StyleSheet.flatten(control.props.style);
-  expect(focused.borderColor).toBe('#E6A957');
+  expect(focused.borderColor).toBe('#E6B963');
   fireEvent(control, 'pressIn', {});
   expect(view.UNSAFE_getByType('LinearGradient' as never).props.colors).toEqual(CONTROL_MATERIAL.creamPressed);
   expect(StyleSheet.flatten(control.props.style)).toEqual(focused);
-  expect(StyleSheet.flatten(view.getByTestId('calm-button-label').props.style).color).toBe('#17323C');
+  expect(StyleSheet.flatten(view.getByTestId('calm-button-label').props.style).color).toBe('#151C26');
   fireEvent(control, 'pressOut', {});
   expect(view.UNSAFE_getByType('LinearGradient' as never).props.colors).toEqual(CONTROL_MATERIAL.cream);
   fireEvent.press(control); expect(press).toHaveBeenCalledTimes(1);
@@ -65,8 +65,8 @@ test('gradient extremes preserve text contrast even when translucent teal is com
     const alpha = parseInt(color.slice(7), 16) / 255;
     return '#' + [1, 3, 5].map(i => Math.round(parseInt(color.slice(i, i + 2), 16) * alpha + 255 * (1 - alpha)).toString(16).padStart(2, '0')).join('');
   };
-  for (const color of [...CONTROL_MATERIAL.cream, ...CONTROL_MATERIAL.creamPressed]) expect(contrastRatio('#17323C', color)).toBeGreaterThanOrEqual(4.5);
-  for (const color of [...CONTROL_MATERIAL.teal, ...CONTROL_MATERIAL.tealPressed, ...CONTROL_MATERIAL.selected, ...CONTROL_MATERIAL.disabled]) expect(contrastRatio('#BDD0CF', composite(color))).toBeGreaterThanOrEqual(4.5);
-  expect(contrastRatio('#E6A957', '#17323C')).toBeGreaterThanOrEqual(3);
-  expect(contrastRatio('#9EB1B2', '#263E43')).toBeGreaterThanOrEqual(4.5);
+  for (const color of [...CONTROL_MATERIAL.cream, ...CONTROL_MATERIAL.creamPressed]) expect(contrastRatio('#151C26', color)).toBeGreaterThanOrEqual(4.5);
+  for (const color of [...CONTROL_MATERIAL.teal, ...CONTROL_MATERIAL.tealPressed, ...CONTROL_MATERIAL.selected, ...CONTROL_MATERIAL.disabled]) expect(contrastRatio('#BDC2C9', composite(color))).toBeGreaterThanOrEqual(4.5);
+  expect(contrastRatio('#E6B963', '#151C26')).toBeGreaterThanOrEqual(3);
+  expect(contrastRatio('#9DA4AE', '#282F39')).toBeGreaterThanOrEqual(4.5);
 });

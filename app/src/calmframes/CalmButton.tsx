@@ -144,12 +144,12 @@ const styles = StyleSheet.create({
   },
   compactLabel: { ...CALM_TEXT.supporting },
   focusedLabel: { textDecorationLine: 'underline' },
-  primary: { backgroundColor: CALM_COLORS.FOCUS_RING, borderColor: CALM_COLORS.FOCUS_RING },
+  primary: { backgroundColor: CALM_COLORS.PRIMARY, borderColor: CALM_COLORS.PRIMARY },
   primaryFocused: { backgroundColor: CALM_COLORS.INK, borderColor: CALM_COLORS.FOCUS_RING },
   focusedPrimaryLabel: { color: CALM_COLORS.TEXT },
   primaryLabel: { color: CALM_COLORS.INK },
   labelDisabled: {
-    color: CALM_COLORS.TEXT_DIM,
+    color: CALM_COLORS.TEXT_DISABLED,
   },
 });
 
