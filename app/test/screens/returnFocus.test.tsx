@@ -112,7 +112,7 @@ describe('Back from playback and details on the real shelf', () => {
 
   it('Watch, then Back from the player: focus returns to Watch, and only there', async () => {
     const { navigation, returnFromPlayer } = await startShelf();
-    expect(preferred()).toEqual(['kid-mode-home-more-info']);
+    expect(preferred()).toEqual(['kid-mode-home-watch']);
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
     expect(navigation.navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.objectContaining({ showHomeOpening: true }));
     returnFromPlayer();
@@ -138,13 +138,14 @@ describe('Back from playback and details on the real shelf', () => {
     expect(preferred()).toEqual(['kid-mode-home-more-info']);
   });
 
-  it('Details, Try the demo, Play, then Back three times: one level at a time, focus on what was pressed', async () => {
+  it('Details, More info, demo, Watch, then Back four times: one level at a time, focus on what was pressed', async () => {
     const { navigation, returnFromPlayer } = await startShelf();
     fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
-    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('20 sec · No flashing found');
+    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('20 sec');
     expect(preferred()).toEqual(['kid-mode-details-play']);
+    fireEvent.press(screen.getByTestId('kid-mode-details-show-info'));
     fireEvent.press(screen.getByTestId('kid-mode-details-practice'));
-    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('Practice version · 20 sec · 2 picture pauses');
+    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('Simulated demo · 20 sec');
     expect(screen.queryByTestId('kid-mode-details-practice')).toBeNull();
     expect(preferred()).toEqual(['kid-mode-details-play']);
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
@@ -152,8 +153,10 @@ describe('Back from playback and details on the real shelf', () => {
     returnFromPlayer();
     expect(preferred()).toEqual(['kid-mode-details-play']);
     fireEvent.press(screen.getByTestId('kid-mode-details-back'));
-    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('20 sec · No flashing found');
+    expect(screen.getByTestId('kid-mode-details-info')).toBeTruthy();
     expect(preferred()).toEqual(['kid-mode-details-practice']);
+    fireEvent.press(screen.getByTestId('kid-mode-details-info-back'));
+    expect(preferred()).toEqual(['kid-mode-details-show-info']);
     fireEvent.press(screen.getByTestId('kid-mode-details-back'));
     expect(preferred()).toEqual(['kid-mode-home-more-info']);
   });

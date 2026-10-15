@@ -21,18 +21,18 @@ interface TitlePresentation {
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
   if (concernsPackagedLibrary(title) && title.sha256 === ACADIA_SOURCE_SHA256) {
     return { name: 'Acadia coastal scenery', kind: 'National Park Service', action: 'Watch now', art: 'coastal',
-      description: 'NPS Video, Acadia National Park. No NPS endorsement is implied. The artwork is decorative, not a video frame.' };
+      description: 'Waves along the coast of Acadia National Park.' };
   }
   if (isBundledBenignStory(title)) {
-    return { name: 'Harbor', cardName: 'Harbor demo', kind: 'Demo', action: 'Play demo',
-      description: 'The picture pauses twice while sound and captions continue. This demo contains no flashing.', art: 'harbor-cinematic' };
+    return { name: 'Harbor', cardName: 'Harbor demo', kind: 'Demo', action: 'Watch demo',
+      description: 'A simulated demonstration with two picture pauses. No flashing.', art: 'harbor-cinematic' };
   }
   if (concernsPackagedLibrary(title) && title.title === 'Harbor story (prepared locally)') {
     return { name: 'Harbor', action: 'Watch now',
       description: '', art: 'harbor-cinematic' };
   }
   if (title.id === OFFLINE_TITLE_ID) {
-    return { name: 'Calm gradient', kind: 'Playback check', action: 'Play',
+    return { name: 'Calm gradient', kind: 'Playback check', action: 'Watch',
       description: 'A short gradient to check that video plays on this television.', art: 'gradient' };
   }
   const label = shelfLabel(title);

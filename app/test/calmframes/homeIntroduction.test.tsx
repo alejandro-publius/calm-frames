@@ -21,6 +21,8 @@ test('the practice demo is reached from Details, not from a card on Home', () =>
   expect(screen.queryByText('Try the demo')).toBeNull();
   screen.unmount();
   render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={demo} onOpenPractice={open} />);
+  expect(screen.queryByTestId('title-details-practice')).toBeNull();
+  fireEvent.press(screen.getByTestId('title-details-show-info'));
   fireEvent.press(screen.getByTestId('title-details-practice'));
   expect(open).toHaveBeenCalledTimes(1);
   expect(open).toHaveBeenCalledWith(demo);
@@ -96,7 +98,7 @@ test('home carries no explanation and keeps parental controls tertiary until foc
   const view = render(<KidHomeScreen titles={titles} onOpen={details} onOpenParentArea={parent} />);
   expect(view.queryByText('Picture holds on supported videos. Audio continues.')).toBeNull();
   expect(view.queryByText('About this story')).toBeNull();
-  fireEvent.press(view.getByRole('button', { name: 'View analysis: Harbor' }));
+  fireEvent.press(view.getByRole('button', { name: 'Details: Harbor' }));
   expect(details).toHaveBeenCalledWith(titles.find(entry => entry.title.title === 'Harbor story (prepared locally)'));
   const control = view.getByTestId('kid-home-parent-area');
   expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent', minHeight: 88, borderWidth: 6 });

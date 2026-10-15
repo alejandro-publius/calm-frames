@@ -147,8 +147,8 @@ describe('reaching Calm Frames', () => {
     await finishFirstRun();
     fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
     fireEvent.press(screen.getByTestId('picture-hold-demo-details'));
-    expect(JSON.stringify(screen.getByTestId('kid-mode-details-demo-label').props.children)).toContain('picture pauses twice');
-    expect(screen.getByTestId('kid-mode-details-summary').props.children).toContain('8 seconds');
+    expect(JSON.stringify(screen.getByTestId('kid-mode-details-demo-label').props.children)).toContain('two picture pauses');
+    expect(screen.queryByTestId('kid-mode-details-summary')).toBeNull();
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     const [, params] = navigate.mock.calls[0];
     expect(params.data.uri).toBe(BENIGN_STORY_URI);
@@ -313,7 +313,7 @@ describe('the shelf a household lands on', () => {
 
   it('retains the main Harbor action, adds Acadia, and keeps diagnostics out of the primary catalog', async () => {
     await renderKidMode(); await finishFirstRun();
-    expect(screen.getByTestId('kid-mode-home-more-info').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
     expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(1);
     expect(screen.getByText('Acadia coastal scenery')).toBeTruthy();
     expect(screen.queryByText('Demo')).toBeNull();

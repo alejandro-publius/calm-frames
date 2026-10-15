@@ -198,6 +198,8 @@ describe('the household viewing plan', () => {
         onPlay={jest.fn()}
       />,
     );
+    fireEvent.press(screen.getByTestId('title-details-show-info'));
+    fireEvent.press(screen.getByTestId('title-details-technical'));
     expect(screen.getByTestId('title-details-plan-preset').props.children).toBe(
       'Standard',
     );
@@ -251,6 +253,8 @@ describe('the household viewing plan', () => {
         onPlay={jest.fn()}
       />,
     );
+    fireEvent.press(screen.getByTestId('title-details-show-info'));
+    fireEvent.press(screen.getByTestId('title-details-technical'));
     expect(screen.getByTestId('title-details-plan-preset').props.children).toBe(
       'Extra cautious',
     );
@@ -380,6 +384,8 @@ describe('TitleDetailsScreen', () => {
     render(
       <TitleDetailsScreen entry={makeTitle('ok', 'verified')} onPlay={jest.fn()} />,
     );
+    fireEvent.press(screen.getByTestId('title-details-show-info'));
+    fireEvent.press(screen.getByTestId('title-details-technical'));
     expect(screen.getByTestId('title-details-summary').props.children).toMatch(
       /2 scenes hidden/,
     );
@@ -457,6 +463,8 @@ describe('TitleDetailsScreen', () => {
     const standard = render(
       <TitleDetailsScreen entry={entry} onPlay={jest.fn()} settings={DEFAULT_SETTINGS} />,
     );
+    fireEvent.press(screen.getByTestId('title-details-show-info'));
+    fireEvent.press(screen.getByTestId('title-details-technical'));
     const standardText = String(
       screen.getByTestId('title-details-summary').props.children,
     );
@@ -469,6 +477,8 @@ describe('TitleDetailsScreen', () => {
         settings={{ ...DEFAULT_SETTINGS, preset: 'extra-cautious' }}
       />,
     );
+    fireEvent.press(screen.getByTestId('title-details-show-info'));
+    fireEvent.press(screen.getByTestId('title-details-technical'));
     const strictText = String(
       screen.getByTestId('title-details-summary').props.children,
     );

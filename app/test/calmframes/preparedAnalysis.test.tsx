@@ -53,7 +53,7 @@ test('file record separates source and rendition and states the same-analyzer li
 
 test('a prepared entry without a matching file record has Back but no Play action', () => {
   const view = render(<TitleDetailsScreen entry={{ ...prepared, title: { ...prepared.title, renditionSha256: '0'.repeat(64) } }} onBack={jest.fn()} onPlay={jest.fn()} />);
-  expect(view.getByText('Analysis record unavailable')).toBeTruthy();
+  expect(view.getByText('This video is unavailable')).toBeTruthy();
   expect(view.queryByTestId('title-details-play')).toBeNull();
   expect(view.getByTestId('title-details-back').props.hasTVPreferredFocus).toBe(true);
 });

@@ -298,9 +298,8 @@ const KidModeScreen = ({
     setLastOpenedFrom(launchControl.current);
     launchControl.current = undefined;
   };
-  // Details offers the practice demo beside Play. Opening it keeps the page
-  // it came from, so Back returns there, one level at a time, with focus on
-  // the control that was pressed rather than on Play.
+  // More info offers the simulated demo. Opening it keeps the title it
+  // came from, so Back restores More info and the control that opened it.
   const [practiceFromId, setPracticeFromId] = React.useState<string | null>(null);
   const [detailsFocus, setDetailsFocus] = React.useState<'play' | 'practice'>('play');
   const [focusGeneration, setFocusGeneration] = React.useState(0);

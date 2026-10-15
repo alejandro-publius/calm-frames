@@ -21,7 +21,7 @@ function preferred(): string[] {
   return [...new Set(ids)];
 }
 
-test('Home names the selected video and leads to analysis without adding a demo card', () => {
+test('Home names the selected video and leads with Watch without adding a demo card', () => {
   const onOpen = jest.fn();
   const launch = jest.fn();
   render(<KidHomeScreen titles={titles} onOpen={onOpen} onPlay={jest.fn()} onLaunchControl={launch} onOpenParentArea={jest.fn()} />);
@@ -35,10 +35,10 @@ test('Home names the selected video and leads to analysis without adding a demo 
   expect(screen.queryByText(/practice hold/)).toBeNull();
   expect(screen.queryByTestId('kid-home-hidden-count')).toBeNull();
   expect(screen.queryByText(/unavailable/)).toBeNull();
-  expect(screen.getByRole('button', { name: 'Play: Harbor' })).toBeTruthy();
-  expect(screen.getByRole('button', { name: 'View analysis: Harbor' })).toBeTruthy();
+  expect(screen.getByRole('button', { name: 'Watch: Harbor' })).toBeTruthy();
+  expect(screen.getByRole('button', { name: 'Details: Harbor' })).toBeTruthy();
   expect(screen.getByTestId('kid-home-parent-area')).toBeTruthy();
-  expect(preferred()).toEqual(['kid-home-more-info']);
+  expect(preferred()).toEqual(['kid-home-watch']);
   fireEvent.press(screen.getByTestId('kid-home-more-info'));
   expect(launch).toHaveBeenCalledWith('details');
   expect(onOpen).toHaveBeenCalledWith(harbor);
@@ -47,11 +47,11 @@ test('Home names the selected video and leads to analysis without adding a demo 
   }
 });
 
-test('one teal action on Home: analysis is primary, Play and Help are quiet', () => {
+test('one teal action on Home: Watch is primary, Details and Help are quiet', () => {
   render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={jest.fn()} />);
-  const watch = StyleSheet.flatten(screen.getByTestId('kid-home-more-info').props.style);
+  const watch = StyleSheet.flatten(screen.getByTestId('kid-home-watch').props.style);
   expect(watch.backgroundColor).toBe(CALM_COLORS.PRIMARY);
-  for (const id of ['kid-home-watch', 'kid-home-learn', 'kid-home-parent-area']) {
+  for (const id of ['kid-home-more-info', 'kid-home-learn', 'kid-home-parent-area']) {
     expect(StyleSheet.flatten(screen.getByTestId(id).props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
   }
 });
@@ -77,7 +77,7 @@ test('when the demo itself leads the shelf there is no second demo control and n
   render(<KidHomeScreen titles={[demo]} onOpen={jest.fn()} onPlay={jest.fn()} />);
   expect(screen.queryByTestId('kid-home-demo')).toBeNull();
   expect(screen.queryByTestId('kid-home-no-holds')).toBeNull();
-  expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Play demo/);
+  expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Watch demo/);
 });
 
 test('the Home heading is one large line sized to clear the artwork, and Details uses the same reading scale', () => {
@@ -93,33 +93,36 @@ test('the Home heading is one large line sized to clear the artwork, and Details
   expect(StyleSheet.flatten(details.getByTestId('title-details-meta').props.style).fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE);
 });
 
-test('Details lists runtime and holds in one factual line under the title', () => {
+test('Details lists runtime without redundant zero-findings copy', () => {
   const prepared = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
-  expect(prepared.getByTestId('title-details-meta').props.children).toBe('20 sec · No flashing found');
-  expect(prepared.getByText('The video plays normally.')).toBeTruthy();
+  expect(prepared.getByTestId('title-details-meta').props.children).toBe('20 sec');
+  expect(prepared.queryByText('The video plays normally.')).toBeNull();
   for (const pattern of BANNED) {
     expect(prepared.queryByText(pattern)).toBeNull();
   }
   prepared.unmount();
   const practice = render(<TitleDetailsScreen entry={demo} onPlay={jest.fn()} />);
-  expect(practice.getByTestId('title-details-meta').props.children).toBe('Practice version · 20 sec · 2 picture pauses');
-  expect(practice.getByTestId('title-details-play').props.accessibilityLabel).toMatch(/Play demo/);
+  expect(practice.getByTestId('title-details-meta').props.children).toBe('Simulated demo · 20 sec');
+  expect(practice.getByTestId('title-details-play').props.accessibilityLabel).toMatch(/Watch demo/);
 });
 
-test('Details offers the practice demo beside Play, quiet, and the demo page itself does not', () => {
+test('Details keeps the practice demo inside More info and returns focus there', () => {
   const openPractice = jest.fn();
   const prepared = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={demo} onOpenPractice={openPractice} />);
-  const entry = prepared.getByTestId('title-details-practice');
-  expect(entry.props.accessibilityLabel).toBe('Try the demo. 20 sec · 2 picture pauses');
-  expect(StyleSheet.flatten(entry.props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
+  expect(prepared.queryByTestId('title-details-practice')).toBeNull();
   expect(prepared.getByTestId('title-details-play').props.hasTVPreferredFocus).toBe(true);
+  fireEvent.press(prepared.getByTestId('title-details-show-info'));
+  const entry = prepared.getByTestId('title-details-practice');
+  expect(entry.props.accessibilityLabel).toBe('Watch simulated demo. 20 sec · 2 picture pauses');
+  expect(StyleSheet.flatten(entry.props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
+  expect(prepared.queryByTestId('title-details-play')).toBeNull();
   expect(entry.props.hasTVPreferredFocus).toBe(false);
   fireEvent.press(entry);
   expect(openPractice).toHaveBeenCalledWith(demo);
   prepared.unmount();
   const returned = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={demo} onOpenPractice={openPractice} preferPracticeFocus />);
   expect(returned.getByTestId('title-details-practice').props.hasTVPreferredFocus).toBe(true);
-  expect(returned.getByTestId('title-details-play').props.hasTVPreferredFocus).toBe(false);
+  expect(returned.queryByTestId('title-details-play')).toBeNull();
   returned.unmount();
   const practice = render(<TitleDetailsScreen entry={demo} onPlay={jest.fn()} practice={demo} onOpenPractice={openPractice} />);
   expect(practice.queryByTestId('title-details-practice')).toBeNull();
@@ -129,5 +132,6 @@ test('Details offers the practice demo beside Play, quiet, and the demo page its
 test('the practice entry follows the demo duration and schedule rather than fixed copy', () => {
   const shorterDemo = { ...demo, title: { ...demo.title, durationMs: 30000 }, segments: demo.segments.slice(0, 1) };
   render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={shorterDemo} onOpenPractice={jest.fn()} />);
-  expect(screen.getByTestId('title-details-practice').props.accessibilityLabel).toBe('Try the demo. 30 sec · 1 picture pause');
+  fireEvent.press(screen.getByTestId('title-details-show-info'));
+  expect(screen.getByTestId('title-details-practice').props.accessibilityLabel).toBe('Watch simulated demo. 30 sec · 1 picture pause');
 });

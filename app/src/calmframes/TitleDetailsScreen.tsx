@@ -1,23 +1,11 @@
-/**
- * The details page, with the still flash map strip.
- *
- * It says what the check found before anything plays: how many parts will be
- * hidden, how long they add up to and where they fall. No video preview.
- *
- * A title that did not verify gets this page too, and that is the point of it.
- * Instead of the strip and a summary it shows one notice saying what happened
- * and that the picture stays hidden, with a focused way back to the library.
- * No playback action is offered for an unchecked title. There is no state
- * of this screen where an unverified title can be started.
- */
-
+/** Viewing first; optional explanations and technical records use separate pages. */
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import HomeHarborScene from './HomeHarborScene';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, scale } from './calmStyles';
-import { noticeForTitle } from './copy';
+import { noticeForTitle, SAFETY_NOTE } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import FlashMapStrip from './FlashMapStrip';
 import {
@@ -47,11 +35,7 @@ export interface TitleDetailsScreenProps {
   testID?: string;
   interfaceMotionEnabled?: boolean;
   interfaceActive?: boolean;
-  /**
-   * The practice demo, offered beside Play on a title that is not the demo
-   * itself. Home carries no card for it, so this is where a family finds the
-   * two scheduled holds.
-   */
+  /** The optional simulated demo lives inside More info. */
   practice?: CheckedTitle;
   onOpenPractice?: (entry: CheckedTitle) => void;
   /** Back from the demo's own page puts focus on the control that opened it. */
@@ -98,10 +82,10 @@ const TitleDetailsScreen = ({
     }).length;
     return seconds > 0 && holds > 0 ? `${seconds} sec · ${holds} picture pause${holds === 1 ? '' : 's'}` : null;
   }, [practiceOffered]);
-  const playLabel = presentation.action === 'Watch now' ? 'Play' : presentation.action;
+  const playLabel = demo ? 'Watch demo' : 'Watch';
   const notice = noticeForTitle(entry) ?? (concernsPackagedLibrary(entry.title) && !packagedLibrary.evidenceFor(entry.title, settings) ? {
-    title: 'Analysis record unavailable',
-    detail: 'This video does not match the prepared library in this build. The picture stays hidden.',
+    title: 'This video is unavailable',
+    detail: 'This version cannot play in Calm Frames. The picture stays hidden.',
     tone: 'blocked' as const,
   } : null);
   const playable = notice === null;
@@ -111,17 +95,21 @@ const TitleDetailsScreen = ({
   );
 
   const hiddenSeconds = Math.round(totalCoveredMs(intervals) / 1000);
-  // One line of facts under the title, the way a film page lists its runtime.
-  const holdCount = intervals.length;
-  const meta = [
-    demo ? 'Practice version' : null,
+  const meta = [demo ? 'Simulated demo' : null,
     durationMs > 0 ? `${Math.round(durationMs / 1000)} sec` : null,
-    demo
-      ? `${holdCount} picture pause${holdCount === 1 ? '' : 's'}`
-      : holdCount === 0 ? 'No flashing found' : `${holdCount} hidden scene${holdCount === 1 ? '' : 's'}`,
-  ].filter((item): item is string => item !== null);
-  const scrollRef = React.useRef<ScrollView>(null);
-  const infoTop = React.useRef(0);
+  ].filter(Boolean).join(' · ');
+  const [page, setPage] = React.useState<'watch' | 'info' | 'technical'>(preferPracticeFocus ? 'info' : 'watch');
+  const [returnFocus, setReturnFocus] = React.useState<'watch' | 'info' | 'technical'>('watch');
+  const back = React.useCallback(() => {
+    if (page === 'technical') { setPage('info'); setReturnFocus('technical'); }
+    else if (page === 'info') { setPage('watch'); setReturnFocus('info'); }
+    else onBack?.();
+  }, [page, onBack]);
+  React.useEffect(() => {
+    if (!interfaceActive || page === 'watch' || !playable) return;
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => { back(); return true; });
+    return () => subscription.remove();
+  }, [back, interfaceActive, page, playable]);
 
   if (notice) {
     // Remove only an exact repeated heading, never a distinct rejection reason.
@@ -144,109 +132,72 @@ const TitleDetailsScreen = ({
     );
   }
 
+  if (page !== 'watch') return (
+    <ScrollView key={page} testID={`${testID}-${page}`} style={styles.screen} contentContainerStyle={styles.content}>
+      <CalmPageHeader onBack={back} backTestID={`${testID}-info-back`} preferredBack={page === 'technical' || (!preferPracticeFocus && returnFocus !== 'technical')} />
+      <View style={styles.reading}>
+        <Text style={styles.title} accessibilityRole="header">{page === 'technical' ? 'Technical details' : 'More info'}</Text>
+        {page === 'technical' ? <>
+          <PreparedVideoAnalysis entry={entry} settings={settings} testID={`${testID}-record`} />
+          {intervals.length > 0 && durationMs > 0 ? <View style={styles.checkSummary}>
+            <Text style={styles.summary} testID={`${testID}-summary`}>
+              {demo ? `Simulated demo: ${intervals.length} picture pauses, ${hiddenSeconds} seconds in total.`
+                : `${intervals.length} scenes hidden, ${hiddenSeconds} seconds in total.`}
+            </Text>
+            <FlashMapStrip width={1040} showCaption={false} showKey holdLabel={demo ? 'Demo pause' : 'Picture hidden'}
+              intervals={intervals} durationMs={durationMs} testID={`${testID}-strip`} />
+          </View> : null}
+          <ViewingPlan entry={entry} settings={settings} testID={`${testID}-plan`} />
+        </> : <>
+          <Text style={styles.section} accessibilityRole="header">{presentation.name}</Text>
+          {demo ? <Text style={styles.summary}>This is a simulated demonstration. The pauses were added to show how the feature works, not because flashing was detected.</Text>
+            : intervals.length > 0 ? <Text style={styles.summary}>A still picture replaces brief parts of this video. Sound and captions continue.</Text> : null}
+          <Text style={styles.summary}>Calm Frames replaces flashing scenes with a still picture while sound and captions continue. It only works with videos in this app.</Text>
+          <Text style={styles.summary}>{`Detection can miss flashing. ${SAFETY_NOTE}`}</Text>
+          {presentation.art === 'coastal' ? <Text style={styles.summary}>Video: National Park Service, Acadia National Park. Public domain. No NPS endorsement is implied. The artwork is an illustration.</Text> : null}
+          {practiceOffered ? <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-practice`} label="Watch demo"
+            accessibilityLabel={practiceLine ? `Watch simulated demo. ${practiceLine}` : 'Watch simulated demo'}
+            disabled={saving} hasTVPreferredFocus={preferPracticeFocus && returnFocus !== 'technical'} onPress={() => onOpenPractice?.(practiceOffered)} /></View> : null}
+          <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-technical`} label="Technical details"
+            hasTVPreferredFocus={returnFocus === 'technical'} onPress={() => setPage('technical')} /></View>
+        </>}
+        <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-back-bottom`} label="Back" onPress={back} /></View>
+      </View>
+    </ScrollView>
+  );
+
   return (
-    <ScrollView
-      ref={scrollRef}
-      testID={testID}
-      style={styles.screen}
-      contentContainerStyle={styles.content}>
+    <ScrollView key="watch" testID={testID} style={styles.screen} contentContainerStyle={styles.content}>
       {presentation.art === 'harbor-cinematic' || presentation.art === 'harbor' ? <HomeHarborScene immersive enabled={interfaceMotionEnabled} active={interfaceActive} /> : null}
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
           <Text style={[styles.title, styles.heroTitle, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
-          <Text style={styles.meta} testID={`${testID}-meta`}>{meta.join(' · ')}</Text>
+          <Text style={styles.meta} testID={`${testID}-meta`}>{meta}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
-          </View>
-        <PreparedVideoAnalysis entry={entry} settings={settings} compact testID={`${testID}-analysis`} />
+        </View>
         <View style={styles.actionRail}>
           <View style={styles.buttons}>
             <CalmButton primary playIcon sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
               accessibilityLabel={saving ? 'Saving your changes...' : `${playLabel}: ${presentation.name}`}
-              disabled={saving} hasTVPreferredFocus={!(preferPracticeFocus && practiceOffered)} onPress={() => onPlay(entry)} />
-            {practiceOffered ? <CalmButton quiet testID={`${testID}-practice`} label="Try the demo"
-              accessibilityLabel={practiceLine ? `Try the demo. ${practiceLine}` : 'Try the demo'}
-              disabled={saving} hasTVPreferredFocus={preferPracticeFocus} onPress={() => onOpenPractice?.(practiceOffered)} /> : null}
+              disabled={saving} hasTVPreferredFocus={returnFocus !== 'info'} onPress={() => onPlay(entry)} />
+            <CalmButton quiet testID={`${testID}-show-info`} label="More info" hasTVPreferredFocus={returnFocus === 'info'}
+              onPress={() => setPage('info')} />
           </View>
-          {demo ? null : <Text style={styles.quickSummary} testID={`${testID}-quick-summary`}>{intervals.length === 0
-            ? 'The video plays normally.'
-            : 'Flashing scenes are hidden while sound and captions continue.'}</Text>}
         </View>
       </View>
-
-      {playable ? (
-        <View testID={`${testID}-info`} style={styles.infoAnchor}
-          onLayout={({ nativeEvent }) => { infoTop.current = nativeEvent.layout.y; }}>
-          <View>
-            <CalmButton quiet testID={`${testID}-show-info`} label="Analysis and settings ↓"
-              accessibilityLabel="Analysis, file record and viewing settings. Scroll down."
-              onPress={() => scrollRef.current?.scrollTo({
-                // Keep this same focused control in view above the explanation.
-                y: Math.max(0, infoTop.current - scale(CALM_SPACE.SAFE_Y)),
-                animated: false,
-              })} />
-          </View>
-        </View>
-      ) : null}
-
-      <>
-          <PreparedVideoAnalysis entry={entry} settings={settings} testID={`${testID}-record`} />
-          <View style={styles.checkSummary}>
-            <View style={styles.chapterHeading}>
-              <Text style={styles.section} accessibilityRole="header">Before you watch</Text>
-            </View>
-            <View style={styles.chapterContent}>
-              <Text style={styles.summary} testID={`${testID}-summary`}>
-                {demo
-                  ? `This demo has no flashing. The picture pauses ${intervals.length === 1 ? 'once' : `${intervals.length} times`}, for ${hiddenSeconds} second${hiddenSeconds === 1 ? '' : 's'} in total.`
-                  : intervals.length === 0
-                    ? 'Detection can miss flashing. Any flashing that is missed will still be visible.'
-                    : `${intervals.length} scene${intervals.length === 1 ? '' : 's'} hidden, ${hiddenSeconds} second${hiddenSeconds === 1 ? '' : 's'} in total. The timeline shows where.`}
-              </Text>
-
-              {durationMs > 0 ? (
-                <View style={styles.timeline}>
-                  <Text style={styles.timelineLabel}>Picture timeline</Text>
-                  <FlashMapStrip
-                    width={1040}
-                    showCaption={false}
-                    showKey
-                    holdLabel={demo ? 'Demo pause' : 'Picture hidden'}
-                    intervals={intervals}
-                    durationMs={durationMs}
-                    testID={`${testID}-strip`}
-                  />
-                </View>
-              ) : null}
-            </View>
-          </View>
-
-          <View style={styles.viewingChapter}>
-            <ViewingPlan
-              entry={entry}
-              settings={settings}
-              testID={`${testID}-plan`}
-            />
-          </View>
-      </>
-
-      {onBack ? <View style={styles.footer}><View><CalmButton quiet testID={`${testID}-back-bottom`} label="Back" onPress={onBack} /></View></View> : null}
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  reading: { width: '100%', maxWidth: scale(1040), gap: scale(24), paddingTop: scale(32) },
+  secondaryAction: { alignItems: 'flex-start' },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
-  navigation: { width: '100%', maxWidth: scale(1728), alignItems: 'flex-start', marginBottom: scale(16) },
   hero: { width: '100%', minHeight: scale(CALM_FLOW.HERO_HEIGHT), alignItems: 'flex-start', justifyContent: 'flex-start' },
-  heroCopy: { width: '100%', maxWidth: scale(720), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
-  actionRail: { width: scale(620), alignItems: 'flex-start', gap: scale(26), marginTop: scale(24) },
-  quickSummary: { ...CALM_TEXT.supporting, maxWidth: scale(600), color: CALM_COLORS.TEXT_DIM },
-  heroArt: { width: '100%', maxWidth: scale(1120) },
-  artSky: { position: 'absolute', top: 0, left: 0, right: 0, height: scale(56) },
-  artFloor: { position: 'absolute', bottom: 0, left: 0, right: 0, height: scale(160) },
-  artEdge: { position: 'absolute', top: 0, bottom: 0, right: 0, width: scale(120) },
+  heroCopy: { backgroundColor: CALM_COLORS.BACKGROUND, width: '100%', maxWidth: scale(720), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
+  actionRail: { backgroundColor: CALM_COLORS.BACKGROUND, width: scale(620), alignItems: 'flex-start', gap: scale(26), marginTop: scale(24) },
   meta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left', marginBottom: scale(16) },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
   heroTitle: { ...CALM_TEXT.feature, marginBottom: scale(8) },
@@ -254,17 +205,9 @@ const styles = StyleSheet.create({
   synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left', maxWidth: scale(620) },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, textAlign: 'left' },
-  infoAnchor: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', marginTop: scale(12) },
   checkSummary: { width: '100%', maxWidth: scale(1040), gap: scale(20), marginTop: scale(32) },
-  chapterHeading: { alignItems: 'flex-start' },
-  chapterContent: { gap: scale(24) },
-  timeline: { marginTop: scale(8) },
-  timelineLabel: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12), textAlign: 'left' },
-  viewingChapter: { width: '100%', maxWidth: scale(1040), marginTop: scale(56) },
   unavailableContent: { flexGrow: 1, justifyContent: 'flex-start' },
   unavailableBody: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', gap: scale(24) },
-  unavailableAction: { marginTop: scale(16) },
   buttons: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: scale(20), marginTop: 0 },
-  footer: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.SURFACE_FOCUSED },
 });
 export default TitleDetailsScreen;

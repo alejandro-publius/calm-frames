@@ -135,9 +135,8 @@ const KidHomeScreen = ({
   const otherStories = listed.filter((entry) => (!hasMainStory || (!isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID)) && (entry !== featured || !titlePresentation(entry.title).art || !hasMainStory));
   const playbackCheck = listed.find((entry) => entry.title.id === OFFLINE_TITLE_ID);
   const feature = featured ? titlePresentation(featured.title) : null;
-  // Name the actual selection. Analysis is the first action; direct Play
-  // remains available for repeat viewing. Unavailable titles stay in Parents.
-  const featuredAction = feature?.action === 'Watch now' ? 'Play' : feature?.action;
+  // Watching is the primary action. Unavailable titles stay in Parents.
+  const featuredAction = feature?.action === 'Watch now' ? 'Watch' : feature?.action;
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
     ? returnFocusId
     : listed[0]?.title.id;
@@ -149,7 +148,7 @@ const KidHomeScreen = ({
   const returnTo: ReturnFocusControl | 'learn' | null = saving ? null
     : returnToIntroduction ? 'learn'
     : returnFocusControl === 'parent' ? 'parent'
-    : !returnFocusId ? 'details'
+    : !returnFocusId ? 'watch'
     : returnFocusControl ?? (fromIntroduction ? 'learn' : returningToFeatured ? 'details' : 'poster');
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
   const empty = listed.length === 0;
@@ -223,11 +222,11 @@ const KidHomeScreen = ({
               <View style={styles.heroCopy}>
                 <Text accessibilityRole="header" testID={`${testID}-title`} style={styles.section}>Choose a video</Text>
                 <Text style={styles.featureTitle} testID={`${testID}-video-title`}>{feature.name}</Text>
-                <Text style={styles.videoMeta}>{`${Math.round((featured.title.durationMs ?? 0) / 1000)} sec · ${isBundledBenignStory(featured.title) ? 'Simulated demo' : 'Prepared video'}`}</Text>
+                <Text style={styles.videoMeta}>{`${Math.round((featured.title.durationMs ?? 0) / 1000)} sec${isBundledBenignStory(featured.title) ? ' · Simulated demo' : ''}`}</Text>
                 <View style={styles.actions}>
-                  <CalmButton primary onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="View analysis" accessibilityLabel={`View analysis: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
-                  <CalmButton quiet playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
+                  <CalmButton primary playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
+                  <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" accessibilityLabel={`Details: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
               </View>
             </View> : null}

@@ -1,8 +1,8 @@
 import '@testing-library/jest-native/extend-expect';
-import { fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
-import { ScrollView } from 'react-native';
-import { COASTAL_COLORS, CALM_SPACE, scale } from '../../src/calmframes/calmStyles';
+import { BackHandler } from 'react-native';
+import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
 import FlashMapStrip from '../../src/calmframes/FlashMapStrip';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import { checkedShelf } from './shelfFixtures';
@@ -21,42 +21,68 @@ const demo = () => checkedShelf().find(entry =>
 
 describe('details discovery', () => {
   afterEach(() => jest.restoreAllMocks());
-  it.each([900, 30])('scrolls from a measured anchor at %s without losing focus or starting playback', y => {
-    const scrollTo = jest.spyOn(ScrollView.prototype, 'scrollTo');
+  it('keeps ordinary viewing brief, with reports and demo behind separate routes', () => {
     const onPlay = jest.fn();
-    const view = render(<TitleDetailsScreen entry={harbor()} onPlay={onPlay} />);
-    const info = view.getByTestId('title-details-show-info');
-    fireEvent(view.getByTestId('title-details-info'), 'layout', {
-      nativeEvent: { layout: { x: 0, y, width: 1040, height: 82 } },
-    });
-    fireEvent(info, 'focus');
-    fireEvent.press(info);
-    expect(scrollTo).toHaveBeenLastCalledWith({
-      y: Math.max(0, y - scale(CALM_SPACE.SAFE_Y)), animated: false,
-    });
-    expect(view.getByTestId('title-details-show-info')).toBe(info);
-    expect(info).toHaveStyle({ borderColor: COASTAL_COLORS.FOCUS_RING });
-    expect(view.getByTestId('title-details-show-info-label')).toHaveStyle({ textDecorationLine: 'underline' });
+    const view = render(<TitleDetailsScreen entry={harbor()} onPlay={onPlay} practice={demo()} onOpenPractice={jest.fn()} />);
+    expect(view.getByTestId('title-details-meta')).toHaveTextContent('20 sec');
+    for (const suffix of ['analysis', 'record', 'strip', 'practice', 'plan']) expect(view.queryByTestId(`title-details-${suffix}`)).toBeNull();
+    expect(view.queryByText(/No scenes flagged|No flashing found|plays normally/)).toBeNull();
+    fireEvent.press(view.getByTestId('title-details-show-info'));
+    expect(view.getByTestId('title-details-practice')).toBeTruthy();
+    expect(view.queryByTestId('title-details-play')).toBeNull();
+    expect(view.queryByTestId('title-details-record')).toBeNull();
+    fireEvent.press(view.getByTestId('title-details-technical'));
+    expect(view.getByTestId('title-details-record')).toBeTruthy();
+    // Zero-change titles have no empty timeline, even in technical details.
+    expect(view.queryByTestId('title-details-strip')).toBeNull();
+    expect(view.queryByTestId('home-harbor-scene')).toBeNull();
+    fireEvent.press(view.getByTestId('title-details-info-back'));
+    expect(view.getByTestId('title-details-technical').props.hasTVPreferredFocus).toBe(true);
+    fireEvent.press(view.getByTestId('title-details-info-back'));
+    expect(view.getByTestId('title-details-show-info').props.hasTVPreferredFocus).toBe(true);
     expect(onPlay).not.toHaveBeenCalled();
-    scrollTo.mockRestore();
   });
 
-  it('labels the real Harbor timeline without implying practice holds', () => {
-    const view = render(<TitleDetailsScreen entry={harbor()} onPlay={jest.fn()} />);
-    expect(view.getByTestId('title-details-strip-start')).toHaveTextContent('0:00');
-    expect(view.getByTestId('title-details-strip-middle')).toHaveTextContent('0:10');
-    expect(view.getByTestId('title-details-strip-end')).toHaveTextContent('0:20');
-    expect(view.getByText('Video plays normally')).toBeTruthy();
-    expect(view.queryByText('Demo pause')).toBeNull();
-  });
-
-  it('explains the actual demo marks and their continuity', () => {
+  it('identifies simulated events before watching and keeps their timeline in technical details', () => {
     const view = render(<TitleDetailsScreen entry={demo()} onPlay={jest.fn()} />);
+    expect(view.getByText('Simulated demo · 20 sec')).toBeTruthy();
+    expect(view.queryByTestId('title-details-strip')).toBeNull();
+    fireEvent.press(view.getByTestId('title-details-show-info'));
+    fireEvent.press(view.getByTestId('title-details-technical'));
     expect(view.getByText('Demo pause')).toBeTruthy();
-    expect(view.getByText('Sound and captions continue when the picture changes.')).toBeTruthy();
     expect(view.getByTestId('title-details-strip-mark-0')).toHaveStyle({ left: 260, width: 208 });
     expect(view.getByTestId('title-details-strip-mark-1')).toHaveStyle({ left: 624, width: 208 });
-    expect(view.getByTestId('title-details-strip').props.accessibilityLabel).toContain('From 0:00 to 0:20.');
+  });
+
+  it('remote Back closes technical details then More info without leaving the title', () => {
+    let handlers: Array<() => boolean | null | undefined> = [];
+    jest.spyOn(BackHandler, 'addEventListener').mockImplementation((_, handler) => {
+      handlers.push(handler);
+      return { remove: () => { handlers = handlers.filter(value => value !== handler); } };
+    });
+    const leave = jest.fn();
+    const view = render(<TitleDetailsScreen entry={harbor()} onPlay={jest.fn()} onBack={leave} />);
+    fireEvent.press(view.getByTestId('title-details-show-info'));
+    fireEvent.press(view.getByTestId('title-details-technical'));
+    act(() => { expect([...handlers].reverse().some(handler => handler())).toBe(true); });
+    expect(view.getByTestId('title-details-technical').props.hasTVPreferredFocus).toBe(true);
+    act(() => { expect([...handlers].reverse().some(handler => handler())).toBe(true); });
+    expect(view.getByTestId('title-details-show-info').props.hasTVPreferredFocus).toBe(true);
+    expect(leave).not.toHaveBeenCalled();
+  });
+
+  it('gives Acadia a content description and makes changed moments optional', () => {
+    const acadia = checkedShelf().find(entry => entry.title.title.includes('Acadia'))!;
+    const view = render(<TitleDetailsScreen entry={acadia} onPlay={jest.fn()} />);
+    expect(view.getByText('Waves along the coast of Acadia National Park.')).toBeTruthy();
+    expect(view.queryByText(/flagged|Extra cautious|Analyzed before/)).toBeNull();
+    expect(view.queryByTestId('title-details-strip')).toBeNull();
+    fireEvent.press(view.getByTestId('title-details-show-info'));
+    expect(view.getByText('A still picture replaces brief parts of this video. Sound and captions continue.')).toBeTruthy();
+    expect(view.queryByTestId('title-details-record')).toBeNull();
+    fireEvent.press(view.getByTestId('title-details-technical'));
+    expect(view.getByTestId('title-details-strip')).toBeTruthy();
+    expect(view.getByTestId('title-details-record-source')).toBeTruthy();
   });
 
   it('does not offer hold information or playback for an unavailable title', () => {

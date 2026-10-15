@@ -152,8 +152,10 @@ describe('the packaged benign story', () => {
       JSON.stringify(
         screen.getByTestId('title-details-demo-label').props.children,
       ),
-    ).toContain('picture pauses twice');
+    ).toContain('two picture pauses');
     fireEvent.press(screen.getByTestId('title-details-play'));
+    fireEvent.press(screen.getByTestId('title-details-show-info'));
+    fireEvent.press(screen.getByTestId('title-details-technical'));
     expect(
       screen.getByTestId('title-details-summary').props.children,
     ).toContain('8 seconds');

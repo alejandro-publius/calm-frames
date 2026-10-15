@@ -154,7 +154,7 @@ describe('the words on the shelf', () => {
 
     render(<TitleDetailsScreen entry={prepared} onPlay={onPlay} />);
     expect(screen.queryByTestId('title-details-description')).toBeNull();
-    expect(screen.getByTestId('title-details-meta').props.children).toBe('20 sec · No flashing found');
+    expect(screen.getByTestId('title-details-meta').props.children).toBe('20 sec');
     expect(screen.queryByText('Original story')).toBeNull();
   });
 
@@ -162,11 +162,11 @@ describe('the words on the shelf', () => {
     const onPlay = jest.fn();
     render(<KidHomeScreen titles={[harbor]} onOpen={jest.fn()} onPlay={onPlay} />);
     fireEvent.press(screen.getByTestId('kid-home-learn'));
-    expect(screen.getByText(/Try the demo to see the picture pause/i)).toBeTruthy();
+    expect(screen.getByText(/two simulated picture pauses/i)).toBeTruthy();
     fireEvent.press(screen.getByTestId('picture-hold-dismiss'));
     expect(screen.getByTestId(`kid-home-poster-qualifier-${BENIGN_STORY_ID}`).props.children)
       .toMatch(/Demo/i);
-    expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Play demo/);
+    expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Watch demo/);
     fireEvent.press(screen.getByTestId('kid-home-watch'));
     expect(onPlay).toHaveBeenCalledWith(harbor);
   });
