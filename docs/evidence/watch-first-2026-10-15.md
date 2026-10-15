@@ -86,12 +86,25 @@ The existing storage, first-run, Parents and playback warning/error text was
 reviewed. Those surfaces retain meaningful settings, setup instructions and
 failure reasons. Playback transport retains conventional Play/Pause semantics.
 
-## Build and navigation status
+## Initial build and navigation finding
 
 The viewing correction was built and installed once from `8d1bb78`. Native
 navigation exposed a hardware Back conflict after returning from the demo:
 Back skipped More info. The regression fails on that installed source, and
 passes on `9afdbe5`, together with the full app suite. This small correction
 makes Details own its own Back stack. It is not a media or player change.
-The fix is not yet installed because the requested single build has been used.
-The receipt distinguishes the installed build from that tested source fix.
+At that checkpoint the fix was not yet installed because the initial single
+build had been used. The initial receipt preserves that distinction. The parent
+then clarified that one build was efficiency guidance and authorized the repair
+build. Current installation and native results are in
+[the repair receipt](../../results/watch-back-repair-2026-10-15/receipt.json).
+
+
+## Completed repair
+
+The additional authorized build is installed from `fcef3bb`, containing app
+repair `9afdbe5`. The targeted native hardware Back route now passes all levels:
+demo to More info, More info to Details, Details to Home. Watch focus, Harbor/demo
+playback return and the Technical details Back stack also pass. The app is left
+running at Home with Watch focused. No visual or audible verification is claimed.
+The preceding failed checkpoint is retained in its original receipt.

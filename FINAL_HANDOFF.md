@@ -1,6 +1,35 @@
 # Final handoff: the integration candidate
 
-## Watch-first correction, October 15, 2026
+## Current Watch-first build with Back repair, October 15, 2026
+
+The corrected viewing app and nested Back repair are installed and running at
+Home with Watch focused. Build source is `fcef3bb48a3dc2381b3b321f05864c8344581a3a`;
+latest app change is `9afdbe5bf72170787deb5cc0d82e3aa565a87812`.
+Package: `build/release/watch-back-repair-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg`.
+SHA-256: `fb77e4ca69c8d29543a336dd58e17b7b6775d617399ad9c20edb664c26f7ba8c`.
+All 747 recorded app inputs match. The [repair receipt](results/watch-back-repair-2026-10-15/receipt.json)
+records eight passing targeted native observations, including the exact hardware
+Back route: demo > More info > Details > Home, with focus on each opening control.
+Technical details Back, Watch focus and Harbor/demo playback returns also pass.
+The source gate passes 131 suites, 1,314 tests and 57 snapshots; typecheck and
+lint pass with 101 existing warnings. No source changed after the build.
+
+Home leads with Watch and secondary Details. Harbor Details is only Back,
+Harbor, 20 sec, Watch and More info. Acadia adds a short coastal description.
+The report card, zero-findings copy and empty timeline are gone. Analysis is
+under More info > Technical details; the simulated demo is secondary. Exact
+before/after and remaining text are in [the copy record](docs/evidence/watch-first-2026-10-15.md).
+
+The extra build was authorized after a native check found a nested Back defect;
+the parent clarified that the earlier single-build wording was efficiency
+guidance. The failing checkpoint below is preserved as history, now resolved.
+No media, trust, detector, settings, PIN or volume changes. No capture was used.
+Logs prove events and requested focus, not visible quality or audible continuity.
+Minimum owner step: review the running Home and Details with the remote. No
+further engineering or access blocker remains for this correction.
+
+
+## Historical first Watch-first build, October 15, 2026
 
 The new viewing copy is installed from `8d1bb787bb8b54b9023bee6f75baa2aac432940e`.
 Home now leads with Watch. Harbor Details contains only Back, Harbor, 20 sec,

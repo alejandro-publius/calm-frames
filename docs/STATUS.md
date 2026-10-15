@@ -1,12 +1,13 @@
 # Status
 
-Watch-first copy correction is installed from `8d1bb78`. Harbor viewing now has
-only its title, runtime, Watch and More info. Analysis and demo content are
-secondary. A nested hardware Back defect was found and fixed in `9afdbe5`, which
-passes 1,314 app tests but is not yet in the installed package. One additional
-build/install is needed beyond the requested single build. See the
-[current handoff](../FINAL_HANDOFF.md) and
-[copy record](evidence/watch-first-2026-10-15.md). No media/trust changes.
+The Watch-first app with the Back repair is installed from `fcef3bb` (latest app
+change `9afdbe5`). It is running at Home with Watch focused. Eight targeted
+native observations pass, including hardware Back from demo to More info to
+Details to Home, Technical details return and Harbor/demo playback return.
+The app suite passes 1,314 tests; typecheck and lint pass. See the
+[current handoff](../FINAL_HANDOFF.md), [repair receipt](../results/watch-back-repair-2026-10-15/receipt.json)
+and [exact copy record](evidence/watch-first-2026-10-15.md). No media/trust or
+household-setting changes. Owner visual review remains; no access blocker.
 
 The following checkpoints are historical.
 
