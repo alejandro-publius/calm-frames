@@ -37,6 +37,7 @@ import {
 import CalmCard from '../calmframes/CalmCard';
 import { CoastalAppearance } from '../calmframes/CoastalAppearance';
 import { trace } from '../calmframes/trace';
+import { bundledStillFor } from '../calmframes/bundledStills';
 import { CALM_COLORS } from '../calmframes/calmStyles';
 import { concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
 import {
@@ -678,6 +679,7 @@ const PlayerScreen = ({
             <CoverLayer
               visible={covered}
               imageUri={access === 'guarded' ? guard.coverImageUri : undefined}
+              imageSource={access === 'guarded' ? bundledStillFor(guard.coverImageUri) : undefined}
               referencePatch={route.params.referencePatch}
               screenWidth={deviceWidth}
               screenHeight={deviceHeight}

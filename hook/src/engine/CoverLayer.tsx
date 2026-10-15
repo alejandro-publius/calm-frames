@@ -18,7 +18,7 @@
  */
 
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View, ImageSourcePropType } from 'react-native';
 import { trace } from './trace';
 
 export interface ReferencePatch {
@@ -42,6 +42,8 @@ export interface CoverLayerProps {
   dimOpacity?: number;
   /** A still from a verified signed scene hold, never an unchecked URL. */
   imageUri?: string;
+  /** A bundled copy of exactly that still, for a device that cannot draw a data URI. */
+  imageSource?: ImageSourcePropType;
   /** Screen area to leave uncovered for the camera harness. */
   referencePatch?: ReferencePatch;
   screenWidth?: number;
@@ -56,6 +58,7 @@ const CoverLayer = ({
   mode = 'opaque',
   dimOpacity = 0.9,
   imageUri,
+  imageSource,
   referencePatch,
   screenWidth,
   screenHeight,
@@ -83,6 +86,7 @@ const CoverLayer = ({
           <SceneStill
             key={imageUri}
             uri={imageUri}
+            source={imageSource}
             testID={`${testID}-still`}
           />
         ) : null}
@@ -154,7 +158,7 @@ const CoverLayer = ({
 };
 
 /** A new URI mounts a fresh native image; failure leaves its black parent intact. */
-const SceneStill = ({ uri, testID }: { uri: string; testID: string }) => {
+const SceneStill = ({ uri, source, testID }: { uri: string; source?: ImageSourcePropType; testID: string }) => {
   const [failed, setFailed] = React.useState(false);
   if (failed) {
     return null;
@@ -162,7 +166,7 @@ const SceneStill = ({ uri, testID }: { uri: string; testID: string }) => {
   return (
     <Image
       testID={testID}
-      source={{ uri }}
+      source={source ?? { uri }}
       style={StyleSheet.absoluteFill}
       resizeMode="contain"
       fadeDuration={0}
