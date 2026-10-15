@@ -52,12 +52,15 @@ Everything here is real. Each entry is something that cost time on this build, w
 | 38 | Virtual device | Capture can return an older GPU frame; a static screen records few frames | Medium |
 | 39 | Build tooling | Custom fonts render as the fallback unless they sit in `assets/fonts` | Low |
 | 40 | React Native | Disabling a focused control drops native focus | Medium |
+| 41 | Device, React Native | `Image` refuses a data URI, so a signed still showed black on the device | High |
+| 42 | Player | `getVideoPlaybackQuality` fails below JavaScript on the virtual device, so no frame is ever counted | High |
+| 43 | CLI, docs | The documented `vega exec inputd-cli` looks for a host executable that is not there | Medium |
 
-**Forty entries. Eight High, fifteen Medium, seventeen Low.**
+**Forty-three entries. Ten High, sixteen Medium, seventeen Low.**
 
-**Entries 1 to 28 and 36 to 40 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. **Entries 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues.** They are marked separately so nobody has to guess which are Amazon's.
+**Entries 1 to 28 and 36 to 43 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. **Entries 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues.** They are marked separately so nobody has to guess which are Amazon's.
 
-Nothing in entries 1 to 33 blocked the build outright, because every one of them had a way around it; 36 and 37 did stop playback and captions on the device until their workarounds were found. The first five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26). Entry 35 records a historical startup block; runners resumed by October 5. The Audit failures between then and Oct 11 were dependencies and bills of materials, not runner startup, and the Oct 11 push is green.
+Nothing in entries 1 to 33 blocked the build outright, because every one of them had a way around it; 36 and 37 did stop playback and captions on the device until their workarounds were found, and on Oct 14, 41 and 42 did the same: the hold still showed black and every playback ended on a recovery screen until theirs. The first five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26). Entry 35 records a historical startup block; runners resumed by October 5. The Audit failures between then and Oct 11 were dependencies and bills of materials, not runner startup, and the Oct 11 push is green.
 
 Three entries say plainly that they are a platform rule we adopted and designed around rather than a failure we watched: 13, 27 and 28. They are in the log because each one shaped the build and each cost time to establish, and they are labelled so that nobody reads them as a crash we saw.
 
@@ -255,7 +258,7 @@ The SDK error log shows `[DeviceManagerHandler]: [getDeviceList]: Error - TypeEr
 
 **Severity.** Medium. Automated UI checks and screen recordings both need this, and for an accessibility project the screen capture is not optional.
 
-**Workaround.** The virtual device is QEMU with a QMP socket at `/tmp/qmp-socket-*.sock`, so `eval/vvd_control.py` sends key events with `input-send-event` and captures with `screendump`. Key injection works. Screenshots do not; see entry 14. This is an undocumented interface and it could change between SDK versions.
+**Workaround.** The virtual device is QEMU with a QMP socket at `/tmp/qmp-socket-*.sock`, so `eval/vvd_control.py` sends key events with `input-send-event` and captures with `screendump`. Key injection works. Screenshots do not; see entry 14. This is an undocumented interface and it could change between SDK versions. Since Oct 9 the device's own `inputd-cli`, reached through `vega device run-cmd`, is the better route for keys; entry 43 has it and the documented spelling that fails.
 
 **Suggestion.** Add `vega device key` and `vega device screenshot`, and make the screenshot capture the composited output rather than the framebuffer the app does not draw into.
 
@@ -938,6 +941,83 @@ so automation can distinguish account or runner restrictions from code failures.
 
 **Suggestion.** Document focus behaviour when a focused view becomes disabled, and move focus to a neighbour by default.
 
+## 41. The image loader refuses a data URI, so a signed still showed black on the device
+
+**Task.** Show the signed hold still during a practice hold. The flash map carries each still as an authenticated `data:image/jpeg;base64,...` URI, which the app rendered through `Image` with `{ uri }`, and which every unit test and browser preview had drawn.
+
+**Steps.**
+
+1. Installed the Debug candidate on the Vega Virtual Device and started the practice film from Details.
+2. Streamed the device log: `vega device start-log-stream --device Simulator`.
+3. At each hold, read the app's own `CALM_TRACE still` breadcrumb and the device lines beside it.
+
+**Expected.** The still from just before the hold, on top of the covered picture, as in every test and preview.
+
+**Actual.** The hold card appeared over black. At every hold the device logged, with the data URI after the colon:
+
+```
+ERROR com.amazon.keplerscript: [KeplerScript-Native] LocalAssetImageLoader: Cannot load image from non local source:
+```
+
+Thirty-five such lines in the Oct 14 session. Nothing in the React Native for Vega pages read so far says a data URI is unsupported, and `Image` accepts the source without a type error, so the first the build heard of it was the device.
+
+**Severity.** High. The still is what a hold shows instead of black, so on the device the feature's picture was black until the workaround, and no test or preview could have shown it.
+
+**Workaround.** The two practice stills ship as package assets, generated by `eval/benign_story_stills.py`, and `app/src/calmframes/bundledStills.ts` swaps one in only when the authenticated data URI matches exactly, so the signed map still decides what is shown. Commit `52138fe`. A map for any other title shows black until its stills are bundled the same way.
+
+**Suggestion.** Load data URIs in `Image`, or document that only packaged and remote sources load, and report the refusal to JavaScript with its reason instead of only to the device log.
+
+---
+
+## 42. The player never reports a decoded frame on the virtual device
+
+**Task.** Keep the opening still on screen until the first real frame has decoded, then swap to the video, so a family never sees a black frame. The shell waited for `getVideoPlaybackQuality().totalVideoFrames` to move, which is what the API is for.
+
+**Steps.**
+
+1. Started any title on the Vega Virtual Device with the Debug candidate installed.
+2. Streamed the device log and read the `CALM_TIMING` events beside the player's own lines.
+
+**Expected.** `totalVideoFrames` climbs once playback starts.
+
+**Actual.** Every call failed below JavaScript and the counter stayed at zero while picture and sound played:
+
+```
+E W3CMEDIA:[MSE_EME] get_video_playback_quality: MPB Call failed with code: 50001.
+```
+
+263 such lines in one twenty-minute session. The shell waited out its 15 second allowance and then showed the recovery screen about fourteen seconds into every playback, over a film that was playing correctly.
+
+**Severity.** High. Every playback on the device ended on a recovery screen until the workaround, and nothing documents what code 50001 means or that the call cannot succeed on the virtual device.
+
+**Workaround.** `app/src/calmframes/useOpeningFrame.ts` readies the shell when the counter is silent but the element reports `readyState` of 2 or more, is not paused, and its clock has advanced a quarter of a second since the first poll; a counter that does report still wins. Commit `ac5a610`, with tests that failed first.
+
+**Suggestion.** Make `getVideoPlaybackQuality` work on the virtual device, or fail it in JavaScript with a documented error instead of silently in native code, and document code 50001.
+
+---
+
+## 43. The documented remote-button command looks for a host executable that is not there
+
+**Task.** Press remote buttons on the virtual device from a script. Amazon's 0.24 `inputd-cli` page (developer.amazon.com/docs/vega/0.24/inputdcli.html, read Oct 9, 2026) describes `inputd-cli`, built into Fire TV devices and the virtual device, and gives the host form `vega exec inputd-cli button_press KEY_BACK`.
+
+**Steps.**
+
+1. `vega exec inputd-cli --help`
+2. `vega device run-cmd --device Simulator --command 'inputd-cli --help'`
+3. `vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_DOWN'`, and the other keys, from the acceptance driver.
+
+**Expected.** Step 1 presses buttons as the page says.
+
+**Actual.** Step 1 prints `[Errno 2] No such file or directory: 'inputd-cli'` and exits 0, so a script cannot even tell that it failed. Rechecked Oct 14, 2026 on Vega CLI 1.3.4. Steps 2 and 3 work: the tool runs on the device and drove both Oct 14 acceptance sessions (`results/native-acceptance-2026-10-14/receipt.json`).
+
+**Severity.** Medium. Entry 9 was written when no route was known and the QMP socket was the only way in. The documented route exists, its documented spelling fails, and a zero exit status hides that.
+
+**Workaround.** `vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_X'`, with `KEY_UP`, `KEY_DOWN`, `KEY_LEFT`, `KEY_RIGHT`, `KEY_ENTER`, `KEY_BACK` and `KEY_PLAYPAUSE` all seen to work.
+
+**Suggestion.** Make `vega exec inputd-cli` reach the device-side tool as the page says, or correct the page to the `run-cmd` form, and exit non-zero when the executable is missing.
+
+---
+
 ## How to add one
 
 Write the six fields Amazon asks for: task, steps, expected versus actual, severity, workaround, suggestion. Real entries only, the way `CLAUDE.md` says. If it did not happen on this build, it does not go in, and if it is a platform rule we adopted rather than a failure we watched, say so in the entry itself. The log has three of those and each one is labelled.
@@ -979,6 +1059,9 @@ The first eleven and the Sep 29 entries, 34 and 35, were written here as they ha
 | 38 simulator capture | docs/SHOT_MANIFEST.md and `results/redesign_demo_manifest_2026-10-10.json`, frame timestamps rather than counts |
 | 39 fonts directory | `app/assets/fonts/`, docs/brand/README.md |
 | 40 focus on a disabled control | `app/src/calmframes/ParentAreaScreen.tsx`, the deferred-write regression in the parent area tests |
+| 41 data URI refused | `app/src/calmframes/bundledStills.ts` header, docs/STATUS.md (Oct 14, night), commit `52138fe` |
+| 42 no decoded frame counted | `app/src/calmframes/useOpeningFrame.ts`, `app/test/calmframes/openingFrame.test.tsx`, commit `ac5a610` |
+| 43 `vega exec inputd-cli` | CLAUDE.md, the section on working with the virtual device; `results/native-acceptance-2026-10-14/receipt.json` |
 
 ### 2026-10-14: visible native checks interrupted active desktop work
 
