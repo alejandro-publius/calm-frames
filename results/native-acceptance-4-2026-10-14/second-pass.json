@@ -1,0 +1,65 @@
+{
+  "status": "second pass on package 4 by the app's own debug breadcrumbs and media events; no screenshot, video or capture",
+  "recorded_utc": "2026-10-15T05:01:36Z",
+  "branch": "claude/final-candidate-2026-10-14",
+  "source_commit": "819de405ddf8e2d45526f978fc33d6a6ca977d5b",
+  "package": {
+    "path": "build/release/final-candidate-4-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "sha256": "471770fb10d9269d1a4128f6b1328cb6dd30495dbc715d8289cdb79cfef0d337",
+    "bytes": 28731853,
+    "target": "aarch64 Debug"
+  },
+  "device": "Vega Virtual Device (Simulator), aarch64, OS 1.2 (TV Ship/101520710), the same running instance as the first pass",
+  "method": "The driver pressed remote keys through inputd-cli on the device and read CALM_TRACE and CALM_TIMING lines from vega device start-log-stream. The seek bar is the sample's: Left or Right slides and pauses, Select confirms and seeks through the guarded function. Each journey is judged from the log only.",
+  "journeys": [
+    {
+      "journey": "J9 pause, resume and Back from playback",
+      "verdict": "observed-pass",
+      "evidence": "playing=True pause=True resume=True left=True screen=player-left', focus=kid-mode-home-watch",
+      "session": "native-acceptance-5",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J10 seek back into a hold by remote (Left, then Select on the seek bar)",
+      "verdict": "observed-partial",
+      "evidence": "second hold ended=True seek events=[] covers after seek=['cover-on media=19999 pause'] pauses=['pause media=19999'] plays=[] order=['ended@19999', 'cover-on@19999 pause', 'pause@19999'] screen now=player', focus=kid-mode-details-back",
+      "session": "native-acceptance-5",
+      "driver_verdict": "observed-partial",
+      "review": "The slide began after the second hold ended at 16 s and the Select arrived after the 20 s film had ended, so no seek was requested; the attempt was too late, not refused. J10b repeats it with the controls brought up during the second hold."
+    },
+    {
+      "journey": "J11 caption control reached by remote during playback",
+      "verdict": "observed-pass",
+      "evidence": "focus after two Down=video-player-caption-btn caption lines=['2aa2e18 local0.info io.github.alejandropublius.calmframes[12167]: 546981343520 INFO com.amazon.keplerscript: [KeplerScript-JavaScript] render KeplerCaptionsView', '2aa2e18 local0.info io.github.alejandropublius.calmframes[12167]: 546981343520 INFO com.amazon.keplerscript: [KeplerScript-JavaScript] render KeplerCaptionsView', '2aa2e18 local0.info io.github.alejandropublius.calmframes[12167]: 546981343520 INFO com.amazon.keplerscript: [KeplerScript-JavaScript] render KeplerCaptionsView', '2aa2e18 local0.info io.github.alejandropublius.calmframes[12167]: 546981343520 INFO com.amazon.keplerscript: [KeplerScript-JavaScript] render KeplerCaptionsView', '2aa2e18 local0.info io.github.alejandropublius.calmframes[12167]: 546981343520 INFO com.amazon.keplerscript: [KeplerScript-JavaScript] render KeplerCaptionsView', '2aa2e18 local0.info io.github.alejandropublius.calmframes[12167]: 546981343520 INFO com.amazon.keplerscript: [KeplerScript-JavaScript] render KeplerCaptionsView'] screen now=player-left', focus=kid-mode-home-watch",
+      "session": "native-acceptance-5",
+      "driver_verdict": "observed-partial",
+      "review": "Two Down presses during playback put focus on the caption button (video-player-caption-btn) and Select was accepted; the caption menu itself is not observable from the log, so what it showed was not seen. Harbor ships an English track."
+    },
+    {
+      "journey": "J12 app still on Home at the end",
+      "verdict": "observed-pass",
+      "evidence": "screen=player-left', focus=kid-mode-home-watch touches in session=0",
+      "session": "native-acceptance-5",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J10b seek back into the first hold by remote (Down, Left, Select)",
+      "verdict": "observed-pass",
+      "evidence": "hold 2 seen=True hold 2 ended=True seek events=['seeking@6788', 'seeked@6812'] covers after Left/Select=['cover-on@17502 pause'] order=['cover-on@17502 pause', 'pause@17502', 'seeking@6788', 'playing@6788', 'seeked@6812', 'waiting@6812', 'playing@6967', 'cover-off@9050 clear'] screen now=player', focus=calm-card-skip",
+      "session": "native-acceptance-6",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J12b app on Home at the end",
+      "verdict": "observed-pass",
+      "evidence": "screen=home focus=kid-mode-home-more-info touches in session=0",
+      "session": "native-acceptance-6",
+      "driver_verdict": "observed-pass"
+    }
+  ],
+  "touches_injected_on_device": 0,
+  "not_observed": [
+    "Pixels, audio, VoiceView, the parent settings interior (household PIN), the caption menu contents."
+  ],
+  "session_logs": "kept outside git under .logs/final/native-acceptance-5/ and -6/"
+}

@@ -98,10 +98,17 @@ clean native path; the still artwork stays the release default and the study
 stays separate.
 
 **The full app suite on `819de40`,** in this worktree after the Home patch:
-133 suites passed and 1 skipped, 1310 tests passed and 4 skipped. The Python
-gate was not re-run for the patch; it touched no Python package, and the
-document, brand, attribution and measured-source tests that cover the changed
-files passed.
+133 suites passed and 1 skipped, 1310 tests passed and 4 skipped.
+
+**The local equivalent of the hosted gate, late Oct 14,** on the candidate
+with the documentation on top: the Python suites (`pytest flashmap pipeline
+eval -m "not slow"`: 1801 passed, 2 deselected), ruff over the repository,
+the pin check (51 pinned, 0 loose), the conformance report rebuilt byte for
+byte, the hook package tests and the packed consumer check, the standalone
+eval tests (957 passed), the committed-tree secret scan (clean after the
+`unknown-key.png` allowlist, `f47ecd9`), the style check, the published number
+check and the document link test. Not run locally: strict mypy, which the
+local environment lacks; the hosted Python job runs it.
 
 ## 3. Native acceptance, as observed
 
@@ -139,9 +146,36 @@ focused; the driver's first Back then landed on Harbor's Details with focus on
 Try picture holds and its second on Home with focus on Details, which is the
 designed route. The driver had budgeted one more Back to leave the player and
 reported partial. The ordinary Harbor journey ended the same way, onto Home
-with focus on Play. Not observed in this session: pause and resume (reported
-on package 3 the same day), seeking by remote, the caption menu, the parent
-settings interior (household PIN), pixels, audio and VoiceView.
+with focus on Play. Not observed in that first pass: pause and resume, seeking by remote and
+the caption control, which the second pass below covers; still unobserved on
+any package: the caption menu's contents, the parent settings interior
+(household PIN), pixels, audio and VoiceView.
+
+### 3a, second pass: pause and resume, the remote seek, the caption control
+
+Receipt: `results/native-acceptance-4-2026-10-14/second-pass.json`, the same
+package and the same running device.
+
+| Journey | Result | What the app reported |
+|---|---|---|
+| J9 pause, resume and Back from playback | observed-pass | playing=True pause=True resume=True left=True screen=player-left', focus=kid-mode-home-watch |
+| J10 seek back into a hold by remote (Left, then Select on the seek bar) | observed-partial | second hold ended=True seek events=[] covers after seek=['cover-on media=19999 pause'] pauses=['pause media=19999'] plays=[] order=['ended@19999', 'cover-on@19999 pause', 'pause@19999'] screen now=player', focus=kid-mode-details-back |
+| J11 caption control reached by remote during playback | observed-pass (the driver said observed-partial; see below) | focus after two Down=video-player-caption-btn caption lines=['2aa2e18 local0.info io.github.alejandropublius.calmframes[12167]: 546981343520 INFO com.amazon.keplerscript: [KeplerScript-JavaScript] render KeplerCaptionsView', '2aa2e18 local0.info io.github.alejandropublius.calmframes[12167]: 546981343520 INFO com.amazon.keplerscript: [KeplerScript-JavaScript] render KeplerCaptionsView', '2aa2e18 local0.info io.gith... |
+| J12 app still on Home at the end | observed-pass | screen=player-left', focus=kid-mode-home-watch touches in session=0 |
+| J10b seek back into the first hold by remote (Down, Left, Select) | observed-pass | hold 2 seen=True hold 2 ended=True seek events=['seeking@6788', 'seeked@6812'] covers after Left/Select=['cover-on@17502 pause'] order=['cover-on@17502 pause', 'pause@17502', 'seeking@6788', 'playing@6788', 'seeked@6812', 'waiting@6812', 'playing@6967', 'cover-off@9050 clear'] screen now=player', focus=calm-card-skip |
+| J12b app on Home at the end | observed-pass | screen=home focus=kid-mode-home-more-info touches in session=0 |
+
+The first seek attempt (J10) began its slide after the second hold ended at
+16 s and its Select arrived after the 20 s film had ended, so nothing was
+requested; it was too late, not refused. The retry (J10b) brought the controls
+up with Down during the second hold, slid back with Left after it (the slide
+pauses, and the player covered the picture at 17.5 s for that pause), and
+confirmed with Select: the seek went to 6.8 s, inside the first hold, with the
+cover already on, playback resumed under the cover, and the cover cleared at
+9.05 s when the hold ended. That is the cover-first seek the tests promise,
+seen by remote. J11 is read as a pass for what it checked: two Down presses
+during playback put focus on the caption button and Select was accepted; the
+menu's contents are not visible from the log.
 
 ### 3b. Package 3 (`ac5a610`), the first Oct 14 session
 

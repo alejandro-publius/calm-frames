@@ -10,7 +10,7 @@ Codex's approved ivory and teal coastal interface, the Oct 14 device fixes
 simplified Home Alex asked for (one "Calm Frames" heading over the scenery,
 Play and Details, nothing else; the practice demo is reached from Details),
 the warm-sand inset border on the launcher icon and the tile, and friction log
-entries 41 to 43 from what the device said. The Oct 13 paragraphs below about
+entries 41 to 44 from what the device said. The Oct 13 paragraphs below about
 the centered cinematic layout, the film and `docs/MAC_FINISH.md` are history:
 do not rebuild them. Codex's Oct 15 research (rules, mini challenges, the
 friction bonus, Fire TV tooling) is documentation only, on

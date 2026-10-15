@@ -44,7 +44,7 @@ to origin on Oct 14 and not merged anywhere; `FINAL_HANDOFF.md` has the package.
 
 #### Added
 
-- A fourth secret-scan allowlist for the `unknown-key.png` render digests, so the committed-tree scan that hosted CI runs is clean again; a planted key is still caught. (the allowlist commit)
+- A fourth secret-scan allowlist for the `unknown-key.png` render digests, so the committed-tree scan that hosted CI runs is clean again; a planted key is still caught. (f47ecd9)
 - Friction log entries 41 to 44 from the Oct 14 device sessions: the image loader refuses a data URI, the player never counts a decoded frame on the virtual device, and the documented `vega exec inputd-cli` form fails with a zero exit status while `run-cmd` works; and refreshed browser renders of Home and Details with their receipt. (111ff12)
 - Ledger rows, NOTICE sections and credits entries for the coastal artwork and for `harbor-illustrated.png`, the latter traced to a pixel-identical render of our own `harbor.svg`. (cf53d39, 58bd1a7)
 - The submission packet under `docs/submission/` and the handoff `FINAL_HANDOFF.md`. (fbcbe20, 5065314)

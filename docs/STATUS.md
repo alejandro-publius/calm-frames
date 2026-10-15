@@ -31,7 +31,18 @@ the driver now detects. Friction log entries 41 to 44 record the Oct 14 device
 findings; an Amazon organizer's forum answer on how the log is delivered was
 re-read and the description draft links to it. The branch is on origin as
 `claude/final-candidate-2026-10-14` (no main merge, no pull request); the CI
-workflows run on pull requests only. `FINAL_HANDOFF.md` is current.
+workflows run on pull requests only. A second pass on the same package
+reported pause and resume, a seek back into a hold by remote with the cover
+on first, and the caption button reached by remote
+(`results/native-acceptance-4-2026-10-14/second-pass.json`). The local
+equivalent of the hosted gate ran on the candidate: the app suite, the Python
+suites (1801), ruff, the pin check, the conformance rebuild, the hook
+package, the eval tests and the committed-tree secret scan, which had carried
+four false findings since Oct 13 and is clean after a narrow allowlist
+(`f47ecd9`); mypy is the one hosted step this machine cannot run. The demo
+assembler's template now mirrors the shot plan, and the upstream patches
+for the Open Source entry were applied cleanly to today's upstream main in a
+throwaway clone. `FINAL_HANDOFF.md` is current.
 
 ### Oct 14, night: the device answered, and two things changed
 
