@@ -12,13 +12,13 @@
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
-![Browser preview of the Calm Frames library: panoramic Harbor artwork, Watch now in focus, quiet profile navigation and a shelf of three titles](docs/design/centered/library-browser.png)
+![Browser render of the coastal Home: the seated figure, the lighthouse island and the boat behind Harbor, 20 sec · No picture holds, Play and Details, the line Picture holds on supported videos. Audio continues., the Try picture holds entry, and Help and Settings in the header](results/coastal-renders-2026-10-14/home.png)
 
-| Setup | Before you watch | Parental controls |
-|---|---|---|
-| ![Setup, step 1 of 4: choose a PIN on a remote-friendly keypad](docs/design/polish/setup-after.png) | ![Centered Harbor artwork, title, story description and Watch now control](docs/design/centered/details-harbor-browser.png) | ![Parental controls while a save is in flight, with Saving your changes beside the title](docs/design/seamless/parent-saving-browser.png) |
+| Details |
+|---|
+| ![Browser render of the coastal Details for Harbor: the artwork, the title, 20 sec · No picture holds, Play with its triangle, the viewing settings and Back to library](results/coastal-renders-2026-10-14/details.png) |
 
-<sub>Browser renders of the app's own React Native trees with the bundled Inter fonts and artwork: the current library and details center the Harbor scene, title, description and actions ([source and render receipt](results/centered_harbor_2026-10-13.json)); parental controls are from 85c30f9 and setup from 54dab0b. They are review aids, not Vega screenshots. The shelf holds two Harbors on purpose, one with labelled practice holds and one prepared the way a real title is, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md), and more screens, with how they were made, in [docs/design/POLISH_REVIEW.md](docs/design/POLISH_REVIEW.md).</sub>
+<sub>Browser renders of the app's own React Native trees with the bundled fonts and artwork, exported from commit 52138fe ([render receipt](results/coastal-renders-2026-10-14/receipt.json)). They are review aids, not Vega screenshots; the native acceptance of this interface is in progress. The shelf holds two Harbors on purpose, one that plays straight through and one with two labelled practice holds, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md).</sub>
 
 ---
 
@@ -30,13 +30,16 @@ Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
 
 ### What a family sees
 
-- **A short setup.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
-- **A library of checked titles only.** A title plays in kid mode only after its flash map is verified; one that has not verified shows Needs check and stays hidden.
-- **A card before anything is hidden.** "Flashing part coming up", with Skip in focus, a few seconds ahead, and an optional chime.
-- **The story keeps going.** During a hidden part a checked still from just before it, or a dark cover, stands over the picture while sound and captions continue; afterwards one line says what was hidden.
-- **Parental controls behind the PIN.** Presets, the room, the chime, a profile per child (which can only be stricter than the household), and two opt-in effects, a gentle artwork entrance and quiet selection sounds, both Off unless a parent turns them on.
-- **What it keeps stays on the television.** The household record (the salted hash of the PIN, the profiles, presets, room and switches) is saved on the device, and the list of what was hidden lives in memory only, so it is gone after a restart. A release build sends nothing about the household anywhere: its only network request fetches a flash map when a catalog entry names a web address, and the default shelf is compiled into the app. The timing and capture beacons run in debug builds only ([`harnessConfig.ts`](app/src/calmframes/harnessConfig.ts), [`timingLog.ts`](app/src/calmframes/timingLog.ts)).
-- **Built for the remote and for screen readers.** The D-pad reaches every control, cards are announced, and reduced motion keeps the artwork still. VoiceView is covered by tests and still owes its check on the device.
+The ivory and teal coast: a seated figure on a rock, a lighthouse island and a boat behind everything on Home, with text sized for a couch and a visible ring on whatever the remote has focused. Playback keeps dark controls over the video.
+
+- **Home says what there is.** "Harbor" with "20 sec · No picture holds", a Play button with a triangle and a quiet Details action, one line under them, "Picture holds on supported videos. Audio continues.", and the Try picture holds entry with "20 sec · 2 practice holds". Help and Settings sit in the header.
+- **A short setup, once.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
+- **A library of checked titles only.** A title plays only after its flash map is verified; one that has not verified shows Needs check and stays hidden.
+- **A card before anything is hidden.** A countdown with Skip in focus a few seconds ahead, and an optional chime.
+- **The story keeps going.** During a hidden part a checked still from just before it, or a dark cover, stands over the picture while sound and captions continue; afterwards one line says what was hidden. The ordinary Harbor has nothing to hide and simply plays; the practice version holds twice so a family can see it work.
+- **Settings behind the PIN.** Presets, the room, the chime, a profile per child (which can only be stricter than the household), and two opt-in effects, a gentle artwork entrance and quiet selection sounds, both Off unless a parent turns them on.
+- **What it keeps stays on the television.** The household record (the salted hash of the PIN, the profiles, presets, room and switches) is saved on the device, and the list of what was hidden lives in memory only, so it is gone after a restart. A release build sends nothing about the household anywhere: its only network request fetches a flash map when a catalog entry names a web address, and the bundled titles name none.
+- **Built for the remote and for screen readers.** The D-pad reaches every control, Back closes one level at a time, cards are announced, and reduced motion keeps the artwork still. VoiceView is covered by tests and still owes its check on the device.
 
 ### What it does underneath
 
@@ -59,6 +62,8 @@ python -m flashmap report app/assets/raw/benign-story/harbor.mp4 --out report.ht
 The first prints `PASS`, the second writes one HTML page for the title that opens with the network off. The TV app itself needs the Vega SDK on a Mac; [Install and run](#install-and-run) has both.
 
 ### Where things stand
+
+**Oct 14: the approved coast, and a candidate to accept.** Alex approved the ivory and teal coastal interface, and it is applied to every menu screen on `claude/final-candidate-2026-10-14`, which carries one aarch64 Debug package with its receipt ([FINAL_HANDOFF.md](FINAL_HANDOFF.md)). A first acceptance session on the Vega Virtual Device, driven from the app's own log without any capture, played the ordinary Harbor to the end with no holds and the practice film through both holds, and found that the device's image loader refuses the data URI the signed map carries for each still, so a practice hold showed black; the two stills now also ship as bundled copies checked byte for byte against the signed map. The remaining steps are the owner's: the native acceptance in the handoff, the recording, and the submission.
 
 **Oct 13 visual update.** The library and details now use centered compositions, and both Harbor titles contain a new 20 second water-and-lighthouse film. The latest Mac observation covers the earlier source at `06190c7` ([receipt](results/polish_native_validation.json)); this centered layout and new film still need a matching Mac build and recording. [Preview and media evidence](results/centered_harbor_2026-10-13.json).
 

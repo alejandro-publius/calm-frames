@@ -1,0 +1,19 @@
+{
+  "source_commit": "52138fe3c4956c45c593ef545f2138882ad62202",
+  "rendering": "Browser render of the component export, not a device capture",
+  "renderer": "Playwright Chromium headless shell, 1920 by 1080, device scale 1",
+  "files": [
+    {
+      "render": "results/coastal-renders-2026-10-14/home.png",
+      "sha256": "5193d5098a4bba1643e445205fe6d262275c75c5353393057abc493603daeff1",
+      "export": "build/coastal-preview/index.html",
+      "export_sha256": "0ce27bc1400690da26ebc7fb66e5d7bd7c188185bc1633aa9189e8a0d8fa5a3e"
+    },
+    {
+      "render": "results/coastal-renders-2026-10-14/details.png",
+      "sha256": "d6537b6fb71fecc34092a68a64971c0e75918509ff0685b5c648cf25fe1149eb",
+      "export": "build/coastal-preview/details.html",
+      "export_sha256": "f9581ddbe970d6eae286b5c36566507e4575993674b00afad5e8c08dec24357b"
+    }
+  ]
+}

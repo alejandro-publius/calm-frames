@@ -324,6 +324,25 @@ in notices, and never "prevents seizures" or "seizure-proof".
 
 ## Renders
 
+### Oct 14: the approved coast
+
+The ivory and teal coast Alex approved on Oct 14, applied in `b22d275` and held
+to the floors in `93cf800`. Home: the coastal artwork full bleed, Harbor at one
+large size with its length and hold count, Play with its triangle, the quiet
+Details action, one line on picture holds, and the Try picture holds entry with
+its round crop of the artwork; Help and Settings in the header. Details keeps
+the same artwork and type with the viewing settings below. Playback stays on
+the dark palette. The values are in [Coastal menus, Oct 14](#coastal-menus-oct-14).
+
+![Coastal Home, browser render of the component export](../../results/coastal-renders-2026-10-14/home.png)
+
+![Coastal Details, browser render of the component export](../../results/coastal-renders-2026-10-14/details.png)
+
+Browser render of the component export, not a device capture
+([receipt](../../results/coastal-renders-2026-10-14/receipt.json), exported
+from `52138fe`). Nothing in them has been seen on the device yet; the native
+acceptance is the owner's next step.
+
 ### Oct 14: dusk lantern Home and Details
 
 The harbor leads. The title sits low left at one size on Home and Details, Watch

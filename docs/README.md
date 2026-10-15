@@ -49,7 +49,13 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 | [RUBRIC.md](RUBRIC.md) | The hackathon's dates, Stage One, the four criteria, the mini challenges and the form, quoted from its own pages rather than remembered. |
 | [SUBMISSION.md](SUBMISSION.md) | The Devpost submission draft, field by field. Not submitted; what Alex still has to supply is marked NEEDS ALEX. |
 | [SUBMISSION_COPY.md](SUBMISSION_COPY.md) | The shorter project story prepared for the Devpost description, with current design and evidence limits. |
-| [submission/README.md](submission/README.md) | Download the checked draft packet with current copy, labelled browser previews, brand assets and the Mac recording plan. |
+| [../FINAL_HANDOFF.md](../FINAL_HANDOFF.md) | The handoff for the final candidate: branch, package hash and receipt, what changed and which checks passed, the native acceptance checklist and the owner's remaining actions. |
+| [submission/README.md](submission/README.md) | The submission packet index: the five documents below and the Oct 13 ZIP, kept as history. |
+| [submission/CHECKLIST.md](submission/CHECKLIST.md) | Every official rule against the repository, marked verified, missing, pending or owner decision, mandatory items apart from the optional mini challenges. |
+| [submission/DEVPOST_DRAFT.md](submission/DEVPOST_DRAFT.md) | The project description to paste once the pending rows close. |
+| [submission/DEMO_SCRIPT.md](submission/DEMO_SCRIPT.md) | The 2:40 narration and shot plan for the native video, waiting for approval to record. |
+| [submission/REVIEWER_QUICKSTART.md](submission/REVIEWER_QUICKSTART.md) | Setup, run and demo steps for a judge, with unexecuted commands marked. |
+| [submission/OPEN_DECISIONS.md](submission/OPEN_DECISIONS.md) | What is pending and what only Alex can decide, mandatory first. |
 | [CLAUDE_FINISH_PROMPT.md](CLAUDE_FINISH_PROMPT.md) | A bounded Mac finishing task for Claude Code or a local Codex session, with API billing verification and milestone pushes. |
 | [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) | The next native recording plan, narration, readable subtitle treatment and checks before the finished cut can be uploaded. |
 | [SHOT_MANIFEST.md](SHOT_MANIFEST.md) | The shots in the Oct 10 recording of the earlier native build, with their source hashes, and what has to be captured again. |
