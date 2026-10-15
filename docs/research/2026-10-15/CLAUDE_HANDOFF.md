@@ -10,6 +10,15 @@ Current package 5 app source: `4016e8dac8f675a4eb1e1613fd9dc7cf63d06e58`. Local 
 
 The following audit and sync instructions are historical context from before that push. Recheck remote refs and inspect the current candidate before changing anything. Do not repeat completed work. The research branch remains documentation-only, based on older source. One remaining-actions paragraph in the candidate's FINAL_HANDOFF still names older `819de40`; use package 5 and source `4016e8d` for current acceptance. No main merge, candidate PR, hosted CI, public video or final submission has been established by this update.
 
+## Mini-challenge correction: existing work takes priority
+
+The newer application branch contains substantially more evidence than the earlier remote snapshot. **Do not create a new validator simply to qualify for a mini-challenge.** First inspect these existing paths:
+
+- [AWS deployment receipt](https://github.com/alejandro-publius/calm-frames/blob/a3368a9e4dbfde52153d586d97d8c6da5ab5c8fd/results/aws_deploy_2026-10-09.json): two historical cloud-preparation runs, including an unsigned clip correctly blocked and a signed run publishing 16 objects and a catalog row. The TV app still uses a packaged library and does not trust the cloud demo signing key. Present this scope accurately; no current AWS availability, billing or credentials were verified by this review. The receipt's inactive Project cost-allocation tag means its zero-dollar reading does not prove zero spend. Its image scan recorded unresolved critical/high findings; confirm current status before treating the deployment as production-ready or expanding it. No Kiro Crew use is documented.
+- [Existing Open Source contribution](https://github.com/alejandro-publius/calm-frames/blob/a3368a9e4dbfde52153d586d97d8c6da5ab5c8fd/docs/OPEN_SOURCE_PR.md): two prepared patches for silent Shaka loading failures plus regression tests. The documented Oct 10 test run and Oct 14 clean-apply check do not establish current upstream compatibility. Refresh duplicate checks and targeted tests, including direct coverage of the wrapper promise-return behavior, before requesting approval to publish. No public contribution URL was established.
+
+Given these facts, AWS Builder appears the lowest additional-effort route using authentic existing evidence; the prepared upstream contribution is the next Open Source opportunity if publication is approved. Final native acceptance and the main submission remain first. This supersedes earlier suggestions to create a new mini-challenge utility or assume AWS integration is absent.
+
 ## Read this before pulling or replacing any code
 
 The research branch is documentation-only and is based on an older, verified remote reliability commit. It is **not** the latest integrated application. Do not replace your current local working tree with this branch, reset to it, or assume `main` is current.
