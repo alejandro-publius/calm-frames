@@ -6,7 +6,7 @@ import { AccessibilityInfo, Animated, Easing, Image, StyleSheet, View } from 're
 import { COASTAL_COLORS as CALM_COLORS, scale } from './calmStyles';
 import { trace } from './trace';
 
-export default function HomeHarborScene({ enabled = false, active = true, immersive = false }: { enabled?: boolean; active?: boolean; immersive?: boolean }) {
+export default function HomeHarborScene({ enabled = false, active = true, immersive = false, wideReading = false }: { enabled?: boolean; active?: boolean; immersive?: boolean; wideReading?: boolean }) {
   const manager = useKeplerAppStateManager();
   const drift = React.useRef(new Animated.Value(0)).current;
   React.useEffect(() => {
@@ -48,13 +48,15 @@ export default function HomeHarborScene({ enabled = false, active = true, immers
     <Animated.View testID="home-water-ripples" style={[styles.ripples, { transform: [{ translateX: drift }, { translateY: drift.interpolate({ inputRange: [scale(-4), scale(4)], outputRange: [scale(-1), scale(1)] }) }] }]}>
       <View style={[styles.ripple, styles.first]} /><View style={[styles.ripple, styles.second]} /><View style={[styles.ripple, styles.third]} />
     </Animated.View>
-    {immersive ? <LinearGradient colors={[CALM_COLORS.BACKGROUND, CALM_COLORS.BACKGROUND, `${CALM_COLORS.BACKGROUND}00`]} locations={[0, 0.76, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.readingEdge} /> : null}
+    {immersive ? <LinearGradient colors={[CALM_COLORS.BACKGROUND, CALM_COLORS.BACKGROUND, `${CALM_COLORS.BACKGROUND}00`]} locations={wideReading ? [0, 0.76, 1] : [0, 0.54, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={[styles.readingEdge, wideReading ? styles.wideReadingEdge : null]} /> : null}
     {!immersive ? <LinearGradient colors={[`${CALM_COLORS.BACKGROUND}F5`, `${CALM_COLORS.BACKGROUND}EB`, `${CALM_COLORS.BACKGROUND}75`]} locations={[0, 0.55, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={StyleSheet.absoluteFill} /> : null}
   </View>;
 }
 const styles = StyleSheet.create({
   scene: { ...StyleSheet.absoluteFillObject, backgroundColor: CALM_COLORS.BACKGROUND, overflow: 'hidden' },
-  readingEdge: { position: 'absolute', left: 0, top: scale(770), width: scale(820), height: scale(310) },
+  // A continuous reading edge groups the heading and action without a card.
+  readingEdge: { position: 'absolute', left: 0, top: 0, width: scale(960), height: scale(1080) },
+  wideReadingEdge: { width: scale(1380) },
   immersiveArt: { opacity: 1 },
   art: { position: 'absolute', left: 0, top: 0, width: scale(1920), height: scale(1080) },
   ripples: { position: 'absolute', top: scale(690), left: scale(1050), width: scale(720), height: scale(120) },

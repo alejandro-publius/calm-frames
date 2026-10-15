@@ -84,7 +84,7 @@ test('when the demo itself leads the shelf there is no second demo control and n
   expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Play demo/);
 });
 
-test('the Home heading is one large line sized to clear the artwork, and Details keeps the title at full size', () => {
+test('the Home heading is one large line sized to clear the artwork, and Details uses the same reading scale', () => {
   const home = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} />);
   const homeTitle = StyleSheet.flatten(home.getByTestId('kid-home-title').props.style);
   // "Calm Frames" measures 755 units at 120 in the display face and would
@@ -94,7 +94,7 @@ test('the Home heading is one large line sized to clear the artwork, and Details
   home.unmount();
   const details = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
   const detailsTitle = StyleSheet.flatten(details.getByTestId('title-details-title').props.style);
-  expect(detailsTitle.fontSize).toBe(184);
+  expect(detailsTitle.fontSize).toBe(homeTitle.fontSize);
   expect(StyleSheet.flatten(details.getByTestId('title-details-meta').props.style).fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE);
 });
 

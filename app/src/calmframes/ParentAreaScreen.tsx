@@ -50,6 +50,7 @@ import TouchableOpacity from './CalmTouchable';
 import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
+import HomeHarborScene from './HomeHarborScene';
 import {
   CALM_CONTROL,
   COASTAL_COLORS as CALM_COLORS,
@@ -305,8 +306,9 @@ const ParentAreaScreen = ({
     const offersSetPin = !gate.record && Boolean(onSetPin);
     return (
       <View testID={testID} style={styles.screen}>
+        <HomeHarborScene immersive wideReading />
         <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} backDisabled={saving} />
-        <View style={styles.header}>
+        <View style={[styles.header, styles.gateHeader]}>
           <Text style={styles.title} accessibilityRole="header">
             {PARENTAL_CONTROLS_TITLE}
           </Text>
@@ -900,7 +902,8 @@ const styles = StyleSheet.create({
   // Reserve the status beside the title so saving never moves the settings.
   savingSlot: { width: scale(400), height: scale(84), justifyContent: 'center' },
   /** The locked screen: words on the left, the keypad on the right. */
-  columns: { flexDirection: 'row', alignItems: 'flex-start' },
+  gateHeader: { paddingTop: scale(40) },
+  columns: { flexDirection: 'row', alignItems: 'flex-start', backgroundColor: CALM_COLORS.BACKGROUND, borderRadius: scale(CALM_CONTROL.RADIUS), padding: scale(24) },
   aside: {
     flex: 1,
     maxWidth: scale(960),

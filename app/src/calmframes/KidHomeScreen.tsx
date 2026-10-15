@@ -192,7 +192,7 @@ const KidHomeScreen = ({
 
   return (
     <View testID={testID} style={styles.screen}>
-      <HomeHarborScene immersive={!showIntroduction && !empty} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
+      <HomeHarborScene immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
       <CalmPageHeader wordmark={false} onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
@@ -205,9 +205,9 @@ const KidHomeScreen = ({
           chosenWord={WATCHING_STATE_WORD} chosenLine={whoIsWatching((profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name)}
           profiles={profiles} activeProfileId={activeProfileId ?? profiles[0].id} onChoose={onChooseProfile} />
       ) : null}
-      {showIntroduction ? <PictureHoldIntroduction disabled={saving} onDemoDetails={demo ? () => onOpen(demo) : undefined} onPlaybackCheck={playbackCheck ? () => onOpen(playbackCheck) : undefined} onStart={demo ? () => {
+      {showIntroduction ? <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false}><PictureHoldIntroduction disabled={saving} onDemoDetails={demo ? () => onOpen(demo) : undefined} onPlaybackCheck={playbackCheck ? () => onOpen(playbackCheck) : undefined} onStart={demo ? () => {
         if (!saving) { setShowIntroduction(false); setReturnToIntroduction(true); (onPlay ?? onOpen)(demo); }
-      } : undefined} /> : empty ? (
+      } : undefined} /></ScrollView> : empty ? (
         <StatusNotice
           testID={`${testID}-empty`}
           notice={offline ? BACKEND_UNREACHABLE_EMPTY : NO_TITLES}
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
   libraryScroll: { flex: 1 },
   scrollContent: { paddingBottom: scale(12) },
   hero: { width: '100%', minHeight: scale(810), alignItems: 'flex-start', paddingBottom: scale(36) },
-  heroCopy: { width: scale(840), paddingTop: scale(70), alignItems: 'flex-start' },
+  heroCopy: { width: scale(840), paddingTop: scale(248), alignItems: 'flex-start' },
   // One line at 120: "Calm Frames" measures 755 units in the display face,
   // which ends before the island's tree at about 900. At 184 it would run to
   // 1158 and under the lighthouse.
