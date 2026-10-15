@@ -47,7 +47,7 @@
 
 import React from 'react';
 import TouchableOpacity from './CalmTouchable';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import {
@@ -232,6 +232,13 @@ const ParentAreaScreen = ({
   // and so no question to ask about them either.
   const removable = Boolean(family && editingKid && family.profiles.length > 1);
   const confirmingRemoval = removable && askedToRemove === editingId;
+  // While the screen is asking, Back answers the question with keeping the
+  // kid. Falling through would leave the whole parent area instead.
+  React.useEffect(() => {
+    if (!confirmingRemoval) return;
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => { setAskedToRemove(null); return true; });
+    return () => subscription.remove();
+  }, [confirmingRemoval]);
 
   let frame = PARENT_LOCKED_FRAME;
   let reason = 'parent area locked';

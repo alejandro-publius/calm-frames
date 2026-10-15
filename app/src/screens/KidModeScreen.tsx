@@ -445,6 +445,9 @@ const KidModeScreen = ({
       <FirstRunScreen
         testID={`${testID}-first-run`}
         onDone={finishFirstRun}
+        // Opened from the parent area's Set a PIN: Back on the first step
+        // returns there. On a fresh device there is nowhere else to go.
+        onCancel={saved.value ? () => setView('parent') : undefined}
         newSalt={newSalt}
         settings={settings}
       />

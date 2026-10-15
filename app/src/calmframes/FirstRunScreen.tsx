@@ -41,6 +41,7 @@
 import React from 'react';
 import TouchableOpacity from './CalmTouchable';
 import {
+  BackHandler,
   ScrollView,
   StyleSheet,
   Text,
@@ -106,6 +107,12 @@ export interface FirstRunResult {
 export interface FirstRunScreenProps {
   /** Called once, with the PIN set and the settings chosen. */
   onDone: (result: FirstRunResult) => void;
+  /**
+   * Called when Back is pressed on the PIN step and there is somewhere to go
+   * back to, which is the parent area that opened this screen to set a PIN.
+   * On a fresh device nobody passes this, and Back is left to the system.
+   */
+  onCancel?: () => void;
   /**
    * A fresh salt for the PIN.
    *
@@ -173,6 +180,7 @@ const PIN_NOTICES: Record<'pin' | 'confirm' | 'mismatch', Notice> = {
 
 const FirstRunScreen = ({
   onDone,
+  onCancel,
   newSalt,
   rounds = PIN_ROUNDS,
   settings: initialSettings = DEFAULT_SETTINGS,
@@ -228,6 +236,23 @@ const FirstRunScreen = ({
     setFocusedRow(null);
     setStep(next);
   };
+
+  // The remote's Back walks the steps the way the on-screen Back does, one
+  // at a time. Before the preset there is only the PIN, which is asked for
+  // again in full, because one remembered entry is not a confirmed PIN.
+  React.useEffect(() => {
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (step === 'explainer') { moveToStep('room'); return true; }
+      if (step === 'room') { moveToStep('preset'); return true; }
+      if (step === 'preset' || step === 'confirm') {
+        setEntered(''); setFirstPin(''); setMismatched(false); setStep('pin');
+        return true;
+      }
+      if (onCancel) { onCancel(); return true; }
+      return false;
+    });
+    return () => subscription.remove();
+  }, [step, onCancel]);
 
   const header = (
     <View style={styles.header}>

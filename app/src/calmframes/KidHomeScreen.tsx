@@ -125,6 +125,13 @@ const KidHomeScreen = ({
     return () => subscription.remove();
   }, [showIntroduction, interfaceActive]);
   const [choosingProfile, setChoosingProfile] = React.useState(false);
+  // The picker is one level above the shelf, so Back closes it rather than
+  // falling through to the shelf's handler and leaving the app.
+  React.useEffect(() => {
+    if (!choosingProfile || !interfaceActive) return;
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => { setChoosingProfile(false); return true; });
+    return () => subscription.remove();
+  }, [choosingProfile, interfaceActive]);
   const featured = listed.find((entry) => titlePresentation(entry.title).action === 'Watch now') ?? listed[0];
   const hasMainStory = listed.some((entry) => !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID);
   const otherStories = listed.filter((entry) => (!hasMainStory || (!isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID)) && (entry !== featured || !titlePresentation(entry.title).art || !hasMainStory));
