@@ -1,5 +1,41 @@
 # Final handoff: the integration candidate
 
+## Cloud continuation, October 15, 2026
+
+Current private working branch: `codex/cloud-finish-2026-10-15`.
+Application source: `0e434dc7c89b7fb2dc19a9ca5d4593e5effa6c19`, based on
+candidate `a3368a9e` plus the 13-file documentation reconciliation `85dedefd`.
+The older package and device sections below remain historical evidence.
+
+The PIN-gate cancel focus defect is fixed in source: both button Back and
+remote Back now return focus only to Parents, including after visiting Details.
+The regression failed twice on the old behavior and passes with the fix.
+The final app gate passed 130 suites, 1,292 tests and 57 snapshots; four existing
+tests remain skipped and the three capture/export suites were excluded.
+Typecheck and lint passed. Checks used the supplied Node 24, not pinned Node 22.
+Exact commands and limits: [cloud finish receipt](results/cloud-finish-2026-10-15.json).
+
+The upstream wrapper/teardown tests now execute with eight passes and three
+expected-failing negative controls. Both original patches remain required;
+a third patch adds the tests. The broader upstream baseline and patched run
+both exit 1 for the same two obsolete snapshots. The duplicate-issue recheck
+was blocked by GitHub API `Forbidden`. See [upstream evidence](docs/upstream-pr/README.md).
+
+Offline AWS checks passed: 100 tests, synthesis and image context. Live billing,
+tags, credits, deployed image digest and findings are blocked by absent AWS
+access. The [bounded owner checklist](docs/research/cloud-aws-check-2026-10-15.md)
+keeps the historical inactive tag, inconclusive zero-dollar reading and
+8 critical/56 high image findings unresolved. The TV still uses its packaged
+library, not the cloud demo signer.
+
+No Vega CLI/SDK is available here. No Mac was accessed, no native package was
+rebuilt, and no screenshot or recording was made. Package 5 does not contain
+this focus fix; rebuild from the new source and repeat acceptance before
+claiming it does. Pixels, audio, parent-settings interior, VoiceView and
+caption-menu contents remain unobserved. No main merge, release tag, upstream
+publication, reviewer invitation or submission occurred.
+
+
 Written Oct 14, 2026, night (Pacific), after remote-driven acceptance sessions
 on the Vega Virtual Device, and reconciled Oct 15 against candidate head
 `a3368a9e4dbfde52153d586d97d8c6da5ab5c8fd` and package 5 from `4016e8d`.

@@ -1,4 +1,51 @@
-# Shaka load-promise coverage proposal
+# Shaka load-promise contract tests
+
+## Executed cloud check, October 15, 2026
+
+The proposal below is now implemented as
+`0003-Test-real-wrapper-load-and-teardown-contracts.patch`. Apply **all three
+patches in filename order**, each separately with `git apply --check` then
+`git apply`. The original `0001` and `0002` files are unchanged. Their old
+claim that the caller patch is independent is incorrect: a caller catch cannot
+observe a promise dropped by the wrapper. Do not publish either alone.
+
+Verified upstream main: `ef8e4da89b22ef7973d0d41beedfa2b42f7bb272` via
+`git ls-remote`. Duplicate recheck via `gh api` returned `Forbidden`; no other
+account or route was attempted. The earlier 13-item tracker check remains
+historical, not newly verified. Local tests proceeded independently; publishing
+still requires a successful duplicate check, public identity and owner approval.
+
+| Executed check | Result |
+|---|---|
+| Real wrapper plus caller tests | 2 suites, 8 tests passed |
+| Drop only wrapper promise return | Fulfillment test failed on undefined result; deferred engine resolved |
+| Remove caller catch | Async rejection test failed |
+| Remove only teardown null-ref guard | Actual teardown test failed on unwanted error callback |
+| Restore all changes | 8 tests passed |
+| Unpatched broad suite | 351 tests passed, 4 skipped, exit 1 for 2 obsolete snapshots |
+| Patched broad suite | 356 tests passed, 4 skipped, same exit 1 and obsolete snapshots |
+| Typecheck before/after | Both exit 0 |
+| Lint before/after | Exit 0; final changed-file lint has no warnings |
+| Prettier on touched files | Exit 0 |
+| Sequential patch application on pristine upstream | All four resulting files match the tested checkout |
+
+The wrapper is loaded with `jest.requireActual`. Only the generated engine and
+six import-time polyfills are virtual mocks. This resolves with upstream's
+existing Jest configuration even with generated files absent; production
+module paths and resolver settings are unchanged. Fulfillment waits for engine
+load before enabling text tracks. Rejection preserves the original error.
+The caller test invokes real `destroyMediaPlayerSync`; its `unload` stub rejects
+the pending load before teardown clears both refs and the callback runs.
+
+Commands ran in a throwaway Linux checkout with Node v24.19.0, npm 11.9.0 and
+Jest 29.7.0, using one dependency installation before and after. Node 22 and
+the generated/native engine were not exercised. No `npm run build` or lint-fix
+command ran. Original patch hashes, dependency-lock hash, exact commands,
+initial cache/resolver failures and final results are in
+[the receipt](../../results/upstream-contract-check-2026-10-15.json).
+
+## Original proposal, retained as history
+
 
 Prepared October 15, 2026 from upstream `ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`
 and the two patches in this directory. This is a test proposal, not an executed

@@ -62,7 +62,8 @@ events under the cover. These observations belong to their named packages.
 The latest candidate's pixels and audio remain unobserved. The parent settings
 interior needs the existing household PIN, and VoiceView and the caption menu's
 contents are untested. Back from the PIN gate reported Home with Details
-focused, so return focus to Parents also needs checking. The checklist is
+focused. Source `0e434dc7` now fixes this with button and remote regressions;
+it is not in package 5 and still needs a rebuilt native acceptance check. The checklist is
 [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 4. Design approval is done;
 native visual and audio acceptance is still pending.
 
@@ -137,10 +138,12 @@ is not defined on the rules page.
 
 **Needs:** the GitHub username to credit, the fork, and the choice of
 contribution. Without a URL the mini challenge is simply not entered. The
+local contract checks now pass, but this cloud session's duplicate recheck
+returned `Forbidden` and must be completed before publication. The
 shortest path is the prepared pull request: fork `AmazonAppDev/vega-video-sample`
 under Alex's account, apply the two patches in `docs/upstream-pr/` with their
-author line set to Alex's public identity, run the sample's six focused tests
-as [../OPEN_SOURCE_PR.md](../OPEN_SOURCE_PR.md) describes, push the branch and
+author line set to Alex's public identity, apply the third test patch and run all eight focused tests
+as [../upstream-pr/README.md](../upstream-pr/README.md) describes, push the branch and
 open the pull request; the contribution URL is the pull request. Opening it is
 public and is Alex's action.
 
@@ -153,6 +156,9 @@ stack, the current bill or whether account credits cover its costs.
 
 **Needs:** Alex to check the current tag and budget coverage, read the bill,
 and decide whether to enter and whether to keep the stack up through judging.
+The [cloud read-only checklist](../research/cloud-aws-check-2026-10-15.md)
+adds deployed-digest and finding verification. Offline tests passed; live state
+is blocked by absent AWS access and the historical findings remain unresolved.
 
 ## Also noted, not blocking
 

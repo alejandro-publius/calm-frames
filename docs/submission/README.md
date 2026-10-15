@@ -1,5 +1,13 @@
 # The submission packet
 
+**October 15 cloud continuation:** the private working branch is now
+`codex/cloud-finish-2026-10-15`, application source `0e434dc7`.
+[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md#cloud-continuation-october-15-2026)
+records the PIN-cancel focus fix, executed upstream tests and offline AWS checks.
+Package 5 remains historical and does not contain this source change; no new
+native build, pixels, sound or capture evidence was produced.
+
+
 Reconciled Oct 15, 2026 against candidate head `a3368a9e`. The packet is the five documents below, written
 against the official rules and the repository's receipts. It now describes the
 final integration candidate `claude/final-candidate-2026-10-14`, whose package

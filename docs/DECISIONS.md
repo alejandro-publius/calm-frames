@@ -2521,3 +2521,14 @@ measured entry. No startup timing, artwork or loading behavior changes.
 - **Decision:** buttons say what they open: How it works and Parents in the Home header instead of Help and Settings; Back instead of Back to library; Play demo instead of Watch demo; Before you watch ↓ instead of Viewing details ↓. **Why:** with the explanatory paragraph gone from Home, the header is where the screen says who it is for; "Parents" does that in one word and the spoken label keeps "parental controls, needs a PIN". **Cost:** the documents and the receipts' journey names disagree on the old names; the receipts are left as recorded.
 - **Decision:** Details says the check's result once in the hero ("20 sec · No flashing found", then "Checked frame by frame. No flashing found, so the picture never holds."), and Before you watch carries only what the hero does not: the limit of detection, the timeline, the viewing settings in one line each, and the approved sentence. The practice page keeps one explaining sentence under its title and none beside Play. **Why:** the old page said "no picture holds" four times and "sound and captions continue" three times. **Cost:** none measured; the ten foot floors still hold on every line.
 - **Decision:** How it works is four lines, in this order: who it is for, every video checked before it plays, the picture holding while the sound and captions continue, and that detection can miss flashing with the approved sentence; then Play the demo and About the demo. The first run explainer says the same in three lines plus the sentence, inside its fifty word budget. **Why:** nothing in the app said who it was for; the user asked for it to show without a speech. **Cost:** none.
+
+## 2026-10-15: finish from the current candidate in cloud
+
+Use `a3368a9e` plus the `85dedefd` documentation reconciliation, preserving
+main and earlier branches. Fix only the reproduced Parents return-focus defect;
+keep approved artwork and parent protection unchanged. Preserve the original
+upstream patches and add a third patch that tests their real wrapper/teardown
+contract. Run offline AWS checks without credentials or deployment. Live AWS,
+upstream duplicate review and native acceptance remain blocked as recorded in
+[the handoff](../FINAL_HANDOFF.md#cloud-continuation-october-15-2026).
+Cost: local compute only; no paid resource, credential or permission changes.

@@ -1,5 +1,12 @@
 # Status
 
+Cloud continuation, Oct 15: source `0e434dc7` on
+`codex/cloud-finish-2026-10-15` fixes Parents return focus. See
+[the current handoff](../FINAL_HANDOFF.md#cloud-continuation-october-15-2026)
+for executed app, upstream and offline AWS checks and remaining live/native
+blockers. Package 5 remains historical. No capture or public publication.
+
+
 Updated Oct 14, 2026.
 
 ## 0. Where things stand

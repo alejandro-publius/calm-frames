@@ -1,5 +1,17 @@
 # The upstream contribution
 
+**October 15 cloud execution update.** The real-wrapper gap is now covered by
+an additional incremental test patch, with eight focused passes and three
+expected-failing negative controls. Both original patches remain required.
+See [the executed record](upstream-pr/README.md) and
+[receipt](../results/upstream-contract-check-2026-10-15.json).
+The broader upstream run retains its baseline failure from two obsolete
+snapshots. This session's duplicate recheck returned `Forbidden`; the earlier
+tracker observations below are historical. Do not use the older six-test
+publication instructions alone: apply all three patches in order and repeat
+the duplicate check before any owner-approved public contribution.
+
+
 **October 15 read-only check.** Upstream `main` remains
 `ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`. The issue tracker now contains
 thirteen issues and pull requests, including two unrelated open items:
