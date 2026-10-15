@@ -115,6 +115,19 @@ and fresh receipts take precedence over dated marketing/status text.
    tests/commands, input/output hashes, report paths and remaining blocks to the
    owner/Codex. Do not merge main or touch the user's running apps.
 
+## Motion-footage candidate supplied by the research lane
+
+Candidate only, NOT a verified ready asset: NPS Acadia B-Roll: Coastal Scenery,
+37 seconds. Official page reports NPS Video and Public domain: Full Granting Rights.
+Source page: https://npgallery.nps.gov/AssetDetail/6fc09aec-7fc2-47ed-b8cc-e1b10861dd3e
+Official 720p MP4 candidate: https://npgallery.nps.gov/GetAsset/6fc09aec-7fc2-47ed-b8cc-e1b10861dd3e/proxyhires
+Research reports the 1080p variant as 64.3 MB; the 720p size and actual SDR/color
+metadata remain unverified. Claude owns acquisition and probing in its isolated
+workspace, with a bounded download, source SHA and retained attribution/license
+record. Do not preview it before analysis. Codex will not duplicate this download
+or pipeline run. If acquisition, rights, decoding or signing blocks progress,
+return the exact blocker and the report produced so far.
+
 ## Existing runnable commands and paths
 
 Use the installed Python 3.12 environment, with THIS checkout first on import
