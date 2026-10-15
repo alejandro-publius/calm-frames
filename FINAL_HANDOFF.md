@@ -1,12 +1,14 @@
 # Final handoff: the integration candidate
 
-Written Oct 14, 2026, night (Pacific), after a remote-driven acceptance session
-on the Vega Virtual Device, and brought up to date late that night after Alex's
-Home simplification, a second package and a second session. The candidate is
-committed and pushed to `origin/claude/final-candidate-2026-10-14` (no main
-merge, no pull request, no visibility change); nothing is published, recorded
-or submitted. The app was installed and driven on the simulator by this work,
-twice, without any screenshot, video or capture.
+Written Oct 14, 2026, night (Pacific), after remote-driven acceptance sessions
+on the Vega Virtual Device, and reconciled Oct 15 against candidate head
+`a3368a9e4dbfde52153d586d97d8c6da5ab5c8fd` and package 5 from `4016e8d`.
+The candidate is committed and pushed to
+`origin/claude/final-candidate-2026-10-14` (no main merge, no pull request,
+no visibility change); nothing from this candidate is published, recorded or
+submitted. Packages 3, 4 and 5 were installed and driven on the simulator
+without any screenshot, video or capture. This reconciliation reads the saved
+receipts; it does not add a native run.
 
 ## 1. Branch, commit and package
 
@@ -18,11 +20,11 @@ twice, without any screenshot, video or capture.
 | Package SHA-256 | `a226b39fc855cd7cf5eb4136b9ba890f92e6e6518ca764a6862cf9990870dc13` |
 | Receipt | `build/release/final-candidate-5-2026-10-14/PREPARATION.json`: 736 recorded app inputs with hashes, inputs committed, prepared library checked with all 3 original reports present, catalog SHA-256 `02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79`; `SHA256SUMS` and `NOTES.md` beside it. The helper writes `native_validation_performed: false`; the sessions in section 3 are the validation |
 | Tested on the device | This exact package, installed over the existing household with `vega device install-app`; no uninstall, no data reset, no PIN entered. Receipt: [`results/native-acceptance-5-2026-10-14/receipt.json`](results/native-acceptance-5-2026-10-14/receipt.json). Package 4's two sessions: [`results/native-acceptance-4-2026-10-14/receipt.json`](results/native-acceptance-4-2026-10-14/receipt.json) and [`second-pass.json`](results/native-acceptance-4-2026-10-14/second-pass.json); package 3's: [`results/native-acceptance-2026-10-14/receipt.json`](results/native-acceptance-2026-10-14/receipt.json) |
-| Receipt recheck | Package 3 was rechecked at `52235a7` (736 inputs bound). Packages 4 and 5 need none yet: no commit after their sources touches `app/` |
-| Build route | `source ~/vega/env`, fnm Node 22 and the watchman fallback shim on `PATH`, `JAVA_HOME=/opt/homebrew/opt/openjdk@21`, `DEMO_PIN` unset, then `RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag final-candidate-3-2026-10-14`. The helper printed its publication command and it was not run |
+| Source comparison | The GitHub comparison from package 5's source `4016e8d` to candidate head `a3368a9e` changes documentation, browser renders and their receipt, and the package 5 acceptance receipt; no `app/` file changes. This is a source comparison, not a fresh hash check of the local package or its 736 recorded inputs. Package 4 remains earlier evidence from `819de40` |
+| Earlier build route (package 3) | `source ~/vega/env`, fnm Node 22 and the watchman fallback shim on `PATH`, `JAVA_HOME=/opt/homebrew/opt/openjdk@21`, `DEMO_PIN` unset, then `RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag final-candidate-3-2026-10-14`. The helper printed its publication command and it was not run |
 | Earlier packages, preserved | `final-candidate-4-2026-10-14` from `819de40` (`471770fb…`, driven twice on the device), `final-candidate-3-2026-10-14` from `ac5a610` (`4d36c177…`, driven once), `final-candidate-2026-10-14` from `93cf800` (`d53444ab…`) and `final-candidate-2-2026-10-14` from `52138fe`; Codex's `approved-coastal-b22d275-2026-10-14` in the coastal worktree |
 | Lineage | `cfddc4a` (reliability) → `b22d275` (Codex: approved coastal interface) → the submission packet and the illustrated harbor ledger → `58bd1a7` (coastal artwork ledgered, credits regenerated) → `53ab01b` (hook mirror) → `93cf800` (coastal menus held to the ten foot floors) → `204f185` (debug breadcrumbs) → `487e5e5` (Back one level at a time in setup, the picker and the removal question) → `52138fe` (bundled copies of the practice stills) → `69390ed` (README opens on the coast) → `ac5a610` (opening readies on a moving clock) → `d7e13be` (documented checks runnable from a fresh checkout) → the judge-path fixes and this documentation → `819de40` (the simplified Home, the practice entry on Details, the bordered icon and tile) → `111ff12` (friction log 41 to 43, renders) → this documentation → `4016e8d` (one voice for the words) → this documentation |
-| Previews | Static component export at `819de40`: <http://127.0.0.1:4176/> (served from `build/coastal-preview` in this worktree, pid in `.logs/final/preview-4176.pid`; regenerate with `cd app && npx jest --ci --watchman=false --coverage=false test/calmframes/coastalExport.test.tsx && cd .. && .venv/bin/python eval/preview/coastal_preview.py`). <http://127.0.0.1:4174/> is Codex's older export served from its own directory and <http://127.0.0.1:4175/> its water study; both left running. Browser previews, not device captures |
+| Earlier local previews (recorded at `819de40`) | Static component export: <http://127.0.0.1:4176/> (served from `build/coastal-preview` in this worktree, pid in `.logs/final/preview-4176.pid`; regenerate with `cd app && npx jest --ci --watchman=false --coverage=false test/calmframes/coastalExport.test.tsx && cd .. && .venv/bin/python eval/preview/coastal_preview.py`). <http://127.0.0.1:4174/> is Codex's older export served from its own directory and <http://127.0.0.1:4175/> its water study; both left running. Browser previews, not device captures |
 
 ## 2. What changed, and the checks
 
@@ -55,8 +57,8 @@ the practice demo beside Play as a quiet Try picture holds entry that opens
 the demo's own page; Back returns one level at a time, to the page that
 opened it with focus on that entry, then to Home with focus on Details. The
 launcher icon and the Fire TV tile carry the warm-sand inset border Alex
-asked for. The browser renders in the README and `docs/design/README.md` are
-regenerated from this commit.
+asked for. The browser renders were regenerated from this commit, then refreshed from
+`4016e8d` for the one-voice copy.
 
 **Integrated from the approved design (`b22d275`, Codex):** the ivory coast on
 every menu screen with the dimensional coastal artwork, the expressive Harbor
@@ -157,7 +159,8 @@ home" breadcrumb as well as the focus breadcrumb, and the device's log limiter
 dropped the screen line (friction log entry 12); the first focus after launch
 was Play on Home with the app running, which is what the first session judged
 by. Pause and resume, the remote seek and the caption control were observed on
-package 4 (its second pass) and the player code did not change since.
+package 4 (its second pass); they were not repeated in package 5's receipt.
+Those earlier observations do not establish package 5's pixels or audio.
 
 ### 3a. Package 4 (`819de40`, the simplified Home), late Oct 14
 
@@ -263,15 +266,18 @@ section 3 and confirm by looking and listening:
 2. Details: "Harbor" with "20 sec · No flashing found", Play, and Try picture
    holds beside it. Try picture holds opens the demo's page ("20 sec · 2
    practice holds"); Play there: the countdown and Skip, then at each hold the
-   calm still (not black) with the "Holding a calm scene" card, captions
+   calm still (not black) with the "Holding the picture" card, captions
    changing, sound continuing without a gap. Back returns to the demo's page,
    then to Harbor's Details with focus on Try picture holds, then Home.
 3. Harbor: plays through, sound audible, no hold, no error screen.
 4. Playback controls: dark and readable over the video; pause shows a readable
    paused state after the controls hide; Back returns to the launching screen.
-5. Parents: a wrong PIN refused with tries remaining, Delete corrects, the
-   right PIN opens presets, room, chime, motion and sounds; a changed preset
-   survives a relaunch.
+5. Parents: Alex enters the existing household PIN himself. Check that a wrong
+   PIN is refused with tries remaining, Delete corrects, the right PIN opens
+   presets, room, chime, motion and sounds, and a changed preset survives a
+   relaunch. Check Back from the PIN gate too: package 5 reported Home with
+   Details focused, not Parents, so return focus to the opening control remains
+   an owner check.
 6. How it works reads correctly in four short lines; the home scene's reading
    edge fades the artwork behind the text.
 7. VoiceView, if available, names controls by their accessible names.
@@ -281,12 +287,13 @@ hash. Do not reset household data.
 
 ## 5. Remaining owner actions, by submission impact
 
-1. Run the checklist in section 4 and decide whether `819de40`, with the
-   documentation on top, becomes the judged release; then merge to `main` and
-   cut the tag that never moves. The branch is on origin already; the hosted
-   CI and Audit workflows run on pull requests, so opening a draft pull request
-   from `claude/final-candidate-2026-10-14` is what runs them. One command
-   does it, with this handoff as the body:
+1. Run the checklist in section 4 and decide whether package 5 from `4016e8d`,
+   with its candidate documentation, becomes the judged release. Choose the
+   exact commit or release reference judges will use. Merging to `main` and
+   cutting a tag are release choices, not stated hackathon requirements.
+   The branch is on origin already; opening a draft pull request from
+   `claude/final-candidate-2026-10-14` would run the hosted CI and Audit
+   workflows. If authorized, this command opens it with the handoff as its body:
 
    ```sh
    gh pr create --draft --base main --head claude/final-candidate-2026-10-14 \
@@ -299,8 +306,8 @@ hash. Do not reset household data.
 2. Authorize and make the recording from
    [`docs/submission/DEMO_SCRIPT.md`](docs/submission/DEMO_SCRIPT.md), assemble
    and check it, upload to YouTube or Vimeo, and check the link logged out.
-3. Choose reviewer access: public (merge, licence visible in About, audit
-   exception dates, private vulnerability reporting, item 5) or private with
+3. Choose reviewer access: public (licence visible in About, audit exception
+   dates, private vulnerability reporting, item 5) or private with
    `testing@devpost.com` and the six Amazon reviewers invited at submission.
    Fill in the About box either way.
 4. Confirm eligibility, the contact email and the Devpost registration.
@@ -312,8 +319,8 @@ hash. Do not reset household data.
    opened from a fork under your account (`docs/upstream-pr/`, steps in
    `docs/OPEN_SOURCE_PR.md`); the private repository on its own does not
    establish it. The AWS Builder entry is possible with the deployed stack
-   (`docs/SUBMISSION.md` section 10.2) and the cost allocation tag is still
-   inactive; the overview also says building with Kiro Crew qualifies on its
+   (`docs/SUBMISSION.md` section 10.2). The cost allocation tag was recorded
+   inactive on Oct 9; its current state and billing coverage are unverified; the overview also says building with Kiro Crew qualifies on its
    own, which this project did not use.
 7. Approve the friction log (44 entries) and product feedback for publication
    as written. An Amazon organizer confirmed on the Devpost forum that a link
@@ -339,8 +346,9 @@ repository is private today and GitHub detects Apache License 2.0. The
 candidate branch is on origin; the CI and Audit workflows trigger on pull
 requests, so no hosted run exists for it until a pull request is opened. The
 local equivalent of the CI gate was run on the candidate late on Oct 14 (the
-app suite, the Python suites, ruff, mypy, the hook package, the pin check, the
-conformance rebuild and the committed-tree secret scan); the scan had reported
+app suite, the Python suites, ruff, the hook package, the pin check, the
+conformance rebuild and the committed-tree secret scan; strict mypy was not
+run in that late local gate, as section 2 records); the scan had reported
 four false findings since Oct 13, hashes of renders named `unknown-key.png`,
 which is why the hosted CI run on the shared branch was red, and a narrow
 allowlist now excuses exactly that line shape. Unresolved:
@@ -370,7 +378,8 @@ this handoff.
 
 **Optional, not started:** the caption button for a title without tracks
 opens a menu that lists only Off (it is announced as "Captions unavailable");
-a bundled-still path for prepared titles beyond the practice demo; seeking by
-remote re-observed on the device; the gradient loader message; the Open Source
+a bundled-still path for prepared titles beyond the practice demo; visual
+confirmation of the cover-first remote seek (observed by log on package 4);
+the gradient loader message; the Open Source
 and AWS Builder entries; a changelog section for the judged tag, written when
 the tag exists.
