@@ -1,5 +1,19 @@
 # The upstream contribution
 
+**October 15 read-only check.** Upstream `main` remains
+`ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`. The issue tracker now contains
+thirteen issues and pull requests, including two unrelated open items:
+[issue #12](https://github.com/AmazonAppDev/vega-video-sample/issues/12) about
+BIF metadata and [pull request #13](https://github.com/AmazonAppDev/vega-video-sample/pull/13)
+about a dependency pin. None concerns this Shaka load-rejection fix. The
+[contributor guide](https://github.com/AmazonAppDev/vega-video-sample/blob/main/CONTRIBUTING.md)
+still asks for current-main, duplicate and local-test checks. No patches were
+applied and no tests were run during this read-only check; the Oct 10 focused
+run and Oct 14 clean-apply evidence below retain their original dates.
+No public contribution URL is recorded. Public identity and publication approval
+remain pending. October 22 is the internal submission target; the competition
+deadline is October 23, 2026 at noon PDT (19:00 UTC).
+
 **October 14 late check.** Upstream `main` is still
 `ef8e4da89b22ef7973d0d41beedfa2b42f7bb272` (last pushed Aug 6, 2026); the
 repository's eleven pull requests are all closed and none concerns this fix.
@@ -24,15 +38,15 @@ remain relevant. Evidence: `results/upstream_review_2026-10-10.json`.
 The contribution remains worthwhile and prepared as the two patches below.
 Placeholder patch author metadata must be replaced with the entrant's chosen
 public identity before publication. No fork, PR or qualifying public contribution
-URL has been created. October 12 is a project target, not the hackathon deadline.
+URL has been created. October 12 was an internal project target, not the hackathon deadline.
 
 **Target:** [`AmazonAppDev/vega-video-sample`](https://github.com/AmazonAppDev/vega-video-sample), Amazon's reference video app for Vega. It has merged an outside contributor's pull request before: #7, opened June 18 2026 by an account with no association to the repository, merged July 6 2026. So they do take them.
 
 **Status, Fri Oct 2 2026.** The two existing patches and their three added tests
 were reapplied and revalidated locally against the pristine sample. They remain
 ready-to-apply files in [`docs/upstream-pr/`](upstream-pr/). **No public fork,
-issue or pull request has been created.** The contribution link remains due by
-Monday October 12.
+issue or pull request has been created.** The original internal contribution target was Monday October 12; it passed.
+Use the current target and competition deadline above.
 
 The Oct 2 read-only GitHub check found upstream `main` still at
 [`ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`](https://github.com/AmazonAppDev/vega-video-sample/commit/ef8e4da89b22ef7973d0d41beedfa2b42f7bb272).
@@ -155,7 +169,7 @@ Two files of source and one of tests. They land as two commits.
 
 **Commit 2, `VideoHandler.ts` and `VideoHandler.test.ts`: catch it, report it, and cover it.**
 
-`VideoHandler.ts` uses `Promise.resolve(...)` rather than `await`, which means it works against either signature, so the two commits are independent and either one is safe on its own.
+`VideoHandler.ts` uses `Promise.resolve(...)` rather than `await`, so the caller remains compatible with either return signature. Both commits are required to fix this upstream version: if `ShakaPlayer.load()` still returns `void`, wrapping that return value cannot catch the promise dropped inside it. Keep the two patches together.
 
 ### The patch
 
@@ -382,6 +396,10 @@ One real upstream problem did turn up while running the suite, and it is not thi
 
 That last row is the honest gap, and the pull request says so: the test covers the `VideoHandler` half, because `jest.setup.ts` mocks `ShakaPlayer`. The `ShakaPlayer.ts` return type change has no unit coverage, and reverting it alone would not turn any test red.
 
+The unexecuted [wrapper-test proposal](upstream-pr/README.md) describes the
+smallest check that would make reverting the wrapper fix fail a test, plus a
+teardown test that calls the real destruction method. It is not new pass evidence.
+
 ---
 
 ## Risk
@@ -434,8 +452,9 @@ For Pull Requests:
      load was in flight (`destroyMediaPlayerSync` nulls `this.player.current`
      before the rejection lands, and an aborted load is not a playback error).
      It uses `Promise.resolve(...)` rather than `await`, so it behaves
-     correctly whether `load()` returns a promise or not, which keeps the two
-     changes independent.
+     safely with either return signature. On current upstream both changes
+     are needed: the wrapper must return the promise for this handler to see
+     its rejection.
 
   3. `test/utils/VideoHandler.test.ts` - three tests. One proves an
      asynchronously rejected load sets the video error. One proves an aborted
@@ -495,10 +514,9 @@ a long time, because a spinner that never stops looks like a network problem
 rather than a load error, and there is nothing in the log that says otherwise
 unless you are watching for an unhandled rejection.
 
-Happy to split this into two pull requests, or to drop the `ShakaPlayer.ts`
-half and keep only the caller-side `.catch`, if you would rather not change
-that file. The caller-side change is useful on its own once `load()` returns
-anything awaitable, and harmless if it never does.
+The two commits separate the wrapper contract from the caller's error handling,
+but both are needed on current upstream to surface an asynchronous load failure.
+Please review them together as one fix.
 
 ### Checklist
 
@@ -555,7 +573,7 @@ anything awaitable, and harmless if it never does.
 
 One decision that is yours, not this machine's: the patches carry no co-author or generated-with trailer. Our own repository puts one on every commit. A contribution to someone else's repository goes out under your name, so the trailer is left off rather than added on your behalf. Add one before pushing if you would rather it were there.
 
-It does not need to be merged by the deadline. It needs to exist by **Monday October 12**. The only outside pull request this repository has ever merged was a two-line documentation change, and it took eighteen days, so plan for the link rather than the merge.
+It does not need to be merged by the deadline. October 12 was an internal target that passed; the current submission target is **Thursday October 22**, before the competition deadline of **Friday October 23, 2026 at noon PDT (19:00 UTC)**. Keep the contribution field pending until an actual qualifying public contribution exists. A bug-report issue alone is not a substitute. Publication still needs Alex's approval and chosen public identity.
 
 ---
 
@@ -565,7 +583,7 @@ Three fields in `docs/SUBMISSION.md` depend on this file. None of them can be fi
 
 | Field | What goes in it | State |
 |---|---|---|
-| 12.1 Contribution URL | The pull request URL, `https://github.com/AmazonAppDev/vega-video-sample/pull/<n>`. If the issue is filed first and the pull request is late, the issue URL is a usable stand-in on the same repository | **NEEDS ALEX.** Nothing is pushed. Due Mon Oct 12 |
+| 12.1 Contribution URL | The actual public contribution URL after publication; record the pull request URL if this plan is used. A bug-report issue alone is not a substitute | **NEEDS ALEX.** Identity and publication approval pending. Target Thu Oct 22 |
 | 12.3 GitHub username | The account that owns the fork, which is the account that appears on the pull request | **NEEDS ALEX.** The repository here is under `alejandro-publius`; confirm the same account forks upstream, or say which one does |
 | 12.4 What we did, and why it matters | Written. The upstream half says three tests, two of which fail without the fix | Ready |
 
