@@ -35,7 +35,9 @@ source hashes match. The Irminger case freshly reproduces its WCAG findings;
 every covered decoded frame in its three retained renditions passes the numeric
 still comparison. No download, new trust, media integration or private key was
 needed. No independent detector or medical validation follows from this.
-Claude's `3af32e4` test/spec review was read-only assessed and not integrated.
+Claude's `3af32e4` test/spec review is now integrated as tests/docs only;
+all 22 focused tests pass. The [integration receipt](results/detector-review/integration.json)
+confirms unchanged detector, app inputs, maps, trust and installed package.
 
 The [submission packet](docs/submission/README.md), readiness matrix, Devpost
 draft, reviewer steps and demo script now describe this actual candidate.

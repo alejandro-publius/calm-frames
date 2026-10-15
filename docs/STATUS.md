@@ -7,7 +7,9 @@ fixed. The corrected TV seek-bar check and 16 native observations pass by logs;
 [current receipt](../results/transport-focus-2026-10-15/receipt.json) and
 [handoff](../FINAL_HANDOFF.md). The app remains running, catalogs/keys and saved
 preferences unchanged. Seven earlier positive sources were recovered by hash;
-one case was reproduced headlessly. Submission documents are reconciled.
+one case was reproduced headlessly. Claude detector validation tests/docs are
+integrated with 22 focused passes and no production or package changes.
+Submission documents are reconciled.
 Owner visual/audio acceptance, independent detector/physical-TV/loop validation,
 licensing, release/access decisions, recording and publication remain open.
 Live AWS state is unverified; optional Open Source does not require a PR.

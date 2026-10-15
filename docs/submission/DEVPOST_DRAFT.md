@@ -79,8 +79,9 @@ budget coverage and billing have not been reverified in this pass.
   historical ledger hashes. A fresh headless Irminger waves check reproduced
   the historical findings; numeric comparisons checked every covered frame
   in its three retained renditions. This adds no video or trust to the app.
-- Claude's separate detector test/specification review is read-only evidence
-  under assessment. It is not independent detector or clinical validation.
+- Claude's detector test/specification review is integrated as tests/docs only;
+  the <!--n results/detector-review/integration.json:tests.passed -->22<!--/n--> focused boundary tests pass. No production detector or media changed.
+  This is not independent detector or clinical validation.
 
 ## Limits and what remains
 

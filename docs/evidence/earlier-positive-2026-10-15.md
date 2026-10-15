@@ -69,7 +69,10 @@ file and audit receipts. The [read-only assessment](../../results/earlier-positi
 records its paths, hashes and claimed runs. Exact working-pixel area boundaries,
 red/general tally separation and temporal intervals are tested; mutation
 controls are reported by Claude. No production detector or media artifact
-changed, and this commit was not integrated by this pass.
+changed. It was subsequently integrated under explicit follow-up authorization;
+[the integration receipt](../../results/detector-review/integration.json) records
+22 passing focused tests and unchanged installed app inputs. The read-only
+assessment linked above remains the historical pre-integration record.
 
 The review exposes limits rather than certifying the product: reduced working
 resolution, display assumptions, unsupported exceptions, HDR and loop seams.

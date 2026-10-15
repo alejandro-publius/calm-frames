@@ -4,7 +4,9 @@ Completed historical brief: Claude delivered ec323fc; Codex audited and
 integrated only the approved Acadia catalog on app source 0a54252. Read
 FINAL_HANDOFF.md for the current build/native result. Do not rerun acquisition,
 preparation or key generation from this old brief. The separate follow-up lane
-is bounded detector tests and specification review, as assigned by the owner.
+delivered `3af32e4`; its tests/docs are integrated with 22 focused passes.
+See results/detector-review/integration.json. No production detector or bundle
+was regenerated.
 
 ## Objective and boundaries
 
