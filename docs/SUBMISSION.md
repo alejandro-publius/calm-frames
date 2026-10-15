@@ -457,8 +457,8 @@ The heaviest complaint, in one line each, is in that file's "At a glance" table.
 confirmed HUMAN CHECKPOINT D. He ran `make deploy` in his own terminal, from a
 detached worktree at commit c5724de, and approved the IAM changes at the CDK
 prompt himself. `CalmFramesStack` in us-east-1 was created between 00:21 and
-00:25 PDT, updated at 00:33 to give the ingest task a signing key, and stands at
-<!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n--> with
+00:25 PDT, updated at 00:33 to give the ingest task a signing key, and read
+<!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n--> at 02:50 PDT that day, with
 <!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n--> resources and
 <!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways. A calm
 marker clip, never a `HAZARD_` file, went through it twice. Unsigned, at 00:27,
@@ -487,12 +487,12 @@ title is prepared, not where it is watched.
 | **Amazon CloudFront** | Serves the delivery bucket through origin access control, so the bucket itself stays private. Signed URLs when a public key is configured; the Oct 9 stack has none, so it serves a title to anyone who has its path. A byte range request came back <!--n results/aws_deploy_2026-10-09.json:read_back.byte_range_status -->206<!--/n-->. | The app needs range requests and reasonable latency for HLS. Origin access control means no public bucket. |
 | **Amazon DynamoDB** | The title catalog, on demand, keyed by the source file's SHA-256, with the same fields as the local JSON catalog. The refused run wrote no row and the signed run wrote one. | On-demand billing suits a workload that is quiet most of the time, and the hash key is the natural identity for a title. |
 | **AWS Fargate on Amazon ECS** | The ingest task, ARM64, <!--n results/aws_deploy_2026-10-09.json:stack.task_cpu_units -->2048<!--/n--> CPU units and <!--n results/aws_deploy_2026-10-09.json:stack.task_memory_mib -->4096<!--/n--> MiB, running the same container as the local pipeline. | No servers to keep alive between titles, and the same image runs locally, so what CI tests is what runs. |
-| **Amazon ECR** | Holds that image, <!--n results/aws_deploy_2026-10-09.json:image.size_mb -->279<!--/n--> MB, with ECR's basic scan on push. That scan reported <!--n results/aws_deploy_2026-10-09.json:image.scan_on_push.findings_total -->101<!--/n--> findings, <!--n results/aws_deploy_2026-10-09.json:image.scan_on_push.critical -->8<!--/n--> critical and <!--n results/aws_deploy_2026-10-09.json:image.scan_on_push.high -->56<!--/n--> high, all in Debian packages from the base image or the pinned ffmpeg, none in the Python packages. They are open: the image has not been rebuilt since. | It is where a Fargate task definition reads from, and its scan saw what our own audit does not cover. |
+| **Amazon ECR** | Holds that image, <!--n results/aws_deploy_2026-10-09.json:image.size_mb -->279<!--/n--> MB, with ECR's basic scan on push. That scan reported <!--n results/aws_deploy_2026-10-09.json:image.scan_on_push.findings_total -->101<!--/n--> findings, <!--n results/aws_deploy_2026-10-09.json:image.scan_on_push.critical -->8<!--/n--> critical and <!--n results/aws_deploy_2026-10-09.json:image.scan_on_push.high -->56<!--/n--> high, all in Debian packages from the base image or the pinned ffmpeg, none in the Python packages. No later image rebuild or scan is recorded here; resolution remains unverified. | It is where a Fargate task definition reads from, and its scan saw what our own audit does not cover. |
 | **AWS Lambda** | A small function started by an S3 upload notification, which runs the Fargate task. | The plan rules out Step Functions and EventBridge while the cut list still has items on it, and one small function is the least machinery that does the job. |
 | **AWS Systems Manager Parameter Store, with AWS KMS** | Holds the cloud demo signing key as a SecureString under the account's own `aws/ssm` key. The task role may read that one parameter, and decrypt it only through SSM. | The task gets a key without one in the image or its environment, and it is never a key the TV trusts. |
 | **Amazon VPC** | Public subnets only, `nat_gateways=0`, the task gets a public IP. | The CDK default of a NAT gateway per availability zone would have been the biggest line on the bill. |
 | **AWS IAM with GitHub OIDC** | **Defined and unit tested, not deployed.** The stack can make a deploy role for GitHub Actions to assume. The Oct 9 deploy left `githubRepo` empty, so neither the OIDC provider nor the role exists and no workflow can reach the account. The deploy ran from Alex's terminal with his own credentials. | No AWS access key is ever stored in the repository or in GitHub secrets. |
-| **AWS Budgets** | A <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollar monthly budget with alerts at 50 and 80 percent of actual spend and 100 percent of forecast, counting costs tagged `Project=calm-frames`. That tag was not yet active for cost allocation on Oct 9, so the budget cannot alert anyone until it is. | A warning on a hobby project's spending, made in the same deploy as everything it watches. It is a warning, not a brake. |
+| **AWS Budgets** | A <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollar monthly budget with alerts at 50 and 80 percent of actual spend and 100 percent of forecast, counting costs tagged `Project=calm-frames`. That tag was not active for cost allocation at the Oct 9 check, so the budget could not attribute those costs. Its current activation and billing status have not been rechecked here. | A warning on a hobby project's spending, made in the same deploy as everything it watches. It is a warning, not a brake. |
 | **Amazon CloudWatch Logs** | Task logs, kept <!--n results/aws_deploy_2026-10-09.json:stack.stack_log_group_retention_days -->14<!--/n--> days. Both runs' logs are there. | Retention means old logs stop costing money on their own. |
 | **Cost allocation tags** | On everything in the stack, and on the CDK bootstrap and the SSM parameter. | So the bill can be read per project, once the tag is active. |
 
@@ -505,11 +505,14 @@ task ran four times as long as the
 <!--n results/cost_estimate.json:assumptions.task_minutes_per_title -->15<!--/n--> minutes
 assumed. That task time is the estimate's largest unknown, and the Oct 9 runs do
 not settle it, because a short calm clip says nothing about a full-length title.
-It is an estimate, not a bill. The bill is the measure, and the budget above
-cannot see it until the tag is active. The stack stays up until the results,
-about Dec 3. `make destroy` then removes the stack, and the few pieces that live
-outside it are removed by hand, as
-[`pipeline/infra/README.md`](../pipeline/infra/README.md) lists under "Taking it down".
+It is an estimate, not a bill. The Oct 9 budget reading of 0.0 US dollars
+was not proof of zero spend: its tag filter was not active. Current charges,
+credit application and cost-tag activation remain unverified here; the bill
+is the measure. Whether to retain the stack through judging or tear it down
+remains the owner's decision; no current resource state was verified in this
+review. Teardown would also need to cover the resources outside the stack,
+as [`pipeline/infra/README.md`](../pipeline/infra/README.md) lists under
+"Taking it down".
 
 **What we would tell another builder.** Two things from before the deploy, and
 four from the night itself. The `ec2.Vpc` default is one NAT gateway per
@@ -532,15 +535,15 @@ because the IAM approval prompt needs one. All of it is written up in
 
 The AWS work in this project is **an AWS CDK application in [`pipeline/infra/`](../pipeline/infra/), unit tested against its synthesized template and deployed once, on Oct 9, 2026.** Here is what that does and does not mean, with every number read from [`results/aws_deploy_2026-10-09.json`](../results/aws_deploy_2026-10-09.json):
 
-- **The stack runs.** `CalmFramesStack`, in us-east-1, was created between 00:21 and 00:25 PDT from commit c5724de and updated at 00:33 to wire in a cloud signing key. At 02:50 it read <!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n-->, with <!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n--> resources, <!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways and <!--n results/aws_deploy_2026-10-09.json:stack.outputs_total -->5<!--/n--> outputs.
+- **The stack ran on Oct 9.** `CalmFramesStack`, in us-east-1, was created between 00:21 and 00:25 PDT from commit c5724de and updated at 00:33 to wire in a cloud signing key. At 02:50 it read <!--n results/aws_deploy_2026-10-09.json:stack_status -->UPDATE_COMPLETE<!--/n-->, with <!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n--> resources, <!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways and <!--n results/aws_deploy_2026-10-09.json:stack.outputs_total -->5<!--/n--> outputs.
 - **A person deployed it, with the checkpoint confirmed first.** Alex confirmed HUMAN CHECKPOINT D, ran `make deploy` in his own terminal and approved the IAM changes at the CDK prompt: <!--n results/aws_deploy_2026-10-09.json:iam_approval.statement_rows -->20<!--/n--> statement rows, <!--n results/aws_deploy_2026-10-09.json:iam_approval.managed_policy_rows -->3<!--/n--> managed policies and <!--n results/aws_deploy_2026-10-09.json:iam_approval.security_group_rows -->1<!--/n--> security group rule. The checkpoint's credit request clause is void, because the form closed on Oct 7, and he waived it ([`docs/GATES.md`](GATES.md)).
 - **It ran twice, on a calm marker clip, never a `HAZARD_` file.** Unsigned, at 00:27 PDT, the task analyzed the clip and refused to publish it, exit <!--n results/aws_deploy_2026-10-09.json:runs.0.exit_code -->1<!--/n-->: the fail closed rule, on AWS. Signed with a cloud demo key, at 00:35, it published <!--n results/aws_deploy_2026-10-09.json:runs.1.published_objects -->16<!--/n--> objects and <!--n results/aws_deploy_2026-10-09.json:runs.1.catalog_rows -->1<!--/n--> catalog row <!--n results/aws_deploy_2026-10-09.json:runs.1.seconds_upload_to_published -->66.5<!--/n--> seconds after the upload, and CloudFront served the HLS master playlist with HTTP <!--n results/aws_deploy_2026-10-09.json:runs.1.cloudfront_status.hls_master_playlist -->200<!--/n-->. The signed map had <!--n results/aws_deploy_2026-10-09.json:runs.1.flagged_segments -->0<!--/n--> flagged segments, so AWS has not yet produced a cover on any title, and a short calm clip measures neither a real title's time nor its cost.
 - **The TV does not use it.** The cloud demo key is not one the app trusts, by design, so a map made in the cloud plays on no TV. The app's library is compiled into its package. AWS is where a title is prepared, not where it is watched.
 - **Not deployed, on purpose:** the GitHub OIDC provider and deploy role, which are defined and unit tested, and CloudFront signed URLs.
-- **The budget cannot warn anyone yet.** The <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollar budget counts costs tagged `Project=calm-frames`, and that tag was not active for cost allocation on Oct 9.
+- **The budget was not tracking these costs at the Oct 9 check.** The <!--n results/aws_deploy_2026-10-09.json:budget.limit_usd -->20<!--/n--> US dollar budget counts costs tagged `Project=calm-frames`, and that tag was not active for cost allocation then. Its 0.0 US dollar reading does not establish zero spend. Current cost-tag activation, charges and credit application remain unverified here.
 - **Nothing in the repository names the account.** The record was written from read-only calls with every account id, bucket name, domain, ARN and repository URI left out. [`docs/GATES.md`](GATES.md), [`docs/SECURITY.md`](SECURITY.md) and [`pipeline/infra/README.md`](../pipeline/infra/README.md) tell the same night in more detail.
 
-**NEEDS ALEX:** activate `Project` as a cost allocation tag (Billing and Cost Management, Cost allocation tags, User-defined), so the budget can see the bill. [`pipeline/infra/README.md`](../pipeline/infra/README.md) has the steps.
+**NEEDS ALEX:** check current charges and whether `Project` is active as a cost allocation tag. If it is still inactive, activation is a separate account change requiring approval. [`pipeline/infra/README.md`](../pipeline/infra/README.md) has the steps. The Oct 15 document review made no AWS calls.
 
 ### 11.2 Whether this qualifies, now that it is deployed
 
@@ -568,7 +571,7 @@ Neither the rules page nor the overview page defines "incorporates". Until Oct 9
 NEEDS ALEX
 ```
 
-**NEEDS ALEX:** the pull request has to be opened by **Monday October 12** so that this URL exists. The branch, the title and the body are prepared in [`docs/OPEN_SOURCE_PR.md`](OPEN_SOURCE_PR.md). It has not been opened and the branch has not been pushed anywhere, because opening it needs a fork under your own GitHub account. It does not need to be merged by the deadline, only opened.
+**NEEDS ALEX:** approve the public contribution and confirm its account and author identity before a fork, branch or pull request is published. The two patches, title and body are prepared in [`docs/OPEN_SOURCE_PR.md`](OPEN_SOURCE_PR.md), but no public contribution URL is recorded. October 12 was an internal target that passed; the current submission target is **Thursday October 22**, ahead of the competition deadline of **Friday October 23, 2026 at noon PDT (19:00 UTC)**. Keep this field pending until an actual qualifying contribution URL exists; a bug-report issue alone is not a substitute.
 
 ### 12.2 Project repository URL
 
@@ -592,20 +595,23 @@ The open-source parts of this project are:
 NEEDS ALEX
 ```
 
-**NEEDS ALEX:** the repository lives under `alejandro-publius`. Confirm which GitHub account should be credited on the contribution and which one forks the upstream repository, because the fork's owner is what appears on the pull request. Both answers are needed before Oct 12.
+**NEEDS ALEX:** the repository lives under `alejandro-publius`. Confirm which GitHub account should be credited on the contribution and which one forks the upstream repository, because the fork's owner is what appears on the pull request. Both answers are needed before publication, planned for the October 22 submission target.
 
 ### 12.4 What we did, and why it matters
 
 ```
-We contributed in two directions: a fix upstream, and a reusable tool
-downstream.
+We prepared two open-source integration paths: a proposed upstream fix and
+reusable downstream tools. Public contribution and release links are pending.
 
 UPSTREAM
 
-A pull request to AmazonAppDev/vega-video-sample, Amazon's reference video app
-for Vega, fixing a real playback defect we hit while building on it, with three
-tests, two of which fail without the fix. Details, including the root cause and
-the tests, are in docs/OPEN_SOURCE_PR.md in our repository.
+Two patches prepared for AmazonAppDev/vega-video-sample, Amazon's reference
+video app for Vega, address a playback defect we hit while building on it.
+Three caller-side tests accompany them; two were observed to fail without
+the caller fix. The last focused run passed six tests on October 10, and both
+patches applied cleanly on October 14. The Shaka wrapper's promise return is
+not directly covered by those mocked tests. No public pull request has been
+opened. Details and limitations are in docs/OPEN_SOURCE_PR.md.
 
 Why it matters: every developer who starts from that sample inherits the bug.
 A fix there is worth more than a fix in our own fork, because it is a starting
@@ -714,32 +720,32 @@ Anything quoted from outreach goes in [`docs/VALIDATION.md`](VALIDATION.md), wit
 
 ## 16. Completion and approval checklist
 
-Preparation, local tests and capture can proceed autonomously. Alex is needed for missing personal details and final approval to publish, submit, change visibility or incur additional cloud costs. October 12 and October 22 are planning targets; the hard deadline is October 23 at noon Pacific.
+Preparation and local tests can proceed within existing permissions. Recording and screenshot capture require renewed explicit approval. Alex is needed for missing personal details and final approval to publish, submit, change visibility or incur additional cloud costs. October 12 was an internal target that passed; October 22 is the current submission target. The hard deadline is October 23, 2026 at noon PDT (19:00 UTC).
 
 | # | What | When | Field it unblocks |
 |---|---|---|---|
 | 0 | **Done Oct 9: the AWS Builder question.** The stack is deployed and has run twice (section 11), so whether an undeployed stack counts no longer arises. Kiro Crew is a route we have not taken and must not imply we have | Done | 5, 11 |
 | 0b | **Done Oct 9 to 10: simulator screen recording.** ScreenCaptureKit recorded the simulator window with picture and audio; the saved takes show both Harbor holds, their English captions and non-silent sound, and the record is `results/redesign_validation_2026-10-10.json` | Done | 7 |
 | 0d | **Validate and record the cloud design polish.** Rebuild on the Mac, check native D-pad focus, scrolling, saved settings and playback, then refresh the demo, manifest, package hashes and review bundle to match | Before video or release publication | 7, 9 |
-| 0c | **Activate `Project` as a cost allocation tag**, so the 20 dollar budget can see the bill. Until then it cannot warn anyone (section 11.1) | **Now.** A new tag can take up to a day to appear for activation | 11 |
-| 1 | **Confirm the GitHub username** to credit on the Open Source fields, and which account forks the upstream repository | Before Mon Oct 12 | 12.3 |
-| 2 | **Open the upstream pull request** from a fork under your own account, and paste the URL | By Mon Oct 12 | 12.1 |
+| 0c | **Check current charges and `Project` cost-tag activation.** The Oct 9 budget reading did not establish zero spend. Seek approval for activation if still needed (section 11.1) | Before further cloud use; no fresh AWS check in this review | 11 |
+| 1 | **Confirm the GitHub username and public commit identity** for the Open Source contribution | Before publication, planned by Thu Oct 22 | 12.3 |
+| 2 | **Approve and publish the upstream contribution**, keeping both patches together, then paste the actual URL | Target Thu Oct 22; competition deadline Fri Oct 23, noon PDT | 12.1 |
 | 3 | **Done Oct 9: first-run PIN instructions verified** on the simulator, including a mismatched confirmation and a Delete correction; no preset PIN is embedded in the package | Done | 9 |
-| 4 | **Done Oct 9: HUMAN CHECKPOINT D.** The Paid plan and the 20 dollar budget are in place, and the credit clause is void because the form closed on Oct 7 | Done | 11 |
+| 4 | **Done Oct 9: HUMAN CHECKPOINT D.** The Paid plan and 20 dollar budget were recorded then; cost-tag activation and current billing still need verification. The credit request clause is void because the form closed on Oct 7 | Historical checkpoint complete | 11 |
 | 5 | **Any outreach reply you want quoted** goes into `docs/VALIDATION.md`, with permission | By Fri Oct 16 | 15 |
 | 6 | **Done for the earlier build: English demo edited.** Actual simulator footage, labelled still captures, synthetic English narration, subtitles and source manifest. Refresh for the current polish under item 0d | Earlier build complete | 7 |
 | 7 | **Done for the earlier build: finished-file check.** Duration below three minutes and WCAG check pass; receipt in `results/redesign_video_check.json`. Rerun on the refreshed cut | Earlier build complete | 7 |
 | 8 | **Upload the video** and check the link works while logged out | Before Thu Oct 22 | 7 |
-| 9 | **Read the forty friction entries** and confirm you are happy for them to be published as written | Before submission | 14 |
-| 9b | **Merge PR #1 into main.** The hosted Audit and CI runs on the Oct 11 push (ba819dc) are green in every job, recorded in `results/github_push_2026-10-11.json`. A public repository shows main by default, and main does not yet hold the scene-hold work, so the merge has to land before item 10 and the judged tag is cut from main after it | Before **Wed Oct 21** | 6, 9 |
-| 9c | **Send the three outreach emails** in `docs/outreach/`, overdue since Sep 18; `docs/VALIDATION.md` still says not yet | Now | 15 |
-| 9d | **Send the Amazon sample licence clarification** in `docs/AMAZON_SAMPLE_LICENSE_REVIEW.md`, as an upstream issue or to the hackathon's Amazon contacts, and record where and when | By **Tue Oct 13** | 6 |
-| 9e | **Review `scripts/audit_exceptions.toml`** at the final checks: re-run `make audit-update`, re-read both groups, move both `review_by` dates past Dec 3, and confirm the CC0 dedication of the Harbor artwork in `media/LICENSES.csv` | **Wed Oct 21** | 6 |
-| 10 | **Make the repository public** and confirm Apache-2.0 shows in GitHub's About box | **Wed Oct 21**, during the final checks | 6 |
+| 9 | **Review the current friction-log entries** and approve the wording before publication | Before submission | 14 |
+| 9b | **Select the verified final candidate and branch.** The Oct 11 PR #1 CI result is historical and does not prove the current candidate passed. Any merge, pull request or tag requires approval; none is mandatory merely to reuse that older result | Before selecting submission links | 6, 9 |
+| 9c | **Review the outreach drafts** in `docs/outreach/` and obtain approval for the recipients and messages before sending. Keep external validation pending unless an actual response supports it | Only after approval | 15 |
+| 9d | **Review the Amazon sample licence clarification draft** in `docs/AMAZON_SAMPLE_LICENSE_REVIEW.md` and obtain approval for its recipient and wording before outreach. Record any actual response and its scope | Before relying on a licence clarification for publication | 6 |
+| 9e | **Review current audit findings and `scripts/audit_exceptions.toml`.** Any exception extension must follow a supported review of the actual finding, scope and risk; do not move dates solely to pass a deadline check. Confirm the Harbor artwork's CC0 dedication in `media/LICENSES.csv` | During final checks | 6 |
+| 10 | **Choose the repository access route explicitly.** Public visibility requires the owner's approval; the permitted private reviewer-access route remains an option. Verify the chosen reviewer access and licence information before submission | Owner decision before submission | 6 |
 | 11 | **Publish the release** and paste the `.vpkg` links and the tag into the testing instructions | **Wed Oct 21**, after the final checks | 9 |
 | 12 | **Confirm remaining entrant details**: eligibility and contact email; entrant name, country of residence and solo status are confirmed. Confirm the gallery image and "try it out" link on the live form (section 7a) | Submission day | 7a, 15 |
 | 13 | **Press submit** at HUMAN CHECKPOINT G | **Thu Oct 22** | all |
 
 Requesting the 150 dollar AWS credits used to be on this list. It is gone: the form closed on Oct 7, 2026, and Alex plans to use his existing credits. Their coverage of this stack and application to billed usage remain unverified.
 
-The deadline is **Friday October 23 at 12:00 PT**. We submit a day early on purpose, so that a form problem on the day is a problem with a day left in it rather than a problem with an hour.
+The deadline is **Friday October 23, 2026 at noon PDT (19:00 UTC)**. We submit a day early on purpose, so that a form problem on the day is a problem with a day left in it rather than a problem with an hour.
