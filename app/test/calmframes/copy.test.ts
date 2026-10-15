@@ -180,7 +180,7 @@ describe('house style', () => {
 
 describe('the record in the parent area', () => {
   it('counts one part as one part, and reads long totals as minutes', () => {
-    expect(hiddenSummary(1, 4_000, 1)).toBe('1 hold, 4 seconds in all.');
+    expect(hiddenSummary(1, 4_000, 1)).toBe('1 scene hidden, 4 seconds in total.');
     // One second used to read "1 seconds".
     expect(describeHiddenTotal(1_000)).toBe('1 second');
     expect(describeHiddenTotal(59_000)).toBe('59 seconds');
@@ -191,9 +191,9 @@ describe('the record in the parent area', () => {
 
   it('says where the list stops, and stays quiet when it does not stop', () => {
     expect(hiddenSummary(25, 100_000, 20)).toBe(
-      '25 holds, 1 minute 40 seconds in all. The 20 most recent are below.',
+      '25 scenes hidden, 1 minute 40 seconds in total. The 20 most recent are below.',
     );
-    expect(hiddenSummary(3, 12_000, 3)).toBe('3 holds, 12 seconds in all.');
+    expect(hiddenSummary(3, 12_000, 3)).toBe('3 scenes hidden, 12 seconds in total.');
   });
 
   it('names the day rather than leaving a bare time to be guessed at', () => {
@@ -212,8 +212,8 @@ describe('the record in the parent area', () => {
   });
 
   it('says the same thing whether the record is one kid or the household', () => {
-    expect(NOTHING_HIDDEN_YET).toBe('No picture holds yet.');
-    expect(nothingHiddenFor('Robin')).toBe('No picture holds for Robin yet.');
+    expect(NOTHING_HIDDEN_YET).toBe('No scenes hidden yet.');
+    expect(nothingHiddenFor('Robin')).toBe('No scenes hidden for Robin yet.');
   });
 });
 
@@ -331,10 +331,10 @@ describe('which notice a title gets', () => {
       entry({
         status: 'failed',
         rejection: 'wrong-file',
-        reason: 'The playback information belongs to a different version of this title.',
+        reason: 'The check for flashing belongs to a different version of this video.',
       }),
     );
     expect(notice?.title).toBe(TITLE_FAILED.title);
-    expect(notice?.detail).toBe('The playback information belongs to a different version of this title. The picture stays hidden.');
+    expect(notice?.detail).toBe('The check for flashing belongs to a different version of this video. The picture stays hidden.');
   });
 });

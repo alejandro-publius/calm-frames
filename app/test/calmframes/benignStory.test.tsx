@@ -152,7 +152,7 @@ describe('the packaged benign story', () => {
       JSON.stringify(
         screen.getByTestId('title-details-demo-label').props.children,
       ),
-    ).toContain('practice holds');
+    ).toContain('picture pauses twice');
     fireEvent.press(screen.getByTestId('title-details-play'));
     expect(
       screen.getByTestId('title-details-summary').props.children,
@@ -179,7 +179,7 @@ describe('the packaged benign story', () => {
       });
       expect(practice.skipToMs).toBe(original.skipToMs);
       expect(practice.secondsLeft).toBe(original.secondsLeft);
-      expect(practice.announcement).toMatch(/practice/i);
+      expect(practice.announcement).toMatch(/demo/i);
     }
     const refused = cardAt([], 0, { rejection: 'bad-signature' });
     expect(benignStoryCard(refused)).toBe(refused);
@@ -197,7 +197,7 @@ describe('the packaged benign story', () => {
  *
  *     -   "detail": "In 4 seconds. Press Skip to jump past it.",
  *     +   "detail": "No flashing. The gentle tone and captions continue.",
- *     -   "title": "Practice hold coming up",
+ *     -   "title": "Demo: picture will pause",
  *     +   "title": "A practice hold is coming",
  */
 describe('the Harbor practice cards', () => {
@@ -226,10 +226,10 @@ describe('the Harbor practice cards', () => {
   it('counts down in the real pattern, with the live seconds', () => {
     expect(practiceAt(1000)).toMatchObject({
       kind: 'countdown',
-      title: 'Practice hold coming up',
+      title: 'Demo: picture will pause',
       detail: 'In 4 seconds. Press Skip to jump past it.',
       announcement:
-        'Practice hold coming up in 4 seconds. Press Skip to jump past it.',
+        'Demo: picture will pause in 4 seconds. Press Skip to jump past it.',
     });
     // The second hold's countdown starts while the first one's after card
     // would still be up, and the countdown wins, as it does on a real title.
@@ -242,20 +242,20 @@ describe('the Harbor practice cards', () => {
   it('says what is held while it is held', () => {
     expect(practiceAt(7000)).toMatchObject({
       kind: 'covering',
-      title: 'Holding a calm scene',
-      detail: 'A practice hold. Sound and captions keep playing.',
+      title: 'Picture paused',
+      detail: 'Demo: sound and captions continue.',
       announcement:
-        'Holding a calm scene for practice. Sound and captions keep playing.',
+        'Demo: the picture is paused while sound and captions continue.',
     });
   });
 
   it('says how long it held, and that nothing flashed', () => {
     expect(practiceAt(16_500)).toMatchObject({
       kind: 'after',
-      title: 'Held 4 seconds for practice',
-      detail: 'A practice hold. Nothing flashed, and sound and captions kept playing.',
+      title: 'Picture paused for 4 seconds',
+      detail: 'Demo: no flashing. Sound and captions continued.',
       announcement:
-        'Held 4 seconds for practice. A practice hold. Nothing flashed, and sound and captions kept playing.',
+        'Picture paused for 4 seconds. Demo: no flashing. Sound and captions continued.',
     });
   });
 
@@ -277,7 +277,7 @@ describe('the Harbor practice cards', () => {
       expect(`${timeMs} ms ${card.kind}: ${claimsAFinding.test(words)}`).toBe(
         `${timeMs} ms ${card.kind}: false`,
       );
-      expect(card.announcement).toMatch(/practice/i);
+      expect(card.announcement).toMatch(/demo/i);
     }
   });
 
@@ -302,9 +302,9 @@ describe('the Harbor practice cards', () => {
       const held = interval(10_000, 10_000 + lengthMs);
       const real = cardAt([held], held.endMs + 100);
       expect(real.kind).toBe('after');
-      const phrase = /^Held the picture for (.+)$/.exec(real.title)?.[1];
+      const phrase = /^Scene hidden for (.+)$/.exec(real.title)?.[1];
       expect(phrase).toBeDefined();
-      expect(benignStoryCard(real).title).toBe(`Held ${phrase} for practice`);
+      expect(benignStoryCard(real).title).toBe(`Picture paused for ${phrase}`);
     }
     for (const timeMs of [5000, 5900, 6000, 9000, 9001]) {
       const real = cardAt([interval(10_000, 12_000)], timeMs);
@@ -315,7 +315,7 @@ describe('the Harbor practice cards', () => {
 
   it('keeps the after card honest when it has no interval to measure', () => {
     const bare = benignStoryCard({ kind: 'after', title: '', announcement: '' });
-    expect(bare.title).toBe('Held a calm scene for practice');
-    expect(bare.announcement).toMatch(/practice/i);
+    expect(bare.title).toBe('Demo pause finished');
+    expect(bare.announcement).toMatch(/demo/i);
   });
 });

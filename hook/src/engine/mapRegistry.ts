@@ -459,15 +459,15 @@ export function registryRefusalMessage(
     case 'registry-unsigned':
       return 'The library is missing playback information. The picture stays hidden.';
     case 'registry-unknown-key':
-      return 'The library comes from an unsupported source. The picture stays hidden.';
+      return 'The source of the library could not be verified. The picture stays hidden.';
     case 'registry-bad-signature':
       return 'The library information appears to have changed. The picture stays hidden.';
     case 'registry-wrong-version':
       return 'The library needs a newer version of Calm Frames. The picture stays hidden.';
     case 'not-listed':
-      return 'This title is still being prepared. The picture stays hidden for now.';
+      return 'This video is still being prepared. The picture stays hidden for now.';
     case 'entry-unusable':
-      return 'This title uses an unsupported location. The picture stays hidden.';
+      return 'This video cannot be played from its current location. The picture stays hidden.';
     case 'not-the-listed-map':
       return 'The playback information does not match the library. The picture stays hidden.';
     case 'map-refused':

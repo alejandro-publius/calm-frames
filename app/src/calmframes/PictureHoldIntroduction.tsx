@@ -9,10 +9,10 @@ export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDe
   return <View testID="picture-hold-introduction" style={styles.content}>
     <Text style={styles.title} accessibilityRole="header">How it works</Text>
     <Text style={styles.body}>Calm Frames is for families with photosensitive epilepsy. Every video is checked for flashing, frame by frame, before it can play.</Text>
-    <Text style={styles.body}>When flashing is found, the picture holds on a calm still while the sound and captions continue. A card says when a hold is coming, and Skip jumps past it.</Text>
-    <Text style={styles.detail}>Try two scheduled practice holds in Harbor.</Text>
+    <Text style={styles.body}>Flashing scenes are replaced by a still picture. Sound and captions continue. A warning appears first; Skip jumps past the scene.</Text>
+    <Text style={styles.detail}>Try the demo to see the picture pause while sound continues.</Text>
     <View style={styles.actions}>
-      {onStart ? <CalmButton testID="picture-hold-start" primary label="Play the demo" sound={false} hasTVPreferredFocus disabled={disabled} onPress={onStart} /> : null}
+      {onStart ? <CalmButton testID="picture-hold-start" primary label="Play demo" sound={false} hasTVPreferredFocus disabled={disabled} onPress={onStart} /> : null}
       {onDemoDetails ? <CalmButton quiet testID="picture-hold-demo-details" label="About the demo" disabled={disabled} onPress={onDemoDetails} /> : null}
     </View>
     <Text style={styles.detail}>{`Detection can miss flashing. ${SAFETY_NOTE}`}</Text>

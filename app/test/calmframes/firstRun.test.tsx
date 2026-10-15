@@ -220,7 +220,7 @@ describe('the first run', () => {
       'Your TV and seating',
     );
     expect(JSON.stringify(screen.toJSON())).toContain(
-      'can only add picture holds',
+      'can hide more of the video, never less',
     );
   });
 

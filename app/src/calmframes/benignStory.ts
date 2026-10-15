@@ -12,9 +12,9 @@ import { HouseholdSettings } from './household';
 export const BENIGN_STORY_ID = 'calm-frames-benign-story';
 export const BENIGN_STORY_URI =
   'file:///pkg/assets/raw/benign-story/harbor.precovered.mp4';
-export const BENIGN_STORY_LABEL = 'Practice holds';
+export const BENIGN_STORY_LABEL = 'Demo';
 /** Harbor's second line on the shelf, under its name. */
-export const BENIGN_STORY_SHELF_QUALIFIER = 'Practice holds demo';
+export const BENIGN_STORY_SHELF_QUALIFIER = 'Picture pause demo';
 
 export function benignStoryTitle(): CatalogTitle {
   return {
@@ -156,25 +156,25 @@ export function benignStoryCard(card: Card): Card {
     const left = `${seconds} second${seconds === 1 ? '' : 's'}`;
     return {
       ...card,
-      title: 'Practice hold coming up',
+      title: 'Demo: picture will pause',
       detail: `In ${left}. Press Skip to jump past it.`,
-      announcement: `Practice hold coming up in ${left}. Press Skip to jump past it.`,
+      announcement: `Demo: picture will pause in ${left}. Press Skip to jump past it.`,
     };
   }
   if (card.kind === 'covering') {
     return {
       ...card,
-      title: 'Holding a calm scene',
-      detail: 'A practice hold. Sound and captions keep playing.',
+      title: 'Picture paused',
+      detail: 'Demo: sound and captions continue.',
       announcement:
-        'Holding a calm scene for practice. Sound and captions keep playing.',
+        'Demo: the picture is paused while sound and captions continue.',
     };
   }
   if (card.kind === 'after') {
     const title = card.interval
-      ? `Held ${secondsPhrase(card.interval.endMs - card.interval.startMs)} for practice`
-      : 'Held a calm scene for practice';
-    const detail = 'A practice hold. Nothing flashed, and sound and captions kept playing.';
+      ? `Picture paused for ${secondsPhrase(card.interval.endMs - card.interval.startMs)}`
+      : 'Demo pause finished';
+    const detail = 'Demo: no flashing. Sound and captions continued.';
     return {
       ...card,
       title,

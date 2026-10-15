@@ -18,7 +18,7 @@ test('the practice demo is reached from Details, not from a card on Home', () =>
   const open = jest.fn();
   render(<KidHomeScreen titles={titles} onOpen={open} />);
   expect(screen.queryByTestId('kid-home-demo')).toBeNull();
-  expect(screen.queryByText('Try picture holds')).toBeNull();
+  expect(screen.queryByText('Try the demo')).toBeNull();
   screen.unmount();
   render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={demo} onOpenPractice={open} />);
   fireEvent.press(screen.getByTestId('title-details-practice'));

@@ -18,7 +18,7 @@ The style takes cues from familiar television interfaces. These are original Cal
 | Start the practice demonstration | Play demo |
 | Start the gradient check clip | Play |
 | Open a video's page | Details |
-| Open the practice demonstration's page from a video's page | Try picture holds |
+| Open the practice demonstration's page from a video's page | Try the demo |
 | The explanation page, from Home | How it works |
 | Protected settings, from Home | Parents |
 | Protected settings, as a page title | Parental controls |
@@ -26,11 +26,11 @@ The style takes cues from familiar television interfaces. These are original Cal
 | Return one level | Back |
 | Close an informational dialog | Close |
 
-Since Oct 14 the words are one voice: a **picture hold** is the mechanism,
-everywhere (the cards, the timeline key, the parent area's record, the room and
-profile rules, the chime, the presets); **the picture stays hidden** is the one
-phrase for a video that may not play; **video** is the word for content; and a
-button says what it opens. Say each fact once per screen.
+The Oct 15 copy pass uses **picture pause** to explain the demonstration and
+**hidden scene** to explain flashing removed during playback. The viewer does
+not need to learn the internal word “hold.” Keep **the picture stays hidden**
+for playback that cannot be verified, with the specific reason. Use **video**
+for content. Say each fact once per screen.
 
 Keep visible labels short and give screen-reader labels enough context, such as “Play: Harbor.” Show Resume only when saved playback progress exists. Do not invent durations, ratings, progress, availability, plot details, or medical claims.
 
@@ -40,11 +40,11 @@ Use the actual story synopsis in the native app. The preview's generic Harbor wo
 
 For the scene-hold demo:
 
-> Two practice holds show what a picture hold looks like: the picture holds on a calm still while the sound and captions continue. They are scheduled for practice, not detected flashing.
+> The picture pauses twice while sound and captions continue. This demo contains no flashing.
 
-When explaining the example holds:
+When explaining the demo timing:
 
-> Harbor has no flashing. These two holds are scheduled for practice, 8 seconds in all.
+> This demo has no flashing. The picture pauses 2 times, for 8 seconds in total.
 
 Keep the demo labeled and retain the full evidence limits in submission materials. Do not imply the scheduled holds were detected hazards or that a prepared title guarantees safety.
 
@@ -76,7 +76,7 @@ Carry this copy direction through onboarding, library, details, playback, PIN, s
 
 ## Historical direction, Oct 13 (superseded)
 
-The paragraph below records the earlier direction. The Oct 14 vocabulary and
+The paragraph below records the earlier direction. The Oct 15 vocabulary and
 preferred labels above take precedence; "Original story" and "Watch now" are
 not current interface labels.
 

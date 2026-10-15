@@ -150,7 +150,7 @@ const PRESET_STEP_NOTE = 'You can change this later in parental controls.';
 
 /** Under the review of the household, before the library opens. */
 const REVIEW_NOTE =
-  'Your library shows the titles available with these viewing settings.';
+  'Your library shows videos that can play with these settings.';
 
 /**
  * The notice beside the keypad.

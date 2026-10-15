@@ -12,7 +12,7 @@ const ErrorView = ({ navigateBack }: ErrorViewProps) => (
   <View style={styles.mainContainer} testID="player-error" accessibilityViewIsModal>
     <View style={styles.message} accessible accessibilityRole="alert" accessibilityLiveRegion="polite">
       <Text style={styles.title} testID="error-boundary-label">Playback stopped</Text>
-      <Text style={styles.detail}>Go back and try opening the story again.</Text>
+      <Text style={styles.detail}>Go back and try playing the video again.</Text>
     </View>
     <View>
       <CalmButton primary label="Go back" onPress={navigateBack} hasTVPreferredFocus sound={false} testID="player-error-back" />

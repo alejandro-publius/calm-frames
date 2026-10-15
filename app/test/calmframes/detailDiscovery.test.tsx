@@ -46,14 +46,14 @@ describe('details discovery', () => {
     expect(view.getByTestId('title-details-strip-start')).toHaveTextContent('0:00');
     expect(view.getByTestId('title-details-strip-middle')).toHaveTextContent('0:10');
     expect(view.getByTestId('title-details-strip-end')).toHaveTextContent('0:20');
-    expect(view.getByText('No scheduled holds')).toBeTruthy();
-    expect(view.queryByText('Practice hold')).toBeNull();
+    expect(view.getByText('Video plays normally')).toBeTruthy();
+    expect(view.queryByText('Demo pause')).toBeNull();
   });
 
   it('explains the actual demo marks and their continuity', () => {
     const view = render(<TitleDetailsScreen entry={demo()} onPlay={jest.fn()} />);
-    expect(view.getByText('Practice hold')).toBeTruthy();
-    expect(view.getByText('Sound and captions continue during every hold.')).toBeTruthy();
+    expect(view.getByText('Demo pause')).toBeTruthy();
+    expect(view.getByText('Sound and captions continue when the picture changes.')).toBeTruthy();
     expect(view.getByTestId('title-details-strip-mark-0')).toHaveStyle({ left: 260, width: 208 });
     expect(view.getByTestId('title-details-strip-mark-1')).toHaveStyle({ left: 624, width: 208 });
     expect(view.getByTestId('title-details-strip').props.accessibilityLabel).toContain('From 0:00 to 0:20.');
@@ -75,8 +75,8 @@ describe('details discovery', () => {
     ]} />);
     expect(view.getByTestId('flash-map-strip-middle')).toHaveTextContent('1:02');
     expect(view.getByTestId('flash-map-strip-end')).toHaveTextContent('2:05');
-    expect(view.getByText('Picture hold')).toBeTruthy();
-    expect(view.getByText('Red flash hold')).toBeTruthy();
+    expect(view.getByText('Picture hidden')).toBeTruthy();
+    expect(view.getByText('Red flashing hidden')).toBeTruthy();
     expect(view.getByTestId('flash-map-strip-mark-1')).toHaveStyle({ backgroundColor: COASTAL_COLORS.FAILED });
   });
 });

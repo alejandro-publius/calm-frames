@@ -11,8 +11,8 @@ export function unavailableVariants(base: CheckedTitle): Array<[string, CheckedT
       rejection, reason: rejectionMessage(rejection), segments: [],
     }]),
     ['viewing-settings', { ...base, status: 'pending', segments: [],
-      reason: 'This title is unavailable with your current viewing settings.' }],
+      reason: 'This video is unavailable with your current viewing settings.' }],
     ['generic', { ...base, status: 'failed', segments: [],
-      reason: 'This title is unavailable. The picture stays hidden.' }],
+      reason: 'This video is unavailable. The picture stays hidden.' }],
   ];
 }

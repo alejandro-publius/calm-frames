@@ -145,7 +145,7 @@ describe('useFlashGuard', () => {
     // rather than the "Not checked yet" one a failed map gets.
     expect(read('card-kind')).toBe('checking');
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Getting your video ready',
+      'Preparing your video',
     );
     expect(screen.queryByTestId('calm-card-skip')).toBeNull();
   });
@@ -172,7 +172,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('checking');
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Getting your video ready',
+      'Preparing your video',
     );
   });
 
@@ -271,7 +271,7 @@ describe('useFlashGuard', () => {
     expect(read('card-kind')).toBe('countdown');
     expect(read('covered')).toBe('clear');
     expect(announce).toHaveBeenCalledWith(
-      expect.stringContaining('Picture hold coming up'),
+      expect.stringContaining('Flashing coming up'),
       { queue: true },
     );
 
@@ -284,7 +284,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('covering');
     expect(announce).toHaveBeenCalledWith(
-      'Holding the picture. Flashing was found here. Sound and captions keep playing.',
+      'Flashing hidden. Sound and captions continue while this scene is hidden.',
       { queue: true },
     );
 
@@ -297,7 +297,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('clear');
     expect(read('card-kind')).toBe('after');
     expect(screen.getByTestId('calm-card-title').props.children).toMatch(
-      /^Held the picture for \d+ seconds$/,
+      /^Scene hidden for \d+ seconds$/,
     );
 
     // And the parent area has a line for it.

@@ -160,10 +160,10 @@ describe('the words on the shelf', () => {
     const onPlay = jest.fn();
     render(<KidHomeScreen titles={[harbor]} onOpen={jest.fn()} onPlay={onPlay} />);
     fireEvent.press(screen.getByTestId('kid-home-learn'));
-    expect(screen.getByText(/two scheduled practice holds/i)).toBeTruthy();
+    expect(screen.getByText(/Try the demo to see the picture pause/i)).toBeTruthy();
     fireEvent.press(screen.getByTestId('picture-hold-dismiss'));
     expect(screen.getByTestId(`kid-home-poster-qualifier-${BENIGN_STORY_ID}`).props.children)
-      .toMatch(/practice holds/i);
+      .toMatch(/Demo/i);
     expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Play demo/);
     fireEvent.press(screen.getByTestId('kid-home-watch'));
     expect(onPlay).toHaveBeenCalledWith(harbor);
@@ -172,7 +172,7 @@ describe('the words on the shelf', () => {
   it('keeps practice and playback diagnostics in optional help, with factual descriptions in details', () => {
     const open = jest.fn();
     render(<KidHomeScreen titles={shelf} onOpen={open} />);
-    expect(screen.queryByText('Practice holds')).toBeNull();
+    expect(screen.queryByText('Demo')).toBeNull();
     expect(screen.queryByText('Playback test')).toBeNull();
     fireEvent.press(screen.getByTestId('kid-home-learn'));
     fireEvent.press(screen.getByTestId('picture-hold-demo-details'));
@@ -207,7 +207,7 @@ describe('the words on the shelf', () => {
   it("writes Harbor's own second line only for the bundled Harbor", () => {
     expect(shelfLabel(benignStoryTitle())).toEqual({
       name: 'Harbor story',
-      qualifier: 'Practice holds demo',
+      qualifier: 'Picture pause demo',
     });
     // Anything else with the same words is read like any catalog title.
     expect(
@@ -229,7 +229,7 @@ describe('the words on the shelf', () => {
    */
   it('draws the second line at the ten foot floors, resting and focused', () => {
     const floors = { textSizeUnits: 32, textContrast: 4.5 };
-    const secondLines = ['Practice holds', 'Playback check'];
+    const secondLines = ['Demo', 'Playback check'];
     render(<KidHomeScreen titles={shelf.filter(entry => entry.title.id === BENIGN_STORY_ID || entry.title.id === OFFLINE_TITLE_ID)} onOpen={jest.fn()} />);
     const measured = () =>
       measureText(screen.toJSON() as unknown as RenderedNode, { background: COASTAL_COLORS.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);
@@ -244,7 +244,7 @@ describe('the words on the shelf', () => {
 
     fireEvent(screen.getByTestId(`kid-home-poster-${BENIGN_STORY_ID}`), 'focus');
     const focused = measured().find(
-      (line) => line.text === 'Practice holds',
+      (line) => line.text === 'Demo',
     );
     expect(focused?.background).toBe(COASTAL_COLORS.SURFACE_FOCUSED);
     expect(focused?.contrast).toBeGreaterThanOrEqual(floors.textContrast);

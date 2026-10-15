@@ -72,9 +72,9 @@ export function describeStrip(
   const parts = intervals.length;
   const minutes = Math.max(1, Math.round(durationMs / 60_000));
   const duration = durationMs < 60_000 ? `${Math.round(durationMs / 1000)} seconds` : `about ${minutes} minute${minutes === 1 ? '' : 's'}`;
-  return `${parts} scheduled cover${parts === 1 ? '' : 's'}, ${seconds} second${
+  return `${parts} hidden section${parts === 1 ? '' : 's'}, ${seconds} second${
     seconds === 1 ? '' : 's'
-  } in all, spread through ${duration}.`;
+  } in total, during ${duration}.`;
 }
 
 const FlashMapStrip = ({
@@ -83,7 +83,7 @@ const FlashMapStrip = ({
   width = 1200,
   showCaption = true,
   showKey = false,
-  holdLabel = 'Picture hold',
+  holdLabel = 'Picture hidden',
   testID = 'flash-map-strip',
 }: FlashMapStripProps) => {
   const marks = stripMarks(intervals, durationMs);
@@ -92,8 +92,8 @@ const FlashMapStrip = ({
   const hasRedHold = marks.some(mark => mark.reason === 'red');
   const hasOtherHold = marks.some(mark => mark.reason !== 'red');
   const keyDescription = marks.length > 0
-    ? `${hasOtherHold ? `${holdLabel} marks show when the picture holds. ` : ''}${hasRedHold ? 'Red flash hold marks show holds for red flashes. ' : ''}Sound and captions continue.`
-    : 'There are no scheduled picture holds.';
+    ? `${hasOtherHold ? `${holdLabel} markers show where the picture changes. ` : ''}${hasRedHold ? 'Red markers show where red flashing is hidden. ' : ''}Sound and captions continue.`
+    : 'The video plays without planned picture pauses.';
 
   return (
     <View testID={testID} accessible accessibilityLabel={showKey
@@ -125,15 +125,15 @@ const FlashMapStrip = ({
           </View>
           <View style={styles.key}>
             <View style={styles.keyItem}><View style={styles.visibleSwatch} />
-              <Text style={styles.time}>{marks.length === 0 ? 'No scheduled holds' : 'Picture visible'}</Text></View>
+              <Text style={styles.time}>{marks.length === 0 ? 'Video plays normally' : 'Picture visible'}</Text></View>
             {hasOtherHold ? <View style={styles.keyItem}>
               <View style={[styles.holdSwatch, { backgroundColor: CALM_COLORS.PENDING }]} />
               <Text style={styles.time}>{holdLabel}</Text></View> : null}
             {hasRedHold ? <View style={styles.keyItem}>
               <View style={[styles.holdSwatch, { backgroundColor: CALM_COLORS.FAILED }]} />
-              <Text style={styles.time}>Red flash hold</Text></View> : null}
+              <Text style={styles.time}>Red flashing hidden</Text></View> : null}
           </View>
-          {marks.length > 0 ? <Text style={styles.keyNote}>Sound and captions continue during every hold.</Text> : null}
+          {marks.length > 0 ? <Text style={styles.keyNote}>Sound and captions continue when the picture changes.</Text> : null}
         </>
       ) : null}
       {showCaption ? <Text style={styles.caption} testID={`${testID}-caption`}>

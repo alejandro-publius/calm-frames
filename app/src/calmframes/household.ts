@@ -46,7 +46,7 @@ export const PRESETS: Record<PresetName, PresetDefinition> = {
     name: 'wcag',
     title: 'Standard',
     description:
-      'The WCAG 2.3.1 flash limits.',
+      'Checks flashing against WCAG 2.3.1 limits.',
     mapProfiles: ['wcag'],
     guardBandMs: DEFAULT_GUARD_BAND_MS,
     minCoverMs: DEFAULT_MIN_COVER_MS,
@@ -55,7 +55,7 @@ export const PRESETS: Record<PresetName, PresetDefinition> = {
     name: 'broadcast',
     title: 'Broadcast',
     description:
-      'The WCAG 2.3.1 limits plus the broadcast limits.',
+      'Checks both WCAG 2.3.1 and broadcast flash limits.',
     mapProfiles: ['wcag', 'broadcast'],
     guardBandMs: DEFAULT_GUARD_BAND_MS,
     minCoverMs: DEFAULT_MIN_COVER_MS,
@@ -64,7 +64,7 @@ export const PRESETS: Record<PresetName, PresetDefinition> = {
     name: 'extra-cautious',
     title: 'Extra cautious',
     description:
-      'The broadcast limits, with the picture held a little longer around each flash.',
+      'Uses broadcast limits and hides a little more before and after each flashing scene.',
     mapProfiles: ['wcag', 'broadcast'],
     guardBandMs: 1_000,
     minCoverMs: 800,

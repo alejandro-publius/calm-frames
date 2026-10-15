@@ -94,7 +94,7 @@ const TitleDetailsScreen = ({
       ...coverOptionsFor(benignStorySettings(practiceOffered.title, DEFAULT_SETTINGS)),
       durationMs: practiceOffered.title.durationMs,
     }).length;
-    return seconds > 0 && holds > 0 ? `${seconds} sec · ${holds} practice hold${holds === 1 ? '' : 's'}` : null;
+    return seconds > 0 && holds > 0 ? `${seconds} sec · ${holds} picture pause${holds === 1 ? '' : 's'}` : null;
   }, [practiceOffered]);
   const playLabel = presentation.action === 'Watch now' ? 'Play' : presentation.action;
   const notice = noticeForTitle(entry);
@@ -111,8 +111,8 @@ const TitleDetailsScreen = ({
     demo ? 'Practice version' : null,
     durationMs > 0 ? `${Math.round(durationMs / 1000)} sec` : null,
     demo
-      ? `${holdCount} practice hold${holdCount === 1 ? '' : 's'}`
-      : holdCount === 0 ? 'No flashing found' : `${holdCount} picture hold${holdCount === 1 ? '' : 's'}`,
+      ? `${holdCount} picture pause${holdCount === 1 ? '' : 's'}`
+      : holdCount === 0 ? 'No flashing found' : `${holdCount} hidden scene${holdCount === 1 ? '' : 's'}`,
   ].filter((item): item is string => item !== null);
   const scrollRef = React.useRef<ScrollView>(null);
   const infoTop = React.useRef(0);
@@ -157,13 +157,13 @@ const TitleDetailsScreen = ({
             <CalmButton primary playIcon sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
               accessibilityLabel={saving ? 'Saving your changes...' : `${playLabel}: ${presentation.name}`}
               disabled={saving} hasTVPreferredFocus={!(preferPracticeFocus && practiceOffered)} onPress={() => onPlay(entry)} />
-            {practiceOffered ? <CalmButton quiet testID={`${testID}-practice`} label="Try picture holds"
-              accessibilityLabel={practiceLine ? `Try picture holds. ${practiceLine}` : 'Try picture holds'}
+            {practiceOffered ? <CalmButton quiet testID={`${testID}-practice`} label="Try the demo"
+              accessibilityLabel={practiceLine ? `Try the demo. ${practiceLine}` : 'Try the demo'}
               disabled={saving} hasTVPreferredFocus={preferPracticeFocus} onPress={() => onOpenPractice?.(practiceOffered)} /> : null}
           </View>
           {demo ? null : <Text style={styles.quickSummary} testID={`${testID}-quick-summary`}>{intervals.length === 0
-            ? 'Checked frame by frame. No flashing found, so the picture never holds.'
-            : `${intervals.length} picture hold${intervals.length === 1 ? '' : 's'}. Sound and captions continue through each.`}</Text>}
+            ? 'The video plays normally.'
+            : 'Flashing scenes are hidden while sound and captions continue.'}</Text>}
         </View>
       </View>
 
@@ -190,10 +190,10 @@ const TitleDetailsScreen = ({
             <View style={styles.chapterContent}>
               <Text style={styles.summary} testID={`${testID}-summary`}>
                 {demo
-                  ? `Harbor has no flashing. ${intervals.length === 1 ? 'This hold is' : `These ${['', '', 'two', 'three'][intervals.length] ?? intervals.length} holds are`} scheduled for practice, ${hiddenSeconds} second${hiddenSeconds === 1 ? '' : 's'} in all.`
+                  ? `This demo has no flashing. The picture pauses ${intervals.length === 1 ? 'once' : `${intervals.length} times`}, for ${hiddenSeconds} second${hiddenSeconds === 1 ? '' : 's'} in total.`
                   : intervals.length === 0
-                    ? 'Detection can miss flashing. A flash that is missed is not held.'
-                    : `${intervals.length} picture hold${intervals.length === 1 ? '' : 's'}, ${hiddenSeconds} second${hiddenSeconds === 1 ? '' : 's'} in all, each marked on the timeline below.`}
+                    ? 'Detection can miss flashing. Any flashing that is missed will still be visible.'
+                    : `${intervals.length} scene${intervals.length === 1 ? '' : 's'} hidden, ${hiddenSeconds} second${hiddenSeconds === 1 ? '' : 's'} in total. The timeline shows where.`}
               </Text>
 
               {durationMs > 0 ? (
@@ -203,7 +203,7 @@ const TitleDetailsScreen = ({
                     width={1040}
                     showCaption={false}
                     showKey
-                    holdLabel={demo ? 'Practice hold' : 'Picture covered'}
+                    holdLabel={demo ? 'Demo pause' : 'Picture hidden'}
                     intervals={intervals}
                     durationMs={durationMs}
                     testID={`${testID}-strip`}

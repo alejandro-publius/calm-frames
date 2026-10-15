@@ -57,7 +57,7 @@ export interface Notice {
 export const NO_TITLES: Notice = {
   title: 'Nothing to watch yet',
   detail:
-    'Videos appear here once they are checked. A parent can see more in Parental controls.',
+    'Checked videos appear here. A parent can review unavailable videos in Parents.',
   tone: 'waiting',
 };
 
@@ -124,7 +124,7 @@ export const PIN_NOT_SET: Notice = {
 export const PIN_PROMPT: Notice = {
   title: 'Enter your PIN',
   detail:
-    'Your PIN opens parental controls. It stays on this television and is never sent anywhere.',
+    'Your PIN opens parental controls. It stays on this TV and is never sent anywhere.',
   tone: 'calm',
 };
 
@@ -151,7 +151,7 @@ export const PARENT_AREA_TITLE = 'Parental controls';
 export const PARENTAL_CONTROLS_TITLE = 'Parental controls';
 /** One line under the heading, saying what the page is for. */
 export const PARENTAL_CONTROLS_LEAD =
-  'How strictly videos are checked, the room, each kid, and the picture holds so far.';
+  'Choose viewing settings for your family and see which scenes were hidden.';
 /** While a change is being written to the household record. */
 export const SAVING_CHANGES = 'Saving your changes…';
 
@@ -171,7 +171,7 @@ export const CHOSEN_WORD = 'Chosen';
 
 /** What the room settings can and cannot do, said the same way everywhere. */
 export const ROOM_ONLY_ADDS =
-  'A bigger television or a closer seat can only add picture holds. It never takes any away.';
+  'A larger TV or a closer seat can hide more of the video, never less.';
 
 /**
  * The two rows of room chips, and which chip in each is the chosen one.
@@ -260,8 +260,8 @@ export const SETTINGS_STATE_WORD = 'showing';
  */
 export const STRICTNESS_TITLE = 'Viewing preset';
 export const ROOM_TITLE = 'TV and seating';
-export const HIDDEN_TITLE = 'Picture holds';
-export const CHECKED_TITLES_TITLE = 'Titles';
+export const HIDDEN_TITLE = 'Hidden scenes';
+export const CHECKED_TITLES_TITLE = 'Videos';
 
 export function sectionFor(title: string, name: string | null): string {
   return name ? `${title} for ${name}` : title;
@@ -281,7 +281,7 @@ export function nextKidName(base: string, taken: string[]): string {
 
 /** The rule about kids' settings, said the same way as the one about rooms. */
 export const PROFILE_ONLY_ADDS =
-  "A kid's own settings can only add picture holds to what Everyone is set to. They never take any away.";
+  "A kid's settings can hide more than Everyone's settings, never less.";
 
 /** Four is the most, and the page says so before the button is gone. */
 export const PROFILES_FULL = 'Up to four kids can be added. Remove one to add another.';
@@ -331,11 +331,11 @@ export function keepKidLabel(name: string): string {
 }
 
 /** The record, before anything has been hidden. */
-export const NOTHING_HIDDEN_YET = 'No picture holds yet.';
+export const NOTHING_HIDDEN_YET = 'No scenes hidden yet.';
 
 /** One kid's record, before anything has been hidden for them. */
 export function nothingHiddenFor(name: string): string {
-  return `No picture holds for ${name} yet.`;
+  return `No scenes hidden for ${name} yet.`;
 }
 
 /**
@@ -351,8 +351,8 @@ export function nothingHiddenFor(name: string): string {
  * parent has to do in their head.
  */
 export function hiddenSummary(count: number, totalMs: number, shown: number): string {
-  const parts = `${count} hold${count === 1 ? '' : 's'}`;
-  const line = `${parts}, ${describeHiddenTotal(totalMs)} in all.`;
+  const parts = `${count} scene${count === 1 ? '' : 's'} hidden`;
+  const line = `${parts}, ${describeHiddenTotal(totalMs)} in total.`;
   return shown < count ? `${line} The ${shown} most recent are below.` : line;
 }
 
@@ -469,11 +469,11 @@ export function hidesByDay(entries: HideLogEntry[], nowMs: number): HideDay[] {
  * sofa does not have to work out which way round a colour means.
  */
 export const CHIME_SECTION_TITLE = 'Sound';
-export const CHIME_ROW_TITLE = 'Chime before a picture hold';
+export const CHIME_ROW_TITLE = 'Warning chime';
 export const CHIME_ON_LABEL = 'On';
 export const CHIME_OFF_LABEL = 'Off';
 export const CHIME_NOTE =
-  'A soft chime plays before a picture hold. Turning it off changes nothing else.';
+  'A soft chime plays before a scene is hidden. Turning it off does not change which scenes are hidden.';
 
 /**
  * The first run explainer.
@@ -489,7 +489,7 @@ export const EXPLAINER_WORDS_PER_MINUTE = 150;
 export const EXPLAINER_TITLE = 'How Calm Frames works';
 export const EXPLAINER_LINES: string[] = [
   'Calm Frames checks every video for flashing before it plays.',
-  'When flashing is found, the picture holds on a calm still. Sound and captions continue.',
+  'Flashing scenes are replaced by a still picture. Sound and captions continue.',
   'Some flashing may go undetected.',
   SAFETY_NOTE,
 ];

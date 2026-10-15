@@ -132,9 +132,9 @@ describe('FlashMapStrip', () => {
 
   it('says out loud what the strip shows', () => {
     expect(describeStrip(intervals, 600_000)).toBe(
-      '2 scheduled covers, 7 seconds in all, spread through about 10 minutes.',
+      '2 hidden sections, 7 seconds in total, during about 10 minutes.',
     );
-    expect(describeStrip(intervals, 20_000)).toContain('spread through 20 seconds.');
+    expect(describeStrip(intervals, 20_000)).toContain('during 20 seconds.');
     expect(describeStrip([], 600_000)).toBe(
       'Nothing above the flash limits was found.',
     );
@@ -146,7 +146,7 @@ describe('FlashMapStrip', () => {
     expect(screen.getByTestId('flash-map-strip-mark-1')).toBeTruthy();
     expect(
       screen.getByTestId('flash-map-strip').props.accessibilityLabel,
-    ).toMatch(/2 scheduled covers/);
+    ).toMatch(/2 hidden sections/);
   });
 });
 
@@ -210,7 +210,7 @@ describe('the household viewing plan', () => {
     expect(
       screen.getByTestId('title-details-plan-continuity').props.children,
     ).toMatch(
-      /calm still.*sound and captions continue/i,
+      /still picture.*sound and captions continue/i,
     );
     expect(screen.getByTestId('title-details-plan-limits').props.children).toBe(
       SAFETY_NOTE,
@@ -381,7 +381,7 @@ describe('TitleDetailsScreen', () => {
       <TitleDetailsScreen entry={makeTitle('ok', 'verified')} onPlay={jest.fn()} />,
     );
     expect(screen.getByTestId('title-details-summary').props.children).toMatch(
-      /2 picture holds/,
+      /2 scenes hidden/,
     );
     expect(screen.getByTestId('title-details-strip')).toBeTruthy();
   });
@@ -1134,7 +1134,7 @@ describe('family profiles on the screens', () => {
     renderFamilyArea();
     expect(screen.getByText('Viewing preset for Everyone')).toBeTruthy();
     expect(screen.getByText('TV and seating for Everyone')).toBeTruthy();
-    expect(screen.getByText('Picture holds for Everyone')).toBeTruthy();
+    expect(screen.getByText('Hidden scenes for Everyone')).toBeTruthy();
     expect(
       screen.getByTestId('parent-area-profiles-chosen').props.children,
     ).toBe('These settings are for Everyone.');
@@ -1142,7 +1142,7 @@ describe('family profiles on the screens', () => {
     fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
     expect(screen.getByText('Viewing preset for Sam')).toBeTruthy();
     expect(screen.getByText('TV and seating for Sam')).toBeTruthy();
-    expect(screen.getByText('Picture holds for Sam')).toBeTruthy();
+    expect(screen.getByText('Hidden scenes for Sam')).toBeTruthy();
     expect(
       screen.getByTestId('parent-area-profiles-chosen').props.children,
     ).toBe('These settings are for Sam.');
@@ -1169,7 +1169,7 @@ describe('family profiles on the screens', () => {
     }
     expect(screen.getByText('Viewing preset')).toBeTruthy();
     expect(screen.getByText('TV and seating')).toBeTruthy();
-    expect(screen.getByText('Picture holds')).toBeTruthy();
+    expect(screen.getByText('Hidden scenes')).toBeTruthy();
     expect(screen.queryByTestId('parent-area-profiles')).toBeNull();
   });
 
@@ -1183,8 +1183,8 @@ describe('family profiles on the screens', () => {
    *
    * Seen to fail. With the third sentence taken out of hiddenSummary:
    *
-   *     Expected: "25 holds, 1 minute 40 seconds in all. The 20 most recent are below."
-   *     Received: "25 holds, 1 minute 40 seconds in all."
+   *     Expected: "25 scenes hidden, 1 minute 40 seconds in total. The 20 most recent are below."
+   *     Received: "25 scenes hidden, 1 minute 40 seconds in total."
    */
   it('says where the list stops rather than showing twenty of twenty five', () => {
     let logs = emptyProfileLogs();
@@ -1198,7 +1198,7 @@ describe('family profiles on the screens', () => {
     renderFamilyArea({ profileLogs: logs });
 
     expect(screen.getByTestId('parent-area-total').props.children).toBe(
-      '25 holds, 1 minute 40 seconds in all. The 20 most recent are below.',
+      '25 scenes hidden, 1 minute 40 seconds in total. The 20 most recent are below.',
     );
     expect(screen.getByTestId('parent-area-log-19')).toBeTruthy();
     expect(screen.queryByTestId('parent-area-log-20')).toBeNull();

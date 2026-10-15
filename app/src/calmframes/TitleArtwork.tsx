@@ -20,8 +20,8 @@ interface TitlePresentation {
 
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
   if (isBundledBenignStory(title)) {
-    return { name: 'Harbor', cardName: 'Harbor demo', kind: 'Practice holds', action: 'Play demo',
-      description: 'Two practice holds show what a picture hold looks like: the picture holds on a calm still while the sound and captions continue.', art: 'harbor-cinematic' };
+    return { name: 'Harbor', cardName: 'Harbor demo', kind: 'Demo', action: 'Play demo',
+      description: 'The picture pauses twice while sound and captions continue. This demo contains no flashing.', art: 'harbor-cinematic' };
   }
   if (concernsPackagedLibrary(title) && title.title === 'Harbor story (prepared locally)') {
     return { name: 'Harbor', action: 'Watch now',

@@ -281,8 +281,8 @@ const PlayerScreen = ({
     card = rejectedPreparedRoute
       ? {
           ...UNGUARDED_CARD,
-          detail: 'This title cannot be opened. Return to the library.',
-          announcement: 'This title is unavailable. Return to the library.',
+          detail: 'This video cannot be opened. Go back to the library.',
+          announcement: 'This video is unavailable. Go back to the library.',
         }
       : UNGUARDED_CARD;
   }
@@ -712,7 +712,7 @@ const PlayerScreen = ({
           card={pausedCard(card, paused)}
           onSkip={guard.skipTo}
           skipAccessibilityLabel={
-            benignDemo ? 'Skip the practice hold' : undefined
+            benignDemo ? 'Skip the demo pause' : undefined
           }
         />}
         {/*

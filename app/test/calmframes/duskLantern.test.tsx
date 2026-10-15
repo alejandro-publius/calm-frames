@@ -35,7 +35,7 @@ test('Home is the app name, the scenery, Play and Details: no title facts, no ex
   expect(screen.queryByText(/No picture holds/)).toBeNull();
   expect(screen.queryByText('Picture holds on supported videos. Audio continues.')).toBeNull();
   expect(screen.queryByTestId('kid-home-demo')).toBeNull();
-  expect(screen.queryByText('Try picture holds')).toBeNull();
+  expect(screen.queryByText('Try the demo')).toBeNull();
   expect(screen.queryByText(/practice hold/)).toBeNull();
   expect(screen.queryByTestId('kid-home-hidden-count')).toBeNull();
   expect(screen.queryByText(/unavailable/)).toBeNull();
@@ -101,13 +101,13 @@ test('the Home heading is one large line sized to clear the artwork, and Details
 test('Details lists runtime and holds in one factual line under the title', () => {
   const prepared = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
   expect(prepared.getByTestId('title-details-meta').props.children).toBe('20 sec · No flashing found');
-  expect(prepared.getByText('Checked frame by frame. No flashing found, so the picture never holds.')).toBeTruthy();
+  expect(prepared.getByText('The video plays normally.')).toBeTruthy();
   for (const pattern of BANNED) {
     expect(prepared.queryByText(pattern)).toBeNull();
   }
   prepared.unmount();
   const practice = render(<TitleDetailsScreen entry={demo} onPlay={jest.fn()} />);
-  expect(practice.getByTestId('title-details-meta').props.children).toBe('Practice version · 20 sec · 2 practice holds');
+  expect(practice.getByTestId('title-details-meta').props.children).toBe('Practice version · 20 sec · 2 picture pauses');
   expect(practice.getByTestId('title-details-play').props.accessibilityLabel).toMatch(/Play demo/);
 });
 
@@ -115,7 +115,7 @@ test('Details offers the practice demo beside Play, quiet, and the demo page its
   const openPractice = jest.fn();
   const prepared = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={demo} onOpenPractice={openPractice} />);
   const entry = prepared.getByTestId('title-details-practice');
-  expect(entry.props.accessibilityLabel).toBe('Try picture holds. 20 sec · 2 practice holds');
+  expect(entry.props.accessibilityLabel).toBe('Try the demo. 20 sec · 2 picture pauses');
   expect(StyleSheet.flatten(entry.props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
   expect(prepared.getByTestId('title-details-play').props.hasTVPreferredFocus).toBe(true);
   expect(entry.props.hasTVPreferredFocus).toBe(false);
@@ -134,5 +134,5 @@ test('Details offers the practice demo beside Play, quiet, and the demo page its
 test('the practice entry follows the demo duration and schedule rather than fixed copy', () => {
   const shorterDemo = { ...demo, title: { ...demo.title, durationMs: 30000 }, segments: demo.segments.slice(0, 1) };
   render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={shorterDemo} onOpenPractice={jest.fn()} />);
-  expect(screen.getByTestId('title-details-practice').props.accessibilityLabel).toBe('Try picture holds. 30 sec · 1 practice hold');
+  expect(screen.getByTestId('title-details-practice').props.accessibilityLabel).toBe('Try the demo. 30 sec · 1 picture pause');
 });

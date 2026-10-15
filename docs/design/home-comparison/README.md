@@ -40,9 +40,9 @@ activates; Escape goes Back; normal Tab navigation lets you leave the study.
 
 Both compositions preserve the intended route:
 
-1. Home / Details → Harbor Details / Play → Try picture holds → Practice Details / Play demo.
+1. Home / Details → Harbor Details / Play → Try the demo → Practice Details / Play demo.
 2. Play demo → simulated practice; Back → Practice Details / Play demo.
-3. Back again → Harbor Details / Try picture holds; Back again → Home / Details.
+3. Back again → Harbor Details / Try the demo; Back again → Home / Details.
 4. Home / Parents → PIN gate; Cancel or Back → Home / Parents, including after Details.
 5. Home / Play → simulated Harbor; Back → Home / Play. Playing from Details returns there.
 
@@ -60,7 +60,7 @@ records the rebuilt current default and its native log observations.
 
 Your design review: compare grayscale, then color and give feedback on the selected A.
 No further layout decision is needed to complete this implementation. Your native acceptance: look at the current rebuilt app,
-listen through Harbor and both practice holds, check visible focus and captions,
+listen through Harbor and both demo pauses, check visible focus and captions,
 and enter the existing household PIN yourself to test the parent settings interior.
 Do not reset the household. VoiceView needs a separate owner check if available.
 

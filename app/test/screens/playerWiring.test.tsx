@@ -242,21 +242,21 @@ describe('the player hands OK to Skip only while Skip is on screen', () => {
     await settle();
 
     await playAt(1);
-    expect(cardKind()).toBe('Picture hold coming up');
+    expect(cardKind()).toBe('Flashing coming up');
     expect(screen.getByTestId('calm-card-skip')).toBeTruthy();
     expect(chromeProps().skipOwnsSelect).toBe(true);
 
     await playAt(5);
-    expect(cardKind()).toBe('Holding the picture');
+    expect(cardKind()).toBe('Flashing hidden');
     expect(chromeProps().skipOwnsSelect).toBe(false);
 
     await playAt(8.5);
-    expect(cardKind()).toMatch(/^Held the picture/);
+    expect(cardKind()).toMatch(/^Scene hidden for/);
     expect(chromeProps().skipOwnsSelect).toBe(false);
 
     // The next countdown takes OK again.
     await playAt(9);
-    expect(cardKind()).toBe('Picture hold coming up');
+    expect(cardKind()).toBe('Flashing coming up');
     expect(chromeProps().skipOwnsSelect).toBe(true);
   });
 

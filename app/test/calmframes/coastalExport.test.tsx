@@ -29,13 +29,13 @@ test('composition keeps Watch, Details, explanation and Back actions with truthf
   fireEvent.press(home.getByTestId('kid-home-more-info')); expect(onOpen).toHaveBeenCalledWith(harbor);
   expect(home.getByTestId('kid-home-title').props.children).toBe('Calm Frames');
   expect(home.queryByText('Picture holds on supported videos. Audio continues.')).toBeNull();
-  expect(home.queryByText('Try picture holds')).toBeNull();
+  expect(home.queryByText('Try the demo')).toBeNull();
   fireEvent.press(home.getByTestId('kid-home-learn')); expect(home.getByTestId('picture-hold-start')).toBeTruthy(); save('help', home.toJSON()); home.unmount();
   const demo = titles.find(item => isBundledBenignStory(item.title))!;
   const onOpenPractice = jest.fn();
   const details = render(<TitleDetailsScreen entry={harbor} onPlay={onPlay} onBack={onBack} practice={demo} onOpenPractice={onOpenPractice} />, { wrapper });
   fireEvent(details.getByTestId('title-details-play'), 'focus'); save('details', details.toJSON());
-  expect(details.getByText('Checked frame by frame. No flashing found, so the picture never holds.')).toBeTruthy();
+  expect(details.getByText('The video plays normally.')).toBeTruthy();
   expect(details.getByTestId('title-details-show-info')).toBeTruthy();
   fireEvent.press(details.getByTestId('title-details-practice')); expect(onOpenPractice).toHaveBeenCalledWith(demo);
   fireEvent.press(details.getByTestId('title-details-play')); expect(onPlay).toHaveBeenCalledTimes(2);

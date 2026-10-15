@@ -304,10 +304,10 @@ describe('the hide log', () => {
       '19:05 Sintel: hid 4 seconds at 1:05',
     );
     expect(describeHideEntry(entry({ cause: 'seek' }))).toMatch(
-      /after moving the playhead$/,
+      /after seeking$/,
     );
     expect(describeHideEntry(entry({ cause: 'unverified' }))).toBe(
-      '19:05 Sintel: kept the picture hidden, title unavailable',
+      '19:05 Sintel: kept the picture hidden, video unavailable',
     );
   });
 });

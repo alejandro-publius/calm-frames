@@ -296,7 +296,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
           setCheckedInput(verificationInput);
           setRejection('missing');
           setBlockedReason(
-            'This title is unavailable with your current viewing settings. The picture stays hidden.',
+            'This video is unavailable with your current viewing settings. The picture stays hidden.',
           );
           setSegments([]);
           return;

@@ -125,13 +125,13 @@ describe('Back from playback and details on the real shelf', () => {
     expect(preferred()).toEqual(['kid-mode-home-more-info']);
   });
 
-  it('Details, Try picture holds, Play, then Back three times: one level at a time, focus on what was pressed', async () => {
+  it('Details, Try the demo, Play, then Back three times: one level at a time, focus on what was pressed', async () => {
     const { navigation, returnFromPlayer } = await startShelf();
     fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
     expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('20 sec · No flashing found');
     expect(preferred()).toEqual(['kid-mode-details-play']);
     fireEvent.press(screen.getByTestId('kid-mode-details-practice'));
-    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('Practice version · 20 sec · 2 practice holds');
+    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('Practice version · 20 sec · 2 picture pauses');
     expect(screen.queryByTestId('kid-mode-details-practice')).toBeNull();
     expect(preferred()).toEqual(['kid-mode-details-play']);
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));

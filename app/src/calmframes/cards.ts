@@ -64,10 +64,10 @@ export const NO_CARD: Card = { kind: 'none', title: '', announcement: '' };
  */
 export const CHECKING_CARD: Card = {
   kind: 'checking',
-  title: 'Getting your video ready',
-  detail: 'It will begin in a moment.',
+  title: 'Preparing your video',
+  detail: 'Checking the video before playback.',
   announcement:
-    'Getting your video ready. It will begin in a moment.',
+    'Preparing your video. Checking the video before playback.',
 };
 
 function secondsWord(milliseconds: number): string {
@@ -119,9 +119,9 @@ export function cardAt(
   if (inside) {
     return {
       kind: 'covering',
-      title: 'Holding the picture',
-      detail: 'Flashing was found here. Sound and captions keep playing.',
-      announcement: 'Holding the picture. Flashing was found here. Sound and captions keep playing.',
+      title: 'Flashing hidden',
+      detail: 'Sound and captions continue while this scene is hidden.',
+      announcement: 'Flashing hidden. Sound and captions continue while this scene is hidden.',
       interval: inside,
     };
   }
@@ -132,9 +132,9 @@ export function cardAt(
     const secondsLeft = Math.max(0, Math.ceil(remainingMs / 1000));
     return {
       kind: 'countdown',
-      title: 'Picture hold coming up',
+      title: 'Flashing coming up',
       detail: `In ${secondsLeft} second${secondsLeft === 1 ? '' : 's'}. Press Skip to jump past it.`,
-      announcement: `Picture hold coming up in ${secondsLeft} second${
+      announcement: `Flashing coming up in ${secondsLeft} second${
         secondsLeft === 1 ? '' : 's'
       }. Press Skip to jump past it.`,
       secondsLeft,
@@ -154,9 +154,9 @@ export function cardAt(
     const hidden = secondsWord(justEnded.endMs - justEnded.startMs);
     return {
       kind: 'after',
-      title: `Held the picture for ${hidden}`,
-      detail: 'Flashing was found. Sound and captions kept playing.',
-      announcement: `Held the picture for ${hidden}. Flashing was found. Sound and captions kept playing.`,
+      title: `Scene hidden for ${hidden}`,
+      detail: 'Sound and captions continued.',
+      announcement: `Scene hidden for ${hidden}. Sound and captions continued.`,
       interval: justEnded,
     };
   }

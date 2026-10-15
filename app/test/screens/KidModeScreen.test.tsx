@@ -142,7 +142,7 @@ describe('reaching Calm Frames', () => {
     await finishFirstRun();
     fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
     fireEvent.press(screen.getByTestId('picture-hold-demo-details'));
-    expect(JSON.stringify(screen.getByTestId('kid-mode-details-demo-label').props.children)).toContain('practice holds');
+    expect(JSON.stringify(screen.getByTestId('kid-mode-details-demo-label').props.children)).toContain('picture pauses twice');
     expect(screen.getByTestId('kid-mode-details-summary').props.children).toContain('8 seconds');
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     const [, params] = navigate.mock.calls[0];
@@ -310,7 +310,7 @@ describe('the shelf a household lands on', () => {
     await renderKidMode(); await finishFirstRun();
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
     expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(0);
-    expect(screen.queryByText('Practice holds')).toBeNull();
+    expect(screen.queryByText('Demo')).toBeNull();
     expect(screen.queryByText('Playback test')).toBeNull();
     expect(screen.getByTestId('home-harbor-scene')).toBeTruthy();
     fireEvent.press(screen.getByTestId('kid-mode-home-learn'));

@@ -15,10 +15,10 @@ for (const option of document.querySelectorAll('.option')) {
     if (page === 'home') {
       content = `<nav class="tv-nav" aria-label="Home navigation">${button('help','How it works')}${button('parents','Parents')}</nav><div class="hero"><h3>Calm Frames</h3><div class="actions">${button('play','Play',true)}${button('details','Details')}</div></div>`;
     } else {
-      const titles = {details:'Harbor',practice:'Try picture holds',parents:'Parents',help:'How it works',playback:'Harbor',practicePlayback:'Picture hold practice'};
-      const copy = {details:'20 sec · No flashing found',practice:'20 sec · 2 practice holds',parents:'Enter your household PIN on the TV.',help:'A picture hold hides a flashing scene. The sound continues.',playback:'Playback route simulation. No media is playing.',practicePlayback:'Practice route simulation. No media is playing.'};
+      const titles = {details:'Harbor',practice:'Try the demo',parents:'Parents',help:'How it works',playback:'Harbor',practicePlayback:'Picture pause demo'};
+      const copy = {details:'20 sec · No flashing found',practice:'20 sec · 2 picture pauses',parents:'Enter your household PIN on the TV.',help:'Flashing scenes are replaced by a still picture. Sound and captions continue.',playback:'Playback route simulation. No media is playing.',practicePlayback:'Practice route simulation. No media is playing.'};
       let actions = '';
-      if (page === 'details') actions = button('play','Play',true) + button('practice','Try picture holds');
+      if (page === 'details') actions = button('play','Play',true) + button('practice','Try the demo');
       if (page === 'practice') actions = button('play','Play demo',true);
       if (page === 'parents') actions = '<p class="pin" aria-label="PIN not collected">○ ○ ○ ○</p>' + button('cancel','Cancel');
       content = `${button('back','Back')}<div class="content"><h3>${titles[page]}</h3><p>${copy[page]}</p><div class="actions">${actions}</div></div><span class="badge">Route simulation</span>`;

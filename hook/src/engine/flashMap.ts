@@ -361,21 +361,21 @@ export function verifyFlashMap(
 export function rejectionMessage(reason: MapRejection): string {
   switch (reason) {
     case 'missing':
-      return 'This title is still being prepared. The picture stays hidden for now.';
+      return 'This video is still being checked. The picture stays hidden for now.';
     case 'stale':
-      return 'This title needs an update. The picture stays hidden.';
+      return 'This video needs an update. The picture stays hidden.';
     case 'unsigned':
-      return 'This title is missing playback information. The picture stays hidden.';
+      return 'This video is missing its check for flashing. The picture stays hidden.';
     case 'unknown-key':
-      return 'This title comes from an unsupported source. The picture stays hidden.';
+      return 'The source of this video could not be verified. The picture stays hidden.';
     case 'bad-signature':
-      return 'The playback information for this title appears to have changed. The picture stays hidden.';
+      return 'The check for flashing appears to have changed. The picture stays hidden.';
     case 'wrong-file':
-      return 'The playback information belongs to a different version of this title. The picture stays hidden.';
+      return 'The check for flashing belongs to a different version of this video. The picture stays hidden.';
     case 'wrong-version':
-      return 'This title needs a newer version of Calm Frames. The picture stays hidden.';
+      return 'This video needs a newer version of Calm Frames. The picture stays hidden.';
     case 'unparseable':
     default:
-      return 'The playback information could not be opened. The picture stays hidden.';
+      return 'The check for flashing could not be read. The picture stays hidden.';
   }
 }

@@ -2,21 +2,21 @@
   "source": "app/src/calmframes",
   "files": {
     "announce.ts": "d67e13b47de80d16",
-    "CalmCard.tsx": "7e5f70b8942f5444",
+    "CalmCard.tsx": "000f168c6d118811",
     "CalmControlSurface.tsx": "af7e1588924a7625",
     "CalmTouchable.tsx": "f3e599f96bb37038",
     "CoastalAppearance.ts": "0106662e737f8297",
     "trace.ts": "7ab8a1894dc1d562",
     "calmStyles.ts": "2b84f7bce0b93d63",
     "canonicalJson.ts": "1097285aae9b21aa",
-    "cards.ts": "ad00e1238b8cf599",
+    "cards.ts": "4a448a3ff7fd8e40",
     "CoverLayer.tsx": "dd341b25f9348dcb",
     "coverSchedule.ts": "0fc0b8ba87e15973",
     "ed25519.ts": "8a8e37cc128b0603",
-    "flashMap.ts": "eadbfc39361f0ecf",
-    "hideLog.ts": "7d2a536369c4d259",
-    "household.ts": "84c04f4396e1b19a",
-    "mapRegistry.ts": "5dc0b4a0675028c4",
+    "flashMap.ts": "1d89492f04f2be13",
+    "hideLog.ts": "981e08d8200a1e56",
+    "household.ts": "704a19f083efaa92",
+    "mapRegistry.ts": "d9d2274e2cb666da",
     "mediaClock.ts": "627d8e5ecb3266f9",
     "SafeMediaControlHandler.ts": "87cdd9e1a5a03701",
     "seekSafety.ts": "410732df66f7006b",
@@ -25,6 +25,6 @@
     "timingLog.ts": "3a56e6734c3f8e18",
     "titleStatus.ts": "04f52111914e4394",
     "useCoverHarness.ts": "5eaa61f38033cb48",
-    "useFlashGuard.ts": "987a32ab1b220676"
+    "useFlashGuard.ts": "761d43d3d12c4a8c"
   }
 }

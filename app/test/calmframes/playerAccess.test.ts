@@ -69,6 +69,6 @@ describe('what the player is allowed to show', () => {
     expect(UNGUARDED_CARD.kind).toBe('unverified');
     expect(UNGUARDED_CARD.title).toBe('This video is unavailable');
     expect(UNGUARDED_CARD.detail).toMatch(/picture stays hidden/);
-    expect(UNGUARDED_CARD.announcement).toMatch(/This title is unavailable/);
+    expect(UNGUARDED_CARD.announcement).toMatch(/This video is unavailable/);
   });
 });

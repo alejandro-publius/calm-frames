@@ -58,9 +58,8 @@ const ViewingPlan = ({
           </View>
           <View style={styles.explanation}>
             <Text style={styles.line} testID={`${testID}-continuity`}>
-              During a picture hold a calm still covers the picture while the sound
-              and captions continue, including while seeking. A bigger television or
-              a closer seat can only add holds.
+              Flashing scenes are replaced by a still picture while sound and captions
+              continue. A larger TV or a closer seat can hide more of the video, never less.
             </Text>
           </View>
         </View>

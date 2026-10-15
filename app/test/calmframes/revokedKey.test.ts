@@ -76,7 +76,7 @@ describe('a map signed by a revoked key', () => {
     if (!verdict.ok) {
       expect(verdict.reason).toBe('unknown-key');
       const message = rejectionMessage(verdict.reason);
-      expect(message).toContain('an unsupported source');
+      expect(message).toContain('source of this video could not be verified');
       expect(message).toContain('picture stays hidden');
       // A revoked key is not a tampered map, and the two must not read alike.
       expect(message).not.toBe(rejectionMessage('bad-signature'));
