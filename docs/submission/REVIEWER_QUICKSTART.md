@@ -10,12 +10,15 @@ analyzer path in section 5 (install 12 s, `check` 17 s printing PASS, `report`
 number and style checks under a second, both mypy configurations clean). At
 that run two Python tests failed for code reasons on this branch and `make
 lint-py` reported ruff findings in `eval/preview` and `scripts`; they were
-reported to the integration owner and are not setup problems. Section 3 (the
+reported to the integration owner and are not setup problems. The later fixes
+and local gate are recorded in [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)
+section 2; the failures above describe that earlier fresh-checkout run.
+Section 3 (the
 device build and install) and section 4 (the demo) were not run from this
 file; the receipts they name record where they were run.
 
 The final integration candidate is `claude/final-candidate-2026-10-14`; its
-package was built from `819de405ddf8e2d45526f978fc33d6a6ca977d5b`
+current package 5 was built from `4016e8dac8f675a4eb1e1613fd9dc7cf63d06e58`
 ([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)). The judged release is still to
 be selected ([OPEN_DECISIONS.md](OPEN_DECISIONS.md)); use the branch or tag
 named in the submission form. The app runs on Vega OS and has only ever run on
@@ -67,10 +70,13 @@ across 8 suites with typecheck and focused lint
 ([`results/core-reliability-2026-10-14.json`](../../results/core-reliability-2026-10-14.json)),
 and the release helper's 39 tests passing
 ([`results/release-pin-license-review-2026-10-14.json`](../../results/release-pin-license-review-2026-10-14.json)).
-The last full app suite in the repository ran on Oct 14 on `00905510`
+An earlier full app suite ran on Oct 14 on `00905510`
 ([`results/native-checkpoint-2026-10-14/receipt.json`](../../results/native-checkpoint-2026-10-14/receipt.json):
 <!--n results/native-checkpoint-2026-10-14/receipt.json:checks.full_jest.passed -->1198<!--/n--> passed,
 <!--n results/native-checkpoint-2026-10-14/receipt.json:checks.full_jest.skipped -->4<!--/n--> skipped).
+The handoff records the later full app suite on package 5's source `4016e8d`:
+133 suites and 1310 tests passed, with typecheck and lint clean. That is a
+recorded result, not a new run of these instructions.
 The hosted `Vega app` job that failed on Oct 13 ran on the shared PR branch head
 `4c9996d`; it predates this candidate and does not describe it. The candidate
 has no hosted run because it has no pull request.
@@ -97,12 +103,16 @@ PIN into `NOTES.md`; `--pin` is kept as a deprecated option whose value is unuse
 `build/release/core-reliability-cfddc4a-2026-10-14/`, SHA-256
 `e315e16d19172a5aadc1bfa8a9364bcf9205d51870ec610b92eb01ea9d2841dd`, with its 723
 recorded source inputs verified and `native_validation_performed: false`. The
-final candidate's package is `build/release/final-candidate-4-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, SHA-256 `471770fb10d9269d1a4128f6b1328cb6dd30495dbc715d8289cdb79cfef0d337`, 28,731,853 bytes, from `819de40`; the
-receipt beside it records the inputs and the prepared library check. That
-package was installed and driven on the Vega Virtual Device late on Oct 14
-([`results/native-acceptance-4-2026-10-14/receipt.json`](../../results/native-acceptance-4-2026-10-14/receipt.json));
-the previous package's session is
-[`results/native-acceptance-2026-10-14/receipt.json`](../../results/native-acceptance-2026-10-14/receipt.json).
+final candidate's package 5 is `build/release/final-candidate-5-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`,
+SHA-256 `a226b39fc855cd7cf5eb4136b9ba890f92e6e6518ca764a6862cf9990870dc13`,
+28,733,262 bytes, from `4016e8d`; the preparation receipt beside it records
+736 inputs and the prepared library check. It was installed over the existing
+household and driven on the Vega Virtual Device without capture
+([`results/native-acceptance-5-2026-10-14/receipt.json`](../../results/native-acceptance-5-2026-10-14/receipt.json)).
+The prior package 4 sessions remain
+[`receipt.json`](../../results/native-acceptance-4-2026-10-14/receipt.json) and
+[`second-pass.json`](../../results/native-acceptance-4-2026-10-14/second-pass.json);
+they are earlier evidence, not repeated checks on package 5.
 
 ```sh
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
@@ -148,16 +158,18 @@ some under load, so a missing line proves nothing.
 
 ## 4. The demo sequence (about ten minutes)
 
-1. **First run.** The app asks for a household PIN. Choose any four digits and
-   confirm them; there is no preset PIN in the package and it is never stored in
-   plain text. Pick a profile, a viewing preset and the room.
+1. **First run on a new reviewer installation only.** The app asks the reviewer
+   to choose and confirm a four digit household PIN, then pick a profile, a
+   viewing preset and the room. There is no preset PIN in the package and it is
+   never stored in plain text. On an existing household, keep its data and have
+   its owner enter the existing PIN himself; do not reset it for this walkthrough.
 2. **Home.** One heading, "Calm Frames", over the coast. Move focus with the
    D-pad from Play to Details, then up to How it works and Parents.
 3. **Details.** Select Details: "Harbor" with "20 sec · No flashing found", Play,
    and the quiet Try picture holds entry beside it.
 4. **Try picture holds.** Select it, read "20 sec · 2 practice holds" on the
    demo's own page, then Play. Watch the countdown and Skip, then the first
-   hold: the picture holds a still, the "Holding a calm scene" card appears,
+   hold: the picture holds a still, the "Holding the picture" card appears,
    captions change and the sound continues. The second hold follows. These are
    scheduled examples, not detected flashing.
 5. **Transport.** Pause and resume; seek back into a hold and watch the cover
@@ -170,16 +182,24 @@ some under load, so a missing line proves nothing.
    the room, relaunch the app and see the choice kept. Practice holds never
    enter the exposure history, so an empty history after the demo is correct.
 
-On the final package, late on Oct 14, the app's own log reported steps 2, 3
-and 4 (Home, Details, the practice page and both holds with the still, Back one
-level at a time), step 6 (Harbor to its end with zero holds), the How it works page,
+On package 5 from `4016e8d`, the app's own log reported steps 2, 3 and 4
+(Home, Details, the practice page and both holds with the still loading, Back
+one level at a time), step 6 (Harbor to its end with zero holds), How it works,
 the PIN gate of step 7 and a relaunch onto the saved Home
-([`results/native-acceptance-4-2026-10-14/receipt.json`](../../results/native-acceptance-4-2026-10-14/receipt.json):
-J1 observed-pass, J2 observed-pass, J3 observed-pass, J4 observed-pass, J5 observed-pass, J6 observed-pass, J7 observed-pass, J8 observed-pass).
-Pause and resume were reported on the previous package the same day. The
-settings interior and the restart with a changed preset were last observed on
-the Oct 10 build; the first run (step 1) on Oct 13. The seek into a hold has only test coverage. Re-verify everything
-on the final package.
+([`results/native-acceptance-5-2026-10-14/receipt.json`](../../results/native-acceptance-5-2026-10-14/receipt.json):
+J1 through J8 observed-pass).
+Package 4's second pass separately reported pause and resume (J9), a cover-first
+remote seek into the first hold (J10b) and the caption control (J11)
+([`results/native-acceptance-4-2026-10-14/second-pass.json`](../../results/native-acceptance-4-2026-10-14/second-pass.json)).
+The caption menu's contents were not observed.
+
+Pixels and audio remain unobserved on the latest candidate. The settings
+interior and a restart after changing a preset were last observed on the
+Oct 10 build; first run was observed on Oct 13. Back from the package 5 PIN gate
+reported Home with Details focused, so check return focus to Parents.
+Re-verify the final package by looking and listening using
+[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 4, with the owner entering
+the existing PIN. Do not capture or record without separate authorization.
 
 ## 4a. A browser preview, without a device
 
