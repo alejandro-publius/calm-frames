@@ -63,6 +63,7 @@ import {
   SeekSource,
 } from './seekSafety';
 import { MediaElementLike, useCoverHarness } from './useCoverHarness';
+import { trace } from './trace';
 
 export type GuardStatus = 'loading' | 'verified' | 'blocked';
 
@@ -364,12 +365,16 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
           latchSceneInterval(plan.interval);
           setSceneSeekDisruptions((count) => count + 1);
         },
-        setCover: (covered) => setSeekHolding(covered),
+        setCover: (covered, reason) => {
+          trace('seek', JSON.stringify({ phase: 'cover-request', covered, reason }));
+          setSeekHolding(covered);
+        },
         seekTo: (targetMs) => {
           const element = mediaRef.current as
             | (MediaElementLike & { currentTime?: number })
             | null;
           if (element) {
+            trace('seek', JSON.stringify({ phase: 'playhead-write', targetMs }));
             element.currentTime = targetMs / 1000;
           }
         },

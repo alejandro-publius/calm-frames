@@ -6,6 +6,7 @@
 // Metro resolves .json before .ts, unlike Jest. Name the generated module
 // explicitly so the signed catalog text is the same in tests and on Vega.
 import { PACKAGED_LIBRARY_JSON } from '../../assets/raw/prepared-library/catalog.ts';
+import { PACKAGED_LIBRARY_JSON as ACADIA_LIBRARY_JSON } from './acadiaCatalog';
 import { base64ToBytes } from './ed25519';
 import { coverOptionsFor, HouseholdSettings, PRESET_NAMES, PresetName } from './household';
 import { CatalogTitle } from './titleStatus';
@@ -284,4 +285,34 @@ export function createPackagedLibrary(raw: string) {
   };
 }
 
-export const packagedLibrary = createPackagedLibrary(PACKAGED_LIBRARY_JSON);
+// Owner approval on 2026-10-15 is limited to this exact compiled catalog.
+// The build gate hashes its actual bytes against the approved catalog digest.
+export const ACADIA_BUNDLE_ID = '4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13';
+export const ACADIA_SOURCE_SHA256 = '2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28';
+export function createApprovedAcadiaLibrary(raw: string) {
+  try {
+    const value = JSON.parse(raw);
+    if (raw !== ACADIA_LIBRARY_JSON || value.bundleId !== ACADIA_BUNDLE_ID ||
+        value.publicKeyBase64 !== 'mSw6rXluFTx+gmF5ODt1pSTIYOkLkxurqGOrJHs2Xkg=') {
+      return createPackagedLibrary('invalid');
+    }
+    return createPackagedLibrary(raw);
+  } catch { return createPackagedLibrary('invalid'); }
+}
+
+const libraries = [createPackagedLibrary(PACKAGED_LIBRARY_JSON), createApprovedAcadiaLibrary(ACADIA_LIBRARY_JSON)];
+export const packagedLibrary = {
+  problem: libraries.find(library => library.problem)?.problem ?? null,
+  titles: (settings: HouseholdSettings) => libraries.flatMap(library => library.titles(settings)),
+  evidenceFor: (title: CatalogTitle, settings: HouseholdSettings) =>
+    libraries.map(library => library.evidenceFor(title, settings)).find(Boolean) ?? null,
+  publicKeyFor: (title: CatalogTitle, settings: HouseholdSettings) =>
+    libraries.map(library => library.publicKeyFor(title, settings)).find(Boolean) ?? null,
+  acceptsRoute: (data: RouteTitle, guarded?: RouteGuard) =>
+    libraries.filter(library => library.acceptsRoute(data, guarded)).length === 1,
+  /** Return a key only after an exact route match in one isolated catalog. */
+  publicKeyForRoute: (data: RouteTitle, guarded?: RouteGuard): string | null => {
+    const accepted = libraries.filter(library => library.acceptsRoute(data, guarded));
+    return accepted.length === 1 ? accepted[0].publicKeyBase64 : null;
+  },
+};

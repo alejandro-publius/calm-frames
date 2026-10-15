@@ -306,10 +306,11 @@ describe('the shelf a household lands on', () => {
     );
   });
 
-  it('offers one dominant Harbor action and keeps diagnostics out of the primary catalog', async () => {
+  it('retains the main Harbor action, adds Acadia, and keeps diagnostics out of the primary catalog', async () => {
     await renderKidMode(); await finishFirstRun();
     expect(screen.getByTestId('kid-mode-home-more-info').props.hasTVPreferredFocus).toBe(true);
-    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(0);
+    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(1);
+    expect(screen.getByText('Acadia coastal scenery')).toBeTruthy();
     expect(screen.queryByText('Demo')).toBeNull();
     expect(screen.queryByText('Playback test')).toBeNull();
     expect(screen.getByTestId('home-harbor-scene')).toBeTruthy();

@@ -1,12 +1,16 @@
 # Acadia integration review, October 15
 
+Update: the owner approved the exact scope below at 21:19 UTC. The restricted
+catalog integration is implemented; see FINAL_HANDOFF.md for build and native
+status. The following offscreen audit describes the pre-approval checkpoint.
+
 The candidate was audited without displaying source footage or playing any
 Acadia rendition. It is staged at `build/acadia-audit-staging`, outside app
 assets. Claude's `ec323fcf38ccb493082100bbf06ea79b0cfb1c53` was imported as
 `f46e238`; its source workspace was not changed. The installed app remains the
 prepared-video UI package recorded in FINAL_HANDOFF.md.
 
-## Exact approval still needed
+## Exact approval scope (approved at 21:19 UTC)
 
 Permit the existing public key with raw-key SHA-256
 `98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407`

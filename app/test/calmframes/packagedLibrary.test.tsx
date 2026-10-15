@@ -1,6 +1,7 @@
 import { PACKAGED_LIBRARY_JSON } from '../../assets/raw/prepared-library/catalog';
 import { DEFAULT_SETTINGS, PRESET_NAMES } from '../../src/calmframes/household';
-import { createPackagedLibrary, packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import { ACADIA_SOURCE_SHA256, createApprovedAcadiaLibrary, createPackagedLibrary, packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import { PACKAGED_LIBRARY_JSON as ACADIA_LIBRARY_JSON } from '../../src/calmframes/acadiaCatalog';
 import { checkTitle } from '../../src/calmframes/titleStatus';
 import { defaultCatalog, guardedParamsFor, titleDataFor } from '../../src/screens/KidModeScreen';
 
@@ -19,6 +20,36 @@ function checked(preset = DEFAULT_SETTINGS.preset) {
 }
 
 describe('the compiled prepared library', () => {
+  it.each(PRESET_NAMES)('isolates the approved Acadia key and exact %s route from Harbor', preset => {
+    const settings = { ...DEFAULT_SETTINGS, preset };
+    const title = packagedLibrary.titles(settings).find(one => one.sha256 === ACADIA_SOURCE_SHA256)!;
+    const acadia = JSON.parse(ACADIA_LIBRARY_JSON);
+    const key = packagedLibrary.publicKeyFor(title, settings)!;
+    expect(key).toBe(acadia.publicKeyBase64);
+    expect(key).not.toBe(manifest.publicKeyBase64);
+    const entry = checkTitle(title, { settings, nowMs: Date.parse('2026-10-16T00:00:00Z'), publicKeyBase64: key });
+    expect(entry.status).toBe('verified');
+    expect(entry.segments.length).toBeGreaterThan(0);
+    const data = titleDataFor(entry);
+    const guarded = guardedParamsFor(entry, settings);
+    expect(packagedLibrary.publicKeyForRoute(data, guarded)).toBe(key);
+    const harbor = checked(preset);
+    expect(packagedLibrary.publicKeyForRoute(harbor.data, harbor.guarded)).toBe(manifest.publicKeyBase64);
+    expect(packagedLibrary.publicKeyForRoute(data, { ...guarded, maps: harbor.guarded.maps })).toBeNull();
+    expect(packagedLibrary.publicKeyForRoute({ ...data, uri: harbor.data.uri }, guarded)).toBeNull();
+    expect(packagedLibrary.publicKeyFor({ ...title, renditionSha256: '0'.repeat(64) }, settings)).toBeNull();
+    expect(packagedLibrary.evidenceFor(title, settings)?.reportSha256).toBe(acadia.titles[0].verification.reportSha256);
+  });
+
+  it.each(['bundleId', 'publicKeyBase64', 'title', 'whitespace'])('does not extend Acadia approval to a changed %s catalog', change => {
+    const bad = JSON.parse(ACADIA_LIBRARY_JSON);
+    if (change === 'bundleId') bad.bundleId = 'a'.repeat(64);
+    if (change === 'publicKeyBase64') bad.publicKeyBase64 = manifest.publicKeyBase64;
+    if (change === 'title') bad.titles[0].title = 'Substituted';
+    const raw = change === 'whitespace' ? ACADIA_LIBRARY_JSON + ' ' : JSON.stringify(bad);
+    expect(createApprovedAcadiaLibrary(raw).titles(DEFAULT_SETTINGS)).toEqual([]);
+    expect(createApprovedAcadiaLibrary(ACADIA_LIBRARY_JSON).problem).toBeNull();
+  });
   it.each(PRESET_NAMES)('verifies the real imported source and chooses its %s rendition', (preset) => {
     const { entry, settings, data, guarded } = checked(preset);
     expect(packagedLibrary.problem).toBeNull();

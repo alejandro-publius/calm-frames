@@ -6,10 +6,26 @@ import PreparedVideoAnalysis from '../../src/calmframes/PreparedVideoAnalysis';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { checkedShelf } from './shelfFixtures';
 import { BENIGN_STORY_ID } from '../../src/calmframes/benignStory';
+import { ACADIA_SOURCE_SHA256, packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import { checkTitle } from '../../src/calmframes/titleStatus';
 
 const entries = checkedShelf();
 const prepared = entries.find(entry => entry.title.id.startsWith('prepared-'))!;
 const demo = entries.find(entry => entry.title.id === BENIGN_STORY_ID)!;
+test('shows two distinct detected Acadia periods and the selected rendition settings', () => {
+  const settings = { ...DEFAULT_SETTINGS, preset: 'extra-cautious' as const };
+  const title = packagedLibrary.titles(settings).find(one => one.sha256 === ACADIA_SOURCE_SHA256)!;
+  const entry = checkTitle(title, { settings, nowMs: Date.parse('2026-10-16T00:00:00Z'), publicKeyBase64: packagedLibrary.publicKeyFor(title, settings)! });
+  const view = render(<PreparedVideoAnalysis entry={entry} settings={settings} compact />);
+  expect(view.getByText('2 flagged periods')).toBeTruthy();
+  view.rerender(<PreparedVideoAnalysis entry={entry} settings={settings} />);
+  expect(view.getByText('8.3 to 11.7 sec')).toBeTruthy();
+  expect(view.getByText('29.1 to 30.6 sec')).toBeTruthy();
+  expect(view.getByText('7.3 to 12.7 sec')).toBeTruthy();
+  expect(view.getByText(/20 nits change, dark image below 160 nits, assumed peak 200 nits/)).toBeTruthy();
+  expect(view.getByText(/relative luminance change 0.1, dark image below 0.8/)).toBeTruthy();
+  expect(view.getAllByText('Preparation room: 85-inch screen at 4 feet.')).toHaveLength(2);
+});
 test('shows zero findings and the pre-analysis boundary for a genuine prepared selection', () => {
   const view = render(<PreparedVideoAnalysis entry={prepared} settings={DEFAULT_SETTINGS} compact />);
   expect(view.getByText('No scenes flagged')).toBeTruthy();

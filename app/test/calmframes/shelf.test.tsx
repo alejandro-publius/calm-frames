@@ -81,12 +81,14 @@ describe('the pictures on the shelf', () => {
    *     Expected: undefined
    *     Received: "data:image/jpeg;base64,/9j//gAPTGF2YzYz..."
    */
-  it('uses dedicated illustration assets for the known prepared story and test clip', () => {
+  it('uses dedicated presentation artwork for each prepared title and test clip', () => {
     for (const entry of others) {
       expect(shelfPoster(entry)).toBeUndefined();
       const view = render(<TitleArtwork illustrated entry={entry} testID="art" />);
       expect(view.getByTestId('art').props.source).toEqual(entry.title.id === OFFLINE_TITLE_ID
-        ? require('../../assets/image/tv/gradient.png') : require('../../assets/image/tv/harbor-illustrated.png'));
+        ? require('../../assets/image/tv/gradient.png')
+        : entry.title.title.startsWith('Acadia coastal scenery') ? require('../../assets/image/tv/coastal-zen.png')
+          : require('../../assets/image/tv/harbor-illustrated.png'));
       view.unmount();
     }
   });

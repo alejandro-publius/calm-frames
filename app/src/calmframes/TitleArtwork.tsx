@@ -3,7 +3,7 @@ import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { isBundledBenignStory } from './benignStory';
 import { OFFLINE_TITLE_ID } from './offlineTitle';
-import { concernsPackagedLibrary } from './packagedLibrary';
+import { ACADIA_SOURCE_SHA256, concernsPackagedLibrary } from './packagedLibrary';
 import { CatalogTitle, CheckedTitle } from './titleStatus';
 import { COASTAL_COLORS as CALM_COLORS, scale } from './calmStyles';
 import { shelfLabel, shelfPoster } from './shelf';
@@ -15,10 +15,14 @@ interface TitlePresentation {
   kind?: string;
   action: string;
   description: string;
-  art?: 'harbor' | 'harbor-cinematic' | 'gradient';
+  art?: 'harbor' | 'harbor-cinematic' | 'gradient' | 'coastal';
 }
 
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
+  if (concernsPackagedLibrary(title) && title.sha256 === ACADIA_SOURCE_SHA256) {
+    return { name: 'Acadia coastal scenery', kind: 'National Park Service', action: 'Watch now', art: 'coastal',
+      description: 'NPS Video, Acadia National Park. No NPS endorsement is implied. The artwork is decorative, not a video frame.' };
+  }
   if (isBundledBenignStory(title)) {
     return { name: 'Harbor', cardName: 'Harbor demo', kind: 'Demo', action: 'Play demo',
       description: 'The picture pauses twice while sound and captions continue. This demo contains no flashing.', art: 'harbor-cinematic' };
@@ -39,7 +43,8 @@ export default function TitleArtwork({ entry, testID, compact = false, height, i
   const presentation = titlePresentation(entry.title);
   const poster = shelfPoster(entry);
   const source = entry.status === 'verified' && presentation.art
-    ? presentation.art === 'harbor-cinematic' && !illustrated ? require('../../assets/image/tv/harbor-cinematic.png')
+    ? presentation.art === 'coastal' ? require('../../assets/image/tv/coastal-zen.png')
+      : presentation.art === 'harbor-cinematic' && !illustrated ? require('../../assets/image/tv/harbor-cinematic.png')
       : (presentation.art === 'harbor' || presentation.art === 'harbor-cinematic') ? require('../../assets/image/tv/harbor-illustrated.png') : require('../../assets/image/tv/gradient.png')
     : poster ? { uri: poster } : undefined;
   const artworkStyle = [styles.art, { height: scale(height ?? (compact ? 220 : 380)) }, immersive ? { borderRadius: 0 } : null];

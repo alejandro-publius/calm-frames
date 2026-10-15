@@ -211,7 +211,7 @@ const PlayerScreen = ({
     mapTexts: guardedParams?.maps,
     mapUrls: guardedParams?.mapUrls,
     expectedSha256: guardedParams?.sha256 ?? '',
-    publicKeyBase64: preparedRouteAccepted ? packagedLibrary.publicKeyBase64 : bundledTitlePublicKey(
+    publicKeyBase64: preparedRouteAccepted ? packagedLibrary.publicKeyForRoute(data, guardedParams) ?? '' : bundledTitlePublicKey(
       bundledIdentity,
       OFFLINE_PUBLIC_KEY_BASE64,
     ),

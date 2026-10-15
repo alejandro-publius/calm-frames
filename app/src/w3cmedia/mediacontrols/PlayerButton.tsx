@@ -12,6 +12,7 @@ import { CALM_CONTROL, CALM_COLORS, FOCUS_RING_WIDTH } from '../../calmframes/ca
 import FocusableElement from '../../components/FocusableElement';
 import { COLORS } from '../../styles/Colors';
 import { scaleUxToDp } from '../../utils/pixelUtils';
+import { trace } from '../../calmframes/trace';
 
 export interface PlayerButtonProps {
   onPress: () => void;
@@ -46,6 +47,7 @@ export const PlayerButton = React.forwardRef(
         accessibilityLabel={accessibilityLabel}
         accessibilityState={accessibilityState}
         onBlur={onBlur}
+        onFocus={() => trace('focus', testID)}
         focusableElementRef={ref as RefObject<React.ComponentRef<typeof TouchableOpacity>> | null}
         style={[styles.buttonContainer, overrideStyle]}
         onFocusOverrideStyle={styles.buttonFocus}

@@ -1,5 +1,18 @@
 # Final handoff: the integration candidate
 
+## Approved Acadia integration source, October 15, 2026
+
+The owner approved the exact Acadia bundle and public key at 21:19 UTC.
+The app now composes separate Harbor and Acadia catalogs and selects each key
+only after an exact title or route match. Harbor remains the main Home title;
+Acadia is an additional video card. Details shows two distinct detected periods,
+selected cover times and profile-specific analysis settings. The existing
+coastal image is labeled decorative, not a frame from Acadia. The original
+optional selection cue and held-key guard are included. Source checks pass
+131 suites, 1,310 tests and 57 snapshots; typecheck, strict delivery and the
+offline hook consumer pass. Build and native observations are pending here.
+Approval is recorded in results/acadia-native-2026-10-15/approval.json.
+
 ## Acadia audit and selection sound, October 15, 2026
 
 [Integration review](docs/evidence/acadia-integration-2026-10-15.md) records
