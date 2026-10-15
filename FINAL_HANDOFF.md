@@ -13,18 +13,35 @@ twice, without any screenshot, video or capture.
 | What | Value |
 |---|---|
 | Branch | `claude/final-candidate-2026-10-14`, worktree `/Users/alexvintera/calm-frames-claude-final-2026-10-14` |
-| Package source commit | `819de405ddf8e2d45526f978fc33d6a6ca977d5b` (`819de40`), the last commit that changes an app input: the simplified Home, the practice entry on Details and the bordered icon; the commits after it are the friction log, renders and this documentation (`git diff --stat 819de40 HEAD -- app/` is empty) |
-| Package | `build/release/final-candidate-4-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, aarch64 Debug, 28,731,853 bytes (build output outside git, in the worktree above) |
-| Package SHA-256 | `471770fb10d9269d1a4128f6b1328cb6dd30495dbc715d8289cdb79cfef0d337` |
-| Receipt | `build/release/final-candidate-4-2026-10-14/PREPARATION.json`: 736 recorded app inputs with hashes, inputs committed, prepared library checked with all 3 original reports present, catalog SHA-256 `02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79`; `SHA256SUMS` and `NOTES.md` beside it. The helper writes `native_validation_performed: false`; the session in section 3 is the validation |
-| Tested on the device | This exact package, installed over the existing household with `vega device install-app`; no uninstall, no data reset, no PIN entered. Receipt: [`results/native-acceptance-4-2026-10-14/receipt.json`](results/native-acceptance-4-2026-10-14/receipt.json). The previous package's session: [`results/native-acceptance-2026-10-14/receipt.json`](results/native-acceptance-2026-10-14/receipt.json) |
-| Receipt recheck | Package 3 was rechecked at `52235a7` (736 inputs bound). Package 4 needs none yet: no commit after `819de40` touches `app/` |
+| Package source commit | `4016e8dac8f675a4eb1e1613fd9dc7cf63d06e58` (`4016e8d`), the last commit that changes an app input: the one-voice copy on every screen, on top of `819de40` (the simplified Home, the practice entry on Details, the bordered icon); the commits after it are renders and this documentation |
+| Package | `build/release/final-candidate-5-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, aarch64 Debug, 28,733,262 bytes (build output outside git, in the worktree above) |
+| Package SHA-256 | `a226b39fc855cd7cf5eb4136b9ba890f92e6e6518ca764a6862cf9990870dc13` |
+| Receipt | `build/release/final-candidate-5-2026-10-14/PREPARATION.json`: 736 recorded app inputs with hashes, inputs committed, prepared library checked with all 3 original reports present, catalog SHA-256 `02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79`; `SHA256SUMS` and `NOTES.md` beside it. The helper writes `native_validation_performed: false`; the sessions in section 3 are the validation |
+| Tested on the device | This exact package, installed over the existing household with `vega device install-app`; no uninstall, no data reset, no PIN entered. Receipt: [`results/native-acceptance-5-2026-10-14/receipt.json`](results/native-acceptance-5-2026-10-14/receipt.json). Package 4's two sessions: [`results/native-acceptance-4-2026-10-14/receipt.json`](results/native-acceptance-4-2026-10-14/receipt.json) and [`second-pass.json`](results/native-acceptance-4-2026-10-14/second-pass.json); package 3's: [`results/native-acceptance-2026-10-14/receipt.json`](results/native-acceptance-2026-10-14/receipt.json) |
+| Receipt recheck | Package 3 was rechecked at `52235a7` (736 inputs bound). Packages 4 and 5 need none yet: no commit after their sources touches `app/` |
 | Build route | `source ~/vega/env`, fnm Node 22 and the watchman fallback shim on `PATH`, `JAVA_HOME=/opt/homebrew/opt/openjdk@21`, `DEMO_PIN` unset, then `RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag final-candidate-3-2026-10-14`. The helper printed its publication command and it was not run |
-| Earlier packages, preserved | `final-candidate-3-2026-10-14` from `ac5a610` (`4d36c177…`, driven on the device in the first Oct 14 session), `final-candidate-2026-10-14` from `93cf800` (`d53444ab…`) and `final-candidate-2-2026-10-14` from `52138fe`; Codex's `approved-coastal-b22d275-2026-10-14` in the coastal worktree |
-| Lineage | `cfddc4a` (reliability) → `b22d275` (Codex: approved coastal interface) → the submission packet and the illustrated harbor ledger → `58bd1a7` (coastal artwork ledgered, credits regenerated) → `53ab01b` (hook mirror) → `93cf800` (coastal menus held to the ten foot floors) → `204f185` (debug breadcrumbs) → `487e5e5` (Back one level at a time in setup, the picker and the removal question) → `52138fe` (bundled copies of the practice stills) → `69390ed` (README opens on the coast) → `ac5a610` (opening readies on a moving clock) → `d7e13be` (documented checks runnable from a fresh checkout) → the judge-path fixes and this documentation → `819de40` (the simplified Home, the practice entry on Details, the bordered icon and tile) → `111ff12` (friction log 41 to 43, renders) → this documentation |
+| Earlier packages, preserved | `final-candidate-4-2026-10-14` from `819de40` (`471770fb…`, driven twice on the device), `final-candidate-3-2026-10-14` from `ac5a610` (`4d36c177…`, driven once), `final-candidate-2026-10-14` from `93cf800` (`d53444ab…`) and `final-candidate-2-2026-10-14` from `52138fe`; Codex's `approved-coastal-b22d275-2026-10-14` in the coastal worktree |
+| Lineage | `cfddc4a` (reliability) → `b22d275` (Codex: approved coastal interface) → the submission packet and the illustrated harbor ledger → `58bd1a7` (coastal artwork ledgered, credits regenerated) → `53ab01b` (hook mirror) → `93cf800` (coastal menus held to the ten foot floors) → `204f185` (debug breadcrumbs) → `487e5e5` (Back one level at a time in setup, the picker and the removal question) → `52138fe` (bundled copies of the practice stills) → `69390ed` (README opens on the coast) → `ac5a610` (opening readies on a moving clock) → `d7e13be` (documented checks runnable from a fresh checkout) → the judge-path fixes and this documentation → `819de40` (the simplified Home, the practice entry on Details, the bordered icon and tile) → `111ff12` (friction log 41 to 43, renders) → this documentation → `4016e8d` (one voice for the words) → this documentation |
 | Previews | Static component export at `819de40`: <http://127.0.0.1:4176/> (served from `build/coastal-preview` in this worktree, pid in `.logs/final/preview-4176.pid`; regenerate with `cd app && npx jest --ci --watchman=false --coverage=false test/calmframes/coastalExport.test.tsx && cd .. && .venv/bin/python eval/preview/coastal_preview.py`). <http://127.0.0.1:4174/> is Codex's older export served from its own directory and <http://127.0.0.1:4175/> its water study; both left running. Browser previews, not device captures |
 
 ## 2. What changed, and the checks
+
+**One voice for the words (`4016e8d`, later on Oct 14):** Alex found the
+wording incohesive and padded. A picture hold is now the mechanism on every
+screen: the cards ("Picture hold coming up", "Holding the picture", "Held the
+picture for 4 seconds"), the timeline key, the parent area's record ("Picture
+holds", "3 holds, 12 seconds in all"), the room and profile rules, the chime
+row, the presets and the first run explainer; "the picture stays hidden" is
+the one phrase for a video that may not play; "video" is the word for content.
+Buttons say what they open: How it works and Parents in the Home header, Back,
+Play demo, Before you watch. Details says the check's result once in the hero
+("20 sec · No flashing found", "Checked frame by frame. No flashing found, so
+the picture never holds.") and Before you watch carries only the limit of
+detection, the timeline, the settings and the approved sentence; How it works
+is four lines beginning with who the app is for. The full app suite passes
+on it (133 suites, 1310 tests), typecheck and lint are clean, the hook mirror
+is re-synced, and the browser renders are regenerated from it. The label
+table is in `docs/design/COPY_GUIDE.md`.
 
 **Simplified at Alex's request (`819de40`, late Oct 14):** Home is one heading,
 "Calm Frames", at 120 units on one line (measured: 755 units wide in the
@@ -117,6 +134,30 @@ Method: the Debug package's own breadcrumbs and media events, read from
 device's `inputd-cli`. No pixels were seen and no audio was heard; "pass" means
 the app reported the journey happening. Details and the open items are in the
 receipts.
+
+### Package 5 (`4016e8d`, one voice for the words), later on Oct 14
+
+Receipt: `results/native-acceptance-5-2026-10-14/receipt.json`, the same
+driver and the same running device as package 4's sessions; the focus ids it
+steers by did not change with the words.
+
+| Journey | Result | What the app reported |
+|---|---|---|
+| J1 cold launch reaches Home with Play focused | observed-pass | first screen=[] first focus=['kid-mode-home-watch'] now screen=None focus=kid-mode-home-watch running=True touch events injected on the device after launch=0 |
+| J2 remote reaches Home controls and nothing removed takes focus | observed-pass | focus ids seen=['kid-mode-home-choose-profile', 'kid-mode-home-learn', 'kid-mode-home-more-info', 'kid-mode-home-parent-area', 'kid-mode-home-watch'] unexpected=[] removed seen=[] |
+| J3 Details opens on Play, Try picture holds sits beside it, Back restores focus to Details | observed-pass | reached=True screen=details focus=kid-mode-details-play right of Play=kid-mode-details-practice after Back screen=home focus=kid-mode-home-more-info |
+| J4 Home to Play: ordinary Harbor plays to the end with zero holds | observed-pass | playing=True ended=True interval covers=0 recovery screen=False after Back screen=player-left', focus=kid-mode-home-watch |
+| J5 Details to practice: the demo page, both holds with the calm still, Back one level at a time | observed-pass (the driver said observed-partial; see below) | reached practice entry=True demo page screen=details focus=kid-mode-details-play covers=['cover-on media=5034 interval 5000-9000', 'cover-on media=12007 interval 12000-16000'] stills=['still loaded', 'still loaded', 'still loaded', 'still loaded'] recovery=False Back1=("player-left',", 'kid-mode-details-practice') Back2=('home', 'kid-mode-home-more-info') Back3=('home', 'kid-mode-home-more-info') |
+| J6 Help opens and Back returns to Help | observed-pass | reached Help=True focus in Help=picture-hold-start after Back screen=home focus=kid-mode-home-learn |
+| J7 Settings opens its PIN gate and Back returns to Home | observed-pass | reached Settings=True screen=parent focus=kid-mode-parent-key-1 after Back screen=home focus=kid-mode-home-more-info; interior blocked: needs the household PIN |
+| J8 relaunch lands on the saved Home, no setup | observed-pass | screen=home focus=kid-mode-home-watch running=True touches in session=0 |
+
+Where a verdict reads "the driver said": the cold launch wanted the "screen
+home" breadcrumb as well as the focus breadcrumb, and the device's log limiter
+dropped the screen line (friction log entry 12); the first focus after launch
+was Play on Home with the app running, which is what the first session judged
+by. Pause and resume, the remote seek and the caption control were observed on
+package 4 (its second pass) and the player code did not change since.
 
 ### 3a. Package 4 (`819de40`, the simplified Home), late Oct 14
 

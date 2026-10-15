@@ -18,7 +18,7 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 |---|
 | ![Browser render of the coastal Details for Harbor: the artwork, the title, 20 sec · No flashing found, Play with its triangle and the quiet Try picture holds entry beside it, the viewing settings and Back to library](results/coastal-renders-2026-10-14/details.png) |
 
-<sub>Browser renders of the app's own React Native trees with the bundled fonts and artwork, exported from commit 819de40 ([render receipt](results/coastal-renders-2026-10-14/receipt.json)). They are review aids, not Vega screenshots; the native acceptance of this interface is in progress. The shelf holds two Harbors on purpose, one that plays straight through and one with two labelled practice holds, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md).</sub>
+<sub>Browser renders of the app's own React Native trees with the bundled fonts and artwork, exported from commit 4016e8d ([render receipt](results/coastal-renders-2026-10-14/receipt.json)). They are review aids, not Vega screenshots; the native acceptance of this interface is in progress. The shelf holds two Harbors on purpose, one that plays straight through and one with two labelled practice holds, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md).</sub>
 
 ---
 

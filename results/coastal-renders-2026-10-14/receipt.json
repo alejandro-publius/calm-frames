@@ -1,19 +1,19 @@
 {
-  "source_commit": "819de405ddf8e2d45526f978fc33d6a6ca977d5b",
+  "source_commit": "4016e8dac8f675a4eb1e1613fd9dc7cf63d06e58",
   "rendering": "Browser render of the component export, not a device capture",
   "renderer": "Playwright Chromium headless shell, 1920 by 1080, device scale 1",
   "files": [
     {
       "render": "results/coastal-renders-2026-10-14/home.png",
-      "sha256": "d683b593c03a46b3c55b6993f7df52e3867a69f5060cd4093d65034f54c86046",
+      "sha256": "a7565153d225ea0293603743bff79cbbe3742f5f107532a556652f5e806ddaaa",
       "export": "build/coastal-preview/index.html",
-      "export_sha256": "d2e17bb3f5b687afb4d7f782f657a1873932f1a795d32099442d02be3e729c71"
+      "export_sha256": "5e00e2aaf85072b7d992589cb39021a9ddd435062b849d373303e6785003ebf1"
     },
     {
       "render": "results/coastal-renders-2026-10-14/details.png",
-      "sha256": "790b0c08c0d3090be9d05c2cf409fd501d6aa2df8e1d8bd63747cf1a5483f6fe",
+      "sha256": "a5743865eb8a013ea368601c689da5a4e05e8b1b5c081bdc58fe0097e53b735d",
       "export": "build/coastal-preview/details.html",
-      "export_sha256": "c587aaad304f979ccd68b15db908030dc9f177ec4e6c4a370f501430374e79c2"
+      "export_sha256": "51576cbdfa37b38dae46e2e94384df7886b79e9e31e4c9c8a6f776ae8c6d848d"
     }
   ]
 }

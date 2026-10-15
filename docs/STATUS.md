@@ -4,6 +4,24 @@ Updated Oct 14, 2026.
 
 ## 0. Where things stand
 
+### Oct 14, later: one voice for the words, package 5
+
+Alex found the app's wording incohesive and padded. `4016e8d` settles one
+vocabulary and applies it on every screen: a picture hold is the mechanism
+(the cards say "Picture hold coming up", "Holding the picture", "Held the
+picture for 4 seconds"; the parent area's record is "Picture holds"); "the
+picture stays hidden" is the one phrase for a video that may not play;
+"video" is the word for content; the Home header says How it works and
+Parents instead of Help and Settings; Back is one word; the demo's action is
+Play demo. Details says the check's result once ("20 sec · No flashing
+found", "Checked frame by frame. No flashing found, so the picture never
+holds.") and Before you watch carries only the limit of detection, the
+timeline, the settings and the approved sentence; How it works is four lines
+beginning with who the app is for. The full app suite passes (133 suites,
+1310 tests), typecheck and lint are clean, the hook mirror is re-synced and
+the documents use the new names. Package 5 is built from `4016e8d`; its
+device session is recorded in `FINAL_HANDOFF.md` when it has run.
+
 ### Oct 14, late: Home simplified at Alex's request, the candidate published, package 4 driven
 
 Codex ran out of usage and Claude took over its handoff. Alex asked for a Home

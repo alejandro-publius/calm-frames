@@ -1,0 +1,89 @@
+{
+  "status": "native acceptance by the app's own debug breadcrumbs and media events; no screenshot, video or capture",
+  "recorded_utc": "2026-10-15T05:27:19Z",
+  "branch": "claude/final-candidate-2026-10-14",
+  "source_commit": "4016e8dac8f675a4eb1e1613fd9dc7cf63d06e58",
+  "package": {
+    "path": "build/release/final-candidate-5-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "sha256": "a226b39fc855cd7cf5eb4136b9ba890f92e6e6518ca764a6862cf9990870dc13",
+    "bytes": 28733262,
+    "target": "aarch64 Debug",
+    "recorded_inputs": 736,
+    "installed": true,
+    "install_mode": "vega device install-app over the existing install; no uninstall, no data reset, no PIN entered"
+  },
+  "device": "Vega Virtual Device (Simulator), aarch64, OS 1.2 (TV Ship/101520710), started detached by the session",
+  "method": "The driver pressed remote keys through inputd-cli on the device and read the app's Debug-build console lines from vega device start-log-stream: CALM_TRACE screen and focus breadcrumbs, CALM_TRACE still load or error, and CALM_TIMING media events. Each journey is judged from those lines only.",
+  "journeys": [
+    {
+      "journey": "J1 cold launch reaches Home with Play focused",
+      "verdict": "observed-pass",
+      "evidence": "first screen=[] first focus=['kid-mode-home-watch'] now screen=None focus=kid-mode-home-watch running=True touch events injected on the device after launch=0",
+      "driver_verdict": "observed-pass",
+      "review": "The driver wanted the \"screen home\" breadcrumb as well as the focus breadcrumb; the device's log limiter dropped the screen line (a known drop, friction log entry 12), while the first focus after launch was Play on Home and the app was running, which is what the first Oct 14 session judged by. Read as a pass on the focus evidence."
+    },
+    {
+      "journey": "J2 remote reaches Home controls and nothing removed takes focus",
+      "verdict": "observed-pass",
+      "evidence": "focus ids seen=['kid-mode-home-choose-profile', 'kid-mode-home-learn', 'kid-mode-home-more-info', 'kid-mode-home-parent-area', 'kid-mode-home-watch'] unexpected=[] removed seen=[]",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J3 Details opens on Play, Try picture holds sits beside it, Back restores focus to Details",
+      "verdict": "observed-pass",
+      "evidence": "reached=True screen=details focus=kid-mode-details-play right of Play=kid-mode-details-practice after Back screen=home focus=kid-mode-home-more-info",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J4 Home to Play: ordinary Harbor plays to the end with zero holds",
+      "verdict": "observed-pass",
+      "evidence": "playing=True ended=True interval covers=0 recovery screen=False after Back screen=player-left', focus=kid-mode-home-watch",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J5 Details to practice: the demo page, both holds with the calm still, Back one level at a time",
+      "verdict": "observed-pass",
+      "evidence": "reached practice entry=True demo page screen=details focus=kid-mode-details-play covers=['cover-on media=5034 interval 5000-9000', 'cover-on media=12007 interval 12000-16000'] stills=['still loaded', 'still loaded', 'still loaded', 'still loaded'] recovery=False Back1=(\"player-left',\", 'kid-mode-details-practice') Back2=('home', 'kid-mode-home-more-info') Back3=('home', 'kid-mode-home-more-info')",
+      "driver_verdict": "observed-partial",
+      "review": "Read against the device log: when the film ended the player left on its own and the demo page remounted with Play focused; the driver's first Back then went to Harbor's Details with focus on Try picture holds and its second to Home with focus on Details, the designed route. The driver had budgeted one more Back to leave the player, so it reported partial; every state it listed is the designed one. The ordinary Harbor journey (J4) ended the same way, onto Home."
+    },
+    {
+      "journey": "J6 Help opens and Back returns to Help",
+      "verdict": "observed-pass",
+      "evidence": "reached Help=True focus in Help=picture-hold-start after Back screen=home focus=kid-mode-home-learn",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J7 Settings opens its PIN gate and Back returns to Home",
+      "verdict": "observed-pass",
+      "evidence": "reached Settings=True screen=parent focus=kid-mode-parent-key-1 after Back screen=home focus=kid-mode-home-more-info; interior blocked: needs the household PIN",
+      "driver_verdict": "observed-pass"
+    },
+    {
+      "journey": "J8 relaunch lands on the saved Home, no setup",
+      "verdict": "observed-pass",
+      "evidence": "screen=home focus=kid-mode-home-watch running=True touches in session=0",
+      "driver_verdict": "observed-pass"
+    }
+  ],
+  "trace_kinds_seen": [
+    "screen details",
+    "screen home",
+    "screen parent",
+    "screen player',",
+    "screen player-left',",
+    "still loaded"
+  ],
+  "image_loader_errors_distinct": 18,
+  "not_observed": [
+    "Pixels: artwork, fonts, focus rings, caption text and the hold still were not seen; the still is judged by its load event.",
+    "Audio: not heard; continuity during holds is inferred from the media clock advancing through each hold.",
+    "The parent settings interior: the household PIN was not entered.",
+    "VoiceView and physical-television timing."
+  ],
+  "touches_injected_on_device": 0,
+  "touch_note": "The driver sends only remote keys; any inject_touch line in the device log is external input from the simulator window.",
+  "voice": "One vocabulary on every screen (4016e8d): a picture hold is the mechanism, the Home header says How it works and Parents, Back is one word, the demo plays as Play demo; the focus ids the driver steers by are unchanged.",
+  "log_lines": 18225,
+  "session_log": "kept outside git under .logs/final/native-acceptance-7/"
+}

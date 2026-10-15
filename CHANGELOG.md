@@ -31,6 +31,7 @@ to origin on Oct 14 and not merged anywhere; `FINAL_HANDOFF.md` has the package.
 
 #### Changed
 
+- One voice for the app's words: a picture hold is the mechanism everywhere (the cards, the timeline key, the parent area's record, the room and profile rules, the chime, the presets); "the picture stays hidden" stays the one phrase for a video that may not play; buttons say what they open (How it works and Parents in the Home header, Back, Play demo, Before you watch); Details says the check's result once and How it works is four lines, starting with who the app is for. (4016e8d)
 - Home is one heading, "Calm Frames", over the coast with Play and Details under it and Help and Settings in the header; the title's length and hold line, the explanation sentence, the Try picture holds card and the notice about titles held back are gone from it. Details carries the facts and offers the practice demo beside Play, opening the demo's own page; Back returns one level at a time, to the page that opened it with focus on that entry, then to Home with focus on Details. (819de40)
 - The launcher icon and the Fire TV tile carry a warm-sand inset border, one percent of the height in from every edge, drawn by the brand generator and re-rendered through the same route; the brand flash check was re-run on all thirteen images. (819de40)
 - Every menu screen paints the approved ivory coast with the dimensional coastal artwork; playback keeps its dark controls. (b22d275)
