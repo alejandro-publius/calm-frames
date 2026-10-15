@@ -1,10 +1,18 @@
 # Calm Frames submission copy
 
-Prepared October 13 for the current cinematic design. This is draft copy, not a
-submitted entry. The current interface is implemented in source; its matching
-Vega package and demo remain pending. Keep that qualification until the fresh
-native run is complete. [SUBMISSION.md](SUBMISSION.md) retains the detailed
-field guidance, technologies, feedback, testing instructions and mini challenges.
+Historical draft prepared October 13 for the cinematic design. The text below
+is kept as a record and is superseded by
+[the current Devpost draft](submission/DEVPOST_DRAFT.md); do not paste this
+version into the form. Its references to the current design and pending build
+describe October 13.
+
+The current candidate has package 5 from `4016e8d`, with eight journeys
+reported by the app's own log on the Vega Virtual Device. Pixels, audio, the
+parent settings interior and VoiceView remain unobserved, and recording still
+needs separate authorization. [FINAL_HANDOFF.md](../FINAL_HANDOFF.md) carries
+the package identity and remaining checks.
+[SUBMISSION.md](SUBMISSION.md) retains the detailed field guidance,
+technologies, feedback, testing instructions and mini challenges.
 
 ## Project name
 
