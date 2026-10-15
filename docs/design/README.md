@@ -326,13 +326,17 @@ in notices, and never "prevents seizures" or "seizure-proof".
 
 ### Oct 14: the approved coast
 
-The ivory and teal coast Alex approved on Oct 14, applied in `b22d275` and held
-to the floors in `93cf800`. Home: the coastal artwork full bleed, Harbor at one
-large size with its length and hold count, Play with its triangle, the quiet
-Details action, one line on picture holds, and the Try picture holds entry with
-its round crop of the artwork; Help and Settings in the header. Details keeps
-the same artwork and type with the viewing settings below. Playback stays on
-the dark palette. The values are in [Coastal menus, Oct 14](#coastal-menus-oct-14).
+The ivory and teal coast Alex approved on Oct 14, applied in `b22d275`, held
+to the floors in `93cf800` and simplified later that day at Alex's request.
+Home: the coastal artwork full bleed, one heading, "Calm Frames", at 120 units
+on one line so it ends before the lighthouse island, Play with its triangle and
+the quiet Details action under it, Help and Settings in the header, and
+nothing else: no title line, no explanation, no demo card, no notice about
+titles held back. Details keeps the same artwork and type with the title at
+184, its length and hold count, the quiet Try picture holds entry beside Play,
+which opens the practice demo's own page, and the viewing settings below.
+Playback stays on the dark palette. The values are in
+[Coastal menus, Oct 14](#coastal-menus-oct-14).
 
 ![Coastal Home, browser render of the component export](../../results/coastal-renders-2026-10-14/home.png)
 

@@ -149,17 +149,21 @@ some under load, so a missing line proves nothing.
 1. **First run.** The app asks for a household PIN. Choose any four digits and
    confirm them; there is no preset PIN in the package and it is never stored in
    plain text. Pick a profile, a viewing preset and the room.
-2. **Home.** Move focus with the D-pad across Play, Details, Try picture holds,
-   Settings and Help. The line under Harbor reads "20 sec · No picture holds".
-3. **Try picture holds.** Select it, read "20 sec · 2 practice holds" on the
-   details page, then Play. Watch the countdown and Skip, then the first hold:
-   the picture holds a still, the "Holding a calm scene" card appears, captions
-   change and the sound continues. The second hold follows. These are scheduled
-   examples, not detected flashing.
-4. **Transport.** Pause and resume; seek back into a hold and watch the cover
-   appear before the picture moves; press Back and see focus return to the tile.
-5. **Harbor.** Play the ordinary title: the same film with zero holds.
-6. **Settings** (Back on the Home root exits the app, by platform convention). Enter a wrong PIN and see it rejected with the tries
+2. **Home.** One heading, "Calm Frames", over the coast. Move focus with the
+   D-pad from Play to Details, then up to Help and Settings.
+3. **Details.** Select Details: "Harbor" with "20 sec · No picture holds", Play,
+   and the quiet Try picture holds entry beside it.
+4. **Try picture holds.** Select it, read "20 sec · 2 practice holds" on the
+   demo's own page, then Play. Watch the countdown and Skip, then the first
+   hold: the picture holds a still, the "Holding a calm scene" card appears,
+   captions change and the sound continues. The second hold follows. These are
+   scheduled examples, not detected flashing.
+5. **Transport.** Pause and resume; seek back into a hold and watch the cover
+   appear before the picture moves; press Back and see focus return to Play on
+   the demo's page, then Back again to Harbor's Details with focus on Try
+   picture holds.
+6. **Harbor.** Play the ordinary title: the same film with zero holds.
+7. **Settings** (Back on the Home root exits the app, by platform convention). Enter a wrong PIN and see it rejected with the tries
    remaining, correct it with Delete, enter the right one. Change the preset or
    the room, relaunch the app and see the choice kept. Practice holds never
    enter the exposure history, so an empty history after the demo is correct.

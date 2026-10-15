@@ -141,8 +141,9 @@ describe('the words on the shelf', () => {
     const onOpen = jest.fn();
     const onPlay = jest.fn();
     const home = render(<KidHomeScreen titles={shelf} onOpen={onOpen} onPlay={onPlay} />);
-    expect(screen.getByTestId('kid-home-meta').props.children).toBe('20 sec · No picture holds');
-    expect(screen.getByText('Picture holds on supported videos. Audio continues.')).toBeTruthy();
+    expect(screen.getByTestId('kid-home-title').props.children).toBe('Calm Frames');
+    expect(screen.queryByTestId('kid-home-meta')).toBeNull();
+    expect(screen.queryByText('Picture holds on supported videos. Audio continues.')).toBeNull();
     fireEvent.press(screen.getByTestId('kid-home-more-info'));
     expect(onOpen).toHaveBeenCalledWith(prepared);
     fireEvent.press(screen.getByTestId('kid-home-watch'));

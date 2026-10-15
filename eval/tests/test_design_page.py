@@ -429,14 +429,17 @@ def test_focus_width_and_text_floor_agree(page, tokens, source):
 
 
 def test_the_original_logo_palette_is_preserved_independently_of_ui():
-    # User-approved UI palette changes must not recolor existing artwork.
+    # User-approved UI palette changes must not recolor existing artwork. The
+    # one addition is the warm-sand inset border Alex asked for on Oct 14,
+    # which maps to no token; anything beyond these six is a recolour.
     original = {"TEAL": ("BACKGROUND", "#102F3A"), "CREAM": ("TEXT", "#F3E8D3"),
                 "SAFF": ("FOCUS_RING", "#E6A957"), "SAFFD": ("ACCENT_DARK", "#B87A2C"),
                 "INK": ("INK", "#17323C")}
+    added = {"SAND": ("none", "#E5D9BA")}
     logo = dict(re.findall(r'([A-Z]+)="(#[0-9A-Fa-f]{6})"', LOGO.read_text(encoding="utf-8")))
-    assert logo == {name: value for name, (_, value) in original.items()}
+    assert logo == {name: value for name, (_, value) in {**original, **added}.items()}
     rows = table(section(BRAND.read_text(encoding="utf-8"), "## The palette"))
-    assert {row[0]: (row[1], row[2].upper()) for row in rows} == original
+    assert {row[0]: (row[1], row[2].upper()) for row in rows} == {**original, **added}
 
 
 def test_every_render_the_page_shows_is_there(page):

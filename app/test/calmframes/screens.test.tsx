@@ -295,9 +295,9 @@ describe('KidHomeScreen', () => {
     expect(screen.getByTestId('kid-home-poster-ok')).toBeTruthy();
     expect(screen.queryByTestId('kid-home-poster-waiting')).toBeNull();
     expect(screen.queryByTestId('kid-home-poster-bad')).toBeNull();
-    expect(screen.getByTestId('kid-home-hidden-count').props.children).toEqual(
-      expect.arrayContaining([2]),
-    );
+    // Titles held back are listed in the parent area; Home carries no notice.
+    expect(screen.queryByTestId('kid-home-hidden-count')).toBeNull();
+    expect(screen.queryByText(/unavailable/)).toBeNull();
   });
 
   it('opens a title when it is pressed', () => {

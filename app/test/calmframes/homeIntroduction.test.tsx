@@ -4,23 +4,24 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { AccessibilityInfo, Animated, StyleSheet } from 'react-native';
 import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
+import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import { COASTAL_COLORS as CALM_COLORS } from '../../src/calmframes/calmStyles';
 import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
 import { checkedShelf } from './shelfFixtures';
 import { BENIGN_STORY_ID } from '../../src/calmframes/benignStory';
-import { InterfaceSoundContext } from '../../src/calmframes/useInterfaceSound';
 const titles = checkedShelf();
 const demo = titles.find(entry => entry.title.id === BENIGN_STORY_ID)!;
+const harbor = titles.find(entry => entry.title.title === 'Harbor story (prepared locally)')!;
 afterEach(() => jest.restoreAllMocks());
 
-test('practice navigation succeeds even if its optional confirmation sound fails', () => {
+test('the practice demo is reached from Details, not from a card on Home', () => {
   const open = jest.fn();
-  const launch = jest.fn();
-  render(<InterfaceSoundContext.Provider value={{ confirm: () => { throw new Error('sound unavailable'); }, stop: jest.fn() }}>
-    <KidHomeScreen titles={titles} onOpen={open} onLaunchControl={launch} />
-  </InterfaceSoundContext.Provider>);
-  expect(() => fireEvent.press(screen.getByTestId('kid-home-demo'))).not.toThrow();
-  expect(launch).toHaveBeenCalledWith('demo');
+  render(<KidHomeScreen titles={titles} onOpen={open} />);
+  expect(screen.queryByTestId('kid-home-demo')).toBeNull();
+  expect(screen.queryByText('Try picture holds')).toBeNull();
+  screen.unmount();
+  render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={demo} onOpenPractice={open} />);
+  fireEvent.press(screen.getByTestId('title-details-practice'));
   expect(open).toHaveBeenCalledTimes(1);
   expect(open).toHaveBeenCalledWith(demo);
 });
@@ -89,13 +90,13 @@ test.each([true, undefined])('home remains still when reduced motion is %s', asy
   expect(loop).not.toHaveBeenCalled();
 });
 
-test('home states the supported-title benefit and keeps parental controls tertiary until focused', () => {
+test('home carries no explanation and keeps parental controls tertiary until focused', () => {
   const parent = jest.fn();
   const details = jest.fn();
   const view = render(<KidHomeScreen titles={titles} onOpen={details} onOpenParentArea={parent} />);
-  expect(view.getByText('Picture holds on supported videos. Audio continues.')).toBeTruthy();
+  expect(view.queryByText('Picture holds on supported videos. Audio continues.')).toBeNull();
   expect(view.queryByText('About this story')).toBeNull();
-  fireEvent.press(view.getByRole('button', { name: 'Details' }));
+  fireEvent.press(view.getByRole('button', { name: 'Details: Harbor' }));
   expect(details).toHaveBeenCalledWith(titles.find(entry => entry.title.title === 'Harbor story (prepared locally)'));
   const control = view.getByTestId('kid-home-parent-area');
   expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent', minHeight: 88, borderWidth: 6 });

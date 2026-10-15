@@ -71,6 +71,7 @@ import {
   benignStoryTitle,
   benignStorySettings,
   bundledTitlePublicKey,
+  isBundledBenignStory,
 } from '../calmframes/benignStory';
 import ParentAreaScreen from '../calmframes/ParentAreaScreen';
 import { emptyPinGate, PinGateState } from '../calmframes/parentGate';
@@ -78,6 +79,7 @@ import {
   CatalogTitle,
   CheckedTitle,
   checkTitle,
+  kidModeTitles,
 } from '../calmframes/titleStatus';
 import TitleDetailsScreen from '../calmframes/TitleDetailsScreen';
 import { AppStackParamList, Screens } from '../components/navigation/types';
@@ -296,6 +298,11 @@ const KidModeScreen = ({
     setLastOpenedFrom(launchControl.current);
     launchControl.current = undefined;
   };
+  // Details offers the practice demo beside Play. Opening it keeps the page
+  // it came from, so Back returns there, one level at a time, with focus on
+  // the control that was pressed rather than on Play.
+  const [practiceFromId, setPracticeFromId] = React.useState<string | null>(null);
+  const [detailsFocus, setDetailsFocus] = React.useState<'play' | 'practice'>('play');
   const [focusGeneration, setFocusGeneration] = React.useState(0);
   React.useEffect(() => {
     const removeFocus = navigation.addListener?.('focus', () => {
@@ -353,6 +360,20 @@ const KidModeScreen = ({
     [resolved, settings, publicKeyBase64, nowMs],
   );
   const open = titles.find((entry) => entry.title.id === openId) ?? null;
+  const practice = React.useMemo(
+    () => kidModeTitles(titles).find((entry) => isBundledBenignStory(entry.title)) ?? null,
+    [titles],
+  );
+  const leaveDetails = () => {
+    if (practiceFromId) {
+      setOpenId(practiceFromId);
+      setPracticeFromId(null);
+      setDetailsFocus('practice');
+      return;
+    }
+    setOpenId(null);
+    setView('home');
+  };
 
   // The D-pad back button walks back through these states rather than leaving
   // the app from the middle of them.
@@ -371,7 +392,19 @@ const KidModeScreen = ({
           interfaceSound.confirm();
           return true;
         }
-        if (view === 'details' || view === 'parent') {
+        if (view === 'details') {
+          if (practiceFromId) {
+            setOpenId(practiceFromId);
+            setPracticeFromId(null);
+            setDetailsFocus('practice');
+          } else {
+            setView('home');
+            setOpenId(null);
+          }
+          interfaceSound.confirm();
+          return true;
+        }
+        if (view === 'parent') {
           setView('home');
           setOpenId(null);
           interfaceSound.confirm();
@@ -381,7 +414,7 @@ const KidModeScreen = ({
       },
     );
     return () => subscription.remove();
-  }, [navigation, view, interfaceSound]);
+  }, [navigation, view, interfaceSound, practiceFromId]);
 
   const finishFirstRun = (result: FirstRunResult) => {
     // The first run sets the floor, not one kid's settings. Every profile is
@@ -491,18 +524,25 @@ const KidModeScreen = ({
   if (view === 'details' && open) {
     return withInterfaceFeedback(
       <TitleDetailsScreen
-        key={`details-${focusGeneration}`}
+        key={`details-${focusGeneration}-${open.title.id}`}
         saving={saved.phase === 'saving'}
         interfaceMotionEnabled={family.interfaceMotionEnabled === true}
         interfaceActive={interfaceActive}
         testID={`${testID}-details`}
         entry={open}
         settings={settings}
-        onPlay={play}
-        onBack={() => {
-          setOpenId(null);
-          setView('home');
+        onPlay={(entry) => {
+          setDetailsFocus('play');
+          play(entry);
         }}
+        practice={practice ?? undefined}
+        preferPracticeFocus={detailsFocus === 'practice'}
+        onOpenPractice={(entry) => {
+          setPracticeFromId(open.title.id);
+          setDetailsFocus('play');
+          setOpenId(entry.title.id);
+        }}
+        onBack={leaveDetails}
       />
     );
   }
@@ -529,6 +569,8 @@ const KidModeScreen = ({
       }
       onOpen={(entry) => {
         rememberLaunch(entry);
+        setPracticeFromId(null);
+        setDetailsFocus('play');
         setOpenId(entry.title.id);
         setView('details');
       }}

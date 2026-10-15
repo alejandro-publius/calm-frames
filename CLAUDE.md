@@ -1,6 +1,25 @@
 # Calm Frames: rules for every session
 
-**Latest finishing checkpoint, Oct 13.** The library and details now center
+**Latest finishing checkpoint, Oct 14, late.** The submission candidate is the
+branch `claude/final-candidate-2026-10-14`, published to origin on Oct 14 at
+Alex's request (no main merge, no visibility change). Read `FINAL_HANDOFF.md`
+at its root first: the package, the native observations and the owner actions
+are there, and the packet is under `docs/submission/`. The branch carries
+Codex's approved ivory and teal coastal interface, the Oct 14 device fixes
+(bundled hold stills, the opening clock fallback), the Back fixes, the
+simplified Home Alex asked for (one "Calm Frames" heading over the scenery,
+Play and Details, nothing else; the practice demo is reached from Details),
+the warm-sand inset border on the launcher icon and the tile, and friction log
+entries 41 to 43 from what the device said. The Oct 13 paragraphs below about
+the centered cinematic layout, the film and `docs/MAC_FINISH.md` are history:
+do not rebuild them. Codex's Oct 15 research (rules, mini challenges, the
+friction bonus, Fire TV tooling) is documentation only, on
+`origin/dot/fire-tv-research-2026-10-15` under `docs/research/2026-10-15/`,
+and is based on an older commit than this candidate. Alex asked to avoid
+repeating the whole project review; continue from the handoff and run the
+checks appropriate to actual changes.
+
+**Earlier checkpoint, Oct 13.** The library and details now center
 artwork, titles, short descriptions and actions. Both playable Harbor versions
 use the new 20 second cinematic film: water opening, bright boat/lighthouse,
 animated reflections, water ambience and story captions. Practice holds remain

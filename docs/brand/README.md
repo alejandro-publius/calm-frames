@@ -7,6 +7,18 @@ small sizes. The identity is still, with no pulsing or animated halo.
 The brand line is **A calmer way to watch**. It describes the experience;
 it is not a clinical or detection guarantee.
 
+## The inset border, Oct 14
+
+Alex asked for a border on the launcher tile. The bust mark and the Fire TV
+tile now carry a warm-sand (`#E5D9BA`) inset line, one percent of the height
+in from every edge and concentric with the frame's corners, drawn last by
+`make_logo.py`. It is static artwork: no glow, no shadow, no extra text. The
+launcher's own focus treatment is the system's and is not imitated. The head
+mark, used under 96 px, has no border because one percent of 48 px is under a
+pixel. The 512 manifest icon is what a sideloaded package shows on the
+launcher and in Settings; the 1280 by 720 tile is the Appstore listing asset.
+The previous renders are in Git history before this change.
+
 ## Making the files
 
     cd app/assets/brand
@@ -160,9 +172,11 @@ which lists every `CALM_COLORS` entry in `app/src/calmframes/calmStyles.ts`
 with its use, and the pairs that carry text with their contrast ratios. This
 section keeps only what is particular to the mark.
 
-The five colours at the top of `app/assets/brand/make_logo.py` are app tokens,
-and `eval/tests/test_design_page.py` fails if one of them stops being a
-palette colour:
+The five original colours at the top of `app/assets/brand/make_logo.py` are
+app tokens, and `eval/tests/test_design_page.py` fails if one of them stops
+being a palette colour or if any colour beyond the sixth appears. The sixth,
+`SAND`, is the inset border Alex asked for on Oct 14; it is artwork only and
+maps to no token:
 
 | make_logo.py | Token | Hex | In the mark |
 |---|---|---|---|
@@ -171,6 +185,7 @@ palette colour:
 | `SAFF` | `FOCUS_RING` | `#E6A957` | The robe |
 | `SAFFD` | `ACCENT_DARK` | `#B87A2C` | The single fold line across the robe |
 | `INK` | `INK` | `#17323C` | The closed eyes and the smile |
+| `SAND` | none | `#E5D9BA` | The inset border on the bust mark and the tile, added Oct 14 |
 
 The tile draws the wordmark and the brand line in full-opacity cream on the
 opaque teal ground. Contrast values measured against the older `#1F4D5C`

@@ -12,11 +12,11 @@
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
-![Browser render of the coastal Home: the seated figure, the lighthouse island and the boat behind Harbor, 20 sec · No picture holds, Play and Details, the line Picture holds on supported videos. Audio continues., the Try picture holds entry, and Help and Settings in the header](results/coastal-renders-2026-10-14/home.png)
+![Browser render of the coastal Home: the seated figure, the lighthouse island and the boat behind one heading, Calm Frames, with Play and Details under it, and Help and Settings in the header](results/coastal-renders-2026-10-14/home.png)
 
 | Details |
 |---|
-| ![Browser render of the coastal Details for Harbor: the artwork, the title, 20 sec · No picture holds, Play with its triangle, the viewing settings and Back to library](results/coastal-renders-2026-10-14/details.png) |
+| ![Browser render of the coastal Details for Harbor: the artwork, the title, 20 sec · No picture holds, Play with its triangle and the quiet Try picture holds entry beside it, the viewing settings and Back to library](results/coastal-renders-2026-10-14/details.png) |
 
 <sub>Browser renders of the app's own React Native trees with the bundled fonts and artwork, exported from commit 52138fe ([render receipt](results/coastal-renders-2026-10-14/receipt.json)). They are review aids, not Vega screenshots; the native acceptance of this interface is in progress. The shelf holds two Harbors on purpose, one that plays straight through and one with two labelled practice holds, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md).</sub>
 
@@ -32,7 +32,7 @@ Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
 
 The ivory and teal coast: a seated figure on a rock, a lighthouse island and a boat behind everything on Home, with text sized for a couch and a visible ring on whatever the remote has focused. Playback keeps dark controls over the video.
 
-- **Home says what there is.** "Harbor" with "20 sec · No picture holds", a Play button with a triangle and a quiet Details action, one line under them, "Picture holds on supported videos. Audio continues.", and the Try picture holds entry with "20 sec · 2 practice holds". Help and Settings sit in the header.
+- **Home is one heading and two actions.** "Calm Frames" over the coast, a Play button with a triangle and a quiet Details action; Help and Settings sit in the header. Details carries the facts: "Harbor" with "20 sec · No picture holds", the picture timeline, and the quiet Try picture holds entry beside Play, which opens the practice demo's own page, "20 sec · 2 practice holds".
 - **A short setup, once.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
 - **A library of checked titles only.** A title plays only after its flash map is verified; one that has not verified shows Needs check and stays hidden.
 - **A card before anything is hidden.** A countdown with Skip in focus a few seconds ahead, and an optional chime.

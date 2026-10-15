@@ -45,6 +45,15 @@ export interface TitleDetailsScreenProps {
   testID?: string;
   interfaceMotionEnabled?: boolean;
   interfaceActive?: boolean;
+  /**
+   * The practice demo, offered beside Play on a title that is not the demo
+   * itself. Home carries no card for it, so this is where a family finds the
+   * two scheduled holds.
+   */
+  practice?: CheckedTitle;
+  onOpenPractice?: (entry: CheckedTitle) => void;
+  /** Back from the demo's own page puts focus on the control that opened it. */
+  preferPracticeFocus?: boolean;
 }
 
 const TitleDetailsScreen = ({
@@ -56,6 +65,9 @@ const TitleDetailsScreen = ({
   testID = 'title-details',
   interfaceMotionEnabled = false,
   interfaceActive = true,
+  practice,
+  onOpenPractice,
+  preferPracticeFocus = false,
 }: TitleDetailsScreenProps) => {
   const settings = React.useMemo(
     () => benignStorySettings(entry.title, householdSettings),
@@ -72,6 +84,18 @@ const TitleDetailsScreen = ({
   );
   const presentation = titlePresentation(entry.title);
   const demo = isBundledBenignStory(entry.title);
+  const practiceOffered = practice && onOpenPractice && !demo ? practice : null;
+  // Counted the way the demo's own page counts them: the merged schedule under
+  // the demo's prepared settings, not the raw segments of each map.
+  const practiceLine = React.useMemo(() => {
+    if (!practiceOffered) return null;
+    const seconds = Math.round((practiceOffered.title.durationMs ?? 0) / 1000);
+    const holds = buildCoverIntervals(practiceOffered.segments ?? [], {
+      ...coverOptionsFor(benignStorySettings(practiceOffered.title, DEFAULT_SETTINGS)),
+      durationMs: practiceOffered.title.durationMs,
+    }).length;
+    return seconds > 0 && holds > 0 ? `${seconds} sec · ${holds} practice hold${holds === 1 ? '' : 's'}` : null;
+  }, [practiceOffered]);
   const playLabel = presentation.action === 'Watch now' ? 'Play' : presentation.action;
   const notice = noticeForTitle(entry);
   const playable = notice === null;
@@ -132,7 +156,10 @@ const TitleDetailsScreen = ({
           <View style={styles.buttons}>
             <CalmButton primary playIcon sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
               accessibilityLabel={saving ? 'Saving your changes...' : `${playLabel}: ${presentation.name}`}
-              disabled={saving} hasTVPreferredFocus onPress={() => onPlay(entry)} />
+              disabled={saving} hasTVPreferredFocus={!(preferPracticeFocus && practiceOffered)} onPress={() => onPlay(entry)} />
+            {practiceOffered ? <CalmButton quiet testID={`${testID}-practice`} label="Try picture holds"
+              accessibilityLabel={practiceLine ? `Try picture holds. ${practiceLine}` : 'Try picture holds'}
+              disabled={saving} hasTVPreferredFocus={preferPracticeFocus} onPress={() => onOpenPractice?.(practiceOffered)} /> : null}
           </View>
           <Text style={styles.quickSummary}>{intervals.length === 0 ? 'No picture holds in this story. Some flashing may still go undetected.' : `${intervals.length} ${demo ? 'practice holds' : 'parts covered'}. Sound and captions continue.`}</Text>
         </View>
@@ -230,7 +257,7 @@ const styles = StyleSheet.create({
   unavailableContent: { flexGrow: 1, justifyContent: 'flex-start' },
   unavailableBody: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', gap: scale(24) },
   unavailableAction: { marginTop: scale(16) },
-  buttons: { flexDirection: 'row', justifyContent: 'flex-start', marginTop: 0 },
+  buttons: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', gap: scale(20), marginTop: 0 },
   footer: { width: '100%', maxWidth: scale(1040), alignItems: 'flex-start', marginTop: scale(40), paddingTop: scale(24), borderTopWidth: scale(1), borderTopColor: CALM_COLORS.SURFACE_FOCUSED },
 });
 export default TitleDetailsScreen;

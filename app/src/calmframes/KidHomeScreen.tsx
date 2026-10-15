@@ -2,7 +2,6 @@ import React from 'react';
 import TouchableOpacity from './CalmTouchable';
 import {
   BackHandler,
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,10 +12,7 @@ import CalmPageHeader from './CalmPageHeader';
 import { OFFLINE_TITLE_ID } from './offlineTitle';
 import HomeHarborScene from './HomeHarborScene';
 import PictureHoldIntroduction from './PictureHoldIntroduction';
-import { benignStorySettings, isBundledBenignStory } from './benignStory';
-import { buildCoverIntervals } from './coverSchedule';
-import { trace } from './trace';
-import { coverOptionsFor, DEFAULT_SETTINGS } from './household';
+import { isBundledBenignStory } from './benignStory';
 import {
   CALM_CONTROL,
   COASTAL_COLORS as CALM_COLORS,
@@ -53,7 +49,7 @@ import {
 } from './uiFrames';
 
 /** The shelf control a title was opened or started from. */
-export type ReturnFocusControl = 'watch' | 'details' | 'poster' | 'demo';
+export type ReturnFocusControl = 'watch' | 'details' | 'poster';
 
 export interface KidHomeScreenProps {
   /** Every title that has been checked, in any state. */
@@ -138,24 +134,11 @@ const KidHomeScreen = ({
   const otherStories = listed.filter((entry) => (!hasMainStory || (!isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID)) && (entry !== featured || !titlePresentation(entry.title).art || !hasMainStory));
   const playbackCheck = listed.find((entry) => entry.title.id === OFFLINE_TITLE_ID);
   const feature = featured ? titlePresentation(featured.title) : null;
-  // Said plainly beside the actions: a checked story with nothing to hold is
-  // not protected by a hold, and the demo is where a hold can be seen.
-  const featuredHasNoHolds = Boolean(featured) && featured!.status === 'verified'
-    && !isBundledBenignStory(featured!.title) && (featured!.segments?.length ?? 0) === 0;
-  const demoSeconds = Math.round((demo?.title.durationMs ?? 0) / 1000);
-  // Counted the way the demo's own page counts them: the merged schedule, not
-  // the raw segments of each map.
-  const demoHolds = React.useMemo(() => demo ? buildCoverIntervals(demo.segments ?? [], {
-    ...coverOptionsFor(benignStorySettings(demo.title, DEFAULT_SETTINGS)),
-    durationMs: demo.title.durationMs,
-  }).length : 0, [demo]);
-  const demoLine = demo && demoSeconds > 0 && demoHolds > 0
-    ? `${demoSeconds} sec · ${demoHolds} practice hold${demoHolds === 1 ? '' : 's'}`
-    : null;
-  const featuredSeconds = Math.round((featured?.title.durationMs ?? 0) / 1000);
-  const featuredMeta = [featuredSeconds > 0 ? `${featuredSeconds} sec` : null, featuredHasNoHolds ? 'No picture holds' : null].filter(Boolean).join(' · ');
+  // The hero names the app, not the title. The title's length and hold count
+  // are on Details, and Play's spoken label still says which title it starts.
+  // Titles held back by the household's settings are listed in the parent
+  // area, not announced here.
   const featuredAction = feature?.action === 'Watch now' ? 'Play' : feature?.action;
-  const hiddenCount = titles.length - listed.length;
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
     ? returnFocusId
     : listed[0]?.title.id;
@@ -201,7 +184,7 @@ const KidHomeScreen = ({
     reason = 'poster focused';
   }
   if (!empty && !otherStories.length && !choosingProfile && !offline) {
-    frame = focusedId === 'watch' ? KID_HOME_STORY_WATCH_FRAME : focusedId === 'details' || focusedId === 'demo' ? KID_HOME_STORY_FOCUSED_FRAME : KID_HOME_STORY_FRAME;
+    frame = focusedId === 'watch' ? KID_HOME_STORY_WATCH_FRAME : focusedId === 'details' ? KID_HOME_STORY_FOCUSED_FRAME : KID_HOME_STORY_FRAME;
     reason = frame.screen;
   }
   useUiCapture(frame, reason);
@@ -209,7 +192,7 @@ const KidHomeScreen = ({
   return (
     <View testID={testID} style={styles.screen}>
       <HomeHarborScene immersive={!showIntroduction && !empty} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
-      <CalmPageHeader onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
+      <CalmPageHeader wordmark={false} onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
           {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet compact testID={`${testID}-learn`} label="Help" accessibilityLabel="Help: How it works" hasTVPreferredFocus={returnTo === 'learn'}
@@ -238,33 +221,13 @@ const KidHomeScreen = ({
           <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroCopy}>
-                <Text accessibilityRole="header" testID={`${testID}-title`} style={[styles.featureTitle, feature.name.length > 18 ? styles.longFeatureTitle : null]}>{feature.name}</Text>
-                {featuredHasNoHolds ? <Text style={styles.description} testID={`${testID}-meta`}>{featuredMeta}</Text> : feature.description ? <Text style={styles.description}>{feature.description}</Text> : null}
+                <Text accessibilityRole="header" testID={`${testID}-title`} style={styles.featureTitle}>Calm Frames</Text>
                 <View style={styles.actions}>
                   <CalmButton primary playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
-                  <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
+                  <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" accessibilityLabel={`Details: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
               </View>
-              <Text style={styles.purposeCopy}>Picture holds on supported videos. Audio continues.</Text>
-              {demo && demo !== featured ? <TouchableOpacity surfaceKind="tertiary" testID={`${testID}-demo`}
-                accessibilityRole="button" accessibilityLabel={demoLine ? `Try picture holds. ${demoLine}` : 'Try picture holds'}
-                accessibilityState={{ disabled: saving }} hasTVPreferredFocus={returnTo === 'demo'} disabled={saving}
-                onFocus={() => setFocusedId('demo')} onBlur={() => setFocusedId(null)}
-                onPress={() => {
-                  if (!saving) {
-                    onLaunchControl?.('demo');
-                    onOpen(demo);
-                    try { feedback.confirm(); } catch { /* Navigation already succeeded. */ }
-                  }
-                }}
-                style={[styles.purpose, focusedId === 'demo' ? styles.posterFocused : null]}>
-                <Image source={require('../../assets/image/tv/coastal-zen.png')} style={styles.demoArt} accessible={false} fadeDuration={0} onLoad={() => trace('image', 'demo tile loaded')} onError={() => trace('image', 'demo tile error')} />
-                <View style={styles.demoCopy}>
-                  <Text style={[styles.demoTitle, focusedId === 'demo' ? styles.focusedLabel : null]}>Try picture holds</Text>
-                  {demoLine ? <Text style={styles.demoMeta} testID={`${testID}-demo-meta`}>{demoLine}</Text> : null}
-                </View>
-              </TouchableOpacity> : null}
             </View> : null}
             {otherStories.length > 0 ? <View style={styles.sectionHeading}><Text style={styles.section}>More to watch</Text></View> : null}
             <View style={styles.grid}>
@@ -290,16 +253,6 @@ const KidHomeScreen = ({
           </ScrollView>
         </>
       )}
-
-      <View style={styles.footer}>
-        {!showIntroduction && hiddenCount > 0 ? (
-          <Text style={styles.footerText} testID={`${testID}-hidden-count`}>
-            {hiddenCount} more {hiddenCount === 1 ? 'title is' : 'titles are'} unavailable.
-            Open Parental controls to see why.
-          </Text>
-        ) : null}
-
-      </View>
     </View>
   );
 };
@@ -316,18 +269,11 @@ const styles = StyleSheet.create({
   libraryScroll: { flex: 1 },
   scrollContent: { paddingBottom: scale(12) },
   hero: { width: '100%', minHeight: scale(810), alignItems: 'flex-start', paddingBottom: scale(36) },
-  heroCopy: { width: scale(760), paddingTop: scale(70), alignItems: 'flex-start' },
-  // The lantern: the one place that says what a hold is and where to see one.
-  purpose: { width: scale(600), marginTop: scale(54), flexDirection: 'row', alignItems: 'center', gap: scale(28), padding: scale(12), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: 'transparent', borderRadius: scale(24) },
-  demoArt: { width: scale(104), height: scale(104), borderRadius: scale(52) },
-  demoCopy: { flex: 1, gap: scale(4) },
-  demoTitle: { ...CALM_TEXT.section, fontSize: scale(34), lineHeight: scale(44), color: CALM_COLORS.TEXT },
-  demoMeta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
-  purposeCopy: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, width: scale(570), marginTop: scale(30) },
-  eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(12) },
-  featureTitle: { ...CALM_TEXT.screen, fontSize: scale(184), lineHeight: scale(210), color: CALM_COLORS.TEXT, marginBottom: scale(12) },
-  longFeatureTitle: { fontSize: scale(64), lineHeight: scale(76) },
-  description: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, maxWidth: scale(600), marginBottom: scale(36) },
+  heroCopy: { width: scale(840), paddingTop: scale(70), alignItems: 'flex-start' },
+  // One line at 120: "Calm Frames" measures 755 units in the display face,
+  // which ends before the island's tree at about 900. At 184 it would run to
+  // 1158 and under the lighthouse.
+  featureTitle: { ...CALM_TEXT.screen, fontSize: scale(120), lineHeight: scale(136), color: CALM_COLORS.TEXT, marginBottom: scale(36) },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   learn: { flexDirection: 'row', marginTop: scale(8) },
   sectionHeading: { alignItems: 'flex-start', marginBottom: scale(24) },
@@ -340,7 +286,5 @@ const styles = StyleSheet.create({
   posterCopy: { flex: 1 },
   posterTitle: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT },
   posterQualifier: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
-  footer: { paddingTop: scale(12) },
-  footerText: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
 });
 export default KidHomeScreen;

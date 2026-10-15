@@ -41,8 +41,9 @@ interval, the player covers the picture before that interval starts and shows a
 checked still from just before it, while the sound and the captions keep going.
 A card says what is happening. A countdown and a Skip appear before a practice
 hold. The ordinary Harbor film has zero holds, because nothing in it goes over
-the limits, so it simply plays. The practice version, "Try picture holds", is
-the same film with two scheduled holds, so a family can see the player work.
+the limits, so it simply plays. The practice version, opened from Details with
+"Try picture holds", is the same film with two scheduled holds, so a family can
+see the player work.
 Those two holds are examples, not detected flashing.
 
 **Parental controls behind a PIN.** Profiles, a viewing preset (Standard,

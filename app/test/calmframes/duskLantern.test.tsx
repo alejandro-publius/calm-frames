@@ -1,7 +1,7 @@
 /**
- * The dusk lantern composition: Home leads with the harbor and one coral
- * action, says plainly what Harbor does and does not do, and puts the picture
- * hold demo one press away. Details lists its facts in one line.
+ * The coastal Home and Details. Home is the app's name over the scenery with
+ * Play and Details and nothing else in the hero: the title's facts live on
+ * Details, which is also where the practice demo is reached.
  */
 import React from 'react';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
@@ -25,31 +25,37 @@ function preferred(): string[] {
   return [...new Set(ids)];
 }
 
-test('Home leads with Harbor, says it has no holds, and puts the picture hold demo one press away', () => {
+test('Home is the app name, the scenery, Play and Details: no title facts, no explanation, no demo card, no notice', () => {
   const onOpen = jest.fn();
   const launch = jest.fn();
   render(<KidHomeScreen titles={titles} onOpen={onOpen} onPlay={jest.fn()} onLaunchControl={launch} onOpenParentArea={jest.fn()} />);
-  expect(screen.getByTestId('kid-home-title').props.children).toBe('Harbor');
-  expect(screen.queryByText('Harbor plays without picture holds.')).toBeNull();
-  expect(screen.getByTestId('kid-home-meta').props.children).toBe('20 sec · No picture holds');
-  expect(screen.getByText('Picture holds on supported videos. Audio continues.')).toBeTruthy();
-  expect(screen.getByText('20 sec · 2 practice holds')).toBeTruthy();
+  expect(screen.getByTestId('kid-home-title').props.children).toBe('Calm Frames');
+  expect(screen.getAllByText('Calm Frames')).toHaveLength(1);
+  expect(screen.queryByTestId('kid-home-meta')).toBeNull();
+  expect(screen.queryByText(/No picture holds/)).toBeNull();
+  expect(screen.queryByText('Picture holds on supported videos. Audio continues.')).toBeNull();
+  expect(screen.queryByTestId('kid-home-demo')).toBeNull();
+  expect(screen.queryByText('Try picture holds')).toBeNull();
+  expect(screen.queryByText(/practice hold/)).toBeNull();
+  expect(screen.queryByTestId('kid-home-hidden-count')).toBeNull();
+  expect(screen.queryByText(/unavailable/)).toBeNull();
   expect(screen.getByRole('button', { name: 'Play: Harbor' })).toBeTruthy();
-  expect(screen.getByRole('button', { name: 'Try picture holds. 20 sec · 2 practice holds' })).toBeTruthy();
+  expect(screen.getByRole('button', { name: 'Details: Harbor' })).toBeTruthy();
+  expect(screen.getByTestId('kid-home-parent-area')).toBeTruthy();
   expect(preferred()).toEqual(['kid-home-watch']);
-  fireEvent.press(screen.getByTestId('kid-home-demo'));
-  expect(launch).toHaveBeenCalledWith('demo');
-  expect(onOpen).toHaveBeenCalledWith(demo);
+  fireEvent.press(screen.getByTestId('kid-home-more-info'));
+  expect(launch).toHaveBeenCalledWith('details');
+  expect(onOpen).toHaveBeenCalledWith(harbor);
   for (const pattern of BANNED) {
     expect(screen.queryByText(pattern)).toBeNull();
   }
 });
 
-test('one teal action on Home: Play is primary, the demo and Details are quiet', () => {
+test('one teal action on Home: Play is primary, Details and Help are quiet', () => {
   render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={jest.fn()} />);
   const watch = StyleSheet.flatten(screen.getByTestId('kid-home-watch').props.style);
   expect(watch.backgroundColor).toBe(CALM_COLORS.PRIMARY);
-  for (const id of ['kid-home-more-info', 'kid-home-demo', 'kid-home-learn']) {
+  for (const id of ['kid-home-more-info', 'kid-home-learn', 'kid-home-parent-area']) {
     expect(StyleSheet.flatten(screen.getByTestId(id).props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
   }
 });
@@ -59,14 +65,16 @@ test('How it works lives in the header, hides while the explanation is open, and
   fireEvent.press(screen.getByTestId('kid-home-learn'));
   expect(screen.getByTestId('picture-hold-introduction')).toBeTruthy();
   expect(screen.queryByTestId('kid-home-learn')).toBeNull();
-  expect(screen.queryByTestId('kid-home-demo')).toBeNull();
   fireEvent.press(screen.getByTestId('picture-hold-dismiss'));
   expect(preferred()).toEqual(['kid-home-learn']);
 });
 
-test('returning from the demo page focuses the demo control and nothing else', () => {
-  render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} returnFocusId={BENIGN_STORY_ID} returnFocusControl="demo" />);
-  expect(preferred()).toEqual(['kid-home-demo']);
+test('returning from Details focuses Details; returning from the demo page reached through Help focuses Help', () => {
+  const first = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} returnFocusId={harbor.title.id} returnFocusControl="details" />);
+  expect(preferred()).toEqual(['kid-home-more-info']);
+  first.unmount();
+  render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} returnFocusId={BENIGN_STORY_ID} />);
+  expect(preferred()).toEqual(['kid-home-learn']);
 });
 
 test('when the demo itself leads the shelf there is no second demo control and no no-holds line', () => {
@@ -76,16 +84,17 @@ test('when the demo itself leads the shelf there is no second demo control and n
   expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Watch demo/);
 });
 
-test('Home and Details titles share one size, and every added line meets the ten foot floor', () => {
+test('the Home heading is one large line sized to clear the artwork, and Details keeps the title at full size', () => {
   const home = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} />);
   const homeTitle = StyleSheet.flatten(home.getByTestId('kid-home-title').props.style);
-  const noHolds = StyleSheet.flatten(home.getByTestId('kid-home-meta').props.style);
-  expect(noHolds.fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE);
+  // "Calm Frames" measures 755 units at 120 in the display face and would
+  // reach the lighthouse island at 184; see KidHomeScreen's style note.
+  expect(homeTitle.fontSize).toBe(120);
+  expect(homeTitle.fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE * 3);
   home.unmount();
   const details = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
   const detailsTitle = StyleSheet.flatten(details.getByTestId('title-details-title').props.style);
-  expect(detailsTitle.fontSize).toBe(homeTitle.fontSize);
-  expect(homeTitle.fontSize).toBeLessThanOrEqual(200);
+  expect(detailsTitle.fontSize).toBe(184);
   expect(StyleSheet.flatten(details.getByTestId('title-details-meta').props.style).fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE);
 });
 
@@ -102,10 +111,28 @@ test('Details lists runtime and holds in one factual line under the title', () =
   expect(practice.getByTestId('title-details-play').props.accessibilityLabel).toMatch(/Watch demo/);
 });
 
+test('Details offers the practice demo beside Play, quiet, and the demo page itself does not', () => {
+  const openPractice = jest.fn();
+  const prepared = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={demo} onOpenPractice={openPractice} />);
+  const entry = prepared.getByTestId('title-details-practice');
+  expect(entry.props.accessibilityLabel).toBe('Try picture holds. 20 sec · 2 practice holds');
+  expect(StyleSheet.flatten(entry.props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
+  expect(prepared.getByTestId('title-details-play').props.hasTVPreferredFocus).toBe(true);
+  expect(entry.props.hasTVPreferredFocus).toBe(false);
+  fireEvent.press(entry);
+  expect(openPractice).toHaveBeenCalledWith(demo);
+  prepared.unmount();
+  const returned = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={demo} onOpenPractice={openPractice} preferPracticeFocus />);
+  expect(returned.getByTestId('title-details-practice').props.hasTVPreferredFocus).toBe(true);
+  expect(returned.getByTestId('title-details-play').props.hasTVPreferredFocus).toBe(false);
+  returned.unmount();
+  const practice = render(<TitleDetailsScreen entry={demo} onPlay={jest.fn()} practice={demo} onOpenPractice={openPractice} />);
+  expect(practice.queryByTestId('title-details-practice')).toBeNull();
+  expect(practice.getByTestId('title-details-play').props.hasTVPreferredFocus).toBe(true);
+});
 
-test('demo metadata follows the title duration and schedule rather than fixed copy', () => {
+test('the practice entry follows the demo duration and schedule rather than fixed copy', () => {
   const shorterDemo = { ...demo, title: { ...demo.title, durationMs: 30000 }, segments: demo.segments.slice(0, 1) };
-  render(<KidHomeScreen titles={titles.map((entry) => entry === demo ? shorterDemo : entry)} onOpen={jest.fn()} />);
-  expect(screen.getByTestId('kid-home-demo-meta').props.children).toBe('30 sec · 1 practice hold');
-  expect(screen.getByRole('button', { name: 'Try picture holds. 30 sec · 1 practice hold' })).toBeTruthy();
+  render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={shorterDemo} onOpenPractice={jest.fn()} />);
+  expect(screen.getByTestId('title-details-practice').props.accessibilityLabel).toBe('Try picture holds. 30 sec · 1 practice hold');
 });

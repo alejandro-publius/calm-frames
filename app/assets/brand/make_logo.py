@@ -1,5 +1,10 @@
 # Calm Frames mark: a peaceful monk and one open halo inside a rounded frame.
 TEAL="#102F3A"; CREAM="#F3E8D3"; SAFF="#E6A957"; SAFFD="#B87A2C"; INK="#17323C"
+# Oct 14: a restrained warm-sand inset border on the icon and the tile, about
+# one percent of the height in from every edge, concentric with the frame's
+# corners. It is static artwork; the launcher's own focus treatment is the
+# system's and is not imitated here.
+SAND="#E5D9BA"
 
 # Licensed Inter faces are bundled by the app and registered by render_qt.cpp.
 UI_FONT = "InterSemiBold"
@@ -30,11 +35,20 @@ def bust(cx, head_cy, hr, bottom=1100):
     s+=face(cx, head_cy, hr)
     return s
 
-def frame(inner, bg=TEAL, size=1024, radius=210):
+def inset_border(width, height, radius, inset, stroke):
+    # The stroke is centred on its path, so the path sits half a stroke inside
+    # the inset and the corner radius shrinks by the same amount to stay
+    # concentric with the frame.
+    edge = inset + stroke / 2
+    return (f'<rect x="{edge}" y="{edge}" width="{width - 2 * edge}" height="{height - 2 * edge}" '
+            f'rx="{max(0, radius - edge)}" fill="none" stroke="{SAND}" stroke-width="{stroke}"/>')
+
+def frame(inner, bg=TEAL, size=1024, radius=210, border=True):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {size} {size}" width="{size}" height="{size}">'
             f'<defs><clipPath id="fr"><rect width="{size}" height="{size}" rx="{radius}"/></clipPath></defs>'
             f'<rect width="{size}" height="{size}" rx="{radius}" fill="{bg}"/>'
-            f'<g clip-path="url(#fr)">{inner}</g></svg>')
+            f'<g clip-path="url(#fr)">{inner}</g>'
+            f'{inset_border(size, size, radius, size * 0.01, size * 0.01) if border else ""}</svg>')
 
 B = frame(halo(512, 435, 310) + bust(512, 435, 172, bottom=920))
 
@@ -44,7 +58,7 @@ def head_only():
     s+=f'<path d="M240 920 C240 820, 350 790, 512 790 C674 790, 784 820, 784 920 Z" fill="{SAFF}"/>'
     s+=f'<circle cx="{cx}" cy="{cy}" r="{hr}" fill="{CREAM}"/>'+face(cx, cy, hr)
     return s
-C = frame(head_only())
+C = frame(head_only(), border=False)
 
 def tile():
     inner = halo(350, 305, 168, stroke=11) + bust(350, 305, 100, bottom=585)
@@ -54,6 +68,7 @@ def tile():
             f'<text x="590" y="310" font-family="{UI_FONT}" font-weight="normal" font-size="100" fill="{CREAM}">Calm</text>'
             f'<text x="590" y="420" font-family="{UI_FONT}" font-weight="normal" font-size="100" fill="{CREAM}">Frames</text>'
             f'<text x="594" y="490" font-family="InterRegular" font-size="32" fill="{CREAM}">A calmer way to watch</text>'
+            f'{inset_border(1280, 720, 0, 7.2, 7.2)}'
             f'</svg>')
 T = tile()
 
