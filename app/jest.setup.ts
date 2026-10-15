@@ -314,4 +314,6 @@ jest.mock('./src/calmframes/harnessConfig', () => ({
 // test has no business opening a socket, and a fetch that outlives the test
 // that started it makes jest leave a worker behind.
 import { setBeaconEnabled } from './src/calmframes/timingLog';
+import { setTraceEnabled } from './src/calmframes/trace';
 setBeaconEnabled(false);
+setTraceEnabled(false);

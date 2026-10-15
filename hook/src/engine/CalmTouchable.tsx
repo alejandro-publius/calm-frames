@@ -8,6 +8,7 @@ import { CoastalAppearance } from './CoastalAppearance';
 import { TouchableOpacity, TouchableOpacityProps, StyleSheet } from 'react-native';
 import { CALM_COLORS, COASTAL_COLORS, COASTAL_PRIMARY_FOCUS } from './calmStyles';
 import { CalmControlSurface, ControlSurfaceKind, CalmControlAppearance } from './CalmControlSurface';
+import { trace } from './trace';
 
 type Props = TouchableOpacityProps & { surfaceKind?: ControlSurfaceKind };
 const CalmTouchable = React.forwardRef<React.ComponentRef<typeof TouchableOpacity>, Props>(
@@ -21,7 +22,7 @@ const CalmTouchable = React.forwardRef<React.ComponentRef<typeof TouchableOpacit
     return <TouchableOpacity {...props} ref={ref} activeOpacity={1}
       onPressIn={(event) => { if (!blocked) setPressed(true); onPressIn?.(event); }}
       onPressOut={(event) => { setPressed(false); onPressOut?.(event); }}
-      onFocus={(event) => { setFocused(true); onFocus?.(event); }}
+      onFocus={(event) => { setFocused(true); trace('focus', props.testID); onFocus?.(event); }}
       onBlur={(event) => { setFocused(false); setPressed(false); onBlur?.(event); }}
       style={[style, pressed && !blocked ? { backgroundColor: coastal && surfaceKind !== 'primary' ? colors.SURFACE_FOCUSED : colors.INK } : null, study ? styles.study : null, study && focused && !blocked ? { borderColor: coastal && surfaceKind === 'primary' ? COASTAL_PRIMARY_FOCUS : colors.FOCUS_RING } : null]}>
       {study ? <CalmControlSurface kind={surfaceKind} focused={focused} pressed={pressed && !blocked} disabled={!!blocked} selected={!!(props.accessibilityState?.selected || props.accessibilityState?.checked === true)} /> : null}

@@ -30,6 +30,7 @@ import { RouteProp } from '@amazon-devices/react-navigation__core';
 import { StackNavigationProp } from '@amazon-devices/react-navigation__stack';
 import React from 'react';
 import { BackHandler, Platform } from 'react-native';
+import { trace } from '../calmframes/trace';
 import HouseholdStorageScreen from '../calmframes/HouseholdStorageScreen';
 import {
   deviceHouseholdStorage,
@@ -283,6 +284,7 @@ const KidModeScreen = ({
   // cannot land in another's.
   const profileLogs = useHideLogs();
   const [view, setView] = React.useState<KidModeView>('home');
+  React.useEffect(() => { trace('screen', view); }, [view]);
   const [openId, setOpenId] = React.useState<string | null>(null);
   const [lastOpenedId, setLastOpenedId] = React.useState<string | null>(null);
   const [lastOpenedFrom, setLastOpenedFrom] = React.useState<ReturnFocusControl | undefined>(undefined);

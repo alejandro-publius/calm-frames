@@ -32,6 +32,7 @@ export const MIRRORED = [
   'CalmControlSurface.tsx',
   'CalmTouchable.tsx',
   'CoastalAppearance.ts',
+  'trace.ts',
   'calmStyles.ts',
   'canonicalJson.ts',
   'cards.ts',

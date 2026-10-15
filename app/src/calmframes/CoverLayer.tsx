@@ -15,6 +15,7 @@
 
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
+import { trace } from './trace';
 
 export interface ReferencePatch {
   /** Distance from the left edge of the screen, in pixels. */
@@ -162,7 +163,8 @@ const SceneStill = ({ uri, testID }: { uri: string; testID: string }) => {
       resizeMode="contain"
       fadeDuration={0}
       accessible={false}
-      onError={() => setFailed(true)}
+      onLoad={() => trace('still', 'loaded')}
+      onError={() => { trace('still', 'error'); setFailed(true); }}
     />
   );
 };

@@ -36,6 +36,7 @@ import {
 } from 'react-native';
 import CalmCard from '../calmframes/CalmCard';
 import { CoastalAppearance } from '../calmframes/CoastalAppearance';
+import { trace } from '../calmframes/trace';
 import { CALM_COLORS } from '../calmframes/calmStyles';
 import { concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
 import {
@@ -122,6 +123,7 @@ const PlayerScreen = ({
     React.useState<boolean>(false);
   const [surfaceReady, setSurfaceReady] = React.useState(false);
   const [returningHome, setReturningHome] = React.useState(false);
+  React.useEffect(() => { trace('screen', 'player'); return () => trace('screen', 'player-left'); }, []);
   const surfaceHandle = useRef<string | null>(null);
   const captionViewHandle = useRef<string | null>(null);
 
