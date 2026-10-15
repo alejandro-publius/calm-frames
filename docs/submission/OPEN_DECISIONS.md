@@ -1,7 +1,7 @@
 # Open decisions and blockers
 
-Updated Oct 14, 2026 (night) for the final integration candidate
-`claude/final-candidate-2026-10-14`, package source `819de40`
+Reconciled Oct 15, 2026 against candidate head `a3368a9e` on
+`claude/final-candidate-2026-10-14`, package 5 source `4016e8d`
 ([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)). It is a candidate, not the
 final judged release. Mandatory items come
 first; the mini challenges are optional and do not block the submission. Where
@@ -11,15 +11,16 @@ evidence does not exist, the row says so instead of inventing it.
 
 ### 1. Final release selection: pending
 
-The final candidate `819de40` carries the approved coastal interface, the
-ledger and credits for its artwork, the hook mirror, the fixes that hold the
-coastal menus to the ten foot floors, three Back fixes, bundled copies of the
-practice stills and the opening readiness fallback, and since `819de40` the
-simplified Home Alex asked for (one "Calm Frames" heading, Play and Details,
-the practice demo reached from Details) and the bordered icon and tile; its
-package 4 was driven on the device and judged from its own log (eight
-journeys, all reported; the previous package's session had reported nine, with
-seeking by remote partial). Its package, checks and the owner's eyes-and-ears
+The final candidate's package 5, from `4016e8d`, carries the approved
+coastal interface, the ledger and credits for its artwork, the hook mirror,
+the fixes that hold the coastal menus to the ten foot floors, three Back
+fixes, bundled copies of the practice stills and the opening readiness
+fallback. It includes the simplified Home from `819de40` (one "Calm Frames"
+heading, Play and Details, the practice demo reached from Details), the bordered
+icon and tile, and the one-voice copy from `4016e8d`. Package 5 was driven on
+the device and judged from its own log: eight journeys reported as happening.
+Package 4's second pass separately reported pause, resume, the caption control
+and a cover-first remote seek. The package, checks and owner's eyes-and-ears
 checklist are in the handoff. Underneath it, the reliability candidate `cfddc4a` includes the Oct 14 playback recovery fix (a failed player setup
 reaches the recovery screen at once) and the release helper fix that keeps a
 supplied PIN out of reviewer documents. Its bounded checks passed
@@ -32,9 +33,9 @@ or run. The candidate has no hosted run because it has no pull request; the
 and does not describe this candidate. `main` is at `7110893` and has not moved
 since Sep 20.
 
-**Needs:** Alex to name the head that becomes the judged release, after the
-visual approval and native validation below, then the merge to `main` and the
-tag that never moves.
+**Needs:** Alex to select the exact commit or release reference judges will
+use, after the native validation below. A merge to `main` and an immutable tag
+are release choices, not stated hackathon requirements.
 
 ### 2. Final visual approval: done on Oct 14
 
@@ -45,23 +46,30 @@ its generation provenance without any ownership or dedication claim.
 
 ### 3. Native validation: pending the owner's eyes and ears
 
-The final candidate was installed and driven on the Vega Virtual Device and
-judged from its own breadcrumbs and media events: cold launch, every Home
-control, Details and return focus, Harbor start to finish, pause and resume,
-both practice holds with the still loading, Help, the Settings gate and a
-relaunch all reported as happening; seeking by remote was not established
-([`results/native-acceptance-2026-10-14/receipt.json`](../../results/native-acceptance-2026-10-14/receipt.json)).
-Nobody has looked at its pixels or listened to it, the parent settings
-interior needs the household PIN, and VoiceView is untested; the checklist for
-that is [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 4. The last
-native sessions were on `06190c7` (Oct 13) and `dba88d5` / `00905510` (Oct 14),
-and both stopped short: the parent-area interior needs the test household's
-PIN, which only Alex has, and the Oct 14 session ended when the Mac locked. The
-final walkthrough waits for item 2.
+Package 5 from `4016e8d` was installed over the existing household and
+driven on the Vega Virtual Device. Its breadcrumbs and media events reported
+cold launch with Play focused, Home controls, Details and return focus,
+Harbor start to finish with zero holds, the practice page and both holds with
+the still loading, How it works, the Parents PIN gate and a relaunch onto the
+saved Home
+([`results/native-acceptance-5-2026-10-14/receipt.json`](../../results/native-acceptance-5-2026-10-14/receipt.json)).
+Package 4's second pass reported pause and resume (J9), a cover-first remote
+seek into the first hold (J10b) and the caption control (J11)
+([`results/native-acceptance-4-2026-10-14/second-pass.json`](../../results/native-acceptance-4-2026-10-14/second-pass.json)).
+The first seek attempt was too late; the retry reported seeking and seeked
+events under the cover. These observations belong to their named packages.
 
-**Needs:** Alex at the Mac with the simulator visible, a fresh test household
-or the existing PIN entered by Alex, and the steps in
-[../MAC_FINISH.md](../MAC_FINISH.md).
+The latest candidate's pixels and audio remain unobserved. The parent settings
+interior needs the existing household PIN, and VoiceView and the caption menu's
+contents are untested. Back from the PIN gate reported Home with Details
+focused, so return focus to Parents also needs checking. The checklist is
+[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 4. Design approval is done;
+native visual and audio acceptance is still pending.
+
+**Needs:** Alex at the Mac with the simulator visible, entering the existing
+household PIN himself, and the handoff's eyes-and-ears checklist. Keep household
+data; no reset or new household is needed. Recording remains a separate
+authorization.
 
 ### 4. The demonstration video: pending, recording not authorized
 
@@ -79,13 +87,13 @@ and a logged-out check of the link.
 Either a public repository with the licence visible in About, or a private one
 shared with `testing@devpost.com` and the six Amazon reviewers. Today the
 repository is private, GitHub already detects Apache License 2.0, and the About
-description and topics are empty. Going public also needs the merge in item 1,
-the audit exception dates in `scripts/audit_exceptions.toml` moved past Dec 3,
-private vulnerability reporting switched on, and item 7 settled. The private
+description and topics were empty at the Oct 14 check. Before public release,
+settle the chosen code reference in item 1, review the audit exception dates in
+`scripts/audit_exceptions.toml`, private vulnerability reporting, and item 7. The private
 route needs invitations sent at submission and accepted within seven days.
 
-**Needs:** Alex's choice; only the owner can change visibility or add
-collaborators, and the About box is empty either way.
+**Needs:** Alex's choice and authorization before changing visibility or
+inviting reviewers. Recheck the About box when preparing access.
 
 ### 6. Entrant details
 
@@ -138,13 +146,13 @@ public and is Alex's action.
 
 ### 9. AWS Builder: enter or not, and the inactive cost tag
 
-The stack is deployed and documented, so the entry is possible. The `Project`
-cost allocation tag was inactive on Oct 9, so the budget cannot warn anyone,
-and whether the account's credits cover this stack has not been verified in
-Bills. Nothing in the repository shows the current bill.
+The Oct 9 deployment is documented, so the entry is possible. The `Project`
+cost allocation tag was recorded inactive then. That historical record does
+not establish the tag's current state, whether the budget now covers the
+stack, the current bill or whether account credits cover its costs.
 
-**Needs:** Alex to activate the tag, read the bill, and decide whether to
-enter and whether to keep the stack up through judging.
+**Needs:** Alex to check the current tag and budget coverage, read the bill,
+and decide whether to enter and whether to keep the stack up through judging.
 
 ## Also noted, not blocking
 
