@@ -3,7 +3,7 @@
 Reconciled Oct 14, 2026. The packet is the five documents below, written
 against the official rules and the repository's receipts. It now describes the
 final integration candidate `claude/final-candidate-2026-10-14`, whose package
-was built from `93cf80028529992cedc4439cb29a59d6ff024188`; the root
+was built from `ac5a610e63deeaeca672d34da43279a1394ca65a` and driven on the Vega Virtual Device; the root
 [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) has the package hash, the checks and
 the owner's remaining actions. It is a candidate, not the final judged release. Nothing is submitted, published, uploaded or recorded, and
 recording is not yet authorized.
@@ -45,8 +45,9 @@ upload attempt and source identity are recorded in
 
 ## What comes next
 
-The coastal composition is approved and applied. Run the native acceptance in
-[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 3 on the Vega Virtual Device,
+The coastal composition is approved and applied, and the candidate has been
+driven on the Vega Virtual Device and judged from its own log. Run the owner's
+eyes-and-ears checklist in [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 4,
 then the recording, following [MAC_FINISH.md](../MAC_FINISH.md). The remaining licence, security, access and
 submission steps are in [the completion checklist](../COMPLETION_CHECKLIST.md)
 and [OPEN_DECISIONS.md](OPEN_DECISIONS.md).

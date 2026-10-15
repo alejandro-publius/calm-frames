@@ -4,6 +4,24 @@ Updated Oct 14, 2026.
 
 ## 0. Where things stand
 
+### Oct 14, night: the device answered, and two things changed
+
+A remote-driven session on the Vega Virtual Device, judged from the Debug
+app's own breadcrumbs and media events (no capture), installed the candidate
+over the existing household and found: cold launch lands on Home with Play
+focused; the remote reaches the profile chooser, Help, Play, Details and the
+practice entry; Details opens with Play focused and Back returns focus to the
+control that opened it; the ordinary Harbor plays to its end with zero holds
+and the practice film with both holds; every practice hold logged an image
+loader error, because the device refuses the data URI the signed map carries,
+so the still showed black; and every playback showed the recovery screen about
+fourteen seconds in, because the device's player never fills the frame counter
+the opening shell waited for. Both are fixed on `claude/final-candidate-2026-10-14`
+with tests that failed first, the navigation worker's three Back fixes are in,
+and the README opens on the coast. Back on the Home root exits the app, which
+is the platform's convention and was left alone. A third package and a second
+session follow; see `FINAL_HANDOFF.md` for the current state.
+
 ### Oct 14, evening: the final integration candidate
 
 `claude/final-candidate-2026-10-14` carries Codex's approved coastal interface

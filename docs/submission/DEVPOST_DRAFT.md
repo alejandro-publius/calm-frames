@@ -136,6 +136,16 @@ they are the ones that bound what the app can promise.
 - A bounded reliability pass on Oct 14 made a failed player setup reach the
   recovery screen at once instead of after a timeout, with the regression
   recorded in `results/core-reliability-2026-10-14.json`.
+- The same night a remote-driven session on the Vega Virtual Device, judged
+  from the app's own log, found two device-only defects and both are fixed with
+  tests: the signed hold still was refused as a data URI and showed black, so
+  the practice holds now draw bundled copies checked byte for byte against the
+  signed map; and the opening shell waited for a frame counter the device never
+  fills, so every playback reached the recovery screen, and it now readies on
+  a moving clock. After the fixes the session reported cold launch, browsing,
+  Details and return focus, Harbor start to finish with zero holds, pause and
+  resume, both practice holds with the still loading, Help, the Settings gate
+  and a relaunch (`results/native-acceptance-2026-10-14/receipt.json`).
 - Every published number traces to a results file and CI fails on drift.
 
 ## Limitations
@@ -148,10 +158,11 @@ they are the ones that bound what the app can promise.
 - All observations are from the Vega Virtual Device. No physical television
   timing was measured, and no clinical validation or feedback from families or
   clinicians exists yet.
-- The final candidate (`93cf800`, with the coastal interface and the Oct 14
-  playback recovery fix) has been built but not installed or observed on the
-  device; the observations above are of earlier builds of the same app.
-  [Replace with the final build's receipt before pasting.]
+- The final candidate (`ac5a610`) was driven on the Vega Virtual Device and
+  judged from its own log; nobody has yet looked at its pixels or listened to
+  its sound. [Replace with the owner's receipt before pasting.]
+- On the device the practice holds draw bundled copies of their signed stills;
+  a prepared title whose still is not bundled would show black during a hold.
 - It runs on Vega OS and has only run on the Vega Virtual Device. Fire OS
   devices, which is most Fire TV sticks and Cubes in homes today, cannot
   install it.

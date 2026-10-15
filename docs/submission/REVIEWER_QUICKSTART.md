@@ -15,7 +15,7 @@ device build and install) and section 4 (the demo) were not run from this
 file; the receipts they name record where they were run.
 
 The final integration candidate is `claude/final-candidate-2026-10-14`; its
-package was built from `93cf80028529992cedc4439cb29a59d6ff024188`
+package was built from `ac5a610e63deeaeca672d34da43279a1394ca65a`
 ([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)). The judged release is still to
 be selected ([OPEN_DECISIONS.md](OPEN_DECISIONS.md)); use the branch or tag
 named in the submission form. The app runs on Vega OS and has only ever run on
@@ -97,9 +97,10 @@ PIN into `NOTES.md`; `--pin` is kept as a deprecated option whose value is unuse
 `build/release/core-reliability-cfddc4a-2026-10-14/`, SHA-256
 `e315e16d19172a5aadc1bfa8a9364bcf9205d51870ec610b92eb01ea9d2841dd`, with its 723
 recorded source inputs verified and `native_validation_performed: false`. The
-final candidate's package is `build/release/final-candidate-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, SHA-256 `d53444ab70f38d24fb4cb1c468ebe78e0ed24cc6932c45235e50dd174fb2a25a`, 28,664,945 bytes, 728 recorded inputs, built from `93cf800`, in the final candidate's worktree; the
-receipt beside it records the inputs and the prepared library check. Neither
-package has been installed or run.
+final candidate's package is `build/release/final-candidate-3-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, SHA-256 `4d36c177c000eb6470ac39acef7e02bdfb72300697f4142e65522d3d3315a6c5`, 28,716,350 bytes, 736 recorded inputs, built from `ac5a610`, in the final candidate's worktree; the
+receipt beside it records the inputs and the prepared library check. That
+package was installed and driven on the Vega Virtual Device on Oct 14
+([`results/native-acceptance-2026-10-14/receipt.json`](../../results/native-acceptance-2026-10-14/receipt.json)).
 
 ```sh
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
@@ -131,7 +132,17 @@ An optional software preflight drives the benign journey and writes a log:
     --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
 ```
 
-Logs do not prove what was on screen; look at the simulator.
+Logs do not prove what was on screen; look at the simulator. A Debug package
+also prints breadcrumbs you can follow from the host while you drive the app:
+
+```sh
+vega device start-log-stream --device Simulator | grep --line-buffered -E 'CALM_TRACE|CALM_TIMING'
+```
+
+`CALM_TRACE screen|focus|still|image` lines say which view is up, which control
+has focus and whether artwork and the hold still loaded; `CALM_TIMING` lines
+are the player's media events. The device prints each app line twice and drops
+some under load, so a missing line proves nothing.
 
 ## 4. The demo sequence (about ten minutes)
 
@@ -148,7 +159,7 @@ Logs do not prove what was on screen; look at the simulator.
 4. **Transport.** Pause and resume; seek back into a hold and watch the cover
    appear before the picture moves; press Back and see focus return to the tile.
 5. **Harbor.** Play the ordinary title: the same film with zero holds.
-6. **Settings.** Enter a wrong PIN and see it rejected with the tries
+6. **Settings** (Back on the Home root exits the app, by platform convention). Enter a wrong PIN and see it rejected with the tries
    remaining, correct it with Delete, enter the right one. Change the preset or
    the room, relaunch the app and see the choice kept. Practice holds never
    enter the exposure history, so an empty history after the demo is correct.

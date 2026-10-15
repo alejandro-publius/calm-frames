@@ -34,6 +34,11 @@ from `93cf800` and not yet merged anywhere; `FINAL_HANDOFF.md` has the package.
 - Every menu screen paints the approved ivory coast with the dimensional coastal artwork; playback keeps its dark controls. (b22d275)
 - A pressed coastal primary keeps its ink fill, the storage error screen's Try again sits on the page where its focus ring clears 3 to 1, the play glyph is drawn at the text floor, and the declared frame inventory and the tests that named the dark palette for menu screens follow the coast. (93cf800)
 - A failed player setup reaches the recovery screen at once instead of after the opening timeout, and the release helper never writes a supplied PIN into reviewer notes. (aa0494f, cfddc4a)
+- The practice demo's two holds draw bundled copies of their signed stills, swapped in only on an exact match of the authenticated data URI, because the device's image loader refuses data URIs and showed black. (52138fe)
+- The opening shell readies on a moving media clock when the device reports no frame counts, instead of ending on the recovery screen fourteen seconds into every playback. (ac5a610)
+- The remote's Back closes one level at a time in setup, the profile picker and the remove-a-kid question instead of leaving the app. (487e5e5)
+- Debug builds print breadcrumbs for the kid mode view, player mount and exit, focus changes, and artwork and still loads, so a device session without any capture can be judged from the log. (204f185, ac5a610)
+- The README opens on the approved coast with labelled browser renders and the docs index lists the handoff and the submission packet. (69390ed)
 
 #### Added
 
