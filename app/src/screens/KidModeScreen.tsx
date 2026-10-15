@@ -377,7 +377,8 @@ const KidModeScreen = ({
   // The D-pad back button walks back through these states rather than leaving
   // the app from the middle of them.
   React.useEffect(() => {
-    if (!Platform.isTV) {
+    // Details owns its nested More info/Technical details Back stack.
+    if (!Platform.isTV || view === 'details') {
       return undefined;
     }
     const subscription = BackHandler.addEventListener(
@@ -388,18 +389,6 @@ const KidModeScreen = ({
         }
         if (view === 'credits') {
           setView('parent');
-          interfaceSound.confirm();
-          return true;
-        }
-        if (view === 'details') {
-          if (practiceFromId) {
-            setOpenId(practiceFromId);
-            setPracticeFromId(null);
-            setDetailsFocus('practice');
-          } else {
-            setView('home');
-            setOpenId(null);
-          }
           interfaceSound.confirm();
           return true;
         }

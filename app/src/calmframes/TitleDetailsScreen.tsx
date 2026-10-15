@@ -106,10 +106,14 @@ const TitleDetailsScreen = ({
     else onBack?.();
   }, [page, onBack]);
   React.useEffect(() => {
-    if (!interfaceActive || page === 'watch' || !playable) return;
-    const subscription = BackHandler.addEventListener('hardwareBackPress', () => { back(); return true; });
+    if (!interfaceActive) return;
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (!playable) { onBack?.(); return Boolean(onBack); }
+      if (page === 'watch' && !onBack) return false;
+      back(); return true;
+    });
     return () => subscription.remove();
-  }, [back, interfaceActive, page, playable]);
+  }, [back, interfaceActive, page, playable, onBack]);
 
   if (notice) {
     // Remove only an exact repeated heading, never a distinct rejection reason.

@@ -161,6 +161,28 @@ describe('Back from playback and details on the real shelf', () => {
     expect(preferred()).toEqual(['kid-mode-home-more-info']);
   });
 
+  it('remote Back restores More info after the demo, then closes it before leaving Details', async () => {
+    const platform = jest.spyOn(Platform, 'isTV', 'get').mockReturnValue(true);
+    let handlers: Array<() => boolean | null | undefined> = [];
+    const subscription = jest.spyOn(BackHandler, 'addEventListener').mockImplementation((_, handler) => {
+      handlers.push(handler);
+      return { remove: () => { handlers = handlers.filter(one => one !== handler); } };
+    });
+    const back = () => act(() => { expect([...handlers].reverse().some(handler => handler())).toBe(true); });
+    try {
+      await startShelf();
+      fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
+      fireEvent.press(screen.getByTestId('kid-mode-details-show-info'));
+      fireEvent.press(screen.getByTestId('kid-mode-details-practice'));
+      back();
+      expect(preferred()).toEqual(['kid-mode-details-practice']);
+      back();
+      expect(preferred()).toEqual(['kid-mode-details-show-info']);
+      back();
+      expect(preferred()).toEqual(['kid-mode-home-more-info']);
+    } finally { subscription.mockRestore(); platform.mockRestore(); }
+  });
+
   it('Watch, then a title from How it works: Back returns to How it works, not Watch', async () => {
     const { returnFromPlayer } = await startShelf();
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
