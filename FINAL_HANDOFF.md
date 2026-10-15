@@ -1,5 +1,38 @@
 # Final handoff: the integration candidate
 
+## Prepared video UI reset, October 15, 2026
+
+Latest app source: `4ba895946aabf322ed03ba7d52debbed6f5611ad` on
+`codex/prepared-video-slice-2026-10-15`, based on preserved `ee76cf5`.
+Home now identifies the actual selected video and initially focuses View analysis.
+The analysis result appears before Play; its record separates source, rendition
+and preparation report and explicitly explains pre-analysis and its limits.
+Demo events are labeled simulated. A mismatched prepared file record offers
+Back but no Play. Shared fonts, spacing, controls and coastal art are retained.
+
+[Claude handoff](CLAUDE_CODE_HANDOFF.md) defines separate ownership. Claude owns
+pipeline/** and tests plus docs/evidence/video-reset/** and results/video-reset/**
+in a separate checkout. Codex owns app/** and final integration. No Claude session
+has been confirmed started. The NPS Acadia clip is only a candidate; no new media,
+key, catalog import or pipeline change was made by this UI lane.
+
+Package: `build/release/prepared-video-slice-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg`.
+SHA-256: `74f6c2790a0407490094e834e9a2bb3129978be210d60cbe4a7166964ea926e5`.
+[Current receipt](results/prepared-video-ui-2026-10-15/receipt.json) separates source,
+build and native checks. The source gate passed 131 suites, 1,300 tests and 57
+snapshots; lint has zero errors and 101 existing warnings. All three retained
+preparation reports are present and pass the package report check.
+Nine native checks reported observed-pass, including exact playback lineage.
+The log contains an unassigned touch down/up near Help, so the session is not
+an isolated remote-only validation. The app was left running; no replay or
+capture was attempted. Pixels, sound, captions and VoiceView remain unverified.
+
+This package plays the existing prepared Harbor with zero detected segments.
+Its source-to-report-to-rendition lineage is recorded from the compiled catalog
+and archived report; a fresh source import and independent detector validation
+remain pipeline work. No visual or audio quality claim follows from the tests.
+The older browser composition comparison is not a preview of this reset.
+
 ## Final Mac layout and copy, October 15, 2026
 
 Both requested passes are implemented on private working branch

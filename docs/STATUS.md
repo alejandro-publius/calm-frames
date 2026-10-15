@@ -1,5 +1,11 @@
 # Status
 
+Latest prepared-video UI slice: source `4ba8959` on
+`codex/prepared-video-slice-2026-10-15`. See the
+[current receipt](../results/prepared-video-ui-2026-10-15/receipt.json).
+Uses existing verified media; new footage and independent evidence are pending
+the separate pipeline lane. The prior design checkpoints below are historical.
+
 Final Mac layout and plain-language copy: `689c484` on the private comparison
 branch. See [the final receipt](../results/plain-language-2026-10-15/receipt.json)
 for exact build, tests and native status; the layout-only checkpoint below is history.

@@ -1,5 +1,12 @@
 # Open decisions and blockers
 
+Latest UI reset: `4ba895946aabf322ed03ba7d52debbed6f5611ad`, package
+`prepared-video-slice-2026-10-15`. See the
+[current receipt](../../results/prepared-video-ui-2026-10-15/receipt.json).
+This uses existing verified Harbor. Fresh NPS footage preparation and independent
+detector evidence remain pending the separate pipeline lane. Prior checkpoint follows.
+
+
 Updated October 15, 2026. Latest implemented source: `689c484efca088e65e76e0c7efeaf51f210c818e`.
 Current package: `home-reading-a-plain-copy-2026-10-15`; native evidence is linked below.
 

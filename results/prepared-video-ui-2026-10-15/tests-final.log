@@ -1,0 +1,7 @@
+PASS test/components/MovieCarousel.test.tsx
+
+Test Suites: 1 skipped, 131 passed, 131 of 132 total
+Tests:       4 skipped, 1300 passed, 1304 total
+Snapshots:   57 passed, 57 total
+Time:        41.543 s
+Ran all test suites.

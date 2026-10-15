@@ -1,0 +1,52 @@
+[
+  {
+    "journey": "Launch to Home analysis",
+    "verdict": "observed-pass",
+    "evidence": "screen=None focus=kid-mode-home-more-info"
+  },
+  {
+    "journey": "Details and return focus",
+    "verdict": "observed-pass",
+    "evidence": "details=kid-mode-details-play next=kid-mode-details-practice return=kid-mode-home-more-info"
+  },
+  {
+    "journey": "Analysis record navigation",
+    "verdict": "observed-pass",
+    "evidence": "control=kid-mode-details-show-info return=kid-mode-home-more-info; focus only, no pixel inspection"
+  },
+  {
+    "journey": "Parents remote Back after Details",
+    "verdict": "observed-pass",
+    "evidence": "gate=kid-mode-parent-key-1 return=kid-mode-home-parent-area"
+  },
+  {
+    "journey": "Parents Back button after Details",
+    "verdict": "observed-pass",
+    "evidence": "return=kid-mode-home-parent-area"
+  },
+  {
+    "journey": "Harbor to end, zero interval holds",
+    "verdict": "observed-pass",
+    "evidence": "playing=True ended=True covers=[] recovery=False return=kid-mode-home-watch"
+  },
+  {
+    "journey": "Prepared playback lineage",
+    "verdict": "observed-pass",
+    "evidence": "{\"bundleId\": \"51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101\", \"checkedInputsSha256\": \"ab301e661033b619e3c25a129fbb85160c9739b5114b92c50a95fa7a1b0fda86\", \"maps\": [{\"preset\": \"wcag\", \"sha256\": \"554b61ecd48618fe091b55c6fac58d4f4894b7bbd220389ebecbd9f4386399be\"}, {\"preset\": \"broadcast\", \"sha256\": \"b8f642d9db63956343e7e7cc72ee8c6523a87a3fa52846977bd389ba36ef3d74\"}, {\"preset\": \"extra-cautious\", \"sha256\": \"8eb4bcb779d6586d9d5ef034aa87459e61362b3718dcff6860781d416e700e50\"}], \"outcome\": \"no flagged segments\", \"preset\": \"extra-cautious\", \"renditionPath\": \"file:///pkg/assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/extra-cautious.mp4\", \"renditionSha256\": \"0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78\", \"renditionStartOffsetMs\": 0, \"reportSha256\": \"18802e65a69233e259eeb2bc68056b22fdd8cbd3b5fdec04576a4464bf19d5f9\", \"sourceSha256\": \"de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e\"}"
+  },
+  {
+    "journey": "Practice holds and Back one level at a time",
+    "verdict": "observed-pass",
+    "evidence": "demo=kid-mode-details-play playing=True second=True covers=['cover-on media=5010 interval 5000-9000', 'cover-on media=12025 interval 12000-16000'] still_count=4 Back=('kid-mode-details-play', 'kid-mode-details-practice', 'kid-mode-home-more-info')"
+  },
+  {
+    "journey": "How it works return",
+    "verdict": "observed-pass",
+    "evidence": "help=picture-hold-start return=kid-mode-home-learn"
+  },
+  {
+    "journey": "Session boundary",
+    "verdict": "recorded",
+    "evidence": "touch events=3; one launch; no PIN entered; no capture; app left running"
+  }
+]

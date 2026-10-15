@@ -1,5 +1,12 @@
 # Calm Frames: rules for every session
 
+**Latest controlled reset, October 15.** Read CLAUDE_CODE_HANDOFF.md before editing.
+Codex owns the prepared-video UI branch and app/**; Claude owns pipeline/** and
+its tests in a separate checkout. The exact current source/build/native status
+is in FINAL_HANDOFF.md and results/prepared-video-ui-2026-10-15/receipt.json.
+Do not duplicate pipeline acquisition or alter signing configuration. Older
+visual checkpoints below are history.
+
 **October 15 Mac continuation.** The owner delegated immediate implementation
 of the stronger Home composition. The isolated branch is
 `codex/home-comparison-2026-10-15`, based on `b6b134c` with the Parents focus fix.
