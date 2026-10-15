@@ -1,0 +1,71 @@
+{
+  "sourceSha256": "fdb4340eb6240f87bd37cae174591f3e74ca29817a2c60f9223c985745cc4345",
+  "sourceBytes": 6538084,
+  "sourceName": "HAZARD_wc_irminger_waves_without_sound_ooi.webm",
+  "analyzerExit": 1,
+  "sourceFindings": 3,
+  "segmentsMatchHistoricalMap": true,
+  "stillSha256": "8f2d34065f59daf1eade69225e23609951abc6160a5229f493888a43c2342abe",
+  "historicalReportSha256": "e92c7065656c94882ee4c26826590fa35ab951cf53d3c35f183b5838de4f9fd9",
+  "renditions": [
+    {
+      "preset": "wcag",
+      "decodedFrames": 261,
+      "renditionSha256": "c207a2ff5ce9b666e1018f2cacec256332f1ca3bc2ca2b482ea88a21ebac5352",
+      "planSha256": "c320e9ae3a23787b8e6967ce1d6b9a2276b61e6e1752aaba812212672b9a4411",
+      "mapSha256": "92a82752545604049c4e2341ce99faad1dac99df5493ae4837ba1ad8c3b8f499",
+      "intervals": [
+        {
+          "startMs": 0.0,
+          "endMs": 8708.0,
+          "frames": 261,
+          "worstPsnrDb": 999.0,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "preset": "broadcast",
+      "decodedFrames": 261,
+      "renditionSha256": "2319d46a194e9da5a565d7565508417752a14e11d51245032553020523cc39d6",
+      "planSha256": "94b86f49c8c779e6c94831f37364e0aeb5949deb5b6d964730a25a357626bb31",
+      "mapSha256": "b34c33cb13607dfa0e77bce9239cef6f6e4efa288eb916164e607b070d355975",
+      "intervals": [
+        {
+          "startMs": 235.0,
+          "endMs": 3770.0,
+          "frames": 105,
+          "worstPsnrDb": 999.0,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "preset": "extra-cautious",
+      "decodedFrames": 261,
+      "renditionSha256": "c207a2ff5ce9b666e1018f2cacec256332f1ca3bc2ca2b482ea88a21ebac5352",
+      "planSha256": "7ba18646e246f0c1a54a08ea9e65b8652f110f50d9327b61305ed316a5efa0c9",
+      "mapSha256": "37c2c1acf862776d3f352a12f2b4df05c194564d47c83de21f53f6eee7d23843",
+      "intervals": [
+        {
+          "startMs": 0.0,
+          "endMs": 8708.0,
+          "frames": 261,
+          "worstPsnrDb": 999.0,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "method": "Fresh WCAG analysis plus full-resolution numeric RGB comparison of every covered decoded frame to the retained still; 30 dB whole-frame PSNR floor; 999 is the finite sentinel for identical arrays (infinite PSNR).",
+  "limits": [
+    "No independent detector validation or fresh map-signature verification.",
+    "Whole-frame similarity is not exact pixel equality or a proof of safety.",
+    "No playback, image export, capture, signing, artifact regeneration or app trust change.",
+    "Retained historical plans are used; no new prepared bundle is created."
+  ]
+}

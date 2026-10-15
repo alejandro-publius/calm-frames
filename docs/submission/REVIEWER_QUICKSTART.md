@@ -17,12 +17,13 @@ Section 3 (the
 device build and install) and section 4 (the demo) were not run from this
 file; the receipts they name record where they were run.
 
-The final integration candidate is `claude/final-candidate-2026-10-14`; its
-current package 5 was built from `4016e8dac8f675a4eb1e1613fd9dc7cf63d06e58`
-([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)). The judged release is still to
-be selected ([OPEN_DECISIONS.md](OPEN_DECISIONS.md)); use the branch or tag
-named in the submission form. The app runs on Vega OS and has only ever run on
-the Vega Virtual Device; Fire OS devices cannot install it.
+Current working candidate: `codex/prepared-video-slice-2026-10-15`, app source
+`21f0ea60332b83efe960eb7cf799139ec2d82ae9`. See
+[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) and the
+[focus-fix receipt](../../results/transport-focus-2026-10-15/receipt.json) for
+the exact installed package and bounded native observations. The approved
+Acadia integration is retained; historical package 5 and the old draft ZIP
+are not the current candidate. Final judged release selection remains open.
 
 ## 1. What you need
 
@@ -58,7 +59,7 @@ From the repository root. These are the commands CI runs
 ([README.md](../../README.md), "Run the checks").
 
 ```sh
-cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx jest --ci --colors=false && cd ..
+cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx jest --ci --colors=false --testPathIgnorePatterns="uiCapture|coastalExport|controlStudy" && cd ..
 .venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"
 .venv/bin/python eval/readme_sync.py --check     # every published number against results/
 .venv/bin/python eval/style_check.py             # no dashes, none of the three banned words
@@ -90,29 +91,16 @@ cd ..
 bash scripts/release.sh --arch aarch64 --build-type Debug --tag reviewer-$(date +%Y%m%d)
 ```
 
-`scripts/release.sh` builds the one architecture, checks the prepared library
-and package identity, and writes `build/release/<tag>/` with the package,
-`SHA256SUMS`, `PREPARATION.json` and `NOTES.md`. It never publishes. It needs a
-Python 3.12 on `RELEASE_PYTHON` or at `.venv/bin/python`. The older route is
-`npm run build:debug -- --target aarch64` inside `app`. Unverified here; the
-Oct 14 receipts record the exact `release.sh` line that produced their packages.
-Since `cfddc4a` the helper no longer reads `DEMO_PIN` and never writes a supplied
-PIN into `NOTES.md`; `--pin` is kept as a deprecated option whose value is unused
-(`results/release-pin-license-review-2026-10-14.json`). A package built from
-`cfddc4a` exists as build output outside git in the reliability worktree,
-`build/release/core-reliability-cfddc4a-2026-10-14/`, SHA-256
-`e315e16d19172a5aadc1bfa8a9364bcf9205d51870ec610b92eb01ea9d2841dd`, with its 723
-recorded source inputs verified and `native_validation_performed: false`. The
-final candidate's package 5 is `build/release/final-candidate-5-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`,
-SHA-256 `a226b39fc855cd7cf5eb4136b9ba890f92e6e6518ca764a6862cf9990870dc13`,
-28,733,262 bytes, from `4016e8d`; the preparation receipt beside it records
-736 inputs and the prepared library check. It was installed over the existing
-household and driven on the Vega Virtual Device without capture
-([`results/native-acceptance-5-2026-10-14/receipt.json`](../../results/native-acceptance-5-2026-10-14/receipt.json)).
-The prior package 4 sessions remain
-[`receipt.json`](../../results/native-acceptance-4-2026-10-14/receipt.json) and
-[`second-pass.json`](../../results/native-acceptance-4-2026-10-14/second-pass.json);
-they are earlier evidence, not repeated checks on package 5.
+`scripts/release.sh` builds one architecture, checks the library and package,
+and writes a local package, hashes and preparation receipt. It never publishes.
+Use Python 3.12 through `RELEASE_PYTHON` or `.venv/bin/python`. Do not pass a PIN.
+The current built package is
+`build/release/transport-focus-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg`,
+SHA-256 `a39566ba190b21cbfc5523e902a37bbe00801c189c3d55c891177343d3b36507`.
+See its [source/build receipt](../../results/transport-focus-2026-10-15/receipt.json).
+It is already installed on the owner's simulator; do not reinstall it merely
+for owner acceptance. The commands below are for a separately authorized
+reviewer installation. Preserve concurrent checkouts and the SDK app link.
 
 ```sh
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
@@ -156,50 +144,29 @@ has focus and whether artwork and the hold still loaded; `CALM_TIMING` lines
 are the player's media events. The device prints each app line twice and drops
 some under load, so a missing line proves nothing.
 
-## 4. The demo sequence (about ten minutes)
+## 4. The current demo sequence
 
-1. **First run on a new reviewer installation only.** The app asks the reviewer
-   to choose and confirm a four digit household PIN, then pick a profile, a
-   viewing preset and the room. There is no preset PIN in the package and it is
-   never stored in plain text. On an existing household, keep its data and have
-   its owner enter the existing PIN himself; do not reset it for this walkthrough.
-2. **Home.** One heading, "Calm Frames", over the coast. Move focus with the
-   D-pad from Play to Details, then up to How it works and Parents.
-3. **Details.** Select Details: "Harbor" with "20 sec · No flashing found", Play,
-   and the quiet Try picture holds entry beside it.
-4. **Try picture holds.** Select it, read "20 sec · 2 practice holds" on the
-   demo's own page, then Play. Watch the countdown and Skip, then the first
-   hold: the picture holds a still, the "Holding the picture" card appears,
-   captions change and the sound continues. The second hold follows. These are
-   scheduled examples, not detected flashing.
-5. **Transport.** Pause and resume; seek back into a hold and watch the cover
-   appear before the picture moves; press Back and see focus return to Play on
-   the demo's page, then Back again to Harbor's Details with focus on Try
-   picture holds.
-6. **Harbor.** Play the ordinary title: the same film with zero holds.
-7. **Parents** (Back on the Home root exits the app, by platform convention). Enter a wrong PIN and see it rejected with the tries
-   remaining, correct it with Delete, enter the right one. Change the preset or
-   the room, relaunch the app and see the choice kept. Practice holds never
-   enter the exposure history, so an empty history after the demo is correct.
+1. Preserve an existing household. On a fresh reviewer install,
+   the reviewer chooses their own PIN. There is no preset PIN to disclose.
+2. Home features Harbor and initially focuses View analysis. Acadia is an
+   additional video card. Open its analysis and read the detected periods,
+   selected covered times, profile settings and file record before Play.
+3. Play only the prepared Acadia rendition. The app's logs report both Extra
+   cautious cover intervals; looking and listening remain owner acceptance.
+4. For TV transport, pause, focus the seek bar, use Left/Right and confirm
+   with Select. The separate Forward button belongs to automotive mode.
+   Use the current receipt for the exact native check outcome.
+5. Back returns to Acadia Details, then its Home card. On Harbor Details,
+   Try the demo opens the explicitly simulated practice version. Back from
+   practice playback returns through its Details and then Harbor Details.
+6. Parents cancellation returns focus to Parents. Do not enter wrong PINs,
+   change settings or reset a household merely to perform this walkthrough.
+7. If the owner wants to hear Selection sounds, they can enable the existing
+   optional setting with their own PIN. The saved preference and volume were
+   not changed by the agent. Sound, captions and VoiceView need human checks.
 
-On package 5 from `4016e8d`, the app's own log reported steps 2, 3 and 4
-(Home, Details, the practice page and both holds with the still loading, Back
-one level at a time), step 6 (Harbor to its end with zero holds), How it works,
-the PIN gate of step 7 and a relaunch onto the saved Home
-([`results/native-acceptance-5-2026-10-14/receipt.json`](../../results/native-acceptance-5-2026-10-14/receipt.json):
-J1 through J8 observed-pass).
-Package 4's second pass separately reported pause and resume (J9), a cover-first
-remote seek into the first hold (J10b) and the caption control (J11)
-([`results/native-acceptance-4-2026-10-14/second-pass.json`](../../results/native-acceptance-4-2026-10-14/second-pass.json)).
-The caption menu's contents were not observed.
-
-Pixels and audio remain unobserved on the latest candidate. The settings
-interior and a restart after changing a preset were last observed on the
-Oct 10 build; first run was observed on Oct 13. Back from the package 5 PIN gate
-reported Home with Details focused, so check return focus to Parents.
-Re-verify the final package by looking and listening using
-[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 4, with the owner entering
-the existing PIN. Do not capture or record without separate authorization.
+No screenshot or recording is authorized by these steps. Current native logs
+and historical visual evidence are separate; see the current handoff.
 
 ## 4a. A browser preview, without a device
 

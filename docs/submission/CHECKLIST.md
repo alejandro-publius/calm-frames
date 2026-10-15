@@ -1,35 +1,35 @@
 # Submission readiness checklist
 
-Latest UI reset: `4ba895946aabf322ed03ba7d52debbed6f5611ad`, package
-`prepared-video-slice-2026-10-15`. See the
-[current receipt](../../results/prepared-video-ui-2026-10-15/receipt.json).
-This uses existing verified Harbor. Fresh NPS footage preparation and independent
-detector evidence remain pending the separate pipeline lane. Prior checkpoint follows.
+Current working candidate: `codex/prepared-video-slice-2026-10-15`, app source
+`21f0ea60332b83efe960eb7cf799139ec2d82ae9`. See
+[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) and the
+[focus-fix receipt](../../results/transport-focus-2026-10-15/receipt.json) for
+the exact installed package and bounded native observations. The approved
+Acadia integration is retained; historical package 5 and the old draft ZIP
+are not the current candidate. Final judged release selection remains open.
 
+Updated October 15, 2026. This matrix separates source checks, native event
+observations and owner acceptance. No screenshot, recording, publication,
+reviewer invitation, main merge or release tag is authorized or performed.
+Official-rule details below retain their stated earlier review dates; this
+update reconciles project evidence and does not claim a fresh rules review.
 
-Updated October 15, 2026. Latest implemented source: `689c484efca088e65e76e0c7efeaf51f210c818e`.
-Current package: `home-reading-a-plain-copy-2026-10-15`; native evidence is linked below.
+## Current readiness matrix
 
-The incoming source was `0e434dc7c89b7fb2dc19a9ca5d4593e5effa6c19`, integrated at
-`b6b134c2402bd51e1048178e7e117744ff4ad4f3`. The isolated Mac review branch is
-`codex/home-comparison-2026-10-15`. The latest rebuild and native status are in
-[the Mac review receipt](../../results/plain-language-2026-10-15/receipt.json).
-Source tests, package preparation and native runtime are separate evidence.
-Package 5 (`4016e8d`) is historical: it lacks the Parents cancellation focus fix.
-The two [Home proposals](../design/home-comparison/index.html) are browser studies;
-the owner subsequently delegated implementation, and A is selected. Its exact source,
-build and native acceptance status are recorded in the Mac receipt above. B is retained
-for comparison and has no native implementation.
-
-Private working-branch delivery is authorized. Public publication, recording, main merge and release tags remain outside this review.
-
-Statuses. **Verified** means the evidence named in the row was read in this
-session. **Missing** means the artifact does not exist yet. **Pending** means
-the work is planned and not finished: native visual and audio acceptance,
-final release selection, reviewer access and the video are still pending.
-The coastal design's visual approval was completed on Oct 14.
-**Owner decision** means only Alex can settle it. A row is never marked verified from a plan, a
-statement of intent or an earlier build's evidence standing in for the current one.
+| Area | Evidence now | Remaining work and owner |
+|---|---|---|
+| App and prepared library | Built source above; Harbor plus exact approved Acadia catalog; byte, signature and report gates pass | Final release selection after acceptance |
+| Navigation and transport | Source regression removes background Home/Details controls; TV uses a seek bar, not the automotive Forward button | Use the current receipt for native seek outcome; owner confirms visible focus |
+| Real-video evidence | Acadia runs in the app; seven earlier positive sources recovered and hash-matched; Irminger headless regression reproduced | These are engineering checks, not independent detector validation |
+| Sound and copy | Same local optional cue, held-key suppression; source tests include sound/copy regressions | Owner listening, captions and VoiceView checks; saved settings unchanged |
+| Native acceptance | Text logs only; source/build identity recorded | Owner eyes and ears; physical TV and loop seam unverified |
+| Demo | Current script in this packet; prepared Acadia and clearly simulated demo are distinct | Recording requires separate approval; final video checks and upload still pending |
+| Licensing | Existing asset ledger and NPS attribution retained | Resolve Amazon wrapper/Shaka notice scope and owner CC0 dedication; verify rights before public release |
+| Reviewer access | Private working branch available to owner | Owner authorizes access route and chooses release; no invitations sent |
+| AWS | Oct 9 deployment evidence; Oct 15 offline tests/synthesis | Current billing, budget/tag, deployed digest and findings need authorized live access; no AWS changes here |
+| Open Source mini challenge | Prepared upstream patches and eight focused contract tests | Optional public contribution URL; a PR is not mandatory, publication is not authorized |
+| Feedback/friction | Existing evidence-backed feedback and friction log retained | Owner approves publication; historical platform observations keep their dates |
+| Entrant/form | Draft text and checklist present | Owner eligibility/contact/registration confirmation and actual form field review |
 
 ## The packet
 
@@ -47,28 +47,14 @@ describes the current packet and labels the Oct 13 ZIP as history.
 
 ## Mandatory blockers and optional work
 
-**Submission work and owner decisions:**
+Before submission: accept the final native presentation, choose the judged
+release, settle licence/entrant items, authorize reviewer access, then authorize
+recording and publication. The app targets Vega OS and was exercised on the
+Vega Virtual Device; no physical-TV acceptance is claimed. Check Amazon's
+current supported-device list before naming hardware on the form.
 
-- Final visual approval: done on Oct 14. The ivory coast design with the
-  dimensional coastal artwork was approved and applied (`b22d275`) and held to
-  the repository's floors (`93cf800`); how it looks on the device is unverified.
-- Native validation of the final build on the Vega Virtual Device (row 4).
-- Final release selection: the latest source and its rebuild need acceptance;
-  package 5 is historical, not the current judged candidate (row 10). The exact reviewed code reference still
-  needs selection; merging to `main` and tagging are release choices.
-- Reviewer access to the repository, public or private (row 11).
-- The demonstration video; recording is not yet authorized (rows 6, 12, 13).
-- The entrant details and licence items only Alex can settle (rows 1, 8, 23).
-
-**Optional, does not block the submission:** the Open Source mini challenge
-(row 18) and the AWS Builder mini challenge (row 17).
-
-**Supported devices.** The package targets Vega OS, Amazon's newer non-Android
-TV platform, and has only ever run on the Vega Virtual Device. Fire OS devices,
-which is most Fire TV sticks and Cubes in homes today, cannot install it. Press
-coverage of the September 30, 2025 announcement names the Fire TV Stick 4K
-Select as the first Vega OS device; the current list should be read from
-Amazon's documentation before it is stated on the form.
+Open Source and AWS Builder are optional mini challenges. Neither a new
+backend deployment nor an upstream PR is required to finish the core app.
 
 ## Sources
 
@@ -116,21 +102,21 @@ credits; each mini challenge is 5,000 cash and 5,000 in credits.
 | 1 | **Eligibility** (section 3): individuals at the age of majority where they reside; not a resident of a place where participation is prohibited; not an employee, agent or household member of the Sponsor or Administrator; not a judge | **Owner decision** | [../SUBMISSION.md](../SUBMISSION.md) section 15 records the entrant as Alex Velazquez, United States, solo. Eligibility confirmation and contact email are marked NEEDS ALEX there |
 | 2 | **Register on Devpost** by clicking "Join Hackathon" (section 4) | **Owner decision** | No record of a Devpost registration in the repository |
 | 3 | **Fire TV developer account** (section 4, How To Enter) | **Verified by owner statement** | [../SUBMISSION.md](../SUBMISSION.md) section 15: created and identity-verified, as confirmed by Alex on Oct 9. Not independently inspectable here |
-| 4 | **Demo-ready app on Fire OS or Vega OS** (Project Requirements, Fire TV) | **Historical packages observed by app logs; latest rebuild acceptance is separate** | Installed and observed on the Vega Virtual Device: source `73fbbed` on Oct 9 and 10 ([`results/redesign_validation_2026-10-10.json`](../../results/redesign_validation_2026-10-10.json)), source `06190c7` on Oct 13 ([`results/polish_native_validation.json`](../../results/polish_native_validation.json)), sources `dba88d5` and `00905510` on Oct 14 ([`results/native-observation-2026-10-14/receipt.json`](../../results/native-observation-2026-10-14/receipt.json), [`results/native-checkpoint-2026-10-14/receipt.json`](../../results/native-checkpoint-2026-10-14/receipt.json)). The Oct 14 source `af192ac` has two built packages, neither installed or launched ([`results/concise-copy-2026-10-14/ARTIFACT_MANIFEST.json`](../../results/concise-copy-2026-10-14/ARTIFACT_MANIFEST.json), `native_validation_performed: false`). The candidate `cfddc4a` has an aarch64 Debug package built from it with its 723 recorded source inputs verified and `native_validation_performed: false`, as build output outside git in the reliability worktree (`build/release/core-reliability-cfddc4a-2026-10-14/PREPARATION.json`, package SHA-256 `e315e16d19172a5aadc1bfa8a9364bcf9205d51870ec610b92eb01ea9d2841dd`); it has not been installed or run. The earlier package 3 source `ac5a610` has its own package, `build/release/final-candidate-3-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, SHA-256 `4d36c177c000eb6470ac39acef7e02bdfb72300697f4142e65522d3d3315a6c5`, 28,716,350 bytes, 736 recorded inputs, built from `ac5a610`, prepared library checked with all three reports. It was installed over the existing household and driven by remote key presses while the Debug app's breadcrumbs and media events were read from the device log: cold launch to Home, every Home control reached, Details and return focus, Harbor start to finish with zero holds and no recovery screen, pause and resume, both practice holds with the still loading, Help, the Settings PIN gate and a relaunch without setup all reported as happening; seeking by remote was not established ([`results/native-acceptance-2026-10-14/receipt.json`](../../results/native-acceptance-2026-10-14/receipt.json)). Late on Oct 14 the simplified Home shipped as package 4, `build/release/final-candidate-4-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, SHA-256 `471770fb10d9269d1a4128f6b1328cb6dd30495dbc715d8289cdb79cfef0d337`, 28,731,853 bytes, 736 recorded inputs, built from `819de40`; it was installed over the same household and driven the same way: cold launch to Home with Play focused, every press landing on a known control, Details with the practice entry beside Play, Harbor to its end with zero holds, the demo page and both holds with the still, Back one level at a time, Help, the PIN gate and a relaunch, all reported ([`results/native-acceptance-4-2026-10-14/receipt.json`](../../results/native-acceptance-4-2026-10-14/receipt.json)); a second pass added pause and resume (J9), the caption control (J11), and a cover-first remote seek into the first hold (J10b, after the first attempt arrived too late) ([`results/native-acceptance-4-2026-10-14/second-pass.json`](../../results/native-acceptance-4-2026-10-14/second-pass.json)). The historical package 5 is `build/release/final-candidate-5-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, SHA-256 `a226b39fc855cd7cf5eb4136b9ba890f92e6e6518ca764a6862cf9990870dc13`, 28,733,262 bytes, 736 recorded inputs, from `4016e8d`. Its receipt reports eight log-observed journeys, installed over the existing household without reset or PIN entry ([`results/native-acceptance-5-2026-10-14/receipt.json`](../../results/native-acceptance-5-2026-10-14/receipt.json)). Pause, seek and the caption control were not repeated in that receipt. No pixels or sound were observed; the parent settings interior, VoiceView and the caption menu's contents remain unchecked. Back from the PIN gate reported Home with Details focused, so return focus to Parents needs checking. The owner's checklist is FINAL_HANDOFF section 4 |
+| 4 | **Demo-ready app on Fire OS or Vega OS** | **Source and native event evidence; owner visual/audio acceptance pending** | Current source `21f0ea6`, exact package and per-journey results in [the receipt](../../results/transport-focus-2026-10-15/receipt.json). Acadia identity and cover intervals are logged; TV seek and return-route outcomes are recorded separately. Logs do not prove pixels, sound or physical-TV behavior. |
 | 5 | **Clear setup and run instructions in the repository** (Functionality) | **Verified present; earlier fresh-checkout run recorded; device steps not replayed** | [README.md](../../README.md) "Install and run" and "Run the checks", [../MAC_FINISH.md](../MAC_FINISH.md), [REVIEWER_QUICKSTART.md](REVIEWER_QUICKSTART.md). The quickstart records a fresh-checkout run of sections 1, 2 and 5 on the earlier candidate and labels sections 3 and 4 as not run from that file; the handoff records later fixes and checks. This reconciliation adds no new execution |
 | 6 | **The project shown functioning in the demonstration video** (Functionality, Platforms) | **Missing, pending** | No video of the candidate, and recording is not yet authorized. An earlier English cut of the Oct 10 build (`73fbbed`) exists locally at `build/submission-redesign/Calm-Frames-demo-English.mp4`, <!--n results/redesign_video_check.json:duration_s -->156.021<!--/n--> seconds, never uploaded ([../SUBMISSION.md](../SUBMISSION.md) section 7). [DEMO_SCRIPT.md](DEMO_SCRIPT.md) is the plan |
-| 7 | **New or significantly updated after Aug 31, 2026**, with the update explained (New & Existing) | **Verified** | First commit `387c173` on Sep 17, 2026 (`git log --reverse`), inside the Submission Period. [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) says so |
+| 7 | **New or significantly updated after Aug 31, 2026**, with the update explained (New & Existing) | **Verified** | First commit `387c173` on Sep 17, 2026 (`git log --reverse`), inside the Submission Period. Git history preserves that date |
 | 8 | **Third-party SDKs, APIs and data used under their terms** (Third Party Integrations) | **Owner decision** | The Amazon sample's root licence is MIT-0 while its player wrapper and Shaka archive carry a proprietary notice; the clarification request in [../AMAZON_SAMPLE_LICENSE_REVIEW.md](../AMAZON_SAMPLE_LICENSE_REVIEW.md) is unsent. Fonts, media and generated artwork are in the release and licence lane another agent owns; the ledger is [`media/LICENSES.csv`](../../media/LICENSES.csv). `app/assets/image/tv/harbor-illustrated.png` is ledgered in this packet's reconciliation commit as a pixel-identical render of our own `app/assets/brand/tv/harbor.svg`. The Amazon sample notices remain explicitly unresolved: [`results/release-pin-license-review-2026-10-14.json`](../../results/release-pin-license-review-2026-10-14.json) classifies them as an unresolved scope of permission, not a resolved attribution |
 | 9 | **Text description of features and functionality** (Submission Requirements) | **Verified draft; not pasted** | [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md), with the longer [../SUBMISSION.md](../SUBMISSION.md) and [../SUBMISSION_COPY.md](../SUBMISSION_COPY.md) |
-| 10 | **GitHub repository URL with all source, assets and instructions** (Submission Requirements) | **Verified present; Owner decision on the judged code line** | <https://github.com/alejandro-publius/calm-frames>. Hazardous media under `media/` is excluded by design; only hashes and licence rows are committed, and the README says so. `main` is at `7110893` and has not moved since Sep 20; draft PR #1 from `codex/signed-scene-holds-2026-09-29` (`4c9996d`) is open and mergeable; the final candidate `claude/final-candidate-2026-10-14`, checked at head `a3368a9e`, includes package 5's source `4016e8d` and descends from both through the approved coastal commit `b22d275`. It is proposed, not selected; a merge to `main` and a tag are release choices, not stated rules. Final release selection is pending ([OPEN_DECISIONS.md](OPEN_DECISIONS.md)) |
-| 11 | **Repository public with an open source licence visible in About, or private and shared** with `testing@devpost.com` and `chris-trag`, `knmeiss`, `giolaq`, `anishamalde`, `mosesroth`, `emersonsklar` (Submission Requirements; Sept 16 update "Hackathon submission requirements: Code repository") | **Pending, owner decision** | Today the repository is private (`gh repo view`: `PRIVATE`). GitHub already detects `Apache License 2.0` from the root `LICENSE`. The About description, website and topics are empty. The collaborator list was not read. The project's plan is to go public on Oct 21 after merging to `main` |
+| 10 | **GitHub repository URL with source, assets and instructions** | **Private working candidate; judged code not selected** | <https://github.com/alejandro-publius/calm-frames>, branch `codex/prepared-video-slice-2026-10-15`, app source `21f0ea6`. Original hazardous source media remain excluded; hashes, licence records and prepared app assets are retained. A main merge or tag is a release choice, not claimed mandatory. |
+| 11 | **Repository public with an open source licence visible in About, or private and shared** with `testing@devpost.com` and `chris-trag`, `knmeiss`, `giolaq`, `anishamalde`, `mosesroth`, `emersonsklar` (Submission Requirements; Sept 16 update "Hackathon submission requirements: Code repository") | **Pending, owner decision** | The Oct 14 repository read recorded `PRIVATE`; this pass changes no visibility. GitHub already detects `Apache License 2.0` from the root `LICENSE`. The About description, website and topics are empty. The collaborator list was not read. Any earlier publication plan remains subject to explicit owner approval |
 | 12 | **Fire TV: any framework; the project runs on Fire OS or Vega OS; the video shows it on an actual Fire TV device or the Fire TV/Vega simulator** (Submission Requirements) | **Verified for the platform; video pending** | React Native 0.83 on Vega SDK 0.24.9914, package `io.github.alejandropublius.calmframes`, installed on the Vega Virtual Device in the receipts of row 4. The video is row 6 |
 | 13 | **Demonstration video**: under three minutes, footage on the device it was built for, public on YouTube or Vimeo, link on the form, no third-party trademarks or copyrighted music or material without permission | **Missing, pending; recording not yet authorized** | [DEMO_SCRIPT.md](DEMO_SCRIPT.md) targets 2:40. The project's own gate refuses a file of 179 seconds or longer and runs the flash check on the finished file (`eval/check_video.sh`). Narration in the earlier cut was synthetic macOS speech, disclosed on screen |
 | 14 | **Product Feedback for each tool, API or SDK used**: which and for what; what worked well; what needs work; onboarding; build with it again and why | **Verified draft; not pasted** | [../FEEDBACK.md](../FEEDBACK.md): eighteen tools, each section answering the five questions, with an "At a glance" table |
 | 15 | **Identify the primary track** | **Verified** | Fire TV ([../SUBMISSION.md](../SUBMISSION.md) section 4) |
 | 16 | **Identify the mini challenges** | **Owner decision** | Open Source and AWS Builder are drafted; see the tracks table |
 | 17 | **AWS Builder: describe which AWS services were used and how, inside the Product Feedback answer** | **Verified draft** | [../SUBMISSION.md](../SUBMISSION.md) section 10.2 table, built from [`results/aws_deploy_2026-10-09.json`](../../results/aws_deploy_2026-10-09.json): <!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n--> resources, <!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways, one refused unsigned run and one signed publication. The `Project` cost allocation tag was inactive on Oct 9 |
-| 18 | **Open Source: contribution URL, project repository URL, GitHub username, description** | **Missing** | No fork or pull request has been opened ([../OPEN_SOURCE_PR.md](../OPEN_SOURCE_PR.md)); the two production patches and a third contract-test patch have eight focused passes in `docs/upstream-pr/`; the current duplicate recheck is blocked by API `Forbidden`; the GitHub username to credit is marked NEEDS ALEX; the description is drafted in [../SUBMISSION.md](../SUBMISSION.md) section 12.4. The rule asks for a new, additional open source project or a contribution to an existing public repository during the window, so the private Calm Frames repository on its own does not establish this entry; a public fork or branch containing the contribution can qualify without opening or merging a PR; private patch files alone do not establish the entry |
+| 18 | **Open Source: contribution URL, project repository URL, GitHub username, description** | **Missing** | No fork or pull request has been opened ([../OPEN_SOURCE_PR.md](../OPEN_SOURCE_PR.md)); the two production patches and a third contract-test patch have eight focused passes in `docs/upstream-pr/`; the Oct 15 duplicate recheck returned API `Forbidden` and was not repeated here; the GitHub username to credit is marked NEEDS ALEX; the description is drafted in [../SUBMISSION.md](../SUBMISSION.md) section 12.4. The rule asks for a new, additional open source project or a contribution to an existing public repository during the window, so the private Calm Frames repository on its own does not establish this entry; a public fork or branch containing the contribution can qualify without opening or merging a PR; private patch files alone do not establish the entry |
 | 19 | **Optional feature requests** with priority ratings | **Verified draft** | [../FEEDBACK.md](../FEEDBACK.md), "Feature requests", each marked Critical, Important or Nice-to-have |
 | 20 | **Optional friction log entries** in the six fields; up to a ten percent bonus at Stage One | **Verified draft; publication needs owner approval** | [../FRICTION_LOG.md](../FRICTION_LOG.md): 44 entries, each with task, steps, expected versus actual, severity, workaround and suggestion, with the evidence table at the end; 41 to 44 came from the Oct 14 device sessions. Delivery: an Amazon organizer answered on the forum (topic 45430, read Oct 14, 2026) that a link in the description is enough and that keeping the log in the repository is easier for judges; [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) carries that link. Alex has not yet confirmed publishing it as written ([../SUBMISSION.md](../SUBMISSION.md) section 14) |
 | 21 | **Testing**: accessible to judges through the repository and the video; credentials if private; free of charge until the Judging Period ends | **Owner decision** (access route, row 11) | The app needs no login. The parent area uses a PIN the installer chooses on first run; there is no preset PIN in the package ([README.md](../../README.md), "The parent area and the demo PIN") |

@@ -1,15 +1,16 @@
 # Status
 
-Current installed app: approved Acadia integration from `0a54252` on private
-`codex/prepared-video-slice-2026-10-15`. See the
-[current receipt](../results/acadia-native-2026-10-15/receipt.json) and
-[handoff](../FINAL_HANDOFF.md). Exact catalog trust is scoped to the approved
-bundle. Harbor remains featured; Acadia adds real detected periods and
-prepared playback. One build and installation completed; the app remains
-running. Source tests pass. Native logs establish playback identity, both
-cover intervals, remote seeks and core Back routes. On-screen Forward focus
-was not established and remains open. Visual/audio acceptance, physical TV
-and independent detector validation remain pending. No capture or publication.
+Current installed app: `21f0ea6` on private
+`codex/prepared-video-slice-2026-10-15`. The background route focus leak is
+fixed. The corrected TV seek-bar check and 16 native observations pass by logs;
+131 suites, 1,313 tests and 57 snapshots pass. See the
+[current receipt](../results/transport-focus-2026-10-15/receipt.json) and
+[handoff](../FINAL_HANDOFF.md). The app remains running, catalogs/keys and saved
+preferences unchanged. Seven earlier positive sources were recovered by hash;
+one case was reproduced headlessly. Submission documents are reconciled.
+Owner visual/audio acceptance, independent detector/physical-TV/loop validation,
+licensing, release/access decisions, recording and publication remain open.
+Live AWS state is unverified; optional Open Source does not require a PR.
 
 Historical checkpoints follow.
 

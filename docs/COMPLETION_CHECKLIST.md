@@ -1,5 +1,12 @@
 # Calm Frames completion checklist
 
+Current October 15 candidate: app source `21f0ea6` on
+`codex/prepared-video-slice-2026-10-15`. Use [FINAL_HANDOFF.md](../FINAL_HANDOFF.md)
+and [the current submission packet](submission/README.md) for source, package,
+native limits and remaining owner actions. The detailed dated notes below are
+historical where they name earlier packages or copy. Nothing here authorizes
+recording, publication, a main merge, credentials or AWS changes.
+
 **Superseded on Oct 14, 2026.** The live owner list is [`FINAL_HANDOFF.md`](../FINAL_HANDOFF.md)
 section 5 and the packet under [`docs/submission/`](submission/README.md); the rows
 below are the Oct 13 plan, kept as a record. Do not rebuild the centered layout

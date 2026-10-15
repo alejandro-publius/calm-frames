@@ -1,0 +1,55 @@
+{
+  "reviewedCommit": "3af32e47c569cc0c1d2a182c09c901487853e183",
+  "changedFiles": [
+    "docs/evidence/detector-review/AUDIT.md",
+    "flashmap/tests/test_video_reset_boundaries.py",
+    "results/detector-review/negative-controls.json",
+    "results/detector-review/test-results.json"
+  ],
+  "productionCodeChanged": false,
+  "integrated": false,
+  "testClaimsRead": {
+    "recorded_utc": "2026-10-15T21:40:52Z",
+    "environment": {
+      "python": "/Users/alexvintera/calm-frames/.venv/bin/python",
+      "PYTHONPATH": "flashmap/src"
+    },
+    "runs": [
+      {
+        "command": "python -m pytest flashmap/tests/test_video_reset_boundaries.py -q",
+        "result": "22 passed"
+      },
+      {
+        "command": "bash negative controls E, F, G (see negative-controls.json), each followed by restore",
+        "result": "E 1 failed, F 2 failed, G 5 failed; 22 passed after restore"
+      },
+      {
+        "command": "python -m pytest flashmap -q -m \"not slow\"",
+        "result": "346 passed, 2 deselected"
+      }
+    ],
+    "tests_added_or_renamed": [
+      "test_flashing_over_a_24_by_25_block_more_than_a_quarter_fails (renamed from the one-pixel name; it was 24 pixels more)",
+      "test_exactly_576_of_the_2304_window_pixels_flashing_is_a_quarter_and_passes",
+      "test_577_of_the_2304_window_pixels_flashing_is_more_than_a_quarter_and_fails",
+      "test_the_hidden_interval_lasts_until_the_fourth_flash_ages_out_of_the_window",
+      "test_the_hidden_interval_cannot_start_before_the_file_does",
+      "test_four_red_flashes_in_a_second_are_a_red_segment_and_not_a_general_one",
+      "test_two_red_and_two_general_flashes_in_a_second_are_two_tallies_of_two_and_pass",
+      "test_a_single_pass_does_not_count_flashes_across_a_loop_seam"
+    ],
+    "not_claimed": "No seizure safety, no clinical confirmation, no loop safety; measured threshold exceedances only."
+  },
+  "assessment": "Bounded tests and audit only. Exact 576/577 working-pixel boundary, separate red/general tallies, temporal extent and loop limitation are addressed. Negative controls are recorded by Claude, not rerun here. Audit is not independent detector or clinical validation.",
+  "limits": [
+    "Broadcast recommendation was not re-fetched for the audit.",
+    "PlayerScreen schedules an automatic return 2300 ms after ended; current native drivers press Back before that delay, so delayed automatic return is source-supported but not independently exercised here.",
+    "Source averaging, SDR assumptions, unimplemented exceptions and loop seam remain material."
+  ],
+  "fileHashes": {
+    "docs/evidence/detector-review/AUDIT.md": "65dc51a2a7422a17589373c5a328cdcad673391a3eaf3d837437fc41392047c8",
+    "flashmap/tests/test_video_reset_boundaries.py": "f078fd1785225895aba2ecd86c452e75c41c92dd81a1a474d26c787ea886c20d",
+    "results/detector-review/negative-controls.json": "aeee77d04930bda66d743b4bb3eb36de36a6c16e142eaa43f14b6ad274514478",
+    "results/detector-review/test-results.json": "969067e68a9cf2017caaea5bf8c999dfa4b1acf7c350f60618c0cc042c9d3c18"
+  }
+}

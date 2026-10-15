@@ -1,5 +1,12 @@
 # Devpost submission draft
 
+Current October 15 candidate: app source `21f0ea6` on
+`codex/prepared-video-slice-2026-10-15`. Use [FINAL_HANDOFF.md](../FINAL_HANDOFF.md)
+and [the current submission packet](submission/README.md) for source, package,
+native limits and remaining owner actions. The detailed dated notes below are
+historical where they name earlier packages or copy. Nothing here authorizes
+recording, publication, a main merge, credentials or AWS changes.
+
 Every field for **Build, Ship, Shape: Amazon Developer Hackathon**, Fire TV track, with the Open Source and AWS Builder mini challenges.
 
 **Status, October 13.** Solo entry; validation and demo use the Vega Virtual Device exclusively. The Amazon Developer account is created and identity-verified. This draft is not ready to submit. The earlier native simulator journey and English video are recorded and checked locally. The current cloud design polish changes app inputs and still needs a Mac build, native checks and refreshed demo assets. The judged release,

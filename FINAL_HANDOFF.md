@@ -1,6 +1,69 @@
 # Final handoff: the integration candidate
 
-## Installed approved Acadia integration, October 15, 2026
+## Current high-value completion, October 15, 2026
+
+App source `21f0ea60332b83efe960eb7cf799139ec2d82ae9` fixes background focus
+while preserving the exact approved Acadia integration. The private working
+branch remains `codex/prepared-video-slice-2026-10-15`.
+Package: `build/release/transport-focus-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg`.
+SHA-256: `a39566ba190b21cbfc5523e902a37bbe00801c189c3d55c891177343d3b36507`.
+The [current receipt](results/transport-focus-2026-10-15/receipt.json) records
+one rebuild and installation for this fix. The app remains running at Home,
+with How it works focused. No app source changed after the build.
+
+The old Forward-button check targeted an automotive-only control. TV uses
+a seek bar. Separately, Home and Details left native controls focusable behind
+playback. Two regression cases reproduced that defect before the fix. The
+inactive route now removes its controls while retaining its state for Back.
+The current gate passes 131 suites, 1,313 tests and 57 snapshots; typecheck
+and lint pass, with 101 existing warnings. The full suite includes the copy
+and optional-sound regressions. Sound preference, cue asset and volume remain
+unchanged; audible quality is not claimed.
+
+All 16 current native observations pass by logs, with no blocked or
+inconclusive journey. They cover core Home/Details and Parents cancellation,
+Harbor to end, simulated practice and Back, Acadia identity and both cover
+intervals, Help, and the corrected TV seek-bar route. After pause, Up/Down
+reported no background route focus. Right then Select requested cover before
+writing 12,123 ms, inside the first Extra cautious interval. Back restored
+Acadia Details then its Home card. Logs do not prove visible focus or paint
+ordering. The prior remote Fast Forward evidence remains dated to `0a54252`.
+
+[Earlier positive-video recovery](docs/evidence/earlier-positive-2026-10-15.md)
+reconciles the Sept 17 ledger with retained local files. All seven cover-positive
+source hashes match. The Irminger case freshly reproduces its WCAG findings;
+every covered decoded frame in its three retained renditions passes the numeric
+still comparison. No download, new trust, media integration or private key was
+needed. No independent detector or medical validation follows from this.
+Claude's `3af32e4` test/spec review was read-only assessed and not integrated.
+
+The [submission packet](docs/submission/README.md), readiness matrix, Devpost
+draft, reviewer steps and demo script now describe this actual candidate.
+AWS remains dated deployment/offline evidence; live state is unverified.
+Open Source remains optional and a PR is not mandatory. Recording, publication,
+reviewer invitations, main merge, release tags and AWS changes remain undone.
+
+### Minimum owner actions
+
+1. In the running app, review Acadia analysis, prepared playback, visible focus
+   and Back. Check sound/captions and VoiceView if used. Only open prepared
+   media, never the original hazardous source. Physical-TV acceptance remains open.
+2. Optionally enable Selection sounds using your own existing Parents PIN,
+   then listen. The agent has not changed household settings or volume.
+3. Settle the Amazon sample/Shaka permission scope and artwork dedication,
+   entrant/contact/registration details, and choose the judged source/package.
+4. Choose and authorize reviewer access. Separately authorize demo recording,
+   final video review and public upload; the script is ready, nothing is recorded.
+5. If entering the optional AWS mini challenge, verify current bill, budget/tag,
+   deployed digest and findings through authorized live access. If entering
+   Open Source, select and authorize an eligible public contribution URL.
+
+The remaining gaps are human acceptance, independent detector/physical-TV and
+loop-seam validation, licensing/access/release choices and any live AWS review.
+They are not hidden behind an all-green submission claim. Historical checkpoints
+below retain their original evidence and are superseded by this section.
+
+## Historical approved Acadia integration, October 15, 2026
 
 App source: `0a542522642cf42d32bacf8dd41aa0f97aca62ff` on private working
 branch `codex/prepared-video-slice-2026-10-15`. The owner approved the exact

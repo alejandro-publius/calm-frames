@@ -1,120 +1,36 @@
 # Open decisions and blockers
 
-Latest UI reset: `4ba895946aabf322ed03ba7d52debbed6f5611ad`, package
-`prepared-video-slice-2026-10-15`. See the
-[current receipt](../../results/prepared-video-ui-2026-10-15/receipt.json).
-This uses existing verified Harbor. Fresh NPS footage preparation and independent
-detector evidence remain pending the separate pipeline lane. Prior checkpoint follows.
+Current working candidate: `codex/prepared-video-slice-2026-10-15`, app source
+`21f0ea60332b83efe960eb7cf799139ec2d82ae9`. See
+[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) and the
+[focus-fix receipt](../../results/transport-focus-2026-10-15/receipt.json) for
+the exact installed package and bounded native observations. The approved
+Acadia integration is retained; historical package 5 and the old draft ZIP
+are not the current candidate. Final judged release selection remains open.
 
+## Engineering and owner acceptance
 
-Updated October 15, 2026. Latest implemented source: `689c484efca088e65e76e0c7efeaf51f210c818e`.
-Current package: `home-reading-a-plain-copy-2026-10-15`; native evidence is linked below.
+- The earlier Forward-button check targeted an automotive-only control.
+  The real issue was background Details/Home controls taking focus. The
+  regression fix and correct TV seek-bar check are in the current receipt.
+- Owner checks still needed: readable analysis, visible focus and Back route,
+  prepared picture holds, optional menu cue, audio continuity, captions and
+  VoiceView. Keep the saved household; only the owner enters the existing PIN.
+- Detection can miss flashing. Native log ordering is not paint timing.
+  Independent detector assessment, physical-TV acceptance and loop-seam
+  validation remain open; none is replaced by unit tests.
+- Choose the final source/package after acceptance. No main merge or release
+  tag has been made. The working branch is private and the old release/ZIP
+  assets are historical.
 
-The incoming source was `0e434dc7c89b7fb2dc19a9ca5d4593e5effa6c19`, integrated at
-`b6b134c2402bd51e1048178e7e117744ff4ad4f3`. The isolated Mac review branch is
-`codex/home-comparison-2026-10-15`. The latest rebuild and native status are in
-[the Mac review receipt](../../results/plain-language-2026-10-15/receipt.json).
-Source tests, package preparation and native runtime are separate evidence.
-Package 5 (`4016e8d`) is historical: it lacks the Parents cancellation focus fix.
-The two [Home proposals](../design/home-comparison/index.html) are browser studies;
-the owner subsequently delegated implementation, and A is selected. Its exact source,
-build and native acceptance status are recorded in the Mac receipt above. B is retained
-for comparison and has no native implementation.
+## Recording and access
 
-The mini challenges remain optional.
+The revised [demo script](DEMO_SCRIPT.md) is a draft only. Recording and public
+upload require separate authorization. No old screenshots or video should be
+presented as the current build. Reviewer access also requires the owner's
+chosen route and authorization; nobody has been invited by this pass.
 
-## Mandatory before submission
-
-Before distribution, Alex must resolve the Amazon sample notice scope and artwork
-permissions/dedication decisions. Keep all existing notices; this review changes none
-and contacts no third parties.
-
-### 1. Final release selection: pending
-
-The historical package 5, from `4016e8d`, carries the approved
-coastal interface, the ledger and credits for its artwork, the hook mirror,
-the fixes that hold the coastal menus to the ten foot floors, three Back
-fixes, bundled copies of the practice stills and the opening readiness
-fallback. It includes the simplified Home from `819de40` (one "Calm Frames"
-heading, Play and Details, the practice demo reached from Details), the bordered
-icon and tile, and the one-voice copy from `4016e8d`. Package 5 was driven on
-the device and judged from its own log: eight journeys reported as happening.
-Package 4's second pass separately reported pause, resume, the caption control
-and a cover-first remote seek. The package, checks and owner's eyes-and-ears
-checklist are in the handoff. Underneath it, the reliability candidate `cfddc4a` includes the Oct 14 playback recovery fix (a failed player setup
-reaches the recovery screen at once) and the release helper fix that keeps a
-supplied PIN out of reviewer documents. Its bounded checks passed
-([`results/core-reliability-2026-10-14.json`](../../results/core-reliability-2026-10-14.json),
-[`results/release-pin-license-review-2026-10-14.json`](../../results/release-pin-license-review-2026-10-14.json)).
-A package built from it, with its 723 recorded source inputs verified, exists as
-build output outside git in the reliability worktree and has not been installed
-or run. The candidate has no hosted run because it has no pull request; the
-`Vega app` job that failed on Oct 13 ran on the shared PR branch head `4c9996d`
-and does not describe this candidate. `main` is at `7110893` and has not moved
-since Sep 20.
-
-**Needs:** Alex to select the exact commit or release reference judges will
-use, after the native validation below. A merge to `main` and an immutable tag
-are release choices, not stated hackathon requirements.
-
-### 2. Composition A selected and implemented under delegated approval
-
-Alex approved the ivory coast design with the dimensional coastal artwork; it
-is applied in `b22d275` and held to the repository's floors in `93cf800`. What
-remains is seeing it on the device (item 3). The artwork's ledger row records
-its generation provenance without any ownership or dedication claim.
-
-### 3. Latest native acceptance: use the Mac review receipt; eyes and ears pending
-
-Package 5 from `4016e8d` was installed over the existing household and
-driven on the Vega Virtual Device. Its breadcrumbs and media events reported
-cold launch with Play focused, Home controls, Details and return focus,
-Harbor start to finish with zero holds, the practice page and both holds with
-the still loading, How it works, the Parents PIN gate and a relaunch onto the
-saved Home
-([`results/native-acceptance-5-2026-10-14/receipt.json`](../../results/native-acceptance-5-2026-10-14/receipt.json)).
-Package 4's second pass reported pause and resume (J9), a cover-first remote
-seek into the first hold (J10b) and the caption control (J11)
-([`results/native-acceptance-4-2026-10-14/second-pass.json`](../../results/native-acceptance-4-2026-10-14/second-pass.json)).
-The first seek attempt was too late; the retry reported seeking and seeked
-events under the cover. These observations belong to their named packages.
-
-The latest candidate's pixels and audio remain unobserved. The parent settings
-interior needs the existing household PIN, and VoiceView and the caption menu's
-contents are untested. Back from the PIN gate reported Home with Details
-focused. Source `0e434dc7` now fixes this with button and remote regressions;
-it is not in package 5. See the current Mac review receipt above for rebuild and runtime results. The checklist is
-[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 4. Design approval is done;
-native visual and audio acceptance is still pending.
-
-**Needs:** Alex at the Mac with the simulator visible, entering the existing
-household PIN himself, and the handoff's eyes-and-ears checklist. Keep household
-data; no reset or new household is needed. Recording remains a separate
-authorization.
-
-### 4. The demonstration video: pending, recording not authorized
-
-The rules require footage of the project on the simulator and a public YouTube
-or Vimeo link. [DEMO_SCRIPT.md](DEMO_SCRIPT.md) is ready; nothing is recorded,
-and recording is not yet authorized. The earlier English cut is of the Oct 10
-build and was never uploaded.
-
-**Needs:** authorization after items 2 and 3, a hosting account, a decision on
-the narration voice (the earlier cut used disclosed macOS synthetic speech),
-and a logged-out check of the link.
-
-### 5. Reviewer access: pending
-
-Either a public repository with the licence visible in About, or a private one
-shared with `testing@devpost.com` and the six Amazon reviewers. Today the
-repository is private, GitHub already detects Apache License 2.0, and the About
-description and topics were empty at the Oct 14 check. Before public release,
-settle the chosen code reference in item 1, review the audit exception dates in
-`scripts/audit_exceptions.toml`, private vulnerability reporting, and item 7. The private
-route needs invitations sent at submission and accepted within seven days.
-
-**Needs:** Alex's choice and authorization before changing visibility or
-inviting reviewers. Recheck the About box when preparing access.
+## Owner and licensing items
 
 ### 6. Entrant details
 

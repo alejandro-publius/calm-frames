@@ -3,7 +3,7 @@
 **Latest controlled reset, October 15.** Read CLAUDE_CODE_HANDOFF.md before editing.
 Codex owns the prepared-video UI branch and app/**; Claude owns pipeline/** and
 its tests in a separate checkout. The exact current source/build/native status
-is in FINAL_HANDOFF.md and results/acadia-native-2026-10-15/.
+is in FINAL_HANDOFF.md and results/transport-focus-2026-10-15/.
 Acadia has exact-bundle public-key approval from 21:19 UTC; this does not
 authorize a different key, bundle or new preparation. The next Claude lane is
 bounded detector tests and specification review, not production detector or

@@ -1,70 +1,46 @@
-# Demo video: narration and shot plan
+# Demo video: current narration and shot plan
 
-A plan for a 2:40 English video of the real app on the Vega Virtual Device.
-Written Oct 14, 2026; nothing has been recorded or captured for it, and
-recording is not yet authorized: it waits for final release selection and
-native visual and audio acceptance. The coastal design was approved Oct 14. The rules
-ask for a video under three minutes that shows the project running on an actual
-Fire TV device or the Fire TV/Vega simulator, public on YouTube or Vimeo, with
-no third-party trademarks or copyrighted music.
+Draft updated October 15, 2026 for app source `21f0ea6`, retaining the approved
+Acadia integration. This is a plan, not permission to record. Use the exact
+package accepted by the owner and named in [the handoff](../../FINAL_HANDOFF.md).
+Recording, upload and publication remain pending separate authorization.
 
-The value shows first, then the whole core journey, then the technical
-contribution. Native shots use the exact build that becomes the judged release;
-the screen labels below are the Home and Details copy on the final candidate
-`claude/final-candidate-2026-10-14` (package 5 source `4016e8d`), and must be
-re-read against the build that is actually recorded.
+The planned cut is 2:40. The earlier rules review required under three minutes;
+recheck the live requirements before submission. No shot may show an original
+hazardous source. The Acadia shots use only its approved prepared rendition.
 
-**Placeholders.** `[UNVERIFIED]` marks behavior nobody has observed on the
-current build. Record it only if the native session confirms it; otherwise cut
-the shot or use a labelled still from the receipt named. Never narrate a claim
-the recording does not show.
-
-## Shot plan
-
-| Start | Length | Picture | Narration |
+| Start | Length | Planned picture | Narration |
 |---|---|---|---|
-| 0:00 | 8 s | Cold open, native capture: a practice hold in progress. The calm still is held, the "Holding the picture" card is up, an English caption changes, the sound continues. No title yet. | This is Calm Frames holding a scene on the Fire TV simulator. The picture waits on a calm still. The sound and the captions keep going. |
-| 0:08 | 6 s | Editorial card: the approved brand tile, `docs/brand/firetv-app-icon-1280x720.png`. | Calm Frames is a Fire TV accessibility prototype for families affected by photosensitivity. It reduces exposure to flashing above published limits in the videos it plays; not a medical device. |
-| 0:14 | 12 s | Home, native, real D-pad presses: one heading, "Calm Frames", over the coast; focus moves from Play to Details, then up to How it works and Parents. Keep the whole screen in frame. | Everything runs on Vega OS with the remote. The library is small on purpose: every title here was analyzed frame by frame before it could be chosen. |
-| 0:26 | 10 s | Details: "Harbor", "20 sec · No flashing found", Play and Try picture holds beside it. Select Try picture holds: the demo's own page, "20 sec · 2 practice holds", the picture timeline, focus on Play. | The practice demo is the same short film with two scheduled holds, so you can see the player work. They are examples, not detected flashing. Harbor itself has nothing above the limits. |
-| 0:36 | 30 s | One continuous native take from Play: the "Picture hold coming up" countdown with Skip, the first hold with the calm still (the final candidate reported it loading at both holds) and changing captions, the gap, the second hold. Narration stops after ten seconds; leave the film's sound audible. | Before a hold, a countdown and a Skip. Then the picture holds on a checked still from just before, and the story carries on in sound and captions. |
-| 1:06 | 14 s | Transport on the same title: pause, resume, then a seek back into a hold. Step the capture frame by frame afterwards: the cover must be on screen before the film moves. `[Package 4's second pass reported pause, resume and Back (J9), and a cover-first remote seek (J10b) in results/native-acceptance-4-2026-10-14/second-pass.json. Package 5 did not repeat those checks. Pixels and audio remain unobserved: keep this shot only if the authorized recording session sees it]` | Every way of moving the playhead goes through one guarded function. Seek into a hold, and the cover is there before the picture moves. |
-| 1:20 | 10 s | Back to Home with visible return focus, then Play on Harbor: it plays through with captions and no hold. | Back returns to where you were. The ordinary Harbor went through the same pipeline and came out with zero holds, so it simply plays. |
-| 1:30 | 16 s | Parents (the parental controls): show the PIN gate before any digits are entered, then cut to the settings after the owner enters the existing household PIN privately with capture stopped. Show profile, viewing preset, television size and distance, chime, with motion and sounds Off only if those are the actual settings. Keep the household data; never show or speak a real PIN. `[Package 5 reported the PIN gate and Back to Home with Details focused; return focus to Parents needs checking. The settings interior is unobserved on this candidate because the household PIN was not entered. Earlier interior evidence is from the Oct 10 build, results/redesign_validation_2026-10-10.json. Keep the settings shot only after native acceptance confirms it]` | Parents set the viewing preset and the room behind a PIN. A child's profile can make the choices stricter, never looser. |
-| 1:46 | 8 s | How it works, from the Home header: four short lines, who it is for, the check, the hold, and the limit. | How it works says it in four lines: who it is for, every video checked before it plays, the picture holding while the sound continues, and that detection can miss flashing. |
-| 1:54 | 22 s | Terminal, large type, no desktop visible: `python -m flashmap check harbor.mp4 --profile wcag` returning exit code 0, then `python -m flashmap verify` of the signed map, then the Action file `flashmap/examples/flash-check.yml` and the first screen of `hook/README.md`. Use the benign Harbor source only. | Underneath is flashmap, an open source analyzer for the published flash limits. It signs a map bound to the file's hash, and the player refuses a map it cannot verify. The same check runs as a GitHub Action on every pull request, and a drop-in hook gives any Vega video app the same guard. |
-| 2:16 | 12 s | Editorial card from the Oct 9 AWS record: the unsigned clip refused, the signed clip published through S3, Fargate, DynamoDB and CloudFront. Text only; no account identifiers. | On AWS, a CDK stack runs the same pipeline. An unsigned clip was refused; a signed one was published. The TV app itself plays only the library compiled into it. |
-| 2:28 | 8 s | Editorial limits card: "Detection can miss flashing. Simulator observations, not a television measurement. Not a medical device." | Detection can miss flashing, and these are simulator observations, not a television measurement. Calm Frames is not a medical device. |
-| 2:36 | 4 s | Closing card: the mark and "A calmer way to watch". | A calmer way to watch. |
+| 0:00 | 12 s | Current Home, then highlight the Acadia card. | Calm Frames is a prepared-video player for families affected by photosensitive epilepsy. A video is checked before it becomes available to play. |
+| 0:12 | 25 s | Acadia analysis. Read the distinct detected periods and covered times; show its file record briefly. | This coastal clip has two detected periods. The analysis shows what was found, which version will play, and how long its picture will be covered. The source, prepared video, maps and report have separate identities. |
+| 0:37 | 40 s | One complete prepared Acadia playback, with its credit. Do not show the original. Verify the recording's actual picture and sound before using the take. | The prepared version replaces the marked picture intervals with a still. The player also uses the verified map to control its cover. This is pre-analysis of this video, not a filter over other streaming apps. [Leave the remaining take without narration.] |
+| 1:17 | 18 s | Back to Details, then Home; Harbor Details, Try the demo. Label it "Simulated practice". | Harbor has no detected flashing. Its separate practice version schedules two example pauses so a family can learn the controls. Those pauses are simulated, not detector findings. |
+| 1:35 | 15 s | Current TV seek bar and return path, only after owner acceptance. | On TV, Left and Right move along the seek bar and Select confirms. Requests inside a covered interval ask for the cover before moving the playhead. Back returns through Details to the video you chose. |
+| 1:50 | 15 s | Parents gate, then cancel; no PIN entry. | Household controls are behind the parent's PIN. Cancelling returns to Parents. Optional menu sounds and artwork motion are off by default. |
+| 2:05 | 15 s | Labelled evidence card or repository view: analyzer, signed map and hook. No hazardous video preview. | Developers can reuse the analyzer, map format and player hook. We test the package identity, altered-file rejection and covered frames. These engineering checks are not independent detector validation. |
+| 2:20 | 16 s | Limits card, then current Home. | Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device. Detection can miss flashing. Current native checks use simulator logs, not a television measurement. |
+| 2:36 | 4 s | Project mark and tagline. | A calmer way to watch. |
 
-Total 2:40. About 330 narrated words at a calm pace, with 20 seconds of the
-hold take left to the film's own sound.
+## Acceptance before recording
 
-## Recording rules
+The owner must confirm readable text, visible focus, the actual prepared
+picture, sound and captions on the selected package. Logs alone do not pass
+these checks. VoiceView remains separately unverified. Do not narrate audio
+continuity, caption rendering or cover paint timing unless the accepted take
+supports the claim. Do not imply that remote Fast Forward validates a separate
+on-screen Forward button: TV uses the seek bar.
 
-- Record only after separate authorization and native acceptance of the chosen
-  package. Keep the existing household and exclude all real PIN entry.
-- Vega Virtual Device only, bundled benign media only. No file with the
-  `HAZARD_` prefix is ever opened; the terminal shot uses the Harbor source.
-- Capture with the existing window recorder (`eval/record_vega_window.m`, built to
-  `build/finish-tools/calm-record-window`), which records the composited picture
-  and native audio. It emits frames only when the window changes, so the quiet
-  stretch of the Harbor play-through may need a labelled still
-  ([../MAC_FINISH.md](../MAC_FINISH.md) section 4).
-- Fill the capture manifest from `eval/assemble_demo.py --write-template` with
-  the exact source commit, the installed package hash and every capture's hash,
-  assemble, then run `eval/check_video.sh` under both profiles with
-  `--max-seconds 179`. The finished file must pass both.
-- Narration: the earlier cut used macOS synthetic speech, disclosed on screen.
-  Keep the disclosure if that voice is used again, or record a human voice.
-- Nothing from another service appears: no desktop, no browser chrome, no logos
-  other than the project's own mark and the simulator the rules require.
-- Label editorial cards and stills as such. Label the practice holds as
-  scheduled examples.
+Keep the existing household. Never include PIN entry, account identifiers,
+credentials or the desktop. Capture/recording tools are not run as part of
+this draft. After separate recording approval, bind the take to the accepted
+source/package, check the completed video under both analysis profiles, and
+verify its duration, credits and actual audio before upload. Synthetic
+narration, editorial cards and inserted stills must be disclosed if used.
 
-## Claims that must stay out
+## Optional material to leave out of the core cut
 
-No "prevents seizures", "seizure-proof" or any medical guarantee. No claim that
-other streaming apps or DRM content are filtered. No "original story" or
-"a Calm Frames original" labels. No timing number: the simulator does not
-measure a television.
+AWS is historical deployment evidence plus offline checks; the TV app does
+not call it. Do not present a live AWS demonstration without current authorized
+verification. The Open Source mini challenge requires an eligible public
+contribution URL; a PR is optional. Neither topic needs extra screen time in
+the core story. Older comparison previews are not the current native app.

@@ -1,0 +1,665 @@
+{
+  "historicalCommit": "7110893e7892e650b5c54e4a08eed1d8f3a86ffc",
+  "historicalSummary": {
+    "adds_up": true,
+    "analyzed": 30,
+    "cover_not_proven": 0,
+    "cover_proven_drawn": 7,
+    "failed": 9,
+    "generated_on": "2026-09-17",
+    "no_flagged_segments": 14,
+    "not_analyzed": {
+      "no_entry_json": 3,
+      "no_verdict": 0,
+      "pending": 1
+    },
+    "statement": "analyzed is no_flagged_segments plus cover_proven_drawn plus cover_not_proven plus failed. A title counted under no_flagged_segments passed verify and had no segment over the thresholds, so nothing was covered and nothing about covering was shown. Only cover_proven_drawn titles had the cover measured on the rendition. The titles under not_analyzed have no verdict and are in none of the four counts.",
+    "title_directories": 34,
+    "work_directory": "~/calm-frames-work"
+  },
+  "currentWorkspaceSummary": {
+    "generated_on": "2026-10-15",
+    "work_directory": "~/calm-frames-work",
+    "title_directories": 34,
+    "analyzed": 30,
+    "no_flagged_segments": 14,
+    "cover_proven_drawn": 7,
+    "cover_not_proven": 0,
+    "failed": 9,
+    "not_analyzed": {
+      "pending": 1,
+      "no_entry_json": 3,
+      "no_verdict": 0
+    },
+    "adds_up": true,
+    "statement": "analyzed is no_flagged_segments plus cover_proven_drawn plus cover_not_proven plus failed. A title counted under no_flagged_segments passed verify and had no segment over the thresholds, so nothing was covered and nothing about covering was shown. Only cover_proven_drawn titles had the cover measured on the rendition. The titles under not_analyzed have no verdict and are in none of the four counts."
+  },
+  "historicalLedgerSha256": "cbac79407db079ac207c7bdd1d6d87b1fd044d34e5bcba98179d549d06832032",
+  "positiveCases": [
+    {
+      "name": "HAZARD_dvids_illumination_flares.mp4",
+      "sourceSha256": "edace50ba797fbe65463ea5a80d243bae2c00eae685c0f9535ab576f0c7f543f",
+      "sourcePath": "/Users/alexvintera/calm-frames/media/HAZARD_dvids_illumination_flares.mp4",
+      "sourceExists": true,
+      "sourceBytes": 2456671,
+      "sourceHashMatches": true,
+      "durationSeconds": 73.5735,
+      "historicalReportPath": "/Users/alexvintera/calm-frames-work/titles/edace50ba797fbe65463ea5a80d243bae2c00eae685c0f9535ab576f0c7f543f/verify/report.json",
+      "historicalReportSha256": "edd13e0ead590b3ffad5a546498273199ea15cc0c1713deb868e1d7998970a3a",
+      "historicalOutcome": "cover proven drawn",
+      "historicalPassed": true,
+      "licenseLedger": {
+        "file": "HAZARD_dvids_illumination_flares.mp4",
+        "source_page_url": "https://www.dvidshub.net/video/16304/soldiers-fire-illumination-flares",
+        "license": "Public domain (U.S. government work)",
+        "credit_line": "Courtesy video, Defense Imagery Management Operations Center, via DVIDS. The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.",
+        "sha256": "edace50ba797fbe65463ea5a80d243bae2c00eae685c0f9535ab576f0c7f543f",
+        "duration_s": "73.63",
+        "resolution": "240x180",
+        "license_checked_on": "2026-09-17",
+        "notes": "source: DVIDS. VIRIN DOD_N06082505, taken 2006-06-01. DVIDS copyright page requires the non-endorsement notice and warns that military department names, insignia, seals and symbols are protected marks. No insignia is used as a mark here. PRECAUTIONARY HAZARD: flashing is the subject of this clip, so it carries the HAZARD_ prefix before any analysis. Do not open it in a player. Inspect it with eval/plots.py only. This is a precaution about subject matter, not a screening result; flashmap decides what is actually flagged."
+      },
+      "assets": {
+        "broadcast": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 0,
+          "coveredMs": 0
+        },
+        "extra-cautious": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 3,
+          "coveredMs": 12507.0
+        },
+        "wcag": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 3,
+          "coveredMs": 10305.0
+        }
+      }
+    },
+    {
+      "name": "HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
+      "sourceSha256": "fafb7339b9ee3aee08a290ae3addaed5501ed167825ad8f42adff64ef2831da8",
+      "sourcePath": "/Users/alexvintera/calm-frames/media/HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
+      "sourceExists": true,
+      "sourceBytes": 10744462,
+      "sourceHashMatches": true,
+      "durationSeconds": 30.0,
+      "historicalReportPath": "/Users/alexvintera/calm-frames-work/titles/fafb7339b9ee3aee08a290ae3addaed5501ed167825ad8f42adff64ef2831da8/verify/report.json",
+      "historicalReportSha256": "aff0a3d92f7b7f3c3e3f60e3361109bfeffe0f4478750672ac9603695b0455bb",
+      "historicalOutcome": "cover proven drawn",
+      "historicalPassed": true,
+      "licenseLedger": {
+        "file": "HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
+        "source_page_url": "https://commons.wikimedia.org/wiki/File%3AJezioro%20Cisie%20-%20panorama%201080p.webm",
+        "license": "CC BY-SA 4.0",
+        "credit_line": "Lubicz via Wikimedia Commons, CC BY-SA 4.0",
+        "sha256": "fafb7339b9ee3aee08a290ae3addaed5501ed167825ad8f42adff64ef2831da8",
+        "duration_s": "30.0",
+        "resolution": "1920x1080",
+        "license_checked_on": "2026-09-17",
+        "notes": "source: Wikimedia Commons. Licence confirmed on the file's own description page before download. Screened by flashmap on 2026-09-17; what it found for this file is in results/screening.json under per_file. Nothing reaches kid mode until the pipeline's publishing check passes, which is a separate gate from this ledger."
+      },
+      "assets": {
+        "broadcast": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 1,
+          "coveredMs": 3467.0
+        },
+        "extra-cautious": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 2,
+          "coveredMs": 17433.0
+        },
+        "wcag": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 2,
+          "coveredMs": 16500.0
+        }
+      }
+    },
+    {
+      "name": "HAZARD_wc_fireworks_rieti.ogv",
+      "sourceSha256": "6dcfb11d06811c9369d30b6d9f5d5438b8779084999134f85bc4542b7180048b",
+      "sourcePath": "/Users/alexvintera/calm-frames/media/HAZARD_wc_fireworks_rieti.ogv",
+      "sourceExists": true,
+      "sourceBytes": 3730096,
+      "sourceHashMatches": true,
+      "durationSeconds": 15.066516,
+      "historicalReportPath": "/Users/alexvintera/calm-frames-work/titles/6dcfb11d06811c9369d30b6d9f5d5438b8779084999134f85bc4542b7180048b/verify/report.json",
+      "historicalReportSha256": "5a5f27aa64dc59075ca61285b7922bcc6821abe5f2811c7c8c73045af37f4d6d",
+      "historicalOutcome": "cover proven drawn",
+      "historicalPassed": true,
+      "licenseLedger": {
+        "file": "HAZARD_wc_fireworks_rieti.ogv",
+        "source_page_url": "https://commons.wikimedia.org/wiki/File:Fuochi_d%27artificio_-_Rieti,_capodanno_2011.ogv",
+        "license": "CC BY 3.0",
+        "credit_line": "Alessandro Antonelli, CC BY 3.0, via Wikimedia Commons",
+        "sha256": "6dcfb11d06811c9369d30b6d9f5d5438b8779084999134f85bc4542b7180048b",
+        "duration_s": "15.07",
+        "resolution": "640x480",
+        "license_checked_on": "2026-09-17",
+        "notes": "source: Wikimedia Commons fireworks. PRECAUTIONARY HAZARD: flashing is the subject of this clip, so it carries the HAZARD_ prefix before any analysis. Do not open it in a player. Inspect it with eval/plots.py only. This is a precaution about subject matter, not a screening result; flashmap decides what is actually flagged."
+      },
+      "assets": {
+        "broadcast": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 0,
+          "coveredMs": 0
+        },
+        "extra-cautious": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 1,
+          "coveredMs": 5766.0
+        },
+        "wcag": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 1,
+          "coveredMs": 2300.0
+        }
+      }
+    },
+    {
+      "name": "HAZARD_wc_lightning_blackout.webm",
+      "sourceSha256": "a139990fcf99ef8b713b8cdf26fd69b43e6478e131e85f6bbc0010f01ac8a376",
+      "sourcePath": "/Users/alexvintera/calm-frames/media/HAZARD_wc_lightning_blackout.webm",
+      "sourceExists": true,
+      "sourceBytes": 4183943,
+      "sourceHashMatches": true,
+      "durationSeconds": 15.02,
+      "historicalReportPath": "/Users/alexvintera/calm-frames-work/titles/a139990fcf99ef8b713b8cdf26fd69b43e6478e131e85f6bbc0010f01ac8a376/verify/report.json",
+      "historicalReportSha256": "7aa1f5983af79bf07809823392288a64da0ba46a50f2b63538259ecf4ce8117c",
+      "historicalOutcome": "cover proven drawn",
+      "historicalPassed": true,
+      "licenseLedger": {
+        "file": "HAZARD_wc_lightning_blackout.webm",
+        "source_page_url": "https://commons.wikimedia.org/wiki/File:Lightningblackout1.webm",
+        "license": "CC BY 3.0",
+        "credit_line": "Couch-scratching-cats, CC BY 3.0, via Wikimedia Commons",
+        "sha256": "a139990fcf99ef8b713b8cdf26fd69b43e6478e131e85f6bbc0010f01ac8a376",
+        "duration_s": "15.02",
+        "resolution": "720x1280",
+        "license_checked_on": "2026-09-17",
+        "notes": "source: Wikimedia Commons lightning. Night scene with a power blackout, so large whole-frame luminance swings. PRECAUTIONARY HAZARD: flashing is the subject of this clip, so it carries the HAZARD_ prefix before any analysis. Do not open it in a player. Inspect it with eval/plots.py only. This is a precaution about subject matter, not a screening result; flashmap decides what is actually flagged."
+      },
+      "assets": {
+        "broadcast": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 2,
+          "coveredMs": 4538.0
+        },
+        "extra-cautious": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 2,
+          "coveredMs": 4749.0
+        },
+        "wcag": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 2,
+          "coveredMs": 4749.0
+        }
+      }
+    },
+    {
+      "name": "HAZARD_wc_lightning_240fps.webm",
+      "sourceSha256": "cfc9677fdeebdb20c19144fe5b581924f9d887dd811946764c56f9e759887391",
+      "sourcePath": "/Users/alexvintera/calm-frames/media/HAZARD_wc_lightning_240fps.webm",
+      "sourceExists": true,
+      "sourceBytes": 4796118,
+      "sourceHashMatches": true,
+      "durationSeconds": 11.266,
+      "historicalReportPath": "/Users/alexvintera/calm-frames-work/titles/cfc9677fdeebdb20c19144fe5b581924f9d887dd811946764c56f9e759887391/verify/report.json",
+      "historicalReportSha256": "33c95ecb6a815c8dd11bd0070e1e8147b6486646d6108e374f8007a20d8f3c21",
+      "historicalOutcome": "cover proven drawn",
+      "historicalPassed": true,
+      "licenseLedger": {
+        "file": "HAZARD_wc_lightning_240fps.webm",
+        "source_page_url": "https://commons.wikimedia.org/wiki/File:LightningStrike240FPS.webm",
+        "license": "CC BY-SA 4.0",
+        "credit_line": "GalaxyDoge72, CC BY-SA 4.0, via Wikimedia Commons",
+        "sha256": "cfc9677fdeebdb20c19144fe5b581924f9d887dd811946764c56f9e759887391",
+        "duration_s": "11.27",
+        "resolution": "1920x1080",
+        "license_checked_on": "2026-09-17",
+        "notes": "source: Wikimedia Commons lightning. High frame rate source, useful for the variable frame rate path. PRECAUTIONARY HAZARD: flashing is the subject of this clip, so it carries the HAZARD_ prefix before any analysis. Do not open it in a player. Inspect it with eval/plots.py only. This is a precaution about subject matter, not a screening result; flashmap decides what is actually flagged."
+      },
+      "assets": {
+        "broadcast": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 1,
+          "coveredMs": 2467.0
+        },
+        "extra-cautious": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 1,
+          "coveredMs": 3767.0
+        },
+        "wcag": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 1,
+          "coveredMs": 3767.0
+        }
+      }
+    },
+    {
+      "name": "HAZARD_wc_irminger_waves_without_sound_ooi.webm",
+      "sourceSha256": "fdb4340eb6240f87bd37cae174591f3e74ca29817a2c60f9223c985745cc4345",
+      "sourcePath": "/Users/alexvintera/calm-frames/media/HAZARD_wc_irminger_waves_without_sound_ooi.webm",
+      "sourceExists": true,
+      "sourceBytes": 6538084,
+      "sourceHashMatches": true,
+      "durationSeconds": 8.708,
+      "historicalReportPath": "/Users/alexvintera/calm-frames-work/titles/fdb4340eb6240f87bd37cae174591f3e74ca29817a2c60f9223c985745cc4345/verify/report.json",
+      "historicalReportSha256": "e92c7065656c94882ee4c26826590fa35ab951cf53d3c35f183b5838de4f9fd9",
+      "historicalOutcome": "cover proven drawn",
+      "historicalPassed": true,
+      "licenseLedger": {
+        "file": "HAZARD_wc_irminger_waves_without_sound_ooi.webm",
+        "source_page_url": "https://commons.wikimedia.org/wiki/File%3AIrminger%20waves%20without%20sound%20%28OOI%29.webm",
+        "license": "Public domain",
+        "credit_line": "Ocean Observatories Initiative via Wikimedia Commons, Public domain",
+        "sha256": "fdb4340eb6240f87bd37cae174591f3e74ca29817a2c60f9223c985745cc4345",
+        "duration_s": "8.71",
+        "resolution": "1920x1080",
+        "license_checked_on": "2026-09-17",
+        "notes": "source: Wikimedia Commons. Licence confirmed on the file's own description page before download. Screened by flashmap on 2026-09-17; what it found for this file is in results/screening.json under per_file. Nothing reaches kid mode until the pipeline's publishing check passes, which is a separate gate from this ledger."
+      },
+      "assets": {
+        "broadcast": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 1,
+          "coveredMs": 3535.0
+        },
+        "extra-cautious": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 1,
+          "coveredMs": 8708.0
+        },
+        "wcag": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 1,
+          "coveredMs": 8708.0
+        }
+      }
+    },
+    {
+      "name": "HAZARD_dvids_fireworks_safety.mp4",
+      "sourceSha256": "ce20d71c7e6e3fcc859eeae1254904f707760bfc293f18e33349c3716d816c79",
+      "sourcePath": "/Users/alexvintera/calm-frames/media/HAZARD_dvids_fireworks_safety.mp4",
+      "sourceExists": true,
+      "sourceBytes": 99721769,
+      "sourceHashMatches": true,
+      "durationSeconds": 87.3873,
+      "historicalReportPath": "/Users/alexvintera/calm-frames-work/titles/ce20d71c7e6e3fcc859eeae1254904f707760bfc293f18e33349c3716d816c79/verify/report.json",
+      "historicalReportSha256": "7aaca232c8631c52fe09414cb1a4d3b24ca93ceb63dd91fb601e368093c9efb4",
+      "historicalOutcome": "cover proven drawn",
+      "historicalPassed": true,
+      "licenseLedger": {
+        "file": "HAZARD_dvids_fireworks_safety.mp4",
+        "source_page_url": "https://www.dvidshub.net/video/929265/fireworks-safety",
+        "license": "Public domain (U.S. government work)",
+        "credit_line": "Courtesy video via DVIDS. The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.",
+        "sha256": "ce20d71c7e6e3fcc859eeae1254904f707760bfc293f18e33349c3716d816c79",
+        "duration_s": "87.39",
+        "resolution": "3840x2160",
+        "license_checked_on": "2026-09-17",
+        "notes": "source: DVIDS. DVIDS copyright page requires the non-endorsement notice and warns that insignia may be trademarks. PRECAUTIONARY HAZARD: flashing is the subject of this clip, so it carries the HAZARD_ prefix before any analysis. Do not open it in a player. Inspect it with eval/plots.py only. This is a precaution about subject matter, not a screening result; flashmap decides what is actually flagged."
+      },
+      "assets": {
+        "broadcast": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 1,
+          "coveredMs": 1985.0
+        },
+        "extra-cautious": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 8,
+          "coveredMs": 36072.0
+        },
+        "wcag": {
+          "mapPresent": true,
+          "renditionPresent": true,
+          "planPresent": true,
+          "segmentCount": 4,
+          "coveredMs": 11890.0
+        }
+      }
+    }
+  ],
+  "sourceInventory": [
+    {
+      "ledgerFile": "bbb_720p_surround.mp4",
+      "sha256": "46f62396c755e1ed0ab856a1521378d54196e125ef1a1643a199af087a15046b",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_bbb_720p_surround.mp4",
+      "bytes": 61878609,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "sintel_2048_stereo_512kb.mp4",
+      "sha256": "93df4e31869e879354a5055a8549fb9335df0f5f73f4963c9bf0db2c888bb704",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_sintel_2048_stereo_512kb.mp4",
+      "bytes": 77410288,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "tears_of_steel_720p.mov",
+      "sha256": "efa9062d9cdb7a338e40ad530dfdf234806743f29ae6a1a136b97ece4e588e8f",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_tears_of_steel_720p.mov",
+      "bytes": 372178639,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_nasa_svs_5011_iss_lightning_1080p.mp4",
+      "sha256": "a989a96b9ade08a9d5577c15325ff461fd1d52b36f410c9e1db3d6ba6c0dc230",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_nasa_svs_5011_iss_lightning_1080p.mp4",
+      "bytes": 133203670,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_dvids_illumination_flares.mp4",
+      "sha256": "edace50ba797fbe65463ea5a80d243bae2c00eae685c0f9535ab576f0c7f543f",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_dvids_illumination_flares.mp4",
+      "bytes": 2456671,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_dvids_fireworks_safety.mp4",
+      "sha256": "ce20d71c7e6e3fcc859eeae1254904f707760bfc293f18e33349c3716d816c79",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_dvids_fireworks_safety.mp4",
+      "bytes": 99721769,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_iss_night_pass_malaysia.ogv",
+      "sha256": "9ef24b3de0d61b768b9d194e3b7c27ffa1f423e137f3cade2b2be7654e641647",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_iss_night_pass_malaysia.ogv",
+      "bytes": 2748409,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_iss_night_pass_europe_to_asia.ogv",
+      "sha256": "bb4f04655ad089e7b0291c9d26ea372c290035e42e06439813ae5946381dfb6c",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_iss_night_pass_europe_to_asia.ogv",
+      "bytes": 4463444,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_iss_night_pass_africa_mideast.ogv",
+      "sha256": "6cc28917ac33c02323d3e102176b305e37c856714bdcd44d5d35374571b4c5f7",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_iss_night_pass_africa_mideast.ogv",
+      "bytes": 4725958,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_lightning_condensed.webm",
+      "sha256": "74f607ca42cdd10a979d91eefc7b4d3764d0d5bf9f6ce6a2ec2ae24318f3b52f",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_lightning_condensed.webm",
+      "bytes": 22191806,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_lightning_slowmo.webm",
+      "sha256": "ec23732cdb0a643af3ba8038c3810d40063dd57eb40c266221737b0c7b4fe97a",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_lightning_slowmo.webm",
+      "bytes": 7441969,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_lightning_240fps.webm",
+      "sha256": "cfc9677fdeebdb20c19144fe5b581924f9d887dd811946764c56f9e759887391",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_lightning_240fps.webm",
+      "bytes": 4796118,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_lightning_blackout.webm",
+      "sha256": "a139990fcf99ef8b713b8cdf26fd69b43e6478e131e85f6bbc0010f01ac8a376",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_lightning_blackout.webm",
+      "bytes": 4183943,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_fireworks_summer.webm",
+      "sha256": "5c0e6646b55b205b2a5fc53b141a2063bbda79fa760d1558fa33414eab4cc154",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_fireworks_summer.webm",
+      "bytes": 9973519,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_fireworks_ignis_brunensis.ogv",
+      "sha256": "368e0950b11110ab51c5a4ea85d5f38c0916c4f4f96823daa67c48b4014cc33c",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_fireworks_ignis_brunensis.ogv",
+      "bytes": 10611148,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_fireworks_buenos_aires.webm",
+      "sha256": "cb8228b058d5e52bf4cf642ed1055f0ee25792874ff61f6a543219e67271577e",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_fireworks_buenos_aires.webm",
+      "bytes": 7216324,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_fireworks_rieti.ogv",
+      "sha256": "6dcfb11d06811c9369d30b6d9f5d5438b8779084999134f85bc4542b7180048b",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_fireworks_rieti.ogv",
+      "bytes": 3730096,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_pd1930_frozen_frolics.mp4",
+      "sha256": "928baf7c90f5689ab68bb9638df35889cfce55cb4e480b41452f6bce1efc3c66",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_pd1930_frozen_frolics.mp4",
+      "bytes": 61484296,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_pd1930_booze_hangs_high.mp4",
+      "sha256": "70c3541ddc7168bd69e67cb0fe694b888f022d25672673ff7ed7ba5f9d8db0c1",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_pd1930_booze_hangs_high.mp4",
+      "bytes": 38151486,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv",
+      "sha256": "2c0fb45445dcfcff83fca373ee7439ea4bc80f0e7201eaa41b0699c06aefccb2",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_growing_cumulus_clouds_in_time_lapse.ogv",
+      "bytes": 11838594,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_clouds_seloncourt.ogv",
+      "sha256": "a55e11856e8818c2616fab0a5631beca5d8e16fc7ba6c1ef73baa39f08a71ca9",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_clouds_seloncourt.ogv",
+      "bytes": 9880477,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_sea_of_clouds_over_asia.webm",
+      "sha256": "5055b5a79e6635428d54a9b50deca980975d50525cbc93158f87db2b8db90cec",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_sea_of_clouds_over_asia.webm",
+      "bytes": 4396005,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_planepassingthundercloud.ogv",
+      "sha256": "dd5ad178b8aa8efd433e93f41f8a713d48dfa2d6943baeb5442bd28c6f349e3d",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_planepassingthundercloud.ogv",
+      "bytes": 2524546,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm",
+      "sha256": "290051905c18fbef8505d7395c9bb730041cba9da4c71658d7ad32a0bd841d5a",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_clouds_101_svs20383_hightaltcloud_v05.webm",
+      "bytes": 1868161,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm",
+      "sha256": "2d856d1fbaeea68dc6e9bcdd896dee00648c1949a76145b2ba5b13a3e0b716d6",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_clouds_101_svs20383_lowaltclouds_v05.webm",
+      "bytes": 3167544,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_water_waves_greece.ogv",
+      "sha256": "1314f759e5f51883d3dd75e2da834c05298508843f28f1bcb08491a2dec453bd",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_water_waves_greece.ogv",
+      "bytes": 3197389,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm",
+      "sha256": "e5ea8d156902829a441ee864df0ff72898d83d24cad622f3eae386e7c77b339b",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_waves_1013354_dingle_peninsula_co_kerry_irel.webm",
+      "bytes": 12220586,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_irminger_waves_without_sound_ooi.webm",
+      "sha256": "fdb4340eb6240f87bd37cae174591f3e74ca29817a2c60f9223c985745cc4345",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_irminger_waves_without_sound_ooi.webm",
+      "bytes": 6538084,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
+      "sha256": "fafb7339b9ee3aee08a290ae3addaed5501ed167825ad8f42adff64ef2831da8",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_jezioro_cisie_panorama_1080p.webm",
+      "bytes": 10744462,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_sunset_time_lapse_31_12_2009.ogv",
+      "sha256": "6e73ebed882b75fd615d315148916cff55bca0bdb98ff6f430e08c5b2595a38a",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_sunset_time_lapse_31_12_2009.ogv",
+      "bytes": 7094355,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_sunset_in_spain.webm",
+      "sha256": "882fd00072bc75483cfaa8f0c14b1b4c07ece4fe23f98d8a3d86591cf298f993",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_sunset_in_spain.webm",
+      "bytes": 4787771,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_sunset_at_the_sea_of_azov.webm",
+      "sha256": "f15d1e62167494aac6bb0a2dcedc78efc2d4db292196e3bb17eb43c05bd9f10c",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_sunset_at_the_sea_of_azov.webm",
+      "bytes": 899615,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm",
+      "sha256": "cb637c2ab9b4b147ce9be1eb05c270f929745827ad3c3c77c05ab909b47af41a",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_sunset_timelapse_lake_huron_looking_west_fro.webm",
+      "bytes": 6869140,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_stockfootage_setting_sun.webm",
+      "sha256": "96f6b354f3713cd1dccdc2f19581369c3ef941ba657888f5ba6b550d0c607532",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_stockfootage_setting_sun.webm",
+      "bytes": 3113228,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm",
+      "sha256": "b062a3db37fdd7c3d46e7d4da03e6736f4cc76ecacc720f3ddfe2786d5c10177",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/media/HAZARD_wc_sunset_under_the_golden_gate_bridge_february.webm",
+      "bytes": 6737237,
+      "kind": "source-media"
+    },
+    {
+      "ledgerFile": "app/assets/raw/sound/calm-chime.mp3",
+      "sha256": "d18605cf4864598c7d5e752cc801bc90557d3e3fba5d03d42e4216580b1b6b5e",
+      "present": true,
+      "path": "/Users/alexvintera/calm-frames/app/assets/raw/sound/calm-chime.mp3",
+      "bytes": 16941,
+      "kind": "app-audio-asset"
+    }
+  ],
+  "limits": [
+    "Seven positive source files freshly hashed; remaining ledger inventory checks existence and size only. The app chime row resolves from the project root, not media/.",
+    "Historical license statements retained as dated evidence, not fresh legal clearance.",
+    "No media was displayed, copied into the app, or trusted. No private keys accessed.",
+    "Current catalog aggregation reproduces the historical 30 analyzed, 7 cover-proven, 14 no-findings and 9 failed totals. One extra report belongs to a directory without an entry and is not a counted title."
+  ]
+}
