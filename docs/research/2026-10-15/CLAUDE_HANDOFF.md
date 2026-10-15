@@ -2,6 +2,14 @@
 
 Prepared 2026-10-15 UTC at the owner's request. This document records work to perform; it does not assert that unverified features or local changes are already complete.
 
+## Status update: 2026-10-15 05:35 UTC
+
+The missing app changes described below have now been pushed. The current verified application branch is [claude/final-candidate-2026-10-14](https://github.com/alejandro-publius/calm-frames/tree/claude/final-candidate-2026-10-14), head `a3368a9e4dbfde52153d586d97d8c6da5ab5c8fd`. It includes the approved coastal lineage, Home simplification, practice access through Details, bordered launcher art, and newer copy.
+
+Current package 5 app source: `4016e8dac8f675a4eb1e1613fd9dc7cf63d06e58`. Local package: `build/release/final-candidate-5-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`; 28,733,262 bytes; SHA-256 `a226b39fc855cd7cf5eb4136b9ba890f92e6e6518ca764a6862cf9990870dc13`. The [committed receipt](https://github.com/alejandro-publius/calm-frames/blob/a3368a9e4dbfde52153d586d97d8c6da5ab5c8fd/results/native-acceptance-5-2026-10-14/receipt.json) records eight simulator journeys judged from app logs. This is partial native evidence: pixels, audible continuity, the parent-settings interior and VoiceView remain unobserved. The practice-navigation verdict was reviewed manually after the driver returned partial. The package is local output, not a GitHub-hosted binary.
+
+The following audit and sync instructions are historical context from before that push. Recheck remote refs and inspect the current candidate before changing anything. Do not repeat completed work. The research branch remains documentation-only, based on older source. One remaining-actions paragraph in the candidate's FINAL_HANDOFF still names older `819de40`; use package 5 and source `4016e8d` for current acceptance. No main merge, candidate PR, hosted CI, public video or final submission has been established by this update.
+
 ## Read this before pulling or replacing any code
 
 The research branch is documentation-only and is based on an older, verified remote reliability commit. It is **not** the latest integrated application. Do not replace your current local working tree with this branch, reset to it, or assume `main` is current.
