@@ -62,7 +62,7 @@ describe('waves into the library', () => {
   it('shows the real wave palette during loading without a timer or motion query', () => {
     render(<HarborOpening />);
     expect(frameFromTree('harbor-bootstrap', screen.toJSON() as unknown as RenderedNode)).toEqual({ ...HARBOR_BOOTSTRAP_FRAME, background: COASTAL_COLORS.BACKGROUND });
-    expect(screen.getByRole('progressbar').props.accessibilityLabel).toContain('Opening your library');
+    expect(screen.getByRole('progressbar').props.accessibilityLabel).toContain('Calm Frames is opening');
     expect(query).not.toHaveBeenCalled();
     expect(timing).not.toHaveBeenCalled();
     expect(jest.getTimerCount()).toBe(0);

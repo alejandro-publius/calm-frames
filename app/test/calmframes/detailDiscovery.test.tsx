@@ -75,8 +75,8 @@ describe('details discovery', () => {
     ]} />);
     expect(view.getByTestId('flash-map-strip-middle')).toHaveTextContent('1:02');
     expect(view.getByTestId('flash-map-strip-end')).toHaveTextContent('2:05');
-    expect(view.getByText('Picture covered')).toBeTruthy();
-    expect(view.getByText('Red-flash hold')).toBeTruthy();
+    expect(view.getByText('Picture hold')).toBeTruthy();
+    expect(view.getByText('Red flash hold')).toBeTruthy();
     expect(view.getByTestId('flash-map-strip-mark-1')).toHaveStyle({ backgroundColor: COASTAL_COLORS.FAILED });
   });
 });

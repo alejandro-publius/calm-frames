@@ -145,7 +145,7 @@ describe('useFlashGuard', () => {
     // rather than the "Not checked yet" one a failed map gets.
     expect(read('card-kind')).toBe('checking');
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Getting your story ready',
+      'Getting your video ready',
     );
     expect(screen.queryByTestId('calm-card-skip')).toBeNull();
   });
@@ -155,7 +155,7 @@ describe('useFlashGuard', () => {
     const { rerender } = render(<Guarded media={media} mapText={null} />);
     await settle();
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'This title is unavailable',
+      'This video is unavailable',
     );
 
     // A new map arrives and is still being fetched. The refusal belonged to
@@ -172,7 +172,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('checking');
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'Getting your story ready',
+      'Getting your video ready',
     );
   });
 
@@ -232,7 +232,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('unverified');
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'This title is unavailable',
+      'This video is unavailable',
     );
   });
 
@@ -271,7 +271,7 @@ describe('useFlashGuard', () => {
     expect(read('card-kind')).toBe('countdown');
     expect(read('covered')).toBe('clear');
     expect(announce).toHaveBeenCalledWith(
-      expect.stringContaining('Flashing part coming up'),
+      expect.stringContaining('Picture hold coming up'),
       { queue: true },
     );
 
@@ -284,7 +284,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('covering');
     expect(announce).toHaveBeenCalledWith(
-      'Hiding a flashing part. Sound and captions keep playing.',
+      'Holding the picture. Flashing was found here. Sound and captions keep playing.',
       { queue: true },
     );
 
@@ -297,7 +297,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('clear');
     expect(read('card-kind')).toBe('after');
     expect(screen.getByTestId('calm-card-title').props.children).toMatch(
-      /^Hid \d+ seconds of flashing$/,
+      /^Held the picture for \d+ seconds$/,
     );
 
     // And the parent area has a line for it.

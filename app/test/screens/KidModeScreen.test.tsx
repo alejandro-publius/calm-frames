@@ -159,7 +159,7 @@ describe('reaching Calm Frames', () => {
     await renderKidMode(); await finishFirstRun();
     expect(screen.queryByTestId(`kid-mode-home-poster-${OFFLINE_TITLE_ID}`)).toBeNull();
     fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
-    expect(screen.getByTestId('picture-hold-playback-check').props.accessibilityLabel).toBe('Playback check');
+    expect(screen.getByTestId('picture-hold-playback-check').props.accessibilityLabel).toBe('Check playback');
   });
 
   it('opens the title, then hands the player the map it verified', async () => {

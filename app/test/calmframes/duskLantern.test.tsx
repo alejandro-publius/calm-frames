@@ -81,7 +81,7 @@ test('when the demo itself leads the shelf there is no second demo control and n
   render(<KidHomeScreen titles={[demo]} onOpen={jest.fn()} onPlay={jest.fn()} />);
   expect(screen.queryByTestId('kid-home-demo')).toBeNull();
   expect(screen.queryByTestId('kid-home-no-holds')).toBeNull();
-  expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Watch demo/);
+  expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Play demo/);
 });
 
 test('the Home heading is one large line sized to clear the artwork, and Details keeps the title at full size', () => {
@@ -100,15 +100,15 @@ test('the Home heading is one large line sized to clear the artwork, and Details
 
 test('Details lists runtime and holds in one factual line under the title', () => {
   const prepared = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
-  expect(prepared.getByTestId('title-details-meta').props.children).toBe('20 sec · No picture holds');
-  expect(prepared.getByText('No picture holds in this story. Some flashing may still go undetected.')).toBeTruthy();
+  expect(prepared.getByTestId('title-details-meta').props.children).toBe('20 sec · No flashing found');
+  expect(prepared.getByText('Checked frame by frame. No flashing found, so the picture never holds.')).toBeTruthy();
   for (const pattern of BANNED) {
     expect(prepared.queryByText(pattern)).toBeNull();
   }
   prepared.unmount();
   const practice = render(<TitleDetailsScreen entry={demo} onPlay={jest.fn()} />);
-  expect(practice.getByTestId('title-details-meta').props.children).toBe('Optional demo · 20 sec · 2 practice holds');
-  expect(practice.getByTestId('title-details-play').props.accessibilityLabel).toMatch(/Watch demo/);
+  expect(practice.getByTestId('title-details-meta').props.children).toBe('Practice version · 20 sec · 2 practice holds');
+  expect(practice.getByTestId('title-details-play').props.accessibilityLabel).toMatch(/Play demo/);
 });
 
 test('Details offers the practice demo beside Play, quiet, and the demo page itself does not', () => {

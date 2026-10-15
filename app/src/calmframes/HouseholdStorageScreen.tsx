@@ -33,9 +33,9 @@ export default function HouseholdStorageScreen({
   if (!failed) return <View testID={testID} style={styles.screen}>
     <HomeHarborScene />
     <CalmPageHeader />
-    <View style={styles.loading} accessible accessibilityRole="progressbar" accessibilityLabel="Opening your library" accessibilityLiveRegion="polite">
-      <Text style={styles.heading}>Opening your library</Text>
-      <Text style={styles.detail}>Loading your saved viewing settings.</Text>
+    <View style={styles.loading} accessible accessibilityRole="progressbar" accessibilityLabel="Opening Calm Frames" accessibilityLiveRegion="polite">
+      <Text style={styles.heading}>Opening Calm Frames</Text>
+      <Text style={styles.detail}>Loading your settings.</Text>
     </View>
   </View>;
   return (
@@ -44,7 +44,7 @@ export default function HouseholdStorageScreen({
       <StatusNotice
         notice={{
           title: "Your settings couldn't be opened or saved",
-          detail: 'Your library stays closed until your settings and PIN are available. Try again.',
+          detail: 'Nothing can play until your settings and PIN are available. Try again.',
           tone: 'blocked',
         }} />
       {/* On the page, not inside the notice: a focused primary's terracotta ring

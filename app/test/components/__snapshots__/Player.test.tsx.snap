@@ -17,11 +17,11 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
   testID="touchable-opacity"
 >
   <View
-    accessibilityLabel="This title is unavailable. This title is unavailable. The picture stays hidden while sound and captions keep playing."
+    accessibilityLabel="This video is unavailable. This title is unavailable. The picture stays hidden while sound and captions keep playing."
     accessibilityLiveRegion="polite"
     accessibilityRole="alert"
     accessible={true}
-    aria-label="This title is unavailable. This title is unavailable. The picture stays hidden while sound and captions keep playing."
+    aria-label="This video is unavailable. This title is unavailable. The picture stays hidden while sound and captions keep playing."
     aria-live="polite"
     pointerEvents="box-none"
     style={
@@ -63,7 +63,7 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
         }
         testID="calm-card-title"
       >
-        This title is unavailable
+        This video is unavailable
       </Text>
       <Text
         style={

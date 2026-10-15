@@ -35,7 +35,7 @@ test('composition keeps Watch, Details, explanation and Back actions with truthf
   const onOpenPractice = jest.fn();
   const details = render(<TitleDetailsScreen entry={harbor} onPlay={onPlay} onBack={onBack} practice={demo} onOpenPractice={onOpenPractice} />, { wrapper });
   fireEvent(details.getByTestId('title-details-play'), 'focus'); save('details', details.toJSON());
-  expect(details.getByText('No picture holds in this story. Some flashing may still go undetected.')).toBeTruthy();
+  expect(details.getByText('Checked frame by frame. No flashing found, so the picture never holds.')).toBeTruthy();
   expect(details.getByTestId('title-details-show-info')).toBeTruthy();
   fireEvent.press(details.getByTestId('title-details-practice')); expect(onOpenPractice).toHaveBeenCalledWith(demo);
   fireEvent.press(details.getByTestId('title-details-play')); expect(onPlay).toHaveBeenCalledTimes(2);

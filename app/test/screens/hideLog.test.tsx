@@ -301,7 +301,7 @@ describe('the hide log', () => {
     jest.setSystemTime(OFFLINE_MADE_AT + 60_000);
     await openParentArea();
     expect(screen.getByTestId('kid-mode-parent-total').props.children).toBe(
-      '1 part, 4 seconds in all.',
+      '1 hold, 4 seconds in all.',
     );
     expect(screen.getByTestId('kid-mode-parent-log-0').props.children).toContain(
       'Test pattern',
@@ -371,7 +371,7 @@ describe('the hide log', () => {
   it('says nothing has been hidden when nothing has', async () => {
     await openParentArea();
     expect(screen.getByTestId('kid-mode-parent-total').props.children).toBe(
-      'Nothing has been hidden yet.',
+      'No picture holds yet.',
     );
   });
 });

@@ -25,7 +25,7 @@ test('composition keeps Watch, Details, explanation and Back actions with truthf
   fireEvent.press(home.getByTestId('kid-home-learn')); expect(home.getByTestId('picture-hold-start')).toBeTruthy(); home.unmount();
   const details = render(<TitleDetailsScreen entry={harbor} onPlay={onPlay} onBack={onBack} />, { wrapper });
   fireEvent(details.getByTestId('title-details-play'), 'focus'); save('details', details.toJSON());
-  expect(details.getByText('No picture holds in this story. Some flashing may still go undetected.')).toBeTruthy();
+  expect(details.getByText('Checked frame by frame. No flashing found, so the picture never holds.')).toBeTruthy();
   expect(details.getByTestId('title-details-show-info')).toBeTruthy();
   fireEvent.press(details.getByTestId('title-details-play')); expect(onPlay).toHaveBeenCalledTimes(2);
   fireEvent.press(details.getByTestId('title-details-back')); expect(onBack).toHaveBeenCalledTimes(1); details.unmount();

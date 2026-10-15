@@ -55,9 +55,9 @@ export interface Notice {
 
 /** Nothing has been checked yet, so the shelf is empty. */
 export const NO_TITLES: Notice = {
-  title: 'Nothing is ready to watch yet',
+  title: 'Nothing to watch yet',
   detail:
-    'New stories will appear here when they are ready. A grown up can open parental controls for more details.',
+    'Videos appear here once they are checked. A parent can see more in Parental controls.',
   tone: 'waiting',
 };
 
@@ -69,17 +69,17 @@ export const NO_TITLES: Notice = {
  * signed check, so it keeps working with no network at all.
  */
 export const BACKEND_UNREACHABLE: Notice = {
-  title: 'New titles are unavailable',
+  title: 'New videos are unavailable',
   detail:
-    'You can still watch the stories on this television. Try again later for new titles.',
+    'You can still watch the videos on this television. Try again later for new ones.',
   tone: 'waiting',
 };
 
 /** The backend is unreachable and there is not even a bundled title. */
 export const BACKEND_UNREACHABLE_EMPTY: Notice = {
-  title: 'New titles are unavailable',
+  title: 'New videos are unavailable',
   detail:
-    'There are no stories on this television yet. Try again later.',
+    'There are no videos on this television yet. Try again later.',
   tone: 'waiting',
 };
 
@@ -87,20 +87,20 @@ export const BACKEND_UNREACHABLE_EMPTY: Notice = {
 export const TITLE_PENDING: Notice = {
   title: 'Not ready to watch',
   detail:
-    'This title is still being prepared. The picture stays hidden for now.',
+    'This video is still being checked. The picture stays hidden for now.',
   tone: 'waiting',
 };
 
 /** A title whose check was there and did not pass. */
 export const TITLE_FAILED: Notice = {
-  title: 'This title is unavailable',
+  title: 'This video is unavailable',
   detail: 'This version cannot play in Calm Frames. The picture stays hidden.',
   tone: 'blocked',
 };
 
 /** A title whose check is too old to trust. */
 export const TITLE_STALE: Notice = {
-  title: 'This title needs an update',
+  title: 'This video needs an update',
   detail:
     'The picture stays hidden until a newer version is available.',
   tone: 'blocked',
@@ -146,19 +146,17 @@ export const PIN_SAVE_FAILED: Notice = {
   tone: 'blocked',
 };
 
-export const KID_HOME_TITLE = 'Ready to watch';
-export const KID_HOME_SUBTITLE = 'Find a story to settle into.';
-/** What the shelf calls the way in. The page itself is headed Parental controls. */
+/** What Home calls the way in. The page itself is headed Parental controls. */
 export const PARENT_AREA_TITLE = 'Parental controls';
 export const PARENTAL_CONTROLS_TITLE = 'Parental controls';
 /** One line under the heading, saying what the page is for. */
 export const PARENTAL_CONTROLS_LEAD =
-  'Manage viewing preferences, profiles and your library.';
+  'How strictly videos are checked, the room, each kid, and the picture holds so far.';
 /** While a change is being written to the household record. */
 export const SAVING_CHANGES = 'Saving your changes…';
 
-/** Button labels, the ones a television usually uses. */
-export const BACK_TO_LIBRARY_LABEL = 'Back to library';
+/** Button labels, the ones a television usually uses. Back is one word: the hardware key says the same. */
+export const BACK_TO_LIBRARY_LABEL = 'Back';
 export const SET_PIN_LABEL = 'Set up a PIN';
 export const CREDITS_LABEL = 'Credits and licences';
 export const ADD_KID_LABEL = 'Add a kid';
@@ -173,7 +171,7 @@ export const CHOSEN_WORD = 'Chosen';
 
 /** What the room settings can and cannot do, said the same way everywhere. */
 export const ROOM_ONLY_ADDS =
-  'A bigger television or a closer sofa can only add hidden parts. It never takes any away.';
+  'A bigger television or a closer seat can only add picture holds. It never takes any away.';
 
 /**
  * The two rows of room chips, and which chip in each is the chosen one.
@@ -262,7 +260,7 @@ export const SETTINGS_STATE_WORD = 'showing';
  */
 export const STRICTNESS_TITLE = 'Viewing preset';
 export const ROOM_TITLE = 'TV and seating';
-export const HIDDEN_TITLE = 'What was hidden';
+export const HIDDEN_TITLE = 'Picture holds';
 export const CHECKED_TITLES_TITLE = 'Titles';
 
 export function sectionFor(title: string, name: string | null): string {
@@ -283,7 +281,7 @@ export function nextKidName(base: string, taken: string[]): string {
 
 /** The rule about kids' settings, said the same way as the one about rooms. */
 export const PROFILE_ONLY_ADDS =
-  "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.";
+  "A kid's own settings can only add picture holds to what Everyone is set to. They never take any away.";
 
 /** Four is the most, and the page says so before the button is gone. */
 export const PROFILES_FULL = 'Up to four kids can be added. Remove one to add another.';
@@ -333,11 +331,11 @@ export function keepKidLabel(name: string): string {
 }
 
 /** The record, before anything has been hidden. */
-export const NOTHING_HIDDEN_YET = 'Nothing has been hidden yet.';
+export const NOTHING_HIDDEN_YET = 'No picture holds yet.';
 
 /** One kid's record, before anything has been hidden for them. */
 export function nothingHiddenFor(name: string): string {
-  return `Nothing has been hidden for ${name} yet.`;
+  return `No picture holds for ${name} yet.`;
 }
 
 /**
@@ -353,7 +351,7 @@ export function nothingHiddenFor(name: string): string {
  * parent has to do in their head.
  */
 export function hiddenSummary(count: number, totalMs: number, shown: number): string {
-  const parts = `${count} part${count === 1 ? '' : 's'}`;
+  const parts = `${count} hold${count === 1 ? '' : 's'}`;
   const line = `${parts}, ${describeHiddenTotal(totalMs)} in all.`;
   return shown < count ? `${line} The ${shown} most recent are below.` : line;
 }
@@ -471,11 +469,11 @@ export function hidesByDay(entries: HideLogEntry[], nowMs: number): HideDay[] {
  * sofa does not have to work out which way round a colour means.
  */
 export const CHIME_SECTION_TITLE = 'Sound';
-export const CHIME_ROW_TITLE = 'Chime before the picture is hidden';
+export const CHIME_ROW_TITLE = 'Chime before a picture hold';
 export const CHIME_ON_LABEL = 'On';
 export const CHIME_OFF_LABEL = 'Off';
 export const CHIME_NOTE =
-  'A soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.';
+  'A soft chime plays before a picture hold. Turning it off changes nothing else.';
 
 /**
  * The first run explainer.
@@ -490,9 +488,9 @@ export const EXPLAINER_WORDS_PER_MINUTE = 150;
 
 export const EXPLAINER_TITLE = 'How Calm Frames works';
 export const EXPLAINER_LINES: string[] = [
-  'Calm Frames prepares each story before you watch.',
-  'Detected flashing is covered while sound and captions continue. Some flashing may go undetected.',
-  'A card says what is coming, and what was hidden.',
+  'Calm Frames checks every video for flashing before it plays.',
+  'When flashing is found, the picture holds on a calm still. Sound and captions continue.',
+  'Some flashing may go undetected.',
   SAFETY_NOTE,
 ];
 

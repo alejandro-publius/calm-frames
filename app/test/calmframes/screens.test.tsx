@@ -136,7 +136,7 @@ describe('FlashMapStrip', () => {
     );
     expect(describeStrip(intervals, 20_000)).toContain('spread through 20 seconds.');
     expect(describeStrip([], 600_000)).toBe(
-      'No parts were flagged by these checks.',
+      'Nothing above the flash limits was found.',
     );
   });
 
@@ -205,12 +205,12 @@ describe('the household viewing plan', () => {
       '55 inch television, seats about 8 feet away',
     );
     expect(screen.getByTestId('title-details-plan-maps').props.children).toBe(
-      'Flash limits: WCAG 2.3.1.',
+      'WCAG 2.3.1 flash limits.',
     );
     expect(
       screen.getByTestId('title-details-plan-continuity').props.children,
     ).toMatch(
-      /still image or dark screen.*sound and captions continue/i,
+      /calm still.*sound and captions continue/i,
     );
     expect(screen.getByTestId('title-details-plan-limits').props.children).toBe(
       SAFETY_NOTE,
@@ -258,7 +258,7 @@ describe('the household viewing plan', () => {
       '65 inch television, seats about 6 feet away',
     );
     expect(screen.getByTestId('title-details-plan-maps').props.children).toBe(
-      'Flash limits: WCAG 2.3.1 and broadcast.',
+      'WCAG 2.3.1 and broadcast flash limits.',
     );
   });
 });
@@ -381,7 +381,7 @@ describe('TitleDetailsScreen', () => {
       <TitleDetailsScreen entry={makeTitle('ok', 'verified')} onPlay={jest.fn()} />,
     );
     expect(screen.getByTestId('title-details-summary').props.children).toMatch(
-      /2 parts will be hidden/,
+      /2 picture holds/,
     );
     expect(screen.getByTestId('title-details-strip')).toBeTruthy();
   });
@@ -1134,7 +1134,7 @@ describe('family profiles on the screens', () => {
     renderFamilyArea();
     expect(screen.getByText('Viewing preset for Everyone')).toBeTruthy();
     expect(screen.getByText('TV and seating for Everyone')).toBeTruthy();
-    expect(screen.getByText('What was hidden for Everyone')).toBeTruthy();
+    expect(screen.getByText('Picture holds for Everyone')).toBeTruthy();
     expect(
       screen.getByTestId('parent-area-profiles-chosen').props.children,
     ).toBe('These settings are for Everyone.');
@@ -1142,7 +1142,7 @@ describe('family profiles on the screens', () => {
     fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
     expect(screen.getByText('Viewing preset for Sam')).toBeTruthy();
     expect(screen.getByText('TV and seating for Sam')).toBeTruthy();
-    expect(screen.getByText('What was hidden for Sam')).toBeTruthy();
+    expect(screen.getByText('Picture holds for Sam')).toBeTruthy();
     expect(
       screen.getByTestId('parent-area-profiles-chosen').props.children,
     ).toBe('These settings are for Sam.');
@@ -1169,7 +1169,7 @@ describe('family profiles on the screens', () => {
     }
     expect(screen.getByText('Viewing preset')).toBeTruthy();
     expect(screen.getByText('TV and seating')).toBeTruthy();
-    expect(screen.getByText('What was hidden')).toBeTruthy();
+    expect(screen.getByText('Picture holds')).toBeTruthy();
     expect(screen.queryByTestId('parent-area-profiles')).toBeNull();
   });
 
@@ -1183,8 +1183,8 @@ describe('family profiles on the screens', () => {
    *
    * Seen to fail. With the third sentence taken out of hiddenSummary:
    *
-   *     Expected: "25 parts, 1 minute 40 seconds in all. The 20 most recent are below."
-   *     Received: "25 parts, 1 minute 40 seconds in all."
+   *     Expected: "25 holds, 1 minute 40 seconds in all. The 20 most recent are below."
+   *     Received: "25 holds, 1 minute 40 seconds in all."
    */
   it('says where the list stops rather than showing twenty of twenty five', () => {
     let logs = emptyProfileLogs();
@@ -1198,7 +1198,7 @@ describe('family profiles on the screens', () => {
     renderFamilyArea({ profileLogs: logs });
 
     expect(screen.getByTestId('parent-area-total').props.children).toBe(
-      '25 parts, 1 minute 40 seconds in all. The 20 most recent are below.',
+      '25 holds, 1 minute 40 seconds in all. The 20 most recent are below.',
     );
     expect(screen.getByTestId('parent-area-log-19')).toBeTruthy();
     expect(screen.queryByTestId('parent-area-log-20')).toBeNull();

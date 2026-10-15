@@ -33,7 +33,7 @@ test('home is the entry, with direct playback and an optional dismissible explan
   expect(screen.queryByText('Original story')).toBeNull();
   expect(screen.queryByTestId('kid-home-try-demo')).toBeNull();
   fireEvent.press(screen.getByTestId('kid-home-learn'));
-  expect(screen.getByText(/Sound continues/)).toBeTruthy();
+  expect(screen.getByText(/captions continue/)).toBeTruthy();
   expect(screen.queryByTestId('kid-home-watch')).toBeNull();
   expect(play).not.toHaveBeenCalled();
   fireEvent.press(screen.getByTestId('picture-hold-dismiss'));

@@ -53,17 +53,14 @@ const ViewingPlan = ({
               {describeRoom(settings)}
             </Text>
             <Text style={styles.line} testID={`${testID}-maps`}>
-              {`Flash limits: ${mapNames.join(' and ')}.`}
+              {`${mapNames.join(' and ')} flash limits.`}
             </Text>
           </View>
           <View style={styles.explanation}>
             <Text style={styles.line} testID={`${testID}-continuity`}>
-              When a part is hidden, a still image or dark screen covers the picture
-              while sound and captions continue.
-            </Text>
-            <Text style={styles.line}>
-              The picture stays covered while seeking or when playback timing is
-              uncertain. Room settings can only hide additional parts.
+              During a picture hold a calm still covers the picture while the sound
+              and captions continue, including while seeking. A bigger television or
+              a closer seat can only add holds.
             </Text>
           </View>
         </View>

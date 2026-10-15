@@ -43,7 +43,7 @@ describe('cardAt', () => {
 
     const card = cardAt(intervals, 19_500 - COUNTDOWN_LEAD_MS);
     expect(card.kind).toBe('countdown');
-    expect(card.title).toBe('Flashing part coming up');
+    expect(card.title).toBe('Picture hold coming up');
     expect(card.secondsLeft).toBe(5);
     expect(card.skipToMs).toBe(24_500 + SKIP_MARGIN_MS);
   });
@@ -60,7 +60,7 @@ describe('cardAt', () => {
     const card = cardAt(intervals, 22_000);
     expect(card.kind).toBe('covering');
     expect(card.announcement).toBe(
-      'Hiding a flashing part. Sound and captions keep playing.',
+      'Holding the picture. Flashing was found here. Sound and captions keep playing.',
     );
   });
 
@@ -68,8 +68,8 @@ describe('cardAt', () => {
     const card = cardAt(intervals, 24_600);
     expect(card.kind).toBe('after');
     // The interval is 19500 to 24500, which is five seconds of cover.
-    expect(card.title).toBe('Hid 5 seconds of flashing');
-    expect(card.detail).toBe('Sound and captions kept playing.');
+    expect(card.title).toBe('Held the picture for 5 seconds');
+    expect(card.detail).toBe('Flashing was found. Sound and captions kept playing.');
   });
 
   it('stops saying it after the card has had its time', () => {
@@ -82,7 +82,7 @@ describe('cardAt', () => {
       guardBandMs: 0,
       minCoverMs: 400,
     });
-    expect(cardAt(short, 1_500).title).toBe('Hid 1 second of flashing');
+    expect(cardAt(short, 1_500).title).toBe('Held the picture for 1 second');
   });
 
   it('prefers the next part over the one that just ended', () => {
@@ -103,7 +103,7 @@ describe('cardAt', () => {
     for (const rejection of ['missing', 'stale', 'unsigned', 'unparseable', 'wrong-file'] as const) {
       const card = cardAt(intervals, 22_000, { rejection });
       expect(card.kind).toBe('unverified');
-      expect(card.title).toBe('This title is unavailable');
+      expect(card.title).toBe('This video is unavailable');
       expect(card.detail).toMatch(/picture stays hidden/);
     }
   });
@@ -112,11 +112,11 @@ describe('cardAt', () => {
     // Being checked is not being refused. The wording says the picture waits
     // for the check, and there is nothing to skip, so no Skip button either.
     expect(CHECKING_CARD.kind).toBe('checking');
-    expect(CHECKING_CARD.title).toBe('Getting your story ready');
+    expect(CHECKING_CARD.title).toBe('Getting your video ready');
     expect(CHECKING_CARD.title).not.toBe(
       cardAt([], 0, { rejection: 'missing' }).title,
     );
-    expect(CHECKING_CARD.detail).toBe('Your story will begin in a moment.');
+    expect(CHECKING_CARD.detail).toBe('It will begin in a moment.');
     expect(CHECKING_CARD.announcement).toBe(
       `${CHECKING_CARD.title}. ${CHECKING_CARD.detail}`,
     );
@@ -163,8 +163,8 @@ describe('announceForAccessibility', () => {
     (AccessibilityInfo as unknown as Record<string, unknown>).announceForAccessibilityWithOptions =
       withOptions;
 
-    expect(announceForAccessibility('Flashing part coming up')).toBe(true);
-    expect(withOptions).toHaveBeenCalledWith('Flashing part coming up', {
+    expect(announceForAccessibility('Picture hold coming up')).toBe(true);
+    expect(withOptions).toHaveBeenCalledWith('Picture hold coming up', {
       queue: true,
     });
   });
@@ -174,10 +174,10 @@ describe('announceForAccessibility', () => {
     (AccessibilityInfo as unknown as Record<string, unknown>).announceForAccessibilityWithOptions =
       withOptions;
 
-    announceForAccessibility('Hiding a flashing part');
-    announceForAccessibility('Hiding a flashing part');
+    announceForAccessibility('Holding the picture');
+    announceForAccessibility('Holding the picture');
     expect(withOptions).toHaveBeenCalledTimes(1);
-    announceForAccessibility('Hiding a flashing part', { force: true });
+    announceForAccessibility('Holding the picture', { force: true });
     expect(withOptions).toHaveBeenCalledTimes(2);
   });
 
@@ -188,8 +188,8 @@ describe('announceForAccessibility', () => {
     (AccessibilityInfo as unknown as Record<string, unknown>).announceForAccessibility =
       plain;
 
-    expect(announceForAccessibility('This title is unavailable')).toBe(true);
-    expect(plain).toHaveBeenCalledWith('This title is unavailable');
+    expect(announceForAccessibility('This video is unavailable')).toBe(true);
+    expect(plain).toHaveBeenCalledWith('This video is unavailable');
   });
 
   it('never throws when the runtime has no announcement api at all', () => {

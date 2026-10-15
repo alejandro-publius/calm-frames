@@ -66,7 +66,7 @@ export function describeStrip(
   durationMs: number,
 ): string {
   if (intervals.length === 0) {
-    return 'No parts were flagged by these checks.';
+    return 'Nothing above the flash limits was found.';
   }
   const seconds = Math.max(1, Math.round(totalCoveredMs(intervals) / 1000));
   const parts = intervals.length;
@@ -83,7 +83,7 @@ const FlashMapStrip = ({
   width = 1200,
   showCaption = true,
   showKey = false,
-  holdLabel = 'Picture covered',
+  holdLabel = 'Picture hold',
   testID = 'flash-map-strip',
 }: FlashMapStripProps) => {
   const marks = stripMarks(intervals, durationMs);
@@ -92,7 +92,7 @@ const FlashMapStrip = ({
   const hasRedHold = marks.some(mark => mark.reason === 'red');
   const hasOtherHold = marks.some(mark => mark.reason !== 'red');
   const keyDescription = marks.length > 0
-    ? `${hasOtherHold ? `${holdLabel} marks show when the picture is covered. ` : ''}${hasRedHold ? 'Red-flash hold marks show covers for red flashes. ' : ''}Sound and captions continue.`
+    ? `${hasOtherHold ? `${holdLabel} marks show when the picture holds. ` : ''}${hasRedHold ? 'Red flash hold marks show holds for red flashes. ' : ''}Sound and captions continue.`
     : 'There are no scheduled picture holds.';
 
   return (
@@ -131,7 +131,7 @@ const FlashMapStrip = ({
               <Text style={styles.time}>{holdLabel}</Text></View> : null}
             {hasRedHold ? <View style={styles.keyItem}>
               <View style={[styles.holdSwatch, { backgroundColor: CALM_COLORS.FAILED }]} />
-              <Text style={styles.time}>Red-flash hold</Text></View> : null}
+              <Text style={styles.time}>Red flash hold</Text></View> : null}
           </View>
           {marks.length > 0 ? <Text style={styles.keyNote}>Sound and captions continue during every hold.</Text> : null}
         </>

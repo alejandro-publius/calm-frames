@@ -108,11 +108,11 @@ const TitleDetailsScreen = ({
   // One line of facts under the title, the way a film page lists its runtime.
   const holdCount = intervals.length;
   const meta = [
-    demo ? 'Optional demo' : null,
+    demo ? 'Practice version' : null,
     durationMs > 0 ? `${Math.round(durationMs / 1000)} sec` : null,
     demo
       ? `${holdCount} practice hold${holdCount === 1 ? '' : 's'}`
-      : holdCount === 0 ? 'No picture holds' : `${holdCount} part${holdCount === 1 ? '' : 's'} covered`,
+      : holdCount === 0 ? 'No flashing found' : `${holdCount} picture hold${holdCount === 1 ? '' : 's'}`,
   ].filter((item): item is string => item !== null);
   const scrollRef = React.useRef<ScrollView>(null);
   const infoTop = React.useRef(0);
@@ -161,7 +161,9 @@ const TitleDetailsScreen = ({
               accessibilityLabel={practiceLine ? `Try picture holds. ${practiceLine}` : 'Try picture holds'}
               disabled={saving} hasTVPreferredFocus={preferPracticeFocus} onPress={() => onOpenPractice?.(practiceOffered)} /> : null}
           </View>
-          <Text style={styles.quickSummary}>{intervals.length === 0 ? 'No picture holds in this story. Some flashing may still go undetected.' : `${intervals.length} ${demo ? 'practice holds' : 'parts covered'}. Sound and captions continue.`}</Text>
+          {demo ? null : <Text style={styles.quickSummary} testID={`${testID}-quick-summary`}>{intervals.length === 0
+            ? 'Checked frame by frame. No flashing found, so the picture never holds.'
+            : `${intervals.length} picture hold${intervals.length === 1 ? '' : 's'}. Sound and captions continue through each.`}</Text>}
         </View>
       </View>
 
@@ -169,8 +171,8 @@ const TitleDetailsScreen = ({
         <View testID={`${testID}-info`} style={styles.infoAnchor}
           onLayout={({ nativeEvent }) => { infoTop.current = nativeEvent.layout.y; }}>
           <View>
-            <CalmButton quiet testID={`${testID}-show-info`} label="Viewing details ↓"
-              accessibilityLabel="Picture holds and viewing settings. Scroll down to read more."
+            <CalmButton quiet testID={`${testID}-show-info`} label="Before you watch ↓"
+              accessibilityLabel="Before you watch: the picture timeline and your viewing settings. Scroll down."
               onPress={() => scrollRef.current?.scrollTo({
                 // Keep this same focused control in view above the explanation.
                 y: Math.max(0, infoTop.current - scale(CALM_SPACE.SAFE_Y)),
@@ -183,18 +185,15 @@ const TitleDetailsScreen = ({
       <>
           <View style={styles.checkSummary}>
             <View style={styles.chapterHeading}>
-              <Text style={styles.section} accessibilityRole="header">{demo ? 'About this demo' : 'Before you watch'}</Text>
+              <Text style={styles.section} accessibilityRole="header">Before you watch</Text>
             </View>
             <View style={styles.chapterContent}>
-              {demo ? <Text style={styles.summary}>Harbor was created without flashing effects. The two picture holds are scheduled demonstrations.</Text> : null}
               <Text style={styles.summary} testID={`${testID}-summary`}>
-                {intervals.length === 0
-                  ? 'This story plays without picture holds. Some flashing may still go undetected.'
-                  : `${intervals.length} ${demo ? 'scheduled hold' : 'part'}${
-                      intervals.length === 1 ? '' : 's'
-                    } ${demo ? (intervals.length === 1 ? 'is included' : 'are included') : 'will be hidden'}, ${hiddenSeconds} second${
-                      hiddenSeconds === 1 ? '' : 's'
-                    } in all.${demo ? '' : ' Sound and captions keep playing.'}`}
+                {demo
+                  ? `Harbor has no flashing. ${intervals.length === 1 ? 'This hold is' : `These ${['', '', 'two', 'three'][intervals.length] ?? intervals.length} holds are`} scheduled for practice, ${hiddenSeconds} second${hiddenSeconds === 1 ? '' : 's'} in all.`
+                  : intervals.length === 0
+                    ? 'Detection can miss flashing. A flash that is missed is not held.'
+                    : `${intervals.length} picture hold${intervals.length === 1 ? '' : 's'}, ${hiddenSeconds} second${hiddenSeconds === 1 ? '' : 's'} in all, each marked on the timeline below.`}
               </Text>
 
               {durationMs > 0 ? (
@@ -223,7 +222,7 @@ const TitleDetailsScreen = ({
           </View>
       </>
 
-      {onBack ? <View style={styles.footer}><View><CalmButton quiet testID={`${testID}-back-bottom`} label="Back to library" onPress={onBack} /></View></View> : null}
+      {onBack ? <View style={styles.footer}><View><CalmButton quiet testID={`${testID}-back-bottom`} label="Back" onPress={onBack} /></View></View> : null}
     </ScrollView>
   );
 };

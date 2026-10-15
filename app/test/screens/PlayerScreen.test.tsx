@@ -102,7 +102,7 @@ describe('the player with nothing to check', () => {
       coverTest: 'layering' });
     expect(mockPreBuffer).not.toHaveBeenCalled();
     expect(screen.queryByTestId('kepler-video-surface-view')).toBeNull();
-    expect(screen.getByTestId('calm-card-title').props.children).toBe('This title is unavailable');
+    expect(screen.getByTestId('calm-card-title').props.children).toBe('This video is unavailable');
   });
   it('restores registered focus after a rejected prepared route', () => {
     const restore = jest.spyOn(focusManager, 'restoreFocus');
@@ -121,7 +121,7 @@ describe('the player with nothing to check', () => {
     renderPlayer({});
     expect(screen.getByTestId('calm-frames-cover')).toBeTruthy();
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'This title is unavailable',
+      'This video is unavailable',
     );
     expect(screen.getByTestId('calm-card-detail').props.children).toMatch(
       /picture stays hidden/,
@@ -132,7 +132,7 @@ describe('the player with nothing to check', () => {
     renderPlayer({ guarded: { sha256: 'a'.repeat(64) } });
     expect(screen.getByTestId('calm-frames-cover')).toBeTruthy();
     expect(screen.getByTestId('calm-card-title').props.children).toBe(
-      'This title is unavailable',
+      'This video is unavailable',
     );
   });
 

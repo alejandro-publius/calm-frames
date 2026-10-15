@@ -165,7 +165,7 @@ export function benignStoryCard(card: Card): Card {
     return {
       ...card,
       title: 'Holding a calm scene',
-      detail: 'Practice hold. Sound and captions keep playing.',
+      detail: 'A practice hold. Sound and captions keep playing.',
       announcement:
         'Holding a calm scene for practice. Sound and captions keep playing.',
     };
@@ -174,7 +174,7 @@ export function benignStoryCard(card: Card): Card {
     const title = card.interval
       ? `Held ${secondsPhrase(card.interval.endMs - card.interval.startMs)} for practice`
       : 'Held a calm scene for practice';
-    const detail = 'Sound and captions kept playing. No flashing was present.';
+    const detail = 'A practice hold. Nothing flashed, and sound and captions kept playing.';
     return {
       ...card,
       title,

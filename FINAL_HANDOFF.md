@@ -29,8 +29,8 @@ twice, without any screenshot, video or capture.
 **Simplified at Alex's request (`819de40`, late Oct 14):** Home is one heading,
 "Calm Frames", at 120 units on one line (measured: 755 units wide in the
 display face, clear of the island; 184 would run under the lighthouse), with
-Play and Details under it and Help and Settings in the header, and nothing
-else: the smaller wordmark, the "20 sec · No picture holds" line, the
+Play and Details under it and How it works and Parents in the header, and
+nothing else: the smaller wordmark, the "20 sec · No picture holds" line, the
 explanation sentence, the Try picture holds card and the notice about titles
 held back are gone from Home. Play still speaks "Play: Harbor" and Details
 "Details: Harbor". Details keeps the title at 184 with its facts and offers
@@ -44,7 +44,7 @@ regenerated from this commit.
 **Integrated from the approved design (`b22d275`, Codex):** the ivory coast on
 every menu screen with the dimensional coastal artwork, the expressive Harbor
 title, the tactile Play button, the quiet Details action, the compact Try
-picture holds entry, Help and Settings in the header, and dark playback
+picture holds entry, Help and Settings in the header (since renamed How it works and Parents), and dark playback
 controls kept through `CoastalAppearance`.
 
 **Fixed, each with a test that failed first:**
@@ -215,11 +215,11 @@ Install the package in section 1 with the commands in
 section 3 and confirm by looking and listening:
 
 1. Home: the coastal artwork fills the screen; one heading, "Calm Frames",
-   Play with a triangle and Details under it; Help and Settings in the header;
+   Play with a triangle and Details under it; How it works and Parents in the header;
    no title line, explanation, demo card or notice; text readable from the
    couch; focus rings visible on every control, terracotta on a focused Play.
    The launcher tile shows the bust mark with its thin sand border.
-2. Details: "Harbor" with "20 sec · No picture holds", Play, and Try picture
+2. Details: "Harbor" with "20 sec · No flashing found", Play, and Try picture
    holds beside it. Try picture holds opens the demo's page ("20 sec · 2
    practice holds"); Play there: the countdown and Skip, then at each hold the
    calm still (not black) with the "Holding a calm scene" card, captions
@@ -228,11 +228,11 @@ section 3 and confirm by looking and listening:
 3. Harbor: plays through, sound audible, no hold, no error screen.
 4. Playback controls: dark and readable over the video; pause shows a readable
    paused state after the controls hide; Back returns to the launching screen.
-5. Settings: a wrong PIN refused with tries remaining, Delete corrects, the
+5. Parents: a wrong PIN refused with tries remaining, Delete corrects, the
    right PIN opens presets, room, chime, motion and sounds; a changed preset
    survives a relaunch.
-6. Help reads correctly; the home scene's reading edge fades the artwork
-   behind the text.
+6. How it works reads correctly in four short lines; the home scene's reading
+   edge fades the artwork behind the text.
 7. VoiceView, if available, names controls by their accessible names.
 
 Record what was seen and heard in a new `results/` receipt with the package

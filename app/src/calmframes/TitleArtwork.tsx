@@ -20,16 +20,16 @@ interface TitlePresentation {
 
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
   if (isBundledBenignStory(title)) {
-    return { name: 'Harbor', cardName: 'Harbor demo', kind: 'Practice holds', action: 'Watch demo',
-      description: 'Two scheduled practice holds show how the picture pauses while sound and captions continue.', art: 'harbor-cinematic' };
+    return { name: 'Harbor', cardName: 'Harbor demo', kind: 'Practice holds', action: 'Play demo',
+      description: 'Two practice holds show what a picture hold looks like: the picture holds on a calm still while the sound and captions continue.', art: 'harbor-cinematic' };
   }
   if (concernsPackagedLibrary(title) && title.title === 'Harbor story (prepared locally)') {
     return { name: 'Harbor', action: 'Watch now',
       description: '', art: 'harbor-cinematic' };
   }
   if (title.id === OFFLINE_TITLE_ID) {
-    return { name: 'Calm gradient', kind: 'Playback test', action: 'Play',
-      description: 'Use this short gradient clip to check picture playback and navigation.', art: 'gradient' };
+    return { name: 'Calm gradient', kind: 'Playback check', action: 'Play',
+      description: 'A short gradient to check that video plays on this television.', art: 'gradient' };
   }
   const label = shelfLabel(title);
   return { name: label.name, kind: label.qualifier, action: 'Watch now', description: '', art: undefined };

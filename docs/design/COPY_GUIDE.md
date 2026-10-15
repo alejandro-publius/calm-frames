@@ -14,15 +14,23 @@ The style takes cues from familiar television interfaces. These are original Cal
 
 | Purpose | Label |
 | --- | --- |
-| Start a story | Watch now |
-| Start the scene-hold demonstration | Watch demo |
-| Start the gradient test clip | Play |
-| Open title details | More info |
-| Main shelf | Your library |
-| Protected settings | Parental controls |
+| Start a video | Play |
+| Start the practice demonstration | Play demo |
+| Start the gradient check clip | Play |
+| Open a video's page | Details |
+| Open the practice demonstration's page from a video's page | Try picture holds |
+| The explanation page, from Home | How it works |
+| Protected settings, from Home | Parents |
+| Protected settings, as a page title | Parental controls |
 | PIN options | PIN settings |
-| Return to the shelf | Back to library |
+| Return one level | Back |
 | Close an informational dialog | Close |
+
+Since Oct 14 the words are one voice: a **picture hold** is the mechanism,
+everywhere (the cards, the timeline key, the parent area's record, the room and
+profile rules, the chime, the presets); **the picture stays hidden** is the one
+phrase for a video that may not play; **video** is the word for content; and a
+button says what it opens. Say each fact once per screen.
 
 Keep visible labels short and give screen-reader labels enough context, such as “Watch Harbor.” Show Resume only when saved playback progress exists. Do not invent durations, ratings, progress, availability, plot details, or medical claims.
 
@@ -32,11 +40,11 @@ Use the actual story synopsis in the native app. The preview's generic Harbor wo
 
 For the scene-hold demo:
 
-> This version adds practice holds to Harbor at set times so you can see how a hide works during playback. The holds are practice, not detected flashing.
+> Two practice holds show what a picture hold looks like: the picture holds on a calm still while the sound and captions continue. They are scheduled for practice, not detected flashing.
 
 When explaining the example holds:
 
-> The holds are added at set times to demonstrate how the picture changes while sound and captions continue.
+> Harbor has no flashing. These two holds are scheduled for practice, 8 seconds in all.
 
 Keep the demo labeled and retain the full evidence limits in submission materials. Do not imply the scheduled holds were detected hazards or that a prepared title guarantees safety.
 

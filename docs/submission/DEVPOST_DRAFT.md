@@ -58,12 +58,13 @@ that Alexa requests arrive on all go through one function. A target inside a
 flagged interval is covered first, then sought. A missing, unsigned, stale or
 mismatched map keeps the picture hidden.
 
-**Help, in the app.** A short page in plain words: supported titles only,
-and detection can miss flashing.
+**How it works, in the app.** Four short lines: who it is for, every video
+checked before it plays, the picture holding while the sound continues, and
+that detection can miss flashing.
 
 **The screen itself.** An ivory and teal coast with dimensional artwork: a
 seated figure on a rock, a lighthouse island, a boat. Home is one heading,
-"Calm Frames", with Play and Details; Help and Settings sit in the header.
+"Calm Frames", with Play and Details; How it works and Parents sit in the header.
 Details carries Harbor's length and hold count and the quiet Try picture holds
 entry that opens the practice demo. Playback keeps dark controls over the
 video. Text is sized for a room and every focused control shows a ring.

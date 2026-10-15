@@ -709,7 +709,7 @@ const ParentAreaScreen = ({
               id: 'interface-motion',
               key: 'interfaceMotionEnabled',
               title: 'Gentle artwork motion',
-              note: 'Artwork settles into place when you open the library or a title. Reduced motion keeps it still.',
+              note: 'Artwork eases into place when you open Home or a video. Reduced motion keeps it still.',
             },
             {
               id: 'interface-sounds',

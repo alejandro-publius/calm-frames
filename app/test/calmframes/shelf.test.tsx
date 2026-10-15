@@ -152,7 +152,7 @@ describe('the words on the shelf', () => {
 
     render(<TitleDetailsScreen entry={prepared} onPlay={onPlay} />);
     expect(screen.queryByTestId('title-details-description')).toBeNull();
-    expect(screen.getByTestId('title-details-meta').props.children).toBe('20 sec · No picture holds');
+    expect(screen.getByTestId('title-details-meta').props.children).toBe('20 sec · No flashing found');
     expect(screen.queryByText('Original story')).toBeNull();
   });
 
@@ -164,7 +164,7 @@ describe('the words on the shelf', () => {
     fireEvent.press(screen.getByTestId('picture-hold-dismiss'));
     expect(screen.getByTestId(`kid-home-poster-qualifier-${BENIGN_STORY_ID}`).props.children)
       .toMatch(/practice holds/i);
-    expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Watch demo/);
+    expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Play demo/);
     fireEvent.press(screen.getByTestId('kid-home-watch'));
     expect(onPlay).toHaveBeenCalledWith(harbor);
   });
@@ -229,7 +229,7 @@ describe('the words on the shelf', () => {
    */
   it('draws the second line at the ten foot floors, resting and focused', () => {
     const floors = { textSizeUnits: 32, textContrast: 4.5 };
-    const secondLines = ['Practice holds', 'Playback test'];
+    const secondLines = ['Practice holds', 'Playback check'];
     render(<KidHomeScreen titles={shelf.filter(entry => entry.title.id === BENIGN_STORY_ID || entry.title.id === OFFLINE_TITLE_ID)} onOpen={jest.fn()} />);
     const measured = () =>
       measureText(screen.toJSON() as unknown as RenderedNode, { background: COASTAL_COLORS.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);

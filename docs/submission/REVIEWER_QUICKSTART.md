@@ -152,8 +152,8 @@ some under load, so a missing line proves nothing.
    confirm them; there is no preset PIN in the package and it is never stored in
    plain text. Pick a profile, a viewing preset and the room.
 2. **Home.** One heading, "Calm Frames", over the coast. Move focus with the
-   D-pad from Play to Details, then up to Help and Settings.
-3. **Details.** Select Details: "Harbor" with "20 sec · No picture holds", Play,
+   D-pad from Play to Details, then up to How it works and Parents.
+3. **Details.** Select Details: "Harbor" with "20 sec · No flashing found", Play,
    and the quiet Try picture holds entry beside it.
 4. **Try picture holds.** Select it, read "20 sec · 2 practice holds" on the
    demo's own page, then Play. Watch the countdown and Skip, then the first
@@ -165,14 +165,14 @@ some under load, so a missing line proves nothing.
    the demo's page, then Back again to Harbor's Details with focus on Try
    picture holds.
 6. **Harbor.** Play the ordinary title: the same film with zero holds.
-7. **Settings** (Back on the Home root exits the app, by platform convention). Enter a wrong PIN and see it rejected with the tries
+7. **Parents** (Back on the Home root exits the app, by platform convention). Enter a wrong PIN and see it rejected with the tries
    remaining, correct it with Delete, enter the right one. Change the preset or
    the room, relaunch the app and see the choice kept. Practice holds never
    enter the exposure history, so an empty history after the demo is correct.
 
 On the final package, late on Oct 14, the app's own log reported steps 2, 3
 and 4 (Home, Details, the practice page and both holds with the still, Back one
-level at a time), step 6 (Harbor to its end with zero holds), the Help page,
+level at a time), step 6 (Harbor to its end with zero holds), the How it works page,
 the PIN gate of step 7 and a relaunch onto the saved Home
 ([`results/native-acceptance-4-2026-10-14/receipt.json`](../../results/native-acceptance-4-2026-10-14/receipt.json):
 J1 observed-pass, J2 observed-pass, J3 observed-pass, J4 observed-pass, J5 observed-pass, J6 observed-pass, J7 observed-pass, J8 observed-pass).
@@ -191,7 +191,7 @@ cd app && npx jest --ci --watchman=false --coverage=false test/calmframes/coasta
 
 Then open <http://127.0.0.1:4174/>. It is an HTML export of the rendered
 component trees with CSS approximations: Home links to Details, the practice
-entry, Help and Settings, and keyboard focus cycles. Play, PIN keys and unmapped
+entry, How it works and Parents, and keyboard focus cycles. Play, PIN keys and unmapped
 actions only show a notice. It does not run the native handlers, media,
 persistence, PIN checks, D-pad spatial navigation or VoiceView.
 

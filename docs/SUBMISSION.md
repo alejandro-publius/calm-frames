@@ -366,7 +366,7 @@ BUILD AND RUN ON THE SIMULATOR
       --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
 
   This is read-only preflight. After it succeeds, repeat with --execute
-  --restart. Use the visible remote to complete setup, open Harbor: Scene hold demo, choose Watch demo, and play, pause and seek.
+  --restart. Use the visible remote to complete setup, open Harbor, choose Play demo, and play, pause and seek.
   English captions are included; the separate hero Watch now plays prepared Harbor.
   Buttons can also be sent from the host. This is the form that works on
   this CLI; the documented vega exec form looks for a missing host executable:

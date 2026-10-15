@@ -27,7 +27,7 @@ describe('unavailable title details', () => {
     expect(view.getAllByRole('button')).toHaveLength(1);
     const back = view.getByTestId('title-details-back');
     expect(back.props.hasTVPreferredFocus).toBe(true);
-    expect(back.props.accessibilityLabel).toBe('Back to library');
+    expect(back.props.accessibilityLabel).toBe('Back');
     expect(back.props.accessibilityState).toEqual({ disabled: false });
     fireEvent(back, 'focus');
     expect(back).toHaveStyle({ borderColor: CALM_COLORS.FOCUS_RING });

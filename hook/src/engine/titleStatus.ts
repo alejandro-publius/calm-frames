@@ -142,7 +142,7 @@ export function checkTitle(
       title,
       status: 'pending',
       reason:
-        'This title is unavailable with your current viewing settings.',
+        'This video is unavailable with your current viewing settings.',
       segments,
       hiddenMs,
       checkedAtMs,

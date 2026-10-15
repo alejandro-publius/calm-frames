@@ -180,7 +180,7 @@ describe('house style', () => {
 
 describe('the record in the parent area', () => {
   it('counts one part as one part, and reads long totals as minutes', () => {
-    expect(hiddenSummary(1, 4_000, 1)).toBe('1 part, 4 seconds in all.');
+    expect(hiddenSummary(1, 4_000, 1)).toBe('1 hold, 4 seconds in all.');
     // One second used to read "1 seconds".
     expect(describeHiddenTotal(1_000)).toBe('1 second');
     expect(describeHiddenTotal(59_000)).toBe('59 seconds');
@@ -191,9 +191,9 @@ describe('the record in the parent area', () => {
 
   it('says where the list stops, and stays quiet when it does not stop', () => {
     expect(hiddenSummary(25, 100_000, 20)).toBe(
-      '25 parts, 1 minute 40 seconds in all. The 20 most recent are below.',
+      '25 holds, 1 minute 40 seconds in all. The 20 most recent are below.',
     );
-    expect(hiddenSummary(3, 12_000, 3)).toBe('3 parts, 12 seconds in all.');
+    expect(hiddenSummary(3, 12_000, 3)).toBe('3 holds, 12 seconds in all.');
   });
 
   it('names the day rather than leaving a bare time to be guessed at', () => {
@@ -212,8 +212,8 @@ describe('the record in the parent area', () => {
   });
 
   it('says the same thing whether the record is one kid or the household', () => {
-    expect(NOTHING_HIDDEN_YET).toBe('Nothing has been hidden yet.');
-    expect(nothingHiddenFor('Robin')).toBe('Nothing has been hidden for Robin yet.');
+    expect(NOTHING_HIDDEN_YET).toBe('No picture holds yet.');
+    expect(nothingHiddenFor('Robin')).toBe('No picture holds for Robin yet.');
   });
 });
 

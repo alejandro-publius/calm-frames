@@ -243,7 +243,7 @@ describe('the Harbor practice cards', () => {
     expect(practiceAt(7000)).toMatchObject({
       kind: 'covering',
       title: 'Holding a calm scene',
-      detail: 'Practice hold. Sound and captions keep playing.',
+      detail: 'A practice hold. Sound and captions keep playing.',
       announcement:
         'Holding a calm scene for practice. Sound and captions keep playing.',
     });
@@ -253,9 +253,9 @@ describe('the Harbor practice cards', () => {
     expect(practiceAt(16_500)).toMatchObject({
       kind: 'after',
       title: 'Held 4 seconds for practice',
-      detail: 'Sound and captions kept playing. No flashing was present.',
+      detail: 'A practice hold. Nothing flashed, and sound and captions kept playing.',
       announcement:
-        'Held 4 seconds for practice. Sound and captions kept playing. No flashing was present.',
+        'Held 4 seconds for practice. A practice hold. Nothing flashed, and sound and captions kept playing.',
     });
   });
 
@@ -302,7 +302,7 @@ describe('the Harbor practice cards', () => {
       const held = interval(10_000, 10_000 + lengthMs);
       const real = cardAt([held], held.endMs + 100);
       expect(real.kind).toBe('after');
-      const phrase = /^Hid (.+) of flashing$/.exec(real.title)?.[1];
+      const phrase = /^Held the picture for (.+)$/.exec(real.title)?.[1];
       expect(phrase).toBeDefined();
       expect(benignStoryCard(real).title).toBe(`Held ${phrase} for practice`);
     }

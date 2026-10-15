@@ -192,7 +192,7 @@ describe('per title status', () => {
     },
     {
       id: 'waiting',
-      title: 'This title is unavailable',
+      title: 'This video is unavailable',
       uri: 'https://example.invalid/b.m3u8',
       sha256: 'b'.repeat(64),
       maps: {},

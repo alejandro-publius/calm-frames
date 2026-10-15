@@ -306,9 +306,11 @@ The voice is in [`COPY_GUIDE.md`](COPY_GUIDE.md). Its core rules:
 > Do not invent durations, ratings, progress, availability, plot details, or
 > medical claims.
 
-The labels are the familiar TV ones: Watch now, Watch demo, Play, More info,
-Your library, Parental controls, Back to library. Screen-reader labels add the
-context a short label leaves out, such as "Watch now: Harbor". House style on
+The labels say what they open: Play, Details, Try picture holds, Play demo,
+How it works, Parents, Back. One word for the mechanism, a picture hold, and
+one phrase for a video that may not play, the picture stays hidden; "video"
+for content. Screen-reader labels add the context a short label leaves out,
+such as "Play: Harbor" and "Parents: parental controls, needs a PIN". House style on
 top of the guide, and enforced by `app/test/calmframes/copy.test.ts` and
 `eval/style_check.py`: no em dashes or en dashes anywhere, no exclamation marks
 in notices, and never "prevents seizures" or "seizure-proof".
@@ -331,7 +333,7 @@ The ivory and teal coast Alex approved on Oct 14, applied in `b22d275`, held
 to the floors in `93cf800` and simplified later that day at Alex's request.
 Home: the coastal artwork full bleed, one heading, "Calm Frames", at 120 units
 on one line so it ends before the lighthouse island, Play with its triangle and
-the quiet Details action under it, Help and Settings in the header, and
+the quiet Details action under it, How it works and Parents in the header, and
 nothing else: no title line, no explanation, no demo card, no notice about
 titles held back. Details keeps the same artwork and type with the title at
 184, its length and hold count, the quiet Try picture holds entry beside Play,

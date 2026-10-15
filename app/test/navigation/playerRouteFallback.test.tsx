@@ -50,7 +50,7 @@ test('after: a harbor-opening route shows the same opening scene while the playe
   expect(view.getByTestId('player-home-opening')).toBeTruthy();
   expect(view.getByText('Harbor')).toBeTruthy();
   // Announced once, by the player's own opening, not twice.
-  expect(view.getByText('Opening your story...').props.accessibilityLiveRegion).toBe('none');
+  expect(view.getByText('Opening your video...').props.accessibilityLiveRegion).toBe('none');
   expect(view.getByTestId('player-opening-back')).toBeTruthy();
   await settle();
   expect(view.getByTestId('player-ready')).toBeTruthy();

@@ -25,7 +25,7 @@ describe('notice actions and announcements', () => {
     fireEvent.press(retry);
     expect(onRetry).toHaveBeenCalledTimes(1);
     const message = screen.getByLabelText(
-      "Your settings couldn't be opened or saved. Your library stays closed until your settings and PIN are available. Try again.",
+      "Your settings couldn't be opened or saved. Nothing can play until your settings and PIN are available. Try again.",
     );
     expect(message.props.accessibilityLiveRegion).toBe('polite');
     expect(message.props.accessible).toBe(true);

@@ -95,14 +95,14 @@ export default function HarborOpening({
 
   // Actual bootstrap callers have no onFinish: match the next loading/home
   // frame without introducing a timer or reading household preferences.
-  if (!canFinish) return <View testID={testID} style={styles.screen} accessible accessibilityLabel="Calm Frames. Opening your library." accessibilityRole="progressbar">
+  if (!canFinish) return <View testID={testID} style={styles.screen} accessible accessibilityLabel="Calm Frames is opening." accessibilityRole="progressbar">
     <HomeHarborScene />
     <CalmPageHeader />
     <View style={styles.loading}><Text style={styles.loadingTitle}>Opening Calm Frames</Text></View>
   </View>;
 
   return (
-    <View testID={testID} style={styles.screen} accessible accessibilityLabel="Calm Frames. Opening your library." accessibilityRole="progressbar">
+    <View testID={testID} style={styles.screen} accessible accessibilityLabel="Calm Frames is opening." accessibilityRole="progressbar">
       <View style={styles.sea} pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
         <Animated.View testID={`${testID}-water`} style={[styles.wave, { transform: [
           { translateX: progress.interpolate({ inputRange: [0, 1], outputRange: [0, scale(HARBOR_WATER_DRIFT.x)] }) },

@@ -15,7 +15,7 @@ export default function PlayerOpening({ title, onBack, returning = false, liveSt
     <View style={styles.copy}>
       <Text style={styles.eyebrow}>A calmer way to watch</Text>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.detail} accessibilityLiveRegion={liveStatus ? 'polite' : 'none'}>{returning ? 'Going back...' : 'Opening your story...'}</Text>
+      <Text style={styles.detail} accessibilityLiveRegion={liveStatus ? 'polite' : 'none'}>{returning ? 'Going back...' : 'Opening your video...'}</Text>
 
     </View>
   </View></CoastalAppearance.Provider>;

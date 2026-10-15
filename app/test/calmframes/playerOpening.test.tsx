@@ -32,7 +32,7 @@ test('a real playback error replaces the opening and retains an exit', () => {
 test('opening uses destination-neutral Back and returns through the existing stack', () => {
   const view = startPlayer('none', true);
   expect(view.getByText('Back')).toBeTruthy();
-  expect(view.queryByText('Back to library')).toBeNull();
+  expect(view.queryByText(/Back to/)).toBeNull();
   fireEvent.press(view.getByTestId('player-opening-back'));
   expect(view.queryByText('Returning to your library.')).toBeNull();
   act(() => jest.advanceTimersByTime(700));

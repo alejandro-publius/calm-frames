@@ -27,7 +27,7 @@ describe('parent header navigation', () => {
     view.rerender(<ParentAreaScreen {...props} saving={saving} />);
     const back = view.getByTestId('parent-area-back-top');
     expect(back.props.hasTVPreferredFocus).toBe(true);
-    expect(back.props.accessibilityLabel).toBe('Back to library');
+    expect(back.props.accessibilityLabel).toBe('Back');
     expect(back.props.accessibilityState).toEqual({ disabled: saving });
     fireEvent(back, 'focus');
     if (!saving) {

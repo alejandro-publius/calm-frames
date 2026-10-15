@@ -46,7 +46,7 @@ const CalmCard = ({
   card,
   onSkip,
   allowSkip = true,
-  skipAccessibilityLabel = 'Skip the flashing part',
+  skipAccessibilityLabel = 'Skip past the hold',
   testID = 'calm-card',
 }: CalmCardProps) => {
   const skipRef = useRef<React.ComponentRef<typeof TouchableOpacity> | null>(

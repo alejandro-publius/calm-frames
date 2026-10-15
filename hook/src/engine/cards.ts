@@ -68,10 +68,10 @@ export const NO_CARD: Card = { kind: 'none', title: '', announcement: '' };
  */
 export const CHECKING_CARD: Card = {
   kind: 'checking',
-  title: 'Getting your story ready',
-  detail: 'Your story will begin in a moment.',
+  title: 'Getting your video ready',
+  detail: 'It will begin in a moment.',
   announcement:
-    'Getting your story ready. Your story will begin in a moment.',
+    'Getting your video ready. It will begin in a moment.',
 };
 
 function secondsWord(milliseconds: number): string {
@@ -110,9 +110,9 @@ export function cardAt(
     const detail = options.blockedDetail ?? rejectionMessage(options.rejection);
     return {
       kind: 'unverified',
-      title: 'This title is unavailable',
+      title: 'This video is unavailable',
       detail,
-      announcement: `This title is unavailable. ${detail}`,
+      announcement: `This video is unavailable. ${detail}`,
     };
   }
 
@@ -123,9 +123,9 @@ export function cardAt(
   if (inside) {
     return {
       kind: 'covering',
-      title: 'Hiding a flashing part',
-      detail: 'Sound and captions keep playing.',
-      announcement: 'Hiding a flashing part. Sound and captions keep playing.',
+      title: 'Holding the picture',
+      detail: 'Flashing was found here. Sound and captions keep playing.',
+      announcement: 'Holding the picture. Flashing was found here. Sound and captions keep playing.',
       interval: inside,
     };
   }
@@ -136,9 +136,9 @@ export function cardAt(
     const secondsLeft = Math.max(0, Math.ceil(remainingMs / 1000));
     return {
       kind: 'countdown',
-      title: 'Flashing part coming up',
+      title: 'Picture hold coming up',
       detail: `In ${secondsLeft} second${secondsLeft === 1 ? '' : 's'}. Press Skip to jump past it.`,
-      announcement: `Flashing part coming up in ${secondsLeft} second${
+      announcement: `Picture hold coming up in ${secondsLeft} second${
         secondsLeft === 1 ? '' : 's'
       }. Press Skip to jump past it.`,
       secondsLeft,
@@ -158,9 +158,9 @@ export function cardAt(
     const hidden = secondsWord(justEnded.endMs - justEnded.startMs);
     return {
       kind: 'after',
-      title: `Hid ${hidden} of flashing`,
-      detail: 'Sound and captions kept playing.',
-      announcement: `Hid ${hidden} of flashing. Sound and captions kept playing.`,
+      title: `Held the picture for ${hidden}`,
+      detail: 'Flashing was found. Sound and captions kept playing.',
+      announcement: `Held the picture for ${hidden}. Flashing was found. Sound and captions kept playing.`,
       interval: justEnded,
     };
   }
