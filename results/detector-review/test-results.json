@@ -1,0 +1,32 @@
+{
+  "recorded_utc": "2026-10-15T21:40:52Z",
+  "environment": {
+    "python": "/Users/alexvintera/calm-frames/.venv/bin/python",
+    "PYTHONPATH": "flashmap/src"
+  },
+  "runs": [
+    {
+      "command": "python -m pytest flashmap/tests/test_video_reset_boundaries.py -q",
+      "result": "22 passed"
+    },
+    {
+      "command": "bash negative controls E, F, G (see negative-controls.json), each followed by restore",
+      "result": "E 1 failed, F 2 failed, G 5 failed; 22 passed after restore"
+    },
+    {
+      "command": "python -m pytest flashmap -q -m \"not slow\"",
+      "result": "346 passed, 2 deselected"
+    }
+  ],
+  "tests_added_or_renamed": [
+    "test_flashing_over_a_24_by_25_block_more_than_a_quarter_fails (renamed from the one-pixel name; it was 24 pixels more)",
+    "test_exactly_576_of_the_2304_window_pixels_flashing_is_a_quarter_and_passes",
+    "test_577_of_the_2304_window_pixels_flashing_is_more_than_a_quarter_and_fails",
+    "test_the_hidden_interval_lasts_until_the_fourth_flash_ages_out_of_the_window",
+    "test_the_hidden_interval_cannot_start_before_the_file_does",
+    "test_four_red_flashes_in_a_second_are_a_red_segment_and_not_a_general_one",
+    "test_two_red_and_two_general_flashes_in_a_second_are_two_tallies_of_two_and_pass",
+    "test_a_single_pass_does_not_count_flashes_across_a_loop_seam"
+  ],
+  "not_claimed": "No seizure safety, no clinical confirmation, no loop safety; measured threshold exceedances only."
+}
