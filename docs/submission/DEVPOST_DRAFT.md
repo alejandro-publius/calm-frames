@@ -1,6 +1,8 @@
 # Devpost description, draft
 
-Draft of Oct 14, 2026 for the Fire TV track. Not submitted. Every number is a
+Draft of Oct 14, 2026 for the Fire TV track, reconciled Oct 15 against
+candidate head `a3368a9e` and package 5 from `4016e8d`. Not submitted.
+Every number is a
 marker against a file in `results/`, checked by `eval/readme_sync.py`. Replace
 the bracketed items before pasting; they are the facts that do not exist yet.
 
@@ -106,8 +108,9 @@ A live overlay can arrive late. The player's position reports are irregular and
 a stalled JavaScript thread delays everything, which is why the pipeline builds
 a pre-covered rendition as the first layer and the app covers whenever playback
 becomes uncertain. The device also drops the app's own log output under load and
-offers no way to capture a frame of what it drew, so native evidence is a host
-side screen recording of the composited window, not a log line.
+offers no way to capture a frame of what it drew from inside the app. Its logs
+record reported app events; confirming the composited picture and sound needs
+direct observation or an authorized host side recording.
 
 Detection is the honest limit. On the corrected synthetic conformance run,
 overall recall was
@@ -123,7 +126,8 @@ they are the ones that bound what the app can promise.
 
 ## Accomplishments
 
-- The complete family journey was observed on the Vega Virtual Device: setup
+- On earlier builds, the complete family journey was observed on the Vega
+  Virtual Device: setup
   with a PIN, a wrong PIN rejected and corrected, browsing with the remote,
   both practice holds with changing English captions over continuing sound, the
   prepared Harbor playing through, pause, Skip and Back with visible focus
@@ -148,6 +152,16 @@ they are the ones that bound what the app can promise.
   Details and return focus, Harbor start to finish with zero holds, pause and
   resume, both practice holds with the still loading, Help, the Settings gate
   and a relaunch (`results/native-acceptance-2026-10-14/receipt.json`).
+- Package 5 from `4016e8d`, with the simplified Home and one-voice copy,
+  reported eight journeys in a later log-driven session: cold launch, Home
+  controls, Details and return focus, ordinary Harbor, the practice page and
+  both holds, How it works, the Parents PIN gate and relaunch
+  (`results/native-acceptance-5-2026-10-14/receipt.json`). Package 4's
+  second pass separately reported pause and resume, the caption control and a
+  cover-first remote seek (J10b,
+  `results/native-acceptance-4-2026-10-14/second-pass.json`). These are
+  software observations; the current candidate's pixels and audio remain
+  unobserved.
 - Every published number traces to a results file and CI fails on drift.
 
 ## Limitations
@@ -160,9 +174,11 @@ they are the ones that bound what the app can promise.
 - All observations are from the Vega Virtual Device. No physical television
   timing was measured, and no clinical validation or feedback from families or
   clinicians exists yet.
-- The final candidate (`819de40`) was driven on the Vega Virtual Device and
-  judged from its own log; nobody has yet looked at its pixels or listened to
-  its sound. [Replace with the owner's receipt before pasting.]
+- The current candidate's package 5 (`4016e8d`) was driven on the Vega
+  Virtual Device and judged from its own log; nobody has yet looked at its
+  pixels or listened to its sound. The parent settings interior, VoiceView and
+  the caption menu's contents also remain unchecked. [Replace with the owner's
+  receipt before pasting.]
 - On the device the practice holds draw bundled copies of their signed stills;
   a prepared title whose still is not bundled would show black during a hold.
 - It runs on Vega OS and has only run on the Vega Virtual Device. Fire OS
@@ -171,7 +187,8 @@ they are the ones that bound what the app can promise.
 
 ## Not shipped, planned
 
-A native run and demo video of the final design; the upstream pull request to
+Native visual and audio acceptance and an authorized demo video of the final
+design; the upstream pull request to
 Amazon's `vega-video-sample`; signed scene stills for arbitrary imports across
 preset unions; and asking families and accessibility reviewers whether the flow
 and its limits are understandable.
