@@ -187,12 +187,50 @@ def test_flashing_over_exactly_a_quarter_of_the_reference_window_passes():
     assert segments == [], segments
 
 
-def test_flashing_over_24_pixels_more_than_a_quarter_fails():
+def test_flashing_over_a_24_by_25_block_more_than_a_quarter_fails():
+    """600 of 2304 pixels, 24 more than a quarter. Kept as the plain case; the exact boundary
+    is the two tests below."""
     region = (0, 0, 24, 25)  # 600 pixels, more than 576
     stamps = [0, 50, 100, 300, 433, 600, 767, 900, 1100]
     segments, _ = _segments(_strobe(stamps, region))
     assert len(segments) == 1
     assert segments[0]["area_fraction"] == pytest.approx(600 / 2304, abs=1e-6)
+    assert segments[0]["area_window"] == "wcag-10deg"
+
+
+def _strobe_with_extra_pixel(stamps: list[float], region: tuple[int, int, int, int], extra: tuple[int, int] | None):
+    """The region flashes, plus one more pixel just outside it when `extra` is given."""
+    frames = []
+    for index, stamp in enumerate(stamps):
+        level = BRIGHT if index % 2 else DARK
+        frame = _frame(index, stamp, level, region)
+        if extra is not None:
+            row, col = extra
+            frame.rgb[row, col, :] = level
+            frame.video_level[row, col] = level
+        frames.append(frame)
+    return frames
+
+
+def test_exactly_576_of_the_2304_window_pixels_flashing_is_a_quarter_and_passes():
+    """The WCAG window on the 192 by 108 working frame is 64 by 36, 2304 pixels. A 24 by 24
+    block is 576 of them: exactly 25%, which is not "more than" 25%. max_coverage sums a 0/1
+    mask through float64 integral images, so 576 and 577 are exact, and nothing here is
+    resampled: these are working-frame pixels, which is the layer the rule is applied at."""
+    stamps = [0, 50, 100, 300, 433, 600, 767, 900, 1100]
+    segments, _ = _segments(_strobe_with_extra_pixel(stamps, (0, 0, 24, 24), None))
+    assert 24 * 24 == 576 and 64 * 36 == 2304 and 576 / 2304 == 0.25
+    assert segments == [], segments
+
+
+def test_577_of_the_2304_window_pixels_flashing_is_more_than_a_quarter_and_fails():
+    """The same block plus one pixel at (24, 0), still inside one placement of the 64 by 36
+    window: 577 / 2304, which is 0.2504, more than a quarter."""
+    stamps = [0, 50, 100, 300, 433, 600, 767, 900, 1100]
+    segments, _ = _segments(_strobe_with_extra_pixel(stamps, (0, 0, 24, 24), (24, 0)))
+    assert len(segments) == 1, segments
+    assert segments[0]["area_fraction"] == pytest.approx(577 / 2304, abs=5e-7)  # the map rounds to six decimals
+    assert segments[0]["area_fraction"] > 0.25
     assert segments[0]["area_window"] == "wcag-10deg"
 
 
@@ -202,6 +240,96 @@ def test_max_coverage_reads_a_quarter_as_a_quarter():
     assert max_coverage(mask, 36, 64) == pytest.approx(0.25)
     mask[24, 0] = True
     assert max_coverage(mask, 36, 64) > 0.25
+
+
+# ---- the hidden interval over time ----------------------------------------------------------
+
+
+def test_the_hidden_interval_lasts_until_the_fourth_flash_ages_out_of_the_window():
+    """Flashes complete at 1100, 1400, 1700 and 2000 ms, then the picture is calm. The trailing
+    window still holds four flashes at every frame up to 2100 ms ([1100, 2100] keeps the first),
+    and three from 2150 ms on, so the hide runs from 1000 ms (one second before the fourth
+    flash) to 2100 ms: not to the last flash at 2000, and not to the end of the file."""
+    stamps = [1000, 1050, 1100, 1250, 1400, 1550, 1700, 1850, 2000]  # flashes at 1100, 1400, 1700, 2000
+    frames = _strobe(stamps)
+    index = len(frames)
+    for stamp in range(2050, 3001, 50):
+        frames.append(_frame(index, float(stamp), DARK))
+        index += 1
+    segments, _ = _segments(frames)
+    [segment] = segments
+    assert segment["start_ms"] == pytest.approx(1000.0)
+    assert segment["end_ms"] == pytest.approx(2100.0)
+    assert segment["flash_first_ms"] == pytest.approx(1100.0)
+    assert segment["flash_last_ms"] == pytest.approx(2000.0)
+
+
+def test_the_hidden_interval_cannot_start_before_the_file_does():
+    """Four flashes in the first second: the hide starts at 0, not at a negative time."""
+    stamps = [0, 50, 100, 200, 300, 400, 500, 600, 700]  # flashes at 100, 300, 500, 700
+    segments, _ = _segments(_strobe(stamps))
+    [segment] = segments
+    assert segment["start_ms"] == 0.0
+    assert segment["end_ms"] >= 700.0
+
+
+# ---- red and general flashes are two tallies ------------------------------------------------
+
+
+RED = (1.0, 0.0, 0.0)
+# sRGB 0.5 grey has a relative luminance of 0.214, within 0.002 of pure red's 0.2126: a swing
+# between the two is far under the 10% that makes a general flash, while the red ratio goes
+# from 1.0 to 1/3 and the chromaticity moves 0.259 in the CIE 1976 UCS diagram, which is a
+# red transition under WCAG 2.2 Note 3.
+GREY_LIKE_RED = (0.5, 0.5, 0.5)
+
+
+def _colour_frame(index: int, pts_ms: float, rgb: tuple[float, float, float]) -> AnalysisFrame:
+    array = np.zeros((H, W, 3), dtype=np.float32)
+    array[:] = rgb
+    return AnalysisFrame(index=index, pts_ms=float(pts_ms), rgb=array, video_level=array[:, :, 1].copy())
+
+
+def _red_strobe(stamps: list[float]) -> list[AnalysisFrame]:
+    """Grey, red, grey, red... so a red flash completes on every second grey frame."""
+    return [_colour_frame(index, stamp, RED if index % 2 else GREY_LIKE_RED) for index, stamp in enumerate(stamps)]
+
+
+def test_four_red_flashes_in_a_second_are_a_red_segment_and_not_a_general_one():
+    stamps = [0, 50, 100, 300, 433, 600, 767, 900, 1100]  # red flashes complete at 100, 433, 767, 1100
+    segments, _ = _segments(_red_strobe(stamps))
+    assert [segment["reason"] for segment in segments] == ["red"], segments
+    assert segments[0]["max_flashes_in_window"] == 4
+
+
+def test_two_red_and_two_general_flashes_in_a_second_are_two_tallies_of_two_and_pass():
+    """WCAG counts "no more than three general flashes and / or no more than three red
+    flashes": two separate tallies. Two of each inside one second is two and two, not four."""
+    # Two general flashes (dark, bright, dark, bright, dark) complete at 100 and 300 ms; the
+    # picture then sits on grey, and two red flashes complete at 650 and 900 ms.
+    frames = _strobe([0, 50, 100, 200, 300])
+    tail = [(400, GREY_LIKE_RED), (520, RED), (650, GREY_LIKE_RED), (780, RED), (900, GREY_LIKE_RED), (950, GREY_LIKE_RED)]
+    frames += [_colour_frame(10 + index, stamp, rgb) for index, (stamp, rgb) in enumerate(tail)]
+    segments, _ = _segments(frames)
+    assert segments == [], segments
+
+
+# ---- a single pass, not a loop ---------------------------------------------------------------
+
+
+def test_a_single_pass_does_not_count_flashes_across_a_loop_seam():
+    """Two flashes in the last half second and two in the first: a player that loops the clip
+    would show four inside one second across the seam, and the analyzer reports none, because
+    it reads one pass from first frame to last. This pins the limitation; it is not loop safety."""
+    head = [0, 50, 100, 200, 300]  # flashes at 100 and 300
+    tail = [1700, 1750, 1800, 1900, 2000]  # flashes at 1800 and 2000, file ends at 2000
+    frames = _strobe(head)
+    frames += [_frame(10 + index, stamp, DARK) for index, stamp in enumerate(range(400, 1700, 100))]
+    offset = len(frames)
+    frames += [_frame(offset + index, stamp, BRIGHT if index % 2 else DARK) for index, stamp in enumerate(tail)]
+    segments, analyzer = _segments(frames)
+    assert analyzer.last_pts_ms == pytest.approx(2000.0)
+    assert segments == [], segments
 
 
 # ---- data the detector must not be fooled by -----------------------------------------------------
