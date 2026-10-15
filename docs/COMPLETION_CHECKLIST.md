@@ -1,5 +1,10 @@
 # Calm Frames completion checklist
 
+**Superseded on Oct 14, 2026.** The live owner list is [`FINAL_HANDOFF.md`](../FINAL_HANDOFF.md)
+section 5 and the packet under [`docs/submission/`](submission/README.md); the rows
+below are the Oct 13 plan, kept as a record. Do not rebuild the centered layout
+they describe.
+
 Updated October 13, 2026. Solo entry, identity-verified Amazon Developer account.
 Deadline October 23 at noon Pacific. Vega Virtual Device exclusively.
 

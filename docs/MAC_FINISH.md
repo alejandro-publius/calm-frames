@@ -1,5 +1,11 @@
 # Finish the polished simulator demo on the Mac
 
+**Superseded on Oct 14, 2026.** The Oct 13 centered layout and film this procedure
+rebuilds were replaced by the approved coastal interface on
+`claude/final-candidate-2026-10-14`, whose package, device sessions and owner
+steps are in [`FINAL_HANDOFF.md`](../FINAL_HANDOFF.md). The device notes below
+(detached start, `is-connected`, the log limiter) still hold.
+
 **Oct 13 visual work:** fetch the full shared branch before rebuilding. The
 library and details now use centered compositions, shorter copy and bounded
 text widths. Both Harbor titles contain the new animated water/boat/lighthouse

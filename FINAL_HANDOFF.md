@@ -244,7 +244,17 @@ hash. Do not reset household data.
    documentation on top, becomes the judged release; then merge to `main` and
    cut the tag that never moves. The branch is on origin already; the hosted
    CI and Audit workflows run on pull requests, so opening a draft pull request
-   from `claude/final-candidate-2026-10-14` is what runs them.
+   from `claude/final-candidate-2026-10-14` is what runs them. One command
+   does it, with this handoff as the body:
+
+   ```sh
+   gh pr create --draft --base main --head claude/final-candidate-2026-10-14 \
+     --title "Calm Frames: the coastal interface, the simplified Home and the Oct 14 device fixes" \
+     --body-file FINAL_HANDOFF.md
+   ```
+
+   Draft PR #1 from the shared branch stays as it is; this candidate contains
+   everything that branch holds.
 2. Authorize and make the recording from
    [`docs/submission/DEMO_SCRIPT.md`](docs/submission/DEMO_SCRIPT.md), assemble
    and check it, upload to YouTube or Vimeo, and check the link logged out.

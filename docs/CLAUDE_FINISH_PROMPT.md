@@ -1,5 +1,10 @@
 # Focused Mac finishing task
 
+**Superseded on Oct 14, 2026.** This task targeted the Oct 13 shared branch. The
+candidate is `claude/final-candidate-2026-10-14` (on origin) and the current
+instructions are [`FINAL_HANDOFF.md`](../FINAL_HANDOFF.md); read that first and
+do not sync or rebuild the branch named below as the task.
+
 Use the following task on the Mac with `~/calm-frames`, the Vega SDK and the
 original project artifacts. For the restricted promotional credits described
 by Alex, test the noninteractive `claude -p` route with an API key from the
