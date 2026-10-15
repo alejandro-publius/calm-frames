@@ -1,9 +1,10 @@
 # The submission packet
 
-Reconciled Oct 14, 2026. The packet is the five documents below, written
+Reconciled Oct 15, 2026 against candidate head `a3368a9e`. The packet is the five documents below, written
 against the official rules and the repository's receipts. It now describes the
 final integration candidate `claude/final-candidate-2026-10-14`, whose package
-was built from `819de405ddf8e2d45526f978fc33d6a6ca977d5b` and driven on the Vega Virtual Device; the root
+5 was built from `4016e8dac8f675a4eb1e1613fd9dc7cf63d06e58` and driven
+on the Vega Virtual Device, judged from its own log; the root
 [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) has the package hash, the checks and
 the owner's remaining actions. It is a candidate, not the final judged release. Nothing is submitted, published, uploaded or recorded, and
 recording is not yet authorized.
@@ -48,6 +49,12 @@ upload attempt and source identity are recorded in
 The coastal composition is approved and applied, and the candidate has been
 driven on the Vega Virtual Device and judged from its own log. Run the owner's
 eyes-and-ears checklist in [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 4,
-then the recording, following [MAC_FINISH.md](../MAC_FINISH.md). The remaining licence, security, access and
-submission steps are in [the completion checklist](../COMPLETION_CHECKLIST.md)
-and [OPEN_DECISIONS.md](OPEN_DECISIONS.md).
+with the existing household preserved and its owner entering the PIN.
+Pixels, audio, the parent settings interior and VoiceView are still unobserved
+on the current candidate. Recording needs separate authorization; use
+[DEMO_SCRIPT.md](DEMO_SCRIPT.md) after acceptance and approval. The remaining
+licence, security, access and submission decisions are in
+[OPEN_DECISIONS.md](OPEN_DECISIONS.md). The Oct 13
+[MAC_FINISH.md](../MAC_FINISH.md) and
+[completion checklist](../COMPLETION_CHECKLIST.md) are historical guidance,
+as their opening notes explain.
