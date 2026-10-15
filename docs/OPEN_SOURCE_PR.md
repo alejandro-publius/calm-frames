@@ -1,5 +1,18 @@
 # The upstream contribution
 
+**October 14 late check.** Upstream `main` is still
+`ef8e4da89b22ef7973d0d41beedfa2b42f7bb272` (last pushed Aug 6, 2026); the
+repository's eleven pull requests are all closed and none concerns this fix.
+Both patches applied with `git am` onto a throwaway shallow clone of that
+commit on Oct 14 with no fuzz (three files: `src/utils/VideoHandler.ts`,
+`src/w3cmedia/shakaplayer/ShakaPlayer.ts`, `test/utils/VideoHandler.test.ts`);
+the clone was discarded and nothing was pushed. The sample's tests were not
+re-run that day; the Oct 10 run below stands. The patches still carry the
+placeholder author, which step 5 below rewrites to yours. The October 12 date
+below was a project target that passed; the contribution has to exist before
+the Oct 23 deadline, and Thu Oct 22 is the plan. Opening the issue, the fork
+and the pull request is public and is yours.
+
 **October 10 final local check.** GitHub API confirms upstream main is still
 `ef8e4da89b22ef7973d0d41beedfa2b42f7bb272`. All eleven issues and pull requests
 were checked; none concerns this Shaka rejection fix. The current contribution

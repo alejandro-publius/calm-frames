@@ -162,8 +162,9 @@ The floors are the ones above: text at 4.5 to 1 on its background, rings at
 sits on the page and never inside a surface panel: terracotta on the panel
 colour falls under 3 to 1, on the page it clears it.
 
-Artwork: `app/assets/image/tv/coastal-zen.png`, full bleed behind Home and
-the opening shell and cropped round in the practice entry. Its provenance is
+Artwork: `app/assets/image/tv/coastal-zen.png`, full bleed behind Home,
+Details and the opening shell (the round crop in the old Home card went with
+the card on Oct 14). Its provenance is
 the adjacent JSON and its ledger row; no ownership or dedication is claimed
 for a generated picture. `harbor-illustrated.png` is a render of
 `app/assets/brand/tv/harbor.svg` and remains for the title posters.

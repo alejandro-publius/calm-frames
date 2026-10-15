@@ -27,7 +27,7 @@ relaunch onto the saved Home, all observed
 (`results/native-acceptance-4-2026-10-14/receipt.json`). The device had frozen
 earlier in the evening and was stopped and started again with its user data
 kept; a first attempt saw a touch injected from the simulator window, which
-the driver now detects. Friction log entries 41 to 43 record the Oct 14 device
+the driver now detects. Friction log entries 41 to 44 record the Oct 14 device
 findings; an Amazon organizer's forum answer on how the log is delivered was
 re-read and the description draft links to it. The branch is on origin as
 `claude/final-candidate-2026-10-14` (no main merge, no pull request); the CI

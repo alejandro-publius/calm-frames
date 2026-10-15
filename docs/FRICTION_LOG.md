@@ -55,10 +55,11 @@ Everything here is real. Each entry is something that cost time on this build, w
 | 41 | Device, React Native | `Image` refuses a data URI, so a signed still showed black on the device | High |
 | 42 | Player | `getVideoPlaybackQuality` fails below JavaScript on the virtual device, so no frame is ever counted | High |
 | 43 | CLI, docs | The documented `vega exec inputd-cli` looks for a host executable that is not there | Medium |
+| 44 | Device | The image loader logs an error for every packaged image, and then loads it | Low |
 
-**Forty-three entries. Ten High, sixteen Medium, seventeen Low.**
+**Forty-four entries. Ten High, sixteen Medium, eighteen Low.**
 
-**Entries 1 to 28 and 36 to 43 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. **Entries 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues.** They are marked separately so nobody has to guess which are Amazon's.
+**Entries 1 to 28 and 36 to 44 are on Amazon's surface**: the installer, the documentation, the CLI, the virtual device, the device itself, the build tooling, the player, the captions view and `vega-video-sample`. **Entries 29 to 33 are the wider toolchain**, mostly ffmpeg and PyAV, and they are here because they cost this build real time and two of them changed what the analyzer computes. **Entries 34 and 35 are restricted local automation and GitHub Actions startup, not Amazon issues.** They are marked separately so nobody has to guess which are Amazon's.
 
 Nothing in entries 1 to 33 blocked the build outright, because every one of them had a way around it; 36 and 37 did stop playback and captions on the device until their workarounds were found, and on Oct 14, 41 and 42 did the same: the hold still showed black and every playback ended on a recovery screen until theirs. The first five High entries are the ones where there was no supported path, or no documented answer, and what we needed had to be built or measured from scratch: the device throwing away our measurement evidence (12), no way to see our own screens (14), no crypto API for checking a signature (15), playback on the virtual device being unsteady enough that a measurement needs twenty-two launches (22), and the player's position reporting being undocumented when the whole design has to act at a precise media time (26). Entry 35 records a historical startup block; runners resumed by October 5. The Audit failures between then and Oct 11 were dependencies and bills of materials, not runner startup, and the Oct 11 push is green.
 
@@ -1018,6 +1019,33 @@ E W3CMEDIA:[MSE_EME] get_video_playback_quality: MPB Call failed with code: 5000
 
 ---
 
+## 44. The image loader logs an error for every packaged image, and then loads it
+
+**Task.** Read the device log for the reason a signed still showed black (entry 41), and then for anything wrong with the Home scene, which logged the same error at every mount while reporting that it loaded.
+
+**Steps.**
+
+1. Installed the Debug candidate and streamed the device log: `vega device start-log-stream --device Simulator`.
+2. Opened Home, Details, the opening shell and the practice film, and lined up every `LocalAssetImageLoader` line against the app's own `CALM_TRACE image` and `CALM_TRACE still` breadcrumbs.
+
+**Expected.** An error from the image loader means an image did not load.
+
+**Actual.** On Oct 14 every packaged image, loaded with `require(...)`, produced one line a few milliseconds before its own load event, and then loaded:
+
+```
+ERROR com.amazon.keplerscript: [KeplerScript-Native] LocalAssetImageLoader: Cannot load image from non local source:
+```
+
+Twenty distinct lines in one twenty-minute session: the coastal scene at every mount of Home and Details, the two pictures of the opening shell, and each bundled still at the holds, each followed within ten milliseconds by `image scene loaded` or `still loaded`. The loader seems to try a non-local source for a packaged asset first and log the miss as an error. Nothing distinguishes that line from the one in entry 41, where the image never loaded, except the load event the app has to print itself.
+
+**Severity.** Low. No picture is affected. It cost an evening of chasing a gradient view that was never at fault, and it means a real image failure cannot be found in the log by its message alone.
+
+**Workaround.** Judge an image by the app's own `onLoad` and `onError` breadcrumbs (`CALM_TRACE image` and `CALM_TRACE still`), never by the loader's line.
+
+**Suggestion.** Log the miss at debug level, or not at all when a later source succeeds, and keep the error level for an image that did not load.
+
+---
+
 ## How to add one
 
 Write the six fields Amazon asks for: task, steps, expected versus actual, severity, workaround, suggestion. Real entries only, the way `CLAUDE.md` says. If it did not happen on this build, it does not go in, and if it is a platform rule we adopted rather than a failure we watched, say so in the entry itself. The log has three of those and each one is labelled.
@@ -1062,6 +1090,7 @@ The first eleven and the Sep 29 entries, 34 and 35, were written here as they ha
 | 41 data URI refused | `app/src/calmframes/bundledStills.ts` header, docs/STATUS.md (Oct 14, night), commit `52138fe` |
 | 42 no decoded frame counted | `app/src/calmframes/useOpeningFrame.ts`, `app/test/calmframes/openingFrame.test.tsx`, commit `ac5a610` |
 | 43 `vega exec inputd-cli` | CLAUDE.md, the section on working with the virtual device; `results/native-acceptance-2026-10-14/receipt.json` |
+| 44 loader error before every load | `results/native-acceptance-4-2026-10-14/receipt.json` (`image_loader_errors_distinct`), FINAL_HANDOFF.md section 3 |
 
 ### 2026-10-14: visible native checks interrupted active desktop work
 

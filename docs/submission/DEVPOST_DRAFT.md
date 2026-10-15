@@ -62,11 +62,11 @@ mismatched map keeps the picture hidden.
 and detection can miss flashing.
 
 **The screen itself.** An ivory and teal coast with dimensional artwork: a
-seated figure on a rock, a lighthouse island, a boat. Home shows Harbor, its
-length and hold count, Play and Details, one line on what picture holds are,
-and the practice entry; Help and Settings sit in the header. Playback keeps
-dark controls over the video. Text is sized for a room and every focused
-control shows a ring.
+seated figure on a rock, a lighthouse island, a boat. Home is one heading,
+"Calm Frames", with Play and Details; Help and Settings sit in the header.
+Details carries Harbor's length and hold count and the quiet Try picture holds
+entry that opens the practice demo. Playback keeps dark controls over the
+video. Text is sized for a room and every focused control shows a ring.
 
 ## How it is built
 
@@ -195,7 +195,7 @@ whether to enter].
 
 ## Friction log
 
-Friction log, 43 entries in Amazon's six fields:
+Friction log, 44 entries in Amazon's six fields:
 <https://github.com/alejandro-publius/calm-frames/blob/main/docs/FRICTION_LOG.md>.
 Until the candidate is merged the file is on `claude/final-candidate-2026-10-14`
 at the same path. An Amazon organizer answered on the Devpost forum (topic

@@ -164,10 +164,15 @@ package still carried the practice card, which is why its journeys name it.
 
 **Not observed:** the artwork, fonts, focus rings, caption text and the hold
 still as pixels; audio; the caption menu; the parent settings interior
-(household PIN); VoiceView; any physical television. **Open observation:** one
-image loader error is logged at every mount of the home scene while both
-pictures in it report loading; the remaining candidate is the scene's gradient
-view, and no visible defect is established.
+(household PIN); VoiceView; any physical television. **The loader error,
+explained:** the package 4 session shows one `LocalAssetImageLoader: Cannot
+load image from non local source:` line a few milliseconds before every
+packaged image reports loading: the scene on Home and on Details, the two
+pictures of the opening shell, and each bundled still at the holds. Every one
+of those images then loads. The device's loader evidently tries a non-local
+source first for a packaged asset and logs the miss; it is noise, not a
+defect, and friction log entry 44 records it. The data URI case (entry 41) is
+different: those never loaded.
 
 ## 4. Native acceptance checklist for the owner (eyes and ears)
 
@@ -193,7 +198,7 @@ section 3 and confirm by looking and listening:
    right PIN opens presets, room, chime, motion and sounds; a changed preset
    survives a relaunch.
 6. Help reads correctly; the home scene's reading edge fades the artwork
-   behind the text (the open observation above).
+   behind the text.
 7. VoiceView, if available, names controls by their accessible names.
 
 Record what was seen and heard in a new `results/` receipt with the package
@@ -225,7 +230,7 @@ hash. Do not reset household data.
    (`docs/SUBMISSION.md` section 10.2) and the cost allocation tag is still
    inactive; the overview also says building with Kiro Crew qualifies on its
    own, which this project did not use.
-7. Approve the friction log (43 entries) and product feedback for publication
+7. Approve the friction log (44 entries) and product feedback for publication
    as written. An Amazon organizer confirmed on the Devpost forum that a link
    in the description is enough and that keeping the log in the repository is
    easiest for judges; the description draft carries that link.
@@ -247,7 +252,13 @@ About, or a private one shared with `testing@devpost.com`, `chris-trag`,
 `knmeiss`, `giolaq`, `anishamalde`, `mosesroth` and `emersonsklar`. The
 repository is private today and GitHub detects Apache License 2.0. The
 candidate branch is on origin; the CI and Audit workflows trigger on pull
-requests, so no hosted run exists for it until a pull request is opened. Unresolved:
+requests, so no hosted run exists for it until a pull request is opened. The
+local equivalent of the CI gate was run on the candidate late on Oct 14 (the
+app suite, the Python suites, ruff, mypy, the hook package, the pin check, the
+conformance rebuild and the committed-tree secret scan); the scan had reported
+four false findings since Oct 13, hashes of renders named `unknown-key.png`,
+which is why the hosted CI run on the shared branch was red, and a narrow
+allowlist now excuses exactly that line shape. Unresolved:
 the Amazon sample notices (`docs/AMAZON_SAMPLE_LICENSE_REVIEW.md`,
 `results/release-pin-license-review-2026-10-14.json`), the dedications and
 positions on the generated artwork, and the entrant's eligibility and contact

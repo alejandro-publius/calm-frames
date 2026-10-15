@@ -1,6 +1,6 @@
 # Secret scanning config.
 #
-# The default rules are kept. Three allowlists, no more, and each one says what
+# The default rules are kept. Four allowlists, no more, and each one says what
 # it covers and why. Needs gitleaks 8.19 or later for the [[allowlists]] form,
 # which is what CI downloads and what .pre-commit-config.yaml pins.
 #
@@ -64,4 +64,21 @@ description = "pool_key_sha256, a digest of the blinding key file, not a key"
 regexTarget = "line"
 regexes = [
   '''"pool_key_sha256":\s*"[0-9a-f]{64}"''',
+]
+
+# 4. The render digests in results/unavailable_design_2026-10-13.json, written
+# on Oct 13 for the unavailable-title study. Four of the renders are named
+# unknown-key.png, after the rejection reason they show, and each line pairs
+# that file name with the SHA-256 of the picture. The word "key" in the file
+# name is what trips generic-api-key; the value is the hash of a PNG. Matched
+# on the whole line, so only a digest beside that file name is excused.
+#
+# Checked on Oct 14, 2026: with this in place the committed tree scans clean,
+# and a real `api_key = "<64 hex>"` planted in a copy of the tree is still
+# caught.
+[[allowlists]]
+description = "Digests of the unknown-key.png renders, hashes of pictures, not keys"
+regexTarget = "line"
+regexes = [
+  '''unknown-key\.png":\s*"[0-9a-f]{64}"''',
 ]
