@@ -1,3 +1,9 @@
+> The summary is presentation data, not an authentication gate. `validate()`
+> checks selected shape and count rules only. It does not bind files or verify
+> signatures. `signature_present` means a field exists. Use the strict package
+> check plus an approved compiled catalog for playback. Corrected output is in
+> results/acadia-integration-2026-10-15/evidence-summary.json.
+
 # The evidence summary, for the app
 
 `pipeline/evidence_summary.py` writes one JSON file per video that the app can
@@ -30,21 +36,21 @@ that contains "seizure-proof", "prevents seizures", "clinically validated" or
   timestamps, whether the rate varied, the timestamp source) and the colour
   decision. `hazard_prefix` says whether the file carries `HAZARD_`.
 - `analysis.runs`: one entry per map: profile, path and SHA-256 of the map,
-  whether it is signed, the analyzer name and version, and the settings that
-  matter (working width and height, luminance model, flash limit and window,
+  whether a signature field is present, the analyzer name and version, and the settings that
+  matter (working width and height, working color model and separate profile-specific luminance rules, flash limit and window,
   area limit, every area window with its size, the room if one was set, whether
   the pattern rule applied, what the picture was measured on), then the map's
   summary and its segments.
 - `findings`: the four states above, plus `actual_count`, `distinct_spans` and
   `distinct_span_count`. A distinct span carries the widest bounds any run gave
-  it, `found_by` (profile, map, room, reason, area) and
+  it, `found_by` (profile, map, room, reason, area), `found_in_runs` (unique map paths), `segment_observations` and
   `breaks_wcag_baseline`, which is true only when a run broke the WCAG
   reference window rather than only a room window.
 - `preparation`: `status` is `ready`, `failed`, `not run` or `unknown`; the
   local receipt (path, SHA-256, source hash, title, presets, verification
   outcome, `physical_tv_validated`, and the artifact hashes per preset) and the
   packaged manifest (path, SHA-256, bundle id, the SHA-256 of the public key
-  that signed the maps, and per title the map and rendition paths, hashes,
+  encoded as base64 text (not the raw-key fingerprint), and per title the map and rendition paths, hashes,
   durations, start offsets, guard bands and minimum cover lengths).
 - `report`: the verification report and the plots, by path.
 - `tests`: the boundary test file and the negative-control record (which break

@@ -1,0 +1,237 @@
+{
+  "bundleId": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13",
+  "method": "Full decoded RGB arrays; inclusive cover bounds from app-v1 plan; every covered frame RGB PSNR >= 30 dB against preparation still bound by checkedInputsSha256. A whole-frame similarity check, not exact pixel equality or detector validation.",
+  "independentDetectorValidation": false,
+  "nativePlayback": false,
+  "results": [
+    {
+      "preset": "broadcast",
+      "renditionSha256": "9baa7a90148bdda70e52e81e68861a33dbfd9146649ca2c41af923d56ba55cac",
+      "sourceSha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+      "stillSha256": "bcafa8996379a2bbb444a9c1b811e5413f0c63251512289b7835db6a2532dc0b",
+      "checkedInputsSha256": "cd7f95048dfb9b7907600c0bb559e4a0197536886d77dce63fb07be0bb18139f",
+      "decodedFrames": 1804,
+      "startOffsetMs": 0.0,
+      "intervals": [
+        {
+          "startMs": 7843.0,
+          "endMs": 12199.0,
+          "coveredFrames": 208,
+          "worstStillPsnrDb": 41.74328358114644,
+          "failedFrames": [],
+          "passed": true,
+          "before": {
+            "index": 376,
+            "ptsMs": 7841.166666666667,
+            "sourceMs": 7841.166666666667,
+            "stillPsnrDb": 9.082840932217609
+          },
+          "first": {
+            "index": 377,
+            "ptsMs": 7862.020833333333,
+            "sourceMs": 7862.020833333333,
+            "stillPsnrDb": 42.07280721498485
+          },
+          "last": {
+            "index": 584,
+            "ptsMs": 12178.833333333334,
+            "sourceMs": 12178.833333333334,
+            "stillPsnrDb": 41.74835593387603
+          },
+          "after": {
+            "index": 585,
+            "ptsMs": 12199.6875,
+            "sourceMs": 12199.6875,
+            "stillPsnrDb": 10.062860857135703
+          }
+        },
+        {
+          "startMs": 28613.0,
+          "endMs": 31093.0,
+          "coveredFrames": 118,
+          "worstStillPsnrDb": 42.08754795492955,
+          "failedFrames": [],
+          "passed": true,
+          "before": {
+            "index": 1372,
+            "ptsMs": 28611.916666666668,
+            "sourceMs": 28611.916666666668,
+            "stillPsnrDb": 7.550135745198675
+          },
+          "first": {
+            "index": 1373,
+            "ptsMs": 28632.770833333332,
+            "sourceMs": 28632.770833333332,
+            "stillPsnrDb": 42.08754795492955
+          },
+          "last": {
+            "index": 1490,
+            "ptsMs": 31072.708333333332,
+            "sourceMs": 31072.708333333332,
+            "stillPsnrDb": 42.09873067051031
+          },
+          "after": {
+            "index": 1491,
+            "ptsMs": 31093.5625,
+            "sourceMs": 31093.5625,
+            "stillPsnrDb": 10.831491996883129
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "preset": "extra-cautious",
+      "renditionSha256": "00a214650090bdabc2a9e4639d68a999aacd762be61055cd9b6fedf7e9175f59",
+      "sourceSha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+      "stillSha256": "bcafa8996379a2bbb444a9c1b811e5413f0c63251512289b7835db6a2532dc0b",
+      "checkedInputsSha256": "cd7f95048dfb9b7907600c0bb559e4a0197536886d77dce63fb07be0bb18139f",
+      "decodedFrames": 1804,
+      "startOffsetMs": 0.0,
+      "intervals": [
+        {
+          "startMs": 7343.0,
+          "endMs": 12699.0,
+          "coveredFrames": 256,
+          "worstStillPsnrDb": 42.08754795492955,
+          "failedFrames": [],
+          "passed": true,
+          "before": {
+            "index": 352,
+            "ptsMs": 7340.666666666667,
+            "sourceMs": 7340.666666666667,
+            "stillPsnrDb": 8.35737867942117
+          },
+          "first": {
+            "index": 353,
+            "ptsMs": 7361.520833333333,
+            "sourceMs": 7361.520833333333,
+            "stillPsnrDb": 42.08754795492955
+          },
+          "last": {
+            "index": 608,
+            "ptsMs": 12679.333333333334,
+            "sourceMs": 12679.333333333334,
+            "stillPsnrDb": 42.09793349390481
+          },
+          "after": {
+            "index": 609,
+            "ptsMs": 12700.1875,
+            "sourceMs": 12700.1875,
+            "stillPsnrDb": 10.266935748512703
+          }
+        },
+        {
+          "startMs": 28113.0,
+          "endMs": 31593.0,
+          "coveredFrames": 166,
+          "worstStillPsnrDb": 42.08754795492955,
+          "failedFrames": [],
+          "passed": true,
+          "before": {
+            "index": 1348,
+            "ptsMs": 28111.416666666668,
+            "sourceMs": 28111.416666666668,
+            "stillPsnrDb": 7.601678796690843
+          },
+          "first": {
+            "index": 1349,
+            "ptsMs": 28132.270833333332,
+            "sourceMs": 28132.270833333332,
+            "stillPsnrDb": 42.08754795492955
+          },
+          "last": {
+            "index": 1514,
+            "ptsMs": 31573.208333333332,
+            "sourceMs": 31573.208333333332,
+            "stillPsnrDb": 42.09873841581941
+          },
+          "after": {
+            "index": 1515,
+            "ptsMs": 31594.0625,
+            "sourceMs": 31594.0625,
+            "stillPsnrDb": 10.740646289002246
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "preset": "wcag",
+      "renditionSha256": "9baa7a90148bdda70e52e81e68861a33dbfd9146649ca2c41af923d56ba55cac",
+      "sourceSha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+      "stillSha256": "bcafa8996379a2bbb444a9c1b811e5413f0c63251512289b7835db6a2532dc0b",
+      "checkedInputsSha256": "cd7f95048dfb9b7907600c0bb559e4a0197536886d77dce63fb07be0bb18139f",
+      "decodedFrames": 1804,
+      "startOffsetMs": 0.0,
+      "intervals": [
+        {
+          "startMs": 7843.0,
+          "endMs": 12199.0,
+          "coveredFrames": 208,
+          "worstStillPsnrDb": 41.74328358114644,
+          "failedFrames": [],
+          "passed": true,
+          "before": {
+            "index": 376,
+            "ptsMs": 7841.166666666667,
+            "sourceMs": 7841.166666666667,
+            "stillPsnrDb": 9.082840932217609
+          },
+          "first": {
+            "index": 377,
+            "ptsMs": 7862.020833333333,
+            "sourceMs": 7862.020833333333,
+            "stillPsnrDb": 42.07280721498485
+          },
+          "last": {
+            "index": 584,
+            "ptsMs": 12178.833333333334,
+            "sourceMs": 12178.833333333334,
+            "stillPsnrDb": 41.74835593387603
+          },
+          "after": {
+            "index": 585,
+            "ptsMs": 12199.6875,
+            "sourceMs": 12199.6875,
+            "stillPsnrDb": 10.062860857135703
+          }
+        },
+        {
+          "startMs": 28613.0,
+          "endMs": 31093.0,
+          "coveredFrames": 118,
+          "worstStillPsnrDb": 42.08754795492955,
+          "failedFrames": [],
+          "passed": true,
+          "before": {
+            "index": 1372,
+            "ptsMs": 28611.916666666668,
+            "sourceMs": 28611.916666666668,
+            "stillPsnrDb": 7.550135745198675
+          },
+          "first": {
+            "index": 1373,
+            "ptsMs": 28632.770833333332,
+            "sourceMs": 28632.770833333332,
+            "stillPsnrDb": 42.08754795492955
+          },
+          "last": {
+            "index": 1490,
+            "ptsMs": 31072.708333333332,
+            "sourceMs": 31072.708333333332,
+            "stillPsnrDb": 42.09873067051031
+          },
+          "after": {
+            "index": 1491,
+            "ptsMs": 31093.5625,
+            "sourceMs": 31093.5625,
+            "stillPsnrDb": 10.831491996883129
+          }
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "passed": true
+}

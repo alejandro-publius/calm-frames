@@ -1,4 +1,4 @@
-import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
+import { useKeplerAppStateManager, useTVEventHandler } from '@amazon-devices/react-native-kepler';
 import { createContext, useContext, useEffect, useLayoutEffect, useRef } from 'react';
 import { AccessibilityInfo, AppState } from 'react-native';
 import { createInterfaceSoundController, InterfaceFeedback } from './interfaceSound';
@@ -13,6 +13,16 @@ export function useInterfaceSound({ enabled, active }: {
   active: boolean;
 }): InterfaceFeedback {
   const manager = useKeplerAppStateManager();
+  const selection = useRef({ held: false, confirmed: false });
+  useTVEventHandler((event) => {
+    if (event.eventType !== 'select' && event.eventType !== 'enter') { return; }
+    if (event.eventKeyAction === 0) {
+      if (!selection.current.held) { selection.current.confirmed = false; }
+      selection.current.held = true;
+    } else if (event.eventKeyAction === 1) {
+      selection.current.held = false;
+    }
+  });
   const controller = useRef<ReturnType<typeof createInterfaceSoundController> | null>(null);
   if (!controller.current) { controller.current = createInterfaceSoundController(); }
   const state = useRef({
@@ -30,6 +40,10 @@ export function useInterfaceSound({ enabled, active }: {
   };
   const feedback = useRef<InterfaceFeedback>({
     confirm: () => {
+      // Key-down repeats can outlast the audio controller's short cooldown.
+      // A held select gets at most one cue; this observer never handles actions.
+      if (selection.current.held && selection.current.confirmed) { return; }
+      selection.current.confirmed = true;
       reconcile.current();
       controller.current?.confirm();
     },

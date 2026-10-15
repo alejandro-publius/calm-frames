@@ -28,6 +28,7 @@ import argparse
 import csv
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -106,13 +107,19 @@ def run_block(path: Path, repo: Path) -> dict:
         "profile": profile.get("name"),
         "map_path": relative,
         "map_sha256": sha256_of(path),
-        "signed": bool(doc.get("signature")),
+        "signature_present": bool(doc.get("signature")),
+        "signature_verification": "not performed by this summary",
         "analyzer": doc.get("generator"),
         "created_utc": doc.get("created_utc"),
         "settings": {
             "analysis_width": doc["color"].get("analysis_width"),
             "analysis_height": doc["color"].get("analysis_height"),
-            "luminance_model": doc["color"].get("luminance_model"),
+            "working_color_luminance_model": doc["color"].get("luminance_model"),
+            **{key: profile.get(key) for key in (
+                "general_flash", "red_flash", "peak_nits", "pattern_rule",
+                "exceptions_not_implemented", "rules_not_implemented",
+                "transition_pairing", "transition_rule", "window_placement",
+            )},
             "flash_limit_per_second": profile.get("flash_limit_per_second"),
             "window_ms": profile.get("window_ms"),
             "area_fraction_limit": profile.get("area_fraction_limit"),
@@ -149,13 +156,14 @@ def distinct_spans(runs: list[dict]) -> list[dict]:
         if spans and start <= spans[-1]["end_ms"]:
             spans[-1]["end_ms"] = max(spans[-1]["end_ms"], end)
             spans[-1]["found_by"].append(found)
-            spans[-1]["breaks_wcag_baseline"] = spans[-1]["breaks_wcag_baseline"] or bool(segment.get("breaks_baseline"))
+            spans[-1]["breaks_wcag_baseline"] = spans[-1]["breaks_wcag_baseline"] or (run["profile"] == "wcag" and bool(segment.get("breaks_baseline")))
         else:
             spans.append({"start_ms": start, "end_ms": end, "found_by": [found],
-                          "breaks_wcag_baseline": bool(segment.get("breaks_baseline"))})
+                          "breaks_wcag_baseline": run["profile"] == "wcag" and bool(segment.get("breaks_baseline"))})
     for span in spans:
         span["reasons"] = sorted({f["reason"] for f in span["found_by"] if f["reason"]})
-        span["found_in_runs"] = len(span["found_by"])
+        span["segment_observations"] = len(span["found_by"])
+        span["found_in_runs"] = len({finding["map_path"] for finding in span["found_by"]})
     return spans
 
 
@@ -252,7 +260,11 @@ def build_summary(*, repo: Path, ledger: Path, ledger_file: str, maps: list[Path
 
 
 def validate(summary: dict) -> list[str]:
-    """Explicit checks, so a consumer without a schema library can refuse a bad summary."""
+    """Presentation consistency checks only, never a lineage or signature gate.
+
+    Playback consumers must use the strict package verifier and an explicitly
+    approved compiled catalog. This validator does not authenticate any field.
+    """
     problems: list[str] = []
     for key in ("schema", "generated_utc", "generator", "states", "source", "analysis", "findings", "preparation", "report", "limitations"):
         if key not in summary:
@@ -281,7 +293,7 @@ def validate(summary: dict) -> list[str]:
         if event.get("detected") is not False:
             problems.append("a simulated event must say detected: false")
     source = summary.get("source", {})
-    if not isinstance(source.get("sha256"), str) or len(source["sha256"]) != 64:
+    if not isinstance(source.get("sha256"), str) or not re.fullmatch(r"[0-9a-f]{64}", source["sha256"]):
         problems.append("source sha256 must be 64 hex characters")
     if summary.get("preparation", {}).get("status") not in ("ready", "failed", "not run", "unknown"):
         problems.append("preparation status must be ready, failed, not run or unknown")

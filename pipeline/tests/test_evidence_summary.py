@@ -99,7 +99,29 @@ def test_the_command_line_writes_a_file_that_validates(tmp_path: Path):
                     "--map", str(tmp_path / "clip.wcag.json"), "--not-analyzed", "audio", "--out", str(out)]) == 0
     written = json.loads(out.read_text())
     assert ev.validate(written) == []
-    assert written["analysis"]["runs"][0]["signed"] is True
+    assert written["analysis"]["runs"][0]["signature_present"] is True
+    assert written["analysis"]["runs"][0]["signature_verification"] == "not performed by this summary"
+
+
+def test_overlapping_segments_in_one_map_are_one_run_and_broadcast_is_not_wcag(tmp_path: Path):
+    path = _map(tmp_path / "broadcast.json", profile="broadcast", segments=[SEGMENT, {**SEGMENT, "start_ms": 200}])
+    [span] = ev.distinct_spans([ev.run_block(path, tmp_path)])
+    assert span["found_in_runs"] == 1
+    assert span["segment_observations"] == 2
+    assert span["breaks_wcag_baseline"] is False
+
+
+def test_profile_luminance_rules_survive_summary_without_confusing_working_color(tmp_path: Path):
+    path = _map(tmp_path / "broadcast.json", profile="broadcast", segments=[])
+    data = json.loads(path.read_text())
+    rules = {"metric": "bt1886-nits", "min_delta": 20, "dark_image_below": 160}
+    data["profile"].update({"general_flash": rules, "peak_nits": 200, "transition_pairing": "non-overlapping"})
+    path.write_text(json.dumps(data))
+    settings = ev.run_block(path, tmp_path)["settings"]
+    assert settings["general_flash"] == rules
+    assert settings["peak_nits"] == 200
+    assert settings["transition_pairing"] == "non-overlapping"
+    assert settings["working_color_luminance_model"] == "wcag-relative-luminance-srgb"
 
 
 

@@ -34,6 +34,14 @@ export interface CreditEntry {
 
 export const CREDIT_ENTRIES: CreditEntry[] = [
   {
+    title: 'Acadia B-Roll: Coastal Scenery (National Park Service)',
+    license: 'Public domain (NPGallery constraints: Public domain, Full Granting Rights; U.S. government work)',
+    credit: 'NPS Video, Acadia National Park. No NPS endorsement is implied.',
+    source: 'https://npgallery.nps.gov/AssetDetail/6fc09aec-7fc2-47ed-b8cc-e1b10861dd3e',
+    collection: 'National Park Service, NPGallery asset 6fc09aec-7fc2-47ed-b8cc-e1b10861dd3e, "Acadia B-Roll: Coastal Scenery" ("A series of clips of waves crashing against rocky shores and coastal views")',
+    obligations: [],
+  },
+  {
     title: 'Big Buck Bunny',
     license: 'CC BY 3.0',
     credit: '(c) copyright 2008, Blender Foundation / www.bigbuckbunny.org',

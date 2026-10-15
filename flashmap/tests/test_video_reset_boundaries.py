@@ -187,7 +187,7 @@ def test_flashing_over_exactly_a_quarter_of_the_reference_window_passes():
     assert segments == [], segments
 
 
-def test_flashing_over_one_pixel_more_than_a_quarter_fails():
+def test_flashing_over_24_pixels_more_than_a_quarter_fails():
     region = (0, 0, 24, 25)  # 600 pixels, more than 576
     stamps = [0, 50, 100, 300, 433, 600, 767, 900, 1100]
     segments, _ = _segments(_strobe(stamps, region))

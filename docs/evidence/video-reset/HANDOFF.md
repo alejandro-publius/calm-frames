@@ -1,3 +1,7 @@
+> Integration review: see ../acadia-integration-2026-10-15.md for corrected
+> evidence, trust scope and current blockers. This is Claude's historical
+> handoff, with factual and review-safety corrections applied during integration.
+
 # Video reset, pipeline lane: handoff to Codex
 
 Written Oct 15, 2026 on branch `claude/video-reset-2026-10-15`, a worktree at
@@ -31,11 +35,11 @@ is `media/HAZARD_nps_acadia_coastal_broll_720p.mp4`, outside git.
 | Run | Settings | Result |
 |---|---|---|
 | `flashmap check`, WCAG profile, no room | 192 px working width, trailing 1 s window, area over a quarter of the 10 degree window | 1 general flash span, 9302 to 11532 ms, 10 flashes in its worst second, 0.511 of the window |
-| `flashmap check`, broadcast profile, no room | same, with the broadcast window and pattern rule | 0 spans |
-| pipeline preparation, every preset, 85 inch at 4 feet | the pipeline's fixed strictest room adds a 22 by 22 px room window | 3 spans per preset: 8343 to 9864, 9135 to 11699 and 29113 to 30593 ms; only the middle one breaks the WCAG baseline window |
+| `flashmap check`, broadcast profile, no room | 192x108 whole-picture window; BT.1886 delta 20 nits, dark below 160 nits at an assumed 200-nit peak; informative pattern rule | 0 spans |
+| pipeline preparation, every preset, 85 inch at 4 feet | the pipeline's fixed strictest room adds a 22 by 22 px room window | 3 spans per preset: 8343 to 9864 (broadcast ends at 9906), 9135 to 11699 and 29113 to 30593 ms; the WCAG map marks only the middle one as breaking its baseline window |
 
-Merged, that is two distinct spans: 8343 to 11699 ms (found by seven of the
-eight run and segment pairs, breaks the WCAG baseline) and 29113 to 30593 ms
+Merged, that is two distinct spans: 8343 to 11699 ms (seven segment observations
+across four map files; breaks the WCAG baseline) and 29113 to 30593 ms
 (room window only). Nobody has looked at either span, on purpose: the source
 is read only by the analyzer and the plot tool. Nothing was simulated; no
 threshold was changed. The plots are in `results/video-reset/acadia/plots/`.
@@ -81,8 +85,8 @@ documentation says; the strict gate (`--require-reports`, what
   repeated timestamp counted once, a backwards timestamp dropped, the
   48000/1001 cadence read as constant and timed to the microsecond, flashes
   counted by timestamp at that cadence, flashing over exactly a quarter of the
-  reference window passes and one pixel more fails, `max_coverage` at a
-  quarter, a frame of NaN neither crashing nor counting, and an audio-only, an
+  reference window passes and 24 pixels more fails; a separate `max_coverage`
+  unit check adds exactly one pixel above a quarter, a frame of NaN neither crashing nor counting, and an audio-only, an
   empty and a noise file refused by `probe`.
 - `pipeline/evidence_summary.py` and `pipeline/tests/test_evidence_summary.py`:
   the evidence contract and nine tests; `docs/evidence/video-reset/EVIDENCE_SUMMARY.md`
@@ -128,10 +132,8 @@ Details, including the test names, are in `results/video-reset/negative-controls
 The synthetic frames are solid grey arrays with exact timestamps; they
 exercise counting, timing, area and input refusal, not codecs, camera noise or
 colour transforms, which the existing suites cover with generated clips. A
-test that watches a line is not evidence of clinical protection. Loop
-boundaries: the analyzer has none of its own (chunk boundaries are already
-held equal to the whole file by `test_chunking.py`); replay in the app reuses
-the same static map, so no separate handling is needed there either.
+test that watches a line is not evidence of clinical protection. Loop boundaries remain unverified. Chunk equivalence tests and reuse of a
+static map do not establish the displayed last-to-first transition during replay.
 
 The analyzer and pipeline suites (`pytest flashmap pipeline -m "not slow"`)
 were run once before this handoff: 867 passed, 2 deselected, in 3 minutes 30.
@@ -142,7 +144,7 @@ installed in this environment; hosted CI runs it.
 
 ## 5. What Codex integrates, and the native checks still required
 
-1. Copy the bundle directory `build/video-reset/prepared-library/4bab8d81…`
+1. Only after explicit approval of this exact bundle and public key, copy the bundle directory `build/video-reset/prepared-library/4bab8d81…`
    and `catalog.json` / `catalog.ts` into the app's prepared-library location
    and catalog import, the way `eval/prepare_owned_harbor.py` outputs are wired
    today. The maps are signed by a new key, so the app must accept its public
@@ -170,11 +172,9 @@ installed in this environment; hosted CI runs it.
 
 ## 6. Independent validation and owner decisions still needed
 
-- Someone who is not photosensitive, and who does not look at the flagged
-  spans at speed, should confirm from the plots (or slowed, dimmed playback
-  under the repository's rules) that the two spans are whitewater against dark
-  rock, so the owner can decide whether a title with real findings belongs in
-  the demo. The findings stand either way.
+- Do not ask anyone to watch the original hazardous source. Use numeric,
+  offscreen evidence for this audit. A descriptive scene label is not a
+  requirement for accepting or rejecting the measured findings.
 - The owner decides whether to ship this title and its credit, and whether
   the broadcast rendition, identical to the wcag one, should be listed twice.
 - Independent validation of the detector against anything outside this

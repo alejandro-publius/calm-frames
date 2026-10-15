@@ -1,5 +1,16 @@
 # Final handoff: the integration candidate
 
+## Acadia audit and selection sound, October 15, 2026
+
+[Integration review](docs/evidence/acadia-integration-2026-10-15.md) records
+Claude's imported artifacts, corrected reporting, offscreen frame checks and
+the exact public-key approval still required. Acadia remains staged outside
+app assets and is not playable in the installed app. Harbor trust is unchanged.
+A small held-key guard was added to the existing optional selection cue; the
+saved sound setting remains unchanged. These source changes have not been
+built or installed. The package and native evidence below remain the current
+installed checkpoint.
+
 ## Prepared video UI reset, October 15, 2026
 
 Latest app source: `4ba895946aabf322ed03ba7d52debbed6f5611ad` on

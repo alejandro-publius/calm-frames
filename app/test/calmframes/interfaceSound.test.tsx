@@ -1,5 +1,5 @@
 /** Audio calls are mocked here; audible balance and native focus need Vega. */
-import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
+import { useKeplerAppStateManager, useTVEventHandler } from '@amazon-devices/react-native-kepler';
 import { act, fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { AccessibilityInfo, AppState } from 'react-native';
@@ -216,6 +216,7 @@ describe('menu sound lifecycle', () => {
   beforeEach(() => {
     jest.useFakeTimers();
     audio = player();
+    (useTVEventHandler as jest.Mock).mockClear();
     makePlayer = jest.fn(() => audio);
     media.AudioPlayer = makePlayer;
     media.AudioContentType = { CONTENT_TYPE_SONIFICATION: 4 };
@@ -254,6 +255,28 @@ describe('menu sound lifecycle', () => {
     AppState.currentState = originalAppState;
     jest.restoreAllMocks();
     jest.useRealTimers();
+  });
+
+  it('keeps a held remote selection silent after its first cue even beyond the cooldown', async () => {
+    const view = render(<Capture />);
+    await act(flush);
+    const calls = (useTVEventHandler as jest.Mock).mock.calls;
+    const key = calls[calls.length - 1][0];
+    key({ eventType: 'select', eventKeyAction: 0 });
+    feedback.confirm();
+    await act(flush);
+    audio.emit('ended');
+    jest.advanceTimersByTime(1000);
+    key({ eventType: 'select', eventKeyAction: 0 });
+    feedback.confirm();
+    await act(flush);
+    expect(audio.play).toHaveBeenCalledTimes(1);
+    key({ eventType: 'select', eventKeyAction: 1 });
+    key({ eventType: 'select', eventKeyAction: 0 });
+    feedback.confirm();
+    await act(flush);
+    expect(audio.play).toHaveBeenCalledTimes(2);
+    view.unmount();
   });
 
   it('stays silent until accessibility resolves, then uses the SDK sonification notification categories', async () => {
@@ -365,6 +388,15 @@ describe('menu sound lifecycle', () => {
 });
 
 describe('button menu feedback', () => {
+  it('does not sound when focus moves without an activation', () => {
+    const confirm = jest.fn();
+    const view = render(<InterfaceSoundContext.Provider value={{ confirm, stop: jest.fn() }}>
+      <CalmButton label="Library" onPress={jest.fn()} />
+    </InterfaceSoundContext.Provider>);
+    fireEvent(view.getByRole('button'), 'focus');
+    fireEvent(view.getByRole('button'), 'blur');
+    expect(confirm).not.toHaveBeenCalled();
+  });
   it('confirms only after the action and contains feedback failures', () => {
     const order: string[] = [];
     const confirm = jest.fn(() => { order.push('sound'); throw new Error('Silent failure'); });
