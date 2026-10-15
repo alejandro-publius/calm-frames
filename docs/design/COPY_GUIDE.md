@@ -32,7 +32,7 @@ profile rules, the chime, the presets); **the picture stays hidden** is the one
 phrase for a video that may not play; **video** is the word for content; and a
 button says what it opens. Say each fact once per screen.
 
-Keep visible labels short and give screen-reader labels enough context, such as “Watch Harbor.” Show Resume only when saved playback progress exists. Do not invent durations, ratings, progress, availability, plot details, or medical claims.
+Keep visible labels short and give screen-reader labels enough context, such as “Play: Harbor.” Show Resume only when saved playback progress exists. Do not invent durations, ratings, progress, availability, plot details, or medical claims.
 
 ## Descriptions
 
@@ -74,7 +74,11 @@ Read each complete native screen aloud. Remove duplicated labels, unexplained te
 
 Carry this copy direction through onboarding, library, details, playback, PIN, settings, errors, and empty states while preserving the already approved visual design.
 
-## Current direction, Oct 13
+## Historical direction, Oct 13 (superseded)
+
+The paragraph below records the earlier direction. The Oct 14 vocabulary and
+preferred labels above take precedence; "Original story" and "Watch now" are
+not current interface labels.
 
 Write for someone choosing a story, not someone reviewing a build. Use
 "Original story", "Watch now" and specific error messages. Do not add
