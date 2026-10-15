@@ -19,7 +19,7 @@ export function setTraceEnabled(enabled: boolean): void {
   traceEnabled = enabled;
 }
 
-export function trace(kind: 'screen' | 'focus' | 'still', detail?: string): void {
+export function trace(kind: 'screen' | 'focus' | 'still' | 'image', detail?: string): void {
   if (!traceEnabled) {
     return;
   }

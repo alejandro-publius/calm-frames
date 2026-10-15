@@ -15,6 +15,7 @@ import HomeHarborScene from './HomeHarborScene';
 import PictureHoldIntroduction from './PictureHoldIntroduction';
 import { benignStorySettings, isBundledBenignStory } from './benignStory';
 import { buildCoverIntervals } from './coverSchedule';
+import { trace } from './trace';
 import { coverOptionsFor, DEFAULT_SETTINGS } from './household';
 import {
   CALM_CONTROL,
@@ -258,7 +259,7 @@ const KidHomeScreen = ({
                   }
                 }}
                 style={[styles.purpose, focusedId === 'demo' ? styles.posterFocused : null]}>
-                <Image source={require('../../assets/image/tv/coastal-zen.png')} style={styles.demoArt} accessible={false} fadeDuration={0} />
+                <Image source={require('../../assets/image/tv/coastal-zen.png')} style={styles.demoArt} accessible={false} fadeDuration={0} onLoad={() => trace('image', 'demo tile loaded')} onError={() => trace('image', 'demo tile error')} />
                 <View style={styles.demoCopy}>
                   <Text style={[styles.demoTitle, focusedId === 'demo' ? styles.focusedLabel : null]}>Try picture holds</Text>
                   {demoLine ? <Text style={styles.demoMeta} testID={`${testID}-demo-meta`}>{demoLine}</Text> : null}

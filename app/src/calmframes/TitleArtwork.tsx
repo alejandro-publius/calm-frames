@@ -7,6 +7,7 @@ import { concernsPackagedLibrary } from './packagedLibrary';
 import { CatalogTitle, CheckedTitle } from './titleStatus';
 import { COASTAL_COLORS as CALM_COLORS, scale } from './calmStyles';
 import { shelfLabel, shelfPoster } from './shelf';
+import { trace } from './trace';
 
 interface TitlePresentation {
   name: string;
@@ -42,7 +43,7 @@ export default function TitleArtwork({ entry, testID, compact = false, height, i
       : (presentation.art === 'harbor' || presentation.art === 'harbor-cinematic') ? require('../../assets/image/tv/harbor-illustrated.png') : require('../../assets/image/tv/gradient.png')
     : poster ? { uri: poster } : undefined;
   const artworkStyle = [styles.art, { height: scale(height ?? (compact ? 220 : 380)) }, immersive ? { borderRadius: 0 } : null];
-  return source ? <Image testID={testID} source={source} style={artworkStyle} resizeMode={presentation.art ? 'cover' : 'contain'} fadeDuration={0} accessible={false} />
+  return source ? <Image testID={testID} source={source} style={artworkStyle} resizeMode={presentation.art ? 'cover' : 'contain'} fadeDuration={0} accessible={false} onLoad={() => trace('image', `title ${presentation.art ?? 'poster'} loaded`)} onError={() => trace('image', `title ${presentation.art ?? 'poster'} error`)} />
     : <View style={artworkStyle} />;
 }
 const styles = StyleSheet.create({ art: { width: '100%', borderRadius: scale(20), backgroundColor: CALM_COLORS.SURFACE } });

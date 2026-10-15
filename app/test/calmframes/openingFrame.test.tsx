@@ -39,3 +39,52 @@ test('a stalled first frame becomes a recoverable error rather than an endless l
   expect(timeout).toHaveBeenCalledTimes(1);
   view.unmount(); jest.useRealTimers();
 });
+
+test('a silent frame counter readies the opening once the clock moves while playing', () => {
+  jest.useFakeTimers();
+  const timeout = jest.fn();
+  // The virtual device: every quality call fails inside the media stack.
+  const media = { current: { readyState: 2, currentTime: 0.04, paused: false, getVideoPlaybackQuality: () => { throw new Error('MPB call failed'); } } };
+  function Probe() {
+    const ready = useOpeningFrame({ media, enabled: true, verified: true, surfaceReady: true, onTimeout: timeout });
+    return <Text>{ready ? 'picture' : 'opening'}</Text>;
+  }
+  const view = render(<Probe />);
+  expect(view.getByText('opening')).toBeTruthy();
+  act(() => { media.current.currentTime = 0.2; jest.advanceTimersByTime(300); });
+  expect(view.getByText('opening')).toBeTruthy();
+  act(() => { media.current.currentTime = 0.35; jest.advanceTimersByTime(100); });
+  expect(view.getByText('picture')).toBeTruthy();
+  act(() => jest.advanceTimersByTime(15000));
+  expect(timeout).not.toHaveBeenCalled();
+  view.unmount(); jest.useRealTimers();
+});
+
+test('a silent counter with a clock that does not move still reaches the recovery screen', () => {
+  jest.useFakeTimers();
+  const timeout = jest.fn();
+  const media = { current: { readyState: 2, currentTime: 0.04, paused: false, getVideoPlaybackQuality: () => ({ totalVideoFrames: 0, droppedVideoFrames: 0 }) } };
+  function Probe() {
+    const ready = useOpeningFrame({ media, enabled: true, verified: true, surfaceReady: true, onTimeout: timeout });
+    return <Text>{ready ? 'picture' : 'opening'}</Text>;
+  }
+  const view = render(<Probe />);
+  act(() => jest.advanceTimersByTime(15000));
+  expect(view.getByText('opening')).toBeTruthy();
+  expect(timeout).toHaveBeenCalledTimes(1);
+  view.unmount(); jest.useRealTimers();
+});
+
+test('a counter that reports only dropped frames is a real signal and keeps waiting', () => {
+  jest.useFakeTimers();
+  const timeout = jest.fn();
+  const media = { current: { readyState: 2, currentTime: 0.04, paused: false, getVideoPlaybackQuality: () => ({ totalVideoFrames: 6, droppedVideoFrames: 6 }) } };
+  function Probe() {
+    const ready = useOpeningFrame({ media, enabled: true, verified: true, surfaceReady: true, onTimeout: timeout });
+    return <Text>{ready ? 'picture' : 'opening'}</Text>;
+  }
+  const view = render(<Probe />);
+  act(() => { media.current.currentTime = 2; jest.advanceTimersByTime(500); });
+  expect(view.getByText('opening')).toBeTruthy();
+  view.unmount(); jest.useRealTimers();
+});

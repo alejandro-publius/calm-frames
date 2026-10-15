@@ -4,6 +4,7 @@ import LinearGradient from '@amazon-devices/react-linear-gradient';
 import React from 'react';
 import { AccessibilityInfo, Animated, Easing, Image, StyleSheet, View } from 'react-native';
 import { COASTAL_COLORS as CALM_COLORS, scale } from './calmStyles';
+import { trace } from './trace';
 
 export default function HomeHarborScene({ enabled = false, active = true, immersive = false }: { enabled?: boolean; active?: boolean; immersive?: boolean }) {
   const manager = useKeplerAppStateManager();
@@ -43,7 +44,7 @@ export default function HomeHarborScene({ enabled = false, active = true, immers
     return () => { alive = false; stop(); lifecycle?.remove(); reduction?.remove(); reader?.remove(); };
   }, [active, enabled, drift, manager]);
   return <View testID="home-harbor-scene" style={styles.scene} pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
-    <Image source={require('../../assets/image/tv/coastal-zen.png')} style={[styles.art, immersive ? styles.immersiveArt : null]} resizeMode="cover" fadeDuration={0} />
+    <Image source={require('../../assets/image/tv/coastal-zen.png')} style={[styles.art, immersive ? styles.immersiveArt : null]} resizeMode="cover" fadeDuration={0} onLoad={() => trace('image', 'scene loaded')} onError={() => trace('image', 'scene error')} />
     <Animated.View testID="home-water-ripples" style={[styles.ripples, { transform: [{ translateX: drift }, { translateY: drift.interpolate({ inputRange: [scale(-4), scale(4)], outputRange: [scale(-1), scale(1)] }) }] }]}>
       <View style={[styles.ripple, styles.first]} /><View style={[styles.ripple, styles.second]} /><View style={[styles.ripple, styles.third]} />
     </Animated.View>
