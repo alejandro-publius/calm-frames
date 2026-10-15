@@ -1,8 +1,10 @@
 # Acadia integration review, October 15
 
 Update: the owner approved the exact scope below at 21:19 UTC. The restricted
-catalog integration is implemented; see FINAL_HANDOFF.md for build and native
-status. The following offscreen audit describes the pre-approval checkpoint.
+catalog integration is built, installed and running. See [the final native
+receipt](../../results/acadia-native-2026-10-15/receipt.json) and
+[handoff](../../FINAL_HANDOFF.md) for passes, the on-screen transport focus gap
+and visual/audio limits. The following audit is the pre-approval checkpoint.
 
 The candidate was audited without displaying source footage or playing any
 Acadia rendition. It is staged at `build/acadia-audit-staging`, outside app

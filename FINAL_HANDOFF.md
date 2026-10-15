@@ -1,28 +1,77 @@
 # Final handoff: the integration candidate
 
-## Approved Acadia integration source, October 15, 2026
+## Installed approved Acadia integration, October 15, 2026
 
-The owner approved the exact Acadia bundle and public key at 21:19 UTC.
-The app now composes separate Harbor and Acadia catalogs and selects each key
-only after an exact title or route match. Harbor remains the main Home title;
-Acadia is an additional video card. Details shows two distinct detected periods,
-selected cover times and profile-specific analysis settings. The existing
-coastal image is labeled decorative, not a frame from Acadia. The original
-optional selection cue and held-key guard are included. Source checks pass
+App source: `0a542522642cf42d32bacf8dd41aa0f97aca62ff` on private working
+branch `codex/prepared-video-slice-2026-10-15`. The owner approved the exact
+Acadia bundle and public key at 21:19 UTC. Separate Harbor and Acadia catalogs
+select a key only after an exact route match. Harbor stays the featured Home
+title; Acadia is an additional card. Its analysis shows two distinct detected
+periods, separate covered times and the settings from verified maps. The
+coastal artwork is explicitly decorative, not a frame from the video.
+
+Package: `build/release/acadia-integrated-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg`.
+SHA-256: `cad71bade96e135b6b741fec87f3fc5ee02d7d294a3be2ee61fa477169faa9a1`.
+Built once from committed inputs, installed once, and left running at Home
+with How it works focused. No app source changed after this build.
+The [current receipt](results/acadia-native-2026-10-15/receipt.json) binds the
+package, approval, source tests and native evidence. The source gate passed
 131 suites, 1,310 tests and 57 snapshots; typecheck, strict delivery and the
-offline hook consumer pass. Build and native observations are pending here.
-Approval is recorded in results/acadia-native-2026-10-15/approval.json.
+offline hook consumer passed. Lint has zero errors and 101 existing warnings.
 
-## Acadia audit and selection sound, October 15, 2026
+The initial native run reports 12 passing observations and one blocked check.
+It covers Home and Details, Parents cancellation by hardware Back and button
+Back, Harbor to end, both simulated practice holds and Back one level at a
+time. Acadia played to the end using the exact approved source, rendition,
+three maps, report and checked-input digest. Both Extra cautious cover
+intervals were reported. A continuation adds four passing observations:
+remote Fast Forward into each cover interval, Acadia Back navigation and
+How it works return. For seek targets 12,320 and 29,832 ms, logs place the
+cover request before the playhead write. This establishes JavaScript request
+ordering, not compositor paint timing.
+
+**Remaining native gap:** after pausing, the driver could not reach the
+on-screen Forward button. It saw underlying Details focus IDs instead.
+Remote Fast Forward worked, but does not validate that on-screen control.
+The original blocked result remains in the receipt. This needs a focused
+follow-up before claiming all transport controls work.
+
+No capture was used. Collected logs contain zero touch-injection events.
+Logs establish emitted events and requested focus, not rendered appearance,
+actual focus rings, audio, captions or VoiceView. The offline catalog label
+"cover proven drawn" is preparation evidence, not a native pixel observation.
+Only the existing Extra cautious preset was exercised natively. Independent
+detector validation, physical TV acceptance and the replay seam remain open.
+
+### Minimum owner steps
+
+1. In the running app, open the additional Acadia card, read its analysis,
+   then select Play. Review text size, hierarchy and visible focus. Only the
+   prepared rendition is available; do not open the original hazardous source.
+2. If desired, use your existing Parents PIN to enable Selection sounds and
+   listen for the quiet cue. The agent did not enter a PIN, change the saved
+   preference or volume, or claim audible verification. The original local
+   cue is retained and held Select/Enter repeats are suppressed.
+3. Report any visible, audio, caption or VoiceView issue. The known on-screen
+   Forward focus gap is engineering follow-up, not something the owner must
+   diagnose. No further trust approval is needed for this exact bundle.
+
+Claude's separate detector test/specification lane remains separate. No
+production detector or prepared artifact was regenerated. The original
+Claude checkouts, SDK app symlink, Harbor media, key and practice demo remain
+unchanged. Earlier checkpoints below are historical, not current installed
+state. The older browser comparison is retained for design learning; it is
+not a preview of this prepared-video UI.
+
+## Historical Acadia audit before approval, October 15, 2026
 
 [Integration review](docs/evidence/acadia-integration-2026-10-15.md) records
 Claude's imported artifacts, corrected reporting, offscreen frame checks and
-the exact public-key approval still required. Acadia remains staged outside
-app assets and is not playable in the installed app. Harbor trust is unchanged.
+the exact public-key approval that was required at that checkpoint. Acadia was
+staged outside app assets and not yet playable. Harbor trust was unchanged.
 A small held-key guard was added to the existing optional selection cue; the
-saved sound setting remains unchanged. These source changes have not been
-built or installed. The package and native evidence below remain the current
-installed checkpoint.
+saved sound setting remains unchanged. At that checkpoint these changes had not been
+built or installed. The top section records the later approved integration.
 
 ## Prepared video UI reset, October 15, 2026
 

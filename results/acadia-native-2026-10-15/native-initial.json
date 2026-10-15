@@ -1,0 +1,67 @@
+[
+  {
+    "journey": "Launch to Home analysis",
+    "verdict": "observed-pass",
+    "evidence": "screen=home focus=kid-mode-home-more-info"
+  },
+  {
+    "journey": "Details and return focus",
+    "verdict": "observed-pass",
+    "evidence": "details=kid-mode-details-play next=kid-mode-details-practice return=kid-mode-home-more-info"
+  },
+  {
+    "journey": "Analysis record navigation",
+    "verdict": "observed-pass",
+    "evidence": "control=kid-mode-details-show-info return=kid-mode-home-more-info; focus only, no pixel inspection"
+  },
+  {
+    "journey": "Parents remote Back after Details",
+    "verdict": "observed-pass",
+    "evidence": "gate=kid-mode-parent-key-1 return=kid-mode-home-parent-area"
+  },
+  {
+    "journey": "Parents Back button after Details",
+    "verdict": "observed-pass",
+    "evidence": "return=kid-mode-home-parent-area"
+  },
+  {
+    "journey": "Harbor to end, zero interval holds",
+    "verdict": "observed-pass",
+    "evidence": "playing=True ended=True covers=[] recovery=False return=kid-mode-home-watch"
+  },
+  {
+    "journey": "Prepared playback lineage",
+    "verdict": "observed-pass",
+    "evidence": "{\"bundleId\": \"51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101\", \"checkedInputsSha256\": \"ab301e661033b619e3c25a129fbb85160c9739b5114b92c50a95fa7a1b0fda86\", \"maps\": [{\"preset\": \"wcag\", \"sha256\": \"554b61ecd48618fe091b55c6fac58d4f4894b7bbd220389ebecbd9f4386399be\"}, {\"preset\": \"broadcast\", \"sha256\": \"b8f642d9db63956343e7e7cc72ee8c6523a87a3fa52846977bd389ba36ef3d74\"}, {\"preset\": \"extra-cautious\", \"sha256\": \"8eb4bcb779d6586d9d5ef034aa87459e61362b3718dcff6860781d416e700e50\"}], \"outcome\": \"no flagged segments\", \"preset\": \"extra-cautious\", \"renditionPath\": \"file:///pkg/assets/raw/prepared-library/51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101/titles/de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e/extra-cautious.mp4\", \"renditionSha256\": \"0b36cee91d224a3accc74d9776beb30f0ec8979505d4104eb43d8c1961c78d78\", \"renditionStartOffsetMs\": 0, \"reportSha256\": \"18802e65a69233e259eeb2bc68056b22fdd8cbd3b5fdec04576a4464bf19d5f9\", \"sourceSha256\": \"de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e\"}"
+  },
+  {
+    "journey": "Practice holds and Back one level at a time",
+    "verdict": "observed-pass",
+    "evidence": "demo=kid-mode-details-play playing=True second=True covers=['cover-on media=5021 interval 5000-9000', 'cover-on media=12019 interval 12000-16000'] still_count=4 Back=('kid-mode-details-play', 'kid-mode-details-practice', 'kid-mode-home-more-info')"
+  },
+  {
+    "journey": "Acadia card to analysis",
+    "verdict": "observed-pass",
+    "evidence": "focus=kid-mode-details-play; UI contents covered by source tests, not pixels"
+  },
+  {
+    "journey": "Acadia exact playback lineage",
+    "verdict": "observed-pass",
+    "evidence": "{\"bundleId\": \"4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13\", \"checkedInputsSha256\": \"cd7f95048dfb9b7907600c0bb559e4a0197536886d77dce63fb07be0bb18139f\", \"maps\": [{\"preset\": \"wcag\", \"sha256\": \"709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a\"}, {\"preset\": \"broadcast\", \"sha256\": \"d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1\"}, {\"preset\": \"extra-cautious\", \"sha256\": \"c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f\"}], \"outcome\": \"cover proven drawn\", \"preset\": \"extra-cautious\", \"renditionPath\": \"file:///pkg/assets/raw/prepared-library/4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4\", \"renditionSha256\": \"00a214650090bdabc2a9e4639d68a999aacd762be61055cd9b6fedf7e9175f59\", \"renditionStartOffsetMs\": 0, \"reportSha256\": \"0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019\", \"sourceSha256\": \"2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28\"}"
+  },
+  {
+    "journey": "Acadia complete prepared playback and both cover intervals",
+    "verdict": "observed-pass",
+    "evidence": "playing=True ended=True covers=['cover-on media=7360 interval 7343-12699', 'cover-on media=28155 interval 28113-31593']"
+  },
+  {
+    "journey": "Acadia playback Back",
+    "verdict": "observed-pass",
+    "evidence": "focus=kid-mode-details-play"
+  },
+  {
+    "journey": "Session stopped",
+    "verdict": "blocked",
+    "evidence": "Forward control not established"
+  }
+]

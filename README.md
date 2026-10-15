@@ -1,9 +1,11 @@
 # Calm Frames
 
-Current prepared-video UI checkpoint: see [FINAL_HANDOFF.md](FINAL_HANDOFF.md).
-The screenshots and dated design descriptions below precede that reset.
-The current bundled Harbor has zero detector findings; its separate demo uses
-explicitly simulated events. New real-footage preparation is pending.
+Current prepared-video checkpoint: see [FINAL_HANDOFF.md](FINAL_HANDOFF.md).
+The screenshots below precede this reset. Harbor retains zero detector findings
+and its separate demo uses simulated events. Acadia coastal scenery now has a
+separate, owner-approved compiled catalog with two merged detected periods.
+Its prepared files and reports are hash-bound; independent detector validation
+remains pending. The app uses pre-analysis, not live interception.
 
 **A calmer way to watch**
 
@@ -37,7 +39,7 @@ Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
 
 The ivory and teal coast: a seated figure on a rock, a lighthouse island and a boat behind everything on Home, with text sized for a couch and a visible ring on whatever the remote has focused. Playback keeps dark controls over the video.
 
-- **Home is one heading and two actions.** "Calm Frames" over the coast, a Play button with a triangle and a quiet Details action; How it works and Parents sit in the header, so the screen says who it is for without a paragraph. Details carries the facts: "Harbor" with "20 sec · No flashing found", one line saying it was checked frame by frame, the picture timeline, and the quiet Try picture holds entry beside Play, which opens the practice version, "20 sec · 2 practice holds".
+- **Choose a video, then view its analysis.** Home names Harbor and initially focuses View analysis; Play remains beside it. Acadia coastal scenery is an additional card. Details separates detected periods, the selected version's cover times and its file record. Try the demo opens Harbor's explicitly simulated picture pauses. How it works and Parents stay in the header.
 - **A short setup, once.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
 - **A library of checked titles only.** A title plays only after its flash map is verified; one that has not verified shows Needs check and stays hidden.
 - **A card before anything is hidden.** A countdown with Skip in focus a few seconds ahead, and an optional chime.

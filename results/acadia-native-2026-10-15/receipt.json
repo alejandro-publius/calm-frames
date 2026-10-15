@@ -1,0 +1,95 @@
+{
+  "branch": "codex/prepared-video-slice-2026-10-15",
+  "appSourceCommit": "0a542522642cf42d32bacf8dd41aa0f97aca62ff",
+  "status": "installed-and-running-with-on-screen-transport-focus-gap",
+  "package": {
+    "path": "build/release/acadia-integrated-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "sha256": "cad71bade96e135b6b741fec87f3fc5ee02d7d294a3be2ee61fa477169faa9a1",
+    "target": "aarch64 Debug",
+    "appInputsCommitted": true,
+    "appSourceFiles": 747,
+    "buildsThisIntegration": 1,
+    "installationsThisIntegration": 1
+  },
+  "tests": {
+    "appSuitesPassed": 131,
+    "appTestsPassed": 1310,
+    "appTestsSkipped": 4,
+    "snapshotsPassed": 57,
+    "captureSuitesExcluded": 3,
+    "focusedAppTests": 87,
+    "pythonReleaseAndAttributionTests": 21,
+    "hookPackageTests": 10,
+    "offlineHookConsumer": "passed",
+    "typecheck": "passed",
+    "lintErrors": 0,
+    "lintWarnings": 101,
+    "strictDelivery": "passed, 4 bundles and 4 required reports; primary catalog reports 1 title, composed app has 2"
+  },
+  "native": {
+    "initialPasses": 12,
+    "continuationPasses": 4,
+    "preservedBlock": "On-screen Forward focus was not established after pause; underlying Details focus IDs appeared. Remote Fast Forward checks do not clear this gap.",
+    "preset": "extra-cautious, existing saved value",
+    "lineageChecks": {
+      "bundle": true,
+      "source": true,
+      "rendition": true,
+      "report": true,
+      "checkedInputs": true,
+      "maps": true
+    },
+    "fullAcadiaPlayback": "playing and ended events, both planned cover intervals reported",
+    "seekTargetsMs": [
+      12320,
+      29832
+    ],
+    "seekEvidence": "cover-request logged before playhead-write for both targets; not paint ordering proof",
+    "finalFocus": "kid-mode-home-learn",
+    "appRunningReadOnlyCheck": "confirmed after continuation",
+    "touchEventsInCollectedLog": 0,
+    "deviceClock": "Device log clock differs from host. native-progress.txt uses host UTC; do not equate device timestamps to UTC."
+  },
+  "preserved": {
+    "originalClaudeCheckouts": true,
+    "sdkOriginalAppSymlink": true,
+    "harborCatalogAndDemo": true,
+    "soundAssetAndSavedPreference": true,
+    "pinAndHouseholdSettings": true
+  },
+  "limits": [
+    "No screenshots, screen recording, video capture or computer-use inspection.",
+    "Native logs prove emitted events and requested focus, not visible focus, pixels, compositor timing, sound, captions or VoiceView.",
+    "The optional selection sound remains off by default; no audible acceptance or volume changes.",
+    "Only Extra cautious Acadia was exercised natively; other presets have offline checks.",
+    "On-screen transport focus remains a functional validation gap.",
+    "No independent detector validation, physical TV acceptance or loop seam validation.",
+    "No original hazardous footage displayed; no private key handling; no public publication, main merge, release tag or AWS change."
+  ],
+  "evidence": {
+    "preparation.json": "0ee405609f012321a733ee54704689735a52186868789e334bd85e647d3eb487",
+    "native-continuation.json": "bb9c18059f61b913e210e0562d1ec2c505a90313981e69ddda9e3fa8a8c4a72b",
+    "native-lineage-check.json": "1b0d555df42ab7335ab5beccce6eaaec5585ae2d81a8ee69045a67344918e095",
+    "node-strict-check.json": "af9b0a23f011b7a144ec5e44c61d1672b89242afb68885d9a345939eefa7e256",
+    "approval.json": "caa99d92af37426c599e4b6dc6d045c1c0eca43f9e49153168cc667166af9024",
+    "native-initial.json": "a5198470ee18abcb3b508703d2e684bfbc6e5a9e4c2b91d7ecbd600e452fb313",
+    "python-strict-check.json": "5784b81c95841af970bcf540905dde40bb3240e8ce0f02ede99053a6909fba27",
+    "native-events.log": "93f669b8a795c4afebd77d31365f2b44741b33f94ea87bc9c771563fa2f39d18",
+    "lineage.json": "5e1da5e7009c7c40676b37ec1d137d8fe65aba2f7a65cd8fdb5884ab8caa7d91",
+    "native-progress.txt": "c7215927a7051908ecd94856e47013921805dedc296841b2d9a0b167ef3a023c"
+  },
+  "localLogHashes": {
+    ".logs/acadia-native/focused-app.log": "611c69bb4fec20ecbeef6f20abfcf2ff445feeb14c07776913b5fc066f37f8f0",
+    ".logs/acadia-native/lint.log": "f23a005c5320c36aa7918cb66dfd4ffb779f332684d18debadd3b21886a06010",
+    ".logs/acadia-native/app-tests.log": "dadc7a38924dfc0950a210d382c68fc90b41359e3cc2d52fe5601d5d22de8633",
+    ".logs/acadia-native/typecheck.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+    ".logs/acadia-native/native-run.log": "3cb29ca9b6b285b4df2bcdb1588293aad5605a6f120fd70f73ee48777384f2fb",
+    ".logs/acadia-native/python-tests.log": "81d9ce5ff715bd3bdc199893cdacd7e9ca924e7007bccce3b0dc21f20b341736",
+    ".logs/acadia-native/hook-tests.log": "48b12c8d3081622c911c48ecfb906fc5ddd9ad645c2cedb29664972ab459256f",
+    ".logs/acadia-native/continuation.log": "9c76c71c667713a04694d81ff384ba9aa168881250bd58c407259637594654a4",
+    ".logs/acadia-native/input-help.log": "ae92e000cd40d2e7edd5e18f49a56cc84e93424e59506999a1e40f3d4f9f538d",
+    ".logs/acadia-native/hook-consumer.log": "706ae73084b323d493d354f04cd4b1933d49fd9749ab80853d259bc56f05cb3b",
+    ".logs/acadia-native/build.log": "8def7ddf1bae8bbf4756c3f365dd64ee11f5256b9b2d7ab8bfa1eb1f548b0546",
+    ".logs/acadia-native/hook-sync.log": "c8db2a3f042e6bcc5ac7299a6c25eab5c8501717ca30660820a5e52ec4d6da30"
+  }
+}

@@ -1,5 +1,18 @@
 # Status
 
+Current installed app: approved Acadia integration from `0a54252` on private
+`codex/prepared-video-slice-2026-10-15`. See the
+[current receipt](../results/acadia-native-2026-10-15/receipt.json) and
+[handoff](../FINAL_HANDOFF.md). Exact catalog trust is scoped to the approved
+bundle. Harbor remains featured; Acadia adds real detected periods and
+prepared playback. One build and installation completed; the app remains
+running. Source tests pass. Native logs establish playback identity, both
+cover intervals, remote seeks and core Back routes. On-screen Forward focus
+was not established and remains open. Visual/audio acceptance, physical TV
+and independent detector validation remain pending. No capture or publication.
+
+Historical checkpoints follow.
+
 Latest prepared-video UI slice: source `4ba8959` on
 `codex/prepared-video-slice-2026-10-15`. See the
 [current receipt](../results/prepared-video-ui-2026-10-15/receipt.json).

@@ -1,5 +1,11 @@
 # Claude Code handoff: prepared video evidence slice
 
+Completed historical brief: Claude delivered ec323fc; Codex audited and
+integrated only the approved Acadia catalog on app source 0a54252. Read
+FINAL_HANDOFF.md for the current build/native result. Do not rerun acquisition,
+preparation or key generation from this old brief. The separate follow-up lane
+is bounded detector tests and specification review, as assigned by the owner.
+
 ## Objective and boundaries
 
 Deliver one honest end-to-end path: choose a prepared video, understand its actual
