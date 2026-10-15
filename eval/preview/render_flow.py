@@ -1,8 +1,12 @@
 """Review real React Native host trees. Media, captions and seekbar are labelled substitutes."""
-import argparse, json
+import argparse
+import json
 from pathlib import Path
+
 from playwright.sync_api import sync_playwright
+
 import render_harbor as host
+
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser();parser.add_argument('--browser',required=True);parser.add_argument('--output',default='results/whole-flow-2026-10-14');parser.add_argument('--height',type=int,default=1080,choices=(1080,720));args=parser.parse_args()
 HEIGHT=args.height;WIDTH=HEIGHT*16//9

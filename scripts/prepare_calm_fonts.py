@@ -1,8 +1,11 @@
 """Create static, uniquely named Vega faces from the pinned OFL inputs in .logs/font-inputs."""
+import hashlib
+import json
 from pathlib import Path
-import hashlib, json
+
 from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont
+
 ROOT=Path(__file__).resolve().parents[1]
 INPUT=ROOT/'.logs/font-inputs'; OUTPUT=ROOT/'app/assets/fonts'
 items=[('Fraunces.ttf','CalmDisplaySemibold',{'wght':600,'opsz':32,'SOFT':20,'WONK':0}),('SourceSans3-Regular.ttf','CalmSansRegular',None),('SourceSans3-Semibold.ttf','CalmSansSemibold',None)]

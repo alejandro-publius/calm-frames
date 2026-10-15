@@ -35,7 +35,13 @@ _EVAL_DIR = Path(__file__).resolve().parents[1]
 if str(_EVAL_DIR) not in sys.path:
     sys.path.insert(0, str(_EVAL_DIR))
 
-from metrics import bootstrap_groups, confusion, f1, rate_with_interval, windows_from_intervals  # noqa: E402
+from metrics import (  # noqa: E402
+    bootstrap_groups,
+    confusion,
+    f1,
+    rate_with_interval,
+    windows_from_intervals,
+)
 
 REPO = _EVAL_DIR.parent
 LABELING = _EVAL_DIR / "labeling"

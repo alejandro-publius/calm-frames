@@ -92,14 +92,14 @@ __all__ = [
 # file and fails if these drift from it.
 # ---------------------------------------------------------------------------
 
-BACKGROUND = "#102F3A"  # teal ground, every Calm Frames screen sits on it
-SURFACE = "#1A414B"  # a card on the ground
-BORDER = "#66A0B4"
-FOCUS_RING = "#E6A957"  # saffron: rings and edges only, never a label
-ACCENT_DARK = "#B87A2C"  # dark saffron: edges only, carries nothing
-TEXT = "#F3E8D3"  # cream on teal
-TEXT_DIM = "#BDD0CF"
-INK = "#17323C"  # text on a light surface
+BACKGROUND = "#151C26"  # the playback palette's ink ground, which the player keeps
+SURFACE = "#303B48"  # a card on the ground
+BORDER = "#697585"
+FOCUS_RING = "#E6B963"  # gold: rings and edges only, never a label
+ACCENT_DARK = "#8E5648"  # dark coral: edges only, carries nothing
+TEXT = "#F4ECDD"  # ivory on ink
+TEXT_DIM = "#BDC2C9"
+INK = "#151C26"  # text on a light surface
 COVER = "#000000"  # the cover itself, and the lane's own track
 
 # ---------------------------------------------------------------------------

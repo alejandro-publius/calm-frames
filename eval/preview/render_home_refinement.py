@@ -1,7 +1,10 @@
 """Targeted home capture and text/background samples; browser evidence, not Vega."""
-import argparse, json
+import argparse
+import json
 from pathlib import Path
+
 from playwright.sync_api import sync_playwright
+
 import render_harbor as host
 
 ROOT = Path(__file__).resolve().parents[2]

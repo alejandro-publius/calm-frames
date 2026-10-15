@@ -1,8 +1,13 @@
 """Matched palette-only static component renders, not native evidence."""
+import hashlib
+import json
+import shutil
 from pathlib import Path
-import json, shutil, hashlib
+
 from playwright.sync_api import sync_playwright
+
 import render_harbor as host
+
 ROOT=Path(__file__).resolve().parents[2]; host.ROOT=ROOT
 OUT=ROOT/'results/dusk-coast-palette-study-2026-10-14'; OUT.mkdir(parents=True,exist_ok=True)
 BEFORE=ROOT/'results/control-depth-integration-2026-10-14/1080'

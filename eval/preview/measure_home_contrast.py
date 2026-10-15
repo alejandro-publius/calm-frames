@@ -1,6 +1,7 @@
 """Measure every background pixel behind the home parental-control label (Pillow)."""
 import json
 from pathlib import Path
+
 from PIL import Image
 
 OUT = Path(__file__).resolve().parents[2] / 'results/whole-flow-2026-10-14/checks'

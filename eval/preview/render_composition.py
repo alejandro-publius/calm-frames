@@ -1,8 +1,12 @@
 """Bounded Home/Details browser study, paired with the accepted component captures."""
-import json, subprocess
+import json
+import subprocess
 from pathlib import Path
+
 from playwright.sync_api import sync_playwright
+
 import render_harbor as host
+
 ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'results/immersive-composition-2026-10-14'
 fonts=''.join(f'@font-face{{font-family:{n};src:url({host.data(ROOT/"app/assets/fonts"/(n+".ttf"))})}}' for n in ('CalmSansRegular','CalmSansSemibold','CalmDisplaySemibold'))

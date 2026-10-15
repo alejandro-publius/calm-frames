@@ -39,6 +39,11 @@ extend-immutable-calls = [
 ]
 
 [lint.per-file-ignores]
+# The design study renderers and the font preparation script are written as dense
+# one-line statements. The judge-path check of Oct 14 found CI's lint refusing them;
+# the rest of the rules still apply to them.
+"eval/preview/*.py" = ["E701", "E702"]
+"scripts/prepare_calm_fonts.py" = ["E701", "E702"]
 # The measured detector and scorer. results/conformance_current_full_2026-10-02.json
 # records the SHA-256 of every one of these files as the source tree the 3,000
 # clip run measured, and every one still matches, so the published conformance
@@ -52,7 +57,8 @@ extend-immutable-calls = [
 "flashmap/src/flashmap/cli.py" = ["B904"]
 "flashmap/src/flashmap/signing.py" = ["I001"]
 "eval/conformance/recheck.py" = ["E402", "I001"]
-"eval/conformance/report.py" = ["B007", "F401"]
+"eval/conformance/report.py" = ["B007", "F401", "I001"]
+"eval/conformance/generate_analyze.py" = ["I001"]
 "eval/conformance_current_report.py" = ["I001"]
 # The app lane's asset generators. results/redesign_validation_2026-10-10.json
 # and results/interface_finish_2026-10-10_pacific.json record their bytes as the

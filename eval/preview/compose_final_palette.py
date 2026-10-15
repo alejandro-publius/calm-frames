@@ -1,8 +1,11 @@
 """Matched previous/current static component captures; media remains a substitute."""
-from pathlib import Path
 import json
+from pathlib import Path
+
 from playwright.sync_api import sync_playwright
+
 import render_harbor as host
+
 ROOT=Path(__file__).resolve().parents[2];host.ROOT=ROOT
 BASE=ROOT/'results/control-depth-integration-2026-10-14/1080'
 CURRENT=ROOT/'results/dusk-coast-integration-2026-10-14/1080'

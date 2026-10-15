@@ -1,6 +1,7 @@
 """Export 1080p and 720p host trees using in-memory fixtures; no native app access."""
-from pathlib import Path
 import subprocess
+from pathlib import Path
+
 ROOT=Path(__file__).resolve().parents[2]
 FIXTURES=[('home','Home'),('harbor','Details'),('parent','Parent'),('playback','Playback'),('unavailable','Unavailable'),('utility','Utility')]
 created=[]
