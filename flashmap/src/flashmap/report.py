@@ -150,6 +150,10 @@ MAX_BLOCKS_PER_LANE = 5
 # The maximum step is 5.59 cd/m2, leaving 14.41 cd/m2 below the unchanged
 # 20 cd/m2 difference. The half-threshold margin, block cap and scanner
 # tests remain unchanged; the explicit palette pin records the new measurement.
+# On Oct 14, 2026 the page followed the app's playback palette: the general
+# lane is now #303B48 at 5.63 cd/m2 and the red lane #151C26 at 0.93 cd/m2,
+# so the widest step in a lane is 5.63 cd/m2 against the same 20 cd/m2 bar
+# difference, and the pin test records those figures.
 LANE_GROUND = COVER
 LANE_GENERAL = SURFACE
 LANE_RED = BACKGROUND

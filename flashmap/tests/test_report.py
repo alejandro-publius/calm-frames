@@ -466,12 +466,12 @@ class TestNoStepInALaneCanBeABar:
         colours in flashmap/src/flashmap/report.py.
         """
         assert report_module.LANE_GROUND == "#000000"
-        assert report_module.LANE_GENERAL == "#1A414B"
-        assert report_module.LANE_RED == "#102F3A"
+        assert report_module.LANE_GENERAL == "#303B48"
+        assert report_module.LANE_RED == "#151C26"
         assert round(lane_nits(report_module.LANE_GROUND), 2) == 0.00
-        assert round(lane_nits(report_module.LANE_GENERAL), 2) == 5.59
-        assert round(lane_nits(report_module.LANE_RED), 2) == 2.52
-        assert round(widest_lane_step_nits(), 2) == 5.59
+        assert round(lane_nits(report_module.LANE_GENERAL), 2) == 5.63
+        assert round(lane_nits(report_module.LANE_RED), 2) == 0.93
+        assert round(widest_lane_step_nits(), 2) == 5.63
         assert bar_difference_nits() == 20.0
 
     def test_the_rules_own_scanner_finds_no_bar_in_a_drawn_lane(self):
