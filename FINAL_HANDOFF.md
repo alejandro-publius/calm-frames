@@ -1,5 +1,55 @@
 # Final handoff: the integration candidate
 
+## Mac implementation, October 15, 2026
+
+This is the newest checkpoint. Working branch: `codex/home-comparison-2026-10-15`.
+Implemented app source: `69df28c8215920ae5a1cc8e82a3124d4a68d65b3`, based on
+`b6b134c` and retaining the `0e434dc` Parents return-focus fix. The owner delegated
+the final layout decision and immediate implementation after the comparison was
+prepared. A, the left reading area, was chosen because its heading and Play form
+a short, clear scan. Home, Details, How it works and the locked Parents gate now
+share that reading treatment; routes and playback behavior are unchanged.
+
+Both compositions remain runnable at
+<http://127.0.0.1:4186/docs/design/home-comparison/> or by opening
+[the local HTML](docs/design/home-comparison/index.html). Start in grayscale,
+then switch to the approved colors. The study uses the same coastal image,
+Fraunces and Source Sans 3. B remains a browser proposal. The prior native
+design is preserved at `b6b134c`; no reset of an existing checkout was used.
+
+The final package is
+`build/release/home-reading-a-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg`
+in `/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-review`.
+SHA-256: `a09eff79ad8466a1ae8d5da81383458b0bf70a6a176b84e98e6faa820500922a`.
+Its [preparation receipt](results/home-review-2026-10-15/selected-preparation.json)
+binds 736 inputs to the committed source. It is build evidence, not runtime evidence.
+The [Mac review receipt](results/home-review-2026-10-15/receipt.json) is the source
+of truth for the separate native observations and remaining checks.
+
+The app gate passed 130 suites, 1,292 tests and 57 snapshots. Four pre-existing
+tests remain skipped; the three capture/export suites were excluded. Typecheck
+passed and lint reported zero errors with four existing warnings, on Node 22.23.2.
+Browser DOM checks passed both route simulations, local fonts, color switching
+and large-view frame bounds without screenshots. Native logs can establish
+reported focus IDs, route transitions, media events and still-load callbacks.
+They cannot establish pixels, readable focus rings, sound continuity, caption
+appearance, VoiceView or the PIN-protected settings interior.
+
+Minimum owner steps: inspect the final app by sight and sound, check captions
+and visible focus, and enter the existing PIN personally to inspect settings.
+No further layout choice blocks implementation. Before distribution, resolve
+the sample-license notice scope and artwork permissions; notices were kept.
+Recording, reviewer access, public contribution, submission and release selection
+remain separate owner actions. No capture, main merge, release tag, AWS deployment,
+cost or credential change was performed. Private working-branch delivery is authorized.
+
+The official Open Source mini-challenge rule allows a public fork or branch
+contribution without opening or merging a PR. Private patch files alone do not
+qualify. The packet now reflects that distinction; nothing was published upstream.
+
+The sections below are dated history and do not replace this checkpoint.
+
+
 ## Cloud continuation, October 15, 2026
 
 Current private working branch: `codex/cloud-finish-2026-10-15`.
@@ -351,8 +401,9 @@ hash. Do not reset household data.
    unresolved; clarification unsent), the CC0 confirmation for the generated
    Harbor artwork, and the position on the generated coastal artwork, which the
    ledger records without any ownership claim.
-6. Optional: the Open Source entry needs the prepared upstream pull request
-   opened from a fork under your account (`docs/upstream-pr/`, steps in
+6. Optional: the Open Source entry needs a public qualifying contribution URL,
+   such as the prepared change in a public fork or branch under your account;
+   opening or merging a PR is not required (`docs/upstream-pr/`, steps in
    `docs/OPEN_SOURCE_PR.md`); the private repository on its own does not
    establish it. The AWS Builder entry is possible with the deployed stack
    (`docs/SUBMISSION.md` section 10.2). The cost allocation tag was recorded

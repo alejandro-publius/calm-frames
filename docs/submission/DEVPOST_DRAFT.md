@@ -205,9 +205,10 @@ Parameter Store.
 
 Primary track: Fire TV (family entertainment, multi-modal UX). The mini
 challenges are optional and do not block this submission: [Open Source: needs
-the upstream pull request opened from a fork under Alex's account; the two
-patches and their tests are ready in `docs/upstream-pr/`, and the private
-repository alone does not establish the entry] and [AWS Builder: the CDK stack
+a public contribution URL, such as the prepared fix published in a public fork
+or branch under Alex's account; a PR is optional and need not be merged. Two
+production patches and a third test patch are ready in `docs/upstream-pr/`; private
+patch files alone do not establish the entry] and [AWS Builder: the CDK stack
 is deployed and described in `docs/SUBMISSION.md` section 10.2; Alex decides
 whether to enter].
 

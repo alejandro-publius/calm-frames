@@ -1,17 +1,30 @@
 # Open decisions and blockers
 
-Reconciled Oct 15, 2026 against candidate head `a3368a9e` on
-`claude/final-candidate-2026-10-14`, package 5 source `4016e8d`
-([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)). It is a candidate, not the
-final judged release. Mandatory items come
-first; the mini challenges are optional and do not block the submission. Where
-evidence does not exist, the row says so instead of inventing it.
+Updated October 15, 2026. Latest implemented source: `69df28c8215920ae5a1cc8e82a3124d4a68d65b3`.
+Current package: `home-reading-a-2026-10-15`; native evidence is linked below.
+
+The incoming source was `0e434dc7c89b7fb2dc19a9ca5d4593e5effa6c19`, integrated at
+`b6b134c2402bd51e1048178e7e117744ff4ad4f3`. The isolated Mac review branch is
+`codex/home-comparison-2026-10-15`. The latest rebuild and native status are in
+[the Mac review receipt](../../results/home-review-2026-10-15/receipt.json).
+Source tests, package preparation and native runtime are separate evidence.
+Package 5 (`4016e8d`) is historical: it lacks the Parents cancellation focus fix.
+The two [Home proposals](../design/home-comparison/index.html) are browser studies;
+the owner subsequently delegated implementation, and A is selected. Its exact source,
+build and native acceptance status are recorded in the Mac receipt above. B is retained
+for comparison and has no native implementation.
+
+The mini challenges remain optional.
 
 ## Mandatory before submission
 
+Before distribution, Alex must resolve the Amazon sample notice scope and artwork
+permissions/dedication decisions. Keep all existing notices; this review changes none
+and contacts no third parties.
+
 ### 1. Final release selection: pending
 
-The final candidate's package 5, from `4016e8d`, carries the approved
+The historical package 5, from `4016e8d`, carries the approved
 coastal interface, the ledger and credits for its artwork, the hook mirror,
 the fixes that hold the coastal menus to the ten foot floors, three Back
 fixes, bundled copies of the practice stills and the opening readiness
@@ -37,14 +50,14 @@ since Sep 20.
 use, after the native validation below. A merge to `main` and an immutable tag
 are release choices, not stated hackathon requirements.
 
-### 2. Final visual approval: done on Oct 14
+### 2. Composition A selected and implemented under delegated approval
 
 Alex approved the ivory coast design with the dimensional coastal artwork; it
 is applied in `b22d275` and held to the repository's floors in `93cf800`. What
 remains is seeing it on the device (item 3). The artwork's ledger row records
 its generation provenance without any ownership or dedication claim.
 
-### 3. Native validation: pending the owner's eyes and ears
+### 3. Latest native acceptance: use the Mac review receipt; eyes and ears pending
 
 Package 5 from `4016e8d` was installed over the existing household and
 driven on the Vega Virtual Device. Its breadcrumbs and media events reported
@@ -63,7 +76,7 @@ The latest candidate's pixels and audio remain unobserved. The parent settings
 interior needs the existing household PIN, and VoiceView and the caption menu's
 contents are untested. Back from the PIN gate reported Home with Details
 focused. Source `0e434dc7` now fixes this with button and remote regressions;
-it is not in package 5 and still needs a rebuilt native acceptance check. The checklist is
+it is not in package 5. See the current Mac review receipt above for rebuild and runtime results. The checklist is
 [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 4. Design approval is done;
 native visual and audio acceptance is still pending.
 
@@ -140,12 +153,14 @@ is not defined on the rules page.
 contribution. Without a URL the mini challenge is simply not entered. The
 local contract checks now pass, but this cloud session's duplicate recheck
 returned `Forbidden` and must be completed before publication. The
-shortest path is the prepared pull request: fork `AmazonAppDev/vega-video-sample`
+prepared path can end at a public fork or branch: fork `AmazonAppDev/vega-video-sample`
 under Alex's account, apply the two patches in `docs/upstream-pr/` with their
 author line set to Alex's public identity, apply the third test patch and run all eight focused tests
-as [../upstream-pr/README.md](../upstream-pr/README.md) describes, push the branch and
-open the pull request; the contribution URL is the pull request. Opening it is
-public and is Alex's action.
+as [../upstream-pr/README.md](../upstream-pr/README.md) describes, publish the contribution branch in the public fork after owner approval. A PR is optional;
+it need not be opened or merged. Record the public fork/branch contribution URL,
+project repository URL, GitHub username and description. Private patch files alone
+do not qualify. Publication remains Alex's decision. This follows the
+[official Open Source rule](https://amazonappdev2026.devpost.com/rules), checked October 15.
 
 ### 9. AWS Builder: enter or not, and the inactive cost tag
 

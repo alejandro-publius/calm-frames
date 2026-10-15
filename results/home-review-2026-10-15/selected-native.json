@@ -1,0 +1,42 @@
+[
+  {
+    "journey": "Launch to Home",
+    "verdict": "observed-pass",
+    "evidence": "screen=home focus=kid-mode-home-watch"
+  },
+  {
+    "journey": "Details and return focus",
+    "verdict": "observed-pass",
+    "evidence": "details=kid-mode-details-play next=kid-mode-details-practice return=kid-mode-home-more-info"
+  },
+  {
+    "journey": "Parents remote Back after Details",
+    "verdict": "observed-pass",
+    "evidence": "gate=kid-mode-parent-key-1 return=kid-mode-home-parent-area"
+  },
+  {
+    "journey": "Parents Back button after Details",
+    "verdict": "observed-pass",
+    "evidence": "return=kid-mode-home-parent-area"
+  },
+  {
+    "journey": "Harbor to end, zero interval holds",
+    "verdict": "observed-pass",
+    "evidence": "playing=True ended=True covers=[] recovery=False return=kid-mode-home-watch"
+  },
+  {
+    "journey": "Practice holds and Back one level at a time",
+    "verdict": "observed-pass",
+    "evidence": "demo=kid-mode-details-play playing=True second=True covers=['cover-on media=5025 interval 5000-9000', 'cover-on media=12050 interval 12000-16000'] still_count=4 Back=('kid-mode-details-play', 'kid-mode-details-practice', 'kid-mode-home-more-info')"
+  },
+  {
+    "journey": "How it works return",
+    "verdict": "observed-pass",
+    "evidence": "help=picture-hold-start return=kid-mode-home-learn"
+  },
+  {
+    "journey": "Session boundary",
+    "verdict": "recorded",
+    "evidence": "touch events=0; one launch; no PIN entered; no capture; app left running"
+  }
+]

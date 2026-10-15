@@ -1,5 +1,14 @@
 # Status
 
+Mac continuation, October 15: Composition A is implemented at `69df28c` on
+`codex/home-comparison-2026-10-15`. Both layout comparisons remain reviewable.
+The exact package and current runtime evidence are in
+[the newest handoff](../FINAL_HANDOFF.md#mac-implementation-october-15-2026)
+and [Mac receipt](../results/home-review-2026-10-15/receipt.json). The app gate
+passes; native logs and owner visual/audio acceptance remain separate.
+No capture or public publication. Earlier checkpoints below are historical.
+
+
 Cloud continuation, Oct 15: source `0e434dc7` on
 `codex/cloud-finish-2026-10-15` fixes Parents return focus. See
 [the current handoff](../FINAL_HANDOFF.md#cloud-continuation-october-15-2026)

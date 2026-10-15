@@ -2532,3 +2532,17 @@ contract. Run offline AWS checks without credentials or deployment. Live AWS,
 upstream duplicate review and native acceptance remain blocked as recorded in
 [the handoff](../FINAL_HANDOFF.md#cloud-continuation-october-15-2026).
 Cost: local compute only; no paid resource, credential or permission changes.
+
+
+## 2026-10-15: implement the left reading area
+
+The owner delegated the final layout choice and immediate implementation after
+requesting two reviewable compositions. Choose A: the heading and Play form a
+short left-hand scan, with an ivory edge separating them from the unchanged
+coastal artwork. Keep B in the browser comparison and preserve the prior app at
+`b6b134c`. Carry the reading edge through Details and How it works, and keep the
+Parents keypad on an opaque surface. Keep all focus IDs, routes, PIN behavior,
+playback safeguards, palette and font assets. Use a separate checkout and an
+isolated writable SDK workspace to preserve other sessions. Cost: local compute
+only, no purchases or AWS changes. Native log evidence remains distinct from
+owner visual/audio acceptance.

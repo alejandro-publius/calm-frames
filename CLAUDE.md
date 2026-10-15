@@ -1,5 +1,15 @@
 # Calm Frames: rules for every session
 
+**October 15 Mac continuation.** The owner delegated immediate implementation
+of the stronger Home composition. The isolated branch is
+`codex/home-comparison-2026-10-15`, based on `b6b134c` with the Parents focus fix.
+Composition A is selected; B and the prior design remain reviewable. Read the
+newest section in `FINAL_HANDOFF.md` and the Mac receipt under
+`results/home-review-2026-10-15/`. No capture, recording, main merge, release tag,
+public publication, AWS cost or credential change is authorized by this pass.
+The older checkpoints below retain historical context.
+
+
 **Latest finishing checkpoint, Oct 14, late.** The submission candidate is the
 branch `claude/final-candidate-2026-10-14`, published to origin on Oct 14 at
 Alex's request (no main merge, no visibility change). Read `FINAL_HANDOFF.md`

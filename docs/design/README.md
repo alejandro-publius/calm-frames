@@ -1,5 +1,17 @@
 # Calm Frames design
 
+October 15 implementation: Composition A, the left reading area, is selected under
+the owner's delegated design decision. Home groups its heading and Play beside a
+continuous ivory reading edge. Details uses the same title scale; How it works
+has a wider reading edge and scrollable copy, and the locked Parents gate keeps
+its keypad on an opaque ivory surface. Both comparison options remain in
+[the Home study](home-comparison/index.html). The previous design is preserved at
+`b6b134c`. Current build and runtime evidence: [Mac receipt](../../results/home-review-2026-10-15/receipt.json).
+
+The renders and dated descriptions below predate this implementation. They are
+historical browser evidence, not images of the new native layout.
+
+
 This is the one page to read before designing anything for Calm Frames. It
 describes the interface the code draws today. The source of truth is
 [`app/src/calmframes/calmStyles.ts`](../../app/src/calmframes/calmStyles.ts):

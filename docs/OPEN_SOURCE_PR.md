@@ -1,5 +1,12 @@
 # The upstream contribution
 
+**October 15 rule correction.** The [official rules](https://amazonappdev2026.devpost.com/rules)
+allow a public fork or branch contribution; a PR need not be opened or merged.
+Private patch files alone do not qualify. The PR workflow below is an optional
+upstream contribution route, not a condition of the mini challenge. Record the
+public contribution URL, repository URL, author username and description after
+owner-approved publication. Nothing has been published in this review.
+
 **October 15 cloud execution update.** The real-wrapper gap is now covered by
 an additional incremental test patch, with eight focused passes and three
 expected-failing negative controls. Both original patches remain required.
@@ -543,7 +550,7 @@ Please review them together as one fix.
 
 ## How to open it
 
-`CONTRIBUTING.md` in that repository asks contributors to work against the latest `main`, to check existing and recently merged pull requests first, and to open an issue to discuss any significant work. Filing the bug first also means the contribution URL exists earlier, which is what the Devpost Open Source field needs.
+`CONTRIBUTING.md` in that repository asks contributors to work against the latest `main`, to check existing and recently merged pull requests first, and to open an issue to discuss any significant work. An issue can discuss the defect, but a bug report alone is not the qualifying contribution URL; a public fork or branch containing the change can supply it.
 
 1. **Check first.** Look through open and recently closed issues and pull requests for anything about Shaka load failures or a stuck buffering spinner. As of Sep 17 there were none and no open issues at all, but check again on the day. Re-read `CONTRIBUTING.md` in case it changed.
 2. **File the issue.** Use the `[BUG]` table above, without the "For Pull Requests" part. Note its number.
