@@ -44,15 +44,16 @@ const NOW = Date.parse(JSON.parse(OFFLINE_MAP_JSON).created_utc) + 60_000;
 
 async function renderKidMode() {
   const navigate = jest.fn();
+  const listeners: Record<string, () => void> = {};
   render(
     <KidModeScreen
-      navigation={{ navigate } as never}
+      navigation={{ navigate, addListener: (event: string, listener: () => void) => { listeners[event] = listener; return () => { delete listeners[event]; }; } } as never}
       newSalt={() => 'test-salt'}
       nowMs={() => NOW}
     />,
   );
   await screen.findByTestId('kid-mode-first-run');
-  return { navigate };
+  return { navigate, returnFromPlayer: () => act(() => listeners.focus?.()) };
 }
 
 /** The first run, end to end, with the PIN 1357. */
@@ -73,14 +74,16 @@ async function finishFirstRun() {
 
 describe('reaching Calm Frames', () => {
   it('returns focus to the opened title through details, player and parent area', async () => {
-    const { navigate } = await renderKidMode();
+    const { navigate, returnFromPlayer } = await renderKidMode();
     await finishFirstRun();
     const lastPoster = 'kid-mode-home-learn';
     fireEvent.press(screen.getByTestId(lastPoster));
     fireEvent.press(screen.getByTestId('picture-hold-playback-check'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     expect(navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.anything());
-    // The stack retains this details route underneath the player.
+    // The route state survives while its native controls are absent.
+    expect(screen.queryByTestId('kid-mode-details-play')).toBeNull();
+    returnFromPlayer();
     expect(screen.getByTestId('kid-mode-details-play').props.hasTVPreferredFocus).toBe(true);
     expect(screen.queryByTestId('kid-mode-home-watch')).toBeNull();
     fireEvent.press(screen.getByTestId('kid-mode-details-back'));
@@ -93,11 +96,13 @@ describe('reaching Calm Frames', () => {
   });
 
   it('retains the home caller when playback begins with Watch now', async () => {
-    const { navigate } = await renderKidMode();
+    const { navigate, returnFromPlayer } = await renderKidMode();
     await finishFirstRun();
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
     expect(navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN,
       expect.objectContaining({ showHomeOpening: true }));
+    expect(screen.queryByTestId('kid-mode-home-watch')).toBeNull();
+    returnFromPlayer();
     expect(screen.getByTestId('kid-mode-home-watch')).toBeTruthy();
     expect(screen.queryByTestId('kid-mode-details-play')).toBeNull();
   });
@@ -192,7 +197,7 @@ describe('reaching Calm Frames', () => {
     fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
     fireEvent.press(screen.getByTestId('picture-hold-playback-check'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
-    fireEvent.press(screen.getByTestId('kid-mode-details-play'));
+    expect(screen.queryByTestId('kid-mode-details-play')).toBeNull();
 
     expect(navigate.mock.calls.length).toBeGreaterThan(0);
     for (const [route, params] of navigate.mock.calls) {

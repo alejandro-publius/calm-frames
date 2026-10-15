@@ -455,7 +455,10 @@ const KidModeScreen = ({
 
   const withInterfaceFeedback = (content: React.ReactElement) => (
     <InterfaceSoundContext.Provider value={interfaceSound}>
-      {content}
+      {/* The navigator keeps this route mounted behind playback. Remove its
+          native controls while inactive so D-pad focus cannot escape into it;
+          route state above survives and restores the caller on return. */}
+      {interfaceActive ? content : null}
     </InterfaceSoundContext.Provider>
   );
 

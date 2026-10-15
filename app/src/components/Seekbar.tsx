@@ -13,6 +13,7 @@ import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
 import { SeekSource } from '../calmframes/seekSafety';
+import { trace } from '../calmframes/trace';
 import { getImageForVideoSecond } from '../services/bif/bifService';
 import { FrameImageSource } from '../services/bif/FrameImageSource';
 import { COLORS } from '../styles/Colors';
@@ -373,6 +374,7 @@ const Seekbar = ({
           style={styles.seekbar}>
           <KUICSeekbar
             ref={seekBarRef}
+            onFocus={() => trace('focus', 'player-seekbar')}
             currentValue={progress}
             totalValue={totalValue}
             disabledWhenNotFocused={true}

@@ -97,6 +97,19 @@ describe('Back from playback and details on the real shelf', () => {
     }
   });
 
+  it.each(['home', 'details'] as const)('removes %s controls from the focus tree during playback and restores them on return', async (origin) => {
+    const { returnFromPlayer } = await startShelf();
+    if (origin === 'details') fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
+    const caller = origin === 'details' ? 'kid-mode-details-play' : 'kid-mode-home-watch';
+    fireEvent.press(screen.getByTestId(caller));
+    expect(screen.queryByTestId(caller)).toBeNull();
+    expect(screen.queryByTestId('kid-mode-details-practice')).toBeNull();
+    expect(preferred()).toEqual([]);
+    returnFromPlayer();
+    expect(screen.getByTestId(caller)).toBeTruthy();
+    expect(preferred()).toEqual([caller]);
+  });
+
   it('Watch, then Back from the player: focus returns to Watch, and only there', async () => {
     const { navigation, returnFromPlayer } = await startShelf();
     expect(preferred()).toEqual(['kid-mode-home-more-info']);

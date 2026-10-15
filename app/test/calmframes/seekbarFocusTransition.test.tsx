@@ -20,3 +20,11 @@ test('the seekbar yields preferred focus when a countdown appears during playbac
   await act(async () => { await mockMedia.play(); });
   expect(view.getByTestId('seekbar-focus-guide').props.hasTVPreferredFocus).toBe(true);
 });
+
+test('the TV player exposes its seek bar rather than the automotive transport buttons', () => {
+  jest.useFakeTimers();
+  jest.spyOn(console, 'log').mockImplementation(() => {});
+  const view = startPlayer('none');
+  expect(view.getByTestId('seekbar-focus-guide')).toBeTruthy();
+  expect(view.queryByTestId('player-btn-seek-forward')).toBeNull();
+});
