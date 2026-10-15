@@ -574,7 +574,10 @@ const KidModeScreen = ({
         setOpenId(entry.title.id);
         setView('details');
       }}
-      onOpenParentArea={() => setView('parent')}
+      onOpenParentArea={() => {
+        setLastOpenedFrom('parent');
+        setView('parent');
+      }}
     />
   );
 };

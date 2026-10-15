@@ -48,8 +48,8 @@ import {
   KID_HOME_PICKER_FRAME,
 } from './uiFrames';
 
-/** The shelf control a title was opened or started from. */
-export type ReturnFocusControl = 'watch' | 'details' | 'poster';
+/** The shelf control to restore after leaving a title or the parent area. */
+export type ReturnFocusControl = 'watch' | 'details' | 'poster' | 'parent';
 
 export interface KidHomeScreenProps {
   /** Every title that has been checked, in any state. */
@@ -149,6 +149,7 @@ const KidHomeScreen = ({
   const fromIntroduction = returnFocusId === demo?.title.id || returnFocusId === playbackCheck?.title.id;
   const returnTo: ReturnFocusControl | 'learn' | null = saving ? null
     : returnToIntroduction ? 'learn'
+    : returnFocusControl === 'parent' ? 'parent'
     : !returnFocusId ? 'watch'
     : returnFocusControl ?? (fromIntroduction ? 'learn' : returningToFeatured ? 'details' : 'poster');
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
@@ -197,7 +198,7 @@ const KidHomeScreen = ({
             disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
           {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" accessibilityLabel="How it works" hasTVPreferredFocus={returnTo === 'learn'}
             disabled={saving} onPress={() => { setChoosingProfile(false); setShowIntroduction(true); }} /></View> : null}
-          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parents" accessibilityLabel="Parents: parental controls, needs a PIN" hasTVPreferredFocus={empty && !saving} onPress={onOpenParentArea} /></View> : null}
+          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parents" accessibilityLabel="Parents: parental controls, needs a PIN" hasTVPreferredFocus={(empty || returnTo === 'parent') && !saving} onPress={onOpenParentArea} /></View> : null}
       </CalmPageHeader>
       {choosingProfile && picking && profiles && onChooseProfile ? (
         <ProfilePicker disabled={saving || undefined} testID={`${testID}-profiles`} title={PROFILES_KID_TITLE}

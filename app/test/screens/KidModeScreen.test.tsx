@@ -88,7 +88,8 @@ describe('reaching Calm Frames', () => {
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(false);
     fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
     fireEvent.press(screen.getByTestId('kid-mode-parent-back'));
-    expect(screen.getByTestId(lastPoster).props.hasTVPreferredFocus).toBe(true);
+    expect(screen.getByTestId('kid-mode-home-parent-area').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.getByTestId(lastPoster).props.hasTVPreferredFocus).toBe(false);
   });
 
   it('retains the home caller when playback begins with Watch now', async () => {
@@ -118,7 +119,8 @@ describe('reaching Calm Frames', () => {
       expect(screen.getByTestId(poster).props.hasTVPreferredFocus).toBe(true);
       fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
       act(() => { expect(back?.()).toBe(true); });
-      expect(screen.getByTestId(poster).props.hasTVPreferredFocus).toBe(true);
+      expect(screen.getByTestId('kid-mode-home-parent-area').props.hasTVPreferredFocus).toBe(true);
+      expect(screen.getByTestId(poster).props.hasTVPreferredFocus).toBe(false);
       fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
       for (const digit of '1357') {
         fireEvent.press(screen.getByTestId(`kid-mode-parent-key-${digit}`));

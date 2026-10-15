@@ -8,6 +8,7 @@
  */
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
+import { BackHandler, Platform } from 'react-native';
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
   getItem: jest.fn(async () => null),
@@ -60,6 +61,42 @@ function preferred(): string[] {
 }
 
 describe('Back from playback and details on the real shelf', () => {
+  it.each(['button', 'remote'] as const)('Parents PIN gate, %s Back: focus returns only to Parents after Details', async (back) => {
+    const platform = jest.spyOn(Platform, 'isTV', 'get').mockReturnValue(true);
+    let handlers: Array<() => boolean | null | undefined> = [];
+    const subscription = jest.spyOn(BackHandler, 'addEventListener').mockImplementation((event, handler) => {
+      if (event === 'hardwareBackPress') handlers.push(handler);
+      return { remove: () => { handlers = handlers.filter((one) => one !== handler); } };
+    });
+    try {
+      await startShelf();
+      fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
+      fireEvent.press(screen.getByTestId('kid-mode-details-back'));
+      expect(preferred()).toEqual(['kid-mode-home-more-info']);
+      fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
+      expect(screen.getByTestId('kid-mode-parent-key-1')).toBeTruthy();
+      expect(screen.queryByTestId('kid-mode-parent-preset-wcag')).toBeNull();
+      if (back === 'button') {
+        fireEvent.press(screen.getByTestId('kid-mode-parent-back'));
+      } else {
+        let handled = false;
+        act(() => { handled = [...handlers].reverse().some((handler) => handler() === true); });
+        expect(handled).toBe(true);
+      }
+      expect(preferred()).toEqual(['kid-mode-home-parent-area']);
+      fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
+      act(() => { expect([...handlers].reverse().some((handler) => handler() === true)).toBe(true); });
+      expect(preferred()).toEqual(['kid-mode-home-learn']);
+      // A later title launch still replaces the remembered Parents control.
+      fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
+      fireEvent.press(screen.getByTestId('kid-mode-details-back'));
+      expect(preferred()).toEqual(['kid-mode-home-more-info']);
+    } finally {
+      subscription.mockRestore();
+      platform.mockRestore();
+    }
+  });
+
   it('Watch, then Back from the player: focus returns to Watch, and only there', async () => {
     const { navigation, returnFromPlayer } = await startShelf();
     expect(preferred()).toEqual(['kid-mode-home-watch']);
