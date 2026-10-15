@@ -4,8 +4,8 @@
 of the stronger Home composition. The isolated branch is
 `codex/home-comparison-2026-10-15`, based on `b6b134c` with the Parents focus fix.
 Composition A is selected; B and the prior design remain reviewable. Read the
-newest section in `FINAL_HANDOFF.md` and the Mac receipt under
-`results/home-review-2026-10-15/`. No capture, recording, main merge, release tag,
+newest section in `FINAL_HANDOFF.md` and the final layout-and-copy receipt under
+`results/plain-language-2026-10-15/`. App source is `689c484`; both passes are implemented. No capture, recording, main merge, release tag,
 public publication, AWS cost or credential change is authorized by this pass.
 The older checkpoints below retain historical context.
 

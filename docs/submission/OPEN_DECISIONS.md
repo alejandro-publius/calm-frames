@@ -1,12 +1,12 @@
 # Open decisions and blockers
 
-Updated October 15, 2026. Latest implemented source: `69df28c8215920ae5a1cc8e82a3124d4a68d65b3`.
-Current package: `home-reading-a-2026-10-15`; native evidence is linked below.
+Updated October 15, 2026. Latest implemented source: `689c484efca088e65e76e0c7efeaf51f210c818e`.
+Current package: `home-reading-a-plain-copy-2026-10-15`; native evidence is linked below.
 
 The incoming source was `0e434dc7c89b7fb2dc19a9ca5d4593e5effa6c19`, integrated at
 `b6b134c2402bd51e1048178e7e117744ff4ad4f3`. The isolated Mac review branch is
 `codex/home-comparison-2026-10-15`. The latest rebuild and native status are in
-[the Mac review receipt](../../results/home-review-2026-10-15/receipt.json).
+[the Mac review receipt](../../results/plain-language-2026-10-15/receipt.json).
 Source tests, package preparation and native runtime are separate evidence.
 Package 5 (`4016e8d`) is historical: it lacks the Parents cancellation focus fix.
 The two [Home proposals](../design/home-comparison/index.html) are browser studies;

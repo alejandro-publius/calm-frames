@@ -1,5 +1,5 @@
 {
-  "status": "layout-implemented-and-log-checked; subsequent copy pass requested",
+  "status": "layout-only checkpoint; superseded by plain-language-2026-10-15",
   "source_commit": "69df28c8215920ae5a1cc8e82a3124d4a68d65b3",
   "baseline_source": "b6b134c2402bd51e1048178e7e117744ff4ad4f3",
   "branch": "codex/home-comparison-2026-10-15",
@@ -19,7 +19,9 @@
     "typecheck": "pass",
     "lint": {
       "errors": 0,
-      "existing_warnings": 4
+      "existing_source_warnings": 97,
+      "existing_test_warnings": 4,
+      "total_warnings": 101
     },
     "jest": {
       "passed_suites": 130,

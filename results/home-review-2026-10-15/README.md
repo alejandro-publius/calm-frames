@@ -1,5 +1,9 @@
 # Mac implementation evidence, October 15
 
+This is the layout-only checkpoint. The final copy pass and package are in
+`../plain-language-2026-10-15/`. Lint totals are corrected in this receipt to
+97 source warnings plus four test warnings, with zero errors.
+
 The machine-readable `receipt.json` identifies the exact source, package and
 checks. `baseline-native.json` belongs to incoming source `b6b134c`, while
 `selected-native.json` belongs to the selected layout at `69df28c`. Their

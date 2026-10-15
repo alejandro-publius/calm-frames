@@ -1,8 +1,49 @@
 # Final handoff: the integration candidate
 
-## Mac implementation, October 15, 2026
+## Final Mac layout and copy, October 15, 2026
 
-This is the newest checkpoint. Working branch: `codex/home-comparison-2026-10-15`.
+Both requested passes are implemented on private working branch
+`codex/home-comparison-2026-10-15`. Final app source: `689c484efca088e65e76e0c7efeaf51f210c818e`.
+A, the left reading area, groups the heading and Play in one scan. Home, Details,
+How it works and the locked Parents gate share the ivory reading treatment;
+Fraunces, Source Sans 3 and the existing dimensional coastal art remain.
+B is retained as a runnable comparison, and the prior app remains at `b6b134c`.
+
+The [copy review](docs/design/PLAIN_LANGUAGE_REVIEW.md) covers all interface
+surfaces. “So the picture never holds” is now “The video plays normally.”
+“Try picture holds” is “Try the demo.” Demo pauses and real hidden scenes are
+named separately. Detection limits, PIN rules, distinct playback errors and
+the approved safety clause remain. Home gained no extra explanatory text.
+
+Final package: `build/release/home-reading-a-plain-copy-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg`.
+SHA-256: `8163aee15b6062a085b79c225994ed199b85ae3c253be1dc978c4d668c72595f`.
+The [final receipt](results/plain-language-2026-10-15/receipt.json) records build,
+tests and native status separately. Its preparation record binds 736 inputs to
+committed source. All seven final-package native journeys passed by logs:
+Home launch; Details and return; Parents hardware Back and button Back after
+Details; Harbor to end; both demo pauses and the three Back steps; help return.
+The app is left running. No native visual or audio claim is made.
+Typecheck, 130 app suites, 1,292 tests, 57 snapshots, ten hook package tests and
+the offline hook consumer pass. Four existing tests are skipped and three
+capture/export suites excluded. Lint has zero errors, 97 existing source warnings
+and four test warnings. The earlier four-warning summary is corrected.
+
+Open <http://127.0.0.1:4186/docs/design/home-comparison/> or
+[the HTML](docs/design/home-comparison/index.html). Start in grayscale, then
+switch color on. If needed, run `python3 -m http.server 4186 --bind 127.0.0.1`
+from `/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-review`.
+The browser is a route simulation; it does not play media or collect a PIN.
+
+Owner's minimum steps: inspect text wrapping and focus from the usual TV seat;
+listen through Harbor and the demo and inspect captions; enter the existing PIN
+personally to check settings. Test VoiceView if available. Logs cannot do these.
+Resolve sample notice scope and artwork permissions before distribution. No
+capture, public publication, main merge, release tag, AWS cost or credential
+change occurred. The original Claude checkout and SDK app link were preserved.
+
+## Earlier Mac layout-only checkpoint, October 15, 2026
+
+This layout-only checkpoint is superseded above. Working branch: `codex/home-comparison-2026-10-15`.
 Implemented app source: `69df28c8215920ae5a1cc8e82a3124d4a68d65b3`, based on
 `b6b134c` and retaining the `0e434dc` Parents return-focus fix. The owner delegated
 the final layout decision and immediate implementation after the comparison was
@@ -28,7 +69,7 @@ of truth for the separate native observations and remaining checks.
 
 The app gate passed 130 suites, 1,292 tests and 57 snapshots. Four pre-existing
 tests remain skipped; the three capture/export suites were excluded. Typecheck
-passed and lint reported zero errors with four existing warnings, on Node 22.23.2.
+passed and lint reported zero errors with 97 source and four test warnings, on Node 22.23.2.
 Browser DOM checks passed both route simulations, local fonts, color switching
 and large-view frame bounds without screenshots. Native logs can establish
 reported focus IDs, route transitions, media events and still-load callbacks.
