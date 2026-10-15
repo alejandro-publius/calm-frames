@@ -1,6 +1,33 @@
 # Final handoff: the integration candidate
 
-## Current high-value completion, October 15, 2026
+## Watch-first correction, October 15, 2026
+
+The new viewing copy is installed from `8d1bb787bb8b54b9023bee6f75baa2aac432940e`.
+Home now leads with Watch. Harbor Details contains only Back, Harbor, 20 sec,
+Watch and More info. Acadia adds a short content description. Reports and profile
+jargon are under More info > Technical details; the simulated demo is secondary.
+The zero-findings card and empty timeline are removed. Artwork, fonts, media,
+trust and detection behavior are preserved. Exact before/after strings and all
+remaining viewing text are in [the copy record](docs/evidence/watch-first-2026-10-15.md).
+
+Installed package: `build/release/watch-first-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg`.
+SHA-256: `874d91690c4ae6893be9e0c2f075503c29c0c7aa394aaaa34a19f948e6b36409`.
+
+The single requested build exposed a nested hardware Back defect after returning
+from the simulated demo: Back skipped More info and returned to Home. It is
+reproduced in native logs and a regression test. Source fix `9afdbe5bf72170787deb5cc0d82e3aa565a87812`
+lets Details own its nested Back stack and passes the complete app suite. This
+fix is newer than the installed package and needs one additional authorized
+build/install. Do not claim the fixed route was tested natively. No further
+redesign or architecture work is needed. See the [receipt](results/watch-first-2026-10-15/receipt.json)
+for the exact native outcomes and source/build distinction. The installed
+app is left running at Home with Watch focused. Harbor/Acadia playback returns,
+Technical details, Help and both Parents cancellations passed by logs. The demo
+Back defect remains in that installed build; use the visible Back button there
+until the small tested repair is installed.
+
+
+## Historical background-focus completion, October 15, 2026
 
 App source `21f0ea60332b83efe960eb7cf799139ec2d82ae9` fixes background focus
 while preserving the exact approved Acadia integration. The private working

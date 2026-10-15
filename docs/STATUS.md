@@ -1,6 +1,16 @@
 # Status
 
-Current installed app: `21f0ea6` on private
+Watch-first copy correction is installed from `8d1bb78`. Harbor viewing now has
+only its title, runtime, Watch and More info. Analysis and demo content are
+secondary. A nested hardware Back defect was found and fixed in `9afdbe5`, which
+passes 1,314 app tests but is not yet in the installed package. One additional
+build/install is needed beyond the requested single build. See the
+[current handoff](../FINAL_HANDOFF.md) and
+[copy record](evidence/watch-first-2026-10-15.md). No media/trust changes.
+
+The following checkpoints are historical.
+
+Previous installed app: `21f0ea6` on private
 `codex/prepared-video-slice-2026-10-15`. The background route focus leak is
 fixed. The corrected TV seek-bar check and 16 native observations pass by logs;
 131 suites, 1,313 tests and 57 snapshots pass. See the

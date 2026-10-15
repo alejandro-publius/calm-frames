@@ -1,0 +1,22 @@
+[
+  {
+    "journey": "Launch prioritizes Watch",
+    "verdict": "observed-pass",
+    "evidence": "kid-mode-home-watch"
+  },
+  {
+    "journey": "Home Watch and player Back",
+    "verdict": "observed-pass",
+    "evidence": "playing event; return kid-mode-home-watch"
+  },
+  {
+    "journey": "Technical details and More info Back",
+    "verdict": "observed-pass",
+    "evidence": "technical Back -> Technical details control; info Back -> More info control"
+  },
+  {
+    "journey": "stopped",
+    "verdict": "blocked",
+    "evidence": "Expected kid-mode-details-play, got calm-card-skip"
+  }
+]

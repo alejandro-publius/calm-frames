@@ -85,3 +85,13 @@ More info with Watch demo focused. Parents cancellation still returns to Parents
 The existing storage, first-run, Parents and playback warning/error text was
 reviewed. Those surfaces retain meaningful settings, setup instructions and
 failure reasons. Playback transport retains conventional Play/Pause semantics.
+
+## Build and navigation status
+
+The viewing correction was built and installed once from `8d1bb78`. Native
+navigation exposed a hardware Back conflict after returning from the demo:
+Back skipped More info. The regression fails on that installed source, and
+passes on `9afdbe5`, together with the full app suite. This small correction
+makes Details own its own Back stack. It is not a media or player change.
+The fix is not yet installed because the requested single build has been used.
+The receipt distinguishes the installed build from that tested source fix.
