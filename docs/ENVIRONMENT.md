@@ -112,9 +112,16 @@ From the repository root with uv installed:
 ```sh
 uv venv --python 3.12 .venv
 uv pip install --python .venv/bin/python -e "./flashmap[dev]"
+uv pip install --python .venv/bin/python matplotlib==3.11.2
 ```
 
-This installs the analyzer and the dependencies used by the benign package
-preflight. `eval/readme_sync.py --check` uses the standard library. The broader
+This installs the analyzer, its dev tools (pytest, hypothesis, ruff, mypy)
+and the dependencies used by the benign package preflight. The third line is
+the one package CI adds for the evaluation lane: three of the `eval` tests
+import matplotlib and Pillow, and without it the documented
+`pytest flashmap pipeline eval` line stops at collection. A venv made by uv
+has no pip in it, so install anything else with `uv pip install --python
+.venv/bin/python ...` rather than `python -m pip`. `eval/readme_sync.py --check`
+uses the standard library. The broader
 infra suite additionally uses `pipeline/infra/requirements.txt`; do not confuse
 that with a requirement to deploy AWS to run the simulator.

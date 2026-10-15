@@ -1,10 +1,18 @@
 # Reviewer quickstart
 
 For a judge with a Mac, a terminal and about thirty minutes. Written Oct 14,
-2026 from the repository's own scripts and documents. **None of the commands
-below were executed while writing this file.** Where a command has been run by
-an earlier session, the receipt that records it is named; everything else is
-marked unverified.
+2026 from the repository's own scripts and documents. On the evening of Oct 14
+sections 1, 2 and 5 were run as written on a fresh checkout of this branch with
+nothing copied from another checkout: the Node checks (`npm ci` 44 s, typecheck
+6 s, lint 9 s with no errors, the full Jest suite 35 s, all passing), the
+analyzer path in section 5 (install 12 s, `check` 17 s printing PASS, `report`
+10 s), and the Python checks (the pytest line 5 minutes 17 seconds, the
+number and style checks under a second, both mypy configurations clean). At
+that run two Python tests failed for code reasons on this branch and `make
+lint-py` reported ruff findings in `eval/preview` and `scripts`; they were
+reported to the integration owner and are not setup problems. Section 3 (the
+device build and install) and section 4 (the demo) were not run from this
+file; the receipts they name record where they were run.
 
 The final integration candidate is `claude/final-candidate-2026-10-14`; its
 package was built from `93cf80028529992cedc4439cb29a59d6ff024188`
@@ -32,10 +40,14 @@ eval "$(fnm env)" && fnm use             # Node 22
 export JAVA_HOME=/opt/homebrew/opt/openjdk@21
 uv venv --python 3.12 .venv
 uv pip install --python .venv/bin/python -e "./flashmap[dev]"
+uv pip install --python .venv/bin/python matplotlib==3.11.2   # the evaluation tests draw plots
 ```
 
-Unverified in this session; the same lines are in the README and
-[../SUBMISSION.md](../SUBMISSION.md) section 9.
+Run on a fresh checkout of this branch on Oct 14 (evening): the venv took
+seconds, the analyzer install two seconds with warm caches, and the extra
+package is the one CI adds; without it the pytest line below stops at
+collection. The same lines are in the README and
+[../ENVIRONMENT.md](../ENVIRONMENT.md).
 
 ## 2. Check the repository without a device (about ten minutes)
 
