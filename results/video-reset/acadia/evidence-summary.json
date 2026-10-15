@@ -1,0 +1,1010 @@
+{
+  "schema": "calm-frames-evidence-summary-v1",
+  "generated_utc": "2026-10-15T20:52:19Z",
+  "generator": {
+    "name": "pipeline.evidence_summary",
+    "repository_commit": "ee76cf559a5814183bc005de57512ee08a10fb5a"
+  },
+  "states": {
+    "actual_findings": "Spans the analyzer measured over a published limit, with the profile, the settings and the window that triggered each.",
+    "simulated_events": "Covers scheduled on purpose, for practice or demonstration. The analyzer found nothing there and they are never counted as findings.",
+    "unsupported_or_not_analyzed": "What no measurement in this summary covers.",
+    "independent_validation_pending": "Nobody outside this repository has checked the findings, the preparation or the playback. Re-analysis by this repository's own analyzer does not count."
+  },
+  "source": {
+    "file": "HAZARD_nps_acadia_coastal_broll_720p.mp4",
+    "sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+    "origin_url": "https://npgallery.nps.gov/AssetDetail/6fc09aec-7fc2-47ed-b8cc-e1b10861dd3e",
+    "licence": "Public domain (NPGallery constraints: Public domain, Full Granting Rights; U.S. government work)",
+    "credit": "NPS Video, Acadia National Park. No NPS endorsement is implied.",
+    "licence_checked_on": "2026-10-15",
+    "duration_s": 37.642,
+    "resolution": "1280x720",
+    "notes": "source: National Park Service, NPGallery asset 6fc09aec-7fc2-47ed-b8cc-e1b10861dd3e, \"Acadia B-Roll: Coastal Scenery\" (\"A series of clips of waves crashing against rocky shores and coastal views\"). The 720p proxy at https://npgallery.nps.gov/GetAsset/6fc09aec-7fc2-47ed-b8cc-e1b10861dd3e/proxyhires, served as 6fc09aec-7fc2-47ed-b8cc-e1b10861dd3eHiResProxy.mp4, retrieved 2026-10-15T20:38:16Z, 4,049,669 bytes; the page lists the original at 67.4 MB. H.264 High 1280x720 yuv420p, BT.709 tagged, limited range, 48000/1001 fps, 1804 frames, AAC stereo. flashmap 1.0.0 at its defaults (192 px analysis width) found one general flash span under the WCAG profile, 9302 to 11532 ms, area 0.511 of the 10 degree window, and none under the broadcast profile (results/video-reset/acadia/). It therefore carries the HAZARD_ prefix: never opened in a player at speed, inspected only as plots or through its prepared rendition. The pipeline's own run, with its fixed 85 inch / 4 foot room added, found three general flash spans per preset (8343 to 9864, 9135 to 11699 and 29113 to 30593 ms; only the middle one breaks the WCAG baseline window) and planned two covered intervals, 7843 to 12199 and 28613 to 31093 ms (extra cautious: 7343 to 12699 and 28113 to 31593). Nobody has looked at the spans. Added Oct 15, 2026 for the video reset.",
+    "hazard_prefix": true,
+    "container": {
+      "size_bytes": 4049669,
+      "coded_size": "1280x720",
+      "container_frame_rate": "7380000/153989",
+      "frame_count": 1804,
+      "first_pts_ms": 0.0,
+      "last_pts_ms": 37600.056,
+      "variable_frame_rate": false,
+      "frame_interval_ms": {
+        "max": 20.856,
+        "median": 20.856,
+        "min": 20.844
+      },
+      "timestamp_source": "container-pts"
+    },
+    "color": {
+      "luminance_model": "wcag-relative-luminance-srgb",
+      "matrix": "bt709",
+      "matrix_source": "stream-tag",
+      "pixel_format": "yuv420p",
+      "range": "limited",
+      "range_source": "stream-tag",
+      "transfer_tag": "1"
+    }
+  },
+  "analysis": {
+    "runs": [
+      {
+        "profile": "wcag",
+        "map_path": "results/video-reset/acadia/acadia.wcag.json",
+        "map_sha256": "f23783b993c0d64aa73f838234429d7ce58b1faf1b36b3f0b27a3e8f594cc135",
+        "signed": false,
+        "analyzer": {
+          "name": "flashmap",
+          "version": "1.0.0"
+        },
+        "created_utc": "2026-10-15T20:40:44Z",
+        "settings": {
+          "analysis_width": 192,
+          "analysis_height": 108,
+          "luminance_model": "wcag-relative-luminance-srgb",
+          "flash_limit_per_second": 3,
+          "window_ms": 1000,
+          "area_fraction_limit": 0.25,
+          "area_windows": [
+            {
+              "name": "wcag-10deg",
+              "width_px": 64,
+              "height_px": 36
+            }
+          ],
+          "room": null,
+          "pattern_rule_applied": false,
+          "picture_measured_on": "picture"
+        },
+        "summary": {
+          "pass": false,
+          "flash_pass": false,
+          "pattern_pass": true,
+          "segment_count": 1,
+          "general_segment_count": 1,
+          "red_segment_count": 0,
+          "pattern_segment_count": 0,
+          "hidden_ms": 2230
+        },
+        "segments": [
+          {
+            "reason": "general",
+            "start_ms": 9302,
+            "end_ms": 11532,
+            "flash_first_ms": 9322,
+            "flash_last_ms": 11512,
+            "max_flashes_in_window": 10,
+            "area_fraction": 0.511285,
+            "area_window": "wcag-10deg",
+            "triggered_by": [
+              "wcag-10deg"
+            ],
+            "breaks_baseline": true
+          }
+        ]
+      },
+      {
+        "profile": "broadcast",
+        "map_path": "results/video-reset/acadia/acadia.broadcast.json",
+        "map_sha256": "5cc03b4d9120c21273ecfb25973eb7bc509d2ed7f1a1ee8a48ecbd88d9bd647f",
+        "signed": false,
+        "analyzer": {
+          "name": "flashmap",
+          "version": "1.0.0"
+        },
+        "created_utc": "2026-10-15T20:41:18Z",
+        "settings": {
+          "analysis_width": 192,
+          "analysis_height": 108,
+          "luminance_model": "wcag-relative-luminance-srgb",
+          "flash_limit_per_second": 3,
+          "window_ms": 1000,
+          "area_fraction_limit": 0.25,
+          "area_windows": [
+            {
+              "name": "bt1702-screen",
+              "width_px": 192,
+              "height_px": 108
+            }
+          ],
+          "room": null,
+          "pattern_rule_applied": true,
+          "picture_measured_on": "picture"
+        },
+        "summary": {
+          "pass": true,
+          "flash_pass": true,
+          "pattern_pass": true,
+          "segment_count": 0,
+          "general_segment_count": 0,
+          "red_segment_count": 0,
+          "pattern_segment_count": 0,
+          "hidden_ms": 0
+        },
+        "segments": []
+      },
+      {
+        "profile": "wcag",
+        "map_path": "results/video-reset/acadia/pipeline-maps/wcag.json",
+        "map_sha256": "709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a",
+        "signed": true,
+        "analyzer": {
+          "name": "flashmap",
+          "version": "1.0.0"
+        },
+        "created_utc": "2026-10-15T20:41:42Z",
+        "settings": {
+          "analysis_width": 192,
+          "analysis_height": 108,
+          "luminance_model": "wcag-relative-luminance-srgb",
+          "flash_limit_per_second": 3,
+          "window_ms": 1000,
+          "area_fraction_limit": 0.25,
+          "area_windows": [
+            {
+              "name": "wcag-10deg",
+              "width_px": 64,
+              "height_px": 36
+            },
+            {
+              "name": "room-10deg",
+              "width_px": 22,
+              "height_px": 22
+            }
+          ],
+          "room": {
+            "tv_diagonal_in": 85.0,
+            "seat_distance_in": 48.0,
+            "display_aspect": "16:9"
+          },
+          "pattern_rule_applied": false,
+          "picture_measured_on": "picture"
+        },
+        "summary": {
+          "pass": false,
+          "flash_pass": false,
+          "pattern_pass": true,
+          "segment_count": 3,
+          "general_segment_count": 3,
+          "red_segment_count": 0,
+          "pattern_segment_count": 0,
+          "hidden_ms": 4836
+        },
+        "segments": [
+          {
+            "reason": "general",
+            "start_ms": 8343,
+            "end_ms": 9864,
+            "flash_first_ms": 8383,
+            "flash_last_ms": 9864,
+            "max_flashes_in_window": 9,
+            "area_fraction": 0.38843,
+            "area_window": "room-10deg",
+            "triggered_by": [
+              "room-10deg"
+            ],
+            "breaks_baseline": false
+          },
+          {
+            "reason": "general",
+            "start_ms": 9135,
+            "end_ms": 11699,
+            "flash_first_ms": 9176,
+            "flash_last_ms": 11637,
+            "max_flashes_in_window": 10,
+            "area_fraction": 0.838843,
+            "area_window": "room-10deg",
+            "triggered_by": [
+              "room-10deg",
+              "wcag-10deg"
+            ],
+            "breaks_baseline": true
+          },
+          {
+            "reason": "general",
+            "start_ms": 29113,
+            "end_ms": 30593,
+            "flash_first_ms": 29154,
+            "flash_last_ms": 30572,
+            "max_flashes_in_window": 8,
+            "area_fraction": 0.396694,
+            "area_window": "room-10deg",
+            "triggered_by": [
+              "room-10deg"
+            ],
+            "breaks_baseline": false
+          }
+        ]
+      },
+      {
+        "profile": "broadcast",
+        "map_path": "results/video-reset/acadia/pipeline-maps/broadcast.json",
+        "map_sha256": "d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1",
+        "signed": true,
+        "analyzer": {
+          "name": "flashmap",
+          "version": "1.0.0"
+        },
+        "created_utc": "2026-10-15T20:42:15Z",
+        "settings": {
+          "analysis_width": 192,
+          "analysis_height": 108,
+          "luminance_model": "wcag-relative-luminance-srgb",
+          "flash_limit_per_second": 3,
+          "window_ms": 1000,
+          "area_fraction_limit": 0.25,
+          "area_windows": [
+            {
+              "name": "bt1702-screen",
+              "width_px": 192,
+              "height_px": 108
+            },
+            {
+              "name": "room-10deg",
+              "width_px": 22,
+              "height_px": 22
+            }
+          ],
+          "room": {
+            "tv_diagonal_in": 85.0,
+            "seat_distance_in": 48.0,
+            "display_aspect": "16:9"
+          },
+          "pattern_rule_applied": true,
+          "picture_measured_on": "picture"
+        },
+        "summary": {
+          "pass": false,
+          "flash_pass": false,
+          "pattern_pass": true,
+          "segment_count": 3,
+          "general_segment_count": 3,
+          "red_segment_count": 0,
+          "pattern_segment_count": 0,
+          "hidden_ms": 4836
+        },
+        "segments": [
+          {
+            "reason": "general",
+            "start_ms": 8343,
+            "end_ms": 9906,
+            "flash_first_ms": 8383,
+            "flash_last_ms": 9885,
+            "max_flashes_in_window": 9,
+            "area_fraction": 0.400826,
+            "area_window": "room-10deg",
+            "triggered_by": [
+              "room-10deg"
+            ],
+            "breaks_baseline": false
+          },
+          {
+            "reason": "general",
+            "start_ms": 9135,
+            "end_ms": 11699,
+            "flash_first_ms": 9155,
+            "flash_last_ms": 11637,
+            "max_flashes_in_window": 10,
+            "area_fraction": 0.832645,
+            "area_window": "room-10deg",
+            "triggered_by": [
+              "room-10deg"
+            ],
+            "breaks_baseline": false
+          },
+          {
+            "reason": "general",
+            "start_ms": 29113,
+            "end_ms": 30593,
+            "flash_first_ms": 29133,
+            "flash_last_ms": 30572,
+            "max_flashes_in_window": 9,
+            "area_fraction": 0.400826,
+            "area_window": "room-10deg",
+            "triggered_by": [
+              "room-10deg"
+            ],
+            "breaks_baseline": false
+          }
+        ]
+      },
+      {
+        "profile": "wcag",
+        "map_path": "results/video-reset/acadia/pipeline-maps/extra-cautious.json",
+        "map_sha256": "c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f",
+        "signed": true,
+        "analyzer": {
+          "name": "flashmap",
+          "version": "1.0.0"
+        },
+        "created_utc": "2026-10-15T20:42:38Z",
+        "settings": {
+          "analysis_width": 192,
+          "analysis_height": 108,
+          "luminance_model": "wcag-relative-luminance-srgb",
+          "flash_limit_per_second": 3,
+          "window_ms": 1000,
+          "area_fraction_limit": 0.25,
+          "area_windows": [
+            {
+              "name": "wcag-10deg",
+              "width_px": 64,
+              "height_px": 36
+            },
+            {
+              "name": "room-10deg",
+              "width_px": 22,
+              "height_px": 22
+            }
+          ],
+          "room": {
+            "tv_diagonal_in": 85.0,
+            "seat_distance_in": 48.0,
+            "display_aspect": "16:9"
+          },
+          "pattern_rule_applied": false,
+          "picture_measured_on": "picture"
+        },
+        "summary": {
+          "pass": false,
+          "flash_pass": false,
+          "pattern_pass": true,
+          "segment_count": 3,
+          "general_segment_count": 3,
+          "red_segment_count": 0,
+          "pattern_segment_count": 0,
+          "hidden_ms": 4836
+        },
+        "segments": [
+          {
+            "reason": "general",
+            "start_ms": 8343,
+            "end_ms": 9864,
+            "flash_first_ms": 8383,
+            "flash_last_ms": 9864,
+            "max_flashes_in_window": 9,
+            "area_fraction": 0.38843,
+            "area_window": "room-10deg",
+            "triggered_by": [
+              "room-10deg"
+            ],
+            "breaks_baseline": false
+          },
+          {
+            "reason": "general",
+            "start_ms": 9135,
+            "end_ms": 11699,
+            "flash_first_ms": 9176,
+            "flash_last_ms": 11637,
+            "max_flashes_in_window": 10,
+            "area_fraction": 0.838843,
+            "area_window": "room-10deg",
+            "triggered_by": [
+              "room-10deg",
+              "wcag-10deg"
+            ],
+            "breaks_baseline": true
+          },
+          {
+            "reason": "general",
+            "start_ms": 29113,
+            "end_ms": 30593,
+            "flash_first_ms": 29154,
+            "flash_last_ms": 30572,
+            "max_flashes_in_window": 8,
+            "area_fraction": 0.396694,
+            "area_window": "room-10deg",
+            "triggered_by": [
+              "room-10deg"
+            ],
+            "breaks_baseline": false
+          }
+        ]
+      }
+    ]
+  },
+  "findings": {
+    "actual": [
+      {
+        "profile": "wcag",
+        "room": null,
+        "reason": "general",
+        "start_ms": 9302,
+        "end_ms": 11532,
+        "flash_first_ms": 9322,
+        "flash_last_ms": 11512,
+        "max_flashes_in_window": 10,
+        "area_fraction": 0.511285,
+        "area_window": "wcag-10deg",
+        "triggered_by": [
+          "wcag-10deg"
+        ],
+        "breaks_baseline": true
+      },
+      {
+        "profile": "wcag",
+        "room": {
+          "tv_diagonal_in": 85.0,
+          "seat_distance_in": 48.0,
+          "display_aspect": "16:9"
+        },
+        "reason": "general",
+        "start_ms": 8343,
+        "end_ms": 9864,
+        "flash_first_ms": 8383,
+        "flash_last_ms": 9864,
+        "max_flashes_in_window": 9,
+        "area_fraction": 0.38843,
+        "area_window": "room-10deg",
+        "triggered_by": [
+          "room-10deg"
+        ],
+        "breaks_baseline": false
+      },
+      {
+        "profile": "wcag",
+        "room": {
+          "tv_diagonal_in": 85.0,
+          "seat_distance_in": 48.0,
+          "display_aspect": "16:9"
+        },
+        "reason": "general",
+        "start_ms": 9135,
+        "end_ms": 11699,
+        "flash_first_ms": 9176,
+        "flash_last_ms": 11637,
+        "max_flashes_in_window": 10,
+        "area_fraction": 0.838843,
+        "area_window": "room-10deg",
+        "triggered_by": [
+          "room-10deg",
+          "wcag-10deg"
+        ],
+        "breaks_baseline": true
+      },
+      {
+        "profile": "wcag",
+        "room": {
+          "tv_diagonal_in": 85.0,
+          "seat_distance_in": 48.0,
+          "display_aspect": "16:9"
+        },
+        "reason": "general",
+        "start_ms": 29113,
+        "end_ms": 30593,
+        "flash_first_ms": 29154,
+        "flash_last_ms": 30572,
+        "max_flashes_in_window": 8,
+        "area_fraction": 0.396694,
+        "area_window": "room-10deg",
+        "triggered_by": [
+          "room-10deg"
+        ],
+        "breaks_baseline": false
+      },
+      {
+        "profile": "broadcast",
+        "room": {
+          "tv_diagonal_in": 85.0,
+          "seat_distance_in": 48.0,
+          "display_aspect": "16:9"
+        },
+        "reason": "general",
+        "start_ms": 8343,
+        "end_ms": 9906,
+        "flash_first_ms": 8383,
+        "flash_last_ms": 9885,
+        "max_flashes_in_window": 9,
+        "area_fraction": 0.400826,
+        "area_window": "room-10deg",
+        "triggered_by": [
+          "room-10deg"
+        ],
+        "breaks_baseline": false
+      },
+      {
+        "profile": "broadcast",
+        "room": {
+          "tv_diagonal_in": 85.0,
+          "seat_distance_in": 48.0,
+          "display_aspect": "16:9"
+        },
+        "reason": "general",
+        "start_ms": 9135,
+        "end_ms": 11699,
+        "flash_first_ms": 9155,
+        "flash_last_ms": 11637,
+        "max_flashes_in_window": 10,
+        "area_fraction": 0.832645,
+        "area_window": "room-10deg",
+        "triggered_by": [
+          "room-10deg"
+        ],
+        "breaks_baseline": false
+      },
+      {
+        "profile": "broadcast",
+        "room": {
+          "tv_diagonal_in": 85.0,
+          "seat_distance_in": 48.0,
+          "display_aspect": "16:9"
+        },
+        "reason": "general",
+        "start_ms": 29113,
+        "end_ms": 30593,
+        "flash_first_ms": 29133,
+        "flash_last_ms": 30572,
+        "max_flashes_in_window": 9,
+        "area_fraction": 0.400826,
+        "area_window": "room-10deg",
+        "triggered_by": [
+          "room-10deg"
+        ],
+        "breaks_baseline": false
+      },
+      {
+        "profile": "wcag",
+        "room": {
+          "tv_diagonal_in": 85.0,
+          "seat_distance_in": 48.0,
+          "display_aspect": "16:9"
+        },
+        "reason": "general",
+        "start_ms": 8343,
+        "end_ms": 9864,
+        "flash_first_ms": 8383,
+        "flash_last_ms": 9864,
+        "max_flashes_in_window": 9,
+        "area_fraction": 0.38843,
+        "area_window": "room-10deg",
+        "triggered_by": [
+          "room-10deg"
+        ],
+        "breaks_baseline": false
+      },
+      {
+        "profile": "wcag",
+        "room": {
+          "tv_diagonal_in": 85.0,
+          "seat_distance_in": 48.0,
+          "display_aspect": "16:9"
+        },
+        "reason": "general",
+        "start_ms": 9135,
+        "end_ms": 11699,
+        "flash_first_ms": 9176,
+        "flash_last_ms": 11637,
+        "max_flashes_in_window": 10,
+        "area_fraction": 0.838843,
+        "area_window": "room-10deg",
+        "triggered_by": [
+          "room-10deg",
+          "wcag-10deg"
+        ],
+        "breaks_baseline": true
+      },
+      {
+        "profile": "wcag",
+        "room": {
+          "tv_diagonal_in": 85.0,
+          "seat_distance_in": 48.0,
+          "display_aspect": "16:9"
+        },
+        "reason": "general",
+        "start_ms": 29113,
+        "end_ms": 30593,
+        "flash_first_ms": 29154,
+        "flash_last_ms": 30572,
+        "max_flashes_in_window": 8,
+        "area_fraction": 0.396694,
+        "area_window": "room-10deg",
+        "triggered_by": [
+          "room-10deg"
+        ],
+        "breaks_baseline": false
+      }
+    ],
+    "actual_count": 10,
+    "distinct_spans": [
+      {
+        "start_ms": 8343.0,
+        "end_ms": 11699.0,
+        "found_by": [
+          {
+            "profile": "wcag",
+            "map_path": "results/video-reset/acadia/pipeline-maps/wcag.json",
+            "room": {
+              "tv_diagonal_in": 85.0,
+              "seat_distance_in": 48.0,
+              "display_aspect": "16:9"
+            },
+            "reason": "general",
+            "start_ms": 8343,
+            "end_ms": 9864,
+            "area_fraction": 0.38843,
+            "area_window": "room-10deg"
+          },
+          {
+            "profile": "wcag",
+            "map_path": "results/video-reset/acadia/pipeline-maps/extra-cautious.json",
+            "room": {
+              "tv_diagonal_in": 85.0,
+              "seat_distance_in": 48.0,
+              "display_aspect": "16:9"
+            },
+            "reason": "general",
+            "start_ms": 8343,
+            "end_ms": 9864,
+            "area_fraction": 0.38843,
+            "area_window": "room-10deg"
+          },
+          {
+            "profile": "broadcast",
+            "map_path": "results/video-reset/acadia/pipeline-maps/broadcast.json",
+            "room": {
+              "tv_diagonal_in": 85.0,
+              "seat_distance_in": 48.0,
+              "display_aspect": "16:9"
+            },
+            "reason": "general",
+            "start_ms": 8343,
+            "end_ms": 9906,
+            "area_fraction": 0.400826,
+            "area_window": "room-10deg"
+          },
+          {
+            "profile": "wcag",
+            "map_path": "results/video-reset/acadia/pipeline-maps/wcag.json",
+            "room": {
+              "tv_diagonal_in": 85.0,
+              "seat_distance_in": 48.0,
+              "display_aspect": "16:9"
+            },
+            "reason": "general",
+            "start_ms": 9135,
+            "end_ms": 11699,
+            "area_fraction": 0.838843,
+            "area_window": "room-10deg"
+          },
+          {
+            "profile": "broadcast",
+            "map_path": "results/video-reset/acadia/pipeline-maps/broadcast.json",
+            "room": {
+              "tv_diagonal_in": 85.0,
+              "seat_distance_in": 48.0,
+              "display_aspect": "16:9"
+            },
+            "reason": "general",
+            "start_ms": 9135,
+            "end_ms": 11699,
+            "area_fraction": 0.832645,
+            "area_window": "room-10deg"
+          },
+          {
+            "profile": "wcag",
+            "map_path": "results/video-reset/acadia/pipeline-maps/extra-cautious.json",
+            "room": {
+              "tv_diagonal_in": 85.0,
+              "seat_distance_in": 48.0,
+              "display_aspect": "16:9"
+            },
+            "reason": "general",
+            "start_ms": 9135,
+            "end_ms": 11699,
+            "area_fraction": 0.838843,
+            "area_window": "room-10deg"
+          },
+          {
+            "profile": "wcag",
+            "map_path": "results/video-reset/acadia/acadia.wcag.json",
+            "room": null,
+            "reason": "general",
+            "start_ms": 9302,
+            "end_ms": 11532,
+            "area_fraction": 0.511285,
+            "area_window": "wcag-10deg"
+          }
+        ],
+        "breaks_wcag_baseline": true,
+        "reasons": [
+          "general"
+        ],
+        "found_in_runs": 7
+      },
+      {
+        "start_ms": 29113.0,
+        "end_ms": 30593.0,
+        "found_by": [
+          {
+            "profile": "wcag",
+            "map_path": "results/video-reset/acadia/pipeline-maps/wcag.json",
+            "room": {
+              "tv_diagonal_in": 85.0,
+              "seat_distance_in": 48.0,
+              "display_aspect": "16:9"
+            },
+            "reason": "general",
+            "start_ms": 29113,
+            "end_ms": 30593,
+            "area_fraction": 0.396694,
+            "area_window": "room-10deg"
+          },
+          {
+            "profile": "broadcast",
+            "map_path": "results/video-reset/acadia/pipeline-maps/broadcast.json",
+            "room": {
+              "tv_diagonal_in": 85.0,
+              "seat_distance_in": 48.0,
+              "display_aspect": "16:9"
+            },
+            "reason": "general",
+            "start_ms": 29113,
+            "end_ms": 30593,
+            "area_fraction": 0.400826,
+            "area_window": "room-10deg"
+          },
+          {
+            "profile": "wcag",
+            "map_path": "results/video-reset/acadia/pipeline-maps/extra-cautious.json",
+            "room": {
+              "tv_diagonal_in": 85.0,
+              "seat_distance_in": 48.0,
+              "display_aspect": "16:9"
+            },
+            "reason": "general",
+            "start_ms": 29113,
+            "end_ms": 30593,
+            "area_fraction": 0.396694,
+            "area_window": "room-10deg"
+          }
+        ],
+        "breaks_wcag_baseline": false,
+        "reasons": [
+          "general"
+        ],
+        "found_in_runs": 3
+      }
+    ],
+    "distinct_span_count": 2,
+    "simulated": [],
+    "unsupported_or_not_analyzed": [
+      "The audio track: the analyzer measures pictures only.",
+      "Any viewing room other than none (the standalone maps) and 85 inch at 4 feet (the pipeline maps).",
+      "HDR transfer functions: not applicable, the source is tagged BT.709 SDR; a PQ or HLG input is refused, not measured.",
+      "The pattern rule: not applied under the WCAG profile; applied under broadcast, which found no pattern span."
+    ],
+    "independent_validation": "pending"
+  },
+  "preparation": {
+    "status": "ready",
+    "receipt": {
+      "path": "results/video-reset/acadia/local-receipt.json",
+      "sha256": "dbd3e44b78703e52e3733c2170eaa1e62a78286be524f1837efcc30ba02bf55e",
+      "source_sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+      "title": "Acadia coastal scenery (National Park Service, public domain)",
+      "presets": [
+        "wcag",
+        "broadcast",
+        "extra-cautious"
+      ],
+      "verification": {
+        "checked_inputs_sha256": "cd7f95048dfb9b7907600c0bb559e4a0197536886d77dce63fb07be0bb18139f",
+        "failed_checks": [],
+        "outcome": "cover proven drawn",
+        "report": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/verify/report.json",
+        "report_sha256": "0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019",
+        "status": "passed"
+      },
+      "physical_tv_validated": false,
+      "artifacts": {
+        "broadcast": {
+          "files": {
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/maps/broadcast.json": "d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/master.m3u8": "e58afb6191472c57c46d96b0828a26eaf794175adb58d132e61967c05e314a57",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/seg_0_00000.ts": "40727b3219673b061d07b79775567c9408d4daf125384f322b9160d0877ebbae",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/seg_0_00001.ts": "ef57f3c57dfd70bee8a77972ed921ad2e441e1f0124c1073ffd46afda8a86236",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/seg_0_00002.ts": "7e2d630713514425bf810cc1578b9c809b79d39252594028956719195094b7dc",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/seg_0_00003.ts": "6bc3ab5002ba9dea9a4f420a652ddf970284d1777c47c73f5258cd3bd614f995",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/seg_0_00004.ts": "f6988ce42aaff096b4265abd1fdbe950e7de109608e310f01413ae4de9c705a5",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/seg_0_00005.ts": "3f76825378e6e08a87522e6d65266c7d6e389c29c37563e5d23928f80ff946cd",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/seg_0_00006.ts": "2853a5125f11489de49c84dc8c23ec0869902ddc5a29d1ec947d1ca9dad608d0",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/seg_0_00007.ts": "2cf67715f221629555184fc56d32aa740d6898c7eb869ccc8594be4cc18d788c",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/seg_0_00008.ts": "06e1e691b38c15e31f9d64b9dea8058f54811e3f3a67c9a71896b2d96b994c4a",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/seg_0_00009.ts": "4fe4e0bcb17906529274969c364df2bda715b9126a2a2216ae9f0f61627999d4",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/stream_0.m3u8": "f75ec3e6ad1c8b384ecc8d743c31527620b0b6e79e771ed26498912969fa982e",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/safe.mp4": "9baa7a90148bdda70e52e81e68861a33dbfd9146649ca2c41af923d56ba55cac"
+          },
+          "map": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/maps/broadcast.json",
+          "master_playlist": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/hls/master.m3u8",
+          "safe_master": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/broadcast/safe.mp4"
+        },
+        "extra-cautious": {
+          "files": {
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/maps/extra-cautious.json": "c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/master.m3u8": "d36f342bfbae383ce8a8a7349499c4996900100c9c731c1014cc3e12743a19f8",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/seg_0_00000.ts": "40727b3219673b061d07b79775567c9408d4daf125384f322b9160d0877ebbae",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/seg_0_00001.ts": "32c5bdd34a8b758869a94fb81a44e5eb2ace6757acf41b787b44dceb548087ce",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/seg_0_00002.ts": "45f2a6207c90fe3da855e72f25f8468b7c67571d5d14bdb52920e8950c552f45",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/seg_0_00003.ts": "451ef24c79582808f750811869f05e334d65ab361b5929736ff8001fb950df5a",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/seg_0_00004.ts": "9722dc5b5c8f7a03bde6783066e74daa627202fb921dcdaf90c88422c0166f62",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/seg_0_00005.ts": "5bf5909857dc06ab67e4ad277577bb7e2ebc22030eaf0d4fa6001bcc015e28a1",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/seg_0_00006.ts": "61e60b2d858bde1a92d98728790314d5311c44fbe713737cb830528e84353f67",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/seg_0_00007.ts": "c4ee3d36c3f69ec19b7b8513c0972ef6eaa1adfa5c3ee599367a4062ed5053c2",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/seg_0_00008.ts": "c9564a8d305833424e94cd7cd7b87b556182f48aa0f13627a0f61a11c9bd2941",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/seg_0_00009.ts": "3793137f4257ec5778c7994733ad9a4b11e4c9061c6b6c00e2763db98afdfcc0",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/stream_0.m3u8": "f75ec3e6ad1c8b384ecc8d743c31527620b0b6e79e771ed26498912969fa982e",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/safe.mp4": "00a214650090bdabc2a9e4639d68a999aacd762be61055cd9b6fedf7e9175f59"
+          },
+          "map": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/maps/extra-cautious.json",
+          "master_playlist": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/hls/master.m3u8",
+          "safe_master": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/extra-cautious/safe.mp4"
+        },
+        "wcag": {
+          "files": {
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/maps/wcag.json": "709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/master.m3u8": "e58afb6191472c57c46d96b0828a26eaf794175adb58d132e61967c05e314a57",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/seg_0_00000.ts": "40727b3219673b061d07b79775567c9408d4daf125384f322b9160d0877ebbae",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/seg_0_00001.ts": "ef57f3c57dfd70bee8a77972ed921ad2e441e1f0124c1073ffd46afda8a86236",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/seg_0_00002.ts": "7e2d630713514425bf810cc1578b9c809b79d39252594028956719195094b7dc",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/seg_0_00003.ts": "6bc3ab5002ba9dea9a4f420a652ddf970284d1777c47c73f5258cd3bd614f995",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/seg_0_00004.ts": "f6988ce42aaff096b4265abd1fdbe950e7de109608e310f01413ae4de9c705a5",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/seg_0_00005.ts": "3f76825378e6e08a87522e6d65266c7d6e389c29c37563e5d23928f80ff946cd",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/seg_0_00006.ts": "2853a5125f11489de49c84dc8c23ec0869902ddc5a29d1ec947d1ca9dad608d0",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/seg_0_00007.ts": "2cf67715f221629555184fc56d32aa740d6898c7eb869ccc8594be4cc18d788c",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/seg_0_00008.ts": "06e1e691b38c15e31f9d64b9dea8058f54811e3f3a67c9a71896b2d96b994c4a",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/seg_0_00009.ts": "4fe4e0bcb17906529274969c364df2bda715b9126a2a2216ae9f0f61627999d4",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/stream_0.m3u8": "f75ec3e6ad1c8b384ecc8d743c31527620b0b6e79e771ed26498912969fa982e",
+            "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/safe.mp4": "9baa7a90148bdda70e52e81e68861a33dbfd9146649ca2c41af923d56ba55cac"
+          },
+          "map": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/maps/wcag.json",
+          "master_playlist": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/hls/master.m3u8",
+          "safe_master": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/safe/wcag/safe.mp4"
+        }
+      }
+    },
+    "manifest": {
+      "path": "results/video-reset/acadia/prepared-manifest.json",
+      "sha256": "ad74eb70199adc8597d1f7bcdba57fa1c0b805987e2f8a11f240fba4c036dd4c",
+      "bundleId": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13",
+      "version": 1,
+      "publicKeySha256": "68fef375357ae81f56b895e5e4e0bb03c159bda47d2b93ceac92dd661f43bd30",
+      "titles": [
+        {
+          "id": "prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+          "title": "Acadia coastal scenery (National Park Service, public domain)",
+          "sourceSha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+          "durationMs": 37641.756,
+          "maps": {
+            "broadcast": {
+              "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.json",
+              "sha256": "d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1"
+            },
+            "extra-cautious": {
+              "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.json",
+              "sha256": "c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f"
+            },
+            "wcag": {
+              "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.json",
+              "sha256": "709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a"
+            }
+          },
+          "renditions": {
+            "broadcast": {
+              "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.mp4",
+              "sha256": "9baa7a90148bdda70e52e81e68861a33dbfd9146649ca2c41af923d56ba55cac",
+              "durationMs": 37620.917,
+              "startOffsetMs": 0.0,
+              "guardBandMs": 500.0,
+              "minCoverMs": 400.0
+            },
+            "extra-cautious": {
+              "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4",
+              "sha256": "00a214650090bdabc2a9e4639d68a999aacd762be61055cd9b6fedf7e9175f59",
+              "durationMs": 37620.917,
+              "startOffsetMs": 0.0,
+              "guardBandMs": 1000.0,
+              "minCoverMs": 800.0
+            },
+            "wcag": {
+              "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.mp4",
+              "sha256": "9baa7a90148bdda70e52e81e68861a33dbfd9146649ca2c41af923d56ba55cac",
+              "durationMs": 37620.917,
+              "startOffsetMs": 0.0,
+              "guardBandMs": 500.0,
+              "minCoverMs": 400.0
+            }
+          },
+          "verification": {
+            "checkedInputsSha256": "cd7f95048dfb9b7907600c0bb559e4a0197536886d77dce63fb07be0bb18139f",
+            "outcome": "cover proven drawn",
+            "reportSha256": "0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019"
+          }
+        }
+      ],
+      "file_count": 6
+    }
+  },
+  "report": {
+    "html": "results/video-reset/acadia/verification-report.json",
+    "plots": [
+      "results/video-reset/acadia/plots/nps_acadia_coastal_broll_720p_luminance_and_area.png"
+    ]
+  },
+  "tests": {
+    "file": "flashmap/tests/test_video_reset_boundaries.py",
+    "negative_controls": {
+      "path": "results/video-reset/negative-controls.json",
+      "sha256": "ad11974302a6fa15a5bf7c88502b18d094534c60bc00772d0b9c635c4624ee0f",
+      "controls": [
+        {
+          "control": "A",
+          "break": "window count: more than three becomes three or more",
+          "tests_that_failed": [
+            "test_the_same_four_flashes_one_millisecond_wider_than_a_second_pass",
+            "test_a_gap_in_the_timestamps_does_not_carry_old_flashes_into_the_new_period",
+            "test_the_hidden_interval_starts_one_second_before_the_fourth_flash_and_covers_them_all",
+            "test_a_frame_whose_timestamp_goes_backwards_is_dropped_rather_than_rewinding_the_window",
+            "test_a_frame_of_nan_neither_crashes_the_tracker_nor_counts_as_a_flash"
+          ],
+          "restored": true
+        },
+        {
+          "control": "B",
+          "break": "area: more than a quarter becomes a quarter or more",
+          "tests_that_failed": [
+            "test_flashing_over_exactly_a_quarter_of_the_reference_window_passes"
+          ],
+          "restored": true
+        },
+        {
+          "control": "C",
+          "break": "window edge: the flash exactly one second earlier is dropped",
+          "tests_that_failed": [
+            "test_four_flashes_whose_first_and_last_are_exactly_one_second_apart_fail",
+            "test_the_hidden_interval_starts_one_second_before_the_fourth_flash_and_covers_them_all",
+            "test_flashing_over_one_pixel_more_than_a_quarter_fails"
+          ],
+          "restored": true
+        },
+        {
+          "control": "D",
+          "break": "duplicate timestamps: a repeated presentation time is counted",
+          "tests_that_failed": [
+            "test_a_frame_that_repeats_the_previous_timestamp_is_not_counted_twice"
+          ],
+          "restored": true
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "The analyzer measures the published WCAG 2.2 and broadcast flash and pattern limits on decoded frames at a reduced working width; it is not a medical device and detection can miss flashing.",
+    "A finding depends on the settings named here, including the viewing room: a stricter room adds a smaller area window and can add findings.",
+    "A prepared rendition covers the planned spans; it does not prove what a viewer sees on any physical television.",
+    "Hashes establish file identity, not that anyone watched the result.",
+    "The two standalone maps name the file before it carried the HAZARD_ prefix; the SHA-256 is the identity and is the same.",
+    "The wcag and broadcast renditions are byte for byte the same file, because their cover plans are identical; the extra-cautious rendition differs by its wider guard band.",
+    "Nobody has looked at the flagged spans, on purpose: the source is only read by the analyzer and the plot tool."
+  ]
+}

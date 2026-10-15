@@ -52,6 +52,7 @@ TITLES = {
     # clip the timing harness and the Oct 9 AWS runs used.
     "app/assets/raw/benign-story/harbor.mp4": "Harbor story (benign demo)",
     "media/markers_packed.mp4": "The Calm Frames timing marker clip",
+    "nps_acadia_coastal_broll_720p.mp4": "Acadia B-Roll: Coastal Scenery (National Park Service)",
     # The presentation pictures for the shelf and details page are never film
     # frames or signed playback stills.
     "app/assets/image/tv/harbor.png": "Harbor presentation artwork",

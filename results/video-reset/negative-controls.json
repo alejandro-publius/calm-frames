@@ -1,0 +1,78 @@
+{
+  "statement": "Each break was applied to flashmap/src/flashmap/analyze.py on its own, the boundary test file was run, the failing tests were recorded, and the file was restored byte for byte (git diff empty) before the next break. A test that stays green under a break proves nothing; these are the ones that went red.",
+  "recorded_utc": "2026-10-15T20:46:32Z",
+  "repository_commit_before_tests_were_committed": "ee76cf559a5814183bc005de57512ee08a10fb5a",
+  "test_file": "flashmap/tests/test_video_reset_boundaries.py",
+  "tests_in_file": 15,
+  "all_pass_unbroken": "15 passed",
+  "controls": [
+    {
+      "control": "A",
+      "break": "window count: more than three becomes three or more",
+      "file": "flashmap/src/flashmap/analyze.py",
+      "result_with_break": "5 failed, 10 passed in 2.07s",
+      "tests_that_failed": [
+        "test_the_same_four_flashes_one_millisecond_wider_than_a_second_pass",
+        "test_a_gap_in_the_timestamps_does_not_carry_old_flashes_into_the_new_period",
+        "test_the_hidden_interval_starts_one_second_before_the_fourth_flash_and_covers_them_all",
+        "test_a_frame_whose_timestamp_goes_backwards_is_dropped_rather_than_rewinding_the_window",
+        "test_a_frame_of_nan_neither_crashes_the_tracker_nor_counts_as_a_flash"
+      ],
+      "restored": true
+    },
+    {
+      "control": "B",
+      "break": "area: more than a quarter becomes a quarter or more",
+      "file": "flashmap/src/flashmap/analyze.py",
+      "result_with_break": "1 failed, 14 passed in 1.96s",
+      "tests_that_failed": [
+        "test_flashing_over_exactly_a_quarter_of_the_reference_window_passes"
+      ],
+      "restored": true
+    },
+    {
+      "control": "C",
+      "break": "window edge: the flash exactly one second earlier is dropped",
+      "file": "flashmap/src/flashmap/analyze.py",
+      "result_with_break": "3 failed, 12 passed in 1.79s",
+      "tests_that_failed": [
+        "test_four_flashes_whose_first_and_last_are_exactly_one_second_apart_fail",
+        "test_the_hidden_interval_starts_one_second_before_the_fourth_flash_and_covers_them_all",
+        "test_flashing_over_one_pixel_more_than_a_quarter_fails"
+      ],
+      "restored": true
+    },
+    {
+      "control": "D",
+      "break": "duplicate timestamps: a repeated presentation time is counted",
+      "file": "flashmap/src/flashmap/analyze.py",
+      "result_with_break": "1 failed, 14 passed in 1.85s",
+      "tests_that_failed": [
+        "test_a_frame_that_repeats_the_previous_timestamp_is_not_counted_twice"
+      ],
+      "restored": true
+    }
+  ],
+  "breaks": {
+    "A": {
+      "from": "failing = counts > self.profile.flash_limit_per_second",
+      "to": "failing = counts >= self.profile.flash_limit_per_second"
+    },
+    "B": {
+      "from": "if value > self.profile.area_fraction_limit]",
+      "to": "if value >= self.profile.area_fraction_limit]"
+    },
+    "C": {
+      "from": "while events and events[0][0] < pts_ms - window_ms:",
+      "to": "while events and events[0][0] <= pts_ms - window_ms:"
+    },
+    "D": {
+      "from": "if self._last_pts is not None and frame.pts_ms <= self._last_pts:",
+      "to": "if self._last_pts is not None and frame.pts_ms < self._last_pts:"
+    }
+  },
+  "limitations": [
+    "Synthetic frames are solid grey arrays with exact timestamps; they exercise counting, timing, area and input refusal, not decoding of real codecs, camera noise or colour transforms (other suites cover those).",
+    "A break that is caught by a test is evidence the test watches that line; it is not evidence that the detector matches any clinical outcome."
+  ]
+}
