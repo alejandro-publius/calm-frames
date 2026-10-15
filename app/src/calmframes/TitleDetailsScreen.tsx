@@ -16,7 +16,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import HomeHarborScene from './HomeHarborScene';
-import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
+import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, scale } from './calmStyles';
 import { noticeForTitle } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import FlashMapStrip from './FlashMapStrip';
@@ -31,6 +31,8 @@ import { CheckedTitle } from './titleStatus';
 import { useUiCapture } from './uiCapture';
 import { TITLE_DETAILS_BLOCKED_FRAME, TITLE_DETAILS_FRAME, TITLE_DETAILS_HARBOR_FRAME, TITLE_DETAILS_DEMO_FRAME } from './uiFrames';
 import ViewingPlan from './ViewingPlan';
+import PreparedVideoAnalysis from './PreparedVideoAnalysis';
+import { concernsPackagedLibrary, packagedLibrary } from './packagedLibrary';
 import {
   benignStorySettings,
   isBundledBenignStory,
@@ -97,7 +99,11 @@ const TitleDetailsScreen = ({
     return seconds > 0 && holds > 0 ? `${seconds} sec · ${holds} picture pause${holds === 1 ? '' : 's'}` : null;
   }, [practiceOffered]);
   const playLabel = presentation.action === 'Watch now' ? 'Play' : presentation.action;
-  const notice = noticeForTitle(entry);
+  const notice = noticeForTitle(entry) ?? (concernsPackagedLibrary(entry.title) && !packagedLibrary.evidenceFor(entry.title, settings) ? {
+    title: 'Analysis record unavailable',
+    detail: 'This video does not match the prepared library in this build. The picture stays hidden.',
+    tone: 'blocked' as const,
+  } : null);
   const playable = notice === null;
   useUiCapture(
     playable ? (presentation.art === 'harbor-cinematic' ? (demo ? TITLE_DETAILS_DEMO_FRAME : TITLE_DETAILS_HARBOR_FRAME) : TITLE_DETAILS_FRAME) : TITLE_DETAILS_BLOCKED_FRAME,
@@ -152,6 +158,7 @@ const TitleDetailsScreen = ({
           <Text style={styles.meta} testID={`${testID}-meta`}>{meta.join(' · ')}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
           </View>
+        <PreparedVideoAnalysis entry={entry} settings={settings} compact testID={`${testID}-analysis`} />
         <View style={styles.actionRail}>
           <View style={styles.buttons}>
             <CalmButton primary playIcon sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
@@ -171,8 +178,8 @@ const TitleDetailsScreen = ({
         <View testID={`${testID}-info`} style={styles.infoAnchor}
           onLayout={({ nativeEvent }) => { infoTop.current = nativeEvent.layout.y; }}>
           <View>
-            <CalmButton quiet testID={`${testID}-show-info`} label="Before you watch ↓"
-              accessibilityLabel="Before you watch: the picture timeline and your viewing settings. Scroll down."
+            <CalmButton quiet testID={`${testID}-show-info`} label="Analysis and settings ↓"
+              accessibilityLabel="Analysis, file record and viewing settings. Scroll down."
               onPress={() => scrollRef.current?.scrollTo({
                 // Keep this same focused control in view above the explanation.
                 y: Math.max(0, infoTop.current - scale(CALM_SPACE.SAFE_Y)),
@@ -183,6 +190,7 @@ const TitleDetailsScreen = ({
       ) : null}
 
       <>
+          <PreparedVideoAnalysis entry={entry} settings={settings} testID={`${testID}-record`} />
           <View style={styles.checkSummary}>
             <View style={styles.chapterHeading}>
               <Text style={styles.section} accessibilityRole="header">Before you watch</Text>
@@ -231,8 +239,8 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
   navigation: { width: '100%', maxWidth: scale(1728), alignItems: 'flex-start', marginBottom: scale(16) },
-  hero: { width: '100%', minHeight: scale(700), alignItems: 'flex-start', justifyContent: 'flex-start' },
-  heroCopy: { width: '100%', maxWidth: scale(720), alignItems: 'flex-start', paddingTop: scale(96) },
+  hero: { width: '100%', minHeight: scale(CALM_FLOW.HERO_HEIGHT), alignItems: 'flex-start', justifyContent: 'flex-start' },
+  heroCopy: { width: '100%', maxWidth: scale(720), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
   actionRail: { width: scale(620), alignItems: 'flex-start', gap: scale(26), marginTop: scale(24) },
   quickSummary: { ...CALM_TEXT.supporting, maxWidth: scale(600), color: CALM_COLORS.TEXT_DIM },
   heroArt: { width: '100%', maxWidth: scale(1120) },
@@ -241,8 +249,8 @@ const styles = StyleSheet.create({
   artEdge: { position: 'absolute', top: 0, bottom: 0, right: 0, width: scale(120) },
   meta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left', marginBottom: scale(16) },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
-  heroTitle: { fontSize: scale(120), lineHeight: scale(136), marginBottom: scale(8) },
-  longTitle: { fontSize: scale(64), lineHeight: scale(76) },
+  heroTitle: { ...CALM_TEXT.feature, marginBottom: scale(8) },
+  longTitle: { ...CALM_TEXT.screen },
   synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left', maxWidth: scale(620) },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, textAlign: 'left' },

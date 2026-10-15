@@ -15,6 +15,7 @@ import PictureHoldIntroduction from './PictureHoldIntroduction';
 import { isBundledBenignStory } from './benignStory';
 import {
   CALM_CONTROL,
+  CALM_FLOW,
   COASTAL_COLORS as CALM_COLORS,
   CALM_SPACE,
   CALM_TEXT,
@@ -134,10 +135,8 @@ const KidHomeScreen = ({
   const otherStories = listed.filter((entry) => (!hasMainStory || (!isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID)) && (entry !== featured || !titlePresentation(entry.title).art || !hasMainStory));
   const playbackCheck = listed.find((entry) => entry.title.id === OFFLINE_TITLE_ID);
   const feature = featured ? titlePresentation(featured.title) : null;
-  // The hero names the app, not the title. The title's length and hold count
-  // are on Details, and Play's spoken label still says which title it starts.
-  // Titles held back by the household's settings are listed in the parent
-  // area, not announced here.
+  // Name the actual selection. Analysis is the first action; direct Play
+  // remains available for repeat viewing. Unavailable titles stay in Parents.
   const featuredAction = feature?.action === 'Watch now' ? 'Play' : feature?.action;
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
     ? returnFocusId
@@ -150,7 +149,7 @@ const KidHomeScreen = ({
   const returnTo: ReturnFocusControl | 'learn' | null = saving ? null
     : returnToIntroduction ? 'learn'
     : returnFocusControl === 'parent' ? 'parent'
-    : !returnFocusId ? 'watch'
+    : !returnFocusId ? 'details'
     : returnFocusControl ?? (fromIntroduction ? 'learn' : returningToFeatured ? 'details' : 'poster');
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
   const empty = listed.length === 0;
@@ -193,7 +192,7 @@ const KidHomeScreen = ({
   return (
     <View testID={testID} style={styles.screen}>
       <HomeHarborScene immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
-      <CalmPageHeader wordmark={false} onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
+      <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" onPress={() => setChoosingProfile(!choosingProfile)} /> : null}
           {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" accessibilityLabel="How it works" hasTVPreferredFocus={returnTo === 'learn'}
@@ -222,11 +221,13 @@ const KidHomeScreen = ({
           <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroCopy}>
-                <Text accessibilityRole="header" testID={`${testID}-title`} style={styles.featureTitle}>Calm Frames</Text>
+                <Text accessibilityRole="header" testID={`${testID}-title`} style={styles.section}>Choose a video</Text>
+                <Text style={styles.featureTitle} testID={`${testID}-video-title`}>{feature.name}</Text>
+                <Text style={styles.videoMeta}>{`${Math.round((featured.title.durationMs ?? 0) / 1000)} sec · ${isBundledBenignStory(featured.title) ? 'Simulated demo' : 'Prepared video'}`}</Text>
                 <View style={styles.actions}>
-                  <CalmButton primary playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
+                  <CalmButton primary onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="View analysis" accessibilityLabel={`View analysis: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
+                  <CalmButton quiet playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
-                  <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" accessibilityLabel={`Details: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
               </View>
             </View> : null}
@@ -269,12 +270,10 @@ const styles = StyleSheet.create({
   navigationLink: { alignSelf: 'center' },
   libraryScroll: { flex: 1 },
   scrollContent: { paddingBottom: scale(12) },
-  hero: { width: '100%', minHeight: scale(810), alignItems: 'flex-start', paddingBottom: scale(36) },
-  heroCopy: { width: scale(840), paddingTop: scale(248), alignItems: 'flex-start' },
-  // One line at 120: "Calm Frames" measures 755 units in the display face,
-  // which ends before the island's tree at about 900. At 184 it would run to
-  // 1158 and under the lighthouse.
-  featureTitle: { ...CALM_TEXT.screen, fontSize: scale(120), lineHeight: scale(136), color: CALM_COLORS.TEXT, marginBottom: scale(36) },
+  hero: { width: '100%', minHeight: scale(CALM_FLOW.HERO_HEIGHT), alignItems: 'flex-start', paddingBottom: scale(36) },
+  heroCopy: { width: scale(CALM_FLOW.READING_WIDTH), paddingTop: scale(CALM_FLOW.HERO_TOP), alignItems: 'flex-start' },
+  featureTitle: { ...CALM_TEXT.feature, color: CALM_COLORS.TEXT, marginTop: scale(CALM_SPACE.BLOCK), marginBottom: scale(CALM_SPACE.ROW) },
+  videoMeta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(CALM_SPACE.BLOCK) },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   learn: { flexDirection: 'row', marginTop: scale(8) },
   sectionHeading: { alignItems: 'flex-start', marginBottom: scale(24) },

@@ -108,7 +108,7 @@ const CalmButton = ({
         disabled ? styles.buttonDisabled : null,
         focused && !disabled ? (primary ? styles.primaryFocused : styles.buttonFocused) : null,
       ]}>
-      {playIcon ? <Text accessible={false} importantForAccessibility="no" style={[styles.label, styles.playIcon, styles.primaryLabel]}>▶</Text> : null}
+      {playIcon ? <Text accessible={false} importantForAccessibility="no" style={[styles.label, styles.playIcon, primary && !disabled ? ((focused || pressed) ? styles.focusedPrimaryLabel : styles.primaryLabel) : null, disabled ? styles.labelDisabled : null]}>▶</Text> : null}
       <Text
         testID={`${testID}-label`}
         style={[styles.label, compact ? styles.compactLabel : null, focused && !disabled ? styles.focusedLabel : null, primary && !disabled ? ((focused || pressed) ? styles.focusedPrimaryLabel : styles.primaryLabel) : null, disabled ? styles.labelDisabled : null, study && primary && !disabled ? styles.primaryLabel : null]}>

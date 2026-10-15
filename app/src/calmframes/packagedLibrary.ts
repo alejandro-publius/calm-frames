@@ -34,6 +34,7 @@ interface PackagedTitle {
   durationMs: number;
   maps: Record<PresetName, { path: string; sha256: string; text: string }>;
   renditions: Record<PresetName, PackagedRendition>;
+  verification: { reportSha256: string; checkedInputsSha256: string; outcome: string };
 }
 interface PackagedManifest {
   bundleId: string;
@@ -169,7 +170,11 @@ function parseManifest(raw: string): PackagedManifest {
     digest(verification.checkedInputsSha256);
     text(verification.outcome);
     return { id, title: text(title.title), sourceSha256, durationMs,
-      maps: mapResult, renditions: renditionResult };
+      maps: mapResult, renditions: renditionResult, verification: {
+        reportSha256: digest(verification.reportSha256),
+        checkedInputsSha256: digest(verification.checkedInputsSha256),
+        outcome: text(verification.outcome),
+      } };
   });
   if (Object.keys(files).length !== used.size) {
     throw new Error('The prepared bundle has unexpected assets.');
@@ -245,6 +250,20 @@ export function createPackagedLibrary(raw: string) {
   return {
     problem,
     titles,
+    /** Read-only evidence, using the same exact identity predicate as playback. */
+    evidenceFor: (title: CatalogTitle, settings: HouseholdSettings) => {
+      if (!match(title, settings)) return null;
+      const item = manifest.titles.find((candidate) => candidate.id === title.id)!;
+      return {
+        bundleId: manifest.bundleId, sourceSha256: item.sourceSha256,
+        renditionSha256: item.renditions[settings.preset].sha256,
+        renditionPath: uri(item.renditions[settings.preset].path),
+        renditionStartOffsetMs: item.renditions[settings.preset].startOffsetMs,
+        preset: settings.preset,
+        maps: PRESET_NAMES.map((preset) => ({ preset, sha256: item.maps[preset].sha256 })),
+        ...item.verification,
+      };
+    },
     publicKeyFor: (title: CatalogTitle, settings: HouseholdSettings): string | null =>
       match(title, settings) ? manifest.publicKeyBase64 : null,
     acceptsRoute: (data: RouteTitle, guarded?: RouteGuard): boolean => {

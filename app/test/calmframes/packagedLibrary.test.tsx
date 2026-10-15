@@ -37,6 +37,7 @@ describe('the compiled prepared library', () => {
       const { entry, settings } = checked();
       const changed = { ...entry.title, [field]: 'substituted' };
       expect(packagedLibrary.publicKeyFor(changed, settings)).toBeNull();
+      expect(packagedLibrary.evidenceFor(changed, settings)).toBeNull();
     });
 
   it.each(['sha256', 'durationMs', 'renditionSha256', 'renditionStartOffsetMs', 'titleId', 'maps'])(
@@ -68,6 +69,19 @@ describe('the compiled prepared library', () => {
       expect(rejected.problem).not.toBeNull();
       expect(rejected.titles(DEFAULT_SETTINGS)).toEqual([]);
     });
+
+  it.each(PRESET_NAMES)('binds displayed evidence to the exact %s playback rendition', preset => {
+    const { entry, settings, data, guarded } = checked(preset);
+    const evidence = packagedLibrary.evidenceFor(entry.title, settings)!;
+    expect(evidence.sourceSha256).toBe(guarded.sha256);
+    expect(evidence.renditionSha256).toBe(guarded.renditionSha256);
+    expect(evidence.renditionPath).toBe(data.uri);
+    expect(evidence.reportSha256).toBe(manifest.titles[0].verification.reportSha256);
+    expect(evidence.checkedInputsSha256).toBe(manifest.titles[0].verification.checkedInputsSha256);
+    expect(evidence.maps).toEqual(PRESET_NAMES.map(name => ({ preset: name, sha256: manifest.titles[0].maps[name].sha256 })));
+    evidence.sourceSha256 = 'altered';
+    expect(packagedLibrary.evidenceFor(entry.title, settings)?.sourceSha256).toBe(guarded.sha256);
+  });
 
   it('allows an intentionally empty build without inventing a key', () => {
     const empty = createPackagedLibrary('{"version":1,"titles":[]}');

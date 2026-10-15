@@ -1,8 +1,4 @@
-/**
- * The coastal Home and Details. Home is the app's name over the scenery with
- * Play and Details and nothing else in the hero: the title's facts live on
- * Details, which is also where the practice demo is reached.
- */
+/** The prepared-video selection and analysis steps share coastal controls and type. */
 import React from 'react';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 import { fireEvent, render, screen } from '@testing-library/react-native';
@@ -25,11 +21,11 @@ function preferred(): string[] {
   return [...new Set(ids)];
 }
 
-test('Home is the app name, the scenery, Play and Details: no title facts, no explanation, no demo card, no notice', () => {
+test('Home names the selected video and leads to analysis without adding a demo card', () => {
   const onOpen = jest.fn();
   const launch = jest.fn();
   render(<KidHomeScreen titles={titles} onOpen={onOpen} onPlay={jest.fn()} onLaunchControl={launch} onOpenParentArea={jest.fn()} />);
-  expect(screen.getByTestId('kid-home-title').props.children).toBe('Calm Frames');
+  expect(screen.getByTestId('kid-home-title').props.children).toBe('Choose a video');
   expect(screen.getAllByText('Calm Frames')).toHaveLength(1);
   expect(screen.queryByTestId('kid-home-meta')).toBeNull();
   expect(screen.queryByText(/No picture holds/)).toBeNull();
@@ -40,9 +36,9 @@ test('Home is the app name, the scenery, Play and Details: no title facts, no ex
   expect(screen.queryByTestId('kid-home-hidden-count')).toBeNull();
   expect(screen.queryByText(/unavailable/)).toBeNull();
   expect(screen.getByRole('button', { name: 'Play: Harbor' })).toBeTruthy();
-  expect(screen.getByRole('button', { name: 'Details: Harbor' })).toBeTruthy();
+  expect(screen.getByRole('button', { name: 'View analysis: Harbor' })).toBeTruthy();
   expect(screen.getByTestId('kid-home-parent-area')).toBeTruthy();
-  expect(preferred()).toEqual(['kid-home-watch']);
+  expect(preferred()).toEqual(['kid-home-more-info']);
   fireEvent.press(screen.getByTestId('kid-home-more-info'));
   expect(launch).toHaveBeenCalledWith('details');
   expect(onOpen).toHaveBeenCalledWith(harbor);
@@ -51,11 +47,11 @@ test('Home is the app name, the scenery, Play and Details: no title facts, no ex
   }
 });
 
-test('one teal action on Home: Play is primary, Details and Help are quiet', () => {
+test('one teal action on Home: analysis is primary, Play and Help are quiet', () => {
   render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={jest.fn()} />);
-  const watch = StyleSheet.flatten(screen.getByTestId('kid-home-watch').props.style);
+  const watch = StyleSheet.flatten(screen.getByTestId('kid-home-more-info').props.style);
   expect(watch.backgroundColor).toBe(CALM_COLORS.PRIMARY);
-  for (const id of ['kid-home-more-info', 'kid-home-learn', 'kid-home-parent-area']) {
+  for (const id of ['kid-home-watch', 'kid-home-learn', 'kid-home-parent-area']) {
     expect(StyleSheet.flatten(screen.getByTestId(id).props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
   }
 });
@@ -86,11 +82,10 @@ test('when the demo itself leads the shelf there is no second demo control and n
 
 test('the Home heading is one large line sized to clear the artwork, and Details uses the same reading scale', () => {
   const home = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} />);
-  const homeTitle = StyleSheet.flatten(home.getByTestId('kid-home-title').props.style);
-  // "Calm Frames" measures 755 units at 120 in the display face and would
-  // reach the lighthouse island at 184; see KidHomeScreen's style note.
-  expect(homeTitle.fontSize).toBe(120);
-  expect(homeTitle.fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE * 3);
+  const homeTitle = StyleSheet.flatten(home.getByTestId('kid-home-video-title').props.style);
+  // Both steps use the shared feature type token.
+  expect(homeTitle.fontSize).toBe(80);
+  expect(homeTitle.fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE * 2);
   home.unmount();
   const details = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
   const detailsTitle = StyleSheet.flatten(details.getByTestId('title-details-title').props.style);

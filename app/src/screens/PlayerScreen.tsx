@@ -265,6 +265,18 @@ const PlayerScreen = ({
     coverTest: rejectedPreparedRoute ? 'off' : coverTest,
   });
   const guarding = access === 'guarded';
+  const lineage = preparedRouteAccepted && guardedParams?.settings
+    ? packagedLibrary.titles(guardedParams.settings).find(title => title.id === data.id)
+    : undefined;
+  const playbackEvidence = lineage && guardedParams?.settings
+    ? packagedLibrary.evidenceFor(lineage, guardedParams.settings) : null;
+  const evidenceTrace = playbackEvidence ? JSON.stringify(playbackEvidence) : null;
+  React.useEffect(() => {
+    if (guarding && guard.status === 'verified' && evidenceTrace) {
+      trace('prepared-playback', evidenceTrace);
+    }
+  }, [guarding, guard.status, evidenceTrace]);
+
   const homeOpening = route.params.showHomeOpening === true && guarding && !isVideoError && guard.status !== 'blocked';
   const openingFrameReady = useOpeningFrame({ media: videoRef, enabled: homeOpening && !returningHome,
     verified: guard.status === 'verified', surfaceReady, onTimeout: () => setVideoError(true) });

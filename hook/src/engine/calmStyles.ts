@@ -145,3 +145,6 @@ export const CALM_TEXT = {
   control: typography(36, 46, CALM_FONT.semibold),
   supporting: typography(32, 42, CALM_FONT.regular),
 } as const;
+
+/** Shared reading geometry for choosing a video and reviewing its analysis. */
+export const CALM_FLOW = { READING_WIDTH: 1040, HERO_TOP: 96, HERO_HEIGHT: 700 } as const;

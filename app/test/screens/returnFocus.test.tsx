@@ -99,7 +99,7 @@ describe('Back from playback and details on the real shelf', () => {
 
   it('Watch, then Back from the player: focus returns to Watch, and only there', async () => {
     const { navigation, returnFromPlayer } = await startShelf();
-    expect(preferred()).toEqual(['kid-mode-home-watch']);
+    expect(preferred()).toEqual(['kid-mode-home-more-info']);
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
     expect(navigation.navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.objectContaining({ showHomeOpening: true }));
     returnFromPlayer();

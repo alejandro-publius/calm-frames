@@ -27,12 +27,12 @@ shared typography/spacing/buttons/navigation, the evidence presentation adapter,
 this handoff, UI preview and the final native integration build.
 
 Claude owns a NEW independent checkout and branch claude/pipeline-evidence-2026-10-15
-based on ee76cf559a5814183bc005de57512ee08a10fb5a. Claude owns flashmap/,
-pipeline/, eval/ pipeline evidence tools/tests, docs/VIDEO_PIPELINE_EVIDENCE.md,
-and results/video-pipeline-evidence-2026-10-15/. Propose generated catalog/media
-updates under app/assets/raw/prepared-library in the Claude branch only. Codex
-will integrate an explicitly reviewed commit. Do not edit app/src, app/test,
-hook/src, global status/handoff docs, package keys, or Codex's working tree.
+based on ee76cf559a5814183bc005de57512ee08a10fb5a. Claude owns pipeline/** and its tests, docs/evidence/video-reset/** and
+results/video-reset/**. Run existing flashmap/eval tests without editing their
+source; propose cross-boundary fixes for review. Keep all generated assets in
+your own workspace outside app/**. Codex alone imports reviewed artifacts into
+app/assets/raw/prepared-library. Do not edit any app/** file, hook/src, catalog
+imports, package manifests, SDK links, global status docs, keys, or Codex's tree.
 Do not overwrite a pre-existing directory or branch with these names. Inspect
 status and applicable instructions first; if the proposed directory exists,
 choose a new empty directory and report it. Do not reset or stash other work.

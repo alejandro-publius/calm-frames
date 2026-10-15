@@ -96,7 +96,7 @@ test('home carries no explanation and keeps parental controls tertiary until foc
   const view = render(<KidHomeScreen titles={titles} onOpen={details} onOpenParentArea={parent} />);
   expect(view.queryByText('Picture holds on supported videos. Audio continues.')).toBeNull();
   expect(view.queryByText('About this story')).toBeNull();
-  fireEvent.press(view.getByRole('button', { name: 'Details: Harbor' }));
+  fireEvent.press(view.getByRole('button', { name: 'View analysis: Harbor' }));
   expect(details).toHaveBeenCalledWith(titles.find(entry => entry.title.title === 'Harbor story (prepared locally)'));
   const control = view.getByTestId('kid-home-parent-area');
   expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent', minHeight: 88, borderWidth: 6 });
