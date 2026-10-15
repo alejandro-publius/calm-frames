@@ -26,11 +26,13 @@ request #1, on top of main at 7110893 (2026-09-20). Main has not moved since.
 
 ### 2026-10-14
 
-The final integration candidate `claude/final-candidate-2026-10-14`, built
-from `93cf800` and not yet merged anywhere; `FINAL_HANDOFF.md` has the package.
+The final integration candidate `claude/final-candidate-2026-10-14`, published
+to origin on Oct 14 and not merged anywhere; `FINAL_HANDOFF.md` has the package.
 
 #### Changed
 
+- Home is one heading, "Calm Frames", over the coast with Play and Details under it and Help and Settings in the header; the title's length and hold line, the explanation sentence, the Try picture holds card and the notice about titles held back are gone from it. Details carries the facts and offers the practice demo beside Play, opening the demo's own page; Back returns one level at a time, to the page that opened it with focus on that entry, then to Home with focus on Details. (819de40)
+- The launcher icon and the Fire TV tile carry a warm-sand inset border, one percent of the height in from every edge, drawn by the brand generator and re-rendered through the same route; the brand flash check was re-run on all thirteen images. (819de40)
 - Every menu screen paints the approved ivory coast with the dimensional coastal artwork; playback keeps its dark controls. (b22d275)
 - A pressed coastal primary keeps its ink fill, the storage error screen's Try again sits on the page where its focus ring clears 3 to 1, the play glyph is drawn at the text floor, and the declared frame inventory and the tests that named the dark palette for menu screens follow the coast. (93cf800)
 - A failed player setup reaches the recovery screen at once instead of after the opening timeout, and the release helper never writes a supplied PIN into reviewer notes. (aa0494f, cfddc4a)
@@ -42,6 +44,7 @@ from `93cf800` and not yet merged anywhere; `FINAL_HANDOFF.md` has the package.
 
 #### Added
 
+- Friction log entries 41 to 43 from the Oct 14 device sessions: the image loader refuses a data URI, the player never counts a decoded frame on the virtual device, and the documented `vega exec inputd-cli` form fails with a zero exit status while `run-cmd` works; and refreshed browser renders of Home and Details with their receipt. (111ff12)
 - Ledger rows, NOTICE sections and credits entries for the coastal artwork and for `harbor-illustrated.png`, the latter traced to a pixel-identical render of our own `harbor.svg`. (cf53d39, 58bd1a7)
 - The submission packet under `docs/submission/` and the handoff `FINAL_HANDOFF.md`. (fbcbe20, 5065314)
 - The coastal control files in the hook package mirror. (53ab01b)

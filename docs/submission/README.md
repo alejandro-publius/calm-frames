@@ -3,7 +3,7 @@
 Reconciled Oct 14, 2026. The packet is the five documents below, written
 against the official rules and the repository's receipts. It now describes the
 final integration candidate `claude/final-candidate-2026-10-14`, whose package
-was built from `ac5a610e63deeaeca672d34da43279a1394ca65a` and driven on the Vega Virtual Device; the root
+was built from `819de405ddf8e2d45526f978fc33d6a6ca977d5b` and driven on the Vega Virtual Device; the root
 [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) has the package hash, the checks and
 the owner's remaining actions. It is a candidate, not the final judged release. Nothing is submitted, published, uploaded or recorded, and
 recording is not yet authorized.

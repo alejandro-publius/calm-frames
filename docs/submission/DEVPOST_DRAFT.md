@@ -159,7 +159,7 @@ they are the ones that bound what the app can promise.
 - All observations are from the Vega Virtual Device. No physical television
   timing was measured, and no clinical validation or feedback from families or
   clinicians exists yet.
-- The final candidate (`ac5a610`) was driven on the Vega Virtual Device and
+- The final candidate (`819de40`) was driven on the Vega Virtual Device and
   judged from its own log; nobody has yet looked at its pixels or listened to
   its sound. [Replace with the owner's receipt before pasting.]
 - On the device the practice holds draw bundled copies of their signed stills;
@@ -186,8 +186,25 @@ Parameter Store.
 ## Track and mini challenges
 
 Primary track: Fire TV (family entertainment, multi-modal UX). The mini
-challenges are optional and do not block this submission: [Open Source:
-contribution URL needed] and [AWS Builder: owner decision].
+challenges are optional and do not block this submission: [Open Source: needs
+the upstream pull request opened from a fork under Alex's account; the two
+patches and their tests are ready in `docs/upstream-pr/`, and the private
+repository alone does not establish the entry] and [AWS Builder: the CDK stack
+is deployed and described in `docs/SUBMISSION.md` section 10.2; Alex decides
+whether to enter].
+
+## Friction log
+
+Friction log, 43 entries in Amazon's six fields:
+<https://github.com/alejandro-publius/calm-frames/blob/main/docs/FRICTION_LOG.md>.
+Until the candidate is merged the file is on `claude/final-candidate-2026-10-14`
+at the same path. An Amazon organizer answered on the Devpost forum (topic
+45430, "Inquiry about submission mechanics", read Oct 14, 2026) that a link
+in the description is fine and that saving the log in the same repository is
+easier for the judges, so the link goes here and the log stays in the
+repository. The same answer says judges' credentials belong at least in the
+testing instructions; Calm Frames has no login, and the parent PIN is chosen
+on first run, which the testing instructions say.
 
 ## Links to fill in
 

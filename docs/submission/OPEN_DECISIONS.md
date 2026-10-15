@@ -1,7 +1,7 @@
 # Open decisions and blockers
 
 Updated Oct 14, 2026 (night) for the final integration candidate
-`claude/final-candidate-2026-10-14`, package source `ac5a610`
+`claude/final-candidate-2026-10-14`, package source `819de40`
 ([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)). It is a candidate, not the
 final judged release. Mandatory items come
 first; the mini challenges are optional and do not block the submission. Where
@@ -11,12 +11,16 @@ evidence does not exist, the row says so instead of inventing it.
 
 ### 1. Final release selection: pending
 
-The final candidate `ac5a610` carries the approved coastal interface, the
+The final candidate `819de40` carries the approved coastal interface, the
 ledger and credits for its artwork, the hook mirror, the fixes that hold the
 coastal menus to the ten foot floors, three Back fixes, bundled copies of the
-practice stills and the opening readiness fallback; it was driven on the
-device and judged from its own log (nine journeys reported, one partial). Its
-package, checks and the owner's eyes-and-ears checklist are in the handoff. Underneath it, the reliability candidate `cfddc4a` includes the Oct 14 playback recovery fix (a failed player setup
+practice stills and the opening readiness fallback, and since `819de40` the
+simplified Home Alex asked for (one "Calm Frames" heading, Play and Details,
+the practice demo reached from Details) and the bordered icon and tile; its
+package 4 was driven on the device and judged from its own log (eight
+journeys, all reported; the previous package's session had reported nine, with
+seeking by remote partial). Its package, checks and the owner's eyes-and-ears
+checklist are in the handoff. Underneath it, the reliability candidate `cfddc4a` includes the Oct 14 playback recovery fix (a failed player setup
 reaches the recovery screen at once) and the release helper fix that keeps a
 supplied PIN out of reviewer documents. Its bounded checks passed
 ([`results/core-reliability-2026-10-14.json`](../../results/core-reliability-2026-10-14.json),
@@ -124,7 +128,13 @@ primary repository satisfies the rule's "new, additional open-source project"
 is not defined on the rules page.
 
 **Needs:** the GitHub username to credit, the fork, and the choice of
-contribution. Without a URL the mini challenge is simply not entered.
+contribution. Without a URL the mini challenge is simply not entered. The
+shortest path is the prepared pull request: fork `AmazonAppDev/vega-video-sample`
+under Alex's account, apply the two patches in `docs/upstream-pr/` with their
+author line set to Alex's public identity, run the sample's six focused tests
+as [../OPEN_SOURCE_PR.md](../OPEN_SOURCE_PR.md) describes, push the branch and
+open the pull request; the contribution URL is the pull request. Opening it is
+public and is Alex's action.
 
 ### 9. AWS Builder: enter or not, and the inactive cost tag
 

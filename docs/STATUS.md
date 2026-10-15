@@ -4,6 +4,35 @@ Updated Oct 14, 2026.
 
 ## 0. Where things stand
 
+### Oct 14, late: Home simplified at Alex's request, the candidate published, package 4 driven
+
+Codex ran out of usage and Claude took over its handoff. Alex asked for a Home
+with one large "Calm Frames" heading, the scenery, Play and Details, and
+nothing else: `819de40` removes the smaller wordmark, the "20 sec · No picture
+holds" line, the explanation sentence, the Try picture holds card and the
+notice about titles held back, sizes the heading at 120 units on one line
+(measured against the display face so it ends before the island), and moves
+the practice demo to Details, where a quiet Try picture holds entry beside
+Play opens the demo's own page and Back returns one level at a time. The
+launcher icon and the Fire TV tile carry the warm-sand inset border Alex asked
+for. The full app suite passes (133 suites, 1310 tests). Package 4,
+`build/release/final-candidate-4-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`
+(SHA-256 `471770fb…`, 28,731,853 bytes, 736 inputs, source `819de40`), was
+installed over the existing household and driven by log on the Vega Virtual
+Device: cold launch onto Home with Play focused, every press landing on a
+known control and nothing removed taking focus, Details with the practice
+entry beside Play, Harbor to its end with zero holds, the practice page and
+both holds with the still, Back one level at a time, Help, the PIN gate and a
+relaunch onto the saved Home, all observed
+(`results/native-acceptance-4-2026-10-14/receipt.json`). The device had frozen
+earlier in the evening and was stopped and started again with its user data
+kept; a first attempt saw a touch injected from the simulator window, which
+the driver now detects. Friction log entries 41 to 43 record the Oct 14 device
+findings; an Amazon organizer's forum answer on how the log is delivered was
+re-read and the description draft links to it. The branch is on origin as
+`claude/final-candidate-2026-10-14` (no main merge, no pull request); the CI
+workflows run on pull requests only. `FINAL_HANDOFF.md` is current.
+
 ### Oct 14, night: the device answered, and two things changed
 
 A remote-driven session on the Vega Virtual Device, judged from the Debug
@@ -1186,6 +1215,8 @@ version of this table in git history, not here.
 
 | When | What | Why it needs you |
 |---|---|---|
+| **Now** | Read `FINAL_HANDOFF.md` on `claude/final-candidate-2026-10-14` (on origin), run its section 4 eyes-and-ears checklist on package 4, then decide the judged release, open the pull request that runs CI, merge and tag. | Only you can look and listen, enter the household PIN, merge to main and cut the tag. |
+| **Before Thu Oct 22** | Authorize the recording from `docs/submission/DEMO_SCRIPT.md`, choose reviewer access (private with the seven named accounts, or public), confirm eligibility and contact details, settle the licence items, approve the friction log and feedback, and decide the two optional mini challenges (the prepared upstream pull request; AWS Builder). | Each is an outward action or a personal decision; the packet under `docs/submission/` has the exact wording and URLs. |
 | **Overdue, was Fri Sep 18** | Send the three outreach emails in `docs/outreach/`. The Discord check-in and the organizer questions in the same folder are optional. | Each needs a recipient and your name. They ask only about wording and flow, and say plainly that nothing we send contains flashing. `docs/VALIDATION.md` still says not yet. |
 | **Now, five minutes** | Fill in the repository's About box on GitHub (the gear beside About on the repository page). Description: `A verified safety layer for Fire TV: every frame is checked before kid mode, and flashing is hidden before it plays. Not a medical device.` Topics: `fire-tv`, `vega`, `react-native`, `accessibility`, `photosensitive-epilepsy`, `wcag`, `flash-detection`, `video`, `python`, `aws-cdk`. Leave the website empty until the release exists. | It is the first thing a judge sees on the repository page, it is empty today, and only the owner can set it. |
 | **Now** | Activate `Project` as a cost allocation tag in Billing, so the $20 budget can see the bill. `pipeline/infra/README.md` has the steps. | HUMAN CHECKPOINT D is done and the stack is deployed; until the tag is active the budget cannot warn anyone. A new tag can take a day to appear. |

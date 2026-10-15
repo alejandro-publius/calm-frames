@@ -15,7 +15,7 @@ device build and install) and section 4 (the demo) were not run from this
 file; the receipts they name record where they were run.
 
 The final integration candidate is `claude/final-candidate-2026-10-14`; its
-package was built from `ac5a610e63deeaeca672d34da43279a1394ca65a`
+package was built from `819de405ddf8e2d45526f978fc33d6a6ca977d5b`
 ([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)). The judged release is still to
 be selected ([OPEN_DECISIONS.md](OPEN_DECISIONS.md)); use the branch or tag
 named in the submission form. The app runs on Vega OS and has only ever run on
@@ -97,10 +97,12 @@ PIN into `NOTES.md`; `--pin` is kept as a deprecated option whose value is unuse
 `build/release/core-reliability-cfddc4a-2026-10-14/`, SHA-256
 `e315e16d19172a5aadc1bfa8a9364bcf9205d51870ec610b92eb01ea9d2841dd`, with its 723
 recorded source inputs verified and `native_validation_performed: false`. The
-final candidate's package is `build/release/final-candidate-3-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, SHA-256 `4d36c177c000eb6470ac39acef7e02bdfb72300697f4142e65522d3d3315a6c5`, 28,716,350 bytes, 736 recorded inputs, built from `ac5a610`, in the final candidate's worktree; the
+final candidate's package is `build/release/final-candidate-4-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg`, SHA-256 `471770fb10d9269d1a4128f6b1328cb6dd30495dbc715d8289cdb79cfef0d337`, 28,731,853 bytes, from `819de40`; the
 receipt beside it records the inputs and the prepared library check. That
-package was installed and driven on the Vega Virtual Device on Oct 14
-([`results/native-acceptance-2026-10-14/receipt.json`](../../results/native-acceptance-2026-10-14/receipt.json)).
+package was installed and driven on the Vega Virtual Device late on Oct 14
+([`results/native-acceptance-4-2026-10-14/receipt.json`](../../results/native-acceptance-4-2026-10-14/receipt.json));
+the previous package's session is
+[`results/native-acceptance-2026-10-14/receipt.json`](../../results/native-acceptance-2026-10-14/receipt.json).
 
 ```sh
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
@@ -168,9 +170,15 @@ some under load, so a missing line proves nothing.
    the room, relaunch the app and see the choice kept. Practice holds never
    enter the exposure history, so an empty history after the demo is correct.
 
-Steps 1 to 3, 5 and the PIN gate of step 6 were observed on Oct 13 and 14 on
-earlier builds; the settings interior and the restart were last observed on the
-Oct 10 build. The seek into a hold has only test coverage. Re-verify everything
+On the final package, late on Oct 14, the app's own log reported steps 2, 3
+and 4 (Home, Details, the practice page and both holds with the still, Back one
+level at a time), step 6 (Harbor to its end with zero holds), the Help page,
+the PIN gate of step 7 and a relaunch onto the saved Home
+([`results/native-acceptance-4-2026-10-14/receipt.json`](../../results/native-acceptance-4-2026-10-14/receipt.json):
+J1 observed-pass, J2 observed-pass, J3 observed-pass, J4 observed-pass, J5 observed-pass, J6 observed-pass, J7 observed-pass, J8 observed-pass).
+Pause and resume were reported on the previous package the same day. The
+settings interior and the restart with a changed preset were last observed on
+the Oct 10 build; the first run (step 1) on Oct 13. The seek into a hold has only test coverage. Re-verify everything
 on the final package.
 
 ## 4a. A browser preview, without a device
