@@ -1,0 +1,15 @@
+04:48:31Z Installed dark cinema once; no data reset
+04:48:40Z PASS Launch Watch focus | kid-mode-home-watch
+04:48:45Z key KEY_ENTER -> player-seekbar
+04:48:50Z key KEY_BACK -> kid-mode-home-watch
+04:48:50Z PASS Harbor Home Watch and Back | playing event; return Home Watch
+04:48:54Z key KEY_DOWN -> kid-mode-home-poster-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e
+04:48:59Z key KEY_RIGHT -> kid-mode-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28
+04:49:03Z key KEY_UP -> kid-mode-home-more-info
+04:49:08Z key KEY_LEFT -> player-opening-back
+04:49:08Z STOP Expected kid-mode-home-watch, got player-opening-back
+Traceback (most recent call last):
+  File "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-review/.logs/dark-cinema/native_driver.py", line 25, in <module>
+    expect('kid-mode-home-watch')
+  File "<string>", line 23, in expect
+RuntimeError: Expected kid-mode-home-watch, got player-opening-back

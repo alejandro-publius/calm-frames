@@ -1,5 +1,41 @@
 # Final handoff: the integration candidate
 
+## Dark cinema review build, October 16, 2026
+
+The approved dark-cinema direction is implemented and installed on the separate
+private branch `codex/dark-cinema-2026-10-16`. App source is
+`d67e1daf6fab07126c7720e49772eeccf09887ee`. The prior branch remains at
+`1509c1bc1270b6156e18c6b5f18af3ff835ce416`.
+
+Home now gives the video title first priority, with a quiet brand, full-screen
+coastal imagery, bright Watch, subdued Details and a horizontal rail of the
+two actual videos. Card focus selects the title without playback. Details,
+opening/return and player controls share the same dark palette. The
+[design record](docs/evidence/dark-cinema-2026-10-16.md) explains hierarchy,
+focus routes, assets and the still-image fallback. Water-only seamless motion
+is outstanding; decorative moving lines were removed.
+
+Package: `build/release/dark-cinema-2026-10-16/calm-frames-0.1.0-aarch64-debug.vpkg`.
+SHA-256: `b5e62325e8270a0bc845ad09ca3fb68e1b4e03d257bbc3ece77947a5084e2467`.
+All 750 recorded app inputs match. Source checks pass 132 suites, 1,318 tests,
+57 textual snapshots, typecheck and lint (zero errors, 101 warnings).
+No capture/export suites were run. Media, maps, trust and household settings
+are unchanged. No release, public publication, main merge or AWS action occurred.
+
+The [native receipt](results/dark-cinema-2026-10-16/receipt.json) records one
+installation and passing launch/Harbor Watch/Back observations. The driver
+paused after touch input outside its own remote-key sequence opened Acadia.
+This is an interrupted check, not evidence of a product navigation failure.
+The remaining native routes need a short exclusive simulator window. No agent
+tool used touch injection, and no screenshot or recording was taken. The app
+is left available for owner review, with no further automated navigation.
+
+Minimum owner steps: review Home, move Down and Left/Right through Harbor and
+Acadia, open Details and Watch, then use Back. Judge the title hierarchy,
+visible focus, legibility and playback transition; listen to audio and inspect
+captions if used. Allow a short untouched simulator window to finish the
+remaining remote-only checks. Logs alone cannot supply visual acceptance.
+
 ## Current Watch-first build with Back repair, October 15, 2026
 
 The corrected viewing app and nested Back repair are installed and running at
