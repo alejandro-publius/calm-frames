@@ -1,5 +1,18 @@
 # Status
 
+App lane, October 16: the TV experience pass is on `claude/tv-experience-2026-10-16`,
+based on the Acadia-first source. The consumer flow now says flashing scenes are covered
+while the sound continues, with captions named only where a title ships them; Watch
+launches once under repeated presses; Back from the profile picker returns focus to its
+button; and the player's refusal of an altered prepared route has its own suite. The
+evidence index, an Acadia demo script draft and a usability sheet were added. Full jest,
+typecheck and lint pass on the final source. Nothing was built, installed, launched,
+captured or recorded; the installed demo is older than this source. See
+[the change record](evidence/tv-experience-2026-10-16.md), the
+[receipt](../results/tv-experience-2026-10-16/receipt.json) and the
+[evidence index](evidence/README.md). The detector candidate is on
+`claude/detector-concurrency-2026-10-16`, separately.
+
 Acadia-first source change is ready on the dark cinema branch. Acadia leads
 Home; Harbor is retained only in packaged artifacts and regression fixtures.
 The installed dark cinema demo was not touched. See the

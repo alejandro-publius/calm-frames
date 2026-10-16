@@ -65,7 +65,7 @@ of that chain, step by step, is in
 | App unit and screen tests, typecheck, lint on the current source | [tv-experience receipt](../../results/tv-experience-2026-10-16/receipt.json) | commands in the receipt, run from `app/` |
 | Acadia as the only main choice, Harbor retained as fixtures | [acadia-first receipt](../../results/acadia-first-2026-10-16/receipt.json) | commands in the receipt |
 | Prepared library integrity (catalog bytes, bundle, reports present) | same receipt, `prepared_library` | `node app/tools/check_prepared_library.mjs` |
-| Detector concurrent-area review, production rule characterised | [detector-area-review-2026-10-16.md](detector-area-review-2026-10-16.md) | `PYTHONPATH="$PWD/flashmap/src:$PWD" python -m pytest eval/tests/test_concurrent_area_review.py -q` |
+| Detector concurrent-area review, production rule characterised | `docs/evidence/detector-area-review-2026-10-16.md` on the branch `codex/detector-area-review-2026-10-16` | `PYTHONPATH="$PWD/flashmap/src:$PWD" python -m pytest eval/tests/test_concurrent_area_review.py -q` on that branch |
 | Detector candidate against baseline, fixtures and real footage | `docs/evidence/detector-concurrency-2026-10-16.md` on the branch `claude/detector-concurrency-2026-10-16` | commands in that document and its receipt |
 | Conformance numbers published in the README | [conformance record](../../results/conformance_current_full_2026-10-02.json) | `python eval/readme_sync.py --check` and `eval/tests/test_measured_sources_unchanged.py` |
 | Earlier positive real videos, recovered by hash and re-run | [earlier-positive-2026-10-15.md](earlier-positive-2026-10-15.md) | command in that document |
