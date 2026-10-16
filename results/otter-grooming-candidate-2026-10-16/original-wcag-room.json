@@ -1,0 +1,662 @@
+{
+  "color": {
+    "analysis_height": 108,
+    "analysis_width": 192,
+    "luminance_model": "wcag-relative-luminance-srgb",
+    "matrix": "bt601",
+    "matrix_source": "stream-tag",
+    "pixel_format": "yuv420p",
+    "range": "limited",
+    "range_source": "stream-tag",
+    "transfer_tag": "2"
+  },
+  "created_utc": "2026-10-16T06:28:12Z",
+  "generator": {
+    "name": "flashmap",
+    "version": "1.0.0"
+  },
+  "pattern_exemptions": [],
+  "picture": {
+    "coded": {
+      "height": 720,
+      "left": 0,
+      "top": 0,
+      "width": 1280
+    },
+    "frame_height": 108,
+    "frame_width": 192,
+    "height": 108,
+    "left": 0,
+    "letterbox": false,
+    "measured_on": "picture",
+    "note": "Area fractions in this map were measured on the picture rectangle above, not on the full coded frame. Letterbox and pillarbox bars were removed first.",
+    "pillarbox": false,
+    "source": "detected",
+    "top": 0,
+    "width": 192
+  },
+  "profile": {
+    "area_fraction_limit": 0.25,
+    "area_window_mode": "ten-degree-field",
+    "area_windows": [
+      {
+        "height_px": 36,
+        "name": "wcag-10deg",
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)",
+        "width_px": 64
+      },
+      {
+        "height_px": 22,
+        "name": "room-10deg",
+        "room": {
+          "display_aspect": "16:9",
+          "display_height_in": 41.672,
+          "display_width_in": 74.084,
+          "field_degrees": 10.0,
+          "field_inches": 8.399,
+          "seat_distance_in": 48.0,
+          "tv_diagonal_in": 85.0
+        },
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "width_px": 22
+      }
+    ],
+    "exceptions_not_implemented": [
+      "WCAG fine balanced pattern exception (white noise, checkerboards under 0.1 degree). Content the exception would excuse is still reported."
+    ],
+    "flash_limit_per_second": 3,
+    "general_flash": {
+      "dark_image_below": 0.8,
+      "metric": "wcag-relative-luminance",
+      "min_delta": 0.1,
+      "source": "WCAG 2.2 general flash and red flash thresholds (SPEC_SOURCES section 2)"
+    },
+    "name": "wcag",
+    "pattern_rule": null,
+    "pattern_rule_source": null,
+    "peak_nits": null,
+    "red_flash": {
+      "min_ucs_distance": 0.2,
+      "saturated_red_ratio": 0.8,
+      "source": "WCAG 2.2 thresholds Note 3 and Understanding 2.3.1 (SPEC_SOURCES sections 2, 4)"
+    },
+    "red_opposing_rule": "enter-saturated-red-paired-with-leave",
+    "room": {
+      "display_aspect": "16:9",
+      "display_height_in": 41.672,
+      "display_width_in": 74.084,
+      "field_degrees": 10.0,
+      "field_inches": 8.399,
+      "seat_distance_in": 48.0,
+      "tv_diagonal_in": 85.0
+    },
+    "rules_not_implemented": [
+      "the fine balanced pattern exception",
+      "any HDR rule",
+      "any regular pattern rule, because WCAG 2.2 has none. See the broadcast profile"
+    ],
+    "spec_sources": "flashmap/docs/SPEC_SOURCES.md",
+    "title": "WCAG 2.2 Success Criterion 2.3.1, general and red flash thresholds",
+    "transition_pairing": "non-overlapping",
+    "transition_rule": "declared-on-first-frame-meeting-threshold",
+    "window_ms": 1000,
+    "window_placement": "trailing-closed-window-at-every-frame"
+  },
+  "schema": "https://calm-frames.github.io/schemas/flashmap-map-v1.json",
+  "segments": [
+    {
+      "area_fraction": 1.0,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 19160,
+      "flash_first_ms": 80,
+      "flash_last_ms": 19160,
+      "max_flashes_in_window": 12,
+      "reason": "general",
+      "start_ms": 0,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 1.0,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 25880,
+      "flash_first_ms": 18640,
+      "flash_last_ms": 25880,
+      "max_flashes_in_window": 12,
+      "reason": "general",
+      "start_ms": 18640,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.309917,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 27120,
+      "flash_first_ms": 25840,
+      "flash_last_ms": 27120,
+      "max_flashes_in_window": 7,
+      "reason": "general",
+      "start_ms": 25840,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.28719,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 27720,
+      "flash_first_ms": 26520,
+      "flash_last_ms": 27720,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 26520,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.264463,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 30360,
+      "flash_first_ms": 29240,
+      "flash_last_ms": 30360,
+      "max_flashes_in_window": 7,
+      "reason": "general",
+      "start_ms": 29240,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.309917,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 31480,
+      "flash_first_ms": 30040,
+      "flash_last_ms": 31480,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 30040,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.512397,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 32840,
+      "flash_first_ms": 30560,
+      "flash_last_ms": 32840,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 30560,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.262397,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 33120,
+      "flash_first_ms": 32000,
+      "flash_last_ms": 33120,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 32000,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.597107,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 34720,
+      "flash_first_ms": 32320,
+      "flash_last_ms": 34720,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 32320,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.27686,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 34960,
+      "flash_first_ms": 33880,
+      "flash_last_ms": 34960,
+      "max_flashes_in_window": 7,
+      "reason": "general",
+      "start_ms": 33880,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.433884,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 37000,
+      "flash_first_ms": 34840,
+      "flash_last_ms": 37000,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 34840,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.268595,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 38160,
+      "flash_first_ms": 37040,
+      "flash_last_ms": 38160,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 37040,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.36157,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 42040,
+      "flash_first_ms": 40640,
+      "flash_last_ms": 42040,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 40640,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.340909,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 42560,
+      "flash_first_ms": 41360,
+      "flash_last_ms": 42560,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 41360,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.285124,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 42960,
+      "flash_first_ms": 41840,
+      "flash_last_ms": 42960,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 41840,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.258264,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 43040,
+      "flash_first_ms": 42040,
+      "flash_last_ms": 43040,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 42040,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.289256,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 44640,
+      "flash_first_ms": 43480,
+      "flash_last_ms": 44640,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 43480,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.752066,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 46360,
+      "flash_first_ms": 43960,
+      "flash_last_ms": 46360,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 43960,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.347107,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 46720,
+      "flash_first_ms": 45440,
+      "flash_last_ms": 46720,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 45440,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.407025,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 48120,
+      "flash_first_ms": 46160,
+      "flash_last_ms": 48120,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 46160,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.278926,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 49960,
+      "flash_first_ms": 48800,
+      "flash_last_ms": 49960,
+      "max_flashes_in_window": 7,
+      "reason": "general",
+      "start_ms": 48800,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.989669,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 53120,
+      "flash_first_ms": 49120,
+      "flash_last_ms": 53120,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 49120,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.316116,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 53560,
+      "flash_first_ms": 52280,
+      "flash_last_ms": 53560,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 52280,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.258264,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 53720,
+      "flash_first_ms": 52720,
+      "flash_last_ms": 53720,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 52720,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.995868,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 59120,
+      "flash_first_ms": 53120,
+      "flash_last_ms": 59120,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 53120,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.396694,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 60400,
+      "flash_first_ms": 58200,
+      "flash_last_ms": 60400,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 58200,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.400826,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 61240,
+      "flash_first_ms": 59840,
+      "flash_last_ms": 61240,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 59840,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.566116,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 62240,
+      "flash_first_ms": 60440,
+      "flash_last_ms": 62240,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 60440,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.487603,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 64440,
+      "flash_first_ms": 62000,
+      "flash_last_ms": 64440,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 62000,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.39876,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 65760,
+      "flash_first_ms": 63920,
+      "flash_last_ms": 65760,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 63920,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 1.0,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 69000,
+      "flash_first_ms": 65360,
+      "flash_last_ms": 69000,
+      "max_flashes_in_window": 12,
+      "reason": "general",
+      "start_ms": 65320,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.607438,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 72640,
+      "flash_first_ms": 70320,
+      "flash_last_ms": 72640,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 70320,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.876033,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 79960,
+      "flash_first_ms": 71840,
+      "flash_last_ms": 79960,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 71840,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.659091,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 87440,
+      "flash_first_ms": 85720,
+      "flash_last_ms": 87440,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 85720,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.262397,
+      "area_window": "room-10deg",
+      "breaks_baseline": false,
+      "end_ms": 89400,
+      "flash_first_ms": 88400,
+      "flash_last_ms": 89400,
+      "max_flashes_in_window": 7,
+      "reason": "general",
+      "start_ms": 88400,
+      "triggered_by": [
+        "room-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.977273,
+      "area_window": "room-10deg",
+      "breaks_baseline": true,
+      "end_ms": 93800,
+      "flash_first_ms": 89680,
+      "flash_last_ms": 93800,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 89680,
+      "triggered_by": [
+        "room-10deg",
+        "wcag-10deg"
+      ]
+    }
+  ],
+  "source": {
+    "coded_height": 720,
+    "coded_width": 1280,
+    "container_frame_rate": "25/1",
+    "duration_ms": null,
+    "first_pts_ms": 0.0,
+    "frame_count": 2346,
+    "frame_interval_ms": {
+      "max": 40.0,
+      "median": 40.0,
+      "min": 40.0
+    },
+    "last_coded_pts_ms": 93800.0,
+    "last_pts_ms": 93800.0,
+    "path": "UNREVIEWED_otter_grooming.webm",
+    "sha256": "3083988ff7c574821fb40bea3c7a053db5625f5106f3c68e1231d2935b410b29",
+    "size_bytes": 62674585,
+    "timestamp_source": "container-pts",
+    "variable_frame_rate": false
+  },
+  "summary": {
+    "area_measured_on": "picture",
+    "flash_pass": false,
+    "general_segment_count": 36,
+    "hidden_ms": 80320,
+    "pass": false,
+    "pattern_exemption_count": 0,
+    "pattern_findings_are_not_wcag": "WCAG 2.2 SC 2.3.1 does not cover regular patterns. A pattern segment is an extra hide from an informative ITU recommendation, never a WCAG finding, and `flash_pass` is the only verdict a WCAG claim may be read from.",
+    "pattern_pass": true,
+    "pattern_rule_applied": false,
+    "pattern_rule_source": null,
+    "pattern_segment_count": 0,
+    "red_segment_count": 0,
+    "segment_count": 36
+  },
+  "version": 1
+}
