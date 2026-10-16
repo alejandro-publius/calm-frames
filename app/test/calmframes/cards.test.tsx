@@ -60,7 +60,7 @@ describe('cardAt', () => {
     const card = cardAt(intervals, 22_000);
     expect(card.kind).toBe('covering');
     expect(card.announcement).toBe(
-      'Flashing hidden. Sound and captions continue while this scene is hidden.',
+      'Flashing hidden. Sound continues while this scene is hidden.',
     );
   });
 
@@ -69,7 +69,7 @@ describe('cardAt', () => {
     expect(card.kind).toBe('after');
     // The interval is 19500 to 24500, which is five seconds of cover.
     expect(card.title).toBe('Scene hidden for 5 seconds');
-    expect(card.detail).toBe('Sound and captions continued.');
+    expect(card.detail).toBe('Sound continued.');
   });
 
   it('stops saying it after the card has had its time', () => {

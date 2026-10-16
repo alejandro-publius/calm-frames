@@ -5,9 +5,10 @@
  *
  *   5 seconds before an interval: "Flashing part coming up", with a Skip
  *   button that has D-pad focus.
- *   During the interval: the cover, while sound and captions keep going.
- *   After it: one line, such as "Hid 4 seconds of flashing. Sound and captions
- *   kept playing."
+ *   During the interval: the cover, while the sound keeps going.
+ *   After it: one line, such as "Hid 4 seconds of flashing. Sound kept
+ *   playing." Captions are not promised here: a title may ship none, and the
+ *   card knows nothing about tracks.
  *   A map that did not verify: the picture stays hidden and a card says the
  *   title is not checked yet.
  *   A map still being checked: the picture stays hidden and a card says the
@@ -120,8 +121,8 @@ export function cardAt(
     return {
       kind: 'covering',
       title: 'Flashing hidden',
-      detail: 'Sound and captions continue while this scene is hidden.',
-      announcement: 'Flashing hidden. Sound and captions continue while this scene is hidden.',
+      detail: 'Sound continues while this scene is hidden.',
+      announcement: 'Flashing hidden. Sound continues while this scene is hidden.',
       interval: inside,
     };
   }
@@ -155,8 +156,8 @@ export function cardAt(
     return {
       kind: 'after',
       title: `Scene hidden for ${hidden}`,
-      detail: 'Sound and captions continued.',
-      announcement: `Scene hidden for ${hidden}. Sound and captions continued.`,
+      detail: 'Sound continued.',
+      announcement: `Scene hidden for ${hidden}. Sound continued.`,
       interval: justEnded,
     };
   }

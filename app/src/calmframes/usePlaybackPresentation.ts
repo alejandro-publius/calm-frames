@@ -28,7 +28,7 @@ export function pausedCard(card: Card, paused: boolean): Card {
   const beforeHold = seconds === undefined ? 'Paused before the hold.'
     : `Paused with ${seconds} second${seconds === 1 ? '' : 's'} before the hold.`;
   const detail = card.kind === 'covering'
-    ? 'Paused. Sound and captions resume when you press Play.'
+    ? 'Paused. Sound resumes when you press Play.'
     : `${beforeHold} Press Play to continue, or Skip to jump past it.`;
   return { ...card, detail, announcement: `${card.title}. ${detail}` };
 }

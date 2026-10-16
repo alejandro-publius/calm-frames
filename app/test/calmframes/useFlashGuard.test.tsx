@@ -284,7 +284,7 @@ describe('useFlashGuard', () => {
     expect(read('covered')).toBe('covered');
     expect(read('card-kind')).toBe('covering');
     expect(announce).toHaveBeenCalledWith(
-      'Flashing hidden. Sound and captions continue while this scene is hidden.',
+      'Flashing hidden. Sound continues while this scene is hidden.',
       { queue: true },
     );
 
