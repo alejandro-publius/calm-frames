@@ -22,13 +22,20 @@ export function usePlaybackPaused(mediaRef: RefObject<VideoPlayer | null>, ready
   return paused;
 }
 
+/**
+ * The covering and countdown cards while playback is paused.
+ *
+ * Paused means paused: nothing is playing, so the card must not say the
+ * sound continues. It says the picture stays hidden and what Play does, and
+ * for a countdown how long remains before the flashing, with Skip as before.
+ */
 export function pausedCard(card: Card, paused: boolean): Card {
   if (!paused || (card.kind !== 'covering' && card.kind !== 'countdown')) { return card; }
   const seconds = card.secondsLeft;
-  const beforeHold = seconds === undefined ? 'Paused before the hold.'
-    : `Paused with ${seconds} second${seconds === 1 ? '' : 's'} before the hold.`;
+  const before = seconds === undefined ? 'Paused before the flashing.'
+    : `Paused, ${seconds} second${seconds === 1 ? '' : 's'} before the flashing.`;
   const detail = card.kind === 'covering'
-    ? 'Paused. Sound resumes when you press Play.'
-    : `${beforeHold} Press Play to continue, or Skip to jump past it.`;
+    ? 'Paused. The picture stays hidden. Press Play to continue.'
+    : `${before} Press Play to continue, or Skip to jump past it.`;
   return { ...card, detail, announcement: `${card.title}. ${detail}` };
 }

@@ -75,10 +75,13 @@ export function mustStayHidden(access: PlaybackAccess): boolean {
  * What the card says when the player was opened with nothing to check.
  *
  * The same card a missing map produces, with wording for this case: there is
- * no map here at all, checked or otherwise.
+ * no map here at all, checked or otherwise. It says what this state does, the
+ * picture stays hidden, and what to do; it promises nothing about sound or
+ * captions, because a route with no map has told the player nothing about
+ * what it carries. The card's title already says the video is unavailable,
+ * so the detail does not say it again.
  */
 export const UNGUARDED_CARD: Card = cardAt([], 0, {
   rejection: 'missing',
-  blockedDetail:
-    'This video is unavailable. The picture stays hidden while sound and captions keep playing.',
+  blockedDetail: 'The picture stays hidden. Go back to the library.',
 });
