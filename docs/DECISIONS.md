@@ -2573,3 +2573,35 @@ cloud resources or paid services.
   Back, How it works. **Cost:** three test pins moved and the hook mirror regenerated; the
   unavailable card's wording in `playerAccess.ts` is left for a separate decision.
 
+## 2026-10-16: the final cohesive pass around Acadia
+
+- **Decision:** Home with one featured video shows the hero alone: title, running time in
+  words, one benefit line ("Watch prepared videos with flashing scenes covered."), Watch and
+  Details. The "Choose a video" rail appears only with two or more prepared videos, and a lone
+  title without hero art keeps its poster. **Why:** a card that repeats the hero gives a
+  person nothing to choose and one more thing to read; a rail earns its place when there is a
+  choice, and a title the hero cannot picture still needs its own card. **Cost:** one Codex
+  test pin changed to expect no card on the default shelf; a poster that leaves the rail
+  hands its focus request to Watch.
+- **Decision:** Home, Details and the opening shell put the title at the same height,
+  `CALM_FLOW.HERO_TOP`; the opening shell subtracts its eyebrow's line and margin. **Why:**
+  Watch moves a person from Details to the opening shell to the picture, and words that jump
+  pull the eye away from the picture. **Cost:** none measured.
+- **Decision:** paused means paused. The covering card says "Paused. The picture stays hidden.
+  Press Play to continue." and the countdown card says how long remains before the flashing;
+  neither says the sound continues. The unavailable card says "The picture stays hidden. Go
+  back to the library." and names the title once. **Why:** a status statement has to agree
+  with the state it describes; a paused player plays no sound, and a route with no map has
+  told the player nothing about tracks. **Cost:** one snapshot updated for the three wording
+  lines, named in the handoff.
+- **Decision:** Details shows the covered sections as a still, noninteractive bar with a text
+  equivalent, built from the same schedule the player follows (guard bands, clamping and
+  merging included), and shows a limitation line when the length or the schedule is not
+  available. **Why:** the question a person asks after the first cover is "why", and the
+  answer belongs where they decide to watch, drawn from the data the player uses rather than
+  from a second calculation. **Cost:** one more block in the Details hero; it is separate from
+  the seek bar and cannot move the playhead.
+- **Decision:** while How it works is open only its Back asks for focus; the profile button
+  and Parents never ask alongside it. **Why:** two requests leave the platform to choose.
+  **Cost:** none.
+

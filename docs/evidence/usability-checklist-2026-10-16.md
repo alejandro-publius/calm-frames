@@ -1,57 +1,58 @@
 # Usability checklist, Acadia journey
 
-Draft, October 16, 2026. Nobody has run this yet. There are no participants,
-no results and no medical content here; this is the sheet to use when a few
-people sit in front of the installed build with ordinary footage, and a place
-to write what actually happened.
+Draft, October 16, 2026, revised with the design pass. Nobody has run this yet. There are
+no participants, no results and no medical content here; this is the sheet the owner
+uses when a few people sit in front of the installed build with ordinary prepared
+footage, and a place to write what actually happened.
 
 ## Setup
 
-- The Acadia-first build installed on the Vega Virtual Device or a Fire TV
+- The current branch built and installed on the Vega Virtual Device or a Fire TV
   device, started at Home, remote in the person's hand.
 - The person has not seen the app before and is not told what it does.
-- One observer, one sheet per person, pen only. No screen capture.
+- One observer, one sheet per person, pen only. No screen capture, no recording.
 - Three to five people is enough to find the obvious problems.
+- Only prepared footage. Nobody who is photosensitive is asked to watch anything with
+  flashing in it, covered or not.
 
-## Tasks, in this order
+## The five tasks, in this order
 
-1. **Understand the purpose.** Ask: "Look at this screen and tell me what you
-   think this app does." Then let them open How it works if they want to.
-   Record their words. Done when they can say, in their own words, that the
-   app covers flashing parts of its own videos while the sound continues, and
-   that it does not work with other apps.
-2. **Start playback.** Ask: "Watch the video." Record the presses it took and
-   any hesitation. Done when the picture is playing.
-3. **Notice a covered part.** Say nothing. When the first cover appears,
-   ask: "What just happened?" Record whether they read the card and whether
-   they tried a button.
-4. **Pause, seek, resume, go back.** Ask them to pause, move forward, play
-   again, and return to the first screen. Record where focus lands when they
-   return and whether that matched what they expected.
-5. **Find the settings.** Ask: "Where would a parent change how strict this
-   is?" Done when they reach Parents and the PIN screen. Record the path.
-6. **Recover from an unavailable video.** This needs a build with an
-   unavailable title in the catalog, which the consumer build does not carry.
-   If such a review build exists, ask them to open that title and then watch
-   something else. Done when they read the notice, press Back and start
-   Acadia. If no such build exists, mark the task not run.
+1. **Explain what the app does after seeing Home.** Say nothing. After ten seconds ask:
+   "What do you think this app does?" Write their words down. Done when they say, in
+   their own words, that it plays prepared videos with the flashing parts covered.
+2. **Start Acadia without coaching.** Ask: "Watch the video." Count the presses from
+   the first one to the picture. Done when the picture is playing.
+3. **Open Details and return to the expected control.** Ask them to find out more about
+   the video and come back. Note where focus lands when they return and whether they
+   say it is where they expected.
+4. **Explain why a section was covered.** When the first covered part arrives, say
+   nothing; afterwards ask "What just happened, and why?" Done when they can say the
+   picture was covered because of flashing and the sound kept going. If they looked at
+   Details first, note whether the covered sections line helped.
+5. **Find Help and return; cancel a parent-area entry.** Ask them to find out how the
+   app works and come back, then to find where a parent would change settings and leave
+   without entering anything. Note the path and where focus lands each time.
 
 ## What to write down, per task
 
-- Presses to complete, and any press that did nothing visible.
-- The first thing they said.
-- Whether they could read the text from where they sat, and the distance.
-- Any word on screen they asked about.
-- Whether focus was always visible to them.
+| Task | Completed? | Presses beyond the fewest needed | Moments of confusion, in their words | Where focus landed |
+| --- | --- | --- | --- | --- |
+| 1 | | | | |
+| 2 | | | | |
+| 3 | | | | |
+| 4 | | | | |
+| 5 | | | | |
+
+Also note the viewing distance, whether they could read every line from there, any word
+on screen they asked about, and whether focus was always visible to them.
 
 ## What this sheet cannot tell anyone
 
-Whether the cover protects anyone. That is not a usability question and no
-answer here should be written up as one. The approved sentence stands: Calm
-Frames reduces exposure to flashing above published limits in the videos it
-plays; not a medical device.
+Whether the cover protects anyone. That is not a usability question and no answer here
+should be written up as one. The approved sentence stands: Calm Frames reduces exposure to
+flashing above published limits in the videos it plays; not a medical device.
 
 ## Results
 
-Not run. Fill in the date, the build hash, the device, and one block per
-person below when it has been.
+Not run. Fill in the date, the build hash, the device, and one table per person when it
+has been.

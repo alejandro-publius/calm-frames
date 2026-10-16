@@ -1,6 +1,14 @@
 # Status
 
-App lane, October 16: the TV experience pass is on `claude/tv-experience-2026-10-16`,
+App lane, October 16, later: the cohesive design pass is on `claude/tv-experience-2026-10-16`.
+Home with one featured video shows the hero alone with a benefit line; Details shows the
+covered sections as a still strip from the player's own schedule; paused and unavailable
+states say only what they do; the title stays in place from Details to the opening shell;
+one control asks for focus on every screen. Full jest, typecheck and lint pass; nothing
+native was built, installed, launched, captured or recorded, and the installed demo is
+older than this source. See `DESIGN_ACCEPTANCE.md` and `CLAUDE_REVIEW_HANDOFF.md`.
+
+Earlier on October 16: the TV experience pass is on `claude/tv-experience-2026-10-16`,
 based on the Acadia-first source. The consumer flow now says flashing scenes are covered
 while the sound continues, with captions named only where a title ships them; Watch
 launches once under repeated presses; Back from the profile picker returns focus to its

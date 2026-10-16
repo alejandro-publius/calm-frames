@@ -1,7 +1,57 @@
 # Claude review handoff: the TV experience pass (app lane)
 
 Written October 16, 2026, for another agent or a person to review before anything is
-built. Nothing here was built, installed, launched, navigated, captured or recorded.
+built. Nothing here was built, installed, launched, navigated, captured or recorded. The
+installed demo on the simulator has not changed. This is not submission-ready until the
+native checks and the submission requirements are verified.
+
+## The cohesive design pass, latest
+
+Five commits on top of the review fixes, oldest first:
+
+- `917849a` Say what paused and unavailable states do, and nothing they do not
+- `4193ccb` Compose Home around one featured video
+- `bf49430` Keep the title in place from Details to the opening shell
+- `cc319d9` Show the covered sections on Details, from the player's own schedule
+- this commit: `DESIGN_ACCEPTANCE.md`, the decisions, the usability sheet, the status
+  line and this handoff
+
+`DESIGN_ACCEPTANCE.md` lists every requirement with its files, its automated check and the
+before and after in words. In short: the unavailable card says "The picture stays hidden.
+Go back to the library." and names the title once; a paused cover says "Paused. The
+picture stays hidden. Press Play to continue." and a paused countdown says how long
+remains before the flashing; Home with one featured video shows the hero alone with
+"Watch prepared videos with flashing scenes covered." and the running time in words, the
+rail returning with two or more videos; Details shows "Covered sections" as a still strip
+with a text equivalent, built from `buildCoverIntervals` under the household's options,
+with limitation lines for an unknown length or an unverified title; Home, Details and the
+opening shell start the title at one offset; while How it works is open only its Back asks
+for focus; Back on the opening shell is pinned to leave once even if the stall timeout
+fires later.
+
+Checks on the final source: full jest 140 suites passed, 1 skipped, 1375 tests passed, 4
+skipped, 57 snapshots passed (one updated on purpose, the three unavailable-card wording
+lines in `Player.test.tsx`); typecheck pass; lint 0 errors, 101 warnings; style and
+doc-link guards pass; the hook mirror is current (no mirrored file changed). Mutations,
+each seen red and restored: rail rule reverted (2 of 11), paused line reverted (1 of 5),
+clamp removed from the covered-sections schedule (2 of 13). Pins changed on purpose: the
+default shelf expects no card under the hero; running times read in words. Not run:
+`uiCapture`, `coastalExport`, `controlStudy`. Logs under `.logs/design-pass-*.log` and
+`.logs/details-timeline-*.log`.
+
+Unresolved after this pass:
+
+- Everything native: appearance, visible focus, legibility at distance, the title's
+  continuity on Watch, audible sound through a cover, and real D-pad behaviour. The list to
+  walk is at the end of `DESIGN_ACCEPTANCE.md`.
+- The usability sheet (`docs/evidence/usability-checklist-2026-10-16.md`) has five owner-run
+  tasks and no results; nobody has performed it.
+- The Harbor demo's own card copy (`benignStory.ts`) still names captions, which that title
+  ships; left as it is.
+- The detector candidate on `claude/detector-concurrency-2026-10-16` stays disabled and its
+  limitations stand as documented there, including the red-envelope finding.
+
+The sections below are the earlier handoffs of the day, kept as written.
 
 ## Where
 
@@ -11,7 +61,8 @@ built. Nothing here was built, installed, launched, navigated, captured or recor
 - Branch: `claude/tv-experience-2026-10-16`, based on `63a0bcb3547df218a634a0ecca100c3bca05cc4e`
   (`codex/dark-cinema-2026-10-16`, the verified latest app branch, equal to origin at the start).
 - HEAD: the commit that updates this file. Run `git -C /Users/alexvintera/calm-frames-claude-tv-2026-10-16 log --oneline 63a0bcb..HEAD`
-  to see the eleven commits, listed below.
+  to see the sixteen commits; the eleven of the earlier passes are listed below and the
+  five of the design pass above.
 - Working tree status at the time of writing: clean apart from this file and
   `docs/STATUS.md`, both committed together. `app/node_modules` is an APFS clone of the
   Codex checkout's modules and is ignored; `.logs/` is ignored.
