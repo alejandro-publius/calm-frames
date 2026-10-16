@@ -290,6 +290,11 @@ const KidModeScreen = ({
   // The control the shelf reported for the press being handled now; a press
   // that reports none, such as one from the introduction, clears it.
   const launchControl = React.useRef<ReturnFocusControl | undefined>(undefined);
+  // One launch at a time. A remote can deliver two Select presses before the
+  // navigator has moved, and state set by the first press is not visible to
+  // the second inside the same event, so the latch is a ref. It opens again
+  // on the navigator's focus event, the same event that restores the controls.
+  const launching = React.useRef(false);
   const rememberLaunch = (entry: CheckedTitle) => {
     setLastOpenedId(entry.title.id);
     setLastOpenedFrom(launchControl.current);
@@ -304,6 +309,7 @@ const KidModeScreen = ({
     const removeFocus = navigation.addListener?.('focus', () => {
       // Vega keeps this route mounted behind the player. Restore its controls
       // on return, and permit menu feedback only while this route is active.
+      launching.current = false;
       setInterfaceActive(true);
       setFocusGeneration((generation) => generation + 1);
     });
@@ -420,9 +426,10 @@ const KidModeScreen = ({
   };
 
   const play = (entry: CheckedTitle) => {
-    if (saved.phase !== 'ready' || !saved.value) {
+    if (saved.phase !== 'ready' || !saved.value || launching.current) {
       return;
     }
+    launching.current = true;
     // Invalidate pending menu audio before the player can request audio focus.
     interfaceSound.stop();
     setInterfaceActive(false);
