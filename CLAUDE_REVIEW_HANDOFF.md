@@ -10,8 +10,8 @@ built. Nothing here was built, installed, launched, navigated, captured or recor
   `/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-review`).
 - Branch: `claude/tv-experience-2026-10-16`, based on `63a0bcb3547df218a634a0ecca100c3bca05cc4e`
   (`codex/dark-cinema-2026-10-16`, the verified latest app branch, equal to origin at the start).
-- HEAD: the commit that adds this file. Run `git -C /Users/alexvintera/calm-frames-claude-tv-2026-10-16 log --oneline 63a0bcb..HEAD`
-  to see the eight commits; the seven before this one are listed below.
+- HEAD: the commit that updates this file. Run `git -C /Users/alexvintera/calm-frames-claude-tv-2026-10-16 log --oneline 63a0bcb..HEAD`
+  to see the eleven commits, listed below.
 - Working tree status at the time of writing: clean apart from this file and
   `docs/STATUS.md`, both committed together. `app/node_modules` is an APFS clone of the
   Codex checkout's modules and is ignored; `.logs/` is ignored.
@@ -47,7 +47,10 @@ and notice components, the focus ring and the one-video rail are unchanged.
 - `852ce26` Record the Oct 16 TV experience decisions
 - `0b106ba` Record the TV experience pass: evidence and receipt
 - `fe21fff` Add the evidence index, the Acadia demo script draft and the usability sheet
-- this commit: the handoff and the status line
+- `2b6d4b2` Hand off the TV experience pass for review (the reviewed head)
+- review fix: Clear the picker's focus request when How it works opens
+- review fix: Promise sound, not captions, on the covering and after cards
+- this commit: the records and this handoff updated for the review fixes
 
 ## Files changed, by feature
 
@@ -62,6 +65,13 @@ and notice components, the focus ring and the one-video rail are unchanged.
   `app/test/calmframes/detailDiscovery.test.tsx`, `app/test/calmframes/screens.test.tsx`.
 - Records: `docs/DECISIONS.md`, `docs/evidence/tv-experience-2026-10-16.md`,
   `results/tv-experience-2026-10-16/receipt.json`.
+- Review fixes: `app/src/calmframes/KidHomeScreen.tsx` and
+  `app/test/calmframes/pickerFocusReturn.test.tsx` (How it works clears the picker's focus
+  request; Acadia-only regression); `app/src/calmframes/cards.ts`,
+  `app/src/calmframes/usePlaybackPresentation.ts`, `app/test/calmframes/cards.test.tsx`,
+  `app/test/calmframes/useFlashGuard.test.tsx`, `hook/src/engine/cards.ts`,
+  `hook/src/mirror.json` (sound, not captions, on the covering and after cards; mirror
+  regenerated with `node hook/tools/sync.mjs`).
 - Judge experience: `docs/evidence/README.md` (the evidence index),
   `docs/submission/DEMO_SCRIPT_ACADIA_2026-10-16.md`,
   `docs/evidence/usability-checklist-2026-10-16.md`, `docs/README.md` (index rows),
@@ -87,9 +97,14 @@ Mutations, each applied, run and reverted (exact edits and counts in the receipt
 refusal removed in `PlayerScreen.tsx` (9 of 10 red); latch never set (2 of 2 red); picker
 return control removed (2 of 3 red); captions always promised (2 of 31 red).
 
-The documents added after the receipt (`fe21fff` and this commit) are documentation only;
-jest, typecheck and lint were not rerun for them, and no source file changed after the
-receipt's run.
+After the review fixes, on the final source: focused jest on the 14 affected suites, 253
+tests, pass; full jest 135 suites passed, 1 skipped, 1337 tests passed, 4 skipped, 57
+snapshots unchanged; typecheck pass; lint 0 errors, 101 warnings; hook package
+`npm --prefix hook run test:package` 10 pass and `check:package` offline install, metro
+resolution and transform all true; `hookMirror.test.ts` passes after
+`node hook/tools/sync.mjs`. Mutation: with the clearing line removed from How it works the
+Acadia-only regression failed (1 of 4) and passed again when restored. Logs and digests are
+under `review_fixes_2026-10-16` in the receipt.
 
 ## What remains experimental or unverified
 
@@ -103,9 +118,10 @@ receipt's run.
 - The launch latch reopens on the navigator's focus event. If the player route never
   mounts, the latch stays shut until focus returns, which is the same state the existing
   control removal already leaves the shelf in. Worth a native check.
-- The generic player card in the mirrored engine (`cards.ts`) still says "Sound and
-  captions continue" for every title, including Acadia, which has no captions. Left for a
-  reviewer's decision because the engine is shared with the hook package.
+- The covering and after cards no longer name captions. Two places still do, on purpose:
+  the unavailable card's announcement in `playerAccess.ts` ("while sound and captions keep
+  playing"), left for a separate decision, and the Harbor demo's own card copy in
+  `benignStory.ts`, which describes a title that ships captions.
 - The usability sheet has not been run with anyone. The demo script is a draft and the
   refusal case can only be shown on the television if a review build carries an
   unavailable title; otherwise it is shown headlessly, and the script says so.

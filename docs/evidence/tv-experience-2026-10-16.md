@@ -79,10 +79,13 @@ Where a cosmetic value, rather than verified state, drove what the user saw:
   `coverLine` in `copy.ts` reads the schedule length and the caption list.
 - **How it works, the first run explainer and the viewing plan** carried the
   same still-picture promise as fixed text. Fixed to "covered".
-- **The player card** (`cards.ts`, mirrored into the hook package) still says
+- **The player card** (`cards.ts`, mirrored into the hook package) said
   "Sound and captions continue while this scene is hidden" for every title,
-  including Acadia, which has no captions. Left unchanged in this pass because
-  the engine is generic and mirrored; noted for the reviewer.
+  including Acadia, which has no captions. Fixed on review: the covering card,
+  its paused variant and the after card now say the sound continues, the
+  announcements say the same, and the mirror was regenerated with the sync
+  tool. The unavailable card's line in `playerAccess.ts` still names captions
+  and is noted below.
 - `showHomeOpening` is a route flag that only chooses the opening shell. It
   never affects the cover. The player's title line comes from the route and
   is shown even over a refused route's unavailable card; identity is checked
@@ -101,6 +104,16 @@ the retained cover with one focused Back (`playbackUi.test.tsx`).
 Added in this pass: `playerRouteRefusal.test.tsx` (nine refused routes plus the
 control), `repeatedPresses.test.tsx`, `pickerFocusReturn.test.tsx`, and the
 captions and wording checks in `copy.test.ts` and `detailDiscovery.test.tsx`.
+
+On review, two more fixes: How it works clears the picker's standing focus
+request, so on the Acadia-only shelf the sequence Profiles, Back, How it works
+leaves exactly one control asking for focus, the explanation's Back button
+(regression in `pickerFocusReturn.test.tsx`, seen red with the clearing line
+removed). And the cards no longer promise captions (above). Still naming
+captions, on purpose and noted: the unavailable card's announcement in
+`playerAccess.ts` ("while sound and captions keep playing") and the Harbor
+demo's own card copy in `benignStory.ts`, which describes a title that ships
+captions.
 
 ## Audio continuity: what is and is not established
 

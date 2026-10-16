@@ -2566,3 +2566,10 @@ cloud resources or paid services.
 - **Decision:** one launch at a time from Watch. A ref latches on the first press and opens again on the navigator's focus event, the event that already restores the controls. **Why:** a remote can deliver two Select presses before the navigator has moved, and the second ran the same handler with the same state and called navigate again; the stack navigator happened to fold the two calls, which is the navigator's behaviour rather than the route's. **Cost:** if the player route never mounts, the latch stays shut until focus returns, which is the same state the existing control removal already leaves the shelf in.
 - **Decision:** Back from the profile picker puts the remote's focus on the button that opened it, by the same one-value rule How it works already used; the panel dismissed last wins. **Why:** the chips leave the tree when the picker closes and nothing said where focus should land. **Cost:** none measured.
 - **Decision:** the prepared-route refusal in the player has its own regression suite: nine altered routes, each refused with no opening shell, no media load, one unavailable card and one Back, against a control that plays the exact compiled Acadia route. **Why:** the refusal existed in code with no test naming what a person sees, and the stand-in guard in these tests always answers verified, so any leak would show as a playing picture. **Cost:** none.
+- **Decision, on review:** the covering card, its paused line and the after card say the
+  sound continues and no longer name captions; How it works clears the picker's standing
+  focus request. **Why:** the card knows nothing about a title's tracks and Acadia ships no
+  captions, and a stale request left two controls asking for the remote after Profiles,
+  Back, How it works. **Cost:** three test pins moved and the hook mirror regenerated; the
+  unavailable card's wording in `playerAccess.ts` is left for a separate decision.
+

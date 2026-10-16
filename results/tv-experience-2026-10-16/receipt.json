@@ -162,5 +162,80 @@
       "path": ".logs/tv-experience-lint.log",
       "sha256": "2d51183111ecd448a87db76cde0df03f7e9adf3113338474432aba66224709a4"
     }
+  },
+  "review_fixes_2026-10-16": {
+    "commits": [
+      "Clear the picker's focus request when How it works opens",
+      "Promise sound, not captions, on the covering and after cards"
+    ],
+    "files": {
+      "focus request": [
+        "app/src/calmframes/KidHomeScreen.tsx",
+        "app/test/calmframes/pickerFocusReturn.test.tsx"
+      ],
+      "card copy": [
+        "app/src/calmframes/cards.ts",
+        "app/src/calmframes/usePlaybackPresentation.ts",
+        "app/test/calmframes/cards.test.tsx",
+        "app/test/calmframes/useFlashGuard.test.tsx",
+        "hook/src/engine/cards.ts",
+        "hook/src/mirror.json"
+      ]
+    },
+    "checks": {
+      "focused_jest": {
+        "suites": 14,
+        "tests": 253,
+        "pass": true,
+        "log": ".logs/review-fixes-focused.log"
+      },
+      "full_jest": {
+        "command": "cd app && node_modules/.bin/jest --watchman=false --ci --coverage=false --colors=false --maxWorkers=4 --testPathIgnorePatterns='uiCapture|coastalExport|controlStudy'",
+        "passed_suites": 135,
+        "skipped_suites": 1,
+        "passed_tests": 1337,
+        "skipped_tests": 4,
+        "text_snapshots": {
+          "passed": 57,
+          "written": 0,
+          "obsolete": 0
+        },
+        "log": ".logs/review-fixes-suite.log"
+      },
+      "typecheck": "pass",
+      "lint": {
+        "errors": 0,
+        "warnings": 101,
+        "log": ".logs/review-fixes-lint.log"
+      },
+      "hook_package": {
+        "test:package": "10 pass, 0 fail",
+        "check:package": "offline_install true, metro_resolution true, react_native_transform true",
+        "logs": [
+          ".logs/review-fixes-hook-test.log",
+          ".logs/review-fixes-hook-check.log"
+        ]
+      },
+      "mirror": "node hook/tools/sync.mjs (25 files copied); hookMirror.test.ts passes"
+    },
+    "mutation": {
+      "guard": "How it works clears the picker focus request",
+      "edit": "KidHomeScreen.tsx: setReturnToHeader(null) removed from the How it works press",
+      "result": "1 failed, 3 passed of 4 in pickerFocusReturn.test.tsx; restored",
+      "log": ".logs/review-fixes-mutation.log"
+    },
+    "left_unchanged_on_purpose": [
+      "playerAccess.ts unavailable card announcement still says sound and captions keep playing",
+      "benignStory.ts demo card copy names captions; the demo ships them"
+    ],
+    "logs_sha256": {
+      "review-fixes-focused.log": "2805e13c8e668543bea4495bad66cd730c1a3ea407ac2ad8c158364cb1dd2a60",
+      "review-fixes-suite.log": "c4caacabfaf37a8eaf9cca892f2f8980c0daf99ec51bdb95ff108a6bda66a4eb",
+      "review-fixes-lint.log": "dbb6977207e3f710753c51bf11f9a1aa94077cbaa6536adbbb2d64e4ee005015",
+      "review-fixes-hook-test.log": "bb548d22071ce1cccc0da55104f03396cf5884bcccfcf307e171fea68558717a",
+      "review-fixes-hook-check.log": "da43866e670dccd714dd5307ef088ee1b1af3caf6f80b625603f53b6c94dcf02",
+      "review-fixes-mutation.log": "740843b43281f9f20cee12ed7744c81887fc27b1f6b9697594417bd5a793d0de"
+    },
+    "native": "nothing built, installed, launched, captured or recorded"
   }
 }
