@@ -5,7 +5,7 @@ import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import HomeHarborScene from './HomeHarborScene';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, scale } from './calmStyles';
-import { noticeForTitle, SAFETY_NOTE } from './copy';
+import { coverLine, noticeForTitle, PURPOSE_LINE, SAFETY_NOTE } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import FlashMapStrip from './FlashMapStrip';
 import {
@@ -155,8 +155,8 @@ const TitleDetailsScreen = ({
         </> : <>
           <Text style={styles.section} accessibilityRole="header">{presentation.name}</Text>
           {demo ? <Text style={styles.summary}>This is a simulated demonstration. The pauses were added to show how the feature works, not because flashing was detected.</Text>
-            : intervals.length > 0 ? <Text style={styles.summary}>A still picture replaces brief parts of this video. Sound and captions continue.</Text> : null}
-          <Text style={styles.summary}>Calm Frames replaces flashing scenes with a still picture while sound and captions continue. It only works with videos in this app.</Text>
+            : intervals.length > 0 ? <Text style={styles.summary} testID={`${testID}-cover-line`}>{coverLine(intervals.length, (entry.title.textTrack?.length ?? 0) > 0)}</Text> : null}
+          <Text style={styles.summary}>{`${PURPOSE_LINE} It only works with videos in this app.`}</Text>
           <Text style={styles.summary}>{`Detection can miss flashing. ${SAFETY_NOTE}`}</Text>
           {presentation.art === 'coastal' ? <Text style={styles.summary}>Video: National Park Service, Acadia National Park. Public domain. No NPS endorsement is implied. The menu image is a still from the prepared video.</Text> : null}
           {practiceOffered ? <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-practice`} label="Watch demo"

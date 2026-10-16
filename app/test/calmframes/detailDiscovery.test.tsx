@@ -78,11 +78,26 @@ describe('details discovery', () => {
     expect(view.queryByText(/flagged|Extra cautious|Analyzed before/)).toBeNull();
     expect(view.queryByTestId('title-details-strip')).toBeNull();
     fireEvent.press(view.getByTestId('title-details-show-info'));
-    expect(view.getByText('A still picture replaces brief parts of this video. Sound and captions continue.')).toBeTruthy();
+    // Acadia's maps carry no scene hold and its rendition ships no captions,
+    // so the page promises neither a still picture nor captions.
+    expect(view.getByTestId('title-details-cover-line').props.children).toBe('Brief parts of this video are covered. The sound continues.');
+    expect(view.queryByText(/still picture|captions/i)).toBeNull();
     expect(view.queryByTestId('title-details-record')).toBeNull();
     fireEvent.press(view.getByTestId('title-details-technical'));
     expect(view.getByTestId('title-details-strip')).toBeTruthy();
     expect(view.getByTestId('title-details-record-source')).toBeTruthy();
+  });
+
+  it('promises captions only for a title that ships them', () => {
+    // The prepared Harbor maps carry no segments, so it gets Acadia's schedule
+    // here: a verified title with covers and with a caption track.
+    const acadia = checkedShelf().find(entry => entry.title.title.includes('Acadia'))!;
+    const entry = { ...harbor(), segments: acadia.segments };
+    expect((entry.title.textTrack ?? []).length).toBeGreaterThan(0);
+    expect(acadia.segments.length).toBeGreaterThan(0);
+    const view = render(<TitleDetailsScreen entry={entry} onPlay={jest.fn()} />);
+    fireEvent.press(view.getByTestId('title-details-show-info'));
+    expect(view.getByTestId('title-details-cover-line').props.children).toMatch(/covered\. The sound continues\. Captions continue too\.$/);
   });
 
   it('does not offer hold information or playback for an unavailable title', () => {

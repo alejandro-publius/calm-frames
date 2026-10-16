@@ -58,8 +58,9 @@ const ViewingPlan = ({
           </View>
           <View style={styles.explanation}>
             <Text style={styles.line} testID={`${testID}-continuity`}>
-              Flashing scenes are replaced by a still picture while sound and captions
-              continue. A larger TV or a closer seat can hide more of the video, never less.
+              Flashing scenes are covered while the sound continues, and captions continue
+              when a video has them. A larger TV or a closer seat can hide more of the video,
+              never less.
             </Text>
           </View>
         </View>

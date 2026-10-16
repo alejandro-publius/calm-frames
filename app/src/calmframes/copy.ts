@@ -489,10 +489,42 @@ export const EXPLAINER_WORDS_PER_MINUTE = 150;
 export const EXPLAINER_TITLE = 'How Calm Frames works';
 export const EXPLAINER_LINES: string[] = [
   'Calm Frames checks every video for flashing before it plays.',
-  'Flashing scenes are replaced by a still picture. Sound and captions continue.',
+  'Flashing scenes are covered while the sound continues. Captions continue when a video has them.',
   'Some flashing may go undetected.',
   SAFETY_NOTE,
 ];
+
+/**
+ * What Calm Frames does, in one line, said the same way on Home's How it
+ * works page and on a title's More info page.
+ *
+ * "Covered", not "replaced by a still picture". The still is drawn only when
+ * a title's signed map carries a scene hold for that interval, and the
+ * prepared Acadia maps carry none, so its covers are plain black. Captions
+ * are promised only for a title that ships them, for the same reason: Acadia
+ * has none, the Harbor demo has one track.
+ */
+export const PURPOSE_LINE =
+  'Watch selected videos with flashing scenes covered while the sound continues.';
+export const CAPTIONS_CONTINUE_LINE =
+  'When a video has captions, the captions continue too.';
+export const CHECKED_BEFORE_ADDED_LINE = 'Every video is checked before it is added.';
+export const ONLY_IN_CALM_FRAMES_LINE =
+  'This only works with videos in Calm Frames, not other apps or live TV.';
+
+/**
+ * The More info line about one title's own covers, built from what the
+ * title carries: how many covered parts its schedule has and whether it
+ * ships captions. It never names a still picture, because the schedule does
+ * not say whether a still exists for each part.
+ */
+export function coverLine(count: number, hasCaptions: boolean): string {
+  const parts =
+    count === 1
+      ? 'One brief part of this video is covered.'
+      : 'Brief parts of this video are covered.';
+  return `${parts} The sound continues.${hasCaptions ? ' Captions continue too.' : ''}`;
+}
 
 /** How long the explainer takes to read, in seconds, at the pace above. */
 export function readingSeconds(

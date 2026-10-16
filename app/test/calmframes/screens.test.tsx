@@ -212,7 +212,7 @@ describe('the household viewing plan', () => {
     expect(
       screen.getByTestId('title-details-plan-continuity').props.children,
     ).toMatch(
-      /still picture.*sound and captions continue/i,
+      /covered while the sound continues.*captions continue when a video has them/i,
     );
     expect(screen.getByTestId('title-details-plan-limits').props.children).toBe(
       SAFETY_NOTE,

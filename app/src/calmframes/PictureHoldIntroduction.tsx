@@ -3,13 +3,14 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import { COASTAL_COLORS as CALM_COLORS, CALM_TEXT, CALM_FLOW, scale } from './calmStyles';
-import { SAFETY_NOTE } from './copy';
+import { CAPTIONS_CONTINUE_LINE, CHECKED_BEFORE_ADDED_LINE, ONLY_IN_CALM_FRAMES_LINE, PURPOSE_LINE, SAFETY_NOTE } from './copy';
 
 export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDemoDetails, disabled = false }: { onDemoDetails?: () => void; onPlaybackCheck?: () => void; onStart?: () => void; disabled?: boolean }) {
   return <View testID="picture-hold-introduction" style={styles.content}>
     <Text style={styles.title} accessibilityRole="header">How it works</Text>
-    <Text style={styles.body}>Calm Frames replaces flashing scenes with a still picture. Sound and captions continue.</Text>
-    <Text style={styles.body}>Videos are checked before they are added. This only works with videos in Calm Frames, not other apps or live TV.</Text>
+    <Text style={styles.body}>{PURPOSE_LINE}</Text>
+    <Text style={styles.body}>{`${CAPTIONS_CONTINUE_LINE} ${CHECKED_BEFORE_ADDED_LINE}`}</Text>
+    <Text style={styles.body}>{ONLY_IN_CALM_FRAMES_LINE}</Text>
     {onStart || onDemoDetails ? <Text style={styles.detail}>The demo has two simulated picture pauses and no flashing.</Text> : null}
     <View style={styles.actions}>
       {onStart ? <CalmButton testID="picture-hold-start" primary label="Watch demo" sound={false} hasTVPreferredFocus disabled={disabled} onPress={onStart} /> : null}

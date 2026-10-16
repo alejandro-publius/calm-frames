@@ -22,6 +22,9 @@ import {
   APPROVED_SAFETY_CLAUSE,
   BACKEND_UNREACHABLE,
   BACKEND_UNREACHABLE_EMPTY,
+  CAPTIONS_CONTINUE_LINE,
+  CHECKED_BEFORE_ADDED_LINE,
+  coverLine,
   describeHiddenTotal,
   EVERYONE_LABEL,
   EXPLAINER_LINES,
@@ -37,9 +40,11 @@ import {
   nothingHiddenFor,
   NOTHING_HIDDEN_YET,
   NO_TITLES,
+  ONLY_IN_CALM_FRAMES_LINE,
   PIN_NOT_SET,
   PIN_PROMPT,
   PROFILE_ONLY_ADDS,
+  PURPOSE_LINE,
   readingSeconds,
   removeKidLabel,
   removeKidPrompt,
@@ -141,6 +146,13 @@ describe('house style', () => {
       removeKidPrompt('Robin').detail,
       removeKidLabel('Robin'),
       keepKidLabel('Robin'),
+      // What the app says it does, on How it works and More info.
+      PURPOSE_LINE,
+      CAPTIONS_CONTINUE_LINE,
+      CHECKED_BEFORE_ADDED_LINE,
+      ONLY_IN_CALM_FRAMES_LINE,
+      coverLine(1, false),
+      coverLine(3, true),
     ];
     for (const line of lines) {
       expect(`${line} has em dash: ${line.includes('—')}`).toBe(
@@ -284,6 +296,28 @@ describe('naming a new kid', () => {
     expect(nextKidName('Kid', ['Kid', 'Kid 2'])).toBe('Kid 3');
     // A gap is filled rather than skipped past.
     expect(nextKidName('Kid', ['Kid', 'Kid 3'])).toBe('Kid 2');
+  });
+});
+
+describe('what the app says it does', () => {
+  /**
+   * The covers are black unless a signed scene hold exists for the interval,
+   * and the prepared Acadia maps carry none, so neither line may promise a
+   * still picture. Captions are promised only where a title ships them.
+   */
+  it('says covered, never a still picture, and promises nothing it cannot keep', () => {
+    for (const line of [PURPOSE_LINE, CAPTIONS_CONTINUE_LINE, ...EXPLAINER_LINES, coverLine(2, false)]) {
+      expect(line).not.toMatch(/still picture|safe|guaranteed|nothing flagged|never holds/i);
+      expect(line.endsWith('.')).toBe(true);
+    }
+    expect(PURPOSE_LINE).toMatch(/covered/);
+    expect(PURPOSE_LINE).toMatch(/sound continues/);
+  });
+
+  it('names captions only for a title that has them', () => {
+    expect(coverLine(3, false)).toBe('Brief parts of this video are covered. The sound continues.');
+    expect(coverLine(3, true)).toBe('Brief parts of this video are covered. The sound continues. Captions continue too.');
+    expect(coverLine(1, false)).toBe('One brief part of this video is covered. The sound continues.');
   });
 });
 
