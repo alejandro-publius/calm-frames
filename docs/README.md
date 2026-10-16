@@ -35,6 +35,8 @@ the date before relying on it.
 
 | File | What is in it |
 |---|---|
+| [evidence/README.md](evidence/README.md) | The evidence index: who the product is for, what is and is not supported, the architecture in one paragraph, the checks that have run with their commands, the detector baseline and candidate, provenance and licences, the exact revision and what is installed, and the four kinds of evidence kept apart. |
+| [evidence/usability-checklist-2026-10-16.md](evidence/usability-checklist-2026-10-16.md) | The sheet for a few people trying the Acadia journey with ordinary footage. Not run yet; no participants or results in it. |
 | [EVAL_PLAN.md](EVAL_PLAN.md) | The evaluation plan, committed on Sep 17 before any real clip was labelled, with every later change logged as a deviation at the bottom. |
 | [VALIDATION.md](VALIDATION.md) | Outreach, and what anyone outside the project has said about it. Nothing has been collected yet, and the page says so. |
 | [SCREEN_TEST_PROTOCOL.md](SCREEN_TEST_PROTOCOL.md) | How to film and measure the screen-level test on a physical TV. Never run: physical hardware has been outside this submission's scope since Oct 9. |
@@ -54,6 +56,7 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 | [submission/CHECKLIST.md](submission/CHECKLIST.md) | Every official rule against the repository, marked verified, missing, pending or owner decision, mandatory items apart from the optional mini challenges. |
 | [submission/DEVPOST_DRAFT.md](submission/DEVPOST_DRAFT.md) | The project description to paste once the pending rows close. |
 | [submission/DEMO_SCRIPT.md](submission/DEMO_SCRIPT.md) | The 2:40 narration and shot plan for the native video, waiting for approval to record. |
+| [submission/DEMO_SCRIPT_ACADIA_2026-10-16.md](submission/DEMO_SCRIPT_ACADIA_2026-10-16.md) | The Oct 16 draft for one Acadia viewing under three minutes, with a covered moment explained and the refusal case shown where it can be shown. Not recorded. |
 | [submission/REVIEWER_QUICKSTART.md](submission/REVIEWER_QUICKSTART.md) | Setup, run and demo steps for a judge, with unexecuted commands marked. |
 | [submission/OPEN_DECISIONS.md](submission/OPEN_DECISIONS.md) | What is pending and what only Alex can decide, mandatory first. |
 | [CLAUDE_FINISH_PROMPT.md](CLAUDE_FINISH_PROMPT.md) | A bounded Mac finishing task for Claude Code or a local Codex session, with API billing verification and milestone pushes. |
