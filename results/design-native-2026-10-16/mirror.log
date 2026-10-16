@@ -1,0 +1,13 @@
+PASS test/calmframes/hookMirror.test.ts
+  the hook package mirror
+    ✓ mirrors the engine, and nothing else (3 ms)
+    ✓ is byte for byte what the sync script would write today (6 ms)
+    ✓ leaves no import pointing outside the package (7 ms)
+    ✓ exports the hook and the pieces an app has to draw (1 ms)
+    ✓ declares the runtime it needs as peers, not as dependencies
+
+Test Suites: 1 passed, 1 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        0.267 s, estimated 1 s
+Ran all test suites within paths "test/calmframes/hookMirror.test.ts".

@@ -4,7 +4,7 @@ import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import HomeHarborScene from './HomeHarborScene';
-import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, scale } from './calmStyles';
+import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, heroTitleTypography, scale } from './calmStyles';
 import { coverLine, noticeForTitle, PURPOSE_LINE, runtimeLabel, SAFETY_NOTE } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import CoveredSectionsStrip from './CoveredSectionsStrip';
@@ -67,8 +67,9 @@ const TitleDetailsScreen = ({
       buildCoverIntervals(entry.segments, {
         ...coverOptionsFor(settings),
         durationMs: durationMs > 0 ? durationMs : undefined,
+        renditionStartOffsetMs: entry.title.renditionStartOffsetMs,
       }),
-    [entry.segments, settings, durationMs],
+    [entry.segments, entry.title.renditionStartOffsetMs, settings, durationMs],
   );
   // The strip on the watch page: the same schedule, read once for the page.
   const covered = React.useMemo(
@@ -181,7 +182,7 @@ const TitleDetailsScreen = ({
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
-          <Text style={[styles.title, styles.heroTitle, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
+          <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name)]} testID={`${testID}-title`}>{presentation.name}</Text>
           <Text style={styles.meta} testID={`${testID}-meta`}>{meta}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
           <CoveredSectionsStrip result={covered} testID={`${testID}-covered`} />
@@ -206,12 +207,11 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
   hero: { width: '100%', minHeight: scale(CALM_FLOW.HERO_HEIGHT), alignItems: 'flex-start', justifyContent: 'flex-start' },
-  heroCopy: { width: '100%', maxWidth: scale(720), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
+  heroCopy: { width: '100%', maxWidth: scale(CALM_FLOW.HERO_TITLE_WIDTH), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
   actionRail: { width: scale(620), alignItems: 'flex-start', gap: scale(26), marginTop: scale(24) },
   meta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left', marginBottom: scale(16) },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
-  heroTitle: { ...CALM_TEXT.feature, marginBottom: scale(8) },
-  longTitle: { ...CALM_TEXT.screen },
+  heroTitle: { marginBottom: scale(8) },
   synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left', maxWidth: scale(620) },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, textAlign: 'left' },

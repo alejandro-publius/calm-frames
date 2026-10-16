@@ -115,5 +115,8 @@ export const CALM_TEXT = {
   supporting: typography(32, 42, CALM_FONT.regular),
 } as const;
 
+/** Details and its opening shell keep the same title size, including long names. */
+export const heroTitleTypography = (title: string) => title.length > 20 ? CALM_TEXT.screen : CALM_TEXT.feature;
+
 /** Shared reading geometry for choosing a video and reviewing its analysis. */
-export const CALM_FLOW = { READING_WIDTH: 1040, HERO_TOP: 96, HERO_HEIGHT: 700 } as const;
+export const CALM_FLOW = { READING_WIDTH: 1040, HERO_TOP: 96, HERO_HEIGHT: 700, HERO_TITLE_WIDTH: 720 } as const;

@@ -1,5 +1,22 @@
 # Design acceptance: the final cohesive pass, October 16, 2026
 
+## Owner-approved review fixes, October 16, 2026
+
+Both review findings are corrected. The watch and technical Details schedules pass
+`renditionStartOffsetMs`, including memo refresh when the offset changes. Details and
+PlayerOpening share `heroTitleTypography` and a 720-unit title column, retaining the
+same short-title and long-title sizes. The hook style mirror is regenerated.
+
+Affected checks: 71 unique tests across eight suites pass after regenerating the mirror
+(the initial run correctly caught that it was stale); typecheck passes; lint reports
+zero errors and the existing 101 warnings; style and strict prepared-input gates pass.
+New checks cover positive and negative offsets at duration boundaries, all three
+compiled Acadia presets, both rendered Details strips, offset changes, and rendered
+title typography for short and long names. No snapshots were updated.
+Logs are in `results/design-native-2026-10-16/`. Native build and installation results
+will be recorded separately there. These source checks do not establish native appearance
+or audible continuity. Media, maps, trust and the detector remain unchanged.
+
 Branch `claude/tv-experience-2026-10-16`, worktree
 `/Users/alexvintera/calm-frames-claude-tv-2026-10-16`. Everything here is source and
 headless checks. Nothing was built, installed, launched, driven, captured or recorded, and

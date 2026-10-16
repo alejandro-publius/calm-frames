@@ -3,7 +3,7 @@ import { CoastalAppearance } from './CoastalAppearance';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeHarborScene from './HomeHarborScene';
 import CalmPageHeader from './CalmPageHeader';
-import { COASTAL_COLORS as CALM_COLORS, CALM_FLOW, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
+import { COASTAL_COLORS as CALM_COLORS, CALM_FLOW, CALM_SPACE, CALM_TEXT, heroTitleTypography, scale } from './calmStyles';
 /**
  * liveStatus is false only for the route's loading stand-in
  * (playerRouteFallback.tsx), so the status is announced once, by the player.
@@ -22,7 +22,7 @@ export default function PlayerOpening({ title, onBack, returning = false, liveSt
     <CalmPageHeader onBack={!returning ? onBack : undefined} backLabel="Back" backTestID="player-opening-back" preferredBack />
     <View style={styles.copy}>
       <Text style={styles.eyebrow}>Calm Frames</Text>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, heroTitleTypography(title)]}>{title}</Text>
       <Text style={styles.detail} accessibilityLiveRegion={liveStatus ? 'polite' : 'none'}>{returning ? 'Going back...' : 'Opening your video...'}</Text>
 
     </View>
@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
   screen: { ...StyleSheet.absoluteFillObject, zIndex: 30, backgroundColor: CALM_COLORS.BACKGROUND, paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y) },
   brand: { flexDirection: 'row', gap: scale(20), alignItems: 'center', height: scale(80) },
   mark: { width: scale(80), height: scale(80) }, wordmark: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT },
-  copy: { paddingTop: scale(OPENING_COPY_TOP), width: scale(800) },
+  copy: { paddingTop: scale(OPENING_COPY_TOP), width: scale(CALM_FLOW.HERO_TITLE_WIDTH) },
   eyebrow: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(EYEBROW_MARGIN) },
-  title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(12) },
+  title: { color: CALM_COLORS.TEXT, marginBottom: scale(12) },
   detail: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, minHeight: scale(84), marginBottom: scale(24) },
   actions: { flexDirection: 'row', gap: scale(20), alignItems: 'center' },
 });

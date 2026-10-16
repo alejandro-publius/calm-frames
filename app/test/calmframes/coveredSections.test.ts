@@ -21,8 +21,10 @@ import {
   coveredSectionsLine,
 } from '../../src/calmframes/coveredSections';
 import { buildCoverIntervals, FlashSegment } from '../../src/calmframes/coverSchedule';
-import { coverOptionsFor, DEFAULT_SETTINGS } from '../../src/calmframes/household';
-import { CheckedTitle } from '../../src/calmframes/titleStatus';
+import { coverOptionsFor, DEFAULT_SETTINGS, PRESET_NAMES } from '../../src/calmframes/household';
+import { CheckedTitle, checkTitle } from '../../src/calmframes/titleStatus';
+import { ACADIA_SOURCE_SHA256, packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import { SHELF_NOW } from './shelfFixtures';
 
 function entry(
   segments: FlashSegment[],
@@ -190,5 +192,29 @@ describe('when there is nothing to draw', () => {
       kind: 'unavailable',
       text: COVERED_SECTIONS_UNAVAILABLE,
     });
+  });
+});
+
+
+describe('rendition timeline parity with playback', () => {
+  it.each([100, -100])('applies the verified %i ms offset before widening and clamping', (offset) => {
+    const segments = [{ startMs: 0, endMs: 1_000 }, { startMs: 36_000, endMs: 37_000 }];
+    const result = coveredSections(entry(segments, {}, { renditionStartOffsetMs: offset }), DEFAULT_SETTINGS);
+    expect(spans(result)).toEqual([[0, 1_500 - offset, 'general'], [35_500 - offset, 37_000, 'general']]);
+    expect(result.kind === 'ready' && result.sections).toEqual(buildCoverIntervals(segments, {
+      ...coverOptionsFor(DEFAULT_SETTINGS), durationMs: 37_000, renditionStartOffsetMs: offset,
+    }));
+  });
+
+  it.each(PRESET_NAMES)('matches the compiled Acadia player schedule under %s', (preset) => {
+    const settings = { ...DEFAULT_SETTINGS, preset };
+    const title = packagedLibrary.titles(settings).find(value => value.sha256 === ACADIA_SOURCE_SHA256)!;
+    const checked = checkTitle(title, { settings, publicKeyBase64: packagedLibrary.publicKeyFor(title, settings)!, nowMs: SHELF_NOW });
+    expect(checked.status).toBe('verified');
+    const result = coveredSections(checked, settings);
+    expect(result.kind === 'ready' && result.sections).toEqual(buildCoverIntervals(checked.segments, {
+      ...coverOptionsFor(settings), durationMs: title.durationMs, renditionStartOffsetMs: title.renditionStartOffsetMs,
+    }));
+    expect(result.text).toBe(`2 covered sections, ${preset === 'extra-cautious' ? 9 : 7} seconds of 38 seconds. The sound continues.`);
   });
 });

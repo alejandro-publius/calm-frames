@@ -81,6 +81,7 @@ export function coveredSections(
   const sections = buildCoverIntervals(segments as FlashSegment[], {
     ...coverOptionsFor(benignStorySettings(entry.title, settings)),
     durationMs,
+    renditionStartOffsetMs: entry.title.renditionStartOffsetMs,
   });
   if (sections.length === 0) {
     return { kind: 'none', durationMs, text: COVERED_SECTIONS_NONE };

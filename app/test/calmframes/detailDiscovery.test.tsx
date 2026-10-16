@@ -121,3 +121,16 @@ describe('details discovery', () => {
     expect(view.getByTestId('flash-map-strip-mark-1')).toHaveStyle({ backgroundColor: COASTAL_COLORS.FAILED });
   });
 });
+
+
+test('watch and technical Details both draw the rendition timeline and update its offset', () => {
+  const entry = { title: { id: 'test', title: 'Coast', uri: 'test.mp4', sha256: 'a'.repeat(64), durationMs: 20_000, renditionStartOffsetMs: 100 },
+    status: 'verified' as const, segments: [{ startMs: 5_000, endMs: 6_000 }], hiddenMs: 1_000, verifiedProfiles: ['wcag'] };
+  const view = render(<TitleDetailsScreen entry={entry} onPlay={jest.fn()} />);
+  expect(view.getByTestId('title-details-covered-mark-0')).toHaveStyle({ left: 136.4, width: 62 });
+  fireEvent.press(view.getByTestId('title-details-show-info'));
+  fireEvent.press(view.getByTestId('title-details-technical'));
+  expect(view.getByTestId('title-details-strip-mark-0')).toHaveStyle({ left: 228.8, width: 104 });
+  view.rerender(<TitleDetailsScreen entry={{ ...entry, title: { ...entry.title, renditionStartOffsetMs: -100 } }} onPlay={jest.fn()} />);
+  expect(view.getByTestId('title-details-strip-mark-0')).toHaveStyle({ left: 239.20000000000002, width: 104 });
+});
