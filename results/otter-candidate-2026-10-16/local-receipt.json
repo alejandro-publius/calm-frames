@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "status": "ready",
+  "readiness": "ready for local playback of the prepared rendition",
+  "source_sha256": "9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9",
+  "title": "Sea otters at Elkhorn Slough (12-second muted excerpt)",
+  "presets": [
+    "wcag",
+    "broadcast",
+    "extra-cautious"
+  ],
+  "artifacts": {
+    "wcag": {
+      "safe_master": "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/wcag/safe.mp4",
+      "master_playlist": "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/wcag/hls/master.m3u8",
+      "map": "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/maps/wcag.json",
+      "sha256": {
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/maps/wcag.json": "ac9fb4d279f675ee38c30c1cf0a882f3927cd88197cabd18a0ba51dcd2949cf2",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/wcag/hls/master.m3u8": "f33af3c71b166826f103d8c89c7c5633f7657226802fe37ccaea513a6b2d1ea7",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/wcag/hls/seg_0_00000.ts": "ec493e269a03e1857894c4538e8996fffba54d8b8c5b628597d002f208f0a9e4",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/wcag/hls/seg_0_00001.ts": "e89a983fc6094457d0ddad9c817f85d071efa7ade738ff163f59b74bf7c91be6",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/wcag/hls/seg_0_00002.ts": "05b4dad820ebf9cb6e770f0dfa871de1375ed8a2801bb98b95e94935224b7092",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/wcag/hls/stream_0.m3u8": "3eaea38d581418e1bf4f5dcc5ed667ca0092f0a9a8e96c0c8361f8e0dbb92fc1",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/wcag/safe.mp4": "7b1f88f63835fc3822133110ce9cc6052736771a21e897e6c17f55a9f021fde3"
+      }
+    },
+    "broadcast": {
+      "safe_master": "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/broadcast/safe.mp4",
+      "master_playlist": "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/broadcast/hls/master.m3u8",
+      "map": "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/maps/broadcast.json",
+      "sha256": {
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/maps/broadcast.json": "06cf6b974d4f38568e442355ecbbf7367ab4d008a99015f115215963ff512325",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/broadcast/hls/master.m3u8": "f33af3c71b166826f103d8c89c7c5633f7657226802fe37ccaea513a6b2d1ea7",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/broadcast/hls/seg_0_00000.ts": "ec493e269a03e1857894c4538e8996fffba54d8b8c5b628597d002f208f0a9e4",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/broadcast/hls/seg_0_00001.ts": "e89a983fc6094457d0ddad9c817f85d071efa7ade738ff163f59b74bf7c91be6",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/broadcast/hls/seg_0_00002.ts": "05b4dad820ebf9cb6e770f0dfa871de1375ed8a2801bb98b95e94935224b7092",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/broadcast/hls/stream_0.m3u8": "3eaea38d581418e1bf4f5dcc5ed667ca0092f0a9a8e96c0c8361f8e0dbb92fc1",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/broadcast/safe.mp4": "7b1f88f63835fc3822133110ce9cc6052736771a21e897e6c17f55a9f021fde3"
+      }
+    },
+    "extra-cautious": {
+      "safe_master": "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/extra-cautious/safe.mp4",
+      "master_playlist": "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/extra-cautious/hls/master.m3u8",
+      "map": "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/maps/extra-cautious.json",
+      "sha256": {
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/maps/extra-cautious.json": "2f47b6ea32a50c834e8a75f4e010f90f33fddf6ecb22f1e771238b2734204fcc",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/extra-cautious/hls/master.m3u8": "f33af3c71b166826f103d8c89c7c5633f7657226802fe37ccaea513a6b2d1ea7",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/extra-cautious/hls/seg_0_00000.ts": "ec493e269a03e1857894c4538e8996fffba54d8b8c5b628597d002f208f0a9e4",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/extra-cautious/hls/seg_0_00001.ts": "e89a983fc6094457d0ddad9c817f85d071efa7ade738ff163f59b74bf7c91be6",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/extra-cautious/hls/seg_0_00002.ts": "05b4dad820ebf9cb6e770f0dfa871de1375ed8a2801bb98b95e94935224b7092",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/extra-cautious/hls/stream_0.m3u8": "3eaea38d581418e1bf4f5dcc5ed667ca0092f0a9a8e96c0c8361f8e0dbb92fc1",
+        "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/safe/extra-cautious/safe.mp4": "7b1f88f63835fc3822133110ce9cc6052736771a21e897e6c17f55a9f021fde3"
+      }
+    }
+  },
+  "verification": {
+    "status": "passed",
+    "outcome": "cover proven drawn",
+    "report": "titles/9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9/verify/report.json",
+    "report_sha256": "ca134de2faa5a83dabb676732f9c6912b7d1f96ce0d7013c5c783328d97f4e20",
+    "checked_inputs_sha256": "56669390f183110811238ddba8eee52781fcc2785860d112818d43c9c7c2adaa",
+    "failed_checks": []
+  },
+  "app_shelf_connected": false,
+  "physical_tv_validated": false,
+  "next_steps": [
+    "Read the verification report and its outcome before choosing a rendition.",
+    "Use only artifacts[preset].safe_master or its prepared HLS playlist locally.",
+    "Do not play the original source or the cover model. Nothing opens automatically.",
+    "The app shelf is not connected to this receipt. TV composition still needs measurement."
+  ]
+}

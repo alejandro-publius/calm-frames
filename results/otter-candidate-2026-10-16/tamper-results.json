@@ -1,0 +1,51 @@
+[
+  {
+    "case": "unchanged",
+    "accepted": true,
+    "expected_acceptance": true,
+    "pass": true,
+    "reason": "accepted"
+  },
+  {
+    "case": "rendition-byte",
+    "accepted": false,
+    "expected_acceptance": false,
+    "pass": true,
+    "reason": "A packaged artifact differs from the verified export."
+  },
+  {
+    "case": "map-byte",
+    "accepted": false,
+    "expected_acceptance": false,
+    "pass": true,
+    "reason": "A packaged artifact differs from the verified export."
+  },
+  {
+    "case": "missing-report",
+    "accepted": false,
+    "expected_acceptance": false,
+    "pass": true,
+    "reason": "Original verification reports are missing: ca134de2faa5a83dabb676732f9c6912b7d1f96ce0d7013c5c783328d97f4e20"
+  },
+  {
+    "case": "catalog-byte",
+    "accepted": false,
+    "expected_acceptance": false,
+    "pass": true,
+    "reason": "The compiled catalog does not match the checked manifest."
+  },
+  {
+    "case": "compiled-catalog-byte",
+    "accepted": false,
+    "expected_acceptance": false,
+    "pass": true,
+    "reason": "The compiled catalog does not match the checked manifest."
+  },
+  {
+    "case": "unknown-file",
+    "accepted": false,
+    "expected_acceptance": false,
+    "pass": true,
+    "reason": "An unexpected asset is present in the packaged library."
+  }
+]

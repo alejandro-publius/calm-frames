@@ -1,0 +1,71 @@
+{
+  "status": "prepared but unsuitable for requested viewing; not integrated or trusted",
+  "source": {
+    "source_sha256": "c30e6d6b403d3849f2e5be6f1d1ec21d50940fc11369504305b4a11c337200de",
+    "published_sha1_verified": "e8e620124d9349bd09afd834e8bd0f7078306779",
+    "bytes": 65359357,
+    "duration_ms": 48982,
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Broll_-_Southern_sea_otters_at_Elkhorn_Slough_in_Moss_Landing%2C_California_Video_by_USFWS_%2828833083527%29.webm",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Broll_-_Southern_sea_otters_at_Elkhorn_Slough_in_Moss_Landing,_California_Video_by_USFWS_(28833083527).webm",
+    "agency_original": "https://www.flickr.com/photos/usfws_pacificsw/28833083527/",
+    "license_statement": "https://www.flickr.com/people/usfws_pacificsw",
+    "credit": "Video: USFWS Pacific Southwest Region (public domain)."
+  },
+  "prepared_input": {
+    "source_sha256": "9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9",
+    "duration_ms": 12012.0,
+    "source_excerpt_seconds": [
+      6,
+      18
+    ],
+    "dimensions": [
+      1280,
+      720
+    ],
+    "bytes": 5721424,
+    "audio": "removed; original Opus stereo preserved in source file, not audibly reviewed",
+    "transform": "Headless 720p H.264 excerpt; source BT.709 inferred under existing HD policy; same matrix recorded on derivative."
+  },
+  "signer": {
+    "scope": "isolated otter-only signer; explicit user approval 2026-10-16 06:17:31 UTC",
+    "raw_public_key_sha256": "463593f4f63f44435a24f6189499bf0659a3abd7aefd4407c11b3d6752b5b5b7",
+    "private_key": "local outside repository; never printed or transmitted"
+  },
+  "bundle_id": "d60801f428d5e580c6e8d6e7b4431703556edf7587cc731e56a49a5b7dfbedd2",
+  "catalog_sha256": "30026dc10a82197da53bea8072bc305008712937fbff8fa7fa0e16745d1bce2a",
+  "verification": {
+    "checkedInputsSha256": "56669390f183110811238ddba8eee52781fcc2785860d112818d43c9c7c2adaa",
+    "outcome": "cover proven drawn",
+    "reportSha256": "ca134de2faa5a83dabb676732f9c6912b7d1f96ce0d7013c5c783328d97f4e20"
+  },
+  "verification_checks": 51,
+  "presets": [
+    "wcag",
+    "broadcast",
+    "extra-cautious"
+  ],
+  "cover": {
+    "each_preset_ms": [
+      0,
+      12012
+    ],
+    "percent": 100,
+    "fallback": "neutral-card",
+    "calm_ranges": []
+  },
+  "export_bytes": 184883,
+  "existing_namespace_bytes": 28551507,
+  "namespace_limit_bytes": 67108864,
+  "tamper_checks": "unchanged accepted; six altered copies rejected",
+  "staging_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-review/build/otter-candidate-2026-10-16",
+  "limitations": [
+    "No original or derivative video displayed. No screenshot/recording or simulator action.",
+    "This analyzer is not independent/clinical validation.",
+    "Original colour metadata absent: HD BT.709 inference used.",
+    "ffmpeg source transcode warned File ended prematurely despite matching published file hash; analyzer decoded 1467 frames with container PTS 33 through 48949 ms.",
+    "No app trust granted, catalog changed or installed package replaced.",
+    "Entire candidate is covered and silent, so it does not meet the requested otter viewing experience."
+  ],
+  "comparison": "window-comparison.json",
+  "execution_order": "Isolated signer and preparation/export completed under explicit approval before subsequent instruction to stop prior to signing if fully covered arrived. No further signing, app-trust grant or integration performed."
+}
