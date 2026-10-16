@@ -1,0 +1,1537 @@
+{
+  "numeric_only": true,
+  "production_changed": false,
+  "broadcast_pattern_rule": "excluded to isolate flash rule",
+  "results": [
+    {
+      "geometry": "wcag-reference",
+      "scenario": "separate-bursts",
+      "window": {
+        "name": "wcag-10deg",
+        "width_px": 64,
+        "height_px": 36,
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)"
+      },
+      "patch_rows": 7,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            520,
+            560
+          ],
+          [
+            600,
+            640
+          ],
+          [
+            680,
+            720
+          ],
+          [
+            760,
+            800
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.19444444444444445,
+      "max_completed_area": 0.19444444444444445,
+      "max_same_frame_repeated_area": 0.19444444444444445,
+      "peak_pooled_observation": {
+        "pts_ms": 800.0,
+        "completed_area": 0.19444444444444445,
+        "pooled_area": 0.3888888888888889,
+        "same_frame_repeated_area": 0.19444444444444445,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 448
+      },
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 1080,
+          "flash_first_ms": 80,
+          "flash_last_ms": 800,
+          "reason": "general",
+          "area_fraction": 0.388889,
+          "area_window": "wcag-10deg",
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 4
+        }
+      ]
+    },
+    {
+      "geometry": "wcag-reference",
+      "scenario": "one-patch",
+      "window": {
+        "name": "wcag-10deg",
+        "width_px": 64,
+        "height_px": 36,
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)"
+      },
+      "patch_rows": 7,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        []
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.19444444444444445,
+      "max_completed_area": 0.19444444444444445,
+      "max_same_frame_repeated_area": 0.19444444444444445,
+      "peak_pooled_observation": {
+        "pts_ms": 320.0,
+        "completed_area": 0.19444444444444445,
+        "pooled_area": 0.19444444444444445,
+        "same_frame_repeated_area": 0.19444444444444445,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 448
+      },
+      "segments": []
+    },
+    {
+      "geometry": "wcag-reference",
+      "scenario": "simultaneous",
+      "window": {
+        "name": "wcag-10deg",
+        "width_px": 64,
+        "height_px": 36,
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)"
+      },
+      "patch_rows": 7,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.3888888888888889,
+      "max_completed_area": 0.3888888888888889,
+      "max_same_frame_repeated_area": 0.3888888888888889,
+      "peak_pooled_observation": {
+        "pts_ms": 320.0,
+        "completed_area": 0.3888888888888889,
+        "pooled_area": 0.3888888888888889,
+        "same_frame_repeated_area": 0.3888888888888889,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 896
+      },
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 1080,
+          "flash_first_ms": 80,
+          "flash_last_ms": 320,
+          "reason": "general",
+          "area_fraction": 0.388889,
+          "area_window": "wcag-10deg",
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 4
+        }
+      ]
+    },
+    {
+      "geometry": "wcag-reference",
+      "scenario": "three-each",
+      "window": {
+        "name": "wcag-10deg",
+        "width_px": 64,
+        "height_px": 36,
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)"
+      },
+      "patch_rows": 7,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ]
+        ],
+        [
+          [
+            520,
+            560
+          ],
+          [
+            600,
+            640
+          ],
+          [
+            680,
+            720
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.19444444444444445,
+      "max_completed_area": 0.19444444444444445,
+      "max_same_frame_repeated_area": 0.0,
+      "peak_pooled_observation": {
+        "pts_ms": 0.0,
+        "completed_area": 0.0,
+        "pooled_area": 0.0,
+        "same_frame_repeated_area": 0.0,
+        "max_per_pixel_count": 0,
+        "completed_pixels": 0
+      },
+      "segments": []
+    },
+    {
+      "geometry": "wcag-reference",
+      "scenario": "expired-history",
+      "window": {
+        "name": "wcag-10deg",
+        "width_px": 64,
+        "height_px": 36,
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)"
+      },
+      "patch_rows": 7,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            1320,
+            1360
+          ],
+          [
+            1400,
+            1440
+          ],
+          [
+            1480,
+            1520
+          ],
+          [
+            1560,
+            1600
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.19444444444444445,
+      "max_completed_area": 0.19444444444444445,
+      "max_same_frame_repeated_area": 0.19444444444444445,
+      "peak_pooled_observation": {
+        "pts_ms": 320.0,
+        "completed_area": 0.19444444444444445,
+        "pooled_area": 0.19444444444444445,
+        "same_frame_repeated_area": 0.19444444444444445,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 448
+      },
+      "segments": []
+    },
+    {
+      "geometry": "wcag-reference",
+      "scenario": "below-delta",
+      "window": {
+        "name": "wcag-10deg",
+        "width_px": 64,
+        "height_px": 36,
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)"
+      },
+      "patch_rows": 7,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            520,
+            560
+          ],
+          [
+            600,
+            640
+          ],
+          [
+            680,
+            720
+          ],
+          [
+            760,
+            800
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.21
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.19444444444444445,
+      "max_completed_area": 0.0,
+      "max_same_frame_repeated_area": 0.0,
+      "peak_pooled_observation": {
+        "pts_ms": 0.0,
+        "completed_area": 0.0,
+        "pooled_area": 0.0,
+        "same_frame_repeated_area": 0.0,
+        "max_per_pixel_count": 0,
+        "completed_pixels": 0
+      },
+      "segments": []
+    },
+    {
+      "geometry": "wcag-reference",
+      "scenario": "overlap-offset",
+      "window": {
+        "name": "wcag-10deg",
+        "width_px": 64,
+        "height_px": 36,
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)"
+      },
+      "patch_rows": 7,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            160
+          ],
+          [
+            240,
+            360
+          ],
+          [
+            440,
+            560
+          ],
+          [
+            640,
+            760
+          ]
+        ],
+        [
+          [
+            80,
+            200
+          ],
+          [
+            280,
+            400
+          ],
+          [
+            480,
+            600
+          ],
+          [
+            680,
+            800
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.3888888888888889,
+      "max_completed_area": 0.19444444444444445,
+      "max_same_frame_repeated_area": 0.19444444444444445,
+      "peak_pooled_observation": {
+        "pts_ms": 800.0,
+        "completed_area": 0.19444444444444445,
+        "pooled_area": 0.3888888888888889,
+        "same_frame_repeated_area": 0.19444444444444445,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 448
+      },
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 1160,
+          "flash_first_ms": 160,
+          "flash_last_ms": 800,
+          "reason": "general",
+          "area_fraction": 0.388889,
+          "area_window": "wcag-10deg",
+          "triggered_by": [
+            "wcag-10deg"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 4
+        }
+      ]
+    },
+    {
+      "geometry": "wcag-room",
+      "scenario": "separate-bursts",
+      "window": {
+        "name": "room-10deg",
+        "width_px": 22,
+        "height_px": 22,
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "room": {
+          "tv_diagonal_in": 85,
+          "seat_distance_in": 48,
+          "display_aspect": "16:9",
+          "display_width_in": 74.084,
+          "display_height_in": 41.672,
+          "field_degrees": 10.0,
+          "field_inches": 8.399
+        }
+      },
+      "patch_rows": 4,
+      "patch_area_fraction": 0.18181818181818182,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            520,
+            560
+          ],
+          [
+            600,
+            640
+          ],
+          [
+            680,
+            720
+          ],
+          [
+            760,
+            800
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.18181818181818182,
+      "max_completed_area": 0.18181818181818182,
+      "max_same_frame_repeated_area": 0.18181818181818182,
+      "peak_pooled_observation": {
+        "pts_ms": 800.0,
+        "completed_area": 0.18181818181818182,
+        "pooled_area": 0.36363636363636365,
+        "same_frame_repeated_area": 0.18181818181818182,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 88
+      },
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 1080,
+          "flash_first_ms": 80,
+          "flash_last_ms": 800,
+          "reason": "general",
+          "area_fraction": 0.363636,
+          "area_window": "room-10deg",
+          "triggered_by": [
+            "room-10deg"
+          ],
+          "breaks_baseline": false,
+          "max_flashes_in_window": 4
+        }
+      ]
+    },
+    {
+      "geometry": "wcag-room",
+      "scenario": "one-patch",
+      "window": {
+        "name": "room-10deg",
+        "width_px": 22,
+        "height_px": 22,
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "room": {
+          "tv_diagonal_in": 85,
+          "seat_distance_in": 48,
+          "display_aspect": "16:9",
+          "display_width_in": 74.084,
+          "display_height_in": 41.672,
+          "field_degrees": 10.0,
+          "field_inches": 8.399
+        }
+      },
+      "patch_rows": 4,
+      "patch_area_fraction": 0.18181818181818182,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        []
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.18181818181818182,
+      "max_completed_area": 0.18181818181818182,
+      "max_same_frame_repeated_area": 0.18181818181818182,
+      "peak_pooled_observation": {
+        "pts_ms": 320.0,
+        "completed_area": 0.18181818181818182,
+        "pooled_area": 0.18181818181818182,
+        "same_frame_repeated_area": 0.18181818181818182,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 88
+      },
+      "segments": []
+    },
+    {
+      "geometry": "wcag-room",
+      "scenario": "simultaneous",
+      "window": {
+        "name": "room-10deg",
+        "width_px": 22,
+        "height_px": 22,
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "room": {
+          "tv_diagonal_in": 85,
+          "seat_distance_in": 48,
+          "display_aspect": "16:9",
+          "display_width_in": 74.084,
+          "display_height_in": 41.672,
+          "field_degrees": 10.0,
+          "field_inches": 8.399
+        }
+      },
+      "patch_rows": 4,
+      "patch_area_fraction": 0.18181818181818182,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.36363636363636365,
+      "max_completed_area": 0.36363636363636365,
+      "max_same_frame_repeated_area": 0.36363636363636365,
+      "peak_pooled_observation": {
+        "pts_ms": 320.0,
+        "completed_area": 0.36363636363636365,
+        "pooled_area": 0.36363636363636365,
+        "same_frame_repeated_area": 0.36363636363636365,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 176
+      },
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 1080,
+          "flash_first_ms": 80,
+          "flash_last_ms": 320,
+          "reason": "general",
+          "area_fraction": 0.363636,
+          "area_window": "room-10deg",
+          "triggered_by": [
+            "room-10deg"
+          ],
+          "breaks_baseline": false,
+          "max_flashes_in_window": 4
+        }
+      ]
+    },
+    {
+      "geometry": "wcag-room",
+      "scenario": "three-each",
+      "window": {
+        "name": "room-10deg",
+        "width_px": 22,
+        "height_px": 22,
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "room": {
+          "tv_diagonal_in": 85,
+          "seat_distance_in": 48,
+          "display_aspect": "16:9",
+          "display_width_in": 74.084,
+          "display_height_in": 41.672,
+          "field_degrees": 10.0,
+          "field_inches": 8.399
+        }
+      },
+      "patch_rows": 4,
+      "patch_area_fraction": 0.18181818181818182,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ]
+        ],
+        [
+          [
+            520,
+            560
+          ],
+          [
+            600,
+            640
+          ],
+          [
+            680,
+            720
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.18181818181818182,
+      "max_completed_area": 0.18181818181818182,
+      "max_same_frame_repeated_area": 0.0,
+      "peak_pooled_observation": {
+        "pts_ms": 0.0,
+        "completed_area": 0.0,
+        "pooled_area": 0.0,
+        "same_frame_repeated_area": 0.0,
+        "max_per_pixel_count": 0,
+        "completed_pixels": 0
+      },
+      "segments": []
+    },
+    {
+      "geometry": "wcag-room",
+      "scenario": "expired-history",
+      "window": {
+        "name": "room-10deg",
+        "width_px": 22,
+        "height_px": 22,
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "room": {
+          "tv_diagonal_in": 85,
+          "seat_distance_in": 48,
+          "display_aspect": "16:9",
+          "display_width_in": 74.084,
+          "display_height_in": 41.672,
+          "field_degrees": 10.0,
+          "field_inches": 8.399
+        }
+      },
+      "patch_rows": 4,
+      "patch_area_fraction": 0.18181818181818182,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            1320,
+            1360
+          ],
+          [
+            1400,
+            1440
+          ],
+          [
+            1480,
+            1520
+          ],
+          [
+            1560,
+            1600
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.18181818181818182,
+      "max_completed_area": 0.18181818181818182,
+      "max_same_frame_repeated_area": 0.18181818181818182,
+      "peak_pooled_observation": {
+        "pts_ms": 320.0,
+        "completed_area": 0.18181818181818182,
+        "pooled_area": 0.18181818181818182,
+        "same_frame_repeated_area": 0.18181818181818182,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 88
+      },
+      "segments": []
+    },
+    {
+      "geometry": "wcag-room",
+      "scenario": "below-delta",
+      "window": {
+        "name": "room-10deg",
+        "width_px": 22,
+        "height_px": 22,
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "room": {
+          "tv_diagonal_in": 85,
+          "seat_distance_in": 48,
+          "display_aspect": "16:9",
+          "display_width_in": 74.084,
+          "display_height_in": 41.672,
+          "field_degrees": 10.0,
+          "field_inches": 8.399
+        }
+      },
+      "patch_rows": 4,
+      "patch_area_fraction": 0.18181818181818182,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            520,
+            560
+          ],
+          [
+            600,
+            640
+          ],
+          [
+            680,
+            720
+          ],
+          [
+            760,
+            800
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.21
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.18181818181818182,
+      "max_completed_area": 0.0,
+      "max_same_frame_repeated_area": 0.0,
+      "peak_pooled_observation": {
+        "pts_ms": 0.0,
+        "completed_area": 0.0,
+        "pooled_area": 0.0,
+        "same_frame_repeated_area": 0.0,
+        "max_per_pixel_count": 0,
+        "completed_pixels": 0
+      },
+      "segments": []
+    },
+    {
+      "geometry": "wcag-room",
+      "scenario": "overlap-offset",
+      "window": {
+        "name": "room-10deg",
+        "width_px": 22,
+        "height_px": 22,
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "room": {
+          "tv_diagonal_in": 85,
+          "seat_distance_in": 48,
+          "display_aspect": "16:9",
+          "display_width_in": 74.084,
+          "display_height_in": 41.672,
+          "field_degrees": 10.0,
+          "field_inches": 8.399
+        }
+      },
+      "patch_rows": 4,
+      "patch_area_fraction": 0.18181818181818182,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            160
+          ],
+          [
+            240,
+            360
+          ],
+          [
+            440,
+            560
+          ],
+          [
+            640,
+            760
+          ]
+        ],
+        [
+          [
+            80,
+            200
+          ],
+          [
+            280,
+            400
+          ],
+          [
+            480,
+            600
+          ],
+          [
+            680,
+            800
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.36363636363636365,
+      "max_completed_area": 0.18181818181818182,
+      "max_same_frame_repeated_area": 0.18181818181818182,
+      "peak_pooled_observation": {
+        "pts_ms": 800.0,
+        "completed_area": 0.18181818181818182,
+        "pooled_area": 0.36363636363636365,
+        "same_frame_repeated_area": 0.18181818181818182,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 88
+      },
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 1160,
+          "flash_first_ms": 160,
+          "flash_last_ms": 800,
+          "reason": "general",
+          "area_fraction": 0.363636,
+          "area_window": "room-10deg",
+          "triggered_by": [
+            "room-10deg"
+          ],
+          "breaks_baseline": false,
+          "max_flashes_in_window": 4
+        }
+      ]
+    },
+    {
+      "geometry": "broadcast-screen",
+      "scenario": "separate-bursts",
+      "window": {
+        "name": "bt1702-screen",
+        "width_px": 192,
+        "height_px": 108,
+        "source": "ITU-R BT.1702-3 Annex 1 Guideline 1, 25% of the displayed screen area"
+      },
+      "patch_rows": 21,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            520,
+            560
+          ],
+          [
+            600,
+            640
+          ],
+          [
+            680,
+            720
+          ],
+          [
+            760,
+            800
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.19444444444444445,
+      "max_completed_area": 0.19444444444444445,
+      "max_same_frame_repeated_area": 0.19444444444444445,
+      "peak_pooled_observation": {
+        "pts_ms": 800.0,
+        "completed_area": 0.19444444444444445,
+        "pooled_area": 0.3888888888888889,
+        "same_frame_repeated_area": 0.19444444444444445,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 4032
+      },
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 1080,
+          "flash_first_ms": 80,
+          "flash_last_ms": 800,
+          "reason": "general",
+          "area_fraction": 0.388889,
+          "area_window": "bt1702-screen",
+          "triggered_by": [
+            "bt1702-screen"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 4
+        }
+      ]
+    },
+    {
+      "geometry": "broadcast-screen",
+      "scenario": "one-patch",
+      "window": {
+        "name": "bt1702-screen",
+        "width_px": 192,
+        "height_px": 108,
+        "source": "ITU-R BT.1702-3 Annex 1 Guideline 1, 25% of the displayed screen area"
+      },
+      "patch_rows": 21,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        []
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.19444444444444445,
+      "max_completed_area": 0.19444444444444445,
+      "max_same_frame_repeated_area": 0.19444444444444445,
+      "peak_pooled_observation": {
+        "pts_ms": 320.0,
+        "completed_area": 0.19444444444444445,
+        "pooled_area": 0.19444444444444445,
+        "same_frame_repeated_area": 0.19444444444444445,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 4032
+      },
+      "segments": []
+    },
+    {
+      "geometry": "broadcast-screen",
+      "scenario": "simultaneous",
+      "window": {
+        "name": "bt1702-screen",
+        "width_px": 192,
+        "height_px": 108,
+        "source": "ITU-R BT.1702-3 Annex 1 Guideline 1, 25% of the displayed screen area"
+      },
+      "patch_rows": 21,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.3888888888888889,
+      "max_completed_area": 0.3888888888888889,
+      "max_same_frame_repeated_area": 0.3888888888888889,
+      "peak_pooled_observation": {
+        "pts_ms": 320.0,
+        "completed_area": 0.3888888888888889,
+        "pooled_area": 0.3888888888888889,
+        "same_frame_repeated_area": 0.3888888888888889,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 8064
+      },
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 1080,
+          "flash_first_ms": 80,
+          "flash_last_ms": 320,
+          "reason": "general",
+          "area_fraction": 0.388889,
+          "area_window": "bt1702-screen",
+          "triggered_by": [
+            "bt1702-screen"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 4
+        }
+      ]
+    },
+    {
+      "geometry": "broadcast-screen",
+      "scenario": "three-each",
+      "window": {
+        "name": "bt1702-screen",
+        "width_px": 192,
+        "height_px": 108,
+        "source": "ITU-R BT.1702-3 Annex 1 Guideline 1, 25% of the displayed screen area"
+      },
+      "patch_rows": 21,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ]
+        ],
+        [
+          [
+            520,
+            560
+          ],
+          [
+            600,
+            640
+          ],
+          [
+            680,
+            720
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.19444444444444445,
+      "max_completed_area": 0.19444444444444445,
+      "max_same_frame_repeated_area": 0.0,
+      "peak_pooled_observation": {
+        "pts_ms": 0.0,
+        "completed_area": 0.0,
+        "pooled_area": 0.0,
+        "same_frame_repeated_area": 0.0,
+        "max_per_pixel_count": 0,
+        "completed_pixels": 0
+      },
+      "segments": []
+    },
+    {
+      "geometry": "broadcast-screen",
+      "scenario": "expired-history",
+      "window": {
+        "name": "bt1702-screen",
+        "width_px": 192,
+        "height_px": 108,
+        "source": "ITU-R BT.1702-3 Annex 1 Guideline 1, 25% of the displayed screen area"
+      },
+      "patch_rows": 21,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            1320,
+            1360
+          ],
+          [
+            1400,
+            1440
+          ],
+          [
+            1480,
+            1520
+          ],
+          [
+            1560,
+            1600
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.19444444444444445,
+      "max_completed_area": 0.19444444444444445,
+      "max_same_frame_repeated_area": 0.19444444444444445,
+      "peak_pooled_observation": {
+        "pts_ms": 320.0,
+        "completed_area": 0.19444444444444445,
+        "pooled_area": 0.19444444444444445,
+        "same_frame_repeated_area": 0.19444444444444445,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 4032
+      },
+      "segments": []
+    },
+    {
+      "geometry": "broadcast-screen",
+      "scenario": "below-delta",
+      "window": {
+        "name": "bt1702-screen",
+        "width_px": 192,
+        "height_px": 108,
+        "source": "ITU-R BT.1702-3 Annex 1 Guideline 1, 25% of the displayed screen area"
+      },
+      "patch_rows": 21,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            80
+          ],
+          [
+            120,
+            160
+          ],
+          [
+            200,
+            240
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        [
+          [
+            520,
+            560
+          ],
+          [
+            600,
+            640
+          ],
+          [
+            680,
+            720
+          ],
+          [
+            760,
+            800
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.21
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.19444444444444445,
+      "max_completed_area": 0.0,
+      "max_same_frame_repeated_area": 0.0,
+      "peak_pooled_observation": {
+        "pts_ms": 0.0,
+        "completed_area": 0.0,
+        "pooled_area": 0.0,
+        "same_frame_repeated_area": 0.0,
+        "max_per_pixel_count": 0,
+        "completed_pixels": 0
+      },
+      "segments": []
+    },
+    {
+      "geometry": "broadcast-screen",
+      "scenario": "overlap-offset",
+      "window": {
+        "name": "bt1702-screen",
+        "width_px": 192,
+        "height_px": 108,
+        "source": "ITU-R BT.1702-3 Annex 1 Guideline 1, 25% of the displayed screen area"
+      },
+      "patch_rows": 21,
+      "patch_area_fraction": 0.19444444444444445,
+      "bright_intervals_ms": [
+        [
+          [
+            40,
+            160
+          ],
+          [
+            240,
+            360
+          ],
+          [
+            440,
+            560
+          ],
+          [
+            640,
+            760
+          ]
+        ],
+        [
+          [
+            80,
+            200
+          ],
+          [
+            280,
+            400
+          ],
+          [
+            480,
+            600
+          ],
+          [
+            680,
+            800
+          ]
+        ]
+      ],
+      "input_gray_levels": [
+        0.2,
+        0.8
+      ],
+      "frame_step_ms": 40,
+      "max_active_area_from_schedule": 0.3888888888888889,
+      "max_completed_area": 0.19444444444444445,
+      "max_same_frame_repeated_area": 0.19444444444444445,
+      "peak_pooled_observation": {
+        "pts_ms": 800.0,
+        "completed_area": 0.19444444444444445,
+        "pooled_area": 0.3888888888888889,
+        "same_frame_repeated_area": 0.19444444444444445,
+        "max_per_pixel_count": 4,
+        "completed_pixels": 4032
+      },
+      "segments": [
+        {
+          "start_ms": 0,
+          "end_ms": 1160,
+          "flash_first_ms": 160,
+          "flash_last_ms": 800,
+          "reason": "general",
+          "area_fraction": 0.388889,
+          "area_window": "bt1702-screen",
+          "triggered_by": [
+            "bt1702-screen"
+          ],
+          "breaks_baseline": true,
+          "max_flashes_in_window": 4
+        }
+      ]
+    }
+  ]
+}

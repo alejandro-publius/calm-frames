@@ -1,0 +1,110 @@
+{
+  "status": "confirmed pooling mismatch on synthetic schedules; production unchanged",
+  "branch": "codex/detector-area-review-2026-10-16",
+  "base_commit": "63a0bcb3547df218a634a0ecca100c3bca05cc4e",
+  "code_sha256": {
+    "flashmap/src/flashmap/analyze.py": "46734d89fc36863b800314247967281c772f85361d7567c5056daef61a6cb4ba",
+    "flashmap/src/flashmap/flash.py": "42609764538beef77e5ff7b88fb800cc75e5db720bd13ee11aac777299db2be3",
+    "eval/concurrent_area_review.py": "5c54cf9de921cdfafcf5de5b2a091cc26a3fbe73ebf0c63003560451824d3e55",
+    "eval/tests/test_concurrent_area_review.py": "f0ab872aaa5da42a9b004e1f235e6bee594502ec50e73aad17649dcd6cbd1cd8"
+  },
+  "fixture_matrix": {
+    "geometries": 3,
+    "scenarios_per_geometry": 7,
+    "total": 21,
+    "frame_size": [
+      192,
+      108
+    ],
+    "step_ms": 40,
+    "media_encoded_or_displayed": false,
+    "pattern_rule": "disabled only in review fixture to isolate broadcast flash rule"
+  },
+  "checks": {
+    "characterization": "24 passed, 3 strict xfailed",
+    "known_spec_mismatch_runxfail": "3 failed, 24 deselected; expected failures reproduced",
+    "ruff": "not available in existing Python environment; not installed"
+  },
+  "commands": {
+    "generate": "PYTHONPATH=\"$PWD/flashmap/src:$PWD\" /Users/alexvintera/calm-frames/.venv/bin/python eval/concurrent_area_review.py",
+    "test": "PYTHONPATH=\"$PWD/flashmap/src:$PWD\" /Users/alexvintera/calm-frames/.venv/bin/python -m pytest eval/tests/test_concurrent_area_review.py -q",
+    "reproduce_failures": "Same pytest command with --runxfail -k separated_small"
+  },
+  "sources": [
+    {
+      "url": "https://www.w3.org/TR/WCAG22/#dfn-general-flash-and-red-flash-thresholds",
+      "section": "normative definition and Note 2",
+      "read_date": "2026-10-16"
+    },
+    {
+      "url": "https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.1702-3-202311-I!!PDF-E.pdf",
+      "section": "Annex 1, Guideline 1, printed page 3 (PDF page 5)",
+      "read_date": "2026-10-16"
+    }
+  ],
+  "historical_intent": {
+    "first_implementation": "3915569fefe62780e25315dc44ddbddfc35278e0",
+    "finding": "Same pooling existed originally; original commit and reviewed implementation-decision list do not document it as an extra policy."
+  },
+  "existing_otter_maps": [
+    {
+      "path": "results/otter-candidate-2026-10-16/candidate-wcag-reference.json",
+      "sha256": "85812c775b6da9a88b701e01e63298e6666518bf5a3fd1cc5c6435e26b380c76",
+      "hidden_ms": 7774,
+      "segments": 2
+    },
+    {
+      "path": "results/otter-candidate-2026-10-16/candidate-wcag-room.json",
+      "sha256": "5fe64ebccf8979d4e1d408fc95e0d7353c39b85b3bc6dcc0ba54c29614352811",
+      "hidden_ms": 11577,
+      "segments": 3
+    },
+    {
+      "path": "results/otter-candidate-2026-10-16/original-wcag-reference.json",
+      "sha256": "bbba4fc1c4264e211fd5f17a30e74c1446ee25194e1a29e1fb9cebd1997c3f31",
+      "hidden_ms": 39936,
+      "segments": 14
+    },
+    {
+      "path": "results/otter-candidate-2026-10-16/original-wcag-room.json",
+      "sha256": "7a19838301b3d1aec1b06f09bd5eca0e749f11df0534f3771b60152a0b1956ca",
+      "hidden_ms": 48446,
+      "segments": 10
+    },
+    {
+      "path": "results/otter-grooming-candidate-2026-10-16/candidate-wcag-reference.json",
+      "sha256": "9163f6a5a0fa957dba36685f9e2ab220cf7998624c7b0116e4858a06b771aa8f",
+      "hidden_ms": 3600,
+      "segments": 3
+    },
+    {
+      "path": "results/otter-grooming-candidate-2026-10-16/candidate-wcag-room.json",
+      "sha256": "9454700420af5250c60735ea5cc771ca270dd56c00e0ca5e60e4f9656b7a373e",
+      "hidden_ms": 12680,
+      "segments": 16
+    },
+    {
+      "path": "results/otter-grooming-candidate-2026-10-16/original-wcag-reference.json",
+      "sha256": "f95f64e2697161679a832dc54a0a0bc9d0a75b44ded306897deb4f3f90f87dc8",
+      "hidden_ms": 51400,
+      "segments": 19
+    },
+    {
+      "path": "results/otter-grooming-candidate-2026-10-16/original-wcag-room.json",
+      "sha256": "634d129b11e4ef631bf1875ea2096ae652e3b351973e6e91681320c4ae7c2f27",
+      "hidden_ms": 80320,
+      "segments": 36
+    }
+  ],
+  "impact": "Maps contain aggregate areas and bounds, not masks or paired-event lifetimes. They do not establish how much otter coverage this behavior caused. No map verdict is revised.",
+  "proposed_next_action": "Specify and review duration-aware concurrent-area semantics, preserve overlapping-offset positive control, then implement and compare unsigned analyses separately. Do not replace pooling with current-frame completion intersection.",
+  "production_files_changed": false,
+  "trusted_assets_changed": false,
+  "native_app_actions": false,
+  "signing_or_preparation": false,
+  "logs": {
+    "area-fixtures.log": "cd7a92e82bbeb1c1e363ecd0d12f461b6e6c5faa6693e577e8460ae0bc891349",
+    "area-tests.log": "4fac76dedc50efc33bdcb29d6149f4d8d9faf9f9e7919fa6b7752451e1b61754",
+    "area-known-mismatch.log": "16b17540ea6c2c3f988abe9fc9cf8a5c1dc094c59fdbd66c6478439a28662bf3"
+  }
+}
