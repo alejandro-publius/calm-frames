@@ -73,3 +73,16 @@ it('opening the picker from its button asks for no other focus than the shelf ha
   expect(screen.getByTestId('kid-home-profiles')).toBeTruthy();
   expect(preferred()).toEqual(['kid-home-watch']);
 });
+
+it('How it works after the picker asks for Back alone, on the Acadia-only shelf', () => {
+  // Seen to fail, Oct 16 2026: before How it works cleared the header request, this
+  // reported ["kid-home-choose-profile", "picture-hold-dismiss"], two controls asking.
+  const consumer = titles.filter((entry) => entry.title.title.startsWith('Acadia'));
+  expect(consumer.length).toBe(1);
+  render(<KidHomeScreen titles={consumer} onOpen={jest.fn()} profiles={profiles} activeProfileId="everyone" onChooseProfile={jest.fn()} />);
+  fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
+  back();
+  expect(preferred()).toEqual(['kid-home-choose-profile']);
+  fireEvent.press(screen.getByTestId('kid-home-learn'));
+  expect(preferred()).toEqual(['picture-hold-dismiss']);
+});

@@ -204,7 +204,7 @@ const KidHomeScreen = ({
             disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={returnTo === 'profile'}
             onPress={() => { setReturnToHeader(null); setChoosingProfile(!choosingProfile); }} /> : null}
           {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" accessibilityLabel="How it works" hasTVPreferredFocus={returnTo === 'learn'}
-            disabled={saving} onPress={() => { setChoosingProfile(false); setShowIntroduction(true); }} /></View> : null}
+            disabled={saving} onPress={() => { setChoosingProfile(false); setReturnToHeader(null); setShowIntroduction(true); }} /></View> : null}
           {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parents" accessibilityLabel="Parents: parental controls, needs a PIN" hasTVPreferredFocus={(empty || returnTo === 'parent') && !saving} onPress={onOpenParentArea} /></View> : null}
       </CalmPageHeader>
       {choosingProfile && picking && profiles && onChooseProfile ? (
