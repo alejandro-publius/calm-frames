@@ -24,7 +24,7 @@ describe('details discovery', () => {
   it('keeps ordinary viewing brief, with reports and demo behind separate routes', () => {
     const onPlay = jest.fn();
     const view = render(<TitleDetailsScreen entry={harbor()} onPlay={onPlay} practice={demo()} onOpenPractice={jest.fn()} />);
-    expect(view.getByTestId('title-details-meta')).toHaveTextContent('20 sec');
+    expect(view.getByTestId('title-details-meta')).toHaveTextContent('20 seconds');
     for (const suffix of ['analysis', 'record', 'strip', 'practice', 'plan']) expect(view.queryByTestId(`title-details-${suffix}`)).toBeNull();
     expect(view.queryByText(/No scenes flagged|No flashing found|plays normally/)).toBeNull();
     fireEvent.press(view.getByTestId('title-details-show-info'));
@@ -45,7 +45,7 @@ describe('details discovery', () => {
 
   it('identifies simulated events before watching and keeps their timeline in technical details', () => {
     const view = render(<TitleDetailsScreen entry={demo()} onPlay={jest.fn()} />);
-    expect(view.getByText('Simulated demo · 20 sec')).toBeTruthy();
+    expect(view.getByText('Simulated demo · 20 seconds')).toBeTruthy();
     expect(view.queryByTestId('title-details-strip')).toBeNull();
     fireEvent.press(view.getByTestId('title-details-show-info'));
     fireEvent.press(view.getByTestId('title-details-technical'));

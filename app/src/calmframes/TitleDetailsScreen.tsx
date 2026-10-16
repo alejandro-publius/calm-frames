@@ -5,8 +5,10 @@ import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import HomeHarborScene from './HomeHarborScene';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, scale } from './calmStyles';
-import { coverLine, noticeForTitle, PURPOSE_LINE, SAFETY_NOTE } from './copy';
+import { coverLine, noticeForTitle, PURPOSE_LINE, runtimeLabel, SAFETY_NOTE } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
+import CoveredSectionsStrip from './CoveredSectionsStrip';
+import { coveredSections } from './coveredSections';
 import FlashMapStrip from './FlashMapStrip';
 import {
   coverOptionsFor,
@@ -68,6 +70,11 @@ const TitleDetailsScreen = ({
       }),
     [entry.segments, settings, durationMs],
   );
+  // The strip on the watch page: the same schedule, read once for the page.
+  const covered = React.useMemo(
+    () => coveredSections(entry, householdSettings),
+    [entry, householdSettings],
+  );
   const presentation = titlePresentation(entry.title);
   const demo = isBundledBenignStory(entry.title);
   const practiceOffered = practice && onOpenPractice && !demo ? practice : null;
@@ -75,12 +82,12 @@ const TitleDetailsScreen = ({
   // the demo's prepared settings, not the raw segments of each map.
   const practiceLine = React.useMemo(() => {
     if (!practiceOffered) return null;
-    const seconds = Math.round((practiceOffered.title.durationMs ?? 0) / 1000);
+    const runtime = runtimeLabel(practiceOffered.title.durationMs);
     const holds = buildCoverIntervals(practiceOffered.segments ?? [], {
       ...coverOptionsFor(benignStorySettings(practiceOffered.title, DEFAULT_SETTINGS)),
       durationMs: practiceOffered.title.durationMs,
     }).length;
-    return seconds > 0 && holds > 0 ? `${seconds} sec · ${holds} picture pause${holds === 1 ? '' : 's'}` : null;
+    return runtime && holds > 0 ? `${runtime}, ${holds} picture pause${holds === 1 ? '' : 's'}` : null;
   }, [practiceOffered]);
   const playLabel = demo ? 'Watch demo' : 'Watch';
   const notice = noticeForTitle(entry) ?? (concernsPackagedLibrary(entry.title) && !packagedLibrary.evidenceFor(entry.title, settings) ? {
@@ -95,9 +102,7 @@ const TitleDetailsScreen = ({
   );
 
   const hiddenSeconds = Math.round(totalCoveredMs(intervals) / 1000);
-  const meta = [demo ? 'Simulated demo' : null,
-    durationMs > 0 ? `${Math.round(durationMs / 1000)} sec` : null,
-  ].filter(Boolean).join(' · ');
+  const meta = [demo ? 'Simulated demo' : null, runtimeLabel(durationMs)].filter(Boolean).join(' · ');
   const [page, setPage] = React.useState<'watch' | 'info' | 'technical'>(preferPracticeFocus ? 'info' : 'watch');
   const [returnFocus, setReturnFocus] = React.useState<'watch' | 'info' | 'technical'>('watch');
   const back = React.useCallback(() => {
@@ -179,6 +184,7 @@ const TitleDetailsScreen = ({
           <Text style={[styles.title, styles.heroTitle, presentation.name.length > 20 ? styles.longTitle : null]} testID={`${testID}-title`}>{presentation.name}</Text>
           <Text style={styles.meta} testID={`${testID}-meta`}>{meta}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
+          <CoveredSectionsStrip result={covered} testID={`${testID}-covered`} />
         </View>
         <View style={styles.actionRail}>
           <View style={styles.buttons}>

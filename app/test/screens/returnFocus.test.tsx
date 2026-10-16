@@ -142,11 +142,11 @@ describe('Back from playback and details on the real shelf', () => {
   it('Details, More info, demo, Watch, then Back four times: one level at a time, focus on what was pressed', async () => {
     const { navigation, returnFromPlayer } = await startShelf(regressionCatalog());
     fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
-    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('20 sec');
+    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('20 seconds');
     expect(preferred()).toEqual(['kid-mode-details-play']);
     fireEvent.press(screen.getByTestId('kid-mode-details-show-info'));
     fireEvent.press(screen.getByTestId('kid-mode-details-practice'));
-    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('Simulated demo · 20 sec');
+    expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('Simulated demo · 20 seconds');
     expect(screen.queryByTestId('kid-mode-details-practice')).toBeNull();
     expect(preferred()).toEqual(['kid-mode-details-play']);
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));

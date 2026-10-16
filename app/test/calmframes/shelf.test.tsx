@@ -154,7 +154,7 @@ describe('the words on the shelf', () => {
 
     render(<TitleDetailsScreen entry={prepared} onPlay={onPlay} />);
     expect(screen.queryByTestId('title-details-description')).toBeNull();
-    expect(screen.getByTestId('title-details-meta').props.children).toBe('20 sec');
+    expect(screen.getByTestId('title-details-meta').props.children).toBe('20 seconds');
     expect(screen.queryByText('Original story')).toBeNull();
   });
 

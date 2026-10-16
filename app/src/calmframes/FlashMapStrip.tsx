@@ -92,7 +92,7 @@ const FlashMapStrip = ({
   const hasRedHold = marks.some(mark => mark.reason === 'red');
   const hasOtherHold = marks.some(mark => mark.reason !== 'red');
   const keyDescription = marks.length > 0
-    ? `${hasOtherHold ? `${holdLabel} markers show where the picture changes. ` : ''}${hasRedHold ? 'Red markers show where red flashing is hidden. ' : ''}Sound and captions continue.`
+    ? `${hasOtherHold ? `${holdLabel} markers show where the picture changes. ` : ''}${hasRedHold ? 'Red markers show where red flashing is hidden. ' : ''}The sound continues.`
     : 'The video plays without planned picture pauses.';
 
   return (
@@ -133,7 +133,7 @@ const FlashMapStrip = ({
               <View style={[styles.holdSwatch, { backgroundColor: CALM_COLORS.FAILED }]} />
               <Text style={styles.time}>Red flashing hidden</Text></View> : null}
           </View>
-          {marks.length > 0 ? <Text style={styles.keyNote}>Sound and captions continue when the picture changes.</Text> : null}
+          {marks.length > 0 ? <Text style={styles.keyNote}>The sound continues when the picture changes.</Text> : null}
         </>
       ) : null}
       {showCaption ? <Text style={styles.caption} testID={`${testID}-caption`}>

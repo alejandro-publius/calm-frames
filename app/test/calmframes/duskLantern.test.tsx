@@ -95,14 +95,14 @@ test('the Home heading is one large line sized to clear the artwork, and Details
 
 test('Details lists runtime without redundant zero-findings copy', () => {
   const prepared = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
-  expect(prepared.getByTestId('title-details-meta').props.children).toBe('20 sec');
+  expect(prepared.getByTestId('title-details-meta').props.children).toBe('20 seconds');
   expect(prepared.queryByText('The video plays normally.')).toBeNull();
   for (const pattern of BANNED) {
     expect(prepared.queryByText(pattern)).toBeNull();
   }
   prepared.unmount();
   const practice = render(<TitleDetailsScreen entry={demo} onPlay={jest.fn()} />);
-  expect(practice.getByTestId('title-details-meta').props.children).toBe('Simulated demo · 20 sec');
+  expect(practice.getByTestId('title-details-meta').props.children).toBe('Simulated demo · 20 seconds');
   expect(practice.getByTestId('title-details-play').props.accessibilityLabel).toMatch(/Watch demo/);
 });
 
@@ -113,7 +113,7 @@ test('Details keeps the practice demo inside More info and returns focus there',
   expect(prepared.getByTestId('title-details-play').props.hasTVPreferredFocus).toBe(true);
   fireEvent.press(prepared.getByTestId('title-details-show-info'));
   const entry = prepared.getByTestId('title-details-practice');
-  expect(entry.props.accessibilityLabel).toBe('Watch simulated demo. 20 sec · 2 picture pauses');
+  expect(entry.props.accessibilityLabel).toBe('Watch simulated demo. 20 seconds, 2 picture pauses');
   expect(StyleSheet.flatten(entry.props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
   expect(prepared.queryByTestId('title-details-play')).toBeNull();
   expect(entry.props.hasTVPreferredFocus).toBe(false);
@@ -133,5 +133,5 @@ test('the practice entry follows the demo duration and schedule rather than fixe
   const shorterDemo = { ...demo, title: { ...demo.title, durationMs: 30000 }, segments: demo.segments.slice(0, 1) };
   render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={shorterDemo} onOpenPractice={jest.fn()} />);
   fireEvent.press(screen.getByTestId('title-details-show-info'));
-  expect(screen.getByTestId('title-details-practice').props.accessibilityLabel).toBe('Watch simulated demo. 30 sec · 1 picture pause');
+  expect(screen.getByTestId('title-details-practice').props.accessibilityLabel).toBe('Watch simulated demo. 30 seconds, 1 picture pause');
 });
