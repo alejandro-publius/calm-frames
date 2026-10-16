@@ -506,6 +506,19 @@ export const EXPLAINER_LINES: string[] = [
  */
 export const PURPOSE_LINE =
   'Watch selected videos with flashing scenes covered while the sound continues.';
+/** Home's one line under the title: the benefit, without a promise about tracks. */
+export const HOME_BENEFIT_LINE = 'Watch prepared videos with flashing scenes covered.';
+
+/**
+ * A running time as a person would say it: "37 seconds", "2 minutes 5 seconds".
+ * Home and Details read the same helper so the two never disagree.
+ */
+export function runtimeLabel(durationMs: number | undefined): string | null {
+  if (durationMs === undefined || !(durationMs > 0)) {
+    return null;
+  }
+  return describeHiddenTotal(durationMs);
+}
 export const CAPTIONS_CONTINUE_LINE =
   'When a video has captions, the captions continue too.';
 export const CHECKED_BEFORE_ADDED_LINE = 'Every video is checked before it is added.';

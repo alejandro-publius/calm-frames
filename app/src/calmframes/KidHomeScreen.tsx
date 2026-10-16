@@ -16,6 +16,7 @@ import { isBundledBenignStory } from './benignStory';
 import {
   CALM_CONTROL,
   COASTAL_COLORS as CALM_COLORS,
+  CALM_FLOW,
   CALM_SPACE,
   CALM_TEXT,
   FOCUS_RING_WIDTH,
@@ -24,8 +25,10 @@ import {
 import {
   BACKEND_UNREACHABLE,
   BACKEND_UNREACHABLE_EMPTY,
+  HOME_BENEFIT_LINE,
   NO_TITLES,
   PROFILES_KID_TITLE,
+  runtimeLabel,
   WATCHING_STATE_WORD,
   whoIsWatching,
 } from './copy';
@@ -139,10 +142,17 @@ const KidHomeScreen = ({
   }, [choosingProfile, interfaceActive]);
   const [selectedId, setSelectedId] = React.useState(returnFocusId);
   const featured = listed.find((entry) => entry.title.id === selectedId && !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID) ?? listed.find((entry) => titlePresentation(entry.title).action === 'Watch now') ?? listed[0];
-  const hasMainStory = listed.some((entry) => !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID);
-  const otherStories = listed.filter((entry) => (!hasMainStory || (!isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID)));
+  const mainStories = listed.filter((entry) => !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID);
+  const hasMainStory = mainStories.length > 0;
   const playbackCheck = listed.find((entry) => entry.title.id === OFFLINE_TITLE_ID);
   const feature = featured ? titlePresentation(featured.title) : null;
+  // The rail chooses between videos. With one featured video whose scene the
+  // hero already shows there is nothing to choose, so the hero stands alone.
+  // With two or more, every one is a card; a lone title without hero art keeps
+  // its poster, which is the only place its own picture appears; and a shelf
+  // with no main video keeps its legacy posters for what it does hold.
+  const otherStories = !hasMainStory ? listed
+    : mainStories.length > 1 || !feature?.art ? mainStories : [];
   // Watching is the primary action. Unavailable titles stay in Parents.
   const featuredAction = feature?.action === 'Watch now' ? 'Watch' : feature?.action;
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
@@ -153,11 +163,14 @@ const KidHomeScreen = ({
   // reports none, How it works.
   const returningToFeatured = Boolean(featured) && returnFocusId === (listed.find((entry) => titlePresentation(entry.title).action === 'Watch now') ?? listed[0])?.title.id;
   const fromIntroduction = returnFocusId === demo?.title.id || returnFocusId === playbackCheck?.title.id;
-  const returnTo: ReturnFocusControl | 'learn' | 'profile' | null = saving ? null
+  const requested: ReturnFocusControl | 'learn' | 'profile' | null = saving ? null
     : returnToHeader ? returnToHeader
     : returnFocusControl === 'parent' ? 'parent'
     : !returnFocusId ? 'watch'
     : returnFocusControl ?? (fromIntroduction ? 'learn' : returningToFeatured ? 'details' : 'poster');
+  // A poster that is no longer on the rail cannot take focus; Watch does.
+  const returnTo = requested === 'poster' && !otherStories.some((entry) => entry.title.id === preferredId)
+    ? 'watch' : requested;
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
   const empty = listed.length === 0;
   // With nothing to watch, the shelf does not ask who is watching: there is
@@ -201,11 +214,11 @@ const KidHomeScreen = ({
       <HomeHarborScene variant={feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
       <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
-            disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={returnTo === 'profile'}
+            disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
             onPress={() => { setReturnToHeader(null); setChoosingProfile(!choosingProfile); }} /> : null}
           {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" accessibilityLabel="How it works" hasTVPreferredFocus={returnTo === 'learn'}
             disabled={saving} onPress={() => { setChoosingProfile(false); setReturnToHeader(null); setShowIntroduction(true); }} /></View> : null}
-          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parents" accessibilityLabel="Parents: parental controls, needs a PIN" hasTVPreferredFocus={(empty || returnTo === 'parent') && !saving} onPress={onOpenParentArea} /></View> : null}
+          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parents" accessibilityLabel="Parents: parental controls, needs a PIN" hasTVPreferredFocus={(empty || returnTo === 'parent') && !saving && !showIntroduction} onPress={onOpenParentArea} /></View> : null}
       </CalmPageHeader>
       {choosingProfile && picking && profiles && onChooseProfile ? (
         <ProfilePicker disabled={saving || undefined} testID={`${testID}-profiles`} title={PROFILES_KID_TITLE}
@@ -230,7 +243,8 @@ const KidHomeScreen = ({
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroCopy}>
                 <Text accessibilityRole="header" style={styles.featureTitle} testID={`${testID}-video-title`}>{feature.name}</Text>
-                <Text style={styles.videoMeta}>{`${Math.round((featured.title.durationMs ?? 0) / 1000)} sec${isBundledBenignStory(featured.title) ? ' · Simulated demo' : ''}`}</Text>
+                <Text style={styles.videoMeta} testID={`${testID}-video-meta`}>{[runtimeLabel(featured.title.durationMs), isBundledBenignStory(featured.title) ? 'Simulated demo' : null].filter(Boolean).join(' · ')}</Text>
+                <Text style={styles.benefit} testID={`${testID}-benefit`}>{HOME_BENEFIT_LINE}</Text>
                 <View style={styles.actions}>
                   <CalmButton primary playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
@@ -278,9 +292,10 @@ const styles = StyleSheet.create({
   libraryScroll: { flex: 1 },
   scrollContent: { paddingBottom: scale(12) },
   hero: { width: '100%', minHeight: scale(480), alignItems: 'flex-start', paddingBottom: scale(36) },
-  heroCopy: { width: scale(900), paddingTop: scale(100), alignItems: 'flex-start' },
-  featureTitle: { ...CALM_TEXT.feature, color: CALM_COLORS.TEXT, marginTop: scale(0), marginBottom: scale(CALM_SPACE.ROW) },
-  videoMeta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(CALM_SPACE.BLOCK) },
+  heroCopy: { width: scale(900), paddingTop: scale(CALM_FLOW.HERO_TOP), alignItems: 'flex-start' },
+  featureTitle: { ...CALM_TEXT.feature, color: CALM_COLORS.TEXT, marginTop: scale(0), marginBottom: scale(CALM_SPACE.TIGHT) },
+  videoMeta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(CALM_SPACE.ROW) },
+  benefit: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT, maxWidth: scale(760), marginBottom: scale(CALM_SPACE.BLOCK) },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   learn: { flexDirection: 'row', marginTop: scale(8) },
   sectionHeading: { alignItems: 'flex-start', marginBottom: scale(24) },

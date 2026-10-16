@@ -318,7 +318,9 @@ describe('the shelf a household lands on', () => {
     await finishFirstRun();
     expect(screen.getByTestId('kid-mode-home-video-title').props.children).toBe('Acadia');
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
-    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(1);
+    // One featured video needs no rail: the hero already shows it, so no card repeats it.
+    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(0);
+    expect(screen.queryByText('Choose a video')).toBeNull();
     expect(screen.queryByText(/Harbor/)).toBeNull();
     expect(screen.queryByText('Playback test')).toBeNull();
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
