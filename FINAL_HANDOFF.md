@@ -2,6 +2,17 @@
 
 ## Dark cinema review build, October 16, 2026
 
+Continuation at 06:09 UTC: the owner authorized an uninterrupted check window.
+The simulator had stopped, so the existing device was started once and the
+installed app launched without rebuilding or reinstalling. Home/Watch appeared
+in logs, but external touch input immediately opened Details and playback before
+the driver sent any navigation key. The driver stopped again. No new route pass
+is claimed. Last observed focus was `player-seekbar`; the app was not forced
+Home while another session was interacting. All 750 build inputs still match.
+The receipt retains this second interruption. Coordinate all simulator users,
+including other agents, before another check window.
+
+
 The approved dark-cinema direction is implemented and installed on the separate
 private branch `codex/dark-cinema-2026-10-16`. App source is
 `d67e1daf6fab07126c7720e49772eeccf09887ee`. The prior branch remains at

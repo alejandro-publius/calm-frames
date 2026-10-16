@@ -3049,7 +3049,24 @@
       "Help return"
     ],
     "logs": "native-observations.log",
-    "remote_commands": "remote-sequence.txt"
+    "remote_commands": "remote-sequence.txt",
+    "continuation_2026_10_16_0609_utc": {
+      "authorization": "User agreed to uninterrupted check window at 06:07:43 UTC, relayed by parent.",
+      "status": "interrupted before first remote navigation key",
+      "observations": [
+        {
+          "journey": "stopped",
+          "verdict": "interrupted",
+          "evidence": "Expected kid-mode-home-watch, got player-seekbar"
+        }
+      ],
+      "events": "Home/Watch logged 06:09:56 UTC. External touch DOWN/UP at 06:09:57-59 opened Details then playback. Driver expected Home and stopped; no navigation key had been sent.",
+      "simulator": "Initially stopped; started existing device once, launched installed app once. No rebuild or reinstall.",
+      "source_inputs_matching": 750,
+      "logs": "resume-native-observations.log",
+      "commands": "resume-remote-sequence.txt",
+      "final_state": "Last observed playback focus player-seekbar. Deliberately not forced back to Home because concurrent interaction was active. Automated navigation and task log stream stopped."
+    }
   },
   "limits": [
     "No screenshot, video recording, pixel capture or capture script was used.",
