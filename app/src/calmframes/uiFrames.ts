@@ -14,21 +14,21 @@
 
 import { CALM_COLORS, COASTAL_COLORS } from './calmStyles';
 
-/** The menus paint the approved ivory coast; everything the player paints over video stays dark. */
+/** Menus and player controls share the dark cinema palette. */
 const MENU = COASTAL_COLORS;
 import { CardKind } from './cards';
 import { UiFrame } from './uiCapture';
 
 /** Early bootstrap wave, before navigation and household loading are ready. */
 export const HARBOR_BOOTSTRAP_FRAME: UiFrame = {
-  screen: 'harbor-bootstrap', background: MENU.BACKGROUND, surfaces: ['#77A19E'],
+  screen: 'harbor-bootstrap', background: MENU.BACKGROUND, surfaces: [],
 };
 
 export const HOUSEHOLD_LOADING_FRAME: UiFrame = {
   screen: 'household-loading',
   background: MENU.BACKGROUND,
   // This inventory models declared solid surfaces, not artwork pixels or motion.
-  surfaces: ['#77A19E'],
+  surfaces: [],
 };
 
 export const HOUSEHOLD_ERROR_FRAME: UiFrame = {
@@ -37,52 +37,52 @@ export const HOUSEHOLD_ERROR_FRAME: UiFrame = {
   surfaces: [MENU.SURFACE, MENU.PRIMARY],
 };
 
-export const KID_HOME_STORY_FRAME: UiFrame = { screen: 'kid-home-story', background: MENU.BACKGROUND, surfaces: ['#77A19E', MENU.PRIMARY] };
-export const KID_HOME_STORY_FOCUSED_FRAME: UiFrame = { screen: 'kid-home-story-focused', background: MENU.BACKGROUND, surfaces: ['#77A19E', MENU.PRIMARY, MENU.SURFACE_FOCUSED] };
+export const KID_HOME_STORY_FRAME: UiFrame = { screen: 'kid-home-story', background: MENU.BACKGROUND, surfaces: [MENU.PRIMARY] };
+export const KID_HOME_STORY_FOCUSED_FRAME: UiFrame = { screen: 'kid-home-story-focused', background: MENU.BACKGROUND, surfaces: [MENU.PRIMARY, MENU.SURFACE_FOCUSED] };
 /** Play focused: on the coast a focused primary fills with ink, a colour the page itself never shows. */
-export const KID_HOME_STORY_WATCH_FRAME: UiFrame = { screen: 'kid-home-story-watch', background: MENU.BACKGROUND, surfaces: ['#77A19E', MENU.INK] };
+export const KID_HOME_STORY_WATCH_FRAME: UiFrame = { screen: 'kid-home-story-watch', background: MENU.BACKGROUND, surfaces: [MENU.INK] };
 
 export const KID_HOME_FRAME: UiFrame = {
   screen: 'kid-home', background: MENU.BACKGROUND,
-  surfaces: ['#77A19E', MENU.PRIMARY, MENU.SURFACE],
+  surfaces: [MENU.PRIMARY, MENU.SURFACE],
 };
 export const KID_HOME_FOCUSED_FRAME: UiFrame = {
   screen: 'kid-home-focused', background: MENU.BACKGROUND,
-  surfaces: ['#77A19E', MENU.PRIMARY, MENU.SURFACE_FOCUSED, MENU.SURFACE],
+  surfaces: [MENU.PRIMARY, MENU.SURFACE_FOCUSED, MENU.SURFACE],
 };
 export const KID_HOME_PROFILES_FRAME: UiFrame = {
   screen: 'kid-home-profiles', background: MENU.BACKGROUND,
-  surfaces: ['#77A19E', MENU.PRIMARY, MENU.SURFACE],
+  surfaces: [MENU.PRIMARY, MENU.SURFACE],
 };
 export const KID_HOME_PROFILES_OFFLINE_FRAME: UiFrame = {
   screen: 'kid-home-profiles-offline', background: MENU.BACKGROUND,
-  surfaces: ['#77A19E', MENU.SURFACE, MENU.PRIMARY],
+  surfaces: [MENU.SURFACE, MENU.PRIMARY],
 };
 export const KID_HOME_PROFILES_FOCUSED_FRAME: UiFrame = {
   screen: 'kid-home-profiles-focused', background: MENU.BACKGROUND,
-  surfaces: ['#77A19E', MENU.PRIMARY, MENU.SURFACE_FOCUSED, MENU.SURFACE],
+  surfaces: [MENU.PRIMARY, MENU.SURFACE_FOCUSED, MENU.SURFACE],
 };
 export const KID_HOME_PICKER_FRAME: UiFrame = {
   screen: 'kid-home-picker', background: MENU.BACKGROUND,
-  surfaces: ['#77A19E', MENU.SURFACE_FOCUSED, MENU.SURFACE, MENU.PRIMARY],
+  surfaces: [MENU.SURFACE_FOCUSED, MENU.SURFACE, MENU.PRIMARY],
 };
 
 /** Nothing has been checked yet, so the shelf is one notice. */
 export const KID_HOME_EMPTY_FRAME: UiFrame = {
   screen: 'kid-home-empty',
   background: MENU.BACKGROUND,
-  surfaces: ['#77A19E', MENU.SURFACE],
+  surfaces: [MENU.SURFACE],
 };
 
 /** The service is unreachable, so a notice sits above what still verifies. */
 export const KID_HOME_OFFLINE_FRAME: UiFrame = {
   screen: 'kid-home-offline',
   background: MENU.BACKGROUND,
-  surfaces: ['#77A19E', MENU.SURFACE, MENU.PRIMARY],
+  surfaces: [MENU.SURFACE, MENU.PRIMARY],
 };
 
-export const TITLE_DETAILS_HARBOR_FRAME: UiFrame = { screen: 'title-details-harbor', background: MENU.BACKGROUND, surfaces: ['#77A19E', MENU.PRIMARY, MENU.SURFACE] };
-export const TITLE_DETAILS_DEMO_FRAME: UiFrame = { screen: 'title-details-demo', background: MENU.BACKGROUND, surfaces: ['#77A19E', MENU.PRIMARY, MENU.SURFACE, MENU.PENDING] };
+export const TITLE_DETAILS_HARBOR_FRAME: UiFrame = { screen: 'title-details-harbor', background: MENU.BACKGROUND, surfaces: [MENU.PRIMARY, MENU.SURFACE] };
+export const TITLE_DETAILS_DEMO_FRAME: UiFrame = { screen: 'title-details-demo', background: MENU.BACKGROUND, surfaces: [MENU.PRIMARY, MENU.SURFACE, MENU.PENDING] };
 
 export const TITLE_DETAILS_FRAME: UiFrame = {
   screen: 'title-details',

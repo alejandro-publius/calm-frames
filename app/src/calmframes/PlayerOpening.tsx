@@ -10,10 +10,10 @@ import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './c
  */
 export default function PlayerOpening({ title, onBack, returning = false, liveStatus = true }: { title: string; onBack: () => void; returning?: boolean; liveStatus?: boolean }) {
   return <CoastalAppearance.Provider value><View testID="player-home-opening" style={styles.screen}>
-    <HomeHarborScene />
+    <HomeHarborScene immersive variant={title.toLowerCase().includes('acadia') ? 'coastal' : 'harbor-cinematic'} />
     <CalmPageHeader onBack={!returning ? onBack : undefined} backLabel="Back" backTestID="player-opening-back" preferredBack />
     <View style={styles.copy}>
-      <Text style={styles.eyebrow}>A calmer way to watch</Text>
+      <Text style={styles.eyebrow}>Calm Frames</Text>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.detail} accessibilityLiveRegion={liveStatus ? 'polite' : 'none'}>{returning ? 'Going back...' : 'Opening your video...'}</Text>
 

@@ -314,8 +314,8 @@ describe('the shelf a household lands on', () => {
   it('retains the main Harbor action, adds Acadia, and keeps diagnostics out of the primary catalog', async () => {
     await renderKidMode(); await finishFirstRun();
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
-    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(1);
-    expect(screen.getByText('Acadia coastal scenery')).toBeTruthy();
+    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(2);
+    expect(screen.getByText('Acadia')).toBeTruthy();
     expect(screen.queryByText('Demo')).toBeNull();
     expect(screen.queryByText('Playback test')).toBeNull();
     expect(screen.getByTestId('home-harbor-scene')).toBeTruthy();

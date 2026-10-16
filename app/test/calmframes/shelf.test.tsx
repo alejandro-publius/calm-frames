@@ -69,7 +69,7 @@ describe('the pictures on the shelf', () => {
 
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
     const image = screen.getByTestId('home-harbor-scene').findByType(Image);
-    expect(image.props.source).toEqual(require('../../assets/image/tv/coastal-zen.png'));
+    expect(image.props.source).toEqual(require('../../assets/image/tv/harbor-cinematic.png'));
     expect(image.props.resizeMode).toBe('cover');
     expect(image.props.fadeDuration).toBe(0);
   });
@@ -87,7 +87,7 @@ describe('the pictures on the shelf', () => {
       const view = render(<TitleArtwork illustrated entry={entry} testID="art" />);
       expect(view.getByTestId('art').props.source).toEqual(entry.title.id === OFFLINE_TITLE_ID
         ? require('../../assets/image/tv/gradient.png')
-        : entry.title.title.startsWith('Acadia coastal scenery') ? require('../../assets/image/tv/coastal-zen.png')
+        : entry.title.title.startsWith('Acadia coastal scenery') ? require('../../assets/image/tv/acadia-coast.png')
           : require('../../assets/image/tv/harbor-illustrated.png'));
       view.unmount();
     }
@@ -239,7 +239,7 @@ describe('the words on the shelf', () => {
     const resting = measured();
     expect(resting.map((line) => line.text).sort()).toEqual([...secondLines].sort());
     for (const line of resting) {
-      expect(line.background).toBe(COASTAL_COLORS.BACKGROUND);
+      expect(line.background).toBe(COASTAL_COLORS.SURFACE);
       expect(line.fontSize).toBeGreaterThanOrEqual(floors.textSizeUnits);
       expect(line.contrast).toBeGreaterThanOrEqual(floors.textContrast);
     }

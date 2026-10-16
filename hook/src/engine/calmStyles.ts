@@ -4,45 +4,18 @@
  */
 import { scaleUxToDp } from '../pixelUtils';
 
-/** Approved ivory coast menu palette. Playback keeps CALM_COLORS below. */
+/** Dark cinema palette shared from the shelf through playback. */
 export const COASTAL_COLORS = {
-  BACKGROUND: '#F5EBDD', SURFACE: '#E9DFD0', SURFACE_FOCUSED: '#DED0BD',
-  BORDER: '#8B8173', FOCUS_RING: '#193B3C', PRIMARY: '#193B3C',
-  TEXT_DISABLED: '#60645F', ACCENT_DARK: '#98492D', TEXT: '#193234',
-  TEXT_DIM: '#40514D', INK: '#193234', VERIFIED: '#24584D',
-  PENDING: '#4E5B68', FAILED: '#873F2C', COVER: '#000000',
+  BACKGROUND: '#0C131A', SURFACE: '#22303B', SURFACE_FOCUSED: '#2B3B47',
+  BORDER: '#748995', FOCUS_RING: '#9CC1CB', PRIMARY: '#F0F2EF',
+  TEXT_DISABLED: '#A1ABB3', ACCENT_DARK: '#9D6A55', TEXT: '#F0F2EF',
+  TEXT_DIM: '#C4CDD2', INK: '#0C131A', VERIFIED: '#C4D8CC',
+  PENDING: '#B9C9DA', FAILED: '#F2BDB1', COVER: '#000000',
 } as const;
 
-/** Terracotta boundary against both the ivory page and focused deep-teal primary. */
-export const COASTAL_PRIMARY_FOCUS = '#C16C45';
-
-/** Approved dusk coast palette; shared across application screens. Contrast is checked against rendered text and focus. */
-export const CALM_COLORS = {
-  /** Every Calm Frames screen sits on this. */
-  BACKGROUND: '#151C26',
-  /** A card on the ground, and the same card with focus on it. */
-  SURFACE: '#303B48',
-  SURFACE_FOCUSED: '#3B4856',
-  BORDER: '#697585',
-  /** Lighthouse gold is reserved for focus. */
-  FOCUS_RING: '#E6B963',
-  PRIMARY: '#D88B72',
-  TEXT_DISABLED: '#9DA4AE',
-  /** The secondary accent. Edges and fills only, it carries no text at all. */
-  ACCENT_DARK: '#8E5648',
-  TEXT: '#F4ECDD',
-  TEXT_DIM: '#BDC2C9',
-  /** Text on a light surface, where cream would disappear. */
-  INK: '#151C26',
-  /** The shield on a checked title. */
-  VERIFIED: '#E7D9BF',
-  /** A title still being checked. */
-  PENDING: '#B9C9DA',
-  /** A title whose check failed. Not a warning red, this is not an alarm. */
-  FAILED: '#F2BDB1',
-  /** The cover itself. */
-  COVER: '#000000',
-} as const;
+/** A mid-tone boundary contrasts with both the bright Watch face and dark page. */
+export const COASTAL_PRIMARY_FOCUS = '#59838F';
+export const CALM_COLORS = COASTAL_COLORS;
 
 /** Legacy size tokens in 1080p units. Named CALM_TEXT styles below add real faces and line heights. */
 export const CALM_TYPE = {

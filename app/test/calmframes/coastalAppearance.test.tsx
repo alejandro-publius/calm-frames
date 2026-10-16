@@ -36,7 +36,7 @@ test('the artwork is decorative, uses the clean asset and has no baked-in UI', (
   const view = render(<HomeHarborScene immersive />);
   expect(view.getByTestId('home-harbor-scene').props.accessibilityElementsHidden).toBe(true);
   const image = view.UNSAFE_getByType('Image' as never);
-  expect(image.props.source.testUri).toContain('coastal-zen.png');
+  expect(image.props.source.testUri).toContain('harbor-cinematic.png');
   expect(image.props.accessible).toBeUndefined();
   expect(view.queryAllByRole('button')).toHaveLength(0);
 });

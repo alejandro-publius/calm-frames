@@ -158,7 +158,7 @@ const TitleDetailsScreen = ({
             : intervals.length > 0 ? <Text style={styles.summary}>A still picture replaces brief parts of this video. Sound and captions continue.</Text> : null}
           <Text style={styles.summary}>Calm Frames replaces flashing scenes with a still picture while sound and captions continue. It only works with videos in this app.</Text>
           <Text style={styles.summary}>{`Detection can miss flashing. ${SAFETY_NOTE}`}</Text>
-          {presentation.art === 'coastal' ? <Text style={styles.summary}>Video: National Park Service, Acadia National Park. Public domain. No NPS endorsement is implied. The artwork is an illustration.</Text> : null}
+          {presentation.art === 'coastal' ? <Text style={styles.summary}>Video: National Park Service, Acadia National Park. Public domain. No NPS endorsement is implied. The menu image is a still from the prepared video.</Text> : null}
           {practiceOffered ? <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-practice`} label="Watch demo"
             accessibilityLabel={practiceLine ? `Watch simulated demo. ${practiceLine}` : 'Watch simulated demo'}
             disabled={saving} hasTVPreferredFocus={preferPracticeFocus && returnFocus !== 'technical'} onPress={() => onOpenPractice?.(practiceOffered)} /></View> : null}
@@ -172,7 +172,7 @@ const TitleDetailsScreen = ({
 
   return (
     <ScrollView key="watch" testID={testID} style={styles.screen} contentContainerStyle={styles.content}>
-      {presentation.art === 'harbor-cinematic' || presentation.art === 'harbor' ? <HomeHarborScene immersive enabled={interfaceMotionEnabled} active={interfaceActive} /> : null}
+      {presentation.art ? <HomeHarborScene variant={presentation.art} immersive enabled={interfaceMotionEnabled} active={interfaceActive} /> : null}
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
@@ -200,8 +200,8 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
   hero: { width: '100%', minHeight: scale(CALM_FLOW.HERO_HEIGHT), alignItems: 'flex-start', justifyContent: 'flex-start' },
-  heroCopy: { backgroundColor: CALM_COLORS.BACKGROUND, width: '100%', maxWidth: scale(720), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
-  actionRail: { backgroundColor: CALM_COLORS.BACKGROUND, width: scale(620), alignItems: 'flex-start', gap: scale(26), marginTop: scale(24) },
+  heroCopy: { width: '100%', maxWidth: scale(720), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
+  actionRail: { width: scale(620), alignItems: 'flex-start', gap: scale(26), marginTop: scale(24) },
   meta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left', marginBottom: scale(16) },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
   heroTitle: { ...CALM_TEXT.feature, marginBottom: scale(8) },

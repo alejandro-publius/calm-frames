@@ -65,21 +65,11 @@ test('saving blocks starting the optional demo as well as normal playback', () =
   expect(play).not.toHaveBeenCalled();
 });
 
-test('home ripples require explicit accessibility permission and stop in background', async () => {
-  let resolve!: (value: boolean) => void;
-  let lifecycle!: (state: string) => void;
-  (useKeplerAppStateManager as jest.Mock).mockReturnValue({ getCurrentState: () => 'active', addAppStateListener: (_: string, fn: typeof lifecycle) => { lifecycle = fn; return { remove: jest.fn() }; } });
-  jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockReturnValue(new Promise(done => { resolve = done; }));
-  jest.spyOn(AccessibilityInfo, 'isScreenReaderEnabled').mockResolvedValue(false);
-  const start = jest.fn(); const stop = jest.fn();
-  const loop = jest.spyOn(Animated, 'loop').mockReturnValue({ start, stop, reset: jest.fn() });
-  render(<HomeHarborScene enabled />);
-  expect(start).not.toHaveBeenCalled();
-  await act(async () => { resolve(false); });
-  expect(start).toHaveBeenCalledTimes(1);
-  act(() => lifecycle('background'));
-  expect(stop).toHaveBeenCalledTimes(1);
-  expect(loop).toHaveBeenCalledTimes(1);
+test('cinema scenery stays fixed even when the saved motion preference is on', () => {
+  const loop = jest.spyOn(Animated, 'loop');
+  const view = render(<HomeHarborScene enabled active />);
+  expect(loop).not.toHaveBeenCalled();
+  expect(view.queryByTestId('home-water-ripples')).toBeNull();
 });
 
 test.each([true, undefined])('home remains still when reduced motion is %s', async reduced => {

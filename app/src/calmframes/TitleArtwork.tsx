@@ -20,7 +20,7 @@ interface TitlePresentation {
 
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
   if (concernsPackagedLibrary(title) && title.sha256 === ACADIA_SOURCE_SHA256) {
-    return { name: 'Acadia coastal scenery', kind: 'National Park Service', action: 'Watch now', art: 'coastal',
+    return { name: 'Acadia', kind: 'National Park Service', action: 'Watch now', art: 'coastal',
       description: 'Waves along the coast of Acadia National Park.' };
   }
   if (isBundledBenignStory(title)) {
@@ -43,7 +43,7 @@ export default function TitleArtwork({ entry, testID, compact = false, height, i
   const presentation = titlePresentation(entry.title);
   const poster = shelfPoster(entry);
   const source = entry.status === 'verified' && presentation.art
-    ? presentation.art === 'coastal' ? require('../../assets/image/tv/coastal-zen.png')
+    ? presentation.art === 'coastal' ? require('../../assets/image/tv/acadia-coast.png')
       : presentation.art === 'harbor-cinematic' && !illustrated ? require('../../assets/image/tv/harbor-cinematic.png')
       : (presentation.art === 'harbor' || presentation.art === 'harbor-cinematic') ? require('../../assets/image/tv/harbor-illustrated.png') : require('../../assets/image/tv/gradient.png')
     : poster ? { uri: poster } : undefined;

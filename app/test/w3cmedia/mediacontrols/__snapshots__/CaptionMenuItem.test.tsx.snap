@@ -47,7 +47,7 @@ exports[`CaptionMenuItem tests component renders correctly 1`] = `
     accessible={false}
     style={
       {
-        "color": "#F4ECDD",
+        "color": "#F0F2EF",
         "fontFamily": "CalmSansRegular",
         "fontSize": 32,
         "fontWeight": "400",
@@ -61,7 +61,7 @@ exports[`CaptionMenuItem tests component renders correctly 1`] = `
     numberOfLines={2}
     style={
       {
-        "color": "#F4ECDD",
+        "color": "#F0F2EF",
         "flex": 1,
         "flexShrink": 1,
         "fontFamily": "CalmSansRegular",
@@ -115,7 +115,7 @@ exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
   style={
     {
       "alignItems": "center",
-      "backgroundColor": "#3B4856",
+      "backgroundColor": "#2B3B47",
       "borderColor": "transparent",
       "borderRadius": 18,
       "borderWidth": 6,
@@ -129,7 +129,7 @@ exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
     accessible={false}
     style={
       {
-        "color": "#F4ECDD",
+        "color": "#F0F2EF",
         "fontFamily": "CalmSansRegular",
         "fontSize": 32,
         "fontWeight": "400",
@@ -145,7 +145,7 @@ exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
     numberOfLines={2}
     style={
       {
-        "color": "#F4ECDD",
+        "color": "#F0F2EF",
         "flex": 1,
         "flexShrink": 1,
         "fontFamily": "CalmSansRegular",
