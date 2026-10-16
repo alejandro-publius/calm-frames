@@ -1,5 +1,21 @@
 # Final handoff: the integration candidate
 
+## Acadia-first source change, October 16, 2026
+
+Source only: the owner requested real video like Acadia instead of Harbor.
+Acadia is now the default featured title and the only main viewing choice.
+Harbor and its practice demo remain intact as signed artifacts and explicit
+regression fixtures, outside the consumer catalog. Dark cinema styling and
+verification are unchanged. The gradient remains an optional playback check.
+See [the change record](docs/evidence/acadia-first-2026-10-16.md) and
+[headless-check receipt](results/acadia-first-2026-10-16/receipt.json).
+No build, installation, launch, native navigation, screenshot or recording
+was performed. The installed package described below remains the prior version;
+its recorded input match predates this source edit. Parent approval is required
+before replacing that running build. Detector review remains separate and
+incomplete; no detector or preset behavior was modified.
+
+
 ## Dark cinema review build, October 16, 2026
 
 Continuation at 06:09 UTC: the owner authorized an uninterrupted check window.

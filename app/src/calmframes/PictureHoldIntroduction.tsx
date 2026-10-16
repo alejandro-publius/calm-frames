@@ -10,7 +10,7 @@ export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDe
     <Text style={styles.title} accessibilityRole="header">How it works</Text>
     <Text style={styles.body}>Calm Frames replaces flashing scenes with a still picture. Sound and captions continue.</Text>
     <Text style={styles.body}>Videos are checked before they are added. This only works with videos in Calm Frames, not other apps or live TV.</Text>
-    <Text style={styles.detail}>The demo has two simulated picture pauses and no flashing.</Text>
+    {onStart || onDemoDetails ? <Text style={styles.detail}>The demo has two simulated picture pauses and no flashing.</Text> : null}
     <View style={styles.actions}>
       {onStart ? <CalmButton testID="picture-hold-start" primary label="Watch demo" sound={false} hasTVPreferredFocus disabled={disabled} onPress={onStart} /> : null}
       {onDemoDetails ? <CalmButton quiet testID="picture-hold-demo-details" label="About the demo" disabled={disabled} onPress={onDemoDetails} /> : null}

@@ -68,7 +68,6 @@ import {
 } from '../calmframes/offlineTitle';
 import CreditsScreen from '../calmframes/CreditsScreen';
 import {
-  benignStoryTitle,
   benignStorySettings,
   bundledTitlePublicKey,
   isBundledBenignStory,
@@ -84,7 +83,7 @@ import {
 import TitleDetailsScreen from '../calmframes/TitleDetailsScreen';
 import { AppStackParamList, Screens } from '../components/navigation/types';
 import { TitleData } from '../types/TitleData';
-import { concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
+import { ACADIA_SOURCE_SHA256, concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
 
 export type KidModeView =
   | 'first-run'
@@ -131,17 +130,15 @@ export interface KidModeScreenProps {
 }
 
 /**
- * The bundled demos and checked prepared library are available offline.
- *
- * The order is the shelf's order, and the first title the shelf lists takes
- * the D-pad focus. Harbor leads because it is the one that shows the whole
- * journey: captions, a countdown and a practice hold. The gradient has none of
- * those, so it goes last, where it still proves a title plays with no network.
+ * Acadia is the current consumer video. The exact signed Harbor catalog and
+ * its practice assets remain bundled for regression work, outside this list.
+ * Selection does not grant trust: every entry still follows the same checks.
+ * The gradient stays available only through How it works > Check playback
+ * while Acadia is available.
  */
 export function defaultCatalog(settings = DEFAULT_SETTINGS): CatalogTitle[] {
   return [
-    benignStoryTitle(),
-    ...packagedLibrary.titles(settings),
+    ...packagedLibrary.titles(settings).filter(title => title.sha256 === ACADIA_SOURCE_SHA256),
     offlineTitle(OFFLINE_VIDEO_URI),
   ];
 }

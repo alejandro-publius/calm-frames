@@ -59,7 +59,8 @@ describe('the compiled prepared library', () => {
     expect(entry.title.renditionSha256).toBe(manifest.titles[0].renditions[preset].sha256);
     expect(entry.title.uri).toMatch(new RegExp(`/${preset}\\.mp4$`));
     expect(entry.title.textTrack?.[0].uri).toMatch(new RegExp(`/${preset}\\.vtt$`));
-    expect(defaultCatalog(settings)).toContainEqual(entry.title);
+    // Harbor remains verified for regression use, outside the consumer catalog.
+    expect(defaultCatalog(settings)).not.toContainEqual(entry.title);
     expect(packagedLibrary.acceptsRoute(data, guarded)).toBe(true);
   });
 

@@ -1,6 +1,14 @@
 # Status
 
-The Watch-first app with the Back repair is installed from `fcef3bb` (latest app
+Acadia-first source change is ready on the dark cinema branch. Acadia leads
+Home; Harbor is retained only in packaged artifacts and regression fixtures.
+The installed dark cinema demo was not touched. See the
+[change record](evidence/acadia-first-2026-10-16.md) and
+[receipt](../results/acadia-first-2026-10-16/receipt.json). Parent go-ahead is
+needed before replacing the running build. Detector review remains separate.
+
+
+Historical checkpoint: the Watch-first app with the Back repair is installed from `fcef3bb` (latest app
 change `9afdbe5`). It is running at Home with Watch focused. Eight targeted
 native observations pass, including hardware Back from demo to More info to
 Details to Home, Technical details return and Harbor/demo playback return.

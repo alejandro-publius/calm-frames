@@ -33,8 +33,9 @@ import KidModeScreen, {
 import { checkTitle } from '../../src/calmframes/titleStatus';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { OFFLINE_PUBLIC_KEY_BASE64 } from '../../src/calmframes/offlineTitle';
-import { BENIGN_STORY_ID, BENIGN_STORY_URI } from '../../src/calmframes/benignStory';
-import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import { BENIGN_STORY_URI } from '../../src/calmframes/benignStory';
+import { ACADIA_SOURCE_SHA256, packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import { regressionCatalog } from '../calmframes/shelfFixtures';
 import * as householdStorage from '../../src/calmframes/householdStorage';
 import { emptyPinGate } from '../../src/calmframes/parentGate';
 import { newFamily } from '../../src/calmframes/profiles';
@@ -42,12 +43,13 @@ import { newFamily } from '../../src/calmframes/profiles';
 /** A moment when the bundled map is neither unmade nor stale. */
 const NOW = Date.parse(JSON.parse(OFFLINE_MAP_JSON).created_utc) + 60_000;
 
-async function renderKidMode() {
+async function renderKidMode(consumer = false) {
   const navigate = jest.fn();
   const listeners: Record<string, () => void> = {};
   render(
     <KidModeScreen
       navigation={{ navigate, addListener: (event: string, listener: () => void) => { listeners[event] = listener; return () => { delete listeners[event]; }; } } as never}
+      catalog={consumer ? undefined : regressionCatalog()}
       newSalt={() => 'test-salt'}
       nowMs={() => NOW}
     />,
@@ -302,25 +304,40 @@ describe('reaching Calm Frames', () => {
 });
 
 describe('the shelf a household lands on', () => {
-  it('keeps Harbor first and the gradient last in the bundled catalog', () => {
-    const ids = defaultCatalog().map((title) => title.id);
-    expect(ids[0]).toBe(BENIGN_STORY_ID);
-    expect(ids[ids.length - 1]).toBe(OFFLINE_TITLE_ID);
-    expect(ids.slice(1, -1)).toEqual(
-      packagedLibrary.titles(DEFAULT_SETTINGS).map((title) => title.id),
-    );
+  it('features only Acadia as a consumer video while retaining the playback diagnostic', () => {
+    const titles = defaultCatalog();
+    expect(titles.map(title => title.id)).toEqual([
+      `prepared-${ACADIA_SOURCE_SHA256}`, OFFLINE_TITLE_ID,
+    ]);
+    expect(titles.some(title => /harbor/i.test(title.title))).toBe(false);
+    expect(packagedLibrary.titles(DEFAULT_SETTINGS).some(title => /harbor/i.test(title.title))).toBe(true);
   });
 
-  it('retains the main Harbor action, adds Acadia, and keeps diagnostics out of the primary catalog', async () => {
-    await renderKidMode(); await finishFirstRun();
+  it('opens Acadia by default and keeps Harbor out of Home and its help flow', async () => {
+    const { navigate, returnFromPlayer } = await renderKidMode(true);
+    await finishFirstRun();
+    expect(screen.getByTestId('kid-mode-home-video-title').props.children).toBe('Acadia');
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
-    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(2);
-    expect(screen.getByText('Acadia')).toBeTruthy();
-    expect(screen.queryByText('Demo')).toBeNull();
+    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(1);
+    expect(screen.queryByText(/Harbor/)).toBeNull();
     expect(screen.queryByText('Playback test')).toBeNull();
-    expect(screen.getByTestId('home-harbor-scene')).toBeTruthy();
+    fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
+    expect(navigate.mock.calls[0][1].guarded.sha256).toBe(ACADIA_SOURCE_SHA256);
+    returnFromPlayer();
+    expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
+    fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
+    fireEvent.press(screen.getByTestId('kid-mode-details-show-info'));
+    expect(screen.queryByTestId('kid-mode-details-practice')).toBeNull();
+    fireEvent.press(screen.getByTestId('kid-mode-details-info-back'));
+    fireEvent.press(screen.getByTestId('kid-mode-details-back'));
+    expect(screen.getByTestId('kid-mode-home-more-info').props.hasTVPreferredFocus).toBe(true);
+    fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
+    fireEvent.press(screen.getByTestId('kid-mode-parent-back'));
+    expect(screen.getByTestId('kid-mode-home-parent-area').props.hasTVPreferredFocus).toBe(true);
     fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
-    expect(screen.getByTestId('picture-hold-start')).toBeTruthy();
+    expect(screen.queryByTestId('picture-hold-start')).toBeNull();
+    expect(screen.queryByTestId('picture-hold-demo-details')).toBeNull();
+    expect(screen.queryByText('The demo has two simulated picture pauses and no flashing.')).toBeNull();
     expect(screen.getByTestId('picture-hold-playback-check')).toBeTruthy();
   });
 });

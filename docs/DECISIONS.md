@@ -2546,3 +2546,15 @@ playback safeguards, palette and font assets. Use a separate checkout and an
 isolated writable SDK workspace to preserve other sessions. Cost: local compute
 only, no purchases or AWS changes. Native log evidence remains distinct from
 owner visual/audio acceptance.
+
+
+## 2026-10-16: Acadia leads the consumer library
+
+The owner prefers real licensed footage to Harbor's original animation.
+Select the approved Acadia source in the default catalog, keep Harbor's exact
+signed assets and all regression fixtures, and remove the practice demo from
+the consumer flow. Retain the optional gradient playback diagnostic. Preserve
+the dark cinema design and all verification and detector policy. Only source
+and headless checks change; the running demo waits for the parent's go-ahead
+before a build replacement. Cost: local compute only, no new media, keys,
+cloud resources or paid services.

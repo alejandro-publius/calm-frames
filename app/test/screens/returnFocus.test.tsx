@@ -16,13 +16,14 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
 }));
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import { OFFLINE_MAP_JSON } from '../../src/calmframes/offlineMapText';
-import { CheckedTitle } from '../../src/calmframes/titleStatus';
+import { CatalogTitle, CheckedTitle } from '../../src/calmframes/titleStatus';
 import { Screens } from '../../src/components/navigation/types';
 import KidModeScreen from '../../src/screens/KidModeScreen';
+import { regressionCatalog } from '../calmframes/shelfFixtures';
 
 const NOW = Date.parse(JSON.parse(OFFLINE_MAP_JSON).created_utc) + 60_000;
 
-async function startShelf() {
+async function startShelf(catalog?: CatalogTitle[]) {
   const listeners: Record<string, Array<() => void>> = {};
   const navigation = {
     navigate: jest.fn(),
@@ -32,7 +33,7 @@ async function startShelf() {
       return () => undefined;
     },
   };
-  render(<KidModeScreen navigation={navigation as never} newSalt={() => 'test-salt'} nowMs={() => NOW} />);
+  render(<KidModeScreen catalog={catalog} navigation={navigation as never} newSalt={() => 'test-salt'} nowMs={() => NOW} />);
   await screen.findByTestId('kid-mode-first-run');
   const type = (digits: string) => {
     for (const digit of digits) fireEvent.press(screen.getByTestId(`kid-mode-first-run-key-${digit}`));
@@ -139,7 +140,7 @@ describe('Back from playback and details on the real shelf', () => {
   });
 
   it('Details, More info, demo, Watch, then Back four times: one level at a time, focus on what was pressed', async () => {
-    const { navigation, returnFromPlayer } = await startShelf();
+    const { navigation, returnFromPlayer } = await startShelf(regressionCatalog());
     fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
     expect(screen.getByTestId('kid-mode-details-meta').props.children).toBe('20 sec');
     expect(preferred()).toEqual(['kid-mode-details-play']);
@@ -170,7 +171,7 @@ describe('Back from playback and details on the real shelf', () => {
     });
     const back = () => act(() => { expect([...handlers].reverse().some(handler => handler())).toBe(true); });
     try {
-      await startShelf();
+      await startShelf(regressionCatalog());
       fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
       fireEvent.press(screen.getByTestId('kid-mode-details-show-info'));
       fireEvent.press(screen.getByTestId('kid-mode-details-practice'));
