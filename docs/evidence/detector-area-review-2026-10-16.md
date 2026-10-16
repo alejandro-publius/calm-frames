@@ -100,3 +100,5 @@ This work does not provide a clinical safety conclusion or clear either clip.
 Isolation: this review is on `codex/detector-area-review-2026-10-16` in the
 separate `calm-frames-detector-review` worktree. The Acadia branch and running
 app were untouched. No screenshot, recording, UI control, new bundle or key.
+
+Design-only follow-up: [duration-aware semantics and test plan](detector-area-design-2026-10-16.md). No production repair is included.

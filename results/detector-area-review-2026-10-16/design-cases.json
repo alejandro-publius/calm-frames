@@ -1,0 +1,391 @@
+{
+  "status": "design-only; test specifications not implemented or executed",
+  "production_changes": false,
+  "event_envelopes": "supplied exact intervals for area-layer tests; tracker extraction separately reviewed",
+  "geometry_matrix": [
+    {
+      "name": "wcag-reference",
+      "window_px": [
+        64,
+        36
+      ],
+      "exact_quarter_pixels": 576,
+      "one_pixel_over": 577
+    },
+    {
+      "name": "room-85in-4ft",
+      "window_px": [
+        22,
+        22
+      ],
+      "exact_quarter_pixels": 121,
+      "one_pixel_over": 122
+    },
+    {
+      "name": "broadcast-baseline",
+      "window_px": [
+        192,
+        108
+      ],
+      "exact_quarter_pixels": 5184,
+      "one_pixel_over": 5185
+    }
+  ],
+  "kind_matrix": [
+    "general",
+    "red"
+  ],
+  "cases": [
+    {
+      "id": "separate-bursts",
+      "setup": "resolved pair envelopes for A end before B starts; each patch below quarter; each four completions in W",
+      "expected": "suppress",
+      "rationale": "Known pooling counterexample; no positive-duration concurrency"
+    },
+    {
+      "id": "overlap-offset",
+      "setup": "two sub-quarter patches overlap in duration; all completion frames differ; four completions per pixel",
+      "expected": "retain",
+      "rationale": "Concurrency must not depend on shared completion timestamp"
+    },
+    {
+      "id": "simultaneous",
+      "setup": "two sub-quarter patches share all four excursion intervals",
+      "expected": "retain",
+      "rationale": "Positive area and frequency control"
+    },
+    {
+      "id": "dark-pulse",
+      "setup": "reverse bright/dark polarity of separated and overlapping schedules",
+      "expected": "same-as-source",
+      "rationale": "Temporal support includes both polarity directions"
+    },
+    {
+      "id": "three-completions",
+      "setup": "three completions per pixel even where instantaneous area exceeds quarter",
+      "expected": "no-frequency-candidate",
+      "rationale": "Preserve existing count rule"
+    },
+    {
+      "id": "closed-left-boundary",
+      "setup": "four completions at 0, 333, 666, 1000 ms; evaluate t=1000; supports overlap sufficiently",
+      "expected": "retain",
+      "rationale": "Compatibility: inclusive left endpoint counts four"
+    },
+    {
+      "id": "expired-left-boundary",
+      "setup": "same completions; evaluate t=1000.001 ms",
+      "expected": "no-frequency-candidate",
+      "rationale": "Compatibility: completion 0 lies outside W"
+    },
+    {
+      "id": "before-left-boundary",
+      "setup": "same completions; evaluate t=999.999 ms",
+      "expected": "no-frequency-candidate",
+      "rationale": "Fourth completion has not occurred"
+    },
+    {
+      "id": "support-crosses-left",
+      "setup": "completion is inside W; support begins before W",
+      "expected": "clip-support-to-W",
+      "rationale": "Retain count; compare overlap inside W, while documenting frequency-convention ambiguity"
+    },
+    {
+      "id": "support-crosses-right",
+      "setup": "qualified second threshold crossing is inside W; final extreme still unknown after t",
+      "expected": "fallback",
+      "rationale": "Do not truncate support at the completion timestamp"
+    },
+    {
+      "id": "touching-exact",
+      "setup": "resolved interval A ends exactly at B start; neither alone exceeds quarter",
+      "expected": "suppress",
+      "rationale": "Half-open proposed convention: zero-duration coincidence is not overlap"
+    },
+    {
+      "id": "short-positive-overlap",
+      "setup": "exact event-table envelopes overlap for 0.001 ms and combined area exceeds quarter; counts qualify",
+      "expected": "retain",
+      "rationale": "No new minimum overlap duration"
+    },
+    {
+      "id": "uncertain-touching",
+      "setup": "sample brackets overlap even though nominal endpoints only touch",
+      "expected": "retain",
+      "rationale": "Use conservative envelope, not central estimate"
+    },
+    {
+      "id": "long-ramp-tail",
+      "setup": "threshold confirmation occurs before final return extreme; overlap occurs in that tail",
+      "expected": "retain-or-fallback",
+      "rationale": "Shortening to completion would be a false negative"
+    },
+    {
+      "id": "minor-reversal",
+      "setup": "small reversal occurs within a pending pair; no resolved envelope mapping yet",
+      "expected": "defer",
+      "rationale": "Define event-boundary state contract before asserting suppression"
+    },
+    {
+      "id": "long-plateau",
+      "setup": "starting or return extreme persists across many frames",
+      "expected": "defer",
+      "rationale": "Approve departure/final-extreme convention; unresolved case falls back"
+    },
+    {
+      "id": "eof-unknown",
+      "setup": "file ends while a relevant qualified event support is unresolved",
+      "expected": "fallback",
+      "rationale": "No zero-duration event or silent event drop"
+    },
+    {
+      "id": "general-only",
+      "setup": "neutral-light pulses independently satisfy general rule and not red rule",
+      "expected": "same-temporal-result",
+      "rationale": "Run real general tracker plus overlap layer"
+    },
+    {
+      "id": "red-only",
+      "setup": "verified linear-light color pair satisfies existing red rule; independently show general rule is not met",
+      "expected": "same-temporal-result",
+      "rationale": "Run real red tracker; no assumed RGB pair"
+    },
+    {
+      "id": "dual-qualified",
+      "setup": "same signal qualifies under both general and red rules",
+      "expected": "independent-kind-results",
+      "rationale": "Do not double-count pixels; preserve red reason and opaque cover"
+    },
+    {
+      "id": "mixed-two-plus-two",
+      "setup": "two general-only and two red-only completions at a pixel in W",
+      "expected": "no-frequency-candidate",
+      "rationale": "Do not merge counts across kinds"
+    },
+    {
+      "id": "exact-area-limit",
+      "setup": "repeat four qualifying excursions on exactly 576, 121, or 5184 pixels in the respective window",
+      "expected": "suppress",
+      "rationale": "Area limit is strictly greater than one quarter"
+    },
+    {
+      "id": "one-pixel-over",
+      "setup": "repeat four qualifying excursions on 577, 122, or 5185 pixels in the respective window",
+      "expected": "retain",
+      "rationale": "One pixel above the unchanged area limit"
+    },
+    {
+      "id": "duplicate-pixel",
+      "setup": "two event records include same pixel at same time",
+      "expected": "union-once",
+      "rationale": "Distinct event count may matter; spatial area must not double-count"
+    },
+    {
+      "id": "translated-window",
+      "setup": "translate equivalent mask within legal frame bounds",
+      "expected": "same-temporal-result",
+      "rationale": "Use every spatial placement, not a fixed origin"
+    },
+    {
+      "id": "different-place-different-time",
+      "setup": "largest patches occur in different window placements at different times",
+      "expected": "no-summed-maxima",
+      "rationale": "Never add independent maxima across time or position"
+    },
+    {
+      "id": "baseline-plus-room",
+      "setup": "evaluate baseline alone and with room appended",
+      "expected": "monotone",
+      "rationale": "Added room cannot remove baseline result; broadcast screen retained"
+    },
+    {
+      "id": "chunk-parity",
+      "setup": "same numeric frames whole, chunked, overlapping chunks",
+      "expected": "identical",
+      "rationale": "Retain timestamp deduplication and pending state"
+    },
+    {
+      "id": "variable-pts",
+      "setup": "nonuniform timestamps with same prescribed pulse supports",
+      "expected": "oracle-agreement",
+      "rationale": "Use PTS, not frame counts or assumed FPS"
+    },
+    {
+      "id": "missing-bound-or-capacity",
+      "setup": "relevant envelope missing or evidence cannot be retained",
+      "expected": "fallback-or-analysis-error",
+      "rationale": "No silent eviction or permissive result"
+    },
+    {
+      "id": "pending-fifth-overlap",
+      "setup": "A has four early completions in W, then a pending fifth excursion overlapping B fourth excursion; completion of A fifth is after t",
+      "expected": "fallback-until-resolved",
+      "rationale": "Do not exclude pending support on an already frequency-eligible pixel"
+    },
+    {
+      "id": "support-completion-outside-window",
+      "setup": "Four completions qualify a pixel in W; another qualified event completes outside W but its conservative support intersects W",
+      "expected": "include-intersecting-support",
+      "rationale": "Frequency count and temporal support require separate retention indexes"
+    }
+  ],
+  "color_vectors": {
+    "red-only": {
+      "states": [
+        {
+          "linear_rgb": [
+            0.1,
+            0,
+            0
+          ],
+          "srgb": [
+            0.3491902126282938,
+            0.0,
+            0.0
+          ],
+          "red_ratio": 1.0,
+          "ucs_uv": [
+            0.4507040960712041,
+            0.52288734298951
+          ],
+          "wcag_luminance": 0.02126,
+          "synthetic_video_level": 0.07423783920477527,
+          "broadcast_nits": 0.38952090451914795
+        },
+        {
+          "linear_rgb": [
+            0,
+            0,
+            0.3
+          ],
+          "srgb": [
+            0.0,
+            0.0,
+            0.5838314900602575
+          ],
+          "red_ratio": 0.0,
+          "ucs_uv": [
+            0.1754386050201377,
+            0.15789474451812394
+          ],
+          "wcag_luminance": 0.02166,
+          "synthetic_video_level": 0.04215263358235059,
+          "broadcast_nits": 0.10014039674831336
+        }
+      ],
+      "ucs_distance": 0.45715499286618233,
+      "relative_luminance_delta": 0.0003999999999999976,
+      "broadcast_delta_nits": 0.28938050777083457,
+      "expected_qualifications": {
+        "red": true,
+        "wcag_general": false,
+        "broadcast_general": false
+      }
+    },
+    "dual-qualified": {
+      "states": [
+        {
+          "linear_rgb": [
+            1,
+            0.2,
+            0
+          ],
+          "srgb": [
+            0.9999999999999999,
+            0.48452920448170694,
+            0.0
+          ],
+          "red_ratio": 0.8333333333333334,
+          "ucs_uv": [
+            0.3254116511349862,
+            0.5381256139836591
+          ],
+          "wcag_luminance": 0.35564,
+          "synthetic_video_level": 0.5591352870453168,
+          "broadcast_nits": 49.553069239261625
+        },
+        {
+          "linear_rgb": [
+            0,
+            0,
+            0.05
+          ],
+          "srgb": [
+            0.0,
+            0.0,
+            0.24780052799263164
+          ],
+          "red_ratio": 0.0,
+          "ucs_uv": [
+            0.1754386050201377,
+            0.1578947445181239
+          ],
+          "wcag_luminance": 0.0036100000000000004,
+          "synthetic_video_level": 0.017891198121068003,
+          "broadcast_nits": 0.012804558705230151
+        }
+      ],
+      "ucs_distance": 0.40873882694880276,
+      "relative_luminance_delta": 0.35203,
+      "broadcast_delta_nits": 49.5402646805564,
+      "expected_qualifications": {
+        "red": true,
+        "wcag_general": true,
+        "broadcast_general": true
+      }
+    },
+    "general-only": {
+      "states": [
+        {
+          "linear_rgb": [
+            0.033104766570885055,
+            0.033104766570885055,
+            0.033104766570885055
+          ],
+          "srgb": [
+            0.2,
+            0.2,
+            0.2
+          ],
+          "red_ratio": 0.3333333333333333,
+          "ucs_uv": [
+            0.19783980937881362,
+            0.46833631320955704
+          ],
+          "wcag_luminance": 0.033104766570885055,
+          "synthetic_video_level": 0.2,
+          "broadcast_nits": 4.202444487046029
+        },
+        {
+          "linear_rgb": [
+            0.6038273388553378,
+            0.6038273388553378,
+            0.6038273388553378
+          ],
+          "srgb": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "red_ratio": 0.33333333333333337,
+          "ucs_uv": [
+            0.19783980937881357,
+            0.4683363132095571
+          ],
+          "wcag_luminance": 0.6038273388553377,
+          "synthetic_video_level": 0.8,
+          "broadcast_nits": 117.07009329339557
+        }
+      ],
+      "ucs_distance": 7.850462293418876e-17,
+      "relative_luminance_delta": 0.5707225722844527,
+      "broadcast_delta_nits": 112.86764880634955,
+      "expected_qualifications": {
+        "red": false,
+        "wcag_general": true,
+        "broadcast_general": true
+      }
+    }
+  },
+  "color_vector_scope": "Synthetic AnalysisFrame inputs. sRGB channels are encoded from the supplied linear RGB; video_level is explicitly set to 0.2126 R_srgb + 0.7152 G_srgb + 0.0722 B_srgb. This is a deterministic input convention for unit tests, not a claim about real decoding or BT.709 transfer conversion."
+}

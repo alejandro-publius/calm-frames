@@ -1,0 +1,44 @@
+{
+  "status": "completed design-only follow-up; no implementation",
+  "base_commit": "e0a63a4997f23f7f46421584abf389d38951b297",
+  "branch": "codex/detector-area-review-2026-10-16",
+  "deliverables_sha256": {
+    "docs/evidence/detector-area-design-2026-10-16.md": "e5b8d36b09bc71dcfc7127696b5ef349807a1f375e8efe46ca79595c3c74f518",
+    "results/detector-area-review-2026-10-16/design-cases.json": "325005de7fbee2ba1de8e110e6c44324dcd1c470c84a30c9b28b272cb1865737"
+  },
+  "validation": {
+    "json_parses": true,
+    "case_ids_unique": true,
+    "case_count": 32,
+    "geometry_quarter_and_plus_one_arithmetic": "pass",
+    "three_color_vector_qualifications": "pass by independent arithmetic; no media generated",
+    "new_detector_tests_executed": false,
+    "production_tests_repeated": false,
+    "style": "pass",
+    "diff_check": "pass"
+  },
+  "proposed_semantics": [
+    "Conservative support envelope spanning both transitions; completion is not the end bound",
+    "Keep current completion-count frequency windows for compatibility, explicitly not certified normative timing",
+    "Separate completion-count and support indexes; retain intersecting supports and relevant pending possible fifth flashes",
+    "Half-open exact envelopes, no minimum overlap time, sampling uncertainty counted conservatively",
+    "Fallback to existing pooled finding when relevant timing is unresolved",
+    "Union pixels once, separate general/red counts, preserve baseline-plus-room geometry and downstream cover rules"
+  ],
+  "unresolved": [
+    "Adjacent-extrema timing through minor reversals and repeated same-direction confirmations",
+    "Completion vs leading-edge vs full-pair frequency interpretation",
+    "Existing per-pixel frequency behavior for moving regions",
+    "Sampled plateau and endpoint conventions",
+    "Streaming event finality and bounded retention without silent evidence loss",
+    "Algorithm identity before future signed regeneration"
+  ],
+  "scope": {
+    "production_detection_changed": false,
+    "thresholds_changed": false,
+    "signed_assets_changed": false,
+    "acadia_branch_changed": false,
+    "build_install_restart_ui_capture_recording": false
+  },
+  "next_action": "Technical review of timing contract and retained count semantics before implementing a shadow oracle or proposed repair; no owner app action required."
+}
