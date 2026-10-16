@@ -38,3 +38,17 @@ test('opening uses destination-neutral Back and returns through the existing sta
   act(() => jest.advanceTimersByTime(700));
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
+
+// Back during the opening cancels the wait: the opening's own stall timeout
+// firing afterwards must not surface the recovery screen or leave twice.
+test('Back on the opening shell leaves once, and a late stall timeout changes nothing', () => {
+  const view = startPlayer('none', true);
+  fireEvent.press(view.getByTestId('player-opening-back'));
+  expect(view.getByText('Going back...')).toBeTruthy();
+  act(() => jest.advanceTimersByTime(700));
+  expect(view.goBack).toHaveBeenCalledTimes(1);
+  act(() => jest.advanceTimersByTime(15_000));
+  expect(view.queryByTestId('player-error')).toBeNull();
+  expect(view.queryByTestId('video-player-ui-view')).toBeNull();
+  expect(view.goBack).toHaveBeenCalledTimes(1);
+});
