@@ -194,6 +194,23 @@ describe('VideoHandler', () => {
   });
 
   describe('destroyMediaPlayerSync', () => {
+    it.each(['timeout', 'failure'])('does not report completed teardown after native %s', (status) => {
+      const { mockVideoRef, videoHandler } = createVideoHandler();
+      const native = { pause: jest.fn(), deinitializeSync: jest.fn(() => status) };
+      mockVideoRef.current = native as unknown as VideoPlayer;
+      videoHandler.removeEventListeners = jest.fn();
+      expect(videoHandler.destroyVideoElements()).toBe(false);
+      expect(native.deinitializeSync).toHaveBeenCalledWith(1500);
+      expect(mockVideoRef.current).toBe(native);
+    });
+
+    it('does not report completed teardown when native deinitialization throws', () => {
+      const { mockVideoRef, videoHandler } = createVideoHandler();
+      mockVideoRef.current = { pause: jest.fn(), deinitializeSync: () => { throw Error('native failure'); } } as unknown as VideoPlayer;
+      videoHandler.removeEventListeners = jest.fn();
+      expect(videoHandler.destroyVideoElements()).toBe(false);
+    });
+
     it('should successfully destroy media player for MP4 content', () => {
       const { mockVideoRef, videoHandler } = createVideoHandler();
 

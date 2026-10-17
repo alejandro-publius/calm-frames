@@ -64,3 +64,28 @@ test('Back returns immediately after confirmed teardown and never returns twice'
   act(() => jest.advanceTimersByTime(15000));
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
+
+test('Back detaches the native surfaces and waits for successful teardown to return before navigation', () => {
+  const view = startPlayer('none', true);
+  const clearVideo = jest.spyOn(mockMedia, 'clearSurfaceHandle');
+  const clearCaptions = jest.spyOn(mockMedia, 'clearCaptionViewHandle');
+  mockDestroy.mockImplementationOnce(() => {
+    expect(clearVideo).toHaveBeenCalledWith('');
+    expect(clearCaptions).toHaveBeenCalledWith('');
+    expect(view.goBack).not.toHaveBeenCalled();
+    return true;
+  });
+  fireEvent.press(view.getByTestId('player-opening-back'));
+  expect(view.goBack).toHaveBeenCalledTimes(1);
+});
+
+test('unconfirmed native teardown retains the 700 ms fallback rather than the fast return', () => {
+  const view = startPlayer('none', true);
+  mockDestroy.mockReturnValueOnce(false);
+  fireEvent.press(view.getByTestId('player-opening-back'));
+  expect(view.goBack).not.toHaveBeenCalled();
+  act(() => jest.advanceTimersByTime(699));
+  expect(view.goBack).not.toHaveBeenCalled();
+  act(() => jest.advanceTimersByTime(1));
+  expect(view.goBack).toHaveBeenCalledTimes(1);
+});
