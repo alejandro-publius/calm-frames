@@ -1,0 +1,82 @@
+PASS test/calmframes/playerRouteRefusal.test.tsx
+PASS test/calmframes/playbackUi.test.tsx
+PASS test/calmframes/bufferingOpening.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:596:15)
+
+PASS test/calmframes/useFlashGuard.test.tsx
+PASS test/calmframes/seekSafety.test.ts
+  ● Console
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSeek - asked for 12000 ms, going to 12000 ms, cover first, target 12000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSkipForward - asked for 11000 ms, going to 11000 ms, cover first, target 11000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSkipBackward - asked for 12000 ms, going to 12000 ms, cover first, target 12000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleFastForward - asked for 15000 ms, going to 15000 ms, cover first, target 15000 decodes from inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleRewind - asked for 10000 ms, going to 10000 ms, cover first, target 10000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleStartOver - asked for 0 ms, going to 0 ms, no cover needed, target 0 is clear
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSeek - asked for 12000 ms, going to 12000 ms, cover first, target 12000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSkipForward - asked for 13000 ms, going to 13000 ms, cover first, target 13000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleSkipBackward - asked for 12000 ms, going to 12000 ms, cover first, target 12000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleFastForward - asked for 22000 ms, going to 22000 ms, no cover needed, target 22000 is clear
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleRewind - asked for 12000 ms, going to 12000 ms, cover first, target 12000 is inside 9500-14500
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+    console.log
+      [SafeMediaControlHandler.ts] - handleStartOver - asked for 0 ms, going to 0 ms, no cover needed, target 0 is clear
+
+      at SafeMediaControlHandler.log (src/calmframes/SafeMediaControlHandler.ts:68:13)
+
+PASS test/calmframes/seekbarFocusTransition.test.tsx
+PASS test/calmframes/hookMirror.test.ts
+
+Test Suites: 7 passed, 7 total
+Tests:       74 passed, 74 total
+Snapshots:   0 total
+Time:        1.699 s, estimated 2 s
+Ran all test suites matching /test\/calmframes\/hookMirror.test.ts|test\/calmframes\/useFlashGuard.test.tsx|test\/calmframes\/seekSafety.test.ts|test\/calmframes\/bufferingOpening.test.tsx|test\/calmframes\/playbackUi.test.tsx|test\/calmframes\/playerRouteRefusal.test.tsx|test\/calmframes\/seekbarFocusTransition.test.tsx/i.

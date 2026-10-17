@@ -1,4 +1,4 @@
-import { startPlayer, mockError, mockMedia } from './playbackUiHarness';
+import { startPlayer, mockError, mockMedia, mockDestroy } from './playbackUiHarness';
 import { act, fireEvent } from '@testing-library/react-native';
 beforeEach(() => { jest.useFakeTimers(); jest.spyOn(console, 'log').mockImplementation(() => {}); });
 afterEach(() => { jest.useRealTimers(); jest.restoreAllMocks(); });
@@ -50,5 +50,17 @@ test('Back on the opening shell leaves once, and a late stall timeout changes no
   act(() => jest.advanceTimersByTime(15_000));
   expect(view.queryByTestId('player-error')).toBeNull();
   expect(view.queryByTestId('video-player-ui-view')).toBeNull();
+  expect(view.goBack).toHaveBeenCalledTimes(1);
+});
+
+// A successful synchronous teardown needs no extra navigation delay.
+test('Back returns immediately after confirmed teardown and never returns twice', () => {
+  mockDestroy.mockReturnValueOnce(true);
+  const view = startPlayer('none', true);
+  fireEvent.press(view.getByTestId('player-opening-back'));
+  expect(mockDestroy).toHaveBeenCalled();
+  expect(view.goBack).toHaveBeenCalledTimes(1);
+  expect(view.queryByTestId('player-opening-back')).toBeNull();
+  act(() => jest.advanceTimersByTime(15000));
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });

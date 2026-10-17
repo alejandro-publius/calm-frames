@@ -48,6 +48,20 @@ describe('AppStack', () => {
     return render(<AppStack />);
   };
 
+  it('does not fetch legacy search data during the Calm Frames launch', () => {
+    setup();
+    expect(mockDispatch).not.toHaveBeenCalled();
+  });
+
+  it('keeps route components stable when the stack is mounted again', () => {
+    const first = setup();
+    const Screen = createStackNavigator().Screen as jest.Mock;
+    const before = Screen.mock.calls.slice(-6).map(([props]) => props.component);
+    first.unmount();
+    setup();
+    expect(Screen.mock.calls.slice(-6).map(([props]) => props.component)).toEqual(before);
+  });
+
   it('renders correctly', () => {
     const { toJSON } = setup();
     expect(toJSON()).toMatchSnapshot();

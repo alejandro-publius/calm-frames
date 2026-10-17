@@ -2605,3 +2605,12 @@ cloud resources or paid services.
   and Parents never ask alongside it. **Why:** two requests leave the platform to choose.
   **Cost:** none.
 
+
+## October 17, 2026: remove measured repeated work before native timing
+
+Cache successful exact-text/key signature authentication only; recheck eligibility
+each call. Defer legacy sample data until its route opens, keep route identities
+stable, and skip Back's 700 ms only after synchronous teardown succeeds. Disable
+collector beacons unless explicitly requested for measurement. Cost: bounded memory
+and targeted regressions; no media/trust changes. Host warm three-map median moved
+from 13.62 to 0.91 ms; cold did not improve. Native speed remains unmeasured.

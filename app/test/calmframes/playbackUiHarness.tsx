@@ -60,10 +60,11 @@ jest.mock('../../src/utils/VideoHandler', () => ({
       this.buffering = buffering; mockError = error; mockBuffering = buffering;
     }
     preBufferVideo() { this.video.current = mockMedia; this.initialized(true); this.buffering(false); }
-    destroyVideoElements() {}
+    destroyVideoElements() { return mockDestroy(); }
   },
 }));
 
+export const mockDestroy = jest.fn();
 export const mockSeekFocus = jest.fn();
 export let mockError: (value: boolean) => void;
 export let mockBuffering: (value: boolean) => void;

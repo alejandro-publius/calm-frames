@@ -1,5 +1,17 @@
 # Final handoff: the integration candidate
 
+## Performance source checkpoint, October 17, 2026
+
+Bounded performance fixes and 167 targeted tests are ready on the isolated app
+branch. Repeated Acadia map authentication is cached without caching eligibility;
+legacy startup work is deferred; successful synchronous Back skips an extra 700 ms;
+Debug collector beacons require explicit opt-in. No native replacement occurred.
+The supplied image shows a scheduled cover, but stalled media time and the three
+teal circles remain unconfirmed. Native loading speed has not been measured.
+See [evidence and the single native checkpoint](results/performance-2026-10-17/README.md).
+The installed package and its source remain the design review build below.
+
+
 ## Installed design review build, October 17, 2026
 
 The owner-approved fixes and design pass are built, installed and open in the existing

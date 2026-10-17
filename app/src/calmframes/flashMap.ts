@@ -93,6 +93,13 @@ export interface VerifyMapOptions {
   maxAgeMs?: number;
 }
 
+// Cache only successful cryptographic checks of exact immutable input text and
+// its trusted key. Parsing, file binding, freshness and shape checks still run
+// on every call. Bound retained text to 8 * 64K characters; large maps stay uncached.
+const authenticatedTexts = new Map<string, string>();
+const MAX_AUTHENTICATED_TEXTS = 8;
+const MAX_CACHED_TEXT_LENGTH = 64 * 1024;
+
 /** Ninety days. Long enough for a season, short enough to notice a stale shelf. */
 export const DEFAULT_MAX_MAP_AGE_MS = 90 * 24 * 60 * 60 * 1000;
 
@@ -275,8 +282,16 @@ export function verifyFlashMap(
   if (!signatureBytes || !publicKeyBytes) {
     return reject('unsigned', 'the signature or the key is not base64');
   }
-  if (!verifyEd25519(signatureBytes, signedBytes, publicKeyBytes)) {
-    return reject('bad-signature', 'the signature does not match the map');
+  if (authenticatedTexts.get(text) !== options.publicKeyBase64) {
+    if (!verifyEd25519(signatureBytes, signedBytes, publicKeyBytes)) {
+      return reject('bad-signature', 'the signature does not match the map');
+    }
+    if (text.length <= MAX_CACHED_TEXT_LENGTH) {
+      if (authenticatedTexts.size >= MAX_AUTHENTICATED_TEXTS) {
+        authenticatedTexts.delete(authenticatedTexts.keys().next().value!);
+      }
+      authenticatedTexts.set(text, options.publicKeyBase64);
+    }
   }
 
   const source = asRecord(plain.source);

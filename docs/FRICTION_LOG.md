@@ -1108,3 +1108,12 @@ single native session could not begin. `cua.listApps()` reported that the Mac
 was locked and automatic unlock failed. No simulator install, relaunch or
 Terminal UI action followed. A manual Mac unlock is required. The independent
 source, package and artifact work continued and the prior build was preserved.
+
+### October 17: owner reports slow loading during design review
+
+Task: open and watch the newly installed build. Expected: responsive transitions.
+Actual: owner reported everything loads slowly and supplied an image of a scheduled
+cover. Severity: blocks comfortable review. Source fixes remove measured repeated
+verification and unnecessary startup/Back work; the image and retained logs do not
+prove a stalled clock. Workaround: preserve the current app while source regressions
+run, then use one coordinated native timing checkpoint. See the performance receipt.

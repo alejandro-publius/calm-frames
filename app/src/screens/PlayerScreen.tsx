@@ -479,12 +479,17 @@ const PlayerScreen = ({
     captionViewHandle.current = null;
     videoRef?.current?.clearSurfaceHandle('');
     videoRef?.current?.clearCaptionViewHandle('');
-    videoHandler.destroyVideoElements();
+    const destroyed = videoHandler.destroyVideoElements();
     videoRef.current = null;
     clearTimeout(Number(timer.current));
 
-    //Approx delay added to destroy media instance
-    exitTimer.current = setTimeout(() => navigation.goBack(), BACK_NAVIGATION_DELAY);
+    // Successful synchronous teardown has already finished. Retain the old
+    // fallback delay when the native player did not confirm completion.
+    if (destroyed) {
+      navigation.goBack();
+    } else {
+      exitTimer.current = setTimeout(() => navigation.goBack(), BACK_NAVIGATION_DELAY);
+    }
     return true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

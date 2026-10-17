@@ -1,5 +1,9 @@
 # Status
 
+October 17 performance checkpoint: bounded source fixes pass 167 focused tests.
+No native speedup or resolution of the reported stall is claimed. The running app
+was preserved. See [evidence](../results/performance-2026-10-17/README.md).
+
 App lane, October 16, later: the cohesive design pass is on `claude/tv-experience-2026-10-16`.
 Home with one featured video shows the hero alone with a benefit line; Details shows the
 covered sections as a still strip from the player's own schedule; paused and unavailable
