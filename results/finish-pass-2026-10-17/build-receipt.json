@@ -1,0 +1,10 @@
+{
+  "source_commit": "ed75fca6d52d5be52fedcd94e19a7eff387abd27",
+  "build_command": "npm run build:debug",
+  "build_count": 1,
+  "build_start_utc": "2026-10-17T08:12:32.531494+00:00",
+  "tracked_app_inputs": 726,
+  "build_exit": 0,
+  "build_end_utc": "2026-10-17T08:13:13.872445+00:00",
+  "changed_inputs": []
+}

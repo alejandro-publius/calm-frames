@@ -1,0 +1,10 @@
+KEY_ENTER focus player-opening-back
+KEY_PLAYPAUSE focus calm-card-skip
+KEY_PLAYPAUSE focus calm-card-skip
+PASS Pause/resume during first cover pause then playing and first cover-off events; inspect timing samples for exact pause duration
+KEY_ENTER focus calm-card-skip
+PASS Activate Skip during second cover Skip focused; Enter caused guarded playhead-write, seeked and cover-off
+PASS End-of-video return Native ended -> existing teardown -> Home Watch without presentation delay
+KEY_ENTER focus player-opening-back
+KEY_BACK focus player-seekbar
+PASS Manual Back during playback Returned Home Watch before video ended

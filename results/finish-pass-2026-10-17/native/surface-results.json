@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "Home Details More info Back Back returns Home Details focus",
+    "How it works Back returns its opener",
+    "Parents hardware Back cancelled without PIN entry; Parents focus restored",
+    "Parents on-screen Back cancelled without PIN entry; Parents focus restored"
+  ],
+  "result": "completed"
+}

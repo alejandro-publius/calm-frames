@@ -1,0 +1,113 @@
+{
+  "recorded_host_utc": "2026-10-17T23:11:45.421914+00:00",
+  "source_commit": "ed75fca6d52d5be52fedcd94e19a7eff387abd27",
+  "branch": "claude/tv-experience-2026-10-16",
+  "build": {
+    "source_commit": "ed75fca6d52d5be52fedcd94e19a7eff387abd27",
+    "build_command": "npm run build:debug",
+    "build_count": 1,
+    "build_start_utc": "2026-10-17T08:12:32.531494+00:00",
+    "tracked_app_inputs": 726,
+    "build_exit": 0,
+    "build_end_utc": "2026-10-17T08:13:13.872445+00:00",
+    "changed_inputs": []
+  },
+  "installation": {
+    "source_commit": "ed75fca6d52d5be52fedcd94e19a7eff387abd27",
+    "reused_build": true,
+    "inputs_matched": 726,
+    "package_path": "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/finish-pass-2026-10-17/calm-frames-finish-aarch64-debug.vpkg",
+    "package_sha256": "d8a253c5e49bccd7a3995165c7d7be3a2205aad680345f3019ba1ac13937a54e",
+    "install_count": 1,
+    "commands": [
+      {
+        "args": [
+          "device",
+          "install-app",
+          "--device",
+          "VirtualDevice",
+          "--packagePath",
+          "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/finish-pass-2026-10-17/calm-frames-finish-aarch64-debug.vpkg",
+          "--buildType",
+          "Debug"
+        ],
+        "start_utc": "2026-10-17T20:57:28.995200+00:00",
+        "end_utc": "2026-10-17T20:57:30.616559+00:00",
+        "exit": 0,
+        "output": "Installing/Updating '/tmp/calm-frames-finish-aarch64-debug.vpkg' ...success\n"
+      },
+      {
+        "args": [
+          "device",
+          "run-cmd",
+          "--device",
+          "VirtualDevice",
+          "--command",
+          "sha256sum /tmp/calm-frames-finish-aarch64-debug.vpkg"
+        ],
+        "start_utc": "2026-10-17T20:57:30.617077+00:00",
+        "end_utc": "2026-10-17T20:57:31.388667+00:00",
+        "exit": 0,
+        "output": "d8a253c5e49bccd7a3995165c7d7be3a2205aad680345f3019ba1ac13937a54e  /tmp/calm-frames-finish-aarch64-debug.vpkg\n"
+      },
+      {
+        "args": [
+          "device",
+          "run-cmd",
+          "--device",
+          "VirtualDevice",
+          "--command",
+          "vmsgr send pkg://io.github.alejandropublius.calmframes.main"
+        ],
+        "start_utc": "2026-10-17T20:57:31.388948+00:00",
+        "end_utc": "2026-10-17T20:57:32.147830+00:00",
+        "exit": 0,
+        "output": "Sending: pkg://io.github.alejandropublius.calmframes.main\n"
+      },
+      {
+        "args": [
+          "device",
+          "running-apps",
+          "--device",
+          "VirtualDevice"
+        ],
+        "start_utc": "2026-10-17T20:57:32.148161+00:00",
+        "end_utc": "2026-10-17T20:57:32.964428+00:00",
+        "exit": 0,
+        "output": "com.amazon.kcp.component.service\ncom.amazon.otad.main\ncom.amazon.map.async.service.main\ncom.amazon.dev.shell.service\ncom.amazon.aplext.alert.10.service.main\ncom.amazon.kepler.keyvault.service.main\ncom.amazon.rdm.service.main\nio.github.alejandropublius.calmframes.main\n"
+      }
+    ],
+    "device_copy_sha256_matches": true
+  },
+  "source_inputs_matched_on_reuse_and_after_native": 726,
+  "package_hash_rechecked_after_native": "d8a253c5e49bccd7a3995165c7d7be3a2205aad680345f3019ba1ac13937a54e",
+  "native_summary": "native/summary.json",
+  "native_all_requested_control_flows": "passed",
+  "final_app_state": "Running at Home, Watch focused",
+  "collector_cleanup": "Old PID 91713 and final PID 98424 identities verified before stopping only their own process groups",
+  "resume_notes": [
+    "No rebuild or reinstall during reconnections.",
+    "Initial Help assertion expected an optional demo; current Acadia catalog has no practice entry, so preferred Back is correct. Driver corrected; app behavior unchanged.",
+    "After disconnections the app was found not running; exact installed production component launched once in final continuation. No cause of its earlier stop inferred."
+  ],
+  "remaining_limits": [
+    "Owner native visual/audio and VoiceView quality review remains pending.",
+    "Opening/seeking waiting transitions logged. Sustained slow/loading display was not forced or visually verified. Historical evidence classifier and state regressions passed before the build.",
+    "Intermittent native slowdown did not reproduce in this run; no cure claimed.",
+    "Device/host wall clocks differ; measured durations use one device clock only."
+  ],
+  "preserved": [
+    "Reserved Opus submission documents",
+    "Concurrent Claude session and detector checkout",
+    "Prepared media, guard timing, signing/trust, detector thresholds and system settings"
+  ],
+  "checks": {
+    "tests": 217,
+    "suites": 15,
+    "typecheck": "passed before build",
+    "relevant_lint": "passed before build",
+    "independent_review": "completed; finding fixed and regression-tested before build",
+    "repeat_broad_tests": "not needed: source unchanged"
+  },
+  "no_capture_recording_or_push": true
+}

@@ -1,0 +1,67 @@
+{
+  "source_commit": "ed75fca6d52d5be52fedcd94e19a7eff387abd27",
+  "reused_build": true,
+  "inputs_matched": 726,
+  "package_path": "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/finish-pass-2026-10-17/calm-frames-finish-aarch64-debug.vpkg",
+  "package_sha256": "d8a253c5e49bccd7a3995165c7d7be3a2205aad680345f3019ba1ac13937a54e",
+  "install_count": 1,
+  "commands": [
+    {
+      "args": [
+        "device",
+        "install-app",
+        "--device",
+        "VirtualDevice",
+        "--packagePath",
+        "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/finish-pass-2026-10-17/calm-frames-finish-aarch64-debug.vpkg",
+        "--buildType",
+        "Debug"
+      ],
+      "start_utc": "2026-10-17T20:57:28.995200+00:00",
+      "end_utc": "2026-10-17T20:57:30.616559+00:00",
+      "exit": 0,
+      "output": "Installing/Updating '/tmp/calm-frames-finish-aarch64-debug.vpkg' ...success\n"
+    },
+    {
+      "args": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "sha256sum /tmp/calm-frames-finish-aarch64-debug.vpkg"
+      ],
+      "start_utc": "2026-10-17T20:57:30.617077+00:00",
+      "end_utc": "2026-10-17T20:57:31.388667+00:00",
+      "exit": 0,
+      "output": "d8a253c5e49bccd7a3995165c7d7be3a2205aad680345f3019ba1ac13937a54e  /tmp/calm-frames-finish-aarch64-debug.vpkg\n"
+    },
+    {
+      "args": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "vmsgr send pkg://io.github.alejandropublius.calmframes.main"
+      ],
+      "start_utc": "2026-10-17T20:57:31.388948+00:00",
+      "end_utc": "2026-10-17T20:57:32.147830+00:00",
+      "exit": 0,
+      "output": "Sending: pkg://io.github.alejandropublius.calmframes.main\n"
+    },
+    {
+      "args": [
+        "device",
+        "running-apps",
+        "--device",
+        "VirtualDevice"
+      ],
+      "start_utc": "2026-10-17T20:57:32.148161+00:00",
+      "end_utc": "2026-10-17T20:57:32.964428+00:00",
+      "exit": 0,
+      "output": "com.amazon.kcp.component.service\ncom.amazon.otad.main\ncom.amazon.map.async.service.main\ncom.amazon.dev.shell.service\ncom.amazon.aplext.alert.10.service.main\ncom.amazon.kepler.keyvault.service.main\ncom.amazon.rdm.service.main\nio.github.alejandropublius.calmframes.main\n"
+    }
+  ],
+  "device_copy_sha256_matches": true
+}
