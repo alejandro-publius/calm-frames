@@ -1,5 +1,17 @@
 # Final handoff: the integration candidate
 
+## Native slowdown isolation, October 17, 2026
+
+The prior control receipt is committed at b32c007. A new app process still slows,
+and one clean simulator restart clears CoreAudio bad-device errors but does not
+restore sustained playback. All 764 app inputs remain unchanged from c2b56d2;
+no rebuild or install occurred. These are failed repair comparisons, not a fix.
+App-process leaks and retained CoreAudio errors are not sufficient explanations.
+The precise native trigger remains unresolved; no protective timing or speculative
+media workaround was changed. App left Home. See
+[the isolation evidence](results/native-slowdown-isolation-2026-10-17/README.md).
+
+
 ## Remaining controls checked, October 17, 2026
 
 Parents cancellation passes both routes. Skip activation exercises cover-before-seek

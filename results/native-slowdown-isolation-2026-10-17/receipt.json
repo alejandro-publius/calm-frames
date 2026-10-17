@@ -1,0 +1,106 @@
+{
+  "recorded_utc": "2026-10-17T06:25:20.709585+00:00",
+  "source_commit": "c2b56d258979b9d7e968944c0780dc7fb1721f9f",
+  "reviewed_inputs_match": 764,
+  "app_code_changes": false,
+  "builds": 0,
+  "installs": 0,
+  "push": false,
+  "screenshots_or_audio_video_recordings": false,
+  "ownership": "No active SDK installer or test driver found; app initially stopped; Claude process present but not operated.",
+  "prior_evidence_commit": "b32c007",
+  "experiments": {
+    "fresh-app": {
+      "samples": 32,
+      "first": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792216069794,
+        "mediaTimeMs": 16,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": 961,
+          "worstTickGapMs": 1006
+        }
+      },
+      "last": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792216085354,
+        "mediaTimeMs": 6026,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": 1986,
+          "worstTickGapMs": 1006
+        }
+      },
+      "wall_span_ms": 15560,
+      "media_span_ms": 6010,
+      "full_text_log": "/tmp/calm-fresh-process-2026-10-17/device.log",
+      "full_text_log_sha256": "078d08ad68f13304b9df8446b5655c32fdf0e10bb07e5a8b5b8039d70e455824"
+    },
+    "fresh-simulator": {
+      "samples": 39,
+      "first": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792218045149,
+        "mediaTimeMs": 245,
+        "covered": false,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": -43,
+          "worstTickGapMs": 1094
+        }
+      },
+      "last": {
+        "kind": "timeupdate",
+        "wallClockMs": 1792218071584,
+        "mediaTimeMs": 6131,
+        "covered": true,
+        "playbackRate": 1,
+        "quality": {
+          "droppedVideoFrames": 0,
+          "totalVideoFrames": 0,
+          "corruptedVideoFrames": null
+        },
+        "extra": {
+          "worstDriftMs": 1988,
+          "worstTickGapMs": 1094
+        }
+      },
+      "wall_span_ms": 26435,
+      "media_span_ms": 5886,
+      "full_text_log": "/tmp/calm-backend-reset-2026-10-17/device.log",
+      "full_text_log_sha256": "e08cc386265f989f871572fbaf09da720e7f153223c513028b0c8db2a2e85091"
+    }
+  },
+  "simulator_restart_count": 1,
+  "app_launch_count": 2,
+  "coreaudio_bad_device_errors_before": 5,
+  "coreaudio_bad_device_errors_after": 0,
+  "host_default_output": "MacBook Pro Speakers, 44100 Hz; read only, not modified",
+  "outcome": "slowdown reproduced before Pause in fresh app and fresh simulator; reset was not a fix",
+  "conclusions": [
+    "Previous app-process resource leaks cannot be the sole cause: a new app process also slows.",
+    "A clean simulator restart removes retained bad-device errors, but slowdown returns before Pause, so those errors alone do not explain it.",
+    "KeplerMediaSink startup Invalid configuration appears in the earlier healthy run too; it is not a distinguishing failure marker.",
+    "Low media progress, zero audio-position advancement and video-queue buffering are distinguishing symptoms.",
+    "The exact native or app-to-native trigger remains unresolved; no speculative recovery or timing change applied."
+  ],
+  "final_state": "Home Watch focused at 06:21:14.026 UTC; app running confirmed; own collectors stopped; simulator left open"
+}

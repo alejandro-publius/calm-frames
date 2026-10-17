@@ -1,5 +1,10 @@
 # Status
 
+October 17 isolation follow-up: new app process and clean simulator restart both
+reproduce low native playback progress. Old CoreAudio errors clear on restart,
+but playback does not recover. No code or safety change. See
+[isolation receipt](../results/native-slowdown-isolation-2026-10-17/README.md).
+
 October 17 remaining native controls: Parents cancellation, guarded Skip activation
 and manual Back verified by logs. Severe media slowdown remains in two playback
 runs, including one without Pause; no source fix claimed. Existing app left Home.

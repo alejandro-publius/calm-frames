@@ -2640,3 +2640,11 @@ Control dispatch and return routes work; native playback performance does not pa
 Do not alter guard timing, audio settings or seek recovery to hide an unlocated
 native pipeline cause. Cost: playback acceptance remains blocked; recorded samples
 and warning excerpts narrow the next investigation. No rebuild or install occurred.
+
+## October 17: reject incomplete backend explanations
+
+A fresh app and clean simulator still reproduce slow playback on unchanged source.
+The simulator restart removed CoreAudio bad-device errors but did not fix progress.
+Do not present those errors or prior app cleanup as the established cause. Preserve
+the controlled comparisons and leave protected timing unchanged. Cost: two short
+playback comparisons and one simulator restart; no package rebuild or install.
