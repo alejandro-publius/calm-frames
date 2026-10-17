@@ -751,7 +751,10 @@ const PlayerScreen = ({
             videoRef={videoRef}
             navigateBack={navigateBack}
             title={route.params.data.title}
-            paused={paused}
+            // During a countdown or a cover the scene card already says it is
+            // paused and what Play and Skip do; the corner banner would say it
+            // a second time, on screen and to a screen reader.
+            paused={paused && card.kind !== 'countdown' && card.kind !== 'covering'}
             setCaptionStatus={setCaptionStatus}
             setSelectedCaptionInVideoPlayer={setSelectedCaptionInVideoPlayer}
             bifFrameImagesRef={bifFrameImagesRef}

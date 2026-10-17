@@ -67,7 +67,12 @@ test.each(['covering', 'countdown', 'none'] as const)('pause stays visible after
   act(() => mockMedia.pause());
   act(() => jest.advanceTimersByTime(6000));
   expect(view.queryByTestId('control-bar')).toBeNull();
-  expect(view.getByTestId('player-paused')).toBeTruthy();
+  // One paused statement on screen: the scene card says it during a countdown
+  // or a cover, the corner banner says it otherwise. Seen to fail, Oct 17 2026,
+  // with the banner shown in every state: two statements, card and banner.
+  expect(view.queryAllByText(/^Paused/)).toHaveLength(1);
+  if (kind === 'none') expect(view.getByTestId('player-paused')).toBeTruthy();
+  else expect(view.queryByTestId('player-paused')).toBeNull();
   if (kind !== 'none') {
     expect(view.getByTestId('calm-card-detail').props.children).toMatch(/Paused/);
     expect(view.getByTestId('calm-card').props.accessibilityLabel).toMatch(/Paused/);
