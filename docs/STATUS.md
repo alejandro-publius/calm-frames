@@ -1,5 +1,11 @@
 # Status
 
+Native checkpoint, October 17: source `c2b56d2` built, installed and launched once on the
+Vega Virtual Device and walked through Acadia by remote keys with logs only. Phase timings,
+both covers on schedule with no stall, and the return to Home are in
+[the receipt](../results/native-checkpoint-2026-10-17/receipt.json). Visuals and sound still
+need the owner. The app is left at Home.
+
 October 17 native checkpoint: reviewed c2b56d2 built and installed once, then a
 concurrent installation changed the simulator package. Functional checks stopped
 before remote keys. App remains open with runtime source unverified. See

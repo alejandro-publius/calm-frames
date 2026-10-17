@@ -1,5 +1,46 @@
 # Claude review handoff: the TV experience pass (app lane)
 
+## Native checkpoint, October 17, 2026 (latest)
+
+The owner said yes to the one checkpoint planned below. Source `c2b56d2` was built once
+(Debug, 38 s, prepared-library gate passed before and after), installed once and launched
+once on the existing Vega Virtual Device. The installed package's SHA-256 is
+`081369b932daf3786b54ad46aaa18e2a5dadcb74ef4865914d9c868a09f9cef1`, the same on the
+device as in `build/release/stabilization-2026-10-17/`. One prepared-Acadia walkthrough
+ran by remote keys while the device log streamed. No screenshot, capture or recording.
+The app is left at Home with Watch focused. Evidence:
+[receipt](results/native-checkpoint-2026-10-17/receipt.json) and
+[selected events](results/native-checkpoint-2026-10-17/selected-events.log).
+
+What the device log established (device clock, measured from the key's release):
+
+| Phase | Result |
+| --- | --- |
+| Launch to visible | system metric 583 ms; first screen settled by the first 5 s render sample |
+| Home to Details | Details screen 20 ms after Enter, its Watch focused at 37 ms |
+| Details Back to Home | Home 24 ms after Back, Details focused at 30 ms |
+| Watch to first picture | handler 5 ms, player mounted 79 ms, maps verified 123 ms, first picture 1,204 ms |
+| Covers (Extra cautious on this device) | on at media 7.378 s and 28.142 s, off at 12.714 s and 31.611 s, each 29 to 35 ms after its scheduled start; wall time matched media time through both |
+| Stalls | none: one 42 ms wait at playback start, and the clock advanced 31.299 s of media in 31.264 s |
+| Return to Home | at video end: teardown ok in 303 ms, Home with Watch focused at 329 ms, player unmounted at 728 ms |
+
+Not established, still for the owner: anything visible (layout, focus rings, card text,
+the single paused statement, How it works, the three circles), sound during covers, the
+remote Back key mid-playback (my driver stopped on a pattern that did not allow the
+trailing component-stack suffix this Debug build adds to player warnings; the
+end-of-video return exercised the same leavePlayer path), and Profiles and Parents.
+
+Two things to know before the next run:
+
+- **Startup traces did not arrive.** Neither launch emitted JavaScript console lines until
+  the first key press, so step 1 below cannot read Home readiness from `CALM_TRACE`; use
+  the system launch lines and a Right then Left press instead.
+- **Someone else touched the device.** A Calm Frames package install at 04:40:06 (during
+  this build) and a forced relaunch at 04:41:52 (35 s after this launch) came from no
+  command issued here. The installed bytes are this build's, and the walk window shows
+  only this driver's keys, but coordinate simulator use before the owner's own pass.
+
+
 ## Stabilization pass, October 17, 2026 (latest)
 
 **Where.** Worktree `/Users/alexvintera/calm-frames-claude-tv-2026-10-16`, branch
