@@ -2666,3 +2666,8 @@ automatically or alter protection. Remove the ended video's presentation-only
 delay and key cancellation, retaining the existing teardown fallback. Cost:
 one read-only timer during active playback; native appearance remains for
 the owner. See FINISH_PASS_HANDOFF.md.
+
+
+## October 17, 2026: Explain opaque covers and balance Home Watch
+
+The owner supplied images of a black scheduled cover and an oversized Watch pill. Keep exact protection and replace only the no-still scheduled cover presentation with a static opaque slate explanation. Give Home Watch the same target geometry as Details and preserve color/focus priority. Numeric source checks distinguish an encoded near-black opening from runtime covers. No media/trust change. 116 focused tests, TypeScript and independent source review passed. Cost: local development and one consolidated native build/install, no external services. Evidence: results/black-gap-2026-10-17/.

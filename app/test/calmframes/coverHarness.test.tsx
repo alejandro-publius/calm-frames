@@ -11,7 +11,7 @@
  */
 import { act, render, screen } from '@testing-library/react-native';
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
 import {
@@ -29,6 +29,29 @@ describe('CoverLayer', () => {
     render(<CoverLayer visible={true} />);
     expect(screen.getByTestId('calm-frames-cover')).toBeTruthy();
     expect(screen.queryByTestId('calm-frames-cover-top')).toBeNull();
+  });
+
+  it('gives an opaque scheduled cover a static explanation without exposing video', () => {
+    const view = render(<CoverLayer visible calmFallback />);
+    expect(StyleSheet.flatten(screen.getByTestId('calm-frames-cover').props.style)).toMatchObject({
+      opacity: 1, backgroundColor: '#22303B', left: 0, top: 0, right: 0, bottom: 0, zIndex: 1,
+    });
+    expect(screen.getByText('This scene is covered')).toBeTruthy();
+    expect(screen.getByTestId('calm-frames-cover').props.pointerEvents).toBe('none');
+    view.rerender(<CoverLayer visible={false} calmFallback />);
+    expect(screen.queryByTestId('calm-frames-cover')).toBeNull();
+  });
+
+  it('keeps signed stills, dim mode and measurement patches outside the fallback', () => {
+    const view = render(<CoverLayer visible calmFallback imageUri="verified-fixture" />);
+    expect(screen.getByTestId('calm-frames-cover-still')).toBeTruthy();
+    expect(screen.queryByTestId('calm-frames-cover-fallback')).toBeNull();
+    view.rerender(<CoverLayer visible calmFallback mode="dim" dimOpacity={0.1} />);
+    expect(StyleSheet.flatten(screen.getByTestId('calm-frames-cover').props.style).opacity).toBe(0.9);
+    expect(screen.queryByTestId('calm-frames-cover-fallback')).toBeNull();
+    view.rerender(<CoverLayer visible calmFallback referencePatch={{ x: 0, y: 0, width: 10, height: 10 }} screenWidth={1920} screenHeight={1080} />);
+    expect(screen.queryByTestId('calm-frames-cover-fallback')).toBeNull();
+    expect(screen.getByTestId('calm-frames-cover-top')).toBeTruthy();
   });
 
   it('leaves the reference patch visible', () => {

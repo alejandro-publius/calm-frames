@@ -14,8 +14,9 @@
  */
 
 import React from 'react';
-import { Image, StyleSheet, View, ImageSourcePropType } from 'react-native';
+import { Image, StyleSheet, Text, View, ImageSourcePropType } from 'react-native';
 import { trace } from './trace';
+import { CALM_COLORS, CALM_TEXT, scale } from './calmStyles';
 
 export interface ReferencePatch {
   /** Distance from the left edge of the screen, in pixels. */
@@ -28,6 +29,8 @@ export interface ReferencePatch {
 
 export interface CoverLayerProps {
   visible: boolean;
+  /** Static opaque presentation for a scheduled cover with no signed still. */
+  calmFallback?: boolean;
   /**
    * Opaque hides the picture completely. Dim is only ever allowed for general
    * (non-red) segments at 90% or darker, and the pipeline's verify step has to
@@ -51,6 +54,7 @@ export const COVER_Z_INDEX = 1;
 
 const CoverLayer = ({
   visible,
+  calmFallback = false,
   mode = 'opaque',
   dimOpacity = 0.9,
   imageUri,
@@ -65,6 +69,7 @@ const CoverLayer = ({
   }
 
   const opacity = mode === 'dim' ? Math.max(0.9, dimOpacity) : 1;
+  const showFallback = calmFallback && mode === 'opaque' && !imageUri && !referencePatch;
   const coverOpacity = imageUri ? 1 : opacity;
 
   if (
@@ -77,7 +82,11 @@ const CoverLayer = ({
         testID={testID}
         accessibilityElementsHidden
         importantForAccessibility="no-hide-descendants"
-        style={[styles.fill, { opacity: coverOpacity }]}>
+        style={[styles.fill, showFallback ? styles.calmFill : null, { opacity: coverOpacity }]} pointerEvents="none">
+        {showFallback ? <View testID={`${testID}-fallback`} style={styles.message}>
+          <Text style={styles.messageTitle}>This scene is covered</Text>
+          <Text style={styles.messageDetail}>You can wait or choose Skip.</Text>
+        </View> : null}
         {imageUri && !referencePatch ? (
           <SceneStill
             key={imageUri}
@@ -191,6 +200,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
     zIndex: COVER_Z_INDEX,
   },
+  calmFill: { backgroundColor: CALM_COLORS.SURFACE },
+  // Above the caption band and separate from the bottom-left Skip control.
+  message: { position: 'absolute', top: scale(360), left: scale(96), right: scale(96), alignItems: 'center' },
+  messageTitle: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT, textAlign: 'center' },
+  messageDetail: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'center', marginTop: scale(12) },
   piece: {
     position: 'absolute',
     backgroundColor: '#000000',

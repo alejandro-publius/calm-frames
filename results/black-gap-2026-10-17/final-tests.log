@@ -1,0 +1,16 @@
+PASS test/calmframes/coastalAppearance.test.tsx
+PASS test/calmframes/bufferingOpening.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:605:15)
+
+PASS test/calmframes/controlSurface.test.tsx
+
+Test Suites: 3 passed, 3 total
+Tests:       16 passed, 16 total
+Snapshots:   0 total
+Time:        1.03 s
+Ran all test suites matching /test\/calmframes\/coastalAppearance.test.tsx|test\/calmframes\/controlSurface.test.tsx|test\/calmframes\/bufferingOpening.test.tsx/i.

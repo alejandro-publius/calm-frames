@@ -38,6 +38,8 @@ export interface CalmButtonProps {
   label: string;
   playIcon?: boolean;
   primary?: boolean;
+  /** Primary emphasis with the same target geometry as adjacent quiet actions. */
+  balanced?: boolean;
   /** Quieter navigation chrome; focus keeps the same visible ring and underline. */
   quiet?: boolean;
   /** Text-only at rest; retains a full target and the standard visible focus treatment. */
@@ -61,6 +63,7 @@ const CalmButton = ({
   label,
   playIcon = false,
   primary = false,
+  balanced = false,
   quiet = false,
   tertiary = false,
   compact = false,
@@ -104,7 +107,7 @@ const CalmButton = ({
         styles.button,
         quiet && !primary ? styles.quiet : null,
         tertiary && !primary ? styles.tertiary : null,
-        primary && !disabled ? styles.primary : null,
+        primary && !disabled ? (balanced ? styles.balancedPrimary : styles.primary) : null,
         disabled ? styles.buttonDisabled : null,
         focused && !disabled ? (primary ? styles.primaryFocused : styles.buttonFocused) : null,
       ]}>
@@ -157,6 +160,7 @@ const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = 
   compactLabel: { ...CALM_TEXT.supporting },
   focusedLabel: { textDecorationLine: 'underline' },
   primary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, ...(coastal ? { borderRadius: scale(64), minWidth: scale(280), paddingHorizontal: scale(48), minHeight: scale(108) } : {}) },
+  balancedPrimary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, paddingVertical: scale(CALM_SPACE.TIGHT), paddingHorizontal: scale(CALM_SPACE.ROW) },
   primaryFocused: { backgroundColor: colors.PRIMARY, borderColor: COASTAL_PRIMARY_FOCUS },
   focusedPrimaryLabel: { color: colors.INK },
   primaryLabel: { color: coastal ? colors.BACKGROUND : colors.INK },

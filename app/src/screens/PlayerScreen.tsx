@@ -308,6 +308,9 @@ const PlayerScreen = ({
   card = playbackCard(card, { paused, covered, buffering: showBuffering, slow: slowPlayback,
     ended: isVideoEnded, practice: benignDemo });
   usePlaybackCardAnnouncement(showOpeningShell ? NO_CARD : card, paused);
+  const calmCoverFallback = guarding && guard.status === 'verified' && card.kind === 'covering';
+  const coverPresentation = !covered ? 'clear' : guard.coverImageUri ? 'signed-still' : calmCoverFallback ? 'message' : 'plain';
+  useEffect(() => { trace('playback', `cover-surface ${coverPresentation}`); }, [coverPresentation]);
   // Debug-build breadcrumbs (CALM_TRACE, see trace.ts) so one native run can
   // separate the phases from the device log alone: the first picture, each
   // cover and each wait with its media time, then Back and teardown. They
@@ -701,6 +704,7 @@ const PlayerScreen = ({
             */}
             <CoverLayer
               visible={covered}
+              calmFallback={calmCoverFallback}
               imageUri={access === 'guarded' ? guard.coverImageUri : undefined}
               imageSource={access === 'guarded' ? bundledStillFor(guard.coverImageUri) : undefined}
               referencePatch={route.params.referencePatch}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import CalmButton from '../../src/calmframes/CalmButton';
 import { CalmControlAppearance, COASTAL_MATERIAL } from '../../src/calmframes/CalmControlSurface';
 import { COASTAL_COLORS, COASTAL_PRIMARY_FOCUS } from '../../src/calmframes/calmStyles';
@@ -39,4 +39,26 @@ test('the artwork is decorative, uses the clean asset and has no baked-in UI', (
   expect(image.props.source.testUri).toContain('harbor-cinematic.png');
   expect(image.props.accessible).toBeUndefined();
   expect(view.queryAllByRole('button')).toHaveLength(0);
+});
+
+
+test('balanced Home Watch matches Details geometry and never grows on focus or press', () => {
+  const view = render(<CalmControlAppearance.Provider value>
+    <View><CalmButton primary balanced playIcon label="Watch" testID="watch" />
+    <CalmButton quiet label="Details" testID="details" /></View>
+  </CalmControlAppearance.Provider>);
+  const watch = view.getByTestId('watch');
+  const details = view.getByTestId('details');
+  const before = StyleSheet.flatten(watch.props.style);
+  const other = StyleSheet.flatten(details.props.style);
+  for (const key of ['minHeight', 'paddingHorizontal', 'paddingVertical', 'borderRadius', 'borderWidth']) expect(before[key]).toBe(other[key]);
+  expect(before.minHeight).toBe(88);
+  expect(before.minWidth).toBeUndefined();
+  expect(before.borderRadius).toBe(18);
+  expect(StyleSheet.flatten(view.getByTestId('watch-label').props.style).fontSize).toBe(36);
+  const geometry = (style: any) => ['minHeight', 'minWidth', 'paddingHorizontal', 'paddingVertical', 'borderRadius', 'borderWidth', 'transform'].map(k => style[k]);
+  fireEvent(watch, 'focus');
+  fireEvent(watch, 'pressIn', {});
+  expect(geometry(StyleSheet.flatten(watch.props.style))).toEqual(geometry(before));
+  expect(StyleSheet.flatten(watch.props.style).borderColor).toBe(COASTAL_PRIMARY_FOCUS);
 });

@@ -1,5 +1,10 @@
 # Status
 
+October 17 cover/button fix: opaque scheduled-cover explanation and proportional
+Home Watch are source-tested and independently reviewed. Native build verification
+is in progress. The separate first five seconds of near-black source content are
+unchanged. See results/black-gap-2026-10-17/.
+
 October 17 finish pass complete: source ed75fca is installed and package-verified.
 217 focused tests, TypeScript, relevant lint and independent review passed. Native
 Home/Details/Help/Parents Back routes, pause/resume, guarded Skip and natural end
