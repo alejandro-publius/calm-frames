@@ -2656,3 +2656,13 @@ until actual cover, then Scene hidden; add only Paused or Loading when true.
 Keep full accessibility guidance, one focus outline and the existing large
 checking/refusal states. Cost: less visible explanatory copy; the owner must
 review native readability. No timing, media, trust or seek-path change.
+
+## October 17: report slow progress without guessing or controlling the player
+
+Native traces demonstrate slow media clocks without waiting events. Observe
+progress once a second and label sustained low progress, while resetting on
+pause, seek, rate changes and host scheduling gaps. Do not infer a cause, seek
+automatically or alter protection. Remove the ended video's presentation-only
+delay and key cancellation, retaining the existing teardown fallback. Cost:
+one read-only timer during active playback; native appearance remains for
+the owner. See FINISH_PASS_HANDOFF.md.

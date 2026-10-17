@@ -46,6 +46,7 @@ export function playbackCard(card: Card, state: {
   paused: boolean;
   covered: boolean;
   buffering: boolean;
+  slow?: boolean;
   ended: boolean;
   practice?: boolean;
 }): Card {
@@ -54,10 +55,11 @@ export function playbackCard(card: Card, state: {
   const title = state.practice
     ? (state.covered ? 'Practice cover' : 'Practice ahead')
     : (state.covered ? 'Scene hidden' : 'Scene ahead');
-  const detail = state.paused ? 'Paused' : state.buffering ? 'Loading' : '';
+  const detail = state.paused ? 'Paused' : state.buffering ? 'Loading' : state.slow ? 'Playback slow' : '';
   const guidance = state.paused
     ? 'Paused. Press Play to continue, or Skip to jump past this scene.'
     : state.buffering ? 'Waiting for playback. You can skip past this scene.'
+    : state.slow ? 'Playback is progressing slowly. You can wait or go back.'
     : state.practice ? 'This is a planned practice scene. You can skip ahead.'
     : 'You can skip past this scene.';
   return { ...card, title, detail, announcement: `${title}. ${guidance}`,

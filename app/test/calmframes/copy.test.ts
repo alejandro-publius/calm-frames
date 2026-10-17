@@ -315,9 +315,9 @@ describe('what the app says it does', () => {
   });
 
   it('says plainly which videos it works with, and names what it does not cover', () => {
-    expect(PURPOSE_LINE).toMatch(/^Watch prepared videos/);
+    expect(PURPOSE_LINE).toMatch(/^Flashing scenes are covered/);
     expect(ONLY_IN_CALM_FRAMES_LINE).toBe(
-      'It works only with the prepared videos in Calm Frames, not with Netflix, Prime Video, other apps or live TV.',
+      'Calm Frames works only with videos in this app, not other apps or live TV.',
     );
   });
 

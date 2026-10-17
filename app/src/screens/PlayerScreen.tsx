@@ -4,13 +4,11 @@ import {
 } from '@amazon-devices/kepler-content-personalization';
 import {
   BackHandler,
-  HWEvent,
   IComponentInstance,
   IKeplerAppStateManager,
   KeplerAppStateChangeData,
   KeplerAppStateEvent,
   useKeplerAppStateManager,
-  useTVEventHandler,
 } from '@amazon-devices/react-native-kepler';
 import {
   KeplerCaptionsView,
@@ -70,6 +68,7 @@ import { useChimeCue } from '../calmframes/useChimeCue';
 import { useCoverHarness } from '../calmframes/useCoverHarness';
 import { scale } from '../calmframes/calmStyles';
 import { playbackCard, usePlaybackCardAnnouncement, usePlaybackPaused } from '../calmframes/usePlaybackPresentation';
+import { usePlaybackProgress } from '../calmframes/usePlaybackProgress';
 import { useFlashGuard } from '../calmframes/useFlashGuard';
 import BufferingWindow from '../components/BufferingWindow';
 import {
@@ -78,7 +77,7 @@ import {
   Screens,
 } from '../components/navigation/types';
 import { isContentPersonalizationEnabled } from '../config/AppConfig';
-import { CAPTION_DISABLE_ID, EVENT_KEY_DOWN } from '../constants';
+import { CAPTION_DISABLE_ID } from '../constants';
 import { getMockPlaybackEventForVideo } from '../personalization/mock/ContentPersonalizationMocks';
 import { getBifFrameImageSource } from '../services/bif/bifService';
 import { FrameImageSource } from '../services/bif/FrameImageSource';
@@ -142,7 +141,6 @@ const PlayerScreen = ({
   const [isVideoError, setVideoError] = React.useState<boolean>(false);
   const [videoPlayElapsedTimeM, setVideoPlayElapsedTimeM] =
     React.useState<number>(0);
-  const timer = useRef<null | ReturnType<typeof setTimeout> | number>(null);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const leaving = useRef(false);
 
@@ -150,9 +148,8 @@ const PlayerScreen = ({
   const player = useRef<ShakaPlayer | null>(null);
   const bifFrameImagesRef = useRef<FrameImageSource | null>(null);
 
-  const TIME_TO_GO_BACK_IF_VIDEO_ENDS = 2300;
   const BACK_NAVIGATION_DELAY = 700;
-  const showVideoPlayerUI = !isVideoError;
+  const showVideoPlayerUI = !isVideoError && !isVideoEnded && !returningHome;
   const paused = usePlaybackPaused(videoRef, isVideoInitialized);
 
   React.useEffect(() => {
@@ -305,7 +302,10 @@ const PlayerScreen = ({
     covered = true;
     card = NO_CARD;
   }
-  card = playbackCard(card, { paused, covered, buffering: showBuffering,
+  const slowPlayback = usePlaybackProgress(videoRef, isVideoInitialized && !showOpeningShell &&
+    !paused && !showBuffering && !isVideoEnded && !isVideoError && !returningHome &&
+    (!guarding || guard.status === 'verified'));
+  card = playbackCard(card, { paused, covered, buffering: showBuffering, slow: slowPlayback,
     ended: isVideoEnded, practice: benignDemo });
   usePlaybackCardAnnouncement(showOpeningShell ? NO_CARD : card, paused);
   // Debug-build breadcrumbs (CALM_TRACE, see trace.ts) so one native run can
@@ -323,6 +323,9 @@ const PlayerScreen = ({
   useEffect(() => {
     if (isVideoInitialized) trace('playback', `waiting ${showBuffering ? 'on' : 'off'} media=${Math.round(traceMediaMs.current)}`);
   }, [showBuffering, isVideoInitialized]);
+  useEffect(() => {
+    trace('playback', `slow ${slowPlayback ? 'on' : 'off'} media=${Math.round(traceMediaMs.current)}`);
+  }, [slowPlayback]);
   // The app records its own layer, because Vega gives it no way to read its
   // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
   useUiCapture(
@@ -365,30 +368,6 @@ const PlayerScreen = ({
     mediaControlHandler,
   );
 
-  useTVEventHandler((evt: HWEvent) => {
-    if (!Platform.isTV) {
-      return;
-    }
-    if (evt && evt.eventKeyAction === EVENT_KEY_DOWN) {
-      if (isVideoEnded) {
-        clearTimeout(Number(timer.current));
-        setVideoEnded(false);
-      }
-    }
-  });
-
-  useEffect(() => {
-    if (!isVideoEnded) {
-      return;
-    }
-    timer.current = setTimeout(() => {
-      leavePlayer();
-    }, TIME_TO_GO_BACK_IF_VIDEO_ENDS);
-
-    return () => clearTimeout(Number(timer.current));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVideoEnded]);
-
   useEffect(() => {
     setupEventListeners();
     if (rejectedPreparedRoute) {
@@ -410,7 +389,6 @@ const PlayerScreen = ({
     );
     return () => {
       changeSubscription.remove();
-      clearTimeout(Number(timer.current));
       removeEventListeners();
       // Restore focus when leaving player screen
       if (route.params.focusId) {
@@ -470,7 +448,6 @@ const PlayerScreen = ({
         videoRef?.current?.clearCaptionViewHandle('');
         videoHandler.destroyVideoElements();
         videoRef.current = null;
-        clearTimeout(Number(timer.current));
       }
 
       if (exitTimer.current !== null) {
@@ -502,7 +479,6 @@ const PlayerScreen = ({
     const destroyed = videoHandler.destroyVideoElements();
     trace('playback', destroyed ? 'teardown ok' : 'teardown fallback');
     videoRef.current = null;
-    clearTimeout(Number(timer.current));
 
     // Successful synchronous teardown has already finished. Retain the old
     // fallback delay when the native player did not confirm completion.
@@ -514,6 +490,15 @@ const PlayerScreen = ({
     return true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // An ended video has nothing left to present. Use the same idempotent
+  // teardown as Back; remote keys cannot cancel the return or revive stale UI.
+  useEffect(() => {
+    if (isVideoEnded) {
+      trace('playback', 'ended');
+      leavePlayer();
+    }
+  }, [isVideoEnded, leavePlayer]);
 
   const navigateBack = useCallback(() => {
     if (captionStatus.current) {
@@ -738,9 +723,9 @@ const PlayerScreen = ({
         {/* Opening, return and errors own their feedback. Unmounting cancels
             pending loading announcements; ordinary stalls keep the status mounted
             long enough to avoid blinking, without dimming the verified picture. */}
-        {!showOpeningShell && !isVideoError && !(guarding && guard.status === 'blocked') && (
-          <BufferingWindow presentation="overlay" visible={showBuffering}
-            statusText={['checking', 'countdown', 'covering'].includes(card.kind) ? null : undefined} />
+        {!showOpeningShell && !isVideoError && !isVideoEnded && !returningHome && !paused && !(guarding && guard.status === 'blocked') && (
+          <BufferingWindow key={slowPlayback ? 'slow' : 'waiting'} presentation="overlay" visible={showBuffering || slowPlayback}
+            statusText={['checking', 'countdown', 'covering'].includes(card.kind) ? null : slowPlayback ? 'Playback slow' : undefined} />
         )}
         {/*
           The card sits above the cover, so it stays readable while the picture

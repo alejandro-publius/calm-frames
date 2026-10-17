@@ -66,10 +66,11 @@ describe('initial loading, on a screen with nothing to show yet', () => {
     advance(1);
     const plate = status(view)!;
     expect(words(view)).toEqual([LOADING_TEXT]);
-    expect(plate.props.accessibilityLiveRegion).toBe('polite');
+    expect(plate.props.accessibilityLiveRegion).toBe('none');
+    expect(plate.props['aria-live']).toBe('off');
     expect(plate.props.accessibilityLabel).toBe(LOADING_TEXT);
     expect(spoken).toHaveBeenCalledTimes(1);
-    expect(spoken).toHaveBeenCalledWith(LOADING_TEXT);
+    expect(spoken).toHaveBeenCalledWith(LOADING_TEXT, { force: true, queue: false });
     const container = StyleSheet.flatten(view.getByTestId('buffering-view').props.style);
     expect(container.alignItems).toBe('center');
     expect(container.justifyContent).toBe('center');
@@ -160,6 +161,19 @@ describe('overlay presentation, for a player that keeps the window mounted', () 
     view.rerender(overlay(false));
     advance(0);
     expect(status(view)).toBeNull();
+  });
+
+  it('speaks once for each separate episode without a second live-region path', () => {
+    const speak = jest.spyOn(AccessibilityInfo, 'announceForAccessibilityWithOptions').mockClear();
+    const view = render(overlay(true));
+    advance(REVEAL_DELAY_MS);
+    expect(status(view)!.props.accessibilityLiveRegion).toBe('none');
+    advance(2000);
+    expect(speak).toHaveBeenCalledTimes(1);
+    view.rerender(overlay(false)); advance(MIN_VISIBLE_MS);
+    view.rerender(overlay(true)); advance(REVEAL_DELAY_MS);
+    expect(speak).toHaveBeenCalledTimes(2);
+    expect(speak).toHaveBeenLastCalledWith(LOADING_TEXT, { queue: false });
   });
 
   it('when playback recovers, it leaves no trace', () => {

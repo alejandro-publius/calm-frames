@@ -1157,3 +1157,13 @@ in the lower-left safe corner, short truthful labels and one focus outline.
 Source checks and native control logs pass after the authorized single install.
 The app stays paused on the compact control for owner visual acceptance.
 The screenshot's teal linked orbs remain unidentified and were not changed.
+
+### October 17: playback state feedback and end return
+
+Observed native clocks could crawl without a new waiting event. Source also
+kept loading beside Pause and allowed any key to cancel the 2.3-second end
+return. The finish pass adds read-only slow-progress feedback, gives Pause
+sole status ownership, clears MP4 waiting only on progress, and routes end
+directly through existing teardown. Separate waiting episodes now each get
+one accessibility announcement. 217 focused tests pass; native receipt and
+owner appearance/audio review remain separate. No slowdown cure is claimed.

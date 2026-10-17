@@ -22,7 +22,7 @@ test('verified initial opening suppresses hidden Loading, then a real playback s
   advance(REVEAL_DELAY_MS * 2);
   expect(view.getByTestId('player-home-opening')).toBeTruthy();
   expect(view.queryByTestId('buffering-status')).toBeNull();
-  expect(spoken).not.toHaveBeenCalledWith('Loading');
+  expect(spoken).not.toHaveBeenCalledWith('Loading', { force: true, queue: false });
   mockMedia.getVideoPlaybackQuality = () => ({ totalVideoFrames: 2, droppedVideoFrames: 0 });
   advance(100);
   expect(view.queryByTestId('player-home-opening')).toBeNull();
@@ -31,7 +31,7 @@ test('verified initial opening suppresses hidden Loading, then a real playback s
   advance(1);
   expect(view.getByTestId('buffering-status')).toBeTruthy();
   expect(StyleSheet.flatten(view.getByTestId('buffering-view').props.style).backgroundColor).toBeUndefined();
-  expect(spoken).toHaveBeenCalledWith('Loading');
+  expect(spoken).toHaveBeenCalledWith('Loading', { force: true, queue: false });
   act(() => mockBuffering(false));
   expect(view.getByTestId('buffering-status')).toBeTruthy();
   advance(MIN_VISIBLE_MS);
@@ -56,7 +56,7 @@ test('checking card owns feedback without a duplicate announcement', () => {
   advance(REVEAL_DELAY_MS * 2);
   expect(view.getByTestId('calm-card')).toBeTruthy();
   expect(view.queryByTestId('buffering-status')).toBeNull();
-  expect(spoken).not.toHaveBeenCalledWith('Loading');
+  expect(spoken).not.toHaveBeenCalledWith('Loading', { force: true, queue: false });
 });
 
 test('error immediately removes a just-shown status and cancels its timer', () => {
@@ -79,7 +79,7 @@ test('returning shell cancels a pending status before it can announce', () => {
   advance(REVEAL_DELAY_MS * 2);
   expect(view.goBack).toHaveBeenCalledTimes(1);
   expect(view.queryByTestId('buffering-status')).toBeNull();
-  expect(spoken).not.toHaveBeenCalledWith('Loading');
+  expect(spoken).not.toHaveBeenCalledWith('Loading', { force: true, queue: false });
 });
 
 test('Skip stays usable while its card owns the waiting status', () => {

@@ -54,7 +54,7 @@ describe('one featured video', () => {
     // The fixture's duration rounds the way describeHiddenTotal rounds it; the words are what matter.
     expect(screen.getByTestId('kid-home-video-meta').props.children).toBe(`${Math.round((acadia.title.durationMs ?? 0) / 1000)} seconds`);
     expect(screen.getByTestId('kid-home-benefit').props.children).toBe(HOME_BENEFIT_LINE);
-    expect(HOME_BENEFIT_LINE).toBe('Watch prepared videos with flashing scenes covered.');
+    expect(HOME_BENEFIT_LINE).toBe('Watch with flashing scenes covered.');
     expect(screen.queryByText('Choose a video')).toBeNull();
     expect(posters()).toHaveLength(0);
     expect(screen.getByTestId('kid-home-watch')).toBeTruthy();

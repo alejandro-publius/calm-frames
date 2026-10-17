@@ -87,6 +87,26 @@ describe('VideoHandler', () => {
     expect(addTextTrack).toHaveBeenCalledWith('subtitles', 'English', 'en', expected, 'text/vtt');
   });
 
+  it('does not dismiss waiting on a repeated MP4 clock value or a seek jump', () => {
+    const { mockVideoRef, videoHandler, mockSetShowBuffering } = createVideoHandler();
+    const media = { currentTime: 6, paused: false, seeking: false };
+    mockVideoRef.current = media as unknown as VideoPlayer;
+    videoHandler.onWaiting();
+    mockSetShowBuffering.mockClear();
+    videoHandler.onTimeUpdate();
+    expect(mockSetShowBuffering).not.toHaveBeenCalled();
+    media.seeking = true; media.currentTime = 15;
+    videoHandler.onTimeUpdate();
+    expect(mockSetShowBuffering).not.toHaveBeenCalled();
+    media.seeking = false; media.currentTime = 15.1;
+    videoHandler.onTimeUpdate();
+    expect(mockSetShowBuffering).toHaveBeenCalledWith(false);
+    videoHandler.onWaiting(); mockSetShowBuffering.mockClear();
+    media.paused = true; media.currentTime = 15.2;
+    videoHandler.onTimeUpdate();
+    expect(mockSetShowBuffering).not.toHaveBeenCalled();
+  });
+
   describe('preBufferVideo', () => {
     it('opens a packaged video using its native path without changing catalog identity', () => {
       const { videoHandler } = createVideoHandler();

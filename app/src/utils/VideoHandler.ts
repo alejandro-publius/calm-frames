@@ -37,6 +37,8 @@ type MediaPlayerDeInitStatus = 'success' | 'timedout' | 'invalid';
  * using the Shaka Player for adaptive content.
  */
 export class VideoHandler {
+  private lastProgressSeconds: number | undefined;
+
   // Core video player references
   /** Reference to the main video player instance */
   public videoRef: React.MutableRefObject<VideoPlayer | null>;
@@ -452,8 +454,14 @@ export class VideoHandler {
 
     // For static media (MP4), use timeupdate to hide buffering
     // since seeked/playing events may not fire reliably
-    if (this.isStaticMediaContent()) {
-      this.setShowBuffering(false);
+    const media = this.videoRef.current;
+    const position = media?.currentTime;
+    if (position !== undefined && Number.isFinite(position)) {
+      const advanced = position > (this.lastProgressSeconds ?? 0);
+      this.lastProgressSeconds = position;
+      if (this.isStaticMediaContent() && advanced && !media?.paused && !media?.seeking) {
+        this.setShowBuffering(false);
+      }
     }
   };
 
@@ -470,6 +478,7 @@ export class VideoHandler {
    * Fired when playback stops due to lack of data
    */
   onWaiting = () => {
+    this.lastProgressSeconds = this.videoRef.current?.currentTime;
     this.setShowBuffering(true);
   };
 
@@ -478,6 +487,7 @@ export class VideoHandler {
    * Fired when user starts seeking to a new position
    */
   onSeeking = () => {
+    this.lastProgressSeconds = this.videoRef.current?.currentTime;
     this.setShowBuffering(true);
   };
 

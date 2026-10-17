@@ -160,7 +160,9 @@ const BufferingWindow = React.memo(
 
     useEffect(() => {
       if (showStatus && status) {
-        announceForAccessibility(status);
+        // One explicit announcement per revealed episode, including a later
+        // episode with the same words. The live region is disabled below.
+        announceForAccessibility(status, { force: true, queue: false });
       }
     }, [showStatus, status]);
 
@@ -174,9 +176,9 @@ const BufferingWindow = React.memo(
         style={styles.plate}
         accessible
         accessibilityRole="text"
-        accessibilityLiveRegion="polite"
+        accessibilityLiveRegion="none"
         accessibilityLabel={status ?? undefined}
-        aria-live="polite">
+        aria-live="off">
         <Text style={styles.statusText}>{status}</Text>
       </View>
     ) : null;

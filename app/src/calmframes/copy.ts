@@ -488,7 +488,7 @@ export const EXPLAINER_WORDS_PER_MINUTE = 150;
 
 export const EXPLAINER_TITLE = 'How Calm Frames works';
 export const EXPLAINER_LINES: string[] = [
-  'Calm Frames checks every video for flashing before it plays.',
+  'Videos are checked for flashing before they are added.',
   'Flashing scenes are covered while the sound continues. Captions continue when a video has them.',
   'Some flashing may go undetected.',
   SAFETY_NOTE,
@@ -505,9 +505,9 @@ export const EXPLAINER_LINES: string[] = [
  * has none, the Harbor demo has one track.
  */
 export const PURPOSE_LINE =
-  'Watch prepared videos with flashing scenes covered while the sound continues.';
+  'Flashing scenes are covered while the sound continues.';
 /** Home's one line under the title: the benefit, without a promise about tracks. */
-export const HOME_BENEFIT_LINE = 'Watch prepared videos with flashing scenes covered.';
+export const HOME_BENEFIT_LINE = 'Watch with flashing scenes covered.';
 
 /**
  * A running time as a person would say it: "37 seconds", "2 minutes 5 seconds".
@@ -523,7 +523,7 @@ export const CAPTIONS_CONTINUE_LINE =
   'When a video has captions, the captions continue too.';
 export const CHECKED_BEFORE_ADDED_LINE = 'Every video is checked before it is added.';
 export const ONLY_IN_CALM_FRAMES_LINE =
-  'It works only with the prepared videos in Calm Frames, not with Netflix, Prime Video, other apps or live TV.';
+  'Calm Frames works only with videos in this app, not other apps or live TV.';
 
 /**
  * The More info line about one title's own covers, built from what the
