@@ -305,7 +305,7 @@ const PlayerScreen = ({
     covered = true;
     card = NO_CARD;
   }
-  card = playbackCard(card, { paused, buffering: showBuffering,
+  card = playbackCard(card, { paused, covered, buffering: showBuffering,
     ended: isVideoEnded, practice: benignDemo });
   usePlaybackCardAnnouncement(showOpeningShell ? NO_CARD : card, paused);
   // Debug-build breadcrumbs (CALM_TRACE, see trace.ts) so one native run can
@@ -723,7 +723,7 @@ const PlayerScreen = ({
               screenHeight={deviceHeight}
             />
             {/* Native captions need a retained RN host to stack above the image cover. */}
-            <View style={styles.captions} pointerEvents="none" collapsable={false}>
+            <View testID="calm-captions-layer" style={styles.captions} pointerEvents="none" collapsable={false}>
               <KeplerCaptionsView
                 onCaptionViewCreated={onCaptionViewCreated}
                 onCaptionViewDestroyed={onCaptionViewDestroyed}
@@ -811,8 +811,8 @@ export default React.memo(PlayerScreen, arePlayerPropsEqual);
 export const styles = StyleSheet.create({
   // Where captions are drawn: the renderer stacks cue lines upward from this
   // view's bottom edge, so the bottom of the picture is theirs. The card and
-  // the practice plate keep to the top (PLAYER_LAYOUT in calmStyles.ts), and
-  // tenFoot.test.tsx fails if either reaches down into the captions.
+  // the practice plate keep clear of this band. The compact scene control
+  // sits below it; tenFoot.test.tsx checks both layouts against captions.
   captions: {
     width: '100%',
     height: '100%',

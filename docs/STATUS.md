@@ -1,5 +1,11 @@
 # Status
 
+October 17 compact-control checkpoint: 125 focused tests, TypeScript and relevant
+lint pass for the smaller lower-left scene status and Skip group. Native review
+is pending the authorized single build/install. Earlier original-media native
+retests recovered before this UI change; no slowdown fix or cause is claimed.
+See [the evidence](../results/compact-scene-control-2026-10-17/README.md).
+
 October 17 isolation follow-up: new app process and clean simulator restart both
 reproduce low native playback progress. Old CoreAudio errors clear on restart,
 but playback does not recover. No code or safety change. See

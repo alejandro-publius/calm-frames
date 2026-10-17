@@ -1148,3 +1148,11 @@ queue reports buffering; JavaScript does not emit a new waiting event in run 1.
 Skip reaches its guarded target after about 7.26 s. Severity: blocks smooth-playback
 acceptance. Back remains usable. No source workaround applied without a proven
 cause. Evidence: results/remaining-controls-2026-10-17/.
+
+### October 17: centered scene message dominates playback
+
+Owner task: watch the prepared film. Actual: the large centered Flashing scenes
+and Skip panel interrupts the composition. Resolution: a fixed compact group
+in the lower-left safe corner, short truthful labels and one focus outline.
+Source checks pass; native visual acceptance follows the authorized install.
+The screenshot's teal linked orbs remain unidentified and were not changed.

@@ -244,12 +244,12 @@ describe('the player hands OK to Skip only while Skip is on screen', () => {
     await settle();
 
     await playAt(1);
-    expect(cardKind()).toBe('Flashing scenes');
+    expect(cardKind()).toBe('Scene ahead');
     expect(screen.getByTestId('calm-card-skip')).toBeTruthy();
     expect(chromeProps().skipOwnsSelect).toBe(true);
 
     await playAt(5);
-    expect(cardKind()).toBe('Flashing scenes');
+    expect(cardKind()).toBe('Scene hidden');
     expect(screen.getByTestId('calm-card-skip')).toBeTruthy();
     expect(chromeProps().skipOwnsSelect).toBe(true);
 
@@ -260,7 +260,7 @@ describe('the player hands OK to Skip only while Skip is on screen', () => {
 
     // The next countdown takes OK again.
     await playAt(9);
-    expect(cardKind()).toBe('Flashing scenes');
+    expect(cardKind()).toBe('Scene ahead');
     expect(chromeProps().skipOwnsSelect).toBe(true);
   });
 

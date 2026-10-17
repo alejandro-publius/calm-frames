@@ -6,7 +6,7 @@
  * Overlap needs positions as well, and the test renderer does no layout: it
  * hands back styles, not rectangles. So this is a small ruler for the one kind
  * of layout the player's own words use: blocks placed absolutely on the
- * screen, holding columns of text with padding, borders, margins and a
+ * screen, holding columns or fixed-width rows with padding, borders, margins and a
  * maximum width.
  *
  * It errs on the side of too big. Text is wrapped as if every character were
@@ -14,7 +14,7 @@
  * averages nearer 0.5, and a Text that sets no line height is given 1.35 times
  * its size. A box this ruler places clear of another is clear on the screen
  * as long as the text keeps inside those bounds. Anything it does not
- * understand, a row, a percentage, a block placed inside another, is an error
+ * understand, a flexible row, a percentage, a block placed inside another, is an error
  * rather than a guess.
  *
  * Nothing here is imported by a screen. It exists so tests can measure them.
@@ -203,8 +203,11 @@ function measure(
     contentHeight = lines * lineHeight;
   } else {
     const direction = style.flexDirection ?? 'column';
-    if (direction !== 'column') {
-      throw new Error(`the ruler lays out columns only, and found ${String(direction)}`);
+    if (direction !== 'column' && direction !== 'row') {
+      throw new Error(`the ruler lays out columns and fixed-width rows, and found ${String(direction)}`);
+    }
+    if (direction === 'row' && style.flexWrap && style.flexWrap !== 'nowrap') {
+      throw new Error('the ruler does not measure wrapping rows');
     }
     for (const child of node.children ?? []) {
       if (!child || typeof child === 'string') {
@@ -215,6 +218,10 @@ function measure(
         throw new Error('a block placed inside another block is not something this ruler measures');
       }
       const margin = margins(childStyle);
+      if (direction === 'row' && (units(childStyle, 'width') === undefined ||
+          childStyle.flex || childStyle.flexGrow || childStyle.flexShrink)) {
+        throw new Error('the ruler requires fixed-width row children without flex sizing');
+      }
       // A block's own size comes from the natural widths of what it holds.
       // Stretching a child afterwards widens it to the block, not the block
       // to the screen, and text has already been wrapped at the width it may
@@ -226,9 +233,18 @@ function measure(
         metrics,
         units(style, 'fontSize') ?? inheritedFontSize,
       );
-      contentWidth = Math.max(contentWidth, size.width + margin.horizontal);
-      contentHeight += size.height + margin.vertical;
+      if (direction === 'row') {
+        contentWidth += size.width + margin.horizontal;
+        contentHeight = Math.max(contentHeight, size.height + margin.vertical);
+      } else {
+        contentWidth = Math.max(contentWidth, size.width + margin.horizontal);
+        contentHeight += size.height + margin.vertical;
+      }
     }
+  }
+
+  if (style.flexDirection === 'row' && contentWidth > inner) {
+    throw new Error('fixed-width row children overflow their available width');
   }
 
   const width =

@@ -44,21 +44,23 @@ export function pausedCard(card: Card, paused: boolean): Card {
 /** Consumer copy only. It never decides whether the picture is covered. */
 export function playbackCard(card: Card, state: {
   paused: boolean;
+  covered: boolean;
   buffering: boolean;
   ended: boolean;
   practice?: boolean;
 }): Card {
   if (state.ended || card.kind === 'after') return NO_CARD;
   if (card.kind !== 'countdown' && card.kind !== 'covering') return card;
-  const title = state.practice ? 'Practice cover' : 'Flashing scenes';
-  const detail = state.paused
+  const title = state.practice
+    ? (state.covered ? 'Practice cover' : 'Practice ahead')
+    : (state.covered ? 'Scene hidden' : 'Scene ahead');
+  const detail = state.paused ? 'Paused' : state.buffering ? 'Loading' : '';
+  const guidance = state.paused
     ? 'Paused. Press Play to continue, or Skip to jump past this scene.'
-    : state.buffering
-    ? 'Waiting for playback. You can skip past this scene.'
-    : state.practice
-    ? 'This demo hides the picture during planned scenes. You can skip ahead.'
-    : 'The picture is hidden during flashing. You can skip past this scene.';
-  return { ...card, title, detail, announcement: `${title}. ${detail}`,
+    : state.buffering ? 'Waiting for playback. You can skip past this scene.'
+    : state.practice ? 'This is a planned practice scene. You can skip ahead.'
+    : 'You can skip past this scene.';
+  return { ...card, title, detail, announcement: `${title}. ${guidance}`,
     skipToMs: card.skipToMs ?? (card.interval ? card.interval.endMs + SKIP_MARGIN_MS : undefined) };
 }
 

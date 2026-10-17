@@ -2648,3 +2648,11 @@ The simulator restart removed CoreAudio bad-device errors but did not fix progre
 Do not present those errors or prior app cleanup as the established cause. Preserve
 the controlled comparisons and leave protected timing unchanged. Cost: two short
 playback comparisons and one simulator restart; no package rebuild or install.
+
+## October 17: make the scheduled action secondary to the picture
+
+Use a compact fixed lower-left scene label and Skip group. Show Scene ahead
+until actual cover, then Scene hidden; add only Paused or Loading when true.
+Keep full accessibility guidance, one focus outline and the existing large
+checking/refusal states. Cost: less visible explanatory copy; the owner must
+review native readability. No timing, media, trust or seek-path change.

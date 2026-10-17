@@ -99,10 +99,25 @@ describe('placedBox', () => {
     expect(placedBox(tree, 'stack', SCREEN)?.bottom).toBe(30 + 12 + 30);
   });
 
+  it('adds fixed row widths and margins while using the tallest child', () => {
+    const tree = view(
+      { position: 'absolute', top: 10, left: 20, flexDirection: 'row', padding: 5 },
+      view({ width: 100, marginRight: 12 }, text('aaaa bbbb')),
+      view({ width: 80 }, text('cc')),
+    );
+    tree.props = { ...tree.props, testID: 'row' };
+    // The first child wraps to two 27-unit lines; the second stays on one.
+    expect(placedBox(tree, 'row', SCREEN)).toEqual({
+      left: 20, top: 10, right: 222, bottom: 74,
+    });
+    tree.props.style = { position: 'absolute', top: 10, left: 20, flexDirection: 'row', padding: 5, width: 200 };
+    expect(() => placedBox(tree, 'row', SCREEN)).toThrow(/overflow/);
+  });
+
   it('refuses what it cannot measure rather than guessing', () => {
     const row = view({ position: 'absolute', top: 0, left: 0, flexDirection: 'row' }, text('a'));
     row.props = { ...row.props, testID: 'row' };
-    expect(() => placedBox(row, 'row', SCREEN)).toThrow(/columns only/);
+    expect(() => placedBox(row, 'row', SCREEN)).toThrow(/fixed-width row children/);
 
     const percent = view({ position: 'absolute', top: '10%', left: 0 }, text('a'));
     percent.props = { ...percent.props, testID: 'percent' };

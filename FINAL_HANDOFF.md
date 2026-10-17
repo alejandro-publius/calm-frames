@@ -1,5 +1,14 @@
 # Final handoff: the integration candidate
 
+## Compact scene control, October 17, 2026
+
+The owner-requested compact lower-left scene status and Skip group passes 125
+focused tests, TypeScript and relevant lint. Labels follow actual cover, pause
+and loading state; the action retains one outline and a fixed position. Guard
+timing, media and signing are unchanged. Native build/install is the next
+checkpoint; see [the change and validation record](results/compact-scene-control-2026-10-17/README.md).
+
+
 ## Native slowdown isolation, October 17, 2026
 
 The prior control receipt is committed at b32c007. A new app process still slows,

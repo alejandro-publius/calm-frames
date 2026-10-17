@@ -87,7 +87,7 @@ test.each(['covering', 'countdown', 'none'] as const)('pause stays visible after
   expect(mockMedia.currentTime).toBe(kind === 'countdown' ? 3 : 6);
   act(() => { mockMedia.play(); });
   expect(view.queryByTestId('player-paused')).toBeNull();
-  if (kind !== 'none') expect(view.getByTestId('calm-card-detail').props.children).toBe('This demo hides the picture during planned scenes. You can skip ahead.');
+  if (kind !== 'none') expect(view.queryByTestId('calm-card-detail')).toBeNull();
   view.unmount();
   expect(mockMedia.listeners.pause.size).toBe(0);
   expect(mockMedia.listeners.play.size).toBe(0);

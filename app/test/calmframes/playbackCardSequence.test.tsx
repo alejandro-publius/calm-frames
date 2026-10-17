@@ -3,6 +3,8 @@ import React from 'react';
 import { act, fireEvent, render } from '@testing-library/react-native';
 import { AccessibilityInfo, StyleSheet } from 'react-native';
 import CalmCard from '../../src/calmframes/CalmCard';
+import { CalmControlAppearance, CalmControlSurface } from '../../src/calmframes/CalmControlSurface';
+import { CALM_CONTROL, CALM_SPACE, FOCUS_RING_WIDTH, scale } from '../../src/calmframes/calmStyles';
 import { Card, cardAt, NO_CARD, cardOffersSkip } from '../../src/calmframes/cards';
 import { buildCoverIntervals, isCovered } from '../../src/calmframes/coverSchedule';
 import { resetAnnouncements } from '../../src/calmframes/announce';
@@ -12,8 +14,8 @@ const intervals = buildCoverIntervals([
   { startMs: 5000, endMs: 5200, reason: 'general' },
   { startMs: 5500, endMs: 5900, reason: 'red' },
 ], { guardBandMs: 0, minCoverMs: 0, durationMs: 20000 });
-const playing = { paused: false, buffering: false, ended: false };
-const presented = (time: number) => playbackCard(cardAt(intervals, time), playing);
+const playing = { paused: false, covered: false, buffering: false, ended: false };
+const presented = (time: number) => playbackCard(cardAt(intervals, time), { ...playing, covered: isCovered(intervals, time) });
 let speak: jest.Mock;
 beforeEach(() => {
   jest.useFakeTimers(); resetAnnouncements();
@@ -24,22 +26,22 @@ beforeEach(() => {
 afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); jest.restoreAllMocks(); });
 
 function Sequence({ time, paused = false, ended = false }: { time: number; paused?: boolean; ended?: boolean }) {
-  const card = playbackCard(cardAt(intervals, time), { ...playing, paused, ended });
+  const card = playbackCard(cardAt(intervals, time), { ...playing, covered: isCovered(intervals, time), paused, ended });
   usePlaybackCardAnnouncement(card, paused);
   return <CalmCard card={card} stableLayout manualAnnouncements />;
 }
 
-test('short adjacent scenes keep identical words and Skip placement while cover changes immediately', () => {
+test('adjacent scenes keep a compact action slot and focused button while status follows coverage', () => {
   const view = render(<Sequence time={1000} />);
-  const detailStyle = StyleSheet.flatten(view.getByTestId('calm-card-detail').props.style);
+  fireEvent(view.getByTestId('calm-card-skip'), 'focus');
+  const containerStyle = StyleSheet.flatten(view.getByTestId('calm-card').props.style);
   const buttonStyle = StyleSheet.flatten(view.getByTestId('calm-card-skip').props.style);
-  const detail = view.getByTestId('calm-card-detail').props.children;
   const visibility: boolean[] = [];
   for (const time of [4999, 5000, 5199, 5200, 5499, 5500, 5899]) {
     view.rerender(<Sequence time={time} />);
-    expect(view.getByTestId('calm-card-title').props.children).toBe('Flashing scenes');
-    expect(view.getByTestId('calm-card-detail').props.children).toBe(detail);
-    expect(StyleSheet.flatten(view.getByTestId('calm-card-detail').props.style)).toEqual(detailStyle);
+    expect(view.getByTestId('calm-card-title').props.children).toBe(isCovered(intervals, time) ? 'Scene hidden' : 'Scene ahead');
+    expect(view.queryByTestId('calm-card-detail')).toBeNull();
+    expect(StyleSheet.flatten(view.getByTestId('calm-card').props.style)).toEqual(containerStyle);
     expect(StyleSheet.flatten(view.getByTestId('calm-card-skip').props.style)).toEqual(buttonStyle);
     visibility.push(isCovered(intervals, time));
   }
@@ -49,11 +51,32 @@ test('short adjacent scenes keep identical words and Skip placement while cover 
   expect(view.queryByTestId('calm-card')).toBeNull();
 });
 
-test('near-boundary countdown and cover share one speech message; completed scenes do not announce', () => {
+test('compact controls keep TV target size with one focus border even under dimensional materials', () => {
+  const view = render(<CalmControlAppearance.Provider value><CalmCard card={presented(5000)} stableLayout /></CalmControlAppearance.Provider>);
+  const container = StyleSheet.flatten(view.getByTestId('calm-card').props.style);
+  expect(container).toMatchObject({ left: scale(CALM_SPACE.SAFE_X), bottom: scale(CALM_SPACE.SAFE_Y), width: scale(520), height: scale(104) });
+  expect(container.top).toBeUndefined();
+  const skip = view.getByTestId('calm-card-skip');
+  fireEvent(skip, 'focus');
+  const focused = StyleSheet.flatten(skip.props.style);
+  expect(focused.minHeight).toBeGreaterThanOrEqual(scale(CALM_CONTROL.MIN_HEIGHT));
+  expect(focused.borderWidth).toBe(scale(FOCUS_RING_WIDTH));
+  expect(view.UNSAFE_queryAllByType(CalmControlSurface)).toHaveLength(0);
+});
+
+test('hidden status follows actual coverage rather than the scheduled card kind', () => {
+  expect(playbackCard(cardAt(intervals, 4999), { ...playing, covered: true }).title).toBe('Scene hidden');
+  expect(playbackCard(cardAt(intervals, 5000), playing).title).toBe('Scene ahead');
+  expect(playbackCard(cardAt(intervals, 4999), { ...playing, practice: true }).title).toBe('Practice ahead');
+});
+
+test('near-boundary status cancels stale lead-in speech; completed scenes do not announce', () => {
   const view = render(<Sequence time={4999} />);
   act(() => jest.advanceTimersByTime(100));
   view.rerender(<Sequence time={5000} />);
   act(() => jest.advanceTimersByTime(CARD_ANNOUNCEMENT_SETTLE_MS - 100));
+  expect(speak).not.toHaveBeenCalled();
+  act(() => jest.advanceTimersByTime(100));
   expect(speak).toHaveBeenCalledTimes(1);
   expect(speak).toHaveBeenCalledWith(presented(5000).announcement, { queue: false });
   view.rerender(<Sequence time={5200} />);

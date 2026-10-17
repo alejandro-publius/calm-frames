@@ -907,7 +907,17 @@ describe('the player keeps its words apart', () => {
     if (!view) {
       throw new Error('the player drew no captions view');
     }
-    const bottom = flattenStyle(view.props?.style).bottom;
+    // The native view fills a retained host; both offsets affect its screen edge.
+    const host = findByTestID(tree, 'calm-captions-layer');
+    if (!host || !findByTestID(host, 'kepler-captions-view')) {
+      throw new Error('the captions view is missing its retained host');
+    }
+    const hostBottom = flattenStyle(host.props?.style).bottom;
+    const viewBottom = flattenStyle(view.props?.style).bottom;
+    if (typeof hostBottom !== 'number' || typeof viewBottom !== 'number') {
+      throw new Error('the captions host and view must have numeric bottom offsets');
+    }
+    const bottom = hostBottom + viewBottom;
     if (typeof bottom !== 'number') {
       throw new Error(`the captions view sits at bottom ${String(bottom)}, not a number of units`);
     }

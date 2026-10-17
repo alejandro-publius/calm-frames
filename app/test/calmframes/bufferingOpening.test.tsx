@@ -44,7 +44,7 @@ test('a stall during a signed hold preserves its still and gives the card sole s
   advance(REVEAL_DELAY_MS);
   expect(view.getByTestId('calm-frames-cover-still')).toBeTruthy();
   expect(view.getByTestId('calm-card')).toBeTruthy();
-  expect(view.getByTestId('calm-card-detail').props.children).toMatch(/Waiting for playback/);
+  expect(view.getByTestId('calm-card-detail').props.children).toBe('Loading');
   expect(view.queryByTestId('buffering-status')).toBeNull();
 });
 
@@ -87,7 +87,7 @@ test('Skip stays usable while its card owns the waiting status', () => {
   act(() => mockBuffering(true));
   advance(REVEAL_DELAY_MS);
   expect(view.queryByTestId('buffering-status')).toBeNull();
-  expect(view.getByTestId('calm-card-detail').props.children).toMatch(/Waiting for playback/);
+  expect(view.getByTestId('calm-card-detail').props.children).toBe('Loading');
   fireEvent.press(view.getByTestId('calm-card-skip'));
   expect(mockGuard.skipTo).toHaveBeenCalled();
 });

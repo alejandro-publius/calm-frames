@@ -49,8 +49,9 @@ export const CALM_SPACE = {
  * ends 240 scaled units above the bottom edge and its cues stack upward from there.
  * The card used to stand 160 units up from the bottom, inside that band, so
  * it covered the captions at the very moment a hidden picture made them the
- * only way to follow the story. It now hangs from the upper part of the safe
- * area instead.
+ * only way to follow the story. Checking/refusal cards stay above that band.
+ * The compact scene control is 104 units tall at bottom SAFE_Y, below the
+ * caption band and the seekbar, opposite the right-aligned captions button.
  *
  * A labelled demo's practice label sits on a plate in the top left corner of
  * the safe area, on a row of its own: one line of small text on the plate
