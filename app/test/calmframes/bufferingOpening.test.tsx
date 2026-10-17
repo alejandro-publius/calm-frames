@@ -38,13 +38,14 @@ test('verified initial opening suppresses hidden Loading, then a real playback s
   expect(view.queryByTestId('buffering-status')).toBeNull();
 });
 
-test('a stall during a signed hold preserves its still and card', () => {
+test('a stall during a signed hold preserves its still and gives the card sole status ownership', () => {
   const view = startPlayer('covering');
   act(() => mockBuffering(true));
   advance(REVEAL_DELAY_MS);
   expect(view.getByTestId('calm-frames-cover-still')).toBeTruthy();
   expect(view.getByTestId('calm-card')).toBeTruthy();
-  expect(view.getByTestId('buffering-status')).toBeTruthy();
+  expect(view.getByTestId('calm-card-detail').props.children).toMatch(/Waiting for playback/);
+  expect(view.queryByTestId('buffering-status')).toBeNull();
 });
 
 test('checking card owns feedback without a duplicate announcement', () => {
@@ -81,11 +82,12 @@ test('returning shell cancels a pending status before it can announce', () => {
   expect(spoken).not.toHaveBeenCalledWith('Loading');
 });
 
-test('countdown Skip stays usable with the loading plate visible', () => {
+test('Skip stays usable while its card owns the waiting status', () => {
   const view = startPlayer('countdown');
   act(() => mockBuffering(true));
   advance(REVEAL_DELAY_MS);
-  expect(view.getByTestId('buffering-status')).toBeTruthy();
+  expect(view.queryByTestId('buffering-status')).toBeNull();
+  expect(view.getByTestId('calm-card-detail').props.children).toMatch(/Waiting for playback/);
   fireEvent.press(view.getByTestId('calm-card-skip'));
   expect(mockGuard.skipTo).toHaveBeenCalled();
 });

@@ -3,7 +3,7 @@
 GO for an owner-approved native checkpoint. Review target:
 33cbf2980be689ee7e32fc7e8e8534e14a5ca712. No installation is authorized by this
 review. An independent read-only local reviewer found no blocking regression.
-The parent review added 17 adversarial cases; the affected three suites pass all
+The parent review added 16 adversarial cases; the affected three suites pass all
 37 tests, with typecheck and targeted lint passing. No runtime repair was needed.
 
 The cache is keyed by exact complete text, including signature, signer metadata,

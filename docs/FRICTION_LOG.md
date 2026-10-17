@@ -1117,3 +1117,12 @@ cover. Severity: blocks comfortable review. Source fixes remove measured repeate
 verification and unnecessary startup/Back work; the image and retained logs do not
 prove a stalled clock. Workaround: preserve the current app while source regressions
 run, then use one coordinated native timing checkpoint. See the performance receipt.
+
+### October 17: rapid cover and Skip status changes feel robotic
+
+Owner task: watch the installed prepared video. Expected: readable steady feedback.
+Actual: owner reported that Flashing hidden to Skip/status transitions were too quick.
+Source showed changing countdown text, disappearing/reappearing Skip, completion
+cards and two announcement paths. Severity: usability issue during playback.
+Resolution in source: stable scene copy/action position and one speech path, without
+changing cover intervals or media actions. Native acceptance awaits approval.

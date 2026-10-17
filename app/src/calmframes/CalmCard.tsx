@@ -6,12 +6,10 @@
  * of the band at the bottom where captions are drawn (PLAYER_LAYOUT in
  * calmStyles.ts says why). Four things it has to get right:
  *
- * - it announces itself. accessibilityLiveRegion="polite" and the web
- *   aria-live="polite" attribute both go on the card, and the caller also
- *   pushes the same words through AccessibilityInfo;
- * - the Skip button takes D-pad focus the moment a countdown appears, because
- *   Vega does not let an app move focus with the D-pad itself, so the button
- *   has to be where focus already is;
+ * - the consumer player owns explicit speech for the final visible copy;
+ *   other callers retain the live-region fallback;
+ * - Skip takes D-pad focus when it appears and keeps the same action slot
+ *   through the consumer countdown and cover;
  * - ten foot type, and a focus ring you can see across a room;
  * - no motion. Nothing fades, slides or pulses.
  */
@@ -32,12 +30,15 @@ import { Card, cardOffersSkip } from './cards';
 
 export interface CalmCardProps {
   card: Card;
-  /** Called when the child presses Skip on a countdown card. */
+  /** Called only when the viewer presses the visible Skip action. */
   onSkip?: (toMs: number) => void;
   /** Turn the Skip button off, for screens with no player behind them. */
   allowSkip?: boolean;
   skipAccessibilityLabel?: string;
   testID?: string;
+  /** Consumer player uses one stable action slot and one explicit speech path. */
+  stableLayout?: boolean;
+  manualAnnouncements?: boolean;
 }
 
 export const CARD_Z_INDEX = 3;
@@ -48,6 +49,8 @@ const CalmCard = ({
   allowSkip = true,
   skipAccessibilityLabel = 'Skip past this scene',
   testID = 'calm-card',
+  stableLayout = false,
+  manualAnnouncements = false,
 }: CalmCardProps) => {
   const skipRef = useRef<React.ComponentRef<typeof TouchableOpacity> | null>(
     null,
@@ -77,19 +80,19 @@ const CalmCard = ({
       style={styles.container}
       pointerEvents="box-none"
       accessible
-      accessibilityLiveRegion="polite"
-      accessibilityRole="alert"
+      accessibilityLiveRegion={manualAnnouncements ? "none" : "polite"}
+      accessibilityRole={manualAnnouncements ? "text" : "alert"}
       accessibilityLabel={card.announcement}
       // The web attribute as well, because VoiceView reads the DOM-like tree
       // that React Native for Vega exposes.
-      aria-live="polite"
+      aria-live={manualAnnouncements ? "off" : "polite"}
       aria-label={card.announcement}>
-      <View style={styles.card}>
+      <View style={[styles.card, stableLayout ? styles.stableCard : null]}>
         <Text style={styles.title} testID={`${testID}-title`}>
           {card.title}
         </Text>
         {card.detail ? (
-          <Text style={styles.detail} testID={`${testID}-detail`}>
+          <Text style={[styles.detail, stableLayout ? styles.stableDetail : null]} testID={`${testID}-detail`}>
             {card.detail}
           </Text>
         ) : null}
@@ -132,6 +135,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     maxWidth: scale(1400),
   },
+  stableCard: { width: scale(1200) },
+  stableDetail: { minHeight: scale(100) },
   title: {
     color: CALM_COLORS.TEXT,
     ...CALM_TEXT.card,

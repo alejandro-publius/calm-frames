@@ -69,7 +69,7 @@ import { playerFrame } from '../calmframes/uiFrames';
 import { useChimeCue } from '../calmframes/useChimeCue';
 import { useCoverHarness } from '../calmframes/useCoverHarness';
 import { scale } from '../calmframes/calmStyles';
-import { pausedCard, usePlaybackPaused } from '../calmframes/usePlaybackPresentation';
+import { playbackCard, usePlaybackCardAnnouncement, usePlaybackPaused } from '../calmframes/usePlaybackPresentation';
 import { useFlashGuard } from '../calmframes/useFlashGuard';
 import BufferingWindow from '../components/BufferingWindow';
 import {
@@ -207,6 +207,7 @@ const PlayerScreen = ({
   };
   const benignDemo = isBundledBenignStory(bundledIdentity);
   const guard = useFlashGuard({
+    announceCards: false,
     mediaRef: videoRef,
     mapTexts: guardedParams?.maps,
     mapUrls: guardedParams?.mapUrls,
@@ -304,6 +305,9 @@ const PlayerScreen = ({
     covered = true;
     card = NO_CARD;
   }
+  card = playbackCard(card, { paused, buffering: showBuffering,
+    ended: isVideoEnded, practice: benignDemo });
+  usePlaybackCardAnnouncement(showOpeningShell ? NO_CARD : card, paused);
   // The app records its own layer, because Vega gives it no way to read its
   // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
   useUiCapture(
@@ -719,14 +723,16 @@ const PlayerScreen = ({
             long enough to avoid blinking, without dimming the verified picture. */}
         {!showOpeningShell && !isVideoError && !(guarding && guard.status === 'blocked') && (
           <BufferingWindow presentation="overlay" visible={showBuffering}
-            statusText={card.kind === 'checking' ? null : undefined} />
+            statusText={['checking', 'countdown', 'covering'].includes(card.kind) ? null : undefined} />
         )}
         {/*
           The card sits above the cover, so it stays readable while the picture
           is hidden, and keeps its own accessible status and Skip action.
         */}
         {!showOpeningShell && <CalmCard
-          card={pausedCard(card, paused)}
+          card={card}
+          stableLayout={card.kind === 'countdown' || card.kind === 'covering'}
+          manualAnnouncements
           onSkip={guard.skipTo}
           skipAccessibilityLabel={
             benignDemo ? 'Skip the demo pause' : undefined

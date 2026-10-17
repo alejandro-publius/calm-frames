@@ -87,6 +87,8 @@ export interface FlashGuardOptions {
   ready?: boolean;
   /** False when the app is in the background. */
   foreground?: boolean;
+  /** False when the player announces its final presentation, including pause state. */
+  announceCards?: boolean;
   durationMs?: number;
   /**
    * How far the rendition about to play sits from the source the map
@@ -160,6 +162,7 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
     publicKeyBase64,
     settings = DEFAULT_SETTINGS,
     ready = true,
+    announceCards = true,
     foreground = true,
     durationMs,
     renditionStartOffsetMs,
@@ -545,11 +548,11 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
   // Say each card once, and never the same words twice in a row.
   const lastCard = useRef<Card>(NO_CARD);
   useEffect(() => {
-    if (card.kind !== 'none' && cardChanged(lastCard.current, card)) {
+    if (announceCards && card.kind !== 'none' && cardChanged(lastCard.current, card)) {
       announceForAccessibility(card.announcement);
     }
     lastCard.current = card;
-  }, [card]);
+  }, [card, announceCards]);
 
   // One log entry per interval that was actually covered.
   const loggedIntervals = useRef<Set<number>>(new Set());

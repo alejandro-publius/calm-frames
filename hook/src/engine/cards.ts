@@ -44,7 +44,7 @@ export interface Card {
   announcement: string;
   /** Countdown only: whole seconds left before the cover comes on. */
   secondsLeft?: number;
-  /** Countdown only: where a Skip press should land. */
+  /** Where an explicit Skip press should land, when this card offers it. */
   skipToMs?: number;
   /** The interval this card is about. */
   interval?: CoverInterval;
@@ -175,9 +175,10 @@ export function cardAt(
  * CalmCard draws the button from this, and the player asks the same question
  * to decide who owns OK: while Skip is on screen it has D-pad focus, so OK is
  * a press on Skip and not a reason to pause the title or bring up controls.
+ * The consumer presentation retains this action through the covering card.
  */
 export function cardOffersSkip(card: Card): boolean {
-  return card.kind === 'countdown' && card.skipToMs !== undefined;
+  return (card.kind === 'countdown' || card.kind === 'covering') && card.skipToMs !== undefined;
 }
 
 /**

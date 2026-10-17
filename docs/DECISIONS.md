@@ -2614,3 +2614,13 @@ stable, and skip Back's 700 ms only after synchronous teardown succeeds. Disable
 collector beacons unless explicitly requested for measurement. Cost: bounded memory
 and targeted regressions; no media/trust changes. Host warm three-map median moved
 from 13.62 to 0.91 ms; cold did not improve. Native speed remains unmeasured.
+
+## October 17, 2026: keep scene feedback steady without delaying protection
+
+Use one consumer message and Skip slot before/during covered scenes; remove
+per-second countdown and completion chatter. Speak final visible copy once after
+600 ms of noncritical stability; pause/checking/refusal remain immediate. Skip,
+Back, media operations and protective boundaries keep their existing timing.
+Why: the owner found rapid status/action changes robotic. Cost: less moment-by-
+moment narration, with native visual/VoiceView review pending. No capture or media
+change. See results/card-presentation-2026-10-17 for the exact old/new sequence.

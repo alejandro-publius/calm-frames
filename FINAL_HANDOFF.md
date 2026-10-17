@@ -1,5 +1,17 @@
 # Final handoff: the integration candidate
 
+## Steadier player cards, October 17, 2026
+
+Source only: the consumer player now keeps one scene message and Skip position
+through the lead and cover, removes countdown/completion chatter, and announces
+only current visible copy. Pause, loading, ended and error states update immediately.
+Cover timing, guarded media actions, signed artifacts and detector code are unchanged.
+126 targeted tests pass; native installation approval remains pending. See the
+[sequence and timing rationale](results/card-presentation-2026-10-17/README.md).
+The independent cache/teardown review found no blocking regression; its tests and
+review are committed at d788a9d1416a86fb0a281142726995c796cca9e3.
+
+
 ## Performance source checkpoint, October 17, 2026
 
 Bounded performance fixes and 167 targeted tests are ready on the isolated app

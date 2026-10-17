@@ -1,5 +1,9 @@
 # Status
 
+October 17 player feedback: steadier scene copy and Skip position are source-tested
+with 126 passing affected tests. Native installation still awaits approval. See
+[card presentation evidence](../results/card-presentation-2026-10-17/README.md).
+
 October 17 performance checkpoint: bounded source fixes pass 167 focused tests.
 No native speedup or resolution of the reported stall is claimed. The running app
 was preserved. See [evidence](../results/performance-2026-10-17/README.md).

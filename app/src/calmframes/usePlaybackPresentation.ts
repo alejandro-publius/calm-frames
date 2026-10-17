@@ -1,7 +1,8 @@
 /** Read-only playback state for labels. Never seeks or changes the safety cover. */
 import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import { RefObject, useEffect, useState } from 'react';
-import { Card } from './cards';
+import { announceForAccessibility } from './announce';
+import { Card, NO_CARD, SKIP_MARGIN_MS } from './cards';
 
 export function usePlaybackPaused(mediaRef: RefObject<VideoPlayer | null>, ready: boolean): boolean {
   const [paused, setPaused] = useState(false);
@@ -38,4 +39,39 @@ export function pausedCard(card: Card, paused: boolean): Card {
     ? 'Paused. The picture stays hidden. Press Play to continue.'
     : `${before} Press Play to continue, or Skip to jump past it.`;
   return { ...card, detail, announcement: `${card.title}. ${detail}` };
+}
+
+/** Consumer copy only. It never decides whether the picture is covered. */
+export function playbackCard(card: Card, state: {
+  paused: boolean;
+  buffering: boolean;
+  ended: boolean;
+  practice?: boolean;
+}): Card {
+  if (state.ended || card.kind === 'after') return NO_CARD;
+  if (card.kind !== 'countdown' && card.kind !== 'covering') return card;
+  const title = state.practice ? 'Practice cover' : 'Flashing scenes';
+  const detail = state.paused
+    ? 'Paused. Press Play to continue, or Skip to jump past this scene.'
+    : state.buffering
+    ? 'Waiting for playback. You can skip past this scene.'
+    : state.practice
+    ? 'This demo hides the picture during planned scenes. You can skip ahead.'
+    : 'The picture is hidden during flashing. You can skip past this scene.';
+  return { ...card, title, detail, announcement: `${title}. ${detail}`,
+    skipToMs: card.skipToMs ?? (card.interval ? card.interval.endMs + SKIP_MARGIN_MS : undefined) };
+}
+
+/** Let fleeting noncritical status settle before speaking, never before acting. */
+export const CARD_ANNOUNCEMENT_SETTLE_MS = 600;
+export function usePlaybackCardAnnouncement(card: Card, urgent = false): void {
+  const message = card.announcement;
+  const immediate = urgent || card.kind === 'checking' || card.kind === 'unverified';
+  useEffect(() => {
+    if (!message) return;
+    const speak = () => announceForAccessibility(message, { queue: false });
+    if (immediate) { speak(); return; }
+    const timer = setTimeout(speak, CARD_ANNOUNCEMENT_SETTLE_MS);
+    return () => clearTimeout(timer);
+  }, [message, immediate]);
 }

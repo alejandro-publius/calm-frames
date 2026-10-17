@@ -52,6 +52,7 @@ function makeMediaElement(): MediaElementLike & {
 }
 
 interface GuardedProps {
+  announceCards?: boolean;
   renditionStartOffsetMs?: number;
   media: MediaElementLike;
   mapText?: string | null;
@@ -63,6 +64,7 @@ interface GuardedProps {
 }
 
 const Guarded = ({
+  announceCards,
   media,
   mapText = burstsMapText,
   mapUrl,
@@ -74,6 +76,7 @@ const Guarded = ({
 }: GuardedProps) => {
   const ref = React.useRef<MediaElementLike | null>(media);
   const guard = useFlashGuard({
+    announceCards,
     mediaRef: ref,
     mapTexts: mapUrl ? undefined : { wcag: mapText },
     mapUrls: mapUrl ? { wcag: mapUrl } : undefined,
@@ -124,6 +127,14 @@ describe('useFlashGuard', () => {
 
   afterEach(() => {
     jest.useRealTimers();
+  });
+
+  it('can delegate card speech to the player without changing verification or protection', async () => {
+    const media = makeMediaElement();
+    render(<Guarded media={media} announceCards={false} />);
+    await settle();
+    expect(read('status')).toBe('verified');
+    expect(announce).not.toHaveBeenCalled();
   });
 
   it('starts with the picture hidden, before any map has been checked', async () => {
