@@ -1,0 +1,30 @@
+{
+  "package": "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/stabilization-2026-10-17/calm-frames-0.1.0-aarch64-debug.vpkg",
+  "steps": [
+    {
+      "step": "Home ready (Watch focused)",
+      "line": null
+    }
+  ],
+  "keys": [],
+  "stopped": "timed out waiting for: Home ready (Watch focused)",
+  "install": {
+    "command": "vega device install-app --device Simulator --packagePath /Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/stabilization-2026-10-17/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "started_utc": "2026-10-17T04:41:15.597+00:00",
+    "ended_utc": "2026-10-17T04:41:17.006+00:00",
+    "exit": 0,
+    "tail": [
+      "Installing/Updating '/tmp/calm-frames-0.1.0-aarch64-debug.vpkg' ...success"
+    ]
+  },
+  "launch": {
+    "command": "vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main",
+    "started_utc": "2026-10-17T04:41:17.007+00:00",
+    "ended_utc": "2026-10-17T04:41:18.614+00:00",
+    "exit": 0,
+    "tail": [
+      "Sending: pkg://io.github.alejandropublius.calmframes.main"
+    ]
+  },
+  "trace_lines": []
+}
