@@ -926,3 +926,10 @@ confirmation of the cover-first remote seek (observed by log on package 4);
 the gradient loader message; the Open Source
 and AWS Builder entries; a changelog section for the judged tag, written when
 the tag exists.
+
+
+## October 17: local video intake and review checkpoint
+
+See [the local intake handoff](docs/LOCAL_INTAKE_HANDOFF.md) and [receipt](results/local-intake-2026-10-17/receipt.json). The new loopback page supports choosing a bounded non-DRM MP4, complete-file analysis, flagged and padded-interval review, cancel/retry/remove, and an explicit developer-assisted preparation boundary. Forty focused tests pass, including an independent rerun; actual localhost analysis and abnormal-server-exit checks pass. Existing Acadia was the test fixture, not a newly delivered TV title.
+
+The Acadia signing private key is documented as deleted. No other signer was authorized or configured, and no key or trust change occurred. New-title catalog integration, native playback and guarded resume remain deferred at that boundary. App inputs still match installed source `3fab9998b0790c8345c2a3f82452e91a05ef4ba6`; no rebuild or native interaction was performed in this intake pass. The prior native pass left Home Watch focused. The three reserved submission documents remain untouched.

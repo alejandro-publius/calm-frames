@@ -1,0 +1,22 @@
+{
+  "recorded_utc": "2026-10-17T23:57:11Z",
+  "base_commit": "7a18871e154dff14e40d303cbe5d333d9c1164f6",
+  "branch": "claude/tv-experience-2026-10-16",
+  "scope": "local intake and non-autoplay review; developer-assisted preparation boundary",
+  "tests_passed": 40,
+  "new_keys_created": false,
+  "trust_changed": false,
+  "app_changed": false,
+  "native_builds_this_pass": 0,
+  "native_installs_this_pass": 0,
+  "new_user_title_played_on_tv": false,
+  "signer_configured": false,
+  "live_url": "http://127.0.0.1:8766/",
+  "fixture": "Existing Acadia NPS source, not a newly imported user title",
+  "source_sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+  "tested_files": {
+    "pipeline/local_intake.py": "2ca2a5a6ff6ec75da933e6a566785f91a6f358fa561533c097753450288022b6",
+    "pipeline/local_intake.html": "768e9e70c95f2cc63cf8024b72bdc9a3eabecdee3baa0ed75a3e820d0e69e52c",
+    "pipeline/tests/test_local_intake.py": "17e23270da87dc654651d08458301cc16771b01e5b964bd39b9532447db70e4a"
+  }
+}
