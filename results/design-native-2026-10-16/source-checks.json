@@ -8,5 +8,5 @@
   "lint_warnings": 101,
   "prepared_input_gate": "pass, four required reports present; approved Acadia bundle unchanged",
   "captures": false,
-  "native_validation": "pending build and installation"
+  "native_validation": "Installation and launch confirmed; visual/audio/route checks not performed. See receipt.json."
 }

@@ -1,5 +1,33 @@
 # Claude review handoff: the TV experience pass (app lane)
 
+## Installed design review build, October 17, 2026
+
+The owner-approved fixes and design pass are built, installed and open in the existing
+Vega Virtual Device. App source: `3f681a783c792cc046a704ac6ebb9383a8128e9c`, branch
+`claude/tv-experience-2026-10-16`. Both Details schedules propagate rendition offsets;
+Details and the opening share short-title and long-title typography and column width.
+
+Package: `build/release/design-native-2026-10-16/calm-frames-0.1.0-aarch64-debug.vpkg`.
+SHA-256: `b682245fc8cdfcdcdd6dd289c58db72516ad0c4f431f558fd9fe721aaf98920e`.
+All 760 app inputs match the build receipt. The strict package gate passes with all
+four original verification reports and the unchanged approved Acadia bundle. The hash
+of the transferred package on the simulator also matches. One installation succeeded,
+followed by one launch request and a positive running-state check for
+`io.github.alejandropublius.calmframes.main`.
+
+The original build completed during the Mac connection interruption; no rebuild was
+needed. The first simulator start exited before installation, so that install attempt
+failed with Device not found. A detached process session started the same simulator
+successfully. No device data, preferences or SDK configuration was reset.
+
+Evidence: [native receipt](results/design-native-2026-10-16/receipt.json).
+The app is left open. No navigation, playback, screenshot or recording was performed.
+Logs establish package delivery and a running process, not visible layout or sound.
+The owner still needs to assess Home and Details, title continuity, visible focus through
+Profiles / Back / How it works and Parents / cancel, and sound through prepared Acadia
+covers. Use the existing usability checklist. No push, publication, merge, detector,
+media, signing or trust change occurred.
+
 ## Owner-approved review fixes, October 16, 2026
 
 Both review findings are corrected. The watch and technical Details schedules pass
