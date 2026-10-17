@@ -308,6 +308,21 @@ const PlayerScreen = ({
   card = playbackCard(card, { paused, buffering: showBuffering,
     ended: isVideoEnded, practice: benignDemo });
   usePlaybackCardAnnouncement(showOpeningShell ? NO_CARD : card, paused);
+  // Debug-build breadcrumbs (CALM_TRACE, see trace.ts) so one native run can
+  // separate the phases from the device log alone: the first picture, each
+  // cover and each wait with its media time, then Back and teardown. They
+  // fire on state changes only, never per tick, and carry no personal data.
+  const traceMediaMs = useRef(0);
+  traceMediaMs.current = guard.mediaTimeMs;
+  useEffect(() => {
+    if (openingFrameReady) trace('playback', `picture-shown media=${Math.round(traceMediaMs.current)}`);
+  }, [openingFrameReady]);
+  useEffect(() => {
+    trace('playback', `cover ${covered ? 'on' : 'off'} media=${Math.round(traceMediaMs.current)}`);
+  }, [covered]);
+  useEffect(() => {
+    if (isVideoInitialized) trace('playback', `waiting ${showBuffering ? 'on' : 'off'} media=${Math.round(traceMediaMs.current)}`);
+  }, [showBuffering, isVideoInitialized]);
   // The app records its own layer, because Vega gives it no way to read its
   // pixels back. tools/ui_flashmap.mjs runs flashmap over what this records.
   useUiCapture(
@@ -475,6 +490,7 @@ const PlayerScreen = ({
       return true;
     }
     leaving.current = true;
+    trace('playback', 'back');
     if (route.params.showHomeOpening) setReturningHome(true);
 
     reportVideoExit();
@@ -484,6 +500,7 @@ const PlayerScreen = ({
     videoRef?.current?.clearSurfaceHandle('');
     videoRef?.current?.clearCaptionViewHandle('');
     const destroyed = videoHandler.destroyVideoElements();
+    trace('playback', destroyed ? 'teardown ok' : 'teardown fallback');
     videoRef.current = null;
     clearTimeout(Number(timer.current));
 

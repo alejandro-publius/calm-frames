@@ -430,6 +430,7 @@ const KidModeScreen = ({
       return;
     }
     launching.current = true;
+    trace('playback', 'watch');
     // Invalidate pending menu audio before the player can request audio focus.
     interfaceSound.stop();
     setInterfaceActive(false);
