@@ -1,5 +1,120 @@
 # Claude review handoff: the TV experience pass (app lane)
 
+## Stabilization pass, October 17, 2026 (latest)
+
+**Where.** Worktree `/Users/alexvintera/calm-frames-claude-tv-2026-10-16`, branch
+`claude/tv-experience-2026-10-16`. Baseline (reviewed head):
+`bfb811f41103526c011454e79e47d210eff1cf66`. Last code commit:
+`d444fd0470a9c0659fabfe88a47fae62019eb073`; HEAD is the commit that adds this section.
+Tree clean after it. Nothing pushed. The installed simulator app is still source
+`3f681a783c792cc046a704ac6ebb9383a8128e9c`; nothing was built, installed, launched,
+navigated, captured or recorded, and the detector worktree was not touched.
+
+**Preserved, not reimplemented.** The Acadia-only hero, the covered-sections strip, the
+rendition offset and shared title styles, the focus and paused/unavailable copy fixes,
+the verification cache and deferred legacy routes (`33cbf29`), the cache and teardown
+review (`d788a9d`) and the steady scene card (`bfb811f`).
+
+**Newly fixed, oldest first.**
+
+| Commit | What a viewer gets | Files |
+| --- | --- | --- |
+| `3427030` | Paused during a countdown or cover, one paused statement instead of the card and a corner banner both saying it, on screen and to a screen reader | `app/src/screens/PlayerScreen.tsx`, `app/test/calmframes/playbackUi.test.tsx` |
+| `2825451` | Nothing visible. Debug builds log Watch, the first picture, each cover and each wait with media time, Back and teardown, so one native run yields phase timings from the device log | `PlayerScreen.tsx`, `app/src/screens/KidModeScreen.tsx`, `app/src/calmframes/trace.ts`, hook mirror (`hook/src/engine/trace.ts`, `hook/src/mirror.json`), `app/test/calmframes/playbackTrace.test.tsx` |
+| `cce89cf` | Nothing visible. Corrects a source note that said Watch evaluates Shaka on the MP4 path; it does not | `app/src/components/navigation/playerRouteFallback.tsx` |
+| `a47eee4` | How it works says it works only with the prepared videos in Calm Frames, not with Netflix, Prime Video, other apps or live TV; the purpose line says "prepared", as Home does | `app/src/calmframes/copy.ts`, `app/test/calmframes/copy.test.ts` |
+| `d444fd0` | Nothing visible. Three suites that already failed at `bfb811f` now follow its documented behavior | `app/test/screens/playerWiring.test.tsx`, `app/test/calmframes/tenFoot.test.tsx`, `app/test/components/__snapshots__/Player.test.tsx.snap` |
+
+**Investigated, no change needed.**
+
+- Shaka on Watch: a Metro-style transform of `VideoHandler.ts` and `PlayerScreen.tsx`
+  (React Native 0.83 metro-config, `inlineRequires: true`) shows the Shaka module required
+  only inside the HLS and DASH branch, and PlayerScreen's type-only import elided. The
+  prepared MP4 never evaluates it.
+- Startup store read: one small AsyncStorage read of legacy sample state; nothing on the
+  Calm Frames path dispatches to that store, so nothing rewrites it during viewing.
+- Teardown before a fresh player returns at once when there is no player.
+- First signature check on Home: required and pure JavaScript; the cache serves the
+  player's second check. Host numbers below.
+- The three teal circles in the owner's screenshot: no Calm Frames code draws them. On TV
+  the player chrome is Back, the title, a seek bar with one orange thumb and a captions
+  button; the 10-second buttons are automotive-only. The Acadia cover is plain black (no
+  scene stills in its catalog), and the still burned into the rendition is a sunset
+  coast frame. Their origin is unidentified; a system or simulator overlay is possible,
+  not shown. The checkpoint below tells them apart.
+- Seizure wording: the copy test bans "prevents seizures" even in a negation, so Help
+  keeps "Detection can miss flashing." with the approved sentence ("not a medical device").
+
+**Checks on the final source.**
+
+| Check | Result |
+| --- | --- |
+| Full jest, `--testPathIgnorePatterns='uiCapture\|coastalExport\|controlStudy'` | 144 suites passed, 1 skipped; 1424 tests passed, 4 skipped; 57 snapshots passed |
+| Same three suites at `bfb811f`, no changes of mine (throwaway worktree, since removed) | playerWiring, Player snapshot and tenFoot fail (4 tests): baseline regressions, now repaired |
+| KidModeScreen | timed out once at 5 s in a loaded parallel run; passes alone and in the final full run; passed at `bfb811f` |
+| Typecheck | pass |
+| Lint | 0 errors, 101 warnings (unchanged baseline), none in changed files |
+| Hook package | `test:package` 10 pass; `check:package` offline install, metro resolution and transform true |
+| Style and doc-link guards | pass |
+| Mutations | banner shown in every paused state: 2 of 9 red; picture-shown line removed: 1 of 2 red; both restored |
+| Not run | `uiCapture`, `coastalExport`, `controlStudy` (banned capture suites) |
+
+The one snapshot update is deliberate and equals `bfb811f`'s card change: live region
+none, role text, aria-live off, and an empty stable-layout style slot. Logs:
+`.logs/stabilization-*.log` (sha256 prefixes: suite `fade0dba96bac6b5`, mutations
+`429f35217406b379`, baseline `5f7697c6a7f99991`).
+
+**Measurements.** Host only, not Vega. `node results/performance-2026-10-17/benchmark.cjs
+app`, Node 22.23.2, arm64 Mac, three exact Acadia maps per batch, eleven batches:
+
+| Run | First batch, cold | Warm median |
+| --- | ---: | ---: |
+| With the JIT, this session | 79.4 ms | 4.24 ms |
+| `--jitless`, interpreter only | 121.6 ms | 9.99 ms |
+
+The same script recorded 23.97 ms and 0.91 ms on Oct 17 under a lighter machine load; the
+spread is host noise. Interpreter-only puts the cold check at about a tenth of a second
+here. Home checks only the maps the preset needs, so this does not account for seconds.
+Unmeasured: everything on the device, namely startup, Home to Details, Watch to first
+picture, buffering, and Back to Home.
+
+**Native checkpoint: one build, one install, one Acadia walkthrough.** After the owner's
+approval, build the Debug package from HEAD (release strips the log lines), install
+once, and stream the log with `vega device start-log-stream | grep CALM_TRACE`. No
+screenshot or recording.
+
+1. Launch. Home is ready at the first `focus kid-mode-home-watch` line. Read the title, the
+   benefit line, Watch focused.
+2. Details, then Back: `screen details`, then focus returns to Details on Home.
+3. Watch: `playback watch`, `screen player`, `prepared-playback`, then
+   `playback picture-shown`. Watch to first picture is the gap between the first and last.
+4. Covers. Standard and Broadcast cover 7.843 to 12.199 s and 28.613 to 31.093 s; Extra
+   cautious 7.343 to 12.699 s and 28.113 to 31.593 s. The card "Flashing scenes" with Skip
+   appears five seconds early. Logs show `playback cover on media=` near each start and
+   `cover off` near each end. Listen for sound through each cover.
+5. Pause inside a cover: one paused statement on the card, no corner banner; Play resumes.
+6. Back: `playback back`, `playback teardown ok` (or `fallback`, then 0.7 s), `screen
+   player-left`, focus on Watch.
+
+How to tell a stalled clock from an intentional cover:
+
+- **Intentional cover.** It starts at a scheduled time above, the card says "The picture is
+  hidden during flashing. You can skip past this scene.", it ends on its own after about
+  4.4 to 5.4 s, and the sound continues. Pressing Up shows the seek bar time advancing.
+- **Stalled clock.** A `playback waiting on` line with no `waiting off`. Inside a cover the
+  card says "Waiting for playback. You can skip past this scene."; outside a cover a plain
+  "Loading" appears after 1 s. The seek bar time does not advance, and no `cover off`
+  arrives at its scheduled time. At the opening, "Opening your video..." stays, and after
+  15 s "Playback stopped" offers Go back.
+- **Circles.** If the three circles appear, press Back once. If they stay on Home or
+  outside the app, they are not the app's. Note whether the seek bar time advances.
+
+**Remaining submission blockers.** The native checkpoint above (appearance, focus, sound
+through covers, real speed). The owner-run usability sheet, which has no results. The
+submission requirements in `docs/submission/`. None of these is verified, so this is not
+submission-ready. The detector candidate stays disabled on its branch.
+
+
 ## Installed design review build, October 17, 2026
 
 The owner-approved fixes and design pass are built, installed and open in the existing
