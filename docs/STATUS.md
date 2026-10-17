@@ -1,5 +1,10 @@
 # Status
 
+October 17 remaining native controls: Parents cancellation, guarded Skip activation
+and manual Back verified by logs. Severe media slowdown remains in two playback
+runs, including one without Pause; no source fix claimed. Existing app left Home.
+See [receipt](../results/remaining-controls-2026-10-17/README.md).
+
 Native checkpoint, October 17: source `c2b56d2` built, installed and launched once on the
 Vega Virtual Device and walked through Acadia by remote keys with logs only. Phase timings,
 both covers on schedule with no stall, and the return to Home are in

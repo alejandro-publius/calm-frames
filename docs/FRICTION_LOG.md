@@ -1137,3 +1137,14 @@ acceptance. Workaround: stop before remote keys and preserve the open app.
 Suggestion: agree one simulator owner and compare the delivered hash before
 navigation. The other installer was not identified. Evidence:
 results/stabilization-native-2026-10-17/receipt.json.
+
+### October 17: low-progress native playback despite playing state
+
+Task: complete Pause, Skip and manual Back on the reviewed installed app. Expected:
+media resumes normal progress and Skip completes promptly. Actual: 17.426 s media
+progress in 122.089 s wall (including a 3.382 s deliberate pause); a fresh run
+without Pause also slows. Native audio-sink reports zero position advance, video
+queue reports buffering; JavaScript does not emit a new waiting event in run 1.
+Skip reaches its guarded target after about 7.26 s. Severity: blocks smooth-playback
+acceptance. Back remains usable. No source workaround applied without a proven
+cause. Evidence: results/remaining-controls-2026-10-17/.

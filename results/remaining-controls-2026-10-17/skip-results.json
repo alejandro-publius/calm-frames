@@ -1,0 +1,6 @@
+{
+  "skip": "guarded playhead-write and native seeked observed",
+  "cover": "cleared after guarded seek",
+  "back": "Home Watch focused",
+  "result": "completed"
+}

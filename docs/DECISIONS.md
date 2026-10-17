@@ -2632,3 +2632,11 @@ installation, because a later installation and different transferred-package has
 break the reviewed-source chain. No installer identity is inferred. Cost: native
 flows remain unverified and need one coordinated window; no rebuild is required.
 Evidence: results/stabilization-native-2026-10-17/.
+
+## October 17: preserve native slowdown evidence and protected timing
+
+Completed the four remaining remote control checks on the existing installation.
+Control dispatch and return routes work; native playback performance does not pass.
+Do not alter guard timing, audio settings or seek recovery to hide an unlocated
+native pipeline cause. Cost: playback acceptance remains blocked; recorded samples
+and warning excerpts narrow the next investigation. No rebuild or install occurred.

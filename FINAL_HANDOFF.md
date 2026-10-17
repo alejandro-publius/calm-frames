@@ -1,5 +1,17 @@
 # Final handoff: the integration candidate
 
+## Remaining controls checked, October 17, 2026
+
+Parents cancellation passes both routes. Skip activation exercises cover-before-seek
+and returns outside the interval; manual playback Back returns Home in both runs.
+Pause/resume dispatches while covered, but the playback journey is not stable:
+severe media-clock slowdown also occurs in a fresh run without Pause, accompanied
+by native audio-sink and buffering warnings. Skip took about 7.26 s. No app-source
+root cause is established, so no speculative timing or media workaround was added.
+The existing installed app was reopened without rebuilding or reinstalling and left
+at Home. See [the complete control receipt](results/remaining-controls-2026-10-17/README.md).
+
+
 ## Interrupted stabilization native checkpoint, October 17, 2026
 
 The approved source `c2b56d2` built successfully and this worker installed it once.
