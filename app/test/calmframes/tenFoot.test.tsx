@@ -974,15 +974,6 @@ describe('the player keeps its words apart', () => {
       proof: () => expect(screen.getByTestId('calm-frames-cover')).toBeTruthy(),
     },
     {
-      state: 'after',
-      atMs: last.endMs + 500,
-      proof: () => {
-        expect(screen.getByTestId('calm-card-title')).toBeTruthy();
-        expect(screen.queryByTestId('calm-card-skip')).toBeNull();
-        expect(screen.queryByTestId('calm-frames-cover')).toBeNull();
-      },
-    },
-    {
       // A map that does not read: the refusal card, with its longest words.
       state: 'unverified',
       guarded: {
@@ -1019,6 +1010,24 @@ describe('the player keeps its words apart', () => {
     expect(cardAt(harborIntervals, first.startMs - 1_000).kind).toBe('countdown');
     expect(cardAt(harborIntervals, (first.startMs + first.endMs) / 2).kind).toBe('covering');
     expect(cardAt(harborIntervals, last.endMs + 500).kind).toBe('after');
+  });
+
+  // Since bfb811f the picture returns after a cover with no completion card,
+  // so that moment has no words to keep apart; it is checked for exactly that.
+  it('returns to the picture after the last cover with no card, Skip or cover left', async () => {
+    render(
+      <PlayerScreen
+        navigation={{ goBack: jest.fn() } as never}
+        route={{ params: harborRoute(undefined) } as never}
+      />,
+    );
+    await settle();
+    await playAt(0);
+    await playAt(last.endMs + 500);
+    expect(screen.queryByTestId('calm-card')).toBeNull();
+    expect(screen.queryByTestId('calm-card-skip')).toBeNull();
+    expect(screen.queryByTestId('calm-frames-cover')).toBeNull();
+    expect(screen.getByTestId('benign-demo-plate')).toBeTruthy();
   });
 
   it.each(LAYOUT_CASES.map((one) => [one.state, one] as const))(

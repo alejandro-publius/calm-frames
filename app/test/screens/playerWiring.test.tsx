@@ -237,26 +237,30 @@ describe('the player hands OK to Skip only while Skip is on screen', () => {
     jest.useRealTimers();
   });
 
-  it('gives OK to Skip during each countdown and back afterwards', async () => {
+  it('gives OK to Skip through each countdown and cover, and back afterwards', async () => {
+    // Since bfb811f the lead and the cover share one steady card with Skip in
+    // the same place, and the picture returns with no completion card.
     renderPlayer({ guarded });
     await settle();
 
     await playAt(1);
-    expect(cardKind()).toBe('Flashing coming up');
+    expect(cardKind()).toBe('Flashing scenes');
     expect(screen.getByTestId('calm-card-skip')).toBeTruthy();
     expect(chromeProps().skipOwnsSelect).toBe(true);
 
     await playAt(5);
-    expect(cardKind()).toBe('Flashing hidden');
-    expect(chromeProps().skipOwnsSelect).toBe(false);
+    expect(cardKind()).toBe('Flashing scenes');
+    expect(screen.getByTestId('calm-card-skip')).toBeTruthy();
+    expect(chromeProps().skipOwnsSelect).toBe(true);
 
     await playAt(8.5);
-    expect(cardKind()).toMatch(/^Scene hidden for/);
+    expect(cardKind()).toBe('none');
+    expect(screen.queryByTestId('calm-card-skip')).toBeNull();
     expect(chromeProps().skipOwnsSelect).toBe(false);
 
     // The next countdown takes OK again.
     await playAt(9);
-    expect(cardKind()).toBe('Flashing coming up');
+    expect(cardKind()).toBe('Flashing scenes');
     expect(chromeProps().skipOwnsSelect).toBe(true);
   });
 
