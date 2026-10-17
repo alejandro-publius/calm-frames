@@ -505,7 +505,7 @@ export const EXPLAINER_LINES: string[] = [
  * has none, the Harbor demo has one track.
  */
 export const PURPOSE_LINE =
-  'Watch selected videos with flashing scenes covered while the sound continues.';
+  'Watch prepared videos with flashing scenes covered while the sound continues.';
 /** Home's one line under the title: the benefit, without a promise about tracks. */
 export const HOME_BENEFIT_LINE = 'Watch prepared videos with flashing scenes covered.';
 
@@ -523,7 +523,7 @@ export const CAPTIONS_CONTINUE_LINE =
   'When a video has captions, the captions continue too.';
 export const CHECKED_BEFORE_ADDED_LINE = 'Every video is checked before it is added.';
 export const ONLY_IN_CALM_FRAMES_LINE =
-  'This only works with videos in Calm Frames, not other apps or live TV.';
+  'It works only with the prepared videos in Calm Frames, not with Netflix, Prime Video, other apps or live TV.';
 
 /**
  * The More info line about one title's own covers, built from what the

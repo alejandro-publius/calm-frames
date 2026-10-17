@@ -314,6 +314,13 @@ describe('what the app says it does', () => {
     expect(PURPOSE_LINE).toMatch(/sound continues/);
   });
 
+  it('says plainly which videos it works with, and names what it does not cover', () => {
+    expect(PURPOSE_LINE).toMatch(/^Watch prepared videos/);
+    expect(ONLY_IN_CALM_FRAMES_LINE).toBe(
+      'It works only with the prepared videos in Calm Frames, not with Netflix, Prime Video, other apps or live TV.',
+    );
+  });
+
   it('names captions only for a title that has them', () => {
     expect(coverLine(3, false)).toBe('Brief parts of this video are covered. The sound continues.');
     expect(coverLine(3, true)).toBe('Brief parts of this video are covered. The sound continues. Captions continue too.');
