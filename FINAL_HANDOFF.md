@@ -5,8 +5,10 @@
 The owner-requested compact lower-left scene status and Skip group passes 125
 focused tests, TypeScript and relevant lint. Labels follow actual cover, pause
 and loading state; the action retains one outline and a fixed position. Guard
-timing, media and signing are unchanged. Native build/install is the next
-checkpoint; see [the change and validation record](results/compact-scene-control-2026-10-17/README.md).
+timing, media and signing are unchanged. Source e4e7d86 built and installed once;
+package hash, guarded Skip, pause/resume and Back passed native log checks. The
+app is open, paused at 8.016 s in the first cover with Skip focused for owner
+visual/audio review. No push or capture. See [the change and validation record](results/compact-scene-control-2026-10-17/README.md).
 
 
 ## Native slowdown isolation, October 17, 2026

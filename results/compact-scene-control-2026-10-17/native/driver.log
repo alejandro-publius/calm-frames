@@ -1,0 +1,13 @@
+KEY_RIGHT focus kid-mode-home-more-info
+KEY_LEFT focus kid-mode-home-watch
+KEY_ENTER focus player-opening-back
+KEY_PLAYPAUSE focus calm-card-skip
+KEY_PLAYPAUSE focus calm-card-skip
+PASS Pause/resume during first cover pause then playing and first cover-off events; inspect timing samples for exact pause duration
+KEY_ENTER focus calm-card-skip
+PASS Activate Skip during second cover Skip focused; Enter caused guarded playhead-write, seeked and cover-off
+KEY_BACK focus player-seekbar
+PASS Manual Back during playback Back key followed by leavePlayer and Home Watch focus, before video ended
+KEY_ENTER focus kid-mode-home-watch
+KEY_PLAYPAUSE focus calm-card-skip
+PASS Owner review state App remains open, paused in first covered scene with Skip focused

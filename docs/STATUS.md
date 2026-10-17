@@ -1,8 +1,9 @@
 # Status
 
 October 17 compact-control checkpoint: 125 focused tests, TypeScript and relevant
-lint pass for the smaller lower-left scene status and Skip group. Native review
-is pending the authorized single build/install. Earlier original-media native
+lint pass for the smaller lower-left scene status and Skip group. Source e4e7d86
+built and installed once; native log checks passed Pause/resume, guarded Skip and
+Back. App remains paused at the first cover for visual/audio review. Earlier original-media native
 retests recovered before this UI change; no slowdown fix or cause is claimed.
 See [the evidence](../results/compact-scene-control-2026-10-17/README.md).
 

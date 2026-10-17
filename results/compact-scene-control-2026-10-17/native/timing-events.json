@@ -1,0 +1,2811 @@
+[
+  {
+    "kind": "harness-start",
+    "wallClockMs": 1792221259953,
+    "mediaTimeMs": null,
+    "covered": false,
+    "extra": {
+      "mode": "timing",
+      "intervals": 2,
+      "toggleEveryMs": 5000,
+      "tickMs": 50,
+      "scheduleLabel": "flash-guard:prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28"
+    }
+  },
+  {
+    "kind": "playing",
+    "wallClockMs": 1792221260084,
+    "mediaTimeMs": 39,
+    "covered": false,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 0
+    }
+  },
+  {
+    "kind": "tick-gap",
+    "wallClockMs": 1792221260096,
+    "mediaTimeMs": 51,
+    "covered": false,
+    "extra": {
+      "gapMs": 140,
+      "tickMs": 50
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221260291,
+    "mediaTimeMs": 258,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 140
+    }
+  },
+  {
+    "kind": "tick-gap",
+    "wallClockMs": 1792221260463,
+    "mediaTimeMs": 430,
+    "covered": false,
+    "extra": {
+      "gapMs": 155,
+      "tickMs": 50
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221260545,
+    "mediaTimeMs": 511,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 155
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221260798,
+    "mediaTimeMs": 758,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 155
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221261052,
+    "mediaTimeMs": 1014.999,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 155
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221261304,
+    "mediaTimeMs": 1242,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 155
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221261554,
+    "mediaTimeMs": 1491,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 155
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221261821,
+    "mediaTimeMs": 1767,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 155
+    }
+  },
+  {
+    "kind": "tick-gap",
+    "wallClockMs": 1792221261823,
+    "mediaTimeMs": 1769,
+    "covered": false,
+    "extra": {
+      "gapMs": 167,
+      "tickMs": 50
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221262069,
+    "mediaTimeMs": 2013.999,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221262319,
+    "mediaTimeMs": 2263,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221262570,
+    "mediaTimeMs": 2511,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221262822,
+    "mediaTimeMs": 2760,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221263072,
+    "mediaTimeMs": 3012,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221263337,
+    "mediaTimeMs": 3283,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221263594,
+    "mediaTimeMs": 3538,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221263877,
+    "mediaTimeMs": 3825,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221264101,
+    "mediaTimeMs": 4040,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221264351,
+    "mediaTimeMs": 4291,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221264607,
+    "mediaTimeMs": 4558,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221264856,
+    "mediaTimeMs": 4803,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221265104,
+    "mediaTimeMs": 5051,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221265355,
+    "mediaTimeMs": 5298,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221265614,
+    "mediaTimeMs": 5549,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221265856,
+    "mediaTimeMs": 5792,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221266106,
+    "mediaTimeMs": 6044,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221266361,
+    "mediaTimeMs": 6308,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221266618,
+    "mediaTimeMs": 6566,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221266861,
+    "mediaTimeMs": 6808,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221267114,
+    "mediaTimeMs": 7058,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221267364,
+    "mediaTimeMs": 7307,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "cover-on",
+    "wallClockMs": 1792221267422,
+    "mediaTimeMs": 7365,
+    "covered": true,
+    "reason": "interval 7343-12699",
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221267621,
+    "mediaTimeMs": 7556,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221267867,
+    "mediaTimeMs": 7806,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221268117,
+    "mediaTimeMs": 8069.000000000001,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -39,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221268436,
+    "mediaTimeMs": 8304,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": 84,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "pause",
+    "wallClockMs": 1792221268442,
+    "mediaTimeMs": 8304,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": 84,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "playing",
+    "wallClockMs": 1792221271331,
+    "mediaTimeMs": 8402,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221271335,
+    "mediaTimeMs": 8402,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221271581,
+    "mediaTimeMs": 8648,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221271830,
+    "mediaTimeMs": 8892,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221272083,
+    "mediaTimeMs": 9147,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221272345,
+    "mediaTimeMs": 9405,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221272594,
+    "mediaTimeMs": 9665,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221272844,
+    "mediaTimeMs": 9917,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221273095,
+    "mediaTimeMs": 10161,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221273345,
+    "mediaTimeMs": 10413,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221273598,
+    "mediaTimeMs": 10665,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221273853,
+    "mediaTimeMs": 10916,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221274103,
+    "mediaTimeMs": 11162,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221274364,
+    "mediaTimeMs": 11434,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221274604,
+    "mediaTimeMs": 11676,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221274871,
+    "mediaTimeMs": 11936,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221275106,
+    "mediaTimeMs": 12172,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221275358,
+    "mediaTimeMs": 12419,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221275608,
+    "mediaTimeMs": 12667,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "cover-off",
+    "wallClockMs": 1792221275706,
+    "mediaTimeMs": 12765,
+    "covered": false,
+    "reason": "clear",
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221275859,
+    "mediaTimeMs": 12919,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221276110,
+    "mediaTimeMs": 13167,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221276360,
+    "mediaTimeMs": 13429,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221276616,
+    "mediaTimeMs": 13684,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221276868,
+    "mediaTimeMs": 13933,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221277118,
+    "mediaTimeMs": 14182,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221277369,
+    "mediaTimeMs": 14434,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221277620,
+    "mediaTimeMs": 14680,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221277870,
+    "mediaTimeMs": 14930,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221278120,
+    "mediaTimeMs": 15192,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221278371,
+    "mediaTimeMs": 15443,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221278623,
+    "mediaTimeMs": 15691,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221278875,
+    "mediaTimeMs": 15939,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221279125,
+    "mediaTimeMs": 16186,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221279375,
+    "mediaTimeMs": 16434,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221279630,
+    "mediaTimeMs": 16689,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221279880,
+    "mediaTimeMs": 16950,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221280136,
+    "mediaTimeMs": 17203,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221280383,
+    "mediaTimeMs": 17443,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221280639,
+    "mediaTimeMs": 17704,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221280903,
+    "mediaTimeMs": 17963,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221281143,
+    "mediaTimeMs": 18203,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221281406,
+    "mediaTimeMs": 18477,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221281655,
+    "mediaTimeMs": 18724,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221281912,
+    "mediaTimeMs": 18977,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221282162,
+    "mediaTimeMs": 19223,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221282409,
+    "mediaTimeMs": 19471,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221282659,
+    "mediaTimeMs": 19718,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221282910,
+    "mediaTimeMs": 19969,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221283163,
+    "mediaTimeMs": 20233,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221283415,
+    "mediaTimeMs": 20485,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221283669,
+    "mediaTimeMs": 20736,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221283924,
+    "mediaTimeMs": 20987,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221284176,
+    "mediaTimeMs": 21236,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221284426,
+    "mediaTimeMs": 21484,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221284677,
+    "mediaTimeMs": 21747,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221284928,
+    "mediaTimeMs": 22000,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221285179,
+    "mediaTimeMs": 22245,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221285430,
+    "mediaTimeMs": 22497,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221285681,
+    "mediaTimeMs": 22744,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221285945,
+    "mediaTimeMs": 23007,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221286199,
+    "mediaTimeMs": 23270,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221286450,
+    "mediaTimeMs": 23519,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221286699,
+    "mediaTimeMs": 23767,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221286950,
+    "mediaTimeMs": 24017,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221287201,
+    "mediaTimeMs": 24264,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221287453,
+    "mediaTimeMs": 24516,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221287716,
+    "mediaTimeMs": 24787,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221287957,
+    "mediaTimeMs": 25028,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221288208,
+    "mediaTimeMs": 25276,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221288458,
+    "mediaTimeMs": 25526,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221288709,
+    "mediaTimeMs": 25776,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221288960,
+    "mediaTimeMs": 26024,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221289210,
+    "mediaTimeMs": 26272,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221289461,
+    "mediaTimeMs": 26520,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221289711,
+    "mediaTimeMs": 26770,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221289961,
+    "mediaTimeMs": 27026,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221290225,
+    "mediaTimeMs": 27292,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221290464,
+    "mediaTimeMs": 27531,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221290721,
+    "mediaTimeMs": 27784,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221290974,
+    "mediaTimeMs": 28036,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "cover-on",
+    "wallClockMs": 1792221291059,
+    "mediaTimeMs": 28121,
+    "covered": true,
+    "reason": "interval 28113-31593",
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221291225,
+    "mediaTimeMs": 28284,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221291477,
+    "mediaTimeMs": 28548,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221291727,
+    "mediaTimeMs": 28798,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221291979,
+    "mediaTimeMs": 29045,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221292230,
+    "mediaTimeMs": 29296,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -98,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "seeking",
+    "wallClockMs": 1792221292240,
+    "mediaTimeMs": 31693,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221292627,
+    "mediaTimeMs": 32015,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "waiting",
+    "wallClockMs": 1792221292657,
+    "mediaTimeMs": 32036,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "playing",
+    "wallClockMs": 1792221292680,
+    "mediaTimeMs": 32070.999,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221292687,
+    "mediaTimeMs": 32078.000000000004,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "seeked",
+    "wallClockMs": 1792221292690,
+    "mediaTimeMs": 32081.000000000004,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221292690,
+    "mediaTimeMs": 32081.000000000004,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 167
+    }
+  },
+  {
+    "kind": "tick-gap",
+    "wallClockMs": 1792221292713,
+    "mediaTimeMs": 32104.000000000004,
+    "covered": true,
+    "extra": {
+      "gapMs": 266,
+      "tickMs": 50
+    }
+  },
+  {
+    "kind": "cover-off",
+    "wallClockMs": 1792221292715,
+    "mediaTimeMs": 32104.000000000004,
+    "covered": false,
+    "reason": "clear",
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221292893,
+    "mediaTimeMs": 32277,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 266
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221293142,
+    "mediaTimeMs": 32520.000000000004,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 266
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221293387,
+    "mediaTimeMs": 32770,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 266
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221293640,
+    "mediaTimeMs": 33034,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 266
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221293898,
+    "mediaTimeMs": 33287.998999999996,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 266
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221294147,
+    "mediaTimeMs": 33530,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 266
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221294398,
+    "mediaTimeMs": 33780,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 266
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221294648,
+    "mediaTimeMs": 34035,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -2387,
+      "worstTickGapMs": 266
+    }
+  },
+  {
+    "kind": "tick-gap",
+    "wallClockMs": 1792221295200,
+    "mediaTimeMs": 34587,
+    "covered": false,
+    "extra": {
+      "gapMs": 440,
+      "tickMs": 50
+    }
+  },
+  {
+    "kind": "harness-stop",
+    "wallClockMs": 1792221295607,
+    "mediaTimeMs": null,
+    "covered": false,
+    "extra": {
+      "mode": "timing"
+    }
+  },
+  {
+    "kind": "harness-start",
+    "wallClockMs": 1792221297684,
+    "mediaTimeMs": null,
+    "covered": false,
+    "extra": {
+      "mode": "timing",
+      "intervals": 2,
+      "toggleEveryMs": 5000,
+      "tickMs": 50,
+      "scheduleLabel": "flash-guard:prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28"
+    }
+  },
+  {
+    "kind": "playing",
+    "wallClockMs": 1792221297730,
+    "mediaTimeMs": 0,
+    "covered": false,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": 0,
+      "worstTickGapMs": 0
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221297972,
+    "mediaTimeMs": 257,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 57
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221298222,
+    "mediaTimeMs": 502,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221298477,
+    "mediaTimeMs": 758,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221298725,
+    "mediaTimeMs": 1004.999,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221298975,
+    "mediaTimeMs": 1250,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221299226,
+    "mediaTimeMs": 1501,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221299478,
+    "mediaTimeMs": 1764,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221299728,
+    "mediaTimeMs": 2015.0000000000002,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221299980,
+    "mediaTimeMs": 2258,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221300229,
+    "mediaTimeMs": 2512,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221300480,
+    "mediaTimeMs": 2760,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221300732,
+    "mediaTimeMs": 3011,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221300982,
+    "mediaTimeMs": 3257,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221301233,
+    "mediaTimeMs": 3520,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221301487,
+    "mediaTimeMs": 3774,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221301739,
+    "mediaTimeMs": 4019.9990000000003,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221301988,
+    "mediaTimeMs": 4272,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221302239,
+    "mediaTimeMs": 4520,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221302490,
+    "mediaTimeMs": 4762,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221302741,
+    "mediaTimeMs": 5017,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221302991,
+    "mediaTimeMs": 5266,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221303245,
+    "mediaTimeMs": 5520,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221303496,
+    "mediaTimeMs": 5779,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221303748,
+    "mediaTimeMs": 6025,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221303998,
+    "mediaTimeMs": 6274,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221304249,
+    "mediaTimeMs": 6528,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221304501,
+    "mediaTimeMs": 6775,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221304752,
+    "mediaTimeMs": 7027,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221305002,
+    "mediaTimeMs": 7288,
+    "covered": false,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "cover-on",
+    "wallClockMs": 1792221305063,
+    "mediaTimeMs": 7349,
+    "covered": true,
+    "reason": "interval 7343-12699",
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221305255,
+    "mediaTimeMs": 7543,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221305509,
+    "mediaTimeMs": 7791,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": -15,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "timeupdate",
+    "wallClockMs": 1792221305813,
+    "mediaTimeMs": 8016,
+    "covered": true,
+    "playbackRate": 1,
+    "quality": {
+      "droppedVideoFrames": 0,
+      "totalVideoFrames": 0,
+      "corruptedVideoFrames": null
+    },
+    "extra": {
+      "worstDriftMs": 79,
+      "worstTickGapMs": 68
+    }
+  },
+  {
+    "kind": "pause",
+    "wallClockMs": 1792221305822,
+    "mediaTimeMs": 8016,
+    "covered": true,
+    "playbackRate": 1,
+    "extra": {
+      "worstDriftMs": 79,
+      "worstTickGapMs": 68
+    }
+  }
+]

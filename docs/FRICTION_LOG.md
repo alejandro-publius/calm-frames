@@ -1154,5 +1154,6 @@ cause. Evidence: results/remaining-controls-2026-10-17/.
 Owner task: watch the prepared film. Actual: the large centered Flashing scenes
 and Skip panel interrupts the composition. Resolution: a fixed compact group
 in the lower-left safe corner, short truthful labels and one focus outline.
-Source checks pass; native visual acceptance follows the authorized install.
+Source checks and native control logs pass after the authorized single install.
+The app stays paused on the compact control for owner visual acceptance.
 The screenshot's teal linked orbs remain unidentified and were not changed.
