@@ -2624,3 +2624,11 @@ Back, media operations and protective boundaries keep their existing timing.
 Why: the owner found rapid status/action changes robotic. Cost: less moment-by-
 moment narration, with native visual/VoiceView review pending. No capture or media
 change. See results/card-presentation-2026-10-17 for the exact old/new sequence.
+
+## October 17: stop native checks when the shared package changes
+
+Decision: preserve the open simulator and stop remote checks after one approved
+installation, because a later installation and different transferred-package hash
+break the reviewed-source chain. No installer identity is inferred. Cost: native
+flows remain unverified and need one coordinated window; no rebuild is required.
+Evidence: results/stabilization-native-2026-10-17/.

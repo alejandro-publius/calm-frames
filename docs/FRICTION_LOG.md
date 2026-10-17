@@ -1126,3 +1126,14 @@ Source showed changing countdown text, disappearing/reappearing Skip, completion
 cards and two announcement paths. Severity: usability issue during playback.
 Resolution in source: stable scene copy/action position and one speech path, without
 changing cover intervals or media actions. Native acceptance awaits approval.
+
+### October 17: concurrent package replacement interrupts native acceptance
+
+Task: install the approved stabilization build once and test without capture.
+Expected: the reviewed package remains installed during the check. Actual: a
+second install completed about 70 seconds later and the transferred package hash
+differed. App route breadcrumbs were absent. Severity: blocks attributable native
+acceptance. Workaround: stop before remote keys and preserve the open app.
+Suggestion: agree one simulator owner and compare the delivered hash before
+navigation. The other installer was not identified. Evidence:
+results/stabilization-native-2026-10-17/receipt.json.

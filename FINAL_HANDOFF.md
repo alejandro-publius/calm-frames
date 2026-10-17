@@ -1,5 +1,18 @@
 # Final handoff: the integration candidate
 
+## Interrupted stabilization native checkpoint, October 17, 2026
+
+The approved source `c2b56d2` built successfully and this worker installed it once.
+All 764 app inputs match; the strict media gate passes. Another installation then
+occurred on the shared simulator before this worker discovered the conflict.
+The transferred package hash differs from the reviewed build. One explicit launch
+request succeeded and the process is running, but its current source identity and
+all functional flows remain unverified. No remote keys were sent. The app is left
+open; no capture, recording or further replacement occurred. Coordinate one
+exclusive simulator window before continuing. See the
+[receipt and minimum owner steps](results/stabilization-native-2026-10-17/README.md).
+
+
 ## Steadier player cards, October 17, 2026
 
 Source only: the consumer player now keeps one scene message and Skip position

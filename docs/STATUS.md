@@ -1,5 +1,10 @@
 # Status
 
+October 17 native checkpoint: reviewed c2b56d2 built and installed once, then a
+concurrent installation changed the simulator package. Functional checks stopped
+before remote keys. App remains open with runtime source unverified. See
+[receipt](../results/stabilization-native-2026-10-17/README.md).
+
 October 17 player feedback: steadier scene copy and Skip position are source-tested
 with 126 passing affected tests. Native installation still awaits approval. See
 [card presentation evidence](../results/card-presentation-2026-10-17/README.md).
