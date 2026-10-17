@@ -1,8 +1,9 @@
 # Status
 
 October 17 cover/button fix: opaque scheduled-cover explanation and proportional
-Home Watch are source-tested and independently reviewed. Native build verification
-is in progress. The separate first five seconds of near-black source content are
+Home Watch are source-tested and independently reviewed. Source 3fab999 built/installed once; package hash and
+native control/cover-state checks pass. App remains Home Watch, collector stopped.
+Visual/audio review remains with the owner. The separate first five seconds of near-black source content are
 unchanged. See results/black-gap-2026-10-17/.
 
 October 17 finish pass complete: source ed75fca is installed and package-verified.

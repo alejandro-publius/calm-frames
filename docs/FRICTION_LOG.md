@@ -1168,3 +1168,16 @@ directly through existing teardown. Separate waiting episodes now each get
 one accessibility announcement. 217 focused tests pass. Native controls now
 pass on the verified package, with natural end returning Home Watch in 361 ms.
 Owner appearance/audio review remains separate. No slowdown cure is claimed.
+
+
+### October 17: Intentional cover looked like a playback failure
+
+Task: investigate owner-reported full-picture blackouts. Steps: inspect the supplied
+image, replay prepared Acadia with text logs, compare the signed schedule and
+numeric source/rendition black-frame analysis. Expected: an intentional, understandable
+cover. Actual: the no-signed-still branch paints black, while Scene hidden and Skip
+remain visible. Severity: confusing core playback presentation. Workaround/fix:
+fully opaque slate explanation during the same scheduled interval. Separate finding:
+the original and prepared clip both begin with about five near-black seconds.
+Suggestion: include scheduled-cover presentation and content-opening review in the
+owner's short demonstration check. No protection was removed.

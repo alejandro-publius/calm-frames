@@ -1,0 +1,62 @@
+{
+  "source_commit": "3fab9998b0790c8345c2a3f82452e91a05ef4ba6",
+  "evidence_base": "f01cda6",
+  "build_count": 1,
+  "install_count": 1,
+  "package_path": "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/black-gap-2026-10-17/calm-frames-cover-watch-aarch64-debug.vpkg",
+  "package_sha256": "86dc3b41842ca90c40fc4c1e48d074e5e5b55f53e78ce414c9437d3546e4af1f",
+  "inputs_matched_after_native": 726,
+  "native_surface": {
+    "checks": [
+      "Home Details More info Back Back returns Home Details focus",
+      "How it works Back returns its opener",
+      "Parents hardware Back cancelled without PIN entry; Parents focus restored",
+      "Parents on-screen Back cancelled without PIN entry; Parents focus restored"
+    ],
+    "result": "completed"
+  },
+  "native_playback": {
+    "checks": [
+      {
+        "check": "Scheduled cover uses the explanatory surface",
+        "evidence": "state trace selects opaque message; native pixels still require owner review"
+      },
+      {
+        "check": "Pause/resume during first cover",
+        "evidence": "pause then playing and first cover-off events; inspect timing samples for exact pause duration"
+      },
+      {
+        "check": "Activate Skip during second cover",
+        "evidence": "Skip focused; Enter caused guarded playhead-write, seeked and cover-off"
+      },
+      {
+        "check": "End-of-video return",
+        "evidence": "Native ended -> existing teardown -> Home Watch without presentation delay"
+      },
+      {
+        "check": "Manual Back during playback",
+        "evidence": "Returned Home Watch before video ended"
+      }
+    ],
+    "pause_observed": true,
+    "result": "completed"
+  },
+  "natural_end_to_home_ms": 339.652,
+  "manual_back_to_home_ms": 312.196,
+  "final_focus": "kid-mode-home-watch",
+  "collector_stopped": 2714,
+  "native_process": 21468,
+  "device_clock_is_not_host_utc": true,
+  "native_pixel_audio_approval": false,
+  "no_slowdown_cure_claim": true,
+  "owner_images": [
+    {
+      "library_file_id": "libfile_fb4498b926448191bb209fb7bb98536a",
+      "sha256": "9a3a5601fbeb6d8c99b1249eb088d98f0ea239e9c8cd6a2728dafd73f1e318b2"
+    },
+    {
+      "library_file_id": "libfile_55b63d46f2dc8191a85c04d7c9535631",
+      "sha256": "ef102e838847ba1b901ebaba20ac0af585456a101798347cc465fa34eeabc2fe"
+    }
+  ]
+}

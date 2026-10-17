@@ -1,5 +1,16 @@
 # Final handoff: the integration candidate
 
+## Cover presentation and Home control fix, October 17, 2026
+
+Source 3fab999 is built once, installed once and package-verified. Scheduled covers
+without signed stills now show an opaque slate explanation, and Home Watch matches
+Details target dimensions/corners. The cover schedule and guarded seeks are unchanged.
+116 focused tests, TypeScript and independent source review pass; native routes, both
+cover message states, pause/resume, Skip, end and Back pass in text logs. App is at
+Home Watch; collector stopped. Native visual/audio approval remains with the owner.
+The source video itself has a near-black first 4.963 seconds, which remains unchanged.
+See [the complete evidence and next-video path](results/black-gap-2026-10-17/README.md).
+
 ## Finish pass complete, October 17, 2026
 
 Installed source ed75fca uses truthful slow-progress feedback, clear pause/loading

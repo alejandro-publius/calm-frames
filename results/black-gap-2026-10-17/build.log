@@ -1,0 +1,245 @@
+
+> calm-frames-app@0.1.0 prebuild:debug
+> node tools/check_prepared_library.mjs
+
+{"prepared_library":"checked","titles":1,"bundles":4,"bytes":28551507,"catalogSha256":"02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79","verification_reports":{"required":4,"present":4,"missing":[]},"approvedAcadiaBundle":"4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"}
+
+> calm-frames-app@0.1.0 build:debug
+> react-native build-kepler --build-type Debug
+
+- Awaiting resources 
+warn This command is deprecated and will be removed in a future version of the Vega CLI plugin.
+warn Please replace usage with 'build-vega' instead.
+warn Invoking 'build-vega' with respective args...
+info Building bundle artifacts for index.js
+[SYSTEM_BUNDLE] Creating app bundle config with globalPrefix: (none)
+info Building split bundle for index.js
+
+                        ▒▒▓▓▓▓▒▒
+                     ▒▓▓▓▒▒░░▒▒▓▓▓▒
+                  ▒▓▓▓▓░░░▒▒▒▒░░░▓▓▓▓▒
+                 ▓▓▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▓▓
+                 ▓▓░░░░░▒▓▓▓▓▓▓▒░░░░░▓▓
+                 ▓▓░░▓▓▒░░░▒▒░░░▒▓▒░░▓▓
+                 ▓▓░░▓▓▓▓▓▒▒▒▒▓▓▓▓▒░░▓▓
+                 ▓▓░░▓▓▓▓▓▓▓▓▓▓▓▓▓▒░░▓▓
+                 ▓▓▒░░▒▒▓▓▓▓▓▓▓▓▒░░░▒▓▓
+                  ▒▓▓▓▒░░░▒▓▓▒░░░▒▓▓▓▒
+                     ▒▓▓▓▒░░░░▒▓▓▓▒
+                        ▒▒▓▓▓▓▒▒
+
+
+                Welcome to Metro v0.83.8
+              Fast - Scalable - Integrated
+
+
+transform[stderr]: (node:4730) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+transform[stderr]: (Use `node --trace-warnings ...` to show where the warning was created)
+transform[stderr]: (node:4731) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+transform[stderr]: (Use `node --trace-warnings ...` to show where the warning was created)
+transform[stderr]: (node:4733) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+transform[stderr]: (Use `node --trace-warnings ...` to show where the warning was created)
+transform[stderr]: (node:4734) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+transform[stderr]: (Use `node --trace-warnings ...` to show where the warning was created)
+transform[stderr]: (node:4732) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+transform[stderr]: (Use `node --trace-warnings ...` to show where the warning was created)
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-kepler/SystemModules/amzn__react-native-kepler-4.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-linear-gradient/SystemModules/amzn__react-linear-gradient-2.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-w3cmedia/SystemModules/amzn__react-native-w3cmedia-2.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/kepler-media-controls/SystemModules/amzn__kepler-media-controls.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/keplermediadescriptor/SystemModules/amzn__keplermediadescriptor-1.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-svg/SystemModules/amzn__react-native-svg-3.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-navigation__native/SystemModules/amzn__react-navigation__native-8.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-navigation__core/SystemModules/amzn__react-navigation__core-8.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-navigation__routers/SystemModules/amzn__react-navigation__routers-8.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-device-info/SystemModules/amzn__react-native-device-info-2.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/kepler-content-personalization/SystemModules/amzn__kepler-content-personalization-1.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/kepler-epg-provider/SystemModules/amzn__kepler-epg-provider-1.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-localize/SystemModules/amzn__react-native-localize-2.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/kepler-file-system/SystemModules/amzn__kepler-file-system-0.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-vector-icons/SystemModules/amzn__react-native-vector-icons-2.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/keplerscript-netmgr-lib/SystemModules/amzn__keplerscript-netmgr-lib-2.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/security-manager-lib/SystemModules/amzn__security-manager-lib-1.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-navigation__drawer/SystemModules/amzn__react-navigation__drawer-8.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-safe-area-context/SystemModules/amzn__react-native-safe-area-context-8.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-navigation__elements/SystemModules/amzn__react-navigation__elements-8.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-drawer-layout/SystemModules/amzn__react-native-drawer-layout-8.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-reanimated/SystemModules/amzn__react-native-reanimated-4.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-worklets/SystemModules/amzn__react-native-worklets-1.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-screens/SystemModules/amzn__react-native-screens-3.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-native-gesture-handler/SystemModules/amzn__react-native-gesture-handler-4.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/keplerscript-appstore-iap-lib/SystemModules/amzn__keplerscript-appstore-iap-lib-2.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@react-native-async-storage/async-storage/SystemModules/amzn__react-native-async-storage__async-storage-2.modules.txt
+Getting Dependencies from System Modules: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/node_modules/@amazon-devices/react-navigation__stack/SystemModules/amzn__react-navigation__stack-8.modules.txt
+LOG:Writing bundle output to: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/lib/rn-bundles/Debug/index.bundle
+LOG:Writing sourcemap output to: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/debugging/Debug/srcmap/index.bundle.map
+LOG:Done writing bundle output
+LOG:Done writing sourcemap output
+transform[stderr]: (node:4735) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+transform[stderr]: (Use `node --trace-warnings ...` to show where the warning was created)
+Copying 50 asset files
+Done copying assets
+info Completed building JS bundle and sourcemap for index.js
+info Completed processing debugging files for index.js
+info Completed building Hermes bundle for index.js
+info Initiating native artifacts build for Vega platform
+validating '/Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/manifest.toml' ...
+analyzing manifest.toml ...
+manifest.toml is valid
+manifest validation found 0 errors
+manifest.toml:176:6 info: [needs.module.id] Kepler module dependency '/com.amazon.kepler.kepler_epg_provider_1@IKeplerEpgProvider_9' MAY require the privilege 'com.amazon.kepler.tv.privilege.data_provider' to function, but the privilege is not requested in the manifest. Ensure that you request the appropriate privileges for the APIs that you use. Disregard this warning if you do not need this privilege
+  help: This privilege is required to periodically update the system with your latest entitled live content. For further information, see: https://developer.amazon.com/docs/kepler-tv/declare-epg-sync-task.html
+manifest.toml:46:1 info: [processes.group] Process group is missing an explicit id. Auto-generated anonymous ids will be used
+  help: Add an id field to each process group for stable process naming
+
+done.
+
+🔍 Build Configuration
+───────────────────────────────────────
+OS configuration resolved from package.json: ["vega"]
+Architectures resolved from package.json: ["armv7","x86_64","aarch64"]
+[VegaTargetSelector] Searching 23 paths
+[VegaTargetSelector] Config not found in any search path
+🔧 Resolved OS-version compatibility for 22 managed dependencies
+
+🔨 Build Plan (3 targets)
+───────────────────────────────────────
+  Debug: aarch64, armv7, x86_64
+
+🔍 Build Parallelization
+───────────────────────────────────────
+Parallelizing 3 total requests:
+  - Known targets and buildTypes: aarch64 for Debug
+  - Known targets and buildTypes: armv7 for Debug
+  - Known targets and buildTypes: x86_64 for Debug
+Running at most 4 threads in parallel
+
+[native-build] Could not compare package-lock.json, continuing to autolink
+[native-build] Perform autolinking on 20 qualified npm packages
+[native-build] 2026-10-17T23:26:51.350927Z  INFO amzn_kepler_manifest_module_remapper: Checking manifest at: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/vega/aarch64/Debug/manifest.toml
+[native-build] 2026-10-17T23:26:51.352009Z  INFO amzn_kepler_manifest_module_remapper::modify: Found dependencies to add to the manifest: 
+[native-build] 	wants: []
+[native-build] 	needs: ["/com.amazon.kepler.appstore_iap_lib_2@IAppstoreIapLib_12", "/com.amazon.kepler.async_storage__async_storage_2@IAsyncStorage__AsyncStorage_1", "/com.amazon.kepler.device_info_2@IDeviceInfo_1", "/com.amazon.kepler.gesture_handler_4@IGestureHandler_0", "/com.amazon.kepler.kepler_content_personalization_1@IKeplerContentPersonalization_3", "/com.amazon.kepler.kepler_epg_provider_1@IKeplerEpgProvider_9", "/com.amazon.kepler.kepler_file_system_0@IKeplerFileSystem_0", "/com.amazon.kepler.kepler_media_controls_1@IKeplerMediaControls_0", "/com.amazon.kepler.keplermediadescriptor_1@IKeplermediadescriptor_1", "/com.amazon.kepler.keplerscript_4@IKeplerScript_0", "/com.amazon.kepler.keplerscript_netmgr_lib_2@INetmgrTurbomodule_0", "/com.amazon.kepler.linear_gradient_2@ILinearGradient_0", "/com.amazon.kepler.localize_2@ILocalize_1", "/com.amazon.kepler.lottie_3@ILottie_0", "/com.amazon.kepler.navigation__core_8@INavigation__Core_0", "/com.amazon.kepler.navigation__drawer_8@INavigation__Drawer_0", "/com.amazon.kepler.navigation__elements_8@INavigation__Elements_0", "/com.amazon.kepler.navigation__native_8@INavigation__Native_0", "/com.amazon.kepler.navigation__routers_8@INavigation__Routers_0", "/com.amazon.kepler.navigation__stack_8@INavigation__Stack_0", "/com.amazon.kepler.reanimated_4@IReanimated_0", "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0", "/com.amazon.kepler.safe_area_context_8@ISafeAreaContext_0", "/com.amazon.kepler.screens_3@IScreens_0", "/com.amazon.kepler.security_manager_lib_1@ISecurityManagerLib_0", "/com.amazon.kepler.svg_3@ISVG_0", "/com.amazon.kepler.vector_icons_2@IVectorIcons_1", "/com.amazon.kepler.w3cmedia_2@IW3cmedia_3", "/com.amazon.kepler.worklets_1@IWorklets_0"]
+[native-build] 2026-10-17T23:26:51.352031Z  INFO amzn_kepler_manifest_module_remapper: Writing new manifest to: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/vega/aarch64/Debug/manifest.toml
+[native-build] 2026-10-17T23:26:51.352249Z  INFO amzn_kepler_manifest_module_remapper: Manifest remapping complete
+[native-build] Calling vpt with args pack /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/vega/aarch64/Debug -n calm-frames-app_aarch64 -d /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/kepler/calm-frames-app/0.1/vega/aarch64/Debug --validate
+[native-build] creating vpkg ...
+[native-build] WARNING: build_number is 0. Provide via --build-number CLI option or in manifest.toml [package] section.
+[native-build] analyzing manifest.toml ...
+[native-build] manifest.toml is valid
+[native-build] manifest validation found 0 errors
+[native-build] manifest.toml:176:6 info: [needs.module.id] Kepler module dependency '/com.amazon.kepler.kepler_epg_provider_1@IKeplerEpgProvider_9' MAY require the privilege 'com.amazon.kepler.tv.privilege.data_provider' to function, but the privilege is not requested in the manifest. Ensure that you request the appropriate privileges for the APIs that you use. Disregard this warning if you do not need this privilege
+[native-build]   help: This privilege is required to periodically update the system with your latest entitled live content. For further information, see: https://developer.amazon.com/docs/kepler-tv/declare-epg-sync-task.html
+[native-build] manifest.toml:46:1 info: [processes.group] Process group is missing an explicit id. Auto-generated anonymous ids will be used
+[native-build]   help: Add an id field to each process group for stable process naming
+[native-build] 
+[native-build] starting ABI validation ...
+[native-build] ABI validation passed!
+[native-build] staging package artifacts ...
+[native-build] generating meta-info ...
+[native-build] archiving ...
+[native-build] created: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/kepler/calm-frames-app/0.1/vega/aarch64/Debug/calm-frames-app_aarch64.vpkg
+[native-build] done.
+[native-build] {
+[native-build]   "title": "Calm Frames",
+[native-build]   "id": "io.github.alejandropublius.calmframes",
+[native-build]   "version": "0.1.0",
+[native-build]   "build_number": 0,
+[native-build]   "size": 70584284,
+[native-build]   "os_version_registry": {
+[native-build]     "contract_package_version": "1.0.323.0",
+[native-build]     "os_versions": [
+[native-build]       "1.2"
+[native-build]     ]
+[native-build]   }
+[native-build] }
+[native-build] Could not compare package-lock.json, continuing to autolink
+[native-build] Perform autolinking on 20 qualified npm packages
+[native-build] 2026-10-17T23:26:57.535236Z  INFO amzn_kepler_manifest_module_remapper: Checking manifest at: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/vega/armv7/Debug/manifest.toml
+[native-build] 2026-10-17T23:26:57.535608Z  INFO amzn_kepler_manifest_module_remapper::modify: Found dependencies to add to the manifest: 
+[native-build] 	wants: []
+[native-build] 	needs: ["/com.amazon.kepler.appstore_iap_lib_2@IAppstoreIapLib_12", "/com.amazon.kepler.async_storage__async_storage_2@IAsyncStorage__AsyncStorage_1", "/com.amazon.kepler.device_info_2@IDeviceInfo_1", "/com.amazon.kepler.gesture_handler_4@IGestureHandler_0", "/com.amazon.kepler.kepler_content_personalization_1@IKeplerContentPersonalization_3", "/com.amazon.kepler.kepler_epg_provider_1@IKeplerEpgProvider_9", "/com.amazon.kepler.kepler_file_system_0@IKeplerFileSystem_0", "/com.amazon.kepler.kepler_media_controls_1@IKeplerMediaControls_0", "/com.amazon.kepler.keplermediadescriptor_1@IKeplermediadescriptor_1", "/com.amazon.kepler.keplerscript_4@IKeplerScript_0", "/com.amazon.kepler.keplerscript_netmgr_lib_2@INetmgrTurbomodule_0", "/com.amazon.kepler.linear_gradient_2@ILinearGradient_0", "/com.amazon.kepler.localize_2@ILocalize_1", "/com.amazon.kepler.lottie_3@ILottie_0", "/com.amazon.kepler.navigation__core_8@INavigation__Core_0", "/com.amazon.kepler.navigation__drawer_8@INavigation__Drawer_0", "/com.amazon.kepler.navigation__elements_8@INavigation__Elements_0", "/com.amazon.kepler.navigation__native_8@INavigation__Native_0", "/com.amazon.kepler.navigation__routers_8@INavigation__Routers_0", "/com.amazon.kepler.navigation__stack_8@INavigation__Stack_0", "/com.amazon.kepler.reanimated_4@IReanimated_0", "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0", "/com.amazon.kepler.safe_area_context_8@ISafeAreaContext_0", "/com.amazon.kepler.screens_3@IScreens_0", "/com.amazon.kepler.security_manager_lib_1@ISecurityManagerLib_0", "/com.amazon.kepler.svg_3@ISVG_0", "/com.amazon.kepler.vector_icons_2@IVectorIcons_1", "/com.amazon.kepler.w3cmedia_2@IW3cmedia_3", "/com.amazon.kepler.worklets_1@IWorklets_0"]
+[native-build] 2026-10-17T23:26:57.535629Z  INFO amzn_kepler_manifest_module_remapper: Writing new manifest to: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/vega/armv7/Debug/manifest.toml
+[native-build] 2026-10-17T23:26:57.535863Z  INFO amzn_kepler_manifest_module_remapper: Manifest remapping complete
+[native-build] Calling vpt with args pack /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/vega/armv7/Debug -n calm-frames-app_armv7 -d /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/kepler/calm-frames-app/0.1/vega/armv7/Debug --validate
+[native-build] creating vpkg ...
+[native-build] WARNING: build_number is 0. Provide via --build-number CLI option or in manifest.toml [package] section.
+[native-build] analyzing manifest.toml ...
+[native-build] manifest.toml is valid
+[native-build] manifest validation found 0 errors
+[native-build] manifest.toml:176:6 info: [needs.module.id] Kepler module dependency '/com.amazon.kepler.kepler_epg_provider_1@IKeplerEpgProvider_9' MAY require the privilege 'com.amazon.kepler.tv.privilege.data_provider' to function, but the privilege is not requested in the manifest. Ensure that you request the appropriate privileges for the APIs that you use. Disregard this warning if you do not need this privilege
+[native-build]   help: This privilege is required to periodically update the system with your latest entitled live content. For further information, see: https://developer.amazon.com/docs/kepler-tv/declare-epg-sync-task.html
+[native-build] manifest.toml:46:1 info: [processes.group] Process group is missing an explicit id. Auto-generated anonymous ids will be used
+[native-build]   help: Add an id field to each process group for stable process naming
+[native-build] 
+[native-build] starting ABI validation ...
+[native-build] ABI validation passed!
+[native-build] staging package artifacts ...
+[native-build] generating meta-info ...
+[native-build] archiving ...
+[native-build] created: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/kepler/calm-frames-app/0.1/vega/armv7/Debug/calm-frames-app_armv7.vpkg
+[native-build] done.
+[native-build] {
+[native-build]   "title": "Calm Frames",
+[native-build]   "id": "io.github.alejandropublius.calmframes",
+[native-build]   "version": "0.1.0",
+[native-build]   "build_number": 0,
+[native-build]   "size": 69956048,
+[native-build]   "os_version_registry": {
+[native-build]     "contract_package_version": "1.0.323.0",
+[native-build]     "os_versions": [
+[native-build]       "1.2"
+[native-build]     ]
+[native-build]   }
+[native-build] }
+[native-build] Could not compare package-lock.json, continuing to autolink
+[native-build] Perform autolinking on 20 qualified npm packages
+[native-build] 2026-10-17T23:27:03.650590Z  INFO amzn_kepler_manifest_module_remapper: Checking manifest at: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/vega/x86_64/Debug/manifest.toml
+[native-build] 2026-10-17T23:27:03.650978Z  INFO amzn_kepler_manifest_module_remapper::modify: Found dependencies to add to the manifest: 
+[native-build] 	wants: []
+[native-build] 	needs: ["/com.amazon.kepler.appstore_iap_lib_2@IAppstoreIapLib_12", "/com.amazon.kepler.async_storage__async_storage_2@IAsyncStorage__AsyncStorage_1", "/com.amazon.kepler.device_info_2@IDeviceInfo_1", "/com.amazon.kepler.gesture_handler_4@IGestureHandler_0", "/com.amazon.kepler.kepler_content_personalization_1@IKeplerContentPersonalization_3", "/com.amazon.kepler.kepler_epg_provider_1@IKeplerEpgProvider_9", "/com.amazon.kepler.kepler_file_system_0@IKeplerFileSystem_0", "/com.amazon.kepler.kepler_media_controls_1@IKeplerMediaControls_0", "/com.amazon.kepler.keplermediadescriptor_1@IKeplermediadescriptor_1", "/com.amazon.kepler.keplerscript_4@IKeplerScript_0", "/com.amazon.kepler.keplerscript_netmgr_lib_2@INetmgrTurbomodule_0", "/com.amazon.kepler.linear_gradient_2@ILinearGradient_0", "/com.amazon.kepler.localize_2@ILocalize_1", "/com.amazon.kepler.lottie_3@ILottie_0", "/com.amazon.kepler.navigation__core_8@INavigation__Core_0", "/com.amazon.kepler.navigation__drawer_8@INavigation__Drawer_0", "/com.amazon.kepler.navigation__elements_8@INavigation__Elements_0", "/com.amazon.kepler.navigation__native_8@INavigation__Native_0", "/com.amazon.kepler.navigation__routers_8@INavigation__Routers_0", "/com.amazon.kepler.navigation__stack_8@INavigation__Stack_0", "/com.amazon.kepler.reanimated_4@IReanimated_0", "/com.amazon.kepler.runtime.react_native_kepler_4@IReactNativeKepler_0", "/com.amazon.kepler.safe_area_context_8@ISafeAreaContext_0", "/com.amazon.kepler.screens_3@IScreens_0", "/com.amazon.kepler.security_manager_lib_1@ISecurityManagerLib_0", "/com.amazon.kepler.svg_3@ISVG_0", "/com.amazon.kepler.vector_icons_2@IVectorIcons_1", "/com.amazon.kepler.w3cmedia_2@IW3cmedia_3", "/com.amazon.kepler.worklets_1@IWorklets_0"]
+[native-build] 2026-10-17T23:27:03.650999Z  INFO amzn_kepler_manifest_module_remapper: Writing new manifest to: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/vega/x86_64/Debug/manifest.toml
+[native-build] 2026-10-17T23:27:03.651233Z  INFO amzn_kepler_manifest_module_remapper: Manifest remapping complete
+[native-build] Calling vpt with args pack /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/vega/x86_64/Debug -n calm-frames-app_x86_64 -d /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/kepler/calm-frames-app/0.1/vega/x86_64/Debug --validate
+[native-build] creating vpkg ...
+[native-build] WARNING: build_number is 0. Provide via --build-number CLI option or in manifest.toml [package] section.
+[native-build] analyzing manifest.toml ...
+[native-build] manifest.toml is valid
+[native-build] manifest validation found 0 errors
+[native-build] manifest.toml:176:6 info: [needs.module.id] Kepler module dependency '/com.amazon.kepler.kepler_epg_provider_1@IKeplerEpgProvider_9' MAY require the privilege 'com.amazon.kepler.tv.privilege.data_provider' to function, but the privilege is not requested in the manifest. Ensure that you request the appropriate privileges for the APIs that you use. Disregard this warning if you do not need this privilege
+[native-build]   help: This privilege is required to periodically update the system with your latest entitled live content. For further information, see: https://developer.amazon.com/docs/kepler-tv/declare-epg-sync-task.html
+[native-build] manifest.toml:46:1 info: [processes.group] Process group is missing an explicit id. Auto-generated anonymous ids will be used
+[native-build]   help: Add an id field to each process group for stable process naming
+[native-build] 
+[native-build] starting ABI validation ...
+[native-build] ABI validation passed!
+[native-build] staging package artifacts ...
+[native-build] generating meta-info ...
+[native-build] archiving ...
+[native-build] created: /Users/alexvintera/calm-frames-claude-tv-2026-10-16/app/build/private/kepler/calm-frames-app/0.1/vega/x86_64/Debug/calm-frames-app_x86_64.vpkg
+[native-build] done.
+[native-build] {
+[native-build]   "title": "Calm Frames",
+[native-build]   "id": "io.github.alejandropublius.calmframes",
+[native-build]   "version": "0.1.0",
+[native-build]   "build_number": 0,
+[native-build]   "size": 70466396,
+[native-build]   "os_version_registry": {
+[native-build]     "contract_package_version": "1.0.323.0",
+[native-build]     "os_versions": [
+[native-build]       "1.2"
+[native-build]     ]
+[native-build]   }
+[native-build] }
+[native-build] vega vtbuild exited with code 0
+
+🔍 Build Configuration
+───────────────────────────────────────
+OS configuration resolved from package.json: ["vega"]
+Architectures resolved from package.json: ["armv7","x86_64","aarch64"]
+info build-kepler completed
+
+> calm-frames-app@0.1.0 postbuild:debug
+> node tools/check_prepared_library.mjs --packages Debug
+
+{"prepared_library":"checked","titles":1,"bundles":4,"bytes":28551507,"catalogSha256":"02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79","verification_reports":{"required":4,"present":4,"missing":[]},"approvedAcadiaBundle":"4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"}
