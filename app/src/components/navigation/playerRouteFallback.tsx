@@ -3,7 +3,9 @@
  *
  * PlayerScreen is lazy, and Metro's import() is an async function: it returns
  * a pending promise even for a module already in the bundle, and the first
- * load also evaluates Shaka's compiled player. So the first Watch of a session
+ * load evaluates the player's own modules. (Not Shaka's compiled player on the
+ * MP4 path: Metro's default inline requires load it only inside the HLS and
+ * DASH branch of VideoHandler.) So the first Watch of a session
  * always renders this route's Suspense fallback before the player itself. The
  * default fallback is the opaque black loading screen, which put a black
  * frame between the harbor details page and the player's own harbor opening.
