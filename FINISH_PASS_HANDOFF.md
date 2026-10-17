@@ -1,6 +1,10 @@
 # Finish pass, October 17, 2026
 
-Source changes are complete on `claude/tv-experience-2026-10-16`, based on `7f0567f`. Native build/install follows; final source and package identity will be recorded here after that checkpoint.
+Completed on `claude/tv-experience-2026-10-16`. Installed app source: `ed75fca6d52d5be52fedcd94e19a7eff387abd27`, based on compact-control evidence `7f0567f`. Native evidence commit: `1b13895918c97c1cae386e3ce70af9d9b92f1d1b`.
+
+Package: `build/release/finish-pass-2026-10-17/calm-frames-finish-aarch64-debug.vpkg`.
+SHA-256: `d8a253c5e49bccd7a3995165c7d7be3a2205aad680345f3019ba1ac13937a54e`.
+The successful build was reused after all 726 tracked app-input hashes matched. One installation was verified against the device copy; no rebuild or reinstall during reconnections. The app is running at Home with Watch focused. Text-log collectors are stopped.
 
 | Before | After |
 | --- | --- |
@@ -14,4 +18,22 @@ The new status compares actual media progress with the requested playback rate: 
 
 217 focused tests across 15 suites, one existing snapshot, TypeScript, changed-file lint and diff whitespace checks pass. Tests cover historical slow/normal traces, genuine loading versus pause/slow, observer cleanup, guarded Skip preservation, end teardown/fallback, copy, focus and layout. Independent review found one accessibility issue, fixed and regression-tested, with no remaining blocking findings. Evidence: `results/finish-pass-2026-10-17/`.
 
-The simulator was found closed before native work. It will be started once using its existing configuration. No screenshots, recording, capture suites, pushes, publication, credentials/settings changes or detector work. The three Opus submission files are reserved and untouched. Owner visual/audio approval remains pending.
+## Verified native outcome
+
+- Home to Details and More info, then Back to each opener: passed.
+- Help and Back: passed. The first driver expected an optional demo button; the current catalog correctly focuses Back. The driver was corrected without app changes.
+- Parents cancellation using hardware Back and the on-screen Back: passed, restoring Parents focus without PIN entry.
+- Pause/resume during the first cover: passed, retaining Skip focus and protection.
+- Skip during the second cover: passed; cover requested before playhead write, seek confirmed while covered, then cover released outside the interval.
+- Natural end: native ended to Home Watch focus in 361 ms, including 335 ms to completed teardown. The old 2.3-second presentation wait is gone.
+- Manual Back: Home Watch focus in 356 ms.
+
+After resume and before Skip, media advanced 20.574 s in 20.577 s of device wall time. No slow-status activation occurred. Opening and seek waiting transitions were logged. This does not prove the intermittent slowdown is cured or establish the appearance of a sustained slow/loading state.
+
+Connection interruptions delayed verification. On the final continuation the simulator was already running but the app was not; the existing production component was launched once. Old collector PID 91713 and final collector PID 98424 were stopped only after identity verification. No cause of the app's earlier stop is inferred. Host and guest clocks differ, so all durations compare timestamps within the same device clock.
+
+## Remaining owner step and limits
+
+Review the already-open Home, then Watch, for actual visual comfort, focus appearance and sound. Native pixels, audio quality and VoiceView speech were not captured or judged. Slow/loading state behavior is covered by the focused tests and historical trace replay; a sustained native instance was not forced. The earlier simulator/SDK slowdown's cause remains unresolved. There is no remaining implementation or connection blocker for this bounded pass.
+
+No screenshots, screen/audio/video recording, capture/export suites, push, publication, credentials/system changes or detector work. The three reserved Opus submission files and concurrent work are untouched. Full receipts and compressed text logs: [results/finish-pass-2026-10-17](results/finish-pass-2026-10-17/README.md).

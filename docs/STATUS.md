@@ -1,5 +1,13 @@
 # Status
 
+October 17 finish pass complete: source ed75fca is installed and package-verified.
+217 focused tests, TypeScript, relevant lint and independent review passed. Native
+Home/Details/Help/Parents Back routes, pause/resume, guarded Skip and natural end
+passed; end to Home Watch was 361 ms. App remains Home, collectors stopped. Owner
+visual/audio approval remains pending; no intermittent-slowdown cure claimed.
+See [the final finish-pass handoff](../FINISH_PASS_HANDOFF.md).
+
+
 October 17 compact-control checkpoint: 125 focused tests, TypeScript and relevant
 lint pass for the smaller lower-left scene status and Skip group. Source e4e7d86
 built and installed once; native log checks passed Pause/resume, guarded Skip and

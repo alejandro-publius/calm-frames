@@ -1,5 +1,19 @@
 # Final handoff: the integration candidate
 
+## Finish pass complete, October 17, 2026
+
+Installed source ed75fca uses truthful slow-progress feedback, clear pause/loading
+precedence, one loading announcement per episode and prompt end return through
+existing teardown. 217 focused tests, TypeScript, lint and independent review pass.
+The successful build was reused; all 726 tracked inputs matched and the installed
+package hash was verified. Home/Details/Help/Parents cancellation, pause/resume,
+guarded Skip, natural end and manual Back passed native text-log checks. End to
+Home Watch focus was 361 ms. The app is open at Home with Watch focused, and both
+owned collectors are stopped. Visual/audio approval remains for the owner; no
+slowdown cure is claimed. No push or reserved submission edits. See
+[FINISH_PASS_HANDOFF.md](FINISH_PASS_HANDOFF.md) for exact commits and evidence.
+
+
 ## Compact scene control, October 17, 2026
 
 The owner-requested compact lower-left scene status and Skip group passes 125
