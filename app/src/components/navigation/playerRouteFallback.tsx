@@ -31,6 +31,7 @@ export function playerRouteFallback({
   return (
     <PlayerOpening
       title={route.params.data.title}
+      menuArt={route.params.data.calmMenuArt}
       onBack={() => navigation.goBack()}
       liveStatus={false}
     />

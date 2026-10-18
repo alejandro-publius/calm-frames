@@ -12,6 +12,7 @@ import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from '../../calmframes/calmStyles';
+import { CoverInterval } from '../../calmframes/coverSchedule';
 import { SeekSource } from '../../calmframes/seekSafety';
 import Seekbar from '../../components/Seekbar';
 import {
@@ -61,6 +62,7 @@ interface VideoPlayerUIProps {
    */
   selectedCaptionId?: string;
   paused?: boolean;
+  sceneIntervals?: CoverInterval[];
 }
 export const areVideoPlayerUIPropsEqual = (
   prevProps: VideoPlayerUIProps,
@@ -72,7 +74,8 @@ export const areVideoPlayerUIPropsEqual = (
     areComponentPropsEqual(prevProps.title, nextProps.title) &&
     prevProps.skipOwnsSelect === nextProps.skipOwnsSelect &&
     prevProps.selectedCaptionId === nextProps.selectedCaptionId &&
-    prevProps.paused === nextProps.paused
+    prevProps.paused === nextProps.paused &&
+    areComponentPropsEqual(prevProps.sceneIntervals, nextProps.sceneIntervals)
   );
 };
 
@@ -89,6 +92,7 @@ export const VideoPlayerUI = React.memo(
     skipOwnsSelect = false,
     selectedCaptionId,
     paused = false,
+    sceneIntervals,
   }: VideoPlayerUIProps) => {
     const [captionMenuVisibility, setCaptionMenuVisibility] =
       useState<boolean>(false);
@@ -263,6 +267,7 @@ export const VideoPlayerUI = React.memo(
               videoData={videoData}
               handleShowControlsOnKeyEvent={handleShowControlsOnKeyEvent}
               requestSeek={requestSeek}
+              sceneIntervals={sceneIntervals}
             />
             <ControlBar
               videoRef={videoRef}

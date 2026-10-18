@@ -1,0 +1,17 @@
+{
+  "base": "59f23834885c3d15acaadac24d4ba912af06883e",
+  "paths_checked": [
+    "app/assets",
+    "app/config",
+    "app/src/calmframes/approvedBakedAmbient.ts",
+    "app/src/calmframes/approvedPreparedCatalogs.ts",
+    "app/src/calmframes/useFlashGuard.ts",
+    "app/src/calmframes/seekSafety.ts",
+    "app/src/calmframes/packagedLibrary.ts",
+    "pipeline",
+    "flashmap"
+  ],
+  "changed_files": [],
+  "asset_tree": "8de1fdc5ffe0de1b962a1397d50a255b2db3947b",
+  "config_tree": "2849abe69cf41de20f2d1996f8a708707bf9ac94"
+}

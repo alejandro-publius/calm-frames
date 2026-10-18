@@ -2671,3 +2671,15 @@ the owner. See FINISH_PASS_HANDOFF.md.
 ## October 17, 2026: Explain opaque covers and balance Home Watch
 
 The owner supplied images of a black scheduled cover and an oversized Watch pill. Keep exact protection and replace only the no-still scheduled cover presentation with a static opaque slate explanation. Give Home Watch the same target geometry as Details and preserve color/focus priority. Numeric source checks distinguish an encoded near-black opening from runtime covers. No media/trust change. 116 focused tests, TypeScript and independent source review passed. Cost: local development and one consolidated native build/install, no external services. Evidence: results/black-gap-2026-10-17/.
+
+## October 18, 2026: one cinematic viewing flow
+
+Use the existing licensed coastal image as the dominant viewport, compact film
+selectors with separate selected/focused states, and shared title/action geometry
+from Home through Details and opening. Keep More info separate. Share read-only
+scene positions with the existing guarded seekbar; no new seek path. Remove the
+large duplicate scheduled-cover message while retaining opacity and compact Skip.
+Reason: the owner requested a cohesive video-first redesign after reviewing
+showcase interface patterns. Cost: no new service, dependency, footage or asset;
+one local Debug build/install for review. Native pixels and audio remain owner
+acceptance, and this work does not authorize a push or publication.

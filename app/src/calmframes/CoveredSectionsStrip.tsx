@@ -20,7 +20,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { CoveredSectionsResult } from './coveredSections';
-import { stripMarks } from './FlashMapStrip';
+import SceneTimeline from './SceneTimeline';
 
 export const COVERED_SECTIONS_HEADING = 'Scenes covered';
 
@@ -41,38 +41,17 @@ const CoveredSectionsStrip = ({
 }: CoveredSectionsStripProps) => {
   const trackWidth = scale(width);
   const heading = ocean && result.kind === 'ready' ? 'Scenes replaced' : COVERED_SECTIONS_HEADING;
-  const marks = result.kind === 'ready' ? stripMarks(result.sections, result.durationMs) : [];
   return (
     <View
       testID={testID}
       style={[styles.block, { maxWidth: trackWidth }]}
       accessible
       accessibilityLabel={`${heading}. ${result.text}`}>
-      <Text style={styles.heading} testID={`${testID}-heading`}>
-        {heading}
-      </Text>
-      {result.kind === 'ready' ? (
-        <View style={[styles.track, { width: trackWidth }]} testID={`${testID}-track`}>
-          {marks.map((mark, index) => (
-            <View
-              key={`${mark.left}-${index}`}
-              testID={`${testID}-mark-${index}`}
-              style={[
-                styles.mark,
-                {
-                  left: mark.left * trackWidth,
-                  width: mark.width * trackWidth,
-                  backgroundColor:
-                    mark.reason === 'red' ? CALM_COLORS.FAILED : CALM_COLORS.PENDING,
-                },
-              ]}
-            />
-          ))}
-        </View>
-      ) : null}
-      <Text style={styles.line} testID={`${testID}-line`}>
-        {result.text}
-      </Text>
+      <View style={styles.summaryRow}>
+        <Text style={styles.heading} testID={`${testID}-heading`}>{heading}</Text>
+        <Text style={styles.line} testID={`${testID}-line`}>{result.text}</Text>
+      </View>
+      {result.kind === 'ready' ? <SceneTimeline intervals={result.sections} durationMs={result.durationMs} width={width} testID={testID} /> : null}
     </View>
   );
 };
@@ -84,16 +63,8 @@ const styles = StyleSheet.create({
     marginTop: scale(CALM_SPACE.BLOCK),
     gap: scale(CALM_SPACE.TIGHT),
   },
+  summaryRow: { width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', gap: scale(12) },
   heading: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
-  track: {
-    height: scale(28),
-    borderRadius: scale(6),
-    backgroundColor: CALM_COLORS.SURFACE,
-    borderColor: CALM_COLORS.BORDER,
-    borderWidth: scale(2),
-    overflow: 'hidden',
-  },
-  mark: { position: 'absolute', top: 0, bottom: 0 },
   line: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
 });
 

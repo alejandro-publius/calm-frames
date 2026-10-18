@@ -334,9 +334,6 @@ const PlayerScreen = ({
   const slowPlayback = usePlaybackProgress(videoRef, isVideoInitialized && !showOpeningShell &&
     !paused && !showBuffering && !isVideoEnded && !isVideoError && !returningHome &&
     (!guarding || guard.status === 'verified'));
-  card = playbackCard(card, { paused, covered, buffering: showBuffering, slow: slowPlayback,
-    ended: isVideoEnded, practice: benignDemo });
-  usePlaybackCardAnnouncement(showOpeningShell ? NO_CARD : card, paused);
   const calmCoverFallback = guarding && guard.status === 'verified' && card.kind === 'covering';
   const sceneBridge = preparedRouteAccepted && extraCoverAsset &&
     guard.scheduledCover && !paused && !showBuffering && !isVideoEnded &&
@@ -351,6 +348,9 @@ const PlayerScreen = ({
       scheduledCover: guard.scheduledCover, buffering: showBuffering || slowPlayback,
       paused, opening: showOpeningShell, returning: returningHome, ended: isVideoEnded, error: isVideoError,
       personalCoversReady: extraCovers.status === 'ready', personalCoverCount: extraCovers.record?.additions.length ?? -1 });
+  card = playbackCard(card, { paused, covered, buffering: showBuffering, slow: slowPlayback,
+    ended: isVideoEnded, practice: benignDemo, oceanVisible: bakedAmbientVisible });
+  usePlaybackCardAnnouncement(showOpeningShell ? NO_CARD : card, paused);
   const coverPresentation = bakedAmbientVisible ? 'baked-ambient' : !covered ? 'clear' : guard.coverImageUri ? 'signed-still' : calmCoverFallback ? 'message' : 'plain';
   useEffect(() => { trace('playback', `cover-surface ${coverPresentation}`); }, [coverPresentation]);
   // Debug-build breadcrumbs (CALM_TRACE, see trace.ts) so one native run can
@@ -812,6 +812,7 @@ const PlayerScreen = ({
             // Skip's and the sample must not pause or show its controls.
             skipOwnsSelect={cardOffersSkip(card)}
             selectedCaptionId={captionID}
+            sceneIntervals={guarding && guard.status === 'verified' ? guard.intervals : undefined}
             requestSeek={
               guarding
                 ? (source, targetMs) => {
@@ -824,7 +825,7 @@ const PlayerScreen = ({
             }
           />
         )}
-        {showOpeningShell && <PlayerOpening title={data.title} returning={returningHome} onBack={leavePlayer} />}
+        {showOpeningShell && <PlayerOpening title={data.title} menuArt={data.calmMenuArt} returning={returningHome} onBack={leavePlayer} />}
         {isVideoError && !returningHome && <ErrorView navigateBack={leavePlayer} />}
       </View>
     </SafeAreaView>

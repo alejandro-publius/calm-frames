@@ -93,14 +93,16 @@ test('Skip stays usable while its card owns the waiting status', () => {
 });
 
 
-test('a scheduled cover without a signed still explains the cover and retains Skip through pause', () => {
+test('a scheduled cover retains opacity and compact Skip through pause without a large message', () => {
   const view = startPlayer('covering');
   mockGuard.coverImageUri = undefined;
   act(() => mockBuffering(true));
-  expect(view.getByTestId('calm-frames-cover-fallback')).toBeTruthy();
-  expect(view.getByText('This scene is covered')).toBeTruthy();
+  expect(view.getByTestId('calm-frames-cover')).toBeTruthy();
+  expect(view.queryByTestId('calm-frames-cover-fallback')).toBeNull();
+  expect(view.queryByText('This scene is covered')).toBeNull();
   act(() => mockMedia.pause());
-  expect(view.getByTestId('calm-frames-cover-fallback')).toBeTruthy();
+  expect(view.getByTestId('calm-frames-cover')).toBeTruthy();
+  expect(view.queryByTestId('calm-frames-cover-fallback')).toBeNull();
   expect(view.getByTestId('calm-card-detail').props.children).toBe('Paused');
   fireEvent.press(view.getByTestId('calm-card-skip'));
   expect(mockGuard.skipTo).toHaveBeenCalled();

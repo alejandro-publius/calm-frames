@@ -159,7 +159,7 @@ const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = 
   },
   compactLabel: { ...CALM_TEXT.supporting },
   focusedLabel: { textDecorationLine: 'underline' },
-  primary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, ...(coastal ? { borderRadius: scale(64), minWidth: scale(280), paddingHorizontal: scale(48), minHeight: scale(108) } : {}) },
+  primary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, minWidth: scale(240) },
   balancedPrimary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, paddingVertical: scale(CALM_SPACE.TIGHT), paddingHorizontal: scale(CALM_SPACE.ROW) },
   primaryFocused: { backgroundColor: colors.PRIMARY, borderColor: COASTAL_PRIMARY_FOCUS },
   focusedPrimaryLabel: { color: colors.INK },

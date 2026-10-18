@@ -20,13 +20,13 @@ import {
   CALM_FLOW,
   CALM_SPACE,
   CALM_TEXT,
+  heroTitleTypography,
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
 import {
   BACKEND_UNREACHABLE,
   BACKEND_UNREACHABLE_EMPTY,
-  HOME_BENEFIT_LINE,
   NO_TITLES,
   PROFILES_KID_TITLE,
   runtimeLabel,
@@ -35,7 +35,7 @@ import {
 } from './copy';
 import ProfilePicker from './ProfilePicker';
 import { Profile } from './profiles';
-import TitleArtwork, { titlePresentation } from './TitleArtwork';
+import { titlePresentation } from './TitleArtwork';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle, kidModeTitles } from './titleStatus';
 import { useUiCapture } from './uiCapture';
@@ -249,11 +249,10 @@ const KidHomeScreen = ({
           <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroCopy}>
-                <Text accessibilityRole="header" style={styles.featureTitle} testID={`${testID}-video-title`}>{feature.name}</Text>
+                <Text accessibilityRole="header" style={[styles.featureTitle, heroTitleTypography(feature.name)]} testID={`${testID}-video-title`}>{feature.name}</Text>
                 <Text style={styles.videoMeta} testID={`${testID}-video-meta`}>{[feature.runtime ?? runtimeLabel(featured.title.durationMs), isBundledBenignStory(featured.title) ? 'Simulated demo' : null].filter(Boolean).join(' · ')}</Text>
-                <Text style={styles.benefit} testID={`${testID}-benefit`}>{HOME_BENEFIT_LINE}</Text>
                 <View style={styles.actions}>
-                  <CalmButton primary balanced playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
+                  <CalmButton primary playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
                   <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" accessibilityLabel={`Details: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
@@ -263,19 +262,19 @@ const KidHomeScreen = ({
             <View style={styles.grid}>
               {otherStories.map((entry) => {
                 const focused = focusedId === entry.title.id;
+                const selected = featured?.title.id === entry.title.id;
                 const label = titlePresentation(entry.title);
-                return <TouchableOpacity disabled={saving || undefined} accessibilityState={saving ? { disabled: true } : undefined}
+                return <TouchableOpacity surfaceKind={selected ? 'secondary' : 'tertiary'} disabled={saving || undefined} accessibilityState={{ disabled: saving, selected }}
                   key={entry.title.id} testID={`${testID}-poster-${entry.title.id}`} accessibilityRole="button"
                   accessibilityLabel={[label.cardName ?? label.name, label.kind].filter(Boolean).join(', ')} activeOpacity={1}
                   hasTVPreferredFocus={returnTo === 'poster' && entry.title.id === preferredId}
                   onFocus={() => { setFocusedId(entry.title.id); setSelectedId(entry.title.id); }} onBlur={() => setFocusedId(null)} onPress={() => {
                     if (!saving) { onLaunchControl?.('poster'); onOpen(entry); feedback.confirm(); }
                   }}
-                  style={[styles.poster, focused ? styles.posterFocused : null]}>
-                  <View style={styles.posterArt}><TitleArtwork compact height={170} entry={entry} testID={`${testID}-poster-image-${entry.title.id}`} /></View>
+                  style={[styles.poster, selected ? styles.posterSelected : null, focused ? styles.posterFocused : null]}>
                   <View style={styles.posterCopy}>
                   <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
-                  {label.kind && label.art !== 'coastal' ? <Text style={styles.posterQualifier} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{label.kind}</Text> : null}
+                  {label.kind ? <Text style={styles.posterQualifier} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{label.selectorMeta ?? label.kind}</Text> : null}
                   </View>
                 </TouchableOpacity>;
               })}
@@ -298,21 +297,20 @@ const styles = StyleSheet.create({
   navigationLink: { alignSelf: 'center' },
   libraryScroll: { flex: 1 },
   scrollContent: { paddingBottom: scale(12) },
-  hero: { width: '100%', minHeight: scale(480), alignItems: 'flex-start', paddingBottom: scale(36) },
-  heroCopy: { width: scale(900), paddingTop: scale(CALM_FLOW.HERO_TOP), alignItems: 'flex-start' },
+  hero: { width: '100%', minHeight: scale(556), alignItems: 'flex-start', paddingBottom: scale(36) },
+  heroCopy: { width: scale(CALM_FLOW.HERO_TITLE_WIDTH), paddingTop: scale(CALM_FLOW.HERO_TOP), alignItems: 'flex-start' },
   featureTitle: { ...CALM_TEXT.feature, color: CALM_COLORS.TEXT, marginTop: scale(0), marginBottom: scale(CALM_SPACE.TIGHT) },
-  videoMeta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(CALM_SPACE.ROW) },
-  benefit: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT, maxWidth: scale(760), marginBottom: scale(CALM_SPACE.BLOCK) },
+  videoMeta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(CALM_SPACE.BLOCK) },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   learn: { flexDirection: 'row', marginTop: scale(8) },
-  sectionHeading: { alignItems: 'flex-start', marginBottom: scale(24) },
+  sectionHeading: { alignItems: 'flex-start', marginBottom: scale(12) },
   section: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
   banner: { marginBottom: scale(20) },
   grid: { width: '100%', flexDirection: 'row', flexWrap: 'nowrap', gap: scale(20) },
-  poster: { width: scale(332), flexDirection: 'column', alignItems: 'stretch', gap: scale(12), padding: scale(6), borderRadius: scale(CALM_CONTROL.RADIUS), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: CALM_COLORS.SURFACE, backgroundColor: CALM_COLORS.SURFACE },
+  poster: { width: scale(396), minHeight: scale(132), flexDirection: 'column', justifyContent: 'center', padding: scale(12), borderRadius: scale(CALM_CONTROL.RADIUS), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: 'transparent', backgroundColor: 'transparent' },
+  posterSelected: { borderLeftColor: CALM_COLORS.FOCUS_RING, backgroundColor: CALM_COLORS.SURFACE },
   posterFocused: { borderColor: CALM_COLORS.FOCUS_RING, backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
-  posterArt: { width: '100%', borderRadius: scale(CALM_CONTROL.RADIUS), overflow: 'hidden' },
-  posterCopy: { paddingHorizontal: scale(12), paddingBottom: scale(8) },
+  posterCopy: { paddingHorizontal: scale(12) },
   posterTitle: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT },
   posterQualifier: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
 });

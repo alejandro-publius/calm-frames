@@ -31,12 +31,12 @@ describe('CoverLayer', () => {
     expect(screen.queryByTestId('calm-frames-cover-top')).toBeNull();
   });
 
-  it('gives an opaque scheduled cover a static explanation without exposing video', () => {
+  it('keeps the scheduled cover opaque without a redundant large message', () => {
     const view = render(<CoverLayer visible calmFallback />);
     expect(StyleSheet.flatten(screen.getByTestId('calm-frames-cover').props.style)).toMatchObject({
       opacity: 1, backgroundColor: '#22303B', left: 0, top: 0, right: 0, bottom: 0, zIndex: 1,
     });
-    expect(screen.getByText('This scene is covered')).toBeTruthy();
+    expect(screen.queryByText('This scene is covered')).toBeNull();
     expect(screen.getByTestId('calm-frames-cover').props.pointerEvents).toBe('none');
     view.rerender(<CoverLayer visible={false} calmFallback />);
     expect(screen.queryByTestId('calm-frames-cover')).toBeNull();

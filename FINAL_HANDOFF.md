@@ -1,5 +1,16 @@
 # Final handoff: the integration candidate
 
+## Cinematic redesign prepared, October 18, 2026
+
+The owner authorized a cohesive video-first redesign from synced 59f2383 on local
+branch `codex/cinematic-review-2026-10-18`. Home now has a compact film selector;
+Details and opening retain the same coastal setting, typography and Watch size.
+Read-only scene marks share interval geometry with the guarded player seekbar.
+The large redundant scheduled-cover message is removed; opaque protection and
+compact Skip remain. Source media, detectors, signing and trust are unchanged.
+Focused tests and source review precede one consolidated build/install; installed
+source is still 603f6ce until its receipt succeeds. No capture or push.
+
 ## Otters and concise Details copy installed, October 18, 2026
 
 Installed source is `603f6ce01a7f719fd719e7947525058e478646fd`; package SHA-256 is

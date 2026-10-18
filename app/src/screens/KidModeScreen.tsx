@@ -162,6 +162,7 @@ export function titleDataFor(entry: CheckedTitle): TitleData {
   return {
     id: entry.title.id,
     title: titlePresentation(entry.title).name,
+    calmMenuArt: titlePresentation(entry.title).menuArt ?? titlePresentation(entry.title).art,
     description: '',
     mediaType: 'video',
     mediaSourceType: 'url',

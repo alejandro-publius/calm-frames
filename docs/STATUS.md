@@ -1,5 +1,12 @@
 # Status
 
+October 18 cinematic redesign: implementation and focused tests are ready on
+`codex/cinematic-review-2026-10-18`, based on synced 59f2383. Existing assets,
+detectors, trust and protective paths remain unchanged. One consolidated native
+build/install follows the source checkpoint; see FINAL_HANDOFF.md and
+results/cinematic-review-2026-10-18/ for the current installed receipt. Older
+installed status below is historical.
+
 October 17 submission packet reconciliation, documentation only: the canonical
 checklist, Devpost draft and 90-second run of show in docs/submission/ now
 describe installed source 9cc57ca, local intake and staging, and the unapproved

@@ -181,14 +181,13 @@ const TitleDetailsScreen = ({
 
   return (
     <ScrollView key="watch" testID={testID} style={styles.screen} contentContainerStyle={styles.content}>
-      {presentation.art ? <HomeHarborScene variant={presentation.art} immersive enabled={interfaceMotionEnabled} active={interfaceActive} /> : null}
+      {presentation.menuArt || presentation.art ? <HomeHarborScene variant={presentation.menuArt ?? presentation.art} immersive enabled={interfaceMotionEnabled} active={interfaceActive} /> : null}
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
           <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name)]} testID={`${testID}-title`}>{presentation.name}</Text>
           <Text style={styles.meta} testID={`${testID}-meta`}>{meta}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
-          <CoveredSectionsStrip result={covered} ocean={ocean} testID={`${testID}-covered`} />
         </View>
         <View style={styles.actionRail}>
           <View style={styles.buttons}>
@@ -199,6 +198,7 @@ const TitleDetailsScreen = ({
               onPress={() => setPage('info')} />
           </View>
         </View>
+        <CoveredSectionsStrip result={covered} ocean={ocean} testID={`${testID}-covered`} />
       </View>
     </ScrollView>
   );
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
   hero: { width: '100%', minHeight: scale(CALM_FLOW.HERO_HEIGHT), alignItems: 'flex-start', justifyContent: 'flex-start' },
   heroCopy: { width: '100%', maxWidth: scale(CALM_FLOW.HERO_TITLE_WIDTH), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
-  actionRail: { width: scale(620), alignItems: 'flex-start', gap: scale(26), marginTop: scale(24) },
+  actionRail: { width: '100%', alignItems: 'flex-start', gap: scale(26), marginTop: scale(24) },
   meta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left', marginBottom: scale(16) },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
   heroTitle: { marginBottom: scale(8) },

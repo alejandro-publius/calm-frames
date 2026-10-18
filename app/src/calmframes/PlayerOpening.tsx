@@ -16,9 +16,9 @@ const EYEBROW_MARGIN = 12;
 /** CALM_TEXT.supporting's line height in 1080p units; test/calmframes/openingAlignment.test.tsx pins it. */
 export const EYEBROW_LINE_HEIGHT = 42;
 export const OPENING_COPY_TOP = CALM_FLOW.HERO_TOP - (EYEBROW_LINE_HEIGHT + EYEBROW_MARGIN);
-export default function PlayerOpening({ title, onBack, returning = false, liveStatus = true }: { title: string; onBack: () => void; returning?: boolean; liveStatus?: boolean }) {
+export default function PlayerOpening({ title, onBack, returning = false, liveStatus = true, menuArt = 'harbor-cinematic' }: { menuArt?: string; title: string; onBack: () => void; returning?: boolean; liveStatus?: boolean }) {
   return <CoastalAppearance.Provider value><View testID="player-home-opening" style={styles.screen}>
-    <HomeHarborScene immersive variant={title.toLowerCase().includes('acadia') ? 'coastal' : 'harbor-cinematic'} />
+    <HomeHarborScene immersive variant={menuArt} />
     <CalmPageHeader onBack={!returning ? onBack : undefined} backLabel="Back" backTestID="player-opening-back" preferredBack />
     <View style={styles.copy}>
       <Text style={styles.eyebrow}>Calm Frames</Text>

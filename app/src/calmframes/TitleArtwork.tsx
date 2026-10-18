@@ -13,6 +13,7 @@ interface TitlePresentation {
   name: string;
   cardName?: string;
   kind?: string;
+  selectorMeta?: string;
   action: string;
   description: string;
   runtime?: string;
@@ -27,7 +28,7 @@ export const OTTER_PREVIEW_SOURCE_SHA256 = '4e473dacc78c2a18c01e8fe030fc482da6b7
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
   if (concernsPackagedLibrary(title) && title.sha256 === OTTER_PREVIEW_SOURCE_SHA256 && title.durationMs === 4240) {
     return { name: 'Otters · short preview', cardName: 'Otters', kind: 'Short preview · 4.24 seconds',
-      action: 'Watch preview', runtime: '4.24 seconds · Silent · Plays once', menuArt: 'coastal',
+      selectorMeta: 'Silent · 4.24 seconds', action: 'Watch preview', runtime: '4.24 seconds · Silent · Plays once', menuArt: 'coastal',
       description: 'A short excerpt of an otter grooming. Plays once, without sound.',
       attribution: 'Uusijani / Wikimedia Commons. Otter (Lutra lutra) grooming. CC0 1.0. Short excerpt. Source: https://commons.wikimedia.org/wiki/File:Otter_(Lutra_lutra)_grooming.webm' };
   }

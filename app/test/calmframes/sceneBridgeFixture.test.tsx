@@ -17,7 +17,7 @@ it('renders verified fixture text and an opaque ordinary fallback for stale iden
   expect(StyleSheet.flatten(screen.getByTestId('scene-bridge-fixture-cover').props.style).opacity).toBe(1);
   fireEvent.press(screen.getByTestId('scene-bridge-fixture-fallback'));
   expect(screen.queryByText('Test fixture: a card displays one.')).toBeNull();
-  expect(screen.getByText('This scene is covered')).toBeTruthy();
+  expect(screen.queryByText('This scene is covered')).toBeNull();
   expect(StyleSheet.flatten(screen.getByTestId('scene-bridge-fixture-cover').props.style).opacity).toBe(1);
   expect(trace).toHaveBeenCalledWith('playback', 'scene-bridge-fixture state=fallback opaque_requested=true media=none');
   fireEvent.press(screen.getByTestId('scene-bridge-fixture-valid'));

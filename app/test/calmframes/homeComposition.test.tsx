@@ -49,12 +49,12 @@ afterEach(() => jest.restoreAllMocks());
 const back = () => act(() => { expect([...handlers].reverse().some((handler) => handler() === true)).toBe(true); });
 
 describe('one featured video', () => {
-  it('shows the hero alone, with the running time in words and the benefit line', () => {
+  it('shows the hero alone, with the runtime and actions, without a persistent explanatory line', () => {
     render(<KidHomeScreen titles={consumer} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={jest.fn()} />);
     expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Acadia');
     // The fixture's duration rounds the way describeHiddenTotal rounds it; the words are what matter.
     expect(screen.getByTestId('kid-home-video-meta').props.children).toBe(`${Math.round((acadia.title.durationMs ?? 0) / 1000)} seconds`);
-    expect(screen.getByTestId('kid-home-benefit').props.children).toBe(HOME_BENEFIT_LINE);
+    expect(screen.queryByText(HOME_BENEFIT_LINE)).toBeNull();
     expect(HOME_BENEFIT_LINE).toBe('Watch with flashing scenes covered.');
     expect(screen.queryByText('Choose a video')).toBeNull();
     expect(posters()).toHaveLength(0);

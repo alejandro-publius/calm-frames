@@ -92,7 +92,7 @@ const CoverLayer = ({
         accessibilityElementsHidden
         importantForAccessibility="no-hide-descendants"
         style={[styles.fill, showFallback ? styles.calmFill : null, { opacity: coverOpacity }]} pointerEvents="none">
-        {showFallback ? <View testID={`${testID}-fallback`} style={styles.message}>
+        {showFallback && bridge ? <View testID={`${testID}-fallback`} style={styles.message}>
           <Text style={styles.messageTitle}>{bridge ? bridge.label : 'This scene is covered'}</Text>
           {bridge ? <Text testID={`${testID}-bridge`} style={styles.bridgeText}>{bridge.text}</Text> : null}
           <Text style={styles.messageDetail}>You can wait or choose Skip.</Text>

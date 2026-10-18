@@ -1,3 +1,5 @@
+import SceneTimeline from '../calmframes/SceneTimeline';
+import { CoverInterval } from '../calmframes/coverSchedule';
 import { CALM_COLORS, CALM_TEXT } from '../calmframes/calmStyles';
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
@@ -48,6 +50,7 @@ const Seekbar = ({
   testID,
   handleShowControlsOnKeyEvent,
   requestSeek,
+  sceneIntervals,
   hasTVPreferredFocus = true,
 }: {
   videoRef: React.MutableRefObject<VideoPlayer | null>;
@@ -63,6 +66,7 @@ const Seekbar = ({
    * moves the playhead.
    */
   requestSeek?: (source: SeekSource, targetMs: number) => void;
+  sceneIntervals?: CoverInterval[];
 }) => {
   const [progress, setProgress] = useState<number>(
     videoRef.current?.currentTime || 0,
@@ -372,6 +376,10 @@ const Seekbar = ({
           hasTVPreferredFocus={hasTVPreferredFocus}
           autoFocus
           style={styles.seekbar}>
+          {sceneIntervals && sceneIntervals.length > 0 ? <View style={styles.sceneTrack} testID="player-scene-context" accessible focusable={false}
+            accessibilityLabel={`${sceneIntervals.length} planned scene${sceneIntervals.length === 1 ? '' : 's'} marked on the timeline`}>
+            <SceneTimeline intervals={sceneIntervals} durationMs={totalValue * SECOND_IN_MILIS} currentMs={progress * SECOND_IN_MILIS} testID="player-scenes" />
+          </View> : null}
           <KUICSeekbar
             ref={seekBarRef}
             onFocus={() => trace('focus', 'player-seekbar')}
@@ -432,6 +440,7 @@ const styles = StyleSheet.create({
     marginBottom: scaleUxToDp(160),
     zIndex: 2,
   },
+  sceneTrack: { width: '100%', marginBottom: scaleUxToDp(8) },
   seekbar: {
     width: '90%',
     marginBottom: scaleUxToDp(10),
@@ -468,6 +477,7 @@ export default React.memo(Seekbar, (prevProps, nextProps) => {
     prevProps.videoData === nextProps.videoData &&
     prevProps.bifFrameImagesRef === nextProps.bifFrameImagesRef &&
     prevProps.seekBarRef === nextProps.seekBarRef &&
-    prevProps.hasTVPreferredFocus === nextProps.hasTVPreferredFocus
+    prevProps.hasTVPreferredFocus === nextProps.hasTVPreferredFocus &&
+    prevProps.sceneIntervals === nextProps.sceneIntervals
   );
 });

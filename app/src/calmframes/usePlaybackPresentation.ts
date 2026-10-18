@@ -49,12 +49,13 @@ export function playbackCard(card: Card, state: {
   slow?: boolean;
   ended: boolean;
   practice?: boolean;
+  oceanVisible?: boolean;
 }): Card {
   if (state.ended || card.kind === 'after') return NO_CARD;
   if (card.kind !== 'countdown' && card.kind !== 'covering') return card;
   const title = state.practice
     ? (state.covered ? 'Practice cover' : 'Practice ahead')
-    : (state.covered ? 'Scene hidden' : 'Scene ahead');
+    : (state.covered ? state.oceanVisible ? 'Scene replaced' : 'Scene hidden' : 'Scene ahead');
   const detail = state.paused ? 'Paused' : state.buffering ? 'Loading' : state.slow ? 'Playback slow' : '';
   const guidance = state.paused
     ? 'Paused. Press Play to continue, or Skip to jump past this scene.'

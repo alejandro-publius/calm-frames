@@ -45,8 +45,8 @@ Nine bounded checks passed on the existing **Extra cautious** profile:
 | Route | What the logs establish |
 | --- | --- |
 | Home → Watch Acadia | Exact ocean bundle, report and rendition `42d2abbe...` selected. |
-| Acadia first interval | Guard covered and baked-ambient requested at 7,387 ms; clear at 12,743 ms. Exact span: 7,343–12,699 ms. |
-| Acadia second interval | Guard covered and baked-ambient requested at 28,142 ms; clear at 31,614 ms. Exact span: 28,113–31,593 ms. |
+| Acadia first interval | Guard covered and baked-ambient requested at 7,387 ms; clear at 12,743 ms. Exact span: 7,343-12,699 ms. |
+| Acadia second interval | Guard covered and baked-ambient requested at 28,142 ms; clear at 31,614 ms. Exact span: 28,113-31,593 ms. |
 | Acadia natural end | Playback ended and Home Watch regained focus. |
 | Home content rail | Both Acadia and Otters selectable; Otters opens Details with Watch preview focused. |
 | Details → Otter playback → end | Exact otter rendition `dd94988d...`, picture-shown event, one natural completion, return to Details Watch; no baked-ambient presentation. |

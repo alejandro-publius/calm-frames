@@ -11,6 +11,7 @@ import { act, fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { playerRouteFallback } from '../../src/components/navigation/playerRouteFallback';
+import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
 import { COLORS } from '../../src/styles/Colors';
 import { WithSuspense } from '../../src/utils/WithSuspense';
 
@@ -80,4 +81,12 @@ test('a fixed fallback still works as before', () => {
   const Route = WithSuspense(React.lazy(metroImport), <Text testID="fixed">fixed</Text>);
   const view = render(<Route />);
   expect(view.getByTestId('fixed')).toBeTruthy();
+});
+
+ test('the route fallback carries the same decorative coast for Otters without a title-name heuristic', async () => {
+  const Route = WithSuspense(React.lazy(metroImport), playerRouteFallback);
+  const { props } = route({ showHomeOpening: true, data: { title: 'Otters · short preview', calmMenuArt: 'coastal' } });
+  const view = render(<Route {...props} />);
+  expect(view.UNSAFE_getByType(HomeHarborScene).props.variant).toBe('coastal');
+  await settle();
 });
