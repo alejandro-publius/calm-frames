@@ -83,7 +83,7 @@ import {
 import TitleDetailsScreen from '../calmframes/TitleDetailsScreen';
 import { AppStackParamList, Screens } from '../components/navigation/types';
 import { TitleData } from '../types/TitleData';
-import { ACADIA_SOURCE_SHA256, concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
+import { concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
 
 export type KidModeView =
   | 'first-run'
@@ -130,7 +130,8 @@ export interface KidModeScreenProps {
 }
 
 /**
- * Acadia is the current consumer video. The exact signed Harbor catalog and
+ * Consumer titles come from exact reviewed build approvals (currently Acadia).
+ * The exact signed Harbor catalog and
  * its practice assets remain bundled for regression work, outside this list.
  * Selection does not grant trust: every entry still follows the same checks.
  * The gradient stays available only through How it works > Check playback
@@ -138,7 +139,7 @@ export interface KidModeScreenProps {
  */
 export function defaultCatalog(settings = DEFAULT_SETTINGS): CatalogTitle[] {
   return [
-    ...packagedLibrary.titles(settings).filter(title => title.sha256 === ACADIA_SOURCE_SHA256),
+    ...packagedLibrary.consumerTitles(settings),
     offlineTitle(OFFLINE_VIDEO_URI),
   ];
 }

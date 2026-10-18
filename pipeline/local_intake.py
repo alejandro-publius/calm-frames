@@ -425,7 +425,36 @@ class IntakeStore:
             self.poll()
             path = job_dir(self.root, job_id)
             job = read_job(path)
+            if action in {"stage-delivery", "check-delivery", "cancel-delivery"}:
+                from .package_delivery import cancel_delivery, check_delivery, stage_delivery
+
+                if job["status"] != "package_review" or not job.get("package"):
+                    raise IntakeError("Wait for a verified export before staging TV delivery.")
+                staging = path / "delivery-reviews"
+                prior = job.get("delivery")
+                # A failed recheck must not leave a stale ready label in the UI.
+                update(path, delivery=None)
+                try:
+                    if action == "stage-delivery":
+                        directory = _path_inside(path / job["package"]["relative_directory"], path)
+                        result = stage_delivery(directory, job["source_sha256"], staging)
+                    else:
+                        if not prior:
+                            raise IntakeError("Stage a delivery review first.")
+                        operation = check_delivery if action == "check-delivery" else cancel_delivery
+                        result = operation(staging, prior["ticket_id"])
+                except (OSError, ValueError, PipelineError):
+                    if prior:
+                        # Keep the cancellation handle, never the old ready status.
+                        update(path, delivery={**prior, "state": "blocked", "can_watch": False,
+                                               "message": "Delivery validation failed. Cancel this review before staging a replacement."})
+                    raise
+                return update(path, delivery=result)
             if action == "cancel":
+                if job.get("delivery") and job["delivery"].get("state") != "canceled":
+                    from .package_delivery import cancel_delivery
+
+                    cancel_delivery(path / "delivery-reviews", job["delivery"]["ticket_id"])
                 update(path, run_id=None)
                 owned = self.children.pop(job_id, None)
                 if owned:
@@ -444,6 +473,7 @@ class IntakeStore:
                     review=None,
                     approved_review=None,
                     package=None,
+                    delivery=None,
                     error=None,
                 )
             if action == "approve":

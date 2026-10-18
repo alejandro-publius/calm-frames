@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "state": "approved_for_build",
+  "message": "Existing exact-approved package; this staging action does not build or install it.",
+  "approval_label": "Acadia \u2014 existing approved fixture",
+  "approval_required": false,
+  "blockers": [],
+  "can_watch": false,
+  "installed_by_staging": false,
+  "package_directory": "/Users/alexvintera/Documents/Codex/2026-10-15/task/delivery-staging-acadia-fixture/package",
+  "source_sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+  "title": "Acadia coastal scenery (National Park Service, public domain)",
+  "bundle_id": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13",
+  "catalog_sha256": "ad74eb70199adc8597d1f7bcdba57fa1c0b805987e2f8a11f240fba4c036dd4c",
+  "public_key_fingerprint": "98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407",
+  "approval_request": {
+    "bundleId": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13",
+    "catalogSha256": "ad74eb70199adc8597d1f7bcdba57fa1c0b805987e2f8a11f240fba4c036dd4c",
+    "publicKeyFingerprint": "98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407"
+  },
+  "verification": {
+    "checkedInputsSha256": "cd7f95048dfb9b7907600c0bb559e4a0197536886d77dce63fb07be0bb18139f",
+    "outcome": "cover proven drawn",
+    "reportSha256": "0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019"
+  },
+  "inventory_sha256": "c899073848c37c92ba96eb390deeda1ba95a41d74bdc83da090e938a1ccbded6",
+  "files": {
+    "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13/manifest.json": "ad74eb70199adc8597d1f7bcdba57fa1c0b805987e2f8a11f240fba4c036dd4c",
+    "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.json": "d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1",
+    "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.mp4": "9baa7a90148bdda70e52e81e68861a33dbfd9146649ca2c41af923d56ba55cac",
+    "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.json": "c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f",
+    "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4": "00a214650090bdabc2a9e4639d68a999aacd762be61055cd9b6fedf7e9175f59",
+    "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.json": "709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a",
+    "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.mp4": "9baa7a90148bdda70e52e81e68861a33dbfd9146649ca2c41af923d56ba55cac",
+    "catalog.json": "ad74eb70199adc8597d1f7bcdba57fa1c0b805987e2f8a11f240fba4c036dd4c",
+    "catalog.ts": "cffa3f09ec91008e3e8e7a5f80d90dc8a6bfcef6b1864519c34754b8a2d53ac4",
+    "reports/0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019.json": "0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019"
+  },
+  "ticket_id": "c557e314876a4270bae9c0dbb382c7a3",
+  "staged_at": 1792284194.048803
+}

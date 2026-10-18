@@ -7,6 +7,7 @@
 // explicitly so the signed catalog text is the same in tests and on Vega.
 import { PACKAGED_LIBRARY_JSON } from '../../assets/raw/prepared-library/catalog.ts';
 import { PACKAGED_LIBRARY_JSON as ACADIA_LIBRARY_JSON } from './acadiaCatalog';
+import { APPROVED_PREPARED_CATALOGS } from './approvedPreparedCatalogs';
 import { base64ToBytes } from './ed25519';
 import { coverOptionsFor, HouseholdSettings, PRESET_NAMES, PresetName } from './household';
 import { CatalogTitle } from './titleStatus';
@@ -300,10 +301,20 @@ export function createApprovedAcadiaLibrary(raw: string) {
   } catch { return createPackagedLibrary('invalid'); }
 }
 
-const libraries = [createPackagedLibrary(PACKAGED_LIBRARY_JSON), createApprovedAcadiaLibrary(ACADIA_LIBRARY_JSON)];
+/** Exact compiled text only; this is not a runtime import or signer registration API. */
+export function createApprovedLibrary(raw: string) {
+  return createPackagedLibrary(APPROVED_PREPARED_CATALOGS.some(entry => entry.raw === raw) ? raw : 'invalid');
+}
+
+const approvedLibraries = APPROVED_PREPARED_CATALOGS.map(entry => ({
+  consumer: entry.consumer, library: createApprovedLibrary(entry.raw),
+}));
+const libraries = [createPackagedLibrary(PACKAGED_LIBRARY_JSON), ...approvedLibraries.map(entry => entry.library)];
 export const packagedLibrary = {
   problem: libraries.find(library => library.problem)?.problem ?? null,
   titles: (settings: HouseholdSettings) => libraries.flatMap(library => library.titles(settings)),
+  consumerTitles: (settings: HouseholdSettings) => approvedLibraries
+    .filter(entry => entry.consumer).flatMap(entry => entry.library.titles(settings)),
   evidenceFor: (title: CatalogTitle, settings: HouseholdSettings) =>
     libraries.map(library => library.evidenceFor(title, settings)).find(Boolean) ?? null,
   publicKeyFor: (title: CatalogTitle, settings: HouseholdSettings) =>

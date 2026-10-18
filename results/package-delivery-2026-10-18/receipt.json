@@ -1,0 +1,39 @@
+{
+  "status": "tested_source_milestone_not_installed",
+  "base_commit": "076247ad45fe8ca6ebfcac22409fe870deb3f35d",
+  "branch": "codex/package-staging-2026-10-18",
+  "python_tests": 55,
+  "node_tests": 32,
+  "app_tests": 59,
+  "typecheck": "pass with preserveSymlinks for shared dependencies",
+  "eslint": "pass",
+  "ruff": "pass",
+  "html_js_syntax": "pass",
+  "exact_approved_consumer_bundles": [
+    "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"
+  ],
+  "fixture": "existing approved Acadia only",
+  "native_builds": 0,
+  "native_installs": 0,
+  "new_signers_or_catalogs_registered": 0,
+  "runtime_import": false,
+  "unknown_package_watch_enabled": false,
+  "app_assets_changed": false,
+  "detector_changed": false,
+  "prairie_package_changed_or_integrated": false,
+  "reserved_submission_files_changed": false,
+  "pushes": 0,
+  "source_hashes": {
+    "pipeline/package_delivery.py": "f62f3d9596c66819f3e4090bfc620a771f643fed67e7cc5b0a88fc346816e1c5",
+    "pipeline/local_intake.py": "49e811539e8b5ba8ac950a221c2364e1858f2036170e57a0a2e7331465c9d88a",
+    "pipeline/local_intake.html": "b3266ddabf4d9f725c982ff93715dfcebebcfdebdfb4194825bc44eb177f451b",
+    "app/config/approved-prepared-libraries.json": "4444adb683c6c762daf59b7b4720f04a91e1b13c56471ab4a8d6225c314308c3",
+    "app/tools/approved_prepared_libraries.mjs": "dde18c633af154762019d3e9395ca7424ebea65d560c0e806b4dee928933dd46",
+    "app/tools/check_prepared_library.mjs": "5ddb339609d91c905d8605703644b7cfc37d84681a7535dfe97f43e470b65087",
+    "app/src/calmframes/approvedPreparedCatalogs.ts": "2009d7360bda090670f139f05c497076b4342416c49e611bafcb635875a0fbdf",
+    "app/src/calmframes/packagedLibrary.ts": "c7cae4194e10c7a7ff6705c2cee13084c88d81f58aad3dfa8ce6d5c56551ab32",
+    "app/src/screens/KidModeScreen.tsx": "c27aa96ef8acf420f43cecba7cb241a1ca467dd98dd450aea1735d1f4bf54ee7"
+  },
+  "review": "Self-review found and fixed an orphaned cancel handle after failed revalidation. Regression now proves blocked status retains cancellation. No independent reviewer claimed.",
+  "remaining": "Future exact package approval, reviewed build/install and native check; source-only staging is not self-service TV intake."
+}
