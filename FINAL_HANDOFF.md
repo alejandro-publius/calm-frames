@@ -1,5 +1,29 @@
 # Final handoff: the integration candidate
 
+## Coastal islands and selection boat installed, October 18, 2026
+
+Installed source `1d142852beb4a0c0b5068d9f50864c2394554107`; package SHA-256
+`af2fcb0f8982773b044ec625fa1f7a3c50c34de33ae64bed9b5d829a6aba0712`. One build/install,
+821 app inputs matched. Acadia granite/lighthouse, Sea Otters kelp and Forest pines,
+rounded rock and illustrated waterfall extend the accepted map. The boat follows
+selection without delaying controls; existing motion opt-in and accessibility
+preferences govern animation. Details/loading reuse the destination motif.
+
+438 bounded app tests and 11 attribution tests pass, plus TypeScript, lint, strict
+package gates and independent review. Native continuation verified both full clips,
+Acadia ocean requests and Details/Back routes. Initial collector missed first focus;
+no second install or launch was needed. App is open Home, Acadia Watch; all collectors
+stopped. No capture, PIN, household preference, player guard or current media change.
+Native pixels, audible output, enabled animation and VoiceView are not certified.
+
+Forest is noninteractive scenery labelled Not ready to watch. Its real NPS creek
+excerpt passed all 48 preparation checks; it is not activated. The exact
+[catalog and packaging proposal](results/forest-candidate-2026-10-18/approval-proposal.json)
+needs separate approval. The proposed fresh namespace is 66,492,442 bytes and omits
+only obsolete river-otter 4064f489 and old Harbor 89496fc4; original assets remain.
+Read [current UI evidence and owner keys](results/coastal-islands-2026-10-18/README.md).
+Earlier installed/build references below are historical.
+
 ## Private coastal-world handoff, October 18, 2026
 
 The owner authorized transferring validated work to the existing private branch

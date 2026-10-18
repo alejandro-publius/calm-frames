@@ -1,7 +1,9 @@
 # Calm Frames
 
-Current state, October 18, 2026: installed app source `6f2570d`. The original
-static coastal world has two approved destinations: Acadia and Sea Otters.
+Current state, October 18, 2026: installed app source `1d14285`. The original
+coastal world has two approved playable destinations: Acadia and Sea Otters.
+Distinct island shapes and a selection boat carry into the browsing flow. Forest
+is decorative scenery labelled Not ready to watch; its new catalog is not approved.
 Sea Otters is a 19.987-second silent NOAA Fisheries ocean excerpt, played once.
 Acadia uses its approved baked ocean replacement during flagged intervals,
 with an independent opaque fallback. See [FINAL_HANDOFF.md](FINAL_HANDOFF.md),
@@ -75,12 +77,13 @@ The first prints `PASS`, the second writes one HTML page for the title that open
 
 ### Where things stand
 
-**Current candidate, October 18.** Source `6f2570d` was built and installed once.
-534 focused app tests and 11 attribution tests pass. Native text logs cover both
-destinations, Details/More info, control hide/reveal, pause/resume, both Acadia
-replacement requests, guarded Skip, natural end/Back and Parents cancel focus.
+**Current candidate, October 18.** Source `1d14285` was built and installed once.
+438 focused app tests and 11 attribution tests pass. Native text logs cover both
+destinations, Details, both Acadia replacement requests, natural end and Back.
+The earlier `6f2570d` walkthrough separately covers More info, controls, pause/resume,
+guarded Skip and Parents cancellation; no PIN operation was repeated in this UI pass.
 The app is left at Home with Acadia selected and Watch focused. See the
-[receipt and limits](results/sea-otters-flow-2026-10-18/README.md). Logs establish
+[receipt and limits](results/coastal-islands-2026-10-18/README.md). Logs establish
 state and actions, not rendered pixels or audio. Physical Fire TV and VoiceView
 acceptance remain unverified; the current demo video, judge access and submission
 are still pending. No recording is authorized by these instructions.

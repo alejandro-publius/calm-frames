@@ -1,13 +1,13 @@
 # Final requirements checklist
 
 The canonical submission checklist. Product/build facts reconciled October 18,
-2026 against installed source `6f2570d`. The official rule pages below retain
+2026 against installed source `1d14285`. The official rule pages below retain
 their October 17 review date; this pass does not claim to revalidate eligibility
 or submission policy. Nothing has been recorded or submitted.
 
-- **Installed build.** Source `6f2570da4165acc752882a0c04ffe996cd072880`,
-  package SHA-256 `8311d90bc34db2efaae77a8a5eda144d7d45cc3989035558860c1b4604e3e63b`.
-  [Current receipts](../../results/sea-otters-flow-2026-10-18/README.md).
+- **Installed build.** Source `1d142852beb4a0c0b5068d9f50864c2394554107`,
+  package SHA-256 `af2fcb0f8982773b044ec625fa1f7a3c50c34de33ae64bed9b5d829a6aba0712`.
+  [Current receipts](../../results/coastal-islands-2026-10-18/README.md).
 - **Applied here.** The corrections in
   [SUBMISSION_RECONCILIATION.md](../SUBMISSION_RECONCILIATION.md) and the code-checked
   facts in [ARCHITECTURE_FACTS.md](../ARCHITECTURE_FACTS.md).
@@ -21,9 +21,10 @@ The coastal-world source is installed and validated. The authorized private GitH
 handoff targets existing branch `codex/creator-editions-2026-10-18`; its final remote
 identity is recorded in `results/github-coastal-handoff-2026-10-18/` after push.
 It includes the earlier setup/persistence fixes and the current two-destination menu.
-534 focused app tests and 11 attribution tests pass. Native logs cover both exact
-approved videos, Details/More info, controls, Acadia ocean replacement requests,
-protected Skip, natural end/Back and Parents cancel focus. Original Acadia media,
+438 focused app tests and 11 attribution tests pass. Native logs cover both exact
+approved videos, Details, Acadia ocean replacement requests, natural end and Back.
+Earlier `6f2570d` logs separately cover More info, controls, protected Skip and Parents
+cancel focus. Forest is noninteractive scenery pending exact media approval. Original Acadia media,
 exact intervals and household migration behavior remain preserved. Only the exact
 owner-approved NOAA sea-otter catalog was added to trust.
 
@@ -85,7 +86,7 @@ section 11.
 
 | Requirement | Status | Evidence or gap |
 | --- | --- | --- |
-| Fire TV: "launch a demo-ready app that works on Fire OS or Vega OS." | Done, simulator only | Source `6f2570d` is installed and running on the Vega VirtualDevice ([install record](../../results/sea-otters-flow-2026-10-18/README.md)). No physical Fire TV device was used. |
+| Fire TV: "launch a demo-ready app that works on Fire OS or Vega OS." | Done, simulator only | Source `1d14285` is installed and running on the Vega VirtualDevice ([install record](../../results/coastal-islands-2026-10-18/README.md)). No physical Fire TV device was used. |
 | A simulator is accepted. FAQ: "a physical device isn't required at any stage of submission or judging." Forum answer: "Yes, virtual device demo is sufficient." | Done | Vega Virtual Device 1.0.67506.0, OS 1.2, Vega SDK 0.24.9914, Vega CLI 1.3.4. |
 | Stage One is pass/fail: the project "reasonably fits the theme and reasonably applies the required APIs/SDKs." | Done, with a framing risk | The rules list "simple video player" as an obvious Fire TV idea. The description and video lead with the checked, signed safety layer, not with playback. |
 | Stage Two scores four equal criteria: Tech Implementation, Design, Potential Impact, Quality of the Idea. Ties go to the first. Judging may use "automated AI-driven analysis". | Done in drafts | The Devpost draft ties each claim to evidence, since an automated reader may check them. |
@@ -142,7 +143,7 @@ section 11.
 | --- | --- | --- |
 | Acadia video, in the app and the demo | Done for the record, unverified for the video | NPGallery: "Public domain, Full Granting Rights; U.S. government work". Credit: "NPS Video, Acadia National Park. No NPS endorsement is implied." The More info page credits the National Park Service, and NOTICE and the credits screen come from the same ledger rows. |
 | Prairie Creek and Redwood, the unapproved review example | Done for the record, not in the app | Ledger rows added in `076247a`. Per its proposal, the NPS source page treats NPS-credited material without a copyright symbol as public domain, and the park's B-roll page permits reuse. Credit: "NPS: G Litten". It is not in the consumer catalog, NOTICE or the credits screen. |
-| Credits generated from the ledger | Included in installed source `6f2570d` | NOTICE and generated credits match the ledger, including NOAA Fisheries. These acknowledgments do not grant playback approval to arbitrary sources. |
+| Credits generated from the ledger | Included in installed source `1d14285` | NOTICE and generated credits match the ledger, including NOAA Fisheries. These acknowledgments do not grant playback approval to arbitrary sources. |
 | Amazon sample code (MIT-0) and Shaka Player (Apache-2.0) | Unverified | The proprietary notice question in section 6. |
 | Fonts: Fraunces, Source Sans 3 and Inter | Done | SIL Open Font License 1.1, licence texts beside the fonts, sources in `app/assets/fonts/FONT_PROVENANCE.json`. |
 | Artwork | Done | Every image has a ledger row in `media/LICENSES.csv`. The Acadia menu image is a still from the prepared video. |
@@ -159,10 +160,10 @@ gate, not proof of a visible frame. Each observation belongs to the build it was
 
 ### Installed on the TV: Acadia and Sea Otters
 
-Source `6f2570d`. Its consumer catalog is generated from exact approvals in
+Source `1d14285`. Its consumer catalog is generated from exact approvals in
 `app/config/approved-prepared-libraries.json`, and Home lists `consumerTitles(settings)`,
 which now contains Acadia and the 19.987-second silent NOAA sea-otter excerpt.
-Current playback/navigation evidence is in [the completed walkthrough](../../results/sea-otters-flow-2026-10-18/validation-summary.json).
+Current playback/navigation evidence is in [the completed walkthrough](../../results/coastal-islands-2026-10-18/validation-summary.json).
 The build-specific bullets below are historical observations, not the current test ceiling.
 
 - **Before delivery** the build checks packaged file hashes, signed maps and original
@@ -185,7 +186,7 @@ The build-specific bullets below are historical observations, not the current te
   <!--n results/black-gap-2026-10-17/receipt.json:manual_back_to_home_ms -->312.196<!--/n--> ms.
   In the slow run of October 17, manual Back used the fallback teardown and reached Home
   after 2.257 s ([remaining controls](../../results/remaining-controls-2026-10-17/README.md)).
-  These historical timings belong only to that build. Current `6f2570d` repeats cover,
+  These historical timings belong only to that build. The earlier `6f2570d` repeated cover,
   pause/resume and Skip checks; player lifecycle source has changed since `3fab999`.
 
 ### Working on the Mac: local intake, review and staging

@@ -1,6 +1,6 @@
 # Open decisions and blockers
 
-Product status updated October 18, 2026 for installed source `6f2570d`.
+Product status updated October 18, 2026 for installed source `1d14285`.
 Rule-source dates remain those recorded in the canonical checklist. The canonical lists are
 [FINAL_REQUIREMENTS_CHECKLIST.md](FINAL_REQUIREMENTS_CHECKLIST.md), which maps
 each mandatory rule to evidence, and [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md)
@@ -40,13 +40,15 @@ unverified. The drafts are [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) and
 
 - The intermittent simulator slowdown is unresolved. Later runs were healthy
   and no fix is claimed, so a take can still be spoiled by it.
-- Source `6f2570d` rechecked both Acadia replacement intervals, pause/resume, protected
+- The earlier `6f2570d` rechecked both Acadia replacement intervals, pause/resume, protected
   Skip, both real video identities, controls and return focus using native text logs.
-- Prairie Creek and Redwood is an unapproved review example, frozen outside the
+- Forest creek is a newly verified 12-second excerpt, pending exact catalog and packaging
+  approval; the map preview cannot be selected. The original full Prairie Creek and
+  Redwood remains an unapproved review example outside the
   consumer catalog. Staging records approval state only; it never installs a
   title or enables Watch.
 - The earlier setup/persistence and style/attribution fixes are included in the installed
-  source. 534 focused app tests and 11 attribution tests pass. The current debug package
+  source. 438 focused app tests and 11 attribution tests pass. The current debug package
   is not a final release package. The WCAG-only legacy playback diagnostic remains
   unavailable under extra-cautious; its gate was not relaxed.
 - Detection can miss flashing, and the prototype has not been medically

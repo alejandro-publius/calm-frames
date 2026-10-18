@@ -1,8 +1,8 @@
 # The submission packet
 
-Updated October 18, 2026 for installed app source `6f2570d` and the coastal-world
+Updated October 18, 2026 for installed app source `1d14285` and the coastal-world
 handoff on private branch `codex/creator-editions-2026-10-18`.
-[Build, native evidence and limits](../../results/sea-otters-flow-2026-10-18/README.md).
+[Build, native evidence and limits](../../results/coastal-islands-2026-10-18/README.md).
 The installed menu has Acadia and the 19.987-second silent NOAA sea-otter clip.
 Nothing in this packet has been submitted, recorded or publicly published.
 

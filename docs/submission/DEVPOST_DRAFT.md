@@ -1,7 +1,7 @@
 # Devpost description, draft
 
 Draft for the owner, updated October 18, 2026. It describes installed source
-`6f2570d`, the original coastal world, approved Acadia and NOAA Sea Otters,
+`1d14285`, the original coastal world, approved Acadia and NOAA Sea Otters,
 the local review/staging tool and the unapproved Prairie Creek and Redwood example. Not
 submitted. Check the live form's fields first
 ([checklist](FINAL_REQUIREMENTS_CHECKLIST.md), section 11). Every measured number below is
@@ -169,9 +169,10 @@ medical device.
 - Two videos are on the TV today: Acadia and Sea Otters. A new one needs exact approval, its packaged files and
   reports, a regenerated catalog, and a build, install and device check.
 - Every native observation comes from the Vega Virtual Device, never a physical Fire TV.
-  Device logs show events, order and focus, not pixels or sound. The October 18 coastal-world
-  run checked both titles, Acadia ocean requests, pause fallback, protected Skip, controls,
-  natural end and Back. The owner's look and listen acceptance is still pending.
+  Device logs show events, order and focus, not pixels or sound. The current `1d14285`
+  run checked both titles, Acadia ocean requests, natural end and Details/Back routes.
+  Earlier source `6f2570d` also has pause fallback, protected Skip and control checks.
+  The owner's look and listen acceptance is still pending.
 - Playback on the virtual device sometimes slows, as described above, and the cause is
   unknown.
 - The Acadia clip opens on a few seconds of near-black footage. That is in the source video,

@@ -1,0 +1,13 @@
+{
+  "source_commit": "1d142852beb4a0c0b5068d9f50864c2394554107",
+  "build_count": 1,
+  "build_start_utc": "2026-10-18T18:28:36.883046+00:00",
+  "app_inputs": 821,
+  "command": "npm run build:debug",
+  "visual_audio_acceptance": false,
+  "build_exit": 0,
+  "build_end_utc": "2026-10-18T18:29:39.752899+00:00",
+  "changed_inputs": [],
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/release/coastal-islands-2026-10-18/calm-frames-coastal-islands-aarch64-debug.vpkg",
+  "package_sha256": "af2fcb0f8982773b044ec625fa1f7a3c50c34de33ae64bed9b5d829a6aba0712"
+}

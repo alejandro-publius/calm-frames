@@ -1,0 +1,71 @@
+{
+  "capture": false,
+  "pin_operations": false,
+  "rebuild": true,
+  "reinstall": true,
+  "audio_system_changes": false,
+  "owner_watched": "not asserted",
+  "status": "stopped",
+  "reason": "Expected event missing: CALM_TRACE focus kid-mode-home-watch",
+  "collector_stopped": true,
+  "events": [
+    {
+      "at": "2026-10-18T18:29:55.944215+00:00",
+      "command": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "vlcm terminate-app --force --pkg-id io.github.alejandropublius.calmframes"
+      ],
+      "exit": 0,
+      "output": "Force stopping pkg: io.github.alejandropublius.calmframes\n"
+    },
+    {
+      "at": "2026-10-18T18:29:57.514221+00:00",
+      "command": [
+        "device",
+        "install-app",
+        "--device",
+        "VirtualDevice",
+        "--packagePath",
+        "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/release/coastal-islands-2026-10-18/calm-frames-coastal-islands-aarch64-debug.vpkg",
+        "--buildType",
+        "Debug"
+      ],
+      "exit": 0,
+      "output": "Installing/Updating '/tmp/calm-frames-coastal-islands-aarch64-debug.vpkg' ...success\n"
+    },
+    {
+      "at": "2026-10-18T18:29:58.390698+00:00",
+      "command": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "sha256sum /tmp/calm-frames-coastal-islands-aarch64-debug.vpkg"
+      ],
+      "exit": 0,
+      "output": "af2fcb0f8982773b044ec625fa1f7a3c50c34de33ae64bed9b5d829a6aba0712  /tmp/calm-frames-coastal-islands-aarch64-debug.vpkg\n"
+    },
+    {
+      "at": "2026-10-18T18:29:59.099350+00:00",
+      "command": [
+        "device",
+        "run-cmd",
+        "--device",
+        "VirtualDevice",
+        "--command",
+        "vmsgr send pkg://io.github.alejandropublius.calmframes.main"
+      ],
+      "exit": 0,
+      "output": "Sending: pkg://io.github.alejandropublius.calmframes.main\n"
+    },
+    {
+      "at": "2026-10-18T18:30:24.117588+00:00",
+      "event": "Stopped: Expected event missing: CALM_TRACE focus kid-mode-home-watch"
+    }
+  ]
+}

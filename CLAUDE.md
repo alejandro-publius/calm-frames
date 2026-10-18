@@ -5,7 +5,9 @@ distinct silhouettes, selection boat and Forest preparation. Current UI source
 adds static Forest scenery only; its exact new catalog is not approved or active.
 Read results/coastal-islands-2026-10-18 and results/forest-candidate-2026-10-18.
 Current two-title media, trust, household preferences and player guards are unchanged.
-One consolidated UI build/install and non-capture walkthrough follow focused gates.
+Installed source is `1d14285`; one UI build/install and native route continuation
+completed. 438 bounded app tests and 11 attribution tests pass. App rests Home,
+Acadia Watch. Forest is not activated; no PIN, capture or settings change occurred.
 
 
 **Latest October 18 coastal-world checkpoint.** Read the newest FINAL_HANDOFF.md entry.

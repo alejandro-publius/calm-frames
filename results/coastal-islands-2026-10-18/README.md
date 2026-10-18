@@ -23,8 +23,15 @@ Existing Acadia ocean and NOAA Sea Otters bytes, trust and reports match ab83cf8
 ## Verification
 
 See the test logs, mutation regression, preservation record and independent review.
-The final bounded app suite, TypeScript, lint, native inputs and strict media gates
-run before the source commit. Build/install and native receipts follow that commit.
+438 bounded app tests in 33 suites and 11 attribution tests pass, along with
+TypeScript, lint with zero errors, native inputs and strict media gates. One build
+and install succeeded from `1d142852beb4a0c0b5068d9f50864c2394554107`. All 821 inputs
+matched; package SHA-256 is `af2fcb0f8982773b044ec625fa1f7a3c50c34de33ae64bed9b5d829a6aba0712`.
+Both exact current videos played to natural end, with both Acadia ocean requests.
+Details/Back and destination selection completed; app rests Home, Acadia Watch.
+The initial log collector missed the launch focus event. Fresh text logging and
+one direction key established current focus; the continuation completed without
+another install or launch. All collectors stopped. No PIN operation was performed.
 Controlled tests establish motion cancellation and accessibility fallbacks. Native
 text logs establish route, focus, playback identity and event order; they do not
 establish pixels, audible quality or the owner having watched. No screenshot,
@@ -36,3 +43,19 @@ The [concrete media proposal](../forest-candidate-2026-10-18/approval-proposal.j
 requires exact catalog and fresh-package approval. UI work does not authorize that
 catalog. The original package namespace and source recordings remain preserved.
 No detector threshold, signing key, broad trust, AWS or release change is included.
+
+## Open the current demo
+
+The updated app is left open in the existing Vega Virtual Device. From Home,
+Acadia Watch: Up, Right, Select opens Sea Otters Details; Select starts it.
+Back from playback returns Details; Back returns the selected island. Left,
+Down, Left restores Home Acadia Watch. Use the simulator remote; no reinstall
+is needed. Forest cannot receive focus or start playback.
+
+The boat supports gentle movement through the existing artwork-motion opt-in.
+That preference was not changed during native checks. The enabled/reduced branches
+are controlled-test evidence, not a claim of native animation or VoiceView acceptance.
+
+Final independent consistency review corrected historical pause/Skip attribution and
+removed pixel-observation wording from the summary. Raw script receipts retain
+narration; only corresponding focus and playback log events establish behavior.

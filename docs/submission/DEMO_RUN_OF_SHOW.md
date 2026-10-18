@@ -1,7 +1,7 @@
 # Current demo run of show
 
-Updated October 18, 2026 for installed source `6f2570da4165acc752882a0c04ffe996cd072880`.
-Package SHA-256: `8311d90bc34db2efaae77a8a5eda144d7d45cc3989035558860c1b4604e3e63b`.
+Updated October 18, 2026 for installed source `1d142852beb4a0c0b5068d9f50864c2394554107`.
+Package SHA-256: `af2fcb0f8982773b044ec625fa1f7a3c50c34de33ae64bed9b5d829a6aba0712`.
 This is a live walkthrough plan, about two minutes without extended explanations.
 No screen/audio/video recording is authorized or claimed. The older October 17
 run of show remains in Git history and describes a superseded interface.
@@ -28,12 +28,13 @@ restores the starting point. Full directions and Parents cancellation are in the
 
 ## Evidence and limits
 
-The [current evidence summary](../../results/sea-otters-flow-2026-10-18/validation-summary.json)
-records 534 focused app tests, 11 attribution tests, one native build/install and
-completed core routes. Native text checks include both Acadia replacement requests,
-pause/resume, Skip, both real video identities, natural end/Back and control hide/reveal.
-The earlier final-focus expectation was corrected: Down from Acadia's destination
-reaches Details, then Left reaches Watch. No second install was needed.
+The [current evidence summary](../../results/coastal-islands-2026-10-18/validation-summary.json)
+records 438 focused app tests, 11 attribution tests, one native build/install and
+completed core routes. Current native text checks include both Acadia replacement
+requests, both real video identities, Details and natural end/Back. The earlier
+`6f2570d` logs separately cover pause/resume, Skip and control hide/reveal.
+Down from Acadia's destination reaches Details, then Left reaches Watch. Forest
+is a noninteractive preview; do not present it as a playable third video.
 
 These logs do not confirm pixels, audible output, visible focus quality or physical
 Fire TV behavior. Loading/error/surface-loss recovery was checked in controlled tests;

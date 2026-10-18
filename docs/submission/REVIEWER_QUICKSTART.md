@@ -17,17 +17,17 @@ Section 3 (the
 device build and install) and section 4 (the demo) were not run from this
 file; the receipts they name record where they were run.
 
-Updated October 18, 2026 for installed source `6f2570d` on the coastal-world
+Updated October 18, 2026 for installed source `1d14285` on the coastal-world
 working branch. The private GitHub handoff targets `codex/creator-editions-2026-10-18`.
-[Current build and native evidence](../../results/sea-otters-flow-2026-10-18/README.md).
+[Current build and native evidence](../../results/coastal-islands-2026-10-18/README.md).
 The fresh-checkout timings above remain historical; no new clean-room install is claimed.
 
 ## Current candidate, October 18
 
-The installed app source is `6f2570da4165acc752882a0c04ffe996cd072880`.
+The installed app source is `1d142852beb4a0c0b5068d9f50864c2394554107`.
 The private handoff branch includes that source plus documentation and evidence;
 use the final remote commit in the handoff receipt. The installed package and
-current test scope are recorded in [the coastal-world evidence](../../results/sea-otters-flow-2026-10-18/README.md).
+current test scope are recorded in [the coastal-world evidence](../../results/coastal-islands-2026-10-18/README.md).
 No clean-room rerun of the historical timings above is claimed.
 
 After repository access is granted, start with the explicit working branch:
@@ -84,9 +84,9 @@ cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx je
 
 `npm ci --ignore-scripts` skips the Shaka build, which the tests mock; a device
 package needs the player setup below with the JDK. The latest installed source
-passed 534 focused app tests across 38 suites and 11 attribution tests, plus
+passed 438 focused app tests across 33 suites and 11 attribution tests, plus
 TypeScript, lint with zero errors, native-input and media delivery checks.
-[The validation summary](../../results/sea-otters-flow-2026-10-18/validation-summary.json)
+[The validation summary](../../results/coastal-islands-2026-10-18/validation-summary.json)
 records the exact scope. An initial unrestricted Jest run exhausted its heap;
 a duplicate surface callback was then fixed and the final bounded suites passed.
 This is not a current full-suite pass. The older figures that follow are dated. On the October 14 candidate, the bounded reliability pass recorded 88 tests passing
@@ -126,9 +126,9 @@ Metro uses a checkout-specific cache and does not depend on Watchman.
 and writes a local package, hashes and preparation receipt. It never publishes.
 Use Python 3.12 through `RELEASE_PYTHON` or `.venv/bin/python`. Do not pass a PIN.
 The current built package is
-`build/release/sea-otters-flow-2026-10-18/calm-frames-coastal-world-aarch64-debug.vpkg`,
-SHA-256 `8311d90bc34db2efaae77a8a5eda144d7d45cc3989035558860c1b4604e3e63b`, from
-source `6f2570d`. See its [build and install record](../../results/sea-otters-flow-2026-10-18/README.md).
+`build/release/coastal-islands-2026-10-18/calm-frames-coastal-islands-aarch64-debug.vpkg`,
+SHA-256 `af2fcb0f8982773b044ec625fa1f7a3c50c34de33ae64bed9b5d829a6aba0712`, from
+source `1d14285`. See its [build and install record](../../results/coastal-islands-2026-10-18/README.md).
 It is already installed on the owner's simulator; do not reinstall it merely
 for owner acceptance. The commands below are for a separately authorized
 reviewer installation. Preserve concurrent checkouts and the SDK app link.
@@ -195,7 +195,10 @@ From Home with Acadia selected and Watch focused:
 5. Details shows covered sections; More info contains source credits and limits.
    Parents cancellation restores focus to Parents without entering a PIN.
 
-Current native text logs cover these core behaviors on `6f2570d`. They do not certify
+The current `1d14285` native pass covers destination selection, Details, both full
+videos, Acadia replacement requests and return focus. The earlier `6f2570d` logs
+cover pause/resume, Skip, More info and Parents cancellation. No PIN operation was
+repeated for the island update. Forest is noninteractive scenery. These logs do not certify
 pixels, audio, VoiceView or physical Fire TV behavior. Loading/error recovery is
 controlled-test evidence. The legacy WCAG-only playback check is unavailable under
 extra-cautious; do not change settings to expose it. No screenshot or recording is authorized.
