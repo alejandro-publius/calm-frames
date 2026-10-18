@@ -1,0 +1,11 @@
+{
+  "url": "http://127.0.0.1:8766",
+  "old_pid": 20209,
+  "pid": 37408,
+  "jobs_preserved": true,
+  "active_jobs_before": 0,
+  "same_existing_signer_configuration": true,
+  "integrated_handler_verified": true,
+  "incomplete_export_refusal": "Wait for a verified export before staging TV delivery.",
+  "no_package_staged_or_installed_by_http_check": true
+}

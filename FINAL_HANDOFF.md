@@ -1,5 +1,17 @@
 # Final handoff: the integration candidate
 
+## Package delivery integrated, October 18, 2026
+
+Source `6125459` is integrated, built once and installed once. The local intake at
+http://127.0.0.1:8766 runs the new staging/recheck/cancel path with existing jobs and
+signer settings preserved. 146 focused tests, TypeScript, lint and the strict built
+package gate pass. All 730 app inputs match. Native Acadia Home/Details/Watch/Back/end
+routes pass in text logs; the app is left Home Watch and the collector is stopped.
+Only the original Acadia consumer approval remains. Owner visual/audio acceptance
+and future exact-title approvals remain separate. No push or reserved submission
+edits. See [the final integration handoff](docs/DELIVERY_INTEGRATION_FINAL.md).
+
+
 ## Cover presentation and Home control fix, October 17, 2026
 
 Source 3fab999 is built once, installed once and package-verified. Scheduled covers

@@ -1,0 +1,19 @@
+{
+  "reinstall_count": 0,
+  "relaunch_count": 0,
+  "checks": [
+    "Home Details opens with Watch focused",
+    "Details Watch selects exact approved Acadia and reports picture shown",
+    "Playback Back restores Details Watch focus",
+    "Details Back restores Home Details; Left selects Home Watch",
+    "Home Watch starts the same approved prepared title",
+    "Natural end returns to Home Watch"
+  ],
+  "capture_used": false,
+  "media": "existing exact-approved Acadia",
+  "collector_pid": 39662,
+  "result": "completed",
+  "collector_stopped": true,
+  "last_reported_focus": "kid-mode-home-watch",
+  "native_visual_audio_acceptance": false
+}

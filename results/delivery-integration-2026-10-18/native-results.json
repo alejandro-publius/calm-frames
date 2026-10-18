@@ -1,0 +1,11 @@
+{
+  "checks": [],
+  "capture_used": false,
+  "media": "existing exact-approved Acadia",
+  "collector_pid": 38483,
+  "result": "stopped",
+  "reason": "No log match: CALM_TRACE focus kid-mode-home-watch",
+  "collector_stopped": true,
+  "last_reported_focus": null,
+  "native_visual_audio_acceptance": false
+}
