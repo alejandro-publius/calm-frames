@@ -6,7 +6,7 @@ import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
 import { titlePresentation, OTTER_PREVIEW_SOURCE_SHA256 } from '../../src/calmframes/TitleArtwork';
-import { createPackagedLibrary, packagedLibrary, ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
+import { createPackagedLibrary, createApprovedLibrary, packagedLibrary, ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
 import { DEFAULT_SETTINGS, PRESET_NAMES } from '../../src/calmframes/household';
 import { checkTitle } from '../../src/calmframes/titleStatus';
 import { bakedAmbientForRendition } from '../../src/calmframes/approvedBakedAmbient';
@@ -15,7 +15,7 @@ import { checkedShelf } from './shelfFixtures';
 
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 const raw = readFileSync(resolve(__dirname, '../../../results/otter-preview-2026-10-18/candidate-catalog.json'), 'utf8');
-// Explicit test-only candidate reader. Production approval registry is not changed.
+// Compare the retained exact candidate against the now-approved production catalog.
 const candidate = createPackagedLibrary(raw);
 const title = candidate.titles(DEFAULT_SETTINGS)[0];
 const nowMs = Date.parse(JSON.parse(title.maps!.wcag!).created_utc) + 60000;
@@ -34,13 +34,17 @@ it.each(PRESET_NAMES)('the real signed %s preview retains duration, identity and
   expect(candidate.acceptsRoute(titleDataFor(checked), guardedParamsFor(checked, settings))).toBe(true);
   expect(bakedAmbientForRendition(item.renditionSha256, preset)).toBeNull();
 });
-it('does not activate the candidate, its signer or an ambient choice in the production registry', () => {
-  expect(defaultCatalog().some(item => item.sha256 === OTTER_PREVIEW_SOURCE_SHA256)).toBe(false);
-  expect(packagedLibrary.publicKeyFor(title, DEFAULT_SETTINGS)).toBeNull();
-  expect(packagedLibrary.acceptsRoute(titleDataFor(otter), guardedParamsFor(otter, DEFAULT_SETTINGS))).toBe(false);
+it('approves only the exact otter catalog and rejects other content under the same signer', () => {
+  expect(defaultCatalog().some(item => item.sha256 === OTTER_PREVIEW_SOURCE_SHA256)).toBe(true);
+  expect(packagedLibrary.publicKeyFor(title, DEFAULT_SETTINGS)).toBe(candidate.publicKeyBase64);
+  expect(packagedLibrary.acceptsRoute(titleDataFor(otter), guardedParamsFor(otter, DEFAULT_SETTINGS))).toBe(true);
   expect(checkTitle(title, { settings: DEFAULT_SETTINGS, publicKeyBase64: packagedLibrary.publicKeyFor(acadia.title, DEFAULT_SETTINGS)!, nowMs }).status).toBe('failed');
-  const screen = render(<TitleDetailsScreen entry={otter} onPlay={jest.fn()} onBack={jest.fn()} />);
-  expect(screen.queryByTestId('title-details-play')).toBeNull();
+  expect(createApprovedLibrary(raw).problem).toBeNull();
+  expect(createApprovedLibrary(raw + ' ').titles(DEFAULT_SETTINGS)).toEqual([]);
+  const other = JSON.parse(raw); other.titles[0].id = 'prepared-unapproved';
+  expect(createApprovedLibrary(JSON.stringify(other)).titles(DEFAULT_SETTINGS)).toEqual([]);
+  expect(packagedLibrary.acceptsRoute({ ...titleDataFor(otter), id: 'prepared-unapproved' }, guardedParamsFor(otter, DEFAULT_SETTINGS))).toBe(false);
+  expect(packagedLibrary.publicKeyFor({ ...title, renditionSha256: 'a'.repeat(64) }, DEFAULT_SETTINGS)).toBeNull();
 });
 it('uses the existing content rail without playing on focus or changing ambient registration', () => {
   const play = jest.fn(), open = jest.fn();
@@ -67,9 +71,7 @@ it.each(['watch', 'details', 'poster'] as const)('retains the preview and a sing
   expect(screen.getByTestId(id).props.hasTVPreferredFocus).toBe(true);
   expect(screen.getAllByRole('button').filter(button => button.props.hasTVPreferredFocus)).toHaveLength(1);
 });
-it('shows duration, silent/once wording and source attribution in Details under simulated exact approval', () => {
-  const existing = packagedLibrary.evidenceFor.bind(packagedLibrary);
-  jest.spyOn(packagedLibrary, 'evidenceFor').mockImplementation((item, settings) => candidate.evidenceFor(item, settings) ?? existing(item, settings));
+it('shows duration, silent/once wording and source attribution in the approved Details flow', () => {
   const play = jest.fn(), back = jest.fn();
   const screen = render(<TitleDetailsScreen entry={otter} onPlay={play} onBack={back} />);
   expect(screen.getByTestId('title-details-meta').props.children).toBe('4.24 seconds · Silent · Plays once');

@@ -1,5 +1,9 @@
 # Final handoff: the integration candidate
 
+## Exact otter activation, October 18, 2026
+
+Owner approval adds only otter catalog `d589ec17` / bundle `4064f489` / existing local signer `00c1bd27` to the exact catalog registry. No arbitrary future content is trusted. The 4.24-second silent preview uses the existing content rail and Details; Acadia ocean metadata is byte-identical. 116 focused tests, TypeScript and prebuild gates pass. One native build/install follows this commit; evidence belongs in `results/otter-native-2026-10-18/`. Installed source remains `4c0d291` until the new installation succeeds.
+
 ## Otter preview candidate, October 18, 2026
 
 The existing excerpt is prepared as `Otters · short preview`, with actual encoded duration 4.24 seconds, silent, once through. All 48 pipeline checks and 89 focused app tests pass. Local UI components compile and reuse the content rail and Details; no ambient choice is added. The existing local project signer differs from Acadia and is not trusted by the TV app, so the exact candidate remains inactive pending the narrow trust proposal. No device action or installation occurred; the ocean review install remains source `4c0d291`. See [candidate identity, evidence and remaining steps](results/otter-preview-2026-10-18/README.md).

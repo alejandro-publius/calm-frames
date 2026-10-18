@@ -22,7 +22,8 @@ import { Profile } from '../../src/calmframes/profiles';
 import { CheckedTitle } from '../../src/calmframes/titleStatus';
 import { checkedShelf } from './shelfFixtures';
 
-const titles = checkedShelf();
+// Retain this two-title regression fixture; the real consumer pair is tested in otterPreview.
+const titles = checkedShelf().filter(entry => entry.title.title !== 'Otters · short preview');
 const acadia = titles.find((entry) => entry.title.sha256 === ACADIA_SOURCE_SHA256)!;
 const consumer = [acadia];
 const profiles = [{ id: 'everyone', name: 'Everyone' }, { id: 'robin', name: 'Robin' }] as unknown as Profile[];
