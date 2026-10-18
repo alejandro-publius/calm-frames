@@ -15,10 +15,22 @@ interface TitlePresentation {
   kind?: string;
   action: string;
   description: string;
+  runtime?: string;
+  attribution?: string;
+  /** Decorative menu scenery, independent of video or ambient playback. */
+  menuArt?: 'coastal';
   art?: 'harbor' | 'harbor-cinematic' | 'gradient' | 'coastal';
 }
 
+export const OTTER_PREVIEW_SOURCE_SHA256 = '4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4';
+
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
+  if (concernsPackagedLibrary(title) && title.sha256 === OTTER_PREVIEW_SOURCE_SHA256 && title.durationMs === 4240) {
+    return { name: 'Otters · short preview', cardName: 'Otters', kind: 'Short preview · 4.24 seconds',
+      action: 'Watch preview', runtime: '4.24 seconds · Silent · Plays once', menuArt: 'coastal',
+      description: 'A short excerpt of an otter grooming. Plays once, without sound.',
+      attribution: 'Uusijani / Wikimedia Commons. Otter (Lutra lutra) grooming. CC0 1.0. Short excerpt. Source: https://commons.wikimedia.org/wiki/File:Otter_(Lutra_lutra)_grooming.webm' };
+  }
   if (concernsPackagedLibrary(title) && title.sha256 === ACADIA_SOURCE_SHA256) {
     return { name: 'Acadia', kind: 'National Park Service', action: 'Watch now', art: 'coastal',
       description: 'Waves along the coast of Acadia National Park.' };

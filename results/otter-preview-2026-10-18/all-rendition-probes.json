@@ -1,0 +1,50 @@
+{
+  "broadcast": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_type": "video",
+        "r_frame_rate": "25/1",
+        "duration": "4.240000",
+        "nb_frames": "106"
+      }
+    ],
+    "format": {
+      "duration": "4.240000",
+      "size": "1575090"
+    }
+  },
+  "extra-cautious": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_type": "video",
+        "r_frame_rate": "25/1",
+        "duration": "4.240000",
+        "nb_frames": "106"
+      }
+    ],
+    "format": {
+      "duration": "4.240000",
+      "size": "1575090"
+    }
+  },
+  "wcag": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_type": "video",
+        "r_frame_rate": "25/1",
+        "duration": "4.240000",
+        "nb_frames": "106"
+      }
+    ],
+    "format": {
+      "duration": "4.240000",
+      "size": "1575090"
+    }
+  }
+}

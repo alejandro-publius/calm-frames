@@ -1,5 +1,9 @@
 # Final handoff: the integration candidate
 
+## Otter preview candidate, October 18, 2026
+
+The existing excerpt is prepared as `Otters · short preview`, with actual encoded duration 4.24 seconds, silent, once through. All 48 pipeline checks and 89 focused app tests pass. Local UI components compile and reuse the content rail and Details; no ambient choice is added. The existing local project signer differs from Acadia and is not trusted by the TV app, so the exact candidate remains inactive pending the narrow trust proposal. No device action or installation occurred; the ocean review install remains source `4c0d291`. See [candidate identity, evidence and remaining steps](results/otter-preview-2026-10-18/README.md).
+
 ## Ocean replacement installed, October 18, 2026
 
 Installed app source is `4c0d291643e8f1d589e12d738f1e2409c68138aa`, including the tested release fixes and the exact owner-approved ocean catalog. One Debug build/install succeeded; all 801 inputs and the transferred package hash match. Native logs confirm Extra cautious ocean selection at both existing intervals, pause fallback, guarded Skip, natural completion and manual Back to Home Watch. The app is left available there and the collector is stopped. Original audio/timing packet proofs match the installed media; pixel/audio acceptance remains the owner's step. No further approval is needed for that review. See [the installed receipt and evidence limits](results/ocean-native-2026-10-18/README.md). Earlier installed/unapproved status below is history.

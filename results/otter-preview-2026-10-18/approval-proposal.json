@@ -1,0 +1,16 @@
+{
+  "approved": false,
+  "title": "Otters · short preview",
+  "durationMs": 4240.0,
+  "sourceSha256": "4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4",
+  "bundleId": "4064f489236973b0e8683f24fac9756ed0cdf475d376a7c6501d644397b597f5",
+  "catalogSha256": "d589ec17cc70b2433dbef19d97e557885d22d97cb0b1daa364596850bced1013",
+  "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+  "reportSha256": "56ff3a30c356b8ef3f61c993a649f42f5a6d64ee9197dbaa1cb1b0aaaa93116a",
+  "verificationOutcome": "no flagged segments",
+  "newKeyCreated": false,
+  "existingLocalSigner": true,
+  "signerAlreadyInTVTrust": false,
+  "output": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/otter-preview-2026-10-18/prepared-library",
+  "requiredScope": "Approve only this exact otter short-preview bundle/catalog and existing local project public key for TV content selection. No ambient registration, no broad signer trust, no install during current ocean review."
+}

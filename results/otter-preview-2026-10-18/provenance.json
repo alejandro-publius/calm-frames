@@ -1,0 +1,34 @@
+{
+  "status": "short unapproved candidate",
+  "approved": false,
+  "longestCombinedStandardGapMs": [
+    80500.0,
+    85220.0
+  ],
+  "excerptMs": [
+    80750.0,
+    84970.0
+  ],
+  "attribution": "Uusijani / Wikimedia Commons, Otter (Lutra lutra) grooming, CC0 1.0.",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Otter_(Lutra_lutra)_grooming.webm",
+  "renditionSha256": "4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4",
+  "analysis": {
+    "wcag": {
+      "clean": true,
+      "segments": []
+    },
+    "broadcast": {
+      "clean": true,
+      "segments": []
+    }
+  },
+  "title": "Otters · short preview",
+  "encodedDurationMs": 4240.0,
+  "encodedFrames": 106,
+  "encodedFrameRate": "25/1",
+  "looped": false,
+  "audio": false,
+  "explanation": "The requested cut spans 4.22 seconds; frame alignment produces a 4.24-second encoded clip. This is a short excerpt, not the full source film.",
+  "originalFullSourceSha256": "3083988ff7c574821fb40bea3c7a053db5625f5106f3c68e1231d2935b410b29",
+  "preparedInputSha256": "4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4"
+}

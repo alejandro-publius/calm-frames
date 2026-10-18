@@ -1,0 +1,69 @@
+{
+  "app_shelf_connected": false,
+  "artifacts": {
+    "broadcast": {
+      "map": "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/maps/broadcast.json",
+      "master_playlist": "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/broadcast/hls/master.m3u8",
+      "safe_master": "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/broadcast/safe.mp4",
+      "sha256": {
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/maps/broadcast.json": "cce6ea228d59837de0292a1334b356366db09bb3967d9891572ff8d92c845c5f",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/broadcast/hls/master.m3u8": "e5cfb2c3615c53a7f787ca74f17dcc92a7172a3af5c759e476285106a6762c44",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/broadcast/hls/seg_0_00000.ts": "e27c85cc05350868506a7c0cedd96222cc3bb15d4313dceeca47e4af2a9c2223",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/broadcast/hls/seg_0_00001.ts": "05734137bfaf82fbfc7094c22daf15d679b0f14fe56cde66ed689359cba1ec4d",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/broadcast/hls/stream_0.m3u8": "9d5a87809f9eef1b7eb35b3e3121df03619e44dab63e906bc1383bfad2283f39",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/broadcast/safe.mp4": "dd94988dcb6744b9de03787c92552909d5e55021f25d0af93a038749d943b68f"
+      }
+    },
+    "extra-cautious": {
+      "map": "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/maps/extra-cautious.json",
+      "master_playlist": "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/extra-cautious/hls/master.m3u8",
+      "safe_master": "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/extra-cautious/safe.mp4",
+      "sha256": {
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/maps/extra-cautious.json": "e59298c8a5ab643a3c7c1684948a86907ffad8a2ea683505a5c20824e1d18868",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/extra-cautious/hls/master.m3u8": "e5cfb2c3615c53a7f787ca74f17dcc92a7172a3af5c759e476285106a6762c44",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/extra-cautious/hls/seg_0_00000.ts": "e27c85cc05350868506a7c0cedd96222cc3bb15d4313dceeca47e4af2a9c2223",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/extra-cautious/hls/seg_0_00001.ts": "05734137bfaf82fbfc7094c22daf15d679b0f14fe56cde66ed689359cba1ec4d",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/extra-cautious/hls/stream_0.m3u8": "9d5a87809f9eef1b7eb35b3e3121df03619e44dab63e906bc1383bfad2283f39",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/extra-cautious/safe.mp4": "dd94988dcb6744b9de03787c92552909d5e55021f25d0af93a038749d943b68f"
+      }
+    },
+    "wcag": {
+      "map": "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/maps/wcag.json",
+      "master_playlist": "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/wcag/hls/master.m3u8",
+      "safe_master": "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/wcag/safe.mp4",
+      "sha256": {
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/maps/wcag.json": "3f11475c91ed7bedfb24ff2936abfd53bbe06d4dadf14219dee2ca284fde8ef4",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/wcag/hls/master.m3u8": "e5cfb2c3615c53a7f787ca74f17dcc92a7172a3af5c759e476285106a6762c44",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/wcag/hls/seg_0_00000.ts": "e27c85cc05350868506a7c0cedd96222cc3bb15d4313dceeca47e4af2a9c2223",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/wcag/hls/seg_0_00001.ts": "05734137bfaf82fbfc7094c22daf15d679b0f14fe56cde66ed689359cba1ec4d",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/wcag/hls/stream_0.m3u8": "9d5a87809f9eef1b7eb35b3e3121df03619e44dab63e906bc1383bfad2283f39",
+        "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/safe/wcag/safe.mp4": "dd94988dcb6744b9de03787c92552909d5e55021f25d0af93a038749d943b68f"
+      }
+    }
+  },
+  "next_steps": [
+    "Read the verification report and its outcome before choosing a rendition.",
+    "Use only artifacts[preset].safe_master or its prepared HLS playlist locally.",
+    "Do not play the original source or the cover model. Nothing opens automatically.",
+    "The app shelf is not connected to this receipt. TV composition still needs measurement."
+  ],
+  "physical_tv_validated": false,
+  "presets": [
+    "wcag",
+    "broadcast",
+    "extra-cautious"
+  ],
+  "readiness": "ready for local playback of the prepared rendition",
+  "source_sha256": "4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4",
+  "status": "ready",
+  "title": "Otters \u00b7 short preview",
+  "verification": {
+    "checked_inputs_sha256": "d5ef1c0a38388b9904bf5fe8e7a16af4ddc6af76ae89a1b2f2a03cd85d7d8f9c",
+    "failed_checks": [],
+    "outcome": "no flagged segments",
+    "report": "titles/4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4/verify/report.json",
+    "report_sha256": "56ff3a30c356b8ef3f61c993a649f42f5a6d64ee9197dbaa1cb1b0aaaa93116a",
+    "status": "passed"
+  },
+  "version": 1
+}

@@ -218,7 +218,7 @@ const KidHomeScreen = ({
 
   return (
     <View testID={testID} style={styles.screen}>
-      <HomeHarborScene variant={feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
+      <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
       <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo && !returnToBridgeTest}>
           {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
@@ -250,7 +250,7 @@ const KidHomeScreen = ({
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroCopy}>
                 <Text accessibilityRole="header" style={styles.featureTitle} testID={`${testID}-video-title`}>{feature.name}</Text>
-                <Text style={styles.videoMeta} testID={`${testID}-video-meta`}>{[runtimeLabel(featured.title.durationMs), isBundledBenignStory(featured.title) ? 'Simulated demo' : null].filter(Boolean).join(' · ')}</Text>
+                <Text style={styles.videoMeta} testID={`${testID}-video-meta`}>{[feature.runtime ?? runtimeLabel(featured.title.durationMs), isBundledBenignStory(featured.title) ? 'Simulated demo' : null].filter(Boolean).join(' · ')}</Text>
                 <Text style={styles.benefit} testID={`${testID}-benefit`}>{HOME_BENEFIT_LINE}</Text>
                 <View style={styles.actions}>
                   <CalmButton primary balanced playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}

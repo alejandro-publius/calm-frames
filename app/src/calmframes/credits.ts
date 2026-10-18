@@ -309,6 +309,14 @@ export const CREDIT_ENTRIES: CreditEntry[] = [
     ],
   },
   {
+    title: 'Otter (Lutra lutra) grooming',
+    license: 'CC0 1.0',
+    credit: 'Uusijani / Wikimedia Commons',
+    source: 'https://commons.wikimedia.org/wiki/File:Otter_(Lutra_lutra)_grooming.webm',
+    collection: 'unknown',
+    obligations: [],
+  },
+  {
     title: 'PlanePassingThunderCloud',
     license: 'CC BY-SA 4.0',
     credit: 'Docfirerock via Wikimedia Commons, CC BY-SA 4.0',

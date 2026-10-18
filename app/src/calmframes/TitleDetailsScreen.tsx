@@ -90,7 +90,7 @@ const TitleDetailsScreen = ({
     }).length;
     return runtime && holds > 0 ? `${runtime}, ${holds} picture pause${holds === 1 ? '' : 's'}` : null;
   }, [practiceOffered]);
-  const playLabel = demo ? 'Watch demo' : 'Watch';
+  const playLabel = demo ? 'Watch demo' : presentation.action === 'Watch preview' ? 'Watch preview' : 'Watch';
   const notice = noticeForTitle(entry) ?? (concernsPackagedLibrary(entry.title) && !packagedLibrary.evidenceFor(entry.title, settings) ? {
     title: 'This video is unavailable',
     detail: 'This version cannot play in Calm Frames. The picture stays hidden.',
@@ -103,7 +103,7 @@ const TitleDetailsScreen = ({
   );
 
   const hiddenSeconds = Math.round(totalCoveredMs(intervals) / 1000);
-  const meta = [demo ? 'Simulated demo' : null, runtimeLabel(durationMs)].filter(Boolean).join(' · ');
+  const meta = [demo ? 'Simulated demo' : null, presentation.runtime ?? runtimeLabel(durationMs)].filter(Boolean).join(' · ');
   const [page, setPage] = React.useState<'watch' | 'info' | 'technical'>(preferPracticeFocus ? 'info' : 'watch');
   const [returnFocus, setReturnFocus] = React.useState<'watch' | 'info' | 'technical'>('watch');
   const back = React.useCallback(() => {
@@ -165,6 +165,7 @@ const TitleDetailsScreen = ({
           <Text style={styles.summary}>{ONLY_IN_CALM_FRAMES_LINE}</Text>
           <Text style={styles.summary}>{`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`}</Text>
           {presentation.art === 'coastal' ? <Text style={styles.summary}>Video: National Park Service, Acadia National Park. Public domain. No NPS endorsement is implied. The menu image is a still from the prepared video.</Text> : null}
+          {presentation.attribution ? <Text style={styles.summary} testID={`${testID}-attribution`}>{presentation.attribution}</Text> : null}
           {practiceOffered ? <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-practice`} label="Watch demo"
             accessibilityLabel={practiceLine ? `Watch simulated demo. ${practiceLine}` : 'Watch simulated demo'}
             disabled={saving} hasTVPreferredFocus={preferPracticeFocus && returnFocus !== 'technical'} onPress={() => onOpenPractice?.(practiceOffered)} /></View> : null}
