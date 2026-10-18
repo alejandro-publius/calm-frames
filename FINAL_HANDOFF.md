@@ -1,5 +1,9 @@
 # Final handoff: the integration candidate
 
+## Ocean replacement installed, October 18, 2026
+
+Installed app source is `4c0d291643e8f1d589e12d738f1e2409c68138aa`, including the tested release fixes and the exact owner-approved ocean catalog. One Debug build/install succeeded; all 801 inputs and the transferred package hash match. Native logs confirm Extra cautious ocean selection at both existing intervals, pause fallback, guarded Skip, natural completion and manual Back to Home Watch. The app is left available there and the collector is stopped. Original audio/timing packet proofs match the installed media; pixel/audio acceptance remains the owner's step. No further approval is needed for that review. See [the installed receipt and evidence limits](results/ocean-native-2026-10-18/README.md). Earlier installed/unapproved status below is history.
+
 ## Approved ocean activation, October 18, 2026
 
 Owner approval now activates exact bundle `d1abd36a` / catalog `6b590929` under the existing Acadia signer. The registry and compiled ambient metadata are generated from the checked report. All 130 focused activation/playback tests, TypeScript and prebuild input gates pass. Prior release fixes through `23a24c2` are included. The reserved native build/install follows this source commit; see `results/ocean-native-2026-10-18/` for its receipt. Installed source remains `50bc01f` until installation succeeds. Earlier unapproved-status sections below are historical.

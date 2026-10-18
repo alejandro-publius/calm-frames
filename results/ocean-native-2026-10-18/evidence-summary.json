@@ -1,0 +1,307 @@
+{
+  "source_commit": "4c0d291643e8f1d589e12d738f1e2409c68138aa",
+  "selected_preset": "extra-cautious",
+  "selected_rendition_sha256": "42d2abbe6ddd2f0a592bc5a1407da945a1c73fc6febedc68895b9f5294608a14",
+  "selected_bundle_id": "d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46",
+  "scheduled_intervals_ms": [
+    [
+      7343,
+      12699
+    ],
+    [
+      28113,
+      31593
+    ]
+  ],
+  "trace_events": [
+    {
+      "device_time": "Oct 18 04:48:06.152576",
+      "value": "focus kid-mode-home-more-info"
+    },
+    {
+      "device_time": "Oct 18 04:48:07.725099",
+      "value": "focus kid-mode-home-watch"
+    },
+    {
+      "device_time": "Oct 18 04:48:09.373894",
+      "value": "playback watch"
+    },
+    {
+      "device_time": "Oct 18 04:48:09.460311",
+      "value": "image scene coastal loaded"
+    },
+    {
+      "device_time": "Oct 18 04:48:09.460769",
+      "value": "focus player-opening-back"
+    },
+    {
+      "device_time": "Oct 18 04:48:09.471474",
+      "value": "image scene coastal loaded"
+    },
+    {
+      "device_time": "Oct 18 04:48:09.471792",
+      "value": "focus player-opening-back"
+    },
+    {
+      "device_time": "Oct 18 04:48:09.472795",
+      "value": "screen player"
+    },
+    {
+      "device_time": "Oct 18 04:48:09.484301",
+      "value": "playback cover-surface plain"
+    },
+    {
+      "device_time": "Oct 18 04:48:09.484346",
+      "value": "playback cover on media=0"
+    },
+    {
+      "device_time": "Oct 18 04:48:09.484367",
+      "value": "playback slow off media=0"
+    },
+    {
+      "device_time": "Oct 18 04:48:10.108798",
+      "value": "prepared-playback {\"bundleId\":\"d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46\",\"sourceSha256\":\"2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28\",\"renditionSha256\":\"42d2abbe6ddd2f0a592bc5a1407da945a1c73fc6febedc68895b9f5294608a14\",\"renditionPath\":\"file:///pkg/assets/raw/prepared-library/d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4\",\"renditionStartOffsetMs\":0,\"preset\":\"extra-cautious\",\"maps\":[{\"preset\":\"wcag\",\"sha256\":\"709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a\"},{\"preset\":\"broadcast\",\"sha256\":\"d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1\"},{\"preset\":\"extra-cautious\",\"sha256\":\"c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f\"}],\"reportSha256\":\"45c6f62f741bbc133d01a0d80b3d4da13d9f2dff0e49d045796592eda0071493\",\"checkedInputsSha256\":\"a01ed3b42c8552f1108806c470c641b85b42244ea6fb53042243c0af31dd5c15\",\"outcome\":\"cover proven drawn\"}"
+    },
+    {
+      "device_time": "Oct 18 04:48:10.401843",
+      "value": "playback cover-surface clear"
+    },
+    {
+      "device_time": "Oct 18 04:48:10.408954",
+      "value": "playback cover off media=0"
+    },
+    {
+      "device_time": "Oct 18 04:48:10.409094",
+      "value": "playback waiting on media=0"
+    },
+    {
+      "device_time": "Oct 18 04:48:10.633140",
+      "value": "playback waiting off media=0"
+    },
+    {
+      "device_time": "Oct 18 04:48:10.890922",
+      "value": "playback picture-shown media=350"
+    },
+    {
+      "device_time": "Oct 18 04:48:10.891658",
+      "value": "focus player-seekbar"
+    },
+    {
+      "device_time": "Oct 18 04:48:12.818841",
+      "value": "focus calm-card-skip"
+    },
+    {
+      "device_time": "Oct 18 04:48:17.809344",
+      "value": "playback cover-surface baked-ambient"
+    },
+    {
+      "device_time": "Oct 18 04:48:17.810195",
+      "value": "playback cover on media=7375"
+    },
+    {
+      "device_time": "Oct 18 04:48:23.211706",
+      "value": "playback cover-surface clear"
+    },
+    {
+      "device_time": "Oct 18 04:48:23.213239",
+      "value": "playback cover off media=12705"
+    },
+    {
+      "device_time": "Oct 18 04:48:33.728870",
+      "value": "focus calm-card-skip"
+    },
+    {
+      "device_time": "Oct 18 04:48:38.750068",
+      "value": "playback cover-surface baked-ambient"
+    },
+    {
+      "device_time": "Oct 18 04:48:38.750989",
+      "value": "playback cover on media=28146"
+    },
+    {
+      "device_time": "Oct 18 04:48:42.215048",
+      "value": "playback cover-surface clear"
+    },
+    {
+      "device_time": "Oct 18 04:48:42.215809",
+      "value": "playback cover off media=31602"
+    },
+    {
+      "device_time": "Oct 18 04:48:48.637973",
+      "value": "playback ended"
+    },
+    {
+      "device_time": "Oct 18 04:48:48.638917",
+      "value": "playback back"
+    },
+    {
+      "device_time": "Oct 18 04:48:48.949408",
+      "value": "playback teardown ok"
+    },
+    {
+      "device_time": "Oct 18 04:48:48.978046",
+      "value": "image scene coastal loaded"
+    },
+    {
+      "device_time": "Oct 18 04:48:48.978070",
+      "value": "focus kid-mode-home-watch"
+    },
+    {
+      "device_time": "Oct 18 04:48:48.978102",
+      "value": "image scene coastal loaded"
+    },
+    {
+      "device_time": "Oct 18 04:48:49.383792",
+      "value": "screen player-left"
+    },
+    {
+      "device_time": "Oct 18 04:48:50.370684",
+      "value": "playback watch"
+    },
+    {
+      "device_time": "Oct 18 04:48:50.385220",
+      "value": "screen player"
+    },
+    {
+      "device_time": "Oct 18 04:48:50.386491",
+      "value": "playback cover-surface plain"
+    },
+    {
+      "device_time": "Oct 18 04:48:50.387202",
+      "value": "playback cover on media=0"
+    },
+    {
+      "device_time": "Oct 18 04:48:50.389369",
+      "value": "playback slow off media=0"
+    },
+    {
+      "device_time": "Oct 18 04:48:50.420919",
+      "value": "image scene coastal loaded"
+    },
+    {
+      "device_time": "Oct 18 04:48:50.421232",
+      "value": "focus player-opening-back"
+    },
+    {
+      "device_time": "Oct 18 04:48:50.868625",
+      "value": "prepared-playback {\"bundleId\":\"d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46\",\"sourceSha256\":\"2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28\",\"renditionSha256\":\"42d2abbe6ddd2f0a592bc5a1407da945a1c73fc6febedc68895b9f5294608a14\",\"renditionPath\":\"file:///pkg/assets/raw/prepared-library/d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4\",\"renditionStartOffsetMs\":0,\"preset\":\"extra-cautious\",\"maps\":[{\"preset\":\"wcag\",\"sha256\":\"709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a\"},{\"preset\":\"broadcast\",\"sha256\":\"d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1\"},{\"preset\":\"extra-cautious\",\"sha256\":\"c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f\"}],\"reportSha256\":\"45c6f62f741bbc133d01a0d80b3d4da13d9f2dff0e49d045796592eda0071493\",\"checkedInputsSha256\":\"a01ed3b42c8552f1108806c470c641b85b42244ea6fb53042243c0af31dd5c15\",\"outcome\":\"cover proven drawn\"}"
+    },
+    {
+      "device_time": "Oct 18 04:48:51.145324",
+      "value": "playback cover-surface clear"
+    },
+    {
+      "device_time": "Oct 18 04:48:51.145380",
+      "value": "playback cover off media=0"
+    },
+    {
+      "device_time": "Oct 18 04:48:51.145994",
+      "value": "playback waiting on media=0"
+    },
+    {
+      "device_time": "Oct 18 04:48:51.273298",
+      "value": "playback waiting off media=0"
+    },
+    {
+      "device_time": "Oct 18 04:48:51.627563",
+      "value": "playback picture-shown media=350"
+    },
+    {
+      "device_time": "Oct 18 04:48:51.628737",
+      "value": "focus player-seekbar"
+    },
+    {
+      "device_time": "Oct 18 04:48:53.556448",
+      "value": "focus calm-card-skip"
+    },
+    {
+      "device_time": "Oct 18 04:48:58.572731",
+      "value": "playback cover-surface baked-ambient"
+    },
+    {
+      "device_time": "Oct 18 04:48:58.574691",
+      "value": "playback cover on media=7383"
+    },
+    {
+      "device_time": "Oct 18 04:48:59.642708",
+      "value": "playback cover-surface message"
+    },
+    {
+      "device_time": "Oct 18 04:49:01.236819",
+      "value": "playback cover-surface baked-ambient"
+    },
+    {
+      "device_time": "Oct 18 04:49:02.824903",
+      "value": "seek {\"phase\":\"cover-request\",\"covered\":true,\"reason\":\"seek seek-bar: target 12799 decodes from inside 7343-12699\"}"
+    },
+    {
+      "device_time": "Oct 18 04:49:02.824927",
+      "value": "seek {\"phase\":\"playhead-write\",\"targetMs\":12799}"
+    },
+    {
+      "device_time": "Oct 18 04:49:02.833150",
+      "value": "playback cover-surface message"
+    },
+    {
+      "device_time": "Oct 18 04:49:02.868485",
+      "value": "playback waiting on media=10029"
+    },
+    {
+      "device_time": "Oct 18 04:49:03.236944",
+      "value": "playback waiting off media=10029"
+    },
+    {
+      "device_time": "Oct 18 04:49:03.284068",
+      "value": "seek {\"phase\":\"cover-request\",\"covered\":false,\"reason\":\"seek confirmed outside the interval\"}"
+    },
+    {
+      "device_time": "Oct 18 04:49:03.286934",
+      "value": "playback cover-surface plain"
+    },
+    {
+      "device_time": "Oct 18 04:49:03.288586",
+      "value": "focus player-seekbar"
+    },
+    {
+      "device_time": "Oct 18 04:49:03.294677",
+      "value": "playback cover-surface clear"
+    },
+    {
+      "device_time": "Oct 18 04:49:03.296326",
+      "value": "playback cover off media=13115"
+    },
+    {
+      "device_time": "Oct 18 04:49:04.983930",
+      "value": "playback back"
+    },
+    {
+      "device_time": "Oct 18 04:49:05.332481",
+      "value": "playback teardown ok"
+    },
+    {
+      "device_time": "Oct 18 04:49:05.365742",
+      "value": "image scene coastal loaded"
+    },
+    {
+      "device_time": "Oct 18 04:49:05.366180",
+      "value": "focus kid-mode-home-watch"
+    },
+    {
+      "device_time": "Oct 18 04:49:05.366389",
+      "value": "image scene coastal loaded"
+    },
+    {
+      "device_time": "Oct 18 04:49:05.771799",
+      "value": "screen player-left"
+    }
+  ],
+  "raw_log_sha256": "289885dacfbf84940c0303672b97b462a65e2a4af7007f3ac91dbd0b4329227b",
+  "retained_trace_sha256": "47e30e8d341c2b40a54041751701df4e2b05018e5aa4de9e2376057f2db78645",
+  "evidence_limits": {
+    "pixel_observation": false,
+    "audio_observation": false,
+    "native_error_injection": false,
+    "all_presets_native_tested": false,
+    "error_protection_tested_in_unit_suite": true
+  }
+}

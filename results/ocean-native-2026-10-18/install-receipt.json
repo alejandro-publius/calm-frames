@@ -1,0 +1,12 @@
+{
+  "source_commit": "4c0d291643e8f1d589e12d738f1e2409c68138aa",
+  "package_sha256": "7292f7b56807e395f8180a99c0205be270d09f3be5982dd9bdfea240ed6c3f0f",
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/release/ocean-native-2026-10-18/calm-frames-ocean-aarch64-debug.vpkg",
+  "install_count": 1,
+  "inputs_matched": 801,
+  "started_utc": "2026-10-18T04:47:57.353214+00:00",
+  "install_output": "Installing/Updating '/tmp/calm-frames-ocean-aarch64-debug.vpkg' ...success\n",
+  "device_copy_sha256_matches": true,
+  "running_confirmed": true,
+  "completed_utc": "2026-10-18T04:48:04.160569+00:00"
+}

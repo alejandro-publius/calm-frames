@@ -1,0 +1,24 @@
+{
+  "checks": [
+    "Single update installed; transferred package SHA-256 and all app inputs match",
+    "Home Watch selects the approved replacement and clears its opening cover",
+    "First scheduled interval requests the baked ocean surface while guard cover stays on",
+    "Second scheduled interval requests the baked ocean surface while guard cover stays on",
+    "Uninterrupted playback reports natural end, teardown and Home Watch return",
+    "Pause during scheduled ocean interval restores the opaque fallback",
+    "Resume restores eligible baked ocean presentation",
+    "Skip requests cover before playhead write, then releases after guarded seek",
+    "Manual playback Back returns Home Watch"
+  ],
+  "capture_used": false,
+  "visual_audio_acceptance": false,
+  "native_error_injected": false,
+  "household_records_inspected": false,
+  "scheduled_cover_on_media_ms": [
+    7375,
+    28146
+  ],
+  "result": "completed",
+  "collector_stopped": true,
+  "last_reported_focus": "kid-mode-home-watch"
+}
