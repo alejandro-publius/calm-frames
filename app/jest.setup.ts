@@ -251,6 +251,7 @@ jest.mock('react-native-responsive-screen', () => ({
   widthPercentageToDP: jest.fn(),
 }));
 jest.mock('@amazon-devices/react-native-svg', () => ({
+  G: 'G',
   __esModule: true,
   default: 'Svg',
   Svg: 'Svg',

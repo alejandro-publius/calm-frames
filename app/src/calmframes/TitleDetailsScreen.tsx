@@ -1,6 +1,7 @@
 /** Viewing first; optional explanations and technical records use separate pages. */
 import React from 'react';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
+import { islandKind } from './CoastalIsland';
 import { Image } from 'react-native';
 import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
@@ -182,7 +183,7 @@ const TitleDetailsScreen = ({
 
   return (
     <WorldAppearance.Provider value><ScrollView key="watch" testID={testID} style={[styles.screen, { backgroundColor: WORLD.BACKGROUND }]} contentContainerStyle={[styles.content, { minHeight: scale(1080) }]}>
-      <CoastalWorld detail />
+      <CoastalWorld detail destination={islandKind(presentation.menuArt ?? presentation.art)} />
       <Image source={filmStill(presentation.menuArt ?? presentation.art)} resizeMode="cover" fadeDuration={0} style={styles.destinationImage} testID={`${testID}-destination-image`} accessible={false} />
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>

@@ -2,6 +2,7 @@ import React from 'react';
 import { CoastalAppearance } from './CoastalAppearance';
 import { StyleSheet, Text, View } from 'react-native';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
+import { islandKind } from './CoastalIsland';
 import CalmPageHeader from './CalmPageHeader';
 import { CALM_FLOW, CALM_SPACE, CALM_TEXT, heroTitleTypography, scale } from './calmStyles';
 /**
@@ -16,9 +17,9 @@ const EYEBROW_MARGIN = 12;
 /** CALM_TEXT.supporting's line height in 1080p units; test/calmframes/openingAlignment.test.tsx pins it. */
 export const EYEBROW_LINE_HEIGHT = 42;
 export const OPENING_COPY_TOP = CALM_FLOW.HERO_TOP - (EYEBROW_LINE_HEIGHT + EYEBROW_MARGIN);
-export default function PlayerOpening({ title, onBack, returning = false, liveStatus = true }: { menuArt?: string; title: string; onBack: () => void; returning?: boolean; liveStatus?: boolean }) {
+export default function PlayerOpening({ menuArt, title, onBack, returning = false, liveStatus = true }: { menuArt?: string; title: string; onBack: () => void; returning?: boolean; liveStatus?: boolean }) {
   return <CoastalAppearance.Provider value><WorldAppearance.Provider value><View testID="player-home-opening" style={styles.screen}>
-    <CoastalWorld detail />
+    <CoastalWorld detail destination={islandKind(menuArt)} />
     <CalmPageHeader onBack={!returning ? onBack : undefined} backLabel="Back" backTestID="player-opening-back" preferredBack />
     <View style={styles.copy}>
       <Text style={styles.eyebrow}>Calm Frames</Text>

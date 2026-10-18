@@ -1,5 +1,6 @@
 import React from 'react';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
+import { islandKind } from './CoastalIsland';
 import TouchableOpacity from './CalmTouchable';
 import {
   BackHandler,
@@ -223,7 +224,7 @@ const KidHomeScreen = ({
 
   return (
     <WorldAppearance.Provider value={!empty && !showIntroduction}><View testID={testID} style={[styles.screen, !empty && !showIntroduction && { backgroundColor: WORLD.BACKGROUND }]}>
-      {!empty && !showIntroduction ? <CoastalWorld /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
+      {!empty && !showIntroduction ? <CoastalWorld destination={islandKind(feature?.menuArt ?? feature?.art)} showBoat={feature?.art === 'coastal' || feature?.menuArt === 'sea-otters'} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
       <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo && !returnToBridgeTest}>
           {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}

@@ -1,0 +1,20 @@
+{
+  "title": "Forest creek at Redwood",
+  "source_page": "https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E",
+  "source_download": "https://www.nps.gov/nps-audiovideo/legacy/redw/F2E1744E-F295-B2E5-52AF33C2205A8C9E/redw-PraireCreekandRedwood_1280x720.mp4",
+  "checked_on": "2026-10-18",
+  "source_license": "Public domain: NPS credit without copyright symbol and official usage statement",
+  "credit": "NPS: G Litten; no NPS endorsement implied",
+  "original_source_sha256": "d823ac6364d69c8dd53b5d542015c754258fccae908ffbc9acc3fbb41fda4070",
+  "excerpt_start_seconds": 1,
+  "excerpt_duration_seconds": 12,
+  "prepared_source_sha256": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+  "transformation": "854x480 H.264 CRF25; original 30fps and speed; AAC96k original audio retained; no loop or crop",
+  "content_inspection": "Decoded source stills at2,6,10s show a redwood trunk, ferns, wooded creek and daylight. No people, captions, brands or shot change in inspected stills. This is a creek, not waterfall footage. Official description says nature sounds without narration; audio stream present, listening acceptance pending. No original video playback or device capture.",
+  "frames_inspected": {
+    "source-10s.jpg": "93b7f1e58ad1c005f45f389f3b987e3e9b664fed38691b4dc2cd0294b2738384",
+    "source-6s.jpg": "4f6a235b283920370a09585f4fe381008c0c9d4bcecc2c71cca4adee493fda0b",
+    "source-2s.jpg": "f6adf3ec6664e1f609dd43fe7dcb579f3ccbeba2475c1fbed662be3d85873c65"
+  },
+  "previous_full_source_limit": "Full50.5s source previously required about32.6s Standard cover; not proposed here. First12s CRF22 candidate passed but required9,241,733 bytes; retained locally and not proposed. Compact candidate is newly analyzed, not a reused result."
+}

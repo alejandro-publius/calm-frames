@@ -1,5 +1,13 @@
 # Calm Frames: rules for every session
 
+**October 18 island refinement.** Owner accepted the coastal world and approved
+distinct silhouettes, selection boat and Forest preparation. Current UI source
+adds static Forest scenery only; its exact new catalog is not approved or active.
+Read results/coastal-islands-2026-10-18 and results/forest-candidate-2026-10-18.
+Current two-title media, trust, household preferences and player guards are unchanged.
+One consolidated UI build/install and non-capture walkthrough follow focused gates.
+
+
 **Latest October 18 coastal-world checkpoint.** Read the newest FINAL_HANDOFF.md entry.
 Installed source is `6f2570d` from isolated `codex/coastal-world-2026-10-18`;
 real NOAA sea otters replace the river preview. 534 app tests and 11 attribution

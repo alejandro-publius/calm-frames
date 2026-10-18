@@ -1,0 +1,42 @@
+{
+  "approved": false,
+  "title": "Forest creek at Redwood",
+  "durationMs": 12000.0,
+  "sourceSha256": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+  "bundleId": "77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f",
+  "catalogSha256": "24d5cb114e3bcec0047158b7d2d3ac10bdb324cca0a51c61d78e70bd5256d732",
+  "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+  "reportSha256": "9daf7a6eb07e6c2ebd5254c05fab17f3c205fa0d36dd1dd95ed47768a89c7981",
+  "verificationChecks": 48,
+  "allChecksPassed": true,
+  "coverPlans": {
+    "broadcast": {
+      "total_covered_ms": 0,
+      "intervals": []
+    },
+    "wcag": {
+      "total_covered_ms": 0,
+      "intervals": []
+    },
+    "extra-cautious": {
+      "total_covered_ms": 0,
+      "intervals": []
+    }
+  },
+  "candidateBytes": 7604620,
+  "originalNamespaceBytes": 64432686,
+  "allGenerationsAdditionBytes": 72037306,
+  "replacementNamespaceBytes": 66492442,
+  "unchangedLimitBytes": 67108864,
+  "excludedFromFreshNamespace": [
+    "4064f489236973b0e8683f24fac9756ed0cdf475d376a7c6501d644397b597f5",
+    "89496fc4b45528558ce35ef9140aa659b86a5f84734156098e2f29e312f2c590"
+  ],
+  "exclusionReason": "Only obsolete river-otter preview4064f489 and old Harbor generation89496fc4 omitted, with their now-unreferenced reports. Current prepared Harbor51b91d74, Acadia ocean and NOAA Sea Otters preserved byte-for-byte. Original namespace and rejected staging plan remain intact.",
+  "currentAcadiaSeaOttersAndHarborPreserved": true,
+  "candidateDirectory": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/forest-compact-2026-10-18/prepared-library",
+  "replacementNamespace": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/forest-compact-2026-10-18/replacement-library-reviewed",
+  "requiredScope": "Approve only the exact Forest catalog/bundle under the existing project signer, add Forest as third playable destination, and use the fresh namespace omitting obsolete river-otter4064f489 and old Harbor89496fc4. Preserve current Acadia, NOAA Sea Otters, current prepared Harbor51b91d74 and all original backups. No new key, broad trust, ambient registration or detector change. UI-only improvements remain separate.",
+  "previousRiverOnlyPlanBytes": 67204054,
+  "previousRiverOnlyPlan": "Rejected by unchanged64MiB gate;95,190 bytes over limit"
+}

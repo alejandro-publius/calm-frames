@@ -1,3 +1,4 @@
+<!-- Latest local checkpoint: October18 island refinement passes438 bounded app tests and11 attribution tests; native UI update pending. Forest media prepared, exact activation approval pending. -->
 # Status
 
 October 18 cinematic redesign installed from 999f69c on local branch

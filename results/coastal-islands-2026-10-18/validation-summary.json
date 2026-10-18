@@ -1,0 +1,17 @@
+{
+  "baseline": "ab83cf85738c496b29b2c33516f82d4d670f2c81",
+  "bounded_app_test_suites": 33,
+  "bounded_app_tests_passed": 438,
+  "attribution_tests_passed": 11,
+  "typecheck": "passed",
+  "lint": "passed with warnings, zero errors",
+  "current_prepared_namespace": "unchanged; strict gate passed",
+  "ambient_approval": "unchanged; passed",
+  "new_motion_guard_mutation": "failed without latch, passed restored",
+  "independent_review": "no remaining scoped blocker",
+  "forest_activation": "pending exact catalog and packaging approval",
+  "native_status": "build/install pending",
+  "capture": false,
+  "pin_operations": false,
+  "source_or_media_publication": false
+}

@@ -2683,3 +2683,14 @@ Reason: the owner requested a cohesive video-first redesign after reviewing
 showcase interface patterns. Cost: no new service, dependency, footage or asset;
 one local Debug build/install for review. Native pixels and audio remain owner
 acceptance, and this work does not authorize a push or publication.
+
+## October 18, 2026: distinct coastal islands and staged Forest
+
+Keep the accepted coastal world and two verified videos. Add original island
+silhouettes, static shore depth and a noninteractive boat that follows selection.
+Existing artwork motion opt-in and accessibility preferences govern movement;
+focus and playback never wait for it. Forest remains labelled not ready until
+its exact NPS creek catalog and proposed fresh namespace are approved. The current
+media namespace is untouched. Cost: local UI build and strict preparation only;
+no AWS, new signing key or public release. Evidence: results/coastal-islands-2026-10-18
+and results/forest-candidate-2026-10-18.

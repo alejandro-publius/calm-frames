@@ -134,6 +134,14 @@ export const CREDIT_ENTRIES: CreditEntry[] = [
     ],
   },
   {
+    title: 'Forest creek at Redwood (NPS review excerpt, not playable)',
+    license: 'Public domain: NPS credit without copyright symbol and official usage statement',
+    credit: 'NPS: G Litten; no NPS endorsement implied',
+    source: 'https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E',
+    collection: 'unknown',
+    obligations: [],
+  },
+  {
     title: 'Frozen Frolics (1930)',
     license: 'Public domain (U.S. work published 1930)',
     credit: 'Frozen Frolics (1930), Van Beuren Studios, public domain, via the Internet Archive',
