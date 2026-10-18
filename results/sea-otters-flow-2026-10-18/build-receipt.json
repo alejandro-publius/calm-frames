@@ -1,0 +1,13 @@
+{
+  "source_commit": "6f2570da4165acc752882a0c04ffe996cd072880",
+  "build_count": 1,
+  "build_start_utc": "2026-10-18T06:38:19.061750+00:00",
+  "app_inputs": 818,
+  "command": "npm run build:debug",
+  "visual_audio_acceptance": false,
+  "build_exit": 0,
+  "build_end_utc": "2026-10-18T06:39:25.178121+00:00",
+  "changed_inputs": [],
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/release/sea-otters-flow-2026-10-18/calm-frames-coastal-world-aarch64-debug.vpkg",
+  "package_sha256": "8311d90bc34db2efaae77a8a5eda144d7d45cc3989035558860c1b4604e3e63b"
+}

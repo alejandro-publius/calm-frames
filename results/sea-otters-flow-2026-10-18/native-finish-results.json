@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "How it works Back restores focus to How it works",
+    "Acadia map destination > Details > Watch > Back > Back restores the same destination",
+    "App remains open on Home with Acadia selected and Watch focused"
+  ],
+  "capture_used": false,
+  "visual_audio_acceptance": false,
+  "native_error_injected": false,
+  "household_records_inspected": false,
+  "result": "completed",
+  "selected_home_title": "Acadia",
+  "collector_stopped": true,
+  "last_reported_focus": "kid-mode-home-watch"
+}

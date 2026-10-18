@@ -1,5 +1,13 @@
 # Calm Frames: rules for every session
 
+**Latest October 18 coastal-world checkpoint.** Read the newest FINAL_HANDOFF.md entry.
+Installed source is `6f2570d` from isolated `codex/coastal-world-2026-10-18`;
+real NOAA sea otters replace the river preview. 534 app tests and 11 attribution
+tests pass; one build/install and native core walkthrough are complete. Home is
+left with Acadia selected and Watch focused. Original checkout and Claude sessions
+remain untouched. No capture, release or push. Evidence and exact owner keys are in
+`results/sea-otters-flow-2026-10-18/`. Earlier checkpoints below are history.
+
 **October 18 cinematic review.** Owner authorized a cohesive UI redesign from
 synced `59f2383`. Current isolated branch is `codex/cinematic-review-2026-10-18`.
 Home uses a compact film selector over existing nature imagery; Details/opening

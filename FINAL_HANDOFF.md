@@ -1,5 +1,35 @@
 # Final handoff: the integration candidate
 
+## Coastal world and real sea otters installed, October 18, 2026
+
+Latest installed source is `6f2570da4165acc752882a0c04ffe996cd072880`, on isolated
+`codex/coastal-world-2026-10-18` in `calm-frames-sea-otters-flow`. Package SHA-256:
+`8311d90bc34db2efaae77a8a5eda144d7d45cc3989035558860c1b4604e3e63b`.
+One build/update; 818 app inputs and transferred package match. Original checkout
+and media namespace remain preserved. Earlier staged/installed statuses below are history.
+
+Home is an original static coastal world with Acadia and Sea Otters destinations,
+real video stills and raised cream/coral controls. Details and loading share a
+cream reading panel; loading never retains a source video frame. Selection persists
+through Parents cancellation. Generation/identity guards cancel late setup/BIF,
+ignore duplicate surface callbacks and restore static loading on surface loss.
+The exact approved NOAA 19.987-second silent sea-otter clip is active. Acadia's
+ocean payload, exact intervals and household migration behavior are unchanged.
+
+534 app tests and 11 attribution tests pass, plus TypeScript, lint, delivery gates
+and independent review. Native logs verify both destinations, More info, playback,
+pause/resume, Acadia ocean requests and protected Skip, natural end/Back and Parents
+cancel focus. Final app state: Home, Acadia selected, Watch focused; collectors stopped.
+Down from Acadia goes to Details; Left then reaches Watch. The legacy Check playback
+utility is absent under extra-cautious because it only has a WCAG map; no setting,
+key or safety gate was changed. Controlled tests cover error/loading/surface failures;
+no native fault injection, screenshots, recording or pixel/audio acceptance is claimed.
+
+Read [the completed evidence](results/sea-otters-flow-2026-10-18/README.md) and
+[the exact owner walkthrough](results/sea-otters-flow-2026-10-18/OWNER_WALKTHROUGH.md).
+Owner visual/audio review, physical-device testing and separate release/submission
+steps remain. No public push, release, PIN input or household reset occurred.
+
 ## Sea-otter correction staged, October 18, 2026
 
 Real NOAA sea otters (Enhydra lutris), floating in the ocean at Unalaska/Dutch

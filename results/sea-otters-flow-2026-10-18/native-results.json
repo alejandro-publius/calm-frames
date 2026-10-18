@@ -1,0 +1,33 @@
+{
+  "checks": [
+    "Single update installed; transferred package SHA-256 and all app inputs match",
+    "Home Watch still selects exact approved ocean Acadia",
+    "Both Acadia intervals request baked ocean; natural end restores Home Watch",
+    "Pause during scheduled ocean interval restores the opaque fallback",
+    "Resume restores eligible baked ocean presentation",
+    "Skip requests cover before playhead write, then releases after guarded seek",
+    "Manual playback Back returns Home Watch",
+    "Acadia destination, Details, More info and Back preserve its map selection",
+    "Coastal map selects both Acadia and Sea Otters",
+    "Otter selection opens Details with Watch focused",
+    "Sea Otters Details and More info return to the same Watch action",
+    "Sea Otters controls hide and reveal; pause/resume state changes confirmed",
+    "Exact NOAA sea otter clip plays once, ends and restores Details Watch; no ambient presentation",
+    "Manual Back from otter playback restores Details Watch",
+    "Details Back restores the selected Otter card on Home",
+    "Parents cancellation returns focus to Parents without PIN input",
+    "Parents cancel retains Sea Otters, verified by its exact playback identity"
+  ],
+  "capture_used": false,
+  "visual_audio_acceptance": false,
+  "native_error_injected": false,
+  "household_records_inspected": false,
+  "acadia_cover_on_media_ms": [
+    7365,
+    28152
+  ],
+  "result": "stopped",
+  "reason": "No log match: CALM_TRACE focus kid-mode-home-watch",
+  "collector_stopped": true,
+  "last_reported_focus": "kid-mode-home-more-info"
+}

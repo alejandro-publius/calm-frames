@@ -1,0 +1,12 @@
+{
+  "source_commit": "6f2570da4165acc752882a0c04ffe996cd072880",
+  "package_sha256": "8311d90bc34db2efaae77a8a5eda144d7d45cc3989035558860c1b4604e3e63b",
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-sea-otters-flow/build/release/sea-otters-flow-2026-10-18/calm-frames-coastal-world-aarch64-debug.vpkg",
+  "install_count": 1,
+  "inputs_matched": 818,
+  "started_utc": "2026-10-18T06:39:38.110790+00:00",
+  "install_output": "Installing/Updating '/tmp/calm-frames-coastal-world-aarch64-debug.vpkg' ...success\n",
+  "device_copy_sha256_matches": true,
+  "running_confirmed": true,
+  "completed_utc": "2026-10-18T06:39:43.943679+00:00"
+}

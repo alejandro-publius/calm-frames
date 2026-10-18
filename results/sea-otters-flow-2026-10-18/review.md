@@ -32,3 +32,15 @@ Native direction checks must use Up from Watch to the destination cards and Down
 ## Evidence limits
 
 This reviewer did not rerun tests. Final regression tests were running during the closing review; earlier saved failed runs are superseded only by the parent's final recorded results. Parent must record the final successful test/type/lint results after the fixes. Native appearance, readable focus and surface recovery still require the single authorized native build/check pass; no such verification is claimed here.
+
+
+## Late lifecycle and trace addendum — source 6f2570d
+
+Read-only recheck of the committed source found no additional blocker.
+
+- `PlayerScreen.tsx:689–698` ignores creation callbacks for the already-current identical surface handle. This makes duplicate notifications idempotent: they cannot increment the presentation generation, reset the decoded-frame baseline, or restart surface setup. A genuine destruction clears the stored handle, so recreation with that same handle still proceeds. The stale-destruction check remains intact.
+- `playerOpening.test.tsx:19–20` repeats the current handle after the opening has cleared and asserts the opening stays absent. The adjacent surface-loss test still covers replacement handles, stale destruction, and a new frame before reopening the picture. This is meaningful regression coverage for the reported repeated-callback loop.
+- `VideoPlayerUI.tsx:98,109` adds dependency-scoped paused/playing and controls shown/hidden traces only. `calmframes/trace.ts` suppresses them outside debug builds and when tests disable tracing. They do not alter playback, focus, controls timing or guards and contain no personal data. The paused/playing trace describes UI state, including the initial prop value; it does not by itself prove frame presentation, uninterrupted playback or audio output. Likewise, controls shown/hidden is state evidence, not a visual rendering measurement. Absence of a log proves nothing.
+- Inspected saved logs: `bounded-tests.log` reports 426 tests in 32 suites passed; `safety-household-tests.log` reports 108 tests in six suites passed; `attribution-tests.log` reports 11 tests passed. The bounded log also records Jest's open-handle warning. The earlier `regression-tests.log` retains the failed OOM attempt; do not cite it as the passing result. This reviewer read these logs and did not rerun the tests.
+
+The build was in progress during this addendum. No new build, installation, native visual/audio result or device action is certified by this review.
