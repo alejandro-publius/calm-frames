@@ -5,8 +5,9 @@ synced `59f2383`. Current isolated branch is `codex/cinematic-review-2026-10-18`
 Home uses a compact film selector over existing nature imagery; Details/opening
 share geometry and scenery. Scene markers are read-only, and the compact player
 status is the only scheduled-cover chrome. Media, detectors, signing and trust
-remain unchanged. One consolidated build/install is authorized after tests;
-no capture or push. Read the newest FINAL_HANDOFF entry and results/cinematic-review-2026-10-18/.
+remain unchanged. One consolidated build/install succeeded from 999f69c after 271 tests;
+nine native text checks pass and the app rests Home with Otters selected. No capture
+or push. Read the newest FINAL_HANDOFF entry and results/cinematic-review-2026-10-18/.
 
 **Latest controlled reset, October 15.** Read CLAUDE_CODE_HANDOFF.md before editing.
 Codex owns the prepared-video UI branch and app/**; Claude owns pipeline/** and

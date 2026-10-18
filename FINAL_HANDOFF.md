@@ -1,15 +1,20 @@
 # Final handoff: the integration candidate
 
-## Cinematic redesign prepared, October 18, 2026
+## Cinematic redesign installed, October 18, 2026
 
-The owner authorized a cohesive video-first redesign from synced 59f2383 on local
-branch `codex/cinematic-review-2026-10-18`. Home now has a compact film selector;
-Details and opening retain the same coastal setting, typography and Watch size.
-Read-only scene marks share interval geometry with the guarded player seekbar.
-The large redundant scheduled-cover message is removed; opaque protection and
-compact Skip remain. Source media, detectors, signing and trust are unchanged.
-Focused tests and source review precede one consolidated build/install; installed
-source is still 603f6ce until its receipt succeeds. No capture or push.
+Installed source is `999f69cd917e51444502d157a3e1bfb069d85235`; package SHA-256 is
+`d8217c60e2857dcd09b1a807fb0a96b1ed68da69eff08675ef4ebe112f787cdd`. One build/install,
+815 app inputs unchanged and transferred package hash matched. Home now has a
+compact film selector over the nature image; Details and opening share scenery,
+title geometry and Watch size. Read-only player scene marks share Details geometry.
+Large redundant cover messaging is removed; opaque protection and compact Skip
+remain. All media, detector and signing/trust inputs remain unchanged.
+271 tests, TypeScript, package gates and source review pass. Nine native text
+checks pass for Acadia ocean playback and both title selection/end/Back routes.
+App is left Home with Otters selected and Watch preview focused; collector stopped.
+Owner pixel/audio review remains. No capture, household writes or push. Local
+branch: `codex/cinematic-review-2026-10-18`; previous 59f2383 remains recoverable.
+See [screens, receipts and owner review](results/cinematic-review-2026-10-18/README.md).
 
 ## Otters and concise Details copy installed, October 18, 2026
 

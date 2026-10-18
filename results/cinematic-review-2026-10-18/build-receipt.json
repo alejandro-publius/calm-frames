@@ -1,0 +1,13 @@
+{
+  "source_commit": "999f69cd917e51444502d157a3e1bfb069d85235",
+  "build_count": 1,
+  "build_start_utc": "2026-10-18T05:29:42.094991+00:00",
+  "app_inputs": 815,
+  "command": "npm run build:debug",
+  "visual_audio_acceptance": false,
+  "build_exit": 0,
+  "build_end_utc": "2026-10-18T05:30:44.985060+00:00",
+  "changed_inputs": [],
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/release/cinematic-review-2026-10-18/calm-frames-cinematic-aarch64-debug.vpkg",
+  "package_sha256": "d8217c60e2857dcd09b1a807fb0a96b1ed68da69eff08675ef4ebe112f787cdd"
+}

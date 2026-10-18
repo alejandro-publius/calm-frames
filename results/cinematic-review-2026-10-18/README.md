@@ -49,14 +49,49 @@ Skip and focus. A new live-state timeline test exposed the existing seekbar memo
 comparison missing the new interval input; the comparator is fixed and the test
 passes, including removal of marks when verification is lost.
 
-## Native review
+## Installed result
 
-One build/install follows this source checkpoint. Build, install and native text
-receipts are authoritative once present. No screenshot or recording is used.
-Tests and source/asset contrast calculations do not establish native pixels,
-readability, transition appearance or heard audio. Those remain owner review.
+One Debug build and one update/install succeeded from source
+`999f69cd917e51444502d157a3e1bfb069d85235`. Package SHA-256:
+`d8217c60e2857dcd09b1a807fb0a96b1ed68da69eff08675ef4ebe112f787cdd`.
+Package path: `build/release/cinematic-review-2026-10-18/calm-frames-cinematic-aarch64-debug.vpkg`.
+All 815 app inputs matched before/after build and before installation. The device
+copy matches the package hash. Both approved catalogs and all 12 media/map assets
+match directly inside the package; new scene timeline/copy strings are included.
+The ambient registry remains byte-identical.
 
-Owner review after installation: use the compact film selector, open Details,
-play Acadia through both ocean replacements and listen across them; then select
-Otters and confirm the silent short preview and return behavior. The app will be
-left on Home. No push or publication is part of this pass.
+Nine native text checks passed on the existing Extra cautious profile:
+
+- Home Watch selected the exact ocean Acadia bundle. Both scheduled intervals
+  requested baked ocean, at sampled media positions 7365 and 28143 ms. Natural end
+  returned to Home Watch.
+- The compact selector reached both titles. Otters opened Details with Watch
+  preview focused, played its exact rendition once and returned to Details Watch.
+- Manual Back from Otter playback restored Details Watch; Details Back restored
+  the selected Otter card. Up returned to the hero actions.
+- The app is left on Home with Otters selected and Watch preview focused. The
+  text collector is stopped.
+
+Receipts, every native command, filtered CALM traces and selected-media identities
+are retained here. Full bounded application logs remain under
+`build/cinematic-review-2026-10-18/`. Logged samples are not display latency
+measurements. Package media proof retains Acadia's original audio packet/timestamp
+continuity and the otter's 106 frames, 4.24 seconds and absent audio stream.
+
+No capture, PIN entry, Parents navigation, household writes or push occurred.
+Practice and Parents cancellation were covered by unit tests, not exercised
+natively in this pass. Native error/seek/pause injection and screen-reader speech
+were not tested here. Logs establish route/guard decisions and installed bytes,
+not native pixels, readability, transition appearance or heard audio.
+
+## Owner review
+
+The open app is ready. Use the compact film selector, open Details, play Acadia
+through both ocean replacements and listen across them; then select Otters and
+confirm the silent short preview. Review the selected-film marker separately from
+the remote focus ring. These visual/audio judgments require the owner. No further
+installation is needed, and no real product decision blocks this review.
+
+The earlier synced checkpoint 59f2383 and installed source 603f6ce remain in history;
+this redesign and its evidence are local only. Evidence commits after 999f69c do
+not change the installed app.

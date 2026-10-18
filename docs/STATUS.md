@@ -1,11 +1,11 @@
 # Status
 
-October 18 cinematic redesign: implementation and focused tests are ready on
-`codex/cinematic-review-2026-10-18`, based on synced 59f2383. Existing assets,
-detectors, trust and protective paths remain unchanged. One consolidated native
-build/install follows the source checkpoint; see FINAL_HANDOFF.md and
-results/cinematic-review-2026-10-18/ for the current installed receipt. Older
-installed status below is historical.
+October 18 cinematic redesign installed from 999f69c on local branch
+`codex/cinematic-review-2026-10-18`. One build/install, 815 matching inputs,
+271 tests and nine native text checks passed. App rests Home with Otters selected;
+collector stopped. Existing media, detectors, trust and protections remain.
+No capture or push. Owner visual/audio review remains; receipts are in
+results/cinematic-review-2026-10-18/ and FINAL_HANDOFF.md. Earlier status is history.
 
 October 17 submission packet reconciliation, documentation only: the canonical
 checklist, Devpost draft and 90-second run of show in docs/submission/ now
