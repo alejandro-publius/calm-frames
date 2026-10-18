@@ -1,112 +1,247 @@
 # Devpost description, draft
 
-Updated October 15, 2026 for private branch
-`codex/prepared-video-slice-2026-10-15`, app source `21f0ea6`. Not submitted.
-The exact package and per-check limits are in [the handoff](../../FINAL_HANDOFF.md).
-Review the live form's field names and limits before pasting. Final release,
-licensing, reviewer access and publication remain owner decisions.
+Draft for the owner, updated on October 17, 2026, in the evening, Pacific time. It describes
+installed app source `9cc57ca` on branch `claude/tv-experience-2026-10-16`, the local review
+and staging tool, and the unapproved Prairie Creek and Redwood proposal from `076247a`. Not
+submitted. Check the live form's fields first
+([checklist](FINAL_REQUIREMENTS_CHECKLIST.md), section 11). Every measured number below is
+tied to a results file and checked by `eval/readme_sync.py`. Bracketed notes are for the
+owner and are not pasted. Paste each number's value, not the hidden comment marker around it.
 
-## Project name and tagline
+## Name and tagline
 
-Calm Frames. A calmer way to watch.
+**Calm Frames.** A calmer way to watch.
 
-## The problem and audience
+Calm Frames checks a video for flashing before it reaches the TV, then covers those scenes
+during playback while the sound continues.
 
-Families affected by photosensitive epilepsy need understandable choices
-about the video they play. Calm Frames explores a narrow approach: analyze
-supported videos in advance, prepare covered versions, and explain the result
-before playback. Parents control the household settings; children use a TV
-remote to choose from the verified library.
+## Who it helps
 
-## What it does today
+Households where someone is sensitive to flashing light, such as a child with photosensitive
+epilepsy, and the parent who chooses what they watch. Flashing is hard to spot before it is on
+screen. Calm Frames shows the household, before anyone presses play, which parts of a video
+will be covered.
 
-The Vega OS app includes Harbor and an owner-approved Acadia coastal clip.
-Harbor has no detector findings. Acadia's analysis separates two distinct
-detected periods from the longer picture-cover times for the selected preset.
-Its record identifies the original source, prepared rendition, maps and
-preparation report. Playback uses the prepared file, not the original source.
-The coastal illustration is decorative and is labelled as such.
+## What it does
 
-Each compiled catalog has its own exact trust scope. Source and rendition
-hashes, signed maps and retained reports bind the selected title to the files
-that play. A missing or mismatched record blocks playback. Acadia approval is
-limited to its exact bundle and existing public key; it does not authorize
-other videos signed with that key.
+### On the TV today
 
-Harbor's separate Try the demo flow schedules two simulated picture pauses.
-It teaches the mechanism without claiming those pauses were detected in
-Harbor. Back returns one level at a time. Cancelling the Parents PIN gate
-returns focus to Parents.
+Installed and running on the Vega Virtual Device.
 
-The TV transport uses a seek bar. Left and Right choose a position and Select
-confirms it through the guarded seek path. An automotive-only Forward button
-is not part of this TV interface. A follow-up fixed background Home/Details
-controls remaining focusable behind playback. Source and native results are
-recorded separately in the current receipt.
+- **One prepared video.** Home features Acadia, a public domain National Park Service clip
+  and the only title in the app's approved catalog, with Watch and Details.
+- **Know before you watch.** Details draws a bar of the sections that will be covered under
+  the household's setting, and says the sound continues.
+- **Covered, not cut.** A few seconds before a flagged scene, a small corner notice says
+  "Scene ahead", then "Scene hidden". During the scene an opaque panel covers the picture and
+  reads "This scene is covered. You can wait or choose Skip." The sound keeps playing.
+- **Skip is a choice.** Skip covers the picture first, moves past the scene, and uncovers
+  only after the player confirms the new position. The seek bar uses the same guard.
+- **Fails closed.** If a map's signature or a title's identity does not match the app's
+  approved catalog, the picture stays hidden.
+- **Parents decide.** Presets and profiles sit behind a PIN, and settings can only add
+  covers.
+- **Plain about its limits.** More info and How it works say that Calm Frames works only
+  with prepared videos in this app, not other apps or live TV, and that this prototype has
+  not been medically validated.
+- **Back where you started.** When the video ends, the remote lands on Watch again.
 
-Household presets, room settings and profiles are protected by the parent's
-PIN. Optional selection sounds and artwork motion are off by default. The
-existing quiet local sound is retained, with held Select/Enter repeats
-suppressed. No household preference was changed for the latest checks.
+### On the computer today
 
-The interface retains Fraunces headings, Source Sans 3 controls, ivory and
-teal reading areas, terracotta accents and dimensional coastal art. Analysis
-comes before playback so the result and its limits can be understood first.
+A local review page on the Mac. It is not a TV screen.
 
-## How it is built
+- Choose a short MP4. The page copies it into a private workspace and analyzes every frame
+  against WCAG 2.2 and ITU-R BT.1702-3.
+- It shows where flashing was flagged, how each cover is padded, and how much each setting
+  would cover. It never plays the video.
+- Approval prepares, verifies and exports a signed package, and only with an authorized
+  signing key.
+- After export, the local tool can stage a delivery review, recheck its files or cancel the
+  review. Staging records approval status; it does not install a title or enable Watch.
 
-The Python analyzer measures supported SDR video against its documented WCAG
-and broadcast profiles. The pipeline prepares renditions and maps, verifies
-the package and retains an evidence report. The React Native app runs on Vega
-OS, verifies its compiled catalog and uses a shared guarded seek function.
-The reusable analyzer, Action, sidecar format and hook are licensed project
-components; the repository is currently private, so no public contribution
-URL is claimed here.
+### Reviewed, not approved
 
-An AWS CDK pipeline was deployed on October 9. Its historical record includes
-an unsigned input being refused and a signed input being published. October
-15 offline infrastructure and ingest checks passed. The current TV app plays
-its compiled library and does not call AWS. Live deployment, security findings,
-budget coverage and billing have not been reverified in this pass.
+The analysis, preparation and packaging steps have been run on a second public domain NPS
+clip, Prairie Creek and Redwood. Its earlier proposal verified a package signed with a newly
+authorized local key, and tampered copies were refused. It was never approved for the TV, it
+is not in the app's catalog, and no promotion is planned for this submission. Most of that
+clip would be covered. A signature and a verified package show that the files are intact and
+were checked. They do not establish medical safety.
 
-## What the evidence establishes
+## How it works
 
-- The current app suite passes <!--n results/transport-focus-2026-10-15/receipt.json:tests.appPassed -->1313<!--/n--> tests and <!--n results/transport-focus-2026-10-15/receipt.json:tests.snapshots -->57<!--/n--> snapshots across <!--n results/transport-focus-2026-10-15/receipt.json:tests.appSuites -->131<!--/n--> suites.
-  Typecheck, package checks and lint pass, with existing lint warnings retained.
-- Native logs identify the selected files and report playback, cover events
-  and focus requests. The current receipt gives each journey's outcome.
-- All seven earlier cover-positive source files remain locally and match the
-  historical ledger hashes. A fresh headless Irminger waves check reproduced
-  the historical findings; numeric comparisons checked every covered frame
-  in its three retained renditions. This adds no video or trust to the app.
-- Claude's detector test/specification review is integrated as tests/docs only;
-  the <!--n results/detector-review/integration.json:tests.passed -->22<!--/n--> focused boundary tests pass. No production detector or media changed.
-  This is not independent detector or clinical validation.
+1. **Analyze once, ahead of time.** flashmap, our open-source Python analyzer, reads every
+   frame at a reduced working resolution. It flags general and red flashes against WCAG 2.2
+   Success Criterion 2.3.1, with ITU-R BT.1702-3 as a second profile.
+2. **Prepare and sign.** The pipeline pads each flagged interval with guard time and renders
+   a prepared copy with those sections already covered. It proves the cover is drawn by
+   checking the first, middle and last frame of each covered span, up to six spans per
+   preset, then signs a flash map (Ed25519) bound to the exact file hashes.
+3. **Approve exactly, check twice.** A reviewed approval file names the exact bundle,
+   catalog digest and signing-key fingerprint, and the app compiles only those. Before delivery, the
+   build checks packaged file hashes, signed maps and original reports. At playback, the app
+   verifies signed maps and matches the route and source metadata to its compiled approved
+   catalog.
+4. **Cover on time.** The live cover follows a clock re-anchored to media time at every
+   player update. Every seek goes through one guarded function, which covers the picture
+   before moving whenever the target is in or near a covered scene. A lint rule rejects
+   playhead writes anywhere else, apart from named exemptions for the sample's fallbacks
+   and two interface sounds.
 
-## Limits and what remains
+## What we built
 
-Calm Frames reduces exposure to flashing above published limits in the videos
-it plays; not a medical device. Detection can miss flashing. It does not filter
-other apps, arbitrary streaming services or DRM content.
+- **A Vega OS app** in React Native for Vega, on Vega SDK 0.24. It started from Amazon's
+  vega-video-sample. We kept its playback stack and W3C media player, and built Home,
+  Details, the cover layer, the guarded seek, the scene notice, Parents and the approved
+  catalog check.
+- **flashmap**, the analyzer, with a GitHub Action, a flash map sidecar format and a hook for
+  other Vega video apps. All Apache-2.0.
+- **A preparation pipeline** that renders covered copies, verifies them and exports a signed
+  package.
+- **A local review and staging tool** for new videos, described above.
+- **Tests seen to fail first.** Our rule is that every guard gets a test that we break on
+  purpose before trusting it. Recent focused passes: the delivery integration ran
+  <!--n results/package-delivery-2026-10-18/receipt.json:python_tests -->55<!--/n--> Python,
+  <!--n results/package-delivery-2026-10-18/receipt.json:node_tests -->32<!--/n--> Node and
+  <!--n results/package-delivery-2026-10-18/receipt.json:app_tests -->59<!--/n--> app tests,
+  and the final wording pass ran
+  <!--n results/final-clarity-2026-10-18/verification.json:tests_passed -->43<!--/n--> tests in
+  <!--n results/final-clarity-2026-10-18/verification.json:test_suites -->4<!--/n--> suites.
+  These are focused suites, not the full suite.
 
-The analyzer works on a reduced analysis frame; small source features can be
-averaged away. The broadcast profile assumes a display luminance model. HDR,
-certain exceptions and loop-seam analysis remain unsupported. Engineering
-tests and matching covered frames do not establish medical effectiveness.
+[Owner: add one line on the October 9 AWS deployment only if entering AWS Builder. The current
+TV app and local workflow do not call AWS.]
 
-Current native checks are simulator text-log observations. They do not prove
-visible focus, compositor timing, sound, captions, VoiceView or physical-TV
-behavior. Owner visual/audio acceptance and an authorized current demo video
-remain open, as do release selection, licensing and reviewer access.
+## Challenges
 
-## Track and supporting material
+- **No frame counter on the virtual device.** On the packaged files the app plays,
+  `getVideoPlaybackQuality` failed with code 50001 and stayed at zero while video played.
+  The opening now waits for the player's ready state and a moving clock instead. That gate
+  is not proof of a visible frame, and we do not claim one from logs.
+- **Packaged files did not open by their documented URI.** The player refused
+  `file:///pkg/...` and opened `/pkg/...`. We normalize the prefix at the media boundary
+  only.
+- **Scripting the remote.** The documented `vega exec inputd-cli` looked for a host program
+  that is not there, and still exited 0. `vega device run-cmd` reaches the device's own copy.
+- **Slow playback on the virtual device, now and then.** In two isolation runs on October 17,
+  <!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-app.media_span_ms -->6010<!--/n--> ms
+  of video took <!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-app.wall_span_ms -->15560<!--/n--> ms,
+  and <!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-simulator.media_span_ms -->5886<!--/n--> ms
+  took <!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-simulator.wall_span_ms -->26435<!--/n--> ms
+  even after a simulator restart. A minimal SDK playback app, tested outside this
+  repository, slowed the same way, and then both recovered with no code change. A later run
+  kept pace,
+  <!--n results/compact-scene-control-2026-10-17/native/summary.json:clock_segments.1.media_ms -->20894<!--/n--> ms
+  of video in <!--n results/compact-scene-control-2026-10-17/native/summary.json:clock_segments.1.wall_ms -->20899<!--/n--> ms.
+  We have not found the cause, and we do not call it fixed.
+- **A cover that looked broken.** In our own review, a plain black cover read as a playback
+  failure, and a large centered message crowded the picture. The cover now explains itself,
+  and the status moved to a small corner notice beside Skip.
 
-Primary track: Fire TV, using Vega OS. Open Source and AWS Builder are optional
-mini challenges. For Open Source, choose an eligible public contribution URL
-only after publication approval; a PR is not mandatory. AWS Builder uses the
-dated deployment record and must not imply fresh live verification.
+## Accomplishments
 
-[Product feedback](../FEEDBACK.md) and the [friction log](../FRICTION_LOG.md)
-retain their evidence and dates. The owner must approve their publication.
-See [the readiness matrix](CHECKLIST.md), [open decisions](OPEN_DECISIONS.md)
-and [demo draft](DEMO_SCRIPT.md) before submission.
+- **No unchecked step from analysis to the TV.** Only exactly approved packages reach the
+  app's catalog, and a mismatch keeps the picture hidden.
+- **One guarded path for every seek.** Skip and the seek bar use the same function, which
+  covers before it moves into or near a covered scene.
+- **Staging that cannot switch anything on.** A delivery review records approval state, but
+  it cannot install a title or enable Watch.
+- **Native runs that say what they measure.** Logs on the virtual device recorded the
+  covers, Skip's cover-then-seek order, pause during a cover and the return to Watch, each on
+  the build where it was observed. We label them as logs, not as pictures or sound.
+- **A friction log kept from day one**, each entry with steps, expected and actual results, a
+  workaround and a suggestion.
+
+## Limitations
+
+Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a
+medical device.
+
+- Detection can miss flashing, and this prototype has not been medically validated. The
+  analyzer works on a reduced frame, so small details can be averaged away.
+- HDR and variable frame rate are outside this intake version. The broadcast profile also
+  implements an informative regular-pattern rule; this is not a WCAG finding or clinical
+  validation.
+- It works only with prepared videos inside Calm Frames, not other apps, streaming services,
+  live TV or DRM content.
+- One video is on the TV today. A new one needs exact approval, its packaged files and
+  reports, a regenerated catalog, and a build, install and device check.
+- Every native observation comes from the Vega Virtual Device, never a physical Fire TV.
+  Device logs show events, order and focus, not pixels or sound. Cover and Skip behaviour was
+  last observed on the October 17 build; later builds rechecked navigation, playback start
+  and the end return. The owner's look and listen acceptance is still pending.
+- Playback on the virtual device sometimes slows, as described above, and the cause is
+  unknown.
+- The Acadia clip opens on a few seconds of near-black footage. That is in the source video,
+  not a cover.
+
+## Product feedback
+
+The form asks five questions about every tool. Full answers for every tool we used, with
+commands and output, are in `docs/FEEDBACK.md` and `docs/FRICTION_LOG.md` in the repository.
+[Owner: paste the remaining sections from FEEDBACK.md if the form wants every tool here.]
+
+**Vega SDK and Vega CLI** (SDK 0.24.9914, CLI 1.3.4)
+
+- *Used for:* building, installing, launching and log-streaming the app.
+- *Worked well:* install, launch and the log stream were reliable enough to script every
+  native check.
+- *Needs work:* `vega exec inputd-cli button_press KEY_BACK`, the documented form, looks for
+  a missing host executable and exits 0, so a script cannot tell it failed. `vega device
+  run-cmd --device Simulator --command 'inputd-cli button_press KEY_BACK'` works. `vega device
+  list` crashes while other device commands succeed, and `vega virtual-device status`
+  reports running before the device accepts commands.
+- *Onboarding:* under a day from a working shell to the sample playing video, most of it
+  spent finding the right documentation page.
+- *Build with it again:* yes. Every rough edge had a workaround.
+
+**Vega Virtual Device** (1.0.67506.0, OS 1.2)
+
+- *Used for:* every native run in this simulator-only entry.
+- *Worked well:* a real OS 1.2 image on ARM, so platform behaviour showed up without
+  hardware.
+- *Needs work:* on October 17 playback slowed sharply and then recovered with no code
+  change, in our app and in a minimal SDK playback app tested outside this repository, and
+  nothing in the logs explains it; the numbers are above. There is no documented way to
+  capture the app's picture to check our own screens.
+- *Onboarding:* quick to start. Readiness means polling `vega device is-connected`, not
+  trusting `status`.
+- *Build with it again:* yes for development, with simulator results labelled as such.
+
+**W3C media player, `@amazon-devices/react-native-w3cmedia`**
+
+- *Used for:* all playback, media events and seeking.
+- *Worked well:* it is the standard media element, so web knowledge carries over.
+- *Needs work:* in a September 17 HLS timing run `getVideoPlaybackQuality` did report
+  frames, but on the packaged MP4 files the app plays now every call fails below JavaScript
+  with `MPB Call failed with code: 50001` and reports zero frames. A packaged
+  `file:///pkg/...` URI does not open while `/pkg/...` does. The `timeupdate` cadence and
+  `currentTime` resolution are not documented.
+- *Onboarding:* good through the sample, hard from the API alone.
+- *Build with it again:* yes, with a documented timing contract.
+
+**`AmazonAppDev/vega-video-sample`**
+
+- *Used for:* the base of the app and its playback wiring.
+- *Worked well:* a complete reference for the surface, captions and media controls.
+- *Needs work:* a failed Shaka load is dropped silently, and the README's data-push step
+  cannot work on OS 1.2.
+- *Onboarding:* fast. Clone, install, build, sideload.
+- *Build with it again:* yes.
+
+## Track, mini challenges and Built With
+
+- **Primary track:** Fire TV, on Vega OS.
+- **Mini challenges:** [Owner decision. None is required. Open Source needs a separate public
+  contribution URL. AWS Builder means describing the October 9 AWS deployment in the
+  feedback.]
+- **Built With:** Vega OS, Vega SDK, Vega Virtual Device, React Native, TypeScript,
+  react-native-w3cmedia, Python, ffmpeg, Ed25519 signing with Python `cryptography`, GitHub
+  Actions. [Add AWS CDK and its services only if entering AWS Builder.]
+
+## Links
+
+- Repository: [Owner: URL once public or private access is set up]
+- Demo video: [Owner: public YouTube or Vimeo URL]
+- Friction log and product feedback: `docs/FRICTION_LOG.md` and `docs/FEEDBACK.md` in the
+  repository
