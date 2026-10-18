@@ -533,12 +533,13 @@ export const DETECTION_LIMITS_LINE =
  * ships captions. It never names a still picture, because the schedule does
  * not say whether a still exists for each part.
  */
-export function coverLine(count: number, hasCaptions: boolean): string {
+export function coverLine(count: number, hasCaptions: boolean, ocean = false): string {
+  if (ocean) return "Ocean footage replaces flagged scenes. You'll still hear the original audio.";
   const parts =
     count === 1
-      ? 'One brief part of this video is covered.'
-      : 'Brief parts of this video are covered.';
-  return `${parts} The sound continues.${hasCaptions ? ' Captions continue too.' : ''}`;
+      ? 'The flagged scene is covered.'
+      : 'Flagged scenes are covered.';
+  return `${parts} Original audio is kept when the video has sound.${hasCaptions ? ' Captions continue too.' : ''}`;
 }
 
 /** How long the explainer takes to read, in seconds, at the pace above. */

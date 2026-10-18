@@ -9,6 +9,7 @@ import { coverLine, DETECTION_LIMITS_LINE, noticeForTitle, ONLY_IN_CALM_FRAMES_L
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import CoveredSectionsStrip from './CoveredSectionsStrip';
 import { coveredSections } from './coveredSections';
+import { hasBakedOceanPresentation } from './titleCoverPresentation';
 import FlashMapStrip from './FlashMapStrip';
 import {
   coverOptionsFor,
@@ -77,6 +78,7 @@ const TitleDetailsScreen = ({
     [entry, householdSettings],
   );
   const presentation = titlePresentation(entry.title);
+  const ocean = hasBakedOceanPresentation(entry, settings, intervals);
   const demo = isBundledBenignStory(entry.title);
   const practiceOffered = practice && onOpenPractice && !demo ? practice : null;
   // Counted the way the demo's own page counts them: the merged schedule under
@@ -161,7 +163,7 @@ const TitleDetailsScreen = ({
         </> : <>
           <Text style={styles.section} accessibilityRole="header">{presentation.name}</Text>
           {demo ? <Text style={styles.summary}>This is a simulated demonstration. The pauses were added to show how the feature works, not because flashing was detected.</Text>
-            : intervals.length > 0 ? <Text style={styles.summary} testID={`${testID}-cover-line`}>{coverLine(intervals.length, (entry.title.textTrack?.length ?? 0) > 0)}</Text> : null}
+            : intervals.length > 0 ? <Text style={styles.summary} testID={`${testID}-cover-line`}>{coverLine(intervals.length, (entry.title.textTrack?.length ?? 0) > 0, ocean)}</Text> : null}
           <Text style={styles.summary}>{ONLY_IN_CALM_FRAMES_LINE}</Text>
           <Text style={styles.summary}>{`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`}</Text>
           {presentation.art === 'coastal' ? <Text style={styles.summary}>Video: National Park Service, Acadia National Park. Public domain. No NPS endorsement is implied. The menu image is a still from the prepared video.</Text> : null}
@@ -186,7 +188,7 @@ const TitleDetailsScreen = ({
           <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name)]} testID={`${testID}-title`}>{presentation.name}</Text>
           <Text style={styles.meta} testID={`${testID}-meta`}>{meta}</Text>
           {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
-          <CoveredSectionsStrip result={covered} testID={`${testID}-covered`} />
+          <CoveredSectionsStrip result={covered} ocean={ocean} testID={`${testID}-covered`} />
         </View>
         <View style={styles.actionRail}>
           <View style={styles.buttons}>

@@ -80,7 +80,7 @@ describe('details discovery', () => {
     fireEvent.press(view.getByTestId('title-details-show-info'));
     // Acadia's maps carry no scene hold and its rendition ships no captions,
     // so the page promises neither a still picture nor captions.
-    expect(view.getByTestId('title-details-cover-line').props.children).toBe('Brief parts of this video are covered. The sound continues.');
+    expect(view.getByTestId('title-details-cover-line').props.children).toBe("Ocean footage replaces flagged scenes. You'll still hear the original audio.");
     expect(view.queryByText(/still picture|captions/i)).toBeNull();
     expect(view.queryByTestId('title-details-record')).toBeNull();
     fireEvent.press(view.getByTestId('title-details-technical'));
@@ -97,7 +97,7 @@ describe('details discovery', () => {
     expect(acadia.segments.length).toBeGreaterThan(0);
     const view = render(<TitleDetailsScreen entry={entry} onPlay={jest.fn()} />);
     fireEvent.press(view.getByTestId('title-details-show-info'));
-    expect(view.getByTestId('title-details-cover-line').props.children).toMatch(/covered\. The sound continues\. Captions continue too\.$/);
+    expect(view.getByTestId('title-details-cover-line').props.children).toMatch(/covered\. Original audio is kept when the video has sound\. Captions continue too\.$/);
   });
 
   it('does not offer hold information or playback for an unavailable title', () => {

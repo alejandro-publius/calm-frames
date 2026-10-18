@@ -58,7 +58,7 @@ describe('the covered sections of a verified title', () => {
     const result = coveredSections(entry([{ startMs: 10_000, endMs: 12_000 }]), DEFAULT_SETTINGS);
     expect(spans(result)).toEqual([[9_500, 12_500, 'general']]);
     expect(result.kind === 'ready' && result.coveredMs).toBe(3_000);
-    expect(result.text).toBe('1 covered section, 3 seconds of 37 seconds. The sound continues.');
+    expect(result.text).toBe('1 scene · 3 seconds');
   });
 
   it('clamps a section at the start of the video to zero', () => {
@@ -84,7 +84,7 @@ describe('the covered sections of a verified title', () => {
     expect(spans(result)).toEqual([[36_300, 37_000, 'general']]);
     expect(result.kind === 'ready' && result.coveredMs).toBe(700);
     // Under a second is said as one second, never as none.
-    expect(result.text).toBe('1 covered section, 1 second of 37 seconds. The sound continues.');
+    expect(result.text).toBe('1 scene · 1 second');
   });
 
   it('merges overlapping sections before it counts the total', () => {
@@ -99,7 +99,7 @@ describe('the covered sections of a verified title', () => {
     // not two sections adding up to 4700.
     expect(spans(result)).toEqual([[9_500, 13_500, 'red']]);
     expect(result.kind === 'ready' && result.coveredMs).toBe(4_000);
-    expect(result.text).toBe('1 covered section, 4 seconds of 37 seconds. The sound continues.');
+    expect(result.text).toBe('1 scene · 4 seconds');
   });
 
   it('counts separate sections separately', () => {
@@ -115,7 +115,7 @@ describe('the covered sections of a verified title', () => {
       [19_500, 22_500, 'general'],
     ]);
     expect(result.kind === 'ready' && result.coveredMs).toBe(5_000);
-    expect(result.text).toBe('2 covered sections, 5 seconds of 37 seconds. The sound continues.');
+    expect(result.text).toBe('2 scenes · 5 seconds');
   });
 
   it('is the schedule the player builds, band for band', () => {
@@ -146,15 +146,15 @@ describe('the covered sections of a verified title', () => {
       [5_000, 9_000, 'general'],
       [12_000, 16_000, 'general'],
     ]);
-    expect(result.text).toBe('2 simulated pauses, 8 seconds of 20 seconds. The sound continues.');
+    expect(result.text).toBe('2 simulated pauses · 8 seconds');
   });
 
   it('never promises captions', () => {
     expect(coveredSectionsLine(3, 12_000, 37_000, false)).toBe(
-      '3 covered sections, 12 seconds of 37 seconds. The sound continues.',
+      '3 scenes · 12 seconds',
     );
     expect(coveredSectionsLine(1, 90_000, 125_000, false)).toBe(
-      '1 covered section, 1 minute 30 seconds of 2 minutes 5 seconds. The sound continues.',
+      '1 scene · 1 minute 30 seconds',
     );
     expect(coveredSectionsLine(1, 1_000, 37_000, false)).not.toMatch(/caption/i);
   });
@@ -215,6 +215,6 @@ describe('rendition timeline parity with playback', () => {
     expect(result.kind === 'ready' && result.sections).toEqual(buildCoverIntervals(checked.segments, {
       ...coverOptionsFor(settings), durationMs: title.durationMs, renditionStartOffsetMs: title.renditionStartOffsetMs,
     }));
-    expect(result.text).toBe(`2 covered sections, ${preset === 'extra-cautious' ? 9 : 7} seconds of 38 seconds. The sound continues.`);
+    expect(result.text).toBe(`2 scenes · ${preset === 'extra-cautious' ? 9 : 7} seconds`);
   });
 });

@@ -22,7 +22,7 @@ const ready: CoveredSectionsResult = {
     { startMs: 12_000, endMs: 16_000, reason: 'red', sources: [] },
   ],
   coveredMs: 8_000,
-  text: '2 covered sections, 8 seconds of 20 seconds. The sound continues.',
+  text: '2 scenes · 8 seconds',
 };
 
 function touchables(view: ReturnType<typeof render>) {
@@ -53,7 +53,7 @@ describe('the covered sections block', () => {
     });
     expect(view.queryByTestId('covered-sections-mark-2')).toBeNull();
     expect(view.getByTestId('covered-sections-line').props.children).toBe(ready.text);
-    expect(view.getByTestId('covered-sections').props.accessibilityLabel).toBe(ready.text);
+    expect(view.getByTestId('covered-sections').props.accessibilityLabel).toBe(`${COVERED_SECTIONS_HEADING}. ${ready.text}`);
     expect(view.getByTestId('covered-sections').props.accessible).toBe(true);
   });
 
@@ -72,7 +72,7 @@ describe('the covered sections block', () => {
     expect(view.queryByTestId('covered-sections-track')).toBeNull();
     expect(view.queryByTestId('covered-sections-mark-0')).toBeNull();
     expect(view.getByTestId('covered-sections-line').props.children).toBe(result.text);
-    expect(view.getByTestId('covered-sections').props.accessibilityLabel).toBe(result.text);
+    expect(view.getByTestId('covered-sections').props.accessibilityLabel).toBe(`${COVERED_SECTIONS_HEADING}. ${result.text}`);
     expect(touchables(view)).toHaveLength(0);
   });
 

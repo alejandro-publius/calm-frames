@@ -324,9 +324,9 @@ describe('what the app says it does', () => {
   });
 
   it('names captions only for a title that has them', () => {
-    expect(coverLine(3, false)).toBe('Brief parts of this video are covered. The sound continues.');
-    expect(coverLine(3, true)).toBe('Brief parts of this video are covered. The sound continues. Captions continue too.');
-    expect(coverLine(1, false)).toBe('One brief part of this video is covered. The sound continues.');
+    expect(coverLine(3, false)).toBe('Flagged scenes are covered. Original audio is kept when the video has sound.');
+    expect(coverLine(3, true)).toBe('Flagged scenes are covered. Original audio is kept when the video has sound. Captions continue too.');
+    expect(coverLine(1, false)).toBe('The flagged scene is covered. Original audio is kept when the video has sound.');
   });
 });
 

@@ -42,28 +42,26 @@ export type CoveredSectionsResult =
     };
 
 export const COVERED_SECTIONS_UNAVAILABLE =
-  'Covered sections are not available for this video.';
+  'Scene information is unavailable.';
 export const COVERED_SECTIONS_NO_DURATION =
-  'The length of this video is unknown, so the covered sections cannot be drawn.';
-export const COVERED_SECTIONS_NONE = 'No sections of this video are covered.';
+  'The video length is unknown, so the scene timeline is unavailable.';
+export const COVERED_SECTIONS_NONE = 'No flagged scenes.';
 
 /**
  * The sentence under the strip.
  *
- * The sound is promised because playback continues through a cover; captions
- * are not, because the schedule says nothing about tracks. A total shorter
- * than a second is said as one second rather than none.
+ * Running time is already shown above. A total shorter than a second is said
+ * as one second rather than none. Audio belongs in the optional explanation.
  */
 export function coveredSectionsLine(
   count: number,
   coveredMs: number,
-  durationMs: number,
+  _durationMs: number,
   demo: boolean,
 ): string {
-  const noun = demo ? 'simulated pause' : 'covered section';
+  const noun = demo ? 'simulated pause' : 'scene';
   const covered = describeHiddenTotal(Math.max(coveredMs, 1000));
-  const runtime = runtimeLabel(durationMs) ?? describeHiddenTotal(durationMs);
-  return `${count} ${noun}${count === 1 ? '' : 's'}, ${covered} of ${runtime}. The sound continues.`;
+  return `${count} ${noun}${count === 1 ? '' : 's'} · ${covered}`;
 }
 
 export function coveredSections(

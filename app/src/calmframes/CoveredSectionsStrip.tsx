@@ -22,10 +22,12 @@ import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './c
 import { CoveredSectionsResult } from './coveredSections';
 import { stripMarks } from './FlashMapStrip';
 
-export const COVERED_SECTIONS_HEADING = 'Covered sections';
+export const COVERED_SECTIONS_HEADING = 'Scenes covered';
 
 export interface CoveredSectionsStripProps {
   result: CoveredSectionsResult;
+  /** Supplied only after the exact prepared ocean rendition has verified. */
+  ocean?: boolean;
   /** Strip width in 1080p units; the Details reading column by default. */
   width?: number;
   testID?: string;
@@ -33,19 +35,21 @@ export interface CoveredSectionsStripProps {
 
 const CoveredSectionsStrip = ({
   result,
+  ocean = false,
   width = 620,
   testID = 'covered-sections',
 }: CoveredSectionsStripProps) => {
   const trackWidth = scale(width);
+  const heading = ocean && result.kind === 'ready' ? 'Scenes replaced' : COVERED_SECTIONS_HEADING;
   const marks = result.kind === 'ready' ? stripMarks(result.sections, result.durationMs) : [];
   return (
     <View
       testID={testID}
       style={[styles.block, { maxWidth: trackWidth }]}
       accessible
-      accessibilityLabel={result.text}>
+      accessibilityLabel={`${heading}. ${result.text}`}>
       <Text style={styles.heading} testID={`${testID}-heading`}>
-        {COVERED_SECTIONS_HEADING}
+        {heading}
       </Text>
       {result.kind === 'ready' ? (
         <View style={[styles.track, { width: trackWidth }]} testID={`${testID}-track`}>

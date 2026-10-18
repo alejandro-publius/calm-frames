@@ -2,7 +2,7 @@
 
 ## Exact otter activation, October 18, 2026
 
-Owner approval adds only otter catalog `d589ec17` / bundle `4064f489` / existing local signer `00c1bd27` to the exact catalog registry. No arbitrary future content is trusted. The 4.24-second silent preview uses the existing content rail and Details; Acadia ocean metadata is byte-identical. 116 focused tests, TypeScript and prebuild gates pass. One native build/install follows this commit; evidence belongs in `results/otter-native-2026-10-18/`. Installed source remains `4c0d291` until the new installation succeeds.
+Owner approval adds only otter catalog `d589ec17` / bundle `4064f489` / existing local signer `00c1bd27` to the exact catalog registry. No arbitrary future content is trusted. The 4.24-second silent preview uses the existing content rail and Details; Acadia ocean metadata is byte-identical. 116 focused tests, TypeScript and prebuild gates pass. The owner-requested concise Details copy is also included before building: exact ocean labels, short scene totals, and audio explanation only in More info; 131 focused copy/state tests pass. One native build/install follows this source; evidence belongs in `results/otter-native-2026-10-18/`. Installed source remains `4c0d291` until the new installation succeeds.
 
 ## Otter preview candidate, October 18, 2026
 
