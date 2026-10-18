@@ -1,0 +1,161 @@
+{
+  "bytes": 26776429,
+  "created_at": 1792282130.601666,
+  "error": null,
+  "id": "cc3c5e4f0c6f436784696fa6c25e1140",
+  "playable": false,
+  "review": {
+    "analysis_complete": true,
+    "analysis_run": "5472aa89201e48b48a1f37cea8e7c385",
+    "analysis_width": 192,
+    "duration_ms": 50500.0,
+    "flagged_intervals": {
+      "broadcast": [
+        {
+          "end_ms": 26700.0,
+          "reason": "general",
+          "start_ms": 16367.0
+        },
+        {
+          "end_ms": 26800.0,
+          "reason": "general",
+          "start_ms": 25767.0
+        },
+        {
+          "end_ms": 33200.0,
+          "reason": "general",
+          "start_ms": 27500.0
+        },
+        {
+          "end_ms": 33267.0,
+          "reason": "general",
+          "start_ms": 32267.0
+        },
+        {
+          "end_ms": 34733.0,
+          "reason": "general",
+          "start_ms": 33733.0
+        },
+        {
+          "end_ms": 34800.0,
+          "reason": "general",
+          "start_ms": 33800.0
+        },
+        {
+          "end_ms": 45467.0,
+          "reason": "general",
+          "start_ms": 33867.0
+        },
+        {
+          "end_ms": 45633.0,
+          "reason": "general",
+          "start_ms": 44533.0
+        },
+        {
+          "end_ms": 47133.0,
+          "reason": "general",
+          "start_ms": 46133.0
+        },
+        {
+          "end_ms": 47967.0,
+          "reason": "general",
+          "start_ms": 46233.0
+        },
+        {
+          "end_ms": 48033.0,
+          "reason": "general",
+          "start_ms": 47033.0
+        }
+      ],
+      "wcag": [
+        {
+          "end_ms": 17367.0,
+          "reason": "general",
+          "start_ms": 16367.0
+        },
+        {
+          "end_ms": 26533.0,
+          "reason": "general",
+          "start_ms": 16433.0
+        },
+        {
+          "end_ms": 26667.0,
+          "reason": "general",
+          "start_ms": 25600.0
+        },
+        {
+          "end_ms": 28533.0,
+          "reason": "general",
+          "start_ms": 27500.0
+        },
+        {
+          "end_ms": 33200.0,
+          "reason": "general",
+          "start_ms": 27600.0
+        },
+        {
+          "end_ms": 45467.0,
+          "reason": "general",
+          "start_ms": 33867.0
+        },
+        {
+          "end_ms": 45600.0,
+          "reason": "general",
+          "start_ms": 44533.0
+        },
+        {
+          "end_ms": 47967.0,
+          "reason": "general",
+          "start_ms": 46233.0
+        }
+      ]
+    },
+    "frame_count": 1515,
+    "limitations": "Full temporal file analysis at the analyzer working resolution; not a medical safety assessment.",
+    "playable": false,
+    "presets": {
+      "broadcast": {
+        "covered_ms": 32666.0,
+        "intervals": [
+          {
+            "end_ms": 48533.0,
+            "reason": "general",
+            "start_ms": 15867.0
+          }
+        ]
+      },
+      "extra-cautious": {
+        "covered_ms": 33666.0,
+        "intervals": [
+          {
+            "end_ms": 49033.0,
+            "reason": "general",
+            "start_ms": 15367.0
+          }
+        ]
+      },
+      "wcag": {
+        "covered_ms": 32600.0,
+        "intervals": [
+          {
+            "end_ms": 48467.0,
+            "reason": "general",
+            "start_ms": 15867.0
+          }
+        ]
+      }
+    },
+    "review_map_hashes": {
+      "broadcast": "da0aede1dd5552c65f0e36826e78392a2adcdd1baf868eaccbd0a20a952c34dc",
+      "wcag": "56f51932321ec3e68e923ff4902291714babbcd94884b2b281666fab7f0b4c5b"
+    },
+    "source_sha256": "d823ac6364d69c8dd53b5d542015c754258fccae908ffbc9acc3fbb41fda4070"
+  },
+  "review_digest": "b2f1954bed500ff2ac6845fc25f88eca8aafdaec8ed457bb135abb997a70b7bc",
+  "run_id": "5472aa89201e48b48a1f37cea8e7c385",
+  "source_sha256": "d823ac6364d69c8dd53b5d542015c754258fccae908ffbc9acc3fbb41fda4070",
+  "stage": "Review the planned interruptions",
+  "status": "review",
+  "title": "Prairie Creek and Redwood",
+  "updated_at": 1792282178.938422
+}

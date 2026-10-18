@@ -78,3 +78,8 @@ These are existing observed friction reports, not new repro runs. Environment: m
 4. Personally inspect the finished TV visuals and audio. Text logs cannot provide that approval.
 
 No publication, push, release tag, cloud deployment, credentials change or edits to the three reserved submission documents occurred.
+
+
+## October 18 update
+
+The signer blocker above is resolved for the specifically authorized local project key. A new official NPS sample has completed the full signed preparation/verification path. Its exact bundle is still awaiting the separately required TV trust approval; see [the current proposal](NEW_VIDEO_TRUST_PROPOSAL.md). Historical signing-blocked test results remain valid for the earlier unconfigured server.

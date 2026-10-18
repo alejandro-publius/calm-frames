@@ -1,0 +1,27 @@
+{
+  "isolated": {
+    "titles": 1,
+    "bundles": 1,
+    "bytes": 23098484,
+    "catalogSha256": "27fce9c0cf6400bf0f288d4891956d6948a39bd2135307fe9f5c54cfb0c5303a",
+    "verification_reports": {
+      "required": 1,
+      "present": 1,
+      "missing": []
+    }
+  },
+  "combined": {
+    "titles": 1,
+    "bundles": 5,
+    "bytes": 51579411,
+    "catalogSha256": "02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79",
+    "verification_reports": {
+      "required": 5,
+      "present": 5,
+      "missing": []
+    }
+  },
+  "limit_bytes": 67108864,
+  "current_titles_preserved": true,
+  "production_app_modified": false
+}

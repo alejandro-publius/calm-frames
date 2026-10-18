@@ -1,0 +1,11 @@
+{
+  "purpose": "Authorized local Calm Frames package signing; not registered in TV trust",
+  "directory": "/Users/alexvintera/.local/share/calm-frames/signing/2026-10-18",
+  "public_key_file": "/Users/alexvintera/.local/share/calm-frames/signing/2026-10-18/local-project.pub.pem",
+  "public_key_fingerprint": "sha256:00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+  "fingerprint_encoding": "SHA-256 of raw 32-byte Ed25519 public key",
+  "directory_mode": "0700",
+  "private_file_mode": "0600",
+  "private_material_output": false,
+  "tv_trust_changed": false
+}

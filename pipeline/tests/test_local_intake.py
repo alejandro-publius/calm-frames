@@ -372,3 +372,31 @@ def test_worker_deadline_without_http_poll(monkeypatch):
     monkeypatch.setattr(intake.os, "killpg", killed)
     with pytest.raises(SystemExit):
         intake.worker_watchdog(intake.os.getppid(), Stop())
+
+
+def test_retry_preparation_clears_old_signer_error(store, monkeypatch):
+    path, job = ready(store)
+    intake.update(path, status="signing_blocked", error="No authorized signer is configured.")
+
+    def success(path, mode):
+        assert mode == "prepare"
+        assert intake.read_job(path)["error"] is None
+        intake.update(path, status="package_review", package={"bundle_id": "fixture"})
+
+    monkeypatch.setattr(store, "launch", success)
+    result = store.action(job["id"], "approve")
+    assert result["status"] == "package_review" and result["error"] is None
+
+
+def test_package_proposal_exposes_only_verified_public_identity(signed_package):
+    import base64
+    import hashlib
+
+    result = intake.inspect_package(signed_package, ACADIA)
+    manifest = json.loads((signed_package / "catalog.json").read_text())
+    expected = "sha256:" + hashlib.sha256(base64.b64decode(manifest["publicKeyBase64"])).hexdigest()
+    assert result["public_key_fingerprint"] == expected
+    assert result["catalog_sha256"] == sha256_file(signed_package / "catalog.json")
+    assert result["title"] == manifest["titles"][0]["title"]
+    assert result["duration_ms"] == manifest["titles"][0]["durationMs"]
+    assert result["playable_in_current_tv_app"] is False

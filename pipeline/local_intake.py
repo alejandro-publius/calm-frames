@@ -8,7 +8,9 @@ This module never creates keys, changes app trust, installs an app or plays medi
 from __future__ import annotations
 
 import argparse
+import base64
 import fcntl
+import hashlib
 import json
 import math
 import os
@@ -240,6 +242,12 @@ def inspect_package(directory: Path, expected_source: str) -> dict:
     return {
         "bundle_id": manifest["bundleId"],
         "source_sha256": expected_source,
+        "title": titles[0]["title"],
+        "duration_ms": titles[0]["durationMs"],
+        "catalog_sha256": sha256_file(directory / "catalog.json"),
+        "public_key_fingerprint": "sha256:"
+        + hashlib.sha256(base64.b64decode(manifest["publicKeyBase64"], validate=True)).hexdigest(),
+        "verification": titles[0]["verification"],
         "status": "verified_package_awaiting_app_approval",
         "playable_in_current_tv_app": False,
     }
@@ -254,7 +262,7 @@ def prepare_worker(path: Path, key: Path, pub: Path) -> None:
             raise IntakeError(
                 "An authorized signer pair must already exist outside the intake workspace."
             )
-    update(path, status="preparing", stage="Preparing and verifying all presets")
+    update(path, status="preparing", stage="Preparing and verifying all presets", error=None)
     run_root = _path_inside(path / "runs" / job["run_id"], path)
     run_root.mkdir(parents=True, exist_ok=True, mode=0o700)
     # Fresh private workspace per run. Interrupted workers cannot change a retry's artifacts.
@@ -289,6 +297,7 @@ def prepare_worker(path: Path, key: Path, pub: Path) -> None:
         status="package_review",
         stage="Verified package ready for operator review",
         package=package,
+        error=None,
     )
 
 
@@ -446,6 +455,7 @@ class IntakeStore:
                 update(
                     path,
                     approved_review=job["review_digest"],
+                    error=None,
                     status="preparing",
                     stage="Preparing the reviewed video",
                 )
