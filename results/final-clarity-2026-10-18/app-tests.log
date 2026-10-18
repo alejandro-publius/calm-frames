@@ -1,0 +1,10 @@
+PASS test/calmframes/copy.test.ts
+PASS test/calmframes/duskLantern.test.tsx
+PASS test/calmframes/detailDiscovery.test.tsx
+PASS test/screens/startupWaves.test.tsx
+
+Test Suites: 4 passed, 4 total
+Tests:       43 passed, 43 total
+Snapshots:   0 total
+Time:        4.689 s
+Ran all test suites matching /test\/calmframes\/copy.test.ts|test\/calmframes\/duskLantern.test.tsx|test\/calmframes\/detailDiscovery.test.tsx|test\/screens\/startupWaves.test.tsx/i.

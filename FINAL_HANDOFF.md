@@ -1,5 +1,18 @@
 # Final handoff: the integration candidate
 
+## Final wording and submission reconciliation, October 18, 2026
+
+Installed source `9cc57ca` clarifies prepared videos only and the absence of medical
+validation in existing How it works / More info text. The approved safety sentence is
+unchanged. Static React startup fallbacks were already implemented, so none was added.
+43 focused tests, TypeScript, lint and the strict package check pass; one build/install,
+all 730 inputs matching. Native explanation/Back/Parents-cancel routes pass; app left
+Home Watch, collector stopped. Pixels/audio still need owner acceptance. Claude's
+reserved drafts remain untouched; exact submission corrections are in a separate handoff.
+No capture, push, media/trust/detector change or new feature. See
+[the final clarity handoff](docs/FINAL_CLARITY_HANDOFF.md).
+
+
 ## Package delivery integrated, October 18, 2026
 
 Source `6125459` is integrated, built once and installed once. The local intake at

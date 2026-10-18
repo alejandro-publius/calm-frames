@@ -1,0 +1,12 @@
+{
+  "source_commit": "9cc57ca04077611c9bf535ce5083b23c83c7bb4a",
+  "build_count": 1,
+  "build_start_utc": "2026-10-18T01:10:35.777615+00:00",
+  "tracked_app_inputs": 730,
+  "command": "npm run build:debug",
+  "build_exit": 0,
+  "build_end_utc": "2026-10-18T01:11:24.600314+00:00",
+  "changed_inputs": [],
+  "package_path": "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/final-clarity-2026-10-18/calm-frames-clarity-aarch64-debug.vpkg",
+  "package_sha256": "8f3636ec8bcc2a1c2d5ac80e26f7b3024c0b0ff9003bbdb1341569c51adecbfd"
+}
