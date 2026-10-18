@@ -32,7 +32,7 @@ export function CalmControlSurface({ kind, focused, pressed, disabled, selected,
     ? (pressed ? material.primaryPressed : material.primary)
     : pressed ? material.secondaryPressed : selected ? material.selected : material.secondary;
   const corners = cornerRadius === undefined
-    ? coastal && primary ? { borderRadius: scale(58) } : null
+    ? null
     : { borderRadius: Math.max(0, cornerRadius - scale(6)) };
   return <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={[styles.paint, corners]}>
     <View style={[styles.depth, disabled || kind === 'tertiary' ? styles.noDepth : null]} />

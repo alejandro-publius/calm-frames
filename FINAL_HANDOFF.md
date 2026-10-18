@@ -1,5 +1,25 @@
 # Final handoff: the integration candidate
 
+## Separate playback integration kit, October 18, 2026
+
+The installed app remains source `805f855` and its Forest package below. Forest
+source/evidence were privately pushed at `8126ec1`. A separate TypeScript coverage
+contract and Vega reference adapter now live in `app/src/calmframes/integration`,
+with no production imports. They reuse existing signed verification and timing,
+serialize guarded transport, refuse repeat/rate changes and invalidate uncertain
+or canceled operations. Read the [integration guide](docs/integration/PLAYBACK_KIT.md)
+and [validation evidence](results/playback-integration-2026-10-18/README.md).
+
+The kit is not installed or natively verified and is not demonstrated Prime Video
+support. Renderer acknowledgment, reliable generation-bound timeline confirmation
+and physical scheduling evidence are prerequisites for a future runtime overlay.
+No ADBT tools were available; only existing text-log latency was summarized.
+The distributable hook's stale UI mirror and missing component dependencies were
+also repaired and checked offline. No existing app input, media approval, signer,
+setting or baked ocean path changed. Minimum owner step now: visual/listening
+acceptance of the installed demo; no additional technical setup for this kit.
+
+
 ## Forest activated and How it works simplified, October 18, 2026
 
 Installed source `805f855e60870eb018b3a6a2ab36e1f7d3e887dc`, package SHA-256 `8e58685d579a740743e5d6e89b0fa8bbcce42e7a6189b9c92265575ea0c1e511`.
@@ -15,7 +35,8 @@ architectures, one install completed. All 813 source inputs match. Native logs
 confirm all three full clips, Forest More info, Details/Back, both Acadia ocean
 requests and help Back focus. App is open Home, Sea Otters selected, How it works
 focused; collectors stopped. No capture, PIN or household preference changes.
-Pixels, audio, VoiceView and physical-TV acceptance remain separate owner checks.
+Pixels, audio and VoiceView remain unverified. Physical-TV timing is a future
+deployment requirement, outside this simulator submission.
 [Current evidence](results/forest-activation-2026-10-18/README.md). Earlier checkpoints
 below are historical. The authorized bounded integration kit is next and will not
 replace this installed production playback path.

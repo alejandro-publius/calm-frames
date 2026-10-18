@@ -3,6 +3,7 @@
  * edit the app copy and run `node hook/tools/sync.mjs`.
  */
 /** Immediate pressed feedback, shared by selectors and controls; never scales or fades. */
+import { WorldAppearance, WORLD } from './CoastalWorld';
 import React from 'react';
 import { CoastalAppearance } from './CoastalAppearance';
 import { TouchableOpacity, TouchableOpacityProps, StyleSheet } from 'react-native';
@@ -14,10 +15,12 @@ type Props = TouchableOpacityProps & { surfaceKind?: ControlSurfaceKind };
 const CalmTouchable = React.forwardRef<React.ComponentRef<typeof TouchableOpacity>, Props>(
   ({ style, onPressIn, onPressOut, onFocus, onBlur, children, surfaceKind = 'secondary', ...props }, ref) => {
     const coastal = React.useContext(CoastalAppearance);
-    const colors = coastal ? COASTAL_COLORS : CALM_COLORS;
+    const world = React.useContext(WorldAppearance);
+    const colors = world ? WORLD : coastal ? COASTAL_COLORS : CALM_COLORS;
     const [pressed, setPressed] = React.useState(false);
     const [focused, setFocused] = React.useState(false);
-    const study = React.useContext(CalmControlAppearance);
+    const material = React.useContext(CalmControlAppearance);
+    const study = material && !world;
     const blocked = props.disabled || props.accessibilityState?.disabled;
     const cornerRadius = StyleSheet.flatten(style)?.borderRadius;
     return <TouchableOpacity {...props} ref={ref} activeOpacity={1}

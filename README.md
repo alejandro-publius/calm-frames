@@ -13,6 +13,10 @@ bundled for regression work, off the consumer shelf. Independent detector
 validation and owner visual/audio acceptance remain pending. The prototype
 has not been medically validated and uses pre-analysis, not live interception.
 
+A separate [playback integration prototype](docs/integration/PLAYBACK_KIT.md) now
+provides tested coverage decisions and a Vega reference adapter. It is not part of
+the installed player and has not demonstrated Prime Video support.
+
 **A calmer way to watch**
 
 [![CI](https://github.com/alejandro-publius/calm-frames/actions/workflows/ci.yml/badge.svg)](https://github.com/alejandro-publius/calm-frames/actions/workflows/ci.yml)

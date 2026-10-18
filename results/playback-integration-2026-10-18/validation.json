@@ -1,0 +1,23 @@
+{
+  "baseline": "8126ec1eb488a637885b2d038dead3e0aba8b6a5",
+  "installed_source": "805f855e60870eb018b3a6a2ab36e1f7d3e887dc",
+  "regression_tests": 207,
+  "regression_suites": 8,
+  "kit_tests": 37,
+  "hook_package_tests": 10,
+  "typecheck": "passed",
+  "focused_lint": "passed",
+  "offline_package_check": "passed",
+  "existing_app_inputs_unchanged": 813,
+  "kit_native_build_install": false,
+  "capture": false,
+  "adbt_available": false,
+  "production_imports_of_kit": false,
+  "source_sha256": {
+    "app/src/calmframes/integration/VegaIntegrationControls.ts": "5029aa6f4a207672a2f4edca680d4f46059060ed5b7965c718928e47d35539e3",
+    "app/src/calmframes/integration/coverageController.ts": "dfec0f08f5913ac6d6fb7de2e44b42a4abcfce46b0e101762da4a97402d699da",
+    "app/src/calmframes/integration/vegaCoverageAdapter.ts": "82e36a820b50281fa61298454856333c9f40e1490d6733f625ba7cb53d9fa271",
+    "app/src/calmframes/integration/verifiedCoverage.ts": "ff46ff68cd4b21be986bf1c39938d6b5a6cb35a431a5538469e549e9c28ec233",
+    "app/test/calmframes/playbackIntegration.test.ts": "c772d7ace20869ab2055f41a733cbac052e49c21dffbb655f914337c4401c567"
+  }
+}

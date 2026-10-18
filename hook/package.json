@@ -26,7 +26,9 @@
     "@amazon-devices/react-linear-gradient": ">=2.0.0",
     "@amazon-devices/react-native-w3cmedia": ">=2.3.0",
     "react": ">=19.0.0",
-    "react-native": ">=0.83.0"
+    "react-native": ">=0.83.0",
+    "@amazon-devices/react-native-kepler": ">=4.0.0",
+    "@amazon-devices/react-native-svg": ">=3.0.0"
   },
   "scripts": {
     "sync": "node tools/sync.mjs",
