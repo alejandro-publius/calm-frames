@@ -1,22 +1,23 @@
 # The submission packet
 
-Current working candidate: `codex/prepared-video-slice-2026-10-15`, app source
-`21f0ea60332b83efe960eb7cf799139ec2d82ae9`. See
-[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) and the
-[focus-fix receipt](../../results/transport-focus-2026-10-15/receipt.json) for
-the exact installed package and bounded native observations. The approved
-Acadia integration is retained; historical package 5 and the old draft ZIP
-are not the current candidate. Final judged release selection remains open.
-
-Nothing in this packet has been submitted, recorded or published by this pass.
+Updated October 17, 2026, Pacific time, for installed app source `9cc57ca` on
+`claude/tv-experience-2026-10-16`
+([final clarity record](../../results/final-clarity-2026-10-18/README.md)).
+Nothing in this packet has been submitted, recorded or published.
 
 | File | Purpose |
 |---|---|
-| [CHECKLIST.md](CHECKLIST.md) | Current readiness matrix and dated official requirements |
-| [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) | Current capability description, ready for owner review |
-| [DEMO_SCRIPT.md](DEMO_SCRIPT.md) | Current narration and shot plan; not recording permission |
-| [REVIEWER_QUICKSTART.md](REVIEWER_QUICKSTART.md) | Setup and actual prepared-video walkthrough |
-| [OPEN_DECISIONS.md](OPEN_DECISIONS.md) | Remaining engineering, acceptance, access and licence items |
+| [FINAL_REQUIREMENTS_CHECKLIST.md](FINAL_REQUIREMENTS_CHECKLIST.md) | The canonical checklist: every mandatory rule, read live on October 17, mapped to evidence and marked done, missing or unverified |
+| [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) | The project description and product feedback, for owner review |
+| [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md) | The canonical demo script, about 90 seconds; not permission to record |
+| [REVIEWER_QUICKSTART.md](REVIEWER_QUICKSTART.md) | Setup and the current walkthrough for a judge |
+| [OPEN_DECISIONS.md](OPEN_DECISIONS.md) | The decisions only the owner can make |
+
+Superseded and kept as dated records: [CHECKLIST.md](CHECKLIST.md),
+[DEMO_SCRIPT.md](DEMO_SCRIPT.md) and
+[DEMO_SCRIPT_ACADIA_2026-10-16.md](DEMO_SCRIPT_ACADIA_2026-10-16.md). The
+corrections applied to this packet are listed in
+[SUBMISSION_RECONCILIATION.md](../SUBMISSION_RECONCILIATION.md).
 
 ## The Oct 13 draft ZIP, kept as history
 
@@ -44,6 +45,8 @@ upload attempt and source identity are recorded in
 
 ## What comes next
 
-Use the current handoff's short owner acceptance list. Resolve the release,
-licence and access items, then authorize recording separately. The historical
-ZIP must not substitute for these current documents.
+Work through the blockers at the top of the
+[checklist](FINAL_REQUIREMENTS_CHECKLIST.md) and the decisions in
+[OPEN_DECISIONS.md](OPEN_DECISIONS.md). Record only after owner acceptance, the
+footage answer and explicit authorization. The historical ZIP must not
+substitute for these current documents.

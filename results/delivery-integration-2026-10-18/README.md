@@ -1,4 +1,4 @@
-# Integrated delivery evidence — October 18, 2026
+# Integrated delivery evidence, October 18, 2026
 
 Source/app commit `612545932ea46f4547f594f58b2cf2b83f9134b3`.
 See [the final handoff](../../docs/DELIVERY_INTEGRATION_FINAL.md).

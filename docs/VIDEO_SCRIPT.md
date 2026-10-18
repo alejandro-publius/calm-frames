@@ -1,5 +1,10 @@
 # English demo script and recording plan
 
+**Superseded.** The canonical demo script is
+[submission/DEMO_RUN_OF_SHOW.md](submission/DEMO_RUN_OF_SHOW.md), about 90
+seconds, for installed source `9cc57ca`. This October 13 plan is kept as a
+record. Do not record from it.
+
 This is the next recording plan for the current cinematic design. It is a plan,
 not a claim that a new native video exists. The October 10 cut and its exact
 narration remain preserved in `results/redesign_demo_manifest_2026-10-10.json`

@@ -17,13 +17,15 @@ Section 3 (the
 device build and install) and section 4 (the demo) were not run from this
 file; the receipts they name record where they were run.
 
-Current working candidate: `codex/prepared-video-slice-2026-10-15`, app source
-`21f0ea60332b83efe960eb7cf799139ec2d82ae9`. See
-[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) and the
-[focus-fix receipt](../../results/transport-focus-2026-10-15/receipt.json) for
-the exact installed package and bounded native observations. The approved
-Acadia integration is retained; historical package 5 and the old draft ZIP
-are not the current candidate. Final judged release selection remains open.
+Updated October 17, 2026, Pacific time, for the installed build: app source
+`9cc57ca04077611c9bf535ce5083b23c83c7bb4a` on `claude/tv-experience-2026-10-16`
+([final clarity record](../../results/final-clarity-2026-10-18/README.md)). Its
+consumer catalog holds Acadia only. The header, the test summary in section 2,
+the package in section 3 and the walkthrough in section 4 describe that build;
+the commands were not rerun for this update. The canonical
+[checklist](FINAL_REQUIREMENTS_CHECKLIST.md) and
+[demo script](DEMO_RUN_OF_SHOW.md) are current. Final judged release selection
+remains open.
 
 ## 1. What you need
 
@@ -66,7 +68,15 @@ cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx je
 ```
 
 `npm ci --ignore-scripts` skips the Shaka build, which the tests mock; a device
-package needs the full `npm install` with the JDK. Unverified here. On the candidate, the bounded reliability pass recorded 88 tests passing
+package needs the full `npm install` with the JDK. Unverified here. The most
+recent recorded focused passes are the delivery integration at `6125459`, with
+<!--n results/package-delivery-2026-10-18/receipt.json:python_tests -->55<!--/n--> Python, <!--n results/package-delivery-2026-10-18/receipt.json:node_tests -->32<!--/n--> Node and
+<!--n results/package-delivery-2026-10-18/receipt.json:app_tests -->59<!--/n--> app tests
+([receipt](../../results/package-delivery-2026-10-18/receipt.json)), and the
+wording pass at `9cc57ca`, with <!--n results/final-clarity-2026-10-18/verification.json:tests_passed -->43<!--/n--> tests in
+<!--n results/final-clarity-2026-10-18/verification.json:test_suites -->4<!--/n--> suites
+([record](../../results/final-clarity-2026-10-18/verification.json)). They are
+focused suites, not the full suite. The older figures that follow are dated. On the October 14 candidate, the bounded reliability pass recorded 88 tests passing
 across 8 suites with typecheck and focused lint
 ([`results/core-reliability-2026-10-14.json`](../../results/core-reliability-2026-10-14.json)),
 and the release helper's 39 tests passing
@@ -95,9 +105,9 @@ bash scripts/release.sh --arch aarch64 --build-type Debug --tag reviewer-$(date 
 and writes a local package, hashes and preparation receipt. It never publishes.
 Use Python 3.12 through `RELEASE_PYTHON` or `.venv/bin/python`. Do not pass a PIN.
 The current built package is
-`build/release/transport-focus-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg`,
-SHA-256 `a39566ba190b21cbfc5523e902a37bbe00801c189c3d55c891177343d3b36507`.
-See its [source/build receipt](../../results/transport-focus-2026-10-15/receipt.json).
+`build/release/final-clarity-2026-10-18/calm-frames-clarity-aarch64-debug.vpkg`,
+SHA-256 `8f3636ec8bcc2a1c2d5ac80e26f7b3024c0b0ff9003bbdb1341569c51adecbfd`, from
+source `9cc57ca`. See its [build and install record](../../results/final-clarity-2026-10-18/README.md).
 It is already installed on the owner's simulator; do not reinstall it merely
 for owner acceptance. The commands below are for a separately authorized
 reviewer installation. Preserve concurrent checkouts and the SDK app link.
@@ -146,27 +156,37 @@ some under load, so a missing line proves nothing.
 
 ## 4. The current demo sequence
 
+The timed, canonical version is [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md).
+On the installed build:
+
 1. Preserve an existing household. On a fresh reviewer install,
    the reviewer chooses their own PIN. There is no preset PIN to disclose.
-2. Home features Harbor and initially focuses View analysis. Acadia is an
-   additional video card. Open its analysis and read the detected periods,
-   selected covered times, profile settings and file record before Play.
-3. Play only the prepared Acadia rendition. The app's logs report both Extra
-   cautious cover intervals; looking and listening remain owner acceptance.
-4. For TV transport, pause, focus the seek bar, use Left/Right and confirm
-   with Select. The separate Forward button belongs to automotive mode.
-   Use the current receipt for the exact native check outcome.
-5. Back returns to Acadia Details, then its Home card. On Harbor Details,
-   Try the demo opens the explicitly simulated practice version. Back from
-   practice playback returns through its Details and then Harbor Details.
+2. Home features Acadia, the only title in the approved consumer catalog,
+   with Watch focused and Details beside it. How it works and Parents sit in
+   the header.
+3. Details shows the covered sections bar for the household's preset. More
+   info says Calm Frames works only with prepared videos in this app and that
+   the prototype has not been medically validated, then gives the approved
+   safety sentence.
+4. Watch plays the prepared Acadia copy. Its first five seconds are
+   near-black in the content. Before each flagged scene a lower-left notice
+   says "Scene ahead", then "Scene hidden" with Skip, while an opaque panel
+   covers the picture and the sound continues.
+5. Skip and the seek bar move through the guarded seek. Back returns to the
+   screen that started playback, with Watch focused. The natural end returns
+   to Home with Watch focused.
 6. Parents cancellation returns focus to Parents. Do not enter wrong PINs,
    change settings or reset a household merely to perform this walkthrough.
-7. If the owner wants to hear Selection sounds, they can enable the existing
-   optional setting with their own PIN. The saved preference and volume were
-   not changed by the agent. Sound, captions and VoiceView need human checks.
 
-No screenshot or recording is authorized by these steps. Current native logs
-and historical visual evidence are separate; see the current handoff.
+Native evidence is dated by build. The installed `9cc57ca` checked the
+explanation routes and Parents cancellation. `6125459` checked Home, Details,
+Watch, Back and the natural end. The cover, pause and Skip checks come from
+`3fab999` on October 17 and were not repeated. Looking and listening remain
+owner acceptance, and the intermittent simulator slowdown is unresolved. The
+local review page on the Mac is separate from the TV: staging a review there
+does not install a title or enable Watch.
+
+No screenshot or recording is authorized by these steps.
 
 ## 4a. A browser preview, without a device
 
@@ -180,7 +200,9 @@ Then open <http://127.0.0.1:4174/>. It is an HTML export of the rendered
 component trees with CSS approximations: Home links to Details, the practice
 entry, How it works and Parents, and keyboard focus cycles. Play, PIN keys and unmapped
 actions only show a notice. It does not run the native handlers, media,
-persistence, PIN checks, D-pad spatial navigation or VoiceView.
+persistence, PIN checks, D-pad spatial navigation or VoiceView. This section
+was written for the October 14 interface and was not rechecked against the
+installed build.
 
 ## 5. The analyzer, the Action and the hook, without the app
 
@@ -210,6 +232,11 @@ python -m pipeline.packaged_library export --workdir build/local-library \
 ```
 
 Use a benign clip. Never open a file with the `HAZARD_` prefix in a player.
+
+The local intake, review and staging page runs on loopback. Its serve command
+and input limits are in [the intake handoff](../LOCAL_INTAKE_HANDOFF.md), and
+staging is in [the delivery integration record](../DELIVERY_INTEGRATION_FINAL.md).
+Staging records approval status; it does not install a title or enable Watch.
 
 ## 6. AWS, offline
 

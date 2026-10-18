@@ -862,6 +862,8 @@ so automation can distinguish account or runner restrictions from code failures.
 
 ---
 
+<a id="packaged-file-uri"></a>
+
 ## 36. A packaged `file:///pkg/...` URI is not opened by the native player as written
 
 **Task.** Play the bundled Harbor title from the package on the Vega Virtual Device.
@@ -1148,6 +1150,14 @@ queue reports buffering; JavaScript does not emit a new waiting event in run 1.
 Skip reaches its guarded target after about 7.26 s. Severity: blocks smooth-playback
 acceptance. Back remains usable. No source workaround applied without a proven
 cause. Evidence: results/remaining-controls-2026-10-17/.
+
+Follow-up, same day. Two isolation runs reproduced it: <!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-app.media_span_ms -->6010<!--/n--> ms of video took
+<!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-app.wall_span_ms -->15560<!--/n--> ms on a fresh app, and <!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-simulator.media_span_ms -->5886<!--/n--> ms took
+<!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-simulator.wall_span_ms -->26435<!--/n--> ms after a simulator restart
+(results/native-slowdown-isolation-2026-10-17/). A minimal SDK playback app, run
+outside this repository, showed the same pattern. Both later played at normal
+speed with no code change; a later run advanced <!--n results/compact-scene-control-2026-10-17/native/summary.json:clock_segments.1.media_ms -->20894<!--/n--> ms of video in <!--n results/compact-scene-control-2026-10-17/native/summary.json:clock_segments.1.wall_ms -->20899<!--/n--> ms.
+Cause unknown. Host activity is a candidate, not a finding. No fix is claimed.
 
 ### October 17: centered scene message dominates playback
 

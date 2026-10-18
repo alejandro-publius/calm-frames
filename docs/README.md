@@ -8,8 +8,10 @@ reviews and the bills of materials.
 
 If you are new here, read the [repository README](../README.md) first, then
 [SAFETY.md](SAFETY.md) before you run anything. For what is true today, the
-live lists are [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md) and
-[STATUS.md](STATUS.md) section 2.
+canonical submission lists are
+[submission/FINAL_REQUIREMENTS_CHECKLIST.md](submission/FINAL_REQUIREMENTS_CHECKLIST.md)
+and [submission/DEMO_RUN_OF_SHOW.md](submission/DEMO_RUN_OF_SHOW.md), and
+[STATUS.md](STATUS.md) section 2 is the dated engineering list.
 
 **Why the working records are public.** The project's rule is that the
 reasoning behind every call stays in the repository: each decision with its
@@ -49,18 +51,20 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 | File | What is in it |
 |---|---|
 | [RUBRIC.md](RUBRIC.md) | The hackathon's dates, Stage One, the four criteria, the mini challenges and the form, quoted from its own pages rather than remembered. |
-| [SUBMISSION.md](SUBMISSION.md) | The Devpost submission draft, field by field. Not submitted; what Alex still has to supply is marked NEEDS ALEX. |
-| [SUBMISSION_COPY.md](SUBMISSION_COPY.md) | The shorter project story prepared for the Devpost description, with current design and evidence limits. |
+| [SUBMISSION.md](SUBMISSION.md) | The older field-by-field Devpost draft, superseded for the description by [submission/DEVPOST_DRAFT.md](submission/DEVPOST_DRAFT.md). Section 15 still holds the entrant details marked NEEDS ALEX. |
+| [SUBMISSION_COPY.md](SUBMISSION_COPY.md) | The shorter October 15 project story, superseded by [submission/DEVPOST_DRAFT.md](submission/DEVPOST_DRAFT.md) and kept as a record. |
 | [../FINAL_HANDOFF.md](../FINAL_HANDOFF.md) | The handoff for the final candidate: branch, package hash and receipt, what changed and which checks passed, the native acceptance checklist and the owner's remaining actions. |
-| [submission/README.md](submission/README.md) | The submission packet index: the five documents below and the Oct 13 ZIP, kept as history. |
-| [submission/CHECKLIST.md](submission/CHECKLIST.md) | Every official rule against the repository, marked verified, missing, pending or owner decision, mandatory items apart from the optional mini challenges. |
+| [submission/README.md](submission/README.md) | The submission packet index: the canonical checklist, description, demo script, quickstart and open decisions, with superseded drafts marked. |
+| [submission/FINAL_REQUIREMENTS_CHECKLIST.md](submission/FINAL_REQUIREMENTS_CHECKLIST.md) | The canonical checklist: every mandatory rule, read live on October 17, mapped to evidence and marked done, missing or unverified. |
+| [submission/DEMO_RUN_OF_SHOW.md](submission/DEMO_RUN_OF_SHOW.md) | The canonical demo script, about 90 seconds, with each shot's purpose, narration, action and evidence. Not recorded. |
+| [submission/CHECKLIST.md](submission/CHECKLIST.md) | The October 15 readiness matrix, superseded by the canonical checklist and kept as a record. |
 | [submission/DEVPOST_DRAFT.md](submission/DEVPOST_DRAFT.md) | The project description to paste once the pending rows close. |
-| [submission/DEMO_SCRIPT.md](submission/DEMO_SCRIPT.md) | The 2:40 narration and shot plan for the native video, waiting for approval to record. |
-| [submission/DEMO_SCRIPT_ACADIA_2026-10-16.md](submission/DEMO_SCRIPT_ACADIA_2026-10-16.md) | The Oct 16 draft for one Acadia viewing under three minutes, with a covered moment explained and the refusal case shown where it can be shown. Not recorded. |
+| [submission/DEMO_SCRIPT.md](submission/DEMO_SCRIPT.md) | The October 15 plan of 2:40, superseded by the canonical demo script and kept as a record. |
+| [submission/DEMO_SCRIPT_ACADIA_2026-10-16.md](submission/DEMO_SCRIPT_ACADIA_2026-10-16.md) | The October 16 Acadia draft, superseded by the canonical demo script and kept as a record. |
 | [submission/REVIEWER_QUICKSTART.md](submission/REVIEWER_QUICKSTART.md) | Setup, run and demo steps for a judge, with unexecuted commands marked. |
 | [submission/OPEN_DECISIONS.md](submission/OPEN_DECISIONS.md) | What is pending and what only Alex can decide, mandatory first. |
 | [CLAUDE_FINISH_PROMPT.md](CLAUDE_FINISH_PROMPT.md) | A bounded Mac finishing task for Claude Code or a local Codex session, with API billing verification and milestone pushes. |
-| [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) | The next native recording plan, narration, readable subtitle treatment and checks before the finished cut can be uploaded. |
+| [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) | The October 13 recording plan, superseded by [submission/DEMO_RUN_OF_SHOW.md](submission/DEMO_RUN_OF_SHOW.md) and kept as a record. |
 | [SHOT_MANIFEST.md](SHOT_MANIFEST.md) | The shots in the Oct 10 recording of the earlier native build, with their source hashes, and what has to be captured again. |
 | [FEEDBACK.md](FEEDBACK.md) | Amazon's five product feedback questions, answered once for every tool the project used, and the feature requests. |
 | [FRICTION_LOG.md](FRICTION_LOG.md) | Developer friction in Amazon's six fields, every entry traceable to a commit, a log or a results file. |
@@ -95,7 +99,7 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 | Path | What is in it |
 |---|---|
 | [STATUS.md](STATUS.md) | Where things stand. Section 0 is the dated history, newest first; section 2 is the dated list of what remains. |
-| [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md) | The single completion checklist: the finish line, the evidence behind each item, and the decisions still open. |
+| [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md) | The October 13 to 15 completion checklist, kept as a record. The submission checklist is [submission/FINAL_REQUIREMENTS_CHECKLIST.md](submission/FINAL_REQUIREMENTS_CHECKLIST.md). |
 | [MAC_FINISH.md](MAC_FINISH.md) | The handoff for the Mac: rebuild, observe and record the current source on the Vega Virtual Device. |
 | [DECISIONS.md](DECISIONS.md) | Every call made, with its date, why and what it cost. Newest at the bottom. |
 | [GATES.md](GATES.md) | Every gate, human checkpoint and kill rule, with the date and the evidence for each result. |

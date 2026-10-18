@@ -1,4 +1,4 @@
-# Delivery integration complete — October 18, 2026
+# Delivery integration complete, October 18, 2026
 
 The generic package review path is integrated into the active local project on
 `claude/tv-experience-2026-10-16`. Source and installed app commit:

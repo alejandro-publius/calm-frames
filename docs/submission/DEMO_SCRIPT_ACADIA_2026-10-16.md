@@ -1,10 +1,9 @@
 # Demo script: one Acadia viewing, under three minutes
 
-Draft, October 16, 2026. Not recorded. Nothing here was filmed, captured or
-rehearsed on a device in this pass. It replaces the Harbor-film plan in
-[DEMO_SCRIPT.md](DEMO_SCRIPT.md) for the Acadia-first build once that build
-is installed and checked with the remote; until then the timings are
-estimates.
+**Superseded.** The canonical demo script is
+[DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md), which adapts this draft to
+installed source `9cc57ca`. This October 16 draft is kept as a dated record. Do
+not record from it.
 
 Rules for the recording, when it happens: the television shows only the
 prepared Acadia video; no original flashing footage is ever on screen; the

@@ -1,34 +1,57 @@
 # Open decisions and blockers
 
-Current working candidate: `codex/prepared-video-slice-2026-10-15`, app source
-`21f0ea60332b83efe960eb7cf799139ec2d82ae9`. See
-[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) and the
-[focus-fix receipt](../../results/transport-focus-2026-10-15/receipt.json) for
-the exact installed package and bounded native observations. The approved
-Acadia integration is retained; historical package 5 and the old draft ZIP
-are not the current candidate. Final judged release selection remains open.
+Updated October 17, 2026, Pacific time, for installed source `9cc57ca` on
+`claude/tv-experience-2026-10-16`. The canonical lists are
+[FINAL_REQUIREMENTS_CHECKLIST.md](FINAL_REQUIREMENTS_CHECKLIST.md), which maps
+each mandatory rule to evidence, and [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md)
+for the video. This page keeps the decisions only the owner can make, and the
+limits that bear on them.
 
-## Engineering and owner acceptance
+## Mandatory for submission
 
-- The earlier Forward-button check targeted an automotive-only control.
-  The real issue was background Details/Home controls taking focus. The
-  regression fix and correct TV seek-bar check are in the current receipt.
-- Owner checks still needed: readable analysis, visible focus and Back route,
-  prepared picture holds, optional menu cue, audio continuity, captions and
-  VoiceView. Keep the saved household; only the owner enters the existing PIN.
-- Detection can miss flashing. Native log ordering is not paint timing.
-  Independent detector assessment, physical-TV acceptance and loop-seam
-  validation remain open; none is replaced by unit tests.
-- Choose the final source/package after acceptance. No main merge or release
-  tag has been made. The working branch is private and the old release/ZIP
-  assets are historical.
+### 1. Accept the installed build by eye and ear
 
-## Recording and access
+Home, Details, the explanation screens, the cover near 7.3 s and 28.1 s, the
+corner notice and sound through covers. Text logs cannot approve layout or
+sound, and every native record says visual and audio acceptance is pending.
 
-The revised [demo script](DEMO_SCRIPT.md) is a draft only. Recording and public
-upload require separate authorization. No old screenshots or video should be
-presented as the current build. Reviewer access also requires the owner's
-chosen route and authorization; nobody has been invited by this pass.
+### 2. Clear the footage question, then authorize the recording
+
+The FAQ asks entrants to check third-party footage with the organizers.
+Office Hours #2 is Monday, October 19, 9:00 am PT. No recording has been made
+or authorized.
+
+### 3. Choose judge access
+
+Either public, with the Apache-2.0 licence visible, which leaves the Amazon
+sample notice question in item 7 open; or private, with the six Amazon
+reviewers and the Devpost testing account invited. The demonstrated build is
+not on GitHub yet, and pushing is the owner's call.
+
+### 4. Register and complete the form
+
+Registration, the eligibility statements and the form's own fields are
+unverified. The drafts are [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) and
+[../FEEDBACK.md](../FEEDBACK.md).
+
+### 5. Engineering limits that bear on these
+
+- The intermittent simulator slowdown is unresolved. Later runs were healthy
+  and no fix is claimed, so a take can still be spoiled by it.
+- Cover, pause and Skip were last observed natively on `3fab999`. Later builds
+  rechecked navigation, playback start and the end return.
+- Prairie Creek and Redwood is an unapproved review example, frozen outside the
+  consumer catalog. Staging records approval state only; it never installs a
+  title or enables Watch.
+- Two repository checks fail, and neither can be fixed from documentation
+  alone. A dash in the Acadia label in `app/config/approved-prepared-libraries.json`
+  is generated into `approvedPreparedCatalogs.ts` and trips `eval/style_check.py`.
+  The Prairie ledger rows have no attribution title, so `eval/attribution.py --check`
+  fails until NOTICE and the app's credits screen are regenerated or the rows
+  change.
+- Detection can miss flashing, and the prototype has not been medically
+  validated. Independent detector assessment remains open. Physical TV acceptance
+  is outside this simulator-only submission; unit tests establish neither.
 
 ## Owner and licensing items
 
@@ -104,8 +127,9 @@ is blocked by absent AWS access and the historical findings remain unresolved.
   ([../SUBMISSION.md](../SUBMISSION.md) section 14).
 - The private draft release `review-redesign-2026-10-10` holds the Oct 10
   build's package and video; replace or delete it before visibility changes.
-- Devpost's early eligibility check on Oct 16 and the office hours on Oct 19
-  are recorded from announcements and were not re-read.
-- The form's exact field names and limits are unread; read them off the live
-  form. The gallery image is proposed (`docs/brand/firetv-app-icon-1280x720.png`)
-  and the form's accepted size is unknown.
+- Devpost announced an early eligibility check for October 16. The repository
+  has no record of its use.
+- The form's exact field names and limits are unread; see section 11 of the
+  [checklist](FINAL_REQUIREMENTS_CHECKLIST.md). The gallery image is proposed
+  (`docs/brand/firetv-app-icon-1280x720.png`) and the form's accepted size is
+  unknown.

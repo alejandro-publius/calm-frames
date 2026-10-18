@@ -143,7 +143,9 @@ otherwise be hidden by a cached `.pyc`.
 ## What it does not do
 
 - **No HDR.** HLG and PQ tagged files are refused rather than measured with the SDR curve.
-- **No pattern rule.** BT.1702-3 Guideline 2, regular patterns, is not implemented.
+- **The pattern rule is informative only.** The broadcast profile applies BT.1702-3
+  Guideline 2, regular patterns, from its informative attachment. A pattern finding is
+  never a WCAG finding, and it is not clinical validation.
 - **No fine balanced pattern exception.** WCAG would excuse white noise and small
   checkerboards. flashmap reports them, which is the strict direction.
 - **No risk score.** Neither spec defines one, so flashmap does not invent one.

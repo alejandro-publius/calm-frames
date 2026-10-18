@@ -1,5 +1,10 @@
 # The rubric we are actually judged against
 
+**Rechecked October 17, 2026.** The official pages were read live again for
+[submission/FINAL_REQUIREMENTS_CHECKLIST.md](submission/FINAL_REQUIREMENTS_CHECKLIST.md),
+the current mapping of each rule to evidence. Where this page differs, the
+checklist is newer.
+
 Everything on this page comes from the hackathon's own pages, fetched and read
 on **Thu Sep 17, 2026**, with repository access requirements rechecked on
 **Thu Oct 1, 2026**:

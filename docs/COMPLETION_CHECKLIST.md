@@ -1,11 +1,12 @@
 # Calm Frames completion checklist
 
-Current October 15 candidate: app source `21f0ea6` on
-`codex/prepared-video-slice-2026-10-15`. Use [FINAL_HANDOFF.md](../FINAL_HANDOFF.md)
-and [the current submission packet](submission/README.md) for source, package,
-native limits and remaining owner actions. The detailed dated notes below are
-historical where they name earlier packages or copy. Nothing here authorizes
-recording, publication, a main merge, credentials or AWS changes.
+**Superseded for the submission.** The canonical checklist is
+[submission/FINAL_REQUIREMENTS_CHECKLIST.md](submission/FINAL_REQUIREMENTS_CHECKLIST.md),
+updated on October 17, 2026 for installed source `9cc57ca`, and the canonical
+demo script is [submission/DEMO_RUN_OF_SHOW.md](submission/DEMO_RUN_OF_SHOW.md).
+The dated notes below describe earlier candidates and are kept as a record.
+Nothing here authorizes recording, publication, a main merge, credentials or
+AWS changes.
 
 **Superseded on Oct 14, 2026.** The live owner list is [`FINAL_HANDOFF.md`](../FINAL_HANDOFF.md)
 section 5 and the packet under [`docs/submission/`](submission/README.md); the rows

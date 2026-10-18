@@ -1,9 +1,9 @@
 # Demo video: current narration and shot plan
 
-Draft updated October 15, 2026 for app source `21f0ea6`, retaining the approved
-Acadia integration. This is a plan, not permission to record. Use the exact
-package accepted by the owner and named in [the handoff](../../FINAL_HANDOFF.md).
-Recording, upload and publication remain pending separate authorization.
+**Superseded.** The canonical demo script is
+[DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md), about 90 seconds, for installed
+source `9cc57ca`. This 2:40 plan was written on October 15 for app source
+`21f0ea6` and is kept as a dated record. Do not record from it.
 
 The planned cut is 2:40. The earlier rules review required under three minutes;
 recheck the live requirements before submission. No shot may show an original

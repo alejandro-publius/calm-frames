@@ -1,12 +1,10 @@
 # Submission readiness checklist
 
-Current working candidate: `codex/prepared-video-slice-2026-10-15`, app source
-`21f0ea60332b83efe960eb7cf799139ec2d82ae9`. See
-[FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) and the
-[focus-fix receipt](../../results/transport-focus-2026-10-15/receipt.json) for
-the exact installed package and bounded native observations. The approved
-Acadia integration is retained; historical package 5 and the old draft ZIP
-are not the current candidate. Final judged release selection remains open.
+**Superseded.** The canonical checklist is
+[FINAL_REQUIREMENTS_CHECKLIST.md](FINAL_REQUIREMENTS_CHECKLIST.md), updated on
+October 17, 2026 for installed source `9cc57ca`, with the official pages read
+live that day. This file describes the October 15 candidate `21f0ea6` and is
+kept as a dated record.
 
 Updated October 15, 2026. This matrix separates source checks, native event
 observations and owner acceptance. No screenshot, recording, publication,

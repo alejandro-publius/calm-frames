@@ -3,6 +3,8 @@
 This is the October 10 recording of the earlier native build. The later cloud
 polish and dependency changes require new native captures. Follow
 [MAC_FINISH.md](MAC_FINISH.md) for the current manifest and bundle workflow.
+The canonical plan for the next recording is
+[submission/DEMO_RUN_OF_SHOW.md](submission/DEMO_RUN_OF_SHOW.md).
 
 `results/redesign_demo_manifest_2026-10-10.json` records source hashes,
 source offsets, output durations, narration and edits. These are completed

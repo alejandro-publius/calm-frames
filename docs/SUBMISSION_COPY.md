@@ -1,11 +1,10 @@
 # Calm Frames submission copy
 
-Current October 15 candidate: app source `21f0ea6` on
-`codex/prepared-video-slice-2026-10-15`. Use [FINAL_HANDOFF.md](../FINAL_HANDOFF.md)
-and [the current submission packet](submission/README.md) for source, package,
-native limits and remaining owner actions. The detailed dated notes below are
-historical where they name earlier packages or copy. Nothing here authorizes
-recording, publication, a main merge, credentials or AWS changes.
+**Superseded for the submission.** The current description is
+[submission/DEVPOST_DRAFT.md](submission/DEVPOST_DRAFT.md), updated on October
+17, 2026 for installed source `9cc57ca`. The copy below describes earlier
+candidates and is kept as a record. Nothing here authorizes recording,
+publication, a main merge, credentials or AWS changes.
 
 Historical draft prepared October 13 for the cinematic design. The text below
 is kept as a record and is superseded by

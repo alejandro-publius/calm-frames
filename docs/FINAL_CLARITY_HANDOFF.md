@@ -1,4 +1,4 @@
-# Bounded final clarity pass — October 18, 2026
+# Bounded final clarity pass, October 18, 2026
 
 This pass follows the completed delivery integration at `6125459` / documentation
 `be94cde`. It closes one wording gap and records submission corrections. Feature scope

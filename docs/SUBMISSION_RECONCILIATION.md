@@ -1,4 +1,4 @@
-# Submission corrections for the draft owner — October 18, 2026
+# Submission corrections for the draft owner, October 18, 2026
 
 Read-only reconciliation of Claude's three reserved submission drafts against integrated
 source `6125459` and the bounded wording follow-up `9cc57ca`. None of those drafts was

@@ -1,5 +1,15 @@
 # Status
 
+October 17 submission packet reconciliation, documentation only: the canonical
+checklist, Devpost draft and 90-second run of show in docs/submission/ now
+describe installed source 9cc57ca, local intake and staging, and the unapproved
+Prairie proposal separately. The quickstart, feedback, friction log, open
+decisions and older checklists and scripts are corrected or point to them.
+Owner decisions remain: visual/audio acceptance, footage permission, recording,
+judge access, registration and the form. Two checks still fail outside this
+documentation: a dash in the generated approved-catalog label, and Prairie
+ledger rows without attribution titles.
+
 October 17 cover/button fix: opaque scheduled-cover explanation and proportional
 Home Watch are source-tested and independently reviewed. Source 3fab999 built/installed once; package hash and
 native control/cover-state checks pass. App remains Home Watch, collector stopped.
