@@ -44,6 +44,7 @@ export const MIRRORED = [
   'household.ts',
   'mapRegistry.ts',
   'mediaClock.ts',
+  'personalCovers.ts',
   'SafeMediaControlHandler.ts',
   'seekSafety.ts',
   'sceneHolds.ts',

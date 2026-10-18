@@ -297,6 +297,8 @@ def prepare_worker(path: Path, key: Path, pub: Path) -> None:
         status="package_review",
         stage="Verified package ready for operator review",
         package=package,
+        delivery=None,
+        delivery_plan=None,
         error=None,
     )
 
@@ -425,6 +427,16 @@ class IntakeStore:
             self.poll()
             path = job_dir(self.root, job_id)
             job = read_job(path)
+            if action == "plan-delivery":
+                from .edition_delivery import plan_delivery
+                from .package_delivery import APP
+
+                update(path, delivery_plan=None)
+                if job["status"] != "package_review" or not job.get("delivery"):
+                    raise IntakeError("Stage a verified package before planning delivery.")
+                result = plan_delivery(path / "delivery-reviews", job["delivery"]["ticket_id"], APP)
+                result["staging_root"] = str(path / "delivery-reviews")
+                return update(path, delivery_plan=result)
             if action in {"stage-delivery", "check-delivery", "cancel-delivery"}:
                 from .package_delivery import cancel_delivery, check_delivery, stage_delivery
 
@@ -433,7 +445,7 @@ class IntakeStore:
                 staging = path / "delivery-reviews"
                 prior = job.get("delivery")
                 # A failed recheck must not leave a stale ready label in the UI.
-                update(path, delivery=None)
+                update(path, delivery=None, delivery_plan=None)
                 try:
                     if action == "stage-delivery":
                         directory = _path_inside(path / job["package"]["relative_directory"], path)
@@ -474,6 +486,7 @@ class IntakeStore:
                     approved_review=None,
                     package=None,
                     delivery=None,
+                    delivery_plan=None,
                     error=None,
                 )
             if action == "approve":
@@ -501,6 +514,8 @@ class IntakeStore:
                     review=None,
                     approved_review=None,
                     package=None,
+                    delivery=None,
+                    delivery_plan=None,
                     error=None,
                 )
                 self.launch(path, "analyze")

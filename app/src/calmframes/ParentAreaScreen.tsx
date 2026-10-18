@@ -141,6 +141,8 @@ import ShieldBadge from './ShieldBadge';
 import { titlePresentation } from './TitleArtwork';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle } from './titleStatus';
+import PersonalCoversScreen from './PersonalCoversScreen';
+import { personalCoverAsset } from './personalCovers';
 import { useUiCapture } from './uiCapture';
 import {
   PARENT_LOCKED_FRAME,
@@ -210,6 +212,8 @@ const ParentAreaScreen = ({
   saving = false,
 }: ParentAreaScreenProps) => {
   const [unlocked, setUnlocked] = React.useState(false);
+  const [extraReturnFocus, setExtraReturnFocus] = React.useState<string>();
+  const [extraTitle, setExtraTitle] = React.useState<CheckedTitle>();
   const [entered, setEntered] = React.useState('');
   const [savingPin, setSavingPin] = React.useState(false);
   const savingPinRef = React.useRef(false);
@@ -351,6 +355,12 @@ const ParentAreaScreen = ({
     );
   }
 
+  const extraAsset = extraTitle ? personalCoverAsset(extraTitle.title) : undefined;
+  if (extraTitle && extraAsset) {
+    return <PersonalCoversScreen asset={extraAsset} title={extraTitle.title.title}
+      onBack={() => { setExtraReturnFocus(extraTitle.title.id); setExtraTitle(undefined); }} />;
+  }
+
   // Who is being edited, and what they are set to. With no family this is the
   // household and nothing else, which is what this screen was before profiles.
   const editingProfile: Profile | undefined = family
@@ -407,7 +417,7 @@ const ParentAreaScreen = ({
       testID={`${testID}-open`}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      <CalmPageHeader onBack={onBack} backTestID={`${testID}-back-top`} preferredBack backDisabled={saving} />
+      <CalmPageHeader onBack={onBack} backTestID={`${testID}-back-top`} preferredBack={!extraReturnFocus} backDisabled={saving} />
       <View style={styles.header}>
         <View style={styles.headerTitleRow}>
           <Text style={[styles.title, styles.headerTitle]} accessibilityRole="header">
@@ -803,6 +813,11 @@ const ParentAreaScreen = ({
                   testID={`${testID}-status-${entry.title.id}`}
                 />
               </View>
+              {entry.status === 'verified' && personalCoverAsset(entry.title) ? (
+                <CalmButton label="Extra picture covers" disabled={saving}
+                  hasTVPreferredFocus={extraReturnFocus === entry.title.id}
+                  onPress={() => { setExtraReturnFocus(undefined); setExtraTitle(entry); }} testID={`${testID}-extra-${entry.title.id}`} />
+              ) : null}
               {titleNotice ? (
                 <Text
                   style={styles.rowDetail}

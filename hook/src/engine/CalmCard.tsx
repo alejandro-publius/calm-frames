@@ -6,9 +6,9 @@
  * The card: the one thing on screen that speaks to the child.
  *
  * It sits above the cover so it stays readable while the picture is hidden,
- * and below nothing else. It hangs from the upper part of the safe area, out
- * of the band at the bottom where captions are drawn (PLAYER_LAYOUT in
- * calmStyles.ts says why). Four things it has to get right:
+ * and keeps scheduled controls in the lower-left safe corner, below captions.
+ * Checking and refusal messages retain their larger reading layout.
+ * Four things it has to get right:
  *
  * - the consumer player owns explicit speech for the final visible copy;
  *   other callers retain the live-region fallback;
@@ -31,6 +31,7 @@ import {
   scale,
 } from './calmStyles';
 import { Card, cardOffersSkip } from './cards';
+import { CalmControlAppearance } from './CalmControlSurface';
 
 export interface CalmCardProps {
   card: Card;
@@ -62,6 +63,7 @@ const CalmCard = ({
   const [focused, setFocused] = React.useState(false);
 
   const showSkip = allowSkip && cardOffersSkip(card);
+  const controlAppearance = React.useContext(CalmControlAppearance);
 
   useEffect(() => {
     // A new countdown puts focus on Skip. requestTVFocus is the supported way
@@ -81,7 +83,7 @@ const CalmCard = ({
   return (
     <View
       testID={testID}
-      style={styles.container}
+      style={stableLayout ? styles.compactContainer : styles.container}
       pointerEvents="box-none"
       accessible
       accessibilityLiveRegion={manualAnnouncements ? "none" : "polite"}
@@ -91,29 +93,33 @@ const CalmCard = ({
       // that React Native for Vega exposes.
       aria-live={manualAnnouncements ? "off" : "polite"}
       aria-label={card.announcement}>
-      <View style={[styles.card, stableLayout ? styles.stableCard : null]}>
-        <Text style={styles.title} testID={`${testID}-title`}>
-          {card.title}
-        </Text>
-        {card.detail ? (
-          <Text style={[styles.detail, stableLayout ? styles.stableDetail : null]} testID={`${testID}-detail`}>
-            {card.detail}
+      <View style={stableLayout ? styles.compactCard : styles.card}>
+        <View style={stableLayout ? styles.compactText : undefined}>
+          <Text style={[styles.title, stableLayout ? styles.compactTitle : null]} testID={`${testID}-title`}>
+            {card.title}
           </Text>
-        ) : null}
+          {card.detail ? (
+            <Text style={[styles.detail, stableLayout ? styles.compactDetail : null]} testID={`${testID}-detail`}>
+              {card.detail}
+            </Text>
+          ) : null}
+        </View>
         {showSkip ? (
-          <TouchableOpacity
-            ref={skipRef}
-            testID={`${testID}-skip`}
-            accessibilityRole="button"
-            accessibilityLabel={skipAccessibilityLabel}
-            activeOpacity={1}
-            hasTVPreferredFocus
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-            onPress={() => onSkip?.(card.skipToMs ?? 0)}
-            style={[styles.skip, focused ? styles.skipFocused : null]}>
-            <Text style={styles.skipLabel}>Skip</Text>
-          </TouchableOpacity>
+          <CalmControlAppearance.Provider value={stableLayout ? false : controlAppearance}>
+            <TouchableOpacity
+              ref={skipRef}
+              testID={`${testID}-skip`}
+              accessibilityRole="button"
+              accessibilityLabel={skipAccessibilityLabel}
+              activeOpacity={1}
+              hasTVPreferredFocus
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              onPress={() => onSkip?.(card.skipToMs ?? 0)}
+              style={[styles.skip, stableLayout ? styles.compactSkip : null, focused ? styles.skipFocused : null]}>
+              <Text style={styles.skipLabel}>Skip</Text>
+            </TouchableOpacity>
+          </CalmControlAppearance.Provider>
         ) : null}
       </View>
     </View>
@@ -139,8 +145,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     maxWidth: scale(1400),
   },
-  stableCard: { width: scale(1200) },
-  stableDetail: { minHeight: scale(100) },
+  compactContainer: {
+    position: 'absolute', left: scale(CALM_SPACE.SAFE_X), bottom: scale(CALM_SPACE.SAFE_Y),
+    width: scale(520), height: scale(104), zIndex: CARD_Z_INDEX,
+  },
+  compactCard: {
+    width: scale(520), height: scale(104), flexDirection: 'row', alignItems: 'center',
+    backgroundColor: '#111B23', borderRadius: scale(12),
+    paddingVertical: scale(8), paddingHorizontal: scale(12),
+  },
+  compactText: { width: scale(324), marginRight: scale(20) },
+  compactTitle: { ...CALM_TEXT.control, textAlign: 'left' },
+  compactDetail: { ...CALM_TEXT.supporting, textAlign: 'left', marginTop: 0 },
+  compactSkip: {
+    width: scale(152), minHeight: scale(CALM_CONTROL.MIN_HEIGHT), marginTop: 0,
+    paddingVertical: scale(8), paddingHorizontal: scale(16),
+    alignItems: 'center', justifyContent: 'center', borderColor: 'transparent',
+    backgroundColor: 'transparent',
+  },
   title: {
     color: CALM_COLORS.TEXT,
     ...CALM_TEXT.card,

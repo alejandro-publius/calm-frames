@@ -2,15 +2,15 @@
   "source": "app/src/calmframes",
   "files": {
     "announce.ts": "5446fdce9f6080c8",
-    "CalmCard.tsx": "1ca4eecbdf44bd52",
-    "CalmControlSurface.tsx": "ee3759ff01dc4215",
-    "CalmTouchable.tsx": "f1edec0c11594552",
+    "CalmCard.tsx": "f29399b99da0ce43",
+    "CalmControlSurface.tsx": "47a5591e413cf4d7",
+    "CalmTouchable.tsx": "63562a6d6353f49f",
     "CoastalAppearance.ts": "0106662e737f8297",
     "trace.ts": "6e1acdf6b6450ff7",
-    "calmStyles.ts": "65c81d2c8567fdc9",
+    "calmStyles.ts": "39efe4a01c2f8da1",
     "canonicalJson.ts": "1097285aae9b21aa",
     "cards.ts": "b1273ac6cff587fe",
-    "CoverLayer.tsx": "dd341b25f9348dcb",
+    "CoverLayer.tsx": "fa04ec47737c1265",
     "coverSchedule.ts": "0fc0b8ba87e15973",
     "ed25519.ts": "8a8e37cc128b0603",
     "flashMap.ts": "d72291f64206d315",
@@ -18,6 +18,7 @@
     "household.ts": "704a19f083efaa92",
     "mapRegistry.ts": "d9d2274e2cb666da",
     "mediaClock.ts": "627d8e5ecb3266f9",
+    "personalCovers.ts": "17a40357b64d2bf0",
     "SafeMediaControlHandler.ts": "87cdd9e1a5a03701",
     "seekSafety.ts": "410732df66f7006b",
     "sceneHolds.ts": "a11f9a7461b37ec0",
@@ -25,6 +26,6 @@
     "timingLog.ts": "e8c9ee381bdb994e",
     "titleStatus.ts": "04f52111914e4394",
     "useCoverHarness.ts": "5eaa61f38033cb48",
-    "useFlashGuard.ts": "f35d3f88999412ad"
+    "useFlashGuard.ts": "cb3ebf7012426f9c"
   }
 }

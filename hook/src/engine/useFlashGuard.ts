@@ -68,6 +68,7 @@ import {
 } from './seekSafety';
 import { MediaElementLike, useCoverHarness } from './useCoverHarness';
 import { trace } from './trace';
+import { PersonalCover, withPersonalCovers } from './personalCovers';
 
 export type GuardStatus = 'loading' | 'verified' | 'blocked';
 
@@ -90,6 +91,9 @@ export interface FlashGuardOptions {
   /** False when the player announces its final presentation, including pause state. */
   announceCards?: boolean;
   durationMs?: number;
+  /** Local additions on the exact prepared rendition timeline. */
+  additionalCovers?: PersonalCover[];
+  personalCoversStatus?: 'loading' | 'ready' | 'blocked';
   /**
    * How far the rendition about to play sits from the source the map
    * describes, milliseconds, from the catalog entry's
@@ -127,6 +131,9 @@ export interface FlashGuardState {
   coverImageUri?: string;
   card: Card;
   intervals: CoverInterval[];
+  /** Verified base only, for optional creator descriptions. */
+  baseIntervals: CoverInterval[];
+  scheduledCover: boolean;
   mediaTimeMs: number;
   /** Total milliseconds hidden so far in this sitting. */
   hiddenMs: number;
@@ -165,6 +172,8 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
     announceCards = true,
     foreground = true,
     durationMs,
+    additionalCovers,
+    personalCoversStatus = 'ready',
     renditionStartOffsetMs,
     titleId = 'unknown',
     titleName = 'this title',
@@ -207,6 +216,8 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
       durationMs,
       renditionStartOffsetMs,
       maxMapAgeMs,
+      additionalCovers,
+      personalCoversStatus,
     }),
     [
       mapTexts?.wcag,
@@ -222,6 +233,8 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
       durationMs,
       renditionStartOffsetMs,
       maxMapAgeMs,
+      additionalCovers,
+      personalCoversStatus,
     ],
   );
   const [checkedInput, setCheckedInput] = useState<object | null>(null);
@@ -230,7 +243,13 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
 
   const coverOptions = useMemo(() => coverOptionsFor(settings), [settings]);
 
-  const intervals = useMemo(() => segments, [segments]);
+  const intervals = useMemo(() => {
+    try {
+      return additionalCovers?.length
+        ? withPersonalCovers(segments, additionalCovers, durationMs ?? 0)
+        : segments;
+    } catch { return segments; }
+  }, [segments, additionalCovers, durationMs]);
   const intervalsRef = useRef<CoverInterval[]>(intervals);
   intervalsRef.current = intervals;
   const committedSceneIntervalsRef = useRef<CoverInterval[]>(intervals);
@@ -273,6 +292,18 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
       setCheckedInput(null);
       setSceneHolds([]);
       setBlockedReason('Getting your story ready.');
+      if (personalCoversStatus === 'loading') return;
+      try {
+        if (personalCoversStatus === 'blocked') throw new Error('storage');
+        if (additionalCovers) withPersonalCovers([], additionalCovers, durationMs ?? 0);
+      } catch {
+        setStatus('blocked');
+        setCheckedInput(verificationInput);
+        setRejection('missing');
+        setBlockedReason('Your extra covers could not be loaded. Return to Parents to review them. The picture stays hidden.');
+        setSegments([]);
+        return;
+      }
       const verifiedMaps: VerifiedFlashMap[] = [];
       for (const profile of preset.mapProfiles) {
         let text: string | null | undefined = mapTexts?.[profile];
@@ -518,7 +549,18 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
 
   const scheduledCard = useMemo(() => {
     if (activeStatus === 'verified') {
-      return cardAt(intervals, harness.mediaTimeMs);
+      const next = cardAt(intervals, harness.mediaTimeMs);
+      if (next.interval?.sources.some((source) => source.label === 'Personal extra cover')) {
+        if (next.kind === 'countdown') {
+          return { ...next, title: 'Picture cover coming up',
+            announcement: `Picture cover coming up. ${next.detail ?? ''}` };
+        }
+        if (next.kind === 'covering') {
+          return { ...next, title: 'Picture covered',
+            announcement: 'Picture covered. Sound continues while this scene is hidden.' };
+        }
+      }
+      return next;
     }
     // Still checking is not a refusal. The refusal card would say "Not
     // checked yet", or repeat why the previous map was turned away, about a
@@ -605,6 +647,9 @@ export function useFlashGuard(options: FlashGuardOptions): FlashGuardState {
     coverImageUri,
     card,
     intervals,
+    baseIntervals: segments,
+    scheduledCover: activeStatus === 'verified' && ready && foreground &&
+      harness.covered && !harness.uncertain && !seekHolding && Boolean(currentInterval),
     mediaTimeMs: harness.mediaTimeMs,
     hiddenMs,
     requestSeek,

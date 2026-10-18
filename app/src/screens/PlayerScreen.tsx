@@ -70,6 +70,10 @@ import { scale } from '../calmframes/calmStyles';
 import { playbackCard, usePlaybackCardAnnouncement, usePlaybackPaused } from '../calmframes/usePlaybackPresentation';
 import { usePlaybackProgress } from '../calmframes/usePlaybackProgress';
 import { useFlashGuard } from '../calmframes/useFlashGuard';
+import { sceneBridgesForAsset } from '../calmframes/approvedSceneBridges';
+import { resolveSceneBridge } from '../calmframes/sceneBridges';
+import { personalCoverAsset } from '../calmframes/personalCovers';
+import { usePersonalCovers } from '../calmframes/personalCoverStorage';
 import BufferingWindow from '../components/BufferingWindow';
 import {
   AppStackParamList,
@@ -203,7 +207,18 @@ const PlayerScreen = ({
     sha256: guardedParams?.sha256,
   };
   const benignDemo = isBundledBenignStory(bundledIdentity);
+  const extraCoverAsset = personalCoverAsset({
+    id: guardedParams?.titleId ?? data.id, sha256: guardedParams?.sha256,
+    renditionSha256: guardedParams?.renditionSha256,
+    durationMs: guardedParams?.durationMs,
+    renditionStartOffsetMs: guardedParams?.renditionStartOffsetMs,
+  });
+  const extraCovers = usePersonalCovers(preparedRouteAccepted ? extraCoverAsset : undefined);
   const guard = useFlashGuard({
+    additionalCovers: preparedRouteAccepted ? extraCovers.record?.additions : undefined,
+    personalCoversStatus: preparedRouteAccepted
+      ? extraCoverAsset ? extraCovers.status : 'blocked'
+      : 'ready',
     announceCards: false,
     mediaRef: videoRef,
     mapTexts: guardedParams?.maps,
@@ -309,6 +324,12 @@ const PlayerScreen = ({
     ended: isVideoEnded, practice: benignDemo });
   usePlaybackCardAnnouncement(showOpeningShell ? NO_CARD : card, paused);
   const calmCoverFallback = guarding && guard.status === 'verified' && card.kind === 'covering';
+  const sceneBridge = preparedRouteAccepted && extraCoverAsset &&
+    guard.scheduledCover && !paused && !showBuffering && !isVideoEnded &&
+    !isVideoError && !returningHome && !showOpeningShell
+    ? resolveSceneBridge(sceneBridgesForAsset(extraCoverAsset), extraCoverAsset,
+        guard.baseIntervals, guard.mediaTimeMs)
+    : undefined;
   const coverPresentation = !covered ? 'clear' : guard.coverImageUri ? 'signed-still' : calmCoverFallback ? 'message' : 'plain';
   useEffect(() => { trace('playback', `cover-surface ${coverPresentation}`); }, [coverPresentation]);
   // Debug-build breadcrumbs (CALM_TRACE, see trace.ts) so one native run can
@@ -705,6 +726,7 @@ const PlayerScreen = ({
             <CoverLayer
               visible={covered}
               calmFallback={calmCoverFallback}
+              sceneBridge={sceneBridge}
               imageUri={access === 'guarded' ? guard.coverImageUri : undefined}
               imageSource={access === 'guarded' ? bundledStillFor(guard.coverImageUri) : undefined}
               referencePatch={route.params.referencePatch}

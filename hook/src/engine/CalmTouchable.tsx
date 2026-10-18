@@ -19,13 +19,14 @@ const CalmTouchable = React.forwardRef<React.ComponentRef<typeof TouchableOpacit
     const [focused, setFocused] = React.useState(false);
     const study = React.useContext(CalmControlAppearance);
     const blocked = props.disabled || props.accessibilityState?.disabled;
+    const cornerRadius = StyleSheet.flatten(style)?.borderRadius;
     return <TouchableOpacity {...props} ref={ref} activeOpacity={1}
       onPressIn={(event) => { if (!blocked) setPressed(true); onPressIn?.(event); }}
       onPressOut={(event) => { setPressed(false); onPressOut?.(event); }}
       onFocus={(event) => { setFocused(true); trace('focus', props.testID); onFocus?.(event); }}
       onBlur={(event) => { setFocused(false); setPressed(false); onBlur?.(event); }}
       style={[style, pressed && !blocked ? { backgroundColor: surfaceKind === 'primary' ? colors.PRIMARY : colors.SURFACE_FOCUSED } : null, study ? styles.study : null, study && focused && !blocked ? { borderColor: surfaceKind === 'primary' ? COASTAL_PRIMARY_FOCUS : colors.FOCUS_RING } : null]}>
-      {study ? <CalmControlSurface kind={surfaceKind} focused={focused} pressed={pressed && !blocked} disabled={!!blocked} selected={!!(props.accessibilityState?.selected || props.accessibilityState?.checked === true)} /> : null}
+      {study ? <CalmControlSurface cornerRadius={typeof cornerRadius === 'number' ? cornerRadius : undefined} kind={surfaceKind} focused={focused} pressed={pressed && !blocked} disabled={!!blocked} selected={!!(props.accessibilityState?.selected || props.accessibilityState?.checked === true)} /> : null}
       {children}
     </TouchableOpacity>;
   },

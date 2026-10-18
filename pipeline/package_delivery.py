@@ -30,8 +30,9 @@ class DeliveryError(PipelineError):
     pass
 
 
-def approvals() -> list[dict]:
-    path = APP / "config/approved-prepared-libraries.json"
+def approvals(app: Path | None = None) -> list[dict]:
+    app = APP if app is None else app
+    path = _file(app / "config/approved-prepared-libraries.json", app)
     if path.stat().st_size > 65536:
         raise DeliveryError("The exact-approval registry is too large.")
     value = json.loads(path.read_text())

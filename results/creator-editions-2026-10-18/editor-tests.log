@@ -1,0 +1,16 @@
+✔ exports exact fractional identity and explicitly labeled authored fixture (2.313208ms)
+✔ short cover (0.500916ms)
+✔ out of bounds (0.345541ms)
+✔ invalid hash (1.575167ms)
+✔ markup (0.532ms)
+✔ too long (0.340083ms)
+✔ reading budget (0.429833ms)
+✔ authorship must be confirmed; no stale draft on failure (0.532792ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 118.969

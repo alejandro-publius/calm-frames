@@ -19,7 +19,8 @@ export const CONTROL_MATERIAL = {
 export const COASTAL_MATERIAL = CONTROL_MATERIAL;
 
 /** All paint stays inside the existing target. No blur, elevation, motion or external shadow. */
-export function CalmControlSurface({ kind, focused, pressed, disabled, selected }: {
+export function CalmControlSurface({ kind, focused, pressed, disabled, selected, cornerRadius }: {
+  cornerRadius?: number;
   kind: ControlSurfaceKind; focused: boolean; pressed: boolean; disabled: boolean; selected: boolean;
 }) {
   const coastal = React.useContext(CoastalAppearance);
@@ -30,10 +31,13 @@ export function CalmControlSurface({ kind, focused, pressed, disabled, selected 
   const colors = disabled ? material.disabled : primary
     ? (pressed ? material.primaryPressed : material.primary)
     : pressed ? material.secondaryPressed : selected ? material.selected : material.secondary;
-  return <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={[styles.paint, coastal && primary ? { borderRadius: scale(58) } : null]}>
+  const corners = cornerRadius === undefined
+    ? coastal && primary ? { borderRadius: scale(58) } : null
+    : { borderRadius: Math.max(0, cornerRadius - scale(6)) };
+  return <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={[styles.paint, corners]}>
     <View style={[styles.depth, disabled || kind === 'tertiary' ? styles.noDepth : null]} />
-    <View style={[styles.foot, coastal && primary ? { borderRadius: scale(58) } : null, primary ? styles.primaryFoot : null]} />
-    <View style={[styles.face, coastal && primary ? { borderRadius: scale(58) } : null, primary || focused ? styles.darkContour : disabled ? styles.disabledContour : null, { top: scale(pressed ? 2 : 0), bottom: scale(pressed || disabled || kind === 'tertiary' ? 2 : 5) }]}>
+    <View style={[styles.foot, corners, primary ? styles.primaryFoot : null]} />
+    <View style={[styles.face, corners, primary || focused ? styles.darkContour : disabled ? styles.disabledContour : null, { top: scale(pressed ? 2 : 0), bottom: scale(pressed || disabled || kind === 'tertiary' ? 2 : 5) }]}>
       <LinearGradient colors={[...colors]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.gradient} />
       {!disabled && !pressed ? <View style={[styles.highlight, primary ? styles.primaryHighlight : null]} /> : null}
       {selected ? <View style={[styles.selectedEdge, disabled ? styles.disabledSelection : null]} /> : null}

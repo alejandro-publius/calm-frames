@@ -1,9 +1,11 @@
 import '@testing-library/jest-native/extend-expect';
-import { fireEvent, render } from '@testing-library/react-native';
+import { act, fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { COASTAL_COLORS as CALM_COLORS } from '../../src/calmframes/calmStyles';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
+import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import { checkTitle } from '../../src/calmframes/titleStatus';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
 import { emptyPinGate, setPin } from '../../src/calmframes/parentGate';
 import { newFamily } from '../../src/calmframes/profiles';
@@ -40,4 +42,22 @@ describe('parent header navigation', () => {
     expect(onSettingsChange).not.toHaveBeenCalled();
     expect(view.getByTestId('parent-area-back').props.accessibilityState).toEqual({ disabled: saving });
   });
+  it('keeps the editor behind the PIN and returns focus to its exact opener', async () => {
+    const title = packagedLibrary.consumerTitles(DEFAULT_SETTINGS)[0];
+    const entry = checkTitle(title, { settings: DEFAULT_SETTINGS, nowMs: Date.now(),
+      publicKeyBase64: packagedLibrary.publicKeyFor(title, DEFAULT_SETTINGS) ?? '' });
+    const view = render(<ParentAreaScreen gate={setPin(emptyPinGate(), '1357', 'test-fixture', 4)}
+      onGateChange={jest.fn()} settings={DEFAULT_SETTINGS} onSettingsChange={jest.fn()}
+      log={emptyHideLog()} titles={[entry]} onBack={jest.fn()} />);
+    const opener = `parent-area-extra-${title.id}`;
+    expect(view.queryByTestId(opener)).toBeNull();
+    for (const digit of '1357') fireEvent.press(view.getByTestId(`parent-area-key-${digit}`));
+    fireEvent.press(view.getByTestId(opener));
+    await act(async () => { await Promise.resolve(); });
+    expect(view.getByTestId('personal-covers')).toBeTruthy();
+    fireEvent.press(view.getByTestId('extra-back'));
+    expect(view.getByTestId(opener).props.hasTVPreferredFocus).toBe(true);
+    expect(view.getByTestId('parent-area-back-top').props.hasTVPreferredFocus).toBe(false);
+  });
+
 });

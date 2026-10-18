@@ -1,5 +1,16 @@
 # Final handoff: the integration candidate
 
+## Creator editions feature branch, October 18, 2026
+
+The isolated branch `codex/creator-editions-2026-10-18` adds checked edition import,
+PIN-protected local additive picture covers, and optional checksum-bound authored
+scene bridge presentation. Current Home design and base media/maps are unchanged.
+Acadia remains the only consumer-approved title. Harbor is staged for exact approval;
+no bridge prose is registered. See [workflow and owner steps](docs/CREATOR_EDITIONS.md)
+and `results/creator-editions-2026-10-18/`. Native results are recorded separately from
+headless tests; no capture or visual/audio acceptance is claimed.
+
+
 ## Final wording and submission reconciliation, October 18, 2026
 
 Installed source `9cc57ca` clarifies prepared videos only and the absence of medical

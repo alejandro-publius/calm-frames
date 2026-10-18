@@ -1,0 +1,18 @@
+✔ the actual package declares installable source entry points and peers (1.753375ms)
+✔ the included Apache licence matches the repository licence (0.831417ms)
+✔ every essential public value and type is exported (8.547333ms)
+✔ a packed entry and every engine dependency are mandatory (2.947875ms)
+✔ keys, media, fixtures, app files and development tools cannot enter the tarball (0.974334ms)
+✔ source entries cannot silently resolve somewhere outside the packed package (0.286458ms)
+✔ a missing runtime peer cannot be hidden by the monorepo (0.265875ms)
+✔ the reused real peers satisfy every declared package range (17.838166ms)
+✔ relative dependency checks reject missing and escaping source paths (9.8205ms)
+✔ consumer entry must be installed source rather than the repository copy (0.447875ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 296.630834

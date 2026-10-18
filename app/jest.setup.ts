@@ -1,3 +1,7 @@
+jest.mock('@react-native-async-storage/async-storage', () =>
+  require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
+);
+
 // jest.setup.js or setupTests.js
 
 import { configure } from '@testing-library/react-native';

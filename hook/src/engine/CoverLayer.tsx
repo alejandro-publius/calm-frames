@@ -18,8 +18,9 @@
  */
 
 import React from 'react';
-import { Image, StyleSheet, View, ImageSourcePropType } from 'react-native';
+import { Image, StyleSheet, Text, View, ImageSourcePropType } from 'react-native';
 import { trace } from './trace';
+import { CALM_COLORS, CALM_TEXT, scale } from './calmStyles';
 
 export interface ReferencePatch {
   /** Distance from the left edge of the screen, in pixels. */
@@ -32,6 +33,10 @@ export interface ReferencePatch {
 
 export interface CoverLayerProps {
   visible: boolean;
+  /** Static opaque presentation for a scheduled cover with no signed still. */
+  calmFallback?: boolean;
+  /** Checked creator text for the current immutable base cover; never a new schedule. */
+  sceneBridge?: { text: string; label: 'Creator note' | 'Scene bridge test' };
   /**
    * Opaque hides the picture completely. Dim is only ever allowed for general
    * (non-red) segments at 90% or darker, and the pipeline's verify step has to
@@ -55,6 +60,8 @@ export const COVER_Z_INDEX = 1;
 
 const CoverLayer = ({
   visible,
+  calmFallback = false,
+  sceneBridge,
   mode = 'opaque',
   dimOpacity = 0.9,
   imageUri,
@@ -69,7 +76,14 @@ const CoverLayer = ({
   }
 
   const opacity = mode === 'dim' ? Math.max(0.9, dimOpacity) : 1;
+  const showFallback = calmFallback && mode === 'opaque' && !imageUri && !referencePatch;
   const coverOpacity = imageUri ? 1 : opacity;
+  const bridge = showFallback && sceneBridge &&
+    (sceneBridge.label === 'Creator note' || sceneBridge.label === 'Scene bridge test') &&
+    typeof sceneBridge.text === 'string' && sceneBridge.text.length > 0 && sceneBridge.text.length <= 120 &&
+    sceneBridge.text === sceneBridge.text.trim() && sceneBridge.text.split(/\s+/u).length <= 20 &&
+    !/[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u2028-\u202e\u2060-\u206f<>]/u.test(sceneBridge.text)
+    ? sceneBridge : undefined;
 
   if (
     !referencePatch ||
@@ -81,7 +95,12 @@ const CoverLayer = ({
         testID={testID}
         accessibilityElementsHidden
         importantForAccessibility="no-hide-descendants"
-        style={[styles.fill, { opacity: coverOpacity }]}>
+        style={[styles.fill, showFallback ? styles.calmFill : null, { opacity: coverOpacity }]} pointerEvents="none">
+        {showFallback ? <View testID={`${testID}-fallback`} style={styles.message}>
+          <Text style={styles.messageTitle}>{bridge ? bridge.label : 'This scene is covered'}</Text>
+          {bridge ? <Text testID={`${testID}-bridge`} style={styles.bridgeText}>{bridge.text}</Text> : null}
+          <Text style={styles.messageDetail}>You can wait or choose Skip.</Text>
+        </View> : null}
         {imageUri && !referencePatch ? (
           <SceneStill
             key={imageUri}
@@ -195,6 +214,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
     zIndex: COVER_Z_INDEX,
   },
+  calmFill: { backgroundColor: CALM_COLORS.SURFACE },
+  // Above the caption band and separate from the bottom-left Skip control.
+  message: { position: 'absolute', top: scale(360), left: scale(96), right: scale(96), alignItems: 'center' },
+  messageTitle: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT, textAlign: 'center' },
+  bridgeText: { ...CALM_TEXT.control, color: CALM_COLORS.TEXT, textAlign: 'center', maxWidth: scale(1000), marginTop: scale(16) },
+  messageDetail: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'center', marginTop: scale(12) },
   piece: {
     position: 'absolute',
     backgroundColor: '#000000',

@@ -400,3 +400,40 @@ def test_package_proposal_exposes_only_verified_public_identity(signed_package):
     assert result["title"] == manifest["titles"][0]["title"]
     assert result["duration_ms"] == manifest["titles"][0]["durationMs"]
     assert result["playable_in_current_tv_app"] is False
+
+
+def test_delivery_plan_requires_staged_review(store):
+    _, job = ready(store)
+    with pytest.raises(intake.IntakeError, match="Stage a verified"):
+        store.action(job["id"], "plan-delivery")
+
+
+def test_delivery_plan_is_read_only_and_clears_stale_result(store, monkeypatch):
+    from pipeline import edition_delivery
+
+    path, job = ready(store)
+    intake.update(path, status="package_review", delivery={"ticket_id": "a" * 32})
+    result = {"state": "blocked", "can_watch": False, "files_to_add": []}
+    monkeypatch.setattr(edition_delivery, "plan_delivery", lambda root, ticket, app: result.copy())
+    planned = store.action(job["id"], "plan-delivery")
+    assert planned["delivery_plan"]["state"] == "blocked"
+    assert planned["delivery_plan"]["staging_root"] == str(path / "delivery-reviews")
+    assert planned["playable"] is False
+
+    def invalid(*_):
+        raise PipelineError("changed package")
+
+    monkeypatch.setattr(edition_delivery, "plan_delivery", invalid)
+    with pytest.raises(PipelineError):
+        store.action(job["id"], "plan-delivery")
+    assert intake.read_job(path)["delivery_plan"] is None
+
+
+def test_cancel_and_retry_discard_delivery_plan(store):
+    path, job = ready(store)
+    intake.update(path, delivery_plan={"state": "ready_to_apply"})
+    store.action(job["id"], "cancel")
+    assert intake.read_job(path)["delivery_plan"] is None
+    intake.update(path, delivery_plan={"state": "ready_to_apply"})
+    store.action(job["id"], "retry")
+    assert intake.read_job(path)["delivery_plan"] is None
