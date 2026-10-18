@@ -2,6 +2,13 @@
 
 Calm Frames is open in the existing Vega VirtualDevice. Start on **Home, Acadia selected, Watch focused**. No recording was made. These directions follow the observed installed layout; the owner was not presumed to have watched the live run.
 
+## Direct route to Sea Otters
+
+From **Home, Acadia selected, Watch focused**: **Up, Right, Select** opens
+Sea Otters Details with Watch focused; **Select** starts playback. Thus the full
+sequence is **Up, Right, Select, Select**. From playback, **Back, Back, Left, Down, Left**
+restores Home Acadia Watch. This exact sequence was rechecked without rebuilding.
+
 ## A three-minute tour
 
 1. Press **Up, Select**. The Acadia destination opens Details with Watch focused.

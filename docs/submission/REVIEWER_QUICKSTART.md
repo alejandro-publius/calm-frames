@@ -17,23 +17,18 @@ Section 3 (the
 device build and install) and section 4 (the demo) were not run from this
 file; the receipts they name record where they were run.
 
-Updated October 17, 2026, Pacific time, for the installed build: app source
-`9cc57ca04077611c9bf535ce5083b23c83c7bb4a` on `claude/tv-experience-2026-10-16`
-([final clarity record](../../results/final-clarity-2026-10-18/README.md)). Its
-consumer catalog holds Acadia only. The header, the test summary in section 2,
-the package in section 3 and the walkthrough in section 4 describe that build;
-the commands were not rerun for this update. The canonical
-[checklist](FINAL_REQUIREMENTS_CHECKLIST.md) and
-[demo script](DEMO_RUN_OF_SHOW.md) are current. Final judged release selection
-remains open.
+Updated October 18, 2026 for installed source `6f2570d` on the coastal-world
+working branch. The private GitHub handoff targets `codex/creator-editions-2026-10-18`.
+[Current build and native evidence](../../results/sea-otters-flow-2026-10-18/README.md).
+The fresh-checkout timings above remain historical; no new clean-room install is claimed.
 
 ## Current candidate, October 18
 
-The private branch `codex/creator-editions-2026-10-18` now contains pushed commit
-`a11587e6004b69d69723d6564cf9ba60e08ca728`. The installed app source is `50bc01f`
-([native receipt](../../results/scene-bridge-native-2026-10-18/README.md)). The local
-setup/persistence follow-up described below is awaiting review and another push;
-it is not installed. Historical timings above remain historical.
+The installed app source is `6f2570da4165acc752882a0c04ffe996cd072880`.
+The private handoff branch includes that source plus documentation and evidence;
+use the final remote commit in the handoff receipt. The installed package and
+current test scope are recorded in [the coastal-world evidence](../../results/sea-otters-flow-2026-10-18/README.md).
+No clean-room rerun of the historical timings above is claimed.
 
 After repository access is granted, start with the explicit working branch:
 
@@ -88,15 +83,13 @@ cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx je
 ```
 
 `npm ci --ignore-scripts` skips the Shaka build, which the tests mock; a device
-package needs the full `npm install` with the JDK. Unverified here. The most
-recent recorded focused passes are the delivery integration at `6125459`, with
-<!--n results/package-delivery-2026-10-18/receipt.json:python_tests -->55<!--/n--> Python, <!--n results/package-delivery-2026-10-18/receipt.json:node_tests -->32<!--/n--> Node and
-<!--n results/package-delivery-2026-10-18/receipt.json:app_tests -->59<!--/n--> app tests
-([receipt](../../results/package-delivery-2026-10-18/receipt.json)), and the
-wording pass at `9cc57ca`, with <!--n results/final-clarity-2026-10-18/verification.json:tests_passed -->43<!--/n--> tests in
-<!--n results/final-clarity-2026-10-18/verification.json:test_suites -->4<!--/n--> suites
-([record](../../results/final-clarity-2026-10-18/verification.json)). They are
-focused suites, not the full suite. The older figures that follow are dated. On the October 14 candidate, the bounded reliability pass recorded 88 tests passing
+package needs the player setup below with the JDK. The latest installed source
+passed 534 focused app tests across 38 suites and 11 attribution tests, plus
+TypeScript, lint with zero errors, native-input and media delivery checks.
+[The validation summary](../../results/sea-otters-flow-2026-10-18/validation-summary.json)
+records the exact scope. An initial unrestricted Jest run exhausted its heap;
+a duplicate surface callback was then fixed and the final bounded suites passed.
+This is not a current full-suite pass. The older figures that follow are dated. On the October 14 candidate, the bounded reliability pass recorded 88 tests passing
 across 8 suites with typecheck and focused lint
 ([`results/core-reliability-2026-10-14.json`](../../results/core-reliability-2026-10-14.json)),
 and the release helper's 39 tests passing
@@ -123,21 +116,19 @@ cd ..
 bash scripts/release.sh --arch aarch64 --build-type Debug --tag reviewer-$(date +%Y%m%d)
 ```
 
-The two named setup/preflight scripts are in the local follow-up; use them only
-after that reviewed delta reaches the branch. On the current pushed `a11587e`,
-the equivalent runtime setup is `(cd shaka-setup && bash build.sh && bash copyOutputs.sh)`.
-`npm ci --ignore-scripts` alone is sufficient for headless checks but cannot build
-a native package: it deliberately leaves Shaka and its polyfills absent. Do not
-copy another checkout's `node_modules` or reset shared Watchman caches. The follow-up
-Metro configuration uses its own cache and does not depend on Watchman.
+The setup and preflight scripts are present in this handoff. The player setup
+builds Shaka and copies its generated runtime and polyfills. `npm ci --ignore-scripts`
+alone is sufficient for headless checks but cannot build a native package.
+Do not copy another checkout's `node_modules` or reset shared Watchman caches.
+Metro uses a checkout-specific cache and does not depend on Watchman.
 
 `scripts/release.sh` builds one architecture, checks the library and package,
 and writes a local package, hashes and preparation receipt. It never publishes.
 Use Python 3.12 through `RELEASE_PYTHON` or `.venv/bin/python`. Do not pass a PIN.
 The current built package is
-`build/release/scene-bridge-native-2026-10-18/calm-frames-bridge-fixture-aarch64-debug.vpkg`,
-SHA-256 `44322944fc3fee3b353e5b20f12133a89273773ce57c742cbac10abdb6187bbd`, from
-source `50bc01f`. See its [build and install record](../../results/scene-bridge-native-2026-10-18/README.md).
+`build/release/sea-otters-flow-2026-10-18/calm-frames-coastal-world-aarch64-debug.vpkg`,
+SHA-256 `8311d90bc34db2efaae77a8a5eda144d7d45cc3989035558860c1b4604e3e63b`, from
+source `6f2570d`. See its [build and install record](../../results/sea-otters-flow-2026-10-18/README.md).
 It is already installed on the owner's simulator; do not reinstall it merely
 for owner acceptance. The commands below are for a separately authorized
 reviewer installation. Preserve concurrent checkouts and the SDK app link.
@@ -186,37 +177,28 @@ some under load, so a missing line proves nothing.
 
 ## 4. The current demo sequence
 
-The timed, canonical version is [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md).
-On the installed build:
+Use [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md) and the
+[exact owner keys](../../results/sea-otters-flow-2026-10-18/OWNER_WALKTHROUGH.md).
+Preserve an existing household; no PIN entry or reset is part of this walkthrough.
 
-1. Preserve an existing household. On a fresh reviewer install,
-   the reviewer chooses their own PIN. There is no preset PIN to disclose.
-2. Home features Acadia, the only title in the approved consumer catalog,
-   with Watch focused and Details beside it. How it works and Parents sit in
-   the header.
-3. Details shows the covered sections bar for the household's preset. More
-   info says Calm Frames works only with prepared videos in this app and that
-   the prototype has not been medically validated, then gives the approved
-   safety sentence.
-4. Watch plays the prepared Acadia copy. Its first five seconds are
-   near-black in the content. Before each flagged scene a lower-left notice
-   says "Scene ahead", then "Scene hidden" with Skip, while an opaque panel
-   covers the picture and the sound continues.
-5. Skip and the seek bar move through the guarded seek. Back returns to the
-   screen that started playback, with Watch focused. The natural end returns
-   to Home with Watch focused.
-6. Parents cancellation returns focus to Parents. Do not enter wrong PINs,
-   change settings or reset a household merely to perform this walkthrough.
+From Home with Acadia selected and Watch focused:
 
-Native evidence is dated by build. The installed `9cc57ca` checked the
-explanation routes and Parents cancellation. `6125459` checked Home, Details,
-Watch, Back and the natural end. The cover, pause and Skip checks come from
-`3fab999` on October 17 and were not repeated. Looking and listening remain
-owner acceptance, and the intermittent simulator slowdown is unresolved. The
-local review page on the Mac is separate from the TV: staging a review there
-does not install a title or enable Watch.
+1. **Up, Right, Select** opens Sea Otters Details with Watch focused.
+2. **Select** starts the exact NOAA Fisheries ocean excerpt: 19.987 seconds, silent,
+   plays once. End/Back returns to Details Watch; Back returns to the selected destination.
+3. **Left, Down, Left** reaches Home Acadia Watch. Select plays approved Acadia.
+   Under the current extra-cautious profile the two replacement intervals are
+   7.343 to 12.699 seconds and 28.113 to 31.593 seconds. The rendition has approved
+   baked ocean replacements and retained original audio, plus an independent opaque fallback.
+4. **Play/Pause** toggles playback; **Down** reveals hidden controls. Select on focused
+   Skip requests protection before seeking. End/Back restores the launching screen.
+5. Details shows covered sections; More info contains source credits and limits.
+   Parents cancellation restores focus to Parents without entering a PIN.
 
-No screenshot or recording is authorized by these steps.
+Current native text logs cover these core behaviors on `6f2570d`. They do not certify
+pixels, audio, VoiceView or physical Fire TV behavior. Loading/error recovery is
+controlled-test evidence. The legacy WCAG-only playback check is unavailable under
+extra-cautious; do not change settings to expose it. No screenshot or recording is authorized.
 
 ## 4a. A browser preview, without a device
 

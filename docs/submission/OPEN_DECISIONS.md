@@ -1,7 +1,7 @@
 # Open decisions and blockers
 
-Updated October 17, 2026, Pacific time, for installed source `9cc57ca` on
-`claude/tv-experience-2026-10-16`. The canonical lists are
+Product status updated October 18, 2026 for installed source `6f2570d`.
+Rule-source dates remain those recorded in the canonical checklist. The canonical lists are
 [FINAL_REQUIREMENTS_CHECKLIST.md](FINAL_REQUIREMENTS_CHECKLIST.md), which maps
 each mandatory rule to evidence, and [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md)
 for the video. This page keeps the decisions only the owner can make, and the
@@ -11,8 +11,9 @@ limits that bear on them.
 
 ### 1. Accept the installed build by eye and ear
 
-Home, Details, the explanation screens, the cover near 7.3 s and 28.1 s, the
-corner notice and sound through covers. Text logs cannot approve layout or
+The coastal map, both destination/Details flows, Acadia ocean replacements near
+7.3 s and 28.1 s, compact Skip, retained Acadia audio and the intentionally silent
+19.987-second NOAA sea-otter excerpt. Text logs cannot approve layout or
 sound, and every native record says visual and audio acceptance is pending.
 
 ### 2. Clear the footage question, then authorize the recording
@@ -25,9 +26,9 @@ or authorized.
 
 Either public, with the Apache-2.0 licence visible, which leaves the Amazon
 sample notice question in item 7 open; or private, with the six Amazon
-reviewers and the Devpost testing account invited. The demonstrated build is
-on the private `codex/creator-editions-2026-10-18` branch at `a11587e`. The later
-local fixes await review before another push.
+reviewers and the Devpost testing account invited. The authorized handoff updates the existing private
+`codex/creator-editions-2026-10-18` branch; the final remote commit is recorded in
+`results/github-coastal-handoff-2026-10-18/`. No invitations or access changes are included.
 
 ### 4. Register and complete the form
 
@@ -39,15 +40,15 @@ unverified. The drafts are [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) and
 
 - The intermittent simulator slowdown is unresolved. Later runs were healthy
   and no fix is claimed, so a take can still be spoiled by it.
-- Cover, pause and Skip were last observed natively on `3fab999`. Later builds
-  rechecked navigation, playback start and the end return.
+- Source `6f2570d` rechecked both Acadia replacement intervals, pause/resume, protected
+  Skip, both real video identities, controls and return focus using native text logs.
 - Prairie Creek and Redwood is an unapproved review example, frozen outside the
   consumer catalog. Staging records approval state only; it never installs a
   title or enables Watch.
-- The style and attribution check failures have been fixed locally, with the
-  existing approval tuple unchanged and review-source credits regenerated. The
-  local setup/persistence fixes are tested but not pushed or installed. See
-  `results/release-blockers-2026-10-18/README.md` for the remaining verification scope.
+- The earlier setup/persistence and style/attribution fixes are included in the installed
+  source. 534 focused app tests and 11 attribution tests pass. The current debug package
+  is not a final release package. The WCAG-only legacy playback diagnostic remains
+  unavailable under extra-cautious; its gate was not relaxed.
 - Detection can miss flashing, and the prototype has not been medically
   validated. Independent detector assessment remains open. Physical TV acceptance
   is outside this simulator-only submission; unit tests establish neither.

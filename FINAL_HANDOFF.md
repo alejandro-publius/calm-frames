@@ -1,5 +1,21 @@
 # Final handoff: the integration candidate
 
+## Private coastal-world handoff, October 18, 2026
+
+The owner authorized transferring validated work to the existing private branch
+`codex/creator-editions-2026-10-18`. The outgoing base was `59f2383`; it is an
+ancestor of this work. The installed app remains source `6f2570d`, package
+`8311d90bc34db2efaae77a8a5eda144d7d45cc3989035558860c1b4604e3e63b`.
+Submission documents now describe the two destinations and current native evidence.
+See [handoff checks and remaining owner steps](results/github-coastal-handoff-2026-10-18/README.md).
+Use the final GitHub remote commit reported with delivery to verify the transfer.
+
+A route-only native check confirmed **Up, Right, Select, Select** from Home,
+Acadia Watch, starts the exact Sea Otters clip. **Back, Back, Left, Down, Left**
+returns to Home, Acadia Watch. The app stays open there; no reinstall, capture,
+PIN entry, public release, repository-access change or main merge was performed.
+
+
 ## Coastal world and real sea otters installed, October 18, 2026
 
 Latest installed source is `6f2570da4165acc752882a0c04ffe996cd072880`, on isolated

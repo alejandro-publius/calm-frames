@@ -1,15 +1,16 @@
 # The submission packet
 
-Updated October 17, 2026, Pacific time, for installed app source `9cc57ca` on
-`claude/tv-experience-2026-10-16`
-([final clarity record](../../results/final-clarity-2026-10-18/README.md)).
-Nothing in this packet has been submitted, recorded or published.
+Updated October 18, 2026 for installed app source `6f2570d` and the coastal-world
+handoff on private branch `codex/creator-editions-2026-10-18`.
+[Build, native evidence and limits](../../results/sea-otters-flow-2026-10-18/README.md).
+The installed menu has Acadia and the 19.987-second silent NOAA sea-otter clip.
+Nothing in this packet has been submitted, recorded or publicly published.
 
 | File | Purpose |
 |---|---|
 | [FINAL_REQUIREMENTS_CHECKLIST.md](FINAL_REQUIREMENTS_CHECKLIST.md) | The canonical checklist: every mandatory rule, read live on October 17, mapped to evidence and marked done, missing or unverified |
 | [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) | The project description and product feedback, for owner review |
-| [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md) | The canonical demo script, about 90 seconds; not permission to record |
+| [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md) | The canonical demo script, about two minutes; not permission to record |
 | [REVIEWER_QUICKSTART.md](REVIEWER_QUICKSTART.md) | Setup and the current walkthrough for a judge |
 | [OPEN_DECISIONS.md](OPEN_DECISIONS.md) | The decisions only the owner can make |
 

@@ -1,8 +1,8 @@
 # Devpost description, draft
 
-Draft for the owner, updated on October 17, 2026, in the evening, Pacific time. It describes
-installed app source `9cc57ca` on branch `claude/tv-experience-2026-10-16`, the local review
-and staging tool, and the unapproved Prairie Creek and Redwood proposal from `076247a`. Not
+Draft for the owner, updated October 18, 2026. It describes installed source
+`6f2570d`, the original coastal world, approved Acadia and NOAA Sea Otters,
+the local review/staging tool and the unapproved Prairie Creek and Redwood example. Not
 submitted. Check the live form's fields first
 ([checklist](FINAL_REQUIREMENTS_CHECKLIST.md), section 11). Every measured number below is
 tied to a results file and checked by `eval/readme_sync.py`. Bracketed notes are for the
@@ -28,13 +28,15 @@ will be covered.
 
 Installed and running on the Vega Virtual Device.
 
-- **One prepared video.** Home features Acadia, a public domain National Park Service clip
-  and the only title in the app's approved catalog, with Watch and Details.
-- **Know before you watch.** Details draws a bar of the sections that will be covered under
-  the household's setting, and says the sound continues.
-- **Covered, not cut.** A few seconds before a flagged scene, a small corner notice says
-  "Scene ahead", then "Scene hidden". During the scene an opaque panel covers the picture and
-  reads "This scene is covered. You can wait or choose Skip." The sound keeps playing.
+- **Two prepared destinations.** Home is a static coastal map with Acadia, a public-domain
+  National Park Service clip, and Sea Otters, a 19.987-second silent NOAA Fisheries ocean
+  excerpt that plays once. Focus selects a destination; Select opens Details with Watch focused.
+- **Know before you watch.** Details draws the covered sections for the household's setting;
+  source attribution and the audio explanation are in More info.
+- **Scenes replaced with protection retained.** Approved Acadia uses baked ocean footage
+  during flagged scenes, retains original audio in its rendition and keeps an independent
+  opaque fallback. Compact player wording and Skip describe the active presentation.
+  The approved sea-otter excerpt has no flagged intervals and no audio track.
 - **Skip is a choice.** Skip covers the picture first, moves past the scene, and uncovers
   only after the player confirms the new position. The seek bar uses the same guard.
 - **Fails closed.** If a map's signature or a title's identity does not match the app's
@@ -164,12 +166,12 @@ medical device.
   validation.
 - It works only with prepared videos inside Calm Frames, not other apps, streaming services,
   live TV or DRM content.
-- One video is on the TV today. A new one needs exact approval, its packaged files and
+- Two videos are on the TV today: Acadia and Sea Otters. A new one needs exact approval, its packaged files and
   reports, a regenerated catalog, and a build, install and device check.
 - Every native observation comes from the Vega Virtual Device, never a physical Fire TV.
-  Device logs show events, order and focus, not pixels or sound. Cover and Skip behaviour was
-  last observed on the October 17 build; later builds rechecked navigation, playback start
-  and the end return. The owner's look and listen acceptance is still pending.
+  Device logs show events, order and focus, not pixels or sound. The October 18 coastal-world
+  run checked both titles, Acadia ocean requests, pause fallback, protected Skip, controls,
+  natural end and Back. The owner's look and listen acceptance is still pending.
 - Playback on the virtual device sometimes slows, as described above, and the cause is
   unknown.
 - The Acadia clip opens on a few seconds of near-black footage. That is in the source video,

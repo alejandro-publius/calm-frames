@@ -1,15 +1,16 @@
 # Calm Frames
 
-Current state, October 18, 2026: installed app source `50bc01f`, whose
-consumer catalog holds only the owner-approved Acadia clip. See
-[FINAL_HANDOFF.md](FINAL_HANDOFF.md) and the
-[submission packet](docs/submission/README.md) for the canonical checklist,
-description and demo script. The screenshots and the family walkthrough below
-predate this build: Home now features Acadia, and the Harbor titles stay
-bundled for regression work, off the consumer shelf. Acadia's prepared files
-and reports are hash-bound. Independent detector validation remains pending,
-and the prototype has not been medically validated. The app uses
-pre-analysis, not live interception.
+Current state, October 18, 2026: installed app source `6f2570d`. The original
+static coastal world has two approved destinations: Acadia and Sea Otters.
+Sea Otters is a 19.987-second silent NOAA Fisheries ocean excerpt, played once.
+Acadia uses its approved baked ocean replacement during flagged intervals,
+with an independent opaque fallback. See [FINAL_HANDOFF.md](FINAL_HANDOFF.md),
+the [exact remote walkthrough](results/sea-otters-flow-2026-10-18/OWNER_WALKTHROUGH.md)
+and the [submission packet](docs/submission/README.md). Historical screenshots
+below predate this map and are not current native captures. Harbor remains
+bundled for regression work, off the consumer shelf. Independent detector
+validation and owner visual/audio acceptance remain pending. The prototype
+has not been medically validated and uses pre-analysis, not live interception.
 
 **A calmer way to watch**
 
@@ -29,25 +30,25 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 |---|
 | ![Browser render of the coastal Details for Harbor: the artwork, the title, 20 sec · No flashing found, Play with its triangle and the quiet Try picture holds entry beside it, the viewing settings and Back](results/coastal-renders-2026-10-14/details.png) |
 
-<sub>Browser renders of the app's own React Native trees with the bundled fonts and artwork, exported from commit 4016e8d ([render receipt](results/coastal-renders-2026-10-14/receipt.json)). They are review aids, not Vega screenshots; the native acceptance of this interface is in progress. The shelf holds two Harbors on purpose, one that plays straight through and one with two labelled practice holds, and the calm gradient is the playback test. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md).</sub>
+<sub>Browser renders of the app's own React Native trees with the bundled fonts and artwork, exported from commit 4016e8d ([render receipt](results/coastal-renders-2026-10-14/receipt.json)). They are review aids, not Vega screenshots; they describe the historical October 14 interface, not the installed coastal world. That historical shelf held two Harbors; the current consumer shelf has Acadia and Sea Otters. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md).</sub>
 
 ---
 
 ## What it is
 
-Calm Frames combines an offline video analyzer, a checked rendition pipeline and a Vega player for families affected by photosensitivity. Before playback, the pipeline analyzes the source, signs its flash map and verifies the prepared rendition. The player adds a scheduled cover and guarded seeks, with audio and captions intended to preserve the story; signed context images, a checked still from before the hide shown in place of black, ship today only on the labelled Harbor demo, and every prepared title uses the opaque cover. Parent settings can make the standard floor stricter and now persist locally. A reusable hook and analyzer provide adoption paths for other developers. Detection, delivery integrity and physical screen behavior have separate limits, recorded below; a signature is not proof that every hazard was detected.
+Calm Frames combines an offline video analyzer, a checked rendition pipeline and a Vega player for families affected by photosensitivity. Before playback, the pipeline analyzes the source, signs its flash map and verifies the prepared rendition. The player adds a scheduled cover and guarded seeks, with audio and captions intended to preserve the story; signed context images, a checked still from before the hide shown in place of black, ship today only on the labelled Harbor demo, and opaque protection remains independent of the approved baked ocean replacement used by current Acadia. Parent settings can make the standard floor stricter and now persist locally. A reusable hook and analyzer provide adoption paths for other developers. Detection, delivery integrity and physical screen behavior have separate limits, recorded below; a signature is not proof that every hazard was detected.
 
 Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
 
 ### What a family sees
 
-Coastal artwork, text sized for a couch and a visible ring on the focused remote control. Home features the approved Acadia video; playback uses dark controls over the picture.
+Coastal artwork, text sized for a couch and a visible ring on the focused remote control. Home presents Acadia and Sea Otters as destinations on a static coastal map; playback uses dark controls over the picture.
 
-- **Watch Acadia or view its analysis.** Home starts on Watch, with Details beside it. Details separates detected periods, the selected version's cover times and its file record. How it works and Parents stay in the header. Harbor remains outside the consumer catalog.
+- **Choose Acadia or Sea Otters.** Home starts on Acadia Watch, with Details beside it. Up reaches Acadia; Right selects Sea Otters; Select opens its Details with Watch focused. A further Select plays. Details shows the selected version's covered sections; More info contains attribution and limits. How it works and Parents stay in the header. Harbor remains outside the consumer catalog.
 - **A short setup, once.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
 - **A library of checked titles only.** A title plays only after its flash map is verified; one that has not verified shows Needs check and stays hidden.
 - **A steady scene notice and Skip.** The compact control stays in one place through a scheduled cover; pause and loading update its wording. An optional chime is controlled in Parents.
-- **Scheduled picture covers.** Prepared Acadia uses an opaque cover and a short explanation during its checked intervals while sound is intended to continue. No authored scene description is registered. Captions are available only when the title supplies them.
+- **Scheduled picture covers.** Prepared Acadia presents verified ocean footage during its checked intervals, with an independent opaque fallback and compact Skip control; original audio is retained in the rendition. Sea Otters is silent and has no flagged intervals. No authored scene description is registered. Captions are available only when the title supplies them.
 - **Settings behind the PIN.** Presets, the room, the chime, a profile per child (which can only be stricter than the household), and two opt-in effects, a gentle artwork entrance and quiet selection sounds, both Off unless a parent turns them on.
 - **What it keeps stays on the television.** The household record (the salted hash of the PIN, the profiles, presets, room and switches) is saved on the device, and the list of what was hidden lives in memory only, so it is gone after a restart. A release build sends nothing about the household anywhere: its only network request fetches a flash map when a catalog entry names a web address, and the bundled titles name none.
 - **Built for the remote and for screen readers.** The D-pad reaches every control, Back closes one level at a time, cards are announced, and reduced motion keeps the artwork still. VoiceView is covered by tests and still owes its check on the device.
@@ -74,7 +75,15 @@ The first prints `PASS`, the second writes one HTML page for the title that open
 
 ### Where things stand
 
-**Current candidate, reconciled Oct 15.** Package 5 is built from `4016e8d`, with the simplified Home and one-voice copy, and its [receipt](results/native-acceptance-5-2026-10-14/receipt.json) reports eight journeys on the Vega Virtual Device from the app's own log: cold launch, Home controls, Details and return focus, ordinary Harbor, the practice page and both holds with the still loading, How it works, the Parents PIN gate and relaunch. [Package 4's second pass](results/native-acceptance-4-2026-10-14/second-pass.json) separately reported pause and resume, the caption control and a cover-first remote seek; these were not repeated in package 5's receipt. No pixels or audio were observed on the current candidate; the parent settings interior, VoiceView and caption menu contents remain unchecked. [FINAL_HANDOFF.md](FINAL_HANDOFF.md) carries the exact package identity and the owner's eyes-and-ears checklist. Keep the existing household and have its owner enter the PIN privately. Recording still needs separate authorization, and the judged release and reviewer access remain to be selected.
+**Current candidate, October 18.** Source `6f2570d` was built and installed once.
+534 focused app tests and 11 attribution tests pass. Native text logs cover both
+destinations, Details/More info, control hide/reveal, pause/resume, both Acadia
+replacement requests, guarded Skip, natural end/Back and Parents cancel focus.
+The app is left at Home with Acadia selected and Watch focused. See the
+[receipt and limits](results/sea-otters-flow-2026-10-18/README.md). Logs establish
+state and actions, not rendered pixels or audio. Physical Fire TV and VoiceView
+acceptance remain unverified; the current demo video, judge access and submission
+are still pending. No recording is authorized by these instructions.
 
 The dated checkpoints below are history; their pending work describes the state at that date.
 
@@ -708,7 +717,7 @@ The approved wording, everywhere, is: **reduces exposure to flashing above publi
 | Calm Frames, including `flashmap/`, `pipeline/` and `eval/` | Apache-2.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE) |
 | `app/`, derived from [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) at tag `v0.24-RN83` | MIT-0, see [app/LICENSE](app/LICENSE). The player wrapper and the Shaka archive it builds from carry Amazon's own proprietary notice beside that grant, kept as published; [docs/AMAZON_SAMPLE_LICENSE_REVIEW.md](docs/AMAZON_SAMPLE_LICENSE_REVIEW.md) says what was checked and what was asked |
 | App third-party dependencies | [app/LICENSE-THIRD-PARTY](app/LICENSE-THIRD-PARTY) |
-| Inter 4.001, the app's typeface | SIL Open Font License 1.1, see [app/assets/fonts/LICENSE-Inter](app/assets/fonts/LICENSE-Inter) |
+| Fraunces headings and Source Sans 3 controls; retained Inter 4.001 | SIL Open Font License 1.1: [Fraunces](app/assets/fonts/LICENSE-Fraunces), [Source Sans 3](app/assets/fonts/LICENSE-SourceSans3), [Inter](app/assets/fonts/LICENSE-Inter) |
 | Presentation artwork and animation plates | Ours, per file in [media/LICENSES.csv](media/LICENSES.csv): the cinematic Harbor and water plates are Apache-2.0; the earlier illustration and gradient are CC0-1.0. Playback stills are extracted and signed through the pipeline |
 | Our own videos: the Harbor film, its prepared renditions, and the calm gradient | Ours, per file in [media/LICENSES.csv](media/LICENSES.csv): the current cinematic Harbor is Apache-2.0; the historical geometric film and calm gradient are CC0-1.0 |
 | The sample's photographs under `app/src/assets/movie-content/` | [Pexels licence](https://www.pexels.com/license/), as the sample's own `app/README.md` states. Only the sample's own screens draw them; kid mode draws our artwork |
