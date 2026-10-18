@@ -5,8 +5,8 @@
 The isolated branch `codex/creator-editions-2026-10-18` adds checked edition import,
 PIN-protected local additive picture covers, and optional checksum-bound authored
 scene bridge presentation. Current Home design and base media/maps are unchanged.
-Acadia remains the only consumer-approved title. Harbor is staged for exact approval;
-no bridge prose is registered. See [workflow and owner steps](docs/CREATOR_EDITIONS.md)
+Acadia remains the only consumer-approved title. Harbor remains regression-only; its proposed consumer promotion and delivery review
+are withdrawn. No bridge prose is registered. See [workflow and owner steps](docs/CREATOR_EDITIONS.md)
 and `results/creator-editions-2026-10-18/`. Installed source is `ce3fae8`; 206 focused tests pass. One install, matching package
 hash and all 779 inputs; native Acadia/Back/end/Parents-cancel checks pass. The app
 is left Home Watch and the collector stopped. Three setup-only build failures

@@ -29,7 +29,8 @@ base coverage failed the monotonic-union test as intended.
 
 Acadia's already-approved delivery applied idempotently: no assets or approvals
 changed. Harbor's existing creator-controlled 20-second fixture passed strict staging,
-but remains pending exact consumer approval. This is fixture reuse, not new footage
+and was then canceled as a consumer candidate. The owner disliked Harbor and prefers
+real footage. This was fixture reuse for delivery validation, not new footage
 acquisition or fresh analysis. Prairie remains excluded.
 
 There were four build invocations: three failed before packaging due to the isolated
@@ -59,18 +60,28 @@ native use remains an owner check. No registered bridge was tested natively. Tho
 capabilities have headless tests, not native visual acceptance. No detector can
 promise seizure prevention; this prototype has not been medically validated.
 
-The exact Harbor tuple requiring approval before consumer registration is:
+Historical Harbor identity, retained only to identify the canceled staging regression.
+No approval is requested and no consumer registration is proposed:
 
 - Bundle: `51b91d7413c50cc020452d4594a493fbf78e6d1ebac40c8066753b76c776d101`
 - Catalog: `02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79`
 - Public-key fingerprint: `a3240e9daf33984511014cd7434803ab05a6e8816081f3f0ccfd94995208186b`
 
-No answer to the action-time approval request was received. The parent-message tool
-returned thread-not-found, so a local async question and this receipt carry the
-request. Lack of an answer was not treated as approval. The existing Acadia path
-was built without waiting on that optional title.
+The earlier approval request is withdrawn, and the staging ticket is canceled. Neither
+an unanswered question nor earlier signing authority grants new consumer trust.
+The original review JSON is historical; `harbor-canceled-review.json` is current.
 
-Minimum owner steps: unlock Parents to review/add/remove an Acadia extra cover and
-look/listen to the result; decide whether to approve the staged Harbor tuple; provide
-verified creator wording for a suitable long base cover if a real scene bridge is
-wanted. Publication and submission remain separate.
+Personal-cover native verification needs the owner to unlock Parents privately and
+leave that screen open. No PIN needs to be shared, reset or bypassed. Extra covers
+are household-wide, so a test profile does not isolate them; any test addition must
+be removed afterward while retaining all existing additions.
+
+There is no supported native scene-bridge fixture route in this build. The only
+runtime integration is the accepted prepared-player route with an empty compiled
+registry; fixtures exist in unit tests and the local editor. Native fixture testing
+would require a separate presentation-only test route and a new build. Acadia must
+not be assigned invented narrative or stretched cover boundaries to provide a test.
+
+The current local intake service was preserved; it was not restarted onto this code.
+The new plan control becomes available when the integrated checkout's intake is next
+served. Its CLI is runnable now. Publication and submission remain separate.

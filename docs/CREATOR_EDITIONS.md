@@ -34,8 +34,9 @@ quiescent isolated checkout; this is not a general transaction against other edi
 A successful import still needs the checked build/install and native review.
 
 Acadia exercises the already-approved path. The existing 20-second creator-controlled
-Harbor fixture is a separate staged candidate, not new acquisition or fresh analysis.
-Its consumer registration remains pending exact approval. Prairie remains excluded;
+Harbor fixture was used only for a staging regression, not new acquisition or fresh
+analysis. Its delivery review and approval request are withdrawn: the owner disliked
+that film and prefers real footage such as Acadia. It is not proposed consumer content. Prairie remains excluded;
 its high coverage is not worked around by weaker detector settings.
 
 ## Add personal covers
@@ -85,5 +86,5 @@ looked like or whether audio sounded correct. Native checks of Acadia do not est
 native use of the PIN-protected personal editor or an unregistered bridge fixture.
 
 The owner supplies suitable rights-cleared source media and verified scene wording,
-approves exact new tuples, and performs the final look/listen acceptance. The current
+approves any future exact new tuples, and performs the final look/listen acceptance. The current
 PIN stays private. Capture, publication and submission remain separate actions.

@@ -16,8 +16,9 @@
   "style_staged": "passed",
   "secrets_scan": "no leaks found",
   "production_approval_changed": false,
-  "harbor_consumer_approval": "pending",
+  "harbor_consumer_approval": "withdrawn; regression fixture only, owner prefers real footage",
   "registered_bridges": 0,
   "raw_build_and_native_logs": "/Users/alexvintera/Documents/Codex/2026-10-15/task/creator-editions-evidence",
-  "runtime_media_hash_note": "Package gate hashes rendition bytes; runtime authenticates maps and exact route identity rather than rehashing every MP4."
+  "runtime_media_hash_note": "Package gate hashes rendition bytes; runtime authenticates maps and exact route identity rather than rehashing every MP4.",
+  "native_fixture_route": "none in this build"
 }
