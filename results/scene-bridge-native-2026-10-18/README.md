@@ -57,3 +57,8 @@ the repository at `../scene-bridge-native/`; the filtered trace is retained here
 
 No capture, recording, content search, push, publication, service restart, PIN
 access, signing change or trust change occurred in this pass.
+
+The clean local working checkout `claude/tv-experience-2026-10-16` was
+fast-forwarded to `f02a299`; all 781 installed inputs match both checkouts.
+Main and remote refs are unchanged. Intake was not restarted because its code
+did not change. This receipt commit changes documentation only.
