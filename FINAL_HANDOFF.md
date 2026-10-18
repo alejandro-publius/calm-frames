@@ -7,8 +7,11 @@ PIN-protected local additive picture covers, and optional checksum-bound authore
 scene bridge presentation. Current Home design and base media/maps are unchanged.
 Acadia remains the only consumer-approved title. Harbor is staged for exact approval;
 no bridge prose is registered. See [workflow and owner steps](docs/CREATOR_EDITIONS.md)
-and `results/creator-editions-2026-10-18/`. Native results are recorded separately from
-headless tests; no capture or visual/audio acceptance is claimed.
+and `results/creator-editions-2026-10-18/`. Installed source is `ce3fae8`; 206 focused tests pass. One install, matching package
+hash and all 779 inputs; native Acadia/Back/end/Parents-cancel checks pass. The app
+is left Home Watch and the collector stopped. Three setup-only build failures
+preceded the successful build. Personal-editor and bridge native use remain unclaimed;
+see the evidence README. No capture or visual/audio acceptance is claimed.
 
 
 ## Final wording and submission reconciliation, October 18, 2026

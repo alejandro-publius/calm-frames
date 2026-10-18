@@ -1,16 +1,58 @@
-✔ exports exact fractional identity and explicitly labeled authored fixture (2.313208ms)
-✔ short cover (0.500916ms)
-✔ out of bounds (0.345541ms)
-✔ invalid hash (1.575167ms)
-✔ markup (0.532ms)
-✔ too long (0.340083ms)
-✔ reading budget (0.429833ms)
-✔ authorship must be confirmed; no stale draft on failure (0.532792ms)
-ℹ tests 8
-ℹ suites 0
-ℹ pass 8
-ℹ fail 0
-ℹ cancelled 0
-ℹ skipped 0
-ℹ todo 0
-ℹ duration_ms 118.969
+TAP version 13
+# Subtest: exports exact fractional identity and explicitly labeled authored fixture
+ok 1 - exports exact fractional identity and explicitly labeled authored fixture
+  ---
+  duration_ms: 3.408916
+  type: 'test'
+  ...
+# Subtest: short cover
+ok 2 - short cover
+  ---
+  duration_ms: 0.411458
+  type: 'test'
+  ...
+# Subtest: out of bounds
+ok 3 - out of bounds
+  ---
+  duration_ms: 0.271583
+  type: 'test'
+  ...
+# Subtest: invalid hash
+ok 4 - invalid hash
+  ---
+  duration_ms: 0.3255
+  type: 'test'
+  ...
+# Subtest: markup
+ok 5 - markup
+  ---
+  duration_ms: 0.274417
+  type: 'test'
+  ...
+# Subtest: too long
+ok 6 - too long
+  ---
+  duration_ms: 0.286916
+  type: 'test'
+  ...
+# Subtest: reading budget
+ok 7 - reading budget
+  ---
+  duration_ms: 0.326334
+  type: 'test'
+  ...
+# Subtest: authorship must be confirmed; no stale draft on failure
+ok 8 - authorship must be confirmed; no stale draft on failure
+  ---
+  duration_ms: 0.3895
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 90.283583
