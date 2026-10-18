@@ -1,0 +1,439 @@
+{
+  "source_commit": "805f855e60870eb018b3a6a2ab36e1f7d3e887dc",
+  "package_sha256": "8e58685d579a740743e5d6e89b0fa8bbcce42e7a6189b9c92265575ea0c1e511",
+  "approved_catalogs": [
+    {
+      "bundleId": "d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46",
+      "catalogSha256": "6b590929ffd622454803caf87354a653190dcb89afa12e906bbaaedfe0e9012d",
+      "publicKeyFingerprint": "98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407",
+      "consumer": true,
+      "label": "Acadia: approved ocean replacement",
+      "approvalReference": "Owner approval in thread 01a10d92-99ac-70a3-b473-29310ef6e002, 2026-10-18; results/ocean-native-2026-10-18/approval.json",
+      "package_asset_hashes": {
+        "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.json": {
+          "sha256": "d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1",
+          "matches": true
+        },
+        "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.mp4": {
+          "sha256": "0b641eb45f2f19dc7694fd0f36a7c85e758782932f11ede10566ac0c33639336",
+          "matches": true
+        },
+        "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.json": {
+          "sha256": "c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f",
+          "matches": true
+        },
+        "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4": {
+          "sha256": "42d2abbe6ddd2f0a592bc5a1407da945a1c73fc6febedc68895b9f5294608a14",
+          "matches": true
+        },
+        "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.json": {
+          "sha256": "709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a",
+          "matches": true
+        },
+        "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.mp4": {
+          "sha256": "0b641eb45f2f19dc7694fd0f36a7c85e758782932f11ede10566ac0c33639336",
+          "matches": true
+        }
+      }
+    },
+    {
+      "bundleId": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+      "catalogSha256": "6b3f250598791232009a8c2ddef81bab0411eebcaa201ff582e7313cd4e9e7fe",
+      "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+      "consumer": true,
+      "label": "Sea otters in Alaska: approved NOAA ocean excerpt",
+      "approvalReference": "Owner \"do it all\" after exact clip/install proposal, thread 01a10d92-99ac-70a3-b473-29310ef6e002; results/sea-otters-flow-2026-10-18/approval.json",
+      "package_asset_hashes": {
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/broadcast.json": {
+          "sha256": "db93b33422ca5d94154d0155803bd31916b94854c93033ba5f103622a1e397e4",
+          "matches": true
+        },
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/broadcast.mp4": {
+          "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f",
+          "matches": true
+        },
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/extra-cautious.json": {
+          "sha256": "4a901e6ded0962554f7fe2835b270f2b0b541185c4009cea367bc4de50538b03",
+          "matches": true
+        },
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/extra-cautious.mp4": {
+          "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f",
+          "matches": true
+        },
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/wcag.json": {
+          "sha256": "194f563555d4060b3e349d402a47bb387ce3930c0a69a2493d8d126d287effaf",
+          "matches": true
+        },
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/wcag.mp4": {
+          "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f",
+          "matches": true
+        }
+      }
+    },
+    {
+      "bundleId": "77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f",
+      "catalogSha256": "24d5cb114e3bcec0047158b7d2d3ac10bdb324cca0a51c61d78e70bd5256d732",
+      "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+      "consumer": true,
+      "label": "Forest creek at Redwood: approved NPS excerpt",
+      "approvalReference": "Owner exact Forest activation approval in thread 01a10d92-99ac-70a3-b473-29310ef6e002; results/forest-activation-2026-10-18/approval.json",
+      "package_asset_hashes": {
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/broadcast.json": {
+          "sha256": "867d353f2a047046d753771ecc10b4434370b8e47824b83c6929b153de6c0724",
+          "matches": true
+        },
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/broadcast.mp4": {
+          "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98",
+          "matches": true
+        },
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/extra-cautious.json": {
+          "sha256": "81e0ab880282189a7d1201fffa9b1aa0f243e491bd36fa24dc517829159da072",
+          "matches": true
+        },
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/extra-cautious.mp4": {
+          "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98",
+          "matches": true
+        },
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/wcag.json": {
+          "sha256": "66dce840677677712e9fef87e7e1f46a79287be6620b1ea31b3fca4305091e86",
+          "matches": true
+        },
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/wcag.mp4": {
+          "sha256": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98",
+          "matches": true
+        }
+      }
+    }
+  ],
+  "bundled_copy_strings": {
+    "Scenes replaced": true,
+    "Scenes covered": true,
+    "Ocean footage replaces flagged scenes.": true,
+    "You'll still hear the original audio.": true,
+    "Sea otters in Alaska": true,
+    "20 seconds": true,
+    "Choose an island": true,
+    "Scene replaced": true,
+    "player-scenes": true,
+    "player-scene-context": true,
+    "Forest creek at Redwood": true,
+    "coastal-boat-": true,
+    "Calm Frames hides flagged flashing scenes in prepared videos.": true,
+    "Acadia replaces them with ocean footage.": true,
+    "cannot guarantee seizure prevention": true
+  },
+  "details_strip_standalone_sound_continues_absent": true,
+  "phrase_remains_in_separate_technical_explanations": true,
+  "acadia_original_audio_and_timing": {
+    "broadcast": {
+      "audioPacketCount": 1765,
+      "audioPacketsSha256": "f1338c4a701d98dad4b78ae70a911b19e63d798f6debf951e193486bad91e21c",
+      "frameCount": 1804,
+      "frameTimesSha256": "a25e3ee9dffec03c112bdc2fe1e889a782bf20cf91480fea0be159cc6c0f77b4",
+      "sourceEqualsOutput": true,
+      "videoDurationRational": "1693879/45000"
+    },
+    "extra-cautious": {
+      "audioPacketCount": 1765,
+      "audioPacketsSha256": "f1338c4a701d98dad4b78ae70a911b19e63d798f6debf951e193486bad91e21c",
+      "frameCount": 1804,
+      "frameTimesSha256": "a25e3ee9dffec03c112bdc2fe1e889a782bf20cf91480fea0be159cc6c0f77b4",
+      "sourceEqualsOutput": true,
+      "videoDurationRational": "1693879/45000"
+    },
+    "wcag": {
+      "audioPacketCount": 1765,
+      "audioPacketsSha256": "f1338c4a701d98dad4b78ae70a911b19e63d798f6debf951e193486bad91e21c",
+      "frameCount": 1804,
+      "frameTimesSha256": "a25e3ee9dffec03c112bdc2fe1e889a782bf20cf91480fea0be159cc6c0f77b4",
+      "sourceEqualsOutput": true,
+      "videoDurationRational": "1693879/45000"
+    }
+  },
+  "otter_rendition_probes": {
+    "broadcast": {
+      "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f",
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "mime_codec_string": "avc1.64001f",
+            "width": 854,
+            "height": 480,
+            "coded_width": 864,
+            "coded_height": 480,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1280:1281",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 31,
+            "color_range": "tv",
+            "color_space": "bt709",
+            "color_transfer": "bt709",
+            "color_primaries": "bt709",
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 4,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "30000/1001",
+            "avg_frame_rate": "30000/1001",
+            "time_base": "1/30000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 599599,
+            "duration": "19.986633",
+            "bit_rate": "3889835",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "599",
+            "nb_read_frames": "599",
+            "extradata_size": 52,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "und",
+              "handler_name": "VideoHandler",
+              "encoder": "Lavc63.1.101 libx264"
+            }
+          }
+        ],
+        "format": {
+          "filename": "build/sea-otters-2026-10-18/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/broadcast.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "19.986633",
+          "size": "9722393",
+          "bit_rate": "3891558",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf63.1.101"
+          }
+        }
+      }
+    },
+    "extra-cautious": {
+      "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f",
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "mime_codec_string": "avc1.64001f",
+            "width": 854,
+            "height": 480,
+            "coded_width": 864,
+            "coded_height": 480,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1280:1281",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 31,
+            "color_range": "tv",
+            "color_space": "bt709",
+            "color_transfer": "bt709",
+            "color_primaries": "bt709",
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 4,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "30000/1001",
+            "avg_frame_rate": "30000/1001",
+            "time_base": "1/30000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 599599,
+            "duration": "19.986633",
+            "bit_rate": "3889835",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "599",
+            "nb_read_frames": "599",
+            "extradata_size": 52,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "und",
+              "handler_name": "VideoHandler",
+              "encoder": "Lavc63.1.101 libx264"
+            }
+          }
+        ],
+        "format": {
+          "filename": "build/sea-otters-2026-10-18/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/extra-cautious.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "19.986633",
+          "size": "9722393",
+          "bit_rate": "3891558",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf63.1.101"
+          }
+        }
+      }
+    },
+    "wcag": {
+      "sha256": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f",
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "mime_codec_string": "avc1.64001f",
+            "width": 854,
+            "height": 480,
+            "coded_width": 864,
+            "coded_height": 480,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1280:1281",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 31,
+            "color_range": "tv",
+            "color_space": "bt709",
+            "color_transfer": "bt709",
+            "color_primaries": "bt709",
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 4,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "30000/1001",
+            "avg_frame_rate": "30000/1001",
+            "time_base": "1/30000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 599599,
+            "duration": "19.986633",
+            "bit_rate": "3889835",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "599",
+            "nb_read_frames": "599",
+            "extradata_size": 52,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "und",
+              "handler_name": "VideoHandler",
+              "encoder": "Lavc63.1.101 libx264"
+            }
+          }
+        ],
+        "format": {
+          "filename": "build/sea-otters-2026-10-18/prepared-library/b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/wcag.mp4",
+          "nb_streams": 1,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "19.986633",
+          "size": "9722393",
+          "bit_rate": "3891558",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf63.1.101"
+          }
+        }
+      }
+    }
+  },
+  "forest_catalog_present_in_package_and_runtime": true,
+  "obsolete_generations_absent_from_package": true,
+  "native_pixels_observed": false,
+  "native_audio_observed": false,
+  "release_fixes_ancestor": "23a24c27a78b693ec2213cc5f65558d1796d525b"
+}

@@ -1,13 +1,18 @@
 # Final requirements checklist
 
+Current build note: one successful compile required a bounded recovery of stale
+media staging, then all package gates passed and one install completed. Current
+native checks cover all three full clips, Forest More info and How it works Back.
+No pixel/audio or owner acceptance is implied.
+
 The canonical submission checklist. Product/build facts reconciled October 18,
-2026 against installed source `1d14285`. The official rule pages below retain
+2026 against installed source `805f855`. The official rule pages below retain
 their October 17 review date; this pass does not claim to revalidate eligibility
 or submission policy. Nothing has been recorded or submitted.
 
-- **Installed build.** Source `1d142852beb4a0c0b5068d9f50864c2394554107`,
-  package SHA-256 `af2fcb0f8982773b044ec625fa1f7a3c50c34de33ae64bed9b5d829a6aba0712`.
-  [Current receipts](../../results/coastal-islands-2026-10-18/README.md).
+- **Installed build.** Source `805f855e60870eb018b3a6a2ab36e1f7d3e887dc`,
+  package SHA-256 `8e58685d579a740743e5d6e89b0fa8bbcce42e7a6189b9c92265575ea0c1e511`.
+  [Current receipts](../../results/forest-activation-2026-10-18/README.md).
 - **Applied here.** The corrections in
   [SUBMISSION_RECONCILIATION.md](../SUBMISSION_RECONCILIATION.md) and the code-checked
   facts in [ARCHITECTURE_FACTS.md](../ARCHITECTURE_FACTS.md).
@@ -20,13 +25,12 @@ or submission policy. Nothing has been recorded or submitted.
 The coastal-world source is installed and validated. The authorized private GitHub
 handoff targets existing branch `codex/creator-editions-2026-10-18`; its final remote
 identity is recorded in `results/github-coastal-handoff-2026-10-18/` after push.
-It includes the earlier setup/persistence fixes and the current two-destination menu.
-438 focused app tests and 11 attribution tests pass. Native logs cover both exact
+It includes the earlier setup/persistence fixes and the current three-destination menu.
+499 focused app tests and 11 attribution tests pass. Native logs cover all three exact
 approved videos, Details, Acadia ocean replacement requests, natural end and Back.
 Earlier `6f2570d` logs separately cover More info, controls, protected Skip and Parents
-cancel focus. Forest is noninteractive scenery pending exact media approval. Original Acadia media,
-exact intervals and household migration behavior remain preserved. Only the exact
-owner-approved NOAA sea-otter catalog was added to trust.
+cancel focus. Forest is the approved 12-second NPS creek excerpt with original nature audio. Original Acadia media,
+exact intervals and household migration behavior remain preserved. Only exact owner-approved catalogs are trusted.
 
 Dated historical rows retain their own evidence scope. Current visual/audio acceptance,
 physical Fire TV testing and release/submission remain unverified. This debug package
@@ -86,7 +90,7 @@ section 11.
 
 | Requirement | Status | Evidence or gap |
 | --- | --- | --- |
-| Fire TV: "launch a demo-ready app that works on Fire OS or Vega OS." | Done, simulator only | Source `1d14285` is installed and running on the Vega VirtualDevice ([install record](../../results/coastal-islands-2026-10-18/README.md)). No physical Fire TV device was used. |
+| Fire TV: "launch a demo-ready app that works on Fire OS or Vega OS." | Done, simulator only | Source `805f855` is installed and running on the Vega VirtualDevice ([install record](../../results/forest-activation-2026-10-18/README.md)). No physical Fire TV device was used. |
 | A simulator is accepted. FAQ: "a physical device isn't required at any stage of submission or judging." Forum answer: "Yes, virtual device demo is sufficient." | Done | Vega Virtual Device 1.0.67506.0, OS 1.2, Vega SDK 0.24.9914, Vega CLI 1.3.4. |
 | Stage One is pass/fail: the project "reasonably fits the theme and reasonably applies the required APIs/SDKs." | Done, with a framing risk | The rules list "simple video player" as an obvious Fire TV idea. The description and video lead with the checked, signed safety layer, not with playback. |
 | Stage Two scores four equal criteria: Tech Implementation, Design, Potential Impact, Quality of the Idea. Ties go to the first. Judging may use "automated AI-driven analysis". | Done in drafts | The Devpost draft ties each claim to evidence, since an automated reader may check them. |
@@ -108,7 +112,7 @@ section 11.
 | "must be uploaded to and made publicly visible on YouTube or Vimeo" with the link on the form | Missing | The rules do not mention unlisted videos, so choose public. |
 | "must not include third party trademarks, or copyrighted music or other material unless the Entrant has permission" | Unverified | Narration only, no music. Acadia is a public domain National Park Service clip. The FAQ asks entrants to "check with us on the specifics (how much of the video it makes up and how it's used) before finalizing." Ask at Office Hours #2, Monday, October 19, 9:00 am PT, or in the forum. Keep other apps, tabs and logos off screen. |
 | English | Done in the plan | The narration is written in English. |
-| Owner visual and audio acceptance before recording | Missing | The latest native record says `native_visual_audio_acceptance: false` ([final clarity](../../results/final-clarity-2026-10-18/native-results.json)). |
+| Owner visual and audio acceptance before recording | Missing | The current [Forest evidence](../../results/forest-activation-2026-10-18/README.md) does not establish pixels or audio acceptance. |
 | Owner authorization to record | Missing | No recording is authorized by any document here. |
 | A take free of the intermittent slowdown | Unverified | See section 9. |
 | No unprotected flashing footage | Done in the plan | The run of show uses only the prepared Acadia copy with covers on, and a review page that shows no frames. |
@@ -142,8 +146,8 @@ section 11.
 | Item | Status | Evidence or gap |
 | --- | --- | --- |
 | Acadia video, in the app and the demo | Done for the record, unverified for the video | NPGallery: "Public domain, Full Granting Rights; U.S. government work". Credit: "NPS Video, Acadia National Park. No NPS endorsement is implied." The More info page credits the National Park Service, and NOTICE and the credits screen come from the same ledger rows. |
-| Prairie Creek and Redwood, the unapproved review example | Done for the record, not in the app | Ledger rows added in `076247a`. Per its proposal, the NPS source page treats NPS-credited material without a copyright symbol as public domain, and the park's B-roll page permits reuse. Credit: "NPS: G Litten". It is not in the consumer catalog, NOTICE or the credits screen. |
-| Credits generated from the ledger | Included in installed source `1d14285` | NOTICE and generated credits match the ledger, including NOAA Fisheries. These acknowledgments do not grant playback approval to arbitrary sources. |
+| Prairie Creek and Redwood | Approved 12-second excerpt installed; full source unapproved | The Forest excerpt and its menu still are credited in the ledger, NOTICE and credits screen. The full source remains outside the consumer catalog. The NPS source page treats NPS-credited material without a copyright symbol as public domain. Credit: "NPS: G Litten". No NPS endorsement is implied. |
+| Credits generated from the ledger | Included in installed source `805f855` | NOTICE and generated credits match the ledger, including NOAA Fisheries. These acknowledgments do not grant playback approval to arbitrary sources. |
 | Amazon sample code (MIT-0) and Shaka Player (Apache-2.0) | Unverified | The proprietary notice question in section 6. |
 | Fonts: Fraunces, Source Sans 3 and Inter | Done | SIL Open Font License 1.1, licence texts beside the fonts, sources in `app/assets/fonts/FONT_PROVENANCE.json`. |
 | Artwork | Done | Every image has a ledger row in `media/LICENSES.csv`. The Acadia menu image is a still from the prepared video. |
@@ -158,12 +162,13 @@ read from device text logs. Logs establish events, ordering, media clock and foc
 not establish pixels, sound or VoiceView. A logged "picture-shown" event is a readiness
 gate, not proof of a visible frame. Each observation belongs to the build it was made on.
 
-### Installed on the TV: Acadia and Sea Otters
+### Installed on the TV: Acadia, Forest and Sea Otters
 
-Source `1d14285`. Its consumer catalog is generated from exact approvals in
+Source `805f855`. Its consumer catalog is generated from exact approvals in
 `app/config/approved-prepared-libraries.json`, and Home lists `consumerTitles(settings)`,
-which now contains Acadia and the 19.987-second silent NOAA sea-otter excerpt.
-Current playback/navigation evidence is in [the completed walkthrough](../../results/coastal-islands-2026-10-18/validation-summary.json).
+which now contains Acadia, the approved 12-second Forest excerpt with original nature
+audio, and the 19.987-second silent NOAA sea-otter excerpt.
+Current playback/navigation evidence is in [the completed walkthrough](../../results/forest-activation-2026-10-18/validation-summary.json).
 The build-specific bullets below are historical observations, not the current test ceiling.
 
 - **Before delivery** the build checks packaged file hashes, signed maps and original

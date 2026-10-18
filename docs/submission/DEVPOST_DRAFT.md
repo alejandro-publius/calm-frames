@@ -1,8 +1,13 @@
 # Devpost description, draft
 
+Current build note: one successful compile required a bounded recovery of stale
+media staging, then all package gates passed and one install completed. Current
+native checks cover all three full clips, Forest More info and How it works Back.
+No pixel/audio or owner acceptance is implied.
+
 Draft for the owner, updated October 18, 2026. It describes installed source
-`1d14285`, the original coastal world, approved Acadia and NOAA Sea Otters,
-the local review/staging tool and the unapproved Prairie Creek and Redwood example. Not
+`805f855`, the original coastal world, approved Acadia and NOAA Sea Otters,
+the local review/staging tool and the approved 12-second Forest creek excerpt. Not
 submitted. Check the live form's fields first
 ([checklist](FINAL_REQUIREMENTS_CHECKLIST.md), section 11). Every measured number below is
 tied to a results file and checked by `eval/readme_sync.py`. Bracketed notes are for the
@@ -28,8 +33,8 @@ will be covered.
 
 Installed and running on the Vega Virtual Device.
 
-- **Two prepared destinations.** Home is a static coastal map with Acadia, a public-domain
-  National Park Service clip, and Sea Otters, a 19.987-second silent NOAA Fisheries ocean
+- **Three prepared destinations.** Home is a static coastal map with Acadia, a public-domain
+  National Park Service clip, Forest, a 12-second NPS creek with nature audio, and Sea Otters, a 19.987-second silent NOAA Fisheries ocean
   excerpt that plays once. Focus selects a destination; Select opens Details with Watch focused.
 - **Know before you watch.** Details draws the covered sections for the household's setting;
   source attribution and the audio explanation are in More info.
@@ -166,11 +171,11 @@ medical device.
   validation.
 - It works only with prepared videos inside Calm Frames, not other apps, streaming services,
   live TV or DRM content.
-- Two videos are on the TV today: Acadia and Sea Otters. A new one needs exact approval, its packaged files and
+- Three videos are on the TV today: Acadia, Forest and Sea Otters. A new one needs exact approval, its packaged files and
   reports, a regenerated catalog, and a build, install and device check.
 - Every native observation comes from the Vega Virtual Device, never a physical Fire TV.
-  Device logs show events, order and focus, not pixels or sound. The current `1d14285`
-  run checked both titles, Acadia ocean requests, natural end and Details/Back routes.
+  Device logs show events, order and focus, not pixels or sound. The current `805f855`
+  run checked all three titles, Acadia ocean requests, natural end and Details/Back routes.
   Earlier source `6f2570d` also has pause fallback, protected Skip and control checks.
   The owner's look and listen acceptance is still pending.
 - Playback on the virtual device sometimes slows, as described above, and the cause is

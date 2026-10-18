@@ -1,55 +1,36 @@
 # Current demo run of show
 
-Updated October 18, 2026 for installed source `1d142852beb4a0c0b5068d9f50864c2394554107`.
-Package SHA-256: `af2fcb0f8982773b044ec625fa1f7a3c50c34de33ae64bed9b5d829a6aba0712`.
-This is a live walkthrough plan, about two minutes without extended explanations.
-No screen/audio/video recording is authorized or claimed. The older October 17
-run of show remains in Git history and describes a superseded interface.
+Installed source `805f855e60870eb018b3a6a2ab36e1f7d3e887dc`, October 18, 2026.
+Package SHA-256: `8e58685d579a740743e5d6e89b0fa8bbcce42e7a6189b9c92265575ea0c1e511`.
+One native compile plus recovery of stale incremental media staging, all strict
+package gates passed, one install. No recording or capture is authorized.
 
-## Starting point and exact keys
+## Verified routes
 
-Start at Home with Acadia selected and Watch focused. The installed app was left
-there after the non-capture walkthrough.
+From Home Acadia Watch: Up reaches Acadia; Right reaches Forest; another Right
+reaches Sea Otters. Select on any island opens Details, with Watch focused; Select
+plays. Every exact clip was allowed to end naturally and returned to Details.
+Back returned to the selected island. Forest More info and Back were also checked.
 
-| Step | Remote action | What to explain |
-| --- | --- | --- |
-| Coastal world | Up selects Acadia's destination; Right selects Sea Otters; Select opens Sea Otters Details with Watch focused. | Two real videos are destinations on original static coastal artwork. Focus changes selection without autoplay. |
-| Sea Otters | Select starts the video. Let it finish or press Back to Details Watch. Back again returns to the selected Sea Otters destination. | NOAA Fisheries footage of sea otters in the ocean at Unalaska, Alaska; 19.987 seconds, silent, plays once. No flagged intervals were found in the approved excerpt. |
-| Acadia | From the Sea Otters destination: Left, Down, Left reaches Home Acadia Watch; Select starts Acadia. | The exact approved National Park Service rendition is selected. The opening uses static map art until the readiness gate passes. |
-| Protected intervals | Let Acadia play uninterrupted. Under the current extra-cautious profile the intervals are 7.343 to 12.699 seconds and 28.113 to 31.593 seconds. | Verified ocean footage replaces flagged scenes. Original audio remains in the rendition. Opaque protection remains independent of the replacement presentation. |
-| Controls | Down reveals hidden controls. Play/Pause toggles playback. During an eligible cover, Select on focused Skip skips the scene. | The native trace records cover requested before the playhead write. This is software evidence, not a screen-level timing measurement. |
-| Return | End or Back returns to the launching screen. From Home Watch, Right, Select opens Acadia Details; Right, Select opens More info. Back walks out one level. | Details shows covered sections; More info contains source credits and limitations. |
-| Close | Leave Home Acadia Watch focused. | Calm Frames works only with prepared videos inside this app. Detection can miss flashing; this prototype has not been medically validated. |
+- Forest: 12-second NPS redwood-creek excerpt, original nature audio, plays once.
+  Credit NPS: G Litten. The illustrated waterfall is not the source footage.
+- Sea Otters: 19.987-second silent NOAA Fisheries ocean excerpt, plays once.
+- Acadia: approved ocean replacement intervals, under current extra-cautious setting,
+  7.343 to 12.699s and 28.113 to 31.593s. Both replacement requests were logged.
 
-The shortest tested route from the starting point to Sea Otters playback is
-**Up, Right, Select, Select**. From that playback, **Back, Back, Left, Down, Left**
-restores the starting point. Full directions and Parents cancellation are in the
-[owner walkthrough](../../results/sea-otters-flow-2026-10-18/OWNER_WALKTHROUGH.md).
+Up from Sea Otters reaches the profile button; Right reaches How it works.
+Select opens the concise explanation with Back focused. Back restores How it works.
+The app is left there, Sea Otters selected. No profile setting was opened or changed.
 
 ## Evidence and limits
 
-The [current evidence summary](../../results/coastal-islands-2026-10-18/validation-summary.json)
-records 438 focused app tests, 11 attribution tests, one native build/install and
-completed core routes. Current native text checks include both Acadia replacement
-requests, both real video identities, Details and natural end/Back. The earlier
-`6f2570d` logs separately cover pause/resume, Skip and control hide/reveal.
-Down from Acadia's destination reaches Details, then Left reaches Watch. Forest
-is a noninteractive preview; do not present it as a playable third video.
+[Current receipts](../../results/forest-activation-2026-10-18/README.md): 499 bounded
+app tests in 38 suites and 11 attribution tests; all 813 app inputs match the installed
+source. Initial staging failure and the route assumption corrected during help
+navigation remain recorded. No second compile, install or launch was needed.
 
-These logs do not confirm pixels, audible output, visible focus quality or physical
-Fire TV behavior. Loading/error/surface-loss recovery was checked in controlled tests;
-no native fault was injected. The previous intermittent simulator slowdown remains
-historical evidence; the latest successful run does not prove it can never recur.
-The legacy Check playback diagnostic is excluded under extra-cautious because it
-has only a WCAG map. Do not change household settings or trust to expose it.
-
-## Before submission or any later recording
-
-Owner visual/audio acceptance, an authorized current demo recording, judge access
-and Devpost completion remain open. The existing submission checklist also records
-an unanswered organizer question about third-party footage; no answer is claimed here.
-Current source rights records cover both NPS Acadia and NOAA Fisheries B-roll.
-Credit **National Park Service, Acadia National Park** and **NOAA Fisheries**;
-no agency endorsement is implied. See [media/LICENSES.csv](../../media/LICENSES.csv)
-and [NOAA source provenance](../../results/sea-otters-2026-10-18/provenance.json).
-Do not show unprepared sources or the rejected 40-second NOAA candidate.
+Native logs establish focus, title identity and playback events, not pixels or audio.
+Earlier `6f2570d` evidence separately covers pause/resume, protected Skip and Parents
+cancellation. Current physical-TV, VoiceView and visual/audio acceptance remain open.
+The demo recording, organizer footage question, judge access and submission remain
+separate owner steps. Preserve credits for NPS Acadia, NPS: G Litten and NOAA Fisheries.

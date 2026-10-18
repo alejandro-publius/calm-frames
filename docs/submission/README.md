@@ -1,9 +1,14 @@
 # The submission packet
 
-Updated October 18, 2026 for installed app source `1d14285` and the coastal-world
+Current build note: one successful compile required a bounded recovery of stale
+media staging, then all package gates passed and one install completed. Current
+native checks cover all three full clips, Forest More info and How it works Back.
+No pixel/audio or owner acceptance is implied.
+
+Updated October 18, 2026 for installed app source `805f855` and the coastal-world
 handoff on private branch `codex/creator-editions-2026-10-18`.
-[Build, native evidence and limits](../../results/coastal-islands-2026-10-18/README.md).
-The installed menu has Acadia and the 19.987-second silent NOAA sea-otter clip.
+[Build, native evidence and limits](../../results/forest-activation-2026-10-18/README.md).
+The installed menu has Acadia, the 12-second NPS Forest creek and the 19.987-second silent NOAA sea-otter clip.
 Nothing in this packet has been submitted, recorded or publicly published.
 
 | File | Purpose |

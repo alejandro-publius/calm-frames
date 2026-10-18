@@ -37,7 +37,7 @@ archive_names = subprocess.check_output(['tar', '-tf', package], env=env, text=T
 assert '77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f' in archive_names
 for obsolete in ['4064f489236973b0e8683f24fac9756ed0cdf475d376a7c6501d644397b597f5', '89496fc4b45528558ce35ef9140aa659b86a5f84734156098e2f29e312f2c590']:
     assert obsolete not in archive_names
-assert b'Not ready to watch' not in js
+assert b'forest-preview-label' not in js  # Generic pending-video safety copy remains.
 copy = {text: text.encode() in js for text in strings}
 assert all(copy.values()), copy
 details_strip = (ROOT/'app/src/calmframes/CoveredSectionsStrip.tsx').read_text()

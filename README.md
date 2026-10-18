@@ -1,13 +1,12 @@
 # Calm Frames
 
-Current state, October 18, 2026: installed app source `1d14285`. The original
-coastal world has two approved playable destinations: Acadia and Sea Otters.
-Distinct island shapes and a selection boat carry into the browsing flow. Forest
-is decorative scenery labelled Not ready to watch; its new catalog is not approved.
+Current state, October 18, 2026: installed app source `805f855`. The original
+coastal world has three approved playable destinations: Acadia, Forest and Sea Otters.
+Distinct island shapes and a selection boat carry into the browsing flow. Forest is a 12-second NPS redwood-creek excerpt with original nature audio.
 Sea Otters is a 19.987-second silent NOAA Fisheries ocean excerpt, played once.
 Acadia uses its approved baked ocean replacement during flagged intervals,
 with an independent opaque fallback. See [FINAL_HANDOFF.md](FINAL_HANDOFF.md),
-the [exact remote walkthrough](results/sea-otters-flow-2026-10-18/OWNER_WALKTHROUGH.md)
+the [exact remote walkthrough](docs/submission/DEMO_RUN_OF_SHOW.md)
 and the [submission packet](docs/submission/README.md). Historical screenshots
 below predate this map and are not current native captures. Harbor remains
 bundled for regression work, off the consumer shelf. Independent detector
@@ -32,7 +31,7 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 |---|
 | ![Browser render of the coastal Details for Harbor: the artwork, the title, 20 sec · No flashing found, Play with its triangle and the quiet Try picture holds entry beside it, the viewing settings and Back](results/coastal-renders-2026-10-14/details.png) |
 
-<sub>Browser renders of the app's own React Native trees with the bundled fonts and artwork, exported from commit 4016e8d ([render receipt](results/coastal-renders-2026-10-14/receipt.json)). They are review aids, not Vega screenshots; they describe the historical October 14 interface, not the installed coastal world. That historical shelf held two Harbors; the current consumer shelf has Acadia and Sea Otters. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md).</sub>
+<sub>Browser renders of the app's own React Native trees with the bundled fonts and artwork, exported from commit 4016e8d ([render receipt](results/coastal-renders-2026-10-14/receipt.json)). They are review aids, not Vega screenshots; they describe the historical October 14 interface, not the installed coastal world. That historical shelf held two Harbors; the current consumer shelf has Acadia, Forest and Sea Otters. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md).</sub>
 
 ---
 
@@ -44,9 +43,9 @@ Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
 
 ### What a family sees
 
-Coastal artwork, text sized for a couch and a visible ring on the focused remote control. Home presents Acadia and Sea Otters as destinations on a static coastal map; playback uses dark controls over the picture.
+Coastal artwork, text sized for a couch and a visible ring on the focused remote control. Home presents Acadia, Forest and Sea Otters as destinations on a static coastal map; playback uses dark controls over the picture.
 
-- **Choose Acadia or Sea Otters.** Home starts on Acadia Watch, with Details beside it. Up reaches Acadia; Right selects Sea Otters; Select opens its Details with Watch focused. A further Select plays. Details shows the selected version's covered sections; More info contains attribution and limits. How it works and Parents stay in the header. Harbor remains outside the consumer catalog.
+- **Choose Acadia, Forest or Sea Otters.** Home starts on Acadia Watch, with Details beside it. Up reaches Acadia; Right selects Forest; another Right selects Sea Otters; Select opens its Details with Watch focused. A further Select plays. Details shows the selected version's covered sections; More info contains attribution and limits. How it works and Parents stay in the header. Harbor remains outside the consumer catalog.
 - **A short setup, once.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
 - **A library of checked titles only.** A title plays only after its flash map is verified; one that has not verified shows Needs check and stays hidden.
 - **A steady scene notice and Skip.** The compact control stays in one place through a scheduled cover; pause and loading update its wording. An optional chime is controlled in Parents.
@@ -77,13 +76,14 @@ The first prints `PASS`, the second writes one HTML page for the title that open
 
 ### Where things stand
 
-**Current candidate, October 18.** Source `1d14285` was built and installed once.
-438 focused app tests and 11 attribution tests pass. Native text logs cover both
-destinations, Details, both Acadia replacement requests, natural end and Back.
+**Current candidate, October 18.** Source `805f855` completed one native compile, a bounded packaging recovery and one install.
+499 focused app tests and 11 attribution tests pass. Native text logs cover all three
+destinations, Forest More info, both Acadia replacement requests, natural end, Back
+and How it works return focus.
 The earlier `6f2570d` walkthrough separately covers More info, controls, pause/resume,
 guarded Skip and Parents cancellation; no PIN operation was repeated in this UI pass.
-The app is left at Home with Acadia selected and Watch focused. See the
-[receipt and limits](results/coastal-islands-2026-10-18/README.md). Logs establish
+The app is left Home with Sea Otters selected and How it works focused. See the
+[receipt and limits](results/forest-activation-2026-10-18/README.md). Logs establish
 state and actions, not rendered pixels or audio. Physical Fire TV and VoiceView
 acceptance remain unverified; the current demo video, judge access and submission
 are still pending. No recording is authorized by these instructions.

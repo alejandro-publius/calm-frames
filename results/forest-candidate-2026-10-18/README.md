@@ -1,6 +1,8 @@
 # Forest creek candidate, October 18, 2026
 
-**Prepared and verified, not activated.** The candidate is a 12-second excerpt
+**Historical preparation proposal, subsequently approved and activated.** See
+[activation and installed evidence](../forest-activation-2026-10-18/README.md).
+The original proposal below records the earlier pending state. The candidate is a 12-second excerpt
 from seconds 1 through 13 of the NPS video
 [Prairie Creek and Redwood](https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E).
 The official page credits **NPS: G Litten** and identifies NPS-credited media

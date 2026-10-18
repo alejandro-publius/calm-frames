@@ -1,5 +1,26 @@
 # Final handoff: the integration candidate
 
+## Forest activated and How it works simplified, October 18, 2026
+
+Installed source `805f855e60870eb018b3a6a2ab36e1f7d3e887dc`, package SHA-256 `8e58685d579a740743e5d6e89b0fa8bbcce42e7a6189b9c92265575ea0c1e511`.
+Forest is now the third playable island using only the exact owner-approved NPS
+catalog. Original namespace and omitted obsolete generations remain backed up.
+How it works starts with the app's purpose, qualifies Acadia ocean replacement and
+sound, gives Watch/Back instructions, and keeps scope and limitations concise.
+
+499 app tests and 11 attribution tests pass. One successful native compile required
+one packaging recovery because incremental Vega staging retained removed media;
+the unchanged postbuild gate caught it. After strict checks passed for all three
+architectures, one install completed. All 813 source inputs match. Native logs
+confirm all three full clips, Forest More info, Details/Back, both Acadia ocean
+requests and help Back focus. App is open Home, Sea Otters selected, How it works
+focused; collectors stopped. No capture, PIN or household preference changes.
+Pixels, audio, VoiceView and physical-TV acceptance remain separate owner checks.
+[Current evidence](results/forest-activation-2026-10-18/README.md). Earlier checkpoints
+below are historical. The authorized bounded integration kit is next and will not
+replace this installed production playback path.
+
+
 ## Coastal islands and selection boat installed, October 18, 2026
 
 Installed source `1d142852beb4a0c0b5068d9f50864c2394554107`; package SHA-256

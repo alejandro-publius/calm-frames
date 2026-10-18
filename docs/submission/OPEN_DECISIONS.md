@@ -1,6 +1,11 @@
 # Open decisions and blockers
 
-Product status updated October 18, 2026 for installed source `1d14285`.
+Current build note: one successful compile required a bounded recovery of stale
+media staging, then all package gates passed and one install completed. Current
+native checks cover all three full clips, Forest More info and How it works Back.
+No pixel/audio or owner acceptance is implied.
+
+Product status updated October 18, 2026 for installed source `805f855`.
 Rule-source dates remain those recorded in the canonical checklist. The canonical lists are
 [FINAL_REQUIREMENTS_CHECKLIST.md](FINAL_REQUIREMENTS_CHECKLIST.md), which maps
 each mandatory rule to evidence, and [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md)
@@ -11,7 +16,7 @@ limits that bear on them.
 
 ### 1. Accept the installed build by eye and ear
 
-The coastal map, both destination/Details flows, Acadia ocean replacements near
+The coastal map, all three destination/Details flows, Acadia ocean replacements near
 7.3 s and 28.1 s, compact Skip, retained Acadia audio and the intentionally silent
 19.987-second NOAA sea-otter excerpt. Text logs cannot approve layout or
 sound, and every native record says visual and audio acceptance is pending.
@@ -42,13 +47,12 @@ unverified. The drafts are [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) and
   and no fix is claimed, so a take can still be spoiled by it.
 - The earlier `6f2570d` rechecked both Acadia replacement intervals, pause/resume, protected
   Skip, both real video identities, controls and return focus using native text logs.
-- Forest creek is a newly verified 12-second excerpt, pending exact catalog and packaging
-  approval; the map preview cannot be selected. The original full Prairie Creek and
-  Redwood remains an unapproved review example outside the
-  consumer catalog. Staging records approval state only; it never installs a
-  title or enables Watch.
+- Forest creek is the approved, installed 12-second excerpt with original nature
+  audio. Its exact catalog and existing signer were approved before activation.
+  The full Prairie Creek and Redwood source remains unapproved and outside the
+  consumer catalog. The review staging tool alone never installs a title or enables Watch.
 - The earlier setup/persistence and style/attribution fixes are included in the installed
-  source. 438 focused app tests and 11 attribution tests pass. The current debug package
+  source. 499 focused app tests and 11 attribution tests pass. The current debug package
   is not a final release package. The WCAG-only legacy playback diagnostic remains
   unavailable under extra-cautious; its gate was not relaxed.
 - Detection can miss flashing, and the prototype has not been medically

@@ -26,7 +26,7 @@ result={'capture':False,'pin_operations':False,'rebuild':True,'reinstall':True,'
 try:
  build=json.loads((out/'build-receipt.json').read_text());inputs=json.loads((out/'app-inputs.json').read_text())
  digest=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
- assert build['build_exit']==0 and not build['changed_inputs']
+ assert (build['build_exit']==0 or build.get('package_recovery_exit')==0) and not build['changed_inputs']
  assert all(digest(root/f)==h for f,h in inputs.items())
  package=Path(build['package_path']);assert digest(package)==build['package_sha256']
  receipt=out/'install-receipt.json';assert not receipt.exists(),'Installation slot already used'

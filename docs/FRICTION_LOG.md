@@ -1191,3 +1191,17 @@ fully opaque slate explanation during the same scheduled interval. Separate find
 the original and prepared clip both begin with about five near-black seconds.
 Suggestion: include scheduled-cover presentation and content-opening review in the
 owner's short demonstration check. No protection was removed.
+
+## October 18: removed prepared-media generations linger in Vega staging
+
+Task: build the approved three-island package after omitting two obsolete bundles.
+Steps: replace the source prepared-library namespace with the reviewed 66,492,442-byte
+copy, run npm run build:debug. Expected: package contains the same namespace. Actual:
+native compilation completed successfully, but the unchanged postbuild gate rejected
+the package budget. All three incremental staging directories still contained the
+omitted generations, totaling 71,988,311 bytes. Severity: blocks installation.
+Workaround: preserve stale staging for evidence, replace only the staged media
+namespace with the exact source copy, repackage compiled output with installed vpt,
+and rerun all strict package gates. No source, limit or trust change. Suggestion:
+Vega should synchronize removals when staging raw assets, or document that asset
+removals require cleaning the generated staging namespace.
