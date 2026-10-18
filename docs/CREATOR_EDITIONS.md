@@ -88,3 +88,16 @@ native use of the PIN-protected personal editor or an unregistered bridge fixtur
 The owner supplies suitable rights-cleared source media and verified scene wording,
 approves any future exact new tuples, and performs the final look/listen acceptance. The current
 PIN stays private. Capture, publication and submission remain separate actions.
+
+## Development-only scene-bridge presentation test
+
+A Debug build exposes **Home → How it works → Scene bridge test**. Release
+builds have neither an entry nor a rendered fixture. This explicitly labeled static
+test uses “Test fixture: a card displays one.” with pinned synthetic metadata and
+no media, persistence or registry entry. **Test stale identity** requests the ordinary
+opaque cover; **Show test text** restores the verified test description. **Skip test
+and return** or remote Back restores focus to Scene bridge test; the next Back
+returns to Home → How it works. Production cover eligibility and guard paths are
+unchanged. This is presentation verification, not approval of any real narrative.
+
+See `results/scene-bridge-native-2026-10-18/` for its separate verification record.

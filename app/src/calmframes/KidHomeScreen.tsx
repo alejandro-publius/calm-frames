@@ -12,6 +12,7 @@ import CalmPageHeader from './CalmPageHeader';
 import { OFFLINE_TITLE_ID } from './offlineTitle';
 import HomeHarborScene from './HomeHarborScene';
 import PictureHoldIntroduction from './PictureHoldIntroduction';
+import SceneBridgeFixture from './SceneBridgeFixture';
 import { isBundledBenignStory } from './benignStory';
 import {
   CALM_CONTROL,
@@ -116,17 +117,19 @@ const KidHomeScreen = ({
   const feedback = useInterfaceFeedback();
   const listed = kidModeTitles(titles);
   const [showIntroduction, setShowIntroduction] = React.useState(false);
+  const [showBridgeFixture, setShowBridgeFixture] = React.useState(false);
+  const [returnToBridgeTest, setReturnToBridgeTest] = React.useState(false);
   // The header control to put the remote's focus back on after a panel it
   // opened is dismissed: How it works after the explanation, the profile
   // button after the picker. One value, so the latest dismissal wins.
   const [returnToHeader, setReturnToHeader] = React.useState<'learn' | 'profile' | null>(null);
   const demo = listed.find((entry) => isBundledBenignStory(entry.title));
-  const closeIntroduction = () => { setShowIntroduction(false); setReturnToHeader('learn'); };
+  const closeIntroduction = () => { setShowIntroduction(false); setReturnToBridgeTest(false); setReturnToHeader('learn'); };
   React.useEffect(() => {
-    if (!showIntroduction || !interfaceActive) return;
+    if (!showIntroduction || !interfaceActive || showBridgeFixture) return;
     const subscription = BackHandler.addEventListener('hardwareBackPress', () => { closeIntroduction(); return true; });
     return () => subscription.remove();
-  }, [showIntroduction, interfaceActive]);
+  }, [showIntroduction, interfaceActive, showBridgeFixture]);
   const [choosingProfile, setChoosingProfile] = React.useState(false);
   // The picker is one level above the shelf, so Back closes it rather than
   // falling through to the shelf's handler and leaving the app. The chips go
@@ -209,10 +212,14 @@ const KidHomeScreen = ({
   }
   useUiCapture(frame, reason);
 
+  if (typeof __DEV__ !== 'undefined' && __DEV__ && showBridgeFixture) {
+    return <SceneBridgeFixture onBack={() => { setShowBridgeFixture(false); setReturnToBridgeTest(true); }} />;
+  }
+
   return (
     <View testID={testID} style={styles.screen}>
       <HomeHarborScene variant={feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
-      <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
+      <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo && !returnToBridgeTest}>
           {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
             onPress={() => { setReturnToHeader(null); setChoosingProfile(!choosingProfile); }} /> : null}
@@ -225,7 +232,7 @@ const KidHomeScreen = ({
           chosenWord={WATCHING_STATE_WORD} chosenLine={whoIsWatching((profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name)}
           profiles={profiles} activeProfileId={activeProfileId ?? profiles[0].id} onChoose={onChooseProfile} />
       ) : null}
-      {showIntroduction ? <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false}><PictureHoldIntroduction disabled={saving} onDemoDetails={demo ? () => onOpen(demo) : undefined} onPlaybackCheck={playbackCheck ? () => onOpen(playbackCheck) : undefined} onStart={demo ? () => {
+      {showIntroduction ? <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false}><PictureHoldIntroduction preferBridgeTest={returnToBridgeTest} onBridgeTest={typeof __DEV__ !== 'undefined' && __DEV__ ? () => setShowBridgeFixture(true) : undefined} disabled={saving} onDemoDetails={demo ? () => onOpen(demo) : undefined} onPlaybackCheck={playbackCheck ? () => onOpen(playbackCheck) : undefined} onStart={demo ? () => {
         if (!saving) { setShowIntroduction(false); setReturnToHeader('learn'); (onPlay ?? onOpen)(demo); }
       } : undefined} /></ScrollView> : empty ? (
         <StatusNotice

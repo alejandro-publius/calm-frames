@@ -1,0 +1,10 @@
+{
+  "tests": 65,
+  "suites": 4,
+  "typecheck_exit": 0,
+  "lint_exit": 0,
+  "independent_review": "no blocking issue; focus and truthful-log findings addressed",
+  "preinstall_unlocked_state": "not established; no focus events in six-second passive log read",
+  "personal_cover_values_changed": false,
+  "capture_used": false
+}

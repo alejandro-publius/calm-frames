@@ -1,0 +1,10 @@
+PASS test/screens/KidModeScreen.test.tsx (8.105 s)
+PASS test/screens/returnFocus.test.tsx
+PASS test/calmframes/sceneBridges.test.tsx
+PASS test/calmframes/sceneBridgeFixture.test.tsx
+
+Test Suites: 4 passed, 4 total
+Tests:       65 passed, 65 total
+Snapshots:   0 total
+Time:        11.393 s
+Ran all test suites matching /test\/calmframes\/sceneBridgeFixture.test.tsx|test\/calmframes\/sceneBridges.test.tsx|test\/screens\/returnFocus.test.tsx|test\/screens\/KidModeScreen.test.tsx/i.
