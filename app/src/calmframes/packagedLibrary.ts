@@ -286,8 +286,9 @@ export function createPackagedLibrary(raw: string) {
   };
 }
 
-// Owner approval on 2026-10-15 is limited to this exact compiled catalog.
-// The build gate hashes its actual bytes against the approved catalog digest.
+// Archived predecessor metadata authenticates existing household additions only.
+// Its video generation is omitted from this package and is never in libraries,
+// consumerTitles or publicKeyForRoute. Current playback uses the exact registry.
 export const ACADIA_BUNDLE_ID = '4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13';
 export const ACADIA_SOURCE_SHA256 = '2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28';
 export function createApprovedAcadiaLibrary(raw: string) {

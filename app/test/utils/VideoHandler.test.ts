@@ -107,6 +107,16 @@ describe('VideoHandler', () => {
     expect(mockSetShowBuffering).not.toHaveBeenCalled();
   });
 
+  it('cancels setup before allocation when teardown wins the first microtask', async () => {
+    const { videoHandler, mockVideoRef } = createVideoHandler();
+    const allocations = (VideoPlayer as unknown as jest.Mock).mock.calls.length;
+    const pending = videoHandler.preBufferVideo({} as never);
+    videoHandler.destroyVideoElements();
+    await pending;
+    expect((VideoPlayer as unknown as jest.Mock).mock.calls).toHaveLength(allocations);
+    expect(mockVideoRef.current).toBeNull();
+  });
+
   describe('preBufferVideo', () => {
     it('opens a packaged video using its native path without changing catalog identity', () => {
       const { videoHandler } = createVideoHandler();

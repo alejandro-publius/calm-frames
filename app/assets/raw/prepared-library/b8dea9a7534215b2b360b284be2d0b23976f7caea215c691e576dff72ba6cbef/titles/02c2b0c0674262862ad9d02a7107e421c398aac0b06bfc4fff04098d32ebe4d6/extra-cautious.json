@@ -10,7 +10,7 @@
     "range_source": "stream-tag",
     "transfer_tag": "1"
   },
-  "created_utc": "2026-10-15T20:42:38Z",
+  "created_utc": "2026-10-18T05:52:10Z",
   "generator": {
     "name": "flashmap",
     "version": "1.0.0"
@@ -18,10 +18,10 @@
   "pattern_exemptions": [],
   "picture": {
     "coded": {
-      "height": 720,
+      "height": 480,
       "left": 0,
       "top": 0,
-      "width": 1280
+      "width": 854
     },
     "frame_height": 108,
     "frame_width": 192,
@@ -103,84 +103,40 @@
     "window_placement": "trailing-closed-window-at-every-frame"
   },
   "schema": "https://calm-frames.github.io/schemas/flashmap-map-v1.json",
-  "segments": [
-    {
-      "area_fraction": 0.38843,
-      "area_window": "room-10deg",
-      "breaks_baseline": false,
-      "end_ms": 9864,
-      "flash_first_ms": 8383,
-      "flash_last_ms": 9864,
-      "max_flashes_in_window": 9,
-      "reason": "general",
-      "start_ms": 8343,
-      "triggered_by": [
-        "room-10deg"
-      ]
-    },
-    {
-      "area_fraction": 0.838843,
-      "area_window": "room-10deg",
-      "breaks_baseline": true,
-      "end_ms": 11699,
-      "flash_first_ms": 9176,
-      "flash_last_ms": 11637,
-      "max_flashes_in_window": 10,
-      "reason": "general",
-      "start_ms": 9135,
-      "triggered_by": [
-        "room-10deg",
-        "wcag-10deg"
-      ]
-    },
-    {
-      "area_fraction": 0.396694,
-      "area_window": "room-10deg",
-      "breaks_baseline": false,
-      "end_ms": 30593,
-      "flash_first_ms": 29154,
-      "flash_last_ms": 30572,
-      "max_flashes_in_window": 8,
-      "reason": "general",
-      "start_ms": 29113,
-      "triggered_by": [
-        "room-10deg"
-      ]
-    }
-  ],
+  "segments": [],
   "signature": {
     "algorithm": "ed25519",
-    "key_id": "sha256:98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407",
-    "payload_sha256": "b8f6b91cef659a3601fa41828a3d72d137848cbde5d0ea53c588175d465dadb9",
-    "public_key": "mSw6rXluFTx+gmF5ODt1pSTIYOkLkxurqGOrJHs2Xkg=",
-    "value": "c4IlQZ1dAIz67UX6269WLG6kWdG/lsnAHPuWJjODCmzKhwsqHnn/uEA4p4TTmxS46Vw6Av1JbPcbboAg/4rYAQ=="
+    "key_id": "sha256:00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+    "payload_sha256": "5094f02823bd34e44665703c72361a1e01c36ce1b882810c2f999c4b7ef67b89",
+    "public_key": "B5T8ySBDCjXF5gUm6NwY78TOnTSVofUMZi4oAMgWyZs=",
+    "value": "i1jKHZL/YyimjS3FW0AE1sshCPh3ucuhHY5e8Pv0ISDsRH//7ijzIwqsrzBC0ezbprccu2t+AK+cqk5NZC6KBg=="
   },
   "source": {
-    "coded_height": 720,
-    "coded_width": 1280,
-    "container_frame_rate": "7380000/153989",
-    "duration_ms": 37641.756,
-    "first_pts_ms": 0.0,
-    "frame_count": 1804,
+    "coded_height": 480,
+    "coded_width": 854,
+    "container_frame_rate": "30000/1001",
+    "duration_ms": 19986.633,
+    "first_pts_ms": 33.367,
+    "frame_count": 599,
     "frame_interval_ms": {
-      "max": 20.856,
-      "median": 20.856,
-      "min": 20.844
+      "max": 33.367,
+      "median": 33.367,
+      "min": 33.367
     },
-    "last_coded_pts_ms": 37600.056,
-    "last_pts_ms": 37600.056,
-    "path": "nps_acadia_coastal_broll_720p.mp4",
-    "sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
-    "size_bytes": 4049669,
+    "last_coded_pts_ms": 19986.633,
+    "last_pts_ms": 19986.633,
+    "path": "sea-otter-raft-alaska-20s.mp4",
+    "sha256": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+    "size_bytes": 10812897,
     "timestamp_source": "container-pts",
     "variable_frame_rate": false
   },
   "summary": {
     "area_measured_on": "picture",
-    "flash_pass": false,
-    "general_segment_count": 3,
-    "hidden_ms": 4836,
-    "pass": false,
+    "flash_pass": true,
+    "general_segment_count": 0,
+    "hidden_ms": 0,
+    "pass": true,
     "pattern_exemption_count": 0,
     "pattern_findings_are_not_wcag": "WCAG 2.2 SC 2.3.1 does not cover regular patterns. A pattern segment is an extra hide from an informative ITU recommendation, never a WCAG finding, and `flash_pass` is the only verdict a WCAG claim may be read from.",
     "pattern_pass": true,
@@ -188,7 +144,7 @@
     "pattern_rule_source": null,
     "pattern_segment_count": 0,
     "red_segment_count": 0,
-    "segment_count": 3
+    "segment_count": 0
   },
   "version": 1
 }

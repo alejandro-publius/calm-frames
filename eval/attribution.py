@@ -43,6 +43,10 @@ END = "<!-- END media credits -->"
 # file nor listed here fails the test in eval/tests/test_attribution.py rather than getting an
 # invented name off its file name.
 TITLES = {
+    "app/assets/image/tv/sea-otters-alaska.jpg": "Sea otters in Alaska (menu still, NOAA Fisheries)",
+    "noaa-sea-otters.mp4": "Sea Otters (NOAA Fisheries source B-roll)",
+    "sea-otters-alaska-40s.mp4": "Sea Otters (rejected review excerpt, not playable)",
+    "sea-otter-raft-alaska-20s.mp4": "Sea otters in Alaska (NOAA Fisheries, silent excerpt)",
     # Ours, generated rather than sourced. It is in the ledger so that every
     # asset that ships has one row saying where it came from, even when the
     # answer is that we made it and there is nothing to credit.

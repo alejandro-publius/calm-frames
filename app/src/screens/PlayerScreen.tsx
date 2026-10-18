@@ -128,6 +128,8 @@ const PlayerScreen = ({
   // After media initialization once media loads isVideoInitialized will change to true.
   const [isVideoInitialized, setIsVideoInitialized] =
     React.useState<boolean>(false);
+  const [frameGeneration, setFrameGeneration] = React.useState(0);
+  const surfaceGeneration = useRef(0);
   const [surfaceReady, setSurfaceReady] = React.useState(false);
   const [returningHome, setReturningHome] = React.useState(false);
   React.useEffect(() => { trace('screen', 'player'); return () => trace('screen', 'player-left'); }, []);
@@ -306,7 +308,7 @@ const PlayerScreen = ({
 
   const homeOpening = route.params.showHomeOpening === true && guarding && !isVideoError && guard.status !== 'blocked';
   const openingFrameReady = useOpeningFrame({ media: videoRef, enabled: homeOpening && !returningHome,
-    verified: guard.status === 'verified', surfaceReady, onTimeout: () => setVideoError(true) });
+    verified: guard.status === 'verified', surfaceReady, frameGeneration, onTimeout: () => setVideoError(true) });
   const showOpeningShell = Boolean(homeOpening && !openingFrameReady || returningHome && route.params.showHomeOpening);
   // The measurement harness and the guard never run at once: a run is a
   // measurement, kid mode is the product.
@@ -482,6 +484,8 @@ const PlayerScreen = ({
 
   useEffect(() => {
     return () => {
+      leaving.current = true;
+      surfaceGeneration.current += 1;
       /**
        * When the player is unmounted we check if the instance was destroyed correctly,
        * if not, it is destroyed (commonly used with integrations like EPG).
@@ -491,9 +495,9 @@ const PlayerScreen = ({
         captionViewHandle.current = null;
         videoRef.current?.clearSurfaceHandle('');
         videoRef?.current?.clearCaptionViewHandle('');
-        videoHandler.destroyVideoElements();
-        videoRef.current = null;
       }
+      videoHandler.destroyVideoElements();
+      videoRef.current = null;
 
       if (exitTimer.current !== null) {
         clearTimeout(exitTimer.current);
@@ -512,6 +516,7 @@ const PlayerScreen = ({
       return true;
     }
     leaving.current = true;
+    surfaceGeneration.current += 1;
     trace('playback', 'back');
     if (route.params.showHomeOpening) setReturningHome(true);
 
@@ -661,34 +666,42 @@ const PlayerScreen = ({
   }, [videoRef, leavePlayer, reportVideoPlaying]);
 
   const setSurface = useCallback(async () => {
-    if (surfaceHandle.current) {
-      videoRef.current?.setSurfaceHandle(surfaceHandle.current);
-
-      //Get bif file if apply
+    const handle = surfaceHandle.current;
+    const media = videoRef.current;
+    const generation = surfaceGeneration.current;
+    if (!handle || !media || leaving.current) return;
+    media.setSurfaceHandle(handle);
+    const current = () => !leaving.current && videoRef.current === media &&
+      surfaceHandle.current === handle && surfaceGeneration.current === generation;
+    try {
       if (data?.bifUrl) {
-        bifFrameImagesRef.current = await getBifFrameImageSource(data.bifUrl);
+        const frames = await getBifFrameImageSource(data.bifUrl);
+        if (!current()) { frames?.clearCache(); return; }
+        bifFrameImagesRef.current?.clearCache();
+        bifFrameImagesRef.current = frames;
       }
-
-      // Play video once surface has created and set to media reference
-      playVideo();
-    }
+      if (current()) playVideo();
+    } catch { if (current()) setVideoError(true); }
   }, [data.bifUrl, playVideo]);
 
-  const onSurfaceViewCreated = useCallback(
-    (_surfaceHandle: string): void => {
-      console.info(
-        '[PlayerScreen.tsx] - onSurfaceViewCreated - Creating video surface',
-      );
-      surfaceHandle.current = _surfaceHandle;
-      setSurfaceReady(true);
-      setSurface();
-    },
-    [setSurface],
-  );
+  const onSurfaceViewCreated = useCallback((handle: string): void => {
+    if (leaving.current || surfaceHandle.current === handle) return;
+    surfaceGeneration.current += 1;
+    surfaceHandle.current = handle;
+    setFrameGeneration(surfaceGeneration.current);
+    setSurfaceReady(true);
+    trace('playback', 'surface-ready');
+    setSurface();
+  }, [setSurface]);
 
-  const onSurfaceViewDestroyed = useCallback((_surfaceHandle: string): void => {
-    // Clear surface on screen unmount
-    videoRef.current?.clearSurfaceHandle(_surfaceHandle);
+  const onSurfaceViewDestroyed = useCallback((handle: string): void => {
+    if (surfaceHandle.current !== handle) return;
+    surfaceGeneration.current += 1;
+    surfaceHandle.current = null;
+    setSurfaceReady(false);
+    setFrameGeneration(surfaceGeneration.current);
+    videoRef.current?.clearSurfaceHandle(handle);
+    trace('playback', 'surface-lost');
   }, []);
 
   const onCaptionViewCreated = useCallback((captionsHandle: string): void => {

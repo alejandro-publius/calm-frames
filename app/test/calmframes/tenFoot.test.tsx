@@ -38,6 +38,7 @@ import {
   BENIGN_STORY_MAPS,
   BENIGN_STORY_PUBLIC_KEY,
 } from '../../src/calmframes/benignStoryData';
+import { WORLD } from '../../src/calmframes/CoastalWorld';
 import CalmCard from '../../src/calmframes/CalmCard';
 import {
   CALM_COLORS,
@@ -57,7 +58,7 @@ import { Card, cardAt, CHECKING_CARD } from '../../src/calmframes/cards';
  * in terracotta because teal on its teal fill would vanish. Every ring still has
  * to clear the contrast floors against its fill and against what is outside it.
  */
-const FOCUS_RING_COLOURS = new Set<string>([CALM_COLORS.FOCUS_RING, COASTAL_COLORS.FOCUS_RING, COASTAL_PRIMARY_FOCUS]);
+const FOCUS_RING_COLOURS = new Set<string>([WORLD.FOCUS_RING, CALM_COLORS.FOCUS_RING, COASTAL_COLORS.FOCUS_RING, COASTAL_PRIMARY_FOCUS]);
 import CornerPlate from '../../src/calmframes/CornerPlate';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';

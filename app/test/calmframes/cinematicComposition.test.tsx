@@ -4,20 +4,20 @@ import { StyleSheet } from 'react-native';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import PlayerOpening from '../../src/calmframes/PlayerOpening';
-import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
+import { WORLD } from '../../src/calmframes/CoastalWorld';
 import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
 import SceneTimeline from '../../src/calmframes/SceneTimeline';
 import { checkedShelf } from './shelfFixtures';
 import { titleDataFor } from '../../src/screens/KidModeScreen';
-import { titlePresentation, OTTER_PREVIEW_SOURCE_SHA256 } from '../../src/calmframes/TitleArtwork';
+import { titlePresentation, SEA_OTTER_SOURCE_SHA256 } from '../../src/calmframes/TitleArtwork';
 import { ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
-import { CALM_COLORS, CALM_CONTROL, FOCUS_RING_WIDTH } from '../../src/calmframes/calmStyles';
+import { CALM_CONTROL, FOCUS_RING_WIDTH } from '../../src/calmframes/calmStyles';
 import { cardAt } from '../../src/calmframes/cards';
 import { playbackCard } from '../../src/calmframes/usePlaybackPresentation';
 import { CoverInterval } from '../../src/calmframes/coverSchedule';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
-const titles = checkedShelf().filter(entry => [ACADIA_SOURCE_SHA256, OTTER_PREVIEW_SOURCE_SHA256].includes(entry.title.sha256!));
-const otter = titles.find(entry => entry.title.sha256 === OTTER_PREVIEW_SOURCE_SHA256)!;
+const titles = checkedShelf().filter(entry => [ACADIA_SOURCE_SHA256, SEA_OTTER_SOURCE_SHA256].includes(entry.title.sha256!));
+const otter = titles.find(entry => entry.title.sha256 === SEA_OTTER_SOURCE_SHA256)!;
 
 it('keeps a selected film visible after focus leaves, with no autoplay or focus resizing', () => {
   const play = jest.fn(), open = jest.fn();
@@ -29,10 +29,10 @@ it('keeps a selected film visible after focus leaves, with no autoplay or focus 
   fireEvent(view.getByTestId('kid-home-watch'), 'focus');
   const selected = view.getByTestId(id);
   expect(selected.props.accessibilityState.selected).toBe(true);
-  expect(StyleSheet.flatten(selected.props.style).borderLeftColor).toBe(CALM_COLORS.FOCUS_RING);
+  expect(StyleSheet.flatten(selected.props.style).borderBottomColor).toBe(WORLD.FOCUS_RING);
   for (const key of ['width','minHeight','borderWidth','padding']) expect(StyleSheet.flatten(selected.props.style)[key]).toBe(before[key]);
   expect(before.borderWidth).toBe(FOCUS_RING_WIDTH);
-  expect(view.queryByTestId(`kid-home-poster-image-${otter.title.id}`)).toBeNull();
+  expect(view.getByTestId(`kid-home-poster-image-${otter.title.id}`)).toBeTruthy();
   expect(play).not.toHaveBeenCalled(); expect(open).not.toHaveBeenCalled();
   fireEvent.press(view.getByTestId('kid-home-watch')); expect(play).toHaveBeenCalledWith(otter);
 });
@@ -42,21 +42,23 @@ it.each(titles)('retains scenery, title typography and Watch size through $title
   const home = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} returnFocusId={entry.title.id} returnFocusControl="watch" />);
   const homeStyle = StyleSheet.flatten(home.getByTestId('kid-home-video-title').props.style);
   const button = StyleSheet.flatten(home.getByTestId('kid-home-watch').props.style);
-  expect(home.UNSAFE_getByType(HomeHarborScene).props.variant).toBe(data.calmMenuArt);
+  expect(home.getByTestId('coastal-world')).toBeTruthy();
   expect(home.queryByTestId('kid-home-benefit')).toBeNull();
+  expect(homeStyle.fontFamily).toBeTruthy();
   home.unmount();
   const detail = render(<TitleDetailsScreen entry={entry} onPlay={jest.fn()} />);
-  expect(detail.UNSAFE_getByType(HomeHarborScene).props.variant).toBe(data.calmMenuArt);
+  expect(detail.getByTestId('coastal-world')).toBeTruthy();
   const detailStyle = StyleSheet.flatten(detail.getByTestId('title-details-title').props.style);
   const detailButton = StyleSheet.flatten(detail.getByTestId('title-details-play').props.style);
   for (const key of ['minHeight','borderRadius','paddingHorizontal']) expect(detailButton[key]).toBe(button[key]);
   expect(button.minHeight).toBeGreaterThanOrEqual(CALM_CONTROL.MIN_HEIGHT);
   detail.unmount();
   const opening = render(<PlayerOpening title={data.title} menuArt={data.calmMenuArt} onBack={jest.fn()} />);
-  expect(opening.UNSAFE_getByType(HomeHarborScene).props.variant).toBe(data.calmMenuArt);
+  expect(opening.getByTestId('coastal-world')).toBeTruthy();
+  expect(opening.queryByTestId('title-details-destination-image')).toBeNull();
   const openingStyle = StyleSheet.flatten(opening.getByText(titlePresentation(entry.title).name).props.style);
   for (const key of ['fontSize','lineHeight','fontFamily']) {
-    expect(homeStyle[key]).toBe(detailStyle[key]); expect(openingStyle[key]).toBe(detailStyle[key]);
+    expect(openingStyle[key]).toBe(detailStyle[key]);
   }
 });
 
@@ -87,5 +89,6 @@ it('production materials paint only the selected film at rest and preserve a per
   expect(card.findAll(node => node.type === ('LinearGradient' as never))).toHaveLength(0);
   fireEvent(card, 'focus'); fireEvent(card, 'blur');
   expect(card.props.accessibilityState.selected).toBe(true);
-  expect(card.findAll(node => node.type === ('LinearGradient' as never))).toHaveLength(1);
+  expect(card.findAll(node => node.type === ('LinearGradient' as never))).toHaveLength(0);
+  expect(StyleSheet.flatten(card.props.style).borderBottomColor).toBe(WORLD.FOCUS_RING);
 });

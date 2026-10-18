@@ -19,18 +19,18 @@ interface TitlePresentation {
   runtime?: string;
   attribution?: string;
   /** Decorative menu scenery, independent of video or ambient playback. */
-  menuArt?: 'coastal';
+  menuArt?: 'coastal' | 'sea-otters';
   art?: 'harbor' | 'harbor-cinematic' | 'gradient' | 'coastal';
 }
 
-export const OTTER_PREVIEW_SOURCE_SHA256 = '4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4';
+export const SEA_OTTER_SOURCE_SHA256 = '02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6';
 
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
-  if (concernsPackagedLibrary(title) && title.sha256 === OTTER_PREVIEW_SOURCE_SHA256 && title.durationMs === 4240) {
-    return { name: 'Otters · short preview', cardName: 'Otters', kind: 'Short preview · 4.24 seconds',
-      selectorMeta: 'Silent · 4.24 seconds', action: 'Watch preview', runtime: '4.24 seconds · Silent · Plays once', menuArt: 'coastal',
-      description: 'A short excerpt of an otter grooming. Plays once, without sound.',
-      attribution: 'Uusijani / Wikimedia Commons. Otter (Lutra lutra) grooming. CC0 1.0. Short excerpt. Source: https://commons.wikimedia.org/wiki/File:Otter_(Lutra_lutra)_grooming.webm' };
+  if (concernsPackagedLibrary(title) && title.sha256 === SEA_OTTER_SOURCE_SHA256 && title.durationMs === 19986.633) {
+    return { name: 'Sea otters in Alaska', cardName: 'Sea otters', kind: 'Ocean wildlife · 20 seconds',
+      selectorMeta: 'Silent · 20 seconds', action: 'Watch now', runtime: '20 seconds · Silent · Plays once', menuArt: 'sea-otters',
+      description: 'Sea otters float together in the ocean at Unalaska, Alaska.',
+      attribution: 'NOAA Fisheries. Sea otters at Unalaska/Dutch Harbor, Alaska. Public-domain B-roll; 19.987-second silent excerpt, plays once. Source: https://videos.fisheries.noaa.gov/detail/video/2789953172001/b-roll%3A-sea-otters' };
   }
   if (concernsPackagedLibrary(title) && title.sha256 === ACADIA_SOURCE_SHA256) {
     return { name: 'Acadia', kind: 'National Park Service', action: 'Watch now', art: 'coastal',

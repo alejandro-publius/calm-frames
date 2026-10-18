@@ -1,0 +1,280 @@
+FAIL app/test/screens/KidModeScreen.test.tsx (5.954 s)
+  ● the shelf a household lands on › features only Acadia as a consumer video while retaining the playback diagnostic
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 1
+
+      Array [
+        "prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+    +   "prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+        "calm-frames-offline",
+      ]
+
+      321 |   it('features only Acadia as a consumer video while retaining the playback diagnostic', () => {
+      322 |     const titles = defaultCatalog();
+    > 323 |     expect(titles.map(title => title.id)).toEqual([
+          |                                           ^
+      324 |       `prepared-${ACADIA_SOURCE_SHA256}`, OFFLINE_TITLE_ID,
+      325 |     ]);
+      326 |     expect(titles.some(title => /harbor/i.test(title.title))).toBe(false);
+
+      at Object.toEqual (test/screens/KidModeScreen.test.tsx:323:43)
+
+  ● the shelf a household lands on › opens Acadia by default and keeps Harbor out of Home and its help flow
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 0
+    Received length: 2
+    Received array:  [{"_fiber": [FiberNode]}, {"_fiber": [FiberNode]}]
+
+      334 |     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
+      335 |     // One featured video needs no rail: the hero already shows it, so no card repeats it.
+    > 336 |     expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(0);
+          |                                                                                           ^
+      337 |     expect(screen.queryByText('Choose a video')).toBeNull();
+      338 |     expect(screen.queryByText(/Harbor/)).toBeNull();
+      339 |     expect(screen.queryByText('Playback test')).toBeNull();
+
+      at Object.toHaveLength (test/screens/KidModeScreen.test.tsx:336:91)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+PASS app/test/calmframes/playerOpening.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.info
+      [PlayerScreen.tsx] - playVideo - k_content_per: Reporting new playback event
+
+      at info (src/screens/PlayerScreen.tsx:655:15)
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:652:15)
+
+    console.info
+      [PlayerScreen.tsx] - playVideo - k_content_per: Reporting new playback event
+
+      at info (src/screens/PlayerScreen.tsx:655:15)
+
+PASS app/test/calmframes/otterPreview.test.tsx
+PASS app/test/calmframes/cinematicComposition.test.tsx
+PASS app/test/calmframes/openingAlignment.test.tsx
+PASS app/test/utils/VideoHandler.test.ts
+  ● Console
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles - Loading subtitles from: /pkg/assets/raw/benign-story/harbor.vtt [en]
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:349:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles -  Loaded 0 subtitles:
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:359:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles - Loading subtitles from: https://example.invalid/captions.vtt [en]
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:349:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles -  Loaded 0 subtitles:
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:359:17)
+
+    console.log
+      [VideoHandler.ts] - No video reference to destroy
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:647:15)
+
+    console.log
+      [VideoHandler.ts] - No video reference to destroy
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:647:15)
+
+    console.log
+      [VideoHandler.ts] - loadStaticMediaPlayer - Loading static player with: file:///pkg/assets/raw/benign-story/harbor.precovered.mp4
+
+      at VideoHandler.log [as loadStaticMediaPlayer] (src/utils/VideoHandler.ts:269:15)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:174:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - Video Player Initialized
+
+      at log (src/utils/VideoHandler.ts:193:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:174:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:174:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:174:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - Video Player Initialized
+
+      at log (src/utils/VideoHandler.ts:193:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:174:19)
+
+    console.log
+      [VideoHandler.ts] - Triggering synchronous video elements destruction
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:651:13)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:579:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:586:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:610:17)
+
+    console.log
+      [VideoHandler.ts] - Triggering synchronous video elements destruction
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:651:13)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:579:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:586:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:610:17)
+
+    console.log
+      [VideoHandler.ts] - Triggering synchronous video elements destruction
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:651:13)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:579:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:586:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:610:17)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:579:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:586:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:610:17)
+
+    console.log
+      [VideoHandler.ts] - Deinitialize sync completed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:621:17)
+
+    console.log
+      [VideoHandler.ts] - Sync destruction completed
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:628:15)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:579:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:586:17)
+
+    console.log
+      [VideoHandler.ts] - destroying player
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:595:17)
+
+    console.log
+      [VideoHandler.ts] - destroying Adaptive Media Player (shaka)
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:598:19)
+
+    console.log
+      [VideoHandler.ts] - player destroyed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:605:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:610:17)
+
+    console.log
+      [VideoHandler.ts] - Deinitialize sync completed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:621:17)
+
+    console.log
+      [VideoHandler.ts] - Sync destruction completed
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:628:15)
+
+PASS app/test/calmframes/openingFrame.test.tsx
+
+Test Suites: 1 failed, 6 passed, 7 total
+Tests:       2 failed, 64 passed, 66 total
+Snapshots:   0 total
+Time:        7.083 s, estimated 11 s
+Ran all test suites matching /app\/test\/calmframes\/otterPreview.test.tsx|app\/test\/calmframes\/cinematicComposition.test.tsx|app\/test\/screens\/KidModeScreen.test.tsx|app\/test\/utils\/VideoHandler.test.ts|app\/test\/calmframes\/playerOpening.test.tsx|app\/test\/calmframes\/openingFrame.test.tsx|app\/test\/calmframes\/openingAlignment.test.tsx/i.

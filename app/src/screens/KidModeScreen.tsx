@@ -130,7 +130,7 @@ export interface KidModeScreenProps {
 }
 
 /**
- * Consumer titles come from exact reviewed build approvals (currently Acadia).
+ * Consumer titles come from exact reviewed build approvals (currently Acadia and Sea Otters).
  * The exact signed Harbor catalog and
  * its practice assets remain bundled for regression work, outside this list.
  * Selection does not grant trust: every entry still follows the same checks.
@@ -287,6 +287,7 @@ const KidModeScreen = ({
   const [view, setView] = React.useState<KidModeView>('home');
   React.useEffect(() => { trace('screen', view); }, [view]);
   const [openId, setOpenId] = React.useState<string | null>(null);
+  const [selectedTitleId, setSelectedTitleId] = React.useState<string | null>(null);
   const [lastOpenedId, setLastOpenedId] = React.useState<string | null>(null);
   const [lastOpenedFrom, setLastOpenedFrom] = React.useState<ReturnFocusControl | undefined>(undefined);
   // The control the shelf reported for the press being handled now; a press
@@ -558,6 +559,8 @@ const KidModeScreen = ({
         rememberLaunch(entry);
         play(entry);
       }}
+      selectedTitleId={selectedTitleId}
+      onSelectTitle={setSelectedTitleId}
       returnFocusId={lastOpenedId}
       returnFocusControl={lastOpenedFrom}
       profiles={family.profiles}

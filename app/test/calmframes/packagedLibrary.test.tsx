@@ -2,7 +2,7 @@ import { PACKAGED_LIBRARY_JSON } from '../../assets/raw/prepared-library/catalog
 import { DEFAULT_SETTINGS, PRESET_NAMES } from '../../src/calmframes/household';
 import { ACADIA_SOURCE_SHA256, createApprovedAcadiaLibrary, createApprovedLibrary, createPackagedLibrary, packagedLibrary } from '../../src/calmframes/packagedLibrary';
 import { PACKAGED_LIBRARY_JSON as ACADIA_LIBRARY_JSON } from '../../src/calmframes/acadiaCatalog';
-import { OTTER_PREVIEW_SOURCE_SHA256 } from '../../src/calmframes/TitleArtwork';
+import { SEA_OTTER_SOURCE_SHA256 } from '../../src/calmframes/TitleArtwork';
 import { APPROVED_PREPARED_CATALOGS } from '../../src/calmframes/approvedPreparedCatalogs';
 import { checkTitle } from '../../src/calmframes/titleStatus';
 import { defaultCatalog, guardedParamsFor, titleDataFor } from '../../src/screens/KidModeScreen';
@@ -24,7 +24,7 @@ function checked(preset = DEFAULT_SETTINGS.preset) {
 
 describe('the compiled prepared library', () => {
   it('uses the exact reviewed consumer registry and never promotes a runtime catalog', () => {
-    expect(packagedLibrary.consumerTitles(DEFAULT_SETTINGS).map(title => title.sha256)).toEqual([ACADIA_SOURCE_SHA256, OTTER_PREVIEW_SOURCE_SHA256]);
+    expect(packagedLibrary.consumerTitles(DEFAULT_SETTINGS).map(title => title.sha256)).toEqual([ACADIA_SOURCE_SHA256, SEA_OTTER_SOURCE_SHA256]);
     expect(createApprovedLibrary(approvedAcadia).problem).toBeNull();
     expect(createApprovedLibrary(approvedAcadia + ' ').titles(DEFAULT_SETTINGS)).toEqual([]);
     expect(createApprovedLibrary(ACADIA_LIBRARY_JSON).titles(DEFAULT_SETTINGS)).toEqual([]);
@@ -134,4 +134,12 @@ describe('the compiled prepared library', () => {
     expect(empty.titles(DEFAULT_SETTINGS)).toEqual([]);
     expect(empty.publicKeyBase64).toBe('');
   });
+});
+
+it('retains pre-ocean metadata for household migration without accepting its playable route', () => {
+  const archive = createApprovedAcadiaLibrary(ACADIA_LIBRARY_JSON);
+  const title = archive.titles(DEFAULT_SETTINGS)[0];
+  const entry = checkTitle(title, {settings: DEFAULT_SETTINGS, publicKeyBase64: archive.publicKeyBase64, nowMs});
+  expect(packagedLibrary.publicKeyFor(title, DEFAULT_SETTINGS)).toBeNull();
+  expect(packagedLibrary.acceptsRoute(titleDataFor(entry), guardedParamsFor(entry, DEFAULT_SETTINGS))).toBe(false);
 });

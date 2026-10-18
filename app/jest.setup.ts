@@ -251,8 +251,13 @@ jest.mock('react-native-responsive-screen', () => ({
   widthPercentageToDP: jest.fn(),
 }));
 jest.mock('@amazon-devices/react-native-svg', () => ({
-  Path: jest.fn(),
-  Svg: jest.fn(),
+  __esModule: true,
+  default: 'Svg',
+  Svg: 'Svg',
+  Path: 'Path',
+  Ellipse: 'Ellipse',
+  Circle: 'Circle',
+  Rect: 'Rect',
 }));
 
 // Add mocks of internal files here

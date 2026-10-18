@@ -17,6 +17,7 @@
  */
 
 import React from 'react';
+import { WorldAppearance, WORLD } from './CoastalWorld';
 import { StyleSheet, Text, View } from 'react-native';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { CoveredSectionsResult } from './coveredSections';
@@ -39,6 +40,7 @@ const CoveredSectionsStrip = ({
   width = 620,
   testID = 'covered-sections',
 }: CoveredSectionsStripProps) => {
+  const world = React.useContext(WorldAppearance);
   const trackWidth = scale(width);
   const heading = ocean && result.kind === 'ready' ? 'Scenes replaced' : COVERED_SECTIONS_HEADING;
   return (
@@ -48,8 +50,8 @@ const CoveredSectionsStrip = ({
       accessible
       accessibilityLabel={`${heading}. ${result.text}`}>
       <View style={styles.summaryRow}>
-        <Text style={styles.heading} testID={`${testID}-heading`}>{heading}</Text>
-        <Text style={styles.line} testID={`${testID}-line`}>{result.text}</Text>
+        <Text style={[styles.heading, world && { color: WORLD.TEXT_DIM }]} testID={`${testID}-heading`}>{heading}</Text>
+        <Text style={[styles.line, world && { color: WORLD.TEXT_DIM }]} testID={`${testID}-line`}>{result.text}</Text>
       </View>
       {result.kind === 'ready' ? <SceneTimeline intervals={result.sections} durationMs={result.durationMs} width={width} testID={testID} /> : null}
     </View>

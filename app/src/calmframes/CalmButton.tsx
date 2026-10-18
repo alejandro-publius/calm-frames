@@ -17,6 +17,7 @@
  *   stationary while artwork can have its own optional entry motion.
  */
 
+import { WorldAppearance, WORLD } from './CoastalWorld';
 import React from 'react';
 import { CoastalAppearance } from './CoastalAppearance';
 import TouchableOpacity from './CalmTouchable';
@@ -77,11 +78,13 @@ const CalmButton = ({
   testID = 'calm-button',
 }: CalmButtonProps) => {
   const coastal = React.useContext(CoastalAppearance);
-  const styles = coastal ? coastalStyles : darkStyles;
+  const world = React.useContext(WorldAppearance);
+  const styles = world ? worldStyles : coastal ? coastalStyles : darkStyles;
   const [pressed, setPressed] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
   const feedback = useInterfaceFeedback();
-  const study = React.useContext(CalmControlAppearance);
+  const material = React.useContext(CalmControlAppearance);
+  const study = material && !world;
   return (
     <TouchableOpacity
       testID={testID}
@@ -121,7 +124,7 @@ const CalmButton = ({
   );
 };
 
-const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = false) => StyleSheet.create({
+const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = false, primaryFocus = COASTAL_PRIMARY_FOCUS) => StyleSheet.create({
   button: {
     alignSelf: 'flex-start',
     flexDirection: 'row',
@@ -161,7 +164,7 @@ const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = 
   focusedLabel: { textDecorationLine: 'underline' },
   primary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, minWidth: scale(240) },
   balancedPrimary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, paddingVertical: scale(CALM_SPACE.TIGHT), paddingHorizontal: scale(CALM_SPACE.ROW) },
-  primaryFocused: { backgroundColor: colors.PRIMARY, borderColor: COASTAL_PRIMARY_FOCUS },
+  primaryFocused: { backgroundColor: colors.PRIMARY, borderColor: primaryFocus },
   focusedPrimaryLabel: { color: colors.INK },
   primaryLabel: { color: coastal ? colors.BACKGROUND : colors.INK },
   labelDisabled: {
@@ -171,4 +174,5 @@ const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = 
 
 const darkStyles = makeStyles(CALM_COLORS);
 const coastalStyles = makeStyles(COASTAL_COLORS, true);
+const worldStyles = makeStyles({ ...CALM_COLORS, ...WORLD }, false, WORLD.FOCUS_RING);
 export default CalmButton;

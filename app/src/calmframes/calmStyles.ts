@@ -120,4 +120,4 @@ export const CALM_TEXT = {
 export const heroTitleTypography = (title: string) => title.length > 20 ? CALM_TEXT.screen : CALM_TEXT.feature;
 
 /** Shared reading geometry for choosing a video and reviewing its analysis. */
-export const CALM_FLOW = { READING_WIDTH: 1040, HERO_TOP: 176, HERO_HEIGHT: 640, HERO_TITLE_WIDTH: 820 } as const;
+export const CALM_FLOW = { READING_WIDTH: 1040, HERO_TOP: 100, HERO_HEIGHT: 640, HERO_TITLE_WIDTH: 820 } as const;

@@ -12,6 +12,7 @@ import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from '../../calmframes/calmStyles';
+import { trace } from '../../calmframes/trace';
 import { CoverInterval } from '../../calmframes/coverSchedule';
 import { SeekSource } from '../../calmframes/seekSafety';
 import Seekbar from '../../components/Seekbar';
@@ -94,6 +95,7 @@ export const VideoPlayerUI = React.memo(
     paused = false,
     sceneIntervals,
   }: VideoPlayerUIProps) => {
+    useEffect(() => { trace('playback', paused ? 'paused' : 'playing'); }, [paused]);
     const [captionMenuVisibility, setCaptionMenuVisibility] =
       useState<boolean>(false);
 
@@ -104,6 +106,7 @@ export const VideoPlayerUI = React.memo(
     const [playerControlType, setPlayerControlType] = useState<string>('');
     const [isCaptionButtonFocused, setCaptionButtonFocused] = useState(false);
     const [showMediaControls, setShowMediaControls] = useState(true);
+    useEffect(() => { trace('playback', `controls ${showMediaControls ? 'shown' : 'hidden'}`); }, [showMediaControls]);
     const { handleShowControls, handleShowControlsOnKeyEvent, cancelTimer } =
       useMediaControls(showMediaControls, setShowMediaControls);
 

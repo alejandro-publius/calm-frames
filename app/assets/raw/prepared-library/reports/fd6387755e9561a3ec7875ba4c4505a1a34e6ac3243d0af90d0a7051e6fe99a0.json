@@ -2,10 +2,10 @@
   "checks": [
     {
       "data": {
-        "actual": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
-        "expected": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28"
+        "actual": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+        "expected": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6"
       },
-      "detail": "source hashes to 2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28, title is filed under 2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+      "detail": "source hashes to 02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6, title is filed under 02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
       "name": "source_hash",
       "passed": true
     },
@@ -23,9 +23,9 @@
     },
     {
       "data": {
-        "map_sha": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28"
+        "map_sha": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6"
       },
-      "detail": "[wcag] map says source 2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28, title is 2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+      "detail": "[wcag] map says source 02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6, title is 02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
       "name": "map_hash:wcag",
       "passed": true
     },
@@ -33,17 +33,17 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[wcag] flashmap verify exited 0: OK /Users/alexvintera/calm-frames-claude-video-2026-10-15/build/video-reset/local-library/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/maps/wcag.json verifies against /Users/alexvintera/calm-frames-claude-video-2026-10-15/media/nps_acadia_coastal_broll_720p.mp4",
+      "detail": "[wcag] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/raft-work/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/wcag.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otter-raft-alaska-20s.mp4",
       "name": "map_signature:wcag",
       "passed": true
     },
     {
       "data": {
-        "expected": 2,
+        "expected": 0,
         "recipe": "app-v1",
-        "stored": 2
+        "stored": 0
       },
-      "detail": "[wcag] hide plan has 2 intervals, the map produces 2",
+      "detail": "[wcag] hide plan has 0 intervals, the map produces 0",
       "name": "plan_matches_map:wcag",
       "passed": true
     },
@@ -67,38 +67,38 @@
       "data": {
         "guard_band_ms": 500.0,
         "rendition": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
           "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.062,
-          "median_interval_ms": 20.854,
+          "frame_count": 599.0,
+          "last_pts_ms": 19953.267,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
-          "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.056,
-          "median_interval_ms": 20.856,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 33.367,
+          "frame_count": 599.0,
+          "last_pts_ms": 19986.633,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "detected"
         },
         "start_offset_limit_ms": 150.0,
-        "start_offset_ms": 0.0,
-        "tolerance_ms": 10.428
+        "start_offset_ms": -33.367,
+        "tolerance_ms": 16.6835
       },
       "detail": "[wcag] the rendition has the source's picture rectangle and frame timing",
       "name": "rendition_matches_source:wcag",
@@ -106,22 +106,11 @@
     },
     {
       "data": {
-        "ffmpeg": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
-        "samples_per_interval": 3,
-        "worst_at_s": 12.178144000000005,
-        "worst_db": 38.657352
+        "intervals": 0,
+        "proof_passed": false,
+        "proof_ran": false
       },
-      "detail": "[wcag] worst sample across the first frame, middle and last frame of each covered span matched the cover still at 38.657352 dB (need 30.0) at 12.178144000000005 s",
-      "name": "cover_actually_drawn:wcag",
-      "passed": true
-    },
-    {
-      "data": {
-        "intervals": 2,
-        "proof_passed": true,
-        "proof_ran": true
-      },
-      "detail": "[wcag] 2 interval(s) to cover, and the cover was measured on the rendition",
+      "detail": "[wcag] the hide plan has no interval, so there is nothing to cover and nothing about covering is shown: no flagged segments",
       "name": "cover_proof:wcag",
       "passed": true
     },
@@ -144,39 +133,39 @@
       "data": {
         "guard_band_ms": 500.0,
         "rendition": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
           "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.066999999995,
-          "median_interval_ms": 20.856,
+          "frame_count": 599.0,
+          "last_pts_ms": 19953.267,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
           "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.062,
-          "median_interval_ms": 20.854,
+          "frame_count": 599.0,
+          "last_pts_ms": 19953.267,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "carried"
         },
         "start_offset_limit_ms": 150.0,
         "start_offset_ms": 0.0,
-        "tolerance_ms": 10.427,
-        "transport_pts_shift_ms": 1441.711
+        "tolerance_ms": 16.6835,
+        "transport_pts_shift_ms": 1466.733
       },
       "detail": "[wcag] HLS relative frame timing matches the checked MP4",
       "name": "hls_timing_matches_master:wcag",
@@ -194,9 +183,9 @@
     {
       "data": {
         "bad_times": [],
-        "frame_count": 4
+        "frame_count": 2
       },
-      "detail": "[wcag] 0 of 4 trickplay frame(s) came from a moment that is neither calm nor under the cover",
+      "detail": "[wcag] 0 of 2 trickplay frame(s) came from a moment that is neither calm nor under the cover",
       "name": "bif_calm:wcag",
       "passed": true
     },
@@ -223,9 +212,9 @@
     },
     {
       "data": {
-        "map_sha": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28"
+        "map_sha": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6"
       },
-      "detail": "[broadcast] map says source 2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28, title is 2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+      "detail": "[broadcast] map says source 02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6, title is 02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
       "name": "map_hash:broadcast",
       "passed": true
     },
@@ -233,17 +222,17 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[broadcast] flashmap verify exited 0: OK /Users/alexvintera/calm-frames-claude-video-2026-10-15/build/video-reset/local-library/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/maps/broadcast.json verifies against /Users/alexvintera/calm-frames-claude-video-2026-10-15/media/nps_acadia_coastal_broll_720p.mp4",
+      "detail": "[broadcast] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/raft-work/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/broadcast.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otter-raft-alaska-20s.mp4",
       "name": "map_signature:broadcast",
       "passed": true
     },
     {
       "data": {
-        "expected": 2,
+        "expected": 0,
         "recipe": "app-v1",
-        "stored": 2
+        "stored": 0
       },
-      "detail": "[broadcast] hide plan has 2 intervals, the map produces 2",
+      "detail": "[broadcast] hide plan has 0 intervals, the map produces 0",
       "name": "plan_matches_map:broadcast",
       "passed": true
     },
@@ -267,38 +256,38 @@
       "data": {
         "guard_band_ms": 500.0,
         "rendition": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
           "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.062,
-          "median_interval_ms": 20.854,
+          "frame_count": 599.0,
+          "last_pts_ms": 19953.267,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
-          "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.056,
-          "median_interval_ms": 20.856,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 33.367,
+          "frame_count": 599.0,
+          "last_pts_ms": 19986.633,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "detected"
         },
         "start_offset_limit_ms": 150.0,
-        "start_offset_ms": 0.0,
-        "tolerance_ms": 10.428
+        "start_offset_ms": -33.367,
+        "tolerance_ms": 16.6835
       },
       "detail": "[broadcast] the rendition has the source's picture rectangle and frame timing",
       "name": "rendition_matches_source:broadcast",
@@ -306,22 +295,11 @@
     },
     {
       "data": {
-        "ffmpeg": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
-        "samples_per_interval": 3,
-        "worst_at_s": 12.178144000000005,
-        "worst_db": 38.657352
+        "intervals": 0,
+        "proof_passed": false,
+        "proof_ran": false
       },
-      "detail": "[broadcast] worst sample across the first frame, middle and last frame of each covered span matched the cover still at 38.657352 dB (need 30.0) at 12.178144000000005 s",
-      "name": "cover_actually_drawn:broadcast",
-      "passed": true
-    },
-    {
-      "data": {
-        "intervals": 2,
-        "proof_passed": true,
-        "proof_ran": true
-      },
-      "detail": "[broadcast] 2 interval(s) to cover, and the cover was measured on the rendition",
+      "detail": "[broadcast] the hide plan has no interval, so there is nothing to cover and nothing about covering is shown: no flagged segments",
       "name": "cover_proof:broadcast",
       "passed": true
     },
@@ -344,39 +322,39 @@
       "data": {
         "guard_band_ms": 500.0,
         "rendition": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
           "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.066999999995,
-          "median_interval_ms": 20.856,
+          "frame_count": 599.0,
+          "last_pts_ms": 19953.267,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
           "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.062,
-          "median_interval_ms": 20.854,
+          "frame_count": 599.0,
+          "last_pts_ms": 19953.267,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "carried"
         },
         "start_offset_limit_ms": 150.0,
         "start_offset_ms": 0.0,
-        "tolerance_ms": 10.427,
-        "transport_pts_shift_ms": 1441.711
+        "tolerance_ms": 16.6835,
+        "transport_pts_shift_ms": 1466.733
       },
       "detail": "[broadcast] HLS relative frame timing matches the checked MP4",
       "name": "hls_timing_matches_master:broadcast",
@@ -394,9 +372,9 @@
     {
       "data": {
         "bad_times": [],
-        "frame_count": 4
+        "frame_count": 2
       },
-      "detail": "[broadcast] 0 of 4 trickplay frame(s) came from a moment that is neither calm nor under the cover",
+      "detail": "[broadcast] 0 of 2 trickplay frame(s) came from a moment that is neither calm nor under the cover",
       "name": "bif_calm:broadcast",
       "passed": true
     },
@@ -423,9 +401,9 @@
     },
     {
       "data": {
-        "map_sha": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28"
+        "map_sha": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6"
       },
-      "detail": "[extra-cautious] map says source 2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28, title is 2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+      "detail": "[extra-cautious] map says source 02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6, title is 02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
       "name": "map_hash:extra-cautious",
       "passed": true
     },
@@ -433,17 +411,17 @@
       "data": {
         "returncode": 0
       },
-      "detail": "[extra-cautious] flashmap verify exited 0: OK /Users/alexvintera/calm-frames-claude-video-2026-10-15/build/video-reset/local-library/titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/maps/extra-cautious.json verifies against /Users/alexvintera/calm-frames-claude-video-2026-10-15/media/nps_acadia_coastal_broll_720p.mp4",
+      "detail": "[extra-cautious] flashmap verify exited 0: OK /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/raft-work/titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/extra-cautious.json verifies against /Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otter-raft-alaska-20s.mp4",
       "name": "map_signature:extra-cautious",
       "passed": true
     },
     {
       "data": {
-        "expected": 2,
+        "expected": 0,
         "recipe": "app-v1",
-        "stored": 2
+        "stored": 0
       },
-      "detail": "[extra-cautious] hide plan has 2 intervals, the map produces 2",
+      "detail": "[extra-cautious] hide plan has 0 intervals, the map produces 0",
       "name": "plan_matches_map:extra-cautious",
       "passed": true
     },
@@ -467,38 +445,38 @@
       "data": {
         "guard_band_ms": 1000.0,
         "rendition": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
           "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.062,
-          "median_interval_ms": 20.854,
+          "frame_count": 599.0,
+          "last_pts_ms": 19953.267,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
-          "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.056,
-          "median_interval_ms": 20.856,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
+          "first_pts_ms": 33.367,
+          "frame_count": 599.0,
+          "last_pts_ms": 19986.633,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "detected"
         },
         "start_offset_limit_ms": 150.0,
-        "start_offset_ms": 0.0,
-        "tolerance_ms": 10.428
+        "start_offset_ms": -33.367,
+        "tolerance_ms": 16.6835
       },
       "detail": "[extra-cautious] the rendition has the source's picture rectangle and frame timing",
       "name": "rendition_matches_source:extra-cautious",
@@ -506,22 +484,11 @@
     },
     {
       "data": {
-        "ffmpeg": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers",
-        "samples_per_interval": 3,
-        "worst_at_s": 31.572144000000005,
-        "worst_db": 38.695389
+        "intervals": 0,
+        "proof_passed": false,
+        "proof_ran": false
       },
-      "detail": "[extra-cautious] worst sample across the first frame, middle and last frame of each covered span matched the cover still at 38.695389 dB (need 30.0) at 31.572144000000005 s",
-      "name": "cover_actually_drawn:extra-cautious",
-      "passed": true
-    },
-    {
-      "data": {
-        "intervals": 2,
-        "proof_passed": true,
-        "proof_ran": true
-      },
-      "detail": "[extra-cautious] 2 interval(s) to cover, and the cover was measured on the rendition",
+      "detail": "[extra-cautious] the hide plan has no interval, so there is nothing to cover and nothing about covering is shown: no flagged segments",
       "name": "cover_proof:extra-cautious",
       "passed": true
     },
@@ -544,39 +511,39 @@
       "data": {
         "guard_band_ms": 1000.0,
         "rendition": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
           "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.066999999995,
-          "median_interval_ms": 20.856,
+          "frame_count": 599.0,
+          "last_pts_ms": 19953.267,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "carried"
         },
         "source": {
-          "coded_height": 720.0,
-          "coded_width": 1280.0,
+          "coded_height": 480.0,
+          "coded_width": 854.0,
           "first_pts_ms": 0.0,
-          "frame_count": 1804.0,
-          "last_pts_ms": 37600.062,
-          "median_interval_ms": 20.854,
+          "frame_count": 599.0,
+          "last_pts_ms": 19953.267,
+          "median_interval_ms": 33.367,
           "picture_coded": [
             0,
             0,
-            1280,
-            720
+            854,
+            480
           ],
           "picture_source": "carried"
         },
         "start_offset_limit_ms": 150.0,
         "start_offset_ms": 0.0,
-        "tolerance_ms": 10.427,
-        "transport_pts_shift_ms": 1441.711
+        "tolerance_ms": 16.6835,
+        "transport_pts_shift_ms": 1466.733
       },
       "detail": "[extra-cautious] HLS relative frame timing matches the checked MP4",
       "name": "hls_timing_matches_master:extra-cautious",
@@ -594,9 +561,9 @@
     {
       "data": {
         "bad_times": [],
-        "frame_count": 4
+        "frame_count": 2
       },
-      "detail": "[extra-cautious] 0 of 4 trickplay frame(s) came from a moment that is neither calm nor under the cover",
+      "detail": "[extra-cautious] 0 of 2 trickplay frame(s) came from a moment that is neither calm nor under the cover",
       "name": "bif_calm:extra-cautious",
       "passed": true
     },
@@ -618,22 +585,22 @@
     {
       "data": {
         "bad_presets": [],
-        "still_ms": 14816.833333333334
+        "still_ms": 6245.8228125000005
       },
-      "detail": "the cover still at 14817 ms is inside a flagged span for no preset",
+      "detail": "the cover still at 6246 ms is inside a flagged span for no preset",
       "name": "cover_still_calm",
       "passed": true
     }
   ],
-  "finished_at": 1792097228.701309,
-  "outcome": "cover proven drawn",
+  "finished_at": 1792302855.565881,
+  "outcome": "no flagged segments",
   "passed": true,
   "presets": [
     "wcag",
     "broadcast",
     "extra-cautious"
   ],
-  "sha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
-  "source_path": "/Users/alexvintera/calm-frames-claude-video-2026-10-15/media/nps_acadia_coastal_broll_720p.mp4",
-  "started_at": 1792096995.439627
+  "sha256": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+  "source_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/source/sea-otter-raft-alaska-20s.mp4",
+  "started_at": 1792302747.250266
 }

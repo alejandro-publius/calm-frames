@@ -2,12 +2,11 @@ import React from 'react';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 import { fireEvent, render } from '@testing-library/react-native';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
-import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
 import { checkedShelf } from './shelfFixtures';
 import { ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
 
 // Retain this two-title regression fixture; the real consumer pair is tested in otterPreview.
-const titles = checkedShelf().filter(entry => entry.title.title !== 'Otters · short preview');
+const titles = checkedShelf().filter(entry => entry.title.title !== 'Sea otters in Alaska');
 const acadia = titles.find(entry => entry.title.sha256 === ACADIA_SOURCE_SHA256)!;
 
 test('the actual-video rail selects artwork and both actions without starting playback on focus', () => {
@@ -18,7 +17,7 @@ test('the actual-video rail selects artwork and both actions without starting pl
   expect(play).not.toHaveBeenCalled();
   expect(open).not.toHaveBeenCalled();
   expect(view.getByTestId('kid-home-video-title').props.children).toBe('Acadia');
-  expect(view.UNSAFE_getByType(HomeHarborScene).props.variant).toBe('coastal');
+  expect(view.getByTestId('coastal-world')).toBeTruthy();
   fireEvent.press(view.getByTestId('kid-home-watch'));
   expect(play).toHaveBeenCalledWith(acadia);
   expect(launch).toHaveBeenLastCalledWith('watch');

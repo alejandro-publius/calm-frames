@@ -10,12 +10,12 @@
       "approvalReference": "Owner approval in thread 01a10d92-99ac-70a3-b473-29310ef6e002, 2026-10-18; results/ocean-native-2026-10-18/approval.json"
     },
     {
-      "bundleId": "4064f489236973b0e8683f24fac9756ed0cdf475d376a7c6501d644397b597f5",
-      "catalogSha256": "d589ec17cc70b2433dbef19d97e557885d22d97cb0b1daa364596850bced1013",
+      "bundleId": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+      "catalogSha256": "6b3f250598791232009a8c2ddef81bab0411eebcaa201ff582e7313cd4e9e7fe",
       "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
       "consumer": true,
-      "label": "Otters: approved silent short preview",
-      "approvalReference": "Owner exact-catalog approval in thread 01a10d92-99ac-70a3-b473-29310ef6e002, 2026-10-18; results/otter-native-2026-10-18/approval.json"
+      "label": "Sea otters in Alaska: approved NOAA ocean excerpt",
+      "approvalReference": "Owner \"do it all\" after exact clip/install proposal, thread 01a10d92-99ac-70a3-b473-29310ef6e002; results/sea-otters-flow-2026-10-18/approval.json"
     }
   ]
 }

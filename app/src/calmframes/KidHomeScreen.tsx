@@ -1,7 +1,9 @@
 import React from 'react';
+import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
 import TouchableOpacity from './CalmTouchable';
 import {
   BackHandler,
+  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,17 +12,15 @@ import {
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import { OFFLINE_TITLE_ID } from './offlineTitle';
-import HomeHarborScene from './HomeHarborScene';
+import HomeHarborScene, { filmStill } from './HomeHarborScene';
 import PictureHoldIntroduction from './PictureHoldIntroduction';
 import SceneBridgeFixture from './SceneBridgeFixture';
 import { isBundledBenignStory } from './benignStory';
 import {
-  CALM_CONTROL,
   COASTAL_COLORS as CALM_COLORS,
   CALM_FLOW,
   CALM_SPACE,
   CALM_TEXT,
-  heroTitleTypography,
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
@@ -35,6 +35,7 @@ import {
 } from './copy';
 import ProfilePicker from './ProfilePicker';
 import { Profile } from './profiles';
+import { shelfPoster } from './shelf';
 import { titlePresentation } from './TitleArtwork';
 import StatusNotice from './StatusNotice';
 import { CheckedTitle, kidModeTitles } from './titleStatus';
@@ -74,6 +75,8 @@ export interface KidHomeScreenProps {
    */
   returnFocusControl?: ReturnFocusControl;
   onOpenParentArea?: () => void;
+  onSelectTitle?: (id: string) => void;
+  selectedTitleId?: string | null;
   /**
    * The service that publishes checks could not be reached.
    *
@@ -105,6 +108,8 @@ const KidHomeScreen = ({
   returnFocusControl,
   onLaunchControl,
   onOpenParentArea,
+  onSelectTitle,
+  selectedTitleId,
   offline = false,
   profiles,
   activeProfileId,
@@ -143,7 +148,7 @@ const KidHomeScreen = ({
     });
     return () => subscription.remove();
   }, [choosingProfile, interfaceActive]);
-  const [selectedId, setSelectedId] = React.useState(returnFocusId);
+  const [selectedId, setSelectedId] = React.useState(selectedTitleId ?? returnFocusId);
   const featured = listed.find((entry) => entry.title.id === selectedId && !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID) ?? listed.find((entry) => titlePresentation(entry.title).action === 'Watch now') ?? listed[0];
   const mainStories = listed.filter((entry) => !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID);
   const hasMainStory = mainStories.length > 0;
@@ -217,13 +222,13 @@ const KidHomeScreen = ({
   }
 
   return (
-    <View testID={testID} style={styles.screen}>
-      <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />
+    <WorldAppearance.Provider value={!empty && !showIntroduction}><View testID={testID} style={[styles.screen, !empty && !showIntroduction && { backgroundColor: WORLD.BACKGROUND }]}>
+      {!empty && !showIntroduction ? <CoastalWorld /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
       <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo && !returnToBridgeTest}>
-          {picking && profiles ? <CalmButton quiet compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
+          {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
             onPress={() => { setReturnToHeader(null); setChoosingProfile(!choosingProfile); }} /> : null}
-          {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet compact testID={`${testID}-learn`} label="How it works" accessibilityLabel="How it works" hasTVPreferredFocus={returnTo === 'learn'}
+          {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-learn`} label="How it works" accessibilityLabel="How it works" hasTVPreferredFocus={returnTo === 'learn'}
             disabled={saving} onPress={() => { setChoosingProfile(false); setReturnToHeader(null); setShowIntroduction(true); }} /></View> : null}
           {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parents" accessibilityLabel="Parents: parental controls, needs a PIN" hasTVPreferredFocus={(empty || returnTo === 'parent') && !saving && !showIntroduction} onPress={onOpenParentArea} /></View> : null}
       </CalmPageHeader>
@@ -249,29 +254,30 @@ const KidHomeScreen = ({
           <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
             {featured && feature ? <View style={styles.hero}>
               <View style={styles.heroCopy}>
-                <Text accessibilityRole="header" style={[styles.featureTitle, heroTitleTypography(feature.name)]} testID={`${testID}-video-title`}>{feature.name}</Text>
+                <Text accessibilityRole="header" style={[styles.featureTitle, CALM_TEXT.section]} testID={`${testID}-video-title`}>{feature.name}</Text>
                 <Text style={styles.videoMeta} testID={`${testID}-video-meta`}>{[feature.runtime ?? runtimeLabel(featured.title.durationMs), isBundledBenignStory(featured.title) ? 'Simulated demo' : null].filter(Boolean).join(' · ')}</Text>
                 <View style={styles.actions}>
                   <CalmButton primary playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
-                  <CalmButton quiet onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" accessibilityLabel={`Details: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
+                  <CalmButton quiet tertiary compact onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" accessibilityLabel={`Details: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
               </View>
             </View> : null}
-            {otherStories.length > 0 ? <View style={styles.sectionHeading}><Text accessibilityRole="header" testID={`${testID}-title`} style={styles.section}>Choose a video</Text></View> : null}
+            {otherStories.length > 0 ? <View style={styles.sectionHeading}><Text accessibilityRole="header" testID={`${testID}-title`} style={styles.section}>Choose your coast</Text></View> : null}
             <View style={styles.grid}>
               {otherStories.map((entry) => {
                 const focused = focusedId === entry.title.id;
                 const selected = featured?.title.id === entry.title.id;
                 const label = titlePresentation(entry.title);
-                return <TouchableOpacity surfaceKind={selected ? 'secondary' : 'tertiary'} disabled={saving || undefined} accessibilityState={{ disabled: saving, selected }}
+                return <TouchableOpacity surfaceKind="tertiary" disabled={saving || undefined} accessibilityState={{ disabled: saving, selected }}
                   key={entry.title.id} testID={`${testID}-poster-${entry.title.id}`} accessibilityRole="button"
                   accessibilityLabel={[label.cardName ?? label.name, label.kind].filter(Boolean).join(', ')} activeOpacity={1}
                   hasTVPreferredFocus={returnTo === 'poster' && entry.title.id === preferredId}
-                  onFocus={() => { setFocusedId(entry.title.id); setSelectedId(entry.title.id); }} onBlur={() => setFocusedId(null)} onPress={() => {
+                  onFocus={() => { setFocusedId(entry.title.id); setSelectedId(entry.title.id); onSelectTitle?.(entry.title.id); }} onBlur={() => setFocusedId(null)} onPress={() => {
                     if (!saving) { onLaunchControl?.('poster'); onOpen(entry); feedback.confirm(); }
                   }}
                   style={[styles.poster, selected ? styles.posterSelected : null, focused ? styles.posterFocused : null]}>
+                  <Image source={!label.menuArt && !label.art && shelfPoster(entry) ? { uri: shelfPoster(entry) } : filmStill(label.menuArt ?? label.art)} style={styles.filmStill} resizeMode="cover" fadeDuration={0} testID={`${testID}-poster-image-${entry.title.id}`} accessible={false} />
                   <View style={styles.posterCopy}>
                   <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
                   {label.kind ? <Text style={styles.posterQualifier} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{label.selectorMeta ?? label.kind}</Text> : null}
@@ -282,7 +288,7 @@ const KidHomeScreen = ({
           </ScrollView>
         </>
       )}
-    </View>
+    </View></WorldAppearance.Provider>
   );
 };
 
@@ -296,22 +302,23 @@ const styles = StyleSheet.create({
   navigation: { flexDirection: 'row', gap: scale(20) },
   navigationLink: { alignSelf: 'center' },
   libraryScroll: { flex: 1 },
-  scrollContent: { paddingBottom: scale(12) },
-  hero: { width: '100%', minHeight: scale(556), alignItems: 'flex-start', paddingBottom: scale(36) },
-  heroCopy: { width: scale(CALM_FLOW.HERO_TITLE_WIDTH), paddingTop: scale(CALM_FLOW.HERO_TOP), alignItems: 'flex-start' },
-  featureTitle: { ...CALM_TEXT.feature, color: CALM_COLORS.TEXT, marginTop: scale(0), marginBottom: scale(CALM_SPACE.TIGHT) },
-  videoMeta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, marginBottom: scale(CALM_SPACE.BLOCK) },
+  scrollContent: { minHeight: scale(820), paddingBottom: scale(12) },
+  hero: { position: 'absolute', bottom: 0, width: '100%', minHeight: scale(180), alignItems: 'flex-start', paddingBottom: scale(36) },
+  heroCopy: { width: scale(CALM_FLOW.HERO_TITLE_WIDTH), paddingTop: 0, alignItems: 'flex-start' },
+  featureTitle: { ...CALM_TEXT.feature, color: WORLD.TEXT, marginTop: scale(0), marginBottom: scale(CALM_SPACE.TIGHT) },
+  videoMeta: { ...CALM_TEXT.supporting, color: WORLD.TEXT_DIM, marginBottom: scale(CALM_SPACE.BLOCK) },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   learn: { flexDirection: 'row', marginTop: scale(8) },
-  sectionHeading: { alignItems: 'flex-start', marginBottom: scale(12) },
-  section: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
+  sectionHeading: { alignItems: 'center', marginTop: scale(16), marginBottom: scale(12) },
+  section: { ...CALM_TEXT.section, color: WORLD.TEXT },
   banner: { marginBottom: scale(20) },
-  grid: { width: '100%', flexDirection: 'row', flexWrap: 'nowrap', gap: scale(20) },
-  poster: { width: scale(396), minHeight: scale(132), flexDirection: 'column', justifyContent: 'center', padding: scale(12), borderRadius: scale(CALM_CONTROL.RADIUS), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: 'transparent', backgroundColor: 'transparent' },
-  posterSelected: { borderLeftColor: CALM_COLORS.FOCUS_RING, backgroundColor: CALM_COLORS.SURFACE },
-  posterFocused: { borderColor: CALM_COLORS.FOCUS_RING, backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
-  posterCopy: { paddingHorizontal: scale(12) },
-  posterTitle: { ...CALM_TEXT.card, color: CALM_COLORS.TEXT },
-  posterQualifier: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM },
+  grid: { width: '100%', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: scale(180), marginTop: scale(100), gap: scale(100) },
+  poster: { width: scale(400), minHeight: scale(280), flexDirection: 'column', justifyContent: 'center', padding: scale(12), borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: WORLD.BORDER, borderBottomWidth: scale(12), backgroundColor: WORLD.SURFACE },
+  posterSelected: { borderBottomColor: WORLD.FOCUS_RING },
+  posterFocused: { borderColor: WORLD.FOCUS_RING, backgroundColor: WORLD.SURFACE_FOCUSED },
+  filmStill: { width: '100%', height: scale(164), borderRadius: scale(10) },
+  posterCopy: { paddingHorizontal: scale(4), paddingTop: scale(8) },
+  posterTitle: { ...CALM_TEXT.section, color: WORLD.TEXT },
+  posterQualifier: { ...CALM_TEXT.supporting, color: WORLD.TEXT_DIM },
 });
 export default KidHomeScreen;

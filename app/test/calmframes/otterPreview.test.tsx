@@ -4,8 +4,7 @@ import { resolve } from 'path';
 import { fireEvent, render } from '@testing-library/react-native';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
-import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
-import { titlePresentation, OTTER_PREVIEW_SOURCE_SHA256 } from '../../src/calmframes/TitleArtwork';
+import { titlePresentation, SEA_OTTER_SOURCE_SHA256 } from '../../src/calmframes/TitleArtwork';
 import { createPackagedLibrary, createApprovedLibrary, packagedLibrary, ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
 import { DEFAULT_SETTINGS, PRESET_NAMES } from '../../src/calmframes/household';
 import { checkTitle } from '../../src/calmframes/titleStatus';
@@ -14,7 +13,7 @@ import { guardedParamsFor, titleDataFor, defaultCatalog } from '../../src/screen
 import { checkedShelf } from './shelfFixtures';
 
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
-const raw = readFileSync(resolve(__dirname, '../../../results/otter-preview-2026-10-18/candidate-catalog.json'), 'utf8');
+const raw = readFileSync(resolve(__dirname, '../../../results/sea-otters-2026-10-18/candidate-catalog.json'), 'utf8');
 // Compare the retained exact candidate against the now-approved production catalog.
 const candidate = createPackagedLibrary(raw);
 const title = candidate.titles(DEFAULT_SETTINGS)[0];
@@ -28,14 +27,14 @@ it.each(PRESET_NAMES)('the real signed %s preview retains duration, identity and
   const item = candidate.titles(settings)[0];
   const checked = checkTitle(item, { settings, publicKeyBase64: candidate.publicKeyBase64, nowMs });
   expect(candidate.problem).toBeNull(); expect(checked.status).toBe('verified');
-  expect(checked.segments).toEqual([]); expect(item.durationMs).toBe(4240);
-  expect(item.sha256).toBe(OTTER_PREVIEW_SOURCE_SHA256); expect(item.title).toBe('Otters · short preview');
+  expect(checked.segments).toEqual([]); expect(item.durationMs).toBe(19986.633);
+  expect(item.sha256).toBe(SEA_OTTER_SOURCE_SHA256); expect(item.title).toBe('Sea otters in Alaska');
   expect(item.textTrack).toBeUndefined();
   expect(candidate.acceptsRoute(titleDataFor(checked), guardedParamsFor(checked, settings))).toBe(true);
   expect(bakedAmbientForRendition(item.renditionSha256, preset)).toBeNull();
 });
 it('approves only the exact otter catalog and rejects other content under the same signer', () => {
-  expect(defaultCatalog().some(item => item.sha256 === OTTER_PREVIEW_SOURCE_SHA256)).toBe(true);
+  expect(defaultCatalog().some(item => item.sha256 === SEA_OTTER_SOURCE_SHA256)).toBe(true);
   expect(packagedLibrary.publicKeyFor(title, DEFAULT_SETTINGS)).toBe(candidate.publicKeyBase64);
   expect(packagedLibrary.acceptsRoute(titleDataFor(otter), guardedParamsFor(otter, DEFAULT_SETTINGS))).toBe(true);
   expect(checkTitle(title, { settings: DEFAULT_SETTINGS, publicKeyBase64: packagedLibrary.publicKeyFor(acadia.title, DEFAULT_SETTINGS)!, nowMs }).status).toBe('failed');
@@ -53,10 +52,10 @@ it('uses the existing content rail without playing on focus or changing ambient 
   expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Acadia');
   fireEvent(screen.getByTestId(`kid-home-poster-${title.id}`), 'focus');
   expect(open).not.toHaveBeenCalled(); expect(play).not.toHaveBeenCalled();
-  expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Otters · short preview');
-  expect(screen.getByTestId('kid-home-video-meta').props.children).toBe('4.24 seconds · Silent · Plays once');
-  expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toBe('Watch preview: Otters · short preview');
-  expect(screen.UNSAFE_getByType(HomeHarborScene).props.variant).toBe('coastal');
+  expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea otters in Alaska');
+  expect(screen.getByTestId('kid-home-video-meta').props.children).toBe('20 seconds · Silent · Plays once');
+  expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toBe('Watch: Sea otters in Alaska');
+  expect(screen.getByTestId('coastal-world')).toBeTruthy();
   expect(screen.queryAllByTestId(/^kid-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(2);
   fireEvent.press(screen.getByTestId('kid-home-watch')); expect(play).toHaveBeenCalledWith(otter);
   fireEvent.press(screen.getByTestId('kid-home-more-info')); expect(open).toHaveBeenCalledWith(otter);
@@ -67,19 +66,19 @@ it('uses the existing content rail without playing on focus or changing ambient 
 it.each(['watch', 'details', 'poster'] as const)('retains the preview and a single %s return focus', control => {
   const screen = render(<KidHomeScreen titles={[acadia, otter]} onOpen={jest.fn()} returnFocusId={title.id} returnFocusControl={control} />);
   const id = control === 'watch' ? 'kid-home-watch' : control === 'details' ? 'kid-home-more-info' : `kid-home-poster-${title.id}`;
-  expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Otters · short preview');
+  expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea otters in Alaska');
   expect(screen.getByTestId(id).props.hasTVPreferredFocus).toBe(true);
   expect(screen.getAllByRole('button').filter(button => button.props.hasTVPreferredFocus)).toHaveLength(1);
 });
 it('shows duration, silent/once wording and source attribution in the approved Details flow', () => {
   const play = jest.fn(), back = jest.fn();
   const screen = render(<TitleDetailsScreen entry={otter} onPlay={play} onBack={back} />);
-  expect(screen.getByTestId('title-details-meta').props.children).toBe('4.24 seconds · Silent · Plays once');
-  expect(screen.getByTestId('title-details-play').props.accessibilityLabel).toBe('Watch preview: Otters · short preview');
+  expect(screen.getByTestId('title-details-meta').props.children).toBe('20 seconds · Silent · Plays once');
+  expect(screen.getByTestId('title-details-play').props.accessibilityLabel).toBe('Watch: Sea otters in Alaska');
   fireEvent.press(screen.getByTestId('title-details-play')); expect(play).toHaveBeenCalledWith(otter);
   fireEvent.press(screen.getByTestId('title-details-show-info'));
-  expect(screen.getByTestId('title-details-attribution').props.children).toContain('Uusijani / Wikimedia Commons');
-  expect(screen.getByTestId('title-details-attribution').props.children).toContain('CC0 1.0');
+  expect(screen.getByTestId('title-details-attribution').props.children).toContain('NOAA Fisheries');
+  expect(screen.getByTestId('title-details-attribution').props.children).toContain('Public-domain B-roll');
   fireEvent.press(screen.getByTestId('title-details-info-back'));
   fireEvent.press(screen.getByTestId('title-details-back')); expect(back).toHaveBeenCalledTimes(1);
 });

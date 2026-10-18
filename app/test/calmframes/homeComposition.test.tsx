@@ -23,7 +23,7 @@ import { CheckedTitle } from '../../src/calmframes/titleStatus';
 import { checkedShelf } from './shelfFixtures';
 
 // Retain this two-title regression fixture; the real consumer pair is tested in otterPreview.
-const titles = checkedShelf().filter(entry => entry.title.title !== 'Otters · short preview');
+const titles = checkedShelf().filter(entry => entry.title.title !== 'Sea otters in Alaska');
 const acadia = titles.find((entry) => entry.title.sha256 === ACADIA_SOURCE_SHA256)!;
 const consumer = [acadia];
 const profiles = [{ id: 'everyone', name: 'Everyone' }, { id: 'robin', name: 'Robin' }] as unknown as Profile[];
@@ -75,7 +75,7 @@ describe('one featured video', () => {
 describe('several videos', () => {
   it('brings the rail back with a card for every prepared video', () => {
     render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} />);
-    expect(screen.getByText('Choose a video')).toBeTruthy();
+    expect(screen.getByText('Choose your coast')).toBeTruthy();
     expect(posters()).toHaveLength(2);
     expect(preferred()).toEqual(['kid-home-watch']);
   });

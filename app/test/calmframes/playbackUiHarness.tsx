@@ -88,7 +88,7 @@ export function makeMedia() {
   };
 }
 export const interval = { startMs: 5000, endMs: 9000, causes: ['general'] };
-export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none', showHomeOpening = false, materials = false): ReturnType<typeof render> & { goBack: jest.Mock } {
+export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none', showHomeOpening = false, materials = false, bifUrl?: string): ReturnType<typeof render> & { goBack: jest.Mock } {
   mockMedia = makeMedia();
   mockMedia.currentTime = kind === 'countdown' ? 3 : 6;
   const raw = kind === 'none' ? NO_CARD : cardAt([interval] as never, mockMedia.currentTime * 1000);
@@ -97,7 +97,7 @@ export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none', sh
   const title = benignStoryTitle();
   if (kind === 'covering') mockGuard.coverImageUri = JSON.parse(title.maps!.wcag!).scene_holds.holds[0].image_data_uri;
   const goBack = jest.fn();
-  const data = { ...title, title: 'Harbor', format: 'MP4', categories: [], channelID: '', posterUrl: '', description: '', mediaType: 'video', mediaSourceType: 'url', uhd: false, secure: false, rentAmount: '' };
+  const data = { ...title, bifUrl, title: 'Harbor', format: 'MP4', categories: [], channelID: '', posterUrl: '', description: '', mediaType: 'video', mediaSourceType: 'url', uhd: false, secure: false, rentAmount: '' };
   const view = render(<PlayerScreen navigation={{ goBack } as never} route={{ params: { data, showHomeOpening, guarded: { sha256: title.sha256, maps: title.maps } } } as never} />, { wrapper: ({ children }: { children: React.ReactNode }) => <CalmControlAppearance.Provider value={materials}>{children}</CalmControlAppearance.Provider> });
   return { ...view, goBack };
 }

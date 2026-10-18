@@ -37,6 +37,7 @@ type MediaPlayerDeInitStatus = 'success' | 'timedout' | 'invalid';
  * using the Shaka Player for adaptive content.
  */
 export class VideoHandler {
+  private initializationGeneration = 0;
   private lastProgressSeconds: number | undefined;
 
   // Core video player references
@@ -137,7 +138,10 @@ export class VideoHandler {
    */
   preBufferVideo = useCallback(
     async (componentInstance?: IComponentInstance) => {
-      await this.destroyVideoElements();
+      const destroyed = this.destroyVideoElements();
+      const generation = this.initializationGeneration;
+      await destroyed;
+      if (generation !== this.initializationGeneration) return;
       console.info(
         '[VideoHandler.ts] - preBufferVideo - Attempt to prebuffer Video Player - ComponentInstance',
         componentInstance,
@@ -177,13 +181,13 @@ export class VideoHandler {
 
       // Leaving or replacing the player while native setup is pending cancels
       // this initialization; never attach listeners to a later media instance.
-      if (this.videoRef.current !== media) {
+      if (generation !== this.initializationGeneration || this.videoRef.current !== media) {
         return;
       }
       media
         .initialize()
         .then(() => {
-          if (this.videoRef.current !== media) {
+          if (generation !== this.initializationGeneration || this.videoRef.current !== media) {
             return;
           }
           console.log(
@@ -196,7 +200,7 @@ export class VideoHandler {
         .catch((error) => {
           // A known setup/load failure can recover immediately. Ignore late
           // failures from a player that Back or replacement already released.
-          if (this.videoRef.current !== media) {
+          if (generation !== this.initializationGeneration || this.videoRef.current !== media) {
             return;
           }
           this.setIsVideoError(true);
@@ -638,6 +642,7 @@ export class VideoHandler {
    * @returns true if destruction was successful or no video to destroy, false on error
    */
   destroyVideoElements = (): boolean => {
+    this.initializationGeneration += 1;
     if (!this.videoRef.current) {
       console.log('[VideoHandler.ts] - No video reference to destroy');
       return false;

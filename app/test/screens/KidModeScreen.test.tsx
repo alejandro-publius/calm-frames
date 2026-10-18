@@ -38,6 +38,7 @@ import { ACADIA_SOURCE_SHA256, packagedLibrary } from '../../src/calmframes/pack
 import { regressionCatalog } from '../calmframes/shelfFixtures';
 import * as householdStorage from '../../src/calmframes/householdStorage';
 import { emptyPinGate } from '../../src/calmframes/parentGate';
+import { SEA_OTTER_SOURCE_SHA256 } from '../../src/calmframes/TitleArtwork';
 import { newFamily } from '../../src/calmframes/profiles';
 
 /** A moment when the bundled map is neither unmade nor stale. */
@@ -75,6 +76,19 @@ async function finishFirstRun() {
 }
 
 describe('reaching Calm Frames', () => {
+  it('retains a selected destination through Parents cancellation without starting playback', async () => {
+    const { navigate } = await renderKidMode(true);
+    await finishFirstRun();
+    const otter = `kid-mode-home-poster-prepared-${SEA_OTTER_SOURCE_SHA256}`;
+    fireEvent(screen.getByTestId(otter), 'focus');
+    fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
+    fireEvent.press(screen.getByTestId('kid-mode-parent-back'));
+    expect(screen.getByTestId(otter).props.accessibilityState.selected).toBe(true);
+    expect(screen.getByTestId('kid-mode-home-parent-area').props.hasTVPreferredFocus).toBe(true);
+    expect(screen.getByTestId('kid-mode-home-video-title').props.children).toBe('Sea otters in Alaska');
+    expect(navigate).not.toHaveBeenCalled();
+  });
+
   it('returns focus to the opened title through details, player and parent area', async () => {
     const { navigate, returnFromPlayer } = await renderKidMode();
     await finishFirstRun();
@@ -304,10 +318,10 @@ describe('reaching Calm Frames', () => {
 });
 
 describe('the shelf a household lands on', () => {
-  it('features only Acadia as a consumer video while retaining the playback diagnostic', () => {
+  it('features Acadia and approved sea otters as consumer videos while retaining the playback diagnostic', () => {
     const titles = defaultCatalog();
     expect(titles.map(title => title.id)).toEqual([
-      `prepared-${ACADIA_SOURCE_SHA256}`, OFFLINE_TITLE_ID,
+      `prepared-${ACADIA_SOURCE_SHA256}`, `prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6`, OFFLINE_TITLE_ID,
     ]);
     expect(titles.some(title => /harbor/i.test(title.title))).toBe(false);
     expect(packagedLibrary.titles(DEFAULT_SETTINGS).some(title => /harbor/i.test(title.title))).toBe(true);
@@ -318,8 +332,8 @@ describe('the shelf a household lands on', () => {
     await finishFirstRun();
     expect(screen.getByTestId('kid-mode-home-video-title').props.children).toBe('Acadia');
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
-    // One featured video needs no rail: the hero already shows it, so no card repeats it.
-    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(0);
+    // Both approved destinations appear on the coastal map.
+    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(2);
     expect(screen.queryByText('Choose a video')).toBeNull();
     expect(screen.queryByText(/Harbor/)).toBeNull();
     expect(screen.queryByText('Playback test')).toBeNull();

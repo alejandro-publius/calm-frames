@@ -1,4 +1,5 @@
 import { startPlayer, mockError, mockMedia, mockDestroy } from './playbackUiHarness';
+import { getBifFrameImageSource } from '../../src/services/bif/bifService';
 import { act, fireEvent } from '@testing-library/react-native';
 beforeEach(() => { jest.useFakeTimers(); jest.spyOn(console, 'log').mockImplementation(() => {}); });
 afterEach(() => { jest.useRealTimers(); jest.restoreAllMocks(); });
@@ -15,6 +16,8 @@ test('home shell stays until a surface and frame are ready, then exposes the gua
   expect(view.queryByTestId('player-home-opening')).toBeNull();
   expect(view.getByTestId('video-player-ui-view')).toBeTruthy();
   expect(view.getByTestId('calm-frames-cover')).toBeTruthy();
+  await act(async () => fireEvent(view.getByTestId('kepler-video-surface-view'), 'surfaceViewCreated', 'test-surface'));
+  expect(view.queryByTestId('player-home-opening')).toBeNull();
 });
 
 test('a real playback error replaces the opening and retains an exit', () => {
@@ -89,3 +92,34 @@ test('unconfirmed native teardown retains the 700 ms fallback rather than the fa
   act(() => jest.advanceTimersByTime(1));
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
+
+ test('surface loss restores the static shell and stale destruction cannot clear its replacement', async () => {
+  const view = startPlayer('covering', true);
+  let frames = 0;
+  mockMedia.getVideoPlaybackQuality = () => ({totalVideoFrames: frames, droppedVideoFrames: 0});
+  const surface = () => view.getByTestId('kepler-video-surface-view');
+  await act(async () => fireEvent(surface(), 'surfaceViewCreated', 'first'));
+  act(() => { frames=2; jest.advanceTimersByTime(100); });
+  expect(view.queryByTestId('player-home-opening')).toBeNull();
+  act(() => fireEvent(surface(), 'surfaceViewDestroyed', 'first'));
+  expect(view.getByTestId('player-home-opening')).toBeTruthy();
+  await act(async () => fireEvent(surface(), 'surfaceViewCreated', 'second'));
+  act(() => { fireEvent(surface(), 'surfaceViewDestroyed', 'first'); jest.advanceTimersByTime(100); });
+  expect(view.getByTestId('player-home-opening')).toBeTruthy();
+  act(() => { frames=3; jest.advanceTimersByTime(100); });
+  expect(view.queryByTestId('player-home-opening')).toBeNull();
+  expect(view.getByTestId('calm-frames-cover')).toBeTruthy();
+ });
+
+ test('a BIF result after Back is cleared and cannot restart playback', async () => {
+  let finish!: (value: any) => void;
+  (getBifFrameImageSource as jest.Mock).mockImplementationOnce(() => new Promise(resolve => { finish = resolve; }));
+  const view = startPlayer('none', true, false, 'fixture-bif');
+  const play = jest.spyOn(mockMedia, 'play');
+  await act(async () => fireEvent(view.getByTestId('kepler-video-surface-view'), 'surfaceViewCreated', 'late-bif'));
+  fireEvent.press(view.getByTestId('player-opening-back'));
+  const clearCache = jest.fn();
+  await act(async () => finish({ clearCache }));
+  expect(clearCache).toHaveBeenCalledTimes(1);
+  expect(play).not.toHaveBeenCalled();
+ });

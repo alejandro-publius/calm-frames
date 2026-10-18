@@ -40,31 +40,40 @@ export function frameCounterSilent(media: OpeningMedia | null): boolean {
   } catch { return true; }
 }
 
-export default function useOpeningFrame({ media, enabled, verified, surfaceReady, onTimeout }: {
-  media: React.MutableRefObject<OpeningMedia | null>; enabled: boolean; verified: boolean; surfaceReady: boolean; onTimeout: () => void;
+export default function useOpeningFrame({ media, enabled, verified, surfaceReady, frameGeneration = 0, onTimeout }: {
+  media: React.MutableRefObject<OpeningMedia | null>; enabled: boolean; verified: boolean; surfaceReady: boolean; frameGeneration?: number; onTimeout: () => void;
 }) {
-  const [ready, setReady] = React.useState(false);
+  const [readyGeneration, setReadyGeneration] = React.useState<number | null>(null);
+  const ready = surfaceReady && verified && readyGeneration === frameGeneration;
   const failure = React.useRef(onTimeout); failure.current = onTimeout;
-  const clockAtStart = React.useRef<number | null>(null);
   React.useEffect(() => {
     if (!enabled || ready) return;
     const timeout = setTimeout(() => failure.current(), 15000);
     return () => clearTimeout(timeout);
-  }, [enabled, ready]);
+  }, [enabled, ready, frameGeneration]);
   React.useEffect(() => {
     if (!enabled || ready || !verified || !surfaceReady) return;
+    let clockAtStart: number | null = null;
+    const frameCount = () => {
+      try {
+        const q = media.current?.getVideoPlaybackQuality?.();
+        return q ? q.totalVideoFrames - q.droppedVideoFrames : 0;
+      } catch { return 0; }
+    };
+    // Existing frames belong to the old surface; require a newly delivered one.
+    const baseline = frameGeneration > 0 ? frameCount() : 0;
     const check = () => {
       const element = media.current;
-      if (hasOpeningFrame(element)) { setReady(true); return; }
+      if (hasOpeningFrame(element) && frameCount() > baseline) { setReadyGeneration(frameGeneration); return; }
       if (!element || element.readyState < 2 || !frameCounterSilent(element)) return;
       const clock = typeof element.currentTime === 'number' && Number.isFinite(element.currentTime) ? element.currentTime : null;
       if (clock === null) return;
-      if (clockAtStart.current === null) { clockAtStart.current = clock; return; }
-      if (!element.paused && clock - clockAtStart.current >= OPENING_CLOCK_ADVANCE_S) setReady(true);
+      if (clockAtStart === null) { clockAtStart = clock; return; }
+      if (!element.paused && clock - clockAtStart >= OPENING_CLOCK_ADVANCE_S) setReadyGeneration(frameGeneration);
     };
     check();
     const poll = setInterval(check, 100);
     return () => clearInterval(poll);
-  }, [enabled, ready, verified, surfaceReady, media]);
+  }, [enabled, ready, verified, surfaceReady, frameGeneration, media]);
   return ready;
 }

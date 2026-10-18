@@ -31,6 +31,7 @@
  */
 
 import React from 'react';
+import { WorldAppearance, WORLD } from './CoastalWorld';
 import TouchableOpacity from './CalmTouchable';
 import { StyleSheet, Text, View } from 'react-native';
 import {
@@ -79,6 +80,7 @@ const ProfilePicker = ({
   testID = 'profile-picker',
   disabled = false,
 }: ProfilePickerProps) => {
+  const styles = React.useContext(WorldAppearance) ? worldStyles : darkStyles;
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
 
   return (
@@ -136,17 +138,17 @@ const ProfilePicker = ({
   );
 };
 
-const styles = StyleSheet.create({
+const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>) => StyleSheet.create({
   focusedLabel: { textDecorationLine: 'underline' },
   block: { marginBottom: scale(CALM_SPACE.BLOCK) },
   title: {
     ...CALM_TEXT.section,
-    color: CALM_COLORS.TEXT,
+    color: colors.TEXT,
     marginBottom: scale(CALM_SPACE.ROW),
   },
   row: { flexDirection: 'row', flexWrap: 'wrap' },
   /** Quiet at rest: the ring is there, in the card's own colour. */
-  selectionMark: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT, width: scale(42) },
+  selectionMark: { ...CALM_TEXT.supporting, color: colors.TEXT, width: scale(42) },
   chip: {
     flexDirection: 'row', alignItems: 'center',
     marginRight: scale(CALM_SPACE.ROW),
@@ -155,27 +157,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
     borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
-    borderColor: CALM_COLORS.SURFACE,
-    backgroundColor: CALM_COLORS.SURFACE,
+    borderColor: colors.SURFACE,
+    backgroundColor: colors.SURFACE,
   },
   /** Chosen is a fill and a word. Focus is the ring. They stack. */
   chipChosen: {
-    borderColor: CALM_COLORS.SURFACE_FOCUSED,
-    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+    borderColor: colors.SURFACE_FOCUSED,
+    backgroundColor: colors.SURFACE_FOCUSED,
   },
   chipFocused: {
-    borderColor: CALM_COLORS.FOCUS_RING,
-    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+    borderColor: colors.FOCUS_RING,
+    backgroundColor: colors.SURFACE_FOCUSED,
   },
   name: {
     ...CALM_TEXT.control,
-    color: CALM_COLORS.TEXT,
+    color: colors.TEXT,
   },
   /** The word half of "a fill and a word", where it cannot move a control. */
   chosenLine: {
     ...CALM_TEXT.body,
-    color: CALM_COLORS.TEXT,
+    color: colors.TEXT,
   },
 });
 
+const darkStyles = makeStyles(CALM_COLORS);
+const worldStyles = makeStyles({ ...CALM_COLORS, ...WORLD });
 export default ProfilePicker;

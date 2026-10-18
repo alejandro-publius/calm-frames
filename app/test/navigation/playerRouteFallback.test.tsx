@@ -11,7 +11,6 @@ import { act, fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { playerRouteFallback } from '../../src/components/navigation/playerRouteFallback';
-import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
 import { COLORS } from '../../src/styles/Colors';
 import { WithSuspense } from '../../src/utils/WithSuspense';
 
@@ -85,8 +84,8 @@ test('a fixed fallback still works as before', () => {
 
  test('the route fallback carries the same decorative coast for Otters without a title-name heuristic', async () => {
   const Route = WithSuspense(React.lazy(metroImport), playerRouteFallback);
-  const { props } = route({ showHomeOpening: true, data: { title: 'Otters · short preview', calmMenuArt: 'coastal' } });
+  const { props } = route({ showHomeOpening: true, data: { title: 'Sea otters in Alaska', calmMenuArt: 'sea-otters' } });
   const view = render(<Route {...props} />);
-  expect(view.UNSAFE_getByType(HomeHarborScene).props.variant).toBe('coastal');
+  expect(view.getByTestId('coastal-world')).toBeTruthy();
   await settle();
 });

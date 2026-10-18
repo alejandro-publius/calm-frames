@@ -1,9 +1,11 @@
 /** Viewing first; optional explanations and technical records use separate pages. */
 import React from 'react';
+import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
+import { Image } from 'react-native';
 import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
-import HomeHarborScene from './HomeHarborScene';
+import { filmStill } from './HomeHarborScene';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, heroTitleTypography, scale } from './calmStyles';
 import { coverLine, DETECTION_LIMITS_LINE, noticeForTitle, ONLY_IN_CALM_FRAMES_LINE, runtimeLabel, SAFETY_NOTE } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
@@ -52,7 +54,6 @@ const TitleDetailsScreen = ({
   saving = false,
   onBack,
   testID = 'title-details',
-  interfaceMotionEnabled = false,
   interfaceActive = true,
   practice,
   onOpenPractice,
@@ -180,42 +181,44 @@ const TitleDetailsScreen = ({
   );
 
   return (
-    <ScrollView key="watch" testID={testID} style={styles.screen} contentContainerStyle={styles.content}>
-      {presentation.menuArt || presentation.art ? <HomeHarborScene variant={presentation.menuArt ?? presentation.art} immersive enabled={interfaceMotionEnabled} active={interfaceActive} /> : null}
+    <WorldAppearance.Provider value><ScrollView key="watch" testID={testID} style={[styles.screen, { backgroundColor: WORLD.BACKGROUND }]} contentContainerStyle={[styles.content, { minHeight: scale(1080) }]}>
+      <CoastalWorld detail />
+      <Image source={filmStill(presentation.menuArt ?? presentation.art)} resizeMode="cover" fadeDuration={0} style={styles.destinationImage} testID={`${testID}-destination-image`} accessible={false} />
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
-          <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name)]} testID={`${testID}-title`}>{presentation.name}</Text>
-          <Text style={styles.meta} testID={`${testID}-meta`}>{meta}</Text>
-          {presentation.description ? <Text style={styles.synopsis} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
+          <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name), { color: WORLD.TEXT }]} testID={`${testID}-title`}>{presentation.name}</Text>
+          <Text style={[styles.meta, { color: WORLD.TEXT_DIM }]} testID={`${testID}-meta`}>{meta}</Text>
         </View>
         <View style={styles.actionRail}>
           <View style={styles.buttons}>
             <CalmButton primary playIcon sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
               accessibilityLabel={saving ? 'Saving your changes...' : `${playLabel}: ${presentation.name}`}
               disabled={saving} hasTVPreferredFocus={returnFocus !== 'info'} onPress={() => onPlay(entry)} />
-            <CalmButton quiet testID={`${testID}-show-info`} label="More info" hasTVPreferredFocus={returnFocus === 'info'}
+            <CalmButton quiet tertiary compact testID={`${testID}-show-info`} label="More info" hasTVPreferredFocus={returnFocus === 'info'}
               onPress={() => setPage('info')} />
           </View>
         </View>
+          {presentation.description ? <Text style={[styles.synopsis, { color: WORLD.TEXT_DIM }]} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
         <CoveredSectionsStrip result={covered} ocean={ocean} testID={`${testID}-covered`} />
       </View>
-    </ScrollView>
+    </ScrollView></WorldAppearance.Provider>
   );
 };
 
 const styles = StyleSheet.create({
+  destinationImage: { position: 'absolute', right: scale(110), top: scale(330), width: scale(660), height: scale(380), borderWidth: scale(10), borderColor: WORLD.SURFACE, borderRadius: scale(26) },
   reading: { width: '100%', maxWidth: scale(1040), gap: scale(24), paddingTop: scale(32) },
   secondaryAction: { alignItems: 'flex-start' },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
-  hero: { width: '100%', minHeight: scale(CALM_FLOW.HERO_HEIGHT), alignItems: 'flex-start', justifyContent: 'flex-start' },
-  heroCopy: { width: '100%', maxWidth: scale(CALM_FLOW.HERO_TITLE_WIDTH), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
-  actionRail: { width: '100%', alignItems: 'flex-start', gap: scale(26), marginTop: scale(24) },
+  hero: { paddingLeft: scale(40), width: '100%', minHeight: scale(CALM_FLOW.HERO_HEIGHT), alignItems: 'flex-start', justifyContent: 'flex-start' },
+  heroCopy: { width: '100%', maxWidth: scale(780), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
+  actionRail: { width: '100%', alignItems: 'flex-start', gap: scale(26), marginTop: 0 },
   meta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left', marginBottom: scale(16) },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
   heroTitle: { marginBottom: scale(8) },
-  synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left', maxWidth: scale(620) },
+  synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left', maxWidth: scale(700), marginTop: scale(28) },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, textAlign: 'left' },
   checkSummary: { width: '100%', maxWidth: scale(1040), gap: scale(20), marginTop: scale(32) },

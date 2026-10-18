@@ -1,0 +1,15 @@
+{
+  "approved": true,
+  "sourceThreadId": "01a10d92-99ac-70a3-b473-29310ef6e002",
+  "ownerInstruction": "do it all",
+  "boundedScope": "Exact prepared sea-otter replacement, fresh package preserving original directory, remaining UI flow fixes, one consolidated native build/install/walkthrough without capture; no future signer trust",
+  "catalog": {
+    "bundleId": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+    "catalogSha256": "6b3f250598791232009a8c2ddef81bab0411eebcaa201ff582e7313cd4e9e7fe",
+    "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+    "consumer": true,
+    "label": "Sea otters in Alaska: approved NOAA ocean excerpt",
+    "approvalReference": "Owner \"do it all\" after exact clip/install proposal, thread 01a10d92-99ac-70a3-b473-29310ef6e002; results/sea-otters-flow-2026-10-18/approval.json"
+  },
+  "originalPreservedAt": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/app/assets/raw/prepared-library"
+}
