@@ -1,0 +1,13 @@
+{
+  "source_commit": "603f6ce01a7f719fd719e7947525058e478646fd",
+  "build_count": 1,
+  "build_start_utc": "2026-10-18T05:08:15.795129+00:00",
+  "app_inputs": 812,
+  "command": "npm run build:debug",
+  "visual_audio_acceptance": false,
+  "build_exit": 0,
+  "build_end_utc": "2026-10-18T05:09:26.422855+00:00",
+  "changed_inputs": [],
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/release/otter-native-2026-10-18/calm-frames-otter-aarch64-debug.vpkg",
+  "package_sha256": "6a4498d66ce2bf3db59dc29614f1e035ba1db1cb75e3e2c1c05f0a18ac2fb037"
+}

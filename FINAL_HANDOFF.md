@@ -1,5 +1,20 @@
 # Final handoff: the integration candidate
 
+## Otters and concise Details copy installed, October 18, 2026
+
+Installed source is `603f6ce01a7f719fd719e7947525058e478646fd`; package SHA-256 is
+`6a4498d66ce2bf3db59dc29614f1e035ba1db1cb75e3e2c1c05f0a18ac2fb037`. One build/install,
+all 812 inputs and transferred package matched. Exact owner-approved Otters joins
+Acadia; the ambient registry is byte-identical. The requested Details cleanup is
+included: `Scenes replaced`, `2 scenes · 9 seconds`, and the ocean/audio explanation
+in More info. Nine native text checks pass for both selections, Acadia ocean
+intervals, Otter natural end/Back and return focus. App is left Home with Otters
+selected and Watch preview focused; collector stopped. 116 activation tests and
+131 copy/state tests pass (overlapping suites). Pixel/audio acceptance remains
+with the owner; no capture, household writes, Parents/PIN, push or release.
+See [installed evidence and three owner steps](results/otter-native-2026-10-18/README.md).
+Earlier installed/pending statuses below are history.
+
 ## Exact otter activation, October 18, 2026
 
 Owner approval adds only otter catalog `d589ec17` / bundle `4064f489` / existing local signer `00c1bd27` to the exact catalog registry. No arbitrary future content is trusted. The 4.24-second silent preview uses the existing content rail and Details; Acadia ocean metadata is byte-identical. 116 focused tests, TypeScript and prebuild gates pass. The owner-requested concise Details copy is also included before building: exact ocean labels, short scene totals, and audio explanation only in More info; 131 focused copy/state tests pass. One native build/install follows this source; evidence belongs in `results/otter-native-2026-10-18/`. Installed source remains `4c0d291` until the new installation succeeds.
