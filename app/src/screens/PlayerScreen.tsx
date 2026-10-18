@@ -1,5 +1,6 @@
 import { bakedAmbientForRendition } from '../calmframes/approvedBakedAmbient';
 import { mayShowBakedAmbient } from '../calmframes/bakedAmbient';
+import { ambientCoverPredecessor, combineAmbientCovers } from '../calmframes/ambientPersonalCovers';
 import {
   ContentPersonalizationServer,
   PlaybackState,
@@ -215,7 +216,18 @@ const PlayerScreen = ({
     durationMs: guardedParams?.durationMs,
     renditionStartOffsetMs: guardedParams?.renditionStartOffsetMs,
   });
-  const extraCovers = usePersonalCovers(preparedRouteAccepted ? extraCoverAsset : undefined);
+  const ambientDocument = preparedRouteAccepted
+    ? bakedAmbientForRendition(extraCoverAsset?.renditionSha256, guardedParams?.settings?.preset) : null;
+  const predecessor = ambientCoverPredecessor(ambientDocument, extraCoverAsset, guardedParams?.settings);
+  const currentCovers = usePersonalCovers(preparedRouteAccepted ? extraCoverAsset : undefined);
+  const predecessorCovers = usePersonalCovers(predecessor.asset);
+  const predecessorStatus = predecessor.status;
+  const predecessorKey = predecessor.asset?.renditionSha256;
+  const extraCovers = React.useMemo(() => combineAmbientCovers(currentCovers, predecessorCovers, predecessor),
+    // Stable records keep the guard from restarting verification on each playback tick.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [currentCovers.status, currentCovers.record, predecessorCovers.status, predecessorCovers.record,
+      predecessorStatus, predecessorKey]);
   const guard = useFlashGuard({
     additionalCovers: preparedRouteAccepted ? extraCovers.record?.additions : undefined,
     personalCoversStatus: preparedRouteAccepted
@@ -333,7 +345,7 @@ const PlayerScreen = ({
         guard.baseIntervals, guard.mediaTimeMs)
     : undefined;
   const bakedAmbientVisible = mayShowBakedAmbient(
-    bakedAmbientForRendition(extraCoverAsset?.renditionSha256, guardedParams?.settings?.preset), extraCoverAsset,
+    ambientDocument, extraCoverAsset,
     guardedParams?.settings?.preset, playbackEvidence?.maps ?? [], guard.baseIntervals,
     guard.mediaTimeMs, { acceptedPreparedRoute: preparedRouteAccepted, verified: guard.status === 'verified',
       scheduledCover: guard.scheduledCover, buffering: showBuffering || slowPlayback,

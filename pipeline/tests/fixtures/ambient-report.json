@@ -1,0 +1,148 @@
+{
+  "report": {
+    "version": 1,
+    "recipe": "baked-ambient-v1",
+    "passed": true,
+    "outcome": "cover proven drawn",
+    "sourceSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "publicKeyFingerprint": "1111111111111111111111111111111111111111111111111111111111111111",
+    "inputBindingRaw": "{\"ambientSha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"mapSha256\":{\"broadcast\":\"b03d52ffec0d6e0c289c9513919396f1379a99c7f3135316793f71ef2e2797f2\",\"extra-cautious\":\"674edae486fdf01ece5d92561cc50cbb1edec1e3a10cacd25ec9a10f2a6cc730\",\"wcag\":\"674edae486fdf01ece5d92561cc50cbb1edec1e3a10cacd25ec9a10f2a6cc730\"},\"metadataSha512\":{\"broadcast\":\"eb86e48ea01067ee6f533da0a0fa8929ef4a2d9680d6126a772b441e6870a23bee62fba1507bcb7b836d707b12042b8448fce1697b3d762d5c8a221868124104\",\"extra-cautious\":\"94ba4b78fdfb6bd8c538817443d4a7bceec3ff9b760ee2093a812c18dfac06f09d26296175ceff26b5f507d58065526a28721e1e772d71b2e20744dd505e9de7\",\"wcag\":\"60cf44dca5ca53d8954600f26005f411312ea3da93aa3433cb37fa5e3daa124859f3650145c97cdfb70aff5c4bd0ae3ba28959ed3d631d6808e9a5b2ae0e8e2f\"},\"renditionSha256\":{\"broadcast\":\"4444444444444444444444444444444444444444444444444444444444444444\",\"extra-cautious\":\"5555555555555555555555555555555555555555555555555555555555555555\",\"wcag\":\"3333333333333333333333333333333333333333333333333333333333333333\"},\"sourceSha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+    "presets": {
+      "wcag": {
+        "reproductionSha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "timingAudio": {
+          "sourceEqualsOutput": true,
+          "frameCount": 300,
+          "audioPacketCount": 100,
+          "videoDurationRational": "10",
+          "frameTimesSha256": "6666666666666666666666666666666666666666666666666666666666666666",
+          "audioPacketsSha256": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        "ambientAnalysis": {
+          "wcag": {
+            "raw": "{\"profile\":{\"name\":\"wcag\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"summary\":{\"pass\":true}}",
+            "sha256": "cbba01ab02d06ca66a8bd1974cfff1aff892be4d288215154c29ceebe87cc673"
+          },
+          "broadcast": {
+            "raw": "{\"profile\":{\"name\":\"broadcast\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"summary\":{\"pass\":true}}",
+            "sha256": "a3bb6ceda3d41cfcc215726021d249ef3a5a488c78ddcb3364d17fe37bbe8a54"
+          }
+        },
+        "outputAnalysis": {
+          "wcag": {
+            "raw": "{\"profile\":{\"name\":\"wcag\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"3333333333333333333333333333333333333333333333333333333333333333\"},\"summary\":{\"pass\":true}}",
+            "sha256": "d3713287ee1f84e72621a68733257bb9530a4dc2f140d0e3f68a0a45e73e6d3d"
+          },
+          "broadcast": {
+            "raw": "{\"profile\":{\"name\":\"broadcast\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"3333333333333333333333333333333333333333333333333333333333333333\"},\"summary\":{\"pass\":true}}",
+            "sha256": "7d92cf5d21ea98ad95aa6632fc2e8ab1762a38ca6a3da0a7143d9d7636e00cd1"
+          }
+        },
+        "metadataRaw": "{\"ambientSha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"analysis\":{\"broadcast\":\"7d92cf5d21ea98ad95aa6632fc2e8ab1762a38ca6a3da0a7143d9d7636e00cd1\",\"wcag\":\"d3713287ee1f84e72621a68733257bb9530a4dc2f140d0e3f68a0a45e73e6d3d\"},\"audioPreserved\":true,\"durationMs\":10000,\"frameTimingPreserved\":true,\"intervals\":[{\"endMs\":2500.0,\"startMs\":500.0}],\"mapSha256\":{\"broadcast\":\"b03d52ffec0d6e0c289c9513919396f1379a99c7f3135316793f71ef2e2797f2\",\"wcag\":\"674edae486fdf01ece5d92561cc50cbb1edec1e3a10cacd25ec9a10f2a6cc730\"},\"preset\":\"wcag\",\"recipe\":\"baked-ambient-v1\",\"renditionSha256\":\"3333333333333333333333333333333333333333333333333333333333333333\",\"renditionStartOffsetMs\":0,\"sourceSha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"version\":1}"
+      },
+      "broadcast": {
+        "reproductionSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+        "timingAudio": {
+          "sourceEqualsOutput": true,
+          "frameCount": 300,
+          "audioPacketCount": 100,
+          "videoDurationRational": "10",
+          "frameTimesSha256": "6666666666666666666666666666666666666666666666666666666666666666",
+          "audioPacketsSha256": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        "ambientAnalysis": {
+          "wcag": {
+            "raw": "{\"profile\":{\"name\":\"wcag\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"summary\":{\"pass\":true}}",
+            "sha256": "cbba01ab02d06ca66a8bd1974cfff1aff892be4d288215154c29ceebe87cc673"
+          },
+          "broadcast": {
+            "raw": "{\"profile\":{\"name\":\"broadcast\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"summary\":{\"pass\":true}}",
+            "sha256": "a3bb6ceda3d41cfcc215726021d249ef3a5a488c78ddcb3364d17fe37bbe8a54"
+          }
+        },
+        "outputAnalysis": {
+          "wcag": {
+            "raw": "{\"profile\":{\"name\":\"wcag\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"4444444444444444444444444444444444444444444444444444444444444444\"},\"summary\":{\"pass\":true}}",
+            "sha256": "ffd58266d34f00fc12923ed1641436f3b0fb7691c5bfc129122914ce0a8232bc"
+          },
+          "broadcast": {
+            "raw": "{\"profile\":{\"name\":\"broadcast\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"4444444444444444444444444444444444444444444444444444444444444444\"},\"summary\":{\"pass\":true}}",
+            "sha256": "8147c1b84a3d5da61b6305d151221350d5be0dd85eb1f9a6011bb31f1944b407"
+          }
+        },
+        "metadataRaw": "{\"ambientSha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"analysis\":{\"broadcast\":\"8147c1b84a3d5da61b6305d151221350d5be0dd85eb1f9a6011bb31f1944b407\",\"wcag\":\"ffd58266d34f00fc12923ed1641436f3b0fb7691c5bfc129122914ce0a8232bc\"},\"audioPreserved\":true,\"durationMs\":10000,\"frameTimingPreserved\":true,\"intervals\":[{\"endMs\":2500.0,\"startMs\":500.0}],\"mapSha256\":{\"broadcast\":\"b03d52ffec0d6e0c289c9513919396f1379a99c7f3135316793f71ef2e2797f2\",\"wcag\":\"674edae486fdf01ece5d92561cc50cbb1edec1e3a10cacd25ec9a10f2a6cc730\"},\"preset\":\"broadcast\",\"recipe\":\"baked-ambient-v1\",\"renditionSha256\":\"4444444444444444444444444444444444444444444444444444444444444444\",\"renditionStartOffsetMs\":0,\"sourceSha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"version\":1}"
+      },
+      "extra-cautious": {
+        "reproductionSha256": "5555555555555555555555555555555555555555555555555555555555555555",
+        "timingAudio": {
+          "sourceEqualsOutput": true,
+          "frameCount": 300,
+          "audioPacketCount": 100,
+          "videoDurationRational": "10",
+          "frameTimesSha256": "6666666666666666666666666666666666666666666666666666666666666666",
+          "audioPacketsSha256": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        "ambientAnalysis": {
+          "wcag": {
+            "raw": "{\"profile\":{\"name\":\"wcag\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"summary\":{\"pass\":true}}",
+            "sha256": "cbba01ab02d06ca66a8bd1974cfff1aff892be4d288215154c29ceebe87cc673"
+          },
+          "broadcast": {
+            "raw": "{\"profile\":{\"name\":\"broadcast\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"summary\":{\"pass\":true}}",
+            "sha256": "a3bb6ceda3d41cfcc215726021d249ef3a5a488c78ddcb3364d17fe37bbe8a54"
+          }
+        },
+        "outputAnalysis": {
+          "wcag": {
+            "raw": "{\"profile\":{\"name\":\"wcag\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"5555555555555555555555555555555555555555555555555555555555555555\"},\"summary\":{\"pass\":true}}",
+            "sha256": "360e6de31040444e89d34672973e6495a949836561a23d9b3c7ec6dc85b8a6d7"
+          },
+          "broadcast": {
+            "raw": "{\"profile\":{\"name\":\"broadcast\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[],\"source\":{\"sha256\":\"5555555555555555555555555555555555555555555555555555555555555555\"},\"summary\":{\"pass\":true}}",
+            "sha256": "b619503e9bc06e9b0b0a0e60a8c4b0f1ba657a701b77972f37693a14b7b11281"
+          }
+        },
+        "metadataRaw": "{\"ambientSha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"analysis\":{\"broadcast\":\"b619503e9bc06e9b0b0a0e60a8c4b0f1ba657a701b77972f37693a14b7b11281\",\"wcag\":\"360e6de31040444e89d34672973e6495a949836561a23d9b3c7ec6dc85b8a6d7\"},\"audioPreserved\":true,\"durationMs\":10000,\"frameTimingPreserved\":true,\"intervals\":[{\"endMs\":3000.0,\"startMs\":0.0}],\"mapSha256\":{\"broadcast\":\"b03d52ffec0d6e0c289c9513919396f1379a99c7f3135316793f71ef2e2797f2\",\"wcag\":\"674edae486fdf01ece5d92561cc50cbb1edec1e3a10cacd25ec9a10f2a6cc730\"},\"preset\":\"extra-cautious\",\"recipe\":\"baked-ambient-v1\",\"renditionSha256\":\"5555555555555555555555555555555555555555555555555555555555555555\",\"renditionStartOffsetMs\":0,\"sourceSha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"version\":1}"
+      }
+    }
+  },
+  "title": {
+    "sourceSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "durationMs": 10000,
+    "maps": {
+      "wcag": {
+        "text": "{\"profile\":{\"name\":\"wcag\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[{\"end_ms\":2000,\"reason\":\"general\",\"start_ms\":1000}],\"signature\":{\"key_id\":\"sha256:1111111111111111111111111111111111111111111111111111111111111111\"},\"source\":{\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"version\":1}",
+        "sha256": "674edae486fdf01ece5d92561cc50cbb1edec1e3a10cacd25ec9a10f2a6cc730"
+      },
+      "broadcast": {
+        "text": "{\"profile\":{\"name\":\"broadcast\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[{\"end_ms\":2000,\"reason\":\"general\",\"start_ms\":1000}],\"signature\":{\"key_id\":\"sha256:1111111111111111111111111111111111111111111111111111111111111111\"},\"source\":{\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"version\":1}",
+        "sha256": "b03d52ffec0d6e0c289c9513919396f1379a99c7f3135316793f71ef2e2797f2"
+      },
+      "extra-cautious": {
+        "text": "{\"profile\":{\"name\":\"wcag\",\"room\":{\"seat_distance_in\":48,\"tv_diagonal_in\":85}},\"segments\":[{\"end_ms\":2000,\"reason\":\"general\",\"start_ms\":1000}],\"signature\":{\"key_id\":\"sha256:1111111111111111111111111111111111111111111111111111111111111111\"},\"source\":{\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"version\":1}",
+        "sha256": "674edae486fdf01ece5d92561cc50cbb1edec1e3a10cacd25ec9a10f2a6cc730"
+      }
+    },
+    "renditions": {
+      "wcag": {
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "durationMs": 10000,
+        "startOffsetMs": 0
+      },
+      "broadcast": {
+        "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+        "durationMs": 10000,
+        "startOffsetMs": 0
+      },
+      "extra-cautious": {
+        "sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+        "durationMs": 10000,
+        "startOffsetMs": 0
+      }
+    },
+    "verification": {
+      "outcome": "cover proven drawn",
+      "checkedInputsSha256": "04a9df3d08d6fa6de160fae3e1d50c0006bc54e94213f65501987654160e12c6"
+    }
+  }
+}

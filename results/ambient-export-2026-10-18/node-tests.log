@@ -1,0 +1,358 @@
+TAP version 13
+# Subtest: accepts distinct synthetic ambient report and rejects duplicate JSON
+ok 1 - accepts distinct synthetic ambient report and rejects duplicate JSON
+  ---
+  duration_ms: 6.622417
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata renditionSha256
+ok 2 - rejects rebound metadata renditionSha256
+  ---
+  duration_ms: 0.891167
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata durationMs
+ok 3 - rejects rebound metadata durationMs
+  ---
+  duration_ms: 0.836792
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata renditionStartOffsetMs
+ok 4 - rejects rebound metadata renditionStartOffsetMs
+  ---
+  duration_ms: 0.573458
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata preset
+ok 5 - rejects rebound metadata preset
+  ---
+  duration_ms: 1.336291
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata audioPreserved
+ok 6 - rejects rebound metadata audioPreserved
+  ---
+  duration_ms: 0.700625
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata frameTimingPreserved
+ok 7 - rejects rebound metadata frameTimingPreserved
+  ---
+  duration_ms: 0.698584
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata ambientSha256
+ok 8 - rejects rebound metadata ambientSha256
+  ---
+  duration_ms: 0.515
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata intervals
+ok 9 - rejects rebound metadata intervals
+  ---
+  duration_ms: 0.796208
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata version
+ok 10 - rejects rebound metadata version
+  ---
+  duration_ms: 1.234042
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis source
+ok 11 - rejects rebound analysis source
+  ---
+  duration_ms: 1.866958
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis flags
+ok 12 - rejects rebound analysis flags
+  ---
+  duration_ms: 0.530792
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis thresholds
+ok 13 - rejects rebound analysis thresholds
+  ---
+  duration_ms: 0.387
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis profile
+ok 14 - rejects rebound analysis profile
+  ---
+  duration_ms: 0.345291
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis failed
+ok 15 - rejects rebound analysis failed
+  ---
+  duration_ms: 0.666375
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof sourceEqualsOutput
+ok 16 - rejects missing timing/audio proof sourceEqualsOutput
+  ---
+  duration_ms: 0.269584
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof frameCount
+ok 17 - rejects missing timing/audio proof frameCount
+  ---
+  duration_ms: 0.216459
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof audioPacketCount
+ok 18 - rejects missing timing/audio proof audioPacketCount
+  ---
+  duration_ms: 0.324208
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof videoDurationRational
+ok 19 - rejects missing timing/audio proof videoDurationRational
+  ---
+  duration_ms: 0.389167
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof frameTimesSha256
+ok 20 - rejects missing timing/audio proof frameTimesSha256
+  ---
+  duration_ms: 0.230292
+  type: 'test'
+  ...
+# Subtest: an exact simulated approval produces three per-preset bindings without writing the app
+ok 21 - an exact simulated approval produces three per-preset bindings without writing the app
+  ---
+  duration_ms: 16.801792
+  type: 'test'
+  ...
+# Subtest: removing simulated catalog approval also removes all ambient registrations
+ok 22 - removing simulated catalog approval also removes all ambient registrations
+  ---
+  duration_ms: 6.730667
+  type: 'test'
+  ...
+# Subtest: refuses report before generation
+ok 23 - refuses report before generation
+  ---
+  duration_ms: 7.830125
+  type: 'test'
+  ...
+# Subtest: refuses catalog before generation
+ok 24 - refuses catalog before generation
+  ---
+  duration_ms: 4.433667
+  type: 'test'
+  ...
+# Subtest: refuses key before generation
+ok 25 - refuses key before generation
+  ---
+  duration_ms: 4.718
+  type: 'test'
+  ...
+# Subtest: refuses missing-report before generation
+ok 26 - refuses missing-report before generation
+  ---
+  duration_ms: 4.68475
+  type: 'test'
+  ...
+# Subtest: existing exact Acadia fixture matches generated input; generation repeats byte-for-byte
+ok 27 - existing exact Acadia fixture matches generated input; generation repeats byte-for-byte
+  ---
+  duration_ms: 10.970709
+  type: 'test'
+  ...
+# Subtest: rejects catalog substitution without changing approval
+ok 28 - rejects catalog substitution without changing approval
+  ---
+  duration_ms: 4.618959
+  type: 'test'
+  ...
+# Subtest: rejects key substitution without changing approval
+ok 29 - rejects key substitution without changing approval
+  ---
+  duration_ms: 5.523292
+  type: 'test'
+  ...
+# Subtest: rejects bundle substitution without changing approval
+ok 30 - rejects bundle substitution without changing approval
+  ---
+  duration_ms: 5.838334
+  type: 'test'
+  ...
+# Subtest: rejects duplicate substitution without changing approval
+ok 31 - rejects duplicate substitution without changing approval
+  ---
+  duration_ms: 3.784041
+  type: 'test'
+  ...
+# Subtest: rejects generated substitution without changing approval
+ok 32 - rejects generated substitution without changing approval
+  ---
+  duration_ms: 4.499166
+  type: 'test'
+  ...
+# Subtest: rejects missing-generated substitution without changing approval
+ok 33 - rejects missing-generated substitution without changing approval
+  ---
+  duration_ms: 4.075583
+  type: 'test'
+  ...
+# Subtest: rejects symlink substitution without changing approval
+ok 34 - rejects symlink substitution without changing approval
+  ---
+  duration_ms: 3.681709
+  type: 'test'
+  ...
+# Subtest: consumer membership is generated from reviewed data rather than title-specific code
+ok 35 - consumer membership is generated from reviewed data rather than title-specific code
+  ---
+  duration_ms: 5.056917
+  type: 'test'
+  ...
+# Subtest: checks the actual generated library and exact byte total
+ok 36 - checks the actual generated library and exact byte total
+  ---
+  duration_ms: 111.974791
+  type: 'test'
+  ...
+# Subtest: checks hash-bound original report bytes and retains the source catalog identity
+ok 37 - checks hash-bound original report bytes and retains the source catalog identity
+  ---
+  duration_ms: 8.968125
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid source evidence
+ok 38 - a matching report digest does not override invalid source evidence
+  ---
+  duration_ms: 4.911958
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid presets evidence
+ok 39 - a matching report digest does not override invalid presets evidence
+  ---
+  duration_ms: 4.378083
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid failed evidence
+ok 40 - a matching report digest does not override invalid failed evidence
+  ---
+  duration_ms: 4.591958
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid missing evidence
+ok 41 - a matching report digest does not override invalid missing evidence
+  ---
+  duration_ms: 4.90225
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid duplicate evidence
+ok 42 - a matching report digest does not override invalid duplicate evidence
+  ---
+  duration_ms: 4.5825
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid outcome evidence
+ok 43 - a matching report digest does not override invalid outcome evidence
+  ---
+  duration_ms: 5.325917
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid derived evidence
+ok 44 - a matching report digest does not override invalid derived evidence
+  ---
+  duration_ms: 4.7565
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid plan evidence
+ok 45 - a matching report digest does not override invalid plan evidence
+  ---
+  duration_ms: 4.643959
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid key evidence
+ok 46 - a matching report digest does not override invalid key evidence
+  ---
+  duration_ms: 4.470583
+  type: 'test'
+  ...
+# Subtest: derived report outcome keeps the full suffix of extra check names
+ok 47 - derived report outcome keeps the full suffix of extra check names
+  ---
+  duration_ms: 4.489458
+  type: 'test'
+  ...
+# Subtest: accepts historical infinite PSNR values without changing quoted text or evidence bytes
+ok 48 - accepts historical infinite PSNR values without changing quoted text or evidence bytes
+  ---
+  duration_ms: 26.126917
+  type: 'test'
+  ...
+# Subtest: report namespace refuses unknown attachments, nested paths and oversized input
+ok 49 - report namespace refuses unknown attachments, nested paths and oversized input
+  ---
+  duration_ms: 14.083041
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared mp4 bytes
+ok 50 - refuses changed prepared mp4 bytes
+  ---
+  duration_ms: 1.261625
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared vtt bytes
+ok 51 - refuses changed prepared vtt bytes
+  ---
+  duration_ms: 0.717833
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared json bytes
+ok 52 - refuses changed prepared json bytes
+  ---
+  duration_ms: 0.620959
+  type: 'test'
+  ...
+# Subtest: refuses a compiled literal different from the reviewed manifest
+ok 53 - refuses a compiled literal different from the reviewed manifest
+  ---
+  duration_ms: 0.210375
+  type: 'test'
+  ...
+# Subtest: refuses an internally valid package from a different build input
+ok 54 - refuses an internally valid package from a different build input
+  ---
+  duration_ms: 45.127667
+  type: 'test'
+  ...
+# Subtest: refuses missing assets, undisclosed siblings and duplicate package members
+ok 55 - refuses missing assets, undisclosed siblings and duplicate package members
+  ---
+  duration_ms: 15.21475
+  type: 'test'
+  ...
+# Subtest: refuses a manifest changed inside its immutable directory
+ok 56 - refuses a manifest changed inside its immutable directory
+  ---
+  duration_ms: 0.971708
+  type: 'test'
+  ...
+# Subtest: refuses aliases to files outside the package
+ok 57 - refuses aliases to files outside the package
+  ---
+  duration_ms: 23.435708
+  type: 'test'
+  ...
+# Subtest: rejects alternate archive paths and link members before reading any prepared content
+ok 58 - rejects alternate archive paths and link members before reading any prepared content
+  ---
+  duration_ms: 452.200875
+  type: 'test'
+  ...
+1..58
+# tests 58
+# suites 0
+# pass 58
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 837.155791

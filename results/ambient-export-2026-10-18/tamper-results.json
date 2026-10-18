@@ -1,0 +1,18 @@
+[
+  {
+    "mutation": "media",
+    "rejected": true
+  },
+  {
+    "mutation": "map",
+    "rejected": true
+  },
+  {
+    "mutation": "report",
+    "rejected": true
+  },
+  {
+    "mutation": "restored",
+    "accepted": true
+  }
+]

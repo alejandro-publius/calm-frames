@@ -1,0 +1,26 @@
+{
+  "status": "short unapproved candidate",
+  "approved": false,
+  "sourceSha256": "3083988ff7c574821fb40bea3c7a053db5625f5106f3c68e1231d2935b410b29",
+  "longestCombinedStandardGapMs": [
+    80500.0,
+    85220.0
+  ],
+  "excerptMs": [
+    80750.0,
+    84970.0
+  ],
+  "attribution": "Uusijani / Wikimedia Commons, Otter (Lutra lutra) grooming, CC0 1.0.",
+  "sourceUrl": "https://commons.wikimedia.org/wiki/File:Otter_(Lutra_lutra)_grooming.webm",
+  "renditionSha256": "4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4",
+  "analysis": {
+    "wcag": {
+      "clean": true,
+      "segments": []
+    },
+    "broadcast": {
+      "clean": true,
+      "segments": []
+    }
+  }
+}

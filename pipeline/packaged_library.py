@@ -106,6 +106,13 @@ def _check_report(raw: bytes, digest: str, titles: list[dict]) -> None:
             return float(value)
         raise PackagedLibraryError("The verification report contains an undefined measurement.")
     data = json.loads(raw, parse_constant=constant)
+    if isinstance(data, dict) and data.get("recipe") == "baked-ambient-v1":
+        from .ambient_report import check_ambient_report, strict_json
+        try:
+            check_ambient_report(strict_json(raw), titles)
+        except (PipelineError, ValueError, TypeError, KeyError, AttributeError) as exc:
+            raise PackagedLibraryError("The baked ambient verification report is invalid.") from exc
+        return
     checks = data.get("checks") if isinstance(data, dict) else None
     if (not isinstance(data, dict) or set(data) != {
             "sha256", "source_path", "presets", "passed", "outcome", "started_at", "finished_at", "checks"}

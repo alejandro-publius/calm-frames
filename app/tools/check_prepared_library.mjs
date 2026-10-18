@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { checkAmbientReport } from './ambient_report.mjs';
 import { checkApprovedCatalogs } from './approved_prepared_libraries.mjs';
 
 const APP = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -54,6 +55,7 @@ function checkVerificationReport(raw, digest, titles) {
   const compatible = text.replace(/"(?:\\.|[^"\\])*"|(?<=[\s[:,])(-?Infinity)(?=[\s,}\]])/g,
     (token, infinite) => infinite ? (infinite.startsWith('-') ? '-1e999' : '1e999') : token);
   const report = record(JSON.parse(compatible));
+  if (report.recipe === 'baked-ambient-v1') { checkAmbientReport(text, titles); return; }
   requireThat(exactKeys(report, ['sha256', 'source_path', 'presets', 'passed', 'outcome', 'started_at', 'finished_at', 'checks']) &&
     report.passed === true && typeof report.source_path === 'string' && report.source_path.length > 0 &&
     Array.isArray(report.presets) && report.presets.length === PRESETS.length &&

@@ -1,5 +1,9 @@
 # Final handoff: the integration candidate
 
+## Exact ocean export ready, October 18, 2026
+
+The replacement Acadia catalog is reproduced and checked by both strict export validators. All 225 focused tests pass. Existing household additions are retained through a read-only exact predecessor check; failures remain covered. The compiled ambient registry remains empty and the installed app is unchanged. See [the exact approval proposal and evidence](results/ambient-export-2026-10-18/README.md). The next owner action is one exact-catalog approval under the existing signer, followed by one native build/install. The bounded otter result is only a 4.22-second unapproved preview.
+
 ## Real ocean baked preparation, October 18, 2026
 
 A new unsigned local recipe bakes real NPS Acadia ocean footage into the unchanged
