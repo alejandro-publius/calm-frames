@@ -1,3 +1,4 @@
+<!-- October 18: exact Forest activation approved; three-island integration and concise How it works validating before one build/install. -->
 <!-- Latest local checkpoint: October18 island refinement passes438 bounded app tests and11 attribution tests; UI source 1d14285 installed once; native two-video walkthrough completed. Forest media prepared, exact activation approval pending. -->
 # Status
 

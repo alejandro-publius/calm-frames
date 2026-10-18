@@ -6,7 +6,7 @@ import { checkedShelf } from './shelfFixtures';
 import { ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
 
 // Retain this two-title regression fixture; the real consumer pair is tested in otterPreview.
-const titles = checkedShelf().filter(entry => entry.title.title !== 'Sea otters in Alaska');
+const titles = checkedShelf().filter(entry => !['Sea otters in Alaska', 'Forest creek at Redwood'].includes(entry.title.title));
 const acadia = titles.find(entry => entry.title.sha256 === ACADIA_SOURCE_SHA256)!;
 
 test('the actual-video rail selects artwork and both actions without starting playback on focus', () => {

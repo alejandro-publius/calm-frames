@@ -1,11 +1,11 @@
 import React from 'react';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import { AccessibilityInfo, Animated, StyleSheet } from 'react-native';
+import { AccessibilityInfo, Animated, StyleSheet, Text } from 'react-native';
 import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
-import { COASTAL_COLORS as CALM_COLORS } from '../../src/calmframes/calmStyles';
+import { WORLD as CALM_COLORS } from '../../src/calmframes/CoastalWorld';
 import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
 import { checkedShelf } from './shelfFixtures';
 import { BENIGN_STORY_ID } from '../../src/calmframes/benignStory';
@@ -35,7 +35,7 @@ test('home is the entry, with direct playback and an optional dismissible explan
   expect(screen.queryByText('Original story')).toBeNull();
   expect(screen.queryByTestId('kid-home-try-demo')).toBeNull();
   fireEvent.press(screen.getByTestId('kid-home-learn'));
-  expect(screen.getByText(/captions continue/)).toBeTruthy();
+  expect(screen.getByTestId('how-it-works-purpose').props.children).toContain('hides flagged flashing scenes');
   expect(screen.queryByTestId('kid-home-watch')).toBeNull();
   expect(play).not.toHaveBeenCalled();
   fireEvent.press(screen.getByTestId('picture-hold-dismiss'));
@@ -99,4 +99,22 @@ test('home carries no explanation and keeps parental controls tertiary until foc
   expect(parent).toHaveBeenCalledTimes(1);
   fireEvent(control, 'blur');
   expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent' });
+});
+
+test('the short explanation leads with purpose, qualifies ocean and sound, and keeps limitations legible', () => {
+  const view = render(<KidHomeScreen titles={titles.filter(entry => entry.title.title.startsWith('Acadia'))} onOpen={jest.fn()} />);
+  fireEvent.press(view.getByTestId('kid-home-learn'));
+  const introduction = view.getByTestId('picture-hold-introduction');
+  const textNodes = introduction.findAllByType(Text);
+  const words = textNodes.map(node => node.props.children).filter(value => typeof value === 'string').join(' ');
+  expect(words).toContain('Calm Frames hides flagged flashing scenes in prepared videos.');
+  expect(words).toContain('Acadia replaces them with ocean footage.');
+  expect(words).toContain('Original sound continues when present.');
+  expect(words).toContain('not other apps or live TV');
+  expect(words).toContain('cannot guarantee seizure prevention');
+  expect(words.split(/\s+/).length).toBeLessThanOrEqual(100);
+  for (const node of view.getByTestId('how-it-works-limits').findAllByType(Text)) {
+    expect(StyleSheet.flatten(node.props.style).fontSize).toBeGreaterThanOrEqual(32);
+  }
+  expect(view.queryByTestId('picture-hold-bridge-test')).toBeNull();
 });

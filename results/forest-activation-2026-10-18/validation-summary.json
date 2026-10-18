@@ -1,0 +1,20 @@
+{
+  "baseline": "ee1e0b556cfa4738929387833fd88156ce391415",
+  "bounded_app_tests_passed": 499,
+  "bounded_app_test_suites": 38,
+  "attribution_tests_passed": 11,
+  "typecheck": "passed",
+  "lint": "passed with warnings, zero errors",
+  "prepared_namespace_bytes": 66492442,
+  "retained_media_files_unchanged": 40,
+  "original_backup_files_unchanged": 59,
+  "exact_forest_activation_authorized": true,
+  "independent_review": "no remaining scoped blocker",
+  "initial_tests": "stale title counts/theme expectations and Forest test template name corrected; log retained",
+  "jest_open_handle_warning": true,
+  "native_status": "pending one consolidated build/install",
+  "capture": false,
+  "pin_operations": false,
+  "household_settings_changed": false,
+  "visual_audio_acceptance": false
+}

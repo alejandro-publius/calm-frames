@@ -1,0 +1,11 @@
+{
+  "sourcePage": "https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E",
+  "credit": "NPS: G Litten; no NPS endorsement implied",
+  "license": "Public domain: NPS credit without copyright symbol and official usage statement",
+  "sourceBundle": "77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f",
+  "rendition": "wcag.mp4",
+  "frameTimeSeconds": 2,
+  "sha256": "51487410aa086dd9639b52644166688d66e6b58cf182a945a7676960aad2d9de",
+  "purpose": "Decorative menu thumbnail only, not a signed playback hold still",
+  "deviceCapture": false
+}

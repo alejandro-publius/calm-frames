@@ -6,7 +6,7 @@ import Svg, { Path, Ellipse } from '@amazon-devices/react-native-svg';
 import { scale } from './calmStyles';
 import { IslandKind } from './CoastalIsland';
 const positions: Record<IslandKind, { x: number; y: number }> = {
-  coastal: { x: 479, y: 714 }, 'sea-otters': { x: 1364, y: 732 }, forest: { x: 924, y: 640 },
+  coastal: { x: 440, y: 660 }, 'sea-otters': { x: 1408, y: 660 }, forest: { x: 924, y: 660 },
 };
 export default function CoastalBoat({ destination, enabled = false, active = true }: { destination: IslandKind; enabled?: boolean; active?: boolean }) {
   const manager = useKeplerAppStateManager();

@@ -6,7 +6,8 @@ import { COASTAL_COLORS as CALM_COLORS, scale } from './calmStyles';
 import { trace } from './trace';
 
 export function filmStill(variant?: string) {
-  return variant === 'sea-otters' ? require('../../assets/image/tv/sea-otters-alaska.jpg')
+  return variant === 'forest' ? require('../../assets/image/tv/forest-creek.jpg')
+    : variant === 'sea-otters' ? require('../../assets/image/tv/sea-otters-alaska.jpg')
     : variant === 'coastal' ? require('../../assets/image/tv/acadia-coast.png')
     : require('../../assets/image/tv/harbor-cinematic.png');
 }

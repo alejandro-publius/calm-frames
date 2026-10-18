@@ -38,15 +38,11 @@ it('has no release entry or release-renderable fixture', () => {
   view.unmount(); render(<SceneBridgeFixture onBack={jest.fn()} />);
   expect(screen.queryByTestId('scene-bridge-fixture')).toBeNull();
 });
-it('requires explicit development entry and restores its opener without launching media', () => {
+it('keeps development diagnostics out of the consumer explanation', () => {
   const open = jest.fn();
   render(<KidHomeScreen titles={checkedShelf()} onOpen={open} />);
-  expect(screen.queryByTestId('scene-bridge-fixture')).toBeNull();
   fireEvent.press(screen.getByTestId('kid-home-learn'));
-  fireEvent.press(screen.getByTestId('picture-hold-bridge-test'));
-  expect(screen.getByTestId('scene-bridge-fixture')).toBeTruthy();
-  fireEvent.press(screen.getByTestId('scene-bridge-fixture-back'));
-  expect(screen.getByTestId('picture-hold-bridge-test').props.hasTVPreferredFocus).toBe(true);
-  expect(screen.getByTestId('picture-hold-dismiss').props.hasTVPreferredFocus).toBe(false);
+  expect(screen.queryByTestId('picture-hold-bridge-test')).toBeNull();
+  expect(screen.queryByTestId('scene-bridge-fixture')).toBeNull();
   expect(open).not.toHaveBeenCalled();
 });

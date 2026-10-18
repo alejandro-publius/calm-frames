@@ -4,7 +4,8 @@ jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { StyleSheet } from 'react-native';
 import { BENIGN_STORY_ID } from '../../src/calmframes/benignStory';
-import { COASTAL_COLORS as CALM_COLORS, MINIMUM_TEXT_SIZE } from '../../src/calmframes/calmStyles';
+import { MINIMUM_TEXT_SIZE, CALM_TEXT } from '../../src/calmframes/calmStyles';
+import { WORLD } from '../../src/calmframes/CoastalWorld';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import { checkedShelf } from './shelfFixtures';
@@ -25,7 +26,7 @@ test('Home names the selected video and leads with Watch without adding a demo c
   const onOpen = jest.fn();
   const launch = jest.fn();
   render(<KidHomeScreen titles={titles} onOpen={onOpen} onPlay={jest.fn()} onLaunchControl={launch} onOpenParentArea={jest.fn()} />);
-  expect(screen.getByTestId('kid-home-title').props.children).toBe('Choose a video');
+  expect(screen.getByTestId('kid-home-title').props.children).toBe('Choose an island');
   expect(screen.getAllByText('Calm Frames')).toHaveLength(1);
   expect(screen.queryByTestId('kid-home-meta')).toBeNull();
   expect(screen.queryByText(/No picture holds/)).toBeNull();
@@ -47,12 +48,12 @@ test('Home names the selected video and leads with Watch without adding a demo c
   }
 });
 
-test('one teal action on Home: Watch is primary, Details and Help are quiet', () => {
+test('one primary action on Home: Watch is primary, Details and Help are quiet', () => {
   render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={jest.fn()} />);
   const watch = StyleSheet.flatten(screen.getByTestId('kid-home-watch').props.style);
-  expect(watch.backgroundColor).toBe(CALM_COLORS.PRIMARY);
+  expect(watch.backgroundColor).toBe(WORLD.PRIMARY);
   for (const id of ['kid-home-more-info', 'kid-home-learn', 'kid-home-parent-area']) {
-    expect(StyleSheet.flatten(screen.getByTestId(id).props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
+    expect(StyleSheet.flatten(screen.getByTestId(id).props.style).backgroundColor).not.toBe(WORLD.PRIMARY);
   }
 });
 
@@ -80,16 +81,16 @@ test('when the demo itself leads the shelf there is no second demo control and n
   expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toMatch(/Watch demo/);
 });
 
-test('the Home heading is one large line sized to clear the artwork, and Details uses the same reading scale', () => {
+test('Home and Details retain legible hierarchy within their reading areas', () => {
   const home = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} />);
   const homeTitle = StyleSheet.flatten(home.getByTestId('kid-home-video-title').props.style);
-  // Both steps use the shared feature type token.
-  expect(homeTitle.fontSize).toBe(80);
-  expect(homeTitle.fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE * 2);
+  // The map labels use the section token; Details has a larger reading area.
+  expect(homeTitle.fontSize).toBe(CALM_TEXT.section.fontSize);
+  expect(homeTitle.fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE);
   home.unmount();
   const details = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} />);
   const detailsTitle = StyleSheet.flatten(details.getByTestId('title-details-title').props.style);
-  expect(detailsTitle.fontSize).toBe(homeTitle.fontSize);
+  expect(detailsTitle.fontSize).toBeGreaterThan(homeTitle.fontSize);
   expect(StyleSheet.flatten(details.getByTestId('title-details-meta').props.style).fontSize).toBeGreaterThanOrEqual(MINIMUM_TEXT_SIZE);
 });
 
@@ -114,7 +115,7 @@ test('Details keeps the practice demo inside More info and returns focus there',
   fireEvent.press(prepared.getByTestId('title-details-show-info'));
   const entry = prepared.getByTestId('title-details-practice');
   expect(entry.props.accessibilityLabel).toBe('Watch simulated demo. 20 seconds, 2 picture pauses');
-  expect(StyleSheet.flatten(entry.props.style).backgroundColor).not.toBe(CALM_COLORS.PRIMARY);
+  expect(StyleSheet.flatten(entry.props.style).backgroundColor).not.toBe(WORLD.PRIMARY);
   expect(prepared.queryByTestId('title-details-play')).toBeNull();
   expect(entry.props.hasTVPreferredFocus).toBe(false);
   fireEvent.press(entry);

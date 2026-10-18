@@ -1,5 +1,7 @@
 # Calm Frames: rules for every session
 
+**Forest activation, October 18.** Owner explicitly approved the exact Forest catalog, existing signer and fresh-package exclusions, plus build/install/playback checks. See results/forest-activation-2026-10-18/approval.json. Third island and concise purpose-first How it works are integrated; validation and one consolidated native update are in progress. Original namespace is backed up. No broader trust, PIN, capture or household preference changes. Earlier checkpoints below are history.
+
 **October 18 island refinement.** Owner accepted the coastal world and approved
 distinct silhouettes, selection boat and Forest preparation. Current UI source
 adds static Forest scenery only; its exact new catalog is not approved or active.

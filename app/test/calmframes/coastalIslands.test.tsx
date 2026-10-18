@@ -7,11 +7,11 @@ import CoastalIsland from '../../src/calmframes/CoastalIsland';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import PlayerOpening from '../../src/calmframes/PlayerOpening';
-import { titlePresentation, SEA_OTTER_SOURCE_SHA256 } from '../../src/calmframes/TitleArtwork';
+import { titlePresentation, SEA_OTTER_SOURCE_SHA256, FOREST_SOURCE_SHA256 } from '../../src/calmframes/TitleArtwork';
 import { ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
 import { checkedShelf } from './shelfFixtures';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
-const titles = checkedShelf().filter(entry => [ACADIA_SOURCE_SHA256, SEA_OTTER_SOURCE_SHA256].includes(entry.title.sha256!));
+const titles = checkedShelf().filter(entry => [ACADIA_SOURCE_SHA256, SEA_OTTER_SOURCE_SHA256, FOREST_SOURCE_SHA256].includes(entry.title.sha256!));
 const otter = titles.find(entry => entry.title.sha256 === SEA_OTTER_SOURCE_SHA256)!;
 const flush = async () => { await act(async () => { await Promise.resolve(); await Promise.resolve(); }); };
 describe('boat selection and accessibility', () => {
@@ -81,12 +81,10 @@ describe('boat selection and accessibility', () => {
     fireEvent.press(view.getByTestId('kid-home-watch')); expect(play).toHaveBeenCalledWith(otter); expect(open).not.toHaveBeenCalled();
   });
 });
-it('shows Forest only as noninteractive scenery and retains exactly the two verified film destinations', () => {
+it('offers three verified destinations with no unready Forest label', () => {
   const view = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} />);
-  expect(view.getByText('Not ready to watch')).toBeTruthy();
-  expect(view.getAllByTestId(/^kid-home-poster-prepared-/)).toHaveLength(2);
-  const preview = view.getByTestId('forest-preview-label');
-  expect(preview.props.onPress).toBeUndefined(); expect(preview.props.focusable).toBeUndefined();
+  expect(view.queryByText('Not ready to watch')).toBeNull();
+  expect(view.getAllByTestId(/^kid-home-poster-prepared-/)).toHaveLength(3);
   expect(view.UNSAFE_getAllByType(CoastalIsland).map(node => node.props.kind)).toEqual(['forest','coastal','sea-otters']);
 });
 it.each(titles)('carries the selected destination motif into Details and static loading for $title.title', entry => {

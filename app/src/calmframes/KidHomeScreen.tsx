@@ -15,7 +15,6 @@ import CalmPageHeader from './CalmPageHeader';
 import { OFFLINE_TITLE_ID } from './offlineTitle';
 import HomeHarborScene, { filmStill } from './HomeHarborScene';
 import PictureHoldIntroduction from './PictureHoldIntroduction';
-import SceneBridgeFixture from './SceneBridgeFixture';
 import { isBundledBenignStory } from './benignStory';
 import {
   COASTAL_COLORS as CALM_COLORS,
@@ -123,19 +122,17 @@ const KidHomeScreen = ({
   const feedback = useInterfaceFeedback();
   const listed = kidModeTitles(titles);
   const [showIntroduction, setShowIntroduction] = React.useState(false);
-  const [showBridgeFixture, setShowBridgeFixture] = React.useState(false);
-  const [returnToBridgeTest, setReturnToBridgeTest] = React.useState(false);
   // The header control to put the remote's focus back on after a panel it
   // opened is dismissed: How it works after the explanation, the profile
   // button after the picker. One value, so the latest dismissal wins.
   const [returnToHeader, setReturnToHeader] = React.useState<'learn' | 'profile' | null>(null);
   const demo = listed.find((entry) => isBundledBenignStory(entry.title));
-  const closeIntroduction = () => { setShowIntroduction(false); setReturnToBridgeTest(false); setReturnToHeader('learn'); };
+  const closeIntroduction = () => { setShowIntroduction(false); setReturnToHeader('learn'); };
   React.useEffect(() => {
-    if (!showIntroduction || !interfaceActive || showBridgeFixture) return;
+    if (!showIntroduction || !interfaceActive) return;
     const subscription = BackHandler.addEventListener('hardwareBackPress', () => { closeIntroduction(); return true; });
     return () => subscription.remove();
-  }, [showIntroduction, interfaceActive, showBridgeFixture]);
+  }, [showIntroduction, interfaceActive]);
   const [choosingProfile, setChoosingProfile] = React.useState(false);
   // The picker is one level above the shelf, so Back closes it rather than
   // falling through to the shelf's handler and leaving the app. The chips go
@@ -152,6 +149,12 @@ const KidHomeScreen = ({
   const [selectedId, setSelectedId] = React.useState(selectedTitleId ?? returnFocusId);
   const featured = listed.find((entry) => entry.title.id === selectedId && !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID) ?? listed.find((entry) => titlePresentation(entry.title).action === 'Watch now') ?? listed[0];
   const mainStories = listed.filter((entry) => !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID);
+  // Keep the playable island order aligned with the map: Acadia, Forest, Sea Otters.
+  const islandOrder = (entry: CheckedTitle) => {
+    const art = titlePresentation(entry.title);
+    return art.menuArt === 'forest' ? 1 : art.menuArt === 'sea-otters' ? 2 : 0;
+  };
+  mainStories.sort((a, b) => islandOrder(a) - islandOrder(b));
   const hasMainStory = mainStories.length > 0;
   const playbackCheck = listed.find((entry) => entry.title.id === OFFLINE_TITLE_ID);
   const feature = featured ? titlePresentation(featured.title) : null;
@@ -218,14 +221,10 @@ const KidHomeScreen = ({
   }
   useUiCapture(frame, reason);
 
-  if (typeof __DEV__ !== 'undefined' && __DEV__ && showBridgeFixture) {
-    return <SceneBridgeFixture onBack={() => { setShowBridgeFixture(false); setReturnToBridgeTest(true); }} />;
-  }
-
   return (
     <WorldAppearance.Provider value={!empty && !showIntroduction}><View testID={testID} style={[styles.screen, !empty && !showIntroduction && { backgroundColor: WORLD.BACKGROUND }]}>
-      {!empty && !showIntroduction ? <CoastalWorld destination={islandKind(feature?.menuArt ?? feature?.art)} showBoat={feature?.art === 'coastal' || feature?.menuArt === 'sea-otters'} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
-      <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo && !returnToBridgeTest}>
+      {!empty && !showIntroduction ? <CoastalWorld destination={islandKind(feature?.menuArt ?? feature?.art)} showBoat={feature?.art === 'coastal' || Boolean(feature?.menuArt)} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
+      <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
             onPress={() => { setReturnToHeader(null); setChoosingProfile(!choosingProfile); }} /> : null}
@@ -238,7 +237,7 @@ const KidHomeScreen = ({
           chosenWord={WATCHING_STATE_WORD} chosenLine={whoIsWatching((profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name)}
           profiles={profiles} activeProfileId={activeProfileId ?? profiles[0].id} onChoose={onChooseProfile} />
       ) : null}
-      {showIntroduction ? <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false}><PictureHoldIntroduction preferBridgeTest={returnToBridgeTest} onBridgeTest={typeof __DEV__ !== 'undefined' && __DEV__ ? () => setShowBridgeFixture(true) : undefined} disabled={saving} onDemoDetails={demo ? () => onOpen(demo) : undefined} onPlaybackCheck={playbackCheck ? () => onOpen(playbackCheck) : undefined} onStart={demo ? () => {
+      {showIntroduction ? <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false}><PictureHoldIntroduction disabled={saving} onDemoDetails={demo ? () => onOpen(demo) : undefined} onPlaybackCheck={playbackCheck ? () => onOpen(playbackCheck) : undefined} onStart={demo ? () => {
         if (!saving) { setShowIntroduction(false); setReturnToHeader('learn'); (onPlay ?? onOpen)(demo); }
       } : undefined} /></ScrollView> : empty ? (
         <StatusNotice
@@ -264,7 +263,7 @@ const KidHomeScreen = ({
                 </View>
               </View>
             </View> : null}
-            {otherStories.length > 0 ? <View style={styles.sectionHeading}><Text accessibilityRole="header" testID={`${testID}-title`} style={styles.section}>Choose your coast</Text></View> : null}
+            {otherStories.length > 0 ? <View style={styles.sectionHeading}><Text accessibilityRole="header" testID={`${testID}-title`} style={styles.section}>Choose an island</Text></View> : null}
             <View style={styles.grid}>
               {otherStories.map((entry) => {
                 const focused = focusedId === entry.title.id;
@@ -313,7 +312,7 @@ const styles = StyleSheet.create({
   sectionHeading: { alignItems: 'center', marginTop: scale(16), marginBottom: scale(12) },
   section: { ...CALM_TEXT.section, color: WORLD.TEXT },
   banner: { marginBottom: scale(20) },
-  grid: { width: '100%', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: scale(180), marginTop: scale(100), gap: scale(100) },
+  grid: { width: '100%', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: scale(180), marginTop: scale(100), gap: scale(40) },
   poster: { width: scale(400), minHeight: scale(280), flexDirection: 'column', justifyContent: 'center', padding: scale(12), borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: WORLD.BORDER, borderBottomWidth: scale(12), backgroundColor: WORLD.SURFACE },
   posterSelected: { borderBottomColor: WORLD.FOCUS_RING },
   posterFocused: { borderColor: WORLD.FOCUS_RING, backgroundColor: WORLD.SURFACE_FOCUSED },

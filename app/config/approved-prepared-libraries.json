@@ -16,6 +16,14 @@
       "consumer": true,
       "label": "Sea otters in Alaska: approved NOAA ocean excerpt",
       "approvalReference": "Owner \"do it all\" after exact clip/install proposal, thread 01a10d92-99ac-70a3-b473-29310ef6e002; results/sea-otters-flow-2026-10-18/approval.json"
+    },
+    {
+      "bundleId": "77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f",
+      "catalogSha256": "24d5cb114e3bcec0047158b7d2d3ac10bdb324cca0a51c61d78e70bd5256d732",
+      "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+      "consumer": true,
+      "label": "Forest creek at Redwood: approved NPS excerpt",
+      "approvalReference": "Owner exact Forest activation approval in thread 01a10d92-99ac-70a3-b473-29310ef6e002; results/forest-activation-2026-10-18/approval.json"
     }
   ]
 }

@@ -19,13 +19,20 @@ interface TitlePresentation {
   runtime?: string;
   attribution?: string;
   /** Decorative menu scenery, independent of video or ambient playback. */
-  menuArt?: 'coastal' | 'sea-otters';
+  menuArt?: 'coastal' | 'sea-otters' | 'forest';
   art?: 'harbor' | 'harbor-cinematic' | 'gradient' | 'coastal';
 }
 
 export const SEA_OTTER_SOURCE_SHA256 = '02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6';
+export const FOREST_SOURCE_SHA256 = '63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c';
 
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
+  if (concernsPackagedLibrary(title) && title.sha256 === FOREST_SOURCE_SHA256 && title.durationMs === 12000) {
+    return { name: 'Forest creek at Redwood', cardName: 'Forest', kind: 'Redwood creek · 12 seconds',
+      selectorMeta: 'Nature audio · 12 sec', action: 'Watch now', runtime: '12 seconds · Nature sounds · Plays once', menuArt: 'forest',
+      description: 'A redwood tree beside a quiet creek in Redwood National and State Parks.',
+      attribution: 'NPS: G Litten. Prairie Creek and Redwood. Public-domain footage; 12-second excerpt with original nature audio, plays once. No NPS endorsement implied. Source: https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E' };
+  }
   if (concernsPackagedLibrary(title) && title.sha256 === SEA_OTTER_SOURCE_SHA256 && title.durationMs === 19986.633) {
     return { name: 'Sea otters in Alaska', cardName: 'Sea otters', kind: 'Ocean wildlife · 20 seconds',
       selectorMeta: 'Silent · 20 seconds', action: 'Watch now', runtime: '20 seconds · Silent · Plays once', menuArt: 'sea-otters',

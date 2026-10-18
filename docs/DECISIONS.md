@@ -2694,3 +2694,7 @@ its exact NPS creek catalog and proposed fresh namespace are approved. The curre
 media namespace is untouched. Cost: local UI build and strict preparation only;
 no AWS, new signing key or public release. Evidence: results/coastal-islands-2026-10-18
 and results/forest-candidate-2026-10-18.
+
+## October 18: activate the exact approved Forest excerpt
+
+Owner explicitly approved catalog 24d5cb11, bundle 77d43b66, existing signer and the fresh namespace excluding obsolete river-otter 4064f489 and old Harbor 89496fc4. Original 59-file namespace was moved intact to build/forest-activation-2026-10-18/original-prepared-library; 40 retained files match. Add only this consumer catalog, with Forest between Acadia and Sea Otters. Keep player guards, Acadia ocean media, settings and ambient registration unchanged. Replace repetitive How it works paragraphs with purpose, qualified ocean/audio behavior, Watch/Back, scope and concise limitations. Remove the developer scene-bridge shortcut from consumer help. Cost: local build/test only; no AWS or external publication.

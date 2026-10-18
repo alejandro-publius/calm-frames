@@ -4,13 +4,13 @@
     "analysis_width": 192,
     "luminance_model": "wcag-relative-luminance-srgb",
     "matrix": "bt601",
-    "matrix_source": "stream-tag",
+    "matrix_source": "inferred-sd-bt601",
     "pixel_format": "yuv420p",
     "range": "limited",
-    "range_source": "stream-tag",
+    "range_source": "default-limited",
     "transfer_tag": "2"
   },
-  "created_utc": "2026-10-18T04:52:49Z",
+  "created_utc": "2026-10-18T18:22:06Z",
   "generator": {
     "name": "flashmap",
     "version": "1.0.0"
@@ -18,10 +18,10 @@
   "pattern_exemptions": [],
   "picture": {
     "coded": {
-      "height": 720,
+      "height": 480,
       "left": 0,
       "top": 0,
-      "width": 1280
+      "width": 854
     },
     "frame_height": 108,
     "frame_width": 192,
@@ -143,27 +143,27 @@
   "signature": {
     "algorithm": "ed25519",
     "key_id": "sha256:00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
-    "payload_sha256": "79cfce6fa6d0f4da80fefa0b2446facc42443fdec986fc8b647bce074837aab9",
+    "payload_sha256": "5974c386ab84fc369c3b870f423510003f5060afe44d278b958da50be926b2a1",
     "public_key": "B5T8ySBDCjXF5gUm6NwY78TOnTSVofUMZi4oAMgWyZs=",
-    "value": "VqZ1E4C/0H4necgdiH45FfqUT/4Smc/5V+Fc7vLska+hGE8uSz6UqsXGvCaGRG0wmTnQ9GvkyDq9W1zrvFNgDA=="
+    "value": "dkyQnLpDLA79A/PQQHOYTwqQ5ey9nKzByCRVAe8J0fhV/OZTB1b9RkWREmwbTgw6+SIn010QKDyik+nwZzzhDw=="
   },
   "source": {
-    "coded_height": 720,
-    "coded_width": 1280,
-    "container_frame_rate": "25/1",
-    "duration_ms": 4240.0,
+    "coded_height": 480,
+    "coded_width": 854,
+    "container_frame_rate": "30/1",
+    "duration_ms": 12000.0,
     "first_pts_ms": 0.0,
-    "frame_count": 106,
+    "frame_count": 360,
     "frame_interval_ms": {
-      "max": 40.0,
-      "median": 40.0,
-      "min": 40.0
+      "max": 33.333,
+      "median": 33.333,
+      "min": 33.333
     },
-    "last_coded_pts_ms": 4200.0,
-    "last_pts_ms": 4200.0,
-    "path": "otter-short-unapproved.mp4",
-    "sha256": "4e473dacc78c2a18c01e8fe030fc482da6b7845c326c2f36814b74d98ba454e4",
-    "size_bytes": 2315227,
+    "last_coded_pts_ms": 11966.667,
+    "last_pts_ms": 11966.667,
+    "path": "HAZARD_forest-creek-12s.mp4",
+    "sha256": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+    "size_bytes": 1903525,
     "timestamp_source": "container-pts",
     "variable_frame_rate": false
   },
