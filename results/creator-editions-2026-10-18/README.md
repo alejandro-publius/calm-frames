@@ -82,6 +82,11 @@ registry; fixtures exist in unit tests and the local editor. Native fixture test
 would require a separate presentation-only test route and a new build. Acadia must
 not be assigned invented narrative or stretched cover boundaries to provide a test.
 
-The current local intake service was preserved; it was not restarted onto this code.
-The new plan control becomes available when the integrated checkout's intake is next
-served. Its CLI is runnable now. Publication and submission remain separate.
+The local working checkout was fast-forwarded from `639066b` to `787fdea`; all 779
+installed app inputs match and its strict package gate passes. Git main and remote
+refs were unchanged. The idle intake service was reloaded once at
+http://127.0.0.1:8766 with identical arguments, all four jobs and signer status
+preserved. The new plan page is live. No key bytes were inspected or changed.
+See `integration-receipt.json` and `intake-integration-receipt.json`. Subsequent
+documentation commits do not change installed app inputs. Publication and submission
+remain separate.

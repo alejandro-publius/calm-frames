@@ -11,7 +11,10 @@ and `results/creator-editions-2026-10-18/`. Installed source is `ce3fae8`; 206 f
 hash and all 779 inputs; native Acadia/Back/end/Parents-cancel checks pass. The app
 is left Home Watch and the collector stopped. Three setup-only build failures
 preceded the successful build. Personal-editor and bridge native use remain unclaimed;
-see the evidence README. No capture or visual/audio acceptance is claimed.
+see the evidence README. The local `claude/tv-experience-2026-10-16` checkout now
+contains these changes by fast-forward, with all installed inputs matching. Its idle
+intake service was reloaded once with existing jobs/signers preserved. No capture or
+visual/audio acceptance is claimed.
 
 
 ## Final wording and submission reconciliation, October 18, 2026
