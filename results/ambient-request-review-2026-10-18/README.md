@@ -48,8 +48,8 @@ not to approve new keys/catalog entries or relax protection.
 ## Native motion and audio boundary
 
 The installed `@amazon-devices/react-native-w3cmedia` README documents explicit
-surface creation/attachment/clear lifecycle (lines 39–81, 146–191) and lists
-`loop`, `volume` and `muted` as unsupported HTMLMediaElement features (lines 341–354).
+surface creation/attachment/clear lifecycle (lines 39-81, 146-191) and lists
+`loop`, `volume` and `muted` as unsupported HTMLMediaElement features (lines 341-354).
 Therefore setting `muted=true` and `loop=true` on a second player is not sufficient.
 The existing Harbor audio cannot be assumed to stay silent alongside source audio.
 The current application uses one source video surface, an opaque RN cover at zIndex 1,

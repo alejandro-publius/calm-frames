@@ -1,5 +1,26 @@
 # Final handoff: the integration candidate
 
+## Real ocean baked preparation, October 18, 2026
+
+A new unsigned local recipe bakes real NPS Acadia ocean footage into the unchanged
+covered intervals, preserving all 1,804 frame timestamps, exact video duration and
+1,765 original audio packets. All three preset candidates pass both unchanged
+room-aware analyses. A separate 3.22-second CC0 otter excerpt also has zero reported
+segments in both room profiles. No candidate is signed, registered or installed.
+
+The new runtime capability requires exact compiled metadata plus accepted prepared
+media, verified maps and complete interval equality. Its registry is EMPTY. All
+seek/uncertainty, loading, pause/error and personal-cover fallbacks stay opaque;
+the existing guard and Skip path are unchanged. 79 app tests, 18 pipeline tests,
+TypeScript, focused lint, Ruff, style and a redacted secret scan pass.
+
+The strict export/report gate still needs support for the ambient recipe before
+an exact new catalog can be approved. No approval tuple is invented or borrowed
+from the old bundle. The one native install remains unused and installed source
+remains `50bc01f`. Earlier release fixes remain preserved locally. See
+[artifacts, exact identities and remaining activation work](results/baked-ocean-2026-10-18/README.md).
+
+
 ## Local release blocker fixes, October 18, 2026
 
 Source `23a24c2` fixes native-input diagnostics, dependency patch failure handling,

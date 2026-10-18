@@ -1,3 +1,5 @@
+import { bakedAmbientForRendition } from '../calmframes/approvedBakedAmbient';
+import { mayShowBakedAmbient } from '../calmframes/bakedAmbient';
 import {
   ContentPersonalizationServer,
   PlaybackState,
@@ -330,7 +332,14 @@ const PlayerScreen = ({
     ? resolveSceneBridge(sceneBridgesForAsset(extraCoverAsset), extraCoverAsset,
         guard.baseIntervals, guard.mediaTimeMs)
     : undefined;
-  const coverPresentation = !covered ? 'clear' : guard.coverImageUri ? 'signed-still' : calmCoverFallback ? 'message' : 'plain';
+  const bakedAmbientVisible = mayShowBakedAmbient(
+    bakedAmbientForRendition(extraCoverAsset?.renditionSha256, guardedParams?.settings?.preset), extraCoverAsset,
+    guardedParams?.settings?.preset, playbackEvidence?.maps ?? [], guard.baseIntervals,
+    guard.mediaTimeMs, { acceptedPreparedRoute: preparedRouteAccepted, verified: guard.status === 'verified',
+      scheduledCover: guard.scheduledCover, buffering: showBuffering || slowPlayback,
+      paused, opening: showOpeningShell, returning: returningHome, ended: isVideoEnded, error: isVideoError,
+      personalCoversReady: extraCovers.status === 'ready', personalCoverCount: extraCovers.record?.additions.length ?? -1 });
+  const coverPresentation = bakedAmbientVisible ? 'baked-ambient' : !covered ? 'clear' : guard.coverImageUri ? 'signed-still' : calmCoverFallback ? 'message' : 'plain';
   useEffect(() => { trace('playback', `cover-surface ${coverPresentation}`); }, [coverPresentation]);
   // Debug-build breadcrumbs (CALM_TRACE, see trace.ts) so one native run can
   // separate the phases from the device log alone: the first picture, each
@@ -724,7 +733,7 @@ const PlayerScreen = ({
               over a hidden picture.
             */}
             <CoverLayer
-              visible={covered}
+              visible={covered && !bakedAmbientVisible}
               calmFallback={calmCoverFallback}
               sceneBridge={sceneBridge}
               imageUri={access === 'guarded' ? guard.coverImageUri : undefined}

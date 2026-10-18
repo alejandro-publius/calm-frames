@@ -1,0 +1,47 @@
+{
+  "candidates": [
+    {
+      "preset": "wcag",
+      "candidatePath": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/ambient-ocean-2026-10-18/standard-1/candidate.mp4",
+      "candidateSha256": "0b641eb45f2f19dc7694fd0f36a7c85e758782932f11ede10566ac0c33639336",
+      "metadataSha512": "f8e2a08d4c22bebb06434026530afc0fb0b307f2263d836c94af0acdab8c906fb84adfe0e0e9896ce78813ab24a309997691aac2187062bd505f2d0e60c0ea45",
+      "exactVideoFrameTimes": 1804,
+      "exactAudioPackets": 1765,
+      "exactVideoDurationSeconds": "1693879/45000",
+      "sourceAndAmbientHashesMatch": true,
+      "mapAndAnalysisHashesMatch": true,
+      "bothRoomProfilesClean": true,
+      "approved": false
+    },
+    {
+      "preset": "broadcast",
+      "candidatePath": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/ambient-ocean-2026-10-18/broadcast-1/candidate.mp4",
+      "candidateSha256": "0b641eb45f2f19dc7694fd0f36a7c85e758782932f11ede10566ac0c33639336",
+      "metadataSha512": "4bbbba3d36bf8d16600a9ba299d34e9a0a649eee826e3db2a822640582a2c5af5ff7cd65088731f29ffa54180dea018043cd1b5d3a822889d0b4514fb9b9508d",
+      "exactVideoFrameTimes": 1804,
+      "exactAudioPackets": 1765,
+      "exactVideoDurationSeconds": "1693879/45000",
+      "sourceAndAmbientHashesMatch": true,
+      "mapAndAnalysisHashesMatch": true,
+      "bothRoomProfilesClean": true,
+      "approved": false
+    },
+    {
+      "preset": "extra-cautious",
+      "candidatePath": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/ambient-ocean-2026-10-18/extra-cautious-1/candidate.mp4",
+      "candidateSha256": "42d2abbe6ddd2f0a592bc5a1407da945a1c73fc6febedc68895b9f5294608a14",
+      "metadataSha512": "ef37f4eb5f65b6684f853c6dc046ab13ddddc3e7a27452e710eebbfd1036a464ac176b405b6e6e198f9859d79c8dcf3929db0b321fe9791f411368953ad6a44f",
+      "exactVideoFrameTimes": 1804,
+      "exactAudioPackets": 1765,
+      "exactVideoDurationSeconds": "1693879/45000",
+      "sourceAndAmbientHashesMatch": true,
+      "mapAndAnalysisHashesMatch": true,
+      "bothRoomProfilesClean": true,
+      "approved": false
+    }
+  ],
+  "nativeTested": false,
+  "pixelsInspected": false,
+  "audioHeard": false,
+  "trustChanged": false
+}

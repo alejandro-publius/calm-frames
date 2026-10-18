@@ -1,0 +1,32 @@
+{
+  "status": "prepared-unapproved",
+  "approved": false,
+  "signed": false,
+  "preset": "wcag",
+  "sourceSha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+  "ambientSha256": "bb6a5994faff83a38af6e25d0222697d99c7a5bca99fbf15958626d68dbfcf14",
+  "attribution": "NPS Video, Acadia National Park; public domain, NPGallery 6fc09aec-7fc2-47ed-b8cc-e1b10861dd3e; source 0\u20136.5 seconds. No NPS endorsement.",
+  "intervals": [
+    {
+      "startMs": 7843.0,
+      "endMs": 12199.0
+    },
+    {
+      "startMs": 28613.0,
+      "endMs": 31093.0
+    }
+  ],
+  "ambientAnalysis": {
+    "wcag": "80451bde4a0a7d0c704e4e74a8afc265638ffbd60e244b4e5d518fc2ae49abcb",
+    "broadcast": "46522854445d4dc6aeec61dfc3a90ed72e103f0845af9962618609f697479533"
+  },
+  "timingAudioExact": true,
+  "outputAnalysis": {
+    "wcag": "56b410cf21bbfa15cf9a520a70ee0cec315f1409aede4f1590b63ba7b80aac66",
+    "broadcast": "52d6848400e5a137bb022a5b82827c28b0ecb6eac2058495f78e287258ce2beb"
+  },
+  "renditionSha256": "0b641eb45f2f19dc7694fd0f36a7c85e758782932f11ede10566ac0c33639336",
+  "metadataSha256": "f6bd59f49cf243fe11b5f22bc6c1c4906c0dc826be550056e1b1ff91615a6325",
+  "frameCount": 1804,
+  "audioPacketCount": 1765
+}
