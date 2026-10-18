@@ -1,0 +1,29 @@
+{
+  "reviewer": "cinematic_review",
+  "date": "2026-10-18",
+  "scope": "Source provenance and staging boundary only; candidate verification pending",
+  "source_page": "https://videos.fisheries.noaa.gov/detail/video/2789953172001/b-roll%3A-sea-otters",
+  "species_reference": "https://www.nps.gov/olym/learn/nature/sea-otter.htm",
+  "findings": [],
+  "confirmed": [
+    "Official source page distinguishes reusable B-roll from narrative-video restrictions and requests NOAA Fisheries credit.",
+    "Opening slate attributes all footage to NOAA and requests NOAA Fisheries credit; inspected Alaska slate contains no third-party attribution or permit exception.",
+    "Alaska slate explicitly identifies raft of sea otters and close-ups at Unalaska/Dutch Harbor, Alaska.",
+    "Decoded source contact sheet visually supports sea-otter rafting identification. Species identification is anchored in NOAA labeling, not location alone.",
+    "NPS reference identifies sea otter as Enhydra lutris and notes that river otters can also occur in ocean water.",
+    "Both media hashes and all five evidence hashes in the inspected provenance.json matched local files.",
+    "40-second candidate ffprobe: 39.973267 seconds, 1198 frames, 854x480, 30000/1001 fps, video only."
+  ],
+  "candidate_status": "Parent reports 130-170 second candidate rejected as proposal because of heavy protective coverage; preferred 122-142 second raft cut is undergoing separate unchanged-pipeline verification.",
+  "required_before_final_proposal": [
+    "Record final raft source hash, exact encoded duration, frames, selected source times and provenance; mark former candidate as superseded.",
+    "Review final verification report and packaged catalog hashes.",
+    "Exact catalog activation approval remains separate."
+  ],
+  "limits": [
+    "No app build, install, activation or device action performed.",
+    "Source images viewed were predecoded public-media stills, not user-screen captures.",
+    "No moving-source playback or visual safety inference.",
+    "Read-only review except this own review record."
+  ]
+}

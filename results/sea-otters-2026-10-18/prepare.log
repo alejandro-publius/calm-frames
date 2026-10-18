@@ -1,0 +1,38 @@
+{
+  "app_shelf_connected": false,
+  "artifacts": {},
+  "error": {
+    "message": "The pipeline did not return a verified result for this source.",
+    "type": "LocalLibraryError"
+  },
+  "next_steps": [
+    "Fix the preparation error and run this local import again."
+  ],
+  "physical_tv_validated": false,
+  "presets": [
+    "wcag",
+    "broadcast",
+    "extra-cautious"
+  ],
+  "source_sha256": "1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171",
+  "status": "failed",
+  "title": "Sea otters in Alaska",
+  "verification": {
+    "failed_checks": [
+      {
+        "name": "cover_model_clean:wcag"
+      },
+      {
+        "name": "safe_rendition_clean:broadcast"
+      },
+      {
+        "name": "cover_model_clean:broadcast"
+      },
+      {
+        "name": "hls_rendition_clean:broadcast"
+      }
+    ],
+    "status": "failed"
+  },
+  "version": 1
+}

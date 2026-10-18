@@ -1,0 +1,37 @@
+[
+  {
+    "case": "original",
+    "accepted": {
+      "python": true,
+      "node": true
+    }
+  },
+  {
+    "case": "media bytes changed",
+    "accepted": {
+      "python": false,
+      "node": false
+    }
+  },
+  {
+    "case": "map bytes changed",
+    "accepted": {
+      "python": false,
+      "node": false
+    }
+  },
+  {
+    "case": "report bytes changed",
+    "accepted": {
+      "python": false,
+      "node": false
+    }
+  },
+  {
+    "case": "restored",
+    "accepted": {
+      "python": true,
+      "node": true
+    }
+  }
+]

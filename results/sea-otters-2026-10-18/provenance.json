@@ -1,0 +1,64 @@
+{
+  "sourcePage": "https://videos.fisheries.noaa.gov/detail/video/2789953172001/b-roll%3A-sea-otters",
+  "downloadURL": "https://download.gallery.brightcove.com/api/gallery/account/659677166001/site/site-600408/video/2789953172001/download",
+  "checkedOn": "2026-10-18",
+  "species": "Enhydra lutris",
+  "speciesEvidence": "NOAA labels the package Sea Otters and the selected segment Raft of sea otters, close-ups; visual source inspection shows rounded heads, small ears, broad hind flippers and floating marine rafts. NPS species reference identifies sea otter as Enhydra lutris.",
+  "speciesReference": "https://www.nps.gov/olym/learn/nature/sea-otter.htm",
+  "location": "Unalaska/Dutch Harbor, Alaska",
+  "locationEvidence": "Source segment slate at 114 seconds; actual ocean harbor footage, not a river.",
+  "license": "Public domain (US government B-roll), NOAA Fisheries credit required by source page",
+  "credit": "NOAA Fisheries",
+  "slateEvidence": "Opening slate: all footage courtesy of NOAA, a federal agency; credit NOAA Fisheries. No external credit or permit is listed on opening or Alaska segment slates.",
+  "files": [
+    {
+      "file": "noaa-sea-otters.mp4",
+      "sha256": "8b751e58fd937460fcae40363eaf5713c4c19a501ec97c5db00422ec50ce0bfa",
+      "duration_s": 175.573333,
+      "resolution": "1280x720",
+      "fps": "30000/1001",
+      "audio": true
+    },
+    {
+      "file": "sea-otters-alaska-40s.mp4",
+      "sha256": "1498a9725de168ad86169594f9ddfa363b2fff9ab9e8f96d154f64e480814171",
+      "duration_s": 39.973267,
+      "resolution": "854x480",
+      "fps": "30000/1001",
+      "audio": false
+    },
+    {
+      "file": "sea-otter-raft-alaska-20s.mp4",
+      "sha256": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+      "duration_s": 19.986633,
+      "resolution": "854x480",
+      "fps": "30000/1001",
+      "audio": false
+    }
+  ],
+  "evidenceHashes": {
+    "noaa-page.html": "0b0f01b74bf2263874b42060c4f2f3c375b5b8a5a94fe5ad1489c734b33d7654",
+    "slate.jpg": "712803024df143b5f962abbd191854898aa8c153ab438326c4fa485baff8f0c2",
+    "alaska-slate.jpg": "3ef139bfd4b415a0fdcea7d85470252be87e972095a27707bb6ea89b1820184e",
+    "source-contact.jpg": "8622fa28dbf30e558c953b9f1ec07543a0b53b396bff4632a0be73ae4b691a5a",
+    "alaska-contact.jpg": "55b6ab1995d7de70a75d1b409f11c2f16308da350266c5fa48665213433066b3",
+    "raft-contact.jpg": "a027be925cd1c11d64f8aafef23620a79a33a55392d1b95fb64a826f39d38c4a"
+  },
+  "screenRecording": false,
+  "inspection": "Still frames decoded only from the downloaded public source media; no device or user-screen capture.",
+  "initialSelection": {
+    "start_s": 130,
+    "requested_duration_s": 40,
+    "transformation": "854x480 H.264, CRF 20, original frame cadence, audio removed; no looping, no speed change, no crop",
+    "description": "Raft of sea otters floating, followed by closer sea-otter views at the ocean surface.",
+    "status": "Not proposed: 18.476s Standard and 23.281s Extra cautious cover time in39.973267s; retained as an evaluated alternative.",
+    "verification": "Failed closed: cover_model_clean:wcag, safe_rendition_clean:broadcast, cover_model_clean:broadcast, hls_rendition_clean:broadcast. Not exported or proposed."
+  },
+  "selection": {
+    "start_s": 122,
+    "requested_duration_s": 20,
+    "transformation": "854x480 H.264, CRF 20, original frame cadence, audio removed; no looping, no speed change, no crop",
+    "description": "Sea otters floating together at the ocean surface, followed by a closer sea-otter view near the end. Includes an original source shot change; not an uninterrupted take.",
+    "reason": "Raft-focused excerpt retains useful ocean footage; the longer closeup alternative required substantial cover time. All detector settings remain unchanged."
+  }
+}

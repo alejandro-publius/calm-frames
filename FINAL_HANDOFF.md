@@ -1,5 +1,28 @@
 # Final handoff: the integration candidate
 
+## Sea-otter correction staged, October 18, 2026
+
+Real NOAA sea otters (Enhydra lutris), floating in the ocean at Unalaska/Dutch
+Harbor, are prepared as a 19.986633-second silent excerpt. All 48 checks pass;
+all three profiles have zero flagged intervals. Source page, opening/location
+slates and source frames were inspected; NOAA Fisheries credit is required.
+The earlier 40-second alternative failed closed and is not proposed.
+
+No app source/trust/assets, device or installed package changed. The wrong
+river-otter preview is still installed. Read [the proposal and evidence](results/sea-otters-2026-10-18/README.md)
+and [exact approval tuple](results/sea-otters-2026-10-18/approval-proposal.json).
+The candidate plus every old generation exceeds 64 MiB. A fresh 64,432,686-byte
+namespace passes delivery checks and omits only obsolete pre-ocean Acadia bundle
+4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13. Current
+Acadia ocean files match byte for byte. Original namespace remains untouched.
+
+Owner's remaining decision: approve the exact catalog/bundle and this fresh
+namespace plan. Then integrate in a separate checkout, retire obsolete Acadia
+fallback references, replace the river-otter shelf selection, preserve cinematic
+UI and Acadia, check gates, and perform one authorized native build/install with
+non-capture flow checks. Owner visual/silent-playback review remains separate.
+No native sea-otter verification or installation is claimed. No push occurred.
+
 ## Cinematic redesign installed, October 18, 2026
 
 Installed source is `999f69cd917e51444502d157a3e1bfb069d85235`; package SHA-256 is
