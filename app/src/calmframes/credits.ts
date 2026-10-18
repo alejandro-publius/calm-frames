@@ -319,6 +319,22 @@ export const CREDIT_ENTRIES: CreditEntry[] = [
     ],
   },
   {
+    title: 'Prairie Creek and Redwood (NPS review source, 480p)',
+    license: 'Public domain: NPS credit without copyright symbol and official usage statement',
+    credit: 'NPS: G Litten; no endorsement implied',
+    source: 'https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E',
+    collection: 'unknown',
+    obligations: [],
+  },
+  {
+    title: 'Prairie Creek and Redwood (NPS review source, 720p)',
+    license: 'Public domain: NPS credited without copyright symbol; official source page usage statement',
+    credit: 'NPS: G Litten; no NPS endorsement implied',
+    source: 'https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E',
+    collection: 'unknown',
+    obligations: [],
+  },
+  {
     title: 'Sea of clouds over Asia',
     license: 'CC BY-SA 4.0',
     credit: 'Asaf Bartov via Wikimedia Commons, CC BY-SA 4.0',

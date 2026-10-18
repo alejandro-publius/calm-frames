@@ -145,6 +145,7 @@ def main():
         # Use the documented target option directly. The existing npm
         # postbuild hook intentionally checks all three architectures.
         before_packages = {str(path): path.stat() if path.exists() else None for path in packages}
+        command(['node', 'tools/check_native_inputs.mjs'])
         command(['node', 'tools/check_prepared_library.mjs', '--require-reports'])
         for arch in arches:
             command(['npm', 'exec', '--', 'react-native', 'build-kepler',

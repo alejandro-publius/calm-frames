@@ -20,6 +20,12 @@ def gate(tmp_path):
     script = app / 'tools/check_prepared_library.mjs'
     script.parent.mkdir(parents=True)
     shutil.copy2(ROOT / 'app/tools/check_prepared_library.mjs', script)
+    generator = script.with_name('approved_prepared_libraries.mjs')
+    shutil.copy2(ROOT / 'app/tools/approved_prepared_libraries.mjs', generator)
+    (app / 'config').mkdir()
+    (app / 'config/approved-prepared-libraries.json').write_text('{"version":1,"catalogs":[]}')
+    (app / 'src/calmframes').mkdir(parents=True)
+    subprocess.run(['node', str(generator), '--write'], check=True, capture_output=True)
     root = app / 'assets/raw/prepared-library'
     root.mkdir(parents=True)
     raw = '{"version":1,"titles":[]}'
@@ -67,7 +73,9 @@ def test_unknown_or_incomplete_target_options_are_refused(gate, args):
     package, run = gate
     for arch in ('armv7', 'aarch64', 'x86_64'):
         package(arch)
-    assert run('--packages', 'Debug', *args).returncode != 0
+    result = run('--packages', 'Debug', *args)
+    assert result.returncode != 0
+    assert 'Choose --arch' in result.stderr
 
 
 def test_selected_package_still_requires_exact_prepared_bytes(gate):

@@ -8,7 +8,9 @@ import { loadPersonalCovers, savePersonalCovers } from './personalCoverStorage';
 import { MAX_PERSONAL_COVERS, PersonalCoverAsset, PersonalCoverRecord, personalAssetKey } from './personalCovers';
 
 export function coverTime(ms: number): string {
-  return `${Math.floor(ms / 60000)}:${String(Math.floor(ms / 1000) % 60).padStart(2, '0')}`;
+  const rounded = Math.round(ms);
+  const fraction = rounded % 1000;
+  return `${Math.floor(rounded / 60000)}:${String(Math.floor(rounded / 1000) % 60).padStart(2, '0')}${fraction ? `.${String(fraction).padStart(3, '0')}` : ''}`;
 }
 
 export default function PersonalCoversScreen({ asset, title, onBack,
@@ -57,7 +59,10 @@ export default function PersonalCoversScreen({ asset, title, onBack,
       setRecord(next);
       if (restoreAddFocus) setAddFocusGeneration((generation) => generation + 1);
     } catch {
-      setError('Changes were not saved. Your previous extra covers are still shown. Retry the change.');
+      // A rejected write can still have reached storage. Re-read before another edit
+      // so retrying cannot silently overwrite or duplicate a committed addition.
+      setRecord(undefined);
+      setError('Could not confirm your saved changes. Retry loading before making another change.');
     } finally {
       savingRef.current = false;
       setSaving(false);
@@ -65,7 +70,7 @@ export default function PersonalCoversScreen({ asset, title, onBack,
   };
   const invalid = startMs >= endMs;
   return <ScrollView style={styles.screen} contentContainerStyle={styles.content} testID="personal-covers">
-    <CalmButton label="Back to Parents" onPress={onBack} disabled={saving} hasTVPreferredFocus={addFocusGeneration === 0} testID="extra-back" />
+    <CalmButton label="Back to Parents" onPress={onBack} disabled={saving} hasTVPreferredFocus={addFocusGeneration === 0 && !(error && !record)} testID="extra-back" />
     <Text style={styles.heading}>Extra picture covers</Text>
     <Text style={styles.body}>{title}</Text>
     <Text style={styles.body}>Choose times from a creator or your own notes. No video plays here. These household additions stay on this device and apply only to this exact prepared edition.</Text>
@@ -73,7 +78,7 @@ export default function PersonalCoversScreen({ asset, title, onBack,
     {error ? <Text style={styles.body} accessibilityLiveRegion="polite" testID="extra-error">{error}</Text> : null}
     {!record ? <View>
       <Text style={styles.body}>{error ? 'Extra covers unavailable' : 'Loading extra covers…'}</Text>
-      {error ? <CalmButton label="Retry loading" onPress={() => setRetry((value) => value + 1)} testID="extra-retry" /> : null}
+      {error ? <CalmButton hasTVPreferredFocus label="Retry loading" onPress={() => setRetry((value) => value + 1)} testID="extra-retry" /> : null}
     </View> : <View>
       <Text style={styles.body} testID="extra-draft">From {coverTime(startMs)} to {coverTime(endMs)} · video ends at {coverTime(asset.durationMs)}</Text>
       <View style={styles.row}>

@@ -59,3 +59,11 @@ it('accepts the actual approved Acadia identity with its fractional duration', (
   expect(exact!.durationMs).toBe(title.durationMs);
   expect(() => withPersonalCovers([], [{ startMs: 0, endMs: 1000 }], exact!.durationMs)).not.toThrow();
 });
+
+it('rejects duplicate storage keys instead of silently dropping saved additions', async () => {
+  const original = JSON.stringify({ version: 1, asset, additions: [{ startMs: 100, endMs: 900 }] });
+  const ambiguous = original.slice(0, -1) + ',"additions":[]}';
+  const storage = { getItem: async () => ambiguous, setItem: jest.fn() };
+  await expect(loadPersonalCovers(asset, storage)).rejects.toThrow();
+  expect(storage.setItem).not.toHaveBeenCalled();
+});

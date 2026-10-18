@@ -87,14 +87,9 @@ cp ../shaka-rel-v$VERSION-r$RELEASE.tar.gz .
 echo "Extracting custom patches, polyfills, and source files"
 tar -xzf shaka-rel-v$VERSION-r$RELEASE.tar.gz
 
-# Apply patches
-{
-    echo "Applying custom patches for Vega TV platform compatibility"
-    git am shaka-rel/shaka-patch/*.patch -3
-} || {
-    echo "Custom patches already applied, skipping patch application"
-    git am --abort
-}
+# Apply patches with a command-local identity. Failed patches stop the build.
+echo "Applying custom patches for Vega TV platform compatibility"
+bash ../applyPatches.sh
 
 # Disable Google Fonts to support restricted network environments
 if [ -f "ui/controls.less" ]; then

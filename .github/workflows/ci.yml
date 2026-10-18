@@ -43,7 +43,7 @@ jobs:
         run: npm run typecheck
       - name: Check prepared package assets and tamper controls
         working-directory: app
-        run: node tools/check_prepared_library.mjs && node --test tools/check_prepared_library.test.mjs tools/catalog_resolution.test.cjs tools/seek_lint_guard.test.mjs
+        run: node tools/check_prepared_library.mjs && node --test tools/check_prepared_library.test.mjs tools/approved_prepared_libraries.test.mjs tools/check_native_inputs.test.mjs tools/catalog_resolution.test.cjs tools/seek_lint_guard.test.mjs
       - name: Lint
         working-directory: app
         run: npx eslint src test --ext .ts,.tsx

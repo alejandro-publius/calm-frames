@@ -1,6 +1,6 @@
 import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
-import PersonalCoversScreen from '../../src/calmframes/PersonalCoversScreen';
+import PersonalCoversScreen, { coverTime } from '../../src/calmframes/PersonalCoversScreen';
 import { PersonalCoverAsset } from '../../src/calmframes/personalCovers';
 jest.mock('@react-native-async-storage/async-storage', () => ({}));
 const asset: PersonalCoverAsset = { titleId: 'prepared', sourceSha256: 'a'.repeat(64),
@@ -38,7 +38,7 @@ it('blocks invalid draft times and does not report a failed save as saved', asyn
   fireEvent.press(screen.getByTestId('extra-start-less'));
   fireEvent.press(screen.getByTestId('extra-add'));
   await settle();
-  expect(screen.getByTestId('extra-error').props.children).toContain('not saved');
+  expect(screen.getByTestId('extra-error').props.children).toContain('confirm');
   expect(screen.queryByTestId('extra-remove-0')).toBeNull();
 });
 
@@ -51,4 +51,27 @@ it('does not replace a corrupt record with empty defaults and permits read retry
   fireEvent.press(screen.getByTestId('extra-retry'));
   await settle();
   expect(screen.getByTestId('extra-add').props.hasTVPreferredFocus).toBe(true);
+});
+
+it('reconciles an uncertain write before allowing another edit', async () => {
+  let saved: string | null = null;
+  const storage = { getItem: jest.fn(async () => saved), setItem: jest.fn(async (_key, text) => {
+    saved = text; throw new Error('write acknowledgement lost');
+  }) };
+  render(<PersonalCoversScreen asset={asset} title="Prepared test" storage={storage} onBack={() => {}} />);
+  await settle();
+  fireEvent.press(screen.getByTestId('extra-add'));
+  await settle();
+  expect(screen.queryByTestId('extra-add')).toBeNull();
+  expect(screen.getByTestId('extra-retry').props.hasTVPreferredFocus).toBe(true);
+  expect(screen.getByTestId('extra-back').props.hasTVPreferredFocus).toBe(false);
+  fireEvent.press(screen.getByTestId('extra-retry'));
+  await settle();
+  expect(screen.getByTestId('extra-remove-0')).toBeTruthy();
+  expect(storage.setItem).toHaveBeenCalledTimes(1);
+  expect(JSON.parse(saved!).additions).toEqual([{ startMs: 0, endMs: 5000 }]);
+});
+
+it.each([[1, '0:00.001'], [999, '0:00.999'], [1000, '0:01'], [60001, '1:00.001']])('shows the saved boundary %i without truncating milliseconds', (ms, text) => {
+  expect(coverTime(ms as number)).toBe(text);
 });

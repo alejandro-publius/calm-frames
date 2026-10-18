@@ -6,7 +6,7 @@
       "catalogSha256": "ad74eb70199adc8597d1f7bcdba57fa1c0b805987e2f8a11f240fba4c036dd4c",
       "publicKeyFingerprint": "98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407",
       "consumer": true,
-      "label": "Acadia — existing approved fixture",
+      "label": "Acadia: existing approved fixture",
       "approvalReference": "FINAL_HANDOFF.md: Historical approved Acadia integration, owner approval 2026-10-15"
     }
   ]
