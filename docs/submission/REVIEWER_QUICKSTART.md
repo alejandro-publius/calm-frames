@@ -27,6 +27,26 @@ the commands were not rerun for this update. The canonical
 [demo script](DEMO_RUN_OF_SHOW.md) are current. Final judged release selection
 remains open.
 
+## Current candidate, October 18
+
+The private branch `codex/creator-editions-2026-10-18` now contains pushed commit
+`a11587e6004b69d69723d6564cf9ba60e08ca728`. The installed app source is `50bc01f`
+([native receipt](../../results/scene-bridge-native-2026-10-18/README.md)). The local
+setup/persistence follow-up described below is awaiting review and another push;
+it is not installed. Historical timings above remain historical.
+
+After repository access is granted, start with the explicit working branch:
+
+```sh
+git clone --single-branch --branch codex/creator-editions-2026-10-18 https://github.com/alejandro-publius/calm-frames.git
+cd calm-frames
+git rev-parse HEAD
+```
+
+Use the reviewed commit from the handoff, not the repository's older default branch.
+No account, key, preset PIN or signing credentials are required to run the existing
+prepared Acadia catalog. A fresh install asks the reviewer to choose a private PIN.
+
 ## 1. What you need
 
 | Tool | Version | Why |
@@ -61,7 +81,7 @@ From the repository root. These are the commands CI runs
 ([README.md](../../README.md), "Run the checks").
 
 ```sh
-cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx jest --ci --colors=false --testPathIgnorePatterns="uiCapture|coastalExport|controlStudy" && cd ..
+cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx jest --watchman=false --ci --colors=false --testPathIgnorePatterns="uiCapture|coastalExport|controlStudy" && cd ..
 .venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"
 .venv/bin/python eval/readme_sync.py --check     # every published number against results/
 .venv/bin/python eval/style_check.py             # no dashes, none of the three banned words
@@ -96,28 +116,38 @@ has no hosted run because it has no pull request.
 
 ```sh
 cd app
-npm install                                  # runs the Shaka build; needs JAVA_HOME
+npm ci --ignore-scripts                      # exact dependency lock
+npm run setup:player                         # Vega environment + JDK 21; generates ignored runtime
+npm run check:native-inputs                  # fail early with repair instructions
 cd ..
 bash scripts/release.sh --arch aarch64 --build-type Debug --tag reviewer-$(date +%Y%m%d)
 ```
+
+The two named setup/preflight scripts are in the local follow-up; use them only
+after that reviewed delta reaches the branch. On the current pushed `a11587e`,
+the equivalent runtime setup is `(cd shaka-setup && bash build.sh && bash copyOutputs.sh)`.
+`npm ci --ignore-scripts` alone is sufficient for headless checks but cannot build
+a native package: it deliberately leaves Shaka and its polyfills absent. Do not
+copy another checkout's `node_modules` or reset shared Watchman caches. The follow-up
+Metro configuration uses its own cache and does not depend on Watchman.
 
 `scripts/release.sh` builds one architecture, checks the library and package,
 and writes a local package, hashes and preparation receipt. It never publishes.
 Use Python 3.12 through `RELEASE_PYTHON` or `.venv/bin/python`. Do not pass a PIN.
 The current built package is
-`build/release/final-clarity-2026-10-18/calm-frames-clarity-aarch64-debug.vpkg`,
-SHA-256 `8f3636ec8bcc2a1c2d5ac80e26f7b3024c0b0ff9003bbdb1341569c51adecbfd`, from
-source `9cc57ca`. See its [build and install record](../../results/final-clarity-2026-10-18/README.md).
+`build/release/scene-bridge-native-2026-10-18/calm-frames-bridge-fixture-aarch64-debug.vpkg`,
+SHA-256 `44322944fc3fee3b353e5b20f12133a89273773ce57c742cbac10abdb6187bbd`, from
+source `50bc01f`. See its [build and install record](../../results/scene-bridge-native-2026-10-18/README.md).
 It is already installed on the owner's simulator; do not reinstall it merely
 for owner acceptance. The commands below are for a separately authorized
 reviewer installation. Preserve concurrent checkouts and the SDK app link.
 
 ```sh
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
-vega device is-connected --device Simulator      # wait for this, not for "status"
-vega device info --device Simulator
-vega device install-app --device Simulator --packagePath app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
-vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main
+vega device is-connected --device VirtualDevice      # wait for this, not for "status"
+vega device info --device VirtualDevice
+vega device install-app --device VirtualDevice --packagePath app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
+vega device run-cmd --device VirtualDevice --command 'vmsgr send pkg://io.github.alejandropublius.calmframes.main'
 ```
 
 Start the virtual device only if it is stopped; it must be started detached.
@@ -129,7 +159,7 @@ lines are the ones the Oct 13 and Oct 14 sessions ran
 Remote buttons from the host, if the simulator window is inconvenient:
 
 ```sh
-vega device run-cmd --device Simulator --command 'inputd-cli button_press KEY_DOWN'
+vega device run-cmd --device VirtualDevice --command 'inputd-cli button_press KEY_DOWN'
 ```
 
 Keys seen to work in the receipts: `KEY_UP`, `KEY_DOWN`, `KEY_LEFT`, `KEY_RIGHT`,
@@ -138,7 +168,7 @@ Keys seen to work in the receipts: `KEY_UP`, `KEY_DOWN`, `KEY_LEFT`, `KEY_RIGHT`
 An optional software preflight drives the benign journey and writes a log:
 
 ```sh
-.venv/bin/python -m eval.benign_native_smoke --device Simulator \
+.venv/bin/python -m eval.benign_native_smoke --device VirtualDevice \
     --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
 ```
 
@@ -146,7 +176,7 @@ Logs do not prove what was on screen; look at the simulator. A Debug package
 also prints breadcrumbs you can follow from the host while you drive the app:
 
 ```sh
-vega device start-log-stream --device Simulator | grep --line-buffered -E 'CALM_TRACE|CALM_TIMING'
+vega device start-log-stream --device VirtualDevice | grep --line-buffered -E 'CALM_TRACE|CALM_TIMING'
 ```
 
 `CALM_TRACE screen|focus|still|image` lines say which view is up, which control

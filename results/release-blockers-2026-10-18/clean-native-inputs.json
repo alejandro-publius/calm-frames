@@ -1,0 +1,16 @@
+{
+  "nativeInputs": "blocked",
+  "missing": [
+    "src/w3cmedia/shakaplayer/dist/shaka-player.compiled.js",
+    "src/w3cmedia/polyfills/DocumentPolyfill.ts",
+    "src/w3cmedia/polyfills/DOMParserPolyfill.ts",
+    "src/w3cmedia/polyfills/ElementPolyfill.ts",
+    "src/w3cmedia/polyfills/MiscPolyfill.ts",
+    "src/w3cmedia/polyfills/TextDecoderPolyfill.ts",
+    "src/w3cmedia/polyfills/W3CMediaPolyfill.ts"
+  ],
+  "problems": [
+    "Generated player files are missing. With the Vega SDK environment and JDK 21 configured, run npm run setup:player in app/. Headless tests do not generate these files."
+  ],
+  "scope": "Input files only. SDK compatibility, native build and owner visual/audio acceptance remain separate checks."
+}

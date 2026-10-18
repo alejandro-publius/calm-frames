@@ -16,14 +16,31 @@ submitted to write it.
   does not exist yet. **Unverified** means it may be satisfied, but nothing we can cite
   confirms it.
 
+## October 18 engineering update
+
+The private working branch `codex/creator-editions-2026-10-18` is now pushed at
+`a11587e`; the GitHub owner and authenticated account match, visibility is private,
+and the remote commit was verified. Judge invitations and submission remain owner
+actions. The installed app source is `50bc01f`, with the static Debug fixture and
+native evidence in `results/scene-bridge-native-2026-10-18/`.
+
+A subsequent local follow-up fixes the native-input preflight, dependency patch
+failure handling, personal-cover persistence recovery and the two failing style/
+attribution gates. It also resolves verified file-digest secret-scan false positives
+without allowing altered values. It is not pushed or installed yet. See
+[the focused change record](../../results/release-blockers-2026-10-18/README.md).
+No new content, signer, detector behavior, visual/audio acceptance or recording is
+claimed. Dated older build and rule-source entries below retain their original context.
+
 ## Blocking now
 
 1. **The demo video does not exist.** It needs owner visual and audio acceptance of the
    installed build, an answer from the organizers on the public domain park footage, the
    owner's authorization to record, and a take that the intermittent playback slowdown
    does not spoil.
-2. **Judges cannot see the demonstrated build.** No remote branch known to this checkout
-   contains `9cc57ca` or `9f7cc6f`. The access route is undecided and nobody is invited.
+2. **Judge access remains pending.** The demonstrated source is on the private
+   `codex/creator-editions-2026-10-18` branch. Invitations or a different access
+   route still need the owner; the local follow-up is awaiting review before push.
 3. **Nothing has been entered on Devpost.** Registration, eligibility and the form's own
    fields are unverified. The text, feedback and track answers exist only as drafts.
 
@@ -100,13 +117,13 @@ section 11.
 
 | Requirement | Status | Evidence or gap |
 | --- | --- | --- |
-| A GitHub URL whose repository holds "all necessary source code, assets, and instructions required for the project to be functional" | Missing | This branch has no upstream. No remote branch known to this checkout contains `9cc57ca` or `9f7cc6f`. Pushing is the owner's decision. |
+| A GitHub URL whose repository holds "all necessary source code, assets, and instructions required for the project to be functional" | Done for the private candidate | `a11587e` is verified on `codex/creator-editions-2026-10-18`. The local follow-up and judge access remain separate. |
 | Public route: an open source license file, "detectable and visible at the top of the repository page (in the About section)" | Unverified | The root [LICENSE](../../LICENSE) is Apache-2.0. The repository is private today. Two sample files carry an "AMAZON PROPRIETARY/CONFIDENTIAL" notice beside the sample's MIT-0 grant ([review](../AMAZON_SAMPLE_LICENSE_REVIEW.md)); the clarification request is unsent. |
 | Private route: share with the Devpost testing account and the Amazon team | Missing | Invite all six names the rules give, since one list has five and the other six: chris-trag, knmeiss, giolaq, anishamalde, mosesroth, emersonsklar. Read the testing account's address from the rules page; do not copy it into the repository. GitHub invitations lapse if not accepted within seven days, so check acceptance and re-send. Nobody is invited. |
-| Setup instructions that work | Unverified | [REVIEWER_QUICKSTART.md](REVIEWER_QUICKSTART.md) now names the installed build and walks the current Home. Its commands last ran on a fresh checkout on October 14 and were not rerun for this update. |
+| Setup instructions that work | Partly verified | A fresh tracked app tree passes TypeScript and strict asset checks using existing dependency versions. The new native preflight correctly identifies missing generated runtime files; full dependency download and Shaka compilation were not repeated. See the October 18 change record and [quickstart](REVIEWER_QUICKSTART.md). |
 | "available free of charge and without any restriction, for testing, evaluation and use" | Missing | Follows from the chosen route. |
 | Login credentials in the testing instructions if anything is private | Done, none needed | The app has no account. A reviewer sets their own Parents PIN on a fresh install. Private repository access is by invitation. |
-| No keys in the code (tips: "Hide your API keys") | Unverified | gitleaks runs in CI and as a pre-commit hook. CI has not run on this unpushed branch. |
+| No keys in the code (tips: "Hide your API keys") | Checked locally | The pushed outgoing history and full blobs, including decompressed logs, were scanned. Findings were verified file digests/public test keys. The local follow-up adds exact digest exceptions and negative tests; hosted CI is not claimed. |
 
 ## 7. Required submission content
 
@@ -126,7 +143,7 @@ section 11.
 | --- | --- | --- |
 | Acadia video, in the app and the demo | Done for the record, unverified for the video | NPGallery: "Public domain, Full Granting Rights; U.S. government work". Credit: "NPS Video, Acadia National Park. No NPS endorsement is implied." The More info page credits the National Park Service, and NOTICE and the credits screen come from the same ledger rows. |
 | Prairie Creek and Redwood, the unapproved review example | Done for the record, not in the app | Ledger rows added in `076247a`. Per its proposal, the NPS source page treats NPS-credited material without a copyright symbol as public domain, and the park's B-roll page permits reuse. Credit: "NPS: G Litten". It is not in the consumer catalog, NOTICE or the credits screen. |
-| Credits generated from the ledger | Missing | `eval/attribution.py --check` now fails because the Prairie rows have no title there. Adding one rewrites NOTICE and the app's generated credits screen, which is an app change that needs a build. Owner decision. |
+| Credits generated from the ledger | Done locally, not installed | Existing review-source rows now have titles; NOTICE and generated credits match the ledger. These acknowledgments do not add a consumer title or grant playback approval. |
 | Amazon sample code (MIT-0) and Shaka Player (Apache-2.0) | Unverified | The proprietary notice question in section 6. |
 | Fonts: Fraunces, Source Sans 3 and Inter | Done | SIL Open Font License 1.1, licence texts beside the fonts, sources in `app/assets/fonts/FONT_PROVENANCE.json`. |
 | Artwork | Done | Every image has a ledger row in `media/LICENSES.csv`. The Acadia menu image is a still from the prepared video. |

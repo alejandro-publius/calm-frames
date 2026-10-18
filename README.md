@@ -1,6 +1,6 @@
 # Calm Frames
 
-Current state, October 17, 2026: installed app source `9cc57ca`, whose
+Current state, October 18, 2026: installed app source `50bc01f`, whose
 consumer catalog holds only the owner-approved Acadia clip. See
 [FINAL_HANDOFF.md](FINAL_HANDOFF.md) and the
 [submission packet](docs/submission/README.md) for the canonical checklist,
@@ -41,13 +41,13 @@ Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
 
 ### What a family sees
 
-The ivory and teal coast: a seated figure on a rock, a lighthouse island and a boat behind everything on Home, with text sized for a couch and a visible ring on whatever the remote has focused. Playback keeps dark controls over the video.
+Coastal artwork, text sized for a couch and a visible ring on the focused remote control. Home features the approved Acadia video; playback uses dark controls over the picture.
 
-- **Choose a video, then view its analysis.** Home names Harbor and initially focuses View analysis; Play remains beside it. Acadia coastal scenery is an additional card. Details separates detected periods, the selected version's cover times and its file record. Try the demo opens Harbor's explicitly simulated picture pauses. How it works and Parents stay in the header.
+- **Watch Acadia or view its analysis.** Home starts on Watch, with Details beside it. Details separates detected periods, the selected version's cover times and its file record. How it works and Parents stay in the header. Harbor remains outside the consumer catalog.
 - **A short setup, once.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
 - **A library of checked titles only.** A title plays only after its flash map is verified; one that has not verified shows Needs check and stays hidden.
-- **A card before anything is hidden.** A countdown with Skip in focus a few seconds ahead, and an optional chime.
-- **The story keeps going.** During a hidden part a checked still from just before it, or a dark cover, stands over the picture while sound and captions continue; afterwards one line says what was hidden. The ordinary Harbor has nothing to hide and simply plays; the practice version holds twice so a family can see it work.
+- **A steady scene notice and Skip.** The compact control stays in one place through a scheduled cover; pause and loading update its wording. An optional chime is controlled in Parents.
+- **Scheduled picture covers.** Prepared Acadia uses an opaque cover and a short explanation during its checked intervals while sound is intended to continue. No authored scene description is registered. Captions are available only when the title supplies them.
 - **Settings behind the PIN.** Presets, the room, the chime, a profile per child (which can only be stricter than the household), and two opt-in effects, a gentle artwork entrance and quiet selection sounds, both Off unless a parent turns them on.
 - **What it keeps stays on the television.** The household record (the salted hash of the PIN, the profiles, presets, room and switches) is saved on the device, and the list of what was hidden lives in memory only, so it is gone after a restart. A release build sends nothing about the household anywhere: its only network request fetches a flash map when a catalog entry names a web address, and the bundled titles name none.
 - **Built for the remote and for screen readers.** The D-pad reaches every control, Back closes one level at a time, cards are announced, and reduced motion keeps the artwork still. VoiceView is covered by tests and still owes its check on the device.

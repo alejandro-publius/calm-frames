@@ -1,5 +1,19 @@
 # Final handoff: the integration candidate
 
+## Local release blocker fixes, October 18, 2026
+
+Source `23a24c2` fixes native-input diagnostics, dependency patch failure handling,
+checkout-local Metro state, lockfile preservation, personal-cover save recovery and
+precise times, plus the failing style/attribution/security checks. 193 focused tests,
+TypeScript, lint and the strict media gate pass. No new approval, detector, media or
+household changes. The delta is local only; no new build/install or push. The main
+working checkout remains `a11587e`; installed source remains `50bc01f`.
+
+At the owner's request, the stopped simulator was started once and the installed
+Acadia demo began through Watch, confirmed at 03:57:44 UTC. Collector stopped; no
+further controls. See [fixes, evidence and remaining decisions](results/release-blockers-2026-10-18/README.md).
+
+
 ## Development scene-bridge native check, October 18, 2026
 
 Installed app source `50bc01f` adds an explicit Debug-only static test under

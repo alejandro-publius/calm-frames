@@ -1,0 +1,26 @@
+{
+  "base_commit": "a11587e6004b69d69723d6564cf9ba60e08ca728",
+  "source_commit": "23a24c27a78b693ec2213cc5f65558d1796d525b",
+  "tests": {
+    "app": 74,
+    "pipeline_attribution_setup_security": 35,
+    "release_helpers": 49,
+    "node": 35,
+    "total": 193,
+    "additional_clean_tree_node_tests": 26
+  },
+  "typecheck": true,
+  "eslint": true,
+  "ruff": true,
+  "style": true,
+  "attribution": true,
+  "strict_prepared_library": true,
+  "approval_tuple_and_membership_unchanged": true,
+  "detector_and_media_unchanged": true,
+  "native_builds": 0,
+  "native_installs": 0,
+  "pushes": 0,
+  "owner_demo": "Existing simulator was stopped; started once with GUI. Existing installed Acadia playback confirmed at 2026-10-18T03:57:44Z. Collector stopped; no further keys.",
+  "main_working_checkout": "a11587e; unchanged and clean",
+  "clean_setup_scope": "Tracked app and its two tracked timing test fixtures exported from a11587e. Existing installed dependency versions copied with APFS clone. No generated runtime copied. TypeScript and strict media gate pass; native preflight correctly blocks seven absent generated entries. Full npm download and Shaka compilation not repeated."
+}

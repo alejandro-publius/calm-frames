@@ -26,7 +26,8 @@ or authorized.
 Either public, with the Apache-2.0 licence visible, which leaves the Amazon
 sample notice question in item 7 open; or private, with the six Amazon
 reviewers and the Devpost testing account invited. The demonstrated build is
-not on GitHub yet, and pushing is the owner's call.
+on the private `codex/creator-editions-2026-10-18` branch at `a11587e`. The later
+local fixes await review before another push.
 
 ### 4. Register and complete the form
 
@@ -43,12 +44,10 @@ unverified. The drafts are [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) and
 - Prairie Creek and Redwood is an unapproved review example, frozen outside the
   consumer catalog. Staging records approval state only; it never installs a
   title or enables Watch.
-- Two repository checks fail, and neither can be fixed from documentation
-  alone. A dash in the Acadia label in `app/config/approved-prepared-libraries.json`
-  is generated into `approvedPreparedCatalogs.ts` and trips `eval/style_check.py`.
-  The Prairie ledger rows have no attribution title, so `eval/attribution.py --check`
-  fails until NOTICE and the app's credits screen are regenerated or the rows
-  change.
+- The style and attribution check failures have been fixed locally, with the
+  existing approval tuple unchanged and review-source credits regenerated. The
+  local setup/persistence fixes are tested but not pushed or installed. See
+  `results/release-blockers-2026-10-18/README.md` for the remaining verification scope.
 - Detection can miss flashing, and the prototype has not been medically
   validated. Independent detector assessment remains open. Physical TV acceptance
   is outside this simulator-only submission; unit tests establish neither.
