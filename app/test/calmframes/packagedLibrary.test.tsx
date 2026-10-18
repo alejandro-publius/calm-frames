@@ -2,6 +2,7 @@ import { PACKAGED_LIBRARY_JSON } from '../../assets/raw/prepared-library/catalog
 import { DEFAULT_SETTINGS, PRESET_NAMES } from '../../src/calmframes/household';
 import { ACADIA_SOURCE_SHA256, createApprovedAcadiaLibrary, createApprovedLibrary, createPackagedLibrary, packagedLibrary } from '../../src/calmframes/packagedLibrary';
 import { PACKAGED_LIBRARY_JSON as ACADIA_LIBRARY_JSON } from '../../src/calmframes/acadiaCatalog';
+import { APPROVED_PREPARED_CATALOGS } from '../../src/calmframes/approvedPreparedCatalogs';
 import { checkTitle } from '../../src/calmframes/titleStatus';
 import { defaultCatalog, guardedParamsFor, titleDataFor } from '../../src/screens/KidModeScreen';
 
@@ -10,6 +11,7 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
 }));
 
 const manifest = JSON.parse(PACKAGED_LIBRARY_JSON);
+const approvedAcadia = APPROVED_PREPARED_CATALOGS.find(entry => entry.consumer)!.raw;
 const nowMs = Date.parse(JSON.parse(manifest.titles[0].maps.wcag.text).created_utc) + 1000;
 function checked(preset = DEFAULT_SETTINGS.preset) {
   const settings = { ...DEFAULT_SETTINGS, preset };
@@ -22,17 +24,18 @@ function checked(preset = DEFAULT_SETTINGS.preset) {
 describe('the compiled prepared library', () => {
   it('uses the exact reviewed consumer registry and never promotes a runtime catalog', () => {
     expect(packagedLibrary.consumerTitles(DEFAULT_SETTINGS).map(title => title.sha256)).toEqual([ACADIA_SOURCE_SHA256]);
-    expect(createApprovedLibrary(ACADIA_LIBRARY_JSON).problem).toBeNull();
-    expect(createApprovedLibrary(ACADIA_LIBRARY_JSON + ' ').titles(DEFAULT_SETTINGS)).toEqual([]);
+    expect(createApprovedLibrary(approvedAcadia).problem).toBeNull();
+    expect(createApprovedLibrary(approvedAcadia + ' ').titles(DEFAULT_SETTINGS)).toEqual([]);
+    expect(createApprovedLibrary(ACADIA_LIBRARY_JSON).titles(DEFAULT_SETTINGS)).toEqual([]);
     expect(createApprovedLibrary(PACKAGED_LIBRARY_JSON).titles(DEFAULT_SETTINGS)).toEqual([]);
-    const changed = JSON.parse(ACADIA_LIBRARY_JSON);
+    const changed = JSON.parse(approvedAcadia);
     changed.publicKeyBase64 = manifest.publicKeyBase64;
     expect(createApprovedLibrary(JSON.stringify(changed)).titles(DEFAULT_SETTINGS)).toEqual([]);
   });
   it.each(PRESET_NAMES)('isolates the approved Acadia key and exact %s route from Harbor', preset => {
     const settings = { ...DEFAULT_SETTINGS, preset };
     const title = packagedLibrary.titles(settings).find(one => one.sha256 === ACADIA_SOURCE_SHA256)!;
-    const acadia = JSON.parse(ACADIA_LIBRARY_JSON);
+    const acadia = JSON.parse(approvedAcadia);
     const key = packagedLibrary.publicKeyFor(title, settings)!;
     expect(key).toBe(acadia.publicKeyBase64);
     expect(key).not.toBe(manifest.publicKeyBase64);

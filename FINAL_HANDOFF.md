@@ -1,5 +1,9 @@
 # Final handoff: the integration candidate
 
+## Approved ocean activation, October 18, 2026
+
+Owner approval now activates exact bundle `d1abd36a` / catalog `6b590929` under the existing Acadia signer. The registry and compiled ambient metadata are generated from the checked report. All 130 focused activation/playback tests, TypeScript and prebuild input gates pass. Prior release fixes through `23a24c2` are included. The reserved native build/install follows this source commit; see `results/ocean-native-2026-10-18/` for its receipt. Installed source remains `50bc01f` until installation succeeds. Earlier unapproved-status sections below are historical.
+
 ## Exact ocean export ready, October 18, 2026
 
 The replacement Acadia catalog is reproduced and checked by both strict export validators. All 225 focused tests pass. Existing household additions are retained through a read-only exact predecessor check; failures remain covered. The compiled ambient registry remains empty and the installed app is unchanged. See [the exact approval proposal and evidence](results/ambient-export-2026-10-18/README.md). The next owner action is one exact-catalog approval under the existing signer, followed by one native build/install. The bounded otter result is only a 4.22-second unapproved preview.

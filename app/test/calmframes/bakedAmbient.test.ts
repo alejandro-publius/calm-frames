@@ -1,6 +1,9 @@
 import { createHash } from 'crypto';
 import { loadBakedAmbient, mayShowBakedAmbient, BakedAmbientState, BakedAmbientDocument } from '../../src/calmframes/bakedAmbient';
 import { bakedAmbientForRendition } from '../../src/calmframes/approvedBakedAmbient';
+import { DEFAULT_SETTINGS, PRESET_NAMES } from '../../src/calmframes/household';
+import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
+import { personalCoverAsset } from '../../src/calmframes/personalCovers';
 const hash = (s: string) => s.repeat(64);
 const draft = () => ({ version: 1, recipe: 'baked-ambient-v1', sourceSha256: hash('a'), renditionSha256: hash('b'),
   ambientSha256: hash('c'), durationMs: 10000, renditionStartOffsetMs: 0, preset: 'wcag',
@@ -14,6 +17,22 @@ const state: BakedAmbientState = { acceptedPreparedRoute: true, verified: true, 
 const maps = [{ preset: 'wcag', sha256: hash('d') }, { preset: 'broadcast', sha256: hash('e') }];
 const show = (doc = load(), s = state, a = asset, spans = draft().intervals, time = 2000, p = 'wcag', m = maps) =>
   mayShowBakedAmbient(doc, a, p, m, spans, time, s);
+it.each(PRESET_NAMES)('activates only the exact approved ocean %s rendition and both complete spans', preset => {
+  const settings = { ...DEFAULT_SETTINGS, preset };
+  const title = packagedLibrary.consumerTitles(settings)[0];
+  const identity = personalCoverAsset(title)!;
+  const doc = bakedAmbientForRendition(identity.renditionSha256, preset)!;
+  const evidence = packagedLibrary.evidenceFor(title, settings)!;
+  expect(evidence.bundleId).toBe('d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46');
+  expect(doc).not.toBeNull();
+  expect(doc.intervals).toHaveLength(2);
+  for (const span of doc.intervals) {
+    expect(mayShowBakedAmbient(doc, identity, preset, evidence.maps, doc.intervals, span.startMs, state)).toBe(true);
+    expect(mayShowBakedAmbient(doc, identity, preset, evidence.maps, doc.intervals, span.endMs, state)).toBe(false);
+    expect(mayShowBakedAmbient(doc, identity, preset, evidence.maps, doc.intervals, span.startMs,
+      { ...state, personalCoverCount: 1 })).toBe(false);
+  }
+});
 it('only permits reviewed exact metadata, not a route-shaped document or current registry', () => {
   expect(show()).toBe(true);
   expect(show(draft() as BakedAmbientDocument)).toBe(false);
