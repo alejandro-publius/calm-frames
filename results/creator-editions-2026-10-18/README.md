@@ -76,11 +76,10 @@ leave that screen open. No PIN needs to be shared, reset or bypassed. Extra cove
 are household-wide, so a test profile does not isolate them; any test addition must
 be removed afterward while retaining all existing additions.
 
-There is no supported native scene-bridge fixture route in this build. The only
-runtime integration is the accepted prepared-player route with an empty compiled
-registry; fixtures exist in unit tests and the local editor. Native fixture testing
-would require a separate presentation-only test route and a new build. Acadia must
-not be assigned invented narrative or stretched cover boundaries to provide a test.
+At the `ce3fae8` checkpoint there was no native scene-bridge fixture route. The
+subsequent authorized Debug-only static route and its native state/focus checks are
+recorded in `../scene-bridge-native-2026-10-18/`. No real bridge is registered; Acadia
+was not assigned invented narrative or stretched cover boundaries to provide a test.
 
 The local working checkout was fast-forwarded from `639066b` to `787fdea`; all 779
 installed app inputs match and its strict package gate passes. Git main and remote

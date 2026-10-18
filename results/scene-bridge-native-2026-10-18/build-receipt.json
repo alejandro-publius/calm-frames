@@ -1,0 +1,12 @@
+{
+  "source_commit": "50bc01fcfcfd82f4138b0cd0268beab60da286ee",
+  "build_count": 1,
+  "build_start_utc": "2026-10-18T02:31:22.611015+00:00",
+  "app_inputs_including_existing_generated": 781,
+  "command": "npm run build:debug -- --config /Users/alexvintera/Documents/Codex/2026-10-15/task/creator-editions-evidence/isolated-metro.config.cjs",
+  "build_exit": 0,
+  "build_end_utc": "2026-10-18T02:32:03.562431+00:00",
+  "changed_inputs": [],
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/release/scene-bridge-native-2026-10-18/calm-frames-bridge-fixture-aarch64-debug.vpkg",
+  "package_sha256": "44322944fc3fee3b353e5b20f12133a89273773ce57c742cbac10abdb6187bbd"
+}

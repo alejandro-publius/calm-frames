@@ -1,5 +1,19 @@
 # Final handoff: the integration candidate
 
+## Development scene-bridge native check, October 18, 2026
+
+Installed app source `50bc01f` adds an explicit Debug-only static test under
+Home → How it works → Scene bridge test. It has clearly labeled synthetic text,
+no media/storage/trust entry, and no Release entry or rendered fixture. 65 focused
+tests, TypeScript, lint and independent review pass. One build/install succeeded;
+all 781 inputs and the transferred package hash match. Native text/fallback state,
+both dismissal controls, return focus and Parents cancellation pass in logs. App
+left Home Watch; collector stopped. Logs are not pixel/audio acceptance. Personal
+cover native rehearsal remains pending private owner unlock and exact preservation
+of existing household-wide additions; no additions or PIN were read or changed.
+See [the evidence and minimum owner steps](results/scene-bridge-native-2026-10-18/README.md).
+
+
 ## Creator editions feature branch, October 18, 2026
 
 The isolated branch `codex/creator-editions-2026-10-18` adds checked edition import,
