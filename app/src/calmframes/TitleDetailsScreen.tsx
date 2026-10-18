@@ -5,7 +5,7 @@ import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import HomeHarborScene from './HomeHarborScene';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, heroTitleTypography, scale } from './calmStyles';
-import { coverLine, noticeForTitle, ONLY_IN_CALM_FRAMES_LINE, runtimeLabel, SAFETY_NOTE } from './copy';
+import { coverLine, DETECTION_LIMITS_LINE, noticeForTitle, ONLY_IN_CALM_FRAMES_LINE, runtimeLabel, SAFETY_NOTE } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import CoveredSectionsStrip from './CoveredSectionsStrip';
 import { coveredSections } from './coveredSections';
@@ -163,7 +163,7 @@ const TitleDetailsScreen = ({
           {demo ? <Text style={styles.summary}>This is a simulated demonstration. The pauses were added to show how the feature works, not because flashing was detected.</Text>
             : intervals.length > 0 ? <Text style={styles.summary} testID={`${testID}-cover-line`}>{coverLine(intervals.length, (entry.title.textTrack?.length ?? 0) > 0)}</Text> : null}
           <Text style={styles.summary}>{ONLY_IN_CALM_FRAMES_LINE}</Text>
-          <Text style={styles.summary}>{`Detection can miss flashing. ${SAFETY_NOTE}`}</Text>
+          <Text style={styles.summary}>{`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`}</Text>
           {presentation.art === 'coastal' ? <Text style={styles.summary}>Video: National Park Service, Acadia National Park. Public domain. No NPS endorsement is implied. The menu image is a still from the prepared video.</Text> : null}
           {practiceOffered ? <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-practice`} label="Watch demo"
             accessibilityLabel={practiceLine ? `Watch simulated demo. ${practiceLine}` : 'Watch simulated demo'}

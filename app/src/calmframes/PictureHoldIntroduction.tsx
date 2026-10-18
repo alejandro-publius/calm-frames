@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import { COASTAL_COLORS as CALM_COLORS, CALM_TEXT, CALM_FLOW, scale } from './calmStyles';
-import { CAPTIONS_CONTINUE_LINE, CHECKED_BEFORE_ADDED_LINE, ONLY_IN_CALM_FRAMES_LINE, PURPOSE_LINE, SAFETY_NOTE } from './copy';
+import { CAPTIONS_CONTINUE_LINE, CHECKED_BEFORE_ADDED_LINE, DETECTION_LIMITS_LINE, ONLY_IN_CALM_FRAMES_LINE, PURPOSE_LINE, SAFETY_NOTE } from './copy';
 
 export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDemoDetails, disabled = false }: { onDemoDetails?: () => void; onPlaybackCheck?: () => void; onStart?: () => void; disabled?: boolean }) {
   return <View testID="picture-hold-introduction" style={styles.content}>
@@ -16,7 +16,7 @@ export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDe
       {onStart ? <CalmButton testID="picture-hold-start" primary label="Watch demo" sound={false} hasTVPreferredFocus disabled={disabled} onPress={onStart} /> : null}
       {onDemoDetails ? <CalmButton quiet testID="picture-hold-demo-details" label="About the demo" disabled={disabled} onPress={onDemoDetails} /> : null}
     </View>
-    <Text style={styles.detail}>{`Detection can miss flashing. ${SAFETY_NOTE}`}</Text>
+    <Text style={styles.detail}>{`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`}</Text>
     {onPlaybackCheck ? <View style={styles.tools}><CalmButton quiet compact testID="picture-hold-playback-check" label="Check playback" disabled={disabled} onPress={onPlaybackCheck} /></View> : null}
   </View>;
 }

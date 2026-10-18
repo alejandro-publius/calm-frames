@@ -523,7 +523,9 @@ export const CAPTIONS_CONTINUE_LINE =
   'When a video has captions, the captions continue too.';
 export const CHECKED_BEFORE_ADDED_LINE = 'Every video is checked before it is added.';
 export const ONLY_IN_CALM_FRAMES_LINE =
-  'Calm Frames works only with videos in this app, not other apps or live TV.';
+  'Calm Frames works only with prepared videos in this app, not other apps or live TV.';
+export const DETECTION_LIMITS_LINE =
+  'Detection can miss flashing. This prototype has not been medically validated.';
 
 /**
  * The More info line about one title's own covers, built from what the

@@ -26,6 +26,7 @@ import {
   CHECKED_BEFORE_ADDED_LINE,
   coverLine,
   describeHiddenTotal,
+  DETECTION_LIMITS_LINE,
   EVERYONE_LABEL,
   EXPLAINER_LINES,
   EXPLAINER_TARGET_SECONDS,
@@ -151,6 +152,7 @@ describe('house style', () => {
       CAPTIONS_CONTINUE_LINE,
       CHECKED_BEFORE_ADDED_LINE,
       ONLY_IN_CALM_FRAMES_LINE,
+      DETECTION_LIMITS_LINE,
       coverLine(1, false),
       coverLine(3, true),
     ];
@@ -317,7 +319,7 @@ describe('what the app says it does', () => {
   it('says plainly which videos it works with, and names what it does not cover', () => {
     expect(PURPOSE_LINE).toMatch(/^Flashing scenes are covered/);
     expect(ONLY_IN_CALM_FRAMES_LINE).toBe(
-      'Calm Frames works only with videos in this app, not other apps or live TV.',
+      'Calm Frames works only with prepared videos in this app, not other apps or live TV.',
     );
   });
 
