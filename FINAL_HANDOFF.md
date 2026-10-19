@@ -1253,3 +1253,10 @@ example need the Mac's source media and the virtual device; neither was attempte
 **Owner steps.** Decide the package budget question. Install this branch and look at Home, Details and playback. Decide
 whether the Mac's unpushed navigation is kept (port it onto `homeIslands.ts`) or
 dropped. Re-read the Devpost rules from a machine that can reach them.
+
+**Final checks, October 19.** Full Python suite on `d9c9e2f`: 1,880 passed, 0 failed,
+9 skipped. Full app suite on `53a1c51` (no app source changed since): 1,676 passed,
+0 failed. Full mutation gate, one run from `53a1c51` (no mutation targets the files
+`d9c9e2f` changed): 68 of 70 killed, matching `results/mutation.json` entry for
+entry; the 2 survivors are the documented equivalents. Not built, installed or seen
+on Vega: this session had no `/dev/kvm`, no Vega SDK and no generated player files.
