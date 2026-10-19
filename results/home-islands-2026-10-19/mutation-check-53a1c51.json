@@ -1,0 +1,28 @@
+{
+  "run_started_from_commit": "53a1c51",
+  "command": "make mutate MUTATE_ARGS=\"--check --out .logs/mutation-ci.json\"",
+  "totals": {
+    "mutations": 70,
+    "killed": 68,
+    "survived": 2,
+    "survived_and_not_equivalent": 0,
+    "kill_rate": 0.9714,
+    "kill_rate_percent": 97.14,
+    "as_a_fraction": "68/70"
+  },
+  "committed_totals": {
+    "mutations": 70,
+    "killed": 68,
+    "survived": 2,
+    "survived_and_not_equivalent": 0,
+    "kill_rate": 0.9714,
+    "kill_rate_percent": 97.14,
+    "as_a_fraction": "68/70"
+  },
+  "entries_that_differ_from_results_mutation_json": [],
+  "survivors": [
+    "background-hides-at-once",
+    "fail-closed-unsigned"
+  ],
+  "note": "No mutation in eval/mutate_gate.py targets pipeline/edition_delivery.py or its tests, which d9c9e2f changed."
+}

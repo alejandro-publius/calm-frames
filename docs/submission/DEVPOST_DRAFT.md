@@ -1,14 +1,21 @@
 # Devpost description, draft
 
-Current build note: one successful compile required a bounded recovery of stale
-media staging, then all package gates passed and one install completed. Current
-native checks cover all three full clips, Forest More info and How it works Back.
-No pixel/audio or owner acceptance is implied.
+Current build note: nothing from branch `claude/ocean-layout-fix-2026-10-19` has been
+built or installed. FINAL_HANDOFF.md records source `805f855` installed on October 18:
+one successful compile required a bounded recovery of stale media staging, then all
+package gates passed and one install completed, and its native checks cover all three
+full clips, Forest More info and How it works Back on the earlier coastal map. The
+owner's October 19 note says the Mac now has source `2b78587` installed, which was
+never pushed and cannot be inspected from here. No pixel/audio or owner acceptance is
+implied.
 
-Draft for the owner, updated October 18, 2026. It describes installed source
-`805f855`, the original coastal world, approved Acadia and NOAA Sea Otters,
-the local review/staging tool and the approved 12-second Forest creek excerpt. Not
-submitted. Check the live form's fields first
+Draft for the owner, updated October 19, 2026. It describes the source on
+`claude/ocean-layout-fix-2026-10-19`: Home names Ocean (Acadia, Sea otters) and Forest
+over their cards, with Watch and Details below; the approved Acadia, NOAA Sea otters
+and 12-second Forest creek titles; and the local review/staging tool. Not
+submitted. The rules were not re-read on October 19 (devpost.com is blocked from the
+cloud session), so the checklist's rule quotes keep their October 17 date. Check the
+live form's fields first
 ([checklist](FINAL_REQUIREMENTS_CHECKLIST.md), section 11). Every measured number below is
 tied to a results file and checked by `eval/readme_sync.py`. Bracketed notes are for the
 owner and are not pasted. Paste each number's value, not the hidden comment marker around it.
@@ -18,7 +25,7 @@ owner and are not pasted. Paste each number's value, not the hidden comment mark
 **Calm Frames.** A calmer way to watch.
 
 Calm Frames checks a video for flashing before it reaches the TV, then covers those scenes
-during playback while the sound continues.
+during playback while any sound continues.
 
 ## Who it helps
 
@@ -31,25 +38,37 @@ will be covered.
 
 ### On the TV today
 
-Installed and running on the Vega Virtual Device.
+The app runs on the Vega Virtual Device. The Ocean and Forest Home described here is the
+current source and has not been built or installed yet; the latest native checks in the
+repository (source `805f855`, October 18) ran the earlier coastal map with the same three
+videos.
 
-- **Three prepared destinations.** Home is a static coastal map with Acadia, a public-domain
-  National Park Service clip, Forest, a 12-second NPS creek with nature audio, and Sea Otters, a 19.987-second silent NOAA Fisheries ocean
-  excerpt that plays once. Focus selects a destination; Select opens Details with Watch focused.
-- **Know before you watch.** Details draws the covered sections for the household's setting;
-  source attribution and the audio explanation are in More info.
+- **Three prepared videos on a map.** Home is a static coastal map. "Ocean" names the
+  Acadia and Sea otters islands and "Forest" the third. Acadia is a public-domain National
+  Park Service clip; Sea otters is a 19.987-second silent NOAA Fisheries excerpt that plays
+  once; Forest is a 12-second NPS creek with nature audio that plays once. Each card gives
+  its sound and length. Watch and Details sit below the cards, with Watch focused when Home
+  opens. Moving to a card chooses it and a boat marks the chosen island; Select on a card
+  opens Details with Watch focused.
+- **Know before you watch.** Details says, for the household's setting, how many scenes
+  will be covered or replaced and for how long, with a still timeline; a video with none
+  says "No flagged scenes", which is what the analyzer found, not a safety certificate.
+  Source attribution and the audio explanation are in More info.
 - **Scenes replaced with protection retained.** Approved Acadia uses baked ocean footage
-  during flagged scenes, retains original audio in its rendition and keeps an independent
-  opaque fallback. Compact player wording and Skip describe the active presentation.
-  The approved sea-otter excerpt has no flagged intervals and no audio track.
+  during flagged scenes, keeps the source's audio track in its rendition (that track is
+  silent, so its card says Silent) and keeps an independent opaque fallback. Compact
+  player wording and Skip describe the active presentation. The approved Sea otters
+  excerpt has no flagged intervals and no audio track; the Forest excerpt has no flagged
+  intervals and keeps its original nature audio.
 - **Skip is a choice.** Skip covers the picture first, moves past the scene, and uncovers
   only after the player confirms the new position. The seek bar uses the same guard.
 - **Fails closed.** If a map's signature or a title's identity does not match the app's
   approved catalog, the picture stays hidden.
-- **Parents decide.** Presets and profiles sit behind a PIN, and settings can only add
-  covers.
-- **Plain about its limits.** More info and How it works say that Calm Frames works only
-  with prepared videos in this app, not other apps or live TV, and that this prototype has
+- **Parents decide.** Presets and profiles are edited behind a PIN; Home's profile button
+  only picks who is watching, and settings can only add covers.
+- **Plain about its limits.** More info and How it works both say that Calm Frames works
+  only with prepared videos in this app, not other apps or live TV, that it can miss
+  flashing, and that it is not a medical device. More info adds that this prototype has
   not been medically validated.
 - **Back where you started.** When the video ends, the remote lands on Watch again.
 
@@ -68,12 +87,14 @@ A local review page on the Mac. It is not a TV screen.
 
 ### Reviewed, not approved
 
-The analysis, preparation and packaging steps have been run on a second public domain NPS
-clip, Prairie Creek and Redwood. Its earlier proposal verified a package signed with a newly
-authorized local key, and tampered copies were refused. It was never approved for the TV, it
-is not in the app's catalog, and no promotion is planned for this submission. Most of that
-clip would be covered. A signature and a verified package show that the files are intact and
-were checked. They do not establish medical safety.
+The analysis, preparation and packaging steps were first run on the whole of a second public
+domain NPS clip, Prairie Creek and Redwood. That proposal verified a package signed with a
+newly authorized local key, and tampered copies were refused. Most of the full clip would be
+covered; it was never approved for the TV, it is not in the app's catalog, and no promotion
+of it is planned for this submission. A separate 12-second excerpt of the same clip, with no
+flagged scenes, was later approved under that same key and is the Forest video. A signature
+and a verified package show that the files are intact and were checked. They do not
+establish medical safety.
 
 ## How it works
 
@@ -83,7 +104,9 @@ were checked. They do not establish medical safety.
 2. **Prepare and sign.** The pipeline pads each flagged interval with guard time and renders
    a prepared copy with those sections already covered. It proves the cover is drawn by
    checking the first, middle and last frame of each covered span, up to six spans per
-   preset, then signs a flash map (Ed25519) bound to the exact file hashes.
+   preset, then signs a flash map (Ed25519) bound to the exact file hashes. Acadia's ocean
+   replacement has its own check instead: the copy is rebuilt, must match byte for byte,
+   and is analyzed again whole under both profiles.
 3. **Approve exactly, check twice.** A reviewed approval file names the exact bundle,
    catalog digest and signing-key fingerprint, and the app compiles only those. Before delivery, the
    build checks packaged file hashes, signed maps and original reports. At playback, the app
@@ -107,7 +130,7 @@ were checked. They do not establish medical safety.
   package.
 - **A local review and staging tool** for new videos, described above.
 - **Tests seen to fail first.** Our rule is that every guard gets a test that we break on
-  purpose before trusting it. Recent focused passes: the delivery integration ran
+  purpose before trusting it. Focused passes on October 18: the delivery integration ran
   <!--n results/package-delivery-2026-10-18/receipt.json:python_tests -->55<!--/n--> Python,
   <!--n results/package-delivery-2026-10-18/receipt.json:node_tests -->32<!--/n--> Node and
   <!--n results/package-delivery-2026-10-18/receipt.json:app_tests -->59<!--/n--> app tests,
@@ -115,6 +138,13 @@ were checked. They do not establish medical safety.
   <!--n results/final-clarity-2026-10-18/verification.json:tests_passed -->43<!--/n--> tests in
   <!--n results/final-clarity-2026-10-18/verification.json:test_suites -->4<!--/n--> suites.
   These are focused suites, not the full suite.
+
+[Owner: FINAL_HANDOFF.md (October 19) records the full suites on this branch: app 1,676
+passed, 0 failed, 4 skipped, on `53a1c51`; Python 1,880 passed, 0 failed, 9 skipped, on `d9c9e2f`;
+mutation gate 68 of 70 killed, matching `results/mutation.json`. The same pass found the
+full app suite had 18 failing stale tests on `c84f95d` while the October 18 records counted
+focused subsets. None of the suite counts is in a results JSON yet, so none is marked or
+published here; add them only once they are.]
 
 [Owner: add one line on the October 9 AWS deployment only if entering AWS Builder. The current
 TV app and local workflow do not call AWS.]
@@ -155,7 +185,7 @@ TV app and local workflow do not call AWS.]
   it cannot install a title or enable Watch.
 - **Native runs that say what they measure.** Logs on the virtual device recorded the
   covers, Skip's cover-then-seek order, pause during a cover and the return to Watch, each on
-  the build where it was observed. We label them as logs, not as pictures or sound.
+  the earlier build where it was observed. We label them as logs, not as pictures or sound.
 - **A friction log kept from day one**, each entry with steps, expected and actual results, a
   workaround and a suggestion.
 
@@ -165,23 +195,41 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 medical device.
 
 - Detection can miss flashing, and this prototype has not been medically validated. The
-  analyzer works on a reduced frame, so small details can be averaged away.
+  analyzer works on a reduced frame, so small details can be averaged away. "No flagged
+  scenes" is a finding, not a safety certificate.
 - HDR and variable frame rate are outside this intake version. The broadcast profile also
   implements an informative regular-pattern rule; this is not a WCAG finding or clinical
   validation.
 - It works only with prepared videos inside Calm Frames, not other apps, streaming services,
   live TV or DRM content.
-- Three videos are on the TV today: Acadia, Forest and Sea Otters. A new one needs exact approval, its packaged files and
-  reports, a regenerated catalog, and a build, install and device check.
+- Three prepared videos are on Home: Acadia, Sea otters and Forest. A new one needs exact
+  approval, its packaged files and reports, a regenerated catalog, and a build, install and
+  device check. It also needs room: the prepared library already fills
+  <!--n results/forest-activation-2026-10-18/validation-summary.json:prepared_namespace_bytes -->66492442<!--/n-->
+  of its <!--n results/forest-activation-2026-10-18/approval.json:unchangedLimitBytes -->67108864<!--/n-->
+  byte budget, much of it the same rendition stored once per preset, which the current
+  package format cannot share. So no new clip of useful length can be added until the
+  owner decides to change the budget, the titles or that format.
+- It is a Vega OS app; there is no Fire OS build.
 - Every native observation comes from the Vega Virtual Device, never a physical Fire TV.
-  Device logs show events, order and focus, not pixels or sound. The current `805f855`
-  run checked all three titles, Acadia ocean requests, natural end and Details/Back routes.
-  Earlier source `6f2570d` also has pause fallback, protected Skip and control checks.
-  The owner's look and listen acceptance is still pending.
+  Device logs show events, order and focus, not pixels or sound. The latest run recorded in
+  the repository, on source `805f855` (October 18), checked all three titles, Acadia ocean requests,
+  natural end and Details/Back routes on the earlier coastal map. Earlier source `6f2570d`
+  also has pause fallback, protected Skip and control checks. The Ocean and Forest Home
+  on the current source has not been built, installed or seen on a device; its pictures
+  are browser renders of the component tree, not device captures. The owner's look and
+  listen acceptance is still pending.
 - Playback on the virtual device sometimes slows, as described above, and the cause is
   unknown.
 - The Acadia clip opens on a few seconds of near-black footage. That is in the source video,
   not a cover.
+
+[Owner: look at Acadia's replaced scenes before pasting "ocean footage". The ocean excerpt is
+source 0 to 6.5 seconds and every replacement starts at its beginning
+(`results/baked-ocean-2026-10-18/README.md`), and the October 17 blackdetect pass found the
+source near-black from 0 to 4.963 seconds (`results/black-gap-2026-10-17/README.md`). By those
+records most of each replacement comes from that near-black opening. No recorded check has
+looked at those frames.]
 
 ## Product feedback
 

@@ -6,7 +6,7 @@ Calm Frames reduces exposure to flashing above published limits in the videos it
 
 Flashing on a screen is a known seizure trigger for some people with photosensitive epilepsy, and the Epilepsy Foundation's own page says it is more common in children and adolescents. The published limits for how much flashing is too much are WCAG 2.2 success criterion 2.3.1 and, for broadcast, ITU-R BT.1702; [flashmap/docs/SPEC_SOURCES.md](flashmap/docs/SPEC_SOURCES.md) quotes both with links.
 
-A parent today has two options: preview everything first, or trust that a title is fine. Calm Frames tries to give a third: every frame of a title is measured before it can play in kid mode, and the player hides each part the analyzer flags, on a schedule set before it plays, while the sound and captions keep the story going.
+A parent today has two options: preview everything first, or trust that a title is fine. Calm Frames tries to give a third: every frame of a title is measured before it can play in kid mode, and the player hides each part the analyzer flags, on a schedule set before it plays, while the sound and captions, when a video has them, keep the story going.
 
 ## Why it is harder than putting a black box over the bad part
 
@@ -16,7 +16,7 @@ A parent today has two options: preview everything first, or trust that a title 
 
 **The map has to be the map for this file.** A flash map for a different cut of a film is worse than none, because it hides the wrong seconds with confidence. A map is an instruction to hide, so the player has to know who vouched for it: each map is signed, and bound to the file's SHA-256 so it can only describe this file, and the player fails closed: a missing, stale, unsigned, unreadable or wrong-hash map keeps the picture hidden.
 
-**The story has to survive the hide.** A child watching a black screen for a few seconds has lost the thread. The cover sits under the captions and over the video surface, so captions stay readable and the sound keeps playing, a card says what is coming and what was hidden, and on the labelled Harbor demo a checked still from just before the hide stands in for black.
+**The story has to survive the hide.** A child watching a black screen for a few seconds has lost the thread. The cover sits under the captions and over the video surface, so captions stay readable and the sound keeps playing, and a card says what is coming and what was hidden. On Acadia, approved ocean footage from the same park video replaces the flagged scenes in the prepared copy, with the opaque cover kept as the fallback, and on the labelled Harbor demo a checked still from just before the hide stands in for black.
 
 **A household can only make it stricter.** Parents set a preset and the room (screen size and viewing distance), and those settings can only add hides; nothing in the parent area can make the player weaker than the WCAG floor. The room is the subtle part: WCAG's area limit is a share of a 10 degree visual field, and the analyzer turns the screen size and the viewing distance into how much of the picture that field covers in this room, checked in addition to the default window, never instead of it.
 

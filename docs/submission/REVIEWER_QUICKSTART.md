@@ -1,51 +1,57 @@
 # Reviewer quickstart
 
-Current build note: one successful compile required a bounded recovery of stale
-media staging, then all package gates passed and one install completed. Current
-native checks cover all three full clips, Forest More info and How it works Back.
-No pixel/audio or owner acceptance is implied.
+Current build note: nothing from the current branch,
+`claude/ocean-layout-fix-2026-10-19`, has been built, installed or seen on a
+device. The last native checks with receipts here are for source `805f855` on
+October 18, with the earlier island order: all three full clips, Forest More
+info and How it works Back. No pixel/audio or owner acceptance is implied.
 
 For a judge with a Mac, a terminal and about thirty minutes. Written Oct 14,
 2026 from the repository's own scripts and documents. On the evening of Oct 14
-sections 1, 2 and 5 were run as written on a fresh checkout of this branch with
-nothing copied from another checkout: the Node checks (`npm ci` 44 s, typecheck
+sections 1, 2 and 5 were run as written on a fresh checkout of the October 14
+candidate branch with nothing copied from another checkout: the Node checks (`npm ci` 44 s, typecheck
 6 s, lint 9 s with no errors, the full Jest suite 35 s, all passing), the
 analyzer path in section 5 (install 12 s, `check` 17 s printing PASS, `report`
 10 s), and the Python checks (the pytest line 5 minutes 17 seconds, the
 number and style checks under a second, both mypy configurations clean). At
-that run two Python tests failed for code reasons on this branch and `make
+that run two Python tests failed for code reasons on that branch and `make
 lint-py` reported ruff findings in `eval/preview` and `scripts`; they were
 reported to the integration owner and are not setup problems. The later fixes
 and local gate are recorded in [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)
 section 2; the failures above describe that earlier fresh-checkout run.
 Section 3 (the
 device build and install) and section 4 (the demo) were not run from this
-file; the receipts they name record where they were run.
+file; the receipts they name are for earlier builds.
 
-Updated October 18, 2026 for installed source `805f855` on the coastal-world
-working branch. The private GitHub handoff targets `codex/creator-editions-2026-10-18`.
-[Current build and native evidence](../../results/forest-activation-2026-10-18/README.md).
+Updated October 19, 2026 for branch `claude/ocean-layout-fix-2026-10-19`.
 The fresh-checkout timings above remain historical; no new clean-room install is claimed.
 
-## Current candidate, October 18
+## Current source, October 19
 
-The installed app source is `805f855e60870eb018b3a6a2ab36e1f7d3e887dc`.
-The private handoff branch includes that source plus documentation and evidence;
-use the final remote commit in the handoff receipt. The installed package and
-current test scope are recorded in [the coastal-world evidence](../../results/forest-activation-2026-10-18/README.md).
-No clean-room rerun of the historical timings above is claimed.
+The branch descends from `codex/creator-editions-2026-10-18` at `c84f95d`. App
+code last changed in `53a1c51`; `d9c9e2f` changed delivery tests and `7b3f5b2`
+the handoff. `main` is unchanged since September 20 and is not the submission
+source. The session that made this branch had no Vega SDK or device, so none of
+it has been built or installed ([October 19 record](../../results/home-islands-2026-10-19/README.md)).
+The last build and install with a receipt here is source
+`805f855e60870eb018b3a6a2ab36e1f7d3e887dc` on October 18
+([build and native evidence](../../results/forest-activation-2026-10-18/README.md)).
+The owner's October 19 note says the Mac has since installed `2b78587`, which
+was never pushed and cannot be inspected.
 
 After repository access is granted, start with the explicit working branch:
 
 ```sh
-git clone --single-branch --branch codex/creator-editions-2026-10-18 https://github.com/alejandro-publius/calm-frames.git
+git clone --single-branch --branch claude/ocean-layout-fix-2026-10-19 https://github.com/alejandro-publius/calm-frames.git
 cd calm-frames
 git rev-parse HEAD
 ```
 
-Use the reviewed commit from the handoff, not the repository's older default branch.
-No account, key, preset PIN or signing credentials are required to run the existing
-prepared Acadia catalog. A fresh install asks the reviewer to choose a private PIN.
+`git rev-parse HEAD` prints `7b3f5b2` or a later commit on this branch named in
+the handoff. Use this branch, not the repository's older default branch.
+No account, key, preset PIN or signing credentials are required to run the
+existing prepared catalog (Acadia, Sea otters, Forest). A fresh install asks
+the reviewer to choose a private PIN.
 
 ## 1. What you need
 
@@ -69,7 +75,7 @@ uv pip install --python .venv/bin/python -e "./flashmap[dev]"
 uv pip install --python .venv/bin/python matplotlib==3.11.2   # the evaluation tests draw plots
 ```
 
-Run on a fresh checkout of this branch on Oct 14 (evening): the venv took
+Run on a fresh checkout of the October 14 candidate (evening): the venv took
 seconds, the analyzer install two seconds with warm caches, and the extra
 package is the one CI adds; without it the pytest line below stops at
 collection. The same lines are in the README and
@@ -81,21 +87,27 @@ From the repository root. These are the commands CI runs
 ([README.md](../../README.md), "Run the checks").
 
 ```sh
-cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx jest --watchman=false --ci --colors=false --testPathIgnorePatterns="uiCapture|coastalExport|controlStudy" && cd ..
+cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx jest --ci --colors=false && cd ..
 .venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"
 .venv/bin/python eval/readme_sync.py --check     # every published number against results/
 .venv/bin/python eval/style_check.py             # no dashes, none of the three banned words
 ```
 
 `npm ci --ignore-scripts` skips the Shaka build, which the tests mock; a device
-package needs the player setup below with the JDK. The latest installed source
-passed 499 focused app tests across 38 suites and 11 attribution tests, plus
-TypeScript, lint with zero errors, native-input and media delivery checks.
-[The validation summary](../../results/forest-activation-2026-10-18/validation-summary.json)
-records the exact scope. An initial unrestricted Jest run exhausted its heap;
-a duplicate surface callback was then fixed and the final bounded suites passed.
-This is not a current full-suite pass. The older figures that follow are dated. On the October 14 candidate, the bounded reliability pass recorded 88 tests passing
-across 8 suites with typecheck and focused lint
+package needs the player setup below with the JDK. On this branch the full app
+suite passed on `53a1c51`: 163 suites, 1,676 tests passed, 0 failed, 4 skipped,
+with the coverage floors met
+([log](../../results/home-islands-2026-10-19/full-suite-after.log)). The same
+suite had 18 failing tests on `c84f95d`
+([log](../../results/home-islands-2026-10-19/full-suite-before.log)). The full
+Python suite passed on `d9c9e2f`: 1,880 passed, 0 failed, 9 skipped
+([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md), October 19). These are recorded
+results, not a new run of these instructions. The October 18 record for
+`805f855` counted a bounded 499 app tests in 38 suites and 11 attribution tests
+([validation summary](../../results/forest-activation-2026-10-18/validation-summary.json)),
+not the full suite. The older figures that follow are dated. On the October 14
+candidate, the bounded reliability pass recorded 88 tests passing across 8
+suites with typecheck and focused lint
 ([`results/core-reliability-2026-10-14.json`](../../results/core-reliability-2026-10-14.json)),
 and the release helper's 39 tests passing
 ([`results/release-pin-license-review-2026-10-14.json`](../../results/release-pin-license-review-2026-10-14.json)).
@@ -107,8 +119,9 @@ The handoff records the later full app suite on package 5's source `4016e8d`:
 133 suites and 1310 tests passed, with typecheck and lint clean. That is a
 recorded result, not a new run of these instructions.
 The hosted `Vega app` job that failed on Oct 13 ran on the shared PR branch head
-`4c9996d`; it predates this candidate and does not describe it. The candidate
-has no hosted run because it has no pull request.
+`4c9996d`; it predates this branch and does not describe it. This branch has
+no hosted run: CI runs on pushes to `main` and on pull requests, and the branch
+had no pull request when the GitHub API was asked on October 19.
 
 ## 3. Build, install and launch on the Vega Virtual Device
 
@@ -130,27 +143,33 @@ Metro uses a checkout-specific cache and does not depend on Watchman.
 `scripts/release.sh` builds one architecture, checks the library and package,
 and writes a local package, hashes and preparation receipt. It never publishes.
 Use Python 3.12 through `RELEASE_PYTHON` or `.venv/bin/python`. Do not pass a PIN.
-The current built package is
-`build/release/forest-activation-2026-10-18/calm-frames-three-islands-aarch64-debug.vpkg`,
-SHA-256 `8e58685d579a740743e5d6e89b0fa8bbcce42e7a6189b9c92265575ea0c1e511`, from
-source `805f855`. See its [build and install record](../../results/forest-activation-2026-10-18/README.md).
-It is already installed on the owner's simulator; do not reinstall it merely
-for owner acceptance. The commands below are for a separately authorized
+No package has been built from this branch. The last package with a build and
+install record is
+`build/release/forest-activation-2026-10-18/calm-frames-three-islands-aarch64-debug.vpkg`
+in the owner's Mac checkout, SHA-256
+`8e58685d579a740743e5d6e89b0fa8bbcce42e7a6189b9c92265575ea0c1e511`, from
+source `805f855`, with the earlier Home. See its [build and install record](../../results/forest-activation-2026-10-18/README.md).
+The owner's October 19 note says the Mac now has `2b78587` installed.
+Installing a build of this branch on the owner's simulator replaces that, so it
+is the owner's call. The commands below are for a separately authorized
 reviewer installation. Preserve concurrent checkouts and the SDK app link.
 
 ```sh
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
 vega device is-connected --device VirtualDevice      # wait for this, not for "status"
 vega device info --device VirtualDevice
-vega device install-app --device VirtualDevice --packagePath app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
+vega device install-app --device VirtualDevice --packagePath app/build/aarch64-debug/calm-frames-app_aarch64.vpkg --buildType Debug
 vega device run-cmd --device VirtualDevice --command 'vmsgr send pkg://io.github.alejandropublius.calmframes.main'
 ```
 
 Start the virtual device only if it is stopped; it must be started detached.
 Avoid `vega device list`, which crashes on this SDK. The install and launch
-lines are the ones the Oct 13 and Oct 14 sessions ran
-([`results/polish_native_validation.json`](../../results/polish_native_validation.json),
-[`results/native-observation-2026-10-14/receipt.json`](../../results/native-observation-2026-10-14/receipt.json)).
+lines are what the October 18 native script ran
+([`native_walkthrough.py`](../../results/forest-activation-2026-10-18/native_walkthrough.py)).
+The October 14 session used `--device Simulator` and `vega device launch-app
+--appName io.github.alejandropublius.calmframes.main`
+([`results/native-observation-2026-10-14/receipt.json`](../../results/native-observation-2026-10-14/receipt.json)),
+the form README shows.
 
 Remote buttons from the host, if the simulator window is inconvenient:
 
@@ -161,12 +180,16 @@ vega device run-cmd --device VirtualDevice --command 'inputd-cli button_press KE
 Keys seen to work in the receipts: `KEY_UP`, `KEY_DOWN`, `KEY_LEFT`, `KEY_RIGHT`,
 `KEY_ENTER`, `KEY_BACK`, `KEY_PLAYPAUSE`.
 
-An optional software preflight drives the benign journey and writes a log:
+An optional read-only preflight checks the connected device and the package and
+prints a plan; it presses no keys and installs nothing:
 
 ```sh
 .venv/bin/python -m eval.benign_native_smoke --device VirtualDevice \
     --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
 ```
+
+Do not add `--execute` for this walkthrough: that installs the package and
+counts only playback of the Harbor demo, which the current Home does not list.
 
 Logs do not prove what was on screen; look at the simulator. A Debug package
 also prints breadcrumbs you can follow from the host while you drive the app:
@@ -182,31 +205,56 @@ some under load, so a missing line proves nothing.
 
 ## 4. The current demo sequence
 
-Use [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md) and the
-[exact owner keys](../../results/sea-otters-flow-2026-10-18/OWNER_WALKTHROUGH.md).
-Preserve an existing household; no PIN entry or reset is part of this walkthrough.
+Use [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md); the keys below are the same
+route. They follow this branch's layout and code and have not yet been pressed
+on a build of it. The October 18
+[owner keys](../../results/sea-otters-flow-2026-10-18/OWNER_WALKTHROUGH.md)
+describe the earlier island order and no longer match Home. Preserve an
+existing household; no PIN entry or reset is part of this walkthrough. Never
+press Back on Home itself; it leaves the app.
 
-From Home with Acadia selected and Watch focused:
+Home is a coastal map: "Ocean" over the Acadia and Sea otters cards, "Forest"
+over the Forest card, and Watch and Details on the sand for the chosen island.
+From Home with Acadia selected and Watch focused, where a launch lands:
 
-1. **Up, Right, Right, Select** opens Sea Otters Details with Watch focused.
-2. **Select** starts the exact NOAA Fisheries ocean excerpt: 19.987 seconds, silent,
-   plays once. End/Back returns to Details Watch; Back returns to the selected destination.
-3. **Left, Left, Down, Left** reaches Home Acadia Watch. Select plays approved Acadia.
-   Under the current extra-cautious profile the two replacement intervals are
-   7.343 to 12.699 seconds and 28.113 to 31.593 seconds. The rendition has approved
-   baked ocean replacements and retained original audio, plus an independent opaque fallback.
-4. **Play/Pause** toggles playback; **Down** reveals hidden controls. Select on focused
-   Skip requests protection before seeking. End/Back restores the launching screen.
-5. Details shows covered sections; More info contains source credits and limits.
-   Parents cancellation restores focus to Parents without entering a PIN.
+1. **Right, Select** moves from Watch to Details on the sand and opens Acadia
+   Details with Watch focused. It shows "Scenes replaced: 2 scenes · 9 seconds"
+   under Extra cautious, 7 seconds under WCAG or Broadcast.
+2. **Right, Select** opens More info: scope, detection limits, the approved
+   sentence, the NPS credit and Technical details. **Back, Left** returns to
+   Details Watch.
+3. **Select** plays approved Acadia, about 38 seconds. Under the current
+   extra-cautious profile the two replacement intervals are 7.343 to 12.699
+   seconds and 28.113 to 31.593 seconds. The rendition has approved baked ocean
+   replacements and an independent opaque fallback; its original audio track is
+   silent (-91 dB). The natural end returns to Details Watch.
+4. **Back, Left, Up, Right, Select** returns Home with Details focused, then
+   reaches Watch, the Acadia card and the Sea otters card, and opens Sea otters
+   Details ("No flagged scenes."). **Select** plays the exact NOAA Fisheries
+   excerpt: 19.987 seconds, silent, plays once, then Details Watch.
+5. **Back, Right, Select, Select** returns to the Sea otters card, reaches
+   Forest, opens its Details and plays the 12-second NPS creek excerpt once with
+   its original nature audio. **Back** after it ends leaves Home on the Forest
+   card.
+6. During any clip, **Play/Pause** toggles playback; **Down** reveals hidden
+   controls. Select on focused Skip requests protection before seeking.
+   End/Back restores the launching screen.
 
-The current `805f855` native pass covers destination selection, Details, all three full
-videos, Acadia replacement requests and return focus. The earlier `6f2570d` logs
-cover pause/resume, Skip, More info and Parents cancellation. No PIN operation was
-repeated for the island update. Forest is now playable. These logs do not certify
-pixels, audio, VoiceView or physical Fire TV behavior. Loading/error recovery is
-controlled-test evidence. The legacy WCAG-only playback check is unavailable under
-extra-cautious; do not change settings to expose it. No screenshot or recording is authorized.
+With the log stream above, each focus move should print a `CALM_TRACE focus` line:
+`kid-mode-home-watch`, `kid-mode-home-more-info` (Details on the sand),
+`kid-mode-home-poster-prepared-...` (a card), `kid-mode-details-play`,
+`kid-mode-details-show-info` and `kid-mode-details-info-back`.
+
+No log from this branch exists. The `805f855` native pass on October 18 covers
+the same Details, More info, playback and return-focus code with all three full
+videos and both Acadia replacement requests, on the earlier island order. The
+earlier `6f2570d` logs cover pause/resume, Skip, More info and Parents
+cancellation. No PIN operation was repeated for the island update. These logs
+do not certify pixels, audio, VoiceView or physical Fire TV behavior.
+Loading/error recovery is controlled-test evidence. The legacy WCAG-only
+playback check is unavailable under extra-cautious; do not change settings to
+expose it. No screenshot or recording is authorized; that stays the owner's
+decision.
 
 ## 4a. A browser preview, without a device
 
@@ -221,8 +269,14 @@ component trees with CSS approximations: Home links to Details, the practice
 entry, How it works and Parents, and keyboard focus cycles. Play, PIN keys and unmapped
 actions only show a notice. It does not run the native handlers, media,
 persistence, PIN checks, D-pad spatial navigation or VoiceView. This section
-was written for the October 14 interface and was not rechecked against the
-installed build.
+was written for the October 14 interface. Its fixture is the regression shelf,
+which adds the locally prepared Harbor story and the practice demo to the three
+titles, so its Home is the flowing "Choose an island" shelf, not the current
+Ocean and Forest map. The
+current Home, Details and opening screens are in the committed
+[October 19 renders](../../results/home-islands-2026-10-19/README.md),
+Chromium renders of the component trees, not device pictures;
+`eval/preview/render_islands.mjs` says in its header how they were made.
 
 ## 5. The analyzer, the Action and the hook, without the app
 
@@ -261,7 +315,7 @@ Staging records approval status; it does not install a title or enable Watch.
 ## 6. AWS, offline
 
 ```sh
-pip install -r pipeline/infra/requirements.txt
+uv pip install --python .venv/bin/python -r pipeline/infra/requirements.txt
 make synth            # synthesizes the CDK stack; no credentials, no account touched
 ```
 
@@ -281,7 +335,7 @@ No value here is a secret, and no secret is needed to review the app.
 | `CHECKPOINT_D` | `Makefile`, `pipeline/upload_server.py` | Must read `confirmed` before anything can reach AWS |
 | `AWS_REGION`, `CDK_DEFAULT_ACCOUNT`, `CDK_DEFAULT_REGION` | CDK deploy only | Not needed for `make synth` |
 | `CALM_FRAMES_CHROME` | `eval/report_page_check.py` | A Chrome binary for the report page check |
-| `CALM_FRAMES_REQUIRE_NODE` | `Makefile` | Makes a target fail instead of skip when Node is missing |
+| `CALM_FRAMES_REQUIRE_NODE` | `eval/property_runner.py`, set by `make properties` and `eval/mutate_gate.py` | Makes a test fail instead of skip when Node is missing |
 
 The map-signing private key never enters the repository; the app ships only
 the public key, and the key for the Harbor demo is its own.

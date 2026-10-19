@@ -1,14 +1,24 @@
 # Calm Frames
 
-Current state, October 18, 2026: installed app source `805f855`. The original
-coastal world has three approved playable destinations: Acadia, Forest and Sea Otters.
-Distinct island shapes and a selection boat carry into the browsing flow. Forest is a 12-second NPS redwood-creek excerpt with original nature audio.
+Current state, October 19, 2026. The submission source is the private branch
+`claude/ocean-layout-fix-2026-10-19` (head `7b3f5b2`, app code last changed in
+`53a1c51`), which descends from `codex/creator-editions-2026-10-18` at `c84f95d`;
+`main` has not moved since Sep 20 and is not the submission source. **Nothing
+from this branch has been built, installed or seen on a device.** The last
+install with a receipt here is source `805f855` on the Vega Virtual Device on
+Oct 18, with the earlier island order. The owner's Oct 19 note says the Mac now
+has `2b78587` installed; it was never pushed and cannot be inspected from here.
+
+Home is a coastal map with three approved playable titles: **Ocean** over the
+Acadia and Sea otters cards, **Forest** over the Forest card, and a boat by the
+chosen island. Forest is a 12-second NPS redwood-creek excerpt with original nature audio, played once.
 Sea Otters is a 19.987-second silent NOAA Fisheries ocean excerpt, played once.
-Acadia uses its approved baked ocean replacement during flagged intervals,
-with an independent opaque fallback. See [FINAL_HANDOFF.md](FINAL_HANDOFF.md),
+Acadia, about 38 seconds with a silent audio track, uses its approved baked
+ocean replacement during flagged intervals, with an independent opaque
+fallback. See [FINAL_HANDOFF.md](FINAL_HANDOFF.md),
 the [exact remote walkthrough](docs/submission/DEMO_RUN_OF_SHOW.md)
-and the [submission packet](docs/submission/README.md). Historical screenshots
-below predate this map and are not current native captures. Harbor remains
+and the [submission packet](docs/submission/README.md). The pictures below are
+browser renders of this branch's screens, not native captures. Harbor remains
 bundled for regression work, off the consumer shelf. Independent detector
 validation and owner visual/audio acceptance remain pending. The prototype
 has not been medically validated and uses pre-analysis, not live interception.
@@ -25,35 +35,35 @@ the installed player and has not demonstrated Prime Video support.
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](.python-version)
 [![Node 22](https://img.shields.io/badge/node-22-blue.svg)](.nvmrc)
 
-**Calm Frames checks every frame of a title before a child can pick it, and the Fire TV player hides each part it flags before it reaches the screen while sound and captions carry the story.**
+**Calm Frames checks every frame of a title before a child can pick it, and the Fire TV player hides each part it flags before it reaches the screen while a title's own sound and captions, when it has them, carry the story.**
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
-![Browser render of the coastal Home: the seated figure, the lighthouse island and the boat behind one heading, Calm Frames, with Play and Details under it, and How it works and Parents in the header](results/coastal-renders-2026-10-14/home.png)
+![Browser render of the island Home: Calm Frames, Everyone, How it works and Parents in the header; Ocean over the Acadia and Sea otters cards and Forest over the Forest card, each card on its own island with a second line of Silent · 38 sec, Silent · 20 sec and Nature audio · 12 sec; the boat by Acadia; Watch, focused, and Details on the sand](results/home-islands-2026-10-19/after-home-watch.png)
 
 | Details |
 |---|
-| ![Browser render of the coastal Details for Harbor: the artwork, the title, 20 sec · No flashing found, Play with its triangle and the quiet Try picture holds entry beside it, the viewing settings and Back](results/coastal-renders-2026-10-14/details.png) |
+| ![Browser render of Acadia Details: Back, the title, 38 seconds, Watch and More info, Waves along the coast of Acadia National Park, Scenes replaced 2 scenes · 7 seconds over its timeline, and the photograph standing on the lighthouse island](results/home-islands-2026-10-19/after-details-coastal.png) |
 
-<sub>Browser renders of the app's own React Native trees with the bundled fonts and artwork, exported from commit 4016e8d ([render receipt](results/coastal-renders-2026-10-14/receipt.json)). They are review aids, not Vega screenshots; they describe the historical October 14 interface, not the installed coastal world. That historical shelf held two Harbors; the current consumer shelf has Acadia, Forest and Sea Otters. The palette, type, contrast and motion rules are on [the design page](docs/design/README.md).</sub>
+<sub>Browser renders of this branch's React Native trees with the real styles, fonts, images and SVG, made by `eval/preview/islands.fixture.tsx` and `eval/preview/render_islands.mjs` ([notes](results/home-islands-2026-10-19/README.md)). Browser flexbox stands in for Yoga, so they show composition and overlap, not native pixels, and they are not Vega screenshots. The October 14 renders of the earlier Harbor interface are kept in [results/coastal-renders-2026-10-14](results/coastal-renders-2026-10-14/receipt.json). The palette, type, contrast and motion rules are on [the design page](docs/design/README.md).</sub>
 
 ---
 
 ## What it is
 
-Calm Frames combines an offline video analyzer, a checked rendition pipeline and a Vega player for families affected by photosensitivity. Before playback, the pipeline analyzes the source, signs its flash map and verifies the prepared rendition. The player adds a scheduled cover and guarded seeks, with audio and captions intended to preserve the story; signed context images, a checked still from before the hide shown in place of black, ship today only on the labelled Harbor demo, and opaque protection remains independent of the approved baked ocean replacement used by current Acadia. Parent settings can make the standard floor stricter and now persist locally. A reusable hook and analyzer provide adoption paths for other developers. Detection, delivery integrity and physical screen behavior have separate limits, recorded below; a signature is not proof that every hazard was detected.
+Calm Frames combines an offline video analyzer, a checked rendition pipeline and a Vega player for families affected by photosensitivity. Before playback, the pipeline analyzes the source, signs its flash map and verifies the prepared rendition. The player adds a scheduled cover and guarded seeks, with audio and captions intended to preserve the story; signed context images, a checked still from before the hide shown in place of black, exist today only on the labelled Harbor demo, which is bundled for regression work and is not on the current shelf, and opaque protection remains independent of the approved baked ocean replacement used by current Acadia. Parent settings can make the standard floor stricter and now persist locally. A reusable hook and analyzer provide adoption paths for other developers. Detection, delivery integrity and physical screen behavior have separate limits, recorded below; a signature is not proof that every hazard was detected.
 
 Why it is built this way, in one page: [WRITEUP.md](WRITEUP.md).
 
 ### What a family sees
 
-Coastal artwork, text sized for a couch and a visible ring on the focused remote control. Home presents Acadia, Forest and Sea Otters as destinations on a static coastal map; playback uses dark controls over the picture.
+Coastal artwork, text sized for a couch and a visible ring on the focused remote control. Home presents Acadia, Sea otters and Forest, in that order, as cards standing on islands of a static coastal map; playback uses dark controls over the picture.
 
-- **Choose Acadia, Forest or Sea Otters.** Home starts on Acadia Watch, with Details beside it. Up reaches Acadia; Right selects Forest; another Right selects Sea Otters; Select opens its Details with Watch focused. A further Select plays. Details shows the selected version's covered sections; More info contains attribution and limits. How it works and Parents stay in the header. Harbor remains outside the consumer catalog.
+- **Choose Acadia, Sea otters or Forest.** Home starts with Acadia chosen and Watch focused, Details beside it on the sand. Each card gives a short name and then sound and length: "Silent · 38 sec", "Silent · 20 sec", "Nature audio · 12 sec". The chosen title is not repeated under the cards; Watch announces it ("Watch: Acadia"), and a boat waits by the chosen island. Selecting a card opens its Details with Watch focused, and a further Select plays. Details shows the runtime, Watch and More info, a short description and the title's covered or replaced scenes; More info holds the scope, the detection limits, the approved safety sentence and the source credit. The profile button, How it works and Parents stay in the header, and Who is watching opens in the card row. Harbor remains outside the consumer catalog. On Oct 18 the earlier layout's route was observed by log on the Vega Virtual Device; this layout's remote route has not been run on a device.
 - **A short setup, once.** A parent picks a four digit PIN, one of three presets (Standard, Broadcast, Extra cautious) and the room: the size of the television and how far away the children sit.
-- **A library of checked titles only.** A title plays only after its flash map is verified; one that has not verified shows Needs check and stays hidden.
+- **A library of checked titles only.** A title plays only after its flash map is verified; one that has not verified is left off Home, and Parents lists it as Preparing or Unavailable.
 - **A steady scene notice and Skip.** The compact control stays in one place through a scheduled cover; pause and loading update its wording. An optional chime is controlled in Parents.
-- **Scheduled picture covers.** Prepared Acadia presents verified ocean footage during its checked intervals, with an independent opaque fallback and compact Skip control; original audio is retained in the rendition. Sea Otters is silent and has no flagged intervals. No authored scene description is registered. Captions are available only when the title supplies them.
+- **Scheduled picture covers.** Prepared Acadia presents verified ocean footage during its checked intervals, with an independent opaque fallback and compact Skip control; its rendition keeps an audio track, and that track is silent (it measures -91 dB throughout). Sea Otters is silent, and neither it nor Forest has flagged intervals, so their Details say "No flagged scenes.", which is a finding, not a safety certificate. No authored scene description is registered. Captions are available only when the title supplies them, and none of the three current titles does.
 - **Settings behind the PIN.** Presets, the room, the chime, a profile per child (which can only be stricter than the household), and two opt-in effects, a gentle artwork entrance and quiet selection sounds, both Off unless a parent turns them on.
 - **What it keeps stays on the television.** The household record (the salted hash of the PIN, the profiles, presets, room and switches) is saved on the device, and the list of what was hidden lives in memory only, so it is gone after a restart. A release build sends nothing about the household anywhere: its only network request fetches a flash map when a catalog entry names a web address, and the bundled titles name none.
 - **Built for the remote and for screen readers.** The D-pad reaches every control, Back closes one level at a time, cards are announced, and reduced motion keeps the artwork still. VoiceView is covered by tests and still owes its check on the device.
@@ -80,15 +90,30 @@ The first prints `PASS`, the second writes one HTML page for the title that open
 
 ### Where things stand
 
-**Current candidate, October 18.** Source `805f855` completed one native compile, a bounded packaging recovery and one install.
-499 focused app tests and 11 attribution tests pass. Native text logs cover all three
+**Current source, October 19.** Branch `claude/ocean-layout-fix-2026-10-19`
+(head `7b3f5b2`) places everything on Home, Details and the opening from one
+module, `app/src/calmframes/homeIslands.ts`, and repairs checks that had stopped
+checking. **It has not been built, installed or seen on a device.** On this
+branch the full app suite passes 1,676 tests with 0 failures and 4 skipped (on
+`53a1c51`, the last app change; `c84f95d` had 18 failures that the earlier
+bounded counts did not run); the full Python suite passes 1,880 with 0 failures
+and 9 skipped (on `d9c9e2f`); the mutation gate catches <!--n results/mutation.json:totals.killed -->68<!--/n--> of <!--n results/mutation.json:totals.mutations -->70<!--/n-->
+mutations, matching the committed report, and the <!--n results/mutation.json:totals.survived -->2<!--/n--> survivors are the
+documented equivalents; and the app's UI flash check passes 37 screens and
+transitions under both profiles. See [FINAL_HANDOFF.md](FINAL_HANDOFF.md) and
+[the renders and notes](results/home-islands-2026-10-19/README.md).
+
+**Last native evidence, October 18.** Source `805f855`, with the earlier island
+order, completed one native compile, a bounded packaging recovery and one
+install on the Vega Virtual Device. 499 focused app tests and 11 attribution
+tests passed for it. Native text logs cover all three
 destinations, Forest More info, both Acadia replacement requests, natural end, Back
 and How it works return focus.
 The earlier `6f2570d` walkthrough separately covers More info, controls, pause/resume,
-guarded Skip and Parents cancellation; no PIN operation was repeated in this UI pass.
-The app is left Home with Sea Otters selected and How it works focused. See the
-[receipt and limits](results/forest-activation-2026-10-18/README.md). Logs establish
-state and actions, not rendered pixels or audio. Physical Fire TV and VoiceView
+guarded Skip and Parents cancellation; no PIN operation was repeated in that UI pass.
+See the [receipt and limits](results/forest-activation-2026-10-18/README.md). Logs establish
+state and actions, not rendered pixels or audio. The Mac's `2b78587` and its
+navigation work were never pushed and are not in this branch. Physical Fire TV and VoiceView
 acceptance remain unverified; the current demo video, judge access and submission
 are still pending. No recording is authorized by these instructions.
 
@@ -477,7 +502,7 @@ Use the aarch64 package on this Apple Silicon Mac. From the repository root:
 ```sh
 cd app
 npm install
-npm run build:debug -- --target aarch64
+npm run build:debug
 cd ..
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
 vega device is-connected --device Simulator
@@ -486,16 +511,16 @@ vega device install-app --device Simulator --packagePath app/build/aarch64-debug
 vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main
 ```
 
-Start the virtual device only if it is stopped. Wait until `vega device is-connected` confirms readiness before installing. The CLI's `virtual-device status` can report running before it is usable; avoid `vega device list`, which previously failed on this SDK. These are the install and launch commands the Oct 10 run used ([docs/COMPLETION_CHECKLIST.md](docs/COMPLETION_CHECKLIST.md)); the app name is the interactive component's ID, which keeps the launch unambiguous.
+`npm run build:debug` is the build command the Oct 18 install used ([build receipt](results/forest-activation-2026-10-18/build-receipt.json)). It builds the armv7, aarch64 and x86_64 packages, and its postbuild step checks the prepared library inside all three, so it expects all three to exist; on Oct 18 that step refused stale media left by an incremental build. Start the virtual device only if it is stopped. Wait until `vega device is-connected` confirms readiness before installing. The CLI's `virtual-device status` can report running before it is usable; avoid `vega device list`, which previously failed on this SDK. These are the install and launch commands the Oct 10 run used ([docs/COMPLETION_CHECKLIST.md](docs/COMPLETION_CHECKLIST.md)); the app name is the interactive component's ID, which keeps the launch unambiguous. Nothing from the current branch has been built or installed this way yet.
 
-Then run the checked benign journey preflight:
+For the current shelf of Acadia, Sea otters and Forest, follow the remote walkthrough in [docs/submission/DEMO_RUN_OF_SHOW.md](docs/submission/DEMO_RUN_OF_SHOW.md). The checked benign journey preflight below was written for the Oct 10 Harbor journey:
 
 ```sh
 .venv/bin/python -m eval.benign_native_smoke --device Simulator \
   --vpkg app/build/aarch64-debug/calm-frames-app_aarch64.vpkg
 ```
 
-After successful preflight, repeat with `--execute --restart` to collect fresh software logs. Use the visible remote to complete setup, select Harbor story (benign demo), enable English practice captions, and observe playback, practice holds, sound, seeks, parent settings and restart. Logs alone do not prove screen composition or audio continuity. `eval/vvd_smoke.py` now delegates to the same benign smoke entrypoint; its historical helper functions remain for separate timing tools.
+Its `--execute --restart` journey asks you to complete setup, open Harbor story (benign demo) from the shelf, enable English practice captions, and observe playback, practice holds, sound, seeks, parent settings and restart. The current shelf no longer lists Harbor, so that journey cannot be completed on the current build as written. Logs alone do not prove screen composition or audio continuity. `eval/vvd_smoke.py` now delegates to the same benign smoke entrypoint; its historical helper functions remain for separate timing tools.
 
 For a fresh Python environment, follow [the reviewer setup](docs/ENVIRONMENT.md#python-setup-for-a-fresh-reviewer-checkout) before the preflight.
 
@@ -695,7 +720,9 @@ Worth knowing before trusting this with a child.
 
 - **It is not a medical device, and it does not prevent seizures.** It reduces exposure to flashing above published limits in the videos it plays. Photosensitivity varies between people and published thresholds are a floor, not a promise.
 - **Only titles that passed verify can play in kid mode.** Anything else is not protected, because it was never measured.
-- **Live streams and other apps' content are out of scope.** So are DRM titles from other apps.
+- **Detection can miss flashing.** "No flagged scenes" on a title's Details is what the analyzer found, not a safety certificate.
+- **It works only with videos prepared for its own player.** Netflix, Prime Video and every other app's content are out of scope, and so are DRM titles and live TV.
+- **The package budget is nearly spent.** The prepared library uses <!--n results/forest-activation-2026-10-18/approval.json:replacementNamespaceBytes -->66492442<!--/n--> of its <!--n results/forest-activation-2026-10-18/approval.json:unchangedLimitBytes -->67108864<!--/n--> bytes (64 MiB), about 602 KB free, so no new clip can be imported until the owner changes the budget, the titles or the package format. More than half of those bytes are identical copies of one rendition stored once per preset, which the current format cannot share ([notes](results/home-islands-2026-10-19/README.md)).
 - **HDR is not measured.** flashmap refuses HLG and PQ input rather than measuring it with the wrong transfer curve.
 - **Decoder support is bounded.** The earlier Theora failures were fixed and rescreened; unsupported or undecodable inputs still fail closed.
 - **There is no screen-level cover lead time.** The software-level number above is the app's own timing on the virtual device, and it stops at the moment the app sets its state. The timing claim is a software observation, not a measurement of what a screen showed; physical camera timing is outside this submission scope.
@@ -707,7 +734,9 @@ Worth knowing before trusting this with a child.
   captions and continuing audio still need direct observation in the current benign simulator journey. No physical cover timing is claimed.
 - **Red flash coverage is untested against real footage**, because no free source in the pool has a saturated red strobe.
 - **The room rule can only add hides.** A household cannot make Calm Frames weaker than WCAG. That is a design rule and it is enforced in code, but it also means a household cannot switch protection off for one title without leaving kid mode.
-- **Physical hardware is untested and outside this submission scope.** The Vega Virtual Device journey is the acceptance target. Simulator observations do not establish physical display behavior.
+- **Physical hardware is untested and outside this submission scope.** The Vega Virtual Device journey is the acceptance target, and the app has only ever run there, never on a physical Fire TV. Simulator observations do not establish physical display behavior.
+- **Vega OS only.** The app is built as a Vega OS package; Fire OS devices cannot install it.
+- **The current layout has not been seen on a device.** Home, Details and the opening on `claude/ocean-layout-fix-2026-10-19` are checked by tests and browser renders only; the last native evidence is for `805f855`, with the earlier island order.
 
 ## Safety
 
@@ -727,7 +756,8 @@ The approved wording, everywhere, is: **reduces exposure to flashing above publi
 | Fraunces headings and Source Sans 3 controls; retained Inter 4.001 | SIL Open Font License 1.1: [Fraunces](app/assets/fonts/LICENSE-Fraunces), [Source Sans 3](app/assets/fonts/LICENSE-SourceSans3), [Inter](app/assets/fonts/LICENSE-Inter) |
 | Presentation artwork and animation plates | Ours, per file in [media/LICENSES.csv](media/LICENSES.csv): the cinematic Harbor and water plates are Apache-2.0; the earlier illustration and gradient are CC0-1.0. Playback stills are extracted and signed through the pipeline |
 | Our own videos: the Harbor film, its prepared renditions, and the calm gradient | Ours, per file in [media/LICENSES.csv](media/LICENSES.csv): the current cinematic Harbor is Apache-2.0; the historical geometric film and calm gradient are CC0-1.0 |
-| The sample's photographs under `app/src/assets/movie-content/` | [Pexels licence](https://www.pexels.com/license/), as the sample's own `app/README.md` states. Only the sample's own screens draw them; kid mode draws our artwork |
+| The three titles on the shelf, and the stills on their cards | Public domain, not ours, credited in [NOTICE](NOTICE) and per file in [media/LICENSES.csv](media/LICENSES.csv) with the source page: Acadia, "NPS Video, Acadia National Park. No NPS endorsement is implied."; Sea otters in Alaska, NOAA Fisheries B-roll, whose source page requires the NOAA Fisheries credit; Forest creek at Redwood, "NPS: G Litten; no NPS endorsement implied". The app shows each credit in the title's More info. The Acadia card still is a frame of the prepared video ([provenance](app/assets/image/tv/acadia-coast.provenance.json)) |
+| The sample's photographs under `app/src/assets/movie-content/` | [Pexels licence](https://www.pexels.com/license/), as the sample's own `app/README.md` states. Only the sample's own screens draw them; kid mode draws our artwork and the public-domain card stills above |
 | Screening media | Per file in [media/LICENSES.csv](media/LICENSES.csv), with URL, licence, credit line, SHA-256, duration and resolution |
 
 Screening media credits: Blender open movies (Cosmos Laundromat, Sintel, Tears of Steel, Big Buck Bunny) from Blender Foundation under CC BY 3.0, with the Tears of Steel credit scroll kept and Blender logos excluded; NASA Scientific Visualization Studio and ISS time-lapse footage, following NASA's credit-line guidance; DVIDS footage, which carries a non-endorsement notice; Wikimedia Commons fireworks and lightning footage under its per-file licences; two 1930 public-domain films.

@@ -534,7 +534,8 @@ export const DETECTION_LIMITS_LINE =
  * not say whether a still exists for each part.
  */
 export function coverLine(count: number, hasCaptions: boolean, ocean = false): string {
-  if (ocean) return "Ocean footage replaces flagged scenes. You'll still hear the original audio.";
+  // Acadia's prepared rendition is silent (-91 dB throughout), so promise sound only when there is some.
+  if (ocean) return 'Ocean footage replaces flagged scenes. Original audio is kept when the video has sound.';
   const parts =
     count === 1
       ? 'The flagged scene is covered.'

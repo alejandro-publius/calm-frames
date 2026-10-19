@@ -1,21 +1,29 @@
 # The submission packet
 
-Current build note: one successful compile required a bounded recovery of stale
-media staging, then all package gates passed and one install completed. Current
-native checks cover all three full clips, Forest More info and How it works Back.
-No pixel/audio or owner acceptance is implied.
+Updated October 19, 2026. The submission source is the private branch
+`claude/ocean-layout-fix-2026-10-19`, head `7b3f5b2` (app code last changed in
+`53a1c51`), which descends from `codex/creator-editions-2026-10-18` at `c84f95d`.
+`main` is unchanged since September 20 and is not the submission source.
 
-Updated October 18, 2026 for installed app source `805f855` and the coastal-world
-handoff on private branch `codex/creator-editions-2026-10-18`.
-[Build, native evidence and limits](../../results/forest-activation-2026-10-18/README.md).
-The installed menu has Acadia, the 12-second NPS Forest creek and the 19.987-second silent NOAA sea-otter clip.
+**What is and is not installed.** Nothing from this branch has been built or
+installed: the October 19 work was done in a cloud session with no Vega SDK or
+device. Its Ocean and Forest Home is shown only in browser renders
+([evidence](../../results/home-islands-2026-10-19/README.md)), which show
+composition, not native pixels. The last install with a receipt here is source
+`805f855` on October 18, on the Vega Virtual Device
+([build, native evidence and limits](../../results/forest-activation-2026-10-18/README.md)).
+The owner's October 19 note says the Mac now has source `2b78587` installed,
+with uncommitted navigation work; neither was pushed, so neither can be
+inspected from here. Both this branch and `805f855` carry the same three
+titles: Acadia, the 12-second NPS Forest creek and the 19.987-second silent
+NOAA sea-otter clip.
 Nothing in this packet has been submitted, recorded or publicly published.
 
 | File | Purpose |
 |---|---|
 | [FINAL_REQUIREMENTS_CHECKLIST.md](FINAL_REQUIREMENTS_CHECKLIST.md) | The canonical checklist: every mandatory rule, read live on October 17, mapped to evidence and marked done, missing or unverified |
 | [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) | The project description and product feedback, for owner review |
-| [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md) | The canonical demo script, about two minutes; not permission to record |
+| [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md) | The canonical demo script, planned under three minutes; not permission to record |
 | [REVIEWER_QUICKSTART.md](REVIEWER_QUICKSTART.md) | Setup and the current walkthrough for a judge |
 | [OPEN_DECISIONS.md](OPEN_DECISIONS.md) | The decisions only the owner can make |
 
@@ -29,7 +37,7 @@ corrections applied to this packet are listed in
 
 [The October 13 draft](calm-frames-submission-draft-2026-10-13.zip) was
 assembled at `7444d21` and is **not current**: its copy, browser previews and
-recording plan predate the Oct 14 design integration and the candidate above.
+recording plan predate the Oct 14 design integration and the current branch.
 It is kept for the record. Do not use its previews in the gallery without
 relabelling them as the Oct 13 layout. On GitHub, use **Download raw file** on
 the ZIP page.
@@ -53,6 +61,7 @@ upload attempt and source identity are recorded in
 
 Work through the blockers at the top of the
 [checklist](FINAL_REQUIREMENTS_CHECKLIST.md) and the decisions in
-[OPEN_DECISIONS.md](OPEN_DECISIONS.md). Record only after owner acceptance, the
-footage answer and explicit authorization. The historical ZIP must not
-substitute for these current documents.
+[OPEN_DECISIONS.md](OPEN_DECISIONS.md). Record only after the build to be shown
+is installed and accepted by the owner, the footage answer and explicit
+authorization. The historical ZIP must not substitute for these current
+documents.
