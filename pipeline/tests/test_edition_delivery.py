@@ -191,9 +191,44 @@ def test_approval_changed_during_preflight_is_not_applied(app, signed_package, t
     assert json.loads((app / edition.REGISTRY).read_text())["catalogs"] == []
 
 
+def namespace_bytes(directory):
+    return sum(path.stat().st_size for path in directory.rglob("*") if path.is_file())
+
+
+def test_budget_overflow_is_refused_before_anything_is_written(app, signed_package, tmp_path):
+    """A delivery that would take the library past its budget never touches the checkout.
+
+    A metadata-only copy of Acadia is a second 21 MB bundle beside the first.
+    With today's library that is over the 64 MiB budget, and the refusal has to
+    come from the proposed checkout, before any file or the compiled catalog
+    module is written into the real one.
+    """
+    checker = (REPO / "app" / edition.TOOLS[1]).read_text()
+    assert "const MAX_BYTES = 64 * 1024 * 1024;" in checker
+    rewrite(signed_package, lambda value: value["titles"][0].update(title="Metadata-only test fixture"))
+    root, ticket = stage(signed_package, tmp_path)
+    requested = review.check_delivery(root, ticket)["approval_request"]
+    added = namespace_bytes(signed_package / requested["bundleId"])
+    # The scenario has to overflow for real; if the library ever shrinks enough, rebuild it.
+    assert namespace_bytes(app / edition.ASSETS) + added > 64 * 1024 * 1024, "this delivery no longer overflows"
+    approval = dict(requested, consumer=True, label="Metadata fixture",
+                    approvalReference="Unit test only; no real approval")
+    (app / edition.REGISTRY).write_text(json.dumps({"version": 1, "catalogs": [approval]}))
+    before = snapshot(app)
+    with pytest.raises(PipelineError, match="exceeds its package budget"):
+        edition.apply_delivery(root, ticket, app)
+    assert snapshot(app) == before
+    assert not (app / edition.ASSETS / requested["bundleId"]).exists()
+
+
 def test_changed_generated_module_is_restored_on_final_failure(app, signed_package, tmp_path, monkeypatch):
     rewrite(signed_package, lambda value: value["titles"][0].update(title="Metadata-only test fixture"))
     root, ticket = stage(signed_package, tmp_path)
+    # Room for the edition, as the other rollback tests make it: the metadata-only
+    # copy replaces the Acadia bundle instead of sitting beside it. Until Oct 19
+    # this test kept both, the proposed checkout went over budget, and the
+    # rollback it exists to check was never reached (the budget case is above).
+    remove_fixture(app)
     requested = review.check_delivery(root, ticket)["approval_request"]
     # Test-only approval in the isolated temporary app. No production registry changes.
     approval = dict(requested, consumer=True, label="Metadata fixture",

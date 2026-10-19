@@ -2754,3 +2754,17 @@ left failing because it reports a true condition. ruff stops linting
 `results/`, whose scripts are evidence kept as they ran. The flashmap report
 page follows the current playback palette, re-measured. Cost: test, lint
 scope, typing and one tool-list change; no catalog, trust or media change.
+
+## October 19, later: the rollback test reaches its rollback; duplicate media is measured, not repacked
+
+Reverses the entry above that left a delivery test failing. It was not reporting
+the library's size: it staged a second 21 MB Acadia bundle beside the first, so
+the proposed checkout was refused on budget and the generated-module rollback it
+exists to check never ran. It now makes room the way its sibling tests do, and a
+separate test holds the overflow case, asserting it overflows for real and that
+nothing is written. Both were seen to fail against a broken rollback and a
+disabled budget. The 64 MiB limit and every approved title stay. Byte-identical
+preset copies are 37,144,901 of the library's 66,492,442 bytes, but the player
+and verifier require one file per preset and approvals pin manifests that list
+them, so storing each once is a format change with new bundle identities. That
+is left for the owner to approve; no catalog, trust, signing or media changed.

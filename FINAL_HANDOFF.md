@@ -1243,8 +1243,11 @@ pass, hook mirror resynced and its package check passes.
 `ambient_report.mjs`, so every delivery was refused; fixed, and its tests run
 again. The prepared library has about 602 KB left of its 64 MiB budget, so a new
 real clip cannot be imported until the budget, the titles or the package format
-changes (Sea Otters ships three identical 9.7 MB renditions). One delivery test
-fails for exactly this reason and is left failing. Scene bridge and the native
+changes. 37,144,901 of the library's bytes are byte-identical preset copies, but
+the current format requires one file per preset, so storing them once needs a
+format change and new bundle identities for owner approval. The delivery test that
+seemed to fail on budget was never reaching its rollback; it now does, and a
+separate test covers budget refusal. Scene bridge and the native
 example need the Mac's source media and the virtual device; neither was attempted.
 
 **Owner steps.** Decide the package budget question. Install this branch and look at Home, Details and playback. Decide

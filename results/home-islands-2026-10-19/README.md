@@ -94,13 +94,31 @@ Yoga: this shows composition and overlap, **not native pixels**.
 
 ## Still open
 
-- **The package budget is spent.** The prepared library is 66,492,442 bytes of
-  its 67,108,864 byte (64 MiB) budget, about 602 KB left, so the import workflow
-  cannot add a real clip of any useful length. Options for the owner: raise the
-  budget, remove a title, or store identical renditions once (Sea Otters ships
-  three identical 9.7 MB files), which changes the signed package format and
-  needs approval. `test_changed_generated_module_is_restored_on_final_failure`
-  fails for this reason and is left failing on purpose.
+- **The package budget is spent, and half of it is duplicate bytes.** The
+  prepared library is 66,492,442 bytes of its 67,108,864 byte (64 MiB) budget,
+  about 602 KB left, so the import workflow cannot add a real clip of useful
+  length. Measured by content hash, 37,144,901 of those bytes are copies: every
+  title whose presets share a rendition stores it once per preset (Sea Otters
+  3 x 9.7 MB, Acadia 2 x 7.1 MB, Harbor 3 x 2.6 MB, Forest 3 x 2.5 MB). The
+  unique content is 29,347,541 bytes. Storing each once is not something the
+  current format allows: the player (`packagedLibrary.ts`) and the verifier
+  (`pipeline/packaged_library.py`) require every preset's rendition at its
+  own `titles/<source>/<preset>.mp4`, and each bundle's identity is the hash
+  of a manifest that lists those files, which the approval registry pins. So
+  reuse needs a format change in the player, verifier, checker and packager,
+  and new bundle identities for the four bundles, which the owner approves.
+  No maps, signatures, media or presets would change. Not done here.
+- **The rollback test was not failing for budget reasons it should keep.**
+  `test_changed_generated_module_is_restored_on_final_failure` added a second
+  21 MB Acadia bundle beside the first, so the proposed checkout was refused on
+  budget before the rollback it checks was ever reached. It now makes room the
+  way the other rollback tests do and reaches the refusal after the generator;
+  a new `test_budget_overflow_is_refused_before_anything_is_written` keeps the
+  overflow case, asserting it really overflows and that nothing is written.
+  Seen to fail: with the generated-module restore removed from
+  `edition_delivery.py` the rollback test goes red, and with the budget check
+  disabled the budget test goes red (the delivery then reaches the checkout
+  and only the 80 MiB review bound stops it).
 - **The pattern rule's text precision** (published as 0.9143) was measured
   on a corpus whose colours are hard coded from the Oct 10 palette in
   `eval/pattern_text_frames.py`, so "every colour pair this product ships" no
