@@ -19,14 +19,46 @@ function Pine({ x, y, size = 1 }: { x: number; y: number; size?: number }) {
     <Path d="M0-166V-45L42-45L15-101H25Z" fill="#4E8166" />
   </G>;
 }
-export default function CoastalIsland({ kind, x, y, size = 1 }: { kind: IslandKind; x: number; y: number; size?: number }) {
+/**
+ * The landmarks for an island a Home card stands on, in island units.
+ *
+ * The card covers the middle of the island (homeIslands.ts), so what says
+ * which island it is stands on the two strips either side of it, at least 262
+ * units from the centre, and the front beach below it. Nothing here is drawn
+ * where the card will be.
+ */
+function Flanks({ kind }: { kind: IslandKind }) {
+  if (kind === 'coastal') return <G testID="island-landmarks-coastal">
+    <Pine x={-300} y={-28} size={0.5} />
+    <Path d="M-336 28Q-346-6-320-24Q-296-40-274-20Q-264-2-268 24Q-300 40-336 28Z" fill="#9CA99C" stroke="#385C59" strokeWidth="6" strokeLinejoin="round" />
+    <Path d="M-318-14Q-300-24-284-12" fill="none" stroke="#DCE0C9" strokeWidth="6" strokeLinecap="round" />
+    <Path d="M272-30L281-188H307L316-30Z" fill="#FFF8E7" stroke="#385C59" strokeWidth="6" />
+    <Rect x="281" y="-168" width="26" height="22" fill="#BB5944" />
+    <Path d="M274-188L294-214L314-188Z" fill="#BB5944" stroke="#385C59" strokeWidth="6" strokeLinejoin="round" />
+  </G>;
+  if (kind === 'sea-otters') return <G testID="island-landmarks-sea-otters">
+    {[[-300, 30], [-322, 60], [300, 30], [322, 60]].map(([left, top]) => <G key={left} transform={`translate(${left} ${top}) scale(0.7)`}>
+      <Path d="M0 50Q-30 5-4-24Q20-55 0-90" fill="none" stroke="#315F4D" strokeWidth="9" strokeLinecap="round" />
+      <Path d="M-5 5Q-55-20-35-40Q-5-33-5 5 M3-28Q42-38 35-64Q5-62 3-28" fill="#4F7D58" stroke="#315F4D" strokeWidth="4" />
+    </G>)}
+    <Ellipse cx="300" cy="-44" rx="30" ry="18" fill="#A9B2A1" stroke="#385C59" strokeWidth="5" />
+    <Path d="M-150 100Q-60 114 20 100 M70 100Q130 112 170 100" fill="none" stroke="#FFF8E7" strokeWidth="8" strokeLinecap="round" />
+  </G>;
+  return <G testID="island-landmarks-forest">
+    <Pine x={-318} y={4} size={0.4} /><Pine x={-290} y={-16} size={0.45} />
+    <Pine x={300} y={-12} size={0.55} />
+    <Ellipse cx="-180" cy="110" rx="34" ry="18" fill="#B8BBA5" stroke="#385C59" strokeWidth="5" />
+  </G>;
+}
+
+export default function CoastalIsland({ kind, x, y, size = 1, onMap = false, underCard = false }: { kind: IslandKind; x: number; y: number; size?: number; /** One of three on the Home map, where a narrower ring keeps neighbours apart. */ onMap?: boolean; /** A Home card stands on it, so landmarks move to the sides. */ underCard?: boolean }) {
   const shore = shores[kind];
   return <G testID={`island-${kind}`} transform={`translate(${x} ${y}) scale(${size})`}>
-    <Ellipse cy="46" rx="360" ry="116" fill="none" stroke="#95C9C0" strokeWidth="9" />
+    <Ellipse cy="46" rx={onMap ? 340 : 360} ry={onMap ? 110 : 116} fill="none" stroke="#95C9C0" strokeWidth="9" />
     <Path d={shore} transform="translate(0 32)" fill="#3D8584" />
     <Path d={shore} transform="translate(0 18)" fill="#A99571" stroke="#385C59" strokeWidth="5" />
     <Path d={shore} fill={kind === 'forest' ? '#BDD09A' : '#F1DCA8'} stroke="#385C59" strokeWidth="5" strokeLinejoin="round" />
-    {kind === 'coastal' ? <>
+    {underCard ? <Flanks kind={kind} /> : kind === 'coastal' ? <>
       <Path d="M-295-20L-255-105L-195-120L-165-40L-95-75L-45-5L-90 38L-230 28Z M160 15L200-65L260-45L305 5L275 40Z" fill="#9CA99C" stroke="#385C59" strokeWidth="6" strokeLinejoin="round" />
       <Path d="M-255-105L-230-18L-165-40 M200-65L222 12L275 40" fill="none" stroke="#DCE0C9" strokeWidth="7" />
       <Pine x={-265} y={-45} size={0.7} />

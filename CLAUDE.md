@@ -1,5 +1,7 @@
 # Calm Frames: rules for every session
 
+**October 19 layout repair.** Branch `claude/ocean-layout-fix-2026-10-19`, from `c84f95d`. Island Home reads every position from `app/src/calmframes/homeIslands.ts` and `app/test/calmframes/homeIslands.test.tsx` fails if anything touches. Renders and the full-suite count are in results/home-islands-2026-10-19. Not installed natively yet. The Mac's Ocean/Forest categorization was never pushed and must be merged onto this branch, with its headings added to homeIslands.ts.
+
 **Forest activation, October 18.** Owner explicitly approved the exact Forest catalog, existing signer and fresh-package exclusions, plus build/install/playback checks. See results/forest-activation-2026-10-18/approval.json. Third island and concise purpose-first How it works are integrated; 499 app tests and 11 attribution tests pass. Installed source is 805f855 after one compile, bounded packaging recovery and one install; all three clips and help Back pass native text checks. Original namespace is backed up. No broader trust, PIN, capture or household preference changes. Earlier checkpoints below are history.
 
 **October 18 island refinement.** Owner accepted the coastal world and approved

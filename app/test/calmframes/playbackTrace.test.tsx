@@ -12,6 +12,7 @@
 import { act, fireEvent } from '@testing-library/react-native';
 import { setTraceEnabled, TRACE_PREFIX } from '../../src/calmframes/trace';
 import { mockBuffering, mockMedia, startPlayer } from './playbackUiHarness';
+import { DISMISS_CONTROLS_DELAY } from '../../src/utils/videoPlayerValues';
 
 let warn: jest.SpyInstance;
 const playbackLines = () => warn.mock.calls
@@ -50,7 +51,10 @@ test('the first picture, the cover and each wait are logged once each, with medi
   act(() => mockMedia.pause());
   act(() => { mockMedia.play(); });
   act(() => jest.advanceTimersByTime(5_000));
-  expect(playbackLines()).toHaveLength(before);
+  // Five seconds crosses DISMISS_CONTROLS_DELAY, and the controls going away
+  // is a change the log reports, once. Nothing else may be added.
+  expect(DISMISS_CONTROLS_DELAY).toBeLessThanOrEqual(5_100);
+  expect(playbackLines().slice(before)).toEqual([`${TRACE_PREFIX} playback controls hidden`]);
   expect(playbackLines().filter((line) => line.includes('picture-shown'))).toHaveLength(1);
 });
 

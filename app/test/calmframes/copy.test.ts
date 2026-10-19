@@ -109,7 +109,12 @@ describe('the sentence about what this is', () => {
 
   it('never turns into a promise anywhere in the app', () => {
     const banned = [/prevents? seizures/i, /seizure[- ]proof/i, /stops? seizures/i];
-    for (const name of fs.readdirSync(SOURCE_DIR)) {
+    // Every file, in every folder: on Oct 18 an integration/ folder made this
+    // read a directory and throw, and the guard stopped checking anything.
+    const names = (fs.readdirSync(SOURCE_DIR, { recursive: true }) as string[])
+      .filter((name) => fs.statSync(path.join(SOURCE_DIR, name)).isFile());
+    expect(names.some((name) => name.startsWith(`integration${path.sep}`))).toBe(true);
+    for (const name of names) {
       const text = fs.readFileSync(path.join(SOURCE_DIR, name), 'utf8');
       for (const phrase of banned) {
         expect(`${name}: ${phrase.source} ${phrase.test(text)}`).toBe(

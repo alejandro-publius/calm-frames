@@ -5,12 +5,11 @@ import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import Svg, { Path, Ellipse } from '@amazon-devices/react-native-svg';
 import { scale } from './calmStyles';
 import { IslandKind } from './CoastalIsland';
-const positions: Record<IslandKind, { x: number; y: number }> = {
-  coastal: { x: 440, y: 660 }, 'sea-otters': { x: 1408, y: 660 }, forest: { x: 924, y: 660 },
-};
+import { boatBox, HOME_ISLANDS } from './homeIslands';
 export default function CoastalBoat({ destination, enabled = false, active = true }: { destination: IslandKind; enabled?: boolean; active?: boolean }) {
   const manager = useKeplerAppStateManager();
-  const target = React.useMemo(() => ({ x: scale(positions[destination].x), y: scale(positions[destination].y) }), [destination]);
+  // In open water in front of the chosen island; homeIslands.ts keeps it clear of the cards and the sand.
+  const target = React.useMemo(() => ({ x: scale(boatBox(destination).left), y: scale(boatBox(destination).top) }), [destination]);
   const latest = React.useRef(target); latest.current = target;
   const previous = React.useRef(destination);
   const position = React.useRef(new Animated.ValueXY(target)).current;
@@ -55,7 +54,7 @@ export default function CoastalBoat({ destination, enabled = false, active = tru
     } else position.setValue(target);
   }, [destination, enabled, active, motionAllowed, position, target]);
   return <Animated.View testID={`coastal-boat-${destination}`} pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants"
-    style={{ position: 'absolute', left: 0, top: 0, width: scale(72), height: scale(62), transform: position.getTranslateTransform() }}>
+    style={{ position: 'absolute', left: 0, top: 0, width: scale(HOME_ISLANDS.BOAT.width), height: scale(HOME_ISLANDS.BOAT.height), transform: position.getTranslateTransform() }}>
     <Svg width="100%" height="100%" viewBox="0 0 72 62">
       <Ellipse cx="36" cy="51" rx="34" ry="8" fill="#386F70" />
       <Path d="M5 35H67L55 51H19Z" fill="#BB5944" stroke="#193F3E" strokeWidth="4" strokeLinejoin="round" />

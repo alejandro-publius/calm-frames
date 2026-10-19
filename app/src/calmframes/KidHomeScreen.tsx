@@ -1,6 +1,7 @@
 import React from 'react';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
 import { islandKind } from './CoastalIsland';
+import { HOME_ISLANDS, IslandSlotKind, islandCardBox, ScreenBox } from './homeIslands';
 import TouchableOpacity from './CalmTouchable';
 import {
   BackHandler,
@@ -52,6 +53,9 @@ import {
   KID_HOME_PROFILES_FOCUSED_FRAME,
   KID_HOME_PICKER_FRAME,
 } from './uiFrames';
+
+/** A block placed on the screen at a homeIslands.ts box, scaled from 1080p units. */
+const placed = (box: ScreenBox) => ({ position: 'absolute' as const, left: scale(box.left), top: scale(box.top), width: scale(box.width), height: scale(box.height) });
 
 /** The shelf control to restore after leaving a title or the parent area. */
 export type ReturnFocusControl = 'watch' | 'details' | 'poster' | 'parent';
@@ -165,6 +169,15 @@ const KidHomeScreen = ({
   // with no main video keeps its legacy posters for what it does hold.
   const otherStories = !hasMainStory ? listed
     : mainStories.length > 1 || !feature?.art ? mainStories : [];
+  // Every main video with an island of its own gets the island map, where
+  // each card stands on its island and every position comes from
+  // homeIslands.ts. Anything else keeps the flowing shelf.
+  const islandOf = (entry: CheckedTitle): IslandSlotKind | undefined => {
+    const art = titlePresentation(entry.title);
+    return art.menuArt ?? (art.art === 'coastal' ? 'coastal' : undefined);
+  };
+  const islandKinds = mainStories.map(islandOf);
+  const islandHome = !showIntroduction && hasMainStory && islandKinds.every(Boolean) && new Set(islandKinds).size === islandKinds.length;
   // Watching is the primary action. Unavailable titles stay in Parents.
   const featuredAction = feature?.action === 'Watch now' ? 'Watch' : feature?.action;
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
@@ -221,40 +234,18 @@ const KidHomeScreen = ({
   }
   useUiCapture(frame, reason);
 
-  return (
-    <WorldAppearance.Provider value={!empty && !showIntroduction}><View testID={testID} style={[styles.screen, !empty && !showIntroduction && { backgroundColor: WORLD.BACKGROUND }]}>
-      {!empty && !showIntroduction ? <CoastalWorld destination={islandKind(feature?.menuArt ?? feature?.art)} showBoat={feature?.art === 'coastal' || Boolean(feature?.menuArt)} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
-      <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
-          {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
-            disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
-            onPress={() => { setReturnToHeader(null); setChoosingProfile(!choosingProfile); }} /> : null}
-          {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-learn`} label="How it works" accessibilityLabel="How it works" hasTVPreferredFocus={returnTo === 'learn'}
-            disabled={saving} onPress={() => { setChoosingProfile(false); setReturnToHeader(null); setShowIntroduction(true); }} /></View> : null}
-          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parents" accessibilityLabel="Parents: parental controls, needs a PIN" hasTVPreferredFocus={(empty || returnTo === 'parent') && !saving && !showIntroduction} onPress={onOpenParentArea} /></View> : null}
-      </CalmPageHeader>
-      {choosingProfile && picking && profiles && onChooseProfile ? (
-        <ProfilePicker disabled={saving || undefined} testID={`${testID}-profiles`} title={PROFILES_KID_TITLE}
-          chosenWord={WATCHING_STATE_WORD} chosenLine={whoIsWatching((profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name)}
-          profiles={profiles} activeProfileId={activeProfileId ?? profiles[0].id} onChoose={onChooseProfile} />
-      ) : null}
-      {showIntroduction ? <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false}><PictureHoldIntroduction disabled={saving} onDemoDetails={demo ? () => onOpen(demo) : undefined} onPlaybackCheck={playbackCheck ? () => onOpen(playbackCheck) : undefined} onStart={demo ? () => {
-        if (!saving) { setShowIntroduction(false); setReturnToHeader('learn'); (onPlay ?? onOpen)(demo); }
-      } : undefined} /></ScrollView> : empty ? (
-        <StatusNotice
-          testID={`${testID}-empty`}
-          notice={offline ? BACKEND_UNREACHABLE_EMPTY : NO_TITLES}
-        />
-      ) : (
-        <>
-          {offline ? (
-            <View style={styles.banner}>
-              <StatusNotice testID={`${testID}-offline`} notice={BACKEND_UNREACHABLE} />
-            </View>
-          ) : null}
-          <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-            {featured && feature ? <View style={styles.hero}>
+  const headingBox: ScreenBox = { left: CALM_SPACE.SAFE_X, top: HOME_ISLANDS.HEADING.top, width: 1920 - 2 * CALM_SPACE.SAFE_X, height: HOME_ISLANDS.HEADING.height };
+  const flowing = !islandHome;
+  // On the island map the picker takes the row of cards while it is open, so
+  // nothing it says sits under a card; the cards come back when it closes.
+  const picker = choosingProfile && picking && profiles && onChooseProfile ? (
+    <ProfilePicker disabled={saving || undefined} testID={`${testID}-profiles`} title={PROFILES_KID_TITLE}
+      chosenWord={WATCHING_STATE_WORD} chosenLine={whoIsWatching((profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name)}
+      profiles={profiles} activeProfileId={activeProfileId ?? profiles[0].id} onChoose={onChooseProfile} />
+  ) : null;
+  const hero = featured && feature ? <View testID={`${testID}-hero`} style={islandHome ? [styles.islandHero, placed(HOME_ISLANDS.HERO)] : styles.hero}>
               <View style={styles.heroCopy}>
-                <Text accessibilityRole="header" style={[styles.featureTitle, CALM_TEXT.section]} testID={`${testID}-video-title`}>{feature.name}</Text>
+                <Text accessibilityRole="header" numberOfLines={1} style={[styles.featureTitle, CALM_TEXT.section]} testID={`${testID}-video-title`}>{feature.name}</Text>
                 <Text style={styles.videoMeta} testID={`${testID}-video-meta`}>{[feature.runtime ?? runtimeLabel(featured.title.durationMs), isBundledBenignStory(featured.title) ? 'Simulated demo' : null].filter(Boolean).join(' · ')}</Text>
                 <View style={styles.actions}>
                   <CalmButton primary playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
@@ -262,10 +253,9 @@ const KidHomeScreen = ({
                   <CalmButton quiet tertiary compact onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" accessibilityLabel={`Details: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
               </View>
-            </View> : null}
-            {otherStories.length > 0 ? <View style={styles.sectionHeading}><Text accessibilityRole="header" testID={`${testID}-title`} style={styles.section}>Choose an island</Text></View> : null}
-            <View style={styles.grid}>
-              {otherStories.map((entry) => {
+            </View> : null;
+  const heading = <View testID={`${testID}-heading`} style={islandHome ? [styles.islandHeading, placed(headingBox)] : styles.sectionHeading}><Text accessibilityRole="header" testID={`${testID}-title`} style={styles.section}>Choose an island</Text></View>;
+  const poster = (entry: CheckedTitle) => {
                 const focused = focusedId === entry.title.id;
                 const selected = featured?.title.id === entry.title.id;
                 const label = titlePresentation(entry.title);
@@ -276,16 +266,57 @@ const KidHomeScreen = ({
                   onFocus={() => { setFocusedId(entry.title.id); setSelectedId(entry.title.id); onSelectTitle?.(entry.title.id); }} onBlur={() => setFocusedId(null)} onPress={() => {
                     if (!saving) { onLaunchControl?.('poster'); onOpen(entry); feedback.confirm(); }
                   }}
-                  style={[styles.poster, selected ? styles.posterSelected : null, focused ? styles.posterFocused : null]}>
+                  style={[styles.poster, islandHome ? [styles.islandCard, placed(islandCardBox(islandOf(entry)!))] : null, selected ? styles.posterSelected : null, focused ? styles.posterFocused : null]}>
                   <Image source={!label.menuArt && !label.art && shelfPoster(entry) ? { uri: shelfPoster(entry) } : filmStill(label.menuArt ?? label.art)} style={styles.filmStill} resizeMode="cover" fadeDuration={0} testID={`${testID}-poster-image-${entry.title.id}`} accessible={false} />
                   <View style={styles.posterCopy}>
                   <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
                   {label.kind ? <Text style={styles.posterQualifier} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{label.selectorMeta ?? label.kind}</Text> : null}
                   </View>
                 </TouchableOpacity>;
-              })}
+              };
+
+  return (
+    <WorldAppearance.Provider value={!empty && !showIntroduction}><View testID={testID} style={[styles.screen, !empty && !showIntroduction && { backgroundColor: WORLD.BACKGROUND }]}>
+      {!empty && !showIntroduction ? <CoastalWorld destination={islandKind(feature?.menuArt ?? feature?.art)} cardKinds={islandHome ? otherStories.map((entry) => islandOf(entry)!) : []} showBoat={feature?.art === 'coastal' || Boolean(feature?.menuArt)} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
+      <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
+          {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
+            disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
+            onPress={() => { setReturnToHeader(null); setChoosingProfile(!choosingProfile); }} /> : null}
+          {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-learn`} label="How it works" accessibilityLabel="How it works" hasTVPreferredFocus={returnTo === 'learn'}
+            disabled={saving} onPress={() => { setChoosingProfile(false); setReturnToHeader(null); setShowIntroduction(true); }} /></View> : null}
+          {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parents" accessibilityLabel="Parents: parental controls, needs a PIN" hasTVPreferredFocus={(empty || returnTo === 'parent') && !saving && !showIntroduction} onPress={onOpenParentArea} /></View> : null}
+      </CalmPageHeader>
+      {flowing ? picker : null}
+      {showIntroduction ? <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false}><PictureHoldIntroduction disabled={saving} onDemoDetails={demo ? () => onOpen(demo) : undefined} onPlaybackCheck={playbackCheck ? () => onOpen(playbackCheck) : undefined} onStart={demo ? () => {
+        if (!saving) { setShowIntroduction(false); setReturnToHeader('learn'); (onPlay ?? onOpen)(demo); }
+      } : undefined} /></ScrollView> : empty ? (
+        <StatusNotice
+          testID={`${testID}-empty`}
+          notice={offline ? BACKEND_UNREACHABLE_EMPTY : NO_TITLES}
+        />
+      ) : (
+        <>
+          {offline && flowing ? (
+            <View style={styles.banner}>
+              <StatusNotice testID={`${testID}-offline`} notice={BACKEND_UNREACHABLE} />
             </View>
-          </ScrollView>
+          ) : null}
+          {flowing ? <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+            {hero}
+            {otherStories.length > 0 ? heading : null}
+            <View style={styles.grid}>
+              {otherStories.map(poster)}
+            </View>
+          </ScrollView> : <View testID={`${testID}-islands`} style={styles.islandLayer} pointerEvents="box-none">
+            {picker ? <View testID={`${testID}-picker-panel`} style={[styles.pickerPanel, placed(HOME_ISLANDS.PICKER), { height: undefined, minHeight: scale(HOME_ISLANDS.PICKER.height) }]}>{picker}</View> : <>
+              {otherStories.length > 0 ? heading : null}
+              {otherStories.map(poster)}
+            </>}
+            {hero}
+            {offline ? <View testID={`${testID}-notice-slot`} style={placed(HOME_ISLANDS.NOTICE)}>
+              <StatusNotice testID={`${testID}-offline`} notice={BACKEND_UNREACHABLE} />
+            </View> : null}
+          </View>}
         </>
       )}
     </View></WorldAppearance.Provider>
@@ -318,6 +349,11 @@ const styles = StyleSheet.create({
   posterFocused: { borderColor: WORLD.FOCUS_RING, backgroundColor: WORLD.SURFACE_FOCUSED },
   filmStill: { width: '100%', height: scale(164), borderRadius: scale(10) },
   posterCopy: { paddingHorizontal: scale(4), paddingTop: scale(8) },
+  islandLayer: { ...StyleSheet.absoluteFillObject },
+  islandHeading: { alignItems: 'center', justifyContent: 'center' },
+  islandHero: { alignItems: 'flex-start', justifyContent: 'flex-end' },
+  islandCard: { minHeight: undefined, justifyContent: 'flex-start' },
+  pickerPanel: { padding: scale(24), paddingBottom: 0, borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: WORLD.BORDER, backgroundColor: WORLD.SURFACE },
   posterTitle: { ...CALM_TEXT.section, color: WORLD.TEXT },
   posterQualifier: { ...CALM_TEXT.supporting, color: WORLD.TEXT_DIM },
 });

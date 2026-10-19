@@ -1,0 +1,10 @@
+FAIL test/calmframes/artworkMotion.test.tsx
+FAIL test/calmframes/coastalExport.test.tsx
+FAIL test/calmframes/shelf.test.tsx
+FAIL test/calmframes/uiCapture.test.tsx
+FAIL test/components/Player.test.tsx
+FAIL test/navigation/DrawerItem.test.tsx
+Snapshots:   3 failed, 54 passed, 57 total
+Test Suites: 6 failed, 1 skipped, 157 passed, 163 of 164 total
+Tests:       16 failed, 4 skipped, 1651 passed, 1671 total
+Time:        38.549 s

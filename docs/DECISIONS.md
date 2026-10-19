@@ -2698,3 +2698,18 @@ and results/forest-candidate-2026-10-18.
 ## October 18: activate the exact approved Forest excerpt
 
 Owner explicitly approved catalog 24d5cb11, bundle 77d43b66, existing signer and the fresh namespace excluding obsolete river-otter 4064f489 and old Harbor 89496fc4. Original 59-file namespace was moved intact to build/forest-activation-2026-10-18/original-prepared-library; 40 retained files match. Add only this consumer catalog, with Forest between Acadia and Sea Otters. Keep player guards, Acadia ocean media, settings and ambient registration unchanged. Replace repetitive How it works paragraphs with purpose, qualified ocean/audio behavior, Watch/Back, scope and concise limitations. Remove the developer scene-bridge shortcut from consumer help. Cost: local build/test only; no AWS or external publication.
+
+## October 19: one geometry for the island Home, measured by a test
+
+Home's heading, map decorations, cards and Watch collided on the TV. The map
+and the controls had no shared coordinates, so make `homeIslands.ts` the single
+source for both and stack the bands so every word and control sits on one flat
+colour. Spread the islands to 400, 960 and 1520 at 0.8 scale so they and their
+rings never meet, move each island's landmarks to the strips beside its card,
+put the boat in open water on its route, put the offline notice and the
+profile picker in fixed slots so neither moves the map, and keep the old
+flowing layout for any shelf that is not all islands. A 15 test suite measures
+the rendered boxes and SVG shapes and was seen to fail six ways. Also: the
+approved-wording guard had stopped running when `integration/` was added, so
+it now recurses. Cost: no media, trust, signing, catalog or player change; one
+install needed to see it natively. Evidence: results/home-islands-2026-10-19.

@@ -35,6 +35,7 @@ export const MIRRORED = [
   'CoastalWorld.tsx',
   'CoastalIsland.tsx',
   'CoastalBoat.tsx',
+  'homeIslands.ts',
   'trace.ts',
   'calmStyles.ts',
   'canonicalJson.ts',

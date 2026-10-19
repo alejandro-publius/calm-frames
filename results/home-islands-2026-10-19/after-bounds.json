@@ -1,0 +1,2074 @@
+{
+ "home-acadia-alone": [
+  {
+   "id": "kid-home",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 742,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 764,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-route",
+   "left": 400,
+   "top": 683,
+   "right": 1520,
+   "bottom": 699
+  },
+  {
+   "id": "island-forest",
+   "left": 686,
+   "top": 433,
+   "right": 1232,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-forest",
+   "left": 686,
+   "top": 447,
+   "right": 1226,
+   "bottom": 638
+  },
+  {
+   "id": "island-coastal",
+   "left": 128,
+   "top": 365,
+   "right": 672,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-coastal",
+   "left": 129,
+   "top": 365,
+   "right": 653,
+   "bottom": 563
+  },
+  {
+   "id": "island-sea-otters",
+   "left": 1240,
+   "top": 446,
+   "right": 1798,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-sea-otters",
+   "left": 1240,
+   "top": 486,
+   "right": 1798,
+   "bottom": 622
+  },
+  {
+   "id": "home-ripple",
+   "left": 16,
+   "top": 461,
+   "right": 112,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 1808,
+   "top": 461,
+   "right": 1904,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 150,
+   "top": 691,
+   "right": 246,
+   "bottom": 709
+  },
+  {
+   "id": "home-ripple",
+   "left": 1660,
+   "top": 691,
+   "right": 1756,
+   "bottom": 709
+  },
+  {
+   "id": "coastal-boat-coastal",
+   "left": 364,
+   "top": 660,
+   "right": 436,
+   "bottom": 722
+  },
+  {
+   "id": "kid-home-learn",
+   "left": 1426,
+   "top": 54,
+   "right": 1651,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-learn-label",
+   "left": 1452,
+   "top": 77,
+   "right": 1625,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-parent-area",
+   "left": 1671,
+   "top": 54,
+   "right": 1824,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-parent-area-label",
+   "left": 1697,
+   "top": 77,
+   "right": 1798,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-islands",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "kid-home-hero",
+   "left": 96,
+   "top": 798,
+   "right": 916,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-video-title",
+   "left": 96,
+   "top": 798,
+   "right": 233,
+   "bottom": 852
+  },
+  {
+   "id": "kid-home-video-meta",
+   "left": 96,
+   "top": 864,
+   "right": 243,
+   "bottom": 906
+  },
+  {
+   "id": "kid-home-watch",
+   "left": 96,
+   "top": 938,
+   "right": 336,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-watch-label",
+   "left": 188,
+   "top": 959,
+   "right": 284,
+   "bottom": 1005
+  },
+  {
+   "id": "kid-home-more-info",
+   "left": 356,
+   "top": 938,
+   "right": 499,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-more-info-label",
+   "left": 382,
+   "top": 961,
+   "right": 473,
+   "bottom": 1003
+  }
+ ],
+ "home-card-coastal": [
+  {
+   "id": "kid-home",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 742,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 764,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-route",
+   "left": 400,
+   "top": 683,
+   "right": 1520,
+   "bottom": 699
+  },
+  {
+   "id": "island-forest",
+   "left": 686,
+   "top": 433,
+   "right": 1232,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-forest",
+   "left": 686,
+   "top": 447,
+   "right": 1226,
+   "bottom": 638
+  },
+  {
+   "id": "island-coastal",
+   "left": 128,
+   "top": 365,
+   "right": 672,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-coastal",
+   "left": 129,
+   "top": 365,
+   "right": 653,
+   "bottom": 563
+  },
+  {
+   "id": "island-sea-otters",
+   "left": 1240,
+   "top": 446,
+   "right": 1798,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-sea-otters",
+   "left": 1240,
+   "top": 486,
+   "right": 1798,
+   "bottom": 622
+  },
+  {
+   "id": "home-ripple",
+   "left": 16,
+   "top": 461,
+   "right": 112,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 1808,
+   "top": 461,
+   "right": 1904,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 150,
+   "top": 691,
+   "right": 246,
+   "bottom": 709
+  },
+  {
+   "id": "home-ripple",
+   "left": 1660,
+   "top": 691,
+   "right": 1756,
+   "bottom": 709
+  },
+  {
+   "id": "coastal-boat-coastal",
+   "left": 364,
+   "top": 660,
+   "right": 436,
+   "bottom": 722
+  },
+  {
+   "id": "kid-home-choose-profile",
+   "left": 1229,
+   "top": 54,
+   "right": 1406,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-choose-profile-label",
+   "left": 1255,
+   "top": 77,
+   "right": 1380,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-learn",
+   "left": 1426,
+   "top": 54,
+   "right": 1651,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-learn-label",
+   "left": 1452,
+   "top": 77,
+   "right": 1625,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-parent-area",
+   "left": 1671,
+   "top": 54,
+   "right": 1824,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-parent-area-label",
+   "left": 1697,
+   "top": 77,
+   "right": 1798,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-islands",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "kid-home-heading",
+   "left": 96,
+   "top": 166,
+   "right": 1824,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-title",
+   "left": 792,
+   "top": 166,
+   "right": 1128,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 200,
+   "top": 292,
+   "right": 600,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 218,
+   "top": 310,
+   "right": 582,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 482,
+   "right": 578,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 536,
+   "right": 578,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 760,
+   "top": 292,
+   "right": 1160,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 778,
+   "top": 310,
+   "right": 1142,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 782,
+   "top": 482,
+   "right": 1138,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 782,
+   "top": 536,
+   "right": 1138,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1320,
+   "top": 292,
+   "right": 1720,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1338,
+   "top": 310,
+   "right": 1702,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1342,
+   "top": 482,
+   "right": 1698,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1342,
+   "top": 536,
+   "right": 1698,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-hero",
+   "left": 96,
+   "top": 798,
+   "right": 916,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-video-title",
+   "left": 96,
+   "top": 798,
+   "right": 233,
+   "bottom": 852
+  },
+  {
+   "id": "kid-home-video-meta",
+   "left": 96,
+   "top": 864,
+   "right": 243,
+   "bottom": 906
+  },
+  {
+   "id": "kid-home-watch",
+   "left": 96,
+   "top": 938,
+   "right": 336,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-watch-label",
+   "left": 188,
+   "top": 959,
+   "right": 284,
+   "bottom": 1005
+  },
+  {
+   "id": "kid-home-more-info",
+   "left": 356,
+   "top": 938,
+   "right": 499,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-more-info-label",
+   "left": 382,
+   "top": 961,
+   "right": 473,
+   "bottom": 1003
+  }
+ ],
+ "home-card-forest": [
+  {
+   "id": "kid-home",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 742,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 764,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-route",
+   "left": 400,
+   "top": 683,
+   "right": 1520,
+   "bottom": 699
+  },
+  {
+   "id": "island-forest",
+   "left": 686,
+   "top": 433,
+   "right": 1232,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-forest",
+   "left": 686,
+   "top": 447,
+   "right": 1226,
+   "bottom": 638
+  },
+  {
+   "id": "island-coastal",
+   "left": 128,
+   "top": 365,
+   "right": 672,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-coastal",
+   "left": 129,
+   "top": 365,
+   "right": 653,
+   "bottom": 563
+  },
+  {
+   "id": "island-sea-otters",
+   "left": 1240,
+   "top": 446,
+   "right": 1798,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-sea-otters",
+   "left": 1240,
+   "top": 486,
+   "right": 1798,
+   "bottom": 622
+  },
+  {
+   "id": "home-ripple",
+   "left": 16,
+   "top": 461,
+   "right": 112,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 1808,
+   "top": 461,
+   "right": 1904,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 150,
+   "top": 691,
+   "right": 246,
+   "bottom": 709
+  },
+  {
+   "id": "home-ripple",
+   "left": 1660,
+   "top": 691,
+   "right": 1756,
+   "bottom": 709
+  },
+  {
+   "id": "coastal-boat-forest",
+   "left": 924,
+   "top": 660,
+   "right": 996,
+   "bottom": 722
+  },
+  {
+   "id": "kid-home-choose-profile",
+   "left": 1229,
+   "top": 54,
+   "right": 1406,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-choose-profile-label",
+   "left": 1255,
+   "top": 77,
+   "right": 1380,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-learn",
+   "left": 1426,
+   "top": 54,
+   "right": 1651,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-learn-label",
+   "left": 1452,
+   "top": 77,
+   "right": 1625,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-parent-area",
+   "left": 1671,
+   "top": 54,
+   "right": 1824,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-parent-area-label",
+   "left": 1697,
+   "top": 77,
+   "right": 1798,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-islands",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "kid-home-heading",
+   "left": 96,
+   "top": 166,
+   "right": 1824,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-title",
+   "left": 792,
+   "top": 166,
+   "right": 1128,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 200,
+   "top": 292,
+   "right": 600,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 218,
+   "top": 310,
+   "right": 582,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 482,
+   "right": 578,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 536,
+   "right": 578,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 760,
+   "top": 292,
+   "right": 1160,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 778,
+   "top": 310,
+   "right": 1142,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 782,
+   "top": 482,
+   "right": 1138,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 782,
+   "top": 536,
+   "right": 1138,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1320,
+   "top": 292,
+   "right": 1720,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1338,
+   "top": 310,
+   "right": 1702,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1342,
+   "top": 482,
+   "right": 1698,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1342,
+   "top": 536,
+   "right": 1698,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-hero",
+   "left": 96,
+   "top": 798,
+   "right": 916,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-video-title",
+   "left": 96,
+   "top": 798,
+   "right": 588,
+   "bottom": 852
+  },
+  {
+   "id": "kid-home-video-meta",
+   "left": 96,
+   "top": 864,
+   "right": 621,
+   "bottom": 906
+  },
+  {
+   "id": "kid-home-watch",
+   "left": 96,
+   "top": 938,
+   "right": 336,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-watch-label",
+   "left": 188,
+   "top": 959,
+   "right": 284,
+   "bottom": 1005
+  },
+  {
+   "id": "kid-home-more-info",
+   "left": 356,
+   "top": 938,
+   "right": 499,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-more-info-label",
+   "left": 382,
+   "top": 961,
+   "right": 473,
+   "bottom": 1003
+  }
+ ],
+ "home-card-sea-otters": [
+  {
+   "id": "kid-home",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 742,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 764,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-route",
+   "left": 400,
+   "top": 683,
+   "right": 1520,
+   "bottom": 699
+  },
+  {
+   "id": "island-forest",
+   "left": 686,
+   "top": 433,
+   "right": 1232,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-forest",
+   "left": 686,
+   "top": 447,
+   "right": 1226,
+   "bottom": 638
+  },
+  {
+   "id": "island-coastal",
+   "left": 128,
+   "top": 365,
+   "right": 672,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-coastal",
+   "left": 129,
+   "top": 365,
+   "right": 653,
+   "bottom": 563
+  },
+  {
+   "id": "island-sea-otters",
+   "left": 1240,
+   "top": 446,
+   "right": 1798,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-sea-otters",
+   "left": 1240,
+   "top": 486,
+   "right": 1798,
+   "bottom": 622
+  },
+  {
+   "id": "home-ripple",
+   "left": 16,
+   "top": 461,
+   "right": 112,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 1808,
+   "top": 461,
+   "right": 1904,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 150,
+   "top": 691,
+   "right": 246,
+   "bottom": 709
+  },
+  {
+   "id": "home-ripple",
+   "left": 1660,
+   "top": 691,
+   "right": 1756,
+   "bottom": 709
+  },
+  {
+   "id": "coastal-boat-sea-otters",
+   "left": 1484,
+   "top": 660,
+   "right": 1556,
+   "bottom": 722
+  },
+  {
+   "id": "kid-home-choose-profile",
+   "left": 1229,
+   "top": 54,
+   "right": 1406,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-choose-profile-label",
+   "left": 1255,
+   "top": 77,
+   "right": 1380,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-learn",
+   "left": 1426,
+   "top": 54,
+   "right": 1651,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-learn-label",
+   "left": 1452,
+   "top": 77,
+   "right": 1625,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-parent-area",
+   "left": 1671,
+   "top": 54,
+   "right": 1824,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-parent-area-label",
+   "left": 1697,
+   "top": 77,
+   "right": 1798,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-islands",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "kid-home-heading",
+   "left": 96,
+   "top": 166,
+   "right": 1824,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-title",
+   "left": 792,
+   "top": 166,
+   "right": 1128,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 200,
+   "top": 292,
+   "right": 600,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 218,
+   "top": 310,
+   "right": 582,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 482,
+   "right": 578,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 536,
+   "right": 578,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 760,
+   "top": 292,
+   "right": 1160,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 778,
+   "top": 310,
+   "right": 1142,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 782,
+   "top": 482,
+   "right": 1138,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 782,
+   "top": 536,
+   "right": 1138,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1320,
+   "top": 292,
+   "right": 1720,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1338,
+   "top": 310,
+   "right": 1702,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1342,
+   "top": 482,
+   "right": 1698,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1342,
+   "top": 536,
+   "right": 1698,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-hero",
+   "left": 96,
+   "top": 798,
+   "right": 916,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-video-title",
+   "left": 96,
+   "top": 798,
+   "right": 487,
+   "bottom": 852
+  },
+  {
+   "id": "kid-home-video-meta",
+   "left": 96,
+   "top": 864,
+   "right": 504,
+   "bottom": 906
+  },
+  {
+   "id": "kid-home-watch",
+   "left": 96,
+   "top": 938,
+   "right": 336,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-watch-label",
+   "left": 188,
+   "top": 959,
+   "right": 284,
+   "bottom": 1005
+  },
+  {
+   "id": "kid-home-more-info",
+   "left": 356,
+   "top": 938,
+   "right": 499,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-more-info-label",
+   "left": 382,
+   "top": 961,
+   "right": 473,
+   "bottom": 1003
+  }
+ ],
+ "home-offline": [
+  {
+   "id": "kid-home",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 742,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 764,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-route",
+   "left": 400,
+   "top": 683,
+   "right": 1520,
+   "bottom": 699
+  },
+  {
+   "id": "island-forest",
+   "left": 686,
+   "top": 433,
+   "right": 1232,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-forest",
+   "left": 686,
+   "top": 447,
+   "right": 1226,
+   "bottom": 638
+  },
+  {
+   "id": "island-coastal",
+   "left": 128,
+   "top": 365,
+   "right": 672,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-coastal",
+   "left": 129,
+   "top": 365,
+   "right": 653,
+   "bottom": 563
+  },
+  {
+   "id": "island-sea-otters",
+   "left": 1240,
+   "top": 446,
+   "right": 1798,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-sea-otters",
+   "left": 1240,
+   "top": 486,
+   "right": 1798,
+   "bottom": 622
+  },
+  {
+   "id": "home-ripple",
+   "left": 16,
+   "top": 461,
+   "right": 112,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 1808,
+   "top": 461,
+   "right": 1904,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 150,
+   "top": 691,
+   "right": 246,
+   "bottom": 709
+  },
+  {
+   "id": "home-ripple",
+   "left": 1660,
+   "top": 691,
+   "right": 1756,
+   "bottom": 709
+  },
+  {
+   "id": "coastal-boat-coastal",
+   "left": 364,
+   "top": 660,
+   "right": 436,
+   "bottom": 722
+  },
+  {
+   "id": "kid-home-learn",
+   "left": 1426,
+   "top": 54,
+   "right": 1651,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-learn-label",
+   "left": 1452,
+   "top": 77,
+   "right": 1625,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-parent-area",
+   "left": 1671,
+   "top": 54,
+   "right": 1824,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-parent-area-label",
+   "left": 1697,
+   "top": 77,
+   "right": 1798,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-islands",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "kid-home-heading",
+   "left": 96,
+   "top": 166,
+   "right": 1824,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-title",
+   "left": 792,
+   "top": 166,
+   "right": 1128,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 200,
+   "top": 292,
+   "right": 600,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 218,
+   "top": 310,
+   "right": 582,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 482,
+   "right": 578,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 536,
+   "right": 578,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 760,
+   "top": 292,
+   "right": 1160,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 778,
+   "top": 310,
+   "right": 1142,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 782,
+   "top": 482,
+   "right": 1138,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 782,
+   "top": 536,
+   "right": 1138,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1320,
+   "top": 292,
+   "right": 1720,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1338,
+   "top": 310,
+   "right": 1702,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1342,
+   "top": 482,
+   "right": 1698,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1342,
+   "top": 536,
+   "right": 1698,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-hero",
+   "left": 96,
+   "top": 798,
+   "right": 916,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-video-title",
+   "left": 96,
+   "top": 798,
+   "right": 233,
+   "bottom": 852
+  },
+  {
+   "id": "kid-home-video-meta",
+   "left": 96,
+   "top": 864,
+   "right": 243,
+   "bottom": 906
+  },
+  {
+   "id": "kid-home-watch",
+   "left": 96,
+   "top": 938,
+   "right": 336,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-watch-label",
+   "left": 188,
+   "top": 959,
+   "right": 284,
+   "bottom": 1005
+  },
+  {
+   "id": "kid-home-more-info",
+   "left": 356,
+   "top": 938,
+   "right": 499,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-more-info-label",
+   "left": 382,
+   "top": 961,
+   "right": 473,
+   "bottom": 1003
+  },
+  {
+   "id": "kid-home-notice-slot",
+   "left": 1000,
+   "top": 798,
+   "right": 1824,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-offline",
+   "left": 1000,
+   "top": 798,
+   "right": 1824,
+   "bottom": 1024
+  },
+  {
+   "id": "kid-home-offline-announcement",
+   "left": 1040,
+   "top": 830,
+   "right": 1792,
+   "bottom": 992
+  },
+  {
+   "id": "kid-home-offline-title",
+   "left": 1040,
+   "top": 830,
+   "right": 1792,
+   "bottom": 884
+  },
+  {
+   "id": "kid-home-offline-detail",
+   "left": 1040,
+   "top": 896,
+   "right": 1792,
+   "bottom": 992
+  }
+ ],
+ "home-picker": [
+  {
+   "id": "kid-home",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 742,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 764,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-route",
+   "left": 400,
+   "top": 683,
+   "right": 1520,
+   "bottom": 699
+  },
+  {
+   "id": "island-forest",
+   "left": 686,
+   "top": 433,
+   "right": 1232,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-forest",
+   "left": 686,
+   "top": 447,
+   "right": 1226,
+   "bottom": 638
+  },
+  {
+   "id": "island-coastal",
+   "left": 128,
+   "top": 365,
+   "right": 672,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-coastal",
+   "left": 129,
+   "top": 365,
+   "right": 653,
+   "bottom": 563
+  },
+  {
+   "id": "island-sea-otters",
+   "left": 1240,
+   "top": 446,
+   "right": 1798,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-sea-otters",
+   "left": 1240,
+   "top": 486,
+   "right": 1798,
+   "bottom": 622
+  },
+  {
+   "id": "home-ripple",
+   "left": 16,
+   "top": 461,
+   "right": 112,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 1808,
+   "top": 461,
+   "right": 1904,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 150,
+   "top": 691,
+   "right": 246,
+   "bottom": 709
+  },
+  {
+   "id": "home-ripple",
+   "left": 1660,
+   "top": 691,
+   "right": 1756,
+   "bottom": 709
+  },
+  {
+   "id": "coastal-boat-forest",
+   "left": 924,
+   "top": 660,
+   "right": 996,
+   "bottom": 722
+  },
+  {
+   "id": "kid-home-choose-profile",
+   "left": 1229,
+   "top": 54,
+   "right": 1406,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-choose-profile-label",
+   "left": 1255,
+   "top": 77,
+   "right": 1380,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-learn",
+   "left": 1426,
+   "top": 54,
+   "right": 1651,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-learn-label",
+   "left": 1452,
+   "top": 77,
+   "right": 1625,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-parent-area",
+   "left": 1671,
+   "top": 54,
+   "right": 1824,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-parent-area-label",
+   "left": 1697,
+   "top": 77,
+   "right": 1798,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-islands",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "kid-home-picker-panel",
+   "left": 200,
+   "top": 292,
+   "right": 1720,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-profiles",
+   "left": 230,
+   "top": 322,
+   "right": 1690,
+   "bottom": 546
+  },
+  {
+   "id": "kid-home-profiles-title",
+   "left": 230,
+   "top": 322,
+   "right": 1690,
+   "bottom": 376
+  },
+  {
+   "id": "kid-home-profiles-everyone",
+   "left": 230,
+   "top": 396,
+   "right": 493,
+   "bottom": 478
+  },
+  {
+   "id": "kid-home-profiles-everyone-name",
+   "left": 310,
+   "top": 414,
+   "right": 455,
+   "bottom": 460
+  },
+  {
+   "id": "kid-home-profiles-chosen",
+   "left": 230,
+   "top": 498,
+   "right": 1690,
+   "bottom": 546
+  },
+  {
+   "id": "kid-home-hero",
+   "left": 96,
+   "top": 798,
+   "right": 916,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-video-title",
+   "left": 96,
+   "top": 798,
+   "right": 588,
+   "bottom": 852
+  },
+  {
+   "id": "kid-home-video-meta",
+   "left": 96,
+   "top": 864,
+   "right": 621,
+   "bottom": 906
+  },
+  {
+   "id": "kid-home-watch",
+   "left": 96,
+   "top": 938,
+   "right": 336,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-watch-label",
+   "left": 188,
+   "top": 959,
+   "right": 284,
+   "bottom": 1005
+  },
+  {
+   "id": "kid-home-more-info",
+   "left": 356,
+   "top": 938,
+   "right": 499,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-more-info-label",
+   "left": 382,
+   "top": 961,
+   "right": 473,
+   "bottom": 1003
+  }
+ ],
+ "home-watch": [
+  {
+   "id": "kid-home",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 742,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 764,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-route",
+   "left": 400,
+   "top": 683,
+   "right": 1520,
+   "bottom": 699
+  },
+  {
+   "id": "island-forest",
+   "left": 686,
+   "top": 433,
+   "right": 1232,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-forest",
+   "left": 686,
+   "top": 447,
+   "right": 1226,
+   "bottom": 638
+  },
+  {
+   "id": "island-coastal",
+   "left": 128,
+   "top": 365,
+   "right": 672,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-coastal",
+   "left": 129,
+   "top": 365,
+   "right": 653,
+   "bottom": 563
+  },
+  {
+   "id": "island-sea-otters",
+   "left": 1240,
+   "top": 446,
+   "right": 1798,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-sea-otters",
+   "left": 1240,
+   "top": 486,
+   "right": 1798,
+   "bottom": 622
+  },
+  {
+   "id": "home-ripple",
+   "left": 16,
+   "top": 461,
+   "right": 112,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 1808,
+   "top": 461,
+   "right": 1904,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 150,
+   "top": 691,
+   "right": 246,
+   "bottom": 709
+  },
+  {
+   "id": "home-ripple",
+   "left": 1660,
+   "top": 691,
+   "right": 1756,
+   "bottom": 709
+  },
+  {
+   "id": "coastal-boat-coastal",
+   "left": 364,
+   "top": 660,
+   "right": 436,
+   "bottom": 722
+  },
+  {
+   "id": "kid-home-choose-profile",
+   "left": 1229,
+   "top": 54,
+   "right": 1406,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-choose-profile-label",
+   "left": 1255,
+   "top": 77,
+   "right": 1380,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-learn",
+   "left": 1426,
+   "top": 54,
+   "right": 1651,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-learn-label",
+   "left": 1452,
+   "top": 77,
+   "right": 1625,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-parent-area",
+   "left": 1671,
+   "top": 54,
+   "right": 1824,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-parent-area-label",
+   "left": 1697,
+   "top": 77,
+   "right": 1798,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-islands",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "kid-home-heading",
+   "left": 96,
+   "top": 166,
+   "right": 1824,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-title",
+   "left": 792,
+   "top": 166,
+   "right": 1128,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 200,
+   "top": 292,
+   "right": 600,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 218,
+   "top": 310,
+   "right": 582,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 482,
+   "right": 578,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 536,
+   "right": 578,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 760,
+   "top": 292,
+   "right": 1160,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 778,
+   "top": 310,
+   "right": 1142,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 782,
+   "top": 482,
+   "right": 1138,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 782,
+   "top": 536,
+   "right": 1138,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1320,
+   "top": 292,
+   "right": 1720,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1338,
+   "top": 310,
+   "right": 1702,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1342,
+   "top": 482,
+   "right": 1698,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 1342,
+   "top": 536,
+   "right": 1698,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-hero",
+   "left": 96,
+   "top": 798,
+   "right": 916,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-video-title",
+   "left": 96,
+   "top": 798,
+   "right": 233,
+   "bottom": 852
+  },
+  {
+   "id": "kid-home-video-meta",
+   "left": 96,
+   "top": 864,
+   "right": 243,
+   "bottom": 906
+  },
+  {
+   "id": "kid-home-watch",
+   "left": 96,
+   "top": 938,
+   "right": 336,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-watch-label",
+   "left": 188,
+   "top": 959,
+   "right": 284,
+   "bottom": 1005
+  },
+  {
+   "id": "kid-home-more-info",
+   "left": 356,
+   "top": 938,
+   "right": 499,
+   "bottom": 1026
+  },
+  {
+   "id": "kid-home-more-info-label",
+   "left": 382,
+   "top": 961,
+   "right": 473,
+   "bottom": 1003
+  }
+ ]
+}

@@ -1,3 +1,4 @@
+<!-- October 19: island Home layout repaired on claude/ocean-layout-fix-2026-10-19 from c84f95d; one shared geometry, 15 layout tests seen to fail six ways; wording guard runs again; 16 stale pre-existing app test failures remain; not yet installed natively; Mac-only Ocean/Forest categorization still unpushed. -->
 <!-- October 18: Forest805f855 installed;499 app +11 attribution pass; three native clips and help Back complete. One compile plus stale-staging packaging recovery, one install. Integration kit next, isolated from installed playback. -->
 <!-- October 18: exact Forest activation approved; three-island integration and concise How it works validating before one build/install. -->
 <!-- Latest local checkpoint: October18 island refinement passes438 bounded app tests and11 attribution tests; UI source 1d14285 installed once; native two-video walkthrough completed. Forest media prepared, exact activation approval pending. -->
