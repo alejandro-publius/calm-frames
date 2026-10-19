@@ -54,6 +54,10 @@ ASSETS = [
     REPO / "app/assets/image/tv/gradient.png",
     REPO / "app/assets/image/tv/coastal-zen.png",
     REPO / "app/assets/image/tv/harbor-illustrated.png",
+    # The three photographs Home and Details show as cards, added Oct 19.
+    REPO / "app/assets/image/tv/acadia-coast.png",
+    REPO / "app/assets/image/tv/forest-creek.jpg",
+    REPO / "app/assets/image/tv/sea-otters-alaska.jpg",
     REPO / "app/assets/image/CalmFrames.png",
     REPO / "docs/brand/appstore-icon-512.png",
     REPO / "docs/brand/appstore-icon-114.png",

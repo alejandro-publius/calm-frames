@@ -1,7 +1,7 @@
 import React from 'react';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
 import { islandKind } from './CoastalIsland';
-import { HOME_ISLANDS, IslandSlotKind, islandCardBox, ScreenBox } from './homeIslands';
+import { ENVIRONMENTS, environmentHeadingBox, HOME_ISLANDS, ISLAND_ORDER, IslandSlotKind, islandCardBox, ScreenBox } from './homeIslands';
 import TouchableOpacity from './CalmTouchable';
 import {
   BackHandler,
@@ -153,10 +153,10 @@ const KidHomeScreen = ({
   const [selectedId, setSelectedId] = React.useState(selectedTitleId ?? returnFocusId);
   const featured = listed.find((entry) => entry.title.id === selectedId && !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID) ?? listed.find((entry) => titlePresentation(entry.title).action === 'Watch now') ?? listed[0];
   const mainStories = listed.filter((entry) => !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID);
-  // Keep the playable island order aligned with the map: Acadia, Forest, Sea Otters.
+  // Keep the playable island order aligned with the map: Ocean (Acadia, Sea Otters), then Forest.
   const islandOrder = (entry: CheckedTitle) => {
     const art = titlePresentation(entry.title);
-    return art.menuArt === 'forest' ? 1 : art.menuArt === 'sea-otters' ? 2 : 0;
+    return ISLAND_ORDER.indexOf(art.menuArt ?? 'coastal');
   };
   mainStories.sort((a, b) => islandOrder(a) - islandOrder(b));
   const hasMainStory = mainStories.length > 0;
@@ -234,7 +234,10 @@ const KidHomeScreen = ({
   }
   useUiCapture(frame, reason);
 
-  const headingBox: ScreenBox = { left: CALM_SPACE.SAFE_X, top: HOME_ISLANDS.HEADING.top, width: 1920 - 2 * CALM_SPACE.SAFE_X, height: HOME_ISLANDS.HEADING.height };
+  // With cards on the map, each card already names its video, so the sand
+  // below holds only what to do with the chosen one.
+  const cardsNameIt = islandHome && otherStories.length > 0;
+  const cardKinds = islandHome ? otherStories.map((entry) => islandOf(entry)!) : [];
   const flowing = !islandHome;
   // On the island map the picker takes the row of cards while it is open, so
   // nothing it says sits under a card; the cards come back when it closes.
@@ -243,10 +246,12 @@ const KidHomeScreen = ({
       chosenWord={WATCHING_STATE_WORD} chosenLine={whoIsWatching((profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name)}
       profiles={profiles} activeProfileId={activeProfileId ?? profiles[0].id} onChoose={onChooseProfile} />
   ) : null;
-  const hero = featured && feature ? <View testID={`${testID}-hero`} style={islandHome ? [styles.islandHero, placed(HOME_ISLANDS.HERO)] : styles.hero}>
+  const hero = featured && feature ? <View testID={`${testID}-hero`} style={islandHome ? [styles.islandHero, placed(cardsNameIt ? HOME_ISLANDS.ACTIONS : HOME_ISLANDS.HERO)] : styles.hero}>
               <View style={styles.heroCopy}>
+                {cardsNameIt ? null : <>
                 <Text accessibilityRole="header" numberOfLines={1} style={[styles.featureTitle, CALM_TEXT.section]} testID={`${testID}-video-title`}>{feature.name}</Text>
                 <Text style={styles.videoMeta} testID={`${testID}-video-meta`}>{[feature.runtime ?? runtimeLabel(featured.title.durationMs), isBundledBenignStory(featured.title) ? 'Simulated demo' : null].filter(Boolean).join(' · ')}</Text>
+                </>}
                 <View style={styles.actions}>
                   <CalmButton primary playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
                     disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
@@ -254,7 +259,16 @@ const KidHomeScreen = ({
                 </View>
               </View>
             </View> : null;
-  const heading = <View testID={`${testID}-heading`} style={islandHome ? [styles.islandHeading, placed(headingBox)] : styles.sectionHeading}><Text accessibilityRole="header" testID={`${testID}-title`} style={styles.section}>Choose an island</Text></View>;
+  const heading = <View testID={`${testID}-heading`} style={styles.sectionHeading}><Text accessibilityRole="header" testID={`${testID}-title`} style={styles.section}>Choose an island</Text></View>;
+  // On the map, each environment is named once, over its own cards.
+  const environmentHeadings = ENVIRONMENTS.map(({ name, kinds }) => {
+    const present = kinds.filter((kind) => cardKinds.includes(kind));
+    if (!present.length) return null;
+    const id = name.toLowerCase();
+    return <View key={id} testID={`${testID}-environment-${id}`} style={[styles.islandHeading, placed(environmentHeadingBox(present))]}>
+      <Text accessibilityRole="header" numberOfLines={1} testID={`${testID}-environment-${id}-name`} style={styles.section}>{name}</Text>
+    </View>;
+  });
   const poster = (entry: CheckedTitle) => {
                 const focused = focusedId === entry.title.id;
                 const selected = featured?.title.id === entry.title.id;
@@ -277,7 +291,7 @@ const KidHomeScreen = ({
 
   return (
     <WorldAppearance.Provider value={!empty && !showIntroduction}><View testID={testID} style={[styles.screen, !empty && !showIntroduction && { backgroundColor: WORLD.BACKGROUND }]}>
-      {!empty && !showIntroduction ? <CoastalWorld destination={islandKind(feature?.menuArt ?? feature?.art)} cardKinds={islandHome ? otherStories.map((entry) => islandOf(entry)!) : []} showBoat={feature?.art === 'coastal' || Boolean(feature?.menuArt)} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
+      {!empty && !showIntroduction ? <CoastalWorld destination={islandKind(feature?.menuArt ?? feature?.art)} cardKinds={cardKinds} showBoat={feature?.art === 'coastal' || Boolean(feature?.menuArt)} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
       <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
@@ -309,7 +323,7 @@ const KidHomeScreen = ({
             </View>
           </ScrollView> : <View testID={`${testID}-islands`} style={styles.islandLayer} pointerEvents="box-none">
             {picker ? <View testID={`${testID}-picker-panel`} style={[styles.pickerPanel, placed(HOME_ISLANDS.PICKER), { height: undefined, minHeight: scale(HOME_ISLANDS.PICKER.height) }]}>{picker}</View> : <>
-              {otherStories.length > 0 ? heading : null}
+              {environmentHeadings}
               {otherStories.map(poster)}
             </>}
             {hero}

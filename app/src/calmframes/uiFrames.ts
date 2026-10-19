@@ -13,9 +13,17 @@
  */
 
 import { CALM_COLORS, COASTAL_COLORS } from './calmStyles';
+import { WORLD } from './CoastalWorld';
 
-/** Menus and player controls share the dark cinema palette. */
+/** Player controls, notices and the parent area keep the dark cinema palette. */
 const MENU = COASTAL_COLORS;
+/**
+ * Home and Details are drawn on the coastal map, so they paint its colours:
+ * the cream sky and sand behind everything, cream cards and the warm Watch.
+ * The map's sea is artwork, not a declared surface; cream behind everything
+ * is the lighter of the two, so the check measures the larger change.
+ */
+const MAP = { ...COASTAL_COLORS, BACKGROUND: WORLD.BACKGROUND, SURFACE: WORLD.SURFACE, SURFACE_FOCUSED: WORLD.SURFACE_FOCUSED, PRIMARY: WORLD.PRIMARY, INK: WORLD.INK };
 import { CardKind } from './cards';
 import { UiFrame } from './uiCapture';
 
@@ -37,34 +45,34 @@ export const HOUSEHOLD_ERROR_FRAME: UiFrame = {
   surfaces: [MENU.SURFACE, MENU.PRIMARY],
 };
 
-export const KID_HOME_STORY_FRAME: UiFrame = { screen: 'kid-home-story', background: MENU.BACKGROUND, surfaces: [MENU.PRIMARY] };
-export const KID_HOME_STORY_FOCUSED_FRAME: UiFrame = { screen: 'kid-home-story-focused', background: MENU.BACKGROUND, surfaces: [MENU.PRIMARY, MENU.SURFACE_FOCUSED] };
-/** Play focused: on the coast a focused primary fills with ink, a colour the page itself never shows. */
-export const KID_HOME_STORY_WATCH_FRAME: UiFrame = { screen: 'kid-home-story-watch', background: MENU.BACKGROUND, surfaces: [MENU.INK] };
+export const KID_HOME_STORY_FRAME: UiFrame = { screen: 'kid-home-story', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE] };
+export const KID_HOME_STORY_FOCUSED_FRAME: UiFrame = { screen: 'kid-home-story-focused', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE_FOCUSED, MAP.SURFACE] };
+/** Watch focused: on the map it keeps its warm fill and takes the ring, so the colours are the resting ones. */
+export const KID_HOME_STORY_WATCH_FRAME: UiFrame = { screen: 'kid-home-story-watch', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE] };
 
 export const KID_HOME_FRAME: UiFrame = {
-  screen: 'kid-home', background: MENU.BACKGROUND,
-  surfaces: [MENU.PRIMARY, MENU.SURFACE],
+  screen: 'kid-home', background: MAP.BACKGROUND,
+  surfaces: [MAP.PRIMARY, MAP.SURFACE],
 };
 export const KID_HOME_FOCUSED_FRAME: UiFrame = {
-  screen: 'kid-home-focused', background: MENU.BACKGROUND,
-  surfaces: [MENU.PRIMARY, MENU.SURFACE_FOCUSED, MENU.SURFACE],
+  screen: 'kid-home-focused', background: MAP.BACKGROUND,
+  surfaces: [MAP.PRIMARY, MAP.SURFACE_FOCUSED, MAP.SURFACE],
 };
 export const KID_HOME_PROFILES_FRAME: UiFrame = {
-  screen: 'kid-home-profiles', background: MENU.BACKGROUND,
-  surfaces: [MENU.PRIMARY, MENU.SURFACE],
+  screen: 'kid-home-profiles', background: MAP.BACKGROUND,
+  surfaces: [MAP.PRIMARY, MAP.SURFACE],
 };
 export const KID_HOME_PROFILES_OFFLINE_FRAME: UiFrame = {
-  screen: 'kid-home-profiles-offline', background: MENU.BACKGROUND,
-  surfaces: [MENU.SURFACE, MENU.PRIMARY],
+  screen: 'kid-home-profiles-offline', background: MAP.BACKGROUND,
+  surfaces: [MENU.SURFACE, MAP.PRIMARY, MAP.SURFACE],
 };
 export const KID_HOME_PROFILES_FOCUSED_FRAME: UiFrame = {
-  screen: 'kid-home-profiles-focused', background: MENU.BACKGROUND,
-  surfaces: [MENU.PRIMARY, MENU.SURFACE_FOCUSED, MENU.SURFACE],
+  screen: 'kid-home-profiles-focused', background: MAP.BACKGROUND,
+  surfaces: [MAP.PRIMARY, MAP.SURFACE_FOCUSED, MAP.SURFACE],
 };
 export const KID_HOME_PICKER_FRAME: UiFrame = {
-  screen: 'kid-home-picker', background: MENU.BACKGROUND,
-  surfaces: [MENU.SURFACE_FOCUSED, MENU.SURFACE, MENU.PRIMARY],
+  screen: 'kid-home-picker', background: MAP.BACKGROUND,
+  surfaces: [MAP.SURFACE_FOCUSED, MAP.SURFACE, MAP.PRIMARY],
 };
 
 /** Nothing has been checked yet, so the shelf is one notice. */
@@ -77,21 +85,22 @@ export const KID_HOME_EMPTY_FRAME: UiFrame = {
 /** The service is unreachable, so a notice sits above what still verifies. */
 export const KID_HOME_OFFLINE_FRAME: UiFrame = {
   screen: 'kid-home-offline',
-  background: MENU.BACKGROUND,
-  surfaces: [MENU.SURFACE, MENU.PRIMARY],
+  background: MAP.BACKGROUND,
+  surfaces: [MENU.SURFACE, MAP.PRIMARY, MAP.SURFACE],
 };
 
-export const TITLE_DETAILS_HARBOR_FRAME: UiFrame = { screen: 'title-details-harbor', background: MENU.BACKGROUND, surfaces: [MENU.PRIMARY, MENU.SURFACE] };
-export const TITLE_DETAILS_DEMO_FRAME: UiFrame = { screen: 'title-details-demo', background: MENU.BACKGROUND, surfaces: [MENU.PRIMARY, MENU.SURFACE, MENU.PENDING] };
+export const TITLE_DETAILS_HARBOR_FRAME: UiFrame = { screen: 'title-details-harbor', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE] };
+export const TITLE_DETAILS_DEMO_FRAME: UiFrame = { screen: 'title-details-demo', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE, MAP.PENDING] };
 
 export const TITLE_DETAILS_FRAME: UiFrame = {
   screen: 'title-details',
-  background: MENU.BACKGROUND,
-  surfaces: [MENU.PRIMARY, MENU.SURFACE, MENU.PENDING, MENU.FAILED],
+  background: MAP.BACKGROUND,
+  surfaces: [MAP.PRIMARY, MENU.SURFACE, MENU.PENDING, MENU.FAILED],
 };
 
 /**
- * A title that is not ready to play.
+ * A title that is not ready to play. It is not drawn on the map: no destination
+ * to show, so it keeps the dark palette.
  *
  * No strip, because a title that did not verify has no schedule to show, so
  * neither of the strip's colours is painted. What is left is the notice.

@@ -1,4 +1,753 @@
 {
+ "details-coastal": [
+  {
+   "id": "title-details",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 920,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 942,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "island-coastal",
+   "left": 1047,
+   "top": 460,
+   "right": 1853,
+   "bottom": 881
+  },
+  {
+   "id": "island-landmarks-coastal",
+   "left": 1071,
+   "top": 460,
+   "right": 1804,
+   "bottom": 737
+  },
+  {
+   "id": "home-ripple",
+   "left": 1120,
+   "top": 311,
+   "right": 1216,
+   "bottom": 329
+  },
+  {
+   "id": "home-ripple",
+   "left": 1700,
+   "top": 321,
+   "right": 1796,
+   "bottom": 339
+  },
+  {
+   "id": "detail-panel",
+   "left": 90,
+   "top": 200,
+   "right": 990,
+   "bottom": 900
+  },
+  {
+   "id": "title-details-destination-image",
+   "left": 1170,
+   "top": 475,
+   "right": 1730,
+   "bottom": 790
+  },
+  {
+   "id": "title-details-back",
+   "left": 96,
+   "top": 54,
+   "right": 213,
+   "bottom": 142
+  },
+  {
+   "id": "title-details-back-label",
+   "left": 122,
+   "top": 77,
+   "right": 187,
+   "bottom": 119
+  },
+  {
+   "id": "title-details-title",
+   "left": 136,
+   "top": 274,
+   "right": 397,
+   "bottom": 366
+  },
+  {
+   "id": "title-details-meta",
+   "left": 136,
+   "top": 374,
+   "right": 283,
+   "bottom": 416
+  },
+  {
+   "id": "title-details-play",
+   "left": 136,
+   "top": 432,
+   "right": 376,
+   "bottom": 520
+  },
+  {
+   "id": "title-details-play-label",
+   "left": 228,
+   "top": 453,
+   "right": 324,
+   "bottom": 499
+  },
+  {
+   "id": "title-details-show-info",
+   "left": 396,
+   "top": 432,
+   "right": 573,
+   "bottom": 520
+  },
+  {
+   "id": "title-details-show-info-label",
+   "left": 422,
+   "top": 455,
+   "right": 547,
+   "bottom": 497
+  },
+  {
+   "id": "title-details-description",
+   "left": 136,
+   "top": 548,
+   "right": 754,
+   "bottom": 592
+  },
+  {
+   "id": "title-details-covered",
+   "left": 136,
+   "top": 624,
+   "right": 756,
+   "bottom": 686
+  },
+  {
+   "id": "title-details-covered-heading",
+   "left": 136,
+   "top": 624,
+   "right": 352,
+   "bottom": 666
+  },
+  {
+   "id": "title-details-covered-line",
+   "left": 491,
+   "top": 624,
+   "right": 756,
+   "bottom": 666
+  },
+  {
+   "id": "title-details-covered-track",
+   "left": 136,
+   "top": 678,
+   "right": 756,
+   "bottom": 686
+  },
+  {
+   "id": "title-details-covered-mark-0",
+   "left": 265,
+   "top": 678,
+   "right": 337,
+   "bottom": 686
+  },
+  {
+   "id": "title-details-covered-mark-1",
+   "left": 607,
+   "top": 678,
+   "right": 648,
+   "bottom": 686
+  }
+ ],
+ "details-forest": [
+  {
+   "id": "title-details",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 920,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 942,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "island-forest",
+   "left": 1047,
+   "top": 556,
+   "right": 1853,
+   "bottom": 881
+  },
+  {
+   "id": "island-landmarks-forest",
+   "left": 1067,
+   "top": 576,
+   "right": 1823,
+   "bottom": 843
+  },
+  {
+   "id": "home-ripple",
+   "left": 1120,
+   "top": 311,
+   "right": 1216,
+   "bottom": 329
+  },
+  {
+   "id": "home-ripple",
+   "left": 1700,
+   "top": 321,
+   "right": 1796,
+   "bottom": 339
+  },
+  {
+   "id": "detail-panel",
+   "left": 90,
+   "top": 200,
+   "right": 990,
+   "bottom": 900
+  },
+  {
+   "id": "title-details-destination-image",
+   "left": 1170,
+   "top": 475,
+   "right": 1730,
+   "bottom": 790
+  },
+  {
+   "id": "title-details-back",
+   "left": 96,
+   "top": 54,
+   "right": 213,
+   "bottom": 142
+  },
+  {
+   "id": "title-details-back-label",
+   "left": 122,
+   "top": 77,
+   "right": 187,
+   "bottom": 119
+  },
+  {
+   "id": "title-details-title",
+   "left": 136,
+   "top": 274,
+   "right": 885,
+   "bottom": 350
+  },
+  {
+   "id": "title-details-meta",
+   "left": 136,
+   "top": 358,
+   "right": 661,
+   "bottom": 400
+  },
+  {
+   "id": "title-details-play",
+   "left": 136,
+   "top": 416,
+   "right": 376,
+   "bottom": 504
+  },
+  {
+   "id": "title-details-play-label",
+   "left": 228,
+   "top": 437,
+   "right": 324,
+   "bottom": 483
+  },
+  {
+   "id": "title-details-show-info",
+   "left": 396,
+   "top": 416,
+   "right": 573,
+   "bottom": 504
+  },
+  {
+   "id": "title-details-show-info-label",
+   "left": 422,
+   "top": 439,
+   "right": 547,
+   "bottom": 481
+  },
+  {
+   "id": "title-details-description",
+   "left": 136,
+   "top": 532,
+   "right": 836,
+   "bottom": 620
+  },
+  {
+   "id": "title-details-covered",
+   "left": 136,
+   "top": 652,
+   "right": 756,
+   "bottom": 694
+  },
+  {
+   "id": "title-details-covered-heading",
+   "left": 136,
+   "top": 652,
+   "right": 342,
+   "bottom": 694
+  },
+  {
+   "id": "title-details-covered-line",
+   "left": 508,
+   "top": 652,
+   "right": 756,
+   "bottom": 694
+  }
+ ],
+ "details-info-coastal": [
+  {
+   "id": "title-details-info",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "title-details-info-back",
+   "left": 96,
+   "top": 54,
+   "right": 213,
+   "bottom": 142
+  },
+  {
+   "id": "title-details-info-back-label",
+   "left": 122,
+   "top": 77,
+   "right": 187,
+   "bottom": 119
+  },
+  {
+   "id": "title-details-cover-line",
+   "left": 96,
+   "top": 400,
+   "right": 1136,
+   "bottom": 496
+  },
+  {
+   "id": "title-details-technical",
+   "left": 96,
+   "top": 976,
+   "right": 405,
+   "bottom": 1064
+  },
+  {
+   "id": "title-details-technical-label",
+   "left": 122,
+   "top": 997,
+   "right": 379,
+   "bottom": 1043
+  },
+  {
+   "id": "title-details-back-bottom",
+   "left": 96,
+   "top": 1088,
+   "right": 224,
+   "bottom": 1176
+  },
+  {
+   "id": "title-details-back-bottom-label",
+   "left": 122,
+   "top": 1109,
+   "right": 198,
+   "bottom": 1155
+  }
+ ],
+ "details-info-forest": [
+  {
+   "id": "title-details-info",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "title-details-info-back",
+   "left": 96,
+   "top": 54,
+   "right": 213,
+   "bottom": 142
+  },
+  {
+   "id": "title-details-info-back-label",
+   "left": 122,
+   "top": 77,
+   "right": 187,
+   "bottom": 119
+  },
+  {
+   "id": "title-details-attribution",
+   "left": 96,
+   "top": 688,
+   "right": 1136,
+   "bottom": 928
+  },
+  {
+   "id": "title-details-technical",
+   "left": 96,
+   "top": 952,
+   "right": 405,
+   "bottom": 1040
+  },
+  {
+   "id": "title-details-technical-label",
+   "left": 122,
+   "top": 973,
+   "right": 379,
+   "bottom": 1019
+  },
+  {
+   "id": "title-details-back-bottom",
+   "left": 96,
+   "top": 1064,
+   "right": 224,
+   "bottom": 1152
+  },
+  {
+   "id": "title-details-back-bottom-label",
+   "left": 122,
+   "top": 1085,
+   "right": 198,
+   "bottom": 1131
+  }
+ ],
+ "details-info-sea-otters": [
+  {
+   "id": "title-details-info",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "title-details-info-back",
+   "left": 96,
+   "top": 54,
+   "right": 213,
+   "bottom": 142
+  },
+  {
+   "id": "title-details-info-back-label",
+   "left": 122,
+   "top": 77,
+   "right": 187,
+   "bottom": 119
+  },
+  {
+   "id": "title-details-attribution",
+   "left": 96,
+   "top": 688,
+   "right": 1136,
+   "bottom": 880
+  },
+  {
+   "id": "title-details-technical",
+   "left": 96,
+   "top": 904,
+   "right": 405,
+   "bottom": 992
+  },
+  {
+   "id": "title-details-technical-label",
+   "left": 122,
+   "top": 925,
+   "right": 379,
+   "bottom": 971
+  },
+  {
+   "id": "title-details-back-bottom",
+   "left": 96,
+   "top": 1016,
+   "right": 224,
+   "bottom": 1104
+  },
+  {
+   "id": "title-details-back-bottom-label",
+   "left": 122,
+   "top": 1037,
+   "right": 198,
+   "bottom": 1083
+  }
+ ],
+ "details-sea-otters": [
+  {
+   "id": "title-details",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 920,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 942,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "island-sea-otters",
+   "left": 1047,
+   "top": 574,
+   "right": 1853,
+   "bottom": 881
+  },
+  {
+   "id": "island-landmarks-sea-otters",
+   "left": 1057,
+   "top": 631,
+   "right": 1839,
+   "bottom": 820
+  },
+  {
+   "id": "home-ripple",
+   "left": 1120,
+   "top": 311,
+   "right": 1216,
+   "bottom": 329
+  },
+  {
+   "id": "home-ripple",
+   "left": 1700,
+   "top": 321,
+   "right": 1796,
+   "bottom": 339
+  },
+  {
+   "id": "detail-panel",
+   "left": 90,
+   "top": 200,
+   "right": 990,
+   "bottom": 900
+  },
+  {
+   "id": "title-details-destination-image",
+   "left": 1170,
+   "top": 475,
+   "right": 1730,
+   "bottom": 790
+  },
+  {
+   "id": "title-details-back",
+   "left": 96,
+   "top": 54,
+   "right": 213,
+   "bottom": 142
+  },
+  {
+   "id": "title-details-back-label",
+   "left": 122,
+   "top": 77,
+   "right": 187,
+   "bottom": 119
+  },
+  {
+   "id": "title-details-title",
+   "left": 136,
+   "top": 274,
+   "right": 880,
+   "bottom": 366
+  },
+  {
+   "id": "title-details-meta",
+   "left": 136,
+   "top": 374,
+   "right": 544,
+   "bottom": 416
+  },
+  {
+   "id": "title-details-play",
+   "left": 136,
+   "top": 432,
+   "right": 376,
+   "bottom": 520
+  },
+  {
+   "id": "title-details-play-label",
+   "left": 228,
+   "top": 453,
+   "right": 324,
+   "bottom": 499
+  },
+  {
+   "id": "title-details-show-info",
+   "left": 396,
+   "top": 432,
+   "right": 573,
+   "bottom": 520
+  },
+  {
+   "id": "title-details-show-info-label",
+   "left": 422,
+   "top": 455,
+   "right": 547,
+   "bottom": 497
+  },
+  {
+   "id": "title-details-description",
+   "left": 136,
+   "top": 548,
+   "right": 836,
+   "bottom": 636
+  },
+  {
+   "id": "title-details-covered",
+   "left": 136,
+   "top": 668,
+   "right": 756,
+   "bottom": 710
+  },
+  {
+   "id": "title-details-covered-heading",
+   "left": 136,
+   "top": 668,
+   "right": 342,
+   "bottom": 710
+  },
+  {
+   "id": "title-details-covered-line",
+   "left": 508,
+   "top": 668,
+   "right": 756,
+   "bottom": 710
+  }
+ ],
+ "help": [
+  {
+   "id": "kid-home",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-harbor-scene",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "picture-hold-dismiss",
+   "left": 96,
+   "top": 54,
+   "right": 213,
+   "bottom": 142
+  },
+  {
+   "id": "picture-hold-dismiss-label",
+   "left": 122,
+   "top": 77,
+   "right": 187,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-parent-area",
+   "left": 1671,
+   "top": 54,
+   "right": 1824,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-parent-area-label",
+   "left": 1697,
+   "top": 77,
+   "right": 1798,
+   "bottom": 119
+  },
+  {
+   "id": "picture-hold-introduction",
+   "left": 96,
+   "top": 174,
+   "right": 1136,
+   "bottom": 810
+  },
+  {
+   "id": "how-it-works-purpose",
+   "left": 96,
+   "top": 310,
+   "right": 1136,
+   "bottom": 358
+  },
+  {
+   "id": "how-it-works-limits",
+   "left": 96,
+   "top": 566,
+   "right": 1136,
+   "bottom": 746
+  }
+ ],
  "home-acadia-alone": [
   {
    "id": "kid-home",
@@ -44,45 +793,24 @@
   },
   {
    "id": "island-forest",
-   "left": 686,
-   "top": 433,
-   "right": 1232,
+   "left": 1248,
+   "top": 302,
+   "right": 1792,
    "bottom": 661
-  },
-  {
-   "id": "island-landmarks-forest",
-   "left": 686,
-   "top": 447,
-   "right": 1226,
-   "bottom": 638
   },
   {
    "id": "island-coastal",
    "left": 128,
-   "top": 365,
+   "top": 328,
    "right": 672,
    "bottom": 661
   },
   {
-   "id": "island-landmarks-coastal",
-   "left": 129,
-   "top": 365,
-   "right": 653,
-   "bottom": 563
-  },
-  {
    "id": "island-sea-otters",
-   "left": 1240,
+   "left": 688,
    "top": 446,
-   "right": 1798,
+   "right": 1232,
    "bottom": 661
-  },
-  {
-   "id": "island-landmarks-sea-otters",
-   "left": 1240,
-   "top": 486,
-   "right": 1798,
-   "bottom": 622
   },
   {
    "id": "home-ripple",
@@ -249,16 +977,16 @@
   },
   {
    "id": "island-forest",
-   "left": 686,
+   "left": 1246,
    "top": 433,
-   "right": 1232,
+   "right": 1792,
    "bottom": 661
   },
   {
    "id": "island-landmarks-forest",
-   "left": 686,
+   "left": 1246,
    "top": 447,
-   "right": 1226,
+   "right": 1786,
    "bottom": 638
   },
   {
@@ -277,16 +1005,16 @@
   },
   {
    "id": "island-sea-otters",
-   "left": 1240,
+   "left": 680,
    "top": 446,
-   "right": 1798,
+   "right": 1238,
    "bottom": 661
   },
   {
    "id": "island-landmarks-sea-otters",
-   "left": 1240,
+   "left": 680,
    "top": 486,
-   "right": 1798,
+   "right": 1238,
    "bottom": 622
   },
   {
@@ -374,17 +1102,31 @@
    "bottom": 1080
   },
   {
-   "id": "kid-home-heading",
-   "left": 96,
+   "id": "kid-home-environment-ocean",
+   "left": 200,
    "top": 166,
-   "right": 1824,
+   "right": 1160,
    "bottom": 220
   },
   {
-   "id": "kid-home-title",
-   "left": 792,
+   "id": "kid-home-environment-ocean-name",
+   "left": 617,
    "top": 166,
-   "right": 1128,
+   "right": 743,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-forest",
+   "left": 1320,
+   "top": 166,
+   "right": 1720,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-forest-name",
+   "left": 1457,
+   "top": 166,
+   "right": 1583,
    "bottom": 220
   },
   {
@@ -416,56 +1158,56 @@
    "bottom": 578
   },
   {
-   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 760,
    "top": 292,
    "right": 1160,
    "bottom": 602
   },
   {
-   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 778,
    "top": 310,
    "right": 1142,
    "bottom": 474
   },
   {
-   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 782,
    "top": 482,
    "right": 1138,
    "bottom": 536
   },
   {
-   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 782,
    "top": 536,
    "right": 1138,
    "bottom": 578
   },
   {
-   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1320,
    "top": 292,
    "right": 1720,
    "bottom": 602
   },
   {
-   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1338,
    "top": 310,
    "right": 1702,
    "bottom": 474
   },
   {
-   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1342,
    "top": 482,
    "right": 1698,
    "bottom": 536
   },
   {
-   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1342,
    "top": 536,
    "right": 1698,
@@ -474,51 +1216,37 @@
   {
    "id": "kid-home-hero",
    "left": 96,
-   "top": 798,
+   "top": 868,
    "right": 916,
-   "bottom": 1026
-  },
-  {
-   "id": "kid-home-video-title",
-   "left": 96,
-   "top": 798,
-   "right": 233,
-   "bottom": 852
-  },
-  {
-   "id": "kid-home-video-meta",
-   "left": 96,
-   "top": 864,
-   "right": 243,
-   "bottom": 906
+   "bottom": 956
   },
   {
    "id": "kid-home-watch",
    "left": 96,
-   "top": 938,
+   "top": 868,
    "right": 336,
-   "bottom": 1026
+   "bottom": 956
   },
   {
    "id": "kid-home-watch-label",
    "left": 188,
-   "top": 959,
+   "top": 889,
    "right": 284,
-   "bottom": 1005
+   "bottom": 935
   },
   {
    "id": "kid-home-more-info",
    "left": 356,
-   "top": 938,
+   "top": 868,
    "right": 499,
-   "bottom": 1026
+   "bottom": 956
   },
   {
    "id": "kid-home-more-info-label",
    "left": 382,
-   "top": 961,
+   "top": 891,
    "right": 473,
-   "bottom": 1003
+   "bottom": 933
   }
  ],
  "home-card-forest": [
@@ -566,16 +1294,16 @@
   },
   {
    "id": "island-forest",
-   "left": 686,
+   "left": 1246,
    "top": 433,
-   "right": 1232,
+   "right": 1792,
    "bottom": 661
   },
   {
    "id": "island-landmarks-forest",
-   "left": 686,
+   "left": 1246,
    "top": 447,
-   "right": 1226,
+   "right": 1786,
    "bottom": 638
   },
   {
@@ -594,16 +1322,16 @@
   },
   {
    "id": "island-sea-otters",
-   "left": 1240,
+   "left": 680,
    "top": 446,
-   "right": 1798,
+   "right": 1238,
    "bottom": 661
   },
   {
    "id": "island-landmarks-sea-otters",
-   "left": 1240,
+   "left": 680,
    "top": 486,
-   "right": 1798,
+   "right": 1238,
    "bottom": 622
   },
   {
@@ -636,323 +1364,6 @@
   },
   {
    "id": "coastal-boat-forest",
-   "left": 924,
-   "top": 660,
-   "right": 996,
-   "bottom": 722
-  },
-  {
-   "id": "kid-home-choose-profile",
-   "left": 1229,
-   "top": 54,
-   "right": 1406,
-   "bottom": 142
-  },
-  {
-   "id": "kid-home-choose-profile-label",
-   "left": 1255,
-   "top": 77,
-   "right": 1380,
-   "bottom": 119
-  },
-  {
-   "id": "kid-home-learn",
-   "left": 1426,
-   "top": 54,
-   "right": 1651,
-   "bottom": 142
-  },
-  {
-   "id": "kid-home-learn-label",
-   "left": 1452,
-   "top": 77,
-   "right": 1625,
-   "bottom": 119
-  },
-  {
-   "id": "kid-home-parent-area",
-   "left": 1671,
-   "top": 54,
-   "right": 1824,
-   "bottom": 142
-  },
-  {
-   "id": "kid-home-parent-area-label",
-   "left": 1697,
-   "top": 77,
-   "right": 1798,
-   "bottom": 119
-  },
-  {
-   "id": "kid-home-islands",
-   "left": 0,
-   "top": 0,
-   "right": 1920,
-   "bottom": 1080
-  },
-  {
-   "id": "kid-home-heading",
-   "left": 96,
-   "top": 166,
-   "right": 1824,
-   "bottom": 220
-  },
-  {
-   "id": "kid-home-title",
-   "left": 792,
-   "top": 166,
-   "right": 1128,
-   "bottom": 220
-  },
-  {
-   "id": "kid-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
-   "left": 200,
-   "top": 292,
-   "right": 600,
-   "bottom": 602
-  },
-  {
-   "id": "kid-home-poster-image-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
-   "left": 218,
-   "top": 310,
-   "right": 582,
-   "bottom": 474
-  },
-  {
-   "id": "kid-home-poster-title-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
-   "left": 222,
-   "top": 482,
-   "right": 578,
-   "bottom": 536
-  },
-  {
-   "id": "kid-home-poster-qualifier-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
-   "left": 222,
-   "top": 536,
-   "right": 578,
-   "bottom": 578
-  },
-  {
-   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
-   "left": 760,
-   "top": 292,
-   "right": 1160,
-   "bottom": 602
-  },
-  {
-   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
-   "left": 778,
-   "top": 310,
-   "right": 1142,
-   "bottom": 474
-  },
-  {
-   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
-   "left": 782,
-   "top": 482,
-   "right": 1138,
-   "bottom": 536
-  },
-  {
-   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
-   "left": 782,
-   "top": 536,
-   "right": 1138,
-   "bottom": 578
-  },
-  {
-   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
-   "left": 1320,
-   "top": 292,
-   "right": 1720,
-   "bottom": 602
-  },
-  {
-   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
-   "left": 1338,
-   "top": 310,
-   "right": 1702,
-   "bottom": 474
-  },
-  {
-   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
-   "left": 1342,
-   "top": 482,
-   "right": 1698,
-   "bottom": 536
-  },
-  {
-   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
-   "left": 1342,
-   "top": 536,
-   "right": 1698,
-   "bottom": 578
-  },
-  {
-   "id": "kid-home-hero",
-   "left": 96,
-   "top": 798,
-   "right": 916,
-   "bottom": 1026
-  },
-  {
-   "id": "kid-home-video-title",
-   "left": 96,
-   "top": 798,
-   "right": 588,
-   "bottom": 852
-  },
-  {
-   "id": "kid-home-video-meta",
-   "left": 96,
-   "top": 864,
-   "right": 621,
-   "bottom": 906
-  },
-  {
-   "id": "kid-home-watch",
-   "left": 96,
-   "top": 938,
-   "right": 336,
-   "bottom": 1026
-  },
-  {
-   "id": "kid-home-watch-label",
-   "left": 188,
-   "top": 959,
-   "right": 284,
-   "bottom": 1005
-  },
-  {
-   "id": "kid-home-more-info",
-   "left": 356,
-   "top": 938,
-   "right": 499,
-   "bottom": 1026
-  },
-  {
-   "id": "kid-home-more-info-label",
-   "left": 382,
-   "top": 961,
-   "right": 473,
-   "bottom": 1003
-  }
- ],
- "home-card-sea-otters": [
-  {
-   "id": "kid-home",
-   "left": 0,
-   "top": 0,
-   "right": 1920,
-   "bottom": 1080
-  },
-  {
-   "id": "coastal-world",
-   "left": 0,
-   "top": 0,
-   "right": 1920,
-   "bottom": 1080
-  },
-  {
-   "id": "home-sky",
-   "left": 0,
-   "top": 0,
-   "right": 1920,
-   "bottom": 260
-  },
-  {
-   "id": "home-sand-edge",
-   "left": 0,
-   "top": 742,
-   "right": 1920,
-   "bottom": 1080
-  },
-  {
-   "id": "home-sand",
-   "left": 0,
-   "top": 764,
-   "right": 1920,
-   "bottom": 1080
-  },
-  {
-   "id": "home-route",
-   "left": 400,
-   "top": 683,
-   "right": 1520,
-   "bottom": 699
-  },
-  {
-   "id": "island-forest",
-   "left": 686,
-   "top": 433,
-   "right": 1232,
-   "bottom": 661
-  },
-  {
-   "id": "island-landmarks-forest",
-   "left": 686,
-   "top": 447,
-   "right": 1226,
-   "bottom": 638
-  },
-  {
-   "id": "island-coastal",
-   "left": 128,
-   "top": 365,
-   "right": 672,
-   "bottom": 661
-  },
-  {
-   "id": "island-landmarks-coastal",
-   "left": 129,
-   "top": 365,
-   "right": 653,
-   "bottom": 563
-  },
-  {
-   "id": "island-sea-otters",
-   "left": 1240,
-   "top": 446,
-   "right": 1798,
-   "bottom": 661
-  },
-  {
-   "id": "island-landmarks-sea-otters",
-   "left": 1240,
-   "top": 486,
-   "right": 1798,
-   "bottom": 622
-  },
-  {
-   "id": "home-ripple",
-   "left": 16,
-   "top": 461,
-   "right": 112,
-   "bottom": 479
-  },
-  {
-   "id": "home-ripple",
-   "left": 1808,
-   "top": 461,
-   "right": 1904,
-   "bottom": 479
-  },
-  {
-   "id": "home-ripple",
-   "left": 150,
-   "top": 691,
-   "right": 246,
-   "bottom": 709
-  },
-  {
-   "id": "home-ripple",
-   "left": 1660,
-   "top": 691,
-   "right": 1756,
-   "bottom": 709
-  },
-  {
-   "id": "coastal-boat-sea-otters",
    "left": 1484,
    "top": 660,
    "right": 1556,
@@ -1008,17 +1419,31 @@
    "bottom": 1080
   },
   {
-   "id": "kid-home-heading",
-   "left": 96,
+   "id": "kid-home-environment-ocean",
+   "left": 200,
    "top": 166,
-   "right": 1824,
+   "right": 1160,
    "bottom": 220
   },
   {
-   "id": "kid-home-title",
-   "left": 792,
+   "id": "kid-home-environment-ocean-name",
+   "left": 617,
    "top": 166,
-   "right": 1128,
+   "right": 743,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-forest",
+   "left": 1320,
+   "top": 166,
+   "right": 1720,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-forest-name",
+   "left": 1457,
+   "top": 166,
+   "right": 1583,
    "bottom": 220
   },
   {
@@ -1050,56 +1475,56 @@
    "bottom": 578
   },
   {
-   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 760,
    "top": 292,
    "right": 1160,
    "bottom": 602
   },
   {
-   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 778,
    "top": 310,
    "right": 1142,
    "bottom": 474
   },
   {
-   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 782,
    "top": 482,
    "right": 1138,
    "bottom": 536
   },
   {
-   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 782,
    "top": 536,
    "right": 1138,
    "bottom": 578
   },
   {
-   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1320,
    "top": 292,
    "right": 1720,
    "bottom": 602
   },
   {
-   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1338,
    "top": 310,
    "right": 1702,
    "bottom": 474
   },
   {
-   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1342,
    "top": 482,
    "right": 1698,
    "bottom": 536
   },
   {
-   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1342,
    "top": 536,
    "right": 1698,
@@ -1108,51 +1533,354 @@
   {
    "id": "kid-home-hero",
    "left": 96,
-   "top": 798,
+   "top": 868,
    "right": 916,
-   "bottom": 1026
-  },
-  {
-   "id": "kid-home-video-title",
-   "left": 96,
-   "top": 798,
-   "right": 487,
-   "bottom": 852
-  },
-  {
-   "id": "kid-home-video-meta",
-   "left": 96,
-   "top": 864,
-   "right": 504,
-   "bottom": 906
+   "bottom": 956
   },
   {
    "id": "kid-home-watch",
    "left": 96,
-   "top": 938,
+   "top": 868,
    "right": 336,
-   "bottom": 1026
+   "bottom": 956
   },
   {
    "id": "kid-home-watch-label",
    "left": 188,
-   "top": 959,
+   "top": 889,
    "right": 284,
-   "bottom": 1005
+   "bottom": 935
   },
   {
    "id": "kid-home-more-info",
    "left": 356,
-   "top": 938,
+   "top": 868,
    "right": 499,
-   "bottom": 1026
+   "bottom": 956
   },
   {
    "id": "kid-home-more-info-label",
    "left": 382,
-   "top": 961,
+   "top": 891,
    "right": 473,
-   "bottom": 1003
+   "bottom": 933
+  }
+ ],
+ "home-card-sea-otters": [
+  {
+   "id": "kid-home",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 742,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 764,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-route",
+   "left": 400,
+   "top": 683,
+   "right": 1520,
+   "bottom": 699
+  },
+  {
+   "id": "island-forest",
+   "left": 1246,
+   "top": 433,
+   "right": 1792,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-forest",
+   "left": 1246,
+   "top": 447,
+   "right": 1786,
+   "bottom": 638
+  },
+  {
+   "id": "island-coastal",
+   "left": 128,
+   "top": 365,
+   "right": 672,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-coastal",
+   "left": 129,
+   "top": 365,
+   "right": 653,
+   "bottom": 563
+  },
+  {
+   "id": "island-sea-otters",
+   "left": 680,
+   "top": 446,
+   "right": 1238,
+   "bottom": 661
+  },
+  {
+   "id": "island-landmarks-sea-otters",
+   "left": 680,
+   "top": 486,
+   "right": 1238,
+   "bottom": 622
+  },
+  {
+   "id": "home-ripple",
+   "left": 16,
+   "top": 461,
+   "right": 112,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 1808,
+   "top": 461,
+   "right": 1904,
+   "bottom": 479
+  },
+  {
+   "id": "home-ripple",
+   "left": 150,
+   "top": 691,
+   "right": 246,
+   "bottom": 709
+  },
+  {
+   "id": "home-ripple",
+   "left": 1660,
+   "top": 691,
+   "right": 1756,
+   "bottom": 709
+  },
+  {
+   "id": "coastal-boat-sea-otters",
+   "left": 924,
+   "top": 660,
+   "right": 996,
+   "bottom": 722
+  },
+  {
+   "id": "kid-home-choose-profile",
+   "left": 1229,
+   "top": 54,
+   "right": 1406,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-choose-profile-label",
+   "left": 1255,
+   "top": 77,
+   "right": 1380,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-learn",
+   "left": 1426,
+   "top": 54,
+   "right": 1651,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-learn-label",
+   "left": 1452,
+   "top": 77,
+   "right": 1625,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-parent-area",
+   "left": 1671,
+   "top": 54,
+   "right": 1824,
+   "bottom": 142
+  },
+  {
+   "id": "kid-home-parent-area-label",
+   "left": 1697,
+   "top": 77,
+   "right": 1798,
+   "bottom": 119
+  },
+  {
+   "id": "kid-home-islands",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "kid-home-environment-ocean",
+   "left": 200,
+   "top": 166,
+   "right": 1160,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-ocean-name",
+   "left": 617,
+   "top": 166,
+   "right": 743,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-forest",
+   "left": 1320,
+   "top": 166,
+   "right": 1720,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-forest-name",
+   "left": 1457,
+   "top": 166,
+   "right": 1583,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 200,
+   "top": 292,
+   "right": 600,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 218,
+   "top": 310,
+   "right": 582,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 482,
+   "right": 578,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+   "left": 222,
+   "top": 536,
+   "right": 578,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 760,
+   "top": 292,
+   "right": 1160,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 778,
+   "top": 310,
+   "right": 1142,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 782,
+   "top": 482,
+   "right": 1138,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "left": 782,
+   "top": 536,
+   "right": 1138,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 1320,
+   "top": 292,
+   "right": 1720,
+   "bottom": 602
+  },
+  {
+   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 1338,
+   "top": 310,
+   "right": 1702,
+   "bottom": 474
+  },
+  {
+   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 1342,
+   "top": 482,
+   "right": 1698,
+   "bottom": 536
+  },
+  {
+   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "left": 1342,
+   "top": 536,
+   "right": 1698,
+   "bottom": 578
+  },
+  {
+   "id": "kid-home-hero",
+   "left": 96,
+   "top": 868,
+   "right": 916,
+   "bottom": 956
+  },
+  {
+   "id": "kid-home-watch",
+   "left": 96,
+   "top": 868,
+   "right": 336,
+   "bottom": 956
+  },
+  {
+   "id": "kid-home-watch-label",
+   "left": 188,
+   "top": 889,
+   "right": 284,
+   "bottom": 935
+  },
+  {
+   "id": "kid-home-more-info",
+   "left": 356,
+   "top": 868,
+   "right": 499,
+   "bottom": 956
+  },
+  {
+   "id": "kid-home-more-info-label",
+   "left": 382,
+   "top": 891,
+   "right": 473,
+   "bottom": 933
   }
  ],
  "home-offline": [
@@ -1200,16 +1928,16 @@
   },
   {
    "id": "island-forest",
-   "left": 686,
+   "left": 1246,
    "top": 433,
-   "right": 1232,
+   "right": 1792,
    "bottom": 661
   },
   {
    "id": "island-landmarks-forest",
-   "left": 686,
+   "left": 1246,
    "top": 447,
-   "right": 1226,
+   "right": 1786,
    "bottom": 638
   },
   {
@@ -1228,16 +1956,16 @@
   },
   {
    "id": "island-sea-otters",
-   "left": 1240,
+   "left": 680,
    "top": 446,
-   "right": 1798,
+   "right": 1238,
    "bottom": 661
   },
   {
    "id": "island-landmarks-sea-otters",
-   "left": 1240,
+   "left": 680,
    "top": 486,
-   "right": 1798,
+   "right": 1238,
    "bottom": 622
   },
   {
@@ -1311,17 +2039,31 @@
    "bottom": 1080
   },
   {
-   "id": "kid-home-heading",
-   "left": 96,
+   "id": "kid-home-environment-ocean",
+   "left": 200,
    "top": 166,
-   "right": 1824,
+   "right": 1160,
    "bottom": 220
   },
   {
-   "id": "kid-home-title",
-   "left": 792,
+   "id": "kid-home-environment-ocean-name",
+   "left": 617,
    "top": 166,
-   "right": 1128,
+   "right": 743,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-forest",
+   "left": 1320,
+   "top": 166,
+   "right": 1720,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-forest-name",
+   "left": 1457,
+   "top": 166,
+   "right": 1583,
    "bottom": 220
   },
   {
@@ -1353,56 +2095,56 @@
    "bottom": 578
   },
   {
-   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 760,
    "top": 292,
    "right": 1160,
    "bottom": 602
   },
   {
-   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 778,
    "top": 310,
    "right": 1142,
    "bottom": 474
   },
   {
-   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 782,
    "top": 482,
    "right": 1138,
    "bottom": 536
   },
   {
-   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 782,
    "top": 536,
    "right": 1138,
    "bottom": 578
   },
   {
-   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1320,
    "top": 292,
    "right": 1720,
    "bottom": 602
   },
   {
-   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1338,
    "top": 310,
    "right": 1702,
    "bottom": 474
   },
   {
-   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1342,
    "top": 482,
    "right": 1698,
    "bottom": 536
   },
   {
-   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1342,
    "top": 536,
    "right": 1698,
@@ -1411,51 +2153,37 @@
   {
    "id": "kid-home-hero",
    "left": 96,
-   "top": 798,
+   "top": 868,
    "right": 916,
-   "bottom": 1026
-  },
-  {
-   "id": "kid-home-video-title",
-   "left": 96,
-   "top": 798,
-   "right": 233,
-   "bottom": 852
-  },
-  {
-   "id": "kid-home-video-meta",
-   "left": 96,
-   "top": 864,
-   "right": 243,
-   "bottom": 906
+   "bottom": 956
   },
   {
    "id": "kid-home-watch",
    "left": 96,
-   "top": 938,
+   "top": 868,
    "right": 336,
-   "bottom": 1026
+   "bottom": 956
   },
   {
    "id": "kid-home-watch-label",
    "left": 188,
-   "top": 959,
+   "top": 889,
    "right": 284,
-   "bottom": 1005
+   "bottom": 935
   },
   {
    "id": "kid-home-more-info",
    "left": 356,
-   "top": 938,
+   "top": 868,
    "right": 499,
-   "bottom": 1026
+   "bottom": 956
   },
   {
    "id": "kid-home-more-info-label",
    "left": 382,
-   "top": 961,
+   "top": 891,
    "right": 473,
-   "bottom": 1003
+   "bottom": 933
   },
   {
    "id": "kid-home-notice-slot",
@@ -1538,16 +2266,16 @@
   },
   {
    "id": "island-forest",
-   "left": 686,
+   "left": 1246,
    "top": 433,
-   "right": 1232,
+   "right": 1792,
    "bottom": 661
   },
   {
    "id": "island-landmarks-forest",
-   "left": 686,
+   "left": 1246,
    "top": 447,
-   "right": 1226,
+   "right": 1786,
    "bottom": 638
   },
   {
@@ -1566,16 +2294,16 @@
   },
   {
    "id": "island-sea-otters",
-   "left": 1240,
+   "left": 680,
    "top": 446,
-   "right": 1798,
+   "right": 1238,
    "bottom": 661
   },
   {
    "id": "island-landmarks-sea-otters",
-   "left": 1240,
+   "left": 680,
    "top": 486,
-   "right": 1798,
+   "right": 1238,
    "bottom": 622
   },
   {
@@ -1608,9 +2336,9 @@
   },
   {
    "id": "coastal-boat-forest",
-   "left": 924,
+   "left": 1484,
    "top": 660,
-   "right": 996,
+   "right": 1556,
    "bottom": 722
   },
   {
@@ -1707,51 +2435,37 @@
   {
    "id": "kid-home-hero",
    "left": 96,
-   "top": 798,
+   "top": 868,
    "right": 916,
-   "bottom": 1026
-  },
-  {
-   "id": "kid-home-video-title",
-   "left": 96,
-   "top": 798,
-   "right": 588,
-   "bottom": 852
-  },
-  {
-   "id": "kid-home-video-meta",
-   "left": 96,
-   "top": 864,
-   "right": 621,
-   "bottom": 906
+   "bottom": 956
   },
   {
    "id": "kid-home-watch",
    "left": 96,
-   "top": 938,
+   "top": 868,
    "right": 336,
-   "bottom": 1026
+   "bottom": 956
   },
   {
    "id": "kid-home-watch-label",
    "left": 188,
-   "top": 959,
+   "top": 889,
    "right": 284,
-   "bottom": 1005
+   "bottom": 935
   },
   {
    "id": "kid-home-more-info",
    "left": 356,
-   "top": 938,
+   "top": 868,
    "right": 499,
-   "bottom": 1026
+   "bottom": 956
   },
   {
    "id": "kid-home-more-info-label",
    "left": 382,
-   "top": 961,
+   "top": 891,
    "right": 473,
-   "bottom": 1003
+   "bottom": 933
   }
  ],
  "home-watch": [
@@ -1799,16 +2513,16 @@
   },
   {
    "id": "island-forest",
-   "left": 686,
+   "left": 1246,
    "top": 433,
-   "right": 1232,
+   "right": 1792,
    "bottom": 661
   },
   {
    "id": "island-landmarks-forest",
-   "left": 686,
+   "left": 1246,
    "top": 447,
-   "right": 1226,
+   "right": 1786,
    "bottom": 638
   },
   {
@@ -1827,16 +2541,16 @@
   },
   {
    "id": "island-sea-otters",
-   "left": 1240,
+   "left": 680,
    "top": 446,
-   "right": 1798,
+   "right": 1238,
    "bottom": 661
   },
   {
    "id": "island-landmarks-sea-otters",
-   "left": 1240,
+   "left": 680,
    "top": 486,
-   "right": 1798,
+   "right": 1238,
    "bottom": 622
   },
   {
@@ -1924,17 +2638,31 @@
    "bottom": 1080
   },
   {
-   "id": "kid-home-heading",
-   "left": 96,
+   "id": "kid-home-environment-ocean",
+   "left": 200,
    "top": 166,
-   "right": 1824,
+   "right": 1160,
    "bottom": 220
   },
   {
-   "id": "kid-home-title",
-   "left": 792,
+   "id": "kid-home-environment-ocean-name",
+   "left": 617,
    "top": 166,
-   "right": 1128,
+   "right": 743,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-forest",
+   "left": 1320,
+   "top": 166,
+   "right": 1720,
+   "bottom": 220
+  },
+  {
+   "id": "kid-home-environment-forest-name",
+   "left": 1457,
+   "top": 166,
+   "right": 1583,
    "bottom": 220
   },
   {
@@ -1966,56 +2694,56 @@
    "bottom": 578
   },
   {
-   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 760,
    "top": 292,
    "right": 1160,
    "bottom": 602
   },
   {
-   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 778,
    "top": 310,
    "right": 1142,
    "bottom": 474
   },
   {
-   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 782,
    "top": 482,
    "right": 1138,
    "bottom": 536
   },
   {
-   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
    "left": 782,
    "top": 536,
    "right": 1138,
    "bottom": 578
   },
   {
-   "id": "kid-home-poster-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1320,
    "top": 292,
    "right": 1720,
    "bottom": 602
   },
   {
-   "id": "kid-home-poster-image-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-image-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1338,
    "top": 310,
    "right": 1702,
    "bottom": 474
   },
   {
-   "id": "kid-home-poster-title-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-title-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1342,
    "top": 482,
    "right": 1698,
    "bottom": 536
   },
   {
-   "id": "kid-home-poster-qualifier-prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+   "id": "kid-home-poster-qualifier-prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
    "left": 1342,
    "top": 536,
    "right": 1698,
@@ -2024,51 +2752,274 @@
   {
    "id": "kid-home-hero",
    "left": 96,
-   "top": 798,
+   "top": 868,
    "right": 916,
-   "bottom": 1026
-  },
-  {
-   "id": "kid-home-video-title",
-   "left": 96,
-   "top": 798,
-   "right": 233,
-   "bottom": 852
-  },
-  {
-   "id": "kid-home-video-meta",
-   "left": 96,
-   "top": 864,
-   "right": 243,
-   "bottom": 906
+   "bottom": 956
   },
   {
    "id": "kid-home-watch",
    "left": 96,
-   "top": 938,
+   "top": 868,
    "right": 336,
-   "bottom": 1026
+   "bottom": 956
   },
   {
    "id": "kid-home-watch-label",
    "left": 188,
-   "top": 959,
+   "top": 889,
    "right": 284,
-   "bottom": 1005
+   "bottom": 935
   },
   {
    "id": "kid-home-more-info",
    "left": 356,
-   "top": 938,
+   "top": 868,
    "right": 499,
-   "bottom": 1026
+   "bottom": 956
   },
   {
    "id": "kid-home-more-info-label",
    "left": 382,
-   "top": 961,
+   "top": 891,
    "right": 473,
-   "bottom": 1003
+   "bottom": 933
+  }
+ ],
+ "opening-coastal": [
+  {
+   "id": "player-home-opening",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 920,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 942,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "island-coastal",
+   "left": 1047,
+   "top": 409,
+   "right": 1853,
+   "bottom": 881
+  },
+  {
+   "id": "home-ripple",
+   "left": 1120,
+   "top": 311,
+   "right": 1216,
+   "bottom": 329
+  },
+  {
+   "id": "home-ripple",
+   "left": 1700,
+   "top": 321,
+   "right": 1796,
+   "bottom": 339
+  },
+  {
+   "id": "detail-panel",
+   "left": 90,
+   "top": 200,
+   "right": 990,
+   "bottom": 900
+  },
+  {
+   "id": "player-opening-back",
+   "left": 96,
+   "top": 54,
+   "right": 213,
+   "bottom": 142
+  },
+  {
+   "id": "player-opening-back-label",
+   "left": 122,
+   "top": 77,
+   "right": 187,
+   "bottom": 119
+  }
+ ],
+ "opening-forest": [
+  {
+   "id": "player-home-opening",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 920,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 942,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "island-forest",
+   "left": 1047,
+   "top": 372,
+   "right": 1853,
+   "bottom": 881
+  },
+  {
+   "id": "home-ripple",
+   "left": 1120,
+   "top": 311,
+   "right": 1216,
+   "bottom": 329
+  },
+  {
+   "id": "home-ripple",
+   "left": 1700,
+   "top": 321,
+   "right": 1796,
+   "bottom": 339
+  },
+  {
+   "id": "detail-panel",
+   "left": 90,
+   "top": 200,
+   "right": 990,
+   "bottom": 900
+  },
+  {
+   "id": "player-opening-back",
+   "left": 96,
+   "top": 54,
+   "right": 213,
+   "bottom": 142
+  },
+  {
+   "id": "player-opening-back-label",
+   "left": 122,
+   "top": 77,
+   "right": 187,
+   "bottom": 119
+  }
+ ],
+ "opening-sea-otters": [
+  {
+   "id": "player-home-opening",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "coastal-world",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sky",
+   "left": 0,
+   "top": 0,
+   "right": 1920,
+   "bottom": 260
+  },
+  {
+   "id": "home-sand-edge",
+   "left": 0,
+   "top": 920,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "home-sand",
+   "left": 0,
+   "top": 942,
+   "right": 1920,
+   "bottom": 1080
+  },
+  {
+   "id": "island-sea-otters",
+   "left": 1047,
+   "top": 574,
+   "right": 1853,
+   "bottom": 881
+  },
+  {
+   "id": "home-ripple",
+   "left": 1120,
+   "top": 311,
+   "right": 1216,
+   "bottom": 329
+  },
+  {
+   "id": "home-ripple",
+   "left": 1700,
+   "top": 321,
+   "right": 1796,
+   "bottom": 339
+  },
+  {
+   "id": "detail-panel",
+   "left": 90,
+   "top": 200,
+   "right": 990,
+   "bottom": 900
+  },
+  {
+   "id": "player-opening-back",
+   "left": 96,
+   "top": 54,
+   "right": 213,
+   "bottom": 142
+  },
+  {
+   "id": "player-opening-back-label",
+   "left": 122,
+   "top": 77,
+   "right": 187,
+   "bottom": 119
   }
  ]
 }

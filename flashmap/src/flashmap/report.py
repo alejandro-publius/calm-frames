@@ -92,14 +92,14 @@ __all__ = [
 # file and fails if these drift from it.
 # ---------------------------------------------------------------------------
 
-BACKGROUND = "#151C26"  # the playback palette's ink ground, which the player keeps
-SURFACE = "#303B48"  # a card on the ground
-BORDER = "#697585"
-FOCUS_RING = "#E6B963"  # gold: rings and edges only, never a label
-ACCENT_DARK = "#8E5648"  # dark coral: edges only, carries nothing
-TEXT = "#F4ECDD"  # ivory on ink
-TEXT_DIM = "#BDC2C9"
-INK = "#151C26"  # text on a light surface
+BACKGROUND = "#0C131A"  # the playback palette's dark ground, which the player keeps
+SURFACE = "#22303B"  # a card on the ground
+BORDER = "#748995"
+FOCUS_RING = "#9CC1CB"  # pale sea blue: rings and edges only, never a label
+ACCENT_DARK = "#9D6A55"  # warm depth: edges only, carries nothing
+TEXT = "#F0F2EF"  # light text on the dark ground
+TEXT_DIM = "#C4CDD2"
+INK = "#0C131A"  # text on a light surface
 COVER = "#000000"  # the cover itself, and the lane's own track
 
 # ---------------------------------------------------------------------------
@@ -154,6 +154,9 @@ MAX_BLOCKS_PER_LANE = 5
 # lane is now #303B48 at 5.63 cd/m2 and the red lane #151C26 at 0.93 cd/m2,
 # so the widest step in a lane is 5.63 cd/m2 against the same 20 cd/m2 bar
 # difference, and the pin test records those figures.
+# On Oct 19, 2026 it followed the playback palette again: the general lane is
+# #22303B at 3.25 cd/m2 and the red lane #0C131A at 0.35 cd/m2, so the widest
+# step in a lane is 3.25 cd/m2, smaller than before, against the same 20 cd/m2.
 LANE_GROUND = COVER
 LANE_GENERAL = SURFACE
 LANE_RED = BACKGROUND

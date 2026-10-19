@@ -49,24 +49,28 @@ it('uses the existing content rail without playing on focus or changing ambient 
   const play = jest.fn(), open = jest.fn();
   const ambient = bakedAmbientForRendition(acadia.title.renditionSha256, DEFAULT_SETTINGS.preset);
   const screen = render(<KidHomeScreen titles={[acadia, otter]} onOpen={open} onPlay={play} />);
-  expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Acadia');
+  // The cards name the videos; what Watch will play is what it announces.
+  expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toBe('Watch: Acadia');
   fireEvent(screen.getByTestId(`kid-home-poster-${title.id}`), 'focus');
   expect(open).not.toHaveBeenCalled(); expect(play).not.toHaveBeenCalled();
-  expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea otters in Alaska');
-  expect(screen.getByTestId('kid-home-video-meta').props.children).toBe('20 seconds · Silent · Plays once');
+  // The cards name the videos; what Watch will play is what it announces.
+  expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toBe('Watch: Sea otters in Alaska');
+  expect(screen.getByTestId(`kid-home-poster-qualifier-${title.id}`).props.children).toBe('Silent · 20 sec');
   expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toBe('Watch: Sea otters in Alaska');
   expect(screen.getByTestId('coastal-world')).toBeTruthy();
   expect(screen.queryAllByTestId(/^kid-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(2);
   fireEvent.press(screen.getByTestId('kid-home-watch')); expect(play).toHaveBeenCalledWith(otter);
   fireEvent.press(screen.getByTestId('kid-home-more-info')); expect(open).toHaveBeenCalledWith(otter);
   fireEvent(screen.getByTestId(`kid-home-poster-${acadia.title.id}`), 'focus');
-  expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Acadia');
+  // The cards name the videos; what Watch will play is what it announces.
+  expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toBe('Watch: Acadia');
   expect(bakedAmbientForRendition(acadia.title.renditionSha256, DEFAULT_SETTINGS.preset)).toBe(ambient);
 });
 it.each(['watch', 'details', 'poster'] as const)('retains the preview and a single %s return focus', control => {
   const screen = render(<KidHomeScreen titles={[acadia, otter]} onOpen={jest.fn()} returnFocusId={title.id} returnFocusControl={control} />);
   const id = control === 'watch' ? 'kid-home-watch' : control === 'details' ? 'kid-home-more-info' : `kid-home-poster-${title.id}`;
-  expect(screen.getByTestId('kid-home-video-title').props.children).toBe('Sea otters in Alaska');
+  // The cards name the videos; what Watch will play is what it announces.
+  expect(screen.getByTestId('kid-home-watch').props.accessibilityLabel).toBe('Watch: Sea otters in Alaska');
   expect(screen.getByTestId(id).props.hasTVPreferredFocus).toBe(true);
   expect(screen.getAllByRole('button').filter(button => button.props.hasTVPreferredFocus)).toHaveLength(1);
 });

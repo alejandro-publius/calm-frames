@@ -31,7 +31,7 @@ def test_exact_approved_fixture_and_repeat_are_read_only(signed_package, tmp_pat
     root = tmp_path / "reviews"
     first = delivery.stage_delivery(signed_package, ACADIA, root)
     assert first["state"] == "approved_for_build"
-    assert "fixture" in first["approval_label"]
+    assert first["approval_label"] == "Acadia: approved ocean replacement"
     assert not first["can_watch"] and not first["installed_by_staging"]
     second = delivery.stage_delivery(signed_package, ACADIA, root)
     assert first == second == delivery.check_delivery(root, first["ticket_id"])

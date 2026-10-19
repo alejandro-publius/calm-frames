@@ -33,6 +33,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import cast
 
 SCHEMA = "calm-frames-evidence-summary-v1"
 STATES = {
@@ -250,7 +251,7 @@ def build_summary(*, repo: Path, ledger: Path, ledger_file: str, maps: list[Path
         "tests": None if not test_file else {
             "file": test_file,
             "negative_controls": None if negative is None else {
-                "path": _rel(negative_controls, repo), "sha256": sha256_of(negative_controls),
+                "path": _rel(cast(Path, negative_controls), repo), "sha256": sha256_of(cast(Path, negative_controls)),
                 "controls": [{"control": c["control"], "break": c["break"], "tests_that_failed": c["tests_that_failed"], "restored": c["restored"]} for c in negative.get("controls", [])],
             },
         },
@@ -321,7 +322,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--limitation", action="append", default=[])
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
-    simulated = _load(args.simulated) if args.simulated else []
+    # The simulated file holds a list of rows; _load is typed for the common object case.
+    simulated: list[dict] = cast(list, _load(args.simulated)) if args.simulated else []
     summary = build_summary(repo=args.repo, ledger=args.ledger, ledger_file=args.ledger_file, maps=args.map,
                             receipt=args.receipt, manifest=args.manifest, plots=args.plot,
                             negative_controls=args.negative_controls, test_file=args.test_file,

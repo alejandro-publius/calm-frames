@@ -7,6 +7,9 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react-native';
+import { titlePresentation } from '../../src/calmframes/TitleArtwork';
+import { filmStill } from '../../src/calmframes/HomeHarborScene';
+import { WORLD } from '../../src/calmframes/CoastalWorld';
 import React from 'react';
 import { Image } from 'react-native';
 jest.mock('@react-native-async-storage/async-storage', () => ({
@@ -19,7 +22,6 @@ import {
   benignStoryTitle,
 } from '../../src/calmframes/benignStory';
 import { BENIGN_STORY_PUBLIC_KEY } from '../../src/calmframes/benignStoryData';
-import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
 import { verifyFlashMap } from '../../src/calmframes/flashMap';
 import TitleArtwork from '../../src/calmframes/TitleArtwork';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
@@ -67,11 +69,16 @@ describe('the pictures on the shelf', () => {
     expect(still).toMatch(/^data:image\/jpeg;base64,/);
     expect(shelfPoster(harbor)).toBe(still);
 
+    // Home is the coastal map now; its pictures are presentation artwork, never the signed still.
     render(<KidHomeScreen titles={shelf} onOpen={jest.fn()} />);
-    const image = screen.getByTestId('home-harbor-scene').findByType(Image);
-    expect(image.props.source).toEqual(require('../../assets/image/tv/harbor-cinematic.png'));
-    expect(image.props.resizeMode).toBe('cover');
-    expect(image.props.fadeDuration).toBe(0);
+    expect(screen.getByTestId('coastal-world')).toBeTruthy();
+    const images = screen.UNSAFE_getAllByType(Image);
+    expect(images.length).toBeGreaterThan(0);
+    for (const image of images) {
+      expect(JSON.stringify(image.props.source)).not.toContain('data:image/jpeg');
+      expect(image.props.resizeMode).toBe('cover');
+      expect(image.props.fadeDuration).toBe(0);
+    }
   });
 
   /**
@@ -84,6 +91,13 @@ describe('the pictures on the shelf', () => {
   it('uses dedicated presentation artwork for each prepared title and test clip', () => {
     for (const entry of others) {
       expect(shelfPoster(entry)).toBeUndefined();
+      const presentation = titlePresentation(entry.title);
+      // A map destination's card shows its own photograph.
+      if (presentation.menuArt) {
+        expect(filmStill(presentation.menuArt)).toEqual(presentation.menuArt === 'forest'
+          ? require('../../assets/image/tv/forest-creek.jpg') : require('../../assets/image/tv/sea-otters-alaska.jpg'));
+        continue;
+      }
       const view = render(<TitleArtwork illustrated entry={entry} testID="art" />);
       expect(view.getByTestId('art').props.source).toEqual(entry.title.id === OFFLINE_TITLE_ID
         ? require('../../assets/image/tv/gradient.png')
@@ -143,7 +157,7 @@ describe('the words on the shelf', () => {
     const onOpen = jest.fn();
     const onPlay = jest.fn();
     const home = render(<KidHomeScreen titles={shelf} onOpen={onOpen} onPlay={onPlay} />);
-    expect(screen.getByTestId('kid-home-title').props.children).toBe('Choose a video');
+    expect(screen.getByTestId('kid-home-title').props.children).toBe('Choose an island');
     expect(screen.queryByTestId('kid-home-meta')).toBeNull();
     expect(screen.queryByText('Picture holds on supported videos. Audio continues.')).toBeNull();
     fireEvent.press(screen.getByTestId('kid-home-more-info'));
@@ -234,12 +248,13 @@ describe('the words on the shelf', () => {
     const secondLines = ['Demo', 'Playback check'];
     render(<KidHomeScreen titles={shelf.filter(entry => entry.title.id === BENIGN_STORY_ID || entry.title.id === OFFLINE_TITLE_ID)} onOpen={jest.fn()} />);
     const measured = () =>
-      measureText(screen.toJSON() as unknown as RenderedNode, { background: COASTAL_COLORS.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);
+      measureText(screen.toJSON() as unknown as RenderedNode, { background: WORLD.BACKGROUND }).filter((line) => secondLines.includes(line.text)).slice(-3);
 
     const resting = measured();
     expect(resting.map((line) => line.text).sort()).toEqual([...secondLines].sort());
     for (const line of resting) {
-      expect(line.background).toBe(COASTAL_COLORS.SURFACE);
+      // The cards stand on the coastal map, so they are its cream cards.
+      expect(line.background).toBe(WORLD.SURFACE);
       expect(line.fontSize).toBeGreaterThanOrEqual(floors.textSizeUnits);
       expect(line.contrast).toBeGreaterThanOrEqual(floors.textContrast);
     }
@@ -248,7 +263,7 @@ describe('the words on the shelf', () => {
     const focused = measured().find(
       (line) => line.text === 'Demo',
     );
-    expect(focused?.background).toBe(COASTAL_COLORS.SURFACE_FOCUSED);
+    expect(focused?.background).toBe(WORLD.SURFACE_FOCUSED);
     expect(focused?.contrast).toBeGreaterThanOrEqual(floors.textContrast);
   });
 });

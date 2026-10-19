@@ -15,7 +15,9 @@ from pipeline.probe import StreamInfo, VideoProbe
 
 REPO = Path(__file__).resolve().parents[2]
 ACADIA = "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28"
-BUNDLE = "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"
+# The approved Acadia bundle. Until Oct 19 this named 4bab8d81, which the Oct 18
+# activation retired, and every delivery test died in setup before checking anything.
+BUNDLE = "d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46"
 
 
 def probe(**changes):
@@ -250,8 +252,9 @@ def signed_package(tmp_path):
     (root / "catalog.ts").write_text(catalog_module(text))
     report = json.loads(text)["titles"][0]["verification"]["reportSha256"]
     (root / "reports").mkdir()
+    # The report the app ships beside the bundle, named by the hash the manifest records.
     shutil.copy2(
-        REPO / "results/video-reset/acadia/verification-report.json",
+        REPO / "app/assets/raw/prepared-library/reports" / (report + ".json"),
         root / "reports" / (report + ".json"),
     )
     return root

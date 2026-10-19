@@ -14,10 +14,15 @@ function fixture(t) {
   fs.mkdirSync(path.join(root, 'src/calmframes'), { recursive: true });
   const config = path.join(root, 'config/approved-prepared-libraries.json');
   fs.copyFileSync(path.join(APP, 'config/approved-prepared-libraries.json'), config);
-  const entry = readApprovalRegistry(root)[0];
-  const manifest = path.join(root, 'assets/raw/prepared-library', entry.bundleId, 'manifest.json');
-  fs.mkdirSync(path.dirname(manifest), { recursive: true });
-  fs.copyFileSync(path.join(APP, 'assets/raw/prepared-library', entry.bundleId, 'manifest.json'), manifest);
+  // Every approved catalog's manifest, not only the first: with one copied, the
+  // Oct 17 and Oct 18 approvals made this fixture throw before any check ran.
+  const manifests = readApprovalRegistry(root).map(entry => {
+    const file = path.join(root, 'assets/raw/prepared-library', entry.bundleId, 'manifest.json');
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.copyFileSync(path.join(APP, 'assets/raw/prepared-library', entry.bundleId, 'manifest.json'), file);
+    return file;
+  });
+  const manifest = manifests[0];
   const generated = path.join(root, 'src/calmframes/approvedPreparedCatalogs.ts');
   fs.writeFileSync(generated, approvedCatalogModule(root).module);
   return { root, config, manifest, generated };
@@ -25,9 +30,11 @@ function fixture(t) {
 
 test('existing exact Acadia fixture matches generated input; generation repeats byte-for-byte', t => {
   const { root } = fixture(t);
-  assert.equal(checkApprovedCatalogs(root).length, 1);
+  const registry = readApprovalRegistry(root);
+  assert.ok(registry.length >= 1);
+  assert.equal(checkApprovedCatalogs(root).length, registry.length);
   assert.equal(approvedCatalogModule(root).module, approvedCatalogModule(root).module);
-  assert.match(checkApprovedCatalogs(root)[0].label, /fixture/);
+  assert.deepEqual(checkApprovedCatalogs(root).map(entry => entry.label), registry.map(entry => entry.label));
 });
 for (const change of ['catalog', 'key', 'bundle', 'duplicate', 'generated', 'missing-generated', 'symlink']) {
   test(`rejects ${change} substitution without changing approval`, t => {

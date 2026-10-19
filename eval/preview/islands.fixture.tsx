@@ -5,6 +5,8 @@ import fs from 'fs';
 import path from 'path';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
+import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
+import PlayerOpening from '../../src/calmframes/PlayerOpening';
 import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
 import { titlePresentation } from '../../src/calmframes/TitleArtwork';
 import { checkedShelf } from './shelfFixtures';
@@ -35,4 +37,19 @@ test('exports Home with the three consumer islands in each selection', () => {
   offline.unmount();
   const alone = render(<KidHomeScreen titles={titles.filter(entry => island(entry) === 'coastal')} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={() => {}} />, { wrapper });
   save('home-acadia-alone', alone.toJSON());
+  alone.unmount();
+  for (const entry of titles) {
+    const art = island(entry)!;
+    const details = render(<TitleDetailsScreen entry={entry} onPlay={jest.fn()} onBack={jest.fn()} />, { wrapper });
+    save(`details-${art}`, details.toJSON());
+    act(() => { fireEvent.press(details.getByTestId('title-details-show-info')); });
+    save(`details-info-${art}`, details.toJSON());
+    details.unmount();
+    const opening = render(<PlayerOpening title={titlePresentation(entry.title).name} menuArt={art} onBack={jest.fn()} />, { wrapper });
+    save(`opening-${art}`, opening.toJSON());
+    opening.unmount();
+  }
+  const help = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={() => {}} />, { wrapper });
+  act(() => { fireEvent.press(help.getByTestId('kid-home-learn')); });
+  save('help', help.toJSON());
 });

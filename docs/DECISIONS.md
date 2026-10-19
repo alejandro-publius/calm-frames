@@ -2713,3 +2713,44 @@ the rendered boxes and SVG shapes and was seen to fail six ways. Also: the
 approved-wording guard had stopped running when `integration/` was added, so
 it now recurses. Cost: no media, trust, signing, catalog or player change; one
 install needed to see it natively. Evidence: results/home-islands-2026-10-19.
+
+## October 19: Ocean and Forest on the map, one title per video, Details on the same geometry
+
+The owner's rule is that Home names environments consistently: Ocean holds
+Acadia and Sea Otters, Forest holds Forest creek at Redwood. The Mac version
+that does this was never pushed, so build it on the pushed map without a new
+design: reorder the islands to Acadia, Sea Otters, Forest, and name each
+environment once over its own cards. The handoff called the chosen title
+repeated under the cards clutter, so the sand holds Watch and Details only and
+Watch announces what it plays; a lone video with no card keeps its title. Card
+second lines become one format, sound then length, and Acadia is called silent
+because its rendition measures -91 dB. Details had the same fault as Home (Back
+on the shoreline, the photograph covering the landmarks), so it reads the same
+module. Cost: no media, catalog, trust, signing, detector or player change.
+Not installed natively. If the Mac's version is preferred, port its navigation
+onto homeIslands.ts so the test measures it.
+
+## October 19: the checks that were not running
+
+The full app suite had 18 failures that bounded runs did not show, the
+approved-wording guard crashed on a folder and checked nothing, the trust-gate
+tests died in setup after the second catalog was approved, and the UI flash
+check declared Home and Details in a palette they no longer paint. Repair each
+so it checks what ships, keep every assertion's intent, and re-measure the UI
+flash check rather than assume it: 37 screens and transitions pass under both
+profiles. Cost: test and declaration changes only.
+
+## October 19: the edition delivery tool list, the package budget, and lint scope
+
+`pipeline/edition_delivery.py` copies a fixed list of checker tools into the
+checkout it proposes, and the checker had gained an import that list lacked, so
+every edition delivery was refused. Add `ambient_report.mjs` to the list rather
+than make the copy recursive: the list is also what the delivery compares
+against the shipped tools byte for byte, and it should stay explicit. The
+prepared library is 66,492,442 of its 67,108,864 byte budget, so no real clip
+can be imported until the budget, the titles or the package format changes;
+that is the owner's decision, and the one delivery test that needs room is
+left failing because it reports a true condition. ruff stops linting
+`results/`, whose scripts are evidence kept as they ran. The flashmap report
+page follows the current playback palette, re-measured. Cost: test, lint
+scope, typing and one tool-list change; no catalog, trust or media change.

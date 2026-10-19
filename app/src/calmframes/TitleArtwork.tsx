@@ -35,12 +35,12 @@ export function titlePresentation(title: CatalogTitle): TitlePresentation {
   }
   if (concernsPackagedLibrary(title) && title.sha256 === SEA_OTTER_SOURCE_SHA256 && title.durationMs === 19986.633) {
     return { name: 'Sea otters in Alaska', cardName: 'Sea otters', kind: 'Ocean wildlife · 20 seconds',
-      selectorMeta: 'Silent · 20 seconds', action: 'Watch now', runtime: '20 seconds · Silent · Plays once', menuArt: 'sea-otters',
+      selectorMeta: 'Silent · 20 sec', action: 'Watch now', runtime: '20 seconds · Silent · Plays once', menuArt: 'sea-otters',
       description: 'Sea otters float together in the ocean at Unalaska, Alaska.',
       attribution: 'NOAA Fisheries. Sea otters at Unalaska/Dutch Harbor, Alaska. Public-domain B-roll; 19.987-second silent excerpt, plays once. Source: https://videos.fisheries.noaa.gov/detail/video/2789953172001/b-roll%3A-sea-otters' };
   }
   if (concernsPackagedLibrary(title) && title.sha256 === ACADIA_SOURCE_SHA256) {
-    return { name: 'Acadia', kind: 'National Park Service', action: 'Watch now', art: 'coastal',
+    return { name: 'Acadia', kind: 'National Park Service', selectorMeta: 'Silent · 38 sec', action: 'Watch now', art: 'coastal',
       description: 'Waves along the coast of Acadia National Park.' };
   }
   if (isBundledBenignStory(title)) {

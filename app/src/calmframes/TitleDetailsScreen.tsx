@@ -1,6 +1,7 @@
 /** Viewing first; optional explanations and technical records use separate pages. */
 import React from 'react';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
+import { DETAIL } from './homeIslands';
 import { islandKind } from './CoastalIsland';
 import { Image } from 'react-native';
 import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -183,7 +184,7 @@ const TitleDetailsScreen = ({
 
   return (
     <WorldAppearance.Provider value><ScrollView key="watch" testID={testID} style={[styles.screen, { backgroundColor: WORLD.BACKGROUND }]} contentContainerStyle={[styles.content, { minHeight: scale(1080) }]}>
-      <CoastalWorld detail destination={islandKind(presentation.menuArt ?? presentation.art)} />
+      <CoastalWorld detail destination={islandKind(presentation.menuArt ?? presentation.art)} cardKinds={[islandKind(presentation.menuArt ?? presentation.art)]} />
       <Image source={filmStill(presentation.menuArt ?? presentation.art)} resizeMode="cover" fadeDuration={0} style={styles.destinationImage} testID={`${testID}-destination-image`} accessible={false} />
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
       <View style={styles.hero}>
@@ -208,7 +209,8 @@ const TitleDetailsScreen = ({
 };
 
 const styles = StyleSheet.create({
-  destinationImage: { position: 'absolute', right: scale(110), top: scale(330), width: scale(660), height: scale(380), borderWidth: scale(10), borderColor: WORLD.SURFACE, borderRadius: scale(26) },
+  // The photograph stands on the island; homeIslands.ts DETAIL keeps the landmarks clear of it.
+  destinationImage: { position: 'absolute', left: scale(DETAIL.PHOTO.left), top: scale(DETAIL.PHOTO.top), width: scale(DETAIL.PHOTO.width), height: scale(DETAIL.PHOTO.height), borderWidth: scale(10), borderColor: WORLD.SURFACE, borderRadius: scale(26) },
   reading: { width: '100%', maxWidth: scale(1040), gap: scale(24), paddingTop: scale(32) },
   secondaryAction: { alignItems: 'flex-start' },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },

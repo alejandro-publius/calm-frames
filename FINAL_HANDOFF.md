@@ -1215,3 +1215,38 @@ The Acadia signing private key is documented as deleted. No other signer was aut
 ## October 18: local signer and verified new-video proposal
 
 The owner authorized creating one project-local signer and preparing a new permitted sample, while retaining separate exact-bundle TV approval. That signer was created outside the repository/intake workspace with owner-only permissions. The complete official NPS Prairie Creek and Redwood 480p video passed full analysis, all 51 preparation verification checks, package negative checks and independent inspection. The prospective combined library retains every existing title and fits the unchanged 64 MiB bound. See [the exact trust proposal](docs/NEW_VIDEO_TRUST_PROPOSAL.md) and its machine-readable receipt. The substantial 32.6/33.6 seconds of cover time is disclosed. No app trust, native build/install, push, recording or reserved submission edits occurred.
+
+
+## October 19: Ocean and Forest Home, Details geometry, and the checks that were not running
+
+Cloud session, branch `claude/ocean-layout-fix-2026-10-19` from `c84f95d`. Not built
+or installed: no Vega SDK or device here. The Mac's installed `2b78587` and its
+uncommitted navigation evidence were never pushed and are not in this branch.
+
+**Visible changes.** Home names Ocean over Acadia and Sea Otters and Forest over
+Forest; every card stands on its own island with its landmarks beside it; card
+second lines share one format; the chosen title is not repeated under the cards,
+and Watch announces what it plays; the offline notice and Who is watching have
+fixed slots. Details and the opening keep Back on the sky, and the Details
+photograph stands on its island without covering the lighthouse or trees. All
+positions come from `app/src/calmframes/homeIslands.ts`; the 24 tests in
+`app/test/calmframes/homeIslands.test.tsx` measure them and were seen to fail
+twelve ways. Renders: `results/home-islands-2026-10-19/`.
+
+**Checks.** Full app suite 1,676 passed, 0 failed (18 failures on `c84f95d`).
+Repaired so they check again: the approved-wording guard, the trust-gate tool tests
+(51 pass), and the UI flash declarations (37 screens and transitions pass, negative
+control still refuses). Typecheck clean, lint 0 errors, style and attribution checks
+pass, hook mirror resynced and its package check passes.
+
+**Import workflow.** Edition delivery copied a tool list without
+`ambient_report.mjs`, so every delivery was refused; fixed, and its tests run
+again. The prepared library has about 602 KB left of its 64 MiB budget, so a new
+real clip cannot be imported until the budget, the titles or the package format
+changes (Sea Otters ships three identical 9.7 MB renditions). One delivery test
+fails for exactly this reason and is left failing. Scene bridge and the native
+example need the Mac's source media and the virtual device; neither was attempted.
+
+**Owner steps.** Decide the package budget question. Install this branch and look at Home, Details and playback. Decide
+whether the Mac's unpushed navigation is kept (port it onto `homeIslands.ts`) or
+dropped. Re-read the Devpost rules from a machine that can reach them.

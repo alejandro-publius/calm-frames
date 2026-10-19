@@ -25,7 +25,13 @@ from .local_library import _file, _json, _lock, _path_inside
 ASSETS = Path("assets/raw/prepared-library")
 GENERATED = Path("src/calmframes/approvedPreparedCatalogs.ts")
 REGISTRY = Path("config/approved-prepared-libraries.json")
-TOOLS = (Path("tools/approved_prepared_libraries.mjs"), Path("tools/check_prepared_library.mjs"))
+# Every file check_prepared_library.mjs imports, or the proposed checkout cannot
+# run it. Until Oct 19 ambient_report.mjs was missing, so every delivery was refused.
+TOOLS = (
+    Path("tools/approved_prepared_libraries.mjs"),
+    Path("tools/check_prepared_library.mjs"),
+    Path("tools/ambient_report.mjs"),
+)
 
 
 def _app(path: Path) -> Path:

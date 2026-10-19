@@ -17,6 +17,7 @@ import { act as flushReact, fireEvent, render, screen } from '@testing-library/r
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
+import { WORLD } from '../../src/calmframes/CoastalWorld';
 import { View } from 'react-native';
 import BufferingWindow, { REVEAL_DELAY_MS } from '../../src/components/BufferingWindow';
 // The real shelf below comes from KidModeScreen's catalog, and that screen
@@ -29,7 +30,7 @@ import {
   BENIGN_STORY_LABEL,
 } from '../../src/calmframes/benignStory';
 import CalmCard from '../../src/calmframes/CalmCard';
-import { CALM_COLORS, COASTAL_COLORS } from '../../src/calmframes/calmStyles';
+import { CALM_COLORS } from '../../src/calmframes/calmStyles';
 import CornerPlate from '../../src/calmframes/CornerPlate';
 import {
   Card,
@@ -183,9 +184,10 @@ const parentArea = (titles: CheckedTitle[]) => (
 /** A household with two kids, for the screens that carry the picker. */
 const FAMILY: Family = addProfile(newFamily(DEFAULT_SETTINGS, 'Robin'), 'Sam');
 
+// Two videos, as a household's shelf has: a lone focused card cannot show the resting card colour.
 const familyShelf = (offline = false) => (
   <KidHomeScreen
-    titles={[makeTitle('ok', 'verified')]}
+    titles={[makeTitle('ok', 'verified'), makeTitle('two', 'verified')]}
     onOpen={jest.fn()}
     offline={offline}
     profiles={FAMILY.profiles}
@@ -238,8 +240,9 @@ describe('what the app paints', () => {
     const frame = renderedFrame('kid-home', (
       <KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />
     ));
-    expect(frame.background).toBe(COASTAL_COLORS.BACKGROUND);
-    expect(frame.surfaces).toContain(COASTAL_COLORS.SURFACE);
+    // Home is drawn on the coastal map, so its colours are the map's.
+    expect(frame.background).toBe(WORLD.BACKGROUND);
+    expect(frame.surfaces).toContain(WORLD.SURFACE);
   });
 
   it('matches what the kid home reports, unfocused and focused', () => {
@@ -249,7 +252,8 @@ describe('what the app paints', () => {
       )),
     ).toEqual(KID_HOME_FRAME);
 
-    render(<KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />);
+    // Two videos, so the focused card sits beside a resting one, as on a household's shelf.
+    render(<KidHomeScreen titles={[makeTitle('ok', 'verified'), makeTitle('two', 'verified')]} onOpen={jest.fn()} />);
     fireEvent(screen.getByTestId('kid-home-poster-ok'), 'focus');
     const focused = frameFromTree(
       'kid-home-focused',

@@ -38,55 +38,57 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
   >
     <View
       style={
-        [
-          {
-            "alignItems": "center",
-            "backgroundColor": "#22303B",
-            "borderColor": "#748995",
-            "borderRadius": 24,
-            "borderWidth": 2,
-            "maxWidth": 1400,
-            "paddingHorizontal": 64,
-            "paddingVertical": 32,
-          },
-          null,
-        ]
+        {
+          "alignItems": "center",
+          "backgroundColor": "#22303B",
+          "borderColor": "#748995",
+          "borderRadius": 24,
+          "borderWidth": 2,
+          "maxWidth": 1400,
+          "paddingHorizontal": 64,
+          "paddingVertical": 32,
+        }
       }
     >
-      <Text
-        style={
-          {
-            "color": "#F0F2EF",
-            "fontFamily": "CalmSansSemibold",
-            "fontSize": 38,
-            "fontWeight": "400",
-            "lineHeight": 48,
-            "textAlign": "center",
+      <View>
+        <Text
+          style={
+            [
+              {
+                "color": "#F0F2EF",
+                "fontFamily": "CalmSansSemibold",
+                "fontSize": 38,
+                "fontWeight": "400",
+                "lineHeight": 48,
+                "textAlign": "center",
+              },
+              null,
+            ]
           }
-        }
-        testID="calm-card-title"
-      >
-        This video is unavailable
-      </Text>
-      <Text
-        style={
-          [
-            {
-              "color": "#C4CDD2",
-              "fontFamily": "CalmSansRegular",
-              "fontSize": 36,
-              "fontWeight": "400",
-              "lineHeight": 48,
-              "marginTop": 12,
-              "textAlign": "center",
-            },
-            null,
-          ]
-        }
-        testID="calm-card-detail"
-      >
-        The picture stays hidden. Go back to the library.
-      </Text>
+          testID="calm-card-title"
+        >
+          This video is unavailable
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "color": "#C4CDD2",
+                "fontFamily": "CalmSansRegular",
+                "fontSize": 36,
+                "fontWeight": "400",
+                "lineHeight": 48,
+                "marginTop": 12,
+                "textAlign": "center",
+              },
+              null,
+            ]
+          }
+          testID="calm-card-detail"
+        >
+          The picture stays hidden. Go back to the library.
+        </Text>
+      </View>
     </View>
   </View>
 </View>

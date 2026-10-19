@@ -95,9 +95,14 @@ def _number_constant(source: str, name: str) -> float:
 
 
 def parse_calm_colors(source: str) -> dict[str, str]:
-    """CALM_COLORS as {NAME: '#RRGGBB'}, refusing any entry it cannot read."""
-    body = _object_literal(source, "CALM_COLORS")
-    entries = re.findall(r"^\s*([A-Z_]+)\s*:", body, re.MULTILINE)
+    """CALM_COLORS as {NAME: '#RRGGBB'}, refusing any entry it cannot read.
+
+    Since Oct 16 calmStyles.ts names the palette COASTAL_COLORS and makes
+    CALM_COLORS an alias of it, so the alias is followed, and nothing else.
+    """
+    alias = re.search(r"export const CALM_COLORS = ([A-Z_]+);", source)
+    body = _object_literal(source, alias.group(1) if alias else "CALM_COLORS")
+    entries = re.findall(r"([A-Z_]+)\s*:", body)
     colours = dict(re.findall(r"([A-Z_]+)\s*:\s*'(#[0-9A-Fa-f]{6})'", body))
     unread = sorted(set(entries) - set(colours))
     assert not unread, (
@@ -470,8 +475,10 @@ def test_the_ratio_check_notices_one_changed_ratio(page, calm_colors):
 
 
 def test_the_floor_check_refuses_a_pair_under_the_floor(calm_colors):
-    # Disabled text is intended for its darker neutral material, not this fill.
-    row = ("TEXT_DISABLED", "SURFACE_FOCUSED", truncated(contrast(calm_colors["TEXT_DISABLED"], calm_colors["SURFACE_FOCUSED"])))
+    # BORDER is never text: on a focused surface it sits between the two floors,
+    # under 4.5 and over 3, so one row tests both. (Until Oct 19 this was
+    # TEXT_DISABLED, which the current palette lifts above 4.5.)
+    row = ("BORDER", "SURFACE_FOCUSED", truncated(contrast(calm_colors["BORDER"], calm_colors["SURFACE_FOCUSED"])))
     assert ratio_mismatches([row], calm_colors) == []
     assert floor_failures([row], calm_colors, TEXT_FLOOR) != []
     assert floor_failures([row], calm_colors, RING_FLOOR) == []

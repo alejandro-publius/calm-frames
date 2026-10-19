@@ -17,15 +17,22 @@
  * islands at the old 0.86 scale (neighbouring islands meet); the boat at the
  * old y of 600 (it lands on the cards); the lighthouse moved back to x 200
  * (the card covers it); the hero at the old top of 760 (it sits on the sand
- * line); the sky's shoreline at 200 (it runs through the heading).
+ * line); the sky's shoreline at 200 (it runs through the heading). Then, for
+ * Ocean and Forest: the chosen title shown again under the cards; Forest back
+ * between the Ocean islands; a card's second line back to "20 seconds"; an
+ * environment given another name. And for Details: the old 660 by 380
+ * photograph (it covers the landmarks), and the old sky curve (it runs up
+ * into Back). Each turned its test red.
  */
 import { act, fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 import { CALM_SPACE } from '../../src/calmframes/calmStyles';
-import { HOME_ISLANDS, ISLAND_ORDER, IslandSlotKind, boatBox, islandCardBox, ScreenBox } from '../../src/calmframes/homeIslands';
+import { DETAIL, ENVIRONMENTS, HOME_ISLANDS, ISLAND_ORDER, IslandSlotKind, boatBox, environmentHeadingBox, islandCardBox, ScreenBox } from '../../src/calmframes/homeIslands';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
+import PlayerOpening from '../../src/calmframes/PlayerOpening';
+import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import { titlePresentation } from '../../src/calmframes/TitleArtwork';
 import { CheckedTitle } from '../../src/calmframes/titleStatus';
 import { CONSERVATIVE_TEXT, wrapText } from '../../src/calmframes/uiLayout';
@@ -170,11 +177,11 @@ describe('the island Home with all three destinations', () => {
   const sky = measured.band('home-sky');
   const sandEdge = measured.band('home-sand-edge');
   const sand = measured.band('home-sand');
-  const heading = placedBox(byID(measured.tree, 'kid-home-heading'));
+  const headings = ENVIRONMENTS.map(({ name }) => ({ name, box: placedBox(byID(measured.tree, `kid-home-environment-${name.toLowerCase()}`)) }));
   const hero = placedBox(byID(measured.tree, 'kid-home-hero'));
   const cards = measured.cards.map((node) => ({ node, box: placedBox(node) }));
   const header: Box = { left: CALM_SPACE.SAFE_X, top: CALM_SPACE.SAFE_Y, right: 1920 - CALM_SPACE.SAFE_X, bottom: HOME_ISLANDS.HEADER_BOTTOM };
-  const read = [header, heading, hero, ...cards.map((card) => card.box)];
+  const read = [header, ...headings.map((one) => one.box), hero, ...cards.map((card) => card.box)];
 
   it('places every card on its own island, at the box homeIslands.ts gives it', () => {
     expect(cards).toHaveLength(3);
@@ -188,13 +195,51 @@ describe('the island Home with all three destinations', () => {
     }
   });
 
-  it('keeps the header and the heading on the cream sky, above its shoreline', () => {
+  it('names each environment once, Ocean over Acadia and Sea Otters and Forest over Forest, on the cream sky', () => {
     expect(header.bottom + CLEARANCE).toBeLessThanOrEqual(sky.top);
-    expect(heading.top).toBeGreaterThanOrEqual(header.bottom);
-    expect(heading.bottom + CLEARANCE).toBeLessThanOrEqual(sky.top);
+    expect(headings.map((one) => String(byID(measured.tree, `kid-home-environment-${one.name.toLowerCase()}-name`).children!.join('')))).toEqual(['Ocean', 'Forest']);
+    for (const { name, box } of headings) {
+      expect(box.top).toBeGreaterThanOrEqual(header.bottom);
+      expect(box.bottom + CLEARANCE).toBeLessThanOrEqual(sky.top);
+      const kinds = ENVIRONMENTS.find((one) => one.name === name)!.kinds;
+      expect(box).toEqual(toBox(environmentHeadingBox(kinds)));
+      // Over exactly its own cards: spanning them, and touching no other card's column.
+      const own = cards.filter((card) => kinds.includes(islandOf(consumer.find((one) => card.node.props.testID === `kid-home-poster-${one.title.id}`)!)!));
+      expect(own).toHaveLength(kinds.length);
+      expect(box.left).toBe(Math.min(...own.map((card) => card.box.left)));
+      expect(box.right).toBe(Math.max(...own.map((card) => card.box.right)));
+      for (const card of cards.filter((one) => !own.includes(one))) expect(card.box.left >= box.right || card.box.right <= box.left).toBe(true);
+    }
+    expect(touches(headings[0].box, headings[1].box)).toBe(false);
+    // The old single heading is gone from the map.
+    expect(find(measured.tree, (n) => n.props.testID === 'kid-home-heading')).toHaveLength(0);
   });
 
-  it('keeps the featured title, its runtime, Watch and Details on the cream sand, below both of its shorelines', () => {
+  it('lays the islands out as the environments read: Acadia, Sea Otters, then Forest', () => {
+    const order = [...cards].sort((a, b) => a.box.left - b.box.left)
+      .map((card) => islandOf(consumer.find((one) => card.node.props.testID === `kid-home-poster-${one.title.id}`)!));
+    expect(order).toEqual(['coastal', 'sea-otters', 'forest']);
+    expect(ENVIRONMENTS.flatMap((one) => one.kinds)).toEqual(ISLAND_ORDER);
+  });
+
+  it('does not repeat the chosen title under the cards: the sand holds Watch and Details, and Watch says what it plays', () => {
+    expect(find(measured.tree, (n) => n.props.testID === 'kid-home-video-title')).toHaveLength(0);
+    expect(find(measured.tree, (n) => n.props.testID === 'kid-home-video-meta')).toHaveLength(0);
+    expect(hero).toEqual(toBox(HOME_ISLANDS.ACTIONS));
+    expect(byID(measured.tree, 'kid-home-watch').props.accessibilityLabel).toBe('Watch: Acadia');
+    expect(byID(measured.tree, 'kid-home-more-info').props.accessibilityLabel).toBe('Details: Acadia');
+  });
+
+  it('gives every card the same two lines: a short name, then its sound and length', () => {
+    for (const card of cards) {
+      const lines = find(card.node, (n) => n.type === 'Text').map((n) => String(n.children!.join('')));
+      expect(lines).toHaveLength(2);
+      expect(lines[0].length).toBeLessThanOrEqual(12);
+      expect(lines[1]).toMatch(/^(Silent|Nature audio) · \d+ sec$/);
+    }
+  });
+
+  it('keeps Watch and Details on the cream sand, below both of its shorelines', () => {
     expect(sandEdge.bottom).toBeLessThanOrEqual(sand.bottom);
     expect(hero.top).toBeGreaterThanOrEqual(sand.bottom + CLEARANCE);
     expect(hero.bottom).toBeLessThanOrEqual(1080 - CALM_SPACE.SAFE_Y);
@@ -272,16 +317,15 @@ describe('the island Home with all three destinations', () => {
       // A card's two lines are clipped to one each rather than allowed to grow the card.
       for (const text of find(card.node, (n) => n.type === 'Text')) expect(text.props.numberOfLines).toBe(1);
     }
-    for (const id of ['kid-home-video-title', 'kid-home-video-meta']) {
-      const node = byID(measured.tree, id);
-      const style = StyleSheet.flatten(node.props.style) as { fontSize: number };
-      expect(wrapText(String(node.children!.join('')), style.fontSize, hero.right - hero.left, CONSERVATIVE_TEXT).lines).toBe(1);
+    for (const text of find(byID(measured.tree, 'kid-home-hero'), (n) => n.type === 'Text' && typeof n.children?.[0] === 'string')) {
+      const style = StyleSheet.flatten(text.props.style) as { fontSize: number };
+      expect(wrapText(String(text.children!.join('')), style.fontSize, hero.right - hero.left, CONSERVATIVE_TEXT).lines).toBe(1);
     }
   });
 
-  it('sizes the hero and every card to exactly what they hold', () => {
-    const lines = (id: string) => { const s = StyleSheet.flatten(byID(measured.tree, id).props.style) as Record<string, number>; return s.lineHeight + (s.marginTop ?? 0) + (s.marginBottom ?? 0); };
-    expect(lines('kid-home-video-title') + lines('kid-home-video-meta') + 88).toBe(hero.bottom - hero.top);
+  it('sizes the actions and every card to exactly what they hold', () => {
+    const watch = StyleSheet.flatten(byID(measured.tree, 'kid-home-watch').props.style) as Record<string, number>;
+    expect(watch.minHeight).toBe(hero.bottom - hero.top);
     for (const card of cards) {
       const style = StyleSheet.flatten(card.node.props.style) as Record<string, number>;
       const image = StyleSheet.flatten(find(card.node, (n) => n.type === 'Image')[0].props.style) as Record<string, number>;
@@ -312,7 +356,7 @@ it('puts the offline notice in the empty half of the sand, where it moves nothin
   expect(touches(slot, hero)).toBe(false);
   expect(slot.top).toBeGreaterThanOrEqual(offline.band('home-sand').bottom + CLEARANCE);
   expect(slot.right).toBeLessThanOrEqual(1920 - CALM_SPACE.SAFE_X);
-  for (const id of ['kid-home-hero', 'kid-home-heading']) expect(placedBox(byID(offline.tree, id))).toEqual(placedBox(byID(online.tree, id)));
+  for (const id of ['kid-home-hero', 'kid-home-environment-ocean', 'kid-home-environment-forest']) expect(placedBox(byID(offline.tree, id))).toEqual(placedBox(byID(online.tree, id)));
   expect(offline.cards.map(placedBox)).toEqual(online.cards.map(placedBox));
 });
 
@@ -327,7 +371,7 @@ it('gives Who is watching the row of cards while it is open, clear of the header
   expect(box).toEqual(toBox(HOME_ISLANDS.PICKER));
   // The cards and the heading step aside rather than sit under the panel, and the panel is not in the flow above them.
   expect(find(tree, (n) => typeof n.props.testID === 'string' && /^kid-home-poster-prepared-[0-9a-f]+$/.test(n.props.testID))).toHaveLength(0);
-  expect(find(tree, (n) => n.props.testID === 'kid-home-heading')).toHaveLength(0);
+  expect(find(tree, (n) => String(n.props.testID ?? '').startsWith('kid-home-environment-'))).toHaveLength(0);
   expect(find(tree, (n) => n.props.testID === 'kid-home-profiles')).toHaveLength(1);
   expect(find(panel, (n) => n.props.testID === 'kid-home-profiles')).toHaveLength(1);
   // What it holds, measured: heading, one row of chips, the chosen line, and the panel's own edges.
@@ -354,6 +398,16 @@ it('gives an island with no card its full scenery, and keeps every island clear 
   expect(measured.cards).toHaveLength(0);
   for (const kind of ISLAND_ORDER) expect(measured.inGroup(`island-landmarks-${kind}`)).toHaveLength(0);
   const hero = placedBox(byID(measured.tree, 'kid-home-hero'));
+  // With no card to name it, the title and runtime stand above Watch, filling the hero exactly.
+  expect(hero).toEqual(toBox(HOME_ISLANDS.HERO));
+  const lines = (id: string) => { const s = StyleSheet.flatten(byID(measured.tree, id).props.style) as Record<string, number>; return s.lineHeight + (s.marginTop ?? 0) + (s.marginBottom ?? 0); };
+  expect(lines('kid-home-video-title') + lines('kid-home-video-meta') + 88).toBe(hero.bottom - hero.top);
+  for (const id of ['kid-home-video-title', 'kid-home-video-meta']) {
+    const node = byID(measured.tree, id);
+    const style = StyleSheet.flatten(node.props.style) as { fontSize: number };
+    expect(wrapText(String(node.children!.join('')), style.fontSize, hero.right - hero.left, CONSERVATIVE_TEXT).lines).toBe(1);
+  }
+  expect(hero.top).toBeGreaterThanOrEqual(measured.band('home-sand').bottom + CLEARANCE);
   const sky = measured.band('home-sky'), sandEdge = measured.band('home-sand-edge');
   for (const shape of measured.drawn.filter((one) => one.groups.some((id) => id.startsWith('island-')))) {
     expect(touches(grow(shape.box, CLEARANCE), hero)).toBe(false);
@@ -370,4 +424,45 @@ it('keeps the flowing shelf for a shelf whose videos are not all islands', () =>
   view.unmount();
   const islands = render(<KidHomeScreen titles={consumer} onOpen={jest.fn()} />);
   expect(islands.getByTestId('kid-home-islands')).toBeTruthy();
+});
+
+describe.each(ISLAND_ORDER)('Details and its opening for the %s island', (kind) => {
+  const entry = consumer.find((one) => islandOf(one) === kind)!;
+  const header: Box = { left: CALM_SPACE.SAFE_X, top: CALM_SPACE.SAFE_Y, right: 1920 - CALM_SPACE.SAFE_X, bottom: HOME_ISLANDS.HEADER_BOTTOM };
+  const scenery = (measured: ReturnType<typeof measureHome>) => {
+    const island = union(measured.inGroup(`island-${kind}`).filter((shape) => shape.node.type === 'Path' && !shape.groups.includes(`island-landmarks-${kind}`)).map((shape) => shape.box));
+    const everything = union(measured.inGroup(`island-${kind}`).map((shape) => shape.box));
+    return { island, everything, sky: measured.band('home-sky'), sandEdge: measured.band('home-sand-edge'), panel: measured.drawn.find((shape) => shape.id === 'detail-panel')!.box };
+  };
+
+  it('stands the photograph on the island with every landmark beside or below it, Back on the sky', () => {
+    const measured = measureHome(<TitleDetailsScreen entry={entry} onPlay={jest.fn()} onBack={jest.fn()} />);
+    const { everything, sky, sandEdge, panel } = scenery(measured);
+    const photo = placedBox(byID(measured.tree, 'title-details-destination-image'));
+    expect(photo).toEqual(toBox(DETAIL.PHOTO));
+    const landmarks = measured.inGroup(`island-landmarks-${kind}`);
+    expect(landmarks.length).toBeGreaterThan(0);
+    for (const shape of landmarks) expect({ kind, shape: show(shape.box), touches: touches(grow(shape.box, CLEARANCE), photo) }).toEqual(expect.objectContaining({ touches: false }));
+    expect(header.bottom + CLEARANCE).toBeLessThanOrEqual(sky.top);
+    expect(everything.top).toBeGreaterThanOrEqual(sky.bottom + CLEARANCE);
+    expect(everything.bottom + CLEARANCE).toBeLessThanOrEqual(sandEdge.top);
+    expect(touches(everything, panel)).toBe(false);
+    expect(touches(photo, panel)).toBe(false);
+    for (const ripple of measured.inGroup('home-ripple')) {
+      for (const box of [photo, panel, everything]) expect(touches(grow(ripple.box, CLEARANCE), box)).toBe(false);
+      expect(ripple.box.top).toBeGreaterThanOrEqual(sky.bottom + CLEARANCE);
+    }
+  });
+
+  it('shows the whole island on the opening, where nothing stands on it, in the same place', () => {
+    const measured = measureHome(<PlayerOpening title={titlePresentation(entry.title).name} menuArt={kind} onBack={jest.fn()} />);
+    const { everything, sky, sandEdge, panel } = scenery(measured);
+    expect(measured.inGroup(`island-landmarks-${kind}`)).toHaveLength(0);
+    expect(header.bottom + CLEARANCE).toBeLessThanOrEqual(sky.top);
+    expect(everything.top).toBeGreaterThanOrEqual(sky.bottom + CLEARANCE);
+    expect(everything.bottom + CLEARANCE).toBeLessThanOrEqual(sandEdge.top);
+    expect(touches(everything, panel)).toBe(false);
+    const ring = measured.inGroup(`island-${kind}`).find((shape) => shape.node.type === 'Ellipse')!.box;
+    expect((ring.left + ring.right) / 2).toBeCloseTo(DETAIL.ISLAND.x, 5);
+  });
 });

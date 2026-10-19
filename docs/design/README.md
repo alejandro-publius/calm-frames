@@ -73,24 +73,24 @@ medical device."
 
 ## Palette
 
-Approved dusk coast interface palette. Original logo and Harbor/zen artwork are preserved; their embedded colors are not UI tokens. Shared material gradients live in `CalmControlSurface.tsx`.
+`COASTAL_COLORS` in `calmStyles.ts`, the dark palette of the player, notices and the parent area (`CALM_COLORS` is the same object). Home and Details are drawn on the coastal map in its own palette, listed after the contrast tables. Original logo and artwork colours are not UI tokens. Shared material gradients live in `CalmControlSurface.tsx`.
 
 | Token | tokens.json | Hex | Use |
 |---|---|---|---|
-| `BACKGROUND` | `background` | `#151C26` | Ink ground behind interface screens; artwork retains its original palette. |
-| `SURFACE` | `surface` | `#303B48` | Weathered slate cards, notices, status plates and fallback controls. |
-| `SURFACE_FOCUSED` | `surfaceFocused` | `#3B4856` | Focused or chosen fallback controls. |
-| `BORDER` | `border` | `#697585` | Slate edges and dividers. |
-| `FOCUS_RING` | `focusRing` | `#E6B963` | Lighthouse gold for focus only, with an underline or control-specific focus cue. |
-| `PRIMARY` | `primary` | `#D88B72` | Burnt coral primary action; gradient endpoints are in CalmControlSurface.tsx. |
-| `TEXT_DISABLED` | `textDisabled` | `#9DA4AE` | Muted text on the neutral disabled material. |
-| `ACCENT_DARK` | `accentDark` | `#8E5648` | Dark coral depth below the primary control. Never text. |
-| `TEXT` | `text` | `#F4ECDD` | Warm ivory headings, body text and control labels. |
-| `TEXT_DIM` | `textDim` | `#BDC2C9` | Supporting text and metadata. |
-| `INK` | `ink` | `#151C26` | Dark text on coral and the separator inside gold focus rings. |
-| `VERIFIED` | `verified` | `#E7D9BF` | Warm pale selection edge and verified status. |
-| `PENDING` | `pending` | `#B9C9DA` | Pale slate-blue preparing status and non-red timeline marks. |
-| `FAILED` | `failed` | `#F2BDB1` | Warm error status, unavailable notices and red timeline marks. |
+| `BACKGROUND` | `background` | `#0C131A` | Dark ground behind the player, notices and the parent area. Home and Details use the map palette below. |
+| `SURFACE` | `surface` | `#22303B` | Slate cards, notices, status plates and fallback controls. |
+| `SURFACE_FOCUSED` | `surfaceFocused` | `#2B3B47` | Focused or chosen fallback controls. |
+| `BORDER` | `border` | `#748995` | Slate edges and dividers. |
+| `FOCUS_RING` | `focusRing` | `#9CC1CB` | Pale sea blue for focus only, with an underline or control-specific focus cue. |
+| `PRIMARY` | `primary` | `#F0F2EF` | Primary action on the dark palette. |
+| `TEXT_DISABLED` | `textDisabled` | `#A1ABB3` | Muted text on the neutral disabled material. |
+| `ACCENT_DARK` | `accentDark` | `#9D6A55` | Warm depth below the primary control. Never text. |
+| `TEXT` | `text` | `#F0F2EF` | Headings, body text and control labels. |
+| `TEXT_DIM` | `textDim` | `#C4CDD2` | Supporting text and metadata. |
+| `INK` | `ink` | `#0C131A` | Dark text on the primary action and the separator inside focus rings. |
+| `VERIFIED` | `verified` | `#C4D8CC` | Verified status and the selection edge. |
+| `PENDING` | `pending` | `#B9C9DA` | Preparing status and non-red timeline marks. |
+| `FAILED` | `failed` | `#F2BDB1` | Error status, unavailable notices and red timeline marks. |
 | `COVER` | `cover` | `#000000` | Protective black cover; preserved independently of interface decoration. |
 
 ## Contrast
@@ -116,29 +116,42 @@ purpose: a television is read from across a room.
 
 | Text | On | Ratio | Where |
 |---|---|---|---|
-| `TEXT` | `BACKGROUND` | 14.59 | Headings and body text. |
-| `TEXT` | `SURFACE` | 9.69 | Labels on slate cards. |
-| `TEXT` | `SURFACE_FOCUSED` | 7.96 | Focused fallback labels. |
-| `TEXT_DIM` | `BACKGROUND` | 9.56 | Supporting text and metadata. |
-| `TEXT_DIM` | `SURFACE` | 6.35 | Descriptions and status plates. |
-| `TEXT_DIM` | `SURFACE_FOCUSED` | 5.21 | Supporting text on selected fallback rows. |
-| `INK` | `PRIMARY` | 6.40 | Primary action at its lightest endpoint; all endpoints are checked separately. |
-| `TEXT` | `INK` | 14.59 | Text on ink. |
-| `VERIFIED` | `SURFACE` | 8.17 | Verified status. |
-| `PENDING` | `SURFACE` | 6.73 | Preparing status. |
-| `FAILED` | `SURFACE` | 6.87 | Unavailable status. |
+| `TEXT` | `BACKGROUND` | 16.59 | Headings and body text. |
+| `TEXT` | `SURFACE` | 12.00 | Labels on slate cards. |
+| `TEXT` | `SURFACE_FOCUSED` | 10.25 | Focused fallback labels. |
+| `TEXT_DIM` | `BACKGROUND` | 11.57 | Supporting text and metadata. |
+| `TEXT_DIM` | `SURFACE` | 8.37 | Descriptions and status plates. |
+| `TEXT_DIM` | `SURFACE_FOCUSED` | 7.15 | Supporting text on selected fallback rows. |
+| `INK` | `PRIMARY` | 16.59 | Primary action at its lightest endpoint; all endpoints are checked separately. |
+| `TEXT` | `INK` | 16.59 | Text on ink. |
+| `VERIFIED` | `SURFACE` | 9.03 | Verified status. |
+| `PENDING` | `SURFACE` | 7.99 | Preparing status. |
+| `FAILED` | `SURFACE` | 8.16 | Unavailable status. |
 | `FAILED` | `COVER` | 12.68 | Playback error heading on the retained protective black surface. |
 
-Material endpoint checks additionally require dark text on every normal/pressed coral endpoint ≥4.5:1, supporting text on every secondary/selected endpoint ≥4.5:1, and disabled text on the neutral disabled fill ≥4.5:1. The minimum across the approved material states is 4.63:1 (truncated). Focus uses a dark contour; gold directly against coral is not claimed to meet 3:1. Actual moving-picture pixels and native caption preferences are outside these solid-color measurements.
+Material endpoint checks additionally require dark text on every normal/pressed coral endpoint ≥4.5:1, supporting text on every secondary/selected endpoint ≥4.5:1, and disabled text on the neutral disabled fill ≥4.5:1. Focus uses a dark contour between the ring and a light primary fill. Actual moving-picture pixels and native caption preferences are outside these solid-color measurements.
 
 ### Focus ring
 
 | Ring | Beside | Ratio | Where |
 |---|---|---|---|
-| `FOCUS_RING` | `SURFACE_FOCUSED` | 5.11 | Ring beside focused fallback controls. |
-| `FOCUS_RING` | `INK` | 9.36 | Dark contour separates gold from coral. |
-| `FOCUS_RING` | `BACKGROUND` | 9.36 | Ring against the ground. |
-| `FOCUS_RING` | `SURFACE` | 6.22 | Ring beside a slate group. |
+| `FOCUS_RING` | `SURFACE_FOCUSED` | 5.99 | Ring beside focused fallback controls. |
+| `FOCUS_RING` | `INK` | 9.70 | Dark contour separates gold from coral. |
+| `FOCUS_RING` | `BACKGROUND` | 9.70 | Ring against the ground. |
+| `FOCUS_RING` | `SURFACE` | 7.01 | Ring beside a slate group. |
+
+### The map palette
+
+Home, Details and the opening screen use `WORLD` in `CoastalWorld.tsx`: `BACKGROUND` `#F7EACF`, `SURFACE` `#FFF8E7`, `SURFACE_FOCUSED` `#FFE1A9`, `PRIMARY` `#F7B37A`, `FOCUS_RING` `#A44132` and `TEXT` `#193F3E`. The sea behind the islands is `#6FB4B1`, which no text sits on.
+
+| Pair | Ratio | Where |
+|---|---|---|
+| `TEXT` on `BACKGROUND` | 9.67 | Headings and labels on the cream sky and sand. |
+| `TEXT` on `SURFACE` | 10.88 | Card names and details on cream cards. |
+| `TEXT` on `SURFACE_FOCUSED` | 9.10 | A focused card. |
+| `TEXT` on `PRIMARY` | 6.41 | Watch. |
+| `FOCUS_RING` on `BACKGROUND` | 5.21 | The focus ring against the sky and sand. |
+| `FOCUS_RING` on `SURFACE` | 5.86 | The focus ring beside a card. |
 
 ## Coastal menus, Oct 14
 

@@ -85,7 +85,8 @@ describe('reaching Calm Frames', () => {
     fireEvent.press(screen.getByTestId('kid-mode-parent-back'));
     expect(screen.getByTestId(otter).props.accessibilityState.selected).toBe(true);
     expect(screen.getByTestId('kid-mode-home-parent-area').props.hasTVPreferredFocus).toBe(true);
-    expect(screen.getByTestId('kid-mode-home-video-title').props.children).toBe('Sea otters in Alaska');
+    // The cards name the videos; what Watch will play is what it announces.
+  expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Watch: Sea otters in Alaska');
     expect(navigate).not.toHaveBeenCalled();
   });
 
@@ -345,7 +346,8 @@ describe('the shelf a household lands on', () => {
   it('opens Acadia by default and keeps Harbor out of Home and its help flow', async () => {
     const { navigate, returnFromPlayer } = await renderKidMode(true);
     await finishFirstRun();
-    expect(screen.getByTestId('kid-mode-home-video-title').props.children).toBe('Acadia');
+    // The cards name the videos; what Watch will play is what it announces.
+  expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Watch: Acadia');
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
     // All three approved destinations appear on the coastal map.
     expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(3);

@@ -40,7 +40,8 @@ it('keeps a selected film visible after focus leaves, with no autoplay or focus 
 it.each(titles)('retains scenery, title typography and Watch size through $title.title', entry => {
   const data = titleDataFor(entry);
   const home = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} returnFocusId={entry.title.id} returnFocusControl="watch" />);
-  const homeStyle = StyleSheet.flatten(home.getByTestId('kid-home-video-title').props.style);
+  // With several videos the card names each one; its title keeps the display face.
+  const homeStyle = StyleSheet.flatten(home.getByTestId(`kid-home-poster-title-${entry.title.id}`).props.style);
   const button = StyleSheet.flatten(home.getByTestId('kid-home-watch').props.style);
   expect(home.getByTestId('coastal-world')).toBeTruthy();
   expect(home.queryByTestId('kid-home-benefit')).toBeNull();

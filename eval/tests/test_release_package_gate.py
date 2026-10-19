@@ -22,6 +22,8 @@ def gate(tmp_path):
     shutil.copy2(ROOT / 'app/tools/check_prepared_library.mjs', script)
     generator = script.with_name('approved_prepared_libraries.mjs')
     shutil.copy2(ROOT / 'app/tools/approved_prepared_libraries.mjs', generator)
+    # check_prepared_library.mjs imports this too; without it the gate never ran.
+    shutil.copy2(ROOT / 'app/tools/ambient_report.mjs', script.with_name('ambient_report.mjs'))
     (app / 'config').mkdir()
     (app / 'config/approved-prepared-libraries.json').write_text('{"version":1,"catalogs":[]}')
     (app / 'src/calmframes').mkdir(parents=True)

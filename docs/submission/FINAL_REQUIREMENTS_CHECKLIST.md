@@ -36,6 +36,31 @@ Dated historical rows retain their own evidence scope. Current visual/audio acce
 physical Fire TV testing and release/submission remain unverified. This debug package
 has build number 0. No recording, public access change or store submission occurred.
 
+## October 19 cloud update
+
+Not installed: these changes were made and tested in a cloud session with no Vega
+SDK or device, on branch `claude/ocean-layout-fix-2026-10-19` from `c84f95d`. The
+Mac's installed `2b78587` and its uncommitted navigation work are not on GitHub,
+so the installed build above is not this source.
+
+- **Home** names Ocean over Acadia and Sea Otters and Forest over Forest, with no
+  shoreline, wave, boat or landmark touching a word, card or control, and no title
+  repeated under the cards. **Details** and the opening screen keep Back on the sky
+  and the island's landmarks clear of the photograph. Done in source, measured by
+  24 layout tests; renders in `results/home-islands-2026-10-19/`. Unverified on Vega.
+- **Full app suite**: 163 suites, 1,676 passed, 0 failed. On `c84f95d` it had 18
+  failures that the bounded Oct 18 runs did not include.
+- **Checks that had stopped checking**, now repaired: the approved-wording guard,
+  the nine trust-gate tool tests, and the UI flash declarations. The UI flash check
+  passes 37 screens and transitions under the wcag and broadcast profiles.
+- **Import workflow**: a real bug fixed (edition delivery refused every delivery
+  because its tool list lacked `ambient_report.mjs`), and a real limit found: the
+  prepared library uses 66,492,442 of its 67,108,864 byte budget, so no new clip
+  of useful length fits until the owner changes the budget, the titles or the
+  package format. Missing: an end-to-end import of a new title.
+- **Rules not re-read today**: the cloud session's network policy blocks
+  devpost.com, so the rule quotes below keep their October 17 review date.
+
 ## Blocking now
 
 1. **The demo video does not exist.** It needs owner visual and audio acceptance of the
@@ -297,9 +322,7 @@ These now point to the canonical checklist, script or description, or were corre
 
 Still open, each needing an app or owner decision:
 
-- `eval/style_check.py` fails on one line of `app/src/calmframes/approvedPreparedCatalogs.ts`,
-  generated from a dash in the Acadia label in `app/config/approved-prepared-libraries.json`.
-  Fixing it changes app inputs.
-- `eval/attribution.py --check` fails on the Prairie ledger rows, as in section 8.
+- `eval/style_check.py` and `eval/attribution.py --check` both pass on
+  `claude/ocean-layout-fix-2026-10-19` (October 19); the earlier failures above are gone.
 - The root [README.md](../../README.md) points to the current state, but its body still
   shows October 14 renders and the older Harbor-first Home.

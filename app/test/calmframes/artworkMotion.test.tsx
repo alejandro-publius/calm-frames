@@ -1,11 +1,12 @@
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import { act, render, screen } from '@testing-library/react-native';
+import CoastalWorld from '../../src/calmframes/CoastalWorld';
+import CoastalBoat from '../../src/calmframes/CoastalBoat';
 import React from 'react';
 import { AccessibilityInfo, Animated, Text } from 'react-native';
 import CalmArtworkMotion from '../../src/calmframes/CalmArtworkMotion';
 import { scale } from '../../src/calmframes/calmStyles';
-import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
 import { checkedShelf } from './shelfFixtures';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 
@@ -192,12 +193,14 @@ describe('optional one-time artwork entry', () => {
     expect(removeReduction).toHaveBeenCalledTimes(1);
   });
 
-  it('shares the restrained harbor scene on details, keeping controls outside it', () => {
+  it('shares the still coastal scene on details, keeping controls outside it', () => {
     const harbor = checkedShelf().find(item => item.title.title === 'Harbor story (prepared locally)')!;
     const view = render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} interfaceMotionEnabled interfaceActive={false} />);
-    const scene = view.UNSAFE_getByType(HomeHarborScene);
-    expect(scene.props.enabled).toBe(true);
-    expect(scene.props.active).toBe(false);
+    // Details draws the map in its detail form: still scenery, no boat, nothing that moves.
+    const scene = view.UNSAFE_getByType(CoastalWorld);
+    expect(scene.props.detail).toBe(true);
+    expect(view.getByTestId('coastal-world').props.pointerEvents).toBe('none');
+    expect(view.UNSAFE_queryAllByType(CoastalBoat)).toHaveLength(0);
     expect(view.getByTestId('title-details-play').props.hasTVPreferredFocus).toBe(true);
     expect(scene.findAllByProps({ testID: 'title-details-play' })).toHaveLength(0);
   });

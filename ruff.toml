@@ -17,7 +17,10 @@ line-length = 100
 # way.
 src = [".", "flashmap/src", "flashmap/tests", "eval", "eval/tests"]
 # Amazon's vega-video-sample files, added unchanged in cf8b752 from upstream tag v0.24-RN83 (ef8e4da).
-extend-exclude = ["app/samples"]
+# results/ holds evidence: the exact scripts a dated run used, kept as they ran.
+# Reformatting one would change the record of what produced a number, so it is
+# not linted (Oct 19: 592 findings, all in receipt scripts added Oct 17 and 18).
+extend-exclude = ["app/samples", "results"]
 
 [lint]
 # Spelled out rather than left to the default, because ruff 0.17 widened its

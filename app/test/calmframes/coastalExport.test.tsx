@@ -27,7 +27,9 @@ test('composition keeps Watch, Details, explanation and Back actions with truthf
   save('home', home.toJSON());
   fireEvent.press(home.getByTestId('kid-home-watch')); expect(onPlay).toHaveBeenCalledWith(harbor);
   fireEvent.press(home.getByTestId('kid-home-more-info')); expect(onOpen).toHaveBeenCalledWith(harbor);
-  expect(home.getByTestId('kid-home-title').props.children).toBe('Calm Frames');
+  // The name is the header's wordmark; the shelf's own heading names the choice.
+  expect(home.getByText('Calm Frames')).toBeTruthy();
+  expect(home.getByTestId('kid-home-title').props.children).toBe('Choose an island');
   expect(home.queryByText('Picture holds on supported videos. Audio continues.')).toBeNull();
   expect(home.queryByText('Try the demo')).toBeNull();
   fireEvent.press(home.getByTestId('kid-home-learn')); expect(home.getByTestId('picture-hold-start')).toBeTruthy(); save('help', home.toJSON()); home.unmount();
@@ -35,11 +37,14 @@ test('composition keeps Watch, Details, explanation and Back actions with truthf
   const onOpenPractice = jest.fn();
   const details = render(<TitleDetailsScreen entry={harbor} onPlay={onPlay} onBack={onBack} practice={demo} onOpenPractice={onOpenPractice} />, { wrapper });
   fireEvent(details.getByTestId('title-details-play'), 'focus'); save('details', details.toJSON());
-  expect(details.getByText('The video plays normally.')).toBeTruthy();
+  // A video with nothing flagged says so, as a finding, not a promise.
+  expect(details.getByText('No flagged scenes.')).toBeTruthy();
   expect(details.getByTestId('title-details-show-info')).toBeTruthy();
-  fireEvent.press(details.getByTestId('title-details-practice')); expect(onOpenPractice).toHaveBeenCalledWith(demo);
   fireEvent.press(details.getByTestId('title-details-play')); expect(onPlay).toHaveBeenCalledTimes(2);
-  fireEvent.press(details.getByTestId('title-details-back')); expect(onBack).toHaveBeenCalledTimes(1); details.unmount();
+  fireEvent.press(details.getByTestId('title-details-back')); expect(onBack).toHaveBeenCalledTimes(1);
+  // The practice demo is offered on More info, beside the source and limits.
+  fireEvent.press(details.getByTestId('title-details-show-info'));
+  fireEvent.press(details.getByTestId('title-details-practice')); expect(onOpenPractice).toHaveBeenCalledWith(demo); details.unmount();
   const practice = render(<TitleDetailsScreen entry={demo} onPlay={onPlay} onBack={onBack} />, { wrapper });
   save('practice', practice.toJSON()); practice.unmount();
   const settings = render(<ParentAreaScreen gate={setPin(emptyPinGate(), '1357', 'preview-fixture')} onGateChange={jest.fn()} settings={DEFAULT_SETTINGS} onSettingsChange={jest.fn()} log={emptyHideLog()} titles={titles} onBack={onBack} />, { wrapper });

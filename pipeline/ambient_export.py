@@ -58,11 +58,11 @@ def export_ambient_catalog(*, source: Path, ambient: Path, source_manifest: Path
                                   preset=p, out_dir=directory, attribution=attribution)
         require(sha256_file(directory/'candidate.mp4') == candidate_hashes[p],
                 'Independent recipe reproduction differs from the proposed media.')
-        raw = (directory/'metadata.draft.json').read_text()
-        meta = strict_json(raw)
+        draft = (directory/'metadata.draft.json').read_text()
+        meta = strict_json(draft)
         require({k:v for k,v in meta.items() if k != 'analysis'} ==
                 {k:v for k,v in old_metadata[p].items() if k != 'analysis'}, 'Candidate recipe metadata changed.')
-        proof = {'metadataRaw': raw, 'reproductionSha256': candidate_hashes[p],
+        proof = {'metadataRaw': draft, 'reproductionSha256': candidate_hashes[p],
                  'timingAudio': {'sourceEqualsOutput': True, 'frameCount': len(identity['frame_times']),
                                  'audioPacketCount': len(identity['audio_packets']),
                                  'videoDurationRational': identity['video_duration'],
@@ -73,7 +73,7 @@ def export_ambient_catalog(*, source: Path, ambient: Path, source_manifest: Path
                                 'sha256': sha256_file(directory/directory_name/f'{q}.json')}
                             for q in ('wcag', 'broadcast')}
         proofs[p] = proof
-        metadata_hashes[p] = hashlib.sha512(raw.encode()).hexdigest()
+        metadata_hashes[p] = hashlib.sha512(draft.encode()).hexdigest()
     require(all(sha256_file(path) == digest for path, digest in source_inputs.items()), 'Export input changed during verification.')
     signer = hashlib.sha256(base64.b64decode(manifest['publicKeyBase64'], validate=True)).hexdigest()
     binding = {'sourceSha256': title['sourceSha256'], 'ambientSha256': sha256_file(ambient),
