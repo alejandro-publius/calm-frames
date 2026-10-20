@@ -534,8 +534,14 @@ export const DETECTION_LIMITS_LINE =
  * not say whether a still exists for each part.
  */
 export function coverLine(count: number, hasCaptions: boolean, ocean = false): string {
-  // Acadia's prepared rendition is silent (-91 dB throughout), so promise sound only when there is some.
-  if (ocean) return 'Ocean footage replaces flagged scenes. Original audio is kept when the video has sound.';
+  // Acadia's baked replacement is cut from the start of its own video, which is a
+  // still, near-black frame (measured Oct 19: 90% of pixels at video black), not
+  // ocean footage; and its rendition is silent (-91 dB). Say only what is shown,
+  // and not "still picture", which names a signed scene hold Acadia does not carry.
+  if (ocean) {
+    const replaced = count === 1 ? 'The flagged scene is replaced' : 'Flagged scenes are replaced';
+    return `${replaced} with a dark frame from the start of this video. Original audio is kept when the video has sound.`;
+  }
   const parts =
     count === 1
       ? 'The flagged scene is covered.'

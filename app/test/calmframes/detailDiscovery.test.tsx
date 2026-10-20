@@ -80,7 +80,7 @@ describe('details discovery', () => {
     fireEvent.press(view.getByTestId('title-details-show-info'));
     // Acadia's maps carry no scene hold and its rendition ships no captions,
     // so the page promises neither a still picture nor captions.
-    expect(view.getByTestId('title-details-cover-line').props.children).toBe('Ocean footage replaces flagged scenes. Original audio is kept when the video has sound.');
+    expect(view.getByTestId('title-details-cover-line').props.children).toBe('Flagged scenes are replaced with a dark frame from the start of this video. Original audio is kept when the video has sound.');
     expect(view.queryByText(/still picture|captions/i)).toBeNull();
     expect(view.queryByTestId('title-details-record')).toBeNull();
     fireEvent.press(view.getByTestId('title-details-technical'));

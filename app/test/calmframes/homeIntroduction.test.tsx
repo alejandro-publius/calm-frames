@@ -108,7 +108,7 @@ test('the short explanation leads with purpose, qualifies ocean and sound, and k
   const textNodes = introduction.findAllByType(Text);
   const words = textNodes.map(node => node.props.children).filter(value => typeof value === 'string').join(' ');
   expect(words).toContain('Calm Frames hides flagged flashing scenes in prepared videos.');
-  expect(words).toContain('Acadia replaces them with ocean footage.');
+  expect(words).toContain('Each one gets a plain cover or a still image from the same video.');
   expect(words).toContain('Original sound continues when present.');
   expect(words).toContain('not other apps or live TV');
   expect(words).toContain('cannot guarantee seizure prevention');

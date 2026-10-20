@@ -9,7 +9,7 @@ export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDe
   return <View testID="picture-hold-introduction" style={styles.content}>
     <Text style={styles.title} accessibilityRole="header">How it works</Text>
     <Text testID="how-it-works-purpose" style={styles.body}>Calm Frames hides flagged flashing scenes in prepared videos.</Text>
-    <Text style={styles.body}>Acadia replaces them with ocean footage. Other videos may use a still image or plain cover. Original sound continues when present.</Text>
+    <Text style={styles.body}>Each one gets a plain cover or a still image from the same video. Original sound continues when present.</Text>
     <Text style={styles.body}>Choose a video, then press Watch. Press Back to return.</Text>
     <View testID="how-it-works-limits" style={styles.limits}>
       <Text style={styles.detail}>{ONLY_IN_CALM_FRAMES_LINE}</Text>
