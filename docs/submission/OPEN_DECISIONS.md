@@ -1,7 +1,8 @@
 # Open decisions and blockers
 
 Install status, October 19: nothing from the submission branch
-`claude/ocean-layout-fix-2026-10-19` (head `7b3f5b2`) has been built or
+`claude/ocean-layout-fix-2026-10-19` (head `9cfd9d3` when checked late on
+October 19) has been built or
 installed. The last install with a receipt here is source `805f855` on October
 18: one compile needed a bounded recovery of stale media staging, then all
 package gates passed and one install completed, and its native text checks
@@ -26,7 +27,7 @@ only in browser renders
 composition, not native pixels. Once a build is installed, accept: the coastal
 map with Ocean over Acadia and Sea otters and Forest over Forest, Watch and
 Details on the sand, all three destination/Details flows, Acadia ocean
-replacements near 7.3 s and 28.1 s, compact Skip, Acadia's retained audio track
+replacements near 7.3 s and 28.1 s under Extra cautious, compact Skip, Acadia's retained audio track
 (it measures -91 dB throughout, so its card says Silent), the intentionally
 silent 19.987-second NOAA sea-otter excerpt and the Forest creek's original
 nature audio. Text logs cannot approve layout or sound, and every native record
@@ -48,8 +49,8 @@ something judges cannot find.
 
 The FAQ asks entrants to check third-party footage with the organizers. All
 three clips are third-party government footage: NPS Acadia, the NPS Forest
-creek (NPS: G Litten) and NOAA Fisheries sea otters. Office Hours #2 is Monday,
-October 19, 9:00 am PT; the repository records no answer. No recording of the
+creek (NPS: G Litten) and NOAA Fisheries sea otters. Office Hours #2 was Monday,
+October 19, 9:00 am PT; the repository records no answer from it. No recording of the
 current app has been made or authorized; the October 10 video in the private
 draft release shows a superseded build.
 
@@ -62,8 +63,9 @@ the private branch `claude/ocean-layout-fix-2026-10-19`. The repository's
 default branch is still `main`, unchanged since September 20 and not the
 submission source, so a repository URL without the branch name opens `main`.
 Choose what judges are given: the branch URL, a new default branch or a merge.
-The October 18 private handoff to `codex/creator-editions-2026-10-18` is
-recorded in `results/github-coastal-handoff-2026-10-18/`. The repository holds
+The October 18 private handoff to `codex/creator-editions-2026-10-18` has a
+preflight, not a push receipt, in `results/github-coastal-handoff-2026-10-18/`;
+that branch now ends at `c84f95d`. The repository holds
 no record of invitations or access changes.
 
 ### 5. Register and complete the form
@@ -86,8 +88,10 @@ unverified. The drafts are [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) and
 - The earlier setup/persistence and style/attribution fixes are included in the
   October 18 installed source, where 499 bounded app tests and 11 attribution tests
   passed. Those bounded runs missed 18 failures that the full app suite showed on
-  `c84f95d`; on this branch the full app suite passes 1,676 tests with 0 failures
-  (on `53a1c51`) and the full Python suite 1,880 with 0 failures (on `d9c9e2f`).
+  `c84f95d`; on this branch the full app suite passed 1,676 tests with 0 failures
+  and 4 skipped on `53a1c51` (no full run is recorded after `9cfd9d3` changed one
+  copy line and the two tests that check it), and the Python suite without its 2
+  slow tests passed 1,880 with 0 failures and 9 skipped on `d9c9e2f`.
   The October 18 debug package is not a final release package. The WCAG-only
   legacy playback diagnostic remains unavailable under extra-cautious; its gate
   was not relaxed.
@@ -131,14 +135,14 @@ The release and licence lane owns the inspection; the decisions are Alex's.
 ### 9. The package budget, or sharing duplicate preset copies
 
 The prepared library uses 66,492,442 of its 67,108,864 byte (64 MiB) budget,
-about 602 KB free, so no new clip of useful length can be imported. 37,144,901
+616,422 bytes (about 602 KiB) free, so no new clip of useful length can be imported. 37,144,901
 of those bytes are byte-identical copies of a rendition that several presets
 share; the unique content is 29,347,541 bytes. The current format cannot store
 them once: the player and the verifier require each preset's rendition at its
 own path, and each bundle's identity is the hash of a manifest listing those
 files, which the approval registry pins. Choices: raise the budget, drop or
 shorten a title, or approve a format change in the player, verifier, checker
-and packager, which gives the four bundles new identities for owner approval
+and packager, which gives the bundles that hold those copies new identities for owner approval
 (no maps, signatures, media or presets would change). Nothing has been changed.
 Evidence: [results/home-islands-2026-10-19](../../results/home-islands-2026-10-19/README.md),
 "Still open".

@@ -1,7 +1,8 @@
 # Current demo run of show
 
-Source: branch `claude/ocean-layout-fix-2026-10-19`, October 19, 2026; app code
-last changed in `53a1c51`. Nothing from this branch has been built, installed or
+Source: branch `claude/ocean-layout-fix-2026-10-19`, October 19, 2026; the
+layout last changed in `53a1c51`, and `9cfd9d3` reworded Acadia's More info
+line. Nothing from this branch has been built, installed or
 seen on a device. The screens below come from the code (`KidHomeScreen.tsx`,
 `homeIslands.ts`, `TitleDetailsScreen.tsx`) and from the browser renders in
 [results/home-islands-2026-10-19](../../results/home-islands-2026-10-19/README.md),
@@ -29,8 +30,8 @@ the three clips alone run about 70 seconds (37.6, 20.0 and 12.0).
 2. **0:15 Right, Select.** Right moves from Watch to Details on the sand; Select
    opens Acadia Details with Watch focused: Back, "Acadia", "38 seconds", Watch,
    More info, "Waves along the coast of Acadia National Park." and "Scenes
-   replaced: 2 scenes · 9 seconds" under Extra cautious (7 seconds under WCAG or
-   Broadcast).
+   replaced: 2 scenes · 9 seconds" under Extra cautious (7 seconds under Standard
+   or Broadcast).
 3. **0:20 Right, Select.** More info opens with Back focused: the ocean
    replacement line, "Calm Frames works only with prepared videos in this app,
    not other apps or live TV.", the detection limits with the approved sentence,
@@ -70,7 +71,8 @@ logs from October 18 recorded Details opening with Watch focused, Right to More
 info, Select, Back to More info, Left to Watch, each clip playing to its natural
 end and returning to Details Watch, and Back from Details to the card that
 opened it. This branch keeps the same Details controls, route and player code;
-only the Details photograph moved. On Home those logs recorded Right from Watch
+the Details photograph and scenery moved and Acadia's More info line was
+reworded. On Home those logs recorded Right from Watch
 to Details on the sand, Left back, and Up from Watch to Acadia; the sand row
 keeps that order here. The islands moved: they now run Acadia, Sea otters,
 Forest from left to right (on `805f855` Forest sat in the middle), so the
@@ -98,7 +100,8 @@ Details photographs are stills from the prepared videos.
 [The October 19 record](../../results/home-islands-2026-10-19/README.md): the
 full app suite passes on `53a1c51` (1,676 passed, 0 failed; 18 failed on
 `c84f95d`), and `app/test/calmframes/homeIslands.test.tsx` fails if anything on
-Home, Details or the opening touches. The [October 18
+Home, Details or the opening touches. No full run is recorded after `9cfd9d3`
+changed one copy line and the two tests that check it. The [October 18
 receipts](../../results/forest-activation-2026-10-18/README.md) for `805f855`
 counted a bounded 499 tests in 38 suites and 11 attribution tests.
 

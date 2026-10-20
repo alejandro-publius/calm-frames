@@ -14,7 +14,8 @@ revalidate eligibility or submission policy. No demo of the current app has been
 recorded, and nothing has been submitted.
 
 - **Submission source.** Private branch `claude/ocean-layout-fix-2026-10-19`, head
-  `7b3f5b2` (app code last changed in `53a1c51`), descended from
+  `9cfd9d3` when checked late on October 19 (the layout last changed in `53a1c51`;
+  `9cfd9d3` reworded Acadia's More info line), descended from
   `codex/creator-editions-2026-10-18` at `c84f95d`. `main` is unchanged since
   September 20 and is not the submission source.
 - **Last recorded install, not this source.** Source
@@ -35,7 +36,7 @@ recorded, and nothing has been submitted.
 
 On October 18 the coastal-world source `805f855` was installed and checked through
 native text logs. The authorized private GitHub handoff targeted existing branch
-`codex/creator-editions-2026-10-18`, recorded in
+`codex/creator-editions-2026-10-18`, whose preflight, not a push receipt, is in
 `results/github-coastal-handoff-2026-10-18/`; that branch now ends at `c84f95d`,
 the base of the current submission branch.
 It includes the earlier setup/persistence fixes and the three-destination menu.
@@ -61,10 +62,12 @@ so the installed build above is not this source.
   repeated under the cards. **Details** and the opening screen keep Back on the sky
   and the island's landmarks clear of the photograph. Done in source, measured by
   24 layout tests; renders in `results/home-islands-2026-10-19/`. Unverified on Vega.
-- **Full app suite**: 163 suites, 1,676 passed, 0 failed, on `53a1c51` (no app
-  code changed after it). On `c84f95d` it had 18 failures that the bounded Oct 18
-  runs did not include. **Full Python suite** on `d9c9e2f`: 1,880 passed, 0
-  failed, 9 skipped. **Mutation gate**: 68 of 70 killed, matching
+- **Full app suite**: 163 suites, 1,676 passed, 4 skipped, 0 failed, on `53a1c51`;
+  no full run is recorded after `9cfd9d3` changed one copy line and the two tests
+  that check it. On `c84f95d` it had 18 failures that the bounded Oct 18
+  runs did not include. **Python suite** on `d9c9e2f`, without its 2 tests marked
+  slow: 1,880 passed, 0 failed, 9 skipped. **Mutation gate**, one run from
+  `53a1c51`: 68 of 70 killed, matching
   `results/mutation.json`; the 2 survivors are its documented equivalents.
 - **Checks that had stopped checking**, now repaired: the approved-wording guard,
   the nine trust-gate tool tests, and the UI flash declarations. The UI flash check
@@ -158,7 +161,7 @@ section 11.
 | "should be less than three (3) minutes. Judges are not required to watch beyond three minutes" | Missing | [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md), the canonical script, plans a route under three minutes; its times are a plan, not a measurement. Nothing of the current app is recorded. |
 | "should include footage that shows the Project functioning on the device for which it was built". Fire TV: an actual device or "the Fire TV/Vega simulator". | Missing | The plan records the Vega Virtual Device window. |
 | "must be uploaded to and made publicly visible on YouTube or Vimeo" with the link on the form | Missing | The rules do not mention unlisted videos, so choose public. |
-| "must not include third party trademarks, or copyrighted music or other material unless the Entrant has permission" | Unverified | Narration only, no music. All three clips are third-party government footage: Acadia and the Forest creek are public domain National Park Service clips, and the sea otters are NOAA Fisheries public domain B-roll. The FAQ asks entrants to "check with us on the specifics (how much of the video it makes up and how it's used) before finalizing." Ask at Office Hours #2, Monday, October 19, 9:00 am PT, or in the forum. Keep other apps, tabs and logos off screen. |
+| "must not include third party trademarks, or copyrighted music or other material unless the Entrant has permission" | Unverified | Narration only, no music. All three clips are third-party government footage: Acadia and the Forest creek are public domain National Park Service clips, and the sea otters are NOAA Fisheries public domain B-roll. The FAQ asks entrants to "check with us on the specifics (how much of the video it makes up and how it's used) before finalizing." Office Hours #2 (Monday, October 19, 9:00 am PT) has passed, and the repository records no answer from it; ask in the forum or by email. Keep other apps, tabs and logos off screen. |
 | English | Done in the plan | The narration is written in English. |
 | Owner visual and audio acceptance before recording | Missing | The current branch is not installed; its Home is seen only in [browser renders](../../results/home-islands-2026-10-19/README.md), not native pixels. The October 18 [Forest evidence](../../results/forest-activation-2026-10-18/README.md) for `805f855` does not establish pixels or audio acceptance. |
 | Owner authorization to record | Missing | No recording is authorized by any document here. |
@@ -169,9 +172,9 @@ section 11.
 
 | Requirement | Status | Evidence or gap |
 | --- | --- | --- |
-| A GitHub URL whose repository holds "all necessary source code, assets, and instructions required for the project to be functional" | Done for the private branch | The submission source, `claude/ocean-layout-fix-2026-10-19` at `7b3f5b2`, is on GitHub (remote head checked October 19). The Mac's `2b78587` and its uncommitted navigation work are not, so a build of them would not match the repository. Judge access remains separate. |
+| A GitHub URL whose repository holds "all necessary source code, assets, and instructions required for the project to be functional" | Done for the private branch | The submission source, `claude/ocean-layout-fix-2026-10-19` at `9cfd9d3`, is on GitHub (remote head checked late on October 19). The Mac's `2b78587` and its uncommitted navigation work are not, so a build of them would not match the repository. Judge access remains separate. |
 | Public route: an open source license file, "detectable and visible at the top of the repository page (in the About section)" | Unverified | The root [LICENSE](../../LICENSE) is Apache-2.0, and on October 19 GitHub's API reported Apache-2.0 detected on the default branch, `main`. The repository is private today, and `main` is not the submission source. Two sample files carry an "AMAZON PROPRIETARY/CONFIDENTIAL" notice beside the sample's MIT-0 grant ([review](../AMAZON_SAMPLE_LICENSE_REVIEW.md)); the clarification request is unsent. |
-| Private route: share with the Devpost testing account and the Amazon team | Missing | Invite all six names the rules give, since one list has five and the other six: chris-trag, knmeiss, giolaq, anishamalde, mosesroth, emersonsklar. Read the testing account's address from the rules page; do not copy it into the repository. GitHub invitations lapse if not accepted within seven days, so check acceptance and re-send. Nobody is invited. |
+| Private route: share with the Devpost testing account and the Amazon team | Missing | Invite all six names the rules give, since one list has five and the other six: chris-trag, knmeiss, giolaq, anishamalde, mosesroth, emersonsklar. Read the testing account's address from the rules page; do not copy it into the repository. GitHub invitations lapse if not accepted within seven days, so check acceptance and re-send. The repository holds no record of an invitation, and the invitation list could not be read from the cloud session. |
 | Setup instructions that work | Partly verified | A fresh tracked app tree passes TypeScript and strict asset checks using existing dependency versions. The new native preflight correctly identifies missing generated runtime files; full dependency download and Shaka compilation were not repeated. See the October 18 change record and [quickstart](REVIEWER_QUICKSTART.md). The current branch has not been built anywhere: its cloud session had no Vega SDK and no generated player files. |
 | "available free of charge and without any restriction, for testing, evaluation and use" | Missing | Follows from the chosen route. |
 | Login credentials in the testing instructions if anything is private | Done, none needed | The app has no account. A reviewer sets their own Parents PIN on a fresh install. Private repository access is by invitation. |
@@ -215,11 +218,11 @@ gate, not proof of a visible frame. Each observation belongs to the build it was
 
 Source `805f855`, on the Vega Virtual Device. The current branch has not been built or
 installed; its approved catalog file and catalog code are unchanged since `805f855`,
-and its Home layout differs. The consumer catalog is generated from exact approvals in
+and its Home, Details and opening layouts and some copy differ. The consumer catalog is generated from exact approvals in
 `app/config/approved-prepared-libraries.json`, and Home lists `consumerTitles(settings)`,
 which contains Acadia, the approved 12-second Forest excerpt with original nature
 audio, and the 19.987-second silent NOAA sea-otter excerpt.
-Current playback/navigation evidence is in [the completed walkthrough](../../results/forest-activation-2026-10-18/validation-summary.json).
+Its playback/navigation evidence is in [the completed walkthrough](../../results/forest-activation-2026-10-18/validation-summary.json).
 The build-specific bullets below are historical observations, not the current test ceiling.
 
 - **Before delivery** the build checks packaged file hashes, signed maps and original
@@ -297,8 +300,9 @@ An earlier proposal, committed in `076247a`. Evidence:
 
 - **Owner visual and audio acceptance.** On a build of the current branch, which none of
   the records above covers: the Ocean and Forest Home with Watch and Details on the sand,
-  the Details bar, the explanation screens, the ocean replacement near 7.3 s and 28.1 s,
-  the corner notice, and sound through covers.
+  the Details bar, the explanation screens, the ocean replacement near 7.3 s and 28.1 s
+  under Extra cautious, the corner notice, and each title's sound. Only Acadia has
+  covers, and its audio track is silent, so no current title carries sound through a cover.
 - **Intermittent playback slowdown on the virtual device.** Two October 17 isolation runs
   showed
   <!--n results/native-slowdown-isolation-2026-10-17/receipt.json:experiments.fresh-app.media_span_ms -->6010<!--/n--> ms
@@ -353,6 +357,6 @@ No longer open: `eval/style_check.py` and `eval/attribution.py --check` both pas
 Still open, each needing an app or owner decision:
 
 - Recheck the root [README.md](../../README.md) against this branch before submission.
-  As committed at `7b3f5b2`, its body still shows October 14 renders and the older
-  Harbor-first Home, and its walkthrough gives the October 18 island order (Acadia,
-  Forest, Sea Otters) rather than this branch's (Acadia, Sea otters, Forest).
+  As committed at `9cfd9d3`, its body shows this branch's October 19 browser renders
+  and island order (Acadia, Sea otters, Forest), but its opening still names head
+  `7b3f5b2` and app code last changed in `53a1c51`, which `9cfd9d3` itself moved past.

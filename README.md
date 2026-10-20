@@ -1,8 +1,8 @@
 # Calm Frames
 
 Current state, October 19, 2026. The submission source is the private branch
-`claude/ocean-layout-fix-2026-10-19` (head `7b3f5b2`, app code last changed in
-`53a1c51`), which descends from `codex/creator-editions-2026-10-18` at `c84f95d`;
+`claude/ocean-layout-fix-2026-10-19` (app code last changed in `9cfd9d3`, which
+rewords Acadia's cover line), which descends from `codex/creator-editions-2026-10-18` at `c84f95d`;
 `main` has not moved since Sep 20 and is not the submission source. **Nothing
 from this branch has been built, installed or seen on a device.** The last
 install with a receipt here is source `805f855` on the Vega Virtual Device on
@@ -78,7 +78,7 @@ Coastal artwork, text sized for a couch and a visible ring on the focused remote
 
 ### Try it in a minute
 
-The analyzer runs on any machine with Python 3.12; PyAV brings its own FFmpeg. The clip is the project's own Harbor film under Apache-2.0, with generated artwork, animated water, original captions and synthesized ambience. The production source checks pass all three flash profiles.
+The analyzer runs on any machine with Python 3.12; PyAV brings its own FFmpeg. The clip is the project's own Harbor film under Apache-2.0, with generated artwork, animated water, original captions and synthesized ambience. The production source checks pass for all three presets, which measure against the two flash profiles, wcag and broadcast.
 
 ```sh
 python -m pip install -e 'flashmap[dev]'
@@ -91,13 +91,15 @@ The first prints `PASS`, the second writes one HTML page for the title that open
 ### Where things stand
 
 **Current source, October 19.** Branch `claude/ocean-layout-fix-2026-10-19`
-(head `7b3f5b2`) places everything on Home, Details and the opening from one
+places everything on Home, Details and the opening from one
 module, `app/src/calmframes/homeIslands.ts`, and repairs checks that had stopped
 checking. **It has not been built, installed or seen on a device.** On this
 branch the full app suite passes 1,676 tests with 0 failures and 4 skipped (on
-`53a1c51`, the last app change; `c84f95d` had 18 failures that the earlier
-bounded counts did not run); the full Python suite passes 1,880 with 0 failures
-and 9 skipped (on `d9c9e2f`); the mutation gate catches <!--n results/mutation.json:totals.killed -->68<!--/n--> of <!--n results/mutation.json:totals.mutations -->70<!--/n-->
+`53a1c51`, and again on `9cfd9d3`, the last app change; `c84f95d` had 18 failures
+that the earlier bounded counts did not run); the Python suite passes 1,880 with
+0 failures and 9 skipped, with its 2 slow tests deselected (on `d9c9e2f`,
+[log](results/home-islands-2026-10-19/python-suite-d9c9e2f.txt)); the mutation
+gate, run from `53a1c51`, catches <!--n results/mutation.json:totals.killed -->68<!--/n--> of <!--n results/mutation.json:totals.mutations -->70<!--/n-->
 mutations, matching the committed report, and the <!--n results/mutation.json:totals.survived -->2<!--/n--> survivors are the
 documented equivalents; and the app's UI flash check passes 37 screens and
 transitions under both profiles. See [FINAL_HANDOFF.md](FINAL_HANDOFF.md) and
@@ -469,10 +471,10 @@ These rows exist so nobody has to guess what is missing.
 | What | Why it is empty |
 |---|---|
 | Physical screen-level cover timing | Unmeasured and outside the simulator-only submission scope. |
-| Current Harbor simulator journey | Requires a visible current build and recorded observation; historical software timing is not screen timing. |
+| Simulator journey on the current branch | Requires a build of this branch and a direct observation; nothing from it has been installed, and historical software timing is not screen timing. |
 | Physical device end-to-end behavior | Outside this submission scope; no hardware validation is claimed. |
 | Prevented exposure, in seconds | Computed from flash maps once the KPI run happens. Never by playing flashing content with the filter off. |
-| Test counts | The suites run in CI. The records of their counts are typed records of single local runs whose logs stay outside the repo: [`results/redesign_validation_2026-10-10.json`](results/redesign_validation_2026-10-10.json) at cba1a29, and on Oct 11 two Python runs that disagreed with each other over a race in the cover measurement, since fixed, [`results/interaction_evidence_2026-10-11.json`](results/interaction_evidence_2026-10-11.json) on 7.1.5 and [`results/local_python_run_2026-10-11.json`](results/local_python_run_2026-10-11.json) on 6.1.1. [docs/STATUS.md](docs/STATUS.md) quotes them side by side. Nothing regenerates them, so no count is a headline here. |
+| Test counts | The suites run in CI. The records of their counts are typed records of single local runs whose logs stay outside the repo: [`results/redesign_validation_2026-10-10.json`](results/redesign_validation_2026-10-10.json) at cba1a29, and on Oct 11 two Python runs that disagreed with each other over a race in the cover measurement, since fixed, [`results/interaction_evidence_2026-10-11.json`](results/interaction_evidence_2026-10-11.json) on 7.1.5 and [`results/local_python_run_2026-10-11.json`](results/local_python_run_2026-10-11.json) on 6.1.1. [docs/STATUS.md](docs/STATUS.md) quotes them side by side. The Oct 19 counts in [Where things stand](#where-things-stand) are single local runs too, and their logs are committed ([app](results/home-islands-2026-10-19/full-suite-after.log), [Python](results/home-islands-2026-10-19/python-suite-d9c9e2f.txt)). Nothing regenerates them, so no count is a headline here. |
 | Red flash segments from real footage | The free pool has none. Self-filmed red clips are the plan, under the rules in [docs/SAFETY.md](docs/SAFETY.md). |
 | Voice transport on a device | The virtual device has no Alexa, so no device run has delivered a spoken seek. The media-session path, `SafeMediaControlHandler`, is exercised by jest only; the D-pad and on-screen paths were observed on the virtual device. |
 
@@ -722,7 +724,7 @@ Worth knowing before trusting this with a child.
 - **Only titles that passed verify can play in kid mode.** Anything else is not protected, because it was never measured.
 - **Detection can miss flashing.** "No flagged scenes" on a title's Details is what the analyzer found, not a safety certificate.
 - **It works only with videos prepared for its own player.** Netflix, Prime Video and every other app's content are out of scope, and so are DRM titles and live TV.
-- **The package budget is nearly spent.** The prepared library uses <!--n results/forest-activation-2026-10-18/approval.json:replacementNamespaceBytes -->66492442<!--/n--> of its <!--n results/forest-activation-2026-10-18/approval.json:unchangedLimitBytes -->67108864<!--/n--> bytes (64 MiB), about 602 KB free, so no new clip can be imported until the owner changes the budget, the titles or the package format. More than half of those bytes are identical copies of one rendition stored once per preset, which the current format cannot share ([notes](results/home-islands-2026-10-19/README.md)).
+- **The package budget is nearly spent.** The prepared library uses <!--n results/forest-activation-2026-10-18/approval.json:replacementNamespaceBytes -->66492442<!--/n--> of its <!--n results/forest-activation-2026-10-18/approval.json:unchangedLimitBytes -->67108864<!--/n--> bytes (64 MiB), about 602 KiB free, so no real clip of useful length can be imported until the owner changes the budget, the titles or the package format. More than half of those bytes are identical copies: a title whose presets share one rendition stores it again for each preset, which the current format cannot avoid ([notes](results/home-islands-2026-10-19/README.md)).
 - **HDR is not measured.** flashmap refuses HLG and PQ input rather than measuring it with the wrong transfer curve.
 - **Decoder support is bounded.** The earlier Theora failures were fixed and rescreened; unsupported or undecodable inputs still fail closed.
 - **There is no screen-level cover lead time.** The software-level number above is the app's own timing on the virtual device, and it stops at the moment the app sets its state. The timing claim is a software observation, not a measurement of what a screen showed; physical camera timing is outside this submission scope.
@@ -756,7 +758,7 @@ The approved wording, everywhere, is: **reduces exposure to flashing above publi
 | Fraunces headings and Source Sans 3 controls; retained Inter 4.001 | SIL Open Font License 1.1: [Fraunces](app/assets/fonts/LICENSE-Fraunces), [Source Sans 3](app/assets/fonts/LICENSE-SourceSans3), [Inter](app/assets/fonts/LICENSE-Inter) |
 | Presentation artwork and animation plates | Ours, per file in [media/LICENSES.csv](media/LICENSES.csv): the cinematic Harbor and water plates are Apache-2.0; the earlier illustration and gradient are CC0-1.0. Playback stills are extracted and signed through the pipeline |
 | Our own videos: the Harbor film, its prepared renditions, and the calm gradient | Ours, per file in [media/LICENSES.csv](media/LICENSES.csv): the current cinematic Harbor is Apache-2.0; the historical geometric film and calm gradient are CC0-1.0 |
-| The three titles on the shelf, and the stills on their cards | Public domain, not ours, credited in [NOTICE](NOTICE) and per file in [media/LICENSES.csv](media/LICENSES.csv) with the source page: Acadia, "NPS Video, Acadia National Park. No NPS endorsement is implied."; Sea otters in Alaska, NOAA Fisheries B-roll, whose source page requires the NOAA Fisheries credit; Forest creek at Redwood, "NPS: G Litten; no NPS endorsement implied". The app shows each credit in the title's More info. The Acadia card still is a frame of the prepared video ([provenance](app/assets/image/tv/acadia-coast.provenance.json)) |
+| The three titles on the shelf, and the stills on their cards | Public domain, not ours, credited in [NOTICE](NOTICE) and, except for the Acadia card still, per file in [media/LICENSES.csv](media/LICENSES.csv) with the source page: Acadia, "NPS Video, Acadia National Park. No NPS endorsement is implied."; Sea otters in Alaska, NOAA Fisheries B-roll, whose source page requires the NOAA Fisheries credit; Forest creek at Redwood, "NPS: G Litten; no NPS endorsement implied". The app shows each credit in the title's More info. The Acadia card still is a frame of the prepared video, recorded in its [provenance file](app/assets/image/tv/acadia-coast.provenance.json) |
 | The sample's photographs under `app/src/assets/movie-content/` | [Pexels licence](https://www.pexels.com/license/), as the sample's own `app/README.md` states. Only the sample's own screens draw them; kid mode draws our artwork and the public-domain card stills above |
 | Screening media | Per file in [media/LICENSES.csv](media/LICENSES.csv), with URL, licence, credit line, SHA-256, duration and resolution |
 

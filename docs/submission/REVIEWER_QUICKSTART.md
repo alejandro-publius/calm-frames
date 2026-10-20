@@ -28,9 +28,10 @@ The fresh-checkout timings above remain historical; no new clean-room install is
 
 ## Current source, October 19
 
-The branch descends from `codex/creator-editions-2026-10-18` at `c84f95d`. App
-code last changed in `53a1c51`; `d9c9e2f` changed delivery tests and `7b3f5b2`
-the handoff. `main` is unchanged since September 20 and is not the submission
+The branch descends from `codex/creator-editions-2026-10-18` at `c84f95d`. The
+Home and Details layout changed in `6a34ae2` and `53a1c51`; `d9c9e2f` changed
+delivery tests, `7b3f5b2` the handoff, and `9cfd9d3` reworded Acadia's More
+info line, the last app code change, and corrected this packet. `main` is unchanged since September 20 and is not the submission
 source. The session that made this branch had no Vega SDK or device, so none of
 it has been built or installed ([October 19 record](../../results/home-islands-2026-10-19/README.md)).
 The last build and install with a receipt here is source
@@ -99,9 +100,11 @@ suite passed on `53a1c51`: 163 suites, 1,676 tests passed, 0 failed, 4 skipped,
 with the coverage floors met
 ([log](../../results/home-islands-2026-10-19/full-suite-after.log)). The same
 suite had 18 failing tests on `c84f95d`
-([log](../../results/home-islands-2026-10-19/full-suite-before.log)). The full
-Python suite passed on `d9c9e2f`: 1,880 passed, 0 failed, 9 skipped
-([FINAL_HANDOFF.md](../../FINAL_HANDOFF.md), October 19). These are recorded
+([log](../../results/home-islands-2026-10-19/full-suite-before.log)). No full
+app run is recorded after `9cfd9d3` changed one copy line and the two tests
+that check it. The Python line above, with `-m "not slow"`, passed on
+`d9c9e2f`: 1,880 passed, 0 failed, 9 skipped, 2 slow tests deselected
+([log](../../results/home-islands-2026-10-19/python-suite-d9c9e2f.txt)). These are recorded
 results, not a new run of these instructions. The October 18 record for
 `805f855` counted a bounded 499 app tests in 38 suites and 11 attribution tests
 ([validation summary](../../results/forest-activation-2026-10-18/validation-summary.json)),
@@ -209,7 +212,8 @@ Use [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md); the keys below are the same
 route. They follow this branch's layout and code and have not yet been pressed
 on a build of it. The October 18
 [owner keys](../../results/sea-otters-flow-2026-10-18/OWNER_WALKTHROUGH.md)
-describe the earlier island order and no longer match Home. Preserve an
+describe the two-island Home of `6f2570d`, before Forest, and were not
+checked against this Home. Preserve an
 existing household; no PIN entry or reset is part of this walkthrough. Never
 press Back on Home itself; it leaves the app.
 
@@ -219,7 +223,7 @@ From Home with Acadia selected and Watch focused, where a launch lands:
 
 1. **Right, Select** moves from Watch to Details on the sand and opens Acadia
    Details with Watch focused. It shows "Scenes replaced: 2 scenes · 9 seconds"
-   under Extra cautious, 7 seconds under WCAG or Broadcast.
+   under Extra cautious, 7 seconds under Standard or Broadcast.
 2. **Right, Select** opens More info: scope, detection limits, the approved
    sentence, the NPS credit and Technical details. **Back, Left** returns to
    Details Watch.
@@ -246,7 +250,9 @@ With the log stream above, each focus move should print a `CALM_TRACE focus` lin
 `kid-mode-details-show-info` and `kid-mode-details-info-back`.
 
 No log from this branch exists. The `805f855` native pass on October 18 covers
-the same Details, More info, playback and return-focus code with all three full
+the same Details controls, More info route, playback and return-focus code
+(since then the Details photograph and scenery moved and Acadia's More info
+line was reworded) with all three full
 videos and both Acadia replacement requests, on the earlier island order. The
 earlier `6f2570d` logs cover pause/resume, Skip, More info and Parents
 cancellation. No PIN operation was repeated for the island update. These logs

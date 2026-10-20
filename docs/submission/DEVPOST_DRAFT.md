@@ -54,10 +54,11 @@ videos.
   will be covered or replaced and for how long, with a still timeline; a video with none
   says "No flagged scenes", which is what the analyzer found, not a safety certificate.
   Source attribution and the audio explanation are in More info.
-- **Scenes replaced with protection retained.** Approved Acadia uses baked ocean footage
-  during flagged scenes, keeps the source's audio track in its rendition (that track is
-  silent, so its card says Silent) and keeps an independent opaque fallback. Compact
-  player wording and Skip describe the active presentation. The approved Sea otters
+- **Scenes replaced with protection retained.** During flagged scenes, approved Acadia
+  shows footage from the opening of the same park video, baked into its rendition. It keeps
+  the source's audio track (that track is silent, so its card says Silent) and an
+  independent opaque fallback. Compact player wording and Skip describe the active
+  presentation. The approved Sea otters
   excerpt has no flagged intervals and no audio track; the Forest excerpt has no flagged
   intervals and keeps its original nature audio.
 - **Skip is a choice.** Skip covers the picture first, moves past the scene, and uncovers
@@ -104,7 +105,7 @@ establish medical safety.
 2. **Prepare and sign.** The pipeline pads each flagged interval with guard time and renders
    a prepared copy with those sections already covered. It proves the cover is drawn by
    checking the first, middle and last frame of each covered span, up to six spans per
-   preset, then signs a flash map (Ed25519) bound to the exact file hashes. Acadia's ocean
+   preset, then signs a flash map (Ed25519) bound to the exact file hashes. Acadia's
    replacement has its own check instead: the copy is rebuilt, must match byte for byte,
    and is analyzed again whole under both profiles.
 3. **Approve exactly, check twice.** A reviewed approval file names the exact bundle,
@@ -139,12 +140,14 @@ establish medical safety.
   <!--n results/final-clarity-2026-10-18/verification.json:test_suites -->4<!--/n--> suites.
   These are focused suites, not the full suite.
 
-[Owner: FINAL_HANDOFF.md (October 19) records the full suites on this branch: app 1,676
-passed, 0 failed, 4 skipped, on `53a1c51`; Python 1,880 passed, 0 failed, 9 skipped, on `d9c9e2f`;
-mutation gate 68 of 70 killed, matching `results/mutation.json`. The same pass found the
-full app suite had 18 failing stale tests on `c84f95d` while the October 18 records counted
-focused subsets. None of the suite counts is in a results JSON yet, so none is marked or
-published here; add them only once they are.]
+[Owner: the October 19 records for this branch: app suite 1,676 passed, 0 failed, 4 skipped,
+on `53a1c51` (`results/home-islands-2026-10-19/full-suite-after.log`); Python 1,880 passed,
+0 failed, 9 skipped, with the 2 slow tests deselected, on `d9c9e2f` (`python-suite-d9c9e2f.txt`
+in the same folder); mutation gate 68 of 70 killed, the 2 survivors the documented
+equivalents, matching `results/mutation.json` (`mutation-check-53a1c51.json`). The same pass
+found the full app suite had 18 failing stale tests on `c84f95d` while the October 18 records
+counted focused subsets. The app and Python counts are in a log and a text file, not a results
+JSON, so neither is marked or published here; add them only once they are.]
 
 [Owner: add one line on the October 9 AWS deployment only if entering AWS Builder. The current
 TV app and local workflow do not call AWS.]
@@ -213,7 +216,7 @@ medical device.
 - It is a Vega OS app; there is no Fire OS build.
 - Every native observation comes from the Vega Virtual Device, never a physical Fire TV.
   Device logs show events, order and focus, not pixels or sound. The latest run recorded in
-  the repository, on source `805f855` (October 18), checked all three titles, Acadia ocean requests,
+  the repository, on source `805f855` (October 18), checked all three titles, Acadia replacement requests,
   natural end and Details/Back routes on the earlier coastal map. Earlier source `6f2570d`
   also has pause fallback, protected Skip and control checks. The Ocean and Forest Home
   on the current source has not been built, installed or seen on a device; its pictures
@@ -222,14 +225,15 @@ medical device.
 - Playback on the virtual device sometimes slows, as described above, and the cause is
   unknown.
 - The Acadia clip opens on a few seconds of near-black footage. That is in the source video,
-  not a cover.
+  not a cover. Acadia's replacement footage starts at that same opening.
 
-[Owner: look at Acadia's replaced scenes before pasting "ocean footage". The ocean excerpt is
-source 0 to 6.5 seconds and every replacement starts at its beginning
-(`results/baked-ocean-2026-10-18/README.md`), and the October 17 blackdetect pass found the
-source near-black from 0 to 4.963 seconds (`results/black-gap-2026-10-17/README.md`). By those
-records most of each replacement comes from that near-black opening. No recorded check has
-looked at those frames.]
+[Owner: look at Acadia's replaced scenes before calling them ocean footage, here or in the
+video. The replacement excerpt is source 0 to 6.5 seconds and every replacement starts at its
+beginning (`results/baked-ocean-2026-10-18/README.md`), and the October 17 blackdetect pass
+found the source near-black from 0 to 4.963 seconds (`results/black-gap-2026-10-17/README.md`).
+By those records the Standard and Broadcast replacements (4.356 and 2.48 seconds) come
+entirely from that near-black opening, and the Extra cautious ones (5.356 and 3.48 seconds)
+all but the last 0.393 seconds of the first. No recorded check has looked at those frames.]
 
 ## Product feedback
 

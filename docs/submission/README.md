@@ -1,8 +1,9 @@
 # The submission packet
 
 Updated October 19, 2026. The submission source is the private branch
-`claude/ocean-layout-fix-2026-10-19`, head `7b3f5b2` (app code last changed in
-`53a1c51`), which descends from `codex/creator-editions-2026-10-18` at `c84f95d`.
+`claude/ocean-layout-fix-2026-10-19`, head `9cfd9d3` when checked late on
+October 19 (the layout last changed in `53a1c51`; `9cfd9d3` reworded Acadia's
+More info line), which descends from `codex/creator-editions-2026-10-18` at `c84f95d`.
 `main` is unchanged since September 20 and is not the submission source.
 
 **What is and is not installed.** Nothing from this branch has been built or
