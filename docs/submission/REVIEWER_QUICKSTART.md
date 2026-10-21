@@ -120,16 +120,10 @@ Metro uses a checkout-specific cache and does not depend on Watchman.
 `scripts/release.sh` builds one architecture, checks the library and package,
 and writes a local package, hashes and preparation receipt. It never publishes.
 Use Python 3.12 through `RELEASE_PYTHON` or `.venv/bin/python`. Do not pass a PIN.
-No package has been built from this branch. The last package with a build and
-install record is
-`build/release/forest-activation-2026-10-18/calm-frames-three-islands-aarch64-debug.vpkg`
-in the owner's Mac checkout, SHA-256
-`8e58685d579a740743e5d6e89b0fa8bbcce42e7a6189b9c92265575ea0c1e511`, from
-source `805f855`, with the earlier Home. See its [build and install record](../../results/forest-activation-2026-10-18/README.md).
-The owner's October 19 note says the Mac now has `2b78587` installed.
-Installing a build of this branch on the owner's simulator replaces that, so it
-is the owner's call. The commands below are for a separately authorized
-reviewer installation. Preserve concurrent checkouts and the SDK app link.
+The current exact package was built from `110ba6e`; its SHA256 and source receipt
+are linked at the top. It is not yet installed. The owner's existing simulator
+and household are preserved while the Mac is locked. Installation and app-only
+review are authorized once the owner unlocks it; no PIN reset is needed.
 
 ```sh
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
@@ -182,59 +176,18 @@ some under load, so a missing line proves nothing.
 
 ## 4. The current demo sequence
 
-Use [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md); the keys below are the same
-route. They follow this branch's layout and code and have not yet been pressed
-on a build of it. The October 18
-[owner keys](../../results/sea-otters-flow-2026-10-18/OWNER_WALKTHROUGH.md)
-describe the two-island Home of `6f2570d`, before Forest, and were not
-checked against this Home. Preserve an
-existing household; no PIN entry or reset is part of this walkthrough. Never
-press Back on Home itself; it leaves the app.
+Use [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md) for the current calm recording plan.
+Preserve the existing household and never use blind repeated Back presses. Home
+retains Ocean/Forest and all approved titles. McWay is an additional coastal card;
+select it explicitly and choose Watch. It plays five minutes at natural speed,
+then holds its final frame until Back. Existing Acadia, Sea otters and Forest
+start as still scenes and expose short previews only through a separate action.
 
-Home is a coastal map: "Ocean" over the Acadia and Sea otters cards, "Forest"
-over the Forest card, and Watch and Details on the sand for the chosen island.
-From Home with Acadia selected and Watch focused, where a launch lands:
-
-1. **Right, Select** moves from Watch to Details on the sand and opens Acadia
-   Details with Watch focused. It shows "Scenes replaced: 2 scenes · 9 seconds"
-   under Extra cautious, 7 seconds under Standard or Broadcast.
-2. **Right, Select** opens More info: scope, detection limits, the approved
-   sentence, the NPS credit and Technical details. **Back, Left** returns to
-   Details Watch.
-3. **Select** plays approved Acadia, about 38 seconds. Under the current
-   extra-cautious profile the two replacement intervals are 7.343 to 12.699
-   seconds and 28.113 to 31.593 seconds. The rendition has approved baked ocean
-   replacements and an independent opaque fallback; its original audio track is
-   silent (-91 dB). The natural end returns to Details Watch.
-4. **Back, Left, Up, Right, Select** returns Home with Details focused, then
-   reaches Watch, the Acadia card and the Sea otters card, and opens Sea otters
-   Details ("No flagged scenes."). **Select** plays the exact NOAA Fisheries
-   excerpt: 19.987 seconds, silent, plays once, then Details Watch.
-5. **Back, Right, Select, Select** returns to the Sea otters card, reaches
-   Forest, opens its Details and plays the 12-second NPS creek excerpt once with
-   its original nature audio. **Back** after it ends leaves Home on the Forest
-   card.
-6. During any clip, **Play/Pause** toggles playback; **Down** reveals hidden
-   controls. Select on focused Skip requests protection before seeking.
-   End/Back restores the launching screen.
-
-With the log stream above, each focus move should print a `CALM_TRACE focus` line:
-`kid-mode-home-watch`, `kid-mode-home-more-info` (Details on the sand),
-`kid-mode-home-poster-prepared-...` (a card), `kid-mode-details-play`,
-`kid-mode-details-show-info` and `kid-mode-details-info-back`.
-
-No log from this branch exists. The `805f855` native pass on October 18 covers
-the same Details controls, More info route, playback and return-focus code
-(since then the Details photograph and scenery moved and Acadia's More info
-line was reworded) with all three full
-videos and both Acadia replacement requests, on the earlier island order. The
-earlier `6f2570d` logs cover pause/resume, Skip, More info and Parents
-cancellation. No PIN operation was repeated for the island update. These logs
-do not certify pixels, audio, VoiceView or physical Fire TV behavior.
-Loading/error recovery is controlled-test evidence. The legacy WCAG-only
-playback check is unavailable under extra-cautious; do not change settings to
-expose it. No screenshot or recording is authorized; that stays the owner's
-decision.
+Before recording, independently verify a complete five-minute run, final audio
+fade and still hold, pause/resume and Back on the exact installed build. Current
+source tests cover those state contracts, but the native review is still pending.
+No completed native picture/audio or physical-TV acceptance is claimed. Do not
+show the diagnostic app or replay the rejected short-preview walkthrough.
 
 ## 4a. A browser preview, without a device
 

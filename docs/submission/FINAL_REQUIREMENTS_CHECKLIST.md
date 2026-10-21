@@ -1,4 +1,8 @@
-# Final requirements checklist
+# Historical requirements review (October 17–19)
+
+For current October 21 status, use [the submission packet](README.md) and
+[remaining blockers](OPEN_DECISIONS.md). The dated facts below are retained as
+history, not current instructions or acceptance claims.
 
 Install status, October 19: nothing from the submission branch has been built or
 installed. The last install with a receipt here is `805f855` on October 18: one
@@ -7,7 +11,7 @@ passed and one install completed, and its native checks cover all three full
 clips, Forest More info and How it works Back. No pixel/audio or owner
 acceptance is implied.
 
-The canonical submission checklist. Product/build facts reconciled October 19,
+The historical submission checklist. Product/build facts reconciled October 19,
 2026 against branch `claude/ocean-layout-fix-2026-10-19`. The official rule
 pages below retain their October 17 review date; this pass does not claim to
 revalidate eligibility or submission policy. No demo of the current app has been
@@ -82,7 +86,7 @@ so the installed build above is not this source.
 - **Rules not re-read today**: the cloud session's network policy blocks
   devpost.com, so the rule quotes below keep their October 17 review date.
 
-## Blocking now
+## Blockers recorded October 19 (superseded)
 
 1. **No demo video of the current app exists.** (The October 10 video in the private
    draft release shows a superseded build.) It needs the source to be shown installed
@@ -328,7 +332,7 @@ Not required. A project "can only win one (1) track prize and one (1) mini chall
 | Open Source | "Create a new, additional open-source project or contribute to an existing public repository during the hackathon window". Needs a "contribution URL, project repository URL, GitHub username" and a description. | Missing. The vega-video-sample fix in [OPEN_SOURCE_PR.md](../OPEN_SOURCE_PR.md) has no public fork or branch yet. Whether packages inside the primary repository count is not defined. |
 | AWS Builder | "Describe which AWS service(s) you used and how, in your Product Feedback answer." | Unverified, and optional. [FEEDBACK.md](../FEEDBACK.md) sections 8 to 16 describe the AWS services in draft. The October 9 deployment is documented ([record](../../results/aws_deploy_2026-10-09.json)); its current live state, cost tag and bill are not ([OPEN_DECISIONS.md](OPEN_DECISIONS.md) item 11). The current TV app and local workflow do not call AWS. The rules note on October 7: "We are out of credit codes and will no longer be accepting credit requests." |
 
-## 11. Form fields not yet seen
+## 11. Form fields not yet seen on October 19
 
 The "Enter a Submission" page needs a login. Fill these in from the live form before
 pasting anything:
