@@ -67,10 +67,12 @@ function pressTwice(testID: string) {
 it('launches once for two quick Watch presses, and again after the player returns', async () => {
   const { navigation, returnFromPlayer } = await startShelf();
   pressTwice('kid-mode-home-watch');
+  expect(navigation.navigate).not.toHaveBeenCalled();
+  pressTwice('kid-mode-ambient-preview');
   expect(navigation.navigate).toHaveBeenCalledTimes(1);
   expect(navigation.navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.objectContaining({ showHomeOpening: true }));
   returnFromPlayer();
-  fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
+  fireEvent.press(screen.getByTestId('kid-mode-ambient-preview'));
   expect(navigation.navigate).toHaveBeenCalledTimes(2);
 });
 
@@ -78,7 +80,10 @@ it('launches once for two quick Watch presses on Details as well', async () => {
   const { navigation, returnFromPlayer } = await startShelf();
   fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
   pressTwice('kid-mode-details-play');
+  expect(navigation.navigate).not.toHaveBeenCalled();
+  pressTwice('kid-mode-ambient-preview');
   expect(navigation.navigate).toHaveBeenCalledTimes(1);
   returnFromPlayer();
+  fireEvent.press(screen.getByTestId('kid-mode-ambient-back'));
   expect(screen.getByTestId('kid-mode-details-play').props.hasTVPreferredFocus).toBe(true);
 });

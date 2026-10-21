@@ -1,3 +1,4 @@
+import AmbientScene, { AmbientArtwork } from '../calmframes/AmbientScene';
 import { bakedAmbientForRendition } from '../calmframes/approvedBakedAmbient';
 import { mayShowBakedAmbient } from '../calmframes/bakedAmbient';
 import { ambientCoverPredecessor, combineAmbientCovers } from '../calmframes/ambientPersonalCovers';
@@ -520,13 +521,13 @@ const PlayerScreen = ({
     trace('playback', 'back');
     if (route.params.showHomeOpening) setReturningHome(true);
 
-    reportVideoExit();
+    if (videoRef.current) reportVideoExit();
 
     surfaceHandle.current = null;
     captionViewHandle.current = null;
     videoRef?.current?.clearSurfaceHandle('');
     videoRef?.current?.clearCaptionViewHandle('');
-    const destroyed = videoHandler.destroyVideoElements();
+    const destroyed = !videoRef.current || videoHandler.destroyVideoElements();
     trace('playback', destroyed ? 'teardown ok' : 'teardown fallback');
     videoRef.current = null;
 
@@ -541,14 +542,30 @@ const PlayerScreen = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // An ended video has nothing left to present. Use the same idempotent
-  // teardown as Back; remote keys cannot cancel the return or revive stale UI.
+  // Optional short previews end on stationary artwork until explicit Back.
+  // Legacy diagnostic/demo routes retain their existing teardown behavior.
   useEffect(() => {
     if (isVideoEnded) {
       trace('playback', 'ended');
-      leavePlayer();
+      if (!route.params.ambientPreview) {
+        leavePlayer();
+      } else {
+        // Release native transport focus as well as the visible surface. A
+        // finished preview must not restart audio beneath the still scene.
+        surfaceGeneration.current += 1;
+        if (videoRef.current) reportVideoExit();
+        videoRef.current?.pause();
+        videoRef.current?.clearSurfaceHandle('');
+        videoRef.current?.clearCaptionViewHandle('');
+        videoHandler.destroyVideoElements();
+        videoRef.current = null;
+        surfaceHandle.current = null;
+        captionViewHandle.current = null;
+      }
     }
-  }, [isVideoEnded, leavePlayer]);
+    // The handler owns the stable media refs for this mounted route.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isVideoEnded, leavePlayer, route.params.ambientPreview]);
 
   const navigateBack = useCallback(() => {
     if (captionStatus.current) {
@@ -731,6 +748,10 @@ const PlayerScreen = ({
     }
     captionViewHandle.current = null;
   };
+
+  if (isVideoEnded && route.params.ambientPreview && ['coastal', 'forest', 'sea-otters'].includes(data.calmMenuArt ?? '')) {
+    return <AmbientScene title={data.title} artwork={data.calmMenuArt as AmbientArtwork} ended onBack={leavePlayer} testID="preview-ended-still" />;
+  }
 
   return (
     <CoastalAppearance.Provider value={false}>

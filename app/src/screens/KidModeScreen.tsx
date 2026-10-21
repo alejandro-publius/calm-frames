@@ -1,3 +1,4 @@
+import AmbientScene, { ambientArtworkFor } from '../calmframes/AmbientScene';
 import { titlePresentation } from '../calmframes/TitleArtwork';
 /**
  * Calm Frames, as a person meets it.
@@ -89,6 +90,7 @@ export type KidModeView =
   | 'first-run'
   | 'home'
   | 'details'
+  | 'ambient'
   | 'parent'
   | 'credits';
 
@@ -286,6 +288,7 @@ const KidModeScreen = ({
   const profileLogs = useHideLogs();
   const [view, setView] = React.useState<KidModeView>('home');
   React.useEffect(() => { trace('screen', view); }, [view]);
+  const [ambientFrom, setAmbientFrom] = React.useState<'home' | 'details'>('home');
   const [openId, setOpenId] = React.useState<string | null>(null);
   const [selectedTitleId, setSelectedTitleId] = React.useState<string | null>(null);
   const [lastOpenedId, setLastOpenedId] = React.useState<string | null>(null);
@@ -393,6 +396,10 @@ const KidModeScreen = ({
         if (navigation.isFocused?.() === false) {
           return false;
         }
+        if (view === 'ambient') {
+          setView(ambientFrom);
+          return true;
+        }
         if (view === 'credits') {
           setView('parent');
           interfaceSound.confirm();
@@ -408,7 +415,7 @@ const KidModeScreen = ({
       },
     );
     return () => subscription.remove();
-  }, [navigation, view, interfaceSound, practiceFromId]);
+  }, [navigation, view, interfaceSound, practiceFromId, ambientFrom]);
 
   const finishFirstRun = (result: FirstRunResult) => {
     // The first run sets the floor, not one kid's settings. Every profile is
@@ -428,7 +435,7 @@ const KidModeScreen = ({
     setView('home');
   };
 
-  const play = (entry: CheckedTitle) => {
+  const play = (entry: CheckedTitle, ambientPreview = false) => {
     if (saved.phase !== 'ready' || !saved.value || launching.current) {
       return;
     }
@@ -440,6 +447,7 @@ const KidModeScreen = ({
     navigation.navigate(Screens.PLAYER_SCREEN, {
       data: titleDataFor(entry),
       showHomeOpening: true,
+      ambientPreview,
       interfaceMotionEnabled: family.interfaceMotionEnabled === true,
       guarded: guardedParamsFor(
         entry,
@@ -521,6 +529,21 @@ const KidModeScreen = ({
     );
   }
 
+  const settle = (entry: CheckedTitle, from: 'home' | 'details') => {
+    if (saved.phase !== 'ready' || !ambientArtworkFor(entry)) return;
+    interfaceSound.stop();
+    setOpenId(entry.title.id);
+    setAmbientFrom(from);
+    setView('ambient');
+  };
+  if (view === 'ambient' && open && ambientArtworkFor(open)) {
+    return withInterfaceFeedback(<AmbientScene title={titlePresentation(open.title).name}
+      artwork={ambientArtworkFor(open)!} testID={`${testID}-ambient`}
+      onBack={() => setView(ambientFrom)}
+      previewSeconds={Math.ceil((open.title.durationMs ?? 0) / 1000)}
+      onPreview={() => play(open, true)} />);
+  }
+
   if (view === 'details' && open) {
     return withInterfaceFeedback(
       <TitleDetailsScreen
@@ -530,6 +553,7 @@ const KidModeScreen = ({
         interfaceActive={interfaceActive}
         testID={`${testID}-details`}
         entry={open}
+        onAmbient={ambientArtworkFor(open) ? (entry) => settle(entry, 'details') : undefined}
         settings={settings}
         onPlay={(entry) => {
           setDetailsFocus('play');
@@ -555,6 +579,7 @@ const KidModeScreen = ({
       interfaceActive={interfaceActive}
       testID={`${testID}-home`}
       titles={titles}
+      onAmbient={(entry) => { rememberLaunch(entry); settle(entry, 'home'); }}
       onLaunchControl={(control) => { launchControl.current = control; }}
       onPlay={(entry) => {
         rememberLaunch(entry);

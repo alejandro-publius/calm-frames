@@ -103,10 +103,14 @@ describe('Back from playback and details on the real shelf', () => {
     if (origin === 'details') fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
     const caller = origin === 'details' ? 'kid-mode-details-play' : 'kid-mode-home-watch';
     fireEvent.press(screen.getByTestId(caller));
+    expect(preferred()).toEqual(['kid-mode-ambient-back']);
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-preview'));
     expect(screen.queryByTestId(caller)).toBeNull();
     expect(screen.queryByTestId('kid-mode-details-practice')).toBeNull();
     expect(preferred()).toEqual([]);
     returnFromPlayer();
+    expect(preferred()).toEqual(['kid-mode-ambient-back']);
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-back'));
     expect(screen.getByTestId(caller)).toBeTruthy();
     expect(preferred()).toEqual([caller]);
   });
@@ -115,8 +119,11 @@ describe('Back from playback and details on the real shelf', () => {
     const { navigation, returnFromPlayer } = await startShelf();
     expect(preferred()).toEqual(['kid-mode-home-watch']);
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
+    expect(navigation.navigate).not.toHaveBeenCalled();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-preview'));
     expect(navigation.navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.objectContaining({ showHomeOpening: true }));
     returnFromPlayer();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-back'));
     expect(preferred()).toEqual(['kid-mode-home-watch']);
   });
 
@@ -132,8 +139,11 @@ describe('Back from playback and details on the real shelf', () => {
     const { navigation, returnFromPlayer } = await startShelf();
     fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
-    expect(navigation.navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.anything());
+    expect(navigation.navigate).not.toHaveBeenCalled();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-preview'));
+    expect(navigation.navigate).toHaveBeenCalledWith(Screens.PLAYER_SCREEN, expect.objectContaining({ ambientPreview: true }));
     returnFromPlayer();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-back'));
     expect(preferred()).toEqual(['kid-mode-details-play']);
     fireEvent.press(screen.getByTestId('kid-mode-details-back'));
     expect(preferred()).toEqual(['kid-mode-home-more-info']);
@@ -187,7 +197,9 @@ describe('Back from playback and details on the real shelf', () => {
   it('Watch, then a title from How it works: Back returns to How it works, not Watch', async () => {
     const { returnFromPlayer } = await startShelf();
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-preview'));
     returnFromPlayer();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-back'));
     fireEvent.press(screen.getByTestId('kid-mode-home-learn'));
     fireEvent.press(screen.getByTestId('picture-hold-playback-check'));
     fireEvent.press(screen.getByTestId('kid-mode-details-back'));
@@ -197,12 +209,16 @@ describe('Back from playback and details on the real shelf', () => {
   it('Watch, Back, then Details and Back: the latest control wins each time', async () => {
     const { returnFromPlayer } = await startShelf();
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-preview'));
     returnFromPlayer();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-back'));
     fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
     fireEvent.press(screen.getByTestId('kid-mode-details-back'));
     expect(preferred()).toEqual(['kid-mode-home-more-info']);
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-preview'));
     returnFromPlayer();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-back'));
     expect(preferred()).toEqual(['kid-mode-home-watch']);
   });
 });

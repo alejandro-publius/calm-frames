@@ -5,6 +5,8 @@
 <!-- Latest local checkpoint: October18 island refinement passes438 bounded app tests and11 attribution tests; UI source 1d14285 installed once; native two-video walkthrough completed. Forest media prepared, exact activation approval pending. -->
 # Status
 
+**October 21 interim stationary default.** The owner rejected the short moving previews as uncomfortable and too brief. Recording and submission are paused. Home and Details now open an explicitly labelled silent still scene that stays until Back; moving previews require a separate action and end on stationary artwork without automatic navigation. This is an interim fallback, not the requested sustained moving ambience. Signed media, timestamps, maps and trust are unchanged. A licensed uninterrupted fixed-camera scene of at least five minutes is still required, with exact edition approval before activation. No clinical or comfort acceptance is claimed.
+
 October 18 cinematic redesign installed from 999f69c on local branch
 `codex/cinematic-review-2026-10-18`. One build/install, 815 matching inputs,
 271 tests and nine native text checks passed. App rests Home with Otters selected;

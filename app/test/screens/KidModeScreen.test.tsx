@@ -86,7 +86,7 @@ describe('reaching Calm Frames', () => {
     expect(screen.getByTestId(otter).props.accessibilityState.selected).toBe(true);
     expect(screen.getByTestId('kid-mode-home-parent-area').props.hasTVPreferredFocus).toBe(true);
     // The cards name the videos; what Watch will play is what it announces.
-  expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Watch: Sea otters in Alaska');
+  expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Settle in: Sea otters in Alaska');
     expect(navigate).not.toHaveBeenCalled();
   });
 
@@ -326,8 +326,13 @@ describe('the shelf a household lands on', () => {
     fireEvent(screen.getByTestId(poster), 'focus');
     fireEvent.press(screen.getByTestId(poster));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
+    expect(navigate).not.toHaveBeenCalled();
+    expect(screen.getByText('Still scene. No motion, no audio, no time limit.')).toBeTruthy();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-preview'));
     expect(navigate.mock.calls[0][1].guarded.sha256).toBe(source);
+    expect(navigate.mock.calls[0][1].ambientPreview).toBe(true);
     returnFromPlayer();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-back'));
     expect(screen.getByTestId('kid-mode-details-play').props.hasTVPreferredFocus).toBe(true);
     fireEvent.press(screen.getByTestId('kid-mode-details-back'));
     expect(screen.getByTestId(poster).props.hasTVPreferredFocus).toBe(true);
@@ -347,7 +352,7 @@ describe('the shelf a household lands on', () => {
     const { navigate, returnFromPlayer } = await renderKidMode(true);
     await finishFirstRun();
     // The cards name the videos; what Watch will play is what it announces.
-  expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Watch: Acadia');
+  expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Settle in: Acadia');
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
     // All three approved destinations appear on the coastal map.
     expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(3);
@@ -355,8 +360,11 @@ describe('the shelf a household lands on', () => {
     expect(screen.queryByText(/Harbor/)).toBeNull();
     expect(screen.queryByText('Playback test')).toBeNull();
     fireEvent.press(screen.getByTestId('kid-mode-home-watch'));
+    expect(navigate).not.toHaveBeenCalled();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-preview'));
     expect(navigate.mock.calls[0][1].guarded.sha256).toBe(ACADIA_SOURCE_SHA256);
     returnFromPlayer();
+    fireEvent.press(screen.getByTestId('kid-mode-ambient-back'));
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
     fireEvent.press(screen.getByTestId('kid-mode-home-more-info'));
     fireEvent.press(screen.getByTestId('kid-mode-details-show-info'));

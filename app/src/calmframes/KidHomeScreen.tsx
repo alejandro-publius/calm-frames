@@ -1,3 +1,4 @@
+import { ambientArtworkFor } from './AmbientScene';
 import React from 'react';
 import Svg, { Path } from '@amazon-devices/react-native-svg';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
@@ -67,6 +68,7 @@ export interface KidHomeScreenProps {
   titles: CheckedTitle[];
   onOpen: (entry: CheckedTitle) => void;
   onPlay?: (entry: CheckedTitle) => void;
+  onAmbient?: (entry: CheckedTitle) => void;
   /**
    * Called with the shelf control just pressed, right before onOpen or onPlay,
    * so the route can bring focus back to that control afterwards.
@@ -110,6 +112,7 @@ const KidHomeScreen = ({
   titles,
   onOpen,
   onPlay,
+  onAmbient,
   returnFocusId,
   returnFocusControl,
   onLaunchControl,
@@ -181,7 +184,8 @@ const KidHomeScreen = ({
   const islandKinds = mainStories.map(islandOf);
   const islandHome = !showIntroduction && hasMainStory && islandKinds.every(Boolean) && new Set(islandKinds).size === islandKinds.length;
   // Watching is the primary action. Unavailable titles stay in Parents.
-  const featuredAction = feature?.action === 'Watch now' ? 'Watch' : feature?.action;
+  const ambient = Boolean(onAmbient && featured && ambientArtworkFor(featured));
+  const featuredAction = ambient ? 'Settle in' : feature?.action === 'Watch now' ? 'Watch' : feature?.action;
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
     ? returnFocusId
     : listed[0]?.title.id;
@@ -255,8 +259,8 @@ const KidHomeScreen = ({
                 <Text style={styles.videoMeta} testID={`${testID}-video-meta`}>{[feature.runtime ?? runtimeLabel(featured.title.durationMs), isBundledBenignStory(featured.title) ? 'Simulated demo' : null].filter(Boolean).join(' · ')}</Text>
                 </>}
                 <View style={styles.actions}>
-                  <CalmButton primary playIcon sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
-                    disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (onPlay ?? onOpen)(featured); }} />
+                  <CalmButton primary playIcon={!ambient} sound={false} onFocus={() => setFocusedId('watch')} onBlur={() => setFocusedId(null)} testID={`${testID}-watch`} label={featuredAction!} accessibilityLabel={`${featuredAction}: ${feature.name}`}
+                    disabled={saving} hasTVPreferredFocus={returnTo === 'watch'} onPress={() => { onLaunchControl?.('watch'); (ambient ? onAmbient! : (onPlay ?? onOpen))(featured); }} />
                   <CalmButton quiet tertiary compact onFocus={() => setFocusedId('details')} onBlur={() => setFocusedId(null)} testID={`${testID}-more-info`} label="Details" accessibilityLabel={`Details: ${feature.name}`} hasTVPreferredFocus={returnTo === 'details'} onPress={() => { onLaunchControl?.('details'); onOpen(featured); }} disabled={saving} />
                 </View>
               </View>
@@ -296,7 +300,7 @@ const KidHomeScreen = ({
                   {selected ? <View testID={`${testID}-selected-${entry.title.id}`} style={styles.selectionMark} pointerEvents="none" accessible={false}><Svg width={scale(32)} height={scale(32)} viewBox="0 0 32 32"><Path d="M6 16L13 23L27 8" fill="none" stroke={WORLD.TEXT} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" /></Svg></View> : null}
                   <View style={styles.posterCopy}>
                   <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
-                  {label.kind ? <Text style={styles.posterQualifier} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{label.selectorMeta ?? label.kind}</Text> : null}
+                  {label.kind ? <Text style={styles.posterQualifier} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{onAmbient && ambientArtworkFor(entry) ? 'Still scene · stays open' : label.selectorMeta ?? label.kind}</Text> : null}
                   </View>
                 </TouchableOpacity>;
               };

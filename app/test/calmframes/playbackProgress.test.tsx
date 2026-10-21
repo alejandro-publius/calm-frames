@@ -1,5 +1,5 @@
 import { mockBuffering, mockDestroy, mockEnded, mockError, mockGuard, mockMedia, startPlayer } from './playbackUiHarness';
-import { act } from '@testing-library/react-native';
+import { act, fireEvent } from '@testing-library/react-native';
 import { createProgressMonitor } from '../../src/calmframes/usePlaybackProgress';
 import slowNative from '../../../results/native-slowdown-isolation-2026-10-17/fresh-simulator-timing.json';
 import normalNative from '../../../results/compact-scene-control-2026-10-17/native/timing-events.json';
@@ -129,4 +129,21 @@ test('ended video retains the teardown fallback and cancels it if unmounted', ()
   act(() => mockEnded(true));
   next.unmount(); advance(1000);
   expect(next.goBack).not.toHaveBeenCalled();
+});
+
+
+test('optional video preview ends on a stationary scene until explicit Back', () => {
+  mockDestroy.mockReturnValue(true);
+  const view = startPlayer('none', true, false, undefined, true);
+  act(() => { mockMedia.ended = true; mockMedia.fire('ended'); mockEnded(true); });
+  expect(view.getByTestId('preview-ended-still')).toBeTruthy();
+  expect(mockDestroy).toHaveBeenCalledTimes(1);
+  expect(mockMedia.paused).toBe(true);
+  expect(view.queryByTestId('kepler-video-surface-view')).toBeNull();
+  expect(view.queryByTestId('video-player-ui-view')).toBeNull();
+  advance(300000);
+  expect(view.goBack).not.toHaveBeenCalled();
+  expect(view.getByTestId('preview-ended-still')).toBeTruthy();
+  fireEvent.press(view.getByTestId('preview-ended-still-back'));
+  expect(view.goBack).toHaveBeenCalledTimes(1);
 });

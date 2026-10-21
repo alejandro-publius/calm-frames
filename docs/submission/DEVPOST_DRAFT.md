@@ -1,5 +1,9 @@
 # Devpost description, draft
 
+**October 21 interim stationary default.** The owner rejected the short moving previews as uncomfortable and too brief. Recording and submission are paused. Home and Details now open an explicitly labelled silent still scene that stays until Back; moving previews require a separate action and end on stationary artwork without automatic navigation. This is an interim fallback, not the requested sustained moving ambience. Signed media, timestamps, maps and trust are unchanged. A licensed uninterrupted fixed-camera scene of at least five minutes is still required, with exact edition approval before activation. No clinical or comfort acceptance is claimed.
+
+Historical build notes below describe the rejected short-preview experience. Six authorized judge invitations were sent and verified pending. A later app-only capture route produced visible pixels, but no accepted final demo video exists. Do not submit this draft until the moving-scene gap and user review are resolved.
+
 Current build note, October 21, 2026: the integrated Ocean/Forest flow and exact
 approved moving Acadia replacement were built and installed on the Vega Virtual
 Device using existing Node 22, Vega SDK 0.24 and JDK 21. The aarch64 Debug package

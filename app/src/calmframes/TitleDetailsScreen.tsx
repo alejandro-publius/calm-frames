@@ -38,6 +38,7 @@ export interface TitleDetailsScreenProps {
   entry: CheckedTitle;
   settings?: HouseholdSettings;
   onPlay: (entry: CheckedTitle) => void;
+  onAmbient?: (entry: CheckedTitle) => void;
   saving?: boolean;
   onBack?: () => void;
   testID?: string;
@@ -54,6 +55,7 @@ const TitleDetailsScreen = ({
   entry,
   settings: householdSettings = DEFAULT_SETTINGS,
   onPlay,
+  onAmbient,
   saving = false,
   onBack,
   testID = 'title-details',
@@ -96,7 +98,7 @@ const TitleDetailsScreen = ({
     }).length;
     return runtime && holds > 0 ? `${runtime}, ${holds} picture pause${holds === 1 ? '' : 's'}` : null;
   }, [practiceOffered]);
-  const playLabel = demo ? 'Watch demo' : presentation.action === 'Watch preview' ? 'Watch preview' : 'Watch';
+  const playLabel = onAmbient ? 'Settle in' : demo ? 'Watch demo' : presentation.action === 'Watch preview' ? 'Watch preview' : 'Watch';
   const notice = noticeForTitle(entry) ?? (concernsPackagedLibrary(entry.title) && !packagedLibrary.evidenceFor(entry.title, settings) ? {
     title: 'This video is unavailable',
     detail: 'This version cannot play in Calm Frames. The picture stays hidden.',
@@ -193,13 +195,13 @@ const TitleDetailsScreen = ({
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
           <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name), { color: WORLD.TEXT }]} testID={`${testID}-title`}>{presentation.name}</Text>
-          <Text style={[styles.meta, { color: WORLD.TEXT_DIM }]} testID={`${testID}-meta`}>{meta}</Text>
+          <Text style={[styles.meta, { color: WORLD.TEXT_DIM }]} testID={`${testID}-meta`}>{onAmbient ? `Still scene, no time limit. Optional video preview: ${Math.ceil(durationMs / 1000)} seconds.` : meta}</Text>
         </View>
         <View style={styles.actionRail}>
           <View style={styles.buttons}>
-            <CalmButton primary playIcon sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
+            <CalmButton primary playIcon={!onAmbient} sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
               accessibilityLabel={saving ? 'Saving your changes...' : `${playLabel}: ${presentation.name}`}
-              disabled={saving} hasTVPreferredFocus={returnFocus !== 'info'} onPress={() => onPlay(entry)} />
+              disabled={saving} hasTVPreferredFocus={returnFocus !== 'info'} onPress={() => (onAmbient ?? onPlay)(entry)} />
             <CalmButton quiet tertiary compact testID={`${testID}-show-info`} label="More info" hasTVPreferredFocus={returnFocus === 'info'}
               onPress={() => setPage('info')} />
           </View>
