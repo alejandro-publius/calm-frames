@@ -12,7 +12,8 @@ The later local ending fix `60c3bbb` is built and installed. Its exact package,
 checks and native screenshots are in the [current presentation record](../presentation/README.md).
 The ending fix is an ancestor of this presentation revision. Confirm the
 current candidate branch head with `git rev-parse HEAD` after cloning. Final edited-demo/audio acceptance and
-publication remain open; do not treat an older remote checkout as that local build.
+publication remain open. The installed ending fix is included in the candidate
+branch; no new native review is implied by later documentation commits.
 Historical test timings and device receipts below describe their stated earlier
 commits and are not acceptance of the current edition.
 
@@ -75,9 +76,10 @@ suite passed on `53a1c51`: 163 suites, 1,676 tests passed, 0 failed, 4 skipped,
 with the coverage floors met
 ([log](../../results/home-islands-2026-10-19/full-suite-after.log)). The same
 suite had 18 failing tests on `c84f95d`
-([log](../../results/home-islands-2026-10-19/full-suite-before.log)). No full
-app run is recorded after `9cfd9d3` changed one copy line and the two tests
-that check it. The Python line above, with `-m "not slow"`, passed on
+([log](../../results/home-islands-2026-10-19/full-suite-before.log)). The later
+full-source baseline and bounded ending-fix checks are recorded in
+[the current presentation evidence](../presentation/README.md); the October 19
+figures here are historical. The Python line above, with `-m "not slow"`, passed on
 `d9c9e2f`: 1,880 passed, 0 failed, 9 skipped, 2 slow tests deselected
 ([log](../../results/home-islands-2026-10-19/python-suite-d9c9e2f.txt)). These are recorded
 results, not a new run of these instructions. The October 18 record for
