@@ -21,7 +21,7 @@ export default function AmbientScene({ title, artwork, onBack, onPreview, previe
   endingPicture?: ImageSourcePropType;
 }) {
   return <View testID={testID} style={styles.screen}>
-    <Image testID={`${testID}-picture`} source={endingPicture ?? filmStill(artwork)} style={StyleSheet.absoluteFill} resizeMode="contain" fadeDuration={0} accessible={false} />
+    <Image testID={`${testID}-picture`} source={endingPicture ?? filmStill(artwork)} style={styles.picture} resizeMode="contain" fadeDuration={0} accessible={false} />
     <View style={styles.caption}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.detail}>{endingPicture ? 'The scene has settled. This final frame stays until you leave.' : ended ? 'Preview finished. This still scene stays until you leave.' : 'Still scene. No motion, no audio, no time limit.'}</Text>
@@ -33,6 +33,9 @@ export default function AmbientScene({ title, artwork, onBack, onPreview, previe
   </View>;
 }
 const styles = StyleSheet.create({
+  // Kepler's bundled images retain their intrinsic size with edge constraints
+  // alone. Explicit bounds keep the ending still aligned with the video.
+  picture: { position: 'absolute', left: 0, top: 0, width: '100%', height: '100%' },
   screen: { ...StyleSheet.absoluteFillObject, backgroundColor: '#193F3E', zIndex: 50 },
   caption: { position: 'absolute', top: scale(CALM_SPACE.SAFE_Y), left: scale(CALM_SPACE.SAFE_X), backgroundColor: CALM_WORLD.SURFACE, padding: scale(20), borderRadius: scale(12), maxWidth: scale(1500) },
   title: { ...CALM_TEXT.supporting, color: CALM_WORLD.TEXT },

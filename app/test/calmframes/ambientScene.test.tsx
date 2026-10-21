@@ -1,6 +1,6 @@
 import React from 'react';
 import { act, fireEvent, render } from '@testing-library/react-native';
-import { Animated } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import AmbientScene, { ambientArtworkFor } from '../../src/calmframes/AmbientScene';
 import { checkedShelf } from './shelfFixtures';
 
@@ -30,6 +30,15 @@ test('an ended preview is a still scene with no replay or timed navigation', () 
   expect(view.getByText('Preview finished. This still scene stays until you leave.')).toBeTruthy();
   expect(view.queryByTestId('ambient-scene-preview')).toBeNull();
   expect(back).not.toHaveBeenCalled();
+});
+
+test('a bundled final frame fills the viewport instead of keeping intrinsic image bounds', () => {
+  const view = render(<AmbientScene title="McWay Falls" artwork="coastal" ended endingPicture={{ uri: 'final-frame.png', width: 1280, height: 720 }} onBack={jest.fn()} />);
+  const picture = view.getByTestId('ambient-scene-picture');
+  expect(StyleSheet.flatten(picture.props.style)).toMatchObject({ left: 0, top: 0, width: '100%', height: '100%' });
+  expect(picture.props.resizeMode).toBe('contain');
+  expect(picture.props.fadeDuration).toBe(0);
+  expect(view.queryByTestId('ambient-scene-preview')).toBeNull();
 });
 
 test('unverified entries cannot open the ambient presentation', () => {
