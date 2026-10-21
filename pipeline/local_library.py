@@ -23,6 +23,7 @@ from .flashmap_adapter import PRESETS, FlashmapAdapter, iter_presets
 from .hashing import fingerprint, sha256_file
 from .ingest import IngestOptions, IngestResult, ingest_title
 from .layout import TitleLayout
+from .render import ENCODE_PROFILES
 from .state import Ledger
 from .verify import VerifyReport
 
@@ -336,6 +337,7 @@ def refresh_local_catalog(workdir: str | Path) -> dict:
 def prepare_local_title(source: str | Path, workdir: str | Path, *,
                         key: str | Path, pub: str | Path,
                         presets: Sequence[str] | None = None, title: str | None = None,
+                        encode_profile: str = "default",
                         adapter: FlashmapAdapter | None = None) -> dict:
     """One source, required external keys, normal pipeline verify, one receipt."""
     source = Path(source).resolve()
@@ -375,7 +377,7 @@ def prepare_local_title(source: str | Path, workdir: str | Path, *,
                 source, root,
                 IngestOptions(presets=requested, key=str(Path(key).resolve()),
                               pub=str(Path(pub).resolve()), title=name, skip_verify=False,
-                              playback_compatible=True),
+                              playback_compatible=True, encode_profile=encode_profile),
                 adapter=adapter,
             )
             if result.verify_report is not None and result.verify_passed is not True:
@@ -409,6 +411,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     prepare.add_argument("--pub", required=True)
     prepare.add_argument("--title")
     prepare.add_argument("--presets", default=",".join(PRESETS))
+    prepare.add_argument("--encode-profile", choices=ENCODE_PROFILES, default="default")
     catalog = subcommands.add_parser("catalog", help="Recheck receipts and refresh the local snapshot.")
     catalog.add_argument("--workdir", required=True)
     args = parser.parse_args(argv)
@@ -419,6 +422,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = prepare_local_title(
                 args.source, args.workdir, key=args.key, pub=args.pub, title=args.title,
                 presets=args.presets.split(","),
+                encode_profile=args.encode_profile,
             )
         print(json.dumps(result, indent=2, sort_keys=True, allow_nan=False))
         return 0 if args.action == "catalog" or result["status"] == "ready" else 1

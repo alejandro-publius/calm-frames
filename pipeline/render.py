@@ -35,7 +35,9 @@ the harder to pass, result.
 
 from __future__ import annotations
 
+import os
 import re
+import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Sequence
@@ -54,6 +56,17 @@ DEFAULT_PRESET = "veryfast"
 # noise must not be able to hide a flash that the cover failed to stop.
 DEFAULT_VERIFY_CRF = 10
 DEFAULT_HLS_SEGMENT_S = 4.0
+ENCODE_PROFILES = ("default", "ambient-720p-v1")
+
+
+def encode_profile_settings(name: str) -> dict:
+    """Versioned delivery settings, independent of analyzer/cover profiles."""
+    if name == "default":
+        return {"name": name}
+    if name != "ambient-720p-v1":
+        raise PipelineError(f"Unknown delivery encode profile: {name}")
+    return {"name": name, "width": 1280, "height": 720, "video_kbps": 480,
+            "passes": 2, "preset": "medium", "threads": 4, "segment_seconds": 4.0}
 
 TEXT_SUBTITLE_CODECS = {"subrip", "srt", "mov_text", "ass", "ssa", "webvtt", "text"}
 
@@ -398,6 +411,7 @@ def render_safe_master(
     segment_seconds: float = DEFAULT_HLS_SEGMENT_S,
     pad_tail_ms: float = 0.0,
     scene_holds: Sequence[SceneHold] | None = None,
+    encode_profile: str = "default",
 ) -> RenderResult:
     """One MP4 with every flagged span plus guard band replaced by the still.
 
@@ -414,6 +428,13 @@ def render_safe_master(
     longer has the source's frame timing. Holding the last frame puts the
     time back and shows exactly what the source shows there.
     """
+    encoding = encode_profile_settings(encode_profile)
+    bounded = encode_profile != "default"
+    if bounded:
+        if (probe.width, probe.height) != (encoding["width"], encoding["height"]):
+            raise PipelineError("The ambient encode profile requires a 1280x720 source; it never resizes.")
+        if (crf, x264_preset, segment_seconds) != (DEFAULT_CRF, DEFAULT_PRESET, DEFAULT_HLS_SEGMENT_S):
+            raise PipelineError("The ambient encode profile cannot be combined with custom CRF, preset or segment settings.")
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     expression = enable_expression(intervals)
@@ -446,13 +467,13 @@ def render_safe_master(
     if keep_subs:
         args += ["-map", "0:s"]
 
+    args += ["-c:v", "libx264"]
+    if bounded:
+        args += ["-preset", encoding["preset"], "-b:v", f"{encoding['video_kbps']}k",
+                 "-threads", str(encoding["threads"])]
+    else:
+        args += ["-preset", x264_preset, "-crf", str(crf)]
     args += [
-        "-c:v",
-        "libx264",
-        "-preset",
-        x264_preset,
-        "-crf",
-        str(crf),
         "-pix_fmt",
         "yuv420p",
         # Key frames on the segment grid so HLS packaging is a stream copy.
@@ -466,9 +487,17 @@ def render_safe_master(
         args += ["-c:s", "mov_text"]
     if probe.duration_s > 0:
         args += ["-t", f"{probe.duration_s:.6f}"]
-    args += ["-movflags", "+faststart", str(out_path)]
-
-    result = ffmpegtool.run_ffmpeg(args)
+    if bounded:
+        # Both passes use the same source, cover graph and duration. Private
+        # pass logs cannot collide with another title and are removed on error.
+        with tempfile.TemporaryDirectory(prefix=".encode-", dir=out_path.parent) as temporary:
+            passlog = str(Path(temporary) / "x264")
+            ffmpegtool.run_ffmpeg([*args, "-pass", "1", "-passlogfile", passlog,
+                                  "-an", "-sn", "-f", "null", os.devnull])
+            result = ffmpegtool.run_ffmpeg([*args, "-pass", "2", "-passlogfile", passlog,
+                                           "-movflags", "+faststart", str(out_path)])
+    else:
+        result = ffmpegtool.run_ffmpeg([*args, "-movflags", "+faststart", str(out_path)])
     return RenderResult(
         path=out_path,
         cmd=result.cmd,
@@ -479,6 +508,7 @@ def render_safe_master(
             "subtitles_carried": keep_subs,
             "subtitles_skipped": skipped_subs,
             "scene_hold_count": None if scene_holds is None else len(scene_holds),
+            "encode_profile": encoding,
         },
     )
 

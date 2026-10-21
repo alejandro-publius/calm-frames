@@ -82,7 +82,9 @@ from .render import (
     DEFAULT_CRF,
     DEFAULT_HLS_SEGMENT_S,
     DEFAULT_PRESET,
+    ENCODE_PROFILES,
     NEUTRAL_STILL_RGB,
+    encode_profile_settings,
     make_neutral_still,
     package_hls,
     render_cover_model,
@@ -123,6 +125,7 @@ class IngestOptions:
     title: str | None = None
     scene_holds: bool = True
     playback_compatible: bool = False
+    encode_profile: str = "default"
 
 
 @dataclass
@@ -200,6 +203,7 @@ def ingest_title(
     adapter: FlashmapAdapter | None = None,
 ) -> IngestResult:
     options = options or IngestOptions()
+    encoding = encode_profile_settings(options.encode_profile)
     adapter = adapter or FlashmapAdapter()
     presets = iter_presets(options.presets)
     if options.playback_compatible:
@@ -454,6 +458,7 @@ def ingest_title(
                 segment_seconds=options.segment_seconds,
                 pad_tail_ms=tail_to_hold_ms(layout.map_path(preset)),
                 scene_holds=scene_images,  # noqa: B023 - steps.run calls it before the loop moves on
+                encode_profile=options.encode_profile,
             )
             hls = package_hls(
                 layout.safe_master(preset),
@@ -470,6 +475,7 @@ def ingest_title(
                 "x264_preset": options.x264_preset,
                 "segment_seconds": options.segment_seconds,
                 "scene_holds": scene_bytes,
+                "encode_profile": encoding,
             },
             [layout.safe_master(preset), layout.master_playlist(preset)],
             do_rendition,
@@ -815,6 +821,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--bif-interval-ms", type=int, default=DEFAULT_INTERVAL_MS)
     parser.add_argument("--crf", type=int, default=DEFAULT_CRF)
     parser.add_argument("--x264-preset", default=DEFAULT_PRESET)
+    parser.add_argument("--encode-profile", choices=ENCODE_PROFILES, default="default",
+                        help="explicit delivery encoding; ambient-720p-v1 uses fixed two-pass 480 kb/s settings")
     parser.add_argument(
         "--no-dim",
         action="store_true",
@@ -850,6 +858,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         bif_interval_ms=args.bif_interval_ms,
         crf=args.crf,
         x264_preset=args.x264_preset,
+        encode_profile=args.encode_profile,
         force=args.force,
         skip_verify=args.skip_verify,
         scene_holds=not args.no_scene_holds,
