@@ -8,8 +8,10 @@ Sea otters and Forest remain available as still scenes with optional short previ
 
 Authenticated preparation and strict delivery passed for all three McWay presets.
 See [the exact receipt](../../results/mcway-activation-2026-10-21/verification.json).
-The current McWay native build and install results are tracked there separately
-from tests. Native picture/audio acceptance remains pending while the Mac is locked.
+The aarch64 Debug native build from `110ba6e` passed ABI and packaged-media
+verification. Its compressed package is 132,557,203 bytes, SHA256
+`eb84321cc9e0a21a4f9ebe87ab3bc57b84865311cb171b95478b3157a6851849`.
+It is built but not yet installed. Native picture/audio acceptance remains pending while the Mac is locked.
 Historical test timings and device receipts below describe their stated earlier
 commits and are not acceptance of the current edition.
 

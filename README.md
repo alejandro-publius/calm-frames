@@ -14,7 +14,8 @@ and strict delivery checks. The prepared namespace is **129,255,687 bytes** unde
 the owner-approved **128 MiB** limit, with every earlier approved title preserved.
 See the [exact activation receipt](results/mcway-activation-2026-10-21/verification.json)
 and [reviewer quickstart](docs/submission/REVIEWER_QUICKSTART.md).
-Native picture/audio acceptance for this new edition is still pending while the
+The aarch64 Debug package built successfully from `110ba6e`; installation and
+native picture/audio acceptance for this new edition are still pending while the
 Mac is locked. Source checks and detector results do not establish sensory comfort
 or medical safety. The prototype uses pre-analysis, not live interception.
 The images below are historical browser renders of the earlier three-card Home,

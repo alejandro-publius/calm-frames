@@ -1,0 +1,587 @@
+TAP version 13
+# Subtest: accepts distinct synthetic ambient report and rejects duplicate JSON
+ok 1 - accepts distinct synthetic ambient report and rejects duplicate JSON
+  ---
+  duration_ms: 5.309042
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata renditionSha256
+ok 2 - rejects rebound metadata renditionSha256
+  ---
+  duration_ms: 0.81525
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata durationMs
+ok 3 - rejects rebound metadata durationMs
+  ---
+  duration_ms: 0.399208
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata renditionStartOffsetMs
+ok 4 - rejects rebound metadata renditionStartOffsetMs
+  ---
+  duration_ms: 0.514
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata preset
+ok 5 - rejects rebound metadata preset
+  ---
+  duration_ms: 1.443416
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata audioPreserved
+ok 6 - rejects rebound metadata audioPreserved
+  ---
+  duration_ms: 0.952708
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata frameTimingPreserved
+ok 7 - rejects rebound metadata frameTimingPreserved
+  ---
+  duration_ms: 0.768125
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata ambientSha256
+ok 8 - rejects rebound metadata ambientSha256
+  ---
+  duration_ms: 0.490334
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata intervals
+ok 9 - rejects rebound metadata intervals
+  ---
+  duration_ms: 0.721375
+  type: 'test'
+  ...
+# Subtest: rejects rebound metadata version
+ok 10 - rejects rebound metadata version
+  ---
+  duration_ms: 0.879625
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis source
+ok 11 - rejects rebound analysis source
+  ---
+  duration_ms: 1.187334
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis flags
+ok 12 - rejects rebound analysis flags
+  ---
+  duration_ms: 1.166
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis thresholds
+ok 13 - rejects rebound analysis thresholds
+  ---
+  duration_ms: 1.786875
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis profile
+ok 14 - rejects rebound analysis profile
+  ---
+  duration_ms: 0.895041
+  type: 'test'
+  ...
+# Subtest: rejects rebound analysis failed
+ok 15 - rejects rebound analysis failed
+  ---
+  duration_ms: 2.328791
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof sourceEqualsOutput
+ok 16 - rejects missing timing/audio proof sourceEqualsOutput
+  ---
+  duration_ms: 0.343958
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof frameCount
+ok 17 - rejects missing timing/audio proof frameCount
+  ---
+  duration_ms: 0.242083
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof audioPacketCount
+ok 18 - rejects missing timing/audio proof audioPacketCount
+  ---
+  duration_ms: 0.369375
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof videoDurationRational
+ok 19 - rejects missing timing/audio proof videoDurationRational
+  ---
+  duration_ms: 0.247875
+  type: 'test'
+  ...
+# Subtest: rejects missing timing/audio proof frameTimesSha256
+ok 20 - rejects missing timing/audio proof frameTimesSha256
+  ---
+  duration_ms: 0.253542
+  type: 'test'
+  ...
+# Subtest: an exact simulated approval produces three per-preset bindings without writing the app
+ok 21 - an exact simulated approval produces three per-preset bindings without writing the app
+  ---
+  duration_ms: 21.908834
+  type: 'test'
+  ...
+# Subtest: removing simulated catalog approval also removes all ambient registrations
+ok 22 - removing simulated catalog approval also removes all ambient registrations
+  ---
+  duration_ms: 6.736
+  type: 'test'
+  ...
+# Subtest: refuses report before generation
+ok 23 - refuses report before generation
+  ---
+  duration_ms: 8.044458
+  type: 'test'
+  ...
+# Subtest: refuses catalog before generation
+ok 24 - refuses catalog before generation
+  ---
+  duration_ms: 6.688542
+  type: 'test'
+  ...
+# Subtest: refuses key before generation
+ok 25 - refuses key before generation
+  ---
+  duration_ms: 7.431125
+  type: 'test'
+  ...
+# Subtest: refuses missing-report before generation
+ok 26 - refuses missing-report before generation
+  ---
+  duration_ms: 5.90375
+  type: 'test'
+  ...
+# Subtest: existing exact Acadia fixture matches generated input; generation repeats byte-for-byte
+ok 27 - existing exact Acadia fixture matches generated input; generation repeats byte-for-byte
+  ---
+  duration_ms: 26.008625
+  type: 'test'
+  ...
+# Subtest: rejects catalog substitution without changing approval
+ok 28 - rejects catalog substitution without changing approval
+  ---
+  duration_ms: 10.25675
+  type: 'test'
+  ...
+# Subtest: rejects key substitution without changing approval
+ok 29 - rejects key substitution without changing approval
+  ---
+  duration_ms: 9.680541
+  type: 'test'
+  ...
+# Subtest: rejects bundle substitution without changing approval
+ok 30 - rejects bundle substitution without changing approval
+  ---
+  duration_ms: 11.234541
+  type: 'test'
+  ...
+# Subtest: rejects duplicate substitution without changing approval
+ok 31 - rejects duplicate substitution without changing approval
+  ---
+  duration_ms: 8.816125
+  type: 'test'
+  ...
+# Subtest: rejects generated substitution without changing approval
+ok 32 - rejects generated substitution without changing approval
+  ---
+  duration_ms: 10.202167
+  type: 'test'
+  ...
+# Subtest: rejects missing-generated substitution without changing approval
+ok 33 - rejects missing-generated substitution without changing approval
+  ---
+  duration_ms: 11.846
+  type: 'test'
+  ...
+# Subtest: rejects symlink substitution without changing approval
+ok 34 - rejects symlink substitution without changing approval
+  ---
+  duration_ms: 8.552792
+  type: 'test'
+  ...
+# Subtest: consumer membership is generated from reviewed data rather than title-specific code
+ok 35 - consumer membership is generated from reviewed data rather than title-specific code
+  ---
+  duration_ms: 8.707959
+  type: 'test'
+  ...
+# Subtest: a headless-only checkout gets actionable missing-runtime instructions
+ok 36 - a headless-only checkout gets actionable missing-runtime instructions
+  ---
+  duration_ms: 7.883166
+  type: 'test'
+  ...
+# Subtest: incomplete dependencies and unsupported Node are reported together
+ok 37 - incomplete dependencies and unsupported Node are reported together
+  ---
+  duration_ms: 1.235042
+  type: 'test'
+  ...
+# Subtest: runtime syntax is checked without executing it and a partial repair still fails
+ok 38 - runtime syntax is checked without executing it and a partial repair still fails
+  ---
+  duration_ms: 93.639208
+  type: 'test'
+  ...
+# Subtest: native builds require Node 22 even when all generated inputs are present
+ok 39 - native builds require Node 22 even when all generated inputs are present
+  ---
+  duration_ms: 178.786959
+  type: 'test'
+  ...
+# Subtest: checks the actual generated library and exact byte total
+ok 40 - checks the actual generated library and exact byte total
+  ---
+  duration_ms: 427.634666
+  type: 'test'
+  ...
+# Subtest: checks hash-bound original report bytes and retains the source catalog identity
+ok 41 - checks hash-bound original report bytes and retains the source catalog identity
+  ---
+  duration_ms: 9.077667
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid source evidence
+ok 42 - a matching report digest does not override invalid source evidence
+  ---
+  duration_ms: 4.965584
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid presets evidence
+ok 43 - a matching report digest does not override invalid presets evidence
+  ---
+  duration_ms: 4.643125
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid failed evidence
+ok 44 - a matching report digest does not override invalid failed evidence
+  ---
+  duration_ms: 4.750292
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid missing evidence
+ok 45 - a matching report digest does not override invalid missing evidence
+  ---
+  duration_ms: 4.974875
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid duplicate evidence
+ok 46 - a matching report digest does not override invalid duplicate evidence
+  ---
+  duration_ms: 4.623583
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid outcome evidence
+ok 47 - a matching report digest does not override invalid outcome evidence
+  ---
+  duration_ms: 4.452458
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid derived evidence
+ok 48 - a matching report digest does not override invalid derived evidence
+  ---
+  duration_ms: 5.304625
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid plan evidence
+ok 49 - a matching report digest does not override invalid plan evidence
+  ---
+  duration_ms: 4.732875
+  type: 'test'
+  ...
+# Subtest: a matching report digest does not override invalid key evidence
+ok 50 - a matching report digest does not override invalid key evidence
+  ---
+  duration_ms: 4.552375
+  type: 'test'
+  ...
+# Subtest: derived report outcome keeps the full suffix of extra check names
+ok 51 - derived report outcome keeps the full suffix of extra check names
+  ---
+  duration_ms: 5.072917
+  type: 'test'
+  ...
+# Subtest: accepts historical infinite PSNR values without changing quoted text or evidence bytes
+ok 52 - accepts historical infinite PSNR values without changing quoted text or evidence bytes
+  ---
+  duration_ms: 27.491625
+  type: 'test'
+  ...
+# Subtest: report namespace refuses unknown attachments, nested paths and oversized input
+ok 53 - report namespace refuses unknown attachments, nested paths and oversized input
+  ---
+  duration_ms: 14.050666
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared mp4 bytes
+ok 54 - refuses changed prepared mp4 bytes
+  ---
+  duration_ms: 4.32175
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared vtt bytes
+ok 55 - refuses changed prepared vtt bytes
+  ---
+  duration_ms: 9.044625
+  type: 'test'
+  ...
+# Subtest: refuses changed prepared json bytes
+ok 56 - refuses changed prepared json bytes
+  ---
+  duration_ms: 0.7365
+  type: 'test'
+  ...
+# Subtest: refuses a compiled literal different from the reviewed manifest
+ok 57 - refuses a compiled literal different from the reviewed manifest
+  ---
+  duration_ms: 0.201583
+  type: 'test'
+  ...
+# Subtest: refuses an internally valid package from a different build input
+ok 58 - refuses an internally valid package from a different build input
+  ---
+  duration_ms: 192.492875
+  type: 'test'
+  ...
+# Subtest: refuses missing assets, undisclosed siblings and duplicate package members
+ok 59 - refuses missing assets, undisclosed siblings and duplicate package members
+  ---
+  duration_ms: 65.175542
+  type: 'test'
+  ...
+# Subtest: refuses a manifest changed inside its immutable directory
+ok 60 - refuses a manifest changed inside its immutable directory
+  ---
+  duration_ms: 0.49375
+  type: 'test'
+  ...
+# Subtest: refuses aliases to files outside the package
+ok 61 - refuses aliases to files outside the package
+  ---
+  duration_ms: 87.155375
+  type: 'test'
+  ...
+# Subtest: rejects alternate archive paths and link members before reading any prepared content
+ok 62 - rejects alternate archive paths and link members before reading any prepared content
+  ---
+  duration_ms: 938.286541
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.currentTime = 1;
+ok 63 - refuses an unguarded seek: player.currentTime = 1;
+  ---
+  duration_ms: 1278.445042
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['currentTime'] = 1;
+ok 64 - refuses an unguarded seek: player['currentTime'] = 1;
+  ---
+  duration_ms: 5.007667
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.currentTime += 1;
+ok 65 - refuses an unguarded seek: player.currentTime += 1;
+  ---
+  duration_ms: 5.429875
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['currentTime'] -= 1;
+ok 66 - refuses an unguarded seek: player['currentTime'] -= 1;
+  ---
+  duration_ms: 3.372917
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.currentTime++;
+ok 67 - refuses an unguarded seek: player.currentTime++;
+  ---
+  duration_ms: 3.700042
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: --player.currentTime;
+ok 68 - refuses an unguarded seek: --player.currentTime;
+  ---
+  duration_ms: 2.703375
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: ++player['currentTime'];
+ok 69 - refuses an unguarded seek: ++player['currentTime'];
+  ---
+  duration_ms: 4.367
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['currentTime']--;
+ok 70 - refuses an unguarded seek: player['currentTime']--;
+  ---
+  duration_ms: 3.478
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player.fastSeek(1);
+ok 71 - refuses an unguarded seek: player.fastSeek(1);
+  ---
+  duration_ms: 7.28775
+  type: 'test'
+  ...
+# Subtest: refuses an unguarded seek: player['fastSeek'](1);
+ok 72 - refuses an unguarded seek: player['fastSeek'](1);
+  ---
+  duration_ms: 3.40625
+  type: 'test'
+  ...
+# Subtest: the guarded seek implementation retains its named exemption
+ok 73 - the guarded seek implementation retains its named exemption
+  ---
+  duration_ms: 6.259542
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player.setNativeProps({});
+ok 74 - still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player.setNativeProps({});
+  ---
+  duration_ms: 5.389542
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player['setNativeProps']({});
+ok 75 - still refuses setNativeProps in src/calmframes/SeekGuardContractProbe.ts: player['setNativeProps']({});
+  ---
+  duration_ms: 4.666209
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player.setNativeProps({});
+ok 76 - still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player.setNativeProps({});
+  ---
+  duration_ms: 3.303333
+  type: 'test'
+  ...
+# Subtest: still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player['setNativeProps']({});
+ok 77 - still refuses setNativeProps in src/calmframes/useFlashGuard.ts: player['setNativeProps']({});
+  ---
+  duration_ms: 2.766916
+  type: 'test'
+  ...
+# negative control: the wcag profile refused the flashing sequence, the broadcast profile refused the grating, and the wcag profile passed the grating, as it must.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# ffmpeg failed to encode a negative control
+# Subtest: an uninstalled analyzer exits 2 before encoding, even when its namespace imports
+ok 78 - an uninstalled analyzer exits 2 before encoding, even when its namespace imports
+  ---
+  duration_ms: 670.576416
+  type: 'test'
+  ...
+# Subtest: measured controls pass and remove only their HAZARD_ scratch files
+ok 79 - measured controls pass and remove only their HAZARD_ scratch files
+  ---
+  duration_ms: 21.982625
+  type: 'test'
+  ...
+# Subtest: analyzer error exit cannot count as a measured hazard and is cleaned up
+ok 80 - analyzer error exit cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 16.762834
+  type: 'test'
+  ...
+# Subtest: analyzer spawn error cannot count as a measured hazard and is cleaned up
+ok 81 - analyzer spawn error cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.561875
+  type: 'test'
+  ...
+# Subtest: analyzer signal cannot count as a measured hazard and is cleaned up
+ok 82 - analyzer signal cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 16.037375
+  type: 'test'
+  ...
+# Subtest: analyzer missing report cannot count as a measured hazard and is cleaned up
+ok 83 - analyzer missing report cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.523542
+  type: 'test'
+  ...
+# Subtest: analyzer malformed report cannot count as a measured hazard and is cleaned up
+ok 84 - analyzer malformed report cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.49525
+  type: 'test'
+  ...
+# Subtest: analyzer wrong source cannot count as a measured hazard and is cleaned up
+ok 85 - analyzer wrong source cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.459292
+  type: 'test'
+  ...
+# Subtest: analyzer wrong profile cannot count as a measured hazard and is cleaned up
+ok 86 - analyzer wrong profile cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.622208
+  type: 'test'
+  ...
+# Subtest: analyzer wrong reason cannot count as a measured hazard and is cleaned up
+ok 87 - analyzer wrong reason cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.83425
+  type: 'test'
+  ...
+# Subtest: analyzer no finding cannot count as a measured hazard and is cleaned up
+ok 88 - analyzer no finding cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 15.847666
+  type: 'test'
+  ...
+# Subtest: analyzer passing report cannot count as a measured hazard and is cleaned up
+ok 89 - analyzer passing report cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 21.266542
+  type: 'test'
+  ...
+# Subtest: analyzer missing refusal cannot count as a measured hazard and is cleaned up
+ok 90 - analyzer missing refusal cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 21.377417
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after encoder exit
+ok 91 - partial fixtures are deleted after encoder exit
+  ---
+  duration_ms: 15.936291
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after encoder throw
+ok 92 - partial fixtures are deleted after encoder throw
+  ---
+  duration_ms: 14.262791
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after analyzer throw
+ok 93 - partial fixtures are deleted after analyzer throw
+  ---
+  duration_ms: 14.886917
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after report write
+ok 94 - partial fixtures are deleted after report write
+  ---
+  duration_ms: 25.054125
+  type: 'test'
+  ...
+1..94
+# tests 94
+# suites 0
+# pass 94
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1943.692333

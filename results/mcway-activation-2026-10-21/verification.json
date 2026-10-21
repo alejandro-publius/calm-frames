@@ -41,10 +41,24 @@
     "nodeChecksPassed": 94,
     "pythonDeliveryAndBudgetPassed": 121
   },
-  "initialNativeBuild": {
+  "nativeBuild": {
+    "sourceCommit": "110ba6e33889610320f8d985ec12d5b878d11c50",
+    "appInputsCommitted": true,
     "architecture": "aarch64",
     "type": "Debug",
-    "result": "passed; exact committed-source rebuild follows",
-    "sha256": "91b5b2626fdd204c5a095c52934baeccac50c4bc70a390c7f879f1f578b59981"
+    "result": "passed including ABI and strict package verification",
+    "packagePath": "app/build/aarch64-debug/calm-frames-app_aarch64.vpkg",
+    "packageBytes": 132557203,
+    "packageSha256": "eb84321cc9e0a21a4f9ebe87ab3bc57b84865311cb171b95478b3157a6851849",
+    "preparedNamespaceBytes": 129255687,
+    "sourceReceipt": "app/build/aarch64-debug/release-build-receipt.json",
+    "installed": false,
+    "pictureAudioAcceptance": false
+  },
+  "remote": {
+    "branch": "claude/ocean-layout-fix-2026-10-19",
+    "verifiedCommit": "110ba6e33889610320f8d985ec12d5b878d11c50",
+    "private": true,
+    "hostedCheckRuns": 0
   }
 }
