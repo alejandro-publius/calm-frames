@@ -1,7 +1,14 @@
 import { scaleUxToDp } from '../utils/pixelUtils';
 
-/** Dark cinema palette shared from the shelf through playback. */
-export const COASTAL_COLORS = {
+/** Shared map materials and illustrated journey geometry, in 1080p units. */
+export const CALM_WORLD = {
+  BACKGROUND: '#F7EACF', SURFACE: '#FFF8E7', SURFACE_FOCUSED: '#F4EEDC',
+  BORDER: '#385C59', FOCUS_RING: '#A44132', PRIMARY: '#FFECD6', TEXT: '#193F3E',
+  TEXT_DIM: '#193F3E', TEXT_DISABLED: '#526A63', INK: '#193F3E',
+} as const;
+
+/** Playback keeps its dark overlay and black protective cover. */
+export const CALM_COLORS = {
   BACKGROUND: '#0C131A', SURFACE: '#22303B', SURFACE_FOCUSED: '#2B3B47',
   BORDER: '#748995', FOCUS_RING: '#9CC1CB', PRIMARY: '#F0F2EF',
   TEXT_DISABLED: '#A1ABB3', ACCENT_DARK: '#9D6A55', TEXT: '#F0F2EF',
@@ -9,9 +16,12 @@ export const COASTAL_COLORS = {
   PENDING: '#B9C9DA', FAILED: '#F2BDB1', COVER: '#000000',
 } as const;
 
-/** A mid-tone boundary contrasts with both the bright Watch face and dark page. */
-export const COASTAL_PRIMARY_FOCUS = '#59838F';
-export const CALM_COLORS = COASTAL_COLORS;
+/** All non-player pages share the map's light surfaces, including errors and focus. */
+export const COASTAL_COLORS = { ...CALM_COLORS, ...CALM_WORLD,
+  VERIFIED: '#285946', PENDING: '#405A74', FAILED: '#8F3329',
+} as const;
+export const COASTAL_PRIMARY_FOCUS = CALM_WORLD.FOCUS_RING;
+export const PLAYER_PRIMARY_FOCUS = '#59838F';
 
 /** Legacy size tokens in 1080p units. Named CALM_TEXT styles below add real faces and line heights. */
 export const CALM_TYPE = {
@@ -122,11 +132,5 @@ export const heroTitleTypography = (title: string) => title.length > 20 ? CALM_T
 /** Shared reading geometry for choosing a video and reviewing its analysis. */
 export const CALM_FLOW = { READING_WIDTH: 1040, HERO_TOP: 100, HERO_HEIGHT: 640, HERO_TITLE_WIDTH: 820 } as const;
 
-/** Shared map materials and illustrated journey geometry, in 1080p units. */
-export const CALM_WORLD = {
-  BACKGROUND: '#F7EACF', SURFACE: '#FFF8E7', SURFACE_FOCUSED: '#FFE1A9',
-  BORDER: '#385C59', FOCUS_RING: '#A44132', PRIMARY: '#F7B37A', TEXT: '#193F3E',
-  TEXT_DIM: '#193F3E', TEXT_DISABLED: '#526A63', INK: '#193F3E',
-} as const;
 export const CALM_SURFACE = { RADIUS: 20, STATUS_RADIUS: 18, INSET: 32, RULE: 2 } as const;
 export const CALM_JOURNEY = { WIDTH: 700, HEIGHT: 144, DRIFT: 4, DURATION: 1800 } as const;

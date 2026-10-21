@@ -1,0 +1,50 @@
+{
+  "testedAtUtc": "2026-10-21T23:33:25.752958+00:00",
+  "previousRun": 39692216310,
+  "previousHead": "bd2df77129b77d03097e8b7b84ace6585af878db",
+  "previousPython": {
+    "passed": 1797,
+    "failed": 6,
+    "skipped": 99,
+    "coveragePercent": 87.78,
+    "requiredPercent": 90
+  },
+  "previousMutationJob": "still running at this checkpoint",
+  "changes": [
+    "Shared light menu palette and near-luminance focus faces; playback palette and black cover retained",
+    "72 rendered screen/stage/focus states checked with unchanged analyzer",
+    "Recovered README code links, corpus table and broken heading links",
+    "Registered McWay final still in shipped-image gate",
+    "Real synthetic-media ambient export reproduction and intake transaction regressions"
+  ],
+  "localChecks": {
+    "renderContrastAndControlTestsPassed": 63,
+    "coastalAndMirrorTestsPassed": 9,
+    "analyzerWcag": "pass",
+    "analyzerBroadcast": "pass",
+    "negativeControls": "expected refusals verified",
+    "shippedImagesPassed": 17,
+    "uiToolTestsPassed": 17,
+    "hookPackageTestsPassed": 10,
+    "pythonRegressionTestsPassed": 23,
+    "ambientExportIntegrationPassed": 1,
+    "intakeWorkerTestsPassed": 13,
+    "typecheck": "passed with preserveSymlinks",
+    "lintErrors": 0,
+    "lintWarnings": 108,
+    "publishedNumbersMatched": 543
+  },
+  "remaining": [
+    "Fresh hosted full checks and unchanged 90 percent Python coverage floor",
+    "Native palette, proof page scrolling and remote Back/focus review; no experiment installation performed"
+  ],
+  "demo": {
+    "sha256": "dad01d91bccdab173c23bbb7df43d4ee480765fa1c6f665f3a224168cf7487a9",
+    "bytes": 56583122,
+    "durationSeconds": 151,
+    "savedWcagGateMatchesHash": true,
+    "quickTimeStateObserved": "paused at 00:00",
+    "subjectiveAudioComfortReview": "pending",
+    "modified": false
+  }
+}

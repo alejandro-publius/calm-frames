@@ -93,6 +93,8 @@ import {
   newFamily,
 } from '../../src/calmframes/profiles';
 import { checkedShelf } from './shelfFixtures';
+import { ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
+import { MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 
 const OUT_DIR = path.join(__dirname, '..', '..', 'build', 'ui-capture');
 
@@ -735,6 +737,33 @@ describe('the capture path', () => {
         stops: [{ name: 'credits', reason: 'open the credits' }],
       },
     ];
+
+    // Exercise actual approved evidence pages and repeated remote focus changes.
+    // No video is mounted; the same unmodified painter/analyzer measures their surfaces.
+    for (const source of [MCWAY_SOURCE_SHA256, ACADIA_SOURCE_SHA256]) {
+      const entry = checkedShelf().find(item => item.title.sha256 === source)!;
+      expect(entry.status).toBe('verified');
+      const proofId = 'title-details-record-proof';
+      scenes.push({ element: <TitleDetailsScreen entry={entry} onPlay={jest.fn()} />, stops: [
+        { name: 'proof-watch', reason: 'approved title details' },
+        { name: 'proof-info', reason: 'more info', act: () => press('title-details-show-info') },
+        { name: 'proof-source', reason: 'source measurements', act: () => press('title-details-technical') },
+        ...['prepared', 'binding', 'source', 'prepared', 'binding', 'source'].map(stage => ({
+          name: `proof-${stage}`, reason: 'change evidence stage', act: () => {
+            press(`${proofId}-step-${stage}`);
+            expect(screen.getByTestId(`${proofId}-${stage}`)).toBeTruthy();
+          },
+        })),
+        ...['source', 'prepared', 'binding', 'source', 'prepared', 'binding'].map((stage, index, stages) => ({
+          name: `proof-focus-${stage}`, reason: 'remote focus in evidence navigation', act: () => {
+            if (index > 0) fireEvent(screen.getByTestId(`${proofId}-step-${stages[index - 1]}`), 'blur');
+            fireEvent(screen.getByTestId(`${proofId}-step-${stage}`), 'focus');
+          },
+        })),
+        { name: 'proof-return-info', reason: 'back to info', act: () => press('title-details-info-back') },
+        { name: 'proof-return-watch', reason: 'back to watch', act: () => press('title-details-info-back') },
+      ] });
+    }
 
     // A quarter of a second between states is faster than anyone can press a
     // button, so it is the worst case for a flash rate. The screens record

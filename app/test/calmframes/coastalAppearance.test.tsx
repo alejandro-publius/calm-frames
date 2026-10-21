@@ -24,7 +24,7 @@ test('coastal primary focus is stationary and contrasts with both adjacent color
 
 test('menu text stays readable across resting, pressed and selected materials', () => {
   for (const color of [...COASTAL_MATERIAL.primary, ...COASTAL_MATERIAL.primaryPressed]) {
-    expect(contrastRatio(COASTAL_COLORS.BACKGROUND, color)).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio(COASTAL_COLORS.INK, color)).toBeGreaterThanOrEqual(4.5);
   }
   for (const color of [...COASTAL_MATERIAL.secondary, ...COASTAL_MATERIAL.secondaryPressed, ...COASTAL_MATERIAL.selected]) {
     expect(contrastRatio(COASTAL_COLORS.TEXT_DIM, color)).toBeGreaterThanOrEqual(4.5);
