@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-21",
+  "scope": "README, docs and static presentation assets only",
+  "baseCommit": "60c3bbb701081c37dbd87a6b1f5b66d51a74b855",
+  "checks": {
+    "existingScreenshotsPixelExactCrop": 4,
+    "localLinksResolved": 68,
+    "readmeMeasurementMarkersMatched": 529,
+    "changedFileStyle": "passed",
+    "diagramXML": "passed",
+    "diagramAndScreenshotVisualInspection": "passed",
+    "gitDiffWhitespace": "passed including new staged files",
+    "obviousCredentialPatterns": "none found",
+    "stagedGitleaks": "passed"
+  },
+  "repositoryWideStyle": {
+    "status": "pre-existing failures outside changed files",
+    "lines": 8,
+    "files": [
+      "docs/submission/DEMO_RUN_OF_SHOW.md",
+      "docs/submission/FINAL_REQUIREMENTS_CHECKLIST.md",
+      "docs/submission/README.md"
+    ]
+  },
+  "notPerformed": [
+    "simulator interaction",
+    "new screenshot or recording",
+    "demo MP4 read or edit",
+    "app code or media changes",
+    "app tests or native rebuild",
+    "commit or push",
+    "public demo upload",
+    "Devpost submission"
+  ],
+  "presentationBytes": 3718119,
+  "files": {
+    "README.md": "4e2c7d6e3c57a22698cb15b76bb8b3c85ffd1d209def74313b9400fcf467b1f5",
+    "docs/DECISIONS.md": "83e769930747e40920232e4474c54e93f848a47740f5ec793d8ac5c17c187b4d",
+    "docs/STATUS.md": "e15075f86f6a6de2259c7809d773cd0ed9fbf04c57a5cd5e30e39cb64e3525d0",
+    "docs/submission/REVIEWER_QUICKSTART.md": "a2532ac138bc6371a494f45938c10a860f0bf9c8052a8b222191a57b9dcdd50d",
+    "docs/presentation/ARCHITECTURE.md": "3b8a1376f450a6476e14ba1bad5706fa112b3687402c0876acbd76f8af6ac842",
+    "docs/presentation/details.png": "d2e397ca6a9cc937306c478d9932d9bf6cdcaf50c948b807f355921bbf77a76c",
+    "docs/presentation/capture-provenance.json": "368258f35e709768231d34458b7e52a272b6184417854b98f2d03f7b23a8bfde",
+    "docs/presentation/home.png": "2574d27330c81a1d1b1e5c57d32225f5e57e4c72c3340395f7ff620c9535dc86",
+    "docs/presentation/architecture.svg": "203248736fddf497d8a9502cbfb54a3a8246fb8dea7a433597ddd4a78606b850",
+    "docs/presentation/README.md": "d741ee9a07d4273b99100916283323359f6429b4057d2ba216149cbb04eb6f8d",
+    "docs/presentation/playback.png": "a1705f39a22ba0aae658fec4e318dcdeca1a6a174b6c38d60446adc9fc0f45cc",
+    "docs/presentation/ending.png": "575585cd6b09abb2e4a7a071e161b1a6d7ffce87092661b7643981fe1947a857",
+    "docs/presentation/render_architecture.py": "9d958f93c3195b69a5b33bd6b83fc6fd4393521a86004371c3d3dbaa387536da",
+    "docs/presentation/architecture.png": "616d6e8fa1b5d62adc94e205513d5b188f0b0ff3f1fde72a0ff118d66e05181a",
+    "docs/presentation/evidence/ending-fix-typecheck.log": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a",
+    "docs/presentation/evidence/ending-fix-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/presentation/evidence/ending-fix-package.json": "2a5c9b1de7bfa47514a70b08b6d711863954e4cfb747a5dcb37f889d065f9b26",
+    "docs/presentation/evidence/ending-fix-tests.log": "5a4bf0818d411d7b3a947ea4acb70ad92d114decf3e4e7000526c070cb07d717"
+  }
+}

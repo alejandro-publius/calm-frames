@@ -8,10 +8,11 @@ Sea otters and Forest remain available as still scenes with optional short previ
 
 Authenticated preparation and strict delivery passed for all three McWay presets.
 See [the exact receipt](../../results/mcway-activation-2026-10-21/verification.json).
-The aarch64 Debug native build from `110ba6e` passed ABI and packaged-media
-verification. Its compressed package is 132,557,203 bytes, SHA256
-`eb84321cc9e0a21a4f9ebe87ab3bc57b84865311cb171b95478b3157a6851849`.
-It is built but not yet installed. Native picture/audio acceptance remains pending while the Mac is locked.
+The later local ending fix `60c3bbb` is built and installed. Its exact package,
+checks and native screenshots are in the [current presentation record](../presentation/README.md).
+The ending fix is an ancestor of this presentation revision. Confirm the
+current candidate branch head with `git rev-parse HEAD` after cloning. Final edited-demo/audio acceptance and
+publication remain open; do not treat an older remote checkout as that local build.
 Historical test timings and device receipts below describe their stated earlier
 commits and are not acceptance of the current edition.
 
@@ -120,10 +121,10 @@ Metro uses a checkout-specific cache and does not depend on Watchman.
 `scripts/release.sh` builds one architecture, checks the library and package,
 and writes a local package, hashes and preparation receipt. It never publishes.
 Use Python 3.12 through `RELEASE_PYTHON` or `.venv/bin/python`. Do not pass a PIN.
-The current exact package was built from `110ba6e`; its SHA256 and source receipt
-are linked at the top. It is not yet installed. The owner's existing simulator
-and household are preserved while the Mac is locked. Installation and app-only
-review are authorized once the owner unlocks it; no PIN reset is needed.
+The current local package and installation are recorded in the linked
+presentation evidence. Preserve an existing household and do not reset its PIN.
+The following commands are for a reviewer installation, not an instruction to
+repeat the already completed local installation.
 
 ```sh
 nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
@@ -140,7 +141,7 @@ lines are what the October 18 native script ran
 The October 14 session used `--device Simulator` and `vega device launch-app
 --appName io.github.alejandropublius.calmframes.main`
 ([`results/native-observation-2026-10-14/receipt.json`](../../results/native-observation-2026-10-14/receipt.json)),
-the form README shows.
+historical CLI syntax, not the current commands above.
 
 Remote buttons from the host, if the simulator window is inconvenient:
 
@@ -184,9 +185,9 @@ then holds its final frame until Back. Existing Acadia, Sea otters and Forest
 start as still scenes and expose short previews only through a separate action.
 
 Before recording, independently verify a complete five-minute run, final audio
-fade and still hold, pause/resume and Back on the exact installed build. Current
-source tests cover those state contracts, but the native review is still pending.
-No completed native picture/audio or physical-TV acceptance is claimed. Do not
+fade and still hold, pause/resume and Back on the exact installed build. The prior native session observed the full run, pause/resume, Back and corrected
+ending picture; screenshots and limits are linked above. Final edited-demo and
+subjective audio acceptance remain open. No physical-TV acceptance is claimed. Do not
 show the diagnostic app or replay the rejected short-preview walkthrough.
 
 ## 4a. A browser preview, without a device
