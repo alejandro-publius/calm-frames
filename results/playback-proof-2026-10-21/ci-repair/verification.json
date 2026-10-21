@@ -32,7 +32,8 @@
     "typecheck": "passed with preserveSymlinks",
     "lintErrors": 0,
     "lintWarnings": 108,
-    "publishedNumbersMatched": 543
+    "publishedNumbersMatched": 543,
+    "proofAndOtherScreensReadabilityTestsPassed": 44
   },
   "remaining": [
     "Fresh hosted full checks and unchanged 90 percent Python coverage floor",
@@ -46,5 +47,11 @@
     "quickTimeStateObserved": "paused at 00:00",
     "subjectiveAudioComfortReview": "pending",
     "modified": false
+  },
+  "publication": {
+    "status": "denied",
+    "unpublishedCommit": "bc1c190cdd7cd5d97d40be1034a19dd751d6dc53",
+    "action": "git push origin codex/playback-proof-2026-10-21",
+    "reason": "Automatic approval review cited earlier no-push instructions despite later scoped publication authorization. Known not executed; no retry or alternate route attempted."
   }
 }

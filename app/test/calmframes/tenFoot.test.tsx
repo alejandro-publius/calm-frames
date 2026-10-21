@@ -39,6 +39,9 @@ import {
   BENIGN_STORY_PUBLIC_KEY,
 } from '../../src/calmframes/benignStoryData';
 import { WORLD } from '../../src/calmframes/CoastalWorld';
+import { checkedShelf } from './shelfFixtures';
+import { ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
+import { MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 import CalmCard from '../../src/calmframes/CalmCard';
 import {
   CALM_COLORS,
@@ -335,6 +338,13 @@ interface Case {
 }
 
 const CASES: Case[] = [
+  ...[MCWAY_SOURCE_SHA256, ACADIA_SOURCE_SHA256].flatMap(source =>
+    ['source', 'prepared', 'binding'].map(stage => ({
+      name: `playback-proof-${source.slice(0, 8)}-${stage}`,
+      element: <TitleDetailsScreen entry={checkedShelf().find(entry => entry.title.sha256 === source)!} onPlay={jest.fn()} />,
+      background: COASTAL_COLORS.BACKGROUND, screen: true,
+      press: ['title-details-show-info', 'title-details-technical', `title-details-record-proof-step-${stage}`],
+    }))),
   { name: 'household-loading', element: <HouseholdStorageScreen failed={false} onRetry={jest.fn()} />,
     background: WORLD.BACKGROUND, screen: true },
   { name: 'household-error', element: <HouseholdStorageScreen failed onRetry={jest.fn()} />,
