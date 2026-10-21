@@ -138,6 +138,7 @@ def main():
     # Direct npm exec below bypasses npm's prebuild hook. Reused packages also
     # need the compiled registry to match the exact approved ambient reports.
     command(['node', 'tools/approved_baked_ambient.mjs', '--check'])
+    command(['node', 'tools/playback_proof.mjs', '--check'])
     if args.skip_build:
         require(len(args.receipt) == len(arches), 'supply one --receipt per selected --arch, in the same order')
         for arch, package, proof in zip(arches, packages, args.receipt):

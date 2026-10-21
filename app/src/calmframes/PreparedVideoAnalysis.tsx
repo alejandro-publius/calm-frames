@@ -8,6 +8,7 @@ import { packagedLibrary } from './packagedLibrary';
 import { isBundledBenignStory } from './benignStory';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import { coverOptionsFor } from './household';
+import PlaybackProofPanel from './PlaybackProofPanel';
 
 export default function PreparedVideoAnalysis({ entry, settings, compact = false, testID = 'prepared-analysis' }: {
   entry: CheckedTitle; settings: HouseholdSettings; compact?: boolean; testID?: string;
@@ -30,6 +31,7 @@ export default function PreparedVideoAnalysis({ entry, settings, compact = false
     <Text style={styles.line}>{intervals.length === 0 ? 'This prepared video has no scheduled hidden scenes.' : `${intervals.length} scene${intervals.length === 1 ? '' : 's'} hidden for ${seconds} seconds in total, including added margins.`}</Text>
   </View>;
   return <View style={styles.record} testID={testID}>
+    <PlaybackProofPanel key={`${entry.title.id}:${settings.preset}`} entry={entry} settings={settings} testID={`${testID}-proof`} />
     <Text style={styles.heading} accessibilityRole="header">Analysis record</Text>
     <Text style={styles.line}>The source was analyzed before this video was prepared. Playback uses the signed timing map for your settings.</Text>
     <Text style={styles.line}>The prepared video was checked again with the same analyzer. This is not an independent safety assessment.</Text>

@@ -1,0 +1,143 @@
+Failure-summary excerpt from the full app run; original log retained locally.
+Summary of all failing tests
+FAIL test/calmframes/imageSizeLegacy.test.ts
+  ● patched image-size behind the legacy Metro API › the installed parser is the exact official fixed version, not a renamed vulnerable copy
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "/Users/alexvintera/Documents/Codex/2026-10-20/task/calm-frames-playback-proof/app/vendor/image-size-legacy/index.cjs"
+    Received: "/Users/alexvintera/Documents/Codex/2026-10-20/task/calm-frames-integration/app/vendor/image-size-legacy/index.cjs"
+
+      51 |     expect(manifest.dependencies['image-size-modern']).toBe('npm:image-size@2.0.4');
+      52 |     expect(manifest.overrides).toEqual({ 'metro@0.54.1': { 'image-size': '$image-size' } });
+    > 53 |     expect(legacyRequire.resolve('image-size')).toBe(join(appRoot, 'vendor/image-size-legacy/index.cjs'));
+         |                                                 ^
+      54 |     for (const [path, component] of Object.entries(lock.packages) as [string,
+      55 |       { name?: string; version?: string; link?: boolean }][]) {
+      56 |       if (component.name === 'image-size' || /(?:^|\/)node_modules\/image-size$/.test(path)) {
+
+      at Object.toBe (test/calmframes/imageSizeLegacy.test.ts:53:49)
+
+FAIL test/navigation/DrawerContent.test.tsx
+  ● DrawerContent Component › renders correctly
+
+    expect(received).toMatchSnapshot()
+
+    Snapshot name: `DrawerContent Component renders correctly 1`
+
+    - Snapshot  - 1
+    + Received  + 1
+
+    @@ -14,11 +14,11 @@
+        }
+      >
+        <Image
+          source={
+            {
+    -         "testUri": "../../../src/assets/nav_drawer_background_gradient.png",
+    +         "testUri": "../../../../../calm-frames-playback-proof/app/src/assets/nav_drawer_background_gradient.png",
+            }
+          }
+          style={
+            [
+              {
+
+      77 |   it('renders correctly', () => {
+      78 |     const component = render(<DrawerContent {...mockProps} />);
+    > 79 |     expect(component).toMatchSnapshot();
+         |                       ^
+      80 |   });
+      81 |
+      82 |   it('renders correctly with', () => {
+
+      at Object.toMatchSnapshot (test/navigation/DrawerContent.test.tsx:79:23)
+
+  ● DrawerContent Component › renders correctly with
+
+    expect(received).toMatchSnapshot()
+
+    Snapshot name: `DrawerContent Component renders correctly with 1`
+
+    - Snapshot  - 1
+    + Received  + 1
+
+    @@ -14,11 +14,11 @@
+        }
+      >
+        <Image
+          source={
+            {
+    -         "testUri": "../../../src/assets/nav_drawer_background_gradient.png",
+    +         "testUri": "../../../../../calm-frames-playback-proof/app/src/assets/nav_drawer_background_gradient.png",
+            }
+          }
+          style={
+            [
+              {
+
+      82 |   it('renders correctly with', () => {
+      83 |     const component = render(<DrawerContent {...mockProps} />);
+    > 84 |     expect(component).toMatchSnapshot();
+         |                       ^
+      85 |     expect(DrawerItemList).toBeDefined();
+      86 |   });
+      87 |
+
+      at Object.toMatchSnapshot (test/navigation/DrawerContent.test.tsx:84:23)
+
+FAIL test/components/miniDetails/Preview.test.tsx
+  ● Preview renders correctly › renders correctly with a posterUrl
+
+    expect(received).toMatchSnapshot()
+
+    Snapshot name: `Preview renders correctly renders correctly with a posterUrl 1`
+
+    - Snapshot  - 2
+    + Received  + 2
+
+    @@ -25,11 +25,11 @@
+        <View>
+          <Image
+            resizeMode="contain"
+            source={
+              {
+    -           "testUri": "../../../src/assets/mini_details_left_gradient.png",
+    +           "testUri": "../../../../../calm-frames-playback-proof/app/src/assets/mini_details_left_gradient.png",
+              }
+            }
+            style={
+              {
+                "height": 696,
+    @@ -41,11 +41,11 @@
+          />
+          <Image
+            resizeMode="contain"
+            source={
+              {
+    -           "testUri": "../../../src/assets/mini_details_bottom_gradient.png",
+    +           "testUri": "../../../../../calm-frames-playback-proof/app/src/assets/mini_details_bottom_gradient.png",
+              }
+            }
+            style={
+              {
+                "height": 696,
+
+      13 |     const posterUrl = 'http://example.com/poster.jpg';
+      14 |     const { toJSON, getByTestId } = render(<Preview posterUrl={posterUrl} />);
+    > 15 |     expect(toJSON()).toMatchSnapshot();
+         |                      ^
+      16 |     expect(getByTestId('poster-image')).toBeTruthy();
+      17 |   });
+      18 |
+
+      at Object.toMatchSnapshot (test/components/miniDetails/Preview.test.tsx:15:22)
+
+
+Snapshot Summary
+ › 3 snapshots failed from 2 test suites. Inspect your code changes or re-run jest with `-u` to update them.
+
+Test Suites: 3 failed, 1 skipped, 164 passed, 167 of 168 total
+Tests:       4 failed, 4 skipped, 1706 passed, 1714 total
+Snapshots:   3 failed, 54 passed, 57 total
+Time:        43.585 s
+Ran all test suites.

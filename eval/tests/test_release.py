@@ -322,3 +322,19 @@ exit 0
     assert (project / 'commands.log').read_text().splitlines() == [
         'tools/approved_baked_ambient.mjs --check']
     assert not (project / 'build/release/v0.1.0').exists()
+
+
+@pytest.mark.parametrize('skip_build', [False, True])
+def test_stale_playback_proof_blocks_build_and_package_reuse(project, skip_build):
+    (project / 'shims/node').write_text('''#!/bin/sh
+printf '%s\\n' "$*" >> "$RELEASE_TEST_LOG"
+case "$1" in tools/playback_proof.mjs) echo 'Playback proof differs from approved reports' >&2; exit 1 ;; esac
+exit 0
+''')
+    args = ['--skip-build', '--receipt', str(receipt(project))] if skip_build else []
+    result = run_release(project, *args)
+    assert result.returncode != 0
+    assert 'Playback proof differs' in result.stderr
+    calls = (project / 'commands.log').read_text().splitlines()
+    assert calls == ['tools/approved_baked_ambient.mjs --check', 'tools/playback_proof.mjs --check']
+    assert not (project / 'build/release/v0.1.0').exists()

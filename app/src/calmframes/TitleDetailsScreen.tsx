@@ -178,7 +178,7 @@ const TitleDetailsScreen = ({
           {practiceOffered ? <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-practice`} label="Watch demo"
             accessibilityLabel={practiceLine ? `Watch simulated demo. ${practiceLine}` : 'Watch simulated demo'}
             disabled={saving} hasTVPreferredFocus={preferPracticeFocus && returnFocus !== 'technical'} onPress={() => onOpenPractice?.(practiceOffered)} /></View> : null}
-          <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-technical`} label="Technical details"
+          <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-technical`} label={concernsPackagedLibrary(entry.title) ? 'Playback proof & details' : 'Technical details'}
             hasTVPreferredFocus={returnFocus === 'technical'} onPress={() => setPage('technical')} /></View>
         </>}
         <View style={styles.secondaryAction}><CalmButton quiet testID={`${testID}-back-bottom`} label="Back" onPress={back} /></View>

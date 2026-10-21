@@ -44,7 +44,7 @@ function verificationReference(title) {
   return value;
 }
 
-function checkVerificationReport(raw, digest, titles) {
+export function checkVerificationReport(raw, digest, titles) {
   requireThat(raw.length <= MAX_REPORT && sha(raw) === digest,
     'Verification report bytes differ from the recorded report hash.');
   const text = raw.toString('utf8');
@@ -55,7 +55,7 @@ function checkVerificationReport(raw, digest, titles) {
   const compatible = text.replace(/"(?:\\.|[^"\\])*"|(?<=[\s[:,])(-?Infinity)(?=[\s,}\]])/g,
     (token, infinite) => infinite ? (infinite.startsWith('-') ? '-1e999' : '1e999') : token);
   const report = record(JSON.parse(compatible));
-  if (report.recipe === 'baked-ambient-v1') { checkAmbientReport(text, titles); return; }
+  if (report.recipe === 'baked-ambient-v1') return checkAmbientReport(text, titles);
   requireThat(exactKeys(report, ['sha256', 'source_path', 'presets', 'passed', 'outcome', 'started_at', 'finished_at', 'checks']) &&
     report.passed === true && typeof report.source_path === 'string' && report.source_path.length > 0 &&
     Array.isArray(report.presets) && report.presets.length === PRESETS.length &&
@@ -91,6 +91,7 @@ function checkVerificationReport(raw, digest, titles) {
   requireThat(titles.every((title) => report.sha256 === title.sourceSha256 &&
     report.outcome === verificationReference(title).outcome && outcome === report.outcome),
   'The verification report source or outcome differs from its title.');
+  return report;
 }
 
 function compactJson(raw) {
