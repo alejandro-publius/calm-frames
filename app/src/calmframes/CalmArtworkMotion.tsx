@@ -2,11 +2,12 @@
 import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import React from 'react';
 import { AccessibilityInfo, Animated, Easing, View } from 'react-native';
-import { scale } from './calmStyles';
+import { CALM_JOURNEY, scale } from './calmStyles';
 
 export interface CalmArtworkMotionProps {
   children: React.ReactNode;
   enabled?: boolean;
+  gentle?: boolean;
   active?: boolean;
   testID?: string;
 }
@@ -14,6 +15,7 @@ export interface CalmArtworkMotionProps {
 export default function CalmArtworkMotion({
   children,
   enabled = false,
+  gentle = false,
   active = true,
   testID = 'calm-artwork-motion',
 }: CalmArtworkMotionProps) {
@@ -49,10 +51,10 @@ export default function CalmArtworkMotion({
         }
         if (!enter || consumed.current || !foreground || !enabled || !active) return;
         consumed.current = true;
-        translation.setValue(scale(6));
+        translation.setValue(scale(gentle ? CALM_JOURNEY.DRIFT : 6));
         animation = Animated.timing(translation, {
           toValue: 0,
-          duration: 240,
+          duration: gentle ? CALM_JOURNEY.DURATION : 240,
           easing: Easing.out(Easing.cubic),
           useNativeDriver: true,
           isInteraction: false,
@@ -100,7 +102,7 @@ export default function CalmArtworkMotion({
       lifecycle?.remove();
       reduction?.remove();
     };
-  }, [active, enabled, manager, translation]);
+  }, [active, enabled, gentle, manager, translation]);
 
   return animatedOnEntry ? (
     <Animated.View testID={testID} accessible={false} pointerEvents="none"

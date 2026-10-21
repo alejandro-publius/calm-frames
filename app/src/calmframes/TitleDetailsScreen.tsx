@@ -7,6 +7,7 @@ import { Image } from 'react-native';
 import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
+import { EnvironmentMark } from './JourneyStatus';
 import { filmStill } from './HomeHarborScene';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, heroTitleTypography, scale } from './calmStyles';
 import { coverLine, DETECTION_LIMITS_LINE, noticeForTitle, ONLY_IN_CALM_FRAMES_LINE, runtimeLabel, SAFETY_NOTE } from './copy';
@@ -186,7 +187,9 @@ const TitleDetailsScreen = ({
     <WorldAppearance.Provider value><ScrollView key="watch" testID={testID} style={[styles.screen, { backgroundColor: WORLD.BACKGROUND }]} contentContainerStyle={[styles.content, { minHeight: scale(1080) }]}>
       <CoastalWorld detail destination={islandKind(presentation.menuArt ?? presentation.art)} cardKinds={[islandKind(presentation.menuArt ?? presentation.art)]} />
       <Image source={filmStill(presentation.menuArt ?? presentation.art)} resizeMode="cover" fadeDuration={0} style={styles.destinationImage} testID={`${testID}-destination-image`} accessible={false} />
-      <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`} />
+      <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`}>
+        {presentation.menuArt || presentation.art === 'coastal' ? <View style={styles.environment}><EnvironmentMark forest={presentation.menuArt === 'forest'} /><Text style={styles.environmentName}>{presentation.menuArt === 'forest' ? 'Forest' : 'Ocean'}</Text></View> : null}
+      </CalmPageHeader>
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
           <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name), { color: WORLD.TEXT }]} testID={`${testID}-title`}>{presentation.name}</Text>
@@ -211,6 +214,8 @@ const TitleDetailsScreen = ({
 const styles = StyleSheet.create({
   // The photograph stands on the island; homeIslands.ts DETAIL keeps the landmarks clear of it.
   destinationImage: { position: 'absolute', left: scale(DETAIL.PHOTO.left), top: scale(DETAIL.PHOTO.top), width: scale(DETAIL.PHOTO.width), height: scale(DETAIL.PHOTO.height), borderWidth: scale(10), borderColor: WORLD.SURFACE, borderRadius: scale(26) },
+  environment: { flexDirection: 'row', alignItems: 'center', gap: scale(CALM_SPACE.TIGHT) },
+  environmentName: { ...CALM_TEXT.supporting, color: WORLD.TEXT },
   reading: { width: '100%', maxWidth: scale(1040), gap: scale(24), paddingTop: scale(32) },
   secondaryAction: { alignItems: 'flex-start' },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },

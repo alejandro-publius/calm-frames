@@ -162,7 +162,9 @@ def test_default_assembles_only_aarch64_debug_and_preserves_evidence_scope(proje
     assert 'aarch64 Debug' in notes
     assert 'Native validation is not performed by this script' in notes
     assert 'Fire TV Stick' not in notes
-    assert 'vega device launch-app --device Simulator --appName io.example.calm.main' in notes
+    assert "vega device run-cmd --device VirtualDevice --command 'vmsgr send pkg://io.example.calm.main'" in notes
+    assert '--packagePath calm-frames-0.1.0-aarch64-debug.vpkg --buildType Debug' in notes
+    assert '--device Simulator' not in notes
     assert '--componentId' not in notes
     assert json.loads((out / 'PREPARATION.json').read_text())['native_validation_performed'] is False
     assert 'Nothing was published' in result.stdout
@@ -304,3 +306,19 @@ exit 0
     calls = (project / 'commands.log').read_text()
     assert '--require-reports' in calls
     assert 'build-kepler' not in calls
+
+
+@pytest.mark.parametrize('skip_build', [False, True])
+def test_ambient_approval_failure_blocks_build_and_package_reuse(project, skip_build):
+    (project / 'shims/node').write_text('''#!/bin/sh
+printf '%s\\n' "$*" >> "$RELEASE_TEST_LOG"
+case "$1" in tools/approved_baked_ambient.mjs) echo 'Compiled ambient metadata differs from exact approval' >&2; exit 1 ;; esac
+exit 0
+''')
+    args = ['--skip-build', '--receipt', str(receipt(project))] if skip_build else []
+    result = run_release(project, *args)
+    assert result.returncode != 0
+    assert 'Compiled ambient metadata differs' in result.stderr
+    assert (project / 'commands.log').read_text().splitlines() == [
+        'tools/approved_baked_ambient.mjs --check']
+    assert not (project / 'build/release/v0.1.0').exists()

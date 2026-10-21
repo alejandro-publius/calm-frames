@@ -1,24 +1,24 @@
 # Devpost description, draft
 
-Current build note: nothing from branch `claude/ocean-layout-fix-2026-10-19` has been
-built or installed. FINAL_HANDOFF.md records source `805f855` installed on October 18:
-one successful compile required a bounded recovery of stale media staging, then all
-package gates passed and one install completed, and its native checks cover all three
-full clips, Forest More info and How it works Back on the earlier coastal map. The
-owner's October 19 note says the Mac now has source `2b78587` installed, which was
-never pushed and cannot be inspected from here. No pixel/audio or owner acceptance is
-implied.
+Current build note, October 21, 2026: the integrated Ocean/Forest flow and exact
+approved moving Acadia replacement were built and installed on the Vega Virtual
+Device using existing Node 22, Vega SDK 0.24 and JDK 21. The aarch64 Debug package
+SHA256 is 82f04537767853d6fcb3c6cdc3a177342b35dc894ebf32ae2d7beb1e1283d00e.
+Native text traces cover all three approved titles, pause/resume, guarded Skip
+and Back. Picture/audio acceptance is unverified: app-only framebuffer capture
+returned black. No new demo video was recorded.
 
-Draft for the owner, updated October 19, 2026. It describes the source on
-`claude/ocean-layout-fix-2026-10-19`: Home names Ocean (Acadia, Sea otters) and Forest
-over their cards, with Watch and Details below; the approved Acadia, NOAA Sea otters
-and 12-second Forest creek titles; and the local review/staging tool. Not
-submitted. The rules were not re-read on October 19 (devpost.com is blocked from the
-cloud session), so the checklist's rule quotes keep their October 17 date. Check the
-live form's fields first
-([checklist](FINAL_REQUIREMENTS_CHECKLIST.md), section 11). Every measured number below is
-tied to a results file and checked by `eval/readme_sync.py`. Bracketed notes are for the
-owner and are not pasted. Paste each number's value, not the hidden comment marker around it.
+Draft for the owner, updated October 21, 2026. Intended candidate branch:
+`claude/ocean-layout-fix-2026-10-19`. Not submitted. The official overview and rules
+were re-read October 21: deadline October 23 at noon Pacific; a publicly visible
+YouTube/Vimeo demonstration and judge-accessible repository are required. Final
+submission constitutes agreement to the rules. Browser access to the existing
+Devpost draft is currently unresolved, so its ownership, current content and
+submission status have not been verified. Preserve its existing text when editing.
+Measured research numbers below retain their original results-file references;
+they are separate from the final integrated-source checks: 1,687 app tests,
+77 Node checks and 41 release tests passed, TypeScript passed, and lint reported
+zero errors and 108 warnings. Bracketed notes are not submission copy.
 
 ## Name and tagline
 
@@ -38,10 +38,10 @@ will be covered.
 
 ### On the TV today
 
-The app runs on the Vega Virtual Device. The Ocean and Forest Home described here is the
-current source and has not been built or installed yet; the latest native checks in the
-repository (source `805f855`, October 18) ran the earlier coastal map with the same three
-videos.
+The app runs on the Vega Virtual Device. The integrated Ocean and Forest Home,
+shared map loading states and approved three-video library were built, installed
+and exercised with bounded native text checks on October 21. Visual and audio
+acceptance remain unverified.
 
 - **Three prepared videos on a map.** Home is a static coastal map. "Ocean" names the
   Acadia and Sea otters islands and "Forest" the third. Acadia is a public-domain National
@@ -55,7 +55,8 @@ videos.
   says "No flagged scenes", which is what the analyzer found, not a safety certificate.
   Source attribution and the audio explanation are in More info.
 - **Scenes replaced with protection retained.** During flagged scenes, approved Acadia
-  shows footage from the opening of the same park video, baked into its rendition. It keeps
+  shows moving ocean footage derived from seconds 13 to 19.5 of the same park
+  video, slowed for the replacement and baked into its rendition. It keeps
   the source's audio track (that track is silent, so its card says Silent) and an
   independent opaque fallback. Compact player wording and Skip describe the active
   presentation. The approved Sea otters
@@ -71,7 +72,12 @@ videos.
   only with prepared videos in this app, not other apps or live TV, that it can miss
   flashing, and that it is not a medical device. More info adds that this prototype has
   not been medically validated.
-- **Back where you started.** When the video ends, the remote lands on Watch again.
+- **Back where you started.** Playback returns to its launch screen. A video opened
+  from Details returns to Details with Watch focused; one Back restores the selected
+  Home card. Playback launched from Home returns to Home.
+- **A connected journey.** Startup, household loading, verification, playback opening
+  and return share the coastal map, Ocean/Forest motifs and consistent typography.
+  Messages reflect actual application state; optional gentle artwork respects reduced motion.
 
 ### On the computer today
 

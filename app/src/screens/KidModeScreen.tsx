@@ -440,6 +440,7 @@ const KidModeScreen = ({
     navigation.navigate(Screens.PLAYER_SCREEN, {
       data: titleDataFor(entry),
       showHomeOpening: true,
+      interfaceMotionEnabled: family.interfaceMotionEnabled === true,
       guarded: guardedParamsFor(
         entry,
         settings,

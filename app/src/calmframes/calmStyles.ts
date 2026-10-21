@@ -121,3 +121,12 @@ export const heroTitleTypography = (title: string) => title.length > 20 ? CALM_T
 
 /** Shared reading geometry for choosing a video and reviewing its analysis. */
 export const CALM_FLOW = { READING_WIDTH: 1040, HERO_TOP: 100, HERO_HEIGHT: 640, HERO_TITLE_WIDTH: 820 } as const;
+
+/** Shared map materials and illustrated journey geometry, in 1080p units. */
+export const CALM_WORLD = {
+  BACKGROUND: '#F7EACF', SURFACE: '#FFF8E7', SURFACE_FOCUSED: '#FFE1A9',
+  BORDER: '#385C59', FOCUS_RING: '#A44132', PRIMARY: '#F7B37A', TEXT: '#193F3E',
+  TEXT_DIM: '#193F3E', TEXT_DISABLED: '#526A63', INK: '#193F3E',
+} as const;
+export const CALM_SURFACE = { RADIUS: 20, STATUS_RADIUS: 18, INSET: 32, RULE: 2 } as const;
+export const CALM_JOURNEY = { WIDTH: 700, HEIGHT: 144, DRIFT: 4, DURATION: 1800 } as const;

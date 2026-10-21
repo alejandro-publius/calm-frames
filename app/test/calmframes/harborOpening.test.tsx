@@ -5,7 +5,7 @@ import { AccessibilityInfo, Animated, BackHandler } from 'react-native';
 import HarborOpening, { HARBOR_OPENING_MS } from '../../src/calmframes/HarborOpening';
 import { frameFromTree, RenderedNode } from '../../src/calmframes/uiCapture';
 import { HARBOR_BOOTSTRAP_FRAME } from '../../src/calmframes/uiFrames';
-import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
+import { CALM_WORLD } from '../../src/calmframes/calmStyles';
 import KidModeScreen from '../../src/screens/KidModeScreen';
 import { newFamily } from '../../src/calmframes/profiles';
 import { emptyPinGate, setPin } from '../../src/calmframes/parentGate';
@@ -61,7 +61,7 @@ describe('waves into the library', () => {
 
   it('shows the real wave palette during loading without a timer or motion query', () => {
     render(<HarborOpening />);
-    expect(frameFromTree('harbor-bootstrap', screen.toJSON() as unknown as RenderedNode)).toEqual({ ...HARBOR_BOOTSTRAP_FRAME, background: COASTAL_COLORS.BACKGROUND });
+    expect(frameFromTree('harbor-bootstrap', screen.toJSON() as unknown as RenderedNode)).toEqual({ ...HARBOR_BOOTSTRAP_FRAME, background: CALM_WORLD.BACKGROUND });
     expect(screen.getByRole('progressbar').props.accessibilityLabel).toContain('Calm Frames is opening');
     expect(query).not.toHaveBeenCalled();
     expect(timing).not.toHaveBeenCalled();

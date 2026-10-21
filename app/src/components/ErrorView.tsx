@@ -4,7 +4,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CalmButton from '../calmframes/CalmButton';
-import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from '../calmframes/calmStyles';
+import { CALM_COLORS, CALM_SURFACE, CALM_SPACE, CALM_TEXT, scale } from '../calmframes/calmStyles';
 
 interface ErrorViewProps { navigateBack: () => void; }
 
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y),
     gap: scale(CALM_SPACE.BLOCK),
   },
-  message: { alignItems: 'flex-start', maxWidth: scale(1200), gap: scale(CALM_SPACE.ROW) },
+  message: { alignItems: 'flex-start', maxWidth: scale(1200), gap: scale(CALM_SPACE.ROW), backgroundColor: CALM_COLORS.SURFACE, padding: scale(CALM_SURFACE.INSET), borderRadius: scale(CALM_SURFACE.STATUS_RADIUS), borderLeftWidth: scale(8), borderLeftColor: CALM_COLORS.FAILED },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.FAILED, textAlign: 'left' },
   detail: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
 });

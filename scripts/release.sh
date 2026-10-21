@@ -135,6 +135,9 @@ def main():
     sources = source_inventory()
     packages = [package_path(arch, args.build_type) for arch in arches]
     receipt_paths = []
+    # Direct npm exec below bypasses npm's prebuild hook. Reused packages also
+    # need the compiled registry to match the exact approved ambient reports.
+    command(['node', 'tools/approved_baked_ambient.mjs', '--check'])
     if args.skip_build:
         require(len(args.receipt) == len(arches), 'supply one --receipt per selected --arch, in the same order')
         for arch, package, proof in zip(arches, packages, args.receipt):
@@ -201,7 +204,7 @@ def main():
             'native_validation_performed': False, 'published': False}
         (stage / 'PREPARATION.json').write_text(json.dumps(preparation, indent=2) + '\n')
         table = '\n'.join(f'| {name} | {arch} {args.build_type} |' for arch, name in zip(arches, names))
-        instructions = '\n'.join(f'    vega device install-app --device Simulator --packagePath {name}' for name in names)
+        instructions = '\n'.join(f'    vega device install-app --device VirtualDevice --packagePath {name} --buildType {args.build_type}' for name in names)
         (stage / 'NOTES.md').write_text(f'''# Calm Frames {tag}
 
 A calmer way to watch.
@@ -230,10 +233,11 @@ Use aarch64 for Apple Silicon and x86_64 for an Intel simulator. No physical
 Fire TV is required. Install only the package matching the connected simulator.
 
     source ~/vega/env
-    vega virtual-device start
-    vega device is-connected --device Simulator
+    # Start only if the virtual device is stopped; keep it alive after this shell.
+    nohup vega virtual-device start > /tmp/calm-frames-vvd.log 2>&1 < /dev/null &
+    vega device is-connected --device VirtualDevice
 {instructions}
-    vega device launch-app --device Simulator --appName {manifest['package']['id']}.main
+    vega device run-cmd --device VirtualDevice --command 'vmsgr send pkg://{manifest['package']['id']}.main'
 
 ## Parent PIN
 

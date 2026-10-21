@@ -1205,3 +1205,11 @@ namespace with the exact source copy, repackage compiled output with installed v
 and rerun all strict package gates. No source, limit or trust change. Suggestion:
 Vega should synchronize removals when staging raw assets, or document that asset
 removals require cleaning the generated staging namespace.
+
+## 2026-10-21: local test runner requested Watchman state access
+
+Task: run the final UI source checks. Expected: workspace-only Jest run. Actual: Watchman tried to chmod its state outside the writable workspace and exited before tests. Severity: blocked that invocation only. Workaround: run Jest with --watchman=false using the existing Node 22; no permissions or software changed. Suggestion: use this flag for bounded local CI-style runs.
+
+## 2026-10-21: Vega incremental packaging retained replaced media
+
+Task: package the approved Acadia replacement. Expected: five bundles and 63,317,768 prepared bytes. Actual: native staging retained the removed Acadia bundle/report alongside the new bundle, and the mandatory package budget gate rejected the archive. No installation occurred. Severity: build blocked. Workaround: move only the generated prepared namespace from app/build/private/vega/aarch64/Debug/assets/raw to the external evidence backup, then rebuild from the checked source assets. Suggestion: refresh the native staged asset tree when a bundle is removed.

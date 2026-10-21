@@ -2768,3 +2768,9 @@ preset copies are 37,144,901 of the library's 66,492,442 bytes, but the player
 and verifier require one file per preset and approvals pin manifests that list
 them, so storing each once is a format change with new bundle identities. That
 is left for the owner to approve; no catalog, trust, signing or media changed.
+
+## 2026-10-21: cohesive journey UI in the isolated Mac checkout
+
+Decision: use the existing coastal map, Fraunces and Source Sans 3 for real startup, household loading, title opening and return. A shared SVG boat route and Ocean/Forest marks connect these states to Home and Details. Status text follows actual bootstrap, household, verification and frame-wait state; no percentage or presentation delay is added. Optional loading art moves four design units once over 1.8 seconds, honoring the household motion preference and system reduced motion. Boot stays still before preferences are known. Existing native primitives and assets only; no install or purchase cost.
+
+Home has a non-text selection check inside the photo. Player title/error/paused/buffering surfaces share geometry while cover, seek, teardown and focus ownership remain unchanged. The owner later approved the exact revised ocean bundle; it is activated, built and installed.

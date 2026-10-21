@@ -40,7 +40,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { announceForAccessibility } from '../calmframes/announce';
 import {
   CALM_COLORS,
-  CALM_SPACE,
+  CALM_SURFACE, CALM_SPACE,
   CALM_TEXT,
   scale,
 } from '../calmframes/calmStyles';
@@ -231,7 +231,7 @@ export const styles = StyleSheet.create({
   // middle of the screen, clear of the card above and the captions below.
   plate: {
     backgroundColor: CALM_COLORS.SURFACE,
-    borderRadius: scale(12),
+    borderRadius: scale(CALM_SURFACE.STATUS_RADIUS),
     paddingVertical: scale(CALM_SPACE.TIGHT),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
   },

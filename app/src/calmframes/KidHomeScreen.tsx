@@ -1,4 +1,5 @@
 import React from 'react';
+import Svg, { Path } from '@amazon-devices/react-native-svg';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
 import { islandKind } from './CoastalIsland';
 import { ENVIRONMENTS, environmentHeadingBox, HOME_ISLANDS, ISLAND_ORDER, IslandSlotKind, islandCardBox, ScreenBox } from './homeIslands';
@@ -13,6 +14,7 @@ import {
 } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
+import { EnvironmentMark } from './JourneyStatus';
 import { OFFLINE_TITLE_ID } from './offlineTitle';
 import HomeHarborScene, { filmStill } from './HomeHarborScene';
 import PictureHoldIntroduction from './PictureHoldIntroduction';
@@ -266,6 +268,7 @@ const KidHomeScreen = ({
     if (!present.length) return null;
     const id = name.toLowerCase();
     return <View key={id} testID={`${testID}-environment-${id}`} style={[styles.islandHeading, placed(environmentHeadingBox(present))]}>
+      <EnvironmentMark forest={name === 'Forest'} />
       <Text accessibilityRole="header" numberOfLines={1} testID={`${testID}-environment-${id}-name`} style={styles.section}>{name}</Text>
     </View>;
   });
@@ -278,10 +281,19 @@ const KidHomeScreen = ({
                   accessibilityLabel={[label.cardName ?? label.name, label.kind].filter(Boolean).join(', ')} activeOpacity={1}
                   hasTVPreferredFocus={returnTo === 'poster' && entry.title.id === preferredId}
                   onFocus={() => { setFocusedId(entry.title.id); setSelectedId(entry.title.id); onSelectTitle?.(entry.title.id); }} onBlur={() => setFocusedId(null)} onPress={() => {
-                    if (!saving) { onLaunchControl?.('poster'); onOpen(entry); feedback.confirm(); }
+                    if (!saving) {
+                      // Activation can arrive without a native focus event.
+                      // Keep Watch and the restored shelf on the opened title.
+                      setSelectedId(entry.title.id);
+                      onSelectTitle?.(entry.title.id);
+                      onLaunchControl?.('poster');
+                      onOpen(entry);
+                      feedback.confirm();
+                    }
                   }}
                   style={[styles.poster, islandHome ? [styles.islandCard, placed(islandCardBox(islandOf(entry)!))] : null, selected ? styles.posterSelected : null, focused ? styles.posterFocused : null]}>
                   <Image source={!label.menuArt && !label.art && shelfPoster(entry) ? { uri: shelfPoster(entry) } : filmStill(label.menuArt ?? label.art)} style={styles.filmStill} resizeMode="cover" fadeDuration={0} testID={`${testID}-poster-image-${entry.title.id}`} accessible={false} />
+                  {selected ? <View testID={`${testID}-selected-${entry.title.id}`} style={styles.selectionMark} pointerEvents="none" accessible={false}><Svg width={scale(32)} height={scale(32)} viewBox="0 0 32 32"><Path d="M6 16L13 23L27 8" fill="none" stroke={WORLD.TEXT} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" /></Svg></View> : null}
                   <View style={styles.posterCopy}>
                   <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
                   {label.kind ? <Text style={styles.posterQualifier} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{label.selectorMeta ?? label.kind}</Text> : null}
@@ -362,9 +374,10 @@ const styles = StyleSheet.create({
   posterSelected: { borderBottomColor: WORLD.FOCUS_RING },
   posterFocused: { borderColor: WORLD.FOCUS_RING, backgroundColor: WORLD.SURFACE_FOCUSED },
   filmStill: { width: '100%', height: scale(164), borderRadius: scale(10) },
+  selectionMark: { position: 'absolute', right: scale(24), top: scale(24), width: scale(44), height: scale(44), borderRadius: scale(22), backgroundColor: WORLD.SURFACE, alignItems: 'center', justifyContent: 'center' },
   posterCopy: { paddingHorizontal: scale(4), paddingTop: scale(8) },
   islandLayer: { ...StyleSheet.absoluteFillObject },
-  islandHeading: { alignItems: 'center', justifyContent: 'center' },
+  islandHeading: { flexDirection: 'row', gap: scale(CALM_SPACE.TIGHT), alignItems: 'center', justifyContent: 'center' },
   islandHero: { alignItems: 'flex-start', justifyContent: 'flex-end' },
   islandCard: { minHeight: undefined, justifyContent: 'flex-start' },
   pickerPanel: { padding: scale(24), paddingBottom: 0, borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: WORLD.BORDER, backgroundColor: WORLD.SURFACE },

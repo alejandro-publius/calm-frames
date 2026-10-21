@@ -1,13 +1,13 @@
 {
   "assetRoot": "assets/raw/prepared-library",
-  "bundleId": "d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46",
+  "bundleId": "0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb",
   "files": {
     "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.json": "d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1",
-    "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.mp4": "0b641eb45f2f19dc7694fd0f36a7c85e758782932f11ede10566ac0c33639336",
+    "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.mp4": "07abfc85a4a37291d432e4570d207ae464b3c88608a79922058df47071ed91cc",
     "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.json": "c6bcb94530134568650f70434756d5571b6eb772871b053e5d64e35a4cd7c34f",
-    "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4": "42d2abbe6ddd2f0a592bc5a1407da945a1c73fc6febedc68895b9f5294608a14",
+    "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4": "8aa6b3566e325b2b89863b221ce2b428ed7ba1ff5abf4cdc41a80ec415121e63",
     "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.json": "709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a",
-    "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.mp4": "0b641eb45f2f19dc7694fd0f36a7c85e758782932f11ede10566ac0c33639336"
+    "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.mp4": "07abfc85a4a37291d432e4570d207ae464b3c88608a79922058df47071ed91cc"
   },
   "publicKeyBase64": "mSw6rXluFTx+gmF5ODt1pSTIYOkLkxurqGOrJHs2Xkg=",
   "titles": [
@@ -37,7 +37,7 @@
           "guardBandMs": 500.0,
           "minCoverMs": 400.0,
           "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/broadcast.mp4",
-          "sha256": "0b641eb45f2f19dc7694fd0f36a7c85e758782932f11ede10566ac0c33639336",
+          "sha256": "07abfc85a4a37291d432e4570d207ae464b3c88608a79922058df47071ed91cc",
           "startOffsetMs": 0
         },
         "extra-cautious": {
@@ -45,7 +45,7 @@
           "guardBandMs": 1000.0,
           "minCoverMs": 800.0,
           "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/extra-cautious.mp4",
-          "sha256": "42d2abbe6ddd2f0a592bc5a1407da945a1c73fc6febedc68895b9f5294608a14",
+          "sha256": "8aa6b3566e325b2b89863b221ce2b428ed7ba1ff5abf4cdc41a80ec415121e63",
           "startOffsetMs": 0
         },
         "wcag": {
@@ -53,16 +53,16 @@
           "guardBandMs": 500.0,
           "minCoverMs": 400.0,
           "path": "titles/2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28/wcag.mp4",
-          "sha256": "0b641eb45f2f19dc7694fd0f36a7c85e758782932f11ede10566ac0c33639336",
+          "sha256": "07abfc85a4a37291d432e4570d207ae464b3c88608a79922058df47071ed91cc",
           "startOffsetMs": 0
         }
       },
       "sourceSha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
       "title": "Acadia coastal scenery (National Park Service, public domain)",
       "verification": {
-        "checkedInputsSha256": "a01ed3b42c8552f1108806c470c641b85b42244ea6fb53042243c0af31dd5c15",
+        "checkedInputsSha256": "a40697417442a49dae8fc1499153bb508e17e6cb22681d2a1f5e651707b353b6",
         "outcome": "cover proven drawn",
-        "reportSha256": "45c6f62f741bbc133d01a0d80b3d4da13d9f2dff0e49d045796592eda0071493"
+        "reportSha256": "4043445adbb836fc3dd2bd3feb222e81e7d8ad9c411be8b8ba0fe28e9f95f6fd"
       }
     }
   ],

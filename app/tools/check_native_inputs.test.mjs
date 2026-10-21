@@ -34,3 +34,14 @@ test('runtime syntax is checked without executing it and a partial repair still 
   fs.unlinkSync(path.join(root, PLAYER_INPUTS[1]));
   assert.deepEqual(checkNativeInputs(root, '22.23.2').missing, [PLAYER_INPUTS[1]]);
 });
+test('native builds require Node 22 even when all generated inputs are present', t => {
+  const root = fixture(t);
+  write(root, 'node_modules/@amazon-devices/kepler-cli-platform/package.json', '{}');
+  for (const name of PLAYER_INPUTS) write(root, name, 'throw new Error("must not execute");');
+  assert.equal(checkNativeInputs(root, '22.23.2').nativeInputs, 'ready');
+  for (const version of ['20.0.0', '23.0.0', '24.0.0', '26.0.0', 'invalid']) {
+    const result = checkNativeInputs(root, version);
+    assert.equal(result.nativeInputs, 'blocked', version);
+    assert.match(result.problems.join(' '), /pinned Node 22/);
+  }
+});

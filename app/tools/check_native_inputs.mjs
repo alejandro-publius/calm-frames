@@ -12,7 +12,7 @@ export const PLAYER_INPUTS = [
 ];
 export function checkNativeInputs(app = APP, nodeVersion = process.versions.node) {
   const problems = [];
-  if (Number(nodeVersion.split('.')[0]) < 22) problems.push('Use Node 22 from .nvmrc before installing dependencies.');
+  if (Number(nodeVersion.split('.')[0]) !== 22) problems.push('Use the pinned Node 22 from .nvmrc for native build reproducibility.');
   const dependencies = path.join(app, 'node_modules');
   if (!fs.existsSync(path.join(dependencies, '@amazon-devices/kepler-cli-platform/package.json'))) {
     problems.push('App dependencies are missing. In app/, run npm ci --ignore-scripts.');

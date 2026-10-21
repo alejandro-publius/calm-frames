@@ -11,7 +11,7 @@ import {
 import { VideoPlayer } from '@amazon-devices/react-native-w3cmedia';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from '../../calmframes/calmStyles';
+import { CALM_COLORS, CALM_SURFACE, CALM_SPACE, CALM_TEXT, scale } from '../../calmframes/calmStyles';
 import { trace } from '../../calmframes/trace';
 import { CoverInterval } from '../../calmframes/coverSchedule';
 import { SeekSource } from '../../calmframes/seekSafety';
@@ -297,7 +297,7 @@ export const VideoPlayerUI = React.memo(
 const styles = StyleSheet.create({
   paused: {
     position: 'absolute', top: scale(CALM_SPACE.SAFE_Y), right: scale(CALM_SPACE.SAFE_X),
-    backgroundColor: CALM_COLORS.SURFACE, padding: scale(16), borderRadius: scale(12),
+    backgroundColor: CALM_COLORS.SURFACE, padding: scale(16), borderRadius: scale(CALM_SURFACE.STATUS_RADIUS),
   },
   pausedText: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT },
   ui: {

@@ -336,7 +336,7 @@ interface Case {
 
 const CASES: Case[] = [
   { name: 'household-loading', element: <HouseholdStorageScreen failed={false} onRetry={jest.fn()} />,
-    background: COASTAL_COLORS.BACKGROUND, screen: true },
+    background: WORLD.BACKGROUND, screen: true },
   { name: 'household-error', element: <HouseholdStorageScreen failed onRetry={jest.fn()} />,
     background: COASTAL_COLORS.BACKGROUND, screen: true },
   {

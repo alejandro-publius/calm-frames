@@ -174,7 +174,9 @@ test('refuses missing assets, undisclosed siblings and duplicate package members
 test('refuses a manifest changed inside its immutable directory', () => {
   const changed = new Map(fixture);
   const manifest = [...changed.keys()].find((key) => key.endsWith('/manifest.json'));
-  changed.set(manifest, Buffer.from(changed.get(manifest).toString().replace('Harbor story', 'Changed story')));
+  const document = JSON.parse(changed.get(manifest).toString());
+  document.titles[0].title += ' (changed)';
+  changed.set(manifest, Buffer.from(JSON.stringify(document)));
   assert.throws(() => check(changed), /immutable directory/);
 });
 

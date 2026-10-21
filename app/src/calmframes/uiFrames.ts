@@ -29,12 +29,12 @@ import { UiFrame } from './uiCapture';
 
 /** Early bootstrap wave, before navigation and household loading are ready. */
 export const HARBOR_BOOTSTRAP_FRAME: UiFrame = {
-  screen: 'harbor-bootstrap', background: MENU.BACKGROUND, surfaces: [],
+  screen: 'harbor-bootstrap', background: MAP.BACKGROUND, surfaces: [],
 };
 
 export const HOUSEHOLD_LOADING_FRAME: UiFrame = {
   screen: 'household-loading',
-  background: MENU.BACKGROUND,
+  background: MAP.BACKGROUND,
   // This inventory models declared solid surfaces, not artwork pixels or motion.
   surfaces: [],
 };

@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
 import { islandKind } from './CoastalIsland';
 import CalmPageHeader from './CalmPageHeader';
+import JourneyStatus from './JourneyStatus';
 import { CALM_FLOW, CALM_SPACE, CALM_TEXT, heroTitleTypography, scale } from './calmStyles';
 /**
  * liveStatus is false only for the route's loading stand-in
@@ -17,14 +18,15 @@ const EYEBROW_MARGIN = 12;
 /** CALM_TEXT.supporting's line height in 1080p units; test/calmframes/openingAlignment.test.tsx pins it. */
 export const EYEBROW_LINE_HEIGHT = 42;
 export const OPENING_COPY_TOP = CALM_FLOW.HERO_TOP - (EYEBROW_LINE_HEIGHT + EYEBROW_MARGIN);
-export default function PlayerOpening({ menuArt, title, onBack, returning = false, liveStatus = true }: { menuArt?: string; title: string; onBack: () => void; returning?: boolean; liveStatus?: boolean }) {
+export default function PlayerOpening({ menuArt, title, onBack, returning = false, liveStatus = true, checking = false, motionEnabled = false }: { menuArt?: string; title: string; onBack: () => void; returning?: boolean; liveStatus?: boolean; checking?: boolean; motionEnabled?: boolean }) {
   return <CoastalAppearance.Provider value><WorldAppearance.Provider value><View testID="player-home-opening" style={styles.screen}>
     <CoastalWorld detail destination={islandKind(menuArt)} />
     <CalmPageHeader onBack={!returning ? onBack : undefined} backLabel="Back" backTestID="player-opening-back" preferredBack />
     <View style={styles.copy}>
-      <Text style={styles.eyebrow}>Calm Frames</Text>
+      <Text style={styles.eyebrow}>{menuArt === 'forest' ? 'Forest' : menuArt === 'coastal' || menuArt === 'sea-otters' ? 'Ocean' : 'Calm Frames'}</Text>
       <Text style={[styles.title, heroTitleTypography(title)]}>{title}</Text>
-      <Text style={styles.detail} accessibilityLiveRegion={liveStatus ? 'polite' : 'none'}>{returning ? 'Going back...' : 'Opening your video...'}</Text>
+      <JourneyStatus forest={islandKind(menuArt) === 'forest'} motionEnabled={motionEnabled && !returning} liveStatus={liveStatus}
+        status={returning ? 'Going back...' : checking ? 'Checking this video...' : 'Opening your video...'} />
 
     </View>
   </View></WorldAppearance.Provider></CoastalAppearance.Provider>;

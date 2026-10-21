@@ -540,7 +540,7 @@ export function coverLine(count: number, hasCaptions: boolean, ocean = false): s
   // and not "still picture", which names a signed scene hold Acadia does not carry.
   if (ocean) {
     const replaced = count === 1 ? 'The flagged scene is replaced' : 'Flagged scenes are replaced';
-    return `${replaced} with a dark frame from the start of this video. Original audio is kept when the video has sound.`;
+    return `${replaced} with moving ocean from this video. Original audio is kept when the video has sound.`;
   }
   const parts =
     count === 1

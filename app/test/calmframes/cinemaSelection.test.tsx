@@ -33,3 +33,37 @@ test.each(['watch', 'details', 'poster'] as const)('return from Acadia restores 
   expect(view.getByTestId(id).props.hasTVPreferredFocus).toBe(true);
   expect(view.getAllByRole('button').filter(button => button.props.hasTVPreferredFocus)).toHaveLength(1);
 });
+
+test.each(['Acadia coastal scenery (National Park Service, public domain)', 'Sea otters in Alaska', 'Forest creek at Redwood'])(
+  'activating %s without focus updates selection, Watch, Details and restored focus', name => {
+    const shelf = checkedShelf();
+    const entry = shelf.find(item => item.title.title === name)!;
+    expect(entry).toBeDefined();
+    const other = shelf.find(item => item.title.id !== entry.title.id)!;
+    const open = jest.fn(); const play = jest.fn(); const select = jest.fn(); const launch = jest.fn();
+    const view = render(<KidHomeScreen titles={shelf} onOpen={open} onPlay={play}
+      onSelectTitle={select} onLaunchControl={launch} returnFocusId={other.title.id} />);
+    fireEvent.press(view.getByTestId(`kid-home-poster-${entry.title.id}`));
+    expect(select).toHaveBeenLastCalledWith(entry.title.id);
+    expect(open).toHaveBeenLastCalledWith(entry);
+    expect(launch).toHaveBeenLastCalledWith('poster');
+    expect(play).not.toHaveBeenCalled();
+    expect(view.getByTestId(`kid-home-poster-${entry.title.id}`).props.accessibilityState.selected).toBe(true);
+    fireEvent.press(view.getByTestId('kid-home-watch'));
+    expect(play).toHaveBeenLastCalledWith(entry);
+    fireEvent.press(view.getByTestId('kid-home-more-info'));
+    expect(open).toHaveBeenLastCalledWith(entry);
+    view.rerender(<KidHomeScreen titles={shelf} onOpen={open} returnFocusId={entry.title.id} returnFocusControl="poster" />);
+    expect(view.getByTestId(`kid-home-poster-${entry.title.id}`).props.hasTVPreferredFocus).toBe(true);
+  },
+);
+
+test('activation while a household update is saving cannot change selection or open a title', () => {
+  const open = jest.fn(); const select = jest.fn(); const launch = jest.fn();
+  const view = render(<KidHomeScreen titles={titles} onOpen={open} onSelectTitle={select}
+    onLaunchControl={launch} saving />);
+  fireEvent.press(view.getByTestId(`kid-home-poster-${acadia.title.id}`));
+  expect(select).not.toHaveBeenCalled();
+  expect(launch).not.toHaveBeenCalled();
+  expect(open).not.toHaveBeenCalled();
+});

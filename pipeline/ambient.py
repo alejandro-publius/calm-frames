@@ -97,7 +97,9 @@ def prepare_ambient_candidate(source: Path, ambient: Path, *, maps: dict[str, Pa
         if keep_subs:
             args += ['-map', '0:s', '-c:s', 'copy']
         output = out_dir / 'candidate.mp4'
-        args += ['-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-pix_fmt', 'yuv420p',
+        # Bound rendition size without changing source timing or copied audio.
+        # The exact encoded output still has to pass both full-output analyses.
+        args += ['-c:v', 'libx264', '-preset', 'veryfast', '-crf', '21', '-pix_fmt', 'yuv420p',
                  '-fps_mode', 'passthrough', '-enc_time_base', identity['time_base'],
                  '-video_track_timescale', str(Fraction(identity['time_base']).denominator)]
         args += _colour_tag_args(source_probe) + ['-movflags', '+faststart', str(output)]

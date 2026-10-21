@@ -8,10 +8,10 @@
  */
 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
-import HomeHarborScene from './HomeHarborScene';
+import LibraryOpening from './LibraryOpening';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import StatusNotice from './StatusNotice';
 import { useUiCapture } from './uiCapture';
@@ -30,14 +30,7 @@ export default function HouseholdStorageScreen({
     failed ? HOUSEHOLD_ERROR_FRAME : HOUSEHOLD_LOADING_FRAME,
     failed ? 'household storage unavailable' : 'household storage loading',
   );
-  if (!failed) return <View testID={testID} style={styles.screen}>
-    <HomeHarborScene />
-    <CalmPageHeader />
-    <View style={styles.loading} accessible accessibilityRole="progressbar" accessibilityLabel="Opening Calm Frames" accessibilityLiveRegion="polite">
-      <Text style={styles.heading}>Opening Calm Frames</Text>
-      <Text style={styles.detail}>Loading your settings.</Text>
-    </View>
-  </View>;
+  if (!failed) return <LibraryOpening testID={testID} status="Loading your settings." />;
   return (
     <View testID={testID} style={styles.screen}>
       <CalmPageHeader />

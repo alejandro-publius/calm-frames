@@ -28,7 +28,7 @@
 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
+import { COASTAL_COLORS as CALM_COLORS, CALM_SURFACE, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { Notice, NoticeTone } from './copy';
 
 export interface StatusNoticeProps {
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     maxWidth: scale(1500),
     paddingVertical: scale(CALM_SPACE.BLOCK),
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
-    borderRadius: scale(16),
+    borderRadius: scale(CALM_SURFACE.STATUS_RADIUS),
     borderLeftWidth: scale(BAR_WIDTH),
     backgroundColor: CALM_COLORS.SURFACE,
   },

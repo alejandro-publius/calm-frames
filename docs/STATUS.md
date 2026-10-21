@@ -1773,3 +1773,7 @@ precision sibling, two dashes, the practice label, four identifiers, three
 licence gaps. A style guard and a conformance report rebuild run in CI now.
 Main is unchanged; the Oct 11 push is PR #1's new head, and Audit and CI are green on it. The Mac still owes
 the rebuild that every app input change since Oct 10 needs.
+
+## 2026-10-21: cohesive journey UI
+
+Implemented in calm-frames-integration: shared map startup/loading, destination-based illustrated waiting states, truthful verification/return messages, selected-card check, matching Ocean/Forest marks and player status surfaces. Exact approved Acadia bundle 0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb is activated. Final checks: 1687 app tests, 77 Node checks and 41 release tests passed; TypeScript passed; lint 0 errors/108 warnings. Integrated aarch64 Debug build installed; bounded text walkthroughs completed for all three titles and pause/resume/Skip/Back. Actual app left on Home with Forest selected. App-only screenshot permission was granted, but the framebuffer capture is black; native picture/audio acceptance remains unverified. Original audio/timing, signed maps, signer identity and guards remain intact. Prepared namespace is 63317768 bytes.

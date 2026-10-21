@@ -58,6 +58,7 @@ export type AppStackParamList = {
     focusId?: number | string;
     /** Keep the home shell while the first checked picture becomes ready. */
     showHomeOpening?: boolean;
+    interfaceMotionEnabled?: boolean;
     /**
      * Calm Frames cover harness. "layering" is the phase 1.5 check and
      * "timing" is the GATE 1 harness. Leave it out for normal playback.

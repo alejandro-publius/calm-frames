@@ -2,12 +2,12 @@
   "version": 1,
   "catalogs": [
     {
-      "bundleId": "d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46",
-      "catalogSha256": "6b590929ffd622454803caf87354a653190dcb89afa12e906bbaaedfe0e9012d",
+      "bundleId": "0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb",
+      "catalogSha256": "458af619dcfd72d46b72e0b0ba7d59db0299cd3054c3a8d2cd6d47cfec682238",
       "publicKeyFingerprint": "98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407",
       "consumer": true,
       "label": "Acadia: approved ocean replacement",
-      "approvalReference": "Owner approval in thread 01a10d92-99ac-70a3-b473-29310ef6e002, 2026-10-18; results/ocean-native-2026-10-18/approval.json"
+      "approvalReference": "Owner \"do everything you can\" after exact local replacement proposal, thread 01a156b2-766b-722d-a376-56854ea450e0, 2026-10-21; results/local-demo-2026-10-21/approval.json"
     },
     {
       "bundleId": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",

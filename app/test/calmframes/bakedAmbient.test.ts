@@ -23,8 +23,10 @@ it.each(PRESET_NAMES)('activates only the exact approved ocean %s rendition and 
   const identity = personalCoverAsset(title)!;
   const doc = bakedAmbientForRendition(identity.renditionSha256, preset)!;
   const evidence = packagedLibrary.evidenceFor(title, settings)!;
-  expect(evidence.bundleId).toBe('d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46');
+  expect(evidence.bundleId).toBe('0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb');
   expect(doc).not.toBeNull();
+  expect(doc.ambientSha256).toBe('ad315810e01b93be05da5ab59625212d98ceacb37bf43920513e824bf141020d');
+  expect(identity.renditionSha256).toBe(preset === 'extra-cautious' ? '8aa6b3566e325b2b89863b221ce2b428ed7ba1ff5abf4cdc41a80ec415121e63' : '07abfc85a4a37291d432e4570d207ae464b3c88608a79922058df47071ed91cc');
   expect(doc.intervals).toHaveLength(2);
   for (const span of doc.intervals) {
     expect(mayShowBakedAmbient(doc, identity, preset, evidence.maps, doc.intervals, span.startMs, state)).toBe(true);

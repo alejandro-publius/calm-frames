@@ -838,7 +838,7 @@ const PlayerScreen = ({
             }
           />
         )}
-        {showOpeningShell && <PlayerOpening title={data.title} menuArt={data.calmMenuArt} returning={returningHome} onBack={leavePlayer} />}
+        {showOpeningShell && <PlayerOpening title={data.title} menuArt={data.calmMenuArt} returning={returningHome} checking={guard.status !== 'verified'} motionEnabled={route.params.interfaceMotionEnabled === true} onBack={leavePlayer} />}
         {isVideoError && !returningHome && <ErrorView navigateBack={leavePlayer} />}
       </View>
     </SafeAreaView>

@@ -1,5 +1,6 @@
 /** Original coastal map, with static shore depth and optional selection movement. */
 import React from 'react';
+import { CALM_WORLD } from './calmStyles';
 import { StyleSheet, View } from 'react-native';
 import Svg, { Path, Rect } from '@amazon-devices/react-native-svg';
 import CoastalIsland, { IslandKind } from './CoastalIsland';
@@ -12,7 +13,7 @@ const ROUTE = `M${FIRST} ${ROUTE_Y}Q${(FIRST + MIDDLE) / 2} ${ROUTE_Y + 16} ${MI
 /** Small waves in open water: past the outer islands, and in front of them clear of the route. */
 const WATER_RIPPLES = [[16, 470], [1808, 470], [150, 700], [1660, 700]];
 export const WorldAppearance = React.createContext(false);
-export const WORLD = { BACKGROUND:'#F7EACF', SURFACE:'#FFF8E7', SURFACE_FOCUSED:'#FFE1A9', BORDER:'#385C59', FOCUS_RING:'#A44132', PRIMARY:'#F7B37A', TEXT:'#193F3E', TEXT_DIM:'#193F3E', TEXT_DISABLED:'#526A63', INK:'#193F3E' };
+export const WORLD = CALM_WORLD;
 export default function CoastalWorld({ detail = false, destination = 'coastal', showBoat = false, motionEnabled = false, active = true, cardKinds = [] }: { detail?: boolean; destination?: IslandKind; showBoat?: boolean; motionEnabled?: boolean; active?: boolean; /** Islands a card or photograph stands on; their landmarks stand beside it. */ cardKinds?: IslandKind[] }) {
   return <View testID="coastal-world" pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={StyleSheet.absoluteFill}>
     <Svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">

@@ -36,7 +36,7 @@ it('shows the concise actual Extra cautious count, with ocean audio explanation 
   expect(screen.getByText('Waves along the coast of Acadia National Park.')).toBeTruthy();
   expect(screen.queryByText(/The sound continues|original audio/)).toBeNull();
   fireEvent.press(screen.getByTestId('title-details-show-info'));
-  expect(screen.getByTestId('title-details-cover-line').props.children).toBe('Flagged scenes are replaced with a dark frame from the start of this video. Original audio is kept when the video has sound.');
+  expect(screen.getByTestId('title-details-cover-line').props.children).toBe('Flagged scenes are replaced with moving ocean from this video. Original audio is kept when the video has sound.');
 });
 it('uses singular/plural without repeating runtime or promising audio in the summary', () => {
   expect(coveredSectionsLine(1, 1000, 38000, false)).toBe('1 scene · 1 second');

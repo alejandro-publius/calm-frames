@@ -3,8 +3,7 @@ import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
 import LinearGradient from '@amazon-devices/react-linear-gradient';
 import React from 'react';
 import { AccessibilityInfo, Animated, BackHandler, Easing, Image, StyleSheet, Text, View } from 'react-native';
-import CalmPageHeader from './CalmPageHeader';
-import HomeHarborScene from './HomeHarborScene';
+import LibraryOpening from './LibraryOpening';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, scale } from './calmStyles';
 import { useUiCapture } from './uiCapture';
 import { HARBOR_BOOTSTRAP_FRAME } from './uiFrames';
@@ -24,7 +23,7 @@ export default function HarborOpening({
   onFinish?: () => void;
   testID?: string;
 }) {
-  useUiCapture(onFinish ? { ...HARBOR_BOOTSTRAP_FRAME, surfaces: [] } : HARBOR_BOOTSTRAP_FRAME, 'harbor startup');
+  useUiCapture(onFinish ? { ...HARBOR_BOOTSTRAP_FRAME, background: CALM_COLORS.BACKGROUND, surfaces: [] } : HARBOR_BOOTSTRAP_FRAME, 'harbor startup');
   const manager = useKeplerAppStateManager();
   const progress = React.useRef(new Animated.Value(0)).current;
   const finish = React.useRef(onFinish);
@@ -95,11 +94,7 @@ export default function HarborOpening({
 
   // Actual bootstrap callers have no onFinish: match the next loading/home
   // frame without introducing a timer or reading household preferences.
-  if (!canFinish) return <View testID={testID} style={styles.screen} accessible accessibilityLabel="Calm Frames is opening." accessibilityRole="progressbar">
-    <HomeHarborScene />
-    <CalmPageHeader />
-    <View style={styles.loading}><Text style={styles.loadingTitle}>Opening Calm Frames</Text></View>
-  </View>;
+  if (!canFinish) return <LibraryOpening testID={testID} status="Opening your library." />;
 
   return (
     <View testID={testID} style={styles.screen} accessible accessibilityLabel="Calm Frames is opening." accessibilityRole="progressbar">
