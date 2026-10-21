@@ -8,6 +8,7 @@ import { CatalogTitle, CheckedTitle } from './titleStatus';
 import { COASTAL_COLORS as CALM_COLORS, scale } from './calmStyles';
 import { shelfLabel, shelfPoster } from './shelf';
 import { trace } from './trace';
+import { continuousScenePicture, isContinuousScene } from './continuousScene';
 
 interface TitlePresentation {
   name: string;
@@ -27,6 +28,13 @@ export const SEA_OTTER_SOURCE_SHA256 = '02c2b0c0674262862ad9d02a7107e421c398aac0
 export const FOREST_SOURCE_SHA256 = '63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c';
 
 export function titlePresentation(title: CatalogTitle): TitlePresentation {
+  if (isContinuousScene(title)) {
+    return { name: 'McWay Falls', cardName: 'McWay Falls', kind: 'Ocean · 5 minutes',
+      selectorMeta: '5 min · then still', action: 'Watch now', menuArt: 'coastal',
+      runtime: '5 minutes · Nature sounds · Then a still frame',
+      description: 'One fixed view of the cove and waterfall, at natural speed. No cuts or repeats. Pause whenever you like; the final frame stays until you leave.',
+      attribution: 'MoneySavingVideos, ♥♥ Relaxing 3 Hour Video of a Waterfall on an Ocean Beach at Sunset. CC BY 3.0: https://creativecommons.org/licenses/by/3.0/ . Source: https://commons.wikimedia.org/wiki/Special:Redirect/file/♥♥_Relaxing_3_Hour_Video_of_a_Waterfall_on_an_Ocean_Beach_at_Sunset.webm . Changes: five-minute excerpt, 720p transcode, final three-second audio fade, extracted final-frame still. No endorsement implied.' };
+  }
   if (concernsPackagedLibrary(title) && title.sha256 === FOREST_SOURCE_SHA256 && title.durationMs === 12000) {
     return { name: 'Forest creek at Redwood', cardName: 'Forest', kind: 'Redwood creek · 12 seconds',
       selectorMeta: 'Nature audio · 12 sec', action: 'Watch now', runtime: '12 seconds · Nature sounds · Plays once', menuArt: 'forest',
@@ -62,11 +70,11 @@ export function titlePresentation(title: CatalogTitle): TitlePresentation {
 export default function TitleArtwork({ entry, testID, compact = false, height, immersive = false, illustrated = false }: { entry: CheckedTitle; testID?: string; compact?: boolean; height?: number; immersive?: boolean; illustrated?: boolean }) {
   const presentation = titlePresentation(entry.title);
   const poster = shelfPoster(entry);
-  const source = entry.status === 'verified' && presentation.art
+  const source = (entry.status === 'verified' ? continuousScenePicture(entry.title) : undefined) ?? (entry.status === 'verified' && presentation.art
     ? presentation.art === 'coastal' ? require('../../assets/image/tv/acadia-coast.png')
       : presentation.art === 'harbor-cinematic' && !illustrated ? require('../../assets/image/tv/harbor-cinematic.png')
       : (presentation.art === 'harbor' || presentation.art === 'harbor-cinematic') ? require('../../assets/image/tv/harbor-illustrated.png') : require('../../assets/image/tv/gradient.png')
-    : poster ? { uri: poster } : undefined;
+    : poster ? { uri: poster } : undefined);
   const artworkStyle = [styles.art, { height: scale(height ?? (compact ? 220 : 380)) }, immersive ? { borderRadius: 0 } : null];
   return source ? <Image testID={testID} source={source} style={artworkStyle} resizeMode={presentation.art ? 'cover' : 'contain'} fadeDuration={0} accessible={false} onLoad={() => trace('image', `title ${presentation.art ?? 'poster'} loaded`)} onError={() => trace('image', `title ${presentation.art ?? 'poster'} error`)} />
     : <View style={artworkStyle} />;

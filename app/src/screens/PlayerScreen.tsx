@@ -1,4 +1,5 @@
 import AmbientScene, { AmbientArtwork } from '../calmframes/AmbientScene';
+import { continuousEndingForRoute } from '../calmframes/continuousScene';
 import { bakedAmbientForRendition } from '../calmframes/approvedBakedAmbient';
 import { mayShowBakedAmbient } from '../calmframes/bakedAmbient';
 import { ambientCoverPredecessor, combineAmbientCovers } from '../calmframes/ambientPersonalCovers';
@@ -207,6 +208,7 @@ const PlayerScreen = ({
   const preparedRouteAccepted = preparedRoute && packagedLibrary.acceptsRoute(data, route.params.guarded);
   const rejectedPreparedRoute = preparedRoute && !preparedRouteAccepted;
   const guardedParams = rejectedPreparedRoute ? undefined : route.params.guarded;
+  const continuousEnding = continuousEndingForRoute(data, guardedParams);
   const bundledIdentity = {
     id: data.id,
     uri: data.uri,
@@ -547,7 +549,7 @@ const PlayerScreen = ({
   useEffect(() => {
     if (isVideoEnded) {
       trace('playback', 'ended');
-      if (!route.params.ambientPreview) {
+      if (!route.params.ambientPreview && !continuousEnding) {
         leavePlayer();
       } else {
         // Release native transport focus as well as the visible surface. A
@@ -565,7 +567,7 @@ const PlayerScreen = ({
     }
     // The handler owns the stable media refs for this mounted route.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVideoEnded, leavePlayer, route.params.ambientPreview]);
+  }, [isVideoEnded, leavePlayer, route.params.ambientPreview, continuousEnding]);
 
   const navigateBack = useCallback(() => {
     if (captionStatus.current) {
@@ -749,6 +751,9 @@ const PlayerScreen = ({
     captionViewHandle.current = null;
   };
 
+  if (isVideoEnded && continuousEnding && guard.status === 'verified') {
+    return <AmbientScene title={data.title} artwork="coastal" endingPicture={continuousEnding} ended onBack={leavePlayer} testID="continuous-ended-still" />;
+  }
   if (isVideoEnded && route.params.ambientPreview && ['coastal', 'forest', 'sea-otters'].includes(data.calmMenuArt ?? '')) {
     return <AmbientScene title={data.title} artwork={data.calmMenuArt as AmbientArtwork} ended onBack={leavePlayer} testID="preview-ended-still" />;
   }

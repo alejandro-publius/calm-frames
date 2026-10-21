@@ -15,9 +15,8 @@ from pipeline.probe import StreamInfo, VideoProbe
 
 REPO = Path(__file__).resolve().parents[2]
 ACADIA = "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28"
-# The approved Acadia bundle. Until Oct 19 this named 4bab8d81, which the Oct 18
-# activation retired, and every delivery test died in setup before checking anything.
-BUNDLE = "d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46"
+# The current approved Acadia bundle; retired generations are not test inputs.
+BUNDLE = "0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb"
 
 
 def probe(**changes):

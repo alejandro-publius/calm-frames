@@ -104,6 +104,14 @@ export function islandCardBox(kind: IslandSlotKind): ScreenBox {
   return { left: HOME_ISLANDS.CENTERS[kind] - width / 2, top, width, height };
 }
 
+/** Two coast choices share their island without covering each other. */
+export function islandChoiceBox(kind: IslandSlotKind, index: number, count: number): ScreenBox {
+  const box = islandCardBox(kind);
+  if (count !== 2) return box;
+  const height = (box.height - 16) / 2;
+  return { ...box, top: box.top + index * (height + 16), height };
+}
+
 /** An environment's heading, centred over the cards it names, in the heading band. */
 export function environmentHeadingBox(kinds: IslandSlotKind[]): ScreenBox {
   const boxes = kinds.map(islandCardBox);

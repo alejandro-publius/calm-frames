@@ -3,6 +3,7 @@ import { act, fireEvent } from '@testing-library/react-native';
 import { createProgressMonitor } from '../../src/calmframes/usePlaybackProgress';
 import slowNative from '../../../results/native-slowdown-isolation-2026-10-17/fresh-simulator-timing.json';
 import normalNative from '../../../results/compact-scene-control-2026-10-17/native/timing-events.json';
+import * as continuousScene from '../../src/calmframes/continuousScene';
 
 beforeEach(() => {
   jest.useFakeTimers();
@@ -145,5 +146,23 @@ test('optional video preview ends on a stationary scene until explicit Back', ()
   expect(view.goBack).not.toHaveBeenCalled();
   expect(view.getByTestId('preview-ended-still')).toBeTruthy();
   fireEvent.press(view.getByTestId('preview-ended-still-back'));
+  expect(view.goBack).toHaveBeenCalledTimes(1);
+});
+
+test('continuous scene releases transport and retains its final frame until explicit Back', () => {
+  jest.spyOn(continuousScene, 'continuousEndingForRoute').mockReturnValue({ uri: 'measured-final-frame-fixture' });
+  mockDestroy.mockReturnValue(true);
+  const view = startPlayer();
+  act(() => { mockMedia.ended = true; mockMedia.fire('ended'); mockEnded(true); });
+  expect(view.getByTestId('continuous-ended-still-picture').props.source).toEqual({ uri: 'measured-final-frame-fixture' });
+  expect(view.getByTestId('continuous-ended-still-picture').props.fadeDuration).toBe(0);
+  expect(mockDestroy).toHaveBeenCalledTimes(1);
+  expect(mockMedia.paused).toBe(true);
+  expect(view.queryByTestId('kepler-video-surface-view')).toBeNull();
+  expect(view.queryByTestId('video-player-ui-view')).toBeNull();
+  advance(3600000);
+  expect(view.goBack).not.toHaveBeenCalled();
+  expect(view.getByTestId('continuous-ended-still')).toBeTruthy();
+  fireEvent.press(view.getByTestId('continuous-ended-still-back'));
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });

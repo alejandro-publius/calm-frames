@@ -3,7 +3,8 @@ import React from 'react';
 import Svg, { Path } from '@amazon-devices/react-native-svg';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
 import { islandKind } from './CoastalIsland';
-import { ENVIRONMENTS, environmentHeadingBox, HOME_ISLANDS, ISLAND_ORDER, IslandSlotKind, islandCardBox, ScreenBox } from './homeIslands';
+import { ENVIRONMENTS, environmentHeadingBox, HOME_ISLANDS, ISLAND_ORDER, IslandSlotKind, islandChoiceBox, ScreenBox } from './homeIslands';
+import { continuousScenePicture } from './continuousScene';
 import TouchableOpacity from './CalmTouchable';
 import {
   BackHandler,
@@ -182,7 +183,8 @@ const KidHomeScreen = ({
     return art.menuArt ?? (art.art === 'coastal' ? 'coastal' : undefined);
   };
   const islandKinds = mainStories.map(islandOf);
-  const islandHome = !showIntroduction && hasMainStory && islandKinds.every(Boolean) && new Set(islandKinds).size === islandKinds.length;
+  const islandHome = !showIntroduction && hasMainStory && islandKinds.every(Boolean) &&
+    islandKinds.every(kind => islandKinds.filter(candidate => candidate === kind).length <= (kind === 'coastal' ? 2 : 1));
   // Watching is the primary action. Unavailable titles stay in Parents.
   const ambient = Boolean(onAmbient && featured && ambientArtworkFor(featured));
   const featuredAction = ambient ? 'Settle in' : feature?.action === 'Watch now' ? 'Watch' : feature?.action;
@@ -243,7 +245,7 @@ const KidHomeScreen = ({
   // With cards on the map, each card already names its video, so the sand
   // below holds only what to do with the chosen one.
   const cardsNameIt = islandHome && otherStories.length > 0;
-  const cardKinds = islandHome ? otherStories.map((entry) => islandOf(entry)!) : [];
+  const cardKinds = islandHome ? [...new Set(otherStories.map((entry) => islandOf(entry)!))] : [];
   const flowing = !islandHome;
   // On the island map the picker takes the row of cards while it is open, so
   // nothing it says sits under a card; the cards come back when it closes.
@@ -277,6 +279,8 @@ const KidHomeScreen = ({
     </View>;
   });
   const poster = (entry: CheckedTitle) => {
+                const siblings = otherStories.filter(candidate => islandOf(candidate) === islandOf(entry));
+                const split = islandHome && siblings.length === 2;
                 const focused = focusedId === entry.title.id;
                 const selected = featured?.title.id === entry.title.id;
                 const label = titlePresentation(entry.title);
@@ -295,12 +299,12 @@ const KidHomeScreen = ({
                       feedback.confirm();
                     }
                   }}
-                  style={[styles.poster, islandHome ? [styles.islandCard, placed(islandCardBox(islandOf(entry)!))] : null, selected ? styles.posterSelected : null, focused ? styles.posterFocused : null]}>
-                  <Image source={!label.menuArt && !label.art && shelfPoster(entry) ? { uri: shelfPoster(entry) } : filmStill(label.menuArt ?? label.art)} style={styles.filmStill} resizeMode="cover" fadeDuration={0} testID={`${testID}-poster-image-${entry.title.id}`} accessible={false} />
-                  {selected ? <View testID={`${testID}-selected-${entry.title.id}`} style={styles.selectionMark} pointerEvents="none" accessible={false}><Svg width={scale(32)} height={scale(32)} viewBox="0 0 32 32"><Path d="M6 16L13 23L27 8" fill="none" stroke={WORLD.TEXT} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" /></Svg></View> : null}
-                  <View style={styles.posterCopy}>
-                  <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
-                  {label.kind ? <Text style={styles.posterQualifier} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{onAmbient && ambientArtworkFor(entry) ? 'Still scene · stays open' : label.selectorMeta ?? label.kind}</Text> : null}
+                  style={[styles.poster, islandHome ? [styles.islandCard, placed(islandChoiceBox(islandOf(entry)!, siblings.indexOf(entry), siblings.length))] : null, split ? styles.splitCard : null, selected ? styles.posterSelected : null, focused ? styles.posterFocused : null]}>
+                  <Image source={continuousScenePicture(entry.title) ?? (!label.menuArt && !label.art && shelfPoster(entry) ? { uri: shelfPoster(entry) } : filmStill(label.menuArt ?? label.art))} style={[styles.filmStill, split ? styles.splitPicture : null]} resizeMode="cover" fadeDuration={0} testID={`${testID}-poster-image-${entry.title.id}`} accessible={false} />
+                  {selected && !split ? <View testID={`${testID}-selected-${entry.title.id}`} style={styles.selectionMark} pointerEvents="none" accessible={false}><Svg width={scale(32)} height={scale(32)} viewBox="0 0 32 32"><Path d="M6 16L13 23L27 8" fill="none" stroke={WORLD.TEXT} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" /></Svg></View> : null}
+                  <View style={[styles.posterCopy, split ? styles.splitCopy : null]}>
+                  <Text style={[styles.posterTitle, split ? styles.splitTitle : null, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
+                  {label.kind ? <Text style={[styles.posterQualifier, split ? styles.splitQualifier : null]} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{onAmbient && ambientArtworkFor(entry) ? split ? 'Still scene' : 'Still scene · stays open' : label.selectorMeta ?? label.kind}</Text> : null}
                   </View>
                 </TouchableOpacity>;
               };
@@ -384,6 +388,11 @@ const styles = StyleSheet.create({
   islandHeading: { flexDirection: 'row', gap: scale(CALM_SPACE.TIGHT), alignItems: 'center', justifyContent: 'center' },
   islandHero: { alignItems: 'flex-start', justifyContent: 'flex-end' },
   islandCard: { minHeight: undefined, justifyContent: 'flex-start' },
+  splitCard: { flexDirection: 'row', alignItems: 'center', gap: scale(12) },
+  splitPicture: { width: scale(80), height: scale(90) },
+  splitCopy: { flex: 1, paddingTop: 0 },
+  splitTitle: { fontSize: scale(32), lineHeight: scale(40) },
+  splitQualifier: { fontSize: scale(26), lineHeight: scale(34) },
   pickerPanel: { padding: scale(24), paddingBottom: 0, borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: WORLD.BORDER, backgroundColor: WORLD.SURFACE },
   posterTitle: { ...CALM_TEXT.section, color: WORLD.TEXT },
   posterQualifier: { ...CALM_TEXT.supporting, color: WORLD.TEXT_DIM },

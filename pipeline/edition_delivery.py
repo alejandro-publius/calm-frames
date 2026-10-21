@@ -21,6 +21,7 @@ from . import PipelineError
 from . import package_delivery as review
 from .hashing import sha256_file
 from .local_library import _file, _json, _lock, _path_inside
+from .packaged_library import MAX_BUNDLE_BYTES
 
 ASSETS = Path("assets/raw/prepared-library")
 GENERATED = Path("src/calmframes/approvedPreparedCatalogs.ts")
@@ -81,7 +82,7 @@ def _snapshot(app: Path) -> dict[str, str]:
     for path in paths:
         _file(path, app)
         total += path.stat().st_size
-        if total > 80 * 1024 * 1024:
+        if total > MAX_BUNDLE_BYTES + 16 * 1024 * 1024:
             raise review.DeliveryError("The existing delivery inputs exceed the review bound.")
         result[str(path.relative_to(app))] = sha256_file(path)
     return result

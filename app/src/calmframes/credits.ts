@@ -305,6 +305,22 @@ export const CREDIT_ENTRIES: CreditEntry[] = [
     ],
   },
   {
+    title: 'McWay Falls (final-frame still)',
+    license: 'CC BY 3.0',
+    credit: 'MoneySavingVideos. ♥♥ Relaxing 3 Hour Video of a Waterfall on an Ocean Beach at Sunset. CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/). No endorsement implied.',
+    source: 'https://commons.wikimedia.org/wiki/File:%E2%99%A5%E2%99%A5_Relaxing_3_Hour_Video_of_a_Waterfall_on_an_Ocean_Beach_at_Sunset.webm',
+    collection: 'unknown',
+    obligations: [],
+  },
+  {
+    title: 'McWay Falls (five-minute excerpt)',
+    license: 'CC BY 3.0',
+    credit: 'MoneySavingVideos. ♥♥ Relaxing 3 Hour Video of a Waterfall on an Ocean Beach at Sunset. CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/). No endorsement implied.',
+    source: 'https://commons.wikimedia.org/wiki/File:%E2%99%A5%E2%99%A5_Relaxing_3_Hour_Video_of_a_Waterfall_on_an_Ocean_Beach_at_Sunset.webm',
+    collection: 'unknown',
+    obligations: [],
+  },
+  {
     title: 'Night Pass over Central Africa and the Middle East',
     license: 'Public domain (NASA)',
     credit: 'ISS Expedition 29 crew, NASA',

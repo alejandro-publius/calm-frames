@@ -198,19 +198,23 @@ def namespace_bytes(directory):
 def test_budget_overflow_is_refused_before_anything_is_written(app, signed_package, tmp_path):
     """A delivery that would take the library past its budget never touches the checkout.
 
-    A metadata-only copy of Acadia is a second 21 MB bundle beside the first.
-    With today's library that is over the 64 MiB budget, and the refusal has to
-    come from the proposed checkout, before any file or the compiled catalog
-    module is written into the real one.
+    Retained valid metadata generations fill the isolated checkout. The next
+    delivery must be refused before any real file or compiled catalog is written.
     """
     checker = (REPO / "app" / edition.TOOLS[1]).read_text()
-    assert "const MAX_BYTES = 64 * 1024 * 1024;" in checker
+    assert "const MAX_BYTES = 128 * 1024 * 1024;" in checker
     rewrite(signed_package, lambda value: value["titles"][0].update(title="Metadata-only test fixture"))
     root, ticket = stage(signed_package, tmp_path)
     requested = review.check_delivery(root, ticket)["approval_request"]
     added = namespace_bytes(signed_package / requested["bundleId"])
-    # The scenario has to overflow for real; if the library ever shrinks enough, rebuild it.
-    assert namespace_bytes(app / edition.ASSETS) + added > 64 * 1024 * 1024, "this delivery no longer overflows"
+    generation = 0
+    while namespace_bytes(app / edition.ASSETS) + added <= 128 * 1024 * 1024:
+        generation += 1
+        retained = tmp_path / f"retained-{generation}"
+        shutil.copytree(signed_package, retained)
+        rewrite(retained, lambda value, number=generation: value["titles"][0].update(title=f"Retained fixture {number}"))
+        bundle = json.loads((retained / "catalog.json").read_text())["bundleId"]
+        shutil.copytree(retained / bundle, app / edition.ASSETS / bundle)
     approval = dict(requested, consumer=True, label="Metadata fixture",
                     approvalReference="Unit test only; no real approval")
     (app / edition.REGISTRY).write_text(json.dumps({"version": 1, "catalogs": [approval]}))

@@ -9,6 +9,7 @@ import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
 import { EnvironmentMark } from './JourneyStatus';
 import { filmStill } from './HomeHarborScene';
+import { continuousScenePicture } from './continuousScene';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, heroTitleTypography, scale } from './calmStyles';
 import { coverLine, DETECTION_LIMITS_LINE, noticeForTitle, ONLY_IN_CALM_FRAMES_LINE, runtimeLabel, SAFETY_NOTE } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
@@ -188,7 +189,7 @@ const TitleDetailsScreen = ({
   return (
     <WorldAppearance.Provider value><ScrollView key="watch" testID={testID} style={[styles.screen, { backgroundColor: WORLD.BACKGROUND }]} contentContainerStyle={[styles.content, { minHeight: scale(1080) }]}>
       <CoastalWorld detail destination={islandKind(presentation.menuArt ?? presentation.art)} cardKinds={[islandKind(presentation.menuArt ?? presentation.art)]} />
-      <Image source={filmStill(presentation.menuArt ?? presentation.art)} resizeMode="cover" fadeDuration={0} style={styles.destinationImage} testID={`${testID}-destination-image`} accessible={false} />
+      <Image source={continuousScenePicture(entry.title) ?? filmStill(presentation.menuArt ?? presentation.art)} resizeMode="cover" fadeDuration={0} style={styles.destinationImage} testID={`${testID}-destination-image`} accessible={false} />
       <CalmPageHeader onBack={onBack} backTestID={`${testID}-back`}>
         {presentation.menuArt || presentation.art === 'coastal' ? <View style={styles.environment}><EnvironmentMark forest={presentation.menuArt === 'forest'} /><Text style={styles.environmentName}>{presentation.menuArt === 'forest' ? 'Forest' : 'Ocean'}</Text></View> : null}
       </CalmPageHeader>

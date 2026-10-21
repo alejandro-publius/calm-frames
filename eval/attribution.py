@@ -43,6 +43,8 @@ END = "<!-- END media credits -->"
 # file nor listed here fails the test in eval/tests/test_attribution.py rather than getting an
 # invented name off its file name.
 TITLES = {
+    "mcway-five-minutes.mp4": "McWay Falls (five-minute excerpt)",
+    "app/assets/image/tv/mcway-final-frame.png": "McWay Falls (final-frame still)",
     "forest-creek-12s.mp4": "Forest creek at Redwood (approved NPS excerpt)",
     "app/assets/image/tv/forest-creek.jpg": "Forest creek at Redwood (menu still, NPS: G Litten)",
     "app/assets/image/tv/sea-otters-alaska.jpg": "Sea otters in Alaska (menu still, NOAA Fisheries)",

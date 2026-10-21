@@ -92,7 +92,7 @@ a private key. The compiled catalog contains the reviewed public key, original
 source identity, separate rendition identities, timing offsets and exact paths.
 The app accepts that key only for an exact compiled title/preset membership.
 
-The namespace is limited to 16 titles and 64 MiB, including retained immutable
+The namespace is limited to 16 titles and 128 MiB, including retained immutable
 generations. Unknown files, aliases and modified generations are rejected.
 Previous generations remain so a concurrent build cannot lose referenced media.
 When the namespace reaches its limit, export into a fresh directory and review
