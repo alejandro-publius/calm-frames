@@ -1,3 +1,4 @@
+import { MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 /**
  * The island Home, measured: no word, control, card, island or boat touches another.
  *
@@ -48,7 +49,7 @@ const islandOf = (entry: CheckedTitle): IslandSlotKind | undefined => {
   const art = titlePresentation(entry.title);
   return art.menuArt ?? (art.art === 'coastal' ? 'coastal' : undefined);
 };
-const consumer = checkedShelf().filter((entry) => islandOf(entry));
+const consumer = checkedShelf().filter(entry => entry.title.sha256 !== MCWAY_SOURCE_SHA256).filter((entry) => islandOf(entry));
 const profiles = [{ id: 'everyone', name: 'Everyone' }] as never;
 
 const toBox = ({ left, top, width, height }: ScreenBox): Box => ({ left, top, right: left + width, bottom: top + height });
@@ -418,7 +419,7 @@ it('gives an island with no card its full scenery, and keeps every island clear 
 });
 
 it('keeps the flowing shelf for a shelf whose videos are not all islands', () => {
-  const legacy = checkedShelf().filter((entry) => !islandOf(entry));
+  const legacy = checkedShelf().filter(entry => entry.title.sha256 !== MCWAY_SOURCE_SHA256).filter((entry) => !islandOf(entry));
   const view = render(<KidHomeScreen titles={legacy} onOpen={jest.fn()} />);
   expect(view.queryByTestId('kid-home-islands')).toBeNull();
   view.unmount();

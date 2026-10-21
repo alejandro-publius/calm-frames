@@ -24,6 +24,14 @@
       "consumer": true,
       "label": "Forest creek at Redwood: approved NPS excerpt",
       "approvalReference": "Owner exact Forest activation approval in thread 01a10d92-99ac-70a3-b473-29310ef6e002; results/forest-activation-2026-10-18/approval.json"
+    },
+    {
+      "bundleId": "96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3",
+      "catalogSha256": "a5b8fee6e16d0f7289e529ceb697f5e43dbc39d322ff67dd720f97d28e4b2e25",
+      "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+      "consumer": true,
+      "label": "McWay Falls: five quiet minutes, then still",
+      "approvalReference": "Owner approved verified McWay activation in overnight completion bundle, thread 01a156b2-766b-722d-a376-56854ea450e0, Sentinel_863b71245ae08191bb0fd73175d5306e; results/mcway-activation-2026-10-21/verification.json"
     }
   ]
 }

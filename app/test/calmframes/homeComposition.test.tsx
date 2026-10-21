@@ -1,3 +1,4 @@
+import { MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 /**
  * Home with one featured video, and Home with several.
  *
@@ -23,7 +24,7 @@ import { CheckedTitle } from '../../src/calmframes/titleStatus';
 import { checkedShelf } from './shelfFixtures';
 
 // Retain this two-title regression fixture; the real consumer pair is tested in otterPreview.
-const titles = checkedShelf().filter(entry => !['Sea otters in Alaska', 'Forest creek at Redwood'].includes(entry.title.title));
+const titles = checkedShelf().filter(entry => entry.title.sha256 !== MCWAY_SOURCE_SHA256).filter(entry => !['Sea otters in Alaska', 'Forest creek at Redwood'].includes(entry.title.title));
 const acadia = titles.find((entry) => entry.title.sha256 === ACADIA_SOURCE_SHA256)!;
 const consumer = [acadia];
 const profiles = [{ id: 'everyone', name: 'Everyone' }, { id: 'robin', name: 'Robin' }] as unknown as Profile[];

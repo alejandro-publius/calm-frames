@@ -1,0 +1,50 @@
+{
+  "source_sha256": "c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2",
+  "bundle_id": "96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3",
+  "catalog_sha256": "a5b8fee6e16d0f7289e529ceb697f5e43dbc39d322ff67dd720f97d28e4b2e25",
+  "public_key_fingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+  "verification": {
+    "checkedInputsSha256": "4fede5cd147a1178c9bc3b7f12cd376a6457cb5fd9cf7f654b79ad9e88778f62",
+    "outcome": "no flagged segments",
+    "reportSha256": "d39321373a7db02609f24bbab68d78eb87c6beb72b24e1c3f9d19e4f7ac9d6bb"
+  },
+  "approval": {
+    "thread": "01a156b2-766b-722d-a376-56854ea450e0",
+    "message": "Sentinel_863b71245ae08191bb0fd73175d5306e",
+    "scope": "Verified McWay activation, existing signer only, 128 MiB budget; overnight completion approval"
+  },
+  "delivery": "applied_for_build",
+  "checks": "generator and strict delivery passed",
+  "durationMs": 299999.7,
+  "renditionSha256": "795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2",
+  "bytesPerPreset": 21959584,
+  "presets": [
+    "wcag",
+    "broadcast",
+    "extra-cautious"
+  ],
+  "preparedNamespaceBytes": 129255687,
+  "limitBytes": 134217728,
+  "remainingBytes": 4962041,
+  "finalFrameSha256": "feaef416d06e4b8d92359f6ef60d60694e341d921935480b42628113f840f1e4",
+  "priorTitlesPreserved": true,
+  "playback": "Natural speed for five minutes, then extracted final-frame still until Back; no repeat or automatic exit.",
+  "nativeAcceptance": "Pending: Mac locked; no native picture/audio acceptance for this edition.",
+  "medicalValidation": false,
+  "sourceChecks": {
+    "fullJestPassed": 1698,
+    "skipped": 4,
+    "snapshots": 57,
+    "typescript": "passed",
+    "eslintErrors": 0,
+    "eslintWarnings": 108,
+    "nodeChecksPassed": 94,
+    "pythonDeliveryAndBudgetPassed": 121
+  },
+  "initialNativeBuild": {
+    "architecture": "aarch64",
+    "type": "Debug",
+    "result": "passed; exact committed-source rebuild follows",
+    "sha256": "91b5b2626fdd204c5a095c52934baeccac50c4bc70a390c7f879f1f578b59981"
+  }
+}

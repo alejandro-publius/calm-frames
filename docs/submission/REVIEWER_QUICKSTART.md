@@ -1,44 +1,17 @@
 # Reviewer quickstart
 
-Current build note: nothing from the current branch,
-`claude/ocean-layout-fix-2026-10-19`, has been built, installed or seen on a
-device. The last native checks with receipts here are for source `805f855` on
-October 18, with the earlier island order: all three full clips, Forest More
-info and How it works Back. No pixel/audio or owner acceptance is implied.
+Current source, October 21, 2026: use private branch
+`claude/ocean-layout-fix-2026-10-19`, not the older default branch. The approved
+McWay edition provides five continuous minutes at natural speed and then an
+indefinite final-frame hold. It does not loop or automatically exit. Acadia,
+Sea otters and Forest remain available as still scenes with optional short previews.
 
-For a judge with a Mac, a terminal and about thirty minutes. Written Oct 14,
-2026 from the repository's own scripts and documents. On the evening of Oct 14
-sections 1, 2 and 5 were run as written on a fresh checkout of the October 14
-candidate branch with nothing copied from another checkout: the Node checks (`npm ci` 44 s, typecheck
-6 s, lint 9 s with no errors, the full Jest suite 35 s, all passing), the
-analyzer path in section 5 (install 12 s, `check` 17 s printing PASS, `report`
-10 s), and the Python checks (the pytest line 5 minutes 17 seconds, the
-number and style checks under a second, both mypy configurations clean). At
-that run two Python tests failed for code reasons on that branch and `make
-lint-py` reported ruff findings in `eval/preview` and `scripts`; they were
-reported to the integration owner and are not setup problems. The later fixes
-and local gate are recorded in [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md)
-section 2; the failures above describe that earlier fresh-checkout run.
-Section 3 (the
-device build and install) and section 4 (the demo) were not run from this
-file; the receipts they name are for earlier builds.
-
-Updated October 19, 2026 for branch `claude/ocean-layout-fix-2026-10-19`.
-The fresh-checkout timings above remain historical; no new clean-room install is claimed.
-
-## Current source, October 19
-
-The branch descends from `codex/creator-editions-2026-10-18` at `c84f95d`. The
-Home and Details layout changed in `6a34ae2` and `53a1c51`; `d9c9e2f` changed
-delivery tests, `7b3f5b2` the handoff, and `9cfd9d3` reworded Acadia's More
-info line, the last app code change, and corrected this packet. `main` is unchanged since September 20 and is not the submission
-source. The session that made this branch had no Vega SDK or device, so none of
-it has been built or installed ([October 19 record](../../results/home-islands-2026-10-19/README.md)).
-The last build and install with a receipt here is source
-`805f855e60870eb018b3a6a2ab36e1f7d3e887dc` on October 18
-([build and native evidence](../../results/forest-activation-2026-10-18/README.md)).
-The owner's October 19 note says the Mac has since installed `2b78587`, which
-was never pushed and cannot be inspected.
+Authenticated preparation and strict delivery passed for all three McWay presets.
+See [the exact receipt](../../results/mcway-activation-2026-10-21/verification.json).
+The current McWay native build and install results are tracked there separately
+from tests. Native picture/audio acceptance remains pending while the Mac is locked.
+Historical test timings and device receipts below describe their stated earlier
+commits and are not acceptance of the current edition.
 
 After repository access is granted, start with the explicit working branch:
 
@@ -48,10 +21,9 @@ cd calm-frames
 git rev-parse HEAD
 ```
 
-`git rev-parse HEAD` prints `7b3f5b2` or a later commit on this branch named in
-the handoff. Use this branch, not the repository's older default branch.
+`git rev-parse HEAD` identifies the exact candidate you checked out. Use this branch, not the repository's older default branch.
 No account, key, preset PIN or signing credentials are required to run the
-existing prepared catalog (Acadia, Sea otters, Forest). A fresh install asks
+existing prepared catalog (McWay Falls, Acadia, Sea otters, Forest). A fresh install asks
 the reviewer to choose a private PIN.
 
 ## 1. What you need

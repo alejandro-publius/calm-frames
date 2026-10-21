@@ -1,25 +1,27 @@
-/** Synthetic route/UI contracts; these do not approve or play a new edition. */
+/** Exact approved route and presentation contracts; no native playback is performed. */
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { StyleSheet } from 'react-native';
 import { createHash } from 'crypto';
 import fs from 'fs';
 import path from 'path';
-import { continuousEndingForRoute, MCWAY_RENDITION_SHA256, MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
+import { continuousEndingForRoute, MCWAY_DURATION_MS, MCWAY_RENDITION_SHA256, MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 import { packagedLibrary } from '../../src/calmframes/packagedLibrary';
-import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
+import { DEFAULT_SETTINGS, PRESET_NAMES } from '../../src/calmframes/household';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import { ambientArtworkFor } from '../../src/calmframes/AmbientScene';
 import { checkedShelf } from './shelfFixtures';
 import { titlePresentation } from '../../src/calmframes/TitleArtwork';
+import { guardedParamsFor, titleDataFor } from '../../src/screens/KidModeScreen';
+import { checkTitle } from '../../src/calmframes/titleStatus';
 import type { CheckedTitle } from '../../src/calmframes/titleStatus';
 
-const mcway: CheckedTitle = { status: 'verified', segments: [], title: {
+const mcway: CheckedTitle = { status: 'verified', segments: [], hiddenMs: 0, verifiedProfiles: ['wcag', 'broadcast'], title: {
   id: `prepared-${MCWAY_SOURCE_SHA256}`, title: 'McWay test fixture', uri: 'assets/raw/prepared-library/test/wcag.mp4',
-  sha256: MCWAY_SOURCE_SHA256, renditionSha256: MCWAY_RENDITION_SHA256, durationMs: 300000,
+  sha256: MCWAY_SOURCE_SHA256, renditionSha256: MCWAY_RENDITION_SHA256, durationMs: MCWAY_DURATION_MS,
 } };
 const guarded = { sha256: MCWAY_SOURCE_SHA256, renditionSha256: MCWAY_RENDITION_SHA256,
-  durationMs: 300000, settings: DEFAULT_SETTINGS };
+  durationMs: MCWAY_DURATION_MS, settings: DEFAULT_SETTINGS };
 
 afterEach(() => jest.restoreAllMocks());
 
@@ -40,7 +42,7 @@ test('ending image remains the extracted exact-rendition final frame', () => {
 });
 
 test('five-minute scene is explicit playback while old still choices remain available', () => {
-  const others = checkedShelf().filter(entry => ['coastal', 'forest', 'sea-otters'].includes(
+  const others = checkedShelf().filter(entry => entry.title.sha256 !== MCWAY_SOURCE_SHA256 && ['coastal', 'forest', 'sea-otters'].includes(
     titlePresentation(entry.title).menuArt ?? titlePresentation(entry.title).art ?? ''));
   const play = jest.fn(); const still = jest.fn();
   const view = render(<KidHomeScreen titles={[mcway, ...others]} selectedTitleId={mcway.title.id}
@@ -58,4 +60,19 @@ test('five-minute scene is explicit playback while old still choices remain avai
   expect(play).toHaveBeenCalledWith(mcway);
   expect(still).not.toHaveBeenCalled();
   for (const entry of others) expect(view.getByTestId(`kid-home-poster-${entry.title.id}`)).toBeTruthy();
+});
+
+test.each(PRESET_NAMES)('real approved %s route retains the final frame at its authenticated duration', preset => {
+  const settings = { ...DEFAULT_SETTINGS, preset };
+  const title = packagedLibrary.consumerTitles(settings).find(item => item.sha256 === MCWAY_SOURCE_SHA256)!;
+  expect(title).toBeDefined();
+  expect(title.durationMs).toBe(MCWAY_DURATION_MS);
+  const checked = checkTitle(title, { settings,
+    publicKeyBase64: packagedLibrary.publicKeyFor(title, settings)!,
+    nowMs: Date.parse(JSON.parse(title.maps!.wcag!).created_utc) + 60000 });
+  expect(checked.status).toBe('verified');
+  expect(checked.segments).toEqual([]);
+  const data = titleDataFor(checked), guard = guardedParamsFor(checked, settings);
+  expect(continuousEndingForRoute(data, guard)).toBeDefined();
+  expect(continuousEndingForRoute({ ...data, uri: data.uri + '.substituted' }, guard)).toBeUndefined();
 });

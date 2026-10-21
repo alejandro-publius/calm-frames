@@ -1,27 +1,24 @@
 # Calm Frames
 
-Current state, October 19, 2026. The submission source is the private branch
-`claude/ocean-layout-fix-2026-10-19` (app code last changed in `9cfd9d3`, which
-rewords Acadia's cover line), which descends from `codex/creator-editions-2026-10-18` at `c84f95d`;
-`main` has not moved since Sep 20 and is not the submission source. **Nothing
-from this branch has been built, installed or seen on a device.** The last
-install with a receipt here is source `805f855` on the Vega Virtual Device on
-Oct 18, with the earlier island order. The owner's Oct 19 note says the Mac now
-has `2b78587` installed; it was never pushed and cannot be inspected from here.
+Current state, October 21, 2026. The submission source is the private branch
+`claude/ocean-layout-fix-2026-10-19`; the older `main` is not the submission source.
+The existing coastal Home, Ocean/Forest categories and approved titles are retained.
+**McWay Falls — Five Quiet Minutes** adds a continuous fixed-camera 720p scene at
+natural speed, with nature audio fading out over the final three seconds. It plays
+only after an explicit Watch action, then holds its exact final frame indefinitely
+until Back. It never automatically repeats or changes scenes. Acadia, Sea otters
+and Forest keep the stationary-first fallback; their short previews remain optional.
 
-Home is a coastal map with three approved playable titles: **Ocean** over the
-Acadia and Sea otters cards, **Forest** over the Forest card, and a boat by the
-chosen island. Forest is a 12-second NPS redwood-creek excerpt with original nature audio, played once.
-Sea Otters is a 19.987-second silent NOAA Fisheries ocean excerpt, played once.
-Acadia, about 38 seconds with a silent audio track, uses its approved baked
-ocean replacement during flagged intervals, with an independent opaque
-fallback. See [FINAL_HANDOFF.md](FINAL_HANDOFF.md),
-the [exact remote walkthrough](docs/submission/DEMO_RUN_OF_SHOW.md)
-and the [submission packet](docs/submission/README.md). The pictures below are
-browser renders of this branch's screens, not native captures. Harbor remains
-bundled for regression work, off the consumer shelf. Independent detector
-validation and owner visual/audio acceptance remain pending. The prototype
-has not been medically validated and uses pre-analysis, not live interception.
+The McWay authenticated three-preset export passed normal preparation, verification
+and strict delivery checks. The prepared namespace is **129,255,687 bytes** under
+the owner-approved **128 MiB** limit, with every earlier approved title preserved.
+See the [exact activation receipt](results/mcway-activation-2026-10-21/verification.json)
+and [reviewer quickstart](docs/submission/REVIEWER_QUICKSTART.md).
+Native picture/audio acceptance for this new edition is still pending while the
+Mac is locked. Source checks and detector results do not establish sensory comfort
+or medical safety. The prototype uses pre-analysis, not live interception.
+The images below are historical browser renders of the earlier three-card Home,
+not current native screenshots.
 
 A separate [playback integration prototype](docs/integration/PLAYBACK_KIT.md) now
 provides tested coverage decisions and a Vega reference adapter. It is not part of
@@ -724,7 +721,7 @@ Worth knowing before trusting this with a child.
 - **Only titles that passed verify can play in kid mode.** Anything else is not protected, because it was never measured.
 - **Detection can miss flashing.** "No flagged scenes" on a title's Details is what the analyzer found, not a safety certificate.
 - **It works only with videos prepared for its own player.** Netflix, Prime Video and every other app's content are out of scope, and so are DRM titles and live TV.
-- **The package budget is nearly spent.** The prepared library uses <!--n results/forest-activation-2026-10-18/approval.json:replacementNamespaceBytes -->66492442<!--/n--> of its <!--n results/forest-activation-2026-10-18/approval.json:unchangedLimitBytes -->67108864<!--/n--> bytes (64 MiB), about 602 KiB free, so no real clip of useful length can be imported until the owner changes the budget, the titles or the package format. More than half of those bytes are identical copies: a title whose presets share one rendition stores it again for each preset, which the current format cannot avoid ([notes](results/home-islands-2026-10-19/README.md)).
+- **The prepared-media limit is 128 MiB**, approved for the five-minute McWay edition. Actual usage is 129,255,687 bytes, leaving 4,962,041 bytes. Each preset retains its independently verified file; the package does not rely on deduplication.
 - **HDR is not measured.** flashmap refuses HLG and PQ input rather than measuring it with the wrong transfer curve.
 - **Decoder support is bounded.** The earlier Theora failures were fixed and rescreened; unsupported or undecodable inputs still fail closed.
 - **There is no screen-level cover lead time.** The software-level number above is the app's own timing on the virtual device, and it stops at the moment the app sets its state. The timing claim is a software observation, not a measurement of what a screen showed; physical camera timing is outside this submission scope.

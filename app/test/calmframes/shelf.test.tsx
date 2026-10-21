@@ -95,7 +95,8 @@ describe('the pictures on the shelf', () => {
       // A map destination's card shows its own photograph.
       if (presentation.menuArt) {
         expect(filmStill(presentation.menuArt)).toEqual(presentation.menuArt === 'forest'
-          ? require('../../assets/image/tv/forest-creek.jpg') : require('../../assets/image/tv/sea-otters-alaska.jpg'));
+          ? require('../../assets/image/tv/forest-creek.jpg') : presentation.menuArt === 'coastal'
+            ? require('../../assets/image/tv/acadia-coast.png') : require('../../assets/image/tv/sea-otters-alaska.jpg'));
         continue;
       }
       const view = render(<TitleArtwork illustrated entry={entry} testID="art" />);

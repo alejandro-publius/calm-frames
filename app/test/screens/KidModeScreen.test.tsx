@@ -1,3 +1,4 @@
+import { MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 /**
  * The route that makes Calm Frames reachable.
  *
@@ -339,10 +340,10 @@ describe('the shelf a household lands on', () => {
     expect(screen.getByTestId(poster).props.accessibilityState.selected).toBe(true);
   });
 
-  it('features all three approved islands as consumer videos while retaining the playback diagnostic', () => {
+  it('features all four approved titles as consumer videos while retaining the playback diagnostic', () => {
     const titles = defaultCatalog();
     expect(titles.map(title => title.id)).toEqual([
-      `prepared-${ACADIA_SOURCE_SHA256}`, `prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6`, `prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c`, OFFLINE_TITLE_ID,
+      `prepared-${ACADIA_SOURCE_SHA256}`, `prepared-02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6`, `prepared-63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c`, `prepared-${MCWAY_SOURCE_SHA256}`, OFFLINE_TITLE_ID,
     ]);
     expect(titles.some(title => /harbor/i.test(title.title))).toBe(false);
     expect(packagedLibrary.titles(DEFAULT_SETTINGS).some(title => /harbor/i.test(title.title))).toBe(true);
@@ -354,8 +355,8 @@ describe('the shelf a household lands on', () => {
     // The cards name the videos; what Watch will play is what it announces.
   expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Settle in: Acadia');
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
-    // All three approved destinations appear on the coastal map.
-    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(3);
+    // All four approved titles appear on the coastal map.
+    expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(4);
     expect(screen.queryByText('Choose a video')).toBeNull();
     expect(screen.queryByText(/Harbor/)).toBeNull();
     expect(screen.queryByText('Playback test')).toBeNull();

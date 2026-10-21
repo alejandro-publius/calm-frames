@@ -1,3 +1,4 @@
+import { MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 import React from 'react';
 jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
 import { fireEvent, render } from '@testing-library/react-native';
@@ -6,7 +7,7 @@ import { checkedShelf } from './shelfFixtures';
 import { ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
 
 // Retain this two-title regression fixture; the real consumer pair is tested in otterPreview.
-const titles = checkedShelf().filter(entry => !['Sea otters in Alaska', 'Forest creek at Redwood'].includes(entry.title.title));
+const titles = checkedShelf().filter(entry => entry.title.sha256 !== MCWAY_SOURCE_SHA256).filter(entry => !['Sea otters in Alaska', 'Forest creek at Redwood'].includes(entry.title.title));
 const acadia = titles.find(entry => entry.title.sha256 === ACADIA_SOURCE_SHA256)!;
 
 test('the actual-video rail selects artwork and both actions without starting playback on focus', () => {

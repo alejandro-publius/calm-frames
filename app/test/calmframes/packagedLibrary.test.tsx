@@ -1,3 +1,4 @@
+import { MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 import { PACKAGED_LIBRARY_JSON } from '../../assets/raw/prepared-library/catalog';
 import { DEFAULT_SETTINGS, PRESET_NAMES } from '../../src/calmframes/household';
 import { ACADIA_SOURCE_SHA256, createApprovedAcadiaLibrary, createApprovedLibrary, createPackagedLibrary, packagedLibrary } from '../../src/calmframes/packagedLibrary';
@@ -24,7 +25,7 @@ function checked(preset = DEFAULT_SETTINGS.preset) {
 
 describe('the compiled prepared library', () => {
   it('uses the exact reviewed consumer registry and never promotes a runtime catalog', () => {
-    expect(packagedLibrary.consumerTitles(DEFAULT_SETTINGS).map(title => title.sha256)).toEqual([ACADIA_SOURCE_SHA256, SEA_OTTER_SOURCE_SHA256, FOREST_SOURCE_SHA256]);
+    expect(packagedLibrary.consumerTitles(DEFAULT_SETTINGS).map(title => title.sha256)).toEqual([ACADIA_SOURCE_SHA256, SEA_OTTER_SOURCE_SHA256, FOREST_SOURCE_SHA256, MCWAY_SOURCE_SHA256]);
     expect(createApprovedLibrary(approvedAcadia).problem).toBeNull();
     expect(createApprovedLibrary(approvedAcadia + ' ').titles(DEFAULT_SETTINGS)).toEqual([]);
     expect(createApprovedLibrary(ACADIA_LIBRARY_JSON).titles(DEFAULT_SETTINGS)).toEqual([]);
