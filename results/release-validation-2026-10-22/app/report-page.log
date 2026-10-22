@@ -1,0 +1,41 @@
+Chrome: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+timeline: 4 lane(s) at [(705, 740, 315, 1199), (836, 871, 315, 1199), (966, 1001, 315, 1199), (1097, 1132, 315, 1199)]
+
+page: rendered 1280x6348, 9 display frame(s) of 1280x720
+  frame 0: PASS  nothing
+  frame 1: PASS  nothing
+  frame 2: PASS  nothing
+  frame 3: PASS  nothing
+  frame 4: PASS  nothing
+  frame 5: PASS  nothing
+  frame 6: PASS  nothing
+  frame 7: PASS  nothing
+  frame 8: PASS  nothing
+  timeline: 4 lane(s), scanned where the page draws them
+    rows 705 to 740: 0 bar(s) on the busiest row, 0 on the busiest column, pattern area 0.000
+    rows 836 to 871: 0 bar(s) on the busiest row, 0 on the busiest column, pattern area 0.000
+    rows 966 to 1001: 0 bar(s) on the busiest row, 0 on the busiest column, pattern area 0.000
+    rows 1097 to 1132: 0 bar(s) on the busiest row, 0 on the busiest column, pattern area 0.000
+
+HAZARD_striped_page: rendered 1280x6348, 9 display frame(s) of 1280x720
+  frame 0: PASS  nothing
+  frame 1: PASS  nothing
+  frame 2: PASS  nothing
+  frame 3: PASS  nothing
+  frame 4: PASS  nothing
+  frame 5: PASS  nothing
+  frame 6: PASS  nothing
+  frame 7: PASS  nothing
+  frame 8: PASS  nothing
+  timeline: 4 lane(s), scanned where the page draws them
+    rows 705 to 740: 25 bar(s) on the busiest row, 3 on the busiest column, pattern area 0.962
+    rows 836 to 871: 25 bar(s) on the busiest row, 3 on the busiest column, pattern area 0.962
+    rows 966 to 1001: 25 bar(s) on the busiest row, 3 on the busiest column, pattern area 0.962
+    rows 1097 to 1132: 25 bar(s) on the busiest row, 3 on the busiest column, pattern area 0.962
+
+negative control: display frame(s) [0, 1] measured more pattern area on the whole page than the report page's own.
+
+negative control: refused, 25 bar boundary(ies) found in its striped timeline. The check can say no.
+
+report page: no flash, and no bar boundary anywhere in the timeline.
+0 of 9 display frame(s) hold a pattern finding from the page's own text, which is printed above and explained in the docstring of this file and in docs/DECISIONS.md.

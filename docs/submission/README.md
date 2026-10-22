@@ -14,6 +14,7 @@ live draft after native review, preserving its personal fields and team.
 | File | Current purpose |
 |---|---|
 | [DEMO_RUN_OF_SHOW.md](DEMO_RUN_OF_SHOW.md) | Quiet 2:35 app-only take; 75 uninterrupted seconds of the actual moving scene |
+| [REPLACEMENT_DEMO_RUN_OF_SHOW.md](REPLACEMENT_DEMO_RUN_OF_SHOW.md) | Plan for a replacement take on the validated integration build; the submitted video stays the fallback until a replacement is accepted |
 | [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) | Accurate product story, implementation feedback and credits |
 | [REVIEWER_QUICKSTART.md](REVIEWER_QUICKSTART.md) | Existing prepared assets, Node 22/Vega setup and build/install commands |
 | [OPEN_DECISIONS.md](OPEN_DECISIONS.md) | Only the remaining blockers and personal answers |

@@ -1,0 +1,14 @@
+ruff	0	0s
+mypy-flashmap	0	1s
+mypy-pipeline	0	0s
+readme-sync	0	0s
+style	0	1s
+pins	0	0s
+gate1-archive	0	0s
+integration-diff	0	0s
+baseline-versions	0	0s
+pattern-text-precision	0	0s
+conformance-rebuild	0	2s
+gitleaks-tree	0	16s
+properties-runner	0	0s
+properties-pytest	0	4s

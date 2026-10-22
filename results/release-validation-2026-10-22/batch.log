@@ -1,0 +1,39 @@
+05:53:02Z start d96c088
+exit 0 after 519s
+06:01:43Z python full done
+exit 0 after 460s
+06:09:24Z python ci-equivalent done
+app-typecheck	0	6s
+app-prepared-library	0	0s
+app-playback-proof-check	0	0s
+app-node-tool-tests	0	2s
+app-lint	0	5s
+app-jest	0	18s
+hook-package-tests	0	1s
+hook-offline-consumer	0	2s
+ui-flashmap	0	6s
+ui-flashmap-tool-tests	0	1s
+ui-flashmap-negative-control	0	1s
+brand-assets	0	4s
+report-page	0	66s
+done
+06:11:16Z app checks done
+ruff	0	0s
+mypy-flashmap	0	1s
+mypy-pipeline	0	0s
+readme-sync	0	0s
+style	0	1s
+pins	0	0s
+gate1-archive	0	0s
+integration-diff	0	0s
+baseline-versions	0	0s
+pattern-text-precision	0	0s
+conformance-rebuild	0	2s
+gitleaks-tree	0	16s
+properties-runner	0	0s
+properties-pytest	0	4s
+done
+06:11:40Z repo checks done
+06:22:08Z recovery runner exit 0
+06:34:41Z mutation gate --check exit 0
+06:34:41Z end; tree:  M docs/PREPARATION_RECOVERY.md ?? results/preparation-recovery-2026-10-22/ 
