@@ -205,7 +205,7 @@ else:
   local verdict="pass"
   [ "$status" -ne 0 ] && verdict="fail"
 
-  "$PYTHON" - "$out" <<PY
+  if ! "$PYTHON" - "$out" <<PY
 import datetime, json, os, subprocess, sys
 
 out = sys.argv[1]
@@ -240,6 +240,10 @@ with open(out, "w", encoding="utf-8") as handle:
     handle.write("\n")
 print(f"record written to {out}")
 PY
+  then
+    echo "UNVERIFIED. Could not write verification record: $out. Do not upload this cut." >&2
+    return 2
+  fi
 
   if [ "$status" -eq 0 ]; then
     echo
