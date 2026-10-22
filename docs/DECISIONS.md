@@ -2778,3 +2778,7 @@ Home has a non-text selection check inside the photo. Player title/error/paused/
 ## 2026-10-21: repository presentation follows Tideline
 
 Decision: lead with a concise product statement, real native Home and paired Details/playback screenshots, an explicit unpublished-demo status, and a readable architecture map with code links. Keep source checks, packaged-byte checks and native observations separate. Crop existing app-only captures without changing pixels inside the picture area and retain source hashes and media credits. Preserve historical receipts, the local ending fix and the separately owned demo MP4. Cost: local documentation and static presentation assets only; no install, account, credential, media edition or publication change.
+
+## 2026-10-22: reconcile verified cloud transfers without changing the product
+
+Decision: verify both attached archives and their Git inventories, retain Claude's history, then cherry-pick only the combined release checks and the completed judging package in a new candidate worktree. Preserve the judging tree and export byte for byte; explain later evidence in `CLOUD_RELEASE_CHECKPOINT.md`. The original native coastal application, media and trust remain unchanged. Rejected browser UI and superseded separate fixes are excluded. Why: transfer real completed work without duplicating it or turning technical receipts into human acceptance. Cost: focused stub regressions and documentation only; no install, benchmark rerun, native action or publication.
