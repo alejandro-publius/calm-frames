@@ -26,7 +26,9 @@ from pipeline.packaged_library import check_packaged_library, export_packaged_li
 
 REPO = Path(__file__).resolve().parent.parent
 
-def prepare_owned_harbor(output: Path, workdir: Path, source_media: Path | None = None) -> dict:
+def assemble_owned_source(workdir: Path, source_media: Path | None = None) -> Path:
+    """The owned Harbor picture and ambience, stream-copied, with the neutral captions. Also used by
+    eval/preparation_benchmark.py, so the benchmark measures this exact source."""
     workdir.mkdir(parents=True, exist_ok=True)
     captions = workdir / "harbor.vtt"
     captions.write_text(CAPTIONS)
@@ -36,6 +38,11 @@ def prepare_owned_harbor(output: Path, workdir: Path, source_media: Path | None 
         "-map", "0:v:0", "-map", "0:a:0", "-map", "1:s:0", "-c:v", "copy", "-c:a", "copy",
         "-c:s", "mov_text", "-metadata:s:s:0", "language=eng", str(source),
     ])
+    return source
+
+
+def prepare_owned_harbor(output: Path, workdir: Path, source_media: Path | None = None) -> dict:
+    source = assemble_owned_source(workdir, source_media)
     public = workdir / "import.pub.pem"
     with TemporaryDirectory(prefix="calm-frames-import-key-") as directory:
         private = Ed25519PrivateKey.generate()
