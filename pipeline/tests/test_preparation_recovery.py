@@ -102,7 +102,7 @@ def test_record_refuses_outputs_that_are_missing_outside_or_links(tmp_path):
     assert not (tmp_path / LEDGER_NAME).exists()
 
 
-@pytest.mark.parametrize("timestamp", [10 ** 1000, -(10 ** 1000)])
+@pytest.mark.parametrize("timestamp", [10 ** 1000, -(10 ** 1000)], ids=["too-large", "too-negative"])
 def test_oversized_integer_timestamp_drops_only_the_malformed_record(tmp_path, timestamp):
     ledger, output = _committed(tmp_path)
     ledger.record("other", "fp", [output])

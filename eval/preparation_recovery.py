@@ -1132,6 +1132,18 @@ def recovery_mutations() -> list:
                  "    if index_path.exists():\n        with _index_lock(index_path):",
                  "    if False:\n        with _index_lock(index_path):",
                  "a withdrawn title stays listed in the kid mode index"),
+        mutation("scene-holds-bound-to-publication", "pipeline/ingest.py",
+                 '                *layout.scene_manifest(preset).parent.glob("*"),\n',
+                 "                *(),  # scene-hold images left out of the checked bytes\n",
+                 "a scene-hold image that changes after verification is published"),
+        mutation("oversized-timestamp-drops-only-its-record", "pipeline/state.py",
+                 "    try:\n        if not math.isfinite(completed):\n"
+                 '            raise ValueError("completed_at is not a finite number")\n'
+                 "    except OverflowError as exc:\n"
+                 '        raise ValueError("completed_at is outside the supported numeric range") from exc\n',
+                 "    if not math.isfinite(completed):  # an oversized integer is not caught\n"
+                 '        raise ValueError("completed_at is not a finite number")\n',
+                 "a ledger record with an integer timestamp too large for a float crashes the run"),
     ]
 
 
