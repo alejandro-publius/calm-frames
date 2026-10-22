@@ -71,7 +71,7 @@ The installed app uses Vega's W3C media player. The remaining rows distinguish l
 | Runtime coverage | `useFlashGuard` [source](app/src/calmframes/useFlashGuard.ts#L159) | Coordinate cover state and player clock |
 | Runtime seeking | `planSeek` [source](app/src/calmframes/seekSafety.ts#L113) | Plan a seek against covered intervals |
 | Runtime ending | `continuousEndingForRoute` [source](app/src/calmframes/continuousScene.ts#L23) | Recognize the exact continuous edition |
-| Offline preparation | `ingest_title` [source](pipeline/ingest.py#L198) | Orchestrate preparation |
+| Offline preparation | `ingest_title` [source](pipeline/ingest.py#L212) | Orchestrate preparation |
 | Offline verification | `verify_title` [source](pipeline/verify.py#L485) | Check actual output against its source |
 | Offline package | `export_packaged_library` [source](pipeline/packaged_library.py#L437) | Export verified editions and reports |
 | Offline replacement | `export_ambient_catalog` [source](pipeline/ambient_export.py#L24) | Independently reproduce replacement media |

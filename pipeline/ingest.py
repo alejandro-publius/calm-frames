@@ -766,6 +766,7 @@ def _prepare(
                 layout.map_path(preset), layout.plan_path(preset),
                 layout.safe_master(preset), layout.cover_model_path(preset),
                 layout.scene_manifest(preset),
+                *layout.scene_manifest(preset).parent.glob("*"),
                 layout.bif_path(preset), layout.bif_manifest(preset),
                 layout.posters_manifest(preset),
                 *layout.posters_dir(preset).glob("*"),

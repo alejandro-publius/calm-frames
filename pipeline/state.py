@@ -90,8 +90,13 @@ def _checked_record(name: object, value: object, *, legacy: bool) -> dict:
     if len(set(outputs)) != len(outputs):
         raise ValueError("an output is listed twice")
     completed = value.get("completed_at", 0.0)
-    if isinstance(completed, bool) or not isinstance(completed, (int, float)) or not math.isfinite(completed):
+    if isinstance(completed, bool) or not isinstance(completed, (int, float)):
         raise ValueError("completed_at is not a finite number")
+    try:
+        if not math.isfinite(completed):
+            raise ValueError("completed_at is not a finite number")
+    except OverflowError as exc:
+        raise ValueError("completed_at is outside the supported numeric range") from exc
     extra = value.get("extra", {})
     if not isinstance(extra, dict):
         raise ValueError("extra is not an object")

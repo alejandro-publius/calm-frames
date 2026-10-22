@@ -102,6 +102,18 @@ def test_record_refuses_outputs_that_are_missing_outside_or_links(tmp_path):
     assert not (tmp_path / LEDGER_NAME).exists()
 
 
+@pytest.mark.parametrize("timestamp", [10 ** 1000, -(10 ** 1000)])
+def test_oversized_integer_timestamp_drops_only_the_malformed_record(tmp_path, timestamp):
+    ledger, output = _committed(tmp_path)
+    ledger.record("other", "fp", [output])
+    data = json.loads(ledger.path.read_text())
+    data["steps"]["step"]["completed_at"] = timestamp
+    ledger.path.write_text(json.dumps(data))
+    loaded = Ledger(tmp_path)
+    assert loaded.get("step") is None
+    assert loaded.check("other", "fp").valid
+
+
 def _nested(depth: int) -> bytes:
     return b"[" * depth + b"]" * depth
 
@@ -728,7 +740,40 @@ def test_publication_flushes_the_checked_bytes_before_the_verdict_is_written(tit
     result = ingest_title(title.source, title.workdir, title.options)
     assert result.publishable
     assert order == ["flush artifacts", "publish"]
-    assert {"safe.mp4", "master.m3u8", "wcag.json", "probe.json", "still.png"} <= flushed
+    assert {"safe.mp4", "master.m3u8", "wcag.json", "probe.json", "still.png", "hold_000.jpg"} <= flushed
+
+
+@needs_ffmpeg
+@pytest.mark.parametrize("phase", ["verification", "cached_publication"])
+def test_scene_image_changed_after_check_is_never_published(title, monkeypatch, phase):
+    first = ingest_title(title.source, title.workdir, title.options)
+    assert first.publishable
+    image = first.layout.scene_image("wcag", 0)
+    record = Ledger(first.layout.root).get("verify")
+    assert record.extra["artifact_sha256"][first.layout.relative(image)] == sha256_file(image)
+    if phase == "verification":
+        first.layout.verify_report_path.unlink()
+        real = ingest_module.verify_title
+
+        def late_writer(layout, **kwargs):
+            report = real(layout, **kwargs)
+            assert report.passed
+            _flip_byte(image)
+            return report
+
+        monkeypatch.setattr(ingest_module, "verify_title", late_writer)
+    else:
+        real_sync = ingest_module.sync_files
+
+        def late_flush(paths):
+            count = real_sync(paths)
+            _flip_byte(image)
+            return count
+
+        monkeypatch.setattr(ingest_module, "sync_files", late_flush)
+    with pytest.raises(PipelineError, match="prepared artifacts changed"):
+        ingest_title(title.source, title.workdir, title.options)
+    assert kid_mode_titles(first.layout.index_path) == []
 
 
 @needs_ffmpeg
