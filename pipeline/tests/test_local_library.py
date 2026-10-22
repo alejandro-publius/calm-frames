@@ -35,6 +35,20 @@ from .clips import make_calm_clip
 from .conftest import needs_ffmpeg
 
 
+def _fabricated_verify_extra(layout, **overrides):
+    """The verify record the real pipeline writes: its verdict and the bytes it checked."""
+    extra = {
+        "passed": True, "report_sha256": sha256_file(layout.verify_report_path),
+        "artifact_sha256": {
+            str(path.relative_to(layout.root)): sha256_file(path)
+            for path in sorted(layout.root.rglob("*"))
+            if path.is_file() and not path.is_symlink() and path.name != "state.json"
+        },
+    }
+    extra.update(overrides)
+    return extra
+
+
 @pytest.fixture
 def stub_workspace(tmp_path, monkeypatch, keypair):
     """Fabricated producer outputs for wrapper guard tests, never real media."""
@@ -92,7 +106,7 @@ def stub_workspace(tmp_path, monkeypatch, keypair):
         update_index(layout.index_path, entry)
         ledger = Ledger(layout.root)
         ledger.record("verify", "fabricated-wrapper-record", [layout.verify_report_path],
-                      {"passed": True, "report_sha256": sha256_file(layout.verify_report_path)})
+                      _fabricated_verify_extra(layout))
         result = IngestResult(layout.sha256, source_path, layout, entry,
                               verify_passed=True, verify_report=report.to_dict())
         state.result = result
@@ -117,7 +131,7 @@ def _replace_report(result, change):
     result.verify_report = data
     Ledger(result.layout.root).record(
         "verify", "fabricated-wrapper-record", [result.layout.verify_report_path],
-        {"passed": True, "report_sha256": sha256_file(result.layout.verify_report_path)},
+        _fabricated_verify_extra(result.layout),
     )
 
 

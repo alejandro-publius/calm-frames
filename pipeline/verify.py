@@ -54,6 +54,7 @@ from .catalog import (
     update_index,
     write_entry,
 )
+from .durable import atomic_write_text
 from .flashmap_adapter import PATTERN, FlashmapAdapter, FlashMapDoc, MapFormatError, load_map
 from .hashing import sha256_file
 from .hideplan import (
@@ -1047,11 +1048,11 @@ def verify_title(
 
 
 def write_report(layout: TitleLayout, report: VerifyReport) -> Path:
-    layout.verify_dir.mkdir(parents=True, exist_ok=True)
-    layout.verify_report_path.write_text(
-        json.dumps(report.to_dict(), indent=2, sort_keys=True)
+    # Atomic, so a run killed while writing it leaves the previous report or none,
+    # never half of one for the ledger or a receipt to be compared against.
+    return atomic_write_text(
+        layout.verify_report_path, json.dumps(report.to_dict(), indent=2, sort_keys=True)
     )
-    return layout.verify_report_path
 
 
 def apply_to_catalog(layout: TitleLayout, report: VerifyReport) -> None:

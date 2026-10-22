@@ -28,6 +28,13 @@ The first rule whose ``match`` appears in the video path wins. A rule may use
 ``segments_all`` instead of ``segments`` to answer the same way for every
 profile. Anything with no rule comes back clean.
 
+A ``block`` list makes a run stop at an exact point, so a test can kill it
+there. Each rule has a ``match`` (and optionally a ``profile``) and a
+``marker`` path. The first analysis that matches, while the marker does not yet
+exist, writes ``partial_bytes`` of its map (when given) as a torn output,
+creates the marker and then sleeps for ``seconds``, at most 120. A killed
+process never gets further; one that is not killed goes on to write its full map.
+
 Shape and timing come from ``geometry``, the same way: a list of rules with a
 ``match`` and any of ``coded_width``, ``coded_height``, ``frame_count``,
 ``first_pts_ms``, ``last_pts_ms``, ``median_interval_ms`` and
@@ -245,7 +252,9 @@ def cmd_analyze(args: argparse.Namespace) -> int:
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(payload, indent=2, sort_keys=True))
+    text = json.dumps(payload, indent=2, sort_keys=True)
+    _maybe_block(str(video), args.profile, out, text)
+    out.write_text(text)
     _log(
         {
             "cmd": "analyze",
@@ -262,6 +271,24 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     if forced is not None:
         return int(forced)
     return 1 if segments else 0
+
+
+def _maybe_block(video: str, profile: str, out: Path, text: str) -> None:
+    for rule in _plan().get("block", []):
+        if not rule.get("match") or rule["match"] not in video:
+            continue
+        if rule.get("profile") not in (None, profile):
+            continue
+        marker = Path(rule["marker"])
+        if marker.exists():
+            continue
+        partial = int(rule.get("partial_bytes") or 0)
+        if partial:
+            out.write_text(text[:partial])
+        marker.write_text(json.dumps({"pid": os.getpid(), "video": video, "profile": profile}))
+        _log({"cmd": "block", "video": video, "profile": profile})
+        time.sleep(min(float(rule.get("seconds", 60)), 120.0))
+        return
 
 
 def cmd_verify(args: argparse.Namespace) -> int:

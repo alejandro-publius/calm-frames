@@ -68,10 +68,20 @@ cover model as a shortcut. Native image, caption and timing composition on a
 physical television still need measurement.
 
 Imports through this wrapper share a nonblocking OS file lock. A second import
-into the same workspace refuses until the first finishes. Do not run the older
-ingest CLI or other writers against that workspace concurrently: they do not
+into the same workspace refuses until the first finishes. The pipeline also
+refuses a second preparation of the same title, from any command, and
+serializes updates to its `catalog.json`. Do not run the older ingest CLI or
+other writers against that workspace concurrently all the same: they do not
 participate in this wrapper lock. Receipt count, workspace file count and JSON
 metadata size are bounded in `pipeline/local_library.py`.
+
+If a preparation is interrupted, by a crash, a kill or a power loss, run the
+same command again. The receipt was withdrawn before any work began, finished
+steps whose outputs still have their recorded bytes are reused, anything
+missing, cut short or changed is rebuilt, and a ready receipt is issued only
+after verification passes again over bytes that did not change while it ran.
+[docs/PREPARATION_RECOVERY.md](../docs/PREPARATION_RECOVERY.md) describes the
+failure model and how to reproduce the evidence.
 
 
 ## Include prepared titles in a Vega build

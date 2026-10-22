@@ -506,9 +506,11 @@ MUTATIONS: list[Mutation] = [
         mid="cached-artifacts-check-the-actual-output-bytes",
         prop="cached metadata and previews stay bound to their checked bytes",
         lane="py",
-        path="pipeline/ingest.py",
-        old="            if not check_output_bytes or (",
-        new="            if True or not check_output_bytes or (",
+        # Since October 21 every step's outputs are hashed by the ledger itself, so the
+        # same fault lives in the ledger's reuse check rather than in ingest.
+        path="pipeline/state.py",
+        old="            if actual != record.output_sha256.get(relative):",
+        new="            if False:",
         tests=("pipeline/tests/test_cached_artifacts.py",),
         why="an artifact changed at the same path is trusted from its old cache "
         "record instead of being regenerated before publication",

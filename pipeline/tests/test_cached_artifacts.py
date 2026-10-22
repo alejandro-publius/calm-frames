@@ -71,8 +71,11 @@ def test_missing_poster_is_a_recorded_output_and_is_regenerated(cached_title):
 def test_unchanged_checked_outputs_preserve_a_work_free_restart(cached_title, ffmpeg_calls):
     source, options, first = cached_title
     state = json.loads((first.layout.root / "state.json").read_text())
+    # Every committed step, not only these four, records the hash of each output.
     for step in ("probe", "still", "bif:wcag", "posters:wcag"):
-        assert state["steps"][step]["extra"]["output_sha256"]
+        assert state["steps"][step]["output_sha256"]
+    for step, record in state["steps"].items():
+        assert set(record["output_sha256"]) == set(record["outputs"]) != set(), step
     poster, _ = _artifact(first.layout, "poster")
     assert first.layout.relative(poster) in state["steps"]["posters:wcag"]["outputs"]
     ffmpeg_calls.clear()

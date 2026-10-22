@@ -144,16 +144,27 @@ def test_scene_integrity_failure_blocks_publication(built_scenes, damage):
 
 
 @needs_ffmpeg
-def test_same_path_asset_tamper_cannot_reuse_a_cached_publishing_verdict(built_scenes):
+def test_same_path_asset_tamper_cannot_reuse_a_cached_publishing_verdict(built_scenes, analyzer):
     result, source, private, public = built_scenes
+    options = IngestOptions(presets=["wcag"], key=str(private), pub=str(public),
+                            x264_preset="ultrafast", poster_count=1, bif_interval_ms=3000)
     images = read_scene_holds(result.layout, "wcag")
+    original = images[0].path.read_bytes()
     images[0].path.write_bytes(images[1].path.read_bytes())
+    # The tampered image no longer has its recorded bytes, so the holds are rebuilt
+    # before any verdict is reused. While they cannot be, the title stays out.
+    analyzer.fail_on("hold_000.jpg", "image check unavailable")
     with pytest.raises(PipelineError):
-        ingest_title(source, result.layout.workdir, IngestOptions(
-            presets=["wcag"], key=str(private), pub=str(public),
-            x264_preset="ultrafast", poster_count=1, bif_interval_ms=3000,
-        ))
+        ingest_title(source, result.layout.workdir, options)
     assert kid_mode_titles(result.layout.index_path) == []
+    # Once they can, the restored image is what publishes, never the tampered one.
+    analyzer.plan.pop("fail")
+    analyzer.write()
+    second = ingest_title(source, result.layout.workdir, options)
+    assert "scene_holds:wcag" in second.steps_run
+    assert images[0].path.read_bytes() == original
+    assert second.publishable
+    assert [entry["sha256"] for entry in kid_mode_titles(result.layout.index_path)] == [result.sha256]
 
 
 @needs_ffmpeg

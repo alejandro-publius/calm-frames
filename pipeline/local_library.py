@@ -13,18 +13,18 @@ import fcntl
 import json
 import os
 import re
-import tempfile
 from pathlib import Path
 from typing import Iterator, Sequence
 
 from . import PipelineError
 from .catalog import STATUS_VERIFIED, read_entry
+from .durable import LockBusy, atomic_write_text
 from .flashmap_adapter import PRESETS, FlashmapAdapter, iter_presets
 from .hashing import fingerprint, sha256_file
 from .ingest import IngestOptions, IngestResult, ingest_title
 from .layout import TitleLayout
 from .render import ENCODE_PROFILES
-from .state import Ledger
+from .state import Ledger, StepRecord
 from .verify import VerifyReport
 
 VERSION = 1
@@ -108,21 +108,10 @@ def _json(path: Path, root: Path) -> dict:
 
 def _write_json(path: Path, value: dict, root: Path) -> None:
     _path_inside(path, root)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    # Unique temporary files avoid following a planted fixed .tmp symlink.
-    temporary: Path | None = None
-    try:
-        with tempfile.NamedTemporaryFile(
-            mode="w", encoding="utf-8", dir=path.parent,
-            prefix=f".{path.name}.", suffix=".tmp", delete=False,
-        ) as handle:
-            temporary = Path(handle.name)
-            json.dump(value, handle, indent=2, sort_keys=True, allow_nan=False)
-            handle.write("\n")
-        os.replace(temporary, path)
-    finally:
-        if temporary is not None:
-            temporary.unlink(missing_ok=True)
+    # Unique temporary files avoid following a planted fixed .tmp symlink, and the
+    # write is flushed before and after the rename, so a withdrawn receipt stays
+    # withdrawn across a power loss before any preparation work starts.
+    atomic_write_text(path, json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n")
 
 
 @contextlib.contextmanager
@@ -211,7 +200,7 @@ def _artifacts(layout: TitleLayout, presets: list[str]) -> dict:
     return result
 
 
-def _verification(layout: TitleLayout, presets: list[str]) -> tuple[dict, VerifyReport]:
+def _verification(layout: TitleLayout, presets: list[str]) -> tuple[dict, VerifyReport, StepRecord]:
     data = _json(layout.verify_report_path, layout.workdir)
     checks = data.get("checks")
     if (data.get("sha256") != layout.sha256 or data.get("presets") != presets
@@ -229,7 +218,7 @@ def _verification(layout: TitleLayout, presets: list[str]) -> tuple[dict, Verify
     if (record is None or record.extra.get("passed") is not True
             or record.extra.get("report_sha256") != sha256_file(layout.verify_report_path)):
         raise LocalLibraryError("The verification report does not match the pipeline's recorded result.")
-    return data, report
+    return data, report, record
 
 
 def _checked_entry(layout: TitleLayout, presets: list[str]) -> None:
@@ -247,13 +236,31 @@ def _checked_entry(layout: TitleLayout, presets: list[str]) -> None:
             raise LocalLibraryError("The catalog points outside the intended prepared artifacts.")
 
 
+def _verified_artifacts(layout: TitleLayout, presets: list[str], record: StepRecord) -> dict:
+    """The receipt's artifacts, refused unless each is the exact file verify checked.
+
+    Hashing them again after verify is not enough on its own: an encoder left running
+    by a killed run could change a file between the verdict and this receipt, and the
+    receipt would then vouch for bytes no check ever saw.
+    """
+    checked = record.extra.get("artifact_sha256")
+    artifacts = _artifacts(layout, presets)
+    if not isinstance(checked, dict):
+        raise LocalLibraryError("The pipeline did not record which bytes verification checked.")
+    for preset in presets:
+        for name, digest in artifacts[preset]["sha256"].items():
+            if checked.get(str((layout.workdir / name).relative_to(layout.root))) != digest:
+                raise LocalLibraryError("A prepared artifact is not the file verification checked.")
+    return artifacts
+
+
 def _ready_receipt(result: IngestResult, source: Path, root: Path,
                    presets: list[str], title: str) -> dict:
     layout = TitleLayout(root, sha256_file(source))
     if (result.sha256 != layout.sha256 or result.verify_passed is not True
             or result.layout.root != layout.root or not result.publishable):
         raise LocalLibraryError("The pipeline did not return a verified result for this source.")
-    data, report = _verification(layout, presets)
+    data, report, record = _verification(layout, presets)
     # The verifier's geometry data uses tuples in memory; JSON records arrays.
     # Compare their JSON representations, without coercing unsupported objects.
     recorded_result = json.loads(json.dumps(result.verify_report, allow_nan=False))
@@ -263,7 +270,7 @@ def _ready_receipt(result: IngestResult, source: Path, root: Path,
     return {
         "version": VERSION, "status": "ready", "readiness": READY_MESSAGE,
         "source_sha256": layout.sha256, "title": title, "presets": presets,
-        "artifacts": _artifacts(layout, presets),
+        "artifacts": _verified_artifacts(layout, presets, record),
         "verification": {
             "status": "passed", "outcome": report.outcome,
             "report": str(layout.verify_report_path.relative_to(root)),
@@ -288,7 +295,7 @@ def _still_ready(receipt: dict, root: Path, expected_sha: str) -> bool:
             return False
         layout = TitleLayout(root, expected_sha)
         _checked_entry(layout, presets)
-        _, report = _verification(layout, presets)
+        _, report, _ = _verification(layout, presets)
         verification = receipt.get("verification", {})
         return (
             set(verification) == _VERIFICATION_KEYS
@@ -389,6 +396,10 @@ def prepare_local_title(source: str | Path, workdir: str | Path, *,
                     ],
                 }
             receipt = _ready_receipt(result, source, root, requested, name)
+        except LockBusy:
+            receipt["error"] = {"type": "LockBusy", "message": (
+                "This title is being prepared by another process. Retry after it finishes."
+            )}
         except (PipelineError, OSError, ValueError, TypeError, KeyError) as exc:
             # Do not copy analyzer stderr, command lines, key paths or key bytes
             # into the receipt. Detailed measurement evidence stays in report.json.

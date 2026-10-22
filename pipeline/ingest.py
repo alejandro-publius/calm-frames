@@ -14,10 +14,18 @@ Order, which is also the order of the ledger steps:
     -> verify
     -> catalog entry
 
-Every step writes a fingerprint of its inputs into the ledger, and each
-fingerprint includes the fingerprints of the steps it depends on. A second run
-over the same file with the same settings does no work. Change the guard band
-and only the plan and what follows it is redone.
+Every step writes a fingerprint of its inputs into the ledger, with the SHA-256
+of each file it produced, and each fingerprint includes the identity (fingerprint
+and output hashes) of every step it depends on. A second run over the same file
+with the same settings does no work. Change the guard band and only the plan and
+what follows it is redone. An output that went missing, was cut short or had its
+bytes changed is rebuilt, and so is everything whose inputs that changed.
+
+A run can stop anywhere, including by SIGKILL, and the next run picks up from the
+last committed step (see ``state``). The title is withdrawn from kid mode before
+any cached artifact is trusted and is published again only by verify, with the
+bytes it checked unchanged and flushed to the device first. One preparation of a
+title runs at a time; a second invocation refuses rather than racing the first.
 
 Usage:
 
@@ -44,10 +52,11 @@ from .catalog import (
     STATUS_PENDING,
     CatalogEntry,
     RenditionEntry,
-    read_entry,
     update_index,
+    withdraw_title,
     write_entry,
 )
+from .durable import atomic_write_bytes, exclusive_lock, sync_files
 from .ffmpegtool import require_tools
 from .flashmap_adapter import FlashmapAdapter, iter_presets, tail_to_hold_ms
 from .hashing import fingerprint, sha256_file
@@ -138,28 +147,32 @@ class IngestResult:
     steps_skipped: list[str] = field(default_factory=list)
     verify_passed: bool = False
     verify_report: dict | None = None
+    # Steps that had a record which could not be reused, and why.
+    invalidated: dict[str, str] = field(default_factory=dict)
+    # What loading the ledger found, such as a malformed file that was moved aside.
+    ledger_events: list[dict] = field(default_factory=list)
 
     @property
     def publishable(self) -> bool:
         return self.entry.kid_mode_visible
 
 
+def _identity(fp: str, output_sha256: dict[str, str]) -> str:
+    """What a dependent step is built from: this step's inputs and its actual bytes."""
+    return fingerprint({"fingerprint": fp, "outputs": output_sha256})
+
+
 class _Steps:
-    """Runs a step, or skips it when the ledger says it is already done."""
+    """Runs a step, or skips it when the ledger proves its outputs are the ones it made."""
 
     def __init__(self, ledger: Ledger, *, force: bool) -> None:
         self.ledger = ledger
         self.force = force
         self.fingerprints: dict[str, str] = {}
+        self.identities: dict[str, str] = {}
         self.ran: list[str] = []
         self.skipped: list[str] = []
-
-    def _output_hashes(self, outputs: Sequence[Path]) -> dict[str, str | None]:
-        root = self.ledger.title_dir.resolve()
-        return {
-            str(path.resolve().relative_to(root)): sha256_file(path) if path.is_file() else None
-            for path in outputs
-        }
+        self.invalidated: dict[str, str] = {}
 
     def run(
         self,
@@ -170,27 +183,28 @@ class _Steps:
         *,
         depends_on: Sequence[str] = (),
         cache_result: bool = True,
-        check_output_bytes: bool = False,
     ) -> str:
-        parents = {dep: self.fingerprints.get(dep, "") for dep in depends_on}
+        unknown = [dep for dep in depends_on if dep not in self.identities]
+        if unknown:
+            raise PipelineError(f"step {name} depends on {', '.join(unknown)}, which has not run")
+        parents = {dep: self.identities[dep] for dep in depends_on}
         fp = fingerprint({"v": VERSION, "step": name, "in": payload, "parents": parents})
         self.fingerprints[name] = fp
-        if cache_result and not self.force and self.ledger.is_done(name, fp):
-            previous = self.ledger.get(name)
-            if not check_output_bytes or (
-                previous is not None
-                and previous.extra.get("output_sha256") == self._output_hashes(
-                    [self.ledger.title_dir / output for output in previous.outputs]
-                )
-            ):
+        if cache_result and not self.force:
+            check = self.ledger.check(name, fp)
+            if check.valid:
+                self.identities[name] = _identity(fp, check.output_sha256)
                 self.skipped.append(name)
                 return fp
+            if self.ledger.get(name) is not None:
+                self.invalidated[name] = check.reason
+        # Withdrawn before any output is touched, so a run stopped halfway through
+        # this step leaves no record vouching for what it half wrote.
+        self.ledger.withdraw(name)
         extra = work() or {}
-        if check_output_bytes:
-            # Probe and preview metadata affect what can be displayed. Restore
-            # changed cached artifacts from their source, not their filenames.
-            extra["output_sha256"] = self._output_hashes(outputs)
-        self.ledger.record(name, fp, outputs, extra)
+        # The commit: every output has to exist, and its bytes are what is recorded.
+        record = self.ledger.record(name, fp, outputs, extra)
+        self.identities[name] = _identity(fp, record.output_sha256 or {})
         self.ran.append(name)
         return fp
 
@@ -222,19 +236,47 @@ def ingest_title(
     source = Path(source).resolve()
     if not source.exists():
         raise PipelineError(f"source file does not exist: {source}")
+    # Maps signed by one key are never reused for another. Only the key's public
+    # identity enters the ledger.
+    signer = None
+    if options.key:
+        from .registry import signer_key_id
+
+        signer = signer_key_id(options.key)
 
     sha = sha256_file(source)
-    layout = TitleLayout(workdir, sha)
+    # Absolute, so every output is recorded relative to the title directory
+    # whatever the current directory is.
+    layout = TitleLayout(Path(workdir).absolute(), sha)
     layout.root.mkdir(parents=True, exist_ok=True)
+    # One preparation of a title at a time. A second invocation refuses at once
+    # rather than rewriting the same outputs underneath the first.
+    with exclusive_lock(layout.ingest_lock_path, what=f"preparation of title {sha[:12]}"):
+        return _prepare(
+            source, sha, layout, options, adapter=adapter, presets=presets,
+            encoding=encoding, diag_in=diag_in, distance_ft=distance_ft,
+            scene_holds_enabled=scene_holds_enabled, signer=signer,
+        )
+
+
+def _prepare(
+    source: Path,
+    sha: str,
+    layout: TitleLayout,
+    options: IngestOptions,
+    *,
+    adapter: FlashmapAdapter,
+    presets: list[str],
+    encoding: dict,
+    diag_in: float | None,
+    distance_ft: float | None,
+    scene_holds_enabled: bool,
+    signer: str | None,
+) -> IngestResult:
     # Re-ingest must withdraw a previous verdict before any cached artifact is
     # trusted. A missing or changed scene image must never leave the old title
     # playable merely because this run failed before writing the final entry.
-    if layout.entry_path.exists():
-        previous_entry = read_entry(layout.entry_path)
-        previous_entry.status = STATUS_PENDING
-        previous_entry.verified = False
-        write_entry(layout.entry_path, previous_entry)
-        update_index(layout.index_path, previous_entry)
+    withdraw_title(layout.index_path, layout.entry_path, sha)
     ledger = Ledger(layout.root)
     stat = source.stat()
     ledger.set_source(
@@ -262,8 +304,7 @@ def ingest_title(
             "frames": probe.frame_count,
         }
 
-    steps.run("probe", {"sha": sha}, [layout.probe_path], do_probe,
-              check_output_bytes=True)
+    steps.run("probe", {"sha": sha}, [layout.probe_path], do_probe)
     probe = probe_holder.get("probe") or VideoProbe.from_dict(
         json.loads(layout.probe_path.read_text())
     )
@@ -275,7 +316,7 @@ def ingest_title(
             doc = adapter.analyze(
                 source,
                 profile=preset,
-                out_path=layout.map_path(preset),
+                out_path=layout.analysis_map_path(preset),
                 diag_in=diag_in,
                 distance_ft=distance_ft,
                 key=options.key,
@@ -290,8 +331,9 @@ def ingest_title(
                 "diag_in": diag_in,
                 "distance_ft": distance_ft,
                 "signed": bool(options.key),
+                "signer": signer,
             },
-            [layout.map_path(preset)],
+            [layout.analysis_map_path(preset)],
             do_analyze,
             depends_on=["probe"],
         )
@@ -302,9 +344,9 @@ def ingest_title(
         def do_plan(preset: str = preset) -> dict:
             from .flashmap_adapter import load_map
 
-            doc = load_map(layout.map_path(preset))
+            doc = load_map(layout.analysis_map_path(preset))
             plan = build_app_playback_plan(
-                {name: load_map(layout.map_path(name)) for name in APP_PLAYBACK_MAPS[preset]},
+                {name: load_map(layout.analysis_map_path(name)) for name in APP_PLAYBACK_MAPS[preset]},
                 source_sha256=sha, duration_ms=duration_ms, preset=preset,
             ) if options.playback_compatible else build_hide_plan(
                 doc,
@@ -416,7 +458,6 @@ def ingest_title(
         [layout.still_path, layout.still_manifest_path],
         do_still,
         depends_on=["luma", *[f"plan:{p}" for p in presets]],
-        check_output_bytes=True,
     )
 
     # 6 to 9, per preset.
@@ -432,7 +473,7 @@ def ingest_title(
                 images = build_scene_holds(
                     source, layout=layout, preset=preset, intervals=plan.intervals,
                     union=union, probe=probe, margin_ms=options.calm_margin_ms,
-                    adapter=adapter,
+                    adapter=adapter, map_path=layout.analysis_map_path(preset),
                 )
                 scene_outputs.extend(image.path for image in images)  # noqa: B023 - steps.run calls it before the loop moves on
                 return {"holds": len(images)}
@@ -446,6 +487,8 @@ def ingest_title(
             scene_images = read_scene_holds(layout, preset)
             scene_bytes = scene_identity(layout, preset)
 
+        rendition_outputs = [layout.safe_master(preset)]
+
         def do_rendition(preset: str = preset, plan: HidePlan = plan) -> dict:
             result = render_safe_master(
                 source,
@@ -456,7 +499,7 @@ def ingest_title(
                 crf=options.crf,
                 x264_preset=options.x264_preset,
                 segment_seconds=options.segment_seconds,
-                pad_tail_ms=tail_to_hold_ms(layout.map_path(preset)),
+                pad_tail_ms=tail_to_hold_ms(layout.analysis_map_path(preset)),
                 scene_holds=scene_images,  # noqa: B023 - steps.run calls it before the loop moves on
                 encode_profile=options.encode_profile,
             )
@@ -465,6 +508,11 @@ def ingest_title(
                 out_dir=layout.hls_dir(preset),
                 probe=probe,
                 segment_seconds=options.segment_seconds,
+            )
+            # Every playlist and segment is an output, so a damaged segment is
+            # caught here and not only by the playlist naming it.
+            rendition_outputs.extend(  # noqa: B023 - steps.run calls it before the loop moves on
+                sorted(path for path in layout.hls_dir(preset).iterdir() if path.is_file())
             )
             return {"master": result.notes, "hls": hls.notes}
 
@@ -477,7 +525,7 @@ def ingest_title(
                 "scene_holds": scene_bytes,
                 "encode_profile": encoding,
             },
-            [layout.safe_master(preset), layout.master_playlist(preset)],
+            rendition_outputs,
             do_rendition,
             depends_on=[f"plan:{preset}", "still"],
         )
@@ -524,7 +572,6 @@ def ingest_title(
             [layout.bif_path(preset), layout.bif_manifest(preset)],
             do_bif,
             depends_on=[f"rendition:{preset}"],
-            check_output_bytes=True,
         )
 
         poster_outputs = [layout.posters_manifest(preset)]
@@ -571,13 +618,14 @@ def ingest_title(
             poster_outputs,
             do_posters,
             depends_on=[f"rendition:{preset}"],
-            check_output_bytes=True,
         )
 
         def do_signed_map(preset: str = preset) -> dict:
             from .flashmap_adapter import load_map
 
-            doc = load_map(layout.map_path(preset))
+            # Built from the analyzer's own map every time, never from the map this
+            # step published last, so a damaged published map cannot feed itself.
+            doc = load_map(layout.analysis_map_path(preset))
             if doc.source_sha256 != sha:
                 raise PipelineError(
                     f"the {preset} map is bound to {doc.source_sha256}, not to this "
@@ -609,11 +657,15 @@ def ingest_title(
                 else:
                     document.pop("signature", None)
                 write_registry(document, layout.map_path(preset))
+            else:
+                # Nothing to add, so the published map is the analyzer's own bytes.
+                atomic_write_bytes(layout.map_path(preset),
+                                   layout.analysis_map_path(preset).read_bytes())
             return {"signed": doc.is_signed, "bound": True}
 
         steps.run(
             f"signed_map:{preset}",
-            {"key": bool(options.key), "scene_holds": scene_bytes},
+            {"key": bool(options.key), "signer": signer, "scene_holds": scene_bytes},
             [layout.map_path(preset)],
             do_signed_map,
             depends_on=[f"analyze:{preset}"],
@@ -695,24 +747,19 @@ def ingest_title(
         entry=entry,
         steps_run=list(steps.ran),
         steps_skipped=list(steps.skipped),
+        invalidated=dict(steps.invalidated),
+        ledger_events=list(ledger.events),
     )
 
     if options.skip_verify:
         return result
 
     # 11. Verify. A pass is cached, a failure never is.
-    previous = ledger.get("verify")
-    verify_payload = {
-        "scene_verification_version": 2,
-        "presets": presets,
-        "pub": options.pub,
-        "public_key_bytes": sha256_file(options.pub) if options.pub and Path(options.pub).is_file() else None,
-        "calm_margin_ms": options.calm_margin_ms,
-        "playback_recipe": APP_PLAYBACK_RECIPE if options.playback_compatible else None,
+    def artifact_bytes() -> dict[str, str | None]:
         # An unchanged filename or a cached report is not evidence that the
         # same map, image or encoded output is still on disk.
-        "artifact_bytes": {
-            str(path): sha256_file(path) if path.is_file() else None
+        paths = {
+            path
             for preset in presets
             for path in (
                 layout.probe_path, layout.still_path, layout.still_manifest_path,
@@ -721,31 +768,47 @@ def ingest_title(
                 layout.scene_manifest(preset),
                 layout.bif_path(preset), layout.bif_manifest(preset),
                 layout.posters_manifest(preset),
-                *sorted(layout.posters_dir(preset).glob("*")),
-                *sorted(layout.hls_dir(preset).glob("*")),
+                *layout.posters_dir(preset).glob("*"),
+                *layout.hls_dir(preset).glob("*"),
             )
-        },
+        }
+        return {
+            layout.relative(path): sha256_file(path) if path.is_file() else None
+            for path in sorted(paths)
+        }
+
+    checked_bytes = artifact_bytes()
+    verify_payload = {
+        "scene_verification_version": 2,
+        "presets": presets,
+        "pub": options.pub,
+        "public_key_bytes": sha256_file(options.pub) if options.pub and Path(options.pub).is_file() else None,
+        "calm_margin_ms": options.calm_margin_ms,
+        "playback_recipe": APP_PLAYBACK_RECIPE if options.playback_compatible else None,
+        "artifact_bytes": checked_bytes,
         "scene_assets": {
             preset: scene_identity(layout, preset)
             for preset in presets if scene_holds_enabled and options.key
         },
     }
     parents = {
-        name: steps.fingerprints[name]
-        for name in steps.fingerprints
+        name: steps.identities[name]
+        for name in steps.identities
         if name.split(":")[0]
         in {"probe", "plan", "rendition", "bif", "posters", "still", "scene_holds", "signed_map", "cover_model"}
     }
     verify_fp = fingerprint(
         {"v": VERSION, "step": "verify", "in": verify_payload, "parents": parents}
     )
+    report_name = layout.relative(layout.verify_report_path)
+    previous = ledger.get("verify")
+    check = ledger.check("verify", verify_fp)
     cached_pass = (
         not options.force
+        and check.valid
         and previous is not None
-        and previous.fingerprint == verify_fp
         and previous.extra.get("passed") is True
-        and layout.verify_report_path.exists()
-        and previous.extra.get("report_sha256") == sha256_file(layout.verify_report_path)
+        and previous.extra.get("report_sha256") == check.output_sha256.get(report_name)
     )
     if cached_pass:
         report_data = json.loads(layout.verify_report_path.read_text())
@@ -753,13 +816,16 @@ def ingest_title(
         # verdict from the cached report has to be put back on it. Without
         # this a second run would quietly drop a verified title out of kid
         # mode.
-        apply_to_catalog(layout, VerifyReport.from_dict(report_data))
+        _publish(layout, VerifyReport.from_dict(report_data), checked_bytes, artifact_bytes)
         result.steps_skipped.append("verify")
         result.verify_passed = bool(report_data.get("passed"))
         result.verify_report = report_data
         result.entry = _reload_entry(layout, result.entry)
         return result
+    if previous is not None and not options.force:
+        result.invalidated["verify"] = check.reason if not check.valid else "the recorded verdict was not a pass"
 
+    ledger.withdraw("verify")
     report = verify_title(
         layout,
         source=source,
@@ -772,15 +838,25 @@ def ingest_title(
         calm_margin_ms=options.calm_margin_ms,
         rerender_cover_model=False,
     )
+    if artifact_bytes() != checked_bytes:
+        # Something wrote into the title while verify was reading it, such as an
+        # encoder left running by a killed run. A verdict about bytes that moved
+        # underneath it is no verdict, so nothing is recorded or published.
+        raise PipelineError(
+            "prepared artifacts changed while verify was checking them; the verdict was "
+            "not recorded and the title stays out of kid mode. Run the preparation again."
+        )
     write_report(layout, report)
-    apply_to_catalog(layout, report)
     ledger.record(
         "verify",
         verify_fp,
         [layout.verify_report_path],
         {"passed": report.passed, "failures": [c.name for c in report.failures],
-         "report_sha256": sha256_file(layout.verify_report_path)},
+         "report_sha256": sha256_file(layout.verify_report_path),
+         # Exactly the bytes this verdict is about. A receipt has to name these.
+         "artifact_sha256": {name: digest for name, digest in checked_bytes.items() if digest is not None}},
     )
+    _publish(layout, report, checked_bytes, artifact_bytes)
     result.steps_run.append("verify")
     result.verify_passed = report.passed
     result.verify_report = report.to_dict()
@@ -788,6 +864,28 @@ def ingest_title(
     if not report.passed:
         result.entry.status = STATUS_FAILED
     return result
+
+
+def _publish(
+    layout: TitleLayout,
+    report: VerifyReport,
+    checked_bytes: dict[str, str | None],
+    artifact_bytes: Callable[[], dict[str, str | None]],
+) -> None:
+    """Write verify's verdict where kid mode reads it, last.
+
+    A pass is published only for the bytes verify checked, and only once they are
+    on the device, so a power loss cannot leave a verified entry in front of
+    artifacts that never reached the disk.
+    """
+    if report.passed:
+        sync_files([layout.root / name for name in checked_bytes])
+        if artifact_bytes() != checked_bytes:
+            raise PipelineError(
+                "prepared artifacts changed after verify checked them; the title stays "
+                "out of kid mode. Run the preparation again."
+            )
+    apply_to_catalog(layout, report)
 
 
 def _reload_entry(layout: TitleLayout, fallback: CatalogEntry) -> CatalogEntry:
@@ -902,6 +1000,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "publishable": result.publishable,
                 "steps_run": result.steps_run,
                 "steps_skipped": result.steps_skipped,
+                "invalidated": result.invalidated,
+                "ledger_events": result.ledger_events,
             }
         )
 

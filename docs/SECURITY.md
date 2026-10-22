@@ -216,12 +216,15 @@ verify passes with the new key.
            --pub ~/.calm-frames/keys/team_key_2026-10-21.pub.pem \
            --force
 
-   **`--force` is not optional here.** The pipeline skips work it has already
-   done, and the fingerprint for the analyze step records only whether a key was
-   used, not which key (`pipeline/ingest.py`, the `analyze:<preset>` step, which
-   hashes `"signed": bool(options.key)`). Without `--force` the analysis is
-   skipped, the map keeps its old signature, and everything downstream looks
-   fine until a player with the new public key refuses the title.
+   **`--force` is no longer what makes this work, though it does no harm.**
+   Until October 21 the fingerprint for the analyze step recorded only whether a
+   key was used, not which key, so without `--force` the analysis was skipped
+   and the map kept its old signature until a player with the new public key
+   refused the title. The analyze and signed-map fingerprints now include the
+   signing key's public key id (`signer_key_id` in `pipeline/registry.py`), so a
+   new key analyzes and signs every map again, and everything built from those
+   maps runs again with them. `--force` adds only the probe and the luminance
+   pass. See [PREPARATION_RECOVERY.md](PREPARATION_RECOVERY.md).
 
 5. **Check that it took.** The key id in each map must be the new one:
 

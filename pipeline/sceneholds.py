@@ -162,10 +162,12 @@ def build_scene_holds(
     probe: VideoProbe,
     margin_ms: float,
     adapter: FlashmapAdapter,
+    map_path: Path | None = None,
 ) -> list[SceneHold]:
     holds: list[SceneHold] = []
     total = 0
-    source_document = json.loads(layout.map_path(preset).read_text())
+    # Ingest passes the analyzer's own map, which is what these holds get signed into.
+    source_document = json.loads((map_path or layout.map_path(preset)).read_text())
     for index, interval in enumerate(intervals[:MAX_HOLDS]):
         path = layout.scene_image(preset, index)
         selected = preceding_frame_ms(interval, union, probe, margin_ms=margin_ms)
