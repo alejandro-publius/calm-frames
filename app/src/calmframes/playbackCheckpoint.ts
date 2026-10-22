@@ -84,19 +84,21 @@ export function createCheckpointStore(storage: CheckpointStorage, now = Date.now
     open(rawIdentity: CheckpointIdentity) {
       const identity = validateCheckpointIdentity(rawIdentity), key = slot(identity);
       const owner = (owners.get(key) ?? 0) + 1; owners.set(key, owner);
-      let closed = false;
+      let closed = false, saving = false;
       const current = () => owners.get(key) === owner;
       const write = (record: PlaybackCheckpoint | null) => enqueue(async () => {
-        if (!current()) return false;
+        if (record && !current()) return false;
         try {
-          const records = decode(await storage.getItem(CHECKPOINT_KEY), now());
-          if (!current()) return false;
+          const raw = await storage.getItem(CHECKPOINT_KEY);
+          let records: PlaybackCheckpoint[];
+          try { records = decode(raw, now()); } catch { records = []; }
+          if (record && !current()) return false;
           const next = records.filter(row => slot(row.identity) !== key);
           if (record) next.unshift(record);
-          const raw = JSON.stringify({ version: 1, records: next.slice(0, MAX_CHECKPOINTS) });
-          if (raw.length > MAX_CHECKPOINT_BYTES) return false;
-          await storage.setItem(CHECKPOINT_KEY, raw);
-          return current();
+          const encoded = JSON.stringify({ version: 1, records: next.slice(0, MAX_CHECKPOINTS) });
+          if (encoded.length > MAX_CHECKPOINT_BYTES) return false;
+          await storage.setItem(CHECKPOINT_KEY, encoded);
+          return record ? current() : true;
         } catch { return false; }
       });
       return {
@@ -109,11 +111,12 @@ export function createCheckpointStore(storage: CheckpointStorage, now = Date.now
           } catch { return null; }
         }),
         save(record: PlaybackCheckpoint): Promise<boolean> {
-          if (closed || !current()) return Promise.resolve(false);
+          if (closed || saving || !current()) return Promise.resolve(false);
           try {
             const checked = validateCheckpoint(record, now());
             if (checkpointIdentityKey(checked.identity) !== checkpointIdentityKey(identity)) return Promise.resolve(false);
-            return write(checked);
+            saving = true;
+            return write(checked).finally(() => {saving = false;});
           } catch { return Promise.resolve(false); }
         },
         clear(): Promise<boolean> {

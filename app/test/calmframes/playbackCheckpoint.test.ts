@@ -52,3 +52,22 @@ test('storage failures are optional, not playback failures', async () => {
   const session = store.open(identity);
   expect(await session.load()).toBeNull(); expect(await session.save(record())).toBe(false);
 });
+
+test('Start over is ordered before a successor session even when its delete is queued', async () => {
+  const {store} = memory(); await store.open(identity).save(record());
+  const clearing = store.open(identity).clear(); const next = store.open(identity);
+  expect(await clearing).toBe(true); expect(await next.load()).toBeNull();
+  expect(await next.save(record({positionMs: 4000}))).toBe(true);
+});
+test('new valid history heals corrupt JSON without treating storage IO failure as an empty file', async () => {
+  const {store, set} = memory(); set('{broken'); const next = store.open(identity);
+  expect(await next.save(record())).toBe(true); expect(await next.load()).toEqual(record());
+});
+test('a slow storage write does not accumulate a queue of playback samples', async () => {
+  let finish!: (value: string | null) => void;
+  const storage = {getItem: () => new Promise<string | null>(resolve => {finish = resolve;}), setItem: jest.fn(async () => {})};
+  const session = createCheckpointStore(storage, () => now).open(identity);
+  const first = session.save(record()); await Promise.resolve();
+  expect(await session.save(record({positionMs: 140000}))).toBe(false);
+  finish(null); expect(await first).toBe(true); expect(storage.setItem).toHaveBeenCalledTimes(1);
+});

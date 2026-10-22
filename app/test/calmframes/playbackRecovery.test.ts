@@ -16,31 +16,30 @@ function harness(paused = false) {
 const tick = async () => { await Promise.resolve(); await Promise.resolve(); await Promise.resolve(); };
 beforeEach(() => jest.useFakeTimers());
 afterEach(() => jest.useRealTimers());
-test('cover precedes the guarded seek; fresh native seek and timeline feedback precede play', async () => {
+test.each([['timeupdate', 'seeked'], ['seeked', 'timeupdate']])('cover precedes seek; native %s then %s confirms recovery', async (first, second) => {
   const h = harness(); expect(h.seek).not.toHaveBeenCalled(); h.show(); await tick();
   expect(h.seek).toHaveBeenCalledWith(135000); expect(h.media.play).not.toHaveBeenCalled();
-  h.emit('timeupdate'); expect(h.phases).not.toContain('ready');
-  h.emit('seeked'); expect(h.phases).not.toContain('ready');
-  h.emit('timeupdate'); await tick(); expect(h.media.play).toHaveBeenCalledTimes(1);
+  h.emit(first); expect(h.phases).not.toContain('ready');
+  h.emit(second); await tick(); expect(h.media.play).toHaveBeenCalledTimes(1);
   expect(h.phases).toEqual(['covered', 'seeking', 'confirming', 'ready']);
 });
 test('paused recovery restores position without starting audio', async () => {
   const h = harness(true); h.show(); await tick(); h.emit('seeked'); h.emit('timeupdate'); await tick();
-  expect(h.media.play).not.toHaveBeenCalled(); expect(h.phases.at(-1)).toBe('ready');
+  expect(h.media.play).not.toHaveBeenCalled(); expect(h.phases[h.phases.length - 1]).toBe('ready');
 });
 test.each(['seeked', 'timeupdate'])('missing native %s fails closed with no timeout fallback', async missing => {
   const h = harness(); h.show(); await tick();
   if (missing !== 'seeked') h.emit('seeked');
   if (missing !== 'timeupdate') h.emit('timeupdate');
-  jest.advanceTimersByTime(RECOVERY_TIMEOUT_MS); expect(h.phases.at(-1)).toBe('failed');
+  jest.advanceTimersByTime(RECOVERY_TIMEOUT_MS); expect(h.phases[h.phases.length - 1]).toBe('failed');
   expect(h.media.play).not.toHaveBeenCalled(); h.emit('seeked'); h.emit('timeupdate'); await tick();
-  expect(h.phases.at(-1)).toBe('failed');
+  expect(h.phases[h.phases.length - 1]).toBe('failed');
 });
 test('wrong or uncertain position cannot release the recovery cover', async () => {
   const h = harness(); h.show(); await tick(); h.media.currentTime = 10;
   h.emit('seeked'); h.emit('timeupdate'); await tick(); expect(h.media.play).not.toHaveBeenCalled();
   h.media.currentTime = 135; h.media.seeking = true; h.emit('seeked'); h.emit('timeupdate');
-  jest.advanceTimersByTime(RECOVERY_TIMEOUT_MS); expect(h.phases.at(-1)).toBe('failed');
+  jest.advanceTimersByTime(RECOVERY_TIMEOUT_MS); expect(h.phases[h.phases.length - 1]).toBe('failed');
 });
 test('Back during cover presentation cancels the late seek and all retries', async () => {
   const h = harness(); h.recovery.cancel(); h.show(); await tick(); jest.runAllTimers();
@@ -50,7 +49,7 @@ test('obsolete play completion pauses the old instance instead of exposing it', 
   const h = harness(); let done!: () => void; h.media.play.mockImplementation(() => new Promise(resolve => {done = resolve;}));
   h.show(); await tick(); h.emit('seeked'); h.emit('timeupdate'); await tick();
   h.invalidate(); h.recovery.cancel(); done(); await tick();
-  expect(h.phases.at(-1)).toBe('canceled'); expect(h.media.pause).toHaveBeenCalled();
+  expect(h.phases[h.phases.length - 1]).toBe('canceled'); expect(h.media.pause).toHaveBeenCalled();
   expect(h.phases).not.toContain('ready');
 });
 test('a native error ends one attempt; it never reconstructs itself automatically', async () => {

@@ -49,6 +49,9 @@ export interface SafeMediaControlDeps {
   getCurrentMs: () => number;
   /** How far a fast forward or rewind press moves. */
   stepMs?: number;
+  /** While a recovered player is being reconstructed, transport must not race its seek. */
+  canControl?: () => boolean;
+  onBlockedPause?: () => void;
 }
 
 export class SafeMediaControlHandler extends KeplerMediaControlHandler {
@@ -64,6 +67,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   }
 
   private async goTo(command: string, targetMs: number): Promise<void> {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     const plan = await this.deps.engine.requestSeek('media-control', targetMs);
     console.log(
       `[SafeMediaControlHandler.ts] - ${command} - asked for ${Math.round(
@@ -116,15 +120,17 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
     await this.goTo('handleStartOver', 0);
   }
 
-  // None of these moves the playhead, so each one logs and then lets the base
-  // class do exactly what it did before. They are here only for the line.
+  // Forward ordinary transport only while the owning player permits it.
+  // Recovery and teardown refuse commands from stale native sessions.
 
   handlePlay(...args: Parameters<KeplerMediaControlHandler['handlePlay']>) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log('[SafeMediaControlHandler.ts] - handlePlay - passed to the player');
     return super.handlePlay(...args);
   }
 
   handlePause(...args: Parameters<KeplerMediaControlHandler['handlePause']>) {
+    if (this.deps.canControl?.() === false) { this.deps.onBlockedPause?.(); return Promise.resolve(); }
     console.log('[SafeMediaControlHandler.ts] - handlePause - passed to the player');
     return super.handlePause(...args);
   }
@@ -132,6 +138,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   handleTogglePlayPause(
     ...args: Parameters<KeplerMediaControlHandler['handleTogglePlayPause']>
   ) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log(
       '[SafeMediaControlHandler.ts] - handleTogglePlayPause - passed to the player',
     );
@@ -139,6 +146,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   }
 
   handleStop(...args: Parameters<KeplerMediaControlHandler['handleStop']>) {
+    if (this.deps.canControl?.() === false) { this.deps.onBlockedPause?.(); return Promise.resolve(); }
     console.log('[SafeMediaControlHandler.ts] - handleStop - passed to the player');
     return super.handleStop(...args);
   }
@@ -146,6 +154,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   handleSetPlaybackSpeed(
     ...args: Parameters<KeplerMediaControlHandler['handleSetPlaybackSpeed']>
   ) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log(
       `[SafeMediaControlHandler.ts] - handleSetPlaybackSpeed - ${args[0]}, passed to the player`,
     );
@@ -155,6 +164,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   handleSetAudioVolume(
     ...args: Parameters<KeplerMediaControlHandler['handleSetAudioVolume']>
   ) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log(
       `[SafeMediaControlHandler.ts] - handleSetAudioVolume - ${args[0]}, passed to the player`,
     );
@@ -164,6 +174,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   handleSetAudioTrack(
     ...args: Parameters<KeplerMediaControlHandler['handleSetAudioTrack']>
   ) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log(
       '[SafeMediaControlHandler.ts] - handleSetAudioTrack - passed to the player',
     );
@@ -173,6 +184,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   handleEnableTextTrack(
     ...args: Parameters<KeplerMediaControlHandler['handleEnableTextTrack']>
   ) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log(
       '[SafeMediaControlHandler.ts] - handleEnableTextTrack - passed to the player',
     );
@@ -182,6 +194,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   handleDisableTextTrack(
     ...args: Parameters<KeplerMediaControlHandler['handleDisableTextTrack']>
   ) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log(
       '[SafeMediaControlHandler.ts] - handleDisableTextTrack - passed to the player',
     );
@@ -189,11 +202,13 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   }
 
   handleNext(...args: Parameters<KeplerMediaControlHandler['handleNext']>) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log('[SafeMediaControlHandler.ts] - handleNext - passed to the player');
     return super.handleNext(...args);
   }
 
   handlePrevious() {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log(
       '[SafeMediaControlHandler.ts] - handlePrevious - passed to the player',
     );
@@ -203,6 +218,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   handleEnableShuffle(
     ...args: Parameters<KeplerMediaControlHandler['handleEnableShuffle']>
   ) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log(
       '[SafeMediaControlHandler.ts] - handleEnableShuffle - passed to the player',
     );
@@ -212,6 +228,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   handleSetRepeatMode(
     ...args: Parameters<KeplerMediaControlHandler['handleSetRepeatMode']>
   ) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log(
       '[SafeMediaControlHandler.ts] - handleSetRepeatMode - passed to the player',
     );
@@ -239,6 +256,7 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
   handleCustomAction(
     ...args: Parameters<KeplerMediaControlHandler['handleCustomAction']>
   ) {
+    if (this.deps.canControl?.() === false) return Promise.resolve();
     console.log(
       '[SafeMediaControlHandler.ts] - handleCustomAction - passed to the player',
     );

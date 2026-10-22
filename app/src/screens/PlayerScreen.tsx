@@ -1,3 +1,8 @@
+import RecoverablePlayback, { RecoveryBinding } from '../calmframes/RecoverablePlayback';
+import { validateCheckpointIdentity, checkpointIdentityKey } from '../calmframes/playbackCheckpoint';
+import { recoverPlayback, RecoveryPhase } from '../calmframes/playbackRecovery';
+import { restoreCaptionChoice, usePlaybackMemory } from '../calmframes/usePlaybackMemory';
+import CalmButton from '../calmframes/CalmButton';
 import AmbientScene, { AmbientArtwork } from '../calmframes/AmbientScene';
 import { continuousEndingForRoute } from '../calmframes/continuousScene';
 import { bakedAmbientForRendition } from '../calmframes/approvedBakedAmbient';
@@ -105,7 +110,8 @@ interface PlayerProps {
 const PlayerScreen = ({
   navigation,
   route,
-}: AppStackScreenProps<Screens.PLAYER_SCREEN>) => {
+  recovery,
+}: AppStackScreenProps<Screens.PLAYER_SCREEN> & { recovery?: RecoveryBinding }) => {
   const { data } = route.params;
   // Calm Frames cover harness. "layering" is the phase 1.5 check and "timing"
   // is the GATE 1 harness; without the parameter the player behaves exactly as
@@ -154,6 +160,12 @@ const PlayerScreen = ({
     React.useState<number>(0);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const leaving = useRef(false);
+  const [recoveryPhase, setRecoveryPhase] = React.useState<RecoveryPhase>(recovery?.start ? 'covered' : 'ready');
+  const [recoveryCoverMounted, setRecoveryCoverMounted] = React.useState(false);
+  const [retryBlocked, setRetryBlocked] = React.useState(false);
+  const recoveryAttempt = useRef<ReturnType<typeof recoverPlayback> | null>(null);
+  const recoveryStarted = useRef(false);
+  const recoveryPending = Boolean(recovery?.start && recoveryPhase !== 'ready');
 
   const videoRef = useRef<VideoPlayer | null>(null);
   const player = useRef<ShakaPlayer | null>(null);
@@ -180,18 +192,16 @@ const PlayerScreen = ({
       return;
     }
     captionsDefaulted.current = true;
-    const shown = showDefaultCaptions(
-      videoRef.current?.textTracks as TextTrackListLike | undefined,
-      data.textTrack,
-      data.id,
-    );
+    const tracks = videoRef.current?.textTracks as TextTrackListLike | undefined;
+    const restored = recovery?.start ? restoreCaptionChoice(tracks, recovery.start.captions) : null;
+    const shown = restored ?? showDefaultCaptions(tracks, data.textTrack, data.id);
     if (shown !== CAPTION_DISABLE_ID) {
       console.log(
         `[PlayerScreen.tsx] - captions - on by default, track ${shown}`,
       );
       setCaptionID(shown);
     }
-  }, [isVideoInitialized, data.textTrack, data.id]);
+  }, [isVideoInitialized, data.textTrack, data.id, recovery?.start]);
 
   const cover = useCoverHarness(videoRef, {
     mode: coverTest,
@@ -274,6 +284,37 @@ const PlayerScreen = ({
       });
     },
   });
+  const memory = usePlaybackMemory({identity: recovery?.identity, initial: recovery?.start,
+    media: videoRef, initialized: isVideoInitialized, verified: guard.status === 'verified',
+    enabled: !isVideoError && !showBuffering && !recoveryPending && !leaving.current,
+    ended: isVideoEnded});
+  const recoveryCurrent = useRef(false);
+  recoveryCurrent.current = guard.status === 'verified' && surfaceReady && !leaving.current && !isVideoError;
+  useEffect(() => {
+    const media = videoRef.current;
+    if (!recovery?.start || recoveryStarted.current || !media || !isVideoInitialized ||
+        !surfaceReady || !recoveryCoverMounted || guard.status !== 'verified') return;
+    recoveryStarted.current = true;
+    recoveryAttempt.current = recoverPlayback({media, positionMs: recovery.start.positionMs,
+      paused: recovery.start.paused,
+      current: () => recoveryCurrent.current && videoRef.current === media && !leaving.current,
+      presentCover: async () => { /* The opaque view's onLayout has already fired. */ },
+      seek: position => guard.requestSeek('recovery', position),
+      phase: next => {
+        if (leaving.current) return;
+        setRecoveryPhase(next);
+        trace('playback', `recovery ${next}`);
+        if (next === 'failed') setVideoError(true);
+      }});
+    // Each keyed player instance owns exactly one explicit recovery attempt.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isVideoInitialized, surfaceReady, recoveryCoverMounted, guard.status]);
+  useEffect(() => () => { recoveryAttempt.current?.cancel(); }, []);
+  useEffect(() => {
+    if (recoveryPending && guard.status === 'blocked') {
+      recoveryAttempt.current?.cancel(); setVideoError(true);
+    }
+  }, [recoveryPending, guard.status]);
   // The courtesy sound. useChimeCue decides whether a chime is owed and
   // refuses to raise one that no cover follows, so everything this call does is
   // hand it the numbers the guard already reports and a way to make a noise.
@@ -284,7 +325,7 @@ const PlayerScreen = ({
     mediaTimeMs: guard.mediaTimeMs,
     covered: guard.covered,
     verified: guard.status === 'verified',
-    enabled: guardedParams?.chimeEnabled !== false,
+    enabled: guardedParams?.chimeEnabled !== false && !recoveryPending,
     playChime,
     titleId: guardedParams?.titleId ?? data.id,
   });
@@ -309,9 +350,9 @@ const PlayerScreen = ({
     }
   }, [guarding, guard.status, evidenceTrace]);
 
-  const homeOpening = route.params.showHomeOpening === true && guarding && !isVideoError && guard.status !== 'blocked';
+  const homeOpening = (recovery?.start ? recoveryPending : route.params.showHomeOpening === true) && guarding && !isVideoError && guard.status !== 'blocked';
   const openingFrameReady = useOpeningFrame({ media: videoRef, enabled: homeOpening && !returningHome,
-    verified: guard.status === 'verified', surfaceReady, frameGeneration, onTimeout: () => setVideoError(true) });
+    verified: guard.status === 'verified' && !recoveryPending, surfaceReady, frameGeneration, onTimeout: () => setVideoError(true) });
   const showOpeningShell = Boolean(homeOpening && !openingFrameReady || returningHome && route.params.showHomeOpening);
   // The measurement harness and the guard never run at once: a run is a
   // measurement, kid mode is the product.
@@ -332,7 +373,7 @@ const PlayerScreen = ({
   }
   // A failed player has no advancing timeline. Keep its picture hidden and
   // remove the stale countdown/Skip control above the recovery screen.
-  if (isVideoError) {
+  if (isVideoError || recoveryPending) {
     covered = true;
     card = NO_CARD;
   }
@@ -343,7 +384,7 @@ const PlayerScreen = ({
   const sceneBridge = preparedRouteAccepted && extraCoverAsset &&
     guard.scheduledCover && !paused && !showBuffering && !isVideoEnded &&
     !isVideoError && !returningHome && !showOpeningShell
-    ? resolveSceneBridge(sceneBridgesForAsset(extraCoverAsset), extraCoverAsset,
+    && !recoveryPending ? resolveSceneBridge(sceneBridgesForAsset(extraCoverAsset), extraCoverAsset,
         guard.baseIntervals, guard.mediaTimeMs)
     : undefined;
   const bakedAmbientVisible = mayShowBakedAmbient(
@@ -351,7 +392,7 @@ const PlayerScreen = ({
     guardedParams?.settings?.preset, playbackEvidence?.maps ?? [], guard.baseIntervals,
     guard.mediaTimeMs, { acceptedPreparedRoute: preparedRouteAccepted, verified: guard.status === 'verified',
       scheduledCover: guard.scheduledCover, buffering: showBuffering || slowPlayback,
-      paused, opening: showOpeningShell, returning: returningHome, ended: isVideoEnded, error: isVideoError,
+      paused, opening: showOpeningShell || recoveryPending, returning: returningHome, ended: isVideoEnded, error: isVideoError,
       personalCoversReady: extraCovers.status === 'ready', personalCoverCount: extraCovers.record?.additions.length ?? -1 });
   card = playbackCard(card, { paused, covered, buffering: showBuffering, slow: slowPlayback,
     ended: isVideoEnded, practice: benignDemo, oceanVisible: bakedAmbientVisible });
@@ -395,12 +436,16 @@ const PlayerScreen = ({
   // every one of them through the same seek function the on-screen controls
   // use, so a spoken "skip forward" cannot land inside a flagged part with the
   // picture showing.
+  const transportReady = useRef(false);
+  transportReady.current = !recoveryPending && !isVideoError;
   const mediaControlHandler = React.useMemo(
     () =>
       guarding
         ? new SafeMediaControlHandler({
             engine: guard.seekEngine,
             getCurrentMs: () => (videoRef.current?.currentTime ?? 0) * 1000,
+            canControl: () => !leaving.current && transportReady.current,
+            onBlockedPause: () => { recoveryAttempt.current?.cancel(); if (!leaving.current) setVideoError(true); },
           })
         : undefined,
     [guarding, guard.seekEngine],
@@ -488,6 +533,7 @@ const PlayerScreen = ({
   useEffect(() => {
     return () => {
       leaving.current = true;
+      recoveryAttempt.current?.cancel();
       surfaceGeneration.current += 1;
       /**
        * When the player is unmounted we check if the instance was destroyed correctly,
@@ -518,7 +564,9 @@ const PlayerScreen = ({
     if (leaving.current) {
       return true;
     }
+    memory.capture();
     leaving.current = true;
+    recoveryAttempt.current?.cancel();
     surfaceGeneration.current += 1;
     trace('playback', 'back');
     if (route.params.showHomeOpening) setReturningHome(true);
@@ -699,9 +747,9 @@ const PlayerScreen = ({
         bifFrameImagesRef.current?.clearCache();
         bifFrameImagesRef.current = frames;
       }
-      if (current()) playVideo();
+      if (current() && !recovery?.start) playVideo();
     } catch { if (current()) setVideoError(true); }
-  }, [data.bifUrl, playVideo]);
+  }, [data.bifUrl, playVideo, recovery?.start]);
 
   const onSurfaceViewCreated = useCallback((handle: string): void => {
     if (leaving.current || surfaceHandle.current === handle) return;
@@ -720,8 +768,10 @@ const PlayerScreen = ({
     setSurfaceReady(false);
     setFrameGeneration(surfaceGeneration.current);
     videoRef.current?.clearSurfaceHandle(handle);
+    recoveryAttempt.current?.cancel();
+    if (recovery?.start) setVideoError(true);
     trace('playback', 'surface-lost');
-  }, []);
+  }, [recovery?.start]);
 
   const onCaptionViewCreated = useCallback((captionsHandle: string): void => {
     console.info(
@@ -749,6 +799,27 @@ const PlayerScreen = ({
       (videoRef.current as VideoPlayer).clearCaptionViewHandle(captionsHandle);
     }
     captionViewHandle.current = null;
+  };
+
+  const retryPlayback = () => {
+    const checkpoint = memory.last.current;
+    if (!recovery || !checkpoint || leaving.current || retryBlocked || guard.status !== 'verified') return;
+    leaving.current = true;
+    recoveryAttempt.current?.cancel();
+    surfaceGeneration.current += 1;
+    let destroyed = false;
+    try {
+      videoRef.current?.pause();
+      videoRef.current?.clearSurfaceHandle('');
+      videoRef.current?.clearCaptionViewHandle('');
+      destroyed = !videoRef.current || videoHandler.destroyVideoElements();
+    } catch { /* An uncertain native teardown must not create a second decoder. */ }
+    if (!destroyed) {
+      // Do not create another native player while teardown is unconfirmed.
+      leaving.current = false; setRetryBlocked(true); setVideoError(true); return;
+    }
+    videoRef.current = null; surfaceHandle.current = null; captionViewHandle.current = null;
+    recovery.retry(checkpoint);
   };
 
   if (isVideoEnded && continuousEnding && guard.status === 'verified') {
@@ -864,8 +935,14 @@ const PlayerScreen = ({
             }
           />
         )}
+        {recoveryPending && <View testID="recovery-picture-barrier" pointerEvents="none"
+          onLayout={() => setRecoveryCoverMounted(true)} style={styles.recoveryCover} />}
+        {!showOpeningShell && slowPlayback && !isVideoError && !retryBlocked && recovery && memory.last.current &&
+          <View style={styles.recoveryAction}><CalmButton label="Try again" sound={false} testID="slow-playback-retry" onPress={retryPlayback} /></View>}
         {showOpeningShell && <PlayerOpening title={data.title} menuArt={data.calmMenuArt} returning={returningHome} checking={guard.status !== 'verified'} motionEnabled={route.params.interfaceMotionEnabled === true} onBack={leavePlayer} />}
-        {isVideoError && !returningHome && <ErrorView navigateBack={leavePlayer} />}
+        {isVideoError && !returningHome && <ErrorView navigateBack={leavePlayer}
+          onRetry={!retryBlocked && recovery && memory.last.current && guard.status === 'verified' ? retryPlayback : undefined}
+          recoveryBlocked={retryBlocked} />}
       </View>
     </SafeAreaView>
     </CoastalAppearance.Provider>
@@ -878,9 +955,30 @@ const arePlayerPropsEqual = (
 ) => {
   return isEqual(prevProps, nextProps);
 };
-export default React.memo(PlayerScreen, arePlayerPropsEqual);
+const RecoverablePlayerScreen = (props: AppStackScreenProps<Screens.PLAYER_SCREEN>) => {
+  const {data, guarded, ambientPreview, coverTest} = props.route.params;
+  let identity;
+  try {
+    if (!ambientPreview && (!coverTest || coverTest === 'off') && guarded?.profileId && packagedLibrary.acceptsRoute(data, guarded)) {
+      identity = validateCheckpointIdentity({profileId: guarded.profileId, titleId: data.id, uri: data.uri,
+        sourceSha256: guarded.sha256, renditionSha256: guarded.renditionSha256,
+        durationMs: guarded.durationMs, startOffsetMs: guarded.renditionStartOffsetMs ?? 0});
+    }
+  } catch { /* Optional recovery cannot grant access or block the ordinary guard path. */ }
+  if (!identity) return <PlayerScreen {...props} />;
+  return <RecoverablePlayback key={checkpointIdentityKey(identity)} identity={identity}
+    title={data.title} menuArt={data.calmMenuArt} onBack={() => {
+      if (props.route.params.focusId) focusManager.restoreFocus(`player_return_${props.route.params.focusId}`);
+      props.navigation.goBack();
+    }}>
+    {(recovery, generation) => <PlayerScreen key={generation} {...props} recovery={recovery} />}
+  </RecoverablePlayback>;
+};
+export default React.memo(RecoverablePlayerScreen, arePlayerPropsEqual);
 
 export const styles = StyleSheet.create({
+  recoveryCover: {...StyleSheet.absoluteFillObject, backgroundColor: CALM_COLORS.COVER, zIndex: 4},
+  recoveryAction: {position: 'absolute', right: scale(96), top: scale(160), zIndex: 5},
   // Where captions are drawn: the renderer stacks cue lines upward from this
   // view's bottom edge, so the bottom of the picture is theirs. The card and
   // the practice plate keep clear of this band. The compact scene control

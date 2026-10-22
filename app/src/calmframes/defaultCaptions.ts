@@ -1,7 +1,7 @@
 /** Initial caption choice. Dialogue tracks remain on by default. The two
  * bundled ambient Harbor films use optional visual descriptions, so start
  * those Off. This runs once per player; explicit menu choices own it afterward.
- * There is currently no persisted caption preference.
+ * A validated playback checkpoint can restore an explicit choice before this default.
  */
 
 import { CAPTION_DISABLE_ID } from '../constants';

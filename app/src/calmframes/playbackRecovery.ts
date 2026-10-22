@@ -58,15 +58,19 @@ export function recoverPlayback(deps: {
   try {
     media.pause();
     listen('seeking', () => { if (seekIssued) { seekSettled = false; freshTimeline = false; } });
-    listen('seeked', () => { if (valid() && seekIssued && targetReady()) seekSettled = true; });
+    listen('seeked', () => {
+      if (valid() && seekIssued && targetReady()) { seekSettled = true; confirm(); }
+    });
     listen('timeupdate', () => {
       if (!valid()) return;
-      if (seekSettled && targetReady()) { freshTimeline = true; void confirm(); }
+      // Native implementations may deliver timeupdate before seeked. Both must
+      // belong to this issued seek and report its settled target.
+      if (seekIssued && targetReady()) { freshTimeline = true; confirm(); }
     });
     listen('error', () => stop('failed'));
     listen('ended', () => stop('failed'));
     timer = setTimeout(() => stop('failed'), RECOVERY_TIMEOUT_MS);
-    void (async () => {
+    (async () => {
       try {
         await deps.presentCover();
         if (!valid()) return;
@@ -74,7 +78,7 @@ export function recoverPlayback(deps: {
         deps.phase('seeking'); seekIssued = true;
         await deps.seek(deps.positionMs);
         if (!valid()) return;
-        seekReturned = true; void confirm();
+        seekReturned = true; confirm();
       } catch { stop('failed'); }
     })();
   } catch { stop('failed'); }
