@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Architecture and code map | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../evidence/architecture-source.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><blockquote>
+<p>Historical source excerpt copied from <code>docs/presentation/ARCHITECTURE.md</code> at <code>13551e4</code>. Local references now point to immutable source or bundled assets. Publication wording describes its original checkpoint, not current status.</p>
+</blockquote>
+<h1 id="architecture-and-code-map">Architecture and code map</h1>
+<p><img src="../assets/architecture.png" alt="Source preparation, approval and native playback"></p>
+<p>The rendered diagram describes the current packaged-media path. It is not a network service topology. The shipped app reads approved local media; the preparation tools run separately.</p>
+<pre><code class="language-mermaid">flowchart TD
+    source[Licensed source + attribution + source hash]
+    analysis[flashmap analysis + signed maps]
+    render[Preset rendering]
+    verify[Verification of exact output bytes]
+    export[Authenticated packaged library]
+    build[Compiled approval registry + strict build checks]
+    home[Home / Details / explicit Watch]
+    route[Exact catalog route + signed map verification]
+    guard[useFlashGuard: covers + guarded seeks]
+    player[Vega W3C media player]
+    hold[Exact McWay final frame until Back]
+    blocked[Picture remains covered]
+    source --&gt; analysis --&gt; render --&gt; verify --&gt; export --&gt; build
+    build --&gt; home --&gt; route
+    route --&gt;|accepted| guard
+    route --&gt;|unresolved or rejected| blocked
+    guard --&gt; player
+    player --&gt;|McWay ends| hold
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Responsibility</th>
+<th>Actual implementation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Analyzer and signature format</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/flashmap/README.md">flashmap</a></td>
+</tr>
+<tr>
+<td>Preparation orchestration</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/local_library.py">local_library.py</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/ingest.py">ingest.py</a></td>
+</tr>
+<tr>
+<td>Planned coverage and encoding</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/hideplan.py">hideplan.py</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/render.py">render.py</a></td>
+</tr>
+<tr>
+<td>Output/source checks, reanalysis and report</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/verify.py">verify.py</a></td>
+</tr>
+<tr>
+<td>Normal authenticated library export</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/packaged_library.py">packaged_library.py</a></td>
+</tr>
+<tr>
+<td>Replacement ambience preparation and reproduction</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/ambient.py">ambient.py</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/ambient_export.py">ambient_export.py</a></td>
+</tr>
+<tr>
+<td>Compiled approvals and package gates</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/config/approved-prepared-libraries.json">approved-prepared-libraries.json</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/tools/check_prepared_library.mjs">check_prepared_library.mjs</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/tools/approved_baked_ambient.mjs">approved_baked_ambient.mjs</a></td>
+</tr>
+<tr>
+<td>Home and title information</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/KidHomeScreen.tsx">KidHomeScreen.tsx</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/TitleDetailsScreen.tsx">TitleDetailsScreen.tsx</a></td>
+</tr>
+<tr>
+<td>Exact catalog/route binding</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/packagedLibrary.ts">packagedLibrary.ts</a></td>
+</tr>
+<tr>
+<td>Signed map verification</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/flashMap.ts">flashMap.ts</a></td>
+</tr>
+<tr>
+<td>Cover timing and seek entry point</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/useFlashGuard.ts">useFlashGuard.ts</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/seekSafety.ts">seekSafety.ts</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/CoverLayer.tsx">CoverLayer.tsx</a></td>
+</tr>
+<tr>
+<td>Native player and end dispatch</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/screens/PlayerScreen.tsx">PlayerScreen.tsx</a></td>
+</tr>
+<tr>
+<td>Exact McWay identity and final still</td>
+<td><a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/continuousScene.ts">continuousScene.ts</a>, <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/app/src/calmframes/AmbientScene.tsx">AmbientScene.tsx</a></td>
+</tr>
+</tbody></table>
+<p>The alternate ambient export path is used for prepared replacement imagery where required. McWay uses its own continuous approved edition. A prepared candidate, a verified export, a compiled approval and observed native playback are different milestones.</p>
+<p>The final-frame still is a presentation asset bound to the exact McWay edition. It is not a signed protective cover and does not weaken the guard. The source, rendition and catalog identities remain distinct.</p>
+<p><a href="../assets/architecture.svg">SVG</a> and <a href="../assets/architecture.png">PNG</a> are generated by <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/presentation/render_architecture.py">render_architecture.py</a> using the existing project fonts and Pillow. The diagram is static and contains no external resources or scripts. The Mermaid graph provides a text-based alternative.</p>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../evidence/architecture-source.md">docs/judging-package/evidence/architecture-source.md</a></p><p>Source SHA-256: <code>9e48af98b05f8d372acb9e191b323805e9dab094a28c6d226a4effbcf002499f</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

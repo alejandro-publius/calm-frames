@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Preparation recovery | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../evidence/preparation-recovery.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><blockquote>
+<p>Historical source excerpt copied from <code>docs/PREPARATION_RECOVERY.md</code> at <code>13551e4</code>. Local references now point to immutable source or bundled assets. Publication wording describes its original checkpoint, not current status.</p>
+</blockquote>
+<h1 id="preparation-recovery">Preparation recovery</h1>
+<p>Preparing a title runs about eight steps per preset, plus shared ones, over
+minutes of analysis and encoding, and the result is published only by verify.
+This page says what can interrupt or damage that work, what the pipeline does
+about each case since October 21, and how to reproduce the evidence. The code is
+the ledger in <code>pipeline/state.py</code>, the file writes and locks in
+<code>pipeline/durable.py</code>, the step runner and publication in <code>pipeline/ingest.py</code>,
+the catalog in <code>pipeline/catalog.py</code> and the receipt in
+<code>pipeline/local_library.py</code>.</p>
+<h2 id="failure-model">Failure model</h2>
+<ul>
+<li><strong>The process stops anywhere.</strong> A crash, SIGKILL, an out of memory kill or a
+stopped container can end a run between two steps, halfway through writing an
+output, or halfway through writing the ledger. A kill sent only to the Python
+process, rather than its process group, can leave an ffmpeg or analyzer child
+running and writing after its parent is gone.</li>
+<li><strong>The machine stops.</strong> After a power loss, writes and renames that had only
+reached memory can be missing or torn.</li>
+<li><strong>A cached file changes.</strong> An output can go missing, be cut short, have bytes
+changed at the same size with its modification time put back, be replaced by
+a link, or be a valid file made from other inputs.</li>
+<li><strong>The ledger cannot be read.</strong> It can be truncated, not JSON, not UTF-8, the
+wrong shape, or carry one bad record among good ones.</li>
+<li><strong>An input changes.</strong> A setting, the signing key, or an upstream output that
+comes out different when it is rebuilt.</li>
+<li><strong>Two runs overlap.</strong> The same title prepared twice at once, or two titles
+updating one kid mode index.</li>
+</ul>
+<h2 id="what-the-base-commit-did">What the base commit did</h2>
+<p>At <code>bf2f615</code> a step was skipped when its fingerprint matched and its output
+files existed. Four steps (probe, still, trickplay and posters) also compared
+output hashes. The others, including analysis, plans, renditions and cover
+models, trusted the file name, and the HLS segments were not recorded at all.
+A step&#39;s fingerprint included its parents&#39; fingerprints, never their bytes.
+The ledger was replaced through a fixed <code>state.json.tmp</code> without being flushed,
+and a JSON syntax error was the only damage it handled. <code>pipeline.ingest</code> took
+no lock. The same scenarios, run against that commit with <code>--code-root</code>, are
+in <code>results/preparation-recovery-2026-10-21/evidence-bf2f615.json</code>;</p>
+<!--n results/preparation-recovery-2026-10-21/evidence-bf2f615.json:summary.failed -->8<!--/n--> of
+<!--n results/preparation-recovery-2026-10-21/evidence-bf2f615.json:summary.scenarios -->16<!--/n-->
+<p>did not meet their expectation there:</p>
+<ul>
+<li>A killed rebuild left the old rendition record in place, vouching for a
+master half the size of the real one. The restart reused it and failed.</li>
+<li>Same-size damage to an HLS segment went through verify again and came out
+with a ready receipt naming the damaged bytes. The fake analyzer does not
+measure pictures; with the real one verify would have measured the damaged
+segment, but the receipt would still have named bytes the pipeline never
+made. Damage to a plan or to the luminance record was never rebuilt.</li>
+<li>Same-size damage to a safe master or a published map, a deleted HLS segment
+and a new signing key each left the title failed, with the ledger still
+vouching for the damaged or stale files, so every later run would fail the
+same way until a manual <code>--force</code>. Whether verify notices damage to a
+rendition at all depends on where the damage lands and what it samples;
+nothing rebuilt it.</li>
+<li>A ledger holding valid JSON of the wrong shape crashed the command with a
+traceback, and one that was not UTF-8 failed the preparation.</li>
+<li>A second <code>pipeline.ingest</code> of the same title ran to completion beside the
+first, rewriting its files, and published.</li>
+<li>A truncated ledger was handled by preparing again, as now, but the
+unreadable file was overwritten rather than kept.</li>
+</ul>
+<p>Interrupting a first preparation, killing verification, changing the guard
+band and failing verification already behaved there as they do now.</p>
+<p>Verify was always the last gate, and it caught some of this: a stale
+signature fails it, and so does a plan whose intervals no longer match its map.
+It could not rebuild what it caught, so those titles stayed blocked until a
+manual <code>--force</code>, and it was never designed to notice bytes that change
+without changing what it measures, such as a plan field it does not compare.</p>
+<h2 id="how-recovery-works">How recovery works</h2>
+<ol>
+<li><strong>Every output is hashed when its step commits.</strong> A ledger record holds the
+step&#39;s fingerprint and the SHA-256 of each output, as a path relative to the
+title. A step is reused only when the fingerprint matches and every output is
+a regular file, reached without a link, with exactly the recorded bytes. HLS
+playlists and segments are outputs of the rendition step.</li>
+<li><strong>Identities flow downstream, not fingerprints.</strong> A step&#39;s identity is its
+fingerprint together with its output hashes, and each fingerprint includes
+the identity of every step it depends on. A rebuilt step that comes out
+different therefore redoes everything built from it; one that comes out
+byte for byte the same leaves its dependents valid.</li>
+<li><strong>Withdraw, work, commit.</strong> Before a step does any work its record is
+removed from the ledger, durably. The record is written back only after the
+work returned and every output exists. A run killed halfway through
+rewriting an output can never leave a record vouching for it.</li>
+<li><strong>One writer per file.</strong> The analyzer&#39;s own map is kept in
+<code>work/analysis/&lt;preset&gt;.json</code>, and the signed-map step writes the published
+<code>maps/&lt;preset&gt;.json</code> from it, so no step&#39;s recorded output is rewritten in
+place by another step.</li>
+<li><strong>State files are replaced atomically and flushed.</strong> The ledger, catalog
+entries, the kid mode index, the verify report and local receipts are written
+to a new temporary file created with <code>O_EXCL | O_NOFOLLOW</code> under a name nobody
+can predict, flushed (<code>F_FULLFSYNC</code> on macOS, <code>fsync</code> elsewhere), renamed over
+the old file, and the directory is flushed after the rename. A reader sees
+the old version or the new one.</li>
+<li><strong>A ledger that cannot be read is never trusted.</strong> Readers treat it as empty.
+The next write moves it aside to <code>state.json.malformed</code> and the title is
+prepared again from its source. A single record with the wrong shape is
+dropped on its own. Records written before output hashes were kept are still
+read, so existing receipts can be checked, but they never skip work.</li>
+<li><strong>Publication is last, and only for bytes that held still.</strong> A re-run takes
+the title out of the kid mode index, then out of its entry, before any cached
+artifact is trusted. Verify is keyed by the hashes of every artifact it
+checks, scene-hold images included. If any of them changes while verify runs, the verdict is not
+recorded and nothing is published. A pass is flushed to the device, artifacts
+first, and published to the entry and then the index. A failed verification
+is recorded but never reused as a pass.</li>
+<li><strong>A receipt names only verified bytes.</strong> Verify&#39;s ledger record lists the
+hash of every artifact it checked, and a local receipt is refused unless each
+file it names still has that hash, so a late write by a leftover child can
+only refuse a receipt, never put new bytes into one.</li>
+<li><strong>One preparation per title.</strong> <code>pipeline.ingest</code> holds an exclusive lock on
+<code>titles/&lt;sha256&gt;/.ingest.lock</code> and refuses at once when another process has
+it. Updates to the shared <code>catalog.json</code> hold <code>.catalog.json.lock</code> for one
+read and write, waiting at most 30 seconds. The local library&#39;s own
+workspace lock is unchanged.</li>
+</ol>
+<p>Retries are bounded: a step runs at most once per invocation and the next
+invocation is the retry; the only loops are the index lock&#39;s 30 second wait and
+at most eight attempts at a temporary name. The recovery code deletes nothing:
+an unreadable ledger is renamed aside, replacing an earlier
+<code>state.json.malformed</code>, and a temporary file is removed only by the write that
+created it, when that write fails.
+Source identity, preset isolation, the safe path checks, signature checks and
+every verification threshold are unchanged. Maps signed with one key are never
+reused for another, because the signing key&#39;s public identity is part of the
+analysis fingerprint.</p>
+<h2 id="reproduce">Reproduce</h2>
+<pre><code class="language-sh">.venv/bin/python -m eval.preparation_recovery \
+    --out results/preparation-recovery-2026-10-22/evidence.json --mutations
+</code></pre>
+<p>It needs ffmpeg and ffprobe on the path. On the Mac that produced the evidence
+it took <!--n results/preparation-recovery-2026-10-22/evidence.json:seconds -->627.9<!--/n-->
+seconds, most of them the mutations. In a temporary directory it makes one
+calm generated clip and two Ed25519 test key pairs, runs every scenario through
+the pipeline&#39;s own command lines as separate processes, and removes the
+directory. The real flashmap CLI is used for one scenario and the fake analyzer
+from <code>pipeline/tests</code> for the rest. Kills are SIGKILL to the whole process group.
+<code>--quick</code> skips the timed sweep and the real analyzer. <code>--code-root DIR</code> runs
+the same scenarios against another checkout; that is how the base commit&#39;s file
+above was made. <code>--mutations</code> then breaks each recovery guard in a copy of the
+code, with the mutation gate&#39;s own harness, and runs the recovery tests against
+it. The runner exits 0 only when every scenario met its expectation and every
+mutation was caught.</p>
+<p>Each scenario in the JSON names the requirement it covers, the procedure, what
+was expected, what was observed and <code>pass</code> or <code>fail</code>. A recovered or repaired
+result is compared with an uninterrupted run of the same source, keys and
+settings at the same path: ledger fingerprints and output hashes, the SHA-256 of
+every file in the title, the verify report and the receipt. Ledger completion
+times, the verify report&#39;s start and finish times, and the two receipt digests
+that cover those files record when something ran, so they are left out, and the
+evidence names them. With the real analyzer, maps carry <code>created_utc</code> and a
+signature over it, so they are compared without those three fields.</p>
+<p>The focused tests are in <code>pipeline/tests/test_preparation_recovery.py</code>,
+including two that SIGKILL real preparations and restart them.</p>
+<h2 id="results">Results</h2>
+<p>On the commit named in <code>results/preparation-recovery-2026-10-22/evidence.json</code>, the integrated branch,</p>
+<!--n results/preparation-recovery-2026-10-22/evidence.json:summary.passed -->16<!--/n--> of
+<!--n results/preparation-recovery-2026-10-22/evidence.json:summary.scenarios -->16<!--/n-->
+<p>scenarios met their expectation, and</p>
+<!--n results/preparation-recovery-2026-10-22/evidence.json:guard_mutations.totals.killed -->24<!--/n--> of
+<!--n results/preparation-recovery-2026-10-22/evidence.json:guard_mutations.totals.mutations -->24<!--/n-->
+<p>guard mutations made the recovery tests fail, after the same tests passed
+unmutated. The first evidence, for <code>7ff4a37</code> before integration, is kept in
+<code>results/preparation-recovery-2026-10-21/evidence.json</code>. Read the scenarios themselves for where each kill landed and which
+steps ran again. The generated clip differs from run to run, so encoded sizes
+differ between evidence files; within one run every comparison is exact.</p>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li>No power was cut. The durability claims rest on <code>fsync</code>, and on macOS
+<code>F_FULLFSYNC</code>, doing what the operating system says they do. The evidence
+comes from one Mac, on APFS.</li>
+<li>On a filesystem that cannot flush a directory, several network and FUSE
+filesystems among them, that refusal is tolerated, and a rename may not
+survive a power loss even though the file contents do.</li>
+<li>The locks are advisory <code>flock</code> locks on one machine. A work directory shared
+between machines, for example over NFS, is not serialized, and other tools
+that write into a workspace without taking the lock are not stopped by it.</li>
+<li>The fake analyzer&#39;s flagged spans are scripted, so the scenarios show the
+pipeline&#39;s recovery and publication gates, not flash measurement. Hashing,
+binding, signing, rendering, packaging and verification are real.</li>
+<li>The identity comparisons rely on ffmpeg and x264 producing the same bytes for
+the same input on one machine, which these runs observed. Another build or
+thread count can change encoded bytes; the pipeline then rebuilds what depends
+on them, which is correct but costs time.</li>
+<li>A late write from a child that outlived a parent killed on its own is covered
+by the in-process tests, not by a scenario.</li>
+<li>A write killed between creating its temporary file and renaming it leaves a
+<code>.state.json.&lt;pid&gt;.&lt;random&gt;.tmp</code> (or the same for another state file) beside
+the target. Nothing reads it, and nothing removes it automatically.</li>
+<li>The analyzer&#39;s own version is not part of any cache key, as before. Upgrading
+flashmap does not by itself redo analysis or verification.</li>
+</ul>
+<h2 id="integrating">Integrating</h2>
+<p>The work was written on <code>claude/preparation-recovery</code>, from <code>bf2f615</code>
+(<code>claude/ocean-layout-fix-2026-10-19</code>), and is combined with Playback Proof on
+<code>codex/recovery-proof-integration-2026-10-22</code>. The recovery work itself changed
+nothing in the app, playback, media, keys or trust configuration; Playback
+Proof&#39;s app changes are described in <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/results/playback-proof-2026-10-21/README.md">its results</a>.</p>
+<ul>
+<li>The integration review found two defects and fixed them in <code>1c6bea9</code>: verify&#39;s
+final byte comparison left out scene-hold images, so one rewritten after
+verification could still be published, and a ledger timestamp written as a huge
+JSON integer raised OverflowError instead of dropping its record. Both have
+regression tests and are among the guard mutations above.</li>
+<li>A work directory prepared before this change has no output hashes in its
+ledger. Its existing receipts are still checked and packaged as before, but
+the first <code>prepare</code> or <code>ingest</code> after this change redoes every step once.
+With the real analyzer that issues new maps with a new <code>created_utc</code> and
+signature, so do not re-prepare an approved work directory unless a new
+approval is intended.</li>
+<li><code>eval/mutate_gate.py</code> keeps its 70 mutations. The one that mutated the old
+hash check in <code>pipeline/ingest.py</code> now mutates the ledger&#39;s check in
+<code>pipeline/state.py</code>; <code>results/mutation.json</code> was regenerated by the full gate
+on the integrated branch, with the result described in
+<a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/RELEASE_READINESS.md">RELEASE_READINESS.md</a>.</li>
+<li>The key rotation steps in <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/SECURITY.md">SECURITY.md</a> no longer depend on
+<code>--force</code>, and <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/pipeline/LOCAL_LIBRARY.md">pipeline/LOCAL_LIBRARY.md</a> says
+what to do after an interruption.</li>
+</ul>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../evidence/preparation-recovery.md">docs/judging-package/evidence/preparation-recovery.md</a></p><p>Source SHA-256: <code>e312433f2c304caa66c9198fce2ba3df8b77f7e6f3d86131fc7acedf3256ba11</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

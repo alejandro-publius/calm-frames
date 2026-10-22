@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>One Mac integration handoff | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../HANDOFF.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><h1 id="one-mac-integration-handoff">One Mac integration handoff</h1>
+<h2 id="what-is-complete">What is complete</h2>
+<p>The package under <code>docs/judging-package</code> includes the offline guide, Markdown alternative, rubric matrix, impact/source brief, curated friction and product-feedback drafts, proposed presentation copy, replacement-demo evidence brief, claims ledger, source excerpts, asset provenance and browser-validation artifacts. The reviewer-page code is reused from <code>3db0505</code>; app, pipeline, benchmark and video work is unchanged.</p>
+<p>This branch starts at <code>13551e45bd853c392489dbecce7158a04036f615</code>. Its evidence names upgraded source <code>d96c0886227f7dcfc5ae6584132a86b193359215</code> and submitted candidate <code>bf2f615e6fad0d73442fe2b9acab3067bf311e7e</code>. Only files under <code>docs/judging-package</code> should be in the package commit. The exact local branch and final commit are returned with the handoff in chat.</p>
+<h2 id="inspect-on-the-mac">Inspect on the Mac</h2>
+<ol>
+<li>Obtain this local commit through the normal authorized workspace transfer. It has not been pushed; a GitHub fetch cannot retrieve an unpublished cloud commit. Alternatively transfer the complete <code>docs/judging-package</code> directory, preserving its children.</li>
+<li>Preserve your current work and use your own integration branch. Inspect the proposed commit with <code>git show --stat &lt;PACKAGE_COMMIT&gt;</code> and confirm every changed path begins <code>docs/judging-package/</code>.</li>
+<li>If the commit object is available locally, cherry-pick only <code>&lt;PACKAGE_COMMIT&gt;</code> onto the intended review branch. Do not cherry-pick the earlier <code>3db0505</code> package merely to obtain this directory: its reuse is already incorporated here. Do not reset the integration branch or replace app/media outputs.</li>
+<li>Open <code>docs/judging-package/index.html</code>, or read <code>GUIDE.md</code>. Keep the directory intact. Review the desktop and narrow <strong>web-guide renders</strong> in <code>validation/</code>; they are not native captures.</li>
+<li>Inspect <a href="validation.html">the validation and factual-audit notes</a>, <code>validation/checks.json</code>, <code>assets.json</code>, <code>CLAIMS_LEDGER.md</code> and the factual gaps below. Browser checks cover this guide only.</li>
+</ol>
+<p>The guide uses ordinary files and no network-backed runtime. If your browser permits local files, no server or installation is needed. The managed cloud browser disallows file URLs, so cloud rendering used a temporary loopback HTTP server. That policy is not an Amazon SDK defect and does not change the guide&#39;s runtime design.</p>
+<h2 id="factual-gaps-before-public-use">Factual gaps before public use</h2>
+<ul>
+<li>The official rules could not be read live through this cloud proxy. Recheck the current Devpost judging section and update <code>PRIMARY_SOURCES.md</code> and <code>RUBRIC_MATRIX.md</code> if it differs from the dated record.</li>
+<li>W3C and Epilepsy Foundation primary-source pages also could not be re-read live. The package labels the repository&#39;s existing excerpts and avoids prevalence or medical-outcome numbers.</li>
+<li>Owner visual/audio acceptance, physical Fire TV work and complete VoiceView acceptance remain outside this package.</li>
+<li>Claude&#39;s newer benchmark results are unavailable in this snapshot. Do not insert estimates or reuse older results as if they were those new measurements.</li>
+<li>The replacement demo remains Claude&#39;s work. The included brief is a plan, not proof of recording or publication.</li>
+<li>Original uncropped Mac captures and the rollback application package are not bundled. Historical receipts do not prove current hosted CI or deployment state.</li>
+</ul>
+<h2 id="ownership-and-approval-boundaries">Ownership and approval boundaries</h2>
+<p>Claude owns app code, pipeline changes, native review, benchmarks and the replacement video. This package proposes README and Devpost copy without editing the live versions. The submitted baseline, integration branch, signing configuration and media remain intact. No push, merge, publish or live-submission action has occurred or is implied by these integration instructions.</p>
+<p>When integrating, retain exact source labels on screenshots, the credits, the current-source verification gap, the limits and the distinction between submitted and upgraded builds. Later factual updates should add their own evidence and commit identity rather than overwrite historical receipts.</p>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../HANDOFF.md">docs/judging-package/HANDOFF.md</a></p><p>Source SHA-256: <code>3e93f7cc05b47fe4cfe437208fc247a161650dacff8fa30a30cd4933a37daa96</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

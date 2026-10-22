@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "reused_page_commit": "3db0505f02441300020a8d6f023c94994be2ae88",
+  "base_commit": "13551e45bd853c392489dbecce7158a04036f615",
+  "assets": [
+    {
+      "path": "assets/home.png",
+      "source_path": "docs/presentation/home.png",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 422009,
+      "sha256": "2574d27330c81a1d1b1e5c57d32225f5e57e4c72c3340395f7ff620c9535dc86",
+      "kind": "existing native image",
+      "depicted_source": "60c3bbb701081c37dbd87a6b1f5b66d51a74b855"
+    },
+    {
+      "path": "assets/details.png",
+      "source_path": "docs/presentation/details.png",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 383323,
+      "sha256": "d2e397ca6a9cc937306c478d9932d9bf6cdcaf50c948b807f355921bbf77a76c",
+      "kind": "existing native image",
+      "depicted_source": "60c3bbb701081c37dbd87a6b1f5b66d51a74b855"
+    },
+    {
+      "path": "assets/ending.png",
+      "source_path": "docs/presentation/ending.png",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 1414987,
+      "sha256": "575585cd6b09abb2e4a7a071e161b1a6d7ffce87092661b7643981fe1947a857",
+      "kind": "existing native image",
+      "depicted_source": "60c3bbb701081c37dbd87a6b1f5b66d51a74b855"
+    },
+    {
+      "path": "assets/architecture.png",
+      "source_path": "docs/presentation/architecture.png",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 223797,
+      "sha256": "616d6e8fa1b5d62adc94e205513d5b188f0b0ff3f1fde72a0ff118d66e05181a",
+      "kind": "existing project asset"
+    },
+    {
+      "path": "assets/architecture.svg",
+      "source_path": "docs/presentation/architecture.svg",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 7174,
+      "sha256": "203248736fddf497d8a9502cbfb54a3a8246fb8dea7a433597ddd4a78606b850",
+      "kind": "existing project asset"
+    },
+    {
+      "path": "assets/icon.png",
+      "source_path": "docs/brand/appstore-icon-114.png",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 7107,
+      "sha256": "440f32a4bebdc843c067188c764a9a98781441fda948b897a7cc5992a81da76f",
+      "kind": "existing project asset"
+    },
+    {
+      "path": "assets/CalmSansRegular.ttf",
+      "source_path": "app/assets/fonts/CalmSansRegular.ttf",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 428864,
+      "sha256": "572616be3424c0dea835f7e427b70a54a6e93bef84548d400e5757ee185f1f61",
+      "kind": "existing project asset"
+    },
+    {
+      "path": "assets/CalmDisplaySemibold.ttf",
+      "source_path": "app/assets/fonts/CalmDisplaySemibold.ttf",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 78628,
+      "sha256": "017e1080cb0228096244f31e87c4b9f8cfe5400ae4da2506422bae2dd53d0882",
+      "kind": "existing project asset"
+    },
+    {
+      "path": "assets/f04-proof-selection.png",
+      "source_path": "results/release-validation-2026-10-22/native/f04-proof-selection.png",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 242482,
+      "sha256": "215730ed906ce18245b55cacf0cc47c320ba3425b8779b12920781cee0152684",
+      "kind": "existing native image",
+      "depicted_source": "d96c0886227f7dcfc5ae6584132a86b193359215"
+    },
+    {
+      "path": "assets/f07-reading-wcag.png",
+      "source_path": "results/release-validation-2026-10-22/native/f07-reading-wcag.png",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 264209,
+      "sha256": "209409a386001aec3771c4acbe476442e7326819ca948926922cc1029c3a313b",
+      "kind": "existing native image",
+      "depicted_source": "d96c0886227f7dcfc5ae6584132a86b193359215"
+    },
+    {
+      "path": "assets/f12-mcway-proof-prepared.png",
+      "source_path": "results/release-validation-2026-10-22/native/f12-mcway-proof-prepared.png",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 245851,
+      "sha256": "3ae156b3ec67e1a82c4bee3a04059aec9cb554bace6c1f6c9baf64ab61d28540",
+      "kind": "existing native image",
+      "depicted_source": "d96c0886227f7dcfc5ae6584132a86b193359215"
+    },
+    {
+      "path": "assets/f15-mcway-playing.png",
+      "source_path": "results/release-validation-2026-10-22/native/f15-mcway-playing.png",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 1395535,
+      "sha256": "a6afff4055da425988cce9a6045a38827c5de63489b476ac4f4118420ccae895",
+      "kind": "existing native image",
+      "depicted_source": "d96c0886227f7dcfc5ae6584132a86b193359215"
+    },
+    {
+      "path": "assets/LICENSE-Fraunces",
+      "source_path": "app/assets/fonts/LICENSE-Fraunces",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 4391,
+      "sha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b",
+      "kind": "license notice"
+    },
+    {
+      "path": "assets/LICENSE-SourceSans3",
+      "source_path": "app/assets/fonts/LICENSE-SourceSans3",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 4486,
+      "sha256": "56af9b9c6715597e458284a474dc118a50a4150e9d547c70f7b4a33c3e6a9328",
+      "kind": "license notice"
+    },
+    {
+      "path": "assets/LICENSE-project",
+      "source_path": "LICENSE",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "kind": "license notice"
+    },
+    {
+      "path": "assets/playback.png",
+      "source_path": "docs/presentation/playback.png",
+      "source_snapshot": "13551e45bd853c392489dbecce7158a04036f615",
+      "depicted_source": "60c3bbb701081c37dbd87a6b1f5b66d51a74b855",
+      "bytes": 1250269,
+      "sha256": "a1705f39a22ba0aae658fec4e318dcdeca1a6a174b6c38d60446adc9fc0f45cc",
+      "kind": "existing historical native image"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Product feedback draft for Vega tooling | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../PRODUCT_FEEDBACK_DRAFT.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><h1 id="product-feedback-draft-for-vega-tooling">Product feedback draft for Vega tooling</h1>
+<p>Not sent. These suggestions derive from the <a href="friction-log-draft.html">recorded friction draft</a>, not new SDK experiments. Priority is a project recommendation, not a claim about Amazon&#39;s roadmap or all developers.</p>
+<p>This is a <strong>supplement for the Vega issues selected here</strong>, not a replacement for the full per-tool inventory in <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/FEEDBACK.md">the pinned product-feedback record</a>. That record also covers AWS and other tools; their deployment, account and benchmark details are outside this package. The five prompts below follow that historical record. Current submission wording still needs the live rules check described in <a href="primary-sources.html">the source register</a>.</p>
+<h2 id="five-question-update-for-the-selected-tools">Five-question update for the selected tools</h2>
+<h3 id="vega-sdk-and-cli">Vega SDK and CLI</h3>
+<ol>
+<li><strong>What we used it for:</strong> Build, package, install and log the native app; send remote input to the selected virtual device. The release record supplies the installed source and package identity.</li>
+<li><strong>What worked well:</strong> The recorded install and device-side input route enabled the native walkthrough. Exact package checks exposed stale generated media before it was treated as a valid release.</li>
+<li><strong>What needs work:</strong> Make input-command failure observable to shell automation (F4), and reconcile deleted assets during incremental staging (F6). The package refusal is an application gate doing its job, not evidence that the SDK diagnosed the mismatch itself.</li>
+<li><strong>Onboarding:</strong> Provide one checked example from connected target to installed sample, remote input and device log. State the supported generated-assets-only cleanup path. No new onboarding duration was measured here.</li>
+<li><strong>Would we build with it again:</strong> Proposed answer: yes for this prototype, retaining explicit device-response and package-membership checks. This recommendation follows the recorded workarounds; it is not a new SDK evaluation or an owner endorsement of current releases.</li>
+</ol>
+<h3 id="vega-virtual-device">Vega Virtual Device</h3>
+<ol>
+<li><strong>What we used it for:</strong> Observe the native journey, proof pages and remote reading stops on the recorded build.</li>
+<li><strong>What worked well:</strong> Existing captures and trace observations made native behavior inspectable without a physical Fire TV. They remain labelled with their source builds and observation limits.</li>
+<li><strong>What needs work:</strong> Clarify which media statistics the virtual device supports and which observations require physical hardware (F3). No conclusion about a host capture failure&#39;s platform root cause follows from a locked Mac or a black capture.</li>
+<li><strong>Onboarding:</strong> Show a bounded benign sample with supported diagnostics and a clear distinction between virtual-device and physical-screen evidence. This package measured no new setup time.</li>
+<li><strong>Would we build with it again:</strong> Proposed answer: yes for development and native workflow review; its observations do not establish physical-screen timing, audio acceptance or a full hardware review.</li>
+</ol>
+<h3 id="react-native-w3cmedia">react-native-w3cmedia</h3>
+<ol>
+<li><strong>What we used it for:</strong> Play the packaged approved edition and supply media state to the app&#39;s opening and guarded-playback logic.</li>
+<li><strong>What worked well:</strong> The recorded native runs show packaged playback after the URI-boundary workaround. The source has one guarded seek path and explicit opening/recovery handling.</li>
+<li><strong>What needs work:</strong> Align packaged URI forms with file-system documentation (F1); expose unsupported playback-quality statistics explicitly (F3). Advancing media time must not be described as a physically displayed frame.</li>
+<li><strong>Onboarding:</strong> Add a packaged MP4/WebVTT sample alongside streaming examples, with supported-statistic detection and JavaScript error reporting.</li>
+<li><strong>Would we build with it again:</strong> Proposed answer: yes with those capability boundaries documented and native observations kept separate from source tests. The draft does not claim a fix in a newer SDK.</li>
+</ol>
+<h3 id="react-native-for-vega-image-and-focus-apis">React Native for Vega image and focus APIs</h3>
+<ol>
+<li><strong>What we used it for:</strong> Present authenticated hold stills, focusable settings and the remote-readable evidence record.</li>
+<li><strong>What worked well:</strong> Exact bundled-still substitution and retained-focus controls provided bounded app workarounds. The upgraded record was reached with remote reading stops in the saved native review.</li>
+<li><strong>What needs work:</strong> Document image-source support and surface load failures in JavaScript (F2); specify focus behavior when the focused control becomes disabled (F5).</li>
+<li><strong>Onboarding:</strong> Include native examples for supported image sources and asynchronous saves. State where native behavior differs from browser previews, and show accessible busy/disabled states without losing the user&#39;s place.</li>
+<li><strong>Would we build with it again:</strong> Proposed answer: yes, with native acceptance alongside component tests. Complete VoiceView and physical-device acceptance remain open.</li>
+</ol>
+<h2 id="prioritized-suggestions">Prioritized suggestions</h2>
+<table>
+<thead>
+<tr>
+<th>Proposal</th>
+<th>Developer and user benefit</th>
+<th>Recorded basis</th>
+<th>Suggested bounded improvement and acceptance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Priority 1: one native asset contract</strong></td>
+<td>Developers can predict which media/image sources work; viewers encounter fewer unexplained black states.</td>
+<td>F1 packaged URI; F2 data-URI still; canonical entry 44&#39;s ambiguous image-loader errors.</td>
+<td>Publish a per-API support table for package paths, URI forms and data URIs. Add native sample fixtures. Surface actionable <code>onError</code> reasons and reserve error logs for terminal failure. A successful fallback must not look indistinguishable from a failed load.</td>
+</tr>
+<tr>
+<td><strong>Priority 1: explicit playback-stat capability</strong></td>
+<td>Apps can implement opening/recovery behavior without confusing unsupported statistics with failed playback.</td>
+<td>F3, <code>useOpeningFrame.ts</code>, error <code>50001</code> in historical logs.</td>
+<td>Return a capability indicator or documented JavaScript error for unsupported statistics; document what each signal proves. Include VVD and physical-device coverage in the sample matrix. Do not treat media-clock progress as displayed-frame proof.</td>
+</tr>
+<tr>
+<td><strong>Priority 1: predictable incremental asset membership</strong></td>
+<td>Smaller, auditable packages and fewer failed release attempts after removing a large asset.</td>
+<td>F6 and strict package-gate refusals.</td>
+<td>Reconcile deleted source files, or provide a documented generated-assets-only clean path. Report unexpected retained files before packaging. Test add, replace and delete cases. Preserve application-level verification gates.</td>
+</tr>
+<tr>
+<td><strong>Priority 2: truthful command exit status</strong></td>
+<td>Automation can stop on a failed input rather than advance a false acceptance script.</td>
+<td>F4, documented versus working <code>inputd-cli</code> forms.</td>
+<td>Align CLI docs and routing; return nonzero for missing tools or targets. Add an example that confirms target identity and expected app response.</td>
+</tr>
+<tr>
+<td><strong>Priority 2: focus and accessibility lifecycle examples</strong></td>
+<td>Remote users retain their place during asynchronous saves, and developers can represent busy/disabled states consistently.</td>
+<td>F5 and the recorded app workaround.</td>
+<td>Show retained focus, announced state and restoration after save; document native differences from web previews. Validate the sample on a device and with VoiceView before claiming accessibility acceptance.</td>
+</tr>
+</tbody></table>
+<h2 id="feedback-payload-to-accompany-each-issue">Feedback payload to accompany each issue</h2>
+<p>Send the historical environment, the exact task and minimal reproduction, the expected and observed result, the workaround and a redacted evidence link. State whether an issue is reproduced on current SDK versions; this package has not done that recheck. Never attach private paths, credentials, account identifiers, signing keys or original hazardous media.</p>
+<p>The useful ask is a reproducible contract or diagnostic improvement. This draft does not ask Amazon to certify the app medically, endorse the project, award a judging bonus or adopt every workaround as platform policy.</p>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../PRODUCT_FEEDBACK_DRAFT.md">docs/judging-package/PRODUCT_FEEDBACK_DRAFT.md</a></p><p>Source SHA-256: <code>0ec223bdd927d7fa444010a575a03c804bbe0ad064b44d1e162243d6600356a3</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>
