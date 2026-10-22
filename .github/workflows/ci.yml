@@ -37,7 +37,7 @@ jobs:
         # --ignore-scripts skips the Shaka Player build, which clones a large
         # repository and needs a JDK. The tests mock the player, so CI does
         # not need the built bundle.
-        run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
+        run: npm ci --ignore-scripts
       - name: Typecheck
         working-directory: app
         run: npm run typecheck
@@ -188,7 +188,7 @@ jobs:
         run: pip install -e ./flashmap
       - name: Install app dependencies
         working-directory: app
-        run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
+        run: npm ci --ignore-scripts
       - name: Render every screen and check it for flashing
         # Kid mode hides flashing in other people's video. An app that flashed
         # its own cards while doing it would be absurd, so every screen and
@@ -251,7 +251,7 @@ jobs:
         working-directory: app
         # The property tests compile the app's scheduler with the app's own tsc and run it,
         # so what they answer about is the code that ships rather than a copy of it.
-        run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
+        run: npm ci --ignore-scripts
       - name: Property tests and the map fuzz corpus
         # CALM_FRAMES_REQUIRE_NODE=1, set by the target, turns a missing node from a skip
         # into a failure. A silently skipped property test is a green tick for nothing.

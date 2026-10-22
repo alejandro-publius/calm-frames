@@ -57,7 +57,7 @@ jobs:
         working-directory: app
         # --ignore-scripts skips the Shaka Player build. npm audit reads the
         # tree, not the built bundle, so this is the same audit either way.
-        run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
+        run: npm ci --ignore-scripts
       - name: Audit, and fail on anything without a written exception
         run: python3 scripts/dep_audit.py --check
 
