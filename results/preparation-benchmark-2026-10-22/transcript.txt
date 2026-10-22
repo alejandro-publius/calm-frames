@@ -1,0 +1,17 @@
+source   20.0 s, 1280x720, 24.0 fps, sha256 e0d9970808c0
+analyzer the real flashmap CLI; presets wcag, broadcast, extra-cautious
+sample 1  cold       95.45 s  ready, no flagged segments, 25 of 25 steps run
+          warm        0.49 s  ready, 0 run, 25 reused
+          kill       28.55 s  while the extra-cautious master was half written; 19 steps committed; outputs with no record: safe/extra-cautious/safe.mp4 (1291582 of 2583164 bytes); receipt failed
+          restart    61.73 s  ready, 19 reused, 6 rebuilt; identity equals the cold run
+sample 2  cold       87.66 s  ready, no flagged segments, 25 of 25 steps run
+          warm        0.46 s  ready, 0 run, 25 reused
+          kill       27.28 s  while the extra-cautious master was half written; 19 steps committed; outputs with no record: safe/extra-cautious/safe.mp4 (1291582 of 2583164 bytes); receipt failed
+          restart    62.95 s  ready, 19 reused, 6 rebuilt; identity equals the cold run
+sample 3  cold       93.21 s  ready, no flagged segments, 25 of 25 steps run
+          warm        0.45 s  ready, 0 run, 25 reused
+          kill       28.21 s  while the extra-cautious master was half written; 19 steps committed; outputs with no record: safe/extra-cautious/safe.mp4 (1291582 of 2583164 bytes); receipt failed
+          restart    62.07 s  ready, 19 reused, 6 rebuilt; identity equals the cold run
+damage   flipped one byte of safe/wcag/hls/seg_0_00002.ts (size 457968 bytes and modification time kept)
+refresh  the local catalog lists 0 title(s) (before the damage: 1)
+repair      1.46 s  ready, rebuilt rendition:wcag; receipt names the cold run's bytes; the refresh lists 1

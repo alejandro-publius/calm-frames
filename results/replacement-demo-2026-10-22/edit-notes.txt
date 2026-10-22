@@ -1,0 +1,58 @@
+Calm Frames replacement demo: edit record (October 22, 2026)
+
+Output: calm-frames-replacement-demo.mp4
+SHA-256: dde2ba357cf769c42eda519591aaf235e06fd487eb61f1d1d59548f4d703df92
+169.2 s, 1920x1080, 30 fps constant, H.264 High yuv420p BT.709 limited range, AAC LC 48 kHz stereo, 49643080 bytes.
+Rebuild: demo-build/build_demo.sh OUTPUT.mp4 after demo-build/make_cards.py <worktree> demo-build/cards (ffmpeg 9.0.1).
+The published demo (calm-frames-demo-final.mp4, SHA-256 dad01d91...) and its upload are untouched.
+
+Build recorded: source d96c088, package SHA-256 6914d157c76a0478588f63e222525754f1202990481e313b4e72422c93759090,
+installed SHA-384 4b815f37... confirmed with vpm before recording.
+
+Sources (ScreenCaptureKit captures of the single "Vega Virtual Device" window, app audio, no microphone)
+  A = native-review-2/takes/takeA.mp4, SHA-256 7d13566964c73d7cae6ac08c078ae3f7f5cbbdfb1e2f517e17e2bd05f5ad16fc
+      Home, McWay Falls Details, Watch, playback, Back. Recorder start 07:15:42Z.
+  B = native-review-2/takes/takeB.mp4, SHA-256 7cd853c22102eb3a5c62a38d034a85dad3946088c49b12e0535bcb1e87cfefbf
+      Home, Acadia Details, More info, Playback proof & details, the three stages, the record, Back twice. Recorder start 07:18:50Z.
+Picture: TV area cropped at 1576x886+8+51 (window chrome and the on-screen remote removed), scaled to 1920x1080.
+
+Edit decision list (final time = source time)
+  0:00.0-0:04.5   A 3.6-8.1      Home, McWay Falls focused
+  0:04.5-0:09.5   A 8.3-13.3     McWay Details, Watch focused (static)
+  0:09.5-0:10.2   A 17.29-18.0   "Opening your video..." as recorded
+  0:10.2-1:29.2   A 18.0-97.0    native playback, uncut; 1 s fade at the end (1:28.2-1:29.2)
+  1:29.2-1:31.7   card           "Playback proof / Same app session, about a minute later /
+                                  Remote presses in real time; the pauses between them are shortened"
+  1:31.7-2:19.2   B, nine pieces Home, Details, More info, proof page, Prepared, Selection, the record, Back, Back:
+                                 B 3.0-8.0, 14.2-17.0, 19.1-27.0, 37.4-42.5, 47.1-51.6, 53.8-66.0, 73.5-77.0, 79.4-82.8, 84.4-87.5
+  2:19.2-2:29.2   card           developer terminal: import (rendered from import-demonstration.json)
+  2:29.2-2:41.2   card           developer terminal: interruption and damage (rendered from the benchmark transcript)
+  2:41.2-2:49.2   card           media credits
+Removed: A 13.3-17.29, the static rest of Details, the Watch press and the 0.14 s gray dip the virtual device draws after
+it (luma 224 to 83 to 198 within 0.14 s at A 17.15-17.29); the idle waits between presses in B, as labelled.
+Kept as recorded: the burned-in "D Hansen" signature in the source footage; the player's own controls for the first
+5 s of playback; one transitional frame of the proof page scrolling to its top as Back unmounts it (B about 79.5).
+Captions (editorial pills): 0:00.4-0:04.3, 0:04.8-0:09.3, 0:15.6-0:21.6 at the bottom; 1:44.3-1:51.3, 1:57.2-2:03.7,
+2:12.9-2:18.7 in the empty right half of the reading pages, clear of the page text. Same text in the .srt sidecar.
+Audio: uniform +7 dB gain on the captured app audio; nothing else added.
+
+Checks on the final file
+  eval/check_video.sh (repo flashmap 1.0.0, wcag profile): PASS, below the thresholds, 169.2 s under 180 s.
+    Record: calm-frames-replacement-demo.video_check.json and .map.json. Self-test also passed.
+  Full decode (ffmpeg -xerror): no errors. Video 169.200 s and audio 169.210 s, both starting at 0.
+  Playback integrity: output 0:10.25-0:15.5 (controls shown), 0:15.5-0:21.7 (caption area cropped out) and
+    0:21.7-1:28.0 compared with source A through the same crop, scale and frame rate. Aligned: y-PSNR 50.2, 50.1
+    and 50.1 dB on average, with the filter's per-frame minimum (all three planes) 50.1, 50.3 and 46.7 dB.
+    One frame off: 42.0 and 45.3 dB (back) and 50.2 and 45.3 dB (forward) for the first two windows, and 45.9 dB
+    either way for the longest; in the controls window the forward shift ties because the capture repeated those
+    frames, and two frames off drops it to 39.1 dB. In the longest window the aligned frame is the best match for
+    1,935 of 1,989 frames; the rest are ties from repeated capture frames. Uncut, unfaded native playback:
+    0:10.2-1:28.2, 78.0 s.
+  blackdetect (0.3 s, pix 0.10): only 1:29.1-1:31.7, the dark label card and its fades.
+  freezedetect (4 s): static menu pages, the terminal cards and the credits only.
+  Audio: integrated -18.8 LUFS, LRA 6.5 LU, true peak -3.6 dBFS, flat factor 0 (no clipping). Audible during the
+    playback stretch and short real menu tones; silent where the app is silent and on the cards.
+  Text: no em or en dashes, no seizure or safety claims; approved wording on the credits card.
+
+Not performed: listening. Sound was checked by measurement only; the owner reviews it.
+Visual review was frame sampling (contact sheets every 3 s, frames on both sides of every cut), not real-time viewing.

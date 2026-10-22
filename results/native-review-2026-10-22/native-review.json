@@ -1,0 +1,160 @@
+{
+  "session": "second native review of the validated build, October 22, 2026 (UTC 07:09 to 07:21)",
+  "installed": {
+    "sha384": "4b815f37537e69a2949b55a0d44ff57d0a7b198fdbcba63fc24475a80b28879db94c6ead3f20fad4d25d94f455d59f2c",
+    "package_sha256": "6914d157c76a0478588f63e222525754f1202990481e313b4e72422c93759090",
+    "source": "d96c088"
+  },
+  "method": "one remote key at a time with inputd-cli, each judged by the app's own CALM_TRACE lines; app-window-only ScreenCaptureKit screenshots and recordings of the Vega Virtual Device window; no microphone, desktop or other window",
+  "key_presses": 60,
+  "with_expected_trace": 54,
+  "expected_trace_seen": 53,
+  "not_seen": [
+    {
+      "utc": "2026-10-22T07:20:33.962+00:00",
+      "key": "KEY_BACK",
+      "expected": "focus kid-mode-home-more-info",
+      "instead": "CALM_TRACE focus kid-mode-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+      "why": "the script expected the Home Details button, but in this take Details was opened from the Acadia card, and Back returned focus to that card, which is the designed behavior"
+    }
+  ],
+  "screenshots": {
+    "taken": 20,
+    "failed": 0
+  },
+  "observed_on_screen": [
+    "Home, Details, More info and the proof page in the light menu palette, with the red-brown focus ring on every focused control",
+    "All three Playback Proof stages for Acadia and for McWay",
+    "Every section of Acadia's record below the proof, including the broadcast analysis and file record missed before, and the closing Back",
+    "Each Back restoring the opener's focus: the proof button, More info, then Home with Details focused",
+    "McWay: \"0 flagged periods\" and \"version not recorded in this report\" for the output analyzer, with prepared file 795927874818 and report d39321373a7d",
+    "McWay playback picture in two recorded takes"
+  ],
+  "audio_check": {
+    "file": "audio-check-mcway-20s.mp4",
+    "sha256": "148ed9dadfb94c959266d1ac0f2942716e7ea5193d172d7309a748faa60d6474",
+    "seconds": 21.32,
+    "audio": "aac 48000 Hz, 2 channels",
+    "integrated_lufs": -27.3,
+    "loudness_range_lu": 5.5,
+    "true_peak_dbfs": -12.7,
+    "mean_volume_db": -30.1,
+    "max_volume_db": -12.7,
+    "silences_of_half_a_second_or_more": 0,
+    "subjective_listening": "not done by the reviewer; left for the owner"
+  },
+  "committed_crops": [
+    {
+      "file": "r06-proof-prepared.png",
+      "shows": "Acadia Prepared stage",
+      "source_sha256": "1570a02344589e0eeecf9633fa33f8274010473b3551e840b65c3e022c959013",
+      "crop_xywh": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "sha256": "0dc264f4a69ee4d3bd6e1ee79538dc2bf00d6a9dfe8d2929afa8b7892728d5b2"
+    },
+    {
+      "file": "r011-reading-broadcast.png",
+      "shows": "Acadia: the broadcast analysis section takes focus (missed in the first session: screen locked)",
+      "source_sha256": "6cebdf58bac2dec1ca994b7e4d02bcc7dd3df768dcc9faed5e78ad4628ad14ee",
+      "crop_xywh": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "sha256": "e8bb7d58f5ab6cc075bc0eb85e7ad591204cd4d6a3beee42b741e328e996e29b"
+    },
+    {
+      "file": "r012-reading-files.png",
+      "shows": "Acadia: the file record takes focus (missed in the first session: screen locked)",
+      "source_sha256": "00cbf76308ca5c79f44825c25f57eaa4cf51b9974ea95165fef64c0fe25dcb36",
+      "crop_xywh": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "sha256": "7e4fc55b8ba1ec0e9a6bd6fd38ca2481fb59e491641a6ddfa6326a7c0a47efa0"
+    },
+    {
+      "file": "r13-bottom-back.png",
+      "shows": "Acadia: the closing Back after scrolling (missed in the first session: screen locked)",
+      "source_sha256": "e2c2609e490b16eb6efaf72e7d341836b182dadbc5fc323e677f536e4a11cb45",
+      "crop_xywh": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "sha256": "ea8f876d8f97cac1072ffcdb80c4a5ac09ea38c5cfcb4f1b73dafd8a1e077892"
+    },
+    {
+      "file": "r14-back-to-more-info.png",
+      "shows": "Back from the proof page: focus on Playback proof & details",
+      "source_sha256": "27fff69466f192bb18dfbca852477f8cd65cb169ceb8bdaf10e00f58fb4fb444",
+      "crop_xywh": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "sha256": "608fc0ad452286e0d59925eda1190020ca59618e625681527181a0e50ec5215e"
+    },
+    {
+      "file": "r15-back-to-details.png",
+      "shows": "Back from More info: focus on More info",
+      "source_sha256": "f7dd7b51d0c398adfdcd1281213decba6d24ced368146d4a2b2c15e6802a51dc",
+      "crop_xywh": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "sha256": "5122f552517ff544286f941426a18ce4404266a140b907f6eeec9a5b1721c0bc"
+    },
+    {
+      "file": "r16-back-to-home.png",
+      "shows": "Back from Details: Home, focus on Details, Acadia still selected",
+      "source_sha256": "759545ed6551170f1b29fb6d3f0dc195dc3d1cb6edcf0b0c24e803f1391ae03e",
+      "crop_xywh": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "sha256": "165742bcfec636acdd3cdc3f2b6ec9cd6204dd08d076736513be259c47ab4c0d"
+    },
+    {
+      "file": "r18-mcway-proof-source.png",
+      "shows": "McWay Source stage: 0 flagged periods",
+      "source_sha256": "c3a0b866403cf3f849b0aebd0e5da981f2d0a95867bdcb71ffcb4e96dcf753fa",
+      "crop_xywh": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "sha256": "30b21005cec33e9d467563d06c1a853f09e07124584b011bb275a667fb529767"
+    },
+    {
+      "file": "r20-mcway-proof-selection.png",
+      "shows": "McWay Selection stage: prepared file and report identities",
+      "source_sha256": "6c8f7e9c938a82fccb97d0c9895fa594b3bd7f0462c6d5e15340739adc559006",
+      "crop_xywh": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "sha256": "d3e6ef401b8940b3270a7daa67d9d4dec12c6992e47d246adc1f11910ca35ff0"
+    }
+  ],
+  "not_established": [
+    "Subjective audio and palette acceptance are the owner's.",
+    "No physical Fire TV, VoiceView or Home-key check."
+  ]
+}
