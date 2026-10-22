@@ -179,6 +179,22 @@ unmutated. The first evidence, for `7ff4a37` before integration, is kept in
 steps ran again. The generated clip differs from run to run, so encoded sizes
 differ between evidence files; within one run every comparison is exact.
 
+### With the real analyzer on an owned clip
+
+`eval/preparation_benchmark.py` reuses the runner's `Lab` with the owned Harbor clip
+and the real flashmap CLI, and times each command. Over three samples the cold
+preparation took a median of <!--n results/preparation-benchmark-2026-10-22/benchmark.json:summary.cold_seconds.median -->93.21<!--/n--> s and a warm
+rerun <!--n results/preparation-benchmark-2026-10-22/benchmark.json:summary.warm_seconds.median -->0.46<!--/n--> s. A run killed while the
+extra-cautious master was half written restarted in a median of
+<!--n results/preparation-benchmark-2026-10-22/benchmark.json:summary.restart_seconds.median -->62.07<!--/n--> s, reusing
+<!--n results/preparation-benchmark-2026-10-22/benchmark.json:summary.steps_reused_on_restart.0 -->19<!--/n--> steps and rebuilding
+<!--n results/preparation-benchmark-2026-10-22/benchmark.json:summary.steps_rebuilt_on_restart.0 -->6<!--/n-->, with an identity equal to the cold run's.
+Verification is most of that restart, so the gain is that finished work is kept and
+nothing partial is trusted, not time. One flipped byte in a cached HLS segment kept
+the title out of the local catalog until a repair of
+<!--n results/preparation-benchmark-2026-10-22/benchmark.json:integrity_demonstration.repair.seconds -->1.46<!--/n--> s. One clip on one Mac;
+[PRODUCT_EVIDENCE.md](PRODUCT_EVIDENCE.md#measured-preparation-time) has the table.
+
 ## Limitations
 
 - No power was cut. The durability claims rest on `fsync`, and on macOS

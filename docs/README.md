@@ -78,6 +78,7 @@ is [`eval/EVAL_RESULTS.md`](../eval/EVAL_RESULTS.md).
 | [ENVIRONMENT.md](ENVIRONMENT.md) | The build machine and every pinned tool version, the three ffmpegs, and the Python setup for a fresh reviewer checkout. |
 | [PREPARATION_RECOVERY.md](PREPARATION_RECOVERY.md) | What can interrupt or damage title preparation, how the ledger, publication and receipts recover from it, and the one command that reproduces the evidence. |
 | [RELEASE_READINESS.md](RELEASE_READINESS.md) | The integrated recovery and Playback Proof branch: each claim with its evidence and the command that reproduces it, what the virtual device showed, what was fixed during validation, what is not established, and the rollback. |
+| [PRODUCT_EVIDENCE.md](PRODUCT_EVIDENCE.md) | From a video to the TV in four steps, and for each capability whether it is implemented, tested, observed on the device or not verified, with measured preparation times. |
 | [RELEASE.md](RELEASE.md) | How to prepare the simulator package and the flashmap PyPI release. No final release has been published. |
 
 ### Design and brand

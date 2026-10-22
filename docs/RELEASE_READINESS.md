@@ -10,14 +10,18 @@ Earlier receipts, such as `results/playback-proof-2026-10-21/` and
 `results/preparation-recovery-2026-10-21/`, describe their own commits; every
 check below was run again on this one rather than carried over.
 
-**Verdict: ready for a native demo of this build, and for the owner's publication review**
+**Verdict: a release candidate ready for the owner's review and publication decision**
 
 Every automated gate passes on this commit, its package is installed on the
 Vega Virtual Device, and the native checks pass after one defect found on the
-device was fixed. Nothing is published: pushing this branch, a new public video
-and any Devpost change each need the owner's specific approval. Before
-recording, the owner should look at the new light menu palette and listen to
-the audio, which no check here covers.
+device was fixed. Since then the import path, recovery and timing were
+demonstrated on an owned clip with the real analyzer, the views the locked
+screen had hidden were seen, and a replacement demo was recorded and gated
+(below). Nothing is published: pushing this branch, a new public video and any
+Devpost change each need the owner's specific approval, listed in
+[the release checklist](submission/RELEASE_CHECKLIST_2026-10-22.md). The owner
+still has to listen to the audio and look at the palette, which no check here
+covers.
 
 ## What each claim rests on
 
@@ -78,14 +82,46 @@ and picture hashes are in `validation.json` under `native`.
   the oversized ledger timestamp. Both are now in the recovery runner's guard
   mutations and both are killed.
 
+## After validation: demonstration, timing and a second look (October 22)
+
+No app or pipeline code changed after `d96c088`. The later commits add
+`eval/preparation_benchmark.py`, factor the owned Harbor source assembly out of
+`eval/prepare_owned_harbor.py` without changing its bytes, and record evidence.
+For those, ruff, the style check and the eval test lane were run again.
+
+- **Import, terminal only.** The repository's own import example ran on the owned
+  Harbor clip in an isolated workspace with the real analyzer, renderer and
+  verifier, and the receipt came out
+  <!--n results/preparation-benchmark-2026-10-22/import-demonstration.json:receipt.status -->ready<!--/n-->. The title cannot
+  reach the TV without the owner: the export into the app and a dropped-in copy
+  were both refused on the package budget, and the approval registry still
+  compiles only its four catalogs
+  ([record](../results/preparation-benchmark-2026-10-22/import-demonstration.json)).
+- **Recovery and timing on the real analyzer.** Three samples of a cold run, a
+  warm rerun and a run killed while writing the extra-cautious master: the
+  restarts reused <!--n results/preparation-benchmark-2026-10-22/benchmark.json:summary.steps_reused_on_restart.0 -->19<!--/n--> steps and
+  rebuilt <!--n results/preparation-benchmark-2026-10-22/benchmark.json:summary.steps_rebuilt_on_restart.0 -->6<!--/n-->, and a damaged
+  cached byte kept the title out of the catalog until a repair;
+  <!--n results/preparation-benchmark-2026-10-22/benchmark.json:summary.checks_passed -->34<!--/n--> of
+  <!--n results/preparation-benchmark-2026-10-22/benchmark.json:summary.checks -->34<!--/n--> checks passed. Medians are in
+  [PRODUCT_EVIDENCE.md](PRODUCT_EVIDENCE.md#measured-preparation-time).
+- **Second look on the device.** With the screen unlocked, all
+  <!--n results/native-review-2026-10-22/native-review.json:screenshots.taken -->20<!--/n--> screenshots succeeded: the
+  broadcast section, the file record and the closing Back that the lock had hidden,
+  each Back with its restored focus, and all three stages for McWay too
+  ([receipt](../results/native-review-2026-10-22/native-review.json)).
+- **Replacement demo.** Recorded from the app window with app audio and gated:
+  [demo.json](../results/replacement-demo-2026-10-22/demo.json) and
+  [the run of show](submission/REPLACEMENT_DEMO_RUN_OF_SHOW.md).
+
 ## Not established
 
 - Audio was not listened to. The new light menu palette and the reading-stop
   focus look still need the owner's own review.
-- <!--n results/release-validation-2026-10-22/validation.json:native.failed_captures -->4<!--/n--> screenshots failed while the Mac screen was locked; those steps rest on
-  trace lines, which the device can drop under load.
-- The five-minute run was judged from trace lines alone, because the Mac screen
-  was locked while it played.
+- In the first session <!--n results/release-validation-2026-10-22/validation.json:native.failed_captures -->4<!--/n--> screenshots failed while the Mac
+  screen was locked; the second session saw those views on screen.
+- The full five-minute run was judged from trace lines, because the screen was
+  locked while it played; 78 seconds of a later run were recorded uncut.
 - Sea Otters, Forest and Acadia were not played in this session.
 - Recovery evidence comes from one Mac and APFS; no power was cut. See
   [the recovery limits](PREPARATION_RECOVERY.md#limitations).
