@@ -1237,9 +1237,13 @@ def main(argv: list[str] | None = None) -> int:
 
     mutations = run_mutations() if args.mutations else None
     passed = sum(1 for record in scenarios if record["result"] == "pass")
+    # Absolute paths name this machine and its user, so the evidence shows a placeholder.
+    shown = ["<checkout of the tested commit>" if os.path.isabs(arg) and Path(arg).resolve() == code_root
+             else "<path>" if os.path.isabs(arg) else arg
+             for arg in (argv if argv is not None else sys.argv[1:])]
     evidence = {
         "tool": "eval/preparation_recovery.py",
-        "command": " ".join(["python -m eval.preparation_recovery", *(argv if argv is not None else sys.argv[1:])]),
+        "command": " ".join(["python -m eval.preparation_recovery", *shown]),
         "tested_commit": git(code_root, "rev-parse", "HEAD"),
         "tested_tree_has_uncommitted_changes": bool(git(code_root, "status", "--porcelain", "--untracked-files=no")),
         "harness_commit": git(HARNESS_ROOT, "rev-parse", "HEAD"),
