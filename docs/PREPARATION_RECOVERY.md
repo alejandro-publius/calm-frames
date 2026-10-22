@@ -37,14 +37,40 @@ models, trusted the file name, and the HLS segments were not recorded at all.
 A step's fingerprint included its parents' fingerprints, never their bytes.
 The ledger was replaced through a fixed `state.json.tmp` without being flushed,
 and a JSON syntax error was the only damage it handled. `pipeline.ingest` took
-no lock. Running the scenarios below against that commit, with `--code-root`,
-records the consequences in
-`results/preparation-recovery-2026-10-21/evidence-bf2f615.json`.
+no lock. The same scenarios, run against that commit with `--code-root`, are
+in `results/preparation-recovery-2026-10-21/evidence-bf2f615.json`;
+<!--n results/preparation-recovery-2026-10-21/evidence-bf2f615.json:summary.failed -->8<!--/n--> of
+<!--n results/preparation-recovery-2026-10-21/evidence-bf2f615.json:summary.scenarios -->16<!--/n-->
+did not meet their expectation there:
 
-Verify was always the last gate, and it caught some of this: a corrupted plan
-or a stale signature failed verification. It could not rebuild what it caught,
-so those titles stayed blocked until a manual `--force`, and it was never
-designed to notice bytes that changed without changing what it measures.
+- A killed rebuild left the old rendition record in place, vouching for a
+  master half the size of the real one. The restart reused it and failed.
+- Same-size damage to an HLS segment went through verify again and came out
+  with a ready receipt naming the damaged bytes. The fake analyzer does not
+  measure pictures; with the real one verify would have measured the damaged
+  segment, but the receipt would still have named bytes the pipeline never
+  made. Damage to a plan or to the luminance record was never rebuilt.
+- Same-size damage to a safe master or a published map, a deleted HLS segment
+  and a new signing key each left the title failed, with the ledger still
+  vouching for the damaged or stale files, so every later run would fail the
+  same way until a manual `--force`. Whether verify notices damage to a
+  rendition at all depends on where the damage lands and what it samples;
+  nothing rebuilt it.
+- A ledger holding valid JSON of the wrong shape crashed the command with a
+  traceback, and one that was not UTF-8 failed the preparation.
+- A second `pipeline.ingest` of the same title ran to completion beside the
+  first, rewriting its files, and published.
+- A truncated ledger was handled by preparing again, as now, but the
+  unreadable file was overwritten rather than kept.
+
+Interrupting a first preparation, killing verification, changing the guard
+band and failing verification already behaved there as they do now.
+
+Verify was always the last gate, and it caught some of this: a stale
+signature fails it, and so does a plan whose intervals no longer match its map.
+It could not rebuild what it caught, so those titles stayed blocked until a
+manual `--force`, and it was never designed to notice bytes that change
+without changing what it measures, such as a plan field it does not compare.
 
 ## How recovery works
 
@@ -112,7 +138,9 @@ analysis fingerprint.
     --out results/preparation-recovery-2026-10-21/evidence.json --mutations
 ```
 
-It needs ffmpeg and ffprobe on the path. In a temporary directory it makes one
+It needs ffmpeg and ffprobe on the path. On the Mac that produced the evidence
+it took <!--n results/preparation-recovery-2026-10-21/evidence.json:seconds -->550.7<!--/n-->
+seconds, most of them the mutations. In a temporary directory it makes one
 calm generated clip and two Ed25519 test key pairs, runs every scenario through
 the pipeline's own command lines as separate processes, and removes the
 directory. The real flashmap CLI is used for one scenario and the fake analyzer
@@ -139,10 +167,16 @@ including two that SIGKILL real preparations and restart them.
 
 ## Results
 
-The evidence for this change is written to
-`results/preparation-recovery-2026-10-21/evidence.json`, which names the
-commit it tested. Read the scenarios themselves for where each kill landed and
-which steps ran again.
+On the commit named in `results/preparation-recovery-2026-10-21/evidence.json`,
+<!--n results/preparation-recovery-2026-10-21/evidence.json:summary.passed -->16<!--/n--> of
+<!--n results/preparation-recovery-2026-10-21/evidence.json:summary.scenarios -->16<!--/n-->
+scenarios met their expectation, and
+<!--n results/preparation-recovery-2026-10-21/evidence.json:guard_mutations.totals.killed -->22<!--/n--> of
+<!--n results/preparation-recovery-2026-10-21/evidence.json:guard_mutations.totals.mutations -->22<!--/n-->
+guard mutations made the recovery tests fail, after the same tests passed
+unmutated. Read the scenarios themselves for where each kill landed and which
+steps ran again. The generated clip differs from run to run, so encoded sizes
+differ between evidence files; within one run every comparison is exact.
 
 ## Limitations
 
@@ -184,8 +218,10 @@ keys or trust configuration changed.
   approval is intended.
 - `eval/mutate_gate.py` keeps its 70 mutations. The one that mutated the old
   hash check in `pipeline/ingest.py` now mutates the ledger's check in
-  `pipeline/state.py`; the gate measured it killed. `results/mutation.json`
-  still names the old file for that entry until the full gate is run again.
+  `pipeline/state.py`; the gate measured it and the poster entry killed
+  (`results/preparation-recovery-2026-10-21/mutation-gate-two-entries.json`).
+  `results/mutation.json` still names the old file for that entry until the
+  full gate is run again.
 - The key rotation steps in [SECURITY.md](SECURITY.md) no longer depend on
   `--force`, and [pipeline/LOCAL_LIBRARY.md](../pipeline/LOCAL_LIBRARY.md) says
   what to do after an interruption.

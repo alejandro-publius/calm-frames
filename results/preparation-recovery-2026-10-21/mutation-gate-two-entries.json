@@ -1,0 +1,73 @@
+{
+  "statement": "Every safety property Calm Frames claims has a mutation that breaks the code guarding it. The kill rate below is killed divided by attempted, rounded down, over the mutations in eval/mutate_gate.py only. It is not a whole-codebase mutation score and it does not stand in for one.",
+  "tool": "eval/mutate_gate.py",
+  "generated_utc": "2026-10-22T02:17:58Z",
+  "how_a_kill_is_counted": "The tests that guard the mutated line are run as whole files. A kill needs at least one named failing test and no collection or compile error, because both of those also exit non-zero and neither is a test catching anything.",
+  "negative_control": {
+    "description": "every selection run unmutated before any mutation was applied",
+    "performed": true,
+    "all_green": true,
+    "selections": [
+      {
+        "lane": "py",
+        "tests": [
+          "pipeline/tests/test_cached_artifacts.py"
+        ],
+        "green": true,
+        "tests_run": 9,
+        "seconds": 15.9,
+        "detail": ""
+      }
+    ]
+  },
+  "totals": {
+    "mutations": 2,
+    "killed": 2,
+    "survived": 0,
+    "survived_and_not_equivalent": 0,
+    "kill_rate": 1.0,
+    "kill_rate_percent": 100.0,
+    "as_a_fraction": "2/2"
+  },
+  "equivalent_mutants_that_were_killed_after_all": [],
+  "properties": {
+    "cached metadata and previews stay bound to their checked bytes": {
+      "mutations": 2,
+      "killed": 2,
+      "survivors": []
+    }
+  },
+  "survivors": [],
+  "mutations": [
+    {
+      "id": "cached-artifacts-check-the-actual-output-bytes",
+      "property": "cached metadata and previews stay bound to their checked bytes",
+      "lane": "py",
+      "file": "pipeline/state.py",
+      "breaks": "an artifact changed at the same path is trusted from its old cache record instead of being regenerated before publication",
+      "tests": [
+        "pipeline/tests/test_cached_artifacts.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_cached_artifacts.py::test_same_path_changed_cached_artifact_is_regenerated_before_publication[probe]",
+      "survived_because": "",
+      "seconds": 1.7,
+      "tests_run": 1
+    },
+    {
+      "id": "cached-posters-are-recorded-as-outputs",
+      "property": "cached metadata and previews stay bound to their checked bytes",
+      "lane": "py",
+      "file": "pipeline/ingest.py",
+      "breaks": "poster JPEGs disappear from the ledger's output list, so a changed or missing poster can reuse a previously checked step",
+      "tests": [
+        "pipeline/tests/test_cached_artifacts.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_cached_artifacts.py::test_same_path_changed_cached_artifact_is_regenerated_before_publication[poster]",
+      "survived_because": "",
+      "seconds": 11.0,
+      "tests_run": 6
+    }
+  ]
+}
