@@ -328,6 +328,8 @@ def _prepare(
             {
                 "sha": sha,
                 "preset": preset,
+                # Recheck maps cached before known-count decode completeness.
+                "decode_evidence_revision": 1,
                 "diag_in": diag_in,
                 "distance_ft": distance_ft,
                 "signed": bool(options.key),
