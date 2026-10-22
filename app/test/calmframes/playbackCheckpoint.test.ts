@@ -63,11 +63,22 @@ test('new valid history heals corrupt JSON without treating storage IO failure a
   const {store, set} = memory(); set('{broken'); const next = store.open(identity);
   expect(await next.save(record())).toBe(true); expect(await next.load()).toEqual(record());
 });
-test('a slow storage write does not accumulate a queue of playback samples', async () => {
+test('a slow write coalesces the latest paused sample and drains it after close', async () => {
   let finish!: (value: string | null) => void;
-  const storage = {getItem: () => new Promise<string | null>(resolve => {finish = resolve;}), setItem: jest.fn(async () => {})};
+  const storage = {getItem: jest.fn().mockImplementationOnce(() => new Promise<string | null>(resolve => {finish = resolve;})).mockResolvedValue(null),
+    setItem: jest.fn(async (_key: string, _raw: string) => {})};
   const session = createCheckpointStore(storage, () => now).open(identity);
-  const first = session.save(record()); await Promise.resolve();
-  expect(await session.save(record({positionMs: 140000}))).toBe(false);
-  finish(null); expect(await first).toBe(true); expect(storage.setItem).toHaveBeenCalledTimes(1);
+  const first = session.save(record({paused: false})); await Promise.resolve();
+  session.save(record({positionMs: 140000, paused: false}));
+  const latest = session.save(record({positionMs: 145000, paused: true}));
+  session.close(); finish(null);
+  await first; await latest;
+  expect(storage.setItem).toHaveBeenCalledTimes(2);
+  expect(JSON.parse(storage.setItem.mock.calls[1][1]).records[0]).toMatchObject({positionMs: 145000, paused: true});
+});
+test('completion discards coalesced samples instead of resurrecting cleared history', async () => {
+  const {store} = memory(); const session = store.open(identity);
+  const first = session.save(record()); session.save(record({positionMs: 145000}));
+  const clearing = session.clear(); await first; await clearing;
+  expect(await store.open(identity).load()).toBeNull();
 });

@@ -39,6 +39,7 @@ export function usePlaybackMemory(options: {
   const last = useRef<PlaybackCheckpoint | null>(options.initial ?? null);
   const session = useRef<ReturnType<typeof deviceCheckpointStore.open> | null>(null);
   const lastWrite = useRef(0);
+  const recording = useRef(true);
   const key = options.identity ? checkpointIdentityKey(options.identity) : '';
   useEffect(() => {
     if (!options.identity) return;
@@ -49,7 +50,7 @@ export function usePlaybackMemory(options: {
   }, [key]);
   const capture = (force = false) => {
     const current = latest.current, media = current.media.current;
-    if (!current.identity || !media || !current.enabled || !current.verified || current.ended ||
+    if (!recording.current || !current.identity || !media || !current.enabled || !current.verified || current.ended ||
         media.ended || media.seeking !== false || media.readyState < 2 || typeof media.paused !== 'boolean') return;
     try {
       // Use an actual reported playhead only, never the guard's extrapolated clock.
@@ -74,5 +75,8 @@ export function usePlaybackMemory(options: {
   useEffect(() => {
     if (options.ended) {last.current = null; session.current?.clear();}
   }, [options.ended]);
-  return {last, capture: () => captureRef.current(true)};
+  return {last, capture: () => captureRef.current(true), close: () => {
+    // Stop native teardown's pause event from changing the viewer's saved intent.
+    recording.current = false; session.current?.close();
+  }};
 }

@@ -27,6 +27,7 @@ export function recoverPlayback(deps: {
 }) {
   let stopped = false, seekIssued = false, seekReturned = false, seekSettled = false, confirming = false;
   let freshTimeline = false;
+  let seekGeneration = 0;
   const { media } = deps;
   const valid = () => !stopped && deps.current();
   const listeners: [string, () => void][] = [];
@@ -45,10 +46,15 @@ export function recoverPlayback(deps: {
     media.seeking === false && Math.abs(media.currentTime * 1000 - deps.positionMs) <= RECOVERY_POSITION_TOLERANCE_MS;
   const confirm = async () => {
     if (!valid() || !seekReturned || !seekSettled || !freshTimeline || !targetReady() || confirming) return;
+    const confirmedSeek = seekGeneration;
     confirming = true; deps.phase('confirming');
     try {
       if (!deps.paused) await media.play();
       if (!valid()) { media.pause(); return; }
+      // A pending native play can outlive a new seek or loss of decoded data.
+      // Its resolution cannot authorize releasing an obsolete confirmation.
+      if (confirmedSeek !== seekGeneration || !seekSettled || !freshTimeline ||
+          media.seeking !== false || media.readyState < 2) { stop('failed'); return; }
       // The signed schedule remains independent after this presentation barrier opens.
       stopped = true; detach(); deps.phase('ready');
     } catch { stop('failed'); }
@@ -57,7 +63,7 @@ export function recoverPlayback(deps: {
   deps.phase('covered');
   try {
     media.pause();
-    listen('seeking', () => { if (seekIssued) { seekSettled = false; freshTimeline = false; } });
+    listen('seeking', () => { if (seekIssued) { seekGeneration += 1; seekSettled = false; freshTimeline = false; } });
     listen('seeked', () => {
       if (valid() && seekIssued && targetReady()) { seekSettled = true; confirm(); }
     });

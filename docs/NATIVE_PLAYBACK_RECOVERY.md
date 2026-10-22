@@ -1,6 +1,7 @@
 # Native playback recovery
 
 Isolated feature branch: `codex/native-playback-recovery-2026-10-22`.
+Critical-review fixes: `codex/native-recovery-reviewed-2026-10-22`.
 Base: `13551e45bd853c392489dbecce7158a04036f615`.
 The fetched release candidate `5771bdeae9c58c257b2e785f64f2fd06c08089ff`
 has identical `app`, `hook`, `pipeline` and `flashmap` trees to this base.
@@ -37,6 +38,8 @@ and retains the existing stationary ending.
 - Local storage retains at most 24 records for 30 days. Position writes use
   reported media time, normally at two-second intervals and on pause/exit.
   Persistence is best effort; power loss or storage failure can lose progress.
+  Slow writes coalesce the latest pending sample; teardown pauses cannot replace
+  the viewer's saved playback intent.
 - Caption tracks match language and label, never a previous native track ID.
   A missing track uses the existing title default.
 - The hook mirror contains only the shared seek-source and transport gating
@@ -49,6 +52,12 @@ ordinary opening, seek safety and hook-mirror tests pass. Native media, SDK
 widgets and guard verdicts in UI tests are explicit test doubles. App TypeScript
 and scoped ESLint checks pass. These checks do not establish native playback,
 pixel ordering, audio behavior or safety efficacy.
+
+The critical review reproduced and fixed a late play resolution releasing an
+invalidated seek, a slow write dropping paused intent, native detach exceptions
+breaking Back, and audio continuing after a recovered surface was lost. Focused
+regressions failed on those behaviors before the fixes. A synchronous memory
+close also prevents teardown pause events from replacing coalesced exit samples.
 
 ## Required Mac / Vega acceptance
 

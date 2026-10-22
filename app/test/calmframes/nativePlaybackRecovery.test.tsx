@@ -140,3 +140,29 @@ test('new native positions persist with current captions and survive leaving', a
   expect(records[0].identity.renditionSha256).toBe(title.renditionSha256);
   expect(records[0].paused).toBe(false);
 });
+test('Back still exits when a native detach throws after recovery fails', async () => {
+  const view = await open(checkpoint()); await resume(view);
+  act(() => mockError(true));
+  jest.spyOn(mockMedia, 'clearSurfaceHandle').mockImplementation(() => {throw new Error('native detach');});
+  fireEvent.press(view.getByTestId('player-error-back'));
+  act(() => jest.advanceTimersByTime(5000));
+  expect(view.goBack).toHaveBeenCalledTimes(1);
+});
+test('surface loss after successful Resume pauses audio and retains retry/Back', async () => {
+  const view = await open(checkpoint()); await resume(view);
+  act(() => mockMedia.fire('seeked')); await act(async () => mockMedia.fire('timeupdate'));
+  expect(mockMedia.paused).toBe(false);
+  fireEvent(view.getByTestId('kepler-video-surface-view'), 'surfaceViewDestroyed', 'surface');
+  expect(mockMedia.paused).toBe(true);
+  expect(view.getByTestId('player-error-back')).toBeTruthy();
+  expect(view.getByTestId('player-error-retry')).toBeTruthy();
+});
+test('Back preserves playing intent despite synchronous native teardown pause', async () => {
+  const view = await open(); await attach(view);
+  await act(async () => {mockMedia.currentTime = 64; mockMedia.fire('timeupdate');});
+  mockDestroy.mockImplementationOnce(() => {mockMedia.pause(); return true;});
+  await act(async () => {for (const fn of [...mockLifecycleCallbacks]) fn('background');});
+  const records = JSON.parse((await AsyncStorage.getItem(CHECKPOINT_KEY))!).records;
+  expect(records[0].paused).toBe(false);
+  expect(view.goBack).toHaveBeenCalledTimes(1);
+});

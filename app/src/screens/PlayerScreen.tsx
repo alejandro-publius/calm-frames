@@ -530,8 +530,23 @@ const PlayerScreen = ({
     }
   };
 
+  const releaseNativePlayer = () => {
+    if (!videoRef.current) return true;
+    let released = true;
+    const attempt = (operation: () => void) => {
+      try { operation(); } catch { released = false; }
+    };
+    // One failed native operation must not prevent the remaining cleanup or Back.
+    attempt(() => videoRef.current?.pause());
+    attempt(() => videoRef.current?.clearSurfaceHandle(''));
+    attempt(() => videoRef.current?.clearCaptionViewHandle(''));
+    attempt(() => {if (!videoHandler.destroyVideoElements()) released = false;});
+    return released;
+  };
+
   useEffect(() => {
     return () => {
+      memory.close();
       leaving.current = true;
       recoveryAttempt.current?.cancel();
       surfaceGeneration.current += 1;
@@ -539,13 +554,9 @@ const PlayerScreen = ({
        * When the player is unmounted we check if the instance was destroyed correctly,
        * if not, it is destroyed (commonly used with integrations like EPG).
        */
-      if (videoRef?.current) {
-        surfaceHandle.current = null;
-        captionViewHandle.current = null;
-        videoRef.current?.clearSurfaceHandle('');
-        videoRef?.current?.clearCaptionViewHandle('');
-      }
-      videoHandler.destroyVideoElements();
+      surfaceHandle.current = null;
+      captionViewHandle.current = null;
+      releaseNativePlayer();
       videoRef.current = null;
 
       if (exitTimer.current !== null) {
@@ -565,6 +576,7 @@ const PlayerScreen = ({
       return true;
     }
     memory.capture();
+    memory.close();
     leaving.current = true;
     recoveryAttempt.current?.cancel();
     surfaceGeneration.current += 1;
@@ -575,9 +587,7 @@ const PlayerScreen = ({
 
     surfaceHandle.current = null;
     captionViewHandle.current = null;
-    videoRef?.current?.clearSurfaceHandle('');
-    videoRef?.current?.clearCaptionViewHandle('');
-    const destroyed = !videoRef.current || videoHandler.destroyVideoElements();
+    const destroyed = releaseNativePlayer();
     trace('playback', destroyed ? 'teardown ok' : 'teardown fallback');
     videoRef.current = null;
 
@@ -596,6 +606,7 @@ const PlayerScreen = ({
   // Legacy diagnostic/demo routes retain their existing teardown behavior.
   useEffect(() => {
     if (isVideoEnded) {
+      memory.close();
       trace('playback', 'ended');
       if (!route.params.ambientPreview && !continuousEnding) {
         leavePlayer();
@@ -604,10 +615,7 @@ const PlayerScreen = ({
         // finished preview must not restart audio beneath the still scene.
         surfaceGeneration.current += 1;
         if (videoRef.current) reportVideoExit();
-        videoRef.current?.pause();
-        videoRef.current?.clearSurfaceHandle('');
-        videoRef.current?.clearCaptionViewHandle('');
-        videoHandler.destroyVideoElements();
+        releaseNativePlayer();
         videoRef.current = null;
         surfaceHandle.current = null;
         captionViewHandle.current = null;
@@ -767,10 +775,19 @@ const PlayerScreen = ({
     surfaceHandle.current = null;
     setSurfaceReady(false);
     setFrameGeneration(surfaceGeneration.current);
-    videoRef.current?.clearSurfaceHandle(handle);
+    recoveryCurrent.current = false;
     recoveryAttempt.current?.cancel();
-    if (recovery?.start) setVideoError(true);
+    if (recovery?.start) {
+      memory.close(); transportReady.current = false;
+      // A completed recovery controller has detached; surface loss must still
+      // stop its audio before presenting the error/retry screen.
+      try { videoRef.current?.pause(); } catch { /* Keep the failed picture covered. */ }
+      setVideoError(true);
+    }
+    try { videoRef.current?.clearSurfaceHandle(handle); } catch { setVideoError(true); }
     trace('playback', 'surface-lost');
+    // The owning player's refs remain stable for this callback's lifetime.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recovery?.start]);
 
   const onCaptionViewCreated = useCallback((captionsHandle: string): void => {
@@ -804,16 +821,11 @@ const PlayerScreen = ({
   const retryPlayback = () => {
     const checkpoint = memory.last.current;
     if (!recovery || !checkpoint || leaving.current || retryBlocked || guard.status !== 'verified') return;
+    memory.close();
     leaving.current = true;
     recoveryAttempt.current?.cancel();
     surfaceGeneration.current += 1;
-    let destroyed = false;
-    try {
-      videoRef.current?.pause();
-      videoRef.current?.clearSurfaceHandle('');
-      videoRef.current?.clearCaptionViewHandle('');
-      destroyed = !videoRef.current || videoHandler.destroyVideoElements();
-    } catch { /* An uncertain native teardown must not create a second decoder. */ }
+    const destroyed = releaseNativePlayer();
     if (!destroyed) {
       // Do not create another native player while teardown is unconfirmed.
       leaving.current = false; setRetryBlocked(true); setVideoError(true); return;

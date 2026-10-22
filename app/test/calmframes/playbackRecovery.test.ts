@@ -57,3 +57,12 @@ test('a native error ends one attempt; it never reconstructs itself automaticall
   expect(h.seek).toHaveBeenCalledTimes(1); expect(h.phases.filter(p => p === 'failed')).toHaveLength(1);
   expect(h.media.play).not.toHaveBeenCalled();
 });
+test('a new seek during pending play invalidates confirmation instead of uncovering', async () => {
+  const h = harness(); let done!: () => void;
+  h.media.play.mockImplementation(() => new Promise(resolve => {done = resolve;}));
+  h.show(); await tick(); h.emit('seeked'); h.emit('timeupdate'); await tick();
+  h.media.seeking = true; h.emit('seeking'); done(); await tick();
+  expect(h.phases).not.toContain('ready');
+  expect(h.phases[h.phases.length - 1]).toBe('failed');
+  expect(h.media.pause).toHaveBeenCalled();
+});

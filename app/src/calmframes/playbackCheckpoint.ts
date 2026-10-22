@@ -84,7 +84,9 @@ export function createCheckpointStore(storage: CheckpointStorage, now = Date.now
     open(rawIdentity: CheckpointIdentity) {
       const identity = validateCheckpointIdentity(rawIdentity), key = slot(identity);
       const owner = (owners.get(key) ?? 0) + 1; owners.set(key, owner);
-      let closed = false, saving = false;
+      let closed = false;
+      let saving: Promise<boolean> | null = null;
+      let pending: PlaybackCheckpoint | null = null;
       const current = () => owners.get(key) === owner;
       const write = (record: PlaybackCheckpoint | null) => enqueue(async () => {
         if (record && !current()) return false;
@@ -111,18 +113,28 @@ export function createCheckpointStore(storage: CheckpointStorage, now = Date.now
           } catch { return null; }
         }),
         save(record: PlaybackCheckpoint): Promise<boolean> {
-          if (closed || saving || !current()) return Promise.resolve(false);
+          if (closed || !current()) return Promise.resolve(false);
           try {
             const checked = validateCheckpoint(record, now());
             if (checkpointIdentityKey(checked.identity) !== checkpointIdentityKey(identity)) return Promise.resolve(false);
-            saving = true;
-            return write(checked).finally(() => {saving = false;});
+            // Retain only the latest accepted sample while storage is busy.
+            // Pause/exit must not disappear behind an older playing sample.
+            pending = checked;
+            if (!saving) saving = (async () => {
+              let written = false;
+              while (pending && current()) {
+                const next = pending; pending = null;
+                written = await write(next);
+              }
+              return written;
+            })().finally(() => {saving = null;});
+            return saving;
           } catch { return Promise.resolve(false); }
         },
         clear(): Promise<boolean> {
           if (closed || !current()) return Promise.resolve(false);
           // Completion/start over closes the writer before deleting its position.
-          closed = true; return write(null);
+          closed = true; pending = null; return write(null);
         },
         close() { closed = true; },
       };
