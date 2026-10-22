@@ -1,4 +1,4 @@
-# Historical requirements review (October 17–19)
+# Historical requirements review (October 17-19)
 
 For current October 21 status, use [the submission packet](README.md) and
 [remaining blockers](OPEN_DECISIONS.md). The dated facts below are retained as

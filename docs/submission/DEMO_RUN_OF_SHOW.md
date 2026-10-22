@@ -26,12 +26,12 @@ or added music. App audio only; use a few static captions in the edit if needed.
 
 | Time | Picture and action | Optional caption |
 |---|---|---|
-| 0:00–0:15 | Hold Home. Ocean and Forest remain visible; no autoplay. | Calm Frames · prepared nature scenes on Vega |
-| 0:15–0:30 | Select McWay Falls, open Details and let the screen settle. | Five continuous minutes · natural speed · then still |
-| 0:30–1:45 | Press Watch once. Keep 75 seconds of the actual scene uninterrupted, including its real loading state. | No caption for most of this interval; let picture and nature audio carry it. |
-| 1:45–2:00 | Pause once, hold briefly, then resume once. | Pause whenever you want. |
-| 2:00–2:15 | Back once to the launching screen. Show More info at rest if focus is clear. | Prepared media only. Analyzer findings are not a medical or comfort guarantee. |
-| 2:15–2:35 | Hold app credits or a static end card made from the approved app-only capture. Leave the app on Home. | Media attribution below. |
+| 0:00-0:15 | Hold Home. Ocean and Forest remain visible; no autoplay. | Calm Frames · prepared nature scenes on Vega |
+| 0:15-0:30 | Select McWay Falls, open Details and let the screen settle. | Five continuous minutes · natural speed · then still |
+| 0:30-1:45 | Press Watch once. Keep 75 seconds of the actual scene uninterrupted, including its real loading state. | No caption for most of this interval; let picture and nature audio carry it. |
+| 1:45-2:00 | Pause once, hold briefly, then resume once. | Pause whenever you want. |
+| 2:00-2:15 | Back once to the launching screen. Show More info at rest if focus is clear. | Prepared media only. Analyzer findings are not a medical or comfort guarantee. |
+| 2:15-2:35 | Hold app credits or a static end card made from the approved app-only capture. Leave the app on Home. | Media attribution below. |
 
 This take shows an excerpt of a five-minute scene; do not imply the full runtime
 fits in the demo. State the final-frame behavior only after the separate full-run

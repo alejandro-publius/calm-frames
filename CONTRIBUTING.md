@@ -23,7 +23,7 @@ release.
 | Node 22 | the Vega app's tests, lint and the hook | `.nvmrc` says 22. The `make` targets use fnm when it is installed and the `node` on PATH otherwise |
 | ffmpeg and ffprobe | the pipeline, the conformance generator and every measurement script | The Python suite passes on both builds the README names; the published numbers came off the one in [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) |
 | gitleaks | the pre-commit hook | `make hooks` installs the hook |
-| The Vega SDK, the Vega CLI and JDK 21 | building the app and running it on the Vega Virtual Device only | The pinned versions and the install steps are in the README's [Install and run](README.md#install-and-run) |
+| The Vega SDK, the Vega CLI and JDK 21 | building the app and running it on the Vega Virtual Device only | The pinned versions and the install steps are in the README's [Install and run](README.md#native-build-and-launch) |
 
 The Python setup, with [uv](https://docs.astral.sh/uv/), from the repository
 root:
@@ -47,7 +47,7 @@ for contributions to that sample upstream, not to this repository.
 ## Run the checks
 
 These are the commands CI runs, from the README's
-[Run the checks](README.md#run-the-checks) block:
+[Run the checks](README.md#app-checks-without-a-simulator) block:
 
 ```sh
 cd app && npm ci --ignore-scripts && npm run typecheck && npm run lint && npx jest --ci --colors=false && cd ..
@@ -161,7 +161,7 @@ packaged library, and a title reaches kid mode only after verify passes.
 Prepare a benign clip with `python -m pipeline.local_library prepare`, export it
 with `python -m pipeline.packaged_library export`, check it, and build the app
 again. The README's
-[A checked local library, without AWS](README.md#a-checked-local-library-without-aws)
+[A checked local library, without AWS](pipeline/LOCAL_LIBRARY.md)
 has the commands, and
 [`pipeline/LOCAL_LIBRARY.md`](pipeline/LOCAL_LIBRARY.md) has the details. A
 title of our own gets a ledger row whose note starts "Ours.", which keeps it out

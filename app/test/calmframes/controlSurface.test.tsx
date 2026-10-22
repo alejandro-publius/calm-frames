@@ -3,8 +3,9 @@ import { render as renderNative, fireEvent } from '@testing-library/react-native
 import { StyleSheet } from 'react-native';
 import CalmButton from '../../src/calmframes/CalmButton';
 import PinKeypad from '../../src/calmframes/PinKeypad';
-import { CONTROL_MATERIAL, CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
-import { contrastRatio } from '../../src/calmframes/uiContrast';
+import { CONTROL_MATERIAL, COASTAL_MATERIAL, CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
+import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
+import { contrastRatio, relativeLuminance } from '../../src/calmframes/uiContrast';
 import { CoastalAppearance } from '../../src/calmframes/CoastalAppearance';
 const render = (element: React.ReactElement) => renderNative(element, { wrapper: ({ children }: { children: React.ReactNode }) => <CoastalAppearance.Provider value={false}>{children}</CoastalAppearance.Provider> });
 const study = (children: React.ReactNode) => <CalmControlAppearance.Provider value>{children}</CalmControlAppearance.Provider>;
@@ -71,4 +72,22 @@ test('gradient extremes preserve text contrast even when translucent secondary i
   for (const color of [...CONTROL_MATERIAL.secondary, ...CONTROL_MATERIAL.secondaryPressed, ...CONTROL_MATERIAL.selected, ...CONTROL_MATERIAL.disabled]) expect(contrastRatio('#BDC2C9', composite(color))).toBeGreaterThanOrEqual(4.5);
   expect(contrastRatio('#59838F', '#0C131A')).toBeGreaterThanOrEqual(3);
   expect(contrastRatio('#9DA4AE', '#282F39')).toBeGreaterThanOrEqual(4.5);
+});
+
+// The material-enabled production tree must not put dark gradients behind menu text.
+test('coastal controls keep readable light faces through focus and press without a luminance pulse', () => {
+  const view = renderNative(study(<CalmButton label="Prepared evidence" />));
+  const control = view.getByTestId('calm-button');
+  for (const event of ['focus', 'pressIn', 'pressOut', 'blur']) {
+    fireEvent(control, event, {});
+    const text = StyleSheet.flatten(view.getByTestId('calm-button-label').props.style).color;
+    for (const fill of view.UNSAFE_getByType('LinearGradient' as never).props.colors) {
+      expect(contrastRatio(text, fill)).toBeGreaterThanOrEqual(4.5);
+    }
+  }
+  const fills = Object.values(COASTAL_MATERIAL).flat();
+  for (const a of fills) for (const b of fills) {
+    expect(Math.abs(relativeLuminance(a) - relativeLuminance(b))).toBeLessThan(0.1);
+  }
+  for (const fill of [COASTAL_COLORS.BACKGROUND, ...fills]) expect(contrastRatio(COASTAL_COLORS.FOCUS_RING, fill)).toBeGreaterThanOrEqual(3);
 });

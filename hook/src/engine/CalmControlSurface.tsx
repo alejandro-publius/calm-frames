@@ -16,7 +16,11 @@ export const CONTROL_MATERIAL = {
   secondary: ['#263641', '#202D37'], secondaryPressed: ['#1D2932', '#2B3B47'],
   selected: ['#2B3B47', '#22303B'], disabled: ['#22303B', '#22303B'],
 } as const;
-export const COASTAL_MATERIAL = CONTROL_MATERIAL;
+export const COASTAL_MATERIAL = {
+  primary: [COASTAL_COLORS.PRIMARY, COASTAL_COLORS.PRIMARY], primaryPressed: [COASTAL_COLORS.PRIMARY, COASTAL_COLORS.PRIMARY],
+  secondary: [COASTAL_COLORS.SURFACE, COASTAL_COLORS.SURFACE], secondaryPressed: [COASTAL_COLORS.SURFACE_FOCUSED, COASTAL_COLORS.SURFACE_FOCUSED],
+  selected: [COASTAL_COLORS.SURFACE_FOCUSED, COASTAL_COLORS.SURFACE_FOCUSED], disabled: [COASTAL_COLORS.SURFACE, COASTAL_COLORS.SURFACE],
+} as const;
 
 /** All paint stays inside the existing target. No blur, elevation, motion or external shadow. */
 export function CalmControlSurface({ kind, focused, pressed, disabled, selected, cornerRadius }: {

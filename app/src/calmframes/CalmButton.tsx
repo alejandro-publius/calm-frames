@@ -27,6 +27,7 @@ import {
   CALM_COLORS,
   COASTAL_COLORS,
   COASTAL_PRIMARY_FOCUS,
+  PLAYER_PRIMARY_FOCUS,
   CALM_SPACE,
   CALM_TEXT,
   FOCUS_RING_WIDTH,
@@ -124,7 +125,7 @@ const CalmButton = ({
   );
 };
 
-const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = false, primaryFocus = COASTAL_PRIMARY_FOCUS) => StyleSheet.create({
+const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = false, primaryFocus: string = COASTAL_PRIMARY_FOCUS) => StyleSheet.create({
   button: {
     alignSelf: 'flex-start',
     flexDirection: 'row',
@@ -166,13 +167,13 @@ const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = 
   balancedPrimary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, paddingVertical: scale(CALM_SPACE.TIGHT), paddingHorizontal: scale(CALM_SPACE.ROW) },
   primaryFocused: { backgroundColor: colors.PRIMARY, borderColor: primaryFocus },
   focusedPrimaryLabel: { color: colors.INK },
-  primaryLabel: { color: coastal ? colors.BACKGROUND : colors.INK },
+  primaryLabel: { color: colors.INK },
   labelDisabled: {
     color: colors.TEXT_DISABLED,
   },
 });
 
-const darkStyles = makeStyles(CALM_COLORS);
+const darkStyles = makeStyles(CALM_COLORS, false, PLAYER_PRIMARY_FOCUS);
 const coastalStyles = makeStyles(COASTAL_COLORS, true);
 const worldStyles = makeStyles({ ...CALM_COLORS, ...WORLD }, false, WORLD.FOCUS_RING);
 export default CalmButton;

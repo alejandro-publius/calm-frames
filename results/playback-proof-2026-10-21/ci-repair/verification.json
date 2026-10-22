@@ -1,0 +1,176 @@
+{
+  "testedAtUtc": "2026-10-21T23:33:25.752958+00:00",
+  "previousRun": 39692216310,
+  "previousHead": "bd2df77129b77d03097e8b7b84ace6585af878db",
+  "previousPython": {
+    "passed": 1797,
+    "failed": 6,
+    "skipped": 99,
+    "coveragePercent": 87.78,
+    "requiredPercent": 90
+  },
+  "previousMutationJob": {
+    "status": "success",
+    "propertyAndFuzzPassed": 241,
+    "mutations": 70,
+    "killed": 68,
+    "equivalentSurvivors": [
+      "background-hides-at-once",
+      "fail-closed-unsigned"
+    ],
+    "completedAtUtc": "2026-10-21T23:42:15Z"
+  },
+  "changes": [
+    "Shared light menu palette and near-luminance focus faces; playback palette and black cover retained",
+    "72 rendered screen/stage/focus states checked with unchanged analyzer",
+    "Recovered README code links, corpus table and broken heading links",
+    "Registered McWay final still in shipped-image gate",
+    "Real synthetic-media ambient export reproduction and intake transaction regressions"
+  ],
+  "localChecks": {
+    "renderContrastAndControlTestsPassed": 63,
+    "coastalAndMirrorTestsPassed": 9,
+    "analyzerWcag": "pass",
+    "analyzerBroadcast": "pass",
+    "negativeControls": "expected refusals verified",
+    "shippedImagesPassed": 17,
+    "uiToolTestsPassed": 17,
+    "hookPackageTestsPassed": 10,
+    "pythonRegressionTestsPassed": 23,
+    "ambientExportIntegrationPassed": 1,
+    "intakeWorkerTestsPassed": 13,
+    "typecheck": "passed normally with local dependency copy",
+    "lintErrors": 0,
+    "lintWarnings": 108,
+    "publishedNumbersMatched": 543,
+    "proofAndOtherScreensReadabilityTestsPassed": 44,
+    "remainingPublishedEvidenceChecks": "all five passed: pins, gate1 archive, integration diff, baseline versions, pattern text precision",
+    "pythonTypecheck": "not run: mypy unavailable in existing environment; no installation attempted",
+    "fullPythonCoverageRun": {
+      "status": "completed with bounded environment rerun",
+      "initial": {
+        "passed": 1963,
+        "setupErrors": 9,
+        "deselected": 2,
+        "seconds": 581.6,
+        "coveragePercent": 89.19
+      },
+      "cause": "Sandbox denied socket.bind for 127.0.0.1 ephemeral-port fixtures; all nine errors shared this traceback.",
+      "rerun": {
+        "passed": 9,
+        "seconds": 9.24,
+        "socketAccess": "approved targeted localhost rerun",
+        "coverageAppended": true
+      },
+      "combinedSelectedTestsPassed": 1972,
+      "coveragePercent": 90.08639002974083,
+      "coveredLines": 6361,
+      "totalLines": 7061,
+      "coverageFloorUnchanged": 90,
+      "assertionFailures": 0,
+      "remainingTestErrors": 0
+    },
+    "fullAppSuite": {
+      "passed": 1725,
+      "skipped": 4,
+      "suitesPassed": 167,
+      "snapshotsPassed": 57,
+      "seconds": 100.626,
+      "watchman": false,
+      "coverage": {
+        "lines": {
+          "total": 6799,
+          "covered": 5638,
+          "skipped": 0,
+          "pct": 82.92
+        },
+        "statements": {
+          "total": 7257,
+          "covered": 6038,
+          "skipped": 0,
+          "pct": 83.2
+        },
+        "functions": {
+          "total": 1640,
+          "covered": 1283,
+          "skipped": 0,
+          "pct": 78.23
+        },
+        "branches": {
+          "total": 5571,
+          "covered": 4603,
+          "skipped": 0,
+          "pct": 82.62
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      }
+    },
+    "nativeInputs": "ready; matching existing dependency lock and generated player bytes copied locally; no install/download"
+  },
+  "remaining": [
+    "Fresh hosted full checks after private branch push authorization; Python mypy unavailable in existing local environment",
+    "Native palette, proof page scrolling and remote Back/focus review; experiment built but not installed",
+    "Video review, upload and submission parked at owner request"
+  ],
+  "demo": {
+    "sha256": "dad01d91bccdab173c23bbb7df43d4ee480765fa1c6f665f3a224168cf7487a9",
+    "bytes": 56583122,
+    "durationSeconds": 151,
+    "savedWcagGateMatchesHash": true,
+    "quickTimeStateObserved": "paused at 00:00",
+    "subjectiveAudioComfortReview": "pending",
+    "modified": false
+  },
+  "publication": {
+    "status": "denied",
+    "unpublishedCommit": "bc1c190cdd7cd5d97d40be1034a19dd751d6dc53",
+    "action": "git push origin codex/playback-proof-2026-10-21",
+    "reason": "Automatic approval review cited earlier no-push instructions despite later scoped publication authorization. Known not executed; no retry or alternate route attempted.",
+    "unpublishedCommits": [
+      "bc1c190cdd7cd5d97d40be1034a19dd751d6dc53",
+      "f63cc35"
+    ]
+  },
+  "previousRunFinal": {
+    "Vega app": "success",
+    "Secret scan": "success",
+    "Mutation gate, property tests and the map fuzz corpus": "success",
+    "Python packages": "failure",
+    "The app's own UI passes flashmap": "failure",
+    "Published numbers match results": "failure"
+  },
+  "localBuild": {
+    "sourceCommit": "f63cc35b65f659a7daee5bc2b2b4c549b6ee6ad2",
+    "appInputsCommitted": true,
+    "package": {
+      "path": "app/build/aarch64-debug/calm-frames-app_aarch64.vpkg",
+      "sha256": "d81a27e7ecac3d731874eafe79d7a80dd1e795f9a07a8fee654ac6dea4aa0c23",
+      "target": "aarch64 Debug"
+    },
+    "nativeValidationPerformed": false,
+    "installed": false,
+    "sdk": "0.24.9914",
+    "node": "22.23.2",
+    "preparedMediaBytes": 129255687,
+    "preparedMediaLimit": 134217728,
+    "receipt": "app/build/aarch64-debug/release-build-receipt.json"
+  },
+  "ownership": {
+    "claudeReserved": [
+      "pipeline/state.py",
+      "pipeline/ingest.py",
+      "pipeline/local_library.py",
+      "new recovery tests and runner"
+    ],
+    "currentLaneNewPythonTests": [
+      "pipeline/tests/test_ambient_export.py",
+      "pipeline/tests/test_intake_worker_boundaries.py"
+    ],
+    "productionPipelineChanged": false
+  }
+}

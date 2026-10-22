@@ -26,6 +26,6 @@ the license ledger (60 titles). The ledger identifies source versus rendition
 hashes and the excerpt/downsampling/audio-fade changes. No private signing key is
 included or required to build the already prepared catalog.
 
-Historical files (the October 13 ZIP, older scripts/checklists and October 17–19
+Historical files (the October 13 ZIP, older scripts/checklists and October 17-19
 rule review) remain dated records. They do not describe this current build or
 provide a substitute demo. Use this packet and the live form for final preparation.

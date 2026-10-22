@@ -15,7 +15,7 @@
 import { CALM_COLORS, COASTAL_COLORS } from './calmStyles';
 import { WORLD } from './CoastalWorld';
 
-/** Player controls, notices and the parent area keep the dark cinema palette. */
+/** Non-player notices and parent pages share the coastal map palette. */
 const MENU = COASTAL_COLORS;
 /**
  * Home and Details are drawn on the coastal map, so they paint its colours:
@@ -64,7 +64,7 @@ export const KID_HOME_PROFILES_FRAME: UiFrame = {
 };
 export const KID_HOME_PROFILES_OFFLINE_FRAME: UiFrame = {
   screen: 'kid-home-profiles-offline', background: MAP.BACKGROUND,
-  surfaces: [MENU.SURFACE, MAP.PRIMARY, MAP.SURFACE],
+  surfaces: [MENU.SURFACE, MAP.PRIMARY],
 };
 export const KID_HOME_PROFILES_FOCUSED_FRAME: UiFrame = {
   screen: 'kid-home-profiles-focused', background: MAP.BACKGROUND,
@@ -86,7 +86,7 @@ export const KID_HOME_EMPTY_FRAME: UiFrame = {
 export const KID_HOME_OFFLINE_FRAME: UiFrame = {
   screen: 'kid-home-offline',
   background: MAP.BACKGROUND,
-  surfaces: [MENU.SURFACE, MAP.PRIMARY, MAP.SURFACE],
+  surfaces: [MENU.SURFACE, MAP.PRIMARY],
 };
 
 export const TITLE_DETAILS_HARBOR_FRAME: UiFrame = { screen: 'title-details-harbor', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE] };
@@ -100,7 +100,7 @@ export const TITLE_DETAILS_FRAME: UiFrame = {
 
 /**
  * A title that is not ready to play. It is not drawn on the map: no destination
- * to show, so it keeps the dark palette.
+ * to show, so it keeps the shared coastal page palette.
  *
  * No strip, because a title that did not verify has no schedule to show, so
  * neither of the strip's colours is painted. What is left is the notice.

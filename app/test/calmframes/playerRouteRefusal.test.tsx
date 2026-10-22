@@ -28,9 +28,10 @@ import { guardedParamsFor, titleDataFor } from '../../src/screens/KidModeScreen'
 import PlayerScreen from '../../src/screens/PlayerScreen';
 import { VideoHandler } from '../../src/utils/VideoHandler';
 import { SHELF_NOW } from './shelfFixtures';
+import { MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 
-function acadiaRoute() {
-  const title = packagedLibrary.titles(DEFAULT_SETTINGS).find((one) => one.sha256 === ACADIA_SOURCE_SHA256)!;
+function acadiaRoute(source = ACADIA_SOURCE_SHA256) {
+  const title = packagedLibrary.titles(DEFAULT_SETTINGS).find((one) => one.sha256 === source)!;
   const entry = checkTitle(title, {
     settings: DEFAULT_SETTINGS,
     publicKeyBase64: packagedLibrary.publicKeyFor(title, DEFAULT_SETTINGS) ?? '',
@@ -95,6 +96,18 @@ it.each(refused)('refuses %s: no opening, no media, one unavailable card and one
   fireEvent.press(screen.getByRole('button', { name: 'Back' }));
   expect(screen.getByText('Going back...')).toBeTruthy();
   expect(screen.queryByRole('button', { name: 'Back' })).toBeNull();
+  act(() => jest.advanceTimersByTime(701));
+  expect(goBack).toHaveBeenCalledTimes(1);
+});
+
+it('a substituted continuous-scene edition cannot prebuffer; Back still returns once', () => {
+  const route = acadiaRoute(MCWAY_SOURCE_SHA256) as Params;
+  route.guarded.renditionSha256 = 'b'.repeat(64);
+  const goBack = renderRoute(route);
+  expect(preBuffer).not.toHaveBeenCalled();
+  expect(screen.queryByTestId('kepler-video-surface-view')).toBeNull();
+  expect(screen.getByText('This video is unavailable')).toBeTruthy();
+  fireEvent.press(screen.getByRole('button', { name: 'Back' }));
   act(() => jest.advanceTimersByTime(701));
   expect(goBack).toHaveBeenCalledTimes(1);
 });

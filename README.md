@@ -56,6 +56,28 @@ The preparation and playback boundaries matter:
 
 This app plays its prepared catalog. It does not intercept Prime Video, other apps, or arbitrary streaming content.
 
+<details>
+<summary>Code paths behind the diagram</summary>
+
+### Required tech at runtime
+
+The installed app uses Vega's W3C media player. The remaining rows distinguish local preparation from runtime verification; they are code references, not extra hackathon requirements. Symbol names accompany line links so they remain checkable on this branch.
+
+| Stage | Entry point | Responsibility |
+|---|---|---|
+| Native playback | `new VideoPlayer()` [source](app/src/utils/VideoHandler.ts#L153) | Create the Vega player |
+| Runtime map | `verifyFlashMap` [source](app/src/calmframes/flashMap.ts#L217) | Check signed map identity and validity |
+| Runtime catalog | `createPackagedLibrary` [source](app/src/calmframes/packagedLibrary.ts#L218) | Bind the packaged route and evidence |
+| Runtime coverage | `useFlashGuard` [source](app/src/calmframes/useFlashGuard.ts#L159) | Coordinate cover state and player clock |
+| Runtime seeking | `planSeek` [source](app/src/calmframes/seekSafety.ts#L113) | Plan a seek against covered intervals |
+| Runtime ending | `continuousEndingForRoute` [source](app/src/calmframes/continuousScene.ts#L23) | Recognize the exact continuous edition |
+| Offline preparation | `ingest_title` [source](pipeline/ingest.py#L198) | Orchestrate preparation |
+| Offline verification | `verify_title` [source](pipeline/verify.py#L485) | Check actual output against its source |
+| Offline package | `export_packaged_library` [source](pipeline/packaged_library.py#L437) | Export verified editions and reports |
+| Offline replacement | `export_ambient_catalog` [source](pipeline/ambient_export.py#L24) | Independently reproduce replacement media |
+
+</details>
+
 ## Engineering decisions
 
 - **Long scenes over a short reel.** The original short-preview experience was rejected as uncomfortable and too brief. The current McWay edition uses one sustained camera view; legacy titles remain stationary by default. This design change is not a guarantee of individual comfort.
@@ -154,6 +176,25 @@ These are recorded results with separate scopes, not a claim that the latest loc
 The older activation receipt's “not installed / Mac locked” note describes that earlier checkpoint. The linked current capture record documents the later installation and picture observations without rewriting the historical receipt.
 
 **Still open:** final edited demo review and public upload, Devpost submission, and subjective audio/comfort acceptance. Physical Fire TV measurements and full VoiceView acceptance are not claimed. Analyzer passes and simulator observations do not establish clinical safety. Calm Frames is not a medical device.
+
+<details>
+<summary>Historical screening corpus, separate from the shipped catalog</summary>
+
+This September 17, 2026 WCAG screening run measures detector findings, not clinical safety, viewing comfort or current catalog approval. The complete per-source file counts below add up to <!--n results/screening.json:clips_analyzed_ok -->38<!--/n--> analyzed files. See [raw screening results](results/screening.json) for findings and scope. Hazardous research sources are not linked for playback here.
+
+| Source group | Files |
+|---|---|
+| 1930 public-domain film | <!--n results/screening.json:per_source.1930 public-domain film.files -->2<!--/n--> |
+| Blender open movies | <!--n results/screening.json:per_source.Blender open movies.files -->3<!--/n--> |
+| DVIDS | <!--n results/screening.json:per_source.DVIDS.files -->2<!--/n--> |
+| NASA ISS time-lapse | <!--n results/screening.json:per_source.NASA ISS time-lapse.files -->3<!--/n--> |
+| NASA SVS 5011 | <!--n results/screening.json:per_source.NASA SVS 5011.files -->1<!--/n--> |
+| Wikimedia Commons | <!--n results/screening.json:per_source.Wikimedia Commons.files -->16<!--/n--> |
+| Wikimedia Commons fireworks | <!--n results/screening.json:per_source.Wikimedia Commons fireworks.files -->4<!--/n--> |
+| Wikimedia Commons lightning | <!--n results/screening.json:per_source.Wikimedia Commons lightning.files -->4<!--/n--> |
+| unlabeled | <!--n results/screening.json:per_source.unlabeled.files -->3<!--/n--> |
+
+</details>
 
 ## Media attribution and license
 
