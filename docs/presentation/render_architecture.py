@@ -1,6 +1,7 @@
 """Render the README architecture as PNG and self-contained SVG. Requires Pillow."""
-from pathlib import Path
 from html import escape
+from pathlib import Path
+
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -28,7 +29,8 @@ def text(x,y,value,size=22,color=INK,bold=False,display=False):
 def arrow(points):
     q=[(x*SCALE,y*SCALE) for x,y in points]
     d.line(q,fill=INK,width=2*SCALE)
-    x,y=points[-1]; px,py=points[-2]
+    x,y=points[-1]
+    px,py=points[-2]
     head=[(x,y),(x-8,y-5),(x-8,y+5)] if x>px else [(x,y),(x-5,y-8),(x+5,y-8)]
     d.polygon([(a*SCALE,b*SCALE) for a,b in head],fill=INK)
     svg.append('<polyline points="'+' '.join(f'{a},{b}' for a,b in points)+'" fill="none" stroke="'+INK+'" stroke-width="2"/>')
@@ -38,7 +40,8 @@ def card(x,y,w,kicker,title,lines):
     rect(x,y,w,164,'#fffaf0',LINE,15)
     text(x+22,y+19,kicker,16,MUTED,bold=True)
     text(x+22,y+49,title,27,INK,bold=True)
-    for n,line in enumerate(lines): text(x+22,y+91+n*26,line,20,MUTED)
+    for n,line in enumerate(lines):
+        text(x+22,y+91+n*26,line,20,MUTED)
 
 rect(0,0,W,H,'#f7f2e6')
 text(48,34,'From source to a scene that stays',39,display=True)
@@ -47,14 +50,16 @@ text(48,152,'OFFLINE PREPARATION',17,INK,bold=True)
 card(48,187,366,'01 / PROVENANCE','Licensed source',['Credit + source hash + timing','No automatic playback'])
 card(457,187,366,'02 / ANALYSIS','Analyze + sign',['flashmap findings and maps','WCAG / broadcast profiles'])
 card(866,187,366,'03 / PREPARATION','Render + verify',['Preset outputs + exact reports','Authenticated library export'])
-arrow([(414,269),(457,269)]); arrow([(823,269),(866,269)])
+arrow([(414,269),(457,269)])
+arrow([(823,269),(866,269)])
 arrow([(1049,351),(1049,385),(183,385),(183,450)])
 text(48,417,'NATIVE VEGA APP',17,INK,bold=True)
 card(48,450,270,'04 / BUILD BOUNDARY','Approved library',['Compiled catalog + hashes','Reports + budget checks'])
 card(353,450,270,'05 / WATCH','Route + map checks',['Exact title and edition','Ed25519 verification'])
 card(658,450,270,'06 / PLAYBACK','Guarded player',['Cover before seek','Pause / resume / Back'])
 card(963,450,270,'07 / MCWAY END','Final frame holds',['Exact edition and still','No repeat or auto-exit'])
-for a,b in [(318,353),(623,658),(928,963)]: arrow([(a,532),(b,532)])
+for a,b in [(318,353),(623,658),(928,963)]:
+    arrow([(a,532),(b,532)])
 rect(48,659,1184,73,TEAL,None,13)
 text(70,680,'Unresolved verification keeps the picture covered. New media cannot grant itself trust.',24,INK,bold=True)
 text(48,768,'Prepared catalog only. No interception of other apps or streaming services.',22,MUTED)
