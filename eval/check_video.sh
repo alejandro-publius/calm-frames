@@ -310,7 +310,7 @@ selftest() {
     -vf "geq=lum='110+24*sin(2*PI*N/300)':cb='128':cr='128'" \
     -c:v libx264 -preset ultrafast -pix_fmt yuv420p -an "$calm" || return 2
 
-  local failures=0
+  local failures=0 hazard_status
 
   echo "--- 1 of 2: the strobe. This has to be blocked. ---"
   echo
@@ -319,6 +319,11 @@ selftest() {
     echo "SELF TEST FAILED: the strobe was passed. The check is not checking." >&2
     failures=$((failures + 1))
   else
+    hazard_status=$?
+    if [ "$hazard_status" -ne 1 ]; then
+      echo "SELF TEST UNVERIFIED: the strobe check did not complete (exit $hazard_status)." >&2
+      return 2
+    fi
     echo
     echo "as expected: the strobe was blocked"
   fi
