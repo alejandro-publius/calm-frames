@@ -741,6 +741,12 @@ describe('the ten foot pass', () => {
     },
   );
 
+  it('holds the reading stops on the technical page to the same ring floors as controls', () => {
+    const acadia = measured.find((one) => one.name === `playback-proof-${ACADIA_SOURCE_SHA256.slice(0, 8)}-source`);
+    expect(acadia?.focused.map((ring) => ring.testID).filter((id) => id.includes('-reading-'))).toEqual(
+      ['intro', 'findings', 'wcag', 'files'].map((section) => `title-details-record-reading-${section}`));
+  });
+
   it('measured every screen and wrote the numbers down', () => {
     expect(measured).toHaveLength(CASES.length);
 

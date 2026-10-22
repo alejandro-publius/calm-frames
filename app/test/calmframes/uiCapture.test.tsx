@@ -760,6 +760,13 @@ describe('the capture path', () => {
             fireEvent(screen.getByTestId(`${proofId}-step-${stage}`), 'focus');
           },
         })),
+        // The record below the proof, one reading stop at a time, as the remote reaches it.
+        ...['intro', ...(source === ACADIA_SOURCE_SHA256 ? ['findings'] : []), 'wcag', 'files'].map((section, index, sections) => ({
+          name: `proof-reading-${section}`, reason: 'remote focus on the record below the proof', act: () => {
+            fireEvent(screen.getByTestId(index === 0 ? `${proofId}-step-binding` : `title-details-record-reading-${sections[index - 1]}`), 'blur');
+            fireEvent(screen.getByTestId(`title-details-record-reading-${section}`), 'focus');
+          },
+        })),
         { name: 'proof-return-info', reason: 'back to info', act: () => press('title-details-info-back') },
         { name: 'proof-return-watch', reason: 'back to watch', act: () => press('title-details-info-back') },
       ] });

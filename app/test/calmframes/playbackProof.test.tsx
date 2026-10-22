@@ -1,6 +1,8 @@
 import React from 'react';
 import { act, fireEvent, render } from '@testing-library/react-native';
-import { BackHandler } from 'react-native';
+import { BackHandler, StyleSheet } from 'react-native';
+import type { ReactTestInstance } from 'react-test-renderer';
+import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
 import { createHash } from 'crypto';
 import { PLAYBACK_PROOF_RECORDS } from '../../src/calmframes/approvedPlaybackProof';
 import { loadPlaybackProof, playbackProofFor } from '../../src/calmframes/playbackProof';
@@ -143,6 +145,44 @@ test('proof navigation never starts playback and remote Back restores each opene
   expect(view.getByTestId('title-details-technical').props.hasTVPreferredFocus).toBe(true);
   act(() => { handlers[handlers.length - 1](); });
   expect(view.getByTestId('title-details-show-info').props.hasTVPreferredFocus).toBe(true);
+  expect(play).not.toHaveBeenCalled();
+  expect(leave).not.toHaveBeenCalled();
+});
+
+// On the device, remote focus jumps between focusable elements and the page scrolls only to the
+// focused one, so text between the proof's stage buttons and the closing Back could never be
+// shown. Every section of the record below the proof must sit inside a focusable reading stop.
+test.each([
+  ['Acadia, WCAG', ACADIA_SOURCE_SHA256, DEFAULT_SETTINGS, ['intro', 'findings', 'wcag', 'files']],
+  ['Acadia, extra cautious', ACADIA_SOURCE_SHA256, { ...DEFAULT_SETTINGS, preset: 'extra-cautious' } as HouseholdSettings, ['intro', 'findings', 'wcag', 'broadcast', 'files']],
+  ['McWay, extra cautious', MCWAY_SOURCE_SHA256, { ...DEFAULT_SETTINGS, preset: 'extra-cautious' } as HouseholdSettings, ['intro', 'wcag', 'broadcast', 'files']],
+])('remote focus can reach every section of the record below the proof: %s', (_name, source, settings, sections) => {
+  const play = jest.fn(), leave = jest.fn();
+  const view = render(<TitleDetailsScreen entry={entryFor(source, settings)} settings={settings} onPlay={play} onBack={leave} />);
+  fireEvent.press(view.getByTestId('title-details-show-info'));
+  fireEvent.press(view.getByRole('button', { name: 'Playback proof & details' }));
+  const isStop = (node: ReactTestInstance) => node.props.accessibilityRole === 'text' && node.props.focusable === true;
+  const unreachable: string[] = [];
+  const walk = (node: ReactTestInstance | string, inStop: boolean): void => {
+    if (typeof node === 'string' || node.props.testID === 'title-details-record-proof') return;
+    const reached = inStop || isStop(node);
+    // Host components carry their name as a string type; composite ones carry the component.
+    if ((node.type as unknown) === 'Text' && !reached) unreachable.push(String(node.props.children));
+    node.children.forEach(child => walk(child, reached));
+  };
+  walk(view.getByTestId('title-details-record'), false);
+  expect(unreachable).toEqual([]);
+  const ids = sections.map(section => `title-details-record-reading-${section}`);
+  expect(view.UNSAFE_root.findAll(node => typeof node.type === 'string' && isStop(node)).map(node => node.props.testID)).toEqual(ids);
+  for (const id of ids) {
+    const stop = view.getByTestId(id);
+    expect(StyleSheet.flatten(stop.props.style).borderColor).toBe('transparent');
+    fireEvent(stop, 'focus');
+    expect(StyleSheet.flatten(view.getByTestId(id).props.style)).toMatchObject({ borderColor: COASTAL_COLORS.FOCUS_RING, backgroundColor: COASTAL_COLORS.SURFACE_FOCUSED });
+    fireEvent.press(view.getByTestId(id));
+    fireEvent(view.getByTestId(id), 'blur');
+  }
+  expect(view.getByText('Technical details')).toBeTruthy();
   expect(play).not.toHaveBeenCalled();
   expect(leave).not.toHaveBeenCalled();
 });
