@@ -166,3 +166,9 @@ test('Back preserves playing intent despite synchronous native teardown pause', 
   expect(records[0].paused).toBe(false);
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
+test('unmount invalidates pending initialization even before a media instance exists', async () => {
+  const view = startPlayer('none', true, false, undefined, false, true, true);
+  await settle(); mockDestroy.mockClear();
+  view.unmount();
+  expect(mockDestroy).toHaveBeenCalledTimes(1);
+});

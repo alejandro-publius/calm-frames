@@ -170,6 +170,15 @@ describe('VideoHandler', () => {
     await expect(pending).resolves.toBeUndefined();
     expect(initialize).not.toHaveBeenCalled();
   });
+  it('invalidates initialization before native construction when destroyed without an instance', async () => {
+    const { mockVideoRef, videoHandler } = createVideoHandler();
+    (VideoPlayer as unknown as jest.Mock).mockClear();
+    const pending = videoHandler.preBufferVideo();
+    videoHandler.destroyVideoElements();
+    await pending;
+    expect(VideoPlayer).not.toHaveBeenCalled();
+    expect(mockVideoRef.current).toBeNull();
+  });
 
   it('does not attach listeners or load after leaving during initialization', async () => {
     const { mockVideoRef, videoHandler } = createVideoHandler();

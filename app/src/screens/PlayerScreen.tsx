@@ -531,7 +531,7 @@ const PlayerScreen = ({
   };
 
   const releaseNativePlayer = () => {
-    if (!videoRef.current) return true;
+    const hadMedia = Boolean(videoRef.current);
     let released = true;
     const attempt = (operation: () => void) => {
       try { operation(); } catch { released = false; }
@@ -540,7 +540,9 @@ const PlayerScreen = ({
     attempt(() => videoRef.current?.pause());
     attempt(() => videoRef.current?.clearSurfaceHandle(''));
     attempt(() => videoRef.current?.clearCaptionViewHandle(''));
-    attempt(() => {if (!videoHandler.destroyVideoElements()) released = false;});
+    // Destruction also invalidates pending initialization before construction.
+    // Its false return for an absent instance is not a teardown failure.
+    attempt(() => {const destroyed = videoHandler.destroyVideoElements(); if (hadMedia && !destroyed) released = false;});
     return released;
   };
 

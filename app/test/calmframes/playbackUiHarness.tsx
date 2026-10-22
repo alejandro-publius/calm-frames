@@ -62,7 +62,7 @@ jest.mock('../../src/utils/VideoHandler', () => ({
       this.video = video; this.data = data; this.initialized = initialized;
       this.buffering = buffering; mockError = error; mockBuffering = buffering; mockEnded = ended;
     }
-    preBufferVideo() { this.video.current = mockMedia; this.initialized(true); this.buffering(false); }
+    preBufferVideo() { if (mockDeferInitialization) return; this.video.current = mockMedia; this.initialized(true); this.buffering(false); }
     destroyVideoElements() { return mockDestroy(); }
   },
 }));
@@ -70,6 +70,7 @@ jest.mock('../../src/utils/VideoHandler', () => ({
 export const mockLifecycleCallbacks = new Set<(state: string) => void>();
 export const mockBackCallbacks = new Set<() => boolean>();
 export const mockDestroy = jest.fn();
+let mockDeferInitialization = false;
 export const mockSeekFocus = jest.fn();
 export let mockEnded: (value: boolean) => void;
 export let mockError: (value: boolean) => void;
@@ -93,7 +94,8 @@ export function makeMedia() {
   };
 }
 export const interval = { startMs: 5000, endMs: 9000, causes: ['general'] };
-export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none', showHomeOpening = false, materials = false, bifUrl?: string, ambientPreview = false, prepared = false): ReturnType<typeof render> & { goBack: jest.Mock } {
+export function startPlayer(kind: 'none' | 'covering' | 'countdown' = 'none', showHomeOpening = false, materials = false, bifUrl?: string, ambientPreview = false, prepared = false, deferInitialization = false): ReturnType<typeof render> & { goBack: jest.Mock } {
+  mockDeferInitialization = deferInitialization;
   mockMedia = makeMedia();
   mockMedia.currentTime = kind === 'countdown' ? 3 : 6;
   const raw = kind === 'none' ? NO_CARD : cardAt([interval] as never, mockMedia.currentTime * 1000);
