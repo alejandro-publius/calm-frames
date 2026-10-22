@@ -164,6 +164,121 @@ def test_a_record_naming_a_path_outside_the_title_is_dropped(tmp_path, path):
     assert Ledger(tmp_path).get("step") is None
 
 
+@pytest.mark.parametrize("damage", [
+    "other_name", "fingerprint_not_text", "outputs_not_a_list", "output_listed_twice",
+    "completion_not_a_number", "completion_infinite", "extra_not_an_object", "no_output_hashes",
+    "record_not_an_object",
+])
+def test_a_record_with_the_wrong_shape_is_dropped_and_its_step_runs_again(tmp_path, damage):
+    ledger, _ = _committed(tmp_path)
+    data = json.loads(ledger.path.read_text())
+    record = data["steps"]["step"]
+    if damage == "other_name":
+        record["name"] = "elsewhere"
+    elif damage == "fingerprint_not_text":
+        record["fingerprint"] = 7
+    elif damage == "outputs_not_a_list":
+        record["outputs"] = "out/artifact.bin"
+    elif damage == "output_listed_twice":
+        record["outputs"] = record["outputs"] * 2
+    elif damage == "completion_not_a_number":
+        record["completed_at"] = True
+    elif damage == "completion_infinite":
+        record["completed_at"] = float("inf")
+    elif damage == "extra_not_an_object":
+        record["extra"] = []
+    elif damage == "no_output_hashes":
+        record.pop("output_sha256")
+    else:
+        data["steps"]["step"] = ["not", "a", "record"]
+    ledger.path.write_text(json.dumps(data))
+    reloaded = Ledger(tmp_path)
+    assert reloaded.get("step") is None
+    assert [event["event"] for event in reloaded.events] == ["record_dropped"]
+
+
+@pytest.mark.parametrize("change", ["unknown_format", "other_pipeline_version"])
+def test_a_ledger_from_another_format_or_version_keeps_only_its_source(tmp_path, change):
+    ledger, _ = _committed(tmp_path)
+    ledger.set_source({"name": "kept"})
+    data = json.loads(ledger.path.read_text())
+    if change == "unknown_format":
+        data["ledger_format"] = 99
+    else:
+        data["pipeline_version"] = "0"
+    ledger.path.write_text(json.dumps(data))
+    reloaded = Ledger(tmp_path)
+    assert reloaded.get("step") is None
+    assert reloaded.source == {"name": "kept"}
+    assert [event["event"] for event in reloaded.events] == ["ledger_outdated"]
+
+
+def test_an_output_that_cannot_be_read_is_not_reused(tmp_path):
+    ledger, output = _committed(tmp_path)
+    output.chmod(0)
+    try:
+        check = ledger.check("step", "fp")
+    finally:
+        output.chmod(0o644)
+    assert not check.valid
+    assert check.reason == "output out/artifact.bin cannot be read"
+
+
+def test_relative_outputs_are_taken_inside_the_title(tmp_path):
+    (tmp_path / "out").mkdir()
+    (tmp_path / "out" / "artifact.bin").write_bytes(b"bytes")
+    Ledger(tmp_path).record("step", "fp", ["out/artifact.bin"])
+    assert Ledger(tmp_path).check("step", "fp").valid
+    with pytest.raises(LedgerError):
+        Ledger(tmp_path).record("step", "fp", ["../escape.bin"])
+
+
+def test_a_malformed_ledger_replaced_by_a_link_is_not_moved_or_followed(tmp_path):
+    ledger_path = tmp_path / LEDGER_NAME
+    ledger_path.write_text("{ torn")
+    reader = Ledger(tmp_path)
+    target = tmp_path.parent / f"{tmp_path.name}-target.json"
+    target.write_text("{}")
+    ledger_path.unlink()
+    ledger_path.symlink_to(target)
+    with pytest.raises(LedgerError):
+        reader.set_source({})
+    assert target.read_text() == "{}"
+    assert not (tmp_path / MALFORMED_NAME).exists()
+
+
+def test_a_directory_that_cannot_be_flushed_is_tolerated_and_reported(tmp_path, monkeypatch):
+    import errno
+
+    def refuse(fd: int) -> None:
+        raise OSError(errno.EINVAL, "not supported here")
+
+    assert durable.fsync_directory(tmp_path) is True
+    monkeypatch.setattr(durable, "fsync_fd", refuse)
+    assert durable.fsync_directory(tmp_path) is False
+
+
+def test_temporary_names_are_tried_a_bounded_number_of_times(tmp_path, monkeypatch):
+    monkeypatch.setattr(durable.secrets, "token_hex", lambda n: "same")
+    (tmp_path / f".state.json.{os.getpid()}.same.tmp").write_text("someone else's")
+    with pytest.raises(PipelineError, match="temporary file"):
+        durable.atomic_write_bytes(tmp_path / "state.json", b"{}")
+    assert not (tmp_path / "state.json").exists()
+
+
+def test_a_lock_on_something_that_is_not_a_regular_file_is_refused(tmp_path):
+    os.mkfifo(tmp_path / ".ingest.lock")
+    with pytest.raises(PipelineError, match="regular file"):
+        with exclusive_lock(tmp_path / ".ingest.lock", what="test"):
+            pass
+
+
+def test_flushing_names_each_file_once_and_skips_missing_ones(tmp_path):
+    present = tmp_path / "present.bin"
+    present.write_bytes(b"bytes")
+    assert durable.sync_files([present, present, tmp_path / "missing.bin"]) == 1
+
+
 def test_records_from_before_output_hashes_are_read_but_never_reused(tmp_path):
     ledger, _ = _committed(tmp_path)
     data = json.loads(ledger.path.read_text())

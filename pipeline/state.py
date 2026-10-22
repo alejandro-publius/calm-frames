@@ -280,21 +280,24 @@ class Ledger:
         same temporary directory /var and /private/var).
         """
         path = Path(output)
-        if not path.is_absolute():
-            _relative_parts(path.as_posix())
-            return path.as_posix()
-        attempts = (
-            (path, self.title_dir.absolute()),
-            (path.parent.resolve() / path.name, self.title_dir.resolve()),
-        )
-        for candidate, root in attempts:
-            try:
-                relative = candidate.relative_to(root).as_posix()
-            except ValueError:
-                continue
-            _relative_parts(relative)
-            return relative
-        raise LedgerError(f"{path} is outside the title directory, so no step may record it")
+        relative = None if path.is_absolute() else path.as_posix()
+        if path.is_absolute():
+            for candidate, root in (
+                (path, self.title_dir.absolute()),
+                (path.parent.resolve() / path.name, self.title_dir.resolve()),
+            ):
+                try:
+                    relative = candidate.relative_to(root).as_posix()
+                    break
+                except ValueError:
+                    continue
+        try:
+            if relative is not None:
+                _relative_parts(relative)
+                return relative
+        except ValueError:
+            pass
+        raise LedgerError(f"{output} is outside the title directory, so no step may record it")
 
     def check(self, step: str, fingerprint: str) -> StepCheck:
         """May this step be skipped? Only when every output still has its recorded bytes."""
