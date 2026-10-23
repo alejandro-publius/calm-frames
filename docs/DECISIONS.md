@@ -2865,3 +2865,31 @@ validated product. Record those permissions and defer production; reconcile the
 story with the accepted build first. Preserve the submitted fallback and original judging
 package. The stated submission cutoff remains a protective boundary because
 the official rules page was inaccessible here.
+
+## 2026-10-23: one owner, compatible dependency fixes and clean product validation
+
+Decision: continue the canonical cloud branch under one integration owner;
+preserve completed Claude handoffs and do not assign new parallel app work.
+Visible Codex threads were idle; external Claude stop acknowledgements cannot
+be obtained through the available tools. No external checkout is edited.
+
+Only launch-editor 2.14.1 to 2.14.2 and top-level shell-quote 1.10.0 to 1.11.0
+change in the lock. Both satisfy parent ranges; the latter is the lowest fixed
+version and avoids additional parser behavior in 1.12.0. The manifest, nested
+old CLI pin, TOML and exception file stay unchanged. Cost: native SDK/package
+validation remains required, and unresolved audit findings remain visible.
+
+The final lock was installed cleanly with the hosted lifecycle policy. Normal
+typecheck, lint and focused contrast/focus/layout checks pass; no symlink or
+compiler-flag workaround is used for acceptance. All SBOMs reproduce with the
+documented exact generators. The product receipt preserves hashes and scope.
+The owner authorized a reviewed normal private-branch push and CI/Audit for
+the exact source. No status-only commit is used to restart a shared job.
+
+The owner explicitly approved the narrow TOML investigation proposal in
+`cloud-integration-2026-10-23/DEPENDENCY_DECISION.md`. Record only those five
+advisories through October 30 with required controls; do not renew the expired
+groups or treat approval as Mac availability. Product acceptance also needs the exact-build
+Mac checks and explicit human observations. Manga and narration remain parked;
+prior script, built-in voice-selection and unlimited-budget approvals remain
+recorded and will not be requested again. The submitted fallback is preserved.

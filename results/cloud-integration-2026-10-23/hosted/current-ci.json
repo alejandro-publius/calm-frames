@@ -1,12 +1,9 @@
 {
-  "databaseId": 39997723491,
-  "headSha": "6360417814d684d41c94789a9e406fc27de53c66",
-  "event": "pull_request",
-  "status": "in_progress",
-  "conclusion": "",
-  "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/39997723491",
+  "conclusion": "success",
   "createdAt": "2026-10-23T17:45:43Z",
-  "updatedAt": "2026-10-23T17:47:15Z",
+  "databaseId": 39997723491,
+  "event": "pull_request",
+  "headSha": "6360417814d684d41c94789a9e406fc27de53c66",
   "jobs": [
     {
       "completedAt": "2026-10-23T17:51:07Z",
@@ -205,12 +202,12 @@
       "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/39997723491/job/120566185377"
     },
     {
-      "completedAt": null,
-      "conclusion": "",
+      "completedAt": "2026-10-23T18:22:06Z",
+      "conclusion": "success",
       "databaseId": 120566185491,
       "name": "Python packages",
       "startedAt": "2026-10-23T17:47:14Z",
-      "status": "in_progress",
+      "status": "completed",
       "steps": [
         {
           "conclusion": "success",
@@ -249,58 +246,64 @@
           "status": "completed"
         },
         {
-          "conclusion": null,
+          "conclusion": "success",
           "name": "Test",
           "number": 7,
-          "status": "in_progress"
+          "status": "completed"
         },
         {
-          "conclusion": null,
+          "conclusion": "success",
           "name": "Python coverage on the run page",
           "number": 8,
-          "status": "pending"
+          "status": "completed"
         },
         {
-          "conclusion": null,
+          "conclusion": "success",
           "name": "Lint Python",
           "number": 9,
-          "status": "pending"
+          "status": "completed"
         },
         {
-          "conclusion": null,
+          "conclusion": "success",
           "name": "Typecheck flashmap",
           "number": 10,
-          "status": "pending"
+          "status": "completed"
         },
         {
-          "conclusion": null,
+          "conclusion": "success",
           "name": "Typecheck the pipeline",
           "number": 11,
-          "status": "pending"
+          "status": "completed"
         },
         {
-          "conclusion": null,
+          "conclusion": "success",
           "name": "Rebuild the complete conformance report from its own rows",
           "number": 12,
-          "status": "pending"
+          "status": "completed"
         },
         {
-          "conclusion": null,
+          "conclusion": "success",
           "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
           "number": 22,
-          "status": "pending"
+          "status": "completed"
         },
         {
-          "conclusion": null,
+          "conclusion": "success",
           "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
           "number": 23,
-          "status": "pending"
+          "status": "completed"
         },
         {
-          "conclusion": null,
+          "conclusion": "success",
           "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
           "number": 24,
-          "status": "pending"
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 25,
+          "status": "completed"
         }
       ],
       "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/39997723491/job/120566185491"
@@ -531,5 +534,8 @@
       "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/39997723491/job/120566185623"
     }
   ],
-  "observedAt": "2026-10-23T18:20:20.527452+00:00"
+  "status": "completed",
+  "updatedAt": "2026-10-23T18:22:06Z",
+  "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/39997723491",
+  "observedAt": "2026-10-23T18:27:18.576935+00:00"
 }

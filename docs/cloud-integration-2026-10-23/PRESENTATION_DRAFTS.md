@@ -1,8 +1,8 @@
 # Calm Frames presentation drafts
 
-Prepared from source `6360417814d684d41c94789a9e406fc27de53c66`; its application code is at `12125b2970342b5376b0bc7964383e547b407376`. These are private working drafts. They do not select a replacement submission, certify the current native build, or authorize publication. Preserve submitted `bf2f615` and its linked materials.
+Prepared from source `6360417814d684d41c94789a9e406fc27de53c66`; its application code is at `12125b2970342b5376b0bc7964383e547b407376`. The canonical continuation adds contrast proposal `ae30cc7` and compatible tooling dependency fixes, without changing the product journey described here. Its exact source and validation are in [the checkpoint](CHECKPOINT.md). These are private working drafts. They do not select a replacement submission, certify the current native build, or authorize publication. Preserve submitted `bf2f615` and its linked materials.
 
-The [integration status](../handoff-2026-10-23/INTEGRATION_STATUS.md) distinguishes implemented changes from native acceptance. Check the integration owner's current CI receipt before selecting any wording about hosted results. Dependency audit findings and human audiovisual acceptance remain open at drafting time.
+The [canonical checkpoint](CHECKPOINT.md) distinguishes implemented changes from native acceptance. The older [integration status](../handoff-2026-10-23/INTEGRATION_STATUS.md) is historical input. Check the integration owner's exact-source CI receipt before selecting any wording about hosted results. Dependency audit findings and human audiovisual acceptance remain open at drafting time.
 
 ## Proposed GitHub opening
 
@@ -82,7 +82,7 @@ The following files were visually inspected in this cloud review. They are exist
 
 The [native receipt](../../results/native-profiles-retry-polish-2026-10-23/receipt.json) records production, profile-acceptance and harness identities separately, plus screenshot hashes. Its `30-probe-focused`, `31-probe-error`, `33-retry-ready` and `35-retry-playing` images are from the separate Retry harness. Exclude them from a production screenshot gallery or production demo. Never merge that harness to make a recording easier.
 
-Use the ordered screenshots as an evidence appendix now. A final current-candidate gallery needs source-bound native captures supplied by the Mac owner; browser renders or generated images cannot fill that gap.
+Use the ordered screenshots as an evidence appendix now. A final current-candidate gallery needs source-bound native captures supplied by the Mac acceptance executor; browser renders or generated images cannot fill that gap.
 
 ## Architecture draft
 
@@ -129,7 +129,7 @@ The diagram deliberately makes no claim that saved progress authorizes media, th
 - The source has already incorporated focus, Watch-label and text-size changes described by the integration status. Do not present this drafting work as having implemented them again.
 - Historical screenshots and the older demo remain historical. The actual current build, final narration and completed movie must be identified independently.
 - Keep eligibility, current judge access and the editing cutoff as owner/source checks. This draft does not certify those external states or create invitations/accounts.
-- Final narration, voice, bounded ElevenLabs budget, exact edit and publication destination require the owner's concrete decisions. No paid generation or publication was performed while preparing this file.
+- The exact narration draft, calm built-in voice selection and unlimited ElevenLabs budget are already authorized. Generation stays parked until product acceptance and exact-source script reconciliation. Material script changes, the final edit and publication remain separate decisions. No paid generation or publication was performed while preparing this file.
 - After the permitted editing window, preserve frozen submitted materials. Unfinished drafts remain isolated until any later publication scope is confirmed.
 
 Status: presentation drafts and source-grounded architecture prepared; current-source native gallery, final movie, human acceptance and publication remain pending.

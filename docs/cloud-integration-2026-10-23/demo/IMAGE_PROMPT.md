@@ -4,7 +4,7 @@ Prompt ready; images not generated or received. Generate the manga only after th
 
 Copy the following into ChatGPT image generation:
 
-> Create five individual 16:9 illustrated stills for a calm manga-inspired story. Use one original fictional adult and one consistent room. These will accompany separately recorded native Fire TV footage. Do not invent an app interface, readable screen text, logos, medical equipment, disability symbols or testimonial. Keep the TV outside the frame or a plain dark reflection. Return five separate images, not a contact sheet.
+> Create five individual 16:9 original full-colour anime/manga illustrated stills for a calm story. Use one original fictional adult and one consistent room. These will accompany separately recorded native Fire TV footage. Do not invent an app interface, readable screen text, logos, medical equipment, disability symbols or testimonial. Keep the TV outside the frame or a plain dark reflection. Return five separate images, not a contact sheet.
 >
 > Character bible, identical throughout: Rowan, late twenties, medium warm-brown skin, short dark wavy hair with one curved lock above the left eyebrow, round charcoal glasses, moss-green cardigan over an ivory crew-neck shirt, dark blue trousers and cream socks. Gentle neutral expression and ordinary proportions. Keep face, glasses, age, outfit, colors and handedness consistent. A terracotta mug with an unglazed cream rim appears in shots 4 and 5; when held, use the right hand.
 >

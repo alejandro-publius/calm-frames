@@ -4,6 +4,7 @@ An unsubmitted production package draft, October 23, 2026. Media production is d
 
 Ready now:
 
+- [Claude assembly-only handoff](CLAUDE_ASSEMBLY.md) and [exact narration-only text](narration-only.txt). The integration owner retains product decisions; Claude's delegated scope is demo assembly and ElevenLabs narration after product gates permit production.
 - [Narration and storyboard](STORYBOARD.md), [five-image prompt](IMAGE_PROMPT.md), and [narration production plan](ELEVENLABS_PLAN.md).
 - [Asset inventory](asset-manifest.json), with hashes of existing native references and explicit missing inputs.
 - [Render plan](timeline.json), [renderer](render_demo.py), [focused checks](test_render_preflight.py) and [draft subtitles](captions.draft.srt).
