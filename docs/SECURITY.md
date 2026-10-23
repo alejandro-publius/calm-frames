@@ -522,7 +522,7 @@ regenerated reproducibly so CI can diff them:
 | File | What it covers | Components |
 |---|---|---|
 | `docs/SBOM.ingest.cdx.json` | the Python packages in the ingest container | <!--n results/sbom.json:published.ingest_components -->12<!--/n--> |
-| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1106<!--/n--> |
+| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1107<!--/n--> |
 | `docs/SBOM.cdk.cdx.json` | what synthesizes and deploys the stack | <!--n results/sbom.json:published.cdk_components -->5<!--/n--> |
 
 What they do not cover: the Debian packages apt installs inside the image.

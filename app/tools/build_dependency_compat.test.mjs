@@ -148,3 +148,146 @@ test('the Minimatch 3 backport leaves the TypeScript consumer on its modern majo
     }
   }
 });
+
+const schemaRequire = createRequire(join(app,
+  'node_modules/@rushstack/node-core-library/lib/JsonSchema.js'));
+const tsdocRequire = createRequire(join(app,
+  'node_modules/@microsoft/tsdoc-config/lib/TSDocConfigFile.js'));
+
+test('schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6', () => {
+  assert.equal(schemaRequire('../package.json').version, '5.4.1');
+  assert.equal(tsdocRequire('../package.json').version, '0.17.1');
+  for (const require of [schemaRequire, tsdocRequire]) {
+    assert.equal(require('ajv/package.json').version, '8.18.0');
+  }
+  const eslintRequire = createRequire(join(app, 'node_modules/eslint/package.json'));
+  assert.equal(eslintRequire('ajv/package.json').version, '6.15.0');
+});
+
+for (const [name, require] of [['Rushstack', schemaRequire], ['TSDoc', tsdocRequire]]) {
+  test(`${name} Ajv uses the selected regex engine for data-supplied patterns`, () => {
+    const Ajv = require('ajv');
+    const seen = [];
+    function controlledRegExp(pattern, flags) {
+      seen.push(pattern);
+      // A harmless sentinel makes an engine bypass observable without a ReDoS
+      // payload, external regex engine, timing threshold or native dependency.
+      if (pattern === '^blocked-by-engine$') return { test: () => false };
+      return new RegExp(pattern, flags);
+    }
+    const ajv = new Ajv({ $data: true, code: { regExp: controlledRegExp } });
+    const validate = ajv.compile({
+      type: 'object',
+      properties: {
+        pattern: { type: 'string' },
+        value: { type: 'string', pattern: { $data: '1/pattern' } },
+      },
+      required: ['pattern', 'value'],
+    });
+    assert.equal(validate({ pattern: '^calm$', value: 'calm' }), true);
+    assert.equal(validate({ pattern: '^calm$', value: 'other' }), false);
+    assert.equal(validate({ pattern: '^blocked-by-engine$', value: 'blocked-by-engine' }), false);
+    assert.ok(seen.includes('^blocked-by-engine$'));
+  });
+
+  test(`${name} Ajv rejects invalid data-pattern syntax without throwing`, () => {
+    const Ajv = require('ajv');
+    const validate = new Ajv({ $data: true }).compile({
+      type: 'object',
+      properties: {
+        pattern: { type: 'string' },
+        value: { type: 'string', pattern: { $data: '1/pattern' } },
+      },
+    });
+    assert.equal(validate({ pattern: '[', value: 'calm' }), false);
+    assert.equal(validate.errors[0].keyword, 'pattern');
+  });
+}
+
+test('the installed Rushstack validator retains drafts, references and format rejection', () => {
+  const { JsonSchema } = schemaRequire('./JsonSchema.js');
+  for (const draft of ['draft-04', 'draft-07']) {
+    const schema = JsonSchema.fromLoadedObject({
+      $schema: `http://json-schema.org/${draft}/schema#`,
+      type: 'object',
+      definitions: { label: { type: 'string', pattern: '^[A-Za-z ]+$' } },
+      properties: { label: { $ref: '#/definitions/label' }, contact: { type: 'string', format: 'email' } },
+      required: ['label', 'contact'],
+      additionalProperties: false,
+    });
+    schema.validateObject({ label: 'Calm Frames', contact: 'fixture@example.com' }, 'fixture.json');
+    for (const value of [
+      { label: 42, contact: 'fixture@example.com' },
+      { label: 'Calm', contact: 'invalid' },
+      { label: 'Calm', contact: 'fixture@example.com', extra: true },
+    ]) {
+      assert.throws(() => schema.validateObject(value, 'fixture.json'), /JSON validation failed/);
+    }
+  }
+});
+
+test('the installed TSDoc loader retains valid tags and refuses malformed config', t => {
+  const { TSDocConfigFile } = tsdocRequire('./TSDocConfigFile.js');
+  const root = fixture(t);
+  const file = join(root, 'tsdoc.json');
+  const valid = {
+    $schema: TSDocConfigFile.CURRENT_SCHEMA_URL,
+    tagDefinitions: [{ tagName: '@calm', syntaxKind: 'block' }],
+    supportForTags: { '@calm': true },
+  };
+  writeFileSync(file, JSON.stringify(valid));
+  const loaded = TSDocConfigFile.loadFile(file);
+  assert.equal(loaded.hasErrors, false, loaded.getErrorSummary());
+  assert.equal(loaded.tagDefinitions[0].tagName, '@calm');
+  assert.equal(loaded.supportForTags.get('@calm'), true);
+  writeFileSync(file, JSON.stringify({ ...valid, tagDefinitions: 'not an array' }));
+  const invalid = TSDocConfigFile.loadFile(file);
+  assert.equal(invalid.hasErrors, true);
+  assert.match(invalid.getErrorSummary(), /tagDefinitions.*array/);
+});
+
+const hooksRequire = createRequire(join(app,
+  'node_modules/eslint-plugin-react-hooks/package.json'));
+
+for (const kind of ['array', 'set']) {
+  test(`the hooks validator rejects oversized constrained ${kind}s before parsing elements`, () => {
+    const { z } = hooksRequire('zod/v4');
+    let parsed = 0;
+    const element = z.string().transform(value => { parsed += 1; return value.toUpperCase(); });
+    const schema = (kind === 'array' ? z.array(element) : z.set(element)).max(2);
+    const make = values => kind === 'array' ? values : new Set(values);
+    const refused = schema.safeParse(make(['one', 'two', 'three']));
+    assert.equal(refused.success, false);
+    assert.equal(refused.error.issues[0].code, 'too_big');
+    assert.equal(parsed, 0);
+    const accepted = schema.parse(make(['one', 'two']));
+    assert.deepEqual([...accepted], ['ONE', 'TWO']);
+    assert.equal(parsed, 2);
+  });
+}
+
+test('the unbounded schema still visits each element; the fix is not a global parse cap', () => {
+  const { z } = hooksRequire('zod/v4');
+  let parsed = 0;
+  const schema = z.array(z.string().transform(value => { parsed += 1; return value; }));
+  assert.deepEqual(schema.parse(['one', 'two', 'three']), ['one', 'two', 'three']);
+  assert.equal(parsed, 3);
+});
+
+test('the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls', () => {
+  const { Linter } = hooksRequire('eslint');
+  const hooks = hooksRequire('eslint-plugin-react-hooks');
+  const linter = new Linter({ configType: 'eslintrc' });
+  linter.defineRule('react-hooks/rules-of-hooks', hooks.rules['rules-of-hooks']);
+  const config = {
+    parserOptions: { ecmaVersion: 2022, sourceType: 'module' },
+    rules: { 'react-hooks/rules-of-hooks': 'error' },
+  };
+  const valid = "import { useState } from 'react'; function Screen() { const [v] = useState(0); return v; }";
+  assert.deepEqual(linter.verify(valid, config), []);
+  const invalid = "import { useState } from 'react'; function Screen({ enabled }) { if (enabled) { useState(0); } return null; }";
+  const errors = linter.verify(invalid, config);
+  assert.equal(errors.length, 1);
+  assert.equal(errors[0].ruleId, 'react-hooks/rules-of-hooks');
+  assert.match(errors[0].message, /conditionally/);
+});
