@@ -28,6 +28,8 @@ the integration owner. You own only the following implementation lane:
 - Profile-name copy in `app/src/calmframes/copy.ts`.
 - `app/src/calmframes/profiles.ts` only if the name contract needs a bounded fix;
   retain existing IDs, limits and protection semantics.
+- `app/src/screens/KidModeScreen.tsx` only for the Parents rename-save result
+  adapter if needed. Its player, recovery and other route behavior are out of scope.
 - Relevant profile/Parents tests, plus exact UI surface declarations and generated
   mirrors only when required by your real change. Run the existing sync tool.
 - Your concise result under `docs/design-polish-2026-10-23/fable-profile-names/`.
