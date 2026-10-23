@@ -101,6 +101,58 @@ not waive them. Fable's app code and tests, player, media, signatures and
 exceptions are unchanged. There is no hosted or native result for this source.
 The remaining findings and expired groups still block Audit acceptance.
 
+## Isolated Ajv and Zod follow-up
+
+Code commit `121270e802df1f150f09a4216319f1af1f1fd67b` on
+`codex/dependency-followup-2026-10-23` is a reviewed local follow-up, not a change
+to the Mac acceptance snapshot `6a87937`. Its app components, player, media,
+signing and exceptions are unchanged. The installed build-tool contracts are
+exercised directly in `app/tools/build_dependency_compat.test.mjs`, already run
+by the existing CI command.
+
+| Package | Compatible selection and limit |
+|---|---|
+| Ajv | Only major 8 moves from 8.12.0/8.13.0 to 8.18.0. Rushstack and TSDoc stay at their existing versions; ESLint's Ajv 6 stays unchanged. The consumers' narrow minor ranges require an explicit override. Draft/schema/format and valid/invalid config checks pass. |
+| Zod | The hooks lint plugin's 4.6.5 moves to 4.6.6, within its accepted range. The plugin version and ordinary hook diagnostics stay unchanged. |
+
+The lock also gains Ajv's `fast-uri` dependency. `uri-js` and `punycode` retain
+their versions and become dev-only nodes. The regenerated app SBOM reproduces
+with the documented generator pins and Node/npm versions. Its published count
+was updated through `eval/readme_sync.py`, not by hand.
+
+Matching fresh scans remove
+[GHSA-2g4f-4pwh-qvx6](https://github.com/advisories/GHSA-2g4f-4pwh-qvx6) and
+[GHSA-mrhx-c7xc-m3w5](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5), with
+no added IDs:
+<!--n results/design-polish-2026-10-23/dependency-wave3/receipt.json:audit_delta.unique_advisories_before -->23<!--/n-->
+to
+<!--n results/design-polish-2026-10-23/dependency-wave3/receipt.json:audit_delta.unique_advisories_after -->21<!--/n-->
+unique IDs. The fresh baseline includes a Zod finding absent from the previous
+recorded scan. Do not compare the older count directly to this result and infer
+that the patch introduced an advisory. Propagated package counts are recorded
+separately in the [audit delta](../../results/design-polish-2026-10-23/dependency-wave3/audit-delta.json).
+
+The [primary advisory and upstream records](../../results/design-polish-2026-10-23/dependency-wave3/advisories.json)
+and [check receipt](../../results/design-polish-2026-10-23/dependency-wave3/receipt.json)
+keep the exposure limits explicit. Ajv now respects a selected regex engine for
+data-supplied patterns and returns a validation error for invalid syntax.
+Its default JavaScript regex engine is not a universal defense against hostile
+patterns. The observed build-tool constructors do not enable `$data`.
+Zod rejects oversized collections before parsing elements when applicable
+leading size checks exist. Unbounded schemas still visit every element; the
+test suite records that limit. No denial-of-service benchmark was run.
+
+Regressions reproduced the old behavior using harmless patterns and small
+collections, then passed after replacement. A clean locked install, normal
+typecheck/lint/full app tests, actual build-tool checks, prepared-media guards
+and SBOM reproduction pass. Source and runtime behavior are separate from
+current native bundle inventory and human acceptance, which remain pending.
+
+The affected WebSocket leaves are major 1 and 3; the oldest fixed upstream
+version is major 5. They were excluded from this compatible batch. Other
+findings and expired exceptions still block Audit. No new exception, renewed
+date, owner acceptance, hosted result or release approval is implied.
+
 ## Owner-approved narrow TOML deferral
 
 The owner explicitly replied "approve" to the temporary, controlled-build

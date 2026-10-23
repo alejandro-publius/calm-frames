@@ -1,0 +1,25 @@
+  Command failed: /workspace/.cloud-setup/node-v22.23.2-linux-x64/bin/node -- /workspace/.cloud-setup/node-v22.23.2-linux-x64/lib/node_modules/npm/bin/npm-cli.js ls --json --long --all --package-lock-only
+  npm error code ELSPROBLEMS
+  npm error invalid: react@19.2.0 ./app/node_modules/react
+  npm error invalid: @typescript-eslint/parser@8.70.0 ./app/node_modules/@typescript-eslint/parser
+  npm error invalid: node-notifier@5.4.5 ./app/node_modules/node-notifier
+  npm error invalid: @types/react@19.3.0 ./app/node_modules/@types/react
+  npm error invalid: @typescript-eslint/eslint-plugin@6.10.0 ./app/node_modules/@typescript-eslint/eslint-plugin
+  npm error missing: @babel/preset-env@^7.1.6, required by jscodeshift@0.14.0
+  npm error invalid: picomatch@2.3.2 ./app/node_modules/picomatch
+  npm error A complete log of this run can be found in: /workspace/.cache/npm/_logs/2026-10-23T21_25_01_870Z-debug-0.log
+
+  npm error code ELSPROBLEMS
+  npm error invalid: react@19.2.0 ./app/node_modules/react
+  npm error invalid: @typescript-eslint/parser@8.70.0 ./app/node_modules/@typescript-eslint/parser
+  npm error invalid: node-notifier@5.4.5 ./app/node_modules/node-notifier
+  npm error invalid: @types/react@19.3.0 ./app/node_modules/@types/react
+  npm error invalid: @typescript-eslint/eslint-plugin@6.10.0 ./app/node_modules/@typescript-eslint/eslint-plugin
+  npm error missing: @babel/preset-env@^7.1.6, required by jscodeshift@0.14.0
+  npm error invalid: picomatch@2.3.2 ./app/node_modules/picomatch
+  npm error A complete log of this run can be found in: /workspace/.cache/npm/_logs/2026-10-23T21_25_01_870Z-debug-0.log
+
+wrote docs/SBOM.ingest.cdx.json (66 kB), by cyclonedx-py 7.4.0, cyclonedx-python-lib 11.12.0
+wrote docs/SBOM.cdk.cdx.json (6 kB), by cyclonedx-py 7.4.0, cyclonedx-python-lib 11.12.0
+wrote docs/SBOM.app.cdx.json (2200 kB), by npm 10.9.8, cyclonedx-library 10.3.0, cyclonedx-npm 6.0.1
+wrote results/sbom.json

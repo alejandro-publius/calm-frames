@@ -1,0 +1,31 @@
+{
+  "final-style": {
+    "name": "final-style",
+    "command": [
+      "python",
+      "eval/style_check.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.41
+  },
+  "final-published-numbers": {
+    "name": "final-published-numbers",
+    "command": [
+      "python",
+      "eval/readme_sync.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.12
+  },
+  "secrets-evidence": {
+    "name": "secrets-evidence",
+    "command": [
+      "bash",
+      "scripts/gitleaks_scan.sh",
+      "staged"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.88
+  }
+}

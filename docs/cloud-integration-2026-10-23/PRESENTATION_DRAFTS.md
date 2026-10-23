@@ -1,6 +1,6 @@
 # Calm Frames presentation drafts
 
-Reconciled for the unpublished review branch, including the visual work through `d7da316d2d48c3b66b3cc4874257e98ca5ef943e`. The [checkpoint](CHECKPOINT.md) records exact included commits and subsequent tooling changes. These private working drafts do not select a replacement submission, certify a native build or authorize publication. Preserve submitted `bf2f615` and its linked materials. The existing approved narration in demo/STORYBOARD.md is unchanged; this editorial correction is not a replacement script or authorization to start media generation.
+Reconciled for the unpublished product snapshot `6a87937f9f185ac0760d6f8331184e34b876d92c`, including the approved visual work and Fable's integrated name editor. The [checkpoint](CHECKPOINT.md) distinguishes that immutable Mac acceptance target from subsequent isolated dependency work. These private working drafts do not select a replacement submission, certify a native build or authorize publication. Preserve submitted `bf2f615` and its linked materials. The existing approved narration in demo/STORYBOARD.md is unchanged; this editorial correction is not a replacement script or authorization to start media generation.
 
 The [canonical checkpoint](CHECKPOINT.md) distinguishes implemented changes from native acceptance. The older [integration status](../handoff-2026-10-23/INTEGRATION_STATUS.md) is historical input. Check the integration owner's exact-source CI receipt before selecting any wording about hosted results. Dependency audit findings and human audiovisual acceptance remain open at drafting time.
 
@@ -33,6 +33,14 @@ The prepared catalog is the implemented scope. We have not integrated these mech
 The native app brings browsing, Details and playback into the same coastal world. Profiles keep separate viewing positions. When a viewer returns to an eligible prepared title, they can resume or start over; the stored position does not replace current media verification or household protection settings.
 
 The recent integration work also addresses profile-picker focus during saving, consistent Watch labels and readable card text. Those changes have source-level regression evidence. Final native acceptance of the exact integrated build remains a separate step.
+
+Within unlocked Parents, a parent can give a kid a recognizable name using the
+remote letter grid. Saving changes the name while retaining that kid's identity,
+preferences and saved places. Cancel and Back discard an unfinished edit. A
+failed storage write is not presented as a successful rename. Letters and spaces
+are supported; accents, digits and punctuation are not current input options.
+These are implemented behaviors with [persistence and failure-path source checks](../design-polish-2026-10-23/FABLE_INTEGRATION.md),
+not a claim of observed native keyboard, VoiceView or focus acceptance.
 
 ### 🔎 Preparation and playback share a chain of evidence
 
@@ -100,6 +108,8 @@ flowchart LR
   subgraph TV[Native Fire TV app]
     Library[Packaged approved library] --> Home[Coastal Home and Details]
     Profiles[Household and profile choice] --> Home
+    Parents[PIN-protected Parents] --> Rename[Result-aware kid name editor]
+    Rename --> Profiles
     Home --> Player[PlayerScreen]
     Library --> Access[Route and map checks]
     Access --> Guard[useFlashGuard]
@@ -118,6 +128,7 @@ flowchart LR
 | Preparation ledger, output verification, publication of checked bytes | [ingest.py](../../pipeline/ingest.py), [verify.py](../../pipeline/verify.py), [analyze.py](../../flashmap/src/flashmap/analyze.py) |
 | Accepted prepared library and visible evidence | [packagedLibrary.ts](../../app/src/calmframes/packagedLibrary.ts), [playbackProof.ts](../../app/src/calmframes/playbackProof.ts), [PlaybackProofPanel.tsx](../../app/src/calmframes/PlaybackProofPanel.tsx) |
 | Coastal journey and household scope | [KidHomeScreen.tsx](../../app/src/calmframes/KidHomeScreen.tsx), [TitleDetailsScreen.tsx](../../app/src/calmframes/TitleDetailsScreen.tsx), [ProfilePicker.tsx](../../app/src/calmframes/ProfilePicker.tsx), [household.ts](../../app/src/calmframes/household.ts) |
+| Editable names with stable profile identity | [ParentAreaScreen.tsx](../../app/src/calmframes/ParentAreaScreen.tsx), [ProfileNameEditor.tsx](../../app/src/calmframes/ProfileNameEditor.tsx), [profiles.ts](../../app/src/calmframes/profiles.ts), [route persistence checks](../../app/test/screens/profileNameSave.test.tsx) |
 | Route acceptance, covered presentation, guarded seeks and native lifecycle | [PlayerScreen.tsx](../../app/src/screens/PlayerScreen.tsx), [playerAccess.ts](../../app/src/calmframes/playerAccess.ts), [useFlashGuard.ts](../../app/src/calmframes/useFlashGuard.ts), [VideoHandler.ts](../../app/src/utils/VideoHandler.ts) |
 | Optional progress and explicit recovery | [playbackCheckpoint.ts](../../app/src/calmframes/playbackCheckpoint.ts), [usePlaybackMemory.ts](../../app/src/calmframes/usePlaybackMemory.ts), [playbackRecovery.ts](../../app/src/calmframes/playbackRecovery.ts), [RecoverablePlayback.tsx](../../app/src/calmframes/RecoverablePlayback.tsx) |
 
