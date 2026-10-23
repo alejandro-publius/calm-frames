@@ -28,14 +28,14 @@ test('boot is a still map until actual work completes, with no progress amount o
 test('verification, frame wait and return follow state and retain title typography and Back ownership', () => {
   const back = jest.fn();
   const view = render(<PlayerOpening title="Forest" menuArt="forest" checking onBack={back} />);
-  expect(view.getByText('Checking this video...')).toBeTruthy();
+  expect(view.getByText('Checking this video…')).toBeTruthy();
   expect(view.getAllByText('Forest')).toHaveLength(2);
   fireEvent.press(view.getByTestId('player-opening-back'));
   expect(back).toHaveBeenCalledTimes(1);
   view.rerender(<PlayerOpening title="Forest" menuArt="forest" onBack={back} />);
-  expect(view.getByText('Opening your video...')).toBeTruthy();
+  expect(view.getByText('Opening your video…')).toBeTruthy();
   view.rerender(<PlayerOpening title="Forest" menuArt="forest" returning onBack={back} />);
-  expect(view.getByText('Going back...')).toBeTruthy();
+  expect(view.getByText('Going back…')).toBeTruthy();
   expect(view.queryByTestId('player-opening-back')).toBeNull();
   expect(StyleSheet.flatten(view.getAllByText('Forest')[1].props.style).fontFamily).toBe(CALM_TEXT.feature.fontFamily);
 });
@@ -47,8 +47,8 @@ test.each([true, undefined, false])('journey motion obeys the system preference 
   jest.spyOn(events, 'addEventListener').mockReturnValue({ remove: jest.fn() });
   const stop = jest.fn();
   const timing = jest.spyOn(Animated, 'timing').mockReturnValue({ start: jest.fn(), stop, reset: jest.fn() });
-  const view = render(<JourneyStatus status="Opening your video..." motionEnabled />);
-  expect(view.getByText('Opening your video...')).toBeTruthy();
+  const view = render(<JourneyStatus status="Opening your video…" motionEnabled />);
+  expect(view.getByText('Opening your video…')).toBeTruthy();
   await act(async () => { await Promise.resolve(); });
   if (reduced === false) expect(timing).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({ duration: CALM_JOURNEY.DURATION, useNativeDriver: true, isInteraction: false }));
   else expect(timing).not.toHaveBeenCalled();

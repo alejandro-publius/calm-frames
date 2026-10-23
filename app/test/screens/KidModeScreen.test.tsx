@@ -87,7 +87,7 @@ describe('reaching Calm Frames', () => {
     expect(screen.getByTestId(otter).props.accessibilityState.selected).toBe(true);
     expect(screen.getByTestId('kid-mode-home-parent-area').props.hasTVPreferredFocus).toBe(true);
     // The cards name the videos; what Watch will play is what it announces.
-  expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Settle in: Sea otters in Alaska');
+  expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Watch: Sea otters in Alaska');
     expect(navigate).not.toHaveBeenCalled();
   });
 
@@ -353,7 +353,7 @@ describe('the shelf a household lands on', () => {
     const { navigate, returnFromPlayer } = await renderKidMode(true);
     await finishFirstRun();
     // The cards name the videos; what Watch will play is what it announces.
-  expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Settle in: Acadia');
+  expect(screen.getByTestId('kid-mode-home-watch').props.accessibilityLabel).toBe('Watch: Acadia');
     expect(screen.getByTestId('kid-mode-home-watch').props.hasTVPreferredFocus).toBe(true);
     // All four approved titles appear on the coastal map.
     expect(screen.queryAllByTestId(/^kid-mode-home-poster-(?!image-|title-|qualifier-)/)).toHaveLength(4);

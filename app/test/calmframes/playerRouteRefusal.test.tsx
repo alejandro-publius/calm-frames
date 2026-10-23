@@ -94,7 +94,7 @@ it.each(refused)('refuses %s: no opening, no media, one unavailable card and one
   // Back is the one way out. The press swaps in the returning shell, which
   // carries no second Back, and the route leaves exactly once.
   fireEvent.press(screen.getByRole('button', { name: 'Back' }));
-  expect(screen.getByText('Going back...')).toBeTruthy();
+  expect(screen.getByText('Going back…')).toBeTruthy();
   expect(screen.queryByRole('button', { name: 'Back' })).toBeNull();
   act(() => jest.advanceTimersByTime(701));
   expect(goBack).toHaveBeenCalledTimes(1);

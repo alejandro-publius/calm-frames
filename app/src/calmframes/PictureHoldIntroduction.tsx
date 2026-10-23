@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import { COASTAL_COLORS as CALM_COLORS, CALM_TEXT, CALM_FLOW, scale } from './calmStyles';
-import { ONLY_IN_CALM_FRAMES_LINE } from './copy';
+import { DETECTION_LIMITS_LINE, ONLY_IN_CALM_FRAMES_LINE, SAFETY_NOTE } from './copy';
 
 export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDemoDetails, onBridgeTest, preferBridgeTest = false, disabled = false }: { onBridgeTest?: () => void; preferBridgeTest?: boolean; onDemoDetails?: () => void; onPlaybackCheck?: () => void; onStart?: () => void; disabled?: boolean }) {
   return <View testID="picture-hold-introduction" style={styles.content}>
@@ -13,7 +13,8 @@ export default function PictureHoldIntroduction({ onStart, onPlaybackCheck, onDe
     <Text style={styles.body}>Choose a video, then press Watch. Press Back to return.</Text>
     <View testID="how-it-works-limits" style={styles.limits}>
       <Text style={styles.detail}>{ONLY_IN_CALM_FRAMES_LINE}</Text>
-      <Text style={styles.detail}>It can miss triggers and cannot guarantee seizure prevention. Not a medical device.</Text>
+      {/* The approved sentence and its limit, word for word as More info says them. */}
+      <Text style={styles.detail}>{`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`}</Text>
     </View>
     {onStart || onDemoDetails ? <Text style={styles.detail}>The demo has two simulated picture pauses and no flashing.</Text> : null}
     <View style={styles.actions}>

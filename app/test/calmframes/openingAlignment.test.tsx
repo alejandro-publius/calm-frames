@@ -26,7 +26,7 @@ test('the opening title starts where the hero title starts', () => {
   expect(OPENING_COPY_TOP).toBeGreaterThan(0);
   const view = render(<PlayerOpening title="Acadia" onBack={jest.fn()} />);
   expect(view.getByText('Acadia')).toBeTruthy();
-  expect(view.getByText('Opening your video...')).toBeTruthy();
+  expect(view.getByText('Opening your video…')).toBeTruthy();
 });
 
 

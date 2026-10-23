@@ -26,7 +26,7 @@ export default function PlayerOpening({ menuArt, title, onBack, returning = fals
       <Text style={styles.eyebrow}>{menuArt === 'forest' ? 'Forest' : menuArt === 'coastal' || menuArt === 'sea-otters' ? 'Ocean' : 'Calm Frames'}</Text>
       <Text style={[styles.title, heroTitleTypography(title)]}>{title}</Text>
       <JourneyStatus forest={islandKind(menuArt) === 'forest'} motionEnabled={motionEnabled && !returning} liveStatus={liveStatus}
-        status={returning ? 'Going back...' : checking ? 'Checking this video...' : 'Opening your video...'} />
+        status={returning ? 'Going back…' : checking ? 'Checking this video…' : 'Opening your video…'} />
 
     </View>
   </View></WorldAppearance.Provider></CoastalAppearance.Provider>;

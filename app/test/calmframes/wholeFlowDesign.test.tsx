@@ -38,7 +38,7 @@ test('opening offers one real Back action and returning offers status without a 
   expect(back).toHaveBeenCalledTimes(1);
   view.rerender(<PlayerOpening title="Harbor" onBack={back} returning />);
   expect(view.queryAllByRole('button')).toHaveLength(0);
-  expect(view.getByText('Going back...').props.accessibilityLiveRegion).toBe('polite');
+  expect(view.getByText('Going back…').props.accessibilityLiveRegion).toBe('polite');
 });
 
 test('selection remains explicit when focus moves to a different profile', () => {

@@ -35,6 +35,7 @@ import {
   NO_TITLES,
   PROFILES_KID_TITLE,
   runtimeLabel,
+  SAVING_CHANGES,
   WATCHING_STATE_WORD,
   whoIsWatching,
 } from './copy';
@@ -198,7 +199,9 @@ const KidHomeScreen = ({
     islandKinds.every(kind => islandKinds.filter(candidate => candidate === kind).length <= (kind === 'coastal' ? 2 : 1));
   // Watching is the primary action. Unavailable titles stay in Parents.
   const ambient = Boolean(onAmbient && featured && ambientArtworkFor(featured));
-  const featuredAction = ambient ? 'Settle in' : feature?.action === 'Watch now' ? 'Watch' : feature?.action;
+  // One verb for the main action, the one How it works names. A still scene
+  // is told apart by its card and the missing play mark, not a second word.
+  const featuredAction = ambient || feature?.action === 'Watch now' ? 'Watch' : feature?.action;
   const preferredId = listed.some((entry) => entry.title.id === returnFocusId)
     ? returnFocusId
     : listed[0]?.title.id;
@@ -327,7 +330,7 @@ const KidHomeScreen = ({
     <WorldAppearance.Provider value={!empty && !showIntroduction}><View testID={testID} style={[styles.screen, !empty && !showIntroduction && { backgroundColor: WORLD.BACKGROUND }]}>
       {!empty && !showIntroduction ? <CoastalWorld destination={islandKind(feature?.menuArt ?? feature?.art)} cardKinds={cardKinds} showBoat={feature?.art === 'coastal' || Boolean(feature?.menuArt)} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
       <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
-          {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? 'Saving your changes...' : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
+          {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? SAVING_CHANGES : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
             onPress={() => { setReturnToHeader(null); setChoosingProfile(!choosingProfile); }} /> : null}
           {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-learn`} label="How it works" accessibilityLabel="How it works" hasTVPreferredFocus={returnTo === 'learn'}

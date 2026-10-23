@@ -26,7 +26,7 @@ test('a real playback error replaces the opening and retains an exit', () => {
   expect(view.queryByTestId('player-home-opening')).toBeNull();
   expect(view.getByTestId('player-error')).toBeTruthy();
   fireEvent.press(view.getByTestId('player-error-back'));
-  expect(view.getByText('Going back...')).toBeTruthy();
+  expect(view.getByText('Going back…')).toBeTruthy();
   act(() => jest.advanceTimersByTime(700));
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
@@ -47,7 +47,7 @@ test('opening uses destination-neutral Back and returns through the existing sta
 test('Back on the opening shell leaves once, and a late stall timeout changes nothing', () => {
   const view = startPlayer('none', true);
   fireEvent.press(view.getByTestId('player-opening-back'));
-  expect(view.getByText('Going back...')).toBeTruthy();
+  expect(view.getByText('Going back…')).toBeTruthy();
   act(() => jest.advanceTimersByTime(700));
   expect(view.goBack).toHaveBeenCalledTimes(1);
   act(() => jest.advanceTimersByTime(15_000));

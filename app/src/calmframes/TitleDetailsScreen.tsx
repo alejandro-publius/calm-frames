@@ -11,7 +11,7 @@ import { EnvironmentMark } from './JourneyStatus';
 import { filmStill } from './HomeHarborScene';
 import { continuousScenePicture } from './continuousScene';
 import { COASTAL_COLORS as CALM_COLORS, CALM_SPACE, CALM_TEXT, CALM_FLOW, heroTitleTypography, scale } from './calmStyles';
-import { coverLine, DETECTION_LIMITS_LINE, noticeForTitle, ONLY_IN_CALM_FRAMES_LINE, runtimeLabel, SAFETY_NOTE } from './copy';
+import { coverLine, DETECTION_LIMITS_LINE, noticeForTitle, ONLY_IN_CALM_FRAMES_LINE, runtimeLabel, SAFETY_NOTE, SAVING_CHANGES } from './copy';
 import { buildCoverIntervals, totalCoveredMs } from './coverSchedule';
 import CoveredSectionsStrip from './CoveredSectionsStrip';
 import { coveredSections } from './coveredSections';
@@ -99,7 +99,7 @@ const TitleDetailsScreen = ({
     }).length;
     return runtime && holds > 0 ? `${runtime}, ${holds} picture pause${holds === 1 ? '' : 's'}` : null;
   }, [practiceOffered]);
-  const playLabel = onAmbient ? 'Settle in' : demo ? 'Watch demo' : presentation.action === 'Watch preview' ? 'Watch preview' : 'Watch';
+  const playLabel = onAmbient ? 'Watch' : demo ? 'Watch demo' : presentation.action === 'Watch preview' ? 'Watch preview' : 'Watch';
   const notice = noticeForTitle(entry) ?? (concernsPackagedLibrary(entry.title) && !packagedLibrary.evidenceFor(entry.title, settings) ? {
     title: 'This video is unavailable',
     detail: 'This version cannot play in Calm Frames. The picture stays hidden.',
@@ -200,8 +200,8 @@ const TitleDetailsScreen = ({
         </View>
         <View style={styles.actionRail}>
           <View style={styles.buttons}>
-            <CalmButton primary playIcon={!onAmbient} sound={false} testID={`${testID}-play`} label={saving ? 'Saving your changes...' : playLabel}
-              accessibilityLabel={saving ? 'Saving your changes...' : `${playLabel}: ${presentation.name}`}
+            <CalmButton primary playIcon={!onAmbient} sound={false} testID={`${testID}-play`} label={saving ? SAVING_CHANGES : playLabel}
+              accessibilityLabel={saving ? SAVING_CHANGES : `${playLabel}: ${presentation.name}`}
               disabled={saving} hasTVPreferredFocus={returnFocus !== 'info'} onPress={() => (onAmbient ?? onPlay)(entry)} />
             <CalmButton quiet tertiary compact testID={`${testID}-show-info`} label="More info" hasTVPreferredFocus={returnFocus === 'info'}
               onPress={() => setPage('info')} />

@@ -66,7 +66,7 @@ export default function RecoverablePlayback({identity, title, menuArt, onBack, c
       <CalmPageHeader onBack={leave} backTestID="resume-back" preferredBack={state.phase === 'loading'} />
       <View style={styles.copy}>
         <Text style={[styles.title, heroTitleTypography(title)]}>{title}</Text>
-        {state.phase === 'loading' ? <Text style={styles.detail} accessibilityLiveRegion="polite">Opening your video...</Text> :
+        {state.phase === 'loading' ? <Text style={styles.detail} accessibilityLiveRegion="polite">Opening your video…</Text> :
           <View style={styles.actions}>
             <CalmButton primary hasTVPreferredFocus sound={false} label={`Resume at ${resumeTime(state.checkpoint!.positionMs)}`}
               testID="resume-playback" onPress={() => choose(true)} />

@@ -9,6 +9,7 @@ import { WORLD as CALM_COLORS } from '../../src/calmframes/CoastalWorld';
 import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
 import { checkedShelf } from './shelfFixtures';
 import { BENIGN_STORY_ID } from '../../src/calmframes/benignStory';
+import { DETECTION_LIMITS_LINE, SAFETY_NOTE } from '../../src/calmframes/copy';
 const titles = checkedShelf();
 const demo = titles.find(entry => entry.title.id === BENIGN_STORY_ID)!;
 const harbor = titles.find(entry => entry.title.title === 'Harbor story (prepared locally)')!;
@@ -111,7 +112,13 @@ test('the short explanation leads with purpose, qualifies ocean and sound, and k
   expect(words).toContain('Each one gets a plain cover or a still image from the same video.');
   expect(words).toContain('Original sound continues when present.');
   expect(words).toContain('not other apps or live TV');
-  expect(words).toContain('cannot guarantee seizure prevention');
+  // One safety sentence everywhere: the approved clause with its detection limit,
+  // the same words More info shows. Seen to fail, Oct 23 2026, against the earlier
+  // line "It can miss triggers and cannot guarantee seizure prevention."
+  expect(words).toContain(`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`);
+  expect(words).not.toMatch(/seizure/i);
+  // The instruction names the button the shelf actually shows.
+  expect(words).toContain('Choose a video, then press Watch.');
   expect(words.split(/\s+/).length).toBeLessThanOrEqual(100);
   for (const node of view.getByTestId('how-it-works-limits').findAllByType(Text)) {
     expect(StyleSheet.flatten(node.props.style).fontSize).toBeGreaterThanOrEqual(32);
