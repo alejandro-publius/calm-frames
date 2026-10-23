@@ -12,6 +12,7 @@ Saved device reports and virtual-device software results are not physical proof.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import re
@@ -156,19 +157,42 @@ def _inspect_story(package: Path) -> dict:
                      and name != STORY_PREFIX]
     if not story_members:
         return {"captions_available": False, "scene_holds_available": False}
-    expected_members = {STORY_PREFIX + name for name in STORY_ASSET_NAMES}
-    expected_members.add(STORY_PROOF_MEMBER)
-    if (set(story_members) != expected_members
-            or len(story_members) != len(expected_members)):
-        raise ValueError("story fixture is missing, duplicated or unreviewed")
     proof_bytes = _member(package, STORY_PROOF_MEMBER)
     if hashlib.sha256(proof_bytes).hexdigest() != STORY_PROOF_SHA256:
         raise ValueError("story verification proof is not the reviewed proof")
     proof = json.loads(proof_bytes)
     hashes = proof["assets_sha256"]
+    checked_assets = {}
     for name in STORY_ASSET_NAMES:
-        if hashlib.sha256(_member(package, STORY_PREFIX + name)).hexdigest() != hashes[name]:
+        data = _member(package, STORY_PREFIX + name)
+        if hashlib.sha256(data).hexdigest() != hashes[name]:
             raise ValueError("story package asset differs from the reviewed proof")
+        checked_assets[name] = data
+    # The SDK also packages the local stills represented by the pinned maps.
+    # Derive their exact identities only after validating those map bytes.
+    stills = {}
+    for preset in ("wcag", "broadcast", "extra-cautious"):
+        flashmap = json.loads(checked_assets[f"harbor.{preset}.json"])
+        for hold in flashmap["scene_holds"]["holds"]:
+            prefix = "data:image/jpeg;base64,"
+            uri = hold["image_data_uri"]
+            if not uri.startswith(prefix):
+                raise ValueError("reviewed scene image is not a JPEG data URI")
+            data = base64.b64decode(uri[len(prefix):], validate=True)
+            digest = hashlib.sha256(data).hexdigest()
+            name = STORY_PREFIX + f"stills/still-{digest[:16]}.jpg"
+            if name in stills and stills[name] != data:
+                raise ValueError("reviewed scene image name collision")
+            stills[name] = data
+    expected_members = {STORY_PREFIX + name for name in STORY_ASSET_NAMES}
+    expected_members.update(stills)
+    expected_members.add(STORY_PROOF_MEMBER)
+    if (set(story_members) != expected_members
+            or len(story_members) != len(expected_members)):
+        raise ValueError("story fixture is missing, duplicated or unreviewed")
+    for name, data in stills.items():
+        if _member(package, name) != data:
+            raise ValueError("story scene image differs from the reviewed map")
     return {
         "captions_available": True, "scene_holds_available": True,
         "benign_story_proof_sha256": STORY_PROOF_SHA256,

@@ -58,9 +58,23 @@ def story_package(package):
             (hardware.REPO / "app" / hardware.STORY_PREFIX / name).read_bytes()
         for name in [*hardware.STORY_ASSET_NAMES, "verification.json"]
     }
+    for path in (hardware.REPO / "app" / hardware.STORY_PREFIX / "stills").glob("*.jpg"):
+        members[hardware.STORY_PREFIX + "stills/" + path.name] = path.read_bytes()
     def write(overrides=None, extra_members=()):
         return package({**members, **(overrides or {})}, extra_members=extra_members)
     return write
+
+
+@pytest.mark.parametrize("replacement", [None, b"changed-scene-image"])
+def test_pinned_scene_image_is_required_and_byte_checked(story_package, replacement):
+    name = hardware.STORY_PREFIX + "stills/still-e746a8732bae6122.jpg"
+    assert hardware.inspect_package(story_package({name: replacement}))["ok"] is False
+
+
+def test_duplicate_scene_image_is_rejected(story_package):
+    name = hardware.STORY_PREFIX + "stills/still-e746a8732bae6122.jpg"
+    data = (hardware.REPO / "app" / name).read_bytes()
+    assert hardware.inspect_package(story_package(extra_members=[(name, data)]))["ok"] is False
 
 
 def test_exact_bundled_bytes_allow_only_preflight_not_physical_proof(package, physical):
