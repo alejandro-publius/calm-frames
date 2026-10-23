@@ -42,7 +42,7 @@ export function titlePresentation(title: CatalogTitle): TitlePresentation {
       attribution: 'NPS: G Litten. Prairie Creek and Redwood. Public-domain footage; 12-second excerpt with original nature audio, plays once. No NPS endorsement implied. Source: https://www.nps.gov/media/video/view.htm?id=F2E1744E-F295-B2E5-52AF33C2205A8C9E' };
   }
   if (concernsPackagedLibrary(title) && title.sha256 === SEA_OTTER_SOURCE_SHA256 && title.durationMs === 19986.633) {
-    return { name: 'Sea otters in Alaska', cardName: 'Sea otters', kind: 'Ocean wildlife · 20 seconds',
+    return { name: 'Sea otters in Alaska', cardName: 'Sea Otters', kind: 'Ocean wildlife · 20 seconds',
       selectorMeta: 'Silent · 20 sec', action: 'Watch now', runtime: '20 seconds · Silent · Plays once', menuArt: 'sea-otters',
       description: 'Sea otters float together in the ocean at Unalaska, Alaska.',
       attribution: 'NOAA Fisheries. Sea otters at Unalaska/Dutch Harbor, Alaska. Public-domain B-roll; 19.987-second silent excerpt, plays once. Source: https://videos.fisheries.noaa.gov/detail/video/2789953172001/b-roll%3A-sea-otters' };
