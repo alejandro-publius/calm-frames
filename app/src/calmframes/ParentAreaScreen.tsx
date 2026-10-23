@@ -97,13 +97,11 @@ import {
   ROOM_ONLY_ADDS,
   ROOM_TITLE,
   SAVING_CHANGES,
-  seatChosen,
   SEAT_DISTANCE_TITLE,
   sectionFor,
   SET_PIN_LABEL,
   SETTINGS_STATE_WORD,
   STRICTNESS_TITLE,
-  televisionChosen,
   TV_SIZE_TITLE,
   whoseSettingsThese,
 } from './copy';
@@ -632,9 +630,6 @@ const ParentAreaScreen = ({
             );
           })}
         </View>
-        <Text style={styles.chosenLine} testID={`${testID}-tv-chosen`}>
-          {televisionChosen(shown.tvDiagonalIn)}
-        </Text>
         <Text style={styles.subheading} accessibilityRole="header">
           {SEAT_DISTANCE_TITLE}
         </Text>
@@ -673,9 +668,6 @@ const ParentAreaScreen = ({
             );
           })}
         </View>
-        <Text style={styles.chosenLine} testID={`${testID}-seat-chosen`}>
-          {seatChosen(shown.seatDistanceIn)}
-        </Text>
       </View>
 
       <View style={styles.group}>

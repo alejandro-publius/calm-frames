@@ -250,9 +250,11 @@ const KidHomeScreen = ({
   // On the island map the picker takes the row of cards while it is open, so
   // nothing it says sits under a card; the cards come back when it closes.
   const picker = choosingProfile && picking && profiles && onChooseProfile ? (
-    <ProfilePicker disabled={saving || undefined} testID={`${testID}-profiles`} title={PROFILES_KID_TITLE}
+    <ProfilePicker focusActive disabled={saving || undefined} testID={`${testID}-profiles`} title={PROFILES_KID_TITLE}
       chosenWord={WATCHING_STATE_WORD} chosenLine={whoIsWatching((profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name)}
-      profiles={profiles} activeProfileId={activeProfileId ?? profiles[0].id} onChoose={onChooseProfile} />
+      profiles={profiles} activeProfileId={activeProfileId ?? profiles[0].id} onChoose={(profile) => {
+        onChooseProfile(profile); setChoosingProfile(false); setReturnToHeader('profile');
+      }} />
   ) : null;
   const hero = featured && feature ? <View testID={`${testID}-hero`} style={islandHome ? [styles.islandHero, placed(cardsNameIt ? HOME_ISLANDS.ACTIONS : HOME_ISLANDS.HERO)] : styles.hero}>
               <View style={styles.heroCopy}>

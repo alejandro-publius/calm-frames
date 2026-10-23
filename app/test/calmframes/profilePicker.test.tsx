@@ -4,6 +4,16 @@ import { TouchableOpacity } from 'react-native';
 import ProfilePicker from '../../src/calmframes/ProfilePicker';
 import { addProfile, newFamily } from '../../src/calmframes/profiles';
 
+it('focuses the active choice only when opening a chooser and retains accessible state without duplicate copy', () => {
+  const family = addProfile(newFamily(), 'Sam');
+  const view = render(<ProfilePicker profiles={family.profiles} activeProfileId={family.activeProfileId}
+    title="Who is watching" focusActive onChoose={jest.fn()} />);
+  const active = view.getByTestId(`profile-picker-${family.activeProfileId}`);
+  expect(active.props.hasTVPreferredFocus).toBe(true);
+  expect(active.props.accessibilityState).toMatchObject({checked: true, selected: true});
+  expect(view.queryByTestId('profile-picker-chosen')).toBeNull();
+});
+
 it('ignores a delivered profile press while a save blocks the picker', () => {
   const family = addProfile(newFamily(), 'Sam');
   const onChoose = jest.fn();

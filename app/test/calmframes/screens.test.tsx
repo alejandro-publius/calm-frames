@@ -800,12 +800,8 @@ describe('ParentAreaScreen', () => {
     const view = render(area(DEFAULT_SETTINGS));
     enter('1357');
 
-    expect(screen.getByTestId('parent-area-tv-chosen').props.children).toBe(
-      '55 inch is chosen.',
-    );
-    expect(screen.getByTestId('parent-area-seat-chosen').props.children).toBe(
-      '8 feet away is chosen.',
-    );
+    expect(screen.queryByTestId('parent-area-tv-chosen')).toBeNull();
+    expect(screen.queryByTestId('parent-area-seat-chosen')).toBeNull();
     // The rows say which question they are asking, and the chips carry the
     // state a radio carries rather than only a fill.
     expect(
@@ -832,13 +828,9 @@ describe('ParentAreaScreen', () => {
     view.rerender(
       area({ ...DEFAULT_SETTINGS, tvDiagonalIn: 85, seatDistanceIn: 48 }),
     );
-    expect(screen.getByTestId('parent-area-tv-chosen').props.children).toBe(
-      '85 inch is chosen.',
-    );
-    expect(screen.getByTestId('parent-area-seat-chosen').props.children).toBe(
-      '4 feet away is chosen.',
-    );
-    // Only the sentence moved. No chip grew, so no chip slid.
+    expect(screen.queryByTestId('parent-area-tv-chosen')).toBeNull();
+    expect(screen.queryByTestId('parent-area-seat-chosen')).toBeNull();
+    // Selection changes without growing a chip or adding a duplicate sentence.
     expect(chipText()).toEqual(before);
   });
 
@@ -918,10 +910,8 @@ describe('family profiles on the screens', () => {
       />,
     );
     fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
-    // The answer is a sentence under the row, not a word on a chip.
-    expect(screen.getByTestId('kid-home-profiles-chosen').props.children).toBe(
-      'Robin is watching.',
-    );
+    // Checkmarks and radio state express the choice without a duplicate sentence.
+    expect(screen.queryByTestId('kid-home-profiles-chosen')).toBeNull();
     fireEvent.press(screen.getByTestId('kid-home-profiles-profile-2'));
     expect(onChooseProfile).toHaveBeenCalledWith(twoKids.profiles[1]);
   });
@@ -978,10 +968,8 @@ describe('family profiles on the screens', () => {
 
     expect(chipText()).toEqual(before);
     expect(before).toEqual(['Robin', 'Sam']);
-    // Only the sentence under the row moved.
-    expect(screen.getByTestId('kid-home-profiles-chosen').props.children).toBe(
-      'Sam is watching.',
-    );
+    // The chosen state changes without a second description.
+    expect(screen.queryByTestId('kid-home-profiles-chosen')).toBeNull();
   });
 
   /** Seen to fail with the radiogroup role taken off the row. */
@@ -1145,17 +1133,13 @@ describe('family profiles on the screens', () => {
     expect(screen.getByText('Viewing preset for Everyone')).toBeTruthy();
     expect(screen.getByText('TV and seating for Everyone')).toBeTruthy();
     expect(screen.getByText('Hidden scenes for Everyone')).toBeTruthy();
-    expect(
-      screen.getByTestId('parent-area-profiles-chosen').props.children,
-    ).toBe('These settings are for Everyone.');
+    expect(screen.queryByTestId('parent-area-profiles-chosen')).toBeNull();
 
     fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
     expect(screen.getByText('Viewing preset for Sam')).toBeTruthy();
     expect(screen.getByText('TV and seating for Sam')).toBeTruthy();
     expect(screen.getByText('Hidden scenes for Sam')).toBeTruthy();
-    expect(
-      screen.getByTestId('parent-area-profiles-chosen').props.children,
-    ).toBe('These settings are for Sam.');
+    expect(screen.queryByTestId('parent-area-profiles-chosen')).toBeNull();
   });
 
   /**

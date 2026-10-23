@@ -32,7 +32,7 @@ export function titlePresentation(title: CatalogTitle): TitlePresentation {
     return { name: 'McWay Falls', cardName: 'McWay Falls', kind: 'Ocean · 5 minutes',
       selectorMeta: '5 min · then still', action: 'Watch now', menuArt: 'coastal',
       runtime: '5 minutes · Nature sounds · Then a still frame',
-      description: 'One fixed view of the cove and waterfall, at natural speed. No cuts or repeats. Pause whenever you like; the final frame stays until you leave.',
+      description: 'One uninterrupted view of McWay Falls and the cove, at natural speed.',
       attribution: 'MoneySavingVideos, ♥♥ Relaxing 3 Hour Video of a Waterfall on an Ocean Beach at Sunset. CC BY 3.0: https://creativecommons.org/licenses/by/3.0/ . Source: https://commons.wikimedia.org/wiki/Special:Redirect/file/♥♥_Relaxing_3_Hour_Video_of_a_Waterfall_on_an_Ocean_Beach_at_Sunset.webm . Changes: five-minute excerpt, 720p transcode, final three-second audio fade, extracted final-frame still. No endorsement implied.' };
   }
   if (concernsPackagedLibrary(title) && title.sha256 === FOREST_SOURCE_SHA256 && title.durationMs === 12000) {
