@@ -1,0 +1,112 @@
+{
+  "scope": "Private GitHub handoff, no public demo or submitted branch changes",
+  "production_base": "69eae5fb1553fdf315960a48d495952bfa2fd7d0",
+  "installed_source": "bd55e470b895aa9e8b7ef8a843f0a742fce3611b",
+  "production_branch": "codex/claude-handoff-2026-10-23",
+  "separate_harness_branch": "codex/native-retry-harness-2026-10-23",
+  "source_inventory": [
+    {
+      "label": "submitted",
+      "commit": "bf2f615e6fad0d73442fe2b9acab3067bf311e7e",
+      "ancestor_of_production": true,
+      "patch_equivalence_if_not_ancestor": []
+    },
+    {
+      "label": "claude-overnight",
+      "commit": "0e9241a478abdda980b272f6654aa2745beabd45",
+      "ancestor_of_production": true,
+      "patch_equivalence_if_not_ancestor": []
+    },
+    {
+      "label": "preparation-recovery",
+      "commit": "ce6f6a3790027fbfa90f55ad78d57ae9edcc03da",
+      "ancestor_of_production": true,
+      "patch_equivalence_if_not_ancestor": []
+    },
+    {
+      "label": "playback-proof",
+      "commit": "318a3fe8dcba07474d08af0609cb1168e1b37f41",
+      "ancestor_of_production": false,
+      "patch_equivalence_if_not_ancestor": [
+        "+ bd2df77129b77d03097e8b7b84ace6585af878db",
+        "+ bc1c190cdd7cd5d97d40be1034a19dd751d6dc53",
+        "+ f63cc35b65f659a7daee5bc2b2b4c549b6ee6ad2",
+        "+ 318a3fe8dcba07474d08af0609cb1168e1b37f41"
+      ]
+    },
+    {
+      "label": "production-evidence",
+      "commit": "69eae5fb1553fdf315960a48d495952bfa2fd7d0",
+      "ancestor_of_production": true,
+      "patch_equivalence_if_not_ancestor": []
+    },
+    {
+      "label": "harness",
+      "commit": "84faeed7dee851c713f75faaff2f8522a961d609",
+      "ancestor_of_production": false,
+      "patch_equivalence_if_not_ancestor": [
+        "+ 9c28e93b18a8fc322bf320f95fb015b47f1e0814",
+        "+ 84faeed7dee851c713f75faaff2f8522a961d609"
+      ]
+    }
+  ],
+  "artifact_inventory": [
+    {
+      "path": "/Users/alexvintera/Documents/Codex/2026-10-20/task/calm-frames-native-polish-69eae5f.zip",
+      "bytes": 14770148,
+      "sha256": "691299745b49469ff6175b709a46fe8a24c7728e90d1c3b94cb8a489d9a2a162",
+      "library_file_id": "libfile_278617dfcdc48191ace2de1fa6256a11",
+      "in_git": false
+    },
+    {
+      "path": "/Users/alexvintera/Documents/Codex/2026-10-20/task/mac-readiness-2026-10-21/release-validation-2026-10-22/calm-frames-replacement-demo.mp4",
+      "bytes": 49643080,
+      "sha256": "dde2ba357cf769c42eda519591aaf235e06fd487eb61f1d1d59548f4d703df92",
+      "library_file_id": null,
+      "in_git": false
+    }
+  ],
+  "exclusions": [
+    {
+      "items": "build/*.vpkg and build caches",
+      "reason": "Large generated packages remain local, hashes and rollback paths in handoff; no upload to GitHub/LFS"
+    },
+    {
+      "items": ".logs raw video/audio/capture collections",
+      "reason": "Large raw diagnostics remain local. Only existing reviewed scoped evidence already committed is retained."
+    },
+    {
+      "items": "calm-frames-replacement-demo.mp4 and audio-check-mcway-20s.mp4",
+      "reason": "Local audiovisual artifacts; stale source identity explicitly recorded. Public baseline unchanged."
+    },
+    {
+      "items": "~/.codex/skills and design-tools-runtime-2026-10-23/node_modules",
+      "reason": "Third-party tools not vendored. Origin/license/hash/setup manifests included instead."
+    },
+    {
+      "items": "eight untracked * 2.* sync copies in calm-frames-integration-review-2026-10-22; app/node_modules 2 in calm-frames-playback-proof",
+      "reason": "Unrelated duplicate sync/dependency material left untouched, not staged."
+    },
+    {
+      "items": "PIN, household/profile storage, signing keys, credentials and browser profiles",
+      "reason": "Private runtime/security data never collected or committed."
+    },
+    {
+      "items": "local untracked description-drafts/README.md",
+      "reason": "Reviewed historical text copied to docs/handoff-2026-10-23/historical-description-styling-note.md; original untouched. Its old submission status is not current."
+    }
+  ],
+  "audit": {
+    "new_production_blobs_since_remote_release": 133,
+    "new_blob_bytes": 17407917,
+    "blobs_over_20MiB": 0,
+    "credential_pattern_findings": "One FirstRunScreen text label Choose a PIN; no secret. Public PEM verification fixtures are not private keys.",
+    "parent_gate_image_provenance": "Existing copy-receipt records Enter your PIN with no digits entered; no secret screen re-inspected."
+  },
+  "playback_proof_archive_branch": "codex/playback-proof-archive-2026-10-23",
+  "notes": [
+    "Playback Proof original branch is preserved separately. It is not an ancestor; do not blindly merge it or duplicate integrated changes.",
+    "Recovery and Claude overnight commits are production ancestors. All clean current source worktree heads are represented either in production ancestry or separate branches.",
+    "No new generated packages, recordings, tool payloads or private runtime state are staged."
+  ]
+}
