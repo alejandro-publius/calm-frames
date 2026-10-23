@@ -49,7 +49,7 @@ describe('patched image-size behind the legacy Metro API', () => {
     expect(adapter).toMatchObject({ name: '@calm-frames/image-size-legacy',
       peerDependencies: { 'image-size-modern': '2.0.4' } });
     expect(manifest.dependencies['image-size-modern']).toBe('npm:image-size@2.0.4');
-    expect(manifest.overrides).toEqual({ 'metro@0.54.1': { 'image-size': '$image-size' } });
+    expect(manifest.overrides['metro@0.54.1']).toEqual({ 'image-size': '$image-size' });
     expect(legacyRequire.resolve('image-size')).toBe(join(appRoot, 'vendor/image-size-legacy/index.cjs'));
     for (const [path, component] of Object.entries(lock.packages) as [string,
       { name?: string; version?: string; link?: boolean }][]) {

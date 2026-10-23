@@ -131,7 +131,8 @@
   "overrides": {
     "metro@0.54.1": {
       "image-size": "$image-size"
-    }
+    },
+    "shell-quote": "1.11.0"
   },
   "engines": {
     "node": ">=22"

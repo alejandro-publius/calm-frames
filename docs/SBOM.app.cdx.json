@@ -14619,40 +14619,6 @@
     },
     {
       "type": "library",
-      "name": "array-filter",
-      "version": "0.0.1",
-      "bom-ref": "calm-frames-app@0.1.0|array-filter@0.0.1",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT",
-            "acknowledgement": "declared"
-          }
-        }
-      ],
-      "purl": "pkg:npm/array-filter@0.0.1",
-      "externalReferences": [
-        {
-          "url": "https://registry.npmjs.org/array-filter/-/array-filter-0.0.1.tgz",
-          "type": "distribution",
-          "hashes": [
-            {
-              "alg": "SHA-512",
-              "content": "556d05a422218d975aad68c8cfc569bdaed4f797e5d899fe6fe9a614530b9fc3c856c70e41c0201339f05334c4b941eea99a88c70cd195c68dfeead31454288b"
-            }
-          ],
-          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "cdx:npm:package:path",
-          "value": "node_modules/array-filter"
-        }
-      ]
-    },
-    {
-      "type": "library",
       "name": "array-includes",
       "version": "3.2.0",
       "bom-ref": "calm-frames-app@0.1.0|array-includes@3.2.0",
@@ -14686,74 +14652,6 @@
         {
           "name": "cdx:npm:package:path",
           "value": "node_modules/array-includes"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "name": "array-map",
-      "version": "0.0.1",
-      "bom-ref": "calm-frames-app@0.1.0|array-map@0.0.1",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT",
-            "acknowledgement": "declared"
-          }
-        }
-      ],
-      "purl": "pkg:npm/array-map@0.0.1",
-      "externalReferences": [
-        {
-          "url": "https://registry.npmjs.org/array-map/-/array-map-0.0.1.tgz",
-          "type": "distribution",
-          "hashes": [
-            {
-              "alg": "SHA-512",
-              "content": "b311c87894c612c442f3f858919cdd24d34f678d445c7572b3ba6a330d62c04fcac7cfe1b68d146c3b8642c489d2e8cfa2f8fda94665e84398fc4899da0dddf5"
-            }
-          ],
-          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "cdx:npm:package:path",
-          "value": "node_modules/array-map"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "name": "array-reduce",
-      "version": "0.0.0",
-      "bom-ref": "calm-frames-app@0.1.0|array-reduce@0.0.0",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT",
-            "acknowledgement": "declared"
-          }
-        }
-      ],
-      "purl": "pkg:npm/array-reduce@0.0.0",
-      "externalReferences": [
-        {
-          "url": "https://registry.npmjs.org/array-reduce/-/array-reduce-0.0.0.tgz",
-          "type": "distribution",
-          "hashes": [
-            {
-              "alg": "SHA-512",
-              "content": "f2347e4ada9a0badfabbb877c9ed5ca3795045e7e0555510521b809916c3a8831e476cae5f346f902350890e49ff06d1126a012cdb69d7776169a5696500d153"
-            }
-          ],
-          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "cdx:npm:package:path",
-          "value": "node_modules/array-reduce"
         }
       ]
     },
@@ -32667,6 +32565,46 @@
           "name": "cdx:npm:package:path",
           "value": "node_modules/launch-editor"
         }
+      ],
+      "components": [
+        {
+          "type": "library",
+          "name": "shell-quote",
+          "version": "1.11.0",
+          "bom-ref": "calm-frames-app@0.1.0|launch-editor@2.14.2|shell-quote@1.11.0",
+          "licenses": [
+            {
+              "license": {
+                "id": "MIT",
+                "acknowledgement": "declared"
+              }
+            }
+          ],
+          "purl": "pkg:npm/shell-quote@1.11.0",
+          "externalReferences": [
+            {
+              "url": "https://registry.npmjs.org/shell-quote/-/shell-quote-1.11.0.tgz",
+              "type": "distribution",
+              "hashes": [
+                {
+                  "alg": "SHA-512",
+                  "content": "25dc433c3d03053caed3ca6ad243c2d3148d7adfeab14d3ba93e88b17d404bca0ed8808d458e2574d6bc38023a3eec001fcb46de5c4485baa6ca9e03c38d37ea"
+                }
+              ],
+              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:npm:package:development",
+              "value": "true"
+            },
+            {
+              "name": "cdx:npm:package:path",
+              "value": "node_modules/launch-editor/node_modules/shell-quote"
+            }
+          ]
+        }
       ]
     },
     {
@@ -38498,6 +38436,44 @@
         },
         {
           "type": "library",
+          "name": "shell-quote",
+          "version": "1.11.0",
+          "bom-ref": "calm-frames-app@0.1.0|npm-run-all@4.1.5|shell-quote@1.11.0",
+          "licenses": [
+            {
+              "license": {
+                "id": "MIT",
+                "acknowledgement": "declared"
+              }
+            }
+          ],
+          "purl": "pkg:npm/shell-quote@1.11.0",
+          "externalReferences": [
+            {
+              "url": "https://registry.npmjs.org/shell-quote/-/shell-quote-1.11.0.tgz",
+              "type": "distribution",
+              "hashes": [
+                {
+                  "alg": "SHA-512",
+                  "content": "25dc433c3d03053caed3ca6ad243c2d3148d7adfeab14d3ba93e88b17d404bca0ed8808d458e2574d6bc38023a3eec001fcb46de5c4485baa6ca9e03c38d37ea"
+                }
+              ],
+              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:npm:package:development",
+              "value": "true"
+            },
+            {
+              "name": "cdx:npm:package:path",
+              "value": "node_modules/npm-run-all/node_modules/shell-quote"
+            }
+          ]
+        },
+        {
+          "type": "library",
           "name": "supports-color",
           "version": "5.5.0",
           "bom-ref": "calm-frames-app@0.1.0|npm-run-all@4.1.5|supports-color@5.5.0",
@@ -42381,6 +42357,42 @@
         {
           "name": "cdx:npm:package:path",
           "value": "node_modules/react-devtools-core"
+        }
+      ],
+      "components": [
+        {
+          "type": "library",
+          "name": "shell-quote",
+          "version": "1.11.0",
+          "bom-ref": "calm-frames-app@0.1.0|react-devtools-core@6.1.5|shell-quote@1.11.0",
+          "licenses": [
+            {
+              "license": {
+                "id": "MIT",
+                "acknowledgement": "declared"
+              }
+            }
+          ],
+          "purl": "pkg:npm/shell-quote@1.11.0",
+          "externalReferences": [
+            {
+              "url": "https://registry.npmjs.org/shell-quote/-/shell-quote-1.11.0.tgz",
+              "type": "distribution",
+              "hashes": [
+                {
+                  "alg": "SHA-512",
+                  "content": "25dc433c3d03053caed3ca6ad243c2d3148d7adfeab14d3ba93e88b17d404bca0ed8808d458e2574d6bc38023a3eec001fcb46de5c4485baa6ca9e03c38d37ea"
+                }
+              ],
+              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:npm:package:path",
+              "value": "node_modules/react-devtools-core/node_modules/shell-quote"
+            }
+          ]
         }
       ]
     },
@@ -46608,8 +46620,8 @@
         {
           "type": "library",
           "name": "shell-quote",
-          "version": "1.6.1",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|shell-quote@1.6.1",
+          "version": "1.11.0",
+          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|shell-quote@1.11.0",
           "licenses": [
             {
               "license": {
@@ -46618,15 +46630,15 @@
               }
             }
           ],
-          "purl": "pkg:npm/shell-quote@1.6.1",
+          "purl": "pkg:npm/shell-quote@1.11.0",
           "externalReferences": [
             {
-              "url": "https://registry.npmjs.org/shell-quote/-/shell-quote-1.6.1.tgz",
+              "url": "https://registry.npmjs.org/shell-quote/-/shell-quote-1.11.0.tgz",
               "type": "distribution",
               "hashes": [
                 {
                   "alg": "SHA-512",
-                  "content": "574890119feea1e9b73660fdd6b0fc5e2ba8cc99eaf7f6499db1d55c79d6a8fd6e700852df227bb0b208cc48b9ef014570ade88b7905502e3ab92c96af7e66c6"
+                  "content": "25dc433c3d03053caed3ca6ad243c2d3148d7adfeab14d3ba93e88b17d404bca0ed8808d458e2574d6bc38023a3eec001fcb46de5c4485baa6ca9e03c38d37ea"
                 }
               ],
               "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -51654,40 +51666,6 @@
         {
           "name": "cdx:npm:package:path",
           "value": "node_modules/shebang-regex"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "name": "shell-quote",
-      "version": "1.11.0",
-      "bom-ref": "calm-frames-app@0.1.0|shell-quote@1.11.0",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT",
-            "acknowledgement": "declared"
-          }
-        }
-      ],
-      "purl": "pkg:npm/shell-quote@1.11.0",
-      "externalReferences": [
-        {
-          "url": "https://registry.npmjs.org/shell-quote/-/shell-quote-1.11.0.tgz",
-          "type": "distribution",
-          "hashes": [
-            {
-              "alg": "SHA-512",
-              "content": "25dc433c3d03053caed3ca6ad243c2d3148d7adfeab14d3ba93e88b17d404bca0ed8808d458e2574d6bc38023a3eec001fcb46de5c4485baa6ca9e03c38d37ea"
-            }
-          ],
-          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "cdx:npm:package:path",
-          "value": "node_modules/shell-quote"
         }
       ]
     },
@@ -61578,9 +61556,6 @@
       ]
     },
     {
-      "ref": "calm-frames-app@0.1.0|array-filter@0.0.1"
-    },
-    {
       "ref": "calm-frames-app@0.1.0|array-includes@3.2.0",
       "dependsOn": [
         "calm-frames-app@0.1.0|call-bind@1.0.9",
@@ -61592,12 +61567,6 @@
         "calm-frames-app@0.1.0|is-string@1.1.1",
         "calm-frames-app@0.1.0|math-intrinsics@1.1.0"
       ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|array-map@0.0.1"
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|array-reduce@0.0.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|array-slice@0.2.3"
@@ -64715,9 +64684,12 @@
     {
       "ref": "calm-frames-app@0.1.0|launch-editor@2.14.2",
       "dependsOn": [
-        "calm-frames-app@0.1.0|picocolors@1.1.1",
-        "calm-frames-app@0.1.0|shell-quote@1.11.0"
+        "calm-frames-app@0.1.0|launch-editor@2.14.2|shell-quote@1.11.0",
+        "calm-frames-app@0.1.0|picocolors@1.1.1"
       ]
+    },
+    {
+      "ref": "calm-frames-app@0.1.0|launch-editor@2.14.2|shell-quote@1.11.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|lcid@1.0.0",
@@ -65705,9 +65677,9 @@
         "calm-frames-app@0.1.0|npm-run-all@4.1.5|ansi-styles@3.2.1",
         "calm-frames-app@0.1.0|npm-run-all@4.1.5|chalk@2.4.2",
         "calm-frames-app@0.1.0|npm-run-all@4.1.5|cross-spawn@6.0.6",
+        "calm-frames-app@0.1.0|npm-run-all@4.1.5|shell-quote@1.11.0",
         "calm-frames-app@0.1.0|pidtree@0.3.1",
         "calm-frames-app@0.1.0|read-pkg@3.0.0",
-        "calm-frames-app@0.1.0|shell-quote@1.11.0",
         "calm-frames-app@0.1.0|string.prototype.padend@3.1.6"
       ]
     },
@@ -65764,6 +65736,9 @@
     },
     {
       "ref": "calm-frames-app@0.1.0|npm-run-all@4.1.5|shebang-regex@1.0.0"
+    },
+    {
+      "ref": "calm-frames-app@0.1.0|npm-run-all@4.1.5|shell-quote@1.11.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|npm-run-all@4.1.5|supports-color@5.5.0",
@@ -66332,9 +66307,12 @@
     {
       "ref": "calm-frames-app@0.1.0|react-devtools-core@6.1.5",
       "dependsOn": [
-        "calm-frames-app@0.1.0|shell-quote@1.11.0",
+        "calm-frames-app@0.1.0|react-devtools-core@6.1.5|shell-quote@1.11.0",
         "calm-frames-app@0.1.0|ws@7.5.13"
       ]
+    },
+    {
+      "ref": "calm-frames-app@0.1.0|react-devtools-core@6.1.5|shell-quote@1.11.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|react-fast-compare@2.0.4"
@@ -66489,7 +66467,7 @@
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|mkdirp@0.5.6",
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|react-native@0.60.6",
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|semver@5.7.2",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|shell-quote@1.6.1",
+        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|shell-quote@1.11.0",
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|ws@1.1.5",
         "calm-frames-app@0.1.0|serve-static@1.16.3"
       ]
@@ -67177,7 +67155,7 @@
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|react-devtools-core@3.6.3",
       "dependsOn": [
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|react-devtools-core@3.6.3|ws@3.3.3",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|shell-quote@1.6.1"
+        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|shell-quote@1.11.0"
       ]
     },
     {
@@ -67275,13 +67253,7 @@
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|shebang-regex@1.0.0"
     },
     {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|shell-quote@1.6.1",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|array-filter@0.0.1",
-        "calm-frames-app@0.1.0|array-map@0.0.1",
-        "calm-frames-app@0.1.0|array-reduce@0.0.0",
-        "calm-frames-app@0.1.0|jsonify@0.0.1"
-      ]
+      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|shell-quote@1.11.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|source-map@0.5.7"
@@ -68168,9 +68140,6 @@
     },
     {
       "ref": "calm-frames-app@0.1.0|shebang-regex@3.0.0"
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|shell-quote@1.11.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|shelljs@0.8.5",
