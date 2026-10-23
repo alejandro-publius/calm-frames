@@ -39,8 +39,11 @@ remote letter grid. Saving changes the name while retaining that kid's identity,
 preferences and saved places. Cancel and Back discard an unfinished edit. A
 failed storage write is not presented as a successful rename. Letters and spaces
 are supported; accents, digits and punctuation are not current input options.
-These are implemented behaviors with [persistence and failure-path source checks](../design-polish-2026-10-23/FABLE_INTEGRATION.md),
-not a claim of observed native keyboard, VoiceView or focus acceptance.
+The [received native review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md)
+records typing, persistence through relaunch and focus return on `6a87937`.
+Native failed-write/retry and VoiceView remain unobserved; their implementation
+has source tests. The platform keyboard was not used. Later cloud follow-ups
+are separate from this installed package.
 
 ### 🔎 Preparation and playback share a chain of evidence
 

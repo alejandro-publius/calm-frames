@@ -1,0 +1,83 @@
+{
+  "recorded_utc": "2026-10-23T23:32:16.196233+00:00",
+  "source_before_review": "ea903dd655b92b6c763061b5ddc0c9719fe4948c",
+  "scope": "Documentation and sanitized evidence reconciliation only; no app, dependency or native build changes.",
+  "checks": {
+    "received_archive_and_listed_file_checksums": "passed; details in transfer-verification.json",
+    "edited_markdown_relative_links_and_anchors": {
+      "status": "passed",
+      "documents": 7,
+      "broken_links": []
+    },
+    "original_backlog_numbering": {
+      "status": "passed",
+      "ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    "receipt_observation_ids_and_status_counts": {
+      "status": "passed",
+      "observations": 24,
+      "counts": {
+        "passed": 21,
+        "unobserved": 2,
+        "pending owner": 1
+      }
+    },
+    "json_syntax_and_private_path_exclusion": "passed",
+    "published_number_markers": {
+      "command": "python eval/readme_sync.py --check",
+      "status": "passed"
+    },
+    "repository_style": {
+      "command": "python eval/style_check.py",
+      "status": "passed"
+    },
+    "diff_whitespace": {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    "staged_secret_scan": {
+      "command": "bash scripts/gitleaks_scan.sh staged",
+      "version": "8.30.1",
+      "status": "passed",
+      "findings": 0
+    }
+  },
+  "reviewed_file_sha256": {
+    "README.md": "69160c0f951e2519019b7a96ba69329e707b26893804519074c63b7d7f497953",
+    "docs/cloud-integration-2026-10-23/CHECKPOINT.md": "6859803190968a552973ed951fe3c8eae655e8d737cc9f22c1e94da14b2a47b4",
+    "docs/cloud-integration-2026-10-23/CLAIMS_LEDGER.md": "fe606aea13bf3725113fec86b3b64996ec149e9a788ae3077d286c63ceaf6f28",
+    "docs/cloud-integration-2026-10-23/EVIDENCE_RECONCILIATION.md": "7095cf7cd34bbbfb6172eec2f962ddae1b147f1662fda7d8ad1e80f3a69c7e5d",
+    "docs/cloud-integration-2026-10-23/PRESENTATION_DRAFTS.md": "fd8ec8c203d23ce2245133675b79ee66d2e51b8e4e0a135a53cf0c383e76d3ac",
+    "docs/design-polish-2026-10-23/FABLE_INTEGRATION.md": "fce2f762cd0e434f0796e924a04841021e933508d6a92ad490cc7b263232b58e",
+    "docs/design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md": "cdb4107b14a354f632b580adf60381d7db6eece85fdeeae8586e7eabd772d378",
+    "results/design-polish-2026-10-23/native-names-acceptance/receipt-review.json": "c808a98bb99d396b1c0274b361a081929c056d6d2b418e6cdf6a7dce70387d18",
+    "results/design-polish-2026-10-23/native-names-acceptance/trace-corroboration.json": "55c7315bee5ba1d8160525683a8b0806309365b0234ec9fb5b7ed6d5a1660e41",
+    "results/design-polish-2026-10-23/native-names-acceptance/transfer-verification.json": "b2f90ceba561ddb1ca48b07503aa26b899f74e977ae012dd3c37538351bac78c"
+  },
+  "limits": [
+    "No application tests were rerun for this documentation-only change. Existing source-check receipts retain their exact commit scope.",
+    "No received screenshot or native binary bytes were available for independent visual inspection or package rehashing.",
+    "No native observations, human comfort acceptance or hosted results were produced by these cloud document checks."
+  ]
+}

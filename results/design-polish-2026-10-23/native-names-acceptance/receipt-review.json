@@ -1,0 +1,524 @@
+{
+  "recorded_utc": "2026-10-23T23:24:18.188501+00:00",
+  "native_source": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+  "cloud_source_before_documentation": "ea903dd655b92b6c763061b5ddc0c9719fe4948c",
+  "cloud_checked_code": "07db296137ec3ba50afff15097053061709fda27",
+  "original_receipt_sha256": "ca78cd883cf06fc348680c80b718f91ea3365077800eba7d2e82959805a31ad8",
+  "original_receipt_modified": false,
+  "operator_counts": {
+    "passed": 21,
+    "unobserved": 2,
+    "pending owner": 1
+  },
+  "scope_qualified_passes": [
+    "still-routes",
+    "refuse-duplicate"
+  ],
+  "observations": [
+    {
+      "id": "build",
+      "operator_status": "passed",
+      "review_status": "supported within supplied build record",
+      "supported_scope": "Build log reaches packaged Debug output for the imported source; the source lock and export match local immutable inputs.",
+      "limit": "Native binary bytes are not in this ZIP.",
+      "capture_references": []
+    },
+    {
+      "id": "rollback",
+      "operator_status": "passed",
+      "review_status": "operator recorded",
+      "supported_scope": "Mac operator recorded an existing rollback package and its hash before installation.",
+      "limit": "No rollback installation was exercised; file bytes were not transferred.",
+      "capture_references": []
+    },
+    {
+      "id": "install",
+      "operator_status": "passed",
+      "review_status": "corroborated by supplied logs",
+      "supported_scope": "Package-scoped install log reports success; installed-device SHA-384 matches the recorded native package.",
+      "limit": "A cloud rehash of native binary bytes was not possible.",
+      "capture_references": []
+    },
+    {
+      "id": "home-route",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "Home, McWay Details, Resume/playback and Back were traversed on the installed build.",
+      "limit": "No full-duration or compositor-ordering certification; images are indexed only.",
+      "capture_references": [
+        {
+          "path": "evidence/01-home.png",
+          "sha256": "a2eb7cbf98e2a4c0efe41840a585408536a293e44a8d7bd99d8a8e314d5653da"
+        },
+        {
+          "path": "evidence/02-home-up.png",
+          "sha256": "a379266c2e8f9c4c7388f78b9a729267f4994de03498b36fdc29007a8bc8c413"
+        },
+        {
+          "path": "evidence/03-mcway-details.png",
+          "sha256": "f77f19e2aacc4c776c23625b18daa979bda5ad545059c76dbe4b43209ef9fc08"
+        },
+        {
+          "path": "evidence/04-mcway-watch.png",
+          "sha256": "4d5b7b45cf8f2e3a01e1dbbeab171611309f4f1bb409849aa2e3f2acfd09cbe9"
+        },
+        {
+          "path": "evidence/05-mcway-playing.png",
+          "sha256": "98ee6ba51bdd8a9af09f450fcafb15ec6a8213b39d44eddc79a220ceb924c3bd"
+        },
+        {
+          "path": "evidence/06-back-to-details.png",
+          "sha256": "23d66b6ba0b373273d11b05e408e06081dfbd8bee0e2b7841b1a11f7295a5666"
+        },
+        {
+          "path": "evidence/07-back-to-home.png",
+          "sha256": "2966487a28f1aa250de7cc700cf8fc33e16ac4519073e24aec6b46cdd90ac38a"
+        }
+      ]
+    },
+    {
+      "id": "still-routes",
+      "operator_status": "passed",
+      "review_status": "partially observed",
+      "supported_scope": "Acadia still playback opened. Sea Otters and Forest Details routes were traversed.",
+      "limit": "Sea Otters and Forest still playback were explicitly not opened, despite the broad passed label.",
+      "capture_references": [
+        {
+          "path": "evidence/08-acadia-open.png",
+          "sha256": "7c51c62b55d949f379dc51d42569b4c39362ab1694f20563fa24e4dc8a287a78"
+        },
+        {
+          "path": "evidence/09-acadia-back.png",
+          "sha256": "d8d1b6e9ee48fa8cb471fcbcb512d0ec96012f1a27c7a1e36f7dad515814f653"
+        },
+        {
+          "path": "evidence/10-otters-open.png",
+          "sha256": "81648fa3fadc5d37f5461595895cabb62cca9edcb95be188a5ba9455775ddab0"
+        },
+        {
+          "path": "evidence/11-forest-open.png",
+          "sha256": "ae661b8a4f2e7416f0ff07955eb7134777ffb6fcb8881a14562fed4909dbe131"
+        },
+        {
+          "path": "evidence/12-forest-back.png",
+          "sha256": "737b53273cd90c71bc363ee00108b07c24f9b13030776928769dda63b3ffa1d0"
+        },
+        {
+          "path": "evidence/13-acadia-still-scene.png",
+          "sha256": "d601245017cf4e389e5d982c9c5bfc830f9a55f56d7141b688b93c9492fe3923"
+        },
+        {
+          "path": "evidence/14-home-after-still.png",
+          "sha256": "54956ded79b0c985f6896e101f27799445f5a76b3828b3dc7863570d33ff8295"
+        }
+      ]
+    },
+    {
+      "id": "parents-locked",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "Parents displayed the PIN gate before protected controls.",
+      "limit": "No real PIN or raw private-input event sequence is reproduced in this review.",
+      "capture_references": [
+        {
+          "path": "evidence/15-header-focus.png",
+          "sha256": "11ccb9a3eb32369712d5a95edec1fcf734417929e8904be4a0cfd59f1fbcd1d8"
+        },
+        {
+          "path": "evidence/16-parents-focus.png",
+          "sha256": "0368c6aca0883f3db53107c3029162b46165c9287742e1c21260f9b976c82974"
+        },
+        {
+          "path": "evidence/17-parents-locked.png",
+          "sha256": "ac72a675126f7e681835c6144e88cf1ff7c14baacabf2fd94a17c201adb14cb1"
+        }
+      ]
+    },
+    {
+      "id": "everyone-no-editor",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "The household-wide selection offered no Edit name control.",
+      "limit": "Images are indexed, not independently inspected in cloud.",
+      "capture_references": [
+        {
+          "path": "evidence/18-parents-open.png",
+          "sha256": "a55db737d590ab3601a20d9dcb957a4a751c128e49e6a3705b73b7859201027e"
+        }
+      ]
+    },
+    {
+      "id": "kid-edit-name",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "Selecting a kid exposed Edit name.",
+      "limit": "This is the received build, not the newer cloud follow-up.",
+      "capture_references": [
+        {
+          "path": "evidence/19-down-from-back.png",
+          "sha256": "13f79c0990ce199c82da21487b6742414e8a09d7d51b06bd4d83a6f967d17381"
+        },
+        {
+          "path": "evidence/20-kid-chosen.png",
+          "sha256": "a523e738f27a8cc44e6a87cb979fb7d819dbe936494bd38506694f4d86c57f2c"
+        }
+      ]
+    },
+    {
+      "id": "editor-opens",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "The editor displayed the existing name/count, focused the first letter and hid the picker/add controls.",
+      "limit": "No native platform keyboard was used.",
+      "capture_references": [
+        {
+          "path": "evidence/21-focus-edit-name.png",
+          "sha256": "5eba5875b31e9d210c738e6d1233046df03f88796344cf417eacb081dafbf22f"
+        },
+        {
+          "path": "evidence/22-editor-open.png",
+          "sha256": "532f6c98714dc80597e848c5e46226d77b98fe84fb5e299e03b6a3567d5e8e03"
+        }
+      ]
+    },
+    {
+      "id": "dpad-travel",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "Inputd-driven navigation reached letters, editing actions, Save, Cancel and Back with a reported visible focus ring.",
+      "limit": "Physical remote timing and independent visual inspection are not established.",
+      "capture_references": [
+        {
+          "path": "evidence/23-travel-to-delete.png",
+          "sha256": "b96e0053b8f8da6c2270518b5abc3174265c3dba13e10db81e8ce453cf31733f"
+        },
+        {
+          "path": "evidence/25-up-twice-from-delete.png",
+          "sha256": "c655f285ec6dd14263a03c7524da33497bc74bc9b53886a05f05d85432b953ee"
+        },
+        {
+          "path": "evidence/35-down-from-delete.png",
+          "sha256": "cf9e84aff93789c0b05d79e26df8a30da49f924c26e88af91535f654a5e879d9"
+        },
+        {
+          "path": "evidence/50-up-to-header-back.png",
+          "sha256": "96651c9f4273771430a77b4f04d06d2faa1778f646173f985a4fabbb088ec8a6"
+        },
+        {
+          "path": "evidence/52-footer-while-editing.png",
+          "sha256": "226f383d8d2e0e262f761173da51a4a7ad4bf1c369f3d286439e5b4a1007bc61"
+        }
+      ]
+    },
+    {
+      "id": "typing",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "Delete, automatic word case, one-shot Shift and single spaces worked.",
+      "limit": "The input scope remains letters/spaces, with no accents, digits or punctuation.",
+      "capture_references": [
+        {
+          "path": "evidence/24-emptied.png",
+          "sha256": "4e72cd25d59dc4f1302ee6c0d41ec6bb1146a8a84c799653cd14ec26183d86fc"
+        },
+        {
+          "path": "evidence/26-typed-jo.png",
+          "sha256": "2982bf285b42c8cbd441b42dd79545655a13255276389e533f24c23ca0f85228"
+        },
+        {
+          "path": "evidence/27-shift-on.png",
+          "sha256": "981dec350528f107bfbc12be21b88e00fb58400c8d988ae98a695157d3a66d6f"
+        },
+        {
+          "path": "evidence/28-shifted-letter.png",
+          "sha256": "8128e89e9cfeb667e98305a2d4729bae4ffba1358a9f165317d3eebadbb08296"
+        },
+        {
+          "path": "evidence/29-deleted-shifted.png",
+          "sha256": "381050b0350944a92bba2047eb55e292406f06141c28ca8ecea679ca277ce809"
+        },
+        {
+          "path": "evidence/30-space-twice.png",
+          "sha256": "fbf313a9c9eeb43116165ff0c321b0c8d857941f6fe81afd873ff7b3872460c6"
+        },
+        {
+          "path": "evidence/31-letter-after-space.png",
+          "sha256": "a57067db037ecb573d1154e2db32ad1bbc04feb60ff16bc896ab425740cccbb8"
+        }
+      ]
+    },
+    {
+      "id": "limit",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "The length limit refused an additional character and Delete restored room.",
+      "limit": "No broader Unicode input support was added.",
+      "capture_references": [
+        {
+          "path": "evidence/32-at-limit.png",
+          "sha256": "0fab49b2b530abfb56ceb83565031dd3bf918aa1696741a4fcedfdf26e14df77"
+        },
+        {
+          "path": "evidence/33-limit-refused.png",
+          "sha256": "874236a210d62ad64b55bec8fb2368579a0f99cfe403a1027e647bd1b156a3ce"
+        },
+        {
+          "path": "evidence/34-back-to-jo.png",
+          "sha256": "381050b0350944a92bba2047eb55e292406f06141c28ca8ecea679ca277ce809"
+        }
+      ]
+    },
+    {
+      "id": "refuse-blank",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "Blank Save displayed a refusal and retained the editor.",
+      "limit": "No new state mutation was performed in cloud.",
+      "capture_references": [
+        {
+          "path": "evidence/36-blank-refused.png",
+          "sha256": "18da23b5e7172b0a38a7c1e586c74376b08746fdfd6bb71fd5a6623b4f0bb063"
+        }
+      ]
+    },
+    {
+      "id": "refuse-duplicate",
+      "operator_status": "passed",
+      "review_status": "partially observed",
+      "supported_scope": "The household label was rejected as a duplicate.",
+      "limit": "A sibling kid name was not entered; its digit could not be typed. Sibling-name rejection retains source-test evidence only.",
+      "capture_references": [
+        {
+          "path": "evidence/38-typed-everyone.png",
+          "sha256": "98e0e60120a07dd72bccc47be8a82a086c8ef70d56de2db4af3d6f3ce4a933c7"
+        },
+        {
+          "path": "evidence/39-duplicate-refused.png",
+          "sha256": "07e6c73d784f4c2d83c1f72c4a09930c91a46479c5ca62ea327d97455a77418e"
+        }
+      ]
+    },
+    {
+      "id": "save-persists",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "Rename persisted in the picker and Home and survived explicit termination/relaunch.",
+      "limit": "No household values or viewing positions are copied into this review.",
+      "capture_references": [
+        {
+          "path": "evidence/40-jo-before-save.png",
+          "sha256": "2982bf285b42c8cbd441b42dd79545655a13255276389e533f24c23ca0f85228"
+        },
+        {
+          "path": "evidence/41-right-after-save.png",
+          "sha256": "34d4d92f653f264a6314093453a79514533d51641647d0801585cafef4d9fdb7"
+        },
+        {
+          "path": "evidence/42-after-save-settled.png",
+          "sha256": "34d4d92f653f264a6314093453a79514533d51641647d0801585cafef4d9fdb7"
+        },
+        {
+          "path": "evidence/43-home-after-rename.png",
+          "sha256": "6850efc9a31f18f9338ee9632530847bd9fc9ab7ffe90c971e9d94e4c45418a8"
+        },
+        {
+          "path": "evidence/44-home-after-relaunch.png",
+          "sha256": "db73a1b707b2cc531a997cf7d15c7d8e5f805d010c9d075c5031d10bdbdea837"
+        },
+        {
+          "path": "evidence/45-parents-reopened.png",
+          "sha256": "f433b90339127a144693c872b8be21a9af16a163e3c85995abc26c56e3672826"
+        }
+      ]
+    },
+    {
+      "id": "focus-after-save",
+      "operator_status": "passed",
+      "review_status": "operator observed with trace corroboration",
+      "supported_scope": "Focus returned to Edit name after saving.",
+      "limit": "Trace order corroborates identifiers, not focus-ring rendering or pixel geometry.",
+      "capture_references": [
+        {
+          "path": "evidence/41-right-after-save.png",
+          "sha256": "34d4d92f653f264a6314093453a79514533d51641647d0801585cafef4d9fdb7"
+        },
+        {
+          "path": "evidence/42-after-save-settled.png",
+          "sha256": "34d4d92f653f264a6314093453a79514533d51641647d0801585cafef4d9fdb7"
+        }
+      ]
+    },
+    {
+      "id": "cancel",
+      "operator_status": "passed",
+      "review_status": "operator observed with trace corroboration",
+      "supported_scope": "Cancel discarded the draft and returned focus to Edit name.",
+      "limit": "The newer cloud privacy patch is not installed in this receipt.",
+      "capture_references": [
+        {
+          "path": "evidence/46-draft-before-cancel.png",
+          "sha256": "e77f350c5e3505f535bfbdde62fa55524d276ca155ad5d48805881855a137ade"
+        },
+        {
+          "path": "evidence/47-after-cancel.png",
+          "sha256": "34d4d92f653f264a6314093453a79514533d51641647d0801585cafef4d9fdb7"
+        }
+      ]
+    },
+    {
+      "id": "hardware-back",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "Device Back cancelled the editor; the next Back left Parents.",
+      "limit": "The virtual-device input driver was used, not a physical remote.",
+      "capture_references": [
+        {
+          "path": "evidence/48-after-hardware-back.png",
+          "sha256": "34d4d92f653f264a6314093453a79514533d51641647d0801585cafef4d9fdb7"
+        },
+        {
+          "path": "evidence/49-second-back-home.png",
+          "sha256": "43539c03db70823f9a8875d694f1bdabe665d7ee2018de2f99c058a517c4b21c"
+        }
+      ]
+    },
+    {
+      "id": "visible-back",
+      "operator_status": "passed",
+      "review_status": "operator observed with trace corroboration",
+      "supported_scope": "Header Back and the Parents footer cancellation closed the editor before leaving Parents.",
+      "limit": "This does not test the isolated first-run onboarding footer.",
+      "capture_references": [
+        {
+          "path": "evidence/50-up-to-header-back.png",
+          "sha256": "96651c9f4273771430a77b4f04d06d2faa1778f646173f985a4fabbb088ec8a6"
+        },
+        {
+          "path": "evidence/51-header-back-pressed.png",
+          "sha256": "34d4d92f653f264a6314093453a79514533d51641647d0801585cafef4d9fdb7"
+        },
+        {
+          "path": "evidence/52-footer-while-editing.png",
+          "sha256": "226f383d8d2e0e262f761173da51a4a7ad4bf1c369f3d286439e5b4a1007bc61"
+        },
+        {
+          "path": "evidence/53-footer-cancel-pressed.png",
+          "sha256": "e623d3ea721ce27cfc64e89658beb2edd0cda17129281c2573ccd40f210e9bc7"
+        }
+      ]
+    },
+    {
+      "id": "profile-isolation",
+      "operator_status": "passed",
+      "review_status": "operator observed",
+      "supported_scope": "Two profiles retained distinct saved positions through a rename and subsequent selection.",
+      "limit": "Position isolation does not prove differential protection restoration or captions.",
+      "capture_references": [
+        {
+          "path": "evidence/54-chooser-open.png",
+          "sha256": "cfb8da60342fa3a4ac252ccd89eebbce59e62c5044d074f5e31b1c7bc2876f47"
+        },
+        {
+          "path": "evidence/55-kid2-active.png",
+          "sha256": "dea0016c37ffccb734c7daa1b219258c794cc877adf2804511f8cdd13019fc86"
+        },
+        {
+          "path": "evidence/56-down-from-header.png",
+          "sha256": "b4ae4c214bcd8836f5b39f849873d519f0fef1030a0a8bdf81ed6657b6e4f582"
+        },
+        {
+          "path": "evidence/57-kid2-mcway-watch.png",
+          "sha256": "adc142ae435ad497397edc3c114027121492df3b2d022be27af8ea3ff0afa6b4"
+        },
+        {
+          "path": "evidence/58-back-to-jo.png",
+          "sha256": "040483d21ca35b4585f3261bbd865c2c04db1474e43d269802335fbb2ce89ce2"
+        },
+        {
+          "path": "evidence/59-jo-mcway-watch.png",
+          "sha256": "84f3a392c7c63c43e986751063a14f7e96bf6b0e18252ab751005b1b6e540ba6"
+        }
+      ]
+    },
+    {
+      "id": "failed-write-retry",
+      "operator_status": "unobserved",
+      "review_status": "unobserved",
+      "supported_scope": "No controlled native storage-failure fixture was run.",
+      "limit": "Existing route/source regressions remain evidence of implementation only; do not corrupt real household storage.",
+      "capture_references": []
+    },
+    {
+      "id": "voiceview",
+      "operator_status": "unobserved",
+      "review_status": "unobserved",
+      "supported_scope": "No native screen-reader announcements were obtained; a missing AccessibilityManager diagnostic is present in the supplied log.",
+      "limit": "That diagnostic does not establish absence or unsupported status across all devices or SDK installations.",
+      "capture_references": []
+    },
+    {
+      "id": "comfort",
+      "operator_status": "pending owner",
+      "review_status": "pending owner",
+      "supported_scope": "Owner picture/audio/reading/comfort review remains open.",
+      "limit": "Operator automation, screenshots and technical tests cannot supply this judgment.",
+      "capture_references": []
+    },
+    {
+      "id": "restore-names",
+      "operator_status": "passed",
+      "review_status": "operator recorded",
+      "supported_scope": "The temporary test rename was restored and the other profile was retained.",
+      "limit": "No household data is reproduced in committed review files.",
+      "capture_references": [
+        {
+          "path": "evidence/60-kid-typed-back.png",
+          "sha256": "435d85eb1409f5c95df544f591420bb04fd63b095fc0b61b0dd01eab579af3cc"
+        },
+        {
+          "path": "evidence/61-restored-saved.png",
+          "sha256": "5eba5875b31e9d210c738e6d1233046df03f88796344cf417eacb081dafbf22f"
+        },
+        {
+          "path": "evidence/62-home-restored.png",
+          "sha256": "387c7de3e0a2eb07b25d69a84b962958ae3b6410ccdaa1099957eb52971c4e34"
+        }
+      ]
+    }
+  ],
+  "toolchain": {
+    "node": "v22.23.2",
+    "npm": "10.9.8",
+    "vega_cli": "1.3.4",
+    "vega_sdk": "0.24.9914"
+  },
+  "source_mapped_results": {
+    "name_editing_save_cancel_back_persistence": "Mac operator observed on 6a87937; source and log corroboration retained.",
+    "failed_write_retry": "Not observed natively.",
+    "voiceview": "Not observed natively.",
+    "human_comfort": "Pending owner.",
+    "sea_otters_forest_still_playback": "Not opened in this pass.",
+    "first_run_footer": "Not tested by the Parents footer check.",
+    "stricter_profile_protection": "Not established by position isolation.",
+    "current_cloud_privacy_and_dependency_followups": "Not installed or natively accepted by this receipt."
+  },
+  "metadata_reconciliation": {
+    "step_entries": 463,
+    "snap_events": 63,
+    "manifest_screenshot_pairs": 64,
+    "additional_pair": "00-baseline-home, outside the snap events.",
+    "receipt_device_log_lines": 92546,
+    "manifest_original_log_lines": 92590,
+    "actual_redacted_log_lines": 92534,
+    "removed_lines_reported": 56,
+    "note": "Use final transferred file hashes for identity. The older receipt line count differs from final packaging metadata; redacted line arithmetic agrees with the manifest. No test rerun is required for this metadata difference."
+  },
+  "not_claimed": [
+    "All 20 backlog items complete",
+    "Hosted CI or Audit success",
+    "Medical safety",
+    "New demo/narration/manga assets",
+    "Independent visual inspection of missing captures",
+    "Human audiovisual acceptance"
+  ]
+}
