@@ -1,0 +1,191 @@
+TAP version 13
+# Subtest: both build tools resolve the fixed Lodash without upgrading either tool
+ok 1 - both build tools resolve the fixed Lodash without upgrading either tool
+  ---
+  duration_ms: 25.221826
+  type: 'test'
+  ...
+# Subtest: Lodash rejects template imports that are not parameter names
+ok 2 - Lodash rejects template imports that are not parameter names
+  ---
+  duration_ms: 23.968233
+  type: 'test'
+  ...
+# Subtest: Lodash blocks prototype deletion through string and coerced path segments
+ok 3 - Lodash blocks prototype deletion through string and coerced path segments
+  ---
+  duration_ms: 1.953945
+  type: 'test'
+  ...
+# Subtest: the installed SDK config loader retains defaults and explicit bundle settings
+ok 4 - the installed SDK config loader retains defaults and explicit bundle settings
+  ---
+  duration_ms: 129.346624
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor merges inherited config without changing defaults
+ok 5 - the installed API Extractor merges inherited config without changing defaults
+  ---
+  duration_ms: 841.702336
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor retains exact names and matches bundled package globs
+ok 6 - the installed API Extractor retains exact names and matches bundled package globs
+  ---
+  duration_ms: 2.028615
+  type: 'test'
+  ...
+# Subtest: the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+ok 7 - the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+  ---
+  duration_ms: 10.461147
+  type: 'test'
+  ...
+# Subtest: legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+ok 8 - legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+  ---
+  duration_ms: 16.633372
+  type: 'test'
+  ...
+# Subtest: line terminators cannot become commands through structured quote tokens
+ok 9 - line terminators cannot become commands through structured quote tokens
+  ---
+  duration_ms: 17.94911
+  type: 'test'
+  ...
+# Subtest: literal paths and arguments survive quoting without interpretation
+ok 10 - literal paths and arguments survive quoting without interpretation
+  ---
+  duration_ms: 3.157613
+  type: 'test'
+  ...
+# Subtest: the installed legacy editor launcher preserves quoted argv and uses direct spawn
+ok 11 - the installed legacy editor launcher preserves quoted argv and uses direct spawn
+  ---
+  duration_ms: 99.672999
+  type: 'test'
+  ...
+# negative control: the wcag profile refused the flashing sequence, the broadcast profile refused the grating, and the wcag profile passed the grating, as it must.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# negative control failed: flashing_sequence_refused_by_wcag. The check did not refuse what it must refuse, so a green run of the real screens means nothing.
+# ffmpeg failed to encode a negative control
+# Subtest: an uninstalled analyzer exits 2 before encoding, even when its namespace imports
+ok 12 - an uninstalled analyzer exits 2 before encoding, even when its namespace imports
+  ---
+  duration_ms: 98.285961
+  type: 'test'
+  ...
+# Subtest: measured controls pass and remove only their HAZARD_ scratch files
+ok 13 - measured controls pass and remove only their HAZARD_ scratch files
+  ---
+  duration_ms: 135.737515
+  type: 'test'
+  ...
+# Subtest: analyzer error exit cannot count as a measured hazard and is cleaned up
+ok 14 - analyzer error exit cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 96.513766
+  type: 'test'
+  ...
+# Subtest: analyzer spawn error cannot count as a measured hazard and is cleaned up
+ok 15 - analyzer spawn error cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 62.029272
+  type: 'test'
+  ...
+# Subtest: analyzer signal cannot count as a measured hazard and is cleaned up
+ok 16 - analyzer signal cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 107.923734
+  type: 'test'
+  ...
+# Subtest: analyzer missing report cannot count as a measured hazard and is cleaned up
+ok 17 - analyzer missing report cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 47.884055
+  type: 'test'
+  ...
+# Subtest: analyzer malformed report cannot count as a measured hazard and is cleaned up
+ok 18 - analyzer malformed report cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 42.541667
+  type: 'test'
+  ...
+# Subtest: analyzer wrong source cannot count as a measured hazard and is cleaned up
+ok 19 - analyzer wrong source cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 32.480265
+  type: 'test'
+  ...
+# Subtest: analyzer wrong profile cannot count as a measured hazard and is cleaned up
+ok 20 - analyzer wrong profile cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 38.185495
+  type: 'test'
+  ...
+# Subtest: analyzer wrong reason cannot count as a measured hazard and is cleaned up
+ok 21 - analyzer wrong reason cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 30.69855
+  type: 'test'
+  ...
+# Subtest: analyzer no finding cannot count as a measured hazard and is cleaned up
+ok 22 - analyzer no finding cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 29.147658
+  type: 'test'
+  ...
+# Subtest: analyzer passing report cannot count as a measured hazard and is cleaned up
+ok 23 - analyzer passing report cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 31.703574
+  type: 'test'
+  ...
+# Subtest: analyzer missing refusal cannot count as a measured hazard and is cleaned up
+ok 24 - analyzer missing refusal cannot count as a measured hazard and is cleaned up
+  ---
+  duration_ms: 35.234396
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after encoder exit
+ok 25 - partial fixtures are deleted after encoder exit
+  ---
+  duration_ms: 29.090319
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after encoder throw
+ok 26 - partial fixtures are deleted after encoder throw
+  ---
+  duration_ms: 28.134746
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after analyzer throw
+ok 27 - partial fixtures are deleted after analyzer throw
+  ---
+  duration_ms: 32.735969
+  type: 'test'
+  ...
+# Subtest: partial fixtures are deleted after report write
+ok 28 - partial fixtures are deleted after report write
+  ---
+  duration_ms: 38.891359
+  type: 'test'
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1231.698597

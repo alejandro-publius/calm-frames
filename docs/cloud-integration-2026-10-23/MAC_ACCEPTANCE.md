@@ -1,7 +1,9 @@
 # Exact-build Mac acceptance handoff
 
-The canonical branch is `codex/integration-owner-2026-10-23`. This document and
-the export's `START_HERE.txt`, `SYNC_MANIFEST.json`, `SHA256SUMS` and transfer
+The frozen integration branch remains `codex/integration-owner-2026-10-23` at
+`2cf54e0`. The current reviewed development branch is
+`codex/design-polish-2026-10-23`, now including Fable's name editor and the cloud
+dependency fixes. This document and the export's `START_HERE.md`, `MANIFEST.json`, `SHA256SUMS` and transfer
 receipt form one handoff. The manifest records the exact full source HEAD,
 required base, commits and changed-file hashes. Use that immutable HEAD, not
 whatever a moving branch later contains. The ZIP contains source and evidence;
@@ -18,8 +20,9 @@ worktrees. No acknowledgement from an inaccessible editor is implied.
 1. Verify the downloaded ZIP's size and SHA-256 against the transfer receipt.
    Extract it to a new directory and run `shasum -a 256 -c SHA256SUMS` there.
 2. Follow the export's exact bundle verification and new-ref/worktree commands.
-   The required base is `6360417814d684d41c94789a9e406fc27de53c66`. The import
-   was tested in a base-only repository; the receipt records that verification.
+   The current cumulative bundle requires
+   `d7da316d2d48c3b66b3cc4874257e98ca5ef943e`, already used for Fable's work.
+   The transfer receipt records bundle verification and exact patch/tree checks.
    Stop if the chosen review ref or directory already exists. Do not reset,
    stash, switch or clean an existing checkout.
 3. Confirm the new worktree's full `git rev-parse HEAD` equals the manifest.
@@ -54,6 +57,7 @@ report, not permission to bypass checks.
 |---|---|
 | Primary action and card edges | Inspect Watch at rest, focused and pressed, selected versus focused cards, text over actual artwork and unchanged geometry. Source contrast arithmetic does not establish native appearance. |
 | Remote focus and profile saving | D-pad navigation, active-profile focus, save completion and Back return; preserve existing profiles and positions. Enter a PIN privately with capture paused. |
+| Editable kid names | In an isolated fictional household, select a kid, edit and save, then reopen. Test Cancel, hardware Back and visible Back, duplicate/blank rejection, Shift/Space/Delete and the 16-character limit. Everyone has no editor. Observe focus returning to Edit name and the failure/retry path. Letters/spaces are the current input scope; platform-keyboard research is optional. Use a separately controlled failure fixture for storage errors, never damage real household storage. |
 | Onboarding footer | Check wrapping and reachable controls only with an isolated first-run fixture that preserves the household. Otherwise record unobserved. |
 | Recovery and protection ordering | Use only approved benign/practice routes. Record cover, seek, playback and recovery events with exact source/package identity. Keep compositor/decoder ordering unproved where instrumentation cannot establish it. Do not merge or present the Retry harness as production. |
 | Existing ambient titles | Confirm the approved Acadia, otter and Forest still/default and explicitly selected preview routes. Observe sustained McWay playback, final hold and Back on this build; earlier native receipts remain earlier observations. |

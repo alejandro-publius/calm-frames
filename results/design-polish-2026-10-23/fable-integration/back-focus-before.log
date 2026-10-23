@@ -1,0 +1,135 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --ci --coverage=false test/calmframes/profileNames.test.tsx
+
+ FAIL  test/calmframes/profileNames.test.tsx (6.285 s)
+  Edit name
+    ✓ is offered for a kid, including the only kid, and never for Everyone (402 ms)
+    ✓ is not offered when the route cannot say whether a save committed (89 ms)
+    ✕ puts the keys where the picker was, with the current name and focus on the first key (127 ms)
+  typing a name with the remote
+    ✓ capitalises each word, and Shift turns the next letter the other way once (261 ms)
+    ✓ allows one space between words and none at the start (116 ms)
+    ✓ stops at the longest name the picker can draw, and says so (510 ms)
+  what Save refuses
+    ✓ refuses a blank in words and saves nothing (135 ms)
+    ✓ refuses a name another chip carries, in any case, and the household label (682 ms)
+    ✓ closes without saving when the name has not changed (128 ms)
+    ✓ lets a kid keep their own name in a different case (202 ms)
+  saving a name
+    ✓ writes one kid's name and nothing else, through the result-returning save (131 ms)
+    ✓ closes only once the write has committed, and saves nothing twice while it is in flight (221 ms)
+    ✓ saves once when two presses land in the same frame, before the screen has re-rendered (233 ms)
+    ✕ keeps the draft and offers Try again and Cancel when the write did not commit (318 ms)
+    ✓ treats a write that throws as not saved, and Cancel then keeps the old name (141 ms)
+    ✓ is blocked while the route is saving something else (118 ms)
+  leaving the editor
+    ✕ parent-area-back-top cancels the draft before its next press can leave Parents (104 ms)
+    ✕ parent-area-back cancels the draft before its next press can leave Parents (196 ms)
+    ✕ visible Back controls cannot leave during a pending rename, even in the same frame (257 ms)
+    ✓ Cancel discards the draft, saves nothing and returns focus to Edit name (219 ms)
+    ✓ Back closes the editor and nothing else, and a second Back is nobody's to answer here (141 ms)
+    ✓ Back waits while a write is in flight rather than showing the old name as the answer (154 ms)
+    ✓ moving the picker afterwards does not leave Edit name holding focus (75 ms)
+  Add a kid, then a name
+    ✓ still adds a kid with a name nobody has, and the editor renames that kid (260 ms)
+
+  ● Edit name › puts the keys where the picker was, with the current name and focus on the first key
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      144 |     expect(count()).toBe(`3 of ${MAX_PROFILE_NAME} characters`);
+      145 |     expect(screen.getByTestId(key('a')).props.hasTVPreferredFocus).toBe(true);
+    > 146 |     expect(screen.getByTestId('parent-area-back-top').props.hasTVPreferredFocus).toBe(false);
+          |                                                                                  ^
+      147 |     // One thing at a time: nothing else in the group can move under the draft.
+      148 |     expect(screen.queryByTestId('parent-area-profiles')).toBeNull();
+      149 |     expect(screen.queryByTestId('parent-area-add-profile')).toBeNull();
+
+      at Object.toBe (test/calmframes/profileNames.test.tsx:146:82)
+
+  ● saving a name › keeps the draft and offers Try again and Cancel when the write did not commit
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      395 |     expect(retry.props.accessibilityLabel).toBe(TRY_NAME_AGAIN_LABEL);
+      396 |     expect(retry.props.hasTVPreferredFocus).toBe(true);
+    > 397 |     expect(screen.getByTestId(key('a')).props.hasTVPreferredFocus).toBe(false);
+          |                                                                    ^
+      398 |     expect(screen.getByTestId('parent-area-back-top').props.hasTVPreferredFocus).toBe(false);
+      399 |     expect(screen.getByTestId('parent-area-name-cancel')).toBeTruthy();
+      400 |
+
+      at Object.toBe (test/calmframes/profileNames.test.tsx:397:68)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+  ● leaving the editor › parent-area-back-top cancels the draft before its next press can leave Parents
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      476 |       type('ash');
+      477 |       press(button);
+    > 478 |       expect(editorOpen()).toBe(false);
+          |                            ^
+      479 |       expect(props.onBack).not.toHaveBeenCalled();
+      480 |       expect(onRenameProfile).not.toHaveBeenCalled();
+      481 |       expect(screen.getByTestId('parent-area-rename-profile').props.hasTVPreferredFocus).toBe(true);
+
+      at toBe (test/calmframes/profileNames.test.tsx:478:28)
+
+  ● leaving the editor › parent-area-back cancels the draft before its next press can leave Parents
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      476 |       type('ash');
+      477 |       press(button);
+    > 478 |       expect(editorOpen()).toBe(false);
+          |                            ^
+      479 |       expect(props.onBack).not.toHaveBeenCalled();
+      480 |       expect(onRenameProfile).not.toHaveBeenCalled();
+      481 |       expect(screen.getByTestId('parent-area-rename-profile').props.hasTVPreferredFocus).toBe(true);
+
+      at toBe (test/calmframes/profileNames.test.tsx:478:28)
+
+  ● leaving the editor › visible Back controls cannot leave during a pending rename, even in the same frame
+
+    expect(jest.fn()).not.toHaveBeenCalled()
+
+    Expected number of calls: 0
+    Received number of calls: 2
+
+    1: called with 0 arguments
+    2: called with 0 arguments
+
+      500 |     const footerBack = handler('parent-area-back');
+      501 |     act(() => { save(); headerBack(); footerBack(); });
+    > 502 |     expect(props.onBack).not.toHaveBeenCalled();
+          |                              ^
+      503 |     expect(editorOpen()).toBe(true);
+      504 |     press('parent-area-back-top');
+      505 |     press('parent-area-back');
+
+      at Object.toHaveBeenCalled (test/calmframes/profileNames.test.tsx:502:30)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at Object.<anonymous> (node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12)
+
+Test Suites: 1 failed, 1 total
+Tests:       5 failed, 19 passed, 24 total
+Snapshots:   0 total
+Time:        6.45 s, estimated 9 s
+Ran all test suites matching /test\/calmframes\/profileNames.test.tsx/i.

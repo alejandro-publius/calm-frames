@@ -7,6 +7,10 @@ or published. The frozen canonical branch, the installed package and the
 submitted fallback are untouched. This is a development candidate for the
 cloud integration owner to review.
 
+These are the original Fable implementation notes. The later
+[cloud integration review](../FABLE_INTEGRATION.md) records the Back/focus
+corrections, combined checks and current acceptance boundary.
+
 ## Exact source
 
 | Role | Identity |
@@ -179,8 +183,8 @@ fixture PIN. Robin, Sam and Ash are fixtures.
 boxes. At both sizes every watched control sits inside the horizontal 5%
 safe area, and Save sits inside the first viewport's safe area while the
 editor is open, typing, refusing or saving. The failed-save state's Try again
-is below the first viewport; it holds preferred focus, so the page scrolls to
-it on a device, and the scrolled render shows it.
+is below the first viewport and requests preferred focus. The scrolled browser
+render places it in view; native automatic scrolling has not been observed.
 
 ## What still needs a device
 

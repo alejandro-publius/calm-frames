@@ -1,0 +1,89 @@
+{
+  "received_utc": "2026-10-23T20:47:14.231043+00:00",
+  "archive": "/workspace/attachments/9d331029-dcf0-4ef9-9b20-7b909cfef879/calm-frames-fable-profile-names-6cda443-export.zip",
+  "archive_bytes": 3578387,
+  "archive_sha256": "c77452f4c7dc6ef74af2728e6a40ab5a37038f0460a2f7797e23d1a0746bcb29",
+  "extracted_root": "/workspace/shared/incoming/fable-profile-names-6cda443/extracted",
+  "files": [
+    {
+      "path": "calm-frames-fable-profile-names-6cda443.bundle",
+      "bytes": 1748781,
+      "sha256": "86f24909624fbd919d83179417ab3cc8f052f0bf583a4506a8ae56ebe9970c25"
+    },
+    {
+      "path": "calm-frames-fable-profile-names-6cda443.patch",
+      "bytes": 2362478,
+      "sha256": "113db20c611b0d452c776b814d6294f26ea86fa7aa0ef51550bd63df83e31222"
+    },
+    {
+      "path": "MANIFEST.json",
+      "bytes": 1158,
+      "sha256": "a5d154e7d5775a5edf90deeaf0446265115256344b2bb8cfd20b87e49ff7faa3"
+    },
+    {
+      "path": "SHA256SUMS",
+      "bytes": 225,
+      "sha256": "ad90a3cf0b62d4628dedc606e8d172604273521a93b07a3a70b9058fd9f8c615"
+    }
+  ],
+  "bundle_requires": "d7da316d2d48c3b66b3cc4874257e98ca5ef943e",
+  "source_head": "6cda443c3475bd086e62a0582cce42a6a49a4695",
+  "source_commits": [
+    "9546c0f530e2bd99966c1836f2b9ae0246fb3dec",
+    "6cda443c3475bd086e62a0582cce42a6a49a4695"
+  ],
+  "imported_commits": [
+    "9a2db495aace369959b975c5f2a2082ff6878051",
+    "f32f2d659e5dd30154d5b7ff43e715d6fa5759ad"
+  ],
+  "bundle_verified": true,
+  "patch_reconstructs_source_tree": true,
+  "patch_matches_user_reported_hash": true,
+  "source_file_count": 42,
+  "source_files": {
+    "app/src/calmframes/ParentAreaScreen.tsx": "ee897577973c574a51fe0a6b2711f73448ac60952bf576e61905d7f5c53a26ad",
+    "app/src/calmframes/ProfileNameEditor.tsx": "3875e256b1836e723eb992f548a10750039abea5bccdc7722e5198470c9039a1",
+    "app/src/calmframes/copy.ts": "b1c3983d78906ca5bfb9c1e145660e4624646d69ea21bb7f0b8b14597f30b75b",
+    "app/src/calmframes/profiles.ts": "6d22e1b98bf8ccef543e8fd3457d56a9a78901f76bc2171c58529cd9f5cc183d",
+    "app/src/calmframes/uiFrames.ts": "c7e2e75a218c05e6de75c9d85b09e44588092f2ff91c506b285b828c88224d88",
+    "app/src/screens/KidModeScreen.tsx": "a80c0ffe48bf6a6decebd912e45dc2dbed56f2123fca55b5f850411a760cf439",
+    "app/test/calmframes/copy.test.ts": "2b28733d0ee44acafcbd20fc91e1d86b9c5d59c8595073e3f2a7beac3c32017f",
+    "app/test/calmframes/profileNames.test.tsx": "ce18ef566dc0340ece527382889a9a6efdd9d7ddc41f50f36489f243f825bf41",
+    "app/test/calmframes/profiles.test.ts": "eabcd9398bee9d5dde1a5d5671e0c782a2dd34c9149c8e403b58481e4d48d5ca",
+    "app/test/calmframes/tenFoot.test.tsx": "00893ec7b6d1a33edaff4736a0278b6d1c314cea3c6cbb80e17a04ed8ab87a7e",
+    "app/test/calmframes/uiCapture.test.tsx": "69df688d1f7a63795c95773b1ab6c055caf25a138188a966e212965cb5141d7f",
+    "app/test/screens/profileNameSave.test.tsx": "54dd0e5032d27fc95891a0304778492b3242534c1e8fbf1d6368e39d42ec2dc6",
+    "docs/design-polish-2026-10-23/fable-profile-names/README.md": "3b1287ba47bb9138deb959afeb3e583441e78311a975a528eac20715ba1489b2",
+    "docs/design-polish-2026-10-23/fable-profile-names/checks.json": "e11cd59f3c0cbea3caa1bb0823b52ceaed2cda9bf221fdc166f28b03e822e22c",
+    "docs/design-polish-2026-10-23/fable-profile-names/mutations.json": "bdfb9308a0a6664c11bcbe4e9d776881b5d77321aa6cc682b651ce8f99238c30",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/01-kid-selected.png": "d47c50fa78aa1fc4a9246e001539653cea643e80b2a552d85b8573e94312b8b1",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/02-editor-open-scrolled.png": "3f2fbd1a150da7943cfd5335356420b59364f3cd2dde414c15fa7d2d1958db63",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/02-editor-open.png": "8a46b973c864376959bcb5215177f0503b9abbe11c601378eedb375192f835cd",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/03-editor-typing-scrolled.png": "ada2e257f52e997be82fda9db8fa84292891dafdb9945990e66b3574f0c73100",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/03-editor-typing.png": "455dda00718125f125564f73874fba63a3a79b7c19786621d32ccbaaeff977ff",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/04-editor-refused-scrolled.png": "fa35a28e14e454951378c2785c390c1e69b1e4def1eae0a054f5ef2fa4420f51",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/04-editor-refused.png": "6b57698241700259a8181f03253386114159e819934d76852aa1e908311fcd7d",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/05-editor-saving-scrolled.png": "e426c0e96a89906a45db9a3e93fcdfa26c3bb20f55b3fabbe7adf67779e816e0",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/05-editor-saving.png": "5575bcd7e4dd0cccdbe31aa7ed8891a38d0fb8da3c39585a4a7f634f748cca77",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/06-editor-failed-scrolled.png": "fd758dc4a37768708bd8c1ea7d7b07bcef5b245f109140e87f1d3741d967c5ed",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/06-editor-failed.png": "bd43fb8529e48879f47c00a73ee2728fbacacbbf51736bd825227e7b2a8bf60e",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/1080/07-renamed.png": "5c4f33cdf07f25d4b100c2f5ac2f50f50acbeb312279c323ac9809611406d716",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/01-kid-selected.png": "aad3bab76f9e7b4f8c255ba23acd904b20c3c29901d51701ca4033dca40085d8",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/02-editor-open-scrolled.png": "813540d1b4a2cf040256d7a83c7d6cfc31a19cced7fb72ad1b4ec4c2308b6df4",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/02-editor-open.png": "125c6e2d0f317ce88fe3475f8c8d93cafbbb8ff98eb110a6170f554068e0e00e",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/03-editor-typing-scrolled.png": "7d35952572762e23b303a38d26ba907430cd54180499849f43ef0dab32594dd8",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/03-editor-typing.png": "8318dc6eb93d38f8e7e047c7f74f71a093cddad5105d68a8ac020c021e572f67",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/04-editor-refused-scrolled.png": "aba45950479c2b0d37f09c04f3111e97d3b327b5d58056637ab804eec490a69d",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/04-editor-refused.png": "811244db68d09d3c8460d55cc4ad7dcc9be3a9d3705feca9216bf2a6b07c996e",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/05-editor-saving-scrolled.png": "8aaff7fab8fadf2242175a5b38f69f9a691c47924464e7a60d6f41f462e7d92e",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/05-editor-saving.png": "467fd763652f2d092322309fb17df81d378856254eee8f6f2ed6faf376d39bd1",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/06-editor-failed-scrolled.png": "e476a00f9fb45da1979f45e4b2db9600d9e9ad4043e8c3b0659d1bb44164c558",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/06-editor-failed.png": "00f6caff58d4fab78dca720650ff35ce3cea004e884bd1e12527b1e0a8e8ca72",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/720/07-renamed.png": "ad53ad9932e63adf897d5ebd9d4726cde8c4765211ccc267bcc1935971c5ec81",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/bounds.json": "84a26eae248cf9da378164b9480e45cf693967cf27014ba2812d5b3dda9039eb",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/profileNamesPreview.fixture.tsx": "e58d82afe4d681d4be09fcaaa37e1f2e74c2d3a11a4ae19c192ad33e9f176312",
+    "docs/design-polish-2026-10-23/fable-profile-names/preview/render_preview.py": "934620a3e545ded14c8a263a18d44f0d69d9222861bccf7d794566ed65710c7a"
+  },
+  "source_owned_scope_only": true,
+  "protected_inputs_unchanged": true
+}
