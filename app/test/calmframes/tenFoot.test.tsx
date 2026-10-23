@@ -435,6 +435,24 @@ const CASES: Case[] = [
     screen: true,
   },
   {
+    // The real catalog on the island map, where two coast titles share one
+    // island and their cards are split in half. Until Oct 23 no screen here
+    // drew the split cards, and their second line had dropped to 26 units
+    // without anything measuring it.
+    name: 'kid-home-islands',
+    element: (
+      <KidHomeScreen
+        // The shelf the app shows: the Harbor titles stay off Home.
+        titles={checkedShelf().filter((entry) => !entry.title.title.startsWith('Harbor'))}
+        onOpen={jest.fn()}
+        onAmbient={jest.fn()}
+        onOpenParentArea={jest.fn()}
+      />
+    ),
+    background: COASTAL_COLORS.BACKGROUND,
+    screen: true,
+  },
+  {
     name: 'kid-home-empty',
     element: <KidHomeScreen titles={[]} onOpen={jest.fn()} onOpenParentArea={jest.fn()} />,
     background: COASTAL_COLORS.BACKGROUND,

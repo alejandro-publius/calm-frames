@@ -409,7 +409,8 @@ const styles = StyleSheet.create({
   splitPicture: { width: scale(80), height: scale(90) },
   splitCopy: { flex: 1, paddingTop: 0 },
   splitTitle: { fontSize: scale(32), lineHeight: scale(40) },
-  splitQualifier: { fontSize: scale(26), lineHeight: scale(34) },
+  // Half a card is still read from the sofa: the second line keeps the 32 unit floor.
+  splitQualifier: { fontSize: scale(32), lineHeight: scale(40) },
   pickerPanel: { padding: scale(24), paddingBottom: 0, borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: WORLD.BORDER, backgroundColor: WORLD.SURFACE },
   posterTitle: { ...CALM_TEXT.section, color: WORLD.TEXT },
   posterQualifier: { ...CALM_TEXT.supporting, color: WORLD.TEXT_DIM },
