@@ -391,3 +391,7 @@ The user explicitly requested all relevant project work pushed to the existing p
 - Remote verification and CI receipt: `docs/handoff-2026-10-23/publication-receipt.json`. Do not infer CI success from dispatch acceptance.
 
 For cloud Claude: fetch the handoff branch into a new worktree after preserving current edits, read the start-here document and receipt, then reconcile source-bound evidence. GitHub includes source, approved already-tracked media, scoped committed screenshots and receipts. Packages, large raw recordings and local tooling remain outside Git by design; the manifest says exactly where they live. Do not call those artifacts uploaded to GitHub.
+
+### Verified private publication checkpoint
+
+The atomic private push succeeded. An independent `git ls-remote` check matched production handoff payload `3a240927e54c3f4b443853ffa6a4bed896839bb4`, harness `84faeed7dee851c713f75faaff2f8522a961d609`, and the preserved historical Playback Proof branch `318a3fe8dcba07474d08af0609cb1168e1b37f41` at `codex/playback-proof-archive-2026-10-23`. The submitted branch remains `bf2f615e6fad0d73442fe2b9acab3067bf311e7e`. This publication receipt is a documentation-only descendant of that payload; use the branch tip for the final documentation. No product code was changed. CI is a distinct pending check, not implied by the push. Cloud agents must still fetch and verify the branch themselves.

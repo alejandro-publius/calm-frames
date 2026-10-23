@@ -1,5 +1,5 @@
 {
-  "status": "prepared; verify remote before claiming published",
+  "status": "private push succeeded; git ls-remote independently matched all three refs",
   "repository": "alejandro-publius/calm-frames",
   "private_verified": true,
   "production_branch": "codex/claude-handoff-2026-10-23",
@@ -8,5 +8,10 @@
   "harness_sha": "84faeed7dee851c713f75faaff2f8522a961d609",
   "proof_archive_branch": "codex/playback-proof-archive-2026-10-23",
   "proof_archive_sha": "318a3fe8dcba07474d08af0609cb1168e1b37f41",
-  "ci": "not dispatched yet"
+  "ci": "Existing CI workflow_dispatch will be attempted for the final documentation head. No CI success is claimed by this receipt.",
+  "verified_at": "2026-10-23T06:16:58.744325+00:00",
+  "verified_production_payload_sha": "3a240927e54c3f4b443853ffa6a4bed896839bb4",
+  "receipt_commit_note": "This receipt is added by a documentation-only descendant of the verified payload. The final remote head is verified separately after pushing that descendant.",
+  "baseline_verified_unchanged": "bf2f615e6fad0d73442fe2b9acab3067bf311e7e",
+  "no_public_service_changes": true
 }
