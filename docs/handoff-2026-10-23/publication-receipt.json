@@ -8,10 +8,18 @@
   "harness_sha": "84faeed7dee851c713f75faaff2f8522a961d609",
   "proof_archive_branch": "codex/playback-proof-archive-2026-10-23",
   "proof_archive_sha": "318a3fe8dcba07474d08af0609cb1168e1b37f41",
-  "ci": "Existing CI workflow_dispatch will be attempted for the final documentation head. No CI success is claimed by this receipt.",
+  "ci": {
+    "first_run": "https://github.com/alejandro-publius/calm-frames/actions/runs/39910572282",
+    "head": "a4651a6062aa0662fab4559a86201620962b27bd",
+    "secret_scan": "passed",
+    "documentation_style": "11 violations in new handoff, corrected locally without source changes",
+    "overall": "not accepted; replacement run required for corrected documentation head"
+  },
   "verified_at": "2026-10-23T06:16:58.744325+00:00",
   "verified_production_payload_sha": "3a240927e54c3f4b443853ffa6a4bed896839bb4",
-  "receipt_commit_note": "This receipt is added by a documentation-only descendant of the verified payload. The final remote head is verified separately after pushing that descendant.",
+  "receipt_commit_note": "The publication and CI receipts identify prior verified heads. This documentation-only descendant contains style corrections. Final tip is separately verified after push.",
   "baseline_verified_unchanged": "bf2f615e6fad0d73442fe2b9acab3067bf311e7e",
-  "no_public_service_changes": true
+  "no_public_service_changes": true,
+  "verified_documentation_head": "a4651a6062aa0662fab4559a86201620962b27bd",
+  "verified_document_blob": "cea7a55854c0b5f259ca81187a914784f4c27928"
 }
