@@ -1,0 +1,8 @@
+{
+  "scope": "Current npm findings checked against unchanged policy; not a complete pip audit.",
+  "problems": [
+    "the exception 'in-the-device-bundle' was due for review on 2026-10-21",
+    "the exception 'not-in-the-device-bundle' was due for review on 2026-10-21",
+    "pip-audit did not run: Not rescanned in this npm-only change; Python manifests are unchanged."
+  ]
+}

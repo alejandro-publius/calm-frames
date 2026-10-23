@@ -1,0 +1,60 @@
+{
+  "before": {
+    "info": 0,
+    "low": 2,
+    "moderate": 26,
+    "high": 24,
+    "critical": 4,
+    "total": 56
+  },
+  "after": {
+    "info": 0,
+    "low": 2,
+    "moderate": 28,
+    "high": 20,
+    "critical": 4,
+    "total": 54
+  },
+  "unique_advisories_before": 28,
+  "unique_advisories_after": 22,
+  "removed_advisories": [
+    "GHSA-23c5-xmqv-rm74",
+    "GHSA-3ppc-4f35-3m26",
+    "GHSA-7r86-cg39-jmmj",
+    "GHSA-f23m-r3pf-42rh",
+    "GHSA-r5fr-rjxr-66jc",
+    "GHSA-xxjr-mmjv-4gpg"
+  ],
+  "added_advisories": [],
+  "note": "Package totals include propagated findings. They are not independent vulnerabilities or runtime exposure measurements.",
+  "lock_changes": {
+    "node_modules/@amazon-devices/kepler-cli-platform/node_modules/lodash": {
+      "before": "4.17.21",
+      "after": null
+    },
+    "node_modules/@eslint/eslintrc/node_modules/minimatch": {
+      "before": "3.1.5",
+      "after": null
+    },
+    "node_modules/@microsoft/api-extractor/node_modules/lodash": {
+      "before": "4.17.23",
+      "after": null
+    },
+    "node_modules/eslint-plugin-react/node_modules/minimatch": {
+      "before": "3.1.5",
+      "after": null
+    },
+    "node_modules/eslint/node_modules/minimatch": {
+      "before": "3.1.5",
+      "after": null
+    },
+    "node_modules/glob/node_modules/minimatch": {
+      "before": "3.1.5",
+      "after": null
+    },
+    "node_modules/minimatch": {
+      "before": "3.0.8",
+      "after": "3.1.5"
+    }
+  }
+}

@@ -52,6 +52,55 @@ The existing image-size override and its malformed-input protections remain.
 No SDK major upgrade, exception-date extension or owner acceptance was added.
 The other Audit findings and both expired groups still block release acceptance.
 
+## Lodash and Minimatch continuation
+
+Local code commit `5bf123409d8d863e2dbefd73bc3b2046e264d89e` removes two
+more vulnerable leaves while retaining SDK and API Extractor versions. All
+Lodash consumers now resolve to the app's existing **4.18.1** dependency.
+The old SDK 4.17.21 and API Extractor 4.17.23 copies are deduplicated. A
+major-scoped override moves Minimatch **3.0.8 to 3.1.5**, a backport already
+used in this lockfile. The TypeScript consumer stays on **10.2.6**. No other
+locked package version changes.
+
+The user benefit is a smaller build-tool attack surface without changing the
+native interface or adopting an untested SDK upgrade. These packages consume
+repository configuration, template options and glob patterns. This is not a
+claim that a household can reach each vulnerability or that a new native
+package has been audited.
+
+| Removed advisory | Issue and selected fix |
+|---|---|
+| [GHSA-r5fr-rjxr-66jc](https://github.com/advisories/GHSA-r5fr-rjxr-66jc) | Lodash template import names can become code; 4.18.1 rejects invalid names. |
+| [GHSA-f23m-r3pf-42rh](https://github.com/advisories/GHSA-f23m-r3pf-42rh) | Coerced path segments bypass Lodash prototype-deletion guards; fixed in 4.18.1. |
+| [GHSA-xxjr-mmjv-4gpg](https://github.com/advisories/GHSA-xxjr-mmjv-4gpg) | Lodash unset/omit can delete prototype properties; fixed in 4.18.1. |
+| [GHSA-3ppc-4f35-3m26](https://github.com/advisories/GHSA-3ppc-4f35-3m26) | Minimatch wildcard patterns can cause excessive backtracking; 3.1.5 includes the fixed 3.x backport. |
+| [GHSA-7r86-cg39-jmmj](https://github.com/advisories/GHSA-7r86-cg39-jmmj) | Non-adjacent globstars can cause excessive recursive matching; fixed in the selected backport. |
+| [GHSA-23c5-xmqv-rm74](https://github.com/advisories/GHSA-23c5-xmqv-rm74) | Nested extglobs can cause excessive backtracking; fixed in the selected backport. |
+
+Fresh matching lockfile scans remove exactly those six IDs and add none:
+**28 to 22 unique advisory IDs**. npm's propagated package entries move from
+56 to 54 (critical 4, high 20, moderate 28, low 2). The moderate entry count
+increases because npm recomputes propagated severity. The set of advisory IDs
+only decreases. See the
+[audit delta](../../results/design-polish-2026-10-23/dependency-wave2/audit-delta.json),
+[primary advisory records](../../results/design-polish-2026-10-23/dependency-wave2/advisories.json)
+and [validation receipt](../../results/design-polish-2026-10-23/dependency-wave2/receipt.json).
+
+Regression checks exercise the installed SDK config loader and API Extractor's
+inherited configuration and package matching. Harmless template compilation
+and isolated prototype sentinels reproduce the old Lodash defects and pass
+after replacement. No injected expression is invoked or built-in prototype
+modified. The Minimatch check verifies the patched versions and ordinary
+consumer behavior; no denial-of-service benchmark was run.
+
+A fresh locked installation, normal app typecheck/lint/tests and existing
+prepared-media guards pass. The new regression joins the existing CI command.
+SBOMs reproduce with the documented pins. Existing npm tree/peer warnings in
+SBOM generation remain identical to the previous receipt; reproduction does
+not waive them. Fable's app code and tests, player, media, signatures and
+exceptions are unchanged. There is no hosted or native result for this source.
+The remaining findings and expired groups still block Audit acceptance.
+
 ## Owner-approved narrow TOML deferral
 
 The owner explicitly replied "approve" to the temporary, controlled-build
