@@ -395,7 +395,8 @@ const styles = StyleSheet.create({
   section: { ...CALM_TEXT.section, color: WORLD.TEXT },
   banner: { marginBottom: scale(20) },
   grid: { width: '100%', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: scale(180), marginTop: scale(100), gap: scale(40) },
-  poster: { width: scale(400), minHeight: scale(280), flexDirection: 'column', justifyContent: 'center', padding: scale(12), borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: WORLD.BORDER, borderBottomWidth: scale(12), backgroundColor: WORLD.SURFACE },
+  // The map's sand edge stays quiet at rest and distinct from the brick focus ring.
+  poster: { width: scale(400), minHeight: scale(280), flexDirection: 'column', justifyContent: 'center', padding: scale(12), borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: '#D2B47D', borderBottomWidth: scale(12), backgroundColor: WORLD.SURFACE },
   posterSelected: { borderBottomColor: WORLD.FOCUS_RING },
   posterFocused: { borderColor: WORLD.FOCUS_RING, backgroundColor: WORLD.SURFACE_FOCUSED },
   filmStill: { width: '100%', height: scale(164), borderRadius: scale(10) },

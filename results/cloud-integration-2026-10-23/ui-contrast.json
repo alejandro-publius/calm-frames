@@ -1,0 +1,69 @@
+{
+  "base_commit": "6360417814d684d41c94789a9e406fc27de53c66",
+  "scope": "Isolated native UI palette proposal; no native build, capture or acceptance.",
+  "files": [
+    {
+      "path": "app/src/calmframes/CalmButton.tsx",
+      "sha256": "e8c6fa1955dce3169742ce4ee15c63bb7a9a17d79d8c68af7b4147069053f135"
+    },
+    {
+      "path": "app/src/calmframes/KidHomeScreen.tsx",
+      "sha256": "ad36c306bb5753d652b6991a2b1c6fd57ee72d615f87e2df6b87f1fb2f88eaf5"
+    },
+    {
+      "path": "app/test/calmframes/tenFoot.test.tsx",
+      "sha256": "5a26c7c20212782b89ac4e9620933608c716f1639f370470cae21f1da287620b"
+    },
+    {
+      "path": "app/test/calmframes/wholeFlowDesign.test.tsx",
+      "sha256": "93fc32c3789ecf25b624934aa32f4278bb5047e1fcbf12a400560b6d0b37f071"
+    }
+  ],
+  "changes": [
+    "World primary buttons use the existing deep teal at rest with cream labels; existing focused and pressed appearance stays intact.",
+    "Resting home cards reuse the existing coastal sand edge; focus ring, selection stripe and geometry stay intact."
+  ],
+  "contrast_ratios": {
+    "card_edge_rest_to_focus_before": 1.189,
+    "card_edge_rest_to_focus_after": 3.1251,
+    "primary_fill_to_page_before": 1.0338,
+    "primary_fill_to_page_after": 6.1988,
+    "primary_label_to_fill_after": 6.9754
+  },
+  "checks": {
+    "baseline_negative_control": {
+      "new_guards_failed": 3,
+      "scope": "New rendered contrast assertions against previous source colors"
+    },
+    "focused_jest": {
+      "suites": 5,
+      "passed": 77,
+      "failed": 0,
+      "snapshots": 0,
+      "suite_names": [
+        "tenFoot",
+        "wholeFlowDesign",
+        "pickerFocusReturn",
+        "coastalIslands",
+        "controlSurface"
+      ]
+    },
+    "changed_file_eslint": "passed",
+    "whitespace": "passed",
+    "typescript_preserve_symlinks": "passed",
+    "typescript_default": "four TS2742 inferred-type portability errors referencing the reused dependency symlink and Immer"
+  },
+  "environment": {
+    "dependencies": "Reused ignored node_modules symlink; no dependency installation",
+    "lockfile_matches_reused_environment": false,
+    "clean_locked_install_claimed": false,
+    "typecheck_runtime_adjustment": "--preserveSymlinks; repository configuration unchanged"
+  },
+  "native_acceptance": "pending: resting Watch, card focus movement/selection, layout, legibility and reduced-motion behavior on exact built candidate",
+  "hosted_acceptance": "not run for this unpushed proposal; existing runs belong to prior source identities",
+  "auth_media_protection_timing_changes": false,
+  "observed_guard_log_sha256": {
+    "before": "40683f852f1898d061d0a3bcb4e96f844ca02709d5cb23aa94549739375ac992",
+    "after": "44b42bc6ea36f8c5f7ff98468494cd4d813870a2dd0f91bbb8ea1e80ceca108c"
+  }
+}

@@ -766,6 +766,25 @@ describe('the ten foot pass', () => {
       ['intro', 'findings', 'wcag', 'files'].map((section) => `title-details-record-reading-${section}`));
   });
 
+  it('makes an island card focus edge distinguishable from its resting edge without moving it', () => {
+    const titles = checkedShelf();
+    render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} onAmbient={jest.fn()} />);
+    const cards = screen.getAllByTestId(/^kid-home-poster-prepared-/);
+    expect(cards.length).toBeGreaterThan(0);
+    for (const card of cards) {
+      const testID = card.props.testID;
+      const resting = flattenStyle(card.props.style);
+      fireEvent(screen.getByTestId(testID), 'focus');
+      const focused = flattenStyle(screen.getByTestId(testID).props.style);
+      expect(contrastRatio(resting.borderColor as string, focused.borderColor as string))
+        .toBeGreaterThanOrEqual(FLOORS.focusContrast);
+      for (const property of ['width', 'height', 'borderWidth', 'borderBottomWidth', 'padding', 'left', 'top']) {
+        expect(focused[property]).toEqual(resting[property]);
+      }
+      fireEvent(screen.getByTestId(testID), 'blur');
+    }
+  });
+
   it('measured every screen and wrote the numbers down', () => {
     expect(measured).toHaveLength(CASES.length);
 

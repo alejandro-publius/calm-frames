@@ -2,11 +2,50 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { StyleSheet } from 'react-native';
 import CalmButton from '../../src/calmframes/CalmButton';
+import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
+import { WorldAppearance, WORLD } from '../../src/calmframes/CoastalWorld';
 import PlayerOpening from '../../src/calmframes/PlayerOpening';
 import ProfilePicker from '../../src/calmframes/ProfilePicker';
 import { COASTAL_COLORS } from '../../src/calmframes/calmStyles';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
-import { measureText, RenderedNode } from '../../src/calmframes/uiContrast';
+import { contrastRatio, measureText, RenderedNode } from '../../src/calmframes/uiContrast';
+
+test.each([false, true])('a world primary action is visible at rest and legible through focus and press, balanced=%s', balanced => {
+  const press = jest.fn();
+  const content = (disabled = false) => <CalmControlAppearance.Provider value><WorldAppearance.Provider value>
+    <CalmButton primary balanced={balanced} playIcon label="Watch" disabled={disabled} onPress={press} />
+  </WorldAppearance.Provider></CalmControlAppearance.Provider>;
+  const view = render(content());
+  const button = () => view.getByRole('button', { name: 'Watch' });
+  const style = () => StyleSheet.flatten(button().props.style);
+  const resting = style();
+  const readable = () => {
+    for (const line of measureText(view.toJSON() as unknown as RenderedNode, { background: WORLD.BACKGROUND })) {
+      expect(line.contrast).toBeGreaterThanOrEqual(4.5);
+    }
+  };
+  expect(contrastRatio(resting.backgroundColor, WORLD.BACKGROUND)).toBeGreaterThanOrEqual(3);
+  readable();
+  fireEvent(button(), 'focus');
+  expect(contrastRatio(style().borderColor, style().backgroundColor)).toBeGreaterThanOrEqual(3);
+  expect(contrastRatio(style().borderColor, WORLD.BACKGROUND)).toBeGreaterThanOrEqual(3);
+  readable();
+  fireEvent(button(), 'pressIn', {});
+  readable();
+  for (const property of ['minHeight', 'minWidth', 'borderRadius', 'borderWidth', 'paddingHorizontal', 'paddingVertical']) {
+    expect(style()[property]).toEqual(resting[property]);
+  }
+  fireEvent(button(), 'pressOut', {});
+  fireEvent.press(button());
+  expect(press).toHaveBeenCalledTimes(1);
+  fireEvent(button(), 'blur');
+  expect(style().backgroundColor).toBe(resting.backgroundColor);
+  readable();
+  view.rerender(content(true));
+  readable();
+  fireEvent.press(button());
+  expect(press).toHaveBeenCalledTimes(1);
+});
 
 test('a primary action stays legible and stationary during focus and immediate press feedback', () => {
   const press = jest.fn();

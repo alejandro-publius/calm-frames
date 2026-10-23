@@ -125,7 +125,7 @@ const CalmButton = ({
   );
 };
 
-const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = false, primaryFocus: string = COASTAL_PRIMARY_FOCUS) => StyleSheet.create({
+const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = false, primaryFocus: string = COASTAL_PRIMARY_FOCUS, primaryFill = colors.PRIMARY, primaryInk = colors.INK) => StyleSheet.create({
   button: {
     alignSelf: 'flex-start',
     flexDirection: 'row',
@@ -163,11 +163,11 @@ const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = 
   },
   compactLabel: { ...CALM_TEXT.supporting },
   focusedLabel: { textDecorationLine: 'underline' },
-  primary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, minWidth: scale(240) },
-  balancedPrimary: { backgroundColor: colors.PRIMARY, borderColor: colors.PRIMARY, paddingVertical: scale(CALM_SPACE.TIGHT), paddingHorizontal: scale(CALM_SPACE.ROW) },
+  primary: { backgroundColor: primaryFill, borderColor: primaryFill, minWidth: scale(240) },
+  balancedPrimary: { backgroundColor: primaryFill, borderColor: primaryFill, paddingVertical: scale(CALM_SPACE.TIGHT), paddingHorizontal: scale(CALM_SPACE.ROW) },
   primaryFocused: { backgroundColor: colors.PRIMARY, borderColor: primaryFocus },
   focusedPrimaryLabel: { color: colors.INK },
-  primaryLabel: { color: colors.INK },
+  primaryLabel: { color: primaryInk },
   labelDisabled: {
     color: colors.TEXT_DISABLED,
   },
@@ -175,5 +175,6 @@ const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>, coastal = 
 
 const darkStyles = makeStyles(CALM_COLORS, false, PLAYER_PRIMARY_FOCUS);
 const coastalStyles = makeStyles(COASTAL_COLORS, true);
-const worldStyles = makeStyles({ ...CALM_COLORS, ...WORLD }, false, WORLD.FOCUS_RING);
+// Map actions stay visible at rest; focus and press retain the light face and dark ink.
+const worldStyles = makeStyles({ ...CALM_COLORS, ...WORLD }, false, WORLD.FOCUS_RING, WORLD.BORDER, WORLD.SURFACE);
 export default CalmButton;
