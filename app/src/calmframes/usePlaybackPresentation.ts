@@ -11,13 +11,12 @@ export function usePlaybackPaused(mediaRef: RefObject<VideoPlayer | null>, ready
     if (!ready || !media) { return; }
     const update = () => setPaused(media.paused === true && !media.ended);
     update();
-    media.addEventListener?.('pause', update);
-    media.addEventListener?.('play', update);
-    media.addEventListener?.('ended', update);
+    // Reconcile late native property updates at settled seek/timeline events.
+    // This reads presentation state only; it never controls media or the cover.
+    const events = ['pause', 'play', 'playing', 'seeked', 'timeupdate', 'ended'];
+    events.forEach(event => media.addEventListener?.(event, update));
     return () => {
-      media.removeEventListener?.('pause', update);
-      media.removeEventListener?.('play', update);
-      media.removeEventListener?.('ended', update);
+      events.forEach(event => media.removeEventListener?.(event, update));
     };
   }, [mediaRef, ready]);
   return paused;

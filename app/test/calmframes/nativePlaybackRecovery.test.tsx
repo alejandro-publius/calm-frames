@@ -55,6 +55,17 @@ test('paused Resume cannot autoplay or trip the ordinary opening timeout', async
   expect(mockMedia.paused).toBe(true); expect(view.queryByTestId('player-error')).toBeNull();
   expect(view.queryByTestId('player-home-opening')).toBeNull();
 });
+test('paused Resume reconciles native state when pause arrives before its property update', async () => {
+  const view = await open(checkpoint(true));
+  mockMedia.pause = function () { this.fire('pause'); this.paused = true; };
+  await resume(view);
+  act(() => mockMedia.fire('seeked')); await act(async () => mockMedia.fire('timeupdate'));
+  expect(mockMedia.paused).toBe(true);
+  act(() => jest.advanceTimersByTime(6000));
+  expect(view.getByText('Paused. Press Play to continue.')).toBeTruthy();
+  await act(async () => mockMedia.play());
+  expect(view.queryByText('Paused. Press Play to continue.')).toBeNull();
+});
 test('Start over removes the checkpoint before the new session writes', async () => {
   const view = await open(checkpoint()); fireEvent.press(view.getByTestId('resume-start-over')); await settle();
   expect(view.queryByTestId('recovery-picture-barrier')).toBeNull();
