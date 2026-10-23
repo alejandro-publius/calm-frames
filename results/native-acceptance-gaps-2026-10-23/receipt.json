@@ -1,0 +1,54 @@
+{
+  "installed_source": "3bc658f0491b02b92fa22bc454a40887ecbf23ae",
+  "prior_evidence": "dda3baada1839adc3db86d8094eacfa8b8053ef4",
+  "package_sha256": "b333b344ae61aa769743c82fb48086826b5e35e55afe9a58b203b2ae8a237057",
+  "source_changed": false,
+  "rebuilt": false,
+  "observations": {
+    "profile_chooser": "Only Kid is present; no profiles or household preferences changed.",
+    "practice": "How it works exposes no practice playback. defaultCatalog intentionally excludes signed Harbor regression fixture.",
+    "skip": "Focused calm-card-skip; explicit activation requested cover before playhead-write target12799. seeking covered=true; seeked covered=true; cover removal followed confirmation outside interval.",
+    "skip_event_times_utc": {
+      "cover_request": "03:15:53.532687",
+      "playhead_write": "03:15:53.532732",
+      "native_seeking": "03:15:53.548862",
+      "native_seeked": "03:15:54.042387",
+      "uncover_request": "03:15:54.083328"
+    },
+    "capture": "26.67 seconds;639 video frames. Inspected sampled transition contact sheet: focused Skip, black covered transition, then prepared coast. Not frame-exact proof of compositor ordering.",
+    "end": "Preview ended at03:16:18; explicit Back at03:16:38.945 returned to stationary scene. Then confirmed Details and Home.",
+    "copy": "No UI copy added or changed; existing Try again action remains. No redesign in this acceptance pass."
+  },
+  "remaining": {
+    "native_retry": "Not reproduced. No production-supported fault injection used; async teardown tests are not native Retry acceptance.",
+    "cross_profile": "Requires second profile created through protected household flow; no PIN bypass.",
+    "caption_restoration": "No captioned recovery title exposed; McWay has no track. Harbor regression fixture cannot establish production checkpoint restoration.",
+    "practice_compositor": "Practice route unavailable. Approved precovered Acadia provided bounded Skip evidence only. Frame-atomic cover ordering not certified.",
+    "human_av": "Human listening/palette/full-demo review pending.",
+    "hosted_ci": "Separate unverified gate."
+  },
+  "raw_artifacts": {
+    "acadia-skip.mp4": {
+      "local_path": "/Users/alexvintera/Documents/Codex/2026-10-20/task/calm-frames-combined-review/.logs/native-gaps-2026-10-23/acadia-skip.mp4",
+      "bytes": 56855196,
+      "sha256": "a13719686f658db6ee1c84d91de8eca2a1333d9972f3f4c4dde9bfa6f719f07b"
+    },
+    "acadia-skip-retest.mp4": {
+      "local_path": "/Users/alexvintera/Documents/Codex/2026-10-20/task/calm-frames-combined-review/.logs/native-gaps-2026-10-23/acadia-skip-retest.mp4",
+      "bytes": 31383608,
+      "sha256": "15fc2efd97d1b119828178ec37c0acd67fd3d336ea4081c01393390fca79c369"
+    },
+    "trace.log": {
+      "local_path": "/Users/alexvintera/Documents/Codex/2026-10-20/task/calm-frames-combined-review/.logs/native-gaps-2026-10-23/trace.log",
+      "bytes": 358701,
+      "sha256": "f0453770800ae7868f0fa5a363de0cdfb28c56e36b3614f466f0c3201bc59393"
+    }
+  },
+  "end_state": {
+    "screen": "Home static",
+    "logger_stopped": true,
+    "recording_stopped": true,
+    "simulator_owner_session": 79214
+  },
+  "publication": false
+}

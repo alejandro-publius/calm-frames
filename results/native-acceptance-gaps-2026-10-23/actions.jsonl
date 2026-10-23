@@ -1,0 +1,16 @@
+{"utc": "2026-10-23T03:05:15.650510+00:00", "key": "KEY_UP", "observed": "CALM_TRACE focus"}
+{"utc": "2026-10-23T03:05:33.210848+00:00", "key": "KEY_UP", "observed": "CALM_TRACE focus"}
+{"utc": "2026-10-23T03:06:24.698483+00:00", "key": "KEY_RIGHT", "observed": "focus kid-mode-home-learn"}
+{"utc": "2026-10-23T03:09:24.599824+00:00", "key": "KEY_BACK", "observed": "focus kid-mode-home-learn"}
+{"utc": "2026-10-23T03:09:25.601330+00:00", "key": "KEY_DOWN", "observed": "CALM_TRACE focus"}
+{"utc": "2026-10-23T03:09:46.375199+00:00", "key": "KEY_LEFT", "observed": "CALM_TRACE focus"}
+{"utc": "2026-10-23T03:10:03.425074+00:00", "key": "KEY_LEFT", "observed": "CALM_TRACE focus"}
+{"utc": "2026-10-23T03:10:25.620427+00:00", "key": "KEY_ENTER", "observed": "focus kid-mode-details-play"}
+{"utc": "2026-10-23T03:10:26.851216+00:00", "key": "KEY_ENTER", "observed": "CALM_TRACE focus"}
+{"utc": "2026-10-23T03:14:12.882986+00:00", "key": "KEY_RIGHT", "observed": "kid-mode-ambient-preview"}
+{"utc": "2026-10-23T03:15:41.543306+00:00", "key": "KEY_RIGHT", "observed": "kid-mode-ambient-preview"}
+{"utc": "2026-10-23T03:15:53.390579+00:00", "key": "KEY_ENTER", "observed": "focus calm-card-skip"}
+{"utc": "2026-10-23T03:15:54.412908+00:00", "key": "KEY_ENTER", "observed": "seeking"}
+{"utc": "2026-10-23T03:16:39.992998+00:00", "key": "KEY_BACK", "observed": "kid-mode-ambient-back"}
+{"utc": "2026-10-23T03:16:57.790664+00:00", "key": "KEY_BACK", "observed": "kid-mode-details-play"}
+{"utc": "2026-10-23T03:16:58.754477+00:00", "key": "KEY_BACK", "observed": "screen home"}
