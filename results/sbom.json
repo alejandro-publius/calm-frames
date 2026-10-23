@@ -15,7 +15,7 @@
     "SBOM.app.cdx.json": {
       "spec_version": "1.6",
       "components": 1110,
-      "bytes": 2262499
+      "bytes": 2262505
     }
   },
   "published": {

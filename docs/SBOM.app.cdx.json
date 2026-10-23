@@ -32634,8 +32634,8 @@
     {
       "type": "library",
       "name": "launch-editor",
-      "version": "2.14.1",
-      "bom-ref": "calm-frames-app@0.1.0|launch-editor@2.14.1",
+      "version": "2.14.2",
+      "bom-ref": "calm-frames-app@0.1.0|launch-editor@2.14.2",
       "licenses": [
         {
           "license": {
@@ -32644,15 +32644,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/launch-editor@2.14.1",
+      "purl": "pkg:npm/launch-editor@2.14.2",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/launch-editor/-/launch-editor-2.14.1.tgz",
+          "url": "https://registry.npmjs.org/launch-editor/-/launch-editor-2.14.2.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "41606b42c3291fb80fafdeb976c283ff770a5a23684e3a404d07fef97abadcdeac29118cc25557cf8d4ed4865331f65080172d0ff2b966dd3afbf23aa4febe1c"
+              "content": "3472446f7d0c1810a49995cb670cf6e6ddfb411e1a634dd9ccf61425738968e6bddae5b013123d481414b88ce7058735c640fb7093465fba1cdcd977b2ada441"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -51660,8 +51660,8 @@
     {
       "type": "library",
       "name": "shell-quote",
-      "version": "1.10.0",
-      "bom-ref": "calm-frames-app@0.1.0|shell-quote@1.10.0",
+      "version": "1.11.0",
+      "bom-ref": "calm-frames-app@0.1.0|shell-quote@1.11.0",
       "licenses": [
         {
           "license": {
@@ -51670,15 +51670,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/shell-quote@1.10.0",
+      "purl": "pkg:npm/shell-quote@1.11.0",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/shell-quote/-/shell-quote-1.10.0.tgz",
+          "url": "https://registry.npmjs.org/shell-quote/-/shell-quote-1.11.0.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "c356a238ac0ab9182dc0045e2088fcf69baa83e23b1af5f821b2ebbe68576f342c8f5f99c22e153b7f9f6ba645f754d64a3231a0490a9cc78770b10e0cae595c"
+              "content": "25dc433c3d03053caed3ca6ad243c2d3148d7adfeab14d3ba93e88b17d404bca0ed8808d458e2574d6bc38023a3eec001fcb46de5c4485baa6ca9e03c38d37ea"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -60550,7 +60550,7 @@
         "calm-frames-app@0.1.0|appdirsjs@1.2.8",
         "calm-frames-app@0.1.0|execa@5.1.1",
         "calm-frames-app@0.1.0|find-up@5.0.0",
-        "calm-frames-app@0.1.0|launch-editor@2.14.1",
+        "calm-frames-app@0.1.0|launch-editor@2.14.2",
         "calm-frames-app@0.1.0|mime@2.6.0",
         "calm-frames-app@0.1.0|picocolors@1.1.1",
         "calm-frames-app@0.1.0|prompts@2.4.2",
@@ -64713,10 +64713,10 @@
       "ref": "calm-frames-app@0.1.0|kleur@3.0.3"
     },
     {
-      "ref": "calm-frames-app@0.1.0|launch-editor@2.14.1",
+      "ref": "calm-frames-app@0.1.0|launch-editor@2.14.2",
       "dependsOn": [
         "calm-frames-app@0.1.0|picocolors@1.1.1",
-        "calm-frames-app@0.1.0|shell-quote@1.10.0"
+        "calm-frames-app@0.1.0|shell-quote@1.11.0"
       ]
     },
     {
@@ -65707,7 +65707,7 @@
         "calm-frames-app@0.1.0|npm-run-all@4.1.5|cross-spawn@6.0.6",
         "calm-frames-app@0.1.0|pidtree@0.3.1",
         "calm-frames-app@0.1.0|read-pkg@3.0.0",
-        "calm-frames-app@0.1.0|shell-quote@1.10.0",
+        "calm-frames-app@0.1.0|shell-quote@1.11.0",
         "calm-frames-app@0.1.0|string.prototype.padend@3.1.6"
       ]
     },
@@ -66332,7 +66332,7 @@
     {
       "ref": "calm-frames-app@0.1.0|react-devtools-core@6.1.5",
       "dependsOn": [
-        "calm-frames-app@0.1.0|shell-quote@1.10.0",
+        "calm-frames-app@0.1.0|shell-quote@1.11.0",
         "calm-frames-app@0.1.0|ws@7.5.13"
       ]
     },
@@ -68170,7 +68170,7 @@
       "ref": "calm-frames-app@0.1.0|shebang-regex@3.0.0"
     },
     {
-      "ref": "calm-frames-app@0.1.0|shell-quote@1.10.0"
+      "ref": "calm-frames-app@0.1.0|shell-quote@1.11.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|shelljs@0.8.5",
