@@ -1,0 +1,14 @@
+{
+  "observed_at_utc": "2026-10-23T18:42:41.478476+00:00",
+  "scope": "Offline real-policy evaluation of recorded npm scan; not a fresh pip/npm audit",
+  "toml_only_scope_verified": true,
+  "other_groups_unmodified_except_toml_removal": true,
+  "other_expiry_dates_preserved": true,
+  "new_toml_advisory_rejected": true,
+  "remaining_gate_problems": [
+    "the exception 'in-the-device-bundle' was due for review on 2026-10-21",
+    "the exception 'not-in-the-device-bundle' was due for review on 2026-10-21",
+    "pip-audit did not run: not rerun in this offline gate check"
+  ],
+  "exception_sha256": "0f1c478bc96af9834bade4c4d7832f8c19c684087adc12f024914309ab941a80"
+}

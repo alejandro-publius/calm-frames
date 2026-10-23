@@ -152,7 +152,7 @@ and istanbul, Metro and the React Native community CLI, the Vega CLI platform
 API Extractor and the Rushstack libraries it pulls in, the TypeScript ESLint
 plugin, and the small utilities under them (micromatch, braces, minimatch,
 fast-glob, globby, js-yaml, argparse, sprintf-js, cosmiconfig, ajv, yargs,
-tmp, shell-quote, cross-spawn, execa, ws, uuid, toml and the
+tmp, shell-quote, cross-spawn, execa, ws, uuid and the
 rest).
 
 Two names here look like they should ship and do not. react-native 0.83.0 is
@@ -280,7 +280,6 @@ packages = [
   "source-map-resolve",
   "sprintf-js",
   "tmp",
-  "toml",
   "uuid",
   "ws",
   "xcode",
@@ -379,9 +378,37 @@ packages = [
 "source-map-resolve" = []
 "sprintf-js" = ["1241202"]
 "tmp" = ["1109537", "1120654"]
-"toml" = ["1164824", "1164825"]
 "uuid" = ["1119441"]
 "ws" = ["1118731", "1123262"]
 "xcode" = []
 "yargs" = []
 "yargs-parser" = ["1088811"]
+
+[[exception]]
+group = "owner-approved-controlled-toml-builds-2026-10-23"
+ecosystem = "npm"
+# Current native module inventory is pending; ships is intentionally unspecified.
+accepted_by = "Owner explicitly replied approve to the exact five-advisory proposal in the canonical integration thread on October 23, 2026"
+review_by = "2026-10-30"
+why = """
+Only toml 3.0.0 in the local manifest-builder path is covered. The owner approved
+this narrow investigation deferral after reviewing the five GHSA IDs, build-host
+exposure, controls and review date in the canonical thread. The full mapping is
+in docs/cloud-integration-2026-10-23/DEPENDENCY_DECISION.md and the approval
+receipt in results/cloud-integration-2026-10-23/product-validation/.
+
+The manifest builder 0.1.16 requires ^3.0.0. Moving to patched 5.0.1 would cross
+two major versions without established SDK compatibility. Required controls:
+review and hash every manifest input; use isolated, bounded builds; accept no
+third-party manifests and expose no parser service. Confirm these controls on
+the Mac before a build. Investigate a supported vendor fix or separately tested
+override by October 30. The current manifest hash is in the approval receipt.
+
+This records risk acceptance for that controlled build scope only. It does not
+prove that TOML is absent from a current native package, authorize a release,
+accept any other advisory, renew either old group, or establish native/human
+acceptance. The old groups stay expired. Any new TOML advisory must fail review.
+"""
+packages = ["toml"]
+[exception.advisories]
+"toml" = ["1164824", "1164825", "1242862", "1242863", "1242864"]
