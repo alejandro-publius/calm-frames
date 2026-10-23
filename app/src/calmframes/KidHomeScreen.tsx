@@ -144,14 +144,25 @@ const KidHomeScreen = ({
     return () => subscription.remove();
   }, [showIntroduction, interfaceActive]);
   const [choosingProfile, setChoosingProfile] = React.useState(false);
+  // A choice or Back asks the picker to close. It closes once nothing is being
+  // saved: the button it hands focus back to is disabled during a save, and a
+  // picker that closed then would leave the remote with nothing focused. Until
+  // then the chips stay focusable and ignore presses.
+  const [closingPicker, setClosingPicker] = React.useState(false);
+  React.useEffect(() => {
+    if (closingPicker && !saving) {
+      setClosingPicker(false);
+      setChoosingProfile(false);
+      setReturnToHeader('profile');
+    }
+  }, [closingPicker, saving]);
   // The picker is one level above the shelf, so Back closes it rather than
   // falling through to the shelf's handler and leaving the app. The chips go
   // with it, so focus is put back on the control that opened them.
   React.useEffect(() => {
     if (!choosingProfile || !interfaceActive) return;
     const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
-      setChoosingProfile(false);
-      setReturnToHeader('profile');
+      setClosingPicker(true);
       return true;
     });
     return () => subscription.remove();
@@ -196,7 +207,8 @@ const KidHomeScreen = ({
   // reports none, How it works.
   const returningToFeatured = Boolean(featured) && returnFocusId === (listed.find((entry) => titlePresentation(entry.title).action === 'Watch now') ?? listed[0])?.title.id;
   const fromIntroduction = returnFocusId === demo?.title.id || returnFocusId === playbackCheck?.title.id;
-  const requested: ReturnFocusControl | 'learn' | 'profile' | null = saving ? null
+  // While the picker is open its active chip is the one control asking.
+  const requested: ReturnFocusControl | 'learn' | 'profile' | null = saving || choosingProfile ? null
     : returnToHeader ? returnToHeader
     : returnFocusControl === 'parent' ? 'parent'
     : !returnFocusId ? 'watch'
@@ -253,7 +265,7 @@ const KidHomeScreen = ({
     <ProfilePicker focusActive disabled={saving || undefined} testID={`${testID}-profiles`} title={PROFILES_KID_TITLE}
       chosenWord={WATCHING_STATE_WORD} chosenLine={whoIsWatching((profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name)}
       profiles={profiles} activeProfileId={activeProfileId ?? profiles[0].id} onChoose={(profile) => {
-        onChooseProfile(profile); setChoosingProfile(false); setReturnToHeader('profile');
+        onChooseProfile(profile); setClosingPicker(true);
       }} />
   ) : null;
   const hero = featured && feature ? <View testID={`${testID}-hero`} style={islandHome ? [styles.islandHero, placed(cardsNameIt ? HOME_ISLANDS.ACTIONS : HOME_ISLANDS.HERO)] : styles.hero}>

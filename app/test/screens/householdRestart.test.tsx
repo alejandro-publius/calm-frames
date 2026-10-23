@@ -224,14 +224,23 @@ describe('household setup across launches', () => {
     expect(storage.setItem).toHaveBeenCalledTimes(1);
     expect(JSON.parse(storage.read()!).family.activeProfileId).toBe('profile-1');
 
+    // Once the save is done the picker closes (Oct 23, bd55e47) and focus goes
+    // back to the button that opened it, which can take it again now.
     await act(async () => { finish(); });
-    expect(chip('profile-2').props.focusable).toBe(true);
-    expect(chip('profile-2').props.accessibilityState.checked).toBe(true);
-    expect(chip('profile-2').props.accessibilityState.disabled).not.toBe(true);
+    expect(screen.queryByTestId('kid-mode-home-profiles')).toBeNull();
+    const button = screen.getByTestId('kid-mode-home-choose-profile');
+    expect(button.props.focusable).toBe(true);
+    expect(button.props.accessibilityState.disabled).not.toBe(true);
+    expect(screen.getByTestId('kid-mode-home-choose-profile-label').props.children).toBe('Sam');
     expect(JSON.parse(storage.read()!).family.activeProfileId).toBe('profile-2');
 
-    fireEvent.press(chip('profile-1'));
-    await waitFor(() => expect(chip('profile-1').props.accessibilityState.checked).toBe(true));
+    fireEvent.press(screen.getByTestId('kid-mode-home-choose-profile'));
+    expect(chip('profile-2').props.accessibilityState.checked).toBe(true);
+    // The write and the close that waits for it both settle inside this act.
+    await act(async () => { fireEvent.press(chip('profile-1')); });
+    expect(JSON.parse(storage.read()!).family.activeProfileId).toBe('profile-1');
+    expect(screen.queryByTestId('kid-mode-home-profiles')).toBeNull();
+    expect(screen.getByTestId('kid-mode-home-choose-profile-label').props.children).toBe('Robin');
     expect(storage.setItem).toHaveBeenCalledTimes(2);
   });
 

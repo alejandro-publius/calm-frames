@@ -65,13 +65,55 @@ it('the panel dismissed last decides: How it works, then the picker, then How it
   expect(preferred()).toEqual(['kid-home-learn']);
 });
 
-it('opening the picker from its button asks for no other focus than the shelf had', () => {
+// Opening the picker moves focus onto the profile already watching (Oct 23,
+// bd55e47). Watch stays on screen beneath the picker, so it has to stop asking
+// while the picker is open, or two controls ask at once and the device picks.
+// Seen to fail, Oct 23 2026: before KidHomeScreen held Watch's request back
+// while the picker was open, this reported
+// ["kid-home-profiles-everyone", "kid-home-watch"].
+it('opening the picker asks for focus on the active profile alone', () => {
   render(<KidHomeScreen titles={titles} onOpen={jest.fn()} profiles={profiles} activeProfileId="everyone" onChooseProfile={jest.fn()} />);
   fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
   back();
   fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
   expect(screen.getByTestId('kid-home-profiles')).toBeTruthy();
-  expect(preferred()).toEqual(['kid-home-watch']);
+  expect(preferred()).toEqual(['kid-home-profiles-everyone']);
+});
+
+it('choosing a profile closes the picker and returns focus to its button alone', () => {
+  const onChooseProfile = jest.fn();
+  render(<KidHomeScreen titles={titles} onOpen={jest.fn()} profiles={profiles} activeProfileId="everyone" onChooseProfile={onChooseProfile} />);
+  fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
+  fireEvent.press(screen.getByTestId('kid-home-profiles-robin'));
+  expect(onChooseProfile).toHaveBeenCalledWith(profiles[1]);
+  expect(screen.queryByTestId('kid-home-profiles')).toBeNull();
+  expect(preferred()).toEqual(['kid-home-choose-profile']);
+});
+
+// The choice is written to storage, and every control that opens something is
+// disabled while it is. If the picker closed on the press, focus would be sent
+// to the profile button while that button cannot take it, and the remote would
+// be left with nothing focused until the write finished. So the picker waits,
+// with its chips still focusable, and closes once the write is done.
+it('a choice that is still saving keeps the picker open until the save ends', () => {
+  // The write starts inside the press, as KidModeScreen's does, so the render
+  // that follows the press already says it is saving.
+  let finishSave = () => {};
+  const Shelf = () => {
+    const [saving, setSaving] = React.useState(false);
+    finishSave = () => setSaving(false);
+    return <KidHomeScreen titles={titles} onOpen={jest.fn()} profiles={profiles} activeProfileId="everyone"
+      onChooseProfile={() => setSaving(true)} saving={saving} />;
+  };
+  render(<Shelf />);
+  fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
+  fireEvent.press(screen.getByTestId('kid-home-profiles-robin'));
+  expect(screen.getByTestId('kid-home-profiles')).toBeTruthy();
+  expect(screen.getByTestId('kid-home-profiles-robin').props.focusable).toBe(true);
+  expect(screen.getByTestId('kid-home-profiles-robin').props.accessibilityState.disabled).toBe(true);
+  act(() => finishSave());
+  expect(screen.queryByTestId('kid-home-profiles')).toBeNull();
+  expect(preferred()).toEqual(['kid-home-choose-profile']);
 });
 
 it('How it works after the picker asks for Back alone, on the Acadia-only shelf', () => {
