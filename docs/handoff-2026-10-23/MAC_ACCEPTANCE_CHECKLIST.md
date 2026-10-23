@@ -19,13 +19,17 @@ cd "$TASK/calm-frames-integration-2026-10-23" && git rev-parse HEAD
 
 ## 2. Hosted CI on that exact commit
 
-The cloud session's GitHub app cannot start workflows, so start it here:
+Every push to the branch starts CI through draft PR #2 (never merge it). Read
+the latest run:
 
 ```sh
-gh workflow run ci.yml --repo alejandro-publius/calm-frames --ref claude/eager-goldberg-1s5eb4
 gh run list --repo alejandro-publius/calm-frames --branch claude/eager-goldberg-1s5eb4 --limit 1
 gh run watch --repo alejandro-publius/calm-frames <run id>
 ```
+
+If a job stalls before its tests start (on October 23 one sat in
+`apt-get install ffmpeg`), run `gh run cancel <run id>`, then
+`gh run rerun <run id> --failed`. The cloud session cannot do either.
 
 Pass: every job green and the run's head SHA equals step 1's `git rev-parse HEAD`.
 

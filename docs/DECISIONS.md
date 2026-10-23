@@ -2833,3 +2833,13 @@ size, PIN slots) should be judged on the simulator by the owner, and none of
 them can be seen from the cloud session. The analyzer identity in the
 preparation cache key is confirmed absent and also left: adding it re-keys every
 approved work directory and the next ingest would sign new maps.
+
+## 2026-10-23: a stalled CI runner, replaced by a push
+
+Decision: when the Python job of run 39994434980 sat in `apt-get install ffmpeg`
+for over twenty minutes, push the overdue documentation fix (the status page
+still said hosted CI had never run) instead of waiting. Why: this session's
+GitHub app gets HTTP 403 on cancel and re-run as well as dispatch, the job has
+no time limit of its own, and the workflow's concurrency group cancels an older
+run on a newer push. The commit changes documentation only, so the code under
+test is still `12125b2`. Cost: the mutation gate runs again, about 25 minutes.

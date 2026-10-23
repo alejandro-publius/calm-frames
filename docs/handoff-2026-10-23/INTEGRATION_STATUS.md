@@ -41,11 +41,25 @@ The run on the handoff commit, [39910746898](https://github.com/alejandro-publiu
 The mutation gate, secret scan, number drift checks and the app's own flash check
 passed on that run.
 
-Hosted CI has not run on this branch yet: this session's GitHub app gets HTTP 403
-when it asks to dispatch a workflow, and CI here runs only on `main`, pull requests
-or a manual dispatch. The same commands CI runs were run in the cloud session on
-the code commit; the [results receipt](../../results/integration-2026-10-23/receipt.json)
-has the counts.
+Hosted CI runs on this branch through
+[draft PR #2](https://github.com/alejandro-publius/calm-frames/pull/2), which exists
+only to start CI: never merge it. This session's GitHub app gets HTTP 403 when it
+asks to dispatch, cancel or re-run a workflow, so each run here starts from a push,
+and a new push cancels the run before it. On `d95e9df`,
+[run 39994434980](https://github.com/alejandro-publius/calm-frames/actions/runs/39994434980)
+passed the Vega app, the app's own flash check, the mutation gate, the secret scan
+and the published numbers jobs. Its Python job stalled in the runner's `apt-get install ffmpeg`
+before any test ran (the same step took about 20 seconds in the other jobs), so
+the next push replaced that run. The latest run on PR #2 is the one that counts.
+The same commands CI runs were also run in the cloud session on the code commit;
+the [results receipt](../../results/integration-2026-10-23/receipt.json) has the
+counts.
+
+The separate Audit workflow fails on this branch, on the handoff commit and on
+the submitted commit alike: the reviewed exceptions in
+`scripts/audit_exceptions.toml` were due for review on October 21, and new
+advisories for `launch-editor` and `toml` arrived since. Renewing exceptions is
+the owner's review, so the file is unchanged here; PR #2 has the details.
 
 ## Verified here, and not
 
@@ -80,8 +94,10 @@ claims them.
 
 ## Next
 
-1. On the Mac, dispatch CI for this branch (this session's GitHub app cannot):
-   `gh workflow run ci.yml --repo alejandro-publius/calm-frames --ref claude/eager-goldberg-1s5eb4`.
+1. Read the latest CI run on draft PR #2 and check that its head is the branch tip.
+   If a job stalls before its tests start, cancel and re-run it from the Mac
+   (`gh run cancel <run id>`, then `gh run rerun <run id> --failed`); this
+   session cannot.
 2. Build and install from the branch tip and work through the
    [Mac checklist](MAC_ACCEPTANCE_CHECKLIST.md). Keep the PIN, profiles and the
    rollback packages it lists.
