@@ -1,10 +1,75 @@
-# Calm Frames
+# Calm Frames 🌊
 
-**A verified safety layer for Fire TV, for kids with photosensitive epilepsy.**
+**A calmer way to watch on Fire TV: prepared nature scenes, a picture that stays, and a verified flash safety layer underneath.**
+
+[![Vega OS](https://img.shields.io/badge/Vega_OS-native_TV_app-245a58)](app/)
+[![Fire TV track](https://img.shields.io/badge/Hackathon-Fire_TV_track-c6854e)](docs/SUBMISSION.md)
+[![Node 22](https://img.shields.io/badge/Node-22-53745b)](.nvmrc)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-53745b)](.python-version)
+[![Apache 2.0](https://img.shields.io/badge/Code-Apache_2.0-c6854e)](LICENSE)
+
+Calm Frames is a native Vega OS app for Fire TV. Choose Ocean or Forest on a coastal map, read what a title holds, and decide when to watch. Every title is checked frame by frame before it can play, and the result is an Ed25519 signed flash map bound to the file's SHA-256. At playback the app verifies that map again, covers any flagged segment before it starts while the sound continues, and sends every seek through one guarded function.
 
 Calm Frames reduces exposure to flashing above published limits in the videos it plays. It is not a medical device.
 
+▶️ **[Watch the demo video](https://www.youtube.com/watch?v=6lAP1FH16vc)** · [Devpost entry](https://devpost.com/software/calm-frames) · [How it works](#how-it-works)
+
+![Calm Frames Home: a coastal map with Ocean and Forest, McWay Falls selected, and Watch as the primary action](docs/presentation/home.png)
+
+<p align="center">
+  <img src="docs/presentation/details.png" alt="McWay Falls details show the duration, nature sounds, final still, and an explicit Watch action" width="49%">
+  <img src="docs/presentation/playback.png" alt="Native playback of the fixed McWay Falls cove and waterfall" width="49%">
+</p>
+
+<p align="center"><em>Real native app views on the Vega Virtual Device: choose a place, understand the session, then watch.</em></p>
+
+<details>
+<summary><strong>After the scene: the final frame stays</strong></summary>
+
+![The ending keeps the scene framing and shows a Back button; it does not repeat or return Home on its own](docs/presentation/ending.png)
+
+The audio fades at the end and the final frame stays until Back. It is a deliberate still ending, not an endless loop.
+
+</details>
+
+**About these screenshots.** They are app-only native captures of the October build (installed source `60c3bbb`), cropped to the picture area, with no reconstructed UI. The demo video shows an earlier build. This default branch still holds the September 20 tree; the October code is on [`codex/integration-owner-2026-10-23`](https://github.com/alejandro-publius/calm-frames/tree/codex/integration-owner-2026-10-23). See the [capture provenance and full credits](https://github.com/alejandro-publius/calm-frames/blob/f9c210b7e00f050846a8f16a85fa715ecbb8d513/docs/presentation/README.md). McWay imagery: MoneySavingVideos, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+
+## Features
+
+- **A connected coastal world.** Ocean and Forest share one map, one typeface pair, warm surfaces and an obvious remote focus ring across Home, Details and loading.
+- **Sustained viewing with a deliberate ending.** McWay Falls plays five continuous minutes of one fixed coastal view at natural speed, with no cuts or loop, then holds its final frame until you leave.
+- **Playback starts with a choice.** Watch is the primary action. Pause, resume and Back stay available, and short moving previews are a separate, secondary action.
+- **Signed flash maps, checked twice.** Offline analysis writes a map signed with Ed25519 and bound to the exact source and rendition hashes. The player verifies it again and keeps the picture covered while anything is unresolved.
+- **Covers come before seeks.** Every transport control shares one seek path. A target inside a flagged interval or its guard band is covered first and moved second.
+- **Household settings only add protection.** PIN protected presets, captions and stricter cover choices live on the device, and none of them can loosen the published limits.
+- **Open tools beyond the app.** The [flashmap analyzer](flashmap/README.md), its GitHub Action and the [Vega hook](hook/) let other apps and studios check their own content.
+
+## How it works
+
+![Calm Frames architecture: licensed sources pass through offline analysis, preparation and verification into an approved packaged library; the TV app verifies the selected route and map before guarded playback and the final still](docs/presentation/architecture.png)
+
+1. **Prepare before playback.** Each licensed source is analyzed offline, its flash map is signed, and preset renditions are rendered. A separate verify step checks the actual outputs against the source, and a title cannot reach the TV until it passes.
+2. **Bind trust to exact artifacts.** Verified editions are exported into a packaged library compiled into the app. Build checks enforce the approval registry, the reports and the media budget, and a file URL cannot introduce a new trusted signer.
+3. **Verify again at the player.** The app matches the compiled catalog and route, verifies the signed map, and only then schedules covers and guards seeks.
+4. **Keep the ending explicit.** The continuous McWay edition ends on its extracted final still, with no automatic repeat or navigation.
+
+This app plays its own prepared catalog. It does not intercept Prime Video, other apps or arbitrary streams. The [readable diagram and code map](https://github.com/alejandro-publius/calm-frames/blob/f9c210b7e00f050846a8f16a85fa715ecbb8d513/docs/presentation/ARCHITECTURE.md) follow the October code.
+
+## Tech stack
+
+| Layer | Choices |
+|---|---|
+| TV app | React Native, TypeScript, Vega OS and Amazon's W3C media player |
+| Design | Fraunces titles, Source Sans 3 controls, shared coastal geometry and focus tokens |
+| Analysis | Python, flashmap, PyAV and ffmpeg, with thresholds quoted from their published sources |
+| Preparation | Preset rendering, source and rendition hashes, Ed25519 signed maps and verification reports |
+| Playback | Compiled catalog, map verification, cover scheduler and one guarded seek engine |
+| Cloud (optional) | AWS CDK stack for signed preparation runs, with S3, a DynamoDB catalog and CloudFront |
+| Checks | Jest, TypeScript, ESLint, pytest, ruff, strict mypy and a GitHub Actions CI |
+
 ---
+
+*Everything below is the September 20 technical record. It describes the code on this branch, with every number traced to `results/`.*
 
 ## What it is
 
@@ -493,6 +558,7 @@ The approved wording, everywhere, is: **reduces exposure to flashing above publi
 | `app/`, derived from [AmazonAppDev/vega-video-sample](https://github.com/AmazonAppDev/vega-video-sample) at tag `v0.24-RN83` | MIT-0, see [app/LICENSE](app/LICENSE) |
 | App third-party dependencies | [app/LICENSE-THIRD-PARTY](app/LICENSE-THIRD-PARTY) |
 | Screening media | Per file in [media/LICENSES.csv](media/LICENSES.csv), with URL, licence, credit line, SHA-256, duration and resolution |
+| Screenshots in `docs/presentation/` | McWay footage and still: MoneySavingVideos, [source on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:%E2%99%A5%E2%99%A5_Relaxing_3_Hour_Video_of_a_Waterfall_on_an_Ocean_Beach_at_Sunset.webm), [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), cropped from the native app capture. Other title imagery: NPS Video, Acadia National Park; NOAA Fisheries; NPS: G Litten. No endorsement implied |
 
 Screening media credits: Blender open movies (Cosmos Laundromat, Sintel, Tears of Steel, Big Buck Bunny) from Blender Foundation under CC BY 3.0, with the Tears of Steel credit scroll kept and Blender logos excluded; NASA Scientific Visualization Studio and ISS time-lapse footage, following NASA's credit-line guidance; DVIDS footage, which carries a non-endorsement notice; Wikimedia Commons fireworks and lightning footage under its per-file licences; two 1930 public-domain films.
 
