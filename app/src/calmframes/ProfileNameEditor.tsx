@@ -206,6 +206,7 @@ const ProfileNameEditor = ({
       <TouchableOpacity
         key={id}
         surfaceKind="keypad"
+        traceFocus={false}
         testID={`${testID}-key-${id}`}
         accessibilityRole="button"
         accessibilityLabel={accessibilityLabel}

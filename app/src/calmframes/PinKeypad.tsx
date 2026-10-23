@@ -91,6 +91,7 @@ const PinKeypad = ({
           <TouchableOpacity
             key={digit}
             surfaceKind="keypad"
+            traceFocus={false}
             testID={`${idPrefix}-key-${digit}`}
             accessibilityRole="button"
             accessibilityLabel={digit === 'delete' ? 'Delete the last digit' : digit}
