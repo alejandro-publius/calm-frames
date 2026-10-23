@@ -3,16 +3,15 @@
 from __future__ import annotations
 
 import argparse
-from fractions import Fraction
 import hashlib
 import json
 import math
-from pathlib import Path
 import re
 import subprocess
 import sys
 import tempfile
-
+from fractions import Fraction
+from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[3]
 SCRIPT = Path(__file__).with_name("narration-cues.json")

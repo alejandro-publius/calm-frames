@@ -1,12 +1,11 @@
 """Test refusal boundaries without generating or opening any media."""
 import importlib.util
 import json
-from pathlib import Path
 import subprocess
 import sys
 import tempfile
 import unittest
-
+from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 SPEC = importlib.util.spec_from_file_location("render_demo", HERE / "render_demo.py")
@@ -122,7 +121,7 @@ class PreflightTests(unittest.TestCase):
         for stream_index in (0, 1):
             for duration in (None, "N/A", "nan", "inf", "0", "-1"):
                 with self.subTest(stream=stream_index, duration=duration):
-                    def probe_unknown(path):
+                    def probe_unknown(path, stream_index=stream_index, duration=duration):
                         data = fake_probe(path)
                         if path.name == "native_ambient":
                             data["streams"][stream_index]["duration"] = duration
@@ -148,7 +147,7 @@ class PreflightTests(unittest.TestCase):
         for stream_index in (0, 1):
             for origin in (None, "N/A", "0.1", "-0.1", "nan", "inf"):
                 with self.subTest(stream=stream_index, origin=origin):
-                    def probe_offset(path):
+                    def probe_offset(path, stream_index=stream_index, origin=origin):
                         data = fake_probe(path)
                         if path.name == "native_ambient":
                             data["streams"][stream_index]["start_time"] = origin
