@@ -1,0 +1,33 @@
+{
+  "published-numbers-final": {
+    "name": "published-numbers-final",
+    "command": [
+      "python",
+      "eval/readme_sync.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.15
+  },
+  "style-final": {
+    "name": "style-final",
+    "command": [
+      "python",
+      "eval/style_check.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.46
+  },
+  "secrets-final": {
+    "name": "secrets-final",
+    "command": [
+      "bash",
+      "scripts/gitleaks_scan.sh",
+      "staged"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.9
+  },
+  "local_links": "doc-links.json",
+  "scope": "Final documentation and staged evidence checks; no hosted or native acceptance."
+}

@@ -1,0 +1,360 @@
+{
+  "before": {
+    "info": 0,
+    "low": 2,
+    "moderate": 20,
+    "high": 20,
+    "critical": 4,
+    "total": 46
+  },
+  "after": {
+    "info": 0,
+    "low": 2,
+    "moderate": 20,
+    "high": 22,
+    "critical": 0,
+    "total": 44
+  },
+  "unique_advisories_before": 21,
+  "unique_advisories_after": 20,
+  "removed_advisories": [
+    "GHSA-v8v8-6859-qxm4"
+  ],
+  "added_advisories": [],
+  "remaining_advisories": {
+    "GHSA-grv7-fg5c-xmjg": {
+      "source": 1098094,
+      "name": "braces",
+      "dependency": "braces",
+      "title": "Uncontrolled resource consumption in braces",
+      "url": "https://github.com/advisories/GHSA-grv7-fg5c-xmjg",
+      "severity": "high",
+      "cwe": [
+        "CWE-400",
+        "CWE-1050"
+      ],
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "range": "<3.0.3"
+    },
+    "GHSA-3xgq-45jj-v275": {
+      "source": 1104663,
+      "name": "cross-spawn",
+      "dependency": "cross-spawn",
+      "title": "Regular Expression Denial of Service (ReDoS) in cross-spawn",
+      "url": "https://github.com/advisories/GHSA-3xgq-45jj-v275",
+      "severity": "high",
+      "cwe": [
+        "CWE-1333"
+      ],
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "range": "<6.0.6"
+    },
+    "GHSA-vcc3-ghjq-m6fr": {
+      "source": 1147955,
+      "name": "decode-uri-component",
+      "dependency": "decode-uri-component",
+      "title": "decode-uri-component: Denial of service via exponential decoding of malformed percent-encoded input",
+      "url": "https://github.com/advisories/GHSA-vcc3-ghjq-m6fr",
+      "severity": "moderate",
+      "cwe": [
+        "CWE-400",
+        "CWE-405",
+        "CWE-407",
+        "CWE-1176"
+      ],
+      "cvss": {
+        "score": 0,
+        "vectorString": null
+      },
+      "range": "<=0.4.2"
+    },
+    "GHSA-4xcv-9jjx-gfj3": {
+      "source": 1085685,
+      "name": "mem",
+      "dependency": "mem",
+      "title": "Denial of Service in mem",
+      "url": "https://github.com/advisories/GHSA-4xcv-9jjx-gfj3",
+      "severity": "moderate",
+      "cwe": [
+        "CWE-400"
+      ],
+      "cvss": {
+        "score": 5.1,
+        "vectorString": "CVSS:3.1/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N"
+      },
+      "range": "<4.0.0"
+    },
+    "GHSA-952p-6rrq-rcjv": {
+      "source": 1098681,
+      "name": "micromatch",
+      "dependency": "micromatch",
+      "title": "Regular Expression Denial of Service (ReDoS) in micromatch",
+      "url": "https://github.com/advisories/GHSA-952p-6rrq-rcjv",
+      "severity": "moderate",
+      "cwe": [
+        "CWE-1333"
+      ],
+      "cvss": {
+        "score": 5.3,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+      },
+      "range": "<4.0.8"
+    },
+    "GHSA-r683-j2x4-v87g": {
+      "source": 1095073,
+      "name": "node-fetch",
+      "dependency": "node-fetch",
+      "title": "node-fetch forwards secure headers to untrusted sites",
+      "url": "https://github.com/advisories/GHSA-r683-j2x4-v87g",
+      "severity": "high",
+      "cwe": [
+        "CWE-173",
+        "CWE-200",
+        "CWE-601"
+      ],
+      "cvss": {
+        "score": 8.8,
+        "vectorString": "CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
+      },
+      "range": "<2.6.7"
+    },
+    "GHSA-5fw9-fq32-wv5p": {
+      "source": 1086436,
+      "name": "node-notifier",
+      "dependency": "node-notifier",
+      "title": "OS Command Injection in node-notifier",
+      "url": "https://github.com/advisories/GHSA-5fw9-fq32-wv5p",
+      "severity": "moderate",
+      "cwe": [
+        "CWE-78"
+      ],
+      "cvss": {
+        "score": 5.6,
+        "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L"
+      },
+      "range": "<8.0.1"
+    },
+    "GHSA-rxrc-rgv4-jpvx": {
+      "source": 1099563,
+      "name": "react-devtools-core",
+      "dependency": "react-devtools-core",
+      "title": "React Developer Tools extension Improper Authorization vulnerability",
+      "url": "https://github.com/advisories/GHSA-rxrc-rgv4-jpvx",
+      "severity": "moderate",
+      "cwe": [
+        "CWE-116",
+        "CWE-285"
+      ],
+      "cvss": {
+        "score": 6.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L"
+      },
+      "range": "<4.28.4"
+    },
+    "GHSA-7f53-fmmv-mfjv": {
+      "source": 1089027,
+      "name": "react-native",
+      "dependency": "react-native",
+      "title": "Regular expression denial of service in react-native",
+      "url": "https://github.com/advisories/GHSA-7f53-fmmv-mfjv",
+      "severity": "high",
+      "cwe": [
+        "CWE-400",
+        "CWE-697"
+      ],
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "range": ">=0.59.0 <0.62.3"
+    },
+    "GHSA-52f5-9888-hmc6": {
+      "source": 1109537,
+      "name": "tmp",
+      "dependency": "tmp",
+      "title": "tmp allows arbitrary temporary file / directory write via symbolic link `dir` parameter",
+      "url": "https://github.com/advisories/GHSA-52f5-9888-hmc6",
+      "severity": "low",
+      "cwe": [
+        "CWE-59"
+      ],
+      "cvss": {
+        "score": 2.5,
+        "vectorString": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N"
+      },
+      "range": "<=0.2.3"
+    },
+    "GHSA-ph9p-34f9-6g65": {
+      "source": 1120654,
+      "name": "tmp",
+      "dependency": "tmp",
+      "title": "tmp has Path Traversal via unsanitized prefix/postfix that enables directory escape",
+      "url": "https://github.com/advisories/GHSA-ph9p-34f9-6g65",
+      "severity": "high",
+      "cwe": [
+        "CWE-22"
+      ],
+      "cvss": {
+        "score": 0,
+        "vectorString": null
+      },
+      "range": "<0.2.6"
+    },
+    "GHSA-82x6-q7mm-w9cf": {
+      "source": 1164824,
+      "name": "toml",
+      "dependency": "toml",
+      "title": "toml-node: Uncontrolled Recursion",
+      "url": "https://github.com/advisories/GHSA-82x6-q7mm-w9cf",
+      "severity": "high",
+      "cwe": [
+        "CWE-674"
+      ],
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "range": "<4.2.0"
+    },
+    "GHSA-v5mp-jgw5-2x6j": {
+      "source": 1164825,
+      "name": "toml",
+      "dependency": "toml",
+      "title": "toml-node: Prototype Pollution Leads to `Object.prototype` Corruption via `__proto__` Key-Path Desynchronization",
+      "url": "https://github.com/advisories/GHSA-v5mp-jgw5-2x6j",
+      "severity": "high",
+      "cwe": [
+        "CWE-1321"
+      ],
+      "cvss": {
+        "score": 8.2,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:L"
+      },
+      "range": "<4.1.2"
+    },
+    "GHSA-4qx8-w7c3-pj3p": {
+      "source": 1242862,
+      "name": "toml",
+      "dependency": "toml",
+      "title": "toml-node: Quadratic-complexity DoS via many array-of-tables headers in toml.parse()",
+      "url": "https://github.com/advisories/GHSA-4qx8-w7c3-pj3p",
+      "severity": "high",
+      "cwe": [
+        "CWE-407"
+      ],
+      "cvss": {
+        "score": 0,
+        "vectorString": null
+      },
+      "range": "<=5.0.0"
+    },
+    "GHSA-9j65-hcg3-gc64": {
+      "source": 1242863,
+      "name": "toml",
+      "dependency": "toml",
+      "title": "toml-node: Quadratic-complexity DoS via long dotted keys or table paths in toml.parse()",
+      "url": "https://github.com/advisories/GHSA-9j65-hcg3-gc64",
+      "severity": "high",
+      "cwe": [
+        "CWE-407"
+      ],
+      "cvss": {
+        "score": 0,
+        "vectorString": null
+      },
+      "range": "<=5.0.0"
+    },
+    "GHSA-9qmh-m7c6-f92p": {
+      "source": 1242864,
+      "name": "toml",
+      "dependency": "toml",
+      "title": "toml-node: Uncontrolled resource consumption (CPU DoS) via unbounded-length integer literals in toml.parse()",
+      "url": "https://github.com/advisories/GHSA-9qmh-m7c6-f92p",
+      "severity": "high",
+      "cwe": [
+        "CWE-400",
+        "CWE-770"
+      ],
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "range": "<=5.0.0"
+    },
+    "GHSA-w5hq-g745-h8pq": {
+      "source": 1119441,
+      "name": "uuid",
+      "dependency": "uuid",
+      "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+      "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+      "severity": "moderate",
+      "cwe": [
+        "CWE-787",
+        "CWE-1285"
+      ],
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+      },
+      "range": "<11.1.1"
+    },
+    "GHSA-3h5v-q93c-6h6q": {
+      "source": 1118731,
+      "name": "ws",
+      "dependency": "ws",
+      "title": "ws affected by a DoS when handling a request with many HTTP headers",
+      "url": "https://github.com/advisories/GHSA-3h5v-q93c-6h6q",
+      "severity": "high",
+      "cwe": [
+        "CWE-476"
+      ],
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "range": ">=2.1.0 <5.2.4"
+    },
+    "GHSA-96hv-2xvq-fx4p": {
+      "source": 1123262,
+      "name": "ws",
+      "dependency": "ws",
+      "title": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+      "url": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p",
+      "severity": "high",
+      "cwe": [
+        "CWE-400",
+        "CWE-770",
+        "CWE-1050"
+      ],
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "range": ">=1.1.0 <5.2.5"
+    },
+    "GHSA-p9pc-299p-vxgp": {
+      "source": 1088811,
+      "name": "yargs-parser",
+      "dependency": "yargs-parser",
+      "title": "yargs-parser Vulnerable to Prototype Pollution",
+      "url": "https://github.com/advisories/GHSA-p9pc-299p-vxgp",
+      "severity": "moderate",
+      "cwe": [
+        "CWE-915",
+        "CWE-1321"
+      ],
+      "cvss": {
+        "score": 5.3,
+        "vectorString": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L"
+      },
+      "range": ">=6.0.0 <13.1.2"
+    }
+  },
+  "note": "Fresh matching npm 10.9.8 lockfile scans. Package entry counts include propagated findings, not independent exploits. Remaining findings and expired exceptions still block Audit."
+}

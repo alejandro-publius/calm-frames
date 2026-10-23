@@ -1,0 +1,374 @@
+{
+  "recorded_utc": "2026-10-23T21:53:06.931192+00:00",
+  "item": 12,
+  "status": "Legacy logger remediation complete locally; the overall dependency item and release acceptance remain open.",
+  "checked_code_source": "2f187d1723f65c7a09fe566a1e13aea91bdbcbb4",
+  "prior_followup_head": "92b99ebf06241ce97287d5bbfb2c30c26199a852",
+  "branch": "codex/dependency-followup-2026-10-23",
+  "mac_acceptance_snapshot_preserved": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+  "not_integrated_into_mac_snapshot": true,
+  "changes": {
+    "override": "Only @react-native-community/cli-platform-android@2.9.0 receives logkitty 0.7.1. Legacy 0.6.1 deduplicates onto the fixed version already used by the modern CLI.",
+    "lock": "17 unused lock nodes removed, including old logkitty and its yargs subtree. No new nodes or other locked package changes.",
+    "consumers": "Legacy CLI 2.9.0, modern CLI platform 20.2.0 and SDK versions unchanged.",
+    "ci": "The new behavioral regression joins the existing CI test command. No hosted run is claimed."
+  },
+  "toolchain": {
+    "node": "22.23.2",
+    "npm": "10.9.8",
+    "cyclonedx-py": "7.4.0",
+    "cyclonedx-python-lib": "11.12.0",
+    "cyclonedx-npm": "6.0.1",
+    "cyclonedx-library": "10.3.0",
+    "gitleaks": "8.30.1"
+  },
+  "checks": {
+    "compatibility-before": {
+      "name": "compatibility-before",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/legacy_logkitty.test.mjs"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 0.15
+    },
+    "lock-update-scoped": {
+      "name": "lock-update-scoped",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "install",
+        "--package-lock-only",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.26
+    },
+    "clean-install": {
+      "name": "clean-install",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 31.05
+    },
+    "compatibility": {
+      "name": "compatibility",
+      "command": [
+        "node",
+        "--test",
+        "app/tools/legacy_logkitty.test.mjs",
+        "app/tools/legacy_shell_quote.test.mjs",
+        "app/tools/build_dependency_compat.test.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.24
+    },
+    "typecheck": {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 14.4
+    },
+    "lint": {
+      "name": "lint",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "run",
+        "lint"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 17.46
+    },
+    "prepared-guards": {
+      "name": "prepared-guards",
+      "command": [
+        "node",
+        "app/tools/check_prepared_library.mjs"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.95
+    },
+    "logger-tree": {
+      "name": "logger-tree",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "ls",
+        "logkitty",
+        "--all"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.86
+    },
+    "sbom-write": {
+      "name": "sbom-write",
+      "command": [
+        "python",
+        "scripts/sbom.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 13.83
+    },
+    "sbom-check": {
+      "name": "sbom-check",
+      "command": [
+        "python",
+        "scripts/sbom.py",
+        "--check",
+        "--keep",
+        "/workspace/shared/calm-frames-dependency-wave4/sbom-reproduction"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.21
+    },
+    "published-numbers-update": {
+      "name": "published-numbers-update",
+      "command": [
+        "python",
+        "eval/readme_sync.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.23
+    },
+    "published-numbers": {
+      "name": "published-numbers",
+      "command": [
+        "python",
+        "eval/readme_sync.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.11
+    },
+    "style": {
+      "name": "style",
+      "command": [
+        "python",
+        "eval/style_check.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.46
+    },
+    "secrets-code": {
+      "name": "secrets-code",
+      "command": [
+        "bash",
+        "scripts/gitleaks_scan.sh",
+        "staged"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.83
+    },
+    "audit-before": {
+      "name": "audit-before",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "audit",
+        "--package-lock-only",
+        "--ignore-scripts",
+        "--json"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 6.85
+    },
+    "audit-after": {
+      "name": "audit-after",
+      "command": [
+        "npm",
+        "--prefix",
+        "app",
+        "audit",
+        "--package-lock-only",
+        "--ignore-scripts",
+        "--json"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 9.29
+    }
+  },
+  "regressions": {
+    "before": "Four assertions fail with installed logkitty 0.6.1: version, cleanup interpolation, PID interpolation and the fixed process-error path. The ordinary legacy CLI contract already passes.",
+    "after": "All 27 selected build-tool regressions pass, including the five logger checks, previous shell-quote checks and Ajv/Zod/Lodash/Minimatch consumer checks.",
+    "logger_behavior": "Actual installed modules are executed. The old CLI retains React Native tag filtering, priority filtering, formatted entries and error events. ADB cleanup/PID calls use literal executable and argument arrays, preserving specific process and invalid-PID errors.",
+    "process_interception": "All ADB process creation is intercepted. No device, simulator, shell payload, native build or external service is invoked."
+  },
+  "lint_result": {
+    "errors": 0,
+    "source_warnings": 104,
+    "test_warnings": 4
+  },
+  "test_scope": "No app UI/player source or Jest tests changed. The full app Jest suite was not rerun in this logger-only batch; its previous result belongs to code 121270e and is not re-labelled as this run.",
+  "exposure_limits": {
+    "host": "The upstream change removes host-shell interpolation from these two Android logging calls. It does not establish safety for arbitrary remote ADB argument semantics.",
+    "native": "Installed build-tool consumers were checked. Current native module inventory and Mac/human acceptance remain separate and unobserved for this follow-up.",
+    "audit": "Zero critical entries describes this npm app-lock scan only. It is not a whole-product, Python/container, hosted Audit or vulnerability-free certification."
+  },
+  "audit_delta": {
+    "before": {
+      "info": 0,
+      "low": 2,
+      "moderate": 20,
+      "high": 20,
+      "critical": 4,
+      "total": 46
+    },
+    "after": {
+      "info": 0,
+      "low": 2,
+      "moderate": 20,
+      "high": 22,
+      "critical": 0,
+      "total": 44
+    },
+    "unique_advisories_before": 21,
+    "unique_advisories_after": 20,
+    "removed_advisories": [
+      "GHSA-v8v8-6859-qxm4"
+    ],
+    "added_advisories": [],
+    "note": "Fresh matching npm 10.9.8 lockfile scans. Package entry counts include propagated findings, not independent exploits. Remaining findings and expired exceptions still block Audit."
+  },
+  "audit_acceptance": "Still blocked by remaining findings and expired exception groups. No exception dates, owner acceptance or TOML policy changed. No Python audit rescan in this npm-only batch.",
+  "sbom": {
+    "reproduced": true,
+    "native_inventory": false,
+    "known_peer_tree_warnings_retained": true,
+    "tree_warnings": [
+      "npm error invalid: @types/react@19.3.0 ./app/node_modules/@types/react",
+      "npm error invalid: @typescript-eslint/eslint-plugin@6.10.0 ./app/node_modules/@typescript-eslint/eslint-plugin",
+      "npm error invalid: @typescript-eslint/parser@8.70.0 ./app/node_modules/@typescript-eslint/parser",
+      "npm error invalid: node-notifier@5.4.5 ./app/node_modules/node-notifier",
+      "npm error invalid: picomatch@2.3.2 ./app/node_modules/picomatch",
+      "npm error invalid: react@19.2.0 ./app/node_modules/react",
+      "npm error missing: @babel/preset-env@^7.1.6, required by jscodeshift@0.14.0"
+    ],
+    "generator_report": "sbom-reproduction.json"
+  },
+  "preserved": {
+    "compared_to": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+    "unchanged_paths": [
+      "app/src",
+      "app/test",
+      "pipeline",
+      "app/manifest.toml",
+      "scripts/audit_exceptions.toml",
+      "docs/judging-package",
+      "docs/cloud-integration-2026-10-23/demo/STORYBOARD.md"
+    ],
+    "frozen_integration": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+    "submitted": "bf2f615e6fad0d73442fe2b9acab3067bf311e7e",
+    "no_push_merge_publication": true
+  },
+  "input_files": {
+    ".github/workflows/ci.yml": {
+      "bytes": 16239,
+      "sha256": "eff219339f108d904c90dc1e4d8def2f762939be2d09816426fd3c14b286f504"
+    },
+    "app/package.json": {
+      "bytes": 12567,
+      "sha256": "a210154c76bf983f099e22d8d2e3ca0abfcbd13f65ca8f5e63e997c93e5d3394"
+    },
+    "app/package-lock.json": {
+      "bytes": 798375,
+      "sha256": "e1ca817dbd2552002958002939760ac72e28837b12fe70ef25f0f1a45f032398"
+    },
+    "app/tools/legacy_logkitty.test.mjs": {
+      "bytes": 5557,
+      "sha256": "4d452e9a67b6278b451158c9b026e398bda302aa518dab6edeb99892f4dcbc0e"
+    },
+    "docs/SBOM.app.cdx.json": {
+      "bytes": 2228806,
+      "sha256": "09dec7727c1f40bad682c76aa25d7234ead2066848014a3800d9586689864fad"
+    },
+    "docs/SECURITY.md": {
+      "bytes": 39927,
+      "sha256": "04db317938bb7d7f1255416f0c96a67d7bfb1c58f1341783b99d2e3193745a10"
+    },
+    "results/sbom.json": {
+      "bytes": 891,
+      "sha256": "64cee7fa873f18cca17b17777d563dc17bb4c0effae1fd62c03f7bc22211718e"
+    }
+  },
+  "logs": {
+    "compatibility-before": {
+      "raw_sha256": "9224731b3fa282daffe03cc015cb1b9652b0edd62d8c454be67fdd8f524d0607",
+      "normalized_sha256": "2b72d8b9f07dbce9e1f6f2f8a3cc5744b12a8794e120e6c8a715f41005d5cee3"
+    },
+    "lock-update-scoped": {
+      "raw_sha256": "b125771fda8addd462adfe7f7b03299feb35e28badbb2d16ae8589e371216f8f",
+      "normalized_sha256": "b125771fda8addd462adfe7f7b03299feb35e28badbb2d16ae8589e371216f8f"
+    },
+    "clean-install": {
+      "raw_sha256": "1bf014d1dbc99f76e7780a613c98b84d03425b88966b4769bbee54a0230a9c98",
+      "normalized_sha256": "1bf014d1dbc99f76e7780a613c98b84d03425b88966b4769bbee54a0230a9c98"
+    },
+    "compatibility": {
+      "raw_sha256": "b7a4f902ef9baee1234705ea59cbb25ddf691bc7cefbdbce4eeaf9ed00896b57",
+      "normalized_sha256": "b7a4f902ef9baee1234705ea59cbb25ddf691bc7cefbdbce4eeaf9ed00896b57"
+    },
+    "typecheck": {
+      "raw_sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+      "normalized_sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a"
+    },
+    "lint": {
+      "raw_sha256": "975a3e4e37b3ed4466d960294a3f6dc0f7a659e0f1b0e57887fb42f675b15d54",
+      "normalized_sha256": "e0dc75813cbc33353b6f46600fb89c2a3239db60d7f0ec0da144fc56d7389714"
+    },
+    "prepared-guards": {
+      "raw_sha256": "c08e65a20baed1e7a71ad05fb332d00ff4e9ba4643dabdee4a3c1f712ed111b0",
+      "normalized_sha256": "c08e65a20baed1e7a71ad05fb332d00ff4e9ba4643dabdee4a3c1f712ed111b0"
+    },
+    "logger-tree": {
+      "raw_sha256": "1fea676c98070e0dd43dc043e32e70c6260d5c9c81b10d32e4d22c00b3c4d487",
+      "normalized_sha256": "31368e833a04e188268bb5212102bf0bdd985c39faa59c8ea82a75539206324b"
+    },
+    "sbom-write": {
+      "raw_sha256": "e550c36cd312d1aa12b0cbcf594bc40fa27dba58851f18f89c6d7ef1336a38eb",
+      "normalized_sha256": "7c753f714ecf4f921a709844b30d942bacbc8f335639244b7d7456c781e1a823"
+    },
+    "sbom-check": {
+      "raw_sha256": "9f7758f44976f02ad9b6207aace98138f5bab01cd629b0f0633c3aa5d84b610a",
+      "normalized_sha256": "331a2fd2b2c84fc08e7ebfc9af430f87dde37f8891e63591d999d433868b91ce"
+    },
+    "published-numbers-update": {
+      "raw_sha256": "bd645e88e20a077089bcbc585050710aae4666752fcb7078014a39c4ee60889c",
+      "normalized_sha256": "bd645e88e20a077089bcbc585050710aae4666752fcb7078014a39c4ee60889c"
+    },
+    "published-numbers": {
+      "raw_sha256": "2b06d48299d1193ba6e4c383ab24e03a57fcd99abdcc1cdf0af5728513998e73",
+      "normalized_sha256": "2b06d48299d1193ba6e4c383ab24e03a57fcd99abdcc1cdf0af5728513998e73"
+    },
+    "style": {
+      "raw_sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca",
+      "normalized_sha256": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca"
+    },
+    "secrets-code": {
+      "raw_sha256": "622c0ae4b975724075956b4bd40e2e843b3ebb540b0c3e471b05d4a9e9334ea2",
+      "normalized_sha256": "622c0ae4b975724075956b4bd40e2e843b3ebb540b0c3e471b05d4a9e9334ea2"
+    }
+  },
+  "log_normalization": "ANSI color, absolute checkout prefix and trailing whitespace removed; diagnostics and outcomes retained.",
+  "hosted": "No hosted result for this local follow-up. Do not apply frozen-branch runs to it."
+}

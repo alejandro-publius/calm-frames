@@ -1,0 +1,10 @@
+calm-frames-app@0.1.0 ./app
+├─┬ @amazon-devices/security-manager-lib@1.0.1767254405
+│ └─┬ react-native-tscodegen-types@0.66.0
+│   └─┬ react-native@0.60.6
+│     └─┬ @react-native-community/cli-platform-android@2.9.0 overridden
+│       └── logkitty@0.7.1 deduped
+└─┬ @react-native-community/cli@20.2.0
+  └─┬ @react-native-community/cli-doctor@20.2.0
+    └─┬ @react-native-community/cli-platform-android@20.2.0 overridden
+      └── logkitty@0.7.1 overridden

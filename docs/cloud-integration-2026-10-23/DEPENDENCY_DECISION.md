@@ -1,7 +1,11 @@
 # Residual dependency decision
 
-The smallest compatible reviewed patch updates only launch-editor to 2.14.2
-and top-level shell-quote to 1.11.0. The clean install, normal typecheck, lint,
+The latest isolated follow-up fixes the legacy logger in `2f187d1`, retaining
+the earlier compatible remediations documented below. Its [receipt](../../results/design-polish-2026-10-23/dependency-wave4/receipt.json)
+records the exact source and limits. The Mac acceptance snapshot stays unchanged.
+
+The first reviewed patch updated only launch-editor to 2.14.2
+and top-level shell-quote to 1.11.0. Its clean install, normal typecheck, lint,
 focused UI checks and pinned SBOM reproduction are recorded in the
 [product receipt](../../results/cloud-integration-2026-10-23/product-validation/receipt.json).
 The [complete residual ledger](../../results/cloud-integration-2026-10-23/product-validation/residual-risk.json)
@@ -152,6 +156,52 @@ The affected WebSocket leaves are major 1 and 3; the oldest fixed upstream
 version is major 5. They were excluded from this compatible batch. Other
 findings and expired exceptions still block Audit. No new exception, renewed
 date, owner acceptance, hosted result or release approval is implied.
+
+## Isolated legacy logger follow-up
+
+Code `2f187d1723f65c7a09fe566a1e13aea91bdbcbb4` scopes the existing legacy
+Android CLI **2.9.0** to **logkitty 0.7.1**, the patched logger already used by
+the modern CLI. The old copy was 0.6.1. Because this pre-1.0 minor version is
+outside the old consumer's `^0.6.0` range, its installed command was exercised
+directly before accepting the override. No SDK or CLI version changes.
+The [lock delta](../../results/design-polish-2026-10-23/dependency-wave4/lock-delta.json)
+records removal of the old logger and its unused dependency subtree, with no
+added nodes or changes to other locked packages.
+
+The [primary advisory](../../results/design-polish-2026-10-23/dependency-wave4/advisory.json)
+is critical [GHSA-v8v8-6859-qxm4](https://github.com/advisories/GHSA-v8v8-6859-qxm4),
+CVE-2020-8149. The [upstream fix](../../results/design-polish-2026-10-23/dependency-wave4/upstream-fix.json)
+replaces shell-interpolated cleanup and PID lookup with direct executable and
+argument calls. The user benefit is reducing build-host command-injection
+exposure while retaining the existing toolchain. It does not change the native
+interface, household data or playback protection.
+
+The regression reproduces interpolation in the old installed module, then
+verifies literal executable/argument handling and specific error codes in the
+patched module. The actual legacy command retains React Native tag filtering,
+priority filtering and formatted entry/error events. Process creation is
+intercepted throughout: no ADB command or device is run. These checks establish
+the tested host-call behavior, not arbitrary remote ADB argument safety or a
+current native module inventory.
+
+Fresh matching scans remove only that advisory, with none added:
+<!--n results/design-polish-2026-10-23/dependency-wave4/receipt.json:audit_delta.unique_advisories_before -->21<!--/n-->
+to
+<!--n results/design-polish-2026-10-23/dependency-wave4/receipt.json:audit_delta.unique_advisories_after -->20<!--/n-->
+unique IDs. The app-lock scan has no critical entries after this change.
+Propagated totals and severity reclassification are recorded separately in the
+[audit delta](../../results/design-polish-2026-10-23/dependency-wave4/audit-delta.json);
+their counts are not independent exploits. Other findings and expired exceptions
+still block Audit. This is not a whole-product vulnerability certification.
+
+The [receipt](../../results/design-polish-2026-10-23/dependency-wave4/receipt.json)
+records a clean locked install, normal typecheck/lint, installed build-tool
+regressions, prepared-library validation and reproduced SBOMs using the pinned
+generators. Existing peer/tree warnings are retained. The full app Jest suite
+was not rerun for this logger-only batch; its earlier result remains tied to
+its earlier source. The new logger regression joins the existing CI command,
+but no hosted result is claimed. Mac acceptance remains on `6a87937`; this
+isolated follow-up has not been added to that snapshot or published.
 
 ## Owner-approved narrow TOML deferral
 
