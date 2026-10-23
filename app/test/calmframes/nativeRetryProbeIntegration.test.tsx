@@ -17,6 +17,7 @@ test('explicit probe feeds the real Retry component and waits for release before
   act(() => jest.advanceTimersByTime(100));
   await act(async () => {mockMedia.currentTime = 11; mockMedia.fire('timeupdate'); await mockMedia.play();});
   await act(async () => mockMedia.fire('timeupdate'));
+  expect(view.getByTestId('native-retry-probe-trigger').props.hasTVPreferredFocus).toBe(true);
   fireEvent.press(view.getByTestId('native-retry-probe-trigger'));
   expect(mockMedia.paused).toBe(true);
   expect(view.getByTestId('player-error-retry')).toBeTruthy();

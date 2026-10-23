@@ -991,7 +991,7 @@ export const PlayerScreen = ({
             videoData={data}
             // Skip and Retry own OK while visible. The seekbar must not
             // reclaim focus when its controls appear behind either action.
-            skipOwnsSelect={cardOffersSkip(card) || retryAvailable}
+            skipOwnsSelect={cardOffersSkip(card) || retryAvailable || (!probeUsed && probeReady && probeEligible())}
             selectedCaptionId={captionID}
             sceneIntervals={guarding && guard.status === 'verified' ? guard.intervals : undefined}
             requestSeek={
@@ -1016,7 +1016,7 @@ export const PlayerScreen = ({
           recoveryBlocked={retryBlocked} closing={retryClosing} />}
         <View testID="native-retry-probe" style={{position: 'absolute', top: 36, right: 96, zIndex: 100, backgroundColor: '#193F3E', padding: 16}}>
           <Text style={{color: '#FFF8E8', fontSize: 24}}>TEST BUILD: synthetic failure</Text>
-          {!probeUsed && probeReady && probeEligible() ? <CalmButton label="Simulate failure" sound={false}
+          {!probeUsed && probeReady && probeEligible() ? <CalmButton label="Simulate failure" sound={false} hasTVPreferredFocus
             testID="native-retry-probe-trigger" onPress={injectProbeFailure} /> : null}
         </View>
       </View>
