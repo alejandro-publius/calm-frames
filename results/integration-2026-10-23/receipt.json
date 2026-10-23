@@ -1,0 +1,72 @@
+{
+  "app": {
+    "coverage_percent": {
+      "branches": 82.88,
+      "functions": 79.36,
+      "lines": 83.65,
+      "statements": 83.72
+    },
+    "eslint_errors": 0,
+    "eslint_warnings": 108,
+    "jest_failed": 0,
+    "jest_passed": 1801,
+    "jest_skipped": 4,
+    "snapshots_passed": 57,
+    "suites_passed": 171,
+    "typecheck": "passed",
+    "ui_flashmap": "no segment broke the thresholds under the wcag and broadcast profiles; negative control refused both hazards",
+    "ui_flashmap_screens_and_transitions": 79
+  },
+  "base_commit": "6193182e6095da0f763534124cb0cd1233b64af7",
+  "branch": "claude/eager-goldberg-1s5eb4",
+  "code_commit": "12125b2970342b5376b0bc7964383e547b407376",
+  "date": "2026-10-23",
+  "environment": {
+    "machine": "Linux x86_64 cloud container, running as root",
+    "node": "v22.22.0",
+    "python": "3.12.3",
+    "vega_simulator": false
+  },
+  "hosted_ci": {
+    "handoff_run": 39910746898,
+    "handoff_run_failed_tests": 5,
+    "this_branch": "not run: the session GitHub app gets HTTP 403 on workflow dispatch; dispatch from the Mac"
+  },
+  "kind": "cloud_integration_checkpoint",
+  "native": "not observed in this session; see docs/handoff-2026-10-23/MAC_ACCEPTANCE_CHECKLIST.md",
+  "not_run_here": [
+    "make mutate: no mutation targets a file changed on this branch; left to hosted CI"
+  ],
+  "python": {
+    "coverage_floor_percent": 90,
+    "coverage_percent": 90.33,
+    "deselected_slow": 2,
+    "failed": 1,
+    "failures": [
+      {
+        "as_unprivileged_user": "passed",
+        "reason": "the container runs as root, so chmod 0 does not stop the read the test expects to fail",
+        "test": "flashmap/tests/test_preparation_recovery.py::test_an_output_that_cannot_be_read_is_not_reused"
+      }
+    ],
+    "passed": 2001,
+    "skipped": 9
+  },
+  "repository_checks_passed": [
+    "eval/readme_sync.py --check",
+    "eval/style_check.py",
+    "scripts/check_pins.py",
+    "eval/verify_gate1_archive.py",
+    "eval/integration_diff_stats.py --check",
+    "eval/baseline_versions.py",
+    "eval/pattern_text_precision.py --check",
+    "node --test tools/ui_flashmap.test.mjs",
+    "npm run ui:flashmap",
+    "node tools/ui_flashmap.mjs --negative-control",
+    "eval/brand_assets_check.py",
+    "eval/report_page_check.py",
+    "make properties (241 property and fuzz tests)",
+    "npm --prefix hook run test:package",
+    "npm --prefix hook run check:package"
+  ]
+}

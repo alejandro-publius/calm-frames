@@ -9,7 +9,7 @@
 
 Calm Frames pairs a coastal, remote-first TV interface with an offline video preparation pipeline. Choose Ocean or Forest, inspect a title, and decide when to watch. McWay Falls offers five continuous minutes of a fixed coastal view at natural speed, then holds the final frame until you leave. Acadia, Sea otters and Forest open as still scenes, with short moving previews available separately.
 
-**Demo status:** a native Vega Virtual Device build is installed and app screenshots are available below. A local video cut is under review; **there is no published demo-video link or confirmed Devpost submission yet**. The repository remains private. The screenshots reflect installed source `60c3bbb`; see [build and publication status](docs/presentation/README.md#build-and-publication-status) for exact evidence and revision scope.
+**Demo status:** the [demo video](https://www.youtube.com/watch?v=6lAP1FH16vc) and the [Devpost entry](https://devpost.com/software/calm-frames) both show an earlier build than this branch, so they do not include the latest playback recovery, profile and onboarding work. A cut of the newer build is local and under review. The repository is private. The screenshots below reflect installed source `60c3bbb`, and the current build words a few labels differently; see [build and publication status](docs/presentation/README.md#build-and-publication-status) for exact evidence and revision scope.
 
 ![Calm Frames Home: a coastal map with Ocean and Forest, McWay Falls selected, and Watch as the primary action](docs/presentation/home.png)
 
@@ -167,6 +167,7 @@ These are recorded results with separate scopes, not a claim that the latest loc
 
 | Scope | Recorded result | Evidence |
 |---|---|---|
+| Integration branch, cloud session, October 23 | <!--n results/integration-2026-10-23/receipt.json:app.jest_passed -->1801<!--/n--> Jest tests passed, <!--n results/integration-2026-10-23/receipt.json:app.jest_skipped -->4<!--/n--> skipped; <!--n results/integration-2026-10-23/receipt.json:python.passed -->2001<!--/n--> Python tests passed, <!--n results/integration-2026-10-23/receipt.json:python.failed -->1<!--/n--> failed only because the container runs as root (it passes as an unprivileged user); TypeScript, lint and the app's own flash check passed. No simulator here, and hosted CI has not yet run on this commit | [Receipt](results/integration-2026-10-23/receipt.json), [integration status](docs/handoff-2026-10-23/INTEGRATION_STATUS.md) |
 | Full source baseline before the ending-bounds fix | <!--n results/mcway-activation-2026-10-21/verification.json:sourceChecks.fullJestPassed -->1698<!--/n--> Jest tests passed, <!--n results/mcway-activation-2026-10-21/verification.json:sourceChecks.skipped -->4<!--/n--> skipped; TypeScript passed; lint <!--n results/mcway-activation-2026-10-21/verification.json:sourceChecks.eslintErrors -->0<!--/n--> errors / <!--n results/mcway-activation-2026-10-21/verification.json:sourceChecks.eslintWarnings -->108<!--/n--> warnings | [Source receipt](results/mcway-activation-2026-10-21/verification.json), [Jest log](results/mcway-activation-2026-10-21/final-jest.log) |
 | Additional preparation and delivery checks | <!--n results/mcway-activation-2026-10-21/verification.json:sourceChecks.nodeChecksPassed -->94<!--/n--> Node checks and <!--n results/mcway-activation-2026-10-21/verification.json:sourceChecks.pythonDeliveryAndBudgetPassed -->121<!--/n--> Python delivery/budget checks passed | [Recorded verification](results/mcway-activation-2026-10-21/verification.json) |
 | Latest local ending fix | Targeted ending tests, TypeScript and focused lint passed; native package built and installed | [Exact build and capture record](docs/presentation/README.md#build-and-publication-status) |
@@ -175,7 +176,7 @@ These are recorded results with separate scopes, not a claim that the latest loc
 
 The older activation receipt's “not installed / Mac locked” note describes that earlier checkpoint. The linked current capture record documents the later installation and picture observations without rewriting the historical receipt.
 
-**Still open:** final edited demo review and public upload, Devpost submission, and subjective audio/comfort acceptance. Physical Fire TV measurements and full VoiceView acceptance are not claimed. Analyzer passes and simulator observations do not establish clinical safety. Calm Frames is not a medical device.
+**Still open:** replacing the demo video and updating the Devpost entry for this build, and subjective audio/comfort acceptance. Physical Fire TV measurements and full VoiceView acceptance are not claimed. Analyzer passes and simulator observations do not establish clinical safety. Calm Frames is not a medical device.
 
 <details>
 <summary>Historical screening corpus, separate from the shipped catalog</summary>

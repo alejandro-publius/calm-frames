@@ -2791,3 +2791,45 @@ footer. Remove the tagline and duplicate room-selection sentences; retain
 checkmarks, checked accessibility state, settings and protection logic. Targeted
 checks and native packaging pass. Installation waits for the user's private
 setup/profile action to finish, because unfinished setup exists only in memory.
+
+## 2026-10-23: one integration owner, and what CI found on the handoff
+
+Decision: integrate on `claude/eager-goldberg-1s5eb4`, fast forwarded from the
+verified handoff `6193182`, and fix what CI run 39910746898 found before any
+polish. Why: the handoff's own tests had not been run in full after `bd55e47`,
+and two of the red tests pointed at real focus problems. With the picker open,
+Watch and the active chip both asked for preferred focus; and the picker closed
+on the press into a profile button that stays disabled for the whole save, which
+can leave the remote with nothing focused. The picker now closes once nothing is
+saving, and Watch holds its request while the picker is open. Cost: the picker
+stays up for the length of a save, usually a moment.
+
+## 2026-10-23: decode.py's completeness check against the published conformance rows
+
+Decision: allow `flashmap/src/flashmap/decode.py` to differ from the conformance
+record, with the reason enforced by a test, rather than replace the published
+numbers. Why: the October 22 check only refuses a file that decodes fewer frames
+than it declares, and every one of the 3000 measured rows decoded every frame its
+encoder wrote, with no errors. The current code therefore reaches the same rows on
+those clips. A fresh run with the current tree was started on the cloud x86
+machine as an outside check and stopped after 890 of 3000 clips to free the
+machine for the test suites. In those 890 the new check refused nothing and no
+clip decoded short, but every encoded file came out a different size from the
+Mac's and 9 near-limit verdicts differed, for reasons that have nothing to do
+with decode.py: the encoder's output depends on the machine. A partial run is not
+evidence, so its journal was not kept, and the preregistered Mac measurement
+stays the published one. Cost: one more allowance in the test, held honest by
+`test_no_measured_clip_decoded_short`, and a finding worth a full cross-machine
+run after the submission.
+
+## 2026-10-23: critique fixes taken, and the ones left for the owner
+
+Decision: take the source-backed fixes (the approved safety sentence on How it
+works, Watch as the one main action, the 32 unit floor on paired cards, one
+ellipsis) and leave the look changes as proposals in
+`docs/handoff-2026-10-23/INTEGRATION_STATUS.md`. Why: each look change (a
+resting fill for the primary button, a lighter resting card edge, the panel
+size, PIN slots) should be judged on the simulator by the owner, and none of
+them can be seen from the cloud session. The analyzer identity in the
+preparation cache key is confirmed absent and also left: adding it re-keys every
+approved work directory and the next ingest would sign new maps.
