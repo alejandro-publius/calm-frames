@@ -22,9 +22,9 @@ export default function AmbientScene({ title, artwork, onBack, onPreview, previe
 }) {
   return <View testID={testID} style={styles.screen}>
     <Image testID={`${testID}-picture`} source={endingPicture ?? filmStill(artwork)} style={styles.picture} resizeMode="contain" fadeDuration={0} accessible={false} />
-    <View style={styles.caption}>
+    <View style={styles.caption} accessible accessibilityLabel={`${title}. ${endingPicture ? 'Playback finished. Final frame.' : ended ? 'Preview finished.' : 'Still scene. No motion or audio.'}`}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.detail}>{endingPicture ? 'The scene has settled. This final frame stays until you leave.' : ended ? 'Preview finished. This still scene stays until you leave.' : 'Still scene. No motion, no audio, no time limit.'}</Text>
+      {ended || endingPicture ? <Text style={styles.detail}>Finished</Text> : null}
     </View>
     <View style={styles.controls}>
       <CalmButton quiet sound={false} label="Back" testID={`${testID}-back`} hasTVPreferredFocus onPress={onBack} />

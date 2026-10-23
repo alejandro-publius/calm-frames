@@ -328,7 +328,7 @@ describe('the shelf a household lands on', () => {
     fireEvent.press(screen.getByTestId(poster));
     fireEvent.press(screen.getByTestId('kid-mode-details-play'));
     expect(navigate).not.toHaveBeenCalled();
-    expect(screen.getByText('Still scene. No motion, no audio, no time limit.')).toBeTruthy();
+    expect(screen.getByLabelText(/Still scene. No motion or audio./)).toBeTruthy();
     fireEvent.press(screen.getByTestId('kid-mode-ambient-preview'));
     expect(navigate.mock.calls[0][1].guarded.sha256).toBe(source);
     expect(navigate.mock.calls[0][1].ambientPreview).toBe(true);

@@ -196,7 +196,7 @@ const TitleDetailsScreen = ({
       <View style={styles.hero}>
         <View style={styles.heroCopy}>
           <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name), { color: WORLD.TEXT }]} testID={`${testID}-title`}>{presentation.name}</Text>
-          <Text style={[styles.meta, { color: WORLD.TEXT_DIM }]} testID={`${testID}-meta`}>{onAmbient ? `Still scene, no time limit. Optional video preview: ${Math.ceil(durationMs / 1000)} seconds.` : meta}</Text>
+          <Text style={[styles.meta, { color: WORLD.TEXT_DIM }]} testID={`${testID}-meta`}>{onAmbient ? 'Still scene' : meta}</Text>
         </View>
         <View style={styles.actionRail}>
           <View style={styles.buttons}>

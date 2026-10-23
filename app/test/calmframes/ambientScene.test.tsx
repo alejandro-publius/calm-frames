@@ -27,7 +27,7 @@ test('a still scene stays unchanged for an hour and starts motion only on an exp
 test('an ended preview is a still scene with no replay or timed navigation', () => {
   const back = jest.fn();
   const view = render(<AmbientScene title="Acadia" artwork="coastal" ended onBack={back} />);
-  expect(view.getByText('Preview finished. This still scene stays until you leave.')).toBeTruthy();
+  expect(view.getByText('Finished')).toBeTruthy();
   expect(view.queryByTestId('ambient-scene-preview')).toBeNull();
   expect(back).not.toHaveBeenCalled();
 });

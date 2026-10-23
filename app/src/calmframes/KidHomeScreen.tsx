@@ -304,7 +304,7 @@ const KidHomeScreen = ({
                   {selected && !split ? <View testID={`${testID}-selected-${entry.title.id}`} style={styles.selectionMark} pointerEvents="none" accessible={false}><Svg width={scale(32)} height={scale(32)} viewBox="0 0 32 32"><Path d="M6 16L13 23L27 8" fill="none" stroke={WORLD.TEXT} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" /></Svg></View> : null}
                   <View style={[styles.posterCopy, split ? styles.splitCopy : null]}>
                   <Text style={[styles.posterTitle, split ? styles.splitTitle : null, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
-                  {label.kind ? <Text style={[styles.posterQualifier, split ? styles.splitQualifier : null]} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{onAmbient && ambientArtworkFor(entry) ? split ? 'Still scene' : 'Still scene · stays open' : label.selectorMeta ?? label.kind}</Text> : null}
+                  {label.kind ? <Text style={[styles.posterQualifier, split ? styles.splitQualifier : null]} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{onAmbient && ambientArtworkFor(entry) ? 'Still scene' : label.selectorMeta ?? label.kind}</Text> : null}
                   </View>
                 </TouchableOpacity>;
               };

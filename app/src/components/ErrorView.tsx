@@ -11,11 +11,10 @@ interface ErrorViewProps { navigateBack: () => void; onRetry?: () => void; recov
 const ErrorView = ({ navigateBack, onRetry, recoveryBlocked, closing }: ErrorViewProps) => (
   <View style={styles.mainContainer} testID="player-error" accessibilityViewIsModal>
     <View style={styles.message} accessible accessibilityRole="alert" accessibilityLiveRegion="polite">
-      <Text style={styles.title} testID="error-boundary-label">Playback stopped</Text>
-      <Text style={styles.detail}>{closing ? 'Closing the player. You can go back while it finishes.' : recoveryBlocked ? 'The player could not close. Go back before trying again.' : onRetry ? 'Try again from your saved position.' : 'Go back and try playing the video again.'}</Text>
+      <Text style={styles.title} testID="error-boundary-label">{closing ? 'Closing player…' : recoveryBlocked ? 'Player could not close' : 'Playback stopped'}</Text>
     </View>
     <View style={styles.actions}>
-      {onRetry && <CalmButton primary label="Try again" onPress={onRetry} hasTVPreferredFocus sound={false} testID="player-error-retry" />}
+      {onRetry && <CalmButton primary label="Try again" accessibilityLabel="Try again from saved position" onPress={onRetry} hasTVPreferredFocus sound={false} testID="player-error-retry" />}
       <CalmButton primary={!onRetry} label="Go back" onPress={navigateBack} hasTVPreferredFocus={!onRetry} sound={false} testID="player-error-back" />
     </View>
   </View>
@@ -35,5 +34,4 @@ export const styles = StyleSheet.create({
   },
   message: { alignItems: 'flex-start', maxWidth: scale(1200), gap: scale(CALM_SPACE.ROW), backgroundColor: CALM_COLORS.SURFACE, padding: scale(CALM_SURFACE.INSET), borderRadius: scale(CALM_SURFACE.STATUS_RADIUS), borderLeftWidth: scale(8), borderLeftColor: CALM_COLORS.FAILED },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.FAILED, textAlign: 'left' },
-  detail: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
 });

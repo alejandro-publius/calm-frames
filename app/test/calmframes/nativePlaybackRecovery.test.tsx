@@ -92,7 +92,7 @@ test('unconfirmed teardown refuses another decoder and retains Back', async () =
   act(() => mockError(true)); mockDestroy.mockReturnValue(false);
   fireEvent.press(view.getByTestId('player-error-retry')); await settle();
   expect(view.queryByTestId('player-error-retry')).toBeNull();
-  expect(view.getByText('The player could not close. Go back before trying again.')).toBeTruthy();
+  expect(view.getByText('Player could not close')).toBeTruthy();
   expect(view.getByTestId('player-error-back')).toBeTruthy();
 });
 test('completion clears history and retains the continuous ending still', async () => {
@@ -192,7 +192,7 @@ test('delayed teardown stays covered, then requires explicit Retry after confirm
   let confirm!: (value: boolean) => void;
   mockDestroy.mockImplementationOnce(() => new Promise<boolean>(resolve => {confirm = resolve;}));
   fireEvent.press(view.getByTestId('player-error-retry')); await settle();
-  expect(view.getByText('Closing the player. You can go back while it finishes.')).toBeTruthy();
+  expect(view.getByText('Closing player…')).toBeTruthy();
   expect(view.queryByTestId('player-error-retry')).toBeNull();
   act(() => jest.advanceTimersByTime(20000));
   expect(view.getByTestId('player-error')).toBeTruthy();
