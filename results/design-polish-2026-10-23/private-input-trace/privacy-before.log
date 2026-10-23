@@ -1,0 +1,135 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --ci --coverage=false --runTestsByPath test/calmframes/privateInputTrace.test.tsx
+
+ FAIL  test/calmframes/privateInputTrace.test.tsx
+  ✕ first-run PIN keys keep their actions and focus without revealing digits in debug traces (259 ms)
+  ✕ parent-area PIN keys keep their actions and focus without revealing digits in debug traces (155 ms)
+  ✕ the name grid stays private while typing, focusing every key and saving (975 ms)
+  ✓ ordinary navigation keeps its focus trace and callbacks (4 ms)
+
+  ● first-run PIN keys keep their actions and focus without revealing digits in debug traces
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 13
+
+    - Array []
+    + Array [
+    +   "CALM_TRACE focus first-run-key-1",
+    +   "CALM_TRACE focus first-run-key-2",
+    +   "CALM_TRACE focus first-run-key-3",
+    +   "CALM_TRACE focus first-run-key-4",
+    +   "CALM_TRACE focus first-run-key-5",
+    +   "CALM_TRACE focus first-run-key-6",
+    +   "CALM_TRACE focus first-run-key-7",
+    +   "CALM_TRACE focus first-run-key-8",
+    +   "CALM_TRACE focus first-run-key-9",
+    +   "CALM_TRACE focus first-run-key-0",
+    +   "CALM_TRACE focus first-run-key-delete",
+    + ]
+
+      42 |   expect(onDigit.mock.calls.map(call => call[0])).toEqual([... '1234567890']);
+      43 |   expect(onDelete).toHaveBeenCalledTimes(1);
+    > 44 |   expect(focusLines()).toEqual([]);
+         |                        ^
+      45 |
+      46 |   view.rerender(<PinKeypad disabled entered={0} onDigit={onDigit} onDelete={onDelete} idPrefix={idPrefix} />);
+      47 |   fireEvent(view.getByTestId(`${idPrefix}-key-1`), 'focus');
+
+      at toEqual (test/calmframes/privateInputTrace.test.tsx:44:24)
+
+  ● parent-area PIN keys keep their actions and focus without revealing digits in debug traces
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 13
+
+    - Array []
+    + Array [
+    +   "CALM_TRACE focus parent-area-key-1",
+    +   "CALM_TRACE focus parent-area-key-2",
+    +   "CALM_TRACE focus parent-area-key-3",
+    +   "CALM_TRACE focus parent-area-key-4",
+    +   "CALM_TRACE focus parent-area-key-5",
+    +   "CALM_TRACE focus parent-area-key-6",
+    +   "CALM_TRACE focus parent-area-key-7",
+    +   "CALM_TRACE focus parent-area-key-8",
+    +   "CALM_TRACE focus parent-area-key-9",
+    +   "CALM_TRACE focus parent-area-key-0",
+    +   "CALM_TRACE focus parent-area-key-delete",
+    + ]
+
+      42 |   expect(onDigit.mock.calls.map(call => call[0])).toEqual([... '1234567890']);
+      43 |   expect(onDelete).toHaveBeenCalledTimes(1);
+    > 44 |   expect(focusLines()).toEqual([]);
+         |                        ^
+      45 |
+      46 |   view.rerender(<PinKeypad disabled entered={0} onDigit={onDigit} onDelete={onDelete} idPrefix={idPrefix} />);
+      47 |   fireEvent(view.getByTestId(`${idPrefix}-key-1`), 'focus');
+
+      at toEqual (test/calmframes/privateInputTrace.test.tsx:44:24)
+
+  ● the name grid stays private while typing, focusing every key and saving
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 37
+
+    - Array []
+    + Array [
+    +   "CALM_TRACE focus profile-name-key-a",
+    +   "CALM_TRACE focus profile-name-key-b",
+    +   "CALM_TRACE focus profile-name-key-c",
+    +   "CALM_TRACE focus profile-name-key-d",
+    +   "CALM_TRACE focus profile-name-key-e",
+    +   "CALM_TRACE focus profile-name-key-f",
+    +   "CALM_TRACE focus profile-name-key-g",
+    +   "CALM_TRACE focus profile-name-key-h",
+    +   "CALM_TRACE focus profile-name-key-i",
+    +   "CALM_TRACE focus profile-name-key-j",
+    +   "CALM_TRACE focus profile-name-key-k",
+    +   "CALM_TRACE focus profile-name-key-l",
+    +   "CALM_TRACE focus profile-name-key-m",
+    +   "CALM_TRACE focus profile-name-key-n",
+    +   "CALM_TRACE focus profile-name-key-o",
+    +   "CALM_TRACE focus profile-name-key-p",
+    +   "CALM_TRACE focus profile-name-key-q",
+    +   "CALM_TRACE focus profile-name-key-r",
+    +   "CALM_TRACE focus profile-name-key-s",
+    +   "CALM_TRACE focus profile-name-key-t",
+    +   "CALM_TRACE focus profile-name-key-u",
+    +   "CALM_TRACE focus profile-name-key-v",
+    +   "CALM_TRACE focus profile-name-key-w",
+    +   "CALM_TRACE focus profile-name-key-x",
+    +   "CALM_TRACE focus profile-name-key-y",
+    +   "CALM_TRACE focus profile-name-key-z",
+    +   "CALM_TRACE focus profile-name-key-shift",
+    +   "CALM_TRACE focus profile-name-key-space",
+    +   "CALM_TRACE focus profile-name-key-delete",
+    +   "CALM_TRACE focus profile-name-key-delete",
+    +   "CALM_TRACE focus profile-name-key-delete",
+    +   "CALM_TRACE focus profile-name-key-delete",
+    +   "CALM_TRACE focus profile-name-key-s",
+    +   "CALM_TRACE focus profile-name-key-a",
+    +   "CALM_TRACE focus profile-name-key-m",
+    + ]
+
+      68 |   expect(view.getByTestId('profile-name-draft').props.children).toBe('Sam');
+      69 |   expect(view.getByTestId('profile-name-key-a').props.accessibilityLabel).toBe('Small A');
+    > 70 |   expect(focusLines()).toEqual([]);
+         |                        ^
+      71 |
+      72 |   const save = view.getByTestId('profile-name-save');
+      73 |   fireEvent(save, 'focus');
+
+      at Object.toEqual (test/calmframes/privateInputTrace.test.tsx:70:24)
+
+Test Suites: 1 failed, 1 total
+Tests:       3 failed, 1 passed, 4 total
+Snapshots:   0 total
+Time:        3.069 s
+Ran all test suites within paths "test/calmframes/privateInputTrace.test.tsx".

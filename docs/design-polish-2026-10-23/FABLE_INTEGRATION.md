@@ -2,8 +2,27 @@
 
 Fable's finished name editor is integrated with the existing cloud dependency
 and visual work on `codex/design-polish-2026-10-23`. Implementation and cloud
-review are complete. Native acceptance is pending. This is unpublished work;
-the frozen integration branch and submitted fallback remain unchanged.
+review are complete. The owner now reports Fable completed native name-editor
+acceptance on `6a87937`. Its receipt ZIP and exact package identity have not yet
+arrived here; receipt verification and owner comfort review remain pending.
+This is unpublished work; the frozen integration and submitted fallback remain unchanged.
+
+## Follow-up after Fable's native recap
+
+The [owner-pasted recap](../../results/design-polish-2026-10-23/private-input-trace/fable-reported-status.json)
+reports completed checks and a saved rollback package. It also identified
+letter-key identifiers in debug focus logs. Source review reproduced that
+issue and the same path for PIN digits. Code `07db296` on the isolated cloud
+follow-up suppresses those private-input traces while retaining labels,
+focus feedback, callbacks and ordinary navigation diagnostics.
+The [privacy receipt](../../results/design-polish-2026-10-23/private-input-trace/receipt.json)
+records the failing reproduction, focused passing checks and normal typecheck/
+lint. Layout, player, media and signing stay unchanged. No new native build is
+claimed, and Fable's `6a87937` snapshot remains intact.
+
+Next: receive and verify the receipt ZIP, map its actual observations to the
+numbered checklist, and record the owner's picture/audio/comfort review.
+Do not repeat accepted work or claim the newer cloud follow-up was installed.
 
 ## Exact source and transfer
 
@@ -104,7 +123,8 @@ returns Parents behind the PIN after retry; source tests prove that route,
 not its native appearance. The native platform keyboard was not observed and
 is not used by this implementation.
 
-Item 5 remains partially completed until native acceptance. Item 12 still has
+Item 5 remains partially completed pending receipt verification, owner comfort
+and selection of the final combined source. Item 12 still has
 dependency and hosted-check blockers. Item 18's source reconciliation is done;
 the next evidence is the Mac package identity and acceptance receipt. The
 [original numbered checklist](../cloud-integration-2026-10-23/CHECKPOINT.md)
