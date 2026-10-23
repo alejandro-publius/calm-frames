@@ -33871,40 +33871,6 @@
     },
     {
       "type": "library",
-      "name": "map-age-cleaner",
-      "version": "0.1.3",
-      "bom-ref": "calm-frames-app@0.1.0|map-age-cleaner@0.1.3",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT",
-            "acknowledgement": "declared"
-          }
-        }
-      ],
-      "purl": "pkg:npm/map-age-cleaner@0.1.3",
-      "externalReferences": [
-        {
-          "url": "https://registry.npmjs.org/map-age-cleaner/-/map-age-cleaner-0.1.3.tgz",
-          "type": "distribution",
-          "hashes": [
-            {
-              "alg": "SHA-512",
-              "content": "6c9cf1ea73283fa3c32cf0459a0efec5129e159bc56e832b1a5c66363f4296f5f9dcaae6bcce5b5c55c45a36f3e1ccf50059fe8d627dcff0c94b3ee1aecd30df"
-            }
-          ],
-          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "cdx:npm:package:path",
-          "value": "node_modules/map-age-cleaner"
-        }
-      ]
-    },
-    {
-      "type": "library",
       "name": "map-cache",
       "version": "0.2.2",
       "bom-ref": "calm-frames-app@0.1.0|map-cache@0.2.2",
@@ -40064,40 +40030,6 @@
     },
     {
       "type": "library",
-      "name": "p-defer",
-      "version": "1.0.0",
-      "bom-ref": "calm-frames-app@0.1.0|p-defer@1.0.0",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT",
-            "acknowledgement": "declared"
-          }
-        }
-      ],
-      "purl": "pkg:npm/p-defer@1.0.0",
-      "externalReferences": [
-        {
-          "url": "https://registry.npmjs.org/p-defer/-/p-defer-1.0.0.tgz",
-          "type": "distribution",
-          "hashes": [
-            {
-              "alg": "SHA-512",
-              "content": "c01df07c0c59a64d80cce7d430934bf9ddfac68b61452ca3f045ce6b87fa18ca980cdf4125a6922126ec93ec12f5a6e69de6d5c3de42d8a6f9b7ce549a90b1bb"
-            }
-          ],
-          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "cdx:npm:package:path",
-          "value": "node_modules/p-defer"
-        }
-      ]
-    },
-    {
-      "type": "library",
       "name": "p-finally",
       "version": "1.0.0",
       "bom-ref": "calm-frames-app@0.1.0|p-finally@1.0.0",
@@ -40127,40 +40059,6 @@
         {
           "name": "cdx:npm:package:path",
           "value": "node_modules/p-finally"
-        }
-      ]
-    },
-    {
-      "type": "library",
-      "name": "p-is-promise",
-      "version": "2.1.0",
-      "bom-ref": "calm-frames-app@0.1.0|p-is-promise@2.1.0",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT",
-            "acknowledgement": "declared"
-          }
-        }
-      ],
-      "purl": "pkg:npm/p-is-promise@2.1.0",
-      "externalReferences": [
-        {
-          "url": "https://registry.npmjs.org/p-is-promise/-/p-is-promise-2.1.0.tgz",
-          "type": "distribution",
-          "hashes": [
-            {
-              "alg": "SHA-512",
-              "content": "6375b4c2544f2bc64c45b36af7b978339a2d8a8780e659b5cfb6e4364c4291af0748f8d1d314569a90a673dbad89a2cff496f5783f0181e2314d6e00205e393e"
-            }
-          ],
-          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "cdx:npm:package:path",
-          "value": "node_modules/p-is-promise"
         }
       ]
     },
@@ -43220,40 +43118,6 @@
         },
         {
           "type": "library",
-          "name": "cliui",
-          "version": "4.1.0",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|cliui@4.1.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "ISC",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/cliui@4.1.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/cliui/-/cliui-4.1.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "e051be4521bd0cbeee130454657667dd24b7e038833dfccfd153a2130b545a513e011d84220fa14b2beb2205147e176047f52401e5b640781e3fe856ad7b3b8d"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/cliui"
-            }
-          ]
-        },
-        {
-          "type": "library",
           "name": "color-convert",
           "version": "1.9.3",
           "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|color-convert@1.9.3",
@@ -43732,40 +43596,6 @@
         },
         {
           "type": "library",
-          "name": "find-up",
-          "version": "3.0.0",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|find-up@3.0.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/find-up@3.0.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/find-up/-/find-up-3.0.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "d720fa4662c8d5705fc6e82f391c25724e9fef9b582fe891d23ab0b0eacec4c672198a94b83849d25e005dd3b5897fc54ecf5c040304935816484c759126f296"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/find-up"
-            }
-          ]
-        },
-        {
-          "type": "library",
           "name": "fs-extra",
           "version": "7.0.1",
           "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|fs-extra@7.0.1",
@@ -43966,40 +43796,6 @@
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/react-native-tscodegen-types/node_modules/import-fresh"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "invert-kv",
-          "version": "2.0.0",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|invert-kv@2.0.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/invert-kv@2.0.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/invert-kv/-/invert-kv-2.0.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "c0f56fff2fd043f5228ab8ffbe1de83fed56c3e0167a19a2d60e5f15618f17a22908108356b8601d132facb7dd61cc038774096c65c35b8240bb3c4494b4aa28"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/invert-kv"
             }
           ]
         },
@@ -44518,142 +44314,6 @@
                   "value": "node_modules/react-native-tscodegen-types/node_modules/jest-worker/node_modules/supports-color"
                 }
               ]
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "lcid",
-          "version": "2.0.0",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|lcid@2.0.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/lcid@2.0.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/lcid/-/lcid-2.0.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "6af3c46fc3fc1069f05ca0a5c2c35482bc958e595c46ab4c61ae3d353b1b41a818b93d437179e5d7dd79a315a3a321ab5d1eb31ff63465cf7ac56b0f7280ca78"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/lcid"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "locate-path",
-          "version": "3.0.0",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|locate-path@3.0.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/locate-path@3.0.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/locate-path/-/locate-path-3.0.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "ec03bbe3cc169c884da80b9ab72d995879101d148d7cf548b0f21fc043963b6d8099aa15ad66af94e70c4799f34cb358be9dfa5f6db4fe669a46cade7351bae4"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/locate-path"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "logkitty",
-          "version": "0.6.1",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|logkitty@0.6.1",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/logkitty@0.6.1",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/logkitty/-/logkitty-0.6.1.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "707b9737ca9466ecd7ffb901e95c92ee4078c720f6e1ef20c875c814d848bfe7e35b73fe8c45cd5218f4a3feea589b6fed46696e73e052aceefc0650f1102ac5"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/logkitty"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "mem",
-          "version": "4.3.0",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|mem@4.3.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/mem@4.3.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/mem/-/mem-4.3.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "a97d9b1b8f294ea6115660c1dfbae7ffa3d3ecb711f13ee8017ddb7fdf6ed53b759f3c587f1920a83c14c2894f957c1e3345f304e045cd2c7891fa7b28fd6cff"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/mem"
             }
           ]
         },
@@ -45683,74 +45343,6 @@
         },
         {
           "type": "library",
-          "name": "p-limit",
-          "version": "2.3.0",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|p-limit@2.3.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/p-limit@2.3.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/p-limit/-/p-limit-2.3.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "ffff3c985592271f25c42cf07400014c92f6332581d76f9e218ecc0cbd92a8b98091e294f6ac51bd6b92c938e6dc5526a4110cb857dc90022a11a546503c5beb"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/p-limit"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "p-locate",
-          "version": "3.0.0",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|p-locate@3.0.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/p-locate@3.0.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/p-locate/-/p-locate-3.0.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "c7ed76c3f4e8fb81857e0261044a620dc2e8cd12467a063e122effcf4b522e4326c4664dc9b54c49f5a3f5a267f19e4573b74150d24e39580fbf61fb230ba549"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/p-locate"
-            }
-          ]
-        },
-        {
-          "type": "library",
           "name": "parse-json",
           "version": "4.0.0",
           "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|parse-json@4.0.0",
@@ -45780,40 +45372,6 @@
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/react-native-tscodegen-types/node_modules/parse-json"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "path-exists",
-          "version": "3.0.0",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|path-exists@3.0.0",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/path-exists@3.0.0",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/path-exists/-/path-exists-3.0.0.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "6e90bb198c220d8438c182def8503c96146385008c7101ae4a0186a83920fd07ab456c3d0a61914f4892395452649dbd34c2d9808cea6a58c9eb7a1a2f834825"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/path-exists"
             }
           ]
         },
@@ -47116,144 +46674,6 @@
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/react-native-tscodegen-types/node_modules/ws"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "y18n",
-          "version": "4.0.3",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|y18n@4.0.3",
-          "licenses": [
-            {
-              "license": {
-                "id": "ISC",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/y18n@4.0.3",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/y18n/-/y18n-4.0.3.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "24a86a4cec12aea340d4d639952ced2751ab06252874b326219b8b88368c449fa2b4577e001544f170633af2162fead2a8d0c2ef82c24859a56ff538519e2125"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/y18n"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "yargs-parser",
-          "version": "11.1.1",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|yargs-parser@11.1.1",
-          "licenses": [
-            {
-              "license": {
-                "id": "ISC",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/yargs-parser@11.1.1",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/yargs-parser/-/yargs-parser-11.1.1.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "0ba901fd624389ac4e34b2509c5f1c731f5211ea134cb7a4f1155b68e22cac0512f15ac11177e67929c2671ca073e5c2dac34c048c0e3a77dcc62ca78c7b1549"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/yargs-parser"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "yargs",
-          "version": "12.0.5",
-          "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|yargs@12.0.5",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/yargs@12.0.5",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/yargs/-/yargs-12.0.5.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "2e1cfc4cb6989f1abfd8e6ea1c3aa5f1d5fc0898bdee81f1ae351c62dcca6dbca43ed556f5607ea68c48f8d336508cec32034265321fd00430b232b9c8c02a67"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/react-native-tscodegen-types/node_modules/yargs"
-            }
-          ],
-          "components": [
-            {
-              "type": "library",
-              "name": "os-locale",
-              "version": "3.1.0",
-              "bom-ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|yargs@12.0.5|os-locale@3.1.0",
-              "licenses": [
-                {
-                  "license": {
-                    "id": "MIT",
-                    "acknowledgement": "declared"
-                  }
-                }
-              ],
-              "purl": "pkg:npm/os-locale@3.1.0",
-              "externalReferences": [
-                {
-                  "url": "https://registry.npmjs.org/os-locale/-/os-locale-3.1.0.tgz",
-                  "type": "distribution",
-                  "hashes": [
-                    {
-                      "alg": "SHA-512",
-                      "content": "67c977478c1858ce34ff9d99f92dbae6891f163f0ab76702d8c298fb1362de416cf97188ed65eefc8df4f5041061b456e228e267ecb1b3da6a121261d03a96dd"
-                    }
-                  ],
-                  "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-                }
-              ],
-              "properties": [
-                {
-                  "name": "cdx:npm:package:path",
-                  "value": "node_modules/react-native-tscodegen-types/node_modules/yargs/node_modules/os-locale"
-                }
-              ]
             }
           ]
         }
@@ -64664,12 +64084,6 @@
       ]
     },
     {
-      "ref": "calm-frames-app@0.1.0|map-age-cleaner@0.1.3",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|p-defer@1.0.0"
-      ]
-    },
-    {
       "ref": "calm-frames-app@0.1.0|map-cache@0.2.2"
     },
     {
@@ -65790,13 +65204,7 @@
       ]
     },
     {
-      "ref": "calm-frames-app@0.1.0|p-defer@1.0.0"
-    },
-    {
       "ref": "calm-frames-app@0.1.0|p-finally@1.0.0"
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|p-is-promise@2.1.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|p-limit@3.1.0",
@@ -66156,10 +65564,10 @@
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|@react-native-community/cli-platform-android@2.9.0",
       "dependsOn": [
         "calm-frames-app@0.1.0|jetifier@1.6.8",
+        "calm-frames-app@0.1.0|logkitty@0.7.1",
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|@react-native-community/cli-tools@2.8.3",
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|chalk@2.4.2",
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|execa@1.0.0",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|logkitty@0.6.1",
         "calm-frames-app@0.1.0|slash@3.0.0",
         "calm-frames-app@0.1.0|xmldoc@1.3.0"
       ]
@@ -66288,14 +65696,6 @@
       ]
     },
     {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|cliui@4.1.0",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|string-width@2.1.1",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|strip-ansi@4.0.0",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|wrap-ansi@2.1.0"
-      ]
-    },
-    {
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|color-convert@1.9.3",
       "dependsOn": [
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|color-name@1.1.3"
@@ -66379,12 +65779,6 @@
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|fill-range@4.0.0|is-extendable@0.1.1"
     },
     {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|find-up@3.0.0",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|locate-path@3.0.0"
-      ]
-    },
-    {
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|fs-extra@7.0.1",
       "dependsOn": [
         "calm-frames-app@0.1.0|graceful-fs@4.2.11",
@@ -66417,9 +65811,6 @@
         "calm-frames-app@0.1.0|caller-path@2.0.0",
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|resolve-from@3.0.0"
       ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|invert-kv@2.0.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|is-number@3.0.0",
@@ -66526,35 +65917,6 @@
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|jest-worker@24.9.0|supports-color@6.1.0",
       "dependsOn": [
         "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|has-flag@3.0.0"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|lcid@2.0.0",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|invert-kv@2.0.0"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|locate-path@3.0.0",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|p-locate@3.0.0",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|path-exists@3.0.0"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|logkitty@0.6.1",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|ansi-fragments@0.2.1",
-        "calm-frames-app@0.1.0|dayjs@1.11.23",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|yargs@12.0.5"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|mem@4.3.0",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|map-age-cleaner@0.1.3",
-        "calm-frames-app@0.1.0|mimic-fn@2.1.0",
-        "calm-frames-app@0.1.0|p-is-promise@2.1.0"
       ]
     },
     {
@@ -66860,26 +66222,11 @@
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|ob1@0.55.0"
     },
     {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|p-limit@2.3.0",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|p-try@2.2.0"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|p-locate@3.0.0",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|p-limit@2.3.0"
-      ]
-    },
-    {
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|parse-json@4.0.0",
       "dependsOn": [
         "calm-frames-app@0.1.0|error-ex@1.3.4",
         "calm-frames-app@0.1.0|json-parse-better-errors@1.0.2"
       ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|path-exists@3.0.0"
     },
     {
       "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|path-key@2.0.1"
@@ -67112,41 +66459,6 @@
       "dependsOn": [
         "calm-frames-app@0.1.0|options@0.0.6",
         "calm-frames-app@0.1.0|ultron@1.0.2"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|y18n@4.0.3"
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|yargs-parser@11.1.1",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|camelcase@5.3.1",
-        "calm-frames-app@0.1.0|decamelize@1.2.0"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|yargs@12.0.5",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|decamelize@1.2.0",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|cliui@4.1.0",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|find-up@3.0.0",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|get-caller-file@1.0.3",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|require-main-filename@1.0.1",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|string-width@2.1.1",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|y18n@4.0.3",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|yargs-parser@11.1.1",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|yargs@12.0.5|os-locale@3.1.0",
-        "calm-frames-app@0.1.0|require-directory@2.1.1",
-        "calm-frames-app@0.1.0|set-blocking@2.0.0",
-        "calm-frames-app@0.1.0|which-module@2.0.1"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|yargs@12.0.5|os-locale@3.1.0",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|execa@1.0.0",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|lcid@2.0.0",
-        "calm-frames-app@0.1.0|react-native-tscodegen-types@0.66.0|mem@4.3.0"
       ]
     },
     {

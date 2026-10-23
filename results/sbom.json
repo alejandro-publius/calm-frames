@@ -14,14 +14,14 @@
     },
     "SBOM.app.cdx.json": {
       "spec_version": "1.6",
-      "components": 1107,
-      "bytes": 2253233
+      "components": 1104,
+      "bytes": 2228806
     }
   },
   "published": {
     "ingest_components": 12,
     "cdk_components": 5,
-    "app_components": 1107,
+    "app_components": 1104,
     "base_image_digest": "sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2"
   }
 }
