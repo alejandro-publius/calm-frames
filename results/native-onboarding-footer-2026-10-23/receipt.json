@@ -1,0 +1,29 @@
+{
+  "source_commit": "4b04877f60101b33fc2e93e1e56413bcd165b051",
+  "reported_defect": "Step 3 room footer clipped below simulator viewport in user-supplied screenshot",
+  "change": "bounded scroll body and nonshrinking sibling footer on preset, room and review; removed brand tagline and duplicate selected room sentences",
+  "settings_pin_and_guard_logic_changed": false,
+  "checks": {
+    "focused_tests": 57,
+    "typescript": "passed",
+    "eslint": "passed, zero errors and warnings",
+    "native_build": "passed",
+    "prepared_media_and_provenance": "passed"
+  },
+  "package": {
+    "path": "build/release/native-onboarding-footer-20261023/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "bytes": 132597309,
+    "sha256": "2bfac62fe2bd992186dd5d948a18b47dc5392f5e003c1cc49280be2476963101"
+  },
+  "installed": false,
+  "native_layout_or_focus_observed": false,
+  "reason": "user completing private Parents/Add a kid step; wait for ready before restarting app",
+  "production_installed_source": "51598761dc557f9bf95459f11ec3284ae604d333",
+  "capture_and_app_logs": "off",
+  "user_reset_confirmation": "parent relayed new PIN setup confirmation at 04:32 UTC",
+  "remaining": [
+    "install without uninstall after user returns Home and confirms ready",
+    "native non-secret room/footer and D-pad verification; never capture PIN entry",
+    "cross-profile and explicit Retry acceptance remain separate"
+  ]
+}

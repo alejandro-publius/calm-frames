@@ -2782,3 +2782,12 @@ Decision: lead with a concise product statement, real native Home and paired Det
 ## 2026-10-22: reconcile verified cloud transfers without changing the product
 
 Decision: verify both attached archives and their Git inventories, retain Claude's history, then cherry-pick only the combined release checks and the completed judging package in a new candidate worktree. Preserve the judging tree and export byte for byte; explain later evidence in `CLOUD_RELEASE_CHECKPOINT.md`. The original native coastal application, media and trust remain unchanged. Rejected browser UI and superseded separate fixes are excluded. Why: transfer real completed work without duplicating it or turning technical receipts into human acceptance. Cost: focused stub regressions and documentation only; no install, benchmark rerun, native action or publication.
+
+### 2026-10-23: keep setup actions inside the TV viewport
+
+A user screenshot showed the room step footer clipped below the window. Move
+preset, room and review actions out of the scrolling body into a nonshrinking
+footer. Remove the tagline and duplicate room-selection sentences; retain
+checkmarks, checked accessibility state, settings and protection logic. Targeted
+checks and native packaging pass. Installation waits for the user's private
+setup/profile action to finish, because unfinished setup exists only in memory.
