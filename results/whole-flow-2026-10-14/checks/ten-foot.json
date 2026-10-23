@@ -1,0 +1,3629 @@
+{
+  "note": "Measured off the rendered screens. The virtual device cannot be photographed, so these numbers are the ten foot check rather than a screenshot. Sizes are 1080p units, ratios are WCAG 2.2 contrast ratios.",
+  "measuredBy": "app/test/calmframes/tenFoot.test.tsx",
+  "floors": {
+    "text_size_units": 32,
+    "text_contrast": 4.5,
+    "focus_ring_units": 6,
+    "focus_contrast": 3,
+    "safe_margin_units": {
+      "x": 96,
+      "y": 54
+    }
+  },
+  "totals": {
+    "screens": 27,
+    "lines_of_text": 461,
+    "controls": 178,
+    "smallest_text_units": 32,
+    "worst_text_contrast": 5.92,
+    "worst_focus_contrast": 4.6
+  },
+  "screens": [
+    {
+      "screen": "household-loading",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 8.78,
+      "controls": 0,
+      "text": [
+        {
+          "text": "Calm Frames",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Opening your library",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Loading your saved viewing settings.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        }
+      ]
+    },
+    {
+      "screen": "household-error",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.53,
+      "controls": 1,
+      "text": [
+        {
+          "text": "Calm Frames",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Your settings couldn't be opened or saved",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Your library stays closed until your settings and PIN are available. Try again.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Try again",
+          "units": 36,
+          "colour": "#17323C",
+          "on": "#E6A957",
+          "contrast": 6.53
+        }
+      ]
+    },
+    {
+      "screen": "first-run-pin",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.88,
+      "controls": 11,
+      "text": [
+        {
+          "text": "Calm Frames",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Step 1 of 4",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "A calmer way to watch",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Choose a PIN",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Your PIN keeps parental controls locked",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Choose four digits you will remember. The PIN stays on this television and is never sent anywhere.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "1",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "2",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "3",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "4",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "5",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "6",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "7",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "8",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "9",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "0",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Delete",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "first-run-preset",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 5.92,
+      "controls": 4,
+      "text": [
+        {
+          "text": "Calm Frames",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Step 2 of 4",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "A calmer way to watch",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Choose a viewing preset",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "You can change this later in parental controls.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Standard",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Uses the WCAG 2.3.1 flash thresholds included in every preset.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#234B55",
+          "contrast": 5.92
+        },
+        {
+          "text": "Chosen",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Broadcast",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Adds broadcast flash limits to the Standard preset.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Extra cautious",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Uses Broadcast limits and covers the picture a little longer around each hidden part.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Next",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "first-run-room",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 7.82,
+      "controls": 16,
+      "text": [
+        {
+          "text": "Calm Frames",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Step 3 of 4",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "A calmer way to watch",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Your TV and seating",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A bigger television or a closer sofa can only add hidden parts. It never takes any away.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Television size",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "32 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "43 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "50 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "55 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "65 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "75 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "85 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "55 inch is chosen.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Viewing distance",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "4 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "5 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "6 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "7 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "8 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "10 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "12 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "8 feet away is chosen.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Back",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Next",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "first-run-explainer",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.88,
+      "controls": 2,
+      "text": [
+        {
+          "text": "Calm Frames",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Step 4 of 4",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "A calmer way to watch",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "How Calm Frames works",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Your household",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Standard",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "55 inch television, seats about 8 feet away",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Your library shows the titles available with these viewing settings.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Calm Frames prepares each story before you watch.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A card says what is coming, and what was hidden.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "About 20 seconds to read. You can find it again under parental controls.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Back",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Open library",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "kid-home",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.53,
+      "controls": 5,
+      "text": [
+        {
+          "text": "Calm Frames",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A calmer way to watch",
+          "units": 32,
+          "colour": "#E6A957",
+          "on": "#102F3A",
+          "contrast": 6.83
+        },
+        {
+          "text": "Title ok",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A quieter picture. Sound and stories carry on.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Watch now",
+          "units": 36,
+          "colour": "#17323C",
+          "on": "#E6A957",
+          "contrast": 6.53
+        },
+        {
+          "text": "About this story",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "How it works",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "More to watch",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Title ok",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "1 more title is unavailable. Open Parental controls to see why.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        }
+      ]
+    },
+    {
+      "screen": "kid-home-profiles",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.53,
+      "controls": 6,
+      "text": [
+        {
+          "text": "Calm Frames",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Robin",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A calmer way to watch",
+          "units": 32,
+          "colour": "#E6A957",
+          "on": "#102F3A",
+          "contrast": 6.83
+        },
+        {
+          "text": "Title ok",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A quieter picture. Sound and stories carry on.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Watch now",
+          "units": 36,
+          "colour": "#17323C",
+          "on": "#E6A957",
+          "contrast": 6.53
+        },
+        {
+          "text": "About this story",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "How it works",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "More to watch",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Title ok",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "1 more title is unavailable. Open Parental controls to see why.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        }
+      ]
+    },
+    {
+      "screen": "kid-home-empty",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.88,
+      "controls": 1,
+      "text": [
+        {
+          "text": "Calm Frames",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Nothing is ready to watch yet",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "New stories will appear here when they are ready. A grown up can open parental controls for more details.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        }
+      ]
+    },
+    {
+      "screen": "kid-home-offline",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.53,
+      "controls": 5,
+      "text": [
+        {
+          "text": "Calm Frames",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "New titles are unavailable",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "You can still watch the stories on this television. Try again later for new titles.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "A calmer way to watch",
+          "units": 32,
+          "colour": "#E6A957",
+          "on": "#102F3A",
+          "contrast": 6.83
+        },
+        {
+          "text": "Title ok",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A quieter picture. Sound and stories carry on.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Watch now",
+          "units": 36,
+          "colour": "#17323C",
+          "on": "#E6A957",
+          "contrast": 6.53
+        },
+        {
+          "text": "About this story",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "How it works",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "More to watch",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Title ok",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        }
+      ]
+    },
+    {
+      "screen": "title-details",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.53,
+      "controls": 4,
+      "text": [
+        {
+          "text": "Back to library",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "About this story",
+          "units": 32,
+          "colour": "#E6A957",
+          "on": "#102F3A",
+          "contrast": 6.83
+        },
+        {
+          "text": "Title ok",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Watch now",
+          "units": 36,
+          "colour": "#17323C",
+          "on": "#E6A957",
+          "contrast": 6.53
+        },
+        {
+          "text": "Viewing details ↓",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Before you watch",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "2 parts will be hidden, 7 seconds in all. Sound and captions keep playing.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Picture timeline",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "0:00",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "5:00",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "10:00",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Picture visible",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Picture covered",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Red-flash hold",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Sound and captions continue during every hold.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Your viewing settings",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Standard",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "55 inch television, seats about 8 feet away",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Flash limits: WCAG 2.3.1.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "When a part is hidden, a still image or dark screen covers the picture while sound and captions continue.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "The picture stays covered while seeking or when playback timing is uncertain. Room settings can only hide additional parts.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Back to library",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        }
+      ]
+    },
+    {
+      "screen": "title-details-pending",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.88,
+      "controls": 1,
+      "text": [
+        {
+          "text": "Back to library",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Title waiting",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Not ready to watch",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "This title is still being prepared. The picture stays hidden for now.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        }
+      ]
+    },
+    {
+      "screen": "title-details-failed",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.88,
+      "controls": 1,
+      "text": [
+        {
+          "text": "Back to library",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Title bad",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "This title is unavailable",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "This version cannot play in Calm Frames. The picture stays hidden.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        }
+      ]
+    },
+    {
+      "screen": "parent-area-locked",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.88,
+      "controls": 12,
+      "text": [
+        {
+          "text": "Back to library",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Enter your PIN",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Your PIN opens parental controls. It stays on this television and is never sent anywhere.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "1",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "2",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "3",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "4",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "5",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "6",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "7",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "8",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "9",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "0",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Delete",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "parent-area-wrong-pin",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.88,
+      "controls": 12,
+      "text": [
+        {
+          "text": "Back to library",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Try again",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "That PIN is not right. 4 tries left.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "1",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "2",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "3",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "4",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "5",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "6",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "7",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "8",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "9",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "0",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Delete",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "parent-area-no-pin",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.88,
+      "controls": 2,
+      "text": [
+        {
+          "text": "Back to library",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Set up a PIN to continue",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "A four digit PIN keeps parental controls where a child cannot change them.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Set up a PIN",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "parent-area-open",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 5.92,
+      "controls": 19,
+      "text": [
+        {
+          "text": "Back to library",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Manage viewing preferences, profiles and your library.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Viewing preset",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Standard",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Uses the WCAG 2.3.1 flash thresholds included in every preset.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#234B55",
+          "contrast": 5.92
+        },
+        {
+          "text": "✓ Chosen",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Broadcast",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Adds broadcast flash limits to the Standard preset.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Extra cautious",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Uses Broadcast limits and covers the picture a little longer around each hidden part.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "TV and seating",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "55 inch television, seats about 8 feet away",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A bigger television or a closer sofa can only add hidden parts. It never takes any away.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Television size",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "32 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "43 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "50 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "55 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "65 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "75 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "85 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "55 inch is chosen.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Viewing distance",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "4 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "5 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "6 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "7 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "8 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "10 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "12 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "8 feet away is chosen.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "What was hidden",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Nothing has been hidden yet.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Titles",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Title ok",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Ready to watch",
+          "units": 32,
+          "colour": "#7FD1A3",
+          "on": "#1A414B",
+          "contrast": 6.07
+        },
+        {
+          "text": "Title bad",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Unavailable",
+          "units": 32,
+          "colour": "#F2BDB1",
+          "on": "#1A414B",
+          "contrast": 6.67
+        },
+        {
+          "text": "This version cannot play in Calm Frames. The picture stays hidden.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "How Calm Frames works",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Calm Frames prepares each story before you watch.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A card says what is coming, and what was hidden.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Back to library",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "parent-area-family",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 5.92,
+      "controls": 24,
+      "text": [
+        {
+          "text": "Back to library",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Manage viewing preferences, profiles and your library.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Whose settings",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Everyone",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Robin",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Sam",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "These settings are for Everyone.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Add a kid",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Viewing preset for Everyone",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Standard",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Uses the WCAG 2.3.1 flash thresholds included in every preset.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#234B55",
+          "contrast": 5.92
+        },
+        {
+          "text": "✓ Chosen",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Broadcast",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Adds broadcast flash limits to the Standard preset.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Extra cautious",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Uses Broadcast limits and covers the picture a little longer around each hidden part.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "TV and seating for Everyone",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "55 inch television, seats about 8 feet away",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A bigger television or a closer sofa can only add hidden parts. It never takes any away.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Television size",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "32 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "43 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "50 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "55 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "65 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "75 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "85 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "55 inch is chosen.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Viewing distance",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "4 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "5 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "6 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "7 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "8 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "10 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "12 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "8 feet away is chosen.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "What was hidden for Everyone",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "1 part, 5 seconds in all.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Thursday 17 September",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "12:30 Title ok: hid 5 seconds at 1:00",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Interface",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Gentle artwork motion",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Artwork settles into place when you open the library or a title. Reduced motion keeps it still.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Off",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Selection sounds",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "A quiet tone confirms menu actions. Silent during playback and when a screen reader is active.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Off",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Sound",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Chime before the picture is hidden",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "A soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "On",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Titles",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Title ok",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Ready to watch",
+          "units": 32,
+          "colour": "#7FD1A3",
+          "on": "#1A414B",
+          "contrast": 6.07
+        },
+        {
+          "text": "Title bad",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Unavailable",
+          "units": 32,
+          "colour": "#F2BDB1",
+          "on": "#1A414B",
+          "contrast": 6.67
+        },
+        {
+          "text": "This version cannot play in Calm Frames. The picture stays hidden.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "How Calm Frames works",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Calm Frames prepares each story before you watch.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A card says what is coming, and what was hidden.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Back to library",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "parent-area-one-kid",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 5.92,
+      "controls": 25,
+      "text": [
+        {
+          "text": "Back to library",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Manage viewing preferences, profiles and your library.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Whose settings",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Everyone",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Robin",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Sam",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "These settings are for Robin.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Add a kid",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Remove Robin",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Viewing preset for Robin",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Standard",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Uses the WCAG 2.3.1 flash thresholds included in every preset.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#234B55",
+          "contrast": 5.92
+        },
+        {
+          "text": "✓ Chosen",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Broadcast",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Adds broadcast flash limits to the Standard preset.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Extra cautious",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Uses Broadcast limits and covers the picture a little longer around each hidden part.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "TV and seating for Robin",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "55 inch television, seats about 8 feet away",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A bigger television or a closer sofa can only add hidden parts. It never takes any away.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Television size",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "32 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "43 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "50 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "55 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "65 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "75 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "85 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "55 inch is chosen.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Viewing distance",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "4 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "5 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "6 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "7 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "8 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "10 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "12 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "8 feet away is chosen.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "What was hidden for Robin",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "1 part, 5 seconds in all.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Thursday 17 September",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "12:30 Title ok: hid 5 seconds at 1:00",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Interface",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Gentle artwork motion",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Artwork settles into place when you open the library or a title. Reduced motion keeps it still.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Off",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Selection sounds",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "A quiet tone confirms menu actions. Silent during playback and when a screen reader is active.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Off",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Sound",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Chime before the picture is hidden",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "A soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "On",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Titles",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Title ok",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Ready to watch",
+          "units": 32,
+          "colour": "#7FD1A3",
+          "on": "#1A414B",
+          "contrast": 6.07
+        },
+        {
+          "text": "Title bad",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Unavailable",
+          "units": 32,
+          "colour": "#F2BDB1",
+          "on": "#1A414B",
+          "contrast": 6.67
+        },
+        {
+          "text": "This version cannot play in Calm Frames. The picture stays hidden.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "How Calm Frames works",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Calm Frames prepares each story before you watch.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A card says what is coming, and what was hidden.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Back to library",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "parent-area-remove-kid",
+      "edges": {
+        "left": 96,
+        "right": 96,
+        "top": 54,
+        "bottom": 54
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 5.92,
+      "controls": 25,
+      "text": [
+        {
+          "text": "Back to library",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Parental controls",
+          "units": 64,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Manage viewing preferences, profiles and your library.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Whose settings",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Everyone",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Robin",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Sam",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "These settings are for Robin.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Remove Robin?",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Robin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Keep Robin",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Remove Robin",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Viewing preset for Robin",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Standard",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Uses the WCAG 2.3.1 flash thresholds included in every preset.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#234B55",
+          "contrast": 5.92
+        },
+        {
+          "text": "✓ Chosen",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "Broadcast",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Adds broadcast flash limits to the Standard preset.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Extra cautious",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Uses Broadcast limits and covers the picture a little longer around each hidden part.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "TV and seating for Robin",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "55 inch television, seats about 8 feet away",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A bigger television or a closer sofa can only add hidden parts. It never takes any away.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#102F3A",
+          "contrast": 8.78
+        },
+        {
+          "text": "Television size",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "32 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "43 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "50 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "55 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "65 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "75 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "85 inch",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "55 inch is chosen.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Viewing distance",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "4 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "5 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "6 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "7 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "✓",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "8 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#234B55",
+          "contrast": 7.82
+        },
+        {
+          "text": "10 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "12 ft",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "8 feet away is chosen.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "What was hidden for Robin",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "1 part, 5 seconds in all.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Thursday 17 September",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "12:30 Title ok: hid 5 seconds at 1:00",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Interface",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Gentle artwork motion",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Artwork settles into place when you open the library or a title. Reduced motion keeps it still.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Off",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Selection sounds",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "A quiet tone confirms menu actions. Silent during playback and when a screen reader is active.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Off",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Sound",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Chime before the picture is hidden",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "A soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "On",
+          "units": 32,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Titles",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Title ok",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Ready to watch",
+          "units": 32,
+          "colour": "#7FD1A3",
+          "on": "#1A414B",
+          "contrast": 6.07
+        },
+        {
+          "text": "Title bad",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Unavailable",
+          "units": 32,
+          "colour": "#F2BDB1",
+          "on": "#1A414B",
+          "contrast": 6.67
+        },
+        {
+          "text": "This version cannot play in Calm Frames. The picture stays hidden.",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "How Calm Frames works",
+          "units": 42,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Calm Frames prepares each story before you watch.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "A card says what is coming, and what was hidden.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#102F3A",
+          "contrast": 11.6
+        },
+        {
+          "text": "Back to library",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "player-checking",
+      "edges": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "smallest_text_units": 36,
+      "worst_text_contrast": 6.88,
+      "controls": 0,
+      "text": [
+        {
+          "text": "Getting your story ready",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Your story will begin in a moment.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        }
+      ]
+    },
+    {
+      "screen": "player-countdown",
+      "edges": {
+        "left": 64,
+        "right": 64,
+        "top": 32,
+        "bottom": 32
+      },
+      "smallest_text_units": 36,
+      "worst_text_contrast": 6.88,
+      "controls": 1,
+      "text": [
+        {
+          "text": "Flashing part coming up",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "In 4 seconds. Press Skip to jump past it.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Skip",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        }
+      ]
+    },
+    {
+      "screen": "player-covering",
+      "edges": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "smallest_text_units": 36,
+      "worst_text_contrast": 6.88,
+      "controls": 0,
+      "text": [
+        {
+          "text": "Hiding a flashing part",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Sound and captions keep playing.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        }
+      ]
+    },
+    {
+      "screen": "player-after",
+      "edges": {
+        "left": 64,
+        "right": 64,
+        "top": 32,
+        "bottom": 32
+      },
+      "smallest_text_units": 36,
+      "worst_text_contrast": 6.88,
+      "controls": 0,
+      "text": [
+        {
+          "text": "Hid 5 seconds of flashing",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Sound and captions kept playing.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        }
+      ]
+    },
+    {
+      "screen": "player-unverified",
+      "edges": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "smallest_text_units": 36,
+      "worst_text_contrast": 6.88,
+      "controls": 0,
+      "text": [
+        {
+          "text": "This title is unavailable",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "This title is still being prepared. The picture stays hidden for now.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        }
+      ]
+    },
+    {
+      "screen": "player-practice-countdown",
+      "edges": {
+        "left": 64,
+        "right": 64,
+        "top": 32,
+        "bottom": 32
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.88,
+      "controls": 1,
+      "text": [
+        {
+          "text": "Flashing part coming up",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "In 4 seconds. Press Skip to jump past it.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Skip",
+          "units": 36,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Practice holds",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        }
+      ]
+    },
+    {
+      "screen": "player-practice-covering",
+      "edges": {
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "bottom": 0
+      },
+      "smallest_text_units": 32,
+      "worst_text_contrast": 6.88,
+      "controls": 0,
+      "text": [
+        {
+          "text": "Hiding a flashing part",
+          "units": 38,
+          "colour": "#F3E8D3",
+          "on": "#1A414B",
+          "contrast": 9.09
+        },
+        {
+          "text": "Sound and captions keep playing.",
+          "units": 36,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        },
+        {
+          "text": "Practice holds",
+          "units": 32,
+          "colour": "#BDD0CF",
+          "on": "#1A414B",
+          "contrast": 6.88
+        }
+      ]
+    }
+  ]
+}

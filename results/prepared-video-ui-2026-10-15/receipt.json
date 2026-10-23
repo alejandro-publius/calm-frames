@@ -1,0 +1,78 @@
+{
+  "status": "UI slice built and log-checked with existing media; fresh footage integration pending",
+  "branch": "codex/prepared-video-slice-2026-10-15",
+  "base": "ee76cf559a5814183bc005de57512ee08a10fb5a",
+  "source_commit": "4ba895946aabf322ed03ba7d52debbed6f5611ad",
+  "package": {
+    "path": "build/release/prepared-video-slice-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "sha256": "74f6c2790a0407490094e834e9a2bb3129978be210d60cbe4a7166964ea926e5",
+    "bytes": 28735862,
+    "target": "aarch64 Debug",
+    "inputs": 738,
+    "preparation": "preparation.json"
+  },
+  "checks": {
+    "typecheck": "pass",
+    "jest": {
+      "passed_suites": 131,
+      "passed_tests": 1300,
+      "snapshots": 57,
+      "skipped_tests": 4,
+      "excluded_suites": [
+        "uiCapture",
+        "coastalExport",
+        "controlStudy"
+      ]
+    },
+    "lint": {
+      "errors": 0,
+      "source_warnings": 97,
+      "test_warnings": 4
+    },
+    "hook_package_tests": 10,
+    "hook_consumer": "pass",
+    "doc_links_measured_sources_attribution_brand_tests": 28,
+    "packaged_library": {
+      "active_titles": 1,
+      "retained_bundles": 3,
+      "required_reports": 3,
+      "present_reports": 3,
+      "check": "--require-reports passed"
+    },
+    "doc_links_after_update": 12
+  },
+  "data_state": {
+    "available": "Existing prepared Harbor, zero flagged segments in all three maps",
+    "new_footage": "NPS Acadia candidate is not acquired or integrated by this lane",
+    "claude_started": "not confirmed",
+    "independent_validation": "not established",
+    "fresh_input_to_output_reproduction": "pending pipeline lane",
+    "signing_configuration": "unchanged"
+  },
+  "ownership": {
+    "codex": "app UI, shared components, read-only evidence adapter, final integration",
+    "claude": "pipeline/**, its tests, docs/evidence/video-reset/**, results/video-reset/** in separate checkout; no app/** edits"
+  },
+  "limits": [
+    "No live frame analysis or other-app interception",
+    "Existing map and report identity is not proof of independent detection accuracy",
+    "No screenshot, recording, pixel or audio inspection",
+    "No PIN entered or household reset",
+    "Appearance, wrapping, audible continuity, captions and VoiceView need owner review"
+  ],
+  "lineage": "lineage.json",
+  "native": {
+    "receipt": "native.json",
+    "event_log": "events.log",
+    "observed_pass_checks": 9,
+    "lineage": "Exact active source, preset, rendition URI/hash and preparation report matched compiled catalog while Harbor reached ended",
+    "capture_performed": false,
+    "pin_entered": false,
+    "simulator_restarted": false,
+    "app_left_running": true,
+    "isolated_remote_only": false,
+    "input_limitation": "Three touch-related log entries describe one down/up sequence near the Help route. Driver sends only KEY commands; origin of touch is unconfirmed. No repeat session attempted.",
+    "host_start_utc": "2026-10-15T20:41:55Z",
+    "host_end_utc": "2026-10-15T20:44:17Z"
+  }
+}

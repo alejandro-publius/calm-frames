@@ -1,0 +1,76 @@
+{
+  "scope": "Cloud release-preparation checks. No native Vega execution, new recording, publication or AWS deployment.",
+  "source_commit": "52ecf1436b2ace039c32848d1cdfe9a38a695c70",
+  "synchronized_remote_commit": "9afacc0c12f901fb34930ce71f0cf73bc38e22d0",
+  "branch": "codex/signed-scene-holds-2026-09-29",
+  "checks": {
+    "app_passed": 1066,
+    "app_skipped": 4,
+    "snapshots_passed": 57,
+    "typecheck": "passed",
+    "preparation_tests_passed": 102,
+    "existing_prepared_node_tests_passed": 11,
+    "sbom_check": "passed with npm 10.9.8 and pinned CycloneDX generators",
+    "staged_secret_scan": "passed",
+    "python_full": {
+      "passed": 1725,
+      "deselected": 2,
+      "duration_seconds": 404.77
+    }
+  },
+  "guard_evidence": {
+    "omitted_inventory_or_hash_and_capture_plan_cases_failed_before_fix": 8,
+    "release_target_and_uncommitted_source_cases_failed_before_fix": 2
+  },
+  "evidence_logs": [
+    {
+      "path": ".logs/finish-app-typecheck.log",
+      "sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828"
+    },
+    {
+      "path": ".logs/finish-app-tests.log",
+      "sha256": "906f0df03d6d009f1cf3b93f8a826c46282421b22db8fe5d7b5b321a72d2d285"
+    },
+    {
+      "path": ".logs/finish-preparation-final.log",
+      "sha256": "93e80661e1ac008544da1b3c518f5f46db791cf1564b9436b885118347766c32"
+    },
+    {
+      "path": ".logs/finish-prepared-node-tests.log",
+      "sha256": "611c61babcb52a3b6893e30390a6bddd59a38589c1aa878118ec81e3fa448b67"
+    },
+    {
+      "path": ".logs/finish-sbom-check.log",
+      "sha256": "2565f6e617afd6e02a33b03ba13ed0dfce5f4d63fee2930006aca85de0b86df4"
+    },
+    {
+      "path": ".logs/finish-staged-secrets.log",
+      "sha256": "0024626e9f747ce281eeaf0cf74cdaa3d8d2272c47077007c094b7dadee06e57"
+    },
+    {
+      "path": ".logs/finish-bundle-additional-red.log",
+      "sha256": "811e304dccab542b9ffdaaba4a51ffc8a457d46fa45ab3af319ed8f7802ef23d"
+    },
+    {
+      "path": ".logs/finish-release-target-red.log",
+      "sha256": "a9cfcda2f37cd6df2f82ef010ad5c13c60cbf7a841c7790aec686b44f23723ed"
+    },
+    {
+      "path": ".logs/finish-python-current.log",
+      "sha256": "65a84d7c75eb107714b1942a5240da9aa3477f1f13f978d907de6fa0e0eece9a"
+    }
+  ],
+  "limits": [
+    "Mac Vega build, D-pad navigation and playback remain unverified for current app inputs.",
+    "Fresh native capture, demo rendering and review asset upload remain open.",
+    "Prepared-library verify reports are on the Mac and still need export and package checks.",
+    "Amazon sample notice clarification and final entrant/publication tasks remain open.",
+    "The prior hosted CI/Audit receipt belongs to ba819dc; no hosted run for this new commit has been independently inspected here.",
+    "The full Python run collected before two final release-target tests were added; the final affected run includes both."
+  ],
+  "generated_utc": "2026-10-11T04:08:29.532618+00:00",
+  "push": {
+    "remote_verified_commit": "52ecf1436b2ace039c32848d1cdfe9a38a695c70",
+    "verified_by": "git ls-remote after successful non-force push"
+  }
+}

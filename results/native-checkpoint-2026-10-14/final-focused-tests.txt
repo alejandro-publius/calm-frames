@@ -1,0 +1,12 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false test/calmframes/playbackUi.test.tsx test/calmframes/defaultCaptions.test.ts
+
+ PASS  test/calmframes/playbackUi.test.tsx
+ PASS  test/calmframes/defaultCaptions.test.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       16 passed, 16 total
+Snapshots:   0 total
+Time:        1.227 s, estimated 2 s
+Ran all test suites matching /test\/calmframes\/playbackUi.test.tsx|test\/calmframes\/defaultCaptions.test.ts/i.

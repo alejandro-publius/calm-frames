@@ -35,15 +35,17 @@ the harder to pass, result.
 
 from __future__ import annotations
 
+import os
 import re
+import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Sequence
 
-from . import PipelineError
-from . import ffmpegtool
+from . import PipelineError, ffmpegtool
 from .hideplan import DIM, DIM_MAX_LUMINANCE, OPAQUE, CoverInterval, HidePlan, cover_mode
 from .probe import VideoProbe
+from .sceneholds import SceneHold
 
 BT1886_GAMMA = 2.4
 SRGB_GAMMA = 2.2
@@ -54,6 +56,17 @@ DEFAULT_PRESET = "veryfast"
 # noise must not be able to hide a flash that the cover failed to stop.
 DEFAULT_VERIFY_CRF = 10
 DEFAULT_HLS_SEGMENT_S = 4.0
+ENCODE_PROFILES = ("default", "ambient-720p-v1")
+
+
+def encode_profile_settings(name: str) -> dict:
+    """Versioned delivery settings, independent of analyzer/cover profiles."""
+    if name == "default":
+        return {"name": name}
+    if name != "ambient-720p-v1":
+        raise PipelineError(f"Unknown delivery encode profile: {name}")
+    return {"name": name, "width": 1280, "height": 720, "video_kbps": 480,
+            "passes": 2, "preset": "medium", "threads": 4, "segment_seconds": 4.0}
 
 TEXT_SUBTITLE_CODECS = {"subrip", "srt", "mov_text", "ass", "ssa", "webvtt", "text"}
 
@@ -303,6 +316,14 @@ def cover_psnr(video: str | Path, still_path: str | Path, *, time_s: float) -> f
     footage, but it would not match the still. ``inf`` means the two frames
     are identical.
     """
+    # Exactly one frame reaches the comparison. ``-frames:v 1`` alone only
+    # stops the encoder: ffmpeg keeps decoding and comparing frames until the
+    # graph is torn down, and the summary line this reads is the average over
+    # every frame compared by then. How many that is depends on threads and
+    # load, so a sample just inside a covered span could average in the
+    # uncovered frames after it and fail on one machine and pass on another.
+    # Seen on Oct 11, 2026: the rendition was right to the last frame and this
+    # measurement said otherwise at 4.4 s of a span ending at 4.5 s.
     result = ffmpegtool.run_ffmpeg(
         [
             "-loglevel",
@@ -316,7 +337,8 @@ def cover_psnr(video: str | Path, still_path: str | Path, *, time_s: float) -> f
             "-frames:v",
             "1",
             "-lavfi",
-            "[0:v]scale=320:180,format=rgb24[a];[1:v]scale=320:180,format=rgb24[b];[a][b]psnr",
+            "[0:v]trim=end_frame=1,scale=320:180,format=rgb24[a];"
+            "[1:v]trim=end_frame=1,scale=320:180,format=rgb24[b];[a][b]psnr",
             "-f",
             "null",
             "-",
@@ -348,6 +370,35 @@ def _subtitle_plan(probe: VideoProbe) -> tuple[bool, list[str]]:
     return bool(text_streams), skipped
 
 
+def _scene_filter(
+    args: list[str],
+    intervals: Sequence[CoverInterval],
+    scene_holds: Sequence[SceneHold],
+    probe: VideoProbe,
+    *,
+    hold: str = "",
+) -> str:
+    """Opaque images over a black fallback, with the original interval times."""
+    expression = enable_expression(intervals)
+    black = (
+        "drawbox=x=0:y=0:w=iw:h=ih:color=black@1:t=fill:"
+        f"enable='{expression}'" if expression else "null"
+    )
+    chains = [f"[0:v]{hold}{black}[scene_base0]"]
+    for index, image in enumerate(scene_holds, 1):
+        if not image.path.is_file():
+            raise PipelineError(f"a scene hold asset is missing: {image.path}")
+        args += ["-loop", "1", "-i", str(image.path)]
+        expression = enable_expression([CoverInterval(image.start_ms, image.end_ms)])
+        chains.append(f"[{index}:v]scale={probe.width}:{probe.height},setsar=1[scene_img{index}]")
+        chains.append(
+            f"[scene_base{index - 1}][scene_img{index}]overlay=0:0:shortest=1:"
+            f"enable='{expression}'[scene_base{index}]"
+        )
+    chains.append(f"[scene_base{len(scene_holds)}]format=yuv420p[v]")
+    return ";".join(chains)
+
+
 def render_safe_master(
     source: str | Path,
     *,
@@ -359,6 +410,8 @@ def render_safe_master(
     x264_preset: str = DEFAULT_PRESET,
     segment_seconds: float = DEFAULT_HLS_SEGMENT_S,
     pad_tail_ms: float = 0.0,
+    scene_holds: Sequence[SceneHold] | None = None,
+    encode_profile: str = "default",
 ) -> RenderResult:
     """One MP4 with every flagged span plus guard band replaced by the still.
 
@@ -375,6 +428,13 @@ def render_safe_master(
     longer has the source's frame timing. Holding the last frame puts the
     time back and shows exactly what the source shows there.
     """
+    encoding = encode_profile_settings(encode_profile)
+    bounded = encode_profile != "default"
+    if bounded:
+        if (probe.width, probe.height) != (encoding["width"], encoding["height"]):
+            raise PipelineError("The ambient encode profile requires a 1280x720 source; it never resizes.")
+        if (crf, x264_preset, segment_seconds) != (DEFAULT_CRF, DEFAULT_PRESET, DEFAULT_HLS_SEGMENT_S):
+            raise PipelineError("The ambient encode profile cannot be combined with custom CRF, preset or segment settings.")
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     expression = enable_expression(intervals)
@@ -385,7 +445,10 @@ def render_safe_master(
     )
 
     args: list[str] = ["-i", str(source)]
-    if expression:
+    if scene_holds is not None:
+        graph = _scene_filter(args, intervals, scene_holds, probe, hold=hold)
+        args += ["-filter_complex_threads", "1", "-filter_complex", graph, "-map", "[v]"]
+    elif expression:
         args += ["-loop", "1", "-i", str(still_path)]
         filtergraph = (
             f"[0:v]{hold}null[base];"
@@ -404,13 +467,13 @@ def render_safe_master(
     if keep_subs:
         args += ["-map", "0:s"]
 
+    args += ["-c:v", "libx264"]
+    if bounded:
+        args += ["-preset", encoding["preset"], "-b:v", f"{encoding['video_kbps']}k",
+                 "-threads", str(encoding["threads"])]
+    else:
+        args += ["-preset", x264_preset, "-crf", str(crf)]
     args += [
-        "-c:v",
-        "libx264",
-        "-preset",
-        x264_preset,
-        "-crf",
-        str(crf),
         "-pix_fmt",
         "yuv420p",
         # Key frames on the segment grid so HLS packaging is a stream copy.
@@ -424,9 +487,17 @@ def render_safe_master(
         args += ["-c:s", "mov_text"]
     if probe.duration_s > 0:
         args += ["-t", f"{probe.duration_s:.6f}"]
-    args += ["-movflags", "+faststart", str(out_path)]
-
-    result = ffmpegtool.run_ffmpeg(args)
+    if bounded:
+        # Both passes use the same source, cover graph and duration. Private
+        # pass logs cannot collide with another title and are removed on error.
+        with tempfile.TemporaryDirectory(prefix=".encode-", dir=out_path.parent) as temporary:
+            passlog = str(Path(temporary) / "x264")
+            ffmpegtool.run_ffmpeg([*args, "-pass", "1", "-passlogfile", passlog,
+                                  "-an", "-sn", "-f", "null", os.devnull])
+            result = ffmpegtool.run_ffmpeg([*args, "-pass", "2", "-passlogfile", passlog,
+                                           "-movflags", "+faststart", str(out_path)])
+    else:
+        result = ffmpegtool.run_ffmpeg([*args, "-movflags", "+faststart", str(out_path)])
     return RenderResult(
         path=out_path,
         cmd=result.cmd,
@@ -436,6 +507,8 @@ def render_safe_master(
             "audio_copied": probe.has_audio,
             "subtitles_carried": keep_subs,
             "subtitles_skipped": skipped_subs,
+            "scene_hold_count": None if scene_holds is None else len(scene_holds),
+            "encode_profile": encoding,
         },
     )
 
@@ -505,6 +578,7 @@ def render_cover_model(
     crf: int = DEFAULT_VERIFY_CRF,
     x264_preset: str = "veryfast",
     dim_alpha: float = DIM_MAX_LUMINANCE,
+    scene_holds: Sequence[SceneHold] | None = None,
 ) -> RenderResult:
     """Draw the on-device cover schedule over the original video.
 
@@ -514,6 +588,23 @@ def render_cover_model(
     """
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    if scene_holds is not None:
+        # Image holds are fully opaque even where the legacy plan allows dim.
+        # The same assets are used here and in the pre-covered rendition.
+        args: list[str] = ["-i", str(source)]
+        graph = _scene_filter(args, plan.intervals, scene_holds, probe)
+        args += ["-filter_complex_threads", "1", "-filter_complex", graph,
+                 "-map", "[v]", "-an", "-sn", "-c:v", "libx264",
+                 "-preset", x264_preset, "-crf", str(crf)]
+        args += _colour_tag_args(probe)
+        if probe.duration_s > 0:
+            args += ["-t", f"{probe.duration_s:.6f}"]
+        args += [str(out_path)]
+        result = ffmpegtool.run_ffmpeg(args)
+        return RenderResult(path=out_path, cmd=result.cmd,
+                            notes={"scene_hold_count": len(scene_holds),
+                                   "dim_spans": 0, "opaque_spans": len(plan.intervals)})
 
     dim_spans = [i for i in plan.intervals if cover_mode(i, allow_dim=plan.allow_dim) == DIM]
     opaque_spans = [
@@ -537,7 +628,7 @@ def render_cover_model(
         )
     chain.append("format=yuv420p")
 
-    args: list[str] = [
+    args = [
         "-i",
         str(source),
         "-map",

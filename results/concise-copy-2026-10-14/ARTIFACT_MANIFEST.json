@@ -1,0 +1,43 @@
+{
+  "source_commit": "ed1347ecb9773d38250a7b8bcc14cb2ee8641ab6",
+  "package": {
+    "path": "build/release/concise-copy-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "bytes": 21885386,
+    "sha256": "58ee2e769323aff98c3970357bd5d0c530910e00d3ef5278cccdf9dd2054de4f"
+  },
+  "native_validation_performed": false,
+  "static_captures": [
+    {
+      "path": "results/concise-copy-2026-10-14/static/1080/details.png",
+      "sha256": "6677c09946425113a83240ab0b3790dc79c8e0c970a197627a398bd97ee52c69"
+    },
+    {
+      "path": "results/concise-copy-2026-10-14/static/1080/home.png",
+      "sha256": "2eba43db0f616af1e6e30149ba3f74f7a919cb14105973fe1b756b5fb8699a1c"
+    },
+    {
+      "path": "results/concise-copy-2026-10-14/static/720/details.png",
+      "sha256": "4cc4e455a3b7e83d3e85c0624ede5ebc0ed775102177590006311c21d4303299"
+    },
+    {
+      "path": "results/concise-copy-2026-10-14/static/720/home.png",
+      "sha256": "bd9942f6fce4db0509f2cd895ba87674e11a89c68ce746b9d5a1f2060afa358c"
+    },
+    {
+      "path": "results/concise-copy-2026-10-14/static/before-after.png",
+      "sha256": "d13f2f667a4008c47f4be50fd698991e6cc49216baccd46e9818af18c9148bff"
+    },
+    {
+      "path": "results/concise-copy-2026-10-14/static/calm-frames-concise-comparison-static.png",
+      "sha256": "8b13b2d5aba8cba865e3737c3c422b68b307a360d9910dd7aad0ecf6a475fcbf"
+    },
+    {
+      "path": "results/concise-copy-2026-10-14/static/calm-frames-concise-details-static.png",
+      "sha256": "ef0e690a7d414ed8d92dfda0ed53785fca675359b411a19d7a56d6177f822db5"
+    },
+    {
+      "path": "results/concise-copy-2026-10-14/static/calm-frames-concise-home-static.png",
+      "sha256": "2a51a9bea70b02b6ff30412f1420592e3950f3c8ef6b0f94c8070fe62161ebee"
+    }
+  ]
+}

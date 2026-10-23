@@ -1,0 +1,4 @@
+/Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-controls/app/src/calmframes/HarborOpening.tsx
+  84:5  warning  Expected 'undefined' and instead saw 'void'  no-void
+
+✖ 1 problem (0 errors, 1 warning)

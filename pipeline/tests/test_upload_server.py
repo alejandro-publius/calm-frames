@@ -35,7 +35,6 @@ from pathlib import Path
 
 import pytest
 
-from pipeline import PipelineError
 from pipeline.upload_server import (
     MAX_UPLOAD_BYTES,
     STATUS_PATTERN,

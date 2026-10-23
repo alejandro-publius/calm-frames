@@ -1,0 +1,19 @@
+PASS  app/assets/image/tv/harbor.png
+PASS  app/assets/image/tv/harbor-cinematic.png
+PASS  app/assets/image/tv/harbor-water.png
+PASS  app/assets/image/tv/gradient.png
+PASS  app/assets/image/tv/coastal-zen.png
+PASS  app/assets/image/tv/harbor-illustrated.png
+PASS  app/assets/image/tv/acadia-coast.png
+PASS  app/assets/image/tv/mcway-final-frame.png
+PASS  app/assets/image/tv/forest-creek.jpg
+PASS  app/assets/image/tv/sea-otters-alaska.jpg
+PASS  app/assets/image/CalmFrames.png
+PASS  docs/brand/appstore-icon-512.png
+PASS  docs/brand/appstore-icon-114.png
+PASS  docs/brand/firetv-app-icon-1280x720.png
+PASS  docs/brand/preview-1024.png
+PASS  docs/brand/preview-256.png
+PASS  docs/brand/preview-48.png
+
+flashmap: 17 brand images, no segment over the thresholds.

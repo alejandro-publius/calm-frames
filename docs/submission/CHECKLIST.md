@@ -1,0 +1,141 @@
+# Submission readiness checklist
+
+**Superseded.** The canonical checklist is
+[FINAL_REQUIREMENTS_CHECKLIST.md](FINAL_REQUIREMENTS_CHECKLIST.md), updated on
+October 17, 2026 for installed source `9cc57ca`, with the official pages read
+live that day. This file describes the October 15 candidate `21f0ea6` and is
+kept as a dated record.
+
+Updated October 15, 2026. This matrix separates source checks, native event
+observations and owner acceptance. No screenshot, recording, publication,
+reviewer invitation, main merge or release tag is authorized or performed.
+Official-rule details below retain their stated earlier review dates; this
+update reconciles project evidence and does not claim a fresh rules review.
+
+## Current readiness matrix
+
+| Area | Evidence now | Remaining work and owner |
+|---|---|---|
+| App and prepared library | Built source above; Harbor plus exact approved Acadia catalog; byte, signature and report gates pass | Final release selection after acceptance |
+| Navigation and transport | Source regression removes background Home/Details controls; TV uses a seek bar, not the automotive Forward button | Use the current receipt for native seek outcome; owner confirms visible focus |
+| Real-video evidence | Acadia runs in the app; seven earlier positive sources recovered and hash-matched; Irminger headless regression reproduced | These are engineering checks, not independent detector validation |
+| Sound and copy | Same local optional cue, held-key suppression; source tests include sound/copy regressions | Owner listening, captions and VoiceView checks; saved settings unchanged |
+| Native acceptance | Text logs only; source/build identity recorded | Owner eyes and ears; physical TV and loop seam unverified |
+| Demo | Current script in this packet; prepared Acadia and clearly simulated demo are distinct | Recording requires separate approval; final video checks and upload still pending |
+| Licensing | Existing asset ledger and NPS attribution retained | Resolve Amazon wrapper/Shaka notice scope and owner CC0 dedication; verify rights before public release |
+| Reviewer access | Private working branch available to owner | Owner authorizes access route and chooses release; no invitations sent |
+| AWS | Oct 9 deployment evidence; Oct 15 offline tests/synthesis | Current billing, budget/tag, deployed digest and findings need authorized live access; no AWS changes here |
+| Open Source mini challenge | Prepared upstream patches and eight focused contract tests | Optional public contribution URL; a PR is not mandatory, publication is not authorized |
+| Feedback/friction | Existing evidence-backed feedback and friction log retained | Owner approves publication; historical platform observations keep their dates |
+| Entrant/form | Draft text and checklist present | Owner eligibility/contact/registration confirmation and actual form field review |
+
+## The packet
+
+| File | What it is |
+|---|---|
+| [CHECKLIST.md](CHECKLIST.md) | This file: the official requirements against the repository |
+| [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) | The project description, ready to paste once the open rows close |
+| [DEMO_SCRIPT.md](DEMO_SCRIPT.md) | A 2:40 narration and shot plan for the native video |
+| [REVIEWER_QUICKSTART.md](REVIEWER_QUICKSTART.md) | Setup, run and demo steps for a judge |
+| [OPEN_DECISIONS.md](OPEN_DECISIONS.md) | The blockers and decisions, by submission impact |
+
+The field-by-field draft with the longer history stays in
+[../SUBMISSION.md](../SUBMISSION.md). [README.md](README.md) in this folder
+describes the current packet and labels the Oct 13 ZIP as history.
+
+## Mandatory blockers and optional work
+
+Before submission: accept the final native presentation, choose the judged
+release, settle licence/entrant items, authorize reviewer access, then authorize
+recording and publication. The app targets Vega OS and was exercised on the
+Vega Virtual Device; no physical-TV acceptance is claimed. Check Amazon's
+current supported-device list before naming hardware on the form.
+
+Open Source and AWS Builder are optional mini challenges. Neither a new
+backend deployment nor an upstream PR is required to finish the core app.
+
+## Sources
+
+- **Official rules:** <https://amazonappdev2026.devpost.com/rules>, read in full on
+  Oct 14, 2026. The server answers plain fetches with HTTP 403, so the page was
+  loaded in a headless browser and its text saved. Quotations below replace the
+  page's dash characters with words, because this repository's style check
+  refuses dashes; nothing else in a quotation is changed.
+- **Not readable here:** the overview page (<https://amazonappdev2026.devpost.com/>)
+  answered 403 to every attempt, and the live "Enter a Submission" form needs a
+  Devpost login. Track descriptions come from the rules page. Field names and
+  character limits on the form remain unchecked.
+- **Repository state:** `gh repo view`, `gh pr view 1`, `gh run list` and the
+  receipts under `results/`, all read on Oct 14.
+
+## Dates and time zone (rules, section 1)
+
+| What | When |
+|---|---|
+| Submission Period | Mon Aug 31, 2026, 10:15 am Pacific Time, to **Fri Oct 23, 2026, 12:00 pm Pacific Time**. The page header reads "Deadline: Oct 23, 2026 @ 12:00pm PDT" |
+| Judging Period | Mon Nov 9, 2026, 12:00 pm PT, to Fri Nov 20, 2026, 12:00 pm PT |
+| Winners announced | On or around Thu Dec 3, 2026, 12:00 pm PT |
+| Project's own target | Submit Thu Oct 22, a day early on purpose ([../SUBMISSION.md](../SUBMISSION.md)) |
+| Early eligibility check (Oct 16) and office hours (Oct 19) | Recorded in [../SUBMISSION.md](../SUBMISSION.md) from hackathon announcements; not re-read in this session |
+
+After the Submission Period ends no change to a submission is allowed, except
+removals the Sponsor permits (rules, section 5).
+
+## Tracks and mini challenges
+
+| Entry | Rule text (rules, Project Requirements) | Fit | Status |
+|---|---|---|---|
+| **Fire TV, primary track** | "Eligible projects for this category have to launch a demo-ready app that works on Fire OS or Vega OS. Priority categories: AI-enhanced viewing, sports, fitness, family entertainment, multi-modal UX, and computer vision." | A Vega OS app; family entertainment and multi-modal UX are the two priority categories it fits | **Verified** as the chosen track ([../SUBMISSION.md](../SUBMISSION.md) section 4). The demo-ready app requirement is open; see rows 4 and 6 below |
+| **Open Source, mini challenge** | "Create a new, additional open-source project or contribute to an existing public repository during the hackathon window, alongside a primary track submission. Contributions can be a new repo (with open-source license), a branch, a fork, or a pull request. PRs do not need to be merged; share your forked version if unmerged. Required: contribution URL, project repository URL, GitHub username, and a description of what you did, how it works, and why it matters." | Candidate contributions: the prepared upstream fix for `AmazonAppDev/vega-video-sample` ([../OPEN_SOURCE_PR.md](../OPEN_SOURCE_PR.md)), and the repository's own Apache-2.0 packages (flashmap, the Action, the sidecar specification, the hook) | **Owner decision.** No fork or pull request exists and the repository is private, so there is no contribution URL today |
+| **AWS Builder, mini challenge** | "Any primary track project that incorporates AWS services (i.e. Amazon Bedrock, AgentCore, Strands SDK, Kiro Crew, SageMaker, etc.) with documented integrations." The rules add that Kiro Crew qualifies on its own as a development tool; it was not used here | A CDK stack deployed once on Oct 9, 2026, with the integration documented in [../SUBMISSION.md](../SUBMISSION.md) sections 10.2 and 11 and [../FEEDBACK.md](../FEEDBACK.md) sections 8 to 16. The TV app does not call AWS | **Owner decision** whether to enter. The documented integration exists ([`results/aws_deploy_2026-10-09.json`](../../results/aws_deploy_2026-10-09.json)) |
+
+Prize limits (rules, section 8): a project can win one track prize and one mini
+challenge prize. Fire TV first place is 25,000 US dollars cash and 15,000 in AWS
+credits; each mini challenge is 5,000 cash and 5,000 in credits.
+
+## Requirements
+
+| # | Requirement, from the rules | Status | Evidence, or what is missing |
+|---|---|---|---|
+| 1 | **Eligibility** (section 3): individuals at the age of majority where they reside; not a resident of a place where participation is prohibited; not an employee, agent or household member of the Sponsor or Administrator; not a judge | **Owner decision** | [../SUBMISSION.md](../SUBMISSION.md) section 15 records the entrant as Alex Velazquez, United States, solo. Eligibility confirmation and contact email are marked NEEDS ALEX there |
+| 2 | **Register on Devpost** by clicking "Join Hackathon" (section 4) | **Owner decision** | No record of a Devpost registration in the repository |
+| 3 | **Fire TV developer account** (section 4, How To Enter) | **Verified by owner statement** | [../SUBMISSION.md](../SUBMISSION.md) section 15: created and identity-verified, as confirmed by Alex on Oct 9. Not independently inspectable here |
+| 4 | **Demo-ready app on Fire OS or Vega OS** | **Source and native event evidence; owner visual/audio acceptance pending** | Current source `21f0ea6`, exact package and per-journey results in [the receipt](../../results/transport-focus-2026-10-15/receipt.json). Acadia identity and cover intervals are logged; TV seek and return-route outcomes are recorded separately. Logs do not prove pixels, sound or physical-TV behavior. |
+| 5 | **Clear setup and run instructions in the repository** (Functionality) | **Verified present; earlier fresh-checkout run recorded; device steps not replayed** | [README.md](../../README.md) "Install and run" and "Run the checks", [../MAC_FINISH.md](../MAC_FINISH.md), [REVIEWER_QUICKSTART.md](REVIEWER_QUICKSTART.md). The quickstart records a fresh-checkout run of sections 1, 2 and 5 on the earlier candidate and labels sections 3 and 4 as not run from that file; the handoff records later fixes and checks. This reconciliation adds no new execution |
+| 6 | **The project shown functioning in the demonstration video** (Functionality, Platforms) | **Missing, pending** | No video of the candidate, and recording is not yet authorized. An earlier English cut of the Oct 10 build (`73fbbed`) exists locally at `build/submission-redesign/Calm-Frames-demo-English.mp4`, <!--n results/redesign_video_check.json:duration_s -->156.021<!--/n--> seconds, never uploaded ([../SUBMISSION.md](../SUBMISSION.md) section 7). [DEMO_SCRIPT.md](DEMO_SCRIPT.md) is the plan |
+| 7 | **New or significantly updated after Aug 31, 2026**, with the update explained (New & Existing) | **Verified** | First commit `387c173` on Sep 17, 2026 (`git log --reverse`), inside the Submission Period. Git history preserves that date |
+| 8 | **Third-party SDKs, APIs and data used under their terms** (Third Party Integrations) | **Owner decision** | The Amazon sample's root licence is MIT-0 while its player wrapper and Shaka archive carry a proprietary notice; the clarification request in [../AMAZON_SAMPLE_LICENSE_REVIEW.md](../AMAZON_SAMPLE_LICENSE_REVIEW.md) is unsent. Fonts, media and generated artwork are in the release and licence lane another agent owns; the ledger is [`media/LICENSES.csv`](../../media/LICENSES.csv). `app/assets/image/tv/harbor-illustrated.png` is ledgered in this packet's reconciliation commit as a pixel-identical render of our own `app/assets/brand/tv/harbor.svg`. The Amazon sample notices remain explicitly unresolved: [`results/release-pin-license-review-2026-10-14.json`](../../results/release-pin-license-review-2026-10-14.json) classifies them as an unresolved scope of permission, not a resolved attribution |
+| 9 | **Text description of features and functionality** (Submission Requirements) | **Verified draft; not pasted** | [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md), with the longer [../SUBMISSION.md](../SUBMISSION.md) and [../SUBMISSION_COPY.md](../SUBMISSION_COPY.md) |
+| 10 | **GitHub repository URL with source, assets and instructions** | **Private working candidate; judged code not selected** | <https://github.com/alejandro-publius/calm-frames>, branch `codex/prepared-video-slice-2026-10-15`, app source `21f0ea6`. Original hazardous source media remain excluded; hashes, licence records and prepared app assets are retained. A main merge or tag is a release choice, not claimed mandatory. |
+| 11 | **Repository public with an open source licence visible in About, or private and shared** with `testing@devpost.com` and `chris-trag`, `knmeiss`, `giolaq`, `anishamalde`, `mosesroth`, `emersonsklar` (Submission Requirements; Sept 16 update "Hackathon submission requirements: Code repository") | **Pending, owner decision** | The Oct 14 repository read recorded `PRIVATE`; this pass changes no visibility. GitHub already detects `Apache License 2.0` from the root `LICENSE`. The About description, website and topics are empty. The collaborator list was not read. Any earlier publication plan remains subject to explicit owner approval |
+| 12 | **Fire TV: any framework; the project runs on Fire OS or Vega OS; the video shows it on an actual Fire TV device or the Fire TV/Vega simulator** (Submission Requirements) | **Verified for the platform; video pending** | React Native 0.83 on Vega SDK 0.24.9914, package `io.github.alejandropublius.calmframes`, installed on the Vega Virtual Device in the receipts of row 4. The video is row 6 |
+| 13 | **Demonstration video**: under three minutes, footage on the device it was built for, public on YouTube or Vimeo, link on the form, no third-party trademarks or copyrighted music or material without permission | **Missing, pending; recording not yet authorized** | [DEMO_SCRIPT.md](DEMO_SCRIPT.md) targets 2:40. The project's own gate refuses a file of 179 seconds or longer and runs the flash check on the finished file (`eval/check_video.sh`). Narration in the earlier cut was synthetic macOS speech, disclosed on screen |
+| 14 | **Product Feedback for each tool, API or SDK used**: which and for what; what worked well; what needs work; onboarding; build with it again and why | **Verified draft; not pasted** | [../FEEDBACK.md](../FEEDBACK.md): eighteen tools, each section answering the five questions, with an "At a glance" table |
+| 15 | **Identify the primary track** | **Verified** | Fire TV ([../SUBMISSION.md](../SUBMISSION.md) section 4) |
+| 16 | **Identify the mini challenges** | **Owner decision** | Open Source and AWS Builder are drafted; see the tracks table |
+| 17 | **AWS Builder: describe which AWS services were used and how, inside the Product Feedback answer** | **Verified draft** | [../SUBMISSION.md](../SUBMISSION.md) section 10.2 table, built from [`results/aws_deploy_2026-10-09.json`](../../results/aws_deploy_2026-10-09.json): <!--n results/aws_deploy_2026-10-09.json:stack.resources_total -->42<!--/n--> resources, <!--n results/aws_deploy_2026-10-09.json:stack.nat_gateways -->0<!--/n--> NAT gateways, one refused unsigned run and one signed publication. The `Project` cost allocation tag was inactive on Oct 9 |
+| 18 | **Open Source: contribution URL, project repository URL, GitHub username, description** | **Missing** | No fork or pull request has been opened ([../OPEN_SOURCE_PR.md](../OPEN_SOURCE_PR.md)); the two production patches and a third contract-test patch have eight focused passes in `docs/upstream-pr/`; the Oct 15 duplicate recheck returned API `Forbidden` and was not repeated here; the GitHub username to credit is marked NEEDS ALEX; the description is drafted in [../SUBMISSION.md](../SUBMISSION.md) section 12.4. The rule asks for a new, additional open source project or a contribution to an existing public repository during the window, so the private Calm Frames repository on its own does not establish this entry; a public fork or branch containing the contribution can qualify without opening or merging a PR; private patch files alone do not establish the entry |
+| 19 | **Optional feature requests** with priority ratings | **Verified draft** | [../FEEDBACK.md](../FEEDBACK.md), "Feature requests", each marked Critical, Important or Nice-to-have |
+| 20 | **Optional friction log entries** in the six fields; up to a ten percent bonus at Stage One | **Verified draft; publication needs owner approval** | [../FRICTION_LOG.md](../FRICTION_LOG.md): 44 entries, each with task, steps, expected versus actual, severity, workaround and suggestion, with the evidence table at the end; 41 to 44 came from the Oct 14 device sessions. Delivery: an Amazon organizer answered on the forum (topic 45430, read Oct 14, 2026) that a link in the description is enough and that keeping the log in the repository is easier for judges; [DEVPOST_DRAFT.md](DEVPOST_DRAFT.md) carries that link. Alex has not yet confirmed publishing it as written ([../SUBMISSION.md](../SUBMISSION.md) section 14) |
+| 21 | **Testing**: accessible to judges through the repository and the video; credentials if private; free of charge until the Judging Period ends | **Owner decision** (access route, row 11) | The app needs no login. The parent area uses a PIN the installer chooses on first run; there is no preset PIN in the package ([README.md](../../README.md), "The parent area and the demo PIN") |
+| 22 | **English** materials | **Verified** | All documents, captions and the earlier narration are in English |
+| 23 | **Original work, solely owned, no infringement; open source used under its licences** (Submission ownership, Intellectual Property) | **Owner decision** | Same items as row 8, plus the CC0 dedication of the generated Harbor artwork that the completion checklist asks Alex to confirm on Oct 21 |
+| 24 | **Judging** (section 6): Stage One pass or fail on viability; Stage Two four equally weighted criteria, Tech Implementation, Design, Potential Impact, Quality of the Idea; friction log bonus | Informational | The description and video are written to those four headings |
+
+## Repository checks that bear on the above
+
+| Check | State on Oct 14 | Evidence |
+|---|---|---|
+| Hosted CI on the shared PR branch | **Red.** On `4c9996d` (Oct 13) the `Vega app` job failed; `Python packages`, `Secret scan`, `Mutation gate, property tests and the map fuzz corpus`, `The app's own UI passes flashmap` and `Published numbers match results` passed, and Audit passed in every job | `gh run list`, `gh run view`. That run is of the shared PR branch head only; it predates the integration candidate and describes nothing about its current package |
+| Hosted CI on the candidate | **None.** CI runs on pushes to `main`, on pull requests and by hand; `claude/final-candidate-2026-10-14` has no pull request. From a fresh checkout of `ac5a610` with nothing copied, the README's own check block ran: `npm ci --ignore-scripts`, typecheck, lint with 0 errors, the full app suite (133 suites, 1309 tests), the analyzer's one-minute path and the report page. The Python suite found three failures a judge would hit, all fixed in `68db2f6` without touching a measured file; the full Python gate after the fixes passed, 1800 tests with one luminance pin updated to the new report palette (FINAL_HANDOFF section 2). Late on Oct 14, on the candidate with the simplified Home, the local equivalent of the gate ran again: the app suite (133 suites, 1310 tests), the Python suites (1801 passed), ruff, the pin check, the conformance rebuild, the hook package, the eval tests and the committed-tree secret scan, which had carried four false findings since Oct 13 (hashes of renders named `unknown-key.png`, the reason the hosted scan job was red on the shared branch) and is clean after a narrow allowlist (`f47ecd9`); strict mypy was not run in that late local gate | [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) section 2; [`results/native-acceptance-2026-10-14/receipt.json`](../../results/native-acceptance-2026-10-14/receipt.json); [`results/native-acceptance-4-2026-10-14/receipt.json`](../../results/native-acceptance-4-2026-10-14/receipt.json) |
+| Final visual approval | **Done Oct 14.** The ivory coast design was approved and applied (`b22d275`), then held to the floors (`93cf800`); the native look is unverified | [FINAL_HANDOFF.md](../../FINAL_HANDOFF.md) |
+| Earlier green heads | Oct 11 heads green in every job, recorded in `results/github_push_2026-10-11*.json` | [../STATUS.md](../STATUS.md) section 0 |
+| GitHub draft release | One private draft, "Calm Frames approved redesign review, October 10, 2026", tag `review-redesign-2026-10-10`, holding the Oct 10 build's assets | `gh release list` |
+| Gallery image | Proposed: `docs/brand/firetv-app-icon-1280x720.png` | [../SUBMISSION.md](../SUBMISSION.md) section 7a; form size limits unread |
+
+## Not checked in this session
+
+The live form, the repository's collaborator list, a new clean-machine run of
+the instructions, the overview page, and any Devpost registration or account
+state. Earlier recorded checks are identified above; no new native run or
+capture was performed for this reconciliation.

@@ -51,6 +51,11 @@ import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
+
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  getItem: jest.fn(async () => null),
+  setItem: jest.fn(async () => undefined),
+}));
 import {
   readHideLogs,
   recordHide,
@@ -147,6 +152,7 @@ jest.mock('../../src/utils/VideoHandler', () => ({
     }
 
     destroyVideoElements() {}
+    async destroyVideoElementsConfirmed() { return true; }
   },
 }));
 
@@ -232,7 +238,7 @@ function finishFirstRun() {
 }
 
 /** Open the parent area on a freshly rendered shelf, through the PIN. */
-function openParentArea() {
+async function openParentArea() {
   render(
     <KidModeScreen
       navigation={{ navigate: jest.fn() } as never}
@@ -240,11 +246,14 @@ function openParentArea() {
       nowMs={() => OFFLINE_MADE_AT + 60_000}
     />,
   );
+  await act(async () => { await Promise.resolve(); });
   finishFirstRun();
+  await act(async () => { await Promise.resolve(); });
   fireEvent.press(screen.getByTestId('kid-mode-home-parent-area'));
   for (const digit of '1357') {
     fireEvent.press(screen.getByTestId(`kid-mode-parent-key-${digit}`));
   }
+  await act(async () => { await Promise.resolve(); });
 }
 
 describe('the hide log', () => {
@@ -291,9 +300,9 @@ describe('the hide log', () => {
     // a module rather than either screen's state.
     unmount();
     jest.setSystemTime(OFFLINE_MADE_AT + 60_000);
-    openParentArea();
+    await openParentArea();
     expect(screen.getByTestId('kid-mode-parent-total').props.children).toBe(
-      '1 part, 4 seconds in all.',
+      '1 scene hidden, 4 seconds in total.',
     );
     expect(screen.getByTestId('kid-mode-parent-log-0').props.children).toContain(
       'Test pattern',
@@ -360,10 +369,10 @@ describe('the hide log', () => {
     expect(allProfileHides(readHideLogs()).entries).toHaveLength(1);
   });
 
-  it('says nothing has been hidden when nothing has', () => {
-    openParentArea();
+  it('says nothing has been hidden when nothing has', async () => {
+    await openParentArea();
     expect(screen.getByTestId('kid-mode-parent-total').props.children).toBe(
-      'Nothing has been hidden yet.',
+      'No scenes hidden yet.',
     );
   });
 });

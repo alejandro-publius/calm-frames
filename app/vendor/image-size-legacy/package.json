@@ -1,0 +1,11 @@
+{
+  "name": "@calm-frames/image-size-legacy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Legacy Metro API adapter around the official patched image-size parser.",
+  "license": "Apache-2.0",
+  "main": "index.cjs",
+  "files": ["index.cjs", "README.md", "LICENSE"],
+  "peerDependencies": { "image-size-modern": "2.0.4" },
+  "engines": { "node": ">=22" }
+}

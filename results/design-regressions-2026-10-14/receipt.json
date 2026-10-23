@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "recorded_utc": "2026-10-14T05:00:23.927408+00:00",
+  "baseline_commit": "b601b444e49e1b7b25de6062b756e9048093e247",
+  "accepted_runtime_source": "dba88d5cbc96d1fc399f4b51701037af16869328",
+  "branch": "codex/native-design-validation-2026-10-14",
+  "scope": "Correct reviewed UI expectations and presentation-only hook mirror drift. No simulator action.",
+  "review": {
+    "Player_snapshot": "72ba03a changes cards.ts title/announcement and playerAccess.ts UNGUARDED_CARD detail. Manually edited only four matching snapshot lines.",
+    "ControlBar_snapshot": "dba88d5 adds scale(CALM_SPACE.SAFE_Y)=54 and scale(CALM_SPACE.SAFE_X)=96 at reference layout. Manually added two snapshot style fields.",
+    "revokedKey": "72ba03a changes unknown-key copy to unsupported source. Retained refusal, hidden-picture and distinct bad-signature assertions; added explicit unknown-key reason assertion. Verification implementation unchanged.",
+    "hook_mirror": "First failing comparison masked seven later mismatches. Reviewed all eight diffs: accepted copy plus caption-position comment only. Synchronized through mirrorText/fingerprint helpers without running destructive whole-folder regeneration. Compared TypeScript AST shape and non-string leaf text before writes; identical after ignoring strings/comments. Full mirror equality test now passes."
+  },
+  "checks": {
+    "affected_jest": {
+      "suites_passed": 4,
+      "suites_failed": 0,
+      "tests_passed": 33,
+      "tests_failed": 0,
+      "snapshots_passed": 2
+    },
+    "full_app_jest": {
+      "suites_passed": 116,
+      "suites_failed": 0,
+      "suites_skipped": 1,
+      "tests_passed": 1193,
+      "tests_failed": 0,
+      "tests_skipped": 4,
+      "snapshots_passed": 57,
+      "snapshots_failed": 0
+    },
+    "typecheck": "passed",
+    "targeted_eslint": "passed: app/test/calmframes/revokedKey.test.ts",
+    "design_pytest": {
+      "passed": 21,
+      "failed": 0
+    },
+    "hook_package_tests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "hook_package_check": {
+      "package": "@calm-frames/flash-guard",
+      "files": 27,
+      "exports": 90,
+      "offline_install": true,
+      "real_current_vega_peer_types": true,
+      "typescript": "5.8.3",
+      "metro_resolution": true,
+      "react_native_transform": true
+    },
+    "git_diff_check": "passed"
+  },
+  "commands": [
+    "cd app && npm test -- --runInBand --coverage=false --watchman=false test/components/Player.test.tsx test/components/ControlBar.test.tsx test/calmframes/revokedKey.test.ts test/calmframes/hookMirror.test.ts",
+    "cd app && npm test -- --runInBand --coverage=false --watchman=false",
+    "cd app && npm run typecheck",
+    "cd app && node_modules/.bin/eslint test/calmframes/revokedKey.test.ts",
+    "/Users/alexvintera/calm-frames/.venv/bin/python -m pytest -q eval/tests/test_design_page.py",
+    "node --test hook/tools/check_package.test.mjs",
+    "npm_config_cache=$PWD/.logs/design-regressions-2026-10-14/npm-cache node hook/tools/check_package.mjs"
+  ],
+  "package_impact": {
+    "app_runtime_changed": false,
+    "media_changed": false,
+    "guard_or_security_logic_changed": false,
+    "hook_package_presentation_changed": true,
+    "rebuild_needed_for_existing_native_validation": false,
+    "existing_package_source": "dba88d5cbc96d1fc399f4b51701037af16869328",
+    "existing_package_sha256": "3b39ff37e87dfc81cb7acadf833ef1f7b3a4861a38f32ea2de56eab2b75e58cb",
+    "strict_receipt_note": "Existing build receipt inventories tests as well as runtime files. Three app test/snapshot files now differ. Keep the package identified as dba88d5; do not relabel it as built from this follow-up. An exact new-HEAD full-inventory release receipt would require rebuilding."
+  },
+  "native_status": "Manual simulator launch pending; no startup retries or Terminal UI access in this follow-up. No new native observations.",
+  "evidence": [
+    {
+      "path": "results/design-regressions-2026-10-14/affected-final.txt",
+      "sha256": "e985ddd57d09c899485075d22d60d36bc9e36cce319511c56fa42c817ae1091d"
+    },
+    {
+      "path": "results/design-regressions-2026-10-14/design-pytest.txt",
+      "sha256": "adea1f3613edb71f4da679d20b2c5581c9602201aa6675b3768673f718464958"
+    },
+    {
+      "path": "results/design-regressions-2026-10-14/eslint.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/design-regressions-2026-10-14/full.txt",
+      "sha256": "54b16dbdff3ba72c64d604cda2f6e46b9061d7f62daed60e3926d3bdd0128435"
+    },
+    {
+      "path": "results/design-regressions-2026-10-14/hook-package-check.txt",
+      "sha256": "4b07a1b0df02ba6decaec10371826eb7c703415e9a6e5b9a8694e6a1f441fa95"
+    },
+    {
+      "path": "results/design-regressions-2026-10-14/hook-package-tests.txt",
+      "sha256": "300df453b06057e58cbc9293cf29e2d71bad8e4709c031396261fd2af180bbaf"
+    },
+    {
+      "path": "results/design-regressions-2026-10-14/typecheck.txt",
+      "sha256": "5ad445802c7fe22b6a2ed3b02833f859dd659b078284a4d0def8628a2137759a"
+    }
+  ]
+}

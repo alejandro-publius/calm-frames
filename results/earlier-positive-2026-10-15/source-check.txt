@@ -1,0 +1,6 @@
+FAIL /Users/alexvintera/calm-frames/media/HAZARD_wc_irminger_waves_without_sound_ooi.webm: 3 segment(s) over the thresholds
+  0 to 3704 ms  general flash, area 0.915 of the wcag-10deg window, measured on the picture
+  3104 to 4938 ms  general flash, area 0.325 of the wcag-10deg window, measured on the picture
+  4138 to 8675 ms  general flash, area 0.501 of the wcag-10deg window, measured on the picture
+
+Do not open a failing file in a player. Analyse it, act on the map, delete it.

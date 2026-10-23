@@ -1,0 +1,39 @@
+1
+00:00:00,400 --> 00:00:04,300
+Calm Frames on the Vega Virtual Device · recorded from the app window with app audio only
+
+2
+00:00:04,800 --> 00:00:09,300
+McWay Falls: five continuous minutes at natural speed, then a still frame
+
+3
+00:00:15,600 --> 00:00:21,600
+Native playback at natural speed, uncut until the next title card
+
+4
+00:01:29,200 --> 00:01:31,700
+Playback proof. Same app session, about a minute later. Remote presses in real time; the pauses between them are shortened
+
+5
+00:01:44,300 --> 00:01:51,300
+Playback proof: what was measured, what was checked, and which file plays
+
+6
+00:01:57,200 --> 00:02:03,700
+Every section of the record can be reached with the remote
+
+7
+00:02:12,900 --> 00:02:18,700
+Back returns focus to the button that opened each page
+
+8
+00:02:19,200 --> 00:02:29,200
+Developer terminal on the Mac, rendered from its saved log, not the TV app: importing a new owned video. Prepared and verified with the real analyzer, then kept off the TV: the app plays only catalogs approved by exact hash, and this one would also exceed the package budget.
+
+9
+00:02:29,200 --> 00:02:41,200
+Developer terminal, rendered from its saved log: interrupting and damaging a preparation. A killed run never leaves a ready receipt. The restart reused the finished steps and rebuilt the rest; a damaged byte kept the title out of the catalog until one step was rebuilt.
+
+10
+00:02:41,200 --> 00:02:49,200
+Media credits: McWay Falls footage, MoneySavingVideos, CC BY 3.0. Acadia footage, NPS, public domain. NOAA Fisheries. NPS: G Litten.

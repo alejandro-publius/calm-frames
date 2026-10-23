@@ -1,0 +1,22 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false --testPathPattern=wholeFlowExport
+
+ PASS  test/calmframes/wholeFlowExport1080Parent.test.tsx
+ PASS  test/calmframes/wholeFlowExport720Parent.test.tsx
+ PASS  test/calmframes/wholeFlowExport720Details.test.tsx
+ PASS  test/calmframes/wholeFlowExport720Home.test.tsx
+ PASS  test/calmframes/wholeFlowExport1080Details.test.tsx
+ PASS  test/calmframes/wholeFlowExport1080Home.test.tsx
+ PASS  test/calmframes/wholeFlowExport1080Playback.test.tsx
+ PASS  test/calmframes/wholeFlowExport720Playback.test.tsx
+ PASS  test/calmframes/wholeFlowExport720Utility.test.tsx
+ PASS  test/calmframes/wholeFlowExport1080Unavailable.test.tsx
+ PASS  test/calmframes/wholeFlowExport720Unavailable.test.tsx
+ PASS  test/calmframes/wholeFlowExport1080Utility.test.tsx
+
+Test Suites: 12 passed, 12 total
+Tests:       12 passed, 12 total
+Snapshots:   0 total
+Time:        6.042 s
+Ran all test suites matching /wholeFlowExport/i.

@@ -2,6 +2,8 @@ import { LinearGradientProps } from '@amazon-devices/react-linear-gradient';
 import { createDrawerNavigator } from '@amazon-devices/react-navigation__drawer';
 import { render } from '@testing-library/react-native';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchPlaylists } from '../../src/store/search/searchSlice';
 import { StyleSheet } from 'react-native';
 import AppDrawer from '../../src/components/navigation/AppDrawer';
 import DrawerContent from '../../src/components/navigation/navigationDrawerContent/DrawerContent';
@@ -22,7 +24,18 @@ jest.mock('@amazon-devices/react-linear-gradient', () => ({
   default: ({ children }: LinearGradientProps) => <>{children}</>,
 }));
 
+jest.mock('../../src/store/search/searchSlice', () => ({ fetchPlaylists: jest.fn(() => ({ type: 'load-legacy-playlists' })) }));
+
 describe('AppDrawer', () => {
+  const dispatch = jest.fn();
+  beforeEach(() => {
+    dispatch.mockClear();
+    (useDispatch as unknown as jest.Mock).mockReturnValue(dispatch);
+  });
+  it('loads legacy search data when the legacy drawer opens', () => {
+    render(<AppDrawer />);
+    expect(dispatch).toHaveBeenCalledWith(fetchPlaylists());
+  });
   const setup = () => {
     return render(<AppDrawer />);
   };

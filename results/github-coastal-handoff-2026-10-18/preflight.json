@@ -1,0 +1,32 @@
+{
+  "repository": "alejandro-publius/calm-frames",
+  "private": true,
+  "owner": "alejandro-publius",
+  "authenticated_login": "alejandro-publius",
+  "destination_branch": "codex/creator-editions-2026-10-18",
+  "remote_base": "59f23834885c3d15acaadac24d4ba912af06883e",
+  "fast_forward_ancestor": true,
+  "outgoing_existing_commits": [
+    "999f69cd917e51444502d157a3e1bfb069d85235",
+    "6f6ed6abe931f18da5c081c5a95f49542ab368cb",
+    "87a702d35385c9962b75e3c6bd7129aa76a1334b",
+    "6f2570da4165acc752882a0c04ffe996cd072880",
+    "ad5ee6584b0af41d926fcb25bbe36ff1058b4db6"
+  ],
+  "unique_historical_file_versions_scanned": 170,
+  "installed_source": "6f2570da4165acc752882a0c04ffe996cd072880",
+  "app_inputs_verified": 818,
+  "app_input_mismatches": [],
+  "installed_build_changed": false,
+  "native_route": "completed",
+  "public_publication": false,
+  "capture_used": false,
+  "main_merge": false,
+  "secret_scan": "passed: historical versions plus current content",
+  "secret_scan_bytes": 72122188,
+  "independent_consistency_review": "passed after corrections",
+  "published_numbers_checked": 697,
+  "attribution_ledger_titles": 56,
+  "modified_markdown_local_links": "passed",
+  "other_checkouts": "both clean and untouched"
+}

@@ -1,0 +1,48 @@
+{
+  "base_source": "e49f712b7a0d74b3fbc41a4a0c90e232fa559bdc",
+  "base_evidence_commit": "b3bc111bbcded8f9512028c1b2a2c2d9aba35bab",
+  "candidate_source": "867d4493159b172bcbacce56a1fc7b863439d8f1",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "kind": "static component renders; not native verification",
+  "pairs": [
+    {
+      "screen": "Home",
+      "state": "01-home",
+      "before": {
+        "file": "home-before.png",
+        "sha256": "abe220ea9faeda7be8ad6bfdc302ea5d169f06d9dabec749b97f487f0b518531"
+      },
+      "after": {
+        "file": "home-after.png",
+        "sha256": "c5bc642f9f0499ae9a7f96be3c00fb7d5c7fef17f9f19db230cd530987b0eeb2"
+      }
+    },
+    {
+      "screen": "Details",
+      "state": "02-details-harbor",
+      "before": {
+        "file": "details-before.png",
+        "sha256": "888b2a234c0f77e6bb4a764b2ee273ae3ae15beeef79ca31588f0d48728bb9c3"
+      },
+      "after": {
+        "file": "details-after.png",
+        "sha256": "9e0b43825c5a65e0998150e09a4c23e2db3662930d6f7f821cd237a5061232c9"
+      }
+    },
+    {
+      "screen": "Settings",
+      "state": "04-household",
+      "before": {
+        "file": "settings-before.png",
+        "sha256": "67ac013e316912cda5843e615ba15aa0705fdcba5ed7a92b79e6cbe5ecc3a970"
+      },
+      "after": {
+        "file": "settings-after.png",
+        "sha256": "bdf4dd663867dafbea9ac5cd8914df18a1e2ce064dbca2ee9a3152c1ed9c6fcb"
+      }
+    }
+  ]
+}

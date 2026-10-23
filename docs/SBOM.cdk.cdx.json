@@ -16,6 +16,36 @@
       "version": "2.270.0"
     },
     {
+      "bom-ref": "requirements-L21",
+      "description": "requirements line 21: aws-cdk.asset-node-proxy-agent-v6==2.1.3",
+      "externalReferences": [
+        {
+          "comment": "implicit dist url",
+          "type": "distribution",
+          "url": "https://pypi.org/simple/aws-cdk.asset-node-proxy-agent-v6/"
+        }
+      ],
+      "name": "aws-cdk.asset-node-proxy-agent-v6",
+      "purl": "pkg:pypi/aws-cdk.asset-node-proxy-agent-v6@2.1.3",
+      "type": "library",
+      "version": "2.1.3"
+    },
+    {
+      "bom-ref": "requirements-L12",
+      "description": "requirements line 12: aws-cdk.cloud-assembly-schema==54.24.0",
+      "externalReferences": [
+        {
+          "comment": "implicit dist url",
+          "type": "distribution",
+          "url": "https://pypi.org/simple/aws-cdk.cloud-assembly-schema/"
+        }
+      ],
+      "name": "aws-cdk.cloud-assembly-schema",
+      "purl": "pkg:pypi/aws-cdk.cloud-assembly-schema@54.24.0",
+      "type": "library",
+      "version": "54.24.0"
+    },
+    {
       "bom-ref": "requirements-L3",
       "description": "requirements line 3: constructs==10.8.1",
       "externalReferences": [
@@ -29,11 +59,35 @@
       "purl": "pkg:pypi/constructs@10.8.1",
       "type": "library",
       "version": "10.8.1"
+    },
+    {
+      "bom-ref": "requirements-L18",
+      "description": "requirements line 18: jsii==1.140.0",
+      "externalReferences": [
+        {
+          "comment": "implicit dist url",
+          "type": "distribution",
+          "url": "https://pypi.org/simple/jsii/"
+        }
+      ],
+      "name": "jsii",
+      "purl": "pkg:pypi/jsii@1.140.0",
+      "type": "library",
+      "version": "1.140.0"
     }
   ],
   "dependencies": [
     {
+      "ref": "requirements-L12"
+    },
+    {
+      "ref": "requirements-L18"
+    },
+    {
       "ref": "requirements-L2"
+    },
+    {
+      "ref": "requirements-L21"
     },
     {
       "ref": "requirements-L3"

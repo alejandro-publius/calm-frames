@@ -1,0 +1,112 @@
+{
+  "note": "Where the player puts the card, the practice plate and the caption band, in 1080p units from the top left, measured off the rendered player screen with the conservative ruler in app/src/calmframes/uiLayout.ts. Text is allowed 0.6 of its size per character and 1.35 per line, so the boxes are larger than the real ones.",
+  "measuredBy": "app/test/calmframes/tenFoot.test.tsx",
+  "caption_band_units": 240,
+  "states": [
+    {
+      "state": "checking",
+      "card": {
+        "left": 526.8,
+        "top": 160,
+        "right": 1393.1999999999998,
+        "bottom": 336
+      },
+      "plate": {
+        "left": 96,
+        "top": 54,
+        "right": 408.8,
+        "bottom": 124
+      },
+      "captions": {
+        "left": 0,
+        "top": 840,
+        "right": 1920,
+        "bottom": 1080
+      }
+    },
+    {
+      "state": "countdown",
+      "card": {
+        "left": 462.00000000000006,
+        "top": 160,
+        "right": 1458,
+        "bottom": 438
+      },
+      "plate": {
+        "left": 96,
+        "top": 54,
+        "right": 408.8,
+        "bottom": 124
+      },
+      "captions": {
+        "left": 0,
+        "top": 840,
+        "right": 1920,
+        "bottom": 1080
+      }
+    },
+    {
+      "state": "covering",
+      "card": {
+        "left": 386.4000000000001,
+        "top": 160,
+        "right": 1533.6,
+        "bottom": 336
+      },
+      "plate": {
+        "left": 96,
+        "top": 54,
+        "right": 408.8,
+        "bottom": 124
+      },
+      "captions": {
+        "left": 0,
+        "top": 840,
+        "right": 1920,
+        "bottom": 1080
+      }
+    },
+    {
+      "state": "after",
+      "card": {
+        "left": 278.4000000000001,
+        "top": 160,
+        "right": 1641.6,
+        "bottom": 336
+      },
+      "plate": {
+        "left": 96,
+        "top": 54,
+        "right": 408.8,
+        "bottom": 124
+      },
+      "captions": {
+        "left": 0,
+        "top": 840,
+        "right": 1920,
+        "bottom": 1080
+      }
+    },
+    {
+      "state": "unverified",
+      "card": {
+        "left": 332.4000000000001,
+        "top": 160,
+        "right": 1587.6,
+        "bottom": 384
+      },
+      "plate": {
+        "left": 96,
+        "top": 54,
+        "right": 408.8,
+        "bottom": 124
+      },
+      "captions": {
+        "left": 0,
+        "top": 840,
+        "right": 1920,
+        "bottom": 1080
+      }
+    }
+  ]
+}

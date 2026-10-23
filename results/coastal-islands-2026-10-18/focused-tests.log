@@ -1,0 +1,10 @@
+PASS app/test/calmframes/coastalIslands.test.tsx
+PASS app/test/calmframes/otterPreview.test.tsx
+PASS app/test/calmframes/cinematicComposition.test.tsx
+PASS app/test/calmframes/openingAlignment.test.tsx
+
+Test Suites: 4 passed, 4 total
+Tests:       32 passed, 32 total
+Snapshots:   0 total
+Time:        1.211 s, estimated 3 s
+Ran all test suites matching /app\/test\/calmframes\/coastalIslands.test.tsx|app\/test\/calmframes\/cinematicComposition.test.tsx|app\/test\/calmframes\/otterPreview.test.tsx|app\/test\/calmframes\/openingAlignment.test.tsx/i.

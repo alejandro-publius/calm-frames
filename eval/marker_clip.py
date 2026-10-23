@@ -100,7 +100,7 @@ def build(
         # honest, because that test asks whether audio keeps going while the
         # picture is hidden.
         "-f", "lavfi",
-        "-i", f"anullsrc=channel_layout=stereo:sample_rate=48000",
+        "-i", "anullsrc=channel_layout=stereo:sample_rate=48000",
         "-shortest",
         "-c:a", "aac",
         "-b:a", "64k",

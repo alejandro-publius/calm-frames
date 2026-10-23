@@ -1,0 +1,20 @@
+{
+  "sourceCommit": "04e5638d92ecd3017eef99d299cbdb480de8f0bd",
+  "baseline": "e49f712b7a0d74b3fbc41a4a0c90e232fa559bdc",
+  "branch": "codex/control-depth-study-2026-10-14",
+  "nativeValidated": false,
+  "productionOptIn": false,
+  "preservedPackageSHA256": "d43f7060ca5468239cbca3e55ac46093db50de71fba158a161f8ec90d6b06208",
+  "hostTrees": {
+    "1080/controls.json": "3ac6d9f5a751175606f7394596ba96eb51d3b020aae194b12a58a88e90245cd8",
+    "1080/selected-rows.json": "e4f23dd717a941671c2fd8dab1e99e0a221ffdcb5e5a176bace92b337583d6ed",
+    "1080/settings-group.json": "8af84c3c31d3e22fefbbbc07ab86b4dd5c4e6800910a7121aea2c53db0259f53",
+    "1080/home-default.json": "4c5632d0dfbf9dd735f11644576978da3315d2015432062892cce684db2de7b3",
+    "1080/home-focus.json": "1399a9cc04cdc098c7e631daa07ba9cf31b5b730b9fe67833e4e9bc3cdc41db2",
+    "720/controls.json": "31bd8af9d590c005f48a49ede9a11d0b9dbad77164782da7d97d7508de02ae5d",
+    "720/selected-rows.json": "c00e62d19dfe2cbe636f32992a7367edd5bce4253a6a2edd26afc5fd75577e92",
+    "720/settings-group.json": "81904aa127c1aa3aed4001acd3f245dd3c13060ae2ea909a9811829d780d535a",
+    "720/home-default.json": "0b923ba8f834b3a550e068835c4f45d95503dc96db54a581c639e3bfd0ba6c24",
+    "720/home-focus.json": "55f840cd7102aebf025528ac37ee5ce14faadc46352f80b133feaaf8f173ddaf"
+  }
+}

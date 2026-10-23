@@ -67,8 +67,8 @@ describe('what the player is allowed to show', () => {
 
   it('says why, in the same words as every other blocked state', () => {
     expect(UNGUARDED_CARD.kind).toBe('unverified');
-    expect(UNGUARDED_CARD.title).toBe('Not checked yet');
+    expect(UNGUARDED_CARD.title).toBe('This video is unavailable');
     expect(UNGUARDED_CARD.detail).toMatch(/picture stays hidden/);
-    expect(UNGUARDED_CARD.announcement).toMatch(/Not checked yet/);
+    expect(UNGUARDED_CARD.announcement).toMatch(/This video is unavailable/);
   });
 });

@@ -1,0 +1,22 @@
+# Line coverage of the Python source, measured by the CI Python job.
+#
+# Source only: the test files are left out, because a test file is nearly all
+# covered by running it and would lift the number without saying anything about
+# the code. The CDK app under pipeline/infra is left out because its tests need
+# the CDK installed and run in the Audit workflow's infra job instead.
+#
+# The floor is the measured value on a clean install like the runner's, rounded
+# down to a whole number, minus one; raise it when the measurement rises.
+[run]
+source =
+    flashmap/src/flashmap
+    pipeline
+omit =
+    */tests/*
+    */conftest.py
+    pipeline/infra/*
+
+[report]
+fail_under = 90
+skip_covered = true
+show_missing = false

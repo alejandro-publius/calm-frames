@@ -4,6 +4,7 @@
 import MaterialIcons from '@amazon-devices/react-native-vector-icons/MaterialIcons';
 import React from 'react';
 import { StyleProp, StyleSheet, Text, ViewStyle } from 'react-native';
+import { CALM_CONTROL, CALM_COLORS, FOCUS_RING_WIDTH } from '../calmframes/calmStyles';
 import { COLORS } from '../styles/Colors';
 import { areComponentPropsEqual } from '../utils/lodashHelper';
 import { scaleUxToDp } from '../utils/pixelUtils';
@@ -22,12 +23,14 @@ const BackButton = ({
 }: BackButtonProps) => {
   return (
     <FocusableElement
+      accessibilityRole="button"
+      accessibilityLabel="Back"
       hasTVPreferredFocus={hasTVPreferredFocus}
       style={[styles.backButtonContainer, overrideStyle]}
       onFocusOverrideStyle={styles.backButtonFocus}
       onPress={onPress}>
       <Text testID={'header_back_icon'}>
-        <MaterialIcons name={'chevron-left'} size={70} color={COLORS.WHITE} />
+        <MaterialIcons name={'chevron-left'} size={scaleUxToDp(48)} color={CALM_COLORS.TEXT} />
       </Text>
     </FocusableElement>
   );
@@ -51,13 +54,16 @@ const styles = StyleSheet.create({
     tintColor: COLORS.WHITE,
   },
   backButtonContainer: {
-    padding: scaleUxToDp(25),
+    padding: scaleUxToDp(12),
     alignItems: 'center',
     flexDirection: 'row',
-    width: scaleUxToDp(125),
+    borderWidth: scaleUxToDp(FOCUS_RING_WIDTH),
+    borderColor: CALM_COLORS.SURFACE,
+    backgroundColor: CALM_COLORS.SURFACE,
+    borderRadius: scaleUxToDp(CALM_CONTROL.RADIUS),
   },
   backButtonFocus: {
-    backgroundColor: COLORS.DARK_GRAY,
-    borderRadius: scaleUxToDp(70),
+    backgroundColor: CALM_COLORS.SURFACE_FOCUSED,
+    borderColor: CALM_COLORS.FOCUS_RING,
   },
 });

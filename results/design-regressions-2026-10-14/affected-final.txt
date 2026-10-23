@@ -1,0 +1,5 @@
+Test Suites: 4 passed, 4 total
+Tests:       33 passed, 33 total
+Snapshots:   2 passed, 2 total
+Time:        0.99 s, estimated 2 s
+Ran all test suites matching /test\/components\/Player.test.tsx|test\/components\/ControlBar.test.tsx|test\/calmframes\/revokedKey.test.ts|test\/calmframes\/hookMirror.test.ts/i.

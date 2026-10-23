@@ -1,0 +1,127 @@
+import React from 'react';
+jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { AccessibilityInfo, Animated, StyleSheet, Text } from 'react-native';
+import { useKeplerAppStateManager } from '@amazon-devices/react-native-kepler';
+import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
+import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
+import { WORLD as CALM_COLORS } from '../../src/calmframes/CoastalWorld';
+import HomeHarborScene from '../../src/calmframes/HomeHarborScene';
+import { checkedShelf } from './shelfFixtures';
+import { BENIGN_STORY_ID } from '../../src/calmframes/benignStory';
+import { DETECTION_LIMITS_LINE, SAFETY_NOTE } from '../../src/calmframes/copy';
+const titles = checkedShelf();
+const demo = titles.find(entry => entry.title.id === BENIGN_STORY_ID)!;
+const harbor = titles.find(entry => entry.title.title === 'Harbor story (prepared locally)')!;
+afterEach(() => jest.restoreAllMocks());
+
+test('the practice demo is reached from Details, not from a card on Home', () => {
+  const open = jest.fn();
+  render(<KidHomeScreen titles={titles} onOpen={open} />);
+  expect(screen.queryByTestId('kid-home-demo')).toBeNull();
+  expect(screen.queryByText('Try the demo')).toBeNull();
+  screen.unmount();
+  render(<TitleDetailsScreen entry={harbor} onPlay={jest.fn()} practice={demo} onOpenPractice={open} />);
+  expect(screen.queryByTestId('title-details-practice')).toBeNull();
+  fireEvent.press(screen.getByTestId('title-details-show-info'));
+  fireEvent.press(screen.getByTestId('title-details-practice'));
+  expect(open).toHaveBeenCalledTimes(1);
+  expect(open).toHaveBeenCalledWith(demo);
+});
+
+test('home is the entry, with direct playback and an optional dismissible explanation', () => {
+  const play = jest.fn();
+  render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={play} />);
+  expect(screen.queryByTestId('picture-hold-introduction')).toBeNull();
+  expect(screen.queryByText('Original story')).toBeNull();
+  expect(screen.queryByTestId('kid-home-try-demo')).toBeNull();
+  fireEvent.press(screen.getByTestId('kid-home-learn'));
+  expect(screen.getByTestId('how-it-works-purpose').props.children).toContain('hides flagged flashing scenes');
+  expect(screen.queryByTestId('kid-home-watch')).toBeNull();
+  expect(play).not.toHaveBeenCalled();
+  fireEvent.press(screen.getByTestId('picture-hold-dismiss'));
+  expect(screen.getByTestId('kid-home-learn').props.hasTVPreferredFocus).toBe(true);
+  fireEvent.press(screen.getByTestId('kid-home-learn'));
+  fireEvent.press(screen.getByTestId('picture-hold-start'));
+  expect(play).toHaveBeenCalledWith(demo);
+});
+
+test('an unavailable demo cannot be launched from either entry', () => {
+  render(<KidHomeScreen titles={titles.map(entry => entry === demo ? { ...entry, status: 'failed' } : entry)} onOpen={jest.fn()} />);
+  expect(screen.queryByTestId('kid-home-try-demo')).toBeNull();
+  fireEvent.press(screen.getByTestId('kid-home-learn'));
+  expect(screen.queryByTestId('picture-hold-start')).toBeNull();
+  expect(screen.getByTestId('picture-hold-dismiss').props.hasTVPreferredFocus).toBe(true);
+});
+
+test('saving blocks starting the optional demo as well as normal playback', () => {
+  const play = jest.fn();
+  const view = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={play} />);
+  fireEvent.press(screen.getByTestId('kid-home-learn'));
+  view.rerender(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={play} saving />);
+  fireEvent.press(screen.getByTestId('picture-hold-start'));
+  expect(play).not.toHaveBeenCalled();
+  fireEvent.press(screen.getByTestId('picture-hold-dismiss'));
+  fireEvent.press(screen.getByTestId('kid-home-watch'));
+  expect(play).not.toHaveBeenCalled();
+});
+
+test('cinema scenery stays fixed even when the saved motion preference is on', () => {
+  const loop = jest.spyOn(Animated, 'loop');
+  const view = render(<HomeHarborScene enabled active />);
+  expect(loop).not.toHaveBeenCalled();
+  expect(view.queryByTestId('home-water-ripples')).toBeNull();
+});
+
+test.each([true, undefined])('home remains still when reduced motion is %s', async reduced => {
+  (useKeplerAppStateManager as jest.Mock).mockReturnValue({ getCurrentState: () => 'active', addAppStateListener: () => ({ remove: jest.fn() }) });
+  jest.spyOn(AccessibilityInfo, 'isReduceMotionEnabled').mockResolvedValue(reduced as boolean);
+  jest.spyOn(AccessibilityInfo, 'isScreenReaderEnabled').mockResolvedValue(false);
+  const loop = jest.spyOn(Animated, 'loop');
+  render(<HomeHarborScene enabled />);
+  await act(async () => { await Promise.resolve(); });
+  expect(loop).not.toHaveBeenCalled();
+});
+
+test('home carries no explanation and keeps parental controls tertiary until focused', () => {
+  const parent = jest.fn();
+  const details = jest.fn();
+  const view = render(<KidHomeScreen titles={titles} onOpen={details} onOpenParentArea={parent} />);
+  expect(view.queryByText('Picture holds on supported videos. Audio continues.')).toBeNull();
+  expect(view.queryByText('About this story')).toBeNull();
+  fireEvent.press(view.getByRole('button', { name: 'Details: Harbor' }));
+  expect(details).toHaveBeenCalledWith(titles.find(entry => entry.title.title === 'Harbor story (prepared locally)'));
+  const control = view.getByTestId('kid-home-parent-area');
+  expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent', minHeight: 88, borderWidth: 6 });
+  fireEvent(control, 'focus');
+  expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: CALM_COLORS.SURFACE_FOCUSED, borderColor: CALM_COLORS.FOCUS_RING, minHeight: 88, borderWidth: 6 });
+  expect(StyleSheet.flatten(view.getByTestId('kid-home-parent-area-label').props.style)).toMatchObject({ color: CALM_COLORS.TEXT, textDecorationLine: 'underline' });
+  fireEvent.press(control);
+  expect(parent).toHaveBeenCalledTimes(1);
+  fireEvent(control, 'blur');
+  expect(StyleSheet.flatten(control.props.style)).toMatchObject({ backgroundColor: 'transparent', borderColor: 'transparent' });
+});
+
+test('the short explanation leads with purpose, qualifies ocean and sound, and keeps limitations legible', () => {
+  const view = render(<KidHomeScreen titles={titles.filter(entry => entry.title.title.startsWith('Acadia'))} onOpen={jest.fn()} />);
+  fireEvent.press(view.getByTestId('kid-home-learn'));
+  const introduction = view.getByTestId('picture-hold-introduction');
+  const textNodes = introduction.findAllByType(Text);
+  const words = textNodes.map(node => node.props.children).filter(value => typeof value === 'string').join(' ');
+  expect(words).toContain('Calm Frames hides flagged flashing scenes in prepared videos.');
+  expect(words).toContain('Each one gets a plain cover or a still image from the same video.');
+  expect(words).toContain('Original sound continues when present.');
+  expect(words).toContain('not other apps or live TV');
+  // One safety sentence everywhere: the approved clause with its detection limit,
+  // the same words More info shows. Seen to fail, Oct 23 2026, against the earlier
+  // line "It can miss triggers and cannot guarantee seizure prevention."
+  expect(words).toContain(`${DETECTION_LIMITS_LINE} ${SAFETY_NOTE}`);
+  expect(words).not.toMatch(/seizure/i);
+  // The instruction names the button the shelf actually shows.
+  expect(words).toContain('Choose a video, then press Watch.');
+  expect(words.split(/\s+/).length).toBeLessThanOrEqual(100);
+  for (const node of view.getByTestId('how-it-works-limits').findAllByType(Text)) {
+    expect(StyleSheet.flatten(node.props.style).fontSize).toBeGreaterThanOrEqual(32);
+  }
+  expect(view.queryByTestId('picture-hold-bridge-test')).toBeNull();
+});

@@ -72,7 +72,7 @@ import isEqual from 'lodash/isEqual';`,
     [
       `            <KeplerCaptionsView
               onCaptionViewCreated={onCaptionViewCreated}`,
-      `            <CoverLayer visible={guard.covered} mode={guard.coverMode} />
+      `            <CoverLayer visible={guard.covered} mode={guard.coverMode} imageUri={guard.coverImageUri} />
             <KeplerCaptionsView
               onCaptionViewCreated={onCaptionViewCreated}`,
     ],

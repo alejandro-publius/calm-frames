@@ -1,0 +1,7 @@
+{
+  "checks": [
+    "Home Details More info Back Back returns Home Details focus"
+  ],
+  "result": "stopped",
+  "reason": "No log match: CALM_TRACE focus picture-hold-start"
+}

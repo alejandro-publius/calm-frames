@@ -1,0 +1,10 @@
+{
+  "package": "@calm-frames/flash-guard",
+  "files": 35,
+  "exports": 90,
+  "offline_install": true,
+  "real_current_vega_peer_types": true,
+  "typescript": "5.8.3",
+  "metro_resolution": true,
+  "react_native_transform": true
+}

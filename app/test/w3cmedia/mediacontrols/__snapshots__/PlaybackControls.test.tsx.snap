@@ -10,6 +10,8 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
   }
 >
   <View
+    accessibilityLabel="Rewind 10 seconds"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -40,9 +42,13 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-seek-backward"
@@ -50,6 +56,8 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     <Text />
   </View>
   <View
+    accessibilityLabel="Pause"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -81,9 +89,13 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-play-pause"
@@ -91,6 +103,8 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     <Text />
   </View>
   <View
+    accessibilityLabel="Forward 10 seconds"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -121,9 +135,13 @@ exports[`PlaybackControls tests component renders correctly 1`] = `
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-seek-forward"
@@ -143,6 +161,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
   }
 >
   <View
+    accessibilityLabel="Rewind 10 seconds"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -173,9 +193,13 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-seek-backward"
@@ -183,6 +207,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     <Text />
   </View>
   <View
+    accessibilityLabel="Pause"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -214,9 +240,13 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-play-pause"
@@ -224,6 +254,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     <Text />
   </View>
   <View
+    accessibilityLabel="Forward 10 seconds"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -254,9 +286,13 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.P
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-seek-forward"
@@ -276,6 +312,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
   }
 >
   <View
+    accessibilityLabel="Rewind 10 seconds"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -306,9 +344,13 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-seek-backward"
@@ -316,6 +358,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     <Text />
   </View>
   <View
+    accessibilityLabel="Pause"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -347,9 +391,13 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-play-pause"
@@ -357,6 +405,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     <Text />
   </View>
   <View
+    accessibilityLabel="Forward 10 seconds"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -387,9 +437,13 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-seek-forward"
@@ -409,6 +463,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
   }
 >
   <View
+    accessibilityLabel="Rewind 10 seconds"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -439,9 +495,13 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-seek-backward"
@@ -449,6 +509,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     <Text />
   </View>
   <View
+    accessibilityLabel="Pause"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -480,9 +542,13 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-play-pause"
@@ -490,6 +556,8 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     <Text />
   </View>
   <View
+    accessibilityLabel="Forward 10 seconds"
+    accessibilityRole="button"
     accessibilityState={
       {
         "busy": undefined,
@@ -520,9 +588,13 @@ exports[`PlaybackControls tests component renders correctly: PlayerControlType.S
     style={
       {
         "alignItems": "center",
+        "backgroundColor": "#22303B",
+        "borderColor": "#22303B",
+        "borderRadius": 18,
+        "borderWidth": 6,
         "flexDirection": "row",
         "opacity": 1,
-        "padding": 25,
+        "padding": 18,
       }
     }
     testID="player-btn-seek-forward"

@@ -9,8 +9,11 @@ import {
 import { NavigationContainer } from '@amazon-devices/react-navigation__native';
 import { Store } from '@reduxjs/toolkit';
 import React, { useEffect, useMemo, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import AppStack from './components/navigation/AppStack';
+import HarborOpening from './calmframes/HarborOpening';
+import { CalmControlAppearance } from './calmframes/CalmControlSurface';
 import { initializeStore } from './store';
 import { createTheme } from './styles/ThemeBuilders';
 
@@ -24,10 +27,6 @@ const App = () => {
     preventHideSplashScreen();
   }
 
-  if (__DEV__) {
-    hideSplashScreen();
-  }
-
   const initStore = async () => {
     const initializedStore = await initializeStore();
     setStore(initializedStore);
@@ -39,19 +38,22 @@ const App = () => {
 
   const theme = useMemo(() => createTheme(), []);
 
-  if (!store) {
-    return null;
-  }
-
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <AppStack />
-        </NavigationContainer>
-      </ThemeProvider>
-    </Provider>
+    <CalmControlAppearance.Provider value>
+    <View testID="app-root" style={styles.root} onLayout={hideSplashScreen}>
+      {store ? (
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <NavigationContainer>
+              <AppStack />
+            </NavigationContainer>
+          </ThemeProvider>
+        </Provider>
+      ) : <HarborOpening />}
+    </View>
+    </CalmControlAppearance.Provider>
   );
 };
 
+const styles = StyleSheet.create({ root: { flex: 1 } });
 export default App;

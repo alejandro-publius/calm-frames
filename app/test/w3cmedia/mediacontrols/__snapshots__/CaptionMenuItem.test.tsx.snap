@@ -2,6 +2,8 @@
 
 exports[`CaptionMenuItem tests component renders correctly 1`] = `
 <View
+  accessibilityLabel="Some Text"
+  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
@@ -31,18 +33,44 @@ exports[`CaptionMenuItem tests component renders correctly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
+      "alignItems": "center",
+      "borderColor": "transparent",
+      "borderRadius": 18,
+      "borderWidth": 6,
+      "flexDirection": "row",
       "opacity": 1,
+      "paddingHorizontal": 12,
     }
   }
 >
   <Text
+    accessible={false}
     style={
       {
-        "color": "#FFFFFF",
-        "fontSize": 30,
-        "fontWeight": "500",
+        "color": "#F0F2EF",
+        "fontFamily": "CalmSansRegular",
+        "fontSize": 32,
+        "fontWeight": "400",
+        "lineHeight": 42,
+        "textAlign": "center",
+        "width": 42,
+      }
+    }
+  />
+  <Text
+    numberOfLines={2}
+    style={
+      {
+        "color": "#F0F2EF",
+        "flex": 1,
+        "flexShrink": 1,
+        "fontFamily": "CalmSansRegular",
+        "fontSize": 32,
+        "fontWeight": "400",
+        "lineHeight": 42,
         "marginVertical": 4,
-        "padding": 20,
+        "paddingHorizontal": 12,
+        "paddingVertical": 20,
       }
     }
     testID="video-player-caption-menu"
@@ -54,10 +82,12 @@ exports[`CaptionMenuItem tests component renders correctly 1`] = `
 
 exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
 <View
+  accessibilityLabel="Some Text"
+  accessibilityRole="radio"
   accessibilityState={
     {
       "busy": undefined,
-      "checked": undefined,
+      "checked": true,
       "disabled": undefined,
       "expanded": undefined,
       "selected": undefined,
@@ -74,6 +104,7 @@ exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
   accessible={true}
   collapsable={false}
   focusable={true}
+  hasTVPreferredFocus={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -83,19 +114,47 @@ exports[`CaptionMenuItem tests component renders correctly with select 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
-      "backgroundColor": "#80808066",
+      "alignItems": "center",
+      "backgroundColor": "#2B3B47",
+      "borderColor": "transparent",
+      "borderRadius": 18,
+      "borderWidth": 6,
+      "flexDirection": "row",
       "opacity": 1,
+      "paddingHorizontal": 12,
     }
   }
 >
   <Text
+    accessible={false}
     style={
       {
-        "color": "#FFFFFF",
-        "fontSize": 30,
-        "fontWeight": "500",
+        "color": "#F0F2EF",
+        "fontFamily": "CalmSansRegular",
+        "fontSize": 32,
+        "fontWeight": "400",
+        "lineHeight": 42,
+        "textAlign": "center",
+        "width": 42,
+      }
+    }
+  >
+    ✓
+  </Text>
+  <Text
+    numberOfLines={2}
+    style={
+      {
+        "color": "#F0F2EF",
+        "flex": 1,
+        "flexShrink": 1,
+        "fontFamily": "CalmSansRegular",
+        "fontSize": 32,
+        "fontWeight": "400",
+        "lineHeight": 42,
         "marginVertical": 4,
-        "padding": 20,
+        "paddingHorizontal": 12,
+        "paddingVertical": 20,
       }
     }
     testID="video-player-caption-menu"

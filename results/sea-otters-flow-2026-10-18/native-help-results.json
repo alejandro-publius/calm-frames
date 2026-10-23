@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "Final route corrected: Down from Acadia reaches Details, then Left reaches Watch"
+  ],
+  "capture_used": false,
+  "visual_audio_acceptance": false,
+  "native_error_injected": false,
+  "household_records_inspected": false,
+  "result": "stopped",
+  "reason": "No log match: CALM_TRACE focus picture-hold-playback-check",
+  "collector_stopped": true,
+  "last_reported_focus": "kid-mode-home-choose-profile"
+}

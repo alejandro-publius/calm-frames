@@ -15,6 +15,10 @@ jest.mock('@amazon-devices/react-native-w3cmedia', () => {
     // The base class moves the playhead itself. If any override forgets to
     // stop that, this records it and the test says so.
     static baseCalls = baseCalls;
+    async handlePlay() {baseCalls.push('handlePlay');}
+    async handlePause() {baseCalls.push('handlePause');}
+    async handleStop() {baseCalls.push('handleStop');}
+    async handleTogglePlayPause() {baseCalls.push('handleTogglePlayPause');}
     async handleSeek() {
       baseCalls.push('handleSeek');
     }
@@ -44,6 +48,30 @@ import {
   SafeMediaControlHandler,
   timeValueToMs,
 } from '../../src/calmframes/SafeMediaControlHandler';
+
+test('remote toggle follows the current media paused flag after a recovered seek', async () => {
+  const calls = (KeplerMediaControlHandler as unknown as {baseCalls: string[]}).baseCalls;
+  calls.length = 0;
+  let paused = true;
+  const handler = new SafeMediaControlHandler({engine: {requestSeek: jest.fn()} as any,
+    getCurrentMs: () => 26811, getPaused: () => paused, canControl: () => true});
+  await handler.handleTogglePlayPause();
+  expect(calls).toEqual(['handlePlay']);
+  paused = false;
+  await handler.handleTogglePlayPause();
+  expect(calls).toEqual(['handlePlay', 'handlePause']);
+});
+
+test('blocked recovery cannot use the paused-state toggle override', async () => {
+  const calls = (KeplerMediaControlHandler as unknown as {baseCalls: string[]}).baseCalls;
+  calls.length = 0;
+  const getPaused = jest.fn(() => true);
+  const handler = new SafeMediaControlHandler({engine: {requestSeek: jest.fn()} as any,
+    getCurrentMs: () => 0, getPaused, canControl: () => false});
+  await handler.handleTogglePlayPause();
+  expect(getPaused).not.toHaveBeenCalled();
+  expect(calls).toEqual([]);
+});
 import {
   createSeekEngine,
   isPreviewAllowed,
@@ -303,4 +331,14 @@ describe('SafeMediaControlHandler', () => {
       (KeplerMediaControlHandler as unknown as { baseCalls: string[] }).baseCalls,
     ).toEqual([]);
   });
+});
+
+it('recovery/stale-session transport gating prevents seeks and playback; Pause cancels the attempt', async () => {
+  const engine = {requestSeek: jest.fn()} as unknown as ReturnType<typeof createSeekEngine>;
+  const pause = jest.fn();
+  const handler = new SafeMediaControlHandler({engine, getCurrentMs: () => 0, canControl: () => false, onBlockedPause: pause});
+  const calls = (KeplerMediaControlHandler as unknown as {baseCalls: string[]}).baseCalls; calls.length = 0;
+  await handler.handlePlay(); await handler.handleTogglePlayPause(); await handler.handleStartOver();
+  await handler.handlePause(); await handler.handleStop();
+  expect(engine.requestSeek).not.toHaveBeenCalled(); expect(calls).toEqual([]); expect(pause).toHaveBeenCalledTimes(2);
 });

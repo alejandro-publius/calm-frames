@@ -1,0 +1,146 @@
+{
+  "date": "2026-10-15",
+  "upstream": "AmazonAppDev/vega-video-sample",
+  "upstream_sha": "ef8e4da89b22ef7973d0d41beedfa2b42f7bb272",
+  "project_base": "85dedefd85daea0bb8d774dd189dcf5af5490b83",
+  "remote_check": {
+    "command": "git ls-remote https://github.com/AmazonAppDev/vega-video-sample.git refs/heads/main",
+    "exit_code": 0
+  },
+  "duplicate_check": {
+    "command": "gh api 'repos/AmazonAppDev/vega-video-sample/issues?state=all&per_page=100'",
+    "exit_code": 1,
+    "result": "Forbidden",
+    "status": "blocked",
+    "limit": "No alternate account or route tried. Earlier 13-item review remains historical; no current duplicate-clear claim."
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "jest": "29.7.0",
+    "project_node_major": "22",
+    "native_engine": "not built or run"
+  },
+  "dependencies": {
+    "command": "npm install --cache /tmp/calm-upstream-npm-cache --ignore-scripts --no-audit --no-fund",
+    "exit_code": 0,
+    "packages_added": 1641,
+    "local_lock_sha256": "4dbb2feb7c553058e38e81c4bff57a69da522f7caf28045a203acfc6962771a0",
+    "same_install_before_after": true,
+    "initial_failure": "Default cache /home/agent/.npm/_cacache unwritable (ENOENT). Resolved using /tmp cache; no registry/account change."
+  },
+  "baseline": {
+    "jest": {
+      "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false",
+      "exit_code": 1,
+      "suites_passed": 63,
+      "suites_skipped": 1,
+      "tests_passed": 351,
+      "tests_skipped": 4,
+      "snapshots_passed": 57,
+      "snapshots_obsolete": 2
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    "lint": {
+      "command": "npm run lint",
+      "exit_code": 0,
+      "warnings": 10
+    },
+    "format": {
+      "command": "./node_modules/.bin/prettier --check src/utils/VideoHandler.ts src/w3cmedia/shakaplayer/ShakaPlayer.ts test/utils/VideoHandler.test.ts",
+      "exit_code": 0
+    }
+  },
+  "implementation": "Third incremental patch adds real wrapper tests with virtual engine/polyfill stubs and replaces manual ref nulling with actual destroyMediaPlayerSync. Original two patches preserved byte for byte and both required.",
+  "first_test_attempt": {
+    "exit_code": 1,
+    "passed_caller_tests": 6,
+    "wrapper_suite_error": "DocumentPolyfill module is generated and absent with ignore-scripts. Made all six polyfill mocks virtual as well as engine; production module paths unchanged."
+  },
+  "focused": {
+    "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false test/w3cmedia/ShakaPlayer.test.ts test/utils/VideoHandler.test.ts",
+    "exit_code": 0,
+    "tests_passed": 8,
+    "suites_passed": 2
+  },
+  "negative_controls": [
+    {
+      "name": "upstream-control-wrapper",
+      "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false test/w3cmedia/ShakaPlayer.test.ts -t fulfills",
+      "exit_code": 1
+    },
+    {
+      "name": "upstream-control-caller",
+      "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false test/utils/VideoHandler.test.ts -t 'rejects after returning'",
+      "exit_code": 1
+    },
+    {
+      "name": "upstream-control-teardown",
+      "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false test/utils/VideoHandler.test.ts -t 'torn down'",
+      "exit_code": 1
+    },
+    {
+      "name": "upstream-restored",
+      "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false test/w3cmedia/ShakaPlayer.test.ts test/utils/VideoHandler.test.ts",
+      "exit_code": 0
+    }
+  ],
+  "control_details": {
+    "wrapper": "Only load return/signature reverted. Fulfillment test fails on undefined result; deferred engine resolved, no unhandled rejection introduced.",
+    "caller": "Only caller production file restored from upstream HEAD. Async test fails on unhandled manifest rejection and missing error callback.",
+    "teardown": "Only null-ref guard removed. Actual destruction rejects deferred load from unload, clears refs, then test fails on unexpected video-error callback."
+  },
+  "patched_baseline": {
+    "jest": {
+      "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false",
+      "exit_code": 1,
+      "suites_passed": 64,
+      "suites_skipped": 1,
+      "tests_passed": 356,
+      "tests_skipped": 4,
+      "snapshots_passed": 57,
+      "snapshots_obsolete": 2
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    "lint": {
+      "command": "npm run lint",
+      "exit_code": 0,
+      "warnings": 11,
+      "note": "One new valid-expect warning from deferred assertion. Rewrote to attach catch before rejection and await assertion; final changed-file eslint has zero warnings."
+    },
+    "final_changed_lint": {
+      "command": "./node_modules/.bin/eslint test/w3cmedia/ShakaPlayer.test.ts test/utils/VideoHandler.test.ts",
+      "exit_code": 0,
+      "warnings": 0
+    },
+    "format": {
+      "command": "./node_modules/.bin/prettier --check src/utils/VideoHandler.ts src/w3cmedia/shakaplayer/ShakaPlayer.ts test/utils/VideoHandler.test.ts test/w3cmedia/ShakaPlayer.test.ts",
+      "exit_code": 0
+    },
+    "final_focused": {
+      "command": "./node_modules/.bin/jest --ci --runInBand --watchman=false --coverage=false test/w3cmedia/ShakaPlayer.test.ts test/utils/VideoHandler.test.ts",
+      "exit_code": 0,
+      "tests_passed": 8
+    }
+  },
+  "baseline_failure": "Both broad runs exit 1 only for two obsolete MediaItemShoveler snapshots; no snapshots rewritten.",
+  "patch_apply": {
+    "command": "For each 0001, 0002, 0003 in order: git apply --check PATCH && git apply PATCH",
+    "exit_code": 0,
+    "pristine_sha": "ef8e4da89b22ef7973d0d41beedfa2b42f7bb272",
+    "four_resulting_files_match_tested_checkout": true,
+    "initial_attempt": "Checking all dependent patches in one git apply invocation failed at the incremental teardown hunk; sequential application succeeds."
+  },
+  "patch_sha256": {
+    "0001-Return-the-load-promise-from-ShakaPlayer.load.patch": "93e55716a2e50e36dc47bd840ecff75dcebc12f383d2a796b6750eebba96b0b1",
+    "0002-Report-a-failed-Shaka-load-instead-of-dropping-it.patch": "994640212eb05b2b330eb4a072f701f8c1273b4c31028de6405a8c6412daa802",
+    "0003-Test-real-wrapper-load-and-teardown-contracts.patch": "a17b38275c204d169c3442ed14a6e142c4d6f478d8a96fcf3e9a83daa3d9f80e"
+  },
+  "publication": "None: no fork, issue, PR, upstream push or public contribution. Duplicate review and owner-selected public identity/approval remain gates."
+}

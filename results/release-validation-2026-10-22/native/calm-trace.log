@@ -1,0 +1,226 @@
+Oct 22 05:22:05.962040 CALM_TRACE screen home
+Oct 22 05:22:05.962157 CALM_TRACE screen home
+Oct 22 05:22:06.305194 CALM_TRACE focus kid-mode-home-watch
+Oct 22 05:22:06.305220 CALM_TRACE focus kid-mode-home-watch
+Oct 22 05:22:32.730912 CALM_TRACE focus kid-mode-home-more-info
+Oct 22 05:22:32.730939 CALM_TRACE focus kid-mode-home-more-info
+Oct 22 05:22:40.829131 CALM_TRACE screen details
+Oct 22 05:22:40.829248 CALM_TRACE screen details
+Oct 22 05:22:40.857687 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:22:40.857802 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:22:56.309980 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:22:56.309995 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:22:58.780336 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:22:58.780824 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:23:12.940775 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:23:12.940980 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:23:25.772144 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:23:25.772224 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:23:42.547758 CALM_TRACE focus kid-mode-details-record-proof-step-source
+Oct 22 05:23:42.547784 CALM_TRACE focus kid-mode-details-record-proof-step-source
+Oct 22 05:23:44.794220 CALM_TRACE focus kid-mode-details-record-proof-step-prepared
+Oct 22 05:23:44.794285 CALM_TRACE focus kid-mode-details-record-proof-step-prepared
+Oct 22 05:24:03.686926 CALM_TRACE focus kid-mode-details-record-proof-step-binding
+Oct 22 05:24:03.686937 CALM_TRACE focus kid-mode-details-record-proof-step-binding
+Oct 22 05:24:30.739366 CALM_TRACE focus kid-mode-details-back-bottom
+Oct 22 05:24:30.739387 CALM_TRACE focus kid-mode-details-back-bottom
+Oct 22 05:25:06.326234 CALM_TRACE focus kid-mode-details-record-proof-step-source
+Oct 22 05:25:06.326291 CALM_TRACE focus kid-mode-details-record-proof-step-source
+Oct 22 05:35:46.000944 CALM_TRACE focus kid-mode-home-more-info
+Oct 22 05:35:46.000970 CALM_TRACE focus kid-mode-home-more-info
+Oct 22 05:35:48.034212 CALM_TRACE screen details
+Oct 22 05:35:48.034288 CALM_TRACE screen details
+Oct 22 05:35:48.054290 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:35:48.054307 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:35:50.017198 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:35:50.017209 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:35:52.069308 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:35:52.069329 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:35:53.707256 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:35:53.707274 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:35:55.695926 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:35:55.695989 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:36:13.843932 CALM_TRACE focus kid-mode-details-record-proof-step-source
+Oct 22 05:36:13.843951 CALM_TRACE focus kid-mode-details-record-proof-step-source
+Oct 22 05:36:15.577699 CALM_TRACE focus kid-mode-details-record-proof-step-prepared
+Oct 22 05:36:15.577720 CALM_TRACE focus kid-mode-details-record-proof-step-prepared
+Oct 22 05:36:21.510822 CALM_TRACE focus kid-mode-details-record-proof-step-binding
+Oct 22 05:36:21.510834 CALM_TRACE focus kid-mode-details-record-proof-step-binding
+Oct 22 05:36:27.838216 CALM_TRACE focus kid-mode-details-record-reading-intro
+Oct 22 05:36:27.838248 CALM_TRACE focus kid-mode-details-record-reading-intro
+Oct 22 05:36:32.131388 CALM_TRACE focus kid-mode-details-record-reading-findings
+Oct 22 05:36:32.131411 CALM_TRACE focus kid-mode-details-record-reading-findings
+Oct 22 05:36:36.439024 CALM_TRACE focus kid-mode-details-record-reading-wcag
+Oct 22 05:36:36.439039 CALM_TRACE focus kid-mode-details-record-reading-wcag
+Oct 22 05:36:40.958959 CALM_TRACE focus kid-mode-details-record-reading-broadcast
+Oct 22 05:36:40.959022 CALM_TRACE focus kid-mode-details-record-reading-broadcast
+Oct 22 05:37:15.638469 CALM_TRACE focus kid-mode-details-record-reading-files
+Oct 22 05:37:15.638504 CALM_TRACE focus kid-mode-details-record-reading-files
+Oct 22 05:37:50.236586 CALM_TRACE focus kid-mode-details-back-bottom
+Oct 22 05:37:50.236606 CALM_TRACE focus kid-mode-details-back-bottom
+Oct 22 05:39:41.254771 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:39:41.254797 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:39:43.153047 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:39:43.153101 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:39:45.216852 CALM_TRACE screen home
+Oct 22 05:39:45.216927 CALM_TRACE screen home
+Oct 22 05:39:45.244112 CALM_TRACE focus kid-mode-home-more-info
+Oct 22 05:39:45.244259 CALM_TRACE focus kid-mode-home-more-info
+Oct 22 05:39:56.524142 CALM_TRACE focus kid-mode-home-poster-prepared-c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2
+Oct 22 05:39:56.524164 CALM_TRACE focus kid-mode-home-poster-prepared-c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2
+Oct 22 05:40:12.119773 CALM_TRACE screen details
+Oct 22 05:40:12.119857 CALM_TRACE screen details
+Oct 22 05:40:12.158836 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:40:12.158911 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:40:14.201575 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:40:14.201587 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:40:16.158962 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:40:16.159028 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:40:17.650283 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:40:17.650297 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:40:25.735461 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:40:25.735596 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:40:27.316038 CALM_TRACE focus kid-mode-details-record-proof-step-source
+Oct 22 05:40:27.316059 CALM_TRACE focus kid-mode-details-record-proof-step-source
+Oct 22 05:40:28.976368 CALM_TRACE focus kid-mode-details-record-proof-step-prepared
+Oct 22 05:40:28.976380 CALM_TRACE focus kid-mode-details-record-proof-step-prepared
+Oct 22 05:40:32.540892 CALM_TRACE focus kid-mode-details-record-reading-intro
+Oct 22 05:40:32.540936 CALM_TRACE focus kid-mode-details-record-reading-intro
+Oct 22 05:40:34.165504 CALM_TRACE focus kid-mode-details-record-reading-wcag
+Oct 22 05:40:34.165525 CALM_TRACE focus kid-mode-details-record-reading-wcag
+Oct 22 05:40:35.979867 CALM_TRACE focus kid-mode-details-record-reading-broadcast
+Oct 22 05:40:35.979888 CALM_TRACE focus kid-mode-details-record-reading-broadcast
+Oct 22 05:40:37.672320 CALM_TRACE focus kid-mode-details-record-reading-files
+Oct 22 05:40:37.672343 CALM_TRACE focus kid-mode-details-record-reading-files
+Oct 22 05:40:39.261332 CALM_TRACE focus kid-mode-details-back-bottom
+Oct 22 05:40:39.261371 CALM_TRACE focus kid-mode-details-back-bottom
+Oct 22 05:40:51.744077 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:40:51.744105 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:40:53.627621 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:40:53.627663 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:40:55.665385 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:40:55.665398 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:40:57.547214 CALM_TRACE playback watch
+Oct 22 05:40:57.547248 CALM_TRACE playback watch
+Oct 22 05:40:57.665483 CALM_TRACE focus player-opening-back
+Oct 22 05:40:57.665504 CALM_TRACE focus player-opening-back
+Oct 22 05:40:57.677106 CALM_TRACE screen player', { [Stack] name: 'Stack' }
+Oct 22 05:40:57.677130 CALM_TRACE screen player', { [Stack] name: 'Stack' }
+Oct 22 05:40:57.678064 CALM_TRACE playback cover-surface plain', { [Stack] name: 'Stack' }
+Oct 22 05:40:57.678075 CALM_TRACE playback cover-surface plain', { [Stack] name: 'Stack' }
+Oct 22 05:40:57.678782 CALM_TRACE playback cover on media=0', { [Stack] name: 'Stack' }
+Oct 22 05:40:57.678825 CALM_TRACE playback cover on media=0', { [Stack] name: 'Stack' }
+Oct 22 05:40:57.679565 CALM_TRACE playback slow off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:40:57.679586 CALM_TRACE playback slow off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:40:57.714509 CALM_TRACE focus player-opening-back
+Oct 22 05:40:57.714611 CALM_TRACE focus player-opening-back
+Oct 22 05:40:58.210897 CALM_TRACE prepared-playback {"bundleId":"96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3","sourceSha256":"c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2","renditionSha256":"795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2","renditionPath":"file:///pkg/assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/extra-cautious.mp4","renditionStartOffsetMs":0,"preset":"extra-cautious","maps":[{"preset":"wcag","sha256":"b2e2a3ce379f126fa5e37140f07a11d2aa6e1d8b3f31eb5239870214480197ce"},{"preset":"broadcast","sha256":"d24df0f26a227cf33fb04fa48db4a23109caa0831a953dc53dc1bf2ea21db5e8"},{"preset":"extra-cautious","sha256":"bcbc1025cbc63ffd71b1df1b74b95a74940c4daddb82ada01f37a8ac8174bc61"}],"reportSha256":"d39321373a7db02609f24bbab68d78eb87c6beb72b24e1c3f9d19e4f7ac9d6bb","checkedInputsSha256":"4fede5cd147a1178c9bc3b7f12cd376a6457cb5fd9cf7f654b79ad9e88778f62","outcome":"no flagged segments"}', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.212158 CALM_TRACE prepared-playback {"bundleId":"96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3","sourceSha256":"c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2","renditionSha256":"795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2","renditionPath":"file:///pkg/assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/extra-cautious.mp4","renditionStartOffsetMs":0,"preset":"extra-cautious","maps":[{"preset":"wcag","sha256":"b2e2a3ce379f126fa5e37140f07a11d2aa6e1d8b3f31eb5239870214480197ce"},{"preset":"broadcast","sha256":"d24df0f26a227cf33fb04fa48db4a23109caa0831a953dc53dc1bf2ea21db5e8"},{"preset":"extra-cautious","sha256":"bcbc1025cbc63ffd71b1df1b74b95a74940c4daddb82ada01f37a8ac8174bc61"}],"reportSha256":"d39321373a7db02609f24bbab68d78eb87c6beb72b24e1c3f9d19e4f7ac9d6bb","checkedInputsSha256":"4fede5cd147a1178c9bc3b7f12cd376a6457cb5fd9cf7f654b79ad9e88778f62","outcome":"no flagged segments"}', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.551846 CALM_TRACE playback cover-surface clear', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.551876 CALM_TRACE playback cover-surface clear', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.555213 CALM_TRACE playback cover off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.555272 CALM_TRACE playback cover off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.558815 CALM_TRACE playback waiting on media=0', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.558891 CALM_TRACE playback waiting on media=0', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.563199 CALM_TRACE playback surface-ready
+Oct 22 05:40:58.563210 CALM_TRACE playback surface-ready
+Oct 22 05:40:58.679484 CALM_TRACE playback waiting off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.679516 CALM_TRACE playback waiting off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.935434 CALM_TRACE playback playing', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.935508 CALM_TRACE playback playing', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.943762 CALM_TRACE playback controls shown', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.944044 CALM_TRACE playback controls shown', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.978193 CALM_TRACE playback picture-shown media=299', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.978264 CALM_TRACE playback picture-shown media=299', { [Stack] name: 'Stack' }
+Oct 22 05:40:58.981807 CALM_TRACE focus player-seekbar
+Oct 22 05:40:58.981847 CALM_TRACE focus player-seekbar
+Oct 22 05:41:03.950843 CALM_TRACE playback controls hidden', { [Stack] name: 'Stack' }
+Oct 22 05:41:03.950975 CALM_TRACE playback controls hidden', { [Stack] name: 'Stack' }
+Oct 22 05:45:59.734855 CALM_TRACE playback ended', { [Stack] name: 'Stack' }
+Oct 22 05:45:59.734890 CALM_TRACE playback ended', { [Stack] name: 'Stack' }
+Oct 22 05:46:00.067443 CALM_TRACE focus continuous-ended-still-back
+Oct 22 05:46:00.067489 CALM_TRACE focus continuous-ended-still-back
+Oct 22 05:50:34.428198 CALM_TRACE playback back
+Oct 22 05:50:34.428221 CALM_TRACE playback back
+Oct 22 05:50:34.429694 CALM_TRACE playback teardown ok
+Oct 22 05:50:34.429775 CALM_TRACE playback teardown ok
+Oct 22 05:50:34.497896 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:50:34.497944 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:50:34.916557 CALM_TRACE screen player-left', { [Stack] name: 'Stack' }
+Oct 22 05:50:34.916637 CALM_TRACE screen player-left', { [Stack] name: 'Stack' }
+Oct 22 05:51:03.812306 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:51:03.812318 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:51:05.836547 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:51:05.836620 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:51:07.446815 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:51:07.447775 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:51:09.379995 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:51:09.380172 CALM_TRACE focus kid-mode-details-info-back
+Oct 22 05:51:10.885090 CALM_TRACE focus kid-mode-details-record-proof-step-source
+Oct 22 05:51:10.885109 CALM_TRACE focus kid-mode-details-record-proof-step-source
+Oct 22 05:51:12.675025 CALM_TRACE focus kid-mode-details-record-proof-step-prepared
+Oct 22 05:51:12.675047 CALM_TRACE focus kid-mode-details-record-proof-step-prepared
+Oct 22 05:51:18.839251 CALM_TRACE focus kid-mode-details-record-reading-intro
+Oct 22 05:51:18.839272 CALM_TRACE focus kid-mode-details-record-reading-intro
+Oct 22 05:51:20.591571 CALM_TRACE focus kid-mode-details-record-reading-wcag
+Oct 22 05:51:20.591586 CALM_TRACE focus kid-mode-details-record-reading-wcag
+Oct 22 05:51:22.535630 CALM_TRACE focus kid-mode-details-record-reading-broadcast
+Oct 22 05:51:22.535798 CALM_TRACE focus kid-mode-details-record-reading-broadcast
+Oct 22 05:51:24.469478 CALM_TRACE focus kid-mode-details-record-reading-files
+Oct 22 05:51:24.469506 CALM_TRACE focus kid-mode-details-record-reading-files
+Oct 22 05:51:28.512816 CALM_TRACE focus kid-mode-details-back-bottom
+Oct 22 05:51:28.512844 CALM_TRACE focus kid-mode-details-back-bottom
+Oct 22 05:51:46.782918 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:51:46.782951 CALM_TRACE focus kid-mode-details-technical
+Oct 22 05:51:48.728434 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:51:48.728597 CALM_TRACE focus kid-mode-details-show-info
+Oct 22 05:51:50.577998 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:51:50.578010 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:51:52.555854 CALM_TRACE playback watch
+Oct 22 05:51:52.555885 CALM_TRACE playback watch
+Oct 22 05:51:52.595446 CALM_TRACE screen player', { [Stack] name: 'Stack' }
+Oct 22 05:51:52.595531 CALM_TRACE screen player', { [Stack] name: 'Stack' }
+Oct 22 05:51:52.597272 CALM_TRACE playback cover-surface plain', { [Stack] name: 'Stack' }
+Oct 22 05:51:52.597309 CALM_TRACE playback cover-surface plain', { [Stack] name: 'Stack' }
+Oct 22 05:51:52.598331 CALM_TRACE playback cover on media=0', { [Stack] name: 'Stack' }
+Oct 22 05:51:52.598347 CALM_TRACE playback cover on media=0', { [Stack] name: 'Stack' }
+Oct 22 05:51:52.599281 CALM_TRACE playback slow off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:51:52.599323 CALM_TRACE playback slow off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:51:52.660180 CALM_TRACE focus player-opening-back
+Oct 22 05:51:52.660282 CALM_TRACE focus player-opening-back
+Oct 22 05:51:53.050768 CALM_TRACE prepared-playback {"bundleId":"96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3","sourceSha256":"c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2","renditionSha256":"795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2","renditionPath":"file:///pkg/assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/extra-cautious.mp4","renditionStartOffsetMs":0,"preset":"extra-cautious","maps":[{"preset":"wcag","sha256":"b2e2a3ce379f126fa5e37140f07a11d2aa6e1d8b3f31eb5239870214480197ce"},{"preset":"broadcast","sha256":"d24df0f26a227cf33fb04fa48db4a23109caa0831a953dc53dc1bf2ea21db5e8"},{"preset":"extra-cautious","sha256":"bcbc1025cbc63ffd71b1df1b74b95a74940c4daddb82ada01f37a8ac8174bc61"}],"reportSha256":"d39321373a7db02609f24bbab68d78eb87c6beb72b24e1c3f9d19e4f7ac9d6bb","checkedInputsSha256":"4fede5cd147a1178c9bc3b7f12cd376a6457cb5fd9cf7f654b79ad9e88778f62","outcome":"no flagged segments"}', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.050806 CALM_TRACE prepared-playback {"bundleId":"96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3","sourceSha256":"c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2","renditionSha256":"795927874818f98c03cff64b6cd1b1e60db4544f7ddd0962f0d1d6340f39ebf2","renditionPath":"file:///pkg/assets/raw/prepared-library/96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3/titles/c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2/extra-cautious.mp4","renditionStartOffsetMs":0,"preset":"extra-cautious","maps":[{"preset":"wcag","sha256":"b2e2a3ce379f126fa5e37140f07a11d2aa6e1d8b3f31eb5239870214480197ce"},{"preset":"broadcast","sha256":"d24df0f26a227cf33fb04fa48db4a23109caa0831a953dc53dc1bf2ea21db5e8"},{"preset":"extra-cautious","sha256":"bcbc1025cbc63ffd71b1df1b74b95a74940c4daddb82ada01f37a8ac8174bc61"}],"reportSha256":"d39321373a7db02609f24bbab68d78eb87c6beb72b24e1c3f9d19e4f7ac9d6bb","checkedInputsSha256":"4fede5cd147a1178c9bc3b7f12cd376a6457cb5fd9cf7f654b79ad9e88778f62","outcome":"no flagged segments"}', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.469205 CALM_TRACE playback cover-surface clear', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.469279 CALM_TRACE playback cover-surface clear', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.469290 CALM_TRACE playback cover off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.469301 CALM_TRACE playback cover off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.481001 CALM_TRACE playback waiting on media=0', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.481082 CALM_TRACE playback waiting on media=0', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.482409 CALM_TRACE playback surface-ready
+Oct 22 05:51:53.482420 CALM_TRACE playback surface-ready
+Oct 22 05:51:53.543643 CALM_TRACE playback waiting off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.543803 CALM_TRACE playback waiting off media=0', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.876279 CALM_TRACE playback playing', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.876389 CALM_TRACE playback playing', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.880967 CALM_TRACE playback controls shown', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.880980 CALM_TRACE playback controls shown', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.910152 CALM_TRACE playback picture-shown media=300', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.910210 CALM_TRACE playback picture-shown media=300', { [Stack] name: 'Stack' }
+Oct 22 05:51:53.914880 CALM_TRACE focus player-seekbar
+Oct 22 05:51:53.914919 CALM_TRACE focus player-seekbar
+Oct 22 05:51:58.897819 CALM_TRACE playback controls hidden', { [Stack] name: 'Stack' }
+Oct 22 05:51:58.897857 CALM_TRACE playback controls hidden', { [Stack] name: 'Stack' }
+Oct 22 05:52:23.220872 CALM_TRACE playback back
+Oct 22 05:52:23.220941 CALM_TRACE playback back
+Oct 22 05:52:23.540643 CALM_TRACE playback teardown ok
+Oct 22 05:52:23.540682 CALM_TRACE playback teardown ok
+Oct 22 05:52:23.540779 CALM_TRACE playback controls shown', { [Stack] name: 'Stack' }
+Oct 22 05:52:23.540793 CALM_TRACE playback controls shown', { [Stack] name: 'Stack' }
+Oct 22 05:52:23.582624 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:52:23.582646 CALM_TRACE focus kid-mode-details-play
+Oct 22 05:52:23.968577 CALM_TRACE screen player-left', { [Stack] name: 'Stack' }
+Oct 22 05:52:23.968687 CALM_TRACE screen player-left', { [Stack] name: 'Stack' }
+Oct 22 05:52:50.431751 CALM_TRACE screen home
+Oct 22 05:52:50.431805 CALM_TRACE screen home
+Oct 22 05:52:50.457421 CALM_TRACE focus kid-mode-home-poster-prepared-c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2
+Oct 22 05:52:50.457603 CALM_TRACE focus kid-mode-home-poster-prepared-c9d5d21786c1beaf075dbc05373cf74184050a5f9b52765d5ef25d2a9cc65cb2

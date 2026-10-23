@@ -1,0 +1,12 @@
+{
+  "source_commit": "ce3fae8bd404355c1d3e863887ff7a96d50a9672",
+  "build_count": 4,
+  "build_start_utc": "2026-10-18T02:02:26.280641+00:00",
+  "app_inputs_including_existing_generated": 779,
+  "command": "npm run build:debug -- --config /Users/alexvintera/Documents/Codex/2026-10-15/task/creator-editions-evidence/isolated-metro.config.cjs",
+  "build_exit": 0,
+  "build_end_utc": "2026-10-18T02:03:10.162615+00:00",
+  "changed_inputs": [],
+  "package_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/release/creator-editions-2026-10-18/calm-frames-editions-aarch64-debug.vpkg",
+  "package_sha256": "9178bdfc5fa0d85d7e3b64a3de5b9fec461e7de17bd768c2d3ff7cea3d2d3bc3"
+}

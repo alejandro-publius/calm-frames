@@ -1,0 +1,72 @@
+{
+  "app_shelf_connected": false,
+  "artifacts": {
+    "broadcast": {
+      "map": "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/maps/broadcast.json",
+      "master_playlist": "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/broadcast/hls/master.m3u8",
+      "safe_master": "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/broadcast/safe.mp4",
+      "sha256": {
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/maps/broadcast.json": "867d353f2a047046d753771ecc10b4434370b8e47824b83c6929b153de6c0724",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/broadcast/hls/master.m3u8": "e91b51d337fd5f57b8ee379e092fdd1e0820d9b155f48e957d76638ab611064d",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/broadcast/hls/seg_0_00000.ts": "111f0a93e0566f87f46ef34b535d104459f751f95bdd0aa3ff5d3a21fd911a4d",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/broadcast/hls/seg_0_00001.ts": "e4201ae1e861d74fdc38e09dc4e4cf07a858bf05e54924472e11fe4da723ea4e",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/broadcast/hls/seg_0_00002.ts": "196280b6464f436b2572102c36f3bfabfa8fcdcb5a38a5ec4f37c936f8daed1c",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/broadcast/hls/stream_0.m3u8": "559177f97db4523c5ae419c9f46555c650f56ec1c1c7a56ff26c96f2c0f84a26",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/broadcast/safe.mp4": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98"
+      }
+    },
+    "extra-cautious": {
+      "map": "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/maps/extra-cautious.json",
+      "master_playlist": "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/extra-cautious/hls/master.m3u8",
+      "safe_master": "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/extra-cautious/safe.mp4",
+      "sha256": {
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/maps/extra-cautious.json": "81e0ab880282189a7d1201fffa9b1aa0f243e491bd36fa24dc517829159da072",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/extra-cautious/hls/master.m3u8": "e91b51d337fd5f57b8ee379e092fdd1e0820d9b155f48e957d76638ab611064d",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/extra-cautious/hls/seg_0_00000.ts": "111f0a93e0566f87f46ef34b535d104459f751f95bdd0aa3ff5d3a21fd911a4d",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/extra-cautious/hls/seg_0_00001.ts": "e4201ae1e861d74fdc38e09dc4e4cf07a858bf05e54924472e11fe4da723ea4e",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/extra-cautious/hls/seg_0_00002.ts": "196280b6464f436b2572102c36f3bfabfa8fcdcb5a38a5ec4f37c936f8daed1c",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/extra-cautious/hls/stream_0.m3u8": "559177f97db4523c5ae419c9f46555c650f56ec1c1c7a56ff26c96f2c0f84a26",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/extra-cautious/safe.mp4": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98"
+      }
+    },
+    "wcag": {
+      "map": "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/maps/wcag.json",
+      "master_playlist": "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/wcag/hls/master.m3u8",
+      "safe_master": "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/wcag/safe.mp4",
+      "sha256": {
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/maps/wcag.json": "66dce840677677712e9fef87e7e1f46a79287be6620b1ea31b3fca4305091e86",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/wcag/hls/master.m3u8": "e91b51d337fd5f57b8ee379e092fdd1e0820d9b155f48e957d76638ab611064d",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/wcag/hls/seg_0_00000.ts": "111f0a93e0566f87f46ef34b535d104459f751f95bdd0aa3ff5d3a21fd911a4d",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/wcag/hls/seg_0_00001.ts": "e4201ae1e861d74fdc38e09dc4e4cf07a858bf05e54924472e11fe4da723ea4e",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/wcag/hls/seg_0_00002.ts": "196280b6464f436b2572102c36f3bfabfa8fcdcb5a38a5ec4f37c936f8daed1c",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/wcag/hls/stream_0.m3u8": "559177f97db4523c5ae419c9f46555c650f56ec1c1c7a56ff26c96f2c0f84a26",
+        "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/safe/wcag/safe.mp4": "38dc13a36048c229ebc1b5558dd3b52b7f99b9de1ae71d2d03dddf8259629c98"
+      }
+    }
+  },
+  "next_steps": [
+    "Read the verification report and its outcome before choosing a rendition.",
+    "Use only artifacts[preset].safe_master or its prepared HLS playlist locally.",
+    "Do not play the original source or the cover model. Nothing opens automatically.",
+    "The app shelf is not connected to this receipt. TV composition still needs measurement."
+  ],
+  "physical_tv_validated": false,
+  "presets": [
+    "wcag",
+    "broadcast",
+    "extra-cautious"
+  ],
+  "readiness": "ready for local playback of the prepared rendition",
+  "source_sha256": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+  "status": "ready",
+  "title": "Forest creek at Redwood",
+  "verification": {
+    "checked_inputs_sha256": "8a2073bafd36717977d6e2df4d5bddd56de08332e01c8c3e18b6119a3cc887e0",
+    "failed_checks": [],
+    "outcome": "no flagged segments",
+    "report": "titles/63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c/verify/report.json",
+    "report_sha256": "9daf7a6eb07e6c2ebd5254c05fab17f3c205fa0d36dd1dd95ed47768a89c7981",
+    "status": "passed"
+  },
+  "version": 1
+}

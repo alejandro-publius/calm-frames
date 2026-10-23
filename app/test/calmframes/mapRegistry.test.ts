@@ -270,7 +270,7 @@ describe('a tampered index entry', () => {
       });
       expect(done.ok).toBe(false);
       expect(!done.ok && registryRefusalMessage(done.reason)).toContain(
-        'the picture stays hidden',
+        'The picture stays hidden',
       );
     }
   });
@@ -356,7 +356,7 @@ describe('the lookup', () => {
     const done = await verdict;
     expect(!done.ok && done.reason).toBe('not-the-listed-map');
     expect(!done.ok && registryRefusalMessage(done.reason)).toContain(
-      'the picture stays hidden',
+      'The picture stays hidden',
     );
   });
 
@@ -389,7 +389,7 @@ describe('the lookup', () => {
     expect(!otherFile.ok && otherFile.mapRejection).toBe('wrong-file');
     expect(
       !otherFile.ok && registryRefusalMessage(otherFile.reason, otherFile.mapRejection),
-    ).toContain('belongs to a different file');
+    ).toContain('belongs to a different version');
   });
 
   it('passes the staleness bound through to the map reader', async () => {
@@ -469,10 +469,10 @@ describe('the wording', () => {
       'not-the-listed-map',
     ];
     for (const reason of reasons) {
-      expect(registryRefusalMessage(reason)).toContain('the picture stays hidden');
+      expect(registryRefusalMessage(reason)).toContain('The picture stays hidden');
     }
     expect(registryRefusalMessage('map-refused', 'bad-signature')).toContain(
-      'changed after it was signed',
+      'appears to have changed',
     );
   });
 });

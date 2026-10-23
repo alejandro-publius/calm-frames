@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; base-uri 'none'">
+<title>Release readiness: preparation recovery with Playback Proof | Calm Frames</title><link rel="icon" href="../assets/icon.png" type="image/png"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="../reading.css"></head>
+<body><a class="skip-link" href="#document">Skip to document</a><header class="site-header wrap"><a class="wordmark" href="../index.html">≈ Calm Frames</a><nav aria-label="Reading navigation"><a href="../index.html#evidence">Back to review</a><a href="../evidence/release-readiness.md">Original Markdown</a></nav></header>
+<main class="reading wrap" id="document"><p class="reading-note">Offline reading copy. Historical observations retain their original scope and date. Draft proposals are not published changes; this rendering is not a new validation run.</p><blockquote>
+<p>Historical source excerpt copied from <code>docs/RELEASE_READINESS.md</code> at <code>13551e4</code>. Local references now point to immutable source or bundled assets. Publication wording describes its original checkpoint, not current status.</p>
+</blockquote>
+<h1 id="release-readiness-preparation-recovery-with-playback-proof">Release readiness: preparation recovery with Playback Proof</h1>
+<p>October 22, 2026. Branch <code>codex/recovery-proof-integration-2026-10-22</code>, code
+commit <!--n results/release-validation-2026-10-22/validation.json:tested_commit -->d96c0886227f7dcfc5ae6584132a86b193359215<!--/n-->.
+It combines the preparation recovery work (<code>ce6f6a3</code>) with Playback Proof
+(<code>318a3fe</code>) on top of the submitted candidate <code>bf2f615</code>. Nothing here is pushed,
+merged, uploaded or submitted. Machine-readable results:
+<a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/results/release-validation-2026-10-22/validation.json">validation.json</a>.
+Earlier receipts, such as <code>results/playback-proof-2026-10-21/</code> and
+<code>results/preparation-recovery-2026-10-21/</code>, describe their own commits; every
+check below was run again on this one rather than carried over.</p>
+<p><strong>Verdict: ready for a native demo of this build, and for the owner&#39;s publication review</strong></p>
+<p>Every automated gate passes on this commit, its package is installed on the
+Vega Virtual Device, and the native checks pass after one defect found on the
+device was fixed. Nothing is published: pushing this branch, a new public video
+and any Devpost change each need the owner&#39;s specific approval. Before
+recording, the owner should look at the new light menu palette and listen to
+the audio, which no check here covers.</p>
+<h2 id="what-each-claim-rests-on">What each claim rests on</h2>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Evidence</th>
+<th>Reproduce</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The whole Python suite passes with nothing skipped</td>
+<td><!--n results/release-validation-2026-10-22/validation.json:python.full.passed -->2049<!--/n--> passed, <!--n results/release-validation-2026-10-22/validation.json:python.full.failed -->0<!--/n--> failed, <!--n results/release-validation-2026-10-22/validation.json:python.full.skipped -->0<!--/n--> skipped, <!--n results/release-validation-2026-10-22/validation.json:python.full.deselected_slow -->2<!--/n--> slow tests deselected as in CI</td>
+<td><code>python -m pytest -q -m &quot;not slow&quot; flashmap pipeline eval --cov --cov-config=.coveragerc</code> with boto3, moto and aws-cdk-lib importable</td>
+</tr>
+<tr>
+<td>The unchanged <!--n results/release-validation-2026-10-22/validation.json:python.full.coverage.floor_percent -->90<!--/n-->% coverage floor in <code>.coveragerc</code> holds</td>
+<td><!--n results/release-validation-2026-10-22/validation.json:python.full.coverage.percent -->90.46<!--/n-->% of <!--n results/release-validation-2026-10-22/validation.json:python.full.coverage.statements -->7419<!--/n--> statements; the same in CI&#39;s install, where <!--n results/release-validation-2026-10-22/validation.json:python.ci_equivalent.skipped -->6<!--/n--> AWS-dependent tests or modules skip and <!--n results/release-validation-2026-10-22/validation.json:python.ci_equivalent.passed -->1987<!--/n--> pass</td>
+<td>Same command with only <code>flashmap[dev]</code>, pytest 9.1.1 and matplotlib 3.11.2, as <code>.github/workflows/ci.yml</code> installs</td>
+</tr>
+<tr>
+<td>Python lint and types</td>
+<td>ruff, strict mypy on flashmap and mypy on the pipeline all pass</td>
+<td><code>python -m ruff check .</code>, <code>python -m mypy --config-file flashmap/pyproject.toml</code>, <code>python -m mypy --config-file pipeline/mypy.ini</code></td>
+</tr>
+<tr>
+<td>Published numbers match their results</td>
+<td><!--n results/release-validation-2026-10-22/validation.json:published_numbers_matched -->550<!--/n--> markers on the code commit, and the check passes again with this report&#39;s own markers; plus the style, pin, archive, diff, baseline and conformance rebuild checks</td>
+<td><code>python eval/readme_sync.py --check</code> and the other steps of CI&#39;s numbers job</td>
+</tr>
+<tr>
+<td>Interrupted or damaged preparation recovers and never publishes damaged work</td>
+<td><!--n results/release-validation-2026-10-22/validation.json:recovery.scenarios.passed -->16<!--/n--> of <!--n results/release-validation-2026-10-22/validation.json:recovery.scenarios.scenarios -->16<!--/n--> scenarios, including real SIGKILL restarts and a real analyzer run; <!--n results/release-validation-2026-10-22/validation.json:recovery.guard_mutations.killed -->24<!--/n--> of <!--n results/release-validation-2026-10-22/validation.json:recovery.guard_mutations.mutations -->24<!--/n--> guard mutations caught</td>
+<td><code>python -m eval.preparation_recovery --out results/preparation-recovery-2026-10-22/evidence.json --mutations</code> (<a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/PREPARATION_RECOVERY.md">how it works</a>)</td>
+</tr>
+<tr>
+<td>The mutation gate&#39;s guards fail when broken</td>
+<td><!--n results/release-validation-2026-10-22/validation.json:mutation_gate.totals.killed -->68<!--/n--> of <!--n results/release-validation-2026-10-22/validation.json:mutation_gate.totals.mutations -->70<!--/n--> mutations killed; the <!--n results/release-validation-2026-10-22/validation.json:mutation_gate.totals.survived -->2<!--/n--> survivors are the two documented equivalent mutants; <code>--check</code> against the previous report exited <!--n results/release-validation-2026-10-22/validation.json:mutation_gate.check_against_previous_report_exit -->0<!--/n--></td>
+<td><code>python eval/mutate_gate.py --check --out &lt;file&gt;</code>; the regenerated report is <a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/results/mutation.json">mutation.json</a></td>
+</tr>
+<tr>
+<td>The app&#39;s tests pass above their floors</td>
+<td><!--n results/release-validation-2026-10-22/validation.json:app.jest.tests_passed -->1729<!--/n--> jest tests passed and <!--n results/release-validation-2026-10-22/validation.json:app.jest.tests_skipped -->4<!--/n--> skipped, <!--n results/release-validation-2026-10-22/validation.json:app.jest.snapshots_passed -->57<!--/n--> snapshots; line coverage <!--n results/release-validation-2026-10-22/validation.json:app.jest.coverage_percent.lines -->82.94<!--/n-->% (floor <!--n results/release-validation-2026-10-22/validation.json:app.jest.coverage_floor_percent.lines -->77<!--/n-->%); TypeScript passes; lint <!--n results/release-validation-2026-10-22/validation.json:app.lint.errors -->0<!--/n--> errors</td>
+<td><code>npm run typecheck</code>, <code>npx eslint src test --ext .ts,.tsx</code>, <code>npx jest --ci</code> in <code>app</code></td>
+</tr>
+<tr>
+<td>The packaged media and Playback Proof records are the approved ones</td>
+<td>prepared library <!--n results/release-validation-2026-10-22/validation.json:app.prepared_library.bytes -->129255687<!--/n--> bytes, catalog <!--n results/release-validation-2026-10-22/validation.json:app.prepared_library.catalogSha256 -->02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79<!--/n-->, every report present; the proof records reproduce from the approved catalogs; <!--n results/release-validation-2026-10-22/validation.json:app.node_tool_tests.passed -->60<!--/n--> tool tests</td>
+<td><code>node tools/check_prepared_library.mjs</code>, <code>node tools/playback_proof.mjs --check</code> and CI&#39;s tool tests in <code>app</code></td>
+</tr>
+<tr>
+<td>The app&#39;s own screens do not flash</td>
+<td><!--n results/release-validation-2026-10-22/validation.json:app.ui_flash_screens_and_transitions -->79<!--/n--> screens and transitions pass the WCAG and broadcast profiles, and the negative control still refuses a flash and a grating; <!--n results/release-validation-2026-10-22/validation.json:app.brand_images_checked -->17<!--/n--> shipped images pass</td>
+<td><code>npm run ui:flashmap</code>, <code>node tools/ui_flashmap.mjs --negative-control</code>, <code>python eval/brand_assets_check.py</code></td>
+</tr>
+<tr>
+<td>No secret in the tree</td>
+<td>gitleaks found no leaks</td>
+<td><code>gitleaks dir . --config .gitleaks.toml</code></td>
+</tr>
+<tr>
+<td>The package installed is the package built from this commit</td>
+<td>SHA-256 <!--n results/release-validation-2026-10-22/validation.json:native.final_build.package_sha256 -->6914d157c76a0478588f63e222525754f1202990481e313b4e72422c93759090<!--/n-->, <!--n results/release-validation-2026-10-22/validation.json:native.final_build.package_bytes -->132592040<!--/n--> bytes; the device&#39;s own SHA-384 matches</td>
+<td><code>make release RELEASE_ARGS=&quot;--tag &lt;tag&gt;&quot;</code>, then <code>vpm info</code> on the device</td>
+</tr>
+</tbody></table>
+<h2 id="on-the-vega-virtual-device">On the Vega Virtual Device</h2>
+<p>All observations are from the final build, driven one remote key at a time and
+judged by the app&#39;s own trace lines, with app-window-only screenshots; details
+and picture hashes are in <code>validation.json</code> under <code>native</code>.</p>
+<ul>
+<li>Home, Details, More info and Playback proof &amp; details are reached with the
+remote, and the three evidence stages switch in place without playing
+anything.</li>
+<li>Acadia&#39;s three stages show its approved extra cautious record: <!--n results/release-validation-2026-10-22/validation.json:native.displayed.acadia.source_findings.wcag -->3<!--/n--> WCAG
+and <!--n results/release-validation-2026-10-22/validation.json:native.displayed.acadia.source_findings.broadcast -->3<!--/n--> broadcast source findings, no output findings, the cover proven
+drawn, <!--n results/release-validation-2026-10-22/validation.json:native.displayed.acadia.frames -->1804<!--/n--> frames, prepared file <code>&lt;!--n results/release-validation-2026-10-22/validation.json:native.displayed.acadia.prepared_file --&gt;8aa6b3566e32&lt;!--/n--&gt;</code> and report
+<code>&lt;!--n results/release-validation-2026-10-22/validation.json:native.displayed.acadia.report --&gt;4043445adbb8&lt;!--/n--&gt;</code>.</li>
+<li>McWay&#39;s report does not record its output analyzer version, and the page says
+&quot;version not recorded in this report&quot; rather than inventing one.</li>
+<li>Every section of the record below the proof takes focus in order and scrolls
+into view, and the bottom Back follows.</li>
+<li>Remote Back restores each opener: the proof button, More info, the Home
+Details button, and Watch after playback.</li>
+<li>McWay played from the approved edition <code>&lt;!--n results/release-validation-2026-10-22/validation.json:native.displayed.mcway.prepared_file --&gt;795927874818&lt;!--/n--&gt;</code>: the picture
+appeared at media <!--n results/release-validation-2026-10-22/validation.json:native.mcway_playback.picture_shown_media_ms -->299<!--/n--> ms and playback ended<!--n results/release-validation-2026-10-22/validation.json:native.mcway_playback.seconds_from_picture_to_end -->300.8<!--/n--> seconds later on the still frame, with no stall,
+surface loss or error line in between. A frame from a second, shorter run is in
+<code>results/release-validation-2026-10-22/native/</code>.</li>
+<li>Of <!--n results/release-validation-2026-10-22/validation.json:native.key_presses.total -->70<!--/n--> remote presses, <!--n results/release-validation-2026-10-22/validation.json:native.key_presses.with_expected_trace -->64<!--/n--> expected a trace line
+and all <!--n results/release-validation-2026-10-22/validation.json:native.key_presses.expected_trace_seen -->64<!--/n--> produced it before the next press. The<!--n results/release-validation-2026-10-22/validation.json:native.key_presses.stage_selections_without_trace -->6<!--/n--> stage selections print no trace line and were checked on
+screen, except one made while the screen was locked.</li>
+</ul>
+<h2 id="found-and-fixed-during-this-validation">Found and fixed during this validation</h2>
+<ul>
+<li><strong>The analysis record below the proof could not be reached with the remote.</strong>
+On the first integrated build, one Down from the stage buttons went straight to
+the closing Back. The record&#39;s sections are now focus stops
+(<code>app/src/calmframes/ReadingStop.tsx</code>); a test fails on any text outside one,
+and the ten foot test holds their rings to the button floors.</li>
+<li><strong>Python lint failed in CI</strong> on five ruff errors in the architecture renderer,
+present on <code>bf2f615</code> too. Fixed by formatting only; the rendered PNG and SVG
+are byte-identical.</li>
+<li><strong>Two integration fixes had no mutation</strong>: the scene-hold publication check and
+the oversized ledger timestamp. Both are now in the recovery runner&#39;s guard
+mutations and both are killed.</li>
+</ul>
+<h2 id="not-established">Not established</h2>
+<ul>
+<li>Audio was not listened to. The new light menu palette and the reading-stop
+focus look still need the owner&#39;s own review.</li>
+<li><!--n results/release-validation-2026-10-22/validation.json:native.failed_captures -->4<!--/n--> screenshots failed while the Mac screen was locked; those steps rest on
+trace lines, which the device can drop under load.</li>
+<li>The five-minute run was judged from trace lines alone, because the Mac screen
+was locked while it played.</li>
+<li>Sea Otters, Forest and Acadia were not played in this session.</li>
+<li>Recovery evidence comes from one Mac and APFS; no power was cut. See
+<a href="https://github.com/alejandro-publius/calm-frames/blob/13551e45bd853c392489dbecce7158a04036f615/docs/PREPARATION_RECOVERY.md#limitations">the recovery limits</a>.</li>
+<li>No hosted CI run exists for this branch, because it is not pushed.</li>
+<li>Approved work directories were not prepared again: with this code, the first
+re-preparation of an old work directory reruns every step and signs new maps.</li>
+</ul>
+<h2 id="rollback">Rollback</h2>
+<p>The package the device held before this validation is the submitted candidate&#39;s
+app (<code>60c3bbb</code>), package SHA-256
+<code>207898aa14d8659760348a716b825fabab83afd8e3b9431f9387202cc10e7163</code>. A read-only
+copy is kept outside the repository with its SHA-256 and SHA-384. Reinstall it
+with <code>vega device install-app --device VirtualDevice --packagePath &lt;that copy&gt;</code>.
+The submitted branch and commit and the public video are untouched.</p>
+</main>
+<footer class="reading-footer wrap"><p>Source: <a href="../evidence/release-readiness.md">docs/judging-package/evidence/release-readiness.md</a></p><p>Source SHA-256: <code>121e6a334536e3002b8995266b8dbb5725163ec791015d478b6c9227c61cc568</code></p><a href="../index.html">Return to the guided review</a></footer></body></html>

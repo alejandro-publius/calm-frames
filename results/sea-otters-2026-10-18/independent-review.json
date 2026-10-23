@@ -1,0 +1,90 @@
+{
+  "reviewer": "cinematic_review",
+  "date": "2026-10-18",
+  "status": "staged_candidate_review_passed",
+  "activation_approved": false,
+  "findings": [],
+  "source_sha256": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+  "catalog_sha256": "6b3f250598791232009a8c2ddef81bab0411eebcaa201ff582e7313cd4e9e7fe",
+  "bundle_id": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+  "signer_fingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+  "report_sha256": "fd6387755e9561a3ec7875ba4c4505a1a34e6ac3243d0af90d0a7051e6fe99a0",
+  "source": {
+    "window_seconds": [
+      122,
+      142
+    ],
+    "encoded_duration_seconds": 19.986633,
+    "frames": 599,
+    "frame_rate": "30000/1001",
+    "resolution": "854x480",
+    "audio": false,
+    "contains_source_shot_change": true,
+    "species": "Enhydra lutris",
+    "location": "Unalaska/Dutch Harbor, Alaska",
+    "credit": "NOAA Fisheries"
+  },
+  "independent_checks": {
+    "provenance_media_and_evidence_hashes_match": true,
+    "catalog_report_signer_and_all_six_payload_hashes_match": true,
+    "report_checks": 48,
+    "all_report_checks_passed": true,
+    "all_three_maps_no_flagged_segments": true,
+    "python_candidate_and_replacement_read_only_validation_passed": true,
+    "node_candidate_and_replacement_read_only_validation_passed": true,
+    "candidate_bytes": 29275450,
+    "replacement_namespace_bytes": 64432686,
+    "limit_bytes": 67108864,
+    "replacement_headroom_bytes": 2676178,
+    "retained_files_all_byte_identical": true,
+    "current_ocean_acadia_payload_files_retained": 7,
+    "only_removed_bundle": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13",
+    "only_removed_report": "0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019",
+    "new_files": 8,
+    "app_pipeline_flashmap_working_diff_empty": true
+  },
+  "tamper_review": {
+    "method": "Inspected check_candidate.py and tamper-results.json; independently reran positive validators only to avoid writes outside this review file.",
+    "reported_rejections": [
+      "media bytes changed",
+      "map bytes changed",
+      "report bytes changed"
+    ],
+    "both_python_and_node_reject_all_three": true,
+    "original_and_restored_accepted": true
+  },
+  "integration_boundaries": [
+    "Candidate remains unapproved and not installed.",
+    "Fresh namespace is a staged delivery artifact; existing app namespace is untouched.",
+    "Existing acadiaCatalog fallback still references the omitted obsolete bundle and must be retired safely during authorized isolated integration.",
+    "The combined check reports one root catalog title, not the future selectable shelf; registry/shelf behavior requires app tests after integration.",
+    "No broad signer trust or ambient registration authorized by this review."
+  ],
+  "limitations": [
+    "No detector rerun by reviewer; checked complete report and validator results against exact bytes.",
+    "No native build, install, playback, device action or screen capture.",
+    "No visual safety, audio-output or clinical claim."
+  ],
+  "evidence_hashes": {
+    "provenance.json": "3223452d69754d08c6c584a525fa649f231dceb338f28b94e8bfff48d94edc41",
+    "approval-proposal.json": "c96c3a58bb22e4392908b6ca4f76b9fd453195842b070da575f03908248e707b",
+    "candidate-catalog.json": "6b3f250598791232009a8c2ddef81bab0411eebcaa201ff582e7313cd4e9e7fe",
+    "verification-report.json": "fd6387755e9561a3ec7875ba4c4505a1a34e6ac3243d0af90d0a7051e6fe99a0",
+    "combined-delivery-check.json": "681b930804801804e55a540bdaa9395ffd9f1a9ccd7f0a79d211eccaa3542eed",
+    "tamper-results.json": "68748ef5994d84bd2bfd86d3aeb393f48cb910faba13023e845b5cd0f9ace019",
+    "check_candidate.py": "64ce121874b1b7410d82fd25032fa29a131b8d005f71f775d31697c905b5e667",
+    "rejected-40s-verification-report.json": "669e0c5e45f55ed1b837662cd0c31e1a1f71c36a8ff59221b970d2a0e7b022b5"
+  },
+  "rejected_alternative": {
+    "duration_seconds": 39.973267,
+    "failed_checks": [
+      "cover_model_clean:wcag",
+      "safe_rendition_clean:broadcast",
+      "cover_model_clean:broadcast",
+      "hls_rendition_clean:broadcast"
+    ],
+    "passed": false,
+    "exported": false,
+    "note": "Parent reports never exported; final proposed candidate is a different exact source/cut and report."
+  }
+}

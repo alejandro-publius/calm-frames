@@ -1,0 +1,9 @@
+{
+  "status": "verified local package, excluded from additive TV proposal",
+  "existing_library_bytes": 28551507,
+  "isolated_package_bytes": 40796812,
+  "naive_combined_bytes": 69348319,
+  "limit_bytes": 67108864,
+  "over_by_bytes": 2239455,
+  "resolution": "Use official complete480p version; retain existing titles and cap; no TV trust change made"
+}

@@ -54,8 +54,8 @@ describe('ControlBarMenu', () => {
     const container = UNSAFE_getByType(View);
     expect(container.props.style).toMatchObject({
       position: 'absolute',
-      bottom: 90,
-      right: 0,
+      bottom: 360,
+      right: 96,
     });
   });
 });

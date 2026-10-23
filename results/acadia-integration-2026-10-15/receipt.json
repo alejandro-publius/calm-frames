@@ -1,0 +1,52 @@
+{
+  "candidateCommit": "ec323fcf38ccb493082100bbf06ea79b0cfb1c53",
+  "importedCommit": "f46e238",
+  "branch": "codex/prepared-video-slice-2026-10-15",
+  "status": "offscreen-audit-passed-awaiting-exact-public-key-approval",
+  "trustChanged": false,
+  "acadiaInAppAssets": false,
+  "candidateNativePlayback": false,
+  "installedPackageUnchanged": true,
+  "sourceTests": {
+    "pythonFocused": 37,
+    "packagedLibrary": 55,
+    "appSuites": 131,
+    "appPassed": 1302,
+    "appSkipped": 4,
+    "snapshots": 57,
+    "captureSuitesExcluded": 3,
+    "soundFocused": 46,
+    "typecheck": "passed",
+    "lintErrors": 0,
+    "lintWarnings": 101,
+    "ruff": "passed via installed ruff CLI",
+    "style": "passed",
+    "publishedNumbers": 664
+  },
+  "soundChange": "Existing original optional cue retained; added held Select/Enter confirmation suppression. Saved preference unchanged. No new native/audio verification.",
+  "limits": [
+    "Full covered-frame comparison uses whole-frame RGB PSNR >=30 dB; not exact pixel equality.",
+    "Signature verification under the staged candidate public key is not approval to trust it in the app.",
+    "No original or prepared Acadia playback, capture, private key access or generation by Codex.",
+    "Same-analyzer evidence is not independent detector validation.",
+    "Loop seam, native event ordering, audio, captions and visual quality remain unverified."
+  ],
+  "evidence": {
+    "all-covered-frames.json": "7fa4a90aeecba41a4eff2fda0163c97af5d790dbf69b4b96380a0e39feaacad5",
+    "evidence-summary.json": "b637cc8ada28c543c4d7d90243ead8dd8a47480695af57f5f60fbed0740c1314",
+    "source-identity.json": "f5a6894a89b684ac940411c1b505e53ef56e5b009aa7b5d482ee1b08466a66e9",
+    "staging.json": "3e0668642fe076748600bc4e0cd6f9fdbcfc107dac7a4aceb8e9032a5d289f78",
+    "strict-check.json": "3ea391168cc57f78d9367b4bf7eb2c4b5ce76b5da87a66c583bc60bdd0ad46df",
+    "strict-tamper-checks.json": "c3410325f0c8d78258bfe2412aa32465aeb09b8b20bf7a98efe064fa938aff97"
+  },
+  "logs": {
+    ".logs/acadia-audit/focused-tests.log": "483b1f9778476c61b674ee2f524d6dfac816c110c24878ec102e1b363411efd1",
+    ".logs/acadia-audit/package-tests.log": "e78f6da75b7fe3f2749fdf1645976928ca32b7b19af211407dc671d20fe389da",
+    ".logs/acadia-audit/app-tests.log": "da996de534979350f8b8f5f114150c6598d2ef7a6f7a809f3d5587fe98eb6058",
+    ".logs/acadia-audit/audio-tests.log": "b89f053da1ddd5fe53ea74b7fad40445f2cc4f36c21a5edfb78b6c140d57b781",
+    ".logs/acadia-audit/typecheck.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+    ".logs/acadia-audit/lint.log": "9fc358320c07706b067699e9ca01e9cbdbe7920178da2974618a1ab452bf4749",
+    ".logs/acadia-audit/ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    ".logs/acadia-audit/style.log": "2e7b3eea1c9319c98cabbd83290a90a26e4371f5efc2ec8d3c6e8ffff31dc8ca"
+  }
+}

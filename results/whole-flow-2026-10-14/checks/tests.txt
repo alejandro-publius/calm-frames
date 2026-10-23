@@ -1,0 +1,14 @@
+ PASS  test/calmframes/mediaClock.test.ts
+ PASS  test/components/MovieCarousel.test.tsx
+ PASS  test/utils/commonFunctions.test.ts
+ PASS  test/calmframes/chimeSound.test.ts
+ PASS  test/blocks/components/MessageBox/MessageBoxProps.test.tsx
+ PASS  test/components/GradientButton.test.tsx
+ PASS  test/utils/FocusManager.test.ts
+ PASS  test/config/AppConfig.test.ts
+
+Test Suites: 1 skipped, 122 passed, 122 of 123 total
+Tests:       4 skipped, 1256 passed, 1260 total
+Snapshots:   57 passed, 57 total
+Time:        38.179 s
+Ran all test suites.

@@ -1,0 +1,1794 @@
+{
+  "1080/caption-menu": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\ue01c\nEnglish practice captions\nOff",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\ue01c\nEnglish practice captions\nOff",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 96,
+      "y": 54,
+      "width": 248.390625,
+      "height": 70,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 118,
+      "y": 68,
+      "width": 204.390625,
+      "height": 42,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "\ue5cb\nHarbor\n\ue01c\nEnglish practice captions\nOff",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "5"
+    },
+    {
+      "id": "header_back_icon",
+      "text": "\ue5cb",
+      "x": 45,
+      "y": 35,
+      "width": 70,
+      "height": 70,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-header",
+      "text": "Harbor",
+      "x": 206,
+      "y": 32,
+      "width": 1674,
+      "height": 76,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "control-bar",
+      "text": "\ue01c",
+      "x": 0,
+      "y": 950,
+      "width": 1920,
+      "height": 130,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-caption-btn",
+      "text": "\ue01c",
+      "x": 1810,
+      "y": 970,
+      "width": 90,
+      "height": 90,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-caption-menu",
+      "text": "English practice captions",
+      "x": 1670,
+      "y": 754,
+      "width": 250,
+      "height": 148,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "caption-menu-focus-element",
+      "text": "Off",
+      "x": 1670,
+      "y": 906,
+      "width": 250,
+      "height": 84,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-caption-menu",
+      "text": "Off",
+      "x": 1670,
+      "y": 910,
+      "width": 250,
+      "height": 76,
+      "centerVisible": true,
+      "zIndex": "auto"
+    }
+  ],
+  "1080/controls-back": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 96,
+      "y": 54,
+      "width": 248.390625,
+      "height": 70,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 118,
+      "y": 68,
+      "width": 204.390625,
+      "height": 42,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "5"
+    },
+    {
+      "id": "header_back_icon",
+      "text": "\ue5cb",
+      "x": 45,
+      "y": 35,
+      "width": 70,
+      "height": 70,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-header",
+      "text": "Harbor",
+      "x": 206,
+      "y": 32,
+      "width": 1674,
+      "height": 76,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "control-bar",
+      "text": "\uf1dc",
+      "x": 0,
+      "y": 970,
+      "width": 1920,
+      "height": 110,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-caption-btn",
+      "text": "\uf1dc",
+      "x": 1820,
+      "y": 980,
+      "width": 90,
+      "height": 90,
+      "centerVisible": true,
+      "zIndex": "auto"
+    }
+  ],
+  "1080/controls-captions": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 96,
+      "y": 54,
+      "width": 248.390625,
+      "height": 70,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 118,
+      "y": 68,
+      "width": 204.390625,
+      "height": 42,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "5"
+    },
+    {
+      "id": "header_back_icon",
+      "text": "\ue5cb",
+      "x": 45,
+      "y": 35,
+      "width": 70,
+      "height": 70,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-header",
+      "text": "Harbor",
+      "x": 206,
+      "y": 32,
+      "width": 1674,
+      "height": 76,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "control-bar",
+      "text": "\uf1dc",
+      "x": 0,
+      "y": 970,
+      "width": 1920,
+      "height": 110,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-caption-btn",
+      "text": "\uf1dc",
+      "x": 1820,
+      "y": 980,
+      "width": 90,
+      "height": 90,
+      "centerVisible": true,
+      "zIndex": "auto"
+    }
+  ],
+  "1080/error": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nAn error occurred while playing the video, please try again later.",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nAn error occurred while playing the video, please try again later.",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "calm-frames-cover",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "1"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 96,
+      "y": 54,
+      "width": 248.390625,
+      "height": 70,
+      "centerVisible": true,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 118,
+      "y": 68,
+      "width": 204.390625,
+      "height": 42,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "header_back_icon",
+      "text": "\ue5cb",
+      "x": 45,
+      "y": 35,
+      "width": 70,
+      "height": 70,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-header",
+      "text": "",
+      "x": 206,
+      "y": 70,
+      "width": 1674,
+      "height": 0,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "error-boundary-label",
+      "text": "An error occurred while playing the video, please try again later.",
+      "x": 731.015625,
+      "y": 550,
+      "width": 457.953125,
+      "height": 20,
+      "centerVisible": false,
+      "zIndex": "auto"
+    }
+  ],
+  "1080/paused-countdown": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice hold coming up\nIn 2 seconds. Press Skip to jump past it.\nSkip\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice hold coming up\nIn 2 seconds. Press Skip to jump past it.\nSkip\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card",
+      "text": "Practice hold coming up\nIn 2 seconds. Press Skip to jump past it.\nSkip",
+      "x": 0,
+      "y": 160,
+      "width": 1920,
+      "height": 278,
+      "centerVisible": false,
+      "zIndex": "3"
+    },
+    {
+      "id": "calm-card-title",
+      "text": "Practice hold coming up",
+      "x": 749.46875,
+      "y": 194,
+      "width": 421.046875,
+      "height": 48,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card-detail",
+      "text": "In 2 seconds. Press Skip to jump past it.",
+      "x": 637.734375,
+      "y": 254,
+      "width": 644.515625,
+      "height": 48,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card-skip",
+      "text": "Skip",
+      "x": 885.1875,
+      "y": 322,
+      "width": 149.59375,
+      "height": 82,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 96,
+      "y": 54,
+      "width": 248.390625,
+      "height": 70,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 118,
+      "y": 68,
+      "width": 204.390625,
+      "height": 42,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "5"
+    }
+  ],
+  "1080/paused-hold": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nHolding a calm scene\nPractice hold. Sound and captions keep playing.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nHolding a calm scene\nPractice hold. Sound and captions keep playing.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "calm-frames-cover",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "1"
+    },
+    {
+      "id": "calm-frames-cover-still",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card",
+      "text": "Holding a calm scene\nPractice hold. Sound and captions keep playing.",
+      "x": 0,
+      "y": 160,
+      "width": 1920,
+      "height": 176,
+      "centerVisible": false,
+      "zIndex": "3"
+    },
+    {
+      "id": "calm-card-title",
+      "text": "Holding a calm scene",
+      "x": 773.4375,
+      "y": 194,
+      "width": 373.109375,
+      "height": 48,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card-detail",
+      "text": "Practice hold. Sound and captions keep playing.",
+      "x": 571.109375,
+      "y": 254,
+      "width": 777.78125,
+      "height": 48,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 96,
+      "y": 54,
+      "width": 248.390625,
+      "height": 70,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 118,
+      "y": 68,
+      "width": 204.390625,
+      "height": 42,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "5"
+    }
+  ],
+  "1080/paused-story": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 96,
+      "y": 54,
+      "width": 248.390625,
+      "height": 70,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 118,
+      "y": 68,
+      "width": 204.390625,
+      "height": 42,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "5"
+    }
+  ],
+  "1080/playing-hold": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nHolding a calm scene\nPractice hold. Sound and captions keep playing.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nHolding a calm scene\nPractice hold. Sound and captions keep playing.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "calm-frames-cover",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "1"
+    },
+    {
+      "id": "calm-frames-cover-still",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card",
+      "text": "Holding a calm scene\nPractice hold. Sound and captions keep playing.",
+      "x": 0,
+      "y": 160,
+      "width": 1920,
+      "height": 176,
+      "centerVisible": false,
+      "zIndex": "3"
+    },
+    {
+      "id": "calm-card-title",
+      "text": "Holding a calm scene",
+      "x": 773.4375,
+      "y": 194,
+      "width": 373.109375,
+      "height": 48,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card-detail",
+      "text": "Practice hold. Sound and captions keep playing.",
+      "x": 571.109375,
+      "y": 254,
+      "width": 777.78125,
+      "height": 48,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 96,
+      "y": 54,
+      "width": 248.390625,
+      "height": 70,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 118,
+      "y": 68,
+      "width": 204.390625,
+      "height": 42,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "centerVisible": true,
+      "zIndex": "5"
+    }
+  ],
+  "720/caption-menu": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\ue01c\nEnglish practice captions\nOff",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\ue01c\nEnglish practice captions\nOff",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 64,
+      "y": 36,
+      "width": 162.140625,
+      "height": 46,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 78,
+      "y": 45,
+      "width": 134.140625,
+      "height": 28,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "\ue5cb\nHarbor\n\ue01c\nEnglish practice captions\nOff",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "5"
+    },
+    {
+      "id": "header_back_icon",
+      "text": "\ue5cb",
+      "x": 30,
+      "y": 24,
+      "width": 70,
+      "height": 70,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-header",
+      "text": "Harbor",
+      "x": 137,
+      "y": 33.5,
+      "width": 1116,
+      "height": 51,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "control-bar",
+      "text": "\ue01c",
+      "x": 0,
+      "y": 606,
+      "width": 1280,
+      "height": 114,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-caption-btn",
+      "text": "\ue01c",
+      "x": 1186,
+      "y": 626,
+      "width": 74,
+      "height": 74,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-caption-menu",
+      "text": "English practice captions",
+      "x": 1113,
+      "y": 503,
+      "width": 167,
+      "height": 98,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "caption-menu-focus-element",
+      "text": "Off",
+      "x": 1113,
+      "y": 604,
+      "width": 167,
+      "height": 56,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-caption-menu",
+      "text": "Off",
+      "x": 1113,
+      "y": 607,
+      "width": 167,
+      "height": 50,
+      "centerVisible": true,
+      "zIndex": "auto"
+    }
+  ],
+  "720/controls-back": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 64,
+      "y": 36,
+      "width": 162.140625,
+      "height": 46,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 78,
+      "y": 45,
+      "width": 134.140625,
+      "height": 28,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "5"
+    },
+    {
+      "id": "header_back_icon",
+      "text": "\ue5cb",
+      "x": 30,
+      "y": 24,
+      "width": 70,
+      "height": 70,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-header",
+      "text": "Harbor",
+      "x": 137,
+      "y": 33.5,
+      "width": 1116,
+      "height": 51,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "control-bar",
+      "text": "\uf1dc",
+      "x": 0,
+      "y": 626,
+      "width": 1280,
+      "height": 94,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-caption-btn",
+      "text": "\uf1dc",
+      "x": 1196,
+      "y": 636,
+      "width": 74,
+      "height": 74,
+      "centerVisible": true,
+      "zIndex": "auto"
+    }
+  ],
+  "720/controls-captions": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 64,
+      "y": 36,
+      "width": 162.140625,
+      "height": 46,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 78,
+      "y": 45,
+      "width": 134.140625,
+      "height": 28,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "\ue5cb\nHarbor\n\uf1dc",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "5"
+    },
+    {
+      "id": "header_back_icon",
+      "text": "\ue5cb",
+      "x": 30,
+      "y": 24,
+      "width": 70,
+      "height": 70,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-header",
+      "text": "Harbor",
+      "x": 137,
+      "y": 33.5,
+      "width": 1116,
+      "height": 51,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "control-bar",
+      "text": "\uf1dc",
+      "x": 0,
+      "y": 626,
+      "width": 1280,
+      "height": 94,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-caption-btn",
+      "text": "\uf1dc",
+      "x": 1196,
+      "y": 636,
+      "width": 74,
+      "height": 74,
+      "centerVisible": true,
+      "zIndex": "auto"
+    }
+  ],
+  "720/error": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nAn error occurred while playing the video, please try again later.",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice holds\n\ue5cb\nAn error occurred while playing the video, please try again later.",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "calm-frames-cover",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "1"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 64,
+      "y": 36,
+      "width": 162.140625,
+      "height": 46,
+      "centerVisible": true,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 78,
+      "y": 45,
+      "width": 134.140625,
+      "height": 28,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "header_back_icon",
+      "text": "\ue5cb",
+      "x": 30,
+      "y": 24,
+      "width": 70,
+      "height": 70,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-header",
+      "text": "",
+      "x": 137,
+      "y": 59,
+      "width": 1116,
+      "height": 0,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "error-boundary-label",
+      "text": "An error occurred while playing the video, please try again later.",
+      "x": 453,
+      "y": 349,
+      "width": 374,
+      "height": 40,
+      "centerVisible": false,
+      "zIndex": "auto"
+    }
+  ],
+  "720/paused-countdown": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice hold coming up\nIn 2 seconds. Press Skip to jump past it.\nSkip\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice hold coming up\nIn 2 seconds. Press Skip to jump past it.\nSkip\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card",
+      "text": "Practice hold coming up\nIn 2 seconds. Press Skip to jump past it.\nSkip",
+      "x": 0,
+      "y": 107,
+      "width": 1280,
+      "height": 184,
+      "centerVisible": false,
+      "zIndex": "3"
+    },
+    {
+      "id": "calm-card-title",
+      "text": "Practice hold coming up",
+      "x": 501.484375,
+      "y": 129,
+      "width": 277.015625,
+      "height": 32,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card-detail",
+      "text": "In 2 seconds. Press Skip to jump past it.",
+      "x": 425.15625,
+      "y": 169,
+      "width": 429.671875,
+      "height": 32,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card-skip",
+      "text": "Skip",
+      "x": 590.453125,
+      "y": 214,
+      "width": 99.0625,
+      "height": 55,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 64,
+      "y": 36,
+      "width": 162.140625,
+      "height": 46,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 78,
+      "y": 45,
+      "width": 134.140625,
+      "height": 28,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "5"
+    }
+  ],
+  "720/paused-hold": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nHolding a calm scene\nPractice hold. Sound and captions keep playing.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nHolding a calm scene\nPractice hold. Sound and captions keep playing.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "calm-frames-cover",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "1"
+    },
+    {
+      "id": "calm-frames-cover-still",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card",
+      "text": "Holding a calm scene\nPractice hold. Sound and captions keep playing.",
+      "x": 0,
+      "y": 107,
+      "width": 1280,
+      "height": 116,
+      "centerVisible": false,
+      "zIndex": "3"
+    },
+    {
+      "id": "calm-card-title",
+      "text": "Holding a calm scene",
+      "x": 517.265625,
+      "y": 129,
+      "width": 245.46875,
+      "height": 32,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card-detail",
+      "text": "Practice hold. Sound and captions keep playing.",
+      "x": 380.734375,
+      "y": 169,
+      "width": 518.53125,
+      "height": 32,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 64,
+      "y": 36,
+      "width": 162.140625,
+      "height": 46,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 78,
+      "y": 45,
+      "width": 134.140625,
+      "height": 28,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "5"
+    }
+  ],
+  "720/paused-story": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 64,
+      "y": 36,
+      "width": 162.140625,
+      "height": 46,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 78,
+      "y": 45,
+      "width": 134.140625,
+      "height": 28,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "5"
+    }
+  ],
+  "720/playing-hold": [
+    {
+      "id": "safe-area-view",
+      "text": "A small boat rests in the harbor.\nHolding a calm scene\nPractice hold. Sound and captions keep playing.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "touchable-opacity",
+      "text": "A small boat rests in the harbor.\nHolding a calm scene\nPractice hold. Sound and captions keep playing.\nPractice holds",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-video-surface-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "0"
+    },
+    {
+      "id": "calm-frames-cover",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "1"
+    },
+    {
+      "id": "calm-frames-cover-still",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "kepler-captions-view",
+      "text": "A small boat rests in the harbor.",
+      "x": 0,
+      "y": -120,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card",
+      "text": "Holding a calm scene\nPractice hold. Sound and captions keep playing.",
+      "x": 0,
+      "y": 107,
+      "width": 1280,
+      "height": 116,
+      "centerVisible": false,
+      "zIndex": "3"
+    },
+    {
+      "id": "calm-card-title",
+      "text": "Holding a calm scene",
+      "x": 517.265625,
+      "y": 129,
+      "width": 245.46875,
+      "height": 32,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "calm-card-detail",
+      "text": "Practice hold. Sound and captions keep playing.",
+      "x": 380.734375,
+      "y": 169,
+      "width": 518.53125,
+      "height": 32,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "benign-demo-plate",
+      "text": "Practice holds",
+      "x": 64,
+      "y": 36,
+      "width": 162.140625,
+      "height": 46,
+      "centerVisible": false,
+      "zIndex": "4"
+    },
+    {
+      "id": "benign-demo-label",
+      "text": "Practice holds",
+      "x": 78,
+      "y": 45,
+      "width": 134.140625,
+      "height": 28,
+      "centerVisible": false,
+      "zIndex": "auto"
+    },
+    {
+      "id": "video-player-ui-view",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 720,
+      "centerVisible": true,
+      "zIndex": "5"
+    }
+  ]
+}

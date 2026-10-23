@@ -1,0 +1,157 @@
+Summary of all failing tests
+ FAIL  test/components/Player.test.tsx
+  ● PlayerScreen rendering Test Cases › renders correctly screenshot match
+
+    expect(received).toMatchSnapshot()
+
+    Snapshot name: `PlayerScreen rendering Test Cases renders correctly screenshot match 1`
+
+    - Snapshot  - 4
+    + Received  + 4
+
+    @@ -12,15 +12,15 @@
+          ]
+        }
+        testID="touchable-opacity"
+      >
+        <View
+    -     accessibilityLabel="Not checked yet. This title has not been checked, so the picture stays hidden. Sound and captions keep playing."
+    +     accessibilityLabel="This title is unavailable. This title is unavailable. The picture stays hidden while sound and captions keep playing."
+          accessibilityLiveRegion="polite"
+          accessibilityRole="alert"
+          accessible={true}
+    -     aria-label="Not checked yet. This title has not been checked, so the picture stays hidden. Sound and captions keep playing."
+    +     aria-label="This title is unavailable. This title is unavailable. The picture stays hidden while sound and captions keep playing."
+          aria-live="polite"
+          pointerEvents="box-none"
+          style={
+            {
+              "alignItems": "center",
+    @@ -58,11 +58,11 @@
+                  "textAlign": "center",
+                }
+              }
+              testID="calm-card-title"
+            >
+    -         Not checked yet
+    +         This title is unavailable
+            </Text>
+            <Text
+              style={
+                {
+                  "color": "#BDD0CF",
+    @@ -74,10 +74,10 @@
+                  "textAlign": "center",
+                }
+              }
+              testID="calm-card-detail"
+            >
+    -         This title has not been checked, so the picture stays hidden. Sound and captions keep playing.
+    +         This title is unavailable. The picture stays hidden while sound and captions keep playing.
+            </Text>
+          </View>
+        </View>
+      </View>
+
+      262 |   it('renders correctly screenshot match', () => {
+      263 |     const tree = render(renderPlayerScreen());
+    > 264 |     expect(tree).toMatchSnapshot();
+          |                  ^
+      265 |   });
+      266 |
+      267 |   it('SafeAreaView is present in component', async () => {
+
+      at Object.toMatchSnapshot (test/components/Player.test.tsx:264:18)
+
+ FAIL  test/calmframes/revokedKey.test.ts
+  ● a map signed by a revoked key › says the right thing to a parent, which is not the signature message
+
+    expect(received).toContain(expected) // indexOf
+
+    Expected substring: "someone we do not know"
+    Received string:    "This title comes from an unsupported source. The picture stays hidden."
+
+      76 |     if (!verdict.ok) {
+      77 |       const message = rejectionMessage(verdict.reason);
+    > 78 |       expect(message).toContain('someone we do not know');
+         |                       ^
+      79 |       expect(message).toContain('picture stays hidden');
+      80 |       // A revoked key is not a tampered map, and the two must not read alike.
+      81 |       expect(message).not.toBe(rejectionMessage('bad-signature'));
+
+      at Object.toContain (test/calmframes/revokedKey.test.ts:78:23)
+
+ FAIL  test/calmframes/hookMirror.test.ts
+  ● the hook package mirror › is byte for byte what the sync script would write today
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -57,11 +57,11 @@
+
+      /**
+       * Where the player puts its own words, in 1080p units from the top left.
+       *
+       * Captions own the bottom of the picture. PlayerScreen's KeplerCaptionsView
+    -  * ends 240 scaled units above the bottom edge and its cues stack upward from there.
+    +  * ends 120 units above the bottom edge and its cues stack upward from there.
+       * The card used to stand 160 units up from the bottom, inside that band, so
+       * it covered the captions at the very moment a hidden picture made them the
+       * only way to follow the story. It now hangs from the upper part of the safe
+       * area instead.
+       *
+
+      59 |       // The mirror carries a header saying where it came from, then the file.
+      60 |       expect(hookText).toContain('Mirrored from app/src/calmframes');
+    > 61 |       expect(hookText.slice(hookText.indexOf('\n */\n') + 5)).toBe(expected);
+         |                                                               ^
+      62 |     }
+      63 |   });
+      64 |
+
+      at Object.toBe (test/calmframes/hookMirror.test.ts:61:63)
+
+ FAIL  test/components/ControlBar.test.tsx
+  ● ControlBar with React.memo › renders correctly
+
+    expect(received).toMatchSnapshot()
+
+    Snapshot name: `ControlBar with React.memo renders correctly 1`
+
+    - Snapshot  - 0
+    + Received  + 2
+
+    @@ -2,9 +2,11 @@
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+    +       "marginBottom": 54,
+    +       "marginHorizontal": 96,
+          }
+        }
+        testID="control-bar"
+      />
+
+      28 |   it('renders correctly', () => {
+      29 |     const tree = render(renderControlBar());
+    > 30 |     expect(tree).toMatchSnapshot();
+         |                  ^
+      31 |   });
+      32 |
+      33 |   it('View is present in component', async () => {
+
+      at Object.toMatchSnapshot (test/components/ControlBar.test.tsx:30:18)
+
+
+Snapshot Summary
+ › 2 snapshots failed from 2 test suites. Inspect your code changes or run `npm test -- -u` to update them.
+
+Test Suites: 4 failed, 1 skipped, 112 passed, 116 of 117 total
+Tests:       4 failed, 4 skipped, 1189 passed, 1197 total
+Snapshots:   2 failed, 55 passed, 57 total
+Time:        42.957 s
+Ran all test suites.

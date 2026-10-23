@@ -229,6 +229,10 @@ export function measureText(
 /** Roles that take D-pad focus, and so have to show that they have it. */
 export const FOCUSABLE_ROLES = ['button', 'radio', 'link', 'menuitem'];
 
+/** A ReadingStop takes focus as text rather than as a control, and its ring is held to the same floors. */
+const isReadingStop = (props: Record<string, unknown> | undefined) =>
+  props?.accessibilityRole === 'text' && props?.focusable === true;
+
 /**
  * Every control on a screen, with its ring measured against both neighbours.
  *
@@ -267,8 +271,9 @@ export function measureFocusRings(
 
     const role = node.props?.accessibilityRole;
     const state = node.props?.accessibilityState as { disabled?: boolean } | undefined;
-    if (typeof role === 'string' && FOCUSABLE_ROLES.includes(role) && !state?.disabled) {
+    if (typeof role === 'string' && (FOCUSABLE_ROLES.includes(role) || isReadingStop(node.props)) && !state?.disabled) {
       const ringColour = String(style.borderColor ?? '');
+      const visibleRing = ringColour && ringColour !== 'transparent';
       const fill = nextBackground;
       found.push({
         testID: String(node.props?.testID ?? ''),
@@ -276,8 +281,8 @@ export function measureFocusRings(
         ringColour,
         fill,
         outside: background,
-        ringOnFill: ringColour ? contrastRatio(ringColour, fill) : 1,
-        ringOnOutside: ringColour ? contrastRatio(ringColour, background) : 1,
+        ringOnFill: visibleRing ? contrastRatio(ringColour, fill) : 1,
+        ringOnOutside: visibleRing ? contrastRatio(ringColour, background) : 1,
       });
     }
 

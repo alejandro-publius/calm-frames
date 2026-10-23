@@ -1,0 +1,26 @@
+{
+  "runtime": "v22.23.2",
+  "platform": "darwin",
+  "arch": "arm64",
+  "method": "11 successive batches, each verifies the 3 exact compiled Acadia maps; first cold then 10 warm. Host Node, NOT Vega.",
+  "mapLengths": [
+    8747,
+    6029,
+    6029
+  ],
+  "batchMs": [
+    23.969334000000003,
+    0.9640830000000165,
+    1.0351660000000038,
+    1.082666999999958,
+    0.9220839999999839,
+    0.8299999999999841,
+    0.8494580000000269,
+    1.1977909999999952,
+    0.9074579999999628,
+    0.8134170000000154,
+    0.7873329999999896
+  ],
+  "firstMs": 23.969334000000003,
+  "warmMedianMs": 0.9147709999999734
+}

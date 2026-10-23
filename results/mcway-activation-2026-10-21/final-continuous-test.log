@@ -1,0 +1,13 @@
+PASS test/calmframes/continuousScene.test.tsx
+  ✓ ending requires exact compiled route acceptance, edition and duration (1 ms)
+  ✓ ending image remains the extracted exact-rendition final frame (2 ms)
+  ✓ five-minute scene is explicit playback while old still choices remain available (199 ms)
+  ✓ real approved wcag route retains the final frame at its authenticated duration (1 ms)
+  ✓ real approved broadcast route retains the final frame at its authenticated duration (8 ms)
+  ✓ real approved extra-cautious route retains the final frame at its authenticated duration (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       6 passed, 6 total
+Snapshots:   0 total
+Time:        0.738 s, estimated 1 s
+Ran all test suites matching /test\/calmframes\/continuousScene.test.tsx/i.

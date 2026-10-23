@@ -5,9 +5,14 @@
   "license": "Apache-2.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
+  "react-native": "src/index.ts",
   "files": [
-    "src",
-    "README.md"
+    "src/index.ts",
+    "src/pixelUtils.ts",
+    "src/mirror.json",
+    "src/engine",
+    "README.md",
+    "LICENSE"
   ],
   "keywords": [
     "vega",
@@ -18,11 +23,16 @@
   ],
   "peerDependencies": {
     "@amazon-devices/kepler-media-controls": ">=1.0.0",
+    "@amazon-devices/react-linear-gradient": ">=2.0.0",
     "@amazon-devices/react-native-w3cmedia": ">=2.3.0",
     "react": ">=19.0.0",
-    "react-native": ">=0.83.0"
+    "react-native": ">=0.83.0",
+    "@amazon-devices/react-native-kepler": ">=4.0.0",
+    "@amazon-devices/react-native-svg": ">=3.0.0"
   },
   "scripts": {
-    "sync": "node tools/sync.mjs"
+    "sync": "node tools/sync.mjs",
+    "test:package": "node --test tools/check_package.test.mjs",
+    "check:package": "node tools/check_package.mjs"
   }
 }

@@ -1,0 +1,40 @@
+{
+  "source_commit": "51598761dc557f9bf95459f11ec3284ae604d333",
+  "package": {
+    "path": "build/release/native-concise-copy-20261023/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "bytes": 132598464,
+    "sha256": "20dcdf34c16619c78d163f5bffba39f2b1adfab84dc6ad9116a01ac09b3d72ea",
+    "sha384": "ad977b8e146bf3720d8a3469c242bbc8b6256609fb539efd74f88554b8b22a96125a6a7a12e44c971bdcbf6c9e43b9ec",
+    "installed_sha384_matches": true
+  },
+  "checks": {
+    "node": "22.23.2",
+    "jest": {
+      "passed": 1796,
+      "skipped": 4,
+      "suites_passed": 171,
+      "snapshots_passed": 57,
+      "exit": 0
+    },
+    "typescript": "passed",
+    "scoped_lint": "passed",
+    "native_build": "passed",
+    "media_provenance": "passed, unchanged 129255687 bytes"
+  },
+  "native_review": {
+    "Home": "shortened qualifier; coastal layout and focus intact",
+    "Details": "Still scene label; primary focus intact",
+    "Stationary_scene": "helper paragraph removed; title and Back/optional timed preview intact",
+    "Recovery_error": "source regression only, not forced natively",
+    "completion": "copy-only Finished label tested in Jest; prior full native ending evidence remains bound to3bc658f",
+    "profile_gate": "Enter your PIN observed; no digits entered; no household changes"
+  },
+  "limitations_file": "RELEASE_GATES.md",
+  "log_hashes": {
+    "copy-full-tests.log": "1c0b33306315349081c34b18d871f3f992c81668361880cce821df480b58e5f5",
+    "copy-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "copy-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "copy-build.log": "fd34853c47774cb444e946002c31de211ac3b9a4540373f38192dd3ce46f8637",
+    "copy-install.log": "57aff92755e9e1858f6621225a5055fb06315ae347c632e9838b91353bacff0c"
+  }
+}

@@ -1,0 +1,11 @@
+# Native continuation checkpoint
+
+Installed source: `3bc658f0491b02b92fa22bc454a40887ecbf23ae`. Package identity, test outcomes, exact media identity, timing samples and capture hashes are in receipt.json. This follows the confirmed asynchronous release fix, with a narrow read-only reconciliation of paused labels after native events. The regression failed before the change and passed afterward. No protective threshold, media, signing key, trust, edition or coastal design changed.
+
+Native fresh and recovered playback on e0f2ee7 progressed near real time. The final source then completed an uninterrupted five-minute McWay run at natural speed with no slow event, settled on its final frame, and stayed until Back. Next Watch began fresh instead of restoring the completed checkpoint. Paused saved-position recovery, first-press Play, Back release and background cancellation were observed on the final source. The paused label is visible in the retained frame. Recorded audio contains a signal; human listening is not claimed.
+
+The old synchronous timeout and mismatched handler ownership have concrete code fixes. The old extreme slowness did not recur in these runs, but host load also changed, so this is not an isolated causal proof or a guarantee against future stalls. The previously failing native Retry path did not recur and was not artificially forced. Source tests for delayed confirmation, failure and stale-generation cancellation are not native Retry acceptance.
+
+Remaining: native explicit Retry, cross-profile/caption restoration, simulated cover/Skip compositor check, human audio/palette/full-demo review and hosted CI. McWay has no caption track; household access was not bypassed. Do not call the complete release accepted from this bounded pass.
+
+Calm Frames is left at static Home. No recording or app log collector remains active. Simulator owner session 79214 remains available; check it before starting another. Rollback and the earlier e0f2ee7 package remain preserved. No push, merge, public video or submission change occurred. Original source/evidence archives remain intact. Import the new bundle into an isolated cloud branch rather than applying both overlapping bundles.

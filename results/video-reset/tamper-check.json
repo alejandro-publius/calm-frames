@@ -1,0 +1,47 @@
+{
+  "statement": "check_packaged_library on a copy of the exported bundle under build/ (not a symlinked path), one change at a time; the untouched copy must be accepted and every change must be refused. The report removal case shows what the check does when the original verification report is absent.",
+  "bundleId": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13",
+  "cases": [
+    {
+      "case": "untouched copy",
+      "result": "accepted",
+      "bundleId": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"
+    },
+    {
+      "case": "one byte flipped in the wcag rendition",
+      "result": "refused",
+      "message": "A packaged artifact differs from the verified export."
+    },
+    {
+      "case": "one byte flipped in the wcag signed map",
+      "result": "refused",
+      "message": "A packaged artifact differs from the verified export."
+    },
+    {
+      "case": "broadcast rendition replaced by the extra-cautious one",
+      "result": "refused",
+      "message": "A packaged artifact differs from the verified export."
+    },
+    {
+      "case": "manifest sha edited for the wcag map",
+      "result": "refused",
+      "message": "The packaged manifest bytes differ from the catalog."
+    },
+    {
+      "case": "hidden_ms edited inside the wcag map text (signature no longer matches)",
+      "result": "refused",
+      "message": "A packaged artifact differs from the verified export."
+    },
+    {
+      "case": "verification report removed",
+      "result": "accepted",
+      "bundleId": "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"
+    },
+    {
+      "case": "verification report removed, strict gate (require_reports=True)",
+      "result": "refused",
+      "message": "Original verification reports are missing: 0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019"
+    }
+  ],
+  "note": "The plain check treats the original verification report as an attachment and accepts a bundle without it, as its documentation says; the strict gate scripts/release.sh uses (require_reports) refuses it. Both behaviours are recorded above."
+}

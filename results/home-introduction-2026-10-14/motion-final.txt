@@ -1,0 +1,17 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false test/calmframes/homeIntroduction.test.tsx
+
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mtest/calmframes/[22m[1mhomeIntroduction.test.tsx[22m
+  [32m✓[39m [2mhome is the entry, with direct playback and an optional dismissible explanation (130 ms)[22m
+  [32m✓[39m [2man unavailable demo cannot be launched from either entry (6 ms)[22m
+  [32m✓[39m [2msaving blocks starting the optional demo as well as normal playback (12 ms)[22m
+  [32m✓[39m [2mhome ripples require explicit accessibility permission and stop in background (2 ms)[22m
+  [32m✓[39m [2mhome remains still when reduced motion is true (1 ms)[22m
+  [32m✓[39m [2mhome remains still when reduced motion is undefined (1 ms)[22m
+
+[1mTest Suites: [22m[1m[32m1 passed[39m[22m, 1 total
+[1mTests:       [22m[1m[32m6 passed[39m[22m, 6 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        0.935 s, estimated 1 s
+[2mRan all test suites[22m[2m matching [22m/test\/calmframes\/homeIntroduction.test.tsx/i[2m.[22m

@@ -28,7 +28,6 @@ import json
 import re
 import shutil
 import subprocess
-import sys
 import tomllib
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -58,6 +57,89 @@ def pip_audit_available() -> list[str] | None:
     return None
 
 
+def scanner_payload(completed: subprocess.CompletedProcess) -> dict:
+    """Exit 1 reports findings; every other failure must stay a failure."""
+    if completed.returncode not in (0, 1):
+        raise ValueError(f"scanner exited with status {completed.returncode}")
+    try:
+        payload = json.loads(completed.stdout)
+    except (json.JSONDecodeError, TypeError) as error:
+        raise ValueError("scanner did not return a JSON report") from error
+    if not isinstance(payload, dict) or "error" in payload:
+        raise ValueError("scanner returned an error or an invalid report object")
+    return payload
+
+
+def python_findings(payload: dict) -> tuple[int, list[dict]]:
+    dependencies = payload.get("dependencies")
+    if not isinstance(dependencies, list):
+        raise ValueError("pip-audit report has no dependencies list")
+    findings = []
+    for entry in dependencies:
+        if not isinstance(entry, dict):
+            raise ValueError("pip-audit returned an invalid dependency")
+        if "skip_reason" in entry:
+            # A skipped dependency has not been audited, even when other
+            # dependencies in this source completed successfully.
+            raise ValueError(f"pip-audit skipped dependency {entry.get('name', '(unnamed)')}")
+        if not all(isinstance(entry.get(key), str) and entry[key] for key in ("name", "version")):
+            raise ValueError("pip-audit dependency is missing its name or version")
+        vulnerabilities = entry.get("vulns")
+        if not isinstance(vulnerabilities, list) or any(
+            not isinstance(vuln, dict) or not isinstance(vuln.get("id"), str) or not vuln["id"]
+            for vuln in vulnerabilities
+        ):
+            raise ValueError("pip-audit dependency has an invalid vulnerability list")
+        if vulnerabilities:
+            findings.append({
+                "package": entry["name"],
+                "version": entry["version"],
+                "ids": sorted(vuln["id"] for vuln in vulnerabilities),
+            })
+    return len(dependencies), findings
+
+
+def npm_findings(payload: dict) -> tuple[dict, list[dict]]:
+    vulnerabilities = payload.get("vulnerabilities")
+    metadata = payload.get("metadata")
+    if payload.get("auditReportVersion") != 2 or not isinstance(vulnerabilities, dict):
+        raise ValueError("npm audit did not return a supported vulnerability report")
+    totals = metadata.get("vulnerabilities") if isinstance(metadata, dict) else None
+    severities = ("info", "low", "moderate", "high", "critical")
+    if not isinstance(totals, dict) or any(
+        type(totals.get(key)) is not int or totals[key] < 0 for key in (*severities, "total")
+    ):
+        raise ValueError("npm audit report has invalid vulnerability totals")
+    if totals["total"] != sum(totals[key] for key in severities) or totals["total"] != len(vulnerabilities):
+        raise ValueError("npm audit vulnerability totals do not match its findings")
+    findings = []
+    for name, entry in sorted(vulnerabilities.items()):
+        if not name or not isinstance(entry, dict):
+            raise ValueError("npm audit returned an invalid dependency")
+        if entry.get("severity") not in severities or not isinstance(entry.get("isDirect"), bool):
+            raise ValueError(f"npm audit returned an invalid finding for {name}")
+        via = entry.get("via")
+        if not isinstance(via, list) or not via:
+            raise ValueError(f"npm audit finding for {name} has no advisory information")
+        ids = set()
+        for advisory in via:
+            if isinstance(advisory, str) and advisory:
+                # npm also lists dependencies that propagate another
+                # package's vulnerability rather than having their own ID.
+                continue
+            if not isinstance(advisory, dict) or type(advisory.get("source")) is not int or advisory["source"] <= 0:
+                raise ValueError(f"npm audit finding for {name} has an invalid advisory ID")
+            ids.add(str(advisory["source"]))
+        findings.append({
+            "package": name,
+            "severity": entry["severity"],
+            "direct": entry["isDirect"],
+            "ids": sorted(ids),
+            "fix_available": bool(entry.get("fixAvailable")),
+        })
+    return totals, findings
+
+
 def audit_python(freeze_file: Path | None) -> dict:
     runner = pip_audit_available()
     if runner is None:
@@ -75,36 +157,29 @@ def audit_python(freeze_file: Path | None) -> dict:
         if not path.exists():
             results.append({"name": name, "path": relative, "ran": False, "reason": "no such file"})
             continue
-        completed = run(
-            runner + ["-r", str(path), "--no-deps", "--progress-spinner", "off", "--format", "json"]
-        )
         try:
-            payload = json.loads(completed.stdout or "{}")
-        except json.JSONDecodeError:
+            completed = run(
+                runner + ["-r", str(path), "--no-deps", "--progress-spinner", "off", "--format", "json"]
+            )
+            packages_audited, findings = python_findings(scanner_payload(completed))
+            if completed.returncode == 1 and not findings:
+                raise ValueError("pip-audit exited with status 1 without reporting findings")
+        except (OSError, ValueError) as error:
             results.append(
                 {
                     "name": name,
                     "path": relative,
                     "ran": False,
-                    "reason": (completed.stderr or completed.stdout)[-400:],
+                    "reason": str(error)[-400:],
                 }
             )
             continue
-        findings = [
-            {
-                "package": entry.get("name"),
-                "version": entry.get("version"),
-                "ids": sorted(v.get("id", "") for v in entry.get("vulns", [])),
-            }
-            for entry in payload.get("dependencies", [])
-            if entry.get("vulns")
-        ]
         results.append(
             {
                 "name": name,
                 "path": relative,
                 "ran": True,
-                "packages_audited": len(payload.get("dependencies", [])),
+                "packages_audited": packages_audited,
                 "findings": findings,
             }
         )
@@ -117,35 +192,18 @@ def audit_npm() -> dict:
         return {"ran": False, "reason": "app/package-lock.json is missing"}
     if not (app / "node_modules").exists():
         return {"ran": False, "reason": "app/node_modules is missing, run npm ci first"}
-    completed = subprocess.run(
-        ["npm", "audit", "--json"], capture_output=True, text=True, cwd=app
-    )
     try:
-        payload = json.loads(completed.stdout or "{}")
-    except json.JSONDecodeError:
-        return {"ran": False, "reason": (completed.stderr or completed.stdout)[-400:]}
-
-    findings = []
-    for name, entry in sorted(payload.get("vulnerabilities", {}).items()):
-        ids = sorted(
-            {
-                str(via.get("source"))
-                for via in entry.get("via", [])
-                if isinstance(via, dict) and via.get("source")
-            }
+        completed = subprocess.run(
+            ["npm", "audit", "--json"], capture_output=True, text=True, cwd=app
         )
-        findings.append(
-            {
-                "package": name,
-                "severity": entry.get("severity"),
-                "direct": bool(entry.get("isDirect")),
-                "ids": ids,
-                "fix_available": bool(entry.get("fixAvailable")),
-            }
-        )
+        totals, findings = npm_findings(scanner_payload(completed))
+        if completed.returncode == 1 and not findings:
+            raise ValueError("npm audit exited with status 1 without reporting findings")
+    except (OSError, ValueError) as error:
+        return {"ran": False, "reason": str(error)[-400:]}
     return {
         "ran": True,
-        "totals": payload.get("metadata", {}).get("vulnerabilities", {}),
+        "totals": totals,
         "findings": findings,
     }
 
@@ -269,7 +327,7 @@ def update_exception_ids(report: dict) -> None:
             re.DOTALL,
         )
         if pattern.search(text):
-            text = pattern.sub(lambda m: m.group(1) + block + "\n", text, count=1)
+            text = pattern.sub(lambda m: m.group(1) + block + "\n", text, count=1)  # noqa: B023 - sub runs it now
     EXCEPTIONS.write_text(text)
 
 
@@ -288,10 +346,9 @@ def main(argv: list[str] | None = None) -> int:
     exceptions = load_exceptions()
     report["published"] = published_numbers(report, exceptions)
     report["statement"] = (
-        "pip-audit and npm audit, run over what this project installs. Every "
-        "finding is either fixed or listed in scripts/audit_exceptions.toml with "
-        "a reason and a review date. The npm findings come almost entirely from "
-        "the Vega SDK sample's pinned toolchain."
+        "pip-audit and npm audit over the scanned project dependencies. Findings, "
+        "exception coverage and expired reviews are recorded below. Nonempty "
+        "problems block audit acceptance; listing a finding does not waive it."
     )
 
     if args.update_ids:

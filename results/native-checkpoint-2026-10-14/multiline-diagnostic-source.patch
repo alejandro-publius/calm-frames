@@ -1,0 +1,167 @@
+diff --git a/app/assets/raw/benign-story/harbor.vtt b/app/assets/raw/benign-story/harbor.vtt
+index 04f7314..1bf1044 100644
+--- a/app/assets/raw/benign-story/harbor.vtt
++++ b/app/assets/raw/benign-story/harbor.vtt
+@@ -7,10 +7,12 @@ Evening settles over the water.
+ A small boat rests in the harbor.
+ 
+ 00:00:07.000 --> 00:00:10.000
+-Sunlight follows the ripples.
++Sunlight follows
++the ripples.
+ 
+ 00:00:11.000 --> 00:00:14.000
+-The lighthouse watches over the bay.
++The lighthouse watches
++over the bay.
+ 
+ 00:00:15.000 --> 00:00:19.500
+ A quiet moment before home.
+diff --git a/app/src/calmframes/CalmCard.tsx b/app/src/calmframes/CalmCard.tsx
+index d435eec..d091511 100644
+--- a/app/src/calmframes/CalmCard.tsx
++++ b/app/src/calmframes/CalmCard.tsx
+@@ -99,7 +99,7 @@ const CalmCard = ({
+             accessibilityLabel={skipAccessibilityLabel}
+             activeOpacity={1}
+             hasTVPreferredFocus
+-            onFocus={() => setFocused(true)}
++            onFocus={() => { console.info("NATIVE_FOCUS SKIP"); setFocused(true); }}
+             onBlur={() => setFocused(false)}
+             onPress={() => onSkip?.(card.skipToMs ?? 0)}
+             style={[styles.skip, focused ? styles.skipFocused : null]}>
+diff --git a/app/src/components/FocusableElement.tsx b/app/src/components/FocusableElement.tsx
+index c2a9b4b..af41b07 100644
+--- a/app/src/components/FocusableElement.tsx
++++ b/app/src/components/FocusableElement.tsx
+@@ -36,6 +36,7 @@ const FocusableElement = ({
+ }: FocusableElementProps) => {
+   const [isFocused, setIsFocused] = useState(false);
+   const focusHandler = () => {
++    console.info("NATIVE_FOCUS BUTTON", otherProps.testID);
+     setIsFocused(true);
+     getFocusState?.(true);
+     onFocus?.();
+diff --git a/app/src/components/Seekbar.tsx b/app/src/components/Seekbar.tsx
+index 18eb62e..495e351 100644
+--- a/app/src/components/Seekbar.tsx
++++ b/app/src/components/Seekbar.tsx
+@@ -46,12 +46,14 @@ const Seekbar = ({
+   testID,
+   handleShowControlsOnKeyEvent,
+   requestSeek,
++  hasTVPreferredFocus = true,
+ }: {
+   videoRef: React.MutableRefObject<VideoPlayer | null>;
+   videoData: TitleData;
+   bifFrameImagesRef: React.MutableRefObject<FrameImageSource | null>;
+   seekBarRef: React.MutableRefObject<null>;
+   testID?: string;
++  hasTVPreferredFocus?: boolean;
+   handleShowControlsOnKeyEvent;
+   /**
+    * Calm Frames: the one safe seek function. When it is given, the bar never
+@@ -364,10 +366,13 @@ const Seekbar = ({
+           </Text>
+         </View>
+         <TVFocusGuideView
+-          hasTVPreferredFocus={true}
++          hasTVPreferredFocus={hasTVPreferredFocus}
+           autoFocus
+           style={styles.seekbar}>
+           <KUICSeekbar
++            hasTVPreferredFocus={hasTVPreferredFocus}
++            onFocus={() => console.info("NATIVE_FOCUS SEEK")}
++            onBlur={() => console.info("NATIVE_BLUR SEEK")}
+             ref={seekBarRef}
+             currentValue={progress}
+             totalValue={totalValue}
+diff --git a/app/src/screens/PlayerScreen.tsx b/app/src/screens/PlayerScreen.tsx
+index 260b676..b2d6139 100644
+--- a/app/src/screens/PlayerScreen.tsx
++++ b/app/src/screens/PlayerScreen.tsx
+@@ -644,7 +644,7 @@ const PlayerScreen = ({
+             height: deviceHeight,
+           },
+         ]}
+-        testID="touchable-opacity">
++        testID="touchable-opacity" onFocus={e => console.info("NATIVE_FOCUS root target", e.nativeEvent.target)}>
+         {isVideoInitialized && (
+           <>
+             <KeplerVideoSurfaceView
+diff --git a/app/src/w3cmedia/mediacontrols/Captions.tsx b/app/src/w3cmedia/mediacontrols/Captions.tsx
+index 8522f7d..29bcd99 100644
+--- a/app/src/w3cmedia/mediacontrols/Captions.tsx
++++ b/app/src/w3cmedia/mediacontrols/Captions.tsx
+@@ -73,8 +73,12 @@ export const CaptionMenu = React.memo(
+       setCaptionMenuVisibility(false);
+     }, [setSelectedCaption, removeCurrentCaption, setCaptionMenuVisibility]);
+ 
++    if (!captionMenuVisibility) {
++      return null;
++    }
++
+     return (
+-      <TVFocusGuideView trapFocusLeft trapFocusRight trapFocusUp>
++      <TVFocusGuideView trapFocusLeft trapFocusRight trapFocusUp onFocus={e => console.info("NATIVE_FOCUS menu guide", e.nativeEvent.target, e.currentTarget)}>
+         {captionMenuVisibility ? (
+           <View style={styles.menu}>
+             <CaptionOptions
+diff --git a/app/src/w3cmedia/mediacontrols/VideoPlayerUI.tsx b/app/src/w3cmedia/mediacontrols/VideoPlayerUI.tsx
+index 98c9fce..6b42d91 100644
+--- a/app/src/w3cmedia/mediacontrols/VideoPlayerUI.tsx
++++ b/app/src/w3cmedia/mediacontrols/VideoPlayerUI.tsx
+@@ -256,6 +256,7 @@ export const VideoPlayerUI = React.memo(
+             )}
+ 
+             <Seekbar
++              hasTVPreferredFocus={!skipOwnsSelect}
+               seekBarRef={seekBarRef}
+               videoRef={videoRef}
+               bifFrameImagesRef={bifFrameImagesRef}
+diff --git a/app/test/calmframes/playbackUi.test.tsx b/app/test/calmframes/playbackUi.test.tsx
+index af1ebce..a1ab025 100644
+--- a/app/test/calmframes/playbackUi.test.tsx
++++ b/app/test/calmframes/playbackUi.test.tsx
+@@ -1,6 +1,6 @@
+-import { startPlayer, mockMedia, mockGuard, mockError, mockSeekFocus } from './playbackUiHarness';
++import { startPlayer, mockMedia, mockGuard, mockError, mockSeekFocus, remote } from './playbackUiHarness';
+ import { act, fireEvent } from '@testing-library/react-native';
+-import { StyleSheet } from 'react-native';
++import { Platform, StyleSheet } from 'react-native';
+ import { CALM_COLORS, FOCUS_RING_WIDTH } from '../../src/calmframes/calmStyles';
+ 
+ beforeEach(() => {
+@@ -10,6 +10,20 @@ beforeEach(() => {
+ });
+ afterEach(() => { jest.clearAllTimers(); jest.useRealTimers(); });
+ 
++test.each(['none', 'countdown'] as const)('seekbar yields initial and restored preferred focus to Skip during %s', kind => {
++  const isTV = jest.spyOn(Platform, 'isTV', 'get').mockReturnValue(true);
++  const view = startPlayer(kind);
++  expect(view.getByTestId('kui-seekbar').props.hasTVPreferredFocus).toBe(kind !== 'countdown');
++  act(() => jest.advanceTimersByTime(6000));
++  expect(view.queryByTestId('kui-seekbar')).toBeNull();
++  remote('down');
++  expect(view.getByTestId('kui-seekbar').props.hasTVPreferredFocus).toBe(kind !== 'countdown');
++  if (kind === 'countdown') {
++    expect(view.getByTestId('calm-card-skip').props.hasTVPreferredFocus).toBe(true);
++  }
++  isTV.mockRestore();
++});
++
+ test('initialized playback exposes named captions and a stationary contrasting focus ring', () => {
+   const view = startPlayer();
+   const button = view.getByRole('button', { name: 'Captions' });
+diff --git a/app/test/calmframes/playbackUiHarness.tsx b/app/test/calmframes/playbackUiHarness.tsx
+index aab6c2c..b7e8589 100644
+--- a/app/test/calmframes/playbackUiHarness.tsx
++++ b/app/test/calmframes/playbackUiHarness.tsx
+@@ -20,6 +20,7 @@ jest.mock('@amazon-devices/react-native-kepler', () => {
+   const RN = jest.requireActual('react-native');
+   return {
+     useTVEventHandler: jest.fn(),
++    BackHandler: { addEventListener: () => ({ remove() {} }) },
+     TVFocusGuideView: ({ children, ...props }: any) => ReactActual.createElement(RN.View, props, children),
+     useKeplerAppStateManager: () => ({ getComponentInstance: () => ({}), addAppStateListener: () => ({ remove() {} }) }),
+   };

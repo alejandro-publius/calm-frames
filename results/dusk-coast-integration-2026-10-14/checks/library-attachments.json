@@ -1,0 +1,82 @@
+[
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/library-and-help.png",
+    "file_id": "file_00000000b2108211ab8899dea05a23f5",
+    "library_file_id": "libfile_82afc4ff4ec48191b673e6c83eab38f0",
+    "file_name": "library-and-help.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 1076224
+  },
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/startup-and-setup.png",
+    "file_id": "file_00000000c1dc8207ab1e04feb98cbe71",
+    "library_file_id": "libfile_6bc4641ae0ec819197e196711b4e7e69",
+    "file_name": "startup-and-setup.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 698462
+  },
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/player-and-captions.png",
+    "file_id": "file_0000000097a881fd9c6c4b27a261315a",
+    "library_file_id": "libfile_a6c29c7553508191823128fe6beea7ad",
+    "file_name": "player-and-captions.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 1583220
+  },
+  {
+    "operation": "create_library_file",
+    "status": "succeeded",
+    "path": "/loading-and-control-states.png",
+    "file_id": "file_00000000e92481f5aad3f97459dce97f",
+    "library_file_id": "libfile_8e1bc1a929888191b688713e8535fae6",
+    "file_name": "loading-and-control-states.png",
+    "current_version_number": 0,
+    "restored_from_version_number": null,
+    "xattrs": [
+      {
+        "name": "user.library-file-version",
+        "value": "0"
+      }
+    ],
+    "directory_id": "libdir_429a21b749f48191ab616f1d162c0a64",
+    "mime_type": "image/png",
+    "library_artifact_type": "image",
+    "file_size_bytes": 1784623
+  }
+]

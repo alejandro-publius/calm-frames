@@ -144,6 +144,18 @@ def test_the_action_calls_the_module_this_suite_tests(action):
     assert "--changed-from" in body
 
 
+def test_an_unmeasurable_file_fails_the_action_by_default(action):
+    # Fail closed, as the player does: a file nobody measured has not been shown to be under
+    # the thresholds, so skipping it has to be asked for.
+    assert action["inputs"]["fail-on-error"]["default"] == "true"
+
+
+def test_failed_count_is_a_count_of_failing_files(action):
+    check = [step for step in action["runs"]["steps"] if step.get("id") == "check"][0]
+    assert "grep -c '^FAIL '" in check["run"], "failed-count has to count the FAIL lines"
+    assert 'failed-count=$status' not in check["run"], "the exit status is not a count"
+
+
 def test_the_action_does_not_swallow_a_failure(action):
     check = [step for step in action["runs"]["steps"] if step.get("id") == "check"][0]
     assert "exit $status" in check["run"]

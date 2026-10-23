@@ -1,0 +1,35 @@
+22:50:29Z key KEY_UP -> kid-mode-details-back
+22:50:34Z key KEY_BACK -> kid-mode-details-practice
+22:50:39Z key KEY_BACK -> kid-mode-home-more-info
+22:50:39Z PASS Observed nested Back defect | kid-mode-home-more-info; regression also reproduced in source test; fixed source not yet rebuilt
+22:50:43Z key KEY_UP -> kid-mode-home-choose-profile
+22:50:48Z key KEY_RIGHT -> kid-mode-home-learn
+22:50:52Z key KEY_RIGHT -> kid-mode-home-parent-area
+22:50:57Z key KEY_ENTER -> kid-mode-parent-key-1
+22:51:02Z key KEY_BACK -> kid-mode-home-parent-area
+22:51:02Z PASS Parents hardware cancel | return Parents; PIN untouched
+22:51:06Z key KEY_ENTER -> kid-mode-parent-key-1
+22:51:11Z key KEY_UP -> kid-mode-parent-back
+22:51:16Z key KEY_ENTER -> kid-mode-home-parent-area
+22:51:16Z PASS Parents button cancel | return Parents; PIN untouched
+22:51:20Z key KEY_DOWN -> kid-mode-home-more-info
+22:51:25Z key KEY_DOWN -> kid-mode-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28
+22:51:30Z key KEY_ENTER -> kid-mode-details-play
+22:51:34Z key KEY_ENTER -> calm-card-skip
+22:51:39Z key KEY_BACK -> kid-mode-details-play
+22:51:39Z PASS Acadia Watch and Back | playing; exact source identity; return Details Watch
+22:51:43Z key KEY_RIGHT -> kid-mode-details-show-info
+22:51:48Z key KEY_ENTER -> kid-mode-details-info-back
+22:51:53Z key KEY_BACK -> kid-mode-details-show-info
+22:51:57Z key KEY_BACK -> kid-mode-home-poster-prepared-2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28
+22:51:57Z PASS Acadia More info and Home | focus returned to Acadia card
+22:52:02Z key KEY_UP -> kid-mode-home-watch
+22:52:07Z key KEY_UP -> kid-mode-home-watch
+22:52:11Z key KEY_UP -> kid-mode-home-choose-profile
+22:52:16Z key KEY_RIGHT -> kid-mode-home-learn
+22:52:20Z key KEY_ENTER -> picture-hold-start
+22:52:25Z key KEY_BACK -> kid-mode-home-learn
+22:52:25Z PASS Help Back | return How it works
+22:52:30Z key KEY_DOWN -> kid-mode-home-more-info
+22:52:34Z key KEY_LEFT -> kid-mode-home-watch
+22:52:34Z PASS Left at Home | Watch focus; no autoplay

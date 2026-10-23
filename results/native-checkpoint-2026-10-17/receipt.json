@@ -1,0 +1,137 @@
+{
+  "recorded_utc": "2026-10-17T04:53:19+00:00",
+  "status": "one build, one install, one launch, one prepared-Acadia walkthrough by remote keys; logs only, no screenshot, capture or recording",
+  "source_commit": "c2b56d258979b9d7e968944c0780dc7fb1721f9f",
+  "branch": "claude/tv-experience-2026-10-16",
+  "authorization": "owner replied \"yes\" to the checkpoint described in CLAUDE_REVIEW_HANDOFF.md",
+  "package": {
+    "path": "build/release/stabilization-2026-10-17/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "target": "aarch64 Debug",
+    "sha256": "081369b932daf3786b54ad46aaa18e2a5dadcb74ef4865914d9c868a09f9cef1",
+    "device_copy_sha256_matches": true
+  },
+  "build": {
+    "command": "cd app && npm run build:debug",
+    "host_utc": [
+      "2026-10-17T04:39:52Z",
+      "2026-10-17T04:40:30Z"
+    ],
+    "exit": 0,
+    "prepared_library_gate_before_and_after": "checked; 1 title, 4 bundles, 4 of 4 verification reports, approved Acadia bundle 4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13",
+    "tracked_files_changed": false
+  },
+  "install": {
+    "command": "vega device install-app --device Simulator --packagePath <package>",
+    "host_utc": [
+      "04:41:15.597",
+      "04:41:17.006"
+    ],
+    "result": "success",
+    "count": 1
+  },
+  "launch": {
+    "command": "vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main",
+    "count": 1,
+    "device_request": "04:41:17.330",
+    "process": "04:41:17.599 pid 21336",
+    "visible": "04:41:17.913",
+    "system_cold_app_launch_time_ms": 583,
+    "first_render_sample": "04:41:22.686 mutations=181 transactions=5 (5 s sampling; unchanged until the first key)"
+  },
+  "clocks": "device log clock matched the host to about 0.3 s (install and launch requests line up with the host command windows)",
+  "unattributed_events": [
+    "04:40:06 a Calm Frames package install, while this build was still running; no command here issued it and the build log shows no install",
+    "04:41:52.672 a forced kill and relaunch of the app (requester device pid 21583), 35 s after this launch, while the driver was only reading logs; relaunched pid 21589 settled the same 181-mutation tree by the 04:41:58 sample"
+  ],
+  "startup_trace_gap": "neither launch emitted any JavaScript console line until the first key press at 04:46:29, so Home readiness could not be read from CALM_TRACE; Home was confirmed by Right and Left moving focus Watch to Details to Watch (14 mutations each) with matching focus traces",
+  "walkthrough_device_ms_from_key_release": {
+    "Details: Enter released 04:47:39.274 to Details screen": 20,
+    "to Details Watch focused": 37,
+    "Back released 04:47:40.286 to Home screen": 24,
+    "to Details focused on Home": 30,
+    "Watch: Enter released 04:47:42.226 to handler": 5,
+    "to player mounted": 79,
+    "to maps verified in the player": 123,
+    "to first picture shown (media 312 ms)": 1204,
+    "focus moves on key down (Right, Left)": [
+      20,
+      2
+    ]
+  },
+  "injected_short_press_hold_ms": 253,
+  "preset_on_device": "extra-cautious (rendition extra-cautious.mp4)",
+  "covers": {
+    "scheduled_extra_cautious_s": [
+      [
+        7.343,
+        12.699
+      ],
+      [
+        28.113,
+        31.593
+      ]
+    ],
+    "observed_media_ms": [
+      [
+        7378,
+        12714
+      ],
+      [
+        28142,
+        31611
+      ]
+    ],
+    "wall_vs_media_s": [
+      [
+        5.33,
+        5.336
+      ],
+      [
+        3.471,
+        3.469
+      ]
+    ],
+    "skip_card_focus": [
+      "04:47:45.480 (about 5 s before cover 1)",
+      "04:48:06.248 (about 5 s before cover 2)"
+    ],
+    "note": "media times are the guard estimate at the render where the cover state changed: each cover went on 29 to 35 ms after its scheduled start, which already sits ahead of the flagged frames by the preset guard band; the prepared rendition also carries the cover in its frames"
+  },
+  "media_clock": "from first picture (media 312 ms at 04:47:43.431) to cover 2 off (media 31611 ms at 04:48:14.695) the media clock advanced 31.299 s in 31.264 s of wall time; no stall",
+  "waiting": "one wait at playback start, media 0, 42 ms (04:47:43.075 to .117); none during playback",
+  "end_of_video_return": {
+    "path": "the player leaves 2.3 s after the video ends, through the same leavePlayer function as Back",
+    "back": "04:48:23.420",
+    "teardown": "ok at 04:48:23.724 (303 ms)",
+    "home_watch_focused_ms": 329,
+    "player_unmounted_ms": 728
+  },
+  "input_integrity": "the walk window shows only the five driver keys and four injections from the app process itself; no touch input",
+  "not_observed": [
+    "anything visible: layout, focus rings, the scene card text, the paused statement, How it works, the three circles",
+    "audible sound during covers",
+    "the remote Back key during playback (the driver stopped on an end-anchored pattern; the end-of-video return exercised the same leavePlayer path)",
+    "Profiles, Parents and the PIN screen",
+    "startup phases from app traces (see startup_trace_gap)"
+  ],
+  "driver_note": "in this Debug build, warnings logged from the player screen carry a trailing component-stack suffix, so readers should match CALM_TRACE lines without end anchors",
+  "final_state": "app left running at Home with Watch focused (04:48:23.749); all log streams stopped; nothing else on the device changed",
+  "logs": {
+    "checkpoint-build.log": {
+      "path": ".logs/checkpoint-build.log",
+      "sha256": "b308c5fb7f05523c1a0b1e9925709b6297435e491aec4c5f61d2a9b13e683f02"
+    },
+    "checkpoint-device.log": {
+      "path": ".logs/checkpoint-device.log",
+      "sha256": "be768940a87ba33562b78ab2ee02669020a8da97df341255b44653e797e2ccb1"
+    },
+    "checkpoint-probe.log": {
+      "path": ".logs/checkpoint-probe.log",
+      "sha256": "6cc9f0efe6f8574e03be1b33fe708bcd8880b5a9fe37ba691396a8156ba0ce50"
+    },
+    "checkpoint-walk.log": {
+      "path": ".logs/checkpoint-walk.log",
+      "sha256": "aec1ffdf4349a879a96c6dd3cf460c0c43280042f9bb777056132351a92e0c0f"
+    }
+  }
+}

@@ -13,17 +13,36 @@
  * rather than photographed. uiCapture.ts says what was tried.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act as flushReact, fireEvent, render, screen } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
+import { WORLD } from '../../src/calmframes/CoastalWorld';
+import { View } from 'react-native';
+import BufferingWindow, { REVEAL_DELAY_MS } from '../../src/components/BufferingWindow';
+// The real shelf below comes from KidModeScreen's catalog, and that screen
+// reads the saved household.
+jest.mock('@react-native-async-storage/async-storage', () => ({
+  getItem: jest.fn(async () => null),
+  setItem: jest.fn(async () => undefined),
+}));
+import {
+  BENIGN_STORY_LABEL,
+} from '../../src/calmframes/benignStory';
 import CalmCard from '../../src/calmframes/CalmCard';
 import { CALM_COLORS } from '../../src/calmframes/calmStyles';
-import { Card, cardAt, NO_CARD } from '../../src/calmframes/cards';
+import CornerPlate from '../../src/calmframes/CornerPlate';
+import {
+  Card,
+  cardAt,
+  CHECKING_CARD,
+  NO_CARD,
+} from '../../src/calmframes/cards';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import CreditsScreen from '../../src/calmframes/CreditsScreen';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
 import FirstRunScreen from '../../src/calmframes/FirstRunScreen';
+import HouseholdStorageScreen from '../../src/calmframes/HouseholdStorageScreen';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
@@ -41,6 +60,10 @@ import {
 } from '../../src/calmframes/uiCapture';
 import {
   ALL_UI_FRAMES,
+  PLAYER_BUFFERING_FRAME,
+  VIDEO_BEHIND,
+  HOUSEHOLD_LOADING_FRAME,
+  HOUSEHOLD_ERROR_FRAME,
   FIRST_RUN_EXPLAINER_FRAME,
   FIRST_RUN_PIN_FRAME,
   FIRST_RUN_PRESET_FRAME,
@@ -48,8 +71,12 @@ import {
   KID_HOME_EMPTY_FRAME,
   KID_HOME_FOCUSED_FRAME,
   KID_HOME_FRAME,
+  KID_HOME_STORY_FRAME, KID_HOME_STORY_FOCUSED_FRAME, KID_HOME_STORY_WATCH_FRAME,
   KID_HOME_OFFLINE_FRAME,
   KID_HOME_PROFILES_FRAME,
+  KID_HOME_PROFILES_OFFLINE_FRAME,
+  KID_HOME_PROFILES_FOCUSED_FRAME,
+  KID_HOME_PICKER_FRAME,
   PARENT_LOCKED_FRAME,
   PARENT_OPEN_FRAME,
   PARENT_PROFILE_FRAME,
@@ -65,6 +92,9 @@ import {
   Family,
   newFamily,
 } from '../../src/calmframes/profiles';
+import { checkedShelf } from './shelfFixtures';
+import { ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
+import { MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 
 const OUT_DIR = path.join(__dirname, '..', '..', 'build', 'ui-capture');
 
@@ -87,11 +117,23 @@ function makeTitle(id: string, status: CheckedTitle['status']): CheckedTitle {
   };
 }
 
-/** What the player paints over the video, for one card state. */
-const PlayerLayer = ({ covered, card }: { covered: boolean; card: Card }) => (
+/**
+ * What the player paints over the video, for one card state. `plate` adds the
+ * practice plate the labelled Harbor demo carries, as PlayerScreen draws it.
+ */
+const PlayerLayer = ({
+  covered,
+  card,
+  plate = false,
+}: {
+  covered: boolean;
+  card: Card;
+  plate?: boolean;
+}) => (
   <>
     <CoverLayer visible={covered} />
     <CalmCard card={card} />
+    {plate ? <CornerPlate label={BENIGN_STORY_LABEL} testID="benign-demo" /> : null}
   </>
 );
 
@@ -144,9 +186,10 @@ const parentArea = (titles: CheckedTitle[]) => (
 /** A household with two kids, for the screens that carry the picker. */
 const FAMILY: Family = addProfile(newFamily(DEFAULT_SETTINGS, 'Robin'), 'Sam');
 
+// Two videos, as a household's shelf has: a lone focused card cannot show the resting card colour.
 const familyShelf = (offline = false) => (
   <KidHomeScreen
-    titles={[makeTitle('ok', 'verified')]}
+    titles={[makeTitle('ok', 'verified'), makeTitle('two', 'verified')]}
     onOpen={jest.fn()}
     offline={offline}
     profiles={FAMILY.profiles}
@@ -179,12 +222,29 @@ function blockedTitle(): CheckedTitle {
 }
 
 describe('what the app paints', () => {
+  it('measures the static buffering plate without dimming the scene', () => {
+    jest.useFakeTimers();
+    try {
+      expect(renderedFrame('player-buffering', (
+        <View style={{ backgroundColor: VIDEO_BEHIND }}><BufferingWindow presentation="overlay" /></View>
+      ), () => flushReact(() => jest.advanceTimersByTime(REVEAL_DELAY_MS)))).toEqual(PLAYER_BUFFERING_FRAME);
+      expect(ALL_UI_FRAMES).toContain(PLAYER_BUFFERING_FRAME);
+    } finally { jest.useRealTimers(); }
+  });
+
+  it('measures household storage loading and errors from the rendered screen', () => {
+    expect(renderedFrame('household-loading', <HouseholdStorageScreen failed={false} onRetry={jest.fn()} />))
+      .toEqual(HOUSEHOLD_LOADING_FRAME);
+    expect(renderedFrame('household-error', <HouseholdStorageScreen failed onRetry={jest.fn()} />))
+      .toEqual(HOUSEHOLD_ERROR_FRAME);
+  });
   it('reads the colours off a rendered tree, background first', () => {
     const frame = renderedFrame('kid-home', (
       <KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />
     ));
-    expect(frame.background).toBe(CALM_COLORS.BACKGROUND);
-    expect(frame.surfaces).toContain(CALM_COLORS.SURFACE);
+    // Home is drawn on the coastal map, so its colours are the map's.
+    expect(frame.background).toBe(WORLD.BACKGROUND);
+    expect(frame.surfaces).toContain(WORLD.SURFACE);
   });
 
   it('matches what the kid home reports, unfocused and focused', () => {
@@ -194,7 +254,8 @@ describe('what the app paints', () => {
       )),
     ).toEqual(KID_HOME_FRAME);
 
-    render(<KidHomeScreen titles={[makeTitle('ok', 'verified')]} onOpen={jest.fn()} />);
+    // Two videos, so the focused card sits beside a resting one, as on a household's shelf.
+    render(<KidHomeScreen titles={[makeTitle('ok', 'verified'), makeTitle('two', 'verified')]} onOpen={jest.fn()} />);
     fireEvent(screen.getByTestId('kid-home-poster-ok'), 'focus');
     const focused = frameFromTree(
       'kid-home-focused',
@@ -203,21 +264,66 @@ describe('what the app paints', () => {
     expect(focused).toEqual(KID_HOME_FOCUSED_FRAME);
   });
 
+  /**
+   * The shelf a household really opens on: Harbor's signed still first, then
+   * the plain blocks of the titles that carry none.
+   *
+   * A picture is not a colour, so what keeps the reported frames true is the
+   * BORDER block under every poster picture. Seen to fail with that block
+   * taken off the picture: the focused shelf read the card colour before
+   * BORDER,
+   *
+   *     -     "#66A0B4",
+   *           "#173B47",
+   *     +     "#66A0B4",
+   *
+   * and a shelf where every poster has a picture lost BORDER altogether.
+   */
+  it('measures the simplified Harbor home at rest, Watch focus and details focus', () => {
+    const view = render(<KidHomeScreen titles={checkedShelf()} onOpen={jest.fn()} />);
+    const frame = (expected: UiFrame) => expect(frameFromTree(expected.screen, view.toJSON() as unknown as RenderedNode)).toEqual(expected);
+    frame(KID_HOME_STORY_FRAME);
+    fireEvent(view.getByTestId('kid-home-watch'), 'focus'); frame(KID_HOME_STORY_WATCH_FRAME);
+    fireEvent(view.getByTestId('kid-home-watch'), 'blur');
+    fireEvent(view.getByTestId('kid-home-more-info'), 'focus'); frame(KID_HOME_STORY_FOCUSED_FRAME);
+  });
+
+  it('matches what the shelf reports when every poster has a picture', () => {
+    const pictured = ['one', 'two'].map((id) => {
+      const entry = makeTitle(id, 'verified');
+      return {
+        ...entry,
+        title: { ...entry.title, posterUrl: `https://example.invalid/${id}.jpg` },
+      };
+    });
+    expect(
+      renderedFrame('kid-home', <KidHomeScreen titles={pictured} onOpen={jest.fn()} />),
+    ).toEqual(KID_HOME_FRAME);
+
+    render(<KidHomeScreen titles={pictured} onOpen={jest.fn()} />);
+    fireEvent(screen.getByTestId('kid-home-poster-one'), 'focus');
+    expect(
+      frameFromTree('kid-home-focused', screen.toJSON() as unknown as RenderedNode),
+    ).toEqual(KID_HOME_FOCUSED_FRAME);
+  });
+
   it('matches what the shelf with a family on it reports, in each of its states', () => {
-    // One frame covers all three, and that is the claim being checked rather
-    // than assumed: the chips carry the chosen fill, so a focused poster and
-    // the offline banner add nothing new to what is painted.
+    // The offline banner paints before the hero, so its surface order has
+    // its own inventory entry. Focus and the profile picker remain measured.
     expect(renderedFrame('kid-home-profiles', familyShelf())).toEqual(
       KID_HOME_PROFILES_FRAME,
     );
-    expect(renderedFrame('kid-home-profiles', familyShelf(true))).toEqual(
-      KID_HOME_PROFILES_FRAME,
+    expect(renderedFrame('kid-home-profiles-offline', familyShelf(true))).toEqual(
+      KID_HOME_PROFILES_OFFLINE_FRAME,
     );
     render(familyShelf());
     fireEvent(screen.getByTestId('kid-home-poster-ok'), 'focus');
     expect(
-      frameFromTree('kid-home-profiles', screen.toJSON() as unknown as RenderedNode),
-    ).toEqual(KID_HOME_PROFILES_FRAME);
+      frameFromTree('kid-home-profiles-focused', screen.toJSON() as unknown as RenderedNode),
+    ).toEqual(KID_HOME_PROFILES_FOCUSED_FRAME);
+    fireEvent(screen.getByTestId('kid-home-poster-ok'), 'blur');
+    fireEvent.press(screen.getByTestId('kid-home-choose-profile'));
+    expect(frameFromTree('kid-home-picker', screen.toJSON() as unknown as RenderedNode)).toEqual(KID_HOME_PICKER_FRAME);
   });
 
   it('matches what the parent area reports with a family in it', () => {
@@ -253,7 +359,13 @@ describe('what the app paints', () => {
     const named = new Set(ALL_UI_FRAMES.map((frame) => frame.screen));
     for (const frame of [
       KID_HOME_PROFILES_FRAME,
+  KID_HOME_PROFILES_FOCUSED_FRAME,
+  KID_HOME_PICKER_FRAME,
       PARENT_PROFILE_FRAME,
+      // The player while the map is still being checked.
+      playerFrame(true, 'checking'),
+      // The Harbor demo between its holds, when only its plate is painted.
+      playerFrame(false, 'none', true),
       // Seen to fail by taking this one back out of ALL_UI_FRAMES:
       //     expect(received).toBe(expected) // Object.is equality
       //     Expected: true
@@ -366,29 +478,34 @@ describe('what the app paints', () => {
 
   it('matches what the player layer reports, covered and clear', () => {
     const cases: Array<[boolean, Card]> = [
+      [true, CHECKING_CARD],
       [false, NO_CARD],
       [false, cardAt(intervals, 16_000)],
       [true, cardAt(intervals, 22_000)],
       [false, cardAt(intervals, 24_600)],
       [true, cardAt([], 0, { rejection: 'missing' })],
     ];
-    for (const [covered, card] of cases) {
-      const expected = playerFrame(covered, card.kind);
-      const actual = renderedFrame(expected.screen, (
-        <PlayerLayer covered={covered} card={card} />
-      ));
-      // Every colour the app's own layer paints, in paint order. With the
-      // cover off there is no background of ours, so the first colour found is
-      // already one of the surfaces.
-      const painted =
-        actual.background === '#000000' && actual.surfaces.length === 0 && !covered
-          ? []
-          : [actual.background, ...actual.surfaces];
-      if (covered) {
-        expect(painted[0]).toBe(CALM_COLORS.COVER);
-        expect(painted.slice(1)).toEqual(expected.surfaces);
-      } else {
-        expect(painted).toEqual(expected.surfaces);
+    // Each state twice: as any title shows it, and as the Harbor demo shows
+    // it with its practice plate on screen as well.
+    for (const plate of [false, true]) {
+      for (const [covered, card] of cases) {
+        const expected = playerFrame(covered, card.kind, plate);
+        const actual = renderedFrame(expected.screen, (
+          <PlayerLayer covered={covered} card={card} plate={plate} />
+        ));
+        // Every colour the app's own layer paints, in paint order. With the
+        // cover off there is no background of ours, so the first colour found
+        // is already one of the surfaces.
+        const painted =
+          actual.background === '#000000' && actual.surfaces.length === 0 && !covered
+            ? []
+            : [actual.background, ...actual.surfaces];
+        if (covered) {
+          expect(painted[0]).toBe(CALM_COLORS.COVER);
+          expect(painted.slice(1)).toEqual(expected.surfaces);
+        } else {
+          expect(painted).toEqual(expected.surfaces);
+        }
       }
     }
   });
@@ -433,6 +550,10 @@ describe('the capture path', () => {
       act?: () => void;
     }
     const scenes: Array<{ element: React.ReactElement; stops: Stop[] }> = [
+      { element: <HouseholdStorageScreen failed={false} onRetry={jest.fn()} />,
+        stops: [{ name: 'household-loading', reason: 'restoring household' }] },
+      { element: <HouseholdStorageScreen failed onRetry={jest.fn()} />,
+        stops: [{ name: 'household-error', reason: 'storage unavailable' }] },
       {
         element: firstRun(),
         stops: [
@@ -484,12 +605,12 @@ describe('the capture path', () => {
         ],
       },
       {
-        // One stop, not two. A shelf with a picker on it paints the same
-        // colours whichever kid is chosen, so a second stop would be dropped
-        // as a repeat and would only make the timeline look longer.
+        // The compact header, focused poster and expanded profile picker.
         element: familyShelf(),
         stops: [
-          { name: 'kid-home-profiles', reason: 'the shelf asks who is watching' },
+          { name: 'kid-home-profiles', reason: 'active profile in the header' },
+          { name: 'kid-home-profiles-focused', reason: 'a focused poster', act: () => fireEvent(screen.getByTestId('kid-home-poster-ok'), 'focus') },
+          { name: 'kid-home-picker', reason: 'choose a profile', act: () => { fireEvent(screen.getByTestId('kid-home-poster-ok'), 'blur'); press('kid-home-choose-profile'); } },
         ],
       },
       {
@@ -497,6 +618,10 @@ describe('the capture path', () => {
           <TitleDetailsScreen entry={makeTitle('ok', 'verified')} onPlay={jest.fn()} />
         ),
         stops: [{ name: 'title-details', reason: 'open a title' }],
+      },
+      {
+        element: <PlayerLayer covered={true} card={CHECKING_CARD} />,
+        stops: [{ name: 'player-covered-checking', reason: 'checking the map' }],
       },
       {
         element: <PlayerLayer covered={false} card={NO_CARD} />,
@@ -519,6 +644,27 @@ describe('the capture path', () => {
           <PlayerLayer covered={true} card={cardAt([], 0, { rejection: 'missing' })} />
         ),
         stops: [{ name: 'player-covered-unverified', reason: 'title not checked' }],
+      },
+      // The Harbor demo, which carries its practice plate the whole time.
+      {
+        element: <PlayerLayer covered={true} card={CHECKING_CARD} plate />,
+        stops: [{ name: 'player-covered-checking-plate', reason: 'demo, checking the map' }],
+      },
+      {
+        element: <PlayerLayer covered={false} card={NO_CARD} plate />,
+        stops: [{ name: 'player-clear-none-plate', reason: 'demo plays' }],
+      },
+      {
+        element: <PlayerLayer covered={false} card={cardAt(intervals, 16_000)} plate />,
+        stops: [{ name: 'player-clear-countdown-plate', reason: 'demo countdown' }],
+      },
+      {
+        element: <PlayerLayer covered={true} card={cardAt(intervals, 22_000)} plate />,
+        stops: [{ name: 'player-covered-covering-plate', reason: 'demo practice hold' }],
+      },
+      {
+        element: <PlayerLayer covered={false} card={cardAt(intervals, 24_600)} plate />,
+        stops: [{ name: 'player-clear-after-plate', reason: 'demo hold over' }],
       },
       {
         element: (
@@ -591,6 +737,40 @@ describe('the capture path', () => {
         stops: [{ name: 'credits', reason: 'open the credits' }],
       },
     ];
+
+    // Exercise actual approved evidence pages and repeated remote focus changes.
+    // No video is mounted; the same unmodified painter/analyzer measures their surfaces.
+    for (const source of [MCWAY_SOURCE_SHA256, ACADIA_SOURCE_SHA256]) {
+      const entry = checkedShelf().find(item => item.title.sha256 === source)!;
+      expect(entry.status).toBe('verified');
+      const proofId = 'title-details-record-proof';
+      scenes.push({ element: <TitleDetailsScreen entry={entry} onPlay={jest.fn()} />, stops: [
+        { name: 'proof-watch', reason: 'approved title details' },
+        { name: 'proof-info', reason: 'more info', act: () => press('title-details-show-info') },
+        { name: 'proof-source', reason: 'source measurements', act: () => press('title-details-technical') },
+        ...['prepared', 'binding', 'source', 'prepared', 'binding', 'source'].map(stage => ({
+          name: `proof-${stage}`, reason: 'change evidence stage', act: () => {
+            press(`${proofId}-step-${stage}`);
+            expect(screen.getByTestId(`${proofId}-${stage}`)).toBeTruthy();
+          },
+        })),
+        ...['source', 'prepared', 'binding', 'source', 'prepared', 'binding'].map((stage, index, stages) => ({
+          name: `proof-focus-${stage}`, reason: 'remote focus in evidence navigation', act: () => {
+            if (index > 0) fireEvent(screen.getByTestId(`${proofId}-step-${stages[index - 1]}`), 'blur');
+            fireEvent(screen.getByTestId(`${proofId}-step-${stage}`), 'focus');
+          },
+        })),
+        // The record below the proof, one reading stop at a time, as the remote reaches it.
+        ...['intro', ...(source === ACADIA_SOURCE_SHA256 ? ['findings'] : []), 'wcag', 'files'].map((section, index, sections) => ({
+          name: `proof-reading-${section}`, reason: 'remote focus on the record below the proof', act: () => {
+            fireEvent(screen.getByTestId(index === 0 ? `${proofId}-step-binding` : `title-details-record-reading-${sections[index - 1]}`), 'blur');
+            fireEvent(screen.getByTestId(`title-details-record-reading-${section}`), 'focus');
+          },
+        })),
+        { name: 'proof-return-info', reason: 'back to info', act: () => press('title-details-info-back') },
+        { name: 'proof-return-watch', reason: 'back to watch', act: () => press('title-details-info-back') },
+      ] });
+    }
 
     // A quarter of a second between states is faster than anyone can press a
     // button, so it is the worst case for a flash rate. The screens record

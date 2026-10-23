@@ -1,0 +1,162 @@
+{
+  "scope": "Cloud integration of verified incoming commits; focused tooling regressions and evidence consistency only. No app build, benchmark, native capture, media processing or human audiovisual review.",
+  "checked_at_utc": "2026-10-22T20:56:05+00:00",
+  "checked_source_commit": "a61c83c59e558093a3fc64ca5b13d1419431e06f",
+  "base_commit": "13551e45bd853c392489dbecce7158a04036f615",
+  "branch": "codex/cloud-release-candidate-2026-10-22",
+  "inputs": [
+    {
+      "name": "calm-frames-combined-release-checks-2026-10-22.zip",
+      "bytes": 13050,
+      "sha256": "8769c541d09d0112d3d662dca7b5838b261326c77c0c2e27c05e4b26222db6db",
+      "actual_local_bytes_verified": true
+    },
+    {
+      "name": "calm-frames-claude-overnight-0e9241a.zip",
+      "bytes": 2534078,
+      "sha256": "804723eff7dc7dce17b06c1e20b1ece76dc5f3695fe24d796efd102a70adcdb8",
+      "actual_local_bytes_verified": true
+    }
+  ],
+  "input_heads": {
+    "claude": "0e9241a478abdda980b272f6654aa2745beabd45",
+    "combined_checks": "9cdb333f460338baddd478c8ce978660dc1d6559",
+    "judging_package": "9ad7bb7a2efd0a3b95f84fcefbeaca19d3eabcf2"
+  },
+  "import_verification": {
+    "archive_identity": "passed",
+    "bundle_prerequisites": "passed",
+    "claude_commits": [
+      "d9f8d296bbc5766fbe6bb496990cfd9e68d6ae3e",
+      "f61d99386abfa4790e48b0b0aa436f4d72d10766",
+      "0e9241a478abdda980b272f6654aa2745beabd45"
+    ],
+    "combined_check_commits": [
+      "69259f309448e82a1bb00df1ba702c2d572f2031",
+      "7e9188b7829309a7d4738a41fee553b23f6ba198",
+      "9cdb333f460338baddd478c8ce978660dc1d6559"
+    ],
+    "claude_changed_files_verified": 32,
+    "combined_changed_paths_verified": 5,
+    "judging_package_changed_paths": 76,
+    "changed_path_overlap": false,
+    "application_hook_pipeline_detector_trees_unchanged_from_base": true
+  },
+  "commit_mapping": [
+    {
+      "source": "69259f309448e82a1bb00df1ba702c2d572f2031",
+      "candidate": "0371ebaa85b2978a47407f4b4c9ab57d04a60827",
+      "purpose": "Locked installs preserve failure"
+    },
+    {
+      "source": "7e9188b7829309a7d4738a41fee553b23f6ba198",
+      "candidate": "5ef3b0d176d2bab46bd320723c07a5a4b629f894",
+      "purpose": "Evidence write failure prevents pass"
+    },
+    {
+      "source": "9cdb333f460338baddd478c8ce978660dc1d6559",
+      "candidate": "3bcfe54216f75ceb95d8d4f7b9bf9eb52a349f7b",
+      "purpose": "Hazard self-test distinguishes measured rejection from inconclusive result"
+    },
+    {
+      "source": "9ad7bb7a2efd0a3b95f84fcefbeaca19d3eabcf2",
+      "candidate": "a61c83c59e558093a3fc64ca5b13d1419431e06f",
+      "purpose": "Exact unchanged judging package"
+    }
+  ],
+  "focused_checks": {
+    "unittest": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v eval.tests.test_ci_locked_install eval.tests.test_video_evidence_write",
+      "passed": 8,
+      "failed": 0,
+      "errors": 0,
+      "scope": "Temporary npm, flashmap, ffprobe and ffmpeg stubs with text fixtures; no real installation, analysis or media generation",
+      "verified_behaviors": [
+        "Each affected workflow calls locked npm ci only; failure stops before subsequent commands and preserves its status.",
+        "The previous unlocked fallback is rejected by the regression harness.",
+        "A writable result record is required for video-gate success; write failure yields exit 2 and no PASS message.",
+        "Measured video failure retains exit 1 and a failed record.",
+        "The hazard self-test accepts measured rejection only; missing evidence yields exit 2 and cannot yield SELF TEST PASSED.",
+        "The self-test accepts a measured hazard rejection with calm pass and refuses an incorrectly passed hazard."
+      ]
+    },
+    "bash_syntax": {
+      "file": "eval/check_video.sh",
+      "status": "passed"
+    },
+    "python_ast": {
+      "files": [
+        "eval/preparation_benchmark.py",
+        "eval/prepare_owned_harbor.py",
+        "eval/tests/test_ci_locked_install.py",
+        "eval/tests/test_video_evidence_write.py"
+      ],
+      "status": "passed"
+    },
+    "workflow_yaml": {
+      "files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/audit.yml"
+      ],
+      "status": "passed"
+    },
+    "repository_style": {
+      "command": "python3 eval/style_check.py",
+      "status": "passed"
+    },
+    "published_number_sync": {
+      "command": "python3 eval/readme_sync.py --check",
+      "status": "passed",
+      "markers_checked": 719
+    },
+    "changed_file_whitespace": {
+      "status": "passed with two verbatim upstream font notices excluded",
+      "exclusions": [
+        "docs/judging-package/assets/LICENSE-Fraunces",
+        "docs/judging-package/assets/LICENSE-SourceSans3"
+      ]
+    },
+    "independent_combined_check_review": "No material regression found; CLI/caller status semantics inspected."
+  },
+  "preservation": {
+    "unchanged_trees_from_base": {
+      "app": "3e77e7f81ca16fad0e6de23f9387d0ca06e7e9e7",
+      "hook": "89de7fbdbeb5d9f93ccef5bfa0cde5cdb1c8eff7",
+      "pipeline": "f97f7d027f1e5a417b28188d4d84a699bf7d1f07",
+      "flashmap": "cb0e9e974693cbc72d25afa0752128c7d9ce9641",
+      "media": "9d325097de039bbbfea367174f732773f219b168"
+    },
+    "judging_package_tree": "e549872bd4365665ba476503ec9ae319bafb5932",
+    "judging_tree_matches_original": true,
+    "combined_code_blobs_match_import": true,
+    "source_branches_and_original_worktrees_preserved": true,
+    "excluded_from_candidate": [
+      "76223f99cf8543ffe1e75d54c9873b56a0c23318",
+      "63122a1f1da791348d94e1dcf5678d341a4fd784",
+      "32cf1f7b74a6a65e7e258ca2b6c95174620abdce"
+    ]
+  },
+  "evidence_consistency": {
+    "native_and_demo_recorded_source": "d96c0886227f7dcfc5ae6584132a86b193359215",
+    "claude_changed_file_sha256_and_sizes_verified": 32,
+    "native_crop_sha256_verified": 9,
+    "benchmark_summaries_match_recorded_sample_arrays": true,
+    "benchmark_check_summary_matches_rows": true,
+    "demo_and_video_gate_agree_on_sha256_bytes_duration": true,
+    "demo_mp4_received": false,
+    "measurements_rerun": false,
+    "native_observations_are_imported_receipts": true,
+    "human_audio_listened_to": false,
+    "independent_evidence_review": "No material numeric contradiction found. Terminal experiments, native screen observations and human acceptance are distinct."
+  },
+  "not_run": [
+    "Application build or full test suites",
+    "Dependency installation",
+    "Actual benchmark, analyzer or media execution",
+    "Native device/capture checks",
+    "Human audio, palette or full-video review",
+    "Hosted CI",
+    "Ruff and ShellCheck (not available in this executor)"
+  ],
+  "publication_actions": []
+}

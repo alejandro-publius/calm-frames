@@ -1,0 +1,18 @@
+{
+  "baseline": "ab83cf85738c496b29b2c33516f82d4d670f2c81",
+  "unchanged_paths": [
+    "app/assets/raw/prepared-library",
+    "app/src/calmframes/approvedPreparedCatalogs.ts",
+    "app/config/approved-prepared-libraries.json",
+    "app/src/calmframes/useFlashGuard.ts",
+    "app/src/calmframes/bakedAmbient.ts",
+    "app/src/calmframes/approvedBakedAmbient.ts",
+    "pipeline",
+    "flashmap"
+  ],
+  "changed_files": [],
+  "Forest_active": false,
+  "original_prepared_namespace_bytes": 64432686,
+  "installed_build_before_ui_update": "6f2570da4165acc752882a0c04ffe996cd072880",
+  "source_video_reused_sha256": "d823ac6364d69c8dd53b5d542015c754258fccae908ffbc9acc3fbb41fda4070"
+}

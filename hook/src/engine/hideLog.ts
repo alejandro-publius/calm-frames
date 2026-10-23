@@ -80,17 +80,17 @@ export function describeHideEntry(entry: HideLogEntry): string {
   const clock = `${twoDigits(when.getHours())}:${twoDigits(when.getMinutes())}`;
   const what =
     entry.cause === 'unverified'
-      ? 'kept the picture hidden, title not checked'
+      ? 'kept the picture hidden, video unavailable'
       : `hid ${formatDuration(entry.durationMs)}`;
   const where =
     entry.cause === 'unverified' ? '' : ` at ${formatPosition(entry.positionMs)}`;
   const how =
     entry.cause === 'seek'
-      ? ', after moving the playhead'
+      ? ', after seeking'
       : entry.cause === 'skipped'
         ? ', then skipped past it'
         : entry.cause === 'uncertain'
-          ? ', while the picture was not certain'
+          ? ', while playback was being checked'
           : '';
   return `${clock} ${entry.titleName}: ${what}${where}${how}`;
 }

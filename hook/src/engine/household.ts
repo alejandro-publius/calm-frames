@@ -50,7 +50,7 @@ export const PRESETS: Record<PresetName, PresetDefinition> = {
     name: 'wcag',
     title: 'Standard',
     description:
-      'Hides what goes over the WCAG 2.3.1 flash thresholds. This is the floor. Nothing can go below it.',
+      'Checks flashing against WCAG 2.3.1 limits.',
     mapProfiles: ['wcag'],
     guardBandMs: DEFAULT_GUARD_BAND_MS,
     minCoverMs: DEFAULT_MIN_COVER_MS,
@@ -59,7 +59,7 @@ export const PRESETS: Record<PresetName, PresetDefinition> = {
     name: 'broadcast',
     title: 'Broadcast',
     description:
-      'Everything Standard hides, plus what goes over the broadcast rules for a bright television.',
+      'Checks both WCAG 2.3.1 and broadcast flash limits.',
     mapProfiles: ['wcag', 'broadcast'],
     guardBandMs: DEFAULT_GUARD_BAND_MS,
     minCoverMs: DEFAULT_MIN_COVER_MS,
@@ -68,7 +68,7 @@ export const PRESETS: Record<PresetName, PresetDefinition> = {
     name: 'extra-cautious',
     title: 'Extra cautious',
     description:
-      'Everything Broadcast hides, and the picture goes dark a little earlier and comes back a little later.',
+      'Uses broadcast limits and hides a little more before and after each flashing scene.',
     mapProfiles: ['wcag', 'broadcast'],
     guardBandMs: 1_000,
     minCoverMs: 800,

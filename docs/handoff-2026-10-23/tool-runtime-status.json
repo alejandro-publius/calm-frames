@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-10-23T05:50:26.338870+00:00",
+  "production_changed": false,
+  "web_design_guidelines": {
+    "installed": true,
+    "revision": "063bee94c3f4df8453406c830b0a7df0f2860278",
+    "reference_revision": "434b7f91364665f2f733b310ec54809bf8f37937",
+    "licensing_hold_resolved": "Official pinned README explicitly states MIT and provides installation instructions. Original wrapper installed locally with documented offline Codex adapter."
+  },
+  "playwright": {
+    "package": "@playwright/cli",
+    "version": "0.1.22",
+    "node_version": "26.0.0",
+    "chrome_version": "155.0.8059.85",
+    "runtime": "/Users/alexvintera/Documents/Codex/2026-10-20/task/design-tools-runtime-2026-10-23/node_modules/.bin/playwright-cli",
+    "install": "Verified official tarballs, offline npm install --ignore-scripts",
+    "fixture": "/Users/alexvintera/Documents/Codex/2026-10-20/task/design-tools-runtime-2026-10-23/smoke/fixture.html",
+    "browser_sandbox": true,
+    "isolated": true,
+    "user_profiles_accessed": false,
+    "page_title": "Local tooling check",
+    "before": "Ready",
+    "after": "Confirmed",
+    "before_snapshot": "/Users/alexvintera/Documents/Codex/2026-10-20/task/design-tools-runtime-2026-10-23/smoke/output/page-2026-10-23T05-48-56-192Z.yml",
+    "after_snapshot": "/Users/alexvintera/Documents/Codex/2026-10-20/task/design-tools-runtime-2026-10-23/smoke/output/page-2026-10-23T05-49-14-590Z.yml",
+    "browser_closed": true,
+    "server_closed": true
+  },
+  "taste": {
+    "installed_revision": "6010f91a9935f1c167dfc500fb1a475681892e6b",
+    "requirements_present": true,
+    "scripts_executed": [
+      "scripts/lint.mjs"
+    ],
+    "execution_status": "approved retry completed",
+    "denial_reason": "This would execute third-party Taste code; the user authorized installation but the retained instructions require a separate concrete approval before execution, which is not present.",
+    "access_scope": "Reads installed Taste source and only the synthetic local fixture, prints findings; no browser or network.",
+    "browser_inspector_note": "Not run. Pinned CDP launcher includes --enable-unsafe-swiftshader. Any browser smoke test must preserve protections and use an explicitly reviewed path; no flags or scripts changed.",
+    "previous_execution_status": "denied; known not executed; not retried",
+    "exit_code": 0,
+    "stdout": {
+      "files": 1,
+      "findings": []
+    },
+    "smoke_test_passed": true,
+    "browser_inspector_executed": false,
+    "verified_at": "2026-10-23T05:56:47.880487+00:00",
+    "fixture_sha256": "578eb5317a0ed1b4a1591620b316f8874bd93d4952a1a10fa681b29e1585cd56",
+    "linter_sha256": "05f2fae2f56fc051b539cdbacb43a6f78fbbfb9644bb74aa11be472ff12dcaf5",
+    "executed_command": "/opt/homebrew/bin/node /Users/alexvintera/.codex/skills/design-taste-frontend/scripts/lint.mjs /Users/alexvintera/Documents/Codex/2026-10-20/task/design-tools-runtime-2026-10-23/smoke/fixture.html --json"
+  }
+}

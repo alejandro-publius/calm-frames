@@ -87,7 +87,7 @@ def probe(path: Path) -> dict:
 
 
 def frame_times(path: Path, max_seconds: float | None) -> list[float]:
-    """Real presentation timestamps, so a variable frame rate clip plots honestly."""
+    """Real presentation timestamps, so a variable frame rate clip plots at its true times."""
     cmd = ["ffprobe", "-v", "error", "-select_streams", "v:0"]
     if max_seconds:
         cmd += ["-read_intervals", f"%+{max_seconds}"]

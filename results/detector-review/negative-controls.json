@@ -1,0 +1,54 @@
+{
+  "statement": "Each break was applied alone to the analyzer or the area module, flashmap/tests/test_video_reset_boundaries.py was run, the failing tests were recorded, and the file was restored (git diff empty) before the next break. The four controls from the video reset (results/video-reset/negative-controls.json) were not repeated; these three aim at the tests added here.",
+  "recorded_utc": "2026-10-15T21:40:52Z",
+  "test_file": "flashmap/tests/test_video_reset_boundaries.py",
+  "tests_in_file": 22,
+  "unbroken": "22 passed",
+  "controls": [
+    {
+      "control": "E",
+      "break": "the hidden interval no longer extends while the window still fails",
+      "file": "flashmap/src/flashmap/analyze.py",
+      "from": "open_segment.end = max(open_segment.end, pts_ms)",
+      "to": "open_segment.end = open_segment.end",
+      "result_with_break": "1 failed, 21 passed in 1.97s",
+      "tests_that_failed": [
+        "test_the_hidden_interval_lasts_until_the_fourth_flash_ages_out_of_the_window"
+      ],
+      "restored": true
+    },
+    {
+      "control": "F",
+      "break": "red flashes are tallied with the general ones",
+      "file": "flashmap/src/flashmap/analyze.py",
+      "from": "self._record(\"red\", frame.pts_ms, red_mask)",
+      "to": "self._record(\"general\", frame.pts_ms, red_mask)",
+      "result_with_break": "2 failed, 20 passed in 2.44s",
+      "tests_that_failed": [
+        "test_four_red_flashes_in_a_second_are_a_red_segment_and_not_a_general_one",
+        "test_two_red_and_two_general_flashes_in_a_second_are_two_tallies_of_two_and_pass"
+      ],
+      "restored": true
+    },
+    {
+      "control": "G",
+      "break": "the area window is one pixel narrower than the profile says",
+      "file": "flashmap/src/flashmap/area.py",
+      "from": "win_w = max(1, min(int(window_width), width))",
+      "to": "win_w = max(1, min(int(window_width) - 1, width))",
+      "result_with_break": "5 failed, 17 passed in 1.93s",
+      "tests_that_failed": [
+        "test_flashing_over_exactly_a_quarter_of_the_reference_window_passes",
+        "test_flashing_over_a_24_by_25_block_more_than_a_quarter_fails",
+        "test_exactly_576_of_the_2304_window_pixels_flashing_is_a_quarter_and_passes",
+        "test_577_of_the_2304_window_pixels_flashing_is_more_than_a_quarter_and_fails",
+        "test_max_coverage_reads_a_quarter_as_a_quarter"
+      ],
+      "restored": true
+    }
+  ],
+  "limitations": [
+    "A break that a test catches shows the test watches that line; it shows nothing about clinical outcomes.",
+    "The fixtures are solid grey or red arrays with exact timestamps on a 192 by 108 working frame; decoding, scaling and camera noise are covered by the clip-based suites, not here."
+  ]
+}

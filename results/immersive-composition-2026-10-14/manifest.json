@@ -1,0 +1,33 @@
+{
+  "source_commit": "4a9169a8b495c83ae14c1c53458fd9cdbd4436ee",
+  "baseline_app_commit": "e05216284b2e3e85e8a73275432568c512c7317c",
+  "baseline_evidence_commit": "c8e4b346dc7ba323ca21972d489900c04d8530fa",
+  "rendering": "React Native component host trees translated to Chromium; not Vega or VoiceView evidence",
+  "files": [
+    {
+      "path": "1080/details.png",
+      "sha256": "f920ec51aa0c2af0414eceb58af6bd94304b8fbc7c2c77649578ff544586a2d8",
+      "bytes": 470364
+    },
+    {
+      "path": "1080/home.png",
+      "sha256": "ed0af3154f30eeec0360114cd839d38105e739325a3ca73240dd88ff5648e13b",
+      "bytes": 460080
+    },
+    {
+      "path": "720/details.png",
+      "sha256": "5fbbc9d7a5f687f14a628df1ed13ae5ee89b2f66b463bf70ac0b02aa9fa1b61f",
+      "bytes": 249936
+    },
+    {
+      "path": "720/home.png",
+      "sha256": "02469a1bc1c038a54cc6f85826e774184721b489680cc80d3172420525ac9ef6",
+      "bytes": 239446
+    },
+    {
+      "path": "before-after.png",
+      "sha256": "16f69bc9e60a7ed1c82f92425a3ef8b7633034a29f674a15fb8a4318b198f4d3",
+      "bytes": 573622
+    }
+  ]
+}

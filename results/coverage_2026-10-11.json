@@ -1,0 +1,51 @@
+{
+  "statement": "Test coverage of the source on Oct 11, 2026, one local run per suite. Python: the CI Python job's own command (pytest over flashmap, pipeline and eval, not slow, with .coveragerc) in a fresh virtual environment installed the way that job installs, on this Linux box with ffmpeg 6.1.1. App: jest's coverage summary from make test-app in the main checkout. Both floors sit one point under these numbers, rounded down; CI writes its own totals to each run's summary.",
+  "generated_utc": "2026-10-11T19:40:00Z",
+  "commit": "ca64dcc plus the uncommitted CI and coverage configuration that this record accompanies",
+  "python": {
+    "config": ".coveragerc",
+    "scope": "flashmap/src/flashmap and pipeline, test files and pipeline/infra left out",
+    "tests": {
+      "passed": 1720,
+      "skipped": 6,
+      "failed": 0
+    },
+    "percent_covered": 91.24,
+    "covered_lines": 5312,
+    "statements": 5822,
+    "by_package": {
+      "flashmap": {
+        "statements": 2241,
+        "covered_lines": 2109,
+        "percent_covered": 94.11
+      },
+      "pipeline": {
+        "statements": 3581,
+        "covered_lines": 3203,
+        "percent_covered": 89.44
+      }
+    },
+    "floor_percent": 90
+  },
+  "app": {
+    "config": "app/jest.config.json",
+    "statements_percent": 78.24,
+    "branches_percent": 75.55,
+    "functions_percent": 72.35,
+    "lines_percent": 78.11,
+    "floors": {
+      "statements": 77,
+      "branches": 74,
+      "functions": 71,
+      "lines": 77
+    }
+  },
+  "worse_sibling": "Branch coverage is the lowest app measure and functions the lowest by floor margin; the Python number is line coverage only, with no branch measurement.",
+  "published": {
+    "python_percent": 91.2,
+    "flashmap_percent": 94.1,
+    "pipeline_percent": 89.4,
+    "app_lines_percent": 78.11,
+    "app_branches_percent": 75.55
+  }
+}

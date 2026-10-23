@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-21",
+  "appCommit": "60c3bbb701081c37dbd87a6b1f5b66d51a74b855",
+  "kind": "Presentation derived from previously verified native captures; no new device interaction",
+  "screenshots": [
+    {
+      "file": "home.png",
+      "sourceFile": "final-home-2216.png",
+      "sourceSha256": "e449408c24d75ca694bac4e7f1943ae94de3864b10e2b98d3bdb5462da4fa40f",
+      "sha256": "2574d27330c81a1d1b1e5c57d32225f5e57e4c72c3340395f7ff620c9535dc86",
+      "bytes": 422009,
+      "crop": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "dimensions": [
+        1592,
+        894
+      ],
+      "pixelExactCrop": true
+    },
+    {
+      "file": "details.png",
+      "sourceFile": "details-verified-2216.png",
+      "sourceSha256": "043b26e64721bb26e79256bbf44da4f96b40f3be42cb20504796398f3696a8fa",
+      "sha256": "d2e397ca6a9cc937306c478d9932d9bf6cdcaf50c948b807f355921bbf77a76c",
+      "bytes": 383323,
+      "crop": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "dimensions": [
+        1592,
+        894
+      ],
+      "pixelExactCrop": true
+    },
+    {
+      "file": "playback.png",
+      "sourceFile": "demo-playing-frame.png",
+      "sourceSha256": "900d6f8d5f4868cfc4ac53b41b7ff30e3f5207d14cad439ec741a96cdc7cdf7d",
+      "sha256": "a1705f39a22ba0aae658fec4e318dcdeca1a6a174b6c38d60446adc9fc0f45cc",
+      "bytes": 1250269,
+      "crop": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "dimensions": [
+        1592,
+        894
+      ],
+      "pixelExactCrop": true
+    },
+    {
+      "file": "ending.png",
+      "sourceFile": "corrected-ending-2215.png",
+      "sourceSha256": "0a07902b6e8483514ab4312ffcd21c7a4560a730fdc9dacf751aeae0f73f2950",
+      "sha256": "575585cd6b09abb2e4a7a071e161b1a6d7ffce87092661b7643981fe1947a857",
+      "bytes": 1414987,
+      "crop": [
+        0,
+        48,
+        1592,
+        894
+      ],
+      "dimensions": [
+        1592,
+        894
+      ],
+      "pixelExactCrop": true
+    }
+  ],
+  "imageChanges": "Crop only: remove simulator titlebar, remote and black desktop area; no resize, retouching, compositing or reconstructed app UI.",
+  "architecture": "Documentation diagram generated from code paths, not an app screenshot.",
+  "demo": "Local edit pending independent final review; no confirmed public URL or submission.",
+  "limits": [
+    "Still images do not verify audio, motion cadence, or cover timing.",
+    "No physical Fire TV, full VoiceView, clinical or individual comfort acceptance is asserted."
+  ]
+}

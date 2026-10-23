@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "From Home Acadia Watch: Up, Right, Select opens Sea Otters Details with Watch focused",
+    "A fourth Select starts the exact approved NOAA sea-otter clip",
+    "Return: Back, Back, Left, Down, Left restores Home Acadia Watch"
+  ],
+  "capture_used": false,
+  "visual_audio_acceptance": false,
+  "native_error_injected": false,
+  "household_records_inspected": false,
+  "result": "completed",
+  "installed_build_changed": false,
+  "selected_home_title": "Acadia",
+  "collector_stopped": true,
+  "last_reported_focus": "kid-mode-home-watch"
+}

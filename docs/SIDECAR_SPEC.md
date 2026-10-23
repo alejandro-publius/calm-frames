@@ -55,6 +55,7 @@ version number.
 | `segments` | array | the intervals to hide, see below |
 | `summary` | object | counts, for reports |
 | `signature` | object or absent | see below |
+| `scene_holds` | object or absent | optional, authenticated images for covered intervals, see below |
 
 ## `source`
 
@@ -250,6 +251,62 @@ is on purpose: the interval always contains the flashing and always starts befor
 | `pattern_rule_applied` | boolean | false on a profile with no pattern rule, which is every WCAG profile |
 | `pattern_rule_source` | string or null | where the rule's numbers come from, carried with every finding |
 | `area_measured_on` | string | `"picture"` |
+
+## `scene_holds`, version 1
+
+This optional presentation field carries the exact JPEG bytes used for the
+scene's opaque hold. It is covered by the map's existing signature, including
+every image byte. It does not change `segments`, guard bands, room rules or seek
+safety. A map without this field uses the existing cover.
+
+The object has `version: 1` and a `holds` array. Each entry has:
+
+| Key | Meaning |
+| --- | --- |
+| `start_ms`, `end_ms` | Finite bounds in the source map's timeline, including the producer's guard band. |
+| `frame_ms` | Presentation timestamp of the preceding source frame, or `null` for a neutral card. A source frame must precede the hold and sit outside all analyzed presets' cover intervals and calm margins. |
+| `image_data_uri` | `data:image/jpeg;base64,...`, with the JPEG embedded in the signed document. Remote image URLs are not accepted. |
+
+Entries are ordered and do not overlap. The producer looks back at most five
+seconds for a preceding calm frame and uses a neutral card when none exists.
+Each map carries at most 32 images, at most 128 KiB of decoded bytes per JPEG,
+and at most 2 MiB of image data URI text in total. These are resource limits,
+not photosensitivity thresholds. A JPEG dimension may not exceed 1280 pixels,
+and the complete map text is limited to 2 MiB plus 256 KiB for its ordinary
+metadata. Further intervals retain an opaque fallback.
+
+Readers first verify the map's signature, file binding and ordinary policy
+checks. A recognized but malformed `scene_holds` field is a rejected map. An
+image is eligible only if its authenticated bounds contain the entire active
+cover interval, after applying the same source-to-rendition offset as the cover
+schedule. An expanded household interval that does not fit stays covered with
+black. Loading, rejected maps, uncertain playback and image-load failures also
+keep the opaque fallback.
+
+A still may stand in for the opaque cover over any segment, including a red or
+a regular-pattern segment. It is one checked picture, drawn opaque and static,
+so it cannot flash, and the red rule, which is about the picture changing, is
+met by any opaque static cover; the image itself is checked under the broadcast
+pattern rule before publication, so a striped still is refused. What a still
+does not do is weaken the cover: nothing in this field changes which segments
+are covered, for how long, or what happens when playback is uncertain.
+
+Once playback uncertainty, a seek, backgrounding or an unready player interrupts
+an interval, that interval remains black for the current verified map/title
+session. Resuming or seeking back must not redisplay its still. A later,
+uninterrupted interval may use its own checked image. Record uncertainty events
+even when an uncertainty event and a resume event share one render batch;
+otherwise a checked static image can become a flashing image/black sequence.
+
+The still must be drawn without fading, with its aspect preserved over an opaque
+black backing below the captions. It never reveals the original picture. The
+pipeline must use the same image in the prepared rendition and its cover model,
+check image bytes and provenance, and analyze the complete MP4, HLS and model
+including entry and exit transitions before publishing. Broadcast-pattern
+findings intersecting a hold also refuse publication, even for a WCAG-only
+source verdict; outside-hold findings do not expand that source policy. A
+signature authenticates the producer's bytes; it is not an
+independent proof of detector correctness or a medical assurance.
 
 ## `pattern_exemptions[]`
 

@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "mode": "benign-native-smoke",
+  "status": "blocked",
+  "blockers": [
+    "connected_known_target_required",
+    "vega_os_1_2_required",
+    "package_device_architecture_mismatch"
+  ],
+  "inventory": {
+    "source": "live-sdk-read-only",
+    "explicit_target": true,
+    "connected": false,
+    "kind": "none",
+    "in_developer_mode": false,
+    "identity": {
+      "architecture": "",
+      "product": "",
+      "buildDescription": ""
+    },
+    "virtual_device_running": false,
+    "command_exit_codes": {
+      "connection": 2,
+      "identity": 0,
+      "virtual_device": 0
+    }
+  },
+  "package": {
+    "ok": true,
+    "file": "calm-frames-app_aarch64.vpkg",
+    "architecture": "aarch64",
+    "sha256": "3b39ff37e87dfc81cb7acadf833ef1f7b3a4861a38f32ea2de56eab2b75e58cb",
+    "benign_video_sha256": "af2934dc45c9519bcace8db253d0a9e0c10f9db6682a04ad2cf3f906e1755224",
+    "bundled_map_sha256": "28dff7b168b97d7c31c010ffeb0bf7cbde9c66f0d7f5da7132dfb8fbe896bd4f",
+    "captions_available": true,
+    "scene_holds_available": true,
+    "benign_story_proof_sha256": "3673491addb72b9bdbcdd9cd6c3b6abac4ee5f77225e0cc6364fed4f52d4fe45",
+    "benign_story_playback_sha256": "e26ce98019406f65765f172404329d0327db60b2bc8e95d958cd74a70011b150",
+    "benign_story_caption_sha256": "a4f0acb9d117a58df7398be9b2752541b7568f1493c3b3a339a64efc5b92a21d",
+    "benign_story_uses_sham_intervals": true
+  },
+  "journey": [
+    "If first run appears, choose and confirm your own PIN, then finish preset, room and explanation. If settings already exist, keep them; never reset data to make this check pass.",
+    "On the checked shelf, open Harbor story (benign demo). Read its fixed Extra cautious practice plan, then choose Play. Do not open a different title.",
+    "Open captions and select English practice captions. Observe readable captions and continuous gentle audio through both labelled holds. Record visual findings separately.",
+    "Replay Harbor, pause/resume and seek into/back into a hold. Observe the opaque fallback on interruption. Software events alone cannot establish image/caption composition.",
+    "For --restart, after the runner relaunches confirm the saved profile, preset and room remain; open Parent area and check that its PIN is required. Do not put PIN digits in logs."
+  ],
+  "executed": false,
+  "physical_tv_validated": false,
+  "composition_tested": false,
+  "household_durability_observed": false,
+  "gate_1_passed": false
+}

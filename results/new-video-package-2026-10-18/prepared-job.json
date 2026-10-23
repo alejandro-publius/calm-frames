@@ -1,0 +1,168 @@
+{
+  "approved_review": "14ae8d1d4e60786aded79bab39348d66420ce3f3a6eaf0f1cfbcf91230bc81ec",
+  "bytes": 16898753,
+  "created_at": 1792282647.277654,
+  "error": null,
+  "id": "9a5fc47a866b4c60b548a9d88ac612b4",
+  "package": {
+    "bundle_id": "568e563a99b3fd21acccdfce7aac061570681e8e31a1587b900616a19b692a32",
+    "catalog_sha256": "27fce9c0cf6400bf0f288d4891956d6948a39bd2135307fe9f5c54cfb0c5303a",
+    "duration_ms": 50500.0,
+    "playable_in_current_tv_app": false,
+    "public_key_fingerprint": "sha256:00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+    "relative_directory": "runs/7385ec182a6a4fa78bb75504e8839810/package",
+    "source_sha256": "30137444a4f7cd8507a0c5d37fa7180e0b8b6215713d14f6d8c131a2f73b5494",
+    "status": "verified_package_awaiting_app_approval",
+    "title": "Prairie Creek and Redwood (480p)",
+    "verification": {
+      "checkedInputsSha256": "2ca440bc6aa14f08d6ca75a888ab06c0e4bfa48969bb92301622e10fcfa9de4d",
+      "outcome": "cover proven drawn",
+      "reportSha256": "be91dad71e6835de997e9472c53adb49bcc37d9995afcb8e0e63b0cf2e064652"
+    }
+  },
+  "playable": false,
+  "review": {
+    "analysis_complete": true,
+    "analysis_run": "593baa82e85d4cf790b398f315ae822a",
+    "analysis_width": 192,
+    "duration_ms": 50500.0,
+    "flagged_intervals": {
+      "broadcast": [
+        {
+          "end_ms": 17367.0,
+          "reason": "general",
+          "start_ms": 16367.0
+        },
+        {
+          "end_ms": 26533.0,
+          "reason": "general",
+          "start_ms": 16467.0
+        },
+        {
+          "end_ms": 26700.0,
+          "reason": "general",
+          "start_ms": 25600.0
+        },
+        {
+          "end_ms": 26767.0,
+          "reason": "general",
+          "start_ms": 25767.0
+        },
+        {
+          "end_ms": 28533.0,
+          "reason": "general",
+          "start_ms": 27500.0
+        },
+        {
+          "end_ms": 33200.0,
+          "reason": "general",
+          "start_ms": 27600.0
+        },
+        {
+          "end_ms": 45600.0,
+          "reason": "general",
+          "start_ms": 33867.0
+        },
+        {
+          "end_ms": 47967.0,
+          "reason": "general",
+          "start_ms": 46233.0
+        }
+      ],
+      "wcag": [
+        {
+          "end_ms": 26533.0,
+          "reason": "general",
+          "start_ms": 16367.0
+        },
+        {
+          "end_ms": 26633.0,
+          "reason": "general",
+          "start_ms": 25600.0
+        },
+        {
+          "end_ms": 28533.0,
+          "reason": "general",
+          "start_ms": 27500.0
+        },
+        {
+          "end_ms": 33100.0,
+          "reason": "general",
+          "start_ms": 27600.0
+        },
+        {
+          "end_ms": 33200.0,
+          "reason": "general",
+          "start_ms": 32167.0
+        },
+        {
+          "end_ms": 45467.0,
+          "reason": "general",
+          "start_ms": 33933.0
+        },
+        {
+          "end_ms": 45567.0,
+          "reason": "general",
+          "start_ms": 44533.0
+        },
+        {
+          "end_ms": 47300.0,
+          "reason": "general",
+          "start_ms": 46233.0
+        },
+        {
+          "end_ms": 47967.0,
+          "reason": "general",
+          "start_ms": 46367.0
+        }
+      ]
+    },
+    "frame_count": 1515,
+    "limitations": "Full temporal file analysis at the analyzer working resolution; not a medical safety assessment.",
+    "playable": false,
+    "presets": {
+      "broadcast": {
+        "covered_ms": 32600.0,
+        "intervals": [
+          {
+            "end_ms": 48467.0,
+            "reason": "general",
+            "start_ms": 15867.0
+          }
+        ]
+      },
+      "extra-cautious": {
+        "covered_ms": 33600.0,
+        "intervals": [
+          {
+            "end_ms": 48967.0,
+            "reason": "general",
+            "start_ms": 15367.0
+          }
+        ]
+      },
+      "wcag": {
+        "covered_ms": 32600.0,
+        "intervals": [
+          {
+            "end_ms": 48467.0,
+            "reason": "general",
+            "start_ms": 15867.0
+          }
+        ]
+      }
+    },
+    "review_map_hashes": {
+      "broadcast": "5d4e83e7c613ef320b4bfd0ac9b3aa79a18b2fbdda449e9bff650031f902d010",
+      "wcag": "036063c36b68b0886460126843cefcb467bafb1f4d4704054e7c94bf06d7a761"
+    },
+    "source_sha256": "30137444a4f7cd8507a0c5d37fa7180e0b8b6215713d14f6d8c131a2f73b5494"
+  },
+  "review_digest": "14ae8d1d4e60786aded79bab39348d66420ce3f3a6eaf0f1cfbcf91230bc81ec",
+  "run_id": "7385ec182a6a4fa78bb75504e8839810",
+  "source_sha256": "30137444a4f7cd8507a0c5d37fa7180e0b8b6215713d14f6d8c131a2f73b5494",
+  "stage": "Verified package ready for operator review",
+  "status": "package_review",
+  "title": "Prairie Creek and Redwood (480p)",
+  "updated_at": 1792282887.531025
+}

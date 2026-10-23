@@ -1,0 +1,74 @@
+{
+  "what": "The repository's own import path run on the owned, non-flashing Harbor story, in an isolated workspace, with the real flashmap analyzer, the renderer and the verifier. Nothing was played.",
+  "commit": "13551e4 (the import code is unchanged since the validated d96c088)",
+  "commands": [
+    {
+      "command": "python -m eval.prepare_owned_harbor --workdir <demo>/owned-harbor --output <demo>/prepared-library",
+      "exit": 0,
+      "output": {
+        "status": "ready",
+        "sourceSha256": "e0d9970808c0ba2b0a172aed86b5b9d3d373f441bbe16b3ed3aecfc9a64ffa9a",
+        "bundleId": "09695d1c3297b7e82e9ec5629e4778f2392ebd4676edf1c8f98353f0ea8dfc74",
+        "physical_tv_validated": false
+      },
+      "wall_clock_seconds": 114.23,
+      "note": "assembles the source, prepares it with a temporary Ed25519 signer that is deleted when it exits, exports it, and checks the export"
+    },
+    {
+      "command": "python -m pipeline.packaged_library export --workdir <demo>/owned-harbor/work --pub <demo>/owned-harbor/import.pub.pem --output <isolated copy of app>/assets/raw/prepared-library",
+      "exit": 2,
+      "output": {
+        "version": 1,
+        "status": "failed",
+        "message": "The full package output exceeds its byte budget; use a fresh output directory."
+      },
+      "note": "the documented way into a build, tried against an isolated copy of app/; the approved library already uses 129,255,687 of 134,217,728 bytes"
+    },
+    {
+      "command": "node tools/check_prepared_library.mjs --require-reports  (isolated copy of app/, bundle files copied in by hand)",
+      "exit": 1,
+      "output": "Prepared library check failed: Prepared library exceeds its package budget.",
+      "note": "the build gate refuses the namespace before any build"
+    },
+    {
+      "command": "node tools/approved_prepared_libraries.mjs --check  (same isolated copy)",
+      "exit": 0,
+      "output": {
+        "approvedCatalogs": 4,
+        "runtimeImport": false
+      },
+      "note": "the app compiles only the four exactly approved catalogs; this bundle is not among them and nothing at run time can add it"
+    }
+  ],
+  "receipt": {
+    "status": "ready",
+    "readiness": "ready for local playback of the prepared rendition",
+    "title": "Harbor story (prepared locally)",
+    "source_sha256": "e0d9970808c0ba2b0a172aed86b5b9d3d373f441bbe16b3ed3aecfc9a64ffa9a",
+    "presets": [
+      "wcag",
+      "broadcast",
+      "extra-cautious"
+    ],
+    "app_shelf_connected": false,
+    "physical_tv_validated": false,
+    "next_steps": [
+      "Read the verification report and its outcome before choosing a rendition.",
+      "Use only artifacts[preset].safe_master or its prepared HLS playlist locally.",
+      "Do not play the original source or the cover model. Nothing opens automatically.",
+      "The app shelf is not connected to this receipt. TV composition still needs measurement."
+    ]
+  },
+  "verification": {
+    "status": "passed",
+    "outcome": "no flagged segments",
+    "failed_checks": [],
+    "report_sha256": "6085a70a4815666c7ce619dc90011578f5543f2d336e43c0a178f34709bbfc38"
+  },
+  "export": {
+    "bundleId": "09695d1c3297b7e82e9ec5629e4778f2392ebd4676edf1c8f98353f0ea8dfc74",
+    "titles": 1,
+    "public_key_sha256": "25dba37cf7acb128dd411128f01ffe6c1e3535d57b5fba8d6d1114d7d191037c"
+  },
+  "boundary": "Ready for local playback of the prepared rendition. Not connected to the app shelf: the TV app trusts only catalogs approved by exact bundle, catalog and signer hash in app/config/approved-prepared-libraries.json, and this bundle would also exceed the package budget. Admitting it would need the owner's approval and a budget decision; neither was made, and no trust or budget setting was changed."
+}

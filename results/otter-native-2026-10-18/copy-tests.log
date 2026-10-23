@@ -1,0 +1,17 @@
+PASS test/calmframes/titleCoverPresentation.test.tsx
+PASS test/screens/returnFocus.test.tsx
+PASS test/calmframes/detailDiscovery.test.tsx
+PASS test/calmframes/copy.test.ts
+PASS test/calmframes/homeComposition.test.tsx
+PASS test/calmframes/otterPreview.test.tsx
+PASS test/calmframes/cinemaSelection.test.tsx
+PASS test/calmframes/coveredSections.test.ts
+PASS test/calmframes/coveredSectionsStrip.test.tsx
+PASS test/calmframes/bakedAmbient.test.ts
+PASS test/calmframes/ambientPersonalCovers.test.ts
+
+Test Suites: 11 passed, 11 total
+Tests:       131 passed, 131 total
+Snapshots:   0 total
+Time:        7.84 s, estimated 9 s
+Ran all test suites matching /test\/calmframes\/titleCoverPresentation.test.tsx|test\/calmframes\/coveredSections.test.ts|test\/calmframes\/coveredSectionsStrip.test.tsx|test\/calmframes\/detailDiscovery.test.tsx|test\/calmframes\/copy.test.ts|test\/calmframes\/otterPreview.test.tsx|test\/calmframes\/bakedAmbient.test.ts|test\/calmframes\/ambientPersonalCovers.test.ts|test\/calmframes\/homeComposition.test.tsx|test\/calmframes\/cinemaSelection.test.tsx|test\/screens\/returnFocus.test.tsx/i.

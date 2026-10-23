@@ -1,0 +1,40 @@
+{
+  "approved": false,
+  "title": "Sea otters in Alaska",
+  "species": "Enhydra lutris",
+  "location": "Unalaska/Dutch Harbor, Alaska (ocean harbor)",
+  "durationMs": 19986.633,
+  "sourceSha256": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+  "bundleId": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+  "catalogSha256": "6b3f250598791232009a8c2ddef81bab0411eebcaa201ff582e7313cd4e9e7fe",
+  "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+  "reportSha256": "fd6387755e9561a3ec7875ba4c4505a1a34e6ac3243d0af90d0a7051e6fe99a0",
+  "verificationOutcome": "no flagged segments",
+  "verificationChecks": 48,
+  "allChecksPassed": true,
+  "coverPlans": {
+    "broadcast": {
+      "totalCoveredMs": 0,
+      "intervals": []
+    },
+    "wcag": {
+      "totalCoveredMs": 0,
+      "intervals": []
+    },
+    "extra-cautious": {
+      "totalCoveredMs": 0,
+      "intervals": []
+    }
+  },
+  "candidateBytes": 29275450,
+  "excludedFromFreshNamespace": [
+    "4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13"
+  ],
+  "originalNamespacePreserved": true,
+  "allGenerationsAdditionBytes": 83714050,
+  "replacementNamespace": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/replacement-library",
+  "combinedBytes": 64432686,
+  "unchangedLimitBytes": 67108864,
+  "output": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-creator-editions/build/sea-otters-2026-10-18/prepared-library",
+  "requiredScope": "Approve only this exact sea-otter catalog/bundle under the existing project signer, replace the wrong river-otter shelf selection, use a fresh namespace omitting only obsolete pre-ocean Acadia bundle4bab8d81f779d7cf0eac3f5e2fe5372e88e95088fb068680818b28865dc6ad13 while preserving the original directory for concurrent builds and preserving current ocean Acadia byte-for-byte, update honest runtime/NOAA credit. No broad signer trust or ambient registration. Following approval, run gates and one authorized native build/install and bounded non-capture checks. No activation or native testing has occurred."
+}

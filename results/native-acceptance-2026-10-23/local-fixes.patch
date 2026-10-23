@@ -1,0 +1,287 @@
+diff --git a/app/src/calmframes/SafeMediaControlHandler.ts b/app/src/calmframes/SafeMediaControlHandler.ts
+index 7186e8d..ed44589 100644
+--- a/app/src/calmframes/SafeMediaControlHandler.ts
++++ b/app/src/calmframes/SafeMediaControlHandler.ts
+@@ -47,6 +47,8 @@ export interface SafeMediaControlDeps {
+   engine: SeekEngine;
+   /** Where the playhead is now, in milliseconds. */
+   getCurrentMs: () => number;
++  /** Native paused state; cached media-control status can lag a recovered seek. */
++  getPaused?: () => boolean | undefined;
+   /** How far a fast forward or rewind press moves. */
+   stepMs?: number;
+   /** While a recovered player is being reconstructed, transport must not race its seek. */
+@@ -142,6 +144,9 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
+     console.log(
+       '[SafeMediaControlHandler.ts] - handleTogglePlayPause - passed to the player',
+     );
++    const paused = this.deps.getPaused?.();
++    if (paused === true) return this.handlePlay(...args);
++    if (paused === false) return this.handlePause(...args);
+     return super.handleTogglePlayPause(...args);
+   }
+ 
+diff --git a/app/src/screens/PlayerScreen.tsx b/app/src/screens/PlayerScreen.tsx
+index fa8987b..0172fbd 100644
+--- a/app/src/screens/PlayerScreen.tsx
++++ b/app/src/screens/PlayerScreen.tsx
+@@ -107,7 +107,7 @@ interface PlayerProps {
+   route: RouteProp<AppStackParamList, Screens.PLAYER_SCREEN>;
+ }
+ 
+-const PlayerScreen = ({
++export const PlayerScreen = ({
+   navigation,
+   route,
+   recovery,
+@@ -380,6 +380,8 @@ const PlayerScreen = ({
+   const slowPlayback = usePlaybackProgress(videoRef, isVideoInitialized && !showOpeningShell &&
+     !paused && !showBuffering && !isVideoEnded && !isVideoError && !returningHome &&
+     (!guarding || guard.status === 'verified'));
++  const retryAvailable = Boolean(!showOpeningShell && slowPlayback && !isVideoError &&
++    !retryBlocked && recovery && memory.last.current);
+   const calmCoverFallback = guarding && guard.status === 'verified' && card.kind === 'covering';
+   const sceneBridge = preparedRouteAccepted && extraCoverAsset &&
+     guard.scheduledCover && !paused && !showBuffering && !isVideoEnded &&
+@@ -444,6 +446,7 @@ const PlayerScreen = ({
+         ? new SafeMediaControlHandler({
+             engine: guard.seekEngine,
+             getCurrentMs: () => (videoRef.current?.currentTime ?? 0) * 1000,
++            getPaused: () => videoRef.current?.paused,
+             canControl: () => !leaving.current && transportReady.current,
+             onBlockedPause: () => { recoveryAttempt.current?.cancel(); if (!leaving.current) setVideoError(true); },
+           })
+@@ -932,9 +935,9 @@ const PlayerScreen = ({
+             setSelectedCaptionInVideoPlayer={setSelectedCaptionInVideoPlayer}
+             bifFrameImagesRef={bifFrameImagesRef}
+             videoData={data}
+-            // The card's Skip button has focus during a countdown, so OK is
+-            // Skip's and the sample must not pause or show its controls.
+-            skipOwnsSelect={cardOffersSkip(card)}
++            // Skip and Retry own OK while visible. The seekbar must not
++            // reclaim focus when its controls appear behind either action.
++            skipOwnsSelect={cardOffersSkip(card) || retryAvailable}
+             selectedCaptionId={captionID}
+             sceneIntervals={guarding && guard.status === 'verified' ? guard.intervals : undefined}
+             requestSeek={
+@@ -951,8 +954,8 @@ const PlayerScreen = ({
+         )}
+         {recoveryPending && <View testID="recovery-picture-barrier" pointerEvents="none"
+           onLayout={() => setRecoveryCoverMounted(true)} style={styles.recoveryCover} />}
+-        {!showOpeningShell && slowPlayback && !isVideoError && !retryBlocked && recovery && memory.last.current &&
+-          <View style={styles.recoveryAction}><CalmButton label="Try again" sound={false} testID="slow-playback-retry" onPress={retryPlayback} /></View>}
++        {retryAvailable &&
++          <View style={styles.recoveryAction}><CalmButton label="Try again" hasTVPreferredFocus sound={false} testID="slow-playback-retry" onPress={retryPlayback} /></View>}
+         {showOpeningShell && <PlayerOpening title={data.title} menuArt={data.calmMenuArt} returning={returningHome} checking={guard.status !== 'verified'} motionEnabled={route.params.interfaceMotionEnabled === true} onBack={leavePlayer} />}
+         {isVideoError && !returningHome && <ErrorView navigateBack={leavePlayer}
+           onRetry={!retryBlocked && recovery && memory.last.current && guard.status === 'verified' ? retryPlayback : undefined}
+diff --git a/app/test/calmframes/seekSafety.test.ts b/app/test/calmframes/seekSafety.test.ts
+index 1c668ce..bc9e9a8 100644
+--- a/app/test/calmframes/seekSafety.test.ts
++++ b/app/test/calmframes/seekSafety.test.ts
+@@ -48,6 +48,30 @@ import {
+   SafeMediaControlHandler,
+   timeValueToMs,
+ } from '../../src/calmframes/SafeMediaControlHandler';
++
++test('remote toggle follows the current media paused flag after a recovered seek', async () => {
++  const calls = (KeplerMediaControlHandler as unknown as {baseCalls: string[]}).baseCalls;
++  calls.length = 0;
++  let paused = true;
++  const handler = new SafeMediaControlHandler({engine: {requestSeek: jest.fn()} as any,
++    getCurrentMs: () => 26811, getPaused: () => paused, canControl: () => true});
++  await handler.handleTogglePlayPause();
++  expect(calls).toEqual(['handlePlay']);
++  paused = false;
++  await handler.handleTogglePlayPause();
++  expect(calls).toEqual(['handlePlay', 'handlePause']);
++});
++
++test('blocked recovery cannot use the paused-state toggle override', async () => {
++  const calls = (KeplerMediaControlHandler as unknown as {baseCalls: string[]}).baseCalls;
++  calls.length = 0;
++  const getPaused = jest.fn(() => true);
++  const handler = new SafeMediaControlHandler({engine: {requestSeek: jest.fn()} as any,
++    getCurrentMs: () => 0, getPaused, canControl: () => false});
++  await handler.handleTogglePlayPause();
++  expect(getPaused).not.toHaveBeenCalled();
++  expect(calls).toEqual([]);
++});
+ import {
+   createSeekEngine,
+   isPreviewAllowed,
+diff --git a/app/test/screens/playerWiring.test.tsx b/app/test/screens/playerWiring.test.tsx
+index dd810f8..a17aa0a 100644
+--- a/app/test/screens/playerWiring.test.tsx
++++ b/app/test/screens/playerWiring.test.tsx
+@@ -27,7 +27,9 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
+   setItem: jest.fn(async () => undefined),
+ }));
+ import { CAPTION_DISABLE_ID } from '../../src/constants';
+-import PlayerScreen from '../../src/screens/PlayerScreen';
++import { PlayerScreen } from '../../src/screens/PlayerScreen';
++import * as progress from '../../src/calmframes/usePlaybackProgress';
++import * as memory from '../../src/calmframes/usePlaybackMemory';
+ 
+ jest.mock('../../src/w3cmedia/mediacontrols/VideoPlayerUI', () => 'VideoPlayerUI');
+ jest.mock('../../src/services/bif/bifService', () => ({
+@@ -186,9 +188,10 @@ const guarded = {
+   chimeEnabled: false,
+ };
+ 
+-function renderPlayer(params: Record<string, unknown>) {
++function renderPlayer(params: Record<string, unknown>, recovery?: React.ComponentProps<typeof PlayerScreen>['recovery']) {
+   return render(
+     <PlayerScreen
++      recovery={recovery}
+       navigation={{ goBack: mockGoBack } as never}
+       route={{ params: { data, ...params } } as never}
+     />,
+@@ -264,6 +267,20 @@ describe('the player hands OK to Skip only while Skip is on screen', () => {
+     expect(chromeProps().skipOwnsSelect).toBe(true);
+   });
+ 
++  it('gives visible Retry focus and OK without the seekbar taking them back', async () => {
++    const slow = jest.spyOn(progress, 'usePlaybackProgress').mockReturnValue(true);
++    const remembered = jest.spyOn(memory, 'usePlaybackMemory').mockReturnValue({
++      last: {current: {positionMs: 1000} as never}, capture: jest.fn(), close: jest.fn(),
++    });
++    try {
++      renderPlayer({guarded}, {identity: {} as never, start: null, retry: jest.fn()});
++      await settle();
++      await playAt(8.5);
++      expect(screen.getByTestId('slow-playback-retry').props.hasTVPreferredFocus).toBe(true);
++      expect(chromeProps().skipOwnsSelect).toBe(true);
++    } finally { slow.mockRestore(); remembered.mockRestore(); }
++  });
++
+   it('leaves OK alone on a card with no Skip button', async () => {
+     // A title with no map: the picture stays hidden behind the refusal card,
+     // which has nothing to skip.
+diff --git a/eval/benign_hardware_validation.py b/eval/benign_hardware_validation.py
+index 4c4153d..1755553 100644
+--- a/eval/benign_hardware_validation.py
++++ b/eval/benign_hardware_validation.py
+@@ -12,6 +12,7 @@ Saved device reports and virtual-device software results are not physical proof.
+ from __future__ import annotations
+ 
+ import argparse
++import base64
+ import hashlib
+ import json
+ import re
+@@ -156,19 +157,42 @@ def _inspect_story(package: Path) -> dict:
+                      and name != STORY_PREFIX]
+     if not story_members:
+         return {"captions_available": False, "scene_holds_available": False}
+-    expected_members = {STORY_PREFIX + name for name in STORY_ASSET_NAMES}
+-    expected_members.add(STORY_PROOF_MEMBER)
+-    if (set(story_members) != expected_members
+-            or len(story_members) != len(expected_members)):
+-        raise ValueError("story fixture is missing, duplicated or unreviewed")
+     proof_bytes = _member(package, STORY_PROOF_MEMBER)
+     if hashlib.sha256(proof_bytes).hexdigest() != STORY_PROOF_SHA256:
+         raise ValueError("story verification proof is not the reviewed proof")
+     proof = json.loads(proof_bytes)
+     hashes = proof["assets_sha256"]
++    checked_assets = {}
+     for name in STORY_ASSET_NAMES:
+-        if hashlib.sha256(_member(package, STORY_PREFIX + name)).hexdigest() != hashes[name]:
++        data = _member(package, STORY_PREFIX + name)
++        if hashlib.sha256(data).hexdigest() != hashes[name]:
+             raise ValueError("story package asset differs from the reviewed proof")
++        checked_assets[name] = data
++    # The SDK also packages the local stills represented by the pinned maps.
++    # Derive their exact identities only after validating those map bytes.
++    stills = {}
++    for preset in ("wcag", "broadcast", "extra-cautious"):
++        flashmap = json.loads(checked_assets[f"harbor.{preset}.json"])
++        for hold in flashmap["scene_holds"]["holds"]:
++            prefix = "data:image/jpeg;base64,"
++            uri = hold["image_data_uri"]
++            if not uri.startswith(prefix):
++                raise ValueError("reviewed scene image is not a JPEG data URI")
++            data = base64.b64decode(uri[len(prefix):], validate=True)
++            digest = hashlib.sha256(data).hexdigest()
++            name = STORY_PREFIX + f"stills/still-{digest[:16]}.jpg"
++            if name in stills and stills[name] != data:
++                raise ValueError("reviewed scene image name collision")
++            stills[name] = data
++    expected_members = {STORY_PREFIX + name for name in STORY_ASSET_NAMES}
++    expected_members.update(stills)
++    expected_members.add(STORY_PROOF_MEMBER)
++    if (set(story_members) != expected_members
++            or len(story_members) != len(expected_members)):
++        raise ValueError("story fixture is missing, duplicated or unreviewed")
++    for name, data in stills.items():
++        if _member(package, name) != data:
++            raise ValueError("story scene image differs from the reviewed map")
+     return {
+         "captions_available": True, "scene_holds_available": True,
+         "benign_story_proof_sha256": STORY_PROOF_SHA256,
+diff --git a/eval/tests/test_benign_hardware_validation.py b/eval/tests/test_benign_hardware_validation.py
+index 79d0478..9a2e68e 100644
+--- a/eval/tests/test_benign_hardware_validation.py
++++ b/eval/tests/test_benign_hardware_validation.py
+@@ -58,11 +58,25 @@ def story_package(package):
+             (hardware.REPO / "app" / hardware.STORY_PREFIX / name).read_bytes()
+         for name in [*hardware.STORY_ASSET_NAMES, "verification.json"]
+     }
++    for path in (hardware.REPO / "app" / hardware.STORY_PREFIX / "stills").glob("*.jpg"):
++        members[hardware.STORY_PREFIX + "stills/" + path.name] = path.read_bytes()
+     def write(overrides=None, extra_members=()):
+         return package({**members, **(overrides or {})}, extra_members=extra_members)
+     return write
+ 
+ 
++@pytest.mark.parametrize("replacement", [None, b"changed-scene-image"])
++def test_pinned_scene_image_is_required_and_byte_checked(story_package, replacement):
++    name = hardware.STORY_PREFIX + "stills/still-e746a8732bae6122.jpg"
++    assert hardware.inspect_package(story_package({name: replacement}))["ok"] is False
++
++
++def test_duplicate_scene_image_is_rejected(story_package):
++    name = hardware.STORY_PREFIX + "stills/still-e746a8732bae6122.jpg"
++    data = (hardware.REPO / "app" / name).read_bytes()
++    assert hardware.inspect_package(story_package(extra_members=[(name, data)]))["ok"] is False
++
++
+ def test_exact_bundled_bytes_allow_only_preflight_not_physical_proof(package, physical):
+     checked = hardware.inspect_package(package())
+     assert checked["ok"] is True
+diff --git a/hook/src/engine/SafeMediaControlHandler.ts b/hook/src/engine/SafeMediaControlHandler.ts
+index 48319c5..bb61277 100644
+--- a/hook/src/engine/SafeMediaControlHandler.ts
++++ b/hook/src/engine/SafeMediaControlHandler.ts
+@@ -51,6 +51,8 @@ export interface SafeMediaControlDeps {
+   engine: SeekEngine;
+   /** Where the playhead is now, in milliseconds. */
+   getCurrentMs: () => number;
++  /** Native paused state; cached media-control status can lag a recovered seek. */
++  getPaused?: () => boolean | undefined;
+   /** How far a fast forward or rewind press moves. */
+   stepMs?: number;
+   /** While a recovered player is being reconstructed, transport must not race its seek. */
+@@ -146,6 +148,9 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
+     console.log(
+       '[SafeMediaControlHandler.ts] - handleTogglePlayPause - passed to the player',
+     );
++    const paused = this.deps.getPaused?.();
++    if (paused === true) return this.handlePlay(...args);
++    if (paused === false) return this.handlePause(...args);
+     return super.handleTogglePlayPause(...args);
+   }
+ 
+diff --git a/hook/src/mirror.json b/hook/src/mirror.json
+index edd57ac..6025ef6 100644
+--- a/hook/src/mirror.json
++++ b/hook/src/mirror.json
+@@ -23,7 +23,7 @@
+     "mapRegistry.ts": "d9d2274e2cb666da",
+     "mediaClock.ts": "627d8e5ecb3266f9",
+     "personalCovers.ts": "17a40357b64d2bf0",
+-    "SafeMediaControlHandler.ts": "2617eaa466f5c7bc",
++    "SafeMediaControlHandler.ts": "3fa4ab5a94913e58",
+     "seekSafety.ts": "d4150bde6a4bf8ae",
+     "sceneHolds.ts": "a11f9a7461b37ec0",
+     "sha512.ts": "66a52df731d2968b",

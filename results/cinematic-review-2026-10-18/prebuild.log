@@ -1,0 +1,12 @@
+
+> calm-frames-app@0.1.0 prebuild:debug
+> node tools/check_native_inputs.mjs && node tools/check_prepared_library.mjs --require-reports && node tools/approved_baked_ambient.mjs --check
+
+{
+  "nativeInputs": "ready",
+  "missing": [],
+  "problems": [],
+  "scope": "Input files only. SDK compatibility, native build and owner visual/audio acceptance remain separate checks."
+}
+{"prepared_library":"checked","titles":1,"bundles":6,"bytes":54487641,"catalogSha256":"02f76715d81d263deb556433cb3ddb914ea9c1d8820f9f8054719dda71b88b79","verification_reports":{"required":6,"present":6,"missing":[]},"approvedBundles":["d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46","4064f489236973b0e8683f24fac9756ed0cdf475d376a7c6501d644397b597f5"]}
+Compiled ambient metadata matches exact approved catalogs.

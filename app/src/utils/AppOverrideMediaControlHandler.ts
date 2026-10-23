@@ -91,6 +91,7 @@ export class AppOverrideMediaControlHandler extends KeplerMediaControlHandler {
       console.log(
         'AppOverrideMediaControlHandler managed media control callback for handleStartOver()',
       );
+      // eslint-disable-next-line no-restricted-syntax -- the sample's own handler; the Calm Frames player installs SafeMediaControlHandler instead
       this.videoPlayer!.currentTime = 0;
       this.videoPlayer?.play();
     } else {

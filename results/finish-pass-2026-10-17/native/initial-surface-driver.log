@@ -1,0 +1,11 @@
+KEY_RIGHT focus kid-mode-home-more-info
+KEY_ENTER focus kid-mode-details-play
+KEY_RIGHT focus kid-mode-details-show-info
+KEY_ENTER focus kid-mode-details-info-back
+KEY_BACK focus kid-mode-details-show-info
+KEY_BACK focus kid-mode-home-more-info
+PASS Home Details More info Back Back returns Home Details focus
+KEY_UP focus kid-mode-home-choose-profile
+KEY_RIGHT focus kid-mode-home-learn
+KEY_ENTER focus picture-hold-dismiss
+STOP No log match: CALM_TRACE focus picture-hold-start

@@ -13,10 +13,10 @@ from hypothesis import strategies as st
 
 import clipgen
 from flashmap import WCAG, analyze_file
+from flashmap import color as color_math
 from flashmap.analyze import StreamingAnalyzer, _chunked, build_area_windows
 from flashmap.decode import iter_frames, probe
 from flashmap.picture import detect_picture
-from flashmap import color as color_math
 
 W, H = 64, 48
 GRAY = (128, 128, 128)

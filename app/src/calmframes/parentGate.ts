@@ -101,7 +101,7 @@ export function attemptPin(
     return {
       state,
       ok: false,
-      message: 'No PIN is set yet. Set one to lock the parent area.',
+      message: 'No PIN is set yet. Set one to lock parental controls.',
     };
   }
   if (state.lockedUntilMs !== null && nowMs < state.lockedUntilMs) {
@@ -132,7 +132,7 @@ export function attemptPin(
     },
     ok: false,
     message: locked
-      ? 'Too many tries. The parent area is locked for a minute.'
+      ? 'Too many tries. Parental controls are locked for a minute.'
       : `That PIN is not right. ${MAX_ATTEMPTS - failedAttempts} tries left.`,
   };
 }

@@ -3,7 +3,10 @@
 // SPDX-License-Identifier: MIT-0
 import { GestureHandlerRootView } from '@amazon-devices/react-native-gesture-handler';
 import { createDrawerNavigator } from '@amazon-devices/react-navigation__drawer';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
+import { fetchPlaylists } from '../../store/search/searchSlice';
 import { StyleSheet } from 'react-native';
 import HomeSvg from '../../assets/svgr/HomeSVG';
 import SearchSvg from '../../assets/svgr/SearchSVG';
@@ -17,6 +20,11 @@ import DrawerContent from './navigationDrawerContent/DrawerContent';
 import { AppDrawerParamList, DrawerType, Screens } from './types';
 
 const AppDrawer = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    // Sample search data belongs to the legacy drawer, not the Calm Frames launch.
+    dispatch(fetchPlaylists());
+  }, [dispatch]);
   const Drawer = createDrawerNavigator<AppDrawerParamList>();
 
   return (

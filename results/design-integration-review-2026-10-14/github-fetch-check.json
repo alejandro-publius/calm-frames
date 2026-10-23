@@ -1,0 +1,32 @@
+[
+  {
+    "path": "results/home-introduction-2026-10-14/home-browser.png",
+    "bytes": 651642,
+    "sha256": "6143e0c4073b91a210311e03a80db2b5f5de1967441e6d2028b66954c9e30682",
+    "authenticated_github_fetch": "passed"
+  },
+  {
+    "path": "results/home-introduction-2026-10-14/how-it-works-browser.png",
+    "bytes": 647862,
+    "sha256": "80254dae7bf97af9b6007d7a360681659e722733a1d1c831fd748fcd83786ae1",
+    "authenticated_github_fetch": "passed"
+  },
+  {
+    "path": "results/home-introduction-2026-10-14/loading-browser.png",
+    "bytes": 569673,
+    "sha256": "6bad0a5116c28f98fc1369b3fbbcc6a02b6cba72810357c30dc49e48c8d08426",
+    "authenticated_github_fetch": "passed"
+  },
+  {
+    "path": "results/home-introduction-2026-10-14/opening-browser.png",
+    "bytes": 575540,
+    "sha256": "809d578b0694c3456077abe0bc10055b67a891a288bdc0ee4efa83009641f0f2",
+    "authenticated_github_fetch": "passed"
+  },
+  {
+    "path": "results/home-introduction-2026-10-14/receipt.json",
+    "bytes": 8303,
+    "sha256": "f27d7ac9fc06e2747ac43202ccc683a1f6257d50ff31b0cac3b0a205d1e577fb",
+    "authenticated_github_fetch": "passed"
+  }
+]

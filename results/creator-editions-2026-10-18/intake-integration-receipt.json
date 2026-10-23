@@ -1,0 +1,14 @@
+{
+  "url": "http://127.0.0.1:8766",
+  "old_pid": 37408,
+  "new_pid": 80846,
+  "jobs": 4,
+  "jobs_and_signer_status_identical": true,
+  "command_arguments_unchanged": true,
+  "command_sha256": "cd70aefc516cc65d2419d4fc8f67c8e250c383f749942cabe339aba39000f9ee",
+  "private_key_read_or_changed": false,
+  "active_jobs_before_reload": 0,
+  "source_head": "787fdea00083a7fbe993c8cfa92c5b365ce8c15d",
+  "new_delivery_plan_page_served": true,
+  "native_app_restarted": false
+}

@@ -1,0 +1,53 @@
+{
+  "package": "/Users/alexvintera/Documents/Codex/2026-10-15/task/intake-development/real-jobs/9a5fc47a866b4c60b548a9d88ac612b4/runs/7385ec182a6a4fa78bb75504e8839810/package",
+  "identity": {
+    "bundle_id": "568e563a99b3fd21acccdfce7aac061570681e8e31a1587b900616a19b692a32",
+    "source_sha256": "30137444a4f7cd8507a0c5d37fa7180e0b8b6215713d14f6d8c131a2f73b5494",
+    "title": "Prairie Creek and Redwood (480p)",
+    "duration_ms": 50500.0,
+    "catalog_sha256": "27fce9c0cf6400bf0f288d4891956d6948a39bd2135307fe9f5c54cfb0c5303a",
+    "public_key_fingerprint": "sha256:00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+    "verification": {
+      "checkedInputsSha256": "2ca440bc6aa14f08d6ca75a888ab06c0e4bfa48969bb92301622e10fcfa9de4d",
+      "outcome": "cover proven drawn",
+      "reportSha256": "be91dad71e6835de997e9472c53adb49bcc37d9995afcb8e0e63b0cf2e064652"
+    },
+    "status": "verified_package_awaiting_app_approval",
+    "playable_in_current_tv_app": false
+  },
+  "checks": [
+    {
+      "check": "original exact package verifies",
+      "passed": true
+    },
+    {
+      "check": "wrong_source",
+      "passed": true,
+      "result": "refused"
+    },
+    {
+      "check": "altered_media",
+      "passed": true,
+      "result": "refused"
+    },
+    {
+      "check": "unsigned_map_rehashed",
+      "passed": true,
+      "result": "refused"
+    },
+    {
+      "check": "wrong_public_key_rehashed",
+      "passed": true,
+      "result": "refused"
+    },
+    {
+      "check": "missing_report",
+      "passed": true,
+      "result": "refused"
+    },
+    {
+      "check": "original preserved and verifies after negatives",
+      "passed": true
+    }
+  ]
+}

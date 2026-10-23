@@ -25,24 +25,49 @@
  * failure names the screen and the line.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import fs from 'fs';
 import path from 'path';
 import React from 'react';
+import {
+  BENIGN_STORY_LABEL,
+  benignStorySettings,
+  benignStoryTitle,
+} from '../../src/calmframes/benignStory';
+import {
+  BENIGN_STORY_MAPS,
+  BENIGN_STORY_PUBLIC_KEY,
+} from '../../src/calmframes/benignStoryData';
+import { WORLD } from '../../src/calmframes/CoastalWorld';
+import { checkedShelf } from './shelfFixtures';
+import { ACADIA_SOURCE_SHA256 } from '../../src/calmframes/packagedLibrary';
+import { MCWAY_SOURCE_SHA256 } from '../../src/calmframes/continuousScene';
 import CalmCard from '../../src/calmframes/CalmCard';
 import {
   CALM_COLORS,
   CALM_SPACE,
+  COASTAL_COLORS,
+  COASTAL_PRIMARY_FOCUS,
   FOCUS_RING_WIDTH,
   MINIMUM_FOCUS_CONTRAST,
   MINIMUM_TEXT_CONTRAST,
   MINIMUM_TEXT_SIZE,
 } from '../../src/calmframes/calmStyles';
-import { Card, cardAt } from '../../src/calmframes/cards';
+import { Card, cardAt, CHECKING_CARD } from '../../src/calmframes/cards';
+
+/**
+ * The rings a focused control may show. Playback keeps the gold ring on the dark
+ * palette; the coastal menus ring in deep teal, and a focused coastal primary rings
+ * in terracotta because teal on its teal fill would vanish. Every ring still has
+ * to clear the contrast floors against its fill and against what is outside it.
+ */
+const FOCUS_RING_COLOURS = new Set<string>([WORLD.FOCUS_RING, CALM_COLORS.FOCUS_RING, COASTAL_COLORS.FOCUS_RING, COASTAL_PRIMARY_FOCUS]);
+import CornerPlate from '../../src/calmframes/CornerPlate';
 import CoverLayer from '../../src/calmframes/CoverLayer';
 import { buildCoverIntervals } from '../../src/calmframes/coverSchedule';
 import FirstRunScreen from '../../src/calmframes/FirstRunScreen';
-import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
+import HouseholdStorageScreen from '../../src/calmframes/HouseholdStorageScreen';
+import { coverOptionsFor, DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
@@ -55,9 +80,10 @@ import {
   newFamily,
 } from '../../src/calmframes/profiles';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
-import { CheckedTitle } from '../../src/calmframes/titleStatus';
+import { CheckedTitle, checkTitle } from '../../src/calmframes/titleStatus';
 import {
   contrastRatio,
+  flattenStyle,
   FocusMeasurement,
   measureEdges,
   measureFocusRings,
@@ -66,6 +92,122 @@ import {
   roundRatio,
   TextMeasurement,
 } from '../../src/calmframes/uiContrast';
+import {
+  Box,
+  boxesOverlap,
+  findByTestID,
+  placedBox,
+} from '../../src/calmframes/uiLayout';
+import PlayerScreen from '../../src/screens/PlayerScreen';
+
+/*
+ * Stand ins for the player's video plumbing, used only by the last block,
+ * which renders the whole player screen. Nothing else in this file reaches
+ * the player. They are the same stand ins test/screens/hideLog.test.tsx uses,
+ * with one change: the captions view is a host element, so where it sits can
+ * be read off the tree.
+ */
+jest.mock('../../src/w3cmedia/mediacontrols/VideoPlayerUI', () => 'VideoPlayerUI');
+jest.mock('../../src/services/bif/bifService', () => ({
+  getBifFrameImageSource: jest.fn(async () => null),
+}));
+jest.mock('@amazon-devices/react-native-w3cmedia', () => {
+  const ReactActual = jest.requireActual('react');
+  class KeplerMediaControlHandler {
+    async handleSeek() {}
+    async handleSkipForward() {}
+    async handleSkipBackward() {}
+    async handleFastForward() {}
+    async handleRewind() {}
+    async handleStartOver() {}
+  }
+  return {
+    __esModule: true,
+    KeplerVideoSurfaceView: ({
+      onSurfaceViewCreated,
+    }: {
+      onSurfaceViewCreated: (handle: string) => void;
+    }) => {
+      onSurfaceViewCreated('SurfaceViewCreated');
+      return null;
+    },
+    KeplerCaptionsView: (props: { onCaptionViewCreated?: (handle: string) => void }) => {
+      props.onCaptionViewCreated?.('CaptionViewCreated');
+      return ReactActual.createElement('KeplerCaptionsView', props);
+    },
+    VideoPlayer: jest.fn(),
+    KeplerMediaControlHandler,
+  };
+});
+
+interface MockMedia {
+  currentTime: number;
+  playbackRate: number;
+  currentSrc: string;
+  addEventListener: (type: string, listener: () => void) => void;
+  removeEventListener: (type: string, listener: () => void) => void;
+  fire: (type: string) => void;
+  setSurfaceHandle: () => void;
+  clearSurfaceHandle: () => void;
+  setCaptionViewHandle: () => void;
+  clearCaptionViewHandle: () => void;
+  play: () => Promise<void>;
+}
+
+/** The fake player for the current test. A jest factory may only reach mock* names. */
+let mockMedia: MockMedia | null = null;
+
+function makeMockMedia(): MockMedia {
+  const listeners: Record<string, Array<() => void>> = {};
+  return {
+    currentTime: 0,
+    playbackRate: 1,
+    currentSrc: 'file:///pkg/harbor.mp4',
+    addEventListener(type, listener) {
+      listeners[type] = [...(listeners[type] ?? []), listener];
+    },
+    removeEventListener(type, listener) {
+      listeners[type] = (listeners[type] ?? []).filter((one) => one !== listener);
+    },
+    fire(type) {
+      for (const listener of listeners[type] ?? []) {
+        listener();
+      }
+    },
+    setSurfaceHandle() {},
+    clearSurfaceHandle() {},
+    setCaptionViewHandle() {},
+    clearCaptionViewHandle() {},
+    async play() {},
+  };
+}
+
+jest.mock('../../src/utils/VideoHandler', () => ({
+  VideoHandler: class {
+    data: unknown;
+    private readonly ref: { current: unknown };
+    private readonly setInitialized: (value: boolean) => void;
+
+    constructor(
+      videoRef: { current: unknown },
+      _player: unknown,
+      data: unknown,
+      setIsVideoInitialized: (value: boolean) => void,
+    ) {
+      this.ref = videoRef;
+      this.data = data;
+      this.setInitialized = setIsVideoInitialized;
+    }
+
+    preBufferVideo() {
+      this.ref.current = mockMedia;
+      this.setInitialized(true);
+    }
+
+    destroyVideoElements() {}
+    async destroyVideoElementsConfirmed() { return true; }
+  },
+}));
 
 const OUT_DIR = path.join(__dirname, '..', '..', 'build', 'ui-capture');
 
@@ -168,10 +310,20 @@ const parentAreaWithFamily = (
 
 const UNLOCK = ['1', '3', '5', '7'].map((digit) => `parent-area-key-${digit}`);
 
-const PlayerLayer = ({ covered, card }: { covered: boolean; card: Card }) => (
+const PlayerLayer = ({
+  covered,
+  card,
+  plate = false,
+}: {
+  covered: boolean;
+  card: Card;
+  /** The practice plate the labelled Harbor demo carries. */
+  plate?: boolean;
+}) => (
   <>
     <CoverLayer visible={covered} />
     <CalmCard card={card} />
+    {plate ? <CornerPlate label={BENIGN_STORY_LABEL} testID="benign-demo" /> : null}
   </>
 );
 
@@ -187,16 +339,27 @@ interface Case {
 }
 
 const CASES: Case[] = [
+  ...[MCWAY_SOURCE_SHA256, ACADIA_SOURCE_SHA256].flatMap(source =>
+    ['source', 'prepared', 'binding'].map(stage => ({
+      name: `playback-proof-${source.slice(0, 8)}-${stage}`,
+      element: <TitleDetailsScreen entry={checkedShelf().find(entry => entry.title.sha256 === source)!} onPlay={jest.fn()} />,
+      background: COASTAL_COLORS.BACKGROUND, screen: true,
+      press: ['title-details-show-info', 'title-details-technical', `title-details-record-proof-step-${stage}`],
+    }))),
+  { name: 'household-loading', element: <HouseholdStorageScreen failed={false} onRetry={jest.fn()} />,
+    background: WORLD.BACKGROUND, screen: true },
+  { name: 'household-error', element: <HouseholdStorageScreen failed onRetry={jest.fn()} />,
+    background: COASTAL_COLORS.BACKGROUND, screen: true },
   {
     name: 'first-run-pin',
     element: <FirstRunScreen onDone={jest.fn()} newSalt={() => 'seed'} rounds={4} />,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
     name: 'first-run-preset',
     element: <FirstRunScreen onDone={jest.fn()} newSalt={() => 'seed'} rounds={4} />,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       'first-run-key-1',
@@ -212,7 +375,7 @@ const CASES: Case[] = [
   {
     name: 'first-run-room',
     element: <FirstRunScreen onDone={jest.fn()} newSalt={() => 'seed'} rounds={4} />,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       'first-run-key-1',
@@ -229,7 +392,7 @@ const CASES: Case[] = [
   {
     name: 'first-run-explainer',
     element: <FirstRunScreen onDone={jest.fn()} newSalt={() => 'seed'} rounds={4} />,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       'first-run-key-1',
@@ -253,7 +416,7 @@ const CASES: Case[] = [
         onOpenParentArea={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
@@ -268,13 +431,31 @@ const CASES: Case[] = [
         onChooseProfile={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
+    screen: true,
+  },
+  {
+    // The real catalog on the island map, where two coast titles share one
+    // island and their cards are split in half. Until Oct 23 no screen here
+    // drew the split cards, and their second line had dropped to 26 units
+    // without anything measuring it.
+    name: 'kid-home-islands',
+    element: (
+      <KidHomeScreen
+        // The shelf the app shows: the Harbor titles stay off Home.
+        titles={checkedShelf().filter((entry) => !entry.title.title.startsWith('Harbor'))}
+        onOpen={jest.fn()}
+        onAmbient={jest.fn()}
+        onOpenParentArea={jest.fn()}
+      />
+    ),
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
     name: 'kid-home-empty',
     element: <KidHomeScreen titles={[]} onOpen={jest.fn()} onOpenParentArea={jest.fn()} />,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
@@ -287,7 +468,7 @@ const CASES: Case[] = [
         offline
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
@@ -299,7 +480,7 @@ const CASES: Case[] = [
         onBack={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
@@ -311,7 +492,7 @@ const CASES: Case[] = [
         onBack={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
@@ -326,19 +507,19 @@ const CASES: Case[] = [
         onBack={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
     name: 'parent-area-locked',
     element: parentArea,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
     name: 'parent-area-wrong-pin',
     element: parentArea,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       'parent-area-key-2',
@@ -362,13 +543,13 @@ const CASES: Case[] = [
         onBack={jest.fn()}
       />
     ),
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
   },
   {
     name: 'parent-area-open',
     element: parentArea,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       'parent-area-key-1',
@@ -380,14 +561,14 @@ const CASES: Case[] = [
   {
     name: 'parent-area-family',
     element: parentAreaWithFamily,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [...UNLOCK],
   },
   {
     name: 'parent-area-one-kid',
     element: parentAreaWithFamily,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [...UNLOCK, 'parent-area-profiles-profile-1'],
   },
@@ -396,13 +577,19 @@ const CASES: Case[] = [
     // and answers from the sofa like any other.
     name: 'parent-area-remove-kid',
     element: parentAreaWithFamily,
-    background: CALM_COLORS.BACKGROUND,
+    background: COASTAL_COLORS.BACKGROUND,
     screen: true,
     press: [
       ...UNLOCK,
       'parent-area-profiles-profile-1',
       'parent-area-remove-profile',
     ],
+  },
+  {
+    name: 'player-checking',
+    element: <PlayerLayer covered card={CHECKING_CARD} />,
+    background: CALM_COLORS.COVER,
+    screen: false,
   },
   {
     name: 'player-countdown',
@@ -427,6 +614,19 @@ const CASES: Case[] = [
     element: (
       <PlayerLayer covered card={cardAt([], 0, { rejection: 'missing' })} />
     ),
+    background: CALM_COLORS.COVER,
+    screen: false,
+  },
+  {
+    // The practice plate is read over the picture and over the cover alike.
+    name: 'player-practice-countdown',
+    element: <PlayerLayer covered={false} card={cardAt(intervals, 16_000)} plate />,
+    background: VIDEO_STAND_IN,
+    screen: false,
+  },
+  {
+    name: 'player-practice-covering',
+    element: <PlayerLayer covered card={cardAt(intervals, 22_000)} plate />,
     background: CALM_COLORS.COVER,
     screen: false,
   },
@@ -524,7 +724,7 @@ describe('the ten foot pass', () => {
       }
 
       for (const control of result.focused) {
-        if (control.ringColour !== CALM_COLORS.FOCUS_RING) {
+        if (!FOCUS_RING_COLOURS.has(control.ringColour)) {
           problems.push(
             `${control.testID} shows ${control.ringColour} when focused, not the focus ring`,
           );
@@ -559,6 +759,12 @@ describe('the ten foot pass', () => {
       expect(problems).toEqual([]);
     },
   );
+
+  it('holds the reading stops on the technical page to the same ring floors as controls', () => {
+    const acadia = measured.find((one) => one.name === `playback-proof-${ACADIA_SOURCE_SHA256.slice(0, 8)}-source`);
+    expect(acadia?.focused.map((ring) => ring.testID).filter((id) => id.includes('-reading-'))).toEqual(
+      ['intro', 'findings', 'wcag', 'files'].map((section) => `title-details-record-reading-${section}`));
+  });
 
   it('measured every screen and wrote the numbers down', () => {
     expect(measured).toHaveLength(CASES.length);
@@ -653,5 +859,297 @@ describe('the contrast arithmetic itself', () => {
     const lines = measureText(tree, { background: VIDEO_STAND_IN });
     expect(lines.map((line) => line.background)).toEqual(['#1B2735', '#101A24']);
     expect(lines[0].fontSize).toBe(36);
+  });
+});
+
+/**
+ * The player keeps its words apart: the card, the practice plate and the
+ * captions each have a place, and no two of them share one.
+ *
+ * The card used to stand 160 units up from the bottom, inside the band where
+ * captions are drawn, and the practice label ran across the top at 100 units,
+ * which is where the card hangs now. Either one covers words a child is
+ * reading. So this renders the real player screen for the labelled Harbor
+ * demo, the one title with all three on screen at once, in every state its
+ * card can be in, and measures where each one sits with the ruler in
+ * src/calmframes/uiLayout.ts.
+ *
+ * Seen to fail, Oct 9 2026, two ways. With the card put back at
+ * bottom: scale(160), all five states went red, the card reaching from about
+ * 600 down to 920 into the caption band at 720 to 960. With the plate put
+ * back where the label was, top 100 and left and right 80, all five went red
+ * with the card and the plate overlapping and the plate reaching into the
+ * safe margins on both sides.
+ */
+describe('the player keeps its words apart', () => {
+  const SCREEN = { width: 1920, height: 1080 };
+
+  /**
+   * How tall the band captions are drawn in, from the captions view's bottom
+   * edge upward.
+   *
+   * Cue lines stack upward from that edge. Allow up to 60 units a line, which
+   * is large for captions on a 1080 line picture, and four lines, where most
+   * cues are one or two: 240 units. Written out here rather than taken from
+   * the app, for the reason FLOORS is.
+   */
+  const CAPTION_BAND_UNITS = 240;
+
+  const harbor = benignStoryTitle();
+  const harborSettings = benignStorySettings(harbor, DEFAULT_SETTINGS);
+  const HARBOR_MADE_AT = Date.parse(JSON.parse(BENIGN_STORY_MAPS.wcag).created_utc);
+  const harborIntervals = buildCoverIntervals(
+    checkTitle(harbor, {
+      settings: harborSettings,
+      publicKeyBase64: BENIGN_STORY_PUBLIC_KEY,
+      nowMs: HARBOR_MADE_AT + 1_000,
+    }).segments,
+    { ...coverOptionsFor(harborSettings), durationMs: harbor.durationMs },
+  );
+
+  /** The route the shelf hands the player for Harbor, as KidModeScreen builds it. */
+  function harborRoute(guardedOverrides: Record<string, unknown> = {}) {
+    return {
+      data: {
+        id: harbor.id,
+        title: harbor.title,
+        description: '',
+        mediaType: 'video',
+        mediaSourceType: 'url',
+        uri: harbor.uri,
+        textTrack: harbor.textTrack,
+        categories: [],
+        channelID: '',
+        posterUrl: '',
+        format: 'MP4',
+        uhd: false,
+        secure: false,
+        rentAmount: '',
+      },
+      guarded: {
+        sha256: harbor.sha256,
+        maps: harbor.maps,
+        settings: harborSettings,
+        durationMs: harbor.durationMs,
+        titleId: harbor.id,
+        chimeEnabled: false,
+        ...guardedOverrides,
+      },
+    };
+  }
+
+  function captionBand(tree: RenderedNode): Box {
+    const view = findByTestID(tree, 'kepler-captions-view');
+    if (!view) {
+      throw new Error('the player drew no captions view');
+    }
+    // The native view fills a retained host; both offsets affect its screen edge.
+    const host = findByTestID(tree, 'calm-captions-layer');
+    if (!host || !findByTestID(host, 'kepler-captions-view')) {
+      throw new Error('the captions view is missing its retained host');
+    }
+    const hostBottom = flattenStyle(host.props?.style).bottom;
+    const viewBottom = flattenStyle(view.props?.style).bottom;
+    if (typeof hostBottom !== 'number' || typeof viewBottom !== 'number') {
+      throw new Error('the captions host and view must have numeric bottom offsets');
+    }
+    const bottom = hostBottom + viewBottom;
+    if (typeof bottom !== 'number') {
+      throw new Error(`the captions view sits at bottom ${String(bottom)}, not a number of units`);
+    }
+    const edge = SCREEN.height - bottom;
+    return { left: 0, top: edge - CAPTION_BAND_UNITS, right: SCREEN.width, bottom: edge };
+  }
+
+  const describeBox = (box: Box) =>
+    `${Math.round(box.left)},${Math.round(box.top)} to ${Math.round(box.right)},${Math.round(box.bottom)}`;
+
+  async function settle() {
+    await act(async () => {
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+  }
+
+  async function playAt(milliseconds: number) {
+    const media = mockMedia as MockMedia;
+    media.currentTime = milliseconds / 1000;
+    await act(async () => {
+      media.fire('playing');
+      media.fire('timeupdate');
+      jest.advanceTimersByTime(100);
+    });
+  }
+
+  const first = harborIntervals[0];
+  const last = harborIntervals[harborIntervals.length - 1];
+
+  interface LayoutCase {
+    state: string;
+    guarded?: Record<string, unknown>;
+    atMs?: number;
+    /** Something on screen that proves the player really is in this state. */
+    proof: () => void;
+  }
+
+  const LAYOUT_CASES: LayoutCase[] = [
+    {
+      // A map that is still being fetched holds the player on the checking card.
+      state: 'checking',
+      guarded: {
+        maps: undefined,
+        mapUrls: {
+          wcag: 'https://example.invalid/harbor.wcag.json',
+          broadcast: 'https://example.invalid/harbor.broadcast.json',
+          'extra-cautious': 'https://example.invalid/harbor.extra-cautious.json',
+        },
+      },
+      proof: () =>
+        expect(screen.getByTestId('calm-card-title').props.children).toBe(
+          CHECKING_CARD.title,
+        ),
+    },
+    {
+      state: 'countdown',
+      atMs: first.startMs - 1_000,
+      proof: () => expect(screen.getByTestId('calm-card-skip')).toBeTruthy(),
+    },
+    {
+      state: 'covering',
+      atMs: Math.round((first.startMs + first.endMs) / 2),
+      proof: () => expect(screen.getByTestId('calm-frames-cover')).toBeTruthy(),
+    },
+    {
+      // A map that does not read: the refusal card, with its longest words.
+      state: 'unverified',
+      guarded: {
+        maps: { wcag: '{}', broadcast: '{}', 'extra-cautious': '{}' },
+      },
+      proof: () =>
+        expect(screen.getByTestId('calm-card-title').props.children).toBe(
+          'This video is unavailable',
+        ),
+    },
+  ];
+
+  const layouts: Array<{ state: string; card: Box; plate: Box; captions: Box }> = [];
+  let realFetch: typeof fetch;
+
+  beforeEach(() => {
+    mockMedia = makeMockMedia();
+    jest.useFakeTimers();
+    jest.setSystemTime(HARBOR_MADE_AT + 1_000);
+    realFetch = global.fetch;
+    // A map that is fetched never arrives, so the checking state holds still.
+    global.fetch = jest.fn(() => new Promise<Response>(() => {})) as unknown as typeof fetch;
+  });
+
+  afterEach(() => {
+    global.fetch = realFetch;
+    jest.useRealTimers();
+  });
+
+  it('times the Harbor states from the schedule the guard builds', () => {
+    // The cases above pick their moments from this schedule, so check the
+    // picks are the states they are named for before trusting them.
+    expect(harborIntervals.length).toBeGreaterThanOrEqual(1);
+    expect(cardAt(harborIntervals, first.startMs - 1_000).kind).toBe('countdown');
+    expect(cardAt(harborIntervals, (first.startMs + first.endMs) / 2).kind).toBe('covering');
+    expect(cardAt(harborIntervals, last.endMs + 500).kind).toBe('after');
+  });
+
+  // Since bfb811f the picture returns after a cover with no completion card,
+  // so that moment has no words to keep apart; it is checked for exactly that.
+  it('returns to the picture after the last cover with no card, Skip or cover left', async () => {
+    render(
+      <PlayerScreen
+        navigation={{ goBack: jest.fn() } as never}
+        route={{ params: harborRoute(undefined) } as never}
+      />,
+    );
+    await settle();
+    await playAt(0);
+    await playAt(last.endMs + 500);
+    expect(screen.queryByTestId('calm-card')).toBeNull();
+    expect(screen.queryByTestId('calm-card-skip')).toBeNull();
+    expect(screen.queryByTestId('calm-frames-cover')).toBeNull();
+    expect(screen.getByTestId('benign-demo-plate')).toBeTruthy();
+  });
+
+  it.each(LAYOUT_CASES.map((one) => [one.state, one] as const))(
+    'keeps the card, the plate and the captions apart while %s',
+    async (_state, one) => {
+      const route = harborRoute(one.guarded);
+      render(
+        <PlayerScreen
+          navigation={{ goBack: jest.fn() } as never}
+          route={{ params: route } as never}
+        />,
+      );
+      await settle();
+      if (one.atMs !== undefined) {
+        await playAt(0);
+        await playAt(one.atMs);
+      }
+      one.proof();
+
+      const tree = screen.toJSON() as unknown as RenderedNode;
+      const card = placedBox(tree, 'calm-card', SCREEN);
+      const plate = placedBox(tree, 'benign-demo-plate', SCREEN);
+      const captions = captionBand(tree);
+      expect(card).not.toBeNull();
+      expect(plate).not.toBeNull();
+      if (!card || !plate) {
+        return;
+      }
+      layouts.push({ state: one.state, card, plate, captions });
+
+      const problems: string[] = [];
+      const pairs: Array<[string, Box, string, Box]> = [
+        ['the card', card, 'the caption band', captions],
+        ['the plate', plate, 'the caption band', captions],
+        ['the card', card, 'the plate', plate],
+      ];
+      for (const [name, box, otherName, other] of pairs) {
+        if (boxesOverlap(box, other)) {
+          problems.push(
+            `${name} (${describeBox(box)}) overlaps ${otherName} (${describeBox(other)})`,
+          );
+        }
+      }
+      for (const [name, box] of [['the card', card], ['the plate', plate]] as const) {
+        if (
+          box.left < FLOORS.safeMarginX ||
+          box.top < FLOORS.safeMarginY ||
+          box.right > SCREEN.width - FLOORS.safeMarginX ||
+          box.bottom > SCREEN.height - FLOORS.safeMarginY
+        ) {
+          problems.push(`${name} (${describeBox(box)}) leaves the safe area`);
+        }
+      }
+      expect(problems).toEqual([]);
+    },
+  );
+
+  it('measured every state and wrote the boxes down', () => {
+    expect(layouts.map((one) => one.state)).toEqual(
+      LAYOUT_CASES.map((one) => one.state),
+    );
+    fs.mkdirSync(OUT_DIR, { recursive: true });
+    fs.writeFileSync(
+      path.join(OUT_DIR, 'player-layout.json'),
+      `${JSON.stringify(
+        {
+          note:
+            'Where the player puts the card, the practice plate and the caption band, in 1080p units from the top left, measured off the rendered player screen with the conservative ruler in app/src/calmframes/uiLayout.ts. Text is allowed 0.6 of its size per character and 1.35 per line, so the boxes are larger than the real ones.',
+          measuredBy: 'app/test/calmframes/tenFoot.test.tsx',
+          caption_band_units: CAPTION_BAND_UNITS,
+          states: layouts,
+        },
+        null,
+        2,
+      )}\n`,
+    );
+    expect(fs.existsSync(path.join(OUT_DIR, 'player-layout.json'))).toBe(true);
   });
 });

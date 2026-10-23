@@ -1,0 +1,10 @@
+{
+  "sha256": "5afbfc7e5a9cae48d42153f4e0ab23fe7a7d7d509f1da864c5cfe52194d33f45",
+  "bytes": 9624827,
+  "original_excerpt_seconds": [
+    30,
+    46
+  ],
+  "encoding": "H.264, CRF20, medium, yuv420p; original dimensions/frame rate retained",
+  "audio": "Original contains no audio stream; derivative also has none."
+}

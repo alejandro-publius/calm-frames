@@ -1,0 +1,973 @@
+{
+  "scope": "local Codex text-only skills",
+  "installed": true,
+  "executables_included": "Taste JavaScript source only; no executable-mode files or binaries",
+  "hooks_included": false,
+  "items": [
+    {
+      "name": "image-to-code",
+      "origin": "https://github.com/Leonxlnx/imagegen-skills/tree/beb16b0d0f4dae9a6f5cb04ea41e97b93a54ab8e/skills/image-to-code",
+      "revision": "beb16b0d0f4dae9a6f5cb04ea41e97b93a54ab8e",
+      "license": "MIT",
+      "upstream_skill_sha256": "4c060a8064a8b13380bc2ef3d6e6a1d0b1e316aa093cd9807d0ce9e4eeb037fa",
+      "adaptation": "## Local Codex scope\n\nThis is a text-only installation. Follow the available image-generation tool\u2019s instructions and the user\u2019s actual design brief. Existing supplied designs, platform requirements and user restrictions take precedence over the upstream website defaults. This skill does not authorize a browser redesign of a native Fire TV app, extra software installation or new captures.\n",
+      "destination": "/Users/alexvintera/.codex/skills/image-to-code",
+      "no_runtime_installed": true,
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1065,
+          "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
+          "mode": "0o644"
+        },
+        {
+          "path": "LOCAL_INSTALL.md",
+          "bytes": 1018,
+          "sha256": "4205eae52ef6612871931aa509b0264c1b6eeec60697f0aec7b6d33e6fe9fdcb",
+          "mode": "0o644"
+        },
+        {
+          "path": "SKILL.md",
+          "bytes": 36840,
+          "sha256": "583c0b1d35b67580475c43c49b270bb34820438ea7acd5570c553b9ceea2b7b1",
+          "mode": "0o644"
+        }
+      ],
+      "installed": true,
+      "verified": true
+    },
+    {
+      "name": "awesome-design-md",
+      "origin": "https://github.com/VoltAgent/awesome-design-md/tree/3b605329240ce735b510037cca322f1831fdd7f8/design-md",
+      "revision": "3b605329240ce735b510037cca322f1831fdd7f8",
+      "license": "MIT",
+      "upstream_skill_sha256": null,
+      "adaptation": "Locally authored wrapper and reference index; upstream DESIGN.md files retained unchanged.",
+      "destination": "/Users/alexvintera/.codex/skills/awesome-design-md",
+      "no_runtime_installed": true,
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1066,
+          "sha256": "6d4bdc9a9cf30e7beb593475fdcdbf29f981ea6bd7923f202866145409f87b44",
+          "mode": "0o644"
+        },
+        {
+          "path": "LOCAL_INSTALL.md",
+          "bytes": 589,
+          "sha256": "0035ffa01805c935f4b3b1ef08e8b9db88125290830c7b6dd5ebc9ffca5c3034",
+          "mode": "0o644"
+        },
+        {
+          "path": "SKILL.md",
+          "bytes": 1221,
+          "sha256": "153fe17de0e2e68f4018046c311f759cc78975c3623a97be498139903ac3784a",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/1win/DESIGN.md",
+          "bytes": 23906,
+          "sha256": "64d02d344cb16d68b6882054f35e3bfb7241ad60dc8b7f84f6636a7d1379496a",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/INDEX.md",
+          "bytes": 2583,
+          "sha256": "0249299bb670519cace957241f17aa8142206f1b6af346919cb7cca4a5df2cef",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/airbnb/DESIGN.md",
+          "bytes": 30517,
+          "sha256": "add34130d67209ad105346d60fe2b290728b9711683969db4b7760e29477a5fe",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/airtable/DESIGN.md",
+          "bytes": 35266,
+          "sha256": "1d225e511213044d3c705bde50265ad010932bfd8a15740a144dd4f480128889",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/aljazeera/DESIGN.md",
+          "bytes": 28031,
+          "sha256": "37614fc72658ffa30faca01049bd1efa8a9baafa4750501405eeea66f149466a",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/apple/DESIGN.md",
+          "bytes": 37096,
+          "sha256": "83fbc614443a9b3d7569e9956a43e7b8740f9d0f939f58b8154f7a7cec3002b2",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/binance/DESIGN.md",
+          "bytes": 39918,
+          "sha256": "378ff97d568ccbc316519b9d45a29d6649ed8961c9c486c3ed4cea7501d72371",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/bmw/DESIGN.md",
+          "bytes": 27907,
+          "sha256": "b7268279e7c98e85fb80890e06765f4ee8340ba1ea1ccb5a8a5b134de43dac3e",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/bmw-m/DESIGN.md",
+          "bytes": 30697,
+          "sha256": "824a1707c0a8d1609d72477d0fa211b9ebe4bdeb3e1fd701790af7b7bb669a4a",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/bugatti/DESIGN.md",
+          "bytes": 28535,
+          "sha256": "375f0a20ada88cdee5e995ca7edcfbd584ddf5f887024deebd1bc75bfd55b1bc",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/cal/DESIGN.md",
+          "bytes": 31176,
+          "sha256": "8cd21b7d67e94c899843d517f4b426e4fee33d47354a433d6a63ebcf79d5a654",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/claude/DESIGN.md",
+          "bytes": 33586,
+          "sha256": "3d972f34f8d4f33b442fa28220cf3b7ca2f13c0a97c468e3988148f82521f9df",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/clay/DESIGN.md",
+          "bytes": 25705,
+          "sha256": "1abd803a207fbe950a06e155adcd6013c2e149b13e7b88844f5069f9d3d99eb3",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/clickhouse/DESIGN.md",
+          "bytes": 25986,
+          "sha256": "50987e29b603cc7503ebe724af810fcf43845e96fdd4083e0fbe5fe00d2cdd2e",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/cohere/DESIGN.md",
+          "bytes": 20020,
+          "sha256": "1c49a5a5f88d43841d4f4afa33831328d47a5715048700a3b75086a822575883",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/coinbase/DESIGN.md",
+          "bytes": 25853,
+          "sha256": "c8c67800dd7f58fcc87ed7d267a3bba862e3419e499e8a66d67731a69d2de1d6",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/composio/DESIGN.md",
+          "bytes": 20606,
+          "sha256": "e7db886dabecca61f29b83e8f46d7a1e8a43889d30b81bc6e48162ccaafcbb2f",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/cursor/DESIGN.md",
+          "bytes": 21771,
+          "sha256": "a3db9b3019dc2f514fdee7cd0ca0a5232c0bd0119e23178e8eebaf6916258d9d",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/dell-1996/DESIGN.md",
+          "bytes": 34592,
+          "sha256": "e186c614b1223fe7015670472ac6bc84b5b3fdd5de5325b3ce5bfb7fbe9c8d6e",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/dji/DESIGN.md",
+          "bytes": 42268,
+          "sha256": "c8a57520b87286869a88cdd2c07f21080ebda9fb3eee315b11d95c752582c1a9",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/elevenlabs/DESIGN.md",
+          "bytes": 20943,
+          "sha256": "3b359acfaafadbb499c7ed3eebe813a76e0be497a7157b77de207fe275068a66",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/expo/DESIGN.md",
+          "bytes": 21660,
+          "sha256": "1be7e129b6f75afaa12318a7c51ab22f6f74a214dec22c4827cecc519f112363",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/ferrari/DESIGN.md",
+          "bytes": 24365,
+          "sha256": "1199e2832641cac7e384aaf3b1f3db87f992240cea5d3d1eee04d9dc00acb17c",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/figma/DESIGN.md",
+          "bytes": 32316,
+          "sha256": "716ce8431f47eb8b8135552710e3c4d538bccccf1202e4ceac5428c9aada9972",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/framer/DESIGN.md",
+          "bytes": 29119,
+          "sha256": "a5d47dddacf5a04577cec0be6fe0fc53b7402254c7686874af3e59bcc7588cb4",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/hashicorp/DESIGN.md",
+          "bytes": 28023,
+          "sha256": "d2df9be72d867e48d318fd18db04e60a78357c27e392ab921fc2ba7f46951442",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/hp/DESIGN.md",
+          "bytes": 36335,
+          "sha256": "4c9a248046684bdde5311a0c9881814f50e2381c2b0f3c75b02a35fc64bc8bb8",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/ibm/DESIGN.md",
+          "bytes": 26481,
+          "sha256": "46f6fd65b5e7524fed1133b9b3c0dd619f9a0f145fbb2b87f3675c701a88f3bd",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/intercom/DESIGN.md",
+          "bytes": 23278,
+          "sha256": "962be23cd947e87a86b2ffbc0440e9d0808243a6ef3af2aa04e8e7cc04d48ba3",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/jobright/DESIGN.md",
+          "bytes": 26861,
+          "sha256": "9e682194e3f846915164189538741133ab1e2779730677e92d28f873f782999b",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/kraken/DESIGN.md",
+          "bytes": 4350,
+          "sha256": "41bcbd5642c926a549f0d50f1151484c5776b4536233240c8415cfb79bcf1f38",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/lamborghini/DESIGN.md",
+          "bytes": 21119,
+          "sha256": "9aa68c53b481a0befdf72859db5625f85454122294509989aa58414aaee04b34",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/linear.app/DESIGN.md",
+          "bytes": 24354,
+          "sha256": "30bd30e72c48a16e4bdbd010f2d1c85fab657c6fae3cc85389399aab10f9cb5f",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/lovable/DESIGN.md",
+          "bytes": 17384,
+          "sha256": "92790895c833104072643929ba56ebbf42c8f88ffb7bff1926462545d0ace6c7",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/mastercard/DESIGN.md",
+          "bytes": 26995,
+          "sha256": "e76ceaa187f43bd24b8338d2b2314e71e9225b36492e40f32a55782281a10437",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/mercury/DESIGN.md",
+          "bytes": 25065,
+          "sha256": "dabb3683422a9841369b0db53ff13ed375b0b6f019157a5c90e9fca165cc111f",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/meta/DESIGN.md",
+          "bytes": 37986,
+          "sha256": "306dfad97c006d47b134fb0dbd55ff68d3baa526844d6eb37346373c9ef35339",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/minimax/DESIGN.md",
+          "bytes": 37920,
+          "sha256": "2658b96488bb629749259b152c5ba2912a0e8feb6a03477e265879abd9264c50",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/mintlify/DESIGN.md",
+          "bytes": 44083,
+          "sha256": "754ffcf35dcd39ef8aef450085ce936aaca5b872ff92caa66be99e91a5c3d5ec",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/miro/DESIGN.md",
+          "bytes": 36542,
+          "sha256": "87c71f76297277d64f9679e015a50da88e72d86d7b41badf8733eae1e4cde335",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/mistral.ai/DESIGN.md",
+          "bytes": 35508,
+          "sha256": "40e2c692d72c54bae1e43446e2d059b71d773668d39d71ccb7ededa9fa07d145",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/mongodb/DESIGN.md",
+          "bytes": 32077,
+          "sha256": "4523f10efd5ccd46f9aeac3b98626e24bcf907bc0c1e46500cb0e3920f932e71",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/mydealz/DESIGN.md",
+          "bytes": 25797,
+          "sha256": "598698a1bd0824260d57eb21f728b79cd702916f918de2b6f39b3720ba727872",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/nerdwallet/DESIGN.md",
+          "bytes": 36240,
+          "sha256": "478475273beb642f0661fb1aef7107bac5cde69250794bc148b28ee2c61960c7",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/nike/DESIGN.md",
+          "bytes": 36697,
+          "sha256": "d2a3d363665839e2ddc15c91b8a9f3e92b1962ff55a7ca5d964ab3bb88b8186c",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/nintendo-2001/DESIGN.md",
+          "bytes": 38977,
+          "sha256": "9630af17090d5c39ba9d8b5915a597a96c7552efe1422b3b8c3f31fb3e636716",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/notion/DESIGN.md",
+          "bytes": 35176,
+          "sha256": "fa9d6e78216d8f3e5d3990709ca2de6bc2e268e945bb94f255fd1bfb15455266",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/nvidia/DESIGN.md",
+          "bytes": 35591,
+          "sha256": "d649be85daf075c98a17071e707e3901c6e19150044a81716acd01ef1169cc83",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/ollama/DESIGN.md",
+          "bytes": 32747,
+          "sha256": "3f36f897e5aad870344dd97e282c8f125ad208dc99449bb08dd38b9259d2f451",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/opencode.ai/DESIGN.md",
+          "bytes": 32647,
+          "sha256": "d1a8893c4b8ac90b1e86230eee2effa8bd15add3582853477920e32432336dda",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/oracle/DESIGN.md",
+          "bytes": 42525,
+          "sha256": "23f03014c1654ff72e9a2185f1c3d1f3b51eabc8124c14f6ddd51b17a36a85a6",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/oura/DESIGN.md",
+          "bytes": 31798,
+          "sha256": "8674dbeb48bf7e3ff5271e79a6222084118ba1630db4a2199d1492568850fa08",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/pinterest/DESIGN.md",
+          "bytes": 36392,
+          "sha256": "26a202fd244e9213d5e2475d81581828da1dd97e089e44639d9783d04f96e4a8",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/playstation/DESIGN.md",
+          "bytes": 39766,
+          "sha256": "2a56c109af6cb847fa091b768f719b498ac56b582d010860e73ea5fb72a1590d",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/posthog/DESIGN.md",
+          "bytes": 40498,
+          "sha256": "01f497f751d56296bfcd5eb8806325a4bb4786d364941ec6e65c65fa9ee6d362",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/raycast/DESIGN.md",
+          "bytes": 41275,
+          "sha256": "6e2c5137e4d914b70996d589688374a801b6f29a35c9c019c22abb5e0170bda3",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/renault/DESIGN.md",
+          "bytes": 30076,
+          "sha256": "b343df9a67e57f248e9eee704f52b17dff9cf6a46d1dc9f8d7ab36741940db59",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/replicate/DESIGN.md",
+          "bytes": 31495,
+          "sha256": "c22062d7b4174bf9ced7bc61c48389086cf6eed96a958e098ee70389893b0a15",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/resend/DESIGN.md",
+          "bytes": 31461,
+          "sha256": "99536f1b2380511a539f7f3466d46d351e4bf35a5af0c0df395bdc20af05c9be",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/revolut/DESIGN.md",
+          "bytes": 32034,
+          "sha256": "b7fa8473315541f5d7e7d76f68a77105d255e6dae00d31d5eb34621d1d52de59",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/runwayml/DESIGN.md",
+          "bytes": 14353,
+          "sha256": "b0e69bf643f89bb57ac0b82a3bf025e59ff1478c244cb0528ad1e38b3f80dac9",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/sanity/DESIGN.md",
+          "bytes": 21231,
+          "sha256": "ea1c442de2b23443f79af46524a81f33951606c8ff043ea9c25ba886264fbdd8",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/sap/DESIGN.md",
+          "bytes": 33615,
+          "sha256": "f14c951d6112efce488f56d189b9bcdf58f5b9f87ae1e2ee68f062e6a6967d97",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/sentry/DESIGN.md",
+          "bytes": 35444,
+          "sha256": "655c91d7d23b5e869a966b7f1b63ae650567ad5d69003cfc64b0ee62c8e02c1f",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/shopify/DESIGN.md",
+          "bytes": 27067,
+          "sha256": "495e89b8d0a1848ded013c040f7a2ae62077e9d87fc4385350e25dee02ccdb38",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/slack/DESIGN.md",
+          "bytes": 24529,
+          "sha256": "03cb243015a2e11d0faf05caba7f3d0c7fda6839b1f5ce707a23e8d46d1a11bd",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/spacex/DESIGN.md",
+          "bytes": 19679,
+          "sha256": "495450c79faab54d12d677649ca0a2c30a60f64f536a802e945ad54185c5baad",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/spotify/DESIGN.md",
+          "bytes": 12955,
+          "sha256": "72e964a6cf551d0603f9854f2f42ee08e97ad4d9e17e037f50f6233508288295",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/starbucks/DESIGN.md",
+          "bytes": 37329,
+          "sha256": "e20338ee10226c63cf2588207288c08e12d60754a53f681657adaf364dfe8fa7",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/stripe/DESIGN.md",
+          "bytes": 24606,
+          "sha256": "5c8806b7dd3e0c2554ccba9d1e2a7c78e7c6e50e44fcf6ff5daea6026f8a9ed9",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/supabase/DESIGN.md",
+          "bytes": 21315,
+          "sha256": "f57287d7f44d59e8169dc4b4304ff03c1a2efb37f5433b9c04460caae7710880",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/superhuman/DESIGN.md",
+          "bytes": 21877,
+          "sha256": "3640298bd2957aee80ce88eb465a7541ba835ec105cba364a6a621d885c7f34f",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/tesla/DESIGN.md",
+          "bytes": 22212,
+          "sha256": "19f2f7e6073d708f46d2512e6bab3c7c417cf2b4d9f57ff6ec6f2e056ea942b0",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/theverge/DESIGN.md",
+          "bytes": 28368,
+          "sha256": "5da2c3116e6845826b043ac115a80896a399efda2cebc0188981fba2ef9bb526",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/together.ai/DESIGN.md",
+          "bytes": 38343,
+          "sha256": "aee472c583f55a2f2c7ee1c403a96dddadb3ff6dc518335451f431e313bf43cf",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/uber/DESIGN.md",
+          "bytes": 34760,
+          "sha256": "f30d2257d2d090790332d00ccb16cd2516c3c6008be61ad2ce83c4e991bcc803",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/vercel/DESIGN.md",
+          "bytes": 41405,
+          "sha256": "d0951b93c2b4ce9840c715c9f9b3e58a386c6c58ae5cc0f804dec3b116b95bd8",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/vodafone/DESIGN.md",
+          "bytes": 28106,
+          "sha256": "293a40951e654283978fa744b24177a159d8f2a60f402bc735bf081618af0ef6",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/voltagent/DESIGN.md",
+          "bytes": 25915,
+          "sha256": "4457887741ae5e965e205282b03c4bff83e47dd7a03cd7f38c64623a17569fcd",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/warp/DESIGN.md",
+          "bytes": 24438,
+          "sha256": "5b1201f7b1b4e72570d148d1f980fd1cb35e6e4122d48dd271787aa3538a25ad",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/webflow/DESIGN.md",
+          "bytes": 28179,
+          "sha256": "9230c7b3951371fc2edc04958962e32bb7ec9a9b703aa6b72eaf5c7991b7c984",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/wired/DESIGN.md",
+          "bytes": 23661,
+          "sha256": "eb439dcc573401dc30583f40e7eef8a60b769232da59e524de6dce56d5c3593e",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/wise/DESIGN.md",
+          "bytes": 24586,
+          "sha256": "442df0ad7380efd8712f5574bdca34a73cfb41a2a43454ff459863a6258af547",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/x.ai/DESIGN.md",
+          "bytes": 21781,
+          "sha256": "9c9ef45d8c0c3b9a7622833cdff8bd125ed6bf296a82cc7274215276706e52eb",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/zapier/DESIGN.md",
+          "bytes": 22995,
+          "sha256": "9aee43ba8ece1b4fd0753b4cad0a29f3497331882fa376f0dd4fea8a018c32fc",
+          "mode": "0o644"
+        }
+      ],
+      "installed": true,
+      "verified": true
+    },
+    {
+      "name": "playwright-cli",
+      "origin": "https://github.com/microsoft/playwright-cli/tree/b1a5903c5b633b8c9f843ad7b629c2a78437040c/skills/playwright-cli",
+      "revision": "b1a5903c5b633b8c9f843ad7b629c2a78437040c",
+      "license": "Apache-2.0",
+      "upstream_skill_sha256": "9bba755285a4c9ad72a4a41b9c7baef6fb516d329c0b44ed0573715f4479b906",
+      "adaptation": "## Local Codex documentation-only adapter\n\nThis installation contains documentation only; it does not install or authorize invoking the Playwright CLI, npm packages, browsers, hooks, browser attachment, profile access or sandbox changes. Treat command examples below as reference material. Use the session\u2019s supported browser tools and their policies for actual browser interaction. Do not invoke installation commands from this skill. Browser testing does not establish native Fire TV behavior. Any separately requested runtime installation requires its own supported, scoped workflow.\n",
+      "destination": "/Users/alexvintera/.codex/skills/playwright-cli",
+      "no_runtime_installed": true,
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 11552,
+          "sha256": "9a7110fc2d2f964038e5dc49128f908f29f47a574c961cba16085914e879cbda",
+          "mode": "0o644"
+        },
+        {
+          "path": "LOCAL_INSTALL.md",
+          "bytes": 1339,
+          "sha256": "bcd31381ab5311256ccff14c6fc5c53ca0de2f862e100153d94c08215f518ad3",
+          "mode": "0o644"
+        },
+        {
+          "path": "SKILL.md",
+          "bytes": 15994,
+          "sha256": "ad1abaf76a53a8c2b43d0863b7e7983ccd7ef1c0da10ced15eb53fd0d56e788c",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/element-attributes.md",
+          "bytes": 665,
+          "sha256": "bf19aa4671e0a50a0fefa9c790f39124e803060eefe395042b723c29fcb7faa2",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/playwright-tests.md",
+          "bytes": 1690,
+          "sha256": "c5b0719fef2cfdff50bd744051b2f9afc119775db4b48e9b2882c1cf3886797c",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/pr-attachments.md",
+          "bytes": 2830,
+          "sha256": "24b118e74598be72e73e24fe223d295b9099c85b1860a7c8f6e5690c9038fa2a",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/request-mocking.md",
+          "bytes": 2182,
+          "sha256": "54e801c9663fc2b6d68ceb058cb1c360724c2499f42acc7852a68e83e5b5f37c",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/running-code.md",
+          "bytes": 5913,
+          "sha256": "3029569ed6ddaeffc0b87badde967efdc2973b1677f078830098146eb3b78ebe",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/session-management.md",
+          "bytes": 5929,
+          "sha256": "a4f16271f95d3eec7bc56e659d8adbb8f6ad7d603a6fa15efdcdd071a50c6ce3",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/storage-state.md",
+          "bytes": 5198,
+          "sha256": "9ac47f9ae4a1aedcd2077f8ac9ab1ba6bee1962cb83ff51adcd36fb6d83b5ec6",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/test-generation.md",
+          "bytes": 16070,
+          "sha256": "27ecb11ef647999bd7486695bb1aacc3682097e6bb5742804cb6c8769c2b5364",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/tracing.md",
+          "bytes": 3456,
+          "sha256": "ef73e71bee792e341df9cd4f60529c929ade48b538ac76e033f4f20843e8dbda",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/video-recording.md",
+          "bytes": 9388,
+          "sha256": "1c800b897824cb54394c34265d8ebffdbb530adfc8d612c5d798b667a1799f48",
+          "mode": "0o644"
+        }
+      ],
+      "installed": true,
+      "verified": true
+    },
+    {
+      "name": "adhd",
+      "origin": "https://github.com/UditAkhourii/adhd/tree/7b91ce601ed951c1a9658c63f6f9550d2486525b/skills/adhd",
+      "revision": "7b91ce601ed951c1a9658c63f6f9550d2486525b",
+      "license": "MIT",
+      "upstream_skill_sha256": "06debe68a370206acd93e0b2ee54d6395bc367fdfbc079f2348e3ce2966dac0a",
+      "adaptation": "## Local Codex adapter\n\nThis skill is opt-in: use it only when the user explicitly asks to run ADHD ideation. Installing or inspecting it is not invocation. The upstream Agent/Task names refer conceptually to the available Codex collaboration tools; use supported spawn/send/wait tools only when applicable instructions permit, never a Claude SDK or CLI installation. Respect current concurrency limits and keep workers isolated; if those capabilities are unavailable, explain that limitation rather than simulate independent workers. No agent fan-out is performed by installation. The optional companion CLI section below is reference only and is not authorization to install or run it.\n",
+      "destination": "/Users/alexvintera/.codex/skills/adhd",
+      "no_runtime_installed": true,
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1074,
+          "sha256": "3f08d24b5561fc516b262351cb8e0302d30e7d9139f01b4a637e4bf3b5ab0938",
+          "mode": "0o644"
+        },
+        {
+          "path": "LOCAL_INSTALL.md",
+          "bytes": 1294,
+          "sha256": "2bb007f4cea89bdc22bb83bb9e3a01628d34b324c50bd4c0d8aff796ce5f8934",
+          "mode": "0o644"
+        },
+        {
+          "path": "SKILL.md",
+          "bytes": 11839,
+          "sha256": "976758af92ac1796bc68a89d30e72a3c82a3015509c1cbc13d46402e966fc0ae",
+          "mode": "0o644"
+        },
+        {
+          "path": "SOURCE-SPEC.md",
+          "bytes": 3770,
+          "sha256": "13aaeca3cbe9b7bd10444969ff38c8200780d56110f2eebf91ea9e0f12a3571d",
+          "mode": "0o644"
+        }
+      ],
+      "installed": true,
+      "verified": true
+    },
+    {
+      "name": "design-taste-frontend",
+      "origin": "https://github.com/Leonxlnx/taste-skill/tree/6010f91a9935f1c167dfc500fb1a475681892e6b/skills/taste-skill",
+      "revision": "6010f91a9935f1c167dfc500fb1a475681892e6b",
+      "license": "MIT",
+      "upstream_skill_sha256": "d955dae4ba8ab2d994f4bb06b4bf412a1d9875433a8597939c391f4bae91dd7a",
+      "adaptation": "## Local installation scope\n\nThe pinned package includes executable Node/browser scripts, installed by explicit user approval. Installation does not execute them or authorize dependencies, browser installation, hooks, new captures, credential access or security changes. This installation pass leaves all scripts unrun. Future execution must follow the session\u2019s supported tool routes and permissions; do not use bundled browser automation to bypass those routes. For Calm Frames, the existing coastal native Fire TV design, concise copy, accessibility and reduced-motion requirements override website defaults. Browser output does not validate native behavior.\n",
+      "destination": "/Users/alexvintera/.codex/skills/design-taste-frontend",
+      "scripts_included": true,
+      "scripts_executed": false,
+      "hooks_included": false,
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1065,
+          "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
+          "mode": "0o644"
+        },
+        {
+          "path": "LOCAL_INSTALL.md",
+          "bytes": 1707,
+          "sha256": "7d1c91fd9350016b87f132eca703ae5999eeeaa9056ed31b6238977660bf22fc",
+          "mode": "0o644"
+        },
+        {
+          "path": "README.md",
+          "bytes": 5345,
+          "sha256": "5e33fd716b3e1ffaca9340f645d44c193f9b446107fa67f0cce498d33025672c",
+          "mode": "0o644"
+        },
+        {
+          "path": "SKILL.md",
+          "bytes": 39124,
+          "sha256": "5fb0eeca361e243e39a92c2a4a9bd117fe14e5651c5f4055ebbdf276b2c914d2",
+          "mode": "0o644"
+        },
+        {
+          "path": "assets/app.css",
+          "bytes": 15918,
+          "sha256": "16518c3a999fb81b2698137f1f743128c189272e8b1d411c4b02598c6755b67f",
+          "mode": "0o644"
+        },
+        {
+          "path": "assets/base.css",
+          "bytes": 6520,
+          "sha256": "aa6ea21613c79e06e06dea3d33200c78590c89b0346bb976ec07947bb45ceafa",
+          "mode": "0o644"
+        },
+        {
+          "path": "assets/base.js",
+          "bytes": 2162,
+          "sha256": "8d50416125596b84c0083d5d5ffba09add57db4b06cbf0eedac2d4999b7653bc",
+          "mode": "0o644"
+        },
+        {
+          "path": "assets/charts.js",
+          "bytes": 58705,
+          "sha256": "89071120bd09eb276d9e568bab433ed035ea8b3a1b72750a1fa204a63e3d4ab4",
+          "mode": "0o644"
+        },
+        {
+          "path": "assets/scenes/stage.css",
+          "bytes": 1141,
+          "sha256": "b5c587dac45ac6fcc34ae7cb4aa2b3e43797b2ef5d71fd32b48483bda3fca3e0",
+          "mode": "0o644"
+        },
+        {
+          "path": "assets/scenes/stage.js",
+          "bytes": 7522,
+          "sha256": "3012ade75e01a9c0c81b5835a60e9ade965ed310cd58d85a7ad10e4ed4a1ad16",
+          "mode": "0o644"
+        },
+        {
+          "path": "evals/evals.json",
+          "bytes": 8198,
+          "sha256": "df0ee2a248cd5445c0e1600eb095dc0d43dd312f5b4bb4316a78471ae0d22a74",
+          "mode": "0o644"
+        },
+        {
+          "path": "library/app.json",
+          "bytes": 74229,
+          "sha256": "3678ccbe1e8d05feff6d4f07fa16a0d610aefeea5e697e842a876713ba763cf5",
+          "mode": "0o644"
+        },
+        {
+          "path": "library/directions.json",
+          "bytes": 61466,
+          "sha256": "d71e3824af33a92d9e1ca543e17f80baa5b7a30c815df5125cfe3300a14892c1",
+          "mode": "0o644"
+        },
+        {
+          "path": "library/heroes.json",
+          "bytes": 108240,
+          "sha256": "98d5e01104412a5fb27936f9c686f3bc0a5f76ce0793186d3de46b982c65b172",
+          "mode": "0o644"
+        },
+        {
+          "path": "library/motions.json",
+          "bytes": 9033,
+          "sha256": "51815dd09a823c829897f99ed9ea7dc5c35bd305ac989b8a0632ea6d42a3f08b",
+          "mode": "0o644"
+        },
+        {
+          "path": "library/palettes.json",
+          "bytes": 34753,
+          "sha256": "a14be9f45baba848c53436f4aa44eb4f1925ad3e232c5d1dcddf4f565661a525",
+          "mode": "0o644"
+        },
+        {
+          "path": "library/photos.json",
+          "bytes": 160632,
+          "sha256": "8fc3b76bca90f44675bd99d99bb4ce95b0756c6c5d4141b7e917d11d90e61520",
+          "mode": "0o644"
+        },
+        {
+          "path": "library/sections.json",
+          "bytes": 276146,
+          "sha256": "7c2c8a470a22501176948661f803434db8c542a511281752c717252de80c1ad8",
+          "mode": "0o644"
+        },
+        {
+          "path": "library/sites.json",
+          "bytes": 869073,
+          "sha256": "a2bc4d0cff8ebff481f0dfd4879c106d5e1e16cb3122f9ab3702184a5e1f3502",
+          "mode": "0o644"
+        },
+        {
+          "path": "library/type.json",
+          "bytes": 82290,
+          "sha256": "01a36c53c4398f48ff945b0f31a256281c1c0c1075729747c11bec70867b6232",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/app-screens.md",
+          "bytes": 85358,
+          "sha256": "55e937ec30de605b53a11310b446f328a3ce7403de24fff008920a00be1a5ed4",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/colour.md",
+          "bytes": 6853,
+          "sha256": "6556bcc7eed48b7bc2d0d281c28bf57c1b75e94d7ca0bde49f5d9df8c6a09351",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/copy.md",
+          "bytes": 9436,
+          "sha256": "676edbe75d5f3cfd8a793010ea9f730525ae074b231a674c2426264d3398262e",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/critique.md",
+          "bytes": 11157,
+          "sha256": "9c2f4392674530b3f02ac529fba53d82ab37b85f401c4c1989fbe98d6217f0b4",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/imagery.md",
+          "bytes": 51025,
+          "sha256": "518def6b2c643b295e13e66b09b66f2e3fc1421d3cf6c7dbb1dc749097ad2ad9",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/layout.md",
+          "bytes": 18315,
+          "sha256": "40080640719b07737afb94a8868afef87767a1ab4892814d9b6882e2d283453b",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/motion.md",
+          "bytes": 55400,
+          "sha256": "79f94d8469898d2bf6186c198ad86ddf691a67c6536eaec36a4ec101285d9a37",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/research.md",
+          "bytes": 24262,
+          "sha256": "83433646a352cae588591e05bc0a75fe1deadff55ede8851bc8dd5dd483adfc5",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/scenes.md",
+          "bytes": 9817,
+          "sha256": "733ac7258a1a28f2f6ae8205bc36ba66c563594ad0a2e2f829c5eaaba3199a61",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/tells.md",
+          "bytes": 7420,
+          "sha256": "8e6de4411c43d3108f832b3f33bb1a2a838148a72b92a176df893b67d99a0da9",
+          "mode": "0o644"
+        },
+        {
+          "path": "references/type.md",
+          "bytes": 8495,
+          "sha256": "6353ff1d0ce2f9913628c88fbcb7dad3cc3877e61196848bce99e33a17d20611",
+          "mode": "0o644"
+        },
+        {
+          "path": "scripts/assets.mjs",
+          "bytes": 64522,
+          "sha256": "b4b4b99b5634735f5a0b4213169cda5240ee6bbed8ed8042ad1bcf2b6607c1fa",
+          "mode": "0o644"
+        },
+        {
+          "path": "scripts/draw.mjs",
+          "bytes": 54140,
+          "sha256": "6c2047d207d2400d3b099956dfe2ac306203b614246e66bc8760212a7f797dbf",
+          "mode": "0o644"
+        },
+        {
+          "path": "scripts/inspect.mjs",
+          "bytes": 27839,
+          "sha256": "9482c546288d4d5c738a915905959e99394551ec27bc202ed443af12a02bd1f7",
+          "mode": "0o644"
+        },
+        {
+          "path": "scripts/lib/app-draw.mjs",
+          "bytes": 14715,
+          "sha256": "aa0802d341d19b53ec14ec21746e428be49a8ec3ed7b30253194105fc18a8df6",
+          "mode": "0o644"
+        },
+        {
+          "path": "scripts/lib/cdp.mjs",
+          "bytes": 11920,
+          "sha256": "320fb75c6454a97b88458e5c33559a1188042aa0041bd5eff53455900236c88a",
+          "mode": "0o644"
+        },
+        {
+          "path": "scripts/lib/probe.mjs",
+          "bytes": 81280,
+          "sha256": "c14fd0bed7727855a1f3fcf5ade945fba97f314562fd7430354168b2da25433b",
+          "mode": "0o644"
+        },
+        {
+          "path": "scripts/lib/rules.mjs",
+          "bytes": 37284,
+          "sha256": "5de058543b3bd6f3dd2f85ff1c1e5e1f91918ba9f4454e7ee0b8934c607982f9",
+          "mode": "0o644"
+        },
+        {
+          "path": "scripts/lint.mjs",
+          "bytes": 11747,
+          "sha256": "05f2fae2f56fc051b539cdbacb43a6f78fbbfb9644bb74aa11be472ff12dcaf5",
+          "mode": "0o644"
+        },
+        {
+          "path": "scripts/scenes.mjs",
+          "bytes": 8980,
+          "sha256": "234ec582e2b841457c33033feeeba8535f9ac285495a74d08dc533a1566c90d5",
+          "mode": "0o644"
+        }
+      ],
+      "installed": true,
+      "verified": true
+    }
+  ],
+  "scripts_executed": false,
+  "verified_at": "2026-10-23T05:41:05.047173+00:00",
+  "held": {
+    "web-design-guidelines": "Original wrapper licensing unresolved; not installed"
+  }
+}

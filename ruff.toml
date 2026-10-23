@@ -1,0 +1,76 @@
+# The Python linter for flashmap, pipeline, eval and scripts.
+#
+#   make lint-py                  the same command CI runs
+#   python -m ruff check .        from the repository root
+#
+# The version is pinned in flashmap/pyproject.toml's dev extra, which is what CI
+# installs, and .pre-commit-config.yaml uses the same release. Never run
+# `ruff format` here: eval/mutate_gate.py and flashmap/tools/mutate.py edit
+# source by exact string match, and a reformat would quietly move the text
+# every mutation looks for.
+
+target-version = "py312"
+line-length = 100
+# What counts as our own code when imports are sorted: the repository root
+# (pipeline), flashmap's src layout, the eval scripts that import each other by
+# bare name, and the two test directories whose helpers are imported the same
+# way.
+src = [".", "flashmap/src", "flashmap/tests", "eval", "eval/tests"]
+# Amazon's vega-video-sample files, added unchanged in cf8b752 from upstream tag v0.24-RN83 (ef8e4da).
+# results/ holds evidence: the exact scripts a dated run used, kept as they ran.
+# Reformatting one would change the record of what produced a number, so it is
+# not linted (Oct 19: 592 findings, all in receipt scripts added Oct 17 and 18).
+extend-exclude = ["app/samples", "results"]
+
+[lint]
+# Spelled out rather than left to the default, because ruff 0.17 widened its
+# default set: pycodestyle's error classes E4, E7 and E9, pyflakes, import
+# order, and bugbear.
+select = ["E4", "E7", "E9", "F", "I", "B"]
+# zip() without strict= is everywhere in this code, always over sequences built
+# to the same length a line or two earlier. strict=True would change behaviour
+# during a feature freeze, and strict=False on every call would say nothing.
+ignore = ["B905"]
+
+[lint.flake8-bugbear]
+# Frozen dataclasses whose fields are numbers, strings and tuples, so a default
+# instance shared between calls cannot be changed by any of them.
+extend-immutable-calls = [
+  "flashmap.decode.ColorPolicy",
+  "flashmap.pattern.PatternSettings",
+  "flashmap.picture.LetterboxSettings",
+]
+
+[lint.per-file-ignores]
+# The design study renderers and the font preparation script are written as dense
+# one-line statements. The judge-path check of Oct 14 found CI's lint refusing them;
+# the rest of the rules still apply to them.
+"eval/preview/*.py" = ["E701", "E702"]
+"scripts/prepare_calm_fonts.py" = ["E701", "E702"]
+# The measured detector and scorer. results/conformance_current_full_2026-10-02.json
+# records the SHA-256 of every one of these files as the source tree the 3,000
+# clip run measured, and every one still matches, so the published conformance
+# numbers describe these exact bytes. CI also rebuilds
+# results/conformance_current_report_2026-10-02.json, which embeds the digest of
+# eval/conformance_current_report.py, and refuses a changed eval/conformance/report.py.
+# Their findings are import order, an unused import and loop variable in the
+# scorer, imports placed after a sys.path insert, and a SystemExit raised inside
+# an except. None changes what the code does, and none is worth a detector whose
+# bytes no longer match the measurement. Fix them when the suite is next re-run.
+"flashmap/src/flashmap/cli.py" = ["B904"]
+"flashmap/src/flashmap/signing.py" = ["I001"]
+"eval/conformance/recheck.py" = ["E402", "I001"]
+"eval/conformance/report.py" = ["B007", "F401", "I001"]
+"eval/conformance/generate_analyze.py" = ["I001"]
+"eval/conformance_current_report.py" = ["I001"]
+# The app lane's asset generators. results/redesign_validation_2026-10-10.json
+# and results/interface_finish_2026-10-10_pacific.json record their bytes as the
+# source of the shipped icon, tile and menu sound.
+"app/assets/brand/make_logo.py" = ["E702", "I001"]
+"app/assets/raw/sound/generate_menu_select.py" = ["I001"]
+# pytest fixtures imported by name from a shared module and then taken as test
+# parameters, which pyflakes reads as a redefinition of the import.
+"eval/property_scheduler_test.py" = ["F811"]
+"eval/property_drift_test.py" = ["F811"]
+"eval/fuzz_maps_test.py" = ["F811"]
+"pipeline/tests/test_packaged_library.py" = ["F811"]

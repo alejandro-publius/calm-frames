@@ -1,0 +1,34 @@
+/** Actual component export; static browser evidence only. */
+import React from 'react';
+import { fireEvent, render } from '@testing-library/react-native';
+import fs from 'fs';
+import path from 'path';
+jest.mock('@react-native-async-storage/async-storage', () => ({ getItem: jest.fn(async () => null), setItem: jest.fn(async () => undefined) }));
+import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
+import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
+import { CalmControlAppearance } from '../../src/calmframes/CalmControlSurface';
+import { checkedShelf } from './shelfFixtures';
+test('composition keeps Watch, Details, explanation and Back actions with truthful safety copy', () => {
+  const titles = checkedShelf();
+  const harbor = titles.find(item => item.title.title === 'Harbor story (prepared locally)')!;
+  expect(harbor.status).toBe('verified');
+  const onPlay = jest.fn(), onOpen = jest.fn(), onBack = jest.fn();
+  const wrapper = ({ children }: { children: React.ReactNode }) => <CalmControlAppearance.Provider value>{children}</CalmControlAppearance.Provider>;
+  const out = path.resolve(__dirname, '../../build/composition-preview/1080');
+  fs.mkdirSync(out, { recursive: true });
+  const save = (name: string, tree: unknown) => fs.writeFileSync(path.join(out, name + '.json'), JSON.stringify(tree));
+  const home = render(<KidHomeScreen titles={titles} onOpen={onOpen} onPlay={onPlay} onOpenParentArea={() => {}} />, { wrapper });
+  fireEvent(home.getByTestId('kid-home-watch'), 'focus');
+  save('home', home.toJSON());
+  fireEvent.press(home.getByTestId('kid-home-watch')); expect(onPlay).toHaveBeenCalledWith(harbor);
+  fireEvent.press(home.getByTestId('kid-home-more-info')); expect(onOpen).toHaveBeenCalledWith(harbor);
+  fireEvent.press(home.getByTestId('kid-home-learn')); expect(home.getByTestId('picture-hold-start')).toBeTruthy(); home.unmount();
+  const details = render(<TitleDetailsScreen entry={harbor} onPlay={onPlay} onBack={onBack} />, { wrapper });
+  fireEvent(details.getByTestId('title-details-play'), 'focus'); save('details', details.toJSON());
+  expect(details.getByText('Checked frame by frame. No flashing found, so the picture never holds.')).toBeTruthy();
+  expect(details.getByTestId('title-details-show-info')).toBeTruthy();
+  fireEvent.press(details.getByTestId('title-details-play')); expect(onPlay).toHaveBeenCalledTimes(2);
+  fireEvent.press(details.getByTestId('title-details-back')); expect(onBack).toHaveBeenCalledTimes(1); details.unmount();
+  const blocked = render(<TitleDetailsScreen entry={{...harbor, status: 'failed', rejection: 'bad-signature', reason: 'Unavailable', segments: []}} onPlay={onPlay} onBack={onBack} />, { wrapper });
+  expect(blocked.queryByTestId('title-details-play')).toBeNull(); blocked.unmount();
+});

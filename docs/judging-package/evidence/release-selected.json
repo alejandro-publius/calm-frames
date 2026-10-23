@@ -1,0 +1,142 @@
+{
+  "scope": "Selected fields from the existing release receipt, not new measurements. Omitted runtime paths, device metadata and logs. See source pointers in CLAIMS_LEDGER.md.",
+  "source_path": "results/release-validation-2026-10-22/validation.json",
+  "source_sha256": "094b4cedb998729cc8fe39c008bad263c6092aa62a9b73efd6da44493907750a",
+  "evidence_commit": "13551e45bd853c392489dbecce7158a04036f615",
+  "tested_commit": "d96c0886227f7dcfc5ae6584132a86b193359215",
+  "bases": {
+    "submitted_candidate": "bf2f615e6fad0d73442fe2b9acab3067bf311e7e",
+    "preparation_recovery": "ce6f6a3",
+    "playback_proof": "318a3fe",
+    "integration_start": "1c6bea95c67423e071722c14f16abb3f8e3a0ebf"
+  },
+  "python": {
+    "full": {
+      "passed": 2049,
+      "failed": 0,
+      "skipped": 0,
+      "deselected_slow": 2,
+      "coverage": {
+        "percent": 90.46,
+        "covered_statements": 6711,
+        "statements": 7419,
+        "floor_percent": 90,
+        "floor_met": true,
+        "floor_source": ".coveragerc [report] fail_under"
+      }
+    }
+  },
+  "app": {
+    "jest": {
+      "suites_passed": 167,
+      "suites_skipped": 1,
+      "tests_passed": 1729,
+      "tests_skipped": 4,
+      "tests_failed": 0,
+      "snapshots_passed": 57,
+      "coverage_percent": {
+        "statements": 83.22,
+        "branches": 82.62,
+        "functions": 78.29,
+        "lines": 82.94
+      },
+      "coverage_floor_percent": {
+        "branches": 74,
+        "functions": 71,
+        "lines": 77,
+        "statements": 77
+      }
+    }
+  },
+  "recovery": {
+    "tested_commit": "d96c0886227f7dcfc5ae6584132a86b193359215",
+    "scenarios": {
+      "scenarios": 16,
+      "passed": 16,
+      "failed": 0
+    },
+    "guard_mutations": {
+      "mutations": 24,
+      "killed": 24,
+      "survived": 0
+    }
+  },
+  "mutation_gate": {
+    "totals": {
+      "mutations": 70,
+      "killed": 68,
+      "survived": 2,
+      "survived_and_not_equivalent": 0,
+      "kill_rate": 0.9714,
+      "kill_rate_percent": 97.14,
+      "as_a_fraction": "68/70"
+    }
+  },
+  "native": {
+    "committed_crops": [
+      {
+        "file": "native/f04-proof-selection.png",
+        "shows": "Acadia, extra cautious: Selection stage with the prepared file and report identities",
+        "source": "f04-proof-selection.png",
+        "source_sha256": "3ae4bc35aef5999292fdb6ed15833629363f8fb543451e4e9fc6813b5804055c",
+        "crop_xywh": [
+          0,
+          48,
+          1592,
+          894
+        ],
+        "sha256": "215730ed906ce18245b55cacf0cc47c320ba3425b8779b12920781cee0152684",
+        "bytes": 242482
+      },
+      {
+        "file": "native/f07-reading-wcag.png",
+        "shows": "Final build: remote focus on the WCAG analysis section below the proof",
+        "source": "f07-reading-wcag.png",
+        "source_sha256": "72fe97b237e3574d047ef594b3b61c9aa89da45b7591e9ff3c0d4a6eb350cd6d",
+        "crop_xywh": [
+          0,
+          48,
+          1592,
+          894
+        ],
+        "sha256": "209409a386001aec3771c4acbe476442e7326819ca948926922cc1029c3a313b",
+        "bytes": 264209
+      },
+      {
+        "file": "native/f12-mcway-proof-prepared.png",
+        "shows": "McWay: an output analyzer version the report does not record is stated as not recorded",
+        "source": "f12-mcway-proof-prepared.png",
+        "source_sha256": "555f0e7feef384682ccca0ed35ca12746fef56e99a171ad3c7d2f43709fdb7de",
+        "crop_xywh": [
+          0,
+          48,
+          1592,
+          894
+        ],
+        "sha256": "3ae156b3ec67e1a82c4bee3a04059aec9cb554bace6c1f6c9baf64ab61d28540",
+        "bytes": 245851
+      },
+      {
+        "file": "native/f15-mcway-playing.png",
+        "shows": "McWay ambient playback on the final build, controls hidden",
+        "source": "f15-mcway-playing.png",
+        "source_sha256": "aadd474bf0293f31cc52b47b936873e55d667d0d402ca0926e040289aeb1d0f3",
+        "crop_xywh": [
+          0,
+          48,
+          1592,
+          894
+        ],
+        "sha256": "a6afff4055da425988cce9a6045a38827c5de63489b476ac4f4118420ccae895",
+        "bytes": 1395535
+      }
+    ],
+    "failed_captures": 4,
+    "final_build": {
+      "source": "d96c0886227f7dcfc5ae6584132a86b193359215",
+      "package_sha256": "6914d157c76a0478588f63e222525754f1202990481e313b4e72422c93759090",
+      "package_bytes": 132592040
+    },
+    "fallback_source": "60c3bbb701081c37dbd87a6b1f5b66d51a74b855 (app and hook trees identical to submitted bf2f615)"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "frames": 36,
+  "held_ms": 100,
+  "width": 640,
+  "height": 360,
+  "fps": 24,
+  "window_px": [
+    213,
+    120
+  ],
+  "video": "build/ui-capture/ui-screens.mp4",
+  "flashmap_exit": 0,
+  "flashmap_output": "PASS /Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-flow/app/build/ui-capture/ui-screens.mp4: below the wcag thresholds",
+  "pattern_profile": "broadcast",
+  "pattern_exit": 0,
+  "pattern_output": "PASS /Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-flow/app/build/ui-capture/ui-screens.mp4: below the broadcast thresholds",
+  "note": "Each painted colour is given a block a full WCAG ten degree window wide, which is larger than the real surfaces, so this overstates the flashing area rather than understating it.",
+  "pattern_note": "The broadcast pass adds ITU-R BT.1702-3 Guideline 2, which the wcag profile does not carry. These frames hold no text, so it asks whether the layout of the app's own blocks is a regular pattern. What the rule makes of glyphs is measured in results/pattern_text_precision.json."
+}

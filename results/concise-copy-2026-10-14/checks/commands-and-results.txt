@@ -1,0 +1,21 @@
+Source ed1347ecb9773d38250a7b8bcc14cb2ee8641ab6, isolated codex/dusk-lantern-integration-2026-10-14.
+Node 22.23.2 and existing local dependencies/toolchain reused.
+npm --prefix app test -- --runInBand --coverage=false --watchman=false --testPathPattern='(duskLantern|homeIntroduction|shelf|screens|returnFocus|firstRun|unavailableDetails)\.test'
+132 passed across 7 suites. Includes dynamic demo duration/count, focus and first-run boundaries.
+The initial targeted run found obsolete copy expectations and a no-video assertion that matched the word videos in visible copy. Updated expected copy and scoped that assertion to element types/autoplay props, preserving its intended check. No runtime playback change.
+npm --prefix app run typecheck
+Passed.
+cd app; ./node_modules/.bin/eslint src/calmframes/KidHomeScreen.tsx src/calmframes/TitleArtwork.tsx src/calmframes/TitleDetailsScreen.tsx test/calmframes/duskLantern.test.tsx test/calmframes/homeIntroduction.test.tsx test/calmframes/screens.test.tsx test/calmframes/shelf.test.tsx
+Passed, no output.
+/Users/alexvintera/calm-frames/.venv/bin/python -m pytest eval/tests/test_design_page.py -q
+21 passed.
+python3 eval/preview/export_composition.py
+2 component-export tests passed, 1080p/720p.
+/tmp/calm-home-preview-venv/bin/python eval/preview/render_concise_copy.py
+Passed safe-area, lighthouse-clearance and contrast assertions at both sizes. Initial sandbox launch failed at Chromium MachPort bootstrap_check_in; authorized escalation rendered local components only. No CUA or simulator access.
+source /Users/alexvintera/vega/env
+PATH begins with existing .logs/integration/build-bin watchman shim and Node 22.23.2; JAVA_HOME=/opt/homebrew/opt/openjdk@21
+RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag concise-copy-2026-10-14
+Passed. Exact prepared-media catalog and all 3 original reports verified. No app install/launch or publication. The printed publication command was not run.
+python3 eval/style_check.py; git diff --check
+Passed.

@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-10",
+  "repository": "alejandro-publius/calm-frames",
+  "visibility": "private",
+  "branch": "codex/signed-scene-holds-2026-09-29",
+  "pushed_implementation_checkpoint": "402c1672fcc15dfbd73a572f60b37dbfaac14480",
+  "release_url": "https://github.com/alejandro-publius/calm-frames/releases/tag/untagged-5e898f46d87868df8dd6",
+  "release_id": 409221460,
+  "draft": true,
+  "release_tag": "review-redesign-2026-10-10",
+  "asset_verification": "All nine GitHub uploaded asset digests match local SHA-256 values",
+  "assets": [
+    {
+      "name": "appstore-icon-114.png",
+      "bytes": 5914,
+      "sha256": "872e85935b5a5b257f8e5d7e16189905d8f8deef736ce11cbb80a4e906bd7d39"
+    },
+    {
+      "name": "appstore-icon-512.png",
+      "bytes": 29974,
+      "sha256": "4432f940580ebbaa3327660a4644ee1e4583ffc7b782b60077a9c533653394e9"
+    },
+    {
+      "name": "calm-frames-app_aarch64.vpkg",
+      "bytes": 9390719,
+      "sha256": "9dbffc3addeb023d2d14893a85a065d67ddef658485a375182e7a2f79f98e726"
+    },
+    {
+      "name": "Calm-Frames-demo-English.mp4",
+      "bytes": 5923717,
+      "sha256": "a0ed8dc308803e6b1ce48e09a579c94ed95716c393bf56a01a0c7009d2af5232"
+    },
+    {
+      "name": "Calm-Frames-demo-English.srt",
+      "bytes": 1680,
+      "sha256": "8bf7fcd312cfc9b7794819f45b54c8f79d722e6526c183b563600ca51962f8f5"
+    },
+    {
+      "name": "calm-frames-redesign-review-2026-10-10.zip",
+      "bytes": 54833967,
+      "sha256": "29685a79b1b0f51a93d43484fa1ba38630fb582d20ff60d5fb08f97ff61eac6c"
+    },
+    {
+      "name": "calm-frames-redesign-source.zip",
+      "bytes": 25440195,
+      "sha256": "8ba3d071c89ba5004c459dbc359bd5be079d041bb973938e2a50fc7a819d4c03"
+    },
+    {
+      "name": "firetv-app-icon-1280x720.png",
+      "bytes": 49727,
+      "sha256": "935d612db62cd39b9f42fae2c62994e6734e0e435ce9d0c0d6a37ea31aeb42f5"
+    },
+    {
+      "name": "redesign-release-SHA256SUMS.txt",
+      "bytes": 763,
+      "sha256": "6500d9d9cc6679c10790f454cf85d98a2c2671e9b1ef5c849933be5757c02c97"
+    }
+  ],
+  "ci": {
+    "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38088388469",
+    "conclusion": "success"
+  },
+  "audit": {
+    "url": "https://github.com/alejandro-publius/calm-frames/actions/runs/38088388496",
+    "conclusion": "failure",
+    "passing_jobs": [
+      "The stack and the container rules",
+      "The ingest image builds for ARM64",
+      "The bills of materials are current"
+    ],
+    "failing_jobs": [
+      "pip-audit and npm audit"
+    ]
+  },
+  "scope": "User requested push everything. Branch pushed and review artifacts uploaded as a private draft. No merge, visibility change, final release or Devpost submission."
+}

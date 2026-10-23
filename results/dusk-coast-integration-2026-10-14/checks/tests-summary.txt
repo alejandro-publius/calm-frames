@@ -1,0 +1,5 @@
+Test Suites: 2 failed, 11 passed, 13 total
+Tests:       2 failed, 176 passed, 178 total
+Snapshots:   1 passed, 1 total
+Time:        12.784 s
+Ran all test suites matching /(controlSurface|controlStudy|wholeFlowDesign|homeIntroduction|parentNavigation|playbackUi|KidModeScreen|tenFoot|uiCapture|firstRun|harborOpening|unavailableDetails|BufferingWindow).test/i.

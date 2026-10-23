@@ -1,3 +1,5 @@
+import AmbientScene, { ambientArtworkFor } from '../calmframes/AmbientScene';
+import { titlePresentation } from '../calmframes/TitleArtwork';
 /**
  * Calm Frames, as a person meets it.
  *
@@ -21,24 +23,35 @@
  * - it never lists a title that did not verify. That is kidModeTitles, and
  *   the parent area is the only place the others appear.
  *
- * Not done yet, and worth knowing: the PIN and the room setting live in
- * memory, so the first run comes back on the next launch. Writing them to
- * /data is a small job and a separate one.
+ * Household setup is restored before the shelf opens. Storage failures keep
+ * it closed rather than replacing the saved floor or PIN with defaults.
  */
 
 import { RouteProp } from '@amazon-devices/react-navigation__core';
 import { StackNavigationProp } from '@amazon-devices/react-navigation__stack';
 import React from 'react';
 import { BackHandler, Platform } from 'react-native';
+import { trace } from '../calmframes/trace';
+import HouseholdStorageScreen from '../calmframes/HouseholdStorageScreen';
+import {
+  deviceHouseholdStorage,
+  HouseholdStorage,
+} from '../calmframes/householdStorage';
+import { useSavedHousehold } from '../calmframes/useSavedHousehold';
+import { InterfaceSoundContext, useInterfaceSound } from '../calmframes/useInterfaceSound';
 import FirstRunScreen, { FirstRunResult } from '../calmframes/FirstRunScreen';
-import { DEFAULT_SETTINGS, HouseholdSettings, PRESETS } from '../calmframes/household';
-import { useHideLogs } from '../calmframes/hideLogStore';
+import {
+  DEFAULT_SETTINGS,
+  HouseholdSettings,
+  PRESETS,
+} from '../calmframes/household';
+import { forgetProfile, useHideLogs } from '../calmframes/hideLogStore';
 import {
   refusedTitle,
   useMapSources,
   waitingTitle,
 } from '../calmframes/mapSource';
-import KidHomeScreen from '../calmframes/KidHomeScreen';
+import KidHomeScreen, { ReturnFocusControl } from '../calmframes/KidHomeScreen';
 import {
   activeProfile,
   allProfileHides,
@@ -55,20 +68,29 @@ import {
   offlineTitle,
 } from '../calmframes/offlineTitle';
 import CreditsScreen from '../calmframes/CreditsScreen';
+import {
+  benignStorySettings,
+  bundledTitlePublicKey,
+  isBundledBenignStory,
+} from '../calmframes/benignStory';
 import ParentAreaScreen from '../calmframes/ParentAreaScreen';
 import { emptyPinGate, PinGateState } from '../calmframes/parentGate';
-import { CatalogTitle, CheckedTitle, checkTitle } from '../calmframes/titleStatus';
-import TitleDetailsScreen from '../calmframes/TitleDetailsScreen';
 import {
-  AppStackParamList,
-  Screens,
-} from '../components/navigation/types';
+  CatalogTitle,
+  CheckedTitle,
+  checkTitle,
+  kidModeTitles,
+} from '../calmframes/titleStatus';
+import TitleDetailsScreen from '../calmframes/TitleDetailsScreen';
+import { AppStackParamList, Screens } from '../components/navigation/types';
 import { TitleData } from '../types/TitleData';
+import { concernsPackagedLibrary, packagedLibrary } from '../calmframes/packagedLibrary';
 
 export type KidModeView =
   | 'first-run'
   | 'home'
   | 'details'
+  | 'ambient'
   | 'parent'
   | 'credits';
 
@@ -76,8 +98,8 @@ export interface KidModeScreenProps {
   navigation: StackNavigationProp<AppStackParamList, Screens.KID_MODE_SCREEN>;
   route?: RouteProp<AppStackParamList, Screens.KID_MODE_SCREEN>;
   /**
-   * The catalog. Defaults to the title bundled inside the package, which is
-   * the one that needs no network and no backend, so a judge with the device
+   * The catalog. Defaults to the titles bundled inside the package, which
+   * need no network and no backend, so a judge with the device
    * in flight mode still gets a working kid mode.
    */
   catalog?: CatalogTitle[];
@@ -105,11 +127,23 @@ export interface KidModeScreenProps {
   newSalt?: () => string;
   nowMs?: () => number;
   testID?: string;
+  /** Tests can provide local storage without a native device. */
+  householdStorage?: HouseholdStorage;
 }
 
-/** The bundled title, and nothing else until a backend is wired in. */
-export function defaultCatalog(): CatalogTitle[] {
-  return [offlineTitle(OFFLINE_VIDEO_URI)];
+/**
+ * Consumer titles come from exact reviewed build approvals (currently Acadia and Sea Otters).
+ * The exact signed Harbor catalog and
+ * its practice assets remain bundled for regression work, outside this list.
+ * Selection does not grant trust: every entry still follows the same checks.
+ * The gradient stays available only through How it works > Check playback
+ * while Acadia is available.
+ */
+export function defaultCatalog(settings = DEFAULT_SETTINGS): CatalogTitle[] {
+  return [
+    ...packagedLibrary.consumerTitles(settings),
+    offlineTitle(OFFLINE_VIDEO_URI),
+  ];
 }
 
 /**
@@ -129,11 +163,13 @@ function makeLocalSalt(): string {
 export function titleDataFor(entry: CheckedTitle): TitleData {
   return {
     id: entry.title.id,
-    title: entry.title.title,
+    title: titlePresentation(entry.title).name,
+    calmMenuArt: titlePresentation(entry.title).menuArt ?? titlePresentation(entry.title).art,
     description: '',
     mediaType: 'video',
     mediaSourceType: 'url',
     uri: entry.title.uri,
+    textTrack: entry.title.textTrack,
     categories: [],
     channelID: '',
     posterUrl: entry.title.posterUrl ?? '',
@@ -159,8 +195,10 @@ export function guardedParamsFor(
 ) {
   return {
     sha256: entry.title.sha256,
+    renditionSha256: entry.title.renditionSha256,
+    renditionStartOffsetMs: entry.title.renditionStartOffsetMs,
     maps: entry.title.maps,
-    settings,
+    settings: benignStorySettings(entry.title, settings),
     durationMs: entry.title.durationMs,
     titleId: entry.title.id,
     // The household switch travels with the title, because the player screen
@@ -182,20 +220,111 @@ const KidModeScreen = ({
   newSalt = makeLocalSalt,
   nowMs = Date.now,
   testID = 'kid-mode',
+  householdStorage = deviceHouseholdStorage,
 }: KidModeScreenProps) => {
   // The family is the one record: the household floor, the kids and which of
   // them the shelf is for. The settings the guard runs with are derived from
   // it rather than stored beside it, so there is no second copy to disagree.
-  const [family, setFamily] = React.useState<Family>(() => newFamily(DEFAULT_SETTINGS));
-  const [gate, setGate] = React.useState<PinGateState>(emptyPinGate());
+  const saved = useSavedHousehold(householdStorage);
+  const committedFamily = saved.value?.family;
+  const previousFamily = React.useRef<Family | null>(null);
+  React.useEffect(() => {
+    if (!committedFamily) {
+      return;
+    }
+    const previous = previousFamily.current;
+    previousFamily.current = committedFamily;
+    for (const profile of previous?.profiles ?? []) {
+      if (!committedFamily.profiles.some((one) => one.id === profile.id)) {
+        forgetProfile(profile.id);
+      }
+    }
+  }, [committedFamily]);
+  const family = saved.value?.family ?? newFamily(DEFAULT_SETTINGS);
+  const gate = saved.value?.gate ?? emptyPinGate();
+  const [interfaceActive, setInterfaceActive] = React.useState(
+    () => navigation.isFocused?.() !== false,
+  );
+  const interfaceSound = useInterfaceSound({
+    enabled: Boolean(saved.value && family.interfaceSoundsEnabled === true &&
+      (saved.phase === 'ready' || saved.phase === 'saving')),
+    active: interfaceActive,
+  });
+  // A saved change is confirmed from the render that holds the saved record,
+  // not from the write's own continuation. On the concurrent root the device
+  // uses, that continuation runs before React has rendered the record, so the
+  // hook would still read the old one, and the press that turns the sound on
+  // would be the one press it never confirmed.
+  const [confirmSavedChange, setConfirmSavedChange] = React.useState(false);
+  React.useEffect(() => {
+    if (confirmSavedChange) {
+      setConfirmSavedChange(false);
+      interfaceSound.confirm();
+    }
+  }, [confirmSavedChange, interfaceSound]);
+  const setFamily = (next: Family) => {
+    if (saved.phase === 'ready' && saved.value) {
+      saved.write({ ...saved.value, family: next }).then((accepted) => {
+        if (accepted && next.interfaceSoundsEnabled === true) {
+          setConfirmSavedChange(true);
+        }
+      });
+    }
+  };
+  const setGate = async (next: PinGateState) => {
+    if (
+      !saved.value ||
+      saved.phase !== 'ready' ||
+      !(await saved.write({ ...saved.value, gate: next }))
+    ) {
+      throw new Error('PIN state was not saved');
+    }
+  };
   // The player covers the flagged parts and knows what it hid. It writes each
   // one into the shared store in hideLogStore.ts, which is a module rather
   // than state on either screen, so a hide survives the player being torn down
   // on the way back here. The logs are kept per profile, so one kid's record
   // cannot land in another's.
   const profileLogs = useHideLogs();
-  const [view, setView] = React.useState<KidModeView>('first-run');
+  const [view, setView] = React.useState<KidModeView>('home');
+  React.useEffect(() => { trace('screen', view); }, [view]);
+  const [ambientFrom, setAmbientFrom] = React.useState<'home' | 'details'>('home');
   const [openId, setOpenId] = React.useState<string | null>(null);
+  const [selectedTitleId, setSelectedTitleId] = React.useState<string | null>(null);
+  const [lastOpenedId, setLastOpenedId] = React.useState<string | null>(null);
+  const [lastOpenedFrom, setLastOpenedFrom] = React.useState<ReturnFocusControl | undefined>(undefined);
+  // The control the shelf reported for the press being handled now; a press
+  // that reports none, such as one from the introduction, clears it.
+  const launchControl = React.useRef<ReturnFocusControl | undefined>(undefined);
+  // One launch at a time. A remote can deliver two Select presses before the
+  // navigator has moved, and state set by the first press is not visible to
+  // the second inside the same event, so the latch is a ref. It opens again
+  // on the navigator's focus event, the same event that restores the controls.
+  const launching = React.useRef(false);
+  const rememberLaunch = (entry: CheckedTitle) => {
+    setLastOpenedId(entry.title.id);
+    setLastOpenedFrom(launchControl.current);
+    launchControl.current = undefined;
+  };
+  // More info offers the simulated demo. Opening it keeps the title it
+  // came from, so Back restores More info and the control that opened it.
+  const [practiceFromId, setPracticeFromId] = React.useState<string | null>(null);
+  const [detailsFocus, setDetailsFocus] = React.useState<'play' | 'practice'>('play');
+  const [focusGeneration, setFocusGeneration] = React.useState(0);
+  React.useEffect(() => {
+    const removeFocus = navigation.addListener?.('focus', () => {
+      // Vega keeps this route mounted behind the player. Restore its controls
+      // on return, and permit menu feedback only while this route is active.
+      launching.current = false;
+      setInterfaceActive(true);
+      setFocusGeneration((generation) => generation + 1);
+    });
+    const removeBlur = navigation.addListener?.('blur', () => {
+      interfaceSound.stop();
+      setInterfaceActive(false);
+    });
+    return () => { removeFocus?.(); removeBlur?.(); };
+  }, [navigation, interfaceSound]);
 
   const watching = activeProfile(family);
   // Never the kid's own choice on its own: the stricter of the household floor
@@ -205,7 +334,7 @@ const KidModeScreen = ({
     [family, watching],
   );
 
-  const entries = React.useMemo(() => catalog ?? defaultCatalog(), [catalog]);
+  const entries = React.useMemo(() => catalog ?? defaultCatalog(settings), [catalog, settings]);
   // Where each title's map comes from: the signed index first, by the file's
   // hash, then the map the package or the catalog carried. With no index
   // configured this is the catalog itself and nothing is fetched.
@@ -229,43 +358,97 @@ const KidModeScreen = ({
           return waitingTitle(one.title);
         }
         return checkTitle(one.title, {
-          settings,
-          publicKeyBase64,
+          settings: benignStorySettings(one.title, settings),
+          publicKeyBase64: concernsPackagedLibrary(one.title)
+            ? packagedLibrary.publicKeyFor(one.title, settings) ?? ''
+            : bundledTitlePublicKey(one.title, publicKeyBase64),
           nowMs: nowMs(),
         });
       }),
     [resolved, settings, publicKeyBase64, nowMs],
   );
   const open = titles.find((entry) => entry.title.id === openId) ?? null;
+  const practice = React.useMemo(
+    () => kidModeTitles(titles).find((entry) => isBundledBenignStory(entry.title)) ?? null,
+    [titles],
+  );
+  const leaveDetails = () => {
+    if (practiceFromId) {
+      setOpenId(practiceFromId);
+      setPracticeFromId(null);
+      setDetailsFocus('practice');
+      return;
+    }
+    setOpenId(null);
+    setView('home');
+  };
 
   // The D-pad back button walks back through these states rather than leaving
   // the app from the middle of them.
   React.useEffect(() => {
-    if (!Platform.isTV) {
+    // Details owns its nested More info/Technical details Back stack.
+    if (!Platform.isTV || view === 'details') {
       return undefined;
     }
-    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
-      if (view === 'details' || view === 'parent') {
-        setView('home');
-        setOpenId(null);
-        return true;
-      }
-      return false;
-    });
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        if (navigation.isFocused?.() === false) {
+          return false;
+        }
+        if (view === 'ambient') {
+          setView(ambientFrom);
+          return true;
+        }
+        if (view === 'credits') {
+          setView('parent');
+          interfaceSound.confirm();
+          return true;
+        }
+        if (view === 'parent') {
+          setView('home');
+          setOpenId(null);
+          interfaceSound.confirm();
+          return true;
+        }
+        return false;
+      },
+    );
     return () => subscription.remove();
-  }, [view]);
+  }, [navigation, view, interfaceSound, practiceFromId, ambientFrom]);
 
   const finishFirstRun = (result: FirstRunResult) => {
-    setGate(result.gate);
     // The first run sets the floor, not one kid's settings. Every profile is
     // measured against it afterwards and the stricter one wins.
-    setFamily((previous) => setFloor(previous, result.settings));
+    saved.write({
+      version: 1,
+      gate: result.gate,
+      family: setFloor(family, result.settings),
+    });
+    // On a fresh device the first run is on screen because nothing is saved
+    // yet, and the view never left the shelf. From the parent area's Set a
+    // PIN it is on screen because the view was set to it on purpose, and
+    // nothing else sets it back, so without this a parent who finished stayed
+    // on the explainer with the PIN already saved. A write that fails still
+    // puts the storage screen over everything, and its retry carries this
+    // same record.
     setView('home');
   };
 
-  const play = (entry: CheckedTitle) => {
+  const play = (entry: CheckedTitle, ambientPreview = false) => {
+    if (saved.phase !== 'ready' || !saved.value || launching.current) {
+      return;
+    }
+    launching.current = true;
+    trace('playback', 'watch');
+    // Invalidate pending menu audio before the player can request audio focus.
+    interfaceSound.stop();
+    setInterfaceActive(false);
     navigation.navigate(Screens.PLAYER_SCREEN, {
       data: titleDataFor(entry),
+      showHomeOpening: true,
+      ambientPreview,
+      interfaceMotionEnabled: family.interfaceMotionEnabled === true,
       guarded: guardedParamsFor(
         entry,
         settings,
@@ -275,11 +458,37 @@ const KidModeScreen = ({
     });
   };
 
-  if (view === 'first-run') {
-    return (
+  const withInterfaceFeedback = (content: React.ReactElement) => (
+    <InterfaceSoundContext.Provider value={interfaceSound}>
+      {/* The navigator keeps this route mounted behind playback. Remove its
+          native controls while inactive so D-pad focus cannot escape into it;
+          route state above survives and restores the caller on return. */}
+      {interfaceActive ? content : null}
+    </InterfaceSoundContext.Provider>
+  );
+
+  if (
+    saved.phase === 'loading' ||
+    saved.phase === 'error' ||
+    (saved.phase === 'saving' && !saved.value)
+  ) {
+    return withInterfaceFeedback(
+      <HouseholdStorageScreen
+        testID={`${testID}-storage`}
+        failed={saved.phase === 'error'}
+        onRetry={saved.retry}
+      />
+    );
+  }
+
+  if (!saved.value || view === 'first-run') {
+    return withInterfaceFeedback(
       <FirstRunScreen
         testID={`${testID}-first-run`}
         onDone={finishFirstRun}
+        // Opened from the parent area's Set a PIN: Back on the first step
+        // returns there. On a fresh device there is nowhere else to go.
+        onCancel={saved.value ? () => setView('parent') : undefined}
         newSalt={newSalt}
         settings={settings}
       />
@@ -287,8 +496,9 @@ const KidModeScreen = ({
   }
 
   if (view === 'parent') {
-    return (
+    return withInterfaceFeedback(
       <ParentAreaScreen
+        saving={saved.phase === 'saving'}
         testID={`${testID}-parent`}
         gate={gate}
         onGateChange={setGate}
@@ -311,7 +521,7 @@ const KidModeScreen = ({
   // asks for attribution somewhere a person can actually read it, which NOTICE
   // in the repository is not for somebody holding a remote.
   if (view === 'credits') {
-    return (
+    return withInterfaceFeedback(
       <CreditsScreen
         testID={`${testID}-credits`}
         onBack={() => setView('parent')}
@@ -319,33 +529,82 @@ const KidModeScreen = ({
     );
   }
 
+  const settle = (entry: CheckedTitle, from: 'home' | 'details') => {
+    if (saved.phase !== 'ready' || !ambientArtworkFor(entry)) return;
+    interfaceSound.stop();
+    setOpenId(entry.title.id);
+    setAmbientFrom(from);
+    setView('ambient');
+  };
+  if (view === 'ambient' && open && ambientArtworkFor(open)) {
+    return withInterfaceFeedback(<AmbientScene title={titlePresentation(open.title).name}
+      artwork={ambientArtworkFor(open)!} testID={`${testID}-ambient`}
+      onBack={() => setView(ambientFrom)}
+      previewSeconds={Math.ceil((open.title.durationMs ?? 0) / 1000)}
+      onPreview={() => play(open, true)} />);
+  }
+
   if (view === 'details' && open) {
-    return (
+    return withInterfaceFeedback(
       <TitleDetailsScreen
+        key={`details-${focusGeneration}-${open.title.id}`}
+        saving={saved.phase === 'saving'}
+        interfaceMotionEnabled={family.interfaceMotionEnabled === true}
+        interfaceActive={interfaceActive}
         testID={`${testID}-details`}
         entry={open}
+        onAmbient={ambientArtworkFor(open) ? (entry) => settle(entry, 'details') : undefined}
         settings={settings}
-        onPlay={play}
-        onBack={() => {
-          setOpenId(null);
-          setView('home');
+        onPlay={(entry) => {
+          setDetailsFocus('play');
+          play(entry);
         }}
+        practice={practice ?? undefined}
+        preferPracticeFocus={detailsFocus === 'practice'}
+        onOpenPractice={(entry) => {
+          setPracticeFromId(open.title.id);
+          setDetailsFocus('play');
+          setOpenId(entry.title.id);
+        }}
+        onBack={leaveDetails}
       />
     );
   }
 
-  return (
+  return withInterfaceFeedback(
     <KidHomeScreen
+      key={`home-${focusGeneration}`}
+      saving={saved.phase === 'saving'}
+      interfaceMotionEnabled={family.interfaceMotionEnabled === true}
+      interfaceActive={interfaceActive}
       testID={`${testID}-home`}
       titles={titles}
+      onAmbient={(entry) => { rememberLaunch(entry); settle(entry, 'home'); }}
+      onLaunchControl={(control) => { launchControl.current = control; }}
+      onPlay={(entry) => {
+        rememberLaunch(entry);
+        play(entry);
+      }}
+      selectedTitleId={selectedTitleId}
+      onSelectTitle={setSelectedTitleId}
+      returnFocusId={lastOpenedId}
+      returnFocusControl={lastOpenedFrom}
       profiles={family.profiles}
       activeProfileId={family.activeProfileId}
-      onChooseProfile={(profile) => setFamily(selectProfile(family, profile.id))}
+      onChooseProfile={(profile) =>
+        setFamily(selectProfile(family, profile.id))
+      }
       onOpen={(entry) => {
+        rememberLaunch(entry);
+        setPracticeFromId(null);
+        setDetailsFocus('play');
         setOpenId(entry.title.id);
         setView('details');
       }}
-      onOpenParentArea={() => setView('parent')}
+      onOpenParentArea={() => {
+        setLastOpenedFrom('parent');
+        setView('parent');
+      }}
     />
   );
 };

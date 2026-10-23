@@ -1,20 +1,31 @@
 {
   "statement": "Every safety property Calm Frames claims has a mutation that breaks the code guarding it. The kill rate below is killed divided by attempted, rounded down, over the mutations in eval/mutate_gate.py only. It is not a whole-codebase mutation score and it does not stand in for one.",
   "tool": "eval/mutate_gate.py",
-  "generated_utc": "2026-09-18T05:23:45Z",
+  "generated_utc": "2026-10-22T06:34:41Z",
   "how_a_kill_is_counted": "The tests that guard the mutated line are run as whole files. A kill needs at least one named failing test and no collection or compile error, because both of those also exit non-zero and neither is a test catching anything.",
   "negative_control": {
     "description": "every selection run unmutated before any mutation was applied",
+    "performed": true,
     "all_green": true,
     "selections": [
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/chimeCue.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 16,
+        "seconds": 2.4,
+        "detail": ""
+      },
       {
         "lane": "app",
         "tests": [
           "test/calmframes/coverSchedule.test.ts"
         ],
         "green": true,
-        "tests_run": 39,
-        "seconds": 1.2,
+        "tests_run": 41,
+        "seconds": 1.0,
         "detail": ""
       },
       {
@@ -23,7 +34,7 @@
           "pipeline/tests/test_hideplan.py"
         ],
         "green": true,
-        "tests_run": 33,
+        "tests_run": 36,
         "seconds": 0.2,
         "detail": ""
       },
@@ -34,7 +45,7 @@
         ],
         "green": true,
         "tests_run": 32,
-        "seconds": 1.2,
+        "seconds": 1.1,
         "detail": ""
       },
       {
@@ -43,8 +54,18 @@
           "test/calmframes/coverHarness.test.tsx"
         ],
         "green": true,
-        "tests_run": 13,
-        "seconds": 1.0,
+        "tests_run": 17,
+        "seconds": 1.9,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/sceneHoldPlayback.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 18,
+        "seconds": 1.5,
         "detail": ""
       },
       {
@@ -54,7 +75,7 @@
         ],
         "green": true,
         "tests_run": 29,
-        "seconds": 1.0,
+        "seconds": 1.1,
         "detail": ""
       },
       {
@@ -65,8 +86,8 @@
           "test/calmframes/mutationSurvivors.test.tsx"
         ],
         "green": true,
-        "tests_run": 30,
-        "seconds": 1.1,
+        "tests_run": 39,
+        "seconds": 1.5,
         "detail": ""
       },
       {
@@ -76,8 +97,8 @@
           "test/calmframes/useFlashGuard.test.tsx"
         ],
         "green": true,
-        "tests_run": 33,
-        "seconds": 1.1,
+        "tests_run": 38,
+        "seconds": 1.2,
         "detail": ""
       },
       {
@@ -87,7 +108,7 @@
         ],
         "green": true,
         "tests_run": 22,
-        "seconds": 1.0,
+        "seconds": 0.8,
         "detail": ""
       },
       {
@@ -98,7 +119,7 @@
         ],
         "green": true,
         "tests_run": 28,
-        "seconds": 1.0,
+        "seconds": 0.8,
         "detail": ""
       },
       {
@@ -107,8 +128,8 @@
           "test/calmframes/useFlashGuard.test.tsx"
         ],
         "green": true,
-        "tests_run": 11,
-        "seconds": 1.1,
+        "tests_run": 16,
+        "seconds": 1.0,
         "detail": ""
       },
       {
@@ -117,8 +138,18 @@
           "pipeline/tests/test_verify.py"
         ],
         "green": true,
-        "tests_run": 52,
-        "seconds": 36.6,
+        "tests_run": 65,
+        "seconds": 68.2,
+        "detail": ""
+      },
+      {
+        "lane": "py",
+        "tests": [
+          "pipeline/tests/test_cached_artifacts.py"
+        ],
+        "green": true,
+        "tests_run": 9,
+        "seconds": 17.3,
         "detail": ""
       },
       {
@@ -128,8 +159,8 @@
           "test/calmframes/household.test.ts"
         ],
         "green": true,
-        "tests_run": 63,
-        "seconds": 1.2,
+        "tests_run": 65,
+        "seconds": 1.7,
         "detail": ""
       },
       {
@@ -140,7 +171,7 @@
         ],
         "green": true,
         "tests_run": 30,
-        "seconds": 1.0,
+        "seconds": 0.9,
         "detail": ""
       },
       {
@@ -150,7 +181,7 @@
         ],
         "green": true,
         "tests_run": 24,
-        "seconds": 1.0,
+        "seconds": 0.8,
         "detail": ""
       },
       {
@@ -160,8 +191,8 @@
           "test/calmframes/useFlashGuard.test.tsx"
         ],
         "green": true,
-        "tests_run": 35,
-        "seconds": 1.1,
+        "tests_run": 40,
+        "seconds": 1.0,
         "detail": ""
       },
       {
@@ -171,7 +202,7 @@
         ],
         "green": true,
         "tests_run": 10,
-        "seconds": 1.2,
+        "seconds": 1.1,
         "detail": ""
       },
       {
@@ -181,7 +212,7 @@
         ],
         "green": true,
         "tests_run": 13,
-        "seconds": 0.2,
+        "seconds": 0.5,
         "detail": ""
       },
       {
@@ -191,8 +222,8 @@
           "pipeline/tests/test_bif.py"
         ],
         "green": true,
-        "tests_run": 46,
-        "seconds": 0.4,
+        "tests_run": 49,
+        "seconds": 0.3,
         "detail": ""
       },
       {
@@ -207,14 +238,25 @@
         "detail": ""
       },
       {
+        "lane": "py",
+        "tests": [
+          "pipeline/tests/test_verify.py",
+          "pipeline/tests/test_verify_pool.py"
+        ],
+        "green": true,
+        "tests_run": 79,
+        "seconds": 65.5,
+        "detail": ""
+      },
+      {
         "lane": "app",
         "tests": [
           "test/calmframes/coverSchedule.test.ts",
           "test/calmframes/useFlashGuard.test.tsx"
         ],
         "green": true,
-        "tests_run": 50,
-        "seconds": 1.1,
+        "tests_run": 57,
+        "seconds": 1.7,
         "detail": ""
       },
       {
@@ -224,8 +266,8 @@
           "test/calmframes/mutationSurvivors.test.tsx"
         ],
         "green": true,
-        "tests_run": 45,
-        "seconds": 1.0,
+        "tests_run": 47,
+        "seconds": 0.8,
         "detail": ""
       },
       {
@@ -235,22 +277,97 @@
         ],
         "green": true,
         "tests_run": 15,
-        "seconds": 1.5,
+        "seconds": 1.7,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/sceneHolds.test.ts"
+        ],
+        "green": true,
+        "tests_run": 25,
+        "seconds": 1.2,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/benignStory.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 16,
+        "seconds": 3.0,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/packagedLibrary.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 37,
+        "seconds": 1.2,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/householdStorage.test.ts"
+        ],
+        "green": true,
+        "tests_run": 29,
+        "seconds": 1.0,
+        "detail": ""
+      },
+      {
+        "lane": "py",
+        "tests": [
+          "pipeline/tests/test_sceneholds.py"
+        ],
+        "green": true,
+        "tests_run": 20,
+        "seconds": 40.8,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/screens/interfaceNavigation.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 8,
+        "seconds": 3.8,
+        "detail": ""
+      },
+      {
+        "lane": "app",
+        "tests": [
+          "test/calmframes/interfaceSound.test.tsx"
+        ],
+        "green": true,
+        "tests_run": 38,
+        "seconds": 1.2,
         "detail": ""
       }
     ]
   },
   "totals": {
-    "mutations": 57,
-    "killed": 55,
+    "mutations": 70,
+    "killed": 68,
     "survived": 2,
     "survived_and_not_equivalent": 0,
-    "kill_rate": 0.9649,
-    "kill_rate_percent": 96.49,
-    "as_a_fraction": "55/57"
+    "kill_rate": 0.9714,
+    "kill_rate_percent": 97.14,
+    "as_a_fraction": "68/70"
   },
   "equivalent_mutants_that_were_killed_after_all": [],
   "properties": {
+    "a chime only ever sounds before a cover": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
     "cover before segment": {
       "mutations": 5,
       "killed": 5,
@@ -262,6 +379,11 @@
       "survivors": [
         "background-hides-at-once"
       ]
+    },
+    "disrupted scene stills cannot flash on resume": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
     },
     "fail closed on a map that is missing": {
       "mutations": 1,
@@ -315,6 +437,11 @@
       "killed": 1,
       "survivors": []
     },
+    "cached metadata and previews stay bound to their checked bytes": {
+      "mutations": 2,
+      "killed": 2,
+      "survivors": []
+    },
     "red segments always opaque": {
       "mutations": 5,
       "killed": 5,
@@ -331,8 +458,8 @@
       "survivors": []
     },
     "verify blocks publishing on any violation": {
-      "mutations": 4,
-      "killed": 4,
+      "mutations": 5,
+      "killed": 5,
       "survivors": []
     },
     "rendition start offset": {
@@ -343,6 +470,46 @@
     "the property tests are not vacuous": {
       "mutations": 5,
       "killed": 5,
+      "survivors": []
+    },
+    "a scene hold still only ever stands over a segment of its own map": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "the demo key unlocks one bundled title and nothing else": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "the packaged library accepts a route only for the exact source it compiled": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "a stored household record cannot change how the PIN is hashed": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "verify refuses a scene hold image that does not reproduce from its stated frame": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "verify measures the cover at the first frame, the middle and the last frame of every covered span": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "the press that turns selection sounds on is itself confirmed": {
+      "mutations": 1,
+      "killed": 1,
+      "survivors": []
+    },
+    "one sound player that never answers cannot silence the menu for good": {
+      "mutations": 1,
+      "killed": 1,
       "survivors": []
     }
   },
@@ -360,10 +527,10 @@
       ],
       "killed": false,
       "evidence": "",
-      "survived_because": "every test passed with the guard broken (30 ran)",
+      "survived_because": "every test passed with the guard broken (39 ran)",
       "seconds": 1.2,
       "equivalent": "the cover still goes on at once, by a second path. foreground is in the dependency list of the tick effect, and that effect calls tick() itself before setting its interval, so a change of foreground tears the effect down, builds it again and covers synchronously. The picture is hidden in the same commit either way and no test can see a difference. It was checked rather than assumed: coverHarness.test.tsx now has a test that flips foreground and advances no timers at all, and it stays green with this mutation applied and goes red when foreground is also taken out of that dependency list, which is the only way to actually remove the behaviour. Worth knowing that the redundancy is what makes this equivalent: drop foreground from those deps as a tidy-up and the guard on line 318 becomes load bearing again.",
-      "tests_run": 30
+      "tests_run": 39
     },
     {
       "id": "fail-closed-unsigned",
@@ -384,6 +551,21 @@
   ],
   "mutations": [
     {
+      "id": "chime-only-before-a-cover",
+      "property": "a chime only ever sounds before a cover",
+      "lane": "app",
+      "file": "src/calmframes/chimeCue.ts",
+      "breaks": "the cue stops checking that the part is still ahead of the playhead, so a seek past a flagged part sounds a chime with nothing hidden after it",
+      "tests": [
+        "test/calmframes/chimeCue.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "when a chime is due \u203a sounds a fixed time before the cover, and only then; when a chime is due \u203a never announces a part the playhead has already gone by; a chime is never left without a cover \u203a over a whole sitting, with both parts played through",
+      "survived_because": "",
+      "seconds": 1.0,
+      "tests_run": 16
+    },
+    {
       "id": "cover-before-segment-app",
       "property": "cover before segment",
       "lane": "app",
@@ -396,7 +578,7 @@
       "evidence": "the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 0 ms; the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 3 ms; the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 67 ms",
       "survived_because": "",
       "seconds": 1.0,
-      "tests_run": 39
+      "tests_run": 41
     },
     {
       "id": "cover-before-segment-min-cover-grows-the-start",
@@ -410,8 +592,8 @@
       "killed": true,
       "evidence": "buildCoverIntervals \u203a never starts a cover later than the guard band promised",
       "survived_because": "",
-      "seconds": 1.0,
-      "tests_run": 39
+      "seconds": 0.9,
+      "tests_run": 41
     },
     {
       "id": "cover-before-segment-pipeline",
@@ -425,7 +607,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_hideplan.py::TestGuardBand::test_widens_both_sides",
       "survived_because": "",
-      "seconds": 0.2,
+      "seconds": 0.3,
       "tests_run": 1
     },
     {
@@ -440,7 +622,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_sidecar.py::test_segment_fields - assert 400 > 400",
       "survived_because": "",
-      "seconds": 0.4,
+      "seconds": 0.5,
       "tests_run": 3
     },
     {
@@ -455,8 +637,8 @@
       "killed": true,
       "evidence": "buildCoverIntervals \u203a merges intervals that touch exactly, so the cover cannot blink off",
       "survived_because": "",
-      "seconds": 1.0,
-      "tests_run": 39
+      "seconds": 0.9,
+      "tests_run": 41
     },
     {
       "id": "hold-through-stall",
@@ -468,10 +650,25 @@
         "test/calmframes/coverHarness.test.tsx"
       ],
       "killed": true,
-      "evidence": "useCoverHarness \u203a timing mode hides the picture at once when buffering starts",
+      "evidence": "useCoverHarness \u203a timing mode hides the picture at once when buffering starts; useCoverHarness \u203a keeps fail-closed coverage when an optional presentation callback throws; useCoverHarness \u203a keeps the committed presentation callback during an abandoned suspended render",
       "survived_because": "",
-      "seconds": 1.0,
-      "tests_run": 13
+      "seconds": 1.1,
+      "tests_run": 17
+    },
+    {
+      "id": "disrupted-scene-stills-stay-black-on-resume",
+      "property": "disrupted scene stills cannot flash on resume",
+      "lane": "app",
+      "file": "src/calmframes/useFlashGuard.ts",
+      "breaks": "waiting still turns the image black, but playing restores a bright still in the same interval, so repeated resume events can create flashes",
+      "tests": [
+        "test/calmframes/sceneHoldPlayback.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "scene hold playback \u203a removes the still on waiting even when the scheduled cover was already on; scene hold playback \u203a removes the still on stalled even when the scheduled cover was already on; scene hold playback \u203a removes the still on pause even when the scheduled cover was already on",
+      "survived_because": "",
+      "seconds": 1.2,
+      "tests_run": 18
     },
     {
       "id": "hold-until-confirmed-outside",
@@ -483,10 +680,10 @@
         "test/calmframes/coverHarness.test.tsx"
       ],
       "killed": true,
-      "evidence": "useCoverHarness \u203a keeps the cover on until playback is confirmed again",
+      "evidence": "useCoverHarness \u203a keeps fail-closed coverage when an optional presentation callback throws; useCoverHarness \u203a keeps the cover on until playback is confirmed again",
       "survived_because": "",
       "seconds": 1.1,
-      "tests_run": 13
+      "tests_run": 17
     },
     {
       "id": "seek-covers-first",
@@ -546,26 +743,26 @@
       ],
       "killed": false,
       "evidence": "",
-      "survived_because": "every test passed with the guard broken (30 ran)",
+      "survived_because": "every test passed with the guard broken (39 ran)",
       "seconds": 1.2,
       "equivalent": "the cover still goes on at once, by a second path. foreground is in the dependency list of the tick effect, and that effect calls tick() itself before setting its interval, so a change of foreground tears the effect down, builds it again and covers synchronously. The picture is hidden in the same commit either way and no test can see a difference. It was checked rather than assumed: coverHarness.test.tsx now has a test that flips foreground and advances no timers at all, and it stays green with this mutation applied and goes red when foreground is also taken out of that dependency list, which is the only way to actually remove the behaviour. Worth knowing that the redundancy is what makes this equivalent: drop foreground from those deps as a tidy-up and the guard on line 318 becomes load bearing again.",
-      "tests_run": 30
+      "tests_run": 39
     },
     {
       "id": "fail-closed-missing",
       "property": "fail closed on a map that is missing",
       "lane": "app",
       "file": "src/calmframes/flashMap.ts",
-      "breaks": "a title with no map is read as an empty one instead of being refused",
+      "breaks": "missing map input returns a verified empty schedule without a signature or analysis, so playing confirmation can uncover the unchecked picture",
       "tests": [
         "test/calmframes/flashMap.test.ts",
         "test/calmframes/useFlashGuard.test.tsx"
       ],
       "killed": true,
-      "evidence": "verifyFlashMap \u203a fails closed when the map is missing",
+      "evidence": "verifyFlashMap \u203a fails closed when the map is missing; useFlashGuard \u203a shows the checking card for a replacement map, not the last refusal; useFlashGuard \u203a shows the checking card for a replacement map, not the last refusal",
       "survived_because": "",
-      "seconds": 1.2,
-      "tests_run": 33
+      "seconds": 1.3,
+      "tests_run": 38
     },
     {
       "id": "fail-closed-stale",
@@ -581,7 +778,7 @@
       "evidence": "verifyFlashMap \u203a fails closed when the map is stale; useFlashGuard \u203a keeps the picture hidden when the map is older than the limit",
       "survived_because": "",
       "seconds": 1.2,
-      "tests_run": 33
+      "tests_run": 38
     },
     {
       "id": "fail-closed-unsigned",
@@ -612,8 +809,8 @@
       "killed": true,
       "evidence": "useFlashGuard \u203a keeps the picture hidden when the map has been tampered with; verifyFlashMap \u203a fails closed when one character of the map was changed after signing; verifyFlashMap \u203a fails closed when a segment is added to a signed map",
       "survived_because": "",
-      "seconds": 1.1,
-      "tests_run": 33
+      "seconds": 1.2,
+      "tests_run": 38
     },
     {
       "id": "fail-closed-wrong-hash",
@@ -657,7 +854,7 @@
       "killed": true,
       "evidence": "verifyFlashMap \u203a refuses a version it does not understand",
       "survived_because": "",
-      "seconds": 1.1,
+      "seconds": 1.0,
       "tests_run": 22
     },
     {
@@ -686,10 +883,10 @@
         "test/calmframes/useFlashGuard.test.tsx"
       ],
       "killed": true,
-      "evidence": "useFlashGuard \u203a starts with the picture hidden, before any map has been checked; useFlashGuard \u203a keeps the picture hidden when the map cannot be fetched; useFlashGuard \u203a keeps the picture hidden and says why when the map does not verify",
+      "evidence": "useFlashGuard \u203a keeps personal loading, failed and invalid preferences opaque; useFlashGuard \u203a starts with the picture hidden, before any map has been checked; useFlashGuard \u203a shows the checking card for a replacement map, not the last refusal",
       "survived_because": "",
-      "seconds": 1.1,
-      "tests_run": 11
+      "seconds": 1.2,
+      "tests_run": 16
     },
     {
       "id": "fail-closed-guard-keeps-going-on-rejection",
@@ -701,10 +898,10 @@
         "test/calmframes/useFlashGuard.test.tsx"
       ],
       "killed": true,
-      "evidence": "useFlashGuard \u203a keeps the picture hidden when the map cannot be fetched; useFlashGuard \u203a keeps the picture hidden and says why when the map does not verify; useFlashGuard \u203a keeps the picture hidden when the map has been tampered with",
+      "evidence": "useFlashGuard \u203a shows the checking card for a replacement map, not the last refusal; useFlashGuard \u203a shows the checking card for a replacement map, not the last refusal; useFlashGuard \u203a keeps the picture hidden when the map cannot be fetched",
       "survived_because": "",
-      "seconds": 1.1,
-      "tests_run": 11
+      "seconds": 1.2,
+      "tests_run": 16
     },
     {
       "id": "fail-closed-sidecar-unsigned-python",
@@ -718,7 +915,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_sidecar.py::test_an_unsigned_map_is_refused_unless_you_ask_for_it",
       "survived_because": "",
-      "seconds": 0.7,
+      "seconds": 1.2,
       "tests_run": 9
     },
     {
@@ -733,7 +930,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_sidecar.py::test_a_map_for_a_different_file_does_not_verify",
       "survived_because": "",
-      "seconds": 0.8,
+      "seconds": 0.9,
       "tests_run": 14
     },
     {
@@ -763,7 +960,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_sidecar.py::test_a_segment_that_makes_no_sense_fails_the_map[segments0-ends at 100]",
       "survived_because": "",
-      "seconds": 1.0,
+      "seconds": 0.9,
       "tests_run": 22
     },
     {
@@ -778,7 +975,7 @@
       "killed": true,
       "evidence": "flashmap/tests/test_sidecar.py::test_a_segment_that_makes_no_sense_fails_the_map[segments0-ends at 100]",
       "survived_because": "",
-      "seconds": 1.0,
+      "seconds": 0.9,
       "tests_run": 22
     },
     {
@@ -793,8 +990,38 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestAWrongHash::test_a_source_file_that_changed_since_ingest_is_caught",
       "survived_because": "",
-      "seconds": 12.5,
+      "seconds": 16.8,
       "tests_run": 16
+    },
+    {
+      "id": "cached-artifacts-check-the-actual-output-bytes",
+      "property": "cached metadata and previews stay bound to their checked bytes",
+      "lane": "py",
+      "file": "pipeline/state.py",
+      "breaks": "an artifact changed at the same path is trusted from its old cache record instead of being regenerated before publication",
+      "tests": [
+        "pipeline/tests/test_cached_artifacts.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_cached_artifacts.py::test_same_path_changed_cached_artifact_is_regenerated_before_publication[probe]",
+      "survived_because": "",
+      "seconds": 2.2,
+      "tests_run": 1
+    },
+    {
+      "id": "cached-posters-are-recorded-as-outputs",
+      "property": "cached metadata and previews stay bound to their checked bytes",
+      "lane": "py",
+      "file": "pipeline/ingest.py",
+      "breaks": "poster JPEGs disappear from the ledger's output list, so a changed or missing poster can reuse a previously checked step",
+      "tests": [
+        "pipeline/tests/test_cached_artifacts.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_cached_artifacts.py::test_same_path_changed_cached_artifact_is_regenerated_before_publication[poster]",
+      "survived_because": "",
+      "seconds": 11.3,
+      "tests_run": 6
     },
     {
       "id": "red-survives-merging",
@@ -807,10 +1034,10 @@
         "test/calmframes/household.test.ts"
       ],
       "killed": true,
-      "evidence": "buildCoverIntervals \u203a makes a merged interval red when any part of it is red; presets \u203a keeps a red segment red through the union",
+      "evidence": "buildCoverIntervals \u203a makes a merged interval red when any part of it is red; a regular pattern is its own reason \u203a loses to red, which is the strongest; presets \u203a keeps a red segment red through the union",
       "survived_because": "",
       "seconds": 1.0,
-      "tests_run": 63
+      "tests_run": 65
     },
     {
       "id": "red-is-the-default-reason",
@@ -840,7 +1067,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_hideplan.py::TestRedIsNeverDimmed::test_a_red_interval_is_opaque",
       "survived_because": "",
-      "seconds": 0.2,
+      "seconds": 0.3,
       "tests_run": 17
     },
     {
@@ -870,7 +1097,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestATamperedMap::test_verify_catches_a_dim_rule_that_lets_red_through",
       "survived_because": "",
-      "seconds": 10.8,
+      "seconds": 14.2,
       "tests_run": 14
     },
     {
@@ -918,7 +1145,7 @@
       "evidence": "the room \u203a refuses a map with no windows at all",
       "survived_because": "",
       "seconds": 1.1,
-      "tests_run": 35
+      "tests_run": 40
     },
     {
       "id": "room-window-is-added-not-swapped",
@@ -947,7 +1174,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_bif.py::TestFramesComeFromCalmMoments::test_a_slot_inside_a_covered_span_is_sampled_from_elsewhere",
       "survived_because": "",
-      "seconds": 0.2,
+      "seconds": 0.3,
       "tests_run": 8
     },
     {
@@ -994,7 +1221,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestFramesFromFlaggedMoments::test_a_trickplay_frame_from_a_flagged_moment_is_caught",
       "survived_because": "",
-      "seconds": 16.4,
+      "seconds": 21.3,
       "tests_run": 21
     },
     {
@@ -1009,7 +1236,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestFramesFromFlaggedMoments::test_trickplay_taken_from_the_original_is_caught",
       "survived_because": "",
-      "seconds": 17.1,
+      "seconds": 22.1,
       "tests_run": 22
     },
     {
@@ -1024,7 +1251,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestARenditionWithAViolation::test_a_violation_left_in_the_safe_rendition_blocks_publishing",
       "survived_because": "",
-      "seconds": 1.9,
+      "seconds": 2.5,
       "tests_run": 2
     },
     {
@@ -1039,8 +1266,24 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestTheCommandLineBlocksPublishing::test_a_broken_title_exits_non_zero_and_stays_out_of_kid_mode",
       "survived_because": "",
-      "seconds": 20.6,
+      "seconds": 27.3,
       "tests_run": 26
+    },
+    {
+      "id": "verify-cover-proof-cannot-be-skipped",
+      "property": "verify blocks publishing on any violation",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "a title with intervals to cover passes verify without the cover ever having been measured on the rendition, which is the hole that let fourteen titles with nothing to hide read exactly like seven whose cover was proven",
+      "tests": [
+        "pipeline/tests/test_verify.py",
+        "pipeline/tests/test_verify_pool.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestTheCoverProofCannotBeSkipped::test_an_empty_sample_takes_the_proof_away_and_verify_refuses",
+      "survived_because": "",
+      "seconds": 65.0,
+      "tests_run": 59
     },
     {
       "id": "verify-cover-is-actually-drawn",
@@ -1054,7 +1297,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestARenditionWithAViolation::test_a_rendition_that_covered_nothing_is_caught_without_the_analyzer",
       "survived_because": "",
-      "seconds": 4.3,
+      "seconds": 5.8,
       "tests_run": 5
     },
     {
@@ -1069,7 +1312,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestARenditionWithAViolation::test_a_violation_left_in_the_safe_rendition_blocks_publishing",
       "survived_because": "",
-      "seconds": 1.9,
+      "seconds": 2.8,
       "tests_run": 2
     },
     {
@@ -1085,8 +1328,8 @@
       "killed": true,
       "evidence": "the rendition start offset \u203a keeps the full guard band ahead of the picture at an offset of 100000 ms; useFlashGuard \u203a keeps the picture hidden when the rendition is further off than verify allows",
       "survived_because": "",
-      "seconds": 1.2,
-      "tests_run": 50
+      "seconds": 1.3,
+      "tests_run": 57
     },
     {
       "id": "rendition-offset-is-applied",
@@ -1102,7 +1345,7 @@
       "evidence": "the rendition start offset \u203a moves both ends of the interval, not just the start",
       "survived_because": "",
       "seconds": 1.0,
-      "tests_run": 45
+      "tests_run": 47
     },
     {
       "id": "rendition-offset-must-be-a-number",
@@ -1117,7 +1360,7 @@
       "evidence": "the rendition start offset \u203a refuses an offset that is not a number",
       "survived_because": "",
       "seconds": 1.0,
-      "tests_run": 39
+      "tests_run": 41
     },
     {
       "id": "rendition-offset-fail-closed-path",
@@ -1131,8 +1374,8 @@
       "killed": true,
       "evidence": "useFlashGuard \u203a keeps the picture hidden when the rendition is further off than verify allows",
       "survived_because": "",
-      "seconds": 1.1,
-      "tests_run": 11
+      "seconds": 1.3,
+      "tests_run": 16
     },
     {
       "id": "rendition-offset-limit-pipeline",
@@ -1146,7 +1389,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestTheRenditionMustMatchTheSource::test_a_start_that_slid_too_far_blocks_publishing",
       "survived_because": "",
-      "seconds": 27.6,
+      "seconds": 40.7,
       "tests_run": 36
     },
     {
@@ -1161,7 +1404,7 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestComparingAMapToItsSource::test_a_narrow_guard_band_narrows_the_offset_tolerance",
       "survived_because": "",
-      "seconds": 32.2,
+      "seconds": 46.5,
       "tests_run": 45
     },
     {
@@ -1176,7 +1419,7 @@
       "killed": true,
       "evidence": "eval/property_scheduler_test.py::test_the_cover_is_on_a_whole_guard_band_early",
       "survived_because": "",
-      "seconds": 4.4,
+      "seconds": 4.7,
       "tests_run": 2
     },
     {
@@ -1191,7 +1434,7 @@
       "killed": true,
       "evidence": "eval/property_scheduler_test.py::test_any_red_source_makes_the_whole_interval_red",
       "survived_because": "",
-      "seconds": 7.6,
+      "seconds": 4.4,
       "tests_run": 5
     },
     {
@@ -1206,7 +1449,7 @@
       "killed": true,
       "evidence": "eval/property_scheduler_test.py::test_two_intervals_that_meet_at_a_point_are_merged",
       "survived_because": "",
-      "seconds": 1.1,
+      "seconds": 1.2,
       "tests_run": 4
     },
     {
@@ -1221,7 +1464,7 @@
       "killed": true,
       "evidence": "eval/property_scheduler_test.py::test_a_seek_just_past_a_hidden_span_still_covers_first",
       "survived_because": "",
-      "seconds": 4.7,
+      "seconds": 5.1,
       "tests_run": 9
     },
     {
@@ -1236,7 +1479,7 @@
       "killed": true,
       "evidence": "eval/property_scheduler_test.py::test_the_estimate_matches_the_player_when_nothing_drifts",
       "survived_because": "",
-      "seconds": 5.3,
+      "seconds": 6.7,
       "tests_run": 13
     },
     {
@@ -1251,8 +1494,128 @@
       "killed": true,
       "evidence": "pipeline/tests/test_verify.py::TestTheRenditionMustMatchTheSource::test_the_offset_is_recorded_so_a_player_can_subtract_it",
       "survived_because": "",
-      "seconds": 30.0,
+      "seconds": 45.5,
       "tests_run": 39
+    },
+    {
+      "id": "scene-still-belongs-to-a-covered-segment",
+      "property": "a scene hold still only ever stands over a segment of its own map",
+      "lane": "app",
+      "file": "src/calmframes/sceneHolds.ts",
+      "breaks": "a signed still with no flagged segment inside its bounds is accepted, so a producer can put a picture over any moment of the film and call it a hold",
+      "tests": [
+        "test/calmframes/sceneHolds.test.ts"
+      ],
+      "killed": true,
+      "evidence": "signed scene holds \u203a fails closed for a signed no matching segment field",
+      "survived_because": "",
+      "seconds": 1.2,
+      "tests_run": 25
+    },
+    {
+      "id": "demo-key-only-for-the-bundled-title",
+      "property": "the demo key unlocks one bundled title and nothing else",
+      "lane": "app",
+      "file": "src/calmframes/benignStory.ts",
+      "breaks": "any catalog entry is verified against the demo key, so a map signed with the demo's private key plays any title in kid mode",
+      "tests": [
+        "test/calmframes/benignStory.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "the packaged benign story \u203a does not grant the demo key if id changes; the packaged benign story \u203a does not grant the demo key if uri changes; the packaged benign story \u203a does not grant the demo key if sha256 changes",
+      "survived_because": "",
+      "seconds": 1.9,
+      "tests_run": 16
+    },
+    {
+      "id": "packaged-route-must-match-the-source-hash",
+      "property": "the packaged library accepts a route only for the exact source it compiled",
+      "lane": "app",
+      "file": "src/calmframes/packagedLibrary.ts",
+      "breaks": "a route naming a different source file with the same id and duration is accepted, and the compiled key then verifies a map for a file it was never compiled for",
+      "tests": [
+        "test/calmframes/packagedLibrary.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "the compiled prepared library \u203a rejects a playback route with substituted sha256",
+      "survived_because": "",
+      "seconds": 1.2,
+      "tests_run": 37
+    },
+    {
+      "id": "household-record-keeps-the-pin-rounds-bounded",
+      "property": "a stored household record cannot change how the PIN is hashed",
+      "lane": "app",
+      "file": "src/calmframes/householdStorage.ts",
+      "breaks": "a record carrying a rounds count of its own is accepted, so a tampered store can make every PIN check hash for as long as it likes, or not at all",
+      "tests": [
+        "test/calmframes/householdStorage.test.ts"
+      ],
+      "killed": true,
+      "evidence": "local household record \u203a refuses unbounded hashing",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 29
+    },
+    {
+      "id": "scene-hold-bytes-reproduce-from-provenance",
+      "property": "verify refuses a scene hold image that does not reproduce from its stated frame",
+      "lane": "py",
+      "file": "pipeline/sceneholds.py",
+      "breaks": "an image that is not the frame it claims to be is signed and published, so the still a child sees is whatever the producer put there",
+      "tests": [
+        "pipeline/tests/test_sceneholds.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_sceneholds.py::test_valid_signature_cannot_paper_over_a_false_source_frame_timestamp",
+      "survived_because": "",
+      "seconds": 21.8,
+      "tests_run": 12
+    },
+    {
+      "id": "cover-proof-reaches-the-end-of-a-span",
+      "property": "verify measures the cover at the first frame, the middle and the last frame of every covered span",
+      "lane": "py",
+      "file": "pipeline/verify.py",
+      "breaks": "a cover drawn at the middle of a span and gone before its end passes a midpoint-only proof, which is the proof verify had until Oct 11, 2026",
+      "tests": [
+        "pipeline/tests/test_verify.py"
+      ],
+      "killed": true,
+      "evidence": "pipeline/tests/test_verify.py::TestTheCoverProofReachesTheEdgesOfASpan::test_a_cover_that_is_gone_before_the_span_ends_is_caught",
+      "survived_because": "",
+      "seconds": 62.5,
+      "tests_run": 63
+    },
+    {
+      "id": "selection-sound-confirmed-from-the-render-that-holds-the-record",
+      "property": "the press that turns selection sounds on is itself confirmed",
+      "lane": "app",
+      "file": "src/screens/KidModeScreen.tsx",
+      "breaks": "the confirmation is raised from the write's own continuation, which on the concurrent root the device uses runs before React has rendered the saved record, so the hook still reads the old record and the one press that turns the sound on is the one press it never confirms; this is the code the branch had until Oct 11, 2026",
+      "tests": [
+        "test/screens/interfaceNavigation.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "confirms the press that turns selection sounds on, on the concurrent root the device uses",
+      "survived_because": "",
+      "seconds": 3.8,
+      "tests_run": 8
+    },
+    {
+      "id": "released-sound-player-frees-the-next-request",
+      "property": "one sound player that never answers cannot silence the menu for good",
+      "lane": "app",
+      "file": "src/calmframes/interfaceSound.ts",
+      "breaks": "a released playback stays the current one until its teardown finishes, so a player whose initialize() or deinitialize() never answers refuses every later request for the rest of the screen's life",
+      "tests": [
+        "test/calmframes/interfaceSound.test.tsx"
+      ],
+      "killed": true,
+      "evidence": "optional menu audio controller \u203a drops overlapping and rapid confirmations without queuing a replay; optional menu audio controller \u203a recovers from a player whose initialize never answers; optional menu audio controller \u203a recovers from a player whose deinitialize never answers",
+      "survived_because": "",
+      "seconds": 1.1,
+      "tests_run": 38
     }
   ]
 }

@@ -1,0 +1,25 @@
+{
+  "source": "results/forest-activation-2026-10-18/native.log",
+  "source_sha256": "25b78546741d762e97925f8aa9ee2a461d8784d00d6f888187c9b8dcbd49006b",
+  "installed_source": "805f855e60870eb018b3a6a2ab36e1f7d3e887dc",
+  "method": "First occurrence per player session; duplicate collector lines ignored. Wall time of existing debug log entries.",
+  "limits": "Three individual samples. Not displayed-frame TTFF, cold launch, CPU/memory, percentile, audio, physical timing, or kit performance.",
+  "new_device_operations": 0,
+  "samples": [
+    {
+      "bundle_id": "77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f",
+      "entry_to_readiness_log_ms": 1110.332,
+      "ended_to_player_left_log_ms": 649.614
+    },
+    {
+      "bundle_id": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+      "entry_to_readiness_log_ms": 1154.686,
+      "ended_to_player_left_log_ms": 628.412
+    },
+    {
+      "bundle_id": "d1abd36aa0cf3ba51d6e66c186c9a1c1deb9cf04b027919dd67a465722015e46",
+      "entry_to_readiness_log_ms": 969.793,
+      "ended_to_player_left_log_ms": 689.194
+    }
+  ]
+}

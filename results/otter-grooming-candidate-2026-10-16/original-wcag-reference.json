@@ -1,0 +1,387 @@
+{
+  "color": {
+    "analysis_height": 108,
+    "analysis_width": 192,
+    "luminance_model": "wcag-relative-luminance-srgb",
+    "matrix": "bt601",
+    "matrix_source": "stream-tag",
+    "pixel_format": "yuv420p",
+    "range": "limited",
+    "range_source": "stream-tag",
+    "transfer_tag": "2"
+  },
+  "created_utc": "2026-10-16T06:28:11Z",
+  "generator": {
+    "name": "flashmap",
+    "version": "1.0.0"
+  },
+  "pattern_exemptions": [],
+  "picture": {
+    "coded": {
+      "height": 720,
+      "left": 0,
+      "top": 0,
+      "width": 1280
+    },
+    "frame_height": 108,
+    "frame_width": 192,
+    "height": 108,
+    "left": 0,
+    "letterbox": false,
+    "measured_on": "picture",
+    "note": "Area fractions in this map were measured on the picture rectangle above, not on the full coded frame. Letterbox and pillarbox bars were removed first.",
+    "pillarbox": false,
+    "source": "detected",
+    "top": 0,
+    "width": 192
+  },
+  "profile": {
+    "area_fraction_limit": 0.25,
+    "area_window_mode": "ten-degree-field",
+    "area_windows": [
+      {
+        "height_px": 36,
+        "name": "wcag-10deg",
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)",
+        "width_px": 64
+      }
+    ],
+    "exceptions_not_implemented": [
+      "WCAG fine balanced pattern exception (white noise, checkerboards under 0.1 degree). Content the exception would excuse is still reported."
+    ],
+    "flash_limit_per_second": 3,
+    "general_flash": {
+      "dark_image_below": 0.8,
+      "metric": "wcag-relative-luminance",
+      "min_delta": 0.1,
+      "source": "WCAG 2.2 general flash and red flash thresholds (SPEC_SOURCES section 2)"
+    },
+    "name": "wcag",
+    "pattern_rule": null,
+    "pattern_rule_source": null,
+    "peak_nits": null,
+    "red_flash": {
+      "min_ucs_distance": 0.2,
+      "saturated_red_ratio": 0.8,
+      "source": "WCAG 2.2 thresholds Note 3 and Understanding 2.3.1 (SPEC_SOURCES sections 2, 4)"
+    },
+    "red_opposing_rule": "enter-saturated-red-paired-with-leave",
+    "room": null,
+    "rules_not_implemented": [
+      "the fine balanced pattern exception",
+      "any HDR rule",
+      "any regular pattern rule, because WCAG 2.2 has none. See the broadcast profile"
+    ],
+    "spec_sources": "flashmap/docs/SPEC_SOURCES.md",
+    "title": "WCAG 2.2 Success Criterion 2.3.1, general and red flash thresholds",
+    "transition_pairing": "non-overlapping",
+    "transition_rule": "declared-on-first-frame-meeting-threshold",
+    "window_ms": 1000,
+    "window_placement": "trailing-closed-window-at-every-frame"
+  },
+  "schema": "https://calm-frames.github.io/schemas/flashmap-map-v1.json",
+  "segments": [
+    {
+      "area_fraction": 0.967882,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 14960,
+      "flash_first_ms": 80,
+      "flash_last_ms": 14960,
+      "max_flashes_in_window": 12,
+      "reason": "general",
+      "start_ms": 0,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.263455,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 20960,
+      "flash_first_ms": 19960,
+      "flash_last_ms": 20960,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 19960,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.828125,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 25760,
+      "flash_first_ms": 20040,
+      "flash_last_ms": 25760,
+      "max_flashes_in_window": 12,
+      "reason": "general",
+      "start_ms": 20040,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.3125,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 36520,
+      "flash_first_ms": 35160,
+      "flash_last_ms": 36520,
+      "max_flashes_in_window": 7,
+      "reason": "general",
+      "start_ms": 35160,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.318142,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 36840,
+      "flash_first_ms": 35640,
+      "flash_last_ms": 36840,
+      "max_flashes_in_window": 7,
+      "reason": "general",
+      "start_ms": 35640,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.605469,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 46160,
+      "flash_first_ms": 44040,
+      "flash_last_ms": 46160,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 44040,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.259549,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 47840,
+      "flash_first_ms": 46840,
+      "flash_last_ms": 47840,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 46840,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.942274,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 53000,
+      "flash_first_ms": 49200,
+      "flash_last_ms": 53000,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 49200,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.952691,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 56840,
+      "flash_first_ms": 53280,
+      "flash_last_ms": 56840,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 53280,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.27691,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 60280,
+      "flash_first_ms": 59160,
+      "flash_last_ms": 60280,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 59160,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.455295,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 62000,
+      "flash_first_ms": 60640,
+      "flash_last_ms": 62000,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 60640,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.708333,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 68720,
+      "flash_first_ms": 65880,
+      "flash_last_ms": 68720,
+      "max_flashes_in_window": 12,
+      "reason": "general",
+      "start_ms": 65880,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.305556,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 72040,
+      "flash_first_ms": 70640,
+      "flash_last_ms": 72040,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 70640,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.552083,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 73960,
+      "flash_first_ms": 71960,
+      "flash_last_ms": 73960,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 71960,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.72092,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 77560,
+      "flash_first_ms": 73040,
+      "flash_last_ms": 77560,
+      "max_flashes_in_window": 9,
+      "reason": "general",
+      "start_ms": 73040,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.250434,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 77640,
+      "flash_first_ms": 76640,
+      "flash_last_ms": 77640,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 76640,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.280816,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 78400,
+      "flash_first_ms": 77120,
+      "flash_last_ms": 78400,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 77120,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.418837,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 87280,
+      "flash_first_ms": 85920,
+      "flash_last_ms": 87280,
+      "max_flashes_in_window": 8,
+      "reason": "general",
+      "start_ms": 85920,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    },
+    {
+      "area_fraction": 0.919705,
+      "area_window": "wcag-10deg",
+      "breaks_baseline": true,
+      "end_ms": 93800,
+      "flash_first_ms": 89760,
+      "flash_last_ms": 93800,
+      "max_flashes_in_window": 10,
+      "reason": "general",
+      "start_ms": 89760,
+      "triggered_by": [
+        "wcag-10deg"
+      ]
+    }
+  ],
+  "source": {
+    "coded_height": 720,
+    "coded_width": 1280,
+    "container_frame_rate": "25/1",
+    "duration_ms": null,
+    "first_pts_ms": 0.0,
+    "frame_count": 2346,
+    "frame_interval_ms": {
+      "max": 40.0,
+      "median": 40.0,
+      "min": 40.0
+    },
+    "last_coded_pts_ms": 93800.0,
+    "last_pts_ms": 93800.0,
+    "path": "UNREVIEWED_otter_grooming.webm",
+    "sha256": "3083988ff7c574821fb40bea3c7a053db5625f5106f3c68e1231d2935b410b29",
+    "size_bytes": 62674585,
+    "timestamp_source": "container-pts",
+    "variable_frame_rate": false
+  },
+  "summary": {
+    "area_measured_on": "picture",
+    "flash_pass": false,
+    "general_segment_count": 19,
+    "hidden_ms": 51400,
+    "pass": false,
+    "pattern_exemption_count": 0,
+    "pattern_findings_are_not_wcag": "WCAG 2.2 SC 2.3.1 does not cover regular patterns. A pattern segment is an extra hide from an informative ITU recommendation, never a WCAG finding, and `flash_pass` is the only verdict a WCAG claim may be read from.",
+    "pattern_pass": true,
+    "pattern_rule_applied": false,
+    "pattern_rule_source": null,
+    "pattern_segment_count": 0,
+    "red_segment_count": 0,
+    "segment_count": 19
+  },
+  "version": 1
+}

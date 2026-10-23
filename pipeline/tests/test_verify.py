@@ -10,13 +10,14 @@ from __future__ import annotations
 
 import json
 import shutil
+from types import SimpleNamespace
 
 import pytest
 
 from pipeline import verify
 from pipeline.catalog import STATUS_FAILED, kid_mode_titles, read_entry
 from pipeline.flashmap_adapter import FlashmapAdapter, parse_map
-from pipeline.hideplan import HidePlan
+from pipeline.hideplan import CoverInterval
 from pipeline.ingest import IngestOptions, ingest_title
 from pipeline.render import still_is_flat
 from pipeline.verify import (
@@ -25,9 +26,9 @@ from pipeline.verify import (
     OUTCOME_NO_FLAGGED_SEGMENTS,
     apply_to_catalog,
     compare_rendition_to_source,
+    verify_title,
 )
 from pipeline.verify import main as verify_main
-from pipeline.verify import verify_title
 
 from .clips import make_calm_clip
 from .conftest import needs_ffmpeg
@@ -51,6 +52,9 @@ def built(tmp_path, analyzer, keypair):
         bif_interval_ms=2000,
         x264_preset="ultrafast",
         skip_verify=True,
+        # These regression guards concern the legacy single-still sampling
+        # path. test_sceneholds.py covers the new per-interval default.
+        scene_holds=False,
     )
     result = ingest_title(source, tmp_path / "out", options)
     return {
@@ -80,6 +84,8 @@ def calm_built(tmp_path, analyzer, keypair):
         bif_interval_ms=2000,
         x264_preset="ultrafast",
         skip_verify=True,
+        # Keep the legacy zero-interval proof path explicit as well.
+        scene_holds=False,
     )
     result = ingest_title(source, tmp_path / "out", options)
     return {
@@ -905,3 +911,49 @@ class TestTheCoverProofCannotBeSkipped:
         assert not report.passed
         assert "presets_checked" in failed_names(report)
         assert report.outcome == OUTCOME_FAILED
+
+
+class TestTheCoverProofReachesTheEdgesOfASpan:
+    """A cover drawn at the middle of a span and gone before its end is not a cover.
+
+    Until Oct 11, 2026 the proof measured one midpoint per covered span. Seen
+    to fail that day: with the still matching at every midpoint and gone one
+    frame before the end of the span, the midpoint-only proof passed the title
+    (`assert not report.passed` red, `cover_actually_drawn:wcag` absent from
+    the failed names). It passes once the proof samples the first frame, the
+    middle and the last frame of each span.
+    """
+
+    def test_a_cover_that_is_gone_before_the_span_ends_is_caught(self, built, monkeypatch):
+        plan = verify._load_plan(built["layout"], "wcag")
+        midpoints = {round((i.start_ms + i.end_ms) / 2000.0, 6) for i in plan.intervals}
+        assert midpoints, "the fixture title has a covered span"
+
+        def fades_before_the_end(video, still_path, *, time_s):
+            return 48.0 if round(time_s, 6) in midpoints else 10.0
+
+        monkeypatch.setattr(verify, "cover_psnr", fades_before_the_end)
+        report = run_verify(built)
+        assert not report.passed
+        assert "cover_actually_drawn:wcag" in failed_names(report)
+        drawn = check_named(report, "cover_actually_drawn:wcag")
+        assert drawn.data["worst_db"] == 10.0
+        assert round(drawn.data["worst_at_s"], 6) not in midpoints
+
+    def test_the_report_says_how_each_span_was_sampled_and_by_which_ffmpeg(self, built):
+        report = run_verify(built)
+        drawn = check_named(report, "cover_actually_drawn:wcag")
+        assert drawn.passed, drawn.detail
+        assert drawn.data["samples_per_interval"] == verify.COVER_SAMPLES_PER_INTERVAL == 3
+        assert isinstance(drawn.data["ffmpeg"], str) and drawn.data["ffmpeg"].startswith("ffmpeg version")
+
+    def test_a_span_shorter_than_three_frames_is_measured_once_in_the_middle(self):
+        probe = SimpleNamespace(frame_interval_median_s=1 / 30, avg_frame_rate=30.0)
+        short = CoverInterval(start_ms=1000.0, end_ms=1060.0)
+        assert verify._cover_sample_times(short, probe) == [1.03]
+        long = CoverInterval(start_ms=2500.0, end_ms=4500.0)
+        first, middle, last = verify._cover_sample_times(long, probe)
+        assert first == pytest.approx(2.5 + 1 / 30)
+        assert middle == pytest.approx(3.5)
+        assert last == pytest.approx(4.5 - 1 / 30)
+

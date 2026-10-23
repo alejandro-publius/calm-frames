@@ -1,0 +1,58 @@
+{
+  "status": "not suitable under current app policy; stopped before signing/preparation/export",
+  "provenance": "provenance.json",
+  "assessment": "assessment.json",
+  "original": {
+    "sha256": "3083988ff7c574821fb40bea3c7a053db5625f5106f3c68e1231d2935b410b29",
+    "sha1": "52f237645e7016f276f2383b1271a5238adbcebd",
+    "bytes": 62674585,
+    "published_hash_matches": true
+  },
+  "candidate": {
+    "sha256": "5afbfc7e5a9cae48d42153f4e0ab23fe7a7d7d509f1da864c5cfe52194d33f45",
+    "bytes": 9624827,
+    "original_excerpt_seconds": [
+      30,
+      46
+    ],
+    "encoding": "H.264, CRF20, medium, yuv420p; original dimensions/frame rate retained",
+    "audio": "Original contains no audio stream; derivative also has none."
+  },
+  "staging_path": "/Users/alexvintera/Documents/Codex/2026-10-15/task/calm-frames-review/build/otter-grooming-candidate-2026-10-16",
+  "budget": {
+    "existing_namespace_bytes": 28551507,
+    "limit_bytes": 67108864,
+    "candidate_bytes": 9624827,
+    "three_similar_renditions_estimated_bytes": 28874481,
+    "estimated_remaining_after_media_bytes": 9682876,
+    "qualification": "Estimate from unsigned candidate size, not measured prepared bundle. No prepared renditions generated."
+  },
+  "analysis": {
+    "runs": 8,
+    "profiles": [
+      "wcag",
+      "broadcast"
+    ],
+    "geometries": [
+      "standalone profile baseline",
+      "85 inch diagonal / 4 feet room added to baseline"
+    ],
+    "analysis_width_pixels": 192,
+    "original_frames": 2346,
+    "candidate_frames": 400,
+    "settings_unchanged": true,
+    "thresholds_unchanged": true,
+    "color_assumption": "Missing matrix tags use existing inferred-HD-BT.709 policy; original and derivative retain untagged metadata."
+  },
+  "no_actions": [
+    "No key generation or access",
+    "No signing",
+    "No app-trust or catalog change",
+    "No preparation/export/install",
+    "No simulator navigation",
+    "No source/derivative playback or visual inspection",
+    "No screenshots or recording"
+  ],
+  "preserved": "First candidate, isolated signer and prior evidence remain untouched.",
+  "recommendation": "Do not integrate. Current policy would cover 90.25% in Standard/Broadcast and 96.5% in Extra cautious. Full-source longest uncovered run is 4.76 seconds (3.72 in Extra cautious), so no sustained 12-20-second usable interval is indicated. Avoid repeated blind acquisition; use a separate bounded detector-validation review or a new licensed low-motion/low-texture candidate, without relaxing limits to pass."
+}

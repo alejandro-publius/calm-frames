@@ -1,0 +1,12 @@
+{
+  "source_commit": "612545932ea46f4547f594f58b2cf2b83f9134b3",
+  "build_count": 1,
+  "build_start_utc": "2026-10-18T00:47:48.895472+00:00",
+  "tracked_app_inputs": 730,
+  "command": "npm run build:debug",
+  "build_exit": 0,
+  "build_end_utc": "2026-10-18T00:48:27.716691+00:00",
+  "changed_inputs": [],
+  "package_path": "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/package-delivery-2026-10-18/calm-frames-delivery-aarch64-debug.vpkg",
+  "package_sha256": "f538fad6796a9f840a57ca9c86ae1794c435831f119322131570f027ba647160"
+}

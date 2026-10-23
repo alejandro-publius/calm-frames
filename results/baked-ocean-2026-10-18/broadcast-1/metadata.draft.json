@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "recipe": "baked-ambient-v1",
+  "sourceSha256": "2fecba5664992fc6aa321c10fed6f735394a0cce4af6349bd59ef28a6f397f28",
+  "renditionSha256": "0b641eb45f2f19dc7694fd0f36a7c85e758782932f11ede10566ac0c33639336",
+  "ambientSha256": "bb6a5994faff83a38af6e25d0222697d99c7a5bca99fbf15958626d68dbfcf14",
+  "durationMs": 37641.756,
+  "renditionStartOffsetMs": 0,
+  "preset": "broadcast",
+  "mapSha256": {
+    "broadcast": "d95fc4aa16c4547b2c8a1ed963192ddda1cc183be0549cf25daf428f6dcd2ef1",
+    "wcag": "709dbd76c9146a3a2964f7f5fc52fef822015a869d5d6f34150ed853ec7d918a"
+  },
+  "intervals": [
+    {
+      "startMs": 7843.0,
+      "endMs": 12199.0
+    },
+    {
+      "startMs": 28613.0,
+      "endMs": 31093.0
+    }
+  ],
+  "audioPreserved": true,
+  "frameTimingPreserved": true,
+  "analysis": {
+    "wcag": "0c87f126a2138cf2b1eeeadf955297c33c83fe53442e90cf6aea3d2628871d2e",
+    "broadcast": "3a8f4427110a8979ad3fd466ca82cb50c8650bf70f2f1976f5c09ac649054d9b"
+  }
+}

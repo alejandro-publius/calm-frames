@@ -106,6 +106,7 @@ const PlayPauseButton = React.forwardRef(
     }, [videoRef]);
     return (
       <PlayerButton
+        accessibilityLabel={playing ? 'Pause' : 'Play'}
         onPress={playing ? pause : play}
         icon={playing ? 'pause' : 'play-arrow'}
         size={size}

@@ -1,0 +1,441 @@
+........................................................................ [  3%]
+........................................................................ [  7%]
+........................................................................ [ 10%]
+........................................................................ [ 14%]
+........................................................................ [ 18%]
+........................................................................ [ 21%]
+........................................................................ [ 25%]
+........................................................................ [ 29%]
+........................................................................ [ 32%]
+........................................................................ [ 36%]
+........................................................................ [ 40%]
+........................................................................ [ 43%]
+......................................................EEEEEEEEE......... [ 47%]
+........................................................................ [ 51%]
+........................................................................ [ 54%]
+........................................................................ [ 58%]
+........................................................................ [ 62%]
+........................................................................ [ 65%]
+........................................................................ [ 69%]
+........................................................................ [ 73%]
+........................................................................ [ 76%]
+........................................................................ [ 80%]
+........................................................................ [ 83%]
+........................................................................ [ 87%]
+........................................................................ [ 91%]
+........................................................................ [ 94%]
+........................................................................ [ 98%]
+............................
+ERROR: Coverage failure: total of 89 is less than fail-under=90
+                                                                         [100%]
+==================================== ERRORS ====================================
+____________ ERROR at setup of TestTheServer.test_the_page_is_there ____________
+
+    @pytest.fixture
+    def running_server():
+>       server = build_server("127.0.0.1", 0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_upload_server.py:254:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/upload_server.py:382: in build_server
+    return ThreadingHTTPServer((host, port), handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:457: in __init__
+    self.server_bind()
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/server.py:140: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <http.server.ThreadingHTTPServer object at 0x117d340b0>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+
+        May be overridden.
+
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Since Linux 6.12.9, SO_REUSEPORT is not allowed
+        # on other address families than AF_INET/AF_INET6.
+        if (
+            self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT")
+            and self.address_family in (socket.AF_INET, socket.AF_INET6)
+        ):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:478: PermissionError
+________ ERROR at setup of TestTheServer.test_the_aws_button_is_refused ________
+
+    @pytest.fixture
+    def running_server():
+>       server = build_server("127.0.0.1", 0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_upload_server.py:254:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/upload_server.py:382: in build_server
+    return ThreadingHTTPServer((host, port), handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:457: in __init__
+    self.server_bind()
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/server.py:140: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <http.server.ThreadingHTTPServer object at 0x130e7bad0>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+
+        May be overridden.
+
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Since Linux 6.12.9, SO_REUSEPORT is not allowed
+        # on other address families than AF_INET/AF_INET6.
+        if (
+            self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT")
+            and self.address_family in (socket.AF_INET, socket.AF_INET6)
+        ):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:478: PermissionError
+__ ERROR at setup of TestTheServer.test_there_is_no_route_that_serves_a_file ___
+
+    @pytest.fixture
+    def running_server():
+>       server = build_server("127.0.0.1", 0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_upload_server.py:254:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/upload_server.py:382: in build_server
+    return ThreadingHTTPServer((host, port), handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:457: in __init__
+    self.server_bind()
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/server.py:140: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <http.server.ThreadingHTTPServer object at 0x130e7aa50>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+
+        May be overridden.
+
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Since Linux 6.12.9, SO_REUSEPORT is not allowed
+        # on other address families than AF_INET/AF_INET6.
+        if (
+            self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT")
+            and self.address_family in (socket.AF_INET, socket.AF_INET6)
+        ):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:478: PermissionError
+_ ERROR at setup of TestTheServer.test_a_post_that_is_not_a_clip_gives_an_error_and_not_a_report _
+
+    @pytest.fixture
+    def running_server():
+>       server = build_server("127.0.0.1", 0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_upload_server.py:254:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/upload_server.py:382: in build_server
+    return ThreadingHTTPServer((host, port), handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:457: in __init__
+    self.server_bind()
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/server.py:140: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <http.server.ThreadingHTTPServer object at 0x130e7ac30>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+
+        May be overridden.
+
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Since Linux 6.12.9, SO_REUSEPORT is not allowed
+        # on other address families than AF_INET/AF_INET6.
+        if (
+            self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT")
+            and self.address_family in (socket.AF_INET, socket.AF_INET6)
+        ):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:478: PermissionError
+_ ERROR at setup of TestTheServer.test_something_that_cannot_be_measured_is_never_called_safe _
+
+    @pytest.fixture
+    def running_server():
+>       server = build_server("127.0.0.1", 0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_upload_server.py:254:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/upload_server.py:382: in build_server
+    return ThreadingHTTPServer((host, port), handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:457: in __init__
+    self.server_bind()
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/server.py:140: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <http.server.ThreadingHTTPServer object at 0x115646030>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+
+        May be overridden.
+
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Since Linux 6.12.9, SO_REUSEPORT is not allowed
+        # on other address families than AF_INET/AF_INET6.
+        if (
+            self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT")
+            and self.address_family in (socket.AF_INET, socket.AF_INET6)
+        ):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:478: PermissionError
+_ ERROR at setup of TestTheServer.test_a_clip_that_is_too_big_never_touches_the_disk _
+
+    @pytest.fixture
+    def running_server():
+>       server = build_server("127.0.0.1", 0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_upload_server.py:254:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/upload_server.py:382: in build_server
+    return ThreadingHTTPServer((host, port), handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:457: in __init__
+    self.server_bind()
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/server.py:140: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <http.server.ThreadingHTTPServer object at 0x115644a70>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+
+        May be overridden.
+
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Since Linux 6.12.9, SO_REUSEPORT is not allowed
+        # on other address families than AF_INET/AF_INET6.
+        if (
+            self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT")
+            and self.address_family in (socket.AF_INET, socket.AF_INET6)
+        ):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:478: PermissionError
+_ ERROR at setup of TestAMeasuredClip.test_a_calm_clip_comes_back_as_a_self_contained_report _
+
+    @pytest.fixture
+    def running_server():
+>       server = build_server("127.0.0.1", 0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_upload_server.py:254:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/upload_server.py:382: in build_server
+    return ThreadingHTTPServer((host, port), handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:457: in __init__
+    self.server_bind()
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/server.py:140: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <http.server.ThreadingHTTPServer object at 0x130e7bcb0>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+
+        May be overridden.
+
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Since Linux 6.12.9, SO_REUSEPORT is not allowed
+        # on other address families than AF_INET/AF_INET6.
+        if (
+            self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT")
+            and self.address_family in (socket.AF_INET, socket.AF_INET6)
+        ):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:478: PermissionError
+_ ERROR at setup of TestAMeasuredClip.test_the_uploaded_clip_is_gone_before_the_answer_arrives _
+
+    @pytest.fixture
+    def running_server():
+>       server = build_server("127.0.0.1", 0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_upload_server.py:254:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/upload_server.py:382: in build_server
+    return ThreadingHTTPServer((host, port), handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:457: in __init__
+    self.server_bind()
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/server.py:140: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <http.server.ThreadingHTTPServer object at 0x1156460c0>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+
+        May be overridden.
+
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Since Linux 6.12.9, SO_REUSEPORT is not allowed
+        # on other address families than AF_INET/AF_INET6.
+        if (
+            self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT")
+            and self.address_family in (socket.AF_INET, socket.AF_INET6)
+        ):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:478: PermissionError
+_ ERROR at setup of TestAMeasuredClip.test_a_clip_that_could_not_be_measured_is_deleted_too _
+
+    @pytest.fixture
+    def running_server():
+>       server = build_server("127.0.0.1", 0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pipeline/tests/test_upload_server.py:254:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+pipeline/upload_server.py:382: in build_server
+    return ThreadingHTTPServer((host, port), handler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:457: in __init__
+    self.server_bind()
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/server.py:140: in server_bind
+    socketserver.TCPServer.server_bind(self)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <http.server.ThreadingHTTPServer object at 0x130ec7230>
+
+    def server_bind(self):
+        """Called by constructor to bind the socket.
+
+        May be overridden.
+
+        """
+        if self.allow_reuse_address and hasattr(socket, "SO_REUSEADDR"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Since Linux 6.12.9, SO_REUSEPORT is not allowed
+        # on other address families than AF_INET/AF_INET6.
+        if (
+            self.allow_reuse_port and hasattr(socket, "SO_REUSEPORT")
+            and self.address_family in (socket.AF_INET, socket.AF_INET6)
+        ):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+>       self.socket.bind(self.server_address)
+E       PermissionError: [Errno 1] Operation not permitted
+
+../../../../../.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socketserver.py:478: PermissionError
+================================ tests coverage ================================
+______________ coverage: platform darwin, python 3.12.13-final-0 _______________
+
+Name                                Stmts   Miss  Cover
+-------------------------------------------------------
+flashmap/src/flashmap/__main__.py       3      3     0%
+flashmap/src/flashmap/analyze.py      354      7    98%
+flashmap/src/flashmap/area.py          43      1    98%
+flashmap/src/flashmap/ci.py            95      4    96%
+flashmap/src/flashmap/cli.py          198     29    85%
+flashmap/src/flashmap/decode.py       216     14    94%
+flashmap/src/flashmap/flash.py         85      2    98%
+flashmap/src/flashmap/pattern.py      386     18    95%
+flashmap/src/flashmap/picture.py      112      6    95%
+flashmap/src/flashmap/pngout.py        22      1    95%
+flashmap/src/flashmap/profiles.py      56      2    96%
+flashmap/src/flashmap/report.py       410     39    90%
+flashmap/src/flashmap/sidecar.py      133      3    98%
+flashmap/src/flashmap/signing.py       36      2    94%
+pipeline/ambient.py                    99     20    80%
+pipeline/ambient_export.py             89      8    91%
+pipeline/bif.py                       119      7    94%
+pipeline/catalog.py                    77      3    96%
+pipeline/edition_delivery.py          215     18    92%
+pipeline/evidence_summary.py          161     29    82%
+pipeline/ffmpegtool.py                 68      9    87%
+pipeline/flashmap_adapter.py          230      9    96%
+pipeline/hideplan.py                  170      2    99%
+pipeline/ingest.py                    310     39    87%
+pipeline/layout.py                     70      2    97%
+pipeline/local_intake.py              428    109    75%
+pipeline/local_library.py             269     39    86%
+pipeline/package_delivery.py          133     36    73%
+pipeline/packaged_library.py          521     47    91%
+pipeline/posters.py                   120      6    95%
+pipeline/probe.py                     138     21    85%
+pipeline/registry.py                  277     47    83%
+pipeline/render.py                    255     12    95%
+pipeline/sceneholds.py                197     24    88%
+pipeline/state.py                      80      6    92%
+pipeline/upload_server.py             192     90    53%
+pipeline/verify.py                    509     49    90%
+-------------------------------------------------------
+TOTAL                                7061    763    89%
+
+6 files skipped due to complete coverage.
+Coverage JSON written to file /tmp/calm-proof-python-coverage.json
+FAIL Required test coverage of 90.0% not reached. Total coverage: 89.19%
+=========================== short test summary info ============================
+ERROR flashmap/tests/test_upload_server.py::TestTheServer::test_the_page_is_there
+ERROR flashmap/tests/test_upload_server.py::TestTheServer::test_the_aws_button_is_refused
+ERROR flashmap/tests/test_upload_server.py::TestTheServer::test_there_is_no_route_that_serves_a_file
+ERROR flashmap/tests/test_upload_server.py::TestTheServer::test_a_post_that_is_not_a_clip_gives_an_error_and_not_a_report
+ERROR flashmap/tests/test_upload_server.py::TestTheServer::test_something_that_cannot_be_measured_is_never_called_safe
+ERROR flashmap/tests/test_upload_server.py::TestTheServer::test_a_clip_that_is_too_big_never_touches_the_disk
+ERROR flashmap/tests/test_upload_server.py::TestAMeasuredClip::test_a_calm_clip_comes_back_as_a_self_contained_report
+ERROR flashmap/tests/test_upload_server.py::TestAMeasuredClip::test_the_uploaded_clip_is_gone_before_the_answer_arrives
+ERROR flashmap/tests/test_upload_server.py::TestAMeasuredClip::test_a_clip_that_could_not_be_measured_is_deleted_too
+1963 passed, 2 deselected, 9 errors in 581.60s (0:09:41)

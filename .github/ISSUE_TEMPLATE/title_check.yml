@@ -1,0 +1,71 @@
+name: Title check or analyzer question
+description: Ask for a title to be run through flashmap, or ask how flashmap judged one.
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.
+        A flashmap result is a measurement against the published limits, not medical advice, and it does not say a
+        video is safe for any one person.
+
+        **Do not attach the video or a clip of it, and never watch flashing content to check a result.** Give the
+        source page and the file's SHA-256. If you ran flashmap yourself, paste the command and its output, or attach
+        the report page that `python -m flashmap report` writes, which never shows a frame of the film.
+
+        Checking a title here means running flashmap on it. It does not add the title to the app's library, which
+        changes only with a new build.
+  - type: dropdown
+    id: ask
+    attributes:
+      label: What you need
+      options:
+        - Run a title through flashmap
+        - Explain why a title passed or failed
+        - Explain how a rule or a threshold works
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: The title and its source page
+      description: The name, and the page you got it from.
+  - type: input
+    id: licence
+    attributes:
+      label: Its licence
+      description: The licence and the credit line, as the source page states them. A title is only run once its licence is confirmed on that page.
+  - type: input
+    id: sha256
+    attributes:
+      label: SHA-256 of the file
+      description: "`shasum -a 256 FILE` or `sha256sum FILE`"
+  - type: dropdown
+    id: profile
+    attributes:
+      label: Profile
+      description: The rule set flashmap measured against, if you know it.
+      options:
+        - wcag
+        - broadcast
+        - Not sure
+  - type: textarea
+    id: output
+    attributes:
+      label: What you ran and what came back
+      description: The command and its output, as text.
+      render: shell
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety
+      options:
+        - label: I have not attached or linked the video or any flashing media, and I did not watch flashing content to check this.
+          required: true

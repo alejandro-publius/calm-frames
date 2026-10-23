@@ -1,0 +1,12 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false --testPathPattern=compositionExport
+
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mtest/calmframes/[22m[1mcompositionExport720.test.tsx[22m
+[0m[7m[1m[32m PASS [39m[22m[27m[0m [2mtest/calmframes/[22m[1mcompositionExport1080.test.tsx[22m
+
+[1mTest Suites: [22m[1m[32m2 passed[39m[22m, 2 total
+[1mTests:       [22m[1m[32m2 passed[39m[22m, 2 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        1.229 s, estimated 2 s
+[2mRan all test suites[22m[2m matching [22m/compositionExport/i[2m.[22m

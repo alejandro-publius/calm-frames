@@ -23,6 +23,8 @@ interface TextTrack {
 
 export interface TitleData extends MediaItem {
   title: string;
+  /** Decorative opening scenery only; cannot authorize media or a cover. */
+  calmMenuArt?: string;
   uri: string;
   categories: string[];
   channelID: string;

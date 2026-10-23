@@ -1,0 +1,18 @@
+{
+  "checks": [
+    "Details More info opens at Back; updated explanation is in installed source",
+    "More info Back and Details Back restore their openers",
+    "Home How it works opens at Back; updated explanation is in installed source",
+    "How it works Back restores its opener",
+    "Parents cancel restores Parents without PIN entry",
+    "App returned to Home Watch"
+  ],
+  "capture_used": false,
+  "media_played": false,
+  "collector_pid": 50675,
+  "initial_focus_trace_missing": true,
+  "result": "completed",
+  "collector_stopped": true,
+  "last_reported_focus": "kid-mode-home-watch",
+  "native_visual_audio_acceptance": false
+}

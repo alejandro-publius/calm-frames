@@ -1,0 +1,94 @@
+{
+  "status": "Reviewed candidate built and ready for one native preview. Native access blocked by locked Mac; no install or launch attempted.",
+  "source_commit": "2d9520605459f78c30d1610c3ca2364eefa60fe1",
+  "app_inputs_committed": true,
+  "branch": "codex/design-integration-2026-10-14",
+  "previous_source": "aa8dea17c7d5814134f1ec560ba31b8525229d1e",
+  "previous_evidence": "5365f0c66ea9fdb18ab45d1a79b8be01160af9a0",
+  "corrections": [
+    "Opening Back and returning copy is destination-neutral; retained home/details stack and focus logic unchanged, with both callers tested.",
+    "Solid-surface UI inventory includes the new ripple surface and correct paint order; offline profiles have a distinct frame."
+  ],
+  "package": {
+    "path": "/Users/alexvintera/Documents/Codex/2026-10-13/task/calm-frames-home/build/release/design-integration-reviewed-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "sha256": "67456e33500a873c5290c1ebba2523fa8797366eccb09e9ee7dea18fe5ed7b3f",
+    "bytes": 21577108,
+    "target": "aarch64 Debug"
+  },
+  "full_app_regression": {
+    "source_commit": "5365f0c66ea9fdb18ab45d1a79b8be01160af9a0",
+    "same_app_inputs_as_package_source": "aa8dea17c7d5814134f1ec560ba31b8525229d1e",
+    "runs": 1,
+    "passed": 1203,
+    "failed": 6,
+    "skipped": 4,
+    "snapshots_passed": 57,
+    "failing_suite": "test/calmframes/uiCapture.test.tsx",
+    "failure_cause": "Stale declared surface colours and paint order after accepted home/loading design changes.",
+    "command": "npm --prefix app test -- --runInBand --coverage=false --watchman=false",
+    "log": "full-app-regression.txt"
+  },
+  "focused_fix_validation": {
+    "passed": 36,
+    "failed": 0,
+    "suites": [
+      "test/calmframes/playerOpening.test.tsx",
+      "test/screens/KidModeScreen.test.tsx",
+      "test/calmframes/uiCapture.test.tsx"
+    ],
+    "typecheck": "passed",
+    "lint": "passed with --max-warnings=0",
+    "ui_flashmap": "36 declared solid-surface states/transitions passed WCAG and broadcast profiles; not pixel or motion evidence.",
+    "full_suite_rerun": false,
+    "logs": [
+      "review-fixes-final.txt",
+      "review-typecheck.txt",
+      "review-lint.txt",
+      "review-ui-flashmap.txt"
+    ]
+  },
+  "claude_loading_review": "claude-loading-review.json",
+  "native_blocker": {
+    "action": "cua.listApps() before selecting or manipulating simulator",
+    "target": "Connected Mac native app inventory",
+    "result": "The Mac is locked and automatic unlock could not unlock it. Ask the user to unlock the Mac manually before continuing.",
+    "state": "blocked before UI interaction; no install or relaunch",
+    "required_user_action": "Unlock the Mac manually.",
+    "completed_independent_work": [
+      "Reviewed corrections, tests, updated preview, exact-source package, Claude branch review and GitHub artifact checks."
+    ]
+  },
+  "demo_plan": "demo-plan.json",
+  "native_task": "codex://threads/01a138bb-a422-7746-9293-caf676f250f3",
+  "preview_kind": "Headless browser rendering of actual React Native host tree. Not native screenshots.",
+  "previews": [
+    {
+      "path": "home-browser.png",
+      "sha256": "6143e0c4073b91a210311e03a80db2b5f5de1967441e6d2028b66954c9e30682"
+    },
+    {
+      "path": "how-it-works-browser.png",
+      "sha256": "80254dae7bf97af9b6007d7a360681659e722733a1d1c831fd748fcd83786ae1"
+    },
+    {
+      "path": "loading-browser.png",
+      "sha256": "6bad0a5116c28f98fc1369b3fbbcc6a02b6cba72810357c30dc49e48c8d08426"
+    },
+    {
+      "path": "opening-browser.png",
+      "sha256": "886bfca18eaf7c1e0442a9826071cbda73730a692ef649db734f8c019e8f39e7"
+    }
+  ],
+  "github_delivery": {
+    "previous_artifacts_verified": "github-fetch-check.json",
+    "method": "Authenticated GitHub git/blob base64 fetch, compared to local bytes. Raw-media endpoint returned a decoding error, so blob API was used.",
+    "updated_artifacts": "Committed alongside this receipt; normal GitHub blob links require repository access."
+  },
+  "preserved": [
+    "Prior build/release/design-integration-2026-10-14 package remains intact.",
+    "Original Harbor film, signed timing, household persistence and PIN unchanged.",
+    "No writes in Claude worktree; no loading patch or picture-break prototype merged.",
+    "No main/shared branch updates, deployment, publication or Terminal UI interaction."
+  ],
+  "build_command": "source /Users/alexvintera/vega/env; PATH=$PWD/.logs/home-introduction-2026-10-14/build-bin:/Users/alexvintera/.local/share/fnm/node-versions/v22.23.2/installation/bin:$PATH JAVA_HOME=/opt/homebrew/opt/openjdk@21 RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag design-integration-reviewed-2026-10-14"
+}

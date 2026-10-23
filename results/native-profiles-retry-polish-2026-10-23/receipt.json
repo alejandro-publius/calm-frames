@@ -1,0 +1,147 @@
+{
+  "date_utc": "2026-10-23T05:29:09.771591+00:00",
+  "production_source": "bd55e470b895aa9e8b7ef8a843f0a742fce3611b",
+  "profile_acceptance_source": "4b04877f60101b33fc2e93e1e56413bcd165b051",
+  "harness_source": "84faeed7dee851c713f75faaff2f8522a961d609",
+  "harness_base": "e9a0e22e25c734938f3b6c7a7eb884414db48786",
+  "harness_not_for_merge": true,
+  "installed_package": {
+    "path": "build/release/native-coastal-polish-20261023/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "bytes": 132597849,
+    "sha256": "4d229b6fd9c2a1ab61aa22eb996a673243da367db66035cb7f640bf70214e8a7"
+  },
+  "rollback": {
+    "path": "build/release/native-onboarding-footer-20261023/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "bytes": 132597309,
+    "sha256": "2bfac62fe2bd992186dd5d948a18b47dc5392f5e003c1cc49280be2476963101"
+  },
+  "harness_package": {
+    "path": "/Users/alexvintera/Documents/Codex/2026-10-20/task/calm-frames-native-retry-harness/build/release/native-retry-focus-20261023/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "bytes": 132600867,
+    "sha256": "d6a0e750ad9c24cede8270a51e5800000b16b2884d4e92f6d685d8d7c71c2c44"
+  },
+  "installed_sha384": "d83f66440a782a481b027d4d6d052c9cef3fd0c9a73efef22cb07f21fd4f5889053b8890ad35a69e22d8d3aa4405977e",
+  "device_sha384_matched": true,
+  "capture_denial_resolved": "Single supported retry accepted after parent supplied explicit scoped approval and completion of private setup. No PIN capture.",
+  "observed": [
+    "Production installation preserved Kid and Kid 2; chooser exposed both.",
+    "Kid saved McWay at 0:57. Kid 2 opened without inheriting Resume, saved 0:24. Switching back to Kid still offered 0:57.",
+    "No parental settings or PIN were read or changed; both profiles used the existing approved consumer route.",
+    "Test build: explicit benign failure became remote reachable after test-only preferred-focus/select-ownership correction. Failure paused real decoder and displayed covered Playback stopped with Try again.",
+    "Test build: first explicit Try again returned to a ready error screen; second explicit Try again opened recovery and showed native clock 2:03 through 2:10. Later paused state was visible; Play/Pause resumed picture at 2:15. This is not an uninterrupted capture or a claim about spontaneous SDK errors.",
+    "Test build: Back returned away from playback; final six seconds of the 12.801667s scoped recording measured silence at -91 dB mean/max.",
+    "Production 4b04877 restored and verified before applying polish. Final production bd55e47 installed and verified, harness marker absent.",
+    "Final production native chooser immediately focuses checked Kid; Right/OK selects Kid 2, closes chooser and focuses header. Switching back restores Kid. McWay Details shows shortened synopsis; Back returns Home."
+  ],
+  "checks": {
+    "polish_focused_jest": 94,
+    "polish_typescript": "pass",
+    "polish_eslint": "zero errors/warnings",
+    "polish_native_build": "pass",
+    "harness_focus_jest": 4,
+    "harness_typescript": "pass",
+    "harness_eslint": "zero errors, two test-only inline-style warnings",
+    "harness_build": "pass",
+    "namespace_bytes": 129255687,
+    "namespace_limit_bytes": 134217728,
+    "media_signatures_provenance": "unchanged; release checks pass"
+  },
+  "limits": [
+    "Package-filtered app diagnostics returned no useful events; no broad log collection substituted. Exact decoder-release callback ordering is therefore inferred from the guarded production code path, not independently timestamped in this pass.",
+    "Requested 40s recording contains 14.573333s, and requested 30s contains 22.404626s. A still capture was entirely black including remote controls. Capture gaps prevent exhaustive compositor ordering proof.",
+    "Native first-run footer was not revisited after setup: no reset or PIN bypass performed. Structural regression/build passed; new profile/Details UI observed.",
+    "Differential stricter profile setting was not changed under Parents; position isolation is observed, preset-floor invariants retain automated evidence.",
+    "McWay has no caption track. Caption-track restoration is not applicable to this consumer title; no new caption fixture was introduced.",
+    "Human listening/comfort/palette/full-demo acceptance remains pending. Hosted CI remains separate and no network settings were changed."
+  ],
+  "screens": [
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/11-profile-choice.png",
+      "bytes": 266515,
+      "sha256": "50d04fc97a2fd4d981335e7374e0cdcc54b5df048640ef1d784f45550f2de4c6"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/17-kid2-resume.png",
+      "bytes": 259457,
+      "sha256": "7234d03696329e033ec090abe76aaa63cfbcee94090835e64dd9ef040b33350d"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/22-kid-isolated.png",
+      "bytes": 259455,
+      "sha256": "0908a2bd2694ce22d076eb45559b97c16ba783c25c4dd2f4b13c2f3ba78e15c6"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/30-probe-focused.png",
+      "bytes": 1640424,
+      "sha256": "a324a85a7aa148bec7c4c41b8707e3a2d75da9679f69b8c4b903fe4f992f255f"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/31-probe-error.png",
+      "bytes": 142691,
+      "sha256": "dd2d5fae2cf0b56fb75761dc7d75344a1b32cd3f7cfc258a2f488c7a559f8705"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/33-retry-ready.png",
+      "bytes": 144262,
+      "sha256": "057e86636588efd5e174ea0b868dcc7beac8c388fedb74adfb24f9bf85128fb1"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/35-retry-playing.png",
+      "bytes": 1677501,
+      "sha256": "928122153a88ac7374971305afd6dd104d27b78c2391d2f8586ff5ff3a4602e3"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/37-polish-picker.png",
+      "bytes": 256366,
+      "sha256": "39356b75d9a33034894ace30b4634f27f0e2756407d5a7812d1ec35aa8e69d2f"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/38-polish-selected.png",
+      "bytes": 535449,
+      "sha256": "f227ae747d44691ae0e04cd11de51db268386edacb555e35a7c81835d76321b4"
+    },
+    {
+      "path": "results/native-profiles-retry-polish-2026-10-23/40-polish-details.png",
+      "bytes": 476776,
+      "sha256": "f85b31d3f142d15149bccf07b07bbc20991f76ed829cb95f117e2bfa11baba5f"
+    }
+  ],
+  "local_recordings": [
+    {
+      "path": ".logs/native-profiles-retry-2026-10-23/retry-native-40s.mp4",
+      "bytes": 10174647,
+      "sha256": "a4c779cbdaef8a6407db613ea597bc4c8216f244e698a733ff4f5364839f058d",
+      "probe": {
+        "format": {
+          "duration": "14.573333",
+          "size": "10174647"
+        }
+      }
+    },
+    {
+      "path": ".logs/native-profiles-retry-2026-10-23/retry-recovery-30s.mp4",
+      "bytes": 8707426,
+      "sha256": "f109af7e6ac218687ec15eb297bc491dba39ed596813724a9b1d5010c2292d33",
+      "probe": {
+        "format": {
+          "duration": "22.404626",
+          "size": "8707426"
+        }
+      }
+    },
+    {
+      "path": ".logs/native-profiles-retry-2026-10-23/retry-back-12s.mp4",
+      "bytes": 1221582,
+      "sha256": "b849c1c4661388a523175b131f38815012c460be556a29e8e68a35d63f2a03af",
+      "probe": {
+        "format": {
+          "duration": "12.801667",
+          "size": "1221582"
+        }
+      }
+    }
+  ],
+  "publication": "none",
+  "final_screen": "Home, Kid active",
+  "data_reset": false
+}

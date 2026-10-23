@@ -1,0 +1,22 @@
+{
+  "checks": [
+    {
+      "check": "Pause/resume during first cover",
+      "evidence": "pause then playing and first cover-off events; inspect timing samples for exact pause duration"
+    },
+    {
+      "check": "Activate Skip during second cover",
+      "evidence": "Skip focused; Enter caused guarded playhead-write, seeked and cover-off"
+    },
+    {
+      "check": "End-of-video return",
+      "evidence": "Native ended -> existing teardown -> Home Watch without presentation delay"
+    },
+    {
+      "check": "Manual Back during playback",
+      "evidence": "Returned Home Watch before video ended"
+    }
+  ],
+  "pause_observed": true,
+  "result": "completed"
+}

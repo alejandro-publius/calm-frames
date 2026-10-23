@@ -1,40 +1,14 @@
-/**
- * Who is watching.
- *
- * One row of large targets, used in two places: on the shelf so a kid can say
- * it is them, and in the parent area so a grown up can pick whose settings and
- * whose record they are looking at.
- *
- * The rules it follows are the ones every control in this app follows. Chosen
- * is a fill and a word, focus is the ring, and the two stack rather than
- * fighting: a chosen profile that also has focus shows the chosen fill inside
- * the focus ring, so nobody has to tell two shades of the same colour apart
- * from the sofa. Nothing moves when focus moves, because the border is the
- * same width in both states.
- *
- * Nothing moves when the choice moves either, and that took a change. The word
- * used to sit on the chosen chip, in brackets, which made that chip wider than
- * it was a moment earlier and slid every chip after it along the row. So the
- * chip carries the name and only the name, and the answer is a sentence under
- * the row where its length costs nobody anything. Every chip now renders the
- * same text whoever is chosen, and the test for that is the guard against the
- * word creeping back onto the chip.
- *
- * The chips are a radio group and say so, because a row of five things where
- * exactly one is true is a radio group whether or not it is built from radio
- * buttons, and a screen reader that is told this reads the row as one question
- * rather than five unrelated buttons.
- *
- * The name is the only thing on a chip. What a profile is set to belongs in
- * the parent area, not on a shelf a child is reading.
- */
+/** Shared profile choices: stable checkmark, radio semantics and visible focus. */
 
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { WorldAppearance, WORLD } from './CoastalWorld';
+import TouchableOpacity from './CalmTouchable';
+import { StyleSheet, Text, View } from 'react-native';
 import {
-  CALM_COLORS,
+  CALM_CONTROL,
+  COASTAL_COLORS as CALM_COLORS,
   CALM_SPACE,
-  CALM_TYPE,
+  CALM_TEXT,
   FOCUS_RING_WIDTH,
   scale,
 } from './calmStyles';
@@ -47,22 +21,20 @@ export interface ProfilePickerProps {
   onChoose: (profile: Profile) => void;
   /** The line above the row. The question. */
   title: string;
-  /**
-   * The line under the row. The answer, as a whole sentence.
-   *
-   * Required rather than optional: a picker whose answer is only a fill is the
-   * thing this component exists not to be.
-   */
-  chosenLine: string;
+  /** Legacy caller context; selected state is conveyed by the chip itself. */
+  chosenLine?: string;
+  /** Move focus into a newly opened chooser, without stealing settings focus. */
+  focusActive?: boolean;
   /**
    * The state word a screen reader hears on the chosen chip.
    *
-   * The shelf says watching, because that is what the row is asking. The
-   * parent area says showing, because nobody is watching a settings page and
-   * what the chip does there is decide what the screen below it shows.
+   * The shelf says watching, because that is what the row is asking. Parental
+   * controls say showing, because nobody is watching a settings page and what
+   * the chip does there is decide what the page below it shows.
    */
   chosenWord?: string;
   testID?: string;
+  disabled?: boolean;
 }
 
 const ProfilePicker = ({
@@ -70,10 +42,12 @@ const ProfilePicker = ({
   activeProfileId,
   onChoose,
   title,
-  chosenLine,
+  focusActive = false,
   chosenWord = 'watching',
   testID = 'profile-picker',
+  disabled = false,
 }: ProfilePickerProps) => {
+  const styles = React.useContext(WorldAppearance) ? worldStyles : darkStyles;
   const [focusedId, setFocusedId] = React.useState<string | null>(null);
 
   return (
@@ -99,64 +73,78 @@ const ProfilePicker = ({
               accessibilityRole="radio"
               // checked is what a radio carries. selected stays beside it
               // because the rest of the app reads that way today.
-              accessibilityState={{ checked: chosen, selected: chosen }}
+              // Keep the chip in the remote focus order while its choice is
+              // being saved, as the PIN keypad does for a pending attempt.
+              accessibilityState={{ checked: chosen, selected: chosen, ...(disabled ? { disabled: true } : {}) }}
               accessibilityLabel={`${profile.name}${chosen ? `, ${chosenWord}` : ''}`}
+              hasTVPreferredFocus={focusActive && chosen}
               activeOpacity={1}
               onFocus={() => setFocusedId(profile.id)}
               onBlur={() => setFocusedId(null)}
-              onPress={() => onChoose(profile)}
+              onPress={() => {
+                if (!disabled) {
+                  onChoose(profile);
+                }
+              }}
               style={[
                 styles.chip,
                 chosen ? styles.chipChosen : null,
                 focused ? styles.chipFocused : null,
               ]}>
-              <Text style={styles.name} testID={`${testID}-${profile.id}-name`}>
+              <Text accessible={false} style={styles.selectionMark}>{chosen ? '✓' : ''}</Text>
+              <Text style={[styles.name, focused ? styles.focusedLabel : null]} testID={`${testID}-${profile.id}-name`}>
                 {profile.name}
               </Text>
             </TouchableOpacity>
           );
         })}
       </View>
-      <Text style={styles.chosenLine} testID={`${testID}-chosen`}>
-        {chosenLine}
-      </Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const makeStyles = (colors: Record<keyof typeof CALM_COLORS, string>) => StyleSheet.create({
+  focusedLabel: { textDecorationLine: 'underline' },
   block: { marginBottom: scale(CALM_SPACE.BLOCK) },
   title: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.SECTION),
-    fontWeight: '600',
-    marginBottom: scale(CALM_SPACE.TIGHT),
+    ...CALM_TEXT.section,
+    color: colors.TEXT,
+    marginBottom: scale(CALM_SPACE.ROW),
   },
   row: { flexDirection: 'row', flexWrap: 'wrap' },
+  /** Quiet at rest: the ring is there, in the card's own colour. */
+  selectionMark: { ...CALM_TEXT.supporting, color: colors.TEXT, width: scale(42) },
   chip: {
+    flexDirection: 'row', alignItems: 'center',
     marginRight: scale(CALM_SPACE.ROW),
-    marginBottom: scale(CALM_SPACE.TIGHT),
+    marginBottom: scale(CALM_SPACE.ROW),
     paddingVertical: scale(CALM_SPACE.TIGHT),
-    paddingHorizontal: scale(CALM_SPACE.ROW),
-    borderRadius: scale(12),
+    paddingHorizontal: scale(CALM_SPACE.BLOCK),
+    borderRadius: scale(CALM_CONTROL.RADIUS),
     borderWidth: scale(FOCUS_RING_WIDTH),
-    borderColor: CALM_COLORS.BORDER,
-    backgroundColor: CALM_COLORS.SURFACE,
+    borderColor: colors.SURFACE,
+    backgroundColor: colors.SURFACE,
   },
   /** Chosen is a fill and a word. Focus is the ring. They stack. */
-  chipChosen: { backgroundColor: CALM_COLORS.SURFACE_FOCUSED },
-  chipFocused: { borderColor: CALM_COLORS.FOCUS_RING },
+  chipChosen: {
+    borderColor: colors.SURFACE_FOCUSED,
+    backgroundColor: colors.SURFACE_FOCUSED,
+  },
+  chipFocused: {
+    borderColor: colors.FOCUS_RING,
+    backgroundColor: colors.SURFACE_FOCUSED,
+  },
   name: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    fontWeight: '600',
+    ...CALM_TEXT.control,
+    color: colors.TEXT,
   },
   /** The word half of "a fill and a word", where it cannot move a control. */
   chosenLine: {
-    color: CALM_COLORS.TEXT,
-    fontSize: scale(CALM_TYPE.BODY),
-    marginTop: scale(CALM_SPACE.TIGHT),
+    ...CALM_TEXT.body,
+    color: colors.TEXT,
   },
 });
 
+const darkStyles = makeStyles(CALM_COLORS);
+const worldStyles = makeStyles({ ...CALM_COLORS, ...WORLD });
 export default ProfilePicker;

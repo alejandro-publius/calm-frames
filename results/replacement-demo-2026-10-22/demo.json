@@ -1,0 +1,70 @@
+{
+  "file": "calm-frames-replacement-demo.mp4",
+  "sha256": "dde2ba357cf769c42eda519591aaf235e06fd487eb61f1d1d59548f4d703df92",
+  "bytes": 49643080,
+  "seconds": 169.21,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30.0,
+  "video_codec": "h264",
+  "kept_outside_the_repository": "the MP4 and the takes are in the release package beside the handoff, not in git",
+  "built_from": {
+    "source_commit": "d96c0886227f7dcfc5ae6584132a86b193359215",
+    "package_sha256": "6914d157c76a0478588f63e222525754f1202990481e313b4e72422c93759090",
+    "takes": {
+      "takeA.mp4": "7d13566964c73d7cae6ac08c078ae3f7f5cbbdfb1e2f517e17e2bd05f5ad16fc",
+      "takeB.mp4": "7cd853c22102eb3a5c62a38d034a85dad3946088c49b12e0535bcb1e87cfefbf"
+    }
+  },
+  "uncut_playback": {
+    "window": "0:10.2-1:28.2",
+    "seconds": 78.0,
+    "plus_fade_seconds": 1.0
+  },
+  "continuity": {
+    "windows": [
+      "0:10.25-0:15.5 controls shown",
+      "0:15.5-0:21.7 caption area cropped out",
+      "0:21.7-1:28.0"
+    ],
+    "aligned_y_psnr_db": [
+      50.2,
+      50.1,
+      50.1
+    ],
+    "aligned_minimum_db": [
+      50.1,
+      50.3,
+      46.7
+    ],
+    "frames_compared_longest_window": 1989,
+    "aligned_best_match_frames": 1935,
+    "method": "output against the source take through the same crop, scale and frame rate, and against the source shifted by one and two frames"
+  },
+  "video_gate": {
+    "verdict": "pass",
+    "profile": "wcag",
+    "segments_over_threshold": 0,
+    "duration_limit_s": 180,
+    "record": "results/replacement-demo-2026-10-22/video_check.json"
+  },
+  "decode_errors": 0,
+  "audio": {
+    "integrated_lufs": -18.8,
+    "loudness_range_lu": 6.5,
+    "true_peak_dbfs": -3.6,
+    "uniform_gain_db": 7,
+    "listened_to": false
+  },
+  "captions": 10,
+  "labels_on_screen": [
+    "recorded from the app window with app audio only",
+    "uncut until the next title card",
+    "same app session, about a minute later; pauses between presses shortened",
+    "developer terminal, rendered from its saved log, not the TV app"
+  ],
+  "not_established": [
+    "Nobody has listened to the audio or watched the file in real time; the review was frame sampling.",
+    "The owner's acceptance of the palette, pacing and audio is still open."
+  ]
+}

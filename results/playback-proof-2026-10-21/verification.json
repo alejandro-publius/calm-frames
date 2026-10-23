@@ -1,0 +1,59 @@
+{
+  "checkedAtUtc": "2026-10-21T23:13:56.401867+00:00",
+  "baseline": "4e01b4b5fa18be6ecaad1475a1078279bb1aa81d",
+  "docsCommit": "bf2f615",
+  "branch": "codex/playback-proof-2026-10-21",
+  "scope": "Read-only proof summary compiler and existing Details UI; no media, signer, runtime guard or simulator changes",
+  "proofRecords": 12,
+  "generatedModuleSha256": "545ca34109a14652922fb9962179b9eb2081429e75be1c3227419ba25975735d",
+  "checks": {
+    "targetedJest": {
+      "passed": 43,
+      "failed": 0,
+      "suites": 4
+    },
+    "node": {
+      "passed": 86,
+      "failed": 0
+    },
+    "release": {
+      "passed": 53,
+      "failed": 0
+    },
+    "typecheck": {
+      "passed": true,
+      "command": "node node_modules/typescript/bin/tsc --noEmit --preserveSymlinks",
+      "note": "Uses existing installed dependencies via an ignored worktree symlink; default declaration inference reports external dependency paths."
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 108
+    },
+    "earlierFullJest": {
+      "passed": 1706,
+      "failed": 4,
+      "skipped": 4,
+      "snapshotsPassed": 54,
+      "snapshotsFailed": 3,
+      "note": "Before final additional adversarial tests. Four failures are shared-dependency path comparisons, not waived or snapshot-updated. Final changed logic passed targeted checks."
+    },
+    "baselinePathChecks": {
+      "passed": 29,
+      "failed": 0,
+      "snapshotsPassed": 3,
+      "note": "Same three failing suites pass in the existing baseline checkout with its own dependency paths."
+    },
+    "stagedSecretScan": "gitleaks: no leaks",
+    "stagedStyle": "passed"
+  },
+  "nativeBuildPerformed": false,
+  "nativeReviewPerformed": false,
+  "simulatorTouched": false,
+  "mediaChanged": false,
+  "aws": {
+    "stackStatus": "UPDATE_COMPLETE",
+    "lastUpdated": "2026-10-09T07:33:44.276000+00:00",
+    "deliveryRootHead": 403,
+    "scope": "Existing CloudFormation metadata and CDN root headers only. No ingestion, video download, provisioning or support request."
+  }
+}

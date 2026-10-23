@@ -1,0 +1,814 @@
+{
+  "tool": "eval/preparation_recovery.py",
+  "command": "python -m eval.preparation_recovery --code-root <checkout of the tested commit> --out results/preparation-recovery-2026-10-21/evidence-bf2f615.json",
+  "tested_commit": "bf2f615e6fad0d73442fe2b9acab3067bf311e7e",
+  "tested_tree_has_uncommitted_changes": false,
+  "harness_commit": "7ff4a373ad4320c091263a8ad3939215222cee1b",
+  "started_utc": "2026-10-22T02:16:05Z",
+  "finished_utc": "2026-10-22T02:17:29Z",
+  "seconds": 83.7,
+  "environment": {
+    "platform": "macOS-15.1.1-arm64-arm-64bit",
+    "python": "3.12.13",
+    "ffmpeg": "ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "fixture": {
+    "clip": "generated calm gradient with a sine tone (pipeline/tests/clips.py), never played",
+    "seconds": 5.0,
+    "width": 320,
+    "height": 180,
+    "fps": 30,
+    "analyzer_flagged_spans_ms": [
+      [
+        2000,
+        2500,
+        "general"
+      ]
+    ],
+    "presets": [
+      "wcag",
+      "broadcast",
+      "extra-cautious"
+    ],
+    "keys": "two Ed25519 pairs generated for this run and deleted with its directory"
+  },
+  "comparison": {
+    "compared": [
+      "ledger step fingerprints and output SHA-256",
+      "SHA-256 of every file in the title",
+      "verify report",
+      "receipt"
+    ],
+    "left_out_as_run_times": [
+      "ledger completed_at and the source's ingested_at",
+      "verify report started_at and finished_at",
+      "receipt checked_inputs_sha256 and report_sha256, which cover those files",
+      "lock files and temporary files"
+    ],
+    "real_analyzer_only": "maps are compared without created_utc and the signature value and payload hash computed over it, and step fingerprints, which chain those maps, are not compared"
+  },
+  "reference": {
+    "status": "ready",
+    "seconds": 1.89,
+    "steps": [
+      "analyze:broadcast",
+      "analyze:extra-cautious",
+      "analyze:wcag",
+      "bif:broadcast",
+      "bif:extra-cautious",
+      "bif:wcag",
+      "cover_model:broadcast",
+      "cover_model:extra-cautious",
+      "cover_model:wcag",
+      "luma",
+      "plan:broadcast",
+      "plan:extra-cautious",
+      "plan:wcag",
+      "posters:broadcast",
+      "posters:extra-cautious",
+      "posters:wcag",
+      "probe",
+      "rendition:broadcast",
+      "rendition:extra-cautious",
+      "rendition:wcag",
+      "signed_map:broadcast",
+      "signed_map:extra-cautious",
+      "signed_map:wcag",
+      "still",
+      "verify"
+    ],
+    "files_compared": 60,
+    "verification_outcome": "cover proven drawn"
+  },
+  "scenarios": [
+    {
+      "id": "no_op_restart",
+      "requirements": [
+        "unaffected cached work is reused"
+      ],
+      "procedure": "Run the same preparation again over the finished reference library.",
+      "expected": "Ready again, no step runs again, and the identity equals the reference.",
+      "observed": {
+        "status": "ready",
+        "steps_run_again": [],
+        "identity_differences": [],
+        "seconds": 0.1
+      },
+      "result": "pass",
+      "unmet": [],
+      "seconds": 0.1
+    },
+    {
+      "id": "sigkill_after_step_commit",
+      "requirements": [
+        "interruption after step commit",
+        "interruption before step commit",
+        "real subprocess kill and restart",
+        "unaffected cached work is reused"
+      ],
+      "procedure": "Prepare from nothing; the analyzer pauses inside the broadcast analysis after writing 300 bytes of its map, by which time the WCAG analysis has committed. SIGKILL the process group there, then run the same command again.",
+      "expected": "While killed the receipt is not ready and nothing is listed. The restart reuses the committed WCAG analysis, redoes the torn one, is ready, and its identity equals the reference.",
+      "observed": {
+        "kill": {
+          "signal": "SIGKILL",
+          "sent_to": "the whole process group",
+          "exit": -9,
+          "every_process_in_the_group_ended": true,
+          "after_s": 0.2
+        },
+        "committed_at_kill": [
+          "analyze:wcag",
+          "probe"
+        ],
+        "receipt_status_at_kill": "failed",
+        "listed_at_kill": 0,
+        "torn_analysis_map_bytes": {
+          "maps/broadcast.json": 300
+        },
+        "restart_status": "ready",
+        "steps_run_again": [
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "plan:wcag",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "luma",
+          "still",
+          "rendition:wcag",
+          "bif:wcag",
+          "posters:wcag",
+          "signed_map:wcag",
+          "cover_model:wcag",
+          "rendition:broadcast",
+          "bif:broadcast",
+          "posters:broadcast",
+          "signed_map:broadcast",
+          "cover_model:broadcast",
+          "rendition:extra-cautious",
+          "bif:extra-cautious",
+          "posters:extra-cautious",
+          "signed_map:extra-cautious",
+          "cover_model:extra-cautious",
+          "verify"
+        ],
+        "identity_differences": []
+      },
+      "result": "pass",
+      "unmet": [],
+      "seconds": 2.0
+    },
+    {
+      "id": "sigkill_before_step_commit_with_partial_output",
+      "requirements": [
+        "interruption before step commit",
+        "missing output",
+        "real subprocess kill and restart",
+        "invalidated work is regenerated"
+      ],
+      "procedure": "From the finished reference, delete the WCAG safe master so its rendition step has to run again. An ffmpeg wrapper writes half of the new master at the real path and stops; SIGKILL the process group there, then run the same command with the real ffmpeg.",
+      "expected": "No record vouches for the half-written master, nothing is ready while the run is dead, and the restart rebuilds the rendition, is ready, and equals the reference.",
+      "observed": {
+        "kill": {
+          "signal": "SIGKILL",
+          "sent_to": "the whole process group",
+          "exit": -9,
+          "every_process_in_the_group_ended": true,
+          "after_s": 0.36
+        },
+        "master_bytes_at_kill": 33503,
+        "reference_master_bytes": 67006,
+        "rendition_record_at_kill": true,
+        "receipt_status_at_kill": "failed",
+        "listed_at_kill": 0,
+        "restart_status": "failed",
+        "steps_run_again": [],
+        "identity_differences": [
+          "files: 3 differ (entry.json, safe/wcag/safe.mp4, verify/safe_wcag.json)",
+          "receipt: 6 differ (artifacts, error, next_steps, readiness, status, verification)"
+        ]
+      },
+      "result": "fail",
+      "unmet": [
+        "no rendition record vouched for the partial master",
+        "the restart is ready",
+        "the identity equals the uninterrupted reference"
+      ],
+      "seconds": 0.6
+    },
+    {
+      "id": "sigkill_during_verification",
+      "requirements": [
+        "interruption after step commit",
+        "real subprocess kill and restart",
+        "unaffected cached work is reused"
+      ],
+      "procedure": "From the finished reference, remove the verify report so verification has to run; the analyzer pauses while verify measures the broadcast safe master. SIGKILL the group, restart.",
+      "expected": "Nothing is ready while the run is dead; the restart runs only verification again, is ready, and equals the reference.",
+      "observed": {
+        "kill": {
+          "signal": "SIGKILL",
+          "sent_to": "the whole process group",
+          "exit": -9,
+          "every_process_in_the_group_ended": true,
+          "after_s": 0.37
+        },
+        "verify_record_at_kill": true,
+        "receipt_status_at_kill": "failed",
+        "listed_at_kill": 0,
+        "restart_status": "ready",
+        "steps_run_again": [
+          "verify"
+        ],
+        "identity_differences": []
+      },
+      "result": "pass",
+      "unmet": [],
+      "seconds": 1.2
+    },
+    {
+      "id": "sigkill_sweep",
+      "requirements": [
+        "real subprocess kill and restart",
+        "interruption before step commit",
+        "interruption after step commit"
+      ],
+      "procedure": "Prepare from nothing and SIGKILL the process group at 6 times spread across the reference run's duration, then restart each one.",
+      "expected": "Every killed run is not ready and not listed at the moment of the kill, and every restart is ready with the reference identity.",
+      "observed": {
+        "kills": [
+          {
+            "fraction_of_reference_run": 0.1,
+            "completed_before_the_kill": false,
+            "signal": "SIGKILL",
+            "sent_to": "the whole process group",
+            "exit": -9,
+            "every_process_in_the_group_ended": true,
+            "after_s": 0.19,
+            "committed_at_kill": 3,
+            "last_committed": "analyze:broadcast",
+            "receipt_status_at_kill": "failed",
+            "listed_at_kill": 0,
+            "temporary_files_left": [],
+            "restart_status": "ready",
+            "steps_run_again": 22,
+            "identity_differences": []
+          },
+          {
+            "fraction_of_reference_run": 0.25,
+            "completed_before_the_kill": false,
+            "signal": "SIGKILL",
+            "sent_to": "the whole process group",
+            "exit": -9,
+            "every_process_in_the_group_ended": true,
+            "after_s": 0.48,
+            "committed_at_kill": 11,
+            "last_committed": "bif:wcag",
+            "receipt_status_at_kill": "failed",
+            "listed_at_kill": 0,
+            "temporary_files_left": [],
+            "restart_status": "ready",
+            "steps_run_again": 14,
+            "identity_differences": []
+          },
+          {
+            "fraction_of_reference_run": 0.4,
+            "completed_before_the_kill": false,
+            "signal": "SIGKILL",
+            "sent_to": "the whole process group",
+            "exit": -9,
+            "every_process_in_the_group_ended": true,
+            "after_s": 0.76,
+            "committed_at_kill": 16,
+            "last_committed": "bif:broadcast",
+            "receipt_status_at_kill": "failed",
+            "listed_at_kill": 0,
+            "temporary_files_left": [],
+            "restart_status": "ready",
+            "steps_run_again": 9,
+            "identity_differences": []
+          },
+          {
+            "fraction_of_reference_run": 0.55,
+            "completed_before_the_kill": false,
+            "signal": "SIGKILL",
+            "sent_to": "the whole process group",
+            "exit": -9,
+            "every_process_in_the_group_ended": true,
+            "after_s": 1.05,
+            "committed_at_kill": 21,
+            "last_committed": "bif:extra-cautious",
+            "receipt_status_at_kill": "failed",
+            "listed_at_kill": 0,
+            "temporary_files_left": [],
+            "restart_status": "ready",
+            "steps_run_again": 4,
+            "identity_differences": []
+          },
+          {
+            "fraction_of_reference_run": 0.7,
+            "completed_before_the_kill": false,
+            "signal": "SIGKILL",
+            "sent_to": "the whole process group",
+            "exit": -9,
+            "every_process_in_the_group_ended": true,
+            "after_s": 1.32,
+            "committed_at_kill": 24,
+            "last_committed": "cover_model:extra-cautious",
+            "receipt_status_at_kill": "failed",
+            "listed_at_kill": 0,
+            "temporary_files_left": [],
+            "restart_status": "ready",
+            "steps_run_again": 1,
+            "identity_differences": []
+          },
+          {
+            "fraction_of_reference_run": 0.85,
+            "completed_before_the_kill": false,
+            "signal": "SIGKILL",
+            "sent_to": "the whole process group",
+            "exit": -9,
+            "every_process_in_the_group_ended": true,
+            "after_s": 1.61,
+            "committed_at_kill": 24,
+            "last_committed": "cover_model:extra-cautious",
+            "receipt_status_at_kill": "failed",
+            "listed_at_kill": 0,
+            "temporary_files_left": [],
+            "restart_status": "ready",
+            "steps_run_again": 1,
+            "identity_differences": []
+          }
+        ],
+        "interrupted": 6
+      },
+      "result": "pass",
+      "unmet": [],
+      "seconds": 12.5
+    },
+    {
+      "id": "truncated_ledger",
+      "requirements": [
+        "truncated ledger",
+        "malformed state is never trusted"
+      ],
+      "procedure": "From the finished reference, cut the ledger to half its length, refresh the catalog, then prepare again.",
+      "expected": "The refresh withdraws the receipt; the run keeps the unreadable ledger as state.json.malformed, prepares the title again, is ready, and equals the reference.",
+      "observed": {
+        "listed_after_refresh": 0,
+        "status": "ready",
+        "malformed_ledger_kept": false,
+        "identity_differences": []
+      },
+      "result": "fail",
+      "unmet": [
+        "the unreadable ledger is kept aside, unchanged"
+      ],
+      "seconds": 2.0
+    },
+    {
+      "id": "malformed_ledger_shapes",
+      "requirements": [
+        "malformed state is never trusted",
+        "truncated ledger"
+      ],
+      "procedure": "From the finished reference, replace the ledger with valid JSON that is not an object, with bytes that are not UTF-8, and with an object whose steps are a list; prepare each.",
+      "expected": "Each run handles the ledger predictably, is ready, and equals the reference.",
+      "observed": {
+        "runs": {
+          "not_an_object": {
+            "status": "no receipt (exit 1)",
+            "identity_differences": [
+              "ledger: 25 differ (analyze:broadcast, analyze:extra-cautious, analyze:wcag, bif:broadcast, bif:extra-cautious, bif:wcag)",
+              "files: 1 differ (entry.json)",
+              "receipt differs"
+            ],
+            "stderr_tail": ""
+          },
+          "not_utf8": {
+            "status": "failed",
+            "identity_differences": [
+              "ledger: 25 differ (analyze:broadcast, analyze:extra-cautious, analyze:wcag, bif:broadcast, bif:extra-cautious, bif:wcag)",
+              "files: 1 differ (entry.json)",
+              "receipt: 6 differ (artifacts, error, next_steps, readiness, status, verification)"
+            ],
+            "stderr_tail": ""
+          },
+          "steps_not_an_object": {
+            "status": "no receipt (exit 1)",
+            "identity_differences": [
+              "ledger: 25 differ (analyze:broadcast, analyze:extra-cautious, analyze:wcag, bif:broadcast, bif:extra-cautious, bif:wcag)",
+              "files: 1 differ (entry.json)",
+              "receipt differs"
+            ],
+            "stderr_tail": ""
+          }
+        }
+      },
+      "result": "fail",
+      "unmet": [
+        "not_an_object: ready and identical",
+        "not_utf8: ready and identical",
+        "steps_not_an_object: ready and identical"
+      ],
+      "seconds": 0.3
+    },
+    {
+      "id": "missing_output",
+      "requirements": [
+        "missing output",
+        "invalidated work is regenerated",
+        "unaffected cached work is reused"
+      ],
+      "procedure": "From the finished reference, delete the first broadcast HLS segment, refresh, then prepare.",
+      "expected": "The refresh withdraws the receipt; only the broadcast rendition runs again; ready and identical.",
+      "observed": {
+        "listed_after_refresh": 0,
+        "status": "failed",
+        "steps_run_again": [
+          "verify"
+        ],
+        "identity_differences": [
+          "ledger: 1 differ (verify)",
+          "files: 1 differ (safe/broadcast/hls/seg_0_00000.ts)",
+          "receipt: 6 differ (artifacts, error, next_steps, readiness, status, verification)"
+        ]
+      },
+      "result": "fail",
+      "unmet": [
+        "the run is ready",
+        "only the broadcast rendition runs again",
+        "the identity equals the uninterrupted reference"
+      ],
+      "seconds": 0.9
+    },
+    {
+      "id": "same_size_corruption",
+      "requirements": [
+        "same-size corruption",
+        "invalidated work is regenerated",
+        "unaffected cached work is reused",
+        "corruption never yields a ready receipt"
+      ],
+      "procedure": "From the finished reference, change bytes without changing the size of a safe master, an HLS segment, a plan, a published map and the luminance record, one at a time; refresh the catalog; then prepare.",
+      "expected": "Each refresh withdraws the receipt. Each run redoes only the step that owns the damaged file, is ready, and equals the reference, so no ready receipt names a damaged byte.",
+      "observed": {
+        "corruptions": {
+          "safe_master_wcag": {
+            "same_size": true,
+            "listed_after_refresh": 0,
+            "status": "failed",
+            "steps_run_again": [
+              "verify"
+            ],
+            "ready_receipt_names_damaged_bytes": false,
+            "identity_differences": [
+              "ledger: 1 differ (verify)",
+              "files: 3 differ (entry.json, safe/wcag/safe.mp4, verify/safe_wcag.json)",
+              "report: 3 differ (checks, outcome, passed)",
+              "receipt: 6 differ (artifacts, error, next_steps, readiness, status, verification)"
+            ]
+          },
+          "hls_segment_extra_cautious": {
+            "same_size": true,
+            "listed_after_refresh": 0,
+            "status": "ready",
+            "steps_run_again": [
+              "verify"
+            ],
+            "ready_receipt_names_damaged_bytes": true,
+            "identity_differences": [
+              "ledger: 1 differ (verify)",
+              "files: 1 differ (safe/extra-cautious/hls/seg_0_00000.ts)",
+              "receipt: 1 differ (artifacts)"
+            ]
+          },
+          "plan_broadcast": {
+            "same_size": true,
+            "listed_after_refresh": 0,
+            "status": "ready",
+            "steps_run_again": [
+              "verify"
+            ],
+            "ready_receipt_names_damaged_bytes": false,
+            "identity_differences": [
+              "ledger: 1 differ (verify)",
+              "files: 1 differ (plans/broadcast.json)"
+            ]
+          },
+          "published_map_wcag": {
+            "same_size": true,
+            "listed_after_refresh": 0,
+            "status": "failed",
+            "steps_run_again": [
+              "verify"
+            ],
+            "ready_receipt_names_damaged_bytes": false,
+            "identity_differences": [
+              "ledger: 1 differ (verify)",
+              "files: 2 differ (entry.json, maps/wcag.json)",
+              "report: 3 differ (checks, outcome, passed)",
+              "receipt: 6 differ (artifacts, error, next_steps, readiness, status, verification)"
+            ]
+          },
+          "luminance": {
+            "same_size": true,
+            "listed_after_refresh": 0,
+            "status": "ready",
+            "steps_run_again": [],
+            "ready_receipt_names_damaged_bytes": false,
+            "identity_differences": [
+              "files: 1 differ (luma.json)"
+            ]
+          }
+        }
+      },
+      "result": "fail",
+      "unmet": [
+        "safe_master_wcag: the run is ready",
+        "safe_master_wcag: only rendition:wcag runs again",
+        "safe_master_wcag: the identity equals the reference",
+        "hls_segment_extra_cautious: only rendition:extra-cautious runs again",
+        "hls_segment_extra_cautious: no ready receipt names the damaged bytes",
+        "hls_segment_extra_cautious: the identity equals the reference",
+        "plan_broadcast: only plan:broadcast runs again",
+        "plan_broadcast: the identity equals the reference",
+        "published_map_wcag: the run is ready",
+        "published_map_wcag: only signed_map:wcag runs again",
+        "published_map_wcag: the identity equals the reference",
+        "luminance: only luma runs again",
+        "luminance: the identity equals the reference"
+      ],
+      "seconds": 3.6
+    },
+    {
+      "id": "changed_settings_signing_key",
+      "requirements": [
+        "changed settings",
+        "invalidated work is regenerated",
+        "signing requirements preserved"
+      ],
+      "procedure": "From the finished reference (key A), prepare with a new key pair B. Then prepare with B from nothing at the same path and compare.",
+      "expected": "The analyses run again, every published map checks against B and not A, the run is ready, and its identity equals the clean run with B.",
+      "observed": {
+        "status": "failed",
+        "steps_run_again": [
+          "verify"
+        ],
+        "maps": {
+          "wcag": {
+            "checks_with_b": false,
+            "checks_with_a": true
+          },
+          "broadcast": {
+            "checks_with_b": false,
+            "checks_with_a": true
+          },
+          "extra-cautious": {
+            "checks_with_b": false,
+            "checks_with_a": true
+          }
+        },
+        "clean_run_status": "ready",
+        "differences_from_clean_run": [
+          "ledger: 1 differ (verify)",
+          "files: 4 differ (entry.json, maps/broadcast.json, maps/extra-cautious.json, maps/wcag.json)",
+          "report: 3 differ (checks, outcome, passed)",
+          "receipt: 6 differ (artifacts, error, next_steps, readiness, status, verification)"
+        ]
+      },
+      "result": "fail",
+      "unmet": [
+        "the run with B is ready",
+        "every analysis runs again",
+        "every published map checks against B and not A",
+        "the result equals a clean run with B"
+      ],
+      "seconds": 2.7
+    },
+    {
+      "id": "changed_settings_guard_band",
+      "requirements": [
+        "changed settings",
+        "invalidated work is regenerated",
+        "unaffected cached work is reused"
+      ],
+      "procedure": "With the bare ingest command (one preset, ultrafast), prepare, then prepare again with a 1000 ms guard band; then prepare with 1000 ms from nothing at the same path.",
+      "expected": "The second run redoes the plan and what depends on it but not probe, analysis or luminance, publishes to the kid mode index, and equals the clean 1000 ms run.",
+      "observed": {
+        "first_publishable": true,
+        "steps_run": [
+          "plan:wcag",
+          "still",
+          "scene_holds:wcag",
+          "rendition:wcag",
+          "bif:wcag",
+          "posters:wcag",
+          "signed_map:wcag",
+          "cover_model:wcag",
+          "verify"
+        ],
+        "steps_skipped": [
+          "probe",
+          "analyze:wcag",
+          "luma"
+        ],
+        "kid_mode_lists_title": true,
+        "clean_run_publishable": true,
+        "differences_from_clean_run": []
+      },
+      "result": "pass",
+      "unmet": [],
+      "seconds": 3.2
+    },
+    {
+      "id": "duplicate_invocation",
+      "requirements": [
+        "duplicate invocation",
+        "locking preserved"
+      ],
+      "procedure": "Start a preparation that pauses for ten seconds inside its first analysis, and start a second identical one meanwhile: once through the local library command and once through the bare ingest command. Let the first finish.",
+      "expected": "Both second invocations refuse at once as busy and change nothing; both first runs then finish, ready or published, and the library one equals the reference.",
+      "observed": {
+        "local_library": {
+          "second_exit": 2,
+          "second_said": "This local workspace is busy. Retry after its import finishes.",
+          "second_changed_no_file": true,
+          "second_seconds": 0.05,
+          "first_status": "ready",
+          "identity_differences": []
+        },
+        "bare_ingest": {
+          "second_exit": 0,
+          "second_refused_as_busy": false,
+          "second_changed_no_file": false,
+          "second_seconds": 1.04,
+          "second_published": true,
+          "first_published": true,
+          "kid_mode_lists_title": true
+        }
+      },
+      "result": "fail",
+      "unmet": [
+        "the second ingest changes no file",
+        "the second ingest refuses as busy"
+      ],
+      "seconds": 23.1
+    },
+    {
+      "id": "failed_verification",
+      "requirements": [
+        "failed verification",
+        "corruption never yields a ready receipt",
+        "verification thresholds preserved"
+      ],
+      "procedure": "From the finished reference, make the analyzer report a flagged span in the broadcast safe master, prepare twice, then remove that and prepare again.",
+      "expected": "Both runs fail verification, issue no ready receipt and list nothing, and the second one verifies again rather than reusing a verdict. Once the master measures clean the run is ready, redoes only verification, and equals the reference.",
+      "observed": {
+        "first_status": "failed",
+        "failed_checks": [
+          "safe_rendition_clean:broadcast"
+        ],
+        "listed_after_first": 0,
+        "second_status": "failed",
+        "second_ran_verify_again": [
+          "verify"
+        ],
+        "third_status": "ready",
+        "third_steps_run_again": [
+          "verify"
+        ],
+        "identity_differences": []
+      },
+      "result": "pass",
+      "unmet": [],
+      "seconds": 2.3
+    },
+    {
+      "id": "negative_controls",
+      "requirements": [
+        "corruption never yields a ready receipt",
+        "the comparison can see a difference"
+      ],
+      "procedure": "Corrupt a finished library without preparing again and refresh the catalog: a safe master, an HLS segment, the verify report and the ledger, one at a time. Separately, feed the identity comparison a copy of the reference with one file hash changed.",
+      "expected": "Every refresh lists nothing, and the comparison reports exactly the changed file.",
+      "observed": {
+        "refresh": {
+          "safe_master": {
+            "listed_before": 1,
+            "listed_after_corruption": 0
+          },
+          "hls_segment": {
+            "listed_before": 1,
+            "listed_after_corruption": 0
+          },
+          "verify_report": {
+            "listed_before": 1,
+            "listed_after_corruption": 0
+          },
+          "ledger": {
+            "listed_before": 1,
+            "listed_after_corruption": 0
+          }
+        },
+        "comparison_of_identical": [],
+        "comparison_with_one_changed_file": [
+          "files: 1 differ (bif/broadcast.bif)"
+        ]
+      },
+      "result": "pass",
+      "unmet": [],
+      "seconds": 0.6
+    },
+    {
+      "id": "real_analyzer_kill_and_restart",
+      "requirements": [
+        "real subprocess kill and restart",
+        "interruption after step commit",
+        "nondeterministic timestamps accounted for"
+      ],
+      "procedure": "With the real flashmap CLI: prepare from nothing as a reference; then prepare from nothing again at the same path and SIGKILL the group as soon as the WCAG analysis commits; restart.",
+      "expected": "Nothing is ready while the run is dead; the restart is ready with the same verification outcome, and everything equals the reference once maps are compared without created_utc and the signature over it.",
+      "observed": {
+        "kill": {
+          "signal": "SIGKILL",
+          "sent_to": "the whole process group",
+          "exit": -9,
+          "every_process_in_the_group_ended": true,
+          "after_s": 0.94
+        },
+        "committed_at_kill": [
+          "analyze:wcag",
+          "probe"
+        ],
+        "receipt_status_at_kill": "failed",
+        "listed_at_kill": 0,
+        "reference_status": "ready",
+        "restart_status": "ready",
+        "outcome": "no flagged segments",
+        "reference_outcome": "no flagged segments",
+        "steps_run_again": [
+          "analyze:broadcast",
+          "analyze:extra-cautious",
+          "plan:wcag",
+          "plan:broadcast",
+          "plan:extra-cautious",
+          "luma",
+          "still",
+          "rendition:wcag",
+          "bif:wcag",
+          "posters:wcag",
+          "signed_map:wcag",
+          "cover_model:wcag",
+          "rendition:broadcast",
+          "bif:broadcast",
+          "posters:broadcast",
+          "signed_map:broadcast",
+          "cover_model:broadcast",
+          "rendition:extra-cautious",
+          "bif:extra-cautious",
+          "posters:extra-cautious",
+          "signed_map:extra-cautious",
+          "cover_model:extra-cautious",
+          "verify"
+        ],
+        "identity_differences": [],
+        "reference_seconds": 13.31
+      },
+      "result": "pass",
+      "unmet": [],
+      "seconds": 26.7
+    },
+    {
+      "id": "ready_receipts_name_only_reference_bytes",
+      "requirements": [
+        "corruption never yields a ready receipt"
+      ],
+      "procedure": "Collect every ready receipt seen in every scenario above and compare the artifact hashes it names with the uninterrupted run it should equal.",
+      "expected": "Every ready receipt names exactly the reference's artifact hashes.",
+      "observed": {
+        "ready_receipts_seen": 16,
+        "naming_other_bytes": [
+          "same_size_corruption"
+        ]
+      },
+      "result": "fail",
+      "unmet": [
+        "no ready receipt named bytes other than the reference's"
+      ]
+    }
+  ],
+  "summary": {
+    "scenarios": 16,
+    "passed": 8,
+    "failed": 8
+  },
+  "limitations": [
+    "No power was cut. Durability rests on fsync, and on macOS F_FULLFSYNC, as the operating system and filesystem implement them; these runs used one machine and one filesystem.",
+    "Every scenario but the last uses the fake analyzer, whose flagged spans are scripted. Hashing, source binding, Ed25519 signing, rendering, HLS packaging and the verification gates are real, so outcomes show the pipeline's recovery and publication gates, not flash measurement.",
+    "Sweep kills are timed, so where each one lands varies between runs; each landing point is recorded.",
+    "A SIGKILL sent only to the Python process, not its group, can leave an ffmpeg or analyzer child writing until it finishes. Such late writes can only cause a mismatch and a rebuild: verification refuses bytes that change under it and a receipt must name exactly the bytes verification recorded. That case is covered by the in-process tests, not by a scenario here.",
+    "Locks are advisory flock locks on one machine. Work directories shared between machines, for example over NFS, are not serialized.",
+    "Comparisons assume ffmpeg and x264 produce the same bytes for the same input on one machine, which these runs observed; a different build or thread count can change encoded bytes between runs.",
+    "Work directories prepared before this change carry no output hashes, so their first run redoes every step. With the real analyzer that issues new maps with a new created_utc and signature."
+  ]
+}

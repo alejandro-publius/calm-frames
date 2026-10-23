@@ -53,7 +53,7 @@ Not installed yet: AWS CDK (will be pinned in `pipeline/infra/package.json`), cm
 - The installer appended this block to `~/.zshrc` and `~/.zprofile`:
   ```
   #Vega CLI
-  source "/Users/alexvintera/vega/env"
+  source "/Users/<user>/vega/env"
   ```
 - It also symlinks `kepler` and `vvman` to `vega` for older scripts (the sample's npm scripts still call `kepler`).
 - Telemetry is on by default: https://developer.amazon.com/docs/vega/latest/telemetry.html explains how to opt out.
@@ -67,7 +67,7 @@ before anyone reads two numbers as if one tool produced both.
 |---|---|---|
 | This Mac, on PATH | 9.0.1 (Homebrew) | Every baseline in `results/baselines/`, the labelling plots, the marker clips, the conformance generate-analyse-delete loop, both selftests |
 | The ingest container | 5.1.9 (Debian bookworm, apt `7:5.1.9-0+deb12u1`) | The pipeline when it runs on Fargate. Pinned in `pipeline/infra/ingest/Dockerfile` |
-| CI runners | whatever `apt-get install ffmpeg` gives ubuntu-latest that day | The CI jobs that need a decoder. Nothing published comes off a CI ffmpeg |
+| CI runners | whatever `apt-get install ffmpeg` gives `ubuntu-24.04` (6.1.1 on Oct 11). The workflows name 24.04 rather than `ubuntu-latest` since Oct 11, because GitHub moves `ubuntu-latest` to Ubuntu 26 from Oct 19, inside the judging window | The CI jobs that need a decoder. Nothing published comes off a CI ffmpeg |
 
 They are three different decoders and three different filter graphs. A number
 measured on one is not a number measured on another, which is why every baseline
@@ -104,3 +104,24 @@ The Mac cannot be pinned the same way. Homebrew has no supported downgrade path
 for a formula another formula depends on, and this is a shared machine. What
 stands in for a pin is the record: every baseline report stamps the build string
 it ran under, and the one-version check fails if a directory ever holds two.
+
+## Python setup for a fresh reviewer checkout
+
+From the repository root with uv installed:
+
+```sh
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python -e "./flashmap[dev]"
+uv pip install --python .venv/bin/python matplotlib==3.11.2
+```
+
+This installs the analyzer, its dev tools (pytest, hypothesis, ruff, mypy)
+and the dependencies used by the benign package preflight. The third line is
+the one package CI adds for the evaluation lane: three of the `eval` tests
+import matplotlib and Pillow, and without it the documented
+`pytest flashmap pipeline eval` line stops at collection. A venv made by uv
+has no pip in it, so install anything else with `uv pip install --python
+.venv/bin/python ...` rather than `python -m pip`. `eval/readme_sync.py --check`
+uses the standard library. The broader
+infra suite additionally uses `pipeline/infra/requirements.txt`; do not confuse
+that with a requirement to deploy AWS to run the simulator.

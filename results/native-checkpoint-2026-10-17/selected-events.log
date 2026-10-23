@@ -1,0 +1,93 @@
+04:40:06.133489 system 1326 I pkgmgr-storaged-update:[StoragedUpdateInterface.cpp:339] Starting extraction and validation for package 'io.github.alejandropublius.calmframes'
+04:40:06.403679 system 1038 I lcm-server:[Lcm.cpp:7414] Terminating package with id io.github.alejandropublius.calmframes without force
+04:41:15.949460 system 1326 I pkgmgr-storaged-update:[StoragedUpdateInterface.cpp:339] Starting extraction and validation for package 'io.github.alejandropublius.calmframes'
+04:41:16.184999 system 1038 I lcm-server:[Lcm.cpp:7414] Terminating package with id io.github.alejandropublius.calmframes without force
+04:41:17.265380 system 1038 I lcm-server:[Lcm.cpp:7414] Terminating package with id io.github.alejandropublius.calmframes with force
+04:41:17.330001 system 1038 I lcm-server:[Lcm.cpp:4036] Received launch request for pkg://io.github.alejandropublius.calmframes.main
+04:41:17.599336 system 1038 I lcm-server:[Lcm.cpp:5671] appInst[107](io.github.alejandropublius.calmframes.main)<F>: Launched in pid 21336
+04:41:17.913573 system 1038 I lcm-server:[Lcm.cpp:6426] appInst[107](io.github.alejandropublius.calmframes.main)<F>: DisplayServer reported visible on display 0
+04:41:17.939013 system cold_app_launch_time(io.github.alejandropublius.calmframes): 583 ms
+04:41:22.686648 render mutations=181 transactions=5
+04:41:27.686902 render mutations=181 transactions=5
+04:41:52.671864 system 1038 I lcm-server:[Lcm.cpp:7414] Terminating package with id io.github.alejandropublius.calmframes with force
+04:41:52.806799 system 1038 I lcm-server:[Lcm.cpp:4036] Received launch request for pkg://io.github.alejandropublius.calmframes.main
+04:41:52.951317 system 1038 I lcm-server:[Lcm.cpp:5671] appInst[112](io.github.alejandropublius.calmframes.main)<F>: Launched in pid 21589
+04:41:53.430560 system 1038 I lcm-server:[Lcm.cpp:6426] appInst[112](io.github.alejandropublius.calmframes.main)<F>: DisplayServer reported visible on display 0
+04:41:53.524415 system cool_app_launch_time(io.github.alejandropublius.calmframes): 614 ms
+04:41:58.031854 render mutations=181 transactions=5
+04:47:38.064299 key injection pid=23223
+04:47:38.084486 trace focus kid-mode-home-more-info
+04:47:38.084716 trace focus kid-mode-home-more-info
+04:47:38.316616 key injection pid=23223
+04:47:39.020711 key injection pid=23265
+04:47:39.273506 key injection pid=23265
+04:47:39.293197 trace screen details
+04:47:39.293254 trace screen details
+04:47:39.302118 trace image scene coastal loaded
+04:47:39.302129 trace image scene coastal loaded
+04:47:39.310567 trace focus kid-mode-details-play
+04:47:39.310659 trace focus kid-mode-details-play
+04:47:40.034288 key injection pid=23318
+04:47:40.285736 key injection pid=23318
+04:47:40.309703 trace screen home
+04:47:40.309772 trace screen home
+04:47:40.313339 trace image scene coastal loaded
+04:47:40.313365 trace image scene coastal loaded
+04:47:40.315923 trace focus kid-mode-home-more-info
+04:47:40.315952 trace focus kid-mode-home-more-info
+04:47:41.001367 key injection pid=23359
+04:47:41.003251 trace focus kid-mode-home-watch
+04:47:41.003261 trace focus kid-mode-home-watch
+04:47:41.252371 key injection pid=23359
+04:47:41.974805 key injection pid=23410
+04:47:42.226433 key injection pid=23410
+04:47:42.230978 trace playback watch
+04:47:42.230993 trace playback watch
+04:47:42.296875 trace image scene coastal loaded
+04:47:42.296914 trace image scene coastal loaded
+04:47:42.297144 trace focus player-opening-back
+04:47:42.297165 trace focus player-opening-back
+04:47:42.305689 trace screen player
+04:47:42.305730 trace screen player
+04:47:42.316960 trace playback cover on media=0
+04:47:42.317018 trace playback cover on media=0
+04:47:42.339816 trace image scene coastal loaded
+04:47:42.339834 trace image scene coastal loaded
+04:47:42.340332 trace focus player-opening-back
+04:47:42.340343 trace focus player-opening-back
+04:47:42.349642 trace prepared-playback extra-cautious
+04:47:42.349689 trace prepared-playback extra-cautious
+04:47:43.074448 trace playback cover off media=0
+04:47:43.074477 trace playback cover off media=0
+04:47:43.075217 trace playback waiting on media=0
+04:47:43.075237 trace playback waiting on media=0
+04:47:43.117701 trace playback waiting off media=0
+04:47:43.117724 trace playback waiting off media=0
+04:47:43.430732 trace playback picture-shown media=312
+04:47:43.430748 trace playback picture-shown media=312
+04:47:43.430763 trace focus player-seekbar
+04:47:43.430781 trace focus player-seekbar
+04:47:45.479625 trace focus calm-card-skip
+04:47:45.479666 trace focus calm-card-skip
+04:47:50.462980 trace playback cover on media=7378
+04:47:50.463002 trace playback cover on media=7378
+04:47:55.793441 trace playback cover off media=12714
+04:47:55.793495 trace playback cover off media=12714
+04:48:06.248111 trace focus calm-card-skip
+04:48:06.248140 trace focus calm-card-skip
+04:48:11.224457 trace playback cover on media=28142
+04:48:11.224482 trace playback cover on media=28142
+04:48:14.695345 trace playback cover off media=31611
+04:48:14.695410 trace playback cover off media=31611
+04:48:23.420466 trace playback back
+04:48:23.420621 trace playback back
+04:48:23.723501 trace playback teardown ok
+04:48:23.723533 trace playback teardown ok
+04:48:23.748597 trace image scene coastal loaded
+04:48:23.748620 trace image scene coastal loaded
+04:48:23.748976 trace focus kid-mode-home-watch
+04:48:23.748999 trace focus kid-mode-home-watch
+04:48:23.749068 trace image scene coastal loaded
+04:48:23.749088 trace image scene coastal loaded
+04:48:24.148693 trace screen player-left
+04:48:24.148715 trace screen player-left

@@ -1,0 +1,12 @@
+{
+  "reviewed_base": "3665eb904a872444c6193c3c170cdc1100861040",
+  "targeted_unique_tests": 71,
+  "targeted_suites": 8,
+  "initial_mirror_failure": "Resolved by regenerating shared calmStyles mirror; five mirror tests pass on rerun.",
+  "typecheck": "pass",
+  "lint_errors": 0,
+  "lint_warnings": 101,
+  "prepared_input_gate": "pass, four required reports present; approved Acadia bundle unchanged",
+  "captures": false,
+  "native_validation": "Installation and launch confirmed; visual/audio/route checks not performed. See receipt.json."
+}

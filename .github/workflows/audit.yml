@@ -33,16 +33,22 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Read only, for every job. The audits read registries over plain HTTPS, the
+# image builds with push: false, and upload-artifact uses the runner's own
+# token rather than this one. A job that ever needs more gets its own block.
+permissions:
+  contents: read
+
 jobs:
   dependencies:
     name: pip-audit and npm audit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version-file: .nvmrc
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version-file: .python-version
       - name: Install the audit tools
@@ -51,40 +57,79 @@ jobs:
         working-directory: app
         # --ignore-scripts skips the Shaka Player build. npm audit reads the
         # tree, not the built bundle, so this is the same audit either way.
-        run: npm ci --ignore-scripts || npm install --ignore-scripts --no-audit --no-fund
+        run: npm ci --ignore-scripts
       - name: Audit, and fail on anything without a written exception
         run: python3 scripts/dep_audit.py --check
 
   sbom:
     name: The bills of materials are current
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version-file: .nvmrc
-      - uses: actions/setup-python@v5
+          # Exact, and in this job only. The app's bill records the npm that
+          # ran `npm ls` as a tool, and the compare below is byte for byte, so
+          # the npm has to be the one the committed bill names: 10.9.8, which
+          # ships with Node 22.23.2. Through .nvmrc, which says 22 and stays
+          # that way for everything else, setup-node takes the newest 22.x, and
+          # every Node release that bundles a newer npm would fail this job
+          # with no change in this repository. The dcb27a1 run took 22.23.3
+          # that way on Oct 9, 2026. pipeline/tests/test_aws_guard.py checks
+          # that this stays an exact version.
+          node-version: 22.23.2
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version-file: .python-version
-      - name: Install the SBOM tool
-        run: python -m pip install cyclonedx-bom==7.4.0
+      - name: Install the SBOM tool and the library it writes through
+        # cyclonedx-bom leaves cyclonedx-python-lib to a range, and the library
+        # writes its own version into metadata.tools of every bill. The two
+        # committed Python bills record 11.12.0, and scripts/sbom.py pins the
+        # same pair for its uvx path. The two matched on Oct 9, 2026 by luck.
+        run: python -m pip install cyclonedx-bom==7.4.0 cyclonedx-python-lib==11.12.0
+      - name: Which generators are about to run
+        # So a failed compare can be read against the tools that produced it
+        # without rerunning anything. The npm line is the one that is not
+        # pinned by any file in this repository, only by the Node above.
+        run: |
+          node --version
+          npm --version
+          python -m pip list --format=freeze | grep -i cyclonedx
       - name: Regenerate and compare
         # No npm install here on purpose. The app's bill is read from
         # package-lock.json rather than from node_modules, because an installed
         # tree is platform specific and this job would otherwise fail on Linux
         # over a package that only exists on a Mac.
-        run: python3 scripts/sbom.py --check
+        #
+        # --keep leaves the fresh bills and a report.json under .logs/, which
+        # is gitignored, so the step after this one can keep them. On a
+        # difference the script says whether the generators or the components
+        # differ and prints the first differing line.
+        run: python3 scripts/sbom.py --check --keep .logs/sbom-check
+      - name: Keep the fresh bills and the report when the compare fails
+        # The dcb27a1 failure said only "does not match what is installed" and
+        # the fresh bill was gone with the runner. With the artifact, a reader
+        # diffs the fresh bill against the committed one and reads report.json
+        # for the tool entries and component counts on both sides. Fourteen
+        # days covers two of the Monday scheduled runs.
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: sbom-check-${{ github.run_attempt }}
+          path: .logs/sbom-check
+          include-hidden-files: true
+          retention-days: 14
 
   infra:
     name: The stack and the container rules
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           # The CDK runs its Python through jsii, which shells out to node.
           node-version-file: .nvmrc
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version-file: .python-version
       - name: Install the CDK and the test doubles
@@ -93,6 +138,13 @@ jobs:
         run: |
           python -m pip install -r pipeline/infra/requirements.txt
           python -m pip install pytest==9.1.1 moto==5.2.3 boto3==1.43.97
+      - name: Which CDK packages this fresh install took
+        # The requirements file pins aws-cdk-lib's own runtime too (the cloud
+        # assembly schema, jsii, the node proxy agent asset) since Oct 9, 2026,
+        # when a fresh install here took a schema declaring a newer CLI minimum
+        # than the frozen venv's and the pin test failed hosted only. This line
+        # shows what was installed, so the next such failure names itself.
+        run: python -m pip list --format=freeze | grep -i -E 'aws-cdk|jsii|constructs'
       - name: Synthesize the template, with no credentials and no account
         env:
           CDK_DEFAULT_ACCOUNT: "000000000000"
@@ -126,21 +178,21 @@ jobs:
 
   image:
     name: The ingest image builds for ARM64
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Emulated ARM64 through QEMU, so it is slower than a native build and
     # still far cheaper than the alternative, which is finding out at deploy
     # time. It builds and never pushes.
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker/setup-qemu-action@v3
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3.7.0
         with:
           platforms: arm64
-      - uses: docker/setup-buildx-action@v3
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
       - name: What the build context would send
         run: python3 scripts/build_context.py --quiet
       - name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
         with:
           context: .
           file: pipeline/infra/ingest/Dockerfile

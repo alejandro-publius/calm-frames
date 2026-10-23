@@ -1,0 +1,18 @@
+[
+  {
+    "run": "candidate-wcag-reference",
+    "exit_code": 1
+  },
+  {
+    "run": "candidate-wcag-room",
+    "exit_code": 1
+  },
+  {
+    "run": "candidate-broadcast-reference",
+    "exit_code": 0
+  },
+  {
+    "run": "candidate-broadcast-room",
+    "exit_code": 1
+  }
+]

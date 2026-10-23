@@ -1,0 +1,21 @@
+22:48:01Z replace existing Calm Frames once
+22:48:12Z PASS Launch prioritizes Watch | kid-mode-home-watch
+22:48:15Z key KEY_ENTER -> player-opening-back
+22:48:19Z key KEY_BACK -> kid-mode-home-watch
+22:48:19Z PASS Home Watch and player Back | playing event; return kid-mode-home-watch
+22:48:21Z key KEY_RIGHT -> kid-mode-home-more-info
+22:48:24Z key KEY_ENTER -> kid-mode-details-play
+22:48:27Z key KEY_RIGHT -> kid-mode-details-show-info
+22:48:29Z key KEY_ENTER -> kid-mode-details-info-back
+22:48:32Z key KEY_DOWN -> kid-mode-details-practice
+22:48:34Z key KEY_DOWN -> kid-mode-details-technical
+22:48:37Z key KEY_ENTER -> kid-mode-details-info-back
+22:48:40Z key KEY_BACK -> kid-mode-details-technical
+22:48:42Z key KEY_BACK -> kid-mode-details-show-info
+22:48:42Z PASS Technical details and More info Back | technical Back -> Technical details control; info Back -> More info control
+22:48:45Z key KEY_ENTER -> kid-mode-details-info-back
+22:48:47Z key KEY_DOWN -> kid-mode-details-practice
+22:48:50Z key KEY_ENTER -> kid-mode-details-play
+22:48:53Z key KEY_ENTER -> player-opening-back
+22:48:56Z key KEY_BACK -> calm-card-skip
+22:48:56Z STOP Expected kid-mode-details-play, got calm-card-skip

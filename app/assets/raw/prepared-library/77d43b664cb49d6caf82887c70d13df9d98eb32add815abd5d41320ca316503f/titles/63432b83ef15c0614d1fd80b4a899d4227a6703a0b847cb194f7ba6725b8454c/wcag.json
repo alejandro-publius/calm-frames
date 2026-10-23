@@ -1,0 +1,150 @@
+{
+  "color": {
+    "analysis_height": 108,
+    "analysis_width": 192,
+    "luminance_model": "wcag-relative-luminance-srgb",
+    "matrix": "bt601",
+    "matrix_source": "inferred-sd-bt601",
+    "pixel_format": "yuv420p",
+    "range": "limited",
+    "range_source": "default-limited",
+    "transfer_tag": "2"
+  },
+  "created_utc": "2026-10-18T18:22:01Z",
+  "generator": {
+    "name": "flashmap",
+    "version": "1.0.0"
+  },
+  "pattern_exemptions": [],
+  "picture": {
+    "coded": {
+      "height": 480,
+      "left": 0,
+      "top": 0,
+      "width": 854
+    },
+    "frame_height": 108,
+    "frame_width": 192,
+    "height": 108,
+    "left": 0,
+    "letterbox": false,
+    "measured_on": "picture",
+    "note": "Area fractions in this map were measured on the picture rectangle above, not on the full coded frame. Letterbox and pillarbox bars were removed first.",
+    "pillarbox": false,
+    "source": "detected",
+    "top": 0,
+    "width": 192
+  },
+  "profile": {
+    "area_fraction_limit": 0.25,
+    "area_window_mode": "ten-degree-field",
+    "area_windows": [
+      {
+        "height_px": 36,
+        "name": "wcag-10deg",
+        "source": "WCAG 2.2 general flash and red flash thresholds, Note 1 (341/1024 by 256/768)",
+        "width_px": 64
+      },
+      {
+        "height_px": 22,
+        "name": "room-10deg",
+        "room": {
+          "display_aspect": "16:9",
+          "display_height_in": 41.672,
+          "display_width_in": 74.084,
+          "field_degrees": 10.0,
+          "field_inches": 8.399,
+          "seat_distance_in": 48.0,
+          "tv_diagonal_in": 85.0
+        },
+        "source": "10 degrees from WCAG 2.2, sized by TV diagonal and seat distance",
+        "width_px": 22
+      }
+    ],
+    "exceptions_not_implemented": [
+      "WCAG fine balanced pattern exception (white noise, checkerboards under 0.1 degree). Content the exception would excuse is still reported."
+    ],
+    "flash_limit_per_second": 3,
+    "general_flash": {
+      "dark_image_below": 0.8,
+      "metric": "wcag-relative-luminance",
+      "min_delta": 0.1,
+      "source": "WCAG 2.2 general flash and red flash thresholds (SPEC_SOURCES section 2)"
+    },
+    "name": "wcag",
+    "pattern_rule": null,
+    "pattern_rule_source": null,
+    "peak_nits": null,
+    "red_flash": {
+      "min_ucs_distance": 0.2,
+      "saturated_red_ratio": 0.8,
+      "source": "WCAG 2.2 thresholds Note 3 and Understanding 2.3.1 (SPEC_SOURCES sections 2, 4)"
+    },
+    "red_opposing_rule": "enter-saturated-red-paired-with-leave",
+    "room": {
+      "display_aspect": "16:9",
+      "display_height_in": 41.672,
+      "display_width_in": 74.084,
+      "field_degrees": 10.0,
+      "field_inches": 8.399,
+      "seat_distance_in": 48.0,
+      "tv_diagonal_in": 85.0
+    },
+    "rules_not_implemented": [
+      "the fine balanced pattern exception",
+      "any HDR rule",
+      "any regular pattern rule, because WCAG 2.2 has none. See the broadcast profile"
+    ],
+    "spec_sources": "flashmap/docs/SPEC_SOURCES.md",
+    "title": "WCAG 2.2 Success Criterion 2.3.1, general and red flash thresholds",
+    "transition_pairing": "non-overlapping",
+    "transition_rule": "declared-on-first-frame-meeting-threshold",
+    "window_ms": 1000,
+    "window_placement": "trailing-closed-window-at-every-frame"
+  },
+  "schema": "https://calm-frames.github.io/schemas/flashmap-map-v1.json",
+  "segments": [],
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "sha256:00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+    "payload_sha256": "4275b5c80e0059091a6be6ef843dd7625f732c4deb289b85518397a62068f2d1",
+    "public_key": "B5T8ySBDCjXF5gUm6NwY78TOnTSVofUMZi4oAMgWyZs=",
+    "value": "W+3hPJ3A5dJSq01qqnagTld9NEsY7/sEs46O7fzk6ol5l5uC3psGQJ6GIKU0gYFjsb6zGdiRFMsmm6cgbRRTDQ=="
+  },
+  "source": {
+    "coded_height": 480,
+    "coded_width": 854,
+    "container_frame_rate": "30/1",
+    "duration_ms": 12000.0,
+    "first_pts_ms": 0.0,
+    "frame_count": 360,
+    "frame_interval_ms": {
+      "max": 33.333,
+      "median": 33.333,
+      "min": 33.333
+    },
+    "last_coded_pts_ms": 11966.667,
+    "last_pts_ms": 11966.667,
+    "path": "HAZARD_forest-creek-12s.mp4",
+    "sha256": "63432b83ef15c0614d1fd80b4a899d4227a6703a0b847cb194f7ba6725b8454c",
+    "size_bytes": 1903525,
+    "timestamp_source": "container-pts",
+    "variable_frame_rate": false
+  },
+  "summary": {
+    "area_measured_on": "picture",
+    "flash_pass": true,
+    "general_segment_count": 0,
+    "hidden_ms": 0,
+    "pass": true,
+    "pattern_exemption_count": 0,
+    "pattern_findings_are_not_wcag": "WCAG 2.2 SC 2.3.1 does not cover regular patterns. A pattern segment is an extra hide from an informative ITU recommendation, never a WCAG finding, and `flash_pass` is the only verdict a WCAG claim may be read from.",
+    "pattern_pass": true,
+    "pattern_rule_applied": false,
+    "pattern_rule_source": null,
+    "pattern_segment_count": 0,
+    "red_segment_count": 0,
+    "segment_count": 0
+  },
+  "version": 1
+}

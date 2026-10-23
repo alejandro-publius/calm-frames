@@ -44,6 +44,7 @@ export const seek = (
         newTime * 1000,
       );
     } else {
+      // eslint-disable-next-line no-restricted-syntax -- the sample's fallback, reached only when no requestSeek is wired; the Calm Frames player always wires one
       videoRef.current.currentTime = newTime;
     }
     if (videoRef.current.paused) {
@@ -157,6 +158,7 @@ const PlaybackControls = ({
         onBlur={onBlurBackwardSeek}
         onPress={handleSeekBackward}
         icon={'replay-10'}
+        accessibilityLabel="Rewind 10 seconds"
         testID="player-btn-seek-backward"
         size={PLAYER_BUTTON_SIZE}
       />
@@ -171,6 +173,7 @@ const PlaybackControls = ({
         key={'player-btn-seek-forward'}
         onPress={handleSeekForward}
         icon={'forward-10'}
+        accessibilityLabel="Forward 10 seconds"
         testID="player-btn-seek-forward"
         size={PLAYER_BUTTON_SIZE}
         ref={skipForwardRef}

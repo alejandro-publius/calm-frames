@@ -1,0 +1,150 @@
+[
+  {
+    "device_time": "Oct 17 09:46:33.920321",
+    "detail": "focus kid-mode-home-watch"
+  },
+  {
+    "device_time": "Oct 17 09:46:41.662840",
+    "detail": "playback watch"
+  },
+  {
+    "device_time": "Oct 17 09:46:41.767601",
+    "detail": "playback cover-surface plain"
+  },
+  {
+    "device_time": "Oct 17 09:46:41.768369",
+    "detail": "playback cover on media=0"
+  },
+  {
+    "device_time": "Oct 17 09:46:41.769159",
+    "detail": "playback slow off media=0"
+  },
+  {
+    "device_time": "Oct 17 09:46:42.539257",
+    "detail": "playback cover-surface clear"
+  },
+  {
+    "device_time": "Oct 17 09:46:42.542133",
+    "detail": "playback cover off media=0"
+  },
+  {
+    "device_time": "Oct 17 09:46:42.544123",
+    "detail": "playback waiting on media=0"
+  },
+  {
+    "device_time": "Oct 17 09:46:42.664533",
+    "detail": "playback waiting off media=0"
+  },
+  {
+    "device_time": "Oct 17 09:46:42.956732",
+    "detail": "playback picture-shown media=291"
+  },
+  {
+    "device_time": "Oct 17 09:46:49.953728",
+    "detail": "playback cover-surface message"
+  },
+  {
+    "device_time": "Oct 17 09:46:49.955973",
+    "detail": "playback cover on media=7365"
+  },
+  {
+    "device_time": "Oct 17 09:46:58.370538",
+    "detail": "playback cover-surface clear"
+  },
+  {
+    "device_time": "Oct 17 09:46:58.370630",
+    "detail": "playback cover off media=12728"
+  },
+  {
+    "device_time": "Oct 17 09:47:13.985750",
+    "detail": "playback cover-surface message"
+  },
+  {
+    "device_time": "Oct 17 09:47:13.987866",
+    "detail": "playback cover on media=28135"
+  },
+  {
+    "device_time": "Oct 17 09:47:15.091851",
+    "detail": "playback waiting on media=29201"
+  },
+  {
+    "device_time": "Oct 17 09:47:15.550818",
+    "detail": "playback waiting off media=29201"
+  },
+  {
+    "device_time": "Oct 17 09:47:15.578446",
+    "detail": "playback cover-surface plain"
+  },
+  {
+    "device_time": "Oct 17 09:47:15.580079",
+    "detail": "playback cover-surface clear"
+  },
+  {
+    "device_time": "Oct 17 09:47:15.580761",
+    "detail": "playback cover off media=32094"
+  },
+  {
+    "device_time": "Oct 17 09:47:21.518826",
+    "detail": "playback ended"
+  },
+  {
+    "device_time": "Oct 17 09:47:21.520635",
+    "detail": "playback back"
+  },
+  {
+    "device_time": "Oct 17 09:47:21.835929",
+    "detail": "playback teardown ok"
+  },
+  {
+    "device_time": "Oct 17 09:47:21.858478",
+    "detail": "focus kid-mode-home-watch"
+  },
+  {
+    "device_time": "Oct 17 09:47:23.016358",
+    "detail": "playback watch"
+  },
+  {
+    "device_time": "Oct 17 09:47:23.046519",
+    "detail": "playback cover-surface plain"
+  },
+  {
+    "device_time": "Oct 17 09:47:23.047388",
+    "detail": "playback cover on media=0"
+  },
+  {
+    "device_time": "Oct 17 09:47:23.048171",
+    "detail": "playback slow off media=0"
+  },
+  {
+    "device_time": "Oct 17 09:47:23.737664",
+    "detail": "playback cover-surface clear"
+  },
+  {
+    "device_time": "Oct 17 09:47:23.737693",
+    "detail": "playback cover off media=0"
+  },
+  {
+    "device_time": "Oct 17 09:47:23.741639",
+    "detail": "playback waiting on media=0"
+  },
+  {
+    "device_time": "Oct 17 09:47:23.792274",
+    "detail": "playback waiting off media=0"
+  },
+  {
+    "device_time": "Oct 17 09:47:24.119050",
+    "detail": "playback picture-shown media=294"
+  },
+  {
+    "device_time": "Oct 17 09:47:25.755425",
+    "detail": "playback back"
+  },
+  {
+    "device_time": "Oct 17 09:47:26.027035",
+    "detail": "playback teardown ok"
+  },
+  {
+    "device_time": "Oct 17 09:47:26.067621",
+    "detail": "focus kid-mode-home-watch"
+  }
+]

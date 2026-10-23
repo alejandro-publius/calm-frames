@@ -1,0 +1,12 @@
+{
+  "source_commit": "3fab9998b0790c8345c2a3f82452e91a05ef4ba6",
+  "build_count": 1,
+  "build_start_utc": "2026-10-17T23:26:38.712445+00:00",
+  "tracked_app_inputs": 726,
+  "command": "npm run build:debug",
+  "build_exit": 0,
+  "build_end_utc": "2026-10-17T23:27:17.236327+00:00",
+  "changed_inputs": [],
+  "package_path": "/Users/alexvintera/calm-frames-claude-tv-2026-10-16/build/release/black-gap-2026-10-17/calm-frames-cover-watch-aarch64-debug.vpkg",
+  "package_sha256": "86dc3b41842ca90c40fc4c1e48d074e5e5b55f53e78ce414c9437d3546e4af1f"
+}

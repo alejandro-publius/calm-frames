@@ -1,0 +1,11 @@
+{
+  "asset": "app/assets/image/tv/sea-otters-alaska.jpg",
+  "asset_sha256": "bcebfa897f90d8f2f77e7ce228c551b53fe395fa2ca42916673db8dde780aeec",
+  "source_url": "https://videos.fisheries.noaa.gov/detail/video/2789953172001/b-roll%3A-sea-otters",
+  "credit": "NOAA Fisheries",
+  "source_sha256": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+  "bundle": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+  "frame_seconds": 2,
+  "role": "Menu destination still only; never a runtime protection still",
+  "capture_used": false
+}

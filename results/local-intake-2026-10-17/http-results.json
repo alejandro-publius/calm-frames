@@ -1,0 +1,37 @@
+[
+  {
+    "check": "Local page available",
+    "passed": true,
+    "detail": "No video element or media endpoint"
+  },
+  {
+    "check": "Cross-origin/missing origin rejected",
+    "passed": true,
+    "detail": 403
+  },
+  {
+    "check": "Original media cannot be fetched",
+    "passed": true,
+    "detail": 404
+  },
+  {
+    "check": "Upload existing fixture for real analysis",
+    "passed": true,
+    "detail": 200
+  },
+  {
+    "check": "Full-file review produced",
+    "passed": true,
+    "detail": "review"
+  },
+  {
+    "check": "Real Acadia identity and all frames",
+    "passed": true,
+    "detail": 1804
+  },
+  {
+    "check": "Explicit review approval remains signing blocked",
+    "passed": true,
+    "detail": "signing_blocked"
+  }
+]

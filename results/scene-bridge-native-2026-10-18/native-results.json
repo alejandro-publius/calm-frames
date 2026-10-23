@@ -1,0 +1,24 @@
+{
+  "checks": [
+    "How it works opens at Back",
+    "Explicit development entry mounts verified static test text with return focused",
+    "Stale identity requests ordinary opaque fallback",
+    "Valid identity restores the static test text",
+    "Hardware Back dismisses the fixture and restores entry focus",
+    "Skip test and return dismisses the fixture and restores entry focus",
+    "How it works Back restores Home opener",
+    "Parents cancel restores Parents without PIN entry",
+    "App returned to Home Watch"
+  ],
+  "capture_used": false,
+  "media_played": false,
+  "collector_pid": 91537,
+  "initial_focus_trace_missing": true,
+  "personal_editor_native_tested": false,
+  "registered_real_scene_bridge_native_tested": false,
+  "static_fixture_native_state_tested": true,
+  "result": "completed",
+  "collector_stopped": true,
+  "last_reported_focus": "kid-mode-home-watch",
+  "native_visual_audio_acceptance": false
+}

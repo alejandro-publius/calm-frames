@@ -1,0 +1,9 @@
+{
+  "source_commit": "1d142852beb4a0c0b5068d9f50864c2394554107",
+  "package_sha256": "af2fcb0f8982773b044ec625fa1f7a3c50c34de33ae64bed9b5d829a6aba0712",
+  "install_count": 1,
+  "started_utc": "2026-10-18T18:29:55.106422+00:00",
+  "app_inputs_matched": 821,
+  "device_copy_sha256_matches": true,
+  "completed_utc": "2026-10-18T18:29:58.390720+00:00"
+}

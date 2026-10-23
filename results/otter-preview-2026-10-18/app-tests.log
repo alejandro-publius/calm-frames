@@ -1,0 +1,12 @@
+PASS test/calmframes/otterPreview.test.tsx
+PASS test/calmframes/homeComposition.test.tsx
+PASS test/calmframes/unavailableDetails.test.tsx
+PASS test/calmframes/cinemaSelection.test.tsx
+PASS test/calmframes/packagedLibrary.test.tsx
+PASS test/calmframes/bakedAmbient.test.ts
+
+Test Suites: 6 passed, 6 total
+Tests:       89 passed, 89 total
+Snapshots:   0 total
+Time:        2.852 s, estimated 3 s
+Ran all test suites matching /test\/calmframes\/otterPreview.test.tsx|test\/calmframes\/cinemaSelection.test.tsx|test\/calmframes\/homeComposition.test.tsx|test\/calmframes\/unavailableDetails.test.tsx|test\/calmframes\/packagedLibrary.test.tsx|test\/calmframes\/bakedAmbient.test.ts/i.

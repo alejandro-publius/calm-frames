@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "catalogs": [
+    {
+      "bundleId": "0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb",
+      "catalogSha256": "458af619dcfd72d46b72e0b0ba7d59db0299cd3054c3a8d2cd6d47cfec682238",
+      "publicKeyFingerprint": "98e4c9564d4ef219cc743a0e06372192b9aef573c4ce956987d5bfe255a11407",
+      "consumer": true,
+      "label": "Acadia: approved ocean replacement",
+      "approvalReference": "Owner \"do everything you can\" after exact local replacement proposal, thread 01a156b2-766b-722d-a376-56854ea450e0, 2026-10-21; results/local-demo-2026-10-21/approval.json"
+    },
+    {
+      "bundleId": "b8dea9a7534215b2b360b284be2d0b23976f7caea215c691e576dff72ba6cbef",
+      "catalogSha256": "6b3f250598791232009a8c2ddef81bab0411eebcaa201ff582e7313cd4e9e7fe",
+      "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+      "consumer": true,
+      "label": "Sea otters in Alaska: approved NOAA ocean excerpt",
+      "approvalReference": "Owner \"do it all\" after exact clip/install proposal, thread 01a10d92-99ac-70a3-b473-29310ef6e002; results/sea-otters-flow-2026-10-18/approval.json"
+    },
+    {
+      "bundleId": "77d43b664cb49d6caf82887c70d13df9d98eb32add815abd5d41320ca316503f",
+      "catalogSha256": "24d5cb114e3bcec0047158b7d2d3ac10bdb324cca0a51c61d78e70bd5256d732",
+      "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+      "consumer": true,
+      "label": "Forest creek at Redwood: approved NPS excerpt",
+      "approvalReference": "Owner exact Forest activation approval in thread 01a10d92-99ac-70a3-b473-29310ef6e002; results/forest-activation-2026-10-18/approval.json"
+    },
+    {
+      "bundleId": "96af7d2223d8f987ffb58cb08889e3d515585f74087f31212e38ddec979e6cf3",
+      "catalogSha256": "a5b8fee6e16d0f7289e529ceb697f5e43dbc39d322ff67dd720f97d28e4b2e25",
+      "publicKeyFingerprint": "00c1bd272c4f3068626ddf6a828ae3f52ca32eae76dab35308d5d6687270b881",
+      "consumer": true,
+      "label": "McWay Falls: five quiet minutes, then still",
+      "approvalReference": "Owner approved verified McWay activation in overnight completion bundle, thread 01a156b2-766b-722d-a376-56854ea450e0, Sentinel_863b71245ae08191bb0fd73175d5306e; results/mcway-activation-2026-10-21/verification.json"
+    }
+  ]
+}

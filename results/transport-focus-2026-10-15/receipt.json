@@ -1,0 +1,76 @@
+{
+  "appSourceCommit": "21f0ea60332b83efe960eb7cf799139ec2d82ae9",
+  "branch": "codex/prepared-video-slice-2026-10-15",
+  "packagePath": "build/release/transport-focus-2026-10-15/calm-frames-0.1.0-aarch64-debug.vpkg",
+  "packageSha256": "a39566ba190b21cbfc5523e902a37bbe00801c189c3d55c891177343d3b36507",
+  "appInputsCommitted": true,
+  "sourceInputCount": 747,
+  "tests": {
+    "appSuites": 131,
+    "appPassed": 1313,
+    "appSkipped": 4,
+    "snapshots": 57,
+    "captureExportSuitesExcluded": [
+      "uiCapture",
+      "coastalExport",
+      "controlStudy"
+    ],
+    "typecheck": "passed",
+    "lintErrors": 0,
+    "lintWarnings": 101,
+    "newRegression": "Two background-focus cases failed before the fix and passed after it; TV configuration regression confirms seek bar rather than automotive Forward button."
+  },
+  "native": {
+    "observedPasses": 16,
+    "blocked": [],
+    "inconclusive": [],
+    "acadiaIdentityMatchesPreviousApprovedPackage": true,
+    "tvSeekTargetMs": 12123,
+    "coverRequestBeforePlayheadWrite": true,
+    "backgroundRouteFocusEventsDuringPauseCheck": 0,
+    "touchInjectionEvents": 0,
+    "finalFocus": "kid-mode-home-learn",
+    "leftRunning": true,
+    "builds": 1,
+    "installs": 1
+  },
+  "diagnosis": "Old harness targeted an automotive-only Forward button. Separately, inactive KidMode route kept focusable native controls behind playback. The fix unmounts those controls while preserving route state; correct TV seek-bar path passes native log checks.",
+  "limits": [
+    "Logs establish emitted focus/media/seek events, not actual pixels, visible rings, audio, captions, VoiceView or compositor timing.",
+    "No physical TV, independent detector or loop-seam acceptance.",
+    "Saved household, sound preference, volume, approved catalogs and keys unchanged.",
+    "No screen/video recording or computer-use capture.",
+    "An interrupted first source-test attempt included controlStudy, which exported in-memory component JSON only. No screen or image capture occurred; final suite explicitly excluded it.",
+    "Historical full remote Fast Forward checks belong to source 0a54252; current native seek check uses TV seek bar."
+  ],
+  "evidence": {
+    "preparation.json": "7aa082021ed799a3a35180c6c5f34575e871f186248d83c128e20ab0864c12de",
+    "native-events.log": "014b7685703716d962fb31428cd28c910ca225a4c66dd52e6aae5b4d44e7f59d",
+    "native-results.json": "53696621975e0d2a9408eda34859a89b81a1973e7976a189d2fe4c1afbd459ee",
+    "native-progress.txt": "1fafba68f20e37cad467f66abc92a7b5925ebeac83116e7cc290702ccd031e8d"
+  },
+  "localLogs": {
+    ".logs/transport-focus/app-tests-final.log": "f8885340275d4a42e73c2bbc1abb9c08f83b8e4aad7cb18da9ccbf2cd6f04df6",
+    ".logs/transport-focus/red.log": "b6879eacf1d3419beaae162f28c257e7b002e1837d894d8b3959feca5cb4dd93",
+    ".logs/transport-focus/lint.log": "f23a005c5320c36aa7918cb66dfd4ffb779f332684d18debadd3b21886a06010",
+    ".logs/transport-focus/app-tests.log": "dd8e48bcb93ec6c84204f53cebff6746c4db28632a49fe10f183fbf90844c41d",
+    ".logs/transport-focus/focused-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".logs/transport-focus/typecheck.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+    ".logs/transport-focus/native-run.log": "1fafba68f20e37cad467f66abc92a7b5925ebeac83116e7cc290702ccd031e8d",
+    ".logs/transport-focus/focused.log": "42efe58366f48aa0cc2209951feabbcea8105602a969a85c41468e9036a90741",
+    ".logs/transport-focus/build.log": "0b538ce65408f21eea091e962792bd5ba03ff956e6f5d1cf72feb46c48333c55",
+    ".logs/transport-focus/hook-sync.log": "c8db2a3f042e6bcc5ac7299a6c25eab5c8501717ca30660820a5e52ec4d6da30"
+  },
+  "regressionEvidence": {
+    "preFix": {
+      "failed": 2,
+      "reason": "Home and Details native controls remained present after play",
+      "log": ".logs/transport-focus/red.log"
+    },
+    "postFix": {
+      "passed": true,
+      "log": ".logs/transport-focus/app-tests-final.log"
+    },
+    "correctedHarness": "Automotive-only button assertion replaced by TV seek-bar assertion. Old sample test mocked React useState and could not support that assertion; moved to existing real player harness."
+  }
+}

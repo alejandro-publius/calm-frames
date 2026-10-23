@@ -1,0 +1,25 @@
+{
+  "checks": [
+    "Single update installed; transferred package SHA-256 and all app inputs match",
+    "Home Watch still selects exact approved ocean Acadia",
+    "Both Acadia intervals request baked ocean; natural end restores Home Watch",
+    "Existing content rail selects both Acadia and Otters",
+    "Otter selection opens Details with Watch preview focused",
+    "Exact otter preview plays once, ends and restores Details Watch; no ambient presentation",
+    "Manual Back from otter playback restores Details Watch",
+    "Details Back restores the selected Otter card on Home",
+    "Left Home with Otters selected and Watch preview focused"
+  ],
+  "capture_used": false,
+  "visual_audio_acceptance": false,
+  "native_error_injected": false,
+  "household_records_inspected": false,
+  "acadia_cover_on_media_ms": [
+    7387,
+    28142
+  ],
+  "selected_home_title": "Otters \u00b7 short preview",
+  "result": "completed",
+  "collector_stopped": true,
+  "last_reported_focus": "kid-mode-home-watch"
+}

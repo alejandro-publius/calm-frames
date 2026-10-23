@@ -1,0 +1,32 @@
+22:54:57Z Installed Back repair once; no data reset
+22:55:07Z PASS Launch Watch focus | kid-mode-home-watch
+22:55:12Z key KEY_ENTER -> player-seekbar
+22:55:16Z key KEY_BACK -> kid-mode-home-watch
+22:55:16Z PASS Harbor Watch and playback Back | playing event; return Home Watch
+22:55:21Z key KEY_RIGHT -> kid-mode-home-more-info
+22:55:25Z key KEY_ENTER -> kid-mode-details-play
+22:55:30Z key KEY_RIGHT -> kid-mode-details-show-info
+22:55:35Z key KEY_ENTER -> kid-mode-details-info-back
+22:55:39Z key KEY_DOWN -> kid-mode-details-practice
+22:55:44Z key KEY_ENTER -> kid-mode-details-play
+22:55:49Z key KEY_ENTER -> calm-card-skip
+22:55:53Z key KEY_BACK -> kid-mode-details-play
+22:55:53Z PASS Simulated demo playback Back | playing event; return demo Details Watch
+22:55:58Z key KEY_BACK -> kid-mode-details-practice
+22:55:58Z PASS Demo Back to More info | More info demo control focused
+22:56:02Z key KEY_BACK -> kid-mode-details-show-info
+22:56:02Z PASS More info Back to Details | More info control focused; Home not reached
+22:56:07Z key KEY_BACK -> kid-mode-home-more-info
+22:56:07Z PASS Details Back to Home | Home Details focused
+22:56:12Z key KEY_ENTER -> kid-mode-details-play
+22:56:16Z key KEY_RIGHT -> kid-mode-details-show-info
+22:56:21Z key KEY_ENTER -> kid-mode-details-info-back
+22:56:25Z key KEY_DOWN -> kid-mode-details-practice
+22:56:30Z key KEY_DOWN -> kid-mode-details-technical
+22:56:35Z key KEY_ENTER -> kid-mode-details-info-back
+22:56:39Z key KEY_BACK -> kid-mode-details-technical
+22:56:44Z key KEY_BACK -> kid-mode-details-show-info
+22:56:49Z key KEY_BACK -> kid-mode-home-more-info
+22:56:49Z PASS Technical details nested Back | technical -> More info -> Details -> Home; matching controls restored
+22:56:53Z key KEY_LEFT -> kid-mode-home-watch
+22:56:54Z PASS Left running at Home | Watch focused; no autoplay

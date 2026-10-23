@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "case": "unchanged",
+      "accepted": true,
+      "expectedAccepted": true,
+      "error": null
+    },
+    {
+      "case": "rendition-byte",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "A packaged artifact differs from the verified export."
+    },
+    {
+      "case": "map-byte",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "A packaged artifact differs from the verified export."
+    },
+    {
+      "case": "swapped-rendition",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "A packaged artifact differs from the verified export."
+    },
+    {
+      "case": "manifest-hash",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "The packaged manifest bytes differ from the catalog."
+    },
+    {
+      "case": "embedded-map",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "The packaged catalog is not canonical export text."
+    },
+    {
+      "case": "missing-report",
+      "accepted": false,
+      "expectedAccepted": false,
+      "error": "Original verification reports are missing: 0c9f243dfa427ae9436b9d58510b52b7f4551f98a8d74e59edf534bec2e4c019"
+    }
+  ]
+}

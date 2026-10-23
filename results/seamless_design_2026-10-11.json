@@ -1,0 +1,200 @@
+{
+  "date": "2026-10-11",
+  "base_commit": "5316051d0cc83146118e1c669131cb6282fbe836",
+  "scope": "Library synopsis, stable parent saving feedback, and setup revision navigation.",
+  "public_reference": {
+    "repository": "https://github.com/openai/apps-sdk-ui",
+    "commit": "0f00143c7a639906f1621fe58e1b6be7b5bea46d",
+    "relationship": "Public design reference, not internal team advice or endorsement."
+  },
+  "source_sha256": {
+    "app/src/calmframes/FirstRunScreen.tsx": "23ac7e86ad90f677ec35245de0b81c3c729f24945e419a065f3549dfa6ce0378",
+    "app/src/calmframes/KidHomeScreen.tsx": "d2ea6cf1f54f186d92b28af95e54ba335c395480e56dab492c653aac99e13fea",
+    "app/src/calmframes/ParentAreaScreen.tsx": "0d7d00b141873285f7ab4856679b139a567092802e162ae471f09d6410afe0c1",
+    "app/src/calmframes/TitleArtwork.tsx": "800a97557117420c11a62d672aa32c8e6f7412a8dc182a2c45944489a1277a7d"
+  },
+  "browser_layout_proof": {
+    "label": "Browser layout approximations from actual rendered React Native trees, not native Vega captures.",
+    "browser_version": "151.0.7922.173",
+    "viewport": {
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1
+    },
+    "method": "Actual rendered host nodes, actual text, actual flattened styles, approved original images and bundled Inter fonts. Host View uses flex-column, border-box and flexShrink=0; ScrollView uses its actual contentContainerStyle.",
+    "fixtures": "Existing checkedShelf data and synthetic household, focus and pending-save inputs. No recorded native session.",
+    "library_observation": "Synopsis is two 48px lines. All three card qualifiers end at y=988 within the 1080px viewport. Library ScrollView has scrollHeight=clientHeight=842 and no horizontal overflow.",
+    "parent_shared_control_bounds_equal": true,
+    "parent_sample_bounds": {
+      "parent-area-profiles-everyone": {
+        "idle": {
+          "x": 96,
+          "y": 376,
+          "width": 234.140625,
+          "height": 82
+        },
+        "saving": {
+          "x": 96,
+          "y": 376,
+          "width": 234.140625,
+          "height": 82
+        },
+        "equal": true
+      },
+      "parent-area-profiles-profile-1": {
+        "idle": {
+          "x": 350.140625,
+          "y": 376,
+          "width": 171.59375,
+          "height": 82
+        },
+        "saving": {
+          "x": 350.140625,
+          "y": 376,
+          "width": 171.59375,
+          "height": 82
+        },
+        "equal": true
+      },
+      "parent-area-profiles-profile-2": {
+        "idle": {
+          "x": 541.734375,
+          "y": 376,
+          "width": 151,
+          "height": 82
+        },
+        "saving": {
+          "x": 541.734375,
+          "y": 376,
+          "width": 151,
+          "height": 82
+        },
+        "equal": true
+      },
+      "parent-area-add-profile": {
+        "idle": {
+          "x": 96,
+          "y": 686,
+          "width": 231.765625,
+          "height": 98
+        },
+        "saving": {
+          "x": 96,
+          "y": 686,
+          "width": 231.765625,
+          "height": 98
+        },
+        "equal": true
+      },
+      "parent-area-preset-wcag": {
+        "idle": {
+          "x": 96,
+          "y": 926,
+          "width": 1400,
+          "height": 156
+        },
+        "saving": {
+          "x": 96,
+          "y": 926,
+          "width": 1400,
+          "height": 156
+        },
+        "equal": true
+      }
+    },
+    "setup_observation": "Review scrollHeight=1292 for 1080px viewport. Back and Open library begin at y=1086 in the initial scroll position; both fit after a 212px scroll to bottom. No native scrolling-on-focus or D-pad behavior measured.",
+    "screenshot_sha256": {
+      "docs/design/seamless/library-family-browser.png": "d0c3552fa92428ea4f5aa68cf27451ba2f830a1d09c580d4e0d94fb968a55429",
+      "docs/design/seamless/parent-idle-browser.png": "19be4b0831e20158b474180144cff5c78602a4fad5a55505a0a80e01e12495d3",
+      "docs/design/seamless/parent-saving-browser.png": "751d970dde0a90c9bab8fe218e4f7e5bf8c58c589f4cbdd9c098efda88f3b814",
+      "docs/design/seamless/setup-review-browser.png": "d05c7ea7e8e4ffd6de17433f868ced1f48647c9ff928d207a46ce96b058c2eef",
+      "docs/design/seamless/setup-review-bottom-browser.png": "546bcbe6d2e0e96a304a35837cb34ce4271c42d15b2c5661b1498f291275a449"
+    },
+    "tree_sha256": {
+      "library-family.tree.json": "d0050ada319d7ac4394b85d91370bc025e8fd5ca1d133af5e74ce45a6d42d413",
+      "parent-idle.tree.json": "11eab849381c1d831d075154d5f64d0dfcc710b71f27a330dd19580772ee6743",
+      "parent-saving.tree.json": "d41c31a2788b20dea085abc00b805d937d6f728ee3f5843ca7b698f1b560bb3d",
+      "setup-review.tree.json": "474d9780247ad7459b77deb63bb99dc3ee25026176f7a11a7bfb0f3a96c8a4cf"
+    },
+    "export_fixture_sha256": "94e2e186c6573d0bf456b06cab8672365313cf81910daed79c695c93fe57f8a5",
+    "render_helper_sha256": "e05befe3f43dd707c68546e853430c86d7c1b0e0d5fedc8a22526e3fae03d32d",
+    "capture_helper_sha256": "aa3d80df48cd9d333e5b7bde9898d64058249ef704319e76bc2664336d8294e2",
+    "limitations": [
+      "Browser flex and text layout approximate React Native Yoga/native text metrics.",
+      "Jest mocks do not provide native focus traversal, screen-reader behavior, scrolling-on-focus, rendering, media, persistence, or performance evidence.",
+      "Focus events and settings state are synthetic inputs listed in each tree file.",
+      "PNG screenshots are browser layout proofs, not Vega captures."
+    ]
+  },
+  "validation": {
+    "app": {
+      "command": "make test-app",
+      "node_major": 22,
+      "passed": 1074,
+      "skipped": 4,
+      "snapshots_passed": 57,
+      "suites_passed": 107,
+      "suites_skipped": 1,
+      "exit_code": 0
+    },
+    "typecheck": {
+      "command": "npm run typecheck (app/)",
+      "exit_code": 0
+    },
+    "scoped_lint": {
+      "scope": "Changed app source and test files",
+      "exit_code": 0,
+      "warnings": 0
+    },
+    "ui_flash_checks": {
+      "commands": [
+        "node tools/ui_flashmap.mjs",
+        "node tools/ui_flashmap.mjs --negative-control"
+      ],
+      "screens_and_transitions": 36,
+      "profiles": [
+        "wcag",
+        "broadcast"
+      ],
+      "normal_and_rejection_controls_passed": true,
+      "exit_code": 0
+    },
+    "regressions": {
+      "library_synopsis": "New tests failed before the change and passed after it; complete preparation disclosure and practice labels are preserved.",
+      "setup_revision": "The new regression failed before the Back controls and passed after them; selected values and confirmed PIN are retained, and completion is not called before Open library.",
+      "setup_red_log": "Observed tool output only; no separate red-run log saved.",
+      "existing_parent_checks_passed": 118
+    },
+    "independent_review": "No concrete source or behavior blockers found; native focus, layout, announcement and scrolling observations remain pending.",
+    "local_log_sha256": {
+      ".logs/seamless-app-final.log": "e961c9ca6b8c1eb55a6c2b4da6175d71ad123f8d22fac6f44a32fed95620bf67",
+      ".logs/seamless-typecheck.log": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828",
+      ".logs/seamless-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      ".logs/seamless-ui-final.log": "f67ee05679551ff3e36825483bf3052a141b1c6d1d17d1a65c3001c3d031877c",
+      ".logs/seamless-parent-checks.log": "707c7cfc3a1d51d75c957bcdcea5116e962f4b97d061d6bbeff232b908c046cf",
+      ".logs/hero-synopsis-red.log": "61ec273aa37ee2922d4e7ad59c004e5ee5b2ba40dcef473c695cb2c5eaa09a86",
+      ".logs/hero-synopsis-green.log": "30311c478c6adf84fba5799f7c02610b851a0bdf56aa6c6b2311caf32f4c67ee",
+      ".logs/seamless-python-final.log": "160fdd1e629d23f3d149ca4c43c0686bd2b7ed470a68c07d7d0e35770f171182"
+    },
+    "log_scope": "Logs are local ignored artifacts. Counts are not additive: focused runs overlap the full app suite.",
+    "staged_secrets": {
+      "command": "bash scripts/gitleaks_scan.sh staged",
+      "exit_code": 0,
+      "findings": 0
+    },
+    "python": {
+      "command": ".venv/bin/python -m pytest flashmap pipeline eval -q -m 'not slow'",
+      "passed": 1750,
+      "deselected": 2,
+      "seconds": 583.04,
+      "exit_code": 0,
+      "environment": "Node 22 on PATH; isolated Moto AWS config; shared credentials disabled; EC2 metadata disabled; writable JSII cache."
+    },
+    "documentation": {
+      "style_check": "pass",
+      "published_number_check": "pass",
+      "diff_check": "pass"
+    }
+  },
+  "native_status": "Pending a fresh Mac/Vega build and observations. Existing native captures predate these changes."
+}

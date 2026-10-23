@@ -1,0 +1,5 @@
+Test Suites: 1 skipped, 116 passed, 116 of 117 total
+Tests:       4 skipped, 1193 passed, 1197 total
+Snapshots:   57 passed, 57 total
+Time:        31.666 s, estimated 43 s
+Ran all test suites.

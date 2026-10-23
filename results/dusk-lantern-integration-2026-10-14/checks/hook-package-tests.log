@@ -1,0 +1,74 @@
+
+> @calm-frames/flash-guard@0.1.0 test:package
+> node --test tools/check_package.test.mjs
+
+TAP version 13
+# Subtest: the actual package declares installable source entry points and peers
+ok 1 - the actual package declares installable source entry points and peers
+  ---
+  duration_ms: 0.803208
+  type: 'test'
+  ...
+# Subtest: the included Apache licence matches the repository licence
+ok 2 - the included Apache licence matches the repository licence
+  ---
+  duration_ms: 0.458708
+  type: 'test'
+  ...
+# Subtest: every essential public value and type is exported
+ok 3 - every essential public value and type is exported
+  ---
+  duration_ms: 6.668
+  type: 'test'
+  ...
+# Subtest: a packed entry and every engine dependency are mandatory
+ok 4 - a packed entry and every engine dependency are mandatory
+  ---
+  duration_ms: 1.173333
+  type: 'test'
+  ...
+# Subtest: keys, media, fixtures, app files and development tools cannot enter the tarball
+ok 5 - keys, media, fixtures, app files and development tools cannot enter the tarball
+  ---
+  duration_ms: 0.94125
+  type: 'test'
+  ...
+# Subtest: source entries cannot silently resolve somewhere outside the packed package
+ok 6 - source entries cannot silently resolve somewhere outside the packed package
+  ---
+  duration_ms: 0.177541
+  type: 'test'
+  ...
+# Subtest: a missing runtime peer cannot be hidden by the monorepo
+ok 7 - a missing runtime peer cannot be hidden by the monorepo
+  ---
+  duration_ms: 0.167083
+  type: 'test'
+  ...
+# Subtest: the reused real peers satisfy every declared package range
+ok 8 - the reused real peers satisfy every declared package range
+  ---
+  duration_ms: 10.745125
+  type: 'test'
+  ...
+# Subtest: relative dependency checks reject missing and escaping source paths
+ok 9 - relative dependency checks reject missing and escaping source paths
+  ---
+  duration_ms: 4.707916
+  type: 'test'
+  ...
+# Subtest: consumer entry must be installed source rather than the repository copy
+ok 10 - consumer entry must be installed source rather than the repository copy
+  ---
+  duration_ms: 0.585
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 169.51075

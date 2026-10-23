@@ -1,0 +1,11 @@
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false --testPathPattern=(uiCapture|homeIntroduction).test
+
+ PASS  test/calmframes/uiCapture.test.tsx
+ PASS  test/calmframes/homeIntroduction.test.tsx
+
+Test Suites: 2 passed, 2 total
+Tests:       25 passed, 25 total
+Snapshots:   0 total
+Time:        1.94 s, estimated 2 s
+Ran all test suites matching /(uiCapture|homeIntroduction).test/i.

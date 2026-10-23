@@ -1,0 +1,37 @@
+{
+  "reviewedCommit": "3af32e47c569cc0c1d2a182c09c901487853e183",
+  "integratedCommit": "4a8b34e1270b94b9ab99fe2aeca052c9816fd1d1",
+  "priorAssessment": "results/earlier-positive-2026-10-15/claude-review-assessment.json",
+  "whyInitiallySeparate": "Prior delegation required read-only assessment and reporting before integration; subsequent delegation explicitly authorized useful tests/docs integration.",
+  "conflictResolution": "Both branches renamed the inaccurate one-pixel-more case. Retained Claude name stating a 24 by 25 block, plus its comment and new exact boundary tests. No assertion removed.",
+  "tests": {
+    "command": "PYTHONPATH=flashmap/src:. python -m pytest flashmap/tests/test_video_reset_boundaries.py -q",
+    "passed": 22,
+    "failed": 0,
+    "logSha256": "addba9418850fc02f3bae522ea42eb3aee2e7b562af276ad31dd981098f9f3c5",
+    "ruff": "passed"
+  },
+  "unchanged": {
+    "productionDetector": true,
+    "pipeline": true,
+    "appAndTrust": true,
+    "mediaAndMaps": true,
+    "hook": true,
+    "installedAppSource": "21f0ea60332b83efe960eb7cf799139ec2d82ae9",
+    "appSourceFilesHashMatched": 747,
+    "packageSha256": "a39566ba190b21cbfc5523e902a37bbe00801c189c3d55c891177343d3b36507",
+    "nativeRerun": false,
+    "rebuild": false
+  },
+  "auditQualifications": [
+    "Removed unsupported guarantee that causal timing approximation can only lengthen a reported span. No production failing case was found by this focused run.",
+    "Automatic return after ended is source-supported; current native driver explicitly presses Back before that delay.",
+    "Claude negative controls and 346-test analyzer run remain attributed historical evidence, not rerun claims."
+  ],
+  "materialLimits": [
+    "Working-resolution averaging can miss small source features.",
+    "SDR display/colour assumptions, unsupported HDR and exceptions remain.",
+    "Loop-seam analysis remains unsupported; no loop-safety claim.",
+    "No independent detector or clinical validation."
+  ]
+}

@@ -1,0 +1,8 @@
+PASS test/calmframes/continuousScene.test.tsx
+PASS test/calmframes/ambientScene.test.tsx
+
+Test Suites: 2 passed, 2 total
+Tests:       10 passed, 10 total
+Snapshots:   0 total
+Time:        1.32 s
+Ran all test suites matching /test\/calmframes\/ambientScene.test.tsx|test\/calmframes\/continuousScene.test.tsx/i.

@@ -1,0 +1,10 @@
+PASS test/screens/KidModeScreen.test.tsx (8.716 s)
+PASS test/calmframes/packagedLibrary.test.tsx
+PASS test/calmframes/preparedAnalysis.test.tsx
+PASS test/calmframes/parentNavigation.test.tsx
+
+Test Suites: 4 passed, 4 total
+Tests:       59 passed, 59 total
+Snapshots:   0 total
+Time:        9.753 s
+Ran all test suites matching /test\/calmframes\/packagedLibrary.test.tsx|test\/screens\/KidModeScreen.test.tsx|test\/calmframes\/parentNavigation.test.tsx|test\/calmframes\/preparedAnalysis.test.tsx/i.

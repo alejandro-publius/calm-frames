@@ -1,0 +1,157 @@
+{
+  "base_commit": "13551e45bd853c392489dbecce7158a04036f615",
+  "claims": [
+    {
+      "id": "C01",
+      "title": "Approved product wording and scope",
+      "statement": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+      "version": "d96c088",
+      "evidence": "GUIDE.md; ARCHITECTURE.md; evidence/spec-sources.md",
+      "limits": "Threshold-based technical aim, not proof of medical safety or personal comfort."
+    },
+    {
+      "id": "C02",
+      "title": "Submitted baseline preserved",
+      "statement": "Submitted candidate bf2f615; native source 60c3bbb has identical app and hook trees.",
+      "version": "bf2f615 / 60c3bbb",
+      "evidence": "evidence/release-selected.json: bases.submitted_candidate, native.fallback_source",
+      "limits": "Tree equality checked with Git in this task; no submitted artifact or live submission was changed."
+    },
+    {
+      "id": "C03",
+      "title": "Upgrade identity",
+      "statement": "Validated source d96c088; integration evidence commit 13551e45bd853c392489dbecce7158a04036f615.",
+      "version": "d96c088 / 13551e4",
+      "evidence": "evidence/release-selected.json: tested_commit, evidence_commit, bases",
+      "limits": "A historical local validation receipt, not hosted CI success or a new cloud run."
+    },
+    {
+      "id": "C04",
+      "title": "Python results",
+      "statement": "2049 passed, 0 failed, 0 skipped, 2 slow tests deselected.",
+      "version": "d96c088",
+      "evidence": "evidence/release-selected.json: python.full",
+      "limits": "Recorded full local run with optional test dependencies installed. Other configurations must retain their different counts."
+    },
+    {
+      "id": "C05",
+      "title": "App results",
+      "statement": "1729 passed, 4 skipped, 0 failed.",
+      "version": "d96c088",
+      "evidence": "evidence/release-selected.json: app.jest",
+      "limits": "Recorded Jest results; not a native, audio, clinical or usability outcome."
+    },
+    {
+      "id": "C06",
+      "title": "Recovery scenarios and guard mutations",
+      "statement": "16 of 16 scenarios passed; 24 of 24 recovery guard mutations killed.",
+      "version": "d96c088",
+      "evidence": "evidence/release-selected.json: recovery.scenarios, recovery.guard_mutations; evidence/preparation-recovery.md",
+      "limits": "One Mac/APFS, mostly fake analyzer, one real-analyzer scenario; no power cut. Not a detector-accuracy or performance benchmark."
+    },
+    {
+      "id": "C07",
+      "title": "General mutation gate",
+      "statement": "68 of 70 mutations killed; two documented equivalent survivors.",
+      "version": "d96c088",
+      "evidence": "evidence/release-selected.json: mutation_gate.totals; evidence/release-readiness.md",
+      "limits": "Do not say all 70 were killed. Recovery mutations are a separate set."
+    },
+    {
+      "id": "C08",
+      "title": "Native images are authentic",
+      "statement": "Home/Details/ending depict 60c3bbb; four integration crops depict d96c088.",
+      "version": "60c3bbb / d96c088",
+      "evidence": "assets.json; evidence/release-selected.json: native.committed_crops; evidence/capture-history.md",
+      "limits": "Reused unchanged, no new native capture. Architecture is documentation. validation/*.png are web-guide renders."
+    },
+    {
+      "id": "C09",
+      "title": "Playback evidence boundary",
+      "statement": "The included McWay playback still came from a shorter separate run; the full-duration observation used trace lines.",
+      "version": "d96c088",
+      "evidence": "evidence/release-readiness.md: On the Vega Virtual Device / Not established",
+      "limits": "The Mac was locked during the full run; audio was not listened to; no picture-timing or full-duration video proof follows from the still."
+    },
+    {
+      "id": "C10",
+      "title": "Proof-page semantics",
+      "statement": "Source, Prepared and Selection separate measurements, output checks and selected identity.",
+      "version": "d96c088",
+      "evidence": "evidence/code-excerpts.md: PlaybackProofPanel.tsx; assets/f04-proof-selection.png",
+      "limits": "Read-only explanation, not runtime rescanning or authority to trust a new title."
+    },
+    {
+      "id": "C11",
+      "title": "Build-time versus runtime identity",
+      "statement": "Media bytes are checked at build time; selection binds to expected route/map identities.",
+      "version": "d96c088",
+      "evidence": "ARCHITECTURE.md; evidence/code-excerpts.md: packagedLibrary.ts; assets/f04-proof-selection.png",
+      "limits": "Do not imply the info page rehashes or reanalyzes all playback bytes."
+    },
+    {
+      "id": "C12",
+      "title": "Missing analyzer version",
+      "statement": "McWay report lacks its output analyzer version and the UI says so.",
+      "version": "d96c088",
+      "evidence": "assets/f12-mcway-proof-prepared.png; evidence/release-readiness.md",
+      "limits": "Do not infer a version from another report. No flagged output segments does not demonstrate an activated protective cover."
+    },
+    {
+      "id": "C13",
+      "title": "Remote reading improvement",
+      "statement": "Reading sections are focus stops and the validation records reaching the analysis record and returning with Back.",
+      "version": "d96c088",
+      "evidence": "evidence/code-excerpts.md: ReadingStop.tsx; assets/f07-reading-wcag.png; evidence/release-readiness.md",
+      "limits": "No full VoiceView or physical Fire TV acceptance is established. Total key counts include an earlier build, so this package does not promote them as final-build counts."
+    },
+    {
+      "id": "C14",
+      "title": "Need and intended impact",
+      "statement": "Published flashing guidance and photosensitivity context motivate an inspectable prepared-library workflow.",
+      "version": "Primary-source context",
+      "evidence": "PRIMARY_SOURCES.md: P2/P3; evidence/spec-sources.md; evidence/outreach-status.md",
+      "limits": "No fresh source-page verification, interviews, adoption, market sizing, medical outcome or comfort measurement."
+    },
+    {
+      "id": "C15",
+      "title": "Differentiation",
+      "statement": "This implementation combines preparation, exact-edition checks, guarded playback and a readable proof record.",
+      "version": "d96c088",
+      "evidence": "ARCHITECTURE.md; evidence/code-excerpts.md",
+      "limits": "Describes this project, not a first/only claim or assertion about competitor limitations."
+    },
+    {
+      "id": "C16",
+      "title": "Official criteria",
+      "statement": "Recorded criteria: Tech Implementation, Design, Potential Impact, Quality of the Idea.",
+      "version": "Dated official-rules record",
+      "evidence": "RUBRIC_MATRIX.md; evidence/recorded-rules.md; evidence/source-access.json",
+      "limits": "Live Devpost fetch blocked. Current wording/weights/eligibility unverified; no score or bonus guaranteed."
+    },
+    {
+      "id": "C17",
+      "title": "SDK friction",
+      "statement": "F1-F6 summarize historical package-URI, image-source, frame-statistic, CLI, focus and staging observations.",
+      "version": "Recorded issue checkpoints; fixes 52138fe / ac5a610 where stated",
+      "evidence": "FRICTION_LOG_DRAFT.md; evidence/friction-records.md",
+      "limits": "No new repro or current SDK resolution claim. Mac lock state, ScreenCaptureKit, browser policy and unrelated runner issues are excluded from Amazon defect attribution."
+    },
+    {
+      "id": "C18",
+      "title": "Unavailable work",
+      "statement": "Claude newer benchmarks and the replacement video are not part of this evidence snapshot.",
+      "version": "Package scope",
+      "evidence": "HANDOFF.md; DEMO_EVIDENCE_BRIEF.md; evidence/release-readiness.md",
+      "limits": "Label newer results unavailable. Planned work is not implemented or measured by this package."
+    },
+    {
+      "id": "C19",
+      "title": "Offline guide and accessibility",
+      "statement": "Bundled runtime has no remote fetch or autoplay; keyboard, focus, contrast, reduced motion and responsive behavior are checked on the browser guide.",
+      "version": "This package only",
+      "evidence": "validation/checks.json; validation/desktop.png; validation/narrow.png",
+      "limits": "Checks cover the static guide, not native application accessibility or full WCAG conformance. Managed browser file-URL policy required HTTP for cloud rendering."
+    }
+  ]
+}

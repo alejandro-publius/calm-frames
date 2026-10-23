@@ -1,0 +1,22 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false --testPathPattern=(duskLantern|homeIntroduction|shelf|screens|returnFocus|appStackPlayerFallback|playerRouteFallback|firstRun|householdRestart|benignStory|packagedLibrary|wholeFlowDesign)\.test
+
+ PASS  test/calmframes/screens.test.tsx
+ PASS  test/screens/householdRestart.test.tsx (5.072 s)
+ PASS  test/calmframes/firstRun.test.tsx
+ PASS  test/calmframes/benignStory.test.tsx
+ PASS  test/calmframes/shelf.test.tsx
+ PASS  test/screens/returnFocus.test.tsx
+ PASS  test/calmframes/duskLantern.test.tsx
+ PASS  test/calmframes/homeIntroduction.test.tsx
+ PASS  test/calmframes/packagedLibrary.test.tsx
+ PASS  test/navigation/playerRouteFallback.test.tsx
+ PASS  test/calmframes/wholeFlowDesign.test.tsx
+ PASS  test/navigation/appStackPlayerFallback.test.tsx
+
+Test Suites: 12 passed, 12 total
+Tests:       187 passed, 187 total
+Snapshots:   0 total
+Time:        15.467 s
+Ran all test suites matching /(duskLantern|homeIntroduction|shelf|screens|returnFocus|appStackPlayerFallback|playerRouteFallback|firstRun|householdRestart|benignStory|packagedLibrary|wholeFlowDesign)\.test/i.

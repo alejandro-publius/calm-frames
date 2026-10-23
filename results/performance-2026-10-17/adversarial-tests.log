@@ -1,0 +1,203 @@
+PASS test/calmframes/playerOpening.test.tsx
+  ● Console
+
+    console.debug
+      [PlayerScreen.tsx] - playVideo -  Video playing successfully
+
+      at debug (src/screens/PlayerScreen.tsx:596:15)
+
+PASS test/calmframes/mapVerificationCache.test.ts
+PASS test/utils/VideoHandler.test.ts
+  ● Console
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles - Loading subtitles from: /pkg/assets/raw/benign-story/harbor.vtt [en]
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:343:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles -  Loaded 0 subtitles:
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:353:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles - Loading subtitles from: https://example.invalid/captions.vtt [en]
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:343:17)
+
+    console.log
+      [VideoHandler.ts] - loadSubtitles -  Loaded 0 subtitles:
+
+      at VideoHandler.log [as loadSubtitles] (src/utils/VideoHandler.ts:353:17)
+
+    console.log
+      [VideoHandler.ts] - loadStaticMediaPlayer - Loading static player with: file:///pkg/assets/raw/benign-story/harbor.precovered.mp4
+
+      at VideoHandler.log [as loadStaticMediaPlayer] (src/utils/VideoHandler.ts:263:15)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:168:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - Video Player Initialized
+
+      at log (src/utils/VideoHandler.ts:187:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:168:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:168:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:168:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - Video Player Initialized
+
+      at log (src/utils/VideoHandler.ts:187:19)
+
+    console.log
+      [VideoHandler.ts] - preBufferVideo - KMC : Skipped setting KMC
+
+      at VideoHandler.log (src/utils/VideoHandler.ts:168:19)
+
+    console.log
+      [VideoHandler.ts] - Triggering synchronous video elements destruction
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:636:13)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:565:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:572:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:596:17)
+
+    console.log
+      [VideoHandler.ts] - Triggering synchronous video elements destruction
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:636:13)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:565:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:572:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:596:17)
+
+    console.log
+      [VideoHandler.ts] - Triggering synchronous video elements destruction
+
+      at VideoHandler.log [as destroyVideoElements] (src/utils/VideoHandler.ts:636:13)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:565:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:572:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:596:17)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:565:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:572:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:596:17)
+
+    console.log
+      [VideoHandler.ts] - Deinitialize sync completed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:607:17)
+
+    console.log
+      [VideoHandler.ts] - Sync destruction completed
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:614:15)
+
+    console.log
+      [VideoHandler.ts] - Starting synchronous media player destruction
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:565:13)
+
+    console.log
+      [VideoHandler.ts]: pausing media
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:572:17)
+
+    console.log
+      [VideoHandler.ts] - destroying player
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:581:17)
+
+    console.log
+      [VideoHandler.ts] - destroying Adaptive Media Player (shaka)
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:584:19)
+
+    console.log
+      [VideoHandler.ts] - player destroyed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:591:17)
+
+    console.log
+      [VideoHandler.ts] - deinitializing media synchronously
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:596:17)
+
+    console.log
+      [VideoHandler.ts] - Deinitialize sync completed successfully
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:607:17)
+
+    console.log
+      [VideoHandler.ts] - Sync destruction completed
+
+      at VideoHandler.log [as destroyMediaPlayerSync] (src/utils/VideoHandler.ts:614:15)
+
+
+Test Suites: 3 passed, 3 total
+Tests:       37 passed, 37 total
+Snapshots:   0 total
+Time:        1.363 s
+Ran all test suites matching /test\/calmframes\/mapVerificationCache.test.ts|test\/calmframes\/playerOpening.test.tsx|test\/utils\/VideoHandler.test.ts/i.

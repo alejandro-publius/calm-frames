@@ -17,20 +17,20 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
   testID="touchable-opacity"
 >
   <View
-    accessibilityLabel="Not checked yet. This title has not been checked, so the picture stays hidden. Sound and captions keep playing."
-    accessibilityLiveRegion="polite"
-    accessibilityRole="alert"
+    accessibilityLabel="This video is unavailable. The picture stays hidden. Go back to the library."
+    accessibilityLiveRegion="none"
+    accessibilityRole="text"
     accessible={true}
-    aria-label="Not checked yet. This title has not been checked, so the picture stays hidden. Sound and captions keep playing."
-    aria-live="polite"
+    aria-label="This video is unavailable. The picture stays hidden. Go back to the library."
+    aria-live="off"
     pointerEvents="box-none"
     style={
       {
         "alignItems": "center",
-        "bottom": 160,
         "left": 0,
         "position": "absolute",
         "right": 0,
+        "top": 160,
         "zIndex": 3,
       }
     }
@@ -40,9 +40,9 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
       style={
         {
           "alignItems": "center",
-          "backgroundColor": "#173B47",
-          "borderColor": "#66A0B4",
-          "borderRadius": 16,
+          "backgroundColor": "#22303B",
+          "borderColor": "#748995",
+          "borderRadius": 24,
           "borderWidth": 2,
           "maxWidth": 1400,
           "paddingHorizontal": 64,
@@ -50,32 +50,45 @@ exports[`PlayerScreen rendering Test Cases renders correctly screenshot match 1`
         }
       }
     >
-      <Text
-        style={
-          {
-            "color": "#F3E8D3",
-            "fontSize": 56,
-            "fontWeight": "600",
-            "textAlign": "center",
+      <View>
+        <Text
+          style={
+            [
+              {
+                "color": "#F0F2EF",
+                "fontFamily": "CalmSansSemibold",
+                "fontSize": 38,
+                "fontWeight": "400",
+                "lineHeight": 48,
+                "textAlign": "center",
+              },
+              null,
+            ]
           }
-        }
-        testID="calm-card-title"
-      >
-        Not checked yet
-      </Text>
-      <Text
-        style={
-          {
-            "color": "#CFE0DC",
-            "fontSize": 38,
-            "marginTop": 12,
-            "textAlign": "center",
+          testID="calm-card-title"
+        >
+          This video is unavailable
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "color": "#C4CDD2",
+                "fontFamily": "CalmSansRegular",
+                "fontSize": 36,
+                "fontWeight": "400",
+                "lineHeight": 48,
+                "marginTop": 12,
+                "textAlign": "center",
+              },
+              null,
+            ]
           }
-        }
-        testID="calm-card-detail"
-      >
-        This title has not been checked, so the picture stays hidden. Sound and captions keep playing.
-      </Text>
+          testID="calm-card-detail"
+        >
+          The picture stays hidden. Go back to the library.
+        </Text>
+      </View>
     </View>
   </View>
 </View>

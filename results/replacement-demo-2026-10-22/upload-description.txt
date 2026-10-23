@@ -1,0 +1,27 @@
+Title: Calm Frames: prepared nature scenes, Playback Proof and recoverable preparation (Vega)
+
+Calm Frames on the Vega Virtual Device: prepared nature scenes for a calm TV, with the record behind each one.
+
+What this video shows
+0:00 Home and McWay Falls Details, in the app.
+0:10 McWay Falls plays at natural speed: 78 seconds uncut, then a one-second fade.
+1:29 Playback proof for Acadia: what was measured in the source, what was checked in the prepared file, and which exact file plays. The remote reaches every section of the record, and Back returns focus to the button that opened each page.
+2:19 Two developer-terminal cards, rendered from their saved logs, not the TV app:
+  1. A new owned video is imported with the real analyzer, renderer and verifier and comes out ready, but it stays off the TV: the app plays only catalogs approved by exact hash, and this one would also exceed the package budget.
+  2. A preparation killed while writing a file restarts, reuses its 19 finished steps and rebuilds the 6 that were incomplete or depended on them. One flipped byte in a cached file keeps the title out of the catalog until a 1.46-second repair.
+2:41 Credits.
+
+How it was recorded and edited
+App-window capture of the Vega Virtual Device with app audio only: no microphone, no other windows, no desktop.
+Cut out: a 0.14-second gray dip the virtual device shows after Watch, and, in the Playback proof walkthrough, the idle pauses between remote presses (labelled on screen). Playback itself is uncut and at natural speed.
+Audio: one uniform +7 dB gain on the captured app audio; nothing added.
+
+Measured on one Mac (Apple M1, macOS 15.1.1, ffmpeg 9.0.1, flashmap 1.0.0) with one 20-second 1280x720 owned clip, three runs each: cold preparation 93.21 s median (87.66 to 95.45 s), warm reuse 0.46 s, restart after the kill 62.07 s, most of it verification. These are not rates for other videos.
+
+Credits
+McWay Falls footage: MoneySavingVideos, "♥♥ Relaxing 3 Hour Video of a Waterfall on an Ocean Beach at Sunset," via Wikimedia Commons, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/). Source: https://commons.wikimedia.org/wiki/File:%E2%99%A5%E2%99%A5_Relaxing_3_Hour_Video_of_a_Waterfall_on_an_Ocean_Beach_at_Sunset.webm
+Changes: first five-minute excerpt, downsampled to 720p, H.264/AAC encoding, three-second fade of the source audio at the end. The footage carries a burned-in "D Hansen" signature. This video shows part of the excerpt.
+Acadia footage: NPS Video, Acadia National Park, public domain. Other visible title artwork: NOAA Fisheries; NPS: G Litten (Prairie Creek and Redwood). No endorsement implied.
+The import test clip, the Harbor story, is original Calm Frames artwork and sound and is not shown.
+
+Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device. Analyzer checks are technical checks, not a medical or comfort guarantee. Detection can miss flashing.

@@ -1,0 +1,5790 @@
+{
+  "1080/child": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "",
+      "x": 935.328125,
+      "y": 54,
+      "width": 400,
+      "height": 84
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 1367.328125,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 1393.328125,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles",
+      "text": "Whose settings\nEveryone\nRobin\nSam\nThese settings are for Robin.",
+      "x": 260,
+      "y": 254,
+      "width": 1000,
+      "height": 224
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "text": "Whose settings",
+      "x": 260,
+      "y": 254,
+      "width": 1000,
+      "height": 54
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "text": "Everyone",
+      "x": 260,
+      "y": 328,
+      "width": 234.140625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "text": "Everyone",
+      "x": 298,
+      "y": 346,
+      "width": 158.140625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "text": "Robin",
+      "x": 514.140625,
+      "y": 328,
+      "width": 171.59375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "text": "Robin",
+      "x": 552.140625,
+      "y": 346,
+      "width": 95.59375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "text": "Sam",
+      "x": 705.734375,
+      "y": 328,
+      "width": 151,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "text": "Sam",
+      "x": 743.734375,
+      "y": 346,
+      "width": 75,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "text": "These settings are for Robin.",
+      "x": 260,
+      "y": 430,
+      "width": 1000,
+      "height": 48
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 260,
+      "y": 522,
+      "width": 1000,
+      "height": 84
+    },
+    {
+      "id": "parent-area-add-profile",
+      "text": "Add a kid",
+      "x": 1300,
+      "y": 286,
+      "width": 231.765625,
+      "height": 98
+    },
+    {
+      "id": "parent-area-add-profile-label",
+      "text": "Add a kid",
+      "x": 1338,
+      "y": 312,
+      "width": 155.765625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-remove-profile",
+      "text": "Remove Robin",
+      "x": 1300,
+      "y": 396,
+      "width": 315.65625,
+      "height": 98
+    },
+    {
+      "id": "parent-area-remove-profile-label",
+      "text": "Remove Robin",
+      "x": 1338,
+      "y": 422,
+      "width": 239.65625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 260,
+      "y": 696,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 260,
+      "y": 868,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 260,
+      "y": 1040,
+      "width": 1400,
+      "height": 198
+    }
+  ],
+  "1080/child-room": [
+    {
+      "id": "parent-area-room",
+      "text": "55 inch television, seats about 8 feet away",
+      "x": 260,
+      "y": 128,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-tv-32",
+      "text": "32 inch",
+      "x": 260,
+      "y": 362,
+      "width": 200.203125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "text": "32 inch",
+      "x": 298,
+      "y": 380,
+      "width": 124.203125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-43",
+      "text": "43 inch",
+      "x": 480.203125,
+      "y": 362,
+      "width": 202.046875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "text": "43 inch",
+      "x": 518.203125,
+      "y": 380,
+      "width": 126.046875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-50",
+      "text": "50 inch",
+      "x": 702.25,
+      "y": 362,
+      "width": 201.015625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "text": "50 inch",
+      "x": 740.25,
+      "y": 380,
+      "width": 125.015625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-55",
+      "text": "55 inch",
+      "x": 923.265625,
+      "y": 362,
+      "width": 199.359375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "text": "55 inch",
+      "x": 961.265625,
+      "y": 380,
+      "width": 123.359375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-65",
+      "text": "65 inch",
+      "x": 1142.625,
+      "y": 362,
+      "width": 200.078125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "text": "65 inch",
+      "x": 1180.625,
+      "y": 380,
+      "width": 124.078125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-75",
+      "text": "75 inch",
+      "x": 1362.703125,
+      "y": 362,
+      "width": 197.34375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "text": "75 inch",
+      "x": 1400.703125,
+      "y": 380,
+      "width": 121.34375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-85",
+      "text": "85 inch",
+      "x": 260,
+      "y": 464,
+      "width": 200.015625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "text": "85 inch",
+      "x": 298,
+      "y": 482,
+      "width": 124.015625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "text": "55 inch is chosen.",
+      "x": 260,
+      "y": 566,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-seat-48",
+      "text": "4 ft",
+      "x": 260,
+      "y": 704,
+      "width": 132.53125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "text": "4 ft",
+      "x": 298,
+      "y": 722,
+      "width": 56.53125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-60",
+      "text": "5 ft",
+      "x": 412.53125,
+      "y": 704,
+      "width": 130.640625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "text": "5 ft",
+      "x": 450.53125,
+      "y": 722,
+      "width": 54.640625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-72",
+      "text": "6 ft",
+      "x": 563.171875,
+      "y": 704,
+      "width": 131.359375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "text": "6 ft",
+      "x": 601.171875,
+      "y": 722,
+      "width": 55.359375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-84",
+      "text": "7 ft",
+      "x": 714.53125,
+      "y": 704,
+      "width": 128.984375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "text": "7 ft",
+      "x": 752.53125,
+      "y": 722,
+      "width": 52.984375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-96",
+      "text": "8 ft",
+      "x": 863.515625,
+      "y": 704,
+      "width": 131.3125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "text": "8 ft",
+      "x": 901.515625,
+      "y": 722,
+      "width": 55.3125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-120",
+      "text": "10 ft",
+      "x": 1014.828125,
+      "y": 704,
+      "width": 146.6875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "text": "10 ft",
+      "x": 1052.828125,
+      "y": 722,
+      "width": 70.6875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-144",
+      "text": "12 ft",
+      "x": 1181.515625,
+      "y": 704,
+      "width": 145.078125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "text": "12 ft",
+      "x": 1219.515625,
+      "y": 722,
+      "width": 69.078125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "text": "8 feet away is chosen.",
+      "x": 260,
+      "y": 806,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 260,
+      "y": 984,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 260,
+      "y": 1052,
+      "width": 1400,
+      "height": 48
+    }
+  ],
+  "1080/child-interface": [
+    {
+      "id": "parent-area-interface-motion",
+      "text": "Gentle artwork motion\nArtwork settles into place when you open the library or a title. Reduced motion keeps it still.\nOff",
+      "x": 260,
+      "y": 128,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "text": "Selection sounds\nA quiet tone confirms menu actions. Silent during playback and when a screen reader is active.\nOff",
+      "x": 260,
+      "y": 342,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-chime",
+      "text": "Chime before the picture is hidden\nA soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.\nOn",
+      "x": 260,
+      "y": 686,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-chime-note",
+      "text": "A soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.",
+      "x": 298,
+      "y": 770,
+      "width": 1104,
+      "height": 84
+    },
+    {
+      "id": "parent-area-chime-label",
+      "text": "On",
+      "x": 1579.6875,
+      "y": 764,
+      "width": 42.3125,
+      "height": 42
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 260,
+      "y": 1030,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 1050,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 1059,
+      "width": 223.625,
+      "height": 42
+    }
+  ],
+  "1080/child-history": [
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 260,
+      "y": 128,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 260,
+      "y": 196,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-log-0",
+      "text": "10:00 Harbor: hid 4 seconds at 0:05",
+      "x": 260,
+      "y": 256,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-interface-motion",
+      "text": "Gentle artwork motion\nArtwork settles into place when you open the library or a title. Reduced motion keeps it still.\nOff",
+      "x": 260,
+      "y": 446,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "text": "Selection sounds\nA quiet tone confirms menu actions. Silent during playback and when a screen reader is active.\nOff",
+      "x": 260,
+      "y": 660,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-chime",
+      "text": "Chime before the picture is hidden\nA soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.\nOn",
+      "x": 260,
+      "y": 1004,
+      "width": 1400,
+      "height": 198
+    }
+  ],
+  "1080/child-bottom": [
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 260,
+      "y": 4,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 24,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 33,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Harbor\nReady to watch",
+      "x": 260,
+      "y": 116,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 136,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 145,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "text": "Calm gradient\nReady to watch",
+      "x": 260,
+      "y": 228,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 248,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 257,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "text": "Calm Frames prepares each story before you watch.",
+      "x": 260,
+      "y": 470,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+      "x": 260,
+      "y": 530,
+      "width": 1400,
+      "height": 96
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "text": "A card says what is coming, and what was hidden.",
+      "x": 260,
+      "y": 638,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+      "x": 260,
+      "y": 698,
+      "width": 1400,
+      "height": 96
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 260,
+      "y": 862,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 298,
+      "y": 888,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-credits",
+      "text": "Credits and licences",
+      "x": 596.671875,
+      "y": 862,
+      "width": 417.078125,
+      "height": 98
+    },
+    {
+      "id": "parent-area-credits-label",
+      "text": "Credits and licences",
+      "x": 634.671875,
+      "y": 888,
+      "width": 341.078125,
+      "height": 46
+    }
+  ],
+  "1080/full-household": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "",
+      "x": 935.328125,
+      "y": 54,
+      "width": 400,
+      "height": 84
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 1367.328125,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 1393.328125,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles",
+      "text": "Whose settings\nEveryone\nRobin\nSam\nAsh\nKit\nThese settings are for Everyone.",
+      "x": 260,
+      "y": 254,
+      "width": 1000,
+      "height": 224
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "text": "Whose settings",
+      "x": 260,
+      "y": 254,
+      "width": 1000,
+      "height": 54
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "text": "Everyone",
+      "x": 260,
+      "y": 328,
+      "width": 234.140625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "text": "Everyone",
+      "x": 298,
+      "y": 346,
+      "width": 158.140625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "text": "Robin",
+      "x": 514.140625,
+      "y": 328,
+      "width": 171.59375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "text": "Robin",
+      "x": 552.140625,
+      "y": 346,
+      "width": 95.59375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "text": "Sam",
+      "x": 705.734375,
+      "y": 328,
+      "width": 151,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "text": "Sam",
+      "x": 743.734375,
+      "y": 346,
+      "width": 75,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-3",
+      "text": "Ash",
+      "x": 876.734375,
+      "y": 328,
+      "width": 141.390625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-3-name",
+      "text": "Ash",
+      "x": 914.734375,
+      "y": 346,
+      "width": 65.390625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-4",
+      "text": "Kit",
+      "x": 1038.125,
+      "y": 328,
+      "width": 122.40625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-4-name",
+      "text": "Kit",
+      "x": 1076.125,
+      "y": 346,
+      "width": 46.40625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "text": "These settings are for Everyone.",
+      "x": 260,
+      "y": 430,
+      "width": 1000,
+      "height": 48
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 260,
+      "y": 522,
+      "width": 1000,
+      "height": 84
+    },
+    {
+      "id": "parent-area-profiles-full",
+      "text": "Up to four kids can be added. Remove one to add another.",
+      "x": 1300,
+      "y": 298,
+      "width": 360,
+      "height": 126
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 260,
+      "y": 696,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 260,
+      "y": 868,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 260,
+      "y": 1040,
+      "width": 1400,
+      "height": 198
+    }
+  ],
+  "1080/household": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "",
+      "x": 935.328125,
+      "y": 54,
+      "width": 400,
+      "height": 84
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 1367.328125,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 1393.328125,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles",
+      "text": "Whose settings\nEveryone\nRobin\nSam\nThese settings are for Everyone.",
+      "x": 260,
+      "y": 254,
+      "width": 1000,
+      "height": 224
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "text": "Whose settings",
+      "x": 260,
+      "y": 254,
+      "width": 1000,
+      "height": 54
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "text": "Everyone",
+      "x": 260,
+      "y": 328,
+      "width": 234.140625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "text": "Everyone",
+      "x": 298,
+      "y": 346,
+      "width": 158.140625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "text": "Robin",
+      "x": 514.140625,
+      "y": 328,
+      "width": 171.59375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "text": "Robin",
+      "x": 552.140625,
+      "y": 346,
+      "width": 95.59375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "text": "Sam",
+      "x": 705.734375,
+      "y": 328,
+      "width": 151,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "text": "Sam",
+      "x": 743.734375,
+      "y": 346,
+      "width": 75,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "text": "These settings are for Everyone.",
+      "x": 260,
+      "y": 430,
+      "width": 1000,
+      "height": 48
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 260,
+      "y": 522,
+      "width": 1000,
+      "height": 84
+    },
+    {
+      "id": "parent-area-add-profile",
+      "text": "Add a kid",
+      "x": 1300,
+      "y": 286,
+      "width": 231.765625,
+      "height": 98
+    },
+    {
+      "id": "parent-area-add-profile-label",
+      "text": "Add a kid",
+      "x": 1338,
+      "y": 312,
+      "width": 155.765625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 260,
+      "y": 696,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 260,
+      "y": 868,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 260,
+      "y": 1040,
+      "width": 1400,
+      "height": 198
+    }
+  ],
+  "1080/household-room": [
+    {
+      "id": "parent-area-room",
+      "text": "55 inch television, seats about 8 feet away",
+      "x": 260,
+      "y": 128,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-tv-32",
+      "text": "32 inch",
+      "x": 260,
+      "y": 362,
+      "width": 200.203125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "text": "32 inch",
+      "x": 298,
+      "y": 380,
+      "width": 124.203125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-43",
+      "text": "43 inch",
+      "x": 480.203125,
+      "y": 362,
+      "width": 202.046875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "text": "43 inch",
+      "x": 518.203125,
+      "y": 380,
+      "width": 126.046875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-50",
+      "text": "50 inch",
+      "x": 702.25,
+      "y": 362,
+      "width": 201.015625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "text": "50 inch",
+      "x": 740.25,
+      "y": 380,
+      "width": 125.015625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-55",
+      "text": "55 inch",
+      "x": 923.265625,
+      "y": 362,
+      "width": 199.359375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "text": "55 inch",
+      "x": 961.265625,
+      "y": 380,
+      "width": 123.359375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-65",
+      "text": "65 inch",
+      "x": 1142.625,
+      "y": 362,
+      "width": 200.078125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "text": "65 inch",
+      "x": 1180.625,
+      "y": 380,
+      "width": 124.078125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-75",
+      "text": "75 inch",
+      "x": 1362.703125,
+      "y": 362,
+      "width": 197.34375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "text": "75 inch",
+      "x": 1400.703125,
+      "y": 380,
+      "width": 121.34375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-85",
+      "text": "85 inch",
+      "x": 260,
+      "y": 464,
+      "width": 200.015625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "text": "85 inch",
+      "x": 298,
+      "y": 482,
+      "width": 124.015625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "text": "55 inch is chosen.",
+      "x": 260,
+      "y": 566,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-seat-48",
+      "text": "4 ft",
+      "x": 260,
+      "y": 704,
+      "width": 132.53125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "text": "4 ft",
+      "x": 298,
+      "y": 722,
+      "width": 56.53125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-60",
+      "text": "5 ft",
+      "x": 412.53125,
+      "y": 704,
+      "width": 130.640625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "text": "5 ft",
+      "x": 450.53125,
+      "y": 722,
+      "width": 54.640625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-72",
+      "text": "6 ft",
+      "x": 563.171875,
+      "y": 704,
+      "width": 131.359375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "text": "6 ft",
+      "x": 601.171875,
+      "y": 722,
+      "width": 55.359375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-84",
+      "text": "7 ft",
+      "x": 714.53125,
+      "y": 704,
+      "width": 128.984375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "text": "7 ft",
+      "x": 752.53125,
+      "y": 722,
+      "width": 52.984375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-96",
+      "text": "8 ft",
+      "x": 863.515625,
+      "y": 704,
+      "width": 131.3125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "text": "8 ft",
+      "x": 901.515625,
+      "y": 722,
+      "width": 55.3125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-120",
+      "text": "10 ft",
+      "x": 1014.828125,
+      "y": 704,
+      "width": 146.6875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "text": "10 ft",
+      "x": 1052.828125,
+      "y": 722,
+      "width": 70.6875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-144",
+      "text": "12 ft",
+      "x": 1181.515625,
+      "y": 704,
+      "width": 145.078125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "text": "12 ft",
+      "x": 1219.515625,
+      "y": 722,
+      "width": 69.078125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "text": "8 feet away is chosen.",
+      "x": 260,
+      "y": 806,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 260,
+      "y": 984,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 260,
+      "y": 1052,
+      "width": 1400,
+      "height": 48
+    }
+  ],
+  "1080/household-interface": [
+    {
+      "id": "parent-area-interface-motion",
+      "text": "Gentle artwork motion\nArtwork settles into place when you open the library or a title. Reduced motion keeps it still.\nOff",
+      "x": 260,
+      "y": 128,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "text": "Selection sounds\nA quiet tone confirms menu actions. Silent during playback and when a screen reader is active.\nOff",
+      "x": 260,
+      "y": 342,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-chime",
+      "text": "Chime before the picture is hidden\nA soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.\nOn",
+      "x": 260,
+      "y": 686,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-chime-note",
+      "text": "A soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.",
+      "x": 298,
+      "y": 770,
+      "width": 1104,
+      "height": 84
+    },
+    {
+      "id": "parent-area-chime-label",
+      "text": "On",
+      "x": 1579.6875,
+      "y": 764,
+      "width": 42.3125,
+      "height": 42
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 260,
+      "y": 1030,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 1050,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 1059,
+      "width": 223.625,
+      "height": 42
+    }
+  ],
+  "1080/household-history": [
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 260,
+      "y": 128,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 260,
+      "y": 196,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-log-0",
+      "text": "10:00 Harbor: hid 4 seconds at 0:05",
+      "x": 260,
+      "y": 256,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-interface-motion",
+      "text": "Gentle artwork motion\nArtwork settles into place when you open the library or a title. Reduced motion keeps it still.\nOff",
+      "x": 260,
+      "y": 446,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "text": "Selection sounds\nA quiet tone confirms menu actions. Silent during playback and when a screen reader is active.\nOff",
+      "x": 260,
+      "y": 660,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-chime",
+      "text": "Chime before the picture is hidden\nA soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.\nOn",
+      "x": 260,
+      "y": 1004,
+      "width": 1400,
+      "height": 198
+    }
+  ],
+  "1080/household-bottom": [
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 260,
+      "y": 4,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 24,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 33,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Harbor\nReady to watch",
+      "x": 260,
+      "y": 116,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 136,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 145,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "text": "Calm gradient\nReady to watch",
+      "x": 260,
+      "y": 228,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 248,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 257,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "text": "Calm Frames prepares each story before you watch.",
+      "x": 260,
+      "y": 470,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+      "x": 260,
+      "y": 530,
+      "width": 1400,
+      "height": 96
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "text": "A card says what is coming, and what was hidden.",
+      "x": 260,
+      "y": 638,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+      "x": 260,
+      "y": 698,
+      "width": 1400,
+      "height": 96
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 260,
+      "y": 862,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 298,
+      "y": 888,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-credits",
+      "text": "Credits and licences",
+      "x": 596.671875,
+      "y": 862,
+      "width": 417.078125,
+      "height": 98
+    },
+    {
+      "id": "parent-area-credits-label",
+      "text": "Credits and licences",
+      "x": 634.671875,
+      "y": 888,
+      "width": 341.078125,
+      "height": 46
+    }
+  ],
+  "1080/locked": [
+    {
+      "id": "parent-area-message",
+      "text": "Enter your PIN\nYour PIN opens parental controls. It stays on this television and is never sent anywhere.",
+      "x": 96,
+      "y": 186,
+      "width": 960,
+      "height": 226
+    },
+    {
+      "id": "parent-area-message-announcement",
+      "text": "Enter your PIN\nYour PIN opens parental controls. It stays on this television and is never sent anywhere.",
+      "x": 136,
+      "y": 218,
+      "width": 888,
+      "height": 162
+    },
+    {
+      "id": "parent-area-message-title",
+      "text": "Enter your PIN",
+      "x": 136,
+      "y": 218,
+      "width": 888,
+      "height": 54
+    },
+    {
+      "id": "parent-area-message-detail",
+      "text": "Your PIN opens parental controls. It stays on this television and is never sent anywhere.",
+      "x": 136,
+      "y": 284,
+      "width": 888,
+      "height": 96
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 96,
+      "y": 444,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 134,
+      "y": 470,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-keypad",
+      "text": "1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nDelete",
+      "x": 1120,
+      "y": 186,
+      "width": 540,
+      "height": 688
+    },
+    {
+      "id": "parent-area-entered",
+      "text": "",
+      "x": 1120,
+      "y": 186,
+      "width": 540,
+      "height": 76
+    },
+    {
+      "id": "parent-area-key-1",
+      "text": "1",
+      "x": 1120,
+      "y": 282,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-2",
+      "text": "2",
+      "x": 1300,
+      "y": 282,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-3",
+      "text": "3",
+      "x": 1480,
+      "y": 282,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-4",
+      "text": "4",
+      "x": 1120,
+      "y": 430,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-5",
+      "text": "5",
+      "x": 1300,
+      "y": 430,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-6",
+      "text": "6",
+      "x": 1480,
+      "y": 430,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-7",
+      "text": "7",
+      "x": 1120,
+      "y": 578,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-8",
+      "text": "8",
+      "x": 1300,
+      "y": 578,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-9",
+      "text": "9",
+      "x": 1480,
+      "y": 578,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-0",
+      "text": "0",
+      "x": 1120,
+      "y": 726,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-delete",
+      "text": "Delete",
+      "x": 1300,
+      "y": 726,
+      "width": 340,
+      "height": 128
+    }
+  ],
+  "1080/no-pin": [
+    {
+      "id": "parent-area-message",
+      "text": "Set up a PIN to continue\nA four digit PIN keeps parental controls where a child cannot change them.",
+      "x": 96,
+      "y": 186,
+      "width": 960,
+      "height": 226
+    },
+    {
+      "id": "parent-area-message-announcement",
+      "text": "Set up a PIN to continue\nA four digit PIN keeps parental controls where a child cannot change them.",
+      "x": 136,
+      "y": 218,
+      "width": 888,
+      "height": 162
+    },
+    {
+      "id": "parent-area-message-title",
+      "text": "Set up a PIN to continue",
+      "x": 136,
+      "y": 218,
+      "width": 888,
+      "height": 54
+    },
+    {
+      "id": "parent-area-message-detail",
+      "text": "A four digit PIN keeps parental controls where a child cannot change them.",
+      "x": 136,
+      "y": 284,
+      "width": 888,
+      "height": 96
+    },
+    {
+      "id": "parent-area-set-pin",
+      "text": "Set up a PIN",
+      "x": 96,
+      "y": 444,
+      "width": 279.765625,
+      "height": 98
+    },
+    {
+      "id": "parent-area-set-pin-label",
+      "text": "Set up a PIN",
+      "x": 134,
+      "y": 470,
+      "width": 203.765625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 395.765625,
+      "y": 444,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 433.765625,
+      "y": 470,
+      "width": 240.671875,
+      "height": 46
+    }
+  ],
+  "1080/no-profiles": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "",
+      "x": 935.328125,
+      "y": 54,
+      "width": 400,
+      "height": 84
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 1367.328125,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 1393.328125,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 260,
+      "y": 328,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 260,
+      "y": 500,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 260,
+      "y": 672,
+      "width": 1400,
+      "height": 198
+    },
+    {
+      "id": "parent-area-room",
+      "text": "55 inch television, seats about 8 feet away",
+      "x": 260,
+      "y": 1016,
+      "width": 1400,
+      "height": 48
+    }
+  ],
+  "1080/no-profiles-room": [
+    {
+      "id": "parent-area-room",
+      "text": "55 inch television, seats about 8 feet away",
+      "x": 260,
+      "y": 128,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-tv-32",
+      "text": "32 inch",
+      "x": 260,
+      "y": 362,
+      "width": 200.203125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "text": "32 inch",
+      "x": 298,
+      "y": 380,
+      "width": 124.203125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-43",
+      "text": "43 inch",
+      "x": 480.203125,
+      "y": 362,
+      "width": 202.046875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "text": "43 inch",
+      "x": 518.203125,
+      "y": 380,
+      "width": 126.046875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-50",
+      "text": "50 inch",
+      "x": 702.25,
+      "y": 362,
+      "width": 201.015625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "text": "50 inch",
+      "x": 740.25,
+      "y": 380,
+      "width": 125.015625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-55",
+      "text": "55 inch",
+      "x": 923.265625,
+      "y": 362,
+      "width": 199.359375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "text": "55 inch",
+      "x": 961.265625,
+      "y": 380,
+      "width": 123.359375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-65",
+      "text": "65 inch",
+      "x": 1142.625,
+      "y": 362,
+      "width": 200.078125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "text": "65 inch",
+      "x": 1180.625,
+      "y": 380,
+      "width": 124.078125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-75",
+      "text": "75 inch",
+      "x": 1362.703125,
+      "y": 362,
+      "width": 197.34375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "text": "75 inch",
+      "x": 1400.703125,
+      "y": 380,
+      "width": 121.34375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-85",
+      "text": "85 inch",
+      "x": 260,
+      "y": 464,
+      "width": 200.015625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "text": "85 inch",
+      "x": 298,
+      "y": 482,
+      "width": 124.015625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "text": "55 inch is chosen.",
+      "x": 260,
+      "y": 566,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-seat-48",
+      "text": "4 ft",
+      "x": 260,
+      "y": 704,
+      "width": 132.53125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "text": "4 ft",
+      "x": 298,
+      "y": 722,
+      "width": 56.53125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-60",
+      "text": "5 ft",
+      "x": 412.53125,
+      "y": 704,
+      "width": 130.640625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "text": "5 ft",
+      "x": 450.53125,
+      "y": 722,
+      "width": 54.640625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-72",
+      "text": "6 ft",
+      "x": 563.171875,
+      "y": 704,
+      "width": 131.359375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "text": "6 ft",
+      "x": 601.171875,
+      "y": 722,
+      "width": 55.359375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-84",
+      "text": "7 ft",
+      "x": 714.53125,
+      "y": 704,
+      "width": 128.984375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "text": "7 ft",
+      "x": 752.53125,
+      "y": 722,
+      "width": 52.984375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-96",
+      "text": "8 ft",
+      "x": 863.515625,
+      "y": 704,
+      "width": 131.3125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "text": "8 ft",
+      "x": 901.515625,
+      "y": 722,
+      "width": 55.3125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-120",
+      "text": "10 ft",
+      "x": 1014.828125,
+      "y": 704,
+      "width": 146.6875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "text": "10 ft",
+      "x": 1052.828125,
+      "y": 722,
+      "width": 70.6875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-144",
+      "text": "12 ft",
+      "x": 1181.515625,
+      "y": 704,
+      "width": 145.078125,
+      "height": 82
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "text": "12 ft",
+      "x": 1219.515625,
+      "y": 722,
+      "width": 69.078125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "text": "8 feet away is chosen.",
+      "x": 260,
+      "y": 806,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 260,
+      "y": 984,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 260,
+      "y": 1052,
+      "width": 1400,
+      "height": 48
+    }
+  ],
+  "1080/no-profiles-history": [
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 260,
+      "y": 128,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 260,
+      "y": 196,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-log-0",
+      "text": "10:00 Harbor: hid 4 seconds at 0:05",
+      "x": 260,
+      "y": 256,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 260,
+      "y": 446,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 466,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 475,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Harbor\nReady to watch",
+      "x": 260,
+      "y": 558,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 578,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 587,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "text": "Calm gradient\nReady to watch",
+      "x": 260,
+      "y": 670,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 690,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 699,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "text": "Calm Frames prepares each story before you watch.",
+      "x": 260,
+      "y": 912,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+      "x": 260,
+      "y": 972,
+      "width": 1400,
+      "height": 96
+    }
+  ],
+  "1080/no-profiles-bottom": [
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 260,
+      "y": 4,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 24,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 33,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Harbor\nReady to watch",
+      "x": 260,
+      "y": 116,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 136,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 145,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "text": "Calm gradient\nReady to watch",
+      "x": 260,
+      "y": 228,
+      "width": 1400,
+      "height": 100
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "text": "Ready to watch",
+      "x": 1374.375,
+      "y": 248,
+      "width": 253.625,
+      "height": 60
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "text": "Ready to watch",
+      "x": 1389.375,
+      "y": 257,
+      "width": 223.625,
+      "height": 42
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "text": "Calm Frames prepares each story before you watch.",
+      "x": 260,
+      "y": 470,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+      "x": 260,
+      "y": 530,
+      "width": 1400,
+      "height": 96
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "text": "A card says what is coming, and what was hidden.",
+      "x": 260,
+      "y": 638,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+      "x": 260,
+      "y": 698,
+      "width": 1400,
+      "height": 96
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 260,
+      "y": 862,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 298,
+      "y": 888,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-credits",
+      "text": "Credits and licences",
+      "x": 596.671875,
+      "y": 862,
+      "width": 417.078125,
+      "height": 98
+    },
+    {
+      "id": "parent-area-credits-label",
+      "text": "Credits and licences",
+      "x": 634.671875,
+      "y": 888,
+      "width": 341.078125,
+      "height": 46
+    }
+  ],
+  "1080/remove-confirm": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "",
+      "x": 935.328125,
+      "y": 54,
+      "width": 400,
+      "height": 84
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 1367.328125,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 1393.328125,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles",
+      "text": "Whose settings\nEveryone\nRobin\nSam\nThese settings are for Robin.",
+      "x": 260,
+      "y": 254,
+      "width": 1400,
+      "height": 224
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "text": "Whose settings",
+      "x": 260,
+      "y": 254,
+      "width": 1400,
+      "height": 54
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "text": "Everyone",
+      "x": 260,
+      "y": 328,
+      "width": 234.140625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "text": "Everyone",
+      "x": 298,
+      "y": 346,
+      "width": 158.140625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "text": "Robin",
+      "x": 514.140625,
+      "y": 328,
+      "width": 171.59375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "text": "Robin",
+      "x": 552.140625,
+      "y": 346,
+      "width": 95.59375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "text": "Sam",
+      "x": 705.734375,
+      "y": 328,
+      "width": 151,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "text": "Sam",
+      "x": 743.734375,
+      "y": 346,
+      "width": 75,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "text": "These settings are for Robin.",
+      "x": 260,
+      "y": 430,
+      "width": 1400,
+      "height": 48
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 260,
+      "y": 522,
+      "width": 1160,
+      "height": 84
+    },
+    {
+      "id": "parent-area-remove-question",
+      "text": "Remove Robin?\nRobin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.\nKeep Robin\nRem",
+      "x": 260,
+      "y": 638,
+      "width": 1400,
+      "height": 368
+    },
+    {
+      "id": "parent-area-remove-question-announcement",
+      "text": "Remove Robin?\nRobin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.",
+      "x": 300,
+      "y": 670,
+      "width": 1328,
+      "height": 162
+    },
+    {
+      "id": "parent-area-remove-question-title",
+      "text": "Remove Robin?",
+      "x": 300,
+      "y": 670,
+      "width": 1328,
+      "height": 54
+    },
+    {
+      "id": "parent-area-remove-question-detail",
+      "text": "Robin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.",
+      "x": 300,
+      "y": 736,
+      "width": 1328,
+      "height": 96
+    },
+    {
+      "id": "parent-area-remove-keep",
+      "text": "Keep Robin",
+      "x": 300,
+      "y": 864,
+      "width": 266.125,
+      "height": 98
+    },
+    {
+      "id": "parent-area-remove-keep-label",
+      "text": "Keep Robin",
+      "x": 338,
+      "y": 890,
+      "width": 190.125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-remove-confirm",
+      "text": "Remove Robin",
+      "x": 586.125,
+      "y": 864,
+      "width": 315.65625,
+      "height": 98
+    },
+    {
+      "id": "parent-area-remove-confirm-label",
+      "text": "Remove Robin",
+      "x": 624.125,
+      "y": 890,
+      "width": 239.65625,
+      "height": 46
+    }
+  ],
+  "1080/remove-confirm-question": [
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 260,
+      "y": -62,
+      "width": 1160,
+      "height": 84
+    },
+    {
+      "id": "parent-area-remove-question",
+      "text": "Remove Robin?\nRobin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.\nKeep Robin\nRem",
+      "x": 260,
+      "y": 54,
+      "width": 1400,
+      "height": 368
+    },
+    {
+      "id": "parent-area-remove-question-announcement",
+      "text": "Remove Robin?\nRobin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.",
+      "x": 300,
+      "y": 86,
+      "width": 1328,
+      "height": 162
+    },
+    {
+      "id": "parent-area-remove-question-title",
+      "text": "Remove Robin?",
+      "x": 300,
+      "y": 86,
+      "width": 1328,
+      "height": 54
+    },
+    {
+      "id": "parent-area-remove-question-detail",
+      "text": "Robin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.",
+      "x": 300,
+      "y": 152,
+      "width": 1328,
+      "height": 96
+    },
+    {
+      "id": "parent-area-remove-keep",
+      "text": "Keep Robin",
+      "x": 300,
+      "y": 280,
+      "width": 266.125,
+      "height": 98
+    },
+    {
+      "id": "parent-area-remove-keep-label",
+      "text": "Keep Robin",
+      "x": 338,
+      "y": 306,
+      "width": 190.125,
+      "height": 46
+    },
+    {
+      "id": "parent-area-remove-confirm",
+      "text": "Remove Robin",
+      "x": 586.125,
+      "y": 280,
+      "width": 315.65625,
+      "height": 98
+    },
+    {
+      "id": "parent-area-remove-confirm-label",
+      "text": "Remove Robin",
+      "x": 624.125,
+      "y": 306,
+      "width": 239.65625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 260,
+      "y": 552,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 260,
+      "y": 724,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 260,
+      "y": 896,
+      "width": 1400,
+      "height": 198
+    }
+  ],
+  "1080/saving": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "Saving your changes\u2026",
+      "x": 935.328125,
+      "y": 54,
+      "width": 400,
+      "height": 84
+    },
+    {
+      "id": "parent-area-saving",
+      "text": "Saving your changes\u2026",
+      "x": 935.328125,
+      "y": 75,
+      "width": 400,
+      "height": 42
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 1367.328125,
+      "y": 54,
+      "width": 292.671875,
+      "height": 82
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 1393.328125,
+      "y": 72,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles",
+      "text": "Whose settings\nEveryone\nRobin\nSam\nThese settings are for Everyone.",
+      "x": 260,
+      "y": 254,
+      "width": 1000,
+      "height": 224
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "text": "Whose settings",
+      "x": 260,
+      "y": 254,
+      "width": 1000,
+      "height": 54
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "text": "Everyone",
+      "x": 260,
+      "y": 328,
+      "width": 234.140625,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "text": "Everyone",
+      "x": 298,
+      "y": 346,
+      "width": 158.140625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "text": "Robin",
+      "x": 514.140625,
+      "y": 328,
+      "width": 171.59375,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "text": "Robin",
+      "x": 552.140625,
+      "y": 346,
+      "width": 95.59375,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "text": "Sam",
+      "x": 705.734375,
+      "y": 328,
+      "width": 151,
+      "height": 82
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "text": "Sam",
+      "x": 743.734375,
+      "y": 346,
+      "width": 75,
+      "height": 46
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "text": "These settings are for Everyone.",
+      "x": 260,
+      "y": 430,
+      "width": 1000,
+      "height": 48
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 260,
+      "y": 522,
+      "width": 1000,
+      "height": 84
+    },
+    {
+      "id": "parent-area-add-profile",
+      "text": "Add a kid",
+      "x": 1300,
+      "y": 286,
+      "width": 231.765625,
+      "height": 98
+    },
+    {
+      "id": "parent-area-add-profile-label",
+      "text": "Add a kid",
+      "x": 1338,
+      "y": 312,
+      "width": 155.765625,
+      "height": 46
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 260,
+      "y": 696,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 260,
+      "y": 868,
+      "width": 1400,
+      "height": 156
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 260,
+      "y": 1040,
+      "width": 1400,
+      "height": 198
+    }
+  ],
+  "1080/wrong-pin": [
+    {
+      "id": "parent-area-message",
+      "text": "Try again\nThat PIN is not right. 4 tries left.",
+      "x": 96,
+      "y": 186,
+      "width": 960,
+      "height": 178
+    },
+    {
+      "id": "parent-area-message-announcement",
+      "text": "Try again\nThat PIN is not right. 4 tries left.",
+      "x": 136,
+      "y": 218,
+      "width": 888,
+      "height": 114
+    },
+    {
+      "id": "parent-area-message-title",
+      "text": "Try again",
+      "x": 136,
+      "y": 218,
+      "width": 888,
+      "height": 54
+    },
+    {
+      "id": "parent-area-message-detail",
+      "text": "That PIN is not right. 4 tries left.",
+      "x": 136,
+      "y": 284,
+      "width": 888,
+      "height": 48
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 96,
+      "y": 396,
+      "width": 316.671875,
+      "height": 98
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 134,
+      "y": 422,
+      "width": 240.671875,
+      "height": 46
+    },
+    {
+      "id": "parent-area-keypad",
+      "text": "1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nDelete",
+      "x": 1120,
+      "y": 186,
+      "width": 540,
+      "height": 688
+    },
+    {
+      "id": "parent-area-entered",
+      "text": "",
+      "x": 1120,
+      "y": 186,
+      "width": 540,
+      "height": 76
+    },
+    {
+      "id": "parent-area-key-1",
+      "text": "1",
+      "x": 1120,
+      "y": 282,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-2",
+      "text": "2",
+      "x": 1300,
+      "y": 282,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-3",
+      "text": "3",
+      "x": 1480,
+      "y": 282,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-4",
+      "text": "4",
+      "x": 1120,
+      "y": 430,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-5",
+      "text": "5",
+      "x": 1300,
+      "y": 430,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-6",
+      "text": "6",
+      "x": 1480,
+      "y": 430,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-7",
+      "text": "7",
+      "x": 1120,
+      "y": 578,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-8",
+      "text": "8",
+      "x": 1300,
+      "y": 578,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-9",
+      "text": "9",
+      "x": 1480,
+      "y": 578,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-0",
+      "text": "0",
+      "x": 1120,
+      "y": 726,
+      "width": 160,
+      "height": 128
+    },
+    {
+      "id": "parent-area-key-delete",
+      "text": "Delete",
+      "x": 1300,
+      "y": 726,
+      "width": 340,
+      "height": 128
+    }
+  ],
+  "720/child": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "",
+      "x": 624.046875,
+      "y": 36,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 912.046875,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 929.046875,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles",
+      "text": "Whose settings\nEveryone\nRobin\nSam\nThese settings are for Robin.",
+      "x": 173.5,
+      "y": 169,
+      "width": 666,
+      "height": 149
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "text": "Whose settings",
+      "x": 173.5,
+      "y": 169,
+      "width": 666,
+      "height": 36
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "text": "Everyone",
+      "x": 173.5,
+      "y": 218,
+      "width": 155.421875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "text": "Everyone",
+      "x": 198.5,
+      "y": 230,
+      "width": 105.421875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "text": "Robin",
+      "x": 341.921875,
+      "y": 218,
+      "width": 113.734375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "text": "Robin",
+      "x": 366.921875,
+      "y": 230,
+      "width": 63.734375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "text": "Sam",
+      "x": 468.65625,
+      "y": 218,
+      "width": 100,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "text": "Sam",
+      "x": 493.65625,
+      "y": 230,
+      "width": 50,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "text": "These settings are for Robin.",
+      "x": 173.5,
+      "y": 286,
+      "width": 666,
+      "height": 32
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 173.5,
+      "y": 347,
+      "width": 666,
+      "height": 56
+    },
+    {
+      "id": "parent-area-add-profile",
+      "text": "Add a kid",
+      "x": 866.5,
+      "y": 190,
+      "width": 153.84375,
+      "height": 65
+    },
+    {
+      "id": "parent-area-add-profile-label",
+      "text": "Add a kid",
+      "x": 891.5,
+      "y": 207,
+      "width": 103.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-remove-profile",
+      "text": "Remove Robin",
+      "x": 866.5,
+      "y": 263,
+      "width": 209.765625,
+      "height": 65
+    },
+    {
+      "id": "parent-area-remove-profile-label",
+      "text": "Remove Robin",
+      "x": 891.5,
+      "y": 280,
+      "width": 159.765625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 173.5,
+      "y": 463,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 173.5,
+      "y": 578,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 173.5,
+      "y": 693,
+      "width": 933,
+      "height": 132
+    }
+  ],
+  "720/child-room": [
+    {
+      "id": "parent-area-room",
+      "text": "55 inch television, seats about 8 feet away",
+      "x": 173.5,
+      "y": 85,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-tv-32",
+      "text": "32 inch",
+      "x": 173.5,
+      "y": 241,
+      "width": 132.796875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "text": "32 inch",
+      "x": 198.5,
+      "y": 253,
+      "width": 82.796875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-43",
+      "text": "43 inch",
+      "x": 319.296875,
+      "y": 241,
+      "width": 134.03125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "text": "43 inch",
+      "x": 344.296875,
+      "y": 253,
+      "width": 84.03125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-50",
+      "text": "50 inch",
+      "x": 466.328125,
+      "y": 241,
+      "width": 133.34375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "text": "50 inch",
+      "x": 491.328125,
+      "y": 253,
+      "width": 83.34375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-55",
+      "text": "55 inch",
+      "x": 612.671875,
+      "y": 241,
+      "width": 132.234375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "text": "55 inch",
+      "x": 637.671875,
+      "y": 253,
+      "width": 82.234375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-65",
+      "text": "65 inch",
+      "x": 757.90625,
+      "y": 241,
+      "width": 132.71875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "text": "65 inch",
+      "x": 782.90625,
+      "y": 253,
+      "width": 82.71875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-75",
+      "text": "75 inch",
+      "x": 903.625,
+      "y": 241,
+      "width": 130.90625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "text": "75 inch",
+      "x": 928.625,
+      "y": 253,
+      "width": 80.90625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-85",
+      "text": "85 inch",
+      "x": 173.5,
+      "y": 309,
+      "width": 132.6875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "text": "85 inch",
+      "x": 198.5,
+      "y": 321,
+      "width": 82.6875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "text": "55 inch is chosen.",
+      "x": 173.5,
+      "y": 377,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-seat-48",
+      "text": "4 ft",
+      "x": 173.5,
+      "y": 469,
+      "width": 87.6875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "text": "4 ft",
+      "x": 198.5,
+      "y": 481,
+      "width": 37.6875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-60",
+      "text": "5 ft",
+      "x": 274.1875,
+      "y": 469,
+      "width": 86.421875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "text": "5 ft",
+      "x": 299.1875,
+      "y": 481,
+      "width": 36.421875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-72",
+      "text": "6 ft",
+      "x": 373.609375,
+      "y": 469,
+      "width": 86.90625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "text": "6 ft",
+      "x": 398.609375,
+      "y": 481,
+      "width": 36.90625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-84",
+      "text": "7 ft",
+      "x": 473.515625,
+      "y": 469,
+      "width": 85.328125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "text": "7 ft",
+      "x": 498.515625,
+      "y": 481,
+      "width": 35.328125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-96",
+      "text": "8 ft",
+      "x": 571.84375,
+      "y": 469,
+      "width": 86.875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "text": "8 ft",
+      "x": 596.84375,
+      "y": 481,
+      "width": 36.875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-120",
+      "text": "10 ft",
+      "x": 671.71875,
+      "y": 469,
+      "width": 97.125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "text": "10 ft",
+      "x": 696.71875,
+      "y": 481,
+      "width": 47.125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-144",
+      "text": "12 ft",
+      "x": 781.84375,
+      "y": 469,
+      "width": 96.046875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "text": "12 ft",
+      "x": 806.84375,
+      "y": 481,
+      "width": 46.046875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "text": "8 feet away is chosen.",
+      "x": 173.5,
+      "y": 537,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 173.5,
+      "y": 655,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 173.5,
+      "y": 700,
+      "width": 933,
+      "height": 32
+    }
+  ],
+  "720/child-interface": [
+    {
+      "id": "parent-area-interface-motion",
+      "text": "Gentle artwork motion\nArtwork settles into place when you open the library or a title. Reduced motion keeps it still.\nOff",
+      "x": 173.5,
+      "y": 85,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "text": "Selection sounds\nA quiet tone confirms menu actions. Silent during playback and when a screen reader is active.\nOff",
+      "x": 173.5,
+      "y": 228,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime",
+      "text": "Chime before the picture is hidden\nA soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.\nOn",
+      "x": 173.5,
+      "y": 457,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime-note",
+      "text": "A soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.",
+      "x": 198.5,
+      "y": 513,
+      "width": 737,
+      "height": 56
+    },
+    {
+      "id": "parent-area-chime-label",
+      "text": "On",
+      "x": 1053.71875,
+      "y": 509,
+      "width": 27.78125,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 173.5,
+      "y": 686,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 699,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 705,
+      "width": 146.765625,
+      "height": 28
+    }
+  ],
+  "720/child-history": [
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 173.5,
+      "y": 85,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 173.5,
+      "y": 130,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-0",
+      "text": "10:00 Harbor: hid 4 seconds at 0:05",
+      "x": 173.5,
+      "y": 170,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-interface-motion",
+      "text": "Gentle artwork motion\nArtwork settles into place when you open the library or a title. Reduced motion keeps it still.\nOff",
+      "x": 173.5,
+      "y": 296,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "text": "Selection sounds\nA quiet tone confirms menu actions. Silent during playback and when a screen reader is active.\nOff",
+      "x": 173.5,
+      "y": 439,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime",
+      "text": "Chime before the picture is hidden\nA soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.\nOn",
+      "x": 173.5,
+      "y": 668,
+      "width": 933,
+      "height": 132
+    }
+  ],
+  "720/child-bottom": [
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 173.5,
+      "y": 6,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 19,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 25,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Harbor\nReady to watch",
+      "x": 173.5,
+      "y": 80,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 93,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 99,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "text": "Calm gradient\nReady to watch",
+      "x": 173.5,
+      "y": 154,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 167,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 173,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "text": "Calm Frames prepares each story before you watch.",
+      "x": 173.5,
+      "y": 314,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+      "x": 173.5,
+      "y": 354,
+      "width": 933,
+      "height": 64
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "text": "A card says what is coming, and what was hidden.",
+      "x": 173.5,
+      "y": 426,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+      "x": 173.5,
+      "y": 466,
+      "width": 933,
+      "height": 64
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 173.5,
+      "y": 575,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 198.5,
+      "y": 592,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-credits",
+      "text": "Credits and licences",
+      "x": 396.953125,
+      "y": 575,
+      "width": 277.390625,
+      "height": 65
+    },
+    {
+      "id": "parent-area-credits-label",
+      "text": "Credits and licences",
+      "x": 421.953125,
+      "y": 592,
+      "width": 227.390625,
+      "height": 31
+    }
+  ],
+  "720/full-household": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "",
+      "x": 624.046875,
+      "y": 36,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 912.046875,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 929.046875,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles",
+      "text": "Whose settings\nEveryone\nRobin\nSam\nAsh\nKit\nThese settings are for Everyone.",
+      "x": 173.5,
+      "y": 169,
+      "width": 666,
+      "height": 149
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "text": "Whose settings",
+      "x": 173.5,
+      "y": 169,
+      "width": 666,
+      "height": 36
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "text": "Everyone",
+      "x": 173.5,
+      "y": 218,
+      "width": 155.421875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "text": "Everyone",
+      "x": 198.5,
+      "y": 230,
+      "width": 105.421875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "text": "Robin",
+      "x": 341.921875,
+      "y": 218,
+      "width": 113.734375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "text": "Robin",
+      "x": 366.921875,
+      "y": 230,
+      "width": 63.734375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "text": "Sam",
+      "x": 468.65625,
+      "y": 218,
+      "width": 100,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "text": "Sam",
+      "x": 493.65625,
+      "y": 230,
+      "width": 50,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-3",
+      "text": "Ash",
+      "x": 581.65625,
+      "y": 218,
+      "width": 93.59375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-3-name",
+      "text": "Ash",
+      "x": 606.65625,
+      "y": 230,
+      "width": 43.59375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-4",
+      "text": "Kit",
+      "x": 688.25,
+      "y": 218,
+      "width": 80.9375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-4-name",
+      "text": "Kit",
+      "x": 713.25,
+      "y": 230,
+      "width": 30.9375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "text": "These settings are for Everyone.",
+      "x": 173.5,
+      "y": 286,
+      "width": 666,
+      "height": 32
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 173.5,
+      "y": 347,
+      "width": 666,
+      "height": 56
+    },
+    {
+      "id": "parent-area-profiles-full",
+      "text": "Up to four kids can be added. Remove one to add another.",
+      "x": 866.5,
+      "y": 198,
+      "width": 240,
+      "height": 84
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 173.5,
+      "y": 463,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 173.5,
+      "y": 578,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 173.5,
+      "y": 693,
+      "width": 933,
+      "height": 132
+    }
+  ],
+  "720/household": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "",
+      "x": 624.046875,
+      "y": 36,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 912.046875,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 929.046875,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles",
+      "text": "Whose settings\nEveryone\nRobin\nSam\nThese settings are for Everyone.",
+      "x": 173.5,
+      "y": 169,
+      "width": 666,
+      "height": 149
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "text": "Whose settings",
+      "x": 173.5,
+      "y": 169,
+      "width": 666,
+      "height": 36
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "text": "Everyone",
+      "x": 173.5,
+      "y": 218,
+      "width": 155.421875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "text": "Everyone",
+      "x": 198.5,
+      "y": 230,
+      "width": 105.421875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "text": "Robin",
+      "x": 341.921875,
+      "y": 218,
+      "width": 113.734375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "text": "Robin",
+      "x": 366.921875,
+      "y": 230,
+      "width": 63.734375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "text": "Sam",
+      "x": 468.65625,
+      "y": 218,
+      "width": 100,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "text": "Sam",
+      "x": 493.65625,
+      "y": 230,
+      "width": 50,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "text": "These settings are for Everyone.",
+      "x": 173.5,
+      "y": 286,
+      "width": 666,
+      "height": 32
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 173.5,
+      "y": 347,
+      "width": 666,
+      "height": 56
+    },
+    {
+      "id": "parent-area-add-profile",
+      "text": "Add a kid",
+      "x": 866.5,
+      "y": 190,
+      "width": 153.84375,
+      "height": 65
+    },
+    {
+      "id": "parent-area-add-profile-label",
+      "text": "Add a kid",
+      "x": 891.5,
+      "y": 207,
+      "width": 103.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 173.5,
+      "y": 463,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 173.5,
+      "y": 578,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 173.5,
+      "y": 693,
+      "width": 933,
+      "height": 132
+    }
+  ],
+  "720/household-room": [
+    {
+      "id": "parent-area-room",
+      "text": "55 inch television, seats about 8 feet away",
+      "x": 173.5,
+      "y": 85,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-tv-32",
+      "text": "32 inch",
+      "x": 173.5,
+      "y": 241,
+      "width": 132.796875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "text": "32 inch",
+      "x": 198.5,
+      "y": 253,
+      "width": 82.796875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-43",
+      "text": "43 inch",
+      "x": 319.296875,
+      "y": 241,
+      "width": 134.03125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "text": "43 inch",
+      "x": 344.296875,
+      "y": 253,
+      "width": 84.03125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-50",
+      "text": "50 inch",
+      "x": 466.328125,
+      "y": 241,
+      "width": 133.34375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "text": "50 inch",
+      "x": 491.328125,
+      "y": 253,
+      "width": 83.34375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-55",
+      "text": "55 inch",
+      "x": 612.671875,
+      "y": 241,
+      "width": 132.234375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "text": "55 inch",
+      "x": 637.671875,
+      "y": 253,
+      "width": 82.234375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-65",
+      "text": "65 inch",
+      "x": 757.90625,
+      "y": 241,
+      "width": 132.71875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "text": "65 inch",
+      "x": 782.90625,
+      "y": 253,
+      "width": 82.71875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-75",
+      "text": "75 inch",
+      "x": 903.625,
+      "y": 241,
+      "width": 130.90625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "text": "75 inch",
+      "x": 928.625,
+      "y": 253,
+      "width": 80.90625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-85",
+      "text": "85 inch",
+      "x": 173.5,
+      "y": 309,
+      "width": 132.6875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "text": "85 inch",
+      "x": 198.5,
+      "y": 321,
+      "width": 82.6875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "text": "55 inch is chosen.",
+      "x": 173.5,
+      "y": 377,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-seat-48",
+      "text": "4 ft",
+      "x": 173.5,
+      "y": 469,
+      "width": 87.6875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "text": "4 ft",
+      "x": 198.5,
+      "y": 481,
+      "width": 37.6875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-60",
+      "text": "5 ft",
+      "x": 274.1875,
+      "y": 469,
+      "width": 86.421875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "text": "5 ft",
+      "x": 299.1875,
+      "y": 481,
+      "width": 36.421875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-72",
+      "text": "6 ft",
+      "x": 373.609375,
+      "y": 469,
+      "width": 86.90625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "text": "6 ft",
+      "x": 398.609375,
+      "y": 481,
+      "width": 36.90625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-84",
+      "text": "7 ft",
+      "x": 473.515625,
+      "y": 469,
+      "width": 85.328125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "text": "7 ft",
+      "x": 498.515625,
+      "y": 481,
+      "width": 35.328125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-96",
+      "text": "8 ft",
+      "x": 571.84375,
+      "y": 469,
+      "width": 86.875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "text": "8 ft",
+      "x": 596.84375,
+      "y": 481,
+      "width": 36.875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-120",
+      "text": "10 ft",
+      "x": 671.71875,
+      "y": 469,
+      "width": 97.125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "text": "10 ft",
+      "x": 696.71875,
+      "y": 481,
+      "width": 47.125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-144",
+      "text": "12 ft",
+      "x": 781.84375,
+      "y": 469,
+      "width": 96.046875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "text": "12 ft",
+      "x": 806.84375,
+      "y": 481,
+      "width": 46.046875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "text": "8 feet away is chosen.",
+      "x": 173.5,
+      "y": 537,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 173.5,
+      "y": 655,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 173.5,
+      "y": 700,
+      "width": 933,
+      "height": 32
+    }
+  ],
+  "720/household-interface": [
+    {
+      "id": "parent-area-interface-motion",
+      "text": "Gentle artwork motion\nArtwork settles into place when you open the library or a title. Reduced motion keeps it still.\nOff",
+      "x": 173.5,
+      "y": 85,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "text": "Selection sounds\nA quiet tone confirms menu actions. Silent during playback and when a screen reader is active.\nOff",
+      "x": 173.5,
+      "y": 228,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime",
+      "text": "Chime before the picture is hidden\nA soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.\nOn",
+      "x": 173.5,
+      "y": 457,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime-note",
+      "text": "A soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.",
+      "x": 198.5,
+      "y": 513,
+      "width": 737,
+      "height": 56
+    },
+    {
+      "id": "parent-area-chime-label",
+      "text": "On",
+      "x": 1053.71875,
+      "y": 509,
+      "width": 27.78125,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 173.5,
+      "y": 686,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 699,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 705,
+      "width": 146.765625,
+      "height": 28
+    }
+  ],
+  "720/household-history": [
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 173.5,
+      "y": 85,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 173.5,
+      "y": 130,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-0",
+      "text": "10:00 Harbor: hid 4 seconds at 0:05",
+      "x": 173.5,
+      "y": 170,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-interface-motion",
+      "text": "Gentle artwork motion\nArtwork settles into place when you open the library or a title. Reduced motion keeps it still.\nOff",
+      "x": 173.5,
+      "y": 296,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-interface-sounds",
+      "text": "Selection sounds\nA quiet tone confirms menu actions. Silent during playback and when a screen reader is active.\nOff",
+      "x": 173.5,
+      "y": 439,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-chime",
+      "text": "Chime before the picture is hidden\nA soft chime plays before the picture is hidden. Turning it off leaves your viewing settings unchanged.\nOn",
+      "x": 173.5,
+      "y": 668,
+      "width": 933,
+      "height": 132
+    }
+  ],
+  "720/household-bottom": [
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 173.5,
+      "y": 6,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 19,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 25,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Harbor\nReady to watch",
+      "x": 173.5,
+      "y": 80,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 93,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 99,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "text": "Calm gradient\nReady to watch",
+      "x": 173.5,
+      "y": 154,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 167,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 173,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "text": "Calm Frames prepares each story before you watch.",
+      "x": 173.5,
+      "y": 314,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+      "x": 173.5,
+      "y": 354,
+      "width": 933,
+      "height": 64
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "text": "A card says what is coming, and what was hidden.",
+      "x": 173.5,
+      "y": 426,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+      "x": 173.5,
+      "y": 466,
+      "width": 933,
+      "height": 64
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 173.5,
+      "y": 575,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 198.5,
+      "y": 592,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-credits",
+      "text": "Credits and licences",
+      "x": 396.953125,
+      "y": 575,
+      "width": 277.390625,
+      "height": 65
+    },
+    {
+      "id": "parent-area-credits-label",
+      "text": "Credits and licences",
+      "x": 421.953125,
+      "y": 592,
+      "width": 227.390625,
+      "height": 31
+    }
+  ],
+  "720/locked": [
+    {
+      "id": "parent-area-message",
+      "text": "Enter your PIN\nYour PIN opens parental controls. It stays on this television and is never sent anywhere.",
+      "x": 64,
+      "y": 124,
+      "width": 640,
+      "height": 150
+    },
+    {
+      "id": "parent-area-message-announcement",
+      "text": "Enter your PIN\nYour PIN opens parental controls. It stays on this television and is never sent anywhere.",
+      "x": 90,
+      "y": 145,
+      "width": 593,
+      "height": 108
+    },
+    {
+      "id": "parent-area-message-title",
+      "text": "Enter your PIN",
+      "x": 90,
+      "y": 145,
+      "width": 593,
+      "height": 36
+    },
+    {
+      "id": "parent-area-message-detail",
+      "text": "Your PIN opens parental controls. It stays on this television and is never sent anywhere.",
+      "x": 90,
+      "y": 189,
+      "width": 593,
+      "height": 64
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 64,
+      "y": 295,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 89,
+      "y": 312,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-keypad",
+      "text": "1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nDelete",
+      "x": 747,
+      "y": 124,
+      "width": 360,
+      "height": 456
+    },
+    {
+      "id": "parent-area-entered",
+      "text": "",
+      "x": 747,
+      "y": 124,
+      "width": 360,
+      "height": 51
+    },
+    {
+      "id": "parent-area-key-1",
+      "text": "1",
+      "x": 747,
+      "y": 188,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-2",
+      "text": "2",
+      "x": 867,
+      "y": 188,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-3",
+      "text": "3",
+      "x": 987,
+      "y": 188,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-4",
+      "text": "4",
+      "x": 747,
+      "y": 286,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-5",
+      "text": "5",
+      "x": 867,
+      "y": 286,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-6",
+      "text": "6",
+      "x": 987,
+      "y": 286,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-7",
+      "text": "7",
+      "x": 747,
+      "y": 384,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-8",
+      "text": "8",
+      "x": 867,
+      "y": 384,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-9",
+      "text": "9",
+      "x": 987,
+      "y": 384,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-0",
+      "text": "0",
+      "x": 747,
+      "y": 482,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-delete",
+      "text": "Delete",
+      "x": 867,
+      "y": 482,
+      "width": 227,
+      "height": 85
+    }
+  ],
+  "720/no-pin": [
+    {
+      "id": "parent-area-message",
+      "text": "Set up a PIN to continue\nA four digit PIN keeps parental controls where a child cannot change them.",
+      "x": 64,
+      "y": 124,
+      "width": 640,
+      "height": 150
+    },
+    {
+      "id": "parent-area-message-announcement",
+      "text": "Set up a PIN to continue\nA four digit PIN keeps parental controls where a child cannot change them.",
+      "x": 90,
+      "y": 145,
+      "width": 593,
+      "height": 108
+    },
+    {
+      "id": "parent-area-message-title",
+      "text": "Set up a PIN to continue",
+      "x": 90,
+      "y": 145,
+      "width": 593,
+      "height": 36
+    },
+    {
+      "id": "parent-area-message-detail",
+      "text": "A four digit PIN keeps parental controls where a child cannot change them.",
+      "x": 90,
+      "y": 189,
+      "width": 593,
+      "height": 64
+    },
+    {
+      "id": "parent-area-set-pin",
+      "text": "Set up a PIN",
+      "x": 64,
+      "y": 295,
+      "width": 185.84375,
+      "height": 65
+    },
+    {
+      "id": "parent-area-set-pin-label",
+      "text": "Set up a PIN",
+      "x": 89,
+      "y": 312,
+      "width": 135.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 262.84375,
+      "y": 295,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 287.84375,
+      "y": 312,
+      "width": 160.453125,
+      "height": 31
+    }
+  ],
+  "720/no-profiles": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "",
+      "x": 624.046875,
+      "y": 36,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 912.046875,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 929.046875,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 173.5,
+      "y": 218,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 173.5,
+      "y": 333,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 173.5,
+      "y": 448,
+      "width": 933,
+      "height": 132
+    },
+    {
+      "id": "parent-area-room",
+      "text": "55 inch television, seats about 8 feet away",
+      "x": 173.5,
+      "y": 677,
+      "width": 933,
+      "height": 32
+    }
+  ],
+  "720/no-profiles-room": [
+    {
+      "id": "parent-area-room",
+      "text": "55 inch television, seats about 8 feet away",
+      "x": 173.5,
+      "y": 85,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-tv-32",
+      "text": "32 inch",
+      "x": 173.5,
+      "y": 241,
+      "width": 132.796875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-32-label",
+      "text": "32 inch",
+      "x": 198.5,
+      "y": 253,
+      "width": 82.796875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-43",
+      "text": "43 inch",
+      "x": 319.296875,
+      "y": 241,
+      "width": 134.03125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-43-label",
+      "text": "43 inch",
+      "x": 344.296875,
+      "y": 253,
+      "width": 84.03125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-50",
+      "text": "50 inch",
+      "x": 466.328125,
+      "y": 241,
+      "width": 133.34375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-50-label",
+      "text": "50 inch",
+      "x": 491.328125,
+      "y": 253,
+      "width": 83.34375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-55",
+      "text": "55 inch",
+      "x": 612.671875,
+      "y": 241,
+      "width": 132.234375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-55-label",
+      "text": "55 inch",
+      "x": 637.671875,
+      "y": 253,
+      "width": 82.234375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-65",
+      "text": "65 inch",
+      "x": 757.90625,
+      "y": 241,
+      "width": 132.71875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-65-label",
+      "text": "65 inch",
+      "x": 782.90625,
+      "y": 253,
+      "width": 82.71875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-75",
+      "text": "75 inch",
+      "x": 903.625,
+      "y": 241,
+      "width": 130.90625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-75-label",
+      "text": "75 inch",
+      "x": 928.625,
+      "y": 253,
+      "width": 80.90625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-85",
+      "text": "85 inch",
+      "x": 173.5,
+      "y": 309,
+      "width": 132.6875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-tv-85-label",
+      "text": "85 inch",
+      "x": 198.5,
+      "y": 321,
+      "width": 82.6875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-tv-chosen",
+      "text": "55 inch is chosen.",
+      "x": 173.5,
+      "y": 377,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-seat-48",
+      "text": "4 ft",
+      "x": 173.5,
+      "y": 469,
+      "width": 87.6875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-48-label",
+      "text": "4 ft",
+      "x": 198.5,
+      "y": 481,
+      "width": 37.6875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-60",
+      "text": "5 ft",
+      "x": 274.1875,
+      "y": 469,
+      "width": 86.421875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-60-label",
+      "text": "5 ft",
+      "x": 299.1875,
+      "y": 481,
+      "width": 36.421875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-72",
+      "text": "6 ft",
+      "x": 373.609375,
+      "y": 469,
+      "width": 86.90625,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-72-label",
+      "text": "6 ft",
+      "x": 398.609375,
+      "y": 481,
+      "width": 36.90625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-84",
+      "text": "7 ft",
+      "x": 473.515625,
+      "y": 469,
+      "width": 85.328125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-84-label",
+      "text": "7 ft",
+      "x": 498.515625,
+      "y": 481,
+      "width": 35.328125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-96",
+      "text": "8 ft",
+      "x": 571.84375,
+      "y": 469,
+      "width": 86.875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-96-label",
+      "text": "8 ft",
+      "x": 596.84375,
+      "y": 481,
+      "width": 36.875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-120",
+      "text": "10 ft",
+      "x": 671.71875,
+      "y": 469,
+      "width": 97.125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-120-label",
+      "text": "10 ft",
+      "x": 696.71875,
+      "y": 481,
+      "width": 47.125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-144",
+      "text": "12 ft",
+      "x": 781.84375,
+      "y": 469,
+      "width": 96.046875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-seat-144-label",
+      "text": "12 ft",
+      "x": 806.84375,
+      "y": 481,
+      "width": 46.046875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-seat-chosen",
+      "text": "8 feet away is chosen.",
+      "x": 173.5,
+      "y": 537,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 173.5,
+      "y": 655,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 173.5,
+      "y": 700,
+      "width": 933,
+      "height": 32
+    }
+  ],
+  "720/no-profiles-history": [
+    {
+      "id": "parent-area-total",
+      "text": "1 part, 4 seconds in all.",
+      "x": 173.5,
+      "y": 85,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-day-2026-10-14",
+      "text": "Today",
+      "x": 173.5,
+      "y": 130,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-log-0",
+      "text": "10:00 Harbor: hid 4 seconds at 0:05",
+      "x": 173.5,
+      "y": 170,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 173.5,
+      "y": 296,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 309,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 315,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Harbor\nReady to watch",
+      "x": 173.5,
+      "y": 370,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 383,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 389,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "text": "Calm gradient\nReady to watch",
+      "x": 173.5,
+      "y": 444,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 457,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 463,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "text": "Calm Frames prepares each story before you watch.",
+      "x": 173.5,
+      "y": 604,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+      "x": 173.5,
+      "y": 644,
+      "width": 933,
+      "height": 64
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "text": "A card says what is coming, and what was hidden.",
+      "x": 173.5,
+      "y": 716,
+      "width": 933,
+      "height": 32
+    }
+  ],
+  "720/no-profiles-bottom": [
+    {
+      "id": "parent-area-title-calm-frames-benign-story",
+      "text": "Harbor\nReady to watch",
+      "x": 173.5,
+      "y": 6,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 19,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-benign-story-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 25,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Harbor\nReady to watch",
+      "x": 173.5,
+      "y": 80,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 93,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-prepared-de53dd81f60a44409531ad1ff57ee08fb213d9650b06c92ae1fe88a2cbbb526e-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 99,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-title-calm-frames-offline",
+      "text": "Calm gradient\nReady to watch",
+      "x": 173.5,
+      "y": 154,
+      "width": 933,
+      "height": 66
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline",
+      "text": "Ready to watch",
+      "x": 918.734375,
+      "y": 167,
+      "width": 166.765625,
+      "height": 40
+    },
+    {
+      "id": "parent-area-status-calm-frames-offline-label",
+      "text": "Ready to watch",
+      "x": 928.734375,
+      "y": 173,
+      "width": 146.765625,
+      "height": 28
+    },
+    {
+      "id": "parent-area-explainer-line-0",
+      "text": "Calm Frames prepares each story before you watch.",
+      "x": 173.5,
+      "y": 314,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-1",
+      "text": "Detected flashing is covered while sound and captions continue. Some flashing may go undetected.",
+      "x": 173.5,
+      "y": 354,
+      "width": 933,
+      "height": 64
+    },
+    {
+      "id": "parent-area-explainer-line-2",
+      "text": "A card says what is coming, and what was hidden.",
+      "x": 173.5,
+      "y": 426,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-explainer-line-3",
+      "text": "Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.",
+      "x": 173.5,
+      "y": 466,
+      "width": 933,
+      "height": 64
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 173.5,
+      "y": 575,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 198.5,
+      "y": 592,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-credits",
+      "text": "Credits and licences",
+      "x": 396.953125,
+      "y": 575,
+      "width": 277.390625,
+      "height": 65
+    },
+    {
+      "id": "parent-area-credits-label",
+      "text": "Credits and licences",
+      "x": 421.953125,
+      "y": 592,
+      "width": 227.390625,
+      "height": 31
+    }
+  ],
+  "720/remove-confirm": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "",
+      "x": 624.046875,
+      "y": 36,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 912.046875,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 929.046875,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles",
+      "text": "Whose settings\nEveryone\nRobin\nSam\nThese settings are for Robin.",
+      "x": 173.5,
+      "y": 169,
+      "width": 933,
+      "height": 149
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "text": "Whose settings",
+      "x": 173.5,
+      "y": 169,
+      "width": 933,
+      "height": 36
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "text": "Everyone",
+      "x": 173.5,
+      "y": 218,
+      "width": 155.421875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "text": "Everyone",
+      "x": 198.5,
+      "y": 230,
+      "width": 105.421875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "text": "Robin",
+      "x": 341.921875,
+      "y": 218,
+      "width": 113.734375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "text": "Robin",
+      "x": 366.921875,
+      "y": 230,
+      "width": 63.734375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "text": "Sam",
+      "x": 468.65625,
+      "y": 218,
+      "width": 100,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "text": "Sam",
+      "x": 493.65625,
+      "y": 230,
+      "width": 50,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "text": "These settings are for Robin.",
+      "x": 173.5,
+      "y": 286,
+      "width": 933,
+      "height": 32
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 173.5,
+      "y": 347,
+      "width": 773,
+      "height": 56
+    },
+    {
+      "id": "parent-area-remove-question",
+      "text": "Remove Robin?\nRobin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.\nKeep Robin\nRem",
+      "x": 173.5,
+      "y": 424,
+      "width": 933,
+      "height": 244
+    },
+    {
+      "id": "parent-area-remove-question-announcement",
+      "text": "Remove Robin?\nRobin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.",
+      "x": 199.5,
+      "y": 445,
+      "width": 886,
+      "height": 108
+    },
+    {
+      "id": "parent-area-remove-question-title",
+      "text": "Remove Robin?",
+      "x": 199.5,
+      "y": 445,
+      "width": 886,
+      "height": 36
+    },
+    {
+      "id": "parent-area-remove-question-detail",
+      "text": "Robin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.",
+      "x": 199.5,
+      "y": 489,
+      "width": 886,
+      "height": 64
+    },
+    {
+      "id": "parent-area-remove-keep",
+      "text": "Keep Robin",
+      "x": 199.5,
+      "y": 574,
+      "width": 176.75,
+      "height": 65
+    },
+    {
+      "id": "parent-area-remove-keep-label",
+      "text": "Keep Robin",
+      "x": 224.5,
+      "y": 591,
+      "width": 126.75,
+      "height": 31
+    },
+    {
+      "id": "parent-area-remove-confirm",
+      "text": "Remove Robin",
+      "x": 389.25,
+      "y": 574,
+      "width": 209.765625,
+      "height": 65
+    },
+    {
+      "id": "parent-area-remove-confirm-label",
+      "text": "Remove Robin",
+      "x": 414.25,
+      "y": 591,
+      "width": 159.765625,
+      "height": 31
+    }
+  ],
+  "720/remove-confirm-question": [
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 173.5,
+      "y": -41,
+      "width": 773,
+      "height": 56
+    },
+    {
+      "id": "parent-area-remove-question",
+      "text": "Remove Robin?\nRobin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.\nKeep Robin\nRem",
+      "x": 173.5,
+      "y": 36,
+      "width": 933,
+      "height": 244
+    },
+    {
+      "id": "parent-area-remove-question-announcement",
+      "text": "Remove Robin?\nRobin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.",
+      "x": 199.5,
+      "y": 57,
+      "width": 886,
+      "height": 108
+    },
+    {
+      "id": "parent-area-remove-question-title",
+      "text": "Remove Robin?",
+      "x": 199.5,
+      "y": 57,
+      "width": 886,
+      "height": 36
+    },
+    {
+      "id": "parent-area-remove-question-detail",
+      "text": "Robin's settings and Robin's record of what was hidden will be removed. Everyone else stays as they are, and this cannot be undone.",
+      "x": 199.5,
+      "y": 101,
+      "width": 886,
+      "height": 64
+    },
+    {
+      "id": "parent-area-remove-keep",
+      "text": "Keep Robin",
+      "x": 199.5,
+      "y": 186,
+      "width": 176.75,
+      "height": 65
+    },
+    {
+      "id": "parent-area-remove-keep-label",
+      "text": "Keep Robin",
+      "x": 224.5,
+      "y": 203,
+      "width": 126.75,
+      "height": 31
+    },
+    {
+      "id": "parent-area-remove-confirm",
+      "text": "Remove Robin",
+      "x": 389.25,
+      "y": 186,
+      "width": 209.765625,
+      "height": 65
+    },
+    {
+      "id": "parent-area-remove-confirm-label",
+      "text": "Remove Robin",
+      "x": 414.25,
+      "y": 203,
+      "width": 159.765625,
+      "height": 31
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 173.5,
+      "y": 366,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 173.5,
+      "y": 481,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 173.5,
+      "y": 596,
+      "width": 933,
+      "height": 132
+    }
+  ],
+  "720/saving": [
+    {
+      "id": "parent-area-saving-slot",
+      "text": "Saving your changes\u2026",
+      "x": 624.046875,
+      "y": 36,
+      "width": 267,
+      "height": 56
+    },
+    {
+      "id": "parent-area-saving",
+      "text": "Saving your changes\u2026",
+      "x": 624.046875,
+      "y": 50,
+      "width": 267,
+      "height": 28
+    },
+    {
+      "id": "parent-area-back-top",
+      "text": "Back to library",
+      "x": 912.046875,
+      "y": 36,
+      "width": 194.453125,
+      "height": 55
+    },
+    {
+      "id": "parent-area-back-top-label",
+      "text": "Back to library",
+      "x": 929.046875,
+      "y": 48,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles",
+      "text": "Whose settings\nEveryone\nRobin\nSam\nThese settings are for Everyone.",
+      "x": 173.5,
+      "y": 169,
+      "width": 666,
+      "height": 149
+    },
+    {
+      "id": "parent-area-profiles-title",
+      "text": "Whose settings",
+      "x": 173.5,
+      "y": 169,
+      "width": 666,
+      "height": 36
+    },
+    {
+      "id": "parent-area-profiles-everyone",
+      "text": "Everyone",
+      "x": 173.5,
+      "y": 218,
+      "width": 155.421875,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-everyone-name",
+      "text": "Everyone",
+      "x": 198.5,
+      "y": 230,
+      "width": 105.421875,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-1",
+      "text": "Robin",
+      "x": 341.921875,
+      "y": 218,
+      "width": 113.734375,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-1-name",
+      "text": "Robin",
+      "x": 366.921875,
+      "y": 230,
+      "width": 63.734375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-profile-2",
+      "text": "Sam",
+      "x": 468.65625,
+      "y": 218,
+      "width": 100,
+      "height": 55
+    },
+    {
+      "id": "parent-area-profiles-profile-2-name",
+      "text": "Sam",
+      "x": 493.65625,
+      "y": 230,
+      "width": 50,
+      "height": 31
+    },
+    {
+      "id": "parent-area-profiles-chosen",
+      "text": "These settings are for Everyone.",
+      "x": 173.5,
+      "y": 286,
+      "width": 666,
+      "height": 32
+    },
+    {
+      "id": "parent-area-profile-rule",
+      "text": "A kid's own settings can only add hidden parts to what Everyone is set to. They never take any away.",
+      "x": 173.5,
+      "y": 347,
+      "width": 666,
+      "height": 56
+    },
+    {
+      "id": "parent-area-add-profile",
+      "text": "Add a kid",
+      "x": 866.5,
+      "y": 190,
+      "width": 153.84375,
+      "height": 65
+    },
+    {
+      "id": "parent-area-add-profile-label",
+      "text": "Add a kid",
+      "x": 891.5,
+      "y": 207,
+      "width": 103.84375,
+      "height": 31
+    },
+    {
+      "id": "parent-area-preset-wcag",
+      "text": "Standard\nUses the WCAG 2.3.1 flash thresholds included in every preset.\nChosen",
+      "x": 173.5,
+      "y": 463,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-broadcast",
+      "text": "Broadcast\nAdds broadcast flash limits to the Standard preset.",
+      "x": 173.5,
+      "y": 578,
+      "width": 933,
+      "height": 104
+    },
+    {
+      "id": "parent-area-preset-extra-cautious",
+      "text": "Extra cautious\nUses Broadcast limits and covers the picture a little longer around each hidden part.",
+      "x": 173.5,
+      "y": 693,
+      "width": 933,
+      "height": 132
+    }
+  ],
+  "720/wrong-pin": [
+    {
+      "id": "parent-area-message",
+      "text": "Try again\nThat PIN is not right. 4 tries left.",
+      "x": 64,
+      "y": 124,
+      "width": 640,
+      "height": 118
+    },
+    {
+      "id": "parent-area-message-announcement",
+      "text": "Try again\nThat PIN is not right. 4 tries left.",
+      "x": 90,
+      "y": 145,
+      "width": 593,
+      "height": 76
+    },
+    {
+      "id": "parent-area-message-title",
+      "text": "Try again",
+      "x": 90,
+      "y": 145,
+      "width": 593,
+      "height": 36
+    },
+    {
+      "id": "parent-area-message-detail",
+      "text": "That PIN is not right. 4 tries left.",
+      "x": 90,
+      "y": 189,
+      "width": 593,
+      "height": 32
+    },
+    {
+      "id": "parent-area-back",
+      "text": "Back to library",
+      "x": 64,
+      "y": 263,
+      "width": 210.453125,
+      "height": 65
+    },
+    {
+      "id": "parent-area-back-label",
+      "text": "Back to library",
+      "x": 89,
+      "y": 280,
+      "width": 160.453125,
+      "height": 31
+    },
+    {
+      "id": "parent-area-keypad",
+      "text": "1\n2\n3\n4\n5\n6\n7\n8\n9\n0\nDelete",
+      "x": 747,
+      "y": 124,
+      "width": 360,
+      "height": 456
+    },
+    {
+      "id": "parent-area-entered",
+      "text": "",
+      "x": 747,
+      "y": 124,
+      "width": 360,
+      "height": 51
+    },
+    {
+      "id": "parent-area-key-1",
+      "text": "1",
+      "x": 747,
+      "y": 188,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-2",
+      "text": "2",
+      "x": 867,
+      "y": 188,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-3",
+      "text": "3",
+      "x": 987,
+      "y": 188,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-4",
+      "text": "4",
+      "x": 747,
+      "y": 286,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-5",
+      "text": "5",
+      "x": 867,
+      "y": 286,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-6",
+      "text": "6",
+      "x": 987,
+      "y": 286,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-7",
+      "text": "7",
+      "x": 747,
+      "y": 384,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-8",
+      "text": "8",
+      "x": 867,
+      "y": 384,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-9",
+      "text": "9",
+      "x": 987,
+      "y": 384,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-0",
+      "text": "0",
+      "x": 747,
+      "y": 482,
+      "width": 107,
+      "height": 85
+    },
+    {
+      "id": "parent-area-key-delete",
+      "text": "Delete",
+      "x": 867,
+      "y": 482,
+      "width": 227,
+      "height": 85
+    }
+  ]
+}

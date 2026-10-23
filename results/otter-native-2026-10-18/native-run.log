@@ -1,0 +1,9 @@
+PASS Single update installed; transferred package SHA-256 and all app inputs match
+PASS Home Watch still selects exact approved ocean Acadia
+PASS Both Acadia intervals request baked ocean; natural end restores Home Watch
+PASS Existing content rail selects both Acadia and Otters
+PASS Otter selection opens Details with Watch preview focused
+PASS Exact otter preview plays once, ends and restores Details Watch; no ambient presentation
+PASS Manual Back from otter playback restores Details Watch
+PASS Details Back restores the selected Otter card on Home
+PASS Left Home with Otters selected and Watch preview focused

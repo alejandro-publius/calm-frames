@@ -1,0 +1,76 @@
+{
+  "original": {
+    "sha256": "c30e6d6b403d3849f2e5be6f1d1ec21d50940fc11369504305b4a11c337200de",
+    "bytes": 65359357,
+    "duration_ms": 48982,
+    "plans": {
+      "wcag": {
+        "covered_ms": 48982.0,
+        "intervals": [
+          [
+            0.0,
+            48982
+          ]
+        ],
+        "calm_ranges_ms": []
+      },
+      "broadcast": {
+        "covered_ms": 48982.0,
+        "intervals": [
+          [
+            0.0,
+            48982
+          ]
+        ],
+        "calm_ranges_ms": []
+      },
+      "extra-cautious": {
+        "covered_ms": 48982.0,
+        "intervals": [
+          [
+            0.0,
+            48982
+          ]
+        ],
+        "calm_ranges_ms": []
+      }
+    }
+  },
+  "candidate": {
+    "sha256": "9c6d2d5812e73b1554668a7acf381585031e01b4b0a47e6d054f49579dd4c6d9",
+    "bytes": 5721424,
+    "duration_ms": 12012,
+    "plans": {
+      "wcag": {
+        "covered_ms": 12012.0,
+        "intervals": [
+          [
+            0.0,
+            12012
+          ]
+        ],
+        "calm_ranges_ms": []
+      },
+      "broadcast": {
+        "covered_ms": 12012.0,
+        "intervals": [
+          [
+            0.0,
+            12012
+          ]
+        ],
+        "calm_ranges_ms": []
+      },
+      "extra-cautious": {
+        "covered_ms": 12012.0,
+        "intervals": [
+          [
+            0.0,
+            12012
+          ]
+        ],
+        "calm_ranges_ms": []
+      }
+    }
+  }
+}

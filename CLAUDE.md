@@ -1,16 +1,202 @@
 # Calm Frames: rules for every session
 
-**Current phase:** Phase 9, the pattern rule's precision, Sat Sep 19, 2026. Phases 0 to 2
-are done apart from what needs the stick, and all five phase 8 features are in, tested,
-documented and reachable in the running app. Phase 9 so far: the regular-pattern rule
-requires a period before a run of bars counts, so text is no longer read as stripes; both
-ffmpeg baselines were re-run as one set on ffmpeg 9.0.1; the labelling pool is back to 40
-segments over 16 titles. docs/STATUS.md section 0 is the short version and section 2 is
-Alex's dated list.
-**The head-start kits never arrived.** flashmap, calm-timing, evkit and the notes were all written here instead. docs/PLAN.md lists what replaced what. If the kits turn up, treat them as a second opinion and re-record any number taken with our version.
-**Repo:** private at github.com/alejandro-publius/calm-frames, main, CI green on ubuntu runners. It goes public during the final checks on Oct 21, because the rules need it public with the licence visible at submission.
+**October 22 cloud candidate.** Read `docs/CLOUD_RELEASE_CHECKPOINT.md` before continuing this isolated candidate. It reconciles verified Claude `0e9241a`, combined checks `9cdb333` and the byte-identical judging package `9ad7bb7`. Use only the combined checks; the earlier separate fixes are superseded. Exclude rejected browser UI `76223f9`. Preserve the native coastal design, accessibility, source branches and submitted fallback. Human listening, palette and full-video acceptance remain pending. Do not rebuild the existing judging package.
 
-Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/BUILD_PROMPT.md (the full plan, phases, gates, kill rules, cut list), docs/DECISIONS.md, docs/GATES.md.
+**October 22 integration validation.** `codex/recovery-proof-integration-2026-10-22` (preparation recovery with Playback Proof) is validated locally; read docs/RELEASE_READINESS.md before changing it. Its build is installed on the Vega Virtual Device; the submitted candidate `bf2f615`, its package and the public video remain the fallback. Not pushed or merged. Pushing, publishing a new video or changing Devpost each needs the owner's specific approval. A replacement demo exists outside git; docs/submission/RELEASE_CHECKLIST_2026-10-22.md holds its checks and the approval bundle. Codex owns docs/judging-package; leave it alone.
+
+**October 21 interim stationary default.** The owner rejected the short moving previews as uncomfortable and too brief. Recording and submission are paused. Home and Details now open an explicitly labelled silent still scene that stays until Back; moving previews require a separate action and end on stationary artwork without automatic navigation. This is an interim fallback, not the requested sustained moving ambience. Signed media, timestamps, maps and trust are unchanged. A licensed uninterrupted fixed-camera scene of at least five minutes is still required, with exact edition approval before activation. No clinical or comfort acceptance is claimed.
+
+**October 21 cohesive journey UI.** User requested a connected design pass in the isolated Mac integration checkout. Startup, household loading and playback opening share the map and destination motif; focus, guards and approved media remain. See docs/STATUS.md and the sibling mac-readiness-2026-10-21 evidence. The exact revised ocean bundle is approved, activated and installed with this UI. Final checks passed; see the sibling evidence/ui-media-final-receipt.json (under mac-readiness-2026-10-21). App-only capture was authorized but returned a black GPU framebuffer, so picture/audio acceptance remains open. The owner subsequently authorized private-branch publication and hackathon submission. Recording, access expansion and undisclosed legal acceptance remain restricted.
+
+**October 19 layout repair.** Branch `claude/ocean-layout-fix-2026-10-19`, from `c84f95d`. Home names Ocean (Acadia, Sea Otters) and Forest over their cards, and Home, Details and the opening read every position from `app/src/calmframes/homeIslands.ts`; `app/test/calmframes/homeIslands.test.tsx` fails if anything touches. The full app suite passes (it had 18 hidden failures). Evidence: results/home-islands-2026-10-19. Not installed natively yet. The Mac's installed `2b78587` and its uncommitted navigation work were never pushed; port them onto homeIslands.ts rather than beside it.
+
+**Forest activation, October 18.** Owner explicitly approved the exact Forest catalog, existing signer and fresh-package exclusions, plus build/install/playback checks. See results/forest-activation-2026-10-18/approval.json. Third island and concise purpose-first How it works are integrated; 499 app tests and 11 attribution tests pass. Installed source is 805f855 after one compile, bounded packaging recovery and one install; all three clips and help Back pass native text checks. Original namespace is backed up. No broader trust, PIN, capture or household preference changes. Earlier checkpoints below are history.
+
+**October 18 island refinement.** Owner accepted the coastal world and approved
+distinct silhouettes, selection boat and Forest preparation. Current UI source
+adds static Forest scenery only; its exact new catalog is not approved or active.
+Read results/coastal-islands-2026-10-18 and results/forest-candidate-2026-10-18.
+Current two-title media, trust, household preferences and player guards are unchanged.
+Installed source is `1d14285`; one UI build/install and native route continuation
+completed. 438 bounded app tests and 11 attribution tests pass. App rests Home,
+Acadia Watch. Forest is not activated; no PIN, capture or settings change occurred.
+
+
+**Latest October 18 coastal-world checkpoint.** Read the newest FINAL_HANDOFF.md entry.
+Installed source is `6f2570d` from isolated `codex/coastal-world-2026-10-18`;
+real NOAA sea otters replace the river preview. 534 app tests and 11 attribution
+tests pass; one build/install and native core walkthrough are complete. Home is
+left with Acadia selected and Watch focused. Original checkout and Claude sessions
+remain untouched. The authorized private GitHub handoff is documented in
+`results/github-coastal-handoff-2026-10-18/`; no capture or release. Build evidence and exact owner keys are in
+`results/sea-otters-flow-2026-10-18/`. Earlier checkpoints below are history.
+
+**October 18 cinematic review.** Owner authorized a cohesive UI redesign from
+synced `59f2383`. Current isolated branch is `codex/cinematic-review-2026-10-18`.
+Home uses a compact film selector over existing nature imagery; Details/opening
+share geometry and scenery. Scene markers are read-only, and the compact player
+status is the only scheduled-cover chrome. Media, detectors, signing and trust
+remain unchanged. One consolidated build/install succeeded from 999f69c after 271 tests;
+nine native text checks pass and the app rests Home with Otters selected. No capture
+or push. Read the newest FINAL_HANDOFF entry and results/cinematic-review-2026-10-18/.
+
+**Latest controlled reset, October 15.** Read CLAUDE_CODE_HANDOFF.md before editing.
+Codex owns the prepared-video UI branch and app/**; Claude owns pipeline/** and
+its tests in a separate checkout. The exact current source/build/native status
+is in FINAL_HANDOFF.md and results/transport-focus-2026-10-15/.
+Acadia has exact-bundle public-key approval from 21:19 UTC; this does not
+authorize a different key, bundle or new preparation. The next Claude lane is
+bounded detector tests and specification review, not production detector or
+artifact regeneration. Preserve the integrated catalog and maps.
+Do not duplicate pipeline acquisition or alter signing configuration. Older
+visual checkpoints below are history.
+
+**October 15 Mac continuation.** The owner delegated immediate implementation
+of the stronger Home composition. The isolated branch is
+`codex/home-comparison-2026-10-15`, based on `b6b134c` with the Parents focus fix.
+Composition A is selected; B and the prior design remain reviewable. Read the
+newest section in `FINAL_HANDOFF.md` and the final layout-and-copy receipt under
+`results/plain-language-2026-10-15/`. App source is `689c484`; both passes are implemented. No capture, recording, main merge, release tag,
+public publication, AWS cost or credential change is authorized by this pass.
+The older checkpoints below retain historical context.
+
+
+**Latest finishing checkpoint, Oct 14, late.** The submission candidate is the
+branch `claude/final-candidate-2026-10-14`, published to origin on Oct 14 at
+Alex's request (no main merge, no visibility change). Read `FINAL_HANDOFF.md`
+at its root first: the package, the native observations and the owner actions
+are there, and the packet is under `docs/submission/`. The branch carries
+Codex's approved ivory and teal coastal interface, the Oct 14 device fixes
+(bundled hold stills, the opening clock fallback), the Back fixes, the
+simplified Home Alex asked for (one "Calm Frames" heading over the scenery,
+Play and Details, nothing else; the practice demo is reached from Details),
+the warm-sand inset border on the launcher icon and the tile, and friction log
+entries 41 to 44 from what the device said. The Oct 13 paragraphs below about
+the centered cinematic layout, the film and `docs/MAC_FINISH.md` are history:
+do not rebuild them. Codex's Oct 15 research (rules, mini challenges, the
+friction bonus, Fire TV tooling) is documentation only, on
+`origin/dot/fire-tv-research-2026-10-15` under `docs/research/2026-10-15/`,
+and is based on an older commit than this candidate. Alex asked to avoid
+repeating the whole project review; continue from the handoff and run the
+checks appropriate to actual changes.
+
+**Earlier checkpoint, Oct 13.** The library and details now center
+artwork, titles, short descriptions and actions. Both playable Harbor versions
+use the new 20 second cinematic film: water opening, bright boat/lighthouse,
+animated reflections, water ambience and story captions. Practice holds remain
+explicitly scheduled. The new prepared catalog includes its original report;
+strict Python and Node delivery gates pass. The two older generations and their original reports, recovered on the Mac in
+`f58ef98`, are retained. The current catalog selects the new film. The latest
+Mac native receipt covers `06190c7`, before this centered layout and new film.
+Rebuild and record the full current branch on the Mac using `docs/MAC_FINISH.md`.
+No new native build or recording is claimed from cloud. Alex requested focused
+work, so use current receipts and run checks appropriate to actual changes.
+
+**Current visual pass.** Alex selected the cinematic storybook direction and
+asked to combine it with Claude's pushed improvements. The latest refinement
+builds on `b882d39`: remove the large text panels, extend the Harbor scene to
+the screen edge and use quiet secondary actions. This explicit request supersedes the earlier feature freeze for
+these visual changes. Inspect the current previews and receipt linked from
+`docs/design/README.md`; they are browser renders, not a new native package.
+
+**Earlier checkpoint, Sun Oct 11, 2026.** The branch `codex/signed-scene-holds-2026-09-29`
+(draft PR #1) carries everything since Sep 20; main has not moved. On Oct 11 the dependency
+audit was repaired (`xmldom` is an alias of `@xmldom/xmldom` 0.8.15, `lodash` is 4.18.1, every
+remaining finding sorted by the device bundle in `scripts/audit_exceptions.toml`, both groups
+due for review on Oct 21), the branch was reviewed against the rules in this file and what
+stood was fixed, and two guards joined CI: `eval/style_check.py` for the style rule, and a
+rebuild of the complete conformance report from its rows in the python job. docs/STATUS.md
+section 0 has the Oct 11 entry and section 2 the dated list. Two things this Linux box cannot
+do, so do not try: the Shaka build (`npm ci` inside shaka-player needs codeload.github.com,
+which the proxy refuses with 403) and anything on a Vega device. The Mac owes a rebuild that
+includes the Oct 11 dependency changes. The hosted Audit and CI runs on the Oct 11 push
+(ba819dc) are green in every job (`results/github_push_2026-10-11.json`), and again on c4dbf0f
+(`results/github_push_2026-10-11_c4dbf0f.json`); PR #1 waits only on Alex's merge. Later on
+Oct 11 a third mock judge read a fresh clone (`docs/MOCK_JUDGE_3.md`) and what it found that
+could be fixed from here was fixed; a lint rule keeps playhead writes inside `useFlashGuard.ts`;
+the sample GitHub Action pins a commit on this repository and installs flashmap from its own
+checkout; the README has a "Run the checks" block and the `make` targets work without fnm. Later still,
+the two Python tests that failed on this box were traced to a race in `cover_psnr`, not to ffmpeg
+6.1.1 as first written: the comparison now reaches one frame, and verify's cover proof samples the
+first frame, the middle and the last frame of every covered span. Later still, two findings from the review of the motion and sound commits were fixed: the press
+that turns Selection sounds on is confirmed from the render that holds the saved record (on the
+device's concurrent root the write's continuation ran before that render), and a released sound
+player frees the next request instead of waiting on a teardown that may never answer; both are in
+the mutation gate, and the hosted runs on cf864d4 are green in every job
+(`results/github_push_2026-10-11_cf864d4.json`). That night the repository was measured against
+Alex's tideline repository and every gap closable from Linux was closed: the README opens with a
+labelled render, what a family sees and a one-minute try; `docs/design/README.md` is the one design
+page, held to `calmStyles.ts` by a test; `WRITEUP.md`, `docs/README.md` (the docs index),
+`CHANGELOG.md`, `CONTRIBUTING.md` and the GitHub templates exist; DECISIONS opens with an index;
+ruff and strict mypy run in CI; actions are pinned to commits; and CI's Python job, which had tested
+only `eval/` since Sep 17, names all three lanes with a coverage floor in `.coveragerc`; 6ecb5df is green in every job
+(`results/github_push_2026-10-11_6ecb5df.json`), and every job runs on `ubuntu-24.04`.
+
+**Active scope, Oct 9 finishing session.** Alex is entering solo and has an
+identity-verified Amazon Developer account. Use only the Vega Virtual Device.
+Physical sticks, camera timing, TV rehearsal and hardware gates are outside
+this submission's completion criteria. Preserve their historical measurements
+and limitations without treating them as pending work for Alex. The brand line
+is "A calmer way to watch". The current checklist is
+`docs/COMPLETION_CHECKLIST.md`; it supersedes older next-action lists below.
+Do not publish, submit, change repository visibility or incur additional cloud
+costs before the reviewable work is complete and Alex approves those actions.
+For the Oct 13 finishing pass, Alex requested help using available Anthropic API
+credits. This supersedes the earlier subscription-only preference for that pass.
+Verify the actual billing route and one small task before paid delegation. Use
+securely configured credentials, preserve the existing subscription login, and
+never print keys or switch billing silently. Start with an enforced bounded
+budget; the available credit balance is not a spending target. The focused
+handoff is [docs/CLAUDE_FINISH_PROMPT.md](docs/CLAUDE_FINISH_PROMPT.md).
+
+**Shared branch workflow.** Push small, checked batches frequently to
+`codex/signed-scene-holds-2026-09-29`, and before every handoff. Fetch before
+starting new work, preserve concurrent changes, and verify the remote commit
+after each push. Report a blocked push promptly. Final release publication and
+submission retain their separate approval requirements above.
+
+**Final interaction scope, Oct 11 (late Oct 10 Pacific).** Alex requested motion and
+interactive sounds after the static design review. The optional artwork-only
+entrance and separate menu confirmation tone are explicit opt-ins in parental
+controls; existing households retain still, silent menus. System reduced motion,
+screen-reader state and lifecycle cancellation govern the effects. Keep focus,
+text, setup and picture covers unchanged. This supersedes the earlier blanket
+no-motion preference, not the flash guards or native evidence requirements.
+Finish this pass, then freeze new features and use the finish line in
+`docs/COMPLETION_CHECKLIST.md`. The current effects still need their Mac/Vega
+observations and recorded-frame checks before they are called native-verified.
+
+**What the branch holds, in one paragraph.** Signed scene holds (a checked still from before a
+hide, shown in place of black, today only on the labelled Harbor demo), a durable household
+record (salted PIN hash, lockout, profiles, room, chime, and since Oct 11 the two opt-in interface
+effects, artwork motion and selection sounds, both off unless a parent turns them on), a packaged library compiled into the
+app with a key accepted only for the exact titles it compiled, the labelled Harbor demo with
+practice holds, external captions and its own demo key, the approved TV design, and the Oct 9
+AWS deploy (`results/aws_deploy_2026-10-09.json`; the app does not consume the cloud catalog, a
+new deploy needs approval and the signing-key parameter, and the budget's cost tag is still not
+activated). The default shelf holds three titles: the Harbor demo, the prepared Harbor and the
+calm gradient. The native journey, saved settings, three presets, playback, transport, captions
+through both holds and native recording were observed on the Vega Virtual Device on Oct 9 and
+10 (`results/redesign_validation_2026-10-10.json`); the later Oct 13 receipt in `results/polish_native_validation.json` covers
+`06190c7`. The centered layout, water opening and new film still need a Mac build. docs/HACKATHON_REVIEW.md is an Oct 2 assessment; the live lists are
+docs/COMPLETION_CHECKLIST.md and docs/STATUS.md section 2; the longer history is docs/STATUS.md
+section 0, newest first.
+
+
+**The head-start kits never arrived.** flashmap, calm-timing, evkit and the notes were all written here instead. docs/PLAN.md lists what replaced what. If the kits turn up, treat them as a second opinion and re-record any number taken with our version.
+**Repo:** private at github.com/alejandro-publius/calm-frames. Work is on
+`codex/signed-scene-holds-2026-09-29`, published as
+[draft PR #1](https://github.com/alejandro-publius/calm-frames/pull/1), whose head
+is the Oct 11 push; main remains unchanged. Runs from Sep 28 to Sep 30 stopped
+before any runner started, which GitHub's annotation put down to failed account
+payments or a spending limit, not a code failure; runners have taken every job
+since Oct 5. CI is green on the branch. The scene-hold tree must pass Audit as
+well before main is updated: the dependency job was repaired on Oct 11, and the
+bills of materials have to be generated with the runner's npm version. The chosen plan is to make it public during the final checks on Oct 21
+with the licence visible. Current rules also allow private reviewer access;
+see the rechecked requirements in docs/SUBMISSION.md.
+
+Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/COMPLETION_CHECKLIST.md (the live checklist), docs/BUILD_PROMPT.md (the full plan, phases, gates, kill rules, cut list), docs/DECISIONS.md, docs/GATES.md.
 
 ## How to resume, from a session with no memory
 
@@ -32,15 +218,19 @@ Read first, in this order: docs/STATUS.md (done, next, blocked, needs), docs/BUI
    - `.venv/bin/python eval/pattern_text_precision.py`, about 4 minutes, writes
      `results/pattern_text_precision.json`.
    - `.venv/bin/python eval/report_page_check.py`, about 2 minutes, needs Chrome.
-   - `cd app && npm run ui:flashmap`, about 1 minute.
+   - `cd app && npm run ui:flashmap && node tools/ui_flashmap.mjs --negative-control`, about 1 minute; the second command is the control that has to refuse a flashing sequence and a grating, or the first means nothing.
    - `.venv/bin/python eval/labeling/make_pool.py` then `eval/labeling/plots.py`, about a
      minute. **Never once labelling has started**: a segment id is a position in a shuffled
      list. `make_pool` refuses while any sheet has an answer in it.
 5. **Before any number reaches a document:** `python eval/readme_sync.py` to rewrite, then
    `--check`. The drift checker cannot see prose, so re-read the sentences around a number
    that moved.
-6. **Before pushing:** `make ci`, or at least `make test-app` and
-   `.venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"`.
+6. **Before pushing:** `make ci`, or at least `make test-app`,
+   `.venv/bin/python -m pytest flashmap pipeline eval -q -m "not slow"` and
+   `make lint-py typecheck-py`. If
+   `app/package-lock.json` changed, `make sbom` has to run under the npm the
+   runner has (10.9.8 on Oct 11; `npm install -g npm@10.9.8`), because the app
+   bill records the npm that wrote it and the hosted check compares bytes.
 
 ## What this is
 
@@ -82,7 +272,7 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 ### Engineering guarantees (enforced in code, with tests)
 - The verify step blocks publishing. A title can't appear in kid mode until verify passes.
 - Fail closed: a missing, stale, unsigned, unparseable or wrong-hash map keeps the picture hidden.
-- Every way of moving the playhead goes through one function. Target inside an interval or guard band: cover first, then seek.
+- Every way of moving the playhead goes through one function. Target inside an interval or guard band: cover first, then seek. A lint rule in `app/package.json` refuses `currentTime =` and `fastSeek(` outside `useFlashGuard.ts`; the sample's fallbacks and the two audio elements (the chime, the menu sound) are exempted by name with the reason beside each.
 - Room settings can only add hides. Red segments always get an opaque cover. Dim mode only for non-red segments at 90% or darker, and verify models it.
 - Plan B (pre-covered kid-safe rendition) is always built, whatever GATE 1 says.
 
@@ -96,7 +286,7 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 ### Security and ops
 - No secrets in the repo. gitleaks runs in CI and as a pre-commit hook. AWS access from CI only through GitHub OIDC.
 - The map-signing private key never enters the repo; the app ships only the public key.
-- CDK: `natGateways: 0`, $20 budget alarm, cost tags, `make destroy` leaves nothing billable. No AWS deploy until HUMAN CHECKPOINT D is confirmed.
+- CDK: `natGateways: 0`, $20 budget alarm, cost tags, `make destroy` does not remove the bootstrap resources or manually created signing parameter; inspect the saved deployment record for remaining resources. No AWS deploy until HUMAN CHECKPOINT D is confirmed.
 - Pinned: Vega SDK 0.24.9914, sample tag `v0.24-RN83` (commit ef8e4da), Node 22 (`.nvmrc`), Python 3.12 (`.python-version`, `.venv`).
 - The colima Docker VM on this Mac is shared with other projects. Never restart colima or remove containers, images or volumes we didn't create.
 - Commit small and often. Once the judged release tag exists, never move it.
@@ -132,6 +322,7 @@ Thesis: a verified safety layer for kids with photosensitive epilepsy, not a vid
 - Start it detached, or it dies with the shell that started it. `eval/vvd_smoke.py` handles this.
 - `vega virtual-device status` says running before the device is usable. Wait for `vega device is-connected` instead.
 - `vega device list` crashes with a TypeError. Use `vega device info` and `vega device is-connected`.
-- The CLI cannot press remote buttons or take screenshots. `eval/vvd_control.py` does both through QEMU's QMP socket. Screenshots come back black because the app renders on a GPU layer the capture misses, so verify playback from device logs.
+- Remote buttons: Amazon's Vega 0.24 docs describe `inputd-cli`, built into Fire TV devices and the Vega Virtual Device and run from the host as `vega exec inputd-cli button_press KEY_BACK`. The full command set needs developer mode; on the virtual device that is `vsm developer-mode enable` inside `vega exec device shell -d VirtualDevice`. Read at developer.amazon.com/docs/vega/0.24/inputdcli.html on Oct 9, 2026. On this CLI, `vega device run-cmd --device Simulator --command 'inputd-cli --help'` works; the documented `vega exec inputd-cli` route instead looks for a missing host executable. Until it has been, `eval/vvd_control.py` presses keys through QEMU's QMP socket.
+- Screenshots: no CLI command for them has turned up in the docs read so far. `eval/vvd_control.py` takes one through QMP, and it comes back black because the app renders on a GPU layer the capture misses, so verify playback from device logs.
 - Release builds strip `console.log`. Use the debug package when you need the app's own logs.
 - The build rewrites `app/manifest.toml`, adding a `[[needs.module]]` entry per installed `@amazon-devices` package. Removing a feature means removing its dependency too, or the app still declares it needs that module.

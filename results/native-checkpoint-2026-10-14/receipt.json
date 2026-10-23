@@ -1,0 +1,268 @@
+{
+  "status": "stable UI checkpoint; native validation partial, not release or product-design approval",
+  "recorded_utc": "2026-10-14T06:23:04.576198+00:00",
+  "task_url": "codex://threads/01a138bb-a422-7746-9293-caf676f250f3",
+  "branch": "codex/native-design-validation-2026-10-14",
+  "baseline": "dba88d5cbc96d1fc399f4b51701037af16869328",
+  "source_commit": "00905510f0dc8e20277dabb2aade6ac5528b8f51",
+  "fix_commits": [
+    "d52d65747aa5f9b5191a47e320952840b9c1d085",
+    "00905510f0dc8e20277dabb2aade6ac5528b8f51"
+  ],
+  "package": {
+    "path": "build/release/native-checkpoint-final-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "sha256": "4b1d68991b2ebf73d30ab217e5e1ad9d5c4e4cc1bc027e4678a15759404c4635",
+    "bytes": 21493818,
+    "architecture": "aarch64",
+    "build_type": "Debug",
+    "app_inputs_committed": true,
+    "installed": true,
+    "install_result": "Installing/Updating ...success",
+    "sdk": "0.24.9914",
+    "simulator": "existing Vega Virtual Device, TV OS 1.2 Ship 101520710"
+  },
+  "changes": [
+    "Existing seekbar focus guide yields preferred focus to Skip while the scheduled-hold countdown owns Select. Native initial Skip ring now gold; OK advances beyond first hold instead of pausing.",
+    "Only the exact bundled ambient Harbor demo and prepared Harbor title identities start scene-description captions Off. Other shipped/dialogue caption defaults stay On.",
+    "Explicit menu selection marks initialization complete and wins for the current player session. No pre-existing persisted caption preference exists; no cross-playback persistence was introduced.",
+    "No home/library/settings source, media bytes, caption assets, signed maps, guard timing, verification, or household storage changes."
+  ],
+  "observed_native": {
+    "library_details": "Prior receipt covers library, details, settings disclosure, unavailable-title count, focus and Back. Final package launch retains Kid household and library. No parental settings opened.",
+    "moving_playback": "Original water/boat/lighthouse film and scheduled demo holds observed. Raw recordings preserved. No audio-listening pass claimed.",
+    "skip": "Final 33-final-skip.mp4: gold Skip at media 00:00; OK advances to media 00:09 and the next scheduled countdown. A subsequent hold at 00:13 is visible. This establishes first Skip activation, not every second-countdown/paused-Skip combination.",
+    "caption_default": "Original Harbor first-cue/boat scene has no unsolicited caption in 22-final-default-off.mp4 (intermediate d52d657 package; caption implementation identical to final). Final demo likewise starts Off. No premature/stale loading cue confirmed, so buffering behavior was not altered.",
+    "caption_selection": "Final native menu shows Off selected; Up focuses English. Select enables original single-line VTT during first hold at 00:06. Reopened menu retains English. Down/Select Off then Play resumes second hold at 00:15 without caption. Native D-pad sequence was paced to let focus settle.",
+    "pause_resume": "Native Play/Pause toggles playback and guard cover. Prior baseline receipt captures persistent Paused state after controls hide beyond six seconds; focused tests cover hidden-controls pause for normal/countdown/hold states. Final explicit-caption recording resumes from paused 00:04 through first hold and pauses near 00:11.",
+    "multiline": "Two line-break-only diagnostic cues captured simultaneously with first and second practice holds plus controls at displayed 00:06 and 00:12; no overlap. This is fixture-layout evidence, not the shipped VTT. Original VTT restored before final source commit/package.",
+    "back": "Final Back returns to the Harbor demo library tile with a visible gold ring.",
+    "manual_picture_break": "Not implemented or claimed. Current controls demonstrate two scheduled practice holds and Skip."
+  },
+  "remaining": [
+    {
+      "action": "Open and validate parental controls/settings",
+      "target": "existing simulator household PIN gate",
+      "state": "pending_user_unlock",
+      "reason": "Existing household PIN required. No digits entered, retrieved, guessed, reset, or storage modified. User must open Parental controls and enter the existing PIN personally."
+    },
+    {
+      "action": "Full native focus traversal",
+      "state": "partial",
+      "reason": "Seekbar-to-Captions traversal can pass through a position with no visible ring. Paced D-pad navigation reaches the caption menu and choices. Root target not identified; diagnostic focus-guide variants were rejected and removed. Do not claim full focus accessibility pass."
+    },
+    {
+      "action": "VoiceView",
+      "state": "untested",
+      "reason": "Read-only a11y utility discovery did not expose a configured VoiceView profile. No OS accessibility setting changed."
+    },
+    {
+      "action": "Recoverable playback error and return focus",
+      "state": "unit_test_pass_native_untested",
+      "reason": "No native error deliberately induced in the household or packaged media. Focused recovery test verifies cover layering, preferred Back and single leave."
+    }
+  ],
+  "checks": {
+    "full_jest": {
+      "passed": 1198,
+      "failed": 0,
+      "skipped": 4,
+      "suites_passed": 116,
+      "suites_skipped": 1,
+      "snapshots_passed": 57
+    },
+    "typecheck": "passed",
+    "targeted_lint": "passed",
+    "design_pytest": "21 passed",
+    "negative_control": "New countdown focus test fails when guide preferred-focus gate is replaced with true; restored source unchanged afterward.",
+    "release": "passed committed app-input inventory, prepared media check and package binding",
+    "asset_diff": "git diff dba88d5 --name-only -- app/assets returns empty"
+  },
+  "commands": [
+    "source /Users/alexvintera/vega/env; PATH=$PWD/.logs/native-design-2026-10-14/build-bin:/Users/alexvintera/.local/share/fnm/node-versions/v22.23.2/installation/bin:$PATH JAVA_HOME=/opt/homebrew/opt/openjdk@21 RELEASE_PYTHON=/Users/alexvintera/calm-frames/.venv/bin/python bash scripts/release.sh --arch aarch64 --build-type Debug --tag native-checkpoint-final-2026-10-14",
+    "vega device install-app --device Simulator --packagePath app/build/aarch64-debug/calm-frames-app_aarch64.vpkg",
+    "vega device launch-app --device Simulator --appName io.github.alejandropublius.calmframes.main",
+    "vega device run-cmd --device Simulator --command \"inputd-cli button_press KEY_ENTER\" (also KEY_DOWN, KEY_UP, KEY_BACK, KEY_PLAYPAUSE)",
+    "/Users/alexvintera/calm-frames/build/finish-tools/calm-record-window OUTPUT SECONDS",
+    "/opt/homebrew/bin/ffmpeg -hide_banner -loglevel error -ss SECONDS -i CAPTURE.mp4 -frames:v 1 FRAME.png",
+    "cd app && npm test -- --runInBand --coverage=false --watchman=false",
+    "cd app && npm run typecheck",
+    "cd app && node_modules/.bin/eslint src/calmframes/defaultCaptions.ts src/components/Seekbar.tsx src/screens/PlayerScreen.tsx src/w3cmedia/mediacontrols/VideoPlayerUI.tsx test/calmframes/defaultCaptions.test.ts test/calmframes/playbackUi.test.tsx test/calmframes/playbackUiHarness.tsx",
+    "/Users/alexvintera/calm-frames/.venv/bin/python -m pytest -q eval/tests/test_design_page.py"
+  ],
+  "diagnostic_multiline": {
+    "base": "60eca59a18adaa84d16153a032263539c170c309",
+    "package_sha256": "c2b4be5487f7150b6f8a3873c66580110578ede72f15401b607b41b8884e3025",
+    "package_path": "build/release/native-hidden-menu-retry-2026-10-14/calm-frames-0.1.0-aarch64-debug.vpkg",
+    "patch": "multiline-diagnostic-source.patch",
+    "receipt": "multiline-diagnostic-build-receipt.json",
+    "not_shipped": true
+  },
+  "intermediate_original_default_capture": {
+    "source": "d52d65747aa5f9b5191a47e320952840b9c1d085",
+    "package_sha256": "b56b64dad722685968a7fdff5b33e2d640c5a838064951179e066a66639c8a3c",
+    "note": "Caption behavior identical; superseded native seekbar preferred flag removed in final."
+  },
+  "raw_captures": [
+    {
+      "path": ".logs/native-focus-diagnostic/20-multiline-holds.mp4",
+      "sha256": "138320e462012f889657fc949090e13ae10ef1be7ced8bbdea09eda945d29370"
+    },
+    {
+      "path": ".logs/native-focus-diagnostic/22-final-default-off.mp4",
+      "sha256": "492d9a40d3da030c0ca58f3a5ecbaab997ab813f9883b1a373a84cc1aa86ff10"
+    },
+    {
+      "path": ".logs/native-focus-diagnostic/33-final-skip.mp4",
+      "sha256": "f367f0378b137eefa73add8e65bb6e21d85dda9b8b1ef1e1f1a8ac13d545162c"
+    },
+    {
+      "path": ".logs/native-focus-diagnostic/36-caption-navigation.mp4",
+      "sha256": "96dad190efd2b885230648c9ecd35e8f2e85dd62a984d63eea821548fdc06943"
+    },
+    {
+      "path": ".logs/native-focus-diagnostic/38-explicit-caption-on.mp4",
+      "sha256": "5cabf16a20574896fa217547b46efc87ece11cd44ca3dfcd2ea3edd1ea59d18a"
+    },
+    {
+      "path": ".logs/native-focus-diagnostic/40-caption-off-resume.mp4",
+      "sha256": "a1d78a987756e10ce28e437119d3296057cbb548072a1f823529e61ca1ff4f6c"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/31-practice-holds.mp4",
+      "sha256": "8ec6a46024946f6b9590bcbb0e901bf039ac621848b4e51556a89d4c276f9803"
+    },
+    {
+      "path": ".logs/native-observation-2026-10-14/33-practice-skip.mp4",
+      "sha256": "b2fd48df04bb803d2e380f0a37c0af81c9485f32258c9ecb5ba7a4f20b265e2d"
+    }
+  ],
+  "capture_limits": "Recorder can emit sparse frames; container seconds are extraction offsets, not precise media timing. Use visible playhead and ordered frames. No timing-conformance claim.",
+  "preserved": "Original checkout, other worktrees, shared PR branch, household data, all captures and packages preserved. No simulator restart, data wipe, media regeneration, merge, deployment or Claude/API process.",
+  "prior_receipts": [
+    "results/native-design-2026-10-14/receipt.json",
+    "results/design-regressions-2026-10-14/receipt.json",
+    "results/native-observation-2026-10-14/receipt.json"
+  ],
+  "evidence": [
+    {
+      "path": "results/native-checkpoint-2026-10-14/ambient-demo-default-off.png",
+      "sha256": "ddd37cafb8a79a94eb67485c39958bcfa2b33761b491ac679d6354cfed468730"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/ambient-original-default-off.png",
+      "sha256": "1edaf2ec28ff88dc7d5f434c8ef2dfef0a98fa8b46b5c6b6738bf43adef35147"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/back-return-focus.png",
+      "sha256": "0174e1c48967a0265e4e8e1668402d45e93fa47f63a20c5c4f20f9904df7e1d8"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/caption-english-focused.png",
+      "sha256": "5c0e644bd8101a91491a8b05adedbe2079421b43944538383d1ae1e3ff1afd53"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/caption-menu-off-selected.png",
+      "sha256": "04cca307244cfcf55ff28c12a70b4d4d7950b3486a86cb949f010dc4f858a566"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/caption-selection-retained.png",
+      "sha256": "07a68d3831147276d40bf15a6cecf998f6004edb33b378b56dc8b27a46b78948"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/explicit-caption-off.png",
+      "sha256": "7efb12b18ff206a4adcb71d2732278064bb9f1955c266a6f53bedd0c58850b7c"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/explicit-caption-on-hold.png",
+      "sha256": "930b6ee271e156c56caa853db3bc7e061f35f7c248e9fcd23e140d15ab84f16a"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/final-build-receipt.json",
+      "sha256": "1c74912e55bac20e8a6092727264ebee2ae63f36de4e547da677cf0e3b8bc6ca"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/final-design-tests.txt",
+      "sha256": "ac32a86ac518bd40c0a367b0c3d0b243ad6f87d4cc82f6881290cd771d564dfa"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/final-focused-tests.txt",
+      "sha256": "4067be284e951936d2a2e2ebd8e73b5ac57082abf8d7992a380ae9616fd90006"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/final-full-tests.txt",
+      "sha256": "aca5f49ccece460b933427ce29615f0963cab0d4ada40595d19609012923396b"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/final-library.png",
+      "sha256": "ccea8659a3f49aa76e14bee6351fac299204a4ae0d97c628b5564ccffbae9007"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/final-lint.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/final-preparation.json",
+      "sha256": "ebd02510055bd5ea29ad2482a3ac15702b70f80f950864c469c6fd8871257093"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/final-typecheck.txt",
+      "sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/multiline-diagnostic-build-receipt.json",
+      "sha256": "45982dab9ae0e894c8abb1c6d4db842415485397d706be2e9898c195a397915c"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/multiline-diagnostic-source.patch",
+      "sha256": "c8ec4900c0ca64a7f82f9003cc2ea7156ab56c7ab18c03a867d9369fef38cfd7"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/multiline-hold-06.png",
+      "sha256": "4512e4d8a18022ef2ac07dccff5e058845ee9e0afd79e9e8d1e8b7a19547bc7a"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/multiline-hold-12.png",
+      "sha256": "06215cb8c84a773022f73e321cd6929b07d34c639d5ef5dd2e4752e3d4707136"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/outer-only-full-tests.txt",
+      "sha256": "de233c1860c0538ce7330513bb60b18ebdfff9a3df88d65deab43b2d5926af1b"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/outer-only-lint.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/outer-only-tests.txt",
+      "sha256": "ba1bf175f4b025f38e3fcc01aad72a26d9b43503d766625a14d7d2ad657c8394"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/outer-only-typecheck.txt",
+      "sha256": "4ccf0cc2a4462e2e4a59d2b8542ff67ae9e281a7ac5d0b0de39e61c23f56e828"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/practice-details.png",
+      "sha256": "884769b0a983d1815dc2a92b09ea709c5b306cb46a86a7755f515c1eb139ddb8"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/second-hold-13.png",
+      "sha256": "ca46378d9c17bd88a4a5dc0629039eb9586a984f4aa18b8788bfcbb62bd97cd4"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/skip-after-09.png",
+      "sha256": "fe4d401865df6ae01fe4304a06f623180676defb8747e2e13a3515693e0bfc1a"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/skip-before.png",
+      "sha256": "ed15a763c97f0e1e70b7c2177318b93999fc67c69531810d35e892ca2da6fb6b"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/skip-focused.png",
+      "sha256": "653bda79e3aa06961da176ce83f3af1870d5136153c76a4d9e39670ff6d584e6"
+    },
+    {
+      "path": "results/native-checkpoint-2026-10-14/skip-negative-control.txt",
+      "sha256": "fecf597cebb26fd398692afa1f64a92c63bedf872daf1b5cc12b9d61605b4251"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+
+> calm-frames-app@0.1.0 test
+> jest --colors --coverage --runInBand --coverage=false --watchman=false test/calmframes/seekbarFocusTransition.test.tsx
+
+[0m[7m[1m[31m FAIL [39m[22m[27m[0m [2mtest/calmframes/[22m[1mseekbarFocusTransition.test.tsx[22m
+  [31m✕[39m [2mthe seekbar yields preferred focus when a countdown appears during playback (321 ms)[22m
+
+[1m[31m  [1m● [22m[1mthe seekbar yields preferred focus when a countdown appears during playback[39m[22m
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mfalse[39m
+    Received: [31mtrue[39m
+[2m[22m
+[2m      16 |   act(() => mockMedia.pause()); // any player state change renders the screen again[22m
+[2m      17 |   expect(view.getByTestId('calm-card-skip')).toBeTruthy();[22m
+[2m    > 18 |   expect(view.getByTestId('seekbar-focus-guide').props.hasTVPreferredFocus).toBe(false);[22m
+[2m         |                                                                             ^[22m
+[2m      19 |   jest.useRealTimers();[22m
+[2m      20 | });[22m
+[2m      21 |[22m
+[2m[22m
+[2m      [2mat Object.toBe ([22m[2m[0m[36mtest/calmframes/seekbarFocusTransition.test.tsx[39m[0m[2m:18:77)[22m[2m[22m
+
+[1mTest Suites: [22m[1m[31m1 failed[39m[22m, 1 total
+[1mTests:       [22m[1m[31m1 failed[39m[22m, 1 total
+[1mSnapshots:   [22m0 total
+[1mTime:[22m        2.848 s
+[2mRan all test suites[22m[2m matching [22m/test\/calmframes\/seekbarFocusTransition.test.tsx/i[2m.[22m

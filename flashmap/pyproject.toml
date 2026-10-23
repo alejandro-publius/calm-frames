@@ -29,13 +29,21 @@ dev = [
   "pytest==9.1.1",
   "hypothesis==6.168.0",
   "pyyaml==6.0.3",
+  # The linter and the type checker. ruff.toml at the repository root and
+  # [tool.mypy] below configure them; .pre-commit-config.yaml uses the same
+  # two releases.
+  "ruff==0.17.0",
+  "mypy==2.4.0",
+  # Source coverage in the CI Python job, configured by .coveragerc at the
+  # repository root.
+  "pytest-cov==7.0.0",
 ]
 
 [project.scripts]
 flashmap = "flashmap.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/calm-frames/calm-frames"
+Homepage = "https://github.com/alejandro-publius/calm-frames"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -49,3 +57,62 @@ markers = [
   "slow: takes more than about a second, skipped on CI with -m 'not slow'",
 ]
 filterwarnings = ["error::DeprecationWarning:flashmap.*"]
+
+# flashmap ships py.typed, so its annotations are a promise to whoever imports
+# it. Run from the repository root, which keeps the cache out of flashmap/ and so
+# out of the ingest image's build context:
+#
+#   python -m mypy --config-file flashmap/pyproject.toml     (make typecheck-py)
+#
+# The package only. The tests are not part of what ships.
+[tool.mypy]
+python_version = "3.12"
+files = ["$MYPY_CONFIG_FILE_DIR/src/flashmap"]
+strict = true
+warn_unreachable = true
+
+# Every override below is held for one reason. These modules are the detector
+# the complete conformance run measured: the SHA-256 of each is recorded in
+# results/conformance_current_full_2026-10-02.json as the source tree behind the
+# published numbers, and each still matches. A type fix, however small, would
+# make the shipped detector differ from the measured one, so the findings are
+# named here, by module and error code only, until the suite is next re-run.
+# None is a fault at run time: each is a narrowing mypy cannot follow.
+
+# Each hold below turns its error codes off for the whole module, including any
+# line written later, so an edit in one of these modules should be checked with
+# the holds lifted (delete the block locally and run make typecheck-py). They
+# come out together with the next full conformance run, which may change the
+# measured bytes they protect.
+
+# A list whose first entries are (name, lines, None, None, None) tuples, later
+# joined by diagonal families that carry index arrays, and the loop over them.
+[[tool.mypy.overrides]]
+module = "flashmap.pattern"
+disable_error_code = ["arg-type", "assignment"]
+
+# The PyAV stub types src_colorspace as int, and PyAV also takes the swscale
+# name this passes. The rest: two helpers whose stream parameter has no
+# annotation, a Packet and a list written without type arguments, and a frame
+# returned straight from PyAV's untyped decode().
+[[tool.mypy.overrides]]
+module = "flashmap.decode"
+disable_error_code = ["arg-type", "type-arg", "no-untyped-def", "no-any-return"]
+
+# Segment times compared after a list comprehension has already checked both
+# are numbers, which mypy cannot carry back to the two names.
+[[tool.mypy.overrides]]
+module = "flashmap.sidecar"
+disable_error_code = ["operator"]
+
+# A flash or pattern segment told apart by its reason string rather than by
+# isinstance.
+[[tool.mypy.overrides]]
+module = "flashmap.cli"
+disable_error_code = ["union-attr"]
+
+# A comparison of numpy arrays that the stubs type as Any, returned where a
+# bool array is declared.
+[[tool.mypy.overrides]]
+module = "flashmap.flash"
+disable_error_code = ["no-any-return"]

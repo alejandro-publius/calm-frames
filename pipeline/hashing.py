@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import stat
 from pathlib import Path
 from typing import Any
 
@@ -24,6 +26,27 @@ def sha256_file(path: str | Path) -> str:
                 break
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def sha256_regular_file(path: str | Path) -> str:
+    """Hex SHA-256 of a regular file, refusing to follow a link at the last component.
+
+    Used where a hash vouches for a file the pipeline owns, so a link planted in
+    place of an output can never stand in for the bytes it was recorded with.
+    """
+    fd = os.open(path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_CLOEXEC", 0))
+    try:
+        if not stat.S_ISREG(os.fstat(fd).st_mode):
+            raise OSError(f"{path} is not a regular file")
+        digest = hashlib.sha256()
+        while True:
+            chunk = os.read(fd, CHUNK_BYTES)
+            if not chunk:
+                break
+            digest.update(chunk)
+        return digest.hexdigest()
+    finally:
+        os.close(fd)
 
 
 def sha256_bytes(data: bytes) -> str:

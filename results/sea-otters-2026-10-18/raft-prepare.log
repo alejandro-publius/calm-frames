@@ -1,0 +1,78 @@
+{
+  "app_shelf_connected": false,
+  "artifacts": {
+    "broadcast": {
+      "map": "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/broadcast.json",
+      "master_playlist": "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/broadcast/hls/master.m3u8",
+      "safe_master": "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/broadcast/safe.mp4",
+      "sha256": {
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/broadcast.json": "db93b33422ca5d94154d0155803bd31916b94854c93033ba5f103622a1e397e4",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/broadcast/hls/master.m3u8": "6b7610fbcb27e71c67c0cfdaeb0eeba7219730be1388f296046224b4df06761a",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/broadcast/hls/seg_0_00000.ts": "30db7a723b81ee16383437dd1d2fac0901eda628f2f82d03f0e2618f1fa3a8d6",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/broadcast/hls/seg_0_00001.ts": "884e2a12dd4058af3de56371d57ea0e12b06dac5336d98a33981521a4d18497a",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/broadcast/hls/seg_0_00002.ts": "0553c966e4750dcf64a9f5bf9abe0bb525e614a8a08895e946f113365d9d6878",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/broadcast/hls/seg_0_00003.ts": "554e02ae1f513f65208c4c98d4b24809a3898c45d93720cc113f33a5a8de1316",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/broadcast/hls/seg_0_00004.ts": "c800597aac499afcb6bdce8b01871a0bd2559b6f6976b35ea21234e2cdc2c1c8",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/broadcast/hls/stream_0.m3u8": "17af099d4deaad73ecaf44003a0c4925a82925fc889ff168243c2794f76bb8c7",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/broadcast/safe.mp4": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f"
+      }
+    },
+    "extra-cautious": {
+      "map": "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/extra-cautious.json",
+      "master_playlist": "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/extra-cautious/hls/master.m3u8",
+      "safe_master": "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/extra-cautious/safe.mp4",
+      "sha256": {
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/extra-cautious.json": "4a901e6ded0962554f7fe2835b270f2b0b541185c4009cea367bc4de50538b03",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/extra-cautious/hls/master.m3u8": "6b7610fbcb27e71c67c0cfdaeb0eeba7219730be1388f296046224b4df06761a",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/extra-cautious/hls/seg_0_00000.ts": "30db7a723b81ee16383437dd1d2fac0901eda628f2f82d03f0e2618f1fa3a8d6",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/extra-cautious/hls/seg_0_00001.ts": "884e2a12dd4058af3de56371d57ea0e12b06dac5336d98a33981521a4d18497a",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/extra-cautious/hls/seg_0_00002.ts": "0553c966e4750dcf64a9f5bf9abe0bb525e614a8a08895e946f113365d9d6878",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/extra-cautious/hls/seg_0_00003.ts": "554e02ae1f513f65208c4c98d4b24809a3898c45d93720cc113f33a5a8de1316",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/extra-cautious/hls/seg_0_00004.ts": "c800597aac499afcb6bdce8b01871a0bd2559b6f6976b35ea21234e2cdc2c1c8",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/extra-cautious/hls/stream_0.m3u8": "17af099d4deaad73ecaf44003a0c4925a82925fc889ff168243c2794f76bb8c7",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/extra-cautious/safe.mp4": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f"
+      }
+    },
+    "wcag": {
+      "map": "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/wcag.json",
+      "master_playlist": "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/wcag/hls/master.m3u8",
+      "safe_master": "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/wcag/safe.mp4",
+      "sha256": {
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/maps/wcag.json": "194f563555d4060b3e349d402a47bb387ce3930c0a69a2493d8d126d287effaf",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/wcag/hls/master.m3u8": "6b7610fbcb27e71c67c0cfdaeb0eeba7219730be1388f296046224b4df06761a",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/wcag/hls/seg_0_00000.ts": "30db7a723b81ee16383437dd1d2fac0901eda628f2f82d03f0e2618f1fa3a8d6",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/wcag/hls/seg_0_00001.ts": "884e2a12dd4058af3de56371d57ea0e12b06dac5336d98a33981521a4d18497a",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/wcag/hls/seg_0_00002.ts": "0553c966e4750dcf64a9f5bf9abe0bb525e614a8a08895e946f113365d9d6878",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/wcag/hls/seg_0_00003.ts": "554e02ae1f513f65208c4c98d4b24809a3898c45d93720cc113f33a5a8de1316",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/wcag/hls/seg_0_00004.ts": "c800597aac499afcb6bdce8b01871a0bd2559b6f6976b35ea21234e2cdc2c1c8",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/wcag/hls/stream_0.m3u8": "17af099d4deaad73ecaf44003a0c4925a82925fc889ff168243c2794f76bb8c7",
+        "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/safe/wcag/safe.mp4": "00fb9ea4a3d69797e3c6551aaf797a3857fd06c4546054132fc6b32ea3c1242f"
+      }
+    }
+  },
+  "next_steps": [
+    "Read the verification report and its outcome before choosing a rendition.",
+    "Use only artifacts[preset].safe_master or its prepared HLS playlist locally.",
+    "Do not play the original source or the cover model. Nothing opens automatically.",
+    "The app shelf is not connected to this receipt. TV composition still needs measurement."
+  ],
+  "physical_tv_validated": false,
+  "presets": [
+    "wcag",
+    "broadcast",
+    "extra-cautious"
+  ],
+  "readiness": "ready for local playback of the prepared rendition",
+  "source_sha256": "02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6",
+  "status": "ready",
+  "title": "Sea otters in Alaska",
+  "verification": {
+    "checked_inputs_sha256": "9c59a5cf7a549428cab8631403858ee19726b567fa53b86e491963ed2019557c",
+    "failed_checks": [],
+    "outcome": "no flagged segments",
+    "report": "titles/02c2b0c0674262862ad9d02a7107e421c398aac0b06bfc4fff04098d32ebe4d6/verify/report.json",
+    "report_sha256": "fd6387755e9561a3ec7875ba4c4505a1a34e6ac3243d0af90d0a7051e6fe99a0",
+    "status": "passed"
+  },
+  "version": 1
+}

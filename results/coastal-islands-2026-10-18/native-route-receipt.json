@@ -1,0 +1,122 @@
+{
+  "capture": false,
+  "pin_operations": false,
+  "rebuild": false,
+  "reinstall": false,
+  "audio_system_changes": false,
+  "owner_watched": "not asserted",
+  "status": "completed",
+  "final_focus": "kid-mode-home-watch",
+  "final_selection": "Acadia",
+  "collector_stopped": true,
+  "events": [
+    {
+      "at": "2026-10-18T18:31:31.738189+00:00",
+      "key": "KEY_LEFT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:31:33.198878+00:00",
+      "event": "Coastal map visible: Acadia selected, Watch focused. Holding for 8 seconds."
+    },
+    {
+      "at": "2026-10-18T18:31:42.211668+00:00",
+      "key": "KEY_UP",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:31:46.089385+00:00",
+      "key": "KEY_RIGHT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:31:46.800339+00:00",
+      "event": "Sea Otters selected on coastal map. Holding for 6 seconds."
+    },
+    {
+      "at": "2026-10-18T18:31:53.830195+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:31:55.051203+00:00",
+      "event": "Sea Otters Details visible. Holding for 10 seconds."
+    },
+    {
+      "at": "2026-10-18T18:32:06.249393+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:32:08.341768+00:00",
+      "event": "Sea Otters playback started; allowing the entire approximately 20-second silent clip to finish."
+    },
+    {
+      "at": "2026-10-18T18:32:28.064569+00:00",
+      "event": "Sea Otters naturally ended and returned to Details."
+    },
+    {
+      "at": "2026-10-18T18:32:34.255937+00:00",
+      "key": "KEY_BACK",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:32:36.100381+00:00",
+      "event": "Returned to coastal map. Holding for 6 seconds."
+    },
+    {
+      "at": "2026-10-18T18:32:43.266892+00:00",
+      "key": "KEY_LEFT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:32:48.015724+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:32:48.849579+00:00",
+      "event": "Acadia Details visible. Holding for 10 seconds."
+    },
+    {
+      "at": "2026-10-18T18:32:59.917966+00:00",
+      "key": "KEY_ENTER",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:33:02.265383+00:00",
+      "event": "Acadia playback started. Letting both ocean-replacement intervals play without skipping."
+    },
+    {
+      "at": "2026-10-18T18:33:08.032037+00:00",
+      "event": "First Acadia ocean-replacement interval requested."
+    },
+    {
+      "at": "2026-10-18T18:33:28.984724+00:00",
+      "event": "Second Acadia ocean-replacement interval requested."
+    },
+    {
+      "at": "2026-10-18T18:33:39.916709+00:00",
+      "event": "Acadia naturally ended and returned to Details."
+    },
+    {
+      "at": "2026-10-18T18:33:46.121480+00:00",
+      "key": "KEY_BACK",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:33:51.606371+00:00",
+      "key": "KEY_DOWN",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:33:53.299809+00:00",
+      "key": "KEY_LEFT",
+      "exit": 0
+    },
+    {
+      "at": "2026-10-18T18:33:54.010007+00:00",
+      "event": "Walkthrough completed. Home with Acadia selected and Watch focused; app left open."
+    }
+  ]
+}

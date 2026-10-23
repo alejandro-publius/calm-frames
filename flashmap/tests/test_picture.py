@@ -8,7 +8,6 @@ when they are not, which is the whole point.
 from __future__ import annotations
 
 import numpy as np
-import pytest
 
 import clipgen
 from flashmap import WCAG, analyze_file
