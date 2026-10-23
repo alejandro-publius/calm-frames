@@ -1,5 +1,5 @@
 /** Real player/session components; native media and guard verdicts are explicit test doubles. */
-import { startPlayer, mockMedia, mockGuard, mockError, mockEnded, mockDestroy, mockLifecycleCallbacks, mockBackCallbacks } from './playbackUiHarness';
+import { startPlayer, mockMedia, mockGuard, mockError, mockEnded, mockDestroy, mockLifecycleCallbacks, mockBackCallbacks, mockHandlerOwners } from './playbackUiHarness';
 import { act, fireEvent } from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CHECKPOINT_KEY, PlaybackCheckpoint } from '../../src/calmframes/playbackCheckpoint';
@@ -66,6 +66,8 @@ test('a native error can retry once explicitly after confirmed teardown; missing
   act(() => mockMedia.fire('seeked')); await act(async () => mockMedia.fire('timeupdate'));
   act(() => mockError(true)); expect(view.getByTestId('player-error-retry')).toBeTruthy();
   fireEvent.press(view.getByTestId('player-error-retry')); await settle();
+  expect(view.getByTestId('player-error-retry')).toBeTruthy();
+  fireEvent.press(view.getByTestId('player-error-retry')); await settle();
   expect(view.queryByTestId('player-error')).toBeNull();
   expect(view.getByTestId('recovery-picture-barrier')).toBeTruthy();
   await attach(view);
@@ -77,7 +79,7 @@ test('a native error can retry once explicitly after confirmed teardown; missing
 test('unconfirmed teardown refuses another decoder and retains Back', async () => {
   const view = await open(checkpoint()); await resume(view);
   act(() => mockError(true)); mockDestroy.mockReturnValue(false);
-  fireEvent.press(view.getByTestId('player-error-retry'));
+  fireEvent.press(view.getByTestId('player-error-retry')); await settle();
   expect(view.queryByTestId('player-error-retry')).toBeNull();
   expect(view.getByText('The player could not close. Go back before trying again.')).toBeTruthy();
   expect(view.getByTestId('player-error-back')).toBeTruthy();
@@ -92,7 +94,7 @@ test('completion clears history and retains the continuous ending still', async 
 test('a native teardown exception leaves recovery blocked with a Back action', async () => {
   const view = await open(checkpoint()); await resume(view);
   act(() => mockError(true)); mockDestroy.mockImplementationOnce(() => {throw new Error('native teardown');});
-  fireEvent.press(view.getByTestId('player-error-retry'));
+  fireEvent.press(view.getByTestId('player-error-retry')); await settle();
   expect(view.queryByTestId('player-error-retry')).toBeNull();
   expect(view.getByTestId('player-error-back')).toBeTruthy();
 });
@@ -171,4 +173,43 @@ test('unmount invalidates pending initialization even before a media instance ex
   await settle(); mockDestroy.mockClear();
   view.unmount();
   expect(mockDestroy).toHaveBeenCalledTimes(1);
+});
+
+test('delayed teardown stays covered, then requires explicit Retry after confirmation', async () => {
+  const view = await open(checkpoint()); await resume(view);
+  act(() => mockError(true));
+  let confirm!: (value: boolean) => void;
+  mockDestroy.mockImplementationOnce(() => new Promise<boolean>(resolve => {confirm = resolve;}));
+  fireEvent.press(view.getByTestId('player-error-retry')); await settle();
+  expect(view.getByText('Closing the player. You can go back while it finishes.')).toBeTruthy();
+  expect(view.queryByTestId('player-error-retry')).toBeNull();
+  act(() => jest.advanceTimersByTime(20000));
+  expect(view.getByTestId('player-error')).toBeTruthy();
+  await act(async () => confirm(true));
+  expect(view.getByTestId('player-error-retry')).toBeTruthy();
+  expect(view.getByTestId('player-error')).toBeTruthy();
+  fireEvent.press(view.getByTestId('player-error-retry')); await settle();
+  expect(view.queryByTestId('player-error')).toBeNull();
+});
+test.each(['back', 'background', 'unmount'])('late native completion cannot replace decoder after %s', async (exit) => {
+  const view = await open(checkpoint()); await resume(view); act(() => mockError(true));
+  let confirm!: (value: boolean) => void;
+  mockDestroy.mockImplementationOnce(() => new Promise<boolean>(resolve => {confirm = resolve;}));
+  fireEvent.press(view.getByTestId('player-error-retry')); await settle();
+  const calls = mockDestroy.mock.calls.length;
+  if (exit === 'unmount') view.unmount();
+  else if (exit === 'back') fireEvent.press(view.getByTestId('player-error-back'));
+  else act(() => {for (const fn of [...mockLifecycleCallbacks]) fn('background');});
+  await act(async () => {confirm(true); jest.advanceTimersByTime(1000);});
+  expect(mockDestroy).toHaveBeenCalledTimes(calls);
+  if (exit !== 'unmount') expect(view.goBack).toHaveBeenCalledTimes(1);
+  expect(mockMedia.paused).toBe(true);
+});
+
+test('one keyed player retains its native handler owner across state renders', async () => {
+  mockHandlerOwners.length = 0;
+  const view = await open(checkpoint()); await resume(view);
+  act(() => mockMedia.fire('seeked')); await act(async () => mockMedia.fire('timeupdate'));
+  act(() => mockError(true));
+  expect(mockHandlerOwners).toHaveLength(1);
 });

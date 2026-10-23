@@ -59,17 +59,20 @@ jest.mock('../../src/utils/VideoHandler', () => ({
       initialized: (value: boolean) => void, ended: (value: boolean) => void,
       error: (value: boolean) => void, _elapsed: unknown,
       buffering: (value: boolean) => void) {
+      mockHandlerOwners.push(this);
       this.video = video; this.data = data; this.initialized = initialized;
       this.buffering = buffering; mockError = error; mockBuffering = buffering; mockEnded = ended;
     }
     preBufferVideo() { if (mockDeferInitialization) return; this.video.current = mockMedia; this.initialized(true); this.buffering(false); }
     destroyVideoElements() { return mockDestroy(); }
+    async destroyVideoElementsConfirmed() { try {return await mockDestroy();} catch {return false;} }
   },
 }));
 
 export const mockLifecycleCallbacks = new Set<(state: string) => void>();
 export const mockBackCallbacks = new Set<() => boolean>();
 export const mockDestroy = jest.fn();
+export const mockHandlerOwners: unknown[] = [];
 let mockDeferInitialization = false;
 export const mockSeekFocus = jest.fn();
 export let mockEnded: (value: boolean) => void;

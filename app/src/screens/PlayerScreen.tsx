@@ -163,6 +163,9 @@ export const PlayerScreen = ({
   const [recoveryPhase, setRecoveryPhase] = React.useState<RecoveryPhase>(recovery?.start ? 'covered' : 'ready');
   const [recoveryCoverMounted, setRecoveryCoverMounted] = React.useState(false);
   const [retryBlocked, setRetryBlocked] = React.useState(false);
+  const [retryClosing, setRetryClosing] = React.useState(false);
+  const retryRelease = useRef<{generation: number; confirmed: boolean} | null>(null);
+  const retryGeneration = useRef(0);
   const recoveryAttempt = useRef<ReturnType<typeof recoverPlayback> | null>(null);
   const recoveryStarted = useRef(false);
   const recoveryPending = Boolean(recovery?.start && recoveryPhase !== 'ready');
@@ -454,7 +457,8 @@ export const PlayerScreen = ({
     [guarding, guard.seekEngine],
   );
 
-  const videoHandler = new VideoHandler(
+  const handlerRef = useRef<VideoHandler | null>(null);
+  if (!handlerRef.current) handlerRef.current = new VideoHandler(
     videoRef,
     player,
     data,
@@ -465,6 +469,8 @@ export const PlayerScreen = ({
     setShowBuffering,
     mediaControlHandler,
   );
+  const videoHandler = handlerRef.current;
+  videoHandler.mediaControlHandler = mediaControlHandler;
 
   useEffect(() => {
     setupEventListeners();
@@ -534,6 +540,8 @@ export const PlayerScreen = ({
   };
 
   const releaseNativePlayer = () => {
+    // An async owner is already closing this decoder; do not call native destroy twice.
+    if (retryRelease.current && !retryRelease.current.confirmed) return false;
     const hadMedia = Boolean(videoRef.current);
     let released = true;
     const attempt = (operation: () => void) => {
@@ -553,6 +561,7 @@ export const PlayerScreen = ({
     return () => {
       memory.close();
       leaving.current = true;
+      retryGeneration.current += 1;
       recoveryAttempt.current?.cancel();
       surfaceGeneration.current += 1;
       /**
@@ -585,6 +594,7 @@ export const PlayerScreen = ({
     leaving.current = true;
     recoveryAttempt.current?.cancel();
     surfaceGeneration.current += 1;
+    retryGeneration.current += 1;
     trace('playback', 'back');
     if (route.params.showHomeOpening) setReturningHome(true);
 
@@ -826,17 +836,28 @@ export const PlayerScreen = ({
   const retryPlayback = () => {
     const checkpoint = memory.last.current;
     if (!recovery || !checkpoint || leaving.current || retryBlocked || guard.status !== 'verified') return;
-    memory.close();
-    leaving.current = true;
-    recoveryAttempt.current?.cancel();
-    surfaceGeneration.current += 1;
-    const destroyed = releaseNativePlayer();
-    if (!destroyed) {
-      // Do not create another native player while teardown is unconfirmed.
-      leaving.current = false; setRetryBlocked(true); setVideoError(true); return;
+    const currentRelease = retryRelease.current;
+    if (currentRelease) {
+      if (!currentRelease.confirmed) return;
+      // A second explicit activation is required after confirmed release.
+      leaving.current = true; retryGeneration.current += 1;
+      videoRef.current = null; surfaceHandle.current = null; captionViewHandle.current = null;
+      recovery.retry(checkpoint);
+      return;
     }
-    videoRef.current = null; surfaceHandle.current = null; captionViewHandle.current = null;
-    recovery.retry(checkpoint);
+    memory.close(); transportReady.current = false;
+    recoveryAttempt.current?.cancel(); surfaceGeneration.current += 1;
+    const generation = ++retryGeneration.current;
+    retryRelease.current = {generation, confirmed: false};
+    setVideoError(true); setRetryClosing(true);
+    trace('playback', 'retry closing');
+    videoHandler.destroyVideoElementsConfirmed().then(confirmed => {
+      if (leaving.current || retryGeneration.current !== generation) return;
+      setRetryClosing(false);
+      if (!confirmed) {setRetryBlocked(true); trace('playback', 'retry release refused'); return;}
+      retryRelease.current!.confirmed = true;
+      trace('playback', 'retry release confirmed');
+    });
   };
 
   if (isVideoEnded && continuousEnding && guard.status === 'verified') {
@@ -958,8 +979,8 @@ export const PlayerScreen = ({
           <View style={styles.recoveryAction}><CalmButton label="Try again" hasTVPreferredFocus sound={false} testID="slow-playback-retry" onPress={retryPlayback} /></View>}
         {showOpeningShell && <PlayerOpening title={data.title} menuArt={data.calmMenuArt} returning={returningHome} checking={guard.status !== 'verified'} motionEnabled={route.params.interfaceMotionEnabled === true} onBack={leavePlayer} />}
         {isVideoError && !returningHome && <ErrorView navigateBack={leavePlayer}
-          onRetry={!retryBlocked && recovery && memory.last.current && guard.status === 'verified' ? retryPlayback : undefined}
-          recoveryBlocked={retryBlocked} />}
+          onRetry={!retryBlocked && !retryClosing && recovery && memory.last.current && guard.status === 'verified' ? retryPlayback : undefined}
+          recoveryBlocked={retryBlocked} closing={retryClosing} />}
       </View>
     </SafeAreaView>
     </CoastalAppearance.Provider>

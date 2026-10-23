@@ -6,13 +6,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import CalmButton from '../calmframes/CalmButton';
 import { CALM_COLORS, CALM_SURFACE, CALM_SPACE, CALM_TEXT, scale } from '../calmframes/calmStyles';
 
-interface ErrorViewProps { navigateBack: () => void; onRetry?: () => void; recoveryBlocked?: boolean; }
+interface ErrorViewProps { navigateBack: () => void; onRetry?: () => void; recoveryBlocked?: boolean; closing?: boolean; }
 
-const ErrorView = ({ navigateBack, onRetry, recoveryBlocked }: ErrorViewProps) => (
+const ErrorView = ({ navigateBack, onRetry, recoveryBlocked, closing }: ErrorViewProps) => (
   <View style={styles.mainContainer} testID="player-error" accessibilityViewIsModal>
     <View style={styles.message} accessible accessibilityRole="alert" accessibilityLiveRegion="polite">
       <Text style={styles.title} testID="error-boundary-label">Playback stopped</Text>
-      <Text style={styles.detail}>{recoveryBlocked ? 'The player could not close. Go back before trying again.' : onRetry ? 'Try again from your saved position.' : 'Go back and try playing the video again.'}</Text>
+      <Text style={styles.detail}>{closing ? 'Closing the player. You can go back while it finishes.' : recoveryBlocked ? 'The player could not close. Go back before trying again.' : onRetry ? 'Try again from your saved position.' : 'Go back and try playing the video again.'}</Text>
     </View>
     <View style={styles.actions}>
       {onRetry && <CalmButton primary label="Try again" onPress={onRetry} hasTVPreferredFocus sound={false} testID="player-error-retry" />}

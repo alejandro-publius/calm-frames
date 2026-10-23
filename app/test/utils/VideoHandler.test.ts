@@ -159,11 +159,13 @@ describe('VideoHandler', () => {
     let resolveFocus!: () => void;
     const focus = new Promise<void>((resolve) => { resolveFocus = resolve; });
     const initialize = jest.fn().mockResolvedValue(undefined);
-    const setMediaControlFocus = jest.fn(() => focus);
+    let signalFocus!: () => void;
+    const focusCalled = new Promise<void>(resolve => {signalFocus = resolve;});
+    const setMediaControlFocus = jest.fn(() => {signalFocus(); return focus;});
     videoHandler.destroyVideoElements = jest.fn().mockResolvedValue(true);
     mockVideoRef.current = { initialize, setMediaControlFocus } as unknown as VideoPlayer;
     const pending = videoHandler.preBufferVideo({} as never);
-    await Promise.resolve();
+    await focusCalled;
     expect(setMediaControlFocus).toHaveBeenCalled();
     mockVideoRef.current = null;
     resolveFocus();
@@ -230,6 +232,22 @@ describe('VideoHandler', () => {
     rejectInitialize(new Error('Initialization completed after Back'));
     await new Promise(process.nextTick);
     expect(mockSetIsVideoError).not.toHaveBeenCalled();
+  });
+
+  it('confirms asynchronous native destruction only after the SDK completion promise', async () => {
+    const {mockVideoRef, videoHandler} = createVideoHandler();
+    let complete!: () => void;
+    const done = new Promise<void>(resolve => {complete = resolve;});
+    const media = {pause: jest.fn(), clearSurfaceHandle: jest.fn(), clearCaptionViewHandle: jest.fn(),
+      deinitialize: jest.fn(() => done)};
+    mockVideoRef.current = media as unknown as VideoPlayer;
+    videoHandler.removeEventListeners = jest.fn();
+    const released = videoHandler.destroyVideoElementsConfirmed(); await Promise.resolve();
+    expect(media.deinitialize).toHaveBeenCalledTimes(1);
+    expect(videoHandler.destroyVideoElements()).toBe(false);
+    expect(mockVideoRef.current).toBe(media);
+    complete(); expect(await released).toBe(true);
+    expect(mockVideoRef.current).toBeNull();
   });
 
   describe('destroyMediaPlayerSync', () => {
