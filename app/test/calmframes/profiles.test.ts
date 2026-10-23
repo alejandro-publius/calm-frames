@@ -59,11 +59,14 @@ import {
   makeProfile,
   MAX_PROFILE_NAME,
   MAX_PROFILES,
+  nameProblem,
+  namesTakenFor,
   newFamily,
   presetsByStrictness,
   PRESET_STRICTNESS,
   profileCoverOptions,
   Profile,
+  profileNameProblem,
   removeProfile,
   renameProfile,
   selectProfile,
@@ -393,5 +396,68 @@ describe('one log per kid', () => {
       logs = addProfileHide(logs, 'profile-1', entry(index, `Title ${index}`), 3);
     }
     expect(logForProfile(logs, 'profile-1').entries).toHaveLength(3);
+  });
+});
+
+/**
+ * A typed name, before it is saved.
+ *
+ * `renameProfile` repairs quietly, which is right for a record read back
+ * from storage and wrong for a parent's typing. The editor asks these first,
+ * so nothing a parent saves is changed on the way in.
+ *
+ * Seen to fail: `nameProblem` comparing without `toLowerCase()` turned
+ * "refuses a name another chip carries, whatever its case" red, with
+ * `expect(received).toBe(expected)`, Expected: "taken", Received: null.
+ */
+describe('a typed name, before it is saved', () => {
+  const family: Family = addProfile(newFamily(DEFAULT_SETTINGS, 'Robin'), 'Sam');
+
+  it('refuses a blank and a name past the limit, and takes the limit itself', () => {
+    expect(profileNameProblem(family, 'profile-2', '')).toBe('empty');
+    expect(profileNameProblem(family, 'profile-2', '   ')).toBe('empty');
+    expect(profileNameProblem(family, 'profile-2', 'a'.repeat(MAX_PROFILE_NAME + 1))).toBe('long');
+    expect(profileNameProblem(family, 'profile-2', 'a'.repeat(MAX_PROFILE_NAME))).toBeNull();
+    // Spaces around a name are not part of it.
+    expect(profileNameProblem(family, 'profile-2', ` ${'a'.repeat(MAX_PROFILE_NAME)} `)).toBeNull();
+  });
+
+  it('refuses a name another chip carries, whatever its case, and the reserved words', () => {
+    expect(profileNameProblem(family, 'profile-2', 'Robin')).toBe('taken');
+    expect(profileNameProblem(family, 'profile-2', ' robin ')).toBe('taken');
+    expect(profileNameProblem(family, 'profile-2', 'ROBIN')).toBe('taken');
+    expect(profileNameProblem(family, 'profile-2', 'Everyone', ['Everyone'])).toBe('taken');
+    expect(profileNameProblem(family, 'profile-2', 'everyone', ['Everyone'])).toBe('taken');
+    expect(profileNameProblem(family, 'profile-2', 'Everyone')).toBeNull();
+    expect(profileNameProblem(family, 'profile-2', 'Ash')).toBeNull();
+  });
+
+  it('lets a kid keep their own name, in any case', () => {
+    expect(profileNameProblem(family, 'profile-2', 'Sam')).toBeNull();
+    expect(profileNameProblem(family, 'profile-2', 'sam')).toBeNull();
+    expect(nameProblem('Sam', namesTakenFor(family, 'profile-2'))).toBeNull();
+  });
+
+  it('names everybody else and the reserved words, and not the kid being renamed', () => {
+    expect(namesTakenFor(family, 'profile-2', ['Everyone'])).toEqual(['Robin', 'Everyone']);
+    expect(namesTakenFor(family, 'profile-1')).toEqual(['Sam']);
+    expect(nameProblem('Robin', [], 16)).toBeNull();
+  });
+
+  it('renames by id and leaves everything else exactly as it was', () => {
+    const renamed = renameProfile(family, 'profile-2', 'Ash');
+    expect(renamed).toEqual({
+      ...family,
+      profiles: [family.profiles[0], { ...family.profiles[1], name: 'Ash' }],
+    });
+    expect(renamed.profiles[1].id).toBe('profile-2');
+    expect(renamed.profiles[1].settings).toEqual(family.profiles[1].settings);
+    expect(renamed.activeProfileId).toBe(family.activeProfileId);
+    expect(renamed.floor).toBe(family.floor);
+    expect(renamed.chimeEnabled).toBe(family.chimeEnabled);
+    // The record of what was hidden is keyed by id, so it is not in the family
+    // at all and a rename cannot reach it.
+    const logs = addProfileHide(emptyProfileLogs(), 'profile-2', entry(1_000, 'Sam title'));
+    expect(logForProfile(logs, renamed.profiles[1].id).entries).toHaveLength(1);
   });
 });

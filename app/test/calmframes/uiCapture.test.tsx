@@ -77,6 +77,7 @@ import {
   KID_HOME_PROFILES_OFFLINE_FRAME,
   KID_HOME_PROFILES_FOCUSED_FRAME,
   KID_HOME_PICKER_FRAME,
+  PARENT_EDIT_NAME_FRAME,
   PARENT_LOCKED_FRAME,
   PARENT_OPEN_FRAME,
   PARENT_PROFILE_FRAME,
@@ -211,6 +212,7 @@ const familyParentArea = (titles: CheckedTitle[]) => (
     log={emptyHideLog()}
     family={FAMILY}
     onFamilyChange={jest.fn()}
+    onRenameProfile={jest.fn(async () => true)}
     titles={titles}
     nowMs={() => 0}
   />
@@ -354,6 +356,15 @@ describe('what the app paints', () => {
     expect(
       frameFromTree('parent-area-remove-kid', screen.toJSON() as unknown as RenderedNode),
     ).toEqual(PARENT_REMOVE_KID_FRAME);
+
+    // Typing that kid's name puts the keys where the picker was. Field, keys
+    // and buttons are the card colour, and the chosen preset row below still
+    // carries the chosen fill, so the same two colours in the same order.
+    fireEvent.press(screen.getByTestId('parent-area-remove-keep'));
+    fireEvent.press(screen.getByTestId('parent-area-rename-profile'));
+    expect(
+      frameFromTree('parent-area-edit-name', screen.toJSON() as unknown as RenderedNode),
+    ).toEqual(PARENT_EDIT_NAME_FRAME);
   });
 
   it('lists every frame the app can show, so the flash run covers them all', () => {
@@ -375,6 +386,7 @@ describe('what the app paints', () => {
       //     Expected: true
       //     Received: false
       PARENT_REMOVE_KID_FRAME,
+      PARENT_EDIT_NAME_FRAME,
     ]) {
       expect(named.has(frame.screen)).toBe(true);
     }
@@ -736,6 +748,11 @@ describe('the capture path', () => {
             name: 'parent-area-remove-kid',
             reason: 'the question before a kid is removed',
             act: () => press('parent-area-remove-profile'),
+          },
+          {
+            name: 'parent-area-edit-name',
+            reason: 'typing that kid\'s name',
+            act: () => pressAll('parent-area-remove-keep', 'parent-area-rename-profile'),
           },
         ],
       },

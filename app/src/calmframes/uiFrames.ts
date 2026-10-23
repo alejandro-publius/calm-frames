@@ -169,6 +169,21 @@ export const PARENT_REMOVE_KID_FRAME: UiFrame = {
   surfaces: [MENU.SURFACE, MENU.SURFACE_FOCUSED],
 };
 
+/**
+ * The parent area while a kid's name is being typed.
+ *
+ * The picker is put away and the letter keys stand where it was. The field,
+ * the keys and the buttons are all the card colour, and the chosen preset
+ * row further down still carries the chosen fill, so these are the same two
+ * colours in the same order as one kid's settings. A frame of its own because
+ * it is a state of its own, and the flash run should walk through it.
+ */
+export const PARENT_EDIT_NAME_FRAME: UiFrame = {
+  screen: 'parent-area-edit-name',
+  background: MENU.BACKGROUND,
+  surfaces: [MENU.SURFACE, MENU.SURFACE_FOCUSED],
+};
+
 /** The four steps of the first run, in order. */
 export const FIRST_RUN_PIN_FRAME: UiFrame = {
   screen: 'first-run-pin',
@@ -274,6 +289,7 @@ export const ALL_UI_FRAMES: UiFrame[] = [
   PARENT_OPEN_FRAME,
   PARENT_PROFILE_FRAME,
   PARENT_REMOVE_KID_FRAME,
+  PARENT_EDIT_NAME_FRAME,
   CREDITS_FRAME,
   // The map is still being checked, so the picture is hidden behind a card.
   playerFrame(true, 'checking'),

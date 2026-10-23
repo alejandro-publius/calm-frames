@@ -43,6 +43,14 @@
  * blocks events on Vega, and this app has no browser to put a modal in. While
  * the question is up it stands where the buttons were, so there is one thing
  * being asked and Add a kid is out of reach until it is answered.
+ *
+ * Renaming a kid works the same way. Edit name sits beside Add a kid and
+ * Remove, and pressing it puts the letter keys where the picker was, so one
+ * name is being typed and nothing else in the group can move under it. The
+ * editor holds the draft; this screen holds whether the write committed,
+ * which it learns from `onRenameProfile` rather than assuming. Only a true
+ * answer closes the editor. A false one keeps the draft on screen with Try
+ * again and Cancel, and Back or Cancel put focus back on Edit name.
  */
 
 import React from 'react';
@@ -70,6 +78,7 @@ import {
   CHIME_SECTION_TITLE,
   CHOSEN_WORD,
   CREDITS_LABEL,
+  EDIT_NAME_LABEL,
   EVERYONE_LABEL,
   EXPLAINER_LINES,
   EXPLAINER_TITLE,
@@ -77,6 +86,7 @@ import {
   hiddenSummary,
   hidesByDay,
   keepKidLabel,
+  NAME_SAVE_FAILED,
   nextKidName,
   Notice,
   noticeForTitle,
@@ -118,6 +128,7 @@ import {
 import { describeHideEntry, HideLogStore, totalHiddenMs } from './hideLog';
 import { attemptPin, PIN_LENGTH, PinGateState } from './parentGate';
 import PinKeypad from './PinKeypad';
+import ProfileNameEditor from './ProfileNameEditor';
 import ProfilePicker from './ProfilePicker';
 import {
   addProfile,
@@ -129,9 +140,11 @@ import {
   EVERYONE_ID,
   Family,
   logForProfile,
+  namesTakenFor,
   Profile,
   ProfileLogs,
   removeProfile,
+  renameProfile,
   setChimeEnabled,
   setFloor,
   setProfileSettings,
@@ -144,6 +157,7 @@ import PersonalCoversScreen from './PersonalCoversScreen';
 import { personalCoverAsset } from './personalCovers';
 import { useUiCapture } from './uiCapture';
 import {
+  PARENT_EDIT_NAME_FRAME,
   PARENT_LOCKED_FRAME,
   PARENT_OPEN_FRAME,
   PARENT_PROFILE_FRAME,
@@ -180,6 +194,16 @@ export interface ParentAreaScreenProps {
    */
   family?: Family;
   onFamilyChange?: (family: Family) => void;
+  /**
+   * Saves a renamed family and says whether the write committed.
+   *
+   * Edit name is offered only when this is given. `onFamilyChange` returns
+   * nothing, and an editor that closed because a callback returned would be
+   * reporting a save it never saw. The route passes the household write's
+   * own answer: true once the record holds the new name, false when it was
+   * refused or failed, in which case the draft stays on screen.
+   */
+  onRenameProfile?: (family: Family) => Promise<boolean>;
   /** One hide log per profile id. */
   profileLogs?: ProfileLogs;
   titles: CheckedTitle[];
@@ -201,6 +225,7 @@ const ParentAreaScreen = ({
   log,
   family,
   onFamilyChange,
+  onRenameProfile,
   profileLogs = emptyProfileLogs(),
   titles,
   nowMs = Date.now,
@@ -227,6 +252,22 @@ const ParentAreaScreen = ({
   // id rather than as a flag, so a question asked about Robin cannot be
   // answered about Sam if the picker moves underneath it.
   const [askedToRemove, setAskedToRemove] = React.useState<string | null>(null);
+  // Which kid's name is being typed, by id for the same reason: a draft begun
+  // for Robin cannot be saved onto Sam.
+  const [renaming, setRenaming] = React.useState<string | null>(null);
+  const [renamePending, setRenamePending] = React.useState(false);
+  const renamePendingRef = React.useRef(false);
+  // The last rename write came back false. The editor stays up with its draft.
+  const [renameFailed, setRenameFailed] = React.useState(false);
+  // Edit name takes focus back when the editor closes, whichever way it closed.
+  const [renameReturnFocus, setRenameReturnFocus] = React.useState(false);
+  const mounted = React.useRef(true);
+  React.useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
   const shownNotice = savingPin ? PIN_CHECKING : notice;
   const wrongPin = shownNotice.tone === 'blocked';
 
@@ -237,6 +278,28 @@ const ParentAreaScreen = ({
   // and so no question to ask about them either.
   const removable = Boolean(family && editingKid && family.profiles.length > 1);
   const confirmingRemoval = removable && askedToRemove === editingId;
+  // The editor is open only for a kid who is still in the family, and only
+  // when the route can say whether a save committed.
+  const renamingProfile: Profile | undefined =
+    family && renaming !== null
+      ? family.profiles.find((profile) => profile.id === renaming)
+      : undefined;
+  const editingName = Boolean(renamingProfile && onRenameProfile);
+  // Back closes the editor and nothing else, and while a write is in flight it
+  // does nothing at all: the write cannot be taken back, so the screen waits
+  // for its answer rather than showing the old name as if it were the answer.
+  React.useEffect(() => {
+    if (!editingName) return;
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (!renamePendingRef.current) {
+        setRenaming(null);
+        setRenameFailed(false);
+        setRenameReturnFocus(true);
+      }
+      return true;
+    });
+    return () => subscription.remove();
+  }, [editingName]);
   // While the screen is asking, Back answers the question with keeping the
   // kid. Falling through would leave the whole parent area instead.
   React.useEffect(() => {
@@ -247,7 +310,10 @@ const ParentAreaScreen = ({
 
   let frame = PARENT_LOCKED_FRAME;
   let reason = 'parent area locked';
-  if (unlocked && confirmingRemoval) {
+  if (unlocked && editingName) {
+    frame = PARENT_EDIT_NAME_FRAME;
+    reason = 'parent area, typing a name';
+  } else if (unlocked && confirmingRemoval) {
     frame = PARENT_REMOVE_KID_FRAME;
     reason = 'parent area, asking before removing a kid';
   } else if (unlocked && editingKid) {
@@ -404,6 +470,53 @@ const ParentAreaScreen = ({
   // that has never made a profile reads exactly what it read before.
   const whose = family && onFamilyChange ? editingProfile?.name ?? EVERYONE_LABEL : null;
 
+  const openRename = (profile: Profile) => {
+    // One thing at a time: a question about removing the kid goes away.
+    setAskedToRemove(null);
+    setRenameFailed(false);
+    setRenameReturnFocus(false);
+    setRenaming(profile.id);
+  };
+  const closeRename = () => {
+    setRenaming(null);
+    setRenameFailed(false);
+    setRenameReturnFocus(true);
+  };
+  const saveName = (name: string) => {
+    if (
+      !family ||
+      !renamingProfile ||
+      !onRenameProfile ||
+      renamePendingRef.current ||
+      saving
+    ) {
+      return;
+    }
+    renamePendingRef.current = true;
+    setRenamePending(true);
+    setRenameFailed(false);
+    // The id is the key. Everything else about the kid, and everybody else
+    // in the household, goes through untouched.
+    onRenameProfile(renameProfile(family, renamingProfile.id, name))
+      .then(
+        (accepted) => {
+          if (!mounted.current) return;
+          if (accepted) {
+            closeRename();
+          } else {
+            setRenameFailed(true);
+          }
+        },
+        () => {
+          if (mounted.current) setRenameFailed(true);
+        },
+      )
+      .finally(() => {
+        renamePendingRef.current = false;
+        if (mounted.current) setRenamePending(false);
+      });
+  };
+
   // The lines actually drawn, and the days they fall on.
   const shownEntries = shownLog.entries.slice(0, LOG_LINES_SHOWN);
   const days = hidesByDay(shownEntries, nowMs());
@@ -417,7 +530,7 @@ const ParentAreaScreen = ({
       testID={`${testID}-open`}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      <CalmPageHeader onBack={onBack} backTestID={`${testID}-back-top`} preferredBack={!extraReturnFocus} backDisabled={saving} />
+      <CalmPageHeader onBack={onBack} backTestID={`${testID}-back-top`} preferredBack={!extraReturnFocus && !renameReturnFocus} backDisabled={saving} />
       <View style={styles.header}>
         <View style={styles.headerTitleRow}>
           <Text style={[styles.title, styles.headerTitle]} accessibilityRole="header">
@@ -438,7 +551,23 @@ const ParentAreaScreen = ({
         <Text style={styles.lead}>{PARENTAL_CONTROLS_LEAD}</Text>
       </View>
 
-      {family && onFamilyChange ? (
+      {family && onFamilyChange && renamingProfile && onRenameProfile ? (
+        // The keys stand where the picker and the buttons were, so one name is
+        // being typed and nothing in the group can move under the draft.
+        <View style={[styles.group, styles.profileGroup, styles.editorGroup]}>
+          <ProfileNameEditor
+            testID={`${testID}-name`}
+            profile={renamingProfile}
+            taken={namesTakenFor(family, renamingProfile.id, [EVERYONE_LABEL])}
+            saving={saving || renamePending}
+            failure={renameFailed ? NAME_SAVE_FAILED : null}
+            onSave={saveName}
+            onCancel={() => {
+              if (!renamePendingRef.current) closeRename();
+            }}
+          />
+        </View>
+      ) : family && onFamilyChange ? (
         <View style={[styles.group, !confirmingRemoval ? styles.profileGroup : null]}>
           <View style={!confirmingRemoval ? styles.profileIdentity : undefined}>
           <ProfilePicker
@@ -453,6 +582,7 @@ const ParentAreaScreen = ({
               // Moving the picker takes the question with it. A parent who
               // answers by choosing somebody else has not said remove.
               setAskedToRemove(null);
+              setRenameReturnFocus(false);
               setEditingId(profile.id);
             }}
           />
@@ -532,6 +662,19 @@ const ParentAreaScreen = ({
                   {PROFILES_FULL}
                 </Text>
               )}
+              {editingProfile && onRenameProfile ? (
+                <View style={styles.button}>
+                  <CalmButton
+                    disabled={saving || undefined}
+                    testID={`${testID}-rename-profile`}
+                    label={EDIT_NAME_LABEL}
+                    // Focus comes back here when the editor closes, so Back
+                    // and Cancel land where the parent left.
+                    hasTVPreferredFocus={renameReturnFocus}
+                    onPress={() => openRename(editingProfile)}
+                  />
+                </View>
+              ) : null}
               {editingProfile && removable ? (
                 <View style={styles.button}>
                   <CalmButton
@@ -926,6 +1069,8 @@ const styles = StyleSheet.create({
   profileGroup: { flexDirection: 'row', gap: scale(40), marginBottom: scale(40), padding: scale(32), borderColor: CALM_COLORS.BORDER, borderWidth: scale(2), borderRadius: scale(24) },
   profileIdentity: { flex: 1 },
   profileManagement: { width: scale(360) },
+  /** The editor takes the whole panel, one column, inside the same outline. */
+  editorGroup: { flexDirection: 'column' },
   managementNote: { maxWidth: '100%' },
   section: {
     ...CALM_TEXT.section,

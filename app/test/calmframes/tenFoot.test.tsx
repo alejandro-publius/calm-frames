@@ -294,6 +294,7 @@ const parentAreaWithFamily = (
     log={emptyHideLog()}
     family={FAMILY}
     onFamilyChange={jest.fn()}
+    onRenameProfile={jest.fn(async () => true)}
     profileLogs={addProfileHide(emptyProfileLogs(), 'profile-1', {
       atMs: Date.parse('2026-09-17T19:30:00Z'),
       titleId: 'ok',
@@ -583,6 +584,19 @@ const CASES: Case[] = [
       ...UNLOCK,
       'parent-area-profiles-profile-1',
       'parent-area-remove-profile',
+    ],
+  },
+  {
+    // The letter keys, the name being typed above them and Save and Cancel
+    // below: every key is a control a parent finds from the sofa.
+    name: 'parent-area-edit-name',
+    element: parentAreaWithFamily,
+    background: COASTAL_COLORS.BACKGROUND,
+    screen: true,
+    press: [
+      ...UNLOCK,
+      'parent-area-profiles-profile-1',
+      'parent-area-rename-profile',
     ],
   },
   {

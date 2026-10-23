@@ -262,14 +262,21 @@ const KidModeScreen = ({
       interfaceSound.confirm();
     }
   }, [confirmSavedChange, interfaceSound]);
-  const setFamily = (next: Family) => {
+  // Says whether the household write committed, because a parent typing a
+  // kid's name in Parents is told the answer: the editor closes only on true,
+  // and keeps the draft on false. The other callers change nothing by
+  // ignoring it. A write the hook refuses, or one made before the record is
+  // ready, is false: nothing was written, so nothing is reported as saved.
+  const setFamily = (next: Family): Promise<boolean> => {
     if (saved.phase === 'ready' && saved.value) {
-      saved.write({ ...saved.value, family: next }).then((accepted) => {
+      return saved.write({ ...saved.value, family: next }).then((accepted) => {
         if (accepted && next.interfaceSoundsEnabled === true) {
           setConfirmSavedChange(true);
         }
+        return accepted;
       });
     }
+    return Promise.resolve(false);
   };
   const setGate = async (next: PinGateState) => {
     if (
@@ -507,6 +514,7 @@ const KidModeScreen = ({
         log={allProfileHides(profileLogs)}
         family={family}
         onFamilyChange={setFamily}
+        onRenameProfile={setFamily}
         profileLogs={profileLogs}
         titles={titles}
         nowMs={nowMs}

@@ -336,6 +336,70 @@ export function keepKidLabel(name: string): string {
   return `Keep ${name}`;
 }
 
+/**
+ * Renaming a kid.
+ *
+ * A new kid is called Kid, or Kid 2, because this screen had no way to type.
+ * The editor is a row of letter keys for the remote, the PIN keypad's shape
+ * with more keys, with the name being typed above them and Save and Cancel
+ * below. Everything it refuses, it refuses in words under the field: a blank,
+ * a name another chip already carries, and a name longer than the picker can
+ * draw on one line.
+ */
+export const EDIT_NAME_LABEL = 'Edit name';
+export const SAVE_NAME_LABEL = 'Save name';
+export const CANCEL_NAME_LABEL = 'Cancel';
+export const TRY_NAME_AGAIN_LABEL = 'Try again';
+export const NAME_SHIFT_LABEL = 'Shift';
+export const NAME_SPACE_LABEL = 'Space';
+export const NAME_DELETE_LABEL = 'Delete';
+/** The field before anything is typed. */
+export const NAME_EMPTY_HINT = 'Type a name';
+/** The save button while the name is being written to the household record. */
+export const NAME_SAVING = 'Saving the name…';
+
+export function editNameTitle(name: string): string {
+  return `New name for ${name}`;
+}
+
+/** How much of the line is used, beside the field. Spaces count: they take room too. */
+export function nameLengthLine(count: number, maxLength: number): string {
+  return `${count} of ${maxLength} characters`;
+}
+
+/** What a screen reader hears when the letter keys change case. */
+export function shiftLabel(nextIsCapital: boolean): string {
+  return `Shift. The next letter is ${nextIsCapital ? 'a capital' : 'small'}.`;
+}
+
+export function nameProblemLine(
+  problem: 'empty' | 'long' | 'taken',
+  name: string,
+  maxLength: number,
+): string {
+  if (problem === 'empty') {
+    return 'Type a name before saving.';
+  }
+  if (problem === 'long') {
+    return `A name can be up to ${maxLength} characters.`;
+  }
+  return `${name} is already in this household. Choose a different name.`;
+}
+
+/**
+ * The new name could not be written down.
+ *
+ * Nothing changed: the old name stays until a write commits, and the draft
+ * stays in the field so nobody types it twice. The two answers are beside
+ * it, and both say what they do.
+ */
+export const NAME_SAVE_FAILED: Notice = {
+  title: 'Name not saved yet',
+  detail:
+    "This TV couldn't write the change down. Try again, or cancel to keep the old name.",
+  tone: 'blocked',
+};
+
 /** The record, before anything has been hidden. */
 export const NOTHING_HIDDEN_YET = 'No scenes hidden yet.';
 
