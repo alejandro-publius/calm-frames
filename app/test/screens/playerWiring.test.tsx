@@ -27,7 +27,9 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
   setItem: jest.fn(async () => undefined),
 }));
 import { CAPTION_DISABLE_ID } from '../../src/constants';
-import PlayerScreen from '../../src/screens/PlayerScreen';
+import { PlayerScreen } from '../../src/screens/PlayerScreen';
+import * as progress from '../../src/calmframes/usePlaybackProgress';
+import * as memory from '../../src/calmframes/usePlaybackMemory';
 
 jest.mock('../../src/w3cmedia/mediacontrols/VideoPlayerUI', () => 'VideoPlayerUI');
 jest.mock('../../src/services/bif/bifService', () => ({
@@ -186,9 +188,10 @@ const guarded = {
   chimeEnabled: false,
 };
 
-function renderPlayer(params: Record<string, unknown>) {
+function renderPlayer(params: Record<string, unknown>, recovery?: React.ComponentProps<typeof PlayerScreen>['recovery']) {
   return render(
     <PlayerScreen
+      recovery={recovery}
       navigation={{ goBack: mockGoBack } as never}
       route={{ params: { data, ...params } } as never}
     />,
@@ -262,6 +265,20 @@ describe('the player hands OK to Skip only while Skip is on screen', () => {
     await playAt(9);
     expect(cardKind()).toBe('Scene ahead');
     expect(chromeProps().skipOwnsSelect).toBe(true);
+  });
+
+  it('gives visible Retry focus and OK without the seekbar taking them back', async () => {
+    const slow = jest.spyOn(progress, 'usePlaybackProgress').mockReturnValue(true);
+    const remembered = jest.spyOn(memory, 'usePlaybackMemory').mockReturnValue({
+      last: {current: {positionMs: 1000} as never}, capture: jest.fn(), close: jest.fn(),
+    });
+    try {
+      renderPlayer({guarded}, {identity: {} as never, start: null, retry: jest.fn()});
+      await settle();
+      await playAt(8.5);
+      expect(screen.getByTestId('slow-playback-retry').props.hasTVPreferredFocus).toBe(true);
+      expect(chromeProps().skipOwnsSelect).toBe(true);
+    } finally { slow.mockRestore(); remembered.mockRestore(); }
   });
 
   it('leaves OK alone on a card with no Skip button', async () => {

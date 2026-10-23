@@ -107,7 +107,7 @@ interface PlayerProps {
   route: RouteProp<AppStackParamList, Screens.PLAYER_SCREEN>;
 }
 
-const PlayerScreen = ({
+export const PlayerScreen = ({
   navigation,
   route,
   recovery,
@@ -380,6 +380,8 @@ const PlayerScreen = ({
   const slowPlayback = usePlaybackProgress(videoRef, isVideoInitialized && !showOpeningShell &&
     !paused && !showBuffering && !isVideoEnded && !isVideoError && !returningHome &&
     (!guarding || guard.status === 'verified'));
+  const retryAvailable = Boolean(!showOpeningShell && slowPlayback && !isVideoError &&
+    !retryBlocked && recovery && memory.last.current);
   const calmCoverFallback = guarding && guard.status === 'verified' && card.kind === 'covering';
   const sceneBridge = preparedRouteAccepted && extraCoverAsset &&
     guard.scheduledCover && !paused && !showBuffering && !isVideoEnded &&
@@ -933,9 +935,9 @@ const PlayerScreen = ({
             setSelectedCaptionInVideoPlayer={setSelectedCaptionInVideoPlayer}
             bifFrameImagesRef={bifFrameImagesRef}
             videoData={data}
-            // The card's Skip button has focus during a countdown, so OK is
-            // Skip's and the sample must not pause or show its controls.
-            skipOwnsSelect={cardOffersSkip(card)}
+            // Skip and Retry own OK while visible. The seekbar must not
+            // reclaim focus when its controls appear behind either action.
+            skipOwnsSelect={cardOffersSkip(card) || retryAvailable}
             selectedCaptionId={captionID}
             sceneIntervals={guarding && guard.status === 'verified' ? guard.intervals : undefined}
             requestSeek={
@@ -952,8 +954,8 @@ const PlayerScreen = ({
         )}
         {recoveryPending && <View testID="recovery-picture-barrier" pointerEvents="none"
           onLayout={() => setRecoveryCoverMounted(true)} style={styles.recoveryCover} />}
-        {!showOpeningShell && slowPlayback && !isVideoError && !retryBlocked && recovery && memory.last.current &&
-          <View style={styles.recoveryAction}><CalmButton label="Try again" sound={false} testID="slow-playback-retry" onPress={retryPlayback} /></View>}
+        {retryAvailable &&
+          <View style={styles.recoveryAction}><CalmButton label="Try again" hasTVPreferredFocus sound={false} testID="slow-playback-retry" onPress={retryPlayback} /></View>}
         {showOpeningShell && <PlayerOpening title={data.title} menuArt={data.calmMenuArt} returning={returningHome} checking={guard.status !== 'verified'} motionEnabled={route.params.interfaceMotionEnabled === true} onBack={leavePlayer} />}
         {isVideoError && !returningHome && <ErrorView navigateBack={leavePlayer}
           onRetry={!retryBlocked && recovery && memory.last.current && guard.status === 'verified' ? retryPlayback : undefined}
