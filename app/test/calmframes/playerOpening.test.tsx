@@ -56,11 +56,11 @@ test('Back on the opening shell leaves once, and a late stall timeout changes no
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
 
-// A successful synchronous teardown needs no extra navigation delay.
-test('Back returns immediately after confirmed teardown and never returns twice', () => {
+// A confirmed asynchronous teardown needs no extra navigation delay.
+test('Back returns immediately after confirmed teardown and never returns twice', async () => {
   mockDestroy.mockReturnValueOnce(true);
   const view = startPlayer('none', true);
-  fireEvent.press(view.getByTestId('player-opening-back'));
+  await act(async () => {fireEvent.press(view.getByTestId('player-opening-back'));});
   expect(mockDestroy).toHaveBeenCalled();
   expect(view.goBack).toHaveBeenCalledTimes(1);
   expect(view.queryByTestId('player-opening-back')).toBeNull();
@@ -68,7 +68,7 @@ test('Back returns immediately after confirmed teardown and never returns twice'
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
 
-test('Back detaches the native surfaces and waits for successful teardown to return before navigation', () => {
+test('Back detaches the native surfaces and waits for successful teardown to return before navigation', async () => {
   const view = startPlayer('none', true);
   const clearVideo = jest.spyOn(mockMedia, 'clearSurfaceHandle');
   const clearCaptions = jest.spyOn(mockMedia, 'clearCaptionViewHandle');
@@ -78,7 +78,7 @@ test('Back detaches the native surfaces and waits for successful teardown to ret
     expect(view.goBack).not.toHaveBeenCalled();
     return true;
   });
-  fireEvent.press(view.getByTestId('player-opening-back'));
+  await act(async () => {fireEvent.press(view.getByTestId('player-opening-back'));});
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
 

@@ -58,9 +58,9 @@ test('the first picture, the cover and each wait are logged once each, with medi
   expect(playbackLines().filter((line) => line.includes('picture-shown'))).toHaveLength(1);
 });
 
-test('Back is logged with the teardown result, once', () => {
+test('Back is logged with the teardown result, once', async () => {
   const view = startPlayer('none', true);
-  fireEvent.press(view.getByTestId('player-opening-back'));
+  await act(async () => {fireEvent.press(view.getByTestId('player-opening-back'));});
   // The shell turns to "Going back..." and drops its Back; the exit delay passes.
   expect(view.queryByTestId('player-opening-back')).toBeNull();
   act(() => jest.advanceTimersByTime(1_000));
@@ -68,5 +68,5 @@ test('Back is logged with the teardown result, once', () => {
   const back = playbackLines().filter((line) => / (back|teardown )/.test(line));
   expect(back).toHaveLength(2);
   expect(back[0]).toBe(`${TRACE_PREFIX} playback back`);
-  expect(back[1]).toMatch(/^CALM_TRACE playback teardown (ok|fallback)$/);
+  expect(back[1]).toMatch(/^CALM_TRACE playback teardown (ok|unconfirmed)$/);
 });

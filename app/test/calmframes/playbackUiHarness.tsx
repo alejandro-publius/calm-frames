@@ -67,7 +67,7 @@ jest.mock('../../src/utils/VideoHandler', () => ({
     destroyVideoElements() { return mockDestroy(); }
     closing?: Promise<boolean>;
     destroyVideoElementsConfirmed() {
-      if (!this.closing) this.closing = (async () => {try {this.video.current?.pause(); return await mockDestroy();} catch {return false;}})();
+      if (!this.closing) this.closing = (async () => {try {this.video.current?.pause(); this.video.current?.clearSurfaceHandle(''); this.video.current?.clearCaptionViewHandle(''); return await mockDestroy();} catch {return false;}})();
       return this.closing;
     }
   },

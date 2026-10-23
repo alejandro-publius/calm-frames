@@ -104,10 +104,10 @@ test('seeking clears slow state and gives the new position a full observation wi
   expect(view.queryByText('Playback slow')).toBeNull();
 });
 
-test('ended video tears down and returns once without a presentation delay', () => {
+test('ended video tears down and returns once without a presentation delay', async () => {
   mockDestroy.mockReturnValue(true);
   const view = startPlayer('covering');
-  act(() => { mockMedia.ended = true; mockMedia.fire('ended'); mockEnded(true); });
+  await act(async () => { mockMedia.ended = true; mockMedia.fire('ended'); mockEnded(true); });
   expect(mockDestroy).toHaveBeenCalledTimes(1);
   expect(view.goBack).toHaveBeenCalledTimes(1);
   expect(view.queryByTestId('calm-card-skip')).toBeNull();
@@ -133,7 +133,7 @@ test('ended video retains the teardown fallback and cancels it if unmounted', ()
 });
 
 
-test('optional video preview ends on a stationary scene until explicit Back', () => {
+test('optional video preview ends on a stationary scene until explicit Back', async () => {
   mockDestroy.mockReturnValue(true);
   const view = startPlayer('none', true, false, undefined, true);
   act(() => { mockMedia.ended = true; mockMedia.fire('ended'); mockEnded(true); });
@@ -145,11 +145,11 @@ test('optional video preview ends on a stationary scene until explicit Back', ()
   advance(300000);
   expect(view.goBack).not.toHaveBeenCalled();
   expect(view.getByTestId('preview-ended-still')).toBeTruthy();
-  fireEvent.press(view.getByTestId('preview-ended-still-back'));
+  await act(async () => {fireEvent.press(view.getByTestId('preview-ended-still-back'));});
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
 
-test('continuous scene releases transport and retains its final frame until explicit Back', () => {
+test('continuous scene releases transport and retains its final frame until explicit Back', async () => {
   jest.spyOn(continuousScene, 'continuousEndingForRoute').mockReturnValue({ uri: 'measured-final-frame-fixture' });
   mockDestroy.mockReturnValue(true);
   const view = startPlayer();
@@ -163,6 +163,6 @@ test('continuous scene releases transport and retains its final frame until expl
   advance(3600000);
   expect(view.goBack).not.toHaveBeenCalled();
   expect(view.getByTestId('continuous-ended-still')).toBeTruthy();
-  fireEvent.press(view.getByTestId('continuous-ended-still-back'));
+  await act(async () => {fireEvent.press(view.getByTestId('continuous-ended-still-back'));});
   expect(view.goBack).toHaveBeenCalledTimes(1);
 });
