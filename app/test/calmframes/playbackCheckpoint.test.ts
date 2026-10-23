@@ -18,6 +18,20 @@ test('round trips exact edition, caption identity and paused intent without stor
   expect(storage.setItem.mock.calls[0][0]).toBe(CHECKPOINT_KEY);
   expect(JSON.parse(storage.setItem.mock.calls[0][1]).records[0].settings).toBeUndefined();
 });
+// The household and the verified route decide protection, never the history.
+// A record edited on the device to carry its own settings, or a looser cover
+// plan, loads as position and captions only. Seen to fail, Oct 23 2026, with
+// validateCheckpoint returning the stored object spread over its fields.
+test('a stored record carrying protection settings loads without them', async () => {
+  const {store, set} = memory();
+  const tampered = {...record(), settings: {preset: 'wcag', guardBandMs: 0, minCoverMs: 0},
+    intervals: [], identity: {...identity, preset: 'wcag'}};
+  set(JSON.stringify({version: 1, records: [tampered]}));
+  const loaded = await store.open(identity).load();
+  expect(loaded).toEqual(record());
+  expect(Object.keys(loaded!).sort()).toEqual(['captions', 'identity', 'paused', 'positionMs', 'savedAt', 'version']);
+  expect(Object.keys(loaded!.identity)).not.toContain('preset');
+});
 test.each(['sourceSha256', 'renditionSha256', 'uri', 'profileId', 'durationMs', 'startOffsetMs'])(
   'refuses a checkpoint for changed %s', async field => {
     const {store} = memory(); await store.open(identity).save(record());
