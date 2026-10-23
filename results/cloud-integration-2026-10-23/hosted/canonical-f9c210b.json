@@ -1,0 +1,1004 @@
+{
+  "observed_at_utc": "2026-10-23T18:52:18.856937+00:00",
+  "expected_head": "f9c210b7e00f050846a8f16a85fa715ecbb8d513",
+  "expected_branch": "codex/integration-owner-2026-10-23",
+  "scope": "Canonical isolated integration branch, not PR2 head. No dispatch, cancellation or rerun by this monitor.",
+  "runs": [
+    {
+      "id": 40006132436,
+      "name": "CI",
+      "event": "workflow_dispatch",
+      "head_sha": "f9c210b7e00f050846a8f16a85fa715ecbb8d513",
+      "head_branch": "codex/integration-owner-2026-10-23",
+      "status": "in_progress",
+      "conclusion": null,
+      "created_at": "2026-10-23T18:47:03Z",
+      "updated_at": "2026-10-23T18:47:14Z",
+      "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006132436",
+      "jobs": [
+        {
+          "id": 120594394875,
+          "name": "Secret scan",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-23T18:47:06Z",
+          "completed_at": "2026-10-23T18:47:32Z",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006132436/job/120594394875",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "gitleaks",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120594395134,
+          "name": "Published numbers match results",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-23T18:47:07Z",
+          "completed_at": "2026-10-23T18:47:30Z",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006132436/job/120594395134",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check every published number against results/",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "No dashes and none of the three words in what we wrote",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Every action is pinned to a commit, and every install to a version",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Rebuild the lead time summary from its own events",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Recount the integration diff the README quotes",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "One baseline directory, one tool version",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Re-score the pattern rule's text and UI report from its own rows",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120594395197,
+          "name": "Python packages",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-23T18:47:06Z",
+          "completed_at": null,
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006132436/job/120594395197",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install ffmpeg",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install packages that exist",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Test",
+              "number": 7,
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "name": "Python coverage on the run page",
+              "number": 8,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Lint Python",
+              "number": 9,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Typecheck flashmap",
+              "number": 10,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Typecheck the pipeline",
+              "number": 11,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Rebuild the complete conformance report from its own rows",
+              "number": 12,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 22,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 23,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 24,
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 120594395276,
+          "name": "Vega app",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-10-23T18:47:07Z",
+          "completed_at": "2026-10-23T18:50:56Z",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006132436/job/120594395276",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install dependencies",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Typecheck",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check prepared package assets and tamper controls",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Lint",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Test",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Coverage totals on the run page",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Hook package guard tests",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Check the installed offline hook consumer",
+              "number": 11,
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 22,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 23,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120594395363,
+          "name": "Mutation gate, property tests and the map fuzz corpus",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-23T18:47:07Z",
+          "completed_at": null,
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006132436/job/120594395363",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install ffmpeg",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the Python packages",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the app's dependencies",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Property tests and the map fuzz corpus",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "The mutation gate",
+              "number": 9,
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "name": "Retain the actual mutation measurement, including a failed drift check",
+              "number": 10,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 18,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 19,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 20,
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 120594395422,
+          "name": "The app's own UI passes flashmap",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-23T18:47:07Z",
+          "completed_at": null,
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006132436/job/120594395422",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install ffmpeg",
+              "number": 5,
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "name": "Install flashmap",
+              "number": 6,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Install app dependencies",
+              "number": 7,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Render every screen and check it for flashing",
+              "number": 8,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "The check is seen to refuse what it must refuse",
+              "number": 9,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Check every image the app and the listing ship",
+              "number": 10,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Check the report page as a reader sees it",
+              "number": 11,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 20,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 21,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 22,
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 40006136805,
+      "name": "Audit",
+      "event": "workflow_dispatch",
+      "head_sha": "f9c210b7e00f050846a8f16a85fa715ecbb8d513",
+      "head_branch": "codex/integration-owner-2026-10-23",
+      "status": "in_progress",
+      "conclusion": null,
+      "created_at": "2026-10-23T18:47:05Z",
+      "updated_at": "2026-10-23T18:47:18Z",
+      "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006136805",
+      "jobs": [
+        {
+          "id": 120594407917,
+          "name": "pip-audit and npm audit",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-10-23T18:47:08Z",
+          "completed_at": "2026-10-23T18:48:05Z",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006136805/job/120594407917",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the audit tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install app dependencies",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Audit, and fail on anything without a written exception",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 12,
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 13,
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 14,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 15,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120594408225,
+          "name": "The ingest image builds for ARM64",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-23T18:47:08Z",
+          "completed_at": null,
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006136805/job/120594408225",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "What the build context would send",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build",
+              "number": 6,
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "name": "It refuses to start with nothing configured",
+              "number": 7,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "It is an ARM64 image and it is not root",
+              "number": 8,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Build",
+              "number": 13,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f",
+              "number": 14,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130",
+              "number": 15,
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 16,
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 120594408418,
+          "name": "The stack and the container rules",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-23T18:47:08Z",
+          "completed_at": "2026-10-23T18:48:18Z",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006136805/job/120594408418",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the CDK and the test doubles",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Which CDK packages this fresh install took",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Synthesize the template, with no credentials and no account",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "There are no NAT gateways in it",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "The infra tests, which must run rather than skip",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 16,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 17,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120594408508,
+          "name": "The bills of materials are current",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-23T18:47:08Z",
+          "completed_at": "2026-10-23T18:47:53Z",
+          "html_url": "https://github.com/alejandro-publius/calm-frames/actions/runs/40006136805/job/120594408508",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the SBOM tool and the library it writes through",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Which generators are about to run",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Regenerate and compare",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Keep the fresh bills and the report when the compare fails",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "number": 14,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+              "number": 15,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "number": 16,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 17,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "audit_annotations": {
+    "observed_at_utc": "2026-10-23T18:49:58.631213+00:00",
+    "job_id": 120594407917,
+    "check_run_url": "https://api.github.com/repos/alejandro-publius/calm-frames/check-runs/120594407917",
+    "annotations": [
+      {
+        "path": ".github",
+        "start_line": 2,
+        "end_line": 2,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      },
+      {
+        "path": ".github",
+        "start_line": 22,
+        "end_line": 22,
+        "annotation_level": "failure",
+        "title": "",
+        "message": "Process completed with exit code 1."
+      }
+    ]
+  },
+  "ci_app_annotations": {
+    "observed_at_utc": "2026-10-23T18:51:08.328431+00:00",
+    "job_id": 120594395276,
+    "check_run_url": "https://api.github.com/repos/alejandro-publius/calm-frames/check-runs/120594395276",
+    "annotations": [
+      {
+        "path": ".github",
+        "start_line": 2,
+        "end_line": 2,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      },
+      {
+        "path": ".github",
+        "start_line": 4636,
+        "end_line": 4636,
+        "annotation_level": "failure",
+        "title": "",
+        "message": "Process completed with exit code 1."
+      },
+      {
+        "path": "app/src/calmframes/CoastalBoat.tsx",
+        "start_line": 40,
+        "end_line": 40,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Expected 'undefined' and instead saw 'void'            "
+      },
+      {
+        "path": "app/src/calmframes/CoastalBoat.tsx",
+        "start_line": 39,
+        "end_line": 39,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Expected 'undefined' and instead saw 'void'            "
+      },
+      {
+        "path": "app/src/calmframes/CoastalBoat.tsx",
+        "start_line": 38,
+        "end_line": 38,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Expected 'undefined' and instead saw 'void'            "
+      },
+      {
+        "path": "app/src/calmframes/CoastalBoat.tsx",
+        "start_line": 37,
+        "end_line": 37,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Expected 'undefined' and instead saw 'void'            "
+      },
+      {
+        "path": "app/src/blocks/components/VerticalNavigationBar/VerticalNavigationBar.tsx",
+        "start_line": 174,
+        "end_line": 174,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Inline style: { paddingTop: 80 }                  "
+      },
+      {
+        "path": "app/src/blocks/components/VerticalNavigationBar/VerticalNavigationBar.tsx",
+        "start_line": 128,
+        "end_line": 128,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Inline style: { position: 'absolute', opacity: 1 }"
+      },
+      {
+        "path": "app/src/blocks/components/MediaItemTile/MediaItemTile.tsx",
+        "start_line": 104,
+        "end_line": 104,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Inline style: { justifyContent: 'center', overflow: 'hidden' }"
+      },
+      {
+        "path": "app/src/blocks/components/MediaItemShovelerList/MediaItemShovelerList.tsx",
+        "start_line": 186,
+        "end_line": 186,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Inline style: { itemPadding: 0 }              "
+      },
+      {
+        "path": "app/src/blocks/components/MediaItemShovelerList/MediaItemShovelerList.tsx",
+        "start_line": 85,
+        "end_line": 85,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Inline style: { color: 'white', fontSize: 50 }"
+      },
+      {
+        "path": "app/src/blocks/components/MediaItemShoveler/MediaItemShoveler.tsx",
+        "start_line": 89,
+        "end_line": 89,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Inline style: { itemPadding: 0, selectedItemScaleFactor: 1.1 }"
+      }
+    ]
+  }
+}

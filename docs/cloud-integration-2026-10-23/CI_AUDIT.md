@@ -89,3 +89,9 @@ remaining dependency decision, native build/bundle inventory and applicable
 [Mac and human checks](MAC_ACCEPTANCE.md) must be resolved. Preserve the submitted
 fallback and frozen materials. No merge, public upload, media preparation,
 unapproved exception-date change or native action occurred in this continuation.
+
+## First canonical run and bounded correction
+
+Exact `f9c210b` CI run 40006132436 failed Vega Test. [Its observed job metadata](../../results/cloud-integration-2026-10-23/hosted/canonical-f9c210b.json) contains no test-specific hosted diagnostic. Local normal Jest reproduced seven stale palette expectations. The subsequent correction and passing full local checks are in [ui-correction.json](../../results/cloud-integration-2026-10-23/product-validation/ui-correction.json). No assertion, coverage floor or safety threshold was removed.
+
+Exact f9c210b Audit run 40006136805 failed the dependency step; SBOM and infrastructure passed at observation time. The annotation says only exit 1. Local policy evidence separately establishes the two expired groups; do not present that inference as a detailed hosted log. New exact-source runs belong to the corrected commit, and may supersede unfinished same-branch runs under the existing workflow concurrency policy. No status-only push is used.

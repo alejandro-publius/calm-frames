@@ -37,6 +37,19 @@ Audit still has expired review groups and unresolved residual findings. The comp
 
 The current isolated UI proposal has no hosted or native acceptance. The latest supplied installed-production receipt names `bd55e47`; profile isolation, sustained playback, Skip and Retry receipts have their own earlier sources. A source tree or passing test does not update those observations. Human listening, comfort/pacing, palette and full-video approval remain missing.
 
+## Exact-source CI correction
+
+The first canonical push, `f9c210b`, failed the hosted Vega Test step. The full
+local suite reproduced seven stale palette expectations: six UI declarations
+and the primary-action assertion. The correction updates only those declared
+surfaces and the assertion, retaining focused Watch's warm fill and every
+threshold. Full normal app checks now pass; [the correction receipt](../../results/cloud-integration-2026-10-23/product-validation/ui-correction.json)
+records tests, modeled UI transition checks and negative controls. This does
+not certify native pixels or every possible focus state. Generic/profile Home
+and Details Watch-focused recording coverage remains incomplete; retain that
+limitation in item 6. The earlier f9c210b exports are superseded for Mac builds.
+The current handoff identifies the corrected full SHA and new hosted runs.
+
 ## One 20-item product checklist
 
 Completed means the stated scope is complete, not that the entire release is accepted. The checklist is not a test-count score. All remaining work stays under this thread.

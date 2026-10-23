@@ -19,11 +19,12 @@ import { WORLD } from './CoastalWorld';
 const MENU = COASTAL_COLORS;
 /**
  * Home and Details are drawn on the coastal map, so they paint its colours:
- * the cream sky and sand behind everything, cream cards and the warm Watch.
+ * the cream sky and sand behind everything, cream cards, and Watch's deep teal
+ * resting fill. Focused Watch keeps its warm fill, so it is a distinct frame.
  * The map's sea is artwork, not a declared surface; cream behind everything
  * is the lighter of the two, so the check measures the larger change.
  */
-const MAP = { ...COASTAL_COLORS, BACKGROUND: WORLD.BACKGROUND, SURFACE: WORLD.SURFACE, SURFACE_FOCUSED: WORLD.SURFACE_FOCUSED, PRIMARY: WORLD.PRIMARY, INK: WORLD.INK };
+const MAP = { ...COASTAL_COLORS, BACKGROUND: WORLD.BACKGROUND, SURFACE: WORLD.SURFACE, SURFACE_FOCUSED: WORLD.SURFACE_FOCUSED, PRIMARY: WORLD.PRIMARY, PRIMARY_REST: WORLD.BORDER, INK: WORLD.INK };
 import { CardKind } from './cards';
 import { UiFrame } from './uiCapture';
 
@@ -45,34 +46,34 @@ export const HOUSEHOLD_ERROR_FRAME: UiFrame = {
   surfaces: [MENU.SURFACE, MENU.PRIMARY],
 };
 
-export const KID_HOME_STORY_FRAME: UiFrame = { screen: 'kid-home-story', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE] };
-export const KID_HOME_STORY_FOCUSED_FRAME: UiFrame = { screen: 'kid-home-story-focused', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE_FOCUSED, MAP.SURFACE] };
-/** Watch focused: on the map it keeps its warm fill and takes the ring, so the colours are the resting ones. */
+export const KID_HOME_STORY_FRAME: UiFrame = { screen: 'kid-home-story', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY_REST, MAP.SURFACE] };
+export const KID_HOME_STORY_FOCUSED_FRAME: UiFrame = { screen: 'kid-home-story-focused', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY_REST, MAP.SURFACE_FOCUSED, MAP.SURFACE] };
+/** Watch focused: the warm fill differs from its deep teal resting fill. */
 export const KID_HOME_STORY_WATCH_FRAME: UiFrame = { screen: 'kid-home-story-watch', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE] };
 
 export const KID_HOME_FRAME: UiFrame = {
   screen: 'kid-home', background: MAP.BACKGROUND,
-  surfaces: [MAP.PRIMARY, MAP.SURFACE],
+  surfaces: [MAP.PRIMARY_REST, MAP.SURFACE],
 };
 export const KID_HOME_FOCUSED_FRAME: UiFrame = {
   screen: 'kid-home-focused', background: MAP.BACKGROUND,
-  surfaces: [MAP.PRIMARY, MAP.SURFACE_FOCUSED, MAP.SURFACE],
+  surfaces: [MAP.PRIMARY_REST, MAP.SURFACE_FOCUSED, MAP.SURFACE],
 };
 export const KID_HOME_PROFILES_FRAME: UiFrame = {
   screen: 'kid-home-profiles', background: MAP.BACKGROUND,
-  surfaces: [MAP.PRIMARY, MAP.SURFACE],
+  surfaces: [MAP.PRIMARY_REST, MAP.SURFACE],
 };
 export const KID_HOME_PROFILES_OFFLINE_FRAME: UiFrame = {
   screen: 'kid-home-profiles-offline', background: MAP.BACKGROUND,
-  surfaces: [MENU.SURFACE, MAP.PRIMARY],
+  surfaces: [MENU.SURFACE, MAP.PRIMARY_REST],
 };
 export const KID_HOME_PROFILES_FOCUSED_FRAME: UiFrame = {
   screen: 'kid-home-profiles-focused', background: MAP.BACKGROUND,
-  surfaces: [MAP.PRIMARY, MAP.SURFACE_FOCUSED, MAP.SURFACE],
+  surfaces: [MAP.PRIMARY_REST, MAP.SURFACE_FOCUSED, MAP.SURFACE],
 };
 export const KID_HOME_PICKER_FRAME: UiFrame = {
   screen: 'kid-home-picker', background: MAP.BACKGROUND,
-  surfaces: [MAP.SURFACE_FOCUSED, MAP.SURFACE, MAP.PRIMARY],
+  surfaces: [MAP.SURFACE_FOCUSED, MAP.SURFACE, MAP.PRIMARY_REST],
 };
 
 /** Nothing has been checked yet, so the shelf is one notice. */
@@ -86,16 +87,16 @@ export const KID_HOME_EMPTY_FRAME: UiFrame = {
 export const KID_HOME_OFFLINE_FRAME: UiFrame = {
   screen: 'kid-home-offline',
   background: MAP.BACKGROUND,
-  surfaces: [MENU.SURFACE, MAP.PRIMARY],
+  surfaces: [MENU.SURFACE, MAP.PRIMARY_REST],
 };
 
-export const TITLE_DETAILS_HARBOR_FRAME: UiFrame = { screen: 'title-details-harbor', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE] };
-export const TITLE_DETAILS_DEMO_FRAME: UiFrame = { screen: 'title-details-demo', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY, MAP.SURFACE, MAP.PENDING] };
+export const TITLE_DETAILS_HARBOR_FRAME: UiFrame = { screen: 'title-details-harbor', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY_REST, MAP.SURFACE] };
+export const TITLE_DETAILS_DEMO_FRAME: UiFrame = { screen: 'title-details-demo', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY_REST, MAP.SURFACE, MAP.PENDING] };
 
 export const TITLE_DETAILS_FRAME: UiFrame = {
   screen: 'title-details',
   background: MAP.BACKGROUND,
-  surfaces: [MAP.PRIMARY, MENU.SURFACE, MENU.PENDING, MENU.FAILED],
+  surfaces: [MAP.PRIMARY_REST, MENU.SURFACE, MENU.PENDING, MENU.FAILED],
 };
 
 /**

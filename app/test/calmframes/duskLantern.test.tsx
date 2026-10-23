@@ -51,9 +51,9 @@ test('Home names the selected video and leads with Watch without adding a demo c
 test('one primary action on Home: Watch is primary, Details and Help are quiet', () => {
   render(<KidHomeScreen titles={titles} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={jest.fn()} />);
   const watch = StyleSheet.flatten(screen.getByTestId('kid-home-watch').props.style);
-  expect(watch.backgroundColor).toBe(WORLD.PRIMARY);
+  expect(watch.backgroundColor).toBe(WORLD.BORDER);
   for (const id of ['kid-home-more-info', 'kid-home-learn', 'kid-home-parent-area']) {
-    expect(StyleSheet.flatten(screen.getByTestId(id).props.style).backgroundColor).not.toBe(WORLD.PRIMARY);
+    expect(StyleSheet.flatten(screen.getByTestId(id).props.style).backgroundColor).not.toBe(WORLD.BORDER);
   }
 });
 
