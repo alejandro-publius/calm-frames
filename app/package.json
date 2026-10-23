@@ -132,7 +132,9 @@
     "metro@0.54.1": {
       "image-size": "$image-size"
     },
-    "shell-quote": "1.11.0"
+    "shell-quote": "1.11.0",
+    "lodash": "$lodash",
+    "minimatch@^3.0.0": "3.1.5"
   },
   "engines": {
     "node": ">=22"

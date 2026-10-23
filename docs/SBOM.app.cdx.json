@@ -163,46 +163,6 @@
           "name": "cdx:npm:package:path",
           "value": "node_modules/@amazon-devices/kepler-cli-platform"
         }
-      ],
-      "components": [
-        {
-          "type": "library",
-          "name": "lodash",
-          "version": "4.17.21",
-          "bom-ref": "calm-frames-app@0.1.0|@amazon-devices/kepler-cli-platform@0.22.14|lodash@4.17.21",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/lodash@4.17.21",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "bf690311ee7b95e713ba568322e3533f2dd1cb880b189e99d4edef13592b81764daec43e2c54c61d5c558dc5cfb35ecb85b65519e74026ff17675b6f8f916f4a"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/@amazon-devices/kepler-cli-platform/node_modules/lodash"
-            }
-          ]
-        }
       ]
     },
     {
@@ -6371,44 +6331,6 @@
               "value": "node_modules/@eslint/eslintrc/node_modules/json-schema-traverse"
             }
           ]
-        },
-        {
-          "type": "library",
-          "name": "minimatch",
-          "version": "3.1.5",
-          "bom-ref": "calm-frames-app@0.1.0|@eslint/eslintrc@2.1.4|minimatch@3.1.5",
-          "licenses": [
-            {
-              "license": {
-                "id": "ISC",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/minimatch@3.1.5",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/minimatch/-/minimatch-3.1.5.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "5608d652c9e74fa9fe35493a799abbef37857695b62d60f33facc51ab09b1d789836e9790f3aa4d871d0e6e147d83356e576e9f3e8d5cda78db7de2cb04125e3"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/@eslint/eslintrc/node_modules/minimatch"
-            }
-          ]
         }
       ]
     },
@@ -7935,40 +7857,6 @@
         }
       ],
       "components": [
-        {
-          "type": "library",
-          "name": "lodash",
-          "version": "4.17.23",
-          "bom-ref": "calm-frames-app@0.1.0|@microsoft/api-extractor@7.47.0|lodash@4.17.23",
-          "licenses": [
-            {
-              "license": {
-                "id": "MIT",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/lodash@4.17.23",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/lodash/-/lodash-4.17.23.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "2e055332942d228a428bbf5225e0e23f44df5a2e4234473f2ff691753877c88be66574e785e5a92a3499867bcc97c8976c2d6d160f607471c330ba15ec29c6fb"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/@microsoft/api-extractor/node_modules/lodash"
-            }
-          ]
-        },
         {
           "type": "library",
           "name": "lru-cache",
@@ -21871,44 +21759,6 @@
         },
         {
           "type": "library",
-          "name": "minimatch",
-          "version": "3.1.5",
-          "bom-ref": "calm-frames-app@0.1.0|eslint-plugin-react@7.37.5|minimatch@3.1.5",
-          "licenses": [
-            {
-              "license": {
-                "id": "ISC",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/minimatch@3.1.5",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/minimatch/-/minimatch-3.1.5.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "5608d652c9e74fa9fe35493a799abbef37857695b62d60f33facc51ab09b1d789836e9790f3aa4d871d0e6e147d83356e576e9f3e8d5cda78db7de2cb04125e3"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/eslint-plugin-react/node_modules/minimatch"
-            }
-          ]
-        },
-        {
-          "type": "library",
           "name": "resolve",
           "version": "2.0.0-next.7",
           "bom-ref": "calm-frames-app@0.1.0|eslint-plugin-react@7.37.5|resolve@2.0.0-next.7",
@@ -22402,44 +22252,6 @@
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/eslint/node_modules/json-schema-traverse"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "minimatch",
-          "version": "3.1.5",
-          "bom-ref": "calm-frames-app@0.1.0|eslint@8.57.1|minimatch@3.1.5",
-          "licenses": [
-            {
-              "license": {
-                "id": "ISC",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/minimatch@3.1.5",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/minimatch/-/minimatch-3.1.5.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "5608d652c9e74fa9fe35493a799abbef37857695b62d60f33facc51ab09b1d789836e9790f3aa4d871d0e6e147d83356e576e9f3e8d5cda78db7de2cb04125e3"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/eslint/node_modules/minimatch"
             }
           ]
         }
@@ -26144,42 +25956,6 @@
         {
           "name": "cdx:npm:package:path",
           "value": "node_modules/glob"
-        }
-      ],
-      "components": [
-        {
-          "type": "library",
-          "name": "minimatch",
-          "version": "3.1.5",
-          "bom-ref": "calm-frames-app@0.1.0|glob@7.2.3|minimatch@3.1.5",
-          "licenses": [
-            {
-              "license": {
-                "id": "ISC",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/minimatch@3.1.5",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/minimatch/-/minimatch-3.1.5.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "5608d652c9e74fa9fe35493a799abbef37857695b62d60f33facc51ab09b1d789836e9790f3aa4d871d0e6e147d83356e576e9f3e8d5cda78db7de2cb04125e3"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/glob/node_modules/minimatch"
-            }
-          ]
         }
       ]
     },
@@ -36756,8 +36532,8 @@
     {
       "type": "library",
       "name": "minimatch",
-      "version": "3.0.8",
-      "bom-ref": "calm-frames-app@0.1.0|minimatch@3.0.8",
+      "version": "3.1.5",
+      "bom-ref": "calm-frames-app@0.1.0|minimatch@3.1.5",
       "licenses": [
         {
           "license": {
@@ -36766,15 +36542,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/minimatch@3.0.8",
+      "purl": "pkg:npm/minimatch@3.1.5",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/minimatch/-/minimatch-3.0.8.tgz",
+          "url": "https://registry.npmjs.org/minimatch/-/minimatch-3.1.5.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "e85b11010b3143ad66c3ea8fd59cdb2fd05cefcc76a793aa3603699e80052d3ad7f27e4ac698740ac9e198a28d5d35a35ea5392f4a463d1ee1624f97599afad1"
+              "content": "5608d652c9e74fa9fe35493a799abbef37857695b62d60f33facc51ab09b1d789836e9790f3aa4d871d0e6e147d83356e576e9f3e8d5cda78db7de2cb04125e3"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -58574,7 +58350,6 @@
     {
       "ref": "calm-frames-app@0.1.0|@amazon-devices/kepler-cli-platform@0.22.14",
       "dependsOn": [
-        "calm-frames-app@0.1.0|@amazon-devices/kepler-cli-platform@0.22.14|lodash@4.17.21",
         "calm-frames-app@0.1.0|@amazon-devices/kepler-compatibility-metro-config@0.0.7",
         "calm-frames-app@0.1.0|@amazon-devices/kepler-module-manifest-builder@0.1.16",
         "calm-frames-app@0.1.0|@amazon-devices/keplerscript-commonmodules@1.1.0",
@@ -58585,14 +58360,12 @@
         "calm-frames-app@0.1.0|@react-native/metro-config@0.83.0",
         "calm-frames-app@0.1.0|@rnx-kit/tools-node@2.1.2",
         "calm-frames-app@0.1.0|find-workspaces@0.3.1",
+        "calm-frames-app@0.1.0|lodash@4.18.1",
         "calm-frames-app@0.1.0|ora@3.4.0",
         "calm-frames-app@0.1.0|react-native@0.83.0",
         "calm-frames-app@0.1.0|semver@7.7.1",
         "calm-frames-app@0.1.0|shelljs@0.8.5"
       ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|@amazon-devices/kepler-cli-platform@0.22.14|lodash@4.17.21"
     },
     {
       "ref": "calm-frames-app@0.1.0|@amazon-devices/kepler-compatibility-metro-config@0.0.7"
@@ -59939,12 +59712,12 @@
       "dependsOn": [
         "calm-frames-app@0.1.0|@eslint/eslintrc@2.1.4|ajv@6.15.0",
         "calm-frames-app@0.1.0|@eslint/eslintrc@2.1.4|js-yaml@4.3.2",
-        "calm-frames-app@0.1.0|@eslint/eslintrc@2.1.4|minimatch@3.1.5",
         "calm-frames-app@0.1.0|debug@4.4.3",
         "calm-frames-app@0.1.0|espree@9.6.1",
         "calm-frames-app@0.1.0|globals@13.24.0",
         "calm-frames-app@0.1.0|ignore@5.3.2",
         "calm-frames-app@0.1.0|import-fresh@3.3.1",
+        "calm-frames-app@0.1.0|minimatch@3.1.5",
         "calm-frames-app@0.1.0|strip-json-comments@3.1.1"
       ]
     },
@@ -59968,12 +59741,6 @@
     },
     {
       "ref": "calm-frames-app@0.1.0|@eslint/eslintrc@2.1.4|json-schema-traverse@0.4.1"
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|@eslint/eslintrc@2.1.4|minimatch@3.1.5",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|brace-expansion@1.1.21"
-      ]
     },
     {
       "ref": "calm-frames-app@0.1.0|@eslint/js@8.57.1"
@@ -60016,7 +59783,7 @@
       "dependsOn": [
         "calm-frames-app@0.1.0|@humanwhocodes/object-schema@2.0.3",
         "calm-frames-app@0.1.0|debug@4.4.3",
-        "calm-frames-app@0.1.0|minimatch@3.0.8"
+        "calm-frames-app@0.1.0|minimatch@3.1.5"
       ]
     },
     {
@@ -60308,7 +60075,6 @@
       "ref": "calm-frames-app@0.1.0|@microsoft/api-extractor@7.47.0",
       "dependsOn": [
         "calm-frames-app@0.1.0|@microsoft/api-extractor-model@7.29.2",
-        "calm-frames-app@0.1.0|@microsoft/api-extractor@7.47.0|lodash@4.17.23",
         "calm-frames-app@0.1.0|@microsoft/api-extractor@7.47.0|semver@7.5.4",
         "calm-frames-app@0.1.0|@microsoft/api-extractor@7.47.0|typescript@5.4.2",
         "calm-frames-app@0.1.0|@microsoft/tsdoc-config@0.17.1",
@@ -60317,13 +60083,11 @@
         "calm-frames-app@0.1.0|@rushstack/rig-package@0.5.2",
         "calm-frames-app@0.1.0|@rushstack/terminal@0.13.0",
         "calm-frames-app@0.1.0|@rushstack/ts-command-line@4.22.0",
-        "calm-frames-app@0.1.0|minimatch@3.0.8",
+        "calm-frames-app@0.1.0|lodash@4.18.1",
+        "calm-frames-app@0.1.0|minimatch@3.1.5",
         "calm-frames-app@0.1.0|resolve@1.22.12",
         "calm-frames-app@0.1.0|source-map@0.6.1"
       ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|@microsoft/api-extractor@7.47.0|lodash@4.17.23"
     },
     {
       "ref": "calm-frames-app@0.1.0|@microsoft/api-extractor@7.47.0|lru-cache@6.0.0",
@@ -62810,13 +62574,13 @@
         "calm-frames-app@0.1.0|array.prototype.tosorted@1.1.4",
         "calm-frames-app@0.1.0|es-iterator-helpers@1.4.0",
         "calm-frames-app@0.1.0|eslint-plugin-react@7.37.5|doctrine@2.1.0",
-        "calm-frames-app@0.1.0|eslint-plugin-react@7.37.5|minimatch@3.1.5",
         "calm-frames-app@0.1.0|eslint-plugin-react@7.37.5|resolve@2.0.0-next.7",
         "calm-frames-app@0.1.0|eslint-plugin-react@7.37.5|semver@6.3.1",
         "calm-frames-app@0.1.0|eslint@8.57.1",
         "calm-frames-app@0.1.0|estraverse@5.3.0",
         "calm-frames-app@0.1.0|hasown@2.0.4",
         "calm-frames-app@0.1.0|jsx-ast-utils@3.3.5",
+        "calm-frames-app@0.1.0|minimatch@3.1.5",
         "calm-frames-app@0.1.0|object.entries@1.1.9",
         "calm-frames-app@0.1.0|object.fromentries@2.0.8",
         "calm-frames-app@0.1.0|object.values@1.2.1",
@@ -62829,12 +62593,6 @@
       "ref": "calm-frames-app@0.1.0|eslint-plugin-react@7.37.5|doctrine@2.1.0",
       "dependsOn": [
         "calm-frames-app@0.1.0|esutils@2.0.3"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|eslint-plugin-react@7.37.5|minimatch@3.1.5",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|brace-expansion@1.1.21"
       ]
     },
     {
@@ -62890,7 +62648,6 @@
         "calm-frames-app@0.1.0|eslint@8.57.1|eslint-scope@7.2.2",
         "calm-frames-app@0.1.0|eslint@8.57.1|eslint-visitor-keys@3.4.3",
         "calm-frames-app@0.1.0|eslint@8.57.1|js-yaml@4.3.2",
-        "calm-frames-app@0.1.0|eslint@8.57.1|minimatch@3.1.5",
         "calm-frames-app@0.1.0|espree@9.6.1",
         "calm-frames-app@0.1.0|esquery@1.7.0",
         "calm-frames-app@0.1.0|esutils@2.0.3",
@@ -62907,6 +62664,7 @@
         "calm-frames-app@0.1.0|json-stable-stringify-without-jsonify@1.0.1",
         "calm-frames-app@0.1.0|levn@0.4.1",
         "calm-frames-app@0.1.0|lodash.merge@4.6.2",
+        "calm-frames-app@0.1.0|minimatch@3.1.5",
         "calm-frames-app@0.1.0|natural-compare@1.4.0",
         "calm-frames-app@0.1.0|optionator@0.9.4",
         "calm-frames-app@0.1.0|strip-ansi@6.0.1",
@@ -62943,12 +62701,6 @@
     },
     {
       "ref": "calm-frames-app@0.1.0|eslint@8.57.1|json-schema-traverse@0.4.1"
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|eslint@8.57.1|minimatch@3.1.5",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|brace-expansion@1.1.21"
-      ]
     },
     {
       "ref": "calm-frames-app@0.1.0|espree@9.6.1",
@@ -63544,17 +63296,11 @@
       "ref": "calm-frames-app@0.1.0|glob@7.2.3",
       "dependsOn": [
         "calm-frames-app@0.1.0|fs.realpath@1.0.0",
-        "calm-frames-app@0.1.0|glob@7.2.3|minimatch@3.1.5",
         "calm-frames-app@0.1.0|inflight@1.0.6",
         "calm-frames-app@0.1.0|inherits@2.0.4",
+        "calm-frames-app@0.1.0|minimatch@3.1.5",
         "calm-frames-app@0.1.0|once@1.4.0",
         "calm-frames-app@0.1.0|path-is-absolute@1.0.1"
-      ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|glob@7.2.3|minimatch@3.1.5",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|brace-expansion@1.1.21"
       ]
     },
     {
@@ -65496,7 +65242,7 @@
       "ref": "calm-frames-app@0.1.0|min-indent@1.0.1"
     },
     {
-      "ref": "calm-frames-app@0.1.0|minimatch@3.0.8",
+      "ref": "calm-frames-app@0.1.0|minimatch@3.1.5",
       "dependsOn": [
         "calm-frames-app@0.1.0|brace-expansion@1.1.21"
       ]
@@ -65601,7 +65347,7 @@
     {
       "ref": "calm-frames-app@0.1.0|node-dir@0.1.17",
       "dependsOn": [
-        "calm-frames-app@0.1.0|minimatch@3.0.8"
+        "calm-frames-app@0.1.0|minimatch@3.1.5"
       ]
     },
     {
@@ -65673,7 +65419,7 @@
       "ref": "calm-frames-app@0.1.0|npm-run-all@4.1.5",
       "dependsOn": [
         "calm-frames-app@0.1.0|memorystream@0.3.1",
-        "calm-frames-app@0.1.0|minimatch@3.0.8",
+        "calm-frames-app@0.1.0|minimatch@3.1.5",
         "calm-frames-app@0.1.0|npm-run-all@4.1.5|ansi-styles@3.2.1",
         "calm-frames-app@0.1.0|npm-run-all@4.1.5|chalk@2.4.2",
         "calm-frames-app@0.1.0|npm-run-all@4.1.5|cross-spawn@6.0.6",
@@ -68604,7 +68350,7 @@
       "dependsOn": [
         "calm-frames-app@0.1.0|@istanbuljs/schema@0.1.6",
         "calm-frames-app@0.1.0|glob@7.2.3",
-        "calm-frames-app@0.1.0|minimatch@3.0.8"
+        "calm-frames-app@0.1.0|minimatch@3.1.5"
       ]
     },
     {
