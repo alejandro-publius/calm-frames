@@ -444,6 +444,7 @@ const PlayerScreen = ({
         ? new SafeMediaControlHandler({
             engine: guard.seekEngine,
             getCurrentMs: () => (videoRef.current?.currentTime ?? 0) * 1000,
+            getPaused: () => videoRef.current?.paused,
             canControl: () => !leaving.current && transportReady.current,
             onBlockedPause: () => { recoveryAttempt.current?.cancel(); if (!leaving.current) setVideoError(true); },
           })

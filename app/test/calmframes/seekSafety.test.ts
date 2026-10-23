@@ -48,6 +48,30 @@ import {
   SafeMediaControlHandler,
   timeValueToMs,
 } from '../../src/calmframes/SafeMediaControlHandler';
+
+test('remote toggle follows the current media paused flag after a recovered seek', async () => {
+  const calls = (KeplerMediaControlHandler as unknown as {baseCalls: string[]}).baseCalls;
+  calls.length = 0;
+  let paused = true;
+  const handler = new SafeMediaControlHandler({engine: {requestSeek: jest.fn()} as any,
+    getCurrentMs: () => 26811, getPaused: () => paused, canControl: () => true});
+  await handler.handleTogglePlayPause();
+  expect(calls).toEqual(['handlePlay']);
+  paused = false;
+  await handler.handleTogglePlayPause();
+  expect(calls).toEqual(['handlePlay', 'handlePause']);
+});
+
+test('blocked recovery cannot use the paused-state toggle override', async () => {
+  const calls = (KeplerMediaControlHandler as unknown as {baseCalls: string[]}).baseCalls;
+  calls.length = 0;
+  const getPaused = jest.fn(() => true);
+  const handler = new SafeMediaControlHandler({engine: {requestSeek: jest.fn()} as any,
+    getCurrentMs: () => 0, getPaused, canControl: () => false});
+  await handler.handleTogglePlayPause();
+  expect(getPaused).not.toHaveBeenCalled();
+  expect(calls).toEqual([]);
+});
 import {
   createSeekEngine,
   isPreviewAllowed,

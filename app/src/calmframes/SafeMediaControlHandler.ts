@@ -47,6 +47,8 @@ export interface SafeMediaControlDeps {
   engine: SeekEngine;
   /** Where the playhead is now, in milliseconds. */
   getCurrentMs: () => number;
+  /** Native paused state; cached media-control status can lag a recovered seek. */
+  getPaused?: () => boolean | undefined;
   /** How far a fast forward or rewind press moves. */
   stepMs?: number;
   /** While a recovered player is being reconstructed, transport must not race its seek. */
@@ -142,6 +144,9 @@ export class SafeMediaControlHandler extends KeplerMediaControlHandler {
     console.log(
       '[SafeMediaControlHandler.ts] - handleTogglePlayPause - passed to the player',
     );
+    const paused = this.deps.getPaused?.();
+    if (paused === true) return this.handlePlay(...args);
+    if (paused === false) return this.handlePause(...args);
     return super.handleTogglePlayPause(...args);
   }
 
