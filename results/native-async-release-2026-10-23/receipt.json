@@ -1,0 +1,92 @@
+{
+  "status": "source_checks_pass_native_acceptance_pending",
+  "source_commit": "e0f2ee747851f5a47fba8d0605c186e55873e414",
+  "tested_head": "e744d49f64768f5d9cb439603a3bbd64e981ddee",
+  "production_diff_from_installed": "",
+  "package": {
+    "source_commit": "e0f2ee747851f5a47fba8d0605c186e55873e414",
+    "sha256": "d18950793bf8fac00d1d5842e6b08964d56f557d2b04e96cccbfef5f12f66f7a",
+    "sha384": "2e628e26854e5a31caff920eb711a99344848f8bf93e6c568ebc16827cd9e7d41362e030d76763e3d4e009cc77eae6d1",
+    "bytes": 132599699,
+    "installed_sha384_match": true
+  },
+  "tests": {
+    "suites_passed": 171,
+    "suites_skipped": 1,
+    "passed": 1795,
+    "skipped": 4,
+    "snapshots_passed": 57,
+    "typescript": "passed",
+    "scoped_eslint": "passed",
+    "focused_exit_tests_passed": 68
+  },
+  "native": {
+    "build": "passed",
+    "install": "passed",
+    "fresh_capture": "failed_timeout_no_frame",
+    "screen_locked": true,
+    "native_validation_performed": false,
+    "slowness_resolved": null,
+    "retained_owner_session": 79214,
+    "recording_active": false,
+    "app_log_collector": "stopped"
+  },
+  "root_cause_evidence": {
+    "teardown": "Prior package-scoped logs showed deinitializeSync timedout after 1.5 seconds and asynchronous completion later. New code awaits actual SDK deinitialize completion. This has not been retested natively because the Mac locked.",
+    "ownership": "Previous VideoHandler construction occurred on every render while useCallback class fields retained the first instance. New owner is stable and its ordinary class methods share one cancellation generation. Regression asserts one owner across renders.",
+    "slow_playback": "Unresolved. Aggregate host snapshots show compressed memory and load; neither proves cause. No playback resource comparison was performed while locked."
+  },
+  "invariants": [
+    "No replacement before confirmed release across Retry, Back, ending and unmount.",
+    "Timeout, rejection or cleanup failure does not count as successful teardown.",
+    "Late completion after Back/background/unmount cannot restart playback.",
+    "After Retry closing completes, another explicit Retry activation is required.",
+    "Approved media, signers, trust and coastal design unchanged."
+  ],
+  "remaining": [
+    "Unlock Mac, verify actual app foreground and repeat slow-progress comparison with capture off/on and scoped resource deltas.",
+    "Observe asynchronous Retry completion and explicit restart, plus Back/background cancellation.",
+    "Other profile/caption restoration and human audiovisual acceptance remain pending.",
+    "Hosted CI environment allowlist remains a separate pending approval."
+  ],
+  "published": false,
+  "merged": false,
+  "evidence": [
+    {
+      "path": ".logs/async-final-app-tests.log",
+      "sha256": "a4cb162717a3945172f296b097587b42d8871f877252f227fae2f002397e0511",
+      "bytes": 160361,
+      "local_only": true
+    },
+    {
+      "path": ".logs/async-final-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "local_only": true
+    },
+    {
+      "path": ".logs/async-all-exits-tests.log",
+      "sha256": "003e06a3136a4f0f506b8897d061df450b6f66e7d38b0899173b7fe7b970d7b8",
+      "bytes": 47217,
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/host-before.json",
+      "sha256": "63b4287c35c7fd77ccfaf0cad9d268aa7864ac11c6b53bc949ee16fb67f55546",
+      "bytes": 1292,
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/simulator-resources.txt",
+      "sha256": "9c0768d9b5cbe20ae567d553bedc8c3b14770c13e9731669b2b16db5e126ec05",
+      "bytes": 546,
+      "local_only": true
+    },
+    {
+      "path": ".logs/native-async-2026-10-23/final-build.log",
+      "sha256": "3fcdf1e0288d18b952ff64a7359f23189fd294fda7e64b863654491642f53943",
+      "bytes": 19846,
+      "local_only": true
+    }
+  ]
+}
