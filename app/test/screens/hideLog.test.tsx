@@ -152,6 +152,7 @@ jest.mock('../../src/utils/VideoHandler', () => ({
     }
 
     destroyVideoElements() {}
+    async destroyVideoElementsConfirmed() { return true; }
   },
 }));
 

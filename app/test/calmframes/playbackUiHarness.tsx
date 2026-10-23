@@ -65,7 +65,11 @@ jest.mock('../../src/utils/VideoHandler', () => ({
     }
     preBufferVideo() { if (mockDeferInitialization) return; this.video.current = mockMedia; this.initialized(true); this.buffering(false); }
     destroyVideoElements() { return mockDestroy(); }
-    async destroyVideoElementsConfirmed() { try {return await mockDestroy();} catch {return false;} }
+    closing?: Promise<boolean>;
+    destroyVideoElementsConfirmed() {
+      if (!this.closing) this.closing = (async () => {try {this.video.current?.pause(); return await mockDestroy();} catch {return false;}})();
+      return this.closing;
+    }
   },
 }));
 

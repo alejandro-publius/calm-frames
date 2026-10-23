@@ -250,6 +250,24 @@ describe('VideoHandler', () => {
     expect(mockVideoRef.current).toBeNull();
   });
 
+  it('a different owner cannot initialize while asynchronous native release is pending', async () => {
+    const first = createVideoHandler(), second = createVideoHandler();
+    let complete!: () => void;
+    const done = new Promise<void>(resolve => {complete = resolve;});
+    first.mockVideoRef.current = {pause: jest.fn(), clearSurfaceHandle: jest.fn(), clearCaptionViewHandle: jest.fn(),
+      deinitialize: jest.fn(() => done)} as unknown as VideoPlayer;
+    first.videoHandler.removeEventListeners = jest.fn();
+    const released = first.videoHandler.destroyVideoElementsConfirmed();
+    const initialize = jest.fn().mockResolvedValue(undefined);
+    second.mockVideoRef.current = {initialize} as unknown as VideoPlayer;
+    second.videoHandler.destroyVideoElements = jest.fn().mockReturnValue(true);
+    second.videoHandler.setupEventListeners = jest.fn(); second.videoHandler.loadVideoElements = jest.fn();
+    const started = second.videoHandler.preBufferVideo();
+    await Promise.resolve(); await Promise.resolve(); expect(initialize).not.toHaveBeenCalled();
+    complete(); expect(await released).toBe(true); await started;
+    expect(initialize).toHaveBeenCalledTimes(1);
+  });
+
   describe('destroyMediaPlayerSync', () => {
     it.each(['timeout', 'failure'])('does not report completed teardown after native %s', (status) => {
       const { mockVideoRef, videoHandler } = createVideoHandler();

@@ -160,6 +160,7 @@ export const PlayerScreen = ({
     React.useState<number>(0);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const leaving = useRef(false);
+  const mounted = useRef(true);
   const [recoveryPhase, setRecoveryPhase] = React.useState<RecoveryPhase>(recovery?.start ? 'covered' : 'ready');
   const [recoveryCoverMounted, setRecoveryCoverMounted] = React.useState(false);
   const [retryBlocked, setRetryBlocked] = React.useState(false);
@@ -539,27 +540,19 @@ export const PlayerScreen = ({
     }
   };
 
-  const releaseNativePlayer = () => {
-    // An async owner is already closing this decoder; do not call native destroy twice.
-    if (retryRelease.current && !retryRelease.current.confirmed) return false;
-    const hadMedia = Boolean(videoRef.current);
-    let released = true;
-    const attempt = (operation: () => void) => {
-      try { operation(); } catch { released = false; }
-    };
-    // One failed native operation must not prevent the remaining cleanup or Back.
-    attempt(() => videoRef.current?.pause());
-    attempt(() => videoRef.current?.clearSurfaceHandle(''));
-    attempt(() => videoRef.current?.clearCaptionViewHandle(''));
-    // Destruction also invalidates pending initialization before construction.
-    // Its false return for an absent instance is not a teardown failure.
-    attempt(() => {const destroyed = videoHandler.destroyVideoElements(); if (hadMedia && !destroyed) released = false;});
-    return released;
+  const releaseNativePlayer = (): Promise<boolean> => {
+    if (!videoRef.current) {
+      // Invalidate pending initialization even before a decoder exists.
+      videoHandler.destroyVideoElements();
+      return Promise.resolve(true);
+    }
+    return videoHandler.destroyVideoElementsConfirmed();
   };
 
   useEffect(() => {
     return () => {
       memory.close();
+      mounted.current = false;
       leaving.current = true;
       retryGeneration.current += 1;
       recoveryAttempt.current?.cancel();
@@ -602,17 +595,22 @@ export const PlayerScreen = ({
 
     surfaceHandle.current = null;
     captionViewHandle.current = null;
-    const destroyed = releaseNativePlayer();
-    trace('playback', destroyed ? 'teardown ok' : 'teardown fallback');
+    const release = releaseNativePlayer();
     videoRef.current = null;
-
-    // Successful synchronous teardown has already finished. Retain the old
-    // fallback delay when the native player did not confirm completion.
-    if (destroyed) {
+    let returned = false;
+    const returnOnce = () => {
+      if (returned || !mounted.current) return;
+      returned = true;
+      if (exitTimer.current !== null) clearTimeout(exitTimer.current);
       navigation.goBack();
-    } else {
-      exitTimer.current = setTimeout(() => navigation.goBack(), BACK_NAVIGATION_DELAY);
-    }
+    };
+    // Back may leave for a static screen while native teardown finishes. The
+    // process-wide creation barrier still forbids any replacement decoder.
+    exitTimer.current = setTimeout(returnOnce, BACK_NAVIGATION_DELAY);
+    release.then(confirmed => {
+      trace('playback', confirmed ? 'teardown ok' : 'teardown unconfirmed');
+      if (confirmed) returnOnce();
+    });
     return true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
