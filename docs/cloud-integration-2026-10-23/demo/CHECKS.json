@@ -1,0 +1,55 @@
+{
+  "scope": "Draft presentation/demo package only; no actual narration generation, video encoding or native validation",
+  "source_reviewed": "6360417814d684d41c94789a9e406fc27de53c66",
+  "application_target": "12125b2970342b5376b0bc7964383e547b407376",
+  "narration_script_sha256": "1695b7a51ba38df4ec22b36715270be8ce37f0763e504e5f41a36603fab3c9c6",
+  "focused_preflight_tests": {
+    "passed": 16,
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 docs/cloud-integration-2026-10-23/demo/test_render_preflight.py -v",
+    "scope": "Metadata and text fixtures, with probe function stubbed; CLI missing-input refusal tested using actual template",
+    "verified_refusals": [
+      "tampered asset bytes",
+      "harness/unreviewed native capture",
+      "stale source and illustration in native slot",
+      "unapproved text or voice",
+      "insufficient native duration or excessive narration duration",
+      "speech over ambient passage or duration at three minutes",
+      "missing inputs before creation of output directory",
+      "mismatched installed package or missing/changed/inconsistent hashed capture receipt",
+      "long container or alternate video stream concealing a short first mapped video stream",
+      "long container or alternate audio stream concealing a short first mapped app-audio stream",
+      "unknown, nonfinite or nonpositive mapped-stream coverage",
+      "unknown or nonzero mapped-stream origins",
+      "selected source interval extending past either mapped native stream",
+      "shorter duration_ts/time_base coverage despite a longer duration field"
+    ],
+    "verified_valid_cases": [
+      "complete source-bound metadata with known zero starts and sufficient first-stream durations",
+      "exact duration_ts/time_base coverage with start_pts equal to zero",
+      "selected interval ending exactly at both native stream coverage boundaries"
+    ],
+    "stream_coverage_policy": "Use the first video and first audio streams that the renderer maps. Require finite positive stream duration or exact duration_ts/time_base coverage, taking the shorter bound when both are present. Container duration and later streams never establish coverage. Native video and any mapped native audio must cover source_start plus the entire selected interval. Narration uses first-audio duration. Every timed mapped stream must have a known zero start_time or exact start_pts/time_base origin; nonzero and unknown origins are rejected because offset normalization is unsupported."
+  },
+  "template_check_only": {
+    "expected_exit": 2,
+    "actual_exit": 2,
+    "reason": "18 real assets, selected package identity and actual selected voice ID missing; exact script approval received"
+  },
+  "local_links_checked": 37,
+  "style_and_python_json_parsing": "passed",
+  "five_reference_screenshot_hashes": "matched native receipt",
+  "official_sdk_readme_commit": "f5d53e09e35717523435cee238ac5cc7f51966fb",
+  "blackbox_reference_frames": "not_received; access blocked",
+  "real_encoding_run": false,
+  "paid_api_calls": 0,
+  "mp4_produced": false,
+  "human_acceptance": "pending",
+  "official_sdk_readme_blob": "456c5b8cca3e9a36d58ce5517f23cef67b6acc72",
+  "official_sdk_readme_sha256": "0557cf1557bf1e6088585a4c5e24fe22b86f4f5e25b7eef521235b6287c8363e",
+  "approval_state": {
+    "script": "approved exact recorded SHA256",
+    "voice_selection": "calm built-in voice authorized; ID not selected",
+    "budget": "owner authorized unlimited budget",
+    "production": "deferred by owner until finished product acceptance and story reconciliation"
+  }
+}

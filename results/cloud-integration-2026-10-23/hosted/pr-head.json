@@ -1,0 +1,11 @@
+{
+  "baseRefName": "main",
+  "headRefName": "claude/eager-goldberg-1s5eb4",
+  "headRefOid": "6360417814d684d41c94789a9e406fc27de53c66",
+  "isDraft": true,
+  "number": 2,
+  "state": "OPEN",
+  "url": "https://github.com/alejandro-publius/calm-frames/pull/2",
+  "observedAt": "2026-10-23T18:10:37.264972+00:00",
+  "localCheckoutSha": "ae30cc7fc70a3b68e07684912cd8a497fb04df70"
+}

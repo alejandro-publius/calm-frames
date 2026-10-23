@@ -2843,3 +2843,25 @@ GitHub app gets HTTP 403 on cancel and re-run as well as dispatch, the job has
 no time limit of its own, and the workflow's concurrency group cancels an older
 run on a newer push. The commit changes documentation only, so the code under
 test is still `12125b2`. Cost: the mutation gate runs again, about 25 minutes.
+
+## 2026-10-23: isolate source-proven contrast fixes and preserve acceptance boundaries
+
+Decision: branch from verified shared head `6360417`, leave the shared candidate
+and Mac session alone, and address only the two demonstrated contrast gaps with
+existing coastal colors. Three new rendered assertions fail before the change;
+focused UI/focus checks pass afterward. Why: Watch and focused cards should be
+easy to find without changing layout, typography, household data or protective
+playback timing. Cost: a small native visual review is still required. Reused
+dependency links and local tests do not establish clean-install or hosted
+acceptance. No source or documentation-only push is used to restart CI.
+
+The received dependency-risk report is evidence, not exception acceptance.
+Keep the new launch-editor/toml findings and expired reviews visible; do not
+change dates or sign for the owner. Prepare the narration, storyboard, image
+prompt and guarded renderer locally while missing assets remain explicit. The
+owner approved the exact script, selection of a calm built-in voice and an
+unlimited budget, then clarified that manga and narration follow the finished,
+validated product. Record those permissions and defer production; reconcile the
+story with the accepted build first. Preserve the submitted fallback and original judging
+package. The stated submission cutoff remains a protective boundary because
+the official rules page was inaccessible here.

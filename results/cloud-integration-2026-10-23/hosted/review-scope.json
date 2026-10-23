@@ -1,0 +1,32 @@
+{
+  "observed_at_utc": "2026-10-23T18:07:47.225178+00:00",
+  "reviewed_head": "6360417814d684d41c94789a9e406fc27de53c66",
+  "reported_code_commit": "12125b2970342b5376b0bc7964383e547b407376",
+  "received_mac_report": {
+    "name": "DEPENDENCY_RISK_d95e9df_2026-10-23.md",
+    "bytes": 11223,
+    "sha256": "f4264899e2e2a4dfed64926e94f2fa534e268f2fd69609130c54b68cccf9aa3d",
+    "supporting_trial_files_received": false
+  },
+  "report_input_identity_checks": [
+    {
+      "path": "app/package-lock.json",
+      "d95_equals_636": true,
+      "sha256": "96079510bdd29a6dc826eb969d416ccfd927fb76735f498eb48cf2c874508eca"
+    },
+    {
+      "path": "app/package.json",
+      "d95_equals_636": true,
+      "sha256": "88e679bb2d517e8947961ca9fccb638552832c2e9e4b520372530ea11843e9ae"
+    },
+    {
+      "path": "app/manifest.toml",
+      "d95_equals_636": true,
+      "sha256": "7e651ea0dd4f8ddcea842bae7616e7d9a49a8f59298e52ba888cf78ce9650c24"
+    }
+  ],
+  "patches_applied": [],
+  "exceptions_renewed": false,
+  "native_acceptance": false,
+  "log_access": "Job-log storage host productionresultssa0.blob.core.windows.net is outside allowlist; no bypass attempted; hosted complete log text not read"
+}
