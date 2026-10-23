@@ -17,6 +17,7 @@ import {
   CHIME_ON_LABEL,
   NO_TITLES,
   PIN_NOT_SET,
+  PIN_SAVE_FAILED,
   PIN_WRONG_TITLE,
   SAFETY_NOTE,
   TITLE_FAILED,
@@ -601,6 +602,8 @@ describe('ParentAreaScreen', () => {
 
     enter('0000');
     expect(onGateChange).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId('parent-area-message-title').props.children).toBe('Checking your PIN…');
+    expect(screen.getByTestId('parent-area-message-announcement').props.accessibilityLiveRegion).toBe('polite');
     // Blocked, said so, and still in the focus order.
     expect(key().props.accessibilityState.disabled).toBe(true);
     expect(key().props.focusable).toBe(true);
@@ -620,6 +623,33 @@ describe('ParentAreaScreen', () => {
     expect(key().props.focusable).toBe(true);
     enter('13');
     expect(screen.getByTestId('parent-area-entered').props.children).toBe('**');
+  });
+
+  it.each(['saved', 'failed'] as const)('shows pending PIN feedback until a correct attempt is %s', async outcome => {
+    let finish!: () => void;
+    let fail!: (error: Error) => void;
+    const onGateChange = jest.fn(() => new Promise<void>((resolve, reject) => {
+      finish = resolve;
+      fail = reject;
+    }));
+    renderArea({ onGateChange });
+    enter('1357');
+    expect(screen.getByTestId('parent-area-message-title').props.children).toBe('Checking your PIN…');
+    expect(screen.queryByTestId('parent-area-open')).toBeNull();
+    enter('1357');
+    expect(onGateChange).toHaveBeenCalledTimes(1);
+    await act(async () => {
+      if (outcome === 'saved') finish();
+      else fail(new Error('fixture storage unavailable'));
+    });
+    expect(screen.queryByText('Checking your PIN…')).toBeNull();
+    if (outcome === 'saved') {
+      expect(screen.getByTestId('parent-area-open')).toBeTruthy();
+    } else {
+      expect(screen.queryByTestId('parent-area-open')).toBeNull();
+      expect(screen.getByTestId('parent-area-message-title').props.children).toBe(PIN_SAVE_FAILED.title);
+      expect(screen.getByTestId('parent-area-key-1').props.accessibilityState.disabled).toBe(false);
+    }
   });
 
   it('offers the credits, and only once the PIN is right', () => {
@@ -804,6 +834,9 @@ describe('ParentAreaScreen', () => {
     expect(screen.queryByTestId('parent-area-seat-chosen')).toBeNull();
     // The rows say which question they are asking, and the chips carry the
     // state a radio carries rather than only a fill.
+    expect(
+      screen.getByLabelText('Viewing preset').props.accessibilityRole,
+    ).toBe('radiogroup');
     expect(
       screen.getByLabelText('Television size').props.accessibilityRole,
     ).toBe('radiogroup');

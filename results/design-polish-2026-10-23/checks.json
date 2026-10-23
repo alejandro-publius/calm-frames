@@ -1,0 +1,92 @@
+{
+  "observed_at": "2026-10-23T19:11:04.101790+00:00",
+  "base": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+  "branch": "codex/design-polish-2026-10-23",
+  "scope": "Unsubmitted Parents feedback/accessibility proposal; no native acceptance, hosted acceptance, push or publication",
+  "files": {
+    "app/src/calmframes/ParentAreaScreen.tsx": "940104a5bee2097428641e127bf8b30ec3592f5e4487ee99223e1850f5b75187",
+    "app/src/calmframes/copy.ts": "0cd42b5b3d940f4a8a86a8342e643e252511dc049477aefc79d914899084f0ba",
+    "app/test/calmframes/screens.test.tsx": "48dc2c6c2a1b653b2ac19a3a9ad80ee9d45f783752fa31b22a03e25e4942bf06",
+    "app/test/calmframes/wholeFlowDesign.test.tsx": "b828e8a25157c9ca32c5b169104d13c999fe26c1aa0204378de22a928241243d"
+  },
+  "install": {
+    "command": "npm ci --ignore-scripts --no-audit --no-fund",
+    "node": "22.23.2",
+    "npm": "10.9.8",
+    "real_node_modules_not_symlink": true,
+    "lock_sha256": "9bced637402801fcd1738aaef927c82cba61488e00515b21a44ca4d85dfffd93",
+    "result": "passed",
+    "lifecycle_scripts": "disabled, matching existing controlled cloud policy"
+  },
+  "regressions": {
+    "before": "Four assertions failed against prior Parents source: pending wrong/correct/failed persistence and missing preset group label",
+    "after": {
+      "suites": 8,
+      "tests_passed": 140,
+      "failed": 0
+    },
+    "covered": [
+      "delayed valid and invalid PIN attempts",
+      "storage failure remains locked",
+      "duplicate presses ignored while persistence pending",
+      "preset group label",
+      "complete primary-button press-before-focus contrast",
+      "existing UI frame declarations"
+    ],
+    "excluded": [
+      "native VoiceView",
+      "native Yoga layout",
+      "native D-pad observation",
+      "full product release acceptance"
+    ]
+  },
+  "typecheck": {
+    "command": "npm run typecheck",
+    "result": "passed",
+    "adjusted_flags": false
+  },
+  "lint": {
+    "command": "npm run lint",
+    "result": "passed",
+    "source_warnings": 104,
+    "test_warnings": 4,
+    "errors": 0
+  },
+  "independent_source_review": "No blocking regression found. Earlier button finding retracted after shared wrapper inspection.",
+  "log_sha256": {
+    "calm-design-install.log": "435f1648b7251785670f2532036f51251734fca39abc9179671a6b646a4d5a3f",
+    "calm-design-confirmed-red.log": "4f7fb86dcaf1917dfaa14c61fecdf0821436acfaf7b18cf181cd54b38fec8d96",
+    "calm-design-final.log": "e4eed0f4879e2b3de237b8d3a23a6c76d7c5223cdb6858e9a3612ea2904620ab",
+    "calm-design-final-typecheck.log": "7f09368d1c1bbe040cbf5b34cf83957d985a877326c77aad71ab060fce233b31",
+    "calm-design-final-lint.log": "def44a238becca53feb679ac525c395296bef22fa79184cc1f18061ba753837d",
+    "calm-design-export-verified.log": "5eeea5a45c38ba7323aa8230a7e098d72910e0c348b8a4beb52c1acbe812f2d8"
+  },
+  "native_component_previews": {
+    "summary": "native-preview-summary.json",
+    "formats": [
+      "1920x1080",
+      "1280x720"
+    ],
+    "runtime": "Playwright 1.62.0, existing Chromium",
+    "nature": "Browser approximation of actual component host trees; not a Vega capture",
+    "invalidated_export": "Initial cached environment-driven exports excluded; literal stage/dimensions used for corrected exports"
+  },
+  "preview_hashes": {
+    "before/1080/locked.json": "80f8775c6a53cacf06c0a47db96413db503bf89c29b4e6b4a09a6b9f27d9dfce",
+    "before/1080/locked.png": "9dc8e774b7ab592bc6de329f2eddd86148d6fd5de510f0b5873d0b4a7b225c18",
+    "before/1080/pending.json": "10a68a26400a737cd5eddc2bb351d149df2684a13e76a014ba40b52ff2f6a3f5",
+    "before/1080/pending.png": "a6fdd8fb936adb60fbb3158ebab69c6d0a4010d0be3adad6c8fb575893607246",
+    "before/720/locked.json": "68e4d2fddc1165a73f2dc6b635bab8069f1679dbde34a129f75b2a84b1c7cf96",
+    "before/720/locked.png": "dd83f5cf15b252bcfe0c6a33a580ec1f29e596a5bdf2fee6ff14a20bf50cefd8",
+    "before/720/pending.json": "27348d7ce71ae46ef5a9f225d8d3523398acbbba3b1b7e53fb4de211b1178f8c",
+    "before/720/pending.png": "29a0952dd471565c3134c1c7771f0edd19c6e61070f9dfa3954fe6207bc90be5",
+    "after/1080/locked.json": "80f8775c6a53cacf06c0a47db96413db503bf89c29b4e6b4a09a6b9f27d9dfce",
+    "after/1080/locked.png": "9dc8e774b7ab592bc6de329f2eddd86148d6fd5de510f0b5873d0b4a7b225c18",
+    "after/1080/pending.json": "da2325e46680a661cb5d309095eb01d7f530e5dd2c0a0395093c54a13580965d",
+    "after/1080/pending.png": "ce280b225f50b3bb6709298c6c54798e24d9f2613149b9bb25b22434e9a3fb9d",
+    "after/720/locked.json": "68e4d2fddc1165a73f2dc6b635bab8069f1679dbde34a129f75b2a84b1c7cf96",
+    "after/720/locked.png": "dd83f5cf15b252bcfe0c6a33a580ec1f29e596a5bdf2fee6ff14a20bf50cefd8",
+    "after/720/pending.json": "c6c8aa6ad0673826b298cf31794a16d038e4039814a353e63ff5561dde8d3530",
+    "after/720/pending.png": "3c2731113f8b41d833c1ab0876401e79b1b559a1cf11e91d142a6d22cce68aad"
+  }
+}

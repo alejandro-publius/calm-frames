@@ -84,6 +84,7 @@ import {
   NOTHING_HIDDEN_YET,
   PARENTAL_CONTROLS_LEAD,
   PARENTAL_CONTROLS_TITLE,
+  PIN_CHECKING,
   PIN_LOCKED_TITLE,
   PIN_NOT_SET,
   PIN_PROMPT,
@@ -226,7 +227,8 @@ const ParentAreaScreen = ({
   // id rather than as a flag, so a question asked about Robin cannot be
   // answered about Sam if the picker moves underneath it.
   const [askedToRemove, setAskedToRemove] = React.useState<string | null>(null);
-  const wrongPin = notice.tone === 'blocked';
+  const shownNotice = savingPin ? PIN_CHECKING : notice;
+  const wrongPin = shownNotice.tone === 'blocked';
 
   const editingKid = Boolean(
     family && family.profiles.some((profile) => profile.id === editingId),
@@ -317,7 +319,7 @@ const ParentAreaScreen = ({
         </View>
         <View style={styles.columns}>
           <View style={styles.aside}>
-            <StatusNotice testID={`${testID}-message`} notice={notice} />
+            <StatusNotice testID={`${testID}-message`} notice={shownNotice} />
             {offersSetPin || onBack ? (
               <View style={styles.buttons}>
                 {offersSetPin ? (
@@ -548,7 +550,11 @@ const ParentAreaScreen = ({
         </View>
       ) : null}
 
-      <View style={styles.group}>
+      <View
+        style={styles.group}
+        accessibilityRole="radiogroup"
+        accessibilityLabel={sectionFor(STRICTNESS_TITLE, whose)}
+        aria-label={sectionFor(STRICTNESS_TITLE, whose)}>
         <Text style={styles.section} accessibilityRole="header">
           {sectionFor(STRICTNESS_TITLE, whose)}
         </Text>

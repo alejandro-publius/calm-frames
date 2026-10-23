@@ -26,6 +26,12 @@ test.each([false, true])('a world primary action is visible at rest and legible 
   };
   expect(contrastRatio(resting.backgroundColor, WORLD.BACKGROUND)).toBeGreaterThanOrEqual(3);
   readable();
+  // Remote events can arrive before the view reports focus. Ink must still
+  // match the fill actually painted, including the decorative play icon.
+  fireEvent(button(), 'pressIn', {});
+  readable();
+  fireEvent(button(), 'pressOut', {});
+  expect(style().backgroundColor).toBe(resting.backgroundColor);
   fireEvent(button(), 'focus');
   expect(contrastRatio(style().borderColor, style().backgroundColor)).toBeGreaterThanOrEqual(3);
   expect(contrastRatio(style().borderColor, WORLD.BACKGROUND)).toBeGreaterThanOrEqual(3);

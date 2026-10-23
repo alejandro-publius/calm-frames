@@ -128,6 +128,12 @@ export const PIN_PROMPT: Notice = {
   tone: 'calm',
 };
 
+/** Visible feedback while the attempt is saved; no unlock is implied. */
+export const PIN_CHECKING: Notice = {
+  ...PIN_PROMPT,
+  title: 'Checking your PIN…',
+};
+
 /**
  * The two ways a PIN entry goes wrong.
  *
