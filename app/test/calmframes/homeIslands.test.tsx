@@ -348,16 +348,18 @@ it('every destination selected still measures clear, because the boat follows th
   }
 });
 
-it('puts the offline notice in the empty half of the sand, where it moves nothing', () => {
+it('keeps offline actions beside the notice without moving the islands or headings', () => {
   const online = measureHome(<KidHomeScreen titles={consumer} onOpen={jest.fn()} />);
   const offline = measureHome(<KidHomeScreen titles={consumer} offline onOpen={jest.fn()} />);
   const slot = placedBox(byID(offline.tree, 'kid-home-notice-slot'));
   expect(slot).toEqual(toBox(HOME_ISLANDS.NOTICE));
   const hero = placedBox(byID(offline.tree, 'kid-home-hero'));
+  expect(hero).toEqual(toBox(HOME_ISLANDS.OFFLINE_ACTIONS));
+  expect(placedBox(byID(online.tree, 'kid-home-hero'))).toEqual(toBox(HOME_ISLANDS.ACTIONS));
   expect(touches(slot, hero)).toBe(false);
   expect(slot.top).toBeGreaterThanOrEqual(offline.band('home-sand').bottom + CLEARANCE);
   expect(slot.right).toBeLessThanOrEqual(1920 - CALM_SPACE.SAFE_X);
-  for (const id of ['kid-home-hero', 'kid-home-environment-ocean', 'kid-home-environment-forest']) expect(placedBox(byID(offline.tree, id))).toEqual(placedBox(byID(online.tree, id)));
+  for (const id of ['kid-home-environment-ocean', 'kid-home-environment-forest']) expect(placedBox(byID(offline.tree, id))).toEqual(placedBox(byID(online.tree, id)));
   expect(offline.cards.map(placedBox)).toEqual(online.cards.map(placedBox));
 });
 

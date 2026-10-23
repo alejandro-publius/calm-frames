@@ -271,8 +271,9 @@ const KidHomeScreen = ({
         onChooseProfile(profile); setClosingPicker(true);
       }} />
   ) : null;
-  const hero = featured && feature ? <View testID={`${testID}-hero`} style={islandHome ? [styles.islandHero, placed(cardsNameIt ? HOME_ISLANDS.ACTIONS : HOME_ISLANDS.HERO)] : styles.hero}>
-              <View style={styles.heroCopy}>
+  const centeredActions = islandHome && cardsNameIt && !offline;
+  const hero = featured && feature ? <View testID={`${testID}-hero`} style={islandHome ? [styles.islandHero, placed(cardsNameIt ? (offline ? HOME_ISLANDS.OFFLINE_ACTIONS : HOME_ISLANDS.ACTIONS) : HOME_ISLANDS.HERO)] : styles.hero}>
+              <View style={[styles.heroCopy, centeredActions ? styles.centeredActions : null]}>
                 {cardsNameIt ? null : <>
                 <Text accessibilityRole="header" numberOfLines={1} style={[styles.featureTitle, CALM_TEXT.section]} testID={`${testID}-video-title`}>{feature.name}</Text>
                 <Text style={styles.videoMeta} testID={`${testID}-video-meta`}>{[feature.runtime ?? runtimeLabel(featured.title.durationMs), isBundledBenignStory(featured.title) ? 'Simulated demo' : null].filter(Boolean).join(' · ')}</Text>
@@ -387,6 +388,7 @@ const styles = StyleSheet.create({
   scrollContent: { minHeight: scale(820), paddingBottom: scale(12) },
   hero: { position: 'absolute', bottom: 0, width: '100%', minHeight: scale(180), alignItems: 'flex-start', paddingBottom: scale(36) },
   heroCopy: { width: scale(CALM_FLOW.HERO_TITLE_WIDTH), paddingTop: 0, alignItems: 'flex-start' },
+  centeredActions: { width: '100%', alignItems: 'center' },
   featureTitle: { ...CALM_TEXT.feature, color: WORLD.TEXT, marginTop: scale(0), marginBottom: scale(CALM_SPACE.TIGHT) },
   videoMeta: { ...CALM_TEXT.supporting, color: WORLD.TEXT_DIM, marginBottom: scale(CALM_SPACE.BLOCK) },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
@@ -396,10 +398,10 @@ const styles = StyleSheet.create({
   banner: { marginBottom: scale(20) },
   grid: { width: '100%', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: scale(180), marginTop: scale(100), gap: scale(40) },
   // The map's sand edge stays quiet at rest and distinct from the brick focus ring.
-  poster: { width: scale(400), minHeight: scale(280), flexDirection: 'column', justifyContent: 'center', padding: scale(12), borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: '#D2B47D', borderBottomWidth: scale(12), backgroundColor: WORLD.SURFACE },
+  poster: { width: scale(400), minHeight: scale(280), flexDirection: 'column', justifyContent: 'center', padding: scale(8), borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: '#D2B47D', borderBottomWidth: scale(6), backgroundColor: WORLD.SURFACE },
   posterSelected: { borderBottomColor: WORLD.FOCUS_RING },
   posterFocused: { borderColor: WORLD.FOCUS_RING, backgroundColor: WORLD.SURFACE_FOCUSED },
-  filmStill: { width: '100%', height: scale(164), borderRadius: scale(10) },
+  filmStill: { width: '100%', height: scale(184), borderRadius: scale(10) },
   selectionMark: { position: 'absolute', right: scale(24), top: scale(24), width: scale(44), height: scale(44), borderRadius: scale(22), backgroundColor: WORLD.SURFACE, alignItems: 'center', justifyContent: 'center' },
   posterCopy: { paddingHorizontal: scale(4), paddingTop: scale(8) },
   islandLayer: { ...StyleSheet.absoluteFillObject },
@@ -407,13 +409,13 @@ const styles = StyleSheet.create({
   islandHero: { alignItems: 'flex-start', justifyContent: 'flex-end' },
   islandCard: { minHeight: undefined, justifyContent: 'flex-start' },
   splitCard: { flexDirection: 'row', alignItems: 'center', gap: scale(12) },
-  splitPicture: { width: scale(80), height: scale(90) },
+  splitPicture: { width: scale(88), height: scale(104) },
   splitCopy: { flex: 1, paddingTop: 0 },
   splitTitle: { fontSize: scale(32), lineHeight: scale(40) },
   // Half a card is still read from the sofa: the second line keeps the 32 unit floor.
   splitQualifier: { fontSize: scale(32), lineHeight: scale(40) },
   pickerPanel: { padding: scale(24), paddingBottom: 0, borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: WORLD.BORDER, backgroundColor: WORLD.SURFACE },
-  posterTitle: { ...CALM_TEXT.section, color: WORLD.TEXT },
+  posterTitle: { ...CALM_TEXT.section, fontSize: scale(38), lineHeight: scale(48), color: WORLD.TEXT },
   posterQualifier: { ...CALM_TEXT.supporting, color: WORLD.TEXT_DIM },
 });
 export default KidHomeScreen;

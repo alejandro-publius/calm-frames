@@ -1,0 +1,164 @@
+{
+  "base": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+  "comparison_before": "41bdeb94ca1c3e8cceabafd821f141587f77c202",
+  "branch": "codex/design-polish-2026-10-23",
+  "source_sha256": {
+    "app/src/calmframes/CalmPageHeader.tsx": "9b25da29edc935c299f789c37a0f71156ff728b6fe97a5271812d8e0e5a5edca",
+    "app/src/calmframes/CoastalWorld.tsx": "22abeb96dfaaa2932bf7b639455acd4ba837466c49612fc861587e22169a9115",
+    "app/src/calmframes/KidHomeScreen.tsx": "25a70f1e689234b896c20b84c8f0d5eae399e8330d248c0e34374b49ebc8d36f",
+    "app/src/calmframes/ParentAreaScreen.tsx": "731ffc91483b469ba7b4f101f6c6a3cb36c3bd4394e81919d799a9d5d8cdeefa",
+    "app/src/calmframes/TitleDetailsScreen.tsx": "25a0f896d4db1c6433ac0bacc8c3c7f09e0b3527927e03d4b5416d44c25b868b",
+    "app/src/calmframes/homeIslands.ts": "2e650c41740745265b46912d5a93032ddcc9b0551b0e055deb3b44763f44648e",
+    "app/src/calmframes/uiFrames.ts": "6938493e359a661224f22a1eb6d525ecb7fb91578d8a41736f805872543e2790",
+    "app/test/calmframes/homeIslands.test.tsx": "947f9ab3986559a3f2187fbd51849faafb54cd8fdf71e7f3c73051c567a4e1d3",
+    "app/test/calmframes/uiCapture.test.tsx": "99c43369f48d5cc62e7123f7ef1d5e0b3e6a41448282069e973644449aa6065d",
+    "eval/preview/render_islands.mjs": "53b4c0453f1b04edd01eaa56be71e02c35a2a38f9d7321162b6046f6af1bc8fd",
+    "hook/src/engine/CoastalWorld.tsx": "4fcff0ae68a0b71a169847c6f04fa6cc696b18ab875c962814daf431a2426f0f",
+    "hook/src/engine/homeIslands.ts": "6d6754c0b3780a9fdb76a2312cea4e38888601c16698c23c2698eec7cba02db6",
+    "hook/src/mirror.json": "3910deae7d8cee4e6f8a32f5cb24f8b2d07db5c80eca529d028deccefc7a836a"
+  },
+  "node": "22.23.2",
+  "npm": "10.9.8",
+  "dependency_install": "Existing real locked node_modules from the preceding proposal; lockfiles unchanged. No symlinks.",
+  "normal_typecheck": "passed",
+  "normal_lint": "passed with existing warnings",
+  "lint_summaries": [
+    "104 problems (0 errors, 104 warnings)",
+    "4 problems (0 errors, 4 warnings)"
+  ],
+  "full_run": {
+    "passed_suites": 169,
+    "failed_suites": [
+      "uiCapture",
+      "hookMirror"
+    ],
+    "skipped_suites": 1,
+    "passed_tests": 1804,
+    "failed_tests": 2,
+    "skipped_tests": 4,
+    "seconds": 87.316,
+    "note": "Initial full run. The two failures were repaired and rerun; this is not recorded as a clean full run."
+  },
+  "final_focused": {
+    "suites": 8,
+    "tests": 114,
+    "seconds": 17.086,
+    "result": "passed",
+    "covers": [
+      "hookMirror",
+      "uiCapture",
+      "homeIslands",
+      "parentNavigation",
+      "openingAlignment",
+      "tenFoot",
+      "wholeFlowDesign",
+      "detailDiscovery"
+    ]
+  },
+  "logs": {
+    "full": {
+      "sha256": "1550972cf09eb63a867406536f5bcd2ce0d9b59e151780b4d4338f2fbc220e64",
+      "bytes": 196086
+    },
+    "regressions": {
+      "sha256": "a2dd3dd3d9df5df1074975cb0833b7658ec64c8db7b21189e2426a26be2b1abb",
+      "bytes": 17532
+    },
+    "typecheck": {
+      "sha256": "7f09368d1c1bbe040cbf5b34cf83957d985a877326c77aad71ab060fce233b31",
+      "bytes": 276
+    },
+    "lint": {
+      "sha256": "def44a238becca53feb679ac525c395296bef22fa79184cc1f18061ba753837d",
+      "bytes": 9595
+    },
+    "final-focused": {
+      "sha256": "9edcf797a65881ea9f692f6d2a2d9e05acd5da23a602c26ec1bc915055310b13",
+      "bytes": 938
+    }
+  },
+  "browser": {
+    "viewports": [
+      {
+        "width": 1440,
+        "all_28_embedded_images_decoded": true,
+        "keyboard_and_visible_focus": "passed",
+        "horizontal_overflow": false,
+        "reduced_motion_animations": 0
+      },
+      {
+        "width": 390,
+        "all_28_embedded_images_decoded": true,
+        "keyboard_and_visible_focus": "passed",
+        "horizontal_overflow": false,
+        "reduced_motion_animations": 0
+      }
+    ],
+    "http_requests": 0,
+    "script_errors": [],
+    "loaded_without_base_url_or_asset_directory": true,
+    "delivery_fix": "All 28 PNGs embedded in one HTML; verified without a base URL, asset directory or network.",
+    "html_sha256": "f1c80ad45dbbb2d88bb6daf7f6ae52ed7bb23727c8876009648e225f25062011"
+  },
+  "native_component_previews": {
+    "kind": "browser approximation, not Vega capture",
+    "states": 7,
+    "sizes": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "before_and_after": true,
+    "keypad_safe_margins": "checked in rendered bounds at both sizes",
+    "details_actions_inside_panel": "checked at both sizes",
+    "images": {
+      "after/1080/details.png": "d73ff4f30e6c68c6140ebde9692747eb2a3b36c8a2ab4d611b5b73b94630cb03",
+      "after/1080/forest.png": "2c93092a3f48ceedadced17520accb4a1516236d826d744de5dea3be83c55f73",
+      "after/1080/home.png": "6c58f086f547d3a67f0daa55ca419592fad6e6db9d05f1f7bbd92c01045e772f",
+      "after/1080/parents-locked.png": "6b9565aa75b122e8c99f315d57f8017200c2e416b1451db297dc919a469763d5",
+      "after/1080/parents-pending.png": "4869066e149a9b7d9bb9834c72d2f4991f5864d8b925e9a79eaae010f784b355",
+      "after/1080/parents-settings.png": "56a7ec90a1e7273111dc0b5a8492c2dd54d2a0cfd1fb4814499564d6d3c4b4dd",
+      "after/1080/profiles.png": "e22af6786f272f2afac52963337e573f9f4793bbb5d42c2bd1e18c42eb69be2c",
+      "after/720/details.png": "cfc2fdbddf920316e28955a73379ea68194dbac2bad972982d3f37d8b27bdc6e",
+      "after/720/forest.png": "382b8936bc5ba269b62ee8887fe4f8b6cbbe71d7d69d3fdc0cd082881189e0c3",
+      "after/720/home.png": "5409faeb840437900808724614fea93734043ae7463b88951ba427022b9c69e5",
+      "after/720/parents-locked.png": "7d3bf7b7bf72be3243f144f88f324d0ddb025b4f1485560fcc788c7a6a30e8ad",
+      "after/720/parents-pending.png": "3a3504c5a0b355ad523ad5a14b28319e68d33471a5136d6d7fbcfcca44681f97",
+      "after/720/parents-settings.png": "6c8b32b56b56e2c7630df9460b65fa97d12375adcd67020754d3be0333c44ab8",
+      "after/720/profiles.png": "fabce25e4acbb341942a9211ca74c33dbd938922b2268d92de4135c8fc369e98",
+      "before/1080/details.png": "efca3634e3191e850edd91667d7718c1bb9f99b14d9517b38e3d8a0b11fad6db",
+      "before/1080/forest.png": "035b6264f2cec5750b4a729a962fa5a83539bc95738475529bd44e0332a1d110",
+      "before/1080/home.png": "5596b083242014e02f22c94376d75cd8da9b3cfc6c2343b142c98fa2b097bd66",
+      "before/1080/parents-locked.png": "4925462bcbbc40e3fb18770e977d1602463d6948e3a74814ff38e1f56d802bdc",
+      "before/1080/parents-pending.png": "70101016a76b2978a3024a757c1749ff75065d266f57b4d2804d2be3dbcb5399",
+      "before/1080/parents-settings.png": "2104e191966d2ee0608b61f1235f8a6250bc8e3f429484a4fbfd7b04dfb4c5e3",
+      "before/1080/profiles.png": "18cacc80de834246693ae96f00cd6c3addf5219e3bb184db321b56b44e463dcd",
+      "before/720/details.png": "3228a651a0aa68daf950a0544f08d5cade66cac290748c5dcd406df984c27fc0",
+      "before/720/forest.png": "2a211753123ba1aefccc38461177a4a4f4166b5934eb24f0280217011f1ef255",
+      "before/720/home.png": "44d3384794f33ac05fd4c4de5192b3104d863d6596a3a8a257df46a16b999319",
+      "before/720/parents-locked.png": "806a1d0233e97c7cf5c2a4a931a9fcf56f8ccd35f58e5f146015ce0c3947846a",
+      "before/720/parents-pending.png": "1cbf694d7dfdeeeeda5e7fa55f956e132fc64cb66965ce524ce3484024833416",
+      "before/720/parents-settings.png": "1f9abdba37469e4e5f4a716656e589794ea64def2117eb82492387903cb22c65",
+      "before/720/profiles.png": "b275cc61cd09d4ff3bb8877d487d9157102815a9a3bce9c0debccd23a44b9944"
+    }
+  },
+  "preserved": [
+    "canonical branch 2cf54e0d168e58daedfde3f15407833d23af4e93",
+    "submitted materials",
+    "media and signatures",
+    "playback and protection logic",
+    "PIN and household persistence"
+  ],
+  "pending": [
+    "native spatial focus and layout",
+    "VoiceView",
+    "human audiovisual comfort",
+    "merge decision"
+  ],
+  "published": false
+}

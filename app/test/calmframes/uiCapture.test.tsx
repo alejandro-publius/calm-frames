@@ -85,7 +85,11 @@ import {
   playerFrame,
   TITLE_DETAILS_BLOCKED_FRAME,
   TITLE_DETAILS_FRAME,
+  TITLE_DETAILS_HARBOR_FRAME,
+  TITLE_DETAILS_DEMO_FRAME,
 } from '../../src/calmframes/uiFrames';
+import { titlePresentation } from '../../src/calmframes/TitleArtwork';
+import { isBundledBenignStory } from '../../src/calmframes/benignStory';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
 import {
   addProfile,
@@ -408,6 +412,15 @@ describe('what the app paints', () => {
         <TitleDetailsScreen entry={blockedTitle()} onPlay={jest.fn()} />
       )),
     ).toEqual(TITLE_DETAILS_BLOCKED_FRAME);
+
+    // The description and coverage now precede the action row. Retained demo
+    // pages must report their actual surface order too.
+    const harbor = checkedShelf().filter(entry => titlePresentation(entry.title).art === 'harbor-cinematic');
+    expect(harbor).toHaveLength(2);
+    for (const entry of harbor) {
+      const frame = isBundledBenignStory(entry.title) ? TITLE_DETAILS_DEMO_FRAME : TITLE_DETAILS_HARBOR_FRAME;
+      expect(renderedFrame(frame.screen, <TitleDetailsScreen entry={entry} onPlay={jest.fn()} />)).toEqual(frame);
+    }
   });
 
   it('matches what each step of the first run reports', () => {

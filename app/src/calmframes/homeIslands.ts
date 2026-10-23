@@ -61,7 +61,9 @@ export const HOME_ISLANDS = {
   BOAT: { top: 660, width: 72, height: 62 },
   HERO: { left: CALM_SPACE.SAFE_X, top: 798, width: CALM_FLOW.HERO_TITLE_WIDTH, height: 228 },
   /** Watch and Details alone, centred in the sand, when the cards already name every video. */
-  ACTIONS: { left: CALM_SPACE.SAFE_X, top: 868, width: CALM_FLOW.HERO_TITLE_WIDTH, height: 88 },
+  ACTIONS: { left: 600, top: 868, width: 720, height: 88 },
+  /** Leave the right half free when a service notice also needs the sand. */
+  OFFLINE_ACTIONS: { left: CALM_SPACE.SAFE_X, top: 868, width: CALM_FLOW.HERO_TITLE_WIDTH, height: 88 },
   /** Who is watching takes the row of cards while it is open, from the first card's left to the last card's right. */
   PICKER: { left: 400 - 200, top: 292, width: 1520 - 400 + 400, height: 310 },
   /** The service notice takes the empty right half of the sand, so it never moves the map. */

@@ -29,7 +29,7 @@ export default function CoastalWorld({ detail = false, destination = 'coastal', 
         <Path testID="home-sand" d={shoreline(DETAIL.SAND_EDGE + HOME_ISLANDS.SAND_STEP, true)} fill="#F7EACF" />
         <CoastalIsland kind={destination} x={DETAIL.ISLAND.x} y={DETAIL.ISLAND.y} size={DETAIL.ISLAND.scale} underCard={cardKinds.includes(destination)} />
         {DETAIL.RIPPLES.map(([x, y]) => <Path key={x} testID="home-ripple" d={`M${x} ${y}q24 18 48 0t48 0`} fill="none" stroke="#CEE5D5" strokeWidth="7" strokeLinecap="round" />)}
-        <Rect testID="detail-panel" x={DETAIL.PANEL.left} y={DETAIL.PANEL.top} width={DETAIL.PANEL.width} height={DETAIL.PANEL.height} rx="36" fill="#FFF8E7" stroke="#385C59" strokeWidth="8" />
+        <Rect testID="detail-panel" x={DETAIL.PANEL.left} y={DETAIL.PANEL.top} width={DETAIL.PANEL.width} height={DETAIL.PANEL.height} rx="28" fill="#FFF8E7" stroke="#385C59" strokeWidth="2" />
       </> : <>
         {/* Positions come from homeIslands.ts, which the cards and the hero read too. */}
         <Path testID="home-sky" d={shoreline(HOME_ISLANDS.SKY_EDGE, false)} fill="#F7EACF" />

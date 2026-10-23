@@ -1,75 +1,86 @@
-# Parents feedback and accessibility polish
+# Coastal visual review
 
-Unsubmitted follow-up to frozen source `2cf54e0d168e58daedfde3f15407833d23af4e93`,
-on `codex/design-polish-2026-10-23`. The integration owner prepared this bounded
-proposal after the stated submission cutoff. It does not replace the canonical
-branch, existing Mac package or submitted materials. No push or publication.
+Unsubmitted proposal on `codex/design-polish-2026-10-23`, based on frozen
+source `2cf54e0d168e58daedfde3f15407833d23af4e93`. The earlier feedback change
+is preserved at `41bdeb94ca1c3e8cceabafd821f141587f77c202`; the broader visual
+pass follows it on the same local branch. No merge, push or publication.
 
-## Implemented
+## Visible changes
 
-- `app/src/calmframes/ParentAreaScreen.tsx`: while a PIN attempt is persisted,
-  the existing notice says **Checking your PIN…** through its polite live region.
-  Previously the keypad was blocked while the notice still said Enter your PIN.
-  The existing privacy detail, colors and layout are retained. Success still
-  waits for persistence; failures remain locked and display the existing error.
-  The declared UI frame follows the displayed notice, including retries.
-- The same screen now labels the viewing-preset radio group with its existing
-  section heading, including the selected profile where applicable. This matches
-  the room controls and First Run. No setting, PIN or profile data changes.
-- The primary-button review found its shared wrapper already supplies the proper
-  pressed fill. That suspected contrast issue was rejected after rendering the
-  complete component. `CalmButton` remains unchanged; the existing test now also
-  checks readability when a press arrives before a focus event.
+- **Home:** a larger wordmark, larger scene photographs, lighter card edges and
+  centered Watch / Details controls. Existing islands, labels and selection
+  handlers remain. Offline notices keep a separate area beside the actions.
+- **Details:** title and runtime, description and coverage summary, then actions.
+  The reading column stays inside its panel; panel and photograph borders are
+  lighter. Existing imagery, island landmarks and title alignment with the
+  opening screen remain. The shared opening panel inherits the lighter border.
+- **Parents PIN:** heading, notice and keypad share one framed paper panel.
+  The keypad moves up into the safe area without reducing control sizes.
+- **Parents settings:** a centered reading column and outlined profile section
+  separate profile management from viewing presets. The page remains scrollable.
+- The earlier Checking your PIN feedback and labelled preset group remain.
+  Authentication, persistence, playback, cover ordering and media are unchanged.
 
-## Design guidance applied
+The cream, paper, teal and clay palette and all three packaged Calm fonts are
+retained. No generated artwork, new animation or browser product is introduced.
+Native spatial focus can change when controls move; that needs a Fire TV review.
 
-The upstream text sources and hashes are in
-[guidance-sources.json](../../results/design-polish-2026-10-23/guidance-sources.json).
-These are freshly retrieved public versions, not claims of access to the Mac's
-installed copies or connector runtimes.
+## Review artifact
 
-| Guidance | Applied here |
-|---|---|
-| Anthropic frontend-design | Keep the existing subject-specific coastal identity and intentional hierarchy. |
-| Anthropic design-critique | Inspect real components and interactions before changing them; reject the false-positive button finding. |
-| Anthropic ux-copy | Replace a misleading input instruction with concise waiting feedback. |
-| Anthropic accessibility-review | Label the choice group and retain the polite status announcement and focusable keypad. |
-| Vercel Web Interface Guidelines | Review the offline guide's browser focus, overflow and loading behavior; apply only relevant principles to native components. |
-| Playwright | Render the existing guide and actual exported native component trees for visual inspection. Browser layout is an approximation, not native acceptance. |
+The portable export includes `preview/index.html`, seven before/after states
+at 1920 by 1080 and 1280 by 720, and a separate-worktree import handoff.
+All screenshots are embedded in the HTML, which opens by itself without an
+asset directory, installation or network. The first linked-file delivery did not
+resolve images in the chat file viewer; the embedded version replaces it.
+Use its screen selector, Before / After buttons and full-size PNG download links.
 
-The existing tokens remain cream `#F7EACF`, paper `#FFF8E7`, teal `#385C59`,
-ink `#193F3E`, clay focus `#A44132` and pale primary `#FFECD6`. Existing Calm
-fonts retain their heading, body and control roles. The Parents composition
-remains heading above message at left and keypad at right; the status changes
-in place. No new font, illustration, animation or decoration.
+These are browser approximations of actual exported React Native host trees,
+with the existing SVG artwork, fonts and packaged photographs. They are not
+native captures or evidence of playback. Robin and Sam are ephemeral test
+fixtures. The settings image shows the first viewport of a scrollable page.
 
-The other named tools are accounted for in the earlier handoff's section 7.
-Taste's script and browser inspector are not needed for this native fix;
-image-to-code and awesome-design-md would add no missing input to it. ADHD
-exploration, new research and a new design system would expand scope. None is
-reported as run or installed here. The requested bounded polish does not require
-reinstalling all Mac plugins.
+Both sides use the corrected preview renderer: inline SVG icons participate in
+layout, and image borders are drawn. Those renderer corrections are not app
+improvements and must not be presented as such. Before images are from
+`41bdeb94ca1c3e8cceabafd821f141587f77c202`; after-image source hashes are in
+[visual-checks.json](../../results/design-polish-2026-10-23/visual-checks.json).
 
-## Evidence and remaining acceptance
+## Checks and limits
 
-[Checks and source hashes](../../results/design-polish-2026-10-23/checks.json)
-record the clean locked install, normal typecheck/lint and focused regressions.
-New pending-state and grouping assertions failed against the previous source
-before passing with the changes. They cover delayed correct and incorrect PIN
-attempts, persistence failure, duplicate presses and the existing group label.
-No private PIN or household data was used; previews use ephemeral fixtures.
+Normal `npm run typecheck` and `npm run lint` pass using the existing real locked
+installation (Node 22.23.2, npm 10.9.8). No TypeScript flags or dependency symlinks
+were substituted. Lint retains existing warnings, recorded in the receipt.
 
-Before/after browser previews use the existing component-export renderer,
-packaged fonts and actual host trees at 1080p and 720p. They are labelled as
-browser approximations. The separate artifact contains those images, their
-hashes, the review script and the patch. A first environment-variable-driven
-export reused Babel's cached values; it was invalidated and excluded. Corrected
-exports use literal dimensions and distinct fixtures, with the original Parents
-component read from the frozen Git commit for the before images.
+The full app run exposed stale surface declarations and unsynced generated
+mirrors. The declarations now follow the actual Details paint order, including
+retained Harbor pages. `node hook/tools/sync.mjs` refreshed the two affected
+mirror sources and their fingerprints. Both failures and the related navigation,
+contrast, focus, geometry and opening-alignment checks pass on focused rerun.
+The receipt distinguishes the original full run from that final rerun.
 
-Mac acceptance still needs the exact proposal's native VoiceView announcement,
-D-pad focus and appearance. This cloud pass does not establish those results.
-The canonical product's dependency Audit failure, native/human acceptance and
-missing final media remain separate outstanding items. Manga and ElevenLabs
-production remain parked; no generated media, release acceptance or publication
-is implied.
+Playwright rendered both TV dimensions. The full Parents keypad and Details
+primary action stay inside their intended bounds. The gallery was inspected
+at desktop and narrow widths; its image links, keyboard order, visible focus,
+reduced-motion behavior and lack of external requests were checked. These
+browser checks do not certify native Yoga layout, D-pad navigation or VoiceView.
+
+Mac acceptance still needs native Home navigation after centering the actions,
+Details / opening alignment, Parents keypad and scrolling, status announcements,
+and human comfort. The canonical build's dependency Audit and native/human
+acceptance remain separate unresolved items. Narration, manga and replacement
+video production remain parked. Submitted materials are frozen.
+
+## Guidance actually applied
+
+[Source versions and hashes](../../results/design-polish-2026-10-23/guidance-sources.json)
+record the public guidance retrieved earlier. This pass applies Anthropic
+frontend-design and design-critique to composition and hierarchy, ux-copy to
+existing status feedback, accessibility-review to focus and readable controls,
+and relevant Vercel interface guidance to the offline gallery. Playwright was
+used for rendering and browser checks. This does not claim access to the Mac's
+plugin runtimes or that every previously discussed plugin was installed.
+
+The earlier feedback-only receipts remain in
+[checks.json](../../results/design-polish-2026-10-23/checks.json) and
+[native-preview-summary.json](../../results/design-polish-2026-10-23/native-preview-summary.json).
+They are historical evidence for the preceding commit, not this visual pass.

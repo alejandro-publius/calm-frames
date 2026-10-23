@@ -80,7 +80,7 @@ function render(node) {
   const id = escape(props.testID ?? '');
   if (SVG_TAGS[type]) {
     const tag = SVG_TAGS[type];
-    const ns = tag === 'svg' ? ' xmlns="http://www.w3.org/2000/svg" style="position:absolute;left:0;top:0"' : '';
+    const ns = tag === 'svg' ? ` xmlns="http://www.w3.org/2000/svg" style="display:block;flex-shrink:0;${css(props.style)}"` : '';
     return `<${tag}${ns} data-testid="${id}" ${svgAttributes(props)}>${render(node.children)}</${tag}>`;
   }
   if (type === 'Image') {
@@ -111,7 +111,7 @@ const fontData = (name) => `data:font/ttf;base64,${fs.readFileSync(path.join(ROO
 const fonts = ['CalmSansRegular', 'CalmSansSemibold', 'CalmDisplaySemibold'].map((name) => `@font-face{font-family:${name};src:url(${fontData(name)})}`).join('');
 const PAGE_CSS = `*{box-sizing:border-box}html,body{margin:0;width:1920px;height:1080px;overflow:hidden}body{display:flex;flex-direction:column}
 .view{display:flex;flex-direction:column;position:relative;flex-shrink:0;min-height:0;min-width:0;border-style:solid;border-width:0}
-.text{display:block;position:relative;flex-shrink:0;white-space:pre-wrap;border-style:solid;border-width:0}img{display:block;flex-shrink:0}.scroll{overflow:hidden}`;
+.text{display:block;position:relative;flex-shrink:0;white-space:pre-wrap;border-style:solid;border-width:0}img{display:block;flex-shrink:0;border-style:solid;border-width:0}.scroll{overflow:hidden}`;
 
 fs.mkdirSync(OUT, { recursive: true });
 const browser = await chromium.launch({ executablePath: CHROMIUM, args: ['--no-sandbox'] });

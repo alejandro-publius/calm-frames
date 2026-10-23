@@ -198,6 +198,8 @@ const TitleDetailsScreen = ({
           <Text style={[styles.title, styles.heroTitle, heroTitleTypography(presentation.name), { color: WORLD.TEXT }]} testID={`${testID}-title`}>{presentation.name}</Text>
           <Text style={[styles.meta, { color: WORLD.TEXT_DIM }]} testID={`${testID}-meta`}>{onAmbient ? 'Still scene' : meta}</Text>
         </View>
+        {presentation.description ? <Text style={[styles.synopsis, { color: WORLD.TEXT_DIM }]} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
+        <CoveredSectionsStrip result={covered} ocean={ocean} testID={`${testID}-covered`} />
         <View style={styles.actionRail}>
           <View style={styles.buttons}>
             <CalmButton primary playIcon={!onAmbient} sound={false} testID={`${testID}-play`} label={saving ? SAVING_CHANGES : playLabel}
@@ -207,8 +209,6 @@ const TitleDetailsScreen = ({
               onPress={() => setPage('info')} />
           </View>
         </View>
-          {presentation.description ? <Text style={[styles.synopsis, { color: WORLD.TEXT_DIM }]} testID={demo ? `${testID}-demo-label` : `${testID}-description`}>{presentation.description}</Text> : null}
-        <CoveredSectionsStrip result={covered} ocean={ocean} testID={`${testID}-covered`} />
       </View>
     </ScrollView></WorldAppearance.Provider>
   );
@@ -216,20 +216,20 @@ const TitleDetailsScreen = ({
 
 const styles = StyleSheet.create({
   // The photograph stands on the island; homeIslands.ts DETAIL keeps the landmarks clear of it.
-  destinationImage: { position: 'absolute', left: scale(DETAIL.PHOTO.left), top: scale(DETAIL.PHOTO.top), width: scale(DETAIL.PHOTO.width), height: scale(DETAIL.PHOTO.height), borderWidth: scale(10), borderColor: WORLD.SURFACE, borderRadius: scale(26) },
+  destinationImage: { position: 'absolute', left: scale(DETAIL.PHOTO.left), top: scale(DETAIL.PHOTO.top), width: scale(DETAIL.PHOTO.width), height: scale(DETAIL.PHOTO.height), borderWidth: scale(6), borderColor: WORLD.SURFACE, borderRadius: scale(20) },
   environment: { flexDirection: 'row', alignItems: 'center', gap: scale(CALM_SPACE.TIGHT) },
   environmentName: { ...CALM_TEXT.supporting, color: WORLD.TEXT },
   reading: { width: '100%', maxWidth: scale(1040), gap: scale(24), paddingTop: scale(32) },
   secondaryAction: { alignItems: 'flex-start' },
   screen: { flex: 1, backgroundColor: CALM_COLORS.BACKGROUND },
   content: { paddingHorizontal: scale(CALM_SPACE.SAFE_X), paddingVertical: scale(CALM_SPACE.SAFE_Y), alignItems: 'flex-start' },
-  hero: { paddingLeft: scale(40), width: '100%', minHeight: scale(CALM_FLOW.HERO_HEIGHT), alignItems: 'flex-start', justifyContent: 'flex-start' },
+  hero: { paddingLeft: scale(40), width: '100%', maxWidth: scale(820), minHeight: scale(CALM_FLOW.HERO_HEIGHT), alignItems: 'flex-start', justifyContent: 'flex-start' },
   heroCopy: { width: '100%', maxWidth: scale(780), alignItems: 'flex-start', paddingTop: scale(CALM_FLOW.HERO_TOP) },
-  actionRail: { width: '100%', alignItems: 'flex-start', gap: scale(26), marginTop: 0 },
+  actionRail: { width: '100%', alignItems: 'flex-start', gap: scale(26), marginTop: scale(40) },
   meta: { ...CALM_TEXT.supporting, color: CALM_COLORS.TEXT_DIM, textAlign: 'left', marginBottom: scale(16) },
   title: { ...CALM_TEXT.screen, color: CALM_COLORS.TEXT, marginBottom: scale(16), textAlign: 'left' },
   heroTitle: { marginBottom: scale(8) },
-  synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left', maxWidth: scale(700), marginTop: scale(28) },
+  synopsis: { ...CALM_TEXT.body, fontSize: scale(32), lineHeight: scale(44), color: CALM_COLORS.TEXT_DIM, textAlign: 'left', maxWidth: scale(700), marginTop: scale(8) },
   summary: { ...CALM_TEXT.body, color: CALM_COLORS.TEXT_DIM, textAlign: 'left' },
   section: { ...CALM_TEXT.section, color: CALM_COLORS.TEXT, textAlign: 'left' },
   checkSummary: { width: '100%', maxWidth: scale(1040), gap: scale(20), marginTop: scale(32) },

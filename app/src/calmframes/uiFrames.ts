@@ -90,13 +90,14 @@ export const KID_HOME_OFFLINE_FRAME: UiFrame = {
   surfaces: [MENU.SURFACE, MAP.PRIMARY_REST],
 };
 
-export const TITLE_DETAILS_HARBOR_FRAME: UiFrame = { screen: 'title-details-harbor', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY_REST, MAP.SURFACE] };
-export const TITLE_DETAILS_DEMO_FRAME: UiFrame = { screen: 'title-details-demo', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY_REST, MAP.SURFACE, MAP.PENDING] };
+/** The retained prepared Harbor has no covered sections, so it paints no strip. */
+export const TITLE_DETAILS_HARBOR_FRAME: UiFrame = { screen: 'title-details-harbor', background: MAP.BACKGROUND, surfaces: [MAP.PRIMARY_REST] };
+export const TITLE_DETAILS_DEMO_FRAME: UiFrame = { screen: 'title-details-demo', background: MAP.BACKGROUND, surfaces: [MAP.SURFACE, MAP.PENDING, MAP.PRIMARY_REST] };
 
 export const TITLE_DETAILS_FRAME: UiFrame = {
   screen: 'title-details',
   background: MAP.BACKGROUND,
-  surfaces: [MAP.PRIMARY_REST, MENU.SURFACE, MENU.PENDING, MENU.FAILED],
+  surfaces: [MENU.SURFACE, MENU.PENDING, MENU.FAILED, MAP.PRIMARY_REST],
 };
 
 /**

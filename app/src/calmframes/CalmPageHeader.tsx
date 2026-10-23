@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
   header: { width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', minHeight: scale(88), marginBottom: scale(32) },
   identity: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
   mark: { width: scale(56), height: scale(56) },
-  wordmark: { ...CALM_TEXT.supporting, fontFamily: CALM_FONT.display, letterSpacing: scale(2), color: CALM_COLORS.TEXT },
+  wordmark: { ...CALM_TEXT.section, fontFamily: CALM_FONT.display, letterSpacing: scale(1), color: CALM_COLORS.TEXT },
   actions: { flexDirection: 'row', alignItems: 'center', gap: scale(20) },
 });
