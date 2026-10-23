@@ -9,14 +9,48 @@ maps every remaining GHSA ID to exact locked nodes, affected ranges, propagated
 packages, historical exception groups, exposure evidence, mitigations and limits.
 It is the pre-approval audit review. The later [owner approval receipt](../../results/cloud-integration-2026-10-23/product-validation/toml-approval.json) applies only to the TOML scope below.
 
-Matching npm 10.9.8 lockfile scans remove four IDs, reducing the unique count
+At the earlier `3a7ddf0` checkpoint, matching npm 10.9.8 lockfile scans remove four IDs, reducing the unique count
 from 34 to 30, with no additions. The remaining 57 package entries include
 propagated findings; they are not 57 independent exploits. The oldest nested
 shell-quote 1.6.1 remains under react-native-tscodegen-types because its old CLI
 pins that exact version. It retains critical
 [GHSA-w7jw-789q-3m8p](https://github.com/advisories/GHSA-w7jw-789q-3m8p)
 and high [GHSA-395f-4hp3-45gv](https://github.com/advisories/GHSA-395f-4hp3-45gv).
-Changing that pin requires separate compatibility and reachability review.
+The follow-up below now addresses that remaining leaf; these counts describe
+the earlier checkpoint rather than the latest review lock.
+
+## Legacy shell-quote remediation in the current review
+
+The local review pins shell-quote to **1.11.0**, the fixed version already used
+by the newer toolchain. npm resolves the old 1.6.1 copy inside the legacy
+react-native-tscodegen-types subtree to that version. The SDK, legacy CLI 2.10.0,
+React Native versions and TOML stay pinned as before. Removed array-map,
+array-filter and array-reduce entries were dependencies of the old parser.
+
+The installed old CLI's launchEditor.js consumes `parse(REACT_EDITOR)` and uses
+direct `spawn` on the checked Unix path. Its actual module was exercised with
+intercepted process creation, quoted executable paths and argument values.
+No editor was launched and no shell payload was executed. The regression also
+rejects newline-bearing structured quote tokens and preserves literal arguments.
+It fails against the old installed parser and passes with the final locked tree.
+These are build-tool compatibility checks, not a current native module inventory.
+
+A fresh matching npm scan removes exactly
+[GHSA-w7jw-789q-3m8p](https://github.com/advisories/GHSA-w7jw-789q-3m8p) and
+[GHSA-395f-4hp3-45gv](https://github.com/advisories/GHSA-395f-4hp3-45gv), with no
+new advisory IDs. The later comment/line-terminator advisory
+[GHSA-pqg4-j6r4-53mv](https://github.com/advisories/GHSA-pqg4-j6r4-53mv) is also
+outside the selected fixed version's affected range. See the
+[before/after audit delta](../../results/design-polish-2026-10-23/cloud-finish/audit-delta.json),
+[primary advisory records](../../results/design-polish-2026-10-23/cloud-finish/shell-quote-advisories.json)
+and [exact validation receipt](../../results/design-polish-2026-10-23/cloud-finish/receipt.json).
+
+The app SBOM was regenerated and reproduced with Node 22.23.2, npm 10.9.8,
+CycloneDX npm 6.0.1/library 10.3.0 and the documented Python generators. A real
+clean locked installation was used for normal typecheck, lint and app checks.
+The existing image-size override and its malformed-input protections remain.
+No SDK major upgrade, exception-date extension or owner acceptance was added.
+The other Audit findings and both expired groups still block release acceptance.
 
 ## Owner-approved narrow TOML deferral
 
@@ -57,8 +91,9 @@ did not establish Mac operator availability or confirm those host controls.
 
 ## Work that remains independent of that decision
 
-- Review the nested shell-quote call sites and remaining advisory preconditions;
-  historical absence from the October 11 bundle is not current absence evidence.
+- Continue reviewing the other advisory preconditions; shell-quote's reviewed
+  leaf is now fixed. Historical absence from the October 11 bundle is not
+  current absence evidence for any remaining package.
 - Obtain current Release/Debug module inventories from the exact Mac build and
   preserve package hashes. No native build is available in this cloud executor.
 - Run the unchanged Audit workflow against the pushed canonical SHA. Keep its

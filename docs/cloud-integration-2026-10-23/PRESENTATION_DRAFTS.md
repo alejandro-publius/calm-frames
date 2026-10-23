@@ -1,6 +1,6 @@
 # Calm Frames presentation drafts
 
-Prepared from source `6360417814d684d41c94789a9e406fc27de53c66`; its application code is at `12125b2970342b5376b0bc7964383e547b407376`. The canonical continuation adds contrast proposal `ae30cc7` and compatible tooling dependency fixes, without changing the product journey described here. Its exact source and validation are in [the checkpoint](CHECKPOINT.md). These are private working drafts. They do not select a replacement submission, certify the current native build, or authorize publication. Preserve submitted `bf2f615` and its linked materials.
+Reconciled for the unpublished review branch, including the visual work through `d7da316d2d48c3b66b3cc4874257e98ca5ef943e`. The [checkpoint](CHECKPOINT.md) records exact included commits and subsequent tooling changes. These private working drafts do not select a replacement submission, certify a native build or authorize publication. Preserve submitted `bf2f615` and its linked materials. The existing approved narration in demo/STORYBOARD.md is unchanged; this editorial correction is not a replacement script or authorization to start media generation.
 
 The [canonical checkpoint](CHECKPOINT.md) distinguishes implemented changes from native acceptance. The older [integration status](../handoff-2026-10-23/INTEGRATION_STATUS.md) is historical input. Check the integration owner's exact-source CI receipt before selecting any wording about hosted results. Dependency audit findings and human audiovisual acceptance remain open at drafting time.
 
@@ -8,13 +8,13 @@ The [canonical checkpoint](CHECKPOINT.md) distinguishes implemented changes from
 
 > # Calm Frames
 >
-> **A calmer way to watch.**
+> **A standalone Fire TV prototype designed with people with photosensitive epilepsy in mind.**
 >
-> Calm Frames is a native Fire TV app for deliberate ambient viewing. Choose a nature scene from a coastal map, watch at your own pace, and return to your profile's saved place. McWay Falls provides a sustained moving scene that ends on a still frame; the older nature titles keep their stationary defaults and explicitly selected previews.
+> Calm Frames combines prepared nature content with flash analysis, signed maps and protective-playback mechanisms. Choose a scene from the coastal map and decide when to watch. McWay Falls provides a sustained moving scene that ends on a still frame; the other nature titles keep their stationary defaults and explicitly selected previews.
 >
 > Behind that simple journey, an offline preparation pipeline analyzes media and verifies the prepared outputs. The player checks the approved edition and its signed map before allowing playback, while household settings and guarded seeks retain their protective role. A saved position is optional viewing history, never permission to weaken those checks.
 >
-> Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.
+> This is a standalone app for its own prepared catalog, with no integration into Prime Video, Netflix or live TV. It is not a medical device and does not establish seizure prevention or individual comfort. Exact-build native validation and release issues remain open.
 >
 > **Review status:** the development candidate and its native evidence are identified separately below. The submitted fallback remains available. See the current integration checkpoint for hosted checks, exact source/package identities and outstanding native review.
 
@@ -22,11 +22,11 @@ Before using this opening, insert the selected, verified checkpoint link. Do not
 
 ## Devpost story draft
 
-### 🌊 A place to settle in
+### 🌊 Why we built it
 
-Calm Frames starts with a small decision: choose a nature scene and spend time with it. The coastal map, quiet typography and remote-first controls are intended to make that decision clear. Moving footage stays at natural speed, and McWay Falls finishes on a still frame until the viewer leaves.
+Calm Frames was designed with people with photosensitive epilepsy in mind. The engineering question is how a standalone TV app can prepare content before viewing, retain evidence of that preparation, and preserve protective checks during playback and recovery. The coastal interface supports that purpose through deliberate choices and readable remote controls.
 
-The intent is a more deliberate viewing experience. This is not a claim of clinical benefit, universal comfort or a completed user study.
+The prepared catalog is the implemented scope. We have not integrated these mechanisms into Prime Video, Netflix, live TV or arbitrary video apps. We have not demonstrated medical effectiveness or completed a user study. Native acceptance of the final integrated build remains open.
 
 ### 🧭 A journey that remembers its viewer
 
@@ -40,7 +40,7 @@ The offline pipeline records its preparation stages and verifies the resulting m
 
 Recovery is explicit and covered while the player re-establishes its state. The implementation has automated checks, but complete native compositor and decoder ordering evidence remains limited. We keep that limitation visible instead of describing a test harness as production acceptance.
 
-Calm Frames reduces exposure to flashing above published limits in the videos it plays; not a medical device.
+The mechanisms are designed to reduce exposure to mapped flashing in the prepared videos this app plays. Analyzer misses and device timing limits remain relevant. A signed map is evidence of identity and approval, not a medical safety certificate.
 
 ### What we learned and what remains
 

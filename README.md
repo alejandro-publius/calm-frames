@@ -1,15 +1,21 @@
 # Calm Frames 🌊
 
-**A quiet place on your TV. Prepared nature scenes, deliberate playback, and a picture that stays.**
+**A standalone Fire TV prototype designed with people with photosensitive epilepsy in mind.**
 
 [![Vega OS](https://img.shields.io/badge/Vega_OS-native_TV_app-245a58)](app/)
 [![Node 22](https://img.shields.io/badge/Node-22-53745b)](.nvmrc)
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-53745b)](.python-version)
 [![Apache 2.0](https://img.shields.io/badge/Code-Apache_2.0-c6854e)](LICENSE)
 
-Calm Frames pairs a coastal, remote-first TV interface with an offline video preparation pipeline. Choose Ocean or Forest, inspect a title, and decide when to watch. McWay Falls offers five continuous minutes of a fixed coastal view at natural speed, then holds the final frame until you leave. Acadia, Sea otters and Forest open as still scenes, with short moving previews available separately.
+Calm Frames combines prepared nature content with offline flash analysis, signed media maps and guarded playback. Its coastal, remote-first interface makes browsing and playback deliberate. These mechanisms do not establish medical safety, prevent seizures or guarantee individual comfort. Calm Frames is not a medical device.
 
-**Demo status:** the [demo video](https://www.youtube.com/watch?v=6lAP1FH16vc) and the [Devpost entry](https://devpost.com/software/calm-frames) both show an earlier build than this branch, so they do not include the latest playback recovery, profile and onboarding work. A cut of the newer build is local and under review. The repository is private. The screenshots below reflect installed source `60c3bbb`, and the current build words a few labels differently; see [build and publication status](docs/presentation/README.md#build-and-publication-status) for exact evidence and revision scope.
+**Playback scope:** this app plays its own prepared catalog. It is not integrated with Prime Video, Netflix, live TV or third-party playback. A reusable hook is available separately; it is not evidence that another app uses it.
+
+Choose Acadia, McWay Falls, Sea Otters or Forest, inspect the title, and decide when to watch. McWay Falls offers five continuous minutes of a fixed coastal view at natural speed, then holds the final frame until you leave. The other titles open as still scenes, with short moving previews available separately.
+
+**Unsubmitted review branch:** the current source includes the approved broader Home, Details and Parents layouts and four separate islands. These changes have browser and source checks; exact-build native acceptance remains pending. [Current source, inclusion map and original 20-item checklist](docs/cloud-integration-2026-10-23/CHECKPOINT.md).
+
+**Evidence and demo:** the [published demo](https://www.youtube.com/watch?v=6lAP1FH16vc), [Devpost entry](https://devpost.com/software/calm-frames) and screenshots below represent earlier builds. The screenshots are native captures of `60c3bbb`, not the four-island review source. Their [provenance record](docs/presentation/README.md#build-and-publication-status) is historical. The new manga/native/ElevenLabs demo remains a production draft; no completed replacement for this review build is claimed. Submitted materials remain unchanged.
 
 ![Calm Frames Home: a coastal map with Ocean and Forest, McWay Falls selected, and Watch as the primary action](docs/presentation/home.png)
 
@@ -18,7 +24,7 @@ Calm Frames pairs a coastal, remote-first TV interface with an offline video pre
   <img src="docs/presentation/playback.png" alt="Native playback of the fixed McWay Falls cove and waterfall" width="49%">
 </p>
 
-<p align="center"><em>Real native app views: choose a place, understand the session, then watch.</em></p>
+<p align="center"><em>Historical native views from source 60c3bbb: choose a place, inspect Details, then watch. These are not captures of the current review build.</em></p>
 
 <details>
 <summary><strong>After the scene: the final frame stays</strong></summary>
@@ -98,12 +104,11 @@ The installed app uses Vega's W3C media player. The remaining rows distinguish l
 
 ## Running locally
 
-Use the candidate branch after obtaining repository access. The default branch is older. Check `git rev-parse HEAD` and the [build record](docs/presentation/README.md#build-and-publication-status) before comparing a newly built package with the screenshots.
+Use the separately imported review worktree identified by the [current checkpoint](docs/cloud-integration-2026-10-23/CHECKPOINT.md) and its verified source bundle. The review branch is local; cloning an older remote branch does not reproduce it. These commands assume you are already in that worktree. Compare its full SHA with the transfer manifest before installing dependencies or building.
 
 ```sh
-git clone --single-branch --branch claude/ocean-layout-fix-2026-10-19 https://github.com/alejandro-publius/calm-frames.git
-cd calm-frames
 git rev-parse HEAD
+git status --short
 ```
 
 ### App checks without a simulator

@@ -1,0 +1,24 @@
+{
+  "before": {
+    "info": 0,
+    "low": 2,
+    "moderate": 26,
+    "high": 24,
+    "critical": 5,
+    "total": 57
+  },
+  "after": {
+    "info": 0,
+    "low": 2,
+    "moderate": 26,
+    "high": 24,
+    "critical": 4,
+    "total": 56
+  },
+  "removed_advisories": [
+    "GHSA-395f-4hp3-45gv",
+    "GHSA-w7jw-789q-3m8p"
+  ],
+  "added_advisories": [],
+  "shell_quote_remains": false
+}

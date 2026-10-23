@@ -1,0 +1,27 @@
+{
+  "checked_local_targets": 119,
+  "issues": [],
+  "original_checklist_numbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "scope": "Local paths and Markdown headings in changed review documents; external URLs not revalidated."
+}

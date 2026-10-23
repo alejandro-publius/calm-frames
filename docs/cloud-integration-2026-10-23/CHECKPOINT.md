@@ -1,98 +1,89 @@
 # Calm Frames canonical product checkpoint
 
-October 23, 2026. The owner designated this thread as the sole integration owner and authoritative project-status thread. All app, dependency, documentation, demo and submission decisions pass through it. This is unsubmitted development on one canonical branch; completed Claude work is preserved as input. Preserve the native coastal identity, existing household, approved media, signed maps and submitted fallback. Historical handoffs do not create another active project owner.
+This cloud thread is the sole integration owner. This is unpublished development,
+not a replacement submission. The original 20 requested outcomes below supersede
+the earlier operational checklist, whose narrower scopes overstated completion.
+The Git history retains that older record.
 
 ## Exact source and ownership
 
-| Role | Identity and scope |
+| Role | Exact source and inclusion |
 |---|---|
-| Reconciled upstream input | `claude/eager-goldberg-1s5eb4`, `6360417814d684d41c94789a9e406fc27de53c66`, [draft PR #2](https://github.com/alejandro-publius/calm-frames/pull/2). Already an ancestor of the canonical branch; no duplicate merge or cherry-pick. Preserve this ref and never merge the PR. |
-| Shared candidate code | `12125b2970342b5376b0bc7964383e547b407376`. Changes through `6360417` are documentation/receipt only. App, hook, pipeline and analyzer trees were compared. |
-| Canonical integration branch | `codex/integration-owner-2026-10-23`. This cycle resumed at exact `54a1825bbd052a42981349f60534677b4ecd07ed`, including UI proposal `ae30cc7fc70a3b68e07684912cd8a497fb04df70`. Resolve the current full HEAD with `git rev-parse HEAD`; this thread's latest handoff and executor resume pointer record it after each commit. The owner authorized a normal private-branch push after review, with no merge or live-submission change. |
-| Approved TOML-only exception | `56ae93322a243bf116290d26d74335d87544bf12`; [approval and scope](DEPENDENCY_DECISION.md). Existing audit-policy tests pass and the real policy still rejects an unreviewed TOML advisory and both old expired groups. |
-| Reviewed dependency and validation commit | `3a7ddf012139752ce7b1cc1f80afb334809d3e77`. Two compatible tooling lock updates, final clean-install product checks and reproduced SBOMs. Subsequent checkpoint documentation does not alter those product inputs. |
-| Original cloud candidate | `codex/cloud-release-candidate-2026-10-22` at `5771bdeae9c58c257b2e785f64f2fd06c08089ff`, already pushed on the owner's prior specific instruction. Its runs are historical checks, not acceptance of the newer candidate. |
-| Submitted fallback | `bf2f615e6fad0d73442fe2b9acab3067bf311e7e` and the existing public demo. Neither has been changed. |
-| Sole integration owner | This thread owns project decisions and is the only writer to the canonical checkout. Read-only helpers may inspect or run assigned checks; they do not create competing branches or authorities. Claude is delegated only exported demo assembly and ElevenLabs narration after product gates; no app edits or integration decisions. |
-| Mac acceptance executor | Native commands and owner review must use the exact package selected here. A Mac executor is an execution handoff, not another product owner. No cloud simulator control or native acceptance is claimed. |
-| Editor inventory | Other visible Calm Frames Codex threads were idle. No other editor process was identified in this executor. External Claude editors are not enumerable or messageable through exposed tools, so checkpoint/stop delivery and acknowledgements are unverified. Do not infer them from idle Codex threads or touch another checkout. [Inventory receipt](../../results/cloud-integration-2026-10-23/ownership-reconciliation.json). |
-
-All pre-existing worktrees and refs are preserved. Retry harness `84faeed7dee851c713f75faaff2f8522a961d609` and rejected browser UI `76223f99cf8543ffe1e75d54c9873b56a0c23318` are absent from the shared candidate ancestry. The old standalone CI/video fixes are already superseded by the combined series; do not apply them again. The existing judging package remains an earlier snapshot and was not rebuilt.
-
-## Completed in this continuation
-
-- Verified environment revision 2, successful GitHub API access, private-repository identity and the actual remote branch head. The network publication fixed this API route; it did not grant every other destination or operation.
-- Read the current start instructions, historical handoff and newest integration status. Reconciled already-completed picker focus, Watch labels, minimum title-card text and protection-restoration tests without reimplementing them.
-- Implemented two source-proven palette fixes on the isolated branch: world primary actions are visible at rest, and card focus edges differ sufficiently from their resting edges. Existing coastal colors, geometry, typography, selection behavior and protective logic remain intact. [UI receipt](../../results/cloud-integration-2026-10-23/ui-contrast.json).
-- Saw the new contrast guards fail against the previous source, then pass with the proposal. Replaced the earlier dependency symlink with a fresh locked installation on the final lock. Normal `npm run typecheck`, normal lint and the focused UI/focus suites now pass without adjusted TypeScript flags. Lint warnings are recorded, not concealed. Independent source review found no blocking regression. [Final product validation](../../results/cloud-integration-2026-10-23/product-validation/receipt.json).
-- Checked recorded evidence identities and committed screenshot hashes. [Evidence reconciliation](EVIDENCE_RECONCILIATION.md) separates automated source checks, predecessor native observations, harness-only Retry evidence and human acceptance.
-- Read the actual uploaded dependency-risk report, independently checked advisories and current-source identity, and preserved its limits. Updated only launch-editor and top-level shell-quote to compatible fixed versions; regenerated and reproduced SBOMs with the documented tool versions. The owner then explicitly approved the five-advisory TOML-only controlled-build deferral through October 30; it is recorded separately without renewing either old group. [CI and dependency review](CI_AUDIT.md), [residual decision and approval](DEPENDENCY_DECISION.md).
-- Prepared an unsubmitted [presentation and architecture draft](PRESENTATION_DRAFTS.md) and [demo production package](demo/README.md). The owner then approved the exact draft script, selection of a calm built-in voice and an unlimited budget, but clarified that manga and narration belong after the product is finished and validated. Production is deferred. Missing footage, illustrations and secure access remain explicit; no replacement MP4, generated image or paid narration was produced.
+| Submitted fallback | `bf2f615e6fad0d73442fe2b9acab3067bf311e7e`; existing video and live materials remain unchanged. |
+| Frozen integration branch | `codex/integration-owner-2026-10-23`, `2cf54e0d168e58daedfde3f15407833d23af4e93`. Remote identity checked in the [hosted receipt](../../results/design-polish-2026-10-23/cloud-finish/hosted.json). |
+| Current review branch | `codex/design-polish-2026-10-23`. Resolve the full final HEAD from the verified transfer manifest and this thread's final checkpoint. It descends from the frozen integration source; no merge is needed to include that work. |
+| Included UI work | `41bdeb94ca1c3e8cceabafd821f141587f77c202` adds pending-PIN feedback; `fb7f48031d3ae587c8fba40422566c68a0a1f23f` refines Home, Details and Parents; `edbd4359443454c115c9137861f2e39ec575677c` separates four islands; `d7da316d2d48c3b66b3cc4874257e98ca5ef943e` capitalizes Sea Otters. |
+| Included cloud correction | `acf064c` fixes the demonstrated Python lint failure. The [cloud receipt](../../results/design-polish-2026-10-23/cloud-finish/receipt.json) records the subsequent dependency fix, exact inputs and checks. |
+| Fable implementation lane | Assigned original item 5 from exact `d7da316`, branch `claude/profile-names-fable-2026-10-23`. [File ownership and acceptance](../design-polish-2026-10-23/CLAUDE_FABLE_PROFILE_NAMES.md). Handoff delivery is prepared; receipt, activity and finished code are unverified until returned. Cloud leaves those app files alone. |
+| Prior completed handoffs | Claude source through `6360417814d684d41c94789a9e406fc27de53c66` is an ancestor. Combined release checks were replayed as `0371ebaa`, `5ef3b0d1`, `3bcfe542`; judging package `9ad7bb7` was replayed as `a61c83c5`. Its package tree remains identical. [Original-to-integrated map](../CLOUD_RELEASE_CHECKPOINT.md#integrated-inputs). No duplicate import. |
+| Explicit exclusions | The separate Retry harness and rejected browser UI remain excluded by the integration record and task boundary. Their referenced full objects are unavailable here, so this is not a new ancestry certificate for those references. New Fable code, narration, illustrations and replacement video are not included before verified receipt. |
 
 ## Hosted checks and remaining release blockers
 
-The reconciled upstream's [CI 39997723491](https://github.com/alejandro-publius/calm-frames/actions/runs/39997723491) passed all six jobs at exact `6360417`; [Audit 39997723468](https://github.com/alejandro-publius/calm-frames/actions/runs/39997723468) failed its dependency check at the same SHA. Infrastructure, SBOM and ARM64 image jobs passed. Use the timestamped [CI/Audit review](CI_AUDIT.md) for the exact receipts. The slow ffmpeg install completed without intervention. No existing jobs were canceled or restarted, and no status-only push was used to trigger CI. These results do not certify the later canonical branch.
+The latest read of frozen `2cf54e0` shows [CI 40007368463](https://github.com/alejandro-publius/calm-frames/actions/runs/40007368463)
+**failed at Python lint**. Vega app, modeled UI checks, secret scan, mutation/property
+checks and published-number checks passed. [Audit 40007372605](https://github.com/alejandro-publius/calm-frames/actions/runs/40007372605)
+**failed at dependency policy**; its infrastructure, ARM64 image and SBOM jobs passed.
+These are results for that exact frozen source, not for the newer local review branch.
+No hosted run has validated the local review changes. No run was restarted here.
 
-Audit still has expired review groups and unresolved residual findings. The compatible patch removes the launch-editor findings and the top-level shell-quote finding. The received Mac report is useful evidence, not owner risk acceptance. Its older bundle inventory and scratch trials do not establish a broad native release GO or absent build-host exposure. Current manifest parse compatibility is narrower than an SDK build or an editor workflow check. Only the later explicit TOML approval authorizes its controlled-build deferral; other residual findings are not covered by it.
-
-The current isolated UI proposal has no hosted or native acceptance. The latest supplied installed-production receipt names `bd55e47`; profile isolation, sustained playback, Skip and Retry receipts have their own earlier sources. A source tree or passing test does not update those observations. Human listening, comfort/pacing, palette and full-video approval remain missing.
-
-## Exact-source CI correction
-
-The first canonical push, `f9c210b`, failed the hosted Vega Test step. The full
-local suite reproduced seven stale palette expectations: six UI declarations
-and the primary-action assertion. The correction updates only those declared
-surfaces and the assertion, retaining focused Watch's warm fill and every
-threshold. Full normal app checks now pass; [the correction receipt](../../results/cloud-integration-2026-10-23/product-validation/ui-correction.json)
-records tests, modeled UI transition checks and negative controls. This does
-not certify native pixels or every possible focus state. Generic/profile Home
-and Details Watch-focused recording coverage remains incomplete; retain that
-limitation in item 6. The earlier f9c210b exports are superseded for Mac builds.
-The current handoff identifies the corrected full SHA and new hosted runs.
+Pinned Ruff 0.17.0 reproduced the lint defects in the demo preflight tooling.
+They are fixed without changing the lint configuration or approved narration.
+The dependency continuation replaces the old shell-quote leaf with the already
+used fixed 1.11.0 version. See the [dependency decision](DEPENDENCY_DECISION.md)
+and [cloud receipt](../../results/design-polish-2026-10-23/cloud-finish/receipt.json).
+Other dependency findings and expired exception groups remain blockers. The
+owner's TOML-only approval through October 30 is not blanket acceptance.
 
 ## One 20-item product checklist
 
-Completed means the stated scope is complete, not that the entire release is accepted. The checklist is not a test-count score. All remaining work stays under this thread.
+These are the user's original items in their original order. Implemented code,
+local checks, native observations, publication and acceptance are separate facts.
+A partial item can contain completed subparts; it is not a reason to redo them.
 
-| # | Item | Status | Evidence and next action |
+| # | Original outcome | Status | Evidence and next action |
 |---|---|---|---|
-| 1 | Single owner and editor coordination | Partially completed | This thread is authoritative; [editor inventory](../../results/cloud-integration-2026-10-23/ownership-reconciliation.json) records idle visible Codex threads and unavailable Claude messaging. Obtain checkpoint/stop acknowledgement before touching any external shared checkout; continue here without assigning new Claude work. |
-| 2 | Canonical source and completed handoffs | Completed | `6360417` and handoff `6193182` are already ancestors of the resumed `54a1825`. [Evidence reconciliation](EVIDENCE_RECONCILIATION.md) preserves source identities and limits. Next: continue this branch only; no repeated import. |
-| 3 | Submitted fallback and freeze boundary | Completed | `bf2f615` and linked submission materials are unchanged; [rollback ledger](EVIDENCE_RECONCILIATION.md#rollback-and-external-artifact-boundary). Next: preserve them unless an exact validated replacement is specifically selected within the permitted window. |
-| 4 | Hosted checks for exact source | Partially completed | Upstream `6360417` CI passed all six jobs; Audit failed. [Hosted review](CI_AUDIT.md). Next: run applicable checks on the reviewed, normally pushed canonical HEAD; do not transfer upstream acceptance to later commits. |
-| 5 | Dependency remediation and residual risk | Partially completed | Compatible launch-editor/shell-quote fixes, clean checks and reproduced SBOMs are in the [product receipt](../../results/cloud-integration-2026-10-23/product-validation/receipt.json). [Residual decision](DEPENDENCY_DECISION.md) records the explicit TOML-only approval and all remaining IDs/limits. Next: confirm build controls, review remaining reachability and obtain current native inventory; no major override or blanket renewal. Audit acceptance remains blocked. |
-| 6 | Primary action and card-focus contrast | Partially completed | `ae30cc7`, [contrast receipt](../../results/cloud-integration-2026-10-23/ui-contrast.json) and [clean-lock normal checks](../../results/cloud-integration-2026-10-23/product-validation/receipt.json) establish source behavior without layout or protection changes. Next: exact-build native appearance under item 12. |
-| 7 | Picker focus, Watch labels and text floor | Completed | Retained `bde35e9`, `2403d8f` and `9f8c612`; source regressions and upstream CI pass. [Evidence ledger](EVIDENCE_RECONCILIATION.md#implemented-work-to-retain). Next: native save/focus observation under item 12; no reimplementation. |
-| 8 | Loading, empty/error states and light transition | Partially completed | Source reviewed; existing recorded pale-frame observation has no proved cause. [Transition boundary](EVIDENCE_RECONCILIATION.md#native-and-human-acceptance-ledger). Next: inspect benign exact-source native evidence; do not alter protection timing for decoration. |
-| 9 | PIN presentation, panel sizing and kid names | Deferred | Existing authentication and household remain intact. [Prior bounded proposals](../handoff-2026-10-23/INTEGRATION_STATUS.md#deferred-with-the-reason). No demonstrated functional regression justifies a redesign. Next: optional design/native pass after product acceptance; never reset data. |
-| 10 | Recovery, cover/seek and decoder ordering | Partially completed | Source tests and predecessor receipts are reconciled in [the ledger](EVIDENCE_RECONCILIATION.md#native-and-human-acceptance-ledger). Retry is harness-only; never merge it. Next: exact-build native checks with instrumentation limits explicit. |
-| 11 | Profile progress and stricter protection | Partially completed | Position isolation observed at `4b04877`; `5e4da02` rejects stored settings. [Ledger](EVIDENCE_RECONCILIATION.md#native-and-human-acceptance-ledger). Next: exact-build save/focus and a permitted differential protection check; PIN entry stays private. |
-| 12 | Native footer, focus, accessibility and human acceptance | Blocked | Cloud has no Vega device. [Exact-build Mac handoff](MAC_ACCEPTANCE.md) provides verification, separate-worktree and rollback procedure. Next: one Mac execution receipt for footer/wrapping, D-pad, VoiceView, reduced motion, palette, sound and comfort; source tests cannot close it. |
-| 13 | Sustained viewing and other ambient titles | Partially completed | Full McWay/ending observed at `3bc658f`; other consumer titles retain stationary defaults and explicit previews. [Ledger](EVIDENCE_RECONCILIATION.md#native-and-human-acceptance-ledger). Next: verify retained approved routes on the selected native build; no new media preparation. |
-| 14 | Caption restoration scope | Completed | Simulated-native restoration tests exist; the shipped consumer catalog has zero tracks. [Caption inventory](../../results/native-acceptance-gaps-2026-10-23/catalog-caption-inventory.json). Next: retain this applicability limit; no claim of native caption observation. |
-| 15 | Personal-file import and caregiver pre-check | Completed | [Verified utility scope](EVIDENCE_RECONCILIATION.md#personal-file-import-and-caregiver-pre-check): local browser/CLI analysis/intake exists; arbitrary native file picking does not. Next: describe analysis and playback approval separately. |
-| 16 | Analyzer-version cache identity | Deferred | [Confirmed missing identity](EVIDENCE_RECONCILIATION.md#deferred-analyzer-identity-change) can invalidate approved workdirs and re-sign maps. Next: separate migration, synthetic fixtures and explicit real-edition scope; no submission-day regeneration. |
-| 17 | README opening, architecture and presentation | Completed | [Source-grounded drafts](PRESENTATION_DRAFTS.md), authentic predecessor screenshot captions and preserved judging package. Next: reconcile only changed behavior with selected source before any authorized publication; public materials remain unchanged. |
-| 18 | Official rules and judge access | Blocked | Historically approved judge accounts are collaborators, but current official rules/list remain inaccessible here. [Publication boundary below](#external-inputs-and-publication-boundary). Next: authoritative rule/window confirmation before submission action; no new accounts or invitations. |
-| 19 | Manga, native demo and ElevenLabs | Deferred | [Draft package](demo/README.md) exists; script, calm built-in voice selection and budget are authorized. Original storyboard and exact narration text are preserved; the exported assembly brief delegates only media work to Claude. No generated media exists. Next: freeze an accepted product, reconcile the story, then produce media and obtain human review; no narration question now. |
-| 20 | Reading comfort mode | Deferred | Optional per-profile text/spacing stays last and separate, using existing fonts. Next: a later bounded implementation with native wrapping/focus checks; no treatment claim. |
+| 1 | Cohesive native design | Partially completed | [Approved broader visual work](../design-polish-2026-10-23/README.md) is implemented through `d7da316`, including separate Acadia and McWay islands. Browser renders are not native acceptance. Next: exact-source D-pad/layout review; no new redesign. |
+| 2 | Redundant-copy removal | Partially completed | `2403d8f` and existing Details/still/recovery copy changes are retained; [source ledger](EVIDENCE_RECONCILIATION.md#implemented-work-to-retain). Next: current-build screen sweep, preserving necessary protective/error disclosures. |
+| 3 | Loading and transitions | Partially completed | `41bdeb9` adds visible PIN-checking feedback. The reported pale opening frame still has no established cause. Next: benign source-bound native observation before changing any player or cover timing. |
+| 4 | Watch and focus visibility | Partially completed | `ae30cc7` contrast fixes, clean normal checks and later coastal refinements are implemented. [Contrast receipt](../../results/cloud-integration-2026-10-23/ui-contrast.json). Next: observe rest/focus/press and selection on this native build. |
+| 5 | PIN, profiles and kid names | Partially completed | Pending PIN feedback and Parents layout are implemented. Renaming exists in the model but has no UI. Fable is assigned the [native name editor](../design-polish-2026-10-23/CLAUDE_FABLE_PROFILE_NAMES.md), with persistence, identity and protection unchanged. Next: receive and integrate its exact commit. |
+| 6 | Onboarding footer | Partially completed | [Recorded code/build fix](../../results/native-onboarding-footer-2026-10-23/receipt.json) is retained. Next: isolated first-run native fixture to inspect wrapping/reachability without resetting the real household. |
+| 7 | Ambient experience across titles | Partially completed | McWay sustained playback/ending was observed on `3bc658f`. Acadia, Sea Otters and Forest have still defaults and explicit short previews. [Native ledger](EVIDENCE_RECONCILIATION.md#native-and-human-acceptance-ledger). Next: check existing routes on selected native source; equal long moving editions are not delivered. |
+| 8 | Human audio and comfort review | Blocked | No final-build owner listening/palette/comfort receipt. Next: owner observations tied to package identity. Script approval and technical measurements do not supply them. |
+| 9 | Cover, seek and decoder ordering | Partially completed | [Source and predecessor evidence](EVIDENCE_RECONCILIATION.md#native-and-human-acceptance-ledger) supports scoped behavior. Harness-only Retry is separate; compositor timing is not proved. Next: benign native checks with instrumentation limits recorded. |
+| 10 | Profile protection and captions | Partially completed | Profile positions were independently observed on `4b04877`; `5e4da02` rejects stored protection overrides. Shipped consumer titles have [no caption tracks](../../results/native-acceptance-gaps-2026-10-23/catalog-caption-inventory.json). Next: stricter-profile native recovery; do not claim native caption restoration. |
+| 11 | Native accessibility | Partially completed | Labels, control sizes, focus and reduced-motion source guards exist. [Evidence ledger](EVIDENCE_RECONCILIATION.md#native-and-human-acceptance-ledger). Next: native VoiceView, D-pad and reduced-motion acceptance, including Fable's editor once integrated. |
+| 12 | Further technical depth and dependency audit | Partially completed | Recovery and decode-completeness work retained; compatible dependency fixes and current lint correction documented in the [cloud receipt](../../results/design-polish-2026-10-23/cloud-finish/receipt.json). Audit remains blocked. Analyzer cache identity stays a separate migration; no media/signature regeneration. |
+| 13 | Personal import and caregiver pre-check | Partially completed | [Local intake/report utilities](EVIDENCE_RECONCILIATION.md#personal-file-import-and-caregiver-pre-check) exist. They are not a finished native TV import journey and do not authorize arbitrary files for playback. Next: define that later user journey separately; no invented delivery claim. |
+| 14 | GitHub presentation | Partially completed | Review README now leads with the photosensitive-epilepsy design purpose, standalone scope and exact evidence boundaries. Historical images remain labelled. Next: current native captures and explicitly authorized publication; default branch is unchanged. |
+| 15 | Devpost and YouTube copy | Partially completed | [Private drafts](PRESENTATION_DRAFTS.md) now retain the core purpose and scope limits. Next: reconcile with accepted source before any permitted publication. Live text is frozen. |
+| 16 | Manga/native/ElevenLabs demo | Deferred | [Approved script and tooling](demo/README.md) exist. No generated narration, illustrations or finished current-source replacement video are claimed. Next: accepted product freeze, show any material script revision, then production and human review. |
+| 17 | Submission and judge requirements | Partially completed | Submitted fallback retained; earlier judging evidence preserved. Current official rules/access are not freshly reverified. Next: authoritative permitted-window/access confirmation before any submission action; no invites or live edits. |
+| 18 | Single source of truth | Partially completed | This checkpoint restores the original numbering and gives an explicit inclusion map. Sole cloud owner; bounded Fable lane reserved. Next: integrate returned Fable code once, then record one final source and package identity. |
+| 19 | Publish upgraded artifacts | Blocked | Review branch remains local and unsubmitted. Native/human acceptance and Audit remain open. Next: complete gates and obtain a permitted publication decision; no automatic promotion. |
+| 20 | Reading comfort mode | Deferred | Not implemented. Keep last; later bounded text/spacing work requires native wrapping/focus checks. No treatment claim. |
 
 ## Mac-only acceptance, without duplicate work
 
-Use the [exact-build Mac handoff](MAC_ACCEPTANCE.md) and exported manifest, selecting the immutable source before a build. The earlier checklist is historical input; its branch and CI-cancellation instructions are superseded. Preserve the current PIN, profiles and saved positions; enter any PIN privately. Keep native package/media hashes, a package-scoped rollback and capture source identity together.
-
-For the new UI proposal specifically, inspect Watch at rest and after focus/press, each resting and focused card, selected versus focused state, unchanged layout and label legibility over the actual art. Verify current picker focus while a profile saves. These changes do not justify replaying hazardous content, resetting first-run state or repeating long media suites.
-
-Native footer, VoiceView/reduced motion, approved legacy title routes and deliberately stricter-profile recovery remain separate checks where the required fixture/access exists. Retain the recorded cover/seek/decoder ordering limitation rather than claiming a compositor guarantee from sampled frames. Human audio/palette/full-video acceptance must come from the owner.
-
-Rollback package identities are listed in [the evidence ledger](EVIDENCE_RECONCILIATION.md#rollback-and-external-artifact-boundary). The files are on the Mac and were not rehashed or received here. The Retry harness must never enter the production branch.
+A Mac operator was confirmed available; a completed acceptance receipt has not
+arrived here. Use [MAC_ACCEPTANCE.md](MAC_ACCEPTANCE.md) with the exact current
+transfer manifest, not the obsolete f9c210b package or an inferred Mac path.
+After Fable returns, select one integrated source before a final build. Preserve
+private PIN entry, household data, approved media and a verified rollback package.
+Report native focus/button appearance, onboarding footer, protection/recovery
+ordering, retained title routes, VoiceView/reduced motion and owner listening/
+comfort as observed, failed or unobserved. A source test cannot mark them passed.
 
 ## External inputs and publication boundary
 
-The uploaded risk report was read as evidence. Its supporting trial directory was not attached; independently reproduced checks are identified separately. No ElevenLabs credential is available in this executor. The owner approved the current script, authorized selection of a calm built-in voice and supplied unlimited budget authorization. Do not ask for those permissions again. Their latest instruction puts manga and narration after the finished, validated product; preserve this draft and reconcile it with the accepted source first. Generated illustrations, current-source app footage and actual Blackbox reference frames remain missing. See the demo manifest for the exact list; do not substitute generated UI or older footage silently.
+The source and browser work continues privately after the user-stated October 23
+noon Pacific cutoff. No public posting, branch push, main merge or submitted
+material change is authorized by this continuation. The old judging guide and
+native captures remain historical evidence. This app plays its own prepared
+catalog; it does not protect playback in Prime Video, Netflix or other apps.
 
-Official Devpost rules, the Blackbox project and its YouTube reference returned proxy 403. The task's stated cutoff is October 23 at noon Pacific / 19:00 UTC; that deadline was not freshly verified from official wording here. Treat it as the protective boundary. Existing submission, repository/video links and live materials remain frozen unless a validated replacement is specifically selected and authorized within the permitted window. No public upload, merge, release or submission edit occurred in this continuation.
-
-Recommendation: preserve the existing submitted fallback. The newer shared candidate adds functionality but has an Audit failure and unresolved exact-source native/human acceptance; the isolated UI proposal adds another native review requirement. The fallback shares dependency concerns, so keeping it is a submission-preservation choice, not a claim it is vulnerability-free or medically safe. Unfinished work stays unsubmitted. After the cutoff, confirm permitted development/publication scope before changing any linked judged material.
-
-Next action: use this thread's exact-SHA publication receipt to monitor the canonical CI and Audit runs without status-only pushes. Execute the verified Mac handoff when a Mac operator is available; return evidence here. Confirm the approved TOML controls and review unresolved findings without treating the narrow approval as blanket release acceptance. Keep media parked and submitted materials frozen; do not cancel existing jobs, redesign the app, re-sign maps or rebuild the judging guide.
+The owner already approved the existing narration, a calm built-in voice choice
+and the budget. Do not ask again. Production remains parked until product
+acceptance; the unchanged script must then be reconciled with that exact build.
+Secure API access is a later-stage requirement, not a blocker to source work.

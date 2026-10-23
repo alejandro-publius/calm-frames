@@ -1,0 +1,85 @@
+[
+  {
+    "ghsa_id": "GHSA-w7jw-789q-3m8p",
+    "html_url": "https://github.com/advisories/GHSA-w7jw-789q-3m8p",
+    "summary": "shell-quote quote() does not escape newlines in object .op values",
+    "description": "### Summary\n\n`shell-quote`'s `quote()` function did not validate object-token inputs against the operator model used by `parse()`. The `.op` field was backslash-escaped character by character using `/(.)/g`, which in JavaScript does not match line terminators (`\\n`, `\\r`, U+2028, U+2029). A line terminator in `.op` therefore passed through unescaped into the output; POSIX shells treat a literal `\\n` as a command separator, so any content after it would execute as a second command.\n\nThe vulnerable code path is reachable in two ways. Neither requires the parser to misbehave \u2014 `parse()` only emits ops from a fixed control set \u2014 but both are documented API surface:\n\n1. **Direct construction.** A caller builds `{ op: '...\\n...' }` from external input (e.g. a deserialized argument array) and passes it to `quote()`.\n2. **`envFn` return.** `parse(cmd, envFn)` is documented to splice the return value of `envFn` into the result array when it is an object. An attacker-influenced data source consulted by `envFn` can introduce an object token whose `.op` reaches `quote()`.\n\n### Impact\n\nShell command injection in callers that pass object tokens with attacker-influenced `.op` values to `quote()` and then hand the result to a shell. The preconditions are narrower than ordinary string injection \u2014 they require the caller to feed object tokens into `quote()` \u2014 but object tokens are a public, documented part of the API surface, and `quote()` is intended to be a shell-safety boundary.\n\n### PoC\n\n```js\nconst { parse, quote } = require('shell-quote');\n\n// Direct construction\nquote([{ op: ';\\nid' }]);\n// \u2192 \"\\;\\n\\\\i\\\\d\"  \u2190 literal newline; second line executes as a command\n\n// Via parse() with an envFn returning attacker-shaped objects\nconst tokens = parse('echo $X', () => ({ op: ';\\nid' }));\nrequire('child_process').execSync(quote(tokens), { shell: true });\n// Executes `id` after `echo \\;`.\n```\n\nConfirmed under `sh`, `bash`, `dash`, and `zsh`.\n\n### Patch\n\nFixed by replacing the per-character escape with strict shape validation in `quote()`. The object-token branch now:\n\n- **`{ op }`** \u2014 `.op` must be a string from the same allowlist the parser emits (`||`, `&&`, `;;`, `|&`, `<(`, `<<<`, `>>`, `>&`, `<&`, `&`, `;`, `(`, `)`, `|`, `<`, `>`). Anything else throws `TypeError`. This is the direct fix for the reported issue and removes the entire class of `.op` injection.\n- **`{ op: 'glob', pattern }`** \u2014 `.pattern` must be a string with no line terminators. Glob metacharacters (`*`, `?`, `[`, `]`, `{`, `}`, `,`) pass through; all other shell-special characters are backslash-escaped. (Previously the pattern field was discarded entirely and the literal string `\\g\\l\\o\\b` was emitted \u2014 a latent bug, not security-relevant.)\n- **`{ comment }`** \u2014 `.comment` must be a string with no line terminators (line terminators would end the shell comment and resume command parsing \u2014 same injection shape).\n- **Any other object shape** \u2014 `TypeError`.\n\nThe fix is allowlist-based rather than a targeted regex tweak, so it closes the reported vector and forecloses adjacent ones (U+2028 / U+2029 line separators in `.op`, line terminators in comments, unknown-shape objects coerced through `.replace`).\n\n### Workarounds\n\nPrior to upgrading, callers that build object tokens from untrusted input should validate `.op` against the parser's operator set themselves, and never construct `{ op }` from attacker-controlled strings.\n\n### Credits\n\nReported by Akshat Sinha",
+    "severity": "critical",
+    "published_at": "2026-06-09T14:27:15Z",
+    "updated_at": "2026-06-09T14:27:16Z",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "shell-quote"
+        },
+        "vulnerable_version_range": ">= 1.1.0, <= 1.8.3",
+        "first_patched_version": "1.8.4",
+        "vulnerable_functions": []
+      }
+    ],
+    "references": [
+      "https://github.com/ljharb/shell-quote/security/advisories/GHSA-w7jw-789q-3m8p",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-9277",
+      "https://github.com/ljharb/shell-quote/commit/1518179",
+      "https://github.com/ljharb/shell-quote",
+      "https://www.npmjs.com/package/shell-quote",
+      "http://www.openwall.com/lists/oss-security/2026/05/23/2",
+      "https://github.com/advisories/GHSA-w7jw-789q-3m8p"
+    ]
+  },
+  {
+    "ghsa_id": "GHSA-395f-4hp3-45gv",
+    "html_url": "https://github.com/advisories/GHSA-395f-4hp3-45gv",
+    "summary": "shell-quote: Quadratic-complexity Denial of Service in `parse()` (CWE-407)",
+    "description": "### Summary\n`shell-quote`'s `parse()` finalizes its token list with a `reduce` that uses\n`Array.prototype.concat` as the accumulator. Each `prev.concat(arg)` copies the entire growing\narray, so `parse()` runs in **O(n\u00b2)** in the number of tokens. An unauthenticated attacker who\ncan submit a string to any code path that calls `parse()` on it can block the single-threaded\nNode.js event loop for tens of seconds with a small input \u2014 a denial of service. The trigger\nneeds **no shell metacharacters** (plain space-separated words suffice), so input filters that\nonly screen for `;`, `|`, `$`, or backticks do not help.\n\n### Root cause\n`parse.js` (lines 200\u2013203), in `parseInternal` \u2014 this path runs on **every** `parse()` call:\n\n```js\n}).reduce(function (prev, arg) { // finalize parsed arguments\n    // TODO: replace this whole reduce with a concat\n    return typeof arg === 'undefined' ? prev : prev.concat(arg);\n}, []);\n```\n\n`prev.concat(arg)` allocates a new array and copies all of `prev` on every iteration, so\nproducing an N-token result costs `1 + 2 + \u2026 + N = O(N\u00b2)` copies. A second `acc.concat(s)`\nreduce in the `module.exports` wrapper (lines 211\u2013224, reached only when `env` is a function)\nhas the same shape. The maintainer's own `// TODO: replace this whole reduce with a concat`\nalready flags the construct.\n\n### Proof of Concept\n```js\nconst { parse } = require('shell-quote');\nconst ms = fn => { const t = process.hrtime.bigint(); fn(); return Number(process.hrtime.bigint()-t)/1e6; };\nfor (const N of [16000, 32000, 64000, 128000]) {\n  console.log(N, 'tokens ->', ms(() => parse('x '.repeat(N))).toFixed(0), 'ms');\n}\n```\n\nMeasured on `shell-quote@1.8.4`, Node v24:\n\n| input (N tokens) | bytes  | `parse()` | ratio vs prev (2\u00d7 input) |\n|-----------------:|-------:|----------:|:------------------------:|\n| 16 000           | 32 KB  |    678 ms | \u2014                        |\n| 32 000           | 64 KB  |  4 169 ms | \u00d76.2                     |\n| 64 000           | 128 KB | 14 914 ms | \u00d73.6                     |\n| 128 000          | 256 KB | **57 319 ms** | \u00d73.8                 |\n\nTime grows ~\u00d74 per 2\u00d7 input \u2192 confirmed O(n\u00b2). A ~128 KB input blocks the event loop ~15 s;\n~256 KB \u2192 ~57 s; a few hundred KB more \u2192 minutes.\n<img width=\"656\" height=\"214\" alt=\"image\" src=\"https://github.com/user-attachments/assets/e8955b0e-0527-45ca-94b7-c3a2d8c0c82e\" />\n[poc.js](https://github.com/user-attachments/files/29255995/poc.js)\n\n### Impact\n`parse()` is synchronous on the main thread; while it copies arrays quadratically the entire\nevent loop is blocked and the process serves no other requests. Any service that calls `parse()`\non attacker-influenced input (command parsers, chat-ops / bot command handlers, REPLs,\nbuild-script / arg-string splitters) can be driven to a sustained DoS with a single small\nrequest. No code execution and no data disclosure \u2014 availability only.\n\nEnd-to-end confirmation: a minimal HTTP server that calls `parse()` on the request body, hit\nwith **one** `POST` of `'x '.repeat(32000)` (~63 KB), froze for ~4.5 s. An out-of-process probe\nclient issuing harmless `GET /ping` requests (normally ~1 ms) observed **27 consecutive pings\nstalled by up to 4374 ms** during that single request \u2014 i.e. every concurrent client was denied\nservice for the whole parse. Scaling the body to a few hundred KB extends the outage to minutes.\n\nThis is the same class as several accepted 2026 advisories for quadratic-parser DoS on\nuntrusted input (e.g. markdown-it CVE-2026-48988, js-yaml CVE-2026-53550,\npython-multipart CVE-2026-53539). It is **distinct** from the known `shell-quote`\ncommand-injection issues (CVE-2021-42740, CVE-2016-10541, CVE-2026-9277), which are all in\n`quote()`, not `parse()`.\n\n### Suggested remediation\nReplace the O(n\u00b2) concat-in-reduce with a linear flatten that **pushes into the\naccumulator** instead of reallocating and copying it on every iteration. Apply the\nsame shape to the wrapper's `acc.concat(s)` reduce. A defensive input-length cap on\n`parse()` is a cheap additional stop-gap.\n\n> **Maintainer note (edit):** the originally-suggested `Array.prototype.flat()` is\n> ES2019 / Node 11+, but `shell-quote` declares `engines: node >= 0.4`, so `.flat()`\n> would silently drop support for older runtimes. The fix instead flattens one-level\n> array tokens with `forEach`/`push` \u2014 and deliberately not `push.apply(...)`, since\n> spreading a large array into function arguments can exceed the engine's argument\n> count limit. Output is byte-identical to the current code across strings, `undefined`\n> holes, one-level array tokens, and `{op}`/`{comment}`/`{op:'glob'}` objects, and\n> finalizing is now linear (1,024,000 tokens in ~150 ms vs ~57 s for 128,000 before).\n> Thanks for the clear report and PoC \u2014 the analysis and reproduction were spot on.\n\n### Disclosure\nFound by source audit + wall-clock confirmation against 1.8.4 (and verified the same code is\npresent on `main`). Reported privately here; no public disclosure until a fix is available.",
+    "severity": "high",
+    "published_at": "2026-07-20T21:49:34Z",
+    "updated_at": "2026-07-20T21:49:34Z",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "shell-quote"
+        },
+        "vulnerable_version_range": "<= 1.8.4",
+        "first_patched_version": "1.9.0",
+        "vulnerable_functions": []
+      }
+    ],
+    "references": [
+      "https://github.com/ljharb/shell-quote/security/advisories/GHSA-395f-4hp3-45gv",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-13311",
+      "https://github.com/ljharb/shell-quote/commit/7ff5488599d01c323514f02f5efb74088dd134ec",
+      "https://github.com/ljharb/shell-quote/releases/tag/v1.9.0",
+      "https://www.npmjs.com/package/shell-quote",
+      "https://github.com/advisories/GHSA-395f-4hp3-45gv"
+    ]
+  },
+  {
+    "ghsa_id": "GHSA-pqg4-j6r4-53mv",
+    "html_url": "https://github.com/advisories/GHSA-pqg4-j6r4-53mv",
+    "summary": "shell-quote: `quote()` command injection via a line terminator in a token after a `{ comment }` token",
+    "description": "### Impact\n\n`quote()` emits a `{ comment }` token as `#` followed by its text, which comments out the rest of the shell line, including the opening quote of any later string token. A line terminator in that later string ends the comment, and the rest of the string is parsed as shell input:\n\n```js\nquote(['echo', 'ok', { comment: 'x' }, 'a\\nid;#']);\n// echo ok #x 'a\n// id;#'\n```\n\nPassed to `sh`, `bash`, `dash`, `ksh`, or `zsh`, this runs `id`.\n\n`parse()` emits a comment token for a `#` in the middle of a word (for example `http://example.com/#frag`), so callers that combine `parse()` output with another untrusted string, such as `quote(parse(untrustedCommand).concat(untrustedArg))`, are affected. The fix for CVE-2026-9277 rejected line terminators in the comment's own text, but not in the tokens after it.\n\nExploitation requires an attacker-controlled string containing a line terminator that follows a `{ comment }` token in the same `quote()` call.\n\n### Patches\n\nFixed in v1.11.0: `quote()` throws a `TypeError` when a string after a `{ comment }` token contains a line terminator (`\\n`, `\\r`, U+2028, or U+2029).\n\n### Workarounds\n\nDrop every token after a `{ comment }` token before calling `quote()`, or reject line terminators in untrusted strings. Separately, do not append other shell text after `quote()` output that contains a comment, since the comment swallows it.",
+    "severity": "critical",
+    "published_at": "2026-10-06T13:40:36Z",
+    "updated_at": "2026-10-06T13:40:37Z",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "npm",
+          "name": "shell-quote"
+        },
+        "vulnerable_version_range": ">= 1.8.4, < 1.11.0",
+        "first_patched_version": "1.11.0",
+        "vulnerable_functions": []
+      }
+    ],
+    "references": [
+      "https://github.com/ljharb/shell-quote/security/advisories/GHSA-pqg4-j6r4-53mv",
+      "https://nvd.nist.gov/vuln/detail/CVE-2026-102422",
+      "https://github.com/ljharb/shell-quote/commit/6002b2ed90c6b83095eb272b6b0adaf3a172b0bc",
+      "https://github.com/advisories/GHSA-pqg4-j6r4-53mv"
+    ]
+  }
+]
