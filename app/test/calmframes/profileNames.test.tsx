@@ -143,6 +143,7 @@ describe('Edit name', () => {
     expect(draft()).toBe('Sam');
     expect(count()).toBe(`3 of ${MAX_PROFILE_NAME} characters`);
     expect(screen.getByTestId(key('a')).props.hasTVPreferredFocus).toBe(true);
+    expect(screen.getByTestId('parent-area-back-top').props.hasTVPreferredFocus).toBe(false);
     // One thing at a time: nothing else in the group can move under the draft.
     expect(screen.queryByTestId('parent-area-profiles')).toBeNull();
     expect(screen.queryByTestId('parent-area-add-profile')).toBeNull();
@@ -393,6 +394,8 @@ describe('saving a name', () => {
     const retry = screen.getByTestId('parent-area-name-retry');
     expect(retry.props.accessibilityLabel).toBe(TRY_NAME_AGAIN_LABEL);
     expect(retry.props.hasTVPreferredFocus).toBe(true);
+    expect(screen.getByTestId(key('a')).props.hasTVPreferredFocus).toBe(false);
+    expect(screen.getByTestId('parent-area-back-top').props.hasTVPreferredFocus).toBe(false);
     expect(screen.getByTestId('parent-area-name-cancel')).toBeTruthy();
 
     // Try again saves the same draft onto the same kid.
@@ -464,6 +467,48 @@ describe('leaving the editor', () => {
     });
     return handled;
   }
+
+  it.each(['parent-area-back-top', 'parent-area-back'])(
+    '%s cancels the draft before its next press can leave Parents', (button) => {
+      const { props, onRenameProfile } = renderArea();
+      openSam();
+      erase(3);
+      type('ash');
+      press(button);
+      expect(editorOpen()).toBe(false);
+      expect(props.onBack).not.toHaveBeenCalled();
+      expect(onRenameProfile).not.toHaveBeenCalled();
+      expect(screen.getByTestId('parent-area-rename-profile').props.hasTVPreferredFocus).toBe(true);
+      press(button);
+      expect(props.onBack).toHaveBeenCalledTimes(1);
+    },
+  );
+
+  it('visible Back controls cannot leave during a pending rename, even in the same frame', async () => {
+    let settle!: (accepted: boolean) => void;
+    const onRenameProfile = jest.fn(
+      (_family: Family) => new Promise<boolean>((resolve) => { settle = resolve; }),
+    );
+    const { props } = renderArea({ onRenameProfile });
+    openSam();
+    erase(3);
+    type('ash');
+    const handler = (id: string) => screen.UNSAFE_getAllByType(TouchableOpacity)
+      .find((one) => one.props.testID === id)!.props.onPress;
+    const save = handler('parent-area-name-save');
+    const headerBack = handler('parent-area-back-top');
+    const footerBack = handler('parent-area-back');
+    act(() => { save(); headerBack(); footerBack(); });
+    expect(props.onBack).not.toHaveBeenCalled();
+    expect(editorOpen()).toBe(true);
+    press('parent-area-back-top');
+    press('parent-area-back');
+    expect(props.onBack).not.toHaveBeenCalled();
+    await act(async () => { settle(false); });
+    press('parent-area-back-top');
+    expect(editorOpen()).toBe(false);
+    expect(props.onBack).not.toHaveBeenCalled();
+  });
 
   it('Cancel discards the draft, saves nothing and returns focus to Edit name', () => {
     const { onRenameProfile, onFamilyChange } = renderArea();

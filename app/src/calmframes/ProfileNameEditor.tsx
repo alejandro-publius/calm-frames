@@ -245,7 +245,7 @@ const ProfileNameEditor = ({
       shown,
       `${nextCase === 'upper' ? 'Capital' : 'Small'} ${letter}`,
       () => type(letter),
-      { preferred: first },
+      { preferred: first && !failure },
     );
   };
 

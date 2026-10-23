@@ -20,7 +20,7 @@
  * editor had no answer to wait for and the first test's `waitFor` on the
  * editor closing timed out.
  */
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
 import KidModeScreen from '../../src/screens/KidModeScreen';
 import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
@@ -49,9 +49,13 @@ const RECORD: SavedHousehold = {
 function memoryStorage(initial: SavedHousehold) {
   let disk = JSON.stringify(initial);
   let refusals = 0;
+  let pausedWrite: Promise<void> | undefined;
   return {
     getItem: jest.fn(async () => disk),
     setItem: jest.fn(async (_key: string, text: string) => {
+      const pending = pausedWrite;
+      pausedWrite = undefined;
+      if (pending) await pending;
       if (refusals > 0) {
         refusals -= 1;
         throw new Error('the disk said no');
@@ -61,6 +65,11 @@ function memoryStorage(initial: SavedHousehold) {
     read: () => JSON.parse(disk) as SavedHousehold,
     refuseNext: (count: number) => {
       refusals = count;
+    },
+    holdNextWrite: () => {
+      let release!: () => void;
+      pausedWrite = new Promise<void>((resolve) => { release = resolve; });
+      return release;
     },
   };
 }
@@ -110,9 +119,16 @@ describe('saving a kid\'s name through the route', () => {
     open(storage);
     await typeAshForSam();
     const writesBefore = storage.setItem.mock.calls.length;
+    const release = storage.holdNextWrite();
 
     press('kid-mode-parent-name-save');
-    await waitFor(() => expect(screen.queryByTestId('kid-mode-parent-name')).toBeNull());
+    // Observe the actual in-flight write, then flush its completion through
+    // React. Coverage overhead must not decide whether a timer sees success.
+    expect(screen.getByTestId('kid-mode-parent-name')).toBeTruthy();
+    expect(storage.read().family.profiles[1].name).toBe('Sam');
+    expect(storage.setItem.mock.calls.length).toBe(writesBefore + 1);
+    await act(async () => { release(); });
+    expect(screen.queryByTestId('kid-mode-parent-name')).toBeNull();
 
     // One write, holding one changed name.
     expect(storage.setItem.mock.calls.length).toBe(writesBefore + 1);

@@ -76,6 +76,7 @@ import {
   CHIME_ON_LABEL,
   CHIME_ROW_TITLE,
   CHIME_SECTION_TITLE,
+  CANCEL_NAME_LABEL,
   CHOSEN_WORD,
   CREDITS_LABEL,
   EDIT_NAME_LABEL,
@@ -482,6 +483,15 @@ const ParentAreaScreen = ({
     setRenameFailed(false);
     setRenameReturnFocus(true);
   };
+  const leaveParents = () => {
+    if (editingName) {
+      // Visible Back follows the same one-level cancellation as the remote.
+      // The ref also covers a Save and Back arriving before the next render.
+      if (!renamePendingRef.current && !saving) closeRename();
+      return;
+    }
+    onBack?.();
+  };
   const saveName = (name: string) => {
     if (
       !family ||
@@ -530,7 +540,7 @@ const ParentAreaScreen = ({
       testID={`${testID}-open`}
       style={styles.screen}
       contentContainerStyle={styles.content}>
-      <CalmPageHeader onBack={onBack} backTestID={`${testID}-back-top`} preferredBack={!extraReturnFocus && !renameReturnFocus} backDisabled={saving} />
+      <CalmPageHeader onBack={onBack ? leaveParents : undefined} backTestID={`${testID}-back-top`} preferredBack={!editingName && !extraReturnFocus && !renameReturnFocus} backDisabled={saving || renamePending} />
       <View style={styles.header}>
         <View style={styles.headerTitleRow}>
           <Text style={[styles.title, styles.headerTitle]} accessibilityRole="header">
@@ -990,10 +1000,10 @@ const ParentAreaScreen = ({
           {onBack ? (
             <View style={styles.button}>
               <CalmButton
-                disabled={saving || undefined}
+                disabled={saving || renamePending || undefined}
                 testID={`${testID}-back`}
-                label={BACK_TO_LIBRARY_LABEL}
-                onPress={onBack}
+                label={editingName ? CANCEL_NAME_LABEL : BACK_TO_LIBRARY_LABEL}
+                onPress={leaveParents}
               />
             </View>
           ) : null}

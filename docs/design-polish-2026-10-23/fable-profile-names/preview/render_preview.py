@@ -52,6 +52,7 @@ def main() -> int:
             folder = HERE / str(height)
             folder.mkdir(parents=True, exist_ok=True)
             page = browser.new_page(viewport={"width": width, "height": height}, device_scale_factor=1)
+            page.route("http**/*", lambda route: route.abort())
             for tree_file in trees:
                 tree = json.loads(tree_file.read_text())
                 page.set_content(
@@ -66,7 +67,7 @@ def main() -> int:
                 )
                 page.evaluate("document.fonts.ready")
 
-                def rows():
+                def rows(page=page):
                     found = page.locator("[data-testid]").evaluate_all(
                         "els => els.filter(e => e.dataset.testid).map(e => { const r = e.getBoundingClientRect(); "
                         "return {id: e.dataset.testid, x: r.x, y: r.y, width: r.width, height: r.height}; })"
