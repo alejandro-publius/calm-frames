@@ -85,7 +85,7 @@ it('offers three verified destinations with no unready Forest label', () => {
   const view = render(<KidHomeScreen titles={titles} onOpen={jest.fn()} />);
   expect(view.queryByText('Not ready to watch')).toBeNull();
   expect(view.getAllByTestId(/^kid-home-poster-prepared-/)).toHaveLength(3);
-  expect(view.UNSAFE_getAllByType(CoastalIsland).map(node => node.props.kind)).toEqual(['forest','coastal','sea-otters']);
+  expect(view.UNSAFE_getAllByType(CoastalIsland).map(node => node.props.kind)).toEqual(['coastal','mcway','sea-otters','forest']);
 });
 it.each(titles)('carries the selected destination motif into Details and static loading for $title.title', entry => {
   const presentation = titlePresentation(entry.title), kind = presentation.menuArt ?? presentation.art;

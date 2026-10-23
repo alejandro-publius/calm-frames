@@ -5,10 +5,11 @@
 /** Original layered vector scenery, shared by the map, Details and loading. */
 import React from 'react';
 import { G, Path, Ellipse, Rect } from '@amazon-devices/react-native-svg';
-export type IslandKind = 'coastal' | 'sea-otters' | 'forest';
+export type IslandKind = 'coastal' | 'mcway' | 'sea-otters' | 'forest';
 export const islandKind = (art?: string): IslandKind => art === 'sea-otters' || art === 'forest' ? art : 'coastal';
 const shores: Record<IslandKind, string> = {
   coastal: 'M-330 0L-285-65L-205-80L-155-120L-45-110L15-135L120-100L195-75L270-80L335-20L310 42L235 68L130 60L40 92L-65 80L-155 95L-245 60L-305 45Z',
+  mcway: 'M-330 0Q-330-90-220-100L-100-128L20-104Q140-135 240-75L330-15L306 45Q220 100 120 78Q20 116-80 85Q-200 108-285 56Z',
   'sea-otters': 'M-330-5Q-305-86-205-85Q-130-125-45-100Q65-130 145-90Q265-100 322-25Q350 30 285 65Q195 105 100 75Q20 110-75 85Q-175 110-250 60Q-340 50-330-5Z',
   forest: 'M-310 0Q-330-65-225-85Q-170-130-70-110Q20-150 100-105Q210-120 245-65Q330-55 305 20Q280 100 160 85Q40 120-55 95Q-180 120-215 75Q-300 80-310 0Z',
 };
@@ -28,6 +29,13 @@ function Pine({ x, y, size = 1 }: { x: number; y: number; size?: number }) {
  * where the card will be.
  */
 function Flanks({ kind }: { kind: IslandKind }) {
+  if (kind === 'mcway') return <G testID="island-landmarks-mcway">
+    <Path d="M-336 30L-332-112Q-300-142-272-112L-268 32Z" fill="#9CA99C" stroke="#385C59" strokeWidth="6" strokeLinejoin="round" />
+    <Path d="M-303-110Q-293-66-303-24L-300 32" fill="none" stroke="#386F70" strokeWidth="24" strokeLinecap="round" />
+    <Path d="M-303-110Q-293-66-303-24L-300 32" fill="none" stroke="#DCEFE0" strokeWidth="12" strokeLinecap="round" />
+    <Pine x={300} y={-10} size={0.45} />
+    <Ellipse cx="300" cy="38" rx="32" ry="20" fill="#B8BBA5" stroke="#385C59" strokeWidth="5" />
+  </G>;
   if (kind === 'coastal') return <G testID="island-landmarks-coastal">
     <Pine x={-300} y={-28} size={0.5} />
     <Path d="M-336 28Q-346-6-320-24Q-296-40-274-20Q-264-2-268 24Q-300 40-336 28Z" fill="#9CA99C" stroke="#385C59" strokeWidth="6" strokeLinejoin="round" />
@@ -51,14 +59,14 @@ function Flanks({ kind }: { kind: IslandKind }) {
   </G>;
 }
 
-export default function CoastalIsland({ kind, x, y, size = 1, onMap = false, underCard = false }: { kind: IslandKind; x: number; y: number; size?: number; /** One of three on the Home map, where a narrower ring keeps neighbours apart. */ onMap?: boolean; /** A Home card stands on it, so landmarks move to the sides. */ underCard?: boolean }) {
+export default function CoastalIsland({ kind, x, y, size = 1, onMap = false, underCard = false }: { kind: IslandKind; x: number; y: number; size?: number; /** A Home island, where a narrower ring keeps neighbours apart. */ onMap?: boolean; /** A Home card stands on it, so landmarks move to the sides. */ underCard?: boolean }) {
   const shore = shores[kind];
   return <G testID={`island-${kind}`} transform={`translate(${x} ${y}) scale(${size})`}>
     <Ellipse cy="46" rx={onMap ? 340 : 360} ry={onMap ? 110 : 116} fill="none" stroke="#95C9C0" strokeWidth="9" />
     <Path d={shore} transform="translate(0 32)" fill="#3D8584" />
     <Path d={shore} transform="translate(0 18)" fill="#A99571" stroke="#385C59" strokeWidth="5" />
     <Path d={shore} fill={kind === 'forest' ? '#BDD09A' : '#F1DCA8'} stroke="#385C59" strokeWidth="5" strokeLinejoin="round" />
-    {underCard ? <Flanks kind={kind} /> : kind === 'coastal' ? <>
+    {underCard ? <Flanks kind={kind} /> : kind === 'coastal' || kind === 'mcway' ? <>
       <Path d="M-295-20L-255-105L-195-120L-165-40L-95-75L-45-5L-90 38L-230 28Z M160 15L200-65L260-45L305 5L275 40Z" fill="#9CA99C" stroke="#385C59" strokeWidth="6" strokeLinejoin="round" />
       <Path d="M-255-105L-230-18L-165-40 M200-65L222 12L275 40" fill="none" stroke="#DCE0C9" strokeWidth="7" />
       <Pine x={-265} y={-45} size={0.7} />

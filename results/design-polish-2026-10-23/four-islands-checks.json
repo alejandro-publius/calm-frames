@@ -1,0 +1,89 @@
+{
+  "base": "fb7f48031d3ae587c8fba40422566c68a0a1f23f",
+  "frozen_canonical": "2cf54e0d168e58daedfde3f15407833d23af4e93",
+  "branch": "codex/design-polish-2026-10-23",
+  "change": "Four full cards on four separate Home islands; preserve approved visual pass.",
+  "source_sha256": {
+    "app/src/calmframes/CoastalIsland.tsx": "079e8642586beaee4fdf771acb5f299a396a3580d6bdaf1506aafbe2fc2cc006",
+    "app/src/calmframes/CoastalWorld.tsx": "625fa0649fdc1eb71c8bd970d9e0d1f63d8a9617b6b5671b95f4d3996c4b8161",
+    "app/src/calmframes/KidHomeScreen.tsx": "f3aa18abe53187aab88823d6c4a58ccfc174ef9ed42ef4c874af3278e8b8fc43",
+    "app/src/calmframes/homeIslands.ts": "54a7eb610b1a9a95bca1836f9a2fb6228b6b0a43cfcd0ead385e84225ee0636e",
+    "app/test/calmframes/coastalIslands.test.tsx": "dbd1d80c0c3bff3acd82fd374001bd3f919eb342384d89c2cabbc10781ad0bb9",
+    "app/test/calmframes/continuousScene.test.tsx": "b39d813f442022565e974251689c66b81c52724b2a16afce905bbade0924932a",
+    "app/test/calmframes/homeIslands.test.tsx": "4aa421f8211975196ba5bb8df3219d8104ea5cc292e456896e651258163f01c2",
+    "hook/src/engine/CoastalIsland.tsx": "8cc451dfb23bae1f3ddac594a4c40a45e2af9463b2ba66d2c3a781c9dfb2ce85",
+    "hook/src/engine/CoastalWorld.tsx": "185a3aecb3caf07709b6edd376fe14320b41c275c79b23fcc087365fc54cb7aa",
+    "hook/src/engine/homeIslands.ts": "428c2ff82b597b8dedaf2f26f7ffd1461d1357e583ae627b232e5aacc9061b0d",
+    "hook/src/mirror.json": "54262b0e95065957adad287069201efd79dcfe01e3269e43d26b2266bed79d6b"
+  },
+  "checks": {
+    "normal_typecheck": "passed",
+    "normal_lint": "passed; 104 existing source warnings and 4 existing test warnings",
+    "focused_regressions": {
+      "suites": 12,
+      "tests": 152,
+      "result": "passed",
+      "seconds": 21.59
+    },
+    "covered": [
+      "four cards with separate positions and island centers",
+      "no card/landmark/island/route/boat overlap",
+      "offline and profile-picker placement",
+      "distinct Acadia and McWay boat destinations",
+      "Acadia still-scene and McWay video dispatch",
+      "selection and return focus",
+      "reduced motion and screen-reader suppression of boat animation",
+      "text and focus contrast",
+      "normal hook mirror consistency"
+    ],
+    "render_dimensions": [
+      [
+        1920,
+        1080
+      ],
+      [
+        1280,
+        720
+      ]
+    ],
+    "native_capture": false
+  },
+  "logs": {
+    "regressions": {
+      "sha256": "bd2574bb24f9983e2e39762eb2f61bbc95355a3dde940b1354b88e3b87b9008a"
+    },
+    "typecheck": {
+      "sha256": "7f09368d1c1bbe040cbf5b34cf83957d985a877326c77aad71ab060fce233b31"
+    },
+    "lint": {
+      "sha256": "def44a238becca53feb679ac525c395296bef22fa79184cc1f18061ba753837d"
+    },
+    "focused": {
+      "sha256": "6a777cb45a9fd195b0cc642e611809b78c7265c20b565eeceaf17bb0bc648b9c"
+    }
+  },
+  "png_sha256": {
+    "after/1080/details.png": "d73ff4f30e6c68c6140ebde9692747eb2a3b36c8a2ab4d611b5b73b94630cb03",
+    "after/1080/forest.png": "2c93092a3f48ceedadced17520accb4a1516236d826d744de5dea3be83c55f73",
+    "after/1080/home.png": "257c1cd4bd52e25ae6860d901f559995492afcd60c3500846b9a37fb3b9d8c5a",
+    "after/1080/parents-locked.png": "6b9565aa75b122e8c99f315d57f8017200c2e416b1451db297dc919a469763d5",
+    "after/1080/parents-pending.png": "4869066e149a9b7d9bb9834c72d2f4991f5864d8b925e9a79eaae010f784b355",
+    "after/1080/parents-settings.png": "56a7ec90a1e7273111dc0b5a8492c2dd54d2a0cfd1fb4814499564d6d3c4b4dd",
+    "after/1080/profiles.png": "dcfe8eac820dfaff14c5d44239afe63a5089ed3986c6c1ef962fe27866596f8d",
+    "after/720/details.png": "cfc2fdbddf920316e28955a73379ea68194dbac2bad972982d3f37d8b27bdc6e",
+    "after/720/forest.png": "382b8936bc5ba269b62ee8887fe4f8b6cbbe71d7d69d3fdc0cd082881189e0c3",
+    "after/720/home.png": "38d57342c72a88af981af02975c868817089c4c9406ce0d072b74d2e97fcbd9c",
+    "after/720/parents-locked.png": "7d3bf7b7bf72be3243f144f88f324d0ddb025b4f1485560fcc788c7a6a30e8ad",
+    "after/720/parents-pending.png": "3a3504c5a0b355ad523ad5a14b28319e68d33471a5136d6d7fbcfcca44681f97",
+    "after/720/parents-settings.png": "6c8b32b56b56e2c7630df9460b65fa97d12375adcd67020754d3be0333c44ab8",
+    "after/720/profiles.png": "c0e7741bb98219d8f40cf6b43bbd2b9a5179b46ced03cb9e47d8399399da9238",
+    "before/1080/home.png": "6c58f086f547d3a67f0daa55ca419592fad6e6db9d05f1f7bbd92c01045e772f",
+    "before/720/home.png": "5409faeb840437900808724614fea93734043ae7463b88951ba427022b9c69e5"
+  },
+  "pending": [
+    "exact-source native spatial focus and layout",
+    "human visual and audiovisual acceptance"
+  ],
+  "no_push_or_merge": true,
+  "submitted_materials_unchanged": true
+}

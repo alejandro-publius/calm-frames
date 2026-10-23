@@ -8,10 +8,10 @@ import CoastalBoat from './CoastalBoat';
 import { DETAIL, HOME_ISLANDS, ISLAND_ORDER, shoreline } from './homeIslands';
 const ROUTE_Y = HOME_ISLANDS.BOAT.top + HOME_ISLANDS.BOAT.height / 2;
 /** The dashed route the boat follows, through the open water in front of the islands. */
-const [FIRST, MIDDLE, LAST] = ISLAND_ORDER.map(kind => HOME_ISLANDS.CENTERS[kind]);
-const ROUTE = `M${FIRST} ${ROUTE_Y}Q${(FIRST + MIDDLE) / 2} ${ROUTE_Y + 16} ${MIDDLE} ${ROUTE_Y}T${LAST} ${ROUTE_Y}`;
+const CENTERS = ISLAND_ORDER.map(kind => HOME_ISLANDS.CENTERS[kind]);
+const ROUTE = `M${CENTERS[0]} ${ROUTE_Y}` + CENTERS.slice(1).map((x, i) => `Q${(CENTERS[i] + x) / 2} ${ROUTE_Y + (i % 2 ? -16 : 16)} ${x} ${ROUTE_Y}`).join('');
 /** Small waves in open water: past the outer islands, and in front of them clear of the route. */
-const WATER_RIPPLES = [[16, 470], [1808, 470], [150, 700], [1660, 700]];
+const WATER_RIPPLES = [[8, 450], [1816, 450], [64, 700], [1760, 700]];
 export const WorldAppearance = React.createContext(false);
 export const WORLD = CALM_WORLD;
 export default function CoastalWorld({ detail = false, destination = 'coastal', showBoat = false, motionEnabled = false, active = true, cardKinds = [] }: { detail?: boolean; destination?: IslandKind; showBoat?: boolean; motionEnabled?: boolean; active?: boolean; /** Islands a card or photograph stands on; their landmarks stand beside it. */ cardKinds?: IslandKind[] }) {
@@ -33,7 +33,7 @@ export default function CoastalWorld({ detail = false, destination = 'coastal', 
         <Path testID="home-sand" d={shoreline(HOME_ISLANDS.SAND_EDGE + HOME_ISLANDS.SAND_STEP, true)} fill="#F7EACF" />
         <Path testID="home-route" d={ROUTE} fill="none" stroke="#386F70" strokeWidth="24" strokeLinecap="round" />
         <Path d={ROUTE} fill="none" stroke="#F7EACF" strokeWidth="9" strokeDasharray="5 30" strokeLinecap="round" />
-        {(['forest', 'coastal', 'sea-otters'] as const).map(kind => <CoastalIsland key={kind} kind={kind} x={HOME_ISLANDS.CENTERS[kind]} y={HOME_ISLANDS.ISLAND_Y} size={HOME_ISLANDS.ISLAND_SCALE} onMap underCard={cardKinds.includes(kind)} />)}
+        {ISLAND_ORDER.map(kind => <CoastalIsland key={kind} kind={kind} x={HOME_ISLANDS.CENTERS[kind]} y={HOME_ISLANDS.ISLAND_Y} size={HOME_ISLANDS.ISLAND_SCALE} onMap underCard={cardKinds.includes(kind)} />)}
         {WATER_RIPPLES.map(([x, y]) => <Path key={x} testID="home-ripple" d={`M${x} ${y}q24 18 48 0t48 0`} fill="none" stroke="#CEE5D5" strokeWidth="7" strokeLinecap="round" />)}
       </>}
     </Svg>

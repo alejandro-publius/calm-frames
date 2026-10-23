@@ -2,9 +2,8 @@ import { ambientArtworkFor } from './AmbientScene';
 import React from 'react';
 import Svg, { Path } from '@amazon-devices/react-native-svg';
 import CoastalWorld, { WorldAppearance, WORLD } from './CoastalWorld';
-import { islandKind } from './CoastalIsland';
-import { ENVIRONMENTS, environmentHeadingBox, HOME_ISLANDS, ISLAND_ORDER, IslandSlotKind, islandChoiceBox, ScreenBox } from './homeIslands';
-import { continuousScenePicture } from './continuousScene';
+import { ENVIRONMENTS, environmentHeadingBox, HOME_ISLANDS, ISLAND_ORDER, IslandSlotKind, islandCardBox, ScreenBox } from './homeIslands';
+import { continuousScenePicture, MCWAY_SOURCE_SHA256 } from './continuousScene';
 import TouchableOpacity from './CalmTouchable';
 import {
   BackHandler,
@@ -171,10 +170,16 @@ const KidHomeScreen = ({
   const [selectedId, setSelectedId] = React.useState(selectedTitleId ?? returnFocusId);
   const featured = listed.find((entry) => entry.title.id === selectedId && !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID) ?? listed.find((entry) => titlePresentation(entry.title).action === 'Watch now') ?? listed[0];
   const mainStories = listed.filter((entry) => !isBundledBenignStory(entry.title) && entry.title.id !== OFFLINE_TITLE_ID);
-  // Keep the playable island order aligned with the map: Ocean (Acadia, Sea Otters), then Forest.
-  const islandOrder = (entry: CheckedTitle) => {
+  // Keep one destination per card. The approved five-minute coast has its own
+  // slot; unrelated editions do not inherit it from a display name.
+  const islandOf = (entry: CheckedTitle): IslandSlotKind | undefined => {
     const art = titlePresentation(entry.title);
-    return ISLAND_ORDER.indexOf(art.menuArt ?? 'coastal');
+    return entry.title.sha256 === MCWAY_SOURCE_SHA256 ? 'mcway'
+      : art.menuArt ?? (art.art === 'coastal' ? 'coastal' : undefined);
+  };
+  // Acadia, McWay Falls, Sea otters, then Forest.
+  const islandOrder = (entry: CheckedTitle) => {
+    return ISLAND_ORDER.indexOf(islandOf(entry) ?? 'coastal');
   };
   mainStories.sort((a, b) => islandOrder(a) - islandOrder(b));
   const hasMainStory = mainStories.length > 0;
@@ -190,13 +195,9 @@ const KidHomeScreen = ({
   // Every main video with an island of its own gets the island map, where
   // each card stands on its island and every position comes from
   // homeIslands.ts. Anything else keeps the flowing shelf.
-  const islandOf = (entry: CheckedTitle): IslandSlotKind | undefined => {
-    const art = titlePresentation(entry.title);
-    return art.menuArt ?? (art.art === 'coastal' ? 'coastal' : undefined);
-  };
   const islandKinds = mainStories.map(islandOf);
   const islandHome = !showIntroduction && hasMainStory && islandKinds.every(Boolean) &&
-    islandKinds.every(kind => islandKinds.filter(candidate => candidate === kind).length <= (kind === 'coastal' ? 2 : 1));
+    new Set(islandKinds).size === islandKinds.length;
   // Watching is the primary action. Unavailable titles stay in Parents.
   const ambient = Boolean(onAmbient && featured && ambientArtworkFor(featured));
   // One verb for the main action, the one How it works names. A still scene
@@ -297,8 +298,6 @@ const KidHomeScreen = ({
     </View>;
   });
   const poster = (entry: CheckedTitle) => {
-                const siblings = otherStories.filter(candidate => islandOf(candidate) === islandOf(entry));
-                const split = islandHome && siblings.length === 2;
                 const focused = focusedId === entry.title.id;
                 const selected = featured?.title.id === entry.title.id;
                 const label = titlePresentation(entry.title);
@@ -317,19 +316,19 @@ const KidHomeScreen = ({
                       feedback.confirm();
                     }
                   }}
-                  style={[styles.poster, islandHome ? [styles.islandCard, placed(islandChoiceBox(islandOf(entry)!, siblings.indexOf(entry), siblings.length))] : null, split ? styles.splitCard : null, selected ? styles.posterSelected : null, focused ? styles.posterFocused : null]}>
-                  <Image source={continuousScenePicture(entry.title) ?? (!label.menuArt && !label.art && shelfPoster(entry) ? { uri: shelfPoster(entry) } : filmStill(label.menuArt ?? label.art))} style={[styles.filmStill, split ? styles.splitPicture : null]} resizeMode="cover" fadeDuration={0} testID={`${testID}-poster-image-${entry.title.id}`} accessible={false} />
-                  {selected && !split ? <View testID={`${testID}-selected-${entry.title.id}`} style={styles.selectionMark} pointerEvents="none" accessible={false}><Svg width={scale(32)} height={scale(32)} viewBox="0 0 32 32"><Path d="M6 16L13 23L27 8" fill="none" stroke={WORLD.TEXT} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" /></Svg></View> : null}
-                  <View style={[styles.posterCopy, split ? styles.splitCopy : null]}>
-                  <Text style={[styles.posterTitle, split ? styles.splitTitle : null, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
-                  {label.kind ? <Text style={[styles.posterQualifier, split ? styles.splitQualifier : null]} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{onAmbient && ambientArtworkFor(entry) ? 'Still scene' : label.selectorMeta ?? label.kind}</Text> : null}
+                  style={[styles.poster, islandHome ? [styles.islandCard, placed(islandCardBox(islandOf(entry)!))] : null, selected ? styles.posterSelected : null, focused ? styles.posterFocused : null]}>
+                  <Image source={continuousScenePicture(entry.title) ?? (!label.menuArt && !label.art && shelfPoster(entry) ? { uri: shelfPoster(entry) } : filmStill(label.menuArt ?? label.art))} style={styles.filmStill} resizeMode="cover" fadeDuration={0} testID={`${testID}-poster-image-${entry.title.id}`} accessible={false} />
+                  {selected ? <View testID={`${testID}-selected-${entry.title.id}`} style={styles.selectionMark} pointerEvents="none" accessible={false}><Svg width={scale(32)} height={scale(32)} viewBox="0 0 32 32"><Path d="M6 16L13 23L27 8" fill="none" stroke={WORLD.TEXT} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" /></Svg></View> : null}
+                  <View style={styles.posterCopy}>
+                  <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
+                  {label.kind ? <Text style={styles.posterQualifier} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{onAmbient && ambientArtworkFor(entry) ? 'Still scene' : label.selectorMeta ?? label.kind}</Text> : null}
                   </View>
                 </TouchableOpacity>;
               };
 
   return (
     <WorldAppearance.Provider value={!empty && !showIntroduction}><View testID={testID} style={[styles.screen, !empty && !showIntroduction && { backgroundColor: WORLD.BACKGROUND }]}>
-      {!empty && !showIntroduction ? <CoastalWorld destination={islandKind(feature?.menuArt ?? feature?.art)} cardKinds={cardKinds} showBoat={feature?.art === 'coastal' || Boolean(feature?.menuArt)} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
+      {!empty && !showIntroduction ? <CoastalWorld destination={featured ? islandOf(featured) ?? 'coastal' : 'coastal'} cardKinds={cardKinds} showBoat={feature?.art === 'coastal' || Boolean(feature?.menuArt)} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
       <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
           {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? SAVING_CHANGES : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
             disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
@@ -408,12 +407,6 @@ const styles = StyleSheet.create({
   islandHeading: { flexDirection: 'row', gap: scale(CALM_SPACE.TIGHT), alignItems: 'center', justifyContent: 'center' },
   islandHero: { alignItems: 'flex-start', justifyContent: 'flex-end' },
   islandCard: { minHeight: undefined, justifyContent: 'flex-start' },
-  splitCard: { flexDirection: 'row', alignItems: 'center', gap: scale(12) },
-  splitPicture: { width: scale(88), height: scale(104) },
-  splitCopy: { flex: 1, paddingTop: 0 },
-  splitTitle: { fontSize: scale(32), lineHeight: scale(40) },
-  // Half a card is still read from the sofa: the second line keeps the 32 unit floor.
-  splitQualifier: { fontSize: scale(32), lineHeight: scale(40) },
   pickerPanel: { padding: scale(24), paddingBottom: 0, borderRadius: scale(20), borderWidth: scale(FOCUS_RING_WIDTH), borderColor: WORLD.BORDER, backgroundColor: WORLD.SURFACE },
   posterTitle: { ...CALM_TEXT.section, fontSize: scale(38), lineHeight: scale(48), color: WORLD.TEXT },
   posterQualifier: { ...CALM_TEXT.supporting, color: WORLD.TEXT_DIM },

@@ -5,6 +5,23 @@ source `2cf54e0d168e58daedfde3f15407833d23af4e93`. The earlier feedback change
 is preserved at `41bdeb94ca1c3e8cceabafd821f141587f77c202`; the broader visual
 pass follows it on the same local branch. No merge, push or publication.
 
+## Four-island follow-up
+
+The owner approved the visual direction and requested a separate Acadia island.
+Home now shows Acadia, McWay Falls, Sea otters and Forest as four full cards on
+four islands. The stacked-card layout is removed. Acadia retains its lighthouse;
+McWay has a separate cove silhouette and static waterfall motif. The boat follows
+each title independently. Acadia still launches its still scene; McWay still
+launches its approved five-minute video. Media, signatures and player logic did
+not change. The approved Details and Parents layouts remain implemented.
+
+The latest export uses direct PNGs at 1080p and 720p because the chat viewer had
+trouble with both the original linked gallery and the larger embedded HTML.
+These are browser approximations of native component trees. Native D-pad review
+remains pending. See [four-islands-checks.json](../../results/design-polish-2026-10-23/four-islands-checks.json)
+for exact source hashes, checks and preview hashes. The earlier gallery below
+is historical evidence of the preceding three-island layout.
+
 ## Visible changes
 
 - **Home:** a larger wordmark, larger scene photographs, lighter card edges and

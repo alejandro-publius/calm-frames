@@ -47,9 +47,9 @@ const CLEARANCE = 4;
 
 const islandOf = (entry: CheckedTitle): IslandSlotKind | undefined => {
   const art = titlePresentation(entry.title);
-  return art.menuArt ?? (art.art === 'coastal' ? 'coastal' : undefined);
+  return entry.title.sha256 === MCWAY_SOURCE_SHA256 ? 'mcway' : art.menuArt ?? (art.art === 'coastal' ? 'coastal' : undefined);
 };
-const consumer = checkedShelf().filter(entry => entry.title.sha256 !== MCWAY_SOURCE_SHA256).filter((entry) => islandOf(entry));
+const consumer = checkedShelf().filter((entry) => islandOf(entry));
 const profiles = [{ id: 'everyone', name: 'Everyone' }] as never;
 
 const toBox = ({ left, top, width, height }: ScreenBox): Box => ({ left, top, right: left + width, bottom: top + height });
@@ -173,7 +173,7 @@ const islandBox = (measured: ReturnType<typeof measureHome>, kind: IslandSlotKin
 const ringBox = (measured: ReturnType<typeof measureHome>, kind: IslandSlotKind) =>
   measured.inGroup(`island-${kind}`).find((shape) => shape.node.type === 'Ellipse' && shape.groups[shape.groups.length - 1] === `island-${kind}`)!.box;
 
-describe('the island Home with all three destinations', () => {
+describe('the island Home with all four destinations', () => {
   const measured = measureHome(<KidHomeScreen titles={consumer} onOpen={jest.fn()} onPlay={jest.fn()} onOpenParentArea={jest.fn()} profiles={profiles} activeProfileId="everyone" onChooseProfile={jest.fn()} />);
   const sky = measured.band('home-sky');
   const sandEdge = measured.band('home-sand-edge');
@@ -185,7 +185,7 @@ describe('the island Home with all three destinations', () => {
   const read = [header, ...headings.map((one) => one.box), hero, ...cards.map((card) => card.box)];
 
   it('places every card on its own island, at the box homeIslands.ts gives it', () => {
-    expect(cards).toHaveLength(3);
+    expect(cards).toHaveLength(4);
     for (const { node, box } of cards) {
       const entry = consumer.find((one) => node.props.testID === `kid-home-poster-${one.title.id}`)!;
       const kind = islandOf(entry)!;
@@ -196,7 +196,7 @@ describe('the island Home with all three destinations', () => {
     }
   });
 
-  it('names each environment once, Ocean over Acadia and Sea Otters and Forest over Forest, on the cream sky', () => {
+  it('names each environment once, Ocean over Acadia, McWay Falls and Sea Otters and Forest over Forest, on the cream sky', () => {
     expect(header.bottom + CLEARANCE).toBeLessThanOrEqual(sky.top);
     expect(headings.map((one) => String(byID(measured.tree, `kid-home-environment-${one.name.toLowerCase()}-name`).children!.join('')))).toEqual(['Ocean', 'Forest']);
     for (const { name, box } of headings) {
@@ -216,10 +216,10 @@ describe('the island Home with all three destinations', () => {
     expect(find(measured.tree, (n) => n.props.testID === 'kid-home-heading')).toHaveLength(0);
   });
 
-  it('lays the islands out as the environments read: Acadia, Sea Otters, then Forest', () => {
+  it('lays the islands out as the environments read: Acadia, McWay Falls, Sea Otters, then Forest', () => {
     const order = [...cards].sort((a, b) => a.box.left - b.box.left)
       .map((card) => islandOf(consumer.find((one) => card.node.props.testID === `kid-home-poster-${one.title.id}`)!));
-    expect(order).toEqual(['coastal', 'sea-otters', 'forest']);
+    expect(order).toEqual(['coastal', 'mcway', 'sea-otters', 'forest']);
     expect(ENVIRONMENTS.flatMap((one) => one.kinds)).toEqual(ISLAND_ORDER);
   });
 
@@ -236,7 +236,7 @@ describe('the island Home with all three destinations', () => {
       const lines = find(card.node, (n) => n.type === 'Text').map((n) => String(n.children!.join('')));
       expect(lines).toHaveLength(2);
       expect(lines[0].length).toBeLessThanOrEqual(12);
-      expect(lines[1]).toMatch(/^(Silent|Nature audio) · \d+ sec$/);
+      expect(lines[1]).toMatch(/^(?:(?:Silent|Nature audio) · \d+ sec|5 min)$/);
     }
   });
 
@@ -429,7 +429,7 @@ it('keeps the flowing shelf for a shelf whose videos are not all islands', () =>
   expect(islands.getByTestId('kid-home-islands')).toBeTruthy();
 });
 
-describe.each(ISLAND_ORDER)('Details and its opening for the %s island', (kind) => {
+describe.each(['coastal', 'sea-otters', 'forest'] as const)('Details and its opening for the %s island', (kind) => {
   const entry = consumer.find((one) => islandOf(one) === kind)!;
   const header: Box = { left: CALM_SPACE.SAFE_X, top: CALM_SPACE.SAFE_Y, right: 1920 - CALM_SPACE.SAFE_X, bottom: HOME_ISLANDS.HEADER_BOTTOM };
   const scenery = (measured: ReturnType<typeof measureHome>) => {

@@ -54,11 +54,19 @@ test('five-minute scene is explicit playback while old still choices remain avai
   const coast = others.find(entry => titlePresentation(entry.title).art === 'coastal')!;
   const one = StyleSheet.flatten(view.getByTestId(`kid-home-poster-${mcway.title.id}`).props.style);
   const two = StyleSheet.flatten(view.getByTestId(`kid-home-poster-${coast.title.id}`).props.style);
-  expect(one.top + one.height).toBeLessThan(two.top);
+  expect(two.left + two.width).toBeLessThan(one.left);
+  expect(one.top).toBe(two.top);
+  expect(one.height).toBe(two.height);
+  expect(view.getByTestId('coastal-boat-mcway')).toBeTruthy();
   expect(play).not.toHaveBeenCalled();
   fireEvent.press(view.getByTestId('kid-home-watch'));
   expect(play).toHaveBeenCalledWith(mcway);
   expect(still).not.toHaveBeenCalled();
+  fireEvent(view.getByTestId(`kid-home-poster-${coast.title.id}`), 'focus');
+  expect(view.getByTestId('coastal-boat-coastal')).toBeTruthy();
+  fireEvent.press(view.getByTestId('kid-home-watch'));
+  expect(still).toHaveBeenCalledWith(coast);
+  expect(play).toHaveBeenCalledTimes(1);
   for (const entry of others) expect(view.getByTestId(`kid-home-poster-${entry.title.id}`)).toBeTruthy();
 });
 

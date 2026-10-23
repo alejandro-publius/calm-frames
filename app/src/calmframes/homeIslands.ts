@@ -29,14 +29,14 @@
  */
 import { CALM_FLOW, CALM_SPACE } from './calmStyles';
 
-export type IslandSlotKind = 'coastal' | 'forest' | 'sea-otters';
+export type IslandSlotKind = 'coastal' | 'mcway' | 'forest' | 'sea-otters';
 
-/** Left to right, the order the islands sit in on the map: the two Ocean islands together, then Forest. */
-export const ISLAND_ORDER: IslandSlotKind[] = ['coastal', 'sea-otters', 'forest'];
+/** Left to right: each Ocean title has its own island, then Forest. */
+export const ISLAND_ORDER: IslandSlotKind[] = ['coastal', 'mcway', 'sea-otters', 'forest'];
 
 /** The environments Home names, and the islands in each. One name per environment everywhere. */
 export const ENVIRONMENTS: Array<{ name: 'Ocean' | 'Forest'; kinds: IslandSlotKind[] }> = [
-  { name: 'Ocean', kinds: ['coastal', 'sea-otters'] },
+  { name: 'Ocean', kinds: ['coastal', 'mcway', 'sea-otters'] },
   { name: 'Forest', kinds: ['forest'] },
 ];
 
@@ -54,10 +54,10 @@ export const HOME_ISLANDS = {
   SAND_STEP: 22,
   WAVE_AMPLITUDE: 10,
   /** Island centres across the screen, wide enough apart that neighbouring islands never meet. */
-  CENTERS: { coastal: 400, 'sea-otters': 960, forest: 1520 } as Record<IslandSlotKind, number>,
-  ISLAND_Y: 536,
-  ISLAND_SCALE: 0.8,
-  CARD: { top: 292, width: 400, height: 310 },
+  CENTERS: { coastal: 276, mcway: 732, 'sea-otters': 1188, forest: 1644 } as Record<IslandSlotKind, number>,
+  ISLAND_Y: 552,
+  ISLAND_SCALE: 0.64,
+  CARD: { top: 292, width: 320, height: 310 },
   BOAT: { top: 660, width: 72, height: 62 },
   HERO: { left: CALM_SPACE.SAFE_X, top: 798, width: CALM_FLOW.HERO_TITLE_WIDTH, height: 228 },
   /** Watch and Details alone, centred in the sand, when the cards already name every video. */
@@ -65,7 +65,7 @@ export const HOME_ISLANDS = {
   /** Leave the right half free when a service notice also needs the sand. */
   OFFLINE_ACTIONS: { left: CALM_SPACE.SAFE_X, top: 868, width: CALM_FLOW.HERO_TITLE_WIDTH, height: 88 },
   /** Who is watching takes the row of cards while it is open, from the first card's left to the last card's right. */
-  PICKER: { left: 400 - 200, top: 292, width: 1520 - 400 + 400, height: 310 },
+  PICKER: { left: 116, top: 292, width: 1688, height: 310 },
   /** The service notice takes the empty right half of the sand, so it never moves the map. */
   NOTICE: { left: 1000, top: 798, width: 1920 - CALM_SPACE.SAFE_X - 1000, height: 228 },
 } as const;
@@ -100,14 +100,6 @@ export function islandCenter(kind: IslandSlotKind): { x: number; y: number } {
 export function islandCardBox(kind: IslandSlotKind): ScreenBox {
   const { top, width, height } = HOME_ISLANDS.CARD;
   return { left: HOME_ISLANDS.CENTERS[kind] - width / 2, top, width, height };
-}
-
-/** Two coast choices share their island without covering each other. */
-export function islandChoiceBox(kind: IslandSlotKind, index: number, count: number): ScreenBox {
-  const box = islandCardBox(kind);
-  if (count !== 2) return box;
-  const height = (box.height - 16) / 2;
-  return { ...box, top: box.top + index * (height + 16), height };
 }
 
 /** An environment's heading, centred over the cards it names, in the heading band. */
