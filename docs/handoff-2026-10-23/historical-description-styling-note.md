@@ -2,8 +2,8 @@
 
 These are separate local drafts. They do not modify the existing Devpost form, any published YouTube description, or the demo files owned by the active video-review task.
 
-- [Devpost story](DEVPOST_EMOJI_DRAFT.md): semantic emoji headings, short paragraphs, an arrow-led user flow, implementation, scoped results, limits, future work and credits.
-- [YouTube description](YOUTUBE_EMOJI_DRAFT.md): a compact pitch, concrete app flow, core idea, stack, evidence, repository access note and full attribution. No invented timestamps or public video link.
+- [Devpost story](../submission/description-drafts/DEVPOST_EMOJI_DRAFT.md): semantic emoji headings, short paragraphs, an arrow-led user flow, implementation, scoped results, limits, future work and credits.
+- [YouTube description](../submission/description-drafts/YOUTUBE_EMOJI_DRAFT.md): a compact pitch, concrete app flow, core idea, stack, evidence, repository access note and full attribution. No invented timestamps or public video link.
 
 ## Reference inspected
 
@@ -17,4 +17,4 @@ The Calm Frames drafts combine that organization with the user's requested emoji
 
 Confirm the final edited video and sound, remove the editorial notes, and align any demo-specific sentence with the footage that actually ships. The required personal/team facts and final legal acceptance are separate outstanding submission steps. Do not fill those gaps with project copy. No submission or public demo completion is asserted.
 
-Evidence: published candidate `63e20d5`; installed app `60c3bbb`; [native capture/build record](../../presentation/README.md); [McWay source checks](../../../results/mcway-activation-2026-10-21/verification.json).
+Evidence: published candidate `63e20d5`; installed app `60c3bbb`; [native capture/build record](../presentation/README.md); [McWay source checks](../../results/mcway-activation-2026-10-21/verification.json).

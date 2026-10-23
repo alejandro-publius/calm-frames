@@ -65,7 +65,7 @@ The installed app uses Vega's W3C media player. The remaining rows distinguish l
 
 | Stage | Entry point | Responsibility |
 |---|---|---|
-| Native playback | `new VideoPlayer()` [source](app/src/utils/VideoHandler.ts#L153) | Create the Vega player |
+| Native playback | `new VideoPlayer()` [source](app/src/utils/VideoHandler.ts#L157) | Create the Vega player |
 | Runtime map | `verifyFlashMap` [source](app/src/calmframes/flashMap.ts#L217) | Check signed map identity and validity |
 | Runtime catalog | `createPackagedLibrary` [source](app/src/calmframes/packagedLibrary.ts#L218) | Bind the packaged route and evidence |
 | Runtime coverage | `useFlashGuard` [source](app/src/calmframes/useFlashGuard.ts#L159) | Coordinate cover state and player clock |
