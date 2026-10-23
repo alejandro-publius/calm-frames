@@ -32,6 +32,12 @@ ALLOWED = {
         "by analysis; its palette changed on Oct 10 (eb20225) and one annotation on Oct 11 "
         "(561ad28)"
     ),
+    "flashmap/src/flashmap/decode.py": (
+        "one check after the last frame (Oct 22, eff3ca4) refuses a file that decodes fewer "
+        "frames than it declares. It changes no decoded frame, so it can only turn a short "
+        "decode into an error, and test_no_measured_clip_decoded_short shows that none of the "
+        "measured clips decoded short"
+    ),
 }
 
 
@@ -64,6 +70,40 @@ def test_every_allowance_is_still_needed() -> None:
     changed = changed_sources(recorded_sources(), REPO)
     stale = [name for name in ALLOWED if name not in changed]
     assert stale == [], f"these allowances no longer match a changed file; remove them: {stale}"
+
+
+def short_decodes(rows: list[dict]) -> list[str]:
+    """Rows the decode completeness check would have refused: an error, or fewer frames read than written."""
+    return [
+        row["clip_id"]
+        for row in rows
+        if "error" in row or row["flashmap"]["frame_count"] < row["encode"]["frames_written"]
+    ]
+
+
+def test_no_measured_clip_decoded_short() -> None:
+    """Why decode.py may differ from the record.
+
+    The completeness check added on Oct 22 raises only when a file decodes fewer
+    frames than it declares, and every clip behind the published numbers decoded
+    every frame its encoder wrote. So the current decode.py reads the same frames
+    from each of those clips and reaches the same rows.
+    """
+    rows = json.loads(RECORD.read_text())["rows"]
+    assert len(rows) == 3000
+    assert short_decodes(rows) == []
+
+
+def test_a_short_decode_is_named() -> None:
+    """Seen to fail on purpose, Oct 23 2026: with the comparison loosened to <= this named the
+    clean row as well, and test_no_measured_clip_decoded_short named every measured row."""
+    rows = [
+        {"clip_id": "clean", "flashmap": {"frame_count": 90}, "encode": {"frames_written": 90}},
+        {"clip_id": "short", "flashmap": {"frame_count": 60}, "encode": {"frames_written": 90}},
+        {"clip_id": "failed", "error": "decode", "encode": {"frames_written": 90}},
+        {"clip_id": "extra", "flashmap": {"frame_count": 91}, "encode": {"frames_written": 90}},
+    ]
+    assert short_decodes(rows) == ["short", "failed"]
 
 
 def test_a_changed_file_is_named(tmp_path: Path) -> None:
