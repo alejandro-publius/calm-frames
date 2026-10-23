@@ -1,0 +1,125 @@
+{
+  "local_only": true,
+  "cloud_availability_implied": false,
+  "new_skills_available": "next turn",
+  "items": [
+    {
+      "name": "accessibility-review",
+      "status": "installed local Codex portable skill",
+      "path": "/Users/alexvintera/.codex/skills/accessibility-review/SKILL.md",
+      "sha256": "0535a56e6832f49959388564166fcf25e15b3fc5daf824744a3eb88ee3a84f87",
+      "origin": "https://github.com/anthropics/knowledge-work-plugins/tree/main/design",
+      "executable_hooks_installed": false
+    },
+    {
+      "name": "design-critique",
+      "status": "installed local Codex portable skill",
+      "path": "/Users/alexvintera/.codex/skills/design-critique/SKILL.md",
+      "sha256": "2783817f3355592c2007c55e0ebf0bfeded7ff977bf1f420f1646c819248e9ad",
+      "origin": "https://github.com/anthropics/knowledge-work-plugins/tree/main/design",
+      "executable_hooks_installed": false
+    },
+    {
+      "name": "design-system",
+      "status": "installed local Codex portable skill",
+      "path": "/Users/alexvintera/.codex/skills/design-system/SKILL.md",
+      "sha256": "a3e80db58f7cb17b084a7b40e5e7d738714106a5f2ca8f67ba5d18f894c388ac",
+      "origin": "https://github.com/anthropics/knowledge-work-plugins/tree/main/design",
+      "executable_hooks_installed": false
+    },
+    {
+      "name": "design-handoff",
+      "status": "installed local Codex portable skill",
+      "path": "/Users/alexvintera/.codex/skills/design-handoff/SKILL.md",
+      "sha256": "bb11bb6bf6afd04050d30050af852a7f61afd9966f5be40ee81fba0af249f925",
+      "origin": "https://github.com/anthropics/knowledge-work-plugins/tree/main/design",
+      "executable_hooks_installed": false
+    },
+    {
+      "name": "ux-copy",
+      "status": "installed local Codex portable skill",
+      "path": "/Users/alexvintera/.codex/skills/ux-copy/SKILL.md",
+      "sha256": "b38daf15530fd3dc7ac4e8646cad392bb3122eba132665c1e0aa2d00b802ea1f",
+      "origin": "https://github.com/anthropics/knowledge-work-plugins/tree/main/design",
+      "executable_hooks_installed": false
+    },
+    {
+      "name": "user-research",
+      "status": "installed local Codex portable skill",
+      "path": "/Users/alexvintera/.codex/skills/user-research/SKILL.md",
+      "sha256": "fa18fc13d0f44aa869102962ef9466417ade726d659465195a40fbcf08cee156",
+      "origin": "https://github.com/anthropics/knowledge-work-plugins/tree/main/design",
+      "executable_hooks_installed": false
+    },
+    {
+      "name": "research-synthesis",
+      "status": "installed local Codex portable skill",
+      "path": "/Users/alexvintera/.codex/skills/research-synthesis/SKILL.md",
+      "sha256": "53d3d82018960f4f6645052ff6c0b90f5687889c6fb59d4b5a34698eb0ec80a9",
+      "origin": "https://github.com/anthropics/knowledge-work-plugins/tree/main/design",
+      "executable_hooks_installed": false
+    },
+    {
+      "name": "frontend-design",
+      "status": "installed local Codex portable skill",
+      "path": "/Users/alexvintera/.codex/skills/frontend-design/SKILL.md",
+      "sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+      "origin": "https://github.com/anthropics/claude-plugins-public/tree/main/plugins/frontend-design",
+      "executable_hooks_installed": false
+    },
+    {
+      "name": "design-taste-frontend",
+      "status": "not activated; only trashed local copy found",
+      "path": "/Users/alexvintera/.claude/skills/.trash/1792711959870-84076-QCAzsG/design-taste-frontend/SKILL.md",
+      "declared_upstream_not_independently_matched": null,
+      "blocker": "Needs verified exact source and bounded third-party installation approval; no executable/hook run. Trashed Claude adaptations are not assumed to equal upstream.",
+      "denied": false
+    },
+    {
+      "name": "image-to-code",
+      "status": "not activated; only trashed local copy found",
+      "path": "/Users/alexvintera/.claude/skills/.trash/1792711959870-84076-VufMvm/image-to-code/SKILL.md",
+      "declared_upstream_not_independently_matched": "https://github.com/Leonxlnx/taste-skill",
+      "blocker": "Needs verified exact source and bounded third-party installation approval; no executable/hook run. Trashed Claude adaptations are not assumed to equal upstream.",
+      "denied": false
+    },
+    {
+      "name": "awesome-design-md",
+      "status": "not activated; only trashed local copy found",
+      "path": "/Users/alexvintera/.claude/skills/.trash/1792711959870-84076-lodA0n/awesome-design-md/SKILL.md",
+      "declared_upstream_not_independently_matched": "https://github.com/VoltAgent/awesome-design-md",
+      "blocker": "Needs verified exact source and bounded third-party installation approval; no executable/hook run. Trashed Claude adaptations are not assumed to equal upstream.",
+      "denied": false
+    },
+    {
+      "name": "web-design-guidelines",
+      "status": "not activated; only trashed local copy found",
+      "path": "/Users/alexvintera/.claude/skills/.trash/1792711959870-84076-RSvNUt/web-design-guidelines/SKILL.md",
+      "declared_upstream_not_independently_matched": "https://github.com/vercel-labs/agent-skills",
+      "blocker": "Needs verified exact source and bounded third-party installation approval; no executable/hook run. Trashed Claude adaptations are not assumed to equal upstream.",
+      "denied": false
+    },
+    {
+      "name": "playwright-cli",
+      "status": "not activated; only trashed local copy found",
+      "path": "/Users/alexvintera/.claude/skills/.trash/1792711959870-84076-9juLZB/playwright-cli/SKILL.md",
+      "declared_upstream_not_independently_matched": "https://github.com/microsoft/playwright-cli",
+      "blocker": "Needs verified exact source and bounded third-party installation approval; no executable/hook run. Trashed Claude adaptations are not assumed to equal upstream.",
+      "denied": false
+    },
+    {
+      "name": "adhd",
+      "status": "not activated; only trashed local copy found",
+      "path": "/Users/alexvintera/.claude/skills/.trash/1792711959870-84076-3F102C/adhd/SKILL.md",
+      "declared_upstream_not_independently_matched": "https://github.com/UditAkhourii/adhd",
+      "blocker": "Needs verified exact source and bounded third-party installation approval; no executable/hook run. Trashed Claude adaptations are not assumed to equal upstream.",
+      "denied": false
+    },
+    {
+      "name": "cowork-plugin-management",
+      "status": "already available in local Codex plugin catalog; no duplicate installation",
+      "path": "/Users/alexvintera/.codex/plugins/cache/claude-cowork/cowork-plugin-management/0.2.2",
+      "limitations": "Cowork-specific runtime/output paths do not become Codex features merely by loading text."
+    }
+  ]
+}
