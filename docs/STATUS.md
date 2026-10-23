@@ -1792,3 +1792,11 @@ Implemented in calm-frames-integration: shared map startup/loading, destination-
 lint and native build passed. Not installed while private setup is pending.
 See results/native-onboarding-footer-2026-10-23/receipt.json. User confirmed new
 PIN setup after the app-only reset; no PIN was read or entered by the agent.
+
+2026-10-23 installation checkpoint: production 4b04877 installed without uninstall
+or data reset; installed SHA384 matches the preserved package. User reported
+second-profile creation. ScreenCaptureKit verification was rejected by approval
+review citing the earlier no-capture restriction. No retry or alternate capture
+was used. Bounded app-only log queries yielded no usable events; collector
+stopped. Native footer, cross-profile and Retry observation remain unverified.
+Test-only harness 9c28e93 remains separate and uninstalled.
