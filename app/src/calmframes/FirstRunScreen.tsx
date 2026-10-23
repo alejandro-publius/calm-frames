@@ -34,8 +34,7 @@
  * question it is asking, and each choice carries `checked` rather than
  * `selected` alone, which is what a radio carries. Without the role a screen
  * reader read three questions as thirteen unrelated buttons. The two room
- * rows also say in words which chip is the chosen one, because a fill colour
- * is not a state everybody on the sofa can read.
+ * rows retain checkmarks and accessible checked state without duplicate captions.
  */
 
 import React from 'react';
@@ -65,8 +64,6 @@ import {
   Notice,
   ROOM_ONLY_ADDS,
   SEAT_DISTANCE_TITLE,
-  seatChosen,
-  televisionChosen,
   TV_SIZE_TITLE,
 } from './copy';
 import {
@@ -264,9 +261,6 @@ const FirstRunScreen = ({
           accessibilityLabel={`Step ${STEP_NUMBER[step]} of ${FIRST_RUN_STEPS}`}>
           Step {STEP_NUMBER[step]} of {FIRST_RUN_STEPS}
         </Text>
-        <Text style={styles.step} testID={`${testID}-brand-line`}>
-          A calmer way to watch
-        </Text>
       </View>
       <View
         style={styles.progress}
@@ -313,156 +307,148 @@ const FirstRunScreen = ({
 
   if (step === 'preset') {
     return (
-      <ScrollView
-        testID={testID}
-        style={styles.screen}
-        contentContainerStyle={styles.content}>
+      <View testID={testID} style={styles.screen}>
         {header}
-        <Text style={styles.helper}>{PRESET_STEP_NOTE}</Text>
-        <View
-          accessibilityRole="radiogroup"
-          accessibilityLabel={STEP_TITLES.preset}
-          aria-label={STEP_TITLES.preset}>
-          {PRESET_NAMES.map((name: PresetName) => {
-            const chosen = settings.preset === name;
-            const key = `preset-${name}`;
-            return (
-              <TouchableOpacity
-                key={name}
-                testID={`${testID}-preset-${name}`}
-                accessibilityRole="radio"
-                // checked is what a radio carries. selected stays beside it
-                // because the rest of the app reads that way today.
-                accessibilityState={{ checked: chosen, selected: chosen }}
-                accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
-                activeOpacity={1}
-                hasTVPreferredFocus={chosen}
-                onFocus={() => setFocusedRow(key)}
-                onBlur={() => setFocusedRow(null)}
-                onPress={() => setSettings({ ...settings, preset: name })}
-                style={[
-                  styles.row,
-                  chosen ? styles.chosen : null,
-                  focusedRow === key ? styles.focused : null,
-                ]}>
-                <View style={styles.rowText}>
-                  <Text style={[styles.rowTitle, focusedRow === key ? styles.focusedLabel : null]}>{PRESETS[name].title}</Text>
-                  <Text style={styles.rowDetail}>{PRESETS[name].description}</Text>
-                </View>
-                <View style={styles.rowState}>
-                  {chosen ? (
-                    <Text style={styles.rowStateWord}>{CHOSEN_WORD}</Text>
-                  ) : null}
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-        <View style={styles.buttons}>
+        <ScrollView testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
+          <Text style={styles.helper}>{PRESET_STEP_NOTE}</Text>
+          <View
+            accessibilityRole="radiogroup"
+            accessibilityLabel={STEP_TITLES.preset}
+            aria-label={STEP_TITLES.preset}>
+            {PRESET_NAMES.map((name: PresetName) => {
+              const chosen = settings.preset === name;
+              const key = `preset-${name}`;
+              return (
+                <TouchableOpacity
+                  key={name}
+                  testID={`${testID}-preset-${name}`}
+                  accessibilityRole="radio"
+                  // checked is what a radio carries. selected stays beside it
+                  // because the rest of the app reads that way today.
+                  accessibilityState={{ checked: chosen, selected: chosen }}
+                  accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
+                  activeOpacity={1}
+                  hasTVPreferredFocus={chosen}
+                  onFocus={() => setFocusedRow(key)}
+                  onBlur={() => setFocusedRow(null)}
+                  onPress={() => setSettings({ ...settings, preset: name })}
+                  style={[
+                    styles.row,
+                    chosen ? styles.chosen : null,
+                    focusedRow === key ? styles.focused : null,
+                  ]}>
+                  <View style={styles.rowText}>
+                    <Text style={[styles.rowTitle, focusedRow === key ? styles.focusedLabel : null]}>{PRESETS[name].title}</Text>
+                    <Text style={styles.rowDetail}>{PRESETS[name].description}</Text>
+                  </View>
+                  <View style={styles.rowState}>
+                    {chosen ? (
+                      <Text style={styles.rowStateWord}>{CHOSEN_WORD}</Text>
+                    ) : null}
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </ScrollView>
+        <View testID={`${testID}-footer`} style={styles.buttons}>
           <CalmButton
             testID={`${testID}-next`}
             label="Next"
             onPress={() => moveToStep('room')}
           />
         </View>
-      </ScrollView>
+      </View>
     );
   }
 
   if (step === 'room') {
     return (
-      <ScrollView
-        testID={testID}
-        style={styles.screen}
-        contentContainerStyle={styles.content}>
+      <View testID={testID} style={styles.screen}>
         {header}
-        <Text style={styles.helper}>{ROOM_ONLY_ADDS}</Text>
+        <ScrollView testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
+          <Text style={styles.helper}>{ROOM_ONLY_ADDS}</Text>
 
-        <Text style={styles.section} accessibilityRole="header">
-          {TV_SIZE_TITLE}
-        </Text>
-        <View
-          style={styles.choices}
-          accessibilityRole="radiogroup"
-          accessibilityLabel={TV_SIZE_TITLE}
-          aria-label={TV_SIZE_TITLE}>
-          {TV_DIAGONAL_CHOICES_IN.map((inches) => {
-            const chosen = settings.tvDiagonalIn === inches;
-            const key = `tv-${inches}`;
-            return (
-              <TouchableOpacity
-                key={key}
-                testID={`${testID}-tv-${inches}`}
-                accessibilityRole="radio"
-                accessibilityState={{ checked: chosen, selected: chosen }}
-                accessibilityLabel={`${inches} inch television${chosen ? ', chosen' : ''}`}
-                activeOpacity={1}
-                hasTVPreferredFocus={chosen}
-                onFocus={() => setFocusedRow(key)}
-                onBlur={() => setFocusedRow(null)}
-                onPress={() => setSettings({ ...settings, tvDiagonalIn: inches })}
-                style={[
-                  styles.chip,
-                  chosen ? styles.chosen : null,
-                  focusedRow === key ? styles.focused : null,
-                ]}>
-                <Text accessible={false} style={styles.selectionMark}>{chosen ? '✓' : ''}</Text>
-                <Text
-                  style={[styles.chipLabel, focusedRow === key ? styles.focusedLabel : null]}
-                  testID={`${testID}-tv-${inches}-label`}>
-                  {inches} inch
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-        <Text style={styles.chosenLine} testID={`${testID}-tv-chosen`}>
-          {televisionChosen(settings.tvDiagonalIn)}
-        </Text>
+          <Text style={styles.section} accessibilityRole="header">
+            {TV_SIZE_TITLE}
+          </Text>
+          <View
+            style={styles.choices}
+            accessibilityRole="radiogroup"
+            accessibilityLabel={TV_SIZE_TITLE}
+            aria-label={TV_SIZE_TITLE}>
+            {TV_DIAGONAL_CHOICES_IN.map((inches) => {
+              const chosen = settings.tvDiagonalIn === inches;
+              const key = `tv-${inches}`;
+              return (
+                <TouchableOpacity
+                  key={key}
+                  testID={`${testID}-tv-${inches}`}
+                  accessibilityRole="radio"
+                  accessibilityState={{ checked: chosen, selected: chosen }}
+                  accessibilityLabel={`${inches} inch television${chosen ? ', chosen' : ''}`}
+                  activeOpacity={1}
+                  hasTVPreferredFocus={chosen}
+                  onFocus={() => setFocusedRow(key)}
+                  onBlur={() => setFocusedRow(null)}
+                  onPress={() => setSettings({ ...settings, tvDiagonalIn: inches })}
+                  style={[
+                    styles.chip,
+                    chosen ? styles.chosen : null,
+                    focusedRow === key ? styles.focused : null,
+                  ]}>
+                  <Text accessible={false} style={styles.selectionMark}>{chosen ? '✓' : ''}</Text>
+                  <Text
+                    style={[styles.chipLabel, focusedRow === key ? styles.focusedLabel : null]}
+                    testID={`${testID}-tv-${inches}-label`}>
+                    {inches} inch
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
 
-        <Text style={styles.section} accessibilityRole="header">
-          {SEAT_DISTANCE_TITLE}
-        </Text>
-        <View
-          style={styles.choices}
-          accessibilityRole="radiogroup"
-          accessibilityLabel={SEAT_DISTANCE_TITLE}
-          aria-label={SEAT_DISTANCE_TITLE}>
-          {SEAT_DISTANCE_CHOICES_IN.map((inches) => {
-            const chosen = settings.seatDistanceIn === inches;
-            const feet = Math.round(inches / 12);
-            const key = `seat-${inches}`;
-            return (
-              <TouchableOpacity
-                key={key}
-                testID={`${testID}-seat-${inches}`}
-                accessibilityRole="radio"
-                accessibilityState={{ checked: chosen, selected: chosen }}
-                accessibilityLabel={`${feet} feet away${chosen ? ', chosen' : ''}`}
-                activeOpacity={1}
-                onFocus={() => setFocusedRow(key)}
-                onBlur={() => setFocusedRow(null)}
-                onPress={() => setSettings({ ...settings, seatDistanceIn: inches })}
-                style={[
-                  styles.chip,
-                  chosen ? styles.chosen : null,
-                  focusedRow === key ? styles.focused : null,
-                ]}>
-                <Text accessible={false} style={styles.selectionMark}>{chosen ? '✓' : ''}</Text>
-                <Text
-                  style={[styles.chipLabel, focusedRow === key ? styles.focusedLabel : null]}
-                  testID={`${testID}-seat-${inches}-label`}>
-                  {feet} ft
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-        <Text style={styles.chosenLine} testID={`${testID}-seat-chosen`}>
-          {seatChosen(settings.seatDistanceIn)}
-        </Text>
+          <Text style={styles.section} accessibilityRole="header">
+            {SEAT_DISTANCE_TITLE}
+          </Text>
+          <View
+            style={styles.choices}
+            accessibilityRole="radiogroup"
+            accessibilityLabel={SEAT_DISTANCE_TITLE}
+            aria-label={SEAT_DISTANCE_TITLE}>
+            {SEAT_DISTANCE_CHOICES_IN.map((inches) => {
+              const chosen = settings.seatDistanceIn === inches;
+              const feet = Math.round(inches / 12);
+              const key = `seat-${inches}`;
+              return (
+                <TouchableOpacity
+                  key={key}
+                  testID={`${testID}-seat-${inches}`}
+                  accessibilityRole="radio"
+                  accessibilityState={{ checked: chosen, selected: chosen }}
+                  accessibilityLabel={`${feet} feet away${chosen ? ', chosen' : ''}`}
+                  activeOpacity={1}
+                  onFocus={() => setFocusedRow(key)}
+                  onBlur={() => setFocusedRow(null)}
+                  onPress={() => setSettings({ ...settings, seatDistanceIn: inches })}
+                  style={[
+                    styles.chip,
+                    chosen ? styles.chosen : null,
+                    focusedRow === key ? styles.focused : null,
+                  ]}>
+                  <Text accessible={false} style={styles.selectionMark}>{chosen ? '✓' : ''}</Text>
+                  <Text
+                    style={[styles.chipLabel, focusedRow === key ? styles.focusedLabel : null]}
+                    testID={`${testID}-seat-${inches}-label`}>
+                    {feet} ft
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
 
-        <View style={styles.buttons}>
+        </ScrollView>
+        <View testID={`${testID}-footer`} style={styles.buttons}>
           <CalmButton
             quiet
             testID={`${testID}-back`}
@@ -476,43 +462,42 @@ const FirstRunScreen = ({
             onPress={() => moveToStep('explainer')}
           />
         </View>
-      </ScrollView>
+      </View>
     );
   }
 
   return (
-    <ScrollView
-      testID={testID}
-      style={styles.screen}
-      contentContainerStyle={styles.content}>
+    <View testID={testID} style={styles.screen}>
       {header}
-      <View style={styles.review} testID={`${testID}-review`}>
-        <Text style={styles.reviewTitle} accessibilityRole="header">
-          Your household
-        </Text>
-        <Text style={styles.reviewLine} testID={`${testID}-review-preset`}>
-          {PRESETS[settings.preset].title}
-        </Text>
-        <Text style={styles.reviewLine} testID={`${testID}-review-room`}>
-          {describeRoom(settings)}
-        </Text>
-        <Text style={styles.reviewNote}>{REVIEW_NOTE}</Text>
-      </View>
-      <View style={styles.explainer} testID={`${testID}-explainer`}>
-        {EXPLAINER_LINES.map((line, index) => (
-          <Text
-            key={line}
-            testID={`${testID}-explainer-line-${index}`}
-            style={styles.explainerLine}>
-            {line}
+      <ScrollView testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
+        <View style={styles.review} testID={`${testID}-review`}>
+          <Text style={styles.reviewTitle} accessibilityRole="header">
+            Your household
           </Text>
-        ))}
-      </View>
-      <Text style={styles.note} testID={`${testID}-reading-time`}>
-        About {EXPLAINER_TARGET_SECONDS} seconds to read. You can find it again
-        under parental controls.
-      </Text>
-      <View style={styles.buttons}>
+          <Text style={styles.reviewLine} testID={`${testID}-review-preset`}>
+            {PRESETS[settings.preset].title}
+          </Text>
+          <Text style={styles.reviewLine} testID={`${testID}-review-room`}>
+            {describeRoom(settings)}
+          </Text>
+          <Text style={styles.reviewNote}>{REVIEW_NOTE}</Text>
+        </View>
+        <View style={styles.explainer} testID={`${testID}-explainer`}>
+          {EXPLAINER_LINES.map((line, index) => (
+            <Text
+              key={line}
+              testID={`${testID}-explainer-line-${index}`}
+              style={styles.explainerLine}>
+              {line}
+            </Text>
+          ))}
+        </View>
+        <Text style={styles.note} testID={`${testID}-reading-time`}>
+          About {EXPLAINER_TARGET_SECONDS} seconds to read. You can find it again
+          under parental controls.
+        </Text>
+      </ScrollView>
+      <View testID={`${testID}-footer`} style={styles.buttons}>
         <CalmButton
           quiet
           testID={`${testID}-back`}
@@ -527,7 +512,7 @@ const FirstRunScreen = ({
           hasTVPreferredFocus
         />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -546,10 +531,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(CALM_SPACE.SAFE_X),
     paddingVertical: scale(CALM_SPACE.SAFE_Y),
   },
+  scroll: { flex: 1, minHeight: 0 },
   content: {
     width: '100%',
     maxWidth: scale(1400),
-    paddingBottom: scale(CALM_SPACE.SAFE_Y),
+    paddingBottom: scale(CALM_SPACE.ROW),
   },
   header: { maxWidth: scale(1400), marginBottom: scale(16) },
   brandRow: {
@@ -656,17 +642,6 @@ const styles = StyleSheet.create({
     ...CALM_TEXT.control,
     color: CALM_COLORS.TEXT,
   },
-  /**
-   * Which chip in the row above is the chosen one, in words.
-   *
-   * The same line parental controls draw under the same two rows, from the
-   * same copy, because a parent meets these chips twice and they should read
-   * the same way both times.
-   */
-  chosenLine: {
-    ...CALM_TEXT.body,
-    color: CALM_COLORS.TEXT,
-  },
   review: {
     alignSelf: 'stretch',
     maxWidth: scale(1400),
@@ -705,6 +680,7 @@ const styles = StyleSheet.create({
     maxWidth: scale(1160),
   },
   buttons: {
+    flexShrink: 0,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',

@@ -310,55 +310,33 @@ describe('the first run', () => {
     ).toEqual({ checked: false, selected: false });
   });
 
-  /**
-   * The room chips say which one is chosen, and choosing moves no chip.
-   *
-   * Same defect and same answer as the parent area's copy of these rows: the
-   * fill colour was the whole of the chosen state for anybody looking at the
-   * screen, and the word goes under the row rather than on the chip so that
-   * choosing cannot change a chip's width.
-   *
-   * Seen to fail. With `televisionChosen(settings.tvDiagonalIn)` left out of
-   * the room step:
-   *
-   *     ● the first run › says which room choices are standing, in words
-   *
-   *       Unable to find an element with testID: first-run-tv-chosen
-   *
-   *       at Object.getByTestId (test/calmframes/firstRun.test.tsx:249:19)
-   */
-  it('says which room choices are standing, in words', () => {
-    renderFirstRun();
-    type('5555');
-    type('5555');
+  it('retains checked choices without redundant captions and keeps navigation outside the scroller', () => {
+    const onDone = renderFirstRun();
+    type('5555'); type('5555');
+    const assertFooter = (button: string) => {
+      const footer = screen.getByTestId('first-run-footer');
+      const scroll = screen.getByTestId('first-run-scroll');
+      expect(footer.findAllByProps({testID: button}).length).toBeGreaterThan(0);
+      expect(scroll.findAllByProps({testID: button})).toHaveLength(0);
+    };
+    assertFooter('first-run-next');
     fireEvent.press(screen.getByTestId('first-run-next'));
-
-    expect(screen.getByTestId('first-run-tv-chosen').props.children).toBe(
-      '55 inch is chosen.',
-    );
-    expect(screen.getByTestId('first-run-seat-chosen').props.children).toBe(
-      '8 feet away is chosen.',
-    );
-
-    const chipText = () =>
-      TV_DIAGONAL_CHOICES_IN.map((inches) =>
-        String(
-          screen.getByTestId(`first-run-tv-${inches}-label`).props.children,
-        ),
-      );
+    assertFooter('first-run-next'); assertFooter('first-run-back');
+    expect(screen.queryByTestId('first-run-brand-line')).toBeNull();
+    expect(screen.queryByTestId('first-run-tv-chosen')).toBeNull();
+    expect(screen.queryByTestId('first-run-seat-chosen')).toBeNull();
+    const chipText = () => TV_DIAGONAL_CHOICES_IN.map(inches =>
+      String(screen.getByTestId(`first-run-tv-${inches}-label`).props.children));
     const before = chipText();
-
     fireEvent.press(screen.getByTestId('first-run-tv-85'));
     fireEvent.press(screen.getByTestId('first-run-seat-48'));
-
-    expect(screen.getByTestId('first-run-tv-chosen').props.children).toBe(
-      '85 inch is chosen.',
-    );
-    expect(screen.getByTestId('first-run-seat-chosen').props.children).toBe(
-      '4 feet away is chosen.',
-    );
-    // Only the sentence moved. No chip grew, so no chip slid along the row.
+    expect(screen.getByTestId('first-run-tv-85').props.accessibilityState.checked).toBe(true);
+    expect(screen.getByTestId('first-run-seat-48').props.accessibilityState.checked).toBe(true);
     expect(chipText()).toEqual(before);
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    assertFooter('first-run-done'); assertFooter('first-run-back');
+    fireEvent.press(screen.getByTestId('first-run-done'));
+    expect(onDone.mock.calls[0][0].settings).toEqual({...DEFAULT_SETTINGS, tvDiagonalIn: 85, seatDistanceIn: 48});
   });
 
   it('has no motion: nothing on any step animates', () => {
