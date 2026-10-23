@@ -1,3 +1,4 @@
+import { nativeRetryProbe } from '../calmframes/nativeRetryProbe';
 import RecoverablePlayback, { RecoveryBinding } from '../calmframes/RecoverablePlayback';
 import { validateCheckpointIdentity, checkpointIdentityKey } from '../calmframes/playbackCheckpoint';
 import { recoverPlayback, RecoveryPhase } from '../calmframes/playbackRecovery';
@@ -39,6 +40,7 @@ import {
   AppStateStatus,
   Platform,
   StyleSheet,
+  Text,
   useWindowDimensions,
   View,
 } from 'react-native';
@@ -164,6 +166,8 @@ export const PlayerScreen = ({
   const [recoveryPhase, setRecoveryPhase] = React.useState<RecoveryPhase>(recovery?.start ? 'covered' : 'ready');
   const [recoveryCoverMounted, setRecoveryCoverMounted] = React.useState(false);
   const [retryBlocked, setRetryBlocked] = React.useState(false);
+  const [probeUsed, setProbeUsed] = React.useState(nativeRetryProbe.used());
+  const [probeReady, setProbeReady] = React.useState(false);
   const [retryClosing, setRetryClosing] = React.useState(false);
   const retryRelease = useRef<{generation: number; confirmed: boolean} | null>(null);
   const retryGeneration = useRef(0);
@@ -858,6 +862,37 @@ export const PlayerScreen = ({
     });
   };
 
+  // TEST BUILD ONLY. No route, guard, destroy, retry or recovery implementation is replaced.
+  const probeEligible = () => Boolean(continuousEnding && preparedRouteAccepted &&
+    recovery && memory.last.current && guard.status === 'verified' &&
+    !leaving.current && !returningHome && !recoveryPending && !showOpeningShell &&
+    !showBuffering && !isVideoError && !isVideoEnded && surfaceReady &&
+    videoRef.current && !videoRef.current.paused && videoRef.current.seeking === false &&
+    videoRef.current.readyState >= 2 && videoRef.current.currentTime >= 10 &&
+    memory.last.current.positionMs >= 8000);
+  const probeEligibility = useRef(probeEligible); probeEligibility.current = probeEligible;
+  useEffect(() => {
+    const media = videoRef.current;
+    if (!isVideoInitialized || !media) return;
+    const refresh = () => setProbeReady(probeEligibility.current());
+    media.addEventListener('timeupdate', refresh);
+    media.addEventListener('play', refresh);
+    media.addEventListener('pause', refresh);
+    return () => {
+      media.removeEventListener('timeupdate', refresh);
+      media.removeEventListener('play', refresh);
+      media.removeEventListener('pause', refresh);
+    };
+  }, [isVideoInitialized, videoRef]);
+  const injectProbeFailure = () => {
+    const media = videoRef.current;
+    if (!media) return;
+    nativeRetryProbe.trigger(probeEligible(), () => media.pause(), () => {
+      trace('playback', 'TEST ONLY synthetic failure; real decoder retained for production Retry');
+      setVideoError(true); setProbeUsed(true);
+    });
+  };
+
   if (isVideoEnded && continuousEnding && guard.status === 'verified') {
     return <AmbientScene title={data.title} artwork="coastal" endingPicture={continuousEnding} ended onBack={leavePlayer} testID="continuous-ended-still" />;
   }
@@ -979,6 +1014,11 @@ export const PlayerScreen = ({
         {isVideoError && !returningHome && <ErrorView navigateBack={leavePlayer}
           onRetry={!retryBlocked && !retryClosing && recovery && memory.last.current && guard.status === 'verified' ? retryPlayback : undefined}
           recoveryBlocked={retryBlocked} closing={retryClosing} />}
+        <View testID="native-retry-probe" style={{position: 'absolute', top: 36, right: 96, zIndex: 100, backgroundColor: '#193F3E', padding: 16}}>
+          <Text style={{color: '#FFF8E8', fontSize: 24}}>TEST BUILD: synthetic failure</Text>
+          {!probeUsed && probeReady && probeEligible() ? <CalmButton label="Simulate failure" sound={false}
+            testID="native-retry-probe-trigger" onPress={injectProbeFailure} /> : null}
+        </View>
       </View>
     </SafeAreaView>
     </CoastalAppearance.Provider>

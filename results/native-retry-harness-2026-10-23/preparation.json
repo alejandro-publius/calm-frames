@@ -1,0 +1,40 @@
+{
+  "base": "e9a0e22e25c734938f3b6c7a7eb884414db48786",
+  "purpose": "isolated synthetic error with production Retry and native teardown unchanged",
+  "built": false,
+  "installed": false,
+  "native_observed": false,
+  "simulator_touched": false,
+  "data_reset": false,
+  "checks": {
+    "focused_jest": {
+      "passed": 28,
+      "suites": 3,
+      "coverage": "disabled for focused run; no full gate claim"
+    },
+    "typescript": {
+      "passed": true,
+      "command": "tsc --noEmit --preserveSymlinks",
+      "reason": "reuse of existing dependencies through node_modules symlink; default declaration inference produced four TS2742 path-portability errors in unchanged Redux slices"
+    },
+    "eslint": {
+      "errors": 0,
+      "warnings": 2,
+      "warnings_detail": "test-only inline marker styles"
+    },
+    "git_diff_check": "passed"
+  },
+  "files_sha256": {
+    "app/manifest.toml": "4b00ff68c6ce495ddd9e9389ebd923c686d5f7fa020fa69f1566f4870c5cf5f2",
+    "app/src/screens/PlayerScreen.tsx": "24a5f94bcebd4758dd746e059f829411ce433b96fed9d301b7f50298608457c9",
+    "app/src/calmframes/nativeRetryProbe.ts": "9f61d997355cd34257f17a4d6f61ce7cac0ebd24d64645615798e595f1fd53ba",
+    "app/test/calmframes/nativeRetryProbe.test.ts": "2a420e51936a848ba69dbd1fbf886e4139946fc6342ade7c8e277202b8cf82f0",
+    "app/test/calmframes/nativeRetryProbeIntegration.test.tsx": "d5618414f3f3a7e414d323ba0c47b73de96c743f62b0b4b65d9eb31f98d3b2bb"
+  },
+  "pending": [
+    "private PIN/reset decision",
+    "native build/install only after private interaction finishes",
+    "native Retry/teardown and compositor observation",
+    "production package restoration after any future harness installation"
+  ]
+}

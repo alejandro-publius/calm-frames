@@ -1787,3 +1787,8 @@ the rebuild that every app input change since Oct 10 needs.
 ## 2026-10-21: cohesive journey UI
 
 Implemented in calm-frames-integration: shared map startup/loading, destination-based illustrated waiting states, truthful verification/return messages, selected-card check, matching Ocean/Forest marks and player status surfaces. Exact approved Acadia bundle 0f31fe96f3db5fb4fbae4c0856f3b6091718936255adceb6b2d88a738725ebeb is activated. Final checks: 1687 app tests, 77 Node checks and 41 release tests passed; TypeScript passed; lint 0 errors/108 warnings. Integrated aarch64 Debug build installed; bounded text walkthroughs completed for all three titles and pause/resume/Skip/Back. Actual app left on Home with Forest selected. App-only screenshot permission was granted, but the framebuffer capture is black; native picture/audio acceptance remains unverified. Original audio/timing, signed maps, signer identity and guards remain intact. Prepared namespace is 63317768 bytes.
+
+2026-10-23 isolated Retry harness: 28 focused tests and TypeScript passed;
+ESLint has zero errors/two test-only style warnings. Preparation only, not built
+or installed. Production 5159876 and simulator data unchanged. Native run and
+app reset remain pending private user action; see NATIVE_RETRY_TEST_PLAN.md.

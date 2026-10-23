@@ -2782,3 +2782,12 @@ Decision: lead with a concise product statement, real native Home and paired Det
 ## 2026-10-22: reconcile verified cloud transfers without changing the product
 
 Decision: verify both attached archives and their Git inventories, retain Claude's history, then cherry-pick only the combined release checks and the completed judging package in a new candidate worktree. Preserve the judging tree and export byte for byte; explain later evidence in `CLOUD_RELEASE_CHECKPOINT.md`. The original native coastal application, media and trust remain unchanged. Rejected browser UI and superseded separate fixes are excluded. Why: transfer real completed work without duplicating it or turning technical receipts into human acceptance. Cost: focused stub regressions and documentation only; no install, benchmark rerun, native action or publication.
+
+### 2026-10-23: isolated native Retry preparation
+
+Use a separate test-only branch with an explicit one-shot benign failure on the
+verified McWay route. Retain production teardown, Retry and recovery code. This
+makes the native failure path exercisable without corrupt media or a weakened
+guard. Cost: one test-only marker/button and focused local checks. No native
+install or reset while private PIN recovery is pending. See
+`../NATIVE_RETRY_TEST_PLAN.md` and the preparation receipt.
