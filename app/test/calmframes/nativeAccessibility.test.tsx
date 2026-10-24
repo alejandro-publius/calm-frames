@@ -28,10 +28,16 @@
  * title; a flush stop keeping its inset; `spoken` leaving the separator in;
  * and the strip summary speaking its raw line. Every one turned its test red
  * at an assertion, and nothing else.
+ *
+ * On the TV the first build of this cut the left side off the How it works
+ * ring, drawn outside the text and clipped by the scroller. The room tests
+ * were seen to fail by taking the scroller's room away, which measured zero
+ * room around the stop, and by keeping the room but not reaching out, which
+ * moved the text.
  */
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import { StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 import KidHomeScreen from '../../src/calmframes/KidHomeScreen';
 import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
@@ -221,6 +227,66 @@ describe('spoken', () => {
 });
 
 describe('a flush reading stop', () => {
+  type Node = { type: unknown; props: Record<string, unknown>; parent: Node | null };
+  const flat = (style: unknown) => (StyleSheet.flatten(style as never) ?? {}) as Record<string, number | string | undefined>;
+  const left = (style: Record<string, number | string | undefined>, side: 'padding' | 'margin') =>
+    Number(style[`${side}Left`] ?? style[`${side}Horizontal`] ?? style[side] ?? 0);
+
+  /**
+   * How much room there is to the left of a stop, inside the scroller that
+   * clips it: every padding and margin between the two, and the scroller's
+   * own padding and content padding.
+   */
+  function roomInsideScroller(stop: Node): number {
+    let room = 0;
+    for (let node = stop.parent; node; node = node.parent) {
+      if (node.type === ScrollView) {
+        return room + left(flat(node.props.style), 'padding') + left(flat(node.props.contentContainerStyle), 'padding');
+      }
+      if (typeof node.type === 'string') {
+        const style = flat(node.props.style);
+        room += left(style, 'padding') + Math.max(0, left(style, 'margin'));
+      }
+    }
+    return Infinity;
+  }
+
+  const outset = (stop: Node) => -Number(flat(stop.props.style).margin);
+
+  it('has room for its whole ring inside the scroller around it, wherever it is used', () => {
+    // On the TV the left side of the How it works ring was cut off by the
+    // scroller's edge, because the stop's ring is drawn outside its text.
+    const cases: Array<[string, () => void]> = [
+      ['how-it-works-reading', () => { renderHome(); fireEvent.press(screen.getByTestId('kid-home-learn')); }],
+      ['title-details-info-reading', () => {
+        render(<TitleDetailsScreen entry={shipped[0]} onPlay={jest.fn()} />);
+        fireEvent.press(screen.getByTestId('title-details-show-info'));
+      }],
+      ['parent-area-hidden-reading', () => {
+        render(<ParentAreaScreen gate={setPin(emptyPinGate(), '1357', 'seed', 4)} onGateChange={jest.fn()} settings={DEFAULT_SETTINGS}
+          onSettingsChange={jest.fn()} log={emptyHideLog()} family={family} onFamilyChange={jest.fn()} titles={shelf} nowMs={() => 0} onBack={jest.fn()} />);
+        for (const digit of '1357') fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
+      }],
+    ];
+    for (const [testID, show] of cases) {
+      show();
+      const stop = screen.getByTestId(testID) as unknown as Node;
+      expect([testID, outset(stop)]).toEqual([testID, expect.any(Number)]);
+      expect(outset(stop)).toBeGreaterThan(0);
+      expect([testID, roomInsideScroller(stop) >= outset(stop)]).toEqual([testID, true]);
+      screen.unmount();
+    }
+  });
+
+  it('keeps How it works where it was: its scroller reaches out as far as its content comes in', () => {
+    renderHome();
+    fireEvent.press(screen.getByTestId('kid-home-learn'));
+    const scroller = screen.UNSAFE_getAllByType(ScrollView).find((one) => one.findAll((node) => node.props.testID === 'how-it-works-reading').length > 0)!;
+    const reach = left(flat(scroller.props.style), 'margin');
+    expect(reach).toBeLessThan(0);
+    expect(reach + left(flat(scroller.props.contentContainerStyle), 'padding')).toBe(0);
+  });
+
   it('takes the room for its ring out of its margins, so the text does not move', () => {
     render(<ReadingStop testID="stop" flush><Text>Line</Text></ReadingStop>);
     const style = StyleSheet.flatten(screen.getByTestId('stop').props.style);

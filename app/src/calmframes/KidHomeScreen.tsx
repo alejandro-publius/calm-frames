@@ -19,6 +19,7 @@ import { EnvironmentMark } from './JourneyStatus';
 import { OFFLINE_TITLE_ID } from './offlineTitle';
 import HomeHarborScene, { filmStill } from './HomeHarborScene';
 import PictureHoldIntroduction from './PictureHoldIntroduction';
+import { READING_STOP_ROOM } from './ReadingStop';
 import { isBundledBenignStory } from './benignStory';
 import {
   COASTAL_COLORS as CALM_COLORS,
@@ -349,7 +350,7 @@ const KidHomeScreen = ({
           {onOpenParentArea ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-parent-area`} label="Parents" accessibilityLabel="Parents: parental controls, needs a PIN" hasTVPreferredFocus={(empty || returnTo === 'parent') && !saving && !showIntroduction} onPress={onOpenParentArea} /></View> : null}
       </CalmPageHeader>
       {flowing ? picker : null}
-      {showIntroduction ? <ScrollView style={styles.libraryScroll} showsVerticalScrollIndicator={false}><PictureHoldIntroduction disabled={saving} onDemoDetails={demo ? () => onOpen(demo) : undefined} onPlaybackCheck={playbackCheck ? () => onOpen(playbackCheck) : undefined} onStart={demo ? () => {
+      {showIntroduction ? <ScrollView style={[styles.libraryScroll, styles.readingRoom]} contentContainerStyle={styles.readingContent} showsVerticalScrollIndicator={false}><PictureHoldIntroduction disabled={saving} onDemoDetails={demo ? () => onOpen(demo) : undefined} onPlaybackCheck={playbackCheck ? () => onOpen(playbackCheck) : undefined} onStart={demo ? () => {
         if (!saving) { setShowIntroduction(false); setReturnToHeader('learn'); (onPlay ?? onOpen)(demo); }
       } : undefined} /></ScrollView> : empty ? (
         <StatusNotice
@@ -395,6 +396,11 @@ const styles = StyleSheet.create({
   navigation: { flexDirection: 'row', gap: scale(20) },
   navigationLink: { alignSelf: 'center' },
   libraryScroll: { flex: 1 },
+  // How it works is a flush ReadingStop, whose ring is drawn outside its
+  // text. A scroller clips at its edge, so this one reaches out by the ring's
+  // room and brings its content back in by the same amount.
+  readingRoom: { marginHorizontal: -scale(READING_STOP_ROOM) },
+  readingContent: { paddingHorizontal: scale(READING_STOP_ROOM) },
   scrollContent: { minHeight: scale(820), paddingBottom: scale(12) },
   hero: { position: 'absolute', bottom: 0, width: '100%', minHeight: scale(180), alignItems: 'flex-start', paddingBottom: scale(36) },
   heroCopy: { width: scale(CALM_FLOW.HERO_TITLE_WIDTH), paddingTop: 0, alignItems: 'flex-start' },

@@ -19,7 +19,10 @@
  * take focus is never spoken. A stop is read whole, every line in it.
  *
  * A `flush` stop takes the room for its ring out of its margins, so the text
- * stays exactly where it stood before the stop was put around it.
+ * stays exactly where it stood before the stop was put around it. The ring is
+ * then drawn READING_STOP_ROOM outside the text, and a scroller clips at its
+ * own edge, so the scroller around a flush stop needs that much room inside
+ * it: on the TV, How it works lost the left side of its ring without it.
  */
 import React from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
@@ -27,6 +30,9 @@ import TouchableOpacity from './CalmTouchable';
 import { CalmControlAppearance } from './CalmControlSurface';
 import { CoastalAppearance } from './CoastalAppearance';
 import { CALM_COLORS, COASTAL_COLORS, CALM_SPACE, FOCUS_RING_WIDTH, scale } from './calmStyles';
+
+/** How far a flush stop's ring reaches outside its text, in 1080p units. */
+export const READING_STOP_ROOM = FOCUS_RING_WIDTH + CALM_SPACE.TIGHT;
 
 export default function ReadingStop({ testID, style, flush = false, children }: {
   testID: string; style?: StyleProp<ViewStyle>; flush?: boolean; children: React.ReactNode;
@@ -57,6 +63,6 @@ const styles = StyleSheet.create({
   flush: {
     width: 'auto',
     alignSelf: 'stretch',
-    margin: -scale(FOCUS_RING_WIDTH + CALM_SPACE.TIGHT),
+    margin: -scale(READING_STOP_ROOM),
   },
 });
