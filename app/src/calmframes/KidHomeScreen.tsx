@@ -35,6 +35,7 @@ import {
   PROFILES_KID_TITLE,
   runtimeLabel,
   SAVING_CHANGES,
+  spoken,
   WATCHING_STATE_WORD,
   whoIsWatching,
 } from './copy';
@@ -225,6 +226,7 @@ const KidHomeScreen = ({
   // With nothing to watch, the shelf does not ask who is watching: there is
   // nothing for the answer to change, and one fewer thing to read.
   const picking = Boolean(profiles && profiles.length > 0 && onChooseProfile) && !empty;
+  const watching = profiles && profiles.length > 0 ? (profiles.find((one) => one.id === activeProfileId) ?? profiles[0]).name : '';
 
   // The app records what it paints, because Vega gives it no way to read its
   // own pixels. See uiCapture.ts.
@@ -301,9 +303,17 @@ const KidHomeScreen = ({
                 const focused = focusedId === entry.title.id;
                 const selected = featured?.title.id === entry.title.id;
                 const label = titlePresentation(entry.title);
-                return <TouchableOpacity surfaceKind="tertiary" disabled={saving || undefined} accessibilityState={{ disabled: saving, selected }}
+                // The line under the card's name, and the same line for a
+                // screen reader. A still scene is announced as one, not by
+                // the length of the preview it can also start.
+                const qualifier = label.kind ? (onAmbient && ambientArtworkFor(entry) ? 'Still scene' : label.selectorMeta ?? label.kind) : null;
+                // Focus selects a card, and VoiceView reads the state as focus
+                // lands, one render before the selection follows, so a false
+                // here was heard as "not selected, selected" on every card.
+                // The chosen card says selected; the others say nothing of it.
+                return <TouchableOpacity surfaceKind="tertiary" disabled={saving || undefined} accessibilityState={{ disabled: saving, ...(selected ? { selected } : {}) }}
                   key={entry.title.id} testID={`${testID}-poster-${entry.title.id}`} accessibilityRole="button"
-                  accessibilityLabel={[label.cardName ?? label.name, label.kind].filter(Boolean).join(', ')} activeOpacity={1}
+                  accessibilityLabel={[label.cardName ?? label.name, qualifier && spoken(qualifier)].filter(Boolean).join(', ')} activeOpacity={1}
                   hasTVPreferredFocus={returnTo === 'poster' && entry.title.id === preferredId}
                   onFocus={() => { setFocusedId(entry.title.id); setSelectedId(entry.title.id); onSelectTitle?.(entry.title.id); }} onBlur={() => setFocusedId(null)} onPress={() => {
                     if (!saving) {
@@ -321,7 +331,7 @@ const KidHomeScreen = ({
                   {selected ? <View testID={`${testID}-selected-${entry.title.id}`} style={styles.selectionMark} pointerEvents="none" accessible={false}><Svg width={scale(32)} height={scale(32)} viewBox="0 0 32 32"><Path d="M6 16L13 23L27 8" fill="none" stroke={WORLD.TEXT} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" /></Svg></View> : null}
                   <View style={styles.posterCopy}>
                   <Text style={[styles.posterTitle, focused ? styles.focusedLabel : null]} numberOfLines={1} testID={`${testID}-poster-title-${entry.title.id}`}>{label.cardName ?? label.name}</Text>
-                  {label.kind ? <Text style={styles.posterQualifier} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{onAmbient && ambientArtworkFor(entry) ? 'Still scene' : label.selectorMeta ?? label.kind}</Text> : null}
+                  {qualifier ? <Text style={styles.posterQualifier} numberOfLines={1} testID={`${testID}-poster-qualifier-${entry.title.id}`}>{qualifier}</Text> : null}
                   </View>
                 </TouchableOpacity>;
               };
@@ -330,8 +340,9 @@ const KidHomeScreen = ({
     <WorldAppearance.Provider value={!empty && !showIntroduction}><View testID={testID} style={[styles.screen, !empty && !showIntroduction && { backgroundColor: WORLD.BACKGROUND }]}>
       {!empty && !showIntroduction ? <CoastalWorld destination={featured ? islandOf(featured) ?? 'coastal' : 'coastal'} cardKinds={cardKinds} showBoat={feature?.art === 'coastal' || Boolean(feature?.menuArt)} motionEnabled={interfaceMotionEnabled} active={interfaceActive && !choosingProfile} /> : <HomeHarborScene variant={feature?.menuArt ?? feature?.art} immersive={!empty} wideReading={showIntroduction} enabled={interfaceMotionEnabled} active={interfaceActive && !showIntroduction} />}
       <CalmPageHeader wordmark onBack={showIntroduction ? closeIntroduction : undefined} backTestID="picture-hold-dismiss" preferredBack={showIntroduction && !demo}>
-          {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? SAVING_CHANGES : (profiles.find((p) => p.id === activeProfileId) ?? profiles[0]).name}
-            disabled={saving} accessibilityLabel="Choose who is watching" hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
+          {/* The button shows who is watching, so a screen reader says it too. */}
+          {picking && profiles ? <CalmButton quiet tertiary compact testID={`${testID}-choose-profile`} label={saving ? SAVING_CHANGES : watching}
+            disabled={saving} accessibilityLabel={saving ? SAVING_CHANGES : `${whoIsWatching(watching)} Choose who is watching`} hasTVPreferredFocus={!showIntroduction && returnTo === 'profile'}
             onPress={() => { setReturnToHeader(null); setChoosingProfile(!choosingProfile); }} /> : null}
           {!showIntroduction && !empty ? <View style={styles.navigationLink}><CalmButton quiet tertiary compact testID={`${testID}-learn`} label="How it works" accessibilityLabel="How it works" hasTVPreferredFocus={returnTo === 'learn'}
             disabled={saving} onPress={() => { setChoosingProfile(false); setReturnToHeader(null); setShowIntroduction(true); }} /></View> : null}

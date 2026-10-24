@@ -53,6 +53,8 @@ export interface CalmButtonProps {
   onBlur?: () => void;
   /** What a screen reader says. Defaults to the label. */
   accessibilityLabel?: string;
+  /** What a screen reader says after the label, role and state. */
+  accessibilityHint?: string;
   /** Drawn as unavailable, and it does not call back. */
   disabled?: boolean;
   /** Disable confirmation for actions that start playback or confirm elsewhere. */
@@ -73,6 +75,7 @@ const CalmButton = ({
   onFocus,
   onBlur,
   accessibilityLabel,
+  accessibilityHint,
   disabled = false,
   sound = true,
   hasTVPreferredFocus = false,
@@ -92,6 +95,7 @@ const CalmButton = ({
       surfaceKind={primary ? 'primary' : tertiary || (quiet && (compact || coastal)) ? 'tertiary' : 'secondary'}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel ?? label}
+      accessibilityHint={accessibilityHint}
       accessibilityState={{ disabled }}
       activeOpacity={1}
       hasTVPreferredFocus={hasTVPreferredFocus}

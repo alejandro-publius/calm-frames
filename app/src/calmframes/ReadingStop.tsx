@@ -13,6 +13,13 @@
  * documents: the ring is always the same width, and focus changes the ring and
  * the fill together. The stop opts out of the app's control material, which
  * would draw a button face under text that is not a button.
+ *
+ * Focus is also the only way VoiceView reads anything on Vega: it speaks what
+ * has focus and the headings of a page as it appears, and text that cannot
+ * take focus is never spoken. A stop is read whole, every line in it.
+ *
+ * A `flush` stop takes the room for its ring out of its margins, so the text
+ * stays exactly where it stood before the stop was put around it.
  */
 import React from 'react';
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
@@ -21,8 +28,8 @@ import { CalmControlAppearance } from './CalmControlSurface';
 import { CoastalAppearance } from './CoastalAppearance';
 import { CALM_COLORS, COASTAL_COLORS, CALM_SPACE, FOCUS_RING_WIDTH, scale } from './calmStyles';
 
-export default function ReadingStop({ testID, style, children }: {
-  testID: string; style?: StyleProp<ViewStyle>; children: React.ReactNode;
+export default function ReadingStop({ testID, style, flush = false, children }: {
+  testID: string; style?: StyleProp<ViewStyle>; flush?: boolean; children: React.ReactNode;
 }) {
   const coastal = React.useContext(CoastalAppearance);
   const colors = coastal ? COASTAL_COLORS : CALM_COLORS;
@@ -32,7 +39,7 @@ export default function ReadingStop({ testID, style, children }: {
       // React Native makes a touchable focusable only when it has a press handler.
       onPress={() => undefined}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-      style={[styles.stop, style, focused ? { borderColor: colors.FOCUS_RING, backgroundColor: colors.SURFACE_FOCUSED } : null]}>
+      style={[styles.stop, flush ? styles.flush : null, style, focused ? { borderColor: colors.FOCUS_RING, backgroundColor: colors.SURFACE_FOCUSED } : null]}>
       {children}
     </TouchableOpacity>
   </CalmControlAppearance.Provider>;
@@ -46,5 +53,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderRadius: scale(18),
     padding: scale(CALM_SPACE.TIGHT),
+  },
+  flush: {
+    width: 'auto',
+    alignSelf: 'stretch',
+    margin: -scale(FOCUS_RING_WIDTH + CALM_SPACE.TIGHT),
   },
 });

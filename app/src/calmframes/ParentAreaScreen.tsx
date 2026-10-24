@@ -131,6 +131,7 @@ import { attemptPin, PIN_LENGTH, PinGateState } from './parentGate';
 import PinKeypad from './PinKeypad';
 import ProfileNameEditor from './ProfileNameEditor';
 import ProfilePicker from './ProfilePicker';
+import ReadingStop from './ReadingStop';
 import {
   addProfile,
   allProfileHides,
@@ -833,6 +834,8 @@ const ParentAreaScreen = ({
         <Text style={styles.section} accessibilityRole="header">
           {sectionFor(HIDDEN_TITLE, whose)}
         </Text>
+        {/* The record is one stop, so the remote can land on it and VoiceView reads it; ReadingStop.tsx says why. */}
+        <ReadingStop testID={`${testID}-hidden-reading`} flush>
         <Text style={styles.body} testID={`${testID}-total`}>
           {shownLog.entries.length === 0
             ? editingProfile
@@ -862,6 +865,7 @@ const ParentAreaScreen = ({
             ))}
           </View>
         ))}
+        </ReadingStop>
       </View>
 
       {family && onFamilyChange ? (
@@ -965,7 +969,9 @@ const ParentAreaScreen = ({
                 />
               </View>
               {entry.status === 'verified' && personalCoverAsset(entry.title) ? (
-                <CalmButton label="Extra picture covers" disabled={saving}
+                // Every verified title has one of these, so the title is in
+                // what a screen reader says; the name beside it is only text.
+                <CalmButton label="Extra picture covers" accessibilityLabel={`Extra picture covers: ${titlePresentation(entry.title).name}`} disabled={saving}
                   hasTVPreferredFocus={extraReturnFocus === entry.title.id}
                   onPress={() => { setExtraReturnFocus(undefined); setExtraTitle(entry); }} testID={`${testID}-extra-${entry.title.id}`} />
               ) : null}
