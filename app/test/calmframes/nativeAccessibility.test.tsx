@@ -46,7 +46,7 @@ import ReadingStop from '../../src/calmframes/ReadingStop';
 import FocusRow from '../../src/calmframes/FocusRow';
 import { ambientArtworkFor } from '../../src/calmframes/AmbientScene';
 import { coveredSectionsSummary } from '../../src/calmframes/CoveredSectionsStrip';
-import { DETECTION_LIMITS_LINE, ONLY_IN_CALM_FRAMES_LINE, SAFETY_NOTE, SAVING_CHANGES, spoken } from '../../src/calmframes/copy';
+import { DETECTION_LIMITS_LINE, EXPLAINER_LINES, ONLY_IN_CALM_FRAMES_LINE, SAFETY_NOTE, SAVING_CHANGES, spoken } from '../../src/calmframes/copy';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
 import { DEFAULT_SETTINGS, PRESET_NAMES, PRESETS } from '../../src/calmframes/household';
 import { CALM_SPACE, scale } from '../../src/calmframes/calmStyles';
@@ -255,6 +255,15 @@ describe('Parents', () => {
     expect(order).toEqual(['"testID":"parent-area-name-field"', '"testID":"parent-area-name-keys"']);
   });
 
+  it('puts How Calm Frames works, with the approved sentence, where the remote can land', () => {
+    // On the TV only its heading was read; the lines never took focus.
+    renderParents();
+    const stop = screen.getByTestId('parent-area-explainer-reading');
+    expect(stop.props.focusable).toBe(true);
+    expect(textsIn(stop)).toEqual(EXPLAINER_LINES);
+    expect(EXPLAINER_LINES.some((line) => line.includes('not a medical device'))).toBe(true);
+  });
+
   it('puts the hidden scenes record where the remote, and so VoiceView, can land', () => {
     renderParents();
     const stop = screen.getByTestId('parent-area-hidden-reading');
@@ -325,6 +334,11 @@ describe('a flush reading stop', () => {
         for (const digit of '1357') fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
         fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
         fireEvent.press(screen.getByTestId('parent-area-rename-profile'));
+      }],
+      ['parent-area-explainer-reading', () => {
+        render(<ParentAreaScreen gate={setPin(emptyPinGate(), '1357', 'seed', 4)} onGateChange={jest.fn()} settings={DEFAULT_SETTINGS}
+          onSettingsChange={jest.fn()} log={emptyHideLog()} family={family} onFamilyChange={jest.fn()} titles={shelf} nowMs={() => 0} onBack={jest.fn()} />);
+        for (const digit of '1357') fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
       }],
       ['parent-area-hidden-reading', () => {
         render(<ParentAreaScreen gate={setPin(emptyPinGate(), '1357', 'seed', 4)} onGateChange={jest.fn()} settings={DEFAULT_SETTINGS}

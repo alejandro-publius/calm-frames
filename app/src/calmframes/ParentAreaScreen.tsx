@@ -999,6 +999,9 @@ const ParentAreaScreen = ({
         <Text style={styles.section} accessibilityRole="header">
           {EXPLAINER_TITLE}
         </Text>
+        {/* The approved sentence is in here, so the lines are one stop the
+            remote can land on and VoiceView reads; ReadingStop.tsx says why. */}
+        <ReadingStop testID={`${testID}-explainer-reading`} flush>
         {EXPLAINER_LINES.map((line, index) => (
           <Text
             key={line}
@@ -1007,6 +1010,7 @@ const ParentAreaScreen = ({
             {line}
           </Text>
         ))}
+        </ReadingStop>
       </View>
 
       {onBack || onCredits ? (
