@@ -305,11 +305,14 @@ const FirstRunScreen = ({
     );
   }
 
+  // Each step below gets a scroller of its own, keyed by the step. With one
+  // shared scroller the native view kept its offset from step to step, and
+  // the room step could open with its first lines scrolled out of sight.
   if (step === 'preset') {
     return (
       <View testID={testID} style={styles.screen}>
         {header}
-        <ScrollView testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
+        <ScrollView key="preset" testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
           <Text style={styles.helper}>{PRESET_STEP_NOTE}</Text>
           <View
             accessibilityRole="radiogroup"
@@ -366,7 +369,7 @@ const FirstRunScreen = ({
     return (
       <View testID={testID} style={styles.screen}>
         {header}
-        <ScrollView testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
+        <ScrollView key="room" testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
           <Text style={styles.helper}>{ROOM_ONLY_ADDS}</Text>
 
           <Text style={styles.section} accessibilityRole="header">
@@ -469,7 +472,7 @@ const FirstRunScreen = ({
   return (
     <View testID={testID} style={styles.screen}>
       {header}
-      <ScrollView testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
+      <ScrollView key="explainer" testID={`${testID}-scroll`} style={styles.scroll} contentContainerStyle={styles.content}>
         <View style={styles.review} testID={`${testID}-review`}>
           <Text style={styles.reviewTitle} accessibilityRole="header">
             Your household

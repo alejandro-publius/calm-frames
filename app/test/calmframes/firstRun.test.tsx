@@ -15,6 +15,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import React from 'react';
+import { ScrollView } from 'react-native';
 import { EXPLAINER_LINES, SAFETY_NOTE } from '../../src/calmframes/copy';
 import FirstRunScreen, {
   FirstRunResult,
@@ -337,6 +338,34 @@ describe('the first run', () => {
     assertFooter('first-run-done'); assertFooter('first-run-back');
     fireEvent.press(screen.getByTestId('first-run-done'));
     expect(onDone.mock.calls[0][0].settings).toEqual({...DEFAULT_SETTINGS, tvDiagonalIn: 85, seatDistanceIn: 48});
+  });
+
+  it('opens every step at the top of a scroller of its own, not where the last step left it', () => {
+    // On the device, choosing Extra cautious scrolls the preset list, and the
+    // room step then opened at that same offset with its first line, the
+    // statement that the room can only hide more, scrolled out of sight.
+    // Back from the end of the explainer hid the whole first row of TV sizes.
+    // The offset lives in the native scroll view, so this asks the thing that
+    // carries it: is the next step's scroller a new one or the last one?
+    // Seen to fail: before each step had its own key, the room step's
+    // scroller was the preset step's own object. Giving the room the
+    // preset's key, or the explainer the room's, turned it red again.
+    renderFirstRun();
+    type('5555'); type('5555');
+    const scroller = () => screen.UNSAFE_getByType(ScrollView).instance;
+    const preset = scroller();
+    expect(preset).toBeTruthy();
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    const room = scroller();
+    expect(room).not.toBe(preset);
+    fireEvent.press(screen.getByTestId('first-run-next'));
+    const explainer = scroller();
+    expect(explainer).not.toBe(room);
+    fireEvent.press(screen.getByLabelText('Back to TV and seating'));
+    const roomAgain = scroller();
+    expect(roomAgain).not.toBe(explainer);
+    fireEvent.press(screen.getByLabelText('Back to viewing preset'));
+    expect(scroller()).not.toBe(roomAgain);
   });
 
   it('has no motion: nothing on any step animates', () => {
