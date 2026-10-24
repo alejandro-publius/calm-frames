@@ -1,0 +1,21 @@
+{
+ "item": 11,
+ "base": "6a87937f9f185ac0760d6f8331184e34b876d92c",
+ "production_commits": ["4d4152c816666cd78df8668417c4d6478f07f7e6", "3ede1fad2afc134682449b4a39a465f847f0e3e9"],
+ "harness_commits": [],
+ "device": "Vega Virtual Device, SDK 0.24.9914, 1920 x 1080 (960 x 540 dp); Home and How it works also at 1280 x 720 (640 x 360 dp)",
+ "screen_reader": "VoiceView, heard through window recordings transcribed on the Mac",
+ "fixed": ["profile button names who is watching", "cards say their drawn line without the separator", "no false selected state on cards", "Details title heading", "Watch hint carries the covered strip", "How it works, More info safety text and the Parents record reachable", "Extra picture covers names its title", "How it works ring whole"],
+ "not_fixed": ["Parents footer Right jumps up the page", "Parents rows read state last", "seek bar percent announcements (dependency)", "resume prompt heading and one bare button (recovery code)", "name editor draft never read"],
+ "unobserved": ["reduced motion on the device", "VoiceView during playback with Dolby on", "1280 x 720 beyond Home and How it works", "typing feedback in the name editor", "physical Fire TV", "human listening"],
+ "packages": {
+  "rollback": {"sha256": "623615034f69586886d57a8b6f582a814d74cce6f58f21cdf4ebba5f3fd8259d", "sha384": "b268be9946241be7e8efab64737e6672b907dfb2d9558cae6a90acb51349b1b02b63e68a7ea63fe4d259a8db432eb458"},
+  "4d4152c": {"sha256": "15f68f9810e21873ffbaddecface19a18de7a910ec925fbf99fe2d6f618c3f81", "sha384": "5e64a1b4c65d69664ce417b9908b38a117c8890c3ea8a9587a023f862c729c8368d9bc6fb5869b8f406350f2ff558f18"},
+  "3ede1fa": {"sha256": "b4272a5f872afbc21b7296563c02ea03efee278dccdf3ca6ebb8b40703c8aad5", "sha384": "f28c9a96482d598ee3ec3cbae04a58f387369aafb8d54b1449927201a345dd5df50d04f2bf9cbf85406ab4baa82968d3"}
+ },
+ "rollback_restored": true,
+ "final_device_sha384": "b268be9946241be7e8efab64737e6672b907dfb2d9558cae6a90acb51349b1b02b63e68a7ea63fe4d259a8db432eb458",
+ "voiceview_final": "off",
+ "checks": {"typecheck": "pass", "lint": "pass", "style": "pass", "jest": "174 suites, 1860 passed, 4 skipped", "new_tests": 22, "mutations_seen_to_fail": 15},
+ "not_signed_off": ["medical safety", "human comfort", "owner listening", "all 20 items"]
+}
