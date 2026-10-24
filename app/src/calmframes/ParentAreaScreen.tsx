@@ -58,6 +58,7 @@ import TouchableOpacity from './CalmTouchable';
 import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
 import CalmPageHeader from './CalmPageHeader';
+import FocusRow from './FocusRow';
 import HomeHarborScene from './HomeHarborScene';
 import {
   CALM_CONTROL,
@@ -721,7 +722,11 @@ const ParentAreaScreen = ({
               testID={`${testID}-preset-${name}`}
               accessibilityRole="radio"
               accessibilityState={{ checked: chosen, selected: chosen, ...blocked }}
-              accessibilityLabel={`${PRESETS[name].title}. ${PRESETS[name].description}`}
+              // Name and state first, as the TV and seat chips say them; the
+              // description follows as the hint. Read as one label, it came
+              // first and a quick move cut the state off.
+              accessibilityLabel={`${PRESETS[name].title}${chosen ? ', chosen' : ''}`}
+              accessibilityHint={PRESETS[name].description}
               activeOpacity={1}
               onFocus={() => setFocusedRow(key)}
               onBlur={() => setFocusedRow(null)}
@@ -893,7 +898,10 @@ const ParentAreaScreen = ({
                 testID={`${testID}-${preference.id}`}
                 accessibilityRole="switch"
                 accessibilityState={{ checked: enabled, disabled: saving }}
-                accessibilityLabel={`${preference.title}. ${preference.note}`}
+                // On or Off is drawn beside the name, so it is said with it,
+                // before the note.
+                accessibilityLabel={`${preference.title}, ${enabled ? 'on' : 'off'}`}
+                accessibilityHint={preference.note}
                 activeOpacity={1}
                 onFocus={() => setFocusedRow(preference.id)}
                 onBlur={() => setFocusedRow(null)}
@@ -1002,7 +1010,8 @@ const ParentAreaScreen = ({
       </View>
 
       {onBack || onCredits ? (
-        <View style={styles.footer}>
+        // Right from the last of these went up the page to a seat chip.
+        <FocusRow style={styles.footer} testID={`${testID}-footer`}>
           {onBack ? (
             <View style={styles.button}>
               <CalmButton
@@ -1023,7 +1032,7 @@ const ParentAreaScreen = ({
               />
             </View>
           ) : null}
-        </View>
+        </FocusRow>
       ) : null}
     </ScrollView>
   );

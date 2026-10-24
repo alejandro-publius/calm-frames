@@ -65,7 +65,8 @@ export default function RecoverablePlayback({identity, title, menuArt, onBack, c
       <CoastalWorld detail destination={islandKind(menuArt)} />
       <CalmPageHeader onBack={leave} backTestID="resume-back" preferredBack={state.phase === 'loading'} />
       <View style={styles.copy}>
-        <Text style={[styles.title, heroTitleTypography(title)]}>{title}</Text>
+        {/* A heading, so VoiceView says which video's place this is as the prompt opens. */}
+        <Text style={[styles.title, heroTitleTypography(title)]} accessibilityRole="header" testID="playback-resume-title">{title}</Text>
         {state.phase === 'loading' ? <Text style={styles.detail} accessibilityLiveRegion="polite">Opening your video…</Text> :
           <View style={styles.actions}>
             <CalmButton primary hasTVPreferredFocus sound={false} label={`Resume at ${resumeTime(state.checkpoint!.positionMs)}`}

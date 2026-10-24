@@ -34,14 +34,20 @@ import { CALM_COLORS, COASTAL_COLORS, CALM_SPACE, FOCUS_RING_WIDTH, scale } from
 /** How far a flush stop's ring reaches outside its text, in 1080p units. */
 export const READING_STOP_ROOM = FOCUS_RING_WIDTH + CALM_SPACE.TIGHT;
 
-export default function ReadingStop({ testID, style, flush = false, children }: {
-  testID: string; style?: StyleProp<ViewStyle>; flush?: boolean; children: React.ReactNode;
+export default function ReadingStop({ testID, style, flush = false, accessibilityLabel, accessibilityLiveRegion, children }: {
+  testID: string; style?: StyleProp<ViewStyle>; flush?: boolean;
+  /** What a screen reader says, when the lines inside are not the words to say. */
+  accessibilityLabel?: string;
+  /** Announce a change to the label while focus is elsewhere. */
+  accessibilityLiveRegion?: 'none' | 'polite' | 'assertive';
+  children: React.ReactNode;
 }) {
   const coastal = React.useContext(CoastalAppearance);
   const colors = coastal ? COASTAL_COLORS : CALM_COLORS;
   const [focused, setFocused] = React.useState(false);
   return <CalmControlAppearance.Provider value={false}>
-    <TouchableOpacity testID={testID} accessibilityRole="text" activeOpacity={1}
+    <TouchableOpacity testID={testID} accessibilityRole="text" accessibilityLabel={accessibilityLabel}
+      accessibilityLiveRegion={accessibilityLiveRegion} activeOpacity={1}
       // React Native makes a touchable focusable only when it has a press handler.
       onPress={() => undefined}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}

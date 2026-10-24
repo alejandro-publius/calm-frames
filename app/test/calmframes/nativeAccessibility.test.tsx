@@ -43,11 +43,13 @@ import TitleDetailsScreen from '../../src/calmframes/TitleDetailsScreen';
 import ParentAreaScreen from '../../src/calmframes/ParentAreaScreen';
 import PictureHoldIntroduction from '../../src/calmframes/PictureHoldIntroduction';
 import ReadingStop from '../../src/calmframes/ReadingStop';
+import FocusRow from '../../src/calmframes/FocusRow';
 import { ambientArtworkFor } from '../../src/calmframes/AmbientScene';
 import { coveredSectionsSummary } from '../../src/calmframes/CoveredSectionsStrip';
 import { DETECTION_LIMITS_LINE, ONLY_IN_CALM_FRAMES_LINE, SAFETY_NOTE, SAVING_CHANGES, spoken } from '../../src/calmframes/copy';
 import { emptyHideLog } from '../../src/calmframes/hideLog';
-import { DEFAULT_SETTINGS } from '../../src/calmframes/household';
+import { DEFAULT_SETTINGS, PRESET_NAMES, PRESETS } from '../../src/calmframes/household';
+import { CALM_SPACE, scale } from '../../src/calmframes/calmStyles';
 import { emptyPinGate, setPin } from '../../src/calmframes/parentGate';
 import { addProfile, newFamily } from '../../src/calmframes/profiles';
 import { titlePresentation } from '../../src/calmframes/TitleArtwork';
@@ -181,7 +183,8 @@ describe('Parents', () => {
   const gate = setPin(emptyPinGate(), '1357', 'seed', 4);
   function renderParents() {
     render(<ParentAreaScreen gate={gate} onGateChange={jest.fn()} settings={DEFAULT_SETTINGS} onSettingsChange={jest.fn()}
-      log={emptyHideLog()} family={family} onFamilyChange={jest.fn()} titles={shelf} nowMs={() => 0} onBack={jest.fn()} />);
+      log={emptyHideLog()} family={family} onFamilyChange={jest.fn()} onRenameProfile={jest.fn(async () => true)} titles={shelf}
+      nowMs={() => 0} onBack={jest.fn()} onCredits={jest.fn()} />);
     for (const digit of '1357') fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
   }
 
@@ -197,6 +200,59 @@ describe('Parents', () => {
     for (const { entry, button } of buttons) {
       expect(button.props.accessibilityLabel).toBe(`Extra picture covers: ${titlePresentation(entry.title).name}`);
     }
+  });
+
+  it('keeps the footer buttons in a row Right cannot leave', () => {
+    // Right from Credits and licences went up the page to the 6 ft chip.
+    renderParents();
+    const footer = screen.getByTestId('parent-area-footer');
+    expect(screen.UNSAFE_getByType(FocusRow).props.testID).toBe('parent-area-footer');
+    const inside = (testID: string) => footer.findAll((node) => node.props.testID === testID).length > 0;
+    expect(inside('parent-area-back')).toBe(true);
+    expect(inside('parent-area-credits')).toBe(true);
+  });
+
+  it("says a preset's name and whether it is chosen before its description", () => {
+    renderParents();
+    for (const name of PRESET_NAMES) {
+      const row = screen.getByTestId(`parent-area-preset-${name}`);
+      const chosen = DEFAULT_SETTINGS.preset === name;
+      expect(row.props.accessibilityLabel).toBe(`${PRESETS[name].title}${chosen ? ', chosen' : ''}`);
+      expect(row.props.accessibilityHint).toBe(PRESETS[name].description);
+      expect(row.props.accessibilityState.checked).toBe(chosen);
+    }
+  });
+
+  it("says an interface switch's name and On or Off before its note", () => {
+    renderParents();
+    for (const id of ['interface-motion', 'interface-sounds']) {
+      const row = screen.getByTestId(`parent-area-${id}`);
+      const drawn = textsIn(row);
+      expect(row.props.accessibilityLabel).toBe(`${drawn[0]}, ${drawn[2].toLowerCase()}`);
+      expect(row.props.accessibilityHint).toBe(drawn[1]);
+      expect(row.props.accessibilityLabel).not.toContain(drawn[1]);
+    }
+  });
+
+  it('lets the remote land on the name being typed, and announces it as it changes', () => {
+    renderParents();
+    fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
+    fireEvent.press(screen.getByTestId('parent-area-rename-profile'));
+    const field = () => screen.getByTestId('parent-area-name-field');
+    expect(field().props.focusable).toBe(true);
+    expect(field().props.accessibilityLiveRegion).toBe('polite');
+    expect(field().props.accessibilityLabel).toBe('Sam. 3 of 16 characters');
+    // A made-up name. It is said, and it never becomes a test id.
+    for (const letter of 'my') fireEvent.press(screen.getByTestId(`parent-area-name-key-${letter}`));
+    expect(field().props.accessibilityLabel).toBe('Sammy. 5 of 16 characters');
+    const ids = JSON.stringify(screen.toJSON()).match(/"testID":"[^"]*"/g) ?? [];
+    expect(ids.filter((id) => /sammy/i.test(id))).toEqual([]);
+    // The keys sit where they sat: the stop's ring room comes out of the old gap.
+    const stop = StyleSheet.flatten(field().props.style) as Record<string, number>;
+    expect(Math.abs(stop.marginBottom + stop.borderWidth + stop.padding - scale(CALM_SPACE.ROW))).toBeLessThanOrEqual(1);
+    // The field comes before the keys, so Up from the letters reaches it.
+    const order = (JSON.stringify(screen.toJSON()).match(/"testID":"parent-area-name-(field|keys)"/g) ?? []);
+    expect(order).toEqual(['"testID":"parent-area-name-field"', '"testID":"parent-area-name-keys"']);
   });
 
   it('puts the hidden scenes record where the remote, and so VoiceView, can land', () => {
@@ -261,6 +317,14 @@ describe('a flush reading stop', () => {
       ['title-details-info-reading', () => {
         render(<TitleDetailsScreen entry={shipped[0]} onPlay={jest.fn()} />);
         fireEvent.press(screen.getByTestId('title-details-show-info'));
+      }],
+      ['parent-area-name-field', () => {
+        render(<ParentAreaScreen gate={setPin(emptyPinGate(), '1357', 'seed', 4)} onGateChange={jest.fn()} settings={DEFAULT_SETTINGS}
+          onSettingsChange={jest.fn()} log={emptyHideLog()} family={family} onFamilyChange={jest.fn()} onRenameProfile={jest.fn(async () => true)}
+          titles={shelf} nowMs={() => 0} onBack={jest.fn()} />);
+        for (const digit of '1357') fireEvent.press(screen.getByTestId(`parent-area-key-${digit}`));
+        fireEvent.press(screen.getByTestId('parent-area-profiles-profile-2'));
+        fireEvent.press(screen.getByTestId('parent-area-rename-profile'));
       }],
       ['parent-area-hidden-reading', () => {
         render(<ParentAreaScreen gate={setPin(emptyPinGate(), '1357', 'seed', 4)} onGateChange={jest.fn()} settings={DEFAULT_SETTINGS}

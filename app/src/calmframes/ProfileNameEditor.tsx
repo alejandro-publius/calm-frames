@@ -37,6 +37,7 @@ import React from 'react';
 import TouchableOpacity from './CalmTouchable';
 import { StyleSheet, Text, View } from 'react-native';
 import CalmButton from './CalmButton';
+import ReadingStop, { READING_STOP_ROOM } from './ReadingStop';
 import {
   CALM_CONTROL,
   COASTAL_COLORS as CALM_COLORS,
@@ -255,15 +256,19 @@ const ProfileNameEditor = ({
         {editNameTitle(profile.name)}
       </Text>
       {/* The count sits at the field's right edge, and a refusal takes its
-          place in the same slot, so a refusal moves nothing on the screen. */}
-      <View
-        style={styles.field}
+          place in the same slot, so a refusal moves nothing on the screen.
+          The field is a stop the remote can land on, Up from the letters, so
+          VoiceView reads the name as it stands; it speaks only what has focus.
+          It still announces each change while focus is on a key. */}
+      <ReadingStop
+        flush
+        style={styles.fieldStop}
         testID={`${testID}-field`}
-        accessible
         accessibilityLiveRegion="polite"
         accessibilityLabel={`${draft.length === 0 ? NAME_EMPTY_HINT : draft}. ${
           shownProblem ?? nameLengthLine(draft.length, maxLength)
         }`}>
+      <View style={styles.field}>
         <Text
           style={[styles.draft, draft.length === 0 ? styles.hint : null]}
           testID={`${testID}-draft`}>
@@ -275,6 +280,7 @@ const ProfileNameEditor = ({
           {shownProblem ?? nameLengthLine(draft.length, maxLength)}
         </Text>
       </View>
+      </ReadingStop>
       <View testID={`${testID}-keys`}>
         {LETTER_ROWS.map((row, rowIndex) => (
           <View key={row} style={styles.row}>
@@ -348,8 +354,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(CALM_SPACE.BLOCK),
     borderRadius: scale(CALM_CONTROL.RADIUS),
     backgroundColor: CALM_COLORS.SURFACE,
-    marginBottom: scale(CALM_SPACE.ROW),
   },
+  /** The field's old gap below it, less the room its stop's ring takes. */
+  fieldStop: { marginBottom: scale(CALM_SPACE.ROW - READING_STOP_ROOM) },
   draft: {
     ...CALM_TEXT.screen,
     color: CALM_COLORS.TEXT,

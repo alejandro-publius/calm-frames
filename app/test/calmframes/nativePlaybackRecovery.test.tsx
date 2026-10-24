@@ -224,3 +224,10 @@ test('one keyed player retains its native handler owner across state renders', a
   act(() => mockError(true));
   expect(mockHandlerOwners).toHaveLength(1);
 });
+
+it('names the video as the resume prompt heading, for VoiceView to say as it opens', async () => {
+  const view = await open(checkpoint());
+  expect(view.getByTestId('playback-resume-title').props.accessibilityRole).toBe('header');
+  expect(view.getByTestId('playback-resume-title').props.children).toBeTruthy();
+  expect(view.getByTestId('resume-playback')).toBeTruthy();
+});
