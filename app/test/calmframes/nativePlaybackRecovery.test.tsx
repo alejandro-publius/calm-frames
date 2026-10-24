@@ -231,3 +231,15 @@ it('names the video as the resume prompt heading, for VoiceView to say as it ope
   expect(view.getByTestId('playback-resume-title').props.children).toBeTruthy();
   expect(view.getByTestId('resume-playback')).toBeTruthy();
 });
+
+it('gives first focus to Resume alone, never to Back while the saved place loads', async () => {
+  // On the TV, Back took focus for the few milliseconds the place took to
+  // load, and VoiceView announced it, once as a bare "button", before Resume.
+  await AsyncStorage.setItem(CHECKPOINT_KEY, JSON.stringify({version: 1, records: [checkpoint()]}));
+  const view = startPlayer('none', true, false, undefined, false, true);
+  expect(view.getByTestId('resume-back').props.hasTVPreferredFocus).toBe(false);
+  await settle();
+  expect(view.getByTestId('resume-playback').props.hasTVPreferredFocus).toBe(true);
+  expect(view.getByTestId('resume-back').props.hasTVPreferredFocus).toBe(false);
+  fireEvent.press(view.getByTestId('resume-back')); expect(view.goBack).toHaveBeenCalledTimes(1);
+});
