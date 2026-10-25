@@ -1,138 +1,105 @@
 # Calm Frames canonical product checkpoint
 
-This cloud thread is the sole integration owner. This is unpublished development,
-not a replacement submission. The original 20 requested outcomes below supersede
-the earlier operational checklist, whose narrower scopes overstated completion.
-The Git history retains that older record.
-
-**October 25 takeover:** the pushed Claude handoff was fetched and independently
-verified at `15ef46c6e23c8ba627492da23b1b147000031aa4`. The active local branch is
-`codex/overnight-completion-2026-10-25`; its [work status](../overnight-2026-10-25/WORK_STATUS.md)
-records current ownership, queued decisions and exact missing native evidence.
-Earlier source rows below retain their historical scope. New overnight work is
-local only and cannot inherit the installed candidate's native acceptance.
+This cloud thread is the sole integration owner. This is private development,
+not a replacement submission. Claude stopped editing before the October 25
+handoff. The original numbered outcomes below remain the acceptance ledger;
+code, machine checks, native observations and human acceptance are separate.
 
 ## Exact source and ownership
 
-| Role | Exact source and inclusion |
+| Role | Exact identity |
 |---|---|
-| Current received handoff | `codex/final-handoff-2026-10-25`, `15ef46c6e23c8ba627492da23b1b147000031aa4`, remotely verified. Native candidate `a672f57d333dc0e3fada51b3175ca1711d1f9397`; [recorded operator acceptance](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate). The native binary and two detailed evidence ZIPs have not been transferred here. |
-| Submitted fallback | `bf2f615e6fad0d73442fe2b9acab3067bf311e7e`; existing video and live materials remain unchanged. |
-| Frozen integration branch | `codex/integration-owner-2026-10-23`, `2cf54e0d168e58daedfde3f15407833d23af4e93`. Remote identity checked in the [hosted receipt](../../results/design-polish-2026-10-23/cloud-finish/hosted.json). |
-| Mac acceptance snapshot | `codex/design-polish-2026-10-23`, `6a87937f9f185ac0760d6f8331184e34b876d92c`. The [received native receipt review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md) ties this source to recorded package SHA-256 `623615034f69586886d57a8b6f582a814d74cce6f58f21cdf4ebba5f3fd8259d` and matching installed-device SHA-384. Preserve this immutable snapshot. |
-| Isolated cloud follow-up | `codex/dependency-followup-2026-10-23`. Code `121270e802df1f150f09a4216319f1af1f1fd67b` updates Ajv/Zod; `2f187d1723f65c7a09fe566a1e13aea91bdbcbb4` fixes the legacy logger. Code `07db296137ec3ba50afff15097053061709fda27` suppresses private name/PIN key focus traces, preserving layout and interaction. These changes are not in the Mac snapshot or published; [dependency receipt](../../results/design-polish-2026-10-23/dependency-wave4/receipt.json), [privacy receipt](../../results/design-polish-2026-10-23/private-input-trace/receipt.json). |
-| Included UI work | `41bdeb94ca1c3e8cceabafd821f141587f77c202` adds pending-PIN feedback; `fb7f48031d3ae587c8fba40422566c68a0a1f23f` refines Home, Details and Parents; `edbd4359443454c115c9137861f2e39ec575677c` separates four islands; `d7da316d2d48c3b66b3cc4874257e98ca5ef943e` capitalizes Sea Otters. |
-| Included cloud correction | `acf064c` fixes Python lint; `f5ea4fb` fixes legacy shell-quote. `5bf123409d8d863e2dbefd73bc3b2046e264d89e` fixes nested Lodash and Minimatch. [Mac-snapshot dependency receipt](../../results/design-polish-2026-10-23/dependency-wave2/receipt.json) records exact inputs and checks. |
-| Fable implementation lane | Verified source `6cda443c3475bd086e62a0582cce42a6a49a4695` received from the user. Feature `9546c0f` and evidence `6cda443` replayed as `9a2db49` and `f32f2d6`. The [integration review](../design-polish-2026-10-23/FABLE_INTEGRATION.md) records cloud Back/focus corrections and exact checks. Original source preserved on `codex/fable-handoff-6cda443`; no other cloud editor is active. |
-| Prior completed handoffs | Claude source through `6360417814d684d41c94789a9e406fc27de53c66` is an ancestor. Combined release checks were replayed as `0371ebaa`, `5ef3b0d1`, `3bcfe542`; judging package `9ad7bb7` was replayed as `a61c83c5`. Its package tree remains identical. [Original-to-integrated map](../CLOUD_RELEASE_CHECKPOINT.md#integrated-inputs). No duplicate import. |
-| Explicit exclusions | The separate Retry harness and rejected browser UI remain excluded by the integration record and task boundary. Their referenced full objects are unavailable here, so this is not a new ancestry certificate for those references. New narration, illustrations and replacement video are not included. |
+| Received and independently verified GitHub handoff | `codex/final-handoff-2026-10-25`, `15ef46c6e23c8ba627492da23b1b147000031aa4` |
+| Active local continuation | `codex/overnight-completion-2026-10-25`; read its full HEAD with `git rev-parse HEAD`. The export manifest records the immutable transfer SHA. |
+| Native candidate described by the handoff | `a672f57d333dc0e3fada51b3175ca1711d1f9397`; [recorded acceptance](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate). Its binary and detailed native ZIPs are not present in this cloud. |
+| Preserved earlier rollback | `6a87937f9f185ac0760d6f8331184e34b876d92c`; [source and package review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md). |
+| Submitted fallback | `bf2f615e6fad0d73442fe2b9acab3067bf311e7e`; live materials unchanged. |
+| Prior cloud branch | `codex/integration-owner-2026-10-23`, frozen historical source `2cf54e0d168e58daedfde3f15407833d23af4e93`; preserved. |
+
+The [overnight work status](../overnight-2026-10-25/WORK_STATUS.md) records local
+commits, checks, exact missing inputs and the next action. Original branches and
+worktrees remain intact. The judging package is preserved. The [exclusion review](../overnight-2026-10-25/HANDOFF_REVIEW.md)
+checks every supplied never-merge head and named fixture against ancestry;
+missing intermediate harness IDs remain an explicit proof limit. No harness or
+rejected browser UI was imported. No overnight push, publication or submission
+change is authorized.
 
 ## Hosted checks and remaining release blockers
 
-The latest read of frozen `2cf54e0` shows [CI 40007368463](https://github.com/alejandro-publius/calm-frames/actions/runs/40007368463)
-**failed at Python lint**. Vega app, modeled UI checks, secret scan, mutation/property
-checks and published-number checks passed. [Audit 40007372605](https://github.com/alejandro-publius/calm-frames/actions/runs/40007372605)
-**failed at dependency policy**; its infrastructure, ARM64 image and SBOM jobs passed.
-These are results for that exact frozen source, not for the newer local review branch.
-No hosted run has validated the local review changes. No run was restarted here.
+GitHub's API returned **no hosted runs for exact handoff `15ef46c`**;
+[read receipt](../../results/overnight-2026-10-25/hosted-handoff.json).
+New local commits do not inherit earlier hosted or native results. Historical
+CI on `2cf54e0` failed Python lint and Audit failed dependency policy; the
+[historical receipt](../../results/design-polish-2026-10-23/cloud-finish/hosted.json)
+keeps those results tied to that source. No run was restarted overnight.
 
-Pinned Ruff 0.17.0 reproduced the lint defects in the demo preflight tooling.
-They are fixed without changing the lint configuration or approved narration.
-The dependency continuation replaces the old shell-quote leaf with the already
-used fixed 1.11.0 version. See the [dependency decision](DEPENDENCY_DECISION.md)
-and [cloud receipt](../../results/design-polish-2026-10-23/cloud-finish/receipt.json).
-The next local fix, `5bf1234`, deduplicates old Lodash onto the existing 4.18.1
-and moves only Minimatch 3.x onto 3.1.5. Six more advisory IDs are removed,
-with no additions. Clean normal checks and unchanged installed build-tool
-behavior are recorded in the [latest receipt](../../results/design-polish-2026-10-23/dependency-wave2/receipt.json).
-Other dependency findings and expired exception groups remain blockers. The
-owner's TOML-only approval through October 30 is not blanket acceptance.
+The [dependency continuation](../overnight-2026-10-25/DEPENDENCIES.md) records
+compatible fixes, failing-before regressions, exact lock inputs and reproduced
+SBOMs. It also lists residual advisories. The two October 21 exception groups
+remain expired. Only the existing five-advisory TOML controlled-build deferral
+is approved through October 30; it requires reviewed, hashed manifests and
+isolated, bounded builds. No exception was renewed and no owner acceptance
+was signed. A nonzero Audit result remains a release blocker.
 
-The separate follow-up fixes Ajv 8 and Zod 4 without changing their consumers.
-Fresh matching scans remove two advisory IDs, from 23 to 21, with no additions;
-the fresh baseline includes a Zod finding absent from the prior scan. The
-[follow-up receipt](../../results/design-polish-2026-10-23/dependency-wave3/receipt.json)
-records clean normal checks and reproduced SBOMs. The remaining findings and
-expired exceptions still block Audit. Fable's Mac target remains `6a87937`.
-
-The next bounded fix scopes legacy logkitty to its patched 0.7.1 version while
-retaining both CLI versions. Fresh matching scans remove the critical
-GHSA-v8v8-6859-qxm4, from 21 to 20 unique advisory IDs, with none added. There
-are no critical entries in that app-lock scan. The [logger receipt](../../results/design-polish-2026-10-23/dependency-wave4/receipt.json)
-records reproduction of the old host-shell interpolation, compatible CLI
-behavior, clean normal checks and SBOM reproduction. Audit still has remaining
-findings and expired exceptions; zero critical app-lock entries is not release
-acceptance or a complete native inventory.
-
-Fable's smaller evidence ZIP is now received and verified. The source export,
-lockfile and recorded installed-package identity agree with `6a87937`; all
-listed file checksums pass. The [native review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md)
-records name editing, persistence, focus return and position isolation as Mac
-operator observations, with relevant trace corroboration. Screenshots are
-indexed but were excluded from the ZIP. Still-route coverage and duplicate-name
-coverage are narrower than their recorded passed labels. Failed-write retry,
-VoiceView and owner comfort remain open. Do not repeat already observed checks
-or infer that every native criterion has passed.
-
-Cloud code `07db296` fixes the concrete privacy issue Fable identified and the
-same issue in PIN keys. Debug key focus no longer discloses letter/digit IDs;
-ordinary navigation diagnostics remain. [Focused regressions](../../results/design-polish-2026-10-23/private-input-trace/receipt.json)
-reproduce the old behavior and verify key actions, labels, focus feedback and
-name persistence afterward. Normal typecheck/lint pass. This is a local code
-fix, not an updated installed Mac package or new native acceptance.
+The [handoff review](../overnight-2026-10-25/HANDOFF_REVIEW.md) preserves #5/#6
+native observations and reports the committed-log privacy review. Later cloud
+source changes require a new native build identity. Missing native checks,
+owner layout/comfort decisions and external account access cannot be replaced
+by source tests. The [morning review](../overnight-2026-10-25/MORNING_REVIEW.md)
+bundles those decisions without stopping independent work.
 
 ## One 20-item product checklist
 
-These are the user's original items in their original order. Implemented code,
-local checks, native observations, publication and acceptance are separate facts.
-A partial item can contain completed subparts; it is not a reason to redo them.
+Statuses apply to each whole original outcome, not the number of tests written.
+A partial item can contain completed machine work. Preserve completed subparts;
+do not repeat them solely to transfer their evidence.
 
-| # | Original outcome | Status | Evidence and next action |
+| # | Original outcome and acceptance scope | Status | Evidence and exact remaining action |
 |---|---|---|---|
-| 1 | Cohesive native design | Partially completed | [Approved broader visual work](../design-polish-2026-10-23/README.md) is implemented through `d7da316`. Home/Details routes were traversed by the Mac operator on `6a87937`; [review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md). Next: receive the existing cropped native images for independent layout inspection and collect owner comfort; no new redesign. |
-| 2 | Redundant-copy removal | Partially completed | `2403d8f` and existing Details/still/recovery copy changes are retained; [source ledger](EVIDENCE_RECONCILIATION.md#implemented-work-to-retain). Next: current-build screen sweep, preserving necessary protective/error disclosures. |
-| 3 | Loading and transitions | Partially completed | `41bdeb9` adds visible PIN-checking feedback. The reported pale opening frame still has no established cause. Next: benign source-bound native observation before changing any player or cover timing. |
-| 4 | Watch and focus visibility | Partially completed | Contrast and coastal refinements retained. Mac operator observed name-grid focus and return after Save/Cancel/Back on `6a87937`, corroborated by control traces. [Review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md). Next: inspect existing native images for rest/focus/press appearance; traces do not establish pixels. |
-| 5 | PIN, profiles and kid names | Completed | Native editing, limit/blank refusal, save persistence through relaunch, Cancel/Back and position isolation are recorded on verified `6a87937`; [review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md). Duplicate refusal covered the household label only. On integration candidate `d7ff886`, a made-up household showed no PIN or name key in the debug trace while ordinary controls were traced, and the merged field still announced the name ([integration notes](../design-polish-2026-10-23/claude-integration/README.md)). At 1280 by 720 with VoiceView and a made-up household, on harness `19ba55d` over candidate code `4de7bd0` (the name editor is unchanged in `a672f57`), a sibling's name is refused ("Sam is already in this household") and a controlled failed save shows its notice, keeps the draft and the old name, and Try again saves it with the kid in its place ([integration notes](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate)). No listed name, profile or PIN check remains. Local `07db296` suppresses name/PIN key traces. Do not repeat the completed functional name pass. |
-| 6 | Onboarding footer | Partially completed | [Recorded code/build fix](../../results/native-onboarding-footer-2026-10-23/receipt.json) is retained, and `dd1ec6c` is integrated as `161c2f5`. On `a672f57` the production first run was observed on fresh made-up households on a disposable virtual device at 1920 by 1080 and 1280 by 720: every step opens at its top, one Down from the last preset reaches Next (`917e78f`), Up from Open library lands on the explainer's reading stop with the approved sentence in view and one Down returns (`917e78f`, `4de7bd0`, `a672f57`), and Open library reaches Home. The display turning off after idle time is the device's own 20-minute timeout: the system closed every app on the display, its launcher too, the crash history stayed empty, and Calm Frames relaunched on its Home with the household intact ([integration notes](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate)). Open: at rest the approved sentence still starts below the explainer's edge, one Up away behind a visible ring; making it visible at rest needs a layout change, the owner's decision. |
-| 7 | Ambient experience across titles | Partially completed | McWay sustained playback/ending remains observed on `3bc658f`. The `6a87937` pass traversed McWay playback and Acadia still playback; Sea Otters and Forest reached Details only. [Native ledger](EVIDENCE_RECONCILIATION.md#native-and-human-acceptance-ledger). Next: the two unopened still scenes; no equivalent long moving editions are delivered for those titles. |
-| 8 | Human audio and comfort review | Blocked | No final-build owner listening/palette/comfort receipt. Next: owner observations tied to package identity; candidate `a672f57` (sha384 `480fd42d...0d59`) is installed on the main virtual device for that review. Script approval and technical measurements do not supply them. |
-| 9 | Cover, seek and decoder ordering | Partially completed | [Source and predecessor evidence](EVIDENCE_RECONCILIATION.md#native-and-human-acceptance-ledger) supports scoped behavior. Harness-only Retry is separate; compositor timing is not proved. Next: benign native checks with instrumentation limits recorded. |
-| 10 | Profile protection and captions | Partially completed | Position isolation was observed on `4b04877` and through rename on `6a87937`; `5e4da02` rejects stored protection overrides. Shipped consumer titles have [no caption tracks](../../results/native-acceptance-gaps-2026-10-23/catalog-caption-inventory.json). Next: differential stricter-profile native recovery; positions do not prove protection or caption restoration. |
-| 11 | Native accessibility | Partially completed | **Implementation:** done on `claude/native-accessibility-2026-10-24`, production commits `4d4152c`, `3ede1fa`, `88c1716`, `eeaaf16`, `3b0174b` ([notes](../design-polish-2026-10-23/claude-native-accessibility/README.md); earlier source guards: [evidence ledger](EVIDENCE_RECONCILIATION.md#native-and-human-acceptance-ledger)). Native name-grid D-pad travel and focus return were recorded on `6a87937`. **Native acceptance:** partial. VoiceView and D-pad passed on `3b0174b` at 1920 by 1080 and 1280 by 720 for Home, Details, More info, How it works, the Parents rows, footer and explainer, and the name editor with made-up names; the resume prompt heading and first focus pass. Open: seek bar progress announcements blocked upstream in Kepler UI Components 3.2.2; VoiceView's own Back or bare button at resume prompt entry in 2 of 5 openings; reduced motion not observable on this virtual device (that diagnostic does not prove other setups lack it); no physical TV or human listening. **Final integration:** in local candidate `a672f57` on `claude/integration-2026-10-24`. At 1280 by 720 the Parents explainer reaches the footer, the profile chooser reads both kids, and the player's controls are reachable; VoiceView repeats the paused notice each time the controls hide (recorded, not changed) and is silent while playing with Dolby kept, as the system says ([integration notes](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate)). The open items above remain. |
-| 12 | Further technical depth and dependency audit | Partially completed | Prior fixes retained. Isolated `121270e` fixes Ajv/Zod; `2f187d1` also removes the critical legacy logger advisory with [clean normal checks and reproduced SBOMs](../../results/design-polish-2026-10-23/dependency-wave4/receipt.json). The latest app-lock scan retains 20 unique IDs and no critical entries. On combined source `d7ff886`, `make sbom-check` passes and `make audit` finds 21 npm advisories, none critical; new advisory 1243074 (`body-parser`, high) has no exception and two exception groups expired on October 21, so `make audit-check` fails; nothing was re-dated ([integration notes](../design-polish-2026-10-23/claude-integration/README.md)). The native inventory of `a672f57` (31 required modules, one native library, 83 bundled npm packages) matches 42 of 45 flagged packages to their groups; `react-navigation__native` and `security-manager-lib` are grouped as shipping but are not bundled, and `body-parser` has no exception ([integration notes](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate)). Next: the owner's decision on exceptions, then hosted CI for `a672f57` when authorized; nothing was renewed or re-dated. Audit stays blocked; no exception renewal or analyzer-cache change. |
-| 13 | Personal import and caregiver pre-check | Partially completed | [Local intake/report utilities](EVIDENCE_RECONCILIATION.md#personal-file-import-and-caregiver-pre-check) exist. They are not a finished native TV import journey and do not authorize arbitrary files for playback. Next: define that later user journey separately; no invented delivery claim. |
-| 14 | GitHub presentation | Partially completed | Private README now includes editable kid names with source evidence and input/native limits, alongside the core purpose and standalone scope. Historical images remain labelled. Next: current native captures and explicitly authorized publication; default branch is unchanged. |
-| 15 | Devpost and YouTube copy | Partially completed | [Private drafts](PRESENTATION_DRAFTS.md) now include the name-editor journey and code-grounded architecture without changing the approved narration. Next: reconcile with accepted source before any permitted publication. Live text is frozen. |
-| 16 | Manga/native/ElevenLabs demo | Deferred | [Approved script and tooling](demo/README.md) exist. No generated narration, illustrations or finished current-source replacement video are claimed. Next: accepted product freeze, show any material script revision, then production and human review. |
-| 17 | Submission and judge requirements | Partially completed | Submitted fallback and historical judging evidence retained. A fresh rules-page request was [blocked by the cloud proxy with HTTP 403](../../results/design-polish-2026-10-23/dependency-wave3/official-rules-access.json). Next: accessible official rules and authoritative permitted-window/access confirmation; no inferred deadline, invitations or live edits. |
-| 18 | Single source of truth | Completed | Fable source and native receipt are received and reconciled once. [Verified source/package mapping and scope](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md) separate the immutable Mac build, later cloud code and submitted fallback. Original numbering and the one-owner checkpoint are current. Local integration candidate `d7ff886` combines cloud `226d317`, #6 `dd1ec6c` and #11; its successor `a672f57` adds three #6 commits and carries its own package, checks and acceptance pass ([integration notes](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate)). Next maintenance: attach later combined-build results to their own source. |
-| 19 | Publish upgraded artifacts | Blocked | Review branch remains local and unsubmitted. Native/human acceptance and Audit remain open. Next: complete gates and obtain a permitted publication decision; no automatic promotion. |
-| 20 | Reading comfort mode | Deferred | Not implemented. Keep last; later bounded text/spacing work requires native wrapping/focus checks. No treatment claim. |
+| 1 | Cohesive native Fire TV design across screens | Partially completed | The [coastal design, four islands and Sea Otters naming](../design-polish-2026-10-23/README.md) are retained in `15ef46c`. Source review found no additional justified redesign. Receive the existing native image ZIPs and assess current-build layout; owner comfort remains #8. |
+| 2 | Remove redundant copy while retaining safety, accessibility and error instructions | Partially completed | Existing `2403d8f` cleanup and later Details/still/recovery copy are retained. [Current UI source review](../overnight-2026-10-25/APP_UX.md) preserves essential instructions. Remaining: current native screen sweep when existing captures arrive, not another speculative copy rewrite. |
+| 3 | Calm cold start, loading, first frames, errors and scene transitions | Partially completed | Pending-PIN feedback `41bdeb9`, guarded loading and explicit recovery remain. [Native limits](../overnight-2026-10-25/NATIVE_LIMITS.md) state the unproved pale first-frame cause. Need source-bound native startup/transition observation before altering cover or decoder timing. |
+| 4 | Visible Watch and distinct card focus at both supported sizes | Partially completed | Existing contrast, Watch hierarchy and coastal refinements are retained. D-pad routes are recorded; traces do not establish focus pixels. Inspect actual current native images at 1920 by 1080 and 1280 by 720. |
+| 5 | PIN presentation, profile-panel sizing and kid-name UX | Completed | [Recorded native acceptance](../design-polish-2026-10-23/claude-integration/README.md#acceptance-pass-on-the-candidate) retains persistence, limit/blank/sibling refusal, Save/Cancel/Back focus and position isolation. Controlled failed-save/retry with VoiceView used named fixture `19ba55d` over `4de7bd0`, not corrupted household data; editor behavior is retained in `a672f57`. Private letter/digit tracing is suppressed by `07db296`. No original name/PIN check remains; retain the scope and do not repeat the whole pass. |
+| 6 | Reachable onboarding Next, Back and footer with readable disclaimer | Partially completed | Production navigation passed both sizes on `a672f57`: steps open at top, one Down reaches Next, Up reaches the explainer reading stop, Down returns and Open library reaches Home. Idle shutdown was the device's timeout closing all apps, not an app crash. Owner must choose whether the approved disclaimer also needs visibility at rest; current wording and layout are preserved. |
+| 7 | Sustained ambient viewing beyond McWay, including Forest and Sea Otters | Partially completed | McWay's existing continuous edition and final still are retained. Other titles offer stills and separate short previews. No approved long moving Forest/Otters editions are available, and none are faked through loops or slow motion. Need appropriate licensed source/edition approval and native observations of the remaining titles. |
+| 8 | Prepare owner audiovisual and comfort review without medical or human-validation claims | Blocked | [Morning review](../overnight-2026-10-25/MORNING_REVIEW.md) supplies exact identity and observation fields. Owner listening, palette, pacing and comfort observations are absent; technical evidence and approved narration are not acceptance. |
+| 9 | Native cover, seek and decoder timing evidence or explicit truthful limitations | Completed | [Explicit limitations record](../overnight-2026-10-25/NATIVE_LIMITS.md) binds each source/observed claim and states unmeasured compositor, decoder and physical timing. This closes the requested limitations alternative, not native timing measurement. No medical guarantee follows. |
+| 10 | Recovery preserves protection floors, profile positions and supported captions | Partially completed | Source checkpoint/guard tests and earlier position isolation remain. Stored settings cannot lower the current floor. [Inventory and limits](../overnight-2026-10-25/NATIVE_LIMITS.md) show no consumer caption tracks; test restoration is not native caption evidence. Need differential stricter-profile native recovery and any approved captioned edition before claiming native restoration. |
+| 11 | Native readability, D-pad order/focus, VoiceView and reduced motion | Partially completed | Existing recorded two-size navigation/VoiceView results are retained. [Pause correction](../overnight-2026-10-25/APP_UX.md) announces each actual pause once, instead of repeating when controls hide; new regressions failed against old source. Native listening on the combined build, upstream seekbar announcements, intermittent resume-entry speech and reduced-motion observation remain open. |
+| 12 | Core technical depth, dependency/audit remediation and final validation | Partially completed | [Compatible dependency fixes](../overnight-2026-10-25/DEPENDENCIES.md), [asset packaging protections](../overnight-2026-10-25/PACKAGING.md) and [caregiver import protections](../overnight-2026-10-25/personal-import/README.md) are implemented. Combined validation and the exact residual advisory ledger remain authoritative. Expired policy groups, missing current native inventory bytes and any failing gate still block release. No budgets, tests or exceptions are weakened. |
+| 13 | Working personal-file import and caregiver pre-check with rights/DRM boundaries | Partially completed | [Working local workflow](../overnight-2026-10-25/personal-import/README.md) now requires processing permission, refuses recognized encrypted MP4 metadata, analyzes without playback and exports an exact-hash caregiver report. Real HTTP/analyzer and browser checks pass, including tampering, reconnect, keyboard and narrow layout. Direct TV file selection and separately approved exact-edition delivery are not supplied or implied. |
+| 14 | GitHub presentation with actual screenshots, architecture, setup and build identity | Partially completed | [README](../../README.md), [architecture](../presentation/ARCHITECTURE.md) and local caregiver setup are current. Existing native screenshots are clearly historical; browser import images are labelled as that workflow. Current native image ZIPs are missing. Private local drafts are ready for review; publication remains separate. |
+| 15 | Final accurate Devpost and YouTube description drafts | Completed | [Source-backed drafts](PRESENTATION_DRAFTS.md) distinguish implemented behavior, recorded native observations and planned replacement media. Claims retain rights/medical/native limits. These are completed private drafts, not final video acceptance or a live submission edit; reconcile again if accepted product scope changes. |
+| 16 | Replacement-demo tooling/assembly from real footage/assets, with missing production inputs queued | Partially completed | [Renderer fixes and real encoder exercise](../overnight-2026-10-25/DEMO.md) bind bytes and receipts, preserve ambient audio and prevent truncated credits. The encoded fixture is visibly TEST ONLY. Actual accepted-source captures, illustrations and narration are absent, so no replacement product video is claimed. Production stays parked until product acceptance and script reconciliation. |
+| 17 | Verify submission/judge-access requirements; queue account/eligibility steps | Blocked | [Primary-source register](../judging-package/PRIMARY_SOURCES.md) preserves dated official-source provenance. The [fresh rules request](../../results/overnight-2026-10-25/official-rules-access.json) was blocked before the origin. Need an accessible current official copy and owner account/eligibility/judge-access confirmation; no guessed deadline or access claim. |
+| 18 | Consolidated source, exact SHA, original checklist and handoff | Completed | Remote `15ef46c` is independently verified, local ownership is singular, original branches are preserved, and this ledger/transfer manifest separate source, package and acceptance. [Work status](../overnight-2026-10-25/WORK_STATUS.md) records the continuation. Maintain exact final SHA and checks in the portable export. |
+| 19 | Prepare validated release artifacts; publication/submission changes wait for owner review | Partially completed | [Packaging fixes](../overnight-2026-10-25/PACKAGING.md) exclude build tools without changing runtime media bytes. Portable source/checksum export is prepared at the final checkpoint. A new native package cannot be built or accepted here without native SDK/runtime inputs and current evidence; no obsolete package is relabelled. No publication is performed. |
+| 20 | Optional per-profile Reading comfort LAST: text, spacing, persistence and native focus/layout, without treatment claims | Deferred | Feasibility reviewed only while higher-priority machine work completes. A bounded default-off preference must preserve IDs, names, floors, positions and normal layouts, with result-aware persistence. Native wrapping/focus acceptance would remain open. No global redesign or protection change is authorized by this item. |
 
 ## Mac-only acceptance, without duplicate work
 
-Fable's native receipt is received and its scope reconciled. Use the
-[per-check review](../design-polish-2026-10-23/NATIVE_NAMES_REVIEW.md) to retain
-completed observations and identify gaps. Use [MAC_ACCEPTANCE.md](MAC_ACCEPTANCE.md)
-for those remaining observations, not the obsolete f9c210b package or an inferred Mac path.
-The current export is the reported Mac snapshot, without the later isolated
-dependency and privacy follow-ups. Keep its receipt tied to `6a87937`; any
-combined follow-up build needs its own source/package identity. Preserve private
-PIN entry, household data, approved media and a verified rollback package.
-Report native focus/button appearance, onboarding footer, protection/recovery
-ordering, retained title routes, VoiceView/reduced motion and owner listening/
-comfort as observed, failed or unobserved. A source test cannot mark them passed.
+Retain #5 and #6's completed observations. The [native limits](../overnight-2026-10-25/NATIVE_LIMITS.md)
+and [morning review](../overnight-2026-10-25/MORNING_REVIEW.md) identify the remaining
+work. Existing missing archives are listed with their recorded sizes/hashes in
+[WORK_STATUS.md](../overnight-2026-10-25/WORK_STATUS.md); attach those bytes instead
+of repeating completed capture runs just to transfer evidence.
+
+Any new package must record its own full source and SHA-384. Preserve the
+household, PIN, positions, approved media and verified rollback. A later cloud
+commit cannot reuse `a672f57`'s installed-package hash or native acceptance.
+Never include real PINs, typed household names or account details in evidence.
 
 ## External inputs and publication boundary
 
-The source and browser work continues privately after the user-stated October 23
-noon Pacific cutoff. No public posting, branch push, main merge or submitted
-material change is authorized by this continuation. The old judging guide and
-native captures remain historical evidence. This app plays its own prepared
-catalog; it does not protect playback in Prime Video, Netflix or other apps.
+The owner's stated submission freeze remains in force. The original submitted
+fallback and linked materials are unchanged. Neither general coding approval
+nor technical checks authorize new public materials or human audiovisual
+acceptance. This app plays its own prepared catalog; it is not protection for
+Prime Video, Netflix or other apps.
 
-The owner already approved the existing narration, a calm built-in voice choice
-and the budget. Do not ask again. Production remains parked until product
-acceptance; the unchanged script must then be reconciled with that exact build.
-Secure API access is a later-stage requirement, not a blocker to source work.
+The existing narration, calm built-in voice choice and budget were already
+approved. Do not ask again. Product acceptance comes first. Later production
+must reconcile that script with the exact accepted build and show any material
+revision before generation. Secure API access and actual media inputs are
+later-stage requirements, not blockers to independent source work.

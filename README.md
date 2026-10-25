@@ -46,6 +46,7 @@ Screenshots are cropped from existing app-only native captures, with no reconstr
 - **A guarded playback path.** The picture stays covered while verification is unresolved. Scheduled covers and seek guards are driven by the accepted map and household settings.
 - **Local household preferences.** PIN-protected settings, presets, captions and stricter cover choices are stored on the device. Optional interface motion respects reduced motion.
 - **Names for individual kids.** Inside unlocked Parents, a remote letter grid edits a kid's name while preserving profile identity, preferences and saved positions. Save waits for the storage result; Cancel and Back discard an unfinished edit. Input currently supports letters and spaces. [Implementation, native observations and remaining gaps](docs/design-polish-2026-10-23/FABLE_INTEGRATION.md).
+- **Caregiver file pre-check.** A separate [local browser workflow](docs/overnight-2026-10-25/personal-import/README.md) analyzes an eligible personal MP4 without playing it. It requires processing permission and exports a report bound to the file. It does not remove DRM, certify rights or automatically add a title to the TV catalog.
 - **Tools beyond the demo.** The [flashmap analyzer](flashmap/README.md), [Vega hook](hook/README.md) and [local preparation workflow](pipeline/LOCAL_LIBRARY.md) expose the underlying work separately.
 
 ## Architecture
@@ -165,7 +166,24 @@ python3.12 -m venv .venv
 .venv/bin/python eval/style_check.py
 ```
 
-New media follows the [local library workflow](pipeline/LOCAL_LIBRARY.md). Preparing a candidate does not automatically add it to the app or expand signer trust.
+### Personal-file pre-check
+
+After installing the Python environment and FFmpeg, run the loopback caregiver
+page with a private review directory outside the checkout:
+
+```sh
+PYTHONPATH=flashmap/src:. .venv/bin/python -m pipeline.local_intake serve \
+  --root "$HOME/CalmFramesLocalReview" --port 8766
+```
+
+Open `http://127.0.0.1:8766` on that computer. The page states its supported
+formats and limits, shows progress, and provides **Save caregiver review (JSON)**.
+It never plays the original. The [guide](docs/overnight-2026-10-25/personal-import/README.md)
+covers cancellation, resuming review and removal of the tool's copy.
+
+New media follows the [local library workflow](pipeline/LOCAL_LIBRARY.md).
+Preparing a candidate does not automatically add it to the app or expand signer
+trust. This is a caregiver computer workflow, not a native TV file picker.
 
 ## Evidence and limits
 
@@ -182,7 +200,7 @@ These are recorded results with separate scopes, not a claim that the latest loc
 
 The older activation receipt's “not installed / Mac locked” note describes that earlier checkpoint. The linked current capture record documents the later installation and picture observations without rewriting the historical receipt.
 
-**Still open:** replacing the demo video and updating the Devpost entry for this build, and subjective audio/comfort acceptance. Physical Fire TV measurements and full VoiceView acceptance are not claimed. Analyzer passes and simulator observations do not establish clinical safety. Calm Frames is not a medical device.
+**Still open:** the [current checklist](docs/cloud-integration-2026-10-23/CHECKPOINT.md) retains native/layout/comfort acceptance, unresolved dependency policy and missing current demo inputs. Any later Devpost or video replacement requires a permitted, explicit publication decision; existing submitted materials remain frozen. Physical Fire TV measurements and full VoiceView acceptance are not claimed. Analyzer passes and simulator observations do not establish clinical safety. Calm Frames is not a medical device.
 
 <details>
 <summary>Historical screening corpus, separate from the shipped catalog</summary>

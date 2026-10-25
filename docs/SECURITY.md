@@ -1,8 +1,9 @@
 # Security
 
 What secrets this project has, where they live, and how to change them. This
-repository goes public on Oct 21, so everything here is written to be read by
-strangers.
+private repository is written so it can be reviewed without exposing secrets.
+Publication requires an explicit owner decision; the old October 21 plan is not
+evidence that publication occurred.
 
 ## The short version
 
@@ -522,7 +523,7 @@ regenerated reproducibly so CI can diff them:
 | File | What it covers | Components |
 |---|---|---|
 | `docs/SBOM.ingest.cdx.json` | the Python packages in the ingest container | <!--n results/sbom.json:published.ingest_components -->12<!--/n--> |
-| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1104<!--/n--> |
+| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1103<!--/n--> |
 | `docs/SBOM.cdk.cdx.json` | what synthesizes and deploys the stack | <!--n results/sbom.json:published.cdk_components -->5<!--/n--> |
 
 What they do not cover: the Debian packages apt installs inside the image.
