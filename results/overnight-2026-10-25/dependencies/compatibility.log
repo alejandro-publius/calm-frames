@@ -1,0 +1,262 @@
+TAP version 13
+# Subtest: the CLI keeps its version and resolves a body parser within its declared major
+ok 1 - the CLI keeps its version and resolves a body parser within its declared major
+  ---
+  duration_ms: 1.286148
+  type: 'test'
+  ...
+# Subtest: the actual CLI middleware survives trailing compressed bytes and serves the next request
+ok 2 - the actual CLI middleware survives trailing compressed bytes and serves the next request
+  ---
+  duration_ms: 444.975742
+  type: 'test'
+  ...
+# Subtest: the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+ok 3 - the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+  ---
+  duration_ms: 92.569912
+  type: 'test'
+  ...
+# Subtest: decompression completion preserves a second raw-body consumer and drains the whole request
+ok 4 - decompression completion preserves a second raw-body consumer and drains the whole request
+  ---
+  duration_ms: 10.14
+  type: 'test'
+  ...
+# Subtest: both build tools resolve the fixed Lodash without upgrading either tool
+ok 5 - both build tools resolve the fixed Lodash without upgrading either tool
+  ---
+  duration_ms: 19.694825
+  type: 'test'
+  ...
+# Subtest: Lodash rejects template imports that are not parameter names
+ok 6 - Lodash rejects template imports that are not parameter names
+  ---
+  duration_ms: 23.418509
+  type: 'test'
+  ...
+# Subtest: Lodash blocks prototype deletion through string and coerced path segments
+ok 7 - Lodash blocks prototype deletion through string and coerced path segments
+  ---
+  duration_ms: 1.805017
+  type: 'test'
+  ...
+# Subtest: the installed SDK config loader retains defaults and explicit bundle settings
+ok 8 - the installed SDK config loader retains defaults and explicit bundle settings
+  ---
+  duration_ms: 33.911488
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor merges inherited config without changing defaults
+ok 9 - the installed API Extractor merges inherited config without changing defaults
+  ---
+  duration_ms: 866.102442
+  type: 'test'
+  ...
+# Subtest: the installed API Extractor retains exact names and matches bundled package globs
+ok 10 - the installed API Extractor retains exact names and matches bundled package globs
+  ---
+  duration_ms: 3.359988
+  type: 'test'
+  ...
+# Subtest: the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+ok 11 - the Minimatch 3 backport leaves the TypeScript consumer on its modern major
+  ---
+  duration_ms: 34.110189
+  type: 'test'
+  ...
+# Subtest: schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+ok 12 - schema consumers resolve patched Ajv 8 while ESLint retains Ajv 6
+  ---
+  duration_ms: 2.064698
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv uses the selected regex engine for data-supplied patterns
+ok 13 - Rushstack Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 44.956565
+  type: 'test'
+  ...
+# Subtest: Rushstack Ajv rejects invalid data-pattern syntax without throwing
+ok 14 - Rushstack Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 41.028279
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv uses the selected regex engine for data-supplied patterns
+ok 15 - TSDoc Ajv uses the selected regex engine for data-supplied patterns
+  ---
+  duration_ms: 26.871187
+  type: 'test'
+  ...
+# Subtest: TSDoc Ajv rejects invalid data-pattern syntax without throwing
+ok 16 - TSDoc Ajv rejects invalid data-pattern syntax without throwing
+  ---
+  duration_ms: 32.619865
+  type: 'test'
+  ...
+# Subtest: the installed Rushstack validator retains drafts, references and format rejection
+ok 17 - the installed Rushstack validator retains drafts, references and format rejection
+  ---
+  duration_ms: 191.542614
+  type: 'test'
+  ...
+# Subtest: the installed TSDoc loader retains valid tags and refuses malformed config
+ok 18 - the installed TSDoc loader retains valid tags and refuses malformed config
+  ---
+  duration_ms: 3.753571
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained arrays before parsing elements
+ok 19 - the hooks validator rejects oversized constrained arrays before parsing elements
+  ---
+  duration_ms: 91.489161
+  type: 'test'
+  ...
+# Subtest: the hooks validator rejects oversized constrained sets before parsing elements
+ok 20 - the hooks validator rejects oversized constrained sets before parsing elements
+  ---
+  duration_ms: 1.838073
+  type: 'test'
+  ...
+# Subtest: the unbounded schema still visits each element; the fix is not a global parse cap
+ok 21 - the unbounded schema still visits each element; the fix is not a global parse cap
+  ---
+  duration_ms: 0.667387
+  type: 'test'
+  ...
+# Subtest: the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+ok 22 - the installed hooks lint rule still accepts ordinary hooks and rejects conditional calls
+  ---
+  duration_ms: 375.381541
+  type: 'test'
+  ...
+# Subtest: the legacy CLI resolves the fixed logger without upgrading the CLI
+ok 23 - the legacy CLI resolves the fixed logger without upgrading the CLI
+  ---
+  duration_ms: 25.689296
+  type: 'test'
+  ...
+# Subtest: buffer cleanup keeps an executable path literal and never starts a host shell
+ok 24 - buffer cleanup keeps an executable path literal and never starts a host shell
+  ---
+  duration_ms: 4.374327
+  type: 'test'
+  ...
+# Subtest: PID lookup passes the application identifier as one argument without host-shell interpolation
+ok 25 - PID lookup passes the application identifier as one argument without host-shell interpolation
+  ---
+  duration_ms: 1.515289
+  type: 'test'
+  ...
+# Subtest: the logger preserves specific process and unparsable-PID errors
+ok 26 - the logger preserves specific process and unparsable-PID errors
+  ---
+  duration_ms: 9.463404
+  type: 'test'
+  ...
+# Subtest: the actual legacy CLI retains React Native tag filtering and formatted events
+ok 27 - the actual legacy CLI retains React Native tag filtering and formatted events
+  ---
+  duration_ms: 19.867269
+  type: 'test'
+  ...
+# Subtest: legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+ok 28 - legacy CLI resolves the fixed shell-quote without changing its SDK CLI version
+  ---
+  duration_ms: 16.81701
+  type: 'test'
+  ...
+# Subtest: line terminators cannot become commands through structured quote tokens
+ok 29 - line terminators cannot become commands through structured quote tokens
+  ---
+  duration_ms: 1.046198
+  type: 'test'
+  ...
+# Subtest: literal paths and arguments survive quoting without interpretation
+ok 30 - literal paths and arguments survive quoting without interpretation
+  ---
+  duration_ms: 2.744044
+  type: 'test'
+  ...
+# Subtest: the installed legacy editor launcher preserves quoted argv and uses direct spawn
+ok 31 - the installed legacy editor launcher preserves quoted argv and uses direct spawn
+  ---
+  duration_ms: 28.47624
+  type: 'test'
+  ...
+# Subtest: only legacy spawn consumers use the existing fixed 6.x version
+ok 32 - only legacy spawn consumers use the existing fixed 6.x version
+  ---
+  duration_ms: 9.374106
+  type: 'test'
+  ...
+# Subtest: the Windows argument escaper handles long literal backslashes in bounded child processes
+ok 33 - the Windows argument escaper handles long literal backslashes in bounded child processes
+  ---
+  duration_ms: 266.537194
+  type: 'test'
+  ...
+# Subtest: the old locale dependency keeps async/sync arguments, environment and failure results
+ok 34 - the old locale dependency keeps async/sync arguments, environment and failure results
+  ---
+  duration_ms: 192.430288
+  type: 'test'
+  ...
+# Subtest: the actual FBJS dependency checker retains child streams and the requested directory
+ok 35 - the actual FBJS dependency checker retains child streams and the requested directory
+  ---
+  duration_ms: 156.755301
+  type: 'test'
+  ...
+# Subtest: only the unchanged legacy editor receives the fixed temporary-file dependency
+ok 36 - only the unchanged legacy editor receives the fixed temporary-file dependency
+  ---
+  duration_ms: 1.72521
+  type: 'test'
+  ...
+# Subtest: temporary names reject a symlink outside their configured base
+ok 37 - temporary names reject a symlink outside their configured base
+  ---
+  duration_ms: 2.728567
+  type: 'test'
+  ...
+# Subtest: temporary names reject traversal in prefix
+ok 38 - temporary names reject traversal in prefix
+  ---
+  duration_ms: 0.725898
+  type: 'test'
+  ...
+# Subtest: temporary names reject a non-string traversal bypass in prefix
+ok 39 - temporary names reject a non-string traversal bypass in prefix
+  ---
+  duration_ms: 0.740589
+  type: 'test'
+  ...
+# Subtest: temporary names reject traversal in postfix
+ok 40 - temporary names reject traversal in postfix
+  ---
+  duration_ms: 6.750039
+  type: 'test'
+  ...
+# Subtest: temporary names reject a non-string traversal bypass in postfix
+ok 41 - temporary names reject a non-string traversal bypass in postfix
+  ---
+  duration_ms: 1.154816
+  type: 'test'
+  ...
+# Subtest: temporary-file mode, cleanup and the actual editor text round trip are retained
+ok 42 - temporary-file mode, cleanup and the actual editor text round trip are retained
+  ---
+  duration_ms: 17.607325
+  type: 'test'
+  ...
+1..42
+# tests 42
+# suites 0
+# pass 42
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2881.910406

@@ -16139,8 +16139,8 @@
     {
       "type": "library",
       "name": "body-parser",
-      "version": "2.3.0",
-      "bom-ref": "calm-frames-app@0.1.0|body-parser@2.3.0",
+      "version": "2.4.0",
+      "bom-ref": "calm-frames-app@0.1.0|body-parser@2.4.0",
       "licenses": [
         {
           "license": {
@@ -16149,15 +16149,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/body-parser@2.3.0",
+      "purl": "pkg:npm/body-parser@2.4.0",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/body-parser/-/body-parser-2.3.0.tgz",
+          "url": "https://registry.npmjs.org/body-parser/-/body-parser-2.4.0.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "d9c1a626ea5a36083e414c152c0b9c0ee5aea0c67a117f621c346cc19e65b0d6049b03da4649cc3c22d9cf4ef24f356affcde9e28ff0cdb0d96c1ad3bc619323"
+              "content": "21f93529c2ebc5a1add6871c41a81034534d3aa46dd4b16e7a11271c7cc1f19e9c460231454d5305a888b14882740fa0cb93cbed8d485f7d4334a9119b1b578d"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -23848,8 +23848,8 @@
         {
           "type": "library",
           "name": "cross-spawn",
-          "version": "5.1.0",
-          "bom-ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|cross-spawn@5.1.0",
+          "version": "6.0.6",
+          "bom-ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|cross-spawn@6.0.6",
           "licenses": [
             {
               "license": {
@@ -23858,15 +23858,15 @@
               }
             }
           ],
-          "purl": "pkg:npm/cross-spawn@5.1.0",
+          "purl": "pkg:npm/cross-spawn@6.0.6",
           "externalReferences": [
             {
-              "url": "https://registry.npmjs.org/cross-spawn/-/cross-spawn-5.1.0.tgz",
+              "url": "https://registry.npmjs.org/cross-spawn/-/cross-spawn-6.0.6.tgz",
               "type": "distribution",
               "hashes": [
                 {
                   "alg": "SHA-512",
-                  "content": "a53810279282d1dda1718f1ec8bd48ce504f6234e4c87ef65d164f9cbc8abacda605f36342cde496a6c95365482ea66bc80654b7d24e6f787f996332db7fdfe4"
+                  "content": "56a094ba171dd6207e76cbfc8313edb5be62661fc3d22b9b48fdb5837e8a5dd12e7fa2392628a87ac5158e909d1d5f4c65151f54596fc2d214c8f7f1a39b6bb7"
                 }
               ],
               "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -23881,26 +23881,26 @@
         },
         {
           "type": "library",
-          "name": "lru-cache",
-          "version": "4.1.5",
-          "bom-ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|lru-cache@4.1.5",
+          "name": "path-key",
+          "version": "2.0.1",
+          "bom-ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|path-key@2.0.1",
           "licenses": [
             {
               "license": {
-                "id": "ISC",
+                "id": "MIT",
                 "acknowledgement": "declared"
               }
             }
           ],
-          "purl": "pkg:npm/lru-cache@4.1.5",
+          "purl": "pkg:npm/path-key@2.0.1",
           "externalReferences": [
             {
-              "url": "https://registry.npmjs.org/lru-cache/-/lru-cache-4.1.5.tgz",
+              "url": "https://registry.npmjs.org/path-key/-/path-key-2.0.1.tgz",
               "type": "distribution",
               "hashes": [
                 {
                   "alg": "SHA-512",
-                  "content": "b166656c43f63ac1cd917acc97919893f8ca93bd0c06783a514e1823fa860d86e07fa61b3f812f9aa2126d70a826244ab3ed5b4a9147560431bc9d7b176962e6"
+                  "content": "7c41c62824a65120cfbf8ba88fc0250fe8e83e5ab7a5e343f87458cb1173e0a3f0e33f76e92fdbf2b22e16cd85609837070b3125fe80f7fdde21d2da602fbd0f"
                 }
               ],
               "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -23909,7 +23909,7 @@
           "properties": [
             {
               "name": "cdx:npm:package:path",
-              "value": "node_modules/fbjs-scripts/node_modules/lru-cache"
+              "value": "node_modules/fbjs-scripts/node_modules/path-key"
             }
           ]
         },
@@ -24046,40 +24046,6 @@
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/fbjs-scripts/node_modules/which"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "yallist",
-          "version": "2.1.2",
-          "bom-ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|yallist@2.1.2",
-          "licenses": [
-            {
-              "license": {
-                "id": "ISC",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/yallist@2.1.2",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "9dc4f31d5ecdbec4199187b50d6edc6c32e6d18a731e6645e6bfe2c8fdd99d0b4c889fa98f38ac0a230d23e4a3fb1405e695e1487c52077b836ec053cd8fdcd8"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/fbjs-scripts/node_modules/yallist"
             }
           ]
         }
@@ -33338,10 +33304,6 @@
       ],
       "properties": [
         {
-          "name": "cdx:npm:package:development",
-          "value": "true"
-        },
-        {
           "name": "cdx:npm:package:path",
           "value": "node_modules/logkitty"
         }
@@ -33375,10 +33337,6 @@
             }
           ],
           "properties": [
-            {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/logkitty/node_modules/cliui"
@@ -33414,10 +33372,6 @@
           ],
           "properties": [
             {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
-            {
               "name": "cdx:npm:package:path",
               "value": "node_modules/logkitty/node_modules/find-up"
             }
@@ -33451,10 +33405,6 @@
             }
           ],
           "properties": [
-            {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/logkitty/node_modules/locate-path"
@@ -33490,10 +33440,6 @@
           ],
           "properties": [
             {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
-            {
               "name": "cdx:npm:package:path",
               "value": "node_modules/logkitty/node_modules/p-limit"
             }
@@ -33527,10 +33473,6 @@
             }
           ],
           "properties": [
-            {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/logkitty/node_modules/p-locate"
@@ -33566,10 +33508,6 @@
           ],
           "properties": [
             {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
-            {
               "name": "cdx:npm:package:path",
               "value": "node_modules/logkitty/node_modules/wrap-ansi"
             }
@@ -33603,10 +33541,6 @@
             }
           ],
           "properties": [
-            {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/logkitty/node_modules/y18n"
@@ -33642,10 +33576,6 @@
           ],
           "properties": [
             {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
-            {
               "name": "cdx:npm:package:path",
               "value": "node_modules/logkitty/node_modules/yargs-parser"
             }
@@ -33679,10 +33609,6 @@
             }
           ],
           "properties": [
-            {
-              "name": "cdx:npm:package:development",
-              "value": "true"
-            },
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/logkitty/node_modules/yargs"
@@ -36417,6 +36343,10 @@
         }
       ],
       "properties": [
+        {
+          "name": "cdx:npm:package:development",
+          "value": "true"
+        },
         {
           "name": "cdx:npm:package:path",
           "value": "node_modules/mimic-fn"
@@ -39583,8 +39513,8 @@
         {
           "type": "library",
           "name": "cross-spawn",
-          "version": "5.1.0",
-          "bom-ref": "calm-frames-app@0.1.0|os-locale@2.1.0|cross-spawn@5.1.0",
+          "version": "6.0.6",
+          "bom-ref": "calm-frames-app@0.1.0|os-locale@2.1.0|cross-spawn@6.0.6",
           "licenses": [
             {
               "license": {
@@ -39593,15 +39523,15 @@
               }
             }
           ],
-          "purl": "pkg:npm/cross-spawn@5.1.0",
+          "purl": "pkg:npm/cross-spawn@6.0.6",
           "externalReferences": [
             {
-              "url": "https://registry.npmjs.org/cross-spawn/-/cross-spawn-5.1.0.tgz",
+              "url": "https://registry.npmjs.org/cross-spawn/-/cross-spawn-6.0.6.tgz",
               "type": "distribution",
               "hashes": [
                 {
                   "alg": "SHA-512",
-                  "content": "a53810279282d1dda1718f1ec8bd48ce504f6234e4c87ef65d164f9cbc8abacda605f36342cde496a6c95365482ea66bc80654b7d24e6f787f996332db7fdfe4"
+                  "content": "56a094ba171dd6207e76cbfc8313edb5be62661fc3d22b9b48fdb5837e8a5dd12e7fa2392628a87ac5158e909d1d5f4c65151f54596fc2d214c8f7f1a39b6bb7"
                 }
               ],
               "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -39718,40 +39648,6 @@
         },
         {
           "type": "library",
-          "name": "lru-cache",
-          "version": "4.1.5",
-          "bom-ref": "calm-frames-app@0.1.0|os-locale@2.1.0|lru-cache@4.1.5",
-          "licenses": [
-            {
-              "license": {
-                "id": "ISC",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/lru-cache@4.1.5",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/lru-cache/-/lru-cache-4.1.5.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "b166656c43f63ac1cd917acc97919893f8ca93bd0c06783a514e1823fa860d86e07fa61b3f812f9aa2126d70a826244ab3ed5b4a9147560431bc9d7b176962e6"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/os-locale/node_modules/lru-cache"
-            }
-          ]
-        },
-        {
-          "type": "library",
           "name": "npm-run-path",
           "version": "2.0.2",
           "bom-ref": "calm-frames-app@0.1.0|os-locale@2.1.0|npm-run-path@2.0.2",
@@ -39815,6 +39711,40 @@
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/os-locale/node_modules/path-key"
+            }
+          ]
+        },
+        {
+          "type": "library",
+          "name": "semver",
+          "version": "5.7.2",
+          "bom-ref": "calm-frames-app@0.1.0|os-locale@2.1.0|semver@5.7.2",
+          "licenses": [
+            {
+              "license": {
+                "id": "ISC",
+                "acknowledgement": "declared"
+              }
+            }
+          ],
+          "purl": "pkg:npm/semver@5.7.2",
+          "externalReferences": [
+            {
+              "url": "https://registry.npmjs.org/semver/-/semver-5.7.2.tgz",
+              "type": "distribution",
+              "hashes": [
+                {
+                  "alg": "SHA-512",
+                  "content": "701ce79d0f4a8c9a94ebb079d91302eb908c6ab2b6eb4d161676e471a8b05aadf1cbfe61685265b21827a63a2f31527e1df7f8f5df06127d1bf3b0b9a43435d2"
+                }
+              ],
+              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:npm:package:path",
+              "value": "node_modules/os-locale/node_modules/semver"
             }
           ]
         },
@@ -39917,40 +39847,6 @@
             {
               "name": "cdx:npm:package:path",
               "value": "node_modules/os-locale/node_modules/which"
-            }
-          ]
-        },
-        {
-          "type": "library",
-          "name": "yallist",
-          "version": "2.1.2",
-          "bom-ref": "calm-frames-app@0.1.0|os-locale@2.1.0|yallist@2.1.2",
-          "licenses": [
-            {
-              "license": {
-                "id": "ISC",
-                "acknowledgement": "declared"
-              }
-            }
-          ],
-          "purl": "pkg:npm/yallist@2.1.2",
-          "externalReferences": [
-            {
-              "url": "https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz",
-              "type": "distribution",
-              "hashes": [
-                {
-                  "alg": "SHA-512",
-                  "content": "9dc4f31d5ecdbec4199187b50d6edc6c32e6d18a731e6645e6bfe2c8fdd99d0b4c889fa98f38ac0a230d23e4a3fb1405e695e1487c52077b836ec053cd8fdcd8"
-                }
-              ],
-              "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-            }
-          ],
-          "properties": [
-            {
-              "name": "cdx:npm:package:path",
-              "value": "node_modules/os-locale/node_modules/yallist"
             }
           ]
         }
@@ -41646,40 +41542,6 @@
     },
     {
       "type": "library",
-      "name": "pseudomap",
-      "version": "1.0.2",
-      "bom-ref": "calm-frames-app@0.1.0|pseudomap@1.0.2",
-      "licenses": [
-        {
-          "license": {
-            "id": "ISC",
-            "acknowledgement": "declared"
-          }
-        }
-      ],
-      "purl": "pkg:npm/pseudomap@1.0.2",
-      "externalReferences": [
-        {
-          "url": "https://registry.npmjs.org/pseudomap/-/pseudomap-1.0.2.tgz",
-          "type": "distribution",
-          "hashes": [
-            {
-              "alg": "SHA-512",
-              "content": "6ff6303616fc964d59cf6f9b5d7a52fcb2bd3a2b22659d5236c48bc4dd71d8e5d51215b60a4affee6584e6fac2d594e22650fd835f635accd3989b01fa812915"
-            }
-          ],
-          "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "cdx:npm:package:path",
-          "value": "node_modules/pseudomap"
-        }
-      ]
-    },
-    {
-      "type": "library",
       "name": "pump",
       "version": "3.0.4",
       "bom-ref": "calm-frames-app@0.1.0|pump@3.0.4",
@@ -41791,8 +41653,8 @@
     {
       "type": "library",
       "name": "qs",
-      "version": "6.16.0",
-      "bom-ref": "calm-frames-app@0.1.0|qs@6.16.0",
+      "version": "6.16.1",
+      "bom-ref": "calm-frames-app@0.1.0|qs@6.16.1",
       "licenses": [
         {
           "license": {
@@ -41801,15 +41663,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/qs@6.16.0",
+      "purl": "pkg:npm/qs@6.16.1",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/qs/-/qs-6.16.0.tgz",
+          "url": "https://registry.npmjs.org/qs/-/qs-6.16.1.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "87a7e1388691ac80f609b118d9faacfbbb7e517668f8c2c09d4e60448abce6e16d76250f09db00a4c947857a202953381ccd8355b22318d4d3607d8e7263f5bc"
+              "content": "e4fc7a27badf1c1006521350ddeb3863370e741070d120dc56d4e126697845d9cac38b4ab367a903490f67e2bc5fe5a21e4b53f7744755c43fdf29b96930a0b6"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -48302,10 +48164,6 @@
       ],
       "properties": [
         {
-          "name": "cdx:npm:package:development",
-          "value": "true"
-        },
-        {
           "name": "cdx:npm:package:path",
           "value": "node_modules/require-main-filename"
         }
@@ -54190,8 +54048,8 @@
     {
       "type": "library",
       "name": "tmp",
-      "version": "0.0.33",
-      "bom-ref": "calm-frames-app@0.1.0|tmp@0.0.33",
+      "version": "0.2.7",
+      "bom-ref": "calm-frames-app@0.1.0|tmp@0.2.7",
       "licenses": [
         {
           "license": {
@@ -54200,15 +54058,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/tmp@0.0.33",
+      "purl": "pkg:npm/tmp@0.2.7",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/tmp/-/tmp-0.0.33.tgz",
+          "url": "https://registry.npmjs.org/tmp/-/tmp-0.2.7.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "8d10899688ca9d9dda75db533a3748aa846e3c4281bcd5dc198ab33bacd6657f0a7ca1299c66398df820250dc48cabaef03e1b251af4cbe7182459986c89971b"
+              "content": "7b4be8b48a69e14a36009612cd51d5eb109c6b0ba27b3dc3cea0c06eb4dcdd8c4192994de9ef9d335dd97887199c383f4294ae536cdf677af3c18f2e9049da5f"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -59696,7 +59554,7 @@
       "dependsOn": [
         "calm-frames-app@0.1.0|@react-native-community/cli-server-api@20.2.0|ws@6.2.6",
         "calm-frames-app@0.1.0|@react-native-community/cli-tools@20.2.0",
-        "calm-frames-app@0.1.0|body-parser@2.3.0",
+        "calm-frames-app@0.1.0|body-parser@2.4.0",
         "calm-frames-app@0.1.0|compression@1.8.2",
         "calm-frames-app@0.1.0|connect@3.7.0",
         "calm-frames-app@0.1.0|errorhandler@1.5.2",
@@ -61061,7 +60919,7 @@
       ]
     },
     {
-      "ref": "calm-frames-app@0.1.0|body-parser@2.3.0",
+      "ref": "calm-frames-app@0.1.0|body-parser@2.4.0",
       "dependsOn": [
         "calm-frames-app@0.1.0|bytes@3.1.2",
         "calm-frames-app@0.1.0|content-type@2.1.0",
@@ -61069,7 +60927,7 @@
         "calm-frames-app@0.1.0|http-errors@2.0.1",
         "calm-frames-app@0.1.0|iconv-lite@0.7.3",
         "calm-frames-app@0.1.0|on-finished@2.4.1",
-        "calm-frames-app@0.1.0|qs@6.16.0",
+        "calm-frames-app@0.1.0|qs@6.16.1",
         "calm-frames-app@0.1.0|raw-body@3.0.2",
         "calm-frames-app@0.1.0|type-is@2.1.0"
       ]
@@ -62252,7 +62110,7 @@
       "dependsOn": [
         "calm-frames-app@0.1.0|chardet@0.4.2",
         "calm-frames-app@0.1.0|external-editor@2.2.0|iconv-lite@0.4.24",
-        "calm-frames-app@0.1.0|tmp@0.0.33"
+        "calm-frames-app@0.1.0|tmp@0.2.7"
       ]
     },
     {
@@ -62373,7 +62231,7 @@
         "calm-frames-app@0.1.0|core-js@2.6.12",
         "calm-frames-app@0.1.0|fancy-log@1.3.3",
         "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|ansi-colors@1.1.0",
-        "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|cross-spawn@5.1.0",
+        "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|cross-spawn@6.0.6",
         "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|semver@5.7.2",
         "calm-frames-app@0.1.0|object-assign@4.1.1",
         "calm-frames-app@0.1.0|plugin-error@0.1.2",
@@ -62387,19 +62245,17 @@
       ]
     },
     {
-      "ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|cross-spawn@5.1.0",
+      "ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|cross-spawn@6.0.6",
       "dependsOn": [
-        "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|lru-cache@4.1.5",
+        "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|path-key@2.0.1",
+        "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|semver@5.7.2",
         "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|shebang-command@1.2.0",
-        "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|which@1.3.1"
+        "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|which@1.3.1",
+        "calm-frames-app@0.1.0|nice-try@1.0.5"
       ]
     },
     {
-      "ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|lru-cache@4.1.5",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|yallist@2.1.2",
-        "calm-frames-app@0.1.0|pseudomap@1.0.2"
-      ]
+      "ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|path-key@2.0.1"
     },
     {
       "ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|semver@5.7.2"
@@ -62418,9 +62274,6 @@
       "dependsOn": [
         "calm-frames-app@0.1.0|isexe@2.0.0"
       ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|fbjs-scripts@1.2.0|yallist@2.1.2"
     },
     {
       "ref": "calm-frames-app@0.1.0|fbjs@1.0.0",
@@ -65132,9 +64985,11 @@
       ]
     },
     {
-      "ref": "calm-frames-app@0.1.0|os-locale@2.1.0|cross-spawn@5.1.0",
+      "ref": "calm-frames-app@0.1.0|os-locale@2.1.0|cross-spawn@6.0.6",
       "dependsOn": [
-        "calm-frames-app@0.1.0|os-locale@2.1.0|lru-cache@4.1.5",
+        "calm-frames-app@0.1.0|nice-try@1.0.5",
+        "calm-frames-app@0.1.0|os-locale@2.1.0|path-key@2.0.1",
+        "calm-frames-app@0.1.0|os-locale@2.1.0|semver@5.7.2",
         "calm-frames-app@0.1.0|os-locale@2.1.0|shebang-command@1.2.0",
         "calm-frames-app@0.1.0|os-locale@2.1.0|which@1.3.1"
       ]
@@ -65142,7 +64997,7 @@
     {
       "ref": "calm-frames-app@0.1.0|os-locale@2.1.0|execa@0.7.0",
       "dependsOn": [
-        "calm-frames-app@0.1.0|os-locale@2.1.0|cross-spawn@5.1.0",
+        "calm-frames-app@0.1.0|os-locale@2.1.0|cross-spawn@6.0.6",
         "calm-frames-app@0.1.0|os-locale@2.1.0|get-stream@3.0.0",
         "calm-frames-app@0.1.0|os-locale@2.1.0|is-stream@1.1.0",
         "calm-frames-app@0.1.0|os-locale@2.1.0|npm-run-path@2.0.2",
@@ -65158,13 +65013,6 @@
       "ref": "calm-frames-app@0.1.0|os-locale@2.1.0|is-stream@1.1.0"
     },
     {
-      "ref": "calm-frames-app@0.1.0|os-locale@2.1.0|lru-cache@4.1.5",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|os-locale@2.1.0|yallist@2.1.2",
-        "calm-frames-app@0.1.0|pseudomap@1.0.2"
-      ]
-    },
-    {
       "ref": "calm-frames-app@0.1.0|os-locale@2.1.0|npm-run-path@2.0.2",
       "dependsOn": [
         "calm-frames-app@0.1.0|os-locale@2.1.0|path-key@2.0.1"
@@ -65172,6 +65020,9 @@
     },
     {
       "ref": "calm-frames-app@0.1.0|os-locale@2.1.0|path-key@2.0.1"
+    },
+    {
+      "ref": "calm-frames-app@0.1.0|os-locale@2.1.0|semver@5.7.2"
     },
     {
       "ref": "calm-frames-app@0.1.0|os-locale@2.1.0|shebang-command@1.2.0",
@@ -65187,9 +65038,6 @@
       "dependsOn": [
         "calm-frames-app@0.1.0|isexe@2.0.0"
       ]
-    },
-    {
-      "ref": "calm-frames-app@0.1.0|os-locale@2.1.0|yallist@2.1.2"
     },
     {
       "ref": "calm-frames-app@0.1.0|os-tmpdir@1.0.2"
@@ -65411,9 +65259,6 @@
       "ref": "calm-frames-app@0.1.0|property-expr@2.0.6"
     },
     {
-      "ref": "calm-frames-app@0.1.0|pseudomap@1.0.2"
-    },
-    {
       "ref": "calm-frames-app@0.1.0|pump@3.0.4",
       "dependsOn": [
         "calm-frames-app@0.1.0|end-of-stream@1.4.5",
@@ -65427,7 +65272,7 @@
       "ref": "calm-frames-app@0.1.0|pure-rand@6.1.0"
     },
     {
-      "ref": "calm-frames-app@0.1.0|qs@6.16.0",
+      "ref": "calm-frames-app@0.1.0|qs@6.16.1",
       "dependsOn": [
         "calm-frames-app@0.1.0|es-define-property@1.0.1",
         "calm-frames-app@0.1.0|side-channel@1.1.1"
@@ -67727,10 +67572,7 @@
       "ref": "calm-frames-app@0.1.0|tinyglobby@0.2.17|picomatch@4.0.7"
     },
     {
-      "ref": "calm-frames-app@0.1.0|tmp@0.0.33",
-      "dependsOn": [
-        "calm-frames-app@0.1.0|os-tmpdir@1.0.2"
-      ]
+      "ref": "calm-frames-app@0.1.0|tmp@0.2.7"
     },
     {
       "ref": "calm-frames-app@0.1.0|tmpl@1.0.5"

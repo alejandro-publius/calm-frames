@@ -1,0 +1,34 @@
+TAP version 13
+# Subtest: the CLI keeps its version and resolves a body parser within its declared major
+ok 1 - the CLI keeps its version and resolves a body parser within its declared major
+  ---
+  duration_ms: 1.268224
+  type: 'test'
+  ...
+# Subtest: the actual CLI middleware survives trailing compressed bytes and serves the next request
+ok 2 - the actual CLI middleware survives trailing compressed bytes and serves the next request
+  ---
+  duration_ms: 403.157495
+  type: 'test'
+  ...
+# Subtest: the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+ok 3 - the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+  ---
+  duration_ms: 103.440353
+  type: 'test'
+  ...
+# Subtest: decompression completion preserves a second raw-body consumer and drains the whole request
+ok 4 - decompression completion preserves a second raw-body consumer and drains the whole request
+  ---
+  duration_ms: 26.770112
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 780.492627

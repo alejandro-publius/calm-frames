@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: only the unchanged legacy editor receives the fixed temporary-file dependency
+ok 1 - only the unchanged legacy editor receives the fixed temporary-file dependency
+  ---
+  duration_ms: 1.852101
+  type: 'test'
+  ...
+# Subtest: temporary names reject a symlink outside their configured base
+ok 2 - temporary names reject a symlink outside their configured base
+  ---
+  duration_ms: 2.250939
+  type: 'test'
+  ...
+# Subtest: temporary names reject traversal in prefix
+ok 3 - temporary names reject traversal in prefix
+  ---
+  duration_ms: 0.585165
+  type: 'test'
+  ...
+# Subtest: temporary names reject a non-string traversal bypass in prefix
+not ok 4 - temporary names reject a non-string traversal bypass in prefix
+  ---
+  duration_ms: 1.591738
+  type: 'test'
+  location: './app/tools/legacy_tmp_dependency.test.mjs:42:3'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_tmp_dependency.test.mjs:45:14)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: temporary names reject traversal in postfix
+ok 5 - temporary names reject traversal in postfix
+  ---
+  duration_ms: 1.835991
+  type: 'test'
+  ...
+# Subtest: temporary names reject a non-string traversal bypass in postfix
+not ok 6 - temporary names reject a non-string traversal bypass in postfix
+  ---
+  duration_ms: 0.862835
+  type: 'test'
+  location: './app/tools/legacy_tmp_dependency.test.mjs:42:3'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_tmp_dependency.test.mjs:45:14)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: temporary-file mode, cleanup and the actual editor text round trip are retained
+ok 7 - temporary-file mode, cleanup and the actual editor text round trip are retained
+  ---
+  duration_ms: 14.369399
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 5
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 89.050146

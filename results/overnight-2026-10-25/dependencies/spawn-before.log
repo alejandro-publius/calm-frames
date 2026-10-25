@@ -1,0 +1,103 @@
+TAP version 13
+# Subtest: only legacy spawn consumers use the existing fixed 6.x version
+not ok 1 - only legacy spawn consumers use the existing fixed 6.x version
+  ---
+  duration_ms: 4.191739
+  type: 'test'
+  location: './app/tools/legacy_spawn_dependency.test.mjs:34:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+
+    '5.1.0' !== '6.0.6'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '6.0.6'
+  actual: '5.1.0'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_spawn_dependency.test.mjs:39:14)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: the Windows argument escaper handles long literal backslashes in bounded child processes
+not ok 2 - the Windows argument escaper handles long literal backslashes in bounded child processes
+  ---
+  duration_ms: 2507.438826
+  type: 'test'
+  location: './app/tools/legacy_spawn_dependency.test.mjs:45:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    fbjs: spawnSync <node-22.23.2> ETIMEDOUT
+    + actual - expected
+
+    + Error: spawnSync <node-22.23.2> ETIMEDOUT
+    +     at Object.spawnSync (node:internal/child_process:1120:20)
+    +     at spawnSync (node:child_process:902:24)
+    +     at TestContext.<anonymous> (file://./app/tools/legacy_spawn_dependency.test.mjs:47:22)
+    +     at Test.runInAsyncScope (node:async_hooks:214:14)
+    +     at Test.run (node:internal/test_runner/test:1047:25)
+    +     at Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    +     at Test.postRun (node:internal/test_runner/test:1173:19)
+    +     at Test.run (node:internal/test_runner/test:1101:12)
+    +     at async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3) {
+    +   code: 'ETIMEDOUT',
+    +   errno: -110,
+    +   path: '<node-22.23.2>',
+    +   spawnargs: [
+    +     './app/tools/legacy_spawn_dependency.test.mjs',
+    +     '--escape-child',
+    +     'fbjs'
+    +   ],
+    +   syscall: 'spawnSync <node-22.23.2>'
+    + }
+    - undefined
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual:
+  error: 'spawnSync <node-22.23.2> ETIMEDOUT'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1120:20)
+    spawnSync (node:child_process:902:24)
+    TestContext.<anonymous> (file://./app/tools/legacy_spawn_dependency.test.mjs:47:22)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file://./app/tools/legacy_spawn_dependency.test.mjs:50:14)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: the old locale dependency keeps async/sync arguments, environment and failure results
+ok 3 - the old locale dependency keeps async/sync arguments, environment and failure results
+  ---
+  duration_ms: 110.011545
+  type: 'test'
+  ...
+# Subtest: the actual FBJS dependency checker retains child streams and the requested directory
+ok 4 - the actual FBJS dependency checker retains child streams and the requested directory
+  ---
+  duration_ms: 55.111102
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 2
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4680.692768

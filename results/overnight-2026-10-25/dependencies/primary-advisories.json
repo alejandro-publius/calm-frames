@@ -1,0 +1,164 @@
+{
+  "source": "Public api.github.com/advisories/<GHSA> responses read during this review",
+  "note": "Structured fixed-version records and actual installed regressions govern selection. The older path-traversal advisory prose still says no patch while its structured record identifies 0.2.6; the later bypass requires 0.2.7.",
+  "advisories": [
+    {
+      "ghsa_id": "GHSA-27r3-jxmh-p828",
+      "cve_id": "CVE-2026-111181",
+      "html_url": "https://github.com/advisories/GHSA-27r3-jxmh-p828",
+      "summary": "body-parser vulnerable to Denial of Service via trailing bytes after a compressed request body",
+      "severity": "high",
+      "published_at": "2026-10-23T20:53:11Z",
+      "updated_at": "2026-10-23T20:53:12Z",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "body-parser"
+          },
+          "vulnerable_version_range": ">= 2.0.0, < 2.4.0",
+          "first_patched_version": "2.4.0",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "body-parser"
+          },
+          "vulnerable_version_range": "< 1.20.9",
+          "first_patched_version": "1.20.9",
+          "vulnerable_functions": []
+        }
+      ],
+      "references": [
+        "https://github.com/expressjs/body-parser/security/advisories/GHSA-27r3-jxmh-p828",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-111181",
+        "https://github.com/expressjs/body-parser/commit/1260c3845f54502a05a87594f09a334786bb34d7",
+        "https://github.com/expressjs/body-parser/commit/f7075eae3a84c3473ab4bf0a777da28db208e916",
+        "https://cna.openjsf.org/security-advisories.html",
+        "https://github.com/expressjs/body-parser/releases/tag/1.20.9",
+        "https://github.com/expressjs/body-parser/releases/tag/v2.4.0",
+        "https://github.com/advisories/GHSA-27r3-jxmh-p828"
+      ]
+    },
+    {
+      "ghsa_id": "GHSA-3xgq-45jj-v275",
+      "cve_id": "CVE-2024-21538",
+      "html_url": "https://github.com/advisories/GHSA-3xgq-45jj-v275",
+      "summary": "Regular Expression Denial of Service (ReDoS) in cross-spawn",
+      "severity": "high",
+      "published_at": "2024-11-08T06:30:47Z",
+      "updated_at": "2025-05-19T19:56:26Z",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "cross-spawn"
+          },
+          "vulnerable_version_range": ">= 7.0.0, < 7.0.5",
+          "first_patched_version": "7.0.5",
+          "vulnerable_functions": []
+        },
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "cross-spawn"
+          },
+          "vulnerable_version_range": "< 6.0.6",
+          "first_patched_version": "6.0.6",
+          "vulnerable_functions": []
+        }
+      ],
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2024-21538",
+        "https://github.com/moxystudio/node-cross-spawn/pull/160",
+        "https://github.com/moxystudio/node-cross-spawn/commit/5ff3a07d9add449021d806e45c4168203aa833ff",
+        "https://github.com/moxystudio/node-cross-spawn/commit/640d391fde65388548601d95abedccc12943374f",
+        "https://security.snyk.io/vuln/SNYK-JS-CROSSSPAWN-8303230",
+        "https://github.com/moxystudio/node-cross-spawn/issues/165",
+        "https://github.com/moxystudio/node-cross-spawn/commit/d35c865b877d2f9ded7c1ed87521c2fdb689c8dd",
+        "https://security.snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-8366349",
+        "https://github.com/advisories/GHSA-3xgq-45jj-v275"
+      ]
+    },
+    {
+      "ghsa_id": "GHSA-52f5-9888-hmc6",
+      "cve_id": "CVE-2025-54798",
+      "html_url": "https://github.com/advisories/GHSA-52f5-9888-hmc6",
+      "summary": "tmp allows arbitrary temporary file / directory write via symbolic link `dir` parameter",
+      "severity": "low",
+      "published_at": "2025-08-06T17:06:04Z",
+      "updated_at": "2025-11-03T21:34:21Z",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "tmp"
+          },
+          "vulnerable_version_range": "<= 0.2.3",
+          "first_patched_version": "0.2.4",
+          "vulnerable_functions": []
+        }
+      ],
+      "references": [
+        "https://github.com/raszi/node-tmp/security/advisories/GHSA-52f5-9888-hmc6",
+        "https://github.com/raszi/node-tmp/commit/188b25e529496e37adaf1a1d9dccb40019a08b1b",
+        "https://nvd.nist.gov/vuln/detail/CVE-2025-54798",
+        "https://github.com/raszi/node-tmp/issues/207",
+        "https://lists.debian.org/debian-lts-announce/2025/08/msg00007.html",
+        "https://github.com/advisories/GHSA-52f5-9888-hmc6"
+      ]
+    },
+    {
+      "ghsa_id": "GHSA-ph9p-34f9-6g65",
+      "cve_id": "CVE-2026-44705",
+      "html_url": "https://github.com/advisories/GHSA-ph9p-34f9-6g65",
+      "summary": "tmp has Path Traversal via unsanitized prefix/postfix that enables directory escape",
+      "severity": "high",
+      "published_at": "2026-05-27T00:34:06Z",
+      "updated_at": "2026-06-12T19:25:33Z",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "tmp"
+          },
+          "vulnerable_version_range": "< 0.2.6",
+          "first_patched_version": "0.2.6",
+          "vulnerable_functions": []
+        }
+      ],
+      "references": [
+        "https://github.com/raszi/node-tmp/security/advisories/GHSA-ph9p-34f9-6g65",
+        "https://github.com/raszi/node-tmp/commit/efa4a06f24374797ae32ab2b6ae39b7a611ae429",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-44705",
+        "https://github.com/advisories/GHSA-ph9p-34f9-6g65"
+      ]
+    },
+    {
+      "ghsa_id": "GHSA-7c78-jf6q-g5cm",
+      "cve_id": "CVE-2026-49982",
+      "html_url": "https://github.com/advisories/GHSA-7c78-jf6q-g5cm",
+      "summary": "tmp: Type-confusion bypass of _assertPath allows path traversal via non-string prefix/postfix/template",
+      "severity": "high",
+      "published_at": "2026-06-15T16:36:46Z",
+      "updated_at": "2026-06-15T16:36:47Z",
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "npm",
+            "name": "tmp"
+          },
+          "vulnerable_version_range": ">= 0.2.6, < 0.2.7",
+          "first_patched_version": "0.2.7",
+          "vulnerable_functions": []
+        }
+      ],
+      "references": [
+        "https://github.com/raszi/node-tmp/security/advisories/GHSA-7c78-jf6q-g5cm",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-49982",
+        "https://github.com/advisories/GHSA-7c78-jf6q-g5cm"
+      ]
+    }
+  ]
+}

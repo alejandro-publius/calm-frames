@@ -1,0 +1,33 @@
+{
+  "pinned_generators": {
+    "cyclonedx-py": "7.4.0",
+    "cyclonedx-python-lib": "11.12.0",
+    "cyclonedx-npm": "6.0.1",
+    "cyclonedx-library": "10.3.0"
+  },
+  "unpinned_generators": [],
+  "bills": {
+    "SBOM.ingest.cdx.json": {
+      "matches": true,
+      "tools": {
+        "cyclonedx-py": "7.4.0",
+        "cyclonedx-python-lib": "11.12.0"
+      }
+    },
+    "SBOM.cdk.cdx.json": {
+      "matches": true,
+      "tools": {
+        "cyclonedx-py": "7.4.0",
+        "cyclonedx-python-lib": "11.12.0"
+      }
+    },
+    "SBOM.app.cdx.json": {
+      "matches": true,
+      "tools": {
+        "npm": "10.9.8",
+        "cyclonedx-library": "10.3.0",
+        "cyclonedx-npm": "6.0.1"
+      }
+    }
+  }
+}

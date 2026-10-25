@@ -1,0 +1,29 @@
+{
+  "before": {
+    "info": 0,
+    "low": 2,
+    "moderate": 20,
+    "high": 23,
+    "critical": 0,
+    "total": 45
+  },
+  "after": {
+    "info": 0,
+    "low": 0,
+    "moderate": 21,
+    "high": 17,
+    "critical": 0,
+    "total": 38
+  },
+  "unique_advisories_before": 21,
+  "unique_advisories_after": 17,
+  "removed_advisories": [
+    "GHSA-27r3-jxmh-p828",
+    "GHSA-3xgq-45jj-v275",
+    "GHSA-52f5-9888-hmc6",
+    "GHSA-ph9p-34f9-6g65"
+  ],
+  "added_advisories": [],
+  "intermediate_rejected_advisory": "GHSA-7c78-jf6q-g5cm",
+  "note": "Matching npm 10.9.8 lockfile scans. Package totals include propagated findings. The intermediate tmp 0.2.6 scan is retained and is not the accepted final lock."
+}

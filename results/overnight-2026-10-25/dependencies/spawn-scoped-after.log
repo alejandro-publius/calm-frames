@@ -1,0 +1,58 @@
+TAP version 13
+# Subtest: the CLI keeps its version and resolves a body parser within its declared major
+ok 1 - the CLI keeps its version and resolves a body parser within its declared major
+  ---
+  duration_ms: 1.407767
+  type: 'test'
+  ...
+# Subtest: the actual CLI middleware survives trailing compressed bytes and serves the next request
+ok 2 - the actual CLI middleware survives trailing compressed bytes and serves the next request
+  ---
+  duration_ms: 352.031493
+  type: 'test'
+  ...
+# Subtest: the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+ok 3 - the actual CLI retains plain/compressed JSON and rejects malformed JSON without opening an editor
+  ---
+  duration_ms: 46.827429
+  type: 'test'
+  ...
+# Subtest: decompression completion preserves a second raw-body consumer and drains the whole request
+ok 4 - decompression completion preserves a second raw-body consumer and drains the whole request
+  ---
+  duration_ms: 6.305862
+  type: 'test'
+  ...
+# Subtest: only legacy spawn consumers use the existing fixed 6.x version
+ok 5 - only legacy spawn consumers use the existing fixed 6.x version
+  ---
+  duration_ms: 5.360918
+  type: 'test'
+  ...
+# Subtest: the Windows argument escaper handles long literal backslashes in bounded child processes
+ok 6 - the Windows argument escaper handles long literal backslashes in bounded child processes
+  ---
+  duration_ms: 107.146051
+  type: 'test'
+  ...
+# Subtest: the old locale dependency keeps async/sync arguments, environment and failure results
+ok 7 - the old locale dependency keeps async/sync arguments, environment and failure results
+  ---
+  duration_ms: 138.893676
+  type: 'test'
+  ...
+# Subtest: the actual FBJS dependency checker retains child streams and the requested directory
+ok 8 - the actual FBJS dependency checker retains child streams and the requested directory
+  ---
+  duration_ms: 72.388998
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2337.943827
