@@ -1,5 +1,7 @@
 <!-- October 19, rollback: the delivery rollback test reaches its rollback again and a budget-refusal test was added, both seen to fail; 37,144,901 of 66,492,442 library bytes are identical preset copies, which the current format cannot share without new owner-approved bundle identities. -->
 <!-- October 19, later: Ocean and Forest named on the map, no repeated title, Details on the same geometry; full app suite 1,676 passed and 0 failed (was 18 failing); wording guard, trust-gate tests and UI flash declarations repaired and re-measured; branch claude/ocean-layout-fix-2026-10-19; not installed natively; Mac work 2b78587 still unpushed; devpost.com unreachable from the cloud session. -->
+**Current October 25 continuation:** use the [canonical original 20-item checklist](cloud-integration-2026-10-23/CHECKPOINT.md) and [local work status](overnight-2026-10-25/WORK_STATUS.md). Earlier dated entries below are historical, including their audit counts. No overnight work is published or natively accepted by this status note.
+
 <!-- October 18: Forest805f855 installed;499 app +11 attribution pass; three native clips and help Back complete. One compile plus stale-staging packaging recovery, one install. Integration kit next, isolated from installed playback. -->
 <!-- October 18: exact Forest activation approved; three-island integration and concise How it works validating before one build/install. -->
 <!-- Latest local checkpoint: October18 island refinement passes438 bounded app tests and11 attribution tests; UI source 1d14285 installed once; native two-video walkthrough completed. Forest media prepared, exact activation approval pending. -->
@@ -702,12 +704,12 @@ and the 0.8 line keeps the 0.6 behaviour on malformed input. The app's own
 bundle carries. Every other finding was sorted by one mechanical test: a
 Release and a Debug bundle were built here for the kepler platform and their
 source maps read, so `scripts/audit_exceptions.toml` says which
-<!--n results/audit.json:published.npm_packages_with_advisories -->118<!--/n-->
+<!--n results/audit-2026-10-13-historical.json:published.npm_packages_with_advisories -->118<!--/n-->
 flagged packages are in the bundle
 (<!--n results/bundle_packages_2026-10-11.json:published.flagged_in_release_bundle -->20<!--/n-->,
 plus the DevTools backend in Debug) and which are in neither
 (<!--n results/bundle_packages_2026-10-11.json:published.flagged_in_neither_bundle -->98<!--/n-->),
-behind <!--n results/audit.json:published.npm_advisories_total -->30<!--/n-->
+behind <!--n results/audit-2026-10-13-historical.json:published.npm_advisories_total -->30<!--/n-->
 advisories. Both groups are due for review on Oct 21. The bundle inventory is
 a Linux build with Shaka's compiled file stubbed, which cannot change which
 npm packages are bundled; the Shaka build itself cannot run here, because its

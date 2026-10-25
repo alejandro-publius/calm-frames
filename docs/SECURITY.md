@@ -410,100 +410,48 @@ that every finding is either fixed or written down, in
 `scripts/audit_exceptions.toml`, with the packages it covers, the advisory ids
 that were read, who accepted it, why, and the date it has to be looked at again.
 
-Oct 11: the audit passes again, and two findings were fixed rather than
-excused. `xmldom` 0.6.0, which the generated Shaka `DOMParserPolyfill` imports
-and which carried sixteen advisories into the shipped bundle, is now an npm
-alias of the maintained fork `@xmldom/xmldom` 0.8.15: the polyfill only
-subclasses its `DOMParser`, the 0.8 line keeps the 0.6 parsing behaviour on
-malformed input (a partial document rather than an exception), and `npm audit`
-reports nothing against it. The app's own `lodash` moved from 4.17.23 to
-4.18.1, which clears the `_.omit` and `_.unset` findings from the copy the
-bundle carries; the two copies still reported are exact pins inside Node build
-tools. Every other finding was re-read and sorted by one mechanical test,
-whether the package is in the Metro bundle for the device. A Release and a
-Debug bundle were built here for the kepler platform with the SDK's own Metro
-configuration and their source maps read; the inventory is
-[`results/bundle_packages_2026-10-11.json`](../results/bundle_packages_2026-10-11.json):
-<!--n results/bundle_packages_2026-10-11.json:published.flagged_in_release_bundle -->20<!--/n-->
-flagged packages are in the Release bundle, react-devtools-core joins them in
-Debug, and
-<!--n results/bundle_packages_2026-10-11.json:published.flagged_in_neither_bundle -->98<!--/n-->
-are in neither. That is a Linux build with the compiled Shaka file stubbed,
-which cannot change which npm packages are bundled; it is not a Vega build
-or a device run, and the Mac's release build should confirm the same list
-once. Both dependency changes still need the Mac's Vega build and a run on
-the virtual device, as does everything else that changed app inputs since
-Oct 10. The Python scan covers the ingest and CDK requirements; it does not
-include a venv freeze.
+### Current local audit, October 25
 
-Historical repair, Sep 29:
+The current [audit report](../results/audit.json) scans the locked app tree,
+ingest and CDK requirements, plus the development environment freeze used for
+this local continuation. It is not a native package inventory or hosted CI.
+`make audit-check` fails because the two historical groups' review date was
+October 21. Their dates and acceptance text remain unchanged. Only the existing
+five-advisory TOML controlled-build deferral is owner-approved through October
+30, using reviewed, hashed manifests in isolated, bounded builds. Coding
+permission is not acceptance of the remaining findings.
 
-**The Sep 29 dependency repair passes the fresh audit gate with unchanged written exceptions.** The earlier
-run found a new, unaccounted `image-size@0.6.3` advisory, npm source `1239766`,
-[GHSA-w3rx-r6r6-pgpr / CVE-2025-71330](https://github.com/advisories/GHSA-w3rx-r6r6-pgpr).
-Malformed ICNS data can hang the legacy build-tool asset parser. The upstream
-fix is `2.0.3`, but that API no longer provides the callable CommonJS module
-and synchronous filename input expected by the SDK's older Metro dependency.
-The SDK's Metro 0.54.1 now resolves a private local API adapter that delegates
-every parse to the exact official `image-size@2.0.4`. It restores the callable
-Buffer, synchronous filename and callback interfaces without copying parsers.
-Reads remain bounded and descriptors close on success or failure. The adapter
-keeps its own name; the official parser retains its registry identity and
-integrity in the lockfile and SBOM. No advisory suppression, downgrade or new
-exception was added. Compatibility and terminating-error regressions pass,
-including actual Metro PNG, JPEG and SVG asset handling.
-
-The image-size repair remains in place. It does not resolve the new findings
-below. GitHub runners now work; latest CI passed and Audit failed three jobs
-on dcb27a1. Only simulator validation is required for this submission.
-
-| | |
+| Scope | Current scanner result |
 |---|---|
-| Python packages with an advisory in the scanned ingest and CDK requirements | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
-| npm packages with an advisory in app/ | <!--n results/audit.json:published.npm_packages_with_advisories -->118<!--/n--> |
-| npm advisories behind them | <!--n results/audit.json:published.npm_advisories_total -->30<!--/n--> |
-| of which critical | <!--n results/audit.json:published.npm_critical -->5<!--/n--> |
-| of which high | <!--n results/audit.json:published.npm_high -->83<!--/n--> |
-| exception groups, each with its reasons | <!--n results/audit.json:published.exception_groups -->2<!--/n--> |
+| Python packages with findings in the scanned sources | <!--n results/audit.json:published.python_packages_with_advisories -->0<!--/n--> |
+| npm packages with findings, including propagated findings | <!--n results/audit.json:published.npm_packages_with_advisories -->33<!--/n--> |
+| Distinct npm advisory IDs behind those packages | <!--n results/audit.json:published.npm_advisories_total -->15<!--/n--> |
+| npm packages classified critical | <!--n results/audit.json:published.npm_critical -->0<!--/n--> |
+| npm packages classified high | <!--n results/audit.json:published.npm_high -->14<!--/n--> |
+| Recorded exception groups; recording does not make expired approval current | <!--n results/audit.json:published.exception_groups -->3<!--/n--> |
 
-The two groups, in short. The full reasoning is in the TOML file, in
-paragraphs, because a one line reason is how an exception becomes permanent.
+The [first overnight batch](overnight-2026-10-25/DEPENDENCIES.md) fixes the
+compressed-body parser crash, legacy argument escaping and temporary-path
+containment/type confusion. The [follow-up](overnight-2026-10-25/DEPENDENCY_FOLLOWUP.md)
+fixes cross-host credential forwarding and expired cache-entry retention in
+scoped legacy consumers. Both include affected-version reproductions, actual
+consumer checks, pinned lockfiles and reproduced SBOMs. No SDK, protection
+budget, exception date or approved media was changed to obtain a passing check.
 
-1. **What ships: the Vega SDK runtime and React Native.** The project pins SDK
-   0.24.9914 and the sample at `v0.24-RN83` because that is what the device
-   runs, and no newer react-native is supported by Vega 0.24. None of the
-   Amazon packages carries an advisory of its own; npm lists them for what
-   they depend on, and each chain was read: a code generation tool behind the
-   TurboModule API, build and test tools behind react-native-kepler, the deep
-   link parser behind react-navigation (the app configures no deep links), and
-   the DevTools backend that only a Debug build carries. The only outside
-   input the app parses itself is the map, through our own reader.
-2. **What does not ship: build and test tooling.** jest, babel, Metro, the
-   community CLI, the Vega CLI platform, API Extractor and the utilities under
-   them. Advisories on braces, sprintf-js and shell-quote
-   sit under tools everything else depends on, which
-   is why npm lists
-   <!--n results/audit.json:published.npm_packages_with_advisories -->118<!--/n-->
-   packages for
-   <!--n results/audit.json:published.npm_advisories_total -->30<!--/n-->
-   advisories. They run on a developer's machine or a CI runner, over this
-   repository's own files. This is the build machine's risk, not the
-   television's.
+The [remaining advisory ledger](../results/overnight-2026-10-25/dependencies-followup/residual-risk.json)
+names each finding, locked node, exposure limit and next action. Shipping
+classification must be checked against the exact new native package; an older
+Debug inventory or host-tool test does not establish current Release contents.
+The old Metro WebSocket consumer and URI-decoder consumer have demonstrated
+API barriers to direct fixed-version overrides. Their evidence is linked in
+the follow-up; no unsupported replacement was silently applied.
 
-On October 13, Handlebars was updated from 4.7.9 to 4.7.10 under ts-jest.
-The registry identifies the previous version as affected by
-GHSA-xw65-4hp5-5hc7, GHSA-8r5x-fm3f-whwj and GHSA-p8wg-vrv2-v86f.
-Handlebars is removed from the tooling exception; the remaining review dates
-and acceptance conditions are unchanged.
-
-The group that held `xmldom` and `lodash` is gone, because both were fixed:
-the October 10 review had found that the generated
-`app/src/w3cmedia/polyfills/DOMParserPolyfill.ts` imports `xmldom`, so a
-replacement had to keep that import working, and an npm alias does. Both
-remaining groups are due for review on Oct 21, the day of the final checks, so
-the release build is made with the words re-read. That review should move the
-dates past judging (Dec 3) once it is done, or the Monday audit after the tag
-will go red for a reason that has nothing to do with a new advisory.
+Historical fixes to xmldom, Lodash, Handlebars, image-size and subsequent build
+leaves remain in the verified handoff. The [retained October 13 audit](../results/audit-2026-10-13-historical.json)
+preserves the old counters used in dated status/review documents. Those old
+passes do not override the present expired reviews. The [October 11 bundle
+inventory](../results/bundle_packages_2026-10-11.json) used a stubbed compiled
+Shaka file and is historical tooling evidence, not a new native build claim.
 
 Scanner execution and report validation also fail closed: empty output, error
 JSON, unexpected exit statuses, incomplete records and skipped dependencies
@@ -523,7 +471,7 @@ regenerated reproducibly so CI can diff them:
 | File | What it covers | Components |
 |---|---|---|
 | `docs/SBOM.ingest.cdx.json` | the Python packages in the ingest container | <!--n results/sbom.json:published.ingest_components -->12<!--/n--> |
-| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1103<!--/n--> |
+| `docs/SBOM.app.cdx.json` | what the Vega app is built from | <!--n results/sbom.json:published.app_components -->1105<!--/n--> |
 | `docs/SBOM.cdk.cdx.json` | what synthesizes and deploys the stack | <!--n results/sbom.json:published.cdk_components -->5<!--/n--> |
 
 What they do not cover: the Debian packages apt installs inside the image.
