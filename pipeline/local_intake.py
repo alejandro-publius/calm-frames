@@ -61,6 +61,15 @@ def read_job(path: Path) -> dict:
     data = json.loads(_file(path / "job.json", path).read_text())
     if not isinstance(data, dict) or data.get("id") != path.name:
         raise IntakeError("Import metadata does not match this job.")
+    if (
+        not isinstance(data.get("status"), str)
+        or data["status"] not in ACTIVE | TERMINAL
+        or not isinstance(data.get("title"), str)
+        or not data["title"].strip()
+        or type(data.get("created_at")) not in {int, float}
+        or not math.isfinite(data["created_at"])
+    ):
+        raise IntakeError("Import metadata is incomplete or unreadable.")
     return data
 
 
@@ -322,7 +331,7 @@ class IntakeStore:
         for path in self.root.iterdir():
             if JOB_ID.fullmatch(path.name) and path.is_dir():
                 job_dir(self.root, path.name)
-                if read_job(path)["status"] in ACTIVE:
+                if self.display_job(path)["status"] in ACTIVE:
                     update(
                         path,
                         status="interrupted",
@@ -331,11 +340,58 @@ class IntakeStore:
                         error="Analyze again. No result from that run is playable.",
                     )
 
+    def display_job(self, path: Path) -> dict:
+        """Keep unrelated reviews reachable without repairing or trusting damaged records."""
+        try:
+            job = read_job(path)
+            if path.name in self.children and job["status"] in TERMINAL:
+                # A result can be durable just before its producer exits. Keep
+                # actions disabled until ownership is released, not merely saved.
+                return {**job, "status": "analyzing", "stage": "Finishing the import worker"}
+            return job
+        except (OSError, ValueError, PipelineError):
+            active = path.name in self.children
+            return {
+                "id": path.name,
+                "title": "Unreadable import",
+                "status": "analyzing" if active else "unreadable",
+                "stage": "This import record could not be read. Its files have been kept.",
+                "error": (
+                    "Cancel the active import before removing its local copy."
+                    if active else
+                    "Remove this local import and select the original file again, or restore its saved record."
+                ),
+                "created_at": path.stat().st_mtime,
+                "record_unreadable": True,
+                "playable": False,
+            }
+
+    def stop_child(self, job_id: str) -> None:
+        owned = self.children.pop(job_id, None)
+        if owned:
+            child, _ = owned
+            if child.poll() is None:
+                os.killpg(child.pid, signal.SIGTERM)
+                try:
+                    child.wait(timeout=3)
+                except subprocess.TimeoutExpired:
+                    os.killpg(child.pid, signal.SIGKILL)
+                    child.wait()
+
     def poll(self) -> list[dict]:
         with self.mutex:
             for job_id, (child, started) in list(self.children.items()):
                 if child.poll() is None and time.monotonic() - started <= JOB_TIMEOUT_S:
-                    continue
+                    try:
+                        saved = read_job(job_dir(self.root, job_id))
+                    except (OSError, ValueError, PipelineError):
+                        continue
+                    if saved["status"] not in TERMINAL:
+                        continue
+                    try:
+                        child.wait(timeout=0.1)
+                    except subprocess.TimeoutExpired:
+                        continue
                 if child.poll() is None:
                     os.killpg(child.pid, signal.SIGTERM)
                     try:
@@ -344,7 +400,9 @@ class IntakeStore:
                         os.killpg(child.pid, signal.SIGKILL)
                         child.wait()
                 path = job_dir(self.root, job_id)
-                if read_job(path)["status"] in ACTIVE:
+                del self.children[job_id]
+                job = self.display_job(path)
+                if not job.get("record_unreadable") and job["status"] in ACTIVE:
                     update(
                         path,
                         status="interrupted",
@@ -352,9 +410,8 @@ class IntakeStore:
                         stage="Analysis or preparation did not complete",
                         error="No completed result. Retry with a supported file.",
                     )
-                del self.children[job_id]
             jobs = [
-                read_job(job_dir(self.root, p.name))
+                self.display_job(job_dir(self.root, p.name))
                 for p in self.root.iterdir()
                 if JOB_ID.fullmatch(p.name)
             ]
@@ -440,7 +497,7 @@ class IntakeStore:
         with self.mutex:
             self.poll()
             path = job_dir(self.root, job_id)
-            if read_job(path)["status"] not in {"review", "signing_blocked", "package_review"}:
+            if self.display_job(path)["status"] not in {"review", "signing_blocked", "package_review"}:
                 raise IntakeError("Wait for a complete current analysis before saving its review.")
             job, _ = checked_review(path)
             return {
@@ -463,7 +520,19 @@ class IntakeStore:
         with self.mutex:
             self.poll()
             path = job_dir(self.root, job_id)
-            job = read_job(path)
+            job = self.display_job(path)
+            if job.get("record_unreadable"):
+                if action == "cancel":
+                    self.stop_child(job_id)
+                    return self.display_job(path)
+                if action == "delete" and job_id not in self.children:
+                    import shutil
+
+                    shutil.rmtree(path)
+                    return {"deleted": job_id}
+                raise IntakeError(
+                    "This record cannot authorize analysis, review or delivery. Cancel any active work before removing its local copy."
+                )
             if action == "plan-delivery":
                 from .edition_delivery import plan_delivery
                 from .package_delivery import APP
@@ -505,16 +574,7 @@ class IntakeStore:
 
                     cancel_delivery(path / "delivery-reviews", job["delivery"]["ticket_id"])
                 update(path, run_id=None)
-                owned = self.children.pop(job_id, None)
-                if owned:
-                    child = owned[0]
-                    if child.poll() is None:
-                        os.killpg(child.pid, signal.SIGTERM)
-                        try:
-                            child.wait(timeout=3)
-                        except subprocess.TimeoutExpired:
-                            os.killpg(child.pid, signal.SIGKILL)
-                            child.wait()
+                self.stop_child(job_id)
                 return update(
                     path,
                     status="canceled",

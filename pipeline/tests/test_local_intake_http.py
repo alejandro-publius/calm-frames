@@ -164,3 +164,33 @@ def test_real_encrypted_file_is_refused_without_decode_or_decryption(server, med
     assert job["playable"] is False
     assert not list((server.root / job["id"]).rglob("wcag.json"))
     assert server.request("GET", f'/jobs/{job["id"]}/review')[0] == 400
+
+
+def test_unreadable_job_does_not_break_the_real_review_server(server, media):
+    status, created, _ = server.upload(media.read_bytes())
+    assert status == 200
+    job = server.settled(created['id'])
+    assert job['status'] == 'review'
+    review_url = f'/jobs/{job["id"]}/review'
+    original_report = server.request('GET', review_url)[1]
+    broken_id = 'c' * 32
+    broken = server.root / broken_id
+    broken.mkdir(mode=0o700)
+    (broken / 'original.mp4').write_bytes(b'owned incomplete fixture, not playable')
+    (broken / 'job.json').write_text('{')
+    status, response, _ = server.request('GET', '/jobs')
+    assert status == 200
+    assert {row['id']: row['status'] for row in response['jobs']} == {
+        job['id']: 'review', broken_id: 'unreadable',
+    }
+    assert str(server.root) not in json.dumps(response)
+    server.stop()
+    server.start()
+    assert server.request('GET', review_url)[1] == original_report
+    assert server.request('GET', f'/jobs/{broken_id}/review')[0] == 400
+    assert server.request('POST', f'/jobs/{broken_id}/retry')[0] == 400
+    assert (broken / 'job.json').read_text() == '{'
+    assert server.request('POST', f'/jobs/{broken_id}/delete')[0] == 200
+    assert not broken.exists()
+    assert server.request('GET', review_url)[1] == original_report
+    assert media.read_bytes() == (server.root / job['id'] / 'original.mp4').read_bytes()
