@@ -1,0 +1,140 @@
+{
+  "scope": "Original checklist item 13: local caregiver file intake and pre-check. No native TV import, new signer, playback approval or human acceptance.",
+  "base_commit": "15ef46c6e23c8ba627492da23b1b147000031aa4",
+  "source_commit": "5e079494cacdffcc982928637c0210eabb0a5c14",
+  "branch": "codex/overnight-import-2026-10-25",
+  "verified_date_utc": "2026-10-25",
+  "source_sha256": {
+    "docs/overnight-2026-10-25/personal-import/browser-check.cjs": "ff82be15299a16a2bb7c558f57e1c790da05f3bad2fcb15d613e4364df7b5282",
+    "pipeline/local_intake.html": "6e57f0b26870e037e6ab225ff847faecbd700d15763d7962dfce73a88e877b27",
+    "pipeline/local_intake.py": "c4e729d18dd8c7026e1c16e01c991f5037ce84230550b2a71119f43d1c1e3f93",
+    "pipeline/local_intake_media.py": "7967d9564bfa4ff42f983a2e4cb7b3023d70d5979d6692e3b5682ed0dcbb9851",
+    "pipeline/tests/test_local_intake.py": "6091315dc47dd1cc299d6f675fd21d4037ee06ca89b4c040fc30e367eefc8474",
+    "pipeline/tests/test_local_intake_http.py": "b29e217d09df2155b8f4a6d34ae4c67f32d0c5656fdf498d7e4085cccf30a8b1",
+    "pipeline/tests/test_local_intake_media.py": "a03f94fea2cc1aca68ba78dfaefa553ccb7966f052e08f100c9196ef710006ea",
+    "pipeline/tests/test_local_intake_review.py": "b5217ae2f132180d28b65668cac4784b19285c2cececf812a360cf273073b10a",
+    "pipeline/tests/test_package_delivery.py": "cb558b7332c803fee03d5484593c094b0b652cb4687e7c89672221e85fec561f"
+  },
+  "tools": {
+    "python": "3.12.14",
+    "pytest": "9.1.1",
+    "ruff": "0.17.0",
+    "mypy": "2.4.0",
+    "ffmpeg": "7.1.5-0+deb13u1",
+    "chromium": "154.0.8037.57",
+    "node": "24.19.0"
+  },
+  "tests": {
+    "passed": 129,
+    "failed": 0,
+    "skipped": 0,
+    "command": "PYTHONPATH=flashmap/src:. python -m pytest pipeline/tests/test_local_intake.py pipeline/tests/test_local_intake_review.py pipeline/tests/test_local_intake_media.py pipeline/tests/test_local_intake_http.py pipeline/tests/test_intake_worker_boundaries.py pipeline/tests/test_package_delivery.py pipeline/tests/test_edition_delivery.py -q",
+    "log_summary": "129 passed in 37.61s"
+  },
+  "checks": {
+    "ruff": {
+      "passed": true,
+      "command": "python -m ruff check pipeline/local_intake.py pipeline/local_intake_media.py pipeline/tests/test_local_intake.py pipeline/tests/test_local_intake_review.py pipeline/tests/test_local_intake_media.py pipeline/tests/test_local_intake_http.py pipeline/tests/test_package_delivery.py"
+    },
+    "mypy": {
+      "passed": true,
+      "command": "PYTHONPATH=flashmap/src:. python -m mypy --config-file pipeline/mypy.ini",
+      "summary": "Success: no issues found in 28 source files"
+    },
+    "style": {
+      "passed": true,
+      "command": "python eval/style_check.py"
+    },
+    "whitespace": {
+      "passed": true,
+      "command": "git diff --check"
+    },
+    "hosted_ci": {
+      "run": false
+    },
+    "native_fire_tv": {
+      "run": false
+    },
+    "human_audio_visual_review": {
+      "performed": false
+    },
+    "gitleaks": {
+      "passed": true,
+      "command": "bash scripts/gitleaks_scan.sh staged",
+      "scope": "Code and generated-fixture acknowledgement commits; evidence checked separately before its commit"
+    }
+  },
+  "guard_mutations": [
+    {
+      "name": "permission-refusal",
+      "exit_code": 1,
+      "guard_broken_test_failed": true,
+      "summary": "1 failed in 0.25s"
+    },
+    {
+      "name": "complete-review-only",
+      "exit_code": 1,
+      "guard_broken_test_failed": true,
+      "summary": "5 failed in 0.30s"
+    },
+    {
+      "name": "export-input-binding",
+      "exit_code": 1,
+      "guard_broken_test_failed": true,
+      "summary": "3 failed in 0.26s"
+    },
+    {
+      "name": "protection-metadata-refusal",
+      "exit_code": 1,
+      "guard_broken_test_failed": true,
+      "summary": "17 failed, 2 passed in 0.35s"
+    }
+  ],
+  "http_behaviors_verified": [
+    "Upload without explicit processing permission rejected before file retention",
+    "Foreign Origin upload rejected",
+    "Generated steady-color silent H.264/AAC file completely analyzed and review downloaded",
+    "Report source hash equals input bytes; attachment is no-store and has no source path",
+    "Original-media HTTP route returns 404",
+    "Changed copied source prevents report export",
+    "No authorized signer prevents preparation",
+    "Report identity persists after real server restart",
+    "Generated CENC-encrypted fixture refused before analyzer map output"
+  ],
+  "fixture": {
+    "description": "Generated steady-color silent media, not user content, not a benchmark or approved title",
+    "source_sha256": "24c7503ffdd6eba67922789ef58e3d99a39757442e58d35e1bdb70f37ccbe88a",
+    "source_bytes": 2992,
+    "played": false,
+    "signed": false,
+    "installed": false
+  },
+  "browser_checks": "browser-checks.json",
+  "browser_command": "node docs/overnight-2026-10-25/personal-import/browser-check.cjs http://127.0.0.1:8946 OUTPUT_DIR GENERATED_FIXTURE_MP4",
+  "artifacts": {
+    "browser-checks.json": {
+      "bytes": 777,
+      "sha256": "0e3972e5b2eba34ca4ba428c09011010ae8c38aadc293a6732a001931abceec5"
+    },
+    "caregiver-review.json": {
+      "bytes": 1706,
+      "sha256": "0f287b01cb7fc35bd2fd83dd9b6aab6b626819ce9b22cf37c3bb2eb1579d72b7"
+    },
+    "desktop.png": {
+      "bytes": 159506,
+      "sha256": "f8b245d8b55af2097b1962008fb22ff32ab364db02f4f2c6fb1987b290dc286f"
+    },
+    "narrow.png": {
+      "bytes": 153438,
+      "sha256": "ac92e07ac50d12614fe855371c90c70d7913832a0057c05424e4242369fb9add"
+    }
+  },
+  "remaining_limits": [
+    "Local caregiver browser workflow only; no native Fire TV file picker",
+    "Recognized MP4 protection metadata refusal is not universal DRM or rights detection",
+    "No new signer, media approval, app-catalog activation or TV delivery",
+    "No medical, comfort or human audiovisual acceptance",
+    "Cloud Linux evidence does not substitute for native remote navigation or VoiceView checks"
+  ],
+  "implementation_commit": "ba9a60a8ccafd1d7358ac1ab22aea85055c1e40d"
+}
