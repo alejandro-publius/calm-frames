@@ -50,7 +50,7 @@ def store(tmp_path, monkeypatch):
 
 
 def ready(store):
-    job = store.create("clip.mp4", b"CONTRACT FIXTURE, NOT MEDIA", "Chosen clip")
+    job = store.create("clip.mp4", b"CONTRACT FIXTURE, NOT MEDIA", "Chosen clip", permission_confirmed=True)
     path = intake.job_dir(store.root, job["id"])
     for p in ["wcag", "broadcast"]:
         (path / (p + ".json")).write_text("{}")
@@ -89,16 +89,16 @@ def test_unsupported_format_is_refused(changes):
 def test_only_bounded_mp4_intake(store):
     for name, data in [("clip.mov", b"bytes"), ("clip.mp4", b"")]:
         with pytest.raises(intake.IntakeError):
-            store.create(name, data, "Title")
+            store.create(name, data, "Title", permission_confirmed=True)
     assert store.poll() == []
 
 
 def test_repeat_import_is_not_stale(store):
-    first = store.create("clip.mp4", b"not media", "First")
+    first = store.create("clip.mp4", b"not media", "First", permission_confirmed=True)
     with pytest.raises(intake.IntakeError):
-        store.create("clip.mp4", b"not media", "Second")
+        store.create("clip.mp4", b"not media", "Second", permission_confirmed=True)
     store.action(first["id"], "cancel")
-    second = store.create("clip.mp4", b"not media", "Second")
+    second = store.create("clip.mp4", b"not media", "Second", permission_confirmed=True)
     assert first["id"] != second["id"] and "review" not in second and second["playable"] is False
 
 
@@ -146,7 +146,7 @@ def test_no_signer_is_blocked(store, monkeypatch):
 def test_restart_marks_incomplete_work(tmp_path, monkeypatch):
     monkeypatch.setattr(intake.IntakeStore, "launch", lambda *_: None)
     first = intake.IntakeStore(tmp_path / "intake")
-    job = first.create("clip.mp4", b"fixture", "Clip")
+    job = first.create("clip.mp4", b"fixture", "Clip", permission_confirmed=True)
     first.close()
     second = intake.IntakeStore(tmp_path / "intake")
     try:
@@ -336,7 +336,7 @@ def test_dead_parent_cannot_publish(store, monkeypatch):
 
 def test_review_approval_respects_active_import(store):
     _, reviewed = ready(store)
-    store.create("clip.mp4", b"second", "Second")
+    store.create("clip.mp4", b"second", "Second", permission_confirmed=True)
     with pytest.raises(intake.IntakeError, match="already running"):
         store.action(reviewed["id"], "approve")
 

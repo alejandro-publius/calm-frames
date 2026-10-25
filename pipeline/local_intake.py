@@ -28,6 +28,7 @@ from . import PipelineError
 from .flashmap_adapter import FlashmapAdapter
 from .hashing import fingerprint, sha256_file
 from .hideplan import build_app_playback_plan
+from .local_intake_media import Mp4IntakeError, refuse_protected_mp4
 from .local_library import _file, _lock, _path_inside, _write_json, prepare_local_title
 from .packaged_library import check_packaged_library, export_packaged_library
 from .probe import VideoProbe, probe_video
@@ -94,6 +95,10 @@ def validate_container(source: Path) -> None:
         raise IntakeError(
             "Choose a standard MP4 container; renamed or unsupported files are refused."
         )
+    try:
+        refuse_protected_mp4(source)
+    except Mp4IntakeError as exc:
+        raise IntakeError(str(exc)) from exc
 
 
 def require_source(path: Path, job: dict) -> Path:
@@ -389,8 +394,14 @@ class IntakeStore:
         )
         self.children[path.name] = (child, time.monotonic())
 
-    def create(self, filename: str, data: bytes, title: str) -> dict:
+    def create(
+        self, filename: str, data: bytes, title: str, *, permission_confirmed: bool = False
+    ) -> dict:
         with self.mutex:
+            if permission_confirmed is not True:
+                raise IntakeError(
+                    "Confirm that you own this non-DRM video or have permission to process it."
+                )
             jobs = self.poll()
             if any(j["status"] in ACTIVE for j in jobs):
                 raise IntakeError("An import is already running. Finish or cancel it first.")
@@ -417,10 +428,36 @@ class IntakeStore:
                 "stage": "Waiting to analyze",
                 "created_at": time.time(),
                 "playable": False,
+                # A user's acknowledgement, never an application verification of rights.
+                "permission_confirmed": True,
             }
             _write_json(path / "job.json", job, path)
             self.launch(path, "analyze")
             return job
+
+    def export_review(self, job_id: str) -> dict:
+        """Download the exact current review without preparing or authorizing a title."""
+        with self.mutex:
+            self.poll()
+            path = job_dir(self.root, job_id)
+            if read_job(path)["status"] not in {"review", "signing_blocked", "package_review"}:
+                raise IntakeError("Wait for a complete current analysis before saving its review.")
+            job, _ = checked_review(path)
+            return {
+                "schema": "calm-frames-caregiver-review-v1",
+                "title": job["title"],
+                "source": {"sha256": job["source_sha256"], "bytes": job["bytes"]},
+                "analysis": job["review"],
+                "processing_permission_confirmed": job.get("permission_confirmed") is True,
+                "permission_verified_by_application": False,
+                "tv_playback_authorized": False,
+                "limitations": [
+                    "Analysis does not establish medical safety, seizure prevention or comfort.",
+                    "Use only non-DRM videos you own or have permission to process. Rights are not verified by this application.",
+                    "This review does not authorize original playback or add a title to the TV library.",
+                    "TV delivery requires a separately authorized signer, exact edition approval and a checked app build.",
+                ],
+            }
 
     def action(self, job_id: str, action: str) -> dict:
         with self.mutex:
@@ -542,13 +579,15 @@ def serve(root: Path, port: int, key: Path | None = None, pub: Path | None = Non
     origin = "http://127.0.0.1:" + str(port)
 
     class Handler(BaseHTTPRequestHandler):
-        def send(self, code, value, mime="application/json"):
+        def send(self, code, value, mime="application/json", *, download=None):
             raw = value.encode() if isinstance(value, str) else json.dumps(value).encode()
             self.send_response(code)
             self.send_header("Content-Type", mime)
             self.send_header("Content-Length", str(len(raw)))
             self.send_header("Cache-Control", "no-store")
             self.send_header("X-Content-Type-Options", "nosniff")
+            if download:
+                self.send_header("Content-Disposition", f'attachment; filename="{download}"')
             self.send_header(
                 "Content-Security-Policy",
                 "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src 'none'; frame-ancestors 'none'; object-src 'none'",
@@ -573,6 +612,15 @@ def serve(root: Path, port: int, key: Path | None = None, pub: Path | None = Non
                 )
             elif self.path == "/jobs":
                 self.send(200, {"jobs": store.poll(), "signer_configured": bool(key and pub)})
+            elif re.fullmatch(r"/jobs/[a-f0-9]{32}/review", self.path):
+                job_id = self.path.split("/")[2]
+                try:
+                    report = store.export_review(job_id)
+                    self.send(200, report, download=f"calm-frames-review-{job_id}.json")
+                except IntakeError as exc:
+                    self.send(400, {"error": str(exc)})
+                except (OSError, ValueError, PipelineError):
+                    self.send(400, {"error": "The review files could not be verified. Analyze again."})
             else:
                 self.send(
                     404, {"error": "Not found. Original and prepared media are never served here."}
@@ -592,7 +640,10 @@ def serve(root: Path, port: int, key: Path | None = None, pub: Path | None = Non
                     raise IntakeError("The upload was interrupted. Choose the file again.")
                 if self.path == "/jobs":
                     item = parse_multipart(body, self.headers.get("Content-Type", ""))
-                    result = store.create(item.filename, item.data, item.fields.get("title", ""))
+                    result = store.create(
+                        item.filename, item.data, item.fields.get("title", ""),
+                        permission_confirmed=item.fields.get("permission") == "confirmed",
+                    )
                 else:
                     parts = self.path.strip("/").split("/")
                     if len(parts) != 3 or parts[0] != "jobs":
