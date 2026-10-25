@@ -1,0 +1,338 @@
+FAIL test/calmframes/readingComfort.test.tsx (6.282 s)
+  Reading comfort persistence and isolation
+    ✕ defaults new and legacy profiles off without changing the household record (4 ms)
+    ✕ changes only the named kid and preserves protection through later edits (3 ms)
+    ✕ roundtrips a single enabled preference without changing PIN, floor or active profile (5 ms)
+    ✕ rejects a malformed stored preference: "true" (1 ms)
+    ✕ rejects a malformed stored preference: 1 (1 ms)
+    ✕ rejects a malformed stored preference: null
+    ✕ rejects a malformed stored preference: {}
+  Reading comfort in Parents
+    ✕ is offered only behind the PIN, for a kid and with a result-aware save adapter (1345 ms)
+    ✕ waits for the saved family, blocks duplicate presses and retains a single focus target (99 ms)
+    ✕ keeps the old preference after false and allows retry (89 ms)
+    ✕ keeps the old preference after rejection and allows retry (92 ms)
+  bounded Reading comfort typography
+    ✕ changes help and spacing while retaining Parents disclaimer and profile panel geometry (79 ms)
+    ✕ enlarges More info only, preserving Watch geometry, safety wording, reading stop and Back focus (239 ms)
+
+  ● Reading comfort persistence and isolation › defaults new and legacy profiles off without changing the household record
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      41 | describe('Reading comfort persistence and isolation', () => {
+      42 |   it('defaults new and legacy profiles off without changing the household record', () => {
+    > 43 |     expect(family.profiles.every(profile => profile.readingComfortEnabled === false)).toBe(true);
+         |                                                                                       ^
+      44 |     const legacy = JSON.parse(JSON.stringify(record));
+      45 |     for (const profile of legacy.family.profiles) delete profile.readingComfortEnabled;
+      46 |     expect(validateHousehold(legacy)).toEqual(record);
+
+      at Object.toBe (test/calmframes/readingComfort.test.tsx:43:87)
+
+  ● Reading comfort persistence and isolation › changes only the named kid and preserves protection through later edits
+
+    TypeError: (0 , _profiles.setProfileReadingComfort) is not a function
+
+      48 |
+      49 |   it('changes only the named kid and preserves protection through later edits', () => {
+    > 50 |     const next = setProfileReadingComfort(family, 'profile-2', true);
+         |                                          ^
+      51 |     expect(next).toEqual({ ...family, profiles: [family.profiles[0], { ...family.profiles[1], readingComfortEnabled: true }] });
+      52 |     expect(effectiveSettings(next, next.profiles[1])).toEqual(effectiveSettings(family, family.profiles[1]));
+      53 |     expect(setProfileReadingComfort(family, 'missing', true)).toBe(family);
+
+      at Object.<anonymous> (test/calmframes/readingComfort.test.tsx:50:42)
+
+  ● Reading comfort persistence and isolation › changes only the named kid and preserves protection through later edits
+
+    expect.hasAssertions()
+
+    Expected at least one assertion to be called but received none.
+
+      32 | const MOCK_CONTENT_RATING_BUILDER = new MockContentRatingBuilder();
+      33 | beforeEach(() => {
+    > 34 |   expect.hasAssertions();
+         |          ^
+      35 | });
+      36 |
+      37 | // Add spyOn here
+
+      at Object.hasAssertions (jest.setup.ts:34:10)
+
+  ● Reading comfort persistence and isolation › roundtrips a single enabled preference without changing PIN, floor or active profile
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 0
+
+    @@ -20,11 +20,10 @@
+              },
+            },
+            Object {
+              "id": "profile-2",
+              "name": "Sam",
+    -         "readingComfortEnabled": true,
+              "settings": Object {
+                "preset": "wcag",
+                "seatDistanceIn": 96,
+                "tvDiagonalIn": 55,
+              },
+
+      64 |     const enabled = { ...record, family: { ...family, profiles: [family.profiles[0], { ...family.profiles[1], readingComfortEnabled: true }] } };
+      65 |     await saveHousehold(storage, enabled);
+    > 66 |     expect(await loadHousehold(storage)).toEqual(enabled);
+         |                                          ^
+      67 |     await saveHousehold(storage, record);
+      68 |     expect(await loadHousehold(storage)).toEqual(record);
+      69 |   });
+
+      at Object.toEqual (test/calmframes/readingComfort.test.tsx:66:42)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+
+  ● Reading comfort persistence and isolation › rejects a malformed stored preference: "true"
+
+    expect(received).toThrow(expected)
+
+    Expected substring: "Invalid household profile"
+
+    Received function did not throw
+
+      72 |     const bad = JSON.parse(JSON.stringify(record));
+      73 |     bad.family.profiles[1].readingComfortEnabled = value;
+    > 74 |     expect(() => validateHousehold(bad)).toThrow('Invalid household profile');
+         |                                          ^
+      75 |     expect(clampFamily(bad.family).profiles[1].readingComfortEnabled).toBe(false);
+      76 |   });
+      77 | });
+
+      at toThrow (test/calmframes/readingComfort.test.tsx:74:42)
+
+  ● Reading comfort persistence and isolation › rejects a malformed stored preference: 1
+
+    expect(received).toThrow(expected)
+
+    Expected substring: "Invalid household profile"
+
+    Received function did not throw
+
+      72 |     const bad = JSON.parse(JSON.stringify(record));
+      73 |     bad.family.profiles[1].readingComfortEnabled = value;
+    > 74 |     expect(() => validateHousehold(bad)).toThrow('Invalid household profile');
+         |                                          ^
+      75 |     expect(clampFamily(bad.family).profiles[1].readingComfortEnabled).toBe(false);
+      76 |   });
+      77 | });
+
+      at toThrow (test/calmframes/readingComfort.test.tsx:74:42)
+
+  ● Reading comfort persistence and isolation › rejects a malformed stored preference: null
+
+    expect(received).toThrow(expected)
+
+    Expected substring: "Invalid household profile"
+
+    Received function did not throw
+
+      72 |     const bad = JSON.parse(JSON.stringify(record));
+      73 |     bad.family.profiles[1].readingComfortEnabled = value;
+    > 74 |     expect(() => validateHousehold(bad)).toThrow('Invalid household profile');
+         |                                          ^
+      75 |     expect(clampFamily(bad.family).profiles[1].readingComfortEnabled).toBe(false);
+      76 |   });
+      77 | });
+
+      at toThrow (test/calmframes/readingComfort.test.tsx:74:42)
+
+  ● Reading comfort persistence and isolation › rejects a malformed stored preference: {}
+
+    expect(received).toThrow(expected)
+
+    Expected substring: "Invalid household profile"
+
+    Received function did not throw
+
+      72 |     const bad = JSON.parse(JSON.stringify(record));
+      73 |     bad.family.profiles[1].readingComfortEnabled = value;
+    > 74 |     expect(() => validateHousehold(bad)).toThrow('Invalid household profile');
+         |                                          ^
+      75 |     expect(clampFamily(bad.family).profiles[1].readingComfortEnabled).toBe(false);
+      76 |   });
+      77 | });
+
+      at toThrow (test/calmframes/readingComfort.test.tsx:74:42)
+
+  ● Reading comfort in Parents › is offered only behind the PIN, for a kid and with a result-aware save adapter
+
+    Unable to find an element with testID: parent-area-reading-comfort
+
+      82 |     expect(screen.queryByTestId('parent-area-reading-comfort')).toBeNull();
+      83 |     press('parent-area-profiles-profile-2');
+    > 84 |     expect(screen.getByTestId('parent-area-reading-comfort').props.accessibilityRole).toBe('switch');
+         |                   ^
+      85 |     expect(screen.getByTestId('parent-area-reading-comfort').props.accessibilityState.checked).toBe(false);
+      86 |     view.rerender(<ParentAreaScreen {...props} onProfilePreferencesChange={undefined} />);
+      87 |     expect(screen.queryByTestId('parent-area-reading-comfort')).toBeNull();
+
+      at Object.getByTestId (test/calmframes/readingComfort.test.tsx:84:19)
+
+  ● Reading comfort in Parents › waits for the saved family, blocks duplicate presses and retains a single focus target
+
+    Unable to find an element with testID: parent-area-reading-comfort
+
+       96 |     const { view, props } = openParents({ onProfilePreferencesChange: save });
+       97 |     press('parent-area-profiles-profile-2');
+    >  98 |     fireEvent(screen.getByTestId('parent-area-reading-comfort'), 'focus');
+          |                      ^
+       99 |     press('parent-area-reading-comfort');
+      100 |     press('parent-area-reading-comfort');
+      101 |     expect(save).toHaveBeenCalledTimes(1);
+
+      at Object.getByTestId (test/calmframes/readingComfort.test.tsx:98:22)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at Object.<anonymous> (node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12)
+
+  ● Reading comfort in Parents › waits for the saved family, blocks duplicate presses and retains a single focus target
+
+    expect.hasAssertions()
+
+    Expected at least one assertion to be called but received none.
+
+      32 | const MOCK_CONTENT_RATING_BUILDER = new MockContentRatingBuilder();
+      33 | beforeEach(() => {
+    > 34 |   expect.hasAssertions();
+         |          ^
+      35 | });
+      36 |
+      37 | // Add spyOn here
+
+      at Object.hasAssertions (jest.setup.ts:34:10)
+
+  ● Reading comfort in Parents › keeps the old preference after false and allows retry
+
+    Unable to find an element with testID: parent-area-reading-comfort
+
+      21 | const gate = setPin(emptyPinGate(), '1357', 'comfort-fixture');
+      22 | const record: SavedHousehold = { version: 1, family, gate };
+    > 23 | const press = (id: string) => fireEvent.press(screen.getByTestId(id));
+         |                                                      ^
+      24 | const flush = () => act(async () => { await Promise.resolve(); });
+      25 | const style = (id: string) => StyleSheet.flatten(screen.getByTestId(id).props.style);
+      26 | type Props = React.ComponentProps<typeof ParentAreaScreen>;
+
+      at getByTestId (test/calmframes/readingComfort.test.tsx:23:54)
+      at press (test/calmframes/readingComfort.test.tsx:128:5)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (test/calmframes/readingComfort.test.tsx:137:4)
+
+  ● Reading comfort in Parents › keeps the old preference after false and allows retry
+
+    expect.hasAssertions()
+
+    Expected at least one assertion to be called but received none.
+
+      32 | const MOCK_CONTENT_RATING_BUILDER = new MockContentRatingBuilder();
+      33 | beforeEach(() => {
+    > 34 |   expect.hasAssertions();
+         |          ^
+      35 | });
+      36 |
+      37 | // Add spyOn here
+
+      at Object.hasAssertions (jest.setup.ts:34:10)
+
+  ● Reading comfort in Parents › keeps the old preference after rejection and allows retry
+
+    Unable to find an element with testID: parent-area-reading-comfort
+
+      21 | const gate = setPin(emptyPinGate(), '1357', 'comfort-fixture');
+      22 | const record: SavedHousehold = { version: 1, family, gate };
+    > 23 | const press = (id: string) => fireEvent.press(screen.getByTestId(id));
+         |                                                      ^
+      24 | const flush = () => act(async () => { await Promise.resolve(); });
+      25 | const style = (id: string) => StyleSheet.flatten(screen.getByTestId(id).props.style);
+      26 | type Props = React.ComponentProps<typeof ParentAreaScreen>;
+
+      at getByTestId (test/calmframes/readingComfort.test.tsx:23:54)
+      at press (test/calmframes/readingComfort.test.tsx:128:5)
+      at asyncGeneratorStep (node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:17)
+      at _next (node_modules/@babel/runtime/helpers/asyncToGenerator.js:17:9)
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:22:7
+      at node_modules/@babel/runtime/helpers/asyncToGenerator.js:14:12
+      at apply (test/calmframes/readingComfort.test.tsx:137:4)
+
+  ● Reading comfort in Parents › keeps the old preference after rejection and allows retry
+
+    expect.hasAssertions()
+
+    Expected at least one assertion to be called but received none.
+
+      32 | const MOCK_CONTENT_RATING_BUILDER = new MockContentRatingBuilder();
+      33 | beforeEach(() => {
+    > 34 |   expect.hasAssertions();
+         |          ^
+      35 | });
+      36 |
+      37 | // Add spyOn here
+
+      at Object.hasAssertions (jest.setup.ts:34:10)
+
+  ● bounded Reading comfort typography › changes help and spacing while retaining Parents disclaimer and profile panel geometry
+
+    TypeError: (0 , _profiles.setProfileReadingComfort) is not a function
+
+      146 |     const normalRoom = style('parent-area-room');
+      147 |     const normalRow = style('parent-area-preset-wcag');
+    > 148 |     view.rerender(<ParentAreaScreen {...props} family={setProfileReadingComfort(family, 'profile-2', true)} />);
+          |                                                                                ^
+      149 |     expect(style('parent-area-explainer-line-0')).toEqual(disclaimer);
+      150 |     expect(style('parent-area-profile-rule')).toEqual(profileRule);
+      151 |     expect(style('parent-area-room').fontSize).toBeGreaterThan(normalRoom.fontSize);
+
+      at Object.<anonymous> (test/calmframes/readingComfort.test.tsx:148:80)
+
+  ● bounded Reading comfort typography › changes help and spacing while retaining Parents disclaimer and profile panel geometry
+
+    expect.hasAssertions()
+
+    Expected at least one assertion to be called but received none.
+
+      32 | const MOCK_CONTENT_RATING_BUILDER = new MockContentRatingBuilder();
+      33 | beforeEach(() => {
+    > 34 |   expect.hasAssertions();
+         |          ^
+      35 | });
+      36 |
+      37 | // Add spyOn here
+
+      at Object.hasAssertions (jest.setup.ts:34:10)
+
+  ● bounded Reading comfort typography › enlarges More info only, preserving Watch geometry, safety wording, reading stop and Back focus
+
+    Unable to find an element with testID: title-details-info-safety
+
+      164 |     const enabledStop = screen.getByTestId('title-details-info-reading');
+      165 |     const enabledGap = StyleSheet.flatten(enabledStop.props.style).gap;
+    > 166 |     const safety = screen.getByTestId('title-details-info-safety');
+          |                           ^
+      167 |     const safetyText = safety.props.children;
+      168 |     expect(StyleSheet.flatten(safety.props.style).fontSize).toBe(scale(40));
+      169 |     expect(enabledStop.props.focusable).toBe(true);
+
+      at Object.getByTestId (test/calmframes/readingComfort.test.tsx:166:27)
+
+Test Suites: 1 failed, 1 total
+Tests:       13 failed, 13 total
+Snapshots:   0 total
+Time:        6.705 s, estimated 10 s
+Ran all test suites matching /test\/calmframes\/readingComfort.test.tsx/i.

@@ -1,0 +1,50 @@
+[
+  {
+    "guard": "storage-preserves-flag",
+    "file": "app/src/calmframes/householdStorage.ts",
+    "test": "roundtrips a single enabled preference",
+    "exitCode": 1,
+    "observedFailure": true,
+    "sourceRestoredSha256": "8e695e32551a3ad358782ef3d541eebd55ed1b777fec94e2bebbd1afd500c02f"
+  },
+  {
+    "guard": "rapid-press-guard",
+    "file": "app/src/calmframes/ParentAreaScreen.tsx",
+    "test": "waits for the saved family",
+    "exitCode": 1,
+    "observedFailure": true,
+    "sourceRestoredSha256": "f8c19d08a969993ab11ca5d40260758114b16f26fbe7014dbe1fbadf8be357ac"
+  },
+  {
+    "guard": "active-profile-route",
+    "file": "app/src/screens/KidModeScreen.tsx",
+    "test": "persists one preference",
+    "exitCode": 1,
+    "observedFailure": true,
+    "sourceRestoredSha256": "cc73638cb562fba5f494087bc4e234270ff87cd9ee54c47fda9ba22800610cc1"
+  },
+  {
+    "guard": "focus-moved-away",
+    "file": "app/src/calmframes/ParentAreaScreen.tsx",
+    "test": "does not steal focus",
+    "exitCode": 1,
+    "observedFailure": true,
+    "sourceRestoredSha256": "f8c19d08a969993ab11ca5d40260758114b16f26fbe7014dbe1fbadf8be357ac"
+  },
+  {
+    "guard": "bounded-text-height",
+    "file": "app/src/calmframes/TitleDetailsScreen.tsx",
+    "test": "conservative text ruler",
+    "exitCode": 1,
+    "observedFailure": true,
+    "sourceRestoredSha256": "707200b7e0612c350d1502eb84eb15cd81ef7ee9d91405fd10b64fc721eb73df"
+  },
+  {
+    "guard": "saved-state-only",
+    "file": "app/src/calmframes/ParentAreaScreen.tsx",
+    "test": "waits for the saved family",
+    "exitCode": 1,
+    "observedFailure": true,
+    "sourceRestoredSha256": "f8c19d08a969993ab11ca5d40260758114b16f26fbe7014dbe1fbadf8be357ac"
+  }
+]
